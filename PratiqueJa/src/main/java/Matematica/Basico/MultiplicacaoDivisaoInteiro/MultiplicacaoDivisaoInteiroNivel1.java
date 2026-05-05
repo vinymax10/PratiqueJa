@@ -2,7 +2,7 @@ package Matematica.Basico.MultiplicacaoDivisaoInteiro;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Modelo.Matematica.Conta;
 

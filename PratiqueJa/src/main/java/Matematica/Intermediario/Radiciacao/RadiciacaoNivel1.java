@@ -4,7 +4,7 @@ package Matematica.Intermediario.Radiciacao;
 
 import Modelo.Matematica.Conta;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Radiciacao.Nivel1Package.Radiciacao;
 

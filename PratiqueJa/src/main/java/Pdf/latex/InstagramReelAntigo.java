@@ -9,8 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.util.Random;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import Bean.Download.Diretorio;
 import Bean.Exercicio.ConfigDownload;

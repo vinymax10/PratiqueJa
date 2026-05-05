@@ -2,7 +2,7 @@ package Matematica.Intermediario.SemelhancaAngulos.Nivel1Package;
 
 import java.awt.image.BufferedImage;
 
-import javax.persistence.Transient;
+import jakarta.persistence.Transient;
 
 import Auxiliar.Graphics;
 import Matematica.Intermediario.SemelhancaAngulos.AuxSemelhancaAngulos;

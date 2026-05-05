@@ -6,8 +6,8 @@ import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.time.LocalDate;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import Bean.Download.Diretorio;
 import Modelo.AssuntoCurso.Enum.Modulo;

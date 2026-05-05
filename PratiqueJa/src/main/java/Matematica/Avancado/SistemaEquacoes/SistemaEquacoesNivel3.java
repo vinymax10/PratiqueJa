@@ -2,7 +2,7 @@ package Matematica.Avancado.SistemaEquacoes;
 
 import java.lang.reflect.InvocationTargetException;
 import Modelo.Matematica.Conta;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class SistemaEquacoesNivel3 extends Conta

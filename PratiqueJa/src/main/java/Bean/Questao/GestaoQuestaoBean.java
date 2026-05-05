@@ -9,13 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.imageio.ImageIO;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.xmlbeans.impl.common.Levenshtein;
@@ -44,6 +38,12 @@ import Modelo.Questao.Configuracao.Orgao;
 import Modelo.Questao.Enum.Dificuldade;
 import Scraping.QuestaoQ;
 import Session.SessionContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 @ViewScoped

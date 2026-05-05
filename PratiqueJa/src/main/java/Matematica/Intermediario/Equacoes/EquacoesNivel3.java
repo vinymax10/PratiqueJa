@@ -1,7 +1,7 @@
 package Matematica.Intermediario.Equacoes;
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Racional;
 import Matematica.Expressao.MyExpression;

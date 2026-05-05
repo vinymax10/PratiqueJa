@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.push.Push;
-import javax.faces.push.PushContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.push.Push;
+import jakarta.faces.push.PushContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.omnifaces.cdi.Startup;
 

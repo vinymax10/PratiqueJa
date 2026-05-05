@@ -2,7 +2,7 @@ package Matematica.Avancado.Probabilidade;
 
 import java.lang.reflect.InvocationTargetException;
 import Modelo.Matematica.Conta;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class ProbabilidadeNivel3 extends Conta

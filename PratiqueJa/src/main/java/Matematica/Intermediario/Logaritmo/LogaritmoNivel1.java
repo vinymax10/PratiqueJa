@@ -2,7 +2,7 @@ package Matematica.Intermediario.Logaritmo;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Modelo.Matematica.Conta;
 

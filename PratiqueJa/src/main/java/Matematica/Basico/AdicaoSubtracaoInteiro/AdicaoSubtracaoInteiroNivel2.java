@@ -2,7 +2,7 @@ package Matematica.Basico.AdicaoSubtracaoInteiro;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Auxiliar;
 import Modelo.Matematica.Conta;

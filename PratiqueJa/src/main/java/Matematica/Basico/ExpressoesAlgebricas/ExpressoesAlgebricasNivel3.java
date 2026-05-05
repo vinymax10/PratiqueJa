@@ -4,7 +4,7 @@ package Matematica.Basico.ExpressoesAlgebricas;
 
 import Modelo.Matematica.Conta;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Basico.ExpressoesAlgebricas.Nivel3Package.*;
 

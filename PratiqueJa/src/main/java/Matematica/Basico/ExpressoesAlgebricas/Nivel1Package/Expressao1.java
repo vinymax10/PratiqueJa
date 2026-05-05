@@ -1,6 +1,6 @@
 package Matematica.Basico.ExpressoesAlgebricas.Nivel1Package;
 
-import javax.persistence.Transient;
+import jakarta.persistence.Transient;
 
 import Auxiliar.Algebra;
 import Matematica.ExpressaoExt;

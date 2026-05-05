@@ -3,9 +3,9 @@ package Session;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpSessionEvent;
+import jakarta.servlet.http.HttpSessionListener;
 
 import Bean.AutenticacaoBean;
 

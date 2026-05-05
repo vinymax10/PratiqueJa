@@ -4,7 +4,7 @@ package Matematica.Intermediario.Dizima;
 
 import Modelo.Matematica.Conta;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Dizima.Nivel1Package.Dizima1;
 

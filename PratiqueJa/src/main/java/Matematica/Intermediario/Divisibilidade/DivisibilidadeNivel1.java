@@ -2,7 +2,7 @@ package Matematica.Intermediario.Divisibilidade;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Divisibilidade.Nivel1Package.Divisibilidade10;
 import Matematica.Intermediario.Divisibilidade.Nivel1Package.Divisibilidade2;

@@ -4,7 +4,7 @@ import Modelo.Matematica.Conta;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Basico.ResolucaoNatural.ResolucaoNatural;
 

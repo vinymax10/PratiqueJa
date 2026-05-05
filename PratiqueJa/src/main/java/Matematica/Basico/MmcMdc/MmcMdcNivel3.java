@@ -2,7 +2,7 @@ package Matematica.Basico.MmcMdc;
 
 import java.lang.reflect.InvocationTargetException;
 import Modelo.Matematica.Conta;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class MmcMdcNivel3 extends Conta

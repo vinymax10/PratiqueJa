@@ -2,7 +2,7 @@ package Matematica.Intermediario.Divisibilidade.Nivel3Package;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Divisibilidade.ResolucaoDivisores;
 import Modelo.Matematica.Conta;

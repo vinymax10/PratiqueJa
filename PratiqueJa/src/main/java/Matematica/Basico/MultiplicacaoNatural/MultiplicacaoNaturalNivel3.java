@@ -2,7 +2,7 @@ package Matematica.Basico.MultiplicacaoNatural;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Basico.ResolucaoNatural.ResolucaoNatural;
 import Modelo.Matematica.Conta;

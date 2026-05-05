@@ -13,7 +13,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import javax.swing.JLabel;
+import jakarta.swing.JLabel;
 
 import com.itextpdf.awt.PdfGraphics2D;
 import com.itextpdf.text.BadElementException;

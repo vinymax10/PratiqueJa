@@ -6,7 +6,7 @@ import Modelo.Matematica.Conta;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Dizima.Nivel2Package.Dizima2;
 

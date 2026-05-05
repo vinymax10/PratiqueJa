@@ -3,11 +3,6 @@ package Bean.Questao;
 import java.io.Serializable;
 import java.sql.SQLException;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -19,6 +14,11 @@ import Infra.Mensagem;
 import Modelo.Questao.ImagemFile;
 import Modelo.Questao.Paragrafo;
 import Modelo.Questao.Questao;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 @ViewScoped

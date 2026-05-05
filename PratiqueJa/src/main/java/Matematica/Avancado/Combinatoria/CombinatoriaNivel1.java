@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import Modelo.Matematica.Conta;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class CombinatoriaNivel1 extends Conta

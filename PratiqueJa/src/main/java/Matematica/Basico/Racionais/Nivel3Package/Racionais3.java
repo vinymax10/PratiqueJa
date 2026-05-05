@@ -2,7 +2,7 @@ package Matematica.Basico.Racionais.Nivel3Package;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Racional;
 import Matematica.Basico.Racionais.ResolucaoRacionais;

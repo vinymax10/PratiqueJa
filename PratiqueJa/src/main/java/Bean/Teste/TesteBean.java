@@ -5,10 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import Bean.Teste.Filtro.FiltroTeste;
 import Bean.Usuario.ControleAcessoBean;

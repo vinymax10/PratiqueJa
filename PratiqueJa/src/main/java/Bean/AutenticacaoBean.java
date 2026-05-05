@@ -10,17 +10,17 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Random;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
-import javax.imageio.ImageIO;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.validation.constraints.Pattern;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.validator.ValidatorException;
+import jakarta.imageio.ImageIO;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.sql.rowset.serial.SerialBlob;
+import jakarta.validation.constraints.Pattern;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.primefaces.PrimeFaces;

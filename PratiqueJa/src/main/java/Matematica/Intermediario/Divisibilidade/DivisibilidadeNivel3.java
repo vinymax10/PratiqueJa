@@ -4,7 +4,7 @@ package Matematica.Intermediario.Divisibilidade;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Modelo.Matematica.Conta;
 

@@ -1,6 +1,6 @@
 package Matematica.Basico.MultiplicacaoNatural;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Modelo.Matematica.Conta;
 

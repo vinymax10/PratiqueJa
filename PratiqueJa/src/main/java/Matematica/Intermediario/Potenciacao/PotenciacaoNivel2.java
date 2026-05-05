@@ -2,7 +2,7 @@ package Matematica.Intermediario.Potenciacao;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Modelo.Matematica.Conta;
 

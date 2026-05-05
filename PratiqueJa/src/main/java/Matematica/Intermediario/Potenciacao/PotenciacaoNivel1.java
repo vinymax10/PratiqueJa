@@ -2,7 +2,7 @@ package Matematica.Intermediario.Potenciacao;
 
 
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Intermediario.Potenciacao.Nivel1Package.Potenciacao;
 import Modelo.Matematica.Conta;

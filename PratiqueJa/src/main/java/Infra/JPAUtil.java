@@ -1,8 +1,8 @@
 package Infra;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceUnit;
 
 @ApplicationScoped
 public class JPAUtil

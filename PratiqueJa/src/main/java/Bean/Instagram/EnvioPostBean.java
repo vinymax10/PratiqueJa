@@ -10,10 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.io.IOUtils;
@@ -36,6 +32,10 @@ import Modelo.Instagram.ProgramacaoPost;
 import Modelo.Usuario.Usuario;
 import Pdf.latex.InstagramFeed;
 import Pdf.latex.TikTok;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Startup
 @Named

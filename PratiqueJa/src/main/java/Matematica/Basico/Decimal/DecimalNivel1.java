@@ -4,7 +4,7 @@ package Matematica.Basico.Decimal;
 
 import Modelo.Matematica.Conta;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import Matematica.Basico.Decimal.Nivel1Package.Decimal;
 

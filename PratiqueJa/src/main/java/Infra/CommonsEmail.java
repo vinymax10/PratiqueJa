@@ -1,11 +1,7 @@
 package Infra;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.Normalizer;
-
-import javax.mail.internet.MimeUtility;
-import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -14,6 +10,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 import Modelo.DocumentoFile;
 import Modelo.Email;
+import jakarta.mail.util.ByteArrayDataSource;
 
 public class CommonsEmail
 {

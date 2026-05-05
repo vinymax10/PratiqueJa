@@ -2,7 +2,7 @@ package DAO;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import Modelo.Entidade;
 

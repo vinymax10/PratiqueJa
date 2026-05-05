@@ -8,11 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -34,6 +29,10 @@ import Modelo.Questao.Enum.TipoFiltro;
 import Modelo.Usuario.Usuario;
 import Pdf.latex.GerarLatexQuestao;
 import Session.SessionContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import software.xdev.chartjs.model.charts.BarChart;
 import software.xdev.chartjs.model.data.BarData;
 import software.xdev.chartjs.model.dataset.BarDataset;
@@ -41,9 +40,6 @@ import software.xdev.chartjs.model.enums.IndexAxis;
 import software.xdev.chartjs.model.options.BarOptions;
 import software.xdev.chartjs.model.options.Plugins;
 import software.xdev.chartjs.model.options.Title;
-import software.xdev.chartjs.model.options.scale.Scales;
-import software.xdev.chartjs.model.options.scale.cartesian.CartesianScaleOptions;
-import software.xdev.chartjs.model.options.scale.cartesian.CartesianTickOptions;
 
 @Named
 @ViewScoped

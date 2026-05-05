@@ -2,7 +2,7 @@ package Infra;
 
 import java.io.IOException;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 
