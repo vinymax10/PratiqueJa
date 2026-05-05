@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			    
+		   <div class="p-col-12" style="text-align: center;">
+				<h:panelGroup rendered="#{questaoBean.questoes.size()>20}">
+
+					<p:commandButton   styleClass="ui-button-secondary ui-button-flat"
+					process="@this" update="@form" oncomplete="reloadMathJax();" icon="pi pi-angle-double-left"
+						action="#{questaoBean.firstOverview()}" style="margin-right:1rem;">
+					</p:commandButton>
+
+					<p:commandButton styleClass="ui-button-secondary ui-button-flat"
+					process="@this" update="@form" oncomplete="reloadMathJax();"
+					action="#{questaoBean.backOverview()}" style="margin-right:1rem;"
+					icon="pi pi-angle-left" >
+					</p:commandButton>
+
+					<h:outputText value="#{questaoBean.inicio} - #{questaoBean.fim}"
+						style="margin-right:1rem;font-weight: bold;color: #607d8b;" />
+
+					<p:commandButton styleClass="ui-button-secondary ui-button-flat"
+					process="@this" update="@form" oncomplete="reloadMathJax();"
+					action="#{questaoBean.nextOverview()}" style="margin-right:1rem;"
+					icon="pi pi-angle-right">
+					</p:commandButton>
+
+					<p:commandButton styleClass="ui-button-secondary ui-button-flat"
+					process="@this" update="@form" oncomplete="reloadMathJax();"
+					action="#{questaoBean.lastOverview()}" style="margin-right:1rem;"
+					icon="pi pi-angle-double-right">
+					</p:commandButton>
+
+					<p:divider />
+
+				</h:panelGroup>
+			</div>
+				
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

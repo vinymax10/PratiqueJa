@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body >
+		<ui:composition>
+			
+			<p:tab title="Paragrafos" rendered="#{!gestaoQuestaoBean.cadastro}">
+			
+	
+				<h:panelGroup  rendered="#{!paragrafoBean.lista}">
+					<div class="ui-fluid p-formgrid p-grid">
+						<div class="p-field p-col-12 ">
+							<p:outputLabel for="@next" value="Texto"/>
+							<p:inputTextarea rows="3" cols="33"  value="#{paragrafoBean.paragrafo.texto}" />
+						</div>
+						
+				            <div class="p-field p-col-4 ">
+								<p:fileUpload listener="#{paragrafoBean.uploadNovo}" 
+					    		label="Escolha um arquivo."
+						    	invalidFileMessage="São permitidos somente arquivos gif, jpeg e png."
+								invalidSizeMessage="O tamanho máximo permitido é de 10MB."
+						    	auto="true"
+						    	update="form:questao:imagem" >
+							    	<p:validateFile  sizeLimit="5002400" virusScan="true" 
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+								</p:fileUpload>
+							</div>
+							
+							<div class="p-field " style="padding: .5rem;">
+								<h:panelGroup id="imagem" >
+									<p:panel  header="Imagem"  rendered="#{paragrafoBean.paragrafo.imagemFile!=null}"  >
+										<f:facet name="actions">
+								            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+								             action="#{paragrafoBean.removerImagem}" update="form:questao:imagem,:growl">
+							                    <i class="pi pi-times" style="line-height: 2;"></i>
+								            </p:commandLink>
+								        </f:facet>
+										
+										<p:graphicImage  value="#{paragrafoBean.paragrafo.imagemFile.imagem()}" cache="false" stream="false"
+							       		style="display:inline-block;padding-top:5px;">
+										</p:graphicImage>
+										
+									</p:panel>
+								</h:panelGroup>
+							
+							</div>
+						
+					</div>
+					
+					<p:divider />
+					
+					<div class="p-grid" style="margin-top:1rem">
+					
+						<div class="p-col-6" >
+							
+							<p:commandButton  value="Remover"    icon="pi pi-trash" process="@this"
+							styleClass="ui-button-raised ui-button-danger ui-button-flat" 
+							action="#{paragrafoBean.remover}" update="@form, :growl" rendered="#{!paragrafoBean.cadastro}" />
+							
+						</div>
+						<div class="p-col-6 p-text-right" >
+					
+							<p:commandButton value="Voltar"  action="#{paragrafoBean.setLista(true)}" icon="pi pi-chevron-left" process="@this"
+							update="@form" style="margin-right:15px;" styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
+							
+							<p:commandButton id="adicionarParagrafo"  value="Adicionar"   class="p-text-right"  icon="pi pi-check" 
+							styleClass="ui-button-raised ui-button-success ui-button-flat" 
+							action="#{paragrafoBean.adicionar}" update="@form, :growl"  process="@form" rendered="#{paragrafoBean.cadastro}">
+								<p:defaultCommand target="form:questao:adicionarParagrafo"/>
+							</p:commandButton>
+							
+							<p:commandButton id="salvarParagrafo" value="Salvar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" 
+							rendered="#{!paragrafoBean.cadastro}"	action="#{paragrafoBean.salvar}" update="@form, :growl"  process="@form">
+								<p:defaultCommand target="form:questao:salvarParagrafo"/>
+							</p:commandButton>
+						</div>
+						
+						<div class="p-col-12" >
+							<p:messages redisplay="false" showDetail="false" closable="true"/>
+						</div>
+						
+					</div>
+					
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{paragrafoBean.lista}">
+						
+					<p:commandButton  value="Adicionar"  icon="pi pi-plus" styleClass="ui-button-raised ui-button-success ui-button-flat" 
+					action="#{paragrafoBean.cadastrar}" update="@form"  process="@this" style="margin-bottom:1rem;"	/>
+					
+				    <p:dataTable  class="table table-striped" var="paragrafo" value="#{gestaoQuestaoBean.questao.paragrafos}" 
+				    stripedRows="true" rowIndexVar="index" draggableRows="true"
+				    selection="#{paragrafoBean.paragrafo}" selectionMode="single" rowKey="#{paragrafo.id}">
+				    	<p:ajax event="rowSelect" update="@form" listener="#{paragrafoBean.onSelected}"/>
+				    	
+				    	<p:ajax event="rowReorder" listener="#{gestaoQuestaoBean.reorderParagrafo}" update="@form, :growl"/>
+				    	
+						<p:column headerText="Texto">
+							<h:outputText value="#{index + 1})  #{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}"/>
+							
+							<p:graphicImage  value="#{paragrafo.imagemFile.imagem()}" height="50rem"
+							cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+			       			style="margin:0">
+							</p:graphicImage>							
+						</p:column>
+						
+					</p:dataTable>
+					
+				</h:panelGroup>
+				
+			</p:tab>
+			
+		</ui:composition>		
+	</h:body>
+</html>

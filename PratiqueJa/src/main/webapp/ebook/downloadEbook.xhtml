@@ -1,0 +1,123 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >	
+					<h2>Download Ebook</h2>	
+				</div>
+		    
+				<p:panel header="Configuração" toggleable="true" closable="true" toggleSpeed="500"
+             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;width:100%;">
+					
+					<div class="ui-fluid formgrid grid">
+					
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
+							<p:outputLabel for="@next" value="Número Exercicios" />
+							<p:spinner min="0" max="1000"
+								title="Número de listas de exercícios de Nível 2"
+								value="#{downloadEbookBean.numListas}" 
+								required="true" />
+						</div>
+						
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
+							<p:outputLabel for="@next" value="Número E-Book" />
+							<p:spinner min="0" max="1000"
+								title="Número de listas de exercícios de Nível 2"
+								value="#{downloadEbookBean.numEBook}" 
+								required="true" />
+						</div>
+						
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
+							<p:outputLabel for="@next" value="Edição Básico" />
+							<p:spinner min="0" max="1000"
+								value="#{edicaoBean.edicao.edicaoBasico}" />
+						</div>
+						
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
+							<p:outputLabel for="@next" value="Edição Intermediário" />
+							<p:spinner min="0" max="1000"
+								value="#{edicaoBean.edicao.edicaoIntermediario}" />
+						</div>
+						
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
+							<p:outputLabel for="@next" value="Edição Avançado" />
+							<p:spinner min="0" max="1000"
+								value="#{edicaoBean.edicao.edicaoAvancado}" />
+						</div>
+						
+						<div class="field col-6 md:col-4 lg:col-2 xl:col-1">
+							<p:outputLabel for="@next" value="Capa" />
+							<p:selectBooleanButton
+								value="#{downloadEbookBean.capa}"
+								onLabel="Sim" offLabel="Não"
+								onIcon="pi pi-check" offIcon="pi pi-times" 
+								style="display:block;" />
+						</div>
+								
+						<div class="field col-12 xl:col-7">
+							<p:outputLabel  for="@next" value="Módulo" />
+							<p:selectOneButton value="#{downloadEbookBean.modulo}">
+								<f:selectItems value="#{moduloBean.opcoes}"
+								var="modulo" itemLabel="#{modulo.nome}"
+								itemValue="#{modulo}" />
+					        </p:selectOneButton>
+						</div>
+					
+					</div>
+					
+					<p:divider />
+			
+					<div class="p-grid" style="margin-top:1rem">
+						
+						<div class="p-col-12 p-text-right" >
+						
+							<p:commandButton value="Download E-Book" ajax="false"  style="margin-right:1rem;"
+							icon="pi pi-download"  process="@form" update="@form, :growl" 
+							onclick="PrimeFaces.monitorDownload('','');" 
+							styleClass="ui-button-raised ui-button-flat">
+								<p:fileDownload value="#{downloadEbookBean.download()}"/>
+							</p:commandButton>
+
+							<p:commandButton value="Gravar E-Book" style="margin-right:1rem;"
+							icon="fa-solid fa-floppy-disk"  process="@form" update="@form, :growl" 
+							styleClass="ui-button-raised ui-button-flat ui-button-secondary" 
+							action="#{downloadEbookBean.gerarEBook()}">
+							</p:commandButton>
+							
+							<p:commandButton value="Gravar Exercicios" style="margin-right:1rem;"
+							icon="fa-solid fa-list-ol"  process="@form" update="@form, :growl" 
+							styleClass="ui-button-raised ui-button-flat ui-button-success" 
+							action="#{downloadEbookBean.gerarListasExercicios()}">
+							</p:commandButton>
+							
+						</div>
+					</div>
+					
+					<f:websocket channel="push">
+						<f:ajax event="update" render="form:progressBar form:mensagem" />
+					</f:websocket>
+					
+					<p:progressBar id="progressBar" value="#{downloadEbookBean.porcentagem*100}" 
+      				style="margin-top:20px;width:100%;height:0.5rem!important;" />
+		       		
+		       		<p:staticMessage id="mensagem" severity="info" summary="Conteúdo baixado" display="text"
+		       		detail="#{downloadEbookBean.numExercicios} exercícios, #{downloadEbookBean.numQuestoes} questões,  
+		       		#{downloadEbookBean.numPaginas} páginas, #{downloadEbookBean.numEBookAtual}º E-Books, porcentagem concluída: #{downloadEbookBean.getPorcentagemInteiro()} \%" 
+		       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
+		   		</p:panel>
+			   		
+					
+			</div>
+		</div>
+	</h:form>
+	
+	
+</ui:decorate>
+	

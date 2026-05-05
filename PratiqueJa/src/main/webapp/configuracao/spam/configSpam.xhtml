@@ -1,0 +1,161 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >	
+					<h2>Spam</h2>	
+				</div>
+		    
+				<p:panel header="Config Spam" toggleable="true" closable="true" toggleSpeed="500"
+             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;width:100%;">
+					
+					 	<div class="ui-fluid formgrid grid">
+							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+								<p:outputLabel for="@next" value="Ativo" />
+								<p:selectBooleanButton 
+									value="#{configSpamBean.configSpam.ativo}"
+									onLabel="Sim" offLabel="Não"
+									onIcon="pi pi-check" offIcon="pi pi-times" 
+									style="display:block;" />
+							</div>
+							
+							<div class="campoMsg col-12 md:col-6 lg:col-4 xl:col-2">
+								<p:outputLabel for="@next" value="Último Envio" />
+								<p:datePicker id="data" value="#{configSpamBean.configSpam.ultimoEnvio}"
+									locale="pt" required="true" requiredMessage="A data é obrigatória"  />
+								<p:message for="data" display="text"/>
+							</div>
+							
+							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+								<p:outputLabel for="@next" value="Dias de Intervalo" />
+								<p:spinner min="0" max="1000"
+									value="#{configSpamBean.configSpam.diasIntervalo}" 
+									required="true" />
+							</div>
+							
+							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+								<p:outputLabel for="@next" value="Qtn. Nível 1" />
+								<p:spinner min="0" max="1000"
+									title="Número de listas de exercícios de Nível 1"
+									value="#{configSpamBean.configSpam.qtnNivel1}" 
+									required="true" />
+							</div>
+							
+							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+								<p:outputLabel for="@next" value="Qtn. Nível 2" />
+								<p:spinner min="0" max="1000"
+									title="Número de listas de exercícios de Nível 2"
+									value="#{configSpamBean.configSpam.qtnNivel2}" 
+									required="true" />
+							</div>
+							
+							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+								<p:outputLabel for="@next" value="Qtn. Nível 3" />
+								<p:spinner min="0" max="1000"
+									title="Número de listas de exercícios de Nível 3"
+									value="#{configSpamBean.configSpam.qtnNivel3}" 
+									required="true" />
+							</div>
+							
+						</div>
+						
+					<p:divider />
+			
+					<div class="p-grid" style="margin-top:1rem">
+						
+						<div class="p-col-12 p-text-right" >
+						
+							<p:commandButton id="salvarGerais" value="Salvar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" 
+							action="#{configSpamBean.salvar}" update="@form, :growl"  process="@form"	>
+<!-- 								<p:defaultCommand target="form:salvarGerais"/> -->
+							</p:commandButton>
+							
+						</div>
+					</div>
+					
+		   		</p:panel>
+		   		
+		   		<div class="formgrid grid" style="width:100%;margin-top:1rem;">
+					
+					<div class="p-col-6" >
+						<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
+						title="Restaura a configuração default utilizando todos os assuntos um por dia."
+						styleClass="ui-button-raised ui-button-help ui-button-flat mr-6"
+						action="#{programacaoSpamBean.programacaoDefault()}" update="@form, :growl"
+						process="@this" 
+						style="margin-bottom:1rem;" />
+					
+						<p:commandButton value="Remover Todos" icon="pi pi-trash"
+						title="Remove todas as configurações."
+						styleClass="ui-button-raised ui-button-danger ui-button-flat "
+						action="#{programacaoSpamBean.removerTodosAcao()}" update="@form, :growl"
+						process="@this" 
+						style="margin-bottom:1rem;" />
+					</div>
+					
+					<div class="p-col-6 comandRight" >
+					 	
+						<p:commandButton value="Adicionar" icon="pi pi-plus"
+						styleClass="ui-button-raised ui-button-success ui-button-flat"
+						action="#{programacaoSpamBean.cadastrar}" update="@form, :dialog-adicionar-programacaoSpam"
+						process="@this" oncomplete="PF('dialogAdicionarProgramacaoSpam').show()"  resetValues="true" 
+						style="margin-bottom:1rem;" />
+						
+					</div>
+				</div>
+		   		
+		   		<p:dataTable id="tabela" class="table mt-3" stripedRows="true" reflow="true"
+				var="programacaoSpam" value="#{configSpamBean.configSpam.programacoesSpam}"
+				selection="#{programacaoSpamBean.programacaoSpam}"
+				selectionMode="single" rowKey="#{programacaoSpam.id}"
+				rows="30" paginator="true"	paginatorAlwaysVisible="false" draggableRows="true" >
+				
+					<p:ajax event="rowSelect" update="@form, dialog-editar-programacaoSpam" 
+					oncomplete="PF('dialogEditarProgramacaoSpam').show()"	 resetValues="true"/>
+					
+					<p:ajax event="rowReorder" listener="#{programacaoSpamBean.onRowReorder}" update="@form"/>
+					
+					<p:column headerText="Imagem" width="4rem" responsivePriority="1" >
+			    		<img class="rectangleTable" 
+	                    src="/image/matematica/#{programacaoSpam.assuntoCurso.getModuloImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}.png" />
+			    	</p:column>
+			    	
+			    	<p:column headerText="Assunto"  >
+						<h:outputText value="#{programacaoSpam.assuntoCurso.nome}" />
+					</p:column>
+					
+					<p:column headerText="Data" >
+						<h:outputText value="#{programacaoSpam.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Remover"  style="width:4rem">
+						<p:commandLink title="Remover a Programação de Spam"
+							action="#{programacaoSpamBean.remover(programacaoSpam)}" update="@form, :growl"
+							process="@this">
+							<div class="buttonIcon">
+								<i class="pi pi-trash despesa"></i>
+							</div>
+						</p:commandLink>
+			
+		            </p:column>				
+				</p:dataTable>
+			   		
+					
+			</div>
+		</div>
+	</h:form>
+	
+	<ui:include src="/configuracao/spam/dialogProgramacaoEditar.xhtml" />
+	
+	<ui:include src="/configuracao/spam/dialogProgramacaoAdicionar.xhtml" />	
+</ui:decorate>
+	

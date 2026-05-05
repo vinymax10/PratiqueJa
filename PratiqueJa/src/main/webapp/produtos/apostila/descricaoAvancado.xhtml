@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body >
+		<ui:composition>
+			
+			<p:commandLink value="ver mais detalhes" id="linkAdvanced" type="button" styleClass="ui-button-login " 
+			style="margin-top:1.8rem" icon="fa-solid fa-icons">
+			</p:commandLink>
+	        <p:overlayPanel dynamic="true" for="linkAdvanced" style="width:25rem;">
+	        	<h5 id="basico-title" class="mt-0">Assuntos do Nível Avançado</h5>
+		        <div class="feature"><div class="dot"></div><div class="itemFeature">Sistema de Equações</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Equações do 2º Grau</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Função Afim</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Números Complexos</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Progressão Aritmética</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Progressão Geométrica</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Juros e Desconto</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Matrizes</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Combinatória</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Probabilidade</div></div>
+				<div class="feature"><div class="dot"></div><div class="itemFeature">Lei dos Senos e Cossenos</div></div>
+	        </p:overlayPanel>
+							
+		</ui:composition>		
+	</h:body>
+</html>
+	

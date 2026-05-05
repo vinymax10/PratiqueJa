@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-adicionar-programacaoSpam" class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2" 
+		header="Programação de Spam" dynamic="true"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true"  widgetVar="dialogAdicionarProgramacaoSpam" responsive="true" 
+		focus="formAdicionarProgramacaoSpam:ordem"	>
+			<h:form id="formAdicionarProgramacaoSpam" enctype="multipart/form-data" >
+				<div class="ui-fluid formgrid grid">
+					
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-2" >
+						<p:outputLabel for="@next" value="Ordem" />
+						<p:spinner  id="ordem" min="0" max="100"
+							value="#{programacaoSpamBean.ordem}"
+							required="true" />
+					</div>
+					
+					<div class="campo col-12 xl:col-7">
+						<p:outputLabel for="@next" value="Assunto" />
+						<p:selectOneMenu id="assuntoCurso"
+							value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+							converter="generic" required="true" requiredMessage="O assunto é obrigatório" filter="true"
+							filterMatchMode="contains">
+							<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+										itemValue="#{assuntoCurso}" />
+						</p:selectOneMenu>
+						<p:message for="assuntoCurso" display="text"/>
+					</div>
+					
+				</div>
+				
+				<p:divider />
+		
+				<div class="p-grid" >
+		
+					<div class="p-col-12 comandRight" >
+		
+						<p:commandButton id="salvarAdicionar" value="Adicionar"
+							styleClass="ui-button-raised ui-button-flat ui-button-success" icon="pi pi-plus"
+							action="#{programacaoSpamBean.adicionar()}" update="@form, form:tabela, :growl"
+							process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAdicionarProgramacaoSpam').hide()">
+							<p:defaultCommand target="salvarAdicionar" />
+						</p:commandButton>
+						
+					</div>
+		
+				</div>
+	           
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</h:body>
+</html>
+
+

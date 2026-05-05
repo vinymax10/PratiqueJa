@@ -1,0 +1,88 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/template/template.xhtml">
+	
+<f:metadata>
+    <f:viewParam name="id" value="#{exercicioBean.id}" converter="javax.faces.Long" />
+    <f:viewAction action="#{exercicioBean.init()}" />
+</f:metadata>
+
+	<p:remoteCommand name="update" action="#{exercicioBean.update}" 
+   	process="@this"  /> 
+
+	<div class="p-d-flex">
+			
+	    <h:form id="form" style="margin-bottom:0;width:100%;">
+			<div class="p-grid" style="margin:0 15px;">
+				<div class="p-col-12" >	
+					<h2>Exercício</h2>	
+				</div>
+				<div class="p-col-6" >
+					<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicio.exercicioPadrao.assuntoCurso.modulo.nome}" />
+			    	 - 
+			    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicio.exercicioPadrao.assuntoCurso.nome}" />
+			    	- 
+			    	<h:outputText style="color: var(--cinza);" value="#{exercicioBean.exercicio.exercicioPadrao.nivel.nome}" />
+	    		</div>
+	    		
+	    	 	<div class="p-col-6" style="text-align:right;">
+	    	 	<h:panelGroup id="nota" >
+	    	 		<h:panelGroup rendered="#{exercicioBean.exercicio.numContasRealizadas>0}">
+				
+		    	 		<h:outputText style="font-weight: bold;color:var(--iris);" value="Nota: " />
+						<h:outputText style="font-weight: bold;" value="#{exercicioBean.exercicio.notaPorcentagem}" >
+							<f:convertNumber pattern="#,##0.00" />
+						</h:outputText>
+						<h:outputText style="margin-right:15px; font-weight: bold;" value=" \%" />
+					</h:panelGroup>
+	    	 	</h:panelGroup>
+	    	 	</div>			
+				
+				<div class="p-col-12" >
+					<h:outputText style="margin-bottom:10px;font-weight: bold;color:var(--laranja)" 
+					value="Instrução: " />
+				   <h:outputText style="margin-bottom:10px;" 
+					value="#{exercicioBean.exercicio.exercicioPadrao.enunciado}"/> 
+		        </div>
+			</div> 
+			 
+		    <br/>  
+			    
+			<div class="p-grid" style="margin:0; width:100%;">
+				<div  class="ui-fluid p-formgrid p-grid" style="width:100%;margin:0 15px;" >
+					<c:forEach items="#{exercicioBean.exercicio.contas}" var="conta" varStatus="status">
+						<ui:insert >
+			        		<ui:include src="#{conta.getFileTipoExercicio()}" />
+		        		</ui:insert>
+					</c:forEach>
+			    </div>
+			
+			</div>
+			<div class="p-grid" style="margin:0 15px;">
+				<div class="p-col-6" >
+				
+					<p:button value="Voltar" styleClass="ui-button-raised ui-button-secondary ui-button-flat" 
+					onclick="window.history.go(-1); return false;" style="width: auto" icon="pi pi-chevron-left" />
+					
+<!-- 	      			<p:button value="Voltar" styleClass="ui-button-raised ui-button-secondary ui-button-flat"  -->
+<!-- 					href="/minhasExercicios/minhasExercicios.xhtml" style="width: auto" icon="pi pi-chevron-left" /> -->
+	      		</div> 
+	      		        
+<!-- 				<div class="p-col-6" style="text-align:right;"> -->
+<!-- 					<p:commandButton styleClass="ui-button-raised ui-button-flat ui-button-success" value="Finalizar" -->
+<!-- 					icon="pi pi-check" action="#{exercicioBean.finalizar}"  update="@form, :growl"  -->
+<!-- 					oncomplete="reloadMathJax();" style="width: auto" > -->
+<!-- 					</p:commandButton> -->
+<!-- 				</div> -->
+			</div>
+		</h:form>
+	</div>
+	<br/>   <br/>
+	
+	
+</ui:decorate>
+	

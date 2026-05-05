@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			    
+		    <ui:repeat id="laco" value="#{questaoBean.questoesOverview}" var="questao"
+			varStatus="status">
+				<div class="p-col-12" style="padding:0;">
+					<p:tag value="#{status.index+1+questaoBean.inicio}"
+						style="margin-right:1rem;font-weight: bold;color:#fffff; background:var(--laranja);" />
+	
+					<h:outputText class="titleQuestao" value="Q#{questao.id}"
+						style="margin-right:1rem;" />
+	
+					<h:outputText class="titleQuestao" value="Ano: " />
+					<h:outputText class="titleQuestaoText" value="#{questao.ano.nome}" />
+	
+					<h:outputText class="titleQuestao" value="Banca: " />
+					<h:outputText class="titleQuestaoText"
+						value="#{questao.banca.sigla}" />
+	
+					<h:outputText class="titleQuestao" value="Orgão: " />
+					<h:outputText class="titleQuestaoText"
+						value="#{questao.orgao.sigla}" />
+	
+					<h:outputText class="titleQuestao" value="Prova: " />
+					<h:outputText class="titleQuestaoText" value="#{questao.prova}" />
+	
+					<h:outputText class="titleQuestao" value="Assunto: " />
+					<h:outputText class="titleQuestaoText"
+						value="#{questao.assuntoCurso.nome}" />
+	
+					<p:divider />
+	
+					<ui:repeat value="#{questao.paragrafos}" var="paragrafo">
+	
+						<h:outputText
+							style="display:block;margin-bottom:1rem;padding-left:.5rem"
+							value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
+	
+						<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
+							cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+							style="margin-bottom:1rem;">
+						</p:graphicImage>
+					</ui:repeat>
+	
+					<h:panelGroup id="resposta">
+	
+						<p:selectOneRadio id="alternativas"
+							value="#{questao.alternativaEscolhida}" converter="generic"
+							layout="custom" columns="1" styleClass="grid-radio"
+							style="color: #495057;font-weight: bold;">
+							<f:selectItems value="#{questao.alternativas}" var="alternativa"
+								itemValue="#{alternativa}" />
+						</p:selectOneRadio>
+	
+						<ui:repeat id="alt" value="#{questao.alternativas}"
+							var="alternativa" varStatus="statusAlt">
+							<h:panelGrid columns="3" cellpadding="5" style="color: #495057;">
+	
+								<p:radioButton id="opt"
+									for="@this:@parent:@parent:@parent:alternativas"
+									itemIndex="#{statusAlt.index}" />
+								<h:outputLabel for="opt"
+									value="#{alternativa.letra})" style="font-weight: bold;" />
+								<h:outputLabel for="opt"
+									value="#{alternativa.texto}" style="display: block;"/>
+	
+							</h:panelGrid>
+						</ui:repeat>
+	
+						<p:commandButton value="Responder" process="@parent"
+							update="msg, :growl, dialogUpgrade"
+							action="#{questaoBean.estaCorreta(questao)}"
+							style="margin-top:1.9rem;margin-right:1rem"
+							styleClass="ui-button-raised ui-button-primary ui-button-flat" />
+							
+						<p:commandButton  value="Editar" process="@parent" icon="fa fa-solid fa-pen"
+						rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
+							action="#{gestaoQuestaoBean.carregar(questao)}"
+							style="margin-top:1.9rem;margin-right:1rem"
+							styleClass="ui-button-raised ui-button-primary ui-button-flat" />
+	
+						<div class="p-col-12 p-md-4">
+							<p:messages id="msg" for="msg" showDetail="true" closable="true"
+								styleClass="successMsg">
+							</p:messages>
+						</div>
+	
+					</h:panelGroup>
+					
+					<p:commandButton value="Resposta Comentada" icon="pi pi-pencil" styleClass="ui-button-flat ui-button-plain"
+				     action="#{questaoBean.toogleResolucaoComentada(questao)}" process="@this" oncomplete="reloadMathJax();"
+				     update="resolucaoComentada, estatistica, :growl, dialogUpgrade"
+				     style="margin-right:1rem" />	
+						
+				    <p:commandButton value="Resolução" icon="pi pi-video" styleClass="ui-button-flat ui-button-plain" 
+				    style="margin-right:1rem"/>	
+						
+				    <p:commandButton value="Estatística" icon="pi pi-chart-bar" process="@this" 
+				    update="resolucaoComentada, estatistica"
+				    action="#{questao.toogleEstatistica()}" styleClass="ui-button-flat ui-button-plain" />	
+						
+					<h:panelGroup id="estatistica" >
+						<div class="ui-fluid  p-grid">
+								
+				            <div class="field col-12 lg:col-6 xl:col-4">
+							     <p:chart  value="#{questaoBean.createBarModel(questao) }" 
+							     rendered="#{questao.showEstatistica}" style="width: 100%; height: 350px;"/>
+						     </div>
+					     </div>
+					</h:panelGroup>	
+					
+					<h:panelGroup id="resolucaoComentada" >
+								
+							<h:panelGroup rendered="#{questao.showResolucaoComentada}">
+								<h:outputLabel value="#{questao.resolucao}"	style="display:block;"/>
+								
+								<h:outputLabel  value="Alternativa #{questao.correta().letra}" 
+								style="margin:20px 0;color:var(--verde); font-weight: bold; display:block;"/>
+								
+							</h:panelGroup>	
+							
+					</h:panelGroup>	
+	
+					<p:divider />
+				</div>
+			</ui:repeat>
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

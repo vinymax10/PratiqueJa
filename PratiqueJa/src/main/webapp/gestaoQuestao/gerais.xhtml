@@ -1,0 +1,157 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			    
+		    <p:tab title="Gerais">
+			    
+				<div class="ui-fluid formgrid grid">
+					
+		             <div class="field col-12 xl:col-6">
+		                <p:outputLabel for="@next" value="Banca"/>
+		                <p:selectOneMenu value="#{gestaoQuestaoBean.questao.banca}" converter="generic"
+		                filter="true" filterMatchMode="contains">
+		                	<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{bancaBean.lista}" var="banca" 
+		                    itemLabel="#{banca.nomeReduzido}" itemValue="#{banca}"/>
+		                </p:selectOneMenu>
+		            </div>
+		            
+		            <div class="field col-12 xl:col-6">
+		                <p:outputLabel for="@next" value="Órgão"/>
+		                <p:selectOneMenu value="#{gestaoQuestaoBean.questao.orgao}" converter="generic"
+		                filter="true" filterMatchMode="contains">
+		                	 <f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{orgaoBean.lista}" var="orgao" 
+		                    itemLabel="#{orgao.nomeReduzido}" itemValue="#{orgao}"/>
+		                </p:selectOneMenu>
+		            </div>
+		            
+		             <div class="field col-12 md:col-6">
+						<p:outputLabel for="@next" value="Prova"/>
+						<p:inputText value="#{gestaoQuestaoBean.questao.prova}" 
+						 requiredMessage="Por favor informe a prova."/>
+					</div>
+		            
+		            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                <p:outputLabel for="@next" value="Ano"/>
+		                <p:selectOneMenu value="#{gestaoQuestaoBean.questao.ano}" converter="generic">
+		                	 <f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{anoBean.lista}" var="ano" itemLabel="#{ano.nome}" itemValue="#{ano}"/>
+		                </p:selectOneMenu>
+		            </div>
+		            
+					<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+                   		<p:outputLabel for="@next" value="Dificuldade"/>
+						<p:selectOneMenu value="#{gestaoQuestaoBean.questao.dificuldade}">
+		                    <f:selectItems value="#{dificuldadeBean.opcoes}" var="opcao" 
+		                    itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+						</p:selectOneMenu>		
+					</div>	
+	            	
+	            	<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+                   		<p:outputLabel for="@next" value="Disciplina"/>
+						<p:selectOneMenu value="#{gestaoQuestaoBean.questao.disciplina}" converter="generic">
+							
+							<f:ajax event="change" process="@this" render="assunto"/>
+							<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{disciplinaBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
+						</p:selectOneMenu>		
+					</div>	
+						
+					<div class="field col-12 md:col-6 lg:col-4">
+						<h:panelGroup id="assunto">	
+                     		<p:outputLabel  class="p-mt-0" for="@next" value="Assunto" />
+							<p:selectCheckboxMenu value="#{gestaoQuestaoBean.questao.assuntos}" multiple="true"
+							filter="true" filterMatchMode="contains" style="margin-top: .5rem;"
+							dynamic="true">
+								<f:attribute name="collectionType" value="java.util.ArrayList" />
+								<f:selectItems value="#{gestaoQuestaoBean.questao.disciplina.assuntos}" 
+			                    var="assunto" itemLabel="#{assunto.nome}" itemValue="#{assunto}"/>
+							</p:selectCheckboxMenu>
+							
+						</h:panelGroup>
+					</div>
+					
+					<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+                   		<p:outputLabel for="@next" value="Assunto Curso"/>
+						<p:selectOneMenu value="#{gestaoQuestaoBean.questao.assuntoCurso}" converter="generic"
+						 filter="true" filterMatchMode="contains">
+							<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}" 
+		                    var="assuntoCurso" itemLabel="#{assuntoCurso.nome}" itemValue="#{assuntoCurso}"/>
+						</p:selectOneMenu>		
+					</div>	
+					
+					<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+	                    <p:outputLabel for="@next" value="Revisada" />
+						<p:selectOneMenu  value="#{gestaoQuestaoBean.questao.revisada}"  >
+							<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+							<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+						</p:selectOneMenu>		
+					</div>	
+					
+					<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+						<p:outputLabel for="@next" value="Chave"/>
+						<p:inputText value="#{gestaoQuestaoBean.questao.chave}" 
+						 requiredMessage="Por favor informe a chave."/>
+					</div>
+					
+					<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+						<p:outputLabel for="@next" value="Ordem Inserção"/>
+						<p:inputText value="#{gestaoQuestaoBean.questao.ordemInsercao}" required="true"
+						 requiredMessage="Por favor informe a Ordem Inserção."/>
+					</div>
+					
+				</div>
+				
+				<p:divider />
+				
+				<div class="p-grid" style="margin-top:1rem">
+					<div class="p-col-6" >
+						
+						<p:commandButton  value="Remover"    icon="pi pi-trash" rendered="#{!gestaoQuestaoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-danger ui-button-flat" oncomplete="window.close();"
+						action="#{gestaoQuestaoBean.remover}" update="@form, :growl"  process="@this" >
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover a questão ?" /> 
+						</p:commandButton>
+						
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" >
+				            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+				            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				        </p:confirmDialog>
+						
+					</div>
+					
+					<div class="p-col-6 p-text-right" >
+					
+						<p:commandButton id="adicionarGerais" value="Adicionar"   class="p-text-right"  icon="pi pi-check" 
+						styleClass="ui-button-raised ui-button-success ui-button-flat" 
+						action="#{gestaoQuestaoBean.adicionar}" update="@form, :growl"  process="@form" rendered="#{gestaoQuestaoBean.cadastro}">
+							<p:defaultCommand target="form:questao:adicionarGerais"/>
+						</p:commandButton>
+						
+						<p:commandButton id="salvarGerais" value="Salvar" 
+						styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" 
+						rendered="#{!gestaoQuestaoBean.cadastro}"	action="#{gestaoQuestaoBean.salvar}"
+						update="@form, :growl"  process="@form"	>
+							<p:defaultCommand target="form:questao:salvarGerais"/>
+						</p:commandButton>
+					</div>
+					
+					<div class="p-col-12" >
+						<p:messages id="messages" redisplay="false" showDetail="false" closable="true"/>
+					</div>
+				</div>
+							
+       		</p:tab>
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

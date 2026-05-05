@@ -1,0 +1,185 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+
+	<h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >	
+					<h2>Testes</h2>	
+				</div>
+		
+			    <h:panelGroup id="fomulario" rendered="#{!testeBean.lista}" style="margin:0 15px;width:100%;" >
+				    <p:tabView activeIndex="#{testeBean.activeIndex}" id="teste" cache="false"  dynamic="true" 
+					onTabShow="reloadMathJax();">
+								
+		            	<ui:include src="/teste/teste/gerais.xhtml" />
+		            	
+<!-- 		            	<ui:include src="/teste/teste/conta.xhtml" /> -->
+						
+			        </p:tabView>
+			    </h:panelGroup>
+				
+				<h:panelGroup id="filtro" rendered="#{testeBean.lista}">
+								
+					<p:commandButton  value="Adicionar"  icon="pi pi-plus" 
+					styleClass="ui-button-raised ui-button-success ui-button-flat" 
+					action="#{testeBean.cadastrar}" update="@form"  process="@this" style="margin-bottom:1rem;"	/>
+					
+					<p:panel header="Filtro" toggleable="true" closable="true" toggleSpeed="500"
+              		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;">
+						
+						<div class="ui-fluid formgrid grid">
+						
+							<div class="field col-12 xl:col-6">
+				                <p:outputLabel for="@next" value="Teste Padrão"/>
+				                <p:selectOneMenu value="#{testeBean.filtroTeste.testePadrao}" converter="generic"
+				                filter="true" filterMatchMode="contains">
+				                	 <f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+				                    <f:selectItems value="#{testePadraoBean.todosTestesPadroes}" var="testePadrao" 
+				                    itemLabel="#{testePadrao.nome}" 
+				                    itemValue="#{testePadrao}"/>
+				                </p:selectOneMenu>
+				            </div>
+				            
+       						<div class="field col-12 lg:col-6 xl:col-4">
+								<p:outputLabel for="@next" value="Assunto Curso" />
+								<p:selectOneMenu
+									value="#{testeBean.filtroTeste.assuntoCurso}"
+									filter="true" filterMatchMode="contains" converter="generic">
+									<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+									<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+										itemValue="#{assuntoCurso}" />
+								</p:selectOneMenu>
+							</div>
+				            
+				            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+			                    <p:outputLabel for="@next" value="Realizado" />
+								<p:selectOneMenu value="#{testeBean.filtroTeste.realizado}"  >
+									<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+									<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+									<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+								</p:selectOneMenu>		
+							</div>	
+							
+							<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+								<p:outputLabel for="@next" value="Início Realização" />
+								<p:datePicker
+									value="#{testeBean.filtroTeste.inicioRealizacao}" />
+							</div>
+	
+							<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+								<p:outputLabel for="@next" value="Término Realização" />
+								<p:datePicker
+									value="#{testeBean.filtroTeste.terminoRealizacao}" />
+							</div>
+							
+							<div class="field col-12 md:col-6 lg:col-4 xl:col-3">
+								<p:outputLabel for="@next" value="Nome do usuário" />
+								<p:inputText
+									value="#{testeBean.filtroTeste.nome}" />
+							</div>
+							
+							<div class="field col-12 lg:col-6 xl:col-3">
+								<p:outputLabel for="@next" value="Nota" />
+								<p:inputNumber 
+									value="#{testeBean.filtroTeste.nota}" 
+									symbolPosition="p" decimalSeparator=","
+									thousandSeparator="." />
+							</div>
+							
+				            
+						</div>
+						
+						<p:divider />
+				
+						<div class="p-grid" style="margin-top:1rem">
+							
+							<div class="p-col-12 p-text-right" >
+							
+								<p:commandButton  value="Filtrar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-search" 
+								action="#{testeBean.filtrar}" update="@form, :growl"  process="@form"	/>
+							</div>
+							
+						</div>
+			       
+			   		</p:panel>
+			   		
+				    <p:dataTable id="tabela" class="table table-striped" reflow="true"  
+				    var="teste" value="#{testeBean.testes}" 
+				    selection="#{testeBean.teste}" selectionMode="single" rowKey="#{teste.id}"
+				    paginator="true" rows="20">
+				    	<p:ajax event="rowSelect" update="@form" listener="#{testeBean.onSelected}"/>
+				    
+						<p:column headerText="Usuário" responsivePriority="1" >
+							<h:outputText value="#{teste.usuario.nome}" style="display:inline-block;margin-right:.5rem;"/>
+						</p:column>
+						
+						<p:column headerText="Teste Padrão" responsivePriority="1" >
+							<h:outputText value="#{teste.testePadrao.nome}" />
+						</p:column>
+						
+						<p:column  headerText="Realizado" responsivePriority="4">
+							<h:outputText value="#{teste.realizado}" converter="simNaoConverter"/>
+						</p:column>
+						
+						<p:column  headerText="Repetir até passar" responsivePriority="4">
+							<h:outputText value="#{teste.repetirAtePassar}" converter="simNaoConverter"/>
+						</p:column>
+						
+						<p:column  headerText="Tempo s" responsivePriority="4">
+							<h:outputText value="#{teste.tempo}" />
+						</p:column>
+						
+						<p:column  headerText="Duração min" responsivePriority="4">
+							<h:outputText value="#{teste.duracao}" />
+						</p:column>
+						
+						<p:column headerText="Realização" responsivePriority="2">
+							<h:outputText value="#{teste.realizacao}" rendered="#{teste.realizado}">
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Nota mínima" responsivePriority="1">
+							<h:outputText value="#{teste.notaMinima}" >
+								<f:convertNumber pattern="#,##0.00" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Nota" responsivePriority="1">
+							<h:outputText value="#{teste.nota}" rendered="#{teste.realizado}">
+								<f:convertNumber pattern="#,##0.00" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column  headerText="Aprovado" responsivePriority="4">
+							<h:outputText value="#{teste.aprovado()}" converter="simNaoConverter"/>
+						</p:column>
+						
+						<p:column headerText="Visializar" responsivePriority="3">
+							
+							<p:button styleClass="ui-button-raised ui-button-flat ui-button-success" value="Visializar"
+							icon="pi pi-caret-right" href="/teste/teste/verTeste.xhtml?id=#{teste.id}" 
+							update="@form, :growl" 
+							oncomplete="reloadMathJax();" style="width: auto" >
+							</p:button>
+							
+						</p:column>
+						
+					</p:dataTable>
+					
+				</h:panelGroup>
+			</div>
+		</div>
+	</h:form>
+	
+	
+</ui:decorate>
+	

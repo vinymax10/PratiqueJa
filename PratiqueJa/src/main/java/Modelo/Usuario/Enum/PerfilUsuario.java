@@ -1,0 +1,33 @@
+package Modelo.Usuario.Enum;
+
+public enum PerfilUsuario
+{
+	Bronze("Bronze"),
+	Prata("Prata"),
+	Ouro("Ouro"),
+	Admin("Administrador");
+
+	private String nome;
+
+	PerfilUsuario(String nome)
+	{
+		this.nome = nome;
+	}
+
+	public String getNome()
+	{
+		return nome;
+	}
+
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	public boolean equals(PerfilUsuario x)
+	{
+		PerfilUsuario modulo = (PerfilUsuario) x;
+		return this.nome.equals(modulo.nome);
+	}
+
+}

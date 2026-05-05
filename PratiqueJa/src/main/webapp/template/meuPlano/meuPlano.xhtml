@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="meuPlano"
+			class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 "
+			header="Meu Plano" showEffect="fade" hideEffect="fade"
+			width="100%;" modal="true" widgetVar="meuPlanoWidget"
+			responsive="true">
+			<h:form id="formMeuPlano" enctype="multipart/form-data" >
+				
+	       		<ui:include src="/template/meuPlano/status.xhtml" />
+				
+				<h:outputText value="Meus Pagamentos" style="font-size:1.5rem;margin:1rem;" />
+				
+				<p:dataTable id="tabelaPagamentos" class="table table-striped" 
+			    var="pagamento" value="#{usuarioBean.usuario.pagamentos}" reflow="true" 
+			    rowKey="#{pagamento.id}" style="margin:1rem;"
+			    paginator="true" rows="20" paginatorAlwaysVisible="false">
+			    	
+					<p:column headerText="Data" responsivePriority="2">
+						<h:outputText value="#{pagamento.data}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Valor"  responsivePriority="1">
+					
+						<h:outputText value="R$ " />
+						<h:outputText value="#{pagamento.valor}" >
+							<f:convertNumber pattern="#,##0.00" />
+						</h:outputText>
+						
+					</p:column>
+					
+					<p:column headerText="Tipo Pagamento" responsivePriority="1">
+						<h:outputText value="#{pagamento.tipoPagamento.nome}" />
+					</p:column>
+					
+					<p:column headerText="Plano" responsivePriority="1">
+						<h:outputText value="#{pagamento.plano.nome}" />
+					</p:column>
+					
+				</p:dataTable>	
+			</h:form>
+	
+			
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>
+
+

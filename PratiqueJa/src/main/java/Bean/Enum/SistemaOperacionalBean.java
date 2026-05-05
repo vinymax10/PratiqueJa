@@ -1,0 +1,36 @@
+package Bean.Enum;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+import Modelo.Configuracao.Enum.SistemaOperacional;
+
+@Named
+@SessionScoped
+public class SistemaOperacionalBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	private List<SistemaOperacional> opcoes;
+
+	@PostConstruct
+	public void init()
+	{
+		opcoes = Arrays.asList(SistemaOperacional.values());
+	}
+
+	public List<SistemaOperacional> getOpcoes()
+	{
+		return opcoes;
+	}
+
+	public void setOpcoes(List<SistemaOperacional> opcoes)
+	{
+		this.opcoes = opcoes;
+	}
+}

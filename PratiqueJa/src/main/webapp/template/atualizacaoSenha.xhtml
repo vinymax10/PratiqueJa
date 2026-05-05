@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="atualizacaoSenha"
+			class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 p-xl-4 p-xl-offset-4"
+			header="Atualização de Senha" showEffect="fade" hideEffect="fade"
+			width="100%;" modal="true" widgetVar="atualizacaoSenhaWidget"
+			responsive="true">
+			<h:form id="formAtualizacaoSenha" enctype="multipart/form-data" style="margin:0;" >
+
+				<div class="ui-fluid p-formgrid p-grid">
+				
+					<div class="campoMsg col-12" >
+	           			<p:outputLabel for="@next" value="Senha Anterior"/>
+	           			<p:password id="senhaAnterior" value="#{autenticacaoBean.senhaAntiga}"
+	           			validator="#{autenticacaoBean.validateSenhaAtualizacao}"
+	           			required="true" requiredMessage="A senha anterior é obrigatória"/>
+	           			<p:message for="senhaAnterior" display="text" />
+	           		</div>
+					
+					<div class="campoMsg col-12" >
+	           			<p:outputLabel for="@next" value="Nova Senha"/>
+	           			<p:password id="senha" value="#{autenticacaoBean.senha}" 
+	           			match="formAtualizacaoSenha:confirmaSenha" 
+	           			feedback="true" required="true" redisplay="true" requiredMessage="A senha é obrigatória"/>
+	           			<p:message for="senha" display="text" />
+	           		</div>
+	           		
+           			<div class="campoMsg col-12" >
+	           			<p:outputLabel for="@next" value="Confirme a Senha"/>
+	           			<p:password id="confirmaSenha" value="#{autenticacaoBean.confirmacaoSenha}" 
+	           			feedback="true" required="true" redisplay="true" requiredMessage="A confirmação da senha é obrigatória"/>
+	           			<p:message for="confirmaSenha" display="text" />
+	           		</div>
+					
+				</div>
+	
+				<p:divider />
+		
+				<div class="p-grid" >
+		
+					<div class="p-col-12 comandRight" >
+						<p:commandButton value="Cancelar"
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+							onclick="PF('atualizacaoSenhaWidget').hide()" style="width: auto;margin-right:15px;"
+							icon="pi pi-times" />
+		
+						<p:commandButton id="salvarUsuario" value="Salvar"
+							styleClass="ui-button-raised ui-button-flat" icon="pi pi-check"
+							action="#{autenticacaoBean.atualizarSenha()}" update="@form, :growl"
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('atualizacaoSenhaWidget').hide()"
+							process="@form" >
+							<p:defaultCommand target="formAtualizacaoSenha:salvarUsuario" />
+						</p:commandButton>
+	
+					</div>
+				</div>
+	
+			</h:form>
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>
+
+

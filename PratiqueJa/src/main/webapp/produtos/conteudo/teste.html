@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pratique Já — Planos</title>
+  <meta name="description" content="Conteúdo pronto, exclusivo e profissional para Instagram e TikTok de professores de matemática." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#7c3aed; --accent-2:#06b6d4; --glass: rgba(255,255,255,0.03);
+      --radius:14px; --maxwidth:1100px;
+      --shadow: 0 6px 30px rgba(2,6,23,0.6);
+      --gap:18px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:linear-gradient(180deg,#071126 0%, #081226 60%); color:#e6eef8; -webkit-font-smoothing:antialiased}
+    main{max-width:var(--maxwidth); margin:36px auto; padding:24px}
+    .container{padding:18px}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1fr; gap:18px; align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:18px; padding:28px; box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block; padding:6px 10px; background:var(--glass); color:var(--muted); border-radius:999px; font-size:13px}
+    h1{margin:12px 0 6px; font-size:28px; line-height:1.06}
+    p.lead{color:var(--muted); margin:0 0 18px}
+    .hero-cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{background:var(--accent); color:white; padding:12px 18px; border-radius:12px; border:0; cursor:pointer; font-weight:600}
+    .btn.secondary{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted)}
+
+    /* How it works */
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px}
+    .card{background:var(--card); border-radius:12px; padding:14px}
+    .card h4{margin:0 0 8px}
+    .small{color:var(--muted); font-size:14px}
+
+    /* Plans */
+    .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px}
+    .plan{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    .plan.popular{box-shadow:0 10px 35px rgba(124,58,237,0.12); transform:translateY(-6px); border:1px solid rgba(124,58,237,0.14)}
+    .price{font-size:22px; font-weight:700; margin:8px 0}
+    .feature{display:flex; gap:10px; align-items:flex-start; margin:8px 0}
+    .feature .dot{width:10px; height:10px; background:var(--accent-2); border-radius:50%; margin-top:6px}
+
+    /* comparison table */
+    .compare{margin-top:28px; overflow:auto; border-radius:12px}
+    table{width:100%; border-collapse:collapse; min-width:720px}
+    th, td{padding:12px 16px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03)}
+    th{color:var(--muted); font-weight:600; background:transparent}
+
+    /* testimonials */
+    .testimonials{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:20px}
+    .testi{background:var(--card); padding:14px; border-radius:10px}
+
+    footer{margin-top:36px; padding:18px; text-align:center; color:var(--muted); font-size:14px}
+
+    /* responsive */
+    @media (max-width:980px){.plans{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr} .testimonials{grid-template-columns:1fr} table{min-width:600px}}
+    @media (max-width:560px){main{padding:12px} h1{font-size:22px} .price{font-size:18px}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero-card hero">
+    <div>
+      <span class="eyebrow">Pratique Já — Conteúdo para professores</span>
+      <h1>Posts prontos, exclusivos e no seu estilo para Instagram e TikTok</h1>
+      <p class="lead">Economize horas de trabalho e mantenha seu perfil ativo com posts de matemática criados automaticamente, personalizados com sua logo, cores e imagens.</p>
+      <div class="hero-cta">
+        <button class="btn" onclick="location.hash='#planos'">Escolha seu plano agora</button>
+        <button class="btn secondary" onclick="location.hash='#como-funciona'">Como funciona</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="como-funciona" class="container">
+    <div class="grid-3">
+      <div class="card">
+        <h4>Automação total</h4>
+        <p class="small">Exercícios gerados aleatoriamente — conteúdo exclusivo a cada envio, sem precisar de intervenção humana.</p>
+      </div>
+      <div class="card">
+        <h4>Personalização</h4>
+        <p class="small">Upload de logo, escolha de paleta de cores, backgrounds e base própria de imagens.</p>
+      </div>
+      <div class="card">
+        <h4>Envio automático</h4>
+        <p class="small">Você recebe por e-mail os pacotes com 6 posts (3 feed + 3 reels) prontos para publicar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos" class="container">
+    <h2 style="margin:6px 0 6px">Escolha o plano ideal para seu perfil</h2>
+    <p class="small">Três opções pensadas para diferentes necessidades — do professor que quer começar ao que quer profissionalizar sua presença online.</p>
+
+    <div class="plans" style="margin-top:16px">
+      <!-- Básico -->
+      <article class="plan" aria-labelledby="basico-title">
+        <h3 id="basico-title">Básico — Comece com consistência</h3>
+        <div class="price">R$ 297 / mês</div>
+        <p class="small">Ideal para manter o perfil ativo com investimento baixo.</p>
+        <div style="margin-top:12px">
+          <div class="feature"><div class="dot"></div><div>6 posts a cada 3 dias (3 feed + 3 reels)</div></div>
+          <div class="feature"><div class="dot"></div><div>Exercícios exclusivos nos 3 níveis</div></div>
+          <div class="feature"><div class="dot"></div><div>Upload de logo + 1 cor predominante</div></div>
+          <div class="feature"><div class="dot"></div><div>Background aleatório do sistema</div></div>
+          <div class="feature"><div class="dot"></div><div>Banco de imagens padrão</div></div>
+          <div class="feature"><div class="dot"></div><div>Legendas curtas automáticas</div></div>
+        </div>
+        <div style="margin-top:14px"><button class="btn" data-plan="basico" onclick="selectPlan('Básico')">Assinar Plano Básico</button></div>
+      </article>
+
+      <!-- Intermediário -->
+      <article class="plan popular" aria-labelledby="inter-title">
+        <h3 id="inter-title">Intermediário — O mais escolhido</h3>
+        <div class="price">R$ 347 / mês</div>
+        <p class="small">Equilíbrio entre personalização e custo.</p>
+        <div style="margin-top:12px">
+          <div class="feature"><div class="dot"></div><div>6 posts a cada 2 dias (3 feed + 3 reels)</div></div>
+          <div class="feature"><div class="dot"></div><div>Paleta de até 3 cores + upload de logo</div></div>
+          <div class="feature"><div class="dot"></div><div>Escolha de background (aleatório ou específico)</div></div>
+          <div class="feature"><div class="dot"></div><div>Upload de até 20 imagens próprias</div></div>
+          <div class="feature"><div class="dot"></div><div>Legendas elaboradas + hashtags sugeridas</div></div>
+          <div class="feature"><div class="dot"></div><div>Calendário mensal sugerido</div></div>
+        </div>
+        <div style="margin-top:14px"><button class="btn" data-plan="intermediario" onclick="selectPlan('Intermediário')">Assinar Plano Intermediário</button></div>
+      </article>
+
+      <!-- Premium -->
+      <article class="plan" aria-labelledby="premium-title">
+        <h3 id="premium-title">Premium — Profissionalize seu perfil</h3>
+        <div class="price">R$ 397 / mês</div>
+        <p class="small">Para quem quer se destacar como autoridade e ter um perfil de alto impacto.</p>
+        <div style="margin-top:12px">
+          <div class="feature"><div class="dot"></div><div>Posts diários (6 por dia)</div></div>
+          <div class="feature"><div class="dot"></div><div>Paleta de cores completa + upload de logo</div></div>
+          <div class="feature"><div class="dot"></div><div>Backgrounds ilimitados e base personalizada</div></div>
+          <div class="feature"><div class="dot"></div><div>Upload ilimitado de imagens próprias</div></div>
+          <div class="feature"><div class="dot"></div><div>Legendas completas com CTA e hashtags inteligentes</div></div>
+          <div class="feature"><div class="dot"></div><div>Sugestões semanais de calendário estratégico</div></div>
+          <div class="feature"><div class="dot"></div><div>Suporte prioritário e relatório mensal simples</div></div>
+        </div>
+        <div style="margin-top:14px"><button class="btn" data-plan="premium" onclick="selectPlan('Premium')">Assinar Plano Premium</button></div>
+      </article>
+    </div>
+
+    <!-- comparison table -->
+    <div class="compare">
+      <table aria-label="Comparação de planos" style="margin-top:20px; background:transparent; border-radius:10px; overflow:hidden">
+        <thead>
+          <tr>
+            <th>Benefícios</th>
+            <th>Básico<br><small>R$297</small></th>
+            <th>Intermediário<br><small>R$347</small></th>
+            <th>Premium<br><small>R$397</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Frequência</td><td>A cada 3 dias</td><td>A cada 2 dias</td><td>Diário</td></tr>
+          <tr><td>Logo personalizada</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+          <tr><td>Paleta de cores</td><td>1 cor</td><td>Até 3</td><td>Completa</td></tr>
+          <tr><td>Backgrounds</td><td>Aleatório</td><td>Escolha</td><td>Ilimitados</td></tr>
+          <tr><td>Upload imagens próprias</td><td>—</td><td>Até 20</td><td>Ilimitado</td></tr>
+          <tr><td>Legendas</td><td>Curtas</td><td>Elaboradas</td><td>Com CTA</td></tr>
+          <tr><td>Calendário estratégico</td><td>—</td><td>✔️ (mensal)</td><td>✔️ (semanal)</td></tr>
+          <tr><td>Relatório</td><td>—</td><td>—</td><td>✔️ (mensal)</td></tr>
+          <tr><td>Suporte prioritário</td><td>—</td><td>—</td><td>✔️</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- testimonials -->
+    <div style="margin-top:26px">
+      <h3>O que professores dizem</h3>
+      <div class="testimonials">
+        <div class="testi"><strong>"Ganhei tempo e consegui manter o perfil ativo"</strong><p class="small">— Prof. Ana, Matemática</p></div>
+        <div class="testi"><strong>"Os posts parecem feitos por agência — meus alunos realmente interagem mais"</strong><p class="small">— Prof. Carlos, Ensino Médio</p></div>
+      </div>
+    </div>
+
+  </section>
+	
+	<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Pratique Já — Conteúdo para professores</span>
+      <h1>Transforme seu Instagram em uma vitrine profissional — posts prontos, personalizados e sem perder horas</h1>
+      <p class="lead">Economize tempo e mantenha seu perfil ativo com posts exclusivos de matemática, já prontos no seu estilo, com sua logo, cores e imagens.</p>
+
+      <div class="hero-ctas">
+        <a class="btn primary" href="#planos">Quero começar agora</a>
+        <a class="btn outline" href="#comparar">Ver planos disponíveis</a>
+      </div>
+
+      <p class="trust">Mais de <strong>50 professores</strong> já usam nossos posts. <a href="#exemplos">Veja exemplos</a>.</p>
+    </div>
+
+    <div class="hero-cards">
+      <div class="feature-card">
+        <h4>Automação total</h4>
+        <p>Exercícios gerados por IA — conteúdo exclusivo a cada envio, sem intervenção humana.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Personalização</h4>
+        <p>Upload de logo, paleta de cores e backgrounds próprios para combinar com seu perfil.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Envio pronto</h4>
+        <p>Você recebe os pacotes no e-mail com tudo pronto para publicar (3 feed + 3 reels).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <h2>Perguntas frequentes</h2>
+
+    <div class="faq-list">
+      <details>
+        <summary>Posso cancelar quando quiser?</summary>
+        <div class="faq-body">
+          <p>Sim — não há fidelidade. Você pode cancelar a assinatura a qualquer momento pelo painel e continuará com o acesso até o final do período pago.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Como recebo os posts? Preciso publicar manualmente?</summary>
+        <div class="faq-body">
+          <p>Você recebe por e-mail um pacote com 6 posts prontos (3 feed + 3 reels) prontos para publicar. Enviamos também o arquivo editável e sugestões de horários. Se quiser, podemos fornecer arquivos já prontos para agendamento em ferramentas como Later ou Buffer.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Os posts já vêm com minha logo e cores?</summary>
+        <div class="faq-body">
+          <p>Sim — todos os planos permitem upload de logo e escolha de paleta. Planos superiores incluem mais opções de backgrounds e templates editáveis.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Posso trocar de plano depois?</summary>
+        <div class="faq-body">
+          <p>Sim — você pode mudar de plano a qualquer momento pelo painel. Se subir de plano, o ajuste é feito proporcionalmente.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>O que acontece se eu não gostar dos posts?</summary>
+        <div class="faq-body">
+          <p>Temos garantia de satisfação de 7 dias para novos assinantes — se não estiver satisfeito, entre em contato que faremos o reembolso conforme nossa política.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CSS (embutido) -->
+<style>
+  :root{
+    --brand:#2f5bd8;
+    --muted:#6b7280;
+    --bg:#f3f8ff;
+    --card:#ffffff;
+    --radius:12px;
+  }
+  .hero{
+    background: linear-gradient(180deg, var(--bg) 0%, #eef6ff 100%);
+    padding: 48px 18px;
+  }
+  .hero-inner{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    gap:28px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .hero-text{ flex:1 1 560px; min-width:320px; }
+  .eyebrow{
+    display:inline-block;
+    background:rgba(47,91,216,0.08);
+    color:var(--brand);
+    padding:6px 12px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.85rem;
+    margin-bottom:12px;
+  }
+  h1{
+    font-size:1.9rem;
+    margin:6px 0 12px;
+    color:#102030;
+    line-height:1.12;
+  }
+  .lead{
+    color:var(--muted);
+    margin-bottom:18px;
+    max-width:60ch;
+  }
+  .hero-ctas{ display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+  .btn{ text-decoration:none; display:inline-block; padding:10px 14px; border-radius:10px; font-weight:700; }
+  .btn.primary{ background:var(--brand); color:#fff; box-shadow:0 10px 26px rgba(47,91,216,0.14); }
+  .btn.outline{ background:#fff; border:1px solid rgba(16,32,48,0.06); color:#102030; }
+  .trust{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
+
+  .hero-cards{
+    display:flex;
+    gap:14px;
+    flex:0 0 480px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .feature-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:14px;
+    box-shadow:0 8px 20px rgba(18,42,79,0.04);
+    min-width:140px;
+    width: 220px;
+  }
+  .feature-card h4{ margin:0 0 6px; font-size:1rem; }
+  .feature-card p{ margin:0; color:var(--muted); font-size:0.92rem; }
+
+  /* FAQ */
+  .faq-section{ padding:40px 18px; }
+  .faq-section .container{ max-width:980px; margin:0 auto; }
+  .faq-section h2{ font-size:1.4rem; margin-bottom:16px; color:#152033; }
+  .faq-list details{ background:#fff; border-radius:10px; padding:14px 16px; box-shadow:0 6px 16px rgba(18,42,79,0.04); margin-bottom:12px; }
+  .faq-list summary{ font-weight:700; cursor:pointer; outline:none; font-size:1rem; }
+  .faq-body{ margin-top:8px; color:var(--muted); line-height:1.5; }
+
+  /* small screens */
+  @media (max-width:880px){
+    h1{ font-size:1.45rem; }
+    .hero-cards{ order:2; width:100%; justify-content:flex-start; }
+    .hero-text{ order:1; }
+  }
+</style>
+
+  <footer>
+    <p>Pratique Já — Conteúdo para professores de matemática • <a href="#" style="color:inherit; text-decoration:underline">Contacte-nos</a></p>
+  </footer>
+</main>
+
+
+<script>
+  function selectPlan(name){
+    // Placeholder: adapte para abrir modal, enviar para checkout, registro etc.
+    alert('Você selecionou o plano: ' + name + '\n\nSubstitua este alerta por integração com checkout ou formulário de inscrição.');
+  }
+</script>
+</body>
+</html>

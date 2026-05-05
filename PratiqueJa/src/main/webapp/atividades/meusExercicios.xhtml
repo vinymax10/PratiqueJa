@@ -1,0 +1,122 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+
+	<div class="p-d-flex">
+			
+	    <h:form id="form" style="margin-bottom:0; width:100%;">
+			
+			<div class="p-grid">
+				<div class="p-col-12" style="margin: 0 10px;">
+					<h2>Meus Exercícios</h2>						
+				</div>
+				
+	   		 	<ui:repeat id="repeat" value="#{exercicioBean.getMeusExercicios(false)}" var="exercicio" >
+				
+		        	<div class="p-col-12 p-lg-6 p-xl-4">
+		        		<p:card class="newBorder" style="margin:10px;width: auto;">
+						    <f:facet name="header">
+						        <img alt="user header" style="border-radius:  16px 16px 0 0" src="#{exercicio.exercicioPadrao.enderecoImage()}"/>
+						    </f:facet>
+						    <f:facet name="title" >
+						        #{exercicio.exercicioPadrao.assuntoCurso.nome}
+						    </f:facet>
+						    <f:facet name="subtitle" style="text-align:right!important;">
+						        #{exercicio.exercicioPadrao.nivel.nome} 
+						        <ui:repeat value="#{exercicio.exercicioPadrao.numEstrelas()}" var="estrelas" >
+									<i class="pi pi-star" style="color:#836FFF;" ></i>
+								</ui:repeat>
+						    </f:facet>
+							
+							#{exercicio.exercicioPadrao.descricao}
+						
+						    <f:facet name="footer" >
+						    	
+						        <p:commandButton value="Download" style="margin-right:15px;"
+								oncomplete="PF('downloadExercicioWidget').show()" process="@this"
+								icon="pi pi-download" update="form:dialogDownloadExercicio"
+								styleClass="ui-button-raised ui-button-flat">
+									<f:setPropertyActionListener value="#{exercicio}" target="#{exercicioBean.exercicio}"/>
+								</p:commandButton>
+						    	
+						        <p:button icon="pi pi-table" value="Fazer"
+						        href="/exercicio/exercicio/verExercicio.xhtml?id=#{exercicio.id}"
+						        styleClass="ui-button-raised ui-button-flat ui-button-success" />
+						        
+						    </f:facet>
+						</p:card>
+		        	</div>	
+	
+			    </ui:repeat>
+			    
+		    	<p:dialog id="dialogDownloadExercicio" class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 p-xl-4 p-xl-offset-4" 
+				header="Download do Exercício" 
+				showEffect="fade" hideEffect="fade" width="100%;" modal="true"  
+				widgetVar="downloadExercicioWidget" responsive="true" >
+					
+					<p:outputPanel id="manage-usuario-content" class="ui-fluid">
+						
+						<div class="p-col-12" >
+							<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicio.exercicioPadrao.assuntoCurso.modulo.nome}" />
+					    	 - 
+					    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicio.exercicioPadrao.assuntoCurso.nome}" />
+					    	- 
+					    	<h:outputText style="color: var(--cinza);" value="#{exercicioBean.exercicio.exercicioPadrao.nivel.nome}" />
+			    		</div>
+			    		
+			    		<div class="p-col-12" >
+							<h:outputText value="Selecione a configuração do pdf do exercício:" />
+			    		</div>
+			    		
+						<div class="ui-fluid p-formgrid p-grid">
+				        				    		
+	                		<div class="p-field p-col-12">
+				                <p:selectBooleanButton value="#{exercicioBean.configDownload.identificacao}" 
+				                onLabel="Com Identificação" offLabel="Sem Identificação"
+								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+								style="width:12rem; margin-top:15px;" />
+							</div>
+							
+							<div class="p-field p-col-12">
+				                <p:selectBooleanButton value="#{exercicioBean.configDownload.respostas}" 
+				                onLabel="Com Respostas" offLabel="Sem Respostas"
+								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+								style="width:12rem; margin-top:15px;" />
+							</div>
+							
+							<div class="p-field p-col-12">
+				                <p:selectBooleanButton value="#{exercicioBean.configDownload.resolucao}" 
+				                onLabel="Com Resolução" offLabel="Sem Resolução"
+								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+								style="width:12rem; margin-top:15px;" />
+							</div>
+				            
+		           		</div>
+					</p:outputPanel>
+					<f:facet name="footer">
+						<p:commandButton  value="Cancelar" styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+						onclick="PF('downloadExercicioWidget').hide()"  icon="pi pi-times" />
+
+						<p:commandButton value="Download" ajax="true" style="margin-right:15px;"
+						onclick="PrimeFaces.monitorDownload(start, stop);"
+						icon="pi pi-download" update="form:dialogDownloadExercicio"
+						styleClass="ui-button-raised ui-button-flat">
+							<p:fileDownload value="#{exercicioBean.download(false)}"/>
+						</p:commandButton>
+						
+       				</f:facet>
+					
+				</p:dialog>
+	   		</div>
+		   		
+				
+		</h:form>
+	</div>
+	
+	
+</ui:decorate>
+	

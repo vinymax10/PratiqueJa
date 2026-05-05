@@ -1,0 +1,242 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-adicionar-programacaoPost" class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2" 
+		header="Programação de Post" dynamic="true"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true"  widgetVar="dialogAdicionarProgramacaoPost" responsive="true" 
+		focus="formAdicionarProgramacaoPost:ordem"	>
+			<h:form id="formAdicionarProgramacaoPost" enctype="multipart/form-data" >
+				<div class="ui-fluid formgrid grid">
+					
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-2" >
+						<p:outputLabel for="@next" value="Ordem" />
+						<p:spinner  id="ordem" min="0" max="100"
+							value="#{programacaoPostBean.ordem}"
+							required="true" />
+					</div>
+					
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-2" >
+						<p:outputLabel for="@next" value="Quantidade" />
+						<p:spinner min="1" max="100"
+							value="#{programacaoPostBean.quantidade}"
+							required="true" />
+					</div>
+					
+					<div class="campo col-12 xl:col-7">
+						<p:outputLabel for="@next" value="Assunto" />
+						<p:selectOneMenu id="assuntoCurso"
+							value="#{programacaoPostBean.programacaoPost.assuntoCurso}"
+							converter="generic" required="true" requiredMessage="O assunto é obrigatório" filter="true"
+							filterMatchMode="contains">
+							<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+										itemValue="#{assuntoCurso}" />
+						</p:selectOneMenu>
+						<p:message for="assuntoCurso" display="text"/>
+					</div>
+					
+				</div>
+				
+				<div class="ui-fluid formgrid grid">
+					<div class="col-12 ">
+						<p:fieldset legend="Background Feed" 
+						style="margin-bottom:1rem;width:100%;" >
+							<div class="ui-fluid formgrid grid">
+								<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+									<p:outputLabel for="@next" value="Escolha" />
+									<p:selectBooleanButton 
+										value="#{programacaoPostBean.programacaoPost.backgroundAleatorioFeed}"
+										onLabel="Aleatória" offLabel="Específica" 
+										onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+										disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+										style="width-min:8rem;display:block;">
+										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed" />
+									</p:selectBooleanButton>
+								</div>
+								
+								<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+									<p:outputLabel for="@next" value="Base de Dados" />
+									<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(true).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
+										value="#{programacaoPostBean.programacaoPost.basePadraoFeed}"
+										onLabel="Padrão" offLabel="Personalizada" 
+										onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+										style="width-min:8rem;display:block;">
+										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed" />
+									</p:selectBooleanButton>
+								</div>
+								
+								<div class="campo col-12 xl:col-8">
+									<h:panelGroup id="backgroundFeed" >
+										<h:panelGroup 
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioFeed and !programacaoPostBean.programacaoPost.basePadraoFeed}">
+											<p:outputLabel for="@next" value="Background" />
+											<p:selectOneMenu 
+												value="#{programacaoPostBean.programacaoPost.backgroundFeed}"
+												converter="generic" required="true" filter="true"
+												filterMatchMode="contains" var="item" >
+												<f:selectItems value="#{imagemPostBean.imagemPost(true)}"
+															var="image" itemLabel="#{image.nome}"
+															itemValue="#{image}" />
+															
+												<p:column >
+							                        <p:graphicImage value="#{item.endImagem}" alt="#{image.nome}" 
+								                    style="width: 80px; " 
+								                     />
+							                    </p:column>
+							                    
+							                    <p:column >
+							                         <f:facet name="header">
+							                            <h:outputText value="Nome"/>
+							                        </f:facet>
+							                        <h:outputText value="#{item.nome}"/>
+							                    </p:column>
+							
+											</p:selectOneMenu>
+										</h:panelGroup>
+										<h:panelGroup 
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioFeed and programacaoPostBean.programacaoPost.basePadraoFeed}">
+											<p:outputLabel for="@next" value="Background" />
+											<p:selectOneMenu 
+												value="#{programacaoPostBean.programacaoPost.padraoFeed}"
+												converter="generic" required="true" filter="true"
+												filterMatchMode="contains" var="item">
+												<f:selectItems value="#{imagemPostBean.imagensFeed}"
+															var="image" itemLabel="#{image.nome}"
+															itemValue="#{image}" >
+															</f:selectItems>
+															
+												<p:column >
+							                        <p:graphicImage value="#{item.endereco}" alt="#{item.nome}" 
+								                    style="width: 80px;" />
+							                    </p:column>
+							                    
+							                    <p:column >
+							                         <f:facet name="header">
+							                            <h:outputText value="Nome"/>
+							                        </f:facet>
+							                        <h:outputText value="#{item.nome}"/>
+							                    </p:column>
+											</p:selectOneMenu>
+										</h:panelGroup>
+									</h:panelGroup>
+								</div>
+							</div>
+						</p:fieldset>
+					</div>
+					<div class="col-12 ">
+						<p:fieldset legend="Background Reel" 
+						style="margin-bottom:1rem;width:100%;" >
+							<div class="ui-fluid formgrid grid">
+								<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+									<p:outputLabel for="@next" value="Escolha" />
+									<p:selectBooleanButton 
+										value="#{programacaoPostBean.programacaoPost.backgroundAleatorioReel}"
+										onLabel="Aleatória" offLabel="Específica" 
+										onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+										disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+										style="width-min:8rem;display:block;">
+										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundReel" />
+									</p:selectBooleanButton>
+								</div>
+								
+								<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+									<p:outputLabel for="@next" value="Base de Dados" />
+									<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
+										value="#{programacaoPostBean.programacaoPost.basePadraoReel}"
+										onLabel="Padrão" offLabel="Personalizada" 
+										onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+										style="width-min:8rem;display:block;">
+										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundReel" />
+									</p:selectBooleanButton>
+								</div>
+								
+								<div class="campo col-12 xl:col-8">
+									<h:panelGroup id="backgroundReel" >
+										<h:panelGroup 
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioReel and !programacaoPostBean.programacaoPost.basePadraoReel}">
+											<p:outputLabel for="@next" value="Background" />
+											<p:selectOneMenu 
+												value="#{programacaoPostBean.programacaoPost.backgroundReel}"
+												converter="generic" required="true" filter="true"
+												filterMatchMode="contains" var="item" >
+												<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
+															var="image" itemLabel="#{image.nome}"
+															itemValue="#{image}" />
+															
+												<p:column >
+							                        <p:graphicImage value="#{item.endImagem}" alt="#{image.nome}" 
+								                    style="width: 80px;"
+								                     />
+							                    </p:column>
+							                    
+							                    <p:column >
+							                         <f:facet name="header">
+							                            <h:outputText value="Nome"/>
+							                        </f:facet>
+							                        <h:outputText value="#{item.nome}"/>
+							                    </p:column>
+							
+											</p:selectOneMenu>
+										</h:panelGroup>
+										<h:panelGroup 
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioReel and programacaoPostBean.programacaoPost.basePadraoReel}">
+											<p:outputLabel for="@next" value="Background" />
+											<p:selectOneMenu 
+												value="#{programacaoPostBean.programacaoPost.padraoReel}"
+												converter="generic" required="true" filter="true"
+												filterMatchMode="contains" var="item">
+												<f:selectItems value="#{imagemPostBean.imagensReel}"
+															var="image" itemLabel="#{image.nome}"
+															itemValue="#{image}" >
+															</f:selectItems>
+															
+												<p:column >
+							                        <p:graphicImage value="#{item.endereco}" alt="#{item.nome}" 
+								                    style="width: 80px;"   />
+							                    </p:column>
+							                    
+							                    <p:column >
+							                         <f:facet name="header">
+							                            <h:outputText value="Nome"/>
+							                        </f:facet>
+							                        <h:outputText value="#{item.nome}"/>
+							                    </p:column>
+											</p:selectOneMenu>
+										</h:panelGroup>
+									</h:panelGroup>
+								</div>
+							</div>
+						</p:fieldset>
+					</div>
+				</div>
+		
+				<p:divider />
+		
+				<div class="p-grid" >
+		
+					<div class="p-col-12 comandRight" >
+		
+						<p:commandButton id="salvarAdicionar" value="Adicionar"
+							styleClass="ui-button-raised ui-button-flat ui-button-success" icon="pi pi-plus"
+							action="#{programacaoPostBean.adicionar()}" update="@form, form:tabela, :growl"
+							process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAdicionarProgramacaoPost').hide()">
+							<p:defaultCommand target="salvarAdicionar" />
+						</p:commandButton>
+						
+					</div>
+		
+				</div>
+	           
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</h:body>
+</html>
+
+

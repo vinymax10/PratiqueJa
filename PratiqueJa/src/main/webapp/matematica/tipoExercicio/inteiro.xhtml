@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+		<div class="col-12 md:col-6 xl:col-4">
+			<p:card   style="margin:10px;width: auto;">
+			
+				<h:outputText value=" #{conta.index}) " 
+					style="color: var(--iris);font-weight: bold;font-size: 1.1rem;display:inline;vertical-align: top;" />
+				<h:outputText value="\\( #{conta.textLatex}~ \\)"
+					style="padding-top:5px;display:inline-block;" />
+				
+				<h:panelGroup id="resultado_#{conta.index}" style="display:block;margin-top:1rem;" >
+					<h:panelGroup  rendered="#{conta.respondida}">
+						<h:outputText value="Resposta: " style="color:var(--cinza);font-weight: bold;" />
+						<h:outputText value="\\( #{conta.respostaAluno} \\)" style="font-weight: bold;" />
+						<h:outputText rendered="#{conta.correta}">
+							<i class="pi pi-check"
+								style="color: var(--iris); vertical-align: middle; margin-bottom: 3px; font-weight: bold;" />
+						</h:outputText>
+						<h:outputText rendered="#{!conta.correta}">
+							<i class="pi pi-times"
+								style="color: #F06060; vertical-align: middle; margin-bottom: 3px; font-weight: bold;" />
+							<h:outputText value=" Correto: \\( #{conta.resultadoCorreto} \\)"
+								style="color: var(--verde);font-weight: bold;" />
+						</h:outputText>
+	
+						<p:commandButton action="#{exercicioBean.toogleResolucao(conta)}"
+							styleClass="ui-button-flat ui-button-plain" ajax="true"
+							icon="pi pi-pencil"
+							rendered="#{conta.respondida and conta.resolucaoLatex!=null}"
+							style="margin-top:1rem;display:block;width: auto;"
+							oncomplete="reloadMathJax();" process="@this"
+							value="Ver Resolução" update="form:exercicio_#{conta.index}" />
+	
+						<h:panelGroup id="exercicio_#{conta.index}" style="display:block;">
+	
+							<h:outputText value="\\( #{conta.resolucaoLatex}~ \\)"
+								style="margin-top:10px;" class="exercise"
+								rendered="#{conta.showResolucao}">
+	
+							</h:outputText>
+	
+						</h:panelGroup>
+					</h:panelGroup>
+				
+					<h:panelGroup  style="display:block; margin-top:1.9rem;"
+					rendered="#{!conta.respondida}">
+						<div class="ui-inputgroup">
+							<p:inputNumber id="input_#{conta.index}" value="#{conta.respostaAluno}"
+								required="true" style="text-align: center;" placeholder="Resposta"
+								decimalPlaces="0" requiredMessage="Informe uma resposta">
+								<f:ajax event="change" process="@this" onevent="update" />
+							</p:inputNumber>
+						
+							<p:commandButton id="responder_#{conta.index}" action="#{exercicioBean.responder(conta)}"
+							styleClass="ui-button-outlined  ui-button-secondary" ajax="true"
+							icon="fa-solid fa-reply"
+							process="@parent" 
+							update="form:resultado_#{conta.index} form:nota" 
+							oncomplete="reloadMathJax(); enableEnterSubmit('form');">
+								<p:defaultCommand target="form:responder_#{conta.index}" />
+							</p:commandButton>
+						</div>
+						<p:message for="input_#{conta.index}" display="text"  />
+						
+					</h:panelGroup>
+				</h:panelGroup>	
+			</p:card>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

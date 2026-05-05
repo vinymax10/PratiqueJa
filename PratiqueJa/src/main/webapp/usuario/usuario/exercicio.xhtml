@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+		
+			<p:tab title="Exercicios">
+			
+			     <p:dataTable id="tabela" class="table table-striped" var="exercicio" value="#{usuarioBean.usuario.exercicios}" 
+				    paginator="true" rows="10">
+				    	<p:ajax event="rowSelect" update="@form" listener="#{exercicioBean.onSelected}"/>
+				    
+				    	<p:column headerText="Exercício">
+							<h:outputText value="#{exercicio.exercicioPadrao.assuntoCurso.modulo.nome} 
+							- #{exercicio.exercicioPadrao.assuntoCurso.nome} - #{exercicio.exercicioPadrao.nivel.nome}" />
+						</p:column>
+						
+						<p:column headerText="Prazo">
+							<h:outputText value="#{exercicio.prazo}" >
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Realizado">
+							<h:outputText value="#{exercicio.realizacao}" rendered="#{exercicio.realizado}">
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Nota">
+							<h:outputText value="#{exercicio.nota}" rendered="#{exercicio.realizado}">
+								<f:convertNumber pattern="#,##0.00" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Visializar">
+							
+							<p:button styleClass="ui-button-raised ui-button-flat ui-button-success" value="Visializar"
+							icon="pi pi-caret-right" href="/exercicio/exercicio/verExercicio.xhtml?id=#{exercicio.id}" 
+							update="@form, :growl" 
+							oncomplete="reloadMathJax();" style="width: auto" >
+							</p:button>
+							
+						</p:column>
+						
+					</p:dataTable>
+			</p:tab>
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

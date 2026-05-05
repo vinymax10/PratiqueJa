@@ -1,0 +1,61 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >	
+					<h2>Usuários Logados</h2>	
+				</div>
+				
+		    	<p:dataTable id="tabela" class="table table-striped" var="acesso" 
+			    value="#{usuariosLogadosBean.acessos}" reflow="true" 
+			    paginator="true" paginatorAlwaysVisible="false" rows="50">
+			    
+			    	<p:column headerText="Foto" width="4rem" responsivePriority="1" >
+			    		<p:graphicImage class="circleTable" value="#{acesso.usuario.imagem.getFotoStreamedContent()}" 
+			    		rendered="#{not empty acesso.usuario.imagem}" stream="false" />
+			    	</p:column>
+			    	
+			    	<p:column headerText="Nome" >
+						<h:outputText value="#{acesso.usuario.nome}"  responsivePriority="1" />
+					</p:column>
+					
+					<p:column headerText="Data" responsivePriority="3">
+						<h:outputText value="#{acesso.data}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Email" responsivePriority="2" >
+						<h:outputText value="#{acesso.usuario.email}" />
+					</p:column>
+					
+					<p:column headerText="Turma" responsivePriority="2" >
+						<h:outputText value="#{acesso.usuario.turma.nome}" />
+					</p:column>
+					
+					<p:column headerText="Perfil" responsivePriority="2" >
+						<h:outputText value="#{acesso.usuario.perfil.nome}" />
+					</p:column>
+					
+					<p:column headerText="Validade do Plano" responsivePriority="3">
+						<h:outputText value="#{acesso.usuario.validadePlano}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+						</h:outputText>
+					</p:column>
+					
+				</p:dataTable>
+			</div>
+		</div>
+	</h:form>
+	
+	
+</ui:decorate>
+	

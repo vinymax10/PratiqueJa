@@ -1,0 +1,57 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+<f:metadata>
+    <f:viewParam name="assunto" value="#{assuntoCursoBean.chave}" />
+    <f:viewParam name="tab" value="#{assuntoCursoBean.activeIndex}" converter="javax.faces.Integer" />
+    <f:viewAction action="#{assuntoCursoBean.init()}"  />
+</f:metadata>
+
+<h:form id="form" >
+	<div class="p-d-flex" >
+	    <div class="p-grid" style="margin:0 15px;width:100%;">
+			<div class="col-12 lg:col-6" >	
+				<h2>#{assuntoCursoBean.assuntoCurso.nome}</h2>	
+			</div>
+			
+			<div class="col-12 lg:col-6" style="text-align:right;">	
+				<p:commandButton value="Fazer Teste" 
+				process="@this" action="#{testeBean.criarTeste(assuntoCursoBean.assuntoCurso)}"
+				icon="fa-solid fa-hourglass-start"  style="margin-top:25px;"
+				styleClass="ui-button-raised ui-button-flat ui-button-success">
+				</p:commandButton>
+				
+				<p:commandButton value="Gerar Conteúdo" 
+				rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
+				process="@this" action="#{programacaoPostBean.gerarConteudo(assuntoCursoBean.assuntoCurso)}"
+				icon="pi pi-instagram"  style="margin-top:25px;"
+				styleClass="ui-button-raised ui-button-flat ml-3">
+				</p:commandButton>
+				
+				
+			</div>
+			
+			<p:tabView activeIndex="#{assuntoCursoBean.activeIndex}" cache="false"  dynamic="true" id="tabView" 
+			onTabShow="reloadMathJax();" style="width:100%;" >
+				
+            	<ui:include src="/matematica/aula.xhtml" />
+
+				<ui:include src="/matematica/anotacao.xhtml" />
+			
+				<ui:include src="/matematica/exercicio.xhtml" />
+				
+				<ui:include src="/matematica/questoes.xhtml" />
+				
+	        </p:tabView>
+	        
+        </div>
+	</div>
+	
+</h:form>
+
+</ui:decorate>
+

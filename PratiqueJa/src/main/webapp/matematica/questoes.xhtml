@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body >
+	<ui:composition>
+		<p:tab title="Questões" rendered="#{assuntoCursoBean.assuntoCurso.showQuestao}" >
+			
+			<div class=" p-grid" style="margin-top:.5rem;width:100%">
+				<div class="p-field p-col-12 p-md-9 " >
+					<p:selectOneButton value="#{questaoBean.tipoFiltro}" >
+						<p:ajax event="change" 
+						listener="#{questaoBean.buscaQuestao(assuntoCursoBean.assuntoCurso)}" 
+						process="@this" update="form:tabView"
+						oncomplete="reloadMathJax();" />
+						
+						<f:selectItems value="#{tipoFiltroBean.opcoes}" 
+			            var="tipoFiltro" itemLabel="#{tipoFiltro.nome}" itemValue="#{tipoFiltro}"/>
+			        </p:selectOneButton>
+		        </div>
+				<div class="p-field p-col-12 p-md-3 p-text-right" style="padding:0;">
+					<p:commandButton value="Download" update="dialogUpgrade"
+					process="@this" action="#{questaoBean.podeFazerDownloadAssunto()}"
+					icon="pi pi-download" 
+					styleClass="ui-button-raised ui-button-flat">
+					</p:commandButton>
+				</div>
+		     </div>
+				
+			<div class=" p-grid" >
+				<p:tag styleClass="p-mr-2" value="Total de #{questaoBean.questoes.size()} questões" 
+				style="margin:.5rem;"></p:tag>
+			
+			</div>
+			
+			<ui:include src="/questao/barraNavegacao.xhtml" />
+			
+			<ui:include src="/questao/listaQuestoes.xhtml" />
+
+			<ui:include src="/questao/barraNavegacao.xhtml" />
+				
+			<p:dialog id="dialogDownloadQuestao" class="p-col-8 p-md-6 p-md-offset-1 p-lg-4 p-lg-offset-2" 
+			header="Download de Questões" 
+			showEffect="fade" hideEffect="fade" width="100%;" modal="true"  
+			widgetVar="downloadQuestaoWidget" responsive="true" >
+				
+				<p:outputPanel id="downloadQuestaoContent" class="ui-fluid">
+					
+					<div class="p-col-12" >
+						<h:outputText style="color: var(--iris);" value="Módulo #{assuntoCursoBean.assuntoCurso.modulo.nome}" />
+				    	 - 
+				    	<h:outputText style="color: var(--verde);" value="Assunto #{assuntoCursoBean.assuntoCurso.nome}" />
+		    		</div>
+		    		
+		    		<div class="p-col-12" >
+						<h:outputText value="Selecione a configuração do pdf de questões:" />
+		    		</div>
+		    		
+					<div class="ui-fluid p-formgrid p-grid">
+			        				    		
+                		<div class="p-field p-col-12">
+			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.identificacao}" 
+			                onLabel="Com Identificação" offLabel="Sem Identificação"
+							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+							style="width:12rem; margin-top:15px;" />
+						</div>
+						
+						<div class="p-field p-col-12">
+			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.respostas}" 
+			                onLabel="Com Respostas" offLabel="Sem Respostas"
+							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+							style="width:12rem; margin-top:15px;" />
+						</div>
+						
+						<div class="p-field p-col-12">
+			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.resolucao}" 
+			                onLabel="Com Resolução" offLabel="Sem Resolução"
+							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
+							style="width:12rem; margin-top:15px;" />
+						</div>
+			            
+	           		</div>
+				</p:outputPanel>
+				<f:facet name="footer">
+				
+					<p:commandButton  value="Cancelar" 
+					styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+					onclick="PF('downloadQuestaoWidget').hide()"  icon="pi pi-times" />
+
+					<p:commandButton value="Download" style="margin-right:15px;"
+					icon="pi pi-download" ajax="false"
+					onclick="PrimeFaces.monitorDownload('', PF('downloadQuestaoWidget').hide());" 
+					styleClass="ui-button-raised ui-button-flat">
+						<p:fileDownload value="#{questaoBean.download(false)}"/>
+					</p:commandButton>
+					
+      				</f:facet>
+				
+			</p:dialog>
+       	</p:tab>
+			
+	</ui:composition>		
+</h:body>
+</html>
+

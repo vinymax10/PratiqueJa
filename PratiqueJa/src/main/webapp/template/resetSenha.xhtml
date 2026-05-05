@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="resetSenha"
+			class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 p-xl-4 p-xl-offset-4"
+			header="Recuperar Senha" showEffect="fade" hideEffect="fade"
+			width="100%;" modal="true" widgetVar="resetSenhaWidget"
+			responsive="true">
+			<h:form id="formResetSenha" enctype="multipart/form-data" style="margin:0;">
+
+				<div class="ui-fluid p-formgrid p-grid">
+					
+					<div class="campoMsg col-12">
+						<p:outputLabel for="emailRecuperarSenha" value="Email"/>
+			            <p:inputText id="emailRecuperarSenha" value="#{autenticacaoBean.email}" 
+			            required="true" requiredMessage="O e-mail é obrigatório" 
+			            validator="#{autenticacaoBean.validateEmail}" />
+						<p:message for="emailRecuperarSenha" display="text" />
+					</div>
+					
+				</div>
+	
+				<p:divider />
+		
+				<div class="p-grid" >
+		
+					<div class="p-col-12 comandRight" >
+						<p:commandButton value="Cancelar"
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+							onclick="PF('resetSenhaWidget').hide()" style="width: auto;margin-right:15px;"
+							icon="pi pi-times" />
+						
+						<p:commandButton id="recupearSenha" value="Recuperar" 
+						update="@form, :growl" 
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('resetSenhaWidget').hide()"
+						process="@form" action="#{autenticacaoBean.recupearSenha}" 
+						styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" iconPos="right"	>	
+							<p:defaultCommand target="formResetSenha:recupearSenha" />
+						</p:commandButton>
+	
+					</div>
+				</div>
+	
+			</h:form>
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>
+
+

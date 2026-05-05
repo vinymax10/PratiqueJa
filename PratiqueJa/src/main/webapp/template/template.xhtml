@@ -1,0 +1,359 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- Permite que a aplicação fique com compoentes grandes no celular -->
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" />
+
+	<link rel="stylesheet" href="/css/meu.css" type="text/css" />
+	<link rel="stylesheet" href="/css/assunto.css" type="text/css" />
+	
+	<link rel="stylesheet" href="/css/primeflex.min.css" type="text/css" />
+	<link rel="stylesheet" href="/css/page.css" type="text/css" />
+
+
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@3.1.0/themes/saga-blue.css" />
+
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_CHTML"></script> -->
+
+	<!-- <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+	<script type="text/javascript" src="/js/jwt-decode.js"></script>
+	<script src="https://accounts.google.com/gsi/client" ></script>
+	
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<!--  	<script type="text/javascript" src="/js/MathJax.js"></script> -->
+	
+	<script type="text/javascript" src="/js/mathJaxConfig.js" ></script>
+	
+	<script src="https://kit.fontawesome.com/476989d711.js"></script>
+   
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel = "canonical" href = "https://pratiqueja.com" /> 
+	<meta name="keywords" content="aprender, matemática, aulas particulares, curso de matemática" />
+	<meta name="author" content="Pratique Já" />
+	<meta name="description" content="O Pratique Já é uma ferramenta de suporte ao ensino de matemática que permite um aprendizado prático e sucinto de diversos assuntos." />
+
+	<title>Pratique Já</title>
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="/image/favicon/apple-touch-icon.png"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="/image/favicon/favicon-32x32.png"/>
+	<link rel="icon" type="image/png" sizes="16x16" href="/image/favicon/favicon-16x16.png"/>
+	<link rel="manifest" href="/image/favicon/site.webmanifest"/>
+	<link rel="mask-icon" href="/image/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
+	<meta name="msapplication-TileColor" content="#da532c"/>
+	<meta name="theme-color" content="#ffffff"/>
+	
+	<ui:insert  name="OpenGraph">
+    </ui:insert>
+	
+</h:head>
+
+<h:body >
+	
+	<!-- 	login google -->
+	<script type="text/javascript" src="/js/google.js" ></script>
+    
+    <p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}" 
+    process="@this" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('loginWidget').hide()" 
+    update=":formPrincipal :growl" /> 
+	
+	<p:growl for="growl" id="growl" redisplay="false" showDetail="true"
+		globalOnly="true" life="4000" />
+
+	<h:form id="formPrincipal" style="margin:0">
+		<p:menubar autoDisplay="false" styleClass="menubar">
+			<p:submenu label="Gerenciamento" icon="pi pi-cog"
+				rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+
+				<p:menuitem url="/assuntoCurso/assuntoCurso.xhtml">
+					<span style="margin-right: 10px;">Assuntos</span>
+				</p:menuitem>
+				
+				<p:menuitem url="/ebook/downloadEbook.xhtml">
+					<span style="margin-right: 10px;">Ebook</span>
+				</p:menuitem>
+				
+				<p:submenu label="Exercícios" 
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					
+					<p:menuitem url="/exercicio/exercicio/exercicio.xhtml">
+	                	Exercicios
+	                </p:menuitem>
+					
+					<p:menuitem url="/exercicio/exercicioPadrao/exercicioPadrao.xhtml">
+						<span style="margin-right: 10px;">Exercício Padrão</span>
+					</p:menuitem>
+	
+					<p:menuitem url="/exercicio/resultadoExercicio/resultadoExercicio.xhtml">
+						<span style="margin-right: 10px;">Resultados dos Exercícios</span>
+					</p:menuitem>
+				</p:submenu>
+				
+                <p:submenu label="Testes"
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					<p:menuitem url="/teste/teste/teste.xhtml">
+	                	Testes
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/teste/testePadrao/testePadrao.xhtml">
+	                	Teste Padrão
+	                </p:menuitem>
+	                
+					<p:menuitem url="/teste/resultadoTeste/resultadoTeste.xhtml">
+						<span style="margin-right: 10px;">Resultados dos Testes</span>
+					</p:menuitem>
+	                
+                </p:submenu>
+
+				<p:submenu label="Questões"
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					<p:menuitem url="/gestaoQuestao/lista.xhtml">
+	                	Questões
+	                </p:menuitem>
+
+					<p:submenu label="Configuração"
+						rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+						<p:menuitem url="/gestaoQuestao/configuracao/ano.xhtml" ajax="false">
+		                	Ano
+		                </p:menuitem>
+
+						<p:menuitem url="/gestaoQuestao/configuracao/banca.xhtml" ajax="false">
+		                	Banca
+		                </p:menuitem>
+
+						<p:menuitem url="/gestaoQuestao/configuracao/orgao.xhtml" ajax="false">
+		                	Órgão
+		                </p:menuitem>
+
+						<p:menuitem url="/gestaoQuestao/configuracao/disciplina.xhtml" ajax="false">
+		                	Disciplina
+		                </p:menuitem>
+
+					</p:submenu>
+				</p:submenu>
+
+				<p:submenu label="Usuários"
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					
+					<p:menuitem url="/usuario/usuario/usuario.xhtml">
+	                	Usuários
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/usuario/logados/logados.xhtml">
+	                	Usuários Logados
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/usuario/turma/turma.xhtml">
+	                	Turma
+	                </p:menuitem>
+					
+					<p:menuitem url="/usuario/contato/contato.xhtml">
+	                	Contatos
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/usuario/pagamento/pagamento.xhtml">
+	                	Pagamento
+	                </p:menuitem>
+					
+					<p:menuitem url="/usuario/acesso/acesso.xhtml">
+						<span style="margin-right: 10px;">Acessos</span>
+					</p:menuitem>
+	
+					<p:menuitem url="/usuario/controleAcesso/controleAcesso.xhtml">
+						<span style="margin-right: 10px;">Controle de Acesso</span>
+					</p:menuitem>
+				</p:submenu>
+				
+                <p:menuitem url="/email/email.xhtml">
+                	Email
+                </p:menuitem>
+                
+                <p:submenu label="Instagram"
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					 <p:menuitem url="/instagram/hashtag.xhtml">
+	                	Hashtag
+	                </p:menuitem>
+	                
+					 <p:menuitem url="/instagram/cta.xhtml">
+	                	CTA's
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/instagram/conviteGrupo.xhtml">
+	                	Convite ao Grupo
+	                </p:menuitem>
+                
+				</p:submenu>
+                
+                <p:submenu label="Configuração"
+					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+					 <p:menuitem url="/configuracao/configLatex/configLatex.xhtml">
+	                	Config Latex
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/configuracao/configCleanup/configCleanup.xhtml">
+	                	Config Cleanup
+	                </p:menuitem>
+	                
+	                <p:menuitem url="/configuracao/spam/configSpam.xhtml">
+	                	Config Spam
+	                </p:menuitem>
+                
+				</p:submenu>
+                
+			</p:submenu>
+
+			<p:menuitem url="/matematica/painel.xhtml" icon="pi pi-home">
+				Painel
+			</p:menuitem>
+			
+			<p:menuitem url="/download/download.xhtml" icon="pi pi-download">
+            	Download
+            </p:menuitem>
+            
+            <p:menuitem url="/questao/questao.xhtml" icon="fa fa-solid fa-book">
+            	Questões
+            </p:menuitem>
+			
+			<p:submenu class="minhasExercicios" label="Atividades" icon="pi pi-th-large" 
+			rendered="#{autenticacaoBean.usuario !=null}"  >
+
+				<p:menuitem icon="fa-solid fa-clock-rotate-left"
+				url="/atividades/meusExercicios.xhtml">
+					<span style="margin-right: 10px;">Exercícios Pendentes <p:badge
+							value="#{exercicioBean.numeroMeusExercicios(false)}"
+							styleClass="p-mr-1"></p:badge>
+					</span>
+				</p:menuitem>
+				
+				<p:menuitem icon="fa-solid fa-chart-simple" 
+				url="/atividades/resultadosExercicios.xhtml">
+					Resultados dos Exercicios
+				</p:menuitem>
+
+				<p:menuitem icon="fa-solid fa-hourglass-start"
+				url="/atividades/meusTestes.xhtml">
+					<span style="margin-right: 10px;">Teste Pendentes <p:badge
+							value="#{testeBean.numeroMeusTestes(false)}"
+							styleClass="p-mr-1"></p:badge>
+					</span>
+				</p:menuitem>
+
+				<p:menuitem icon="fa-solid fa-check-double" 
+				url="/atividades/resultadosTestes.xhtml">
+					Resultados dos Testes
+				</p:menuitem>
+				
+			</p:submenu>
+
+			<p:submenu class="minhasExercicios" label="Produtos" icon="fa-solid fa-boxes-stacked"   >
+
+				<p:menuitem url="/produtos/acesso/acesso.xhtml" icon="fa-solid fa-door-open">
+					Acesso ao Pratique Já
+				</p:menuitem>
+				
+				<p:menuitem url="/produtos/conteudo/conteudo.xhtml" icon="pi pi-instagram">
+					Produção de Conteúdo
+				</p:menuitem>
+				
+				<p:menuitem url="/produtos/apostila/apostilas.xhtml" icon="fa-solid fa-book">
+					Apostilas
+				</p:menuitem>
+				
+			</p:submenu>
+						
+			<p:menuitem icon="pi pi-fw pi-user" styleClass="menu-usuario" resetValues="true"
+			rendered="#{!controleAcessoBean.estaLogado()}" update="formLogin"
+			action="#{autenticacaoBean.resetLogin()}"
+			oncomplete="PF('loginWidget').show();return false;">
+				Login
+			</p:menuitem>
+			
+			<p:submenu label="#{autenticacaoBean.usuario.firstNome}" rendered="#{controleAcessoBean.estaLogado()}"
+				icon="#{autenticacaoBean.usuario.perfil=='Bronze'? 'pi pi-star-fill': ''} 
+				#{autenticacaoBean.usuario.perfil=='Prata'? 'fa-solid fa-crown': ''}
+				#{autenticacaoBean.usuario.perfil=='Ouro'? 'fa-solid fa-gem': ''}
+				#{autenticacaoBean.usuario.perfil=='Admin'? 'fa-brands fa-hackerrank': ''}" styleClass="menu-usuario">
+				
+				<p:menuitem value="Cadastro" icon="fa fa-regular fa-address-card" process="@this"
+					update="formEditarUsuario" action="#{usuarioBean.editar(autenticacaoBean.usuario)}"
+					oncomplete="PF('editarUsuarioWidget').show()">
+				</p:menuitem>
+
+				 <p:menuitem icon="pi pi-instagram" rendered="#{autenticacaoBean.usuario.criador}"
+				 url="/post/configuracao.xhtml?configPost=#{autenticacaoBean.usuario.configPost.id}" >
+	                	Post
+	                </p:menuitem>
+
+				<p:menuitem value="Meu Plano" icon="fa-solid fa-money-bill" process="@this"
+					onclick="PF('meuPlanoWidget').show();" update="formMeuPlano">
+				</p:menuitem>
+
+				<p:menuitem value="Atualizar Senha" icon="fa fa-solid fa-key" process="@this" 
+					resetValues="true"
+					update="formAtualizacaoSenha" action="#{autenticacaoBean.resetLogin()}"
+					oncomplete="PF('atualizacaoSenhaWidget').show()">
+				</p:menuitem>
+
+				<p:menuitem value="Logout" icon="pi pi-sign-out" 
+				update="@form :formPrincipal :growl" ajax="true"
+					process="@this" action="#{autenticacaoBean.logout}" />
+
+			</p:submenu>
+
+		</p:menubar>
+		</h:form>
+		
+		<ui:include src="/template/meuPlano/meuPlano.xhtml" />
+		<ui:include src="/template/pagamento.xhtml" />
+		<ui:include src="/template/cadastroUsuario.xhtml" />
+<!-- 		<ui:include src="/template/post/configPost.xhtml" /> -->
+		
+		<ui:include src="/template/editarUsuario.xhtml" />
+		<ui:include src="/template/resetSenha.xhtml" />
+		<ui:include src="/template/atualizacaoSenha.xhtml" />
+		
+		<ui:include src="/template/login.xhtml" />
+
+	<div class="conteudo">
+
+		<ui:insert />
+
+	</div>
+
+	<footer>
+		<div class="container">
+			<img class="logo" src="/image/favicon/favicon-32x32.png" style="width: 30px;" /> <a
+				class="item" href="/informativo/politica-de-privacidade.xhtml">Política
+				de Privacidade</a> <a class="item"
+				href="/informativo/termos-de-uso.xhtml">Termos de Uso</a> <a
+				class="item" href="/informativo/sobre-pratique-ja.xhtml">Sobre o
+				Pratique Já</a> <a class="item" href="/informativo/fale-conosco.xhtml">Fale
+				Conosco</a>
+
+		</div>
+	</footer>
+
+	<script type="text/javascript" src="/js/template.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
+
+	
+</h:body>
+</html>

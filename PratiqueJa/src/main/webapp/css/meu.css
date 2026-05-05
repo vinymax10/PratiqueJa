@@ -1,0 +1,594 @@
+:root {
+  --iris: #6370FF; 
+  --muted: rgb(62, 92, 198);
+  --laranja: #DE7B40;
+  --verde: #008A70;
+  --rosa: #FF6A85;
+  --cinza: #766E62;
+  --babyblue:#2196F3;
+  --menubar-bg-color: rgb(236, 241, 255);
+  --menubar-bg-color-hover: #d7e1ff;
+}
+
+.ui-card-content
+{
+	padding:0!important;
+}
+
+.circle {
+  border-radius: 50%;
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
+    height: 12rem;
+  overflow: hidden;
+}
+
+.circleTable {
+  border-radius: 50%;
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+  overflow: hidden;
+}
+
+.rectangleTable {
+ 	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+  overflow: hidden;
+}
+
+.ui-chip.custom-chip {
+        background: var(--primary-color);
+        color: var(--primary-color-text);
+}
+
+h3.ui-panelmenu-header
+{
+	border:none!important;
+	background:#ffffff!important;
+}
+
+.ui-card-footer
+{
+	text-align:right;
+}
+
+.grid-radio td
+{
+    padding: .5rem;
+}
+
+.titleQuestaoText
+{
+	color:var(--babyblue);
+	margin-right:1rem;
+}
+
+.titleQuestao
+{
+	color:var(--babyblue);
+	font-weight: bold;
+}
+
+.successMsg .ui-messages-info 
+{
+	border-color: #b2dba1!important;
+	color: #3c763d!important;
+	background-color: #dff0d8!important;
+}
+
+.successMsg 
+{
+	border-color: #b2dba1!important;
+	color: #3c763d!important;
+	background-color: #dff0d8!important;
+}
+
+.successMsg .ui-messages-info .ui-messages-close, .ui-messages-info-icon
+{
+	border-color: #b2dba1!important;
+	color: #3c763d!important;
+	background-color: #dff0d8!important;
+}
+
+body .successMsg .ui-messages-info .ui-messages-info-icon:before {
+    content: "\e909";
+}
+
+.fundoAlgebra
+{
+	background:#ffffff;
+}
+
+.fundoAlgebra:hover
+{
+	background:#F7F1F7!important;
+}
+
+.fundoGeometria
+{
+	background:#ffffff;
+}
+
+.fundoGeometria:hover
+{
+	background:#ECF6F5!important;
+}
+
+.ui-panelmenu .ui-menuitem {
+    margin: 0;
+}
+
+.ui-panelmenu .ui-panelmenu-content {
+    border: 0 !important;
+}
+
+a:hover
+{
+	text-decoration: none!important;
+}
+
+.menubar{
+	background-color: var(--menubar-bg-color)!important;
+	width: 100%;
+	z-index: 997;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+	border-bottom: 1px solid var(--surface-d)!important;
+	border-radius:0!important;
+}
+
+.menubar ul
+{
+	background: url("/image/logoMarcaDagua.png") center ;
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+
+.menu-usuario, li:has(a.menu-usuario)
+{
+	float:right!important;
+	position: relative!important;
+}
+
+.conteudo {
+	
+	flex:1 0 auto;
+}
+
+footer  {
+	background:var(--menubar-bg-color);
+   	flex-shrink:0;
+	width: 100%;
+}
+
+
+footer .container {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+.container .logo {
+	display:flex;
+	margin:15px 15px 15px 30px;
+}
+
+.container .item {
+	display:flex;
+	padding: 0.75rem 1rem;
+	margin:10px;
+	border-radius: 4px;
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1;
+	color: inherit; 
+}
+
+.ui-menuitem-active :hover, .item:hover  {
+	background:var(--menubar-bg-color-hover)!important;
+} 
+
+.menubar > .ui-menu-list > .ui-menuitem > .ui-state-hover {
+	background:var(--menubar-bg-color-hover)!important;
+	border-radius: 4px;
+}
+
+.sidebar{
+	width:22rem;
+	padding:0!important;
+	overflow-y: scroll;
+}
+
+.textInfo{
+	margin:0 10px;
+	line-height:2rem;
+	font-size: 1.25rem;
+}
+
+.textTitle{
+	margin:30px 10px 0 10px;
+	line-height:2rem;
+	font-size: 1.75rem;
+	font-weight: 600;
+}
+
+.ui-progressbar-value
+{
+	background:#d7e1ff!important;	
+}
+
+.porcentagemProgresso
+{
+	margin-top: 10px;
+	margin-left:5px;
+	color:#C5CAE9;	
+	font-weight: bold;
+	font-size: 1rem;
+	width:13%;
+}
+
+.numberExercise
+{
+	color: var(--iris);
+	font-weight: bold;
+	font-size: 1.1rem;
+	vertical-align: top;
+	margin-right:5px;
+	line-height: .75em;
+	display:flex;
+}
+
+.exercise
+{
+	display:block;
+}
+
+.result
+{
+	display:block;
+}
+
+.ui-selectonebutton > div.ui-button:not(:last-child)
+{
+	border-bottom-width: 1px!important;
+}
+
+.ui-selectonebutton > .ui-button:first-child
+{
+	border-top-left-radius: 4px!important;
+    border-bottom-left-radius: 4px!important;
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+.ui-selectonebutton > .ui-button:last-child
+{
+	border-top-right-radius: 4px!important;
+    border-bottom-right-radius: 4px!important;
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+}
+
+.mjx-block
+{
+	margin-top: 15.442px;
+}
+
+.ui-selectbooleanbutton.ui-state-active, .ui-selectonebutton > .ui-button.ui-state-active
+{
+	background:var(--iris)!important;
+	border-color:var(--iris)!important;
+}
+
+body .ui-panel .ui-panel-titlebar
+{
+	background:#ecf1ff!important;
+}
+
+.ui-spinner-button 
+{
+	background:var(--iris)!important;
+	border: 1px solid var(--iris)!important;
+}
+
+.despesa
+{
+	color:#EA7D7D;
+	font-weight: 600;
+}
+
+.receita
+{
+	color:#7D89EA;
+	font-weight: 600;
+}
+
+.campo
+{
+	padding: 1rem!important;
+}
+
+.check
+{
+	font-size: 1rem!important;color:var(--iris);
+	font-weight: bold;
+	text-shadow: 0 0 2px var(--iris);
+}
+
+.times
+{
+	font-size: 1rem!important;color:var(--cinza);
+}
+
+.limit
+{
+	font-size: 1rem!important;color:var(--verde);
+}
+
+body .ui-fieldset .ui-fieldset-legend
+{
+	background:#ecf1ff!important;
+	padding: 8px!important;
+}
+
+.ui-growl-item-container.ui-growl-info,
+.ui-growl .ui-growl-item-container.ui-growl-info .ui-growl-image,.ui-growl .ui-growl-item-container.ui-growl-info .ui-icon
+{
+	background: #C5CBFF!important;
+	border: none!important;
+	color: #3B438E !important;
+}
+
+.ui-growl-message p
+{
+	font-weight: 600!important;
+}
+
+body .ui-growl .ui-growl-item-container.ui-growl-info .ui-growl-image::before {
+  content: "\e909";
+}
+
+.ui-dialog
+{
+	max-height: 100%;
+	overflow-y: auto;
+}
+
+.ui-resizable-s,.ui-resizable-sw
+{
+	height: 0 !important;
+}
+
+.ui-dialog .ui-resizable-se
+{
+	bottom:0!important;
+}
+
+.comandRight
+{
+	margin:0; 
+	padding:0; 
+	display: flex;
+	flex-direction: row;
+	flex-flow: row wrap;
+	justify-content:flex-end;
+}
+
+body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
+  padding: 15 0;
+}
+
+.ui-message
+{
+	margin:4px 0 0 0 !important;
+}
+.ui-message-error
+{
+	color:#EA7D7D !important;
+	background-color: #fff !important;
+	border:none!important;
+	padding:0 !important;
+}
+
+.campoMsg
+{
+	padding: 1rem 1rem 0 1rem!important;
+}
+
+.ui-outputlabel{
+	margin-bottom: .5rem;
+	display: inline-block;
+}
+
+.minhasExercicios > ul
+{
+	width:250px!important;
+}
+
+.icon:hover
+{
+	background: #F6F5FF;
+}
+
+.buttonIcon
+{
+	border-radius: 50%;
+	height: 2.357rem;
+	width: 2.357rem;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	margin:8px 0;
+}
+
+.buttonIcon:hover
+{
+	background: rgba(125,137,234,.15);
+}
+
+.buttonIcon:active
+{
+	background: rgba(125,137,234,.40);
+}
+
+.buttonIcon > i
+{
+	font-size: 20px;
+	font-weight: 100;
+}
+
+.pdf 
+{
+    width: 100%;
+    aspect-ratio: 1.25;
+}
+
+.pdf
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child
+{
+	width:16em!important;
+}
+
+.star
+{
+	color:#836FFF;
+	font-size:1rem;
+}
+
+.newBorder
+{
+	box-shadow: 0 0 20px rgba(0, 0, 0, .2)!important; 
+	border-radius: 16px!important;
+}
+
+.title
+{
+	font-weight: 600;
+	font-size: 1.3rem;
+	color: #2e65b3;
+	margin-right:15px;
+}
+
+.assunto
+{
+	font-weight: 600;
+	font-size: 1.5rem;
+	color: #5b6d80;
+}
+
+.status
+{
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: #939393;
+}
+
+.ui-card-header
+{
+	margin:1rem;
+}
+
+.table .ui-datatable-data > tr > td 
+{
+	padding: .3rem 1rem!important;
+}
+
+body .ui-panel.titleSlim .ui-panel-titlebar
+{
+	padding:8px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 3px 10px 10px 10px;
+  margin: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* 1) Classe dedicada para o seu fieldset (recomendo usar styleClass no JSF) */
+.meu-fieldset-half, .meu-fieldset-half .ui-fieldset-content {
+  /* força 50% e garante que o width funcione em fieldset modernos */
+  min-inline-size: 0 !important; /* corrige comportamento do fieldset em alguns browsers */
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important; /* centraliza */
+  display: block !important;
+}
+
+/* 2) garante que a UI content e a galeria preencham o interior do fieldset */
+.meu-fieldset-half .ui-fieldset-content,
+.meu-fieldset-half .ui-galleria,
+.meu-fieldset-half .ui-galleria .ui-galleria-stage,
+.meu-fieldset-half .ui-galleria .ui-galleria-items {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 3) proteção contra inline styles do tema */
+.meu-fieldset-half .ui-fieldset-content[style] {
+  width: 100% !important;
+}
+
+/* 4) se quiser dois fieldsets lado a lado (opcional) */
+.fieldset-col {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ui-galleria img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none; /* se quiser bloquear clique/arrasto */
+}
+
+.marcadagua{
+	position: absolute; 
+	top: 10px; 
+	right: 10px; 
+	opacity: 0.5; 
+	font-size: 3rem; 
+	color: white; 
+	background: rgba(0,0,0,0.4); 
+	padding: 4px 8px;
+	pointer-events: none;
+}
+
+.buttonBlue
+{
+	background:var(--muted)!important;
+	font-weight: 600;
+	border-radius: 6px!important;
+	border: none!important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active a ,
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active a .ui-icon ,
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active
+{
+	color:var(--muted)!important;
+	border-color: var(--muted)!important;
+}

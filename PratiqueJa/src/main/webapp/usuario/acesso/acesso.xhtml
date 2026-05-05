@@ -1,0 +1,128 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+				<div class="p-col-12" >	
+					<h2>Acessos</h2>	
+				</div>
+				
+				<p:panel header="Filtro" toggleable="true" closable="true" toggleSpeed="500"
+             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;">
+					
+					<div class="ui-fluid formgrid grid">
+						
+						<div class="field col-12 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Nome do usuário"/>
+							<p:inputText value="#{acessoBean.filtroAcesso.nomeUsuario}" />
+						</div>
+						
+						<div class="field col-12 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="ID da Sessão"/>
+							<p:inputText value="#{acessoBean.filtroAcesso.idSessao}" />
+						</div>
+						
+						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                    <p:outputLabel for="@next" value="Início"/>
+							<p:datePicker value="#{acessoBean.filtroAcesso.inicio}" />		
+						</div>
+						
+						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                    <p:outputLabel for="@next" value="Término"/>
+							<p:datePicker value="#{acessoBean.filtroAcesso.termino}" />		
+						</div>
+			            
+						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                    <p:outputLabel for="@next" value="Minutos Mínimo"/>
+							<p:inputText value="#{acessoBean.filtroAcesso.minutosMinimo}" />		
+						</div>
+						
+						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                    <p:outputLabel for="@next" value="Minutos Máximo"/>
+							<p:inputText value="#{acessoBean.filtroAcesso.minutosMaximo}" />			
+						</div>
+						
+						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+		                    <p:outputLabel for="@next" value="Finalizado"/>
+							<p:selectOneMenu value="#{acessoBean.filtroAcesso.finalizado}" >
+								<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+								<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+								<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+							</p:selectOneMenu>		
+						</div>	
+						
+					</div>
+					
+					<p:divider />
+			
+					<div class="p-grid" style="margin-top:1rem">
+						
+						<div class="p-col-12 p-text-right" >
+						
+							<p:commandButton  value="Filtrar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-search" 
+							action="#{acessoBean.filtrar}" update="@form, :growl"  process="@form"	/>
+						</div>
+						
+					</div>
+		       
+		   		</p:panel>
+		   		
+			    <p:dataTable id="tabela" class="table table-striped" 
+			    var="acesso" value="#{acessoBean.acessos}" reflow="true" 
+			    paginator="true" paginatorAlwaysVisible="false" rows="50">
+			    	
+			    	<p:column  headerText="Usuário" responsivePriority="1">
+						<h:outputText value="#{acesso.usuario.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Data" responsivePriority="2">
+						<h:outputText value="#{acesso.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column  headerText="Minutos" responsivePriority="3">
+						<h:outputText value="#{acesso.minutos}"/>
+					</p:column>
+					
+					<p:column  headerText="Id da Sessão" responsivePriority="5">
+						<h:outputText value="#{acesso.idSessao}"/>
+					</p:column>
+					
+					<p:column headerText="Finalizado" responsivePriority="1" width="4rem" 
+					exportable="false">
+							
+						<p:commandLink
+							styleClass="rounded-button ui-button-flat "
+							action="#{acessoBean.finalizadoToggle(acesso)}"
+							update="@this" process="@this"	>
+							
+							<div class="buttonIcon">
+								<h:outputText rendered="#{!acesso.finalizado}" 	 >
+									<i class="fa-regular fa-square despesa" title="Click para finalizar" ></i>
+								</h:outputText>
+								
+								<h:outputText rendered="#{acesso.finalizado}"	 >
+									<i class="fa-regular fa-square-check receita" title="Click para deixar pendente" ></i>
+								</h:outputText>
+							</div>
+							
+						</p:commandLink> 
+						
+					</p:column>
+			
+				</p:dataTable>
+					
+			</div>
+		</div>
+	</h:form>
+	
+</ui:decorate>
+	

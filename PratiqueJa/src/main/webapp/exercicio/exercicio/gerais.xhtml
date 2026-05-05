@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			    
+		    <p:tab title="Gerais">
+			    
+				<div class="ui-fluid formgrid grid">
+					
+		          <div class="field col-12 xl:col-5">
+		                <p:outputLabel for="@next" value="Exercício Padrão"/>
+		                <p:selectOneMenu value="#{exercicioBean.exercicio.exercicioPadrao}" converter="generic"
+		                required="true" disabled="#{!exercicioBean.cadastro}"
+		                filter="true" filterMatchMode="contains">
+		                	 <f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{exercicioPadraoBean.todosExerciciosPadrao}" var="exercicio" 
+		                    itemLabel="#{exercicio.assuntoCurso.modulo.nome} - #{exercicio.assuntoCurso.nome} - #{exercicio.nivel.nome}" itemValue="#{exercicio}"/>
+		                </p:selectOneMenu>
+		            </div>
+		            
+		          <div class="field col-12 xl:col-5">
+		                <p:outputLabel for="@next" value="Usuário"/>
+		                <p:selectOneMenu value="#{exercicioBean.exercicio.usuario}" converter="generic" 
+		                filter="true" filterMatchMode="contains"  required="true">
+		                	 <f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+		                    <f:selectItems value="#{usuarioBean.todosUsuarios}" var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario}"/>
+		                </p:selectOneMenu>
+		            </div>
+		            
+		            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+	                    <p:outputLabel for="@next" value="Prazo"/>
+						<p:datePicker value="#{exercicioBean.exercicio.prazo}" />		
+					</div>
+					
+				</div>
+				
+				<p:divider />
+				
+				<div class="p-grid" style="margin-top:1rem">
+					<div class="p-col-6" >
+						
+						<p:commandButton  value="Remover"    icon="pi pi-trash" rendered="#{!exercicioBean.cadastro}"
+						styleClass="ui-button-raised ui-button-danger ui-button-flat" 
+						action="#{exercicioBean.remover}" update="@form, :growl"  process="@this" >
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover o exercício?" /> 
+						</p:commandButton>
+						
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" >
+				            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+				            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				        </p:confirmDialog>
+				        
+				        <p:commandButton value="Voltar"  action="#{exercicioBean.setLista(true)}" 
+				        icon="pi pi-chevron-left" process="@this"
+						update="@form" style="margin-right:15px;" 
+						styleClass="ui-button-raised ui-button-secondary ui-button-flat" 
+						rendered="#{exercicioBean.cadastro}" />
+						
+					</div>
+					
+					<div class="p-col-6 p-text-right" >
+					
+						<p:commandButton value="Voltar"  action="#{exercicioBean.setLista(true)}" icon="pi pi-chevron-left" 
+						process="@this" rendered="#{!exercicioBean.cadastro}"
+						update="@form" style="margin-bottom:15px;" styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
+						
+						<p:commandButton id="adicionarGerais" value="Adicionar"   class="p-text-right"  icon="pi pi-check" 
+						styleClass="ui-button-raised ui-button-success ui-button-flat" 
+						action="#{exercicioBean.adicionar}" update="@form, :growl"  process="@form" rendered="#{exercicioBean.cadastro}">
+							<p:defaultCommand target="form:exercicio:adicionarGerais"/>
+						</p:commandButton>
+						
+						<p:commandButton id="salvarGerais" value="Salvar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" 
+						rendered="#{!exercicioBean.cadastro}"	style="margin-left:15px;" 
+						action="#{exercicioBean.salvar}" update="@form, :growl"  process="@form"	>
+							<p:defaultCommand target="form:exercicio:salvarGerais"/>
+						</p:commandButton>
+					</div>
+					
+					<div class="p-col-12" >
+						<p:messages id="messages" redisplay="false" showDetail="false" closable="true"/>
+					</div>
+				</div>
+							
+       		</p:tab>
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

@@ -1,0 +1,227 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+	<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
+
+	<ui:define name="OpenGraph">
+		
+		<meta property="og:title" content="Apostilas"/>
+		<meta property="og:description" content="Conheça as apostilas de matemática do Pratique Já."/>
+		<meta property="og:image" content="https://pratiqueja.com/image/apostila/3apostilas.png"/>
+		<meta property="og:url" content="https://pratiqueja.com/produtos/apostila/apostilas"/>
+		<meta property="og:type" content="website"/>
+		
+	</ui:define>
+
+	<div class="p-d-flex backgroundBlue" >
+		<h:form id="form" style="margin-bottom:0;width:100%">
+			<div class="p-grid" style="margin: 15px;">
+
+				<p:card class="newBorder m-3 p-3 " style="width: 100%;">
+					 <div class="hero-container">
+						<div class="hero-text">
+							<span class="eyebrow">Pratique Já — Conteúdo para
+								estudantes</span>
+							<h1>Apostilas de Matemática – Pratique Já</h1>
+							<p class="lead"> Estude matemática com material exclusivo, produzido artesanalmente e com conteúdo selecionado para cada nível de aprendizado.</p>
+		
+							<div class="hero-cta">
+								<p:button value="Escolha sua apostila" 
+								styleClass="ui-button-raised buttonBlue mr-2" 
+								onclick="location.hash='#planos'; return false;">
+								</p:button>
+							</div>
+						</div>
+						<div class="hero-image">
+					      <img src="/image/apostila/3apostilas.png" 
+					           alt="Conjunto das Apostilas Pratique Já" 
+					           class="w-80 md:w-96 drop-shadow-xl rounded-xl transform hover:scale-105 transition duration-500">
+				           </img>
+					    </div>
+				    </div>
+				</p:card>
+				
+				<div  class="grid-3 p-3" style="width: 100%;">
+
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4><i class="fa-solid fa-book-open mr-2" ></i>Conteúdo exclusivo</h4>
+						<p class="small">Cada exemplar é único, desenvolvido artesanalmente com exercícios cuidadosamente selecionados e explicações claras.
+						Um material pensado para tornar o estudo mais eficiente, personalizado e prazeroso.</p>
+					</p:card>
+					
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4><i class="fa-solid fa-brain mr-2" ></i>Aprendizado prático</h4>
+						<p class="small">Domine a matemática por meio da prática. Cada apostila foi cuidadosamente planejada para unir teoria e aplicação, oferecendo uma forma clara, direta e eficaz de aprender de verdade.</p>
+					</p:card>
+					
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4><i class="fa-solid fa-bullseye mr-2" ></i>Seu aprendizado é o nosso objetivo</h4>
+						<p class="small">Nossa missão é ajudar você a aprender com confiança e constância.
+						Cada detalhe foi pensado para tornar a matemática mais acessível, estimulante e parte do seu progresso diário.</p>
+					</p:card>
+				</div>
+				
+				<div id="planos" class="p-4" style="width: 100%;">
+					<h2 style="margin:6px 0 6px">Conheça as nossas apostilas</h2>
+				    <p >Escolha o nível ideal e comece a praticar o quanto antes.</p>
+				</div>
+				<div class="grid-3"  style="width: 100%;">
+
+					<p:card class="newBorder m-3 p-3" style="background:#ebf8ff; width: auto;">
+					
+						<p:galleria class="apostila" showItemNavigators="true" circular="true">
+				
+						   <p:graphicImage value="/image/apostila/basico/capa1.png" title="image1" alt="image1 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/basico/capa2.png" title="image2" alt="image2 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/basico/capa3.png" title="image3" alt="image3 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/basico/capa4.png" title="image4" alt="image4 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+					        
+					    </p:galleria>
+					    
+	                    <span class="eyebrow mt-3">🔰 Iniciante</span>
+						<h3 id="basico-title" class="mb-0" style="color:var(--muted)">Nível Básico</h3>
+						<h6 id="basico-title" class="mt-0">Comece com segurança</h6>
+				        <div class="price">R$ 179,00</div>
+				        <p class="small">Ideal para estudantes que desejam praticar e fixar conteúdos de matemática de forma completa, com exercícios cuidadosamente preparados para estimular o aprendizado e a resolução de problemas do dia a dia. </p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">11 tópicos essenciais  
+   							<ui:include src="/produtos/apostila/descricaoBasico.xhtml" />
+				          </div>
+				        </div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">99 listas de exercícios</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">1.122 exercícios resolvidos</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Questões comentadas: 42</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">252 páginas – impressão colorida A4</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Capa: Dura, com acabamento de qualidade</div></div>
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:button  value="Comprar agora" target="_blank"
+							styleClass="ui-button-raised buttonBlue"
+								href="https://produto.mercadolivre.com.br/MLB-4165506701-apostila-de-matematica-nivel-basico-pratique-ja-_JM" >
+							</p:button>
+				        </div>
+					</p:card>
+					
+					<p:card class="newBorder m-3 p-3" style="background:#f8f3ff; width: auto;">
+						
+						<p:galleria class="apostila" showItemNavigators="true" circular="true">
+				
+						   <p:graphicImage value="/image/apostila/intermediario/capa1.png" title="image1" alt="image1 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/intermediario/capa2.png" title="image2" alt="image2 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/intermediario/capa3.png" title="image3" alt="image3 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/intermediario/capa4.png" title="image4" alt="image4 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+					        
+					    </p:galleria>
+						
+	                    <span class="eyebrow mt-3">⚙️ Aprimoramento</span>
+						<h3 id="basico-title" class="mb-0" style="color:var(--muted)">Nível Intermediário</h3>
+						<h6 id="basico-title" class="mt-0">Avance com confiança</h6>
+				        <div class="price">R$ 179,00</div>
+				        <p class="small">Ideal para estudantes que buscam reforço escolar, preparação para provas e concursos ou simplesmente desejam fortalecer seus conhecimentos matemáticos em nível intermediário. </p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">12 tópicos essenciais 
+				          	<ui:include src="/produtos/apostila/descricaoIntermediario.xhtml" />
+				          	</div>
+				          </div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">108 listas de exercícios</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">864 exercícios resolvidos</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Questões comentadas: 75</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">288 páginas – impressão colorida A4</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Capa: Dura, com acabamento de qualidade</div></div>
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:button  value="Comprar agora" target="_blank"
+							styleClass="ui-button-raised buttonBlue"
+								href="https://produto.mercadolivre.com.br/MLB-5592428218-apostila-de-matematica-nivel-intermediario-pratique-ja-_JM">
+							</p:button>
+				        </div>
+					</p:card>
+					
+					<p:card class="newBorder m-3 p-3" style="background:#ebfff2; width: auto;">
+						<p:galleria class="apostila" showItemNavigators="true" circular="true">
+				
+						   <p:graphicImage value="/image/apostila/avancado/capa1.png" title="image1" alt="image1 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/avancado/capa2.png" title="image2" alt="image2 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/avancado/capa3.png" title="image3" alt="image3 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+						   <p:graphicImage value="/image/apostila/avancado/capa4.png" title="image4" alt="image4 desc" style="width: 100%; display: block;" cache="false" stream="false"/>
+					        
+					    </p:galleria>
+	                    <span class="eyebrow mt-3">🚀 Aprofundamento</span>
+						<h3 id="basico-title" class="mb-0" style="color:var(--muted)">Nível Avançado</h3>
+						<h6 id="basico-title" class="mt-0">Aprofunde-se com conteúdo de alto nível</h6>
+				        <div class="price">R$ 179,00</div>
+				        <p class="small">Material ideal para estudantes que buscam reforço, preparação para vestibulares, concursos e aprofundamento acadêmico.</p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">11 tópicos essenciais 
+				          		<ui:include src="/produtos/apostila/descricaoAvancado.xhtml" />
+				          	</div>
+				          </div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">99 listas de exercícios</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">498 exercícios resolvidos</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Questões comentadas: 110</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">292 páginas – impressão colorida A4</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Capa: Dura, com acabamento de qualidade</div></div>
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:button  value="Comprar agora" target="_blank"
+							styleClass="ui-button-raised buttonBlue"
+								href="https://produto.mercadolivre.com.br/MLB-5592700144-apostila-de-matematica-nivel-avancado-pratique-ja-_JM">
+							</p:button>
+				        </div>
+					</p:card>
+				</div>
+				
+				<div id="faq" class="p-col-12 p-lg-10 p-lg-offset-1 p-xl-8 p-xl-offset-2 p-3 mb-4" >
+				
+					<h2>Perguntas frequentes</h2>
+
+					<div class="faq-list">
+				      <details>
+				        <summary>Qual apostila devo escolher?</summary>
+				        <div class="faq-body">
+				          <p>Verifique o conteúdo programatico de cada apostila e identifique aquela que mais se alinha aos assuntos que prentende aprender.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>A apostila é física ou digital?</summary>
+				        <div class="faq-body">
+				          <p>As apostilas são físicas com impressão colorida em papel A4 e capa dura. Possui um excelente acabamento.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Como é feita a entrega?</summary>
+				        <div class="faq-body">
+				          <p>A entrega é feita pelo Mercado Envios do Mercado livre e é não possui custo adicional. Ou seja, o frete é grátis.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Posso parcelar o pagamento?</summary>
+				        <div class="faq-body">
+				          <p>Sim, o mercado livre oferece diversas formas de pagamento, inclusive com o cartão de credito podendo ser parcelado em até 12 vezes.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>O conteúdo é o mesmo para todos os exemplares?</summary>
+				        <div class="faq-body">
+				          <p>Não, cada apostila possui um conjunto de exercícios exclusivos.</p>
+				        </div>
+				      </details>
+				      
+				    </div>
+				</div>
+				
+				
+				
+			</div>
+		</h:form>
+	</div>
+
+</ui:decorate>
+

@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body >
+	<ui:composition>
+		<p:tab title="Anotações" rendered="#{assuntoCursoBean.assuntoCurso.showAnotacao}">
+<!--        		<embed src="#{assuntoCursoBean.pdfAnotacao()}?embedded=true" width="100%" style="height: 1150px;"  -->
+<!--  				type="application/pdf"/> -->
+<!--        			<iframe src="#{assuntoCursoBean.pdfAnotacao()}" width="100%" style="height: 1150px;" ></iframe> -->
+			<div id="adobe-dc-view" style="width: 100%;"></div>
+			<script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
+			<script type="text/javascript">
+			document.addEventListener("adobe_dc_view_sdk.ready", function()
+			{
+				let element=document.querySelector('#adobe-dc-view');
+				element.style.height=element.offsetWidth*1.2+"px"; 
+				 
+			    var adobeDCView = new AdobeDC.View({clientId: "#{assuntoCursoBean.getKeyPdfEmbedAdobe()}", divId: "adobe-dc-view"});
+			    adobeDCView.previewFile({
+			      content:{ location:
+			        { url: "#{assuntoCursoBean.pdfAnotacao()}"}},
+			      metaData:{fileName: "#{assuntoCursoBean.pdfName()}"},
+			    },
+			    {
+			      embedMode: "SIZED_CONTAINER"
+			    });
+			  });
+			</script>
+
+       	</p:tab>
+		</ui:composition>		
+	</h:body>
+</html>
+

@@ -1,0 +1,78 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >	
+					<h2>Config Cleanup</h2>	
+				</div>
+		    
+				<p:panel header="Config Cleanup" toggleable="true" closable="true" toggleSpeed="500"
+             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;width:100%;">
+					
+					 	<div class="ui-fluid formgrid grid">
+							
+							<div class="campoMsg col-12 lg:col-6 xl:col-3">
+								<p:outputLabel for="@next" value="Dias remover exercicio realizado" />
+								<p:inputText id="diasRemoverExercicioRealizado" placeholder="Dias remover exercicio realizado"
+								value="#{configCleanupBean.configCleanup.diasRemoverExercicioRealizado}"
+								required="true" requiredMessage="Os dias para remover um exercício realizado é obrigatório" />
+								<p:message for="diasRemoverExercicioRealizado" display="text" />
+							</div>
+							
+							<div class="campoMsg col-12 lg:col-6 xl:col-3">
+								<p:outputLabel for="@next" value="Dias remover exercicio não realizado" />
+								<p:inputText id="diasRemoverExercicioNaoRealizado" placeholder="Dias remover exercicio não realizado"
+								value="#{configCleanupBean.configCleanup.diasRemoverExercicioNaoRealizado}"
+								required="true" requiredMessage="Os dias para remover um exercício não realizado é obrigatório" />
+								<p:message for="diasRemoverExercicioNaoRealizado" display="text" />
+							</div>
+							
+							<div class="campoMsg col-12 lg:col-6 xl:col-3">
+								<p:outputLabel for="@next" value="Dias remover teste realizado" />
+								<p:inputText id="diasRemoverTesteRealizado" placeholder="Dias remover teste realizado"
+								value="#{configCleanupBean.configCleanup.diasRemoverTesteRealizado}" 
+								required="true" requiredMessage="Os dias para remover um teste realizado é obrigatório" />
+								<p:message for="diasRemoverTesteRealizado" display="text" />
+							</div>
+							
+							<div class="campoMsg col-12 lg:col-6 xl:col-3">
+								<p:outputLabel for="@next" value="Dias remover teste não realizado" />
+								<p:inputText id="diasRemoverTesteNaoRealizado" placeholder="Dias remover teste não realizado"
+								value="#{configCleanupBean.configCleanup.diasRemoverTesteNaoRealizado}" 
+								required="true" requiredMessage="Os dias para remover um teste não realizado é obrigatório" />
+								<p:message for="diasRemoverTesteNaoRealizado" display="text" />
+							</div>
+							
+						</div>
+						
+					<p:divider />
+			
+					<div class="p-grid" style="margin-top:1rem">
+						
+						<div class="p-col-12 p-text-right" >
+						
+							<p:commandButton id="salvarGerais" value="Salvar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-check" 
+							action="#{configCleanupBean.salvar}" update="@form, :growl"  process="@form"	>
+<!-- 								<p:defaultCommand target="form:salvarGerais"/> -->
+							</p:commandButton>
+							
+						</div>
+					</div>
+					
+		   		</p:panel>
+			   		
+					
+			</div>
+		</div>
+	</h:form>
+	
+	
+</ui:decorate>
+	

@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+		<div class="ui-fluid formgrid grid">
+
+			<div class="campoMsg col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText id="nome" placeholder="Nome" 
+				requiredMessage="O nome é obrigatório"
+					value="#{turmaBean.turma.nome}" required="true" />
+				<p:message for="nome" display="text" />
+			</div>
+			
+			<div class="campoMsg col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Assunto Curso" />
+				<p:selectOneMenu id="assuntoCurso" value="#{turmaBean.turma.assuntoAtual}"
+					converter="generic" required="true"
+					requiredMessage="O assunto curso é obrigatório">
+					<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+					<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+						var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+						itemValue="#{assuntoCurso}" />
+				</p:selectOneMenu>
+				<p:message for="assuntoCurso" display="text" />
+			</div>
+			
+		</div>
+
+		<ui:include src="/usuario/turma/alunos.xhtml" />
+
+		<p:divider />
+
+		<div class="p-grid" style="margin-top: 1rem">
+			<div class="p-col-6">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!turmaBean.cadastro}"
+					styleClass="ui-button-raised ui-button-danger ui-button-flat"
+					action="#{turmaBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+						message="Você tem certeza que deseja remover essa turma?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+					responsive="true">
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+				<p:commandButton value="Voltar"
+					action="#{turmaBean.setLista(true)}"
+					icon="pi pi-chevron-left" process="@this" update="@form"
+					style="margin-right:15px;"
+					styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+					rendered="#{turmaBean.cadastro}" />
+
+			</div>
+			
+			<div class="p-col-6 p-text-right">
+
+				<p:commandButton value="Voltar"
+					action="#{turmaBean.setLista(true)}"
+					icon="pi pi-chevron-left" process="@this"
+					rendered="#{!turmaBean.cadastro}" update="@form"
+					style="margin-bottom:15px;"
+					styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
+				
+				<p:commandButton  value="Aplicar Teste"
+					styleClass="ui-button-raised ui-button-flat ui-button-success" icon="pi pi-check"
+					rendered="#{!turmaBean.cadastro}" style="margin-left:15px;"
+					action="#{testeBean.criarTesteTurma(turmaBean.turma)}" update="@form, :growl"
+					process="@form">
+				</p:commandButton>
+				
+				<p:commandButton id="adicionarGerais" value="Adicionar"
+					class="p-text-right" icon="pi pi-check"
+					styleClass="ui-button-raised ui-button-success ui-button-flat"
+					action="#{turmaBean.adicionar}" update="@form, :growl"
+					process="@form" rendered="#{turmaBean.cadastro}">
+					<p:defaultCommand target="form:adicionarGerais" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarGerais" value="Salvar"
+					styleClass="ui-button-raised ui-button-flat" icon="pi pi-check"
+					rendered="#{!turmaBean.cadastro}" style="margin-left:15px;"
+					action="#{turmaBean.salvar}" update="@form, :growl"
+					process="@form">
+					<p:defaultCommand target="form:salvarGerais" />
+				</p:commandButton>
+				
+			</div>
+
+			<div class="p-col-12">
+				<p:messages id="messages" redisplay="false" showDetail="false"
+					closable="true" />
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>
+
+

@@ -1,0 +1,43 @@
+package Matematica.Intermediario.SomaAngulosTriangulo.Nivel1Package;
+
+import java.awt.image.BufferedImage;
+
+import Auxiliar.Graphics;
+import Matematica.Intermediario.SomaAngulosTriangulo.ResolucaoSAT2;
+import Modelo.Matematica.Conta;
+
+
+public class Image10 extends Conta
+{
+	private static final long serialVersionUID = 1L;
+
+	public Image10(int index)
+	{
+		super(index);
+
+		int a = 50 + rand.nextInt(20);
+		int c = 20 + rand.nextInt(20);
+		int b = 180 - a - c;
+
+//		10- ConfigTriangulo3 a, B, c | 
+		ConfigTriangulo3 config = new ConfigTriangulo3(a, b, c);
+		config.a.mostrar();
+		config.b.mostrar();
+		config.c.mostrar();
+		config.b.nome = "x";
+
+		textLatex = config.getTextLatex();
+		resultadoCorreto = "" + b + "°";
+		resolucaoLatex = ResolucaoSAT2.complemento180("x", a, c);
+
+		BufferedImage image = config.criarImagem(index);
+		baos = Graphics.salvar(image, false, "");
+
+		carregarBlob();
+	}
+
+	public static void main(String[] args)
+	{
+		new Image15(1);
+	}
+}

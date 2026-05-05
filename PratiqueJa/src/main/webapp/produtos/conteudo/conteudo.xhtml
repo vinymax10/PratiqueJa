@@ -1,0 +1,235 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+	<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
+
+	<div class="p-d-flex backgroundBlue" >
+		<h:form id="form" style="margin-bottom:0;width:100%">
+			<div class="p-grid" style="margin: 15px;">
+
+				<p:card class="newBorder m-3 p-3" style="width: 100%;">
+					<span class="eyebrow">Pratique Já — Conteúdo para
+						professores</span>
+					<h1>Posts prontos, exclusivos e no seu estilo para Instagram e
+						TikTok</h1>
+					<p class="lead">Economize horas de trabalho e mantenha seu
+						perfil ativo com posts de matemática criados de forma inteligente,
+						personalizados com sua logo, cores e imagens.</p>
+
+					<div class="hero-cta">
+						<p:button value="Escolha seu plano agora" 
+						styleClass="ui-button-raised buttonBlue mr-2" 
+						onclick="location.hash='#planos'; return false;">
+						</p:button>
+						<p:button  value="Compare os planos" 
+						styleClass="ui-button-raised ui-button-flat ui-button-secondary"
+							onclick="location.hash='#compare';return false;">
+						</p:button>
+							
+					</div>
+				</p:card>
+				
+				<div  class="grid-3 p-3" style="width: 100%;">
+
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4>Automação total</h4>
+						<p class="small">Exercícios gerados por IA — conteúdo
+						exclusivo a cada envio, sem precisar de intervenção humana.</p>
+					</p:card>
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4>Personalização</h4>
+						<p class="small">Upload de logo, escolha de paleta de cores,
+						backgrounds e base própria de imagens.</p>
+					</p:card>
+					<p:card class="newBorder m-3" style="width: auto;">
+						<h4>Envio automático</h4>
+						<p class="small">Você recebe por e-mail os pacotes com 6 posts
+						(3 feed + 3 reels) prontos para publicar.</p>
+					</p:card>
+				</div>
+				
+				<div id="planos" class="p-4" style="width: 100%;">
+					<h2 style="margin:6px 0 6px">Escolha o plano ideal para seu perfil</h2>
+				    <p >Três opções pensadas para diferentes necessidades — do professor que quer começar ao que quer profissionalizar sua presença online.</p>
+				</div>
+				<div class="grid-3"  style="width: 100%;">
+
+					<p:card class="newBorder m-3 p-3" style="width: auto;">
+						<h3 id="basico-title" class="mb-0 mt-0">Básico</h3>
+						<h6 id="basico-title" class="mt-0">Comece com consistência</h6>
+				        <div class="price">R$ 297 / mês</div>
+				        <p class="small">Ideal para manter o perfil ativo com investimento baixo.</p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">6 posts a cada 3 dias (3 feed + 3 reels)</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Exercícios exclusivos nos 3 níveis</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Coloração default + upload de logo</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Background aleatório do sistema</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Banco de imagens padrão</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Legendas curtas automáticas</div></div>
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:commandButton  value="Quero começar no Básico" 
+							styleClass="ui-button-raised buttonBlue"
+							process="@this" action="#{pagamentoBean.pagamentoCriador('Basico')}">
+							</p:commandButton>
+				        </div>
+					</p:card>
+					
+					<p:card class="newBorder m-3 p-3" style="width: auto;">
+						<h3 id="basico-title" class="mb-0 mt-0">Premium</h3>
+						<h6 id="basico-title" class="mt-0">O mais escolhido</h6>
+				        <div class="price">R$ 397 / mês</div>
+				        <p class="small">Equilíbrio entre personalização e custo.</p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Posts diários (3 feed + 3 reels)</div></div>
+   				          <div class="feature"><div class="dot"></div><div class="itemFeature">Exercícios exclusivos nos 3 níveis</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Paleta de cores completa + upload de logo</div></div>
+   				          <div class="feature"><div class="dot"></div><div class="itemFeature">Escolha de background (aleatório ou específico)</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Upload de até 10 backgrounds próprios</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Legendas completas com CTA e hashtags inteligentes</div></div>
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:commandButton  value="Quero ser Premium" 
+							styleClass="ui-button-raised buttonBlue"
+							process="@this" action="#{pagamentoBean.pagamentoCriador('Premium')}">
+							</p:commandButton>
+				        </div>
+					</p:card>
+					
+					<p:card class="newBorder m-3 p-3" style="width: auto;">
+						<h3 id="basico-title" class="mb-0 mt-0">Master</h3>
+						<h6 id="basico-title" class="mt-0">Profissionalize seu perfil</h6>
+				        <div class="price">R$ 497 / mês</div>
+				        <p class="small">Para quem quer se destacar como autoridade e ter um perfil de alto impacto.</p>
+				        <div style="margin-top:12px">
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Posts diários (3 feed + 3 reels)</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Paleta de cores completa + upload de logo</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Escolha de background (aleatório ou específico)</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Upload de até 30 backgrounds próprios</div></div>
+				          <div class="feature"><div class="dot"></div><div class="itemFeature">Legendas personalizadas com CTA + hashtags inteligentes</div></div>
+  				          <div class="feature"><div class="dot"></div><div class="itemFeature">Suporte prioritário e acesso ao Pratique Já Prata</div></div>
+				        	
+				        </div>
+				        <div style="margin:14px 0">
+				        	<p:commandButton  value="Quero ser Master" 
+							styleClass="ui-button-raised buttonBlue"
+							process="@this" action="#{pagamentoBean.pagamentoCriador('Master')}">
+							</p:commandButton>
+				        </div>
+					</p:card>
+				</div>
+				
+				<div id="compare" class="p-col-12 p-lg-10 p-lg-offset-1 p-xl-8 p-xl-offset-2 compare p-3 mb-4" >
+				  <h2 class="mb-0">Comparação</h2>
+			      <table aria-label="Comparação de planos" style="background:transparent; border-radius:10px; overflow:hidden">
+			        <thead>
+			           <tr>
+				            <th>Benefícios</th>
+				            <th>Básico <br/> R$ 297</th>
+				            <th>Premium<br/>R$ 397</th>
+				            <th>Master<br/>R$ 497</th>
+			          </tr>
+			        </thead>
+			        <tbody class="itemTable">
+			          <tr ><td>Frequência</td><td>A cada 3 dias</td><td>Diário</td><td>Diário</td></tr>
+			          <tr><td>Logo personalizada</td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
+			          <tr><td>Programação dos assuntos</td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
+			          <tr><td>Paleta de cores</td><td>Default</td><td>Completa</td><td>Completa</td></tr>
+			          <tr><td>Escolha dos Backgrounds</td><td>Aleatório</td><td>Escolha</td><td>Escolha</td></tr>
+			          <tr><td>Legendas</td><td>Curtas</td><td>Com CTA</td><td>Personalizadas</td></tr>
+   			          <tr><td>Upload imagens próprias</td><td>—</td><td>Até 10</td><td>Até 30</td></tr>
+			          <tr><td>Acesso ao Pratique Já</td><td>Bronze</td><td>Bronze</td><td>Prata</td></tr>
+			          <tr><td>Suporte prioritário</td><td>—</td><td>—</td><td><i class="pi pi-check check" ></i></td></tr>
+			        </tbody>
+			      </table>
+			    </div>
+				
+				<div id="faq" class="p-col-12 p-lg-10 p-lg-offset-1 p-xl-8 p-xl-offset-2 p-3 mb-4" >
+				
+				<h2>Perguntas frequentes</h2>
+
+				<div class="faq-list">
+				      <details>
+				        <summary>Posso cancelar quando quiser?</summary>
+				        <div class="faq-body">
+				          <p>Sim — não há fidelidade. Você pode cancelar a assinatura a qualquer momento pelo painel e continuará com o acesso até o final do período pago.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Como recebo os posts? Preciso publicar manualmente?</summary>
+				        <div class="faq-body">
+				          <p>Você recebe por e-mail um pacote com 6 posts prontos (3 feed + 3 reels) prontos para publicar. Cada post é composto por duas imagens. 
+				          Uma imagem com exercício e outra com a resolução.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Os posts já vêm com a minha logo e cores?</summary>
+				        <div class="faq-body">
+				          <p>Sim — todos os planos permitem upload de logo. No Premium e no Master você pode escolher de paleta de cores e 
+				          fazer upload de imagens personalizadas para usar como background.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Posso trocar de plano depois?</summary>
+				        <div class="faq-body">
+				          <p>Sim — você pode mudar de plano a qualquer momento. Se subir de plano, o ajuste é feito proporcionalmente.</p>
+				        </div>
+				      </details>
+				
+				      <details>
+				        <summary>Posso testar por um tempo antes de comprar?</summary>
+				        <div class="faq-body">
+				          <p>Sim, oferecemos um teste grátis por 7 dias para que você possa constatar a qualidade do conteúdo produzido.</p>
+				        </div>
+				      </details>
+				      
+				      <details>
+				        <summary>Preciso ter conhecimento técnico para usar os posts?</summary>
+				        <div class="faq-body">
+				          <p>Não, os posts já vêm prontos em imagem png. Basta baixar e publicar no Instagram ou TikTok.</p>
+				        </div>
+				      </details>
+				      <details>
+				        <summary>Posso escolher o assunto dos posts?</summary>
+				        <div class="faq-body">
+				          <p>Sim, na programação dos post você consegue escolher o assunto dentre todos os assuntos disponíveis no Pratique já.</p>
+				        </div>
+				      </details>
+				      <details>
+				        <summary>Os posts são exclusivos ou podem ser iguais a outros professores?</summary>
+				        <div class="faq-body">
+				          <p>O conteúdo é exclusivo em cada envio. 
+				          Os exercícios são gerados por IA utilizando as suas informações para que o conteúdo tenha a sua identidade.</p>
+				        </div>
+				      </details>
+				      <details>
+				        <summary>Existe fidelidade mínima?</summary>
+				        <div class="faq-body">
+				          <p>Não, você pode cancelar quando quiser.</p>
+				        </div>
+				      </details>
+				    </div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				
+
+
+
+			</div>
+		</h:form>
+	</div>
+
+</ui:decorate>
+

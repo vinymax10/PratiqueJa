@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body >
+		<ui:composition>
+			<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
+			
+			<div class="p-4" >
+				<h2 style="margin:6px 0 6px">Escolha o plano ideal para acesso ao Pratique Já</h2>
+			    <p >Três opções de acesso criadas para diferentes perfis de estudante — do básico ao acompanhamento completo com professor.</p>
+			</div>
+			<div class="grid-3"  >
+
+				<p:card class="newBorder m-3 p-3" style="width: auto;">
+					<h3 id="basico-title" class="mb-0 mt-0">Bronze</h3>
+					<h6 id="basico-title" class="mt-0">Comece agora mesmo</h6>
+			        <div class="tag-free">Grátis</div>
+			        <p class="small">Ideal para conhecer a plataforma e revisar conteúdos com liberdade.</p>
+			        <div style="margin-top:12px">
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso às anotações de aula</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Download das anotações em PDF</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso ilimitado aos exercícios</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso limitado às questões</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Download limitado dos exercícios e resoluções</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso limitado às resoluções de exercícios e questões.</div></div>
+			        </div>
+			        <div style="margin:14px 0">
+			        	<p:commandButton  value="Acessar Grátis" 
+						styleClass="ui-button-raised buttonBlue"
+						resetValues="true"
+						rendered="#{!controleAcessoBean.estaLogado()}" update="formLogin"
+						action="#{autenticacaoBean.resetLogin()}"
+						oncomplete="PF('loginWidget').show();return false;">
+						</p:commandButton>
+			        </div>
+				</p:card>
+				
+				<p:card class="newBorder m-3 p-3" style="width: auto;">
+					<h3 id="basico-title" class="mb-0 mt-0">Prata</h3>
+					<h6 id="basico-title" class="mt-0">Estudo completo e flexível</h6>
+					<div class="hero-cta">
+			        	<div class="price mr-4 mt-3">R$ 27,90 / mês</div>
+			       		<span class="eyebrow price">R$ 176,40 / ano</span>
+		       		</div>
+			        <p class="small">Para quem quer dominar Matemática com prática, resoluções e material completo.</p>
+			        <div style="margin-top:12px">
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Todo o conteúdo do Bronze</div></div>
+  				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso ilimitado às questões</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Download em PDF de exercícios e questões</div></div>
+  				          <div class="feature"><div class="dot"></div><div class="itemFeature">Resoluções comentadas completas</div></div>
+			        </div>
+		            <div class="note"><strong>Economia anual:</strong> Pagando o plano anual você paga o equivalente a <strong>R$ 14,70 / mês</strong> — <span style="color:var(--muted);font-weight:700">Economize 47%</span></div>
+			        
+			        <div class="hero-cta mt-3">
+			        	<p:commandButton  value="Assinar Prata (Mensal)" 
+			        	process="@this" action="#{pagamentoBean.pagamento('Prata','Mensal')}"
+						styleClass="ui-button-raised ui-button-flat ui-button-secondary" >
+						</p:commandButton>
+
+			        	<p:commandButton  value="Assinar Prata (Anual)" 
+			        	process="@this" action="#{pagamentoBean.pagamento('Prata','Anual')}"
+						styleClass="ui-button-raised  buttonBlue" >
+						</p:commandButton>
+			        </div>
+				</p:card>
+				
+				<p:card class="newBorder m-3 p-3" style="width: auto;">
+					<h3 id="basico-title" class="mb-0 mt-0">Ouro</h3>
+					<h6 id="basico-title" class="mt-0">Acompanhamento e evolução guiada</h6>
+			        <div class="price">R$ 197 / mês</div>
+			        <p class="small">Ideal para quem busca orientação direta do professor e um plano de estudos personalizado.</p>
+			        <div style="margin-top:12px">
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Todo o conteúdo do Prata</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso aos exercícios passados pelo professor</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Acompanhamento das atividades pelo professor</div></div>
+			          <div class="feature"><div class="dot"></div><div class="itemFeature">Feedback individualizado</div></div>
+			        	
+			        </div>
+			        <div style="margin:14px 0">
+			        	<p:commandButton  value="Assinar Ouro" 
+			        	process="@this" action="#{pagamentoBean.pagamento('Ouro','Mensal')}"
+						styleClass="ui-button-raised buttonBlue" >
+						</p:commandButton>
+			        </div>
+				</p:card>
+			</div>
+				
+		</ui:composition>		
+	</h:body>
+</html>
+	

@@ -1,0 +1,166 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+
+    <h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+	    	<div class="p-grid" style="margin:0 15px;width:100%;">
+		
+			    <div class="p-col-12" >
+			    	<p:outputLabel for="@next" value="Usuário #{usuarioBean.usuario.nome}" style="font-size:2rem;font-weight: bold;"
+			    	rendered="#{!usuarioBean.lista and !usuarioBean.cadastro}"/>
+			    	<p:outputLabel for="@next" value="Usuário" style="font-size:2.5rem;font-weight: bold; "
+			    	rendered="#{usuarioBean.lista or usuarioBean.cadastro}"/>	
+				</div>
+		    
+			    <h:panelGroup id="fomulario" style="width:100%;" rendered="#{!usuarioBean.lista}">
+	            	
+	            	<p:tabView activeIndex="#{usuarioBean.activeIndex}" id="usuario" cache="false"  dynamic="true" >
+								
+		            	<ui:include src="/usuario/usuario/gerais.xhtml" />
+						
+		            	<ui:include src="/usuario/usuario/exercicio.xhtml" />
+		     	
+		     	       	<ui:include src="/usuario/usuario/resultadoExercicio.xhtml" />
+		     	       	
+	     	       		<ui:include src="/usuario/usuario/pagamento.xhtml" />
+						
+			        </p:tabView>
+		            	
+			    </h:panelGroup>
+				
+				<h:panelGroup id="filtro" rendered="#{usuarioBean.lista}">
+								
+					<p:commandButton  value="Adicionar"  icon="pi pi-plus" 
+					styleClass="ui-button-raised ui-button-success ui-button-flat" 
+					action="#{usuarioBean.cadastrar(false)}" update="@form"  process="@this" 
+					style="margin-bottom:1rem;"	/>
+					
+					<p:panel header="Filtro" toggleable="true" closable="true" toggleSpeed="500"
+	             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;">
+						
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 xl:col-6">
+					       		<p:outputLabel for="@next" value="Nome"/>
+				                <p:inputText placeholder="Nome" value="#{usuarioBean.filtroUsuario.nome}" />
+							</div>
+							
+				           <div class="field col-12 xl:col-6">
+				            	<p:outputLabel for="@next" value="Email"/>
+				                <p:inputText placeholder="Email" value="#{usuarioBean.filtroUsuario.email}" />
+							</div>
+							
+							<div class="field col-12 xl:col-6">
+				                <p:outputLabel for="@next" value="Turma"/>
+				                <p:selectOneMenu value="#{usuarioBean.filtroUsuario.turma}" 
+				                converter="generic" filter="true" filterMatchMode="contains">
+				                	<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+				                    <f:selectItems value="#{turmaBean.todasTurmas}" var="opcao" 
+				                    itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				                </p:selectOneMenu>
+				            </div>
+				            
+				            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+				                <p:outputLabel for="@next" value="Perfil"/>
+				                <p:selectOneMenu value="#{usuarioBean.filtroUsuario.perfil}" 
+				                filter="true" filterMatchMode="contains">
+				                	<f:selectItem itemLabel="Selecione uma opção" itemValue=""/>
+				                    <f:selectItems value="#{perfilUsuarioBean.opcoes}" var="perfil" 
+				                    itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
+				                </p:selectOneMenu>
+				            </div>
+				            
+				            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+								<p:outputLabel for="@next" value="Criador" />
+								<p:selectOneMenu value="#{usuarioBean.filtroUsuario.criador}">
+									<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+									<f:selectItem itemLabel="Sim" itemValue="#{true}" />
+									<f:selectItem itemLabel="Não" itemValue="#{false}" />
+								</p:selectOneMenu>
+							</div>
+							
+							<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
+								<p:outputLabel for="@next" value="Recebe Spam" />
+								<p:selectOneMenu value="#{usuarioBean.filtroUsuario.recebeSpam}">
+									<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+									<f:selectItem itemLabel="Sim" itemValue="#{true}" />
+									<f:selectItem itemLabel="Não" itemValue="#{false}" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+						
+						<p:divider />
+				
+						<div class="p-grid" style="margin-top:1rem">
+							
+							<div class="p-col-12 p-text-right" >
+							
+								<p:commandButton  value="Filtrar" styleClass="ui-button-raised ui-button-flat" icon="pi pi-search" 
+								action="#{usuarioBean.filtrar}" update="@form, :growl"  process="@form"	/>
+								
+							</div>
+						</div>
+			       
+			   		</p:panel>
+			   		
+				    <p:dataTable id="tabela" class="table table-striped" var="usuario" 
+				    value="#{usuarioBean.usuarios}" reflow="true" 
+				    selection="#{usuarioBean.usuario}" selectionMode="single" rowKey="#{usuario.id}"
+				    paginator="true" rows="20">
+				    	<p:ajax event="rowSelect" update="@form" listener="#{usuarioBean.onSelected}"/>
+				    
+				    	<p:column headerText="Foto" width="4rem" responsivePriority="1" >
+				    		<p:graphicImage class="circleTable" value="#{usuario.imagem.getFotoStreamedContent()}" 
+				    		rendered="#{not empty usuario.imagem}" stream="false" />
+				    	</p:column>
+				    	
+				    	<p:column headerText="Nome" >
+							<h:outputText value="#{usuario.nome}"  responsivePriority="1" />
+						</p:column>
+						
+						<p:column headerText="Email" responsivePriority="2" >
+							<h:outputText value="#{usuario.email}" />
+						</p:column>
+						
+						<p:column headerText="Nascimento" responsivePriority="3">
+							<h:outputText value="#{usuario.nascimento}" >
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Turma" responsivePriority="2" >
+							<h:outputText value="#{usuario.turma.nome}" />
+						</p:column>
+						
+						<p:column headerText="Perfil" responsivePriority="2" >
+							<h:outputText value="#{usuario.perfil.nome}" />
+						</p:column>
+						
+						<p:column headerText="Criador" responsivePriority="2" >
+							<h:outputText value="#{usuario.criador}" converter="simNaoConverter"/>
+						</p:column>
+						
+						<p:column headerText="Recebe Spam" responsivePriority="2" >
+							<h:outputText value="#{usuario.recebeSpam}" converter="simNaoConverter"/>
+						</p:column>
+						
+						<p:column headerText="Validade do Plano" responsivePriority="3">
+							<h:outputText value="#{usuario.validadePlano}" >
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+							</h:outputText>
+						</p:column>
+						
+					</p:dataTable>
+					
+				</h:panelGroup>
+			</div>
+		</div>
+	</h:form>
+	
+	
+</ui:decorate>
+	

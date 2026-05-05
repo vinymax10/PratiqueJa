@@ -1,0 +1,91 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+
+	<h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+			<div class="p-grid" style="margin: 0 15px; width: 100%;">
+
+				<div class="p-col-12">
+					<h2>Resultado dos Exercícios</h2>
+				</div>
+
+				<p:dataTable id="tabela" class="table table-striped" reflow="true"
+					var="resultadoExercicio"  rowKey="#{resultado.id}" widgetVar="resultadosTable"
+					filteredValue="#{resultadoExercicioBean.resultadosExerciciosFiltrados}"
+             		filterBy="#{resultadoExercicioBean.filterBy}"
+					value="#{resultadoExercicioBean.resultadosExerciciosUsuario}"
+					paginator="true" rows="20" paginatorAlwaysVisible="false">
+
+					<p:column field="exercicioPadrao.assuntoCurso.nome" headerText="Assunto" filterMatchMode="exact"
+                    sortBy="#{resultadoExercicio.exercicioPadrao.assuntoCurso.nome}">
+		                <f:facet name="filter">
+		                    <p:selectOneMenu  onchange="PF('resultadosTable').filter()" styleClass="custom-filter">
+		                        <f:attribute name="collectionType" value="java.util.ArrayList" />	
+		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+		                        <f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}" var="opcao" 
+		                        itemLabel="#{opcao.nome}" itemValue="#{opcao.nome}"/>
+		                    </p:selectOneMenu >
+		                </f:facet>
+					</p:column>
+					
+					<p:column field="exercicioPadrao.assuntoCurso.modulo.nome" headerText="Módulo" filterMatchMode="exact"
+                    sortBy="#{resultadoExercicio.exercicioPadrao.assuntoCurso.modulo.nome}">
+		                <f:facet name="filter">
+		                    <p:selectOneMenu  onchange="PF('resultadosTable').filter()" styleClass="custom-filter">
+		                        <f:attribute name="collectionType" value="java.util.ArrayList" />	
+		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+		                        <f:selectItems value="#{moduloBean.opcoes}" var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao.nome}"/>
+		                    </p:selectOneMenu >
+		                </f:facet>
+					</p:column>
+
+					<p:column field="exercicioPadrao.nivel.nome" headerText="Nível" filterMatchMode="exact"
+                    sortBy="#{resultadoExercicio.exercicioPadrao.nivel.nome}">
+		                <f:facet name="filter">
+		                    <p:selectOneMenu  onchange="PF('resultadosTable').filter()" styleClass="custom-filter">
+		                        <f:attribute name="collectionType" value="java.util.ArrayList" />	
+		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+		                        <f:selectItems value="#{nivelBean.opcoes}" var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao.nome}"/>
+		                    </p:selectOneMenu >
+		                </f:facet>
+					</p:column>
+					
+					<p:column field="realizacao" headerText="Realização" filterMatchMode="between">
+						<h:outputText value="#{resultadoExercicio.realizacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+						</h:outputText>
+						<f:facet name="filter">
+							<p:datePicker selectionMode="range" onchange="PF('resultadosTable').filter()"/>
+						</f:facet>
+					</p:column>
+
+<!-- 					<p:column  headerText="Duração" responsivePriority="4" > -->
+<!-- 						<h:outputText value="#{resultadoExercicio.duracao}"> -->
+<!-- 							<f:convertNumber pattern="#,##0.00" /> -->
+<!-- 						</h:outputText> -->
+<!-- 						<h:outputText value=" s" /> -->
+
+<!-- 					</p:column> -->
+
+					<p:column field="notaPorcentagem" headerText="Nota" responsivePriority="1" sortBy="#{resultadoExercicio.notaPorcentagem}">
+						<h:outputText value="#{resultadoExercicio.notaPorcentagem}">
+							<f:convertNumber pattern="#,##0.00" />
+						</h:outputText>
+						<h:outputText value=" \%" />
+						<p:progressBar value="#{resultadoExercicio.notaPorcentagem}"
+							displayOnly="true" style="height: .5rem" />
+					</p:column>
+
+				</p:dataTable>
+
+			</div>
+		</div>
+	</h:form>
+
+
+</ui:decorate>
+

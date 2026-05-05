@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   	
+	<!-- Permite que a aplicação fique com compoentes grandes no celular -->
+   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0"/>
+   	
+	<link rel="stylesheet" href="/css/meu.css" type="text/css"/> 
+	<link rel="stylesheet" href="/css/primeflex.min.css" type="text/css"/> 
+	<script type="text/javascript" src="/js/jwt-decode.js"></script>
+	
+	<script src="https://accounts.google.com/gsi/client" ></script>
+   
+	<meta name="keywords"
+		content="Pratique Já" />
+	<meta name="author" content="Vinícius Máximo" />
+	
+	<title>Pratique Já</title>
+	<link rel="icon" type="image/jpg" href="/image/favicon.png" />
+</h:head>
+
+<h:body >
+
+	<!-- 	login google -->
+	<script>
+    
+        function handleCredentialResponse(response) {
+        	const responsePayload = jwt_decode(response.credential);
+
+            console.log("ID: " + responsePayload.sub);
+            console.log('Full Name: ' + responsePayload.name);
+            console.log('Given Name: ' + responsePayload.given_name);
+            console.log('Family Name: ' + responsePayload.family_name);
+            console.log("Image URL: " + responsePayload.picture);
+            console.log("Email: " + responsePayload.email);
+            console.log(responsePayload);
+			
+            sendDadosUser ([ 
+                {
+	                name : 'email',
+	                value : responsePayload.email
+               },   
+               {
+                 name : 'name',
+                 value : responsePayload.name
+               },
+               {
+                   name : 'sub',
+                   value : responsePayload.sub
+               },
+               {
+                   name : 'picture',
+                   value : responsePayload.picture
+               }
+             ]);  
+        }
+        
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "404469863896-q3dl3oechaqfocos3ho3k986igu3g6o8.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+    </script>
+    
+    <p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}" process="@this" /> 
+    
+
+	
+	
+		
+	<p:growl for="growl" id="growl" showDetail="true" globalOnly="true"  />
+         
+	<ui:insert />
+
+	<script type="text/javascript" src="/js/template.js"></script>
+
+</h:body>
+</html>
