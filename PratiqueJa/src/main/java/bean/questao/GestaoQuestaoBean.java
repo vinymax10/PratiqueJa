@@ -331,7 +331,7 @@ public class GestaoQuestaoBean implements Serializable
 				str = str.trim();
 				if(!str.equals(""))
 				{
-					List<Assunto> assuntos = assuntoBean.getAssuntoDAO().filtrar(str);
+					List<Assunto> assuntos = assuntoBean.getEntidadeDAO().filtrar(str);
 					if(assuntos.size() > 0)
 					{
 						Assunto bestAssunto = null;
@@ -360,7 +360,7 @@ public class GestaoQuestaoBean implements Serializable
 						assunto.setDisciplina(disciplina);
 						assunto.setNome(str);
 						disciplina.getAssuntos().add(assunto);
-						assuntoBean.getAssuntoDAO().salvar(assunto);
+						assuntoBean.getEntidadeDAO().salvar(assunto);
 						disciplinaBean.getDisciplinaDAO().salvar(disciplina);
 						questao.getAssuntos().add(assunto);
 					}

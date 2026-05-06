@@ -193,6 +193,14 @@
 		    <version>1.1.1.4</version>
 		</dependency>
 
+		<!-- Source: https://mvnrepository.com/artifact/software.xdev/chartjs-java-model -->
+		<dependency>
+		    <groupId>software.xdev</groupId>
+		    <artifactId>chartjs-java-model</artifactId>
+		    <version>3.0.1</version>
+		    <scope>compile</scope>
+		</dependency>
+
 		<!-- Primefaces -->
 		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
 		<dependency>

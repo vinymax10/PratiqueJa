@@ -2,99 +2,41 @@ package modelo.questao;
 
 import java.io.Serializable;
 
+import org.javers.core.metamodel.annotation.DiffIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
 import modelo.usuario.Usuario;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = { "usuario", "questao" })
+@Data
 @Entity
 public class ResultadoQuestao implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
-//  Volta
+	@DiffIgnore
 	@ManyToOne
 	private Usuario usuario;
 
+	@DiffIgnore
 	@ManyToOne
 	private Questao questao;
 
+	@AuditLabel(value = "acertou")
 	private boolean acertou;
-
-	public static long getSerialversionuid()
-	{
-		return serialVersionUID;
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((questao == null) ? 0 : questao.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
-			return true;
-		if(obj == null)
-			return false;
-		if(getClass() != obj.getClass())
-			return false;
-		ResultadoQuestao other = (ResultadoQuestao) obj;
-		if(questao == null)
-		{
-			if(other.questao != null)
-				return false;
-		}
-		else if(!questao.equals(other.questao))
-			return false;
-		return true;
-	}
-
-	public Usuario getUsuario()
-	{
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	public Questao getQuestao()
-	{
-		return questao;
-	}
-
-	public void setQuestao(Questao questao)
-	{
-		this.questao = questao;
-	}
-
-	public boolean isAcertou()
-	{
-		return acertou;
-	}
-
-	public void setAcertou(boolean acertou)
-	{
-		this.acertou = acertou;
-	}
-
 }

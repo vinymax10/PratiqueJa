@@ -8,7 +8,6 @@ import java.util.List;
 import auxiliar.StringAux;
 import bean.AutenticacaoBean;
 import bean.usuario.filtro.FiltroPagamento;
-import bean.util.EmailBean;
 import dao.usuario.PagamentoDAO;
 import infra.Mensagem;
 import infra.Navegacao;
@@ -21,6 +20,7 @@ import modelo.usuario.Pagamento;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.TipoPagamento;
 import modelo.usuario.Usuario;
+import service.EmailService;
 import session.SessionContext;
 
 @Named
@@ -60,7 +60,7 @@ public class PagamentoBean implements Serializable
 	private ControleAcessoBean controleAcessoBean;
 	
 	@Inject
-	EmailBean emailBean;
+	private EmailService emailService;
 	
 	public String adicionarFinalizar()
 	{
@@ -102,7 +102,7 @@ public class PagamentoBean implements Serializable
 				+ "Plano: "+pagamento.getPlano()+"\n"
 				+ "TipoPagamento: "+pagamento.getTipoPagamento()+"\n";
 
-				emailBean.adicionar(emailBean.getEmailPessoal(), assunto, mensagem,5);
+				emailService.adicionar("vinymax10@gmail.com", assunto, mensagem);
 		
 				pagamentoDAO.salvar(pagamento);
 			}

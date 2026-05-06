@@ -5,19 +5,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import auxiliar.StringAux;
+import bean.usuario.filtro.FiltroContato;
+import dao.usuario.ContatoDAO;
+import infra.Mensagem;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import auxiliar.StringAux;
-import dao.usuario.ContatoDAO;
-import infra.Mensagem;
 import modelo.usuario.Contato;
 import modelo.usuario.Usuario;
+import service.EmailService;
 import session.SessionContext;
-import bean.usuario.filtro.FiltroContato;
-import bean.util.EmailBean;
 
 @Named
 @ViewScoped
@@ -43,7 +42,7 @@ public class ContatoBean implements Serializable
 	private FiltroContato filtroContato;
 
 	@Inject
-	EmailBean emailBean;
+	private EmailService emailService;
 	
 	public String cadastrar()
 	{
@@ -91,7 +90,7 @@ public class ContatoBean implements Serializable
 		+ "Data: "+StringAux.getDataStr(contato.getData())+"\n"
 		+ "Email: "+contato.getEmail()+"\n";
 
-		emailBean.adicionar(emailBean.getEmailPessoal(), assunto, mensagem,5);
+		emailService.adicionar("vinymax10@gmail.com", assunto, mensagem);
 	}
 
 	public String salvar()

@@ -16,10 +16,16 @@ import org.apache.commons.io.IOUtils;
 import org.omnifaces.cdi.Startup;
 
 import auxiliar.ColorHolder;
+import bean.download.Diretorio;
+import bean.download.PoolNomesBean;
 import dao.instagram.ConfigPostDAO;
 import dao.instagram.CtaDAO;
 import dao.instagram.HashtagDAO;
 import dao.instagram.ProgramacaoPostDAO;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import modelo.DocumentoFile;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.instagram.ConfigPost;
@@ -29,13 +35,7 @@ import modelo.instagram.ProgramacaoPost;
 import modelo.usuario.Usuario;
 import pdf.latex.InstagramFeed;
 import pdf.latex.TikTok;
-import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
-import bean.util.EmailBean;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import service.EmailService;
 
 @Startup
 @Named
@@ -65,7 +65,7 @@ public class EnvioPostBean implements Serializable
 	private HashtagDAO hashtagDAO;
 	
 	@Inject
-	private EmailBean emailBean;
+	private EmailService emailService;
 	
 	private String email, nome;
 	
@@ -213,7 +213,7 @@ public class EnvioPostBean implements Serializable
 		mensagem+="Abraço,\r\n\r\n";
 		mensagem+="Equipe do Pratique Já";
 		
-		emailBean.adicionar(email, assuntoEmail, mensagem, documentosFile, 5);
+		emailService.adicionar(email, assuntoEmail, mensagem, documentosFile);
 	}
 	
 	private DocumentoFile buildDocumentoFile(String endFile, String nomeFile)

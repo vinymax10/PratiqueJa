@@ -1,94 +1,41 @@
 package modelo.configuracao;
 
 import java.io.Serializable;
-import java.util.Objects;
+
+import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Data
 @Entity
 public class ConfigCleanup implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@AuditLabel(value = "dias para remover teste realizado")
 	private int diasRemoverTesteRealizado;
-	
+
+	@AuditLabel(value = "dias para remover teste não realizado")
 	private int diasRemoverTesteNaoRealizado;
-	
+
+	@AuditLabel(value = "dias para remover exercício realizado")
 	private int diasRemoverExercicioRealizado;
-	
+
+	@AuditLabel(value = "dias para remover exercício não realizado")
 	private int diasRemoverExercicioNaoRealizado;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public int getDiasRemoverTesteRealizado() {
-		return diasRemoverTesteRealizado;
-	}
-
-	public void setDiasRemoverTesteRealizado(int diasRemoverTesteRealizado) {
-		this.diasRemoverTesteRealizado = diasRemoverTesteRealizado;
-	}
-
-	public int getDiasRemoverTesteNaoRealizado() {
-		return diasRemoverTesteNaoRealizado;
-	}
-
-	public void setDiasRemoverTesteNaoRealizado(int diasRemoverTesteNaoRealizado) {
-		this.diasRemoverTesteNaoRealizado = diasRemoverTesteNaoRealizado;
-	}
-
-	public int getDiasRemoverExercicioRealizado() {
-		return diasRemoverExercicioRealizado;
-	}
-
-	public void setDiasRemoverExercicioRealizado(int diasRemoverExercicioRealizado) {
-		this.diasRemoverExercicioRealizado = diasRemoverExercicioRealizado;
-	}
-
-	public int getDiasRemoverExercicioNaoRealizado() {
-		return diasRemoverExercicioNaoRealizado;
-	}
-
-	public void setDiasRemoverExercicioNaoRealizado(int diasRemoverExercicioNaoRealizado) {
-		this.diasRemoverExercicioNaoRealizado = diasRemoverExercicioNaoRealizado;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ConfigCleanup other = (ConfigCleanup) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "ConfigCleanup: " + (id != null ? "id=" + id + ", " : "") + "diasRemoverTesteRealizado="
-				+ diasRemoverTesteRealizado + ", diasRemoverTesteNaoRealizado=" + diasRemoverTesteNaoRealizado
-				+ ", diasRemoverExercicioRealizado=" + diasRemoverExercicioRealizado
-				+ ", diasRemoverExercicioNaoRealizado=" + diasRemoverExercicioNaoRealizado;
-	}
-	
 }

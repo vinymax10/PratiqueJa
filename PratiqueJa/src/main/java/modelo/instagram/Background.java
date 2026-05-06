@@ -1,92 +1,38 @@
 package modelo.instagram;
 
 import java.io.Serializable;
-import java.util.Objects;
+
+import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Data
 @Entity
-public class Background implements Serializable,Entidade
+public class Background implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
-	
+
+	@AuditLabel(value = "endereço")
 	private String endereco;
-	
+
+	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
 
+	@AuditLabel(value = "feed")
 	private boolean feed;
-	
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public String getEndereco()
-	{
-		return endereco;
-	}
-
-	public void setEndereco(String endereco)
-	{
-		this.endereco = endereco;
-	}
-
-	public boolean isFeed()
-	{
-		return feed;
-	}
-
-	public void setFeed(boolean feed)
-	{
-		this.feed = feed;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
-			return true;
-		if(obj == null)
-			return false;
-		if(getClass() != obj.getClass())
-			return false;
-		Background other = (Background) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "Background [id=" + id + ", endereco=" + endereco + ", nome=" + nome + "]";
-	}
-	
 }

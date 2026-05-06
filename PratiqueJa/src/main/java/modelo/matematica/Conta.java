@@ -11,13 +11,13 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
+import org.javers.core.metamodel.annotation.DiffIgnore;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.scilab.forge.jlatexmath.TeXConstants;
@@ -38,69 +38,90 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import matematica.Correcao;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
+import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.TipoExercicio;
 import modelo.teste.EtapaTeste;
 import pdf.Convert;
 
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = { "exercicio", "etapaTeste", "file", "imagemResolucao", "baos", "baosResolucao", "rand", "binding", "shell", "textGroovy" })
+@Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Conta")
+@DiscriminatorColumn(name = "Conta", length = 255)
 public abstract class Conta implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@DiffIgnore
 	@ManyToOne
 	private Exercicio exercicio;
-	
+
+	@DiffIgnore
 	@ManyToOne
 	private EtapaTeste etapaTeste;
-	
+
+	@AuditLabel(value = "tipo de exercício")
 	private TipoExercicio tipoExercicio;
 
+	@AuditLabel(value = "índice")
 	protected int indice;
 
 	@Column(length = 1023)
 	@Size(max = 1023)
+	@AuditLabel(value = "texto LaTeX")
 	protected String textLatex;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "tamanho da fonte LaTeX")
 	protected String sizeFontTextLatex;
-	
+
 	@Column(length = 1023)
 	@Size(max = 1023)
+	@AuditLabel(value = "resolução LaTeX", genero = GeneroGramatical.FEMININO)
 	protected String resolucaoLatex;
 
 	@Transient
 	protected boolean showResolucao = false;
-	
+
 	@Transient
 	protected boolean jaMostrouResolucao = false;
 
 	@Column(length = 1023)
 	@Size(max = 1023)
+	@AuditLabel(value = "pergunta", genero = GeneroGramatical.FEMININO)
 	protected String pergunta;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "resultado correto")
 	protected String resultadoCorreto = "";
-	
+
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "resultado correto LaTeX")
 	protected String resultadoCorretoLatex = "";
 
-//	TODO colocar "" aqui
+	@AuditLabel(value = "resposta do aluno", genero = GeneroGramatical.FEMININO)
 	protected String respostaAluno = "";
-//	protected String respostaAluno = ""+3;
 
-//	TODO colocar false aqui
+	@AuditLabel(value = "respondida", genero = GeneroGramatical.FEMININO)
 	protected boolean respondida = false;
 
 	protected boolean respostaAlunoBol;
@@ -131,24 +152,21 @@ public abstract class Conta implements Serializable, Entidade
 	@Transient
 	protected GroovyShell shell;
 
-	public Conta()
-	{
-	}
-
 	public Conta(int index)
 	{
 		this.indice = index;
 	}
-	
+
 	public boolean possuiResolucao()
 	{
-		return (resolucaoLatex!=null&&!resolucaoLatex.equals("")) || baosResolucao!=null;
+		return (resolucaoLatex != null && !resolucaoLatex.equals("")) || baosResolucao != null;
 	}
+
 	public boolean possuiResolucaoLatex()
 	{
-		return resolucaoLatex!=null&&!resolucaoLatex.equals("");
+		return resolucaoLatex != null && !resolucaoLatex.equals("");
 	}
-	
+
 	protected void carregarBlob()
 	{
 		try
@@ -169,14 +187,9 @@ public abstract class Conta implements Serializable, Entidade
 		}
 	}
 
-	public Long getId()
-	{
-		return id;
-	}
-	
 	public boolean isCorreta()
 	{
-		return Correcao.isCorreta(resultadoCorreto,respostaAluno);
+		return Correcao.isCorreta(resultadoCorreto, respostaAluno);
 	}
 
 	public void clone(Conta conta)
@@ -193,25 +206,12 @@ public abstract class Conta implements Serializable, Entidade
 		this.file = conta.file;
 		this.pergunta = conta.pergunta;
 		this.resolucaoLatex = conta.resolucaoLatex;
-		this.sizeFontTextLatex=conta.sizeFontTextLatex;
+		this.sizeFontTextLatex = conta.sizeFontTextLatex;
 	}
 
 	public void toogleShowResolucao()
 	{
 		showResolucao = !showResolucao;
-	}
-
-	@Override
-	public String toString()
-	{
-		return (id != null ? "id=" + id + ", " : "")
-		+ (tipoExercicio != null ? "tipoExercicio=" + tipoExercicio + ", " : "") + "indice=" + indice + ", "
-		+ (textLatex != null ? "textLatex=" + textLatex + ", " : "")
-		+ (resolucaoLatex != null ? "resolucaoLatex=" + resolucaoLatex + ", " : "") + "showResolucao=" + showResolucao
-		+ ", jaMostrouResolucao=" + jaMostrouResolucao + ", " + (pergunta != null ? "pergunta=" + pergunta + ", " : "")
-		+ (resultadoCorreto != null ? "resultadoCorreto=" + resultadoCorreto + ", " : "")
-		+ (respostaAluno != null ? "respostaAluno=" + respostaAluno + ", " : "") + "respondida=" + respondida
-		+ ", respostaAlunoBol=" + respostaAlunoBol + ", resultadoCorretoBol=" + resultadoCorretoBol;
 	}
 
 	public int getIndex()
@@ -224,62 +224,16 @@ public abstract class Conta implements Serializable, Entidade
 		this.indice = index;
 	}
 
-	public String getTextGroovy()
-	{
-		return textGroovy;
-	}
-
-	public void setTextGroovy(String textGroovy)
-	{
-		this.textGroovy = textGroovy;
-	}
-
-	public String getTextLatex()
-	{
-		return textLatex;
-	}
-
-	public void setTextLatex(String textLatex)
-	{
-		this.textLatex = textLatex;
-	}
-
-	public String getResultadoCorreto()
-	{
-		return resultadoCorreto;
-	}
-
-	public void setResultadoCorreto(String resultadoCorreto)
-	{
-		this.resultadoCorreto = resultadoCorreto;
-	}
-
 	public String getRespostaAluno()
 	{
 		if(respostaAluno.contains("%"))
-			respostaAluno=respostaAluno.replace("\\", "").replace("%", "\\%");
-
+			respostaAluno = respostaAluno.replace("\\", "").replace("%", "\\%");
 		return respostaAluno;
 	}
 
 	public void setRespostaAluno(String respostaAluno)
 	{
 		this.respostaAluno = respostaAluno.replaceAll("\\.", ",").replaceAll(" ", "");
-	}
-
-	public boolean isRespondida()
-	{
-		return respondida;
-	}
-
-	public void setRespondida(boolean respondida)
-	{
-		this.respondida = respondida;
-	}
-
-	public boolean isRespostaAlunoBol()
-	{
-		return respostaAlunoBol;
 	}
 
 	public String respostaAlunoBolTexto()
@@ -298,38 +252,6 @@ public abstract class Conta implements Serializable, Entidade
 			return "Não";
 	}
 
-	public void setRespostaAlunoBol(boolean respostaAlunoBol)
-	{
-		this.respostaAlunoBol = respostaAlunoBol;
-	}
-
-	public boolean isResultadoCorretoBol()
-	{
-		return resultadoCorretoBol;
-	}
-
-	public void setResultadoCorretoBol(boolean resultadoCorretoBol)
-	{
-		this.resultadoCorretoBol = resultadoCorretoBol;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(pergunta, textLatex);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		return Objects.equals(pergunta, other.pergunta) && Objects.equals(textLatex, other.textLatex);
-	}
-
 	public StreamedContent getImageStream()
 	{
 		if(baos == null)
@@ -337,10 +259,7 @@ public abstract class Conta implements Serializable, Entidade
 			try
 			{
 				InputStream inStream = new ByteArrayInputStream(file.getBytes(1, (int) (file.length())));
-
-				StreamedContent image = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream)
-				.build();
-
+				StreamedContent image = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream).build();
 				return image;
 			}
 			catch(SQLException e)
@@ -351,12 +270,9 @@ public abstract class Conta implements Serializable, Entidade
 		else
 		{
 			InputStream inStream2 = new ByteArrayInputStream(baos.toByteArray());
-			StreamedContent image2 = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream2)
-			.build();
-
+			StreamedContent image2 = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream2).build();
 			return image2;
 		}
-
 		return null;
 	}
 
@@ -364,7 +280,7 @@ public abstract class Conta implements Serializable, Entidade
 	{
 		return baosResolucao != null || imagemResolucao != null;
 	}
-	
+
 	public StreamedContent getImageResolucaoStream()
 	{
 		if(baosResolucao == null && imagemResolucao != null)
@@ -372,10 +288,7 @@ public abstract class Conta implements Serializable, Entidade
 			try
 			{
 				InputStream inStream = new ByteArrayInputStream(imagemResolucao.getBytes(1, (int) (imagemResolucao.length())));
-
-				StreamedContent image = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream)
-				.build();
-
+				StreamedContent image = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream).build();
 				return image;
 			}
 			catch(SQLException e)
@@ -386,12 +299,9 @@ public abstract class Conta implements Serializable, Entidade
 		else if(baosResolucao != null)
 		{
 			InputStream inStream2 = new ByteArrayInputStream(baosResolucao.toByteArray());
-			StreamedContent image2 = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream2)
-			.build();
-
+			StreamedContent image2 = DefaultStreamedContent.builder().name("image" + indice + ".png").contentType("aplication/pdf").stream(() -> inStream2).build();
 			return image2;
 		}
-
 		return null;
 	}
 
@@ -399,20 +309,11 @@ public abstract class Conta implements Serializable, Entidade
 	{
 		TeXFormula formula = new TeXFormula(textLatex);
 		formula.createPNG(TeXConstants.STYLE_DISPLAY, 15, "out.png", Color.white, Color.black);
-//		Image image= formula.createBufferedImage(TeXConstants.STYLE_DISPLAY, 14, Color.black, Color.white);
-
-//		getLaTeXImage();
-//		ImageIcon icon = new ImageIcon(image);
-//		Image a=new Image(image);
-//		image.getGraphics().drawImage(a, 0, 0, null);
-//		return image;
 	}
 
 	public void createImagePNG(String nome)
 	{
 		TeXFormula formula = new TeXFormula(textLatex);
-//		Image image= formula.createBufferedImage(TeXConstants.STYLE_DISPLAY, 14, Color.black, Color.white);
-//		formula.createPNG(TeXConstants.STYLE_DISPLAY, 15, "out.png",  Color.white,Color.black);
 		TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 14);
 		int w = icon.getIconWidth();
 		int h = icon.getIconHeight();
@@ -433,24 +334,18 @@ public abstract class Conta implements Serializable, Entidade
 		{
 			e.printStackTrace();
 		}
-
-//		getLaTeXImage();
-//		ImageIcon icon = new ImageIcon(image);
-//		Image a=new Image(image);
-//		image.getGraphics().drawImage(a, 0, 0, null);
-//		return image;
 	}
 
 	public ByteArrayOutputStream getBaos()
 	{
-		if(baos==null&&file!=null)
+		if(baos == null && file != null)
 		{
-   	        try
+			try
 			{
-   	        	baos = new ByteArrayOutputStream();
+				baos = new ByteArrayOutputStream();
 				baos.write(file.getBytes(1, (int) file.length()));
 			}
-			catch(SQLException|IOException e)
+			catch(SQLException | IOException e)
 			{
 				e.printStackTrace();
 			}
@@ -460,14 +355,14 @@ public abstract class Conta implements Serializable, Entidade
 
 	public ByteArrayOutputStream getBaosResolucao()
 	{
-		if(baosResolucao==null&&imagemResolucao!=null)
+		if(baosResolucao == null && imagemResolucao != null)
 		{
-   	        try
+			try
 			{
-   	        	baosResolucao = new ByteArrayOutputStream();
-   	        	baosResolucao.write(file.getBytes(1, (int) file.length()));
+				baosResolucao = new ByteArrayOutputStream();
+				baosResolucao.write(file.getBytes(1, (int) file.length()));
 			}
-			catch(SQLException|IOException e)
+			catch(SQLException | IOException e)
 			{
 				e.printStackTrace();
 			}
@@ -487,102 +382,10 @@ public abstract class Conta implements Serializable, Entidade
 		}
 	}
 
-	public Exercicio getExercicio()
-	{
-		return exercicio;
-	}
-
-	public void setExercicio(Exercicio exercicio)
-	{
-		this.exercicio = exercicio;
-	}
-
-	public String getPergunta()
-	{
-		return pergunta;
-	}
-
-	public void setPergunta(String pergunta)
-	{
-		this.pergunta = pergunta;
-	}
-
-	public String getResolucaoLatex()
-	{
-		return resolucaoLatex;
-	}
-
-	public void setResolucaoLatex(String resolucaoLatex)
-	{
-		this.resolucaoLatex = resolucaoLatex;
-	}
-
-	public boolean isShowResolucao()
-	{
-		return showResolucao;
-	}
-
-	public void setShowResolucao(boolean showResolucao)
-	{
-		this.showResolucao = showResolucao;
-	}
-
-	public Blob getImagemResolucao()
-	{
-		return imagemResolucao;
-	}
-
-	public void setImagemResolucao(Blob imagemResolucao)
-	{
-		this.imagemResolucao = imagemResolucao;
-	}
-
-	public boolean isJaMostrouResolucao()
-	{
-		return jaMostrouResolucao;
-	}
-
-	public void setJaMostrouResolucao(boolean jaMostrouResolucao)
-	{
-		this.jaMostrouResolucao = jaMostrouResolucao;
-	}
-
-	public EtapaTeste getEtapaTeste()
-	{
-		return etapaTeste;
-	}
-
-	public void setEtapaTeste(EtapaTeste etapaTeste)
-	{
-		this.etapaTeste = etapaTeste;
-	}
-
-	public TipoExercicio getTipoExercicio()
-	{
-		return tipoExercicio;
-	}
-
-	public void setTipoExercicio(TipoExercicio tipoExercicio)
-	{
-		this.tipoExercicio = tipoExercicio;
-	}
-	
-	public String getSizeFontTextLatex()
-	{
-		return sizeFontTextLatex;
-	}
-
-	public void setSizeFontTextLatex(String sizeFontTextLatex)
-	{
-		this.sizeFontTextLatex = sizeFontTextLatex;
-	}
-
 	public String getFileTipoExercicio()
 	{
 		String prefixo = "/matematica/tipoExercicio/";
 		String sufixo = ".xhtml";
 		return prefixo + StringAux.toLowerCaseFirst(tipoExercicio.toString()) + sufixo;
 	}
-	
-	
 }

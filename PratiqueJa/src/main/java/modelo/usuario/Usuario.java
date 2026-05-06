@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.javers.core.metamodel.annotation.DiffIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,313 +21,111 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
+import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.instagram.ConfigPost;
 import modelo.questao.ResultadoQuestao;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
+@Data
 @Entity
 public class Usuario implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "nome")
 	private String nome;
 
 	@Size(max = 255)
 	@Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", message = "Email inválido.")
 	@Column(unique = true, length = 255)
+	@AuditLabel(value = "email")
 	private String email;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "senha", genero = GeneroGramatical.FEMININO)
 	private String senha;
 
+	@AuditLabel(value = "nascimento")
 	private LocalDate nascimento;
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<ResultadoExercicio> resultadosExercicios = new ArrayList<ResultadoExercicio>();
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<ResultadoQuestao> resultadosQuestoes = new ArrayList<ResultadoQuestao>();
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<Exercicio> exercicios = new ArrayList<Exercicio>();
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<Contato> contatos = new ArrayList<Contato>();
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "sub Google")
 	private String subGoogle;
 
+	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Imagem imagem;
 
 	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "perfil")
 	private PerfilUsuario perfil = PerfilUsuario.Bronze;
-	
+
+	@AuditLabel(value = "criador")
 	private boolean criador;
-	
+
+	@AuditLabel(value = "recebe spam")
 	private boolean recebeSpam;
-	
+
+	@AuditLabel(value = "validade do plano", genero = GeneroGramatical.FEMININO)
 	private LocalDate validadePlano;
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<Acesso> acessos = new ArrayList<Acesso>();
 
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<ControleAcesso> controlesAcessos = new ArrayList<ControleAcesso>();
-	
+
+	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<Pagamento> pagamentos = new ArrayList<Pagamento>();
-	
+
+	@DiffIgnore
 	@ManyToOne(optional = true)
 	@JoinColumn(nullable = true)
 	private Turma turma;
-	
+
+	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private ConfigPost configPost;
-	
-	public Long getId()
-	{
-		return id;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
 
 	public String getFirstNome()
 	{
 		return nome.split(" ")[0];
 	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public String getEmail()
-	{
-		return email;
-	}
-
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
-
-	public String getSenha()
-	{
-		return senha;
-	}
-
-	public void setSenha(String senha)
-	{
-		this.senha = senha;
-	}
-
-	public LocalDate getNascimento()
-	{
-		return nascimento;
-	}
-
-	public void setNascimento(LocalDate nascimento)
-	{
-		this.nascimento = nascimento;
-	}
-
-	public ConfigPost getConfigPost()
-	{
-		return configPost;
-	}
-
-	public void setConfigPost(ConfigPost configPost)
-	{
-		this.configPost = configPost;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
-			return true;
-		if(obj == null)
-			return false;
-		if(getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if(id == null)
-		{
-			if(other.id != null)
-				return false;
-		}
-		else if(!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString()
-	{
-		return (id != null ? "id=" + id + ", " : "") + (nome != null ? "nome=" + nome + ", " : "")
-		+ (email != null ? "email=" + email + ", " : "") + (nascimento != null ? "nascimento=" + nascimento + ", " : "")
-		+ (subGoogle != null ? "subGoogle=" + subGoogle + ", " : "") + (perfil != null ? "perfil=" + perfil : "");
-	}
-
-	public List<ResultadoExercicio> getResultadosExercicios()
-	{
-		return resultadosExercicios;
-	}
-
-	public void setResultadosExercicios(List<ResultadoExercicio> resultadosExercicios)
-	{
-		this.resultadosExercicios = resultadosExercicios;
-	}
-
-	public List<ResultadoQuestao> getResultadosQuestoes()
-	{
-		return resultadosQuestoes;
-	}
-
-	public void setResultadosQuestoes(List<ResultadoQuestao> resultadosQuestoes)
-	{
-		this.resultadosQuestoes = resultadosQuestoes;
-	}
-
-	public List<Exercicio> getExercicios()
-	{
-		return exercicios;
-	}
-
-	public void setExercicios(List<Exercicio> exercicios)
-	{
-		this.exercicios = exercicios;
-	}
-
-	public Imagem getImagem()
-	{
-		return imagem;
-	}
-
-	public void setImagem(Imagem imagem)
-	{
-		this.imagem = imagem;
-	}
-
-	public String getSubGoogle()
-	{
-		return subGoogle;
-	}
-
-	public void setSubGoogle(String subGoogle)
-	{
-		this.subGoogle = subGoogle;
-	}
-
-	public PerfilUsuario getPerfil()
-	{
-		return perfil;
-	}
-
-	public void setPerfil(PerfilUsuario perfil)
-	{
-		this.perfil = perfil;
-	}
-
-	public List<Contato> getContatos()
-	{
-		return contatos;
-	}
-
-	public void setContatos(List<Contato> contatos)
-	{
-		this.contatos = contatos;
-	}
-
-	public List<Acesso> getAcessos()
-	{
-		return acessos;
-	}
-
-	public void setAcessos(List<Acesso> acessos)
-	{
-		this.acessos = acessos;
-	}
-
-	public List<ControleAcesso> getControlesAcessos()
-	{
-		return controlesAcessos;
-	}
-
-	public void setControlesAcessos(List<ControleAcesso> controlesAcessos)
-	{
-		this.controlesAcessos = controlesAcessos;
-	}
-
-	public List<Pagamento> getPagamentos()
-	{
-		return pagamentos;
-	}
-
-	public void setPagamentos(List<Pagamento> pagamentos)
-	{
-		this.pagamentos = pagamentos;
-	}
-
-	public Turma getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
-
-	public LocalDate getValidadePlano()
-	{
-		return validadePlano;
-	}
-
-	public void setValidadePlano(LocalDate validadePlano)
-	{
-		this.validadePlano = validadePlano;
-	}
-
-	public boolean isCriador()
-	{
-		return criador;
-	}
-
-	public void setCriador(boolean criador)
-	{
-		this.criador = criador;
-	}
-
-	public boolean isRecebeSpam()
-	{
-		return recebeSpam;
-	}
-
-	public void setRecebeSpam(boolean recebeSpam)
-	{
-		this.recebeSpam = recebeSpam;
-	}
-	
 }

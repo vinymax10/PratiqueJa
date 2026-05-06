@@ -28,7 +28,6 @@ import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import bean.ebook.HeaderEBook;
 import bean.exercicio.ConfigDownload;
-import bean.util.EmailBean;
 import dao.exercicio.ExercicioPadraoDAO;
 import dao.instagram.CtaDAO;
 import dao.spam.ConfigSpamDAO;
@@ -48,6 +47,7 @@ import modelo.spam.ProgramacaoSpam;
 import modelo.usuario.Usuario;
 import pdf.latex.GerarLatexExercicio;
 import pdf.latex.ItemSumario;
+import service.EmailService;
 
 @Named
 @ApplicationScoped
@@ -67,7 +67,7 @@ public class EnvioSpamBean implements Serializable
 	private ProgramacaoSpam programacaoSpam;
 	
 	@Inject
-	private EmailBean emailBean;
+	private EmailService emailService;
 	
 	private static Thread thread;
 
@@ -162,7 +162,7 @@ public class EnvioSpamBean implements Serializable
 			mensagem+="Equipe do Pratique Já\r\n";
 			mensagem+="📚 pratiqueja.com";
 			
-			emailBean.adicionar(usuario.getEmail(), assuntoEmail, mensagem, documentosFile, 15);
+			emailService.adicionar(usuario.getEmail(), assuntoEmail, mensagem, documentosFile);
 		}
 	}
 

@@ -1,9 +1,10 @@
 package modelo.questao.configuracao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import org.javers.core.metamodel.annotation.DiffIgnore;
+import org.javers.core.metamodel.annotation.ValueObject;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,46 +12,47 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import modelo.Config;
 import modelo.Entidade;
-import modelo.configuracao.Opcao;
+import modelo.auditoria.AuditLabel;
+import modelo.auditoria.GeneroGramatical;
 import modelo.questao.Questao;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@ToString(exclude = { "questoes" })
+@Data
 @Entity
-public class Orgao implements Serializable, Entidade, Opcao
+@ValueObject
+public class Orgao extends Config implements Entidade
 {
-
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "sigla", genero = GeneroGramatical.FEMININO)
 	private String sigla;
 
-//  Volta
+	@DiffIgnore
 	@OneToMany(mappedBy = "orgao")
 	private List<Questao> questoes = new ArrayList<Questao>();
 
-	public Long getId()
+	public void setSigla(String sigla)
 	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public String getNome()
-	{
-		return nome;
+		this.sigla = sigla.toUpperCase();
 	}
 
 	public String getNomeReduzido()
@@ -58,55 +60,4 @@ public class Orgao implements Serializable, Entidade, Opcao
 		String str = sigla + " - " + nome;
 		return str.substring(0, Math.min(str.length(), 80));
 	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public List<Questao> getQuestoes()
-	{
-		return questoes;
-	}
-
-	public void setQuestoes(List<Questao> questoes)
-	{
-		this.questoes = questoes;
-	}
-
-	public String getSigla()
-	{
-		return sigla;
-	}
-
-	public void setSigla(String sigla)
-	{
-		this.sigla = sigla.toUpperCase();
-	}
-
-	@Override
-	public String toString()
-	{
-		return "Orgao [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Orgao other = (Orgao) obj;
-		return Objects.equals(id, other.id);
-	}
-
 }

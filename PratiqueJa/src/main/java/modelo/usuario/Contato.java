@@ -2,7 +2,8 @@ package modelo.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
+
+import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,145 +12,55 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
+import modelo.auditoria.GeneroGramatical;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = { "usuario" })
+@Data
 @Entity
 public class Contato implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@DiffIgnore
 	@ManyToOne
 	private Usuario usuario;
-	
+
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "nome do usuário")
 	private String nomeUsuario;
-	
+
 	@Size(max = 255)
 	@Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", message = "Email inválido.")
 	@Column(length = 255)
+	@AuditLabel(value = "email")
 	private String email;
 
 	@Column(length = 1023)
 	@Size(max = 1023)
+	@AuditLabel(value = "mensagem", genero = GeneroGramatical.FEMININO)
 	private String mensagem;
 
 	@Column(length = 255)
 	@Size(max = 255)
+	@AuditLabel(value = "assunto")
 	private String assunto;
 
+	@AuditLabel(value = "data", genero = GeneroGramatical.FEMININO)
 	private LocalDate data;
 
+	@AuditLabel(value = "respondido")
 	private boolean respondido = false;
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public Usuario getUsuario()
-	{
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	public LocalDate getData()
-	{
-		return data;
-	}
-	
-	public void setData(LocalDate data)
-	{
-		this.data = data;
-	}
-
-	public String getMensagem()
-	{
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem)
-	{
-		this.mensagem = mensagem;
-	}
-
-	public String getAssunto()
-	{
-		return assunto;
-	}
-
-	public void setAssunto(String assunto)
-	{
-		this.assunto = assunto;
-	}
-
-	public boolean isRespondido()
-	{
-		return respondido;
-	}
-
-	public void setRespondido(boolean respondido)
-	{
-		this.respondido = respondido;
-	}
-
-	public String getNomeUsuario()
-	{
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario)
-	{
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public String getEmail()
-	{
-		return email;
-	}
-
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
-			return true;
-		if(obj == null)
-			return false;
-		if(getClass() != obj.getClass())
-			return false;
-		Contato other = (Contato) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString()
-	{
-		return (id != null ? "id=" + id + ", " : "") + (usuario != null ? "usuario=" + usuario.getFirstNome() + ", " : "")
-		+ (nomeUsuario != null ? "nomeUsuario=" + nomeUsuario + ", " : "")
-		+ (mensagem != null ? "mensagem=" + mensagem + ", " : "") + (assunto != null ? "assunto=" + assunto + ", " : "")
-		+ (data != null ? "data=" + data + ", " : "") + "respondido=" + respondido;
-	}
-
-	
-
 }

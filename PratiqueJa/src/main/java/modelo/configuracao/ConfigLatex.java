@@ -1,134 +1,54 @@
 package modelo.configuracao;
 
 import java.io.Serializable;
-import java.util.Objects;
+
+import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import modelo.Entidade;
+import modelo.auditoria.AuditLabel;
+import modelo.auditoria.GeneroGramatical;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Data
 @Entity
 public class ConfigLatex implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@AuditLabel(value = "endereço")
 	private String endereco;
-	
+
+	@AuditLabel(value = "endereço do background")
 	private String endBackground;
-	
+
+	@AuditLabel(value = "endereço do e-book")
 	private String enderecoEBook;
-	
+
+	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
-	
+
+	@AuditLabel(value = "remover diretórios")
 	private boolean removeDiretorios;
 
+	@AuditLabel(value = "sistema operacional")
 	private SistemaOperacional sistemaOperacional;
-	
-	String imagens="imagens";
-	String imagensResolucao="imagensResolucao";
-	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@AuditLabel(value = "imagens", genero = GeneroGramatical.FEMININO)
+	String imagens = "imagens";
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public boolean isRemoveDiretorios() {
-		return removeDiretorios;
-	}
-
-	public void setRemoveDiretorios(boolean removeDiretorios) {
-		this.removeDiretorios = removeDiretorios;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public SistemaOperacional getSistemaOperacional()
-	{
-		return sistemaOperacional;
-	}
-
-	public void setSistemaOperacional(SistemaOperacional sistemaOperacional)
-	{
-		this.sistemaOperacional = sistemaOperacional;
-	}
-
-	public String getImagens()
-	{
-		return imagens;
-	}
-
-	public void setImagens(String imagens)
-	{
-		this.imagens = imagens;
-	}
-
-	public String getImagensResolucao()
-	{
-		return imagensResolucao;
-	}
-
-	public void setImagensResolucao(String imagensResolucao)
-	{
-		this.imagensResolucao = imagensResolucao;
-	}
-
-	public String getEndBackground()
-	{
-		return endBackground;
-	}
-
-	public void setEndBackground(String endBackground)
-	{
-		this.endBackground = endBackground;
-	}
-
-	public String getEnderecoEBook()
-	{
-		return enderecoEBook;
-	}
-
-	public void setEnderecoEBook(String enderecoEBook)
-	{
-		this.enderecoEBook = enderecoEBook;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ConfigLatex other = (ConfigLatex) obj;
-		return Objects.equals(id, other.id);
-	}
-	
+	@AuditLabel(value = "imagens de resolução", genero = GeneroGramatical.FEMININO)
+	String imagensResolucao = "imagensResolucao";
 }

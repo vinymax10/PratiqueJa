@@ -10,32 +10,32 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.primefaces.PrimeFaces;
+
+import bean.usuario.ControleAcessoBean;
+import dao.usuario.AcessoDAO;
+import dao.usuario.ControleAcessoDAO;
+import dao.usuario.UsuarioDAO;
+import infra.Mensagem;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
-import javax.imageio.ImageIO;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import javax.sql.rowset.serial.SerialBlob;
 import jakarta.validation.constraints.Pattern;
-
-import org.mindrot.jbcrypt.BCrypt;
-import org.primefaces.PrimeFaces;
-
-import dao.usuario.AcessoDAO;
-import dao.usuario.ControleAcessoDAO;
-import dao.usuario.UsuarioDAO;
-import infra.Mensagem;
 import modelo.usuario.Acesso;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
+import service.EmailService;
 import session.SessionContext;
-import bean.usuario.ControleAcessoBean;
-import bean.util.EmailBean;
 
 @Named
 @SessionScoped
@@ -67,7 +67,7 @@ public class AutenticacaoBean implements Serializable
 	private ControleAcessoBean controleAcessoBean;
 	
 	@Inject
-	EmailBean emailBean;
+	private EmailService emailService;
 	
 	public String loginGoogle()
 	{
@@ -275,8 +275,8 @@ public class AutenticacaoBean implements Serializable
 			String mensagem = "Foi solicitada uma recuperação de senha para o email " + email + "\nSua nova senha é: " + novaSenha
 			+ "\nAcesse novamente o Prática e atualize a sua senha.";
 
-			emailBean.adicionar(email, assunto, mensagem,1);
-			
+			emailService.adicionar(email, assunto, mensagem);
+
 			FacesContext.getCurrentInstance().addMessage("growl", new FacesMessage(FacesMessage.SEVERITY_INFO, "Recuperação de Senha",
 			"Um email foi enviado para " + email + " contendo a nova senha. Por favor verifique seu email e acesse novamente o nosso sistema."));
 

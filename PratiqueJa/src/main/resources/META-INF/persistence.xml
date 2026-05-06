@@ -5,9 +5,9 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 	
-<!-- 	<persistence-unit name="PratiqueJa" transaction-type="RESOURCE_LOCAL"> -->
+<!-- 	<persistence-unit name="Pratica" transaction-type="RESOURCE_LOCAL"> -->
 <!-- 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>  -->
-<!--         <jta-data-source>java:jboss/PratiqueJa</jta-data-source> -->
+<!--         <jta-data-source>java:jboss/Pratica</jta-data-source> -->
     		
 	<persistence-unit name="PratiqueJa" transaction-type="JTA">
     		<jta-data-source>java:jboss/PratiqueJa</jta-data-source>
@@ -16,7 +16,6 @@
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class, hbm"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update"></property>
 			<property name="hibernate.id.new_generator_mappings" value="true"></property>
 			<property name="org.hibernate.envers.store_data_at_delete" value="true"></property>

@@ -7,6 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.push.Push;
 import jakarta.faces.push.PushContext;
 import jakarta.inject.Inject;
+import modelo.DocumentoFile;
 import modelo.email.Email;
 
 @ApplicationScoped
@@ -35,6 +36,17 @@ public class EmailService
 		adicionar(email);
 	}
 
+	public void adicionar(String destinatario, String subject, String msg, List<DocumentoFile> documentosFile)
+	{
+		Email email = new Email();
+		email.setDestinatario(destinatario);
+		email.setAssunto(subject);
+		email.setMensagem(msg);
+		email.setDocumentosFile(documentosFile);
+
+		adicionar(email);
+	}
+	
 	public void adicionar(Email email)
 	{
 		emailDAO.adicionar(email);
