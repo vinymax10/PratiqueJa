@@ -1,25 +1,31 @@
 package Modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
+import org.javers.core.metamodel.annotation.DiffIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.Entidade;
 
+@Data
 @Entity
 public class Email implements Serializable, Entidade {
 	private static final long serialVersionUID = 1L;
 
+	@DiffIgnore
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Long id;
 	
 	@Column(length = 255)
@@ -36,93 +42,15 @@ public class Email implements Serializable, Entidade {
 	
 	private int tentativaEnvio;
 	
-	private int tempoEspera=1;
+	private LocalDateTime dataEnvio;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval = true)
-	private List<DocumentoFile> documentosFile = new ArrayList<DocumentoFile>();
+	private String erro;
 	
-	public String getDestinatario() {
-		return destinatario;
-	}
-
-	public void setDestinatario(String destinatario) {
-		this.destinatario = destinatario;
-	}
-
-	public String getAssunto() {
-		return assunto;
-	}
-
-	public void setAssunto(String assunto) {
-		this.assunto = assunto;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public int getTentativaEnvio()
-	{
-		return tentativaEnvio;
-	}
-
-	public void setTentativaEnvio(int tentativaEnvio)
-	{
-		this.tentativaEnvio = tentativaEnvio;
-	}
-
-	public List<DocumentoFile> getDocumentosFile()
-	{
-		return documentosFile;
-	}
-
-	public void setDocumentosFile(List<DocumentoFile> documentosFile)
-	{
-		this.documentosFile = documentosFile;
-	}
-
-	public int getTempoEspera()
-	{
-		return tempoEspera;
-	}
-
-	public void setTempoEspera(int tempoEspera)
-	{
-		this.tempoEspera = tempoEspera;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Email other = (Email) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "Email [" + (id != null ? "id=" + id + ", " : "")
-		+ (destinatario != null ? "destinatario=" + destinatario + ", " : "")
-		+ (assunto != null ? "assunto=" + assunto + ", " : "") + (mensagem != null ? "mensagem=" + mensagem + ", " : "")
-		+ "tentativaEnvio=" + tentativaEnvio + "]";
-	}
+	@Enumerated(EnumType.STRING)
+	private StatusEmail status=StatusEmail.PENDENTE;
 	
+	public void incrementaTetativa()
+	{
+		tentativaEnvio++;
+	}
 }

@@ -13,14 +13,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import jakarta.swing.JLabel;
-
-import com.itextpdf.awt.PdfGraphics2D;
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.ImgTemplate;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfTemplate;
-import com.itextpdf.text.pdf.PdfWriter;
+import javax.swing.JLabel;
 
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGeneratorContext;
@@ -39,6 +32,13 @@ import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+
+import com.itextpdf.awt.PdfGraphics2D;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.ImgTemplate;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfTemplate;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class Convert
 {
