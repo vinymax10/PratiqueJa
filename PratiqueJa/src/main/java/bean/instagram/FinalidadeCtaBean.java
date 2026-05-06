@@ -1,0 +1,36 @@
+package bean.instagram;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+
+import modelo.instagram.FinalidadeCta;
+
+@Named
+@SessionScoped
+public class FinalidadeCtaBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	private List<FinalidadeCta> opcoes;
+
+	@PostConstruct
+	public void init()
+	{
+		opcoes = Arrays.asList(FinalidadeCta.values());
+	}
+
+	public List<FinalidadeCta> getOpcoes()
+	{
+		return opcoes;
+	}
+
+	public void setOpcoes(List<FinalidadeCta> opcoes)
+	{
+		this.opcoes = opcoes;
+	}
+}

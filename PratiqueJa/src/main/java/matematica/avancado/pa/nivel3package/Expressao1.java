@@ -1,0 +1,41 @@
+package matematica.avancado.pa.nivel3package;
+
+import matematica.Racional;
+import matematica.avancado.pa.ResolucaoPA;
+import modelo.matematica.Conta;
+
+public class Expressao1 extends Conta
+{
+	private static final long serialVersionUID = 1L;
+
+	public Expressao1(int index)
+	{
+		super(index);
+
+		int n = 4 + rand.nextInt(20);
+
+		Racional a1=new Racional(1 + rand.nextInt(20),1 + rand.nextInt(20));
+		a1.fatoracao(2);
+		
+		Racional r=new Racional(1 + rand.nextInt(20),1 + rand.nextInt(20));
+		r.fatoracao(2);
+		
+		Racional an = ResolucaoPA.a(a1, r, n);
+		
+		textLatex = "" + a1.showDfrac() + 
+		", " + ResolucaoPA.a(a1, r, 2).showDfrac()
+		+", "+ResolucaoPA.a(a1, r, 3).showDfrac()+", \\ldots";
+
+		pergunta="Qual é o "+n+"º termo?";
+		
+		resultadoCorreto = "" + an.toString();
+		
+		resolucaoLatex=ResolucaoPA.n_esimo(a1, r, n);
+		
+	}
+
+	public static void main(String[] args)
+	{
+		new Expressao1(1);
+	}
+}
