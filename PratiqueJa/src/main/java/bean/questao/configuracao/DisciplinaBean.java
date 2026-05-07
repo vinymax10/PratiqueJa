@@ -116,7 +116,7 @@ public class DisciplinaBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		this.disciplinas = disciplinaDAO.listaTudo();
+		this.disciplinas = disciplinaDAO.listarTudo();
 	}
 
 	public String getNome()

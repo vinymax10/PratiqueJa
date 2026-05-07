@@ -226,7 +226,7 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		this.opcoesAtivas = entidadeDAO.listarOpcoesAtivas();
 	}
 
-	public void adicionarDefault(Empresa empresa){}
+	public void adicionarDefault(){}
 	
 	public void validateNomeRepetido(FacesContext context, UIComponent component, Object object)
 	{

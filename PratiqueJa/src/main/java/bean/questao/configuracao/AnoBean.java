@@ -131,7 +131,7 @@ public class AnoBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		this.lista = entidadeDAO.listaTudoOpcao();
+		this.lista = entidadeDAO.listarTudo();
 	}
 
 	public Ano getEntidade()

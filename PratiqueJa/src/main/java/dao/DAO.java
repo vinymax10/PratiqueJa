@@ -1,8 +1,12 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import auxiliar.ClasseAux;
+import filtro.FiltroConfig;
+import infra.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -11,10 +15,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
-
-import infra.Log;
 import modelo.Entidade;
-import modelo.configuracao.Opcao;
 
 public abstract class DAO<T extends Entidade> implements Serializable,DAOInterface<T>
 {
@@ -93,49 +94,90 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 	{
 		em.clear();
 	}
-
-	public boolean contains(Opcao entidade)
+	
+	public List<T> buscar(FiltroConfig filtroConfig)
 	{
 		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(classe);
-		Root<T> from = query.from(classe);
+		Root<T> fromT = query.from(classe);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
+		
+		predicates.add(builder.like(
+		fromT.get("nome"), "%" + filtroConfig.getNome()+ "%"));
 
-		predicate = builder.and(predicate, builder.equal(from.get("nome"), entidade.getNome()));
+		if(filtroConfig.getNome() != null&&!filtroConfig.getNome().isBlank())
+			predicates.add(builder.like(
+			fromT.get("nome"), "%" + filtroConfig.getNome()+ "%"));
 
-		if(entidade.getId() != null)
+		if(filtroConfig.getAtivo() != null)
+			predicates.add( builder.equal(
+			fromT.get("ativo"), filtroConfig.getAtivo().booleanValue()));
+		
+		TypedQuery<T> typedQuery = em
+		.createQuery(query.select(fromT)
+		.where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromT.get("ordem"))));
+		List<T> list = typedQuery.getResultList();
+		
+		return list;
+	}
+
+	public List<T> listarTudo()
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<T> query = builder.createQuery(classe);
+		Root<T> fromT = query.from(classe);
+		
+		List<Predicate> predicates = new ArrayList<>();
+
+		TypedQuery<T> typedQuery;
+		if(ClasseAux.possuiAtributo(classe, "ordem"))
 		{
-			predicate = builder.and(predicate, builder.notEqual(from.get("id"), entidade.getId()));
+			typedQuery = em
+			.createQuery(query.select(fromT)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.asc(fromT.get("ordem"))));
 		}
+		else
+			typedQuery = em
+			.createQuery(query.select(fromT)
+			.where(predicates.toArray(new Predicate[0])));
 
-		TypedQuery<T> typedQuery = em.createQuery(query.select(from).where(predicate));
 		List<T> list = typedQuery.getResultList();
 
-		if(list.size() > 0)
-			return true;
-
-		return false;
-	}
-
-	public List<T> listaTudo()
-	{
-		em.clear();
-		String hql = "Select e from " + classe.getName() + " e";
-		@SuppressWarnings("unchecked")
-		List<T> list = em.createQuery(hql).getResultList();
 		return list;
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<T> listaTudoOpcao()
+	
+	public List<T> listarOpcoesAtivas()
 	{
-		em.clear();
-		String hql = "Select e from " + classe.getName() + " e ORDER BY e.nome ASC";
-		List<T> list = em.createQuery(hql).getResultList();
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<T> query = builder.createQuery(classe);
+		Root<T> fromT = query.from(classe);
+		
+		List<Predicate> predicates = new ArrayList<>();
+
+		predicates.add(builder.equal(fromT.get("ativo"), true));
+		
+		TypedQuery<T> typedQuery;
+		if(ClasseAux.possuiAtributo(classe, "ordem"))
+		{
+			typedQuery = em
+			.createQuery(query.select(fromT)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.asc(fromT.get("ordem"))));
+		}
+		else
+			typedQuery = em
+			.createQuery(query.select(fromT)
+			.where(predicates.toArray(new Predicate[0])));
+
+		List<T> list = typedQuery.getResultList();
+
 		return list;
+		
 	}
 
 }

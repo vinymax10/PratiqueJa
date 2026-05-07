@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition >
+		<p:menuButton value="Exportar" icon="fa-solid fa-download"
+		buttonStyleClass="ui-button-outlined ui-button-secondary"
+		>
+							
+<!-- 			<p:menuitem value="XLS"  -->
+<!-- 			icon="fa-solid fa-table" styleClass="gray"> -->
+<!-- 				<p:dataExporter type="xls" target="#{id}" fileName="#{nome}" /> -->
+<!-- 			</p:menuitem> -->
+
+			<p:menuitem value="XLSX"  title="Baixar tabela em XLSX"
+			icon="fa-regular fa-file-excel" styleClass="gray">
+				<p:dataExporter type="xlsxstream" target="#{id}" fileName="#{exporterBean.formatNomeFile(nome)}" />
+			</p:menuitem>
+
+			<p:menuitem value="CSV"  title="Baixar tabela em CSV"
+			icon="fa-solid fa-file-csv" styleClass="gray">
+				<p:dataExporter type="csv" target="#{id}" fileName="#{exporterBean.formatNomeFile(nome)}" />
+			</p:menuitem>
+			
+			<p:menuitem value="PDF" title="Baixar tabela em PDF" styleClass="gray"
+				icon="fa-regular fa-file-pdf" ajax="false">
+			    <p:fileDownload value="#{exporterPdfBean.exportarPDF(id,nome)}" />
+			</p:menuitem>
+			
+		</p:menuButton>
+	</ui:composition>
+</h:body>
+</html>
+
+

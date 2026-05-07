@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import auxiliar.ListAux;
+import dao.questao.configuracao.BancaDAO;
+import exceptions.ContensException;
+import exceptions.RelacaoException;
+import infra.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import dao.questao.configuracao.BancaDAO;
-import exceptions.ContensException;
-import exceptions.RelacaoException;
-import infra.ListAux;
-import infra.Mensagem;
 import modelo.questao.configuracao.Banca;
 
 @Named
@@ -169,7 +168,7 @@ public class BancaBean implements Serializable
 
 	public void procurarConcomitancia()
 	{
-		List<Banca> listaCompleta = entidadeDAO.listaTudoOpcao();
+		List<Banca> listaCompleta = entidadeDAO.listarTudo();
 		List<Banca> listaParcial;
 		this.lista = new ArrayList<Banca>();
 
@@ -188,8 +187,8 @@ public class BancaBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		this.lista = entidadeDAO.listaTudoOpcao();
-		this.listaBusca = entidadeDAO.listaTudoOpcao();
+		this.lista = entidadeDAO.listarTudo();
+		this.listaBusca = entidadeDAO.listarTudo();
 	}
 
 	public Banca getEntidade()

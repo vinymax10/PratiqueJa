@@ -67,9 +67,9 @@ public class OrgaoBean implements Serializable
 
 	private void podeAdicionar() throws ContensException
 	{
-		if (entidadeDAO.contains(entidadeNova))
-			throw new ContensException(
-			"Não foi possível adicionar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
+//		if (entidadeDAO.contains(entidadeNova))
+//			throw new ContensException(
+//			"Não foi possível adicionar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
 	}
 
 	public String salvar()
@@ -113,9 +113,9 @@ public class OrgaoBean implements Serializable
 
 	private void podeSalvar() throws ContensException
 	{
-		if (entidadeDAO.contains(entidade))
-			throw new ContensException(
-			"Não foi possível salvar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
+//		if (entidadeDAO.contains(entidade))
+//			throw new ContensException(
+//			"Não foi possível salvar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
 	}
 
 	public String remover(Orgao entidade)
@@ -153,7 +153,7 @@ public class OrgaoBean implements Serializable
 
 	public void procurarConcomitancia()
 	{
-		List<Orgao> listaCompleta = entidadeDAO.listaTudoOpcao();
+		List<Orgao> listaCompleta = entidadeDAO.listarTudo();
 		List<Orgao> listaParcial;
 		this.lista = new ArrayList<Orgao>();
 
@@ -186,8 +186,8 @@ public class OrgaoBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		this.lista = entidadeDAO.listaTudoOpcao();
-		this.listaBusca = entidadeDAO.listaTudoOpcao();
+		this.lista = entidadeDAO.listarTudo();
+		this.listaBusca = entidadeDAO.listarTudo();
 	}
 
 	public Orgao getEntidade()

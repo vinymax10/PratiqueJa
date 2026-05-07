@@ -231,7 +231,7 @@ public class UsuarioBean implements Serializable
 
 	public List<Usuario> getTodosUsuarios()
 	{
-		return usuarioDAO.listaTudo();
+		return usuarioDAO.listarTudo();
 	}
 
 	public String gerarSenhaAleatoria()

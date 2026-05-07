@@ -35,8 +35,7 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.AuditoriaEvento;
 import modelo.auditoria.GeneroGramatical;
 import modelo.auditoria.TipoEvento;
-import modelo.configuracao.Loja;
-import modelo.seguranca.Usuario;
+import modelo.usuario.Usuario;
 import session.Sessao;
 
 @Stateless
@@ -105,8 +104,6 @@ public class AuditoriaService implements Serializable
 
 		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		evento.setUsuario(usuario);
-		evento.setEmpresa(usuario.getEmpresa());
-		evento.setLoja((Loja) Sessao.get("Loja"));
 		evento.setDataEvento(LocalDateTime.now());
 
 		HttpServletRequest request = (HttpServletRequest) Sessao.externalContext().getRequest();
