@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.usuario.filtro.FiltroAcesso;
+import dao.seguranca.AcessoDAO;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import dao.usuario.AcessoDAO;
-import modelo.usuario.Acesso;
-import bean.usuario.filtro.FiltroAcesso;
+import modelo.seguranca.Acesso;
 
 @Named
 @SessionScoped
@@ -35,8 +35,8 @@ public class AcessoBean implements Serializable
 
 	public String finalizadoToggle(Acesso acesso)
 	{
-		acesso.finalizadoToggle();
-		acessoDAO.salvar(acesso);
+//		acesso.set();
+//		acessoDAO.salvar(acesso);
 		return "";
 	}
 	

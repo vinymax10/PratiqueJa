@@ -7,7 +7,7 @@
 
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" 
-		value="#{bancaBean.nome}"	/>
+		value="#{assuntoBean.nome}"	/>
 	</ui:define>
 	
 	<h:form id="form" class="form" >
@@ -16,36 +16,36 @@
 		
 			<ui:include src="/exportar/exportar.xhtml" >
 				<ui:param name="id" value="form:tabela" />
-				<ui:param name="nome" value="Canais de Atendimento" />
+				<ui:param name="nome" value="Assuntos" />
 			</ui:include>
 			
 			<p:commandButton value="Adicionar" icon="pi pi-plus"
 			styleClass="ui-button-raised ui-button-success"
-			action="#{bancaBean.cadastrar}" update="@form, dialog-cadastro"
+			action="#{assuntoBean.cadastrar}" update="@form, dialog-cadastro"
 			process="@this" 
 			oncomplete="PF('dialogCadastro').show()"  resetValues="true" />
 		</div>
 		
 		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
-			var="entidade" value="#{bancaBean.opcoes}" widgetVar="dtMaterial"
-			selection="#{bancaBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
+			var="entidade" value="#{assuntoBean.opcoes}" widgetVar="dtMaterial"
+			selection="#{assuntoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
 	   		draggableRows="true" rows="30" paginator="true"	paginatorAlwaysVisible="false"
 	   		rowSelector="td:not(.coluna-ativo)" >
 
 			<p:ajax event="rowSelect" update="form:tabela"  process="@this"
-			 listener="#{bancaBean.onRowSelect}"	/>
+			 listener="#{assuntoBean.onRowSelect}"	/>
 			 
- 			<p:ajax event="rowReorder" listener="#{bancaBean.onRowReorder}" update="@form"/>
+ 			<p:ajax event="rowReorder" listener="#{assuntoBean.onRowReorder}" update="@form"/>
 			 
 			<p:column headerText="Nome" responsivePriority="1" filterBy="#{entidade.nome}"
 			exportValue="#{entidade.nome}" filterMatchMode="contains" filterPlaceholder="Filtro por Nome">
                 <h:outputText value="#{entidade.nome}" 
-                rendered="#{entidade.id!=bancaBean.entidade.id}"/>
+                rendered="#{entidade.id!=assuntoBean.entidade.id}"/>
     
                 <p:inputText id="inputNome" value="#{entidade.nome}" style="width:100%;margin-top:18px"
-                required="true" validator="#{bancaBean.validateNomeRepetido}" 
+                required="true" validator="#{assuntoBean.validateNomeRepetido}" 
 				requiredMessage="O nome é obrigatório" 
-				rendered="#{entidade.id==bancaBean.entidade.id}">
+				rendered="#{entidade.id==assuntoBean.entidade.id}">
 				</p:inputText>
 				<p:message id="msg" for="inputNome" display="text"/>
 			</p:column>
@@ -63,7 +63,7 @@
 				<p:toggleSwitch class="toggleSwitch-form" 
 					value="#{entidade.ativo}" >
 					<p:ajax event="change" process="@this"
-					listener="#{bancaBean.salvar(entidade)}" />
+					listener="#{assuntoBean.salvar(entidade)}" />
 				</p:toggleSwitch>
 			</p:column>
 			
@@ -72,13 +72,13 @@
 			exportable="false">
 				
 				<h:panelGroup style="width:100%;"
-				rendered="#{entidade.id!=bancaBean.entidade.id}">
+				rendered="#{entidade.id!=assuntoBean.entidade.id}">
 				
 					<div  style="display: flex">
 						<p:commandLink rendered="#{sessaoBean.podeVerAuditoria}"
-							title="Carregar auditoria para o(a) #{bancaBean.nome} #{entidade.nome}"
+							title="Carregar auditoria para o(a) #{assuntoBean.nome} #{entidade.nome}"
 							styleClass="rounded-button ui-button-flat mr-3"
-							action="#{auditoriaBean.carregar(entidade,bancaBean.nome)}"
+							action="#{auditoriaBean.carregar(entidade,assuntoBean.nome)}"
 							update="@form, :growl dialog-auditoria"  process="@this" oncomplete="PF('dialogAuditoria').show()">
 							<div class="buttonIcon">
 								<h:outputText>
@@ -87,8 +87,8 @@
 							</div>
 						</p:commandLink>
 						
-						<p:commandLink title="Remover o(a) #{bancaBean.nome} #{entidade.nome}"
-							action="#{bancaBean.remover(entidade)}" update="@form, :growl"
+						<p:commandLink title="Remover o(a) #{assuntoBean.nome} #{entidade.nome}"
+							action="#{assuntoBean.remover(entidade)}" update="@form, :growl"
 							process="@this">
 							<div class="buttonIcon">
 								<p:confirm header="Confirmação" icon="pi pi-info-circle"
@@ -100,18 +100,18 @@
 					</div>
 				</h:panelGroup>
 				<h:panelGroup style="width:100%;"
-				rendered="#{entidade.id==bancaBean.entidade.id}">
+				rendered="#{entidade.id==assuntoBean.entidade.id}">
 					<div  style="display: flex">
-						<p:commandLink title="Cancelar edição do(a) #{bancaBean.nome}"
+						<p:commandLink title="Cancelar edição do(a) #{assuntoBean.nome}"
 						styleClass="rounded-button ui-button-flat mr-3"
-						action="#{bancaBean.cancelar}" update="form:tabela, :growl"
+						action="#{assuntoBean.cancelar}" update="form:tabela, :growl"
 						process="@this">
 							<div class="buttonIcon">
 								<i class="fa-solid fa-xmark cinza"></i>
 							</div>
 						</p:commandLink>
 						
-						<p:commandLink id="salvar" title="Salvar o(a) #{bancaBean.nome}" action="#{bancaBean.salvar}"
+						<p:commandLink id="salvar" title="Salvar o(a) #{assuntoBean.nome}" action="#{assuntoBean.salvar}"
 						update="@form, :growl"	process="@form">
 							<div class="buttonIcon">
 								<i class="fa-regular fa-floppy-disk azul"></i>
@@ -130,7 +130,7 @@
 	</h:form>
 	
 	<p:dialog id="dialog-cadastro" class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2" 
-	header="#{bancaBean.cadastro? 'Adicionar':'Editar'}  #{bancaBean.nome}" 
+	header="#{assuntoBean.cadastro? 'Adicionar':'Editar'}  #{assuntoBean.nome}" 
 	showEffect="fade" hideEffect="fade" width="100%;" modal="true"  widgetVar="dialogCadastro" responsive="true" 
 	focus="formAdicionar:nome"	>
 		<h:form id="formAdicionar" class="form" enctype="multipart/form-data"  >
@@ -138,8 +138,8 @@
 				
 				<h:panelGroup styleClass="campoMsg col-12 xl:col-6">
 					<p:outputLabel for="@next" value="Nome" />
-					<p:inputText value="#{bancaBean.entidade.nome}"
-						required="true" validator="#{bancaBean.validateNomeRepetido}" 
+					<p:inputText value="#{assuntoBean.entidade.nome}"
+						required="true" validator="#{assuntoBean.validateNomeRepetido}" 
 						requiredMessage="O nome é obrigatório"/>
 					<p:message for="@previous" display="text"/>
 				</h:panelGroup>
@@ -147,7 +147,7 @@
 				<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
 					<p:outputLabel for="@next" value="Ativo" />
 					<p:toggleSwitch class="toggleSwitch-form" 
-						value="#{bancaBean.entidade.ativo}" />
+						value="#{assuntoBean.entidade.ativo}" />
 				</h:panelGroup>
 					
 			</div>
@@ -156,10 +156,10 @@
 						
 				<div class="divisor" ></div>
 
-				<p:commandButton id="adicionarCadastro" value="Adicionar" rendered="#{bancaBean.cadastro}"
+				<p:commandButton id="adicionarCadastro" value="Adicionar" rendered="#{assuntoBean.cadastro}"
 					styleClass="ui-button-raised ui-button-success" 
 					icon="pi pi-plus"
-					action="#{bancaBean.adicionar}" update="@form :form:tabela :growl"
+					action="#{assuntoBean.adicionar}" update="@form :form:tabela :growl"
 					process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
 						<p:defaultCommand target="adicionarCadastro" />
 				</p:commandButton>

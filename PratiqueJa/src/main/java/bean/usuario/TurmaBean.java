@@ -11,9 +11,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import dao.usuario.TurmaDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.usuario.Turma;
 import bean.usuario.filtro.FiltroTurma;
+import bean.util.Mensagem;
 
 @Named
 @ViewScoped

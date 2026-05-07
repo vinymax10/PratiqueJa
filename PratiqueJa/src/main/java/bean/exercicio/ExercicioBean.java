@@ -24,15 +24,15 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import bean.AutenticacaoBean;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import bean.exercicio.filtro.FiltroExercicio;
+import bean.seguranca.AutenticacaoBean;
 import bean.usuario.ControleAcessoBean;
+import bean.util.Mensagem;
 import dao.exercicio.ExercicioDAO;
 import dao.exercicio.ResultadoExercicioDAO;
 import dao.usuario.UsuarioDAO;
-import infra.Mensagem;
 import infra.Navegacao;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;

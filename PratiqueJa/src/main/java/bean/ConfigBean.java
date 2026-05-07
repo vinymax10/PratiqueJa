@@ -13,10 +13,10 @@ import org.primefaces.event.SelectEvent;
 
 import auxiliar.ClasseAux;
 import auxiliar.ListAux;
+import bean.util.Mensagem;
 import dao.DAO;
 import exceptions.RelacaoException;
 import filtro.FiltroConfig;
-import infra.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;

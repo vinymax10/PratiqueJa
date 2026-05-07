@@ -78,16 +78,15 @@
 	</build>
 
 	<dependencies>
-	
-		<!-- expressao matematica -->
-		<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+		
+		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
-		    <groupId>org.codehaus.groovy</groupId>
-		    <artifactId>groovy-all</artifactId>
-		    <version>3.0.7</version>
-		    <type>pom</type>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.18.0</version>
 		</dependency>
-			
+		
 		<!-- latex -->
 		<dependency>
 		    <groupId>org.scilab.forge</groupId>
@@ -170,14 +169,6 @@
 		<!--			<scope>provided</scope>-->
 		<!--		</dependency>-->
 
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.18.0</version>
-		</dependency>
-
-
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
 		<dependency>
 			<groupId>org.apache.tika</groupId>
@@ -190,7 +181,14 @@
 		<dependency>
 		    <groupId>com.guicedee.services</groupId>
 		    <artifactId>org.apache.fop</artifactId>
-		    <version>1.1.1.4</version>
+		    <version>1.2.2.1</version>
+		    <scope>compile</scope>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>com.guicedee.services</groupId>
+		            <artifactId>commons-io</artifactId>
+		        </exclusion>
+		    </exclusions>
 		</dependency>
 
 		<!-- Source: https://mvnrepository.com/artifact/software.xdev/chartjs-java-model -->
@@ -309,7 +307,6 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.4.1</version>
 		</dependency>
-
 
 		<!-- para gerar pdf -->
 		<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->

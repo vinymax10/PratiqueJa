@@ -17,13 +17,13 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import dao.teste.ResultadoTesteDAO;
 import dao.teste.TesteDAO;
-import infra.Mensagem;
 import modelo.matematica.Conta;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.ResultadoTeste;
 import modelo.teste.Teste;
 import bean.teste.filtro.FiltroTeste;
+import bean.util.Mensagem;
 
 @Named
 @SessionScoped

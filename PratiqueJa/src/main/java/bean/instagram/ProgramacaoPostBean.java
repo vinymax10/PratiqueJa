@@ -13,11 +13,11 @@ import jakarta.inject.Named;
 import org.primefaces.event.ReorderEvent;
 
 import dao.instagram.ProgramacaoPostDAO;
-import infra.Mensagem;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.instagram.ConfigPost;
 import modelo.instagram.ProgramacaoPost;
 import bean.assuntocurso.AssuntoCursoBean;
+import bean.util.Mensagem;
 
 @Named
 @ViewScoped

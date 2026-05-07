@@ -17,13 +17,13 @@ import auxiliar.FileAux;
 import auxiliar.Graphics;
 import dao.instagram.ConfigPostDAO;
 import dao.instagram.ImagemPostDAO;
-import infra.Mensagem;
 import modelo.instagram.ConfigPost;
 import modelo.instagram.ImagemPost;
 import modelo.usuario.Usuario;
-import bean.AutenticacaoBean;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
+import bean.seguranca.AutenticacaoBean;
+import bean.util.Mensagem;
 
 @Named
 @SessionScoped

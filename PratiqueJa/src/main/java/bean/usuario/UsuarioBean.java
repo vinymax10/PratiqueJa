@@ -23,12 +23,12 @@ import org.primefaces.model.file.UploadedFile;
 
 import auxiliar.Graphics;
 import dao.usuario.UsuarioDAO;
-import infra.Mensagem;
 import modelo.instagram.ConfigPost;
 import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
 import bean.instagram.ConfigPostBean;
 import bean.usuario.filtro.FiltroUsuario;
+import bean.util.Mensagem;
 
 @Named
 @SessionScoped
@@ -179,7 +179,7 @@ public class UsuarioBean implements Serializable
 
 	public void validateEmail(FacesContext context, UIComponent component, Object email)
 	{
-		Usuario usuariosBanco = usuarioDAO.getUsuario((String) email);
+		Usuario usuariosBanco = usuarioDAO.getUsuario((String) email,"");
 		if(this.usuario.getId() == null && usuariosBanco != null
 		|| (this.usuario.getId() != null && usuariosBanco != null && !this.usuario.getId().equals(usuariosBanco.getId())))
 		{

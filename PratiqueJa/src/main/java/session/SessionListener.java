@@ -3,16 +3,16 @@ package session;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import bean.AutenticacaoBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
+import service.AcessoService;
 
 public class SessionListener implements HttpSessionListener
 {
 
 	@Inject
-	AutenticacaoBean autenticacaoBean;
+	private AcessoService acessoService;
 
 	public void sessionCreated(HttpSessionEvent event)
 	{
@@ -21,7 +21,7 @@ public class SessionListener implements HttpSessionListener
 
 	public void sessionDestroyed(HttpSessionEvent event)
 	{
-		autenticacaoBean.salvarAcessoLogout(event.getSession().getId(), true);
+		acessoService.registrarLogout(event.getSession().getId());
 		String ultimoAcesso = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).format(new Date(event.getSession().getLastAccessedTime()));
 		System.out.println("Sessão expirada " + event.getSession().getId() + ". Ultimo Acesso = " + ultimoAcesso);
 	}

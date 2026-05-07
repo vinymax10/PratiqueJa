@@ -44,7 +44,7 @@ public class AuditoriaService implements Serializable
 	@Inject
 	private AuditoriaEventoDAO auditoriaEventoDAO;
 
-	@PersistenceContext(unitName = "LojaRoupa")
+	@PersistenceContext(unitName = "PratiqueJa")
 	private EntityManager em;
 
 	private final Javers javers = JaversBuilder.javers().build();

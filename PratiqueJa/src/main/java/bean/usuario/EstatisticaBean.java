@@ -13,7 +13,7 @@ import dao.usuario.ControleAcessoDAO;
 import dao.usuario.UsuarioDAO;
 import infra.DadosGrafico;
 import infra.GraficoPeriodo;
-import modelo.usuario.Acesso;
+import modelo.seguranca.Acesso;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.Usuario;
 
@@ -298,8 +298,7 @@ public class EstatisticaBean implements Serializable
 		int count = 0;
 		for(Acesso acesso : acessos)
 		{
-			if((acesso.getData().isAfter(a) || acesso.getData().isEqual(a)) && acesso.getData().isBefore(b))
-				count += acesso.getMinutos();
+			count += acesso.getDuracao();
 		}
 		return count;
 	}	

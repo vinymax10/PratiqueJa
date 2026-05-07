@@ -16,11 +16,11 @@ import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import bean.exercicio.ConfigDownload;
 import bean.usuario.ControleAcessoBean;
+import bean.util.Mensagem;
 import dao.questao.AlternativaDAO;
 import dao.questao.QuestaoDAO;
 import dao.questao.ResultadoQuestaoDAO;
 import dao.usuario.UsuarioDAO;
-import infra.Mensagem;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -180,8 +180,8 @@ public class QuestaoBean implements Serializable
 					+ "\nPor favor faça o upgrade de sua conta.");
 			}
 			else
-				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Nenhuma questão carregada", 
-				"Por favor utilize o filtro para carregar as questões.");
+				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Nenhuma questão carregada. "
+				+ "Por favor utilize o filtro para carregar as questões.");
 		}
 	}
 	
@@ -197,13 +197,13 @@ public class QuestaoBean implements Serializable
 					salvarResultadoQuestao(questao);
 					
 					if(questao.getAlternativaEscolhida().isCorreta())
-						Mensagem.send("msg", FacesMessage.SEVERITY_INFO, "Resposta correta.", "");
+						Mensagem.send("msg", FacesMessage.SEVERITY_INFO, "Resposta correta.");
 					else
 					{
 						Alternativa correta = questaoDAO.getAlternativaCorreta(questao);
 						if(correta != null)
 							Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, 
-							"Resposta errada. A aternativa correta é a letra " + correta.getLetra(), "");
+							"Resposta errada. A aternativa correta é a letra " + correta.getLetra());
 					}
 
 					if(!questao.isJaFezQuestao())
@@ -214,7 +214,7 @@ public class QuestaoBean implements Serializable
 				}
 				else
 				{
-					Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, "Por favor escolha uma alternativa.", "");
+					Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, "Por favor escolha uma alternativa.");
 				}
 			}
 			else

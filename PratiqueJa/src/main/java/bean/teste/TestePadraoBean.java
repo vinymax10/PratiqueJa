@@ -12,12 +12,12 @@ import jakarta.inject.Named;
 import dao.AssuntoCursoDAO;
 import dao.teste.ConteudoTesteDAO;
 import dao.teste.TestePadraoDAO;
-import infra.Mensagem;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.TestePadrao;
 import bean.teste.filtro.FiltroTestePadrao;
+import bean.util.Mensagem;
 
 @Named
 @ViewScoped

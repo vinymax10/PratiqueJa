@@ -198,7 +198,7 @@ public class TikTok
 
 	public void cabecalho()
 	{
-		latex+="\\includegraphics[width=100px]{logo2.png}\r\n";
+		latex+="\\includegraphics[width=100px]{logo.png}\r\n";
 		if(programacaoPost.isTeste())
 			latex+="\\textcolor{black!20}{\\normalsize ~~\\textbf{Imagem de Teste}}";
 	}

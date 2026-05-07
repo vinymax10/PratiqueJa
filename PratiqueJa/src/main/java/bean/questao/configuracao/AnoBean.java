@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.util.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
@@ -15,7 +16,6 @@ import jakarta.inject.Named;
 
 import dao.questao.configuracao.AnoDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.questao.configuracao.Ano;
 
 @Named

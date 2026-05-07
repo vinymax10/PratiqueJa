@@ -141,7 +141,7 @@ public class FolhaRosto
 		+ "\\begin{titlepage}\r\n"
 		+ "\\begin{center}\r\n"
 		+ "\\vspace*{1cm}\r\n"
-		+ "\\includegraphics[width=0.3\\textwidth]{logo2.png}\\\\[3cm]\r\n "
+		+ "\\includegraphics[width=0.3\\textwidth]{logo.png}\\\\[3cm]\r\n "
 		+ "\\textbf{\\Huge Pratique Já}\\\\[0.5cm]\r\n"
 		+ "\\textbf{\\Large Matemática com Exercícios}\\\\[2cm]\r\n"
 		+ "\\textbf{\\Large Módulo: "+modulo.getNome()+"}\\\\[2cm]\r\n"
@@ -159,7 +159,7 @@ public class FolhaRosto
 		if(!logo.exists())
 		{
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	        File origem = new File(externalContext.getRealPath("image") + "/logo2.png");
+	        File origem = new File(externalContext.getRealPath("image") + "/logo.png");
 			try
 			{
 				Files.copy(origem.toPath(), logo.toPath());

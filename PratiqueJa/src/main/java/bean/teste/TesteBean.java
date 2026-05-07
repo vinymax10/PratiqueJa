@@ -10,7 +10,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import dao.teste.TesteDAO;
-import infra.Mensagem;
 import infra.Navegacao;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.matematica.Conta;
@@ -22,6 +21,7 @@ import modelo.usuario.Usuario;
 import session.SessionContext;
 import bean.teste.filtro.FiltroTeste;
 import bean.usuario.ControleAcessoBean;
+import bean.util.Mensagem;
 
 @Named
 @SessionScoped

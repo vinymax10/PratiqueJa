@@ -1,11 +1,8 @@
 package matematica.basico.divisaonatural;
 
 import jakarta.persistence.Entity;
-
 import matematica.basico.resolucaonatural.ResolucaoNatural;
 import modelo.matematica.Conta;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
 
 @Entity
 public class DivisaoNaturalNivel2 extends Conta

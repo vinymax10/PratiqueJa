@@ -16,9 +16,9 @@ import jakarta.inject.Named;
 
 import org.primefaces.event.CellEditEvent;
 
+import bean.util.Mensagem;
 import dao.instagram.CtaDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.instagram.Cta;
 import modelo.instagram.FinalidadeCta;
 

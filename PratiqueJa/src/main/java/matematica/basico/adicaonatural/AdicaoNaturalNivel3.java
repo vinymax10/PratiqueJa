@@ -1,12 +1,8 @@
 package matematica.basico.adicaonatural;
 
-import modelo.matematica.Conta;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
-
 import jakarta.persistence.Entity;
-
 import matematica.basico.resolucaonatural.ResolucaoNatural;
+import modelo.matematica.Conta;
 
 @Entity
 public class AdicaoNaturalNivel3 extends Conta {

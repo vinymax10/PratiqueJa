@@ -2,6 +2,7 @@ package bean.configuracao;
 
 import java.io.Serializable;
 
+import bean.util.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -9,7 +10,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import dao.configuracao.ConfigCleanupDAO;
-import infra.Mensagem;
 import modelo.configuracao.ConfigCleanup;
 
 @Named

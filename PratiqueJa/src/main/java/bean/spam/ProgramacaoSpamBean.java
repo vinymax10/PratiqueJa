@@ -13,12 +13,12 @@ import jakarta.inject.Named;
 import org.primefaces.event.ReorderEvent;
 
 import dao.spam.ProgramacaoSpamDAO;
-import infra.Mensagem;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.spam.ConfigSpam;
 import modelo.spam.ProgramacaoSpam;
 import bean.assuntocurso.AssuntoCursoBean;
 import bean.instagram.EnvioPostBean;
+import bean.util.Mensagem;
 
 @Named
 @ViewScoped

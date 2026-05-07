@@ -1,0 +1,151 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			<p:card class="newBorder mb-3 mt-3" style="width: 100%;">
+				<div class="ui-fluid gride">
+
+				    <h4 class="title-card col-12">Filtro</h4>
+				
+				    <!-- Resumo -->
+				    <h:panelGroup styleClass="campo col-12 md:col-12 lg:col-7 xl:col-6">
+				        <p:outputLabel for="@next" value="Resumo" />
+				        <p:inputText value="#{auditoriaBean.filtro.resumo}"
+				                     placeholder="Resumo" />
+				    </h:panelGroup>
+				
+				    <!-- IP -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-5 xl:col-3">
+				        <p:outputLabel for="@next" value="IP" />
+				        <p:inputText value="#{auditoriaBean.filtro.ip}"
+				                     placeholder="Ex.: 172.0.0.1" />
+				    </h:panelGroup>
+				
+				    <!-- Navegador -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-7 xl:col-3">
+				        <p:outputLabel for="@next" value="Navegador" />
+				        <p:inputText value="#{auditoriaBean.filtro.userAgent}"
+				                     placeholder="Ex.: Mozilla" />
+				    </h:panelGroup>
+				
+				    <!-- Tipo -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-5 xl:col-3">
+				        <p:outputLabel for="@next" value="Tipo" />
+				
+				        <p:selectOneMenu value="#{auditoriaBean.filtro.tipo}"
+				                         filter="true"
+				                         filterMatchMode="contains">
+				
+				            <f:selectItem itemLabel="Selecione"
+				                          itemValue="#{null}"
+				                          noSelectionOption="true"/>
+				
+				            <f:selectItems value="#{auditoriaBean.tiposEvento}"
+				                           var="opcao"
+				                           itemLabel="#{opcao.nome}"
+				                           itemValue="#{opcao}" />
+				
+				        </p:selectOneMenu>
+				    </h:panelGroup>
+				
+				    <!-- Usuário -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+				        <p:outputLabel for="@next" value="Usuário" />
+				
+				        <p:selectOneMenu value="#{auditoriaBean.filtro.usuario}"
+				                         filter="true"
+				                         filterMatchMode="contains"
+				                         converter="generic">
+				
+				            <f:selectItem itemLabel="Selecione"
+				                          itemValue="#{null}"
+				                          noSelectionOption="true"/>
+				
+				            <f:selectItems value="#{usuarioBean.usuariosLoja()}"
+				                           var="opcao"
+				                           itemLabel="#{opcao.nome}"
+				                           itemValue="#{opcao}" />
+				
+				        </p:selectOneMenu>
+				    </h:panelGroup>
+				
+				    <!-- Períodos comuns -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+				        <p:outputLabel for="@next" value="Períodos Comuns"/>
+				
+				        <p:selectOneMenu id="preset"
+				                         value="#{auditoriaBean.filtro.preset}"
+				                         filter="true"
+				                         filterMatchMode="contains">
+				
+				            <f:selectItem itemLabel="Todos"
+				                          itemValue="#{null}"
+				                          noSelectionOption="true"/>
+				
+				            <f:selectItems value="#{periodoPresetBean.opcoes}"
+				                           var="opcao"
+				                           itemLabel="#{opcao.nome}"
+				                           itemValue="#{opcao}"/>
+				
+				            <p:ajax event="change"
+				                    listener="#{auditoriaBean.filtro.aplicarPreset}"
+				                    update="form-auditoria:periodo"/>
+				
+				        </p:selectOneMenu>
+				    </h:panelGroup>
+				
+				    <!-- Período -->
+				    <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+				
+				        <p:outputLabel for="@next" value="Período" />
+				
+				        <p:datePicker id="periodo"
+				                      value="#{auditoriaBean.filtro.periodo}"
+				                      selectionMode="range"
+				                      placeholder="Período"
+				                      locale="pt"
+				                      monthNavigator="true"
+				                      yearNavigator="select"
+				                      readonlyInput="true"
+				                      hideOnRangeSelection="true">
+				
+				            <p:ajax event="change"
+				                    listener="#{auditoriaBean.filtro.resetPreset}"
+				                    update="form-auditoria:preset"/>
+				
+				        </p:datePicker>
+				
+				    </h:panelGroup>
+				
+				</div>
+			
+				<div class="content-button-right" >
+						
+					<div class="divisor" ></div>
+						
+					<p:commandButton value="Limpar"
+					styleClass="ui-button-flat ui-button-plain" 
+					icon="fa-solid fa-eraser" 
+					action="#{auditoriaBean.filtrarInit}" update="@form"  >
+					</p:commandButton>
+					
+					<p:commandButton id="filtrar" value="Filtrar"
+					styleClass="ui-button-raised ui-button-primary" 
+					icon="pi pi-search" 
+					action="#{auditoriaBean.filtrar}" update="@form, :growl"  process="@form"	>
+						<p:defaultCommand target="form-auditoria:filtrar"/>
+					</p:commandButton>
+						
+				</div>
+       
+			</p:card>
+				
+		</ui:composition>		
+	</h:body>
+</html>
+
+	

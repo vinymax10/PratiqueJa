@@ -102,11 +102,11 @@ public class GerarLatexExercicio
 		{
 			File origem;
 			if(FacesContext.getCurrentInstance()==null)
-				origem = new File(servletContext.getRealPath("image") + "/logo2.png");
+				origem = new File(servletContext.getRealPath("image") + "/logo.png");
 			else
 			{
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-				origem = new File(externalContext.getRealPath("image") + "/logo2.png");
+				origem = new File(externalContext.getRealPath("image") + "/logo.png");
 			}
 			try
 			{
@@ -186,7 +186,7 @@ public class GerarLatexExercicio
 		+"\\setlength{\\tabcolsep}{0em} \r\n"
 		+"\\setlength\\parindent{0pt} \r\n"
 		+"\\begin{tabular}{p{0.19\\textwidth} p{0.61\\textwidth} p{0.2\\textwidth}}\r\n" 
-		+"\\vspace{-0.5cm} \\includegraphics[width=2.7cm]{logo2.png}  & "
+		+"\\vspace{-0.5cm} \\includegraphics[width=2.7cm]{logo.png}  & "
 		+"\\BB{\\Large Exercícios } & Nota:    \\\\  \r\n" 
 		+"\\vspace{-0.5cm} \\small \\BC{pratiqueja.com} & \\vspace{-0.5cm} Nome: "+nome+" & \\vspace{-0.5cm} Data:  \\\\ "
 		+"\\multicolumn{3}{l}{\\footnotesize "

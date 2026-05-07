@@ -69,7 +69,7 @@ public class InstagramFeedAntigo
 		if(!logo.exists())
 		{
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	        File origem = new File(externalContext.getRealPath("image") + "/logo2.png");
+	        File origem = new File(externalContext.getRealPath("image") + "/logo.png");
 			try
 			{
 				Files.copy(origem.toPath(), logo.toPath());
@@ -149,7 +149,7 @@ public class InstagramFeedAntigo
 	
 	public void cabecalho()
 	{
-		latex+="\\includegraphics[width=60px]{logo2.png}\r\n"; 
+		latex+="\\includegraphics[width=60px]{logo.png}\r\n"; 
 	}
 	
 	public void caput()

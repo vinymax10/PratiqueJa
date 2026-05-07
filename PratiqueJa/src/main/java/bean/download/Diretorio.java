@@ -78,7 +78,7 @@ public class Diretorio implements Serializable
 	
 	public String getEnderecoLogo()
 	{
-		return converte(getEndereco()+"/logo2.png");
+		return converte(getEndereco()+"/logo.png");
 	}
 	
 	public String getEnderecoBackground()

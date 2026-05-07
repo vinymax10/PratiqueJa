@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import auxiliar.ListAux;
+import bean.util.Mensagem;
 import dao.questao.configuracao.BancaDAO;
 import exceptions.ContensException;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;

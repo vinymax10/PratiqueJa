@@ -155,13 +155,13 @@ public class ExercicioPDF
 		try
 		{
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			imagem = Image.getInstance(externalContext.getRealPath("image") + "/logo2.png");
+			imagem = Image.getInstance(externalContext.getRealPath("image") + "/logo.png");
 		}
 		catch(java.lang.NoSuchMethodError | BadElementException | IOException e)
 		{
 			try
 			{
-				imagem = Image.getInstance("src/main/webapp/image/logo2.png");
+				imagem = Image.getInstance("src/main/webapp/image/logo.png");
 			}
 			catch(BadElementException | IOException e1)
 			{

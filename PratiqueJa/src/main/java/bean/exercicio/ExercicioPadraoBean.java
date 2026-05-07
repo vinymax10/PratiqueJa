@@ -9,9 +9,9 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import dao.exercicio.ExercicioPadraoDAO;
-import infra.Mensagem;
 import modelo.exercicio.ExercicioPadrao;
 import bean.exercicio.filtro.FiltroExercicioPadrao;
+import bean.util.Mensagem;
 
 @Named
 @ViewScoped

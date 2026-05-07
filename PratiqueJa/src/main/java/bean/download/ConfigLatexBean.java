@@ -2,6 +2,7 @@ package bean.download;
 
 import java.io.Serializable;
 
+import bean.util.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
@@ -9,7 +10,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import dao.configuracao.ConfigLatexDAO;
-import infra.Mensagem;
 import modelo.configuracao.ConfigLatex;
 
 @Named

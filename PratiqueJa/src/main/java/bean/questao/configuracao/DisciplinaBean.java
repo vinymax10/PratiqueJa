@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.util.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
@@ -12,7 +13,6 @@ import jakarta.inject.Named;
 
 import dao.questao.configuracao.DisciplinaDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.questao.configuracao.Disciplina;
 
 @Named

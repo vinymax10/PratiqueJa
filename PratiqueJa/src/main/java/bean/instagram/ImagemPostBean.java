@@ -24,12 +24,12 @@ import auxiliar.Graphics;
 import dao.instagram.BackgroundDAO;
 import dao.instagram.ImagemPostDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.instagram.Background;
 import modelo.instagram.ConfigPost;
 import modelo.instagram.ImagemPost;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
+import bean.util.Mensagem;
 
 @Named
 @SessionScoped

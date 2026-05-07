@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import bean.util.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -16,7 +17,6 @@ import jakarta.inject.Named;
 
 import dao.instagram.HashtagDAO;
 import exceptions.RelacaoException;
-import infra.Mensagem;
 import modelo.instagram.Hashtag;
 
 @Named

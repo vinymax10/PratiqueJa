@@ -25,8 +25,6 @@ import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 
 import auxiliar.StringAux;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -53,7 +51,7 @@ import pdf.Convert;
 
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "exercicio", "etapaTeste", "file", "imagemResolucao", "baos", "baosResolucao", "rand", "binding", "shell", "textGroovy" })
+@ToString(exclude = { "exercicio", "etapaTeste", "file", "imagemResolucao", "baos", "baosResolucao", "rand" })
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -135,9 +133,6 @@ public abstract class Conta implements Serializable, Entidade
 	protected Blob imagemResolucao;
 
 	@Transient
-	protected String textGroovy;
-
-	@Transient
 	protected ByteArrayOutputStream baos;
 
 	@Transient
@@ -145,12 +140,6 @@ public abstract class Conta implements Serializable, Entidade
 
 	@Transient
 	protected Random rand = new Random();
-
-	@Transient
-	protected Binding binding;
-
-	@Transient
-	protected GroovyShell shell;
 
 	public Conta(int index)
 	{
@@ -195,7 +184,6 @@ public abstract class Conta implements Serializable, Entidade
 	public void clone(Conta conta)
 	{
 		this.indice = conta.indice;
-		this.textGroovy = conta.textGroovy;
 		this.textLatex = conta.textLatex;
 		this.resultadoCorreto = conta.resultadoCorreto;
 		this.respostaAlunoBol = conta.respostaAlunoBol;

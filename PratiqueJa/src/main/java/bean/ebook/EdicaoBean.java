@@ -2,8 +2,8 @@ package bean.ebook;
 
 import java.io.Serializable;
 
+import bean.util.Mensagem;
 import dao.configuracao.EdicaoDAO;
-import infra.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;

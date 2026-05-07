@@ -7,8 +7,8 @@ import java.util.List;
 
 import auxiliar.StringAux;
 import bean.usuario.filtro.FiltroContato;
+import bean.util.Mensagem;
 import dao.usuario.ContatoDAO;
-import infra.Mensagem;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;

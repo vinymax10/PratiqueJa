@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+		<p:dialog id="dialog-auditoria"
+			class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+			header="Auditoria de #{auditoriaBean.nomeTitle}" showEffect="fade"
+			hideEffect="fade" width="100%;" modal="true"
+			widgetVar="dialogAuditoria" responsive="true">
+			<h:form id="form-auditoria" class="form">
+				
+				<div class="gride m-3" >
+			
+					<div class="col-6">
+						<p:selectBooleanButton style="width:10rem"
+							value="#{auditoriaBean.mostrarFiltro}"
+							offLabel="Mostrar Filtro" onLabel="Ocultar Filtro"
+							offIcon="pi pi-search-plus" onIcon="pi pi-search-minus">
+							<f:ajax event="change" process="@this"
+								render="form-auditoria:filtro form-auditoria" />
+						</p:selectBooleanButton>
+					</div>
+			
+					<div class="col-6 text-right">
+						<ui:include src="/auditoria/exportar.xhtml" />
+					</div>
+			
+					<h:panelGroup id="filtro" style="width:100%;">
+				
+						<h:panelGroup style="width:100%;"
+						rendered="#{auditoriaBean.mostrarFiltro}" >
+							<ui:include src="/auditoria/filtro.xhtml" />
+						</h:panelGroup>
+							
+					</h:panelGroup>
+							
+					<p:dataView value="#{auditoriaBean.auditorias}" var="registro" style="width:100%"
+		            paginator="true" rows="10" paginatorAlwaysVisible="false" emptyMessage="">
+						<p:dataViewListItem>
+						
+							<p:card class="newBorder mt-3 mb-3" style="width:100%">
+								<div class="grid panelStatus m-0">
+
+								    <!-- Tipo -->
+								    <h:panelGroup
+								        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-row align-items-center gap-2">
+								
+								        <h:outputText styleClass="title" value="Tipo:" />
+								
+								        <ui:include src="/status/status.xhtml">
+								            <ui:param name="status" value="#{registro.tipo}" />
+								        </ui:include>
+								
+								    </h:panelGroup>
+								
+								    <!-- Usuário -->
+								    <h:panelGroup
+								        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-row align-items-center gap-1">
+								
+								        <h:outputText styleClass="title" value="Usuário:" />
+								
+								        <h:outputText
+								            styleClass="status"
+								            value="#{registro.usuario.nome}" />
+								
+								    </h:panelGroup>
+								
+								    <!-- IP -->
+								    <h:panelGroup
+								        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-row align-items-center gap-1">
+								
+								        <h:outputText styleClass="title" value="IP:" />
+								
+								        <h:outputText
+								            styleClass="status"
+								            value="#{registro.ip}" />
+								
+								    </h:panelGroup>
+								
+								    <!-- Data -->
+								    <h:panelGroup
+								        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-row align-items-center gap-1">
+								
+								        <h:outputText styleClass="title" value="Data:" />
+								
+								        <h:outputText
+								            styleClass="status"
+								            value="#{registro.dataEvento}">
+								
+								            <f:convertDateTime
+								                pattern="dd/MM/yyyy HH:mm"
+								                type="localDateTime" />
+								
+								        </h:outputText>
+								
+								    </h:panelGroup>
+								
+								    <!-- Navegador -->
+								    <h:panelGroup
+								        styleClass="col-12 flex flex-row align-items-center gap-1">
+								
+								        <h:outputText styleClass="title" value="Navegador:" />
+								
+								        <h:outputText
+								            styleClass="status"
+								            value="#{registro.userAgent}" />
+								
+								    </h:panelGroup>
+								
+								    <!-- Resumo -->
+								    <h:panelGroup
+								        styleClass="col-12 flex flex-column gap-1">
+								
+								        <h:outputText styleClass="title" value="Resumo:" />
+								
+								        <ui:repeat value="#{registro.itensResumo}" var="item">
+								
+								            <h:outputText
+								                styleClass="status"
+								                value="#{item}" />
+								
+								        </ui:repeat>
+								
+								    </h:panelGroup>
+								
+								</div>
+							</p:card>
+					
+						</p:dataViewListItem>
+					 
+					</p:dataView>
+					
+					<h:outputText class="title"
+						value="Não há registros recentes de auditoria."
+						rendered="#{empty auditoriaBean.auditorias}" />
+				</div>
+			</h:form>
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>
+
+

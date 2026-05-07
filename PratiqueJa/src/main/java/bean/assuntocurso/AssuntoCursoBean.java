@@ -7,9 +7,9 @@ import java.util.List;
 import org.primefaces.event.ReorderEvent;
 
 import bean.questao.QuestaoBean;
+import bean.util.Mensagem;
 import dao.AssuntoCursoDAO;
 import dao.teste.ResultadoTesteDAO;
-import infra.Mensagem;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;

@@ -13,7 +13,7 @@
 			modal="true" widgetVar="loginWidget" responsive="true">
 			<h:form id="formLogin" enctype="multipart/form-data" >
 				<div style="text-align: center;">
-					<img alt="user header" src="/image/logo2.png" style="width: 300px;" />
+					<img alt="user header" src="/image/logo.png" style="width: 300px;" />
 				</div>
 				<div class="ui-fluid formgrid grid">
 	
@@ -29,7 +29,6 @@
 					<div class="campoMsg col-12">
 						<p:outputLabel for="senha" value="Senha" />
 						<p:password id="senha" value="#{autenticacaoBean.senha}"
-							validator="#{autenticacaoBean.validateSenha}" 
 							required="true" requiredMessage="A senha é obrigatória"/>
 						<p:message id="msgSenha" for="senha" display="text" />
 					</div>

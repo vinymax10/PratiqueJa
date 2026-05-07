@@ -1,6 +1,7 @@
 package dao.usuario;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.NoResultException;
@@ -10,7 +11,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import dao.DAO;
-import modelo.usuario.Acesso;
+import modelo.seguranca.Acesso;
 import modelo.usuario.Usuario;
 import bean.usuario.filtro.FiltroUsuario;
 
@@ -23,31 +24,39 @@ public class UsuarioDAO extends DAO<Usuario>
 		super(Usuario.class);
 	}
 
-	public Usuario getUsuario(String email)
+	public Usuario getUsuario(String email, String sub)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);
 		Root<Usuario> fromUsuario = query.from(Usuario.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
+		
+		Predicate pEntidade1 = null;
+		Predicate pEntidade2 = null;
 
-		Usuario usuario = null;
-		if(!email.equals(""))
-		{
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("email"), email));
-			TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicate).distinct(true));
-			try
-			{
-				usuario = typedQuery.getSingleResult();
-			}
-			catch(NoResultException e)
-			{
-				return null;
-			}
-		}
-		return usuario;
+		if(email != null && !email.isBlank())
+			pEntidade1 = builder.equal(fromUsuario.get("email"), email);
+
+		if(sub != null && !sub.isBlank())
+			pEntidade2 = builder.equal(fromUsuario.get("subGoogle"), sub);
+
+		if(pEntidade1 != null && pEntidade2 != null)
+			predicates.add(builder.or(pEntidade1, pEntidade2));
+		else if(pEntidade1 != null)
+			predicates.add(pEntidade1);
+		else if(pEntidade2 != null)
+			predicates.add(pEntidade2);
+		
+		TypedQuery<Usuario> typedQuery = em
+		.createQuery(query.select(fromUsuario)
+		.where(predicates.toArray(new Predicate[0])));
+		List<Usuario> list = typedQuery.getResultList();
+
+		if(list.size()==1)
+			return list.get(0);
+		
+		return null;
 	}
 
 	public Usuario getUsuarioGoogle(String sub)

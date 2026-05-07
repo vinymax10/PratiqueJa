@@ -1,6 +1,5 @@
 package modelo.usuario;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import modelo.Ativo;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
@@ -31,12 +31,13 @@ import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.instagram.ConfigPost;
 import modelo.questao.ResultadoQuestao;
+import modelo.seguranca.Acesso;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
 @Data
 @Entity
-public class Usuario implements Serializable, Entidade
+public class Usuario extends Ativo implements Entidade
 {
 	private static final long serialVersionUID = 1L;
 
@@ -123,6 +124,9 @@ public class Usuario implements Serializable, Entidade
 	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private ConfigPost configPost;
+	
+	@DiffIgnore
+	private boolean resetSenha;
 
 	public String getFirstNome()
 	{

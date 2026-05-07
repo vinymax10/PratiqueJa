@@ -2,13 +2,13 @@ package bean.questao;
 
 import java.io.Serializable;
 
+import bean.util.Mensagem;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import dao.questao.AlternativaDAO;
-import infra.Mensagem;
 import modelo.questao.Alternativa;
 import modelo.questao.Questao;
 

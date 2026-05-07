@@ -1,4 +1,4 @@
-package dao.usuario;
+package dao.seguranca;
 
 import java.util.List;
 
@@ -9,7 +9,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import dao.DAO;
-import modelo.usuario.Acesso;
+import modelo.seguranca.Acesso;
+import modelo.seguranca.StatusAcesso;
 import modelo.usuario.Usuario;
 import bean.usuario.filtro.FiltroAcesso;
 
@@ -34,7 +35,7 @@ public class AcessoDAO extends DAO<Acesso>
 
 		Acesso acesso = null;
 
-		predicate = builder.and(predicate, builder.equal(fromAcesso.get("finalizado"), false));
+		predicate = builder.and(predicate, builder.equal(fromAcesso.get("status"), StatusAcesso.ATIVO));
 		predicate = builder.and(predicate, builder.equal(fromAcesso.get("idSessao"), idSessao));
 
 		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicate));
@@ -71,11 +72,6 @@ public class AcessoDAO extends DAO<Acesso>
 			predicate = builder.and(predicate, builder.equal(fromAcesso.get("idSessao"), filtroAcesso.getIdSessao()));
 		}
 
-		if(filtroAcesso.getFinalizado() != null)
-		{
-			predicate = builder.and(predicate, builder.equal(fromAcesso.get("finalizado"), filtroAcesso.getFinalizado().booleanValue()));
-		}
-
 		if(filtroAcesso.getInicio() != null)
 		{
 			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getInicio()));
@@ -100,24 +96,6 @@ public class AcessoDAO extends DAO<Acesso>
 		List<Acesso> list = typedQuery.getResultList();
 
 		return list;
-	}
-
-	public List<Acesso> acessosAtivos()
-	{
-		em.clear();
-
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
-		Root<Acesso> fromAcesso = query.from(Acesso.class);
-
-		Predicate predicate = builder.and();
-
-		predicate = builder.and(predicate, builder.equal(fromAcesso.get("finalizado"), false));
-
-		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicate));
-		List<Acesso> listaUsuario = typedQuery.getResultList();
-
-		return listaUsuario;
 	}
 
 }

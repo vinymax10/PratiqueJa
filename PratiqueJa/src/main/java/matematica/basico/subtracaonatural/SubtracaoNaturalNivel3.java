@@ -2,13 +2,9 @@ package matematica.basico.subtracaonatural;
 
 
 
-import modelo.matematica.Conta;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
-
 import jakarta.persistence.Entity;
-
 import matematica.basico.resolucaonatural.ResolucaoNatural;
+import modelo.matematica.Conta;
 
 @Entity
 public class SubtracaoNaturalNivel3 extends Conta

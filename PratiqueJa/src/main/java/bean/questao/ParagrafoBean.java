@@ -9,8 +9,8 @@ import javax.sql.rowset.serial.SerialException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
+import bean.util.Mensagem;
 import dao.questao.ParagrafoDAO;
-import infra.Mensagem;
 import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;

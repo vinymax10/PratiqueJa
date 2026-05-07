@@ -19,11 +19,6 @@
 	<link rel="stylesheet" href="/css/page.css" type="text/css" />
 
 
-	<link rel="stylesheet"
-		href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
-	<link rel="stylesheet"
-		href="https://unpkg.com/primeflex@3.1.0/themes/saga-blue.css" />
-
 	<!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_CHTML"></script> -->
 
 	<!-- <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
@@ -38,13 +33,8 @@
 	
 	<script type="text/javascript" src="/js/mathJaxConfig.js" ></script>
 	
-	<script src="https://kit.fontawesome.com/476989d711.js"></script>
+	<link rel="stylesheet" href="/css/fontAwesome.min.css" type="text/css" />
    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 	<link rel = "canonical" href = "https://pratiqueja.com" /> 
 	<meta name="keywords" content="aprender, matemática, aulas particulares, curso de matemática" />
 	<meta name="author" content="Pratique Já" />
@@ -80,7 +70,7 @@
 	<h:form id="formPrincipal" style="margin:0">
 		<p:menubar autoDisplay="false" styleClass="menubar">
 			<p:submenu label="Gerenciamento" icon="pi pi-cog"
-				rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+				rendered="#{sessaoBean.podeVerAdministracao()}">
 
 				<p:menuitem url="/assuntoCurso/assuntoCurso.xhtml">
 					<span style="margin-right: 10px;">Assuntos</span>
@@ -90,8 +80,7 @@
 					<span style="margin-right: 10px;">Ebook</span>
 				</p:menuitem>
 				
-				<p:submenu label="Exercícios" 
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+				<p:submenu label="Exercícios" >
 					
 					<p:menuitem url="/exercicio/exercicio/exercicio.xhtml">
 	                	Exercicios
@@ -106,8 +95,7 @@
 					</p:menuitem>
 				</p:submenu>
 				
-                <p:submenu label="Testes"
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+                <p:submenu label="Testes">
 					<p:menuitem url="/teste/teste/teste.xhtml">
 	                	Testes
 	                </p:menuitem>
@@ -122,15 +110,17 @@
 	                
                 </p:submenu>
 
-				<p:submenu label="Questões"
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+				<p:submenu label="Questões">
 					<p:menuitem url="/gestaoQuestao/lista.xhtml">
 	                	Questões
 	                </p:menuitem>
 
-					<p:submenu label="Configuração"
-						rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
-						<p:menuitem url="/gestaoQuestao/configuracao/ano.xhtml" ajax="false">
+					<p:submenu label="Configuração">
+						<p:menuitem url="/gestaoQuestao/assunto/list.xhtml" ajax="false">
+		                	Assunto
+		                </p:menuitem>
+		                
+		                <p:menuitem url="/gestaoQuestao/configuracao/ano.xhtml" ajax="false">
 		                	Ano
 		                </p:menuitem>
 
@@ -149,8 +139,7 @@
 					</p:submenu>
 				</p:submenu>
 
-				<p:submenu label="Usuários"
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+				<p:submenu label="Usuários">
 					
 					<p:menuitem url="/usuario/usuario/usuario.xhtml">
 	                	Usuários
@@ -185,8 +174,7 @@
                 	Email
                 </p:menuitem>
                 
-                <p:submenu label="Instagram"
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+                <p:submenu label="Instagram">
 					 <p:menuitem url="/instagram/hashtag.xhtml">
 	                	Hashtag
 	                </p:menuitem>
@@ -201,8 +189,7 @@
                 
 				</p:submenu>
                 
-                <p:submenu label="Configuração"
-					rendered="#{autenticacaoBean.usuario.perfil=='Admin'}">
+                <p:submenu label="Configuração">
 					 <p:menuitem url="/configuracao/configLatex/configLatex.xhtml">
 	                	Config Latex
 	                </p:menuitem>
@@ -279,22 +266,19 @@
 			</p:submenu>
 						
 			<p:menuitem icon="pi pi-fw pi-user" styleClass="menu-usuario" resetValues="true"
-			rendered="#{!controleAcessoBean.estaLogado()}" update="formLogin"
-			action="#{autenticacaoBean.resetLogin()}"
+			rendered="#{!sessaoBean.logado}" update="formLogin"
+			action="#{autenticacaoBean.init()}"
 			oncomplete="PF('loginWidget').show();return false;">
 				Login
 			</p:menuitem>
 			
-			<p:submenu label="#{autenticacaoBean.usuario.firstNome}" rendered="#{controleAcessoBean.estaLogado()}"
-				icon="#{autenticacaoBean.usuario.perfil=='Bronze'? 'pi pi-star-fill': ''} 
-				#{autenticacaoBean.usuario.perfil=='Prata'? 'fa-solid fa-crown': ''}
-				#{autenticacaoBean.usuario.perfil=='Ouro'? 'fa-solid fa-gem': ''}
-				#{autenticacaoBean.usuario.perfil=='Admin'? 'fa-brands fa-hackerrank': ''}" styleClass="menu-usuario">
+			<p:submenu label="#{sessaoBean.usuario.firstNome}" rendered="#{sessaoBean.logado}"
+				styleClass="menu-usuario">
 				
-				<p:menuitem value="Cadastro" icon="fa fa-regular fa-address-card" process="@this"
-					update="formEditarUsuario" action="#{usuarioBean.editar(autenticacaoBean.usuario)}"
-					oncomplete="PF('editarUsuarioWidget').show()">
-				</p:menuitem>
+<!-- 				<p:menuitem value="Cadastro" icon="fa fa-regular fa-address-card" process="@this" -->
+<!-- 					update="formEditarUsuario" action="#{usuarioBean.editar(autenticacaoBean.usuario)}" -->
+<!-- 					oncomplete="PF('editarUsuarioWidget').show()"> -->
+<!-- 				</p:menuitem> -->
 
 				 <p:menuitem icon="pi pi-instagram" rendered="#{autenticacaoBean.usuario.criador}"
 				 url="/post/configuracao.xhtml?configPost=#{autenticacaoBean.usuario.configPost.id}" >
@@ -305,11 +289,11 @@
 					onclick="PF('meuPlanoWidget').show();" update="formMeuPlano">
 				</p:menuitem>
 
-				<p:menuitem value="Atualizar Senha" icon="fa fa-solid fa-key" process="@this" 
-					resetValues="true"
-					update="formAtualizacaoSenha" action="#{autenticacaoBean.resetLogin()}"
-					oncomplete="PF('atualizacaoSenhaWidget').show()">
-				</p:menuitem>
+<!-- 				<p:menuitem value="Atualizar Senha" icon="fa fa-solid fa-key" process="@this"  -->
+<!-- 					resetValues="true" -->
+<!-- 					update="formAtualizacaoSenha" action="#{autenticacaoBean.resetLogin()}" -->
+<!-- 					oncomplete="PF('atualizacaoSenhaWidget').show()"> -->
+<!-- 				</p:menuitem> -->
 
 				<p:menuitem value="Logout" icon="pi pi-sign-out" 
 				update="@form :formPrincipal :growl" ajax="true"
@@ -326,8 +310,8 @@
 <!-- 		<ui:include src="/template/post/configPost.xhtml" /> -->
 		
 		<ui:include src="/template/editarUsuario.xhtml" />
-		<ui:include src="/template/resetSenha.xhtml" />
-		<ui:include src="/template/atualizacaoSenha.xhtml" />
+<!-- 		<ui:include src="/template/resetSenha.xhtml" /> -->
+<!-- 		<ui:include src="/template/atualizacaoSenha.xhtml" /> -->
 		
 		<ui:include src="/template/login.xhtml" />
 
@@ -349,6 +333,18 @@
 
 		</div>
 	</footer>
+	
+	<h:panelGroup rendered="#{sessaoBean.podeVerAuditoria}">
+		<ui:include src="/auditoria/auditoria-dialog.xhtml" />
+	</h:panelGroup>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		responsive="true">
+		<p:commandButton value="Não" type="button"
+			styleClass="ui-confirmdialog-no ui-button-raised ui-button-flat ui-button-primary mr-3" />
+		<p:commandButton value="Sim" type="button"
+			styleClass="ui-confirmdialog-yes ui-button-raised ui-button-primary"  />
+	</p:confirmDialog>
 
 	<script type="text/javascript" src="/js/template.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
