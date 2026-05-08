@@ -37,15 +37,11 @@ public class Ano extends Config implements Entidade
 
 	@Column(length = 255)
 	@Size(max = 255)
-	@AuditLabel(value = "nome", atributo = "nome")
+	@AuditLabel(value = "nome")
 	private String nome;
 
 	@DiffIgnore
 	@OneToMany(mappedBy = "ano")
 	private List<Questao> questoes = new ArrayList<Questao>();
 
-	public void setNome(String nome)
-	{
-		this.nome = nome.toUpperCase();
-	}
 }

@@ -1,283 +1,50 @@
 package bean.questao.configuracao;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
 
-import bean.util.Mensagem;
-import jakarta.annotation.PostConstruct;
-import jakarta.faces.application.FacesMessage;
+import bean.ConfigBean;
+import dao.questao.configuracao.OrgaoDAO;
+import exceptions.RelacaoException;
+import filtro.FiltroOrgao;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import dao.questao.configuracao.OrgaoDAO;
-import exceptions.ContensException;
-import exceptions.RelacaoException;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.auditoria.TipoEvento;
 import modelo.questao.configuracao.Orgao;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class OrgaoBean implements Serializable
+public class OrgaoBean extends ConfigBean<Orgao, OrgaoDAO>
 {
-
-	private static final long serialVersionUID = 1L;
-
-	private String nome = "Órgão";
-
-	private Orgao entidade;
-
 	@Inject
-	private Orgao entidadeNova;
+	private FiltroOrgao filtro;
 
-	@Inject
-	private OrgaoDAO entidadeDAO;
-
-	private List<Orgao> lista = new ArrayList<Orgao>();
-	private List<Orgao> listaBusca = new ArrayList<Orgao>();
-
-	private boolean cadastro = true;
-
-	private String nomeFiltro;
-
-	private String siglaFiltro;
-
-	public String adicionar()
+	public OrgaoBean()
 	{
-		try
-		{
-			podeAdicionar();
-			entidadeDAO.salvar(entidadeNova);
-			lista.add(entidadeNova);
-			this.entidadeNova = new Orgao();
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
-		}
-		catch (ContensException e)
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar o " + nome);
-		}
-
-		return "";
+		super(Orgao.class, "Órgão");
+		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}
 
-	private void podeAdicionar() throws ContensException
-	{
-//		if (entidadeDAO.contains(entidadeNova))
-//			throw new ContensException(
-//			"Não foi possível adicionar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
-	}
-
-	public String salvar()
-	{
-		try
-		{
-			podeSalvar();
-			entidade=entidadeDAO.salvar(entidade);
-			this.entidade = null;
-			cadastro = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
-		}
-		catch (ContensException e)
-		{
-			entidade = entidadeDAO.refresh(entidade);
-			updateListas(entidade);
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o " + nome);
-		}
-
-		return "";
-	}
-
-	private void updateListas(Orgao entidade)
-	{
-		int index = lista.indexOf(entidade);
-		lista.remove(index);
-		lista.add(index, entidade);
-
-		if (listaBusca.contains(entidade))
-		{
-			index = listaBusca.indexOf(entidade);
-			listaBusca.remove(index);
-			listaBusca.add(index, entidade);
-		}
-	}
-
-	private void podeSalvar() throws ContensException
-	{
-//		if (entidadeDAO.contains(entidade))
-//			throw new ContensException(
-//			"Não foi possível salvar o " + nome + ". Já existe um " + nome + " com o mesmo nome.");
-	}
-
-	public String remover(Orgao entidade)
-	{
-		try
-		{
-			podeRemover(entidade);
-			lista.remove(entidade);
-			listaBusca.remove(entidade);
-			entidadeDAO.remover(entidade);
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido com sucesso.");
-		}
-		catch (RelacaoException e)
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o " + nome);
-		}
-		return "";
-	}
-
-	private void podeRemover(Orgao entidade) throws RelacaoException
-	{
-		if (entidade.getQuestoes().size() > 0)
-			throw new RelacaoException("Não foi possível remover o " + nome + ". Existem questões relacionadas.");
-	}
-
+	@Override
 	public void filtrar()
 	{
-		this.listaBusca = entidadeDAO.filtrar(nomeFiltro, siglaFiltro);
+		this.opcoes = entidadeDAO.buscar(filtro);
 	}
 
-	public void procurarConcomitancia()
+	public void filtrarInit()
 	{
-		List<Orgao> listaCompleta = entidadeDAO.listarTudo();
-		List<Orgao> listaParcial;
-		this.lista = new ArrayList<Orgao>();
-
-		for (Orgao orgao : listaCompleta)
-		{
-			listaParcial = entidadeDAO.procurarParecido(orgao);
-			if (listaParcial.size() > 0)
-			{
-				lista.add(orgao);
-				for (Orgao orgaoConcomitante : listaParcial)
-					lista.add(orgaoConcomitante);
-			}
-		}
+		filtro.limpar();
+		filtrar();
 	}
 
-	public String editar(Orgao entidade)
+	protected void podeRemover(Orgao entidade) throws RelacaoException
 	{
-		this.entidade = entidade;
-		cadastro = false;
-		return "";
+		if(entidade.getQuestoes().size() > 0)
+		throw new RelacaoException("Não foi possível remover o(a) " + nome + ". "
+		+ "Existem Questões relacionadas.");
 	}
-
-	public String cancelar()
-	{
-		this.entidade = null;
-		cadastro = true;
-		return "";
-	}
-
-	@PostConstruct
-	public void init()
-	{
-		this.lista = entidadeDAO.listarTudo();
-		this.listaBusca = entidadeDAO.listarTudo();
-	}
-
-	public Orgao getEntidade()
-	{
-		return entidade;
-	}
-
-	public void setEntidade(Orgao entidade)
-	{
-		this.entidade = entidade;
-	}
-
-	public List<Orgao> getLista()
-	{
-		return lista;
-	}
-
-	public void setLista(List<Orgao> lista)
-	{
-		this.lista = lista;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
-	public Orgao getEntidadeNova()
-	{
-		return entidadeNova;
-	}
-
-	public void setEntidadeNova(Orgao entidadeNova)
-	{
-		this.entidadeNova = entidadeNova;
-	}
-
-	public String getNomeFiltro()
-	{
-		return nomeFiltro;
-	}
-
-	public void setNomeFiltro(String nomeFiltro)
-	{
-		this.nomeFiltro = nomeFiltro;
-	}
-
-	public String getSiglaFiltro()
-	{
-		return siglaFiltro;
-	}
-
-	public void setSiglaFiltro(String siglaFiltro)
-	{
-		this.siglaFiltro = siglaFiltro;
-	}
-
-	public OrgaoDAO getEntidadeDAO()
-	{
-		return entidadeDAO;
-	}
-
-	public void setEntidadeDAO(OrgaoDAO entidadeDAO)
-	{
-		this.entidadeDAO = entidadeDAO;
-	}
-
-	public List<Orgao> getListaBusca()
-	{
-		return listaBusca;
-	}
-
-	public void setListaBusca(List<Orgao> listaBusca)
-	{
-		this.listaBusca = listaBusca;
-	}
-
 }

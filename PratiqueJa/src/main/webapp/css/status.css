@@ -1,0 +1,62 @@
+:root {
+	--azul: #2687e9;
+	--verde: #16A34A;
+	--cinza: #6b7280;
+	--vermelho: #EA7D7D;
+	--amarelo: #f0ad4e;
+	--cinza-claro: #90949d;
+	--azul-claro: #e3f2fd ; 
+	--lilas: #8B7CF6;
+}
+
+.status-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 14px;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	color: #fff;
+	
+}
+
+/*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);*/
+
+.bgVermelho{
+	border: 1px solid color-mix(in srgb, var(--vermelho) 40%, white 60%);
+	color: var(--vermelho);
+	background: color-mix(in srgb, var(--vermelho) 10%, white 90%);
+}
+
+.bgAzul{
+	border: 1px solid color-mix(in srgb, var(--azul) 40%, white 60%);
+	color: var(--azul);
+	background: color-mix(in srgb, var(--azul) 10%, white 90%);
+}
+
+.bgVerde {
+	border: 1px solid color-mix(in srgb, var(--verde) 40%, white 60%);
+	color: var(--verde);
+	background: color-mix(in srgb, var(--verde) 10%, white 90%);
+}
+
+.bgAmarelo {
+	border: 1px solid color-mix(in srgb, var(--amarelo) 40%, white 60%);
+	color: var(--amarelo);
+	background: color-mix(in srgb, var(--amarelo) 10%, white 90%);
+}
+
+.bgCinza {
+	border: 1px solid color-mix(in srgb, var(--cinza) 40%, white 60%);
+	color: var(--cinza);
+	background: color-mix(in srgb, var(--cinza) 10%, white 90%);
+}
+
+.bgLilas {
+	border: 1px solid color-mix(in srgb, var(--lilas) 40%, white 60%);
+	color: var(--lilas);
+	background: color-mix(in srgb, var(--lilas) 10%, white 90%);
+}

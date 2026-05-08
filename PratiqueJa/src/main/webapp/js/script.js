@@ -133,3 +133,51 @@ function focusFistCampo(idElement)
 	
 }
 
+// Utilizado nas telas de filtro grande. 
+// Para abrir com deslizando dropdown.
+function slideToggle(id) 
+{
+	duration = 300;
+	el = document.getElementById(id);
+  if (!el) return;
+
+  if (window.getComputedStyle(el).display === "none") {
+    // Slide Down
+    el.style.display = "block";
+    let height = el.scrollHeight;
+    el.style.overflow = "hidden";
+    el.style.height = "0px";
+    el.offsetHeight; // força reflow
+    el.style.transition = `height ${duration}ms ease`;
+    el.style.height = height + "px";
+
+    setTimeout(() => {
+      el.style.height = "";
+      el.style.overflow = "";
+      el.style.transition = "";
+    }, duration);
+  } else {
+    // Slide Up
+    let height = el.scrollHeight;
+    el.style.height = height + "px";
+    el.style.overflow = "hidden";
+    el.offsetHeight;
+    el.style.transition = `height ${duration}ms ease`;
+    el.style.height = "0px";
+
+    setTimeout(() => {
+      el.style.display = "none";
+      el.style.height = "";
+      el.style.overflow = "";
+      el.style.transition = "";
+    }, duration);
+  }
+}
+
+function manterFiltroAberto(id) {
+  const filtros = document.getElementById(id);
+  if (window.getComputedStyle(filtros).display === "none") {
+    filtros.style.display = "block";
+  }
+}
+

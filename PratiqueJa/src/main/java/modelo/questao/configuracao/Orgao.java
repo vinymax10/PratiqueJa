@@ -38,7 +38,7 @@ public class Orgao extends Config implements Entidade
 
 	@Column(length = 255)
 	@Size(max = 255)
-	@AuditLabel(value = "nome", atributo = "nome")
+	@AuditLabel(value = "nome")
 	private String nome;
 
 	@Column(length = 255)

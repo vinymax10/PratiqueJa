@@ -2,13 +2,12 @@ package dao.questao.configuracao;
 
 import java.util.List;
 
+import dao.DAO;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
-import dao.DAO;
 import modelo.questao.configuracao.Disciplina;
 
 public class DisciplinaDAO extends DAO<Disciplina>
@@ -36,9 +35,6 @@ public class DisciplinaDAO extends DAO<Disciplina>
 		}
 
 		TypedQuery<Disciplina> typedQuery = em.createQuery(query.select(fromDisciplina).where(predicate).distinct(true));
-		List<Disciplina> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
-
 }

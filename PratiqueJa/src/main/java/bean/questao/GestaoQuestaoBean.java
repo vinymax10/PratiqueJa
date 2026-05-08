@@ -248,7 +248,7 @@ public class GestaoQuestaoBean implements Serializable
 				Ano ano = new Ano();
 				ano.setNome(questaoQ.getAno().trim());
 				anoBean.getEntidadeDAO().salvar(ano);
-				anoBean.getLista().add(ano);
+				anoBean.getOpcoes().add(ano);
 				questao.setAno(ano);
 			}
 
@@ -281,7 +281,7 @@ public class GestaoQuestaoBean implements Serializable
 				banca.setNome(questaoQ.getBanca().trim());
 				banca.setSigla(questaoQ.getOrgao().trim());
 				bancaBean.getEntidadeDAO().salvar(banca);
-				bancaBean.getLista().add(banca);
+				bancaBean.getOpcoes().add(banca);
 				questao.setBanca(banca);
 			}
 
@@ -314,12 +314,12 @@ public class GestaoQuestaoBean implements Serializable
 				orgao.setNome(questaoQ.getOrgao().trim());
 				orgao.setSigla(questaoQ.getOrgao().trim());
 				orgaoBean.getEntidadeDAO().salvar(orgao);
-				orgaoBean.getLista().add(orgao);
+				orgaoBean.getOpcoes().add(orgao);
 				questao.setOrgao(orgao);
 			}
 
 			Disciplina disciplina = null;
-			List<Disciplina> disciplinas = disciplinaBean.getDisciplinaDAO().filtrar(questaoQ.getDisciplina().trim());
+			List<Disciplina> disciplinas = disciplinaBean.getEntidadeDAO().filtrar(questaoQ.getDisciplina().trim());
 			if(disciplinas.size() > 0)
 			{
 				disciplina = disciplinas.get(0);
@@ -361,7 +361,7 @@ public class GestaoQuestaoBean implements Serializable
 						assunto.setNome(str);
 						disciplina.getAssuntos().add(assunto);
 						assuntoBean.getEntidadeDAO().salvar(assunto);
-						disciplinaBean.getDisciplinaDAO().salvar(disciplina);
+						disciplinaBean.getEntidadeDAO().salvar(disciplina);
 						questao.getAssuntos().add(assunto);
 					}
 				}

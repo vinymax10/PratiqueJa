@@ -517,7 +517,7 @@ body .ui-growl .ui-growl-item-container.ui-growl-info .ui-growl-image::before {
 }
 
 .table .ui-datatable-data > tr > td {
-	padding: .5rem 1rem !important;
+	padding: .1rem 1rem !important;
 }
 
 .tableStatus .ui-datatable-data > tr > td {

@@ -2,13 +2,13 @@ package dao.questao.configuracao;
 
 import java.util.List;
 
+import dao.DAO;
+import filtro.FiltroOrgao;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
-import dao.DAO;
 import modelo.questao.configuracao.Orgao;
 
 public class OrgaoDAO extends DAO<Orgao>
@@ -20,30 +20,28 @@ public class OrgaoDAO extends DAO<Orgao>
 		super(Orgao.class);
 	}
 
-	public List<Orgao> filtrar(String nomeFiltro, String siglaFiltro)
+	public List<Orgao> buscar(FiltroOrgao filtro)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Orgao> query = builder.createQuery(Orgao.class);
 		Root<Orgao> fromOrgao = query.from(Orgao.class);
 
 		Predicate predicate = builder.and();
 
-		if(!nomeFiltro.equals(""))
-		{
-			predicate = builder.and(predicate, builder.like(fromOrgao.<String>get("nome"), "%" + nomeFiltro + "%"));
-		}
+		if(filtro.getNome() != null && !filtro.getNome().isBlank())
+			predicate = builder.and(predicate, builder.like(
+				builder.upper(fromOrgao.get("nome")), "%" + filtro.getNome().toUpperCase() + "%"));
 
-		if(!siglaFiltro.equals(""))
-		{
-			predicate = builder.and(predicate, builder.like(fromOrgao.<String>get("sigla"), "%" + siglaFiltro + "%"));
-		}
+		if(filtro.getSigla() != null && !filtro.getSigla().isBlank())
+			predicate = builder.and(predicate, builder.like(
+				builder.upper(fromOrgao.get("sigla")), "%" + filtro.getSigla().toUpperCase() + "%"));
+
+		if(filtro.getAtivo() != null)
+			predicate = builder.and(predicate, builder.equal(
+				fromOrgao.get("ativo"), filtro.getAtivo()));
 
 		TypedQuery<Orgao> typedQuery = em.createQuery(query.select(fromOrgao).where(predicate).distinct(true));
-		List<Orgao> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
 
 	public List<Orgao> procurarParecido(Orgao orgao)
@@ -57,13 +55,12 @@ public class OrgaoDAO extends DAO<Orgao>
 		Predicate predicate = builder.and();
 
 		predicate = builder.and(predicate, builder.notEqual(fromOrgao.get("id"), orgao.getId()));
-		predicate = builder.and(predicate, builder.or(builder.like(fromOrgao.<String>get("nome"), "%" + orgao.getNome() + "%"),
-		builder.like(fromOrgao.<String>get("sigla"), "%" + orgao.getSigla() + "%")));
+		predicate = builder.and(predicate, builder.or(
+			builder.like(fromOrgao.<String>get("nome"), "%" + orgao.getNome() + "%"),
+			builder.like(fromOrgao.<String>get("sigla"), "%" + orgao.getSigla() + "%")));
 
 		TypedQuery<Orgao> typedQuery = em.createQuery(query.select(fromOrgao).where(predicate).distinct(true));
-		List<Orgao> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
 
 	public List<Orgao> filtrar(String nome)
@@ -79,13 +76,12 @@ public class OrgaoDAO extends DAO<Orgao>
 		if(!nome.equals(""))
 		{
 			predicate = builder.and(predicate,
-			builder.or(builder.like(fromOrgao.<String>get("nome"), "%" + nome + "%"), builder.like(fromOrgao.<String>get("sigla"), "%" + nome + "%")));
+			builder.or(
+				builder.like(fromOrgao.<String>get("nome"), "%" + nome + "%"),
+				builder.like(fromOrgao.<String>get("sigla"), "%" + nome + "%")));
 		}
 
 		TypedQuery<Orgao> typedQuery = em.createQuery(query.select(fromOrgao).where(predicate).distinct(true));
-		List<Orgao> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
-
 }

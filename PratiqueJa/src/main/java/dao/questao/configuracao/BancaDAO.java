@@ -2,13 +2,13 @@ package dao.questao.configuracao;
 
 import java.util.List;
 
+import dao.DAO;
+import filtro.FiltroBanca;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
-import dao.DAO;
 import modelo.questao.configuracao.Banca;
 
 public class BancaDAO extends DAO<Banca>
@@ -20,30 +20,28 @@ public class BancaDAO extends DAO<Banca>
 		super(Banca.class);
 	}
 
-	public List<Banca> filtrar(String nomeFiltro, String siglaFiltro)
+	public List<Banca> buscar(FiltroBanca filtro)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Banca> query = builder.createQuery(Banca.class);
 		Root<Banca> fromBanca = query.from(Banca.class);
 
 		Predicate predicate = builder.and();
 
-		if(!nomeFiltro.equals(""))
-		{
-			predicate = builder.and(predicate, builder.like(fromBanca.<String>get("nome"), "%" + nomeFiltro + "%"));
-		}
+		if(filtro.getNome() != null && !filtro.getNome().isBlank())
+			predicate = builder.and(predicate, builder.like(
+				builder.upper(fromBanca.get("nome")), "%" + filtro.getNome().toUpperCase() + "%"));
 
-		if(!siglaFiltro.equals(""))
-		{
-			predicate = builder.and(predicate, builder.like(fromBanca.<String>get("sigla"), "%" + siglaFiltro + "%"));
-		}
+		if(filtro.getSigla() != null && !filtro.getSigla().isBlank())
+			predicate = builder.and(predicate, builder.like(
+				builder.upper(fromBanca.get("sigla")), "%" + filtro.getSigla().toUpperCase() + "%"));
+
+		if(filtro.getAtivo() != null)
+			predicate = builder.and(predicate, builder.equal(
+				fromBanca.get("ativo"), filtro.getAtivo()));
 
 		TypedQuery<Banca> typedQuery = em.createQuery(query.select(fromBanca).where(predicate).distinct(true));
-		List<Banca> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
 
 	public List<Banca> procurarParecido(Banca banca)
@@ -57,13 +55,12 @@ public class BancaDAO extends DAO<Banca>
 		Predicate predicate = builder.and();
 
 		predicate = builder.and(predicate, builder.notEqual(fromBanca.get("id"), banca.getId()));
-		predicate = builder.and(predicate, builder.or(builder.like(fromBanca.<String>get("nome"), "%" + banca.getNome() + "%"),
-		builder.like(fromBanca.<String>get("sigla"), "%" + banca.getSigla() + "%")));
+		predicate = builder.and(predicate, builder.or(
+			builder.like(fromBanca.<String>get("nome"), "%" + banca.getNome() + "%"),
+			builder.like(fromBanca.<String>get("sigla"), "%" + banca.getSigla() + "%")));
 
 		TypedQuery<Banca> typedQuery = em.createQuery(query.select(fromBanca).where(predicate).distinct(true));
-		List<Banca> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
 
 	public List<Banca> filtrar(String nome)
@@ -79,13 +76,12 @@ public class BancaDAO extends DAO<Banca>
 		if(!nome.equals(""))
 		{
 			predicate = builder.and(predicate,
-			builder.or(builder.like(fromBanca.<String>get("nome"), "%" + nome + "%"), builder.like(fromBanca.<String>get("sigla"), "%" + nome + "%")));
+			builder.or(
+				builder.like(fromBanca.<String>get("nome"), "%" + nome + "%"),
+				builder.like(fromBanca.<String>get("sigla"), "%" + nome + "%")));
 		}
 
 		TypedQuery<Banca> typedQuery = em.createQuery(query.select(fromBanca).where(predicate).distinct(true));
-		List<Banca> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
-
 }
