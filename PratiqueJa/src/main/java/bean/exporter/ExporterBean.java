@@ -3,8 +3,8 @@ package bean.exporter;
 import java.io.Serializable;
 import java.util.Collection;
 
-import auxiliar.ClasseAux;
-import auxiliar.StringAux;
+import util.ClasseAux;
+import util.StringAux;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 

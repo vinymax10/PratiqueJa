@@ -1,7 +1,7 @@
 package matematica;
 
-import auxiliar.ColorHolder;
-import auxiliar.CorAux;
+import util.ColorHolder;
+import util.CorAux;
 
 public class ParCor
 {

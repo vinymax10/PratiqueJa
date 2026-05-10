@@ -3,7 +3,7 @@ package infra;
 import jakarta.faces.context.FacesContext;
 
 import modelo.usuario.Usuario;
-import session.SessionContext;
+import web.session.SessionContext;
 
 public class Log
 {

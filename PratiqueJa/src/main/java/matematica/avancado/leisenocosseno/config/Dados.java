@@ -3,7 +3,7 @@ package matematica.avancado.leisenocosseno.config;
 import java.awt.Point;
 import java.util.Random;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Racional;
 
 

@@ -1,6 +1,6 @@
 package matematica.basico.expressoesnumericas.nivel1package;
 
-import auxiliar.Algebra;
+import util.Algebra;
 import matematica.ExpressaoExt;
 import matematica.Racional;
 import modelo.matematica.Conta;

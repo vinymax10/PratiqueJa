@@ -1,6 +1,6 @@
 package matematica.intermediario.dizima;
 
-import auxiliar.Algebra;
+import util.Algebra;
 import matematica.ParCor;
 import matematica.Racional;
 

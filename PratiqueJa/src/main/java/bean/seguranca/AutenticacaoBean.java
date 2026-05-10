@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import modelo.usuario.Usuario;
 import service.AcessoService;
-import session.Sessao;
+import web.session.Sessao;
 
 @Data
 @Named

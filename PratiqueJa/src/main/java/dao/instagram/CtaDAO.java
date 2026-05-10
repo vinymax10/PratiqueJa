@@ -1,5 +1,6 @@
 package dao.instagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -26,18 +27,17 @@ public class CtaDAO extends DAO<Cta>
 
 	public String getAnyCta(FinalidadeCta finalidadeCta)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Cta> query = builder.createQuery(Cta.class);
 		Root<Cta> fromCta = query.from(Cta.class);
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.isNull(fromCta.<String>get("configPost")));
-		predicate = builder.and(predicate, builder.equal(fromCta.get("finalidadeCta"),finalidadeCta));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.isNull(fromCta.<String>get("configPost")));
+		predicates.add(builder.equal(fromCta.get("finalidadeCta"),finalidadeCta));
 
 	    Expression<Double> randExpr = builder.function("RAND", Double.class);
 		query.select(fromCta);
-		query.where(predicate);
+		query.where(predicates.toArray(new Predicate[0]));
 		query.orderBy(builder.asc(randExpr));
 		
 		TypedQuery<Cta> typedQuery = em.createQuery(query);
@@ -53,21 +53,20 @@ public class CtaDAO extends DAO<Cta>
 	
 	public String getAnyCta(ConfigPost configPost)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Cta> query = builder.createQuery(Cta.class);
 		Root<Cta> fromCta = query.from(Cta.class);
 		
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 		Join<Cta, ConfigPost> configPostJoin = fromCta.join("configPost");
 
-		predicate = builder.and(predicate, builder.equal(configPostJoin.get("id"),configPost.getId()));
-		predicate = builder.and(predicate, builder.equal(fromCta.get("finalidadeCta"),configPost.getFinalidadeCta()));
+		predicates.add(builder.equal(configPostJoin.get("id"),configPost.getId()));
+		predicates.add(builder.equal(fromCta.get("finalidadeCta"),configPost.getFinalidadeCta()));
 
 	    Expression<Double> randExpr = builder.function("RAND", Double.class);
 		query.select(fromCta);
-		query.where(predicate);
+		query.where(predicates.toArray(new Predicate[0]));
 		query.orderBy(builder.asc(randExpr));
 		
 		TypedQuery<Cta> typedQuery = em.createQuery(query);
@@ -82,20 +81,19 @@ public class CtaDAO extends DAO<Cta>
 	
 	public List<Cta> filtrar(String nome)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Cta> query = builder.createQuery(Cta.class);
 		Root<Cta> fromCta = query.from(Cta.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromCta.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromCta.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta).where(predicate).distinct(true));
+		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Cta> list = typedQuery.getResultList();
 
 		return list;
@@ -103,16 +101,15 @@ public class CtaDAO extends DAO<Cta>
 	
 	public List<Cta> listarGenericas()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Cta> query = builder.createQuery(Cta.class);
 		Root<Cta> fromCta = query.from(Cta.class);
 
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.isNull(fromCta.<String>get("configPost")));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.isNull(fromCta.<String>get("configPost")));
 
-		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta).where(predicate));
+		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta).where(predicates.toArray(new Predicate[0])));
 		List<Cta> list = typedQuery.getResultList();
 
 		return list;

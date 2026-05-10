@@ -2,7 +2,7 @@ package matematica.avancado.leisenocosseno.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.avancado.leisenocosseno.Resolucao;
 import matematica.avancado.leisenocosseno.config.Config;
 import matematica.avancado.leisenocosseno.config.Dados;

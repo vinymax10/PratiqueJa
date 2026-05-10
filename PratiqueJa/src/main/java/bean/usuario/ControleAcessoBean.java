@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.primefaces.PrimeFaces;
 
-import bean.usuario.filtro.FiltroControleAcesso;
+import filtro.usuario.FiltroControleAcesso;
 import dao.usuario.ControleAcessoDAO;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
@@ -14,7 +14,7 @@ import jakarta.inject.Named;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
-import session.SessionContext;
+import web.session.SessionContext;
 
 @Named
 @SessionScoped

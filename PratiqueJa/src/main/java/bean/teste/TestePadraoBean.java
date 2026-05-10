@@ -16,7 +16,7 @@ import modelo.assuntocurso.AssuntoCurso;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.TestePadrao;
-import bean.teste.filtro.FiltroTestePadrao;
+import filtro.teste.FiltroTestePadrao;
 import bean.util.Mensagem;
 
 @Named

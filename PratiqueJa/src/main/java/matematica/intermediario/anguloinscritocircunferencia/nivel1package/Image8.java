@@ -2,7 +2,7 @@ package matematica.intermediario.anguloinscritocircunferencia.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.expressao.MyExpression;
 import matematica.intermediario.anguloinscritocircunferencia.config.Config2;
 import modelo.matematica.Conta;

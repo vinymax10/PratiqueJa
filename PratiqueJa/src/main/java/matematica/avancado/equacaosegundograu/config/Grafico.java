@@ -8,7 +8,7 @@ import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 import matematica.intermediario.somaangulostriangulo.Config;

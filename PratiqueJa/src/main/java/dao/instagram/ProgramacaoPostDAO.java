@@ -1,6 +1,7 @@
 package dao.instagram;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -23,7 +24,6 @@ public class ProgramacaoPostDAO extends DAO<ProgramacaoPost>
 
 	public List<ProgramacaoPost> hoje()
 	{
-		em.clear();
 		
 		LocalDate hoje=LocalDate.now();
 		
@@ -31,12 +31,12 @@ public class ProgramacaoPostDAO extends DAO<ProgramacaoPost>
 		CriteriaQuery<ProgramacaoPost> query = builder.createQuery(ProgramacaoPost.class);
 		Root<ProgramacaoPost> fromProgramacaoPost = query.from(ProgramacaoPost.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromProgramacaoPost.get("data"), hoje));
+		predicates.add(builder.lessThanOrEqualTo(fromProgramacaoPost.get("data"), hoje));
 		
 		TypedQuery<ProgramacaoPost> typedQuery = em
-		.createQuery(query.select(fromProgramacaoPost).where(predicate));
+		.createQuery(query.select(fromProgramacaoPost).where(predicates.toArray(new Predicate[0])));
 
 		List<ProgramacaoPost> list = typedQuery.getResultList();
 

@@ -1,5 +1,6 @@
 package dao.spam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -23,15 +24,14 @@ public class ConfigSpamDAO extends DAO<ConfigSpam>
 
 	public ConfigSpam buscar()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ConfigSpam> query = builder.createQuery(ConfigSpam.class);
 		Root<ConfigSpam> fromConfigSpam = query.from(ConfigSpam.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		TypedQuery<ConfigSpam> typedQuery = em.createQuery(query.select(fromConfigSpam).where(predicate));
+		TypedQuery<ConfigSpam> typedQuery = em.createQuery(query.select(fromConfigSpam).where(predicates.toArray(new Predicate[0])));
 		List<ConfigSpam> list = typedQuery.getResultList();
 
 		if(list.size()>0)
@@ -42,17 +42,16 @@ public class ConfigSpamDAO extends DAO<ConfigSpam>
 	
 	public List<Usuario> usuarioSpam()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);
 		Root<Usuario> fromUsuario = query.from(Usuario.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.equal(fromUsuario.get("recebeSpam"), true));
+		predicates.add(builder.equal(fromUsuario.get("recebeSpam"), true));
 		
-		TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicate));
+		TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicates.toArray(new Predicate[0])));
 		List<Usuario> list = typedQuery.getResultList();
 
 		return list;

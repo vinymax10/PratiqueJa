@@ -2,7 +2,7 @@ package matematica.intermediario.somaangulostriangulo.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.expressao.MyExpression;
 import matematica.intermediario.somaangulostriangulo.nivel1package.ConfigTrianguloRetangulo;
 import modelo.matematica.Conta;

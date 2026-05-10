@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import auxiliar.StringAux;
+import util.StringAux;
 import bean.seguranca.AutenticacaoBean;
-import bean.usuario.filtro.FiltroPagamento;
+import filtro.usuario.FiltroPagamento;
 import bean.util.Mensagem;
 import dao.usuario.PagamentoDAO;
 import infra.Navegacao;
@@ -21,7 +21,7 @@ import modelo.usuario.PerfilUsuario;
 import modelo.usuario.TipoPagamento;
 import modelo.usuario.Usuario;
 import service.EmailService;
-import session.SessionContext;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped

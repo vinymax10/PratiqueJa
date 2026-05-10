@@ -1,8 +1,9 @@
 package dao.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import bean.usuario.filtro.FiltroPagamento;
+import filtro.usuario.FiltroPagamento;
 import dao.DAO;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -22,39 +23,38 @@ public class PagamentoDAO extends DAO<Pagamento>
 
 	public List<Pagamento> buscar(FiltroPagamento filtroPagamento)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Pagamento> query = builder.createQuery(Pagamento.class);
 		Root<Pagamento> fromPagamento = query.from(Pagamento.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!filtroPagamento.getNomeUsuario().equals(""))
-			predicate = builder.and(predicate, builder.like(fromPagamento.get("usuario").get("nome"), "%" + filtroPagamento.getNomeUsuario() + "%"));
+		if(filtroPagamento.getNomeUsuario() != null && !filtroPagamento.getNomeUsuario().isBlank())
+			predicates.add(builder.like(fromPagamento.get("usuario").get("nome"), "%" + filtroPagamento.getNomeUsuario() + "%"));
 
 		if(filtroPagamento.getId() != null)
-			predicate = builder.and(predicate, builder.equal(fromPagamento.get("id"), filtroPagamento.getId()));
+			predicates.add(builder.equal(fromPagamento.get("id"), filtroPagamento.getId()));
 
 		if(filtroPagamento.getDataInicio() != null)
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataInicio()));
+			predicates.add(builder.greaterThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataInicio()));
 
 		if(filtroPagamento.getDataFim() != null)
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataFim()));
+			predicates.add(builder.lessThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataFim()));
 
 		if(filtroPagamento.getValor() != 0)
-			predicate = builder.and(predicate, builder.equal(fromPagamento.get("valor"), filtroPagamento.getValor()));
+			predicates.add(builder.equal(fromPagamento.get("valor"), filtroPagamento.getValor()));
 		
 		if(filtroPagamento.getTipoPagamento() != null)
-			predicate = builder.and(predicate, builder.equal(fromPagamento.get("tipoPagamento"), filtroPagamento.getTipoPagamento()));
+			predicates.add(builder.equal(fromPagamento.get("tipoPagamento"), filtroPagamento.getTipoPagamento()));
 		
 		if(filtroPagamento.getPlano() != null)
-			predicate = builder.and(predicate, builder.equal(fromPagamento.get("plano"), filtroPagamento.getPlano()));
+			predicates.add(builder.equal(fromPagamento.get("plano"), filtroPagamento.getPlano()));
 		
 		if(filtroPagamento.getPago() != null)
-			predicate = builder.and(predicate, builder.equal(fromPagamento.get("pago"), filtroPagamento.getPago().booleanValue()));
+			predicates.add(builder.equal(fromPagamento.get("pago"), filtroPagamento.getPago().booleanValue()));
 		
-		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicate).distinct(true));
+		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Pagamento> list = typedQuery.getResultList();
 
 		return list;
@@ -62,20 +62,19 @@ public class PagamentoDAO extends DAO<Pagamento>
 	
 	public boolean contem(Pagamento pagamento)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Pagamento> query = builder.createQuery(Pagamento.class);
 		Root<Pagamento> fromPagamento = query.from(Pagamento.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 		
-		predicate = builder.and(predicate, builder.equal(fromPagamento.get("data"), pagamento.getData()));
-		predicate = builder.and(predicate, builder.equal(fromPagamento.get("plano"), pagamento.getPlano()));
-		predicate = builder.and(predicate, builder.equal(fromPagamento.get("tipoPagamento"), pagamento.getTipoPagamento()));
-		predicate = builder.and(predicate, builder.equal(fromPagamento.get("usuario").get("id"), pagamento.getUsuario().getId()));
+		predicates.add(builder.equal(fromPagamento.get("data"), pagamento.getData()));
+		predicates.add(builder.equal(fromPagamento.get("plano"), pagamento.getPlano()));
+		predicates.add(builder.equal(fromPagamento.get("tipoPagamento"), pagamento.getTipoPagamento()));
+		predicates.add(builder.equal(fromPagamento.get("usuario").get("id"), pagamento.getUsuario().getId()));
 		
-		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicate).distinct(true));
+		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Pagamento> list = typedQuery.getResultList();
 		
 		return list.size()!=0;

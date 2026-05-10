@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import modelo.usuario.Usuario;
 import service.AutorizacaoService;
-import session.Sessao;
+import web.session.Sessao;
 
 @Data
 @SessionScoped

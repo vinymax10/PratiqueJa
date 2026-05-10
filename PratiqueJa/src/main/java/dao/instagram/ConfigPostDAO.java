@@ -1,5 +1,6 @@
 package dao.instagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,16 +23,15 @@ public class ConfigPostDAO extends DAO<ConfigPost>
 	
 	public ConfigPost getConfigPost(Long id)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ConfigPost> query = builder.createQuery(ConfigPost.class);
 		Root<ConfigPost> fromConfigPost = query.from(ConfigPost.class);
 
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.equal(fromConfigPost.get("id"), id));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromConfigPost.get("id"), id));
 		
-		TypedQuery<ConfigPost> typedQuery = em.createQuery(query.where(predicate));
+		TypedQuery<ConfigPost> typedQuery = em.createQuery(query.where(predicates.toArray(new Predicate[0])));
 		typedQuery.setMaxResults(1);
 		List<ConfigPost> list=typedQuery.getResultList();
 		if(list.size()>0)

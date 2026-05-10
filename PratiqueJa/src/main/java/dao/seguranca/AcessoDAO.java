@@ -1,5 +1,6 @@
 package dao.seguranca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.NoResultException;
@@ -12,7 +13,7 @@ import dao.DAO;
 import modelo.seguranca.Acesso;
 import modelo.seguranca.StatusAcesso;
 import modelo.usuario.Usuario;
-import bean.usuario.filtro.FiltroAcesso;
+import filtro.usuario.FiltroAcesso;
 
 public class AcessoDAO extends DAO<Acesso>
 {
@@ -25,20 +26,19 @@ public class AcessoDAO extends DAO<Acesso>
 
 	public Acesso lastAcesso(String idSessao)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
 		Root<Acesso> fromAcesso = query.from(Acesso.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		Acesso acesso = null;
 
-		predicate = builder.and(predicate, builder.equal(fromAcesso.get("status"), StatusAcesso.ATIVO));
-		predicate = builder.and(predicate, builder.equal(fromAcesso.get("idSessao"), idSessao));
+		predicates.add(builder.equal(fromAcesso.get("status"), StatusAcesso.ATIVO));
+		predicates.add(builder.equal(fromAcesso.get("idSessao"), idSessao));
 
-		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicate));
+		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])));
 		try
 		{
 			List<Acesso> listaAcesso = typedQuery.getResultList();
@@ -54,45 +54,44 @@ public class AcessoDAO extends DAO<Acesso>
 
 	public List<Acesso> buscar(FiltroAcesso filtroAcesso)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
 		Root<Acesso> fromAcesso = query.from(Acesso.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroAcesso.getNomeUsuario() != null && !filtroAcesso.getNomeUsuario().equals(""))
+		if(filtroAcesso.getNomeUsuario() != null && !filtroAcesso.getNomeUsuario().isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromAcesso.<Usuario>get("usuario").get("nome"), "%" + filtroAcesso.getNomeUsuario() + "%"));
+			predicates.add(builder.like(fromAcesso.<Usuario>get("usuario").get("nome"), "%" + filtroAcesso.getNomeUsuario() + "%"));
 		}
 
-		if(filtroAcesso.getIdSessao() != null && !filtroAcesso.getIdSessao().equals(""))
+		if(filtroAcesso.getIdSessao() != null && !filtroAcesso.getIdSessao().isBlank())
 		{
-			predicate = builder.and(predicate, builder.equal(fromAcesso.get("idSessao"), filtroAcesso.getIdSessao()));
+			predicates.add(builder.equal(fromAcesso.get("idSessao"), filtroAcesso.getIdSessao()));
 		}
 
 		if(filtroAcesso.getInicio() != null)
 		{
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getInicio()));
+			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getInicio()));
 		}
 
 		if(filtroAcesso.getTermino() != null)
 		{
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getTermino()));
+			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getTermino()));
 		}
 
 		if(filtroAcesso.getMinutosMinimo() != 0)
 		{
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMinimo()));
+			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMinimo()));
 		}
 
 		if(filtroAcesso.getMinutosMaximo() != 0)
 		{
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMaximo()));
+			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMaximo()));
 		}
 
-		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicate));
+		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])));
 		List<Acesso> list = typedQuery.getResultList();
 
 		return list;

@@ -1,5 +1,6 @@
 package dao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,15 +23,14 @@ public class ConfigLatexDAO extends DAO<ConfigLatex>
 
 	public ConfigLatex buscar()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ConfigLatex> query = builder.createQuery(ConfigLatex.class);
 		Root<ConfigLatex> fromConfigLatex = query.from(ConfigLatex.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		TypedQuery<ConfigLatex> typedQuery = em.createQuery(query.select(fromConfigLatex).where(predicate));
+		TypedQuery<ConfigLatex> typedQuery = em.createQuery(query.select(fromConfigLatex).where(predicates.toArray(new Predicate[0])));
 		List<ConfigLatex> list = typedQuery.getResultList();
 
 		if(list.size()>0)

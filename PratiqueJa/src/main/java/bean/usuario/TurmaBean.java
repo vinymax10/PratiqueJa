@@ -12,7 +12,7 @@ import jakarta.inject.Named;
 import dao.usuario.TurmaDAO;
 import exceptions.RelacaoException;
 import modelo.usuario.Turma;
-import bean.usuario.filtro.FiltroTurma;
+import filtro.usuario.FiltroTurma;
 import bean.util.Mensagem;
 
 @Named

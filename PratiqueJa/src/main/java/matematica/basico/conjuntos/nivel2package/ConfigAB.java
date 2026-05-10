@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 

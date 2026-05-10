@@ -1,5 +1,6 @@
 package dao.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -9,7 +10,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import dao.DAO;
 import modelo.usuario.Turma;
-import bean.usuario.filtro.FiltroTurma;
+import filtro.usuario.FiltroTurma;
 
 public class TurmaDAO extends DAO<Turma>
 {
@@ -22,21 +23,20 @@ public class TurmaDAO extends DAO<Turma>
 
 	public List<Turma> buscar(FiltroTurma filtroTurma)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Turma> query = builder.createQuery(Turma.class);
 		Root<Turma> fromTurma = query.from(Turma.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroTurma.getNome()!= null && !filtroTurma.getNome().equals(""))
-			predicate = builder.and(predicate, builder.like(fromTurma.get("nome"), "%" + filtroTurma.getNome() + "%"));
+		if(filtroTurma.getNome()!= null && !filtroTurma.getNome().isBlank())
+			predicates.add(builder.like(fromTurma.get("nome"), "%" + filtroTurma.getNome() + "%"));
 
 		if(filtroTurma.getAssuntoAtual() != null)
-			predicate = builder.and(predicate, builder.equal(fromTurma.get("assuntoAtual").get("id"), filtroTurma.getAssuntoAtual().getId()));
+			predicates.add(builder.equal(fromTurma.get("assuntoAtual").get("id"), filtroTurma.getAssuntoAtual().getId()));
 
-		TypedQuery<Turma> typedQuery = em.createQuery(query.select(fromTurma).where(predicate));
+		TypedQuery<Turma> typedQuery = em.createQuery(query.select(fromTurma).where(predicates.toArray(new Predicate[0])));
 		List<Turma> list = typedQuery.getResultList();
 
 		return list;
@@ -44,15 +44,14 @@ public class TurmaDAO extends DAO<Turma>
 	
 	public List<Turma> todas()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Turma> query = builder.createQuery(Turma.class);
 		Root<Turma> fromTurma = query.from(Turma.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		TypedQuery<Turma> typedQuery = em.createQuery(query.select(fromTurma).where(predicate));
+		TypedQuery<Turma> typedQuery = em.createQuery(query.select(fromTurma).where(predicates.toArray(new Predicate[0])));
 		List<Turma> list = typedQuery.getResultList();
 
 		return list;

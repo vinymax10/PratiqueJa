@@ -20,7 +20,7 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import auxiliar.ColorHolder;
+import util.ColorHolder;
 import bean.exercicio.ConfigDownload;
 import bean.instagram.ProgramacaoPostBean;
 import bean.usuario.ControleAcessoBean;
@@ -42,11 +42,11 @@ import modelo.exercicio.Nivel;
 import modelo.instagram.ProgramacaoPost;
 import modelo.questao.Questao;
 import modelo.usuario.Usuario;
-import pdf.latex.GerarLatexExercicio;
-import pdf.latex.GerarLatexQuestao;
-import pdf.latex.InstagramFeed;
-import pdf.latex.TikTok;
-import session.SessionContext;
+import pdf.exercicio.GerarLatexExercicio;
+import pdf.questao.GerarLatexQuestao;
+import pdf.social.InstagramFeed;
+import pdf.social.TikTok;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped

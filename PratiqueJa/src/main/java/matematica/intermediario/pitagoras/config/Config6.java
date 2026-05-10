@@ -7,7 +7,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 import matematica.intermediario.pitagoras.dados.Dados;

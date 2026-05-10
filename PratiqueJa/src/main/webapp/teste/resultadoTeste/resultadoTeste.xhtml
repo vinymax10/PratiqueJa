@@ -37,7 +37,7 @@
 								value="#{resultadoTesteBean.filtroResultadoTeste.assuntoCurso}"
 								filter="true" filterMatchMode="contains" converter="generic">
 								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+								<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
 									var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
 									itemValue="#{assuntoCurso}" />
 							</p:selectOneMenu>

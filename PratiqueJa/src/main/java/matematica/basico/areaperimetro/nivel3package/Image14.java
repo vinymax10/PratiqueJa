@@ -2,7 +2,7 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrapezio;

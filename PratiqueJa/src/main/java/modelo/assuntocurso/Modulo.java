@@ -2,16 +2,18 @@ package modelo.assuntocurso;
 
 public enum Modulo
 {
-	Basico("Básico"),
-	Intermediario("Intermediário"),
-	Avancado("Avançado"),
-	Expert("Expert");
+	Basico("Básico",0),
+	Intermediario("Intermediário",1),
+	Avancado("Avançado",2),
+	Expert("Expert",3);
 
 	private String nome;
-
-	Modulo(String nome)
+	private int ordem;
+	
+	Modulo(String nome, int ordem)
 	{
 		this.nome = nome;
+		this.ordem=ordem;
 	}
 
 	public String getNome()
@@ -19,15 +21,9 @@ public enum Modulo
 		return nome;
 	}
 
-	public void setNome(String nome)
+	public int getOrdem()
 	{
-		this.nome = nome;
-	}
-
-	public boolean equals(Modulo x)
-	{
-		Modulo modulo = (Modulo) x;
-		return this.nome.equals(modulo.nome);
+		return ordem;
 	}
 
 }

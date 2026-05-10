@@ -45,13 +45,13 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.questao.Questao;
 import modelo.spam.ConfigSpam;
-import pdf.latex.ExercicioEBook;
-import pdf.latex.FolhaRosto;
-import pdf.latex.GerarLatexExercicio;
-import pdf.latex.ItemSumario;
-import pdf.latex.QuestaoEBook;
-import pdf.latex.Resumo;
-import pdf.latex.Sumario;
+import pdf.ebook.ExercicioEBook;
+import pdf.ebook.FolhaRosto;
+import pdf.exercicio.GerarLatexExercicio;
+import pdf.ebook.ItemSumario;
+import pdf.ebook.QuestaoEBook;
+import pdf.ebook.Resumo;
+import pdf.ebook.Sumario;
 
 @Named
 @ViewScoped
@@ -414,7 +414,7 @@ public class DownloadEbookBean implements Serializable
 					finalOutputStream= construirListasExercicios(assuntoCurso,nivel);
 					InputStream inStream = new ByteArrayInputStream(finalOutputStream.toByteArray());
 					
-					String nomeFile = (assuntoCurso.getIndice()+1)+"_"+assuntoCurso.getNome() + "_" + nivel.getNome();
+					String nomeFile = (assuntoCurso.getOrdem()+1)+"_"+assuntoCurso.getNome() + "_" + nivel.getNome();
 					File file=new File(diretorio.getConfigLatex().getEnderecoEBook()+"/"+nomeFile + ".pdf");
 					Files.copy(inStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				}

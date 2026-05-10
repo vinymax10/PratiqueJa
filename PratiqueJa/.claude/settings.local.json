@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(Remove-Item *)"
+      "PowerShell(Remove-Item *)",
+      "Bash(sed -i '/^import pdf\\\\.base\\\\.PdfStyle;$/d' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/base/Cabecalho.java)",
+      "Bash(sed -i '/^import pdf\\\\.base\\\\.PdfStyle;$/d' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/base/Rodape.java)",
+      "Bash(sed -i 's/^package pdf;$/package pdf.exercicio;/' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/exercicio/ExercicioPDF.java)",
+      "Bash(sed -i 's/^package pdf\\\\.latex;$/package pdf.exercicio;/' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/exercicio/GerarLatexExercicio.java)",
+      "Bash(sed -i '/^import com\\\\.itextpdf/i import pdf.base.CustomDashedLineSeparator;\\\\nimport pdf.util.Convert;' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/exercicio/ExercicioPDF.java)",
+      "Bash(sed -i '/^import java\\\\.io\\\\.File;/a import pdf.util.Arquivo;' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/exercicio/GerarLatexExercicio.java)",
+      "Bash(sed -i 's/^package pdf;$/package pdf.questao;/' /mnt/c/Users/USUARIO/git/PratiqueJa/PratiqueJa/src/main/java/pdf/questao/QuestoesPDF.java)"
     ]
   }
 }

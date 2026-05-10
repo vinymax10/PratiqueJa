@@ -34,7 +34,7 @@
 							value="#{programacaoPostBean.programacaoPost.assuntoCurso}"
 							converter="generic" required="true" requiredMessage="O assunto é obrigatório" filter="true"
 							filterMatchMode="contains">
-							<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
 										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
 										itemValue="#{assuntoCurso}" />
 						</p:selectOneMenu>

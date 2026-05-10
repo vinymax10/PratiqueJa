@@ -1,5 +1,6 @@
 package dao.questao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -24,25 +25,24 @@ public class ResultadoQuestaoDAO extends DAO<ResultadoQuestao>
 
 	public List<ResultadoQuestao> questoesRealizados(Questao questao, Usuario usuario)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ResultadoQuestao> query = builder.createQuery(ResultadoQuestao.class);
 		Root<ResultadoQuestao> fromResultadoQuestao = query.from(ResultadoQuestao.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(questao != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromResultadoQuestao.<Questao>get("questao").get("id"), questao.getId()));
+			predicates.add(builder.equal(fromResultadoQuestao.<Questao>get("questao").get("id"), questao.getId()));
 		}
 
 		if(usuario != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromResultadoQuestao.<Usuario>get("usuario").get("id"), usuario.getId()));
+			predicates.add(builder.equal(fromResultadoQuestao.<Usuario>get("usuario").get("id"), usuario.getId()));
 		}
 
-		TypedQuery<ResultadoQuestao> typedQuery = em.createQuery(query.select(fromResultadoQuestao).where(predicate));
+		TypedQuery<ResultadoQuestao> typedQuery = em.createQuery(query.select(fromResultadoQuestao).where(predicates.toArray(new Predicate[0])));
 		List<ResultadoQuestao> list = typedQuery.getResultList();
 
 		return list;

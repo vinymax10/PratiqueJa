@@ -19,8 +19,8 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.ResponsiveOption;
 import org.primefaces.model.file.UploadedFile;
 
-import auxiliar.FileAux;
-import auxiliar.Graphics;
+import util.FileAux;
+import infra.Graphics;
 import dao.instagram.BackgroundDAO;
 import dao.instagram.ImagemPostDAO;
 import exceptions.RelacaoException;

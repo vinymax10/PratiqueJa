@@ -1,5 +1,6 @@
 package dao.questao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,20 +23,18 @@ public class AnoDAO extends DAO<Ano>
 
 	public List<Ano> filtrar(String nome)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Ano> query = builder.createQuery(Ano.class);
 		Root<Ano> fromAno = query.from(Ano.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromAno.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromAno.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<Ano> typedQuery = em.createQuery(query.select(fromAno).where(predicate).distinct(true));
+		TypedQuery<Ano> typedQuery = em.createQuery(query.select(fromAno).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Ano> list = typedQuery.getResultList();
 
 		return list;

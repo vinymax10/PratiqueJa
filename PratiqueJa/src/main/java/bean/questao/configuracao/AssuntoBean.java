@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import bean.ConfigBean;
 import dao.questao.configuracao.AssuntoDAO;
 import exceptions.RelacaoException;
-import filtro.FiltroAssunto;
+import filtro.questao.FiltroAssunto;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

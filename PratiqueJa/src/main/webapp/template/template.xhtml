@@ -15,9 +15,9 @@
 	<link rel="stylesheet" href="/css/meu.css" type="text/css" />
 	<link rel="stylesheet" href="/css/assunto.css" type="text/css" />
 	<link rel="stylesheet" href="/css/status.css" type="text/css" />
+	<link rel="stylesheet" href="/css/page.css" type="text/css" />
 	
 	<link rel="stylesheet" href="/css/primeflex.min.css" type="text/css" />
-	<link rel="stylesheet" href="/css/page.css" type="text/css" />
 
 
 	<!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_CHTML"></script> -->
@@ -69,11 +69,23 @@
 		globalOnly="true" life="4000" />
 
 	<h:form id="formPrincipal" style="margin:0">
+		
 		<p:menubar autoDisplay="false" styleClass="menubar">
+			<f:facet name="start">
+				<div class="brand">
+					<img class="logo-text" src="/image/logoQuadrada.png" />
+					<div>
+						<h:outputText style="font-size: 20px;display:block;margin: 0 10px;"
+							value="Teste" />
+						<ui:insert name="linkPage">
+						</ui:insert>
+					</div>
+				</div>
+			</f:facet>
 			<p:submenu label="Gerenciamento" icon="pi pi-cog"
 				rendered="#{sessaoBean.podeVerAdministracao()}">
 
-				<p:menuitem url="/assuntoCurso/assuntoCurso.xhtml">
+				<p:menuitem url="/administracao/assunto-curso/list.xhtml">
 					<span style="margin-right: 10px;">Assuntos</span>
 				</p:menuitem>
 				
@@ -87,7 +99,7 @@
 	                	Exercicios
 	                </p:menuitem>
 					
-					<p:menuitem url="/exercicio/exercicioPadrao/exercicioPadrao.xhtml">
+					<p:menuitem url="/administracao/exercicio-padrao/list.xhtml">
 						<span style="margin-right: 10px;">Exercício Padrão</span>
 					</p:menuitem>
 	
@@ -306,7 +318,7 @@
 		</h:form>
 		
 		<ui:include src="/template/meuPlano/meuPlano.xhtml" />
-		<ui:include src="/template/pagamento.xhtml" />
+<!-- 		<ui:include src="/template/pagamento.xhtml" /> -->
 		<ui:include src="/template/cadastroUsuario.xhtml" />
 <!-- 		<ui:include src="/template/post/configPost.xhtml" /> -->
 		

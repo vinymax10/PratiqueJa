@@ -3,7 +3,7 @@ package matematica.basico.resolucaonatural;
 import java.io.IOException;
 
 import matematica.DefinicaoCores;
-import pdf.Convert;
+import pdf.util.Convert;
 
 public class Subtracao 
 {

@@ -11,7 +11,7 @@ import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 import matematica.intermediario.somaangulostriangulo.ResolucaoSomaAngulosTriangulo1;

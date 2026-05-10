@@ -2,7 +2,7 @@ package matematica.basico.expressoesalgebricas.nivel1package;
 
 import jakarta.persistence.Transient;
 
-import auxiliar.Algebra;
+import util.Algebra;
 import matematica.ExpressaoExt;
 import matematica.Racional;
 import modelo.matematica.Conta;

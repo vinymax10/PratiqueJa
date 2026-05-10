@@ -2,7 +2,7 @@ package matematica.intermediario.somaangulostriangulo.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.intermediario.somaangulostriangulo.ResolucaoSAT2;
 import matematica.intermediario.somaangulostriangulo.nivel2package.ConfigTrianguloBipartido1;
 import modelo.matematica.Conta;

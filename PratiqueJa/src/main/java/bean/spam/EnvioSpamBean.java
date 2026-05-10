@@ -45,8 +45,8 @@ import modelo.instagram.FinalidadeCta;
 import modelo.spam.ConfigSpam;
 import modelo.spam.ProgramacaoSpam;
 import modelo.usuario.Usuario;
-import pdf.latex.GerarLatexExercicio;
-import pdf.latex.ItemSumario;
+import pdf.exercicio.GerarLatexExercicio;
+import pdf.ebook.ItemSumario;
 import service.EmailService;
 
 @Named
@@ -135,7 +135,7 @@ public class EnvioSpamBean implements Serializable
 		{
 			SerialBlob serialBlob = new SerialBlob(IOUtils.toByteArray(inStream));
 			documentoFile.setFile(serialBlob);
-			documentoFile.setEndDocumentacao((assuntoCurso.getIndice()+1)+"_"+assuntoCurso.getNome()+".pdf");
+			documentoFile.setEndDocumentacao((assuntoCurso.getOrdem()+1)+"_"+assuntoCurso.getNome()+".pdf");
 		}
 		catch (Exception e) 
 		{

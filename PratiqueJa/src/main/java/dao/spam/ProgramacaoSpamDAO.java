@@ -1,6 +1,7 @@
 package dao.spam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -23,7 +24,6 @@ public class ProgramacaoSpamDAO extends DAO<ProgramacaoSpam>
 
 	public List<ProgramacaoSpam> hoje()
 	{
-		em.clear();
 		
 		LocalDate hoje=LocalDate.now();
 		
@@ -31,12 +31,12 @@ public class ProgramacaoSpamDAO extends DAO<ProgramacaoSpam>
 		CriteriaQuery<ProgramacaoSpam> query = builder.createQuery(ProgramacaoSpam.class);
 		Root<ProgramacaoSpam> fromProgramacaoSpam = query.from(ProgramacaoSpam.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromProgramacaoSpam.get("data"), hoje));
+		predicates.add(builder.lessThanOrEqualTo(fromProgramacaoSpam.get("data"), hoje));
 		
 		TypedQuery<ProgramacaoSpam> typedQuery = em
-		.createQuery(query.select(fromProgramacaoSpam).where(predicate));
+		.createQuery(query.select(fromProgramacaoSpam).where(predicates.toArray(new Predicate[0])));
 
 		List<ProgramacaoSpam> list = typedQuery.getResultList();
 

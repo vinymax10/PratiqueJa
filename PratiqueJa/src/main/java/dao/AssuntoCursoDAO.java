@@ -1,8 +1,9 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import bean.assuntocurso.FiltroAssuntoCurso;
+import filtro.assuntocurso.FiltroAssuntoCurso;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -21,63 +22,57 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 		super(AssuntoCurso.class);
 	}
 
-	public List<AssuntoCurso> buscar(FiltroAssuntoCurso filtroAssuntoCurso)
+	public List<AssuntoCurso> buscar(FiltroAssuntoCurso filtro)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<AssuntoCurso> query = builder.createQuery(AssuntoCurso.class);
 		Root<AssuntoCurso> fromAssuntoCurso = query.from(AssuntoCurso.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!filtroAssuntoCurso.getNomeAssuntoCurso().equals(""))
+		if(filtro.getNomeAssuntoCurso() != null && !filtro.getNomeAssuntoCurso().isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromAssuntoCurso.get("nome"), "%" + filtroAssuntoCurso.getNomeAssuntoCurso() + "%"));
+			predicates.add(builder.like(fromAssuntoCurso.get("nome"), "%" + filtro.getNomeAssuntoCurso() + "%"));
 		}
 
-		if(!filtroAssuntoCurso.getChave().equals(""))
+		if(filtro.getChave() != null && !filtro.getChave().isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromAssuntoCurso.get("chave"), "%" + filtroAssuntoCurso.getChave() + "%"));
+			predicates.add(builder.like(fromAssuntoCurso.get("chave"), "%" + filtro.getChave() + "%"));
 		}
 
-		if(filtroAssuntoCurso.getModulo() != null)
+		if(filtro.getModulo() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("modulo"), filtroAssuntoCurso.getModulo()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("modulo"), filtro.getModulo()));
 		}
 
-		if(filtroAssuntoCurso.getHabilidado() != null)
+		if(filtro.getHabilidado() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("habilidado"), filtroAssuntoCurso.getHabilidado()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("habilidado"), filtro.getHabilidado()));
 		}
 		
-		if(filtroAssuntoCurso.getShowAula() != null)
+		if(filtro.getShowAula() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("showAula"), filtroAssuntoCurso.getShowAula()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("showAula"), filtro.getShowAula()));
 		}
 
-		if(filtroAssuntoCurso.getShowAnotacao() != null)
+		if(filtro.getShowAnotacao() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("showAnotacao"), filtroAssuntoCurso.getShowAnotacao()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("showAnotacao"), filtro.getShowAnotacao()));
 		}
 
-		if(filtroAssuntoCurso.getShowExercicio() != null)
+		if(filtro.getShowExercicio() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("showExercicio"), filtroAssuntoCurso.getShowExercicio()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("showExercicio"), filtro.getShowExercicio()));
 		}
 
-		if(filtroAssuntoCurso.getShowQuestao() != null)
+		if(filtro.getShowQuestao() != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("showQuestao"), filtroAssuntoCurso.getShowQuestao()));
+			predicates.add(builder.equal(fromAssuntoCurso.get("showQuestao"), filtro.getShowQuestao()));
 		}
 
-		if(filtroAssuntoCurso.getIndice() != 0)
-		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("indice"), filtroAssuntoCurso.getIndice()));
-		}
-
-		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicate)
-		.orderBy(builder.asc(fromAssuntoCurso.get("indice"))));
+		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromAssuntoCurso.get("modulo")),
+		builder.asc(fromAssuntoCurso.get("ordem"))));
 		
 		List<AssuntoCurso> list = typedQuery.getResultList();
 
@@ -86,19 +81,18 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 	
 	public AssuntoCurso assunto(String chave)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<AssuntoCurso> query = builder.createQuery(AssuntoCurso.class);
 		Root<AssuntoCurso> fromAssuntoCurso = query.from(AssuntoCurso.class);
 
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("habilidado"), true));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromAssuntoCurso.get("habilidado"), true));
 
-		predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("chave"), chave));
+		predicates.add(builder.equal(fromAssuntoCurso.get("chave"), chave));
 
-		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicate)
-		.orderBy(builder.asc(fromAssuntoCurso.get("indice"))));
+		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromAssuntoCurso.get("modulo")),
+		builder.asc(fromAssuntoCurso.get("ordem"))));
 		
 		List<AssuntoCurso> list = typedQuery.getResultList();
 
@@ -110,17 +104,16 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 	
 	public List<AssuntoCurso> todos()
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<AssuntoCurso> query = builder.createQuery(AssuntoCurso.class);
 		Root<AssuntoCurso> fromAssuntoCurso = query.from(AssuntoCurso.class);
 
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("habilidado"), true));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromAssuntoCurso.get("habilidado"), true));
 
-		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicate)
-		.orderBy(builder.asc(fromAssuntoCurso.get("indice"))));
+		TypedQuery<AssuntoCurso> typedQuery = em.createQuery(query.select(fromAssuntoCurso).where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromAssuntoCurso.get("modulo")),
+		builder.asc(fromAssuntoCurso.get("ordem"))));
 		
 		List<AssuntoCurso> list = typedQuery.getResultList();
 
@@ -129,22 +122,23 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 
 	public List<AssuntoCurso> buscar(Modulo modulo)
 	{
-		em.clear();
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<AssuntoCurso> query = builder.createQuery(AssuntoCurso.class);
 		Root<AssuntoCurso> fromAssuntoCurso = query.from(AssuntoCurso.class);
 
-		Predicate predicate = builder.and();
-		predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("habilidado"), true));
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromAssuntoCurso.get("habilidado"), true));
 
 		if(modulo != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAssuntoCurso.get("modulo"), modulo));
+			predicates.add(builder.equal(fromAssuntoCurso.get("modulo"), modulo));
 		}
 
 		TypedQuery<AssuntoCurso> typedQuery = em
-		.createQuery(query.select(fromAssuntoCurso).where(predicate).distinct(true).orderBy(builder.asc(fromAssuntoCurso.get("indice"))));
+		.createQuery(query.select(fromAssuntoCurso).where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromAssuntoCurso.get("modulo")),
+		builder.asc(fromAssuntoCurso.get("ordem"))));
+		
 		List<AssuntoCurso> list = typedQuery.getResultList();
 
 		return list;
@@ -152,20 +146,19 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 
 	public List<ExercicioPadrao> getExerciciosPadrao(AssuntoCurso assuntoCurso)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ExercicioPadrao> query = builder.createQuery(ExercicioPadrao.class);
 		Root<ExercicioPadrao> fromExercicioPadrao = query.from(ExercicioPadrao.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(assuntoCurso != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromExercicioPadrao.get("assuntoCurso").get("id"), assuntoCurso.getId()));
+			predicates.add(builder.equal(fromExercicioPadrao.get("assuntoCurso").get("id"), assuntoCurso.getId()));
 		}
 
-		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(query.select(fromExercicioPadrao).where(predicate)
+		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(query.select(fromExercicioPadrao).where(predicates.toArray(new Predicate[0]))
 		.orderBy(builder.asc(fromExercicioPadrao.get("nivel"))));
 		List<ExercicioPadrao> list = typedQuery.getResultList();
 

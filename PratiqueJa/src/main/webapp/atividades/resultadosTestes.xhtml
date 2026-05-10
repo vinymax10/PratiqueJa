@@ -26,7 +26,7 @@
 		                    <p:selectOneMenu  onchange="PF('resultadosTable').filter()" styleClass="custom-filter">
 		                        <f:attribute name="collectionType" value="java.util.ArrayList" />	
 		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
-		                        <f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}" var="opcao" 
+		                        <f:selectItems value="#{assuntoCursoBean.listaAtivas}" var="opcao" 
 		                        itemLabel="#{opcao.nome}" itemValue="#{opcao.nome}"/>
 		                    </p:selectOneMenu >
 		                </f:facet>

@@ -1,9 +1,10 @@
 package dao.questao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAO;
-import filtro.FiltroAssunto;
+import filtro.questao.FiltroAssunto;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -26,21 +27,21 @@ public class AssuntoDAO extends DAO<Assunto>
 		CriteriaQuery<Assunto> query = builder.createQuery(Assunto.class);
 		Root<Assunto> fromAssunto = query.from(Assunto.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(filtro.getNome() != null && !filtro.getNome().isBlank())
-			predicate = builder.and(predicate, builder.like(
+			predicates.add(builder.like(
 				builder.upper(fromAssunto.get("nome")), "%" + filtro.getNome().toUpperCase() + "%"));
 
 		if(filtro.getDisciplina() != null)
-			predicate = builder.and(predicate, builder.equal(
+			predicates.add(builder.equal(
 				fromAssunto.get("disciplina"), filtro.getDisciplina()));
 
 		if(filtro.getAtivo() != null)
-			predicate = builder.and(predicate, builder.equal(
+			predicates.add(builder.equal(
 				fromAssunto.get("ativo"), filtro.getAtivo()));
 
-		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicate).distinct(true));
+		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicates.toArray(new Predicate[0])).distinct(true));
 		return typedQuery.getResultList();
 	}
 	
@@ -50,14 +51,14 @@ public class AssuntoDAO extends DAO<Assunto>
 		CriteriaQuery<Assunto> query = builder.createQuery(Assunto.class);
 		Root<Assunto> fromAssunto = query.from(Assunto.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromAssunto.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromAssunto.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicate).distinct(true));
+		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Assunto> list = typedQuery.getResultList();
 
 		return list;

@@ -21,6 +21,7 @@ import dao.questao.AlternativaDAO;
 import dao.questao.QuestaoDAO;
 import dao.questao.ResultadoQuestaoDAO;
 import dao.usuario.UsuarioDAO;
+import filtro.questao.FiltroQuestao;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -31,8 +32,7 @@ import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
 import modelo.usuario.Usuario;
-import pdf.latex.GerarLatexQuestao;
-import session.SessionContext;
+import pdf.questao.GerarLatexQuestao;
 import software.xdev.chartjs.model.charts.BarChart;
 import software.xdev.chartjs.model.data.BarData;
 import software.xdev.chartjs.model.dataset.BarDataset;
@@ -40,6 +40,7 @@ import software.xdev.chartjs.model.enums.IndexAxis;
 import software.xdev.chartjs.model.options.BarOptions;
 import software.xdev.chartjs.model.options.Plugins;
 import software.xdev.chartjs.model.options.Title;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped

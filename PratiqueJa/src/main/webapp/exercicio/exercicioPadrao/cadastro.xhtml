@@ -14,7 +14,7 @@
 				<p:selectOneMenu value="#{exercicioPadraoBean.exercicioPadrao.assuntoCurso}"
 					converter="generic" required="true">
 					<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-					<f:selectItems value="#{assuntoCursoBean.todosAssuntoCursos}"
+					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
 						var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
 						itemValue="#{assuntoCurso}" />
 				</p:selectOneMenu>

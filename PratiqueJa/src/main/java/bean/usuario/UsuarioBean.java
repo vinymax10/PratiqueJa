@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -16,18 +15,18 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import dao.usuario.UsuarioDAO;
 import modelo.instagram.ConfigPost;
 import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
 import bean.instagram.ConfigPostBean;
-import bean.usuario.filtro.FiltroUsuario;
+import filtro.usuario.FiltroUsuario;
+import service.UsuarioService;
 import bean.util.Mensagem;
 
 @Named
@@ -57,7 +56,10 @@ public class UsuarioBean implements Serializable
 
 	@Inject
 	private ConfigPostBean configPostBean;
-	
+
+	@Inject
+	private UsuarioService usuarioService;
+
 	public String cadastrar(boolean externo)
 	{
 		cadastro = true;
@@ -85,7 +87,7 @@ public class UsuarioBean implements Serializable
 	{
 		try
 		{
-			usuario.setSenha(BCrypt.hashpw(senha, BCrypt.gensalt(12)));
+			usuario.setSenha(usuarioService.hashPassword(senha));
 			usuarioDAO.salvar(usuario);
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
 
@@ -236,19 +238,7 @@ public class UsuarioBean implements Serializable
 
 	public String gerarSenhaAleatoria()
 	{
-		String str = "";
-		String[] carct = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-		"q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-		"U", "V", "W", "X", "Y", "Z" };
-		Random rand = new Random();
-		str += carct[rand.nextInt(10)];
-		str += carct[10 + rand.nextInt(26)];
-		str += carct[36 + rand.nextInt(26)];
-		for(int i = 0; i < 7; i++)
-		{
-			str += carct[rand.nextInt(carct.length)];
-		}
-		return str;
+		return usuarioService.gerarSenhaAleatoria();
 	}
 
 	public Usuario getUsuario()

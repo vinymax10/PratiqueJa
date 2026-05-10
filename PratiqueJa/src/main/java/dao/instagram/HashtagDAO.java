@@ -1,5 +1,6 @@
 package dao.instagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -23,7 +24,6 @@ public class HashtagDAO extends DAO<Hashtag>
 
 	public String getAny(int number)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Hashtag> query = builder.createQuery(Hashtag.class);
@@ -46,20 +46,19 @@ public class HashtagDAO extends DAO<Hashtag>
 	
 	public List<Hashtag> filtrar(String nome)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Hashtag> query = builder.createQuery(Hashtag.class);
 		Root<Hashtag> fromHashtag = query.from(Hashtag.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromHashtag.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromHashtag.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<Hashtag> typedQuery = em.createQuery(query.select(fromHashtag).where(predicate).distinct(true));
+		TypedQuery<Hashtag> typedQuery = em.createQuery(query.select(fromHashtag).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Hashtag> list = typedQuery.getResultList();
 
 		return list;

@@ -13,7 +13,7 @@ import jakarta.persistence.criteria.Root;
 import dao.DAO;
 import modelo.seguranca.Acesso;
 import modelo.usuario.Usuario;
-import bean.usuario.filtro.FiltroUsuario;
+import filtro.usuario.FiltroUsuario;
 
 public class UsuarioDAO extends DAO<Usuario>
 {
@@ -61,19 +61,18 @@ public class UsuarioDAO extends DAO<Usuario>
 
 	public Usuario getUsuarioGoogle(String sub)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);
 		Root<Usuario> fromUsuario = query.from(Usuario.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		Usuario usuario = null;
-		if(!sub.equals(""))
+		if(sub != null && !sub.isBlank())
 		{
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("subGoogle"), sub));
-			TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicate).distinct(true));
+			predicates.add(builder.equal(fromUsuario.get("subGoogle"), sub));
+			TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicates.toArray(new Predicate[0])).distinct(true));
 			try
 			{
 				usuario = typedQuery.getSingleResult();
@@ -88,33 +87,32 @@ public class UsuarioDAO extends DAO<Usuario>
 
 	public List<Usuario> buscar(FiltroUsuario filtroUsuario)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);
 		Root<Usuario> fromUsuario = query.from(Usuario.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroUsuario.getNome()!=null && !filtroUsuario.getNome().equals(""))
-			predicate = builder.and(predicate, builder.like(fromUsuario.get("nome"), "%" + filtroUsuario.getNome() + "%"));
+		if(filtroUsuario.getNome()!=null && !filtroUsuario.getNome().isBlank())
+			predicates.add(builder.like(fromUsuario.get("nome"), "%" + filtroUsuario.getNome() + "%"));
 
-		if(filtroUsuario.getEmail()!=null && !filtroUsuario.getEmail().equals(""))
-			predicate = builder.and(predicate, builder.like(fromUsuario.get("email"), "%" + filtroUsuario.getEmail() + "%"));
+		if(filtroUsuario.getEmail()!=null && !filtroUsuario.getEmail().isBlank())
+			predicates.add(builder.like(fromUsuario.get("email"), "%" + filtroUsuario.getEmail() + "%"));
 
 		if(filtroUsuario.getTurma() !=null)
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("turma").get("id"), filtroUsuario.getTurma().getId() ));
+			predicates.add(builder.equal(fromUsuario.get("turma").get("id"), filtroUsuario.getTurma().getId() ));
 		
 		if(filtroUsuario.getPerfil() !=null)
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("perfil"), filtroUsuario.getPerfil()));
+			predicates.add(builder.equal(fromUsuario.get("perfil"), filtroUsuario.getPerfil()));
 
 		if(filtroUsuario.getCriador() !=null)
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("criador"), filtroUsuario.getCriador() ));
+			predicates.add(builder.equal(fromUsuario.get("criador"), filtroUsuario.getCriador() ));
 	
 		if(filtroUsuario.getRecebeSpam() !=null)
-			predicate = builder.and(predicate, builder.equal(fromUsuario.get("recebeSpam"), filtroUsuario.getRecebeSpam() ));
+			predicates.add(builder.equal(fromUsuario.get("recebeSpam"), filtroUsuario.getRecebeSpam() ));
 		
-		TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicate).distinct(true));
+		TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Usuario> list = typedQuery.getResultList();
 
 		return list;
@@ -122,24 +120,23 @@ public class UsuarioDAO extends DAO<Usuario>
 
 	public List<Acesso> listaAcessos(Usuario usuario, LocalDate inicio, LocalDate fim)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
 		Root<Acesso> fromAcesso = query.from(Acesso.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(usuario != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromAcesso.get("usuario").get("id"), usuario.getId()));
+			predicates.add(builder.equal(fromAcesso.get("usuario").get("id"), usuario.getId()));
 
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromAcesso.get("data"), fim));
+			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("data"), fim));
 
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromAcesso.get("data"), inicio));
+			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("data"), inicio));
 		}
 
-		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicate).distinct(true));
+		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Acesso> list = typedQuery.getResultList();
 
 		return list;

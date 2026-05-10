@@ -13,8 +13,8 @@ import jakarta.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import auxiliar.FileAux;
-import auxiliar.Graphics;
+import util.FileAux;
+import infra.Graphics;
 import dao.instagram.ConfigPostDAO;
 import dao.instagram.ImagemPostDAO;
 import modelo.instagram.ConfigPost;

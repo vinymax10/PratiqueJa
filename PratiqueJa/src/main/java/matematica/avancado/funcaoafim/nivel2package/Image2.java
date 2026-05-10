@@ -2,7 +2,7 @@ package matematica.avancado.funcaoafim.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.avancado.funcaoafim.config.ConfigRetaInteiro;
 import matematica.expressao.MyExpression;
 import modelo.matematica.Conta;

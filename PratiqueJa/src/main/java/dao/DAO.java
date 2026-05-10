@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import auxiliar.ClasseAux;
-import filtro.FiltroConfig;
+import util.ClasseAux;
+import filtro.configuracao.FiltroConfig;
 import infra.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -92,12 +92,10 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 
 	public void clear()
 	{
-		em.clear();
 	}
 	
 	public List<T> buscar(FiltroConfig filtroConfig)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(classe);

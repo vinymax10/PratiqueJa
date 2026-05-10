@@ -2,7 +2,7 @@ package matematica.avancado.equacaosegundograu.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Auxiliar;
 import matematica.avancado.equacaosegundograu.ResolucaoEq2Grau;
 import matematica.avancado.equacaosegundograu.config.ConfigEq2Grau;

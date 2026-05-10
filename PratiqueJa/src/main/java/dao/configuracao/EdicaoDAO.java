@@ -1,5 +1,6 @@
 package dao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,15 +23,14 @@ public class EdicaoDAO extends DAO<Edicao>
 
 	public Edicao buscar()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Edicao> query = builder.createQuery(Edicao.class);
 		Root<Edicao> fromEdicao = query.from(Edicao.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		TypedQuery<Edicao> typedQuery = em.createQuery(query.select(fromEdicao).where(predicate));
+		TypedQuery<Edicao> typedQuery = em.createQuery(query.select(fromEdicao).where(predicates.toArray(new Predicate[0])));
 		List<Edicao> list = typedQuery.getResultList();
 
 		if(list.size()>0)

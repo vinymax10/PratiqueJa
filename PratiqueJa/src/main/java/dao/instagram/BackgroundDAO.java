@@ -1,5 +1,6 @@
 package dao.instagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,17 +23,16 @@ public class BackgroundDAO extends DAO<Background>
 
 	public List<Background> carregar(boolean feed)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Background> query = builder.createQuery(Background.class);
 		Root<Background> fromBackground = query.from(Background.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.equal(fromBackground.get("feed"), feed));
+		predicates.add(builder.equal(fromBackground.get("feed"), feed));
 
-		TypedQuery<Background> typedQuery = em.createQuery(query.select(fromBackground).where(predicate).distinct(true));
+		TypedQuery<Background> typedQuery = em.createQuery(query.select(fromBackground).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Background> list = typedQuery.getResultList();
 
 		return list;

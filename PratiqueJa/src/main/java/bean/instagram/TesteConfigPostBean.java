@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 
-import auxiliar.ColorHolder;
+import util.ColorHolder;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import bean.util.Mensagem;
@@ -21,8 +21,8 @@ import modelo.exercicio.Nivel;
 import modelo.instagram.ConfigPost;
 import modelo.instagram.ImagemPost;
 import modelo.instagram.ProgramacaoPost;
-import pdf.latex.InstagramFeed;
-import pdf.latex.TikTok;
+import pdf.social.InstagramFeed;
+import pdf.social.TikTok;
 
 @Named
 @ViewScoped

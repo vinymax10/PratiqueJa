@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import matematica.DefinicaoCores;
-import pdf.Convert;
+import pdf.util.Convert;
 
 public class Multiplicacao 
 {

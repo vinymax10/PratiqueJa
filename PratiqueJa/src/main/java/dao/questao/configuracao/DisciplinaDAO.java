@@ -1,5 +1,6 @@
 package dao.questao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAO;
@@ -21,20 +22,19 @@ public class DisciplinaDAO extends DAO<Disciplina>
 
 	public List<Disciplina> filtrar(String nome)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Disciplina> query = builder.createQuery(Disciplina.class);
 		Root<Disciplina> fromDisciplina = query.from(Disciplina.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromDisciplina.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromDisciplina.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<Disciplina> typedQuery = em.createQuery(query.select(fromDisciplina).where(predicate).distinct(true));
+		TypedQuery<Disciplina> typedQuery = em.createQuery(query.select(fromDisciplina).where(predicates.toArray(new Predicate[0])).distinct(true));
 		return typedQuery.getResultList();
 	}
 }

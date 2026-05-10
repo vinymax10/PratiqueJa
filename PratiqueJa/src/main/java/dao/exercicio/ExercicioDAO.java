@@ -1,6 +1,7 @@
 package dao.exercicio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -12,7 +13,7 @@ import dao.DAO;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.usuario.Usuario;
-import bean.exercicio.filtro.FiltroExercicio;
+import filtro.exercicio.FiltroExercicio;
 
 public class ExercicioDAO extends DAO<Exercicio>
 {
@@ -25,21 +26,20 @@ public class ExercicioDAO extends DAO<Exercicio>
 
 	public Long numeroMeusExercicios(Usuario usuario, Boolean realizado)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Long> query = builder.createQuery(Long.class);
 		Root<Exercicio> fromExercicio = query.from(Exercicio.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(realizado != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.get("realizado"), realizado.booleanValue()));
+			predicates.add(builder.equal(fromExercicio.get("realizado"), realizado.booleanValue()));
 
 		if(usuario != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), usuario.getId()));
+			predicates.add(builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), usuario.getId()));
 
-		query.select(builder.count(fromExercicio)).where(predicate);
+		query.select(builder.count(fromExercicio)).where(predicates.toArray(new Predicate[0]));
 		Long result = em.createQuery(query).getSingleResult();
 
 		return result;
@@ -47,23 +47,22 @@ public class ExercicioDAO extends DAO<Exercicio>
 	
 	public List<Exercicio> meusExercicios(Usuario usuario, Boolean realizada)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Exercicio> query = builder.createQuery(Exercicio.class);
 		Root<Exercicio> fromExercicio = query.from(Exercicio.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(realizada != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.get("realizado"), realizada.booleanValue()));
+			predicates.add(builder.equal(fromExercicio.get("realizado"), realizada.booleanValue()));
 
 		if(usuario != null)
 		{
-			predicate = builder.and(predicate, builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), usuario.getId()));
+			predicates.add(builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), usuario.getId()));
 		}
 
-		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicate)
+		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicates.toArray(new Predicate[0]))
 		.orderBy(builder.desc(fromExercicio.get("realizacao"))));
 		List<Exercicio> list = typedQuery.getResultList();
 
@@ -72,36 +71,35 @@ public class ExercicioDAO extends DAO<Exercicio>
 
 	public List<Exercicio> buscar(FiltroExercicio filtroExercicio)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Exercicio> query = builder.createQuery(Exercicio.class);
 		Root<Exercicio> fromExercicio = query.from(Exercicio.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		if(filtroExercicio.getRealizada() != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.get("realizado"), filtroExercicio.getRealizada().booleanValue()));
+			predicates.add(builder.equal(fromExercicio.get("realizado"), filtroExercicio.getRealizada().booleanValue()));
 
 		if(filtroExercicio.getUsuario() != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), filtroExercicio.getUsuario().getId()));
+			predicates.add(builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), filtroExercicio.getUsuario().getId()));
 
 		if(filtroExercicio.getExercicioPadrao() != null)
-			predicate = builder.and(predicate, builder.equal(fromExercicio.<ExercicioPadrao>get("exercicioPadrao").get("id"), filtroExercicio.getExercicioPadrao().getId()));
+			predicates.add(builder.equal(fromExercicio.<ExercicioPadrao>get("exercicioPadrao").get("id"), filtroExercicio.getExercicioPadrao().getId()));
 
 		if(filtroExercicio.getInicioRealizacao() != null)
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getInicioRealizacao()));
+			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getInicioRealizacao()));
 
 		if(filtroExercicio.getTerminoRealizacao() != null)
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getTerminoRealizacao()));
+			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getTerminoRealizacao()));
 
 		if(filtroExercicio.getInicioPrazo() != null)
-			predicate = builder.and(predicate, builder.greaterThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getInicioPrazo()));
+			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getInicioPrazo()));
 
 		if(filtroExercicio.getTerminoPrazo() != null)
-			predicate = builder.and(predicate, builder.lessThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getTerminoPrazo()));
+			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getTerminoPrazo()));
 
-		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicate).distinct(true));
+		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Exercicio> list = typedQuery.getResultList();
 
 		return list;
@@ -109,23 +107,21 @@ public class ExercicioDAO extends DAO<Exercicio>
 	
 	public List<Exercicio> exerciciosRealizados(int diasRemoverExercicioRealizado)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Exercicio> query = builder.createQuery(Exercicio.class);
 		Root<Exercicio> fromExercicio = query.from(Exercicio.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.equal(fromExercicio.get("realizado"), true));
+		predicates.add(builder.equal(fromExercicio.get("realizado"), true));
 
 		LocalDate hoje=LocalDate.now();
 		LocalDate limite = hoje.minusDays(diasRemoverExercicioRealizado);
 		
-		predicate = builder.and(predicate,
-			builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), limite));
+		predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), limite));
 
-		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicate));
+		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicates.toArray(new Predicate[0])));
 		List<Exercicio> list = typedQuery.getResultList();
 
 		return list;
@@ -133,23 +129,21 @@ public class ExercicioDAO extends DAO<Exercicio>
 	
 	public List<Exercicio> exerciciosNaoRealizados(int diasRemoverExercicioNaoRealizado)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Exercicio> query = builder.createQuery(Exercicio.class);
 		Root<Exercicio> fromExercicio = query.from(Exercicio.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		predicate = builder.and(predicate, builder.equal(fromExercicio.get("realizado"), false));
+		predicates.add(builder.equal(fromExercicio.get("realizado"), false));
 
 		LocalDate hoje=LocalDate.now();
 		LocalDate limite = hoje.minusDays(diasRemoverExercicioNaoRealizado);
 		
-		predicate = builder.and(predicate,
-			builder.lessThanOrEqualTo(fromExercicio.get("prazo"), limite));
+		predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("prazo"), limite));
 
-		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicate));
+		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicates.toArray(new Predicate[0])));
 		List<Exercicio> list = typedQuery.getResultList();
 
 		return list;

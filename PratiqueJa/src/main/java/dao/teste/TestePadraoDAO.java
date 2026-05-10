@@ -1,5 +1,6 @@
 package dao.teste;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -11,7 +12,7 @@ import dao.DAO;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.teste.TestePadrao;
 import modelo.usuario.Usuario;
-import bean.teste.filtro.FiltroTestePadrao;
+import filtro.teste.FiltroTestePadrao;
 
 public class TestePadraoDAO extends DAO<TestePadrao>
 {
@@ -24,32 +25,28 @@ public class TestePadraoDAO extends DAO<TestePadrao>
 
 	public List<TestePadrao> buscar(FiltroTestePadrao filtroTestePadrao)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<TestePadrao> query = builder.createQuery(TestePadrao.class);
 		Root<TestePadrao> fromTestePadrao = query.from(TestePadrao.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroTestePadrao.getNome() != null && !filtroTestePadrao.getNome().equals(""))
-			predicate = builder.and(predicate,
-			builder.like(fromTestePadrao.get("nome"), "%" + filtroTestePadrao.getNome() + "%"));
+		if(filtroTestePadrao.getNome() != null && !filtroTestePadrao.getNome().isBlank())
+			predicates.add(builder.like(fromTestePadrao.get("nome"), "%" + filtroTestePadrao.getNome() + "%"));
 		
 		if(filtroTestePadrao.getAssuntoCurso() != null)
-			predicate = builder.and(predicate,
-			builder.equal(fromTestePadrao.<Usuario>get("assuntoCurso").get("id"), filtroTestePadrao.getAssuntoCurso().getId()));
+			predicates.add(builder.equal(fromTestePadrao.<Usuario>get("assuntoCurso").get("id"), filtroTestePadrao.getAssuntoCurso().getId()));
 		
 		if(filtroTestePadrao.getNotaMinima() != null)
-			predicate = builder.and(predicate,
-			builder.equal(fromTestePadrao.<Usuario>get("notaMinima"), filtroTestePadrao.getNotaMinima()));
+			predicates.add(builder.equal(fromTestePadrao.<Usuario>get("notaMinima"), filtroTestePadrao.getNotaMinima()));
 
 		if(filtroTestePadrao.getDuracao() != null)
-			predicate = builder.and(predicate, builder.equal(fromTestePadrao.<ExercicioPadrao>get("duracao"),
+			predicates.add(builder.equal(fromTestePadrao.<ExercicioPadrao>get("duracao"),
 			filtroTestePadrao.getDuracao()));
 
 		TypedQuery<TestePadrao> typedQuery = em
-		.createQuery(query.select(fromTestePadrao).where(predicate).distinct(true));
+		.createQuery(query.select(fromTestePadrao).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<TestePadrao> list = typedQuery.getResultList();
 
 		return list;
@@ -57,16 +54,15 @@ public class TestePadraoDAO extends DAO<TestePadrao>
 	
 	public List<TestePadrao> listaTodos()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<TestePadrao> query = builder.createQuery(TestePadrao.class);
 		Root<TestePadrao> fromTestePadrao = query.from(TestePadrao.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
 		TypedQuery<TestePadrao> typedQuery = em
-		.createQuery(query.select(fromTestePadrao).where(predicate).distinct(true));
+		.createQuery(query.select(fromTestePadrao).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<TestePadrao> list = typedQuery.getResultList();
 
 		return list;

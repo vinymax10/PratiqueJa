@@ -2,7 +2,7 @@ package matematica.basico.regratres;
 
 import java.util.Random;
 
-import auxiliar.Algebra;
+import util.Algebra;
 import matematica.DefinicaoCores;
 import matematica.ParCor;
 import matematica.avancado.combinatoria.AuxCombinacao;

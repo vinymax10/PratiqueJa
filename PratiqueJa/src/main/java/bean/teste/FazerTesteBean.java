@@ -22,7 +22,7 @@ import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.ResultadoTeste;
 import modelo.teste.Teste;
-import bean.teste.filtro.FiltroTeste;
+import filtro.teste.FiltroTeste;
 import bean.util.Mensagem;
 
 @Named

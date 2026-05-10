@@ -2,7 +2,7 @@ package matematica.intermediario.razoestrigonometricas.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Racional;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;

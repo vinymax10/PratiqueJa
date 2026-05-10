@@ -9,7 +9,7 @@ import jakarta.inject.Inject;
 import modelo.seguranca.Acesso;
 import modelo.seguranca.StatusAcesso;
 import modelo.usuario.Usuario;
-import session.Sessao;
+import web.session.Sessao;
 
 @ApplicationScoped
 public class AcessoService

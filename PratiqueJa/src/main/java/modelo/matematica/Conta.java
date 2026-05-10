@@ -24,7 +24,7 @@ import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 
-import auxiliar.StringAux;
+import util.StringAux;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.TipoExercicio;
 import modelo.teste.EtapaTeste;
-import pdf.Convert;
+import pdf.util.Convert;
 
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

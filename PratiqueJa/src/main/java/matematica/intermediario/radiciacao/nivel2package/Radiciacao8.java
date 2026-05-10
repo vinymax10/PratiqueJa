@@ -2,7 +2,7 @@ package matematica.intermediario.radiciacao.nivel2package;
 
 import matematica.intermediario.radiciacao.ResolucaoRadiciacao;
 import modelo.matematica.Conta;
-import pdf.Convert;
+import pdf.util.Convert;
 
 
 public class Radiciacao8 extends Conta

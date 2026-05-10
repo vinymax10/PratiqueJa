@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import jakarta.persistence.Transient;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.intermediario.semelhancaangulos.AuxSemelhancaAngulos;
 import modelo.matematica.Conta;
 

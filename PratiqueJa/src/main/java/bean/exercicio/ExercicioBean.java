@@ -5,10 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -26,21 +24,20 @@ import org.primefaces.model.StreamedContent;
 
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
-import bean.exercicio.filtro.FiltroExercicio;
+import filtro.exercicio.FiltroExercicio;
 import bean.seguranca.AutenticacaoBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioDAO;
-import dao.exercicio.ResultadoExercicioDAO;
 import dao.usuario.UsuarioDAO;
+import service.ExercicioService;
 import infra.Navegacao;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.exercicio.ResultadoExercicio;
 import modelo.matematica.Conta;
 import modelo.usuario.Usuario;
-import pdf.latex.GerarLatexExercicio;
-import session.SessionContext;
+import pdf.exercicio.GerarLatexExercicio;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped
@@ -87,8 +84,8 @@ public class ExercicioBean implements Serializable
 	private ExercicioPadrao exercicioPadrao;
 	
 	@Inject
-	private ResultadoExercicioDAO resultadoExercicioDAO;
-	
+	private ExercicioService exercicioService;
+
 	public String cadastrar()
 	{
 		activeIndex = 0;
@@ -115,31 +112,9 @@ public class ExercicioBean implements Serializable
 
 	private void construirExercicio()
 	{
-		Conta conta;
 		try
 		{
-			for(int i = 0; i < exercicio.getExercicioPadrao().getQuantidade(); i++)
-			{
-				do
-				{
-					conta = (Conta) Class.forName(exercicio.getExercicioPadrao().getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-					conta.setExercicio(exercicio);
-					conta.setTipoExercicio(exercicio.getExercicioPadrao().getTipoExercicio());
-				}
-				while(exercicio.getContas().contains(conta));
-				exercicio.getContas().add(conta);
-			}
-			
-			if(exercicio.getPrazo()==null)
-				exercicio.setPrazo(LocalDate.now());
-			
-			exercicioDAO.salvar(exercicio);
-
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
+			exercicioService.construirExercicio(exercicio);
 		}
 		catch(Exception e)
 		{
@@ -218,32 +193,7 @@ public class ExercicioBean implements Serializable
 
 	public String responder(Conta conta)
 	{
-		conta.setRespondida(true);
-		if(conta.isCorreta())
-			exercicio.incrementaContasCorretas();
-		
-		exercicio.incrementaContasRealizadas();
-		exercicio.calculaNota();
-		exercicio.setRealizacao(LocalDate.now());
-		exercicio.setRealizado(true);
-		
-		if(exercicio.getResultadoExercicio()==null)
-		{
-			ResultadoExercicio resultadoExercicio = new ResultadoExercicio();
-			resultadoExercicio.setExercicioPadrao(exercicio.getExercicioPadrao());
-			resultadoExercicio.setUsuario(exercicio.getUsuario());
-			resultadoExercicio.setRealizacao(LocalDate.now());
-			resultadoExercicio.setNota(exercicio.getNota());
-			resultadoExercicioDAO.salvar(resultadoExercicio);
-			exercicio.setResultadoExercicio(resultadoExercicio);
-		}
-		else
-		{
-			ResultadoExercicio resultadoExercicio = exercicio.getResultadoExercicio();
-			resultadoExercicio.setNota(exercicio.getNota());
-			resultadoExercicioDAO.salvar(resultadoExercicio);
-		}
-		exercicioDAO.salvar(exercicio);
+		exercicioService.registrarResposta(exercicio, conta);
 		return "";
 	}
 	

@@ -2,7 +2,7 @@ package matematica.avancado.funcaoafim.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Racional;
 import matematica.avancado.funcaoafim.config.ConfigRetaReal;
 import matematica.expressao.MyExpression;

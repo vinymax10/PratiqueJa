@@ -15,7 +15,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.apache.commons.io.IOUtils;
 import org.omnifaces.cdi.Startup;
 
-import auxiliar.ColorHolder;
+import util.ColorHolder;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import dao.instagram.ConfigPostDAO;
@@ -33,8 +33,8 @@ import modelo.instagram.FinalidadeCta;
 import modelo.instagram.PerfilCriador;
 import modelo.instagram.ProgramacaoPost;
 import modelo.usuario.Usuario;
-import pdf.latex.InstagramFeed;
-import pdf.latex.TikTok;
+import pdf.social.InstagramFeed;
+import pdf.social.TikTok;
 import service.EmailService;
 
 @Startup

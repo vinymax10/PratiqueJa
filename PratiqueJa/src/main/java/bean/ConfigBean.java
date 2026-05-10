@@ -11,12 +11,12 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.ReorderEvent;
 import org.primefaces.event.SelectEvent;
 
-import auxiliar.ClasseAux;
-import auxiliar.ListAux;
+import util.ClasseAux;
+import util.ListAux;
 import bean.util.Mensagem;
 import dao.DAO;
 import exceptions.RelacaoException;
-import filtro.FiltroConfig;
+import filtro.configuracao.FiltroConfig;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;

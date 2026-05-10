@@ -2,7 +2,7 @@ package matematica.intermediario.semelhancatriangulos.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.intermediario.semelhancatriangulos.ConfigValores1;
 import matematica.intermediario.semelhancatriangulos.nivel1package.ConfigSemelhancaTriangulos2;
 import modelo.matematica.Conta;

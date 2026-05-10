@@ -137,9 +137,6 @@ a:hover {
 }
 
 .menubar ul {
-	background: url("/image/logoMarcaDagua.png") center;
-	background-repeat: no-repeat;
-	background-size: 150px;
 }
 
 .menu-usuario, li:has(a.menu-usuario) {
@@ -191,6 +188,32 @@ footer .container {
 .menubar > .ui-menu-list > .ui-menuitem > .ui-state-hover {
 	background: var(--menubar-bg-color-hover) !important;
 	border-radius: 4px;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+}
+
+.brand .logo-text {
+	width: 48px;
+	height: 48px;
+	
+	display: grid;
+	place-items: center;
+	color: white;
+	font-weight: 700;
+	font-size: 20px;
+	mix-blend-mode: multiply;
+}
+
+.brand .linkPage {
+	color: #7d7d7d;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 10px;
+	margin-top: 2px;
 }
 
 .textInfo {
@@ -649,8 +672,8 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 .title-card {
 	color: var(--azul);
 	width: 100%;
-	margin: 0.5rem 1rem;
-	margin-bottom: 0;
+	margin:0.5rem 1rem;
+	margin-bottom:0;
 }
 
 .title-divisor {

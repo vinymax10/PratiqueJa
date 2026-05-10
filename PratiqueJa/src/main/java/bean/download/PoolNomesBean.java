@@ -10,7 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import auxiliar.FileAux;
+import util.FileAux;
 import dao.configuracao.ConfigLatexDAO;
 import modelo.configuracao.ConfigLatex;
 

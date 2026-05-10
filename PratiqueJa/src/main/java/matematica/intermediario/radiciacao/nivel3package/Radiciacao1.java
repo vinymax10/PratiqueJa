@@ -3,7 +3,7 @@ package matematica.intermediario.radiciacao.nivel3package;
 import matematica.intermediario.radiciacao.FatoresPrimos;
 import matematica.intermediario.radiciacao.ResolucaoRadiciacao;
 import modelo.matematica.Conta;
-import pdf.Convert;
+import pdf.util.Convert;
 
 
 public class Radiciacao1 extends Conta

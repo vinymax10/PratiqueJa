@@ -1,5 +1,6 @@
 package dao.configuracao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,15 +23,14 @@ public class ConfigCleanupDAO extends DAO<ConfigCleanup>
 
 	public ConfigCleanup buscar()
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ConfigCleanup> query = builder.createQuery(ConfigCleanup.class);
 		Root<ConfigCleanup> fromConfigCleanup = query.from(ConfigCleanup.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		TypedQuery<ConfigCleanup> typedQuery = em.createQuery(query.select(fromConfigCleanup).where(predicate));
+		TypedQuery<ConfigCleanup> typedQuery = em.createQuery(query.select(fromConfigCleanup).where(predicates.toArray(new Predicate[0])));
 		List<ConfigCleanup> list = typedQuery.getResultList();
 
 		if(list.size()>0)

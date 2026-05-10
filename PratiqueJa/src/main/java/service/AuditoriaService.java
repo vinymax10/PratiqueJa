@@ -22,7 +22,7 @@ import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.diff.changetype.ValueChange;
 
-import auxiliar.ClasseAux;
+import util.ClasseAux;
 import dao.AuditoriaEventoDAO;
 import filtro.auditoria.FiltroAuditoria;
 import jakarta.ejb.Stateless;
@@ -36,7 +36,7 @@ import modelo.auditoria.AuditoriaEvento;
 import modelo.auditoria.GeneroGramatical;
 import modelo.auditoria.TipoEvento;
 import modelo.usuario.Usuario;
-import session.Sessao;
+import web.session.Sessao;
 
 @Stateless
 public class AuditoriaService implements Serializable

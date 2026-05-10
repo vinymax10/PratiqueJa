@@ -2,7 +2,7 @@ package matematica.intermediario.pitagoras.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.intermediario.pitagoras.ResolucaoPitagoras;
 import matematica.intermediario.pitagoras.config.Config;
 import matematica.intermediario.pitagoras.dados.Dados;

@@ -19,7 +19,7 @@ import modelo.Entidade;
 import modelo.auditoria.AuditoriaEvento;
 import modelo.auditoria.EntidadeAuditavel;
 import modelo.auditoria.TipoEvento;
-import pdfERP.auditoria.AuditoriaPDF;
+import pdf.relatorio.AuditoriaPDF;
 import service.AuditoriaService;
 
 @Data

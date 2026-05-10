@@ -1,5 +1,6 @@
 package dao.instagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.TypedQuery;
@@ -22,20 +23,19 @@ public class ConviteGrupoDAO extends DAO<ConviteGrupo>
 
 	public List<ConviteGrupo> filtrar(String nome)
 	{
-		em.clear();
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ConviteGrupo> query = builder.createQuery(ConviteGrupo.class);
 		Root<ConviteGrupo> fromConviteGrupo = query.from(ConviteGrupo.class);
 
-		Predicate predicate = builder.and();
+		List<Predicate> predicates = new ArrayList<>();
 
-		if(!nome.equals(""))
+		if(nome != null && !nome.isBlank())
 		{
-			predicate = builder.and(predicate, builder.like(fromConviteGrupo.<String>get("nome"), "%" + nome + "%"));
+			predicates.add(builder.like(fromConviteGrupo.<String>get("nome"), "%" + nome + "%"));
 		}
 
-		TypedQuery<ConviteGrupo> typedQuery = em.createQuery(query.select(fromConviteGrupo).where(predicate).distinct(true));
+		TypedQuery<ConviteGrupo> typedQuery = em.createQuery(query.select(fromConviteGrupo).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<ConviteGrupo> list = typedQuery.getResultList();
 
 		return list;

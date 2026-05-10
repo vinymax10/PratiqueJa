@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import auxiliar.ValidaSenha;
+import util.ValidaSenha;
 import bean.seguranca.SessaoBean;
 import dao.seguranca.PasswordResetTokenDAO;
 import dao.usuario.UsuarioDAO;
@@ -26,7 +26,7 @@ import modelo.seguranca.PasswordResetToken;
 import modelo.usuario.Usuario;
 import service.AcessoService;
 import service.EmailService;
-import session.Sessao;
+import web.session.Sessao;
 
 @Data
 @Named

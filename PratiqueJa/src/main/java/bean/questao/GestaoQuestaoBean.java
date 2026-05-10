@@ -25,6 +25,7 @@ import bean.questao.configuracao.DisciplinaBean;
 import bean.questao.configuracao.OrgaoBean;
 import bean.util.Mensagem;
 import dao.questao.QuestaoDAO;
+import filtro.questao.FiltroQuestao;
 import infra.Navegacao;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -43,7 +44,7 @@ import modelo.questao.configuracao.Banca;
 import modelo.questao.configuracao.Disciplina;
 import modelo.questao.configuracao.Orgao;
 import scraping.QuestaoQ;
-import session.SessionContext;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped

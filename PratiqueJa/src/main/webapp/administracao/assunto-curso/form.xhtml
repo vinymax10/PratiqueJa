@@ -1,0 +1,162 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{assuntoCursoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewParam name="chave" value="#{assuntoCursoBean.chave}" />
+	    <f:viewParam name="cadastro" value="#{assuntoCursoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+	    <f:viewAction action="#{assuntoCursoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<h4 class="title-divisor" >Assunto do Curso</h4>
+
+		<div class="ui-fluid gride" >
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText value="#{assuntoCursoBean.entidade.nome}"
+				placeholder="Ex.: Matemática Básica" required="true"
+				requiredMessage="O nome é obrigatório" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Chave" />
+				<p:inputText value="#{assuntoCursoBean.entidade.chave}"
+				placeholder="Ex.: matematica-basica" required="true"
+				requiredMessage="A chave é obrigatória" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Módulo" />
+				<p:selectOneMenu value="#{assuntoCursoBean.entidade.modulo}"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O módulo é obrigatório">
+	            	<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{moduloBean.opcoes}" var="opcao"
+						itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Teste Padrão" />
+				<p:selectOneMenu value="#{assuntoCursoBean.entidade.testePadrao}"
+				converter="generic" filter="true" filterMatchMode="contains">
+	            	<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{testePadraoBean.todosTestesPadroes}" var="testePadrao"
+						itemLabel="#{testePadrao.nome}" itemValue="#{testePadrao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Hashtag" />
+				<p:inputText value="#{assuntoCursoBean.entidade.hashtag}"
+				placeholder="Hashtag" maxlength="255" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Habilitado" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{assuntoCursoBean.entidade.habilidado}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Mostrar Aulas" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{assuntoCursoBean.entidade.showAula}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Mostrar Anotações" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{assuntoCursoBean.entidade.showAnotacao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Mostrar Exercícios" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{assuntoCursoBean.entidade.showExercicio}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Mostrar Questões" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{assuntoCursoBean.entidade.showQuestao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12">
+				<p:outputLabel for="@next" value="Descrição" />
+				<p:inputTextarea rows="5" value="#{assuntoCursoBean.entidade.descricao}"
+				placeholder="Descrição do assunto do curso." maxlength="4095" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button" >
+
+			<div class="divisor" ></div>
+
+		    <div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!assuntoCursoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{assuntoCursoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Assunto do Curso?" />
+				</p:commandButton>
+
+			</div>
+
+   			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !assuntoCursoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(assuntoCursoBean.entidade, assuntoCursoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/assunto-curso/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{assuntoCursoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{assuntoCursoBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!assuntoCursoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{assuntoCursoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

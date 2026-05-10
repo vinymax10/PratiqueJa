@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import auxiliar.Graphics;
+import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 import matematica.intermediario.semelhancatriangulos.ConfigSemelhancaAngulos;

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
-import auxiliar.StringAux;
+import util.StringAux;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +18,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import modelo.Config;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
@@ -29,7 +30,7 @@ import modelo.teste.TestePadrao;
 @ToString(exclude = { "exerciciosPadrao", "questoes", "testePadrao" })
 @Data
 @Entity
-public class AssuntoCurso implements Serializable, Entidade
+public class AssuntoCurso extends Config implements Entidade
 {
 	private static final long serialVersionUID = 1L;
 
@@ -41,9 +42,6 @@ public class AssuntoCurso implements Serializable, Entidade
 
 	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
-
-	@AuditLabel(value = "índice")
-	private int indice;
 
 	@Column(length = 255)
 	@Size(max = 255)

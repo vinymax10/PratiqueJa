@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.usuario.filtro.FiltroAcesso;
+import filtro.usuario.FiltroAcesso;
 import dao.seguranca.AcessoDAO;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;

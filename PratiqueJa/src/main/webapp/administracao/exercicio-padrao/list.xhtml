@@ -1,0 +1,90 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{exercicioPadraoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewAction action="#{exercicioPadraoBean.filtrar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row" >
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText id="globalFilter" value="#{exercicioPadraoBean.filtro.nomeEnunciadoDescricao}"
+						placeholder="Nome / Enunciado / Descrição" styleClass="w-full" >
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{exercicioPadraoBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+
+				<ui:include src="/exportar/exportar.xhtml" >
+					<ui:param name="id" value="form:tabela" />
+					<ui:param name="nome" value="ExerciciosPadrao" />
+				</ui:include>
+
+				<p:button value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				href="/administracao/exercicio-padrao/form.xhtml?cadastro=true" />
+
+			</div>
+		</div>
+
+		<ui:include src="/administracao/exercicio-padrao/filtro.xhtml" />
+
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
+			var="entidade" value="#{exercicioPadraoBean.lista}" reflow="true"
+			selection="#{exercicioPadraoBean.entidade}" selectionMode="single"
+			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">
+
+			<p:ajax event="rowSelect" update="@form" listener="#{exercicioPadraoBean.onSelected}"
+			resetValues="true"/>
+			
+			<p:column headerText="Nome" responsivePriority="2" width="25%">
+				<h:outputText value="#{entidade.nome}" />
+			</p:column>
+			
+			<p:column headerText="Assunto Curso" responsivePriority="1" width="25%">
+				<h:outputText value="#{entidade.assuntoCurso.nome}" />
+			</p:column>
+			
+			<p:column headerText="Módulo" responsivePriority="3" width="15%">
+				<h:outputText value="#{entidade.assuntoCurso.modulo.nome}" />
+			</p:column>
+
+			<p:column headerText="Nível" responsivePriority="4" width="15%">
+				<h:outputText value="#{entidade.nivel.nome}" />
+			</p:column>
+
+			<p:column headerText="Tipo" responsivePriority="5" width="10%">
+				<h:outputText value="#{entidade.tipoExercicio.nome}" />
+			</p:column>
+
+			<p:column headerText="Qtd" responsivePriority="6" width="10%">
+				<h:outputText value="#{entidade.quantidade}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</ui:decorate>

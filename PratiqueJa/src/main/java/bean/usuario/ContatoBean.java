@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import auxiliar.StringAux;
-import bean.usuario.filtro.FiltroContato;
+import util.StringAux;
+import filtro.usuario.FiltroContato;
 import bean.util.Mensagem;
 import dao.usuario.ContatoDAO;
 import jakarta.faces.application.FacesMessage;
@@ -16,7 +16,7 @@ import jakarta.inject.Named;
 import modelo.usuario.Contato;
 import modelo.usuario.Usuario;
 import service.EmailService;
-import session.SessionContext;
+import web.session.SessionContext;
 
 @Named
 @ViewScoped

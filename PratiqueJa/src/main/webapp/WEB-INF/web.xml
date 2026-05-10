@@ -7,7 +7,7 @@
 
 	<filter>
 		<filter-name>PageFilter</filter-name>
-		<filter-class>session.PageFilter</filter-class>
+		<filter-class>web.filter.PageFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -46,7 +46,7 @@
 		<session-timeout>120</session-timeout>
 	</session-config>
 	<listener>
-		<listener-class>session.SessionListener</listener-class>
+		<listener-class>web.listener.SessionListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>jakarta.faces.PROJECT_STAGE</param-name>

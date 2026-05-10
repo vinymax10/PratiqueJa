@@ -172,7 +172,7 @@ public class ProgramacaoPostBean implements Serializable
 	public String programacaoDefault()
 	{
 		removerTodos();
-		List<AssuntoCurso> assuntos=assuntoCursoBean.getTodosAssuntoCursos();
+		List<AssuntoCurso> assuntos=assuntoCursoBean.getListaAtivas();
 		AssuntoCurso assuntoCurso;
 		for(int i = 0; i < assuntos.size(); i++)
 		{

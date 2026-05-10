@@ -14,8 +14,8 @@ import org.primefaces.model.FilterMeta;
 import dao.exercicio.ResultadoExercicioDAO;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
-import session.SessionContext;
-import bean.exercicio.filtro.FiltroResultadoExercicio;
+import web.session.SessionContext;
+import filtro.exercicio.FiltroResultadoExercicio;
 import bean.usuario.UsuarioBean;
 
 @Named
