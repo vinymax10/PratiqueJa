@@ -62,27 +62,19 @@
 
 			<p:ajax event="rowReorder" listener="#{assuntoCursoBean.onRowReorder}" update="@form"/>
 
-			<p:column headerText="Nome" responsivePriority="1">
+			<p:column headerText="Nome" responsivePriority="1" width="30%">
 				<h:outputText value="#{entidade.nome}"/>
 			</p:column>
 
-			<p:column headerText="Chave" responsivePriority="2">
+			<p:column headerText="Módulo" responsivePriority="2" width="15%">
+				<h:outputText value="#{entidade.modulo.nome}"/>
+			</p:column>
+			
+			<p:column headerText="Chave" responsivePriority="6" width="25%">
 				<h:outputText value="#{entidade.chave}"/>
 			</p:column>
 
-			<p:column headerText="Módulo" responsivePriority="1">
-				<h:outputText value="#{entidade.modulo.nome}"/>
-			</p:column>
-
-			<p:column headerText="Teste Padrão" responsivePriority="3">
-				<h:outputText value="#{entidade.testePadrao.nome}"/>
-			</p:column>
-
-			<p:column headerText="Ordem" responsivePriority="4">
-				<h:outputText value="#{entidade.ordem}"/>
-			</p:column>
-
-			<p:column headerText="Habilitado" responsivePriority="2" style="width:6rem"
+			<p:column headerText="Habilitado" responsivePriority="3" width="10%"
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.habilidado}" >
 					<p:ajax event="change" process="@this"
@@ -90,23 +82,7 @@
 				</p:toggleSwitch>
 			</p:column>
 
-			<p:column headerText="Aulas" responsivePriority="5" style="width:5rem"
-			styleClass="coluna-ativo">
-				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showAula}" >
-					<p:ajax event="change" process="@this"
-					listener="#{assuntoCursoBean.salvar(entidade)}" />
-				</p:toggleSwitch>
-			</p:column>
-
-			<p:column headerText="Anotações" responsivePriority="5" style="width:6rem"
-			styleClass="coluna-ativo">
-				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showAnotacao}" >
-					<p:ajax event="change" process="@this"
-					listener="#{assuntoCursoBean.salvar(entidade)}" />
-				</p:toggleSwitch>
-			</p:column>
-
-			<p:column headerText="Exercícios" responsivePriority="5" style="width:6rem"
+			<p:column headerText="Exercícios" responsivePriority="4" width="10%"
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showExercicio}" >
 					<p:ajax event="change" process="@this"
@@ -114,7 +90,7 @@
 				</p:toggleSwitch>
 			</p:column>
 
-			<p:column headerText="Questões" responsivePriority="5" style="width:6rem"
+			<p:column headerText="Questões" responsivePriority="5" width="10%"
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showQuestao}" >
 					<p:ajax event="change" process="@this"

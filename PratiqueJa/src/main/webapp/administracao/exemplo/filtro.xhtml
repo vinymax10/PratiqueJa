@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			<div id="filtros"  style="width: 100%;display:none;">
+			
+				<p:card class="newBorder mb-3" style="width: 100%;">
+					<div class="ui-fluid gride" >
+						<h4 class="title-card" >Filtro</h4>
+						
+						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						    <p:outputLabel for="@next" value="Status" />
+						    <p:selectOneMenu value="#{vendaBean.filtro.status}"
+						        filter="true" filterMatchMode="contains">
+						        
+						        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+						        
+						        <f:selectItems value="#{vendaBean.statusVenda}"
+						            var="opcao"
+						            itemLabel="#{opcao.nome}"
+						            itemValue="#{opcao}" />
+						    </p:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						    <p:outputLabel for="@next" value="Vendedor" />
+						    <p:selectOneMenu value="#{vendaBean.filtro.vendedor}"
+						        filter="true" filterMatchMode="contains" converter="generic">
+						        
+						        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{funcionarioBean.vendedores()}" var="opcao"
+									itemLabel="#{opcao.nomeExibicao}" itemValue="#{opcao}" />
+						    </p:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						    <p:outputLabel for="@next" value="Canal" />
+						    <p:selectOneMenu value="#{vendaBean.filtro.canalAtendimento}"
+						        filter="true" filterMatchMode="contains" converter="generic">
+						        
+						        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+						       <f:selectItems value="#{canalAtendimentoBean.opcoesAtivas}" var="opcao"
+								itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+						    </p:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						    <p:outputLabel for="preset" value="Períodos Comuns" />
+						    <p:selectOneMenu id="preset"
+						        value="#{vendaBean.filtro.preset}"
+						        filter="true"
+						        filterMatchMode="contains">
+						        
+						        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+						        
+						        <f:selectItems value="#{periodoPresetBean.opcoes}"
+						            var="opcao"
+						            itemLabel="#{opcao.nome}"
+						            itemValue="#{opcao}" />
+						        
+						        <p:ajax event="change"
+						            listener="#{vendaBean.filtro.aplicarPreset}"
+						            update="form:periodo"/>
+						    </p:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						    <p:outputLabel for="periodo" value="Período" />
+						    <p:datePicker id="periodo"
+						        value="#{vendaBean.filtro.periodo}"
+						        selectionMode="range"
+						        placeholder="Período"
+						        locale="pt"
+						        monthNavigator="true"
+						        yearNavigator="select"
+						        readonlyInput="true"
+						        hideOnRangeSelection="true">
+						        
+						        <p:ajax event="change"
+						            listener="#{vendaBean.filtro.resetPreset}"
+						            update="form:preset"/>
+						    </p:datePicker>
+						</h:panelGroup>
+						
+					</div>
+				
+					<div class="content-button-right" >
+							
+						<div class="divisor" ></div>
+							
+						<p:commandButton value="Limpar"
+						styleClass="ui-button-flat ui-button-plain" 
+						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
+						action="#{vendaBean.filtrarInit}" update="@form"  >
+						</p:commandButton>
+						
+						<p:commandButton id="filtrar" value="Filtrar"
+						styleClass="ui-button-raised ui-button-primary" 
+						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
+						action="#{vendaBean.filtrar}" update="@form, :growl"  process="@form"	>
+							<p:defaultCommand target="form:filtrar"/>
+						</p:commandButton>
+							
+					</div>
+	       
+				</p:card>
+			</div>
+		</ui:composition>		
+		
+	</h:body>
+</html>
+
+	

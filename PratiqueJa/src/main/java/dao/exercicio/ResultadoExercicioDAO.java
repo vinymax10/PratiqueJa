@@ -3,16 +3,16 @@ package dao.exercicio;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DAO;
+import filtro.exercicio.FiltroResultadoExercicio;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import dao.DAO;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
-import filtro.exercicio.FiltroResultadoExercicio;
 
 public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 {
@@ -25,113 +25,82 @@ public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 
 	public List<ResultadoExercicio> listar(Usuario usuario)
 	{
-
-		TypedQuery<ResultadoExercicio> query = em.createQuery("Select e from ResultadoExercicio e WHERE e.usuario.id = : usuarioId ORDER BY e.realizacao DESC",
-		ResultadoExercicio.class);
+		TypedQuery<ResultadoExercicio> query = em.createQuery(
+			"Select e from ResultadoExercicio e WHERE e.usuario.id = :usuarioId ORDER BY e.realizacao DESC",
+			ResultadoExercicio.class);
 
 		query.setParameter("usuarioId", usuario.getId());
 
-		List<ResultadoExercicio> list = query.getResultList();
-
-		return list;
+		return query.getResultList();
 	}
 
 	public List<ResultadoExercicio> exerciciosRealizados100(ExercicioPadrao exercicio, Usuario usuario)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ResultadoExercicio> query = builder.createQuery(ResultadoExercicio.class);
-		Root<ResultadoExercicio> fromResultadoExercicio = query.from(ResultadoExercicio.class);
+		Root<ResultadoExercicio> from = query.from(ResultadoExercicio.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-
-		predicates.add(builder.greaterThanOrEqualTo(fromResultadoExercicio.<Double>get("nota"), 1d));
+		predicates.add(builder.greaterThanOrEqualTo(from.<Double>get("nota"), 1d));
 
 		if(exercicio != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.<ExercicioPadrao>get("exercicio").get("id"), exercicio.getId()));
-		}
+			predicates.add(builder.equal(from.<ExercicioPadrao>get("exercicioPadrao").get("id"), exercicio.getId()));
 
 		if(usuario != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.<Usuario>get("usuario").get("id"), usuario.getId()));
-		}
+			predicates.add(builder.equal(from.<Usuario>get("usuario").get("id"), usuario.getId()));
 
-		TypedQuery<ResultadoExercicio> typedQuery = em.createQuery(query.select(fromResultadoExercicio).where(predicates.toArray(new Predicate[0])));
-		List<ResultadoExercicio> list = typedQuery.getResultList();
-
-		return list;
+		return em.createQuery(query.select(from).where(predicates.toArray(new Predicate[0]))).getResultList();
 	}
 
-	public List<ResultadoExercicio> buscar(FiltroResultadoExercicio filtroResultadoExercicio)
+	public List<ResultadoExercicio> buscar(FiltroResultadoExercicio filtro)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ResultadoExercicio> query = builder.createQuery(ResultadoExercicio.class);
-		Root<ResultadoExercicio> fromResultadoExercicio = query.from(ResultadoExercicio.class);
+		Root<ResultadoExercicio> from = query.from(ResultadoExercicio.class);
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroResultadoExercicio.getUsuario() != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.get("usuario").get("id"), filtroResultadoExercicio.getUsuario().getId()));
-		}
-		
-		if(filtroResultadoExercicio.getNomeUsuario() != null && !filtroResultadoExercicio.getNomeUsuario().isBlank())
-		{
+		if(filtro.getUsuario() != null)
+			predicates.add(builder.equal(from.get("usuario").get("id"), filtro.getUsuario().getId()));
 
-			predicates.add(builder.like(fromResultadoExercicio.<Usuario>get("usuario").get("nome"), "%" + filtroResultadoExercicio.getNomeUsuario() + "%"));
-		}
+		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
+			predicates.add(builder.like(from.<Usuario>get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 
-		if(filtroResultadoExercicio.getAssuntoCurso() != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.get("exercicio").get("assuntoCurso").get("id"), filtroResultadoExercicio.getAssuntoCurso().getId()));
-		}
+		if(filtro.getAssuntoCurso() != null)
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("assuntoCurso").get("id"), filtro.getAssuntoCurso().getId()));
 
-		if(filtroResultadoExercicio.getModulo() != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.get("exercicio").get("assuntoCurso").get("modulo"), filtroResultadoExercicio.getModulo()));
-		}
+		if(filtro.getModulo() != null)
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("assuntoCurso").get("modulo"), filtro.getModulo()));
 
-		if(filtroResultadoExercicio.getNivel() != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.get("exercicio").get("nivel"), filtroResultadoExercicio.getNivel()));
-		}
+		if(filtro.getNivel() != null)
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("nivel"), filtro.getNivel()));
 
-		if(filtroResultadoExercicio.getNomeExercicio() != null && !filtroResultadoExercicio.getNomeExercicio().isBlank())
+		if(filtro.getTipoExercicio() != null)
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("tipoExercicio"), filtro.getTipoExercicio()));
+
+		if(filtro.getNomeEnunciadoDescricao() != null && !filtro.getNomeEnunciadoDescricao().isBlank())
 		{
-			predicates.add(builder.like(fromResultadoExercicio.get("exercicio").get("nome"), "%" + filtroResultadoExercicio.getNomeExercicio() + "%"));
+			String like = "%" + filtro.getNomeEnunciadoDescricao() + "%";
+			predicates.add(builder.or(
+				builder.like(from.get("exercicioPadrao").get("nome"), like),
+				builder.like(from.get("exercicioPadrao").get("enunciado"), like),
+				builder.like(from.get("exercicioPadrao").get("descricao"), like)
+			));
 		}
 
-		if(filtroResultadoExercicio.getEnunciado() != null && !filtroResultadoExercicio.getEnunciado().isBlank())
+		if(filtro.getPeriodo() != null && filtro.getPeriodo().size() == 2)
 		{
-			predicates.add(builder.like(fromResultadoExercicio.get("exercicio").get("enunciado"), "%" + filtroResultadoExercicio.getEnunciado() + "%"));
+			if(filtro.getPeriodo().get(0) != null)
+				predicates.add(builder.greaterThanOrEqualTo(from.get("realizacao"), filtro.getPeriodo().get(0)));
+
+			if(filtro.getPeriodo().get(1) != null)
+				predicates.add(builder.lessThanOrEqualTo(from.get("realizacao"), filtro.getPeriodo().get(1)));
 		}
 
-		if(filtroResultadoExercicio.getDescricao() != null && !filtroResultadoExercicio.getDescricao().isBlank())
-		{
-			predicates.add(builder.like(fromResultadoExercicio.get("exercicio").get("descricao"), "%" + filtroResultadoExercicio.getDescricao() + "%"));
-		}
-
-		if(filtroResultadoExercicio.getTipoExercicio() != null)
-		{
-			predicates.add(builder.equal(fromResultadoExercicio.get("exercicio").get("tipoExercicio"), filtroResultadoExercicio.getTipoExercicio()));
-		}
-
-		if(filtroResultadoExercicio.getInicioRealizacao() != null)
-		{
-			predicates.add(builder.greaterThanOrEqualTo(fromResultadoExercicio.get("realizacao"), filtroResultadoExercicio.getInicioRealizacao()));
-		}
-
-		if(filtroResultadoExercicio.getTerminoRealizacao() != null)
-		{
-			predicates.add(builder.lessThanOrEqualTo(fromResultadoExercicio.get("realizacao"), filtroResultadoExercicio.getTerminoRealizacao()));
-		}
-
-		TypedQuery<ResultadoExercicio> typedQuery = em.createQuery(query.select(fromResultadoExercicio).where(predicates.toArray(new Predicate[0]))
-		.orderBy(builder.desc(fromResultadoExercicio.get("realizacao"))));
-		List<ResultadoExercicio> list = typedQuery.getResultList();
-
-		return list;
+		return em.createQuery(
+			query.select(from)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.desc(from.get("realizacao")))
+		).getResultList();
 	}
 }
