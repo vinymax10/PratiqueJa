@@ -28,7 +28,7 @@
 			            
 			            <div class="field col-12 md:col-6 lg:col-4 xl:col-2">
 							<p:outputLabel for="@next" value="Quantidade" />
-							<p:spinner min="1" max="10000"
+							<p:inputNumber minValue="1" maxValue="10000" decimalPlaces="0"
 								value="#{conteudoTesteBean.conteudoTeste.quantidade}" required="true" />
 						</div>
 						
@@ -76,7 +76,7 @@
 					<p:commandButton  value="Adicionar"  icon="pi pi-plus" styleClass="ui-button-raised ui-button-success ui-button-flat" 
 					action="#{conteudoTesteBean.cadastrar}" update="@form"  process="@this" style="margin-bottom:1rem;"	/>
 					
-				    <p:dataTable  class="table table-striped" var="conteudoTeste" value="#{testePadraoBean.testePadrao.conteudosTeste}" 
+				    <p:dataTable  class="table table-striped" var="conteudoTeste" value="#{testePadraoBean.entidade.conteudosTeste}"
 				    stripedRows="true" rowIndexVar="index" draggableRows="true"
 				    selection="#{conteudoTesteBean.conteudoTeste}" selectionMode="single" rowKey="#{conteudoTeste.id}">
 				    	<p:ajax event="rowSelect" update="@form" listener="#{conteudoTesteBean.onSelected}"/>

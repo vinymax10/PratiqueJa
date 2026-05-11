@@ -122,25 +122,25 @@
 									
 									<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 										<p:outputLabel for="@next" value="Nível 1" />
-										<p:spinner min="0" max="1000"
+										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 											title="Número de listas de exercícios de Nível 1"
-											value="#{downloadBean.setDownload.quantidadeNivel1}" 
+											value="#{downloadBean.setDownload.quantidadeNivel1}"
 											required="true" />
 									</div>
 									
 										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 										<p:outputLabel for="@next" value="Nível 2" />
-										<p:spinner min="0" max="1000"
+										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 											title="Número de listas de exercícios de Nível 2"
-											value="#{downloadBean.setDownload.quantidadeNivel2}" 
+											value="#{downloadBean.setDownload.quantidadeNivel2}"
 											required="true" />
 									</div>
 									
 									<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 										<p:outputLabel for="@next" value="Nível 3" />
-										<p:spinner min="0" max="1000" 
+										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 											title="Número de listas de exercícios de Nível 3"
-											value="#{downloadBean.setDownload.quantidadeNivel3}" 
+											value="#{downloadBean.setDownload.quantidadeNivel3}"
 											required="true" />
 									</div>
 								</div>

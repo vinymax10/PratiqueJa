@@ -1,147 +1,74 @@
 package bean.teste;
 
-import java.io.Serializable;
+import java.util.EnumSet;
 
-import bean.util.Mensagem;
-import jakarta.faces.application.FacesMessage;
+import bean.FilhoBean;
+import dao.teste.ConteudoTesteDAO;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import dao.teste.ConteudoTesteDAO;
+import modelo.auditoria.TipoEvento;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.TestePadrao;
 
 @Named
 @ViewScoped
-public class ConteudoTesteBean implements Serializable
+public class ConteudoTesteBean extends FilhoBean<ConteudoTeste, ConteudoTesteDAO>
 {
-	private static final long serialVersionUID = 1L;
-
-	String nome = "Conteúdo do Teste";
-
-	private ConteudoTeste conteudoTeste;
-
-	private boolean lista = true;
-	private boolean cadastro = false;
-
 	@Inject
 	private TestePadraoBean testePadraoBean;
 
-	@Inject
-	private ConteudoTesteDAO conteudoTesteDAO;
+	public ConteudoTesteBean()
+	{
+		super(ConteudoTeste.class, "Conteúdo do Teste");
+		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
+	}
 
 	public String cadastrar()
 	{
+		entidade = new ConteudoTeste();
+		entidade.setTestePadrao(testePadraoBean.getEntidade());
 		cadastro = true;
-		lista = false;
-		conteudoTeste = new ConteudoTeste();
 		return "";
 	}
-
+	
 	public String adicionar()
 	{
-		try
-		{
-			TestePadrao testePadrao = testePadraoBean.getTestePadrao();
-			conteudoTeste.setTestePadrao(testePadrao);
-			testePadrao.getConteudosTeste().add(conteudoTeste);
-			conteudoTesteDAO.salvar(conteudoTeste);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar o " + nome);
-		}
-		return "";
+		return adicionar(
+		() -> {
+			TestePadrao testePadrao = testePadraoBean.getEntidade();
+			entidade.setOrdem(testePadrao.getConteudosTeste().size());
+			testePadrao.getConteudosTeste().add(entidade);
+			if(testePadrao.getId()!=null)
+				testePadrao=testePadraoBean.somenteSalvar();
+			
+			entidade=testePadrao.getConteudosTeste().get(entidade.getOrdem());
+		});
 	}
 
 	public String salvar()
 	{
-		try
-		{
-			conteudoTeste=conteudoTesteDAO.salvar(conteudoTeste);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o " + nome);
-		}
-		return "";
+		TestePadrao testePadrao = testePadraoBean.getEntidade();
+		return salvar(
+		() -> {
+		    mapper.update(entidade, entidadeOriginal);
+		},
+		() -> {
+			if(testePadrao.getId()!=null)
+				testePadraoBean.somenteSalvar();
+		});
 	}
-
+	
 	public String remover()
 	{
-		try
-		{
-			TestePadrao testePadrao = testePadraoBean.getTestePadrao();
-			testePadrao.getConteudosTeste().remove(conteudoTeste);
-			conteudoTesteDAO.remover(conteudoTeste);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o " + nome);
-		}
-		return "";
+		return remover(
+		() -> {
+			TestePadrao testePadrao = testePadraoBean.getEntidade();
+			testePadrao.getConteudosTeste().remove(entidade);
+			if(testePadrao.getId()!=null)
+				testePadrao=testePadraoBean.somenteSalvar();
+			onRowReorder(testePadrao.getConteudosTeste());
+		});
 	}
-
-	public String cancelar()
-	{
-		lista = true;
-		return "";
-	}
-
-	public void onSelected()
-	{
-		cadastro = false;
-		lista = false;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public ConteudoTeste getConteudoTeste()
-	{
-		return conteudoTeste;
-	}
-
-	public void setConteudoTeste(ConteudoTeste conteudoTeste)
-	{
-		this.conteudoTeste = conteudoTeste;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
+	
 }

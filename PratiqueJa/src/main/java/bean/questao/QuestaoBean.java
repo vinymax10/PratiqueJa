@@ -40,7 +40,7 @@ import software.xdev.chartjs.model.enums.IndexAxis;
 import software.xdev.chartjs.model.options.BarOptions;
 import software.xdev.chartjs.model.options.Plugins;
 import software.xdev.chartjs.model.options.Title;
-import web.session.SessionContext;
+import web.session.Sessao;
 
 @Named
 @ViewScoped
@@ -93,7 +93,7 @@ public class QuestaoBean implements Serializable
 	
 	public List<Questao> buscaQuestao(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 
 		questoes = questaoDAO.buscaAssuntoCurso(assuntoCurso, tipoFiltro, usuario);
 		setQuestoes();
@@ -126,7 +126,7 @@ public class QuestaoBean implements Serializable
 	public StreamedContent download(boolean massa)
 	{
 		System.out.println(configDownload);
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		usuario = usuarioDAO.carrega(usuario.getId());
 		configDownload.setUsuario(usuario);
 		
@@ -230,7 +230,7 @@ public class QuestaoBean implements Serializable
 	
 	private void salvarResultadoQuestao(Questao questao)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		ResultadoQuestao resultadoQuestao = questaoDAO.getResultadoQuestaos(questao, usuario);
 
 		if(resultadoQuestao == null)

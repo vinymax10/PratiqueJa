@@ -43,4 +43,7 @@ public class ConteudoTeste implements Serializable, Entidade
 	@ManyToOne(optional = true)
 	@JoinColumn(nullable = true)
 	private TestePadrao testePadrao;
+	
+	@DiffIgnore
+	private int ordem;
 }

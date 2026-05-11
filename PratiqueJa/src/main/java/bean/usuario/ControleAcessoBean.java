@@ -6,14 +6,15 @@ import java.util.List;
 
 import org.primefaces.PrimeFaces;
 
-import filtro.usuario.FiltroControleAcesso;
 import dao.usuario.ControleAcessoDAO;
+import filtro.usuario.FiltroControleAcesso;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
+import web.session.Sessao;
 import web.session.SessionContext;
 
 @Named
@@ -48,7 +49,7 @@ public class ControleAcessoBean implements Serializable
 
 	public boolean estaLogado()
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		return usuario!=null;
 	}
 	
@@ -173,7 +174,7 @@ public class ControleAcessoBean implements Serializable
 	
 	public void carrega()
 	{
-		usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		usuario = (Usuario) Sessao.get("UsuarioLogado");
 		controleAcesso = (ControleAcesso) SessionContext.getInstance().getAttribute("controleAcesso");
 	}
 

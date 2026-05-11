@@ -5,10 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.StringAux;
-import filtro.usuario.FiltroContato;
 import bean.util.Mensagem;
 import dao.usuario.ContatoDAO;
+import filtro.usuario.FiltroContato;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -16,7 +15,8 @@ import jakarta.inject.Named;
 import modelo.usuario.Contato;
 import modelo.usuario.Usuario;
 import service.EmailService;
-import web.session.SessionContext;
+import util.StringAux;
+import web.session.Sessao;
 
 @Named
 @ViewScoped
@@ -56,7 +56,7 @@ public class ContatoBean implements Serializable
 	{
 		try
 		{
-			Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+			Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 			contato.setUsuario(usuario);
 			if(usuario!=null)
 			{

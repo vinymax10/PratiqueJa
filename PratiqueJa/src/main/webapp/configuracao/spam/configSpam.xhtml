@@ -35,32 +35,32 @@
 							
 							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
 								<p:outputLabel for="@next" value="Dias de Intervalo" />
-								<p:spinner min="0" max="1000"
-									value="#{configSpamBean.configSpam.diasIntervalo}" 
+								<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+									value="#{configSpamBean.configSpam.diasIntervalo}"
 									required="true" />
 							</div>
 							
 							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
 								<p:outputLabel for="@next" value="Qtn. Nível 1" />
-								<p:spinner min="0" max="1000"
+								<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 									title="Número de listas de exercícios de Nível 1"
-									value="#{configSpamBean.configSpam.qtnNivel1}" 
+									value="#{configSpamBean.configSpam.qtnNivel1}"
 									required="true" />
 							</div>
 							
 							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
 								<p:outputLabel for="@next" value="Qtn. Nível 2" />
-								<p:spinner min="0" max="1000"
+								<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 									title="Número de listas de exercícios de Nível 2"
-									value="#{configSpamBean.configSpam.qtnNivel2}" 
+									value="#{configSpamBean.configSpam.qtnNivel2}"
 									required="true" />
 							</div>
 							
 							<div class="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
 								<p:outputLabel for="@next" value="Qtn. Nível 3" />
-								<p:spinner min="0" max="1000"
+								<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 									title="Número de listas de exercícios de Nível 3"
-									value="#{configSpamBean.configSpam.qtnNivel3}" 
+									value="#{configSpamBean.configSpam.qtnNivel3}"
 									required="true" />
 							</div>
 							

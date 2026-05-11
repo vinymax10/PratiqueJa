@@ -2,120 +2,55 @@ package filtro.teste;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
+import lombok.Data;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.assuntocurso.Modulo;
 import modelo.teste.TestePadrao;
 import modelo.usuario.Usuario;
 
+@Data
 public class FiltroResultadoTeste implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	private String nomeUsuario;
 
-	private LocalDate inicioRealizacao;
-	private LocalDate terminoRealizacao;
-
 	private AssuntoCurso assuntoCurso;
-	
+
 	private Modulo modulo;
 
 	private TestePadrao testePadrao;
-	
+
 	private Usuario usuario;
+
+	private List<LocalDate> periodo;
+
+	private PeriodoPreset preset;
 
 	public void limpar()
 	{
-		nomeUsuario="";
-		inicioRealizacao=null;
-		terminoRealizacao=null;
-		assuntoCurso=null;
-		testePadrao=null;		
-		usuario=null;
-		modulo=null;
-	}
-	
-	public String getNomeUsuario()
-	{
-		return nomeUsuario;
+		nomeUsuario = null;
+		assuntoCurso = null;
+		modulo = null;
+		testePadrao = null;
+		usuario = null;
+		periodo = null;
+		preset = null;
 	}
 
-	public void setNomeUsuario(String nomeUsuario)
+	public void resetPreset()
 	{
-		this.nomeUsuario = nomeUsuario;
+		preset = PeriodoPreset.PERSONALIZADO;
 	}
 
-	public LocalDate getInicioRealizacao()
+	public void aplicarPreset()
 	{
-		return inicioRealizacao;
+		if(preset == null)
+			periodo = null;
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+			periodo = preset.calcularIntervalo();
 	}
-
-	public void setInicioRealizacao(LocalDate inicioRealizacao)
-	{
-		this.inicioRealizacao = inicioRealizacao;
-	}
-
-	public LocalDate getTerminoRealizacao()
-	{
-		return terminoRealizacao;
-	}
-
-	public void setTerminoRealizacao(LocalDate terminoRealizacao)
-	{
-		this.terminoRealizacao = terminoRealizacao;
-	}
-
-	public AssuntoCurso getAssuntoCurso()
-	{
-		return assuntoCurso;
-	}
-
-	public void setAssuntoCurso(AssuntoCurso assuntoCurso)
-	{
-		this.assuntoCurso = assuntoCurso;
-	}
-
-	public Usuario getUsuario()
-	{
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	public TestePadrao getTestePadrao()
-	{
-		return testePadrao;
-	}
-
-	public void setTestePadrao(TestePadrao testePadrao)
-	{
-		this.testePadrao = testePadrao;
-	}
-
-	public Modulo getModulo()
-	{
-		return modulo;
-	}
-
-	public void setModulo(Modulo modulo)
-	{
-		this.modulo = modulo;
-	}
-
-	@Override
-	public String toString()
-	{
-		return (nomeUsuario != null ? "nomeUsuario=" + nomeUsuario + ", " : "")
-		+ (inicioRealizacao != null ? "inicioRealizacao=" + inicioRealizacao + ", " : "")
-		+ (terminoRealizacao != null ? "terminoRealizacao=" + terminoRealizacao + ", " : "")
-		+ (assuntoCurso != null ? "assuntoCurso=" + assuntoCurso + ", " : "")
-		+ (modulo != null ? "modulo=" + modulo + ", " : "")
-		+ (testePadrao != null ? "testePadrao=" + testePadrao + ", " : "")
-		+ (usuario != null ? "usuario=" + usuario : "");
-	}
-
 }

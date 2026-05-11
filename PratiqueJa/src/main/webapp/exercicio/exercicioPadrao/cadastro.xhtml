@@ -45,7 +45,7 @@
 
 			<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
 				<p:outputLabel for="@next" value="Quantidade" />
-				<p:spinner min="1" max="10000"
+				<p:inputNumber minValue="1" maxValue="10000" decimalPlaces="0"
 					value="#{exercicioPadraoBean.exercicioPadrao.quantidade}" required="true" />
 			</div>
 			

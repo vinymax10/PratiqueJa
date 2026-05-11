@@ -23,7 +23,7 @@ import modelo.auditoria.TipoEvento;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.permissao.PermissaoPadrao;
 import modelo.usuario.Usuario;
-import web.session.SessionContext;
+import web.session.Sessao;
 
 
 @Data
@@ -124,7 +124,7 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	
 	private int numStar(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		if(usuario==null)
 			return 0;
 		
@@ -146,7 +146,7 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	
 	public double porcentagemConcluida(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		if(usuario!=null)
 			return resultadoTesteDAO.melhorResultado(assuntoCurso, usuario);
 		else

@@ -52,20 +52,5 @@ public class TestePadraoDAO extends DAO<TestePadrao>
 		return list;
 	}
 	
-	public List<TestePadrao> listaTodos()
-	{
-
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<TestePadrao> query = builder.createQuery(TestePadrao.class);
-		Root<TestePadrao> fromTestePadrao = query.from(TestePadrao.class);
-
-		List<Predicate> predicates = new ArrayList<>();
-
-		TypedQuery<TestePadrao> typedQuery = em
-		.createQuery(query.select(fromTestePadrao).where(predicates.toArray(new Predicate[0])).distinct(true));
-		List<TestePadrao> list = typedQuery.getResultList();
-
-		return list;
-	}
 
 }

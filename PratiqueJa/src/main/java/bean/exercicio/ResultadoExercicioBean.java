@@ -15,7 +15,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
-import web.session.SessionContext;
+import web.session.Sessao;
 import web.session.TabStateManager;
 
 @Data
@@ -57,7 +57,7 @@ public class ResultadoExercicioBean implements Serializable
 
 	public void filtrarUsuario()
 	{
-		Usuario usuarioLogado = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuarioLogado = (Usuario) Sessao.get("UsuarioLogado");
 		filtro.setUsuario(usuarioLogado);
 		this.resultadosExercicios = resultadoExercicioDAO.buscar(filtro);
 	}
@@ -68,7 +68,7 @@ public class ResultadoExercicioBean implements Serializable
 		if(tabState.hasState(FiltroResultadoExercicio.class))
 			filtro = tabState.getState(FiltroResultadoExercicio.class);
 
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		if(usuario != null)
 		{
 			FiltroResultadoExercicio filtroUsuario = new FiltroResultadoExercicio();

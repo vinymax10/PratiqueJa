@@ -25,77 +25,63 @@ public class ResultadoTesteDAO extends DAO<ResultadoTeste>
 
 	public Double melhorResultado(AssuntoCurso assuntoCurso, Usuario usuario)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Double> query = builder.createQuery(Double.class);
 		Root<ResultadoTeste> fromResultadoTeste = query.from(ResultadoTeste.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-		
-		if(assuntoCurso!=null)
-		{
+
+		if(assuntoCurso != null)
 			predicates.add(builder.equal(fromResultadoTeste.get("testePadrao").get("assuntoCurso").get("id"), assuntoCurso.getId()));
-		}
-		
-		if(usuario!=null)
-		{
+
+		if(usuario != null)
 			predicates.add(builder.equal(fromResultadoTeste.get("usuario").get("id"), usuario.getId()));
-		}
-		
+
 		query.select(builder.max(fromResultadoTeste.<Double>get("nota"))).where(predicates.toArray(new Predicate[0]));
 		List<Double> list = em.createQuery(query).getResultList();
-		double maiorNota=0;
 
-		if(list!=null&&list.size()>0&&list.get(0)!=null)
-			maiorNota= list.get(0);
-		
-		return maiorNota;
+		if(list != null && list.size() > 0 && list.get(0) != null)
+			return list.get(0);
+
+		return 0d;
 	}
 
-	public List<ResultadoTeste> buscar(FiltroResultadoTeste filtroResultadoTeste)
+	public List<ResultadoTeste> buscar(FiltroResultadoTeste filtro)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ResultadoTeste> query = builder.createQuery(ResultadoTeste.class);
-		Root<ResultadoTeste> fromResultadoTeste = query.from(ResultadoTeste.class);
+		Root<ResultadoTeste> from = query.from(ResultadoTeste.class);
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroResultadoTeste.getUsuario() != null)
-		{
-			predicates.add(builder.equal(fromResultadoTeste.get("usuario").get("id"), filtroResultadoTeste.getUsuario().getId()));
-		}
-		
-		if(filtroResultadoTeste.getNomeUsuario() != null && !filtroResultadoTeste.getNomeUsuario().isBlank())
-		{
+		if(filtro.getUsuario() != null)
+			predicates.add(builder.equal(from.get("usuario").get("id"), filtro.getUsuario().getId()));
 
-			predicates.add(builder.like(fromResultadoTeste.<Usuario>get("usuario").get("nome"), "%" + filtroResultadoTeste.getNomeUsuario() + "%"));
-		}
+		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
+			predicates.add(builder.like(from.<Usuario>get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 
-		if(filtroResultadoTeste.getAssuntoCurso() != null)
-		{
-			predicates.add(builder.equal(fromResultadoTeste.get("testePadrao").get("assuntoCurso").get("id"), filtroResultadoTeste.getAssuntoCurso().getId()));
-		}
+		if(filtro.getTestePadrao() != null)
+			predicates.add(builder.equal(from.get("testePadrao").get("id"), filtro.getTestePadrao().getId()));
 
-		if(filtroResultadoTeste.getModulo() != null)
-		{
-			predicates.add(builder.equal(fromResultadoTeste.get("testePadrao").get("assuntoCurso").get("modulo"), filtroResultadoTeste.getModulo()));
-		}
+		if(filtro.getAssuntoCurso() != null)
+			predicates.add(builder.equal(from.get("testePadrao").get("assuntoCurso").get("id"), filtro.getAssuntoCurso().getId()));
 
-		if(filtroResultadoTeste.getInicioRealizacao() != null)
+		if(filtro.getModulo() != null)
+			predicates.add(builder.equal(from.get("testePadrao").get("assuntoCurso").get("modulo"), filtro.getModulo()));
+
+		if(filtro.getPeriodo() != null && filtro.getPeriodo().size() == 2)
 		{
-			predicates.add(builder.greaterThanOrEqualTo(fromResultadoTeste.get("realizacao"), filtroResultadoTeste.getInicioRealizacao()));
+			if(filtro.getPeriodo().get(0) != null)
+				predicates.add(builder.greaterThanOrEqualTo(from.get("realizacao"), filtro.getPeriodo().get(0)));
+
+			if(filtro.getPeriodo().get(1) != null)
+				predicates.add(builder.lessThanOrEqualTo(from.get("realizacao"), filtro.getPeriodo().get(1)));
 		}
 
-		if(filtroResultadoTeste.getTerminoRealizacao() != null)
-		{
-			predicates.add(builder.lessThanOrEqualTo(fromResultadoTeste.get("realizacao"), filtroResultadoTeste.getTerminoRealizacao()));
-		}
-
-		TypedQuery<ResultadoTeste> typedQuery = em.createQuery(query.select(fromResultadoTeste).where(predicates.toArray(new Predicate[0]))
-		.orderBy(builder.desc(fromResultadoTeste.get("realizacao"))));
-		List<ResultadoTeste> list = typedQuery.getResultList();
-
-		return list;
+		return em.createQuery(
+			query.select(from)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.desc(from.get("realizacao")))
+		).getResultList();
 	}
 }

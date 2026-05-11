@@ -1,0 +1,81 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{testePadraoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewAction action="#{testePadraoBean.filtrar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row">
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText id="globalFilter" value="#{testePadraoBean.filtro.nome}"
+						placeholder="Nome" styleClass="w-full">
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{testePadraoBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+
+				<p:button value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				href="/administracao/teste-padrao/form.xhtml?cadastro=true" />
+
+			</div>
+		</div>
+
+		<ui:include src="/administracao/teste-padrao/filtro.xhtml" />
+
+		<p:dataTable id="tabela"  stripedRows="true"
+			var="entidade" value="#{testePadraoBean.lista}" reflow="true"
+			selection="#{testePadraoBean.entidade}" selectionMode="single"
+			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">
+
+			<p:ajax event="rowSelect" update="@form" listener="#{testePadraoBean.onSelected}"
+			resetValues="true" />
+
+			<p:column headerText="Nome" responsivePriority="2" width="40%">
+				<h:outputText value="#{entidade.nome}" />
+			</p:column>
+
+			<p:column headerText="Assunto Curso" responsivePriority="1" width="30%">
+				<h:outputText value="#{entidade.assuntoCurso.nome}" />
+			</p:column>
+
+			<p:column headerText="Duração (min)" responsivePriority="3" width="15%">
+				<h:outputText value="#{entidade.duracao}" >
+					<f:convertNumber pattern="#,##0.00" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Nota Mínima" responsivePriority="4" width="15%">
+				<h:outputText value="#{entidade.notaMinima}">
+					<f:convertNumber pattern="#,##0.00" />
+				</h:outputText>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</ui:decorate>

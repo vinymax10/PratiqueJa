@@ -152,6 +152,7 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 	public void onRowSelect(SelectEvent<T> event)
 	{
 		cadastro = false;
+		System.out.println("entidadeOriginal: "+entidadeOriginal);
 		this.entidade = mapper.clone(entidadeOriginal); // clone
 	}
 	

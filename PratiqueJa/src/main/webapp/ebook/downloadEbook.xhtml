@@ -20,35 +20,35 @@
 					
 						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Número Exercicios" />
-							<p:spinner min="0" max="1000"
+							<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 								title="Número de listas de exercícios de Nível 2"
-								value="#{downloadEbookBean.numListas}" 
+								value="#{downloadEbookBean.numListas}"
 								required="true" />
 						</div>
 						
 						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Número E-Book" />
-							<p:spinner min="0" max="1000"
+							<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 								title="Número de listas de exercícios de Nível 2"
-								value="#{downloadEbookBean.numEBook}" 
+								value="#{downloadEbookBean.numEBook}"
 								required="true" />
 						</div>
 						
 						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Edição Básico" />
-							<p:spinner min="0" max="1000"
+							<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 								value="#{edicaoBean.edicao.edicaoBasico}" />
 						</div>
 						
 						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Edição Intermediário" />
-							<p:spinner min="0" max="1000"
+							<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 								value="#{edicaoBean.edicao.edicaoIntermediario}" />
 						</div>
 						
 						<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Edição Avançado" />
-							<p:spinner min="0" max="1000"
+							<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
 								value="#{edicaoBean.edicao.edicaoAvancado}" />
 						</div>
 						

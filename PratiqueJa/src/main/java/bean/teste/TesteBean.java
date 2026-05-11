@@ -4,21 +4,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.usuario.ControleAcessoBean;
+import bean.util.Mensagem;
+import dao.teste.TesteDAO;
+import filtro.teste.FiltroTeste;
+import infra.Navegacao;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import dao.teste.TesteDAO;
-import infra.Navegacao;
-import service.TesteService;
 import modelo.assuntocurso.AssuntoCurso;
 import modelo.teste.Teste;
 import modelo.usuario.Turma;
 import modelo.usuario.Usuario;
-import web.session.SessionContext;
-import filtro.teste.FiltroTeste;
-import bean.usuario.ControleAcessoBean;
-import bean.util.Mensagem;
+import service.TesteService;
+import web.session.Sessao;
 
 @Named
 @SessionScoped
@@ -80,7 +80,7 @@ public class TesteBean implements Serializable
 		{
 			teste = new Teste();
 			teste.setTestePadrao(assuntoCurso.getTestePadrao());
-			Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+			Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 			teste.setUsuario(usuario);
 			
 			construirTeste();
@@ -171,13 +171,13 @@ public class TesteBean implements Serializable
 
 	public List<Teste> getMeusTestes(Boolean realizado)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		return testeDAO.meusTestes(usuario, realizado);
 	}
 	
 	public Long numeroMeusTestes(Boolean realizado)
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		return testeDAO.numeroMeusTestes(usuario, realizado);
 	}
 

@@ -3,8 +3,8 @@ package dao.questao;
 import java.util.ArrayList;
 import java.util.List;
 
-import filtro.questao.FiltroQuestao;
 import dao.DAO;
+import filtro.questao.FiltroQuestao;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -21,7 +21,7 @@ import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
 import modelo.questao.configuracao.Assunto;
 import modelo.usuario.Usuario;
-import web.session.SessionContext;
+import web.session.Sessao;
 
 public class QuestaoDAO extends DAO<Questao>
 {
@@ -180,7 +180,7 @@ public class QuestaoDAO extends DAO<Questao>
 				predicates.add(builder.isNull(fromQuestao.get("resolucao")));
 		}
 		
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		if(usuario!=null)
 		{
 			if(filtroQuestao.getRespondida() != null)

@@ -16,14 +16,14 @@
 					
 					<div class="campo col-12 md:col-6 lg:col-6 xl:col-2" >
 						<p:outputLabel for="@next" value="Ordem" />
-						<p:spinner  id="ordem" min="0" max="100"
+						<p:inputNumber id="ordem" minValue="0" maxValue="100" decimalPlaces="0"
 							value="#{programacaoPostBean.ordem}"
 							required="true" />
 					</div>
 					
 					<div class="campo col-12 md:col-6 lg:col-6 xl:col-2" >
 						<p:outputLabel for="@next" value="Quantidade" />
-						<p:spinner min="1" max="100"
+						<p:inputNumber minValue="1" maxValue="100" decimalPlaces="0"
 							value="#{programacaoPostBean.quantidade}"
 							required="true" />
 					</div>

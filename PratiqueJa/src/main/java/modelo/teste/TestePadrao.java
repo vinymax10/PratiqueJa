@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class TestePadrao implements Serializable, Entidade
 	private AssuntoCurso assuntoCurso;
 
 	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "testePadrao")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "testePadrao")
 	private List<ConteudoTeste> conteudosTeste = new ArrayList<ConteudoTeste>();
 
 	@AuditLabel(value = "duração", genero = GeneroGramatical.FEMININO)

@@ -1,12 +1,10 @@
 package modelo.assuntocurso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
-import util.StringAux;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +23,9 @@ import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.questao.Questao;
 import modelo.teste.TestePadrao;
+import util.StringAux;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString(exclude = { "exerciciosPadrao", "questoes", "testePadrao" })
 @Data
 @Entity

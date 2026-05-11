@@ -20,7 +20,6 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import util.ColorHolder;
 import bean.exercicio.ConfigDownload;
 import bean.instagram.ProgramacaoPostBean;
 import bean.usuario.ControleAcessoBean;
@@ -46,7 +45,8 @@ import pdf.exercicio.GerarLatexExercicio;
 import pdf.questao.GerarLatexQuestao;
 import pdf.social.InstagramFeed;
 import pdf.social.TikTok;
-import web.session.SessionContext;
+import util.ColorHolder;
+import web.session.Sessao;
 
 @Named
 @ViewScoped
@@ -505,7 +505,7 @@ public class DownloadBean implements Serializable
 	
 	private ConfigDownload buildConfigDownloadExercicio()
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		usuario = usuarioDAO.carrega(usuario.getId());
 		setDownload.setUsuario(usuario);
 		
@@ -520,7 +520,7 @@ public class DownloadBean implements Serializable
 	
 	private ConfigDownload buildConfigDownloadQuestao()
 	{
-		Usuario usuario = (Usuario) SessionContext.getInstance().getAttribute("UsuarioLogado");
+		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
 		usuario = usuarioDAO.carrega(usuario.getId());
 		setDownload.setUsuario(usuario);
 		

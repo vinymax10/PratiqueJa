@@ -46,4 +46,9 @@ public class ResultadoTeste implements Serializable, Entidade
 
 	@AuditLabel(value = "nota", genero = GeneroGramatical.FEMININO)
 	private double nota;
+
+	public double getNotaPorcentagem()
+	{
+		return nota;
+	}
 }

@@ -67,7 +67,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
 				<p:outputLabel for="@next" value="Quantidade" />
-				<p:spinner min="1" max="10000"
+				<p:inputNumber minValue="1" maxValue="10000" decimalPlaces="0"
 				value="#{exercicioPadraoBean.entidade.quantidade}"
 				required="true" requiredMessage="A quantidade é obrigatória" />
 				<p:message for="@previous" display="text"/>
@@ -156,13 +156,6 @@
 
 			</div>
 		</div>
-
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
-			<p:commandButton value="Não" type="button"
-				styleClass="ui-confirmdialog-no ui-button-flat" />
-			<p:commandButton value="Sim" type="button"
-				styleClass="ui-confirmdialog-yes" />
-		</p:confirmDialog>
 
 	</h:form>
 
