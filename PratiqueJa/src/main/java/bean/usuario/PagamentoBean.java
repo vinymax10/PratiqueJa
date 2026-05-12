@@ -90,7 +90,7 @@ public class PagamentoBean implements Serializable
 				
 				usuario.setPerfil(plano);
 				usuario.setValidadePlano(validade);
-				usuario=usuarioBean.getUsuarioDAO().salvar(usuario);
+				usuario=usuarioBean.getEntidadeDAO().salvar(usuario);
 				SessionContext.getInstance().setAttribute("UsuarioLogado", usuario);
 				autenticacaoBean.setUsuario(usuario);
 				

@@ -35,8 +35,8 @@ public class EstatisticaBean implements Serializable
 	
 	private void setUsuario()
 	{
-		usuario = usuarioBean.getUsuario();
-		usuarioDAO=usuarioBean.getUsuarioDAO();
+		usuario = usuarioBean.getEntidade();
+		usuarioDAO=usuarioBean.getEntidadeDAO();
 		if(usuario!=null)
 			usuario = usuarioDAO.carrega(usuario.getId());
 	}

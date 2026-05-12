@@ -18,13 +18,13 @@
 					<div id="image" class="p-field p-col-12"
 						style="text-align: center; margin-bottom: 0">
 						<p:graphicImage class="circle"
-							value="#{usuarioBean.usuario.imagem.fotoStreamedContent}"
-							rendered="#{not empty usuarioBean.usuario.imagem}" cache="false" />
+							value="#{usuarioBean.entidade.imagem.fotoStreamedContent}"
+							rendered="#{not empty usuarioBean.entidade.imagem}" cache="false" />
 					</div>
 					<div class="campoMsg col-12 xl:col-6">
 						<p:outputLabel for="nome" value="Nome" />
 						<p:inputText id="nome" placeholder="Nome" maxlength="255"
-						value="#{usuarioBean.usuario.nome}" required="true" 
+						value="#{usuarioBean.entidade.nome}" required="true" 
 						requiredMessage="O nome é obrigatório"/>
 						<p:message for="nome" display="text" />
 					</div>
@@ -32,7 +32,7 @@
 					<div class="campoMsg col-12 xl:col-6">
 						<p:outputLabel for="email" value="Email" />
 						<p:inputText id="email" placeholder="Email"
-						value="#{usuarioBean.usuario.email}" maxlength="255"
+						value="#{usuarioBean.entidade.email}" maxlength="255"
 						validator="#{usuarioBean.validateEmail}" 
 						required="true" requiredMessage="O e-mail é obrigatório" />
 						<p:message for="email" display="text" />
@@ -41,7 +41,7 @@
 					<div class="campoMsg col-12 md:col-6 lg:col-4">
 						<p:outputLabel for="nascimento" value="Nascimento" />
 						<p:datePicker id="nascimento"
-						value="#{usuarioBean.usuario.nascimento}" locale="pt"
+						value="#{usuarioBean.entidade.nascimento}" locale="pt"
 						required="true"  requiredMessage="A data de nascimento é obrigatória"/>
 						<p:message for="nascimento" display="text" />
 					</div>
@@ -64,7 +64,7 @@
 						<p:outputLabel for="@next" value="Quer receber exercícios?" 
 						title="Se esta opção estiver ativa, você receberá automaticamente, a cada 3 dias, um PDF completo no seu e-mail - com uma lista de exercícios resolvidos e um resumo do conteúdo correspondente."/>
 						<p:selectBooleanButton 
-							value="#{usuarioBean.usuario.recebeSpam}"
+							value="#{usuarioBean.entidade.recebeSpam}"
 							onLabel="Sim" offLabel="Não" 
 							onIcon="fa fa-solid fa-thumbs-up" offIcon="fa fa-solid fa-thumbs-down"
 							style="width-min:8rem;display:block;">

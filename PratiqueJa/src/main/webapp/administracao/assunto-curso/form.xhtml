@@ -54,7 +54,7 @@
 				<p:selectOneMenu value="#{assuntoCursoBean.entidade.testePadrao}"
 				converter="generic" filter="true" filterMatchMode="contains">
 	            	<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{testePadraoBean.todosTestesPadroes}" var="testePadrao"
+					<f:selectItems value="#{testePadraoBean.listaTudo}" var="testePadrao"
 						itemLabel="#{testePadrao.nome}" itemValue="#{testePadrao}" />
 				</p:selectOneMenu>
 				<p:message for="@previous" display="text"/>

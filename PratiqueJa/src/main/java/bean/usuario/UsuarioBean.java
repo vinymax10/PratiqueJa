@@ -3,56 +3,45 @@ package bean.usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import infra.Graphics;
-import dao.usuario.UsuarioDAO;
-import modelo.instagram.ConfigPost;
-import modelo.usuario.Imagem;
-import modelo.usuario.Usuario;
+import bean.PaiBean;
 import bean.instagram.ConfigPostBean;
+import dao.usuario.UsuarioDAO;
 import filtro.usuario.FiltroUsuario;
+import infra.Graphics;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.auditoria.TipoEvento;
+import modelo.instagram.ConfigPost;
+import modelo.permissao.PermissaoPadrao;
+import modelo.usuario.Imagem;
+import modelo.usuario.PerfilUsuario;
+import modelo.usuario.Usuario;
 import service.UsuarioService;
-import bean.util.Mensagem;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
-@SessionScoped
-public class UsuarioBean implements Serializable
+@ViewScoped
+public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Usuario>>
 {
-	private static final long serialVersionUID = 1L;
-
 	@Inject
-	private UsuarioDAO usuarioDAO;
-
-	@Inject
-	private Usuario usuario;
-
-	private String nome = "Usuário";
-	private boolean lista = true;
-	private boolean cadastro = false;
-	private String senha;
-	private String confirmaSenha;
-	private int activeIndex;
-	private int activeIndexGrafico;
-	
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
-	
-	@Inject
-	private FiltroUsuario filtroUsuario;
+	private FiltroUsuario filtro;
 
 	@Inject
 	private ConfigPostBean configPostBean;
@@ -60,104 +49,55 @@ public class UsuarioBean implements Serializable
 	@Inject
 	private UsuarioService usuarioService;
 
-	public String cadastrar(boolean externo)
+	private String senha;
+	private String confirmaSenha;
+	private int activeIndex;
+	private int activeIndexGrafico;
+
+	public UsuarioBean()
 	{
-		cadastro = true;
-		lista = false;
-		usuario = new Usuario();
-		senha = "";
-		confirmaSenha = "";
-		if(externo)
-			PrimeFaces.current().executeScript("PF('cadastroWidget').show()");
+		super(Usuario.class, "Usuário");
 
-		return "";
-	}
+		urlCadastro = "/administracao/usuario/form.xhtml";
+		urlLista = "/administracao/usuario/list.xhtml";
 
-	public String editar(Usuario usuario)
-	{
-		cadastro = false;
-		this.usuario=usuario;
-		senha = "";
-		confirmaSenha = "";
-
-		return "";
-	}
-	
-	public String adicionar(boolean externo)
-	{
-		try
-		{
-			usuario.setSenha(usuarioService.hashPassword(senha));
-			usuarioDAO.salvar(usuario);
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
-
-			if(externo)
-				PrimeFaces.current().executeScript("PF('cadastroWidget').hide()");
-
-			lista = true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar o " + nome);
-		}
-		return "";
-	}
-
-	public String salvar()
-	{
-		try
-		{
-			if(usuario.isCriador()&&usuario.getConfigPost()==null)
-			{
-				ConfigPost configPost = configPostBean.cadastrar(usuario);
-				usuario.setConfigPost(configPost);
-			}
-			
-			usuario=usuarioDAO.salvar(usuario);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o " + nome);
-		}
-		return "";
-	}
-
-	public String remover()
-	{
-		try
-		{
-			usuarioDAO.remover(usuario);
-			usuarios.remove(usuario);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o " + nome);
-		}
-		return "";
-	}
-
-	public void onSelected()
-	{
-		cadastro = false;
-		lista = false;
-	}
-
-	public String cancelar()
-	{
-		lista = true;
-		return "";
+		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}
 
 	public void filtrar()
 	{
-		this.usuarios = usuarioDAO.buscar(filtroUsuario);
+		this.lista = entidadeDAO.buscar(filtro);
+		tabState.putState(filtro);
+	}
+
+	public void filtrarInit()
+	{
+		filtro.limpar();
+		filtrar();
+	}
+
+	@PostConstruct
+	public void init()
+	{
+		if(tabState.hasState(FiltroUsuario.class))
+			filtro = tabState.getState(FiltroUsuario.class);
+	}
+
+	@Override
+	public void personalizarAdicionar()
+	{
+		if(senha != null && !senha.isBlank())
+			entidade.setSenha(usuarioService.hashPassword(senha));
+	}
+
+	@Override
+	public void personalizarSalvar()
+	{
+		if(entidade.isCriador() && entidade.getConfigPost() == null)
+		{
+			ConfigPost configPost = configPostBean.cadastrar(entidade);
+			entidade.setConfigPost(configPost);
+		}
 	}
 
 	public void uploadFile(FileUploadEvent event)
@@ -169,71 +109,28 @@ public class UsuarioBean implements Serializable
 			Imagem imagem = new Imagem();
 			imagem.setFile(serialBlob);
 			imagem.setEndereco(file.getFileName());
-			usuario.setImagem(imagem);
-
+			entidade.setImagem(imagem);
 		}
 		catch(SQLException | IOException e)
 		{
 			e.printStackTrace();
 		}
-		
 	}
 
 	public void validateEmail(FacesContext context, UIComponent component, Object email)
 	{
-		Usuario usuariosBanco = usuarioDAO.getUsuario((String) email,"");
-		if(this.usuario.getId() == null && usuariosBanco != null
-		|| (this.usuario.getId() != null && usuariosBanco != null && !this.usuario.getId().equals(usuariosBanco.getId())))
+		Usuario usuariosBanco = entidadeDAO.getUsuario((String) email, "");
+		if(entidade.getId() == null && usuariosBanco != null
+		|| (entidade.getId() != null && usuariosBanco != null && !entidade.getId().equals(usuariosBanco.getId())))
 		{
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"" , "Email já cadastrado.");
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Email já cadastrado.");
 			throw new ValidatorException(msg);
 		}
 	}
 
-//	public void compressImage(BufferedImage bufferedImage, OutputStream output, int quality) throws IOException
-//	{
-//	if (quality <= 0 || quality > 100)
-//	{
-//	   throw new IllegalArgumentException("quality not in 1-100");
-//	}
-//	ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-//	   try
-//	   {
-//	       ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
-//	       jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-//	       jpgWriteParam.setCompressionQuality(quality * 0.01f);
-//	       try (ImageOutputStream ios = ImageIO.createImageOutputStream(output))
-//	       {
-//	           jpgWriter.setOutput(ios);
-//	           IIOImage outputImage = new IIOImage(bufferedImage, null, null);
-//	           jpgWriter.write(null, outputImage, jpgWriteParam);
-//	       }
-//	   }
-//	   finally
-//	   {
-//	       jpgWriter.dispose();
-//	   }
-//	}
-
-//	private BufferedImage redonda(BufferedImage bufferedImage)
-//	{
-//		int t = Math.min(bufferedImage.getWidth(), bufferedImage.getHeight());
-//		BufferedImage other = new BufferedImage(t, t, bufferedImage.getType());
-//		
-//		//Obtém o contexto gráfico
-//		Graphics2D g2d = other.createGraphics();		
-//		//Define a área de pintura para um círculo		
-//		g2d.setClip(new Ellipse2D.Double(0, 0, t, t));
-//		//Desenha a imagem
-//		g2d.drawImage(bufferedImage, 0, 0, null);		
-//		//Libera o contexto gráfico
-//		g2d.dispose();
-//		return other;
-//	}
-
 	public List<Usuario> getTodosUsuarios()
 	{
-		return usuarioDAO.listarTudo();
+		return entidadeDAO.listarTudo();
 	}
 
 	public String gerarSenhaAleatoria()
@@ -241,112 +138,9 @@ public class UsuarioBean implements Serializable
 		return usuarioService.gerarSenhaAleatoria();
 	}
 
-	public Usuario getUsuario()
+	public PerfilUsuario[] getPerfis()
 	{
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios)
-	{
-		this.usuarios = usuarios;
-	}
-
-	public List<Usuario> getUsuarios()
-	{
-		return usuarios;
-	}
-
-	public FiltroUsuario getFiltroUsuario() {
-		return filtroUsuario;
-	}
-
-	public void setFiltroUsuario(FiltroUsuario filtroUsuario) {
-		this.filtroUsuario = filtroUsuario;
-	}
-
-	public String getSenha()
-	{
-		return senha;
-	}
-
-	public void setSenha(String senha)
-	{
-		this.senha = senha;
-	}
-
-	public String getConfirmaSenha()
-	{
-		return confirmaSenha;
-	}
-
-	public void setConfirmaSenha(String confirmaSenha)
-	{
-		this.confirmaSenha = confirmaSenha;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
-	public void setActiveIndex(int activeIndex)
-	{
-		this.activeIndex = activeIndex;
-	}
-
-	public int getActiveIndexGrafico()
-	{
-		return activeIndexGrafico;
-	}
-
-	public void setActiveIndexGrafico(int activeIndexGrafico)
-	{
-		this.activeIndexGrafico = activeIndexGrafico;
-	}
-
-	public UsuarioDAO getUsuarioDAO()
-	{
-		return usuarioDAO;
-	}
-
-	public void setUsuarioDAO(UsuarioDAO usuarioDAO)
-	{
-		this.usuarioDAO = usuarioDAO;
+		return PerfilUsuario.values();
 	}
 
 }

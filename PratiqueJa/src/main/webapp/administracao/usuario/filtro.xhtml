@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body >
+		<ui:composition>
+			<div id="filtros" style="width: 100%;display:none;">
+
+				<p:card class="newBorder mb-3" style="width: 100%;">
+					<div class="ui-fluid gride" >
+						<h4 class="title-card" >Filtro</h4>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Nome"/>
+							<p:inputText value="#{usuarioBean.filtro.nome}" />
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Email"/>
+							<p:inputText value="#{usuarioBean.filtro.email}" />
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Turma"/>
+							<p:selectOneMenu value="#{usuarioBean.filtro.turma}"
+							converter="generic" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="Todas" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{turmaBean.todasTurmas}" var="turma"
+								itemLabel="#{turma.nome}" itemValue="#{turma}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+							<p:outputLabel for="@next" value="Perfil"/>
+							<p:selectOneMenu value="#{usuarioBean.filtro.perfil}">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{usuarioBean.perfis}" var="p"
+								itemLabel="#{p.nome}" itemValue="#{p}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-2">
+							<p:outputLabel for="@next" value="Criador"/>
+							<p:selectOneMenu value="#{usuarioBean.filtro.criador}">
+								<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+								<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-2">
+							<p:outputLabel for="@next" value="Recebe Spam"/>
+							<p:selectOneMenu value="#{usuarioBean.filtro.recebeSpam}">
+								<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+								<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+							</p:selectOneMenu>
+						</div>
+
+					</div>
+
+					<div class="content-button-right" >
+
+						<div class="divisor" ></div>
+
+						<p:commandButton value="Limpar"
+						styleClass="ui-button-flat ui-button-plain"
+						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
+						action="#{usuarioBean.filtrarInit}" update="@form" >
+						</p:commandButton>
+
+						<p:commandButton id="filtrar" value="Filtrar"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
+						action="#{usuarioBean.filtrar}" update="@form, :growl" process="@form" >
+							<p:defaultCommand target="form:filtrar"/>
+						</p:commandButton>
+
+					</div>
+
+				</p:card>
+			</div>
+		</ui:composition>
+
+	</h:body>
+</html>
