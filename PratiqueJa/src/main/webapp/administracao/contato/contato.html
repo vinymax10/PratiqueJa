@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do Contato</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+      padding: 32px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .back-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid #dbe4f0;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 24px;
+      color: #2563eb;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .back-btn:hover {
+      transform: translateY(-1px);
+      background: #eff6ff;
+    }
+
+    .page-title small {
+      color: #3b82f6;
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .page-title h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .audit-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1px solid #dbe4f0;
+      padding: 14px 22px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #64748b;
+      transition: 0.2s;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .audit-btn:hover {
+      background: #f8fafc;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .hero-card {
+      margin-bottom: 28px;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      margin-bottom: 32px;
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #eef4ff;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .subject-area {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .icon-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .subject-label {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .subject-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e9eef5;
+      margin: 24px 0 10px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding-right: 16px;
+      border-right: 1px solid #edf2f7;
+    }
+
+    .info-item:last-child {
+      border-right: none;
+    }
+
+    .info-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #f8fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .info-label {
+      color: #64748b;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .info-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 26px;
+      color: #0f172a;
+    }
+
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 56px;
+      height: 32px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #d1d5db;
+      transition: .3s;
+      border-radius: 999px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 24px;
+      width: 24px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2563eb;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .status-text {
+      font-size: 18px;
+      color: #475569;
+    }
+
+    .alert-box {
+      margin-top: 12px;
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      gap: 16px;
+      color: #33518f;
+      line-height: 1.6;
+    }
+
+    .alert-icon {
+      font-size: 24px;
+      color: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .date-input {
+      width: 100%;
+      height: 62px;
+      border-radius: 16px;
+      border: 1px solid #d7dee8;
+      padding: 0 20px;
+      font-size: 17px;
+      color: #0f172a;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .date-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      height: 62px;
+      padding: 0 32px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: 0.2s;
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid #cfe0ff;
+      color: #2563eb;
+    }
+
+    .btn-secondary:hover {
+      background: #eff6ff;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1100px) {
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-item {
+        border-right: none;
+      }
+
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 18px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-actions {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .subject-title {
+        font-size: 32px;
+      }
+
+      .page-title h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="back-btn">←</button>
+
+        <div class="page-title">
+          <small>Contatos</small>
+          <h1>Detalhes do Contato</h1>
+        </div>
+      </div>
+
+      <button class="audit-btn">
+        👁 Auditoria
+      </button>
+    </div>
+
+    <div class="card hero-card">
+
+      <div class="hero-content">
+        <div class="avatar">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800" alt="Avatar">
+        </div>
+
+        <div class="subject-area">
+          <div class="icon-box">💬</div>
+
+          <div>
+            <div class="subject-label">Assunto</div>
+            <div class="subject-title">Olá</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <div class="info-icon">👤</div>
+
+          <div>
+            <div class="info-label">Nome do Usuário</div>
+            <div class="info-value">Vinícius</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">📅</div>
+
+          <div>
+            <div class="info-label">Data</div>
+            <div class="info-value">02/05/2024</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">—</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">💭</div>
+
+          <div>
+            <div class="info-label">Mensagem</div>
+            <div class="info-value">Eu sou Vinícius</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bottom-grid">
+
+      <div class="card">
+        <div class="section-title">
+          📌 Status de Resposta
+        </div>
+
+        <div class="toggle-wrapper">
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+
+          <span class="status-text">Não respondido</span>
+        </div>
+
+        <div class="alert-box">
+          <div class="alert-icon">ℹ️</div>
+
+          <div>
+            Marque como respondido quando houver retorno ao contato.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          📆 Data de Resposta
+        </div>
+
+        <input class="date-input" type="date">
+      </div>
+
+    </div>
+
+    <div class="card footer-actions">
+      <button class="btn btn-secondary">
+        ← Voltar
+      </button>
+
+      <button class="btn btn-primary">
+        ✓ Salvar
+      </button>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,549 @@
+/* =============================================
+   form-contato.css – Detalhes do Contato v2
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --fc-primary: #2563eb;
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT
+   ══════════════════════════════════════════ */
+
+.fc-container {
+    padding: 24px 16px;
+    font-family: 'Inter', var(--font-family), sans-serif;
+}
+
+.fc-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.fc-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.fc-page-title small {
+    color: #3b82f6;
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.fc-page-title h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.fc-bottom-grid {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    gap: 20px;
+    margin-bottom: 0;
+}
+
+.fc-bottom-grid .fc-card {
+    margin-bottom: 0;
+}
+
+.fc-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+/* ══════════════════════════════════════════
+   CARD BASE
+   ══════════════════════════════════════════ */
+
+.fc-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05);
+    margin-bottom: 20px;
+}
+
+/* ══════════════════════════════════════════
+   HERO – avatar, assunto e info grid
+   ══════════════════════════════════════════ */
+
+.fc-hero-content {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.fc-avatar {
+    width: 152px;
+    height: 152px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #eef4ff;
+    flex-shrink: 0;
+}
+
+.fc-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.fc-avatar-placeholder {
+    width: 152px;
+    height: 152px;
+    border-radius: 50%;
+    background: #eff6ff;
+    border: 4px solid #eef4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fc-avatar-placeholder i {
+    font-size: 3.5rem;
+    color: #93c5fd;
+}
+
+.fc-subject-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.fc-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 28px;
+}
+
+.fc-icon-box i {
+    font-size: 1.75rem;
+    color: var(--fc-primary);
+}
+
+.fc-subject-label {
+    font-size: 0.8125rem;
+    color: #64748b;
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.fc-subject-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.fc-divider {
+    height: 1px;
+    background: #e9eef5;
+    margin: 0 0 24px;
+}
+
+.fc-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.fc-info-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 8px 20px 8px 0;
+    border-right: 1px solid #edf2f7;
+}
+
+.fc-info-item:last-child {
+    border-right: none;
+}
+
+.fc-info-item-full {
+    grid-column: 1 / -1;
+    border-right: none !important;
+    border-top: 1px solid #edf2f7;
+    padding: 20px 0 8px;
+    margin-top: 16px;
+}
+
+.fc-info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    background: #f8fbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+}
+
+.fc-info-icon i {
+    font-size: 1.2rem;
+    color: var(--fc-primary);
+}
+
+.fc-info-label {
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.fc-info-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e273d;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* ══════════════════════════════════════════
+   SEÇÃO – título dos cards inferiores
+   ══════════════════════════════════════════ */
+
+.fc-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+.fc-section-title i {
+    font-size: 1.1rem;
+    color: var(--fc-primary);
+}
+
+/* ══════════════════════════════════════════
+   TOGGLE & ALERTA
+   ══════════════════════════════════════════ */
+
+.fc-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.fc-toggle-wrapper .ui-outputlabel {
+    font-size: 0.9375rem;
+    color: #475569;
+    font-weight: 500;
+    margin: 0 !important;
+    cursor: default;
+}
+
+.fc-alert-box {
+    background: #f8fbff;
+    border: 1px solid #dbeafe;
+    border-radius: 13px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    color: #33518f;
+    font-size: 1rem;
+    line-height: 1.65;
+    align-items: flex-start;
+}
+
+.fc-alert-icon {
+    font-size: 1rem;
+    color: var(--fc-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════
+   DATE PICKER
+   ══════════════════════════════════════════ */
+
+.fc-date-picker {
+    display: block;
+    width: 100%;
+}
+
+.fc-date-picker > .ui-inputfield,
+.fc-date-picker .ui-datepicker-trigger + .ui-inputfield,
+.fc-date-picker input.ui-inputfield {
+    width: 100% !important;
+    height: 52px !important;
+    border-radius: 13px !important;
+    border: 1.5px solid #d7dee8 !important;
+    padding: 0 18px !important;
+    font-size: 0.9375rem !important;
+    color: #0f172a !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    font-family: 'Inter', var(--font-family), sans-serif !important;
+    box-sizing: border-box !important;
+}
+
+.fc-date-picker > .ui-inputfield:focus,
+.fc-date-picker input.ui-inputfield:focus {
+    border-color: var(--fc-primary) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+    outline: none !important;
+}
+
+/* ══════════════════════════════════════════
+   BOTÕES
+   ══════════════════════════════════════════ */
+
+/* Posicionamento do ícone e texto (PF usa position: absolute no ícone) */
+
+.fc-btn-flat .ui-button-icon-left,
+.fc-btn-secondary .ui-button-icon-left,
+.fc-btn-primary .ui-button-icon-left {
+    left: 2.5rem !important;
+    margin-top: -0.4em !important;
+}
+
+.fc-btn-flat .ui-button-text,
+.fc-btn-secondary .ui-button-text,
+.fc-btn-primary .ui-button-text {
+    padding-left: 2.5rem !important;
+}
+
+/* Botão voltar (ícone apenas) */
+
+.fc-back-btn.ui-button {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px !important;
+    border: 1px solid #dbe4f0 !important;
+    background: white !important;
+    color: var(--fc-primary) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06) !important;
+    transition: transform 0.2s, background 0.2s !important;
+    padding: 0 !important;
+}
+
+.fc-back-btn.ui-button:hover {
+    transform: translateY(-1px) !important;
+    background: #eff6ff !important;
+}
+
+.fc-back-btn.ui-button .ui-button-text {
+    display: none !important;
+    padding: 0 !important;
+}
+
+.fc-back-btn.ui-button .ui-button-icon-only {
+    font-size: 1.1rem;
+}
+
+/* Botão flat / outline cinza (reutilizável) */
+
+.fc-btn-flat.ui-button {
+    height: 50px !important;
+    padding: 0 24px !important;
+    border-radius: 14px !important;
+    border: none !important;
+    background: white !important;
+    color: #64748b !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    transition: background 0.2s, color 0.2s !important;
+}
+
+.fc-btn-flat.ui-button:hover {
+    background: #eff6ff !important;
+    color: #334155 !important;
+}
+
+/* Botão secundário / outline azul */
+
+.fc-btn-secondary.ui-button {
+    height: 50px !important;
+    padding: 0 24px !important;
+    border-radius: 13px !important;
+    border: 1.5px solid #bfdbfe !important;
+    background: white !important;
+    color: var(--fc-primary) !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+    box-shadow: none !important;
+}
+
+.fc-btn-secondary.ui-button:hover {
+    background: #eff6ff !important;
+}
+
+/* Botão primário / gradiente azul */
+
+.fc-btn-primary.ui-button {
+    height: 50px !important;
+    padding: 0 24px !important;
+    border-radius: 13px !important;
+    border: none !important;
+    background: linear-gradient(135deg, var(--fc-primary) 0%, #1d4ed8 100%) !important;
+    color: white !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28) !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.fc-btn-primary.ui-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.34) !important;
+}
+
+.fc-btn-primary.ui-button:active {
+    transform: translateY(0) !important;
+}
+
+/* ══════════════════════════════════════════
+   PRIMEFACES OVERRIDES
+   ══════════════════════════════════════════ */
+
+.ui-toggleswitch.ui-toggleswitch-checked .ui-toggleswitch-slider {
+    background-color: var(--fc-primary) !important;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVO
+   ══════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+    .fc-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .fc-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fc-info-item:nth-child(2) {
+        border-right: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .fc-container {
+        padding: 16px 10px;
+    }
+
+    .fc-card {
+        padding: 20px 18px;
+    }
+
+    .fc-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fc-page-title h1 {
+        font-size: 1.5rem;
+    }
+
+    .fc-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .fc-avatar,
+    .fc-avatar-placeholder {
+        width: 110px;
+        height: 110px;
+    }
+
+    .fc-subject-title {
+        font-size: 1.5rem;
+    }
+
+    .fc-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fc-info-item {
+        border-right: none;
+        border-bottom: 1px solid #edf2f7;
+        padding-bottom: 14px;
+        margin-bottom: 4px;
+    }
+
+    .fc-info-item:last-child,
+    .fc-info-item-full {
+        border-bottom: none;
+    }
+
+    .fc-footer-actions {
+        flex-direction: column;
+    }
+
+    .fc-footer-actions .ui-button {
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    /* No mobile o ícone é absoluto e fica desalinhado com botão full-width:
+       troca para flex para centralizar ícone + texto juntos */
+    .fc-btn-flat.ui-button,
+    .fc-btn-secondary.ui-button,
+    .fc-btn-primary.ui-button {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+
+    .fc-btn-flat .ui-button-icon-left,
+    .fc-btn-secondary .ui-button-icon-left,
+    .fc-btn-primary .ui-button-icon-left {
+        position: static !important;
+        left: auto !important;
+    	margin-top: 0.2em !important;
+    }
+
+    .fc-btn-flat .ui-button-text,
+    .fc-btn-secondary .ui-button-text,
+    .fc-btn-primary .ui-button-text {
+        padding-left: 0 !important;
+    }
+    
+    
+}

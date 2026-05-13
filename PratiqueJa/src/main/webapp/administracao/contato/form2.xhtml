@@ -1,0 +1,186 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{contatoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewParam name="chave" value="#{contatoBean.chave}" />
+		<f:viewParam name="cadastro" value="#{contatoBean.cadastro}" converter="jakarta.faces.Boolean" />
+		<f:viewAction action="#{contatoBean.carregar()}" />
+	</f:metadata>
+
+	<h:outputStylesheet library="css" name="form-contato.css" />
+
+	<h:form id="form">
+		<div class="fc-container">
+		
+			<!-- ── Hero Card ──────────────────────────── -->
+			<div class="fc-card">
+
+				<div class="fc-hero-content">
+
+					<!-- Avatar com imagem -->
+					<h:panelGroup layout="block" styleClass="fc-avatar"
+						rendered="#{not empty contatoBean.entidade.usuario.imagem}">
+						<p:graphicImage styleClass="fc-avatar-img"
+							value="#{contatoBean.entidade.usuario.imagem.getFotoStreamedContent()}"
+							stream="false" />
+					</h:panelGroup>
+
+					<!-- Avatar placeholder sem imagem -->
+					<h:panelGroup layout="block" styleClass="fc-avatar-placeholder"
+						rendered="#{empty contatoBean.entidade.usuario.imagem}">
+						<i class="pi pi-user"></i>
+					</h:panelGroup>
+
+					<!-- Assunto -->
+					<div class="fc-subject-area">
+						<div class="fc-icon-box">
+							💬
+						</div>
+						<div>
+							<div class="fc-subject-label">Assunto</div>
+							<div class="fc-subject-title">
+								<h:outputText value="#{contatoBean.entidade.assunto}" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fc-divider"></div>
+
+				<!-- Info Grid -->
+				<div class="fc-info-grid">
+
+					<!-- Nome do Usuário -->
+					<div class="fc-info-item">
+						<div class="fc-info-icon">
+							👤
+						</div>
+						<div>
+							<div class="fc-info-label">Nome do Usuário</div>
+							<div class="fc-info-value">
+								<h:outputText
+									value="#{not empty contatoBean.entidade.usuario ? contatoBean.entidade.usuario.nome : contatoBean.entidade.nomeUsuario}" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Data -->
+					<div class="fc-info-item">
+						<div class="fc-info-icon">
+							📅
+						</div>
+						<div>
+							<div class="fc-info-label">Data</div>
+							<div class="fc-info-value">
+								<h:outputText value="#{contatoBean.entidade.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+								</h:outputText>
+							</div>
+						</div>
+					</div>
+
+					<!-- Email -->
+					<div class="fc-info-item">
+						<div class="fc-info-icon">
+							✉️
+						</div>
+						<div>
+							<div class="fc-info-label">Email</div>
+							<div class="fc-info-value">
+								<h:outputText value="#{contatoBean.entidade.email}" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Mensagem (linha inteira) -->
+					<div class="fc-info-item fc-info-item-full">
+						<div class="fc-info-icon">
+							💭
+						</div>
+						<div>
+							<div class="fc-info-label">Mensagem</div>
+							<div class="fc-info-value">
+								<h:outputText value="#{contatoBean.entidade.mensagem}" />
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- ── Bottom Grid ─────────────────────────── -->
+			<div class="fc-bottom-grid">
+
+				<!-- Status de Resposta -->
+				<div class="fc-card">
+					<div class="fc-section-title">
+						📌
+						Status de Resposta
+					</div>
+
+					<div class="fc-toggle-wrapper">
+						<p:outputLabel for="@next" value="Respondido" />
+						<p:toggleSwitch styleClass="toggleSwitch-form"
+							value="#{contatoBean.entidade.respondido}" />
+					</div>
+
+					<div class="fc-alert-box">
+						ℹ️
+						<span>Marque como respondido quando houver retorno ao contato.</span>
+					</div>
+				</div>
+
+				<!-- Data de Resposta -->
+				<div class="fc-card">
+					<div class="fc-section-title">
+						📆
+						Data de Resposta
+					</div>
+
+					<p:datePicker styleClass="fc-date-picker"
+						value="#{contatoBean.entidade.dataResposta}"
+						locale="pt" monthNavigator="true" yearNavigator="select" />
+				</div>
+
+			</div>
+
+			<!-- ── Footer Actions ──────────────────────── -->
+			<div class="fc-card fc-footer-actions">
+				
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !contatoBean.cadastro}"
+					styleClass="fc-btn-flat"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(contatoBean.entidade, contatoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+				
+				<p:button value="Voltar"
+					styleClass="fc-btn-secondary"
+					icon="pi pi-chevron-left"
+					href="/administracao/contato/list.xhtml" />
+				
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!contatoBean.cadastro}"
+					styleClass="fc-btn-primary"
+					icon="pi pi-check"
+					action="#{contatoBean.salvar(false)}"
+					update="@form, :growl"
+					process="@form">
+					<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+			</div>
+
+		</div>
+	</h:form>
+
+</ui:decorate>
