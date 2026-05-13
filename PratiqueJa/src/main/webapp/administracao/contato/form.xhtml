@@ -15,79 +15,81 @@
 	    <f:viewAction action="#{contatoBean.carregar()}" />
 	</f:metadata>
 
-	<h:form id="form" class="form" >
+	<h:form id="form" class="form">
 
-		<h4 class="title-divisor" >Contato</h4>
+		<h4 class="title-divisor">Contato</h4>
 
-		<div class="ui-fluid gride" >
+		<div class="grid panelStatus ml-2 mr-2">
 
 			<div class="col-12" style="text-align:center;">
 				<p:graphicImage class="circle" value="#{contatoBean.entidade.usuario.imagem.getFotoStreamedContent()}"
 				rendered="#{not empty contatoBean.entidade.usuario.imagem}" stream="false" />
 			</div>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4"
-			rendered="#{contatoBean.entidade.usuario == null}">
-				<p:outputLabel for="@next" value="Nome do Usuário" />
-				<p:inputText value="#{contatoBean.entidade.nomeUsuario}" maxlength="255" />
-				<p:message for="@previous" display="text"/>
+			<!-- Nome do Usuário -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Nome do Usuário:" />
+				<h:outputText styleClass="status"
+					value="#{not empty contatoBean.entidade.usuario ? contatoBean.entidade.usuario.nome : contatoBean.entidade.nomeUsuario}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4"
-			rendered="#{contatoBean.entidade.usuario != null}">
-				<p:outputLabel for="@next" value="Nome do Usuário" />
-				<p:inputText value="#{contatoBean.entidade.usuario.nome}" disabled="true" />
+			<!-- Email -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Email:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.email}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
-				<p:outputLabel for="@next" value="Email" />
-				<p:inputText value="#{contatoBean.entidade.email}" maxlength="255" />
-				<p:message for="@previous" display="text"/>
+			<!-- Assunto -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Assunto:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.assunto}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
-				<p:outputLabel for="@next" value="Assunto" />
-				<p:inputText value="#{contatoBean.entidade.assunto}"
-				required="true" requiredMessage="O assunto é obrigatório" maxlength="255" />
-				<p:message for="@previous" display="text"/>
+			<!-- Data -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Data:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+				</h:outputText>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
-				<p:outputLabel for="@next" value="Data" />
-				<p:datePicker value="#{contatoBean.entidade.data}" locale="pt"
-				monthNavigator="true" yearNavigator="select" />
+			<!-- Mensagem -->
+			<h:panelGroup
+				styleClass="col-12 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Mensagem:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.mensagem}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+		</div>
+		
+		<div class="ui-fluid gride" >
+		
+			<!-- Respondido -->
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
 				<p:outputLabel for="@next" value="Respondido" />
 				<p:toggleSwitch class="toggleSwitch-form"
 				value="#{contatoBean.entidade.respondido}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12">
-				<p:outputLabel for="@next" value="Mensagem" />
-				<p:inputTextarea rows="5" value="#{contatoBean.entidade.mensagem}"
-				required="true" requiredMessage="A mensagem é obrigatória" maxlength="1023" />
-				<p:message for="@previous" display="text"/>
+			<!-- Data de Resposta -->
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Data de Resposta" />
+				<p:datePicker value="#{contatoBean.entidade.dataResposta}" locale="pt"
+				monthNavigator="true" yearNavigator="select" />
 			</h:panelGroup>
-
+			
+		
 		</div>
 
-		<div class="content-button" >
+		<div class="content-button">
 
-			<div class="divisor" ></div>
+			<div class="divisor"></div>
 
-		    <div class="flex gap-3 flex-wrap">
-
-				<p:commandButton value="Remover" icon="pi pi-trash"
-					rendered="#{!contatoBean.cadastro}"
-					styleClass="ui-button-danger ui-button-flat"
-					action="#{contatoBean.remover}" update="@form, :growl"
-					process="@this">
-					<p:confirm header="Confirmação" icon="pi pi-info-circle"
-					message="Você tem certeza que deseja remover este Contato?" />
-				</p:commandButton>
-
+			<div class="flex gap-3 flex-wrap">
 			</div>
 
 			<div class="flex gap-3 flex-wrap">
@@ -104,16 +106,7 @@
 				<p:button value="Voltar"
 				styleClass="ui-button-outlined"
 				icon="pi pi-chevron-left" href="/administracao/contato/list.xhtml" />
-
-				<p:commandButton id="adicionarCadastro" value="Adicionar"
-					rendered="#{contatoBean.cadastro}"
-					styleClass="ui-button-raised ui-button-success"
-					icon="pi pi-plus"
-					action="#{contatoBean.adicionar(false)}" update="@form, :growl"
-					process="@form">
-						<p:defaultCommand target="adicionarCadastro" />
-				</p:commandButton>
-
+				
 				<p:commandButton id="salvarCadastro" value="Salvar"
 					rendered="#{!contatoBean.cadastro}"
 					styleClass="ui-button-raised ui-button-primary"
@@ -122,7 +115,7 @@
 					process="@form">
 						<p:defaultCommand target="salvarCadastro" />
 				</p:commandButton>
-
+				
 			</div>
 		</div>
 

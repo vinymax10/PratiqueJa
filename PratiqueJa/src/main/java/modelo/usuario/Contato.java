@@ -63,4 +63,7 @@ public class Contato implements Serializable, Entidade
 
 	@AuditLabel(value = "respondido")
 	private boolean respondido = false;
+
+	@AuditLabel(value = "data de resposta", genero = GeneroGramatical.FEMININO)
+	private LocalDate dataResposta;
 }

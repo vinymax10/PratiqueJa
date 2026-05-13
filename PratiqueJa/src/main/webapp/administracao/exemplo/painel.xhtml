@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+		<div class="grid panelStatus ml-2 mr-2">
+
+			<!-- Venda -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Venda:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.numeroStr()}" />
+			</h:panelGroup>
+
+			<!-- data -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Data:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+				</h:outputText>
+			</h:panelGroup>
+			
+			<!-- Status -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-2">
+				<h:outputText styleClass="title" value="Status:" />
+				<ui:include src="/status/status.xhtml">
+					<ui:param name="status" value="#{vendaBean.entidade.status}" />
+				</ui:include>
+			</h:panelGroup>
+			
+			<!-- Desconto -->
+			<h:panelGroup
+				rendered="#{!vendaBean.permissao.podeEditar}"
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Desconto:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.descontoGeral}">
+					<f:convertNumber pattern="#,##0.00" />
+				</h:outputText>
+				<h:outputText styleClass="status" value="%" />
+			</h:panelGroup>
+
+			<!-- Cliente -->
+			<h:panelGroup
+				rendered="#{!vendaBean.permissao.podeEditar}"
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Cliente:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.cliente.nome}" />
+			</h:panelGroup>
+			
+			<!-- Vendedor -->
+			<h:panelGroup
+				rendered="#{!vendaBean.permissao.podeEditarVendedor}"
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Vendedor:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.vendedor.nomeExibicao}" />
+			</h:panelGroup>
+
+			<!-- Forma de Pagamento -->
+			<h:panelGroup rendered="#{!vendaBean.permissao.podeEditar}" 
+			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+			    <h:outputText styleClass="title" value="Pagamento:" />
+			    <h:outputText styleClass="status"
+			        value="#{vendaBean.entidade.formaPagamento.nome}" />
+			</h:panelGroup>
+			
+			<!-- Forma de Pagamento -->
+			<h:panelGroup rendered="#{!vendaBean.permissao.podeEditar and vendaBean.entidade.formaPagamento.permiteParcelamento}"
+			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+			    <h:outputText styleClass="title" value="Nº de Parcelas:" />
+		        <h:outputText styleClass="status" 
+			        value="#{vendaBean.entidade.qtdParcelas}" />
+			</h:panelGroup>
+					
+			<!-- Canal de Atendimento -->
+			<h:panelGroup
+				rendered="#{!vendaBean.permissao.podeEditar}"
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Canal de Atendimento:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.canalAtendimento.nome}" />
+			</h:panelGroup>
+
+			<!-- Observação -->
+			<h:panelGroup
+				rendered="#{!vendaBean.permissao.podeEditar}"
+				styleClass="col-12 flex flex-row align-items-center gap-1">
+				<h:outputText styleClass="title" value="Observação:" />
+				<h:outputText styleClass="status"
+					value="#{vendaBean.entidade.observacao}" />
+			</h:panelGroup>
+
+		</div>
+
+	</ui:composition>
+</h:body>
+</html>
