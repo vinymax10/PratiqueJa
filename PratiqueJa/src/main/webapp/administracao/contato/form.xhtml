@@ -1,0 +1,131 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{contatoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewParam name="chave" value="#{contatoBean.chave}" />
+	    <f:viewParam name="cadastro" value="#{contatoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+	    <f:viewAction action="#{contatoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<h4 class="title-divisor" >Contato</h4>
+
+		<div class="ui-fluid gride" >
+
+			<div class="col-12" style="text-align:center;">
+				<p:graphicImage class="circle" value="#{contatoBean.entidade.usuario.imagem.getFotoStreamedContent()}"
+				rendered="#{not empty contatoBean.entidade.usuario.imagem}" stream="false" />
+			</div>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4"
+			rendered="#{contatoBean.entidade.usuario == null}">
+				<p:outputLabel for="@next" value="Nome do Usuário" />
+				<p:inputText value="#{contatoBean.entidade.nomeUsuario}" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4"
+			rendered="#{contatoBean.entidade.usuario != null}">
+				<p:outputLabel for="@next" value="Nome do Usuário" />
+				<p:inputText value="#{contatoBean.entidade.usuario.nome}" disabled="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Email" />
+				<p:inputText value="#{contatoBean.entidade.email}" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Assunto" />
+				<p:inputText value="#{contatoBean.entidade.assunto}"
+				required="true" requiredMessage="O assunto é obrigatório" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Data" />
+				<p:datePicker value="#{contatoBean.entidade.data}" locale="pt"
+				monthNavigator="true" yearNavigator="select" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Respondido" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{contatoBean.entidade.respondido}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12">
+				<p:outputLabel for="@next" value="Mensagem" />
+				<p:inputTextarea rows="5" value="#{contatoBean.entidade.mensagem}"
+				required="true" requiredMessage="A mensagem é obrigatória" maxlength="1023" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button" >
+
+			<div class="divisor" ></div>
+
+		    <div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!contatoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{contatoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Contato?" />
+				</p:commandButton>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !contatoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(contatoBean.entidade, contatoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/contato/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{contatoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{contatoBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!contatoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{contatoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

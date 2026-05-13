@@ -21,7 +21,7 @@ public class ContatoDAO extends DAO<Contato>
 		super(Contato.class);
 	}
 
-	public List<Contato> buscar(FiltroContato filtroContato)
+	public List<Contato> buscar(FiltroContato filtro)
 	{
 		
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -30,33 +30,37 @@ public class ContatoDAO extends DAO<Contato>
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroContato.getNomeUsuario() != null && !filtroContato.getNomeUsuario().isBlank())
+		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
 		{
-			predicates.add(builder.like(fromContato.get("nomeUsuario"), "%" + filtroContato.getNomeUsuario() + "%"));
+			predicates.add(builder.like(fromContato.get("nomeUsuario"), "%" + filtro.getNomeUsuario() + "%"));
 		}
 		
-		if(filtroContato.getEmail() != null && !filtroContato.getEmail().isBlank())
+		if(filtro.getEmail() != null && !filtro.getEmail().isBlank())
 		{
-			predicates.add(builder.like(fromContato.get("email"), "%" + filtroContato.getEmail() + "%"));
+			predicates.add(builder.like(fromContato.get("email"), "%" + filtro.getEmail() + "%"));
 		}
 		
-		if(filtroContato.getId() != null)
-			predicates.add(builder.equal(fromContato.get("id"), filtroContato.getId()));
+		if(filtro.getId() != null)
+			predicates.add(builder.equal(fromContato.get("id"), filtro.getId()));
 
-		if(filtroContato.getMensagem() != null && !filtroContato.getMensagem().isBlank())
-			predicates.add(builder.like(fromContato.get("mensagem"), "%" + filtroContato.getMensagem() + "%"));
+		if(filtro.getMensagem() != null && !filtro.getMensagem().isBlank())
+			predicates.add(builder.like(fromContato.get("mensagem"), "%" + filtro.getMensagem() + "%"));
 
-		if(filtroContato.getAssunto() != null && !filtroContato.getAssunto().isBlank())
-			predicates.add(builder.like(fromContato.get("assunto"), "%" + filtroContato.getAssunto() + "%"));
+		if(filtro.getAssunto() != null && !filtro.getAssunto().isBlank())
+			predicates.add(builder.like(fromContato.get("assunto"), "%" + filtro.getAssunto() + "%"));
 
-		if(filtroContato.getDataInicio() != null)
-			predicates.add(builder.greaterThanOrEqualTo(fromContato.get("data"), filtroContato.getDataInicio()));
-
-		if(filtroContato.getDataFim() != null)
-			predicates.add(builder.lessThanOrEqualTo(fromContato.get("data"), filtroContato.getDataFim()));
-
-		if(filtroContato.getRespondido() != null)
-			predicates.add(builder.equal(fromContato.get("respondido"), filtroContato.getRespondido().booleanValue()));
+		if(filtro.getPeriodo() != null)
+	    {
+	    	if(filtro.getPeriodo().size()>0)
+		    	predicates.add(builder.greaterThanOrEqualTo(
+		    	fromContato.get("data"), filtro.getPeriodo().get(0)));
+	    	
+	    	if(filtro.getPeriodo().size()>1)
+	    		predicates.add(builder.lessThanOrEqualTo(
+	    		fromContato.get("data"), filtro.getPeriodo().get(1)));
+	    }
+		if(filtro.getRespondido() != null)
+			predicates.add(builder.equal(fromContato.get("respondido"), filtro.getRespondido().booleanValue()));
 
 		TypedQuery<Contato> typedQuery = em.createQuery(query.select(fromContato).where(predicates.toArray(new Predicate[0])));
 
