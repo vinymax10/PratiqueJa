@@ -10,7 +10,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 import dao.DAO;
-import modelo.questao.configuracao.Ano;
+import modelo.academico.Ano;
 
 public class AnoDAO extends DAO<Ano>
 {

@@ -13,7 +13,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.teste.Teste;
 import modelo.usuario.Turma;
 import modelo.usuario.Usuario;
@@ -80,7 +80,7 @@ public class TesteBean implements Serializable
 		{
 			teste = new Teste();
 			teste.setTestePadrao(assuntoCurso.getTestePadrao());
-			Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+			Usuario usuario = Sessao.getUsuarioLogado();
 			teste.setUsuario(usuario);
 			
 			construirTeste();
@@ -171,13 +171,13 @@ public class TesteBean implements Serializable
 
 	public List<Teste> getMeusTestes(Boolean realizado)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		return testeDAO.meusTestes(usuario, realizado);
 	}
 	
 	public Long numeroMeusTestes(Boolean realizado)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		return testeDAO.numeroMeusTestes(usuario, realizado);
 	}
 

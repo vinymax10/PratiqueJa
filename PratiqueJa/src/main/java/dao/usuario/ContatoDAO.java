@@ -59,6 +59,7 @@ public class ContatoDAO extends DAO<Contato>
 	    		predicates.add(builder.lessThanOrEqualTo(
 	    		fromContato.get("data"), filtro.getPeriodo().get(1)));
 	    }
+		
 		if(filtro.getRespondido() != null)
 			predicates.add(builder.equal(fromContato.get("respondido"), filtro.getRespondido().booleanValue()));
 

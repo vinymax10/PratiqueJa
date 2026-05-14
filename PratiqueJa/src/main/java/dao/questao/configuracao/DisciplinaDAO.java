@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import modelo.questao.configuracao.Disciplina;
+import modelo.academico.Disciplina;
 
 public class DisciplinaDAO extends DAO<Disciplina>
 {

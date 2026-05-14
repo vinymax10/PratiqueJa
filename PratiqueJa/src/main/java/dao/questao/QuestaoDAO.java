@@ -13,13 +13,13 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.questao.Alternativa;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
-import modelo.questao.configuracao.Assunto;
+import modelo.academico.Assunto;
 import modelo.usuario.Usuario;
 import web.session.Sessao;
 
@@ -180,7 +180,7 @@ public class QuestaoDAO extends DAO<Questao>
 				predicates.add(builder.isNull(fromQuestao.get("resolucao")));
 		}
 		
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario!=null)
 		{
 			if(filtroQuestao.getRespondida() != null)

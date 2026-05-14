@@ -1,0 +1,256 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Config Spam" />
+	</ui:define>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Config Spam</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-2">
+				<p:outputLabel for="data" value="Último Envio" />
+				<p:datePicker id="data"
+					value="#{configSpamBean.configSpam.ultimoEnvio}"
+					locale="pt" required="true" requiredMessage="A data é obrigatória" />
+				<p:message for="data" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Dias de Intervalo" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					value="#{configSpamBean.configSpam.diasIntervalo}" required="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Qtn. Nível 1" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 1"
+					value="#{configSpamBean.configSpam.qtnNivel1}" required="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Qtn. Nível 2" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 2"
+					value="#{configSpamBean.configSpam.qtnNivel2}" required="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-6 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Qtn. Nível 3" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 3"
+					value="#{configSpamBean.configSpam.qtnNivel3}" required="true" />
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
+				<p:outputLabel for="@next" value="Ativo" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{configSpamBean.configSpam.ativo}" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div></div>
+
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton id="salvarGerais" value="Salvar"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{configSpamBean.salvar}"
+					update="@form, :growl" process="@form">
+					<p:defaultCommand target="salvarGerais" />
+				</p:commandButton>
+			</div>
+
+		</div>
+
+		<h4 class="title-divisor">Programação</h4>
+
+		<div class="content-button-right">
+
+			<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
+			title="Restaura a configuração default utilizando todos os assuntos um por dia."
+			styleClass="ui-button-raised ui-button-help"
+			action="#{programacaoSpamBean.programacaoDefault()}" update="@form, :growl"
+			process="@this">
+				<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja restaurar a programação default?" />
+			</p:commandButton>
+
+			<p:commandButton value="Remover Todos" icon="pi pi-trash"
+			styleClass="ui-button-raised ui-button-danger"
+			action="#{programacaoSpamBean.removerTodosAcao()}" update="@form, :growl"
+			process="@this">
+				<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover todas as programações?" />
+			</p:commandButton>
+
+			<p:commandButton value="Adicionar" icon="pi pi-plus"
+			styleClass="ui-button-raised ui-button-success"
+			action="#{programacaoSpamBean.cadastrar}"
+			update="@form, :dialog-adicionar-programacaoSpam"
+			process="@this"
+			oncomplete="PF('dialogAdicionarProgramacaoSpam').show()"
+			resetValues="true" />
+
+		</div>
+
+		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+			var="programacaoSpam" value="#{configSpamBean.configSpam.programacoesSpam}"
+			selection="#{programacaoSpamBean.programacaoSpam}"
+			selectionMode="single" rowKey="#{programacaoSpam.id}"
+			rows="30" paginator="true" paginatorAlwaysVisible="false"
+			draggableRows="true">
+
+			<p:ajax event="rowSelect"
+				update="@form, :dialog-editar-programacaoSpam"
+				oncomplete="PF('dialogEditarProgramacaoSpam').show()"
+				resetValues="true" />
+
+			<p:ajax event="rowReorder"
+				listener="#{programacaoSpamBean.onRowReorder}" update="@form" />
+
+			<p:column headerText="Imagem" width="4rem" responsivePriority="1">
+				<img class="rectangleTable"
+					src="/image/matematica/#{programacaoSpam.assuntoCurso.getModuloImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}.png" />
+			</p:column>
+
+			<p:column headerText="Assunto" responsivePriority="2">
+				<h:outputText value="#{programacaoSpam.assuntoCurso.nome}" />
+			</p:column>
+
+			<p:column headerText="Data" responsivePriority="3">
+				<h:outputText value="#{programacaoSpam.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Ação" style="width:4rem" exportable="false">
+				<p:commandLink title="Remover a Programação de Spam"
+					action="#{programacaoSpamBean.remover(programacaoSpam)}"
+					update="@form, :growl" process="@this">
+					<div class="buttonIcon">
+						<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover esta programação?" />
+						<i class="pi pi-trash vermelho"></i>
+					</div>
+				</p:commandLink>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+	<p:dialog id="dialog-adicionar-programacaoSpam"
+	class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+	header="Adicionar Programação de Spam"
+	showEffect="fade" hideEffect="fade" width="100%;" modal="true"
+	widgetVar="dialogAdicionarProgramacaoSpam" responsive="true"
+	focus="formAdicionarProgramacaoSpam:ordem">
+		<h:form id="formAdicionarProgramacaoSpam" class="form">
+			<div class="ui-fluid gride">
+
+				<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-3 xl:col-2">
+					<p:outputLabel for="ordem" value="Ordem" />
+					<p:inputNumber id="ordem" minValue="0" maxValue="1000" decimalPlaces="0"
+						value="#{programacaoSpamBean.ordem}" required="true"
+						requiredMessage="A ordem é obrigatória" />
+					<p:message for="ordem" display="text" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-3 xl:col-2">
+					<p:outputLabel for="@next" value="Quantidade" />
+					<p:inputNumber minValue="1" maxValue="100" decimalPlaces="0"
+						value="#{programacaoSpamBean.quantidade}" required="true"
+						requiredMessage="A quantidade é obrigatória" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-8">
+					<p:outputLabel for="assuntoCurso" value="Assunto" />
+					<p:selectOneMenu id="assuntoCurso"
+						value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+						converter="generic" required="true"
+						requiredMessage="O assunto é obrigatório"
+						filter="true" filterMatchMode="contains">
+						<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+							itemValue="#{assuntoCurso}" />
+					</p:selectOneMenu>
+					<p:message for="assuntoCurso" display="text" />
+				</h:panelGroup>
+
+			</div>
+
+			<div class="content-button-right">
+				<div class="divisor"></div>
+				<p:commandButton id="salvarAdicionar" value="Adicionar"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{programacaoSpamBean.adicionar()}"
+					update="@form, :form:tabela, :growl" process="@form"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAdicionarProgramacaoSpam').hide()">
+					<p:defaultCommand target="salvarAdicionar" />
+				</p:commandButton>
+			</div>
+		</h:form>
+	</p:dialog>
+
+	<p:dialog id="dialog-editar-programacaoSpam"
+	class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+	header="Editar Programação de Spam"
+	showEffect="fade" hideEffect="fade" width="100%;" modal="true"
+	widgetVar="dialogEditarProgramacaoSpam" responsive="true">
+		<h:form id="formEditarProgramacaoSpam" class="form">
+			<div class="ui-fluid gride">
+
+				<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-3 xl:col-2">
+					<p:outputLabel for="@next" value="Ordem" />
+					<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+						value="#{programacaoSpamBean.programacaoSpam.ordem}" required="true"
+						requiredMessage="A ordem é obrigatória" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campoMsg col-12 lg:col-9 xl:col-10">
+					<p:outputLabel for="@next" value="Assunto" />
+					<p:selectOneMenu
+						value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+						converter="generic" required="true"
+						requiredMessage="O assunto é obrigatório"
+						filter="true" filterMatchMode="contains">
+						<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+						<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+							itemValue="#{assuntoCurso}" />
+					</p:selectOneMenu>
+					<p:message for="@previous" display="text" />
+				</h:panelGroup>
+
+			</div>
+
+			<div class="content-button-right">
+				<div class="divisor"></div>
+				<p:commandButton id="salvarEdicao" value="Salvar"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{programacaoSpamBean.salvar}"
+					update="@form, :form:tabela, :growl" process="@form"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogEditarProgramacaoSpam').hide()">
+					<p:defaultCommand target="salvarEdicao" />
+				</p:commandButton>
+			</div>
+		</h:form>
+	</p:dialog>
+
+</ui:decorate>

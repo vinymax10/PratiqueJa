@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 

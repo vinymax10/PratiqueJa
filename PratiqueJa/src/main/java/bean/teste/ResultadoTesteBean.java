@@ -57,7 +57,7 @@ public class ResultadoTesteBean implements Serializable
 
 	public void filtrarUsuario()
 	{
-		Usuario usuarioLogado = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuarioLogado = Sessao.getUsuarioLogado();
 		filtro.setUsuario(usuarioLogado);
 		this.resultadosTestes = resultadoTesteDAO.buscar(filtro);
 	}
@@ -68,7 +68,7 @@ public class ResultadoTesteBean implements Serializable
 		if(tabState.hasState(FiltroResultadoTeste.class))
 			filtro = tabState.getState(FiltroResultadoTeste.class);
 
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario != null)
 		{
 			FiltroResultadoTeste filtroUsuario = new FiltroResultadoTeste();

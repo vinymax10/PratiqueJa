@@ -13,9 +13,9 @@ import jakarta.inject.Named;
 import org.primefaces.event.ReorderEvent;
 
 import dao.spam.ProgramacaoSpamDAO;
-import modelo.assuntocurso.AssuntoCurso;
-import modelo.spam.ConfigSpam;
-import modelo.spam.ProgramacaoSpam;
+import modelo.academico.AssuntoCurso;
+import modelo.email.ConfigSpam;
+import modelo.email.ProgramacaoSpam;
 import bean.assuntocurso.AssuntoCursoBean;
 import bean.instagram.EnvioPostBean;
 import bean.util.Mensagem;

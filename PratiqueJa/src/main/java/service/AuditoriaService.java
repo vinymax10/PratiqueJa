@@ -102,7 +102,7 @@ public class AuditoriaService implements Serializable
 		evento.setEntidadeId(entidadeId);
 		evento.setTipo(tipo);
 
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		evento.setUsuario(usuario);
 		evento.setDataEvento(LocalDateTime.now());
 

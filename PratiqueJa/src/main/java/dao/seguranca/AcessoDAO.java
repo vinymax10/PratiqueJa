@@ -1,5 +1,6 @@
 package dao.seguranca;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class AcessoDAO extends DAO<Acesso>
 
 	public Acesso lastAcesso(String idSessao)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
 		Root<Acesso> fromAcesso = query.from(Acesso.class);
@@ -52,49 +52,50 @@ public class AcessoDAO extends DAO<Acesso>
 		return acesso;
 	}
 
-	public List<Acesso> buscar(FiltroAcesso filtroAcesso)
+	public List<Acesso> buscar(FiltroAcesso filtro)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Acesso> query = builder.createQuery(Acesso.class);
 		Root<Acesso> fromAcesso = query.from(Acesso.class);
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroAcesso.getNomeUsuario() != null && !filtroAcesso.getNomeUsuario().isBlank())
+		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
 		{
-			predicates.add(builder.like(fromAcesso.<Usuario>get("usuario").get("nome"), "%" + filtroAcesso.getNomeUsuario() + "%"));
+			predicates.add(builder.like(fromAcesso.<Usuario>get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 		}
 
-		if(filtroAcesso.getIdSessao() != null && !filtroAcesso.getIdSessao().isBlank())
+		if(filtro.getIdSessao() != null && !filtro.getIdSessao().isBlank())
 		{
-			predicates.add(builder.equal(fromAcesso.get("idSessao"), filtroAcesso.getIdSessao()));
+			predicates.add(builder.equal(fromAcesso.get("idSessao"), filtro.getIdSessao()));
 		}
 
-		if(filtroAcesso.getInicio() != null)
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
 		{
-			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getInicio()));
+			LocalDateTime inicioPeriodo = filtro.getPeriodo().get(0).atStartOfDay();
+			LocalDateTime terminoPeriodo = filtro.getPeriodo().size() > 1
+				? filtro.getPeriodo().get(1).atTime(23, 59, 59)
+				: filtro.getPeriodo().get(0).atTime(23, 59, 59);
+
+			Predicate inicioNoPeriodo = builder.between(fromAcesso.get("inicio"), inicioPeriodo, terminoPeriodo);
+			Predicate terminoNoPeriodo = builder.between(fromAcesso.get("termino"), inicioPeriodo, terminoPeriodo);
+
+			predicates.add(builder.or(inicioNoPeriodo, terminoNoPeriodo));
 		}
 
-		if(filtroAcesso.getTermino() != null)
+		if(filtro.getMinutosMinimo() != null)
 		{
-			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("data"), filtroAcesso.getTermino()));
+			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("duracao"), (long) filtro.getMinutosMinimo() * 60));
 		}
 
-		if(filtroAcesso.getMinutosMinimo() != 0)
+		if(filtro.getMinutosMaximo() != null)
 		{
-			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMinimo()));
-		}
-
-		if(filtroAcesso.getMinutosMaximo() != 0)
-		{
-			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("minutos"), filtroAcesso.getMinutosMaximo()));
+			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("duracao"), (long) filtro.getMinutosMaximo() * 60));
 		}
 
 		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])));
-		List<Acesso> list = typedQuery.getResultList();
 
-		return list;
+		return typedQuery.getResultList();
 	}
 
 }

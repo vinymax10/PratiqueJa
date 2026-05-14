@@ -20,7 +20,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.Entidade;
 import modelo.auditoria.TipoEvento;
-import modelo.permissao.Permissao;
+import modelo.seguranca.Permissao;
 import modelo.usuario.Usuario;
 import service.AuditoriaService;
 import web.session.Sessao;
@@ -223,7 +223,6 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	{
 		try
 		{
-			validar(!permissao.isPodeEditar(),Mensagem.messagePermissaoNegada());
 			this.entidade=entidade;
 			personalizarSalvar();
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
@@ -232,10 +231,6 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 			entidade = entidadeDAO.salvar(entidade);
 			
 			carregarPermissao(entidade);
-		}
-		catch(RelacaoException e)
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
 		}
 		catch(Exception e)
 		{
@@ -331,7 +326,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 
 	public void carregarPermissao(T entidade)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		permissao.update(entidade,usuario);
 	}
 	

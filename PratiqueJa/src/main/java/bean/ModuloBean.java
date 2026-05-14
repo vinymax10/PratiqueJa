@@ -7,7 +7,7 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 
 @Named
 @SessionScoped

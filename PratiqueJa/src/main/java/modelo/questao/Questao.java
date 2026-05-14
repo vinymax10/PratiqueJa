@@ -22,14 +22,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
-import modelo.questao.configuracao.Ano;
-import modelo.questao.configuracao.Assunto;
-import modelo.questao.configuracao.Banca;
-import modelo.questao.configuracao.Disciplina;
-import modelo.questao.configuracao.Orgao;
+import modelo.academico.Ano;
+import modelo.academico.Assunto;
+import modelo.academico.Banca;
+import modelo.academico.Disciplina;
+import modelo.academico.Orgao;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "assuntoCurso", "assuntos", "paragrafos", "alternativas", "resultadosQuestao" })

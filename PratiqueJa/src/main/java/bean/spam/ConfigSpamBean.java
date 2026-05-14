@@ -10,7 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import dao.spam.ConfigSpamDAO;
-import modelo.spam.ConfigSpam;
+import modelo.email.ConfigSpam;
 
 @Named
 @ViewScoped

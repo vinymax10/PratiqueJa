@@ -4,15 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import filtro.usuario.FiltroAcesso;
 import dao.seguranca.AcessoDAO;
-import jakarta.enterprise.context.SessionScoped;
+import filtro.usuario.FiltroAcesso;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.seguranca.Acesso;
 
+@Data
 @Named
-@SessionScoped
+@ViewScoped
 public class AcessoBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -21,63 +24,24 @@ public class AcessoBean implements Serializable
 	private AcessoDAO acessoDAO;
 
 	@Inject
-	private Acesso acesso;
+	private FiltroAcesso filtro;
 
-	@Inject
-	FiltroAcesso filtroAcesso;
+	private List<Acesso> acessos = new ArrayList<>();
 
-	private List<Acesso> acessos = new ArrayList<Acesso>();
+	@PostConstruct
+	public void init()
+	{
+		filtrar();
+	}
 
 	public void filtrar()
 	{
-		this.acessos = acessoDAO.buscar(filtroAcesso);
+		this.acessos = acessoDAO.buscar(filtro);
 	}
 
-	public String finalizadoToggle(Acesso acesso)
+	public void filtrarInit()
 	{
-//		acesso.set();
-//		acessoDAO.salvar(acesso);
-		return "";
+		filtro.limpar();
+		filtrar();
 	}
-	
-	public AcessoDAO getAcessoDAO()
-	{
-		return acessoDAO;
-	}
-
-	public void setAcessoDAO(AcessoDAO acessoDAO)
-	{
-		this.acessoDAO = acessoDAO;
-	}
-
-	public Acesso getAcesso()
-	{
-		return acesso;
-	}
-
-	public void setAcesso(Acesso acesso)
-	{
-		this.acesso = acesso;
-	}
-
-	public FiltroAcesso getFiltroAcesso()
-	{
-		return filtroAcesso;
-	}
-
-	public void setFiltroAcesso(FiltroAcesso filtroAcesso)
-	{
-		this.filtroAcesso = filtroAcesso;
-	}
-
-	public List<Acesso> getAcessos()
-	{
-		return acessos;
-	}
-
-	public void setAcessos(List<Acesso> acessos)
-	{
-		this.acessos = acessos;
-	}
-
 }

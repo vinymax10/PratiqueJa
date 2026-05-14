@@ -12,7 +12,7 @@ public class Log
 		if(FacesContext.getCurrentInstance() != null
 		&&SessionContext.getInstance().getAttribute("UsuarioLogado")!=null)
 		{
-			Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+			Usuario usuario = Sessao.getUsuarioLogado();
 			System.out.println("usuário id: "+usuario.getId()+" nome: "+usuario.getNome()+" "+mensagem);
 		}
 		else

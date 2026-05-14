@@ -1,14 +1,17 @@
 package bean.util;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import modelo.email.Email;
+import filtro.email.FiltroEmail;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
+import modelo.email.Email;
+import modelo.email.StatusEmail;
 import service.EmailService;
 
 @Data
@@ -21,32 +24,36 @@ public class EmailBean implements Serializable
 	@Inject
 	private EmailService emailService;
 
-	private Email email;
-	private List<Email> emails;
+	@Inject
+	private FiltroEmail filtro;
+
+	private List<Email> emails = new ArrayList<>();
 
 	@PostConstruct
 	public void init()
 	{
-		email = new Email();
-		carregarEmails();
+		filtrar();
 	}
 
-	public void carregarEmails()
+	public void filtrar()
 	{
-		emails = emailService.listarPendentes();
+		this.emails = emailService.buscar(filtro);
 	}
 
-	public void adicionar()
+	public void filtrarInit()
 	{
-		emailService.adicionar(email);
-		email = new Email();
-		carregarEmails();
+		filtro.limpar();
+		filtrar();
 	}
 
 	public void remover(Email email)
 	{
 		emailService.remover(email);
-		carregarEmails();
+		filtrar();
 	}
 
+	public StatusEmail[] getStatusValues()
+	{
+		return StatusEmail.values();
+	}
 }

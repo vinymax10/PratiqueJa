@@ -6,255 +6,133 @@ import java.util.List;
 
 import org.primefaces.PrimeFaces;
 
-import dao.usuario.ControleAcessoDAO;
 import filtro.usuario.FiltroControleAcesso;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.usuario.ControleAcesso;
-import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
+import service.ControleAcessoService;
 import web.session.Sessao;
 import web.session.SessionContext;
 
+@Data
 @Named
 @SessionScoped
 public class ControleAcessoBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
-	private int numDownloadQuestao=5;
-	
-	private int numDownloadExercicio=5;
-	
-	private int numResolucaoExercicio=50;
-	
-	private int numResolucaoQuestao=50;
 
-	private int numQuestaoFeita=50;
-	
 	@Inject
-	private ControleAcessoDAO controleAcessoDAO;
+	private ControleAcessoService controleAcessoService;
+
+	@Inject
+	private FiltroControleAcesso filtro;
 
 	private Usuario usuario;
-	
+
 	private ControleAcesso controleAcesso;
 
 	private String mensagem;
-	
-	@Inject
-	private FiltroControleAcesso filtroControleAcesso;
-	
-	private List<ControleAcesso> controlesAcessos = new ArrayList<ControleAcesso>();
 
-	public boolean estaLogado()
-	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
-		return usuario!=null;
-	}
-	
-	public boolean verificaEstaLogado()
-	{
-		if(estaLogado())
-		{
-			return true;
-		}
-		else
-		{
-			PrimeFaces.current().executeScript("PF('loginWidget').show()");
-			return false;
-		}
-	}
-	
+	private List<ControleAcesso> controlesAcessos = new ArrayList<>();
+
+	// --- admin: lista ---
+
 	public void filtrar()
 	{
-		this.controlesAcessos = controleAcessoDAO.buscar(filtroControleAcesso);
+		this.controlesAcessos = controleAcessoService.buscar(filtro);
 	}
-	
-	public void showUpgrade(String mensagem)
+
+	public void filtrarInit()
 	{
-		this.mensagem=mensagem;
-		PrimeFaces.current().executeScript("PF('upgradeWidget').show()");
+		filtro.limpar();
+		filtrar();
 	}
-	
-	public boolean podeFazerDownloadMassa()
-	{
-		if(usuario==null)
-			return false;
-			
-		if(usuario.getPerfil()==PerfilUsuario.Bronze)
-			return false;
-			
-		return true;
-	}
-	
-	public boolean podeFazerDownloadExercicio()
-	{
-		if(usuario==null||controleAcesso==null)
-			return false;
-		
-		if(usuario.getPerfil()!=PerfilUsuario.Bronze)
-			return true;
-		else
-		{
-			if(controleAcesso.getNumDownloadExercicio()<numDownloadExercicio)
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean podeFazerDownloadQuestao()
-	{
-		if(usuario==null||controleAcesso==null)
-			return false;
-		
-		if(usuario.getPerfil()!=PerfilUsuario.Bronze)
-			return true;
-		else
-		{
-			if(controleAcesso.getNumDownloadQuestao()<numDownloadQuestao)
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean podeResolucaoExercicio()
-	{
-		if(usuario==null||controleAcesso==null)
-			return false;
-		
-		if(usuario.getPerfil()!=PerfilUsuario.Bronze)
-			return true;
-		else
-		{
-			if(controleAcesso.getNumResolucaoExercicio()<numResolucaoExercicio)
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean podeResolucaoQuestao()
-	{
-		if(usuario==null||controleAcesso==null)
-			return false;
-		
-		if(usuario.getPerfil()!=PerfilUsuario.Bronze)
-			return true;
-		else
-		{
-			if(controleAcesso.getNumResolucaoQuestao()<numResolucaoQuestao)
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean podeFazerQuestao()
-	{
-		if(usuario==null||controleAcesso==null)
-			return false;
-		
-		if(usuario.getPerfil()!=PerfilUsuario.Bronze)
-			return true;
-		else
-		{
-			if(controleAcesso.getNumQuestaoFeita()<numQuestaoFeita)
-				return true;
-		}
-		return false;
-	}
-	
-	public void registrarDownloadExercicio()
-	{
-		if(controleAcesso!=null)
-		{
-			controleAcesso.incrementaDownloadExercicio();
-			controleAcessoDAO.salvar(controleAcesso);
-		}
-	}
-	
+
+	// --- UI / sessão ---
+
 	public void carrega()
 	{
-		usuario = (Usuario) Sessao.get("UsuarioLogado");
+		usuario = Sessao.getUsuarioLogado();
 		controleAcesso = (ControleAcesso) SessionContext.getInstance().getAttribute("controleAcesso");
+	}
+
+	public boolean verificaEstaLogado()
+	{
+		if(Sessao.estaLogado())
+			return true;
+
+		PrimeFaces.current().executeScript("PF('loginWidget').show()");
+		return false;
+	}
+
+	public void showUpgrade(String mensagem)
+	{
+		this.mensagem = mensagem;
+		PrimeFaces.current().executeScript("PF('upgradeWidget').show()");
+	}
+
+	// --- delegação ao service ---
+
+	public boolean podeFazerDownloadMassa()
+	{
+		return controleAcessoService.podeFazerDownloadMassa(usuario);
+	}
+
+	public boolean podeFazerDownloadExercicio()
+	{
+		return controleAcessoService.podeFazerDownloadExercicio(usuario, controleAcesso);
+	}
+
+	public boolean podeFazerDownloadQuestao()
+	{
+		return controleAcessoService.podeFazerDownloadQuestao(usuario, controleAcesso);
+	}
+
+	public boolean podeResolucaoExercicio()
+	{
+		return controleAcessoService.podeResolucaoExercicio(usuario, controleAcesso);
+	}
+
+	public boolean podeResolucaoQuestao()
+	{
+		return controleAcessoService.podeResolucaoQuestao(usuario, controleAcesso);
+	}
+
+	public boolean podeFazerQuestao()
+	{
+		return controleAcessoService.podeFazerQuestao(usuario, controleAcesso);
+	}
+
+	public void registrarDownloadExercicio()
+	{
+		controleAcessoService.registrarDownloadExercicio(controleAcesso);
 	}
 
 	public void registrarDownloadQuestao(boolean massa)
 	{
-		if(controleAcesso!=null)
-		{
-			if(massa)
-				controleAcesso.incrementaDownloadQuestaoMassa();
-			else
-				controleAcesso.incrementaDownloadQuestao();
-			
-			controleAcessoDAO.salvar(controleAcesso);
-		}
+		controleAcessoService.registrarDownloadQuestao(controleAcesso, massa);
 	}
-	
+
 	public void registrarDownloadMassa()
 	{
-		if(controleAcesso!=null)
-		{
-			controleAcesso.incrementaDownloadMassa();
-			controleAcessoDAO.salvar(controleAcesso);
-		}
+		controleAcessoService.registrarDownloadMassa(controleAcesso);
 	}
-	
+
 	public void registrarResolucaoExercicio()
 	{
-		if(controleAcesso!=null)
-		{
-			controleAcesso.incrementaResolucaoExercicio();
-			controleAcessoDAO.salvar(controleAcesso);
-		}
+		controleAcessoService.registrarResolucaoExercicio(controleAcesso);
 	}
-	
+
 	public void registrarResolucaoQuestao()
 	{
-		if(controleAcesso!=null)
-		{
-			controleAcesso.incrementaResolucaoQuestao();
-			controleAcessoDAO.salvar(controleAcesso);
-		}
+		controleAcessoService.registrarResolucaoQuestao(controleAcesso);
 	}
-	
+
 	public void registrarQuestaoFeita()
 	{
-		if(controleAcesso!=null)
-		{
-			controleAcesso.incrementaQuestaoFeita();
-			controleAcessoDAO.salvar(controleAcesso);
-		}
+		controleAcessoService.registrarQuestaoFeita(controleAcesso);
 	}
-	
-	public String getMensagem()
-	{
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem)
-	{
-		this.mensagem = mensagem;
-	}
-
-	public FiltroControleAcesso getFiltroControleAcesso()
-	{
-		return filtroControleAcesso;
-	}
-
-	public void setFiltroControleAcesso(FiltroControleAcesso filtroControleAcesso)
-	{
-		this.filtroControleAcesso = filtroControleAcesso;
-	}
-
-	public List<ControleAcesso> getControlesAcessos()
-	{
-		return controlesAcessos;
-	}
-
-	public void setControlesAcessos(List<ControleAcesso> controlesAcessos)
-	{
-		this.controlesAcessos = controlesAcessos;
-	}
-	
 }

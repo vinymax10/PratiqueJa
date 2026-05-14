@@ -9,7 +9,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 import modelo.configuracao.Edicao;
 
 @Named

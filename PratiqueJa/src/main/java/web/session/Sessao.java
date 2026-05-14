@@ -2,6 +2,7 @@ package web.session;
 
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import modelo.usuario.Usuario;
 
 public class Sessao
 {
@@ -45,8 +46,19 @@ public class Sessao
 		externalContext().getRequestParameterMap().put(chave, valor);
 	}
 	
-	public static String id() {
+	public static String id()
+	{
 	    return externalContext().getSessionId(false);
+	}
+
+	public static boolean estaLogado()
+	{
+		return get("UsuarioLogado") != null;
+	}
+
+	public static Usuario getUsuarioLogado()
+	{
+		return (Usuario) get("UsuarioLogado");
 	}
 
 }

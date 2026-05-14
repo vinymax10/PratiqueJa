@@ -2,51 +2,40 @@ package filtro.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
+import lombok.Data;
+
+@Data
 public class FiltroControleAcesso implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	private String nomeUsuario;
 
-	private LocalDate inicio;
-	private LocalDate termino;
+	private List<LocalDate> periodo;
+	private PeriodoPreset preset;
 
-	public String getNomeUsuario()
+	public void resetPreset()
 	{
-		return nomeUsuario;
+		preset=PeriodoPreset.PERSONALIZADO;
 	}
-
-	public void setNomeUsuario(String nomeUsuario)
+	
+	public void aplicarPreset()
 	{
-		this.nomeUsuario = nomeUsuario;
+		if(this.preset == null)
+            this.periodo = null;
+
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+	    	periodo = preset.calcularIntervalo();
 	}
-
-	public LocalDate getInicio()
+	
+	public void limpar()
 	{
-		return inicio;
-	}
-
-	public void setInicio(LocalDate inicio)
-	{
-		this.inicio = inicio;
-	}
-
-	public LocalDate getTermino()
-	{
-		return termino;
-	}
-
-	public void setTermino(LocalDate termino)
-	{
-		this.termino = termino;
-	}
-
-	@Override
-	public String toString()
-	{
-		return (nomeUsuario != null ? "nomeUsuario=" + nomeUsuario + ", " : "")
-		+ (inicio != null ? "inicio=" + inicio + ", " : "") + (termino != null ? "termino=" + termino : "");
+		nomeUsuario = null;
+		periodo = null;
+		preset = null;
 	}
 
 }

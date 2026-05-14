@@ -8,7 +8,7 @@ import exceptions.RelacaoException;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import modelo.auditoria.TipoEvento;
-import modelo.questao.configuracao.Ano;
+import modelo.academico.Ano;
 
 @Named
 @ViewScoped

@@ -3,15 +3,14 @@ package dao.instagram;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DAO;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
-import dao.DAO;
-import modelo.instagram.Hashtag;
+import modelo.publicacao.Hashtag;
 
 public class HashtagDAO extends DAO<Hashtag>
 {

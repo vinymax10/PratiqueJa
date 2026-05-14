@@ -3,8 +3,8 @@ package filtro.exercicio;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.assuntocurso.AssuntoCurso;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.AssuntoCurso;
+import modelo.academico.Modulo;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
 

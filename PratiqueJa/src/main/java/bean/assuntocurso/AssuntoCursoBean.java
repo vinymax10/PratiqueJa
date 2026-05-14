@@ -17,11 +17,11 @@ import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import modelo.assuntocurso.AssuntoCurso;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.AssuntoCurso;
+import modelo.academico.Modulo;
 import modelo.auditoria.TipoEvento;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.permissao.PermissaoPadrao;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
 import web.session.Sessao;
 
@@ -124,7 +124,7 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	
 	private int numStar(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario==null)
 			return 0;
 		
@@ -146,7 +146,7 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	
 	public double porcentagemConcluida(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario!=null)
 			return resultadoTesteDAO.melhorResultado(assuntoCurso, usuario);
 		else

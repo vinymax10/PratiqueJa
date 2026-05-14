@@ -8,9 +8,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
+import modelo.publicacao.ConviteGrupo;
 import dao.DAO;
-import modelo.instagram.ConviteGrupo;
 
 public class ConviteGrupoDAO extends DAO<ConviteGrupo>
 {

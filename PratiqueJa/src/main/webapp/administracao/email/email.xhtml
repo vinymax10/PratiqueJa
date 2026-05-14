@@ -1,0 +1,65 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+
+	<h:form id="form" style="margin-bottom:0">
+		<div class="p-d-flex">
+			<div class="p-grid" style="margin: 0 15px; width: 100%;">
+
+				<div class="p-col-12">
+					<h2>Email</h2>
+				</div>
+				
+<!-- 				<h:panelGroup id="fomulario" style="width:100%;" rendered="#{!emailBean.lista}"> -->
+								
+<!-- 	            	<ui:include src="/email/cadastro.xhtml" /> -->
+		            	
+<!-- 			    </h:panelGroup> -->
+				
+<!-- 				<h:panelGroup id="filtro" rendered="#{emailBean.lista}"> -->
+				
+					<p:commandButton look="success" value="Cadastrar" icon="pi pi-plus" 
+					styleClass="ui-button-raised ui-button-success ui-button-flat"
+					action="#{emailBean.cadastrar()}" update="@form" process="@this" style="margin-right:15px;" />
+						
+					<p:commandButton look="success" value="Remover" process="@this" 
+					icon="pi pi-trash" 
+					styleClass="ui-button-raised ui-button-danger ui-button-flat"
+					action="#{emailBean.removerTeste()}" style="margin-right:15px;" />
+						
+					
+					<f:websocket channel="email">
+						<f:ajax event="updateEmail" render="form:tabela" />
+					</f:websocket>
+					
+					<p:dataTable id="tabela" class="table table-striped"
+						var="email" value="#{emailBean.emails}"
+						paginator="true" rows="20" reflow="true" >
+						
+						<p:column headerText="Assunto" responsivePriority="1">
+							<h:outputText value="#{email.assunto}" />
+						</p:column>
+						
+						<p:column headerText="Destinatario" responsivePriority="1">
+							<h:outputText value="#{email.destinatario}" />
+						</p:column>
+						
+						<p:column headerText="Tentativa Envio" responsivePriority="1">
+							<h:outputText value="#{email.tentativaEnvio}" />
+						</p:column>
+						
+						<p:column headerText="Mensagem" responsivePriority="1">
+							<h:outputText value="#{email.mensagem}" />
+						</p:column>
+							
+					</p:dataTable>
+<!-- 				</h:panelGroup> -->
+			</div>
+		</div>
+	</h:form>
+
+</ui:decorate>
+

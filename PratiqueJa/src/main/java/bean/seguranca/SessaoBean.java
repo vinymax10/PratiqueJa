@@ -75,6 +75,6 @@ public class SessaoBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		usuario = (Usuario) Sessao.get("UsuarioLogado");
+		usuario = Sessao.getUsuarioLogado();
 	}
 }

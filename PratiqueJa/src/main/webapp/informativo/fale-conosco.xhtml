@@ -21,7 +21,7 @@
 				
 				<div class="ui-fluid  p-col-12">
 					
-					<h:panelGroup rendered="#{!controleAcessoBean.estaLogado()}">
+					<h:panelGroup rendered="#{!sessaoBean.logado}">
 						<div class="campoMsg p-col-12 ">
 							<p:outputLabel for="@next" value="Nome"/>
 			                <p:inputText id="nome" placeholder="Nome" value="#{contatoBean.contato.nomeUsuario}" 

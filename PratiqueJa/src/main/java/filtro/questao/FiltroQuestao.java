@@ -2,13 +2,13 @@ package filtro.questao;
 
 import java.io.Serializable;
 
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.questao.Dificuldade;
-import modelo.questao.configuracao.Ano;
-import modelo.questao.configuracao.Assunto;
-import modelo.questao.configuracao.Banca;
-import modelo.questao.configuracao.Disciplina;
-import modelo.questao.configuracao.Orgao;
+import modelo.academico.Ano;
+import modelo.academico.Assunto;
+import modelo.academico.Banca;
+import modelo.academico.Disciplina;
+import modelo.academico.Orgao;
 
 public class FiltroQuestao implements Serializable
 {

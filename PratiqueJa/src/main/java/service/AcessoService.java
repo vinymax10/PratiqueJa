@@ -34,7 +34,7 @@ public class AcessoService
 			return;
 
 		LocalDateTime fim = LocalDateTime.now();
-		acesso.setFim(fim);
+		acesso.setTermino(fim);
 		acesso.setDuracao(Duration.between(acesso.getInicio(), fim).getSeconds());
 		acesso.setStatus(StatusAcesso.EXPIRADO);
 		acessoDAO.salvar(acesso);

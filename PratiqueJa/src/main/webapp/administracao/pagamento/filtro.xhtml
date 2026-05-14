@@ -11,17 +11,38 @@
 				<p:card class="newBorder mb-3" style="width: 100%;">
 					<div class="ui-fluid gride">
 						<h4 class="title-card">Filtro</h4>
-
-						<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
-							<p:outputLabel for="@next" value="ID"/>
-							<p:inputText value="#{pagamentoBean.filtro.id}" />
+						
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+							<p:outputLabel for="preset" value="Períodos Comuns"/>
+							<p:selectOneMenu id="preset"
+							value="#{pagamentoBean.filtro.preset}"
+							filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{periodoPresetBean.opcoes}"
+								var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+								<p:ajax event="change"
+								listener="#{pagamentoBean.filtro.aplicarPreset}"
+								update="form:periodo"/>
+							</p:selectOneMenu>
 						</div>
 
-						<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
-							<p:outputLabel for="@next" value="Nome do Usuário"/>
-							<p:inputText value="#{pagamentoBean.filtro.nomeUsuario}" />
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+							<p:outputLabel for="periodo" value="Período"/>
+							<p:datePicker id="periodo"
+							value="#{pagamentoBean.filtro.periodo}"
+							selectionMode="range"
+							placeholder="Período"
+							locale="pt"
+							monthNavigator="true"
+							yearNavigator="select"
+							readonlyInput="true"
+							hideOnRangeSelection="true">
+								<p:ajax event="change"
+								listener="#{pagamentoBean.filtro.resetPreset}"
+								update="form:preset"/>
+							</p:datePicker>
 						</div>
-
+						
 						<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
 							<p:outputLabel for="@next" value="Plano"/>
 							<p:selectOneMenu value="#{pagamentoBean.filtro.plano}" filter="true" filterMatchMode="contains">
@@ -48,13 +69,10 @@
 								<f:selectItem itemLabel="Não" itemValue="#{false}"/>
 							</p:selectOneMenu>
 						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-4 xl:col-4">
-							<p:outputLabel for="@next" value="Período"/>
-							<p:datePicker value="#{pagamentoBean.filtro.periodo}"
-							selectionMode="range" locale="pt"
-							showIcon="true" pattern="dd/MM/yyyy"
-							valueChangeListener="#{pagamentoBean.filtro.resetPreset}" />
+						
+						<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+							<p:outputLabel for="@next" value="ID"/>
+							<p:inputText value="#{pagamentoBean.filtro.id}" />
 						</div>
 
 					</div>

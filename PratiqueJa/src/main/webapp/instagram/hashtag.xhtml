@@ -14,10 +14,10 @@
 				<div class="ui-fluid formgrid grid">
 					<div class="field col-12 xl:col-6">
 						<p:inputText label="Nome" name="Nome"
-							value="#{hashtagBean.entidadeNova.nome}" placeholder="Nome"
+							value="#{hashtagBean.entidade.nome}" placeholder="Nome"
 							required="true"
 							requiredMessage="Por favor informe um nome para o #{hashtagBean.nome}."
-							validator="#{hashtagBean.validate}">
+							validator="#{hashtagBean.validateNomeRepetido}">
 						</p:inputText>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 
 			<h:form id="form">
 				<p:dataTable id="tabela" class="table table-striped" var="entidade"
-					value="#{hashtagBean.lista}" columnClasses="columnInput,columnAction">
+					value="#{hashtagBean.opcoes}" columnClasses="columnInput,columnAction">
 					<p:column headerText="Nome">
 						<div class="p-grid ui-fluid" style="margin: 0">
 							<div class="p-col-12 " style="padding: 0">
@@ -52,7 +52,7 @@
 									required="true"
 									requiredMessage="Por favor informe um nome para o #{hashtagBean.nome}."
 									rendered="#{entidade.id==hashtagBean.entidade.id}"
-									validator="#{hashtagBean.validate}">
+									validator="#{hashtagBean.validateNomeRepetido}">
 								</p:inputText>
 							</div>
 						</div>

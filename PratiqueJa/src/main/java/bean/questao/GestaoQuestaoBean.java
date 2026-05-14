@@ -38,11 +38,11 @@ import modelo.questao.Dificuldade;
 import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
-import modelo.questao.configuracao.Ano;
-import modelo.questao.configuracao.Assunto;
-import modelo.questao.configuracao.Banca;
-import modelo.questao.configuracao.Disciplina;
-import modelo.questao.configuracao.Orgao;
+import modelo.academico.Ano;
+import modelo.academico.Assunto;
+import modelo.academico.Banca;
+import modelo.academico.Disciplina;
+import modelo.academico.Orgao;
 import scraping.QuestaoQ;
 import web.session.SessionContext;
 

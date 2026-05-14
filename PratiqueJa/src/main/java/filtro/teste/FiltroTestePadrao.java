@@ -3,7 +3,7 @@ package filtro.teste;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 
 @Data
 public class FiltroTestePadrao implements Serializable

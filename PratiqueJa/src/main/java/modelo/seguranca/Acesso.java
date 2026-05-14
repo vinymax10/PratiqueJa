@@ -26,7 +26,7 @@ public class Acesso implements Serializable, Entidade
 	private Usuario usuario;
 
 	private LocalDateTime inicio;
-	private LocalDateTime fim;
+	private LocalDateTime termino;
 
 //	duração em segundos
 	private long duracao;

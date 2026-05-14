@@ -3,7 +3,7 @@ package filtro.teste;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.teste.TestePadrao;
 
 public class FiltroTeste implements Serializable

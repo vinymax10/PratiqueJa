@@ -3,7 +3,7 @@ package filtro.assuntocurso;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 
 @Data
 public class FiltroAssuntoCurso implements Serializable

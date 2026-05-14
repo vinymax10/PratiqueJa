@@ -99,7 +99,7 @@
 				<p:toggleSwitch class="toggleSwitch-form"
 					value="#{entidade.pago}" >
 					<p:ajax event="change" process="@this"
-					listener="#{pagamentoBean.salvar(entidade)}" />
+					listener="#{pagamentoBean.salvar(entidade)}" update="growl" />
 				</p:toggleSwitch>
 			</p:column>
 

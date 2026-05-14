@@ -8,10 +8,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
+import modelo.publicacao.ConfigPost;
+import modelo.publicacao.ImagemPost;
 import dao.DAO;
-import modelo.instagram.ConfigPost;
-import modelo.instagram.ImagemPost;
 
 public class ImagemPostDAO extends DAO<ImagemPost>
 {

@@ -10,7 +10,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import modelo.questao.configuracao.Orgao;
+import modelo.academico.Orgao;
 
 public class OrgaoDAO extends DAO<Orgao>
 {

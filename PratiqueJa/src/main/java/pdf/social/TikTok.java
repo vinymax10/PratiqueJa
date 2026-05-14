@@ -16,8 +16,8 @@ import matematica.Racional;
 import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.TipoExercicio;
-import modelo.instagram.ProgramacaoPost;
 import modelo.matematica.Conta;
+import modelo.publicacao.ProgramacaoPost;
 
 public class TikTok
 {

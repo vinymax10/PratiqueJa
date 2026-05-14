@@ -10,7 +10,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 import dao.DAO;
-import modelo.spam.ConfigSpam;
+import modelo.email.ConfigSpam;
 import modelo.usuario.Usuario;
 
 public class ConfigSpamDAO extends DAO<ConfigSpam>

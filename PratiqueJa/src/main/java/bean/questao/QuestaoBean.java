@@ -26,7 +26,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.questao.Alternativa;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
@@ -93,7 +93,7 @@ public class QuestaoBean implements Serializable
 	
 	public List<Questao> buscaQuestao(AssuntoCurso assuntoCurso)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 
 		questoes = questaoDAO.buscaAssuntoCurso(assuntoCurso, tipoFiltro, usuario);
 		setQuestoes();
@@ -126,7 +126,7 @@ public class QuestaoBean implements Serializable
 	public StreamedContent download(boolean massa)
 	{
 		System.out.println(configDownload);
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		usuario = usuarioDAO.carrega(usuario.getId());
 		configDownload.setUsuario(usuario);
 		
@@ -230,7 +230,7 @@ public class QuestaoBean implements Serializable
 	
 	private void salvarResultadoQuestao(Questao questao)
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		ResultadoQuestao resultadoQuestao = questaoDAO.getResultadoQuestaos(questao, usuario);
 
 		if(resultadoQuestao == null)

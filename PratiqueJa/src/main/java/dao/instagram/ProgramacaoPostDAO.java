@@ -9,9 +9,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
+import modelo.publicacao.ProgramacaoPost;
 import dao.DAO;
-import modelo.instagram.ProgramacaoPost;
 
 public class ProgramacaoPostDAO extends DAO<ProgramacaoPost>
 {

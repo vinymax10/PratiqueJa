@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dao.EmailDAO;
+import filtro.email.FiltroEmail;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.push.Push;
 import jakarta.faces.push.PushContext;
@@ -25,6 +26,11 @@ public class EmailService
 	public List<Email> listarPendentes()
 	{
 		return emailDAO.listarPendentes();
+	}
+
+	public List<Email> buscar(FiltroEmail filtro)
+	{
+		return emailDAO.buscar(filtro);
 	}
 
 	public void adicionar(String destinatario, String assunto, String mensagem)

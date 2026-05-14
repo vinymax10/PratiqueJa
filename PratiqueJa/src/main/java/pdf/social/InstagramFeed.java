@@ -14,8 +14,8 @@ import util.CorAux;
 import bean.download.Diretorio;
 import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.instagram.ProgramacaoPost;
 import modelo.matematica.Conta;
+import modelo.publicacao.ProgramacaoPost;
 
 public class InstagramFeed
 {

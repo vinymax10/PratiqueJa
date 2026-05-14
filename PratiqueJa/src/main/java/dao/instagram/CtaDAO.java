@@ -10,11 +10,10 @@ import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
+import modelo.publicacao.ConfigPost;
+import modelo.publicacao.Cta;
+import modelo.publicacao.FinalidadeCta;
 import dao.DAO;
-import modelo.instagram.ConfigPost;
-import modelo.instagram.Cta;
-import modelo.instagram.FinalidadeCta;
 
 public class CtaDAO extends DAO<Cta>
 {
@@ -109,7 +108,9 @@ public class CtaDAO extends DAO<Cta>
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(builder.isNull(fromCta.<String>get("configPost")));
 
-		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta).where(predicates.toArray(new Predicate[0])));
+		TypedQuery<Cta> typedQuery = em.createQuery(query.select(fromCta)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.asc(fromCta.get("ordem"))));
 		List<Cta> list = typedQuery.getResultList();
 
 		return list;

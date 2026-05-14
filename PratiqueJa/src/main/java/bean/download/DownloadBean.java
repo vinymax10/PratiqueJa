@@ -35,10 +35,10 @@ import jakarta.faces.push.PushContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
-import modelo.instagram.ProgramacaoPost;
+import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.Questao;
 import modelo.usuario.Usuario;
 import pdf.exercicio.GerarLatexExercicio;
@@ -505,7 +505,7 @@ public class DownloadBean implements Serializable
 	
 	private ConfigDownload buildConfigDownloadExercicio()
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		usuario = usuarioDAO.carrega(usuario.getId());
 		setDownload.setUsuario(usuario);
 		
@@ -520,7 +520,7 @@ public class DownloadBean implements Serializable
 	
 	private ConfigDownload buildConfigDownloadQuestao()
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		usuario = usuarioDAO.carrega(usuario.getId());
 		setDownload.setUsuario(usuario);
 		

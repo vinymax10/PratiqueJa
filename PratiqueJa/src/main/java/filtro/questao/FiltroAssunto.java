@@ -3,7 +3,7 @@ package filtro.questao;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.questao.configuracao.Disciplina;
+import modelo.academico.Disciplina;
 
 @Data
 public class FiltroAssunto implements Serializable

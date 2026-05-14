@@ -29,7 +29,7 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
-import modelo.instagram.ConfigPost;
+import modelo.publicacao.ConfigPost;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 

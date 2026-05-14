@@ -7,8 +7,7 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-
-import modelo.instagram.PerfilCriador;
+import modelo.publicacao.PerfilCriador;
 
 @Named
 @SessionScoped

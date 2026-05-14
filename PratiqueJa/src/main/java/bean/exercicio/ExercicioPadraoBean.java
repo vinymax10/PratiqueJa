@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.permissao.PermissaoPadrao;
+import modelo.seguranca.PermissaoPadrao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

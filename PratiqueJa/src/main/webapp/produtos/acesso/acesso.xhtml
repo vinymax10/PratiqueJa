@@ -69,7 +69,7 @@
 				        	<p:commandButton  value="Acessar Grátis" 
 							styleClass="ui-button-raised buttonBlue"
 							resetValues="true"
-							rendered="#{!controleAcessoBean.estaLogado()}" update="formLogin"
+							rendered="#{!sessaoBean.logado}" update="formLogin"
 							action="#{autenticacaoBean.resetLogin()}"
 							oncomplete="PF('loginWidget').show();return false;">
 							</p:commandButton>

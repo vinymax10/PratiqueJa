@@ -6,8 +6,8 @@ import java.util.List;
 
 import filtro.PeriodoPreset;
 import lombok.Data;
-import modelo.assuntocurso.AssuntoCurso;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.AssuntoCurso;
+import modelo.academico.Modulo;
 import modelo.teste.TestePadrao;
 import modelo.usuario.Usuario;
 

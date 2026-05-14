@@ -72,7 +72,7 @@ public class ExercicioBean implements Serializable
 
 	private Usuario getUsuarioLogado()
 	{
-		return (Usuario) Sessao.get("UsuarioLogado");
+		return Sessao.getUsuarioLogado();
 	}
 
 	public String cadastrar()

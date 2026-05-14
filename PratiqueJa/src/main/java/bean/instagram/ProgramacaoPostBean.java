@@ -13,9 +13,9 @@ import jakarta.inject.Named;
 import org.primefaces.event.ReorderEvent;
 
 import dao.instagram.ProgramacaoPostDAO;
-import modelo.assuntocurso.AssuntoCurso;
-import modelo.instagram.ConfigPost;
-import modelo.instagram.ProgramacaoPost;
+import modelo.academico.AssuntoCurso;
+import modelo.publicacao.ConfigPost;
+import modelo.publicacao.ProgramacaoPost;
 import bean.assuntocurso.AssuntoCursoBean;
 import bean.util.Mensagem;
 

@@ -3,7 +3,7 @@ package bean.download;
 import java.io.Serializable;
 import java.util.List;
 
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 import modelo.usuario.Usuario;
 
 public class SetDownload implements Serializable

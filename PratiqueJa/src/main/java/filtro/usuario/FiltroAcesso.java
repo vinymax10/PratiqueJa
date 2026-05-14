@@ -2,7 +2,9 @@ package filtro.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
 import lombok.Data;
 
 @Data
@@ -12,12 +14,35 @@ public class FiltroAcesso implements Serializable
 
 	private String nomeUsuario;
 
-	private LocalDate inicio;
-	private LocalDate termino;
+	private List<LocalDate> periodo;
+	private PeriodoPreset preset;
 
-	private int minutosMinimo;
-	private int minutosMaximo;
+	private Integer minutosMinimo;
+	private Integer minutosMaximo;
 
 	private String idSessao;
+	
+	public void resetPreset()
+	{
+		preset=PeriodoPreset.PERSONALIZADO;
+	}
+	
+	public void aplicarPreset()
+	{
+		if(this.preset == null)
+            this.periodo = null;
 
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+	    	periodo = preset.calcularIntervalo();
+	}
+	
+	public void limpar()
+	{
+		nomeUsuario = null;
+		minutosMinimo = null;
+		minutosMaximo = null;
+		idSessao = null;
+		periodo = null;
+		preset = null;
+	}
 }

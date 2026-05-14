@@ -49,11 +49,6 @@ public class Pagamento implements Serializable, Entidade
 	@AuditLabel(value = "pago")
 	private boolean pago = false;
 
-	public void pagoToggle()
-	{
-		pago = !pago;
-	}
-
 	public void calcularValor()
 	{
 		switch(plano)

@@ -12,7 +12,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.questao.configuracao.Banca;
+import modelo.academico.Banca;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 import dao.DAO;
-import modelo.spam.ProgramacaoSpam;
+import modelo.email.ProgramacaoSpam;
 
 public class ProgramacaoSpamDAO extends DAO<ProgramacaoSpam>
 {

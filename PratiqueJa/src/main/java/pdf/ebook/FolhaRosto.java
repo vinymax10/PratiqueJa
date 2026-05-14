@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import bean.download.Diretorio;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 import modelo.configuracao.SistemaOperacional;
 
 public class FolhaRosto

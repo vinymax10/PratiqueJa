@@ -51,7 +51,7 @@ public class Rodape
 
 			footer.getDefaultCell().setBorderColor(style.corTexto);
 
-			Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+			Usuario usuario = Sessao.getUsuarioLogado();
 			LocalDateTime now = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 			String texto="Emitido por: "+usuario.getNome()+" em "+formatter.format(now);

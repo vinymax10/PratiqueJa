@@ -2,7 +2,7 @@ package filtro.usuario;
 
 import java.io.Serializable;
 
-import modelo.assuntocurso.AssuntoCurso;
+import modelo.academico.AssuntoCurso;
 
 public class FiltroTurma implements Serializable
 {

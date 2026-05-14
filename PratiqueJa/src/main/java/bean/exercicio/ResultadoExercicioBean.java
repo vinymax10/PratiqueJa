@@ -57,7 +57,7 @@ public class ResultadoExercicioBean implements Serializable
 
 	public void filtrarUsuario()
 	{
-		Usuario usuarioLogado = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuarioLogado = Sessao.getUsuarioLogado();
 		filtro.setUsuario(usuarioLogado);
 		this.resultadosExercicios = resultadoExercicioDAO.buscar(filtro);
 	}
@@ -68,7 +68,7 @@ public class ResultadoExercicioBean implements Serializable
 		if(tabState.hasState(FiltroResultadoExercicio.class))
 			filtro = tabState.getState(FiltroResultadoExercicio.class);
 
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario != null)
 		{
 			FiltroResultadoExercicio filtroUsuario = new FiltroResultadoExercicio();

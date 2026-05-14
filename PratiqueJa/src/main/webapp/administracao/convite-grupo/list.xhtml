@@ -1,0 +1,172 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage"
+		value="#{conviteGrupoBean.nome}"	/>
+	</ui:define>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button-right" >
+
+			<ui:include src="/exportar/exportar.xhtml" >
+				<ui:param name="id" value="form:tabela" />
+				<ui:param name="nome" value="Anos" />
+			</ui:include>
+
+			<p:commandButton value="Adicionar" icon="pi pi-plus"
+			styleClass="ui-button-raised ui-button-success"
+			action="#{conviteGrupoBean.cadastrar}" update="@form, dialog-cadastro"
+			process="@this"
+			oncomplete="PF('dialogCadastro').show()"  resetValues="true" />
+		</div>
+
+		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+			var="entidade" value="#{conviteGrupoBean.opcoes}" widgetVar="dtMaterial"
+			selection="#{conviteGrupoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
+   			draggableRows="true" rows="30" paginator="true"	paginatorAlwaysVisible="false"
+   			rowSelector="td:not(.coluna-ativo)" >
+
+			<p:ajax event="rowSelect" update="form:tabela"  process="@this"
+			 listener="#{conviteGrupoBean.onRowSelect}"	/>
+
+ 			<p:ajax event="rowReorder" listener="#{conviteGrupoBean.onRowReorder}" update="@form"/>
+
+			<p:column headerText="Nome" responsivePriority="1" filterBy="#{entidade.nome}"
+			exportValue="#{entidade.nome}" filterMatchMode="contains" filterPlaceholder="Filtro por Nome">
+                <h:outputText value="#{entidade.nome}"
+                rendered="#{entidade.id!=conviteGrupoBean.entidade.id}"/>
+
+                <p:inputText id="inputNome" value="#{entidade.nome}" style="width:100%;margin-top:18px"
+                required="true" validator="#{conviteGrupoBean.validateNomeRepetido}"
+				requiredMessage="O nome é obrigatório"
+				rendered="#{entidade.id==conviteGrupoBean.entidade.id}">
+				</p:inputText>
+				<p:message id="msg" for="inputNome" display="text"/>
+			</p:column>
+
+			<p:column headerText="Ativo" responsivePriority="1" filterBy="#{entidade.ativo}"
+			exportFunction="#{exporterBean.exportBoolean(entidade.ativo)}" style="width:5rem"
+			filterMatchMode="contains"  styleClass="coluna-ativo">
+				<f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('dtMaterial').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+	                	<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+	                	<f:selectItem itemLabel="Não" itemValue="#{false}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{entidade.ativo}" >
+					<p:ajax event="change" process="@this"
+					listener="#{conviteGrupoBean.salvar(entidade)}" />
+				</p:toggleSwitch>
+			</p:column>
+
+
+			<p:column headerText="Ação" responsivePriority="1" style="width:6rem"
+			exportable="false">
+
+				<h:panelGroup style="width:100%;"
+				rendered="#{entidade.id!=conviteGrupoBean.entidade.id}">
+
+					<div  style="display: flex">
+						<p:commandLink rendered="#{sessaoBean.podeVerAuditoria}"
+							title="Carregar auditoria para o(a) #{conviteGrupoBean.nome} #{entidade.nome}"
+							styleClass="rounded-button ui-button-flat mr-3"
+							action="#{auditoriaBean.carregar(entidade,conviteGrupoBean.nome)}"
+							update="@form, :growl dialog-auditoria"  process="@this" oncomplete="PF('dialogAuditoria').show()">
+							<div class="buttonIcon">
+								<h:outputText>
+									<i class="fa-regular fa-eye"></i>
+								</h:outputText>
+							</div>
+						</p:commandLink>
+
+						<p:commandLink title="Remover o(a) #{conviteGrupoBean.nome} #{entidade.nome}"
+							action="#{conviteGrupoBean.remover(entidade)}" update="@form, :growl"
+							process="@this">
+							<div class="buttonIcon">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+									message="Você tem certeza que deseja remover o #{conviteGrupoBean.nome} #{entidade.nome}?" />
+								<i class="pi pi-trash vermelho"></i>
+							</div>
+						</p:commandLink>
+
+					</div>
+				</h:panelGroup>
+				<h:panelGroup style="width:100%;"
+				rendered="#{entidade.id==conviteGrupoBean.entidade.id}">
+					<div  style="display: flex">
+						<p:commandLink title="Cancelar edição do(a) #{conviteGrupoBean.nome}"
+						styleClass="rounded-button ui-button-flat mr-3"
+						action="#{conviteGrupoBean.cancelar}" update="form:tabela, :growl"
+						process="@this">
+							<div class="buttonIcon">
+								<i class="fa-solid fa-xmark cinza"></i>
+							</div>
+						</p:commandLink>
+
+						<p:commandLink id="salvar" title="Salvar o(a) #{conviteGrupoBean.nome}" action="#{conviteGrupoBean.salvar}"
+						update="@form, :growl"	process="@form">
+							<div class="buttonIcon">
+								<i class="fa-regular fa-floppy-disk azul"></i>
+							</div>
+							<p:defaultCommand target="salvar" />
+						</p:commandLink>
+
+					</div>
+				</h:panelGroup>
+            </p:column>
+
+		</p:dataTable>
+
+		<ui:include src="/configuracao/aviso.xhtml" />
+
+	</h:form>
+
+	<p:dialog id="dialog-cadastro" class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+	header="#{conviteGrupoBean.cadastro? 'Adicionar':'Editar'}  #{conviteGrupoBean.nome}"
+	showEffect="fade" hideEffect="fade" width="100%;" modal="true"  widgetVar="dialogCadastro" responsive="true"
+	focus="formAdicionar:nome"	>
+		<h:form id="formAdicionar" class="form" enctype="multipart/form-data"  >
+			<div class="ui-fluid gride" >
+
+				<h:panelGroup styleClass="campoMsg col-12 xl:col-6">
+					<p:outputLabel for="@next" value="Nome" />
+					<p:inputText value="#{conviteGrupoBean.entidade.nome}"
+						required="true" validator="#{conviteGrupoBean.validateNomeRepetido}"
+						requiredMessage="O nome é obrigatório"/>
+					<p:message for="@previous" display="text"/>
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
+					<p:outputLabel for="@next" value="Ativo" />
+					<p:toggleSwitch class="toggleSwitch-form"
+						value="#{conviteGrupoBean.entidade.ativo}" />
+				</h:panelGroup>
+
+			</div>
+
+			<div class="content-button-right" >
+
+				<div class="divisor" ></div>
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar" rendered="#{conviteGrupoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{conviteGrupoBean.adicionar}" update="@form :form:tabela :growl"
+					process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+			</div>
+
+		</h:form>
+	</p:dialog>
+
+</ui:decorate>

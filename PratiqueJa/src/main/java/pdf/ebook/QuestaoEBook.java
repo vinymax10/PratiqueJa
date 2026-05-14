@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import bean.download.Diretorio;
-import modelo.assuntocurso.Modulo;
+import modelo.academico.Modulo;
 import modelo.configuracao.SistemaOperacional;
 import modelo.questao.Alternativa;
 import modelo.questao.Paragrafo;

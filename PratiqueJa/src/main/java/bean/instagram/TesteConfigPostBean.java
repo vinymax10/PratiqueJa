@@ -18,9 +18,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
-import modelo.instagram.ConfigPost;
-import modelo.instagram.ImagemPost;
-import modelo.instagram.ProgramacaoPost;
+import modelo.publicacao.ConfigPost;
+import modelo.publicacao.ImagemPost;
+import modelo.publicacao.ProgramacaoPost;
 import pdf.social.InstagramFeed;
 import pdf.social.TikTok;
 

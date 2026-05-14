@@ -10,7 +10,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.questao.configuracao.Disciplina;
+import modelo.academico.Disciplina;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

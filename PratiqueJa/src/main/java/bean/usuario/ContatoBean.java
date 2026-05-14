@@ -13,7 +13,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.permissao.PermissaoPadrao;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Contato;
 import modelo.usuario.Usuario;
 import service.EmailService;
@@ -45,7 +45,7 @@ public class ContatoBean extends PaiBean<Contato, ContatoDAO, PermissaoPadrao<Co
 	@Override
 	public void personalizarAdicionar()
 	{
-		Usuario usuario = (Usuario) Sessao.get("UsuarioLogado");
+		Usuario usuario = Sessao.getUsuarioLogado();
 		entidade.setUsuario(usuario);
 		if(usuario != null)
 		{
