@@ -1,0 +1,141 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{pagamentoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewParam name="chave" value="#{pagamentoBean.chave}" />
+		<f:viewParam name="cadastro" value="#{pagamentoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+		<f:viewAction action="#{pagamentoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Pagamento</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-5">
+				<p:outputLabel for="@next" value="Usuário"/>
+				<p:selectOneMenu value="#{pagamentoBean.entidade.usuario}" converter="generic"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="Selecione um usuário">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{usuarioBean.listaTudo}" var="usuario"
+					itemLabel="#{usuario.nome}" itemValue="#{usuario}"/>
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Valor"/>
+				<p:inputNumber value="#{pagamentoBean.entidade.valor}" required="true"
+				symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="."
+				requiredMessage="O valor é obrigatório"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Plano"/>
+				<p:selectOneMenu value="#{pagamentoBean.entidade.plano}"
+				required="true" requiredMessage="O plano é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{perfilUsuarioBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Tipo de Pagamento"/>
+				<p:selectOneMenu value="#{pagamentoBean.entidade.tipoPagamento}"
+				required="true" requiredMessage="O tipo de pagamento é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{tipoPagamentoBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Data"/>
+				<p:datePicker value="#{pagamentoBean.entidade.data}" locale="pt"
+				required="true" requiredMessage="A data é obrigatória" showIcon="true" pattern="dd/MM/yyyy"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Pago"/>
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{pagamentoBean.entidade.pago}" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!pagamentoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{pagamentoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Pagamento?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !pagamentoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(pagamentoBean.entidade, pagamentoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/pagamento/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{pagamentoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{pagamentoBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!pagamentoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{pagamentoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

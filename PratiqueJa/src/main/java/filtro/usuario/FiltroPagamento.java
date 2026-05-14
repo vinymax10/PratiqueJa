@@ -2,11 +2,14 @@ package filtro.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
+import lombok.Data;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.TipoPagamento;
 
-
+@Data
 public class FiltroPagamento implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -17,93 +20,39 @@ public class FiltroPagamento implements Serializable
 	
 	private PerfilUsuario plano;
 
-	private double valor;
+	private Double valor;
 
-	private LocalDate dataInicio;
-	private LocalDate dataFim;
+	private List<LocalDate> periodo;
+	private PeriodoPreset preset;
 
 	private TipoPagamento tipoPagamento;
 
 	private Boolean pago;
 
-	public Long getId()
+	public void limpar()
 	{
-		return id;
+		id = null;
+		nomeUsuario = null;
+		plano = null;
+		valor = null;
+		tipoPagamento = null;
+		periodo = null;
+		preset = null;
+		pago = null;
 	}
-
-	public void setId(Long id)
+	
+	public void resetPreset()
 	{
-		this.id = id;
+		preset=PeriodoPreset.PERSONALIZADO;
 	}
-
-	public String getNomeUsuario()
+	
+	public void aplicarPreset()
 	{
-		return nomeUsuario;
-	}
+		if(this.preset == null)
+            this.periodo = null;
 
-	public void setNomeUsuario(String nomeUsuario)
-	{
-		this.nomeUsuario = nomeUsuario;
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+	    	periodo = preset.calcularIntervalo();
 	}
-
-	public PerfilUsuario getPlano()
-	{
-		return plano;
-	}
-
-	public void setPlano(PerfilUsuario plano)
-	{
-		this.plano = plano;
-	}
-
-	public double getValor()
-	{
-		return valor;
-	}
-
-	public void setValor(double valor)
-	{
-		this.valor = valor;
-	}
-
-	public LocalDate getDataInicio()
-	{
-		return dataInicio;
-	}
-
-	public void setDataInicio(LocalDate dataInicio)
-	{
-		this.dataInicio = dataInicio;
-	}
-
-	public LocalDate getDataFim()
-	{
-		return dataFim;
-	}
-
-	public void setDataFim(LocalDate dataFim)
-	{
-		this.dataFim = dataFim;
-	}
-
-	public TipoPagamento getTipoPagamento()
-	{
-		return tipoPagamento;
-	}
-
-	public void setTipoPagamento(TipoPagamento tipoPagamento)
-	{
-		this.tipoPagamento = tipoPagamento;
-	}
-
-	public Boolean getPago()
-	{
-		return pago;
-	}
-
-	public void setPago(Boolean pago)
-	{
-		this.pago = pago;
-	}
-
+	
 }

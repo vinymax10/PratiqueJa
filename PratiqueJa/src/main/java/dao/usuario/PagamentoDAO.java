@@ -21,7 +21,7 @@ public class PagamentoDAO extends DAO<Pagamento>
 		super(Pagamento.class);
 	}
 
-	public List<Pagamento> buscar(FiltroPagamento filtroPagamento)
+	public List<Pagamento> buscar(FiltroPagamento filtro)
 	{
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -30,29 +30,34 @@ public class PagamentoDAO extends DAO<Pagamento>
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroPagamento.getNomeUsuario() != null && !filtroPagamento.getNomeUsuario().isBlank())
-			predicates.add(builder.like(fromPagamento.get("usuario").get("nome"), "%" + filtroPagamento.getNomeUsuario() + "%"));
+		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
+			predicates.add(builder.like(fromPagamento.get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 
-		if(filtroPagamento.getId() != null)
-			predicates.add(builder.equal(fromPagamento.get("id"), filtroPagamento.getId()));
+		if(filtro.getId() != null)
+			predicates.add(builder.equal(fromPagamento.get("id"), filtro.getId()));
 
-		if(filtroPagamento.getDataInicio() != null)
-			predicates.add(builder.greaterThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataInicio()));
-
-		if(filtroPagamento.getDataFim() != null)
-			predicates.add(builder.lessThanOrEqualTo(fromPagamento.get("data"), filtroPagamento.getDataFim()));
-
-		if(filtroPagamento.getValor() != 0)
-			predicates.add(builder.equal(fromPagamento.get("valor"), filtroPagamento.getValor()));
+		if(filtro.getPeriodo() != null)
+	    {
+	    	if(filtro.getPeriodo().size()>0)
+		    	predicates.add(builder.greaterThanOrEqualTo(
+		    	fromPagamento.get("data"), filtro.getPeriodo().get(0)));
+	    	
+	    	if(filtro.getPeriodo().size()>1)
+	    		predicates.add(builder.lessThanOrEqualTo(
+	    		fromPagamento.get("data"), filtro.getPeriodo().get(1)));
+	    }
 		
-		if(filtroPagamento.getTipoPagamento() != null)
-			predicates.add(builder.equal(fromPagamento.get("tipoPagamento"), filtroPagamento.getTipoPagamento()));
+		if(filtro.getValor() != null)
+			predicates.add(builder.equal(fromPagamento.get("valor"), filtro.getValor()));
 		
-		if(filtroPagamento.getPlano() != null)
-			predicates.add(builder.equal(fromPagamento.get("plano"), filtroPagamento.getPlano()));
+		if(filtro.getTipoPagamento() != null)
+			predicates.add(builder.equal(fromPagamento.get("tipoPagamento"), filtro.getTipoPagamento()));
 		
-		if(filtroPagamento.getPago() != null)
-			predicates.add(builder.equal(fromPagamento.get("pago"), filtroPagamento.getPago().booleanValue()));
+		if(filtro.getPlano() != null)
+			predicates.add(builder.equal(fromPagamento.get("plano"), filtro.getPlano()));
+		
+		if(filtro.getPago() != null)
+			predicates.add(builder.equal(fromPagamento.get("pago"), filtro.getPago().booleanValue()));
 		
 		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Pagamento> list = typedQuery.getResultList();

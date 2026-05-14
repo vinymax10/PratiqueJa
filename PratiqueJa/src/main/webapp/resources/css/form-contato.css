@@ -164,8 +164,8 @@
 
 .fc-subject-title {
     font-size: 2rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-weight: 600;
+    color:var(--fc-primary);
     line-height: 1.2;
 }
 
@@ -229,8 +229,8 @@
 
 .fc-info-value {
     font-size: 1rem;
-    font-weight: 600;
-    color: #1e273d;
+    font-weight: 500;
+    color: var(--fc-primary);
     line-height: 1.5;
     word-break: break-word;
 }
@@ -246,7 +246,7 @@
     font-size: 0.9375rem;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #0f172a;
+    color:#64748b;
 }
 
 .fc-section-title i {
