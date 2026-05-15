@@ -3,7 +3,7 @@ package dao.academico;
 import java.util.ArrayList;
 import java.util.List;
 
-import filtro.assuntocurso.FiltroAssuntoCurso;
+import filtro.academico.FiltroAssuntoCurso;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

@@ -1,4 +1,4 @@
-package service;
+package service.email;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class EmailService
 
 		adicionar(email);
 	}
-	
+
 	public void adicionar(Email email)
 	{
 		emailDAO.adicionar(email);

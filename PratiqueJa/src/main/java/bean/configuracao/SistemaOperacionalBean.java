@@ -7,9 +7,11 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.configuracao.SistemaOperacional;
 
 
+@Data
 @Named
 @SessionScoped
 public class SistemaOperacionalBean implements Serializable
@@ -24,13 +26,4 @@ public class SistemaOperacionalBean implements Serializable
 		opcoes = Arrays.asList(SistemaOperacional.values());
 	}
 
-	public List<SistemaOperacional> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<SistemaOperacional> opcoes)
-	{
-		this.opcoes = opcoes;
-	}
 }

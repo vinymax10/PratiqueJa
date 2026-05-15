@@ -1,4 +1,4 @@
-package service;
+package service.auditoria;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -57,7 +57,7 @@ public class AuditoriaService implements Serializable
 		return auditoriaEventoDAO.buscar(filtro);
 	}
 
-	public <T extends Entidade> void registrarEdicao(Class<T> classe, Long entidadeId, T entidadeAtual) 
+	public <T extends Entidade> void registrarEdicao(Class<T> classe, Long entidadeId, T entidadeAtual)
 	{
 		Long ini = System.currentTimeMillis();
 
@@ -79,16 +79,16 @@ public class AuditoriaService implements Serializable
 
 		System.out.println("tempo: " + (fim - ini) + " ms");
 	}
-	
 
-	public <T extends Entidade> void registrarCriacao(Class<?> classe, Long entidadeId, T entidadeAtual) 
+
+	public <T extends Entidade> void registrarCriacao(Class<?> classe, Long entidadeId, T entidadeAtual)
 	{
 		AuditoriaEvento evento = criarEventoBase(classe, entidadeId, TipoEvento.CRIACAO);
 		evento.setResumo(imprimirComAuditLabel(entidadeAtual));
 		auditoriaEventoDAO.adicionar(evento);
 	}
 
-	public <T extends Entidade> void registrarExclusao(Class<?> classe, Long entidadeId, T entidadeAtual) 
+	public <T extends Entidade> void registrarExclusao(Class<?> classe, Long entidadeId, T entidadeAtual)
 	{
 		AuditoriaEvento evento = criarEventoBase(classe, entidadeId, TipoEvento.EXCLUSAO);
 		evento.setResumo(imprimirComAuditLabel(entidadeAtual));
@@ -125,15 +125,10 @@ public class AuditoriaService implements Serializable
 	        String path = change.getPropertyNameWithPath();
 	        String root = path.split("[/\\.]")[0];
 	        String propriedade = change.getPropertyName();
-	       
-//	        System.out.println("path: "+path); 
-//	        System.out.println("root: "+root);
-//	        System.out.println("propriedade: "+propriedade);
-	        
+
 	        Field rootField = ClasseAux.getField(classe, root);
 	        AuditLabel rootLabel = rootField != null ? rootField.getAnnotation(AuditLabel.class) : null;
-//	        System.out.println("rootLabel: "+rootLabel);
-	        
+
 	        // 🔥 REGRA: se tem atributo, ignora filhos
 	        if(rootLabel != null && !rootLabel.atributo().isEmpty())
 	        {
@@ -150,16 +145,14 @@ public class AuditoriaService implements Serializable
 
 	    for(ValueChange change : changesFiltrados.values())
 	    {
-//	    	System.out.println("change: "+change);
 	        String texto = obterResumo(classe, change, antigo, novo);
-//	        System.out.println("texto: "+texto);
 	        if(!texto.isBlank())
 	            resumo.append(texto).append("\n");
 	    }
 
 	    return resumo.toString();
 	}
-	
+
 	private String obterResumo(Class<?> entidadeRaiz, ValueChange change, Object antigo, Object novo)
 	{
 	    String path = change.getPropertyNameWithPath();
@@ -237,22 +230,20 @@ public class AuditoriaService implements Serializable
 	    {
 	        labelParaGenero = raizLabel;
 	    }
-	    
+
 	    String verbo = verboAlterado(labelParaGenero);
-	    
-	    texto += " " + verbo + " de '" 
-	            + formatarValor(valorAntigo) 
-	            + "' para '" 
-	            + formatarValor(valorNovo) 
+
+	    texto += " " + verbo + " de '"
+	            + formatarValor(valorAntigo)
+	            + "' para '"
+	            + formatarValor(valorNovo)
 	            + "';";
 
 	    return texto;
 	}
-	
+
 	private List<AuditLabel> obterAnotacoes(Class<?> entidadeRaiz, String path)
 	{
-//		System.out.println("-----------obterAnotacoes-----------");
-//		System.out.println("path: " + path);
 		String[] partes = path.split("[/\\.]");
 		Class<?> classeAtual = entidadeRaiz;
 		Field field = null;
@@ -261,17 +252,13 @@ public class AuditoriaService implements Serializable
 
 		for(String parte : partes)
 		{
-//			System.out.println("classeAtual: " + classeAtual.getSimpleName());
-//			System.out.println("parte: " + parte);
-
 			field = ClasseAux.getField(classeAtual, parte);
 
 			if(field == null)
 			{
-//			    System.out.println("Campo não encontrado: " + parte + " em " + classeAtual);
 			    return null;
 			}
-			
+
 			field.setAccessible(true);
 			AuditLabel auditLabel = field.getAnnotation(AuditLabel.class);
 			if(auditLabel != null)
@@ -279,22 +266,18 @@ public class AuditoriaService implements Serializable
 
 			if(!List.class.isAssignableFrom(field.getType()))
 			{
-//				System.out.println("if 1");
 				classeAtual = field.getType();
 			}
 			else if(field.getGenericType() instanceof ParameterizedType pt)
 			{
 				tipoGenerico = pt.getActualTypeArguments()[0];
 
-//				System.out.println("if 2 tipoGenerico: " + tipoGenerico);
 				classeAtual = (Class<?>) tipoGenerico;
 			}
 		}
-//		System.out.println("anotacoes: " + anotacoes);
-//		System.out.println("----------------------");
 		return anotacoes;
 	}
-	
+
 	private String verboAlterado(AuditLabel label)
 	{
 		if(label != null && label.genero() == GeneroGramatical.FEMININO)
@@ -350,7 +333,6 @@ public class AuditoriaService implements Serializable
 	        }
 	        clazz = clazz.getSuperclass();
 	    }
-//	    System.out.println("joiner.toString(): "+joiner.toString());
 	    return joiner.toString();
 	}
 
@@ -396,8 +378,6 @@ public class AuditoriaService implements Serializable
 	            {
 	                // opcional
 	            }
-	            
-	            
 	        }
 	        clazz = clazz.getSuperclass();
 	    }
@@ -472,7 +452,7 @@ public class AuditoriaService implements Serializable
 	            return valor.toString();
 	        }
 	    }
-	    
+
 	    // 🔥 CORREÇÃO DO PROBLEMA
 	    if(valor instanceof BigDecimal)
 	    {
@@ -482,5 +462,5 @@ public class AuditoriaService implements Serializable
 
 	    return valor.toString();
 	}
-	
+
 }

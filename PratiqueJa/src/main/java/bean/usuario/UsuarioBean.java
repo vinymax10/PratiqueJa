@@ -32,7 +32,7 @@ import modelo.publicacao.ConfigPost;
 import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
-import service.UsuarioService;
+import service.usuario.UsuarioService;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

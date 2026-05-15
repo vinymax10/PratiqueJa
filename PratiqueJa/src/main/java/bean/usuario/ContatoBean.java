@@ -16,7 +16,7 @@ import modelo.auditoria.TipoEvento;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Contato;
 import modelo.usuario.Usuario;
-import service.EmailService;
+import service.email.EmailService;
 import util.StringAux;
 import web.session.Sessao;
 

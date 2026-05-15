@@ -9,9 +9,11 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.academico.Modulo;
 import modelo.configuracao.Edicao;
 
+@Data
 @Named
 @ViewScoped
 public class EdicaoBean implements Serializable
@@ -45,14 +47,6 @@ public class EdicaoBean implements Serializable
 			edicao=new Edicao();
 			edicaoDAO.salvar(edicao);
 		}
-	}
-
-	public Edicao getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(Edicao edicao) {
-		this.edicao = edicao;
 	}
 
 }

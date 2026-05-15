@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.seguranca.AcessoDAO;
-import filtro.usuario.FiltroAcesso;
+import filtro.seguranca.FiltroAcesso;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;

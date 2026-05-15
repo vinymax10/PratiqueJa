@@ -22,10 +22,11 @@ import modelo.usuario.Pagamento;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.TipoPagamento;
 import modelo.usuario.Usuario;
-import service.EmailService;
+import service.email.EmailService;
 import util.StringAux;
 import bean.util.Mensagem;
 import web.session.SessionContext;
+import web.session.Sessao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -87,7 +88,7 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 			TipoPagamento tipoPagamento = TipoPagamento.valueOf(this.tipoPagamentoStr);
 			PerfilUsuario plano = PerfilUsuario.valueOf(this.planoStr);
 
-			Usuario usuario = autenticacaoBean.getUsuario();
+			Usuario usuario = Sessao.getUsuarioLogado();
 
 			entidade = new Pagamento();
 			entidade.setUsuario(usuario);

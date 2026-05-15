@@ -3,9 +3,11 @@ package bean.download;
 import java.io.File;
 import java.io.Serializable;
 
+import lombok.Data;
 import modelo.configuracao.ConfigLatex;
 import modelo.configuracao.SistemaOperacional;
 
+@Data
 public class Diretorio implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -16,7 +18,6 @@ public class Diretorio implements Serializable
 	
 	public Diretorio(ConfigLatex configLatex, String diretorio)
 	{
-		super();
 		this.configLatex = configLatex;
 		this.diretorio = diretorio;
 	}
@@ -37,29 +38,11 @@ public class Diretorio implements Serializable
 		if(theDir.isDirectory())
 		{
 			File[] files = theDir.listFiles();
-			for(File file : files)
-			{
-				file.delete();
-			}
+			if(files != null)
+				for(File file : files)
+					file.delete();
 		}
 	}
-	
-//	public String criarDiretorio()
-//	{
-//		diretorio=poolNomesBean.gerarDiretorio();
-//		return diretorio;
-//	}
-//	
-//	public void freeDiretorio()
-//	{
-//		if(configLatex.isRemoveDiretorios())
-//			removerEndereco(configLatex.getEndereco());
-//		
-//		poolNomesBean.freeDiretorio(diretorio);
-//	}
-	
-	
-	
 	
 	public String getEnderecoPdf()
 	{
@@ -120,27 +103,9 @@ public class Diretorio implements Serializable
 	{
 		if(configLatex.getSistemaOperacional()==SistemaOperacional.Windows)
 		{
-			return texto.replaceAll("/", "\\\\");
+			return texto.replace("/", "\\");
 		}
 		return texto;	
 	}
 	
-	public ConfigLatex getConfigLatex() {
-		return configLatex;
-	}
-
-	public void setConfigLatex(ConfigLatex configLatex) {
-		this.configLatex = configLatex;
-	}
-
-	public String getDiretorio()
-	{
-		return diretorio;
-	}
-
-	public void setDiretorio(String diretorio)
-	{
-		this.diretorio = diretorio;
-	}
-
 }

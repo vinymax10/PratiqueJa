@@ -20,7 +20,7 @@ import modelo.BaseMapper;
 import modelo.Entidade;
 import modelo.GenericMapper;
 import modelo.auditoria.TipoEvento;
-import service.AuditoriaService;
+import service.auditoria.AuditoriaService;
 
 @Data
 @Named

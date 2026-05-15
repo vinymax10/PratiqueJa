@@ -1,4 +1,4 @@
-package service;
+package service.seguranca;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import modelo.usuario.PerfilUsuario;
@@ -11,15 +11,15 @@ public class AutorizacaoService
 	{
 		if(usuario!=null)
 			return usuario.getPerfil()==PerfilUsuario.Admin;
-		
+
 		return false;
 	}
-	
+
 	public static boolean podeVerAdministracao(Usuario usuario)
 	{
 		if(usuario!=null)
 			return usuario.getPerfil()==PerfilUsuario.Admin;
-		
+
 		return false;
 	}
 }

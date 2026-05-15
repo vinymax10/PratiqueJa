@@ -1,4 +1,4 @@
-package filtro.assuntocurso;
+package filtro.academico;
 
 import java.io.Serializable;
 
@@ -40,5 +40,4 @@ public class FiltroAssuntoCurso implements Serializable
 		showQuestao = null;
 		habilidado = null;
 	}
-
 }

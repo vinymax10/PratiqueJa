@@ -1,4 +1,4 @@
-package service;
+package service.publicacao;
 
 import java.io.File;
 import java.io.IOException;

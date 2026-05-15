@@ -7,8 +7,10 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.publicacao.FinalidadeCta;
 
+@Data
 @Named
 @ApplicationScoped
 public class FinalidadeCtaBean implements Serializable
@@ -21,15 +23,5 @@ public class FinalidadeCtaBean implements Serializable
 	public void init()
 	{
 		opcoes = Arrays.asList(FinalidadeCta.values());
-	}
-
-	public List<FinalidadeCta> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<FinalidadeCta> opcoes)
-	{
-		this.opcoes = opcoes;
 	}
 }

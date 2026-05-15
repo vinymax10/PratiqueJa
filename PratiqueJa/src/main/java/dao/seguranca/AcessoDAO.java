@@ -14,7 +14,7 @@ import dao.DAO;
 import modelo.seguranca.Acesso;
 import modelo.seguranca.StatusAcesso;
 import modelo.usuario.Usuario;
-import filtro.usuario.FiltroAcesso;
+import filtro.seguranca.FiltroAcesso;
 
 public class AcessoDAO extends DAO<Acesso>
 {

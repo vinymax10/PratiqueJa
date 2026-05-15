@@ -23,8 +23,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import modelo.seguranca.PasswordResetToken;
 import modelo.usuario.Usuario;
-import service.AcessoService;
-import service.EmailService;
+import service.seguranca.AcessoService;
+import service.email.EmailService;
 import web.session.Sessao;
 import bean.util.Mensagem;
 

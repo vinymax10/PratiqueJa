@@ -5,23 +5,24 @@ import java.io.Serializable;
 
 import util.ColorHolder;
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
+import service.configuracao.DiretorioService;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioPadraoDAO;
-import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import pdf.social.InstagramFeed;
 import pdf.social.TikTok;
-import service.ImagemPostService;
-import service.ProgramacaoPostService;
+import service.publicacao.ImagemPostService;
+import service.publicacao.ProgramacaoPostService;
 
+@Data
 @Named
 @ViewScoped
 public class TesteConfigPostBean implements Serializable
@@ -41,7 +42,7 @@ public class TesteConfigPostBean implements Serializable
 	private ImagemPostService imagemPostService;
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	private Nivel nivel;
 
@@ -57,7 +58,7 @@ public class TesteConfigPostBean implements Serializable
 			return false;
 		}
 
-		if(configPost.getNome() == null || configPost.getNome().equals(""))
+		if(configPost.getNome() == null || configPost.getNome().isEmpty())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Por favor adicione um nome em configurações para realizar o teste.");
 			return false;
@@ -78,10 +79,7 @@ public class TesteConfigPostBean implements Serializable
 			ColorHolder.setCOLOR(configPost.getCorFonte());
 			ColorHolder.setFORMULA(configPost.getCorFormula());
 
-			if(feed)
-				gerarConteudoFeed();
-			else
-				gerarConteudoReel();
+			gerarConteudo(feed);
 
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Teste realizado com sucesso.");
 			ColorHolder.clear();
@@ -92,70 +90,43 @@ public class TesteConfigPostBean implements Serializable
 
 	public void gerarConteudoFeed()
 	{
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
-		InstagramFeed gerarLatex = new InstagramFeed(diretorio);
-		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssuntoCurso(), nivel);
-
-		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-		gerarLatex.gerarPDF();
-		gerarLatex.convertPNG();
-
-		try
-		{
-			imagemPostService.gravarTeste(true, diretorio, configPostBean.getConfigPost());
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		poolNomesBean.freeDiretorio(diretorio);
+		gerarConteudo(true);
 	}
 
 	public void gerarConteudoReel()
 	{
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
-		TikTok gerarLatex = new TikTok(diretorio);
+		gerarConteudo(false);
+	}
+
+	private void gerarConteudo(boolean feed)
+	{
+		Diretorio diretorio = diretorioService.criarDiretorio();
 		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssuntoCurso(), nivel);
 
-		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-		gerarLatex.gerarPDF();
-		gerarLatex.convertPNG();
+		if(feed)
+		{
+			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
+			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+			gerarLatex.gerarPDF();
+			gerarLatex.convertPNG();
+		}
+		else
+		{
+			TikTok gerarLatex = new TikTok(diretorio);
+			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+			gerarLatex.gerarPDF();
+			gerarLatex.convertPNG();
+		}
 
 		try
 		{
-			imagemPostService.gravarTeste(false, diretorio, configPostBean.getConfigPost());
+			imagemPostService.gravarTeste(feed, diretorio, configPostBean.getConfigPost());
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
 
-		poolNomesBean.freeDiretorio(diretorio);
-	}
-
-	@PostConstruct
-	public void init()
-	{
-	}
-
-	public ProgramacaoPost getProgramacaoPost()
-	{
-		return programacaoPost;
-	}
-
-	public void setProgramacaoPost(ProgramacaoPost ProgramacaoPost)
-	{
-		this.programacaoPost = ProgramacaoPost;
-	}
-
-	public Nivel getNivel()
-	{
-		return nivel;
-	}
-
-	public void setNivel(Nivel nivel)
-	{
-		this.nivel = nivel;
+		diretorioService.freeDiretorio(diretorio);
 	}
 }

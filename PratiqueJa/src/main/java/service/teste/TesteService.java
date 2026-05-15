@@ -1,4 +1,4 @@
-package service;
+package service.teste;
 
 import java.lang.reflect.InvocationTargetException;
 

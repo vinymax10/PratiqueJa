@@ -1,4 +1,4 @@
-package service;
+package service.seguranca;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

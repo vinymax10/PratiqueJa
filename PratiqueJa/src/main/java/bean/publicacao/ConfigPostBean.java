@@ -14,16 +14,18 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import dao.publicacao.ConfigPostDAO;
+import lombok.Data;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ImagemPost;
 import modelo.usuario.Usuario;
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
-import bean.seguranca.AutenticacaoBean;
+import service.configuracao.DiretorioService;
 import bean.util.Mensagem;
-import service.ImagemPostService;
-import service.ProgramacaoPostService;
+import service.publicacao.ImagemPostService;
+import service.publicacao.ProgramacaoPostService;
+import web.session.Sessao;
 
+@Data
 @Named
 @SessionScoped
 public class ConfigPostBean implements Serializable
@@ -46,15 +48,12 @@ public class ConfigPostBean implements Serializable
 	@Inject
 	private ImagemPostService imagemPostService;
 
-	@Inject
-	private AutenticacaoBean autenticacaoBean;
-
 	private int activeIndex;
 
 	private UploadedFile uploadedFile;
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	private Diretorio diretorio;
 
@@ -144,8 +143,8 @@ public class ConfigPostBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		diretorio = poolNomesBean.criarDiretorioSemReserva();
-		Usuario usuario = autenticacaoBean.getUsuario();
+		diretorio = diretorioService.criarDiretorioSemReserva();
+		Usuario usuario = Sessao.getUsuarioLogado();
 		if(usuario.isCriador())
 			configPost = usuario.getConfigPost();
 	}
@@ -153,55 +152,5 @@ public class ConfigPostBean implements Serializable
 	public void carregarConfigPost()
 	{
 		this.configPost = configPostDAO.getConfigPost(idConfigPost);
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public ConfigPost getConfigPost()
-	{
-		return configPost;
-	}
-
-	public void setConfigPost(ConfigPost configPost)
-	{
-		this.configPost = configPost;
-	}
-
-	public ConfigPostDAO getConfigPostDAO()
-	{
-		return configPostDAO;
-	}
-
-	public void setConfigPostDAO(ConfigPostDAO configPostDAO)
-	{
-		this.configPostDAO = configPostDAO;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
-	public void setActiveIndex(int activeIndex)
-	{
-		this.activeIndex = activeIndex;
-	}
-
-	public Long getIdConfigPost()
-	{
-		return idConfigPost;
-	}
-
-	public void setIdConfigPost(Long idConfigPost)
-	{
-		this.idConfigPost = idConfigPost;
 	}
 }

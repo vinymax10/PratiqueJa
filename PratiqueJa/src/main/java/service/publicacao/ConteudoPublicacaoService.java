@@ -1,4 +1,4 @@
-package service;
+package service.publicacao;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,6 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.apache.commons.io.IOUtils;
 
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
 import dao.publicacao.CtaDAO;
 import dao.publicacao.HashtagDAO;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -26,12 +25,14 @@ import modelo.publicacao.PerfilCriador;
 import modelo.publicacao.ProgramacaoPost;
 import pdf.social.InstagramFeed;
 import pdf.social.TikTok;
+import service.configuracao.DiretorioService;
+import service.email.EmailService;
 
 @ApplicationScoped
 public class ConteudoPublicacaoService
 {
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	@Inject
 	private CtaDAO ctaDAO;
@@ -44,7 +45,7 @@ public class ConteudoPublicacaoService
 
 	public void gerarConteudoFeed(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
 	{
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
+		Diretorio diretorio = diretorioService.criarDiretorio();
 		InstagramFeed gerarLatex = new InstagramFeed(diretorio);
 
 		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
@@ -53,12 +54,12 @@ public class ConteudoPublicacaoService
 
 		enviarEmail("Instagram Feed", diretorio, "feed", exercicioPadrao, programacaoPost);
 
-		poolNomesBean.freeDiretorio(diretorio);
+		diretorioService.freeDiretorio(diretorio);
 	}
 
 	public void gerarConteudoReel(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
 	{
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
+		Diretorio diretorio = diretorioService.criarDiretorio();
 		TikTok gerarLatex = new TikTok(diretorio);
 
 		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
@@ -67,7 +68,7 @@ public class ConteudoPublicacaoService
 
 		enviarEmail("Instagram Reel", diretorio, "reel", exercicioPadrao, programacaoPost);
 
-		poolNomesBean.freeDiretorio(diretorio);
+		diretorioService.freeDiretorio(diretorio);
 	}
 
 	private void enviarEmail(String assuntoEmail, Diretorio diretorio, String feed,

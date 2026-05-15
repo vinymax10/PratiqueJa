@@ -8,7 +8,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.model.StreamedContent;
 
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
+import service.configuracao.DiretorioService;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import filtro.exercicio.FiltroExercicio;
@@ -23,7 +23,7 @@ import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.matematica.Conta;
 import modelo.usuario.Usuario;
-import service.ExercicioService;
+import service.exercicio.ExercicioService;
 import web.session.Sessao;
 
 @Data
@@ -46,7 +46,7 @@ public class ExercicioBean implements Serializable
 	private ConfigDownload configDownload;
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
@@ -200,9 +200,9 @@ public class ExercicioBean implements Serializable
 			construirExercicio();
 		}
 
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
+		Diretorio diretorio = diretorioService.criarDiretorio();
 		StreamedContent file = exercicioService.gerarPdfExercicio(exercicio, configDownload, diretorio, getUsuarioLogado());
-		poolNomesBean.freeDiretorio(diretorio);
+		diretorioService.freeDiretorio(diretorio);
 		controleAcessoBean.registrarDownloadExercicio();
 
 		return file;

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import modelo.usuario.Usuario;
-import service.AutorizacaoService;
+import service.seguranca.AutorizacaoService;
 import web.session.Sessao;
 
 @Data

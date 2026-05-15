@@ -12,6 +12,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ImagemPost;
@@ -22,18 +23,19 @@ import org.primefaces.model.file.UploadedFile;
 
 import exceptions.RelacaoException;
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
+import service.configuracao.DiretorioService;
 import bean.util.Mensagem;
-import service.ImagemPostService;
-import service.ProgramacaoPostService;
+import service.publicacao.ImagemPostService;
+import service.publicacao.ProgramacaoPostService;
 
+@Data
 @Named
 @SessionScoped
 public class ImagemPostBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private String nome = "Configuração de Post";
+	private String nome = "Imagem de Post";
 
 	@Inject
 	private ConfigPostBean configPostBean;
@@ -52,7 +54,7 @@ public class ImagemPostBean implements Serializable
 	private int activeIndex = 0;
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	private Diretorio diretorio;
 
@@ -151,7 +153,7 @@ public class ImagemPostBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		diretorio = poolNomesBean.criarDiretorioSemReserva();
+		diretorio = diretorioService.criarDiretorioSemReserva();
 		imagensFeed = programacaoPostService.getImagensFeed();
 		imagensReel = programacaoPostService.getImagensReel();
 
@@ -166,56 +168,6 @@ public class ImagemPostBean implements Serializable
 	public void changeActiveIndex()
 	{
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		this.activeIndex = Integer.valueOf(params.get("index"));
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public List<Background> getImagensFeed()
-	{
-		return imagensFeed;
-	}
-
-	public void setImagensFeed(List<Background> imagensFeed)
-	{
-		this.imagensFeed = imagensFeed;
-	}
-
-	public List<Background> getImagensReel()
-	{
-		return imagensReel;
-	}
-
-	public void setImagensReel(List<Background> imagensReel)
-	{
-		this.imagensReel = imagensReel;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
-	public void setActiveIndex(int activeIndex)
-	{
-		this.activeIndex = activeIndex;
-	}
-
-	public List<ResponsiveOption> getResponsiveOptions()
-	{
-		return responsiveOptions;
-	}
-
-	public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions)
-	{
-		this.responsiveOptions = responsiveOptions;
+		this.activeIndex = Integer.parseInt(params.get("index"));
 	}
 }

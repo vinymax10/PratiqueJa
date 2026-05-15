@@ -6,9 +6,8 @@ import java.util.List;
 import bean.PaiBean;
 import dao.academico.AssuntoCursoDAO;
 import dao.teste.ResultadoTesteDAO;
-import dao.usuario.UsuarioDAO;
 import exceptions.RelacaoException;
-import filtro.assuntocurso.FiltroAssuntoCurso;
+import filtro.academico.FiltroAssuntoCurso;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -34,12 +33,6 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 {
 	@Inject
 	private FiltroAssuntoCurso filtro;
-
-	@Inject
-	private Usuario usuario;
-
-	@Inject
-	private UsuarioDAO usuarioDAO;
 
 	@Inject
 	private ResultadoTesteDAO resultadoTesteDAO;

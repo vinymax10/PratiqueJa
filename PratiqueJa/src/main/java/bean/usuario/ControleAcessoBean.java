@@ -13,7 +13,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.Usuario;
-import service.ControleAcessoService;
+import service.usuario.ControleAcessoService;
 import web.session.Sessao;
 import web.session.SessionContext;
 

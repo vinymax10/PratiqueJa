@@ -1,4 +1,4 @@
-package service;
+package service.exercicio;
 
 import java.io.File;
 import java.io.FileInputStream;

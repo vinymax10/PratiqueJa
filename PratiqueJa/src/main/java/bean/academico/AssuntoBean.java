@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import bean.ConfigBean;
 import dao.academico.AssuntoDAO;
 import exceptions.RelacaoException;
-import filtro.questao.FiltroAssunto;
+import filtro.academico.FiltroAssunto;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -35,6 +35,7 @@ public class AssuntoBean extends ConfigBean<Assunto, AssuntoDAO>
 		filtrar();
 	}
 
+	@Override
 	public void filtrar()
 	{
 		this.opcoes = entidadeDAO.buscar(filtro);

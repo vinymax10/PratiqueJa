@@ -8,10 +8,12 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 
 import dao.configuracao.ConfigCleanupDAO;
 import modelo.configuracao.ConfigCleanup;
 
+@Data
 @Named
 @SessionScoped
 public class ConfigCleanupBean implements Serializable
@@ -44,14 +46,6 @@ public class ConfigCleanupBean implements Serializable
 			
 			configCleanupDAO.salvar(configCleanup);
 		}
-	}
-
-	public ConfigCleanup getConfigCleanup() {
-		return configCleanup;
-	}
-
-	public void setConfigCleanup(ConfigCleanup configCleanup) {
-		this.configCleanup = configCleanup;
 	}
 
 }

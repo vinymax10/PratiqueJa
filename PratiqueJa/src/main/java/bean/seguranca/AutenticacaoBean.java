@@ -18,7 +18,7 @@ import jakarta.inject.Named;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import modelo.usuario.Usuario;
-import service.AcessoService;
+import service.seguranca.AcessoService;
 import web.session.Sessao;
 
 @Data

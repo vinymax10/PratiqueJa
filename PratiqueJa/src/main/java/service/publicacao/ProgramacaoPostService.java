@@ -1,4 +1,4 @@
-package service;
+package service.publicacao;
 
 import java.time.LocalDate;
 import java.util.List;

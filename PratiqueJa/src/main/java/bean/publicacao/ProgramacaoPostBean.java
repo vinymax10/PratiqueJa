@@ -3,7 +3,6 @@ package bean.publicacao;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -11,12 +10,14 @@ import jakarta.inject.Named;
 
 import org.primefaces.event.ReorderEvent;
 
+import lombok.Data;
 import modelo.academico.AssuntoCurso;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import bean.util.Mensagem;
-import service.ProgramacaoPostService;
+import service.publicacao.ProgramacaoPostService;
 
+@Data
 @Named
 @ViewScoped
 public class ProgramacaoPostBean implements Serializable
@@ -76,6 +77,7 @@ public class ProgramacaoPostBean implements Serializable
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o " + nome);
 		}
 	}
 
@@ -142,51 +144,6 @@ public class ProgramacaoPostBean implements Serializable
 		programacaoPost.setAvulsa(true);
 		programacaoPostService.persistir(programacaoPost);
 		envioPostBean.acorda();
-	}
-
-	@PostConstruct
-	public void init()
-	{
-	}
-
-	public ProgramacaoPost getProgramacaoPost()
-	{
-		return programacaoPost;
-	}
-
-	public void setProgramacaoPost(ProgramacaoPost ProgramacaoPost)
-	{
-		this.programacaoPost = ProgramacaoPost;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public int getQuantidade()
-	{
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade)
-	{
-		this.quantidade = quantidade;
-	}
-
-	public int getOrdem()
-	{
-		return ordem;
-	}
-
-	public void setOrdem(int ordem)
-	{
-		this.ordem = ordem;
 	}
 
 	public ConfigPost getConfigPost()

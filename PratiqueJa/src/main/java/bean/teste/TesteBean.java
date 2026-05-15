@@ -17,7 +17,7 @@ import modelo.academico.AssuntoCurso;
 import modelo.teste.Teste;
 import modelo.usuario.Turma;
 import modelo.usuario.Usuario;
-import service.TesteService;
+import service.teste.TesteService;
 import web.session.Sessao;
 
 @Named

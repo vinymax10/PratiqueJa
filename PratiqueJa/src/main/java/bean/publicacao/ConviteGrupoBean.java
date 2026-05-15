@@ -1,7 +1,7 @@
 package bean.publicacao;
 
 import java.util.EnumSet;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import bean.ConfigBean;
 import dao.publicacao.ConviteGrupoDAO;
@@ -21,20 +21,13 @@ public class ConviteGrupoBean extends ConfigBean<ConviteGrupo, ConviteGrupoDAO>
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}
 
-	protected void podeRemover(ConviteGrupo entidade) throws RelacaoException
-	{
-//		if(entidade.getQuestoes().size() > 0)
-//		throw new RelacaoException("Não foi possível remover o(a) " + nome + ". "
-//		+ "Existem Questões relacionadas.");
-	}
+	protected void podeRemover(ConviteGrupo entidade) throws RelacaoException {}
 
 	public String getAnyConviteGrupo()
 	{
-		Random rand=new Random();
-		if(opcoesAtivas.size()>0)
-			return opcoesAtivas.get(rand.nextInt(opcoesAtivas.size())).getNome();
+		if(opcoesAtivas.size() > 0)
+			return opcoesAtivas.get(ThreadLocalRandom.current().nextInt(opcoesAtivas.size())).getNome();
 		else
 			return "";
 	}
-
 }

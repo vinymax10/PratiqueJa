@@ -8,10 +8,12 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 
 import dao.configuracao.ConfigLatexDAO;
 import modelo.configuracao.ConfigLatex;
 
+@Data
 @Named
 @ViewScoped
 public class ConfigLatexBean implements Serializable
@@ -41,14 +43,6 @@ public class ConfigLatexBean implements Serializable
 			configLatex.setNome("exercicio");
 			configLatexDAO.salvar(configLatex);
 		}
-	}
-
-	public ConfigLatex getConfigLatex() {
-		return configLatex;
-	}
-
-	public void setConfigLatex(ConfigLatex configLatex) {
-		this.configLatex = configLatex;
 	}
 
 }

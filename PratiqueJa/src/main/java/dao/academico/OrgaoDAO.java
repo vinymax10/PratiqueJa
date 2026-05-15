@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAO;
-import filtro.questao.FiltroOrgao;
+import filtro.academico.FiltroOrgao;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

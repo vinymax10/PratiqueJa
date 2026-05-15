@@ -1,4 +1,4 @@
-package filtro.questao;
+package filtro.academico;
 
 import java.io.Serializable;
 

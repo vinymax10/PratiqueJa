@@ -25,7 +25,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
+import service.configuracao.DiretorioService;
 import bean.ebook.HeaderEBook;
 import bean.exercicio.ConfigDownload;
 import dao.exercicio.ExercicioPadraoDAO;
@@ -47,7 +47,7 @@ import modelo.email.ProgramacaoSpam;
 import modelo.usuario.Usuario;
 import pdf.exercicio.GerarLatexExercicio;
 import pdf.ebook.ItemSumario;
-import service.EmailService;
+import service.email.EmailService;
 
 @Named
 @ApplicationScoped
@@ -80,7 +80,7 @@ public class EnvioSpamBean implements Serializable
 	private ExercicioPadraoDAO exercicioPadraoDAO;
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 
 	@Inject
     private ServletContext servletContext;
@@ -172,7 +172,7 @@ public class EnvioSpamBean implements Serializable
 
 		ExercicioPadrao exercicio;
 
-		diretorio = poolNomesBean.criarDiretorio();
+		diretorio = diretorioService.criarDiretorio();
 		baos = new ByteArrayOutputStream();
 		document = new Document();
 
@@ -194,7 +194,7 @@ public class EnvioSpamBean implements Serializable
 			document.close();
 			pdfWriter.close();
 
-			poolNomesBean.freeDiretorio(diretorio);
+			diretorioService.freeDiretorio(diretorio);
 
 			return baos;
 		}

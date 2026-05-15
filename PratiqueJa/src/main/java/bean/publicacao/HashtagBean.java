@@ -20,10 +20,5 @@ public class HashtagBean extends ConfigBean<Hashtag, HashtagDAO>
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}
 
-	protected void podeRemover(Hashtag entidade) throws RelacaoException
-	{
-//		if(entidade.getQuestoes().size() > 0)
-//		throw new RelacaoException("Não foi possível remover o(a) " + nome + ". "
-//		+ "Existem Questões relacionadas.");
-	}
+	protected void podeRemover(Hashtag entidade) throws RelacaoException {}
 }

@@ -1,4 +1,4 @@
-package service;
+package service.usuario;
 
 import java.util.List;
 

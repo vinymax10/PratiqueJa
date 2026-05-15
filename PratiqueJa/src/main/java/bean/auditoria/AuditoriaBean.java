@@ -20,7 +20,7 @@ import modelo.auditoria.AuditoriaEvento;
 import modelo.auditoria.EntidadeAuditavel;
 import modelo.auditoria.TipoEvento;
 import pdf.relatorio.AuditoriaPDF;
-import service.AuditoriaService;
+import service.auditoria.AuditoriaService;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

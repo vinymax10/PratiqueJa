@@ -1,12 +1,14 @@
 package bean.publicacao;
 
-import java.util.Random;
+import java.util.Iterator;
+import java.util.concurrent.ThreadLocalRandom;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.publicacao.Cta;
 import modelo.publicacao.FinalidadeCta;
 
@@ -17,6 +19,7 @@ import bean.util.Mensagem;
 import dao.publicacao.CtaDAO;
 import exceptions.RelacaoException;
 
+@Data
 @Named
 @ViewScoped
 public class CtaBean extends ConfigBean<Cta, CtaDAO>
@@ -74,11 +77,11 @@ public class CtaBean extends ConfigBean<Cta, CtaDAO>
 		try
 		{
 			Cta cta;
-			String[] list = ctas.split("\\n");
+			String[] list = ctas.split("\\R");
 			for (String ctaString : list)
 			{
 				cta = new Cta();
-				cta.setNome(ctaString);
+				cta.setNome(ctaString.trim());
 				cta.setFinalidadeCta(finalidadeCta);
 				if (personal)
 				{
@@ -137,51 +140,22 @@ public class CtaBean extends ConfigBean<Cta, CtaDAO>
 
 	public void removerTodosCTAs(boolean personal)
 	{
-		Cta cta;
-		if (personal)
+		Iterator<Cta> it = personal
+			? configPostBean.getConfigPost().getCtas().iterator()
+			: opcoes.iterator();
+
+		while (it.hasNext())
 		{
-			while (configPostBean.getConfigPost().getCtas().size() > 0)
-			{
-				cta = configPostBean.getConfigPost().getCtas().get(0);
-				entidadeDAO.remover(cta);
-				configPostBean.getConfigPost().getCtas().remove(0);
-			}
-		}
-		else
-		{
-			while (opcoes.size() > 0)
-			{
-				cta = opcoes.get(0);
-				entidadeDAO.remover(cta);
-				opcoes.remove(0);
-			}
+			entidadeDAO.remover(it.next());
+			it.remove();
 		}
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "CTAs removidos com sucesso.");
 	}
 
 	public String getAnyCta()
 	{
-		Random rand = new Random();
-		return opcoes.get(rand.nextInt(opcoes.size())).getNome();
-	}
-
-	public String getCtas()
-	{
-		return ctas;
-	}
-
-	public void setCtas(String ctas)
-	{
-		this.ctas = ctas;
-	}
-
-	public FinalidadeCta getFinalidadeCta()
-	{
-		return finalidadeCta;
-	}
-
-	public void setFinalidadeCta(FinalidadeCta finalidadeCta)
-	{
-		this.finalidadeCta = finalidadeCta;
+		if(opcoes.isEmpty())
+			return "";
+		return opcoes.get(ThreadLocalRandom.current().nextInt(opcoes.size())).getNome();
 	}
 }

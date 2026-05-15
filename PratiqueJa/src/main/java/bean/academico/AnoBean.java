@@ -7,9 +7,13 @@ import dao.academico.AnoDAO;
 import exceptions.RelacaoException;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
 import modelo.academico.Ano;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
 public class AnoBean extends ConfigBean<Ano, AnoDAO>

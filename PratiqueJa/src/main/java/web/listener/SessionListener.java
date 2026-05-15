@@ -6,7 +6,7 @@ import java.util.Date;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
-import service.AcessoService;
+import service.seguranca.AcessoService;
 
 public class SessionListener implements HttpSessionListener
 {

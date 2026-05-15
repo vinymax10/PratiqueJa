@@ -27,7 +27,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.Entidade;
 import modelo.auditoria.TipoEvento;
-import service.AuditoriaService;
+import service.auditoria.AuditoriaService;
 
 @Data
 @Named

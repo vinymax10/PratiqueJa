@@ -12,7 +12,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.email.Email;
 import modelo.email.StatusEmail;
-import service.EmailService;
+import service.email.EmailService;
 
 @Data
 @Named

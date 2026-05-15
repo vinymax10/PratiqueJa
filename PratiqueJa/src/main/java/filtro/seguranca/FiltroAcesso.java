@@ -1,4 +1,4 @@
-package filtro.usuario;
+package filtro.seguranca;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,21 +21,21 @@ public class FiltroAcesso implements Serializable
 	private Integer minutosMaximo;
 
 	private String idSessao;
-	
+
 	public void resetPreset()
 	{
-		preset=PeriodoPreset.PERSONALIZADO;
+		preset = PeriodoPreset.PERSONALIZADO;
 	}
-	
+
 	public void aplicarPreset()
 	{
 		if(this.preset == null)
-            this.periodo = null;
+			this.periodo = null;
 
 		else if(preset != PeriodoPreset.PERSONALIZADO)
-	    	periodo = preset.calcularIntervalo();
+			periodo = preset.calcularIntervalo();
 	}
-	
+
 	public void limpar()
 	{
 		nomeUsuario = null;

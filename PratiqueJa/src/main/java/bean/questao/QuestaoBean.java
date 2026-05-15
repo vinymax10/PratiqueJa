@@ -13,7 +13,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import bean.download.Diretorio;
-import bean.download.PoolNomesBean;
+import service.configuracao.DiretorioService;
 import bean.exercicio.ConfigDownload;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
@@ -54,7 +54,7 @@ public class QuestaoBean implements Serializable
 	private List<Questao> questoes = new ArrayList<Questao>();
 
 	@Inject
-	private PoolNomesBean poolNomesBean;
+	private DiretorioService diretorioService;
 	
 	@Inject
 	private UsuarioDAO usuarioDAO;
@@ -130,7 +130,7 @@ public class QuestaoBean implements Serializable
 		usuario = usuarioDAO.carrega(usuario.getId());
 		configDownload.setUsuario(usuario);
 		
-		Diretorio diretorio = poolNomesBean.criarDiretorio();
+		Diretorio diretorio = diretorioService.criarDiretorio();
 		
 		GerarLatexQuestao gerarLatex=new GerarLatexQuestao(diretorio);
 		gerarLatex.gerarPDFQuestoes(questoes, configDownload);
@@ -150,7 +150,7 @@ public class QuestaoBean implements Serializable
 			e.printStackTrace();
 		}
 		
-		poolNomesBean.freeDiretorio(diretorio);
+		diretorioService.freeDiretorio(diretorio);
 		
 		controleAcessoBean.registrarDownloadQuestao(massa);
 		return file;

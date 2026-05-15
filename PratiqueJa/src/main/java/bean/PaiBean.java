@@ -22,7 +22,7 @@ import modelo.Entidade;
 import modelo.auditoria.TipoEvento;
 import modelo.seguranca.Permissao;
 import modelo.usuario.Usuario;
-import service.AuditoriaService;
+import service.auditoria.AuditoriaService;
 import web.session.Sessao;
 import web.session.TabStateManager;
 

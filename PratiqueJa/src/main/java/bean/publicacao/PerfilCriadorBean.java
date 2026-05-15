@@ -7,8 +7,10 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.publicacao.PerfilCriador;
 
+@Data
 @Named
 @ApplicationScoped
 public class PerfilCriadorBean implements Serializable
@@ -21,15 +23,5 @@ public class PerfilCriadorBean implements Serializable
 	public void init()
 	{
 		opcoes = Arrays.asList(PerfilCriador.values());
-	}
-
-	public List<PerfilCriador> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<PerfilCriador> opcoes)
-	{
-		this.opcoes = opcoes;
 	}
 }
