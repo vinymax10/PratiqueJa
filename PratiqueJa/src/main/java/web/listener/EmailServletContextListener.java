@@ -1,6 +1,6 @@
 package web.listener;
 
-import bean.spam.EnvioSpamBean;
+import bean.email.EnvioSpamBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;

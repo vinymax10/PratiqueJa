@@ -20,7 +20,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import bean.PaiBean;
-import bean.instagram.ConfigPostBean;
+import bean.publicacao.ConfigPostBean;
 import dao.usuario.UsuarioDAO;
 import filtro.usuario.FiltroUsuario;
 import infra.Graphics;

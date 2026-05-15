@@ -21,7 +21,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import bean.exercicio.ConfigDownload;
-import bean.instagram.ProgramacaoPostBean;
+import bean.publicacao.ProgramacaoPostBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioPadraoDAO;

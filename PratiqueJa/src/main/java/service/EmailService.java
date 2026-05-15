@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import dao.EmailDAO;
+import dao.email.EmailDAO;
 import filtro.email.FiltroEmail;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.push.Push;

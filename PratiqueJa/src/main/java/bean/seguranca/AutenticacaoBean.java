@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import bean.util.EmailBean;
+import bean.email.EmailBean;
 import bean.util.Mensagem;
 import dao.usuario.UsuarioDAO;
 import infra.Navegacao;

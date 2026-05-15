@@ -23,7 +23,7 @@ import org.javers.core.diff.Diff;
 import org.javers.core.diff.changetype.ValueChange;
 
 import util.ClasseAux;
-import dao.AuditoriaEventoDAO;
+import dao.auditoria.AuditoriaEventoDAO;
 import filtro.auditoria.FiltroAuditoria;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;

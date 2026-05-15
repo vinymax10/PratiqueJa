@@ -24,11 +24,12 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import bean.configuracao.EdicaoBean;
 import bean.download.Diretorio;
 import bean.download.PoolNomesBean;
 import bean.exercicio.ConfigDownload;
 import bean.util.Mensagem;
-import dao.AssuntoCursoDAO;
+import dao.academico.AssuntoCursoDAO;
 import dao.exercicio.ExercicioPadraoDAO;
 import dao.questao.QuestaoDAO;
 import jakarta.faces.application.FacesMessage;

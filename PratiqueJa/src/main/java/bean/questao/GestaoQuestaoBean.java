@@ -18,11 +18,11 @@ import org.primefaces.event.ReorderEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import bean.exercicio.ConfigDownload;
-import bean.questao.configuracao.AnoBean;
-import bean.questao.configuracao.AssuntoBean;
-import bean.questao.configuracao.BancaBean;
-import bean.questao.configuracao.DisciplinaBean;
-import bean.questao.configuracao.OrgaoBean;
+import bean.academico.AnoBean;
+import bean.academico.AssuntoBean;
+import bean.academico.BancaBean;
+import bean.academico.DisciplinaBean;
+import bean.academico.OrgaoBean;
 import bean.util.Mensagem;
 import dao.questao.QuestaoDAO;
 import filtro.questao.FiltroQuestao;
