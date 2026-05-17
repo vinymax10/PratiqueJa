@@ -36,6 +36,8 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 
 	@Inject
 	private ResultadoTesteDAO resultadoTesteDAO;
+	
+	private String assunto;
 
 	public AssuntoCursoBean()
 	{
@@ -71,6 +73,11 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	{
 		if(tabState.hasState(FiltroAssuntoCurso.class))
 			filtro = tabState.getState(FiltroAssuntoCurso.class);
+		
+		if(assunto != null)
+		{
+			this.entidade = entidadeDAO.assunto(assunto);
+		}
 	}
 
 	public List<ExercicioPadrao> getExerciciosPadrao()

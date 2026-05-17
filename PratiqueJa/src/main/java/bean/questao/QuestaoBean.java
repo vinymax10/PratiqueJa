@@ -185,7 +185,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 			else if(questao.isShowResolucaoComentada())
 				questao.toogleResolucaoComentada();
 			else
-				controleAcessoBean.showUpgrade("Limite diário de acesso as resoluções de questões foi excedido."
+				controleAcessoBean.showUpgrade("Limite mensal de acesso as resoluções de questões foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
 
 			if(!questao.isJaMostrouResolucaoComentada())
@@ -219,8 +219,8 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 			e.printStackTrace();
 		}
 
+		controleAcessoBean.registrarDownload(diretorio.getEnderecoPdf());
 		diretorioService.freeDiretorio(diretorio);
-		controleAcessoBean.registrarDownloadQuestao(massa);
 		return file;
 	}
 
@@ -228,10 +228,10 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			if(controleAcessoBean.podeFazerDownloadQuestao())
+			if(controleAcessoBean.podeFazerDownload())
 				PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
 			else
-				controleAcessoBean.showUpgrade("Limite diário de downloads de questões foi excedido."
+				controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
 		}
 	}
@@ -242,10 +242,10 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 		{
 			if(questoes.size() > 0)
 			{
-				if(controleAcessoBean.podeFazerDownloadMassa())
+				if(controleAcessoBean.podeFazerDownload())
 					PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
 				else
-					controleAcessoBean.showUpgrade("Este recurso está disponível somente para os perfis Prata ou Ouro."
+					controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido."
 					+ "\nPor favor faça o upgrade de sua conta.");
 			}
 			else
@@ -285,7 +285,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 					Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, "Por favor escolha uma alternativa.");
 			}
 			else
-				controleAcessoBean.showUpgrade("Limite diário para resolver as questões foi excedido."
+				controleAcessoBean.showUpgrade("Limite mensal para resolver as questões foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
 		}
 		return "";

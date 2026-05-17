@@ -2,13 +2,10 @@ package bean.usuario;
 
 public enum AtributoControleAcesso
 {
-	numDownloadExercicio(4),
-	numDownloadQuestao(5),
-	numDownloadQuestaoMassa(6),
-	numDownloadMassa(7),
-	numResolucaoExercicio(8),
-	numResolucaoQuestao(9),
-	numQuestaoFeita(10);
+	numPaginasBaixadas(3),
+	numResolucaoExercicio(4),
+	numResolucaoQuestao(5),
+	numQuestaoFeita(6);
 
 	private final int valor;
 

@@ -173,8 +173,8 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 
 		Diretorio diretorio = diretorioService.criarDiretorio();
 		StreamedContent file = exercicioService.gerarPdfExercicio(entidade, configDownload, diretorio, Sessao.getUsuarioLogado());
+		controleAcessoBean.registrarDownload(diretorio.getEnderecoPdf());
 		diretorioService.freeDiretorio(diretorio);
-		controleAcessoBean.registrarDownloadExercicio();
 		return file;
 	}
 
@@ -189,10 +189,10 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			this.exercicioPadrao = exercicioPadrao;
-			if(controleAcessoBean.podeFazerDownloadExercicio())
+			if(controleAcessoBean.podeFazerDownload())
 				PrimeFaces.current().executeScript("PF('downloadExercicioWidget').show()");
 			else
-				controleAcessoBean.showUpgrade("Limite diário de downloads de exercícios foi excedido."
+				controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
 		}
 	}

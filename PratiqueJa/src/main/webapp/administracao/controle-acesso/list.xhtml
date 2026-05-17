@@ -54,18 +54,15 @@
 			<p:columnGroup type="header">
 				<p:row>
 					<p:column colspan="1" headerText="Usuário"/>
-					<p:column colspan="1" headerText="Data"/>
-					<p:column colspan="1" headerText="Download Massa"/>
-					<p:column colspan="2" headerText="Exercício"/>
-					<p:column colspan="4" headerText="Questão"/>
+					<p:column colspan="1" headerText="Mês"/>
+					<p:column colspan="1" headerText="Páginas Baixadas"/>
+					<p:column colspan="1" headerText="Exercício"/>
+					<p:column colspan="2" headerText="Questão"/>
 				</p:row>
 				<p:row>
 					<p:column colspan="3" headerText=""/>
-					<p:column colspan="1" headerText="Download"/>
 					<p:column colspan="1" headerText="Nº Resolução"/>
-					<p:column colspan="1" headerText="Nº Download Massa"/>
 					<p:column colspan="1" headerText="Nº Feita"/>
-					<p:column colspan="1" headerText="Nº Download"/>
 					<p:column colspan="1" headerText="Nº Resolução"/>
 				</p:row>
 			</p:columnGroup>
@@ -74,34 +71,22 @@
 				<h:outputText value="#{controleAcesso.usuario.nome}" />
 			</p:column>
 
-			<p:column headerText="Data" responsivePriority="2">
+			<p:column headerText="Mês" responsivePriority="2">
 				<h:outputText value="#{controleAcesso.data}">
-					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+					<f:convertDateTime pattern="MM/yyyy" type="localDate" />
 				</h:outputText>
 			</p:column>
 
-			<p:column headerText="Download Massa" responsivePriority="5">
-				<h:outputText value="#{controleAcesso.numDownloadMassa}" />
-			</p:column>
-
-			<p:column headerText="Download" responsivePriority="3">
-				<h:outputText value="#{controleAcesso.numDownloadExercicio}" />
+			<p:column headerText="Páginas Baixadas" responsivePriority="3">
+				<h:outputText value="#{controleAcesso.numPaginasBaixadas}" />
 			</p:column>
 
 			<p:column headerText="Nº Resolução" responsivePriority="4">
 				<h:outputText value="#{controleAcesso.numResolucaoExercicio}" />
 			</p:column>
 
-			<p:column headerText="Nº Download Massa" responsivePriority="4">
-				<h:outputText value="#{controleAcesso.numDownloadQuestaoMassa}" />
-			</p:column>
-
 			<p:column headerText="Nº Feita" responsivePriority="4">
 				<h:outputText value="#{controleAcesso.numQuestaoFeita}" />
-			</p:column>
-
-			<p:column headerText="Nº Download" responsivePriority="4">
-				<h:outputText value="#{controleAcesso.numDownloadQuestao}" />
 			</p:column>
 
 			<p:column headerText="Nº Resolução" responsivePriority="4">

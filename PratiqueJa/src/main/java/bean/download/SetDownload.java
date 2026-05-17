@@ -1,6 +1,7 @@
 package bean.download;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -32,7 +33,7 @@ public class SetDownload implements Serializable
 
 	private Usuario usuario;
 
-	private List<AssuntoCurso> assuntosCurso;
+	private List<AssuntoCurso> assuntosCurso = new ArrayList<>();;
 
 	private int quantidadeNivel1=1;
 

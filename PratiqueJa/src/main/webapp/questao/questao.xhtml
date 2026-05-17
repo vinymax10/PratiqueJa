@@ -2,187 +2,100 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
 
-	<h:form id="form" style="margin-bottom:0">
-		<div class="p-d-flex">
-			<div class="p-grid" style="margin: 0 15px; width: 100%;">
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Questões" />
+	</ui:define>
 
-				<div class="p-col-12">
-					<h2>Questões</h2>
+	<h:form id="form" class="form">
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row">
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText value="#{questaoBean.filtro.conteudo}"
+						placeholder="Conteúdo" styleClass="w-full">
+							<p:ajax event="keyup" delay="500" update="@form" listener="#{questaoBean.filtrarEstudante}" />
+						</p:inputText>
+					</span>
 				</div>
 
-				<p:panel header="Filtro" toggleable="true" closable="true"
-					toggleSpeed="500" closeSpeed="500" widgetVar="panel"
-					style="margin-bottom:1rem;width: 100%;">
-
-					<div class="ui-fluid formgrid grid">
-						<div class="field col-12 xl:col-6">
-							<p:outputLabel for="@next" value="Banca" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.banca}"
-								converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{bancaBean.lista}" var="banca"
-									itemLabel="#{banca.nomeReduzido}" itemValue="#{banca}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="field col-12 xl:col-6">
-							<p:outputLabel for="@next" value="Órgão" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.orgao}"
-								converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{orgaoBean.lista}" var="orgao"
-									itemLabel="#{orgao.nomeReduzido}" itemValue="#{orgao}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="field col-12 md:col-6 lg:col-4">
-							<p:outputLabel for="@next" value="Assunto Curso" />
-							<p:selectOneMenu
-								value="#{questaoBean.filtroQuestao.assuntoCurso}"
-								converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-									var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-									itemValue="#{assuntoCurso}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
-							<p:outputLabel for="@next" value="Ano" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.ano}"
-								converter="generic">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{anoBean.lista}" var="ano"
-									itemLabel="#{ano.nome}" itemValue="#{ano}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
-							<p:outputLabel for="@next" value="Dificuldade" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.dificuldade}">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItems value="#{dificuldadeBean.opcoes}" var="opcao"
-									itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
-							</p:selectOneMenu>
-						</div>
-						
-						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
-							<p:outputLabel for="@next" value="Acertei" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.acertei}">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItem itemLabel="Acertei" itemValue="#{true}" />
-								<f:selectItem itemLabel="Errei" itemValue="#{false}" />
-							</p:selectOneMenu>
-						</div>
-						
-						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
-							<p:outputLabel for="@next" value="Repondida" />
-							<p:selectOneMenu value="#{questaoBean.filtroQuestao.respondida}">
-								<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-								<f:selectItem itemLabel="Repondida" itemValue="#{true}" />
-								<f:selectItem itemLabel="Não Repondida" itemValue="#{false}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="field col-12 md:col-6 lg:col-4 xl:col-2">
-							<label for="@next">ID</label>
-							<p:inputText value="#{questaoBean.filtroQuestao.id}" />
-						</div>
-
-					</div>
-
-					<p:divider />
-
-					<div class="p-grid" style="margin-top: 1rem">
-
-						<div class="p-col-12 p-text-right">
-							
-							<p:commandButton value="Download" style="margin-right:15px;"
-							process="@this" action="#{questaoBean.podeFazerDownloadMassa()}"
-							icon="pi pi-download" update=":growl, dialogUpgrade"
-							styleClass="ui-button-raised ui-button-flat">
-							</p:commandButton>
-							
-							<p:commandButton id="filtrar" value="Filtrar" oncomplete="reloadMathJax();"
-							styleClass="ui-button-raised ui-button-flat ui-button-secondary" icon="pi pi-search"
-							action="#{questaoBean.filtrar}" update="@form, :growl"
-							process="@form" >
-								<p:defaultCommand target="form:filtrar"/>
-							</p:commandButton>
-							
-						</div>
-
-					</div>
-					
-		       		<p:staticMessage id="mensagem" severity="info" summary="Conteúdo listado" display="text"
-		       		detail="#{questaoBean.questoes.size()} questões" 
-		       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
-		       		
-				</p:panel>
-				
-				<ui:include src="/questao/barraNavegacao.xhtml" />
-				
-				<ui:include src="/questao/listaQuestoes.xhtml" />
-
-				<ui:include src="/questao/barraNavegacao.xhtml" />
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
 
 			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+
+				<p:commandButton value="Download"
+				process="@this" action="#{questaoBean.podeFazerDownloadMassa()}"
+				icon="pi pi-download" update=":growl, dialogUpgrade"
+				styleClass="ui-button-raised ui-button-flat" />
+
+			</div>
+
 		</div>
-		
-		<p:dialog id="dialogDownloadQuestao" class="p-col-8 p-md-6 p-md-offset-1 p-lg-4 p-lg-offset-2" 
-		header="Download de Questões" 
-		showEffect="fade" hideEffect="fade" width="100%;" modal="true"  
-		widgetVar="downloadQuestaoWidget" responsive="true" >
-			
-			<p:outputPanel id="downloadQuestaoContent" class="ui-fluid">
-				
-	    		<div class="p-col-12" >
-					<h:outputText value="Selecione a configuração do pdf de questões:" />
-	    		</div>
-	    		
-				<div class="ui-fluid p-formgrid p-grid">
-		        				    		
-               		<div class="p-field p-col-12">
-		                <p:selectBooleanButton value="#{questaoBean.configDownload.identificacao}" 
-		                onLabel="Com Identificação" offLabel="Sem Identificação"
-						onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-						style="width:12rem; margin-top:15px;" />
-					</div>
-					
-					<div class="p-field p-col-12">
-		                <p:selectBooleanButton value="#{questaoBean.configDownload.respostas}" 
-		                onLabel="Com Respostas" offLabel="Sem Respostas"
-						onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-						style="width:12rem; margin-top:15px;" />
-					</div>
-					
-					<div class="p-field p-col-12">
-		                <p:selectBooleanButton value="#{questaoBean.configDownload.resolucao}" 
-		                onLabel="Com Resolução" offLabel="Sem Resolução"
-						onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-						style="width:12rem; margin-top:15px;" />
-					</div>
-		            
-           		</div>
+
+		<ui:include src="/questao/filtro.xhtml" />
+
+		<p:staticMessage severity="info" summary="Questões carregadas"
+		detail="#{questaoBean.questoes.size()} questões"
+		display="text"
+		style="background: #ecf1ff !important;margin:0 0 1rem 0;width:100%" />
+
+		<ui:include src="/questao/barraNavegacao.xhtml" />
+
+		<ui:include src="/questao/listaQuestoes.xhtml" />
+
+		<ui:include src="/questao/barraNavegacao.xhtml" />
+
+		<p:dialog id="dialogDownloadQuestao" header="Download de Questões"
+		showEffect="fade" hideEffect="fade" modal="true"
+		widgetVar="downloadQuestaoWidget" responsive="true">
+
+			<p:outputPanel id="downloadQuestaoContent">
+				<div class="ui-fluid gride">
+
+					<h:panelGroup styleClass="campoMsg col-12 md:col-4">
+						<p:outputLabel for="@next" value="Identificação" />
+						<p:toggleSwitch class="toggleSwitch-form" value="#{questaoBean.configDownload.identificacao}" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="campoMsg col-12 md:col-4">
+						<p:outputLabel for="@next" value="Respostas" />
+						<p:toggleSwitch class="toggleSwitch-form" value="#{questaoBean.configDownload.respostas}" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="campoMsg col-12 md:col-4">
+						<p:outputLabel for="@next" value="Resolução" />
+						<p:toggleSwitch class="toggleSwitch-form" value="#{questaoBean.configDownload.resolucao}" />
+					</h:panelGroup>
+
+				</div>
 			</p:outputPanel>
+
 			<f:facet name="footer">
-				<p:commandButton  value="Cancelar" 
+
+				<p:commandButton value="Cancelar"
 				styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-				onclick="PF('downloadQuestaoWidget').hide()"  icon="pi pi-times" />
-				
-				<p:commandButton value="Download" style="margin-right:15px;"
-				icon="pi pi-download" ajax="false"
-				onclick="PrimeFaces.monitorDownload('', PF('downloadQuestaoWidget').hide());" 
-				styleClass="ui-button-raised ui-button-flat">
-					<p:fileDownload value="#{questaoBean.download(true)}"/>
+				onclick="PF('downloadQuestaoWidget').hide()" icon="pi pi-times" />
+
+				<p:commandButton value="Download" icon="pi pi-download" ajax="false"
+				onclick="PrimeFaces.monitorDownload('', PF('downloadQuestaoWidget').hide());"
+				styleClass="ui-button-raised ui-button-primary">
+					<p:fileDownload value="#{questaoBean.download(true)}" />
 				</p:commandButton>
-				
-     				</f:facet>
-			
+
+			</f:facet>
+
 		</p:dialog>
+
 	</h:form>
 
 </ui:decorate>
-

@@ -7,6 +7,7 @@ import java.util.List;
 import org.primefaces.PrimeFaces;
 
 import filtro.usuario.FiltroControleAcesso;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -15,7 +16,6 @@ import modelo.usuario.ControleAcesso;
 import modelo.usuario.Usuario;
 import service.usuario.ControleAcessoService;
 import web.session.Sessao;
-import web.session.SessionContext;
 
 @Data
 @Named
@@ -51,12 +51,11 @@ public class ControleAcessoBean implements Serializable
 		filtrar();
 	}
 
-	// --- UI / sessão ---
-
+	@PostConstruct
 	public void carrega()
 	{
 		usuario = Sessao.getUsuarioLogado();
-		controleAcesso = (ControleAcesso) SessionContext.getInstance().getAttribute("controleAcesso");
+		controleAcesso = controleAcessoService.carregarOuCriar(usuario);
 	}
 
 	public boolean verificaEstaLogado()
@@ -76,19 +75,9 @@ public class ControleAcessoBean implements Serializable
 
 	// --- delegação ao service ---
 
-	public boolean podeFazerDownloadMassa()
+	public boolean podeFazerDownload()
 	{
-		return controleAcessoService.podeFazerDownloadMassa(usuario);
-	}
-
-	public boolean podeFazerDownloadExercicio()
-	{
-		return controleAcessoService.podeFazerDownloadExercicio(usuario, controleAcesso);
-	}
-
-	public boolean podeFazerDownloadQuestao()
-	{
-		return controleAcessoService.podeFazerDownloadQuestao(usuario, controleAcesso);
+		return controleAcessoService.podeFazerDownload(usuario, controleAcesso);
 	}
 
 	public boolean podeResolucaoExercicio()
@@ -106,19 +95,14 @@ public class ControleAcessoBean implements Serializable
 		return controleAcessoService.podeFazerQuestao(usuario, controleAcesso);
 	}
 
-	public void registrarDownloadExercicio()
+	public void registrarDownload(String pdfPath)
 	{
-		controleAcessoService.registrarDownloadExercicio(controleAcesso);
+		controleAcessoService.registrarDownload(controleAcesso, pdfPath);
 	}
 
-	public void registrarDownloadQuestao(boolean massa)
+	public void registrarDownload(int paginas)
 	{
-		controleAcessoService.registrarDownloadQuestao(controleAcesso, massa);
-	}
-
-	public void registrarDownloadMassa()
-	{
-		controleAcessoService.registrarDownloadMassa(controleAcesso);
+		controleAcessoService.registrarDownload(controleAcesso, paginas);
 	}
 
 	public void registrarResolucaoExercicio()

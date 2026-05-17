@@ -6,13 +6,13 @@
 
 <h:body >
 	<ui:composition>
-		<p:tab title="Questões" rendered="#{assuntoCursoBean.assuntoCurso.showQuestao}" >
+		<p:tab title="Questões" rendered="#{assuntoCursoBean.entidade.showQuestao}" >
 			
 			<div class=" p-grid" style="margin-top:.5rem;width:100%">
 				<div class="p-field p-col-12 p-md-9 " >
 					<p:selectOneButton value="#{questaoBean.tipoFiltro}" >
 						<p:ajax event="change" 
-						listener="#{questaoBean.buscaQuestao(assuntoCursoBean.assuntoCurso)}" 
+						listener="#{questaoBean.buscaQuestao(assuntoCursoBean.entidade)}" 
 						process="@this" update="form:tabView"
 						oncomplete="reloadMathJax();" />
 						
@@ -49,9 +49,9 @@
 				<p:outputPanel id="downloadQuestaoContent" class="ui-fluid">
 					
 					<div class="p-col-12" >
-						<h:outputText style="color: var(--iris);" value="Módulo #{assuntoCursoBean.assuntoCurso.modulo.nome}" />
+						<h:outputText style="color: var(--iris);" value="Módulo #{assuntoCursoBean.entidade.modulo.nome}" />
 				    	 - 
-				    	<h:outputText style="color: var(--verde);" value="Assunto #{assuntoCursoBean.assuntoCurso.nome}" />
+				    	<h:outputText style="color: var(--verde);" value="Assunto #{assuntoCursoBean.entidade.nome}" />
 		    		</div>
 		    		
 		    		<div class="p-col-12" >

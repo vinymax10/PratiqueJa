@@ -13,7 +13,9 @@
       "Bash(Get-ChildItem *)",
       "Bash(cmd /c \"wsl --version\")",
       "Bash(cmd /c \"C:\\\\Program Files\\\\WSL\\\\wsl.exe --version\")",
-      "Bash(cmd *)"
+      "Bash(cmd *)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
     ]
   }
 }

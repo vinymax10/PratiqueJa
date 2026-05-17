@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition>
+			<div id="filtros" style="width: 100%;display:none;">
+
+				<p:card class="newBorder mb-3" style="width: 100%;">
+					<div class="ui-fluid gride">
+						<h4 class="title-card">Filtro</h4>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Assunto" />
+							<p:selectOneMenu value="#{questaoBean.filtro.assuntoCurso}"
+							converter="generic" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+								var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+								itemValue="#{assuntoCurso}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Banca" />
+							<p:selectOneMenu value="#{questaoBean.filtro.banca}"
+							converter="generic" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{bancaBean.opcoes}" var="banca"
+								itemLabel="#{banca.nome}" itemValue="#{banca}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Órgão" />
+							<p:selectOneMenu value="#{questaoBean.filtro.orgao}"
+							converter="generic" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{orgaoBean.opcoes}" var="orgao"
+								itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Ano" />
+							<p:selectOneMenu value="#{questaoBean.filtro.ano}"
+							converter="generic">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{anoBean.opcoes}" var="ano"
+								itemLabel="#{ano.nome}" itemValue="#{ano}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Dificuldade" />
+							<p:selectOneMenu value="#{questaoBean.filtro.dificuldade}">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{questaoBean.dificuldadeValues}" var="d"
+								itemLabel="#{d.nome}" itemValue="#{d}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Acertei" />
+							<p:selectOneMenu value="#{questaoBean.filtro.acertei}">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItem itemLabel="Acertei" itemValue="#{true}" />
+								<f:selectItem itemLabel="Errei" itemValue="#{false}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="Respondida" />
+							<p:selectOneMenu value="#{questaoBean.filtro.respondida}">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItem itemLabel="Respondida" itemValue="#{true}" />
+								<f:selectItem itemLabel="Não Respondida" itemValue="#{false}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+							<p:outputLabel for="@next" value="ID" />
+							<p:inputText value="#{questaoBean.filtro.id}" />
+						</div>
+
+					</div>
+
+					<div class="content-button-right">
+
+						<div class="divisor"></div>
+
+						<p:commandButton value="Limpar"
+						styleClass="ui-button-flat ui-button-plain"
+						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
+						action="#{questaoBean.filtrarInit}" update="@form">
+						</p:commandButton>
+
+						<p:commandButton id="filtrar" value="Filtrar"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
+						action="#{questaoBean.filtrarEstudante}" update="@form, :growl" process="@form">
+							<p:defaultCommand target="form:filtrar" />
+						</p:commandButton>
+
+					</div>
+
+				</p:card>
+			</div>
+		</ui:composition>
+	</h:body>
+</html>

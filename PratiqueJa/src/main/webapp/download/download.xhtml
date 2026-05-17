@@ -5,199 +5,159 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
-    <h:form id="form" style="margin-bottom:0">
-		<div class="p-d-flex">
-	    	<div class="p-grid" style="margin:0 15px;width:100%;">
-		
-			    <div class="p-col-12" >	
-					<h2>Download</h2>	
-				</div>
-		    
-				<p:panel header="Configuração" toggleable="true" closable="true" toggleSpeed="500"
-             		closeSpeed="500" widgetVar="panel" style="margin-bottom:1rem;width:100%;">
-					
-						 <p:fieldset legend="Gerais" style="margin-bottom:1rem;width:100%;" >
-						 	<div class="ui-fluid formgrid grid">
-								<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
-									<p:outputLabel for="@next" value="Nome do Arquivo" />
-									<p:inputText placeholder="Nome do Arquivo"
-									value="#{downloadBean.setDownload.nomeArquivo}" />
-								</div>
-								
-								<div class="field col-6 md:col-4 lg:col-2 xl:col-1">
-									<p:outputLabel for="@next" value="Anotações" />
-									<p:selectBooleanButton
-										value="#{downloadBean.setDownload.anotacao}"
-										onLabel="Sim" offLabel="Não"
-										onIcon="pi pi-check" offIcon="pi pi-times" 
-										style="display:block;" />
-								</div>
-							
-								<div class="field col-12 xl:col-7">
-									<p:outputLabel  for="@next" value="Assuntos" />
-									<p:selectCheckboxMenu value="#{downloadBean.setDownload.assuntosCurso}" 
-									multiple="true"
-									filter="true" filterMatchMode="contains" dynamic="true">
-										<f:attribute name="collectionType" value="java.util.ArrayList" />
-										<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-										itemValue="#{assuntoCurso}" />
-									</p:selectCheckboxMenu>
-								</div>
-							</div>
-						</p:fieldset>
-						<div class="ui-fluid formgrid grid">
-							<div class="col-12 xl:col-6">
-							
-								<p:fieldset legend="Questões" style="margin-bottom:1rem;width:100%;">
-						 			<div class="ui-fluid formgrid grid">
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-											<p:outputLabel for="@next" value="Questões" />
-											<p:selectBooleanButton
-												value="#{downloadBean.setDownload.questao}"
-												onLabel="Sim" offLabel="Não"
-												onIcon="pi pi-check" offIcon="pi pi-times" 
-												style="display:block;" />
-										</div>
-										
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-											<p:outputLabel for="@next" value="Resolução" />
-											<p:selectBooleanButton
-												value="#{downloadBean.setDownload.resolucaoQuestao}"
-												onLabel="Sim" offLabel="Não"
-												onIcon="pi pi-check" offIcon="pi pi-times" 
-												style="display:block;" />
-										</div>
-										
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-											<p:outputLabel for="@next" value="Respostas" />
-											<p:selectBooleanButton
-												value="#{downloadBean.setDownload.respostasQuestao}"
-												onLabel="Sim" offLabel="Não"
-												onIcon="pi pi-check" offIcon="pi pi-times" 
-												style="display:block;" />
-										</div>
-										
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-											<p:outputLabel for="@next" value="Identificação" />
-											<p:selectBooleanButton
-												value="#{downloadBean.setDownload.identificacaoQuestao}"
-												onLabel="Sim" offLabel="Não"
-												onIcon="pi pi-check" offIcon="pi pi-times" 
-												style="display:block;" />
-										</div>
-									</div>
-								</p:fieldset>
-							</div>
-							<div class="col-12 xl:col-6">
-							<p:fieldset legend="Exercícios" style="margin-bottom:1rem;width:100%;">
-							 	<div class="ui-fluid formgrid grid">
-							 	
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Resolução" />
-										<p:selectBooleanButton
-											value="#{downloadBean.setDownload.resolucaoExercicio}"
-											onLabel="Sim" offLabel="Não"
-											onIcon="pi pi-check" offIcon="pi pi-times" 
-											style="display:block;" />
-									</div>
-									
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Respostas" />
-										<p:selectBooleanButton
-											value="#{downloadBean.setDownload.respostasExercicio}"
-											onLabel="Sim" offLabel="Não"
-											onIcon="pi pi-check" offIcon="pi pi-times" 
-											style="display:block;" />
-									</div>
-									
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Identificação" />
-										<p:selectBooleanButton
-											value="#{downloadBean.setDownload.identificacaoExercicio}"
-											onLabel="Sim" offLabel="Não"
-											onIcon="pi pi-check" offIcon="pi pi-times" 
-											style="display:block;" />
-									</div>
-									
-									<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Nível 1" />
-										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
-											title="Número de listas de exercícios de Nível 1"
-											value="#{downloadBean.setDownload.quantidadeNivel1}"
-											required="true" />
-									</div>
-									
-										<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Nível 2" />
-										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
-											title="Número de listas de exercícios de Nível 2"
-											value="#{downloadBean.setDownload.quantidadeNivel2}"
-											required="true" />
-									</div>
-									
-									<div class="field col-6 md:col-4 lg:col-2 xl:col-2">
-										<p:outputLabel for="@next" value="Nível 3" />
-										<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
-											title="Número de listas de exercícios de Nível 3"
-											value="#{downloadBean.setDownload.quantidadeNivel3}"
-											required="true" />
-									</div>
-								</div>
-							</p:fieldset>
-						</div>
-						</div>
-						
-					<p:divider />
-			
-					<div class="p-grid" style="margin-top:1rem">
-						
-						<div class="p-col-12 p-text-right" >
-						
-							<p:commandButton value="Download" ajax="false"  style="margin-right:15px;"
-							icon="pi pi-download"  process="@form" update="@form, :growl" 
-							onclick="PrimeFaces.monitorDownload('','');" 
-							styleClass="ui-button-raised ui-button-flat">
-								<p:fileDownload value="#{downloadBean.download()}"/>
-							</p:commandButton>
-							
-							<p:commandButton ajax="false"  style="margin-right:15px;"
-							icon="pi pi-instagram"  process="@form" update="@form, :growl" 
-							onclick="PrimeFaces.monitorDownload('','');" 
-							rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
-							styleClass="rounded-button ui-button-flat">
-								<p:fileDownload value="#{downloadBean.downloadInstagram(true)}"/>
-							</p:commandButton>
-							
-							<p:commandButton ajax="false"  style="margin-right:15px;"
-							icon="fa-brands fa-tiktok"  process="@form" update="@form, :growl" 
-							onclick="PrimeFaces.monitorDownload('','');" 
-							rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
-							styleClass="rounded-button ui-button-flat">
-								<p:fileDownload value="#{downloadBean.downloadInstagram(false)}"/>
-							</p:commandButton>
-							
-						</div>
-					</div>
-					
-					<f:websocket channel="push">
-						<f:ajax event="update" render="form:progressBar form:mensagem" />
-					</f:websocket>
-					
-					<p:progressBar id="progressBar" value="#{downloadBean.porcentagem*100}" 
-      				style="margin-top:20px;width:100%;height:0.5rem!important;" />
-		       		
-		       		<p:staticMessage id="mensagem" severity="info" summary="Conteúdo baixado" display="text"
-		       		detail="#{downloadBean.totalExercicios} exercícios, #{downloadBean.totalQuestoes} questões,  
-		       		#{downloadBean.totalPaginas} páginas, porcentagem concluída: #{downloadBean.getPorcentagemInteiro()} \%" 
-		       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
-		   		</p:panel>
-			   		
-					
-			</div>
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Download" />
+	</ui:define>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Gerais</h4>
+
+		<div class="ui-fluid gride mb-3">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Nome do Arquivo" />
+				<p:inputText placeholder="Nome do Arquivo"
+					value="#{downloadBean.setDownload.nomeArquivo}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Anotações" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.anotacao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Assuntos" />
+				<p:selectCheckboxMenu emptyLabel="Escolha os Assuntos" updateLabel="true"
+					value="#{downloadBean.setDownload.assuntosCurso}"
+					converter="generic"
+					multiple="true" filter="true" filterMatchMode="contains" dynamic="true">
+					<f:attribute name="collectionType" value="java.util.ArrayList" />
+					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+						var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+						itemValue="#{assuntoCurso}" />
+				</p:selectCheckboxMenu>
+			</h:panelGroup>
+
 		</div>
+
+		<h4 class="title-divisor">Questões</h4>
+
+		<div class="ui-fluid gride mb-3">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Questões" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.questao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Resolução" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.resolucaoQuestao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Respostas" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.respostasQuestao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Identificação" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.identificacaoQuestao}" />
+			</h:panelGroup>
+
+		</div>
+
+		<h4 class="title-divisor">Exercícios</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Resolução" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.resolucaoExercicio}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Respostas" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.respostasExercicio}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Identificação" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{downloadBean.setDownload.identificacaoExercicio}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Nível 1" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 1"
+					value="#{downloadBean.setDownload.quantidadeNivel1}"
+					required="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Nível 2" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 2"
+					value="#{downloadBean.setDownload.quantidadeNivel2}"
+					required="true" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-4 lg:col-2 xl:col-2">
+				<p:outputLabel for="@next" value="Nível 3" />
+				<p:inputNumber minValue="0" maxValue="1000" decimalPlaces="0"
+					title="Número de listas de exercícios de Nível 3"
+					value="#{downloadBean.setDownload.quantidadeNivel3}"
+					required="true" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div></div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Download" ajax="false"
+					icon="pi pi-download" process="@form" update="@form, :growl"
+					styleClass="ui-button-raised ui-button-primary">
+					<p:fileDownload value="#{downloadBean.download()}" />
+				</p:commandButton>
+
+				<p:commandButton ajax="false"
+					icon="pi pi-instagram" process="@form" update="@form, :growl"
+					onclick="PrimeFaces.monitorDownload('','');"
+					rendered="#{autenticacaoBean.usuario.perfil == 'Admin'}"
+					styleClass="rounded-button ui-button-flat">
+					<p:fileDownload value="#{downloadBean.downloadInstagram(true)}" />
+				</p:commandButton>
+
+				<p:commandButton ajax="false"
+					icon="fa-brands fa-tiktok" process="@form" update="@form, :growl"
+					onclick="PrimeFaces.monitorDownload('','');"
+					rendered="#{autenticacaoBean.usuario.perfil == 'Admin'}"
+					styleClass="rounded-button ui-button-flat">
+					<p:fileDownload value="#{downloadBean.downloadInstagram(false)}" />
+				</p:commandButton>
+
+			</div>
+
+		</div>
+
+		<f:websocket channel="push">
+			<f:ajax event="update" render="form:progressBar form:mensagem" />
+		</f:websocket>
+
+		<p:progressBar id="progressBar" value="#{downloadBean.porcentagem * 100}"
+			style="margin-top:1rem;width:100%;height:0.5rem!important;" />
+
+		<p:staticMessage id="mensagem" severity="info" summary="Conteúdo baixado"
+			detail="#{downloadBean.totalExercicios} exercícios, #{downloadBean.totalQuestoes} questões, #{downloadBean.totalPaginas} páginas — #{downloadBean.porcentagemInteiro}% concluído"
+			display="text"
+			style="background: #ecf1ff !important;margin:1rem 0 0 0;width:100%" />
+
 	</h:form>
-	
-	
+
 </ui:decorate>
-	

@@ -1,11 +1,16 @@
 package service.usuario;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.itextpdf.text.pdf.PdfReader;
+
+import dao.configuracao.ConfigControleAcessoDAO;
 import dao.usuario.ControleAcessoDAO;
 import filtro.usuario.FiltroControleAcesso;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import modelo.configuracao.ConfigControleAcesso;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
@@ -13,31 +18,41 @@ import modelo.usuario.Usuario;
 @ApplicationScoped
 public class ControleAcessoService
 {
-	static final int LIMITE_DOWNLOAD_EXERCICIO  = 5;
-	static final int LIMITE_DOWNLOAD_QUESTAO    = 5;
-	static final int LIMITE_RESOLUCAO_EXERCICIO = 50;
-	static final int LIMITE_RESOLUCAO_QUESTAO   = 50;
-	static final int LIMITE_QUESTAO_FEITA       = 50;
-
 	@Inject
 	private ControleAcessoDAO controleAcessoDAO;
+
+	@Inject
+	private ConfigControleAcessoDAO configControleAcessoDAO;
+
+	private ConfigControleAcesso getConfig()
+	{
+		return configControleAcessoDAO.buscar();
+	}
 
 	public List<ControleAcesso> buscar(FiltroControleAcesso filtro)
 	{
 		return controleAcessoDAO.buscar(filtro);
 	}
 
-	// --- regras de autorização ---
-
-	public boolean podeFazerDownloadMassa(Usuario usuario)
+	public ControleAcesso carregarOuCriar(Usuario usuario)
 	{
 		if(usuario == null)
-			return false;
+			return null;
 
-		return usuario.getPerfil() != PerfilUsuario.Bronze;
+		ControleAcesso controleAcesso = controleAcessoDAO.controleAcessoMes(usuario);
+		if(controleAcesso == null)
+		{
+			controleAcesso = new ControleAcesso();
+			controleAcesso.setUsuario(usuario);
+			controleAcesso.limpar();
+			controleAcessoDAO.salvar(controleAcesso);
+		}
+		return controleAcesso;
 	}
 
-	public boolean podeFazerDownloadExercicio(Usuario usuario, ControleAcesso controleAcesso)
+	// --- regras de autorização ---
+
+	public boolean podeFazerDownload(Usuario usuario, ControleAcesso controleAcesso)
 	{
 		if(usuario == null || controleAcesso == null)
 			return false;
@@ -45,18 +60,9 @@ public class ControleAcessoService
 		if(usuario.getPerfil() != PerfilUsuario.Bronze)
 			return true;
 
-		return controleAcesso.getNumDownloadExercicio() < LIMITE_DOWNLOAD_EXERCICIO;
-	}
-
-	public boolean podeFazerDownloadQuestao(Usuario usuario, ControleAcesso controleAcesso)
-	{
-		if(usuario == null || controleAcesso == null)
-			return false;
-
-		if(usuario.getPerfil() != PerfilUsuario.Bronze)
-			return true;
-
-		return controleAcesso.getNumDownloadQuestao() < LIMITE_DOWNLOAD_QUESTAO;
+		ConfigControleAcesso config = getConfig();
+		int limite = config != null ? config.getLimitePaginasBaixadas() : 100;
+		return controleAcesso.getNumPaginasBaixadas() < limite;
 	}
 
 	public boolean podeResolucaoExercicio(Usuario usuario, ControleAcesso controleAcesso)
@@ -67,7 +73,9 @@ public class ControleAcessoService
 		if(usuario.getPerfil() != PerfilUsuario.Bronze)
 			return true;
 
-		return controleAcesso.getNumResolucaoExercicio() < LIMITE_RESOLUCAO_EXERCICIO;
+		ConfigControleAcesso config = getConfig();
+		int limite = config != null ? config.getLimiteResolucaoExercicio() : 50;
+		return controleAcesso.getNumResolucaoExercicio() < limite;
 	}
 
 	public boolean podeResolucaoQuestao(Usuario usuario, ControleAcesso controleAcesso)
@@ -78,7 +86,9 @@ public class ControleAcessoService
 		if(usuario.getPerfil() != PerfilUsuario.Bronze)
 			return true;
 
-		return controleAcesso.getNumResolucaoQuestao() < LIMITE_RESOLUCAO_QUESTAO;
+		ConfigControleAcesso config = getConfig();
+		int limite = config != null ? config.getLimiteResolucaoQuestao() : 50;
+		return controleAcesso.getNumResolucaoQuestao() < limite;
 	}
 
 	public boolean podeFazerQuestao(Usuario usuario, ControleAcesso controleAcesso)
@@ -89,39 +99,28 @@ public class ControleAcessoService
 		if(usuario.getPerfil() != PerfilUsuario.Bronze)
 			return true;
 
-		return controleAcesso.getNumQuestaoFeita() < LIMITE_QUESTAO_FEITA;
+		ConfigControleAcesso config = getConfig();
+		int limite = config != null ? config.getLimiteQuestaoFeita() : 50;
+		return controleAcesso.getNumQuestaoFeita() < limite;
 	}
 
 	// --- registro de eventos ---
 
-	public void registrarDownloadExercicio(ControleAcesso controleAcesso)
+	public void registrarDownload(ControleAcesso controleAcesso, String pdfPath)
 	{
 		if(controleAcesso == null)
 			return;
 
-		controleAcesso.incrementaDownloadExercicio();
-		controleAcessoDAO.salvar(controleAcesso);
+		int paginas = contarPaginas(pdfPath);
+		registrarDownload(controleAcesso, paginas);
 	}
 
-	public void registrarDownloadQuestao(ControleAcesso controleAcesso, boolean massa)
+	public void registrarDownload(ControleAcesso controleAcesso, int paginas)
 	{
 		if(controleAcesso == null)
 			return;
 
-		if(massa)
-			controleAcesso.incrementaDownloadQuestaoMassa();
-		else
-			controleAcesso.incrementaDownloadQuestao();
-
-		controleAcessoDAO.salvar(controleAcesso);
-	}
-
-	public void registrarDownloadMassa(ControleAcesso controleAcesso)
-	{
-		if(controleAcesso == null)
-			return;
-
-		controleAcesso.incrementaDownloadMassa();
+		controleAcesso.incrementaPaginasBaixadas(paginas);
 		controleAcessoDAO.salvar(controleAcesso);
 	}
 
@@ -150,5 +149,21 @@ public class ControleAcessoService
 
 		controleAcesso.incrementaQuestaoFeita();
 		controleAcessoDAO.salvar(controleAcesso);
+	}
+
+	private int contarPaginas(String pdfPath)
+	{
+		try
+		{
+			PdfReader reader = new PdfReader(pdfPath);
+			int paginas = reader.getNumberOfPages();
+			reader.close();
+			return paginas;
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			return 0;
+		}
 	}
 }

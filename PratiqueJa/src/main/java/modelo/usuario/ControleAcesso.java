@@ -37,17 +37,8 @@ public class ControleAcesso implements Serializable, Entidade
 	@AuditLabel(value = "data", genero = GeneroGramatical.FEMININO)
 	private LocalDate data;
 
-	@AuditLabel(value = "downloads de exercício")
-	private int numDownloadExercicio;
-
-	@AuditLabel(value = "downloads de questão", genero = GeneroGramatical.FEMININO)
-	private int numDownloadQuestao;
-
-	@AuditLabel(value = "downloads de questão em massa", genero = GeneroGramatical.FEMININO)
-	private int numDownloadQuestaoMassa;
-
-	@AuditLabel(value = "downloads em massa")
-	private int numDownloadMassa;
+	@AuditLabel(value = "páginas baixadas", genero = GeneroGramatical.FEMININO)
+	private int numPaginasBaixadas;
 
 	@AuditLabel(value = "resoluções de exercício", genero = GeneroGramatical.FEMININO)
 	private int numResolucaoExercicio;
@@ -60,20 +51,14 @@ public class ControleAcesso implements Serializable, Entidade
 
 	public void limpar()
 	{
-		data = LocalDate.now();
-		numDownloadExercicio = 0;
-		numDownloadQuestao = 0;
+		data = LocalDate.now().withDayOfMonth(1);
+		numPaginasBaixadas = 0;
 		numResolucaoExercicio = 0;
 		numResolucaoQuestao = 0;
 		numQuestaoFeita = 0;
-		numDownloadQuestaoMassa = 0;
-		numDownloadMassa = 0;
 	}
 
-	public void incrementaDownloadExercicio() { numDownloadExercicio++; }
-	public void incrementaDownloadQuestao() { numDownloadQuestao++; }
-	public void incrementaDownloadQuestaoMassa() { numDownloadQuestaoMassa++; }
-	public void incrementaDownloadMassa() { numDownloadMassa++; }
+	public void incrementaPaginasBaixadas(int paginas) { numPaginasBaixadas += paginas; }
 	public void incrementaResolucaoExercicio() { numResolucaoExercicio++; }
 	public void incrementaResolucaoQuestao() { numResolucaoQuestao++; }
 	public void incrementaQuestaoFeita() { numQuestaoFeita++; }

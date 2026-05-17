@@ -23,25 +23,22 @@ public class ControleAcessoDAO extends DAO<ControleAcesso>
 		super(ControleAcesso.class);
 	}
 
-	public ControleAcesso controleAcessoHoje(Usuario usuario)
+	public ControleAcesso controleAcessoMes(Usuario usuario)
 	{
-		
-		
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ControleAcesso> query = builder.createQuery(ControleAcesso.class);
 		Root<ControleAcesso> fromControleAcesso = query.from(ControleAcesso.class);
-		
+
 		List<Predicate> predicates = new ArrayList<>();
-		
-		LocalDate hoje=LocalDate.now();
-		predicates.add(builder.equal(fromControleAcesso.get("data"), hoje));
-		
+
+		LocalDate primeiroDiaMes = LocalDate.now().withDayOfMonth(1);
+		predicates.add(builder.equal(fromControleAcesso.get("data"), primeiroDiaMes));
 		predicates.add(builder.equal(fromControleAcesso.get("usuario").get("id"), usuario.getId()));
 
 		TypedQuery<ControleAcesso> typedQuery = em.createQuery(query.select(fromControleAcesso)
 		.where(predicates.toArray(new Predicate[0])));
 		List<ControleAcesso> list = typedQuery.getResultList();
-		
+
 		return list.isEmpty() ? null : list.get(0);
 	}
 	

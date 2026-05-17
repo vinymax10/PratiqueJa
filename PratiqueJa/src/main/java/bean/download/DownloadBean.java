@@ -62,10 +62,14 @@ public class DownloadBean implements Serializable
 
 	public StreamedContent download()
 	{
+		System.out.println("download");
 		if (!verificarAcesso())
 			return null;
 
+		System.out.println("download 1");
+		System.out.println("setDownload: "+setDownload);
 		int totalPartes = montadorPdfService.calcularTotalPartes(setDownload);
+		
 		if (totalPartes == 0)
 		{
 			if (setDownload.getAssuntosCurso().isEmpty())
@@ -84,7 +88,8 @@ public class DownloadBean implements Serializable
 							+ ", ou diminua a quantidade do número de listas de exercícios.");
 			return null;
 		}
-
+		System.out.println("download 3");
+		
 		logger.fine(setDownload.toString());
 		porcentagem = 0;
 		Usuario usuario = prepararUsuario();
@@ -97,8 +102,8 @@ public class DownloadBean implements Serializable
 				diretorio, basePath, p -> { porcentagem = p; push.send("update"); });
 
 		StreamedContent file = buildStreamedContent(bytes, resolverNomeArquivo());
+		controleAcessoBean.registrarDownload(montadorPdfService.getTotalPaginas());
 		diretorioService.freeDiretorio(diretorio);
-		controleAcessoBean.registrarDownloadMassa();
 		return file;
 	}
 
@@ -122,9 +127,9 @@ public class DownloadBean implements Serializable
 				diretorio, programacaoPost, feed, p -> { porcentagem = p; push.send("update"); });
 
 		StreamedContent file = buildStreamedContent(bytes, resolverNomeArquivo());
+		controleAcessoBean.registrarDownload(montadorPdfService.getTotalPaginas());
 		diretorioService.freeDiretorio(diretorio);
 		ColorHolder.clear();
-		controleAcessoBean.registrarDownloadMassa();
 		return file;
 	}
 
@@ -132,9 +137,10 @@ public class DownloadBean implements Serializable
 	{
 		if (!controleAcessoBean.verificaEstaLogado())
 			return false;
-		if (!controleAcessoBean.podeFazerDownloadMassa())
+		
+		if (!controleAcessoBean.podeFazerDownload())
 		{
-			controleAcessoBean.showUpgrade("Este recurso está disponível somente para os perfis Prata ou Ouro."
+			controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido."
 					+ "\nPor favor faça o upgrade de sua conta.");
 			return false;
 		}
