@@ -11,10 +11,12 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import dao.usuario.TurmaDAO;
 import exceptions.RelacaoException;
+import lombok.Data;
 import modelo.usuario.Turma;
 import filtro.usuario.FiltroTurma;
 import bean.util.Mensagem;
 
+@Data
 @Named
 @ViewScoped
 public class TurmaBean implements Serializable
@@ -67,7 +69,7 @@ public class TurmaBean implements Serializable
 	{
 		try
 		{
-			turma=turmaDAO.salvar(turma);
+			turma = turmaDAO.salvar(turma);
 			lista = true;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salva com sucesso.");
 		}
@@ -89,7 +91,7 @@ public class TurmaBean implements Serializable
 			lista = true;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removida com sucesso.");
 		}
-		catch (RelacaoException e)
+		catch(RelacaoException e)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
 		}
@@ -100,10 +102,10 @@ public class TurmaBean implements Serializable
 		}
 		return "";
 	}
-	
+
 	private void podeRemover() throws RelacaoException
 	{
-		if (turma.getAlunos().size() > 0)
+		if(!turma.getAlunos().isEmpty())
 			throw new RelacaoException("Não foi possível remover a " + nome + ". Existem alunos relacionados.");
 	}
 
@@ -117,7 +119,7 @@ public class TurmaBean implements Serializable
 	{
 		this.turmas = turmaDAO.buscar(filtroTurma);
 	}
-	
+
 	@PostConstruct
 	public void init()
 	{
@@ -129,83 +131,4 @@ public class TurmaBean implements Serializable
 		cadastro = false;
 		lista = false;
 	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public Turma getTurma()
-	{
-		return turma;
-	}
-
-	public void setTurma(Turma turma)
-	{
-		this.turma = turma;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
-	public List<Turma> getTurmas()
-	{
-		return turmas;
-	}
-
-	public void setTurmas(List<Turma> turmas)
-	{
-		this.turmas = turmas;
-	}
-
-	public FiltroTurma getFiltroTurma()
-	{
-		return filtroTurma;
-	}
-
-	public void setFiltroTurma(FiltroTurma filtroTurma)
-	{
-		this.filtroTurma = filtroTurma;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
-	public void setActiveIndex(int activeIndex)
-	{
-		this.activeIndex = activeIndex;
-	}
-
-	public List<Turma> getTodasTurmas() {
-		return todasTurmas;
-	}
-
-	public void setTodasTurmas(List<Turma> todasTurmas) {
-		this.todasTurmas = todasTurmas;
-	}
-
 }

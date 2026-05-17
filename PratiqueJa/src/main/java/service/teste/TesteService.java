@@ -5,13 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import dao.teste.TesteDAO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import modelo.matematica.Conta;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.Teste;
 
-@Named
 @ApplicationScoped
 public class TesteService
 {

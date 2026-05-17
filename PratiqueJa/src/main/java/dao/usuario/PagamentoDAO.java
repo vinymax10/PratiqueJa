@@ -36,16 +36,15 @@ public class PagamentoDAO extends DAO<Pagamento>
 		if(filtro.getId() != null)
 			predicates.add(builder.equal(fromPagamento.get("id"), filtro.getId()));
 
-		if(filtro.getPeriodo() != null)
-	    {
-	    	if(filtro.getPeriodo().size()>0)
-		    	predicates.add(builder.greaterThanOrEqualTo(
-		    	fromPagamento.get("data"), filtro.getPeriodo().get(0)));
-	    	
-	    	if(filtro.getPeriodo().size()>1)
-	    		predicates.add(builder.lessThanOrEqualTo(
-	    		fromPagamento.get("data"), filtro.getPeriodo().get(1)));
-	    }
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(
+				fromPagamento.get("data"), filtro.getPeriodo().get(0)));
+
+			if(filtro.getPeriodo().size() > 1)
+				predicates.add(builder.lessThanOrEqualTo(
+					fromPagamento.get("data"), filtro.getPeriodo().get(1)));
+		}
 		
 		if(filtro.getValor() != null)
 			predicates.add(builder.equal(fromPagamento.get("valor"), filtro.getValor()));
@@ -82,7 +81,7 @@ public class PagamentoDAO extends DAO<Pagamento>
 		TypedQuery<Pagamento> typedQuery = em.createQuery(query.select(fromPagamento).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Pagamento> list = typedQuery.getResultList();
 		
-		return list.size()!=0;
+		return !list.isEmpty();
 	}
 	
 }

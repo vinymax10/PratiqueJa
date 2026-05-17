@@ -7,7 +7,7 @@
 <h:body>
 	<ui:composition>
 			<div  class="col-12 md:col-6 xl:col-4">
-			<p:card style="margin:10px;width: auto;">
+			<p:card class="newBorder p-3 card-fill" style="margin:10px;width: auto;">
 
 				<div style="display: flex; flex-direction: column;">
 					<div style="display: flex; flex-direction: row;">
@@ -71,7 +71,7 @@
 
 								<p:commandButton id="responder_#{conta.index}" action="#{exercicioBean.responder(conta)}"
 								styleClass="ui-button-outlined  ui-button-secondary" ajax="true"
-								icon="fa-solid fa-reply"
+								icon="fa-regular fa-eye"
 								oncomplete="reloadMathJax();" process="@parent"
 								update="@form" >
 									<p:defaultCommand target="form:responder_#{conta.index}"/>

@@ -1,148 +1,80 @@
 package bean.questao;
 
-import java.io.Serializable;
+import java.util.EnumSet;
 
-import bean.util.Mensagem;
-import jakarta.faces.application.FacesMessage;
+import bean.FilhoBean;
+import dao.questao.AlternativaDAO;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import dao.questao.AlternativaDAO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.auditoria.TipoEvento;
 import modelo.questao.Alternativa;
 import modelo.questao.Questao;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class AlternativaBean implements Serializable
+public class AlternativaBean extends FilhoBean<Alternativa, AlternativaDAO>
 {
 	private static final long serialVersionUID = 1L;
 
-	String nome = "Alternativa";
-
-	private Alternativa alternativa;
-
-	private boolean lista = true;
-	private boolean cadastro = false;
-
 	@Inject
-	private GestaoQuestaoBean gestaoQuestaoBean;
+	private QuestaoBean questaoBean;
 
-	@Inject
-	private AlternativaDAO alternativaDAO;
+	public AlternativaBean()
+	{
+		super(Alternativa.class, "Alternativa");
+		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
+	}
 
 	public String cadastrar()
 	{
+		entidade = new Alternativa();
+		entidade.setQuestao(questaoBean.getEntidade());
 		cadastro = true;
-		lista = false;
-		alternativa = new Alternativa();
 		return "";
 	}
 
 	public String adicionar()
 	{
-		try
-		{
-			Questao questao = gestaoQuestaoBean.getQuestao();
-			alternativa.setQuestao(questao);
-			alternativa.setOrdem(questao.getAlternativas().size());
-			questao.getAlternativas().add(alternativa);
-			alternativaDAO.salvar(alternativa);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionada com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar a " + nome);
-		}
-		return "";
+		return adicionar(() -> {
+			Questao questao = questaoBean.getEntidade();
+			entidade.setOrdem(questao.getAlternativas().size());
+			questao.getAlternativas().add(entidade);
+			if(questao.getId() != null)
+			{
+				questao = questaoBean.somenteSalvar();
+				entidade = questao.getAlternativas().get(entidade.getOrdem());
+			}
+		});
 	}
 
 	public String salvar()
 	{
-		try
-		{
-			alternativa=alternativaDAO.salvar(alternativa);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salva com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar a " + nome);
-		}
-		return "";
+		return salvar(
+		() -> {
+			mapper.update(entidade, entidadeOriginal);
+		},
+		() -> {
+			Questao questao = questaoBean.getEntidade();
+			if(questao.getId() != null)
+				questaoBean.somenteSalvar();
+		});
 	}
 
 	public String remover()
 	{
-		try
-		{
-			Questao questao = gestaoQuestaoBean.getQuestao();
-			questao.getAlternativas().remove(alternativa);
-			alternativaDAO.remover(alternativa);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removida com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover a " + nome);
-		}
-		return "";
+		return remover(() -> {
+			Questao questao = questaoBean.getEntidade();
+			questao.getAlternativas().remove(entidade);
+			if(questao.getId() != null)
+			{
+				questao = questaoBean.somenteSalvar();
+				onRowReorder(questao.getAlternativas());
+			}
+		});
 	}
-
-	public String cancelar()
-	{
-		lista = true;
-		return "";
-	}
-
-	public void onSelected()
-	{
-		cadastro = false;
-		lista = false;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public Alternativa getAlternativa()
-	{
-		return alternativa;
-	}
-
-	public void setAlternativa(Alternativa alternativa)
-	{
-		this.alternativa = alternativa;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
 }

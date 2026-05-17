@@ -1,6 +1,7 @@
 package dao.usuario;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,9 +132,11 @@ public class UsuarioDAO extends DAO<Usuario>
 		{
 			predicates.add(builder.equal(fromAcesso.get("usuario").get("id"), usuario.getId()));
 
-			predicates.add(builder.lessThanOrEqualTo(fromAcesso.get("data"), fim));
+			predicates.add(builder.greaterThanOrEqualTo(
+				fromAcesso.<LocalDateTime>get("inicio"), inicio.atStartOfDay()));
 
-			predicates.add(builder.greaterThanOrEqualTo(fromAcesso.get("data"), inicio));
+			predicates.add(builder.lessThanOrEqualTo(
+				fromAcesso.<LocalDateTime>get("inicio"), fim.atTime(23, 59, 59)));
 		}
 
 		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])).distinct(true));

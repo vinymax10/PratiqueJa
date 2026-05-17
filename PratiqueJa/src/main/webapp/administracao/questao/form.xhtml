@@ -1,0 +1,210 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{questaoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewParam name="chave" value="#{questaoBean.chave}" />
+	    <f:viewParam name="cadastro" value="#{questaoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+	    <f:viewAction action="#{questaoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<h4 class="title-divisor" >Questão</h4>
+
+		<div class="ui-fluid gride" >
+			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
+				<p:outputLabel for="@next" value="Disciplina" />
+				<p:selectOneMenu value="#{questaoBean.entidade.disciplina}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{disciplinaBean.opcoes}" var="disciplina"
+					itemLabel="#{disciplina.nome}" itemValue="#{disciplina}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+			
+			<div class="campo col-12 md:col-6 lg:col-6 xl:col-5">
+				<h:panelGroup id="assunto">	
+                   		<p:outputLabel  class="p-mt-0" for="@next" value="Assunto" />
+					<p:selectCheckboxMenu value="#{questaoBean.entidade.assuntos}" multiple="true"
+					filter="true" filterMatchMode="contains"
+					dynamic="true">
+						<f:attribute name="collectionType" value="java.util.ArrayList" />
+						<f:selectItems value="#{questaoBean.entidade.disciplina.assuntos}" 
+	                    var="assunto" itemLabel="#{assunto.nome}" itemValue="#{assunto}"/>
+					</p:selectCheckboxMenu>
+					
+				</h:panelGroup>
+			</div>
+			
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Assunto Curso" />
+				<p:selectOneMenu value="#{questaoBean.entidade.assuntoCurso}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+					var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+					itemValue="#{assuntoCurso}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<div class="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Ordem Inserção"/>
+				<p:inputText value="#{questaoBean.entidade.ordemInsercao}" required="true"
+				 requiredMessage="Por favor informe a Ordem Inserção."/>
+			</div>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Ano" />
+				<p:selectOneMenu value="#{questaoBean.entidade.ano}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{anoBean.opcoes}" var="ano"
+					itemLabel="#{ano.nome}" itemValue="#{ano}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Dificuldade" />
+				<p:selectOneMenu value="#{questaoBean.entidade.dificuldade}">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{questaoBean.dificuldadeValues}" var="d"
+					itemLabel="#{d.nome}" itemValue="#{d}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-9 xl:col-6">
+				<p:outputLabel for="@next" value="Chave" />
+				<p:inputText value="#{questaoBean.entidade.chave}" maxlength="255" />
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Banca" />
+				<p:selectOneMenu value="#{questaoBean.entidade.banca}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{bancaBean.opcoes}" var="banca"
+					itemLabel="#{banca.nome}" itemValue="#{banca}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Órgão" />
+				<p:selectOneMenu value="#{questaoBean.entidade.orgao}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{orgaoBean.opcoes}" var="orgao"
+					itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="campo col-12 md:col-12 lg:col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Prova" />
+				<p:inputText value="#{questaoBean.entidade.prova}" maxlength="255" />
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Revisada" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{questaoBean.entidade.revisada}" />
+			</h:panelGroup>
+
+		</div>
+
+		<ui:include rendered="#{!questaoBean.cadastro}"
+		src="/administracao/questao/paragrafo/paragrafo.xhtml" />
+
+		<ui:include rendered="#{!questaoBean.cadastro}"
+		src="/administracao/questao/alternativa/alternativa.xhtml" />
+			
+		<h4 class="title-divisor" >Resolução</h4>
+			
+		<div class="ui-fluid gride" >
+			<div class="gride col-12 p-0">
+														
+				 <div class="campo col-6">
+					<p:outputLabel for="@next" value="Resolução"/>
+					<p:inputTextarea rows="10" value="#{questaoBean.entidade.resolucao}"  />
+				</div>
+				<div class="campo col-6">
+					<p:outputLabel  for="@next" value="Resolução" style="display:block;margin-bottom:15px;"/>
+					<p:outputLabel id="resolucao"  value="#{questaoBean.entidade.resolucao}"/>
+				</div>
+				
+			</div>
+		</div>
+		<div class="content-button" >
+
+			<div class="divisor" ></div>
+
+		    <div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!questaoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{questaoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover esta Questão?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !questaoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(questaoBean.entidade, questaoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/questao/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{questaoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{questaoBean.adicionar(true)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!questaoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{questaoBean.salvar(true)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+	<ui:include src="/administracao/questao/paragrafo/dialog-cadastro.xhtml" />
+
+	<ui:include src="/administracao/questao/alternativa/dialog-cadastro.xhtml" />
+
+</ui:decorate>

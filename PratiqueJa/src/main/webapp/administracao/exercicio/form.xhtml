@@ -1,0 +1,109 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{exercicioBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewParam name="chave" value="#{exercicioBean.chave}" />
+		<f:viewParam name="cadastro" value="#{exercicioBean.cadastro}" converter="jakarta.faces.Boolean"/>
+		<f:viewAction action="#{exercicioBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Exercício</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-5">
+				<p:outputLabel for="@next" value="Exercício Padrão" />
+				<p:selectOneMenu value="#{exercicioBean.entidade.exercicioPadrao}"
+				converter="generic" filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O exercício padrão é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{exercicioPadraoBean.listaTudo}" var="ep"
+					itemLabel="#{ep.assuntoCurso.modulo.nome} - #{ep.assuntoCurso.nome} - #{ep.nivel.nome}"
+					itemValue="#{ep}"/>
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-5">
+				<p:outputLabel for="@next" value="Usuário" />
+				<p:selectOneMenu value="#{exercicioBean.entidade.usuario}"
+				converter="generic" filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O usuário é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{usuarioBean.todosUsuarios}" var="usuario"
+					itemLabel="#{usuario.nome}" itemValue="#{usuario}"/>
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-2">
+				<p:outputLabel for="@next" value="Prazo" />
+				<p:datePicker value="#{exercicioBean.entidade.prazo}"
+				locale="pt" monthNavigator="true" yearNavigator="select"
+				focusOnSelect="true" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!exercicioBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{exercicioBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Exercício?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/exercicio/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{exercicioBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{exercicioBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!exercicioBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{exercicioBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

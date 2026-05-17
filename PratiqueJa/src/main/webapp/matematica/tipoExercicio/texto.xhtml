@@ -7,7 +7,7 @@
 <h:body>
 	<ui:composition>
 			<div  class="col-12 md:col-6 xl:col-4">
-			<p:card style="margin:10px;width: auto;">
+			<p:card class="newBorder p-3 card-fill" style="margin:10px;width: auto;">
 
 				<div style="display: flex; flex-direction: column;">
 					<div style="display: flex; flex-direction: row;">
@@ -61,29 +61,25 @@
 								</h:panelGroup>
 							</h:panelGroup>
 
-							<h:panelGroup style="display:block; " rendered="#{!conta.respondida}">
-	<!-- 							<div class="ui-fluid p-formgrid p-grid" style="padding: 0 15px;"> -->
+							<h:panelGroup style="display:block; margin-top:auto;" rendered="#{!conta.respondida}">
+								<div class="ui-inputgroup">
+									<p:inputText id="input_#{conta.index}" value="#{conta.respostaAluno}" required="true"
+										style="text-align: center;"
+										requiredMessage="Informe uma resposta"
+										placeholder="Resposta" >
+										<f:ajax event="change" process="@this" onevent="update"  />
+									</p:inputText>
 									
-									<div class="ui-inputgroup">
-										<p:inputText id="input_#{conta.index}" value="#{conta.respostaAluno}" required="true"
-											style="text-align: center;"
-											requiredMessage="Informe uma resposta"
-											placeholder="Resposta" >
-											<f:ajax event="change" process="@this" onevent="update"  />
-										</p:inputText>
-										
-										<p:commandButton id="responder_#{conta.index}" 
-										action="#{exercicioBean.responder(conta)}"
-										styleClass="ui-button-outlined  ui-button-secondary" ajax="true"
-										icon="fa-solid fa-reply"
-										process="@parent"
-										update="form:resultado_#{conta.index} form:nota" 
-										oncomplete="reloadMathJax(); enableEnterSubmit('form');">
-											<p:defaultCommand target="form:responder_#{conta.index}"/>
-										</p:commandButton>
-									</div>
-									<p:message for="input_#{conta.index}" display="text"/>	 
-	<!-- 							</div> -->
+									<p:commandButton id="responder_#{conta.index}" 
+									action="#{exercicioBean.responder(conta)}"
+									styleClass="ui-button-outlined  ui-button-secondary" ajax="true"
+									icon="fa-regular fa-eye"
+									process="@parent"
+									update="form:resultado_#{conta.index} form:nota" 
+									oncomplete="reloadMathJax(); enableEnterSubmit('form');">
+										<p:defaultCommand target="form:responder_#{conta.index}"/>
+									</p:commandButton>
+								</div>
 							</h:panelGroup>
 						</h:panelGroup>
 					</div>

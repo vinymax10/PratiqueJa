@@ -1,5 +1,7 @@
 :root {
-	--azul: #2687e9;
+		/* --azul: #2687e9;*/
+	
+	--azul: #2669e9;
 	--iris: #6370FF;
 	--muted: rgb(62, 92, 198);
 	--laranja: #DE7B40;
@@ -621,8 +623,8 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 
 .title {
 	font-weight: 600;
-	font-size: 1rem;
-	color: var(--cinza);
+	font-size: 1.1rem;
+	color: var(--cinza-claro);
 }
 
 .assunto {
@@ -637,8 +639,8 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 }
 
 .status {
-	font-size: 1rem;
-	font-weight: 500;
+	font-size: 1.2rem;
+	font-weight: 600;
 	color: var(--azul);
 	word-break: break-all;
 	overflow-wrap: anywhere;
@@ -751,13 +753,31 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 	z-index: 1;
 }
 
-.ui-selectonemenu, .ui-inputfield, .ui-button, .ui-selectcheckboxmenu {
+.ui-selectonemenu, .ui-inputfield,
+ .ui-button, .ui-selectcheckboxmenu {
 	border-radius: 8px !important;
+}
+
+.ui-button-icon-only .ui-button-icon-left,
+.ui-button-icon-only .ui-button-icon-right {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 !important;
 }
 
 .newBorder {
 	box-shadow: 0 0 20px rgba(0, 0, 0, .2) !important;
 	border-radius: 16px !important;
+}
+
+.card-fill.ui-card,
+.card-fill.ui-card .ui-card-body,
+.card-fill.ui-card .ui-card-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }
 
 .resumo {
@@ -856,11 +876,25 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 }
 
 .ui-splitbutton .ui-button.ui-splitbutton-menubutton,
-.ui-inputgroup > .ui-widget {
+.ui-inputgroup > .ui-widget:last-child {
 	border-top-left-radius: 0 !important;
 	border-bottom-left-radius: 0 !important;
 	border-top-right-radius: 8px !important;
 	border-bottom-right-radius: 8px !important;
+}
+
+.ui-inputgroup > .ui-widget:not(:last-child) {
+	border-top-left-radius: 8px !important;
+	border-bottom-left-radius: 8px !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.ui-inputgroup > :not(:last-child) .ui-inputfield {
+	border-top-left-radius: 8px !important;
+	border-bottom-left-radius: 8px !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
 }
 
 .ui-button-login {

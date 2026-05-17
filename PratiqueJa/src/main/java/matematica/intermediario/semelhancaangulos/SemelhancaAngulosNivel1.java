@@ -20,7 +20,7 @@ public class SemelhancaAngulosNivel1 extends Conta
 		try
 		{
 			int tipo = 1 + rand.nextInt(3);
-			clone((Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel1Package.Exercicio" + tipo)
+			clone((Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Exercicio" + tipo)
 			.getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,8 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import bean.PaiBean;
 import bean.download.Diretorio;
-import service.configuracao.DiretorioService;
 import bean.exercicio.ConfigDownload;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
@@ -21,18 +20,27 @@ import dao.questao.AlternativaDAO;
 import dao.questao.QuestaoDAO;
 import dao.questao.ResultadoQuestaoDAO;
 import dao.usuario.UsuarioDAO;
+import exceptions.RelacaoException;
 import filtro.questao.FiltroQuestao;
+import infra.Navegacao;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import modelo.academico.AssuntoCurso;
+import modelo.auditoria.TipoEvento;
 import modelo.questao.Alternativa;
+import modelo.questao.Dificuldade;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
 import pdf.questao.GerarLatexQuestao;
+import service.configuracao.DiretorioService;
 import software.xdev.chartjs.model.charts.BarChart;
 import software.xdev.chartjs.model.data.BarData;
 import software.xdev.chartjs.model.dataset.BarDataset;
@@ -40,71 +48,135 @@ import software.xdev.chartjs.model.enums.IndexAxis;
 import software.xdev.chartjs.model.options.BarOptions;
 import software.xdev.chartjs.model.options.Plugins;
 import software.xdev.chartjs.model.options.Title;
+import util.ClasseAux;
 import web.session.Sessao;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class QuestaoBean implements Serializable
+public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Questao>>
 {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private QuestaoDAO questaoDAO;
-
-	private List<Questao> questoes = new ArrayList<Questao>();
+	private FiltroQuestao filtro;
 
 	@Inject
 	private DiretorioService diretorioService;
-	
+
 	@Inject
 	private UsuarioDAO usuarioDAO;
-	
-	@Inject
-	private FiltroQuestao filtroQuestao;
-	
+
 	@Inject
 	private ConfigDownload configDownload;
-	
+
 	@Inject
 	private ResultadoQuestaoDAO resultadoQuestaoDAO;
-	
-//  --------------Overview-------------
+
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
+	@Inject
+	private AlternativaDAO alternativaDAO;
+
+	private TipoFiltro tipoFiltro;
+
+	// Overview pagination para views de aluno
 	private int index;
-	private List<Questao> questoesOverview = new ArrayList<Questao>();
+	private List<Questao> questoes = new ArrayList<>();
+	private List<Questao> questoesOverview = new ArrayList<>();
 	private int janela = 20;
 	private int inicio;
 	private int fim;
 
-	@Inject
-	private ControleAcessoBean controleAcessoBean;
-	
-	@Inject AlternativaDAO alternativaDAO;
-	
-	private TipoFiltro tipoFiltro;
+	public QuestaoBean()
+	{
+		super(Questao.class, "Questão");
+		urlCadastro = "/administracao/questao/form.xhtml";
+		urlLista    = "/administracao/questao/list.xhtml";
+	}
+
+	@PostConstruct
+	public void postConstruct()
+	{
+		if(tabState.hasState(FiltroQuestao.class))
+			filtro = tabState.getState(FiltroQuestao.class);
+	}
 
 	public void filtrar()
 	{
-		filtroQuestao.setRevisada(true);
-		filtroQuestao.setResolucaoLatex(true);
+		this.lista = entidadeDAO.filtrar(filtro);
+		tabState.putState(filtro);
+	}
 
-		this.questoes = questaoDAO.filtrar(filtroQuestao);
-		setQuestoes();
+	public void filtrarInit()
+	{
+		filtro.limpar();
+		filtrar();
 	}
 	
+	public String remover(Questao questao)
+	{
+		try
+		{
+			validar(!permissao.isPodeRemover(),Mensagem.messagePermissaoNegada());
+			podeRemover(entidade);
+			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
+				auditoriaService.registrarExclusao(classe, entidade.getId(), entidade);
+			
+			if(lista.contains(questao))
+				lista.remove(entidade);
+			
+			getListaTudo().remove(entidade);
+			entidadeDAO.remover(entidade);
+			if(ClasseAux.possuiAtributo(classe, "ordem"))
+				onRowReorder(null);
+			
+			personalizarRemover();
+			
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, nome + " removido(a) com sucesso.");
+			Navegacao.redirect(urlLista);
+		}
+		catch(RelacaoException e)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o(a) " + nome);
+		}
+		return "";
+	}
+
+	/** Alias para compatibilidade com views existentes. */
+	public FiltroQuestao getFiltroQuestao() { return filtro; }
+	public void setFiltroQuestao(FiltroQuestao f) { this.filtro = f; }
+
+	/** Para views de aluno: carrega questões de um assunto com filtros de revisada/resolução. */
 	public List<Questao> buscaQuestao(AssuntoCurso assuntoCurso)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();
-
-		questoes = questaoDAO.buscaAssuntoCurso(assuntoCurso, tipoFiltro, usuario);
-		setQuestoes();
+		questoes = entidadeDAO.buscaAssuntoCurso(assuntoCurso, tipoFiltro, usuario);
+		atualizarOverview();
 		return questoes;
 	}
-	
+
+	/** Para views de aluno: filtro com revisada=true forçado. */
+	public void filtrarEstudante()
+	{
+		filtro.setRevisada(true);
+		filtro.setResolucaoLatex(true);
+		questoes = entidadeDAO.filtrar(filtro);
+		atualizarOverview();
+	}
+
 	public void toogleResolucaoComentada(Questao questao)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			if(!questao.isShowResolucaoComentada()&&controleAcessoBean.podeResolucaoQuestao())
+			if(!questao.isShowResolucaoComentada() && controleAcessoBean.podeResolucaoQuestao())
 			{
 				questao.toogleResolucaoComentada();
 				if(!questao.isJaMostrouResolucaoComentada())
@@ -113,32 +185,29 @@ public class QuestaoBean implements Serializable
 			else if(questao.isShowResolucaoComentada())
 				questao.toogleResolucaoComentada();
 			else
-			{
 				controleAcessoBean.showUpgrade("Limite diário de acesso as resoluções de questões foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
-			}
-			
+
 			if(!questao.isJaMostrouResolucaoComentada())
 				questao.setJaMostrouResolucaoComentada(true);
 		}
 	}
-	
+
 	public StreamedContent download(boolean massa)
 	{
-		System.out.println(configDownload);
 		Usuario usuario = Sessao.getUsuarioLogado();
 		usuario = usuarioDAO.carrega(usuario.getId());
 		configDownload.setUsuario(usuario);
-		
+
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		
-		GerarLatexQuestao gerarLatex=new GerarLatexQuestao(diretorio);
+
+		GerarLatexQuestao gerarLatex = new GerarLatexQuestao(diretorio);
 		gerarLatex.gerarPDFQuestoes(questoes, configDownload);
 		gerarLatex.gerar();
-		
+
 		File initialFile = new File(diretorio.getEnderecoPdf());
-	    InputStream inStream;
-	    StreamedContent file=null;
+		InputStream inStream;
+		StreamedContent file = null;
 		try
 		{
 			inStream = new FileInputStream(initialFile);
@@ -149,13 +218,12 @@ public class QuestaoBean implements Serializable
 		{
 			e.printStackTrace();
 		}
-		
+
 		diretorioService.freeDiretorio(diretorio);
-		
 		controleAcessoBean.registrarDownloadQuestao(massa);
 		return file;
 	}
-	
+
 	public void podeFazerDownloadAssunto()
 	{
 		if(controleAcessoBean.verificaEstaLogado())
@@ -167,12 +235,12 @@ public class QuestaoBean implements Serializable
 				+ "\nPor favor faça o upgrade de sua conta.");
 		}
 	}
-	
+
 	public void podeFazerDownloadMassa()
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			if(questoes.size()>0)
+			if(questoes.size() > 0)
 			{
 				if(controleAcessoBean.podeFazerDownloadMassa())
 					PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
@@ -185,7 +253,7 @@ public class QuestaoBean implements Serializable
 				+ "Por favor utilize o filtro para carregar as questões.");
 		}
 	}
-	
+
 	public String estaCorreta(Questao questao)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
@@ -194,17 +262,17 @@ public class QuestaoBean implements Serializable
 			{
 				if(questao.getAlternativaEscolhida() != null)
 				{
-					computarAlternaticaEscolhida(questao.getAlternativaEscolhida());
+					computarAlternativaEscolhida(questao.getAlternativaEscolhida());
 					salvarResultadoQuestao(questao);
-					
+
 					if(questao.getAlternativaEscolhida().isCorreta())
 						Mensagem.send("msg", FacesMessage.SEVERITY_INFO, "Resposta correta.");
 					else
 					{
-						Alternativa correta = questaoDAO.getAlternativaCorreta(questao);
+						Alternativa correta = entidadeDAO.getAlternativaCorreta(questao);
 						if(correta != null)
-							Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, 
-							"Resposta errada. A aternativa correta é a letra " + correta.getLetra());
+							Mensagem.send("msg", FacesMessage.SEVERITY_ERROR,
+							"Resposta errada. A alternativa correta é a letra " + correta.getLetra());
 					}
 
 					if(!questao.isJaFezQuestao())
@@ -214,82 +282,81 @@ public class QuestaoBean implements Serializable
 					}
 				}
 				else
-				{
 					Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, "Por favor escolha uma alternativa.");
-				}
 			}
 			else
-			{
 				controleAcessoBean.showUpgrade("Limite diário para resolver as questões foi excedido."
 				+ "\nPor favor faça o upgrade de sua conta.");
-			}
 		}
-
 		return "";
 	}
-	
+
 	private void salvarResultadoQuestao(Questao questao)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();
-		ResultadoQuestao resultadoQuestao = questaoDAO.getResultadoQuestaos(questao, usuario);
+		ResultadoQuestao resultadoQuestao = entidadeDAO.getResultadoQuestaos(questao, usuario);
 
 		if(resultadoQuestao == null)
 			resultadoQuestao = new ResultadoQuestao();
 
 		resultadoQuestao.setUsuario(usuario);
 		resultadoQuestao.setQuestao(questao);
-		
 		resultadoQuestao.setAcertou(questao.getAlternativaEscolhida().isCorreta());
 		resultadoQuestaoDAO.salvar(resultadoQuestao);
 	}
-	
-	private void computarAlternaticaEscolhida(Alternativa alternativa)
+
+	private void computarAlternativaEscolhida(Alternativa alternativa)
 	{
 		alternativa.incrementaQtnEscolhida();
 		alternativaDAO.salvar(alternativa);
 	}
-	
+
 	public void nextOverview()
 	{
 		if(((index + 1) * janela) < questoes.size())
 			index++;
-
-		setQuestoes();
+		atualizarOverview();
 	}
 
 	public void backOverview()
 	{
 		if(index > 0)
 			index--;
-
-		setQuestoes();
+		atualizarOverview();
 	}
 
 	public void firstOverview()
 	{
 		index = 0;
-
-		setQuestoes();
+		atualizarOverview();
 	}
 
 	public void lastOverview()
 	{
-		index = (int) ((questoes.size() - 1) / janela);
-		index = Math.max(index, 0);
-
-		setQuestoes();
+		index = Math.max(0, (questoes.size() - 1) / janela);
+		atualizarOverview();
 	}
 
+	/** Mantido por compatibilidade com GestaoQuestaoBean. */
 	public void setQuestoes()
 	{
-		questoesOverview = new ArrayList<Questao>();
+		atualizarOverview();
+	}
+
+	private void atualizarOverview()
+	{
+		questoesOverview = new ArrayList<>();
 		inicio = index * janela;
 		fim = Math.min(inicio + janela, questoes.size());
-
 		for(int i = inicio; i < fim; i++)
 			questoesOverview.add(questoes.get(i));
 	}
-	
+
+	public Dificuldade[] getDificuldadeValues()
+	{
+		return Dificuldade.values();
+	}
+
 	public String createBarModel(Questao questao)
 	{
 		BarChart barModel = new BarChart();
@@ -321,148 +388,29 @@ public class QuestaoBean implements Serializable
 
 		for(Alternativa alternativa : questao.getAlternativas())
 		{
-			if(total == 0)
-				values.add(0);
-			else
-				values.add(100 * alternativa.getQtnEscolhida() / total);
-
+			values.add(total == 0 ? 0 : 100 * alternativa.getQtnEscolhida() / total);
 			labels.add(alternativa.getLetra());
 		}
+
 		barDataSet.setData(values);
 		barDataSet.setBackgroundColor(bgColor);
 		barDataSet.setBorderColor(borderColor);
 		barDataSet.setBorderWidth(1);
 
 		data.addDataset(barDataSet);
-
 		data.setLabels(labels);
 		barModel.setData(data);
 
-		// Options
 		BarOptions options = new BarOptions();
-		
 		options.setResponsive(true)
-        .setMaintainAspectRatio(false)
-        .setIndexAxis(IndexAxis.X)
-//        .setScales(new Scales()
-//    		.addScale(Scales.ScaleAxis.Y, new CartesianScaleOptions()
-//                .setStacked(false)
-//                .setTicks(new CartesianTickOptions()
-//                        .setAutoSkip(true)
-//                        .setMirror(true)))
-//    		.addScale(Scales.ScaleAxis.X, new CategoryScaleOptions()
-//			.setTitle(new AbstractCartesianScaleOptions.Title().setText("Test"))
-//        	)
-//        )
-        .setPlugins(new Plugins()
-                .setTitle(new Title()
-                        .setDisplay(true)
-                        .setText("Q" + questao.getId())));
-        
-//		Title title = new Title();
-//		title.setDisplay(true);
-//		title.setText("Q" + questao.getId());
-//		options.setTitle(title);
-//
-//		Legend legend = new Legend();
-//		legend.setDisplay(true);
-//		legend.setPosition("top");
-//		LegendLabel legendLabels = new LegendLabel();
-//		legendLabels.setFontStyle("bold");
-//		legendLabels.setFontColor("#2980B9");
-//		legendLabels.setFontSize(24);
-//		legend.setLabels(legendLabels);
-//		options.setLegend(legend);
-//
-//		// disable animation
-//		Animation animation = new Animation();
-//		animation.setDuration(0);
-//		options.setAnimation(animation);
+		       .setMaintainAspectRatio(false)
+		       .setIndexAxis(IndexAxis.X)
+		       .setPlugins(new Plugins()
+		               .setTitle(new Title()
+		                       .setDisplay(true)
+		                       .setText("Q" + questao.getId())));
 
 		barModel.setOptions(options);
-		
-		
 		return barModel.toJson();
 	}
-	
-	public List<Questao> getQuestoes()
-	{
-		return questoes;
-	}
-
-	public void setQuestoes(List<Questao> questoes)
-	{
-		this.questoes = questoes;
-	}
-
-	public FiltroQuestao getFiltroQuestao()
-	{
-		return filtroQuestao;
-	}
-
-	public void setFiltroQuestao(FiltroQuestao filtroQuestao)
-	{
-		this.filtroQuestao = filtroQuestao;
-	}
-
-	public int getInicio()
-	{
-		return inicio;
-	}
-
-	public void setInicio(int inicio)
-	{
-		this.inicio = inicio;
-	}
-
-	public int getFim()
-	{
-		return fim;
-	}
-
-	public void setFim(int fim)
-	{
-		this.fim = fim;
-	}
-
-	public List<Questao> getQuestoesOverview()
-	{
-		return questoesOverview;
-	}
-
-	public void setQuestoesOverview(List<Questao> questoesOverview)
-	{
-		this.questoesOverview = questoesOverview;
-	}
-
-	public ConfigDownload getConfigDownload()
-	{
-		return configDownload;
-	}
-
-	public void setConfigDownload(ConfigDownload configDownload)
-	{
-		this.configDownload = configDownload;
-	}
-
-	public TipoFiltro getTipoFiltro()
-	{
-		return tipoFiltro;
-	}
-
-	public void setTipoFiltro(TipoFiltro tipoFiltro)
-	{
-		this.tipoFiltro = tipoFiltro;
-	}
-
-	public int getIndex()
-	{
-		return index;
-	}
-
-	public void setIndex(int index)
-	{
-		this.index = index;
-	}
-	
 }

@@ -4,33 +4,17 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
+import lombok.Getter;
 import modelo.usuario.TipoPagamento;
 
-
 @Named
-@SessionScoped
+@ApplicationScoped
 public class TipoPagamentoBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private List<TipoPagamento> opcoes;
-
-	@PostConstruct
-	public void init()
-	{
-		opcoes = Arrays.asList(TipoPagamento.values());
-	}
-
-	public List<TipoPagamento> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<TipoPagamento> opcoes)
-	{
-		this.opcoes = opcoes;
-	}
+	@Getter
+	private final List<TipoPagamento> opcoes = Arrays.asList(TipoPagamento.values());
 }

@@ -2,94 +2,50 @@ package filtro.exercicio;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
+import lombok.Data;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.usuario.Usuario;
 
+@Data
 public class FiltroExercicio implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Usuario usuario;
+	private String nome;
 
 	private ExercicioPadrao exercicioPadrao;
 
 	private Boolean realizada;
 
-	private LocalDate inicioRealizacao;
-	private LocalDate terminoRealizacao;
+	private List<LocalDate> periodo;
+	private PeriodoPreset preset;
 
 	private LocalDate inicioPrazo;
 	private LocalDate terminoPrazo;
 
-	public Usuario getUsuario()
+	public void limpar()
 	{
-		return usuario;
+		nome = null;
+		exercicioPadrao = null;
+		realizada = null;
+		periodo = null;
+		preset = null;
+		inicioPrazo = null;
+		terminoPrazo = null;
 	}
 
-	public void setUsuario(Usuario usuario)
+	public void resetPreset()
 	{
-		this.usuario = usuario;
+		preset = PeriodoPreset.PERSONALIZADO;
 	}
 
-	public ExercicioPadrao getExercicioPadrao()
+	public void aplicarPreset()
 	{
-		return exercicioPadrao;
+		if(preset == null)
+			periodo = null;
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+			periodo = preset.calcularIntervalo();
 	}
-
-	public void setExercicioPadrao(ExercicioPadrao exercicioPadrao)
-	{
-		this.exercicioPadrao = exercicioPadrao;
-	}
-
-	public Boolean getRealizada()
-	{
-		return realizada;
-	}
-
-	public void setRealizada(Boolean realizada)
-	{
-		this.realizada = realizada;
-	}
-
-	public LocalDate getInicioRealizacao()
-	{
-		return inicioRealizacao;
-	}
-
-	public void setInicioRealizacao(LocalDate inicioRealizacao)
-	{
-		this.inicioRealizacao = inicioRealizacao;
-	}
-
-	public LocalDate getTerminoRealizacao()
-	{
-		return terminoRealizacao;
-	}
-
-	public void setTerminoRealizacao(LocalDate terminoRealizacao)
-	{
-		this.terminoRealizacao = terminoRealizacao;
-	}
-
-	public LocalDate getInicioPrazo()
-	{
-		return inicioPrazo;
-	}
-
-	public void setInicioPrazo(LocalDate inicioPrazo)
-	{
-		this.inicioPrazo = inicioPrazo;
-	}
-
-	public LocalDate getTerminoPrazo()
-	{
-		return terminoPrazo;
-	}
-
-	public void setTerminoPrazo(LocalDate terminoPrazo)
-	{
-		this.terminoPrazo = terminoPrazo;
-	}
-
 }

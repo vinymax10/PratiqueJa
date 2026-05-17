@@ -16,7 +16,6 @@ import dao.usuario.UsuarioDAO;
 import filtro.exercicio.FiltroExercicio;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.matematica.Conta;
@@ -25,7 +24,6 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import pdf.exercicio.GerarLatexExercicio;
 
-@Named
 @ApplicationScoped
 public class ExercicioService
 {
@@ -41,16 +39,12 @@ public class ExercicioService
 	public void construirExercicio(Exercicio exercicio)
 	throws ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
-		Conta conta;
+		String classe = exercicio.getExercicioPadrao().getClasse();
 		for(int i = 0; i < exercicio.getExercicioPadrao().getQuantidade(); i++)
 		{
-			do
-			{
-				conta = (Conta) Class.forName(exercicio.getExercicioPadrao().getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-				conta.setExercicio(exercicio);
-				conta.setTipoExercicio(exercicio.getExercicioPadrao().getTipoExercicio());
-			}
-			while(exercicio.getContas().contains(conta));
+			Conta conta = (Conta) Class.forName(classe).getConstructor(Integer.TYPE).newInstance(i + 1);
+			conta.setExercicio(exercicio);
+			conta.setTipoExercicio(exercicio.getExercicioPadrao().getTipoExercicio());
 			exercicio.getContas().add(conta);
 		}
 

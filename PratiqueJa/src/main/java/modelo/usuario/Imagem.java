@@ -36,6 +36,7 @@ public class Imagem implements Serializable, Entidade
 	@EqualsAndHashCode.Include
 	private Long id;
 
+	@DiffIgnore
 	@Lob
 	private Blob file;
 

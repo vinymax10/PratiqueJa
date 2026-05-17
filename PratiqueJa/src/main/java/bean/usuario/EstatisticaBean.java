@@ -26,40 +26,37 @@ public class EstatisticaBean implements Serializable
 	@Inject
 	private ControleAcessoDAO controleAcessoDAO;
 
-	private Usuario usuario;
-	
+	@Inject
+	private UsuarioDAO usuarioDAO;
+
 	@Inject
 	private UsuarioBean usuarioBean;
-	
-	private UsuarioDAO usuarioDAO;
-	
-	private void setUsuario()
+
+	private Usuario usuario;
+
+	private void carregarUsuario()
 	{
 		usuario = usuarioBean.getEntidade();
-		usuarioDAO=usuarioBean.getEntidadeDAO();
-		if(usuario!=null)
+		if(usuario != null)
 			usuario = usuarioDAO.carrega(usuario.getId());
 	}
-	
-	public String grafico(Periodo periodo, 
-	AtributoControleAcesso atributo, String titulo)
+
+	public String grafico(Periodo periodo, AtributoControleAcesso atributo, String titulo)
 	{
-		setUsuario();
-		System.out.println("periodo: "+periodo+" atributoControleAcesso: "+atributo);
-		Field [] atribuilts=ControleAcesso.class.getDeclaredFields();
-		Field field=atribuilts[atributo.getValor()];
+		carregarUsuario();
+		Field[] atribuilts = ControleAcesso.class.getDeclaredFields();
+		Field field = atribuilts[atributo.getValor()];
 		field.setAccessible(true);
-		
+
 		switch(periodo)
 		{
 			case semanal: return graficoControleAcessoSemanal(titulo, field);
-			case mensal: return graficoControleAcessoMensal(titulo, field);
-			case anual: return graficoControleAcessoAnual(titulo, field);
-
-			default: return graficoControleAcessoSemanal(titulo, field);
+			case mensal:  return graficoControleAcessoMensal(titulo, field);
+			case anual:   return graficoControleAcessoAnual(titulo, field);
+			default:      return graficoControleAcessoSemanal(titulo, field);
 		}
 	}
-	
+
 	public String graficoControleAcessoAnual(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
@@ -88,7 +85,7 @@ public class EstatisticaBean implements Serializable
 
 		return GraficoPeriodo.criarGraficoBarras(dadosGrafico);
 	}
-	
+
 	public String graficoControleAcessoMensal(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
@@ -112,7 +109,6 @@ public class EstatisticaBean implements Serializable
 		dadosGrafico.setValues(histogramaControleAcesso(controlesAcessos, datas, field));
 
 		List<String> labels = new ArrayList<>();
-
 		for(int i = 0; i < datas.length - 1; i++)
 			labels.add(datas[i].getDayOfMonth() + "/" + datas[i].getMonthValue());
 
@@ -120,7 +116,7 @@ public class EstatisticaBean implements Serializable
 
 		return GraficoPeriodo.criarGraficoBarras(dadosGrafico);
 	}
-	
+
 	public String graficoControleAcessoSemanal(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
@@ -140,8 +136,7 @@ public class EstatisticaBean implements Serializable
 			datas[i] = LocalDate.now();
 			datas[i] = datas[i].plusDays(1 - (periodo * (datas.length - 1 - i)));
 		}
-		
-		field.setAccessible(true);
+
 		dadosGrafico.setValues(histogramaControleAcesso(controlesAcessos, datas, field));
 
 		List<String> labels = new ArrayList<>();
@@ -152,9 +147,9 @@ public class EstatisticaBean implements Serializable
 
 		return GraficoPeriodo.criarGraficoBarras(dadosGrafico);
 	}
-	
-	private List<Number> histogramaControleAcesso(List<ControleAcesso> controlesAcessos, 
-	LocalDate[] dates, Field field)
+
+	private List<Number> histogramaControleAcesso(List<ControleAcesso> controlesAcessos,
+		LocalDate[] dates, Field field)
 	{
 		List<Number> values = new ArrayList<>();
 
@@ -163,15 +158,15 @@ public class EstatisticaBean implements Serializable
 
 		return values;
 	}
-	
-	private int countControleAcesso(List<ControleAcesso> controlesAcessos, 
-	LocalDate a, LocalDate b, Field field)
+
+	private int countControleAcesso(List<ControleAcesso> controlesAcessos,
+		LocalDate a, LocalDate b, Field field)
 	{
 		int count = 0;
 		for(ControleAcesso controleAcesso : controlesAcessos)
 		{
-			if((controleAcesso.getData().isAfter(a) || controleAcesso.getData().isEqual(a)) 
-			&& controleAcesso.getData().isBefore(b))
+			if((controleAcesso.getData().isAfter(a) || controleAcesso.getData().isEqual(a))
+				&& controleAcesso.getData().isBefore(b))
 			{
 				try
 				{
@@ -184,13 +179,14 @@ public class EstatisticaBean implements Serializable
 			}
 		}
 		return count;
-	}	
-	
-//	---------------Acesso---------------
+	}
+
+	// ---------------Acesso---------------
+
 	public String graficoAcessoSemanal()
 	{
-		setUsuario();
-		
+		carregarUsuario();
+
 		DadosGrafico dadosGrafico = new DadosGrafico();
 		dadosGrafico.setTitutlo("Frequência diária");
 
@@ -222,7 +218,8 @@ public class EstatisticaBean implements Serializable
 
 	public String graficoAcessoMensal()
 	{
-		setUsuario();
+		carregarUsuario();
+
 		DadosGrafico dadosGrafico = new DadosGrafico();
 		dadosGrafico.setTitutlo("Frequência Semanal");
 
@@ -244,7 +241,6 @@ public class EstatisticaBean implements Serializable
 		dadosGrafico.setValues(histogramaAcesso(acessos, datas));
 
 		List<String> labels = new ArrayList<>();
-
 		for(int i = 0; i < datas.length - 1; i++)
 			labels.add(datas[i].getDayOfMonth() + "/" + datas[i].getMonthValue());
 
@@ -255,7 +251,8 @@ public class EstatisticaBean implements Serializable
 
 	public String graficoAcessoAnual()
 	{
-		setUsuario();
+		carregarUsuario();
+
 		DadosGrafico dadosGrafico = new DadosGrafico();
 		dadosGrafico.setTitutlo("Frequência Mensal");
 
@@ -298,8 +295,11 @@ public class EstatisticaBean implements Serializable
 		int count = 0;
 		for(Acesso acesso : acessos)
 		{
-			count += acesso.getDuracao();
+			LocalDate dataAcesso = acesso.getInicio().toLocalDate();
+			if((dataAcesso.isAfter(a) || dataAcesso.isEqual(a))
+				&& dataAcesso.isBefore(b))
+				count += acesso.getDuracao();
 		}
 		return count;
-	}	
+	}
 }

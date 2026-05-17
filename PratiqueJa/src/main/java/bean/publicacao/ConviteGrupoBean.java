@@ -25,9 +25,8 @@ public class ConviteGrupoBean extends ConfigBean<ConviteGrupo, ConviteGrupoDAO>
 
 	public String getAnyConviteGrupo()
 	{
-		if(opcoesAtivas.size() > 0)
+		if(!opcoesAtivas.isEmpty())
 			return opcoesAtivas.get(ThreadLocalRandom.current().nextInt(opcoesAtivas.size())).getNome();
-		else
-			return "";
+		return "";
 	}
 }

@@ -27,17 +27,30 @@ public class PasswordResetToken implements Entidade, Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Long id;
-	
+
+	@DiffIgnore
 	@ManyToOne(optional = true)
 	@JoinColumn(nullable = true)
-    private Usuario usuario;
-	
-    private String token;
-    private LocalDateTime criadoEm;
-    private LocalDateTime expiraEm;
-    private LocalDateTime usadoEm;
-    private boolean usado;
-    private String ipSolicitacao;
-    private String userAgent;
+	private Usuario usuario;
 
+	@DiffIgnore
+	private String token;
+
+	@DiffIgnore
+	private LocalDateTime criadoEm;
+
+	@DiffIgnore
+	private LocalDateTime expiraEm;
+
+	@DiffIgnore
+	private LocalDateTime usadoEm;
+
+	@DiffIgnore
+	private boolean usado;
+
+	@DiffIgnore
+	private String ipSolicitacao;
+
+	@DiffIgnore
+	private String userAgent;
 }

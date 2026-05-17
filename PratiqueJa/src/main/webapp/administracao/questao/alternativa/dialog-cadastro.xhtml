@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-alternativa"
+		class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+		header="Alternativa"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true" widgetVar="dialogAlternativa" responsive="true">
+
+			<h:form id="formAlternativa" class="form">
+				<div class="ui-fluid gride">
+
+					<h:panelGroup styleClass="campoMsg col-12">
+						<p:outputLabel for="@next" value="Texto" />
+						<p:inputTextarea value="#{alternativaBean.entidade.texto}"
+						rows="5" autoResize="false" maxlength="1023" styleClass="w-full"
+						required="true" requiredMessage="O texto é obrigatório" />
+						<p:message for="@previous" display="text" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+						<p:outputLabel for="@next" value="Correta" />
+						<p:toggleSwitch class="toggleSwitch-form"
+						value="#{alternativaBean.entidade.correta}" />
+					</h:panelGroup>
+
+				</div>
+
+				<div class="content-button">
+
+					<div class="divisor"></div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Remover" icon="pi pi-trash"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{alternativaBean.remover}"
+						update="formAlternativa form:alternativasTabela :growl"
+						process="@this" oncomplete="PF('dialogAlternativa').hide()"
+						rendered="#{!alternativaBean.cadastro}">
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover esta Alternativa?" />
+						</p:commandButton>
+
+					</div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Auditoria"
+						rendered="#{sessaoBean.podeVerAuditoria and !alternativaBean.cadastro}"
+						styleClass="ui-button-flat ui-button-plain"
+						icon="fa-regular fa-eye"
+						action="#{auditoriaBean.carregar(alternativaBean.entidade, alternativaBean.nome)}"
+						update="dialog-auditoria"
+						process="@this" oncomplete="PF('dialogAuditoria').show()">
+						</p:commandButton>
+
+						<p:commandButton id="salvarAlternativa" value="Salvar"
+						rendered="#{!alternativaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{alternativaBean.salvar}"
+						update="formAlternativa form:alternativasTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide()">
+							<p:defaultCommand target="salvarAlternativa" />
+						</p:commandButton>
+
+						<p:commandButton id="adicionarAlternativa" value="Adicionar"
+						rendered="#{alternativaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-check"
+						action="#{alternativaBean.adicionar}"
+						update="formAlternativa form:alternativasTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide()">
+							<p:defaultCommand target="adicionarAlternativa" />
+						</p:commandButton>
+
+					</div>
+				</div>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

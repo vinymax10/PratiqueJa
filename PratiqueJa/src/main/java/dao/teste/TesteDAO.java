@@ -89,11 +89,11 @@ public class TesteDAO extends DAO<Teste>
 		if(filtroTeste.getNome() != null && !filtroTeste.getNome().isBlank())
 			predicates.add(builder.like(fromTeste.<Usuario>get("usuario").get("nome"), "%"+filtroTeste.getNome()+"%"));
 
-		if(filtroTeste.getInicioRealizacao() != null)
-			predicates.add(builder.greaterThanOrEqualTo(fromTeste.get("realizacao"), filtroTeste.getInicioRealizacao()));
-
-		if(filtroTeste.getTerminoRealizacao() != null)
-			predicates.add(builder.lessThanOrEqualTo(fromTeste.get("realizacao"), filtroTeste.getTerminoRealizacao()));
+		if(filtroTeste.getPeriodo() != null && !filtroTeste.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(fromTeste.get("realizacao"), filtroTeste.getPeriodo().get(0)));
+			predicates.add(builder.lessThanOrEqualTo(fromTeste.get("realizacao"), filtroTeste.getPeriodo().get(1)));
+		}
 
 		if(filtroTeste.getNota() != null)
 			predicates.add(builder.equal(fromTeste.get("nota"), filtroTeste.getNota()));

@@ -17,8 +17,6 @@ public class EmailService
 	@Inject
 	private EmailDAO emailDAO;
 
-//	private static final String EMAIL_PESSOAL = "vinymax10@gmail.com";
-
 	@Inject
 	@Push(channel = "email")
 	private PushContext push;

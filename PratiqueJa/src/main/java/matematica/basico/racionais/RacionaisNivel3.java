@@ -21,7 +21,7 @@ public class RacionaisNivel3 extends Conta
 		{
 			int tipo = 1 + rand.nextInt(6);
 			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel3Package.Racionais" + tipo).getConstructor(Integer.TYPE).newInstance(index));
+			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Racionais" + tipo).getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
 		| ClassNotFoundException e)

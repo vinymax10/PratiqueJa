@@ -69,7 +69,7 @@ public class ExercicioDAO extends DAO<Exercicio>
 		return list;
 	}
 
-	public List<Exercicio> buscar(FiltroExercicio filtroExercicio)
+	public List<Exercicio> buscar(FiltroExercicio filtro)
 	{
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -78,26 +78,26 @@ public class ExercicioDAO extends DAO<Exercicio>
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroExercicio.getRealizada() != null)
-			predicates.add(builder.equal(fromExercicio.get("realizado"), filtroExercicio.getRealizada().booleanValue()));
+		if(filtro.getRealizada() != null)
+			predicates.add(builder.equal(fromExercicio.get("realizado"), filtro.getRealizada().booleanValue()));
 
-		if(filtroExercicio.getUsuario() != null)
-			predicates.add(builder.equal(fromExercicio.<Usuario>get("usuario").get("id"), filtroExercicio.getUsuario().getId()));
+		if(filtro.getNome() != null && !filtro.getNome().isBlank())
+			predicates.add(builder.like(fromExercicio.get("usuario").get("nome"), "%" + filtro.getNome() + "%"));
 
-		if(filtroExercicio.getExercicioPadrao() != null)
-			predicates.add(builder.equal(fromExercicio.<ExercicioPadrao>get("exercicioPadrao").get("id"), filtroExercicio.getExercicioPadrao().getId()));
+		if(filtro.getExercicioPadrao() != null)
+			predicates.add(builder.equal(fromExercicio.<ExercicioPadrao>get("exercicioPadrao").get("id"), filtro.getExercicioPadrao().getId()));
 
-		if(filtroExercicio.getInicioRealizacao() != null)
-			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getInicioRealizacao()));
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("realizacao"), filtro.getPeriodo().get(0)));
+			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), filtro.getPeriodo().get(1)));
+		}
 
-		if(filtroExercicio.getTerminoRealizacao() != null)
-			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("realizacao"), filtroExercicio.getTerminoRealizacao()));
+		if(filtro.getInicioPrazo() != null)
+			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("prazo"), filtro.getInicioPrazo()));
 
-		if(filtroExercicio.getInicioPrazo() != null)
-			predicates.add(builder.greaterThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getInicioPrazo()));
-
-		if(filtroExercicio.getTerminoPrazo() != null)
-			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("prazo"), filtroExercicio.getTerminoPrazo()));
+		if(filtro.getTerminoPrazo() != null)
+			predicates.add(builder.lessThanOrEqualTo(fromExercicio.get("prazo"), filtro.getTerminoPrazo()));
 
 		TypedQuery<Exercicio> typedQuery = em.createQuery(query.select(fromExercicio).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Exercicio> list = typedQuery.getResultList();

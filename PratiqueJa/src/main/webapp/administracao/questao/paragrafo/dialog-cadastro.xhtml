@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-paragrafo"
+		class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+		header="Parágrafo"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true" widgetVar="dialogParagrafo" responsive="true">
+
+			<h:form id="formParagrafo" class="form" enctype="multipart/form-data">
+				<div class="ui-fluid gride">
+
+					<!-- Texto -->
+					<h:panelGroup styleClass="campo col-12"
+					rendered="#{!paragrafoBean.entidade.tipoImagem}">
+						<p:outputLabel for="@next" value="Texto" />
+						<p:inputTextarea value="#{paragrafoBean.entidade.texto}"
+						rows="6" autoResize="false" maxlength="4095" styleClass="w-full" />
+					</h:panelGroup>
+
+					<!-- Upload de Imagem -->
+					<h:panelGroup styleClass="campo col-12 md:col-6">
+						<p:outputLabel value="Imagem" />
+						<p:fileUpload listener="#{paragrafoBean.uploadNovo}"
+						mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						update="formParagrafo" process="@form" auto="false"
+						label="Selecionar imagem" />
+					</h:panelGroup>
+
+					<!-- Imagem atual -->
+					<h:panelGroup styleClass="campo col-12 md:col-6 flex flex-column gap-2"
+					rendered="#{paragrafoBean.entidade.tipoImagem}">
+						<p:outputLabel value="Imagem atual" />
+						<h:outputText styleClass="status"
+						value="#{paragrafoBean.entidade.imagemFile.endImagem}" />
+						<p:commandButton value="Remover Imagem" icon="pi pi-times"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{paragrafoBean.removerImagem()}"
+						update="formParagrafo" process="@this" />
+					</h:panelGroup>
+
+				</div>
+
+				<div class="content-button">
+
+					<div class="divisor"></div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Remover" icon="pi pi-trash"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{paragrafoBean.remover}"
+						update="formParagrafo form:paragrafosTabela :growl"
+						process="@this" oncomplete="PF('dialogParagrafo').hide()"
+						rendered="#{!paragrafoBean.cadastro}">
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover este Parágrafo?" />
+						</p:commandButton>
+
+					</div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Auditoria"
+						rendered="#{sessaoBean.podeVerAuditoria and !paragrafoBean.cadastro}"
+						styleClass="ui-button-flat ui-button-plain"
+						icon="fa-regular fa-eye"
+						action="#{auditoriaBean.carregar(paragrafoBean.entidade, paragrafoBean.nome)}"
+						update="dialog-auditoria"
+						process="@this" oncomplete="PF('dialogAuditoria').show()">
+						</p:commandButton>
+
+						<p:commandButton id="salvarParagrafo" value="Salvar"
+						rendered="#{!paragrafoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{paragrafoBean.salvar}"
+						update="formParagrafo form:paragrafosTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogParagrafo').hide()">
+							<p:defaultCommand target="salvarParagrafo" />
+						</p:commandButton>
+
+						<p:commandButton id="adicionarParagrafo" value="Adicionar"
+						rendered="#{paragrafoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-check"
+						action="#{paragrafoBean.adicionar}"
+						update="formParagrafo form:paragrafosTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogParagrafo').hide()">
+							<p:defaultCommand target="adicionarParagrafo" />
+						</p:commandButton>
+
+					</div>
+				</div>
+
+			</h:form>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+				<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

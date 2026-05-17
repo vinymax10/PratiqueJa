@@ -2,24 +2,33 @@ package modelo.seguranca;
 
 import java.io.Serializable;
 
+import org.javers.core.metamodel.annotation.DiffIgnore;
+
 import lombok.Data;
 import modelo.usuario.Usuario;
 
 @Data
-public class Permissao <T> implements Serializable
+public class Permissao<T> implements Serializable
 {
-    protected boolean podeEditar;
-    protected boolean podeRemover;
-    protected boolean podeCarregar;
-    protected boolean podeAdicionar;
+	@DiffIgnore
+	protected boolean podeEditar;
 
-    public void update(T entidade, Usuario usuario) {}
+	@DiffIgnore
+	protected boolean podeRemover;
 
-    protected void negarTudo()
-    {
-        this.podeEditar = false;
-        this.podeRemover = false;
-        this.podeCarregar = false;
-        this.podeAdicionar = false;
-    }
+	@DiffIgnore
+	protected boolean podeCarregar;
+
+	@DiffIgnore
+	protected boolean podeAdicionar;
+
+	public void update(T entidade, Usuario usuario) {}
+
+	protected void negarTudo()
+	{
+		this.podeEditar = false;
+		this.podeRemover = false;
+		this.podeCarregar = false;
+		this.podeAdicionar = false;
+	}
 }

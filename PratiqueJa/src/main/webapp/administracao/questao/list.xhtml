@@ -1,0 +1,212 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{questaoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewAction action="#{questaoBean.filtrar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row" >
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText id="globalFilter" value="#{questaoBean.filtro.conteudo}"
+						placeholder="Conteúdo" styleClass="w-full" >
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{questaoBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+
+				<p:button value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				href="/administracao/questao/form.xhtml?cadastro=true" />
+
+			</div>
+		</div>
+
+		<ui:include src="/administracao/questao/filtro.xhtml" />
+
+		<p:dataView id="tabela" value="#{questaoBean.lista}" var="entidade" style="width:100%"
+		paginator="true" rows="10" paginatorAlwaysVisible="false" emptyMessage="">
+
+			<p:dataViewListItem>
+
+				<p:card class="newBorder mt-3 mb-3 p-2" style="width:100%">
+					<div class="grid panelStatus m-0">
+
+						<!-- ID -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="ID" />
+							<h:outputText styleClass="status" value="#{entidade.id}" />
+						</h:panelGroup>
+
+						<!-- Chave -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Chave" />
+							<h:outputText styleClass="status" value="#{entidade.chave}" />
+						</h:panelGroup>
+
+						<!-- Ordem de Inserção -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Ordem" />
+							<h:outputText styleClass="status" value="#{entidade.ordemInsercao}" />
+						</h:panelGroup>
+
+						<!-- Revisada -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Revisada" />
+							<h:outputText styleClass="status" value="#{entidade.revisada ? 'Sim' : 'Não'}" />
+						</h:panelGroup>
+
+						<!-- Assunto Curso -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Assunto Curso" />
+							<h:outputText styleClass="status" value="#{entidade.assuntoCurso.nome}" />
+						</h:panelGroup>
+
+						<!-- Disciplina -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Disciplina" />
+							<h:outputText styleClass="status" value="#{entidade.disciplina.nome}" />
+						</h:panelGroup>
+
+						<!-- Ano -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Ano" />
+							<h:outputText styleClass="status" value="#{entidade.ano.nome}" />
+						</h:panelGroup>
+
+						<!-- Dificuldade -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Dificuldade" />
+							<h:outputText styleClass="status" value="#{entidade.dificuldade.nome}" />
+						</h:panelGroup>
+						
+						<!-- Banca -->
+						<h:panelGroup
+						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Banca" />
+							<h:outputText styleClass="status" value="#{entidade.banca.nome}" />
+						</h:panelGroup>
+
+						<!-- Órgão -->
+						<h:panelGroup
+						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Órgão" />
+							<h:outputText styleClass="status" value="#{entidade.orgao.nome}" />
+						</h:panelGroup>
+
+						<!-- Prova -->
+						<h:panelGroup
+						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start gap-1">
+							<h:outputText styleClass="title" value="Prova" />
+							<h:outputText styleClass="status" value="#{entidade.prova}" />
+						</h:panelGroup>
+						
+						<!-- Parágrafos -->
+						<h:panelGroup rendered="#{not empty entidade.paragrafos}"
+						styleClass="col-12 flex flex-column gap-1">
+							<h:outputText styleClass="title" value="Enunciado" />
+							<ui:repeat value="#{entidade.paragrafos}" var="paragrafo">
+								<h:outputText styleClass="status"
+								value="#{paragrafo.isTipoImagem() ? '[Imagem]' : paragrafo.texto}" />
+							</ui:repeat>
+						</h:panelGroup>
+
+						<!-- Alternativas -->
+						<h:panelGroup rendered="#{not empty entidade.alternativas}"
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-1">
+							<h:outputText styleClass="title" value="Alternativas" />
+							<ui:repeat value="#{entidade.alternativas}" var="alt">
+								<h:panelGroup styleClass="flex flex-row align-items-center gap-2">
+									<h:outputText styleClass="status"
+									value="#{alt.letra}) #{alt.texto}" />
+									<h:outputText rendered="#{alt.correta}">
+										<i class="pi pi-check" style="color:var(--green-500);" />
+									</h:outputText>
+									
+								</h:panelGroup>
+							</ui:repeat>
+						</h:panelGroup>
+						
+						<!-- Resolução -->
+						<h:panelGroup rendered="#{not empty entidade.resolucao}"
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-1">
+							<h:outputText styleClass="title" value="Resolução" />
+							<h:outputText styleClass="status" value="#{entidade.resolucao}" />
+						</h:panelGroup>
+
+						<!-- Botão Editar -->
+						<h:panelGroup styleClass="col-12 flex justify-content-end mt-2">
+							
+						</h:panelGroup>
+
+					</div>
+					
+					<div class="content-button" >
+
+			<div class="divisor" ></div>
+
+		    <div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{questaoBean.remover(entidade)}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover esta Questão?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:button value="Editar" icon="pi pi-pencil"
+					styleClass="ui-button-raised ui-button-primary"
+							href="#{questaoBean.getUrlEdicao(entidade)}" />
+
+			</div>
+		</div>
+					
+				</p:card>
+
+			</p:dataViewListItem>
+
+		</p:dataView>
+
+	</h:form>
+
+</ui:decorate>

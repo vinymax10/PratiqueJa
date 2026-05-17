@@ -97,10 +97,7 @@ public class AssuntoCursoDAO extends DAO<AssuntoCurso>
 
 		List<AssuntoCurso> list = typedQuery.getResultList();
 
-		if(list.size()>0)
-			return list.get(0);
-
-		return null;
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 	public List<AssuntoCurso> todos()

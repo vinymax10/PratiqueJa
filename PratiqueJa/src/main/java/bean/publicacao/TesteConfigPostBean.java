@@ -58,7 +58,7 @@ public class TesteConfigPostBean implements Serializable
 			return false;
 		}
 
-		if(configPost.getNome() == null || configPost.getNome().isEmpty())
+		if(configPost.getNome() == null || configPost.getNome().isBlank())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Por favor adicione um nome em configurações para realizar o teste.");
 			return false;

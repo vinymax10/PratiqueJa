@@ -2,117 +2,52 @@ package filtro.teste;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import filtro.PeriodoPreset;
+import lombok.Data;
 import modelo.academico.AssuntoCurso;
 import modelo.teste.TestePadrao;
 
+@Data
 public class FiltroTeste implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private TestePadrao testePadrao;
-	
-	private Boolean realizado;
-	
-	private LocalDate inicioRealizacao;
-	private LocalDate terminoRealizacao;
-	
-	private Double nota;
-	
 	private String nome;
 
+	private TestePadrao testePadrao;
+
+	private Boolean realizado;
+
+	private List<LocalDate> periodo;
+	private PeriodoPreset preset;
+
+	private Double nota;
+
 	private AssuntoCurso assuntoCurso;
-	
+
 	public void limpar()
 	{
-		nome="";
-		testePadrao=null;
-		realizado=null;
-		inicioRealizacao=null;
-		terminoRealizacao=null;
-		nota=null;
-		assuntoCurso=null;
-	}
-	
-	public String getNome()
-	{
-		return nome;
+		nome = "";
+		testePadrao = null;
+		realizado = null;
+		periodo = null;
+		preset = null;
+		nota = null;
+		assuntoCurso = null;
 	}
 
-	public void setNome(String nome)
+	public void resetPreset()
 	{
-		this.nome = nome;
+		preset = PeriodoPreset.PERSONALIZADO;
 	}
 
-	public TestePadrao getTestePadrao()
+	public void aplicarPreset()
 	{
-		return testePadrao;
+		if(preset == null)
+			periodo = null;
+		else if(preset != PeriodoPreset.PERSONALIZADO)
+			periodo = preset.calcularIntervalo();
 	}
-
-	public void setTestePadrao(TestePadrao testePadrao)
-	{
-		this.testePadrao = testePadrao;
-	}
-
-	public Boolean getRealizado()
-	{
-		return realizado;
-	}
-
-	public void setRealizado(Boolean realizado)
-	{
-		this.realizado = realizado;
-	}
-
-	public LocalDate getInicioRealizacao()
-	{
-		return inicioRealizacao;
-	}
-
-	public void setInicioRealizacao(LocalDate inicioRealizacao)
-	{
-		this.inicioRealizacao = inicioRealizacao;
-	}
-
-	public LocalDate getTerminoRealizacao()
-	{
-		return terminoRealizacao;
-	}
-
-	public void setTerminoRealizacao(LocalDate terminoRealizacao)
-	{
-		this.terminoRealizacao = terminoRealizacao;
-	}
-
-	public Double getNota()
-	{
-		return nota;
-	}
-
-	public void setNota(Double nota)
-	{
-		this.nota = nota;
-	}
-
-	public AssuntoCurso getAssuntoCurso()
-	{
-		return assuntoCurso;
-	}
-
-	public void setAssuntoCurso(AssuntoCurso assuntoCurso)
-	{
-		this.assuntoCurso = assuntoCurso;
-	}
-
-	@Override
-	public String toString()
-	{
-		return (testePadrao != null ? "testePadrao=" + testePadrao + ", " : "")
-		+ (realizado != null ? "realizado=" + realizado + ", " : "")
-		+ (inicioRealizacao != null ? "inicioRealizacao=" + inicioRealizacao + ", " : "")
-		+ (terminoRealizacao != null ? "terminoRealizacao=" + terminoRealizacao + ", " : "")
-		+ (nota != null ? "nota=" + nota + ", " : "") + (nome != null ? "nome=" + nome + ", " : "")
-		+ (assuntoCurso != null ? "assuntoCurso=" + assuntoCurso : "");
-	}
-
 }

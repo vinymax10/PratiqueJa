@@ -17,7 +17,7 @@ import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import modelo.Entidade;
 
-public abstract class DAO<T extends Entidade> implements Serializable,DAOInterface<T>
+public abstract class DAO<T extends Entidade> implements Serializable, DAOInterface<T>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -34,21 +34,21 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 	@Transactional
 	public void adicionar(T entidade)
 	{
-//		System.out.println("salvando entidade: " + entidade);
 		em.persist(entidade);
 	}
-	
+
 	@Transactional
 	public T salvar(T entidade)
 	{
-		Log.escrever("salvou entidade: "+entidade);
+		Log.escrever("salvou entidade: " + entidade);
 		if(entidade.getId() == null)
+		{
 			em.persist(entidade);
-		else
-			return em.merge(entidade);
-		return null;
+			return entidade;
+		}
+		return em.merge(entidade);
 	}
-	
+
 	@Transactional
 	public void salvarSL(T entidade)
 	{
@@ -65,7 +65,7 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 			entidade = em.find(classe, entidade.getId());
 
 		em.remove(entidade);
-		Log.escrever("removido com sucesso: "+entidade);
+		Log.escrever("removido com sucesso: " + entidade);
 	}
 
 	@Transactional
@@ -75,14 +75,12 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 			entidade = em.find(classe, entidade.getId());
 
 		em.refresh(entidade);
-		System.out.println("depois do refresh no DAO: " + entidade);
 		return entidade;
 	}
 
 	public T carrega(Serializable id)
 	{
-		T entidade = em.find(classe, id);
-		return entidade;
+		return em.find(classe, id);
 	}
 
 	public void destacar(Object entidade)
@@ -93,34 +91,29 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 	public void clear()
 	{
 	}
-	
+
 	public List<T> buscar(FiltroConfig filtroConfig)
 	{
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(classe);
 		Root<T> fromT = query.from(classe);
 
 		List<Predicate> predicates = new ArrayList<>();
-		
-		predicates.add(builder.like(
-		fromT.get("nome"), "%" + filtroConfig.getNome()+ "%"));
 
-		if(filtroConfig.getNome() != null&&!filtroConfig.getNome().isBlank())
+		if(filtroConfig.getNome() != null && !filtroConfig.getNome().isBlank())
 			predicates.add(builder.like(
-			fromT.get("nome"), "%" + filtroConfig.getNome()+ "%"));
+				fromT.get("nome"), "%" + filtroConfig.getNome() + "%"));
 
 		if(filtroConfig.getAtivo() != null)
-			predicates.add( builder.equal(
-			fromT.get("ativo"), filtroConfig.getAtivo().booleanValue()));
-		
+			predicates.add(builder.equal(
+				fromT.get("ativo"), filtroConfig.getAtivo().booleanValue()));
+
 		TypedQuery<T> typedQuery = em
-		.createQuery(query.select(fromT)
-		.where(predicates.toArray(new Predicate[0]))
-		.orderBy(builder.asc(fromT.get("ordem"))));
-		List<T> list = typedQuery.getResultList();
-		
-		return list;
+			.createQuery(query.select(fromT)
+			.where(predicates.toArray(new Predicate[0]))
+			.orderBy(builder.asc(fromT.get("ordem"))));
+
+		return typedQuery.getResultList();
 	}
 
 	public List<T> listarTudo()
@@ -128,54 +121,47 @@ public abstract class DAO<T extends Entidade> implements Serializable,DAOInterfa
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(classe);
 		Root<T> fromT = query.from(classe);
-		
+
 		List<Predicate> predicates = new ArrayList<>();
 
 		TypedQuery<T> typedQuery;
 		if(ClasseAux.possuiAtributo(classe, "ordem"))
 		{
 			typedQuery = em
-			.createQuery(query.select(fromT)
-			.where(predicates.toArray(new Predicate[0]))
-			.orderBy(builder.asc(fromT.get("ordem"))));
+				.createQuery(query.select(fromT)
+				.where(predicates.toArray(new Predicate[0]))
+				.orderBy(builder.asc(fromT.get("ordem"))));
 		}
 		else
 			typedQuery = em
-			.createQuery(query.select(fromT)
-			.where(predicates.toArray(new Predicate[0])));
+				.createQuery(query.select(fromT)
+				.where(predicates.toArray(new Predicate[0])));
 
-		List<T> list = typedQuery.getResultList();
-
-		return list;
+		return typedQuery.getResultList();
 	}
-	
+
 	public List<T> listarOpcoesAtivas()
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(classe);
 		Root<T> fromT = query.from(classe);
-		
-		List<Predicate> predicates = new ArrayList<>();
 
+		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(builder.equal(fromT.get("ativo"), true));
-		
+
 		TypedQuery<T> typedQuery;
 		if(ClasseAux.possuiAtributo(classe, "ordem"))
 		{
 			typedQuery = em
-			.createQuery(query.select(fromT)
-			.where(predicates.toArray(new Predicate[0]))
-			.orderBy(builder.asc(fromT.get("ordem"))));
+				.createQuery(query.select(fromT)
+				.where(predicates.toArray(new Predicate[0]))
+				.orderBy(builder.asc(fromT.get("ordem"))));
 		}
 		else
 			typedQuery = em
-			.createQuery(query.select(fromT)
-			.where(predicates.toArray(new Predicate[0])));
+				.createQuery(query.select(fromT)
+				.where(predicates.toArray(new Predicate[0])));
 
-		List<T> list = typedQuery.getResultList();
-
-		return list;
-		
+		return typedQuery.getResultList();
 	}
-
 }

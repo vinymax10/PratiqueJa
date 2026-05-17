@@ -13,6 +13,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.academico.AssuntoCurso;
 import modelo.teste.Teste;
 import modelo.usuario.Turma;
@@ -20,6 +21,7 @@ import modelo.usuario.Usuario;
 import service.teste.TesteService;
 import web.session.Sessao;
 
+@Data
 @Named
 @SessionScoped
 public class TesteBean implements Serializable
@@ -28,7 +30,7 @@ public class TesteBean implements Serializable
 
 	@Inject
 	private TesteDAO testeDAO;
-	
+
 	@Inject
 	private Teste teste;
 
@@ -57,7 +59,7 @@ public class TesteBean implements Serializable
 		teste = new Teste();
 		return "";
 	}
-	
+
 	public String criarTesteTurma(Turma turma)
 	{
 		for (Usuario usuario : turma.getAlunos())
@@ -66,47 +68,50 @@ public class TesteBean implements Serializable
 			teste.setRepetirAtePassar(true);
 			teste.setTestePadrao(turma.getAssuntoAtual().getTestePadrao());
 			teste.setUsuario(usuario);
-			
-			construirTeste();
+
+			try
+			{
+				testeService.construirTeste(teste);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " foi criado para cada aluno da turma.");
 
 		return "";
 	}
-	
+
 	public String criarTeste(AssuntoCurso assuntoCurso)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			teste = new Teste();
 			teste.setTestePadrao(assuntoCurso.getTestePadrao());
-			Usuario usuario = Sessao.getUsuarioLogado();
-			teste.setUsuario(usuario);
-			
-			construirTeste();
-			
-			Navegacao.redirect("/teste/teste/verTeste.xhtml?id="+teste.getId());
+			teste.setUsuario(Sessao.getUsuarioLogado());
+
+			try
+			{
+				testeService.construirTeste(teste);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível criar o " + nome + ".");
+				return "";
+			}
+
+			Navegacao.redirect("/teste/teste/verTeste.xhtml?id=" + teste.getId());
 		}
 		return "";
 	}
-	
-	private void construirTeste()
-	{
-		try
-		{
-			testeService.construirTeste(teste);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
+
 	public String adicionar()
 	{
 		try
 		{
-			construirTeste();
+			testeService.construirTeste(teste);
 			cadastro = false;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
 		}
@@ -128,7 +133,7 @@ public class TesteBean implements Serializable
 	{
 		try
 		{
-			teste=testeDAO.salvar(teste);
+			teste = testeDAO.salvar(teste);
 			lista = true;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
 		}
@@ -139,7 +144,7 @@ public class TesteBean implements Serializable
 		}
 		return "";
 	}
-	
+
 	public String remover()
 	{
 		try
@@ -161,7 +166,7 @@ public class TesteBean implements Serializable
 	{
 		this.testes = testeDAO.buscar(filtroTeste);
 	}
-	
+
 	public void onSelected()
 	{
 		activeIndex = 0;
@@ -174,81 +179,10 @@ public class TesteBean implements Serializable
 		Usuario usuario = Sessao.getUsuarioLogado();
 		return testeDAO.meusTestes(usuario, realizado);
 	}
-	
+
 	public Long numeroMeusTestes(Boolean realizado)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();
 		return testeDAO.numeroMeusTestes(usuario, realizado);
 	}
-
-	public Teste getTeste()
-	{
-		return teste;
-	}
-
-	public void setTeste(Teste teste)
-	{
-		this.teste = teste;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
-	public List<Teste> getTestes()
-	{
-		return testes;
-	}
-
-	public void setTestes(List<Teste> testes)
-	{
-		this.testes = testes;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
-	public void setActiveIndex(int activeIndex)
-	{
-		this.activeIndex = activeIndex;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public FiltroTeste getFiltroTeste()
-	{
-		return filtroTeste;
-	}
-
-	public void setFiltroTeste(FiltroTeste filtroTeste)
-	{
-		this.filtroTeste = filtroTeste;
-	}
-
 }

@@ -21,7 +21,7 @@ public class ProbabilidadeNivel1 extends Conta
 		{
 			int tipo = 1 + rand.nextInt(2);
 			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel1Package.Probabilidade" + tipo).getConstructor(Integer.TYPE).newInstance(index));
+			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Probabilidade" + tipo).getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
 		| ClassNotFoundException e)

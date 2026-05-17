@@ -23,7 +23,7 @@ public class DizimaNivel2 extends Conta
 		{
 			int tipo = 1 + rand.nextInt(2);
 			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel2Package.Dizima" + tipo).getConstructor(Integer.TYPE).newInstance(index));
+			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Dizima" + tipo).getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
 		| ClassNotFoundException e)

@@ -19,7 +19,7 @@ public class PotenciacaoNivel3 extends Conta
 		{
 			int tipo = 1 + rand.nextInt(7);
 			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel3Package.Potenciacao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
+			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Potenciacao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
 		| ClassNotFoundException e)

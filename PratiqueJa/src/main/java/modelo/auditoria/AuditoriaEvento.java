@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.javers.core.metamodel.annotation.DiffIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,33 +30,43 @@ import modelo.usuario.Usuario;
 @Index(name = "idx_auditoria_entidade", columnList = "entidade, entidadeId")})
 public class AuditoriaEvento implements Entidade
 {
+	@DiffIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Long id;
+	@EqualsAndHashCode.Include
+	private Long id;
 
-    private String entidade;      // Produto, Cliente, Preco...
-    private Long entidadeId;
+	@DiffIgnore
+	private String entidade;
 
-    @Enumerated(EnumType.STRING)
-    private TipoEvento tipo;           
+	@DiffIgnore
+	private Long entidadeId;
 
-    @ManyToOne
-    private Usuario usuario;
+	@DiffIgnore
+	@Enumerated(EnumType.STRING)
+	private TipoEvento tipo;
 
-    private LocalDateTime dataEvento;
+	@DiffIgnore
+	@ManyToOne
+	private Usuario usuario;
 
-    @Column(length = 4095)
-    private String resumo;         // Texto humano
-    
-    @Column(length = 45) // suporta IPv6
-    private String ip;
+	@DiffIgnore
+	private LocalDateTime dataEvento;
 
-    @Column(length = 512)
-    private String userAgent;
-    
-    public List<String> getItensResumo()
-    {
+	@DiffIgnore
+	@Column(length = 4095)
+	private String resumo;
+
+	@DiffIgnore
+	@Column(length = 45)
+	private String ip;
+
+	@DiffIgnore
+	@Column(length = 512)
+	private String userAgent;
+
+	public List<String> getItensResumo()
+	{
 		List<String> itens = new ArrayList<>();
 		if(resumo == null || resumo.isBlank())
 			return itens;
@@ -65,9 +77,9 @@ public class AuditoriaEvento implements Entidade
 		{
 			String item = parte.trim();
 			if(!item.isEmpty())
-				itens.add(item); 
+				itens.add(item);
 		}
-		
+
 		return itens;
-    }
+	}
 }

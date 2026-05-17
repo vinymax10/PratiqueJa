@@ -10,7 +10,7 @@ public enum AtributoControleAcesso
 	numResolucaoQuestao(9),
 	numQuestaoFeita(10);
 
-	private int valor;
+	private final int valor;
 
 	AtributoControleAcesso(int valor)
 	{
@@ -21,16 +21,4 @@ public enum AtributoControleAcesso
 	{
 		return valor;
 	}
-
-	public void setValor(int valor)
-	{
-		this.valor = valor;
-	}
-
-	public boolean equals(AtributoControleAcesso x)
-	{
-		AtributoControleAcesso modulo = (AtributoControleAcesso) x;
-		return this.valor==modulo.valor;
-	}
-
 }

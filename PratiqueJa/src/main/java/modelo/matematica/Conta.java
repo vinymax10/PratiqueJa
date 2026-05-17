@@ -95,9 +95,11 @@ public abstract class Conta implements Serializable, Entidade
 	@AuditLabel(value = "resolução LaTeX", genero = GeneroGramatical.FEMININO)
 	protected String resolucaoLatex;
 
+	@DiffIgnore
 	@Transient
 	protected boolean showResolucao = false;
 
+	@DiffIgnore
 	@Transient
 	protected boolean jaMostrouResolucao = false;
 
@@ -122,22 +124,29 @@ public abstract class Conta implements Serializable, Entidade
 	@AuditLabel(value = "respondida", genero = GeneroGramatical.FEMININO)
 	protected boolean respondida = false;
 
+	@DiffIgnore
 	protected boolean respostaAlunoBol;
 
+	@DiffIgnore
 	protected boolean resultadoCorretoBol;
 
+	@DiffIgnore
 	@Lob
 	protected Blob file;
 
+	@DiffIgnore
 	@Lob
 	protected Blob imagemResolucao;
 
+	@DiffIgnore
 	@Transient
 	protected ByteArrayOutputStream baos;
 
+	@DiffIgnore
 	@Transient
 	protected ByteArrayOutputStream baosResolucao;
 
+	@DiffIgnore
 	@Transient
 	protected Random rand = new Random();
 

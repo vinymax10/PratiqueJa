@@ -14,7 +14,11 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class HeaderEBook extends PdfPageEventHelper
 {
 	static final BaseColor cor   = new BaseColor(102, 102, 102);
@@ -27,9 +31,9 @@ public class HeaderEBook extends PdfPageEventHelper
 	static final int margin = 50;
 	static final int rodape = 50;
 
-	String assunto;
-	boolean addPage = false;
-	int pagInicial = 0;
+	private String assunto;
+	private boolean addPage = false;
+	private int pagInicial = 0;
 
 	@Override
 	public void onStartPage(PdfWriter pdfWriter, Document document)

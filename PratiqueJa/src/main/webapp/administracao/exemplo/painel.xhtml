@@ -10,7 +10,7 @@
 
 			<!-- Venda -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Venda:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.numeroStr()}" />
@@ -18,7 +18,7 @@
 
 			<!-- data -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Data:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.data}">
@@ -28,7 +28,7 @@
 			
 			<!-- Status -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-2">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-2">
 				<h:outputText styleClass="title" value="Status:" />
 				<ui:include src="/status/status.xhtml">
 					<ui:param name="status" value="#{vendaBean.entidade.status}" />
@@ -38,7 +38,7 @@
 			<!-- Desconto -->
 			<h:panelGroup
 				rendered="#{!vendaBean.permissao.podeEditar}"
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Desconto:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.descontoGeral}">
@@ -50,7 +50,7 @@
 			<!-- Cliente -->
 			<h:panelGroup
 				rendered="#{!vendaBean.permissao.podeEditar}"
-				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Cliente:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.cliente.nome}" />
@@ -59,7 +59,7 @@
 			<!-- Vendedor -->
 			<h:panelGroup
 				rendered="#{!vendaBean.permissao.podeEditarVendedor}"
-				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Vendedor:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.vendedor.nomeExibicao}" />
@@ -67,7 +67,7 @@
 
 			<!-- Forma de Pagamento -->
 			<h:panelGroup rendered="#{!vendaBean.permissao.podeEditar}" 
-			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column align-items-start gap-1">
 			    <h:outputText styleClass="title" value="Pagamento:" />
 			    <h:outputText styleClass="status"
 			        value="#{vendaBean.entidade.formaPagamento.nome}" />
@@ -75,7 +75,7 @@
 			
 			<!-- Forma de Pagamento -->
 			<h:panelGroup rendered="#{!vendaBean.permissao.podeEditar and vendaBean.entidade.formaPagamento.permiteParcelamento}"
-			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+			styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column align-items-start gap-1">
 			    <h:outputText styleClass="title" value="Nº de Parcelas:" />
 		        <h:outputText styleClass="status" 
 			        value="#{vendaBean.entidade.qtdParcelas}" />
@@ -84,7 +84,7 @@
 			<!-- Canal de Atendimento -->
 			<h:panelGroup
 				rendered="#{!vendaBean.permissao.podeEditar}"
-				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Canal de Atendimento:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.canalAtendimento.nome}" />
@@ -93,7 +93,7 @@
 			<!-- Observação -->
 			<h:panelGroup
 				rendered="#{!vendaBean.permissao.podeEditar}"
-				styleClass="col-12 flex flex-row align-items-center gap-1">
+				styleClass="col-12 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Observação:" />
 				<h:outputText styleClass="status"
 					value="#{vendaBean.entidade.observacao}" />

@@ -1,193 +1,118 @@
 package bean.questao;
 
-import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.EnumSet;
 
 import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import bean.util.Mensagem;
+import bean.FilhoBean;
 import dao.questao.ParagrafoDAO;
-import modelo.questao.ImagemFile;
-import modelo.questao.Paragrafo;
-import modelo.questao.Questao;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.auditoria.TipoEvento;
+import modelo.questao.ImagemFile;
+import modelo.questao.Paragrafo;
+import modelo.questao.Questao;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class ParagrafoBean implements Serializable
+public class ParagrafoBean extends FilhoBean<Paragrafo, ParagrafoDAO>
 {
 	private static final long serialVersionUID = 1L;
 
-	String nome = "Paragrafo";
+	@Inject
+	private QuestaoBean questaoBean;
 
-	private Paragrafo paragrafo;
-
-	private boolean lista = true;
-	private boolean cadastro = false;
 	private UploadedFile uploadedFile;
 
-	@Inject
-	private GestaoQuestaoBean gestaoQuestaoBean;
-
-	@Inject
-	private ParagrafoDAO paragrafoDAO;
+	public ParagrafoBean()
+	{
+		super(Paragrafo.class, "Parágrafo");
+		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
+	}
 
 	public String cadastrar()
 	{
+		entidade = new Paragrafo();
+		entidade.setQuestao(questaoBean.getEntidade());
 		cadastro = true;
-		lista = false;
-		paragrafo = new Paragrafo();
 		return "";
 	}
 
 	public String adicionar()
 	{
-		try
-		{
-			Questao questao = gestaoQuestaoBean.getQuestao();
-			paragrafo.setQuestao(questao);
-			paragrafo.setOrdem(questao.getParagrafos().size());
-			questao.getParagrafos().add(paragrafo);
-			paragrafoDAO.salvar(paragrafo);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar o " + nome);
-		}
-		return "";
+		return adicionar(() -> {
+			Questao questao = questaoBean.getEntidade();
+			entidade.setOrdem(questao.getParagrafos().size());
+			questao.getParagrafos().add(entidade);
+			if(questao.getId() != null)
+			{
+				questao = questaoBean.somenteSalvar();
+				entidade = questao.getParagrafos().get(entidade.getOrdem());
+			}
+		});
 	}
 
 	public String salvar()
 	{
-		try
-		{
-			paragrafo=paragrafoDAO.salvar(paragrafo);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o " + nome);
-		}
-		return "";
+		return salvar(
+		() -> {
+			mapper.update(entidade, entidadeOriginal);
+		},
+		() -> {
+			Questao questao = questaoBean.getEntidade();
+			if(questao.getId() != null)
+				questaoBean.somenteSalvar();
+		});
 	}
 
 	public String remover()
 	{
-		try
-		{
-			Questao questao = gestaoQuestaoBean.getQuestao();
-			questao.getParagrafos().remove(paragrafo);
-			paragrafoDAO.remover(paragrafo);
-			lista = true;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o " + nome);
-		}
-		return "";
+		return remover(() -> {
+			Questao questao = questaoBean.getEntidade();
+			questao.getParagrafos().remove(entidade);
+			if(questao.getId() != null)
+			{
+				questao = questaoBean.somenteSalvar();
+				onRowReorder(questao.getParagrafos());
+			}
+		});
 	}
 
-	public String cancelar()
-	{
-		lista = true;
-		return "";
-	}
-
-	public void onSelected()
-	{
-		cadastro = false;
-		lista = false;
-	}
-
-	public String uploadNovo(FileUploadEvent event)
+	public void uploadNovo(FileUploadEvent event)
 	{
 		uploadedFile = event.getFile();
 		try
 		{
 			SerialBlob serialBlob = new SerialBlob(uploadedFile.getContent());
 			ImagemFile imagemFile = new ImagemFile();
-
 			imagemFile.setFile(serialBlob);
 			imagemFile.setEndImagem(uploadedFile.getFileName());
-			paragrafo.setImagemFile(imagemFile);
+			entidade.setImagemFile(imagemFile);
+			entidade.setTexto(null);
 
 			FacesContext.getCurrentInstance().addMessage("growl",
-			new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload do arquivo " + uploadedFile.getFileName() + " realizado com sucesso.", ""));
-
-		}
-		catch(SerialException e)
-		{
-			e.printStackTrace();
+			new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Upload de " + uploadedFile.getFileName() + " realizado com sucesso.", ""));
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return "";
 	}
 
-	public String removerImagem()
+	public void removerImagem()
 	{
-		paragrafo.setImagemFile(null);
-		paragrafoDAO.salvar(paragrafo);
-
-		FacesContext.getCurrentInstance().addMessage("growl", new FacesMessage(FacesMessage.SEVERITY_INFO, "Imagem removida com sucesso.", ""));
-		return "";
+		entidade.setImagemFile(null);
 	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public Paragrafo getParagrafo()
-	{
-		return paragrafo;
-	}
-
-	public void setParagrafo(Paragrafo paragrafo)
-	{
-		this.paragrafo = paragrafo;
-	}
-
-	public boolean isLista()
-	{
-		return lista;
-	}
-
-	public void setLista(boolean lista)
-	{
-		this.lista = lista;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
 }

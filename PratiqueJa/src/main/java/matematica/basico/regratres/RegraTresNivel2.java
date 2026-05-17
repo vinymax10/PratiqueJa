@@ -21,7 +21,7 @@ public class RegraTresNivel2 extends Conta
 		{
 			int tipo = 1 + rand.nextInt(1);
 			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".Nivel2Package.RegraTres" + tipo).getConstructor(Integer.TYPE).newInstance(index));
+			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.RegraTres" + tipo).getConstructor(Integer.TYPE).newInstance(index));
 		}
 		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
 		| ClassNotFoundException e)

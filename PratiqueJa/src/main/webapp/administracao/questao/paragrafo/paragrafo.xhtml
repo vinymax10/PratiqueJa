@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition>
+
+			<h:panelGroup id="paragrafos" class="gride">
+
+				<div class="title-divisor-button">
+					<h4 class="m-0">Parágrafos</h4>
+					<div class="flex justify-content-end">
+						<p:commandButton value="Parágrafo" icon="pi pi-plus"
+							styleClass="ui-button-raised ui-button-success"
+							action="#{paragrafoBean.cadastrar()}"
+							update="dialog-paragrafo" process="@this"
+							oncomplete="PF('dialogParagrafo').show()" resetValues="true">
+						</p:commandButton>
+					</div>
+				</div>
+
+				<p:dataTable id="paragrafosTabela" class="tableStatus ml-3 mr-3" stripedRows="true"
+				var="entidade" value="#{questaoBean.entidade.paragrafos}"
+				selection="#{paragrafoBean.entidadeOriginal}" reflow="true"
+				selectionMode="single" rowKey="#{entidade.id}"
+				rows="30" paginator="true" paginatorAlwaysVisible="false"
+				rowSelector="td:not(.coluna-ativo)">
+
+					<p:ajax event="rowSelect" update="dialog-paragrafo"
+					listener="#{paragrafoBean.onRowSelect}"
+					oncomplete="PF('dialogParagrafo').show()" resetValues="true"/>
+
+					<p:column headerText="Ordem" responsivePriority="1" width="10%">
+						<h:outputText value="#{entidade.ordem}" />
+					</p:column>
+
+					<p:column headerText="Tipo" responsivePriority="2" width="15%">
+						<h:outputText value="#{entidade.tipoImagem ? 'Imagem' : 'Texto'}" />
+					</p:column>
+
+					<p:column headerText="Conteúdo" responsivePriority="3">
+						<h:outputText rendered="#{!entidade.tipoImagem}"
+						value="#{entidade.texto}" style="white-space:pre-wrap;" />
+						<h:outputText rendered="#{entidade.tipoImagem}"
+						value="#{entidade.imagemFile.endImagem}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</h:panelGroup>
+
+		</ui:composition>
+	</h:body>
+</html>

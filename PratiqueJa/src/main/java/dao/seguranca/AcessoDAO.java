@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -39,16 +38,9 @@ public class AcessoDAO extends DAO<Acesso>
 		predicates.add(builder.equal(fromAcesso.get("idSessao"), idSessao));
 
 		TypedQuery<Acesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])));
-		try
-		{
-			List<Acesso> listaAcesso = typedQuery.getResultList();
-			if(listaAcesso.size() > 0)
-				acesso = typedQuery.getResultList().get(0);
-		}
-		catch(NoResultException e)
-		{
-			return null;
-		}
+		List<Acesso> listaAcesso = typedQuery.getResultList();
+		if(!listaAcesso.isEmpty())
+			acesso = listaAcesso.get(0);
 		return acesso;
 	}
 

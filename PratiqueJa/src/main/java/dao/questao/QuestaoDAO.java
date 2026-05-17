@@ -239,10 +239,7 @@ public class QuestaoDAO extends DAO<Questao>
 
 		List<Questao> list = typedQuery.getResultList();
 		
-		if(list.size()>0)
-			return list.get(0);
-		
-		return null;
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 	public Alternativa getAlternativaCorreta(Questao questao)

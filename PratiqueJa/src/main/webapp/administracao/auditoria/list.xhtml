@@ -1,0 +1,123 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/barraLateral.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" 
+		value="#{auditoriaBean.nome}"	/>
+	</ui:define>
+	
+	<f:metadata>
+	    <f:viewAction action="#{auditoriaBean.filtrar()}"  />
+	</f:metadata>
+	
+	<h:form id="form" class="form" >
+		
+		<ui:include src="/configuracao/auditoria/filtro.xhtml" />
+		
+		<p:dataView value="#{auditoriaBean.auditorias}" class="m-3" var="registro" style="width:100%"
+          paginator="true" rows="10" paginatorAlwaysVisible="false" emptyMessage="">
+			<p:dataViewListItem>
+			
+				<p:card class="newBorder mt-3 mb-3" style="width:100%">
+					<div class="grid panelStatus m-0">
+
+					    <!-- Tipo -->
+					    <h:panelGroup
+					        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-column align-items-start gap-2">
+					
+					        <h:outputText styleClass="title" value="Tipo:" />
+					
+					        <ui:include src="/status/status.xhtml">
+					            <ui:param name="status" value="#{registro.tipo}" />
+					        </ui:include>
+					
+					    </h:panelGroup>
+					
+					    <!-- Usuário -->
+					    <h:panelGroup
+					        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-column align-items-start gap-1">
+					
+					        <h:outputText styleClass="title" value="Usuário:" />
+					
+					        <h:outputText
+					            styleClass="status"
+					            value="#{registro.usuario.nome}" />
+					
+					    </h:panelGroup>
+					
+					    <!-- IP -->
+					    <h:panelGroup
+					        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-column align-items-start gap-1">
+					
+					        <h:outputText styleClass="title" value="IP:" />
+					
+					        <h:outputText
+					            styleClass="status"
+					            value="#{registro.ip}" />
+					
+					    </h:panelGroup>
+					
+					    <!-- Data -->
+					    <h:panelGroup
+					        styleClass="col-12 md:col-6 lg:col-6 xl:col-3 flex flex-column align-items-start gap-1">
+					
+					        <h:outputText styleClass="title" value="Data:" />
+					
+					        <h:outputText
+					            styleClass="status"
+					            value="#{registro.dataEvento}">
+					
+					            <f:convertDateTime
+					                pattern="dd/MM/yyyy HH:mm"
+					                type="localDateTime" />
+					
+					        </h:outputText>
+					
+					    </h:panelGroup>
+					
+					    <!-- Navegador -->
+					    <h:panelGroup
+					        styleClass="col-12 flex flex-column align-items-start gap-1">
+					
+					        <h:outputText styleClass="title" value="Navegador:" />
+					
+					        <h:outputText
+					            styleClass="status"
+					            value="#{registro.userAgent}" />
+					
+					    </h:panelGroup>
+					
+					    <!-- Resumo -->
+					    <h:panelGroup
+					        styleClass="col-12 flex flex-column gap-1">
+					
+					        <h:outputText styleClass="title" value="Resumo:" />
+					
+					        <ui:repeat value="#{registro.itensResumo}" var="item">
+					
+					            <h:outputText
+					                styleClass="status"
+					                value="#{item}" />
+					
+					        </ui:repeat>
+					
+					    </h:panelGroup>
+					
+					</div>
+				</p:card>
+		
+			</p:dataViewListItem>
+		 
+		</p:dataView>
+		
+		<h:outputText class="title"
+			value="Não há registros recentes de auditoria."
+			rendered="#{empty auditoriaBean.auditorias}" />		
+	</h:form>
+	
+</ui:decorate>
+

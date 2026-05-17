@@ -28,7 +28,7 @@
 
 			<!-- Nome do Usuário -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Nome do Usuário:" />
 				<h:outputText styleClass="status"
 					value="#{not empty contatoBean.entidade.usuario ? contatoBean.entidade.usuario.nome : contatoBean.entidade.nomeUsuario}" />
@@ -36,21 +36,21 @@
 
 			<!-- Email -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Email:" />
 				<h:outputText styleClass="status" value="#{contatoBean.entidade.email}" />
 			</h:panelGroup>
 
 			<!-- Assunto -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Assunto:" />
 				<h:outputText styleClass="status" value="#{contatoBean.entidade.assunto}" />
 			</h:panelGroup>
 
 			<!-- Data -->
 			<h:panelGroup
-				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-row align-items-center gap-1">
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Data:" />
 				<h:outputText styleClass="status" value="#{contatoBean.entidade.data}">
 					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
@@ -59,7 +59,7 @@
 
 			<!-- Mensagem -->
 			<h:panelGroup
-				styleClass="col-12 flex flex-row align-items-center gap-1">
+				styleClass="col-12 flex flex-column align-items-start gap-1">
 				<h:outputText styleClass="title" value="Mensagem:" />
 				<h:outputText styleClass="status" value="#{contatoBean.entidade.mensagem}" />
 			</h:panelGroup>

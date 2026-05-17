@@ -6,10 +6,15 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	template="/template/template.xhtml">
 	
-<f:metadata>
-    <f:viewParam name="id" value="#{exercicioBean.id}" converter="jakarta.faces.Long" />
-    <f:viewAction action="#{exercicioBean.init()}" />
-</f:metadata>
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Exercício" />
+	</ui:define>
+	
+	
+	<f:metadata>
+	    <f:viewParam name="id" value="#{exercicioBean.id}" converter="jakarta.faces.Long" />
+	    <f:viewAction action="#{exercicioBean.init()}" />
+	</f:metadata>
 
 	<p:remoteCommand name="update" action="#{exercicioBean.update}" 
    	process="@this"  /> 
@@ -17,10 +22,7 @@
 	<div class="p-d-flex">
 			
 	    <h:form id="form" style="margin-bottom:0;width:100%;">
-			<div class="p-grid" style="margin:0 15px;">
-				<div class="p-col-12" >	
-					<h2>Exercício</h2>	
-				</div>
+			<div class="grid" style="margin:0 15px;">
 				<div class="p-col-6" >
 					<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicio.exercicioPadrao.assuntoCurso.modulo.nome}" />
 			    	 - 
@@ -42,7 +44,7 @@
 	    	 	</h:panelGroup>
 	    	 	</div>			
 				
-				<div class="p-col-12" >
+				<div class="col-12" >
 					<h:outputText style="margin-bottom:10px;font-weight: bold;color:var(--laranja)" 
 					value="Instrução: " />
 				   <h:outputText style="margin-bottom:10px;" 
@@ -52,16 +54,14 @@
 			 
 		    <br/>  
 			    
-			<div class="p-grid" style="margin:0; width:100%;">
-				<div  class="ui-fluid p-formgrid p-grid" style="width:100%;margin:0 15px;" >
-					<c:forEach items="#{exercicioBean.exercicio.contas}" var="conta" varStatus="status">
-						<ui:insert >
-			        		<ui:include src="#{conta.getFileTipoExercicio()}" />
-		        		</ui:insert>
-					</c:forEach>
-			    </div>
-			
+			<div class="grid ui-fluid">
+				<c:forEach items="#{exercicioBean.exercicio.contas}" var="conta" varStatus="status">
+					<ui:insert>
+						<ui:include src="#{conta.getFileTipoExercicio()}" />
+					</ui:insert>
+				</c:forEach>
 			</div>
+			
 			<div class="p-grid" style="margin:0 15px;">
 				<div class="p-col-6" >
 				

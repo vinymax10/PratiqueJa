@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -96,17 +97,17 @@ public class Questao implements Serializable, Entidade
 	private String prova;
 
 	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "questao")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "questao")
 	@OrderBy("ordem")
 	private List<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
 
 	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "questao")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "questao")
 	@OrderBy("ordem")
 	private List<Alternativa> alternativas = new ArrayList<Alternativa>();
 
 	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "questao")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "questao")
 	private List<ResultadoQuestao> resultadosQuestao = new ArrayList<ResultadoQuestao>();
 
 	@AuditLabel(value = "revisada", genero = GeneroGramatical.FEMININO)

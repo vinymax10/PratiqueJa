@@ -110,7 +110,7 @@ public class ProgramacaoPostService
 
 	public void removerTodos(ConfigPost configPost)
 	{
-		while(configPost.getProgramacoesPost().size() > 0)
+		while(!configPost.getProgramacoesPost().isEmpty())
 		{
 			ProgramacaoPost p = configPost.getProgramacoesPost().get(0);
 			programacaoPostDAO.remover(p);

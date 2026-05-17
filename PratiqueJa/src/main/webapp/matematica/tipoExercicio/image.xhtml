@@ -7,7 +7,7 @@
 <h:body>
 	<ui:composition>
 		<div class="col-12 md:col-6 xl:col-4">
-			<p:card style="margin:10px;width: auto;">
+			<p:card class="newBorder p-3 card-fill" style="margin:10px;width: auto;">
 			
 				<h:outputText value=" #{conta.index}) "
 				class="numberExercise"
@@ -60,7 +60,7 @@
 	
 					</h:panelGroup>
 
-					<h:panelGroup style="display:block; margin-top:1rem;"
+					<h:panelGroup style="display:block;margin-top:auto; margin-top:1rem;"
 						rendered="#{!conta.respondida}">
 						<div class="ui-inputgroup">
 							<p:inputText id="input_#{conta.index}" value="#{conta.respostaAluno}"
@@ -72,14 +72,13 @@
 							<p:commandButton id="responder_#{conta.index}" 
 							action="#{exercicioBean.responder(conta)}"
 							styleClass="ui-button-outlined  ui-button-secondary" ajax="true"
-							icon="fa-solid fa-reply"
+							icon="fa-regular fa-eye"
 							process="@parent"
 							update="form:resultado_#{conta.index} form:nota" 
 							oncomplete="reloadMathJax(); enableEnterSubmit('form');">
 								<p:defaultCommand target="form:responder_#{conta.index}"/>
 							</p:commandButton>
 						</div>
-						<p:message for="input_#{conta.index}" display="text"/>
 					</h:panelGroup>
 				</h:panelGroup>
 			</p:card>

@@ -59,15 +59,13 @@ public class AuditoriaService implements Serializable
 
 	public <T extends Entidade> void registrarEdicao(Class<T> classe, Long entidadeId, T entidadeAtual)
 	{
-		Long ini = System.currentTimeMillis();
-
 		T anterior = em.find(classe, entidadeId);
 
 		Diff diff = javers.compare(anterior, entidadeAtual);
 
 		if(diff.hasChanges())
 		{
-			String resumo = gerarResumo(classe, diff,anterior,entidadeAtual);
+			String resumo = gerarResumo(classe, diff, anterior, entidadeAtual);
 			if(!resumo.isBlank())
 			{
 				AuditoriaEvento evento = criarEventoBase(classe, entidadeId, TipoEvento.EDICAO);
@@ -75,9 +73,6 @@ public class AuditoriaService implements Serializable
 				auditoriaEventoDAO.adicionar(evento);
 			}
 		}
-		Long fim = System.currentTimeMillis();
-
-		System.out.println("tempo: " + (fim - ini) + " ms");
 	}
 
 

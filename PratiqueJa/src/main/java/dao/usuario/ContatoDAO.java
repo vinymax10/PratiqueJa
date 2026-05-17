@@ -49,16 +49,15 @@ public class ContatoDAO extends DAO<Contato>
 		if(filtro.getAssunto() != null && !filtro.getAssunto().isBlank())
 			predicates.add(builder.like(fromContato.get("assunto"), "%" + filtro.getAssunto() + "%"));
 
-		if(filtro.getPeriodo() != null)
-	    {
-	    	if(filtro.getPeriodo().size()>0)
-		    	predicates.add(builder.greaterThanOrEqualTo(
-		    	fromContato.get("data"), filtro.getPeriodo().get(0)));
-	    	
-	    	if(filtro.getPeriodo().size()>1)
-	    		predicates.add(builder.lessThanOrEqualTo(
-	    		fromContato.get("data"), filtro.getPeriodo().get(1)));
-	    }
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(
+				fromContato.get("data"), filtro.getPeriodo().get(0)));
+
+			if(filtro.getPeriodo().size() > 1)
+				predicates.add(builder.lessThanOrEqualTo(
+					fromContato.get("data"), filtro.getPeriodo().get(1)));
+		}
 		
 		if(filtro.getRespondido() != null)
 			predicates.add(builder.equal(fromContato.get("respondido"), filtro.getRespondido().booleanValue()));

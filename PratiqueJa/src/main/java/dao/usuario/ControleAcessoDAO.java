@@ -42,10 +42,7 @@ public class ControleAcessoDAO extends DAO<ControleAcesso>
 		.where(predicates.toArray(new Predicate[0])));
 		List<ControleAcesso> list = typedQuery.getResultList();
 		
-		if(list.size()>0)
-			return list.get(0);
-		
-		return null;
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	public List<ControleAcesso> buscar(FiltroControleAcesso filtro)
@@ -62,16 +59,15 @@ public class ControleAcessoDAO extends DAO<ControleAcesso>
 			predicates.add(builder.like(fromAcesso.<Usuario>get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 		}
 
-		if(filtro.getPeriodo() != null)
-	    {
-	    	if(filtro.getPeriodo().size()>0)
-		    	predicates.add(builder.greaterThanOrEqualTo(
-		    	fromAcesso.get("data"), filtro.getPeriodo().get(0)));
-	    	
-	    	if(filtro.getPeriodo().size()>1)
-	    		predicates.add(builder.lessThanOrEqualTo(
-	    		fromAcesso.get("data"), filtro.getPeriodo().get(1)));
-	    }
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(
+				fromAcesso.get("data"), filtro.getPeriodo().get(0)));
+
+			if(filtro.getPeriodo().size() > 1)
+				predicates.add(builder.lessThanOrEqualTo(
+					fromAcesso.get("data"), filtro.getPeriodo().get(1)));
+		}
 
 		TypedQuery<ControleAcesso> typedQuery = em.createQuery(query.select(fromAcesso).where(predicates.toArray(new Predicate[0])));
 		List<ControleAcesso> list = typedQuery.getResultList();

@@ -33,8 +33,8 @@ public class ImagemPostService
 
 	public void remover(ImagemPost imagem, String endBase) throws RelacaoException
 	{
-		if((imagem.isFeed() && imagem.getProgramacoesFeed().size() > 0)
-		|| (!imagem.isFeed() && imagem.getProgramacoesReel().size() > 0))
+		if((imagem.isFeed() && !imagem.getProgramacoesFeed().isEmpty())
+		|| (!imagem.isFeed() && !imagem.getProgramacoesReel().isEmpty()))
 			throw new RelacaoException("Não foi possível remover a imagem. Existem programações relacionadas.");
 
 		if(imagem.getEndImagem() != null)

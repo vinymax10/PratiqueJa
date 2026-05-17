@@ -62,17 +62,8 @@ public class DownloadBean implements Serializable
 
 	public StreamedContent download()
 	{
-		if (!controleAcessoBean.verificaEstaLogado())
+		if (!verificarAcesso())
 			return null;
-
-		if (!controleAcessoBean.podeFazerDownloadMassa())
-		{
-			controleAcessoBean.showUpgrade("Este recurso está disponível somente para os perfis Prata ou Ouro."
-					+ "\nPor favor faça o upgrade de sua conta.");
-			return null;
-		}
-
-		logger.fine(setDownload.toString());
 
 		int totalPartes = montadorPdfService.calcularTotalPartes(setDownload);
 		if (totalPartes == 0)
@@ -94,9 +85,9 @@ public class DownloadBean implements Serializable
 			return null;
 		}
 
+		logger.fine(setDownload.toString());
 		porcentagem = 0;
-		Usuario usuario = usuarioDAO.carrega(Sessao.getUsuarioLogado().getId());
-		setDownload.setUsuario(usuario);
+		Usuario usuario = prepararUsuario();
 		ConfigDownload configExercicio = buildConfigDownload(usuario, true);
 		ConfigDownload configQuestao = buildConfigDownload(usuario, false);
 		Diretorio diretorio = diretorioService.criarDiretorio();
@@ -105,12 +96,7 @@ public class DownloadBean implements Serializable
 		byte[] bytes = montadorPdfService.montar(setDownload, configExercicio, configQuestao,
 				diretorio, basePath, p -> { porcentagem = p; push.send("update"); });
 
-		InputStream inStream = new ByteArrayInputStream(bytes);
-		String nomeFile = resolverNomeArquivo();
-
-		StreamedContent file = DefaultStreamedContent.builder().name(nomeFile + ".pdf")
-				.contentType("aplication/pdf").stream(() -> inStream).build();
-
+		StreamedContent file = buildStreamedContent(bytes, resolverNomeArquivo());
 		diretorioService.freeDiretorio(diretorio);
 		controleAcessoBean.registrarDownloadMassa();
 		return file;
@@ -118,59 +104,71 @@ public class DownloadBean implements Serializable
 
 	public StreamedContent downloadInstagram(boolean feed)
 	{
-		if (!controleAcessoBean.verificaEstaLogado())
+		if (!verificarAcesso())
 			return null;
 
-		if (!controleAcessoBean.podeFazerDownloadMassa())
-		{
-			controleAcessoBean.showUpgrade("Este recurso está disponível somente para os perfis Prata ou Ouro."
-					+ "\nPor favor faça o upgrade de sua conta.");
-			return null;
-		}
-
-		ProgramacaoPost programacaoPost = programacaoPostBean.programacaoPostDefault();
 		logger.fine(setDownload.toString());
-
-		Usuario usuario = usuarioDAO.carrega(Sessao.getUsuarioLogado().getId());
-		setDownload.setUsuario(usuario);
+		porcentagem = 0;
+		Usuario usuario = prepararUsuario();
 		ConfigDownload configExercicio = buildConfigDownload(usuario, true);
+		ProgramacaoPost programacaoPost = programacaoPostBean.programacaoPostDefault();
 
 		ColorHolder.setCOLOR(programacaoPost.getConfigPost().getCorFonte());
 		ColorHolder.setFORMULA(programacaoPost.getConfigPost().getCorFormula());
 
-		porcentagem = 0;
 		Diretorio diretorio = diretorioService.criarDiretorio();
 
 		byte[] bytes = montadorPdfService.montarInstagram(setDownload, configExercicio,
 				diretorio, programacaoPost, feed, p -> { porcentagem = p; push.send("update"); });
 
-		InputStream inStream = new ByteArrayInputStream(bytes);
-		String nomeFile = resolverNomeArquivo();
-
-		StreamedContent file = DefaultStreamedContent.builder().name(nomeFile + ".pdf")
-				.contentType("aplication/pdf").stream(() -> inStream).build();
-
+		StreamedContent file = buildStreamedContent(bytes, resolverNomeArquivo());
 		diretorioService.freeDiretorio(diretorio);
 		ColorHolder.clear();
 		controleAcessoBean.registrarDownloadMassa();
 		return file;
 	}
 
+	private boolean verificarAcesso()
+	{
+		if (!controleAcessoBean.verificaEstaLogado())
+			return false;
+		if (!controleAcessoBean.podeFazerDownloadMassa())
+		{
+			controleAcessoBean.showUpgrade("Este recurso está disponível somente para os perfis Prata ou Ouro."
+					+ "\nPor favor faça o upgrade de sua conta.");
+			return false;
+		}
+		return true;
+	}
+
+	private Usuario prepararUsuario()
+	{
+		Usuario usuario = usuarioDAO.carrega(Sessao.getUsuarioLogado().getId());
+		setDownload.setUsuario(usuario);
+		return usuario;
+	}
+
+	private StreamedContent buildStreamedContent(byte[] bytes, String nomeFile)
+	{
+		InputStream inStream = new ByteArrayInputStream(bytes);
+		return DefaultStreamedContent.builder().name(nomeFile + ".pdf")
+				.contentType("aplication/pdf").stream(() -> inStream).build();
+	}
+
 	private ConfigDownload buildConfigDownload(Usuario usuario, boolean exercicio)
 	{
-		ConfigDownload configDownload = new ConfigDownload();
-		configDownload.setIdentificacao(exercicio ? setDownload.isIdentificacaoExercicio() : setDownload.isIdentificacaoQuestao());
-		configDownload.setResolucao(exercicio ? setDownload.isResolucaoExercicio() : setDownload.isResolucaoQuestao());
-		configDownload.setRespostas(exercicio ? setDownload.isRespostasExercicio() : setDownload.isRespostasQuestao());
-		configDownload.setUsuario(usuario);
-
-		return configDownload;
+		ConfigDownload config = new ConfigDownload();
+		config.setIdentificacao(exercicio ? setDownload.isIdentificacaoExercicio() : setDownload.isIdentificacaoQuestao());
+		config.setResolucao(exercicio ? setDownload.isResolucaoExercicio() : setDownload.isResolucaoQuestao());
+		config.setRespostas(exercicio ? setDownload.isRespostasExercicio() : setDownload.isRespostasQuestao());
+		config.setUsuario(usuario);
+		return config;
 	}
 
 	private String resolverNomeArquivo()
 	{
 		String nome = setDownload.getNomeArquivo();
-		if (nome.isEmpty())
+		if (nome == null || nome.isBlank())
 			return setDownload.getAssuntosCurso().size() == 1
 					? setDownload.getAssuntosCurso().get(0).getChave()
 					: "pratiqueJa";

@@ -82,19 +82,18 @@ public class AuditoriaEventoDAO extends DAO<AuditoriaEvento>
 		if(filtro.getUserAgent() != null && !filtro.getUserAgent().isBlank())
 			predicates.add(builder.like(fromAuditoriaEvento.get("userAgent"), "%" + filtro.getUserAgent() + "%"));
 
-		if(filtro.getPeriodo() != null)
-	    {
-	    	if(filtro.getPeriodo().size()>0)
-		    	predicates.add(builder.greaterThanOrEqualTo(
-		    	fromAuditoriaEvento.get("dataEvento"), filtro.getPeriodo().get(0)));
+		if(filtro.getPeriodo() != null && !filtro.getPeriodo().isEmpty())
+		{
+			predicates.add(builder.greaterThanOrEqualTo(
+				fromAuditoriaEvento.get("dataEvento"), filtro.getPeriodo().get(0)));
 
-	    	if(filtro.getPeriodo().size()>1)
-	    	{
-	    		LocalDateTime dataFinalfimDoDia = filtro.getPeriodo().get(1).atTime(LocalTime.MAX);
-	    		predicates.add(builder.lessThanOrEqualTo(
-	    		fromAuditoriaEvento.get("dataEvento"), dataFinalfimDoDia));
-	    	}
-	    }
+			if(filtro.getPeriodo().size() > 1)
+			{
+				LocalDateTime dataFinalFimDoDia = filtro.getPeriodo().get(1).atTime(LocalTime.MAX);
+				predicates.add(builder.lessThanOrEqualTo(
+					fromAuditoriaEvento.get("dataEvento"), dataFinalFimDoDia));
+			}
+		}
 
 		TypedQuery<AuditoriaEvento> typedQuery = em
 		.createQuery(query.select(fromAuditoriaEvento).where(predicates.toArray(new Predicate[0])).orderBy(builder.asc(fromAuditoriaEvento.get("dataEvento"))));

@@ -21,7 +21,7 @@ import bean.download.SetDownload;
 import bean.exercicio.ConfigDownload;
 import dao.exercicio.ExercicioPadraoDAO;
 import dao.questao.QuestaoDAO;
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import modelo.academico.AssuntoCurso;
 import modelo.exercicio.ExercicioPadrao;
@@ -33,7 +33,7 @@ import pdf.questao.GerarLatexQuestao;
 import pdf.social.InstagramFeed;
 import pdf.social.TikTok;
 
-@Dependent
+@RequestScoped
 public class MontadorPdfService
 {
 	@Inject
