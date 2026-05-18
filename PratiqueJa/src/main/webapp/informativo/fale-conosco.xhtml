@@ -4,74 +4,79 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
-	
 
-    <h:form id="form" style="margin-bottom:0">
-		<div class="p-d-flex">
-	    	<div class="p-grid" style="margin:0 15px;width:100%;word-break: break-word;">
-		
-				<div class="p-col-12" style="margin:10px;">	
-					<h2 >Fale Conosco</h2>
-				</div>
-				
-				<div class="textInfo p-col-12">
-					Este canal deve ser utilizado para tirar alguma dúvida, tecer críticas ou elogios. Também pode ser utilizado para tratar de qualquer assunto relacionado ao Pratique Já.
-					O seu contato é muito importante para que possamos melhorar o nosso serviço. Estamos empenhados em oferecer um serviço de qualidade e estamos dispostos para lhe atender.
-				</div>
-				
-				<div class="ui-fluid  p-col-12">
-					
-					<h:panelGroup rendered="#{!sessaoBean.logado}">
-						<div class="campoMsg p-col-12 ">
-							<p:outputLabel for="@next" value="Nome"/>
-			                <p:inputText id="nome" placeholder="Nome" value="#{contatoBean.contato.nomeUsuario}" 
-			                maxlength="255" required="true" requiredMessage="O nome é obrigatório" />
-			                <p:message for="nome" display="text"/>
-						</div>
-						
-						<div class="campoMsg col-12 ">
-							<p:outputLabel for="email" value="Email" />
-							<p:inputText id="email" placeholder="Email"
-							value="#{contatoBean.contato.email}" maxlength="255"
-							required="true" requiredMessage="O e-mail é obrigatório" />
-							<p:message for="email" display="text" />
-						</div>
-					</h:panelGroup>
-					
-					<div class="campoMsg p-col-12 ">
-						<p:outputLabel for="@next" value="Assunto"/>
-		                <p:inputText id="assunto" placeholder="Assunto" value="#{contatoBean.contato.assunto}" maxlength="255"
-		                required="true" requiredMessage="O assunto é obrigatório" />
-		                <p:message for="assunto" display="text"/>
-					</div>
-					
-					<div class="campoMsg p-col-12 ">
-						<p:outputLabel for="@next" value="Mensagem"/>
-						<p:inputTextarea id="mensagem" rows="5"  placeholder="Mensagem" value="#{contatoBean.contato.mensagem}" maxlength="1023"
-						required="true" requiredMessage="A mensagem é obrigatória" /> 
-						<p:message for="mensagem" display="text"/>
-					</div>
-					
-				</div>
-				
-				<p:divider style="margin:15px;" />
-				<div class="p-col-12 p-text-right" >
-				
-					<p:commandButton id="enviar" value="Enviar" 
-					styleClass="ui-button-raised ui-button-flat" icon="pi pi-send" 
-					action="#{contatoBean.adicionar}" update="@form, :growl"  process="@form"	>
-						<p:defaultCommand target="form:enviar"/>
-					</p:commandButton>
-					
-				</div>
+<!-- HERO -->
+<div class="card-hero">
+	<p class="section-label">Contato</p>
+	<h1 class="page-title">Fale <span class="accent">Conosco</span></h1>
+	<p class="page-subtitle">
+		Este canal pode ser utilizado para tirar dúvidas, fazer críticas ou elogios, ou tratar de qualquer assunto relacionado ao Pratique Já. O seu contato é muito importante para que possamos melhorar continuamente o nosso serviço.
+	</p>
+</div>
 
-		    </div>
-   				
+<!-- FORMULÁRIO -->
+<h:form id="form">
+<div class="card-lg">
+	<h2 class="section-title">Enviar Mensagem</h2>
+
+	<h:panelGroup rendered="#{!sessaoBean.logado}" layout="block">
+		<div class="grid-3" style="margin-bottom:0;">
+			<div class="form-field">
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" placeholder="Seu nome"
+					value="#{contatoBean.entidade.nomeUsuario}"
+					maxlength="255" required="true"
+					requiredMessage="O nome é obrigatório" styleClass="w-full" />
+				<p:message for="nome" display="text" />
+			</div>
+			<div class="form-field">
+				<p:outputLabel for="email" value="Email" />
+				<p:inputText id="email" placeholder="Seu e-mail"
+					value="#{contatoBean.entidade.email}"
+					maxlength="255" required="true"
+					requiredMessage="O e-mail é obrigatório" styleClass="w-full" />
+				<p:message for="email" display="text" />
+			</div>
+			
+			<div class="form-field">
+				<p:outputLabel for="telefone" value="Telefone (opcional)" />
+				<p:inputMask id="telefone" placeholder="(00) 00000-0000"
+					value="#{contatoBean.entidade.telefone}"
+					mask="(99) 99999-9999" styleClass="w-full" />
+			</div>
 		</div>
-		<br/>
-		<br/>
-	</h:form>
-	
-	
+		
+	</h:panelGroup>
+
+	<div class="form-field">
+		<p:outputLabel for="assunto" value="Assunto" />
+		<p:inputText id="assunto" placeholder="Assunto da mensagem"
+			value="#{contatoBean.entidade.assunto}"
+			maxlength="255" required="true"
+			requiredMessage="O assunto é obrigatório" styleClass="w-full" />
+		<p:message for="assunto" display="text" />
+	</div>
+
+	<div class="form-field">
+		<p:outputLabel for="mensagem" value="Mensagem" />
+		<p:inputTextarea id="mensagem" rows="6" placeholder="Escreva sua mensagem..."
+			value="#{contatoBean.entidade.mensagem}"
+			maxlength="1023" required="true"
+			requiredMessage="A mensagem é obrigatória" styleClass="w-full" />
+		<p:message for="mensagem" display="text" />
+	</div>
+
+	<div class="form-actions">
+		<p:commandButton id="enviar" value="Enviar Mensagem"
+			icon="pi pi-send"
+			styleClass="ui-button-raised"
+			action="#{contatoBean.adicionar}"
+			update="@form :growl"
+			process="@form">
+			<p:defaultCommand target="form:enviar" />
+		</p:commandButton>
+	</div>
+</div>
+</h:form>
+
 </ui:decorate>
-	

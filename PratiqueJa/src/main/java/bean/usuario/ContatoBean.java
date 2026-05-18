@@ -36,8 +36,8 @@ public class ContatoBean extends PaiBean<Contato, ContatoDAO, PermissaoPadrao<Co
 	{
 		super(Contato.class, "Contato");
 
-		urlCadastro = "/administracao/contato/form.xhtml";
-		urlLista = "/administracao/contato/list.xhtml";
+		urlCadastro = "/administracao/usuarios/contato/form.xhtml";
+		urlLista = "/administracao/usuarios/contato/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}

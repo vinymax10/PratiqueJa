@@ -1,0 +1,130 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{contatoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewParam name="chave" value="#{contatoBean.chave}" />
+	    <f:viewParam name="cadastro" value="#{contatoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+	    <f:viewAction action="#{contatoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Contato</h4>
+
+		<div class="grid panelStatus ml-2 mr-2">
+
+			<div class="col-12" style="text-align:center;">
+				<p:graphicImage class="circle" value="#{contatoBean.entidade.usuario.imagem.getFotoStreamedContent()}"
+				rendered="#{not empty contatoBean.entidade.usuario.imagem}" stream="false" />
+			</div>
+
+			<!-- Nome do Usuário -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Nome do Usuário:" />
+				<h:outputText styleClass="status"
+					value="#{not empty contatoBean.entidade.usuario ? contatoBean.entidade.usuario.nome : contatoBean.entidade.nomeUsuario}" />
+			</h:panelGroup>
+
+			<!-- Email -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Email:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.email}" />
+			</h:panelGroup>
+
+			<!-- Telefone -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Telefone:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.telefone}" />
+			</h:panelGroup>
+
+			<!-- Assunto -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-4 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Assunto:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.assunto}" />
+			</h:panelGroup>
+
+			<!-- Data -->
+			<h:panelGroup
+				styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Data:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+				</h:outputText>
+			</h:panelGroup>
+
+			<!-- Mensagem -->
+			<h:panelGroup
+				styleClass="col-12 flex flex-column align-items-start gap-1">
+				<h:outputText styleClass="title" value="Mensagem:" />
+				<h:outputText styleClass="status" value="#{contatoBean.entidade.mensagem}" />
+			</h:panelGroup>
+
+		</div>
+		
+		<div class="ui-fluid gride" >
+		
+			<!-- Respondido -->
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Respondido" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{contatoBean.entidade.respondido}" />
+			</h:panelGroup>
+
+			<!-- Data de Resposta -->
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Data de Resposta" />
+				<p:datePicker value="#{contatoBean.entidade.dataResposta}" locale="pt"
+				monthNavigator="true" yearNavigator="select"  />
+			</h:panelGroup>
+		
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !contatoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(contatoBean.entidade, contatoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/usuarios/contato/list.xhtml" />
+				
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!contatoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{contatoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+				
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

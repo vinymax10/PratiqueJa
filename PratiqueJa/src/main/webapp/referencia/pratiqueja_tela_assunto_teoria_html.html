@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PratiqueJá - Função do 1º Grau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, #07142f, #0d1d47);
+      color: white;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+
+    .logo span {
+      color: #3b82f6;
+    }
+
+    .menu-title {
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin: 24px 0 14px;
+      text-transform: uppercase;
+    }
+
+    .menu-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+
+    .menu-item:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      color: white;
+      box-shadow: 0 10px 25px rgba(37,99,235,0.35);
+    }
+
+    .main {
+      margin-left: 280px;
+      flex: 1;
+      padding: 32px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .breadcrumb {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 28px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 30px;
+      box-shadow: 0 10px 35px rgba(15,23,42,0.05);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: #6b7280;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 18px 22px;
+      min-width: 160px;
+    }
+
+    .stat-card h3 {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .stat-card strong {
+      font-size: 24px;
+      color: #111827;
+    }
+
+    .hero-graph {
+      background: linear-gradient(180deg, #f8fbff, #eef4ff);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 320px;
+      border: 1px solid #dbeafe;
+    }
+
+    .hero-graph::before {
+      content: 'f(x) = ax + b';
+      position: absolute;
+      font-size: 42px;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.04);
+    }
+
+    .card-title {
+      font-size: 22px;
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      height: 16px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 26px;
+    }
+
+    .progress-fill {
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      border-radius: 999px;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .progress-item strong {
+      display: block;
+      font-size: 32px;
+      color: #2563eb;
+      margin-bottom: 6px;
+    }
+
+    .progress-item span {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .continue-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .continue-card h3 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .continue-card p {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 15px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37,99,235,0.25);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 14px 22px;
+      border-radius: 14px;
+      background: white;
+      color: #6b7280;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tab.active {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(37,99,235,0.18);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .section-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section-item {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 18px;
+      transition: 0.2s;
+    }
+
+    .section-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+    }
+
+    .section-item h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .section-item p {
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .easy {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .medium {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .hard {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .video-item,
+    .pdf-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 16px;
+    }
+
+    .video-thumb {
+      width: 100px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      margin-right: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumb::before {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 24px;
+    }
+
+    .video-info {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .pdf-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #fee2e2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #dc2626;
+      margin-right: 16px;
+    }
+
+    .pdf-info h4,
+    .video-info h4 {
+      margin-bottom: 6px;
+    }
+
+    .pdf-info span,
+    .video-info span {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .small-btn {
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .small-btn:hover {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    @media (max-width: 1200px) {
+      .hero,
+      .progress-grid,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .progress-stats {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">Pratique<span>Já</span></div>
+
+    <div class="menu-title">Principal</div>
+    <div class="menu-item">🏠 Início</div>
+    <div class="menu-item">📈 Meu progresso</div>
+    <div class="menu-item">🎥 Minhas aulas</div>
+    <div class="menu-item">📝 Simulados</div>
+
+    <div class="menu-title">Matemática</div>
+    <div class="menu-item">Álgebra</div>
+    <div class="menu-item active">Função do 1º Grau</div>
+    <div class="menu-item">Função do 2º Grau</div>
+    <div class="menu-item">Progressões</div>
+    <div class="menu-item">Geometria</div>
+    <div class="menu-item">Estatística</div>
+
+    <div style="margin-top:auto">
+      <div class="menu-item">⚙️ Configurações</div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="topbar">
+      <div class="breadcrumb">
+        Matemática > Álgebra > Função do 1º Grau
+      </div>
+    </div>
+
+    <section class="hero">
+      <div>
+        <h1>Função do 1º Grau</h1>
+        <p>
+          Aprenda teoria, pratique exercícios, resolva questões de concurso
+          e acompanhe videoaulas completas sobre função afim.
+        </p>
+
+        <div class="stats">
+          <div class="stat-card">
+            <h3>Tempo médio</h3>
+            <strong>3h 20m</strong>
+          </div>
+
+          <div class="stat-card">
+            <h3>Videoaulas</h3>
+            <strong>12 aulas</strong>
+          </div>
+
+          <div class="stat-card">
+            <h3>Exercícios</h3>
+            <strong>84</strong>
+          </div>
+
+          <div class="stat-card">
+            <h3>Questões</h3>
+            <strong>126</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-graph"></div>
+    </section>
+
+    <section class="progress-grid">
+      <div class="card">
+        <div class="card-title">Seu progresso no assunto</div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <div class="progress-stats">
+          <div class="progress-item">
+            <strong>8/12</strong>
+            <span>Aulas concluídas</span>
+          </div>
+
+          <div class="progress-item">
+            <strong>42/84</strong>
+            <span>Exercícios resolvidos</span>
+          </div>
+
+          <div class="progress-item">
+            <strong>31/126</strong>
+            <span>Questões respondidas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card continue-card">
+        <h3>Continue de onde parou</h3>
+        <p>
+          Aula 09 - Gráfico da função do 1º grau.
+        </p>
+
+        <button class="btn">Continuar estudando</button>
+      </div>
+    </section>
+
+    <div class="tabs">
+      <div class="tab active">📘 Teoria</div>
+      <div class="tab">📝 Exercícios</div>
+      <div class="tab">🏆 Questões</div>
+      <div class="tab">🎥 Videoaulas</div>
+      <div class="tab">📄 PDFs</div>
+    </div>
+
+    <section class="content-grid">
+
+      <div class="card">
+        <div class="card-title">Conteúdo Teórico</div>
+
+        <div class="section-list">
+
+          <div class="section-item">
+            <div class="badge easy">Introdução</div>
+            <h4>O que é uma função do 1º grau?</h4>
+            <p>
+              Uma função do 1º grau é uma função matemática representada pela fórmula f(x) = ax + b,
+              onde a e b são números reais e a ≠ 0.
+            </p>
+          </div>
+
+          <div class="section-item">
+            <div class="badge medium">Conceito</div>
+            <h4>Coeficiente angular</h4>
+            <p>
+              O coeficiente angular indica a inclinação da reta. Quando a > 0 a função é crescente,
+              e quando a < 0 a função é decrescente.
+            </p>
+          </div>
+
+          <div class="section-item">
+            <div class="badge hard">Importante</div>
+            <h4>Coeficiente linear</h4>
+            <p>
+              O coeficiente linear representa o ponto em que a reta intercepta o eixo y.
+            </p>
+          </div>
+
+          <div class="section-item">
+            <div class="badge easy">Resumo</div>
+            <h4>Fórmula principal</h4>
+            <p style="font-size:24px; font-weight:700; color:#2563eb; margin-top:10px;">
+              f(x) = ax + b
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Explicação Visual</div>
+
+        <div style="background:#f8fbff; border:1px solid #dbeafe; border-radius:22px; padding:40px; min-height:420px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+
+          <div style="font-size:48px; font-weight:800; color:#2563eb; margin-bottom:20px;">
+            f(x) = ax + b
+          </div>
+
+          <p style="font-size:18px; color:#4b5563; max-width:500px; line-height:1.8;">
+            O gráfico de uma função do 1º grau é sempre uma reta.
+            O valor de <strong>a</strong> controla a inclinação da reta,
+            enquanto o valor de <strong>b</strong> indica onde ela corta o eixo y.
+          </p>
+
+          <div style="margin-top:30px; width:100%; height:220px; border-radius:18px; background:linear-gradient(180deg,#ffffff,#eef4ff); position:relative; overflow:hidden; border:1px solid #dbeafe;">
+
+            <div style="position:absolute; left:50%; top:20px; bottom:20px; width:2px; background:#111827;"></div>
+            <div style="position:absolute; top:50%; left:20px; right:20px; height:2px; background:#111827;"></div>
+
+            <div style="position:absolute; left:120px; top:150px; width:320px; height:3px; background:#2563eb; transform:rotate(-28deg); border-radius:999px;"></div>
+
+            <div style="position:absolute; right:18px; top:52%; font-weight:700;">x</div>
+            <div style="position:absolute; left:52%; top:10px; font-weight:700;">y</div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Dicas de Prova</div>
+
+        <div class="section-item">
+          <div class="badge medium">Concurso</div>
+          <h4>Questões frequentemente cobradas</h4>
+          <p>
+            Bancas costumam cobrar interpretação gráfica, cálculo de raízes,
+            crescimento da função e identificação dos coeficientes.
+          </p>
+        </div>
+
+        <div class="section-item">
+          <div class="badge easy">Dica rápida</div>
+          <h4>Como encontrar a raiz</h4>
+          <p>
+            Basta igualar f(x) = 0 e resolver a equação.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Materiais Complementares</div>
+
+        <div class="pdf-item">
+          <div style="display:flex; align-items:center;">
+            <div class="pdf-icon">PDF</div>
+
+            <div class="pdf-info">
+              <h4>Resumo completo</h4>
+              <span>25 páginas</span>
+            </div>
+          </div>
+
+          <button class="small-btn">Download</button>
+        </div>
+
+        <div class="pdf-item">
+          <div style="display:flex; align-items:center;">
+            <div class="pdf-icon">PDF</div>
+
+            <div class="pdf-info">
+              <h4>Mapa mental</h4>
+              <span>8 páginas</span>
+            </div>
+          </div>
+
+          <button class="small-btn">Download</button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>

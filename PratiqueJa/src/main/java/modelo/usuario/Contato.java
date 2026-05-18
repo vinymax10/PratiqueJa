@@ -58,6 +58,11 @@ public class Contato implements Serializable, Entidade
 	@AuditLabel(value = "assunto")
 	private String assunto;
 
+	@Column(length = 20)
+	@Size(max = 20)
+	@AuditLabel(value = "telefone")
+	private String telefone;
+
 	@AuditLabel(value = "data", genero = GeneroGramatical.FEMININO)
 	private LocalDate data;
 

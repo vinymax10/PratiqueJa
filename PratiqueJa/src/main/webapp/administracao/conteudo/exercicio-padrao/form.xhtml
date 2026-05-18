@@ -1,0 +1,162 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{exercicioPadraoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewParam name="chave" value="#{exercicioPadraoBean.chave}" />
+	    <f:viewParam name="cadastro" value="#{exercicioPadraoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+	    <f:viewAction action="#{exercicioPadraoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<h4 class="title-divisor" >Exercício Padrão</h4>
+
+		<div class="ui-fluid gride" >
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Assunto Curso" />
+				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.assuntoCurso}"
+				converter="generic" filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O assunto do curso é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+					var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+					itemValue="#{assuntoCurso}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Nível" />
+				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.nivel}"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O nível é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{nivelBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Tipo de Exercício" />
+				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.tipoExercicio}"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O tipo de exercício é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{tipoExercicioBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText value="#{exercicioPadraoBean.entidade.nome}"
+				required="true" requiredMessage="O nome é obrigatório" maxlength="255" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Quantidade" />
+				<p:inputNumber minValue="1" maxValue="10000" decimalPlaces="0"
+				value="#{exercicioPadraoBean.entidade.quantidade}"
+				required="true" requiredMessage="A quantidade é obrigatória" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Mostrar na Resolução" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{exercicioPadraoBean.entidade.mostrarResolucao}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Imagem Quadrada" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{exercicioPadraoBean.entidade.imagemQuadrada}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12">
+				<p:outputLabel for="@next" value="Enunciado" />
+				<p:inputText value="#{exercicioPadraoBean.entidade.enunciado}"
+				required="true" requiredMessage="O enunciado é obrigatório" maxlength="511" />
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12">
+				<p:outputLabel for="@next" value="Enunciado Singular" />
+				<p:inputText value="#{exercicioPadraoBean.entidade.enunciadoSingular}" maxlength="511" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12">
+				<p:outputLabel for="@next" value="Descrição" />
+				<p:inputText value="#{exercicioPadraoBean.entidade.descricao}" maxlength="511" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button" >
+
+			<div class="divisor" ></div>
+
+		    <div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!exercicioPadraoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{exercicioPadraoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Exercício Padrão?" />
+				</p:commandButton>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !exercicioPadraoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(exercicioPadraoBean.entidade, exercicioPadraoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/conteudo/exercicio-padrao/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{exercicioPadraoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{exercicioPadraoBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!exercicioPadraoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{exercicioPadraoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

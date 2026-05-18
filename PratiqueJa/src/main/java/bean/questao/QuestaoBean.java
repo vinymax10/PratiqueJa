@@ -93,8 +93,8 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	public QuestaoBean()
 	{
 		super(Questao.class, "Questão");
-		urlCadastro = "/administracao/questao/form.xhtml";
-		urlLista    = "/administracao/questao/list.xhtml";
+		urlCadastro = "/administracao/conteudo/questao/gerenciar/form.xhtml";
+		urlLista    = "/administracao/conteudo/questao/gerenciar/list.xhtml";
 	}
 
 	@PostConstruct

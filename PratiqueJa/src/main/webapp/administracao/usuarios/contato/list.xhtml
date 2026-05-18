@@ -1,0 +1,101 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{contatoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+	    <f:viewAction action="#{contatoBean.filtrar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row" >
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText id="globalFilter" value="#{contatoBean.filtro.nomeUsuario}"
+						placeholder="Nome do Usuário" styleClass="w-full" >
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{contatoBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+
+				<ui:include src="/exportar/exportar.xhtml" >
+					<ui:param name="id" value="form:tabela" />
+					<ui:param name="nome" value="Contatos" />
+				</ui:include>
+
+				<p:button value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				href="/administracao/usuarios/contato/form.xhtml?cadastro=true" />
+
+			</div>
+		</div>
+
+		<ui:include src="/administracao/usuarios/contato/filtro.xhtml" />
+
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
+			var="entidade" value="#{contatoBean.lista}" reflow="true"
+			selection="#{contatoBean.entidade}" selectionMode="single"
+			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">
+
+			<p:ajax event="rowSelect" update="@form" listener="#{contatoBean.onSelected}"
+			resetValues="true"/>
+
+			<p:column headerText="Foto" width="4rem" responsivePriority="6">
+				<p:graphicImage class="circleTable" value="#{entidade.usuario.imagem.getFotoStreamedContent()}"
+				rendered="#{not empty entidade.usuario.imagem}" stream="false" />
+			</p:column>
+
+			<p:column headerText="ID" responsivePriority="5" width="5%">
+				<h:outputText value="#{entidade.id}" />
+			</p:column>
+
+			<p:column headerText="Usuário" responsivePriority="1" width="20%">
+				<h:outputText value="#{entidade.nomeUsuario}" />
+			</p:column>
+
+			<p:column headerText="Email" responsivePriority="2" width="20%">
+				<h:outputText value="#{entidade.email}" />
+			</p:column>
+
+			<p:column headerText="Telefone" responsivePriority="3" width="12%">
+				<h:outputText value="#{entidade.telefone}" />
+			</p:column>
+
+			<p:column headerText="Assunto" responsivePriority="1" width="20%">
+				<h:outputText value="#{entidade.assunto}" />
+			</p:column>
+
+			<p:column headerText="Data" responsivePriority="3" width="10%">
+				<h:outputText value="#{entidade.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Respondido" responsivePriority="4" width="10%">
+				<h:outputText value="#{entidade.respondido}" converter="simNaoConverter"/>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</ui:decorate>

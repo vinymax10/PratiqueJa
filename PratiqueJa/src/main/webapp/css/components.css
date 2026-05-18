@@ -1,0 +1,263 @@
+/* ===== CARDS ===== */
+
+.card {
+	background: white;
+	border-radius: 24px;
+	padding: 28px;
+	box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.card-hero {
+	background: white;
+	border-radius: 28px;
+	padding: 40px;
+	box-shadow: 0 10px 35px rgba(15, 23, 42, 0.05);
+	margin-bottom: 24px;
+}
+
+.card-lg {
+	background: white;
+	border-radius: 24px;
+	padding: 32px;
+	box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+	margin-bottom: 24px;
+}
+
+.card-dark {
+	background: linear-gradient(135deg, #07142f, #1e3a8a);
+	border-radius: 24px;
+	padding: 32px;
+	color: white;
+}
+
+/* ===== CARD ICON ===== */
+
+.card-icon {
+	width: 44px;
+	height: 44px;
+	background: #eff6ff;
+	border-radius: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+}
+
+.card-icon i {
+	font-size: 20px;
+	color: #2563eb;
+}
+
+.card-icon-dark {
+	width: 44px;
+	height: 44px;
+	background: rgba(255, 255, 255, 0.12);
+	border-radius: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 18px;
+}
+
+.card-icon-dark i {
+	font-size: 20px;
+	color: white;
+}
+
+/* ===== STAT CHIPS ===== */
+
+.stat-chips {
+	display: flex;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.stat-chip {
+	background: #f8fafc;
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	padding: 16px 22px;
+}
+
+.stat-chip-blue {
+	background: linear-gradient(90deg, #2563eb, #3b82f6);
+	border-radius: 16px;
+	padding: 16px 22px;
+}
+
+.stat-label {
+	font-size: 12px;
+	color: #6b7280;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.stat-label-white {
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.75);
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.stat-value {
+	font-size: 22px;
+	font-weight: 800;
+	color: #111827;
+}
+
+.stat-value-white {
+	font-size: 22px;
+	font-weight: 800;
+	color: white;
+}
+
+/* ===== BADGES ===== */
+
+.badge {
+	font-size: 12px;
+	font-weight: 700;
+	padding: 4px 10px;
+	border-radius: 999px;
+	display: inline-block;
+}
+
+.badge-green  { background: #dcfce7; color: #16a34a; }
+.badge-blue   { background: #dbeafe; color: #2563eb; }
+.badge-purple { background: #fae8ff; color: #9333ea; }
+
+.badge-wrapper {
+	margin-bottom: 14px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+
+.section-label {
+	color: #2563eb;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 0 0 10px;
+}
+
+.page-title {
+	font-size: 40px;
+	font-weight: 800;
+	color: #07142f;
+	line-height: 1.15;
+	margin: 0 0 16px;
+}
+
+.page-title .accent { color: #2563eb; }
+
+.page-subtitle {
+	color: #6b7280;
+	font-size: 17px;
+	line-height: 1.75;
+	margin: 0 0 28px;
+}
+
+.section-title {
+	font-size: 20px;
+	font-weight: 800;
+	color: #111827;
+	margin: 0 0 24px;
+}
+
+.card-title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #111827;
+	margin: 0 0 8px;
+}
+
+.card-title-lg {
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0 0 12px;
+}
+
+.card-text {
+	font-size: 14px;
+	color: #6b7280;
+	line-height: 1.65;
+	margin: 0;
+}
+
+.card-text-white {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.80);
+	line-height: 1.75;
+	margin: 0;
+}
+
+/* ===== CONTENT SECTIONS (legal/informativo pages) ===== */
+
+.content-section {
+	padding: 24px 0;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.content-section:first-child { padding-top: 0; }
+.content-section:last-child  { padding-bottom: 0; border-bottom: none; }
+
+.content-section h3 {
+	font-size: 16px;
+	font-weight: 700;
+	color: #111827;
+	margin: 0 0 10px;
+}
+
+.content-section p {
+	font-size: 14px;
+	color: #4b5563;
+	line-height: 1.75;
+	margin: 0;
+}
+
+/* ===== FORM FIELDS ===== */
+
+.form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+.form-field label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #374151;
+}
+
+.form-field .ui-inputfield,
+.form-field .ui-inputtextarea {
+	width: 100%;
+}
+
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 8px;
+	border-top: 1px solid #f3f4f6;
+	margin-top: 8px;
+}
+
+/* ===== MODULE LIST ===== */
+
+.module-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.module-list li {
+	font-size: 14px;
+	color: #374151;
+	padding: 6px 0;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.module-list li:last-child {
+	border-bottom: none;
+}

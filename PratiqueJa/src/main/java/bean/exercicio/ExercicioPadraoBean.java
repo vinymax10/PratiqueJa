@@ -28,8 +28,8 @@ public class ExercicioPadraoBean extends PaiBean<ExercicioPadrao, ExercicioPadra
 	{
 		super(ExercicioPadrao.class, "Exercício Padrão");
 
-		urlCadastro = "/administracao/exercicio-padrao/form.xhtml";
-		urlLista = "/administracao/exercicio-padrao/list.xhtml";
+		urlCadastro = "/administracao/conteudo/exercicio-padrao/form.xhtml";
+		urlLista = "/administracao/conteudo/exercicio-padrao/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}

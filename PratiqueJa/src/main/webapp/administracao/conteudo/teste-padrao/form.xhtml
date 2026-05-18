@@ -1,0 +1,113 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{testePadraoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewParam name="chave" value="#{testePadraoBean.chave}" />
+		<f:viewParam name="cadastro" value="#{testePadraoBean.cadastro}" converter="jakarta.faces.Boolean" />
+		<f:viewAction action="#{testePadraoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Teste Padrão</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Assunto Curso" />
+				<p:selectOneMenu value="#{testePadraoBean.entidade.assuntoCurso}"
+				converter="generic" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+					var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+					itemValue="#{assuntoCurso}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 xl:col-6">
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText required="true" requiredMessage="O nome é obrigatório"
+				value="#{testePadraoBean.entidade.nome}" maxlength="255" />
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-3">
+				<p:outputLabel for="@next" value="Duração (min)" />
+				<p:inputNumber symbolPosition="p" decimalSeparator="," thousandSeparator="."
+				required="true" requiredMessage="A duração é obrigatória"
+				value="#{testePadraoBean.entidade.duracao}" />
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-3">
+				<p:outputLabel for="@next" value="Nota Mínima" />
+				<p:inputNumber symbolPosition="p" decimalSeparator="," thousandSeparator="."
+				required="true" requiredMessage="A nota mínima é obrigatória"
+				value="#{testePadraoBean.entidade.notaMinima}" />
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+		</div>
+
+		<ui:include src="/administracao/conteudo/teste-padrao/conteudo/conteudo.xhtml" />
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+				rendered="#{!testePadraoBean.cadastro}"
+				styleClass="ui-button-danger ui-button-flat"
+				action="#{testePadraoBean.remover}" update="@form, :growl" process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Teste Padrão?" />
+				</p:commandButton>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:button value="Voltar" styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left"
+				href="/teste/testePadrao/testePadrao.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+				rendered="#{testePadraoBean.cadastro}"
+				styleClass="ui-button-raised ui-button-success" icon="pi pi-plus"
+				action="#{testePadraoBean.adicionar(false)}" update="@form, :growl" process="@form">
+					<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+				rendered="#{!testePadraoBean.cadastro}"
+				styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
+				action="#{testePadraoBean.salvar(false)}" update="@form, :growl" process="@form">
+					<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+			<p:commandButton value="Não" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+			<p:commandButton value="Sim" type="button"
+			styleClass="ui-confirmdialog-yes" />
+		</p:confirmDialog>
+
+	</h:form>
+	
+	<ui:include src="/administracao/conteudo/teste-padrao/conteudo/dialog-cadastro.xhtml" />
+	
+
+</ui:decorate>

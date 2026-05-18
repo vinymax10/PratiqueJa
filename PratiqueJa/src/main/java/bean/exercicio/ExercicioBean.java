@@ -56,8 +56,8 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	public ExercicioBean()
 	{
 		super(Exercicio.class, "Exercício");
-		urlCadastro = "/administracao/exercicio/form.xhtml";
-		urlLista    = "/administracao/exercicio/list.xhtml";
+		urlCadastro = "/administracao/conteudo/exercicio/form.xhtml";
+		urlLista    = "/administracao/conteudo/exercicio/list.xhtml";
 	}
 
 	@PostConstruct

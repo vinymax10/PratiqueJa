@@ -56,8 +56,8 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	{
 		super(Pagamento.class, "Pagamento");
 
-		urlCadastro = "/administracao/pagamento/form.xhtml";
-		urlLista = "/administracao/pagamento/list.xhtml";
+		urlCadastro = "/administracao/usuarios/pagamento/form.xhtml";
+		urlLista = "/administracao/usuarios/pagamento/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}

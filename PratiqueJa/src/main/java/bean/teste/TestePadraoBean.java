@@ -28,8 +28,8 @@ public class TestePadraoBean extends PaiBean<TestePadrao, TestePadraoDAO, Permis
 	{
 		super(TestePadrao.class, "Teste Padrão");
 
-		urlCadastro = "/administracao/teste-padrao/form.xhtml";
-		urlLista = "/administracao/teste-padrao/list.xhtml";
+		urlCadastro = "/administracao/conteudo/teste-padrao/form.xhtml";
+		urlLista = "/administracao/conteudo/teste-padrao/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}

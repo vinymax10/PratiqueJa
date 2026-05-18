@@ -43,8 +43,8 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 	{
 		super(AssuntoCurso.class, "Assunto do Curso");
 
-		urlCadastro="/administracao/assunto-curso/form.xhtml";
-		urlLista="/administracao/assunto-curso/list.xhtml";
+		urlCadastro="/administracao/conteudo/assunto-curso/form.xhtml";
+		urlLista="/administracao/conteudo/assunto-curso/list.xhtml";
 
 		auditoriasAtivas=EnumSet.allOf(TipoEvento.class);
 	}

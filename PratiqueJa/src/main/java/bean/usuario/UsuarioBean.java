@@ -58,8 +58,8 @@ public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Us
 	{
 		super(Usuario.class, "Usuário");
 
-		urlCadastro = "/administracao/usuario/form.xhtml";
-		urlLista = "/administracao/usuario/list.xhtml";
+		urlCadastro = "/administracao/usuarios/usuario/form.xhtml";
+		urlLista = "/administracao/usuarios/usuario/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}

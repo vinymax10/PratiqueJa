@@ -1,0 +1,173 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage"
+		value="#{assuntoBean.nome}" />
+	</ui:define>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row" >
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText value="#{assuntoBean.filtro.nome}"
+						placeholder="Nome" styleClass="w-full" >
+							<p:ajax event="keyup" delay="500" update="form:tabela" listener="#{assuntoBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+				<ui:include src="/exportar/exportar.xhtml" >
+					<ui:param name="id" value="form:tabela" />
+					<ui:param name="nome" value="Assuntos" />
+				</ui:include>
+
+				<p:commandButton value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				action="#{assuntoBean.cadastrar}" update="@form, dialog-cadastro"
+				process="@this"
+				oncomplete="PF('dialogCadastro').show()" resetValues="true" />
+			</div>
+		</div>
+
+		<ui:include src="/administracao/conteudo/questao/assunto/filtro.xhtml" />
+
+		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+			var="entidade" value="#{assuntoBean.opcoes}" widgetVar="dtAssunto"
+			selection="#{assuntoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
+			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"
+			rowSelector="td:not(.coluna-ativo)" >
+
+			<p:ajax event="rowSelect" update="@form, dialog-cadastro"
+			oncomplete="PF('dialogCadastro').show()" listener="#{assuntoBean.onRowSelect}" resetValues="true" />
+
+			<p:ajax event="rowReorder" listener="#{assuntoBean.onRowReorder}" update="@form" />
+
+			<p:column headerText="Nome" responsivePriority="1">
+				<h:outputText value="#{entidade.nome}" />
+			</p:column>
+
+			<p:column headerText="Disciplina" responsivePriority="2">
+				<h:outputText value="#{entidade.disciplina.nome}" />
+			</p:column>
+
+			<p:column headerText="Ativo" responsivePriority="1" style="width:3rem"
+			exportFunction="#{exporterBean.exportBoolean(entidade.ativo)}"
+			styleClass="coluna-ativo">
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{entidade.ativo}" >
+					<p:ajax event="change" process="@this"
+					listener="#{assuntoBean.salvar(entidade)}" />
+				</p:toggleSwitch>
+			</p:column>
+
+			<p:column headerText="Audit." rendered="#{sessaoBean.podeVerAuditoria}"
+			responsivePriority="1" style="width:3rem" exportable="false">
+				<p:commandLink
+					title="Carregar auditoria para o(a) #{assuntoBean.nome} #{entidade.nome}"
+					styleClass="rounded-button ui-button-flat"
+					action="#{auditoriaBean.carregar(entidade,assuntoBean.nome)}"
+					update="@form, :growl dialog-auditoria" process="@this" oncomplete="PF('dialogAuditoria').show()">
+					<div class="buttonIcon">
+						<h:outputText>
+							<i class="fa-regular fa-eye"></i>
+						</h:outputText>
+					</div>
+				</p:commandLink>
+			</p:column>
+
+		</p:dataTable>
+
+		<ui:include src="/administracao/configuracao/aviso.xhtml" />
+
+	</h:form>
+
+	<p:dialog id="dialog-cadastro" class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+	header="#{assuntoBean.cadastro? 'Adicionar':'Editar'} #{assuntoBean.nome}"
+	showEffect="fade" hideEffect="fade" width="100%;" modal="true" widgetVar="dialogCadastro" responsive="true"
+	focus="formAdicionar:nome" >
+		<h:form id="formAdicionar" class="form" enctype="multipart/form-data" >
+			<div class="ui-fluid gride" >
+
+				<div class="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+					<p:outputLabel for="@next" value="Nome" />
+					<p:inputText id="nome" value="#{assuntoBean.entidade.nome}"
+						required="true" requiredMessage="O nome é obrigatório"
+						validator="#{assuntoBean.validateNomeRepetido}" />
+					<p:message for="nome" display="text" />
+				</div>
+
+				<div class="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
+					<p:outputLabel for="@next" value="Disciplina" />
+					<p:selectOneMenu id="disciplina"
+						value="#{assuntoBean.entidade.disciplina}"
+						converter="generic" filter="true"
+						filterMatchMode="contains" style="width:100%">
+						<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{disciplinaBean.opcoes}" var="opcao"
+							itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+					</p:selectOneMenu>
+					<p:message for="disciplina" display="text" />
+				</div>
+
+				<div class="campo col-6 md:col-6 lg:col-4 xl:col-2">
+					<p:outputLabel for="@next" value="Ativo" />
+					<p:toggleSwitch class="toggleSwitch-form"
+						value="#{assuntoBean.entidade.ativo}" />
+				</div>
+
+			</div>
+
+			<div class="content-button" >
+
+				<div class="divisor" ></div>
+
+				<div class="flex gap-3 flex-wrap">
+					<p:commandButton value="Remover" icon="pi pi-trash" rendered="#{!assuntoBean.cadastro}"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{assuntoBean.remover}" update="@form, :form, :growl"
+						process="@this" oncomplete="PF('dialogCadastro').hide()">
+						<p:confirm header="Confirmação" icon="pi pi-info-circle"
+						message="Você tem certeza que deseja remover o #{assuntoBean.nome} #{assuntoBean.entidade.nome}?" />
+					</p:commandButton>
+				</div>
+
+				<div class="flex gap-3 flex-wrap">
+					<p:commandButton id="adicionar" value="Adicionar" rendered="#{assuntoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-plus"
+						action="#{assuntoBean.adicionar}" update="@form :form:tabela :growl"
+						process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
+							<p:defaultCommand target="adicionar" />
+					</p:commandButton>
+
+					<p:commandButton id="salvar" value="Salvar" rendered="#{!assuntoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{assuntoBean.salvar}" update="@form :form:tabela :growl"
+						process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
+							<p:defaultCommand target="salvar" />
+					</p:commandButton>
+				</div>
+
+			</div>
+
+		</h:form>
+	</p:dialog>
+
+</ui:decorate>

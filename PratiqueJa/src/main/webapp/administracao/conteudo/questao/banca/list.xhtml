@@ -1,0 +1,167 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage"
+		value="#{bancaBean.nome}" />
+	</ui:define>
+
+	<h:form id="form" class="form" >
+
+		<div class="content-button flex-column lg:flex-row xl:flex-row" >
+
+			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+
+				<div class="w-full">
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText value="#{bancaBean.filtro.nome}"
+						placeholder="Nome" styleClass="w-full" >
+							<p:ajax event="keyup" delay="500" update="form:tabela" listener="#{bancaBean.filtrar}" />
+						</p:inputText>
+					</span>
+				</div>
+
+				<p:button value="Filtros" icon="fa-solid fa-filter"
+				onclick="slideToggle('filtros'); return false;"
+				styleClass="ui-button-outlined ui-button-secondary" />
+			</div>
+
+			<div class="flex gap-3 align-items-center justify-content-end">
+				<ui:include src="/exportar/exportar.xhtml" >
+					<ui:param name="id" value="form:tabela" />
+					<ui:param name="nome" value="Bancas" />
+				</ui:include>
+
+				<p:commandButton value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				action="#{bancaBean.cadastrar}" update="@form, dialog-cadastro"
+				process="@this"
+				oncomplete="PF('dialogCadastro').show()" resetValues="true" />
+			</div>
+		</div>
+
+		<ui:include src="/administracao/conteudo/questao/banca/filtro.xhtml" />
+
+		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+			var="entidade" value="#{bancaBean.opcoes}" widgetVar="dtBanca"
+			selection="#{bancaBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
+			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"
+			rowSelector="td:not(.coluna-ativo)" >
+
+			<p:ajax event="rowSelect" update="@form, dialog-cadastro"
+			oncomplete="PF('dialogCadastro').show()" listener="#{bancaBean.onRowSelect}" resetValues="true" />
+
+			<p:ajax event="rowReorder" listener="#{bancaBean.onRowReorder}" update="@form" />
+
+			<p:column headerText="Nome" responsivePriority="1">
+				<h:outputText value="#{entidade.nome}" />
+			</p:column>
+
+			<p:column headerText="Sigla" responsivePriority="2" >
+				<h:outputText value="#{entidade.sigla}" />
+			</p:column>
+
+			<p:column headerText="Ativo" responsivePriority="1" style="width:3rem"
+			exportFunction="#{exporterBean.exportBoolean(entidade.ativo)}"
+			styleClass="coluna-ativo">
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{entidade.ativo}" >
+					<p:ajax event="change" process="@this"
+					listener="#{bancaBean.salvar(entidade)}" />
+				</p:toggleSwitch>
+			</p:column>
+
+			<p:column headerText="Audit." rendered="#{sessaoBean.podeVerAuditoria}"
+			responsivePriority="1" style="width:3rem" exportable="false">
+				<p:commandLink
+					title="Carregar auditoria para o(a) #{bancaBean.nome} #{entidade.nome}"
+					styleClass="rounded-button ui-button-flat"
+					action="#{auditoriaBean.carregar(entidade,bancaBean.nome)}"
+					update="@form, :growl dialog-auditoria" process="@this" oncomplete="PF('dialogAuditoria').show()">
+					<div class="buttonIcon">
+						<h:outputText>
+							<i class="fa-regular fa-eye"></i>
+						</h:outputText>
+					</div>
+				</p:commandLink>
+			</p:column>
+
+		</p:dataTable>
+
+		<ui:include src="/administracao/configuracao/aviso.xhtml" />
+
+	</h:form>
+
+	<p:dialog id="dialog-cadastro" class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+	header="#{bancaBean.cadastro? 'Adicionar':'Editar'} #{bancaBean.nome}"
+	showEffect="fade" hideEffect="fade" width="100%;" modal="true" widgetVar="dialogCadastro" responsive="true"
+	focus="formAdicionar:nome" >
+		<h:form id="formAdicionar" class="form" enctype="multipart/form-data" >
+			<div class="ui-fluid gride" >
+
+				<div class="campoMsg col-12 md:col-12 lg:col-6 xl:col-5">
+					<p:outputLabel for="@next" value="Nome" />
+					<p:inputText id="nome" value="#{bancaBean.entidade.nome}"
+						required="true" requiredMessage="O nome é obrigatório"
+						validator="#{bancaBean.validateNomeRepetido}" />
+					<p:message for="nome" display="text" />
+				</div>
+
+				<div class="campoMsg col-12 md:col-6 lg:col-4 xl:col-3">
+					<p:outputLabel for="@next" value="Sigla" />
+					<p:inputText id="sigla" value="#{bancaBean.entidade.sigla}"
+						required="true" requiredMessage="A sigla é obrigatória" />
+					<p:message for="sigla" display="text" />
+				</div>
+
+				<div class="campo col-6 md:col-6 lg:col-2 xl:col-2">
+					<p:outputLabel for="@next" value="Ativo" />
+					<p:toggleSwitch class="toggleSwitch-form"
+						value="#{bancaBean.entidade.ativo}" />
+				</div>
+
+			</div>
+
+			<div class="content-button" >
+
+				<div class="divisor" ></div>
+
+				<div class="flex gap-3 flex-wrap">
+					<p:commandButton value="Remover" icon="pi pi-trash" rendered="#{!bancaBean.cadastro}"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{bancaBean.remover}" update="@form, :form, :growl"
+						process="@this" oncomplete="PF('dialogCadastro').hide()">
+						<p:confirm header="Confirmação" icon="pi pi-info-circle"
+						message="Você tem certeza que deseja remover o #{bancaBean.nome} #{bancaBean.entidade.nome}?" />
+					</p:commandButton>
+				</div>
+
+				<div class="flex gap-3 flex-wrap">
+					<p:commandButton id="adicionar" value="Adicionar" rendered="#{bancaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-plus"
+						action="#{bancaBean.adicionar}" update="@form :form:tabela :growl"
+						process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
+							<p:defaultCommand target="adicionar" />
+					</p:commandButton>
+
+					<p:commandButton id="salvar" value="Salvar" rendered="#{!bancaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{bancaBean.salvar}" update="@form :form:tabela :growl"
+						process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogCadastro').hide()">
+							<p:defaultCommand target="salvar" />
+					</p:commandButton>
+				</div>
+
+			</div>
+
+		</h:form>
+	</p:dialog>
+
+</ui:decorate>

@@ -15,7 +15,11 @@
       "Bash(cmd /c \"C:\\\\Program Files\\\\WSL\\\\wsl.exe --version\")",
       "Bash(cmd *)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "Bash(Select-Object -Property FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(Select-Object Name)"
     ]
   }
 }
