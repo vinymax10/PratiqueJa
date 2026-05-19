@@ -6,242 +6,230 @@
 
 	<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
 
-	<div class="p-d-flex backgroundBlue" >
-		<h:form id="form" style="margin-bottom:0;width:100%">
-			<div class="p-grid" style="margin: 15px;">
-
-				<p:card class="newBorder m-3 p-3" style="width: 100%;">
-					<span class="eyebrow">Pratique Já — Conteúdo para
-						estudantes</span>
-					<h1>Pratique Já — Aprenda Matemática com método, prática e acompanhamento</h1>
-					<p class="lead">Estude no seu ritmo com anotações, exercícios e feedback do professor. 
-					Escolha o plano que combina com a sua forma de aprender.</p>
-
-					<div class="hero-cta">
-						<p:button value="Escolha seu plano agora" 
-						styleClass="ui-button-raised buttonBlue mr-2" 
-						onclick="location.hash='#planos'; return false;">
-						</p:button>
-						<p:button  value="Compare os planos" 
-						styleClass="ui-button-raised ui-button-flat ui-button-secondary"
-							onclick="location.hash='#compare';return false;">
-						</p:button>
-							
-					</div>
-				</p:card>
-				
-				<div  class="grid-3 p-3" style="width: 100%;" >
-
-					<p:card class="newBorder m-3" style="width: auto;">
-						<h4>Aprenda no seu tempo</h4>
-						<p class="small">Revise quando quiser com materiais sempre disponíveis.</p>
-					</p:card>
-					<p:card class="newBorder m-3" style="width: auto;">
-						<h4>Conte com apoio do professor</h4>
-						<p class="small">Receba orientação e feedback nos planos avançados.</p>
-					</p:card>
-					<p:card class="newBorder m-3" style="width: auto;">
-						<h4>Organize seus estudos</h4>
-						<p class="small">Acesse anotações de aula, exercícios e resoluções em um só ambiente.</p>
-					</p:card>
-				</div>
-				
-				<div id="planos" class="p-4" style="width: 100%;">
-					<h2 style="margin:6px 0 6px">Escolha o plano ideal para acesso ao Pratique Já</h2>
-				    <p >Três opções de acesso criadas para diferentes perfis de estudante — do básico ao acompanhamento completo com professor.</p>
-				</div>
-				<div class="grid-3" style="width: 100%;" >
-
-					<p:card class="newBorder m-3 p-3" style="width: auto;">
-						<h3 id="basico-title" class="mb-0 mt-0">Bronze</h3>
-						<h6 id="basico-title" class="mt-0">Comece agora mesmo</h6>
-				        <div class="tag-free">Grátis</div>
-				        <p class="small">Ideal para conhecer a plataforma e revisar conteúdos com liberdade.</p>
-				        <div style="margin-top:12px">
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso às anotações de aula</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Download das anotações em PDF</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso ilimitado aos exercícios</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso limitado às questões</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Download limitado dos exercícios e resoluções</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso limitado às resoluções de exercícios e questões.</div></div>
-				        </div>
-				        <div style="margin:14px 0">
-				        	<p:commandButton  value="Acessar Grátis" 
-							styleClass="ui-button-raised buttonBlue"
-							resetValues="true"
-							rendered="#{!sessaoBean.logado}" update="formLogin"
-							action="#{autenticacaoBean.resetLogin()}"
-							oncomplete="PF('loginWidget').show();return false;">
-							</p:commandButton>
-				        </div>
-					</p:card>
-					
-					<p:card class="newBorder m-3 p-3" style="width: auto;">
-						<h3 id="basico-title" class="mb-0 mt-0">Prata</h3>
-						<h6 id="basico-title" class="mt-0">Estudo completo e flexível</h6>
-						<div class="hero-cta">
-				        	<div class="price mr-4 mt-3">R$ 27,90 / mês</div>
-				       		<span class="eyebrow price">R$ 176,40 / ano</span>
-			       		</div>
-				        <p class="small">Para quem quer dominar Matemática com prática, resoluções e material completo.</p>
-				        <div style="margin-top:12px">
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Todo o conteúdo do Bronze</div></div>
-   				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso ilimitado às questões</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Download em PDF de exercícios e questões</div></div>
-   				          <div class="feature"><div class="dot"></div><div class="itemFeature">Resoluções comentadas completas</div></div>
-				        </div>
-			            <div class="note"><strong>Economia anual:</strong> Pagando o plano anual você paga o equivalente a <strong>R$ 14,70 / mês</strong> — <span style="color:var(--muted);font-weight:700">Economize 47%</span></div>
-				        
-				        <div class="hero-cta mt-3">
-				        	<p:commandButton  value="Assinar Prata (Mensal)" 
-				        	process="@this" action="#{pagamentoBean.pagamento('Prata','Mensal')}"
-							styleClass="ui-button-raised ui-button-flat ui-button-secondary" >
-							</p:commandButton>
-
-				        	<p:commandButton  value="Assinar Prata (Anual)" 
-				        	process="@this" action="#{pagamentoBean.pagamento('Prata','Anual')}"
-							styleClass="ui-button-raised  buttonBlue" >
-							</p:commandButton>
-				        </div>
-					</p:card>
-					
-					<p:card class="newBorder m-3 p-3" style="width: auto;">
-						<h3 id="basico-title" class="mb-0 mt-0">Ouro</h3>
-						<h6 id="basico-title" class="mt-0">Acompanhamento e evolução guiada</h6>
-				        <div class="price">R$ 197 / mês</div>
-				        <p class="small">Ideal para quem busca orientação direta do professor e um plano de estudos personalizado.</p>
-				        <div style="margin-top:12px">
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Todo o conteúdo do Prata</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acesso aos exercícios passados pelo professor</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Acompanhamento das atividades pelo professor</div></div>
-				          <div class="feature"><div class="dot"></div><div class="itemFeature">Feedback individualizado</div></div>
-				        	
-				        </div>
-				        <div style="margin:14px 0">
-				        	<p:commandButton  value="Assinar Ouro" 
-				        	process="@this" action="#{pagamentoBean.pagamento('Ouro','Mensal')}"
-							styleClass="ui-button-raised buttonBlue" >
-							</p:commandButton>
-				        </div>
-					</p:card>
-				</div>
-				
-				<div id="compare" class="p-col-12 p-lg-10 p-lg-offset-1 p-xl-8 p-xl-offset-2 compare p-3 mb-4" >
-			      <h2 class="mb-0">Comparação</h2>
-			      <table aria-label="Comparação de planos" style="background:transparent; border-radius:10px; overflow:hidden">
-			        <thead>
-			           <tr>
-				            <th>Recurso</th>
-				            <th>Bronze <br/> Grátis</th>
-				            <th>Prata<br/>R$ 27,90</th>
-				            <th>Ouro<br/>R$ 197,00</th>
-			          </tr>
-			        </thead>
-			        <tbody class="itemTable">
-			          <tr ><td>Acesso às anotações de aula</td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Download das anotações em PDF</td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Acesso aos exercícios</td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Resolução comentada dos exercícios</td><td><i class="pi pi-circle limit" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Download dos exercícios em PDF</td><td><i class="pi pi-circle limit" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Acesso às questões</td><td><i class="pi pi-circle limit" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Resolução comentada das questões</td><td><i class="pi pi-circle limit" ></i></td><td><i class="pi pi-check check" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Acesso aos exercícios passados pelo professor</td><td><i class="pi pi-times times" ></i></td><td><i class="pi pi-times times" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			          <tr ><td>Acompanhamento das atividades pelo professor</td><td><i class="pi pi-times times" ></i></td><td><i class="pi pi-times times" ></i></td><td><i class="pi pi-check check" ></i></td></tr>
-			        </tbody>
-			      </table>
-		      	  <div class="itemFeature m-3" style="display:block">
-		      	  	Compare os recursos e escolha o plano ideal para o seu momento de estudo.
-      	  		  </div>
-			      <div class="legend m-3">
-			          <div><i class="pi pi-check check" ></i><span style="color:var(--muted)">Acesso ilimitado</span></div>
-			          <div><i class="pi pi-circle limit" ></i><span style="color:var(--muted)">Acesso limitado</span></div>
-			          <div><i class="pi pi-times times" ></i><span style="color:var(--muted)">Sem acesso</span></div>
-				</div>
-			    </div>
-				
-				<div id="faq" class="p-col-12 p-lg-10 p-lg-offset-1 p-xl-8 p-xl-offset-2 p-3 mb-4" >
-				
-				<h2>Perguntas frequentes</h2>
-
-				<div class="faq-list">
-				      <details>
-				        <summary>O que é o Pratique Já?</summary>
-				        <div class="faq-body">
-				          <p>O Pratique Já é uma plataforma de prática e revisão em Matemática, com anotações, exercícios e 
-				          acompanhamento personalizado. Ideal para quem quer reforçar o aprendizado e revisar conteúdos no próprio ritmo.</p>
-				        </div>
-				      </details>
-				
-				      <details>
-				        <summary>Como funciona o acesso?</summary>
-				        <div class="faq-body">
-				          <p>Após a confirmação do pagamento, você já passa a ter o perfil contratado. 
-				          A partir daí, pode entrar na plataforma e utilizar os benefícios do seu perfil, pelo celular ou computador.</p>
-				        </div>
-				      </details>
-				
-				      <details>
-				        <summary>O plano é renovado automaticamente?</summary>
-				        <div class="faq-body">
-				          <p>Sim, o pagamento é renovado automaticamente a cada mês, garantindo que seu acesso continue ativo sem interrupções. 
-				          Você pode cancelar quando quiser.</p>
-				        </div>
-				      </details>
-				
-				      <details>
-				        <summary>Posso mudar de plano depois?</summary>
-				        <div class="faq-body">
-				          <p>Claro! Você pode fazer upgrade ou downgrade do seu plano a qualquer momento — o sistema ajusta automaticamente o acesso conforme o novo plano.</p>
-				        </div>
-				      </details>
-				
-				      <details>
-				        <summary>O plano Ouro inclui aulas ao vivo?</summary>
-				        <div class="faq-body">
-				          <p>Não. O plano Ouro inclui acompanhamento direto do professor por meio da plataforma, com orientações, feedbacks e listas de exercícios  — mas sem aulas ao vivo.</p>
-				        </div>
-				      </details>
-				      
-				      <details>
-				        <summary>Preciso instalar algum aplicativo?</summary>
-				        <div class="faq-body">
-				          <p>Não. O Pratique Já funciona direto no navegador (Google Chrome, Firefox ou Safari), tanto no computador quanto no celular.</p>
-				        </div>
-				      </details>
-				      <details>
-				        <summary>Há desconto para pagamento anual?</summary>
-				        <div class="faq-body">
-				          <p>Sim! O plano Prata possui opção anual com desconto, ideal para quem quer garantir o acesso por mais tempo.</p>
-				        </div>
-				      </details>
-				      <details>
-				        <summary>E se eu tiver dúvidas ou problemas de acesso?</summary>
-				        <div class="faq-body">
-				          <p>Você pode entrar em contato disponível no link https://pratiqueja.com/informativo/fale-conosco. Nossa equipe responde rapidamente!</p>
-				        </div>
-				      </details>
-				      <details>
-				        <summary>Posso cancelar quando quiser?</summary>
-				        <div class="faq-body">
-				          <p>Sim, o cancelamento é simples e pode ser feito diretamente pelo painel da plataforma ou solicitando pelo suporte. Não há multa ou taxa de cancelamento.</p>
-				        </div>
-				      </details>
-				    </div>
-				</div>
-				
-				
-				
-				
-				
-				
-				
-				
-
-
-
-			</div>
-		</h:form>
+<!-- HERO -->
+<div class="card-hero">
+	<p class="section-label">Produtos</p>
+	<h1 class="page-title">Pratique Já para <span class="accent">Estudantes</span></h1>
+	<p class="page-subtitle">
+		Estude no seu ritmo com anotações, exercícios e feedback do professor. Escolha o plano que combina com a sua forma de aprender.
+	</p>
+	<div class="stat-chips">
+		<div class="stat-chip">
+			<div class="stat-label">Planos</div>
+			<div class="stat-value">3</div>
+		</div>
+		<div class="stat-chip">
+			<div class="stat-label">Assuntos</div>
+			<div class="stat-value">27+</div>
+		</div>
+		<div class="stat-chip">
+			<div class="stat-label">Exercícios</div>
+			<div class="stat-value">2.484+</div>
+		</div>
+		<div class="stat-chip-blue">
+			<div class="stat-label-white">Bronze</div>
+			<div class="stat-value-white">Grátis</div>
+		</div>
 	</div>
+</div>
+
+<!-- DIFERENCIAIS -->
+<div class="grid-3" style="margin-bottom:24px;">
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-clock"></i></div>
+		<h3 class="card-title">Aprenda no seu tempo</h3>
+		<p class="card-text">Revise quando quiser com materiais sempre disponíveis.</p>
+	</div>
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+		<h3 class="card-title">Conte com apoio do professor</h3>
+		<p class="card-text">Receba orientação e feedback nos planos avançados.</p>
+	</div>
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+		<h3 class="card-title">Organize seus estudos</h3>
+		<p class="card-text">Acesse anotações de aula, exercícios e resoluções em um só ambiente.</p>
+	</div>
+</div>
+
+<!-- PLANOS -->
+<h:form id="formPlanos">
+<div class="card-lg">
+	<h2 class="section-title">Escolha o plano ideal para acesso ao Pratique Já</h2>
+	<p class="card-text" style="margin-bottom:24px;">Três opções de acesso criadas para diferentes perfis de estudante — do básico ao acompanhamento completo com professor.</p>
+	<div class="grid-3" style="margin-top:0;">
+
+		<!-- BRONZE -->
+		<div class="card" style="background:#ebf8ff;">
+			<div class="badge-wrapper"><span class="badge badge-green">Bronze</span></div>
+			<h3 class="card-title-lg">Comece agora mesmo</h3>
+			<p class="card-text" style="margin-bottom:12px;">Ideal para conhecer a plataforma e revisar conteúdos com liberdade.</p>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:26px;font-weight:800;color:#16a34a;">Grátis</span>
+			</div>
+			<ul class="module-list">
+				<li>Acesso às anotações de aula</li>
+				<li>Download das anotações em PDF</li>
+				<li>Acesso ilimitado aos exercícios</li>
+				<li>Acesso limitado às questões</li>
+				<li>Download limitado dos exercícios e resoluções</li>
+				<li>Acesso limitado às resoluções de exercícios e questões</li>
+			</ul>
+			<div style="margin-top:16px;">
+				<p:commandButton value="Acessar Grátis"
+					styleClass="ui-button-raised btn-primary"
+					resetValues="true"
+					rendered="#{!sessaoBean.logado}" update="formLogin"
+					action="#{autenticacaoBean.resetLogin()}"
+					oncomplete="PF('loginWidget').show();return false;"/>
+			</div>
+		</div>
+
+		<!-- PRATA -->
+		<div class="card" style="background:#f8f3ff;">
+			<div class="badge-wrapper"><span class="badge badge-blue">Prata</span></div>
+			<h3 class="card-title-lg">Estudo completo e flexível</h3>
+			<p class="card-text" style="margin-bottom:12px;">Para quem quer dominar Matemática com prática, resoluções e material completo.</p>
+			<div style="margin-bottom:4px;">
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ 27,90<span style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+			</div>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:13px;color:#2563eb;font-weight:600;">ou R$ 176,40 / ano</span>
+			</div>
+			<ul class="module-list">
+				<li>Todo o conteúdo do Bronze</li>
+				<li>Acesso ilimitado às questões</li>
+				<li>Download em PDF de exercícios e questões</li>
+				<li>Resoluções comentadas completas</li>
+			</ul>
+			<div style="background:#eff6ff;border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;color:#374151;line-height:1.5;">
+				<strong>Economia anual:</strong> Pagando o plano anual você paga o equivalente a <strong>R$ 14,70 / mês</strong> — <span style="color:#2563eb;font-weight:700;">Economize 47%</span>
+			</div>
+			<div style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap;">
+				<p:commandButton value="Assinar Mensal"
+					styleClass="ui-button-raised ui-button-flat ui-button-secondary"
+					process="@this" action="#{pagamentoBean.pagamento('Prata','Mensal')}"/>
+				<p:commandButton value="Assinar Anual"
+					styleClass="ui-button-raised btn-primary"
+					process="@this" action="#{pagamentoBean.pagamento('Prata','Anual')}"/>
+			</div>
+		</div>
+
+		<!-- OURO -->
+		<div class="card" style="background:#ebfff2;">
+			<div class="badge-wrapper"><span class="badge badge-purple">Ouro</span></div>
+			<h3 class="card-title-lg">Acompanhamento e evolução guiada</h3>
+			<p class="card-text" style="margin-bottom:12px;">Ideal para quem busca orientação direta do professor e um plano de estudos personalizado.</p>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ 197<span style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+			</div>
+			<ul class="module-list">
+				<li>Todo o conteúdo do Prata</li>
+				<li>Acesso aos exercícios passados pelo professor</li>
+				<li>Acompanhamento das atividades pelo professor</li>
+				<li>Feedback individualizado</li>
+			</ul>
+			<div style="margin-top:16px;">
+				<p:commandButton value="Assinar Ouro"
+					styleClass="ui-button-raised btn-primary"
+					process="@this" action="#{pagamentoBean.pagamento('Ouro','Mensal')}"/>
+			</div>
+		</div>
+
+	</div>
+</div>
+</h:form>
+
+<!-- COMPARAÇÃO -->
+<div class="card-lg">
+	<h2 class="section-title">Comparação de planos</h2>
+	<table aria-label="Comparação de planos" style="width:100%;border-collapse:collapse;">
+		<thead>
+			<tr style="background:#f8fafc;">
+				<th style="text-align:left;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Recurso</th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Bronze<br/><span style="font-weight:500;color:#16a34a;">Grátis</span></th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Prata<br/><span style="font-weight:500;color:#6b7280;">R$ 27,90</span></th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Ouro<br/><span style="font-weight:500;color:#6b7280;">R$ 197,00</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Acesso às anotações de aula</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Download das anotações em PDF</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Acesso aos exercícios</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Resolução comentada dos exercícios</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-circle limit"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Download dos exercícios em PDF</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-circle limit"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Acesso às questões</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-circle limit"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Resolução comentada das questões</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-circle limit"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Exercícios passados pelo professor</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-times times"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-times times"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;">Acompanhamento e feedback do professor</td><td style="text-align:center;padding:10px 16px;"><i class="pi pi-times times"></i></td><td style="text-align:center;padding:10px 16px;"><i class="pi pi-times times"></i></td><td style="text-align:center;padding:10px 16px;"><i class="pi pi-check check"></i></td></tr>
+		</tbody>
+	</table>
+	<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;">
+		<div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#374151;"><i class="pi pi-check check"></i> Acesso ilimitado</div>
+		<div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#374151;"><i class="pi pi-circle limit"></i> Acesso limitado</div>
+		<div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#374151;"><i class="pi pi-times times"></i> Sem acesso</div>
+	</div>
+</div>
+
+<!-- FAQ -->
+<div class="card-lg" style="margin-bottom:0;">
+	<h2 class="section-title">Perguntas frequentes</h2>
+	<div class="faq-list">
+		<details>
+			<summary>O que é o Pratique Já?</summary>
+			<div class="faq-body">
+				<p>O Pratique Já é uma plataforma de prática e revisão em Matemática, com anotações, exercícios e acompanhamento personalizado. Ideal para quem quer reforçar o aprendizado e revisar conteúdos no próprio ritmo.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Como funciona o acesso?</summary>
+			<div class="faq-body">
+				<p>Após a confirmação do pagamento, você já passa a ter o perfil contratado. A partir daí, pode entrar na plataforma e utilizar os benefícios do seu perfil, pelo celular ou computador.</p>
+			</div>
+		</details>
+		<details>
+			<summary>O plano é renovado automaticamente?</summary>
+			<div class="faq-body">
+				<p>Sim, o pagamento é renovado automaticamente a cada mês, garantindo que seu acesso continue ativo sem interrupções. Você pode cancelar quando quiser.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Posso mudar de plano depois?</summary>
+			<div class="faq-body">
+				<p>Claro! Você pode fazer upgrade ou downgrade do seu plano a qualquer momento — o sistema ajusta automaticamente o acesso conforme o novo plano.</p>
+			</div>
+		</details>
+		<details>
+			<summary>O plano Ouro inclui aulas ao vivo?</summary>
+			<div class="faq-body">
+				<p>Não. O plano Ouro inclui acompanhamento direto do professor por meio da plataforma, com orientações, feedbacks e listas de exercícios — mas sem aulas ao vivo.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Preciso instalar algum aplicativo?</summary>
+			<div class="faq-body">
+				<p>Não. O Pratique Já funciona direto no navegador (Google Chrome, Firefox ou Safari), tanto no computador quanto no celular.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Há desconto para pagamento anual?</summary>
+			<div class="faq-body">
+				<p>Sim! O plano Prata possui opção anual com desconto, ideal para quem quer garantir o acesso por mais tempo.</p>
+			</div>
+		</details>
+		<details>
+			<summary>E se eu tiver dúvidas ou problemas de acesso?</summary>
+			<div class="faq-body">
+				<p>Você pode entrar em contato pela página <a href="/informativo/fale-conosco" style="color:#2563eb;font-weight:600;">Fale Conosco</a>. Nossa equipe responde rapidamente!</p>
+			</div>
+		</details>
+		<details>
+			<summary>Posso cancelar quando quiser?</summary>
+			<div class="faq-body">
+				<p>Sim, o cancelamento é simples e pode ser feito diretamente pelo painel da plataforma ou solicitando pelo suporte. Não há multa ou taxa de cancelamento.</p>
+			</div>
+		</details>
+	</div>
+</div>
 
 </ui:decorate>
-

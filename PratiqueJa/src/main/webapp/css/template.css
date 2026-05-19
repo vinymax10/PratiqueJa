@@ -211,7 +211,7 @@
 .t2-footer a:hover { color: #2563eb; }
 
 /* ---- RESPONSIVO (≤ 900px) ---- */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
 	.t2-page {
 		background: #f5f7fb;
 	}

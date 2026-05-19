@@ -28,9 +28,4 @@
 	line-height: 1.5;
 }
 
-/* 150% zoom em telas 1920px → ~1280px de largura efetiva */
-@media (max-width: 1366px) {
-	.grid-3 {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
+
