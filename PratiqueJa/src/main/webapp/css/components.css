@@ -220,14 +220,18 @@
 .form-field {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
-	margin-bottom: 16px;
+	margin-bottom: 24px;
+}
+
+
+
+.form-field .ui-message:not(.ui-message-error):not(.ui-message-warn):not(.ui-message-info) {
+	display: none;
 }
 
 .form-field label {
-	font-size: 13px;
+	font-size: 16px;
 	font-weight: 600;
-	color: #374151;
 }
 
 .form-field .ui-inputfield,
@@ -238,9 +242,19 @@
 .form-actions {
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 8px;
-	border-top: 1px solid #f3f4f6;
+	padding-top: 16px;
+	border-top: 1px solid #dfe7ef;
 	margin-top: 8px;
+}
+
+.btn-primary.ui-button {
+	background: #2563eb;
+	border-color: #2563eb;
+}
+
+.btn-primary.ui-button:hover {
+	background: #1d4ed8;
+	border-color: #1d4ed8;
 }
 
 /* ===== MODULE LIST ===== */

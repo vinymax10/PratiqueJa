@@ -312,12 +312,18 @@
 			<a href="/informativo/fale-conosco.xhtml" class="t2-menu-item">
 				<i class="pi pi-envelope"></i> Fale Conosco
 			</a>
-			<a href="/informativo/politica-de-privacidade.xhtml" class="t2-menu-item">
-				<i class="pi pi-shield"></i> Política de Privacidade
-			</a>
-			<a href="/informativo/termos-de-uso.xhtml" class="t2-menu-item">
-				<i class="pi pi-file"></i> Termos de Uso
-			</a>
+			<div class="t2-menu-item t2-has-sub" onclick="t2ToggleSub(this)">
+				<i class="pi pi-book"></i> Legal
+				<i class="t2-sub-arrow pi pi-chevron-down"></i>
+			</div>
+			<div class="t2-submenu">
+				<a href="/informativo/politica-de-privacidade.xhtml" class="t2-menu-item t2-sub-item">
+					<i class="pi pi-shield"></i> Política de Privacidade
+				</a>
+				<a href="/informativo/termos-de-uso.xhtml" class="t2-menu-item t2-sub-item">
+					<i class="pi pi-file"></i> Termos de Uso
+				</a>
+			</div>
 
 			<div class="t2-sidebar-footer">
 				<h:panelGroup rendered="#{sessaoBean.logado}" layout="block">
