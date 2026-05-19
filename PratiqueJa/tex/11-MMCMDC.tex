@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{MMC e MDC}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{MMC - Mínimo Múltiplo Comum} 
+
+O mínimo múltiplo comum, denotado por MMC, de dois ou mais números inteiros positivos é o menor número inteiro diferente de zero que aparece na lista de múltiplos desses dois ou mais números ao mesmo tempo. 
+
+Nós dizemos que $a$ é múltiplo de $b$ quando $a$ é divisível por $b$. 
+
+\TM{Exemplos:}
+
+10 é múltiplo de 5, pois 10 é divisível por 5. Ou seja, o resultado da fração $\frac{10}{5} = 2$.
+
+6 é múltiplo de 2, pois 6 é divisível por 2. 
+
+\vspace{0.5cm}
+
+Para encontrar o menor múltiplo comum de dois ou mais números geralmente utilizamos o método da fatoração que consistem em decompor esses números em fatores primos.
+
+\T{Método da fatoração}
+
+Coloque os números alinhados e inicie a divisão deles pelo menor número primo que divida pelo menos um dos números. Repita esse procedimento até que não seja mais possível dividir. Neste caso, passa para o próximo número primo que divide ao menos um dos números restantes. Esse procedimento deve ser efetuado até que tenhamos somente 1 no final.
+
+\TM{Exemplo com 1 número:}
+
+$\begin{array}{r|l} 
+28 & 2 \\
+14 & 2 \\
+7 & 7 \\
+\hline 
+1 & 2^2 \cdot 7
+\end{array}$
+\vspace{0.3cm}
+
+MMC de 28 é 28
+
+\TM{Exemplo com 2 números:}
+
+$\begin{array}{r|l} 
+30,5 & 2 \\
+15,5 & 3 \\
+5,5 & 5 \\
+\hline 
+1,1 & 2 \cdot 3 \cdot 5
+\end{array}$
+\vspace{0.3cm}
+
+MMC de 30, 5 = $2 \cdot 3 \cdot 5 = 30$
+
+\TM{Exemplo com 3 números:}
+
+$\begin{array}{r|l} 
+90,30,25 & 2 \\
+45,15,25 & 3 \\
+15,5,25 & 3 \\
+5,5,25 & 5 \\
+1,1,5 & 5 \\
+\hline 
+1,1,1 & 2 \cdot 3^2 \cdot 5^2
+\end{array}$
+
+\vspace{0.3cm}
+
+MMC de $90, 30, 25 = 2 \cdot 3^2 \cdot 5^2 = 450$
+
+
+\T{MDC - Máximo Divisor Comum}
+
+O MDC é o maior número que divide dois ou mais números ao mesmo tempo, ou seja, o maior número que divide dois ou mais números simultaneamente. Para encontrar o MDC existem vários métodos. Em virtude da simplicidade, o mais utilizado é o método da decomposição simultânea. Esse método consiste em realizar a decomposição em fatores primos conforme já apresentado, no entanto, são considerados somente os fatores que dividem todos os elementos ao mesmo tempo. 
+
+\TM{Exemplo com 2 números:}
+
+$\begin{array}{r|l} 
+\textcolor{iris}{32,24} &\textcolor{iris}{ 2} \\
+\textcolor{iris}{16,12} &\textcolor{iris}{ 2 }\\
+\textcolor{iris}{8,6} &\textcolor{iris}{ 2} \\
+4,3 & 2 \\
+2,3 & 2 \\
+1,3 & 3 \\
+\hline 
+1,1 & 2^3
+\end{array}$
+\vspace{0.3cm}
+
+MDC de $32,24 = 2^3 = 8 $
+
+
+\TM{Exemplo com 3 números:}
+
+$\begin{array}{r|l} 
+120,30,45 & 2 \\
+60,15,45 & 2 \\
+30,15,45 & 2 \\
+\textcolor{iris}{15,15,45} & \textcolor{iris}{3} \\
+5,5,15 & 3 \\
+\textcolor{iris}{5,5,5} &\textcolor{iris}{ 5} \\
+\hline 
+1,1,1 & 3 \cdot 5
+\end{array}$
+\vspace{0.3cm}
+
+MDC de $120, 30, 45 = 3 \cdot 5 = 15 $
+
+Perceba que somente as linhas indicadas em azul são consideradas. As demais não são contadas pois o fator primo não divide todos os elementos.
+
+\TM{Propriedades}
+
+O MDC de dois números consecutivos entre si é sempre igual a 1.
+
+\TM{Exemplos:}
+
+MDC de 13, 14 = 1
+
+\vspace{0.3cm}
+
+MDC de 56, 57 = 1
+
+\vspace{0.3cm}
+
+Outra propriedade é que se entre os elementos analisados houver um que é divisor dos demais, então este número será o MDC.
+
+\TM{Exemplos:}
+
+MDC de 4, 12, 28 = 4
+
+\vspace{0.3cm}
+
+MDC de 90, 45, 15 = 15
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

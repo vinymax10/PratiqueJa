@@ -1,0 +1,123 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+ 	
+\begin{document}
+\pagenumbering{gobble}
+%\setstretch{1.5}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Subtração com Naturais}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+\T{Subtração de números com mais de um dígito } 
+ 
+Primeiramente coloque maior número em cima e menor embaixo, alinhando os algarismos da direita para esquerda. Depois efetue a subtração dos dígitos da coluna mais à direita e repita o processo para as demais colunas.
+
+\TM{Exemplos:}
+
+\vspace{0.5cm}
+
+$\begin{array}{rrrr}
+&1&8&\textcolor{iris}{6}\\
+-&&5&\textcolor{iris}{3}\\
+\hline
+&&&\textcolor{iris}{3}\\
+\end{array}$
+$\Rightarrow$
+$\begin{array}{rrrr}
+&1&\textcolor{iris}{8}&6\\
+-&&\textcolor{iris}{5}&3\\
+\hline
+&&\textcolor{iris}{3}&3\\
+\end{array}$
+$\Rightarrow$
+\vspace{0.2cm}
+
+$\begin{array}{rrrr}
+&\textcolor{iris}{1}&8&6\\
+-&&5&3\\
+\hline
+&\textcolor{iris}{1}&3&3\\
+\end{array}$
+
+%\includegraphics[width=8cm]{SubtracaoNaturais/SubtracaoNaturais1.png}
+
+
+
+\T{Empresta 1 }
+
+Quando o dígito de cima é menor que o de baixo, então pegue uma unidade da coluna da esquerda emprestado e efetue a subtração.
+
+\TM{Exemplos:}
+\vspace{0.5cm}
+
+$\begin{array}{rrrr}
+&3&2\textcolor{babypink}{\cancel{3}}&\textcolor{iris}{^12}\\
+-&&1&\textcolor{iris}{4}\\
+\hline
+&&&\textcolor{iris}{8}\\
+\end{array}$
+$\Rightarrow$
+$\begin{array}{rrrr}
+&3&\textcolor{iris}{2}\textcolor{babypink}{\cancel{3}}&^12\\
+-&&\textcolor{iris}{1}&4\\
+\hline
+&&\textcolor{iris}{1}&8\\
+\end{array}$
+$\Rightarrow$
+
+\vspace{0.5cm}
+
+$\begin{array}{rrrr}
+&\textcolor{iris}{3}&2\textcolor{babypink}{\cancel{3}}&^12\\
+-&&1&4\\
+\hline
+&\textcolor{iris}{3}&1&8\\
+\end{array}$
+
+
+%\includegraphics[width=8cm]{SubtracaoNaturais/SubtracaoNaturais2.png}
+
+\end{multicols}
+
+\begin{center}
+     \textbf{\Large Tabuada}
+\end{center}
+
+\setlength{\tabcolsep}{25pt}
+\begin{tabular}{lllll}
+2-1=1	&	3-2=1	&	4-3=1	&	5-4=1	&	6-5=1	\\
+3-1=2	&	4-2=2	&	5-3=2	&	6-4=2	&	7-5=2	\\
+4-1=3	&	5-2=3	&	6-3=3	&	7-4=3	&	8-5=3	\\
+5-1=4	&	6-2=4	&	7-3=4	&	8-4=4	&	9-5=4	\\
+6-1=5	&	7-2=5	&	8-3=5	&	9-4=5	&	10-5=5	\\
+7-1=6	&	8-2=6	&	9-3=6	&	10-4=6	&	11-5=6	\\
+8-1=7	&	9-2=7	&	10-3=7	&	11-4=7	&	12-5=7	\\
+9-1=8	&	10-2=8	&	11-3=8	&	12-4=8	&	13-5=8	\\
+10-1=9	&	11-2=9	&	12-3=9	&	13-4=9	&	14-5=9	\\
+11-1=10	&	12-2=10	&	13-3=10	&	14-4=10	&	15-5=10	\\
+\end{tabular} 
+
+\vspace{0.5cm}
+
+\begin{tabular}{lllll}
+7-6=1	&	8-7=1	&	9-8=1	&	10-9=1	&	11-10=1	\\
+8-6=2	&	9-7=2	&	10-8=2	&	11-9=2	&	12-10=2	\\
+9-6=3	&	10-7=3	&	11-8=3	&	12-9=3	&	13-10=3	\\
+10-6=4	&	11-7=4	&	12-8=4	&	13-9=4	&	14-10=4	\\
+11-6=5	&	12-7=5	&	13-8=5	&	14-9=5	&	15-10=5	\\
+12-6=6	&	13-7=6	&	14-8=6	&	15-9=6	&	16-10=6	\\
+13-6=7	&	14-7=7	&	15-8=7	&	16-9=7	&	17-10=7	\\
+14-6=8	&	15-7=8	&	16-8=8	&	17-9=8	&	18-10=8	\\
+15-6=9	&	16-7=9	&	17-8=9	&	18-9=9	&	19-10=9	\\
+16-6=10	&	17-7=10	&	18-8=10	&	19-9=10	&	20-10=10	\\
+\end{tabular}
+
+\input{rodape}
+
+\end{document}

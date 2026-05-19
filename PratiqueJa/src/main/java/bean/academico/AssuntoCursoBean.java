@@ -122,6 +122,23 @@ public class AssuntoCursoBean extends PaiBean<AssuntoCurso,AssuntoCursoDAO,Permi
 		return url;
 	}
 
+	public String teoriaHtmlUrl()
+	{
+		if (entidade == null) return null;
+		String path = "/matematica/" + entidade.getModulo().toString().toLowerCase()
+				+ "/" + entidade.getChaveImage() + "/teoria.xhtml";
+		try
+		{
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+					.getExternalContext().getRequest();
+			String realPath = request.getServletContext().getRealPath(path);
+			if (realPath != null && new java.io.File(realPath).exists())
+				return path + "?assunto=" + assunto;
+		}
+		catch (Exception e) { }
+		return null;
+	}
+
 	private int numStar(AssuntoCurso assuntoCurso)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();

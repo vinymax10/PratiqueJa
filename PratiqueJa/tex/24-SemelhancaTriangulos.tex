@@ -1,0 +1,194 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Semelhança de Triângulos}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Teorema de Tales} 
+
+Se duas retas transversais cortam um feixe de retas paralelas, então a dimensão de dois seguimentos quaisquer são proporcionais aos seguimentos correspondentes a outra reta transversal.
+
+\Formula{
+\dfrac{\alpha}{\beta}  = \dfrac{\gamma}{\phi}
+}
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,line width=2pt]
+
+\draw[line,stealth-stealth] (0,0) -- (5,1);
+\draw[line,stealth-stealth] (0,3) -- (5,2);
+\draw[line,stealth-stealth] (1,-1) -- (1,4);
+\draw[line,stealth-stealth] (2,-1) -- (2,4);
+\draw[line,stealth-stealth] (4,-1) -- (4,4);
+
+\node[texto] at (1.5,0) {\textbf{$\alpha$}};
+\node[texto] at (3,0.3) {\textbf{$\beta$}};
+
+\node[texto] at (1.5,3) {\textbf{$\gamma$}};
+\node[texto] at (3,2.8) {\textbf{$\phi$}};
+\end{tikzpicture}
+\end{center}
+
+É possível manter a proporção substituindo um seguimento pela soma de dois segmentos adjacentes. Por exemplo:
+
+\Formula{ 
+\dfrac{\alpha+\beta}{\beta}  = \dfrac{\gamma+\phi}{\phi}
+}
+
+\Formula{
+\dfrac{\alpha}{\alpha + \beta}  = \dfrac{\gamma}{\gamma + \phi}
+}
+
+\TM{Exemplos:}
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[red!50!white,line width=2pt]
+
+\draw[line,stealth-stealth] (0,0) -- (5,1);
+\draw[line,stealth-stealth] (0,3) -- (5,2);
+\draw[line,stealth-stealth] (1,-1) -- (1,4);
+\draw[line,stealth-stealth] (2,-1) -- (2,4);
+\draw[line,stealth-stealth] (4,-1) -- (4,4);
+
+\node[texto] at (1.5,0) {\textbf{$5$}};
+\node[texto] at (3,0.3) {\textbf{$10 $}};
+
+\node[texto] at (1.5,3) {\textbf{$x$}};
+\node[texto] at (3,2.8) {\textbf{$12$}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{8px}
+$\dfrac{5}{10} = \dfrac{x}{12}$ \vspace{8px}
+
+$ \dfrac{x}{12} = \dfrac{5}{10} $ \vspace{8px}
+
+$ \dfrac{x}{12} = \dfrac{1}{2} $ \vspace{8px}
+
+$ x = \dfrac{1}{2} \cdot 12 $ \vspace{8px}
+
+$x = \dfrac{12}{2}$ \vspace{8px}
+
+$x= 6$
+
+\TM{Triângulos Semelhantes}
+
+Se dois triângulos possuem dois ângulos iguais então eles são semelhantes e por isso possuem lados proporcionais.
+
+\Formula{
+\dfrac{CD}{CA}  = \dfrac{DE}{AB}  = \dfrac{CD}{CA} = \dfrac{CE}{CB}
+}
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[pink!70!white,line width=2pt]
+
+\draw[line] (0,0) -- (5,0) -- (1,3) -- cycle;
+\draw[line] (0.5,1.5) -- (3,1.5);
+
+%\node[texto] at (2.5,-0.3) {\textbf{$\alpha$}};
+%\node[texto] at (1.6,1.1) {\textbf{$\beta$}};
+
+\node[texto] at (-0.2,-0.2) {\textbf{$A$}};
+\node[texto] at (5.2,-0.2) {\textbf{$B$}};
+\node[texto] at (1,3.2) {\textbf{$C$}};
+\node[texto] at (0.3,1.5) {\textbf{$D$}};
+\node[texto] at (3.3,1.6) {\textbf{$E$}};
+\end{tikzpicture}
+\end{center}
+
+\TM{Exemplos: }
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[orange!50!white,line width=2pt]
+
+\draw[line] (0,0) -- (5,0) -- (1,3) -- cycle;
+\draw[line] (0.5,1.5) -- (3,1.5);
+
+\node[texto] at (2.5,-0.3) {\textbf{$12$}};
+\node[texto] at (1.6,1.1) {\textbf{$6$}};
+\node[texto] at (0.5,2.3) {\textbf{$4$}};
+\node[texto] at (0,0.8) {\textbf{$x$}};
+
+\node[texto] at (-0.2,-0.2) {\textbf{$A$}};
+\node[texto] at (5.2,-0.2) {\textbf{$B$}};
+\node[texto] at (1,3.2) {\textbf{$C$}};
+\node[texto] at (0.3,1.5) {\textbf{$D$}};
+\node[texto] at (3.3,1.6) {\textbf{$E$}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{8px}
+$\dfrac{4}{4+x} = \dfrac{6}{12}$ \vspace{8px}
+
+$\dfrac{4}{4+x} = \dfrac{1}{2}$ \vspace{8px}
+
+$4 = \dfrac{1}{2} \cdot (4+x)$ \vspace{8px}
+
+$4 = \dfrac{4+x}{2} $ \vspace{8px}
+
+$4 \cdot 2 = 4+x $
+
+$8 = 4+x $
+
+$4+x = 8 $
+
+$x = 8 -4 $
+
+$x = 4 $
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[violet!50!white,line width=2pt]
+
+\draw[line] (0,0) -- (5,0) -- (1,3) -- cycle;
+\draw[line] (0.5,1.5) -- (3,1.5);
+
+\node[texto] at (4.3,0.9) {\textbf{$x$}};
+\node[texto] at (2.3,2.4) {\textbf{$8$}};
+\node[texto] at (0.5,2.3) {\textbf{$4$}};
+\node[texto] at (0,0.8) {\textbf{$6$}};
+
+\node[texto] at (-0.2,-0.2) {\textbf{$A$}};
+\node[texto] at (5.2,-0.2) {\textbf{$B$}};
+\node[texto] at (1,3.2) {\textbf{$C$}};
+\node[texto] at (0.3,1.5) {\textbf{$D$}};
+\node[texto] at (3.3,1.6) {\textbf{$E$}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{8px}
+$\dfrac{4}{6} = \dfrac{8}{x}$ \vspace{8px}
+
+$x \cdot \dfrac{4}{6} = 8$ \vspace{8px}
+
+$x \cdot 4 = 8 \cdot 6$ 
+
+$x \cdot 4 = 48$
+
+\vspace{8px}
+$x = \dfrac{48}{4}$ \vspace{8px}
+
+$x = 12$
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

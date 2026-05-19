@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Potenciação}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+A potenciação é uma operação matemática que representa a multiplicação sucessiva de um número por ele mesmo da seguinte forma: 
+
+\Formula{
+a^n = \underbrace{a \cdot a \ldots \cdot a}_{n ~ \text{vezes}}
+}
+
+Onde $a$ é base e o e $n$ é o expoente.
+
+\TM{Exemplos:}
+
+$4^2 = 4 \cdot 4 = 16$
+
+Nesse exemplo dizemos que o 4 está elevado à segunda potência, ou ao quadrado.
+
+\vspace{8px} 
+$4^3 = 4 \cdot 4 \cdot 4 = 64$ 
+
+Nesse exemplo dizemos que o 4 está elevado à terceira potência, ou ao cubo.
+
+\vspace{8px} 
+$(x-2)^2 = (x-2) \cdot (x-2)$
+
+\T{Propriedades}
+
+\TM{Multiplicação de potências com a mesma base:}
+
+Repete a base e soma os expoentes.
+
+\Formula{
+a^x \cdot a^y = a^{x+y}
+}
+
+\TM{Exemplos:}
+
+$2^2 \cdot 2^3 = 2^{2+3} = 2^5$ \vspace{8px} 
+
+$2^5 \cdot 2^{-3} = 2^{5-3} = 2^2 $
+
+\TM{Divisão de potências com a mesma base:}
+
+Repete a base e subtrai os expoentes.
+
+\Formula{
+\dfrac{a^x}{a^y} = a^{x-y}
+}
+
+\TM{Exemplos:}
+
+\vspace{8px} 
+$\dfrac{2^6}{2^2} = 2^{6-2} =  2^{4}$ \vspace{8px} 
+
+$\dfrac{2^2}{2^{-3}} = 2^{2-(-3)} = 2^{2+3} =  2^{5}$ \vspace{8px} 
+
+\TM{Potência de um produto:}
+
+Distribua a potência entre os elementos do produto.
+
+\Formula{
+(a \cdot b )^n = a^n  \cdot b^n
+}
+
+\TM{Exemplos:}
+
+$(2 \cdot 3)^4 = 2^4 \cdot 3^4$
+
+\TM{Potência de potência:}
+
+Repete a base e multiplique os expoentes.
+
+\Formula{
+(a^x )^y = a^{x \cdot y}
+}
+
+\TM{Exemplos:}
+
+$(2^3)^2 = 2^{3 \cdot 2} = 2^6 = 64$
+
+\TM{Potência de números racionais:}
+
+Distribua a potência entre os elementos da fração.
+
+\Formula{
+\left( \dfrac{a}{b} \right)^n = \dfrac{a^n}{b^n}
+}
+
+\TM{Exemplos:}
+
+\vspace{8px} 
+$\left(\dfrac{5}{3} \right)^2 = \dfrac{5^2}{3^2} = \dfrac{25}{9}$ \vspace{8px} 
+
+\TM{Potência negativas:}
+
+Inverta a base e aplique a potência como positiva entre os elementos.
+
+\Formula{
+a^{-n} = \dfrac{1}{a^n}
+}
+
+\TM{Exemplos:}
+
+\vspace{8px} 
+$2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$ \vspace{8px} 
+
+\vspace{8px} 
+$\left(\dfrac{2}{3} \right)^{-2} = \left(\dfrac{3}{2} \right)^{2} = \dfrac{3^2}{2^2} = \dfrac{9}{4} $ \vspace{8px} 
+
+\TM{Potência nula:}
+
+Qualquer número $a \neq 0$ elevado a potência $0$ é igual a 1.
+
+$ a^{0} = 1$
+
+\TM{Exemplos:}
+
+$ 4^{0} = 1$
+
+$ -5^{0} = 1$
+
+\end{multicols}
+
+\begin{center}
+\textbf{\Large Principais Potências}
+\vspace{0.5cm}
+     
+\setlength{\tabcolsep}{25pt}
+
+\begin{tabular}{llll}
+$1^2=1$&$11^2=121$&$1^3=1$&$1^4=1$\\
+$2^2=4$&$12^2=144$&$2^3=8$&$2^4=16$\\
+$3^2=9$&$13^2=169$&$3^3=27$&$3^4=81$\\
+$4^2=16$&$14^2=196$&$4^3=64$&$4^4=256$\\
+$5^2=25$&$15^2=225$&$5^3=125$&$5^4=625$\\
+$6^2=36$&$16^2=256$&$6^3=216$&$6^4=1296$\\
+$7^2=49$&$17^2=289$&$7^3=343$&$7^4=2401$\\
+$8^2=64$&$18^2=324$&$8^3=512$&$8^4=4096$\\
+$9^2=81$&$19^2=361$&$9^3=729$&$9^4=6561$\\
+$10^2=100$&$20^2=400$&$10^3=1000$&$10^4=10000$\\
+
+\end{tabular} 
+
+\end{center}
+
+\input{rodape}
+\end{document}

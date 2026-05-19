@@ -1,0 +1,121 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+%\setstretch{1.5}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Adição com Naturais}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+\T{Somando números com mais de um dígito} 
+ 
+Primeiramente coloque os números um em cima do outro, alinhando os algarismos da direita para a esquerda. Depois efetue a soma dos dígitos da coluna mais à direita e repita o processo para as demais colunas.
+
+\TM{Exemplos:}
+
+\vspace{0.5cm}
+
+$\begin{array}{rrrr}
+&1&4&\textcolor{iris}{3}\\
++&&2&\textcolor{iris}{6}\\
+\hline
+&&&\textcolor{iris}{9}\\
+\end{array}$
+$\Rightarrow$
+$\begin{array}{rrrr}
+&1&\textcolor{iris}{4}&3\\
++&&\textcolor{iris}{2}&6\\
+\hline
+&&\textcolor{iris}{6}&9\\
+\end{array}$
+$\Rightarrow$
+\vspace{0.5cm}
+
+$\begin{array}{rrrr}
+&\textcolor{iris}{1}&4&3\\
++&&2&6\\
+\hline
+&\textcolor{iris}{1}&6&9\\
+\end{array}$
+
+\vspace{0.5cm}
+%\includegraphics[width=8cm]{AdicaoNaturais/AdicaoNaturais1.png}
+
+\T{Vai 1}
+
+Quando o resultado da soma de uma coluna possuir mais de um dígito, então mova o dígito da dezena para a parte superior da coluna à esquerda.  Exemplos:
+\vspace{0.5cm}
+
+$ \begin{array}{rrrr}
+&  &  \textcolor{iris}{1}&\\
+&4&7&\textcolor{iris}{6}\\
++&&4&\textcolor{iris}{8}\\
+\hline
+&&&\textcolor{iris}{4}\\
+\end{array} $
+$\Rightarrow$
+$ \begin{array}{rrrr}
+&  \textcolor{iris}{1}&  \textcolor{iris}{1}&\\
+&4&\textcolor{iris}{7}&6\\
++&&\textcolor{iris}{4}&8\\
+\hline
+&&\textcolor{iris}{2}&4\\
+\end{array} $
+$\Rightarrow$
+\vspace{0.5cm}
+
+$ \begin{array}{rrrr}
+&  \textcolor{iris}{1}& 1&\\
+&\textcolor{iris}{4}&7&6\\
++&&4&8\\
+\hline
+&\textcolor{iris}{5}&2&4\\
+\end{array} $
+
+%\includegraphics[width=8cm]{AdicaoNaturais/AdicaoNaturais2.png}
+\end{multicols}
+
+
+
+
+\begin{center}
+     \textbf{\Large Tabuada}
+\end{center}
+
+\setlength{\tabcolsep}{25pt}
+\begin{tabular}{lllll}
+1+1=2	&	2+1=3	&	3+1=4	&	4+1=5	&	5+1=6	\\
+1+2=3	&	2+2=4	&	3+2=5	&	4+2=6	&	5+2=7	\\
+1+3=4	&	2+3=5	&	3+3=6	&	4+3=7	&	5+3=8	\\
+1+4=5	&	2+4=6	&	3+4=7	&	4+4=8	&	5+4=9	\\
+1+5=6	&	2+5=7	&	3+5=8	&	4+5=9	&	5+5=10	\\
+1+6=7	&	2+6=8	&	3+6=9	&	4+6=10	&	5+6=11	\\
+1+7=8	&	2+7=9	&	3+7=10	&	4+7=11	&	5+7=12	\\
+1+8=9	&	2+8=10	&	3+8=11	&	4+8=12	&	5+8=13	\\
+1+9=10	&	2+9=11	&	3+9=12	&	4+9=13	&	5+9=14	\\
+1+10=11	&	2+10=12	&	3+10=13	&	4+10=14	&	5+10=15	\\
+\end{tabular} 
+
+\vspace{0.5cm}
+
+\begin{tabular}{lllll}
+6+1=7	&	7+1=8	&	8+1=9	&	9+1=10	&	10+1=11	\\
+6+2=8	&	7+2=9	&	8+2=10	&	9+2=11	&	10+2=12	\\
+6+3=9	&	7+3=10	&	8+3=11	&	9+3=12	&	10+3=13	\\
+6+4=10	&	7+4=11	&	8+4=12	&	9+4=13	&	10+4=14	\\
+6+5=11	&	7+5=12	&	8+5=13	&	9+5=14	&	10+5=15	\\
+6+6=12	&	7+6=13	&	8+6=14	&	9+6=15	&	10+6=16	\\
+6+7=13	&	7+7=14	&	8+7=15	&	9+7=16	&	10+7=17	\\
+6+8=14	&	7+8=15	&	8+8=16	&	9+8=17	&	10+8=18	\\
+6+9=15	&	7+9=16	&	8+9=17	&	9+9=18	&	10+9=19	\\
+6+10=16	&	7+10=17	&	8+10=18	&	9+10=19	&	10+10=20	\\
+\end{tabular}
+\input{rodape}
+\end{document}

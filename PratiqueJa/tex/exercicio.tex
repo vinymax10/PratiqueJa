@@ -1,0 +1,141 @@
+\documentclass[12pt,twoside]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{sansmathfonts}
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+%\usepackage{tabularx}
+\usepackage{dashrule}
+\usepackage{tikz}
+\usepackage{tabularray}
+\usepackage[export]{adjustbox}
+%\captionsetup[longtable]{skip=30pt}
+\usepackage{arydshln}
+\usepackage{ctable}
+\usepackage{colortbl}
+\usepackage{multicol,lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm,amsmath,dsfont,mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=15mm,
+right=15mm,
+top=15mm,
+bottom=10mm,
+}
+\usepackage{natbib}
+\usepackage{soul}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{cancel}
+\color{darkgray}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+
+\newcommand{\T}[1]{\textbf{\large #1} \newline}
+
+\newcommand{\TM}[1]{ \textbf{ \newline #1}  }
+\setlength\columnsep{30pt}
+
+\definecolor{bluebell}{rgb}{0.39, 0.44, 1}
+\definecolor{laranja}{rgb}{1, 0.58, 0.33}
+\definecolor{verde}{rgb}{0, 0.46, 0.37}
+\definecolor{babypink}{rgb}{0.85, 0.65, 0.65} 
+\definecolor{cinza}{rgb}{0.3, 0.3, 0.3} 
+\definecolor{iris}{rgb}{0.39, 0.44, 1} 
+\definecolor{babyblue}{rgb}{0.13, 0.59, 0.95} 
+
+\color{cinza} 
+ 
+\newcommand{\C}[1]{\textcolor{cinza}{#1}}
+\newcommand{\BI}[1]{\textbf{\textcolor{iris}{#1}}}
+\newcommand{\BL}[1]{\textbf{\textcolor{laranja}{#1}}}
+\newcommand{\BV}[1]{\textbf{\textcolor{verde}{#1}}}
+\newcommand{\BC}[1]{\textbf{\textcolor{cinza}{#1}}}
+\newcommand{\BB}[1]{\textbf{\textcolor{babyblue}{#1}}}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1}
+
+\setstretch{1} 
+\normalsize 
+\setlength{\tabcolsep}{0em} 
+\setlength\parindent{0pt} 
+\begin{tabular}{p{0.19\textwidth} p{0.61\textwidth} p{0.2\textwidth}}
+\BB{\Large Exercícios } & \footnotesize \textcolor{iris}{Módulo Básico} \BL{-} \textcolor{verde}{Conjuntos} \BL{-} Nível I & Nota:    \\  
+\end{tabular}
+\vspace{0.3cm}
+
+\small
+\textcolor{laranja}{Instruções: } \textcolor{cinza}{asd}
+\vspace{0.1cm}
+
+\setstretch{1.3}
+\footnotesize
+\begin{tblr}{
+colspec={p{0.46\textwidth}|[2pt,laranja]p{0.46\textwidth}},
+columns = {colsep=0pt, rightsep=10pt},
+column{2} = {leftsep=8pt},
+rows={valign=h, ht=8.200000000000001cm},
+}
+\BI{1)~}Qual a soma dos elementos da intersecção \(A \cap B ~\)?\vspace{5px}  \newline$A=\{5,13,15,18,19,21,24\}\newline B=\{1,6,9,13,18,19,24\}$ &\BI{2)~}Quantos elementos tem a união \(A \cup B ~\)?\vspace{5px}  \newline$A=\{4,10,19,22,23\}\newline B=\{9,10,18,23\}$ \\ 
+\BI{3)~}Quantos elementos tem a união \(A \cup B ~\)?\vspace{5px}  \newline$A=\{0,1,3,6,7,8,10,12,14,19\}\newline B=\{3,5,6,8,16,18,24\}$ &\BI{4)~}Qual o menor elemento da união \(A \cup B ~\)?\vspace{5px}  \newline$A=\{5,7,8,14,22\}\newline B=\{0,5,14,18,19,21\}$ \\ 
+\BI{5)~}Qual o menor elemento da intersecção \(A \cap B ~\)?\vspace{5px}  \newline$A=\{2,4,6,16,20,21\}\newline B=\{4,6,11,18,20\}$ &\BI{6)~}Qual o menor elemento de \(A - B ~\)?\vspace{5px}  \newline$A=\{4,6,7,8,12,24\}\newline B=\{8,12,15,24\}$ \\ 
+\end{tblr}
+
+\newpage 
+\setstretch{1} 
+\normalsize 
+\setlength{\tabcolsep}{0em} 
+\setlength\parindent{0pt} 
+\BB{\Large Resolução } \quad \footnotesize \textcolor{iris}{Módulo Básico} \BL{-} \textcolor{verde}{Conjuntos} \BL{-} Nível I
+\vspace{0.3cm}
+\small
+
+\textcolor{laranja}{Instruções: } \textcolor{cinza}{asd}
+\vspace{0.1cm}
+
+
+
+\setstretch{1.5}
+\footnotesize
+\begin{tblr}{
+colspec={p{0.46\textwidth}|[1pt,cinza]p{0.46\textwidth}},
+columns = {colsep=0pt, rightsep=10pt},
+column{2} = {leftsep=8pt},
+rows={valign=h, ht=8.200000000000001cm},
+}
+\BI{1)~}{Qual a soma dos elementos da intersecção \(A \cap B ~\)?}\vspace{5px}  \newline 
+{ $A=\{5,13,15,18,19,21,24\}\newline B=\{1,6,9,13,18,19,24\}$} \vspace{5px} \newline 
+{$A \cap B = \{13,18,19,24\} \\\text{Soma dos elementos de}~ A \cap B \text{ é: } \\13+18+19+24=74$} &\BI{2)~}{Quantos elementos tem a união \(A \cup B ~\)?}\vspace{5px}  \newline 
+{ $A=\{4,10,19,22,23\}\newline B=\{9,10,18,23\}$} \vspace{5px} \newline 
+{$A \cup B = \{4,9,10,18,19,22,23\} \\|A \cup B|=7$} \\ 
+\BI{3)~}{Quantos elementos tem a união \(A \cup B ~\)?}\vspace{5px}  \newline 
+{ $A=\{0,1,3,6,7,8,10,12,14,19\}\newline B=\{3,5,6,8,16,18,24\}$} \vspace{5px} \newline 
+{$A \cup B = \{0,1,3,5,6,7,8,10,12,14,16,18,19,24\} \\|A \cup B|=14$} &\BI{4)~}{Qual o menor elemento da união \(A \cup B ~\)?}\vspace{5px}  \newline 
+{ $A=\{5,7,8,14,22\}\newline B=\{0,5,14,18,19,21\}$} \vspace{5px} \newline 
+{$A \cup B = \{0,5,7,8,14,18,19,21,22\} \\\text{Menor elemento de}~ A \cup B \text{ é }0$} \\ 
+\BI{5)~}{Qual o menor elemento da intersecção \(A \cap B ~\)?}\vspace{5px}  \newline 
+{ $A=\{2,4,6,16,20,21\}\newline B=\{4,6,11,18,20\}$} \vspace{5px} \newline 
+{$A \cap B = \{4,6,20\} \\\text{Menor elemento de}~ A \cap B \text{ é }4$} &\BI{6)~}{Qual o menor elemento de \(A - B ~\)?}\vspace{5px}  \newline 
+{ $A=\{4,6,7,8,12,24\}\newline B=\{8,12,15,24\}$} \vspace{5px} \newline 
+{$A - B = \{4,6,7\} \\\text{Menor elemento de}~ A - B \text{ é }4$} \\ 
+\end{tblr}
+
+\vfill
+\begin{flushright}
+\setlength{\tabcolsep}{0em}
+\setlength\parindent{0pt}
+\footnotesize \textbf{pratiqueja.com}
+\end{flushright}
+
+\end{document}

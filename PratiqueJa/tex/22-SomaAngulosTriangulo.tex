@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Soma dos ângulos de um Triângulo}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+A soma dos ângulos internos a um triângulo é igual a $\ang{180}$. Tendo como referência a figura abaixo temos que $\alpha + \beta + \gamma = \ang{180}$.
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,line width=2pt]
+\tikzstyle{angleA}=[draw=none,fill=red!30!white]
+\tikzstyle{angleB}=[draw=none,fill=green!30!white]
+\tikzstyle{angleC}=[draw=none,fill=yellow!50!white]
+
+\draw[angleA] (0,0) -- (0:0.5) arc (0:60:0.5);
+
+\begin{scope}[shift={(5,0)}]
+    \draw[angleB] (0,0) -- (145:0.5) arc (145:180:0.5);
+\end{scope}
+
+\begin{scope}[shift={(1.5,2.5)}]
+    \draw[angleC] (0,0) -- (240:0.5) arc (240:325:0.5);
+\end{scope}
+
+\draw[line] (0,0) -- (5,0) -- (1.5,2.5) -- cycle;
+
+\node[texto] at (0.6,0.35) {\textbf{$\alpha$}};
+\node[texto] at (4.3,0.2) {\textbf{$\gamma$}};
+\node[texto] at (1.6,1.8) {\textbf{$\beta$}};
+\end{tikzpicture}
+\end{center}
+
+A soma dos ângulos de um triângulo, que é sempre 180º, têm diversas aplicações, como na resolução de problemas geométricos para encontrar ângulos desconhecidos, no auxílio à construção e navegação em engenharia e arquitetura, e no desenvolvimento de fórmulas e identidades trigonométricas, que envolvem os ângulos internos dos triângulos.
+
+
+\TM{Exemplo:}
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[red!50!white,line width=2pt]
+\tikzstyle{angleA}=[draw=none,fill=blue!30!white]
+\tikzstyle{angleB}=[draw=none,fill=green!30!white]
+\tikzstyle{angleC}=[draw=none,fill=yellow!50!white]
+
+\draw[angleA] (0,0) -- (0:0.5) arc (0:60:0.5);
+
+\begin{scope}[shift={(5,0)}]
+    \draw[angleB] (0,0) -- (145:0.5) arc (145:180:0.5);
+\end{scope}
+
+\begin{scope}[shift={(1.5,2.5)}]
+    \draw[angleC] (0,0) -- (240:0.5) arc (240:325:0.5);
+\end{scope}
+
+\draw[line] (0,0) -- (5,0) -- (1.5,2.5) -- cycle;
+
+\node[texto] at (0.7,0.35) {\textbf{$\ang{60}$}};
+\node[texto] at (4.2,0.25) {\textbf{$\ang{30}$}};
+\node[texto] at (1.6,1.8) {\textbf{$x$}};
+\end{tikzpicture}
+\end{center}
+
+$65 + 30 + x = 180$
+
+$95 + x = 180$
+
+$x= 180 - 95$
+
+$x = 85$
+
+\TM{Triângulo Isósceles:}
+
+O triângulo isósceles possui dois lados com a mesma medida. O terceiro lado que possui medida diferente é chamado de base do triângulo isósceles. Os dois ângulos formados pela base e os lados congruentes (iguais) possuem a mesma medida.
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[pink!70!white,line width=2pt]
+\tikzstyle{angleA}=[draw=none,fill=blue!30!white]
+\tikzstyle{angleB}=[draw=none,fill=green!30!white]
+\tikzstyle{angleC}=[draw=none,fill=green!50!white]
+
+\draw[angleA] (0,0) -- (0:0.5) arc (0:65:0.5);
+
+\begin{scope}[shift={(3,0)}]
+    \draw[angleA] (0,0) -- (115:0.5) arc (115:180:0.5);
+\end{scope}
+
+\begin{scope}[shift={(1.5,3)}]
+    \draw[angleC] (0,0) -- (245:0.5) arc (245:295:0.5);
+\end{scope}
+
+\draw[line] (0,0) -- (3,0) -- (1.5,3) -- cycle;
+
+\node[texto] at (0.6,0.35) {\textbf{$\alpha$}};
+\node[texto] at (2.3,0.35) {\textbf{$\alpha$}};
+\node[texto] at (1.5,2.2) {\textbf{$\beta$}};
+\end{tikzpicture}
+\end{center}
+
+\TM{Exemplo:}
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[violet!70!white,line width=2pt]
+\tikzstyle{angleA}=[draw=none,fill=yellow!70!white]
+\tikzstyle{angleB}=[draw=none,fill=red!30!white]
+\tikzstyle{angleC}=[draw=none,fill=green!50!white]
+
+\draw[angleA] (0,0) -- (0:0.5) arc (0:65:0.5);
+
+\begin{scope}[shift={(3,0)}]
+    \draw[angleA] (0,0) -- (115:0.5) arc (115:180:0.5);
+\end{scope}
+
+\begin{scope}[shift={(1.5,3)}]
+    \draw[angleB] (0,0) -- (245:0.5) arc (245:295:0.5);
+\end{scope}
+
+\draw[line] (0,0) -- (3,0) -- (1.5,3) -- cycle;
+
+\node[texto] at (0.6,0.35) {\textbf{$x$}};
+\node[texto] at (2.3,0.35) {\textbf{$x$}};
+\node[texto] at (1.5,2.2) {\textbf{$\ang{40}$}};
+\end{tikzpicture}
+\end{center}
+
+$x + x + 40 = 180$
+
+$2 x + 40 = 180$
+
+$2 x  = 180 - 40$
+
+$2x  = 140$
+
+\vspace{8px}
+$x  = \dfrac{140}{2}$ \vspace{8px}
+
+$x  = 70$
+
+\TM{Ângulo Externo}
+
+Em todo triângulo, qualquer ângulo externo é igual a soma dos ângulos internos não adjacentes.
+
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,line width=2pt]
+\tikzstyle{angleA}=[draw=none,fill=red!30!white]
+\tikzstyle{angleB}=[draw=none,fill=green!30!white]
+\tikzstyle{angleC}=[draw=none,fill=yellow!50!white]
+\tikzstyle{angleD}=[draw=none,fill=orange!50!white]
+
+\draw[angleA] (0,0) -- (0:0.5) arc (0:60:0.5);
+
+\begin{scope}[shift={(5,0)}]
+    \draw[angleB] (0,0) -- (145:0.5) arc (145:180:0.5);
+\end{scope}
+
+\begin{scope}[shift={(1.5,2.5)}]
+    \draw[angleC] (0,0) -- (240:0.5) arc (240:325:0.5);
+\end{scope}
+
+\begin{scope}[shift={(5,0)}]
+    \draw[angleD] (0,0) -- (0:0.5) arc (0:150:0.5);
+\end{scope}
+
+\draw[line] (0,0) -- (5,0) -- (1.5,2.5) -- cycle;
+\draw[line] (5,0) -- (6.5,0);
+
+\node[texto] at (0.6,0.35) {\textbf{$\alpha$}};
+\node[texto] at (4.3,0.2) {\textbf{$\gamma$}};
+\node[texto] at (1.6,1.8) {\textbf{$\beta$}};
+\node[texto] at (5.2,0.8) {\textbf{$\alpha + \beta$}};
+\end{tikzpicture}
+\end{center}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

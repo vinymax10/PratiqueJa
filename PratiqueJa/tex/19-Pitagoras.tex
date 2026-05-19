@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Teorema de Pitágoras}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+O Teorema de Pitágoras é um dos conceitos fundamentais da geometria, e trata da relação entre os lados de um triângulo retângulo. O teorema afirma que:
+
+\textcolor{iris}{Em um triângulo retângulo, o quadrado da medida da hipotenusa é igual à soma dos quadrados das medidas dos catetos.}
+
+\begin{center}
+\vspace{0.3cm}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,line width=2pt]
+\draw[line] 
+(0,0) -- (4,0) -- (0,2) -- cycle;
+\node[no] at (-0.3,1) {\textbf{c}};
+\node[no] at (1.8,-0.3) {\textbf{b}};
+\node[no] at (2,1.3) {\textbf{a}};
+\draw[line] (0,0) rectangle (0.3,0.3);
+\filldraw[blue!50!white] (0.15,0.15) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+O triângulo retângulo acima tem catetos de comprimento $b$ e $c$ e a hipotenusa de comprimento $a$, então a relação matemática que descreve esse teorema é:
+
+\Formula{
+a^2=b^2 + c^2
+}
+
+Este teorema é bastante utilizado para encontrar a medida de um dos lados do triângulo retângulo tendo como referência as medidas dos outros dois lados. Diversos problemas em geometria plana podem ser resolvidos com a utilização desse teorema.
+
+
+\TM{Exemplos:}
+
+\vspace{0.3cm}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[red!50!white,line width=2pt]
+\draw[line] 
+(0,0) -- (4,0) -- (0,2) -- cycle;
+\node[no] at (-0.3,1) {\textbf{3}};
+\node[no] at (1.8,-0.3) {\textbf{4}};
+\node[no] at (2,1.3) {\textbf{x}};
+\draw[line] (0,0) rectangle (0.3,0.3);
+\filldraw[red!50!white] (0.15,0.15) circle (1pt);
+\end{tikzpicture}
+
+
+$x^2=4^2 + 3^2$
+
+$x^2 = 16 + 9 = 25$
+
+$x = \sqrt{25} = 5$
+
+Outro exemplo:
+
+\vspace{1cm}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[green!50!white,line width=2pt]
+\draw[line] 
+(0,0) -- (4,0) -- (0,2) -- cycle;
+\node[no] at (-0.3,1) { \textbf{9}};
+\node[no] at (1.8,-0.3) { \textbf{x}};
+\node[no] at (2,1.5) { \textbf{15}};
+\draw[line] (0,0) rectangle (0.3,0.3);
+\filldraw[green!50!white] (0.15,0.15) circle (1pt);
+\end{tikzpicture}
+
+$15^2 = x^2 + 9^2$
+
+$225 = x^2 + 81$
+
+$x^2 + 81 = 225$
+
+$x^2 = 225 - 81 = 144$
+
+$x = \sqrt{144} = 12$
+
+\vspace{0.3cm}
+\TW{Distância entre dois pontos} 
+
+Quando temos dois pontos no plano cartesiano, $(x_1, y_1)$ e $(x_2, y_2)$, podemos encontrar a distância entre eles aplicando o Teorema de Pitágoras por meio da seguinte fórmula:
+
+\Formula{d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}
+
+\TM{Exemplo:}
+
+A distância entre os pontos \( (15,14)\) e \( (31,26)\) é:
+
+$d =\sqrt{(31-15)^2 + (26-14)^2}$
+
+$d =\sqrt{16^2 + 12^2}$
+
+$d =\sqrt{256 + 144}$
+
+$d =\sqrt{400} = 20$
+
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

@@ -88,6 +88,16 @@ public class AssuntoCurso extends Config implements Entidade
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)
 	private String descricao;
 
+	public String endTeoria()
+	{
+		return "/matematica/"+getModuloImage()+"/"+getChaveImage()+"/teoria.xhtml?assunto="+getChaveImage();
+	}
+	
+	public String endImageCapa()
+	{
+		return "/image/matematica/"+getModuloImage()+"/"+getChaveImage()+"/capa.png";
+	}
+	
 	public String getChaveImage()
 	{
 		return StringAux.toLowerCaseFirst(chave);

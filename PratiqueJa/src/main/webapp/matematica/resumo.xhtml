@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body >
+	<ui:composition>
+		<!-- HERO -->
+		<div class="as-hero">
+			<div class="as-hero-content">
+				<span class="as-modulo as-modulo-#{assuntoCursoBean.entidade.modulo.toString().toLowerCase()}">
+					<h:outputText value="#{assuntoCursoBean.entidade.modulo.nome}" />
+				</span>
+				<h1 class="as-title">
+					<h:outputText value="#{assuntoCursoBean.entidade.nome}" />
+				</h1>
+				<h:outputText styleClass="as-desc"
+					rendered="#{not empty assuntoCursoBean.entidade.descricao}"
+					value="#{assuntoCursoBean.entidade.descricao}" />
+	
+				<div class="as-stats">
+					<div class="as-stat">
+						<span class="as-stat-label">Exercícios</span>
+						<strong class="as-stat-value">#{assuntoCursoBean.exerciciosPadrao.size()}</strong>
+					</div>
+					<div class="as-stat">
+						<span class="as-stat-label">Questões</span>
+						<strong class="as-stat-value">#{assuntoCursoBean.entidade.questoes.size()}</strong>
+					</div>
+					<h:panelGroup layout="block" styleClass="as-stat"
+						>
+						<span class="as-stat-label">Videoaulas</span>
+						<strong class="as-stat-value">12</strong>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="as-stat"
+						rendered="#{assuntoCursoBean.entidade.showAnotacao}">
+						<span class="as-stat-label">Anotações</span>
+						<strong class="as-stat-value">15</strong>
+					</h:panelGroup>
+				</div>
+			</div>
+	
+			<div class="as-hero-image">
+				<img src="#{assuntoCursoBean.entidade.endImageCapa()}" alt="#{assuntoCursoBean.entidade.nome}" />
+			</div>
+		</div>
+	
+		<!-- PROGRESSO -->
+		<div class="as-progress-section">
+			<div class="as-progress-card">
+				<h3 class="as-progress-title">Seu progresso no assunto</h3>
+				<div class="as-progress-bar">
+					<div class="as-progress-fill" style="width: 0%"></div>
+				</div>
+				<div class="as-progress-stats">
+					<div class="as-progress-item">
+						<strong>0</strong>
+						<span>Exercícios resolvidos</span>
+					</div>
+					<div class="as-progress-item">
+						<strong>0</strong>
+						<span>Questões respondidas</span>
+					</div>
+					<div class="as-progress-item">
+						<strong>0%</strong>
+						<span>Concluído</span>
+					</div>
+				</div>
+			</div>
+	
+			<div class="as-continue-card">
+				<h3 class="as-continue-title">Continue de onde parou</h3>
+				<p class="as-continue-desc">Nenhuma atividade iniciada ainda. Comece pelos exercícios ou pelas anotações de teoria.</p>
+				<div class="as-continue-actions">
+					<div class="as-tab as-continue-btn" onclick="asShowTab('exercicios', this)">
+						<i class="pi pi-pencil"></i> Ir para Exercícios
+					</div>
+					<div class="as-tab as-continue-btn" onclick="location.href='#{assuntoCursoBean.entidade.endTeoria()}'">
+						<i class="pi pi-book"></i> Ver Teoria
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<!-- BOTÕES DE NAVEGAÇÃO -->
+		<div class="as-tabs" id="asTabs">
+			<h:panelGroup layout="block"
+				rendered="#{assuntoCursoBean.entidade.showAnotacao}"
+				styleClass="as-tab" onclick="location.href='#{assuntoCursoBean.entidade.endTeoria()}'">
+				<i class="pi pi-book"></i> Teoria
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block"
+				rendered="#{assuntoCursoBean.entidade.showExercicio}"
+				styleClass="as-tab" onclick="asShowTab('exercicios', this)">
+				<i class="pi pi-pencil"></i> Exercícios
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{assuntoCursoBean.entidade.showAula}"
+				styleClass="as-tab" onclick="asShowTab('videoaulas', this)">
+				<i class="pi pi-video"></i> Videoaulas
+			</h:panelGroup>
+			<div class="as-tab" onclick="asShowTab('pdfs', this)">
+				<i class="pi pi-download"></i> PDFs
+			</div>
+		</div>
+
+	</ui:composition>		
+</h:body>
+</html>

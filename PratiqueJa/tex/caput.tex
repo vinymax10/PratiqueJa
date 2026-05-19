@@ -1,0 +1,72 @@
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{sansmathfonts}
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage{multicol,lipsum}
+\usepackage{amsmath,cancel}
+\usepackage{amssymb,amsthm,dsfont,mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=20mm,
+top=15mm,
+bottom=22mm,
+}
+\usepackage{natbib}
+\usepackage{soul}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{siunitx}
+\graphicspath{ {imagens/} }
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\color{darkgray}
+\newcommand{\T}[1]{\vspace{0.4cm}\textbf{\large#1}}
+\newcommand{\TW}[1]{\textbf{\large#1}}
+
+\newcommand{\TM}[1]{\vspace{0.2cm} \textbf{#1}}
+
+\newcommand{\M}[1]{
+\vspace{-0.6cm}
+\begin{flalign*}
+#1&
+\end{flalign*}
+\vspace{-0.6cm}
+}
+
+
+\definecolor{bluebell}{rgb}{0.25, 0.35, 0.89} 
+\definecolor{laranja}{rgb}{0.87, 0.48, 0.25} 
+\definecolor{verde}{rgb}{0, 0.54, 0.44} 
+\definecolor{babypink}{rgb}{1, 0.42, 0.52} 
+\definecolor{rosa}{rgb}{1, 0.72, 0.77} 
+\definecolor{cinza}{rgb}{0.3, 0.3, 0.3}  
+\definecolor{iris}{rgb}{0.25, 0.35, 0.89}  
+\definecolor{babyblue}{rgb}{0.13, 0.59, 0.95}
+
+\setlength\columnsep{30pt}
+
+\setlength{\parindent}{0cm}
+\setlength{\fboxrule}{1.3pt}  % <-- Aumenta a espessura
+
+\newcommand{\Formula}[1]{
+\begin{center}
+\color{iris}
+\fcolorbox{rosa}{white}{
+\(
+\begin{array}{c}
+#1
+\end{array}
+\)
+}
+\color{cinza}
+\end{center}
+}

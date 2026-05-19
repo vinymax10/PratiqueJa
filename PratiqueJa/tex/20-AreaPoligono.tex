@@ -1,0 +1,320 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Área e Perímetro}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+A área de um polígono representa uma medida do preenchimento da região interna do polígono. Existe uma grande variedade de polígonos e diversas maneiras para determinar o valor de cada área. O perímetro de um de polígono é a soma de todos os seus lados. Ou seja, é a medida do comprimento total do contorno da figura. Apresentamos a seguir uma formulação para o cálculo da área e do perímetro dos principais polígonos. 
+
+\TM{Quadrado}
+
+A área $A$ do quadrado pode ser calculada pela fórmula: 
+
+\Formula{A = l^2}
+
+Onde $l$ representa a medida do lado do quadrado.
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,fill=blue!20!white,line width=2pt]
+\draw[line] 
+(0,0) rectangle (2.5,2.5);
+\node[no] at (1.25,-0.3) {\textbf{l}};
+\node[no] at (2.8,1.25) {\textbf{l}};
+\draw[line] (0,0) rectangle (0.3,0.3);
+\filldraw[blue!50!white] (0.15,0.15) circle (1pt);
+\draw[line] (2.5,2.5) rectangle (2.2,2.2);
+\filldraw[blue!50!white] (2.35,2.35) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+Como o quadrado possui 4 lados com a mesma medida, então o perímetro $P$ pode ser calculado por:
+
+\Formula{P = 4 \cdot l}
+
+\TM{Exemplo:}
+
+Se um quadrado tem lado $l=5$ então sua área $A = 25$. O mesmo pode ser feito para calcular a medida do lado do quadrado dada sua área. Por exemplo, se um quadrado possui área $A = 16$, então deduzimos que $l^2=16$, então $l= 4$.  
+
+O perímetro de um quadrado com lado $l=3$ é $P=4 \cdot 3 = 12$.
+
+\TM{Retângulo}
+
+Dado um retângulo com base $b$ e altura $h$, temos que a área do retângulo é igual ao produto da medida da base pela altura. Ou seja:
+
+\Formula{A = b \cdot h}
+
+\vspace{-0.2cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[red!50!white, fill=red!20!white, line width=2pt]
+\draw[line] 
+(0,0) rectangle (4,2.5);
+\node[no] at (2,-0.3) {\textbf{b}};
+\node[no] at (4.3,1.25) {\textbf{h}};
+\draw[line] (0,0) rectangle (0.3,0.3);
+\filldraw[red!50!white] (0.15,0.15) circle (1pt);
+\draw[line] (4,2.5) rectangle (3.7,2.2);
+\filldraw[red!50!white] (3.85,2.35) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+Como o retângulo possui dois lados com a medida da base e dois lados com a medida da altura, então o perímetro pode ser calculado por:
+
+\Formula{P = 2 \cdot (b+h)}
+
+\TM{Exemplo:}
+
+Dado um retângulo com base $b=4$ e altura $h=3$ temos:
+
+$A = 4 \cdot 3 = 12$
+
+O perímetro desse retângulo é calculado por:
+
+$P = 2 \cdot (4+3) = 2 \cdot 7 = 14$
+
+\TM{Paralelogramo}
+
+A área do paralelogramo é idêntica a do retângulo, ou seja:
+
+\Formula{A = b \cdot h}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[green!40!white, fill=green!10!white, line width=2pt]
+\draw[line] 
+(0,0) -- (1,2.5) -- (5,2.5) -- (4,0) -- (0,0);
+\node[no] at (2,-0.3) {\textbf{b}};
+\node[no] at (4.7,1) {\textbf{a}};
+\node[no] at (1.3,1.25) {\textbf{h}};
+\draw[dotted,line] (1,0) -- (1,2.5);
+\draw[line] (1,0) rectangle (1.3,0.3);
+\filldraw[green!40!white] (1.15,0.15) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+O perímetro do paralelogramo é semelhante ao perímetro do retângulo, a diferença é que no lugar a altura utiliza-se o lado $a$ do paralelogramo conforme a fórmula abaixo:
+
+\Formula{P=2 \cdot (a+b)}
+
+\TM{Exemplo:}
+
+Dado um paralelogramo com base $b=5$ e altura $h=2$ temos:
+
+$A = 5 \cdot 2 = 10$
+
+Se tivermos um paralelogramo com base $b=6$ e lado $a=4$, então o perímetro é calculado por:
+
+$P=2 \cdot (6+4) = 2 \cdot 10 = 20$
+
+\TM{Triângulo}
+
+A área do triângulo é calculada pela metade do produto da base $b$ pela altura $h$, deste modo temos:
+
+\Formula{A = \dfrac{b \cdot h}{2}}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[violet!50!white, fill=violet!20!white, line width=2pt]
+\draw[line] 
+(0,0) -- (5,0) -- (1.5,3) -- cycle;
+\draw[dotted,line] (1.5,0) -- (1.5,3);
+\node[no] at (1.65,1.5) {\textbf{h}};
+\node[no] at (0.5,1.5) {\textbf{a}};
+\node[no] at (3.2,1.8) {\textbf{c}};
+\node[no] at (1.8,-0.3) {\textbf{b}};
+\draw[line] (1.5,0) rectangle (1.8,0.3);
+\filldraw[violet!50!white] (1.65,0.15) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+O perímetro do triângulo é calculado pela soma dos seus lados da seguinte forma:
+
+\Formula{P=a + b + c}
+
+\TM{Exemplo:}
+
+Dado um triângulo com base $b=6$ e altura $h=3$ temos:
+
+\vspace{8px}
+$A = \dfrac{6 \cdot 3}{2} = \dfrac{18}{2} = 9$ 
+\vspace{8px}
+
+O perímetro de um triângulo com lados $a=3$, $b=6$ e $c=5$ é:
+
+$P=3+6+5=14$
+
+\TM{Triângulo Equilátero}
+
+O triângulo equilátero é aquele que possui os três lados com a mesma medida. O cálculo da sua área é expresso pela fórmula:
+
+\Formula{A = \dfrac{l^2 \sqrt{3}}{4}}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,fill=blue!20!white,line width=2pt]
+\draw[line] 
+(0,0) -- (3,0) -- (1.5,2.59) -- cycle;
+\node[no] at (1.5,-0.3) {\textbf{l}};
+\node[no] at (0.5,1.3) {\textbf{l}};
+\node[no] at (2.5,1.3) {\textbf{l}};
+\end{tikzpicture}
+\end{center}
+
+Como o triângulo equilátero possui os três lados com a mesma medida o cálculo do seu perímetro é:
+
+\Formula{P = 3 \cdot l}
+
+\TM{Exemplo:}
+
+Dado um triângulo equilátero com lado $l=4$ temos:
+
+\vspace{8px}
+$A = \dfrac{4^2 \cdot \sqrt{3}}{4} = \dfrac{16 \cdot \sqrt{3}}{4} = 4 \sqrt{3}$ 
+\vspace{8px}
+
+O perímetro desse mesmo triângulo é:
+
+$P=3 \cdot 4=12$
+
+\TM{Trapézio}
+
+A área do trapézio é dada pela metade do produto da soma das bases pela altura. Em outras palavras temos que a área de um trapézio de base maior $B$, base menor $b$ e altura $h$ é a formula:  
+
+\Formula{A = \dfrac{(B + b) \cdot h}{2}}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[pink!70!white, fill=pink!20!white, line width=2pt]
+\draw[line] 
+(0,0) -- (1,2) -- (3,2) -- (4,0) -- (0,0);
+\node[no] at (2,-0.3) {\textbf{B}};
+\node[no] at (1.3,1.25) {\textbf{h}};
+\node[no] at (2,2.3) {\textbf{b}};
+\draw[dotted,line] (1,0) -- (1,2);
+\draw[line] (1,0) rectangle (1.3,0.3);
+\filldraw[pink!70!white] (1.15,0.15) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+O cálculo do perímetro do trapézio é dado pela soma dos seus quatro dados conforme indicado na figura abaixo:
+
+\Formula{P=a+b+c+d}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[red!50!white, fill=red!20!white, line width=2pt]
+\draw[line] 
+(0,0) -- (1,2) -- (3,2) -- (4,0) -- (0,0);
+\node[no] at (2,-0.3) {\textbf{a}};
+\node[no] at (0.3,1.4) {\textbf{c}};
+\node[no] at (2,2.3) {\textbf{b}};
+\node[no] at (3.7,1.4) {\textbf{d}};
+\end{tikzpicture}
+\end{center}
+
+\TM{Exemplo:}
+
+Dado um trapézio com base maior $B=7$, base menor $b=3$ e altura $h=2$ temos:
+
+\vspace{8px}
+$A = \dfrac{(7 + 3) \cdot 2}{2} =  \dfrac{10 \cdot 2}{2} = 10$ \vspace{8px}
+
+Considerando um trapézio com os lados $a=6$, $b=3$, $c=4$ e $d=4$, temos o perímetro dado por:
+
+$P=6+3+4+4=17$
+
+\TM{Losango}
+
+A área do losango é igual a metade do produto da diagonal maior $D$ pela diagonal menor $d$. 
+
+\Formula{A = \dfrac{D \cdot d }{2}}
+
+\vspace{-0.4cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[orange!70!white, fill=orange!20!white, line width=2pt]
+\draw[line] 
+(0,1.25) -- (2,2.5) -- (4,1.25) -- (2,0) -- (0,1.25);
+\node[no] at (2.2,0.7) {\textbf{d}};
+\node[no] at (1.3,1.45) {\textbf{D}};
+\node[no] at (3.1,2.1) {\textbf{l}};
+\draw[dotted,line] (2,0) -- (2,2.5);
+\draw[dotted,line] (0,1.25) -- (4,1.25);
+\draw[line] (2,1.25) rectangle (2.3,1.55);
+\filldraw[orange!70!white] (2.15,1.4) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+Como o losango possui 4 lados com a mesma medida, então o perímetro pode ser calculado por:
+
+\Formula{P=4 \cdot l}
+
+\TM{Exemplo:}
+
+Dado um losango com diagonal maior $D=6$ e diagonal menor $d=4$ temos:
+
+\vspace{8px}
+$A = \dfrac{6 \cdot 4}{2} =\dfrac{24}{2} = 12$ \vspace{8px}
+
+O perímetro de um losango com lado $l=5$ é $P=4 \cdot 5= 20$.
+
+\TM{Circunferência}
+
+A área do círculo é calculada por meio do seu raio $r$ da seguinte forma: 
+
+\Formula{A= \pi r^2}
+
+\vspace{-0.5cm}
+\begin{center}
+\begin{tikzpicture}
+\tikzstyle{no}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[orange!70!white, fill=orange!20!white, line width=2pt]
+\draw[line] (0,0) circle (1.5);
+\filldraw [line] (0,0) circle (1pt);
+\draw[line] (0,0) -- (1.5,0);
+\node[no] at (0.75,0.2) {\textbf{r}};
+\end{tikzpicture}
+\end{center}
+
+O comprimento da circunferência é dado por:
+
+\Formula{C= 2 \cdot \pi r}
+
+\TM{Exemplo:}
+
+Dado um círculo de raio $r=3$ temos:
+
+$A = 3^2 \pi = 9\pi$ 
+
+O comprimento de uma circunferência com raio $r=5$ é $C=2\cdot \pi \cdot 5 = 10 \pi$.
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

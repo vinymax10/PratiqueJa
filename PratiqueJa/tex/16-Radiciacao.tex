@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Radiciação}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+Radiciação é a operação inversa à potenciação. Ela consiste em determinar o número que, elevado a um expoente, resulta em um dado valor.
+
+A radiciação mais comum é a raiz quadrada $\sqrt{~~}$, que responde à pergunta: Qual número, ao elevar-se ao quadrado, dá um determinado valor?
+
+A seguir temos a definição de uma radiciação:
+
+\Formula{
+\sqrt[n]{a} = b  \Leftrightarrow a = b^n
+}
+
+Onde $a$ é o radicando e  $n$ é o índice. Essa propriedade é válida para $n \in  \mathbb{N}, n \geq 2$, e se $n$ for par, então $a\geq 0$.
+
+Para resolver a radiciação é necessário encontrar o número que elevado ao índice é igual ao radicando. Por convenção, quando o índice não é informado, utiliza-se o índice 2.
+						
+Índice 2 = raiz quadrada.
+
+Índice 3 = raiz cúbica
+
+\TM{Exemplo:}
+
+$\sqrt{16} = \sqrt{4^2} = 4$
+
+\TM{Outra Visão}
+
+\Formula{
+\sqrt[n]{a} = a^{\frac{1}{n}}
+}
+
+A raiz quadrada é equivalente a elevar o radicando a potência $ \frac{1}{n}$. 
+
+\TM{Exemplo:}
+
+$\sqrt{16} = 16^{\frac{1}{2}} = (2^4)^{\frac{1}{2}} = 2^{(4 \cdot \frac{1}{2})} = 2^{(\frac{4}{2})} = 2^{2} = 4$
+
+\T{Resolvendo números grandes.}
+
+Decomponha o radicando em fatores primos. Em seguida, agrupe o resultado em potências de 2 e depois remova as potências juntamente com a raiz.
+
+\TM{Exemplo:}
+
+$\sqrt{576} = 24$
+\vspace{0.3cm}
+
+$\begin{array}{l|l} 
+576 & 2 \\
+288 & 2 \\
+144 & 2 \\
+72 & 2 \\
+36 & 2 \\
+18 & 2 \\
+9 & 3 \\
+3 & 3  \\
+\hline 
+1 & 2^2 \cdot 2^2 \cdot 2^2 \cdot 3^2
+\end{array}$
+
+\vspace{0.3cm}
+
+$\sqrt{576} = \sqrt{2^2 \cdot 2^2 \cdot 2^2 \cdot 3^2} = \\2 \cdot 2 \cdot 2 \cdot 3 = 4 \cdot 6 = 24$
+
+\T{Propriedades}
+
+A seguir iremos descrever as principais propriedades envolvendo a radiciação.
+
+\TM{1ª Propriedade:}
+
+Essa propriedade estabelece que a raiz enésima de um número $a$ elevado à potência $n$ é o próprio número $a$.
+
+\Formula{
+\sqrt[n]{a^n} = a
+}
+
+Em termos mais simples, se você eleva um número a uma certa potência e depois tira a raiz com o mesmo índice dessa potência, você volta ao número original. As duas operações (potenciação e radiciação com o mesmo índice) se "cancelam" ou se "desfazem" mutuamente.
+
+Essa propriedade é válida para $n \in  \mathbb{N}, n \geq 2$, e se $n$ for par, então $a\geq 0$ e $b\geq 0$.
+
+\TM{Exemplo:}
+
+\vspace{8px} 
+$\sqrt[3]{8} = \sqrt[3]{2^3} = 2$
+
+\TM{2ª Propriedade:}
+
+Essa propriedade estabelece que o produto de duas ou mais raízes que possuem o mesmo índice é igual a uma única raiz com o mesmo índice, cujo radicando é o produto dos radicandos originais.
+
+\Formula{
+\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}
+}
+
+Essa propriedade é válida para $n \in  \mathbb{N}, n \geq 2$, e se $n$ for par, então $a\geq 0$ e $b\geq 0$.
+
+
+\TM{Exemplo:}
+
+\vspace{8px} 
+$\sqrt{2} \cdot \sqrt{18} = \sqrt{2 \cdot 18} = \sqrt{36} = 6$
+
+\TM{3ª Propriedade:}
+
+Essa é uma das propriedades fundamentais da radiciação, conhecida como a propriedade do quociente de raízes com o mesmo índice.
+
+\Formula{
+\dfrac{\sqrt[n]{a}}{\sqrt[n]{b}} = \sqrt[n]{\dfrac{a}{b}} 
+}
+
+Essa propriedade estabelece que a divisão de duas raízes que possuem o mesmo índice é igual a uma única raiz com o mesmo índice, cujo radicando é o quociente dos radicandos originais.
+
+Essa propriedade é válida para $n \in  \mathbb{N}, n \geq 2, b\neq0$, e se $n$ for par, então $a\geq 0$ e $b>0$.
+
+\TM{Exemplo:}
+
+\vspace{8px} 
+$\dfrac{\sqrt{108}}{\sqrt{12}} = \sqrt{\dfrac{108}{12}} = \sqrt{9} = 3$ \vspace{8px} 
+
+\vspace{24px} 
+\TM{4ª Propriedade:}
+
+Essa propriedade é conhecida como a propriedade de equivalência de radicais ou a propriedade de amplificação ou simplificação de radicais.
+
+\Formula{
+\sqrt[n]{a^b} = \sqrt[n \cdot c]{a^{(b \cdot c)}} 
+}
+
+\Formula{
+\sqrt[n]{a^b} = \sqrt[\uproot{5} \frac{n}{c}]{a^{(\frac{b}{c})}}
+}
+
+Essa propriedade afirma que é possível multiplicar (ou dividir) o índice de uma raiz e o expoente do radicando pelo mesmo número real (não nulo) sem alterar o valor da expressão. Essencialmente, ela permite reescrever uma raiz em uma forma equivalente com um índice e um expoente diferentes.
+
+Essa propriedade é válida para $n \in  \mathbb{N}, n \geq 2, b \in \mathbb{Z}, c \in \mathbb{R}, c \neq 0$, e se $n$ ou $n\cdot c$ for par, então $a\geq 0$.
+
+\TM{Exemplo:}
+
+\vspace{8px} 
+$\sqrt{8} \cdot \sqrt[4]{4} = \sqrt[4]{8^2} \cdot \sqrt[4]{4} = \sqrt[4]{64 \cdot 4} = \sqrt[4]{256} = 4$
+
+\vspace{8px} 
+
+$\sqrt[6]{64} = \sqrt[6]{4^3} = \sqrt{4} = 2$
+
+\TM{5ª Propriedade:}
+
+Essa propriedade é conhecida como a propriedade da raiz de uma raiz ou propriedade da radiciação de radicais.
+
+\Formula{\sqrt[n]{\sqrt[b]{a}} = \sqrt[n \cdot b]{a}
+}
+
+Essa propriedade afirma que quando você tem uma raiz dentro de outra raiz, você pode simplificar a expressão multiplicando os índices das raízes e mantendo o mesmo radicando. O resultado é uma única raiz com o novo índice.
+
+Essa propriedade é válida para $n, b \in  \mathbb{N}, n, b \geq 2$, e se $n$, $b$ ou $n\cdot b$ for par, então $a\geq 0$.
+
+\TM{Exemplo:}
+
+\vspace{8px} 
+$\sqrt{\sqrt{8}} \cdot \sqrt[4]{2} = \sqrt[4]{8} \cdot \sqrt[4]{2} = \sqrt[4]{8 \cdot 2} = \sqrt[4]{16} = 2$
+
+\T{Racionalização de denominador}
+
+A Racionalização de Denominadores é um processo matemático que tem como objetivo eliminar radicais (raízes) do denominador de uma fração, transformando-o em um número racional. O valor da fração original não é alterado, apenas a sua forma de representação.
+
+\TM{Exemplo 1:}
+
+\vspace{8px} 
+$\dfrac{1}{\sqrt{2}} = \dfrac{1}{\sqrt{2}} \cdot \dfrac{\sqrt{2}}{\sqrt{2}} = \dfrac{\sqrt{2}}{2}$ \vspace{8px} 
+
+\TM{Exemplo 2:}
+
+\vspace{8px} 
+$\dfrac{5}{\sqrt{3} + 1} = \dfrac{5}{\sqrt{3} + 1} \cdot \dfrac{\sqrt{3} - 1}{\sqrt{3} - 1}  = \vspace{8px} \\
+\dfrac{5 \cdot (\sqrt{3} - 1)}{(\sqrt{3})^2 - (1)^2} = \dfrac{5 \cdot (\sqrt{3} - 1)}{3 - 1} =$ \vspace{8px} 
+
+$ \dfrac{5 \sqrt{3} - 5}{2}$ \vspace{8px} 
+
+\TM{Exemplo 3:}
+
+\vspace{8px} 
+$\dfrac{3}{\sqrt{5} + \sqrt{2}} = \dfrac{3}{\sqrt{5} + \sqrt{2}} \cdot \dfrac{\sqrt{5} - \sqrt{2}}{\sqrt{5} - \sqrt{2}}  =	\vspace{8px}  \\ 
+\dfrac{3 \cdot (\sqrt{5} - \sqrt{2})}{(\sqrt{5})^2 - (\sqrt{2})^2} = \dfrac{3 \cdot (\sqrt{5} - \sqrt{2})}{5 - 2} = \vspace{8px}  \\
+\dfrac{3 \cdot (\sqrt{5} - \sqrt{2})}{3} = \sqrt{5} - \sqrt{2} $ \vspace{8px} 
+
+\end{multicols}
+
+\vspace{0.5cm}
+\begin{center}
+\textbf{\Large Principais Raízes}
+\vspace{0.5cm}
+     
+\setlength{\tabcolsep}{13pt}
+
+\begin{tabular}{llllll}
+$\sqrt{0}=0$&$\sqrt{100}=10$&$\sqrt{400}=20$&$\sqrt{900}=30$&$\sqrt[3]{0}=0$&$\sqrt[3]{1000}=10$\\
+$\sqrt{1}=1$&$\sqrt{121}=11$&$\sqrt{441}=21$&$\sqrt{961}=31$&$\sqrt[3]{1}=1$&$\sqrt[3]{1331}=11$\\
+$\sqrt{4}=2$&$\sqrt{144}=12$&$\sqrt{484}=22$&$\sqrt{1024}=32$&$\sqrt[3]{8}=2$&$\sqrt[3]{1728}=12$\\
+$\sqrt{9}=3$&$\sqrt{169}=13$&$\sqrt{529}=23$&$\sqrt{1089}=33$&$\sqrt[3]{27}=3$&$\sqrt[3]{2197}=13$\\
+$\sqrt{16}=4$&$\sqrt{196}=14$&$\sqrt{576}=24$&$\sqrt{1156}=34$&$\sqrt[3]{64}=4$&$\sqrt[3]{2744}=14$\\
+$\sqrt{25}=5$&$\sqrt{225}=15$&$\sqrt{625}=25$&$\sqrt{1225}=35$&$\sqrt[3]{125}=5$&$\sqrt[3]{3375}=15$\\
+$\sqrt{36}=6$&$\sqrt{256}=16$&$\sqrt{676}=26$&$\sqrt{1296}=36$&$\sqrt[3]{216}=6$&$\sqrt[3]{4096}=16$\\
+$\sqrt{49}=7$&$\sqrt{289}=17$&$\sqrt{729}=27$&$\sqrt{1369}=37$&$\sqrt[3]{343}=7$&$\sqrt[3]{4913}=17$\\
+$\sqrt{64}=8$&$\sqrt{324}=18$&$\sqrt{784}=28$&$\sqrt{1444}=38$&$\sqrt[3]{512}=8$&$\sqrt[3]{5832}=18$\\
+$\sqrt{81}=9$&$\sqrt{361}=19$&$\sqrt{841}=29$&$\sqrt{1521}=39$&$\sqrt[3]{729}=9$&$\sqrt[3]{6859}=19$\\
+\end{tabular} 
+\end{center}
+
+\input{rodape}
+\end{document}

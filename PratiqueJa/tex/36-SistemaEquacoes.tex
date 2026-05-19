@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Sistema de Equações}}
+\end{center}
+
+\begin{multicols}{2}
+
+\T{Definição}
+
+Sistema de equações é um conjunto de duas ou mais equações que compartilham as mesmas variáveis. O objetivo é encontrar os valores das variáveis que satisfazem todas as equações simultaneamente. Existem diferentes tipos de sistemas de equações, sendo os mais comuns os sistemas lineares e não lineares. Neste momento iremos focar nos sistemas lineares que são formados por equações do primeiro grau.
+
+\TM{Exemplo}
+
+$$
+\begin{cases}
+2x + 3y = 6 \\
+x - y = 2
+\end{cases}
+$$
+
+\T{Tipos de soluções}
+
+\TM{Solução única}
+
+Quando existe um único conjunto de valores que satisfaz todas as equações (sistema consistente e independente).
+
+\TM{Infinitas soluções}
+
+Quando as equações representam a mesma reta ou plano, ou seja, elas são dependentes (sistema consistente e dependente).
+
+\TM{Nenhuma solução}
+
+Quando não existe nenhum valor que satisfaça todas as equações, o que acontece quando as equações representam retas ou planos paralelos (sistema inconsistente).
+
+\T{Métodos de resolução}
+
+\TM{Método da Substituição}
+
+O método de substituição é uma técnica para resolver sistemas de equações lineares, geralmente com duas incógnitas (mas pode ser usado com mais).
+A ideia principal é isolar uma das variáveis em uma equação e substituir na outra. Este método é aconselhado quando uma das variáveis é fácil de isolar.
+
+\TM{Exemplo}
+
+$$
+\begin{cases}
+x + y = 5 \\
+2x - y = 4
+\end{cases}
+$$
+
+Passo 1: Escolha uma equação. Neste exemplo iremos escolher a equação (1) $x + y = 5$.
+
+Passo 2: Isolar uma variável. Pode ser $x$ ou $y$, de preferencia escolher a variável que possui o menor coeficiente. Neste exemplo iremos isolar a variável $x$.
+
+$x = 5 - y$
+
+Passo 3: Substituir o valor de $x$ na equação (2) $2x - y = 4$:
+
+$2(5 - y) - y = 4 $
+
+$10 -2y -y = 4 $
+
+$ -2y -y = 4 -10 $
+
+$ -3y = -6 $
+
+$ 3y = 6 $
+\vspace{10px}
+
+$y = \dfrac{6}{3}=2$
+\vspace{10px}
+
+Passo 4: Para descobrir o valor de $x$ basta substituir o valor de $y$ na equação (1) $x = 5 - y$:
+
+$x = 5 - 2 = 3$
+
+Solução: $x = 3$ e $y = 2$
+
+\TM{Método da Adição}
+
+O método de adição (ou método da soma) é uma técnica para resolver sistemas lineares com 2 ou mais equações, eliminando uma das incógnitas somando ou subtraindo as equações.
+
+\TM{Exemplo}
+
+$$
+\begin{cases}
+2x + y = 5 \\
+x - y = 1
+\end{cases}
+$$
+
+
+Passo 1: Multiplique uma ou ambas as equações (se necessário). O objetivo é ter coeficientes opostos para uma das incógnitas. Neste exemplo já temos $y$ com +1 e -1. De modo que ao somar as equações essa variável seja anulada.
+
+Passo 2: Some as duas equações.
+
+$2x + x +y -y = 5 + 1 $
+
+$2x + x = 5 + 1 $
+
+$ 3x = 6 $
+\vspace{10px}
+
+$x=\dfrac{6}{3}=2$
+\vspace{10px}
+
+Para descobrir o valor de $y$ substitua $x$ em uma das equações. Neste exemplo iremos usar a equação (2).
+
+$x - y = 1$ 
+
+$2 - y = 1 $
+
+$-y = 1 -2 $
+
+$-y = -1 $
+
+$y = 1$
+
+Solução: $x = 2$ e $y = 1$
+
+Se os coeficientes não são opostos, multiplique uma ou ambas as equações para igualar os coeficientes (em módulo) e obter sinais opostos. Depois, some as equações para cancelar uma das variáveis.
+
+
+
+\TM{Método da comparação}
+
+
+O método de comparação é uma técnica usada para resolver sistemas de equações lineares com duas incógnitas. A ideia principal é isolar a mesma variável em ambas as equações e igualar as expressões encontradas. Assim, o sistema se reduz a uma única equação com uma incógnita.
+
+\TM{Exemplo} 
+
+$$
+\begin{cases}7x +y = 140  \\-8x +y = -145 \end{cases}
+$$
+
+Passo 1: Isolar $y$ na equação (1):
+
+$7x +y = 140 $
+
+$y =140 -7x$
+
+Passo 2: Isolar $y$ na equação (2):
+
+$-8x +y = -145 $
+
+$y =-145 +8x$
+
+Passo 3: Iguale as duas equações e resolva:
+
+$140 -7x = -145 +8x$
+
+$-7x -8x = -145 -140 $
+
+$-15x = -285$
+
+$15x = 285$
+\vspace{10px}
+
+$x = \dfrac{285}{15} =19$
+\vspace{10px}
+
+Passo 4: Substituir $x$ em uma das equações onde o $y$ está isolado. Neste exemplo iremos substituir em $y =140 -7x$:
+
+$y =140 -7 \cdot 19$
+
+$y =140 -133 = 7$
+
+Solução: $x = 19$ e $y = 7$
+
+
+
+\end{multicols}
+\input{rodape}
+\end{document}

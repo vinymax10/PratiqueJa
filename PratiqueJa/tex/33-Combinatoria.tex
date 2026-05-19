@@ -1,0 +1,232 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Combinatória}}
+\end{center}
+
+\begin{multicols}{2}
+
+Combinatória é a área da matemática que estuda as possibilidades de contar, agrupar ou organizar elementos de um conjunto, sem precisar listar todos os casos. Três principais conceitos da combinatória:
+
+\textbf{Permutação} – quando todos os elementos são usados e a ordem importa.
+
+\textbf{Arranjo} – quando só parte dos elementos é usada e a ordem importa.
+
+\textbf{Combinação} – quando só parte dos elementos é usada, mas a ordem não importa.
+
+\vspace{0.4cm}
+\TW{Permutação Simples}
+
+Dado um conjunto com $n$ elementos distintos, uma permutação é qualquer arranjo ordenado desses elementos. O número total de permutações possíveis é dado por:
+
+\Formula{
+P(n) = n!
+}
+
+onde o fatorial de $n$, representado por $n!$, é o produto de todos os números inteiros positivos de 1 até $n$:
+$$
+n! = n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot 2 \cdot 1
+$$
+
+\TM{Exemplo}
+
+Considere o conjunto $A = \{1, 2, 3\}$. As permutações possíveis são:
+
+1. (1, 2, 3)
+
+2. (1, 3, 2)
+
+3. (2, 1, 3)
+
+4. (2, 3, 1)
+
+5. (3, 1, 2)
+
+6. (3, 2, 1)
+
+Como o conjunto tem 3 elementos, temos $n = 3$, logo:
+$$
+P(3) = 3! = 3 \cdot 2 \cdot 1 = 6
+$$
+
+Portanto, existem 6 permutações distintas.
+
+\vspace{0.4cm}
+\TW{Permutação Repetição}
+
+Se há elementos repetidos no conjunto, o número de permutações distintas é ajustado para evitar contagem duplicada. Se um elemento se repete $k$ vezes, o número de permutações distintas é:
+\Formula{
+P_{n}^{k}=\dfrac{n!}{k!}
+}
+\vspace{0.5cm}
+
+Se houver múltiplas repetições (por exemplo, um elemento repete $k$ vezes e outro repete $m$ vezes), a fórmula se torna:
+\vspace{0.4cm}
+\Formula{
+P_{n}^{k,m}=\frac{n!}{k! \cdot m!}
+}
+\vspace{0.4cm}
+
+\TM{Exemplo}
+Quantos anagramas tem a palavra "BANANA"?  
+
+- Letras: B, A, N, A, N, A  
+
+- Total de letras: \( n = 6 \)  
+
+- Repetições: 
+
+\quad "A" aparece 3 vezes, então divide por $3!$
+
+\quad "N" aparece 2 vezes, então divide por $2!$  
+
+Número de permutações distintas:
+
+\[
+P_{6}^{3,2}=\dfrac{6!}{3! \cdot 2!} = \dfrac{6 \cdot  5\cdot 4\cdot 3!}{3! \cdot 2!} =
+\]
+
+\[
+\dfrac{6 \cdot  5\cdot 4}{2!} = \dfrac{120}{2} = 60
+\]
+
+\TW{Arranjo Simples}
+
+Em combinatória, um arranjo simples é uma forma de selecionar e ordenar $k$ elementos distintos de um conjunto com $n$ elementos. Nesse tipo de agrupamento:
+
+\quad - A ordem dos elementos importa
+
+\quad - Não há repetição de elementos
+
+A quantidade de arranjos simples possíveis é dada pela fórmula:
+
+\Formula{
+A(n, k) = \dfrac{n!}{(n - k)!}
+}
+
+Onde:
+
+\quad - $n$ é o número total de elementos disponíveis
+
+\quad - $k$ é o número de elementos escolhidos para cada agrupamento (com $k \leq n$)
+
+\TM{Exemplo}
+
+Quantos números de dois algarismos distintos podem ser formados com os dígitos {1, 2, 3, 4}?
+
+\quad - A ordem importa (por exemplo, 12 é diferente de 21)
+
+\quad - Não há repetição (números como 11 ou 22 não são permitidos)
+
+Temos $n = 4$ e $k = 2$:
+$$
+A(4, 2) = \dfrac{4!}{(4 - 2)!} = \dfrac{4 \cdot 3 \cdot 2 \cdot 1}{2!} = 
+$$
+$$
+\dfrac{24}{2} = 12
+$$
+Os 12 arranjos possíveis são:
+
+(12, 13, 14, 21, 23, 24, 31, 32, 34, 41, 42, 43)
+
+\vspace{0.4cm}
+\TW{Princípio da Multiplicação}
+
+O princípio da multiplicação é uma regra fundamental da combinatória utilizada para calcular o número total de possibilidades quando uma ação é realizada em etapas sucessivas e independentes.
+
+Se uma primeira etapa pode ser realizada de $m$ maneiras diferentes e, para cada uma dessas, uma segunda etapa pode ser realizada de $n$ maneiras, então o total de maneiras de realizar as duas etapas em sequência é:
+\Formula{
+m \cdot n
+}
+
+De forma geral, se há $k$ etapas independentes, com $n_1, n_2, \dots, n_k$ possibilidades em cada uma, o número total de combinações possíveis é:
+$$
+n_1 \cdot n_2 \cdot \dots \cdot n_k
+$$
+\TM{Exemplos}
+
+1. Combinação de roupas:
+
+Suponha que se tenha 3 camisetas, 2 calças e 4 pares de sapato. O número total de combinações possíveis é:
+$$
+3 \cdot 2 \cdot 4 = 24 \text{ combinações}
+$$
+2. Senhas numéricas:
+
+Uma senha formada por 4 dígitos, onde cada dígito pode variar de 0 a 9, possui:
+$$
+10 \cdot 10 \cdot 10 \cdot 10 = 10^4 = 10.000 \text{ possibilidades}
+$$
+
+\vspace{0.4cm}
+\TW{Combinação Simples}
+
+Em combinatória, uma combinação simples é um agrupamento não ordenado de elementos selecionados de um conjunto, onde a ordem não importa e não há repetição dos elementos.
+
+Dado um conjunto com $n$ elementos distintos, o número de combinações de $k$ elementos (com \( k \leq n \)) é calculado por:  
+
+\Formula{
+C(n,k) = \binom{n}{k} = \dfrac{n!}{k! \cdot (n - k)!}
+}
+
+Onde:
+
+- $n$ é o número total de elementos disponíveis.
+
+- $k$ é o número de elementos escolhidos para cada agrupamento (com $k \leq n$).
+
+\TM{Exemplos}
+
+Quantos comitês de 3 pessoas podem ser formados a partir de 5 candidatos?  
+
+\quad - Ordem não importa (Ana, João, Maria = João, Maria, Ana). 
+
+\quad - Sem repetição (ninguém pode ser escolhido duas vezes).  
+\[
+C(5,3) = \dfrac{5!}{3! \cdot 2!} = \dfrac{5 \cdot 4\cdot 3 \cdot 2 \cdot 1}{6 \cdot 2} 
+\] 
+\[
+\dfrac{120}{12} = 10 \text{ combinações.}
+\] 
+
+Lista das combinações (supondo os candidatos A, B, C, D, E): 
+
+ABC, ABD, ABE, ACD, ACE, ADE, BCD, BCE, BDE, CDE.  
+
+\vspace{0.4cm}
+\TW{Combinação com Repetição}
+
+A combinação com repetição é usada quando os elementos de um conjunto podem ser escolhidos mais de uma vez nos agrupamentos. Um exemplo clássico é a escolha de bolas ou sabores de sorvete, em que repetições são permitidas.
+
+A fórmula para calcular o número de combinações com repetição de $k$ elementos a partir de um conjunto com $n$ elementos distintos é:
+\Formula{
+CR(n, k) = \binom{n + k - 1}{k} = \dfrac{(n + k - 1)!}{k! \cdot (n - 1)!}
+}
+
+\TM{Exemplo}
+
+Quantas combinações de 3 bolas são possíveis, escolhidas entre 4 cores diferentes, permitindo repetições?
+
+Neste caso, temos $n = 4$ e $k = 3$. Aplicando a fórmula:
+$$
+CR(4, 3) = \binom{4 + 3 - 1}{3} = \binom{6}{3} = \dfrac{6!}{3! \cdot 3!}
+$$
+
+Desenvolvendo os cálculos:
+$$
+\dfrac{6 \cdot 5 \cdot 4 \cdot 3!}{3! \cdot 3!} = \dfrac{6 \cdot 5 \cdot 4}{3!} = \dfrac{120}{6} = 20
+$$
+
+Portanto, há 20 combinações possíveis.
+
+
+\end{multicols}
+\input{rodape}
+\end{document}

@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Dízima Periódica}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+
+Uma dízima periódica é um número decimal que possui uma parte decimal que se repete infinitamente. Essa repetição acontece de forma contínua a partir de um certo ponto.
+
+\TM{Exemplos:}
+
+\(0,3333\ldots\) (a repetição do 3)
+
+\(1,272727\ldots\) (repetição do 27)
+
+\(0,1666\ldots\) (repetição do 6)
+
+\TM{Tipos de dízimas periódicas}
+
+- Dízima periódica simples: só a parte decimal se repete (exemplo: 0,666...).
+
+- Dízima periódica composta: o número possui uma parte decimal não periódica e uma parte decimal periódica (exemplo: 0,1666 \ldots). 
+
+\T{Periódica Simples}
+
+Nessa dízima a parte fracionária contém somente o período. 
+
+\TM{Exemplos:}
+
+$0,77777 \ldots = 0,\overline{7}$
+
+$2,565656 \ldots  = 2,\overline{56}$
+
+\TM{Fração Geratriz}
+
+A fração geratriz é uma fração equivalente a dízima periódica. Em muitas situações, é difícil utilizar a dízima em cálculos complexos, por esse motivo, substituir a dízima por uma fração equivalente é muito interessante. Para encontrar a fração geratriz de uma dízima $x$ utilizamos a seguinte fórmula:
+
+\Formula{
+\dfrac{x \cdot 10^{p}- x }{10^{p} - 1} } 
+
+Nessa fórmula o valor de $p$ representa o número de algarismos da parte periódica.
+
+\TM{Exemplos}
+
+$0,777\ldots = 0,\overline{7} $
+
+$p=1$
+
+\vspace{8px} 
+$\dfrac{0,777 \ldots \cdot 10^{1} ~-~ 0,777 \ldots }{10^{1} - 1} = \vspace{8px} \\
+\dfrac{7,777 \ldots ~-~ 0,7777 \ldots }{10 - 1} =  \dfrac{7}{9}$ \vspace{16px} 
+
+
+$0,259259\ldots = 0,\overline{259} $
+
+$p=3$
+
+\vspace{8px} 
+$\dfrac{0,259259\ldots\cdot 10^{3} - 0,259259\ldots}{10^{3}-1}= \vspace{8px} \\
+\dfrac{0,259259\ldots\cdot 1000 - 0,259259\ldots}{1000-1}= 
+\vspace{8px} \\
+\dfrac{259,259259\ldots-0,259259\ldots}{999}=\dfrac{259}{999}=\dfrac{7}{27}
+$
+
+\vspace{8px} 
+
+\T{Periódica Composta}
+
+A parte fracionária dessa dízima contém uma parte não periódica.
+
+\TM{Exemplos:}
+
+$0,52222 \ldots = 0,5\overline{2}$
+
+Nesse exemplo, o 5 é a parte decimal não periódica e o 2 é a parte periódica.
+
+$1,68747474 \ldots  = 1,68\overline{74}$
+
+Nesse exemplo, o 68 é a parte decimal não periódica e o 74 é a parte periódica.
+
+\TM{Fração Geratriz}
+
+Para encontrar a fração geratriz de dízimas compostas utilizamos a seguinte fórmula:
+
+\Formula{
+\dfrac{x \cdot 10^{(n+p)}- x \cdot 10^{n}}{10^{(n+p)} - 10^{n} } } 
+
+Nessa fórmula o valor de $n$ representa o número de dígitos da parte \textbf{não periódica} e $p$ o número de dígitos da parte \textbf{periódica}.
+
+\TM{Exemplos}
+
+\vspace{12px} 
+$1,5333 =1,5\overline{3}$
+
+$n=1, \quad p=1 $
+
+\vspace{8px} 
+$\dfrac{1,5333 \ldots \cdot 10^{2} ~-~ 1,5333 \ldots \cdot 10^{1}}{10^{2} - 10^{1}} = $
+\vspace{8px} 
+
+$\dfrac{1,5333 \ldots \cdot 100 ~-~ 1,5333 \ldots \cdot 10}{100 - 10} =$
+\vspace{8px} 
+
+$\dfrac{153,33\ldots ~-~ 15,333 \ldots }{90} =  \dfrac{138}{90} =  $
+\vspace{8px} 
+
+$\dfrac{153-15}{90} = \dfrac{138}{90} = \dfrac{23}{15}$ 
+
+\vspace{16px} 
+$ 2,74636363\ldots = 2,74\overline{63} $
+
+$n=2, \quad p=2 $
+
+\vspace{8px} 
+$\dfrac{2,74636363 \ldots \cdot 10^{4} ~-~ 2,74636363 \ldots \cdot 10^{2}}{10^{4} - 10^{2}} = $
+\vspace{8px} 
+
+$\dfrac{2,74636363 \ldots \cdot 10000 ~-~ 2,74636363 \ldots \cdot 100}{10000 - 100} = $
+\vspace{8px} 
+
+$ \dfrac{27463,6363\ldots ~-~ 274,636363 \ldots }{9900} =$
+\vspace{8px} 
+
+$\dfrac{27463 - 274}{9900} = \dfrac{27189}{9900} = \dfrac{3021}{100}$
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

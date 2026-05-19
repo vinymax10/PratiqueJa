@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{sansmathfonts}
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage{multicol,lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm,amsmath,dsfont,mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=20mm,
+top=20mm,
+bottom=25mm,
+}
+\usepackage{natbib}
+\usepackage{soul}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\color{darkgray}
+\usepackage{graphicx}
+\graphicspath{ {imagens/} }
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\T}[1]{\vspace{0.5cm}\textbf{\large#1}}
+\newcommand{\TW}[1]{\textbf{\large#1}}
+
+\newcommand{\TM}[1]{\vspace{0.3cm} \textbf{#1}}
+
+\definecolor{bluebell}{rgb}{0.64, 0.64, 0.82}
+\definecolor{azure}{rgb}{0.0, 0.5, 1.0}
+
+\setlength\columnsep{30pt}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Expressões Numéricas}}
+\end{center}
+
+
+
+
+\TW{Definição} 
+
+A expressão numérica é representada por um conjunto de números e operações numérica que são realizadas numa determinada ordem.
+
+\TM{Ordem das operações:}
+
+1º Radiciação e Potenciação
+
+2º Multiplicação e Divisão
+
+3º Adição e Subtração
+
+\vspace{0.5cm}
+
+Para priorizar uma operação em relação a uma outra, temos a utilização de colchetes, chaves e parênteses.
+
+\TM{Ordem de prioridade:}
+
+1º Parênteses
+
+2º Colchetes
+
+3º Chaves
+
+\T{Exemplos}
+
+$4 + \textcolor{azure}{6 \times 2} = 4 + 12 = 16$
+\vspace{0.3cm}
+
+$\textcolor{azure}{8 \div 2} + 2 \times 3 = 4 + \textcolor{azure}{2 \times 3} = 4 + 6 = 10$
+\vspace{0.3cm}
+
+$2 \times 4 + \textcolor{azure}{3^2} = \textcolor{azure}{2 \times 4} + 9 = 8 + 9 = 17$
+\vspace{0.3cm}
+
+$2 \times \textcolor{azure}{( 2 + 4 )} \div 3 = \textcolor{azure}{ 2 \times 6} \div 3 = 12 \div 3 = 4$
+\vspace{0.3cm}
+
+$3 \times [ 12 \div \textcolor{azure}{(1+2)}] = 3 \times \textcolor{azure}{[ 12 \div 3 ]} = 3 \times 4 = 12 $
+\vspace{0.3cm}
+
+$24 \div \{ 2 \times [5 - \textcolor{azure}{(3-2)}] \} = 24 \div \{ 2 \times \textcolor{azure}{[5 - 1]} \} = 24 \div \{ 2 \times 4 \} = 24 \div \textcolor{azure}{{ 2 \times 4 }} = 24 \div 8 = 3$
+
+
+\lfoot{\scriptsize © Copyright, Pratique Já}
+\rfoot{\large \textcolor{bluebell}{www.pratiqueja.com}}
+
+\end{document}

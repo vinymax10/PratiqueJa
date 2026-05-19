@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Juros e Desconto}}
+\end{center}
+
+\begin{multicols}{2}
+
+%Neste assunto iremos abordar o Juros simples e composto bem como o desconto simples e composto.
+
+\vspace{0.4cm}
+\TW{Juros simples} 
+
+O Juros Simples é um tipo de cálculo de juros onde o valor dos juros é calculado apenas sobre o capital inicial (ou valor principal) durante todo o período da aplicação ou do empréstimo. Ou seja, os juros não se acumulam sobre os juros já calculados, mas apenas sobre o valor original. A fórmula para calcular os juros simples é:
+\Formula{J = C \cdot i \cdot t}
+\vspace{10px}
+
+Onde \( J \) = juros simples, \( C \) = capital inicial (ou valor principal), \( i \) = taxa de juros por período
+e \( t \) = tempo de aplicação ou de empréstimo, expresso no mesmo período de tempo da taxa de juros.
+
+\TM{Montante:}
+
+O montante (\( M \)) após a aplicação de juros simples é o valor total que o investidor ou tomador de empréstimo terá que pagar ou receber no final, e é dado por:
+
+\Formula{M = C + J}
+
+Ou seja:
+\Formula{M = C \cdot (1 + i \cdot t)}
+
+\TM{Exemplo:}
+
+Se você investir R\$ 1.000,00 a uma taxa de 5\% ao mês por 6 meses, os juros simples seriam:
+
+$J = 1000 \cdot 0,05 \cdot 6 = 300$
+
+O montante total seria:
+
+$M = 1000 + 300 = 1300$
+
+\vspace{0.7cm}
+\TW{Juros Compostos}
+
+Juros Compostos é um tipo de cálculo de juros em que o valor dos juros é calculado sobre o capital inicial e também sobre os juros acumulados de períodos anteriores. Em outras palavras, os juros geram mais juros a cada novo período.
+
+No juros simples, os juros são calculados apenas sobre o capital inicial durante toda a aplicação ou empréstimo. Já nos juros compostos, o valor dos juros vai crescendo, pois a cada período o montante (capital + juros acumulados) é considerado como novo capital para o cálculo dos juros. A fórmula dos Juros Compostos é:
+
+\Formula{M = C \cdot (1 + i)^t}
+\vspace{5px}
+
+Onde \( M \) = montante final (valor total após o cálculo dos juros), \( C \) = capital inicial (o valor aplicado ou emprestado), \( i \) = taxa de juros por período (expressa em decimal) e \( t \) = tempo (número de períodos). O juros pode ser calculado por:
+
+\Formula{J = M - C}
+
+\TM{Exemplo:}
+
+Se você investir R\$ 1.000,00 a uma taxa de 10\% ao ano, por 2 anos, o cálculo será:
+
+$ M = 1000 \cdot (1 + 0,10)^2$
+
+$M = 1000 \cdot (1,1)^2$
+
+$M = 1000 \cdot 1,21=1210$
+
+Portanto, ao final de 2 anos, o montante será de R\$ 1.210,00.
+
+
+\vspace{1.4cm}
+\TW{Desconto Simples}
+
+Desconto Simples é uma operação financeira utilizada para calcular a redução no valor nominal de um título ou dívida, com base em uma taxa de desconto aplicada sobre o valor de face do título, considerando um prazo específico. Esse tipo de desconto é chamado de "simples" porque o valor do desconto é calculado diretamente sobre o valor nominal, sem considerar juros sobre juros, ou seja, o desconto é linear. A fórmula do Desconto Simples é:
+
+\Formula{D = N \cdot i \cdot t}
+
+Onde \( D \) = desconto, \( N \) = valor nominal do título, \( i \) = taxa de desconto (em decimal) e \( t \) = tempo (geralmente em dias, meses ou anos).
+
+\TM{Valor Atual:}
+
+O valor atual (\( A \)) de um título é o valor que o devedor paga após o desconto, e pode ser calculado pela fórmula:
+
+\Formula{A = N - D}
+
+Ou, substituindo \( D \) na fórmula:
+
+\Formula{A = N \cdot (1 - i \cdot t)}
+
+\vspace{-0.5cm}
+\TM{Exemplo:}
+
+Se um título tem o valor nominal de R\$ 1.000,00, com uma taxa de desconto de 10\% ao ano, e o prazo de desconto é de 1 ano, o desconto será:
+
+$D = 1000 \cdot 0,10 \cdot 1 = 100$
+
+O valor atual do título será:
+
+$A = 1000 - 100 = 900$
+
+Portanto, o valor atual após o desconto será de R\$ 900,00.
+
+\vspace{1cm}
+
+%O desconto simples é amplamente utilizado em operações comerciais e financeiras para antecipação de recebíveis ou para a concessão de descontos em títulos de dívida.
+
+\vspace{0.4cm}
+\TW{Desconto Composto}
+
+O desconto composto é uma forma de cálculo utilizada para determinar o valor atual de um título antes do seu vencimento, considerando que o desconto é aplicado sobre o valor nominal de forma sucessiva a cada período. Diferente do desconto simples, onde a redução ocorre de maneira linear, no desconto composto o valor descontado diminui progressivamente, pois a base de cálculo é sempre o saldo remanescente após cada período. A fórmula do desconto composto é:
+
+\Formula{A = N \cdot (1 - i)^t}
+
+Onde \( A \) = valor atual do título (valor recebido após o desconto), \( N \) = valor nominal do título (valor total a ser pago no vencimento), \( i \) = taxa de desconto por período e \( t \) = tempo (número de períodos de desconto). O desconto total aplicado pode ser encontrado por:  
+
+\Formula{D = N - A}
+
+\TM{Exemplo:}
+Um título de R\$ 5.000,00 sofre um desconto composto de 5\% ao mês por 3 meses. Qual será o valor atual recebido?  
+
+$A = 5000 \cdot (1 - 0,05)^3$
+
+$A = 5000 \cdot (0,95)^3$
+
+$A = 5000 \cdot 0,8574$
+
+$A \approx 4287,00$
+
+O desconto total será:  
+
+$D = 5000 - 4287 = 713,00$
+
+Assim, o valor recebido será R\$ 4.287,00 e o desconto aplicado foi R\$ 713,00.
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

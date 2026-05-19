@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{sansmathfonts}
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage{multicol,lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm,amsmath,dsfont,mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=20mm,
+top=20mm,
+bottom=25mm,
+}
+\usepackage{natbib}
+\usepackage{soul}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\color{darkgray}
+\usepackage{graphicx}
+\graphicspath{ {imagens/} }
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\T}[1]{\vspace{0.5cm}\textbf{\large#1}}
+\newcommand{\TW}[1]{\textbf{\large#1}}
+
+\newcommand{\TM}[1]{\vspace{0.3cm} \textbf{#1}}
+
+\definecolor{bluebell}{rgb}{0.25, 0.35, 0.89} 
+\definecolor{laranja}{rgb}{0.87, 0.48, 0.25} 
+\definecolor{verde}{rgb}{0, 0.54, 0.44} 
+\definecolor{babypink}{rgb}{1, 0.42, 0.52}  
+\definecolor{cinza}{rgb}{0.3, 0.3, 0.3}  
+\definecolor{iris}{rgb}{0.25, 0.35, 0.89}  
+\definecolor{babyblue}{rgb}{0.13, 0.59, 0.95} 
+
+\setlength\columnsep{30pt}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Números Decimais}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+Os números decimais são números não inteiros divididos em duas parte: a parte inteira e a parte fracionária. A parte fracionária é separa da parte inteira por uma vírgula. A esquerda da vírgula fica a parte inteira e a direita fica a parte fracionária.Os números decimais são divididos em duas classes: finitos e infinitos. Nessa seção abordaremos somente os números decimais finitos.
+
+\TM{Exemplos:}
+
+\vspace{8px} 
+$\dfrac{1}{2} = 0,5$ \vspace{8px} 
+
+$\dfrac{1}{8} = 0,125$ \vspace{8px} 
+
+\T{Convertendo um número decimal em fração}
+
+Remova a vírgula no número decimal e coloque esse número no numerador da fração. Depois coloque no denominador a potencia de 10 proporcional ao número de casas decimais. Por exemplo, se o número tiver uma casa decimal, então o denominador será 10, se tiver 2 casas decimais será 100 e assim sucessivamente.
+
+\TM{Exemplos:}
+
+\vspace{8px} 
+$1,2 = \dfrac{12}{10}$ \vspace{8px} 
+
+$2,43 = \dfrac{243}{100}$ \vspace{8px} 
+
+$3,256 = \dfrac{3256}{1000}$ \vspace{8px} 
+
+\T{Adição}
+
+Primeiramente coloque os números um em cima do outro alinhando as cadas decimais da direita pra esquerda. Depois efetue a soma dos dígitos da coluna mais a direita e repita o processo para as demais colunas.
+\vspace{0.5cm}
+
+$\begin{array}{rrr}
+&1,&\textcolor{iris}{2}\\
++&1,&\textcolor{iris}{4}\\
+\hline
+&&\textcolor{iris}{6}\\
+\end{array}$
+$\Rightarrow$
+$\begin{array}{rrr}
+&\textcolor{iris}{1},&2\\
++&\textcolor{iris}{1},&4\\
+\hline
+&\textcolor{iris}{2},&6\\
+\end{array}$
+
+%\includegraphics[width=5cm]{Decimal/Decimal1.png}
+
+\end{multicols}
+
+\lfoot{\scriptsize © Copyright, Pratique Já}
+\rfoot{\large \textcolor{bluebell}{pratiqueja.com}}
+
+\end{document}

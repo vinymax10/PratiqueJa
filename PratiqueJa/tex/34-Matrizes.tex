@@ -1,0 +1,221 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Matrizes}}
+\end{center}
+
+\begin{multicols}{2}
+
+As matrizes são ferramentas fundamentais na álgebra linear e são amplamente usadas em matemática, física, estatística e programação. Abaixo, você encontrará as principais operações com matrizes, com exemplos e explicações.
+
+\T{Soma de Matrizes}
+
+Duas matrizes só podem ser somadas se tiverem a mesma ordem (mesmo número de linhas e colunas). A soma é feita elemento por elemento.
+
+\Formula{
+A_{(n\times m)} + B_{(n\times m)} = C_{(n\times m)} \\
+c_{i,j}=a_{i,j}+b_{i,j}, ~\forall ~i,j
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$
+A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix},\quad
+B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}
+$
+\vspace{0.3cm}
+
+$
+A + B = \begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}
+$
+
+\T{Subtração de Matrizes}
+
+Assim como na soma, as matrizes devem ter a mesma ordem. Subtrai-se elemento por elemento.
+
+\Formula{
+A_{(n\times m)} - B_{(n\times m)} = C_{(n\times m)} \\
+c_{i,j}=a_{i,j}-b_{i,j}, ~\forall ~i,j
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$
+A - B = \begin{bmatrix} 1 - 5 & 2 - 6 \\ 3 - 7 & 4 - 8 \end{bmatrix} = \begin{bmatrix} -4 & -4 \\ -4 & -4 \end{bmatrix}
+$
+
+\T{Multiplicação por Escalar}
+
+Multiplica-se cada elemento da matriz por um número (chamado escalar).
+
+\Formula{
+k \cdot A_{(n\times m)} = B_{(n\times m)} \\
+b_{i,j}=k \cdot a_{i,j}, ~\forall ~i,j
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$
+3 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 \cdot 1 & 3 \cdot 2 \\ 3 \cdot 3 & 3 \cdot 4 \end{bmatrix} = \begin{bmatrix} 3 & 6 \\ 9 & 12 \end{bmatrix}
+$
+
+\T{Matriz Transposta}
+
+A matriz transposta é obtida trocando as linhas por colunas. 
+
+\Formula{
+A=(a_{j,i})_{(n\times m)}\\
+A^T=(a_{j,i})_{(m\times n)}
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$ A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\5 & 6 \end{bmatrix}, \quad
+A^T = \begin{bmatrix} 1 & 3 &5 \\ 2 & 4 &6\end{bmatrix} $
+
+\T{Multiplicação de Matrizes}
+
+Para multiplicar duas matrizes $A \cdot B$, o número de colunas de A deve ser igual ao número de linhas de B.
+
+Como fazer: Cada elemento da matriz resultante é obtido multiplicando linha por coluna.
+
+Fórmula (elemento $c_{ij}$):
+
+\Formula{
+A_{(n\times m)} \cdot B_{(m\times o)} = C_{(n\times o)} \\
+c_{ij} = \sum_{k=1}^{m} a_{ik} \cdot b_{kj}, ~\forall ~i,j
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$
+A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix},\quad
+B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}$
+
+$A \cdot B = \begin{bmatrix}
+1\cdot5 + 2\cdot7 & 1\cdot6 + 2\cdot8 \\
+3\cdot5 + 4\cdot7 & 3\cdot6 + 4\cdot8
+\end{bmatrix}
+=
+\begin{bmatrix}
+19 & 22 \\
+43 & 50
+\end{bmatrix}
+$
+
+\T{Determinante}
+
+O determinante é um número associado a uma matriz quadrada. Ele indica, por exemplo, se a matriz tem inversa.
+
+\TM{Determinante de uma matriz $2 \times 2$}
+\vspace{0.3cm}
+
+Dada uma matriz $A=(a_{j,i})_{(n\times m)}$, temos que o determinante de $A$ é indicado por $\det A$ da seguinte forma:
+
+\Formula{
+\det A = a_{1,1} \cdot a_{2,2} - a_{1,2} \cdot a_{2,1}
+}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$
+\det \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = 1\cdot4 - 2\cdot3 = -2
+$
+
+\TM{Determinante de uma matriz $3 \times 3$}
+\vspace{0.3cm}
+
+A Regra de Sarrus estabelece que o determinante é resultado da subtração da soma das diagonais principais ($sd_p$) pela soma das diagonais secundárias ($sd_s$).
+
+\Formula{
+\det~ A = sd_p - sd_s
+}
+
+\footnotesize
+$sd_p=(a_{1,1} \cdot a_{2,2} \cdot a_{3,3})+(a_{1,2} \cdot a_{2,3} \cdot a_{3,1})+(a_{1,3} \cdot a_{2,1} \cdot a_{3,2})$
+
+$sds=(a_{1,3} \cdot a_{2,2} \cdot a_{3,1})+(a_{1,1} \cdot a_{2,3} \cdot a_{3,2})+(a_{1,2} \cdot a_{2,1} \cdot a_{3,3})$
+\normalsize
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+Para calcular o valor de $\det A$, calculados os valores de $sd_p$ e $sd_s$.
+\vspace{0.3cm}
+
+$A=\begin{bmatrix}-14&0&14\\3&18&-3\\-2&-7&4\\\end{bmatrix}$
+\vspace{0.3cm}
+
+
+Soma das diagonais principais $sd_p$: 
+
+$sd_p=-14 \cdot 18 \cdot 4+0 \cdot (-3) \cdot (-2)+14 \cdot 3 \cdot (-7) =-1008+0-294=-1302$
+\vspace{0.3cm}
+
+Soma das diagonais secundárias $sd_s$:
+
+$sd_s=14 \cdot 18 \cdot (-2)+(-14) \cdot (-3) \cdot (-7)+0 \cdot 3 \cdot 4=-504-294+0=-798
+$
+\vspace{0.3cm}
+
+$\det~ A = -1302-(-798)=-504$
+
+
+\T{Matriz Inversa}
+
+A matriz inversa $A^{-1}$ é aquela que satisfaz:
+
+$$
+A \cdot A^{-1} = I
+$$
+
+Onde $I$ é a matriz identidade de mesma ordem.
+
+Condições para existir a matriz inversa:
+
+1. A matriz deve ser quadrada.
+
+2. O determinante $\neq$ 0.
+
+\TM{Inversa de matriz 2×2}
+\vspace{0.3cm}
+
+Dada uma matriz $A=(a_{j,i})_{(n\times m)}$, temos que a inversa de $A$ calculada da seguinte forma:
+
+\Formula{A^{-1} = \dfrac{1}{\det A} \cdot \begin{bmatrix}a_{2,2}& -a_{1,2}\\-a_{2,1}& a_{1,1}\end{bmatrix}}
+
+\TM{Exemplo}
+\vspace{0.3cm}
+
+$A=\begin{bmatrix}8&17\\8&11\\\end{bmatrix}$
+\vspace{0.3cm}
+
+$\det~ A = 8 \cdot 11-17 \cdot 8$
+
+$\det~ A =88-136=-48$
+\vspace{0.3cm}
+
+$A^{-1} =\dfrac{1}{-48}\cdot \begin{bmatrix}11&-17\\-8&8\\\end{bmatrix}=$
+\vspace{0.3cm}
+
+$\begin{bmatrix}\frac{1}{-48} \cdot 11&\frac{1}{-48} \cdot (-17)\\\frac{1}{-48} \cdot (-8)&\frac{1}{-48} \cdot 8\\\end{bmatrix}=$
+\vspace{0.3cm}
+
+$\begin{bmatrix}\frac{-11}{48}&\frac{17}{48}\\\frac{8}{48}&\frac{-2}{12}\\\end{bmatrix}$
+
+\end{multicols}
+\input{rodape}
+\end{document}

@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{iris}{Divisibilidade}}
+\end{center}
+
+\begin{multicols}{2}
+
+\TW{Definição} 
+
+Um número é divisível por um determinado divisor se e somente se o resto da divisão for igual a zero.
+
+\TM{Divisibilidade por 2:}
+
+Todo número par é divisível por 2.
+
+\TM{Exemplos:}
+
+$2,4,6,8,10, \ldots$
+
+\TM{Divisibilidade por 3:}
+
+Quando a soma dos algarismos for múltipla de 3.
+
+\TM{Exemplos:}
+
+$132 \Rightarrow 1+3+2 = 6 $ que é múltiplo de 3.
+
+$531 \Rightarrow 5+3+1 = 9 $ que é múltiplo de 3.
+
+\TM{Divisibilidade por 4:}
+
+Quando o número formado pelos 2 últimos dígitos é divisível por 4.
+
+\TM{Exemplos:}
+
+$13583485\textcolor{iris}{24} \Rightarrow $ 24 é múltiplo de 4.
+
+\TM{Divisibilidade por 5:}
+
+Quando o último dígito é igual a 0 ou 5.
+
+\TM{Exemplos:}
+
+$63489334\textcolor{iris}{5}$
+
+$93489658\textcolor{iris}{0}$
+
+\TM{Divisibilidade por 6:}
+
+Quando o número é divisível por 2 e por 3.
+
+\TM{Exemplos:}
+
+$654 \Rightarrow 6+5+4=15 $ que é múltiplo de 3 e é par.
+
+\TM{Divisibilidade por 7:}
+
+Multiplique o último dígito por 2 e subtraia do número inicial sem o último dígito. Repita o passo anterior para o número resultante até que o número final seja divisível por 7. Se ao final, o número resultante não for divisível por 7 então o número inicial também não é.
+
+\TM{Exemplos:}
+
+$16\textcolor{iris}{1} \Rightarrow 1 \cdot 2 = 2 \Rightarrow 16-2 = 14 $ é múltiplo de 7.
+
+$109\textcolor{iris}{9} \Rightarrow 9 \cdot 2 = 18 \Rightarrow 109-18 = 91$
+
+$9\textcolor{iris}{1} \Rightarrow 1 \cdot 2 = 2 \Rightarrow 9-2 = 7 $ é múltiplo de 7.
+
+\TM{Divisibilidade por 8:}
+
+Quando o número formado pelos 3 últimos dígitos é divisível por 8.
+
+\TM{Exemplos:}
+
+$1535467886\textcolor{iris}{128} \Rightarrow $ 128 é múltiplo de 8.
+
+$1535467886\textcolor{iris}{768} \Rightarrow $ 768 é múltiplo de 8.
+
+\TM{Divisibilidade por 9:}
+
+Quando a soma dos algarismos for múltipla de 9.
+
+\TM{Exemplos:}
+
+$432 \Rightarrow 4+3+2 = 9 $ que é múltiplo de 9.
+
+$6561 \Rightarrow 6+5+6+1 = 9 $ que é múltiplo de 9.
+
+\TM{Divisores de um número}
+
+Como encontrar todos os divisores naturais de um número. 
+
+\TM{Exemplo:}
+
+Os divisores de 60 são: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60.
+
+Para encontrar todos os divisores de um número, inicialmente faça a decomposição desse número em fatores primos.
+
+\vspace{8px}
+$\begin{array}[t]{r |l}
+60&2\\
+30&2\\
+15&3\\
+5&5\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+Em seguida, trace uma linha à direita da última coluna e coloque o número 1 em cima da primeira linha. Essa coluna irá armazenar todos os divisores. Inicialmente o único divisor nesta lista será o número 1.
+
+\vspace{8px}
+$\begin{array}[t]{r |l|l}&&\textcolor{iris}{1}\\
+60&2\\
+30&2\\
+15&3\\
+5&5\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+Agora pegue o primeiro fator primo, nesse exemplo o número 2, e multiplique toda a lista de divisores. Coloque o resultado na respectiva coluna à direita. Como a lista só possui o número 1 então temos $2 \cdot 1 = 2$.
+
+\vspace{8px}
+$\begin{array}[t]{r |l|l}&&1\\
+60&\textcolor{iris}{2}&\textcolor{iris}{2}\\
+30&2\\
+15&3\\
+5&5\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+Repita esse processo para a segunda linha pegando o segundo fator, nesse exemplo o número 2, e multiplique toda a lista de divisores gerada  até o momento. Neste caso temos $2 \cdot 1 = 2$ e  $2 \cdot 2 = 4$. O número 2 já está na lista de divisores, então adicionamos somente o número 4.
+
+\vspace{8px}
+$\begin{array}[t]{r |l|l}&&1\\
+60&2&2\\
+30&\textcolor{iris}{2}&\textcolor{iris}{4}\\
+15&3\\
+5&5\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+Com a linha seguinte temos que multiplicar toda a lista por 3. Então temos $3 \cdot 1 = 3$, $3 \cdot 2 = 6$ e  $3 \cdot 4 = 12$.
+
+\vspace{8px}
+$\begin{array}[t]{r |l|l}&&1\\
+60&2&2\\
+30&2&4\\
+15&\textcolor{iris}{3}&\textcolor{iris}{3, 6, 12}\\
+5&5\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+Em seguida temos que multiplicar toda a lista por 5. Então temos $5 \cdot 1 = 5$, $5 \cdot 2 = 10$,  $5 \cdot 4 = 20$, $5 \cdot 3 = 15$, $5 \cdot 6 = 30$ e $5 \cdot 12 = 60$.
+
+\vspace{8px}
+$\begin{array}[t]{r |l|l}&&1\\
+60&2&2\\
+30&2&4\\
+15&3&3,~6,~12\\
+5&\textcolor{iris}{5}&\textcolor{iris}{5,~10,~20,~15,~30,~60}\\
+\hline1&\\
+\end{array}$
+\vspace{8px}
+
+\end{multicols}
+
+\input{rodape}
+
+\end{document}

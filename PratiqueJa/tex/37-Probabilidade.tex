@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Probabilidade}}
+\end{center}
+
+\begin{multicols}{2}
+
+\T{Definição}
+
+Probabilidade é a medida de quão provável é ocorrer um determinado evento. Ela expressa a chance de um acontecimento acontecer, variando de 0 (evento impossível) a 1 (evento certeza). Pode ser calculada dividindo o número de resultados favoráveis pelo total de resultados possíveis. A probabilidade é usada para fazer previsões, analisar riscos, tomar decisões e modelar situações aleatórias em diversas áreas, como jogos, estatística, economia e ciências.
+
+\T{Eventos e Espaço Amostral}
+
+Eventos e espaço amostral são conceitos fundamentais na teoria da probabilidade. O espaço amostral é o conjunto de todos os resultados possíveis de um experimento aleatório, como lançar um dado ou tirar uma carta de um baralho. Cada elemento desse conjunto é chamado de resultado ou elemento. Um evento, por sua vez, é qualquer subconjunto do espaço amostral, ou seja, um conjunto de resultados favoráveis a uma determinada situação. 
+
+\TM{Exemplo}
+
+Ao lançar um dado, o espaço amostral é \(\{1,2,3,4,5,6\}\), enquanto o evento “obter um número par” corresponde ao subconjunto \(\{2,4,6\}\). Assim, os eventos representam ocorrências específicas dentro do universo total de resultados possíveis, e o estudo da probabilidade busca calcular a chance desses eventos acontecerem.
+
+\TM{Cálculo de Probabilidade}
+
+Para um evento $A$ simples (com resultados igualmente prováveis) podemos usar a seguinte fórmula:
+
+\Formula{
+P(A) = \dfrac{n(A)}{n(\Omega)}
+}
+
+$n(A) =$ número de casos favoráveis ao evento A.
+
+$n(\Omega)=$ número total de casos possíveis.
+
+\TM{Exemplo}
+  
+Probabilidade de tirar uma face com número par ao lançar um dado:  
+
+Evento A: resultado par.
+
+$n(A) = 3, \quad n(\Omega)=6$
+\vspace{10px}
+
+$
+P(A)= \dfrac{3}{6} = \dfrac{1}{2}
+$
+\vspace{10px}
+
+\T{Regras da Probabilidade}
+
+\TM{Regra de Eventos Complementares}
+
+A probabilidade de um evento não acontecer (\(A^c\)) é:
+
+\Formula{
+P(A^c) = 1 - P(A)
+}
+
+\TM{Exemplo}
+
+Um pote guarda 12 lápis pretos, 16 lápis azuis e 2 lápis vermelhos. Qual a chance de não tirar um lápis vermelho?
+
+$A$: lápis vermelho
+
+$n(A)=2,\quad n(\Omega)=12+16+2=30 $
+\vspace{5px}
+
+$P(A)=\dfrac{2}{30}=\dfrac{1}{15}$
+\vspace{5px}
+
+$P(A^c)=1-\dfrac{1}{15}=\dfrac{14}{15}$
+\vspace{5px}
+
+\TM{Regra da Soma}
+
+Para eventos mutuamente exclusivos (não podem acontecer ao mesmo tempo):
+
+\Formula{
+P(A \cup B) = P(A) + P(B)
+}
+
+\TM{Exemplo}
+
+Imagine lançar um dado. A probabilidade de sair o número 2 é $P(A) = \frac{1}{6}$ e a probabilidade de sair o número 5 é $P(B) = \frac{1}{6}$. Esses eventos são mutuamente exclusivos, pois o dado não pode mostrar 2 e 5 ao mesmo tempo. Assim, pela Regra da Soma:
+\vspace{5px}
+
+$
+P(A \cup B) = \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{2}{6} = \dfrac{1}{3}
+$
+\vspace{5px}
+
+Portanto, a probabilidade de sair os números 2 ou 5 em um único lançamento é $\frac{1}{3}$.
+\vspace{5px}
+
+Regra da Soma para eventos não mutuamente exclusivos (quando eles podem ocorrer juntos) — ou seja, quando os eventos são dependentes ou simplesmente não se excluem:
+
+\Formula{
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+}
+
+Imagine que, em uma turma de 30 alunos, 18 estudam Matemática (evento A) e 12 estudam Física (evento B). Destes, 5 estudam Matemática e Física ao mesmo tempo.
+
+Então temos:
+\vspace{5px}
+
+$P(A) = \dfrac{18}{30} = \dfrac{9}{15}, \quad P(B) = \dfrac{12}{30} = \dfrac{6}{15}$
+\vspace{5px}
+
+$P(A \cap B) = \dfrac{5}{30} = \dfrac{1}{6} $
+\vspace{5px}
+
+Usando a Regra da Soma:
+\vspace{5px}
+
+$
+P(A \cup B) = \dfrac{9}{15} + \dfrac{6}{15} - \dfrac{1}{6} = \dfrac{5}{6} 
+$
+\vspace{5px}
+
+Portanto, a probabilidade de um aluno da turma estudar Matemática ou Física (ou ambas) é $\frac{5}{6}$.
+
+\TM{Regra do Produto}
+
+Para eventos independentes (acontecimentos que não influenciam um ao outro):
+
+\Formula{
+P(A \cap B) = P(A) \cdot P(B)
+}
+
+\TM{Exemplo}
+
+Suponha que você lance uma moeda e um dado ao mesmo tempo. A probabilidade de sair \textbf{cara} na moeda é $P(A) = \frac{1}{2}$ e a probabilidade de sair o número 4 no dado é $P(B) = \frac{1}{6}$. Esses eventos são independentes, pois o resultado da moeda não afeta o resultado do dado. Assim, pela Regra do Produto:
+\vspace{5px}
+
+$
+P(A \cap B) = \dfrac{1}{2} \cdot \dfrac{1}{6} = \dfrac{1}{12}
+$
+\vspace{5px}
+
+Portanto, a probabilidade de obter \textbf{cara} na moeda e 4 no dado ao mesmo tempo é $\frac{1}{12}$.
+
+\TM{Probabilidade de Eventos Dependentes}
+
+Se os eventos não forem independentes:
+
+\Formula{
+P(A \cap B) = P(A) \cdot P(B|A)
+}
+
+onde \(P(B|A)\) é a probabilidade de \(B\) ocorrer dado que \(A\) já ocorreu.
+
+\TM{Exemplo}
+
+Suponha que você tenha uma caixa com 5 bolas vermelhas e 3 bolas azuis. Você retira uma bola sem reposição e depois retira outra. Qual é a probabilidade de a primeira ser vermelha (evento A) e a segunda ser azul (evento B)?
+\vspace{5px}
+
+$P(A) = \frac{5}{8}$ (probabilidade de tirar uma bola vermelha na primeira retirada).
+
+Depois de tirar uma vermelha, restam 7 bolas, sendo 3 azuis. Logo, $P(B|A) = \frac{3}{7}$.
+
+Assim, pela fórmula para eventos dependentes:
+\vspace{0px}
+
+$
+P(A \cap B) = \dfrac{5}{8} \cdot \dfrac{3}{7} = \dfrac{15}{56}.
+$
+\vspace{5px}
+
+Portanto, a probabilidade de retirar primeiro uma bola vermelha e depois uma azul, sem reposição, é $\frac{15}{56}$.
+
+\end{multicols}
+\input{rodape}
+\end{document}

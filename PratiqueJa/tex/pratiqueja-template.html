@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$title$</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  $if(math)$$math$$endif$
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      min-height: 100vh;
+    }
+
+    /* ===== HERO ===== */
+    .pj-hero {
+      background: linear-gradient(135deg, #07142f 0%, #0d1d47 100%);
+      padding: 52px 32px 72px;
+      text-align: center;
+    }
+
+    .pj-brand {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 36px;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .pj-brand span { color: #3b82f6; }
+
+    .pj-hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .pj-badge {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.25);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== CONTEÚDO ===== */
+    .pj-content {
+      max-width: 900px;
+      margin: -36px auto 64px;
+      padding: 0 24px;
+    }
+
+    .pj-card {
+      background: white;
+      border-radius: 24px;
+      padding: 52px 56px;
+      box-shadow: 0 8px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Oculta elementos LaTeX sem sentido no HTML */
+    .pj-card > p:first-child img,
+    .center:first-of-type,
+    .multicols > p:first-child {
+      display: none;
+    }
+
+    /* ===== TIPOGRAFIA ===== */
+    .pj-card h1,
+    .pj-card h2,
+    .pj-card h3,
+    .pj-card h4 {
+      color: #07142f;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 2em 0 0.75em;
+    }
+    .pj-card h1 { font-size: 1.9rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; }
+    .pj-card h2 { font-size: 1.4rem; }
+    .pj-card h3 { font-size: 1.15rem; color: #2563eb; }
+
+    .pj-card p {
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 1em;
+      font-size: 1rem;
+    }
+
+    .pj-card ul, .pj-card ol {
+      padding-left: 1.6em;
+      margin-bottom: 1em;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    .pj-card li { margin-bottom: 0.3em; }
+
+    /* ===== MATEMÁTICA ===== */
+    .math.inline {
+      color: #1d4ed8;
+      font-size: 1.02em;
+    }
+
+    .math.display {
+      display: block;
+      background: #f0f5ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 14px 14px 0;
+      padding: 18px 24px;
+      margin: 24px 0;
+      overflow-x: auto;
+      font-size: 1.05em;
+    }
+
+    /* ===== TABELAS ===== */
+    table {
+      border-collapse: collapse;
+      margin: 1.5em auto;
+      font-size: 14px;
+      width: auto;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 10px 16px;
+      text-align: center;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #374151;
+    }
+    tr:nth-child(even) td { background: #fafbfc; }
+
+    /* ===== DESTAQUE / BLOCKQUOTE ===== */
+    blockquote {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 14px 14px 0;
+      padding: 16px 22px;
+      margin: 24px 0;
+      color: #1e40af;
+      font-weight: 500;
+    }
+
+    /* ===== LINHA DIVISÓRIA ===== */
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 2em 0;
+    }
+
+    /* ===== MULTICOLUNAS (pandoc) ===== */
+    .multicols { columns: 1; }
+    .center { text-align: center; margin: 1em 0; }
+
+    /* ===== IMAGENS ===== */
+    img { max-width: 100%; border-radius: 10px; display: block; margin: 1em auto; }
+
+    /* ===== RODAPÉ ===== */
+    .pj-footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .pj-footer a { color: #2563eb; text-decoration: none; }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 700px) {
+      .pj-hero { padding: 36px 20px 56px; }
+      .pj-hero-title { font-size: 2rem; }
+      .pj-card { padding: 28px 20px; }
+      .pj-content { padding: 0 12px; margin-bottom: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pj-hero">
+    <a class="pj-brand" href="https://pratiqueja.com">Pratique<span>Já</span></a>
+    <h1 class="pj-hero-title">$title$</h1>
+    <span class="pj-badge">Anotações de Aula</span>
+  </div>
+
+  <div class="pj-content">
+    <div class="pj-card">
+      $body$
+    </div>
+  </div>
+
+  <div class="pj-footer">
+    &copy; Pratique Já &mdash; <a href="https://pratiqueja.com">pratiqueja.com</a>
+  </div>
+
+</body>
+</html>
