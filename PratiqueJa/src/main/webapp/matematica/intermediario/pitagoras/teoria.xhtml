@@ -1,0 +1,339 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Relação entre hipotenusa e catetos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Em um <strong>triângulo retângulo</strong>, o quadrado da medida da
+                    <strong>hipotenusa</strong> é igual à soma dos quadrados das medidas
+                    dos <strong>catetos</strong>.
+                </div>
+
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="200" height="130" viewBox="0 0 200 130" style="display:inline-block;" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="20,110 180,110 20,10" fill="none" stroke="#059669" stroke-width="2.5"/>
+                        <polyline points="20,90 40,90 40,110" fill="none" stroke="#059669" stroke-width="2"/>
+                        <text x="6"  y="65"  font-size="16" font-weight="bold" fill="#374151">c</text>
+                        <text x="93" y="127" font-size="16" font-weight="bold" fill="#374151">b</text>
+                        <text x="108" y="55" font-size="16" font-weight="bold" fill="#374151">a</text>
+                        <text x="18"  y="128" font-size="10" fill="#9ca3af">a = hipotenusa</text>
+                        <text x="108" y="128" font-size="10" fill="#9ca3af">b, c = catetos</text>
+                    </svg>
+                </div>
+
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[a^2 = b^2 + c^2\]
+                </div>
+                <p>Onde \(a\) é a <strong>hipotenusa</strong> (lado oposto ao ângulo reto)
+                e \(b\), \(c\) são os <strong>catetos</strong> (os lados que formam o ângulo reto).</p>
+            </div>
+
+            <!-- COMO APLICAR -->
+            <div class="tr-section" id="sec-aplicar">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Met</div>
+                    <div>
+                        <div class="tr-section-title">Como Aplicar</div>
+                        <div class="tr-section-sub">Isolando hipotenusa ou cateto desconhecido</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Identifique qual lado é desconhecido e isole-o na fórmula.
+                    Se a <strong>hipotenusa</strong> for desconhecida: \(a = \sqrt{b^2 + c^2}\).
+                    Se um <strong>cateto</strong> for desconhecido: \(b = \sqrt{a^2 - c^2}\).
+                </div>
+                <h4>Encontrando a hipotenusa</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Catetos \(b = 4\) e \(c = 3\) — achar \(a\)</span>
+                        <span>\(a^2 = 4^2 + 3^2 = 16 + 9 = 25\)</span>
+                        <span class="hl">\(a = \sqrt{25} = 5\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Catetos \(b = 5\) e \(c = 12\) — achar \(a\)</span>
+                        <span>\(a^2 = 5^2 + 12^2 = 25 + 144 = 169\)</span>
+                        <span class="hl">\(a = \sqrt{169} = 13\)</span>
+                    </div>
+                </div>
+                <h4>Encontrando um cateto</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Hipotenusa \(a = 15\), cateto \(c = 9\) — achar \(b\)</span>
+                        <span>\(b^2 = 15^2 - 9^2 = 225 - 81 = 144\)</span>
+                        <span class="hl">\(b = \sqrt{144} = 12\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Hipotenusa \(a = 10\), cateto \(c = 6\) — achar \(b\)</span>
+                        <span>\(b^2 = 10^2 - 6^2 = 100 - 36 = 64\)</span>
+                        <span class="hl">\(b = \sqrt{64} = 8\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TERNAS PITAGÓRICAS -->
+            <div class="tr-section" id="sec-ternas">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">3,4,5</div>
+                    <div>
+                        <div class="tr-section-title">Ternas Pitagóricas</div>
+                        <div class="tr-section-sub">Conjuntos de inteiros que satisfazem o teorema</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma <strong>terna pitagórica</strong> é um conjunto de três inteiros positivos
+                    \((a,\,b,\,c)\) que satisfazem \(a^2 = b^2 + c^2\). Reconhecê-las agiliza
+                    cálculos em provas — evita calcular raiz quadrada.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\((3,\,4,\,5)\) &#160;&#8212; \(25=16+9\)</div>
+                    <div class="tr-ex">\((5,\,12,\,13)\) &#160;&#8212; \(169=144+25\)</div>
+                    <div class="tr-ex">\((8,\,15,\,17)\) &#160;&#8212; \(289=225+64\)</div>
+                    <div class="tr-ex">\((7,\,24,\,25)\) &#160;&#8212; \(625=576+49\)</div>
+                </div>
+                <p style="margin-top:.6rem;font-size:.93rem;color:#6b7280;">
+                    Múltiplos de uma terna também são ternas: \((6,8,10)\), \((9,12,15)\), \((10,24,26)\)&#8230;
+                </p>
+            </div>
+
+            <!-- RECÍPROCA E CLASSIFICAÇÃO -->
+            <div class="tr-section" id="sec-reciproca">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#8660;</div>
+                    <div>
+                        <div class="tr-section-title">Recíproca e Classificação de Triângulos</div>
+                        <div class="tr-section-sub">Identificar o tipo de triângulo pelo maior lado</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dado um triângulo com lados \(a \geq b \geq c\), compare \(a^2\) com \(b^2 + c^2\)
+                    para classificá-lo — sem precisar medir ângulos.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(a^2 = b^2 + c^2\)</span>
+                        <span class="hl">Triângulo <strong>retângulo</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">Ex.: \(5^2 = 3^2 + 4^2 \;\Rightarrow\; 25=25\) &#10003;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(a^2 \gt b^2 + c^2\)</span>
+                        <span class="hl">Triângulo <strong>obtusângulo</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">Ex.: lados 4, 5, 7 — \(49 \gt 25+16=41\) &#10003;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(a^2 \lt b^2 + c^2\)</span>
+                        <span class="hl">Triângulo <strong>acutângulo</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">Ex.: lados 4, 5, 6 — \(36 \lt 25+16=41\) &#10003;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIÂNGULOS NOTÁVEIS -->
+            <div class="tr-section" id="sec-notaveis">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">45°</div>
+                    <div>
+                        <div class="tr-section-title">Triângulos Notáveis</div>
+                        <div class="tr-section-sub">45°-45°-90° e 30°-60°-90°</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois triângulos retângulos especiais aparecem com frequência em provas.
+                    Conhecer suas relações entre lados elimina a necessidade de cálculo.
+                </div>
+                <h4>Isósceles retângulo — 45°-45°-90°</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Catetos iguais a \(\ell\) — achar hipotenusa</span>
+                        <span>\(a^2 = \ell^2 + \ell^2 = 2\ell^2\)</span>
+                        <span class="hl">\(a = \ell\sqrt{2}\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Ex.: cateto 5 &#8594; hipotenusa \(5\sqrt{2} \approx 7{,}07\)</span>
+                    </div>
+                </div>
+                <h4>Semi-equilátero — 30°-60°-90°</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Cateto menor \(\ell\) (oposto a 30°)</span>
+                        <span>Cateto maior \(= \ell\sqrt{3}\) (oposto a 60°)</span>
+                        <span>Hipotenusa \(= 2\ell\) (oposto a 90°)</span>
+                        <span class="hl">Relação: \(\ell\;:\;\ell\sqrt{3}\;:\;2\ell\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Ex.: cateto menor 3 &#8594; cateto maior \(3\sqrt{3}\), hipotenusa 6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RELAÇÕES MÉTRICAS -->
+            <div class="tr-section" id="sec-metricas">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Rel</div>
+                    <div>
+                        <div class="tr-section-title">Relações Métricas no Triângulo Retângulo</div>
+                        <div class="tr-section-sub">Altura sobre a hipotenusa e projeções dos catetos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Ao traçar a <strong>altura \(h\)</strong> relativa à hipotenusa \(a\), ela divide
+                    \(a\) em duas projeções: \(m\) (projeção de \(b\)) e \(n\) (projeção de \(c\)),
+                    com \(m + n = a\). Quatro relações decorrem disso.
+                </div>
+
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="240" height="150" viewBox="0 0 240 150" style="display:inline-block;" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="20,125 220,125 60,45" fill="none" stroke="#059669" stroke-width="3"/>
+                        <!-- ângulo reto em C(60,45): marcador com vetores unitários para A e B -->
+                        <polyline points="55,56 66,61 71,50" fill="none" stroke="#1a7a50" stroke-width="2"/>
+                        <!-- altitude CH tracejada -->
+                        <line x1="60" y1="45" x2="60" y2="125" stroke="#4f46e5" stroke-width="2.2" stroke-dasharray="5,3"/>
+                        <!-- ângulo reto em H(60,125) -->
+                        <polyline points="60,108 76,108 76,125" fill="none" stroke="#4f46e5" stroke-width="2"/>
+                        <!-- rótulos catetos -->
+                        <text x="26"  y="80"  font-size="15" font-weight="bold" fill="#1e293b">b</text>
+                        <text x="148" y="72"  font-size="15" font-weight="bold" fill="#1e293b">c</text>
+                        <!-- rótulos projeções -->
+                        <text x="33"  y="143" font-size="13" fill="#1e293b">m</text>
+                        <text x="133" y="143" font-size="13" fill="#1e293b">n</text>
+                        <!-- rótulo altura -->
+                        <text x="64"  y="90"  font-size="14" font-weight="bold" fill="#4f46e5">h</text>
+                        <!-- rótulos vértices -->
+                        <text x="53"  y="38"  font-size="11" fill="#6b7280">C</text>
+                        <text x="55"  y="148" font-size="11" fill="#6b7280">H</text>
+                        <text x="6"   y="140" font-size="11" fill="#6b7280">A</text>
+                        <text x="222" y="140" font-size="11" fill="#6b7280">B</text>
+                    </svg>
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(h^2 = m \cdot n\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">altura ao quadrado = produto das projeções</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(b^2 = a \cdot m\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">cateto ao quadrado = hipotenusa × sua projeção</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(c^2 = a \cdot n\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">cateto ao quadrado = hipotenusa × sua projeção</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(a \cdot h = b \cdot c\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">relação de área: base × altura = produto dos catetos</span>
+                    </div>
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Catetos \(b=6\) e \(c=8\) — achar \(h\), \(m\) e \(n\)</span>
+                        <span>\(a = \sqrt{6^2+8^2} = \sqrt{100} = 10\)</span>
+                        <span>\(b^2 = a \cdot m \;\Rightarrow\; 36 = 10m \;\Rightarrow\; m = 3{,}6\)</span>
+                        <span>\(c^2 = a \cdot n \;\Rightarrow\; 64 = 10n \;\Rightarrow\; n = 6{,}4\)</span>
+                        <span>\(h^2 = m \cdot n = 3{,}6 \times 6{,}4 = 23{,}04\)</span>
+                        <span class="hl">\(h = \sqrt{23{,}04} = 4{,}8\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Verificação: \(a \cdot h = 10 \times 4{,}8 = 48 = b \cdot c = 6 \times 8\) &#10003;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISTÂNCIA ENTRE DOIS PONTOS -->
+            <div class="tr-section" id="sec-distancia">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">d</div>
+                    <div>
+                        <div class="tr-section-title">Distância entre Dois Pontos</div>
+                        <div class="tr-section-sub">Aplicação no plano cartesiano</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dados dois pontos \((x_1, y_1)\) e \((x_2, y_2)\) no plano cartesiano,
+                    a distância entre eles é obtida aplicando o Teorema de Pitágoras ao triângulo
+                    retângulo formado pelas diferenças de coordenadas.
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Distância entre \((15,\,14)\) e \((31,\,26)\)</span>
+                        <span>\(d = \sqrt{(31-15)^2 + (26-14)^2}\)</span>
+                        <span>\(d = \sqrt{16^2 + 12^2} = \sqrt{256 + 144}\)</span>
+                        <span>\(d = \sqrt{400}\)</span>
+                        <span class="hl">\(d = 20\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Distância entre \((1,\,1)\) e \((4,\,5)\)</span>
+                        <span>\(d = \sqrt{(4-1)^2 + (5-1)^2} \)</span>
+                        <span>\(d = \sqrt{9+16}\)</span>
+                        <span class="hl">\(d = \sqrt{25} = 5\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-problema">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação em situações reais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar o triângulo retângulo oculto no problema;
+                    (2) rotular hipotenusa e catetos; (3) aplicar o teorema; (4) interpretar o resultado.
+                </div>
+                <h4>Problema 1 — Escada apoiada na parede</h4>
+                <p>Uma escada de 5 m apoia-se em uma parede vertical. O pé da escada está a 3 m da base
+                da parede. A que altura a escada toca a parede?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Hipotenusa = escada = 5 m; cateto horizontal = 3 m; cateto vertical = \(h\)</span>
+                        <span>\(5^2 = h^2 + 3^2\)</span>
+                        <span>\(25 = h^2 + 9 \;\Rightarrow\; h^2 = 16\)</span>
+                        <span class="hl">\(h = 4\) m</span>
+                    </div>
+                </div>
+                <h4>Problema 2 — Diagonal de um retângulo</h4>
+                <p>Um retângulo tem lados de 6 cm e 8 cm. Qual é o comprimento de sua diagonal?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>A diagonal forma a hipotenusa; os lados são os catetos.</span>
+                        <span>\(d^2 = 6^2 + 8^2 = 36 + 64 = 100\)</span>
+                        <span class="hl">\(d = \sqrt{100} = 10\) cm</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

@@ -18,25 +18,8 @@
 	<ui:include src="/matematica/resumo.xhtml" />
 
 
-    <!-- ===== LAYOUT: TOC + seções ===== -->
+    <!-- ===== LAYOUT: seções ===== -->
     <div class="tr-layout">
-
-        <!-- TOC -->
-        <div id="trToc" class="tr-toc">
-            <div class="tr-toc-title">Nesta anotação</div>
-            <a href="#sec-def"><span class="tr-toc-num">D</span> Definição</a>
-            <a href="#sec-2"><span class="tr-toc-num">2</span> Divisível por 2</a>
-            <a href="#sec-3"><span class="tr-toc-num">3</span> Divisível por 3</a>
-            <a href="#sec-4"><span class="tr-toc-num">4</span> Divisível por 4</a>
-            <a href="#sec-5"><span class="tr-toc-num">5</span> Divisível por 5</a>
-            <a href="#sec-6"><span class="tr-toc-num">6</span> Divisível por 6</a>
-            <a href="#sec-7"><span class="tr-toc-num">7</span> Divisível por 7</a>
-            <a href="#sec-8"><span class="tr-toc-num">8</span> Divisível por 8</a>
-            <a href="#sec-9"><span class="tr-toc-num">9</span> Divisível por 9</a>
-            <a href="#sec-10"><span class="tr-toc-num">10</span> Divisível por 10</a>
-            <a href="#sec-11"><span class="tr-toc-num">11</span> Divisível por 11</a>
-            <a href="#sec-div"><span class="tr-toc-num">&#9733;</span> Divisores</a>
-        </div>
 
         <!-- SEÇÕES -->
         <div class="tr-content">
@@ -400,28 +383,5 @@
         </div><!-- /tr-content -->
     </div><!-- /tr-layout -->
 
-    <script type="text/javascript">
-        //<![CDATA[
-        (function() {
-            var sections = document.querySelectorAll('.tr-section[id]');
-            var tocLinks = document.querySelectorAll('#trToc a');
-
-            function onScroll() {
-                var scrollY = window.scrollY + 100;
-                var active = null;
-                sections.forEach(function(sec) {
-                    if (sec.offsetTop <= scrollY) active = sec.id;
-                });
-                tocLinks.forEach(function(a) {
-                    var href = a.getAttribute('href').replace('#', '');
-                    a.classList.toggle('active', href === active);
-                });
-            }
-
-            window.addEventListener('scroll', onScroll, { passive: true });
-            onScroll();
-        })();
-        //]]>
-    </script>
 
 </ui:decorate>

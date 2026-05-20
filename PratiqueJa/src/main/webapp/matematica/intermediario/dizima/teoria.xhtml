@@ -1,0 +1,221 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Dízima periódica e números racionais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma <strong>dízima periódica</strong> é um número decimal cuja parte decimal
+                    se repete infinitamente a partir de um certo ponto. A parte que se repete
+                    chama-se <strong>período</strong> e é indicada pela notação \(\overline{\,\cdot\,}\).
+                </div>
+                <p>Toda dízima periódica é um <strong>número racional</strong> — ou seja, pode ser
+                escrita como fração \(\tfrac{a}{b}\) com \(a, b \in \mathbb{Z}\) e \(b \neq 0\).
+                A fração correspondente é chamada de <strong>fração geratriz</strong>.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(0{,}333\ldots = 0{,}\overline{3}\)</div>
+                    <div class="tr-ex">\(1{,}272727\ldots = 1{,}\overline{27}\)</div>
+                    <div class="tr-ex">\(0{,}1666\ldots = 0{,}1\overline{6}\)</div>
+                </div>
+                <h4>Tipos</h4>
+                <p><strong>Simples:</strong> a parte decimal contém <em>somente</em> o período —
+                não há dígitos não periódicos entre a vírgula e o início da repetição.
+                Ex: \(0{,}\overline{6}\), \(2{,}\overline{56}\).</p>
+                <p><strong>Composta:</strong> existe uma parte <em>não periódica</em> de \(n\) dígitos
+                antes do período de \(p\) dígitos.
+                Ex: \(0{,}5\overline{2}\), \(1{,}68\overline{74}\).</p>
+            </div>
+
+            <!-- MÉTODO ALGÉBRICO -->
+            <div class="tr-section" id="sec-metodo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Alg</div>
+                    <div>
+                        <div class="tr-section-title">Método Algébrico</div>
+                        <div class="tr-section-sub">De onde vêm as fórmulas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Chame a dízima de \(x\). Multiplique por \(10^p\) para deslocar exatamente
+                    um período. Subtraia \(x\) de \(10^p \cdot x\) — a parte periódica se cancela
+                    e sobra uma equação com solução inteira.
+                </div>
+                <h4>Derivação — Simples \(0{,}\overline{7}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Seja \(x = 0{,}777\ldots\)</span>
+                        <span>\(10x = 7{,}777\ldots\)</span>
+                        <span>\(10x - x = 7{,}777\ldots - 0{,}777\ldots\)</span>
+                        <span>\(9x = 7\)</span>
+                        <span class="hl">\(x = \dfrac{7}{9}\)</span>
+                    </div>
+                </div>
+                <p>O denominador tem exatamente \(p\) noves porque subtraímos \(10^p \cdot x - x = (10^p - 1)\,x\).
+                Daí vem a fórmula \(\dfrac{x \cdot 10^p - x}{10^p - 1}\).</p>
+                <h4>Derivação — Composta \(1{,}5\overline{3}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Seja \(x = 1{,}5333\ldots\)</span>
+                        <span>\(10x = 15{,}333\ldots\) &#160;<em style="font-size:11px;color:#9ca3af">(\(\times 10^n\), desloca parte não periódica)</em></span>
+                        <span>\(100x = 153{,}333\ldots\) &#160;<em style="font-size:11px;color:#9ca3af">(\(\times 10^{n+p}\), desloca período inteiro)</em></span>
+                        <span>\(100x - 10x = 153{,}33\ldots - 15{,}33\ldots\)</span>
+                        <span>\(90x = 138\)</span>
+                        <span class="hl">\(x = \dfrac{138}{90} = \dfrac{23}{15}\)</span>
+                    </div>
+                </div>
+                <p>O denominador \(10^{n+p} - 10^n\) equivale a \(p\) noves seguidos de \(n\) zeros —
+                consequência direta de subtrair as duas equações.</p>
+            </div>
+
+            <!-- ATALHO MENTAL -->
+            <div class="tr-section" id="sec-atalho">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#9889;</div>
+                    <div>
+                        <div class="tr-section-title">Atalho Mental</div>
+                        <div class="tr-section-sub">Cálculo rápido da fração geratriz</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Simples:</strong> numerador = período; denominador = \(p\) noves.<br/>
+                    <strong>Composta:</strong> numerador = (número completo sem vírgula) &#8722; (parte não periódica);
+                    denominador = \(p\) noves seguidos de \(n\) zeros.
+                </div>
+                <h4>Simples — exemplos rápidos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(0{,}\overline{3} = \dfrac{3}{9} = \dfrac{1}{3}\)</div>
+                    <div class="tr-ex">\(0{,}\overline{37} = \dfrac{37}{99}\)</div>
+                    <div class="tr-ex">\(0{,}\overline{259} = \dfrac{259}{999} = \dfrac{7}{27}\)</div>
+                    <div class="tr-ex">\(2{,}\overline{56} = 2 + \dfrac{56}{99} = \dfrac{254}{99}\)</div>
+                </div>
+                <h4>Composta — exemplos rápidos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        \(0{,}5\overline{2}\): &#160; \(\dfrac{52 - 5}{90} = \dfrac{47}{90}\)
+                    </div>
+                    <div class="tr-ex">
+                        \(0{,}1\overline{6}\): &#160; \(\dfrac{16 - 1}{90} = \dfrac{15}{90} = \dfrac{1}{6}\)
+                    </div>
+                    <div class="tr-ex">
+                        \(1{,}68\overline{74}\): &#160; \(\dfrac{16874 - 168}{9900} = \dfrac{16706}{9900} = \dfrac{8353}{4950}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- GERATRIZ SIMPLES -->
+            <div class="tr-section" id="sec-geratriz-sim">
+                <div class="tr-section-header">
+                    <div class="tr-badge">FG</div>
+                    <div>
+                        <div class="tr-section-title">Fração Geratriz — Simples</div>
+                        <div class="tr-section-sub">Fórmula e exemplos com simplificação</div>
+                    </div>
+                </div>
+                <p>Para uma dízima \(x\) com período de \(p\) algarismos. O denominador
+                \(10^p - 1\) é sempre \(p\) noves (\(9\), \(99\), \(999\ldots\)):</p>
+                <div class="tr-rule">
+                    \[\frac{x \cdot 10^{p} - x}{10^{p} - 1}\]
+                </div>
+                <h4>Exemplo 1 — \(0{,}\overline{7}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(p = 1)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{0{,}777\ldots \cdot 10 - 0{,}777\ldots}{10 - 1} = \dfrac{7{,}77\ldots - 0{,}77\ldots}{9}\)</span>
+                        <span class="hl">\(= \dfrac{7}{9}\) &#160; (irredutível)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — \(0{,}\overline{259}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(p = 3)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{259{,}259\ldots - 0{,}259\ldots}{999} = \dfrac{259}{999}\)</span>
+                        <span>\(\text{MDC}(259, 999) = 37\)</span>
+                        <span class="hl">\(= \dfrac{259 \div 37}{999 \div 37} = \dfrac{7}{27}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 3 — \(2{,}\overline{56}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(parte inteira &#8800; 0, p = 2)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{2{,}565656\ldots \cdot 100 - 2{,}565656\ldots}{99} = \dfrac{256{,}56\ldots - 2{,}56\ldots}{99}\)</span>
+                        <span>\(= \dfrac{254}{99}\)</span>
+                        <span>\(\text{MDC}(254, 99) = 1\)</span>
+                        <span class="hl">\(= \dfrac{254}{99}\) &#160; (irredutível)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GERATRIZ COMPOSTA -->
+            <div class="tr-section" id="sec-geratriz-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">FG</div>
+                    <div>
+                        <div class="tr-section-title">Fração Geratriz — Composta</div>
+                        <div class="tr-section-sub">Fórmula e exemplos com simplificação</div>
+                    </div>
+                </div>
+                <p>\(n\) = dígitos <strong>não periódicos</strong> &#160;·&#160;
+                   \(p\) = dígitos <strong>periódicos</strong>. O denominador
+                   \(10^{n+p} - 10^n\) equivale a \(p\) noves seguidos de \(n\) zeros:</p>
+                <div class="tr-rule">
+                    \[\frac{x \cdot 10^{n+p} \;-\; x \cdot 10^{n}}{10^{n+p} - 10^{n}}\]
+                </div>
+                <h4>Exemplo 1 — \(1{,}5\overline{3}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(n = 1, p = 1, denom. = 90)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{153{,}33\ldots - 15{,}33\ldots}{90} = \dfrac{153 - 15}{90} = \dfrac{138}{90}\)</span>
+                        <span>\(\text{MDC}(138, 90) = 6\)</span>
+                        <span class="hl">\(= \dfrac{138 \div 6}{90 \div 6} = \dfrac{23}{15}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — \(2{,}74\overline{63}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(n = 2, p = 2, denom. = 9900)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{27463{,}\overline{63} - 274{,}\overline{63}}{9900} = \dfrac{27463 - 274}{9900} = \dfrac{27189}{9900}\)</span>
+                        <span>\(\text{MDC}(27189, 9900) = 9\)</span>
+                        <span class="hl">\(= \dfrac{27189 \div 9}{9900 \div 9} = \dfrac{3021}{1100}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 3 — \(0{,}5\overline{2}\) &#160;<em style="font-size:12px;font-weight:400;color:#9ca3af">(n = 1, p = 1, denom. = 90)</em></h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{5{,}22\ldots - 0{,}52\ldots \cdot 10}{90}\) &#160;&#160; pelo atalho: \(\dfrac{52 - 5}{90}\)</span>
+                        <span>\(= \dfrac{47}{90}\)</span>
+                        <span>\(\text{MDC}(47, 90) = 1\)</span>
+                        <span class="hl">\(= \dfrac{47}{90}\) &#160; (irredutível)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

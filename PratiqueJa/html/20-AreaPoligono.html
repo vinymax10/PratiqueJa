@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Área e Perímetro</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 1.05rem;
+      line-height: 1.7; color: #1e293b; background: #f8fafc; }
+
+    .hero {
+      background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 60%, #a78bfa 100%);
+      color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 70%); }
+    .hero img { height: 64px; width: auto; margin-bottom: 1.2rem;
+      filter: brightness(0) invert(1); opacity: .9; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -.5px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hero .subtitle { margin-top: .4rem; font-size: 1rem; opacity: .85; }
+
+    main { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem 4rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 660px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: #fff; border-radius: 14px; padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 14px rgba(76,29,149,.08), 0 1px 3px rgba(0,0,0,.05);
+      border-top: 4px solid #7c3aed; }
+    .card.full { grid-column: 1 / -1; }
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #4c1d95;
+      margin-bottom: .85rem; padding-bottom: .5rem; border-bottom: 1px solid #e2e8f0; }
+
+    p { margin-bottom: .75rem; } p:last-child { margin-bottom: 0; }
+
+    .formula-box { display: flex; justify-content: center; margin: .7rem 0;
+      padding: .7rem 1.2rem; background: #f5f3ff; border: 2px solid #c4b5fd;
+      border-radius: 10px; font-size: 1.05rem; }
+
+    .shape-wrap { display: flex; justify-content: center; margin: .8rem 0; }
+
+    h4 { font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; margin: .8rem 0 .3rem; }
+
+    .steps { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: .8rem 1.1rem; margin: .5rem 0; display: flex; flex-direction: column; gap: .45em;
+      font-size: .93rem; }
+    .steps .result { border-top: 1px dashed #cbd5e1; padding-top: .35rem;
+      font-weight: 700; color: #7c3aed; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="Logo2.png" alt="Logo PratiqueJa" />
+  <h1>Área e Perímetro</h1>
+  <p class="subtitle">Fórmulas para os principais polígonos e o círculo</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <!-- ── Quadrado ── -->
+    <div class="card">
+      <h2>Quadrado</h2>
+      <div class="shape-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="90" height="90" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+          <polyline points="10,28 28,28 28,10" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+          <polyline points="92,10 92,28 110,28" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="55" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#4c1d95">l</text>
+          <text x="105" y="58" text-anchor="middle" font-size="13" font-weight="bold" fill="#4c1d95">l</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = l^2\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = 4 \cdot l\)</div>
+      <h4>Exemplo — \(l = 5\)</h4>
+      <div class="steps">
+        <span>\(A = 5^2 = 25\)</span>
+        <span>\(P = 4 \cdot 5 = 20\)</span>
+      </div>
+    </div>
+
+    <!-- ── Retângulo ── -->
+    <div class="card">
+      <h2>Retângulo</h2>
+      <div class="shape-wrap">
+        <svg width="140" height="100" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="120" height="80" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
+          <polyline points="10,26 24,26 24,10" fill="none" stroke="#db2777" stroke-width="1.5"/>
+          <text x="70" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">b</text>
+          <text x="136" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">h</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = b \cdot h\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = 2 \cdot (b + h)\)</div>
+      <h4>Exemplo — \(b=4,\; h=3\)</h4>
+      <div class="steps">
+        <span>\(A = 4 \cdot 3 = 12\)</span>
+        <span>\(P = 2 \cdot (4+3) = 14\)</span>
+      </div>
+    </div>
+
+    <!-- ── Paralelogramo ── -->
+    <div class="card">
+      <h2>Paralelogramo</h2>
+      <div class="shape-wrap">
+        <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="25,85 10,15 125,15 140,85" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+          <line x1="25" y1="15" x2="25" y2="85" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <polyline points="25,70 39,70 39,85" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="75" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">b</text>
+          <text x="8"  y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">h</text>
+          <text x="142" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">a</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = b \cdot h\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = 2 \cdot (a + b)\)</div>
+      <h4>Exemplo — \(b=5,\; h=2,\; a=4\)</h4>
+      <div class="steps">
+        <span>\(A = 5 \cdot 2 = 10\)</span>
+        <span>\(P = 2 \cdot (4+5) = 18\)</span>
+      </div>
+    </div>
+
+    <!-- ── Triângulo ── -->
+    <div class="card">
+      <h2>Triângulo</h2>
+      <div class="shape-wrap">
+        <svg width="150" height="110" viewBox="0 0 150 110" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="10,95 140,95 50,10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2.5"/>
+          <line x1="50" y1="10" x2="50" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <polyline points="50,80 64,80 64,95" fill="none" stroke="#9333ea" stroke-width="1.5"/>
+          <text x="75" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#6b21a8">b</text>
+          <text x="58" y="58"  font-size="13" font-weight="bold" fill="#6b21a8">h</text>
+          <text x="20" y="58"  font-size="13" font-weight="bold" fill="#6b21a8">a</text>
+          <text x="108" y="65" font-size="13" font-weight="bold" fill="#6b21a8">c</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = \dfrac{b \cdot h}{2}\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = a + b + c\)</div>
+      <h4>Exemplo — \(b=6,\; h=3,\; a=3,\; c=5\)</h4>
+      <div class="steps">
+        <span>\(A = \dfrac{6 \cdot 3}{2} = 9\)</span>
+        <span>\(P = 3+6+5 = 14\)</span>
+      </div>
+    </div>
+
+    <!-- ── Triângulo Equilátero ── -->
+    <div class="card">
+      <h2>Triângulo Equilátero</h2>
+      <div class="shape-wrap">
+        <svg width="130" height="110" viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="65,8 10,100 120,100" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+          <text x="65" y="110" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+          <text x="28"  y="62"  font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+          <text x="100" y="62"  font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = \dfrac{l^2\sqrt{3}}{4}\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = 3 \cdot l\)</div>
+      <h4>Exemplo — \(l = 4\)</h4>
+      <div class="steps">
+        <span>\(A = \dfrac{16\sqrt{3}}{4} = 4\sqrt{3} \approx 6{,}93\)</span>
+        <span>\(P = 3 \cdot 4 = 12\)</span>
+      </div>
+    </div>
+
+    <!-- ── Trapézio ── -->
+    <div class="card">
+      <h2>Trapézio</h2>
+      <div class="shape-wrap">
+        <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="10,90 30,15 110,15 140,90" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
+          <line x1="30" y1="15" x2="30" y2="90" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <polyline points="30,75 44,75 44,90" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+          <text x="75"  y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#9d174d">B (base maior)</text>
+          <text x="72"  y="12"  text-anchor="middle" font-size="12" font-weight="bold" fill="#9d174d">b</text>
+          <text x="19"  y="57"  font-size="12" font-weight="bold" fill="#9d174d">h</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = \dfrac{(B + b) \cdot h}{2}\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = a + b + c + d\)</div>
+      <h4>Exemplo — \(B=7,\; b=3,\; h=2\)</h4>
+      <div class="steps">
+        <span>\(A = \dfrac{(7+3) \cdot 2}{2} = 10\)</span>
+        <span>Com lados \(a=6, b=3, c=4, d=4\): \(P = 17\)</span>
+      </div>
+    </div>
+
+    <!-- ── Losango ── -->
+    <div class="card">
+      <h2>Losango</h2>
+      <div class="shape-wrap">
+        <svg width="130" height="110" viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="65,5 120,55 65,105 10,55" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+          <line x1="65" y1="5"  x2="65"  y2="105" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="10" y1="55" x2="120" y2="55"  stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <polyline points="65,55 79,55 79,69" fill="none" stroke="#ea580c" stroke-width="1.5"/>
+          <text x="72" y="35"  font-size="12" font-weight="bold" fill="#9a3412">D</text>
+          <text x="72" y="76"  font-size="12" font-weight="bold" fill="#9a3412">d</text>
+          <text x="98" y="40"  font-size="12" font-weight="bold" fill="#9a3412">l</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = \dfrac{D \cdot d}{2}\)</div>
+      <h4>Perímetro</h4>
+      <div class="formula-box">\(\displaystyle P = 4 \cdot l\)</div>
+      <h4>Exemplo — \(D=6,\; d=4,\; l=5\)</h4>
+      <div class="steps">
+        <span>\(A = \dfrac{6 \cdot 4}{2} = 12\)</span>
+        <span>\(P = 4 \cdot 5 = 20\)</span>
+      </div>
+    </div>
+
+    <!-- ── Círculo ── -->
+    <div class="card">
+      <h2>Círculo</h2>
+      <div class="shape-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="55" r="45" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+          <line x1="55" y1="55" x2="100" y2="55" stroke="#ca8a04" stroke-width="2"/>
+          <circle cx="55" cy="55" r="3" fill="#ca8a04"/>
+          <text x="76" y="48" font-size="13" font-weight="bold" fill="#92400e">r</text>
+        </svg>
+      </div>
+      <h4>Área</h4>
+      <div class="formula-box">\(\displaystyle A = \pi r^2\)</div>
+      <h4>Comprimento da circunferência</h4>
+      <div class="formula-box">\(\displaystyle C = 2\pi r\)</div>
+      <h4>Exemplo — \(r = 3\)</h4>
+      <div class="steps">
+        <span>\(A = \pi \cdot 3^2 = 9\pi \approx 28{,}27\)</span>
+        <span>\(C = 2\pi \cdot 3 = 6\pi \approx 18{,}85\)</span>
+      </div>
+    </div>
+
+  </div><!-- .grid -->
+</main>
+
+</body>
+</html>

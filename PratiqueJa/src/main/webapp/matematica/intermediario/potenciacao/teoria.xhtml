@@ -1,0 +1,340 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Multiplicação sucessiva de um número por ele mesmo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>potenciação</strong> representa a multiplicação sucessiva de um número
+                    por ele mesmo. \(a\) é a <strong>base</strong>, \(n\) é o <strong>expoente</strong>
+                    e o resultado é a <strong>potência</strong>.
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[\displaystyle a^n = \underbrace{a \cdot a \cdots a}_{n\;\text{vezes}}\]
+                </div>
+                <h4>Exemplos numéricos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(4^2 = 4 \cdot 4 = 16\) &#160;<em style="font-size:.85rem;color:#6b7280">(ao quadrado)</em></div>
+                    <div class="tr-ex">\(4^3 = 4 \cdot 4 \cdot 4 = 64\) &#160;<em style="font-size:.85rem;color:#6b7280">(ao cubo)</em></div>
+                    <div class="tr-ex">\(2^5 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32\)</div>
+                </div>
+                <h4>Exemplos algébricos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\((x-2)^2 = (x-2)\cdot(x-2)\)</div>
+                    <div class="tr-ex">\((3x)^2 = 3x \cdot 3x = 9x^2\)</div>
+                </div>
+            </div>
+
+            <!-- REGRA DOS SINAIS -->
+            <div class="tr-section" id="sec-sinais">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#177;</div>
+                    <div>
+                        <div class="tr-section-title">Regra dos Sinais na Base</div>
+                        <div class="tr-section-sub">Base negativa e a distinção de \(-a^n\) vs \((-a)^n\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Base negativa:</strong> o resultado depende da <strong>paridade do expoente</strong>.<br/>
+                    Expoente <strong>par</strong> &#8594; resultado <strong>positivo</strong>.<br/>
+                    Expoente <strong>ímpar</strong> &#8594; resultado <strong>negativo</strong>.
+                </div>
+                <h4>Exemplos — base negativa</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((-2)^4 = (-2)\cdot(-2)\cdot(-2)\cdot(-2)\)</span>
+                        <span class="hl">\(= +16\) &#160;<em style="font-size:.85rem;font-weight:400;color:#6b7280">(expoente par &#8594; positivo)</em></span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\((-2)^3 = (-2)\cdot(-2)\cdot(-2)\)</span>
+                        <span class="hl">\(= -8\) &#160;<em style="font-size:.85rem;font-weight:400;color:#6b7280">(expoente ímpar &#8594; negativo)</em></span>
+                    </div>
+                </div>
+                <h4>Atenção — \(-a^n\) é diferente de \((-a)^n\)</h4>
+                <p>O sinal fora dos parênteses <strong>não faz parte da base</strong>. A potenciação
+                é calculada primeiro; o sinal negativo é aplicado depois.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(-2^4 = -(2^4) = -16\)</span>
+                        <span class="param">sinal fora: base é 2, não \(-2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\((-2)^4 = +16\)</span>
+                        <span class="param">sinal dentro: base é \(-2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(-5^0 = -(5^0) = -1\)</span>
+                        <span class="param">enquanto \((-5)^0 = 1\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MESMA BASE -->
+            <div class="tr-section" id="sec-mesma-base">
+                <div class="tr-section-header">
+                    <div class="tr-badge">MB</div>
+                    <div>
+                        <div class="tr-section-title">Mesma Base — Mult. e Divisão</div>
+                        <div class="tr-section-sub">Operações com potências de mesma base</div>
+                    </div>
+                </div>
+                <p><strong>Multiplicação:</strong> repete a base e <strong>soma</strong> os expoentes.</p>
+                <div class="tr-rule">
+                    \[a^x \cdot a^y = a^{\,x+y}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(2^2 \cdot 2^3 = 2^{2+3} = 2^5 = 32\)</div>
+                    <div class="tr-ex">\(2^5 \cdot 2^{-3} = 2^{5-3} = 2^2 = 4\)</div>
+                    <div class="tr-ex">\(x^3 \cdot x^4 = x^7\)</div>
+                    <div class="tr-ex">\(3x^2 \cdot 2x^3 = 6x^5\)</div>
+                </div>
+                <p style="margin-top:16px"><strong>Divisão:</strong> repete a base e <strong>subtrai</strong> os expoentes.</p>
+                <div class="tr-rule">
+                    \[\frac{a^x}{a^y} = a^{\,x-y}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{2^6}{2^2} = 2^{6-2} = 2^4 = 16\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{2^2}{2^{-3}} = 2^{2-(-3)} = 2^{2+3} = 2^5\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{x^5}{x^2} = x^3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUTO E POTÊNCIA DE POTÊNCIA -->
+            <div class="tr-section" id="sec-produto-pot">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Pp</div>
+                    <div>
+                        <div class="tr-section-title">Produto e Potência de Potência</div>
+                        <div class="tr-section-sub">Distribuição e composição de expoentes</div>
+                    </div>
+                </div>
+                <p><strong>Potência de um produto:</strong> distribua a potência entre os fatores.</p>
+                <div class="tr-rule">
+                    \[(a \cdot b)^n = a^n \cdot b^n\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\((2 \cdot 3)^4 = 2^4 \cdot 3^4 = 16 \cdot 81 = 1296\)</div>
+                    <div class="tr-ex">\((2x)^3 = 2^3 \cdot x^3 = 8x^3\)</div>
+                    <div class="tr-ex">\((3x^2)^2 = 3^2 \cdot (x^2)^2 = 9x^4\)</div>
+                </div>
+                <p style="margin-top:16px"><strong>Potência de potência:</strong> repete a base e <strong>multiplica</strong> os expoentes.</p>
+                <div class="tr-rule">
+                    \[(a^x)^y = a^{\,x \cdot y}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((2^3)^2 = 2^{3 \cdot 2} = 2^6 = 64\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\((x^2)^3 = x^6\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\((5^2)^4 = 5^8\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRAÇÃO, NEGATIVO E ZERO -->
+            <div class="tr-section" id="sec-especiais">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">FG</div>
+                    <div>
+                        <div class="tr-section-title">Fração, Expoente Negativo e Zero</div>
+                        <div class="tr-section-sub">Casos com bases fracionárias e expoentes especiais</div>
+                    </div>
+                </div>
+                <p><strong>Potência de fração:</strong> distribua a potência entre numerador e denominador.</p>
+                <div class="tr-rule">
+                    \[\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\left(\dfrac{5}{3}\right)^2 = \dfrac{5^2}{3^2} = \dfrac{25}{9}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\left(\dfrac{2}{3}\right)^3 = \dfrac{8}{27}\)</span>
+                    </div>
+                </div>
+                <p style="margin-top:16px"><strong>Expoente negativo:</strong> inverte a base (toma o recíproco) e aplica o expoente positivo.</p>
+                <div class="tr-rule">
+                    \[a^{-n} = \frac{1}{a^n} \qquad \left(\frac{a}{b}\right)^{-n} = \left(\frac{b}{a}\right)^{n}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\left(\dfrac{2}{3}\right)^{-2} = \left(\dfrac{3}{2}\right)^{2} = \dfrac{9}{4}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(10^{-3} = \dfrac{1}{1000} = 0{,}001\)</span>
+                    </div>
+                </div>
+                <p style="margin-top:16px"><strong>Expoente zero:</strong> qualquer \(a \neq 0\) elevado a \(0\) é igual a \(1\).</p>
+                <div class="tr-rule">
+                    \[a^0 = 1 \qquad (a \neq 0)\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(7^0 = 1\)</div>
+                    <div class="tr-ex">\((-5)^0 = 1\)</div>
+                    <div class="tr-ex">\(\left(\dfrac{7}{3}\right)^0 = 1\)</div>
+                </div>
+            </div>
+
+            <!-- ERRO CLÁSSICO + COMBINANDO PROPRIEDADES -->
+            <div class="tr-section" id="sec-avancado">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#9888;</div>
+                    <div>
+                        <div class="tr-section-title">Erro Clássico e Exercício Combinado</div>
+                        <div class="tr-section-sub">Armadilha frequente e aplicação encadeada das regras</div>
+                    </div>
+                </div>
+                <h4>Erro clássico — \((a+b)^n \neq a^n + b^n\)</h4>
+                <div class="tr-rule" style="background:#fff7ed;border-color:#f97316;color:#7c2d12;">
+                    A potenciação <strong>não se distribui sobre a soma ou a subtração</strong>.
+                    Este é o erro mais comum em álgebra com potências.
+                    \[(a + b)^n \;\neq\; a^n + b^n\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Errado:</strong> \((2+3)^2 \overset{?}{=} 2^2 + 3^2 = 4 + 9 = 13\)</span>
+                        <span><strong>Correto:</strong> \((2+3)^2 = 5^2 = 25\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Errado:</strong> \((x+y)^2 \overset{?}{=} x^2 + y^2\)</span>
+                        <span><strong>Correto:</strong> \((x+y)^2 = x^2 + 2xy + y^2\)</span>
+                    </div>
+                </div>
+                <h4 style="margin-top:20px">Exercício combinado — múltiplas propriedades</h4>
+                <p>Simplifique: \(\;\dfrac{(2^3)^2 \cdot 2^{-1}}{2^4}\)</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((2^3)^2 = 2^{3 \cdot 2} = 2^6\) &#160;<em style="font-size:.85rem;color:#9ca3af">(potência de potência)</em></span>
+                        <span>\(2^6 \cdot 2^{-1} = 2^{6-1} = 2^5\) &#160;<em style="font-size:.85rem;color:#9ca3af">(mult. mesma base)</em></span>
+                        <span>\(\dfrac{2^5}{2^4} = 2^{5-4} = 2^1\) &#160;<em style="font-size:.85rem;color:#9ca3af">(div. mesma base)</em></span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTAÇÃO CIENTÍFICA -->
+            <div class="tr-section" id="sec-notacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge">NC</div>
+                    <div>
+                        <div class="tr-section-title">Notação Científica</div>
+                        <div class="tr-section-sub">Aplicação das potências de 10 em números muito grandes ou pequenos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um número está em <strong>notação científica</strong> quando é escrito na forma
+                    \(a \times 10^n\), onde \(1 \leq |a| &lt; 10\) e \(n \in \mathbb{Z}\).
+                    Expoente <strong>positivo</strong> &#8594; número grande;
+                    expoente <strong>negativo</strong> &#8594; número pequeno.
+                </div>
+                <h4>Convertendo para notação científica</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(6\,000\,000 = 6 \times 10^6\)</span>
+                        <span class="param">desloque a vírgula 6 casas para a esquerda</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(0{,}00045 = 4{,}5 \times 10^{-4}\)</span>
+                        <span class="param">desloque a vírgula 4 casas para a direita</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(3\,850\,000\,000 = 3{,}85 \times 10^{9}\)</span>
+                        <span class="param">raio da Terra em metros</span>
+                    </div>
+                </div>
+                <h4>Operações em notação científica</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((3 \times 10^4) \cdot (2 \times 10^3)\)</span>
+                        <span>\(= (3 \cdot 2) \times 10^{4+3}\)</span>
+                        <span class="hl">\(= 6 \times 10^7\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{8 \times 10^6}{2 \times 10^2}\)</span>
+                        <span>\(= \dfrac{8}{2} \times 10^{6-2}\)</span>
+                        <span class="hl">\(= 4 \times 10^4\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABELA DE REFERÊNCIA -->
+            <div class="tr-section" id="sec-tabela">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ref</div>
+                    <div>
+                        <div class="tr-section-title">Principais Potências</div>
+                        <div class="tr-section-sub">Tabela de referência — quadrados, cubos e quartas</div>
+                    </div>
+                </div>
+                <div class="fact-wrap">
+                    <table class="fact-table" style="width:100%;font-size:.92rem;">
+                        <thead>
+                            <tr>
+                                <th style="background:#ede9fe;color:#4c1d95;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 10px;border:1px solid #ddd6fe;text-align:center;">Quadrados</th>
+                                <th style="background:#ede9fe;color:#4c1d95;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 10px;border:1px solid #ddd6fe;text-align:center;">Quadrados</th>
+                                <th style="background:#ede9fe;color:#4c1d95;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 10px;border:1px solid #ddd6fe;text-align:center;">Cubos</th>
+                                <th style="background:#ede9fe;color:#4c1d95;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 10px;border:1px solid #ddd6fe;text-align:center;">Quartas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(1^2 = 1\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(11^2 = 121\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(1^3 = 1\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(1^4 = 1\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(2^2 = 4\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(12^2 = 144\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(2^3 = 8\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(2^4 = 16\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(3^2 = 9\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(13^2 = 169\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(3^3 = 27\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(3^4 = 81\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(4^2 = 16\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(14^2 = 196\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(4^3 = 64\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(4^4 = 256\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(5^2 = 25\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(15^2 = 225\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(5^3 = 125\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(5^4 = 625\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(6^2 = 36\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(16^2 = 256\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(6^3 = 216\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(6^4 = 1.296\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(7^2 = 49\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(17^2 = 289\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(7^3 = 343\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(7^4 = 2.401\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(8^2 = 64\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(18^2 = 324\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(8^3 = 512\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(8^4 = 4.096\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(9^2 = 81\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(19^2 = 361\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(9^3 = 729\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;">\(9^4 = 6.561\)</td></tr>
+                            <tr><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(10^2 = 100\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(20^2 = 400\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(10^3 = 1.000\)</td><td style="padding:5px 10px;border:1px solid #e5e7eb;text-align:center;background:#faf5ff;">\(10^4 = 10.000\)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

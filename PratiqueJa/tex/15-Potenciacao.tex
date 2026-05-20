@@ -13,35 +13,60 @@
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+% ──────────────────────────────────────────
+\TW{Definição}
 
-A potenciação é uma operação matemática que representa a multiplicação sucessiva de um número por ele mesmo da seguinte forma: 
+A \textbf{potenciação} representa a multiplicação sucessiva de um número por ele mesmo. $a$ é a \textbf{base}, $n$ é o \textbf{expoente} e o resultado é a \textbf{potência}:
 
 \Formula{
-a^n = \underbrace{a \cdot a \ldots \cdot a}_{n ~ \text{vezes}}
+a^n = \underbrace{a \cdot a \cdots a}_{n~\text{vezes}}
 }
 
-Onde $a$ é base e o e $n$ é o expoente.
+\TM{Exemplos numéricos:}
+
+$4^2 = 4 \cdot 4 = 16$ \quad (ao quadrado)
+
+$4^3 = 4 \cdot 4 \cdot 4 = 64$ \quad (ao cubo)
+
+$2^5 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32$
+
+\TM{Exemplos algébricos:}
+
+$(x-2)^2 = (x-2)\cdot(x-2)$
+
+$(3x)^2 = 9x^2$
+
+% ──────────────────────────────────────────
+\T{Regra dos Sinais na Base}
+
+\textbf{Base negativa}: o resultado depende da \textbf{paridade do expoente}.
+
+Expoente \textbf{par} $\Rightarrow$ resultado \textbf{positivo}.
+
+Expoente \textbf{ímpar} $\Rightarrow$ resultado \textbf{negativo}.
 
 \TM{Exemplos:}
 
-$4^2 = 4 \cdot 4 = 16$
+$(-2)^4 = (-2)(-2)(-2)(-2) = +16$
 
-Nesse exemplo dizemos que o 4 está elevado à segunda potência, ou ao quadrado.
+$(-2)^3 = (-2)(-2)(-2) = -8$
 
-\vspace{8px} 
-$4^3 = 4 \cdot 4 \cdot 4 = 64$ 
+\TM{Atenção: $-a^n \neq (-a)^n$}
 
-Nesse exemplo dizemos que o 4 está elevado à terceira potência, ou ao cubo.
+O sinal \textit{fora} dos parênteses não faz parte da base. A potenciação é calculada primeiro; o sinal é aplicado depois.
 
-\vspace{8px} 
-$(x-2)^2 = (x-2) \cdot (x-2)$
+$-2^4 = -(2^4) = -16$ \hfill {\small\textit{(base é 2)}}
 
+$(-2)^4 = +16$ \hfill {\small\textit{(base é $-2$)}}
+
+$-5^0 = -(5^0) = -1$ \quad enquanto \quad $(-5)^0 = 1$
+
+% ──────────────────────────────────────────
 \T{Propriedades}
 
 \TM{Multiplicação de potências com a mesma base:}
 
-Repete a base e soma os expoentes.
+Repete a base e \textbf{soma} os expoentes.
 
 \Formula{
 a^x \cdot a^y = a^{x+y}
@@ -49,13 +74,15 @@ a^x \cdot a^y = a^{x+y}
 
 \TM{Exemplos:}
 
-$2^2 \cdot 2^3 = 2^{2+3} = 2^5$ \vspace{8px} 
+$2^2 \cdot 2^3 = 2^{2+3} = 2^5 = 32$
 
-$2^5 \cdot 2^{-3} = 2^{5-3} = 2^2 $
+$2^5 \cdot 2^{-3} = 2^{5-3} = 2^2 = 4$
+
+$x^3 \cdot x^4 = x^7$ \qquad $3x^2 \cdot 2x^3 = 6x^5$
 
 \TM{Divisão de potências com a mesma base:}
 
-Repete a base e subtrai os expoentes.
+Repete a base e \textbf{subtrai} os expoentes.
 
 \Formula{
 \dfrac{a^x}{a^y} = a^{x-y}
@@ -63,82 +90,127 @@ Repete a base e subtrai os expoentes.
 
 \TM{Exemplos:}
 
-\vspace{8px} 
-$\dfrac{2^6}{2^2} = 2^{6-2} =  2^{4}$ \vspace{8px} 
+$\dfrac{2^6}{2^2} = 2^{6-2} = 2^4 = 16$ \vspace{6px}
 
-$\dfrac{2^2}{2^{-3}} = 2^{2-(-3)} = 2^{2+3} =  2^{5}$ \vspace{8px} 
+$\dfrac{2^2}{2^{-3}} = 2^{2-(-3)} = 2^{2+3} = 2^5$ \vspace{6px}
+
+$\dfrac{x^5}{x^2} = x^3$
 
 \TM{Potência de um produto:}
 
-Distribua a potência entre os elementos do produto.
+Distribua a potência entre os fatores.
 
 \Formula{
-(a \cdot b )^n = a^n  \cdot b^n
+(a \cdot b)^n = a^n \cdot b^n
 }
 
 \TM{Exemplos:}
 
-$(2 \cdot 3)^4 = 2^4 \cdot 3^4$
+$(2 \cdot 3)^4 = 2^4 \cdot 3^4 = 1296$
+
+$(2x)^3 = 8x^3$ \qquad $(3x^2)^2 = 9x^4$
 
 \TM{Potência de potência:}
 
-Repete a base e multiplique os expoentes.
+Repete a base e \textbf{multiplica} os expoentes.
 
 \Formula{
-(a^x )^y = a^{x \cdot y}
+(a^x)^y = a^{x \cdot y}
 }
 
 \TM{Exemplos:}
 
-$(2^3)^2 = 2^{3 \cdot 2} = 2^6 = 64$
+$(2^3)^2 = 2^{6} = 64$ \qquad $(x^2)^3 = x^6$
 
-\TM{Potência de números racionais:}
+\TM{Potência de fração:}
 
-Distribua a potência entre os elementos da fração.
+Distribua a potência entre numerador e denominador.
 
 \Formula{
-\left( \dfrac{a}{b} \right)^n = \dfrac{a^n}{b^n}
+\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}
 }
 
 \TM{Exemplos:}
 
-\vspace{8px} 
-$\left(\dfrac{5}{3} \right)^2 = \dfrac{5^2}{3^2} = \dfrac{25}{9}$ \vspace{8px} 
+$\left(\dfrac{5}{3}\right)^2 = \dfrac{25}{9}$ \qquad $\left(\dfrac{2}{3}\right)^3 = \dfrac{8}{27}$ \vspace{6px}
 
-\TM{Potência negativas:}
+\TM{Expoente negativo:}
 
-Inverta a base e aplique a potência como positiva entre os elementos.
+Inverta a base (tome o recíproco) e aplique o expoente positivo.
 
 \Formula{
-a^{-n} = \dfrac{1}{a^n}
+a^{-n} = \dfrac{1}{a^n} \qquad \left(\dfrac{a}{b}\right)^{-n} = \left(\dfrac{b}{a}\right)^{n}
 }
 
 \TM{Exemplos:}
 
-\vspace{8px} 
-$2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$ \vspace{8px} 
+$2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$ \vspace{6px}
 
-\vspace{8px} 
-$\left(\dfrac{2}{3} \right)^{-2} = \left(\dfrac{3}{2} \right)^{2} = \dfrac{3^2}{2^2} = \dfrac{9}{4} $ \vspace{8px} 
+$\left(\dfrac{2}{3}\right)^{-2} = \left(\dfrac{3}{2}\right)^{2} = \dfrac{9}{4}$ \vspace{6px}
 
-\TM{Potência nula:}
+$10^{-3} = \dfrac{1}{1000} = 0{,}001$
 
-Qualquer número $a \neq 0$ elevado a potência $0$ é igual a 1.
+\TM{Expoente zero:}
 
-$ a^{0} = 1$
+Qualquer $a \neq 0$ elevado a $0$ é igual a 1.
+
+\Formula{a^0 = 1 \quad (a \neq 0)}
 
 \TM{Exemplos:}
 
-$ 4^{0} = 1$
+$7^0 = 1$ \qquad $(-5)^0 = 1$ \qquad $\left(\dfrac{7}{3}\right)^0 = 1$
 
-$ -5^{0} = 1$
+% ──────────────────────────────────────────
+\T{Erro Clássico}
+
+A potenciação \textbf{não se distribui sobre a soma ou subtração}:
+
+\Formula{(a + b)^n \neq a^n + b^n}
+
+\TM{Contraexemplo:}
+
+$(2+3)^2 = 5^2 = 25$, \quad mas $2^2 + 3^2 = 13$ \vspace{6px}
+
+$(x+y)^2 = x^2 + 2xy + y^2 \neq x^2 + y^2$
+
+% ──────────────────────────────────────────
+\T{Exercício Combinado}
+
+Simplifique: $\dfrac{(2^3)^2 \cdot 2^{-1}}{2^4}$
+
+$(2^3)^2 = 2^6$ \hfill {\small\textit{(pot. de potência)}}
+
+$2^6 \cdot 2^{-1} = 2^5$ \hfill {\small\textit{(mult. mesma base)}}
+
+$\dfrac{2^5}{2^4} = 2^1 = \mathbf{2}$ \hfill {\small\textit{(div. mesma base)}}
+
+% ──────────────────────────────────────────
+\T{Notação Científica}
+
+Um número está em \textbf{notação científica} quando escrito como $a \times 10^n$, com $1 \leq |a| < 10$ e $n \in \mathbb{Z}$.
+
+Expoente \textbf{positivo} $\Rightarrow$ número grande; expoente \textbf{negativo} $\Rightarrow$ número pequeno.
+
+\TM{Exemplos:}
+
+$6\,000\,000 = 6 \times 10^6$
+
+$0{,}00045 = 4{,}5 \times 10^{-4}$
+
+$3\,850\,000\,000 = 3{,}85 \times 10^{9}$
+
+\TM{Operações:}
+
+$(3 \times 10^4) \cdot (2 \times 10^3) = 6 \times 10^7$ \vspace{6px}
+
+$\dfrac{8 \times 10^6}{2 \times 10^2} = 4 \times 10^4$
 
 \end{multicols}
 
 \begin{center}
 \textbf{\Large Principais Potências}
 \vspace{0.5cm}
-     
+
 \setlength{\tabcolsep}{25pt}
 
 \begin{tabular}{llll}
@@ -153,7 +225,7 @@ $8^2=64$&$18^2=324$&$8^3=512$&$8^4=4096$\\
 $9^2=81$&$19^2=361$&$9^3=729$&$9^4=6561$\\
 $10^2=100$&$20^2=400$&$10^3=1000$&$10^4=10000$\\
 
-\end{tabular} 
+\end{tabular}
 
 \end{center}
 

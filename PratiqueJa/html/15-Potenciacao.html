@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Potenciação</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #1e293b;
+      background: #f8fafc;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 60%, #60a5fa 100%);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 70%);
+    }
+    .hero img {
+      height: 64px; width: auto;
+      margin-bottom: 1.2rem;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.25);
+    }
+    .hero .subtitle {
+      margin-top: .4rem;
+      font-size: 1rem;
+      opacity: .85;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 980px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+    }
+    @media (max-width: 660px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 14px rgba(30,58,138,.08), 0 1px 3px rgba(0,0,0,.05);
+      border-top: 4px solid #3b82f6;
+    }
+    .card.def   { border-top-color: #10b981; }
+    .card.prop2 { border-top-color: #f59e0b; }
+    .card.ref   { border-top-color: #8b5cf6; }
+    .card.full  { grid-column: 1 / -1; }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: .85rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .card.def   h2 { color: #047857; }
+    .card.prop2 h2 { color: #b45309; }
+    .card.ref   h2 { color: #6d28d9; }
+
+    p { margin-bottom: .75rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Regra destacada ── */
+    .rule {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 8px 8px 0;
+      padding: .7rem 1rem;
+      margin: .8rem 0;
+      color: #1e40af;
+      font-weight: 500;
+      font-size: .97rem;
+      line-height: 1.6;
+    }
+    .card.def   .rule { background: #ecfdf5; border-color: #10b981; color: #065f46; }
+    .card.prop2 .rule { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+    .card.ref   .rule { background: #f5f3ff; border-color: #8b5cf6; color: #4c1d95; }
+
+    /* ── Fórmula boxed ── */
+    .formula-box {
+      display: flex;
+      justify-content: center;
+      margin: .9rem 0;
+      padding: .8rem 1.4rem;
+      background: #f0f5ff;
+      border: 2px solid #bfdbfe;
+      border-radius: 10px;
+      font-size: 1.1rem;
+    }
+    .card.def   .formula-box { background: #ecfdf5; border-color: #6ee7b7; }
+    .card.prop2 .formula-box { background: #fffbeb; border-color: #fcd34d; }
+
+    /* ── Exemplos inline ── */
+    .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: .7rem 0; }
+    .ex {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: .95rem;
+      color: #374151;
+    }
+
+    /* ── Bloco passo a passo ── */
+    .steps {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: .9rem 1.2rem;
+      margin: .6rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: .55em;
+    }
+    .steps-title {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #9ca3af;
+    }
+    .steps .result {
+      padding-top: .4rem;
+      border-top: 1px dashed #cbd5e1;
+      font-weight: 700;
+      color: #2563eb;
+    }
+    .card.prop2 .steps .result { color: #b45309; }
+
+    h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #9ca3af;
+      margin: 1rem 0 .4rem;
+    }
+
+    /* ── Tabela de referência ── */
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .93rem;
+      margin-top: .5rem;
+    }
+    .ref-table th {
+      background: #ede9fe;
+      color: #4c1d95;
+      font-weight: 700;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      padding: 6px 10px;
+      text-align: center;
+      border: 1px solid #ddd6fe;
+    }
+    .ref-table td {
+      padding: 5px 10px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+    }
+    .ref-table tr:nth-child(even) td { background: #faf5ff; }
+    .ref-table tr:hover td { background: #ede9fe; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="Logo2.png" alt="Logo PratiqueJa" />
+  <h1>Potenciação</h1>
+  <p class="subtitle">Definição, Propriedades e Principais Potências</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <!-- ── Definição ── -->
+    <div class="card def">
+      <h2>Definição</h2>
+      <div class="rule">
+        A potenciação representa a <strong>multiplicação sucessiva</strong> de um número
+        por ele mesmo. \(a\) é a <strong>base</strong> e \(n\) é o <strong>expoente</strong>.
+      </div>
+      <div class="formula-box">
+        \(\displaystyle a^n = \underbrace{a \cdot a \cdots a}_{n\;\text{vezes}}\)
+      </div>
+      <h4>Exemplos</h4>
+      <div class="examples">
+        <div class="ex">\(4^2 = 4 \cdot 4 = 16\) &nbsp;<em style="font-size:.85rem;color:#6b7280">(ao quadrado)</em></div>
+        <div class="ex">\(4^3 = 4 \cdot 4 \cdot 4 = 64\) &nbsp;<em style="font-size:.85rem;color:#6b7280">(ao cubo)</em></div>
+        <div class="ex">\((x-2)^2 = (x-2)\cdot(x-2)\)</div>
+      </div>
+    </div>
+
+    <!-- ── Mesma Base: Mult & Div ── -->
+    <div class="card">
+      <h2>Mesma Base — Mult. e Divisão</h2>
+      <p><strong>Multiplicação:</strong> repete a base e <strong>soma</strong> os expoentes.</p>
+      <div class="formula-box">
+        \(\displaystyle a^x \cdot a^y = a^{\,x+y}\)
+      </div>
+      <div class="examples">
+        <div class="ex">\(2^2 \cdot 2^3 = 2^{2+3} = 2^5\)</div>
+        <div class="ex">\(2^5 \cdot 2^{-3} = 2^{5-3} = 2^2\)</div>
+      </div>
+      <p style="margin-top:.9rem"><strong>Divisão:</strong> repete a base e <strong>subtrai</strong> os expoentes.</p>
+      <div class="formula-box">
+        \(\displaystyle \frac{a^x}{a^y} = a^{\,x-y}\)
+      </div>
+      <div class="examples">
+        <div class="ex">\(\dfrac{2^6}{2^2} = 2^{6-2} = 2^4\)</div>
+        <div class="ex">\(\dfrac{2^2}{2^{-3}} = 2^{2-(-3)} = 2^5\)</div>
+      </div>
+    </div>
+
+    <!-- ── Produto e Potência de Potência ── -->
+    <div class="card">
+      <h2>Produto e Potência de Potência</h2>
+      <p><strong>Potência de um produto:</strong> distribua a potência entre os fatores.</p>
+      <div class="formula-box">
+        \(\displaystyle (a \cdot b)^n = a^n \cdot b^n\)
+      </div>
+      <div class="examples">
+        <div class="ex">\((2 \cdot 3)^4 = 2^4 \cdot 3^4 = 16 \cdot 81 = 1296\)</div>
+        <div class="ex">\((2x)^3 = 2^3 \cdot x^3 = 8x^3\)</div>
+      </div>
+      <p style="margin-top:.9rem"><strong>Potência de potência:</strong> repete a base e <strong>multiplica</strong> os expoentes.</p>
+      <div class="formula-box">
+        \(\displaystyle (a^x)^y = a^{\,x \cdot y}\)
+      </div>
+      <div class="examples">
+        <div class="ex">\((2^3)^2 = 2^{3 \cdot 2} = 2^6 = 64\)</div>
+        <div class="ex">\((5^2)^4 = 5^8\)</div>
+      </div>
+    </div>
+
+    <!-- ── Racionais, Negativas, Nula ── -->
+    <div class="card prop2">
+      <h2>Racionais, Negativas e Nula</h2>
+      <p><strong>Potência de fração:</strong> distribua a potência entre numerador e denominador.</p>
+      <div class="formula-box">
+        \(\displaystyle \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}\)
+      </div>
+      <div class="examples">
+        <div class="ex">\(\left(\dfrac{5}{3}\right)^2 = \dfrac{25}{9}\)</div>
+        <div class="ex">\(\left(\dfrac{2}{3}\right)^3 = \dfrac{8}{27}\)</div>
+      </div>
+      <p style="margin-top:.9rem"><strong>Expoente negativo:</strong> inverte a base e aplica o expoente positivo.</p>
+      <div class="formula-box">
+        \(\displaystyle a^{-n} = \frac{1}{a^n}\)
+      </div>
+      <div class="examples">
+        <div class="ex">\(2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}\)</div>
+        <div class="ex">\(\left(\dfrac{2}{3}\right)^{-2} = \left(\dfrac{3}{2}\right)^{2} = \dfrac{9}{4}\)</div>
+      </div>
+      <p style="margin-top:.9rem"><strong>Expoente zero:</strong> qualquer \(a \neq 0\) elevado a \(0\) é igual a \(1\).</p>
+      <div class="formula-box">
+        \(\displaystyle a^0 = 1 \qquad (a \neq 0)\)
+      </div>
+      <div class="examples">
+        <div class="ex">\(4^0 = 1\)</div>
+        <div class="ex">\((-5)^0 = 1\)</div>
+        <div class="ex">\(\left(\dfrac{7}{3}\right)^0 = 1\)</div>
+      </div>
+    </div>
+
+    <!-- ── Principais Potências ── -->
+    <div class="card ref full">
+      <h2>Principais Potências</h2>
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Quadrados (\(n^2\))</th>
+            <th>Quadrados (\(n^2\))</th>
+            <th>Cubos (\(n^3\))</th>
+            <th>Quartas (\(n^4\))</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>\(1^2 = 1\)</td><td>\(11^2 = 121\)</td><td>\(1^3 = 1\)</td><td>\(1^4 = 1\)</td></tr>
+          <tr><td>\(2^2 = 4\)</td><td>\(12^2 = 144\)</td><td>\(2^3 = 8\)</td><td>\(2^4 = 16\)</td></tr>
+          <tr><td>\(3^2 = 9\)</td><td>\(13^2 = 169\)</td><td>\(3^3 = 27\)</td><td>\(3^4 = 81\)</td></tr>
+          <tr><td>\(4^2 = 16\)</td><td>\(14^2 = 196\)</td><td>\(4^3 = 64\)</td><td>\(4^4 = 256\)</td></tr>
+          <tr><td>\(5^2 = 25\)</td><td>\(15^2 = 225\)</td><td>\(5^3 = 125\)</td><td>\(5^4 = 625\)</td></tr>
+          <tr><td>\(6^2 = 36\)</td><td>\(16^2 = 256\)</td><td>\(6^3 = 216\)</td><td>\(6^4 = 1{.}296\)</td></tr>
+          <tr><td>\(7^2 = 49\)</td><td>\(17^2 = 289\)</td><td>\(7^3 = 343\)</td><td>\(7^4 = 2{.}401\)</td></tr>
+          <tr><td>\(8^2 = 64\)</td><td>\(18^2 = 324\)</td><td>\(8^3 = 512\)</td><td>\(8^4 = 4{.}096\)</td></tr>
+          <tr><td>\(9^2 = 81\)</td><td>\(19^2 = 361\)</td><td>\(9^3 = 729\)</td><td>\(9^4 = 6{.}561\)</td></tr>
+          <tr><td>\(10^2 = 100\)</td><td>\(20^2 = 400\)</td><td>\(10^3 = 1{.}000\)</td><td>\(10^4 = 10{.}000\)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- .grid -->
+</main>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Relação entre logaritmo e potenciação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O logaritmo de \(a\) na base \(b\) é o expoente \(x\) ao qual \(b\) deve
+                    ser elevada para produzir \(a\). \(b\) é a <strong>base</strong>,
+                    \(a\) é o <strong>logaritmando</strong> e \(x\) é o <strong>logaritmo</strong>.
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[\log_b a = x \;\iff\; a = b^x\]
+                </div>
+                <p><strong>Condições de existência:</strong> \(b > 0,\; b \neq 1\) e \(a > 0\).
+                Não existe logaritmo de número negativo ou zero, nem com base 1.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 8 \Rightarrow 8 = 2^x \Rightarrow 2^3 = 2^x\)</span>
+                        <span class="hl">\(\Rightarrow x = 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_3 81 \Rightarrow 81 = 3^x \Rightarrow 3^4 = 3^x\)</span>
+                        <span class="hl">\(\Rightarrow x = 4\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_5 25 \Rightarrow 25 = 5^x \Rightarrow 5^2 = 5^x\)</span>
+                        <span class="hl">\(\Rightarrow x = 2\)</span>
+                    </div>
+                </div>
+                <h4>Tipos comuns</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Log. natural</strong> \((\ln)\): base \(\mathrm{e} \approx 2{,}718\).
+                        Notação: \(\ln a = \log_e a\).
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Log. decimal</strong> \((\log)\): base \(10\).
+                        Notação: \(\log a = \log_{10} a\).
+                    </div>
+                </div>
+                <h4>Comportamento da função</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        \(b > 1\) &#160;&#8594;&#160; função <strong>crescente</strong>
+                        &#160;<em style="font-size:.85rem;color:#6b7280">(\(\log_2\), \(\log_{10}\), \(\ln\))</em>
+                    </div>
+                    <div class="tr-ex">
+                        \(0 &lt; b &lt; 1\) &#160;&#8594;&#160; função <strong>decrescente</strong>
+                        &#160;<em style="font-size:.85rem;color:#6b7280">(\(\log_{1/2}\))</em>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGARITMOS ESPECIAIS -->
+            <div class="tr-section" id="sec-especiais">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#9733;</div>
+                    <div>
+                        <div class="tr-section-title">Logaritmos Especiais</div>
+                        <div class="tr-section-sub">Resultados imediatos que simplificam cálculos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Três resultados decorrem diretamente da definição e devem ser memorizados —
+                    eles aparecem em quase toda simplificação de expressões logarítmicas.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_b 1 = 0\)</span>
+                        <span class="param">pois \(b^0 = 1\) para qualquer \(b\)</span>
+                        <span>\(\log_2 1 = 0 \quad \log_{10} 1 = 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_b b = 1\)</span>
+                        <span class="param">pois \(b^1 = b\)</span>
+                        <span>\(\log_2 2 = 1 \quad \log_{10} 10 = 1\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_b b^n = n\)</span>
+                        <span class="param">pois \(b^n = b^n\) — logaritmo cancela a potência de mesma base</span>
+                        <span>\(\log_2 2^5 = 5 \quad \log_{10} 10^3 = 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(b^{\log_b a} = a\)</span>
+                        <span class="param">potenciação e logaritmo de mesma base se cancelam</span>
+                        <span>\(2^{\log_2 7} = 7 \quad 10^{\log 5} = 5\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MUDANÇA DE BASE -->
+            <div class="tr-section" id="sec-base">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">MB</div>
+                    <div>
+                        <div class="tr-section-title">Mudança de Base</div>
+                        <div class="tr-section-sub">Reescrevendo logaritmos em qualquer base</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Qualquer logaritmo pode ser expresso como a razão entre dois logaritmos
+                    de uma mesma base auxiliar \(c\). Essencial para usar calculadoras,
+                    que só possuem \(\log\) e \(\ln\).
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[\log_b a = \dfrac{\log_c a}{\log_c b}\]
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_8 16 = \dfrac{\log_2 16}{\log_2 8} = \dfrac{4}{3}\)</span>
+                        <span class="param">base auxiliar 2</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 5 = \dfrac{\log 5}{\log 2} \approx \dfrac{0{,}699}{0{,}301}\)</span>
+                        <span class="hl">\(\approx 2{,}322\)</span>
+                    </div>
+                </div>
+                <h4>Consequências úteis</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\log_b a \cdot \log_a b = 1\)</div>
+                    <div class="tr-ex">\(\log_b a = \dfrac{1}{\log_a b}\)</div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES PRODUTO E QUOCIENTE -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge">P&#183;Q</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades — Produto e Quociente</div>
+                        <div class="tr-section-sub">Logaritmo transforma × em + e ÷ em −</div>
+                    </div>
+                </div>
+
+                <h4>Produto — soma dos logaritmos</h4>
+                <div class="tr-rule">
+                    \[\log_b a + \log_b c = \log_b (a \cdot c)\]
+                </div>
+                <p>Converte multiplicação em adição — foi a base histórica das tábuas de logaritmos
+                para facilitar cálculos antes da era digital.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_6 4 + \log_6 9 = \log_6 (4 \cdot 9) = \log_6 36\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 4 + \log_2 8 = \log_2 32\)</span>
+                        <span class="hl">\(= 5\)</span>
+                    </div>
+                </div>
+
+                <h4>Quociente — diferença dos logaritmos</h4>
+                <div class="tr-rule">
+                    \[\log_b a - \log_b c = \log_b \!\left(\frac{a}{c}\right)\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_3 54 - \log_3 2 = \log_3 \!\left(\dfrac{54}{2}\right) = \log_3 27\)</span>
+                        <span class="hl">\(= 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_{10} 500 - \log_{10} 5 = \log_{10} 100\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES POTÊNCIA -->
+            <div class="tr-section" id="sec-pot">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Exp</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades — Potência e Base Potência</div>
+                        <div class="tr-section-sub">Movendo expoentes dentro e fora do logaritmo</div>
+                    </div>
+                </div>
+
+                <h4>Potência — expoente desce como fator</h4>
+                <div class="tr-rule">
+                    \[c \cdot \log_b a = \log_b (a^c)\]
+                </div>
+                <p>Permite mover expoentes para fora do logaritmo — essencial para resolver
+                equações exponenciais.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 8^3 = 3 \cdot \log_2 8 = 3 \cdot 3\)</span>
+                        <span class="hl">\(= 9\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(2 \cdot \log_2 \sqrt{8} = \log_2 (\sqrt{8})^2 = \log_2 8\)</span>
+                        <span class="hl">\(= 3\)</span>
+                    </div>
+                </div>
+
+                <h4>Base potência — divide pelo expoente da base</h4>
+                <div class="tr-rule">
+                    \[\log_{b^c} a = \dfrac{1}{c} \cdot \log_b a\]
+                </div>
+                <p>Simplifica logaritmos com bases compostas.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_4 8 = \log_{2^2} 8 = \dfrac{1}{2} \cdot \log_2 8 = \dfrac{1}{2} \cdot 3\)</span>
+                        <span class="hl">\(= \dfrac{3}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_9 27 = \log_{3^2} 3^3 = \dfrac{1}{2} \cdot 3\)</span>
+                        <span class="hl">\(= \dfrac{3}{2}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EQUAÇÕES LOGARÍTMICAS -->
+            <div class="tr-section" id="sec-eq">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Eq</div>
+                    <div>
+                        <div class="tr-section-title">Equações Logarítmicas</div>
+                        <div class="tr-section-sub">Resolvendo equações com incógnita no logaritmando</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Estratégia: isolar o logaritmo e converter para forma exponencial,
+                    ou usar as propriedades para unir termos antes de converter.
+                    Sempre verificar se a solução satisfaz as <strong>condições de existência</strong>.
+                </div>
+                <h4>Tipo 1 — logaritmo isolado</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 x = 3\)</span>
+                        <span>\(x = 2^3\)</span>
+                        <span class="hl">\(x = 8\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_5 x = -2\)</span>
+                        <span>\(x = 5^{-2}\)</span>
+                        <span class="hl">\(x = \dfrac{1}{25}\)</span>
+                    </div>
+                </div>
+                <h4>Tipo 2 — usando propriedades para simplificar</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_2 x + \log_2 4 = 5\)</span>
+                        <span>\(\log_2 (4x) = 5\)</span>
+                        <span>\(4x = 2^5 = 32\)</span>
+                        <span class="hl">\(x = 8\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\log_3 x - \log_3 2 = 2\)</span>
+                        <span>\(\log_3 \!\left(\dfrac{x}{2}\right) = 2\)</span>
+                        <span>\(\dfrac{x}{2} = 3^2 = 9\)</span>
+                        <span class="hl">\(x = 18\)</span>
+                    </div>
+                </div>
+                <h4>Exercício combinando propriedades</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Simplifique: \(\log_2 4 + \log_2 8 - \log_2 2\)</span>
+                        <span>\(= \log_2 (4 \cdot 8) - \log_2 2 = \log_2 \!\left(\dfrac{32}{2}\right)\)</span>
+                        <span>\(= \log_2 16\)</span>
+                        <span class="hl">\(= 4\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APLICAÇÕES PRÁTICAS -->
+            <div class="tr-section" id="sec-aplic">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Apl</div>
+                    <div>
+                        <div class="tr-section-title">Aplicações Práticas</div>
+                        <div class="tr-section-sub">Logaritmos no mundo real — escalas científicas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Logaritmos modelam fenômenos onde a grandeza cresce em <strong>ordens de
+                    magnitude</strong> — cada unidade na escala representa uma multiplicação,
+                    não uma adição.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Escala Richter</strong> &#160;<em style="font-size:.85rem;color:#6b7280">(sismos)</em></span>
+                        <span>\(M = \log\!\left(\dfrac{A}{A_0}\right)\)</span>
+                        <span class="param">Um sismo de magnitude 7 é 10× mais intenso que um de magnitude 6.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>pH</strong> &#160;<em style="font-size:.85rem;color:#6b7280">(química)</em></span>
+                        <span>\(\text{pH} = -\log[\text{H}^+]\)</span>
+                        <span>\(\text{pH} = 7 \Rightarrow [\text{H}^+] = 10^{-7}\) mol/L</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Decibéis</strong> &#160;<em style="font-size:.85rem;color:#6b7280">(acústica)</em></span>
+                        <span>\(\text{dB} = 10 \cdot \log\!\left(\dfrac{I}{I_0}\right)\)</span>
+                        <span class="param">Duplicar a intensidade sonora acrescenta apenas ~3 dB.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

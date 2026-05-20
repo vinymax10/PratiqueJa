@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Logaritmo</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 1.05rem;
+      line-height: 1.7; color: #1e293b; background: #f8fafc; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 60%, #818cf8 100%);
+      color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 70%); }
+    .hero img { height: 64px; width: auto; margin-bottom: 1.2rem;
+      filter: brightness(0) invert(1); opacity: .9; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -.5px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hero .subtitle { margin-top: .4rem; font-size: 1rem; opacity: .85; }
+
+    /* ── Layout ── */
+    main { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem 4rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 660px) { .grid { grid-column: 1fr; } }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: 14px; padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 14px rgba(30,27,75,.08), 0 1px 3px rgba(0,0,0,.05);
+      border-top: 4px solid #4f46e5; }
+    .card.def  { border-top-color: #10b981; }
+    .card.prop { border-top-color: #4f46e5; }
+    .card.base { border-top-color: #f59e0b; }
+    .card.full { grid-column: 1 / -1; }
+
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #1e1b4b;
+      margin-bottom: .85rem; padding-bottom: .5rem; border-bottom: 1px solid #e2e8f0; }
+    .card.def  h2 { color: #047857; }
+    .card.base h2 { color: #b45309; }
+
+    p { margin-bottom: .75rem; } p:last-child { margin-bottom: 0; }
+
+    .rule { background: #eef2ff; border-left: 4px solid #4f46e5;
+      border-radius: 0 8px 8px 0; padding: .7rem 1rem; margin: .8rem 0;
+      color: #1e1b4b; font-weight: 500; font-size: .97rem; line-height: 1.6; }
+    .card.def  .rule { background: #ecfdf5; border-color: #10b981; color: #065f46; }
+    .card.base .rule { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+
+    .formula-box { display: flex; justify-content: center; margin: .9rem 0;
+      padding: .8rem 1.4rem; background: #eef2ff; border: 2px solid #c7d2fe;
+      border-radius: 10px; font-size: 1.1rem; }
+    .card.def  .formula-box { background: #ecfdf5; border-color: #6ee7b7; }
+    .card.base .formula-box { background: #fffbeb; border-color: #fcd34d; }
+
+    .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: .7rem 0; }
+    .ex { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+      padding: 6px 14px; font-size: .95rem; color: #374151; }
+    .steps { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: .9rem 1.2rem; margin: .6rem 0; display: flex; flex-direction: column; gap: .55em; }
+    .steps-title { font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; }
+    .steps .result { padding-top: .4rem; border-top: 1px dashed #cbd5e1;
+      font-weight: 700; color: #4f46e5; }
+    .card.base .steps .result { color: #b45309; }
+
+    h4 { font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; margin: 1rem 0 .4rem; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="Logo2.png" alt="Logo PratiqueJa" />
+  <h1>Logaritmo</h1>
+  <p class="subtitle">Definição, propriedades e mudança de base</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <!-- ── Definição ── -->
+    <div class="card def">
+      <h2>Definição</h2>
+      <div class="rule">
+        O logaritmo de \(a\) na base \(b\) é o expoente \(x\) ao qual \(b\) deve
+        ser elevada para produzir \(a\). \(b\) é a <strong>base</strong>,
+        \(a\) é o <strong>logaritmando</strong> e \(x\) é o <strong>logaritmo</strong>.
+      </div>
+      <div class="formula-box">
+        \(\displaystyle \log_b a = x \;\iff\; a = b^x\)
+      </div>
+      <p>Condições: \(b > 0,\; b \neq 1\) e \(a > 0\).</p>
+      <h4>Exemplos</h4>
+      <div class="examples">
+        <div class="ex steps">
+          <span>\(\log_2 8 \Rightarrow 8 = 2^x \Rightarrow 2^3 = 2^x\)</span>
+          <span class="result">\(\Rightarrow x = 3\)</span>
+        </div>
+        <div class="ex steps">
+          <span>\(\log_3 81 \Rightarrow 81 = 3^x \Rightarrow 3^4 = 3^x\)</span>
+          <span class="result">\(\Rightarrow x = 4\)</span>
+        </div>
+      </div>
+      <h4>Tipos comuns</h4>
+      <div class="examples">
+        <div class="ex">
+          <strong>Log. natural</strong> \((\ln)\): base \(\mathrm{e} \approx 2{,}718\).
+          Notação: \(\ln a = \log_e a\).
+        </div>
+        <div class="ex">
+          <strong>Log. decimal</strong> \((\log)\): base 10.
+          Notação: \(\log a = \log_{10} a\).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Troca de Base ── -->
+    <div class="card base">
+      <h2>Mudança de Base</h2>
+      <div class="rule">
+        Qualquer logaritmo pode ser expresso como a razão entre dois logaritmos
+        de uma mesma base auxiliar \(c\). Essencial para usar calculadoras
+        (que só têm \(\log\) e \(\ln\)).
+      </div>
+      <div class="formula-box">
+        \(\displaystyle \log_b a = \dfrac{\log_c a}{\log_c b}\)
+      </div>
+      <h4>Exemplo — base 2 como auxiliar</h4>
+      <div class="examples">
+        <div class="ex steps">
+          <span>\(\log_8 16 = \dfrac{\log_2 16}{\log_2 8} = \dfrac{4}{3}\)</span>
+        </div>
+      </div>
+      <h4>Usando a calculadora (base 10)</h4>
+      <div class="examples">
+        <div class="ex steps">
+          <span>\(\log_2 5 = \dfrac{\log 5}{\log 2} = \dfrac{0{,}699}{0{,}301}\)</span>
+          <span class="result">\(\approx 2{,}322\)</span>
+        </div>
+      </div>
+      <h4>Consequência útil</h4>
+      <div class="examples">
+        <div class="ex">\(\log_b a \cdot \log_a b = 1\)</div>
+        <div class="ex">\(\log_b a = \dfrac{1}{\log_a b}\)</div>
+      </div>
+    </div>
+
+    <!-- ── Propriedades ── -->
+    <div class="card prop full">
+      <h2>Propriedades dos Logaritmos</h2>
+      <div class="grid" style="gap:1rem;margin-top:.5rem">
+
+        <div class="steps">
+          <div class="steps-title">Produto — soma dos logaritmos</div>
+          <span>\(\log_b a + \log_b c = \log_b (a \cdot c)\)</span>
+          <span style="font-size:.88rem;color:#6b7280">Converte multiplicação em adição — base histórica das tábuas de logaritmos.</span>
+          <span>\(\log_6 4 + \log_6 9 = \log_6 36\)</span>
+          <span class="result">\(= 2\)</span>
+        </div>
+
+        <div class="steps">
+          <div class="steps-title">Quociente — diferença dos logaritmos</div>
+          <span>\(\log_b a - \log_b c = \log_b \!\left(\dfrac{a}{c}\right)\)</span>
+          <span style="font-size:.88rem;color:#6b7280">Converte divisão em subtração.</span>
+          <span>\(\log_3 54 - \log_3 2 = \log_3 27\)</span>
+          <span class="result">\(= 3\)</span>
+        </div>
+
+        <div class="steps">
+          <div class="steps-title">Potência — expoente desce como fator</div>
+          <span>\(c \cdot \log_b a = \log_b (a^c)\)</span>
+          <span style="font-size:.88rem;color:#6b7280">Permite mover expoentes para fora do logaritmo.</span>
+          <span>\(2 \cdot \log_2 \sqrt{8} = \log_2 (\sqrt{8})^2 = \log_2 8\)</span>
+          <span class="result">\(= 3\)</span>
+        </div>
+
+        <div class="steps">
+          <div class="steps-title">Base potência — divide pelo expoente da base</div>
+          <span>\(\log_{b^c} a = \dfrac{1}{c} \cdot \log_b a\)</span>
+          <span style="font-size:.88rem;color:#6b7280">Simplifica logaritmos com bases compostas.</span>
+          <span>\(\log_4 8 = \log_{2^2} 8 = \dfrac{1}{2} \cdot \log_2 8 = \dfrac{1}{2} \cdot 3\)</span>
+          <span class="result">\(= \dfrac{3}{2}\)</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- .grid -->
+</main>
+
+</body>
+</html>

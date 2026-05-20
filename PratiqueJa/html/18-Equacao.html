@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Equações do 1º Grau</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 1.05rem;
+      line-height: 1.7; color: #1e293b; background: #f8fafc; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #7c2d12 0%, #ea580c 60%, #fb923c 100%);
+      color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 70%); }
+    .hero img { height: 64px; width: auto; margin-bottom: 1.2rem;
+      filter: brightness(0) invert(1); opacity: .9; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -.5px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hero .subtitle { margin-top: .4rem; font-size: 1rem; opacity: .85; }
+
+    /* ── Layout ── */
+    main { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem 4rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 660px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: 14px; padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 14px rgba(124,45,18,.08), 0 1px 3px rgba(0,0,0,.05);
+      border-top: 4px solid #ea580c; }
+    .card.def  { border-top-color: #10b981; }
+    .card.met  { border-top-color: #3b82f6; }
+    .card.full { grid-column: 1 / -1; }
+
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #7c2d12;
+      margin-bottom: .85rem; padding-bottom: .5rem; border-bottom: 1px solid #e2e8f0; }
+    .card.def h2 { color: #047857; }
+    .card.met h2 { color: #1d4ed8; }
+
+    p { margin-bottom: .75rem; } p:last-child { margin-bottom: 0; }
+
+    .rule { background: #fff7ed; border-left: 4px solid #ea580c;
+      border-radius: 0 8px 8px 0; padding: .7rem 1rem; margin: .8rem 0;
+      color: #7c2d12; font-weight: 500; font-size: .97rem; line-height: 1.6; }
+    .card.def .rule { background: #ecfdf5; border-color: #10b981; color: #065f46; }
+    .card.met .rule { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
+
+    .formula-box { display: flex; justify-content: center; margin: .9rem 0;
+      padding: .8rem 1.4rem; background: #fff7ed; border: 2px solid #fed7aa;
+      border-radius: 10px; font-size: 1.1rem; }
+    .card.def .formula-box { background: #ecfdf5; border-color: #6ee7b7; }
+    .card.met .formula-box { background: #eff6ff; border-color: #bfdbfe; }
+
+    .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: .7rem 0; }
+    .ex { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+      padding: 6px 14px; font-size: .95rem; color: #374151; }
+    .steps { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: .9rem 1.2rem; margin: .6rem 0; display: flex; flex-direction: column; gap: .55em; }
+    .steps-title { font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; }
+    .steps .result { padding-top: .4rem; border-top: 1px dashed #cbd5e1;
+      font-weight: 700; color: #ea580c; }
+    .steps .ann { font-size: .83rem; color: #9ca3af; font-style: italic; }
+
+    h4 { font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; margin: 1rem 0 .4rem; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="Logo2.png" alt="Logo PratiqueJa" />
+  <h1>Equações do 1º Grau</h1>
+  <p class="subtitle">Definição, forma geral e resolução passo a passo</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <!-- ── Definição ── -->
+    <div class="card def">
+      <h2>Definição</h2>
+      <div class="rule">
+        Uma <strong>equação</strong> estabelece uma igualdade entre expressões que contêm
+        uma ou mais <strong>incógnitas</strong> — valores desconhecidos a determinar.
+        O <strong>grau</strong> é dado pelo maior expoente da incógnita.
+      </div>
+      <p>Nas equações de <strong>1º grau</strong>, a incógnita aparece com expoente 1.
+      A forma geral é:</p>
+      <div class="formula-box">
+        \(\displaystyle ax + b = 0 \qquad a \neq 0\)
+      </div>
+      <p>onde \(a\) e \(b\) são números reais, \(a \neq 0\), e \(x\) é a incógnita.</p>
+      <h4>Exemplos de equações do 1º grau</h4>
+      <div class="examples">
+        <div class="ex">\(2x - 3 = 7\)</div>
+        <div class="ex">\(6x - 1 = 4\)</div>
+        <div class="ex">\(2 - 5x = 9\)</div>
+        <div class="ex">\(3x - x - 5 = 3\)</div>
+      </div>
+    </div>
+
+    <!-- ── Como resolver ── -->
+    <div class="card met">
+      <h2>Como Resolver</h2>
+      <div class="rule">
+        Isole a incógnita: agrupe os termos com \(x\) de um lado e as constantes do outro.
+        Ao <strong>trocar um termo de lado</strong>, inverta o seu operador.
+      </div>
+      <h4>Regras de transposição</h4>
+      <div class="examples">
+        <div class="ex">\(+\) passa para o outro lado como \(-\)</div>
+        <div class="ex">\(-\) passa para o outro lado como \(+\)</div>
+        <div class="ex">\(\times\) passa para o outro lado como \(\div\)</div>
+        <div class="ex">\(\div\) passa para o outro lado como \(\times\)</div>
+      </div>
+      <h4>Roteiro de resolução</h4>
+      <div class="examples">
+        <div class="ex"><strong>1.</strong> Transpor constantes para o lado direito.</div>
+        <div class="ex"><strong>2.</strong> Transpor termos com \(x\) para o lado esquerdo.</div>
+        <div class="ex"><strong>3.</strong> Somar/subtrair termos semelhantes.</div>
+        <div class="ex"><strong>4.</strong> Dividir ambos os lados pelo coeficiente de \(x\).</div>
+      </div>
+    </div>
+
+    <!-- ── Exemplos resolvidos ── -->
+    <div class="card full">
+      <h2>Exemplos Resolvidos</h2>
+      <div class="grid" style="gap:1rem;margin-top:.5rem">
+
+        <div class="steps">
+          <div class="steps-title">Exemplo 1 — \(4x - 6 = 2\)</div>
+          <span>\(4x - 6 = 2\)</span>
+          <span>\(4x = 2 + 6\) <span class="ann">(−6 passa para o outro lado como +6)</span></span>
+          <span>\(4x = 8\)</span>
+          <span>\(x = \dfrac{8}{4}\) <span class="ann">(4 multiplicando passa dividindo)</span></span>
+          <span class="result">\(x = 2\)</span>
+        </div>
+
+        <div class="steps">
+          <div class="steps-title">Exemplo 2 — \(3x - x - 5 = 3\)</div>
+          <span>\(3x - x - 5 = 3\)</span>
+          <span>\(3x - x = 3 + 5\) <span class="ann">(−5 passa como +5)</span></span>
+          <span>\(2x = 8\) <span class="ann">(3x − x = 2x)</span></span>
+          <span>\(x = \dfrac{8}{2}\) <span class="ann">(2 multiplicando passa dividindo)</span></span>
+          <span class="result">\(x = 4\)</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- .grid -->
+</main>
+
+</body>
+</html>

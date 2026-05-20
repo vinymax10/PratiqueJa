@@ -13,126 +13,130 @@
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+% ──────────────────────────────────────────
+\TW{Definição}
 
+Uma \textbf{dízima periódica} é um número decimal cuja parte decimal se repete infinitamente a partir de um certo ponto. A parte que se repete chama-se \textbf{período} e é indicada pela notação $\overline{\,\cdot\,}$.
 
-Uma dízima periódica é um número decimal que possui uma parte decimal que se repete infinitamente. Essa repetição acontece de forma contínua a partir de um certo ponto.
-
-\TM{Exemplos:}
-
-\(0,3333\ldots\) (a repetição do 3)
-
-\(1,272727\ldots\) (repetição do 27)
-
-\(0,1666\ldots\) (repetição do 6)
-
-\TM{Tipos de dízimas periódicas}
-
-- Dízima periódica simples: só a parte decimal se repete (exemplo: 0,666...).
-
-- Dízima periódica composta: o número possui uma parte decimal não periódica e uma parte decimal periódica (exemplo: 0,1666 \ldots). 
-
-\T{Periódica Simples}
-
-Nessa dízima a parte fracionária contém somente o período. 
+Toda dízima periódica é um \textbf{número racional} — ou seja, pode ser escrita como fração $\dfrac{a}{b}$ com $a, b \in \mathbb{Z}$ e $b \neq 0$. A fração correspondente é chamada de \textbf{fração geratriz}.
 
 \TM{Exemplos:}
 
-$0,77777 \ldots = 0,\overline{7}$
+$0{,}333\ldots = 0{,}\overline{3}$ \quad $1{,}272727\ldots = 1{,}\overline{27}$ \quad $0{,}1666\ldots = 0{,}1\overline{6}$
 
-$2,565656 \ldots  = 2,\overline{56}$
+\TM{Tipos:}
 
-\TM{Fração Geratriz}
+\textbf{Simples:} a parte decimal contém \textit{somente} o período. Ex: $0{,}\overline{6}$, $2{,}\overline{56}$.
 
-A fração geratriz é uma fração equivalente a dízima periódica. Em muitas situações, é difícil utilizar a dízima em cálculos complexos, por esse motivo, substituir a dízima por uma fração equivalente é muito interessante. Para encontrar a fração geratriz de uma dízima $x$ utilizamos a seguinte fórmula:
+\textbf{Composta:} existe uma parte \textit{não periódica} de $n$ dígitos antes do período de $p$ dígitos. Ex: $0{,}5\overline{2}$, $1{,}68\overline{74}$.
 
-\Formula{
-\dfrac{x \cdot 10^{p}- x }{10^{p} - 1} } 
+% ──────────────────────────────────────────
+\T{Método Algébrico}
 
-Nessa fórmula o valor de $p$ representa o número de algarismos da parte periódica.
+Chame a dízima de $x$. Multiplique por $10^p$ para deslocar exatamente um período e subtraia $x$ — a parte periódica se cancela e sobra uma equação com solução inteira.
 
-\TM{Exemplos}
+\TM{Derivação — Simples $0{,}\overline{7}$:}
 
-$0,777\ldots = 0,\overline{7} $
+Seja $x = 0{,}777\ldots$
 
-$p=1$
+$10x = 7{,}777\ldots$
 
-\vspace{8px} 
-$\dfrac{0,777 \ldots \cdot 10^{1} ~-~ 0,777 \ldots }{10^{1} - 1} = \vspace{8px} \\
-\dfrac{7,777 \ldots ~-~ 0,7777 \ldots }{10 - 1} =  \dfrac{7}{9}$ \vspace{16px} 
+$10x - x = 7{,}777\ldots - 0{,}777\ldots$
 
+$9x = 7$
 
-$0,259259\ldots = 0,\overline{259} $
+$x = \dfrac{7}{9}$
 
-$p=3$
+\vspace{4px}
+O denominador tem exatamente $p$ noves pois $10^p \cdot x - x = (10^p - 1)\,x$. Daí vem a fórmula da geratriz simples.
 
-\vspace{8px} 
-$\dfrac{0,259259\ldots\cdot 10^{3} - 0,259259\ldots}{10^{3}-1}= \vspace{8px} \\
-\dfrac{0,259259\ldots\cdot 1000 - 0,259259\ldots}{1000-1}= 
-\vspace{8px} \\
-\dfrac{259,259259\ldots-0,259259\ldots}{999}=\dfrac{259}{999}=\dfrac{7}{27}
-$
+\TM{Derivação — Composta $1{,}5\overline{3}$:}
 
-\vspace{8px} 
+Seja $x = 1{,}5333\ldots$
 
-\T{Periódica Composta}
+$10x = 15{,}333\ldots$ \hfill {\small\textit{($\times 10^n$: desloca parte não periódica)}}
 
-A parte fracionária dessa dízima contém uma parte não periódica.
+$100x = 153{,}333\ldots$ \hfill {\small\textit{($\times 10^{n+p}$: desloca período inteiro)}}
 
-\TM{Exemplos:}
+$100x - 10x = 153{,}33\ldots - 15{,}33\ldots$
 
-$0,52222 \ldots = 0,5\overline{2}$
+$90x = 138$
 
-Nesse exemplo, o 5 é a parte decimal não periódica e o 2 é a parte periódica.
+$x = \dfrac{138}{90} = \dfrac{23}{15}$
 
-$1,68747474 \ldots  = 1,68\overline{74}$
+\vspace{4px}
+O denominador $10^{n+p} - 10^n$ equivale a $p$ noves seguidos de $n$ zeros.
 
-Nesse exemplo, o 68 é a parte decimal não periódica e o 74 é a parte periódica.
+% ──────────────────────────────────────────
+\T{Atalho Mental}
 
-\TM{Fração Geratriz}
+\textbf{Simples:} numerador $=$ período; denominador $=$ $p$ noves.
 
-Para encontrar a fração geratriz de dízimas compostas utilizamos a seguinte fórmula:
+\textbf{Composta:} numerador $=$ (número completo sem vírgula) $-$ (parte não periódica); denominador $=$ $p$ noves seguidos de $n$ zeros.
 
-\Formula{
-\dfrac{x \cdot 10^{(n+p)}- x \cdot 10^{n}}{10^{(n+p)} - 10^{n} } } 
+\TM{Simples — exemplos rápidos:}
 
-Nessa fórmula o valor de $n$ representa o número de dígitos da parte \textbf{não periódica} e $p$ o número de dígitos da parte \textbf{periódica}.
+$0{,}\overline{3} = \dfrac{3}{9} = \dfrac{1}{3}$ \qquad $0{,}\overline{37} = \dfrac{37}{99}$
 
-\TM{Exemplos}
+\vspace{4px}
+$2{,}\overline{56} = 2 + \dfrac{56}{99} = \dfrac{254}{99}$
 
-\vspace{12px} 
-$1,5333 =1,5\overline{3}$
+\TM{Composta — exemplos rápidos:}
 
-$n=1, \quad p=1 $
+$0{,}5\overline{2}: \quad \dfrac{52 - 5}{90} = \dfrac{47}{90}$
 
-\vspace{8px} 
-$\dfrac{1,5333 \ldots \cdot 10^{2} ~-~ 1,5333 \ldots \cdot 10^{1}}{10^{2} - 10^{1}} = $
-\vspace{8px} 
+\vspace{4px}
+$0{,}1\overline{6}: \quad \dfrac{16 - 1}{90} = \dfrac{15}{90} = \dfrac{1}{6}$
 
-$\dfrac{1,5333 \ldots \cdot 100 ~-~ 1,5333 \ldots \cdot 10}{100 - 10} =$
-\vspace{8px} 
+% ──────────────────────────────────────────
+\T{Fração Geratriz — Simples}
 
-$\dfrac{153,33\ldots ~-~ 15,333 \ldots }{90} =  \dfrac{138}{90} =  $
-\vspace{8px} 
+Para uma dízima $x$ com período de $p$ algarismos. O denominador $10^p - 1$ é sempre $p$ noves:
 
-$\dfrac{153-15}{90} = \dfrac{138}{90} = \dfrac{23}{15}$ 
+\Formula{\dfrac{x \cdot 10^{p} - x}{10^{p} - 1}}
 
-\vspace{16px} 
-$ 2,74636363\ldots = 2,74\overline{63} $
+\TM{Exemplo 1 — $0{,}\overline{7}$ \;($p=1$):}
 
-$n=2, \quad p=2 $
+$\dfrac{0{,}777\ldots \cdot 10 - 0{,}777\ldots}{10 - 1} = \dfrac{7{,}77\ldots - 0{,}77\ldots}{9} = \textbf{\dfrac{7}{9}}$
 
-\vspace{8px} 
-$\dfrac{2,74636363 \ldots \cdot 10^{4} ~-~ 2,74636363 \ldots \cdot 10^{2}}{10^{4} - 10^{2}} = $
-\vspace{8px} 
+\TM{Exemplo 2 — $0{,}\overline{259}$ \;($p=3$):}
 
-$\dfrac{2,74636363 \ldots \cdot 10000 ~-~ 2,74636363 \ldots \cdot 100}{10000 - 100} = $
-\vspace{8px} 
+$\dfrac{259{,}259\ldots - 0{,}259\ldots}{999} = \dfrac{259}{999}$
 
-$ \dfrac{27463,6363\ldots ~-~ 274,636363 \ldots }{9900} =$
-\vspace{8px} 
+$\text{MDC}(259, 999) = 37 \;\Rightarrow\; \textbf{\dfrac{7}{27}}$
 
-$\dfrac{27463 - 274}{9900} = \dfrac{27189}{9900} = \dfrac{3021}{100}$
+\TM{Exemplo 3 — $2{,}\overline{56}$ \;($p=2$, parte inteira $\neq 0$):}
+
+$\dfrac{256{,}56\ldots - 2{,}56\ldots}{99} = \dfrac{254}{99}$
+
+$\text{MDC}(254, 99) = 1 \;\Rightarrow\; \textbf{\dfrac{254}{99}}$ \;(irredutível)
+
+% ──────────────────────────────────────────
+\T{Fração Geratriz — Composta}
+
+$n$ = dígitos \textbf{não periódicos} \quad $p$ = dígitos \textbf{periódicos}.
+
+O denominador $10^{n+p} - 10^n$ equivale a $p$ noves seguidos de $n$ zeros:
+
+\Formula{\dfrac{x \cdot 10^{(n+p)} - x \cdot 10^{n}}{10^{(n+p)} - 10^{n}}}
+
+\TM{Exemplo 1 — $1{,}5\overline{3}$ \;($n=1, p=1$, denom. $= 90$):}
+
+$\dfrac{153{,}33\ldots - 15{,}33\ldots}{90} = \dfrac{153 - 15}{90} = \dfrac{138}{90}$
+
+$\text{MDC}(138, 90) = 6 \;\Rightarrow\; \textbf{\dfrac{23}{15}}$
+
+\TM{Exemplo 2 — $2{,}74\overline{63}$ \;($n=2, p=2$, denom. $= 9900$):}
+
+$\dfrac{27463{,}\overline{63} - 274{,}\overline{63}}{9900} = \dfrac{27463 - 274}{9900} = \dfrac{27189}{9900}$
+
+$\text{MDC}(27189, 9900) = 9 \;\Rightarrow\; \textbf{\dfrac{3021}{1100}}$
+
+\TM{Exemplo 3 — $0{,}5\overline{2}$ \;($n=1, p=1$, denom. $= 90$):}
+
+Pelo atalho: $\dfrac{52 - 5}{90} = \dfrac{47}{90}$
+
+$\text{MDC}(47, 90) = 1 \;\Rightarrow\; \textbf{\dfrac{47}{90}}$ \;(irredutível)
 
 \end{multicols}
 

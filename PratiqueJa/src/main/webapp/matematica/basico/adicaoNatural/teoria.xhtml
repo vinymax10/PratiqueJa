@@ -1,0 +1,500 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é adição e seus elementos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>adição</strong> é a operação que reúne duas ou mais quantidades
+                    em uma única quantidade total, chamada de <strong>soma</strong> ou
+                    <strong>resultado</strong>. Os números somados são chamados de <strong>parcelas</strong>.
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#eff6ff;border:2px solid #bfdbfe;border-radius:10px;">
+                    \[\text{parcela} + \text{parcela} = \text{soma}\]
+                </div>
+                <h4>Propriedades fundamentais</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Comutativa</span>
+                        <span>\(a + b = b + a\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">A ordem das parcelas não altera a soma.</span>
+                        <span class="hl">\(3 + 5 = 5 + 3 = 8\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Associativa</span>
+                        <span>\((a + b) + c = a + (b + c)\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">O agrupamento das parcelas não altera a soma.</span>
+                        <span class="hl">\((2+3)+4 = 2+(3+4) = 9\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Elemento neutro</span>
+                        <span>\(a + 0 = a\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">Somar zero não altera o valor.</span>
+                        <span class="hl">\(7 + 0 = 7\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Fechamento</span>
+                        <span>Soma de naturais é sempre natural.</span>
+                        <span class="hl">\(4 + 6 = 10 \in \mathbb{N}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALGORITMO: MAIS DE UM DÍGITO -->
+            <div class="tr-section" id="sec-algoritmo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Met</div>
+                    <div>
+                        <div class="tr-section-title">Somando com Mais de Um Dígito</div>
+                        <div class="tr-section-sub">Algoritmo coluna a coluna da direita para a esquerda</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Alinhe os números pela direita — unidades sob unidades, dezenas sob dezenas.
+                    Some coluna por coluna, sempre da direita para a esquerda.
+                </div>
+                <h4>Exemplo — 143 + 26</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 1</strong> — some as unidades</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;1&#160;4&#160;<strong>3</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;2&#160;<strong>6</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;&#160;&#160;<strong>9</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">\(3 + 6 = 9\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 2</strong> — some as dezenas</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;1&#160;<strong>4</strong>&#160;3</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;<strong>2</strong>&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;<strong>6</strong>&#160;9</span>
+                        <span style="font-size:.83rem;color:#6b7280;">\(4 + 2 = 6\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 3</strong> — some as centenas</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<strong>1</strong>&#160;4&#160;3</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;2&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;<strong>1</strong>&#160;6&#160;9</span>
+                        <span class="hl">\(143 + 26 = 169\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAI UM -->
+            <div class="tr-section" id="sec-vaiUm">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">+1</div>
+                    <div>
+                        <div class="tr-section-title">Vai Um (Reserva)</div>
+                        <div class="tr-section-sub">Quando a soma da coluna ultrapassa 9</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando a soma de uma coluna for <strong>maior ou igual a 10</strong>,
+                    escreva apenas o dígito das unidades e carregue o dígito das dezenas
+                    para a coluna seguinte à esquerda. Esse dígito carregado é chamado de
+                    <strong>reserva</strong> ou <strong>vai um</strong>.
+                </div>
+                <h4>Exemplo — 476 + 48</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 1</strong> — unidades: \(6 + 8 = 14\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;4&#160;7&#160;<strong>6</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;4&#160;<strong>8</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;&#160;&#160;<strong>4</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">escreve 4, reserva 1</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 2</strong> — dezenas: \(7 + 4 + 1 = 12\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;4&#160;<strong>7</strong>&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;<strong>4</strong>&#160;8</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;<strong>2</strong>&#160;4</span>
+                        <span style="font-size:.83rem;color:#6b7280;">escreve 2, reserva 1</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 3</strong> — centenas: \(4 + 0 + 1 = 5\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;1&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<strong>4</strong>&#160;7&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;&#160;&#160;4&#160;8</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;<strong>5</strong>&#160;2&#160;4</span>
+                        <span class="hl">\(476 + 48 = 524\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAI UM EM MÚLTIPLAS COLUNAS -->
+            <div class="tr-section" id="sec-vaiUmMultiplo">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">+1+1</div>
+                    <div>
+                        <div class="tr-section-title">Vai Um em Múltiplas Colunas</div>
+                        <div class="tr-section-sub">Reserva acontece em mais de uma coluna</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O processo do <strong>vai um</strong> se repete em cada coluna independentemente.
+                    Sempre some a reserva antes de passar para a coluna seguinte.
+                </div>
+                <h4>Exemplo — 987 + 456</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 1</strong> — unidades: \(7 + 6 = 13\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;9&#160;8&#160;<strong>7</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;4&#160;5&#160;<strong>6</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;&#160;&#160;<strong>3</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">escreve 3, reserva 1</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 2</strong> — dezenas: \(8 + 5 + 1 = 14\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;9&#160;<strong>8</strong>&#160;7</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;4&#160;<strong>5</strong>&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;<strong>4</strong>&#160;3</span>
+                        <span style="font-size:.83rem;color:#6b7280;">escreve 4, reserva 1</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 3</strong> — centenas: \(9 + 4 + 1 = 14\)</span>
+                        <span style="font-family:monospace;font-size:1rem;"><span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;1&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<strong>9</strong>&#160;8&#160;7</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;<strong>4</strong>&#160;5&#160;6</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;"><strong>1</strong>&#160;4&#160;4&#160;3</span>
+                        <span class="hl">\(987 + 456 = 1443\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADIÇÃO DE TRÊS PARCELAS -->
+            <div class="tr-section" id="sec-tresParcelas">
+                <div class="tr-section-header">
+                    <div class="tr-badge">3+</div>
+                    <div>
+                        <div class="tr-section-title">Adição de Três Parcelas</div>
+                        <div class="tr-section-sub">O algoritmo funciona igual para mais de dois números</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Alinhe todos os números pela direita e some coluna por coluna normalmente.
+                    Se a soma de uma coluna ultrapassar 9, aplique o <strong>vai um</strong> como de costume.
+                </div>
+                <h4>Exemplo — 124 + 31 + 205</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 1</strong> — unidades: \(4 + 1 + 5 = 10\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;1&#160;2&#160;<strong>4</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;&#160;&#160;3&#160;<strong>1</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;2&#160;0&#160;<strong>5</strong></span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;&#160;&#160;<strong>0</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">escreve 0, reserva 1</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 2</strong> — dezenas: \(2 + 3 + 0 + 1 = 6\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<span style="color:#f59e0b;font-size:.8rem;">1</span>&#160;&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;1&#160;<strong>2</strong>&#160;4</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;&#160;&#160;<strong>3</strong>&#160;1</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;2&#160;<strong>0</strong>&#160;5</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;&#160;&#160;<strong>6</strong>&#160;0</span>
+                        <span style="font-size:.83rem;color:#6b7280;">\(2+3+0+1=6\), sem reserva</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 3</strong> — centenas: \(1 + 0 + 2 = 3\)</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;<strong>1</strong>&#160;2&#160;4</span>
+                        <span style="font-family:monospace;font-size:1rem;">&#160;&#160;&#160;&#160;3&#160;1</span>
+                        <span style="font-family:monospace;font-size:1rem;">+&#160;<strong>2</strong>&#160;0&#160;5</span>
+                        <span style="font-family:monospace;font-size:1rem;border-top:2px solid #374151;padding-top:4px;align-self:flex-start;">&#160;&#160;<strong>3</strong>&#160;6&#160;0</span>
+                        <span class="hl">\(124 + 31 + 205 = 360\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERIFICAÇÃO -->
+            <div class="tr-section" id="sec-verificacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">&#10003;</div>
+                    <div>
+                        <div class="tr-section-title">Verificação do Resultado</div>
+                        <div class="tr-section-sub">Usar a subtração para conferir a soma</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A adição e a subtração são operações <strong>inversas</strong>: se
+                    \(a + b = c\), então \(c - b = a\) e \(c - a = b\).
+                    Subtraia uma das parcelas da soma — o resultado deve ser a outra parcela.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \(143 + 26\)</span>
+                        <span class="hl">\(143 + 26 = 169\)</span>
+                        <span><strong>Verifique:</strong> \(169 - 26 = 143\) &#10003;</span>
+                        <span style="font-size:.83rem;color:#6b7280;">ou: \(169 - 143 = 26\) &#10003;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \(476 + 48\)</span>
+                        <span class="hl">\(476 + 48 = 524\)</span>
+                        <span><strong>Verifique:</strong> \(524 - 48 = 476\) &#10003;</span>
+                        <span style="font-size:.83rem;color:#6b7280;">ou: \(524 - 476 = 48\) &#10003;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-problema">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicar a adição em situações do cotidiano</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar as quantidades; (2) perceber que
+                    estão sendo <em>reunidas</em> — sinal de adição; (3) calcular; (4) responder
+                    com unidade.
+                </div>
+                <h4>Problema 1</h4>
+                <p>Uma turma tem 143 livros na biblioteca. A escola doou mais 26 livros.
+                Quantos livros a turma tem agora?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Livros antes: 143 &#160;+&#160; Doados: 26</span>
+                        <span>\(143 + 26 = 169\)</span>
+                        <span class="hl">A turma tem <strong>169 livros</strong>.</span>
+                    </div>
+                </div>
+                <h4>Problema 2</h4>
+                <p>Em uma festa havia 476 convidados. Chegaram mais 48 pessoas.
+                Quantas pessoas estavam na festa ao todo?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Convidados: 476 &#160;+&#160; Chegaram: 48</span>
+                        <span>\(476 + 48 = 524\)</span>
+                        <span class="hl">Havia <strong>524 pessoas</strong> na festa.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABUADA -->
+            <div class="tr-section" id="sec-tabuada">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Tabuada da Adição</div>
+                        <div class="tr-section-sub">Somas de 1 a 10 — formato equação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Cada coluna mostra a tabuada de um número. Leia linha por linha:
+                    <strong>parcela + parcela = soma</strong>.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+
+                    <!-- col 1 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 1</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            1 + 1 = <strong>2</strong><br/>
+                            1 + 2 = <strong>3</strong><br/>
+                            1 + 3 = <strong>4</strong><br/>
+                            1 + 4 = <strong>5</strong><br/>
+                            1 + 5 = <strong>6</strong><br/>
+                            1 + 6 = <strong>7</strong><br/>
+                            1 + 7 = <strong>8</strong><br/>
+                            1 + 8 = <strong>9</strong><br/>
+                            1 + 9 = <strong>10</strong><br/>
+                            1 + 10 = <strong>11</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 2 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 2</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            2 + 1 = <strong>3</strong><br/>
+                            2 + 2 = <strong>4</strong><br/>
+                            2 + 3 = <strong>5</strong><br/>
+                            2 + 4 = <strong>6</strong><br/>
+                            2 + 5 = <strong>7</strong><br/>
+                            2 + 6 = <strong>8</strong><br/>
+                            2 + 7 = <strong>9</strong><br/>
+                            2 + 8 = <strong>10</strong><br/>
+                            2 + 9 = <strong>11</strong><br/>
+                            2 + 10 = <strong>12</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 3 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 3</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            3 + 1 = <strong>4</strong><br/>
+                            3 + 2 = <strong>5</strong><br/>
+                            3 + 3 = <strong>6</strong><br/>
+                            3 + 4 = <strong>7</strong><br/>
+                            3 + 5 = <strong>8</strong><br/>
+                            3 + 6 = <strong>9</strong><br/>
+                            3 + 7 = <strong>10</strong><br/>
+                            3 + 8 = <strong>11</strong><br/>
+                            3 + 9 = <strong>12</strong><br/>
+                            3 + 10 = <strong>13</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 4 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 4</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            4 + 1 = <strong>5</strong><br/>
+                            4 + 2 = <strong>6</strong><br/>
+                            4 + 3 = <strong>7</strong><br/>
+                            4 + 4 = <strong>8</strong><br/>
+                            4 + 5 = <strong>9</strong><br/>
+                            4 + 6 = <strong>10</strong><br/>
+                            4 + 7 = <strong>11</strong><br/>
+                            4 + 8 = <strong>12</strong><br/>
+                            4 + 9 = <strong>13</strong><br/>
+                            4 + 10 = <strong>14</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 5 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 5</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            5 + 1 = <strong>6</strong><br/>
+                            5 + 2 = <strong>7</strong><br/>
+                            5 + 3 = <strong>8</strong><br/>
+                            5 + 4 = <strong>9</strong><br/>
+                            5 + 5 = <strong>10</strong><br/>
+                            5 + 6 = <strong>11</strong><br/>
+                            5 + 7 = <strong>12</strong><br/>
+                            5 + 8 = <strong>13</strong><br/>
+                            5 + 9 = <strong>14</strong><br/>
+                            5 + 10 = <strong>15</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 6 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 6</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            6 + 1 = <strong>7</strong><br/>
+                            6 + 2 = <strong>8</strong><br/>
+                            6 + 3 = <strong>9</strong><br/>
+                            6 + 4 = <strong>10</strong><br/>
+                            6 + 5 = <strong>11</strong><br/>
+                            6 + 6 = <strong>12</strong><br/>
+                            6 + 7 = <strong>13</strong><br/>
+                            6 + 8 = <strong>14</strong><br/>
+                            6 + 9 = <strong>15</strong><br/>
+                            6 + 10 = <strong>16</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 7 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 7</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            7 + 1 = <strong>8</strong><br/>
+                            7 + 2 = <strong>9</strong><br/>
+                            7 + 3 = <strong>10</strong><br/>
+                            7 + 4 = <strong>11</strong><br/>
+                            7 + 5 = <strong>12</strong><br/>
+                            7 + 6 = <strong>13</strong><br/>
+                            7 + 7 = <strong>14</strong><br/>
+                            7 + 8 = <strong>15</strong><br/>
+                            7 + 9 = <strong>16</strong><br/>
+                            7 + 10 = <strong>17</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 8 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 8</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            8 + 1 = <strong>9</strong><br/>
+                            8 + 2 = <strong>10</strong><br/>
+                            8 + 3 = <strong>11</strong><br/>
+                            8 + 4 = <strong>12</strong><br/>
+                            8 + 5 = <strong>13</strong><br/>
+                            8 + 6 = <strong>14</strong><br/>
+                            8 + 7 = <strong>15</strong><br/>
+                            8 + 8 = <strong>16</strong><br/>
+                            8 + 9 = <strong>17</strong><br/>
+                            8 + 10 = <strong>18</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 9 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 9</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            9 + 1 = <strong>10</strong><br/>
+                            9 + 2 = <strong>11</strong><br/>
+                            9 + 3 = <strong>12</strong><br/>
+                            9 + 4 = <strong>13</strong><br/>
+                            9 + 5 = <strong>14</strong><br/>
+                            9 + 6 = <strong>15</strong><br/>
+                            9 + 7 = <strong>16</strong><br/>
+                            9 + 8 = <strong>17</strong><br/>
+                            9 + 9 = <strong>18</strong><br/>
+                            9 + 10 = <strong>19</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 10 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:100px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 10</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            10 + 1 = <strong>11</strong><br/>
+                            10 + 2 = <strong>12</strong><br/>
+                            10 + 3 = <strong>13</strong><br/>
+                            10 + 4 = <strong>14</strong><br/>
+                            10 + 5 = <strong>15</strong><br/>
+                            10 + 6 = <strong>16</strong><br/>
+                            10 + 7 = <strong>17</strong><br/>
+                            10 + 8 = <strong>18</strong><br/>
+                            10 + 9 = <strong>19</strong><br/>
+                            10 + 10 = <strong>20</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

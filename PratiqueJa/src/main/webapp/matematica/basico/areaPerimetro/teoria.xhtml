@@ -1,0 +1,282 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Área e Perímetro</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>área</strong> de uma figura plana é a medida da superfície que ela ocupa.
+                    Imagina-se a figura coberta por quadradinhos de lado 1 — a quantidade de quadradinhos é a área.
+                    A unidade é sempre <strong>quadrática</strong>: cm², m², km²…
+                </div>
+                <div class="tr-rule" style="margin-top:8px;">
+                    O <strong>perímetro</strong> de um polígono é a soma de todos os seus lados —
+                    a medida total do contorno da figura.
+                    A unidade é <strong>linear</strong>: cm, m, km…
+                </div>
+                <div class="tr-examples" style="margin-top:12px;">
+                    <div class="tr-ex">\(\displaystyle P = l_1 + l_2 + \cdots + l_n\)</div>
+                </div>
+            </div>
+
+            <!-- QUADRADO -->
+            <div class="tr-section" id="sec-quadrado">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">&#9632;</div>
+                    <div>
+                        <div class="tr-section-title">Quadrado</div>
+                        <div class="tr-section-sub">Todos os lados iguais, ângulos retos</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="115" height="115" viewBox="0 0 115 115" style="display:inline-block;">
+                        <rect x="10" y="10" width="90" height="90" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+                        <polyline points="10,28 28,28 28,10" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+                        <polyline points="82,10 82,28 100,28" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+                        <text x="55" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="#4c1d95">l</text>
+                        <text x="106" y="58" text-anchor="middle" font-size="13" font-weight="bold" fill="#4c1d95">l</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = l^2 \qquad P = 4\,l\)</div>
+                <h4>Exemplo — \(l = 5\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = 5^2 = 25\)</span>
+                        <span>\(P = 4 \cdot 5 = 20\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RETÂNGULO -->
+            <div class="tr-section" id="sec-retangulo">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">&#9645;</div>
+                    <div>
+                        <div class="tr-section-title">Retângulo</div>
+                        <div class="tr-section-sub">Lados opostos iguais, ângulos retos</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="140" height="110" viewBox="0 0 140 110" style="display:inline-block;">
+                        <rect x="10" y="10" width="120" height="80" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
+                        <polyline points="10,26 24,26 24,10" fill="none" stroke="#db2777" stroke-width="1.5"/>
+                        <text x="70" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">b</text>
+                        <text x="137" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">h</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = b \cdot h \qquad P = 2(b + h)\)</div>
+                <h4>Exemplo — \(b=4,\; h=3\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = 4 \cdot 3 = 12\)</span>
+                        <span>\(P = 2 \cdot (4+3) = 14\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARALELOGRAMO -->
+            <div class="tr-section" id="sec-paralelogramo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">&#9649;</div>
+                    <div>
+                        <div class="tr-section-title">Paralelogramo</div>
+                        <div class="tr-section-sub">Lados opostos paralelos e iguais</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="150" height="100" viewBox="0 0 150 100" style="display:inline-block;">
+                        <polygon points="25,85 10,15 125,15 140,85" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+                        <line x1="25" y1="15" x2="25" y2="85" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3"/>
+                        <polyline points="25,70 39,70 39,85" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+                        <text x="75" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">b</text>
+                        <text x="10" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">h</text>
+                        <text x="143" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">a</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = b \cdot h \qquad P = 2(a + b)\)</div>
+                <h4>Exemplo — \(b=5,\; h=2,\; a=4\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = 5 \cdot 2 = 10\)</span>
+                        <span>\(P = 2 \cdot (4+5) = 18\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIÂNGULO -->
+            <div class="tr-section" id="sec-triangulo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">&#9651;</div>
+                    <div>
+                        <div class="tr-section-title">Triângulo</div>
+                        <div class="tr-section-sub">Base e altura perpendicular</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="150" height="110" viewBox="0 0 150 110" style="display:inline-block;">
+                        <polygon points="10,95 140,95 50,10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2.5"/>
+                        <line x1="50" y1="10" x2="50" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="4,3"/>
+                        <polyline points="50,80 64,80 64,95" fill="none" stroke="#9333ea" stroke-width="1.5"/>
+                        <text x="75" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#6b21a8">b</text>
+                        <text x="58" y="58" font-size="13" font-weight="bold" fill="#6b21a8">h</text>
+                        <text x="20" y="58" font-size="13" font-weight="bold" fill="#6b21a8">a</text>
+                        <text x="108" y="65" font-size="13" font-weight="bold" fill="#6b21a8">c</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = \dfrac{b \cdot h}{2} \qquad P = a + b + c\)</div>
+                <h4>Exemplo — \(b=6,\; h=3,\; a=3,\; c=5\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \dfrac{6 \cdot 3}{2} = 9\)</span>
+                        <span>\(P = 3+6+5 = 14\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIÂNGULO EQUILÁTERO -->
+            <div class="tr-section" id="sec-triangulo-equi">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Equi</div>
+                    <div>
+                        <div class="tr-section-title">Triângulo Equilátero</div>
+                        <div class="tr-section-sub">Três lados iguais, ângulos de 60°</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="130" height="110" viewBox="0 0 130 110" style="display:inline-block;">
+                        <polygon points="65,8 10,100 120,100" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+                        <text x="65" y="110" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+                        <text x="28" y="62" font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+                        <text x="100" y="62" font-size="13" font-weight="bold" fill="#1d4ed8">l</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = \dfrac{l^2\sqrt{3}}{4} \qquad P = 3\,l\)</div>
+                <h4>Exemplo — \(l = 4\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \dfrac{16\sqrt{3}}{4} = 4\sqrt{3} \approx 6{,}93\)</span>
+                        <span>\(P = 3 \cdot 4 = 12\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRAPÉZIO -->
+            <div class="tr-section" id="sec-trapezio">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Trap</div>
+                    <div>
+                        <div class="tr-section-title">Trapézio</div>
+                        <div class="tr-section-sub">Um par de lados paralelos (bases)</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="150" height="110" viewBox="0 0 150 110" style="display:inline-block;">
+                        <polygon points="10,90 30,15 110,15 140,90" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
+                        <line x1="30" y1="15" x2="30" y2="90" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="4,3"/>
+                        <polyline points="30,75 44,75 44,90" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+                        <text x="75" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#9d174d">B</text>
+                        <text x="72" y="12" text-anchor="middle" font-size="12" font-weight="bold" fill="#9d174d">b</text>
+                        <text x="20" y="60" font-size="12" font-weight="bold" fill="#9d174d">h</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = \dfrac{(B+b)\cdot h}{2} \qquad P = a+b+c+d\)</div>
+                <h4>Exemplo — \(B=7,\; b=3,\; h=2,\; a=c=d=4\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \dfrac{(7+3)\cdot 2}{2} = 10\)</span>
+                        <span>\(P = 7+3+4+4 = 18\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOSANGO -->
+            <div class="tr-section" id="sec-losango">
+                <div class="tr-section-header">
+                    <div class="tr-badge">&#9672;</div>
+                    <div>
+                        <div class="tr-section-title">Losango</div>
+                        <div class="tr-section-sub">Quatro lados iguais, diagonais perpendiculares</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="160" height="110" viewBox="0 0 160 110" style="display:inline-block;">
+                        <polygon points="80,10 150,55 80,100 10,55" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+                        <line x1="10" y1="55" x2="150" y2="55" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+                        <line x1="80" y1="10" x2="80" y2="100" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+                        <polyline points="80,67 92,67 92,55" fill="none" stroke="#ea580c" stroke-width="1.5"/>
+                        <text x="103" y="51" font-size="12" font-weight="bold" fill="#9a3412">D</text>
+                        <text x="84" y="34" font-size="12" font-weight="bold" fill="#9a3412">d</text>
+                        <text x="122" y="27" font-size="12" font-weight="bold" fill="#9a3412">l</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = \dfrac{D \cdot d}{2} \qquad P = 4\,l \qquad l = \sqrt{\left(\dfrac{D}{2}\right)^2\!+\!\left(\dfrac{d}{2}\right)^2}\)</div>
+                <h4>Exemplo — \(D=8,\; d=6\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(l = \sqrt{4^2+3^2} = \sqrt{25} = 5\)</span>
+                        <span>\(A = \dfrac{8 \cdot 6}{2} = 24\)</span>
+                        <span>\(P = 4 \cdot 5 = 20\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÍRCULO -->
+            <div class="tr-section" id="sec-circulo">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#9711;</div>
+                    <div>
+                        <div class="tr-section-title">Círculo</div>
+                        <div class="tr-section-sub">Área e comprimento da circunferência</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <svg width="110" height="110" viewBox="0 0 110 110" style="display:inline-block;">
+                        <circle cx="55" cy="55" r="45" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+                        <line x1="55" y1="55" x2="100" y2="55" stroke="#ca8a04" stroke-width="2"/>
+                        <circle cx="55" cy="55" r="3" fill="#ca8a04"/>
+                        <text x="74" y="50" font-size="13" font-weight="bold" fill="#92400e">r</text>
+                    </svg>
+                </div>
+                <div class="tr-rule">\(\displaystyle A = \pi r^2 \qquad C = 2\pi r\)</div>
+                <h4>Exemplo — \(r = 3\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \pi \cdot 9 = 9\pi \approx 28{,}27\)</span>
+                        <span>\(C = 6\pi \approx 18{,}85\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

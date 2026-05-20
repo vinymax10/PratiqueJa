@@ -1,0 +1,410 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Operação inversa da potenciação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Radiciação é a <strong>operação inversa à potenciação</strong>: determinar o número
+                    que, elevado ao índice \(n\), resulta no radicando \(a\).
+                    \(a\) é o <strong>radicando</strong> e \(n\) é o <strong>índice</strong>.
+                </div>
+                <div style="display:flex;justify-content:center;margin:14px 0;padding:12px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[\sqrt[n]{a} = b \;\Leftrightarrow\; a = b^n\]
+                </div>
+                <p>Se o índice não for informado, usa-se \(n = 2\) (raiz quadrada).
+                Quando \(n\) é par, exige-se \(a \geq 0\).</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">Índice 2 = raiz <strong>quadrada</strong></div>
+                    <div class="tr-ex">Índice 3 = raiz <strong>cúbica</strong></div>
+                    <div class="tr-ex">\(\sqrt{16} = \sqrt{4^2} = 4\)</div>
+                    <div class="tr-ex">\(\sqrt[3]{27} = \sqrt[3]{3^3} = 3\)</div>
+                </div>
+                <p style="margin-top:12px">Raízes de números que <strong>não são quadrados perfeitos</strong> são
+                <strong>números irracionais</strong> — não podem ser escritos como fração e sua
+                representação decimal é infinita e não periódica.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\sqrt{2} \approx 1{,}4142\ldots\) &#160;<em style="color:#9ca3af;font-size:.85rem">(irracional)</em></div>
+                    <div class="tr-ex">\(\sqrt{3} \approx 1{,}7320\ldots\) &#160;<em style="color:#9ca3af;font-size:.85rem">(irracional)</em></div>
+                    <div class="tr-ex">\(\sqrt{4} = 2\) &#160;<em style="color:#9ca3af;font-size:.85rem">(racional)</em></div>
+                </div>
+                <h4>Raiz como potência fracionária</h4>
+                <div style="display:flex;justify-content:center;margin:10px 0;padding:10px 18px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;">
+                    \[\sqrt[n]{a} = a^{\,\frac{1}{n}}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{16} = 16^{\frac{1}{2}} = (2^4)^{\frac{1}{2}} = 2^2\)</span>
+                        <span class="hl">\(= 4\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt[3]{8} = 8^{\frac{1}{3}} = (2^3)^{\frac{1}{3}} = 2^1\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESOLVENDO NÚMEROS GRANDES -->
+            <div class="tr-section" id="sec-fat">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Fat</div>
+                    <div>
+                        <div class="tr-section-title">Resolvendo Números Grandes</div>
+                        <div class="tr-section-sub">Decomposição em fatores primos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Decomponha o radicando em <strong>fatores primos</strong>, agrupe em potências
+                    com expoente igual ao índice da raiz e remova cada grupo com a raiz.
+                </div>
+                <h4>Exemplo — \(\sqrt{576}\)</h4>
+                <div class="fact-wrap">
+                    <table class="fact-table">
+                        <tr><td class="sep">576</td><td>2</td></tr>
+                        <tr><td class="sep">288</td><td>2</td></tr>
+                        <tr><td class="sep">144</td><td>2</td></tr>
+                        <tr><td class="sep">72</td><td>2</td></tr>
+                        <tr><td class="sep">36</td><td>2</td></tr>
+                        <tr><td class="sep">18</td><td>2</td></tr>
+                        <tr><td class="sep">9</td><td>3</td></tr>
+                        <tr><td class="sep">3</td><td>3</td></tr>
+                        <tr class="hline"><td class="sep">1</td><td class="hlc">\(2^2\!\cdot\!2^2\!\cdot\!2^2\!\cdot\!3^2\)</td></tr>
+                    </table>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{576} = \sqrt{2^2 \cdot 2^2 \cdot 2^2 \cdot 3^2}\)</span>
+                        <span>\(= 2 \cdot 2 \cdot 2 \cdot 3\)</span>
+                        <span class="hl">\(= 24\)</span>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\sqrt{900} = \sqrt{(2\cdot3\cdot5)^2} = 30\)</div>
+                    <div class="tr-ex">\(\sqrt[3]{216} = \sqrt[3]{6^3} = 6\)</div>
+                </div>
+            </div>
+
+            <!-- SIMPLIFICAÇÃO DE RADICAIS -->
+            <div class="tr-section" id="sec-simplif">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Sim</div>
+                    <div>
+                        <div class="tr-section-title">Simplificação de Radicais</div>
+                        <div class="tr-section-sub">Extraindo fatores perfeitos de dentro da raiz</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Identifique o <strong>maior fator quadrado perfeito</strong> (ou cúbico perfeito)
+                    contido no radicando, separe-o usando a propriedade do produto e retire-o da raiz.
+                    Resultado: parte fora da raiz · parte irredutível dentro da raiz.
+                </div>
+                <h4>Método — raiz quadrada</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{48} = \sqrt{16 \cdot 3} = \sqrt{16} \cdot \sqrt{3}\)</span>
+                        <span class="hl">\(= 4\sqrt{3}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{75} = \sqrt{25 \cdot 3} = \sqrt{25} \cdot \sqrt{3}\)</span>
+                        <span class="hl">\(= 5\sqrt{3}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{72} = \sqrt{36 \cdot 2} = \sqrt{36} \cdot \sqrt{2}\)</span>
+                        <span class="hl">\(= 6\sqrt{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{200} = \sqrt{100 \cdot 2} = \sqrt{100} \cdot \sqrt{2}\)</span>
+                        <span class="hl">\(= 10\sqrt{2}\)</span>
+                    </div>
+                </div>
+                <h4>Método — raiz cúbica</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt[3]{54} = \sqrt[3]{27 \cdot 2} = \sqrt[3]{27} \cdot \sqrt[3]{2}\)</span>
+                        <span class="hl">\(= 3\sqrt[3]{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt[3]{250} = \sqrt[3]{125 \cdot 2} = \sqrt[3]{125} \cdot \sqrt[3]{2}\)</span>
+                        <span class="hl">\(= 5\sqrt[3]{2}\)</span>
+                    </div>
+                </div>
+                <h4>Com expressões algébricas</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\sqrt{4x^2} = 2|x|\)</div>
+                    <div class="tr-ex">\(\sqrt{a^2 b} = |a|\sqrt{b}\)</div>
+                    <div class="tr-ex">\(\sqrt{9x^4} = 3x^2\)</div>
+                </div>
+            </div>
+
+            <!-- ADIÇÃO E SUBTRAÇÃO -->
+            <div class="tr-section" id="sec-operacoes">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#177;</div>
+                    <div>
+                        <div class="tr-section-title">Adição e Subtração de Radicais</div>
+                        <div class="tr-section-sub">Radicais semelhantes — mesmo índice e mesmo radicando</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Só é possível somar ou subtrair radicais que tenham <strong>mesmo índice</strong>
+                    e <strong>mesmo radicando</strong> (radicais semelhantes). Quando os radicandos
+                    diferem, <strong>simplifique primeiro</strong> e verifique se tornam semelhantes.
+                </div>
+                <h4>Radicais já semelhantes</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(3\sqrt{2} + 5\sqrt{2} = 8\sqrt{2}\)</div>
+                    <div class="tr-ex">\(7\sqrt{3} - 2\sqrt{3} = 5\sqrt{3}\)</div>
+                    <div class="tr-ex">\(4\sqrt[3]{5} + \sqrt[3]{5} = 5\sqrt[3]{5}\)</div>
+                </div>
+                <h4>Simplificar para obter radicais semelhantes</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{12} + \sqrt{27}\)</span>
+                        <span>\(= \sqrt{4\cdot3} + \sqrt{9\cdot3} = 2\sqrt{3} + 3\sqrt{3}\)</span>
+                        <span class="hl">\(= 5\sqrt{3}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(2\sqrt{50} - \sqrt{8}\)</span>
+                        <span>\(= 2\sqrt{25\cdot2} - \sqrt{4\cdot2} = 10\sqrt{2} - 2\sqrt{2}\)</span>
+                        <span class="hl">\(= 8\sqrt{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{45} + \sqrt{20} - \sqrt{5}\)</span>
+                        <span>\(= 3\sqrt{5} + 2\sqrt{5} - \sqrt{5}\)</span>
+                        <span class="hl">\(= 4\sqrt{5}\)</span>
+                    </div>
+                </div>
+                <h4>Radicais não semelhantes — não se simplificam</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\sqrt{2} + \sqrt{3}\) &#160;<em style="color:#9ca3af;font-size:.85rem">(não simplifica)</em></div>
+                    <div class="tr-ex">\(\sqrt{2} + \sqrt[3]{2}\) &#160;<em style="color:#9ca3af;font-size:.85rem">(índices diferentes)</em></div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES 1ª–3ª -->
+            <div class="tr-section" id="sec-prop123">
+                <div class="tr-section-header">
+                    <div class="tr-badge">P¹²³</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades 1ª a 3ª</div>
+                        <div class="tr-section-sub">Cancelamento, produto e quociente de raízes</div>
+                    </div>
+                </div>
+
+                <h4>1ª — Raiz cancela potência de mesmo índice</h4>
+                <div class="tr-rule">
+                    \[\sqrt[n]{a^n} = a \qquad (a \geq 0 \text{ se } n \text{ par})\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(\sqrt[3]{8} = \sqrt[3]{2^3} = 2\)</div>
+                    <div class="tr-ex">\(\sqrt[4]{81} = \sqrt[4]{3^4} = 3\)</div>
+                    <div class="tr-ex">\(\sqrt{x^2} = |x|\)</div>
+                </div>
+
+                <h4>2ª — Produto de raízes de mesmo índice</h4>
+                <div class="tr-rule">
+                    \[\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{2} \cdot \sqrt{18} = \sqrt{36}\)</span>
+                        <span class="hl">\(= 6\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{4x^2} = \sqrt{4} \cdot \sqrt{x^2} = 2|x|\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt[3]{4} \cdot \sqrt[3]{2} = \sqrt[3]{8}\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                </div>
+
+                <h4>3ª — Quociente de raízes de mesmo índice</h4>
+                <div class="tr-rule">
+                    \[\frac{\sqrt[n]{a}}{\sqrt[n]{b}} = \sqrt[n]{\frac{a}{b}} \qquad (b \neq 0)\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{\sqrt{108}}{\sqrt{12}} = \sqrt{\dfrac{108}{12}} = \sqrt{9}\)</span>
+                        <span class="hl">\(= 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{\dfrac{a^2}{b^2}} = \dfrac{\sqrt{a^2}}{\sqrt{b^2}} = \dfrac{a}{b}\)</span>
+                        <span class="param">\((a, b \geq 0)\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES 4ª–5ª -->
+            <div class="tr-section" id="sec-prop45">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">P⁴⁵</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades 4ª e 5ª</div>
+                        <div class="tr-section-sub">Amplificação, simplificação e raiz de raiz</div>
+                    </div>
+                </div>
+
+                <h4>4ª — Amplificação / Simplificação de radicais</h4>
+                <p>Multiplica-se (ou divide-se) o índice e o expoente do radicando pelo
+                mesmo número \(c \neq 0\) sem alterar o valor da expressão.</p>
+                <div class="tr-rule">
+                    \[\sqrt[n]{a^b} = \sqrt[n\cdot c]{a^{\,b\cdot c}}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Amplificação</strong> (×2): \(\sqrt{3} = \sqrt[4]{3^2} = \sqrt[4]{9}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Simplificação</strong> (÷3): \(\sqrt[6]{64} = \sqrt[6]{4^3}\)</span>
+                        <span class="param">índice \(6 \div 3 = 2\); expoente \(3 \div 3 = 1\)</span>
+                        <span>\(= \sqrt[2]{4^1} = \sqrt{4}\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{8} \cdot \sqrt[4]{4} = \sqrt[4]{8^2} \cdot \sqrt[4]{4} = \sqrt[4]{256}\)</span>
+                        <span class="hl">\(= 4\)</span>
+                    </div>
+                </div>
+
+                <h4>5ª — Raiz de raiz</h4>
+                <p>Uma raiz dentro de outra se simplifica <strong>multiplicando os índices</strong>.</p>
+                <div class="tr-rule">
+                    \[\sqrt[n]{\sqrt[b]{a}} = \sqrt[n \cdot b]{a}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{\sqrt{81}} = \sqrt[2\cdot2]{81} = \sqrt[4]{81} = \sqrt[4]{3^4}\)</span>
+                        <span class="hl">\(= 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{\sqrt{8}} \cdot \sqrt[4]{2} = \sqrt[4]{8} \cdot \sqrt[4]{2} = \sqrt[4]{16}\)</span>
+                        <span class="hl">\(= 2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RACIONALIZAÇÃO -->
+            <div class="tr-section" id="sec-rac">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Rac</div>
+                    <div>
+                        <div class="tr-section-title">Racionalização de Denominador</div>
+                        <div class="tr-section-sub">Eliminando radicais do denominador de frações</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Processo de <strong>eliminar radicais do denominador</strong> sem alterar o valor
+                    da fração. Multiplica-se numerador e denominador pelo fator que completa uma
+                    potência perfeita no denominador. Quando há \(a \pm \sqrt{b}\), usa-se o
+                    <strong>conjugado</strong>, pois \((a+b)(a-b) = a^2 - b^2\) elimina a raiz.
+                </div>
+
+                <h4>Tipo 1 — denominador \(\sqrt{a}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{1}{\sqrt{2}} = \dfrac{1}{\sqrt{2}} \cdot \dfrac{\sqrt{2}}{\sqrt{2}} = \dfrac{\sqrt{2}}{\sqrt{2}^2}\)</span>
+                        <span class="hl">\(= \dfrac{\sqrt{2}}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{4}{\sqrt{5}} = \dfrac{4}{\sqrt{5}} \cdot \dfrac{\sqrt{5}}{\sqrt{5}}\)</span>
+                        <span class="hl">\(= \dfrac{4\sqrt{5}}{5}\)</span>
+                    </div>
+                </div>
+
+                <h4>Tipo 2 — denominador com conjugado \((a \pm \sqrt{b})\)</h4>
+                <p>Usa-se \((a+b)(a-b) = a^2 - b^2\) para eliminar a raiz:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{5}{\sqrt{3}+1} \cdot \dfrac{\sqrt{3}-1}{\sqrt{3}-1}\)</span>
+                        <span>\(= \dfrac{5(\sqrt{3}-1)}{(\sqrt{3})^2 - 1^2} = \dfrac{5(\sqrt{3}-1)}{2}\)</span>
+                        <span class="hl">\(= \dfrac{5\sqrt{3}-5}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{3}{\sqrt{5}+\sqrt{2}} \cdot \dfrac{\sqrt{5}-\sqrt{2}}{\sqrt{5}-\sqrt{2}}\)</span>
+                        <span>\(= \dfrac{3(\sqrt{5}-\sqrt{2})}{5 - 2}\)</span>
+                        <span class="hl">\(= \sqrt{5}-\sqrt{2}\)</span>
+                    </div>
+                </div>
+
+                <h4>Tipo 3 — denominador com raiz cúbica \(\sqrt[3]{a}\)</h4>
+                <p>Multiplica-se por \(\sqrt[3]{a^2}\) para completar \(\sqrt[3]{a^3} = a\) no denominador:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{1}{\sqrt[3]{2}} = \dfrac{1}{\sqrt[3]{2}} \cdot \dfrac{\sqrt[3]{2^2}}{\sqrt[3]{2^2}} = \dfrac{\sqrt[3]{4}}{\sqrt[3]{2^3}}\)</span>
+                        <span class="hl">\(= \dfrac{\sqrt[3]{4}}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{6}{\sqrt[3]{3}} = \dfrac{6}{\sqrt[3]{3}} \cdot \dfrac{\sqrt[3]{9}}{\sqrt[3]{9}} = \dfrac{6\sqrt[3]{9}}{\sqrt[3]{27}}\)</span>
+                        <span class="hl">\(= \dfrac{6\sqrt[3]{9}}{3} = 2\sqrt[3]{9}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABELA DE REFERÊNCIA -->
+            <div class="tr-section" id="sec-tabela">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ref</div>
+                    <div>
+                        <div class="tr-section-title">Principais Raízes</div>
+                        <div class="tr-section-sub">Tabela de referência — quadradas e cúbicas</div>
+                    </div>
+                </div>
+                <div class="fact-wrap">
+                    <table class="fact-table" style="width:100%;font-size:.9rem;">
+                        <thead>
+                            <tr>
+                                <th colspan="4" style="background:#e0f2fe;color:#0c4a6e;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 8px;border:1px solid #bae6fd;text-align:center;">Raízes Quadradas</th>
+                                <th colspan="2" style="background:#e0f2fe;color:#0c4a6e;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 8px;border:1px solid #bae6fd;text-align:center;">Raízes Cúbicas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{0}=0\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{100}=10\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{400}=20\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{900}=30\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{0}=0\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{1000}=10\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{1}=1\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{121}=11\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{441}=21\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{961}=31\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{1}=1\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{1331}=11\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{4}=2\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{144}=12\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{484}=22\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{1024}=32\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{8}=2\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{1728}=12\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{9}=3\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{169}=13\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{529}=23\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{1089}=33\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{27}=3\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{2197}=13\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{16}=4\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{196}=14\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{576}=24\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{1156}=34\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{64}=4\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{2744}=14\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{25}=5\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{225}=15\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{625}=25\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{1225}=35\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{125}=5\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{3375}=15\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{36}=6\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{256}=16\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{676}=26\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{1296}=36\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{216}=6\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{4096}=16\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{49}=7\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{289}=17\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{729}=27\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{1369}=37\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{343}=7\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{4913}=17\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{64}=8\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{324}=18\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{784}=28\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt{1444}=38\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{512}=8\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;">\(\sqrt[3]{5832}=18\)</td></tr>
+                            <tr><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{81}=9\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{361}=19\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{841}=29\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt{1521}=39\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{729}=9\)</td><td style="padding:4px 8px;border:1px solid #e5e7eb;text-align:center;background:#f0f9ff;">\(\sqrt[3]{6859}=19\)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

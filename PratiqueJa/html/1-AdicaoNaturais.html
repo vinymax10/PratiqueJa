@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Adição com Naturais</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 1.05rem;
+      line-height: 1.7; color: #1e293b; background: #f8fafc; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #60a5fa 100%);
+      color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 70%); }
+    .hero img { height: 64px; width: auto; margin-bottom: 1.2rem;
+      filter: brightness(0) invert(1); opacity: .9; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -.5px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hero .subtitle { margin-top: .4rem; font-size: 1rem; opacity: .85; }
+
+    /* ── Layout ── */
+    main { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem 4rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 660px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: 14px; padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 14px rgba(30,58,138,.08), 0 1px 3px rgba(0,0,0,.05);
+      border-top: 4px solid #2563eb; }
+    .card.def  { border-top-color: #10b981; }
+    .card.full { grid-column: 1 / -1; }
+
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #1e3a8a;
+      margin-bottom: .85rem; padding-bottom: .5rem; border-bottom: 1px solid #e2e8f0; }
+    .card.def h2 { color: #047857; }
+
+    p { margin-bottom: .75rem; } p:last-child { margin-bottom: 0; }
+
+    .rule { background: #eff6ff; border-left: 4px solid #2563eb;
+      border-radius: 0 8px 8px 0; padding: .7rem 1rem; margin: .8rem 0;
+      color: #1e40af; font-weight: 500; font-size: .97rem; line-height: 1.6; }
+    .card.def .rule { background: #ecfdf5; border-color: #10b981; color: #065f46; }
+
+    h4 { font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; margin: 1rem 0 .4rem; }
+
+    /* ── Column addition ── */
+    .col-add-wrap { display: flex; flex-wrap: wrap; align-items: center;
+      gap: 10px; margin: .8rem 0; }
+    .col-add { border-collapse: collapse; font-size: 1.1rem; font-weight: 600; }
+    .col-add td { padding: 2px 6px; text-align: right; min-width: 24px; }
+    .col-add tr.op td:first-child { font-size: 1.2rem; color: #2563eb; }
+    .col-add tr.result td { border-top: 2px solid #374151; }
+    .col-add td.hi { color: #2563eb; }
+    .col-add td.carry { font-size: .72rem; color: #f59e0b; font-weight: 700;
+      vertical-align: bottom; padding-bottom: 0; }
+    .arrow { font-size: 1.3rem; color: #94a3b8; }
+
+    /* ── Addition table ── */
+    .add-table { border-collapse: collapse; font-size: .82rem; width: 100%; }
+    .add-table th { background: #1e3a8a; color: #fff; padding: 5px 8px;
+      text-align: center; font-weight: 700; }
+    .add-table td { padding: 4px 8px; text-align: center; border: 1px solid #e2e8f0; }
+    .add-table tr:nth-child(even) td { background: #f0f5ff; }
+    .add-table td:first-child { background: #dbeafe; font-weight: 700; color: #1e3a8a; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="Logo2.png" alt="Logo PratiqueJa" />
+  <h1>Adição com Naturais</h1>
+  <p class="subtitle">Algoritmo da adição, vai-um e tabuada</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <!-- ── Somando com mais de um dígito ── -->
+    <div class="card def">
+      <h2>Somando com Mais de Um Dígito</h2>
+      <div class="rule">
+        Alinhe os números pela direita (unidades sob unidades, dezenas sob dezenas…).
+        Some coluna por coluna, da direita para a esquerda.
+      </div>
+      <h4>Exemplo — 143 + 26</h4>
+      <div class="col-add-wrap">
+        <table class="col-add">
+          <tr><td></td><td>1</td><td>4</td><td class="hi">3</td></tr>
+          <tr class="op"><td>+</td><td></td><td>2</td><td class="hi">6</td></tr>
+          <tr class="result"><td></td><td></td><td></td><td class="hi">9</td></tr>
+        </table>
+        <span class="arrow">⇒</span>
+        <table class="col-add">
+          <tr><td></td><td>1</td><td class="hi">4</td><td>3</td></tr>
+          <tr class="op"><td>+</td><td></td><td class="hi">2</td><td>6</td></tr>
+          <tr class="result"><td></td><td></td><td class="hi">6</td><td>9</td></tr>
+        </table>
+        <span class="arrow">⇒</span>
+        <table class="col-add">
+          <tr><td></td><td class="hi">1</td><td>4</td><td>3</td></tr>
+          <tr class="op"><td>+</td><td></td><td>2</td><td>6</td></tr>
+          <tr class="result"><td></td><td class="hi">1</td><td>6</td><td>9</td></tr>
+        </table>
+      </div>
+      <p style="font-size:.9rem;color:#6b7280;">Resultado: <strong>143 + 26 = 169</strong></p>
+    </div>
+
+    <!-- ── Vai 1 ── -->
+    <div class="card">
+      <h2>Vai Um (Reserva)</h2>
+      <div class="rule">
+        Quando a soma de uma coluna for ≥ 10, escreva apenas o dígito das unidades
+        e carregue o dígito das dezenas para a coluna seguinte (à esquerda).
+      </div>
+      <h4>Exemplo — 476 + 48</h4>
+      <div class="col-add-wrap">
+        <table class="col-add">
+          <tr><td></td><td></td><td class="carry">1</td><td></td></tr>
+          <tr><td></td><td>4</td><td>7</td><td class="hi">6</td></tr>
+          <tr class="op"><td>+</td><td></td><td>4</td><td class="hi">8</td></tr>
+          <tr class="result"><td></td><td></td><td></td><td class="hi">4</td></tr>
+        </table>
+        <span class="arrow">⇒</span>
+        <table class="col-add">
+          <tr><td></td><td class="carry">1</td><td class="carry">1</td><td></td></tr>
+          <tr><td></td><td>4</td><td class="hi">7</td><td>6</td></tr>
+          <tr class="op"><td>+</td><td></td><td class="hi">4</td><td>8</td></tr>
+          <tr class="result"><td></td><td></td><td class="hi">2</td><td>4</td></tr>
+        </table>
+        <span class="arrow">⇒</span>
+        <table class="col-add">
+          <tr><td></td><td class="carry">1</td><td>1</td><td></td></tr>
+          <tr><td></td><td class="hi">4</td><td>7</td><td>6</td></tr>
+          <tr class="op"><td>+</td><td></td><td>4</td><td>8</td></tr>
+          <tr class="result"><td></td><td class="hi">5</td><td>2</td><td>4</td></tr>
+        </table>
+      </div>
+      <p style="font-size:.9rem;color:#6b7280;">Resultado: <strong>476 + 48 = 524</strong></p>
+    </div>
+
+    <!-- ── Tabuada ── -->
+    <div class="card full">
+      <h2>Tabuada da Adição</h2>
+      <div style="overflow-x:auto;">
+        <table class="add-table">
+          <thead>
+            <tr>
+              <th>+</th>
+              <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+              <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+            <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+            <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+            <tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+            <tr><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+            <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+            <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
+            <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td></tr>
+            <tr><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+            <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- .grid -->
+</main>
+
+</body>
+</html>

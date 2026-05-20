@@ -13,116 +13,185 @@
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+% ──────────────────────────────────────────
+\TW{Definição}
 
-O logaritmo de um número $a$ em uma base $b$ é o expoente $x$ ao qual a base $b$ deve ser elevada para produzir o número $a$.
-
-Matematicamente, isso é expresso como:
+O logaritmo de $a$ na base $b$ é o expoente $x$ ao qual $b$ deve ser elevada para produzir $a$. $b$ é a \textbf{base}, $a$ é o \textbf{logaritmando} e $x$ é o \textbf{logaritmo}.
 
 \Formula{
-\log_{b} a = x \iff a = b^x
+\log_b a = x \iff a = b^x
 }
 
-Onde $x$ é logaritmo, $b$ é a base e $a$ é o logaritmando.
+\textbf{Condições de existência:} $b > 0,\; b \neq 1$ e $a > 0$. Não existe logaritmo de número negativo ou zero, nem com base 1.
 
 \TM{Exemplos:}
 
-$\log_{2} 8 \Rightarrow 8 = 2^x \Rightarrow 2^3 = 2^x \Rightarrow x=3$
+$\log_2 8 \Rightarrow 8 = 2^x \Rightarrow 2^3 = 2^x \Rightarrow x = 3$
 
-$\log_{3} 81 \Rightarrow 81 = 3^x \Rightarrow 3^4 = 3^x \Rightarrow x=4$
+$\log_3 81 \Rightarrow 81 = 3^x \Rightarrow 3^4 = 3^x \Rightarrow x = 4$
+
+$\log_5 25 \Rightarrow 25 = 5^x \Rightarrow 5^2 = 5^x \Rightarrow x = 2$
 
 \TM{Tipos comuns de logaritmos:}
 
-- Logaritmo natural $(\ln)$: Quando a base é o número de Euler ($\mathrm{e}  \approx 2,71828$). É denotado por $\ln b$ ou $\log_e b$.
+\textbf{Logaritmo natural} $(\ln)$: base $\mathrm{e} \approx 2{,}718$. Notação: $\ln a = \log_e a$.
 
-- Logaritmo comum ($\log$): Quando a base é 10. É denotado por $\log b$ ou $\log_{10} b$.
+\textbf{Logaritmo decimal} $(\log)$: base $10$. Notação: $\log a = \log_{10} a$.
 
-\TM{Troca de base:}
+\TM{Comportamento da função:}
 
-A troca de base de logaritmos é uma propriedade fundamental que permite reescrever um logaritmo de uma base para outra. Essa propriedade é extremamente útil em diversas situações, especialmente quando se trabalha com calculadoras que geralmente só possuem logaritmos na base 10 (logaritmo comum, $\log$) e na base $\mathrm{e}$ (logaritmo natural, $\ln$).
+$b > 1$ $\Rightarrow$ função \textbf{crescente} $(\log_2, \log_{10}, \ln)$
 
-Se você tem um logaritmo $\log_{b} a $ e deseja expressá-lo em uma nova base $c$, a fórmula é a seguinte:
+$0 < b < 1$ $\Rightarrow$ função \textbf{decrescente} $(\log_{1/2})$
+
+% ──────────────────────────────────────────
+\T{Logaritmos Especiais}
+
+Três resultados decorrem diretamente da definição e aparecem em quase toda simplificação:
+
+\Formula{\log_b 1 = 0}
+
+pois $b^0 = 1$ para qualquer $b$ válido.
+
+$\log_2 1 = 0$ \qquad $\log_{10} 1 = 0$
+
+\Formula{\log_b b = 1}
+
+pois $b^1 = b$.
+
+$\log_2 2 = 1$ \qquad $\log_{10} 10 = 1$
+
+\Formula{\log_b b^n = n}
+
+Logaritmo cancela a potência de mesma base.
+
+$\log_2 2^5 = 5$ \qquad $\log_{10} 10^3 = 3$
+
+\Formula{b^{\log_b a} = a}
+
+Potenciação e logaritmo de mesma base se cancelam.
+
+$2^{\log_2 7} = 7$ \qquad $10^{\log 5} = 5$
+
+% ──────────────────────────────────────────
+\T{Mudança de Base}
+
+Qualquer logaritmo pode ser expresso como a razão entre dois logaritmos de uma mesma base auxiliar $c$. Essencial para usar calculadoras, que só possuem $\log$ e $\ln$.
 
 \Formula{
-\log_{b} a = \dfrac{\log_{c} a}{\log_{c} b}
+\log_b a = \dfrac{\log_c a}{\log_c b}
 }
-
-A ideia por trás da fórmula é que qualquer logaritmo pode ser expresso como a razão entre dois logaritmos de uma mesma base arbitrária.
 
 \TM{Exemplos:}
 
-\vspace{8px} 
-$\log_{8} 16 = \dfrac{\log_{2} 16}{\log_{2} 8} = \frac{4}{3}$ \vspace{8px} 
+$\log_8 16 = \dfrac{\log_2 16}{\log_2 8} = \dfrac{4}{3}$ \hfill {\small\textit{(base auxiliar 2)}}
 
+\vspace{6px}
+
+$\log_2 5 = \dfrac{\log 5}{\log 2} \approx \dfrac{0{,}699}{0{,}301} \approx 2{,}322$
+
+\TM{Consequências úteis:}
+
+$\log_b a \cdot \log_a b = 1$ \qquad $\log_b a = \dfrac{1}{\log_a b}$
+
+% ──────────────────────────────────────────
 \T{Propriedades}
-
-A seguir iremos apresentar as principais propriedades de logaritmos:
 
 \TM{Logaritmo de um produto:}
 
-Essa propriedade é uma das regras mais importantes dos logaritmos, conhecida como a Propriedade da Soma de Logaritmos ou Logaritmo de um Produto.
-
-A propriedade estabelece que a soma de dois logaritmos que possuem a mesma base é igual ao logaritmo do produto dos seus logaritmandos, mantendo-se a mesma base. Matematicamente, é expressa como:
-
 \Formula{
-\log_{b} a + \log_{b} c = \log_{b} (a \cdot c)
+\log_b a + \log_b c = \log_b (a \cdot c)
 }
 
-Essa propriedade é crucial para simplificar e resolver expressões logarítmicas, permitindo combinar vários termos em um só. Historicamente, ela foi essencial para converter multiplicações em adições, facilitando cálculos antes da era digital.
+Converte multiplicação em adição — base histórica das tábuas de logaritmos.
 
-\TM{Exemplos:}
+$\log_6 4 + \log_6 9 = \log_6 36 = 2$
 
-$\log_{6} 4 + \log_{6} 9 = \log_{6} (4 \cdot 9) = \log_{6} 36 = 2$
+$\log_2 4 + \log_2 8 = \log_2 32 = 5$
 
 \TM{Logaritmo de um quociente:}
 
-Essa propriedade é outra regra fundamental dos logaritmos, conhecida como a Propriedade da Diferença de Logaritmos ou Logaritmo de um Quociente.
-
-A propriedade estabelece que a diferença entre dois logaritmos que possuem a mesma base é igual ao logaritmo do quociente dos seus logaritmandos, mantendo-se a mesma base. Matematicamente, é expressa como:
-
-\Formula{ 
-\log_{b} a - \log_{b} c = \log_{b} \left( \dfrac{a}{c} \right)
+\Formula{
+\log_b a - \log_b c = \log_b \left(\dfrac{a}{c}\right)
 }
 
-Essa propriedade é vital para simplificar expressões logarítmicas com divisões e resolver equações e inequações que as contêm. Ela também facilita a transformação de divisões em subtrações, o que era útil para cálculos manuais, e permite expandir ou contrair expressões logarítmicas, sendo essencial em áreas como o cálculo.
+$\log_3 54 - \log_3 2 = \log_3 27 = 3$
 
-\TM{Exemplos:}
-
-\vspace{8px} 
-$\log_{3} 54 - \log_{3} 2 = \log_{3} \left( \dfrac{54}{2} \right) = \log_{3} 27 = 3 $ \vspace{8px} 
+$\log_{10} 500 - \log_{10} 5 = \log_{10} 100 = 2$
 
 \TM{Logaritmo de uma potência:}
 
-Essa propriedade é uma das mais poderosas e frequentemente usadas dos logaritmos, conhecida como a Propriedade da Potência de um Logaritmo ou Regra do Expoente para Logaritmos.
-
-A propriedade estabelece que o produto de uma constante (ou qualquer número real) por um logaritmo é igual ao logaritmo do logaritmando elevado a essa constante, mantendo-se a mesma base. Matematicamente, é expressa como:
-
 \Formula{
-c \cdot \log_{b} a = \log_{b} (a^c)
+c \cdot \log_b a = \log_b (a^c)
 }
 
-Essa propriedade é incrivelmente útil para simplificar expressões logarítmicas, permitindo que você mova expoentes para fora do logaritmo. Ela é essencial para resolver equações logarítmicas e exponenciais, pois permite "baixar" os expoentes ao aplicar logaritmos. Além disso, ajuda a combinar e separar logaritmos em expressões complexas e é crucial no cálculo diferencial para simplificar a derivação de funções.
-    
-\TM{Exemplos:}
+Permite mover expoentes para fora do logaritmo — essencial para equações exponenciais.
 
-$2 \cdot \log_{2} \sqrt{8} = \log_{2} (\sqrt{8})^2 = \log_{2} 8 = 3$
+$\log_2 8^3 = 3 \cdot \log_2 8 = 3 \cdot 3 = 9$
+
+$2 \cdot \log_2 \sqrt{8} = \log_2 (\sqrt{8})^2 = \log_2 8 = 3$
 
 \TM{Logaritmo de uma potência de base:}
 
-Essa propriedade é menos comum em sua formulação explícita, mas é uma derivação direta da fórmula de mudança de base de logaritmos e da propriedade da potência de um logaritmo. Ela lida com situações onde a base do logaritmo é uma potência.
-
-A propriedade estabelece que se a base de um logaritmo é uma potência $b^c$, então o logaritmo pode ser reescrito como o inverso do expoente $\frac{1}{c}$ multiplicado pelo logaritmo do mesmo logaritmando na base original $b$. Matematicamente, é expressa como:
-
 \Formula{
-\log_{b^c} a = \dfrac{1}{c} \cdot \log_{b} a
+\log_{b^c} a = \dfrac{1}{c} \cdot \log_b a
 }
 
-\TM{Exemplos:}
+$\log_4 8 = \log_{2^2} 8 = \dfrac{1}{2} \cdot \log_2 8 = \dfrac{3}{2}$
 
-\vspace{8px} 
-$\log_{4} 8 = \log_{2^2} 8 = \dfrac{1}{2}  \cdot \log_{2} 8 = \dfrac{1}{2} \cdot 3 = \dfrac{3}{2}$ \vspace{8px} 
+$\log_9 27 = \log_{3^2} 3^3 = \dfrac{1}{2} \cdot 3 = \dfrac{3}{2}$
 
-Essa propriedade é valiosa porque simplifica logaritmos com bases complexas, tornando-os mais fáceis de usar. Ela também ajuda a resolver equações e expressões logarítmicas, facilitando o isolamento de variáveis e os cálculos. Além disso, a propriedade aprofunda a compreensão das relações entre logaritmos, mostrando como eles se conectam às regras de expoentes.
+% ──────────────────────────────────────────
+\T{Equações Logarítmicas}
+
+\textbf{Estratégia:} isolar o logaritmo e converter para forma exponencial, ou usar as propriedades para unir termos antes. Sempre verificar as condições de existência.
+
+\TM{Tipo 1 — logaritmo isolado:}
+
+$\log_2 x = 3 \Rightarrow x = 2^3 = 8$
+
+$\log_5 x = -2 \Rightarrow x = 5^{-2} = \dfrac{1}{25}$
+
+\TM{Tipo 2 — usando propriedades:}
+
+$\log_2 x + \log_2 4 = 5$
+
+$\log_2 (4x) = 5 \Rightarrow 4x = 32 \Rightarrow x = 8$
+
+\vspace{6px}
+
+$\log_3 x - \log_3 2 = 2$
+
+$\log_3 \left(\dfrac{x}{2}\right) = 2 \Rightarrow \dfrac{x}{2} = 9 \Rightarrow x = 18$
+
+\TM{Exercício combinado:}
+
+Simplifique: $\log_2 4 + \log_2 8 - \log_2 2$
+
+$= \log_2 (4 \cdot 8) - \log_2 2 = \log_2 \left(\dfrac{32}{2}\right) = \log_2 16 = \mathbf{4}$
+
+% ──────────────────────────────────────────
+\T{Aplicações Práticas}
+
+Logaritmos modelam fenômenos onde a grandeza cresce em \textbf{ordens de magnitude}.
+
+\TM{Escala Richter (sismos):}
+
+$M = \log\left(\dfrac{A}{A_0}\right)$
+
+Um sismo de magnitude 7 é 10× mais intenso que um de magnitude 6.
+
+\TM{pH (química):}
+
+$\text{pH} = -\log[\text{H}^+]$
+
+$\text{pH} = 7 \Rightarrow [\text{H}^+] = 10^{-7}$ mol/L
+
+\TM{Decibéis (acústica):}
+
+$\text{dB} = 10 \cdot \log\left(\dfrac{I}{I_0}\right)$
+
+Duplicar a intensidade sonora acrescenta apenas $\approx 3$ dB.
 
 \end{multicols}
 

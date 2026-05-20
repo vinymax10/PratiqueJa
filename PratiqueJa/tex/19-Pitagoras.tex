@@ -13,102 +13,205 @@
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+% ──────────────────────────────────────────
+\TW{Definição}
 
-O Teorema de Pitágoras é um dos conceitos fundamentais da geometria, e trata da relação entre os lados de um triângulo retângulo. O teorema afirma que:
-
-\textcolor{iris}{Em um triângulo retângulo, o quadrado da medida da hipotenusa é igual à soma dos quadrados das medidas dos catetos.}
-
-\begin{center}
-\vspace{0.3cm}
-\begin{tikzpicture}
-\tikzstyle{no}=[draw=none,fill=none,black!60!white]
-\tikzstyle{line}=[blue!50!white,line width=2pt]
-\draw[line] 
-(0,0) -- (4,0) -- (0,2) -- cycle;
-\node[no] at (-0.3,1) {\textbf{c}};
-\node[no] at (1.8,-0.3) {\textbf{b}};
-\node[no] at (2,1.3) {\textbf{a}};
-\draw[line] (0,0) rectangle (0.3,0.3);
-\filldraw[blue!50!white] (0.15,0.15) circle (1pt);
-\end{tikzpicture}
-\end{center}
-
-O triângulo retângulo acima tem catetos de comprimento $b$ e $c$ e a hipotenusa de comprimento $a$, então a relação matemática que descreve esse teorema é:
+Em um \textbf{triângulo retângulo}, o quadrado da medida da \textbf{hipotenusa} é igual à soma dos quadrados das medidas dos \textbf{catetos}.
 
 \Formula{
-a^2=b^2 + c^2
+a^2 = b^2 + c^2
 }
 
-Este teorema é bastante utilizado para encontrar a medida de um dos lados do triângulo retângulo tendo como referência as medidas dos outros dois lados. Diversos problemas em geometria plana podem ser resolvidos com a utilização desse teorema.
+Onde $a$ é a \textbf{hipotenusa} (lado oposto ao ângulo reto) e $b$, $c$ são os \textbf{catetos} (os lados que formam o ângulo reto).
 
+% ──────────────────────────────────────────
+\T{Como Aplicar}
 
-\TM{Exemplos:}
+Identifique qual lado é desconhecido e isole-o na fórmula.
 
-\vspace{0.3cm}
-\begin{tikzpicture}
-\tikzstyle{no}=[draw=none,fill=none,black!60!white]
-\tikzstyle{line}=[red!50!white,line width=2pt]
-\draw[line] 
-(0,0) -- (4,0) -- (0,2) -- cycle;
-\node[no] at (-0.3,1) {\textbf{3}};
-\node[no] at (1.8,-0.3) {\textbf{4}};
-\node[no] at (2,1.3) {\textbf{x}};
-\draw[line] (0,0) rectangle (0.3,0.3);
-\filldraw[red!50!white] (0.15,0.15) circle (1pt);
-\end{tikzpicture}
+Se a \textbf{hipotenusa} for desconhecida:
 
+\Formula{a = \sqrt{b^2 + c^2}}
 
-$x^2=4^2 + 3^2$
+Se um \textbf{cateto} for desconhecido:
 
-$x^2 = 16 + 9 = 25$
+\Formula{b = \sqrt{a^2 - c^2}}
 
-$x = \sqrt{25} = 5$
+\TM{Encontrando a hipotenusa:}
 
-Outro exemplo:
+Catetos $b = 4$ e $c = 3$:
 
-\vspace{1cm}
-\begin{tikzpicture}
-\tikzstyle{no}=[draw=none,fill=none,black!60!white]
-\tikzstyle{line}=[green!50!white,line width=2pt]
-\draw[line] 
-(0,0) -- (4,0) -- (0,2) -- cycle;
-\node[no] at (-0.3,1) { \textbf{9}};
-\node[no] at (1.8,-0.3) { \textbf{x}};
-\node[no] at (2,1.5) { \textbf{15}};
-\draw[line] (0,0) rectangle (0.3,0.3);
-\filldraw[green!50!white] (0.15,0.15) circle (1pt);
-\end{tikzpicture}
+$a^2 = 4^2 + 3^2 = 16 + 9 = 25$
 
-$15^2 = x^2 + 9^2$
+$a = \sqrt{25} = 5$
 
-$225 = x^2 + 81$
+\vspace{4pt}
 
-$x^2 + 81 = 225$
+Catetos $b = 5$ e $c = 12$:
 
-$x^2 = 225 - 81 = 144$
+$a^2 = 5^2 + 12^2 = 25 + 144 = 169$
 
-$x = \sqrt{144} = 12$
+$a = \sqrt{169} = 13$
 
-\vspace{0.3cm}
-\TW{Distância entre dois pontos} 
+\TM{Encontrando um cateto:}
 
-Quando temos dois pontos no plano cartesiano, $(x_1, y_1)$ e $(x_2, y_2)$, podemos encontrar a distância entre eles aplicando o Teorema de Pitágoras por meio da seguinte fórmula:
+Hipotenusa $a = 15$, cateto $c = 9$:
+
+$b^2 = 15^2 - 9^2 = 225 - 81 = 144$
+
+$b = \sqrt{144} = 12$
+
+\vspace{4pt}
+
+Hipotenusa $a = 10$, cateto $c = 6$:
+
+$b^2 = 10^2 - 6^2 = 100 - 36 = 64$
+
+$b = \sqrt{64} = 8$
+
+% ──────────────────────────────────────────
+\T{Ternas Pitagóricas}
+
+Uma \textbf{terna pitagórica} é um conjunto de três inteiros positivos $(a, b, c)$ que satisfazem $a^2 = b^2 + c^2$. Reconhecê-las agiliza cálculos em provas — evita calcular raiz quadrada.
+
+$(3, 4, 5)$ \quad $25 = 16 + 9$
+
+$(5, 12, 13)$ \quad $169 = 144 + 25$
+
+$(8, 15, 17)$ \quad $289 = 225 + 64$
+
+$(7, 24, 25)$ \quad $625 = 576 + 49$
+
+Múltiplos de uma terna também são ternas: $(6,8,10)$, $(9,12,15)$, $(10,24,26)$\ldots
+
+% ──────────────────────────────────────────
+\T{Recíproca e Classificação de Triângulos}
+
+Dado um triângulo com lados $a \geq b \geq c$, compare $a^2$ com $b^2 + c^2$ para classificá-lo — sem precisar medir ângulos.
+
+\TM{Triângulo retângulo:}
+
+\Formula{a^2 = b^2 + c^2}
+
+Ex.: $5^2 = 3^2 + 4^2 \Rightarrow 25 = 25$ \checkmark
+
+\TM{Triângulo obtusângulo:}
+
+\Formula{a^2 > b^2 + c^2}
+
+Ex.: lados 4, 5, 7 $\Rightarrow$ $49 > 25 + 16 = 41$ \checkmark
+
+\TM{Triângulo acutângulo:}
+
+\Formula{a^2 < b^2 + c^2}
+
+Ex.: lados 4, 5, 6 $\Rightarrow$ $36 < 25 + 16 = 41$ \checkmark
+
+% ──────────────────────────────────────────
+\T{Triângulos Notáveis}
+
+Dois triângulos retângulos especiais aparecem com frequência em provas. Conhecer suas relações entre lados elimina a necessidade de cálculo.
+
+\TM{Isósceles retângulo — 45°-45°-90°:}
+
+Catetos iguais a $\ell$:
+
+$a^2 = \ell^2 + \ell^2 = 2\ell^2$
+
+\Formula{a = \ell\sqrt{2}}
+
+Ex.: cateto 5 $\rightarrow$ hipotenusa $5\sqrt{2} \approx 7{,}07$
+
+\TM{Semi-equilátero — 30°-60°-90°:}
+
+Cateto menor $\ell$ (oposto a 30°):
+
+Cateto maior $= \ell\sqrt{3}$ (oposto a 60°)
+
+Hipotenusa $= 2\ell$ (oposto a 90°)
+
+\Formula{\ell \;:\; \ell\sqrt{3} \;:\; 2\ell}
+
+Ex.: cateto menor 3 $\rightarrow$ cateto maior $3\sqrt{3}$, hipotenusa 6
+
+% ──────────────────────────────────────────
+\T{Relações Métricas no Triângulo Retângulo}
+
+Ao traçar a \textbf{altura $h$} relativa à hipotenusa $a$, ela divide $a$ em duas projeções: $m$ (projeção de $b$) e $n$ (projeção de $c$), com $m + n = a$.
+
+\TM{As quatro relações:}
+
+\Formula{h^2 = m \cdot n}
+
+Altura ao quadrado = produto das projeções.
+
+\Formula{b^2 = a \cdot m}
+
+Cateto ao quadrado = hipotenusa $\times$ sua projeção.
+
+\Formula{c^2 = a \cdot n}
+
+\Formula{a \cdot h = b \cdot c}
+
+Relação de área: base $\times$ altura = produto dos catetos.
+
+\TM{Exemplo:} Catetos $b = 6$ e $c = 8$:
+
+$a = \sqrt{6^2 + 8^2} = \sqrt{100} = 10$
+
+$m = \dfrac{b^2}{a} = \dfrac{36}{10} = 3{,}6$ \quad $n = \dfrac{c^2}{a} = \dfrac{64}{10} = 6{,}4$
+
+$h^2 = 3{,}6 \times 6{,}4 = 23{,}04$
+
+$h = \sqrt{23{,}04} = 4{,}8$
+
+Verificação: $a \cdot h = 10 \times 4{,}8 = 48 = b \cdot c = 6 \times 8$ \checkmark
+
+% ──────────────────────────────────────────
+\T{Distância entre Dois Pontos}
+
+Dados dois pontos $(x_1, y_1)$ e $(x_2, y_2)$ no plano cartesiano, a distância entre eles é obtida aplicando o Teorema de Pitágoras ao triângulo retângulo formado pelas diferenças de coordenadas.
 
 \Formula{d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}
 
-\TM{Exemplo:}
+\TM{Exemplos:}
 
-A distância entre os pontos \( (15,14)\) e \( (31,26)\) é:
+Distância entre $(15, 14)$ e $(31, 26)$:
 
-$d =\sqrt{(31-15)^2 + (26-14)^2}$
+$d = \sqrt{(31-15)^2 + (26-14)^2} = \sqrt{16^2 + 12^2}$
 
-$d =\sqrt{16^2 + 12^2}$
+$d = \sqrt{256 + 144} = \sqrt{400} = 20$
 
-$d =\sqrt{256 + 144}$
+\vspace{4pt}
 
-$d =\sqrt{400} = 20$
+Distância entre $(1, 1)$ e $(4, 5)$:
 
+$d = \sqrt{(4-1)^2 + (5-1)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$
+
+% ──────────────────────────────────────────
+\T{Problema Contextualizado}
+
+\textbf{Estratégia:} (1) identificar o triângulo retângulo oculto no problema; (2) rotular hipotenusa e catetos; (3) aplicar o teorema; (4) interpretar o resultado.
+
+\TM{Problema 1 — Escada apoiada na parede:}
+
+Uma escada de 5 m apoia-se em uma parede vertical. O pé da escada está a 3 m da base da parede. A que altura a escada toca a parede?
+
+Hipotenusa = escada = 5 m; cateto horizontal = 3 m; cateto vertical = $h$
+
+$5^2 = h^2 + 3^2 \Rightarrow 25 = h^2 + 9 \Rightarrow h^2 = 16$
+
+$h = 4$ m
+
+\TM{Problema 2 — Diagonal de um retângulo:}
+
+Um retângulo tem lados de 6 cm e 8 cm. Qual é o comprimento de sua diagonal?
+
+A diagonal forma a hipotenusa; os lados são os catetos.
+
+$d^2 = 6^2 + 8^2 = 36 + 64 = 100$
+
+$d = \sqrt{100} = 10$ cm
 
 \end{multicols}
 

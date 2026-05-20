@@ -13,131 +13,135 @@
 
 \begin{multicols}{2}
 
-\TW{MMC - Mínimo Múltiplo Comum} 
+% ──────────────────────────────────────────
+\TW{MMC — Mínimo Múltiplo Comum}
 
-O mínimo múltiplo comum, denotado por MMC, de dois ou mais números inteiros positivos é o menor número inteiro diferente de zero que aparece na lista de múltiplos desses dois ou mais números ao mesmo tempo. 
+O MMC de dois ou mais inteiros positivos é o \textbf{menor inteiro diferente de zero} que é múltiplo de todos eles simultaneamente.
 
-Nós dizemos que $a$ é múltiplo de $b$ quando $a$ é divisível por $b$. 
+Dizemos que $a$ é múltiplo de $b$ quando existe um inteiro $q$ tal que $a = b \cdot q$. Por exemplo: 10 é múltiplo de 5 pois $10 = 5 \cdot 2$; 18 é múltiplo de 6 pois $18 = 6 \cdot 3$.
 
-\TM{Exemplos:}
+\T{Método da fatoração simultânea}
 
-10 é múltiplo de 5, pois 10 é divisível por 5. Ou seja, o resultado da fração $\frac{10}{5} = 2$.
+Divida os números pelo menor primo que divida \textit{ao menos um} deles, carregando os demais inalterados. Repita até todos chegarem a 1. O MMC é o \textbf{produto de todos os fatores primos usados} — incluindo os que não dividiram todos os números ao mesmo tempo.
 
-6 é múltiplo de 2, pois 6 é divisível por 2. 
+\TM{Exemplo com 2 números — MMC de 12 e 18:}
 
-\vspace{0.5cm}
-
-Para encontrar o menor múltiplo comum de dois ou mais números geralmente utilizamos o método da fatoração que consistem em decompor esses números em fatores primos.
-
-\T{Método da fatoração}
-
-Coloque os números alinhados e inicie a divisão deles pelo menor número primo que divida pelo menos um dos números. Repita esse procedimento até que não seja mais possível dividir. Neste caso, passa para o próximo número primo que divide ao menos um dos números restantes. Esse procedimento deve ser efetuado até que tenhamos somente 1 no final.
-
-\TM{Exemplo com 1 número:}
-
-$\begin{array}{r|l} 
-28 & 2 \\
-14 & 2 \\
-7 & 7 \\
-\hline 
-1 & 2^2 \cdot 7
+$\begin{array}{r|l}
+12,18 & 2 \\
+6,9   & 2 \\
+3,9   & 3 \\
+1,3   & 3 \\
+\hline
+1,1   & 2^2 \cdot 3^2
 \end{array}$
+
+\vspace{0.2cm}
+{\small\textit{Obs.: nas linhas 2 e 4, os valores 9 e 1 são carregados por não serem divisíveis pelo fator usado.}}
+
 \vspace{0.3cm}
+MMC$(12, 18) = 2^2 \cdot 3^2 = 4 \cdot 9 = \textbf{36}$
 
-MMC de 28 é 28
+\TM{Exemplo com 3 números — MMC de 90, 30 e 25:}
 
-\TM{Exemplo com 2 números:}
-
-$\begin{array}{r|l} 
-30,5 & 2 \\
-15,5 & 3 \\
-5,5 & 5 \\
-\hline 
-1,1 & 2 \cdot 3 \cdot 5
-\end{array}$
-\vspace{0.3cm}
-
-MMC de 30, 5 = $2 \cdot 3 \cdot 5 = 30$
-
-\TM{Exemplo com 3 números:}
-
-$\begin{array}{r|l} 
+$\begin{array}{r|l}
 90,30,25 & 2 \\
 45,15,25 & 3 \\
-15,5,25 & 3 \\
-5,5,25 & 5 \\
-1,1,5 & 5 \\
-\hline 
-1,1,1 & 2 \cdot 3^2 \cdot 5^2
+15,5,25  & 3 \\
+5,5,25   & 5 \\
+1,1,5    & 5 \\
+\hline
+1,1,1    & 2 \cdot 3^2 \cdot 5^2
 \end{array}$
 
 \vspace{0.3cm}
+MMC$(90, 30, 25) = 2 \cdot 3^2 \cdot 5^2 = 2 \cdot 9 \cdot 25 = \textbf{450}$
 
-MMC de $90, 30, 25 = 2 \cdot 3^2 \cdot 5^2 = 450$
+% ──────────────────────────────────────────
+\T{MDC — Máximo Divisor Comum}
 
+O MDC de dois ou mais inteiros é o \textbf{maior inteiro positivo} que divide todos eles sem deixar resto.
 
-\T{MDC - Máximo Divisor Comum}
+\T{Método da decomposição simultânea}
 
-O MDC é o maior número que divide dois ou mais números ao mesmo tempo, ou seja, o maior número que divide dois ou mais números simultaneamente. Para encontrar o MDC existem vários métodos. Em virtude da simplicidade, o mais utilizado é o método da decomposição simultânea. Esse método consiste em realizar a decomposição em fatores primos conforme já apresentado, no entanto, são considerados somente os fatores que dividem todos os elementos ao mesmo tempo. 
+Divida os números pelo menor primo que divida \textit{todos} eles ao mesmo tempo. \textbf{Pare} quando não existir mais nenhum primo que divida todos simultaneamente. O MDC é o produto dos fatores usados.
 
-\TM{Exemplo com 2 números:}
+Esta é a principal diferença em relação ao MMC: no MDC o fator só é aproveitado se dividir \textit{todos} os números daquela linha — indicados em \textcolor{iris}{azul} nas tabelas abaixo.
 
-$\begin{array}{r|l} 
-\textcolor{iris}{32,24} &\textcolor{iris}{ 2} \\
-\textcolor{iris}{16,12} &\textcolor{iris}{ 2 }\\
-\textcolor{iris}{8,6} &\textcolor{iris}{ 2} \\
-4,3 & 2 \\
-2,3 & 2 \\
-1,3 & 3 \\
-\hline 
-1,1 & 2^3
+\TM{Exemplo com 2 números — MDC de 32 e 24:}
+
+$\begin{array}{r|l}
+\textcolor{iris}{32,24} & \textcolor{iris}{2} \\
+\textcolor{iris}{16,12} & \textcolor{iris}{2} \\
+\textcolor{iris}{8,6}   & \textcolor{iris}{2} \\
+\hline
+4,3 & 2^3
 \end{array}$
+
+\vspace{0.2cm}
+{\small\textit{4 e 3 não têm fator primo em comum — paramos aqui.}}
+
 \vspace{0.3cm}
+MDC$(32, 24) = 2^3 = \textbf{8}$
 
-MDC de $32,24 = 2^3 = 8 $
+\TM{Exemplo com 3 números — MDC de 120, 30 e 45:}
 
-
-\TM{Exemplo com 3 números:}
-
-$\begin{array}{r|l} 
-120,30,45 & 2 \\
-60,15,45 & 2 \\
-30,15,45 & 2 \\
-\textcolor{iris}{15,15,45} & \textcolor{iris}{3} \\
-5,5,15 & 3 \\
-\textcolor{iris}{5,5,5} &\textcolor{iris}{ 5} \\
-\hline 
-1,1,1 & 3 \cdot 5
+$\begin{array}{r|l}
+\textcolor{iris}{120,30,45} & \textcolor{iris}{3} \\
+\textcolor{iris}{40,10,15}  & \textcolor{iris}{5} \\
+\hline
+8,2,3 & 3 \cdot 5
 \end{array}$
-\vspace{0.3cm}
 
-MDC de $120, 30, 45 = 3 \cdot 5 = 15 $
-
-Perceba que somente as linhas indicadas em azul são consideradas. As demais não são contadas pois o fator primo não divide todos os elementos.
-
-\TM{Propriedades}
-
-O MDC de dois números consecutivos entre si é sempre igual a 1.
-
-\TM{Exemplos:}
-
-MDC de 13, 14 = 1
+\vspace{0.2cm}
+{\small\textit{Como 45 é ímpar, nenhuma divisão por 2 divide os três — começamos pelo 3.}}
 
 \vspace{0.3cm}
+MDC$(120, 30, 45) = 3 \cdot 5 = \textbf{15}$
 
-MDC de 56, 57 = 1
+% ──────────────────────────────────────────
+\T{Propriedades}
 
-\vspace{0.3cm}
+\TM{Relação entre MMC e MDC:}
 
-Outra propriedade é que se entre os elementos analisados houver um que é divisor dos demais, então este número será o MDC.
+Para quaisquer dois inteiros positivos $a$ e $b$:
 
-\TM{Exemplos:}
+\Formula{\text{MMC}(a,b) \times \text{MDC}(a,b) = a \times b}
 
-MDC de 4, 12, 28 = 4
+\vspace{0.2cm}
+Verificação com 12 e 18: MDC$(12,18) = 6$ e MMC$(12,18) = 36$.
 
-\vspace{0.3cm}
+$36 \times 6 = 216 = 12 \times 18$ \checkmark
 
-MDC de 90, 45, 15 = 15
+\TM{Números coprimos:}
+
+Dois números são \textbf{coprimos} (ou primos entre si) quando seu MDC é igual a 1 — não compartilham nenhum fator primo.
+
+MDC$(9, 16) = 1$, pois $9 = 3^2$ e $16 = 2^4$ não têm fatores em comum.
+
+\TM{Casos especiais:}
+
+Dois números \textbf{consecutivos} são sempre coprimos:
+MDC$(13, 14) = 1$ \quad MDC$(56, 57) = 1$
+
+Se $a$ divide $b$, então MDC$(a,b) = a$ e MMC$(a,b) = b$:
+MDC$(5, 30) = 5$ \quad MMC$(5, 30) = 30$
+
+% ──────────────────────────────────────────
+\T{Aplicação Prática}
+
+\TM{Quando usar o MMC — encontro de ciclos:}
+
+Dois ônibus partem juntos de um terminal. O primeiro passa a cada \textbf{12 minutos} e o segundo a cada \textbf{18 minutos}. Após quantos minutos voltarão a partir juntos?
+
+MMC$(12, 18) = 2^2 \cdot 3^2 = \textbf{36 minutos}$
+
+\TM{Quando usar o MDC — maior divisão exata:}
+
+Uma professora quer dividir \textbf{32 meninos} e \textbf{24 meninas} em grupos de mesmo tamanho, sem misturar. Qual o maior número de alunos por grupo?
+
+MDC$(32, 24) = 2^3 = \textbf{8 alunos por grupo}$
+
+Resultado: 4 grupos de meninos e 3 grupos de meninas.
 
 \end{multicols}
 
