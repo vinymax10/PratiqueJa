@@ -7,147 +7,7 @@
 
     <ui:define name="OpenGraph">
         <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
-        <style type="text/css">
-            /* ===== TEORIA LAYOUT ===== */
-            .tr-layout {
-                display: flex;
-                gap: 24px;
-                align-items: flex-start;
-                margin-top: 8px;
-            }
-
-            /* ===== TOC ===== */
-            .tr-toc {
-                width: 210px;
-                flex-shrink: 0;
-                background: white;
-                border-radius: 20px;
-                padding: 20px 0;
-                box-shadow: 0 4px 20px rgba(15,23,42,0.06);
-                position: sticky;
-                top: 24px;
-            }
-            .tr-toc-title {
-                font-size: 10px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                color: #9ca3af;
-                padding: 0 16px 10px;
-                border-bottom: 1px solid #f3f4f6;
-                margin-bottom: 6px;
-            }
-            .tr-toc a {
-                display: flex;
-                align-items: center;
-                gap: 9px;
-                padding: 8px 16px;
-                font-size: 13px;
-                font-weight: 500;
-                color: #6b7280;
-                text-decoration: none;
-                border-left: 3px solid transparent;
-                transition: color 0.15s, border-color 0.15s, background 0.15s;
-            }
-            .tr-toc a:hover { color: #2563eb; background: #f0f5ff; }
-            .tr-toc a.active {
-                color: #2563eb;
-                font-weight: 700;
-                border-left-color: #2563eb;
-                background: #f0f5ff;
-            }
-            .tr-toc-num {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 22px; height: 22px;
-                background: #f3f4f6;
-                border-radius: 6px;
-                font-size: 11px; font-weight: 700;
-                color: #6b7280; flex-shrink: 0;
-            }
-            .tr-toc a.active .tr-toc-num { background: #dbeafe; color: #2563eb; }
-
-            /* ===== CONTENT ===== */
-            .tr-content { flex: 1; min-width: 0; }
-
-            /* ===== SECTION CARD ===== */
-            .tr-section {
-                background: white;
-                border-radius: 20px;
-                padding: 32px 40px;
-                box-shadow: 0 4px 20px rgba(15,23,42,0.06);
-                margin-bottom: 20px;
-                scroll-margin-top: 24px;
-            }
-            .tr-section-header {
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                margin-bottom: 18px;
-                padding-bottom: 14px;
-                border-bottom: 2px solid #f3f4f6;
-            }
-            .tr-badge {
-                display: inline-flex; align-items: center; justify-content: center;
-                width: 40px; height: 40px;
-                background: linear-gradient(135deg, #2563eb, #60a5fa);
-                border-radius: 12px;
-                font-size: 16px; font-weight: 800; color: white;
-                flex-shrink: 0;
-            }
-            .tr-badge.def  { background: linear-gradient(135deg, #7c3aed, #a78bfa); font-size: 12px; }
-            .tr-badge.extra{ background: linear-gradient(135deg, #059669, #34d399); font-size: 12px; }
-            .tr-section-title { font-size: 1.2rem; font-weight: 700; color: #07142f; line-height: 1.2; }
-            .tr-section-sub   { font-size: 12px; color: #9ca3af; font-weight: 500; margin-top: 2px; }
-
-            .tr-section p { color: #374151; line-height: 1.85; margin-bottom: 1em; font-size: 1rem; }
-            .tr-section p:last-child { margin-bottom: 0; }
-            .tr-section h4 {
-                font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-                letter-spacing: 0.6px; color: #9ca3af; margin: 18px 0 8px;
-            }
-            .tr-rule {
-                background: #f0f5ff; border-left: 4px solid #2563eb;
-                border-radius: 0 12px 12px 0;
-                padding: 14px 18px; margin: 14px 0;
-                color: #1e40af; font-weight: 500; line-height: 1.7; font-size: 0.97rem;
-            }
-            .tr-examples { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-            .tr-ex {
-                background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px;
-                padding: 9px 14px; font-size: 0.92rem; color: #374151; line-height: 1.6;
-            }
-            .hl { color: #2563eb; font-weight: 700; }
-
-            /* ===== FACTORIZATION TABLE ===== */
-            .fact-wrap { overflow-x: auto; margin: 14px 0; }
-            .fact-table { border-collapse: collapse; font-size: 14px; }
-            .fact-table td { padding: 5px 12px; text-align: right; border: 1px solid #e5e7eb; color: #374151; }
-            .fact-table td.sep { border-right: 2px solid #374151; }
-            .fact-table tr.hline td { border-top: 2px solid #374151; }
-            .fact-table td.hlc { color: #2563eb; font-weight: 700; }
-
-            /* ===== DIVISORS ===== */
-            .tr-divisors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-            .tr-divisor {
-                background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
-                padding: 5px 12px; font-size: 13px; font-weight: 600; color: #1d4ed8;
-            }
-
-            /* ===== RESPONSIVE ===== */
-            @media (max-width: 900px) {
-                .tr-layout { flex-direction: column; }
-                .tr-toc {
-                    width: 100%; position: static;
-                    display: flex; flex-wrap: wrap; padding: 12px; gap: 4px;
-                }
-                .tr-toc-title { width: 100%; padding: 0 4px 8px; }
-                .tr-toc a { border-left: none; border-radius: 8px; padding: 6px 10px; }
-                .tr-toc a.active { border-left: none; }
-                .tr-section { padding: 20px 16px; }
-            }
-        </style>
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
     </ui:define>
 
     <f:metadata>
@@ -173,6 +33,8 @@
             <a href="#sec-7"><span class="tr-toc-num">7</span> Divisível por 7</a>
             <a href="#sec-8"><span class="tr-toc-num">8</span> Divisível por 8</a>
             <a href="#sec-9"><span class="tr-toc-num">9</span> Divisível por 9</a>
+            <a href="#sec-10"><span class="tr-toc-num">10</span> Divisível por 10</a>
+            <a href="#sec-11"><span class="tr-toc-num">11</span> Divisível por 11</a>
             <a href="#sec-div"><span class="tr-toc-num">&#9733;</span> Divisores</a>
         </div>
 
@@ -249,8 +111,8 @@
                 </div>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex">13583485<span class="hl">24</span> → 24 é múltiplo de 4 ✓</div>
-                    <div class="tr-ex">7<span class="hl">36</span> → 36 é múltiplo de 4 ✓</div>
+                    <div class="tr-ex">5<span class="hl">24</span> → 24 é múltiplo de 4 ✓</div>
+                    <div class="tr-ex">13<span class="hl">36</span> → 36 é múltiplo de 4 ✓</div>
                     <div class="tr-ex">5<span class="hl">14</span> → 14 não é múltiplo de 4 ✗</div>
                 </div>
             </div>
@@ -269,9 +131,9 @@
                 </div>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex">63489334<span class="hl">5</span> → termina em 5 ✓</div>
-                    <div class="tr-ex">93489658<span class="hl">0</span> → termina em 0 ✓</div>
-                    <div class="tr-ex">7832<span class="hl">3</span> → termina em 3 ✗</div>
+                    <div class="tr-ex">32<span class="hl">5</span> → termina em 5 ✓</div>
+                    <div class="tr-ex">14<span class="hl">0</span> → termina em 0 ✓</div>
+                    <div class="tr-ex">78<span class="hl">3</span> → termina em 3 ✗</div>
                 </div>
             </div>
 
@@ -318,7 +180,7 @@
                         109<span class="hl">9</span>
                         \(\Rightarrow 9 \cdot 2 = 18 \Rightarrow 109 - 18 = 91\)
                         <br />
-                        9<span class="hl">1</span>
+                        → repete com 91:&#160;&#160;9<span class="hl">1</span>
                         \(\Rightarrow 1 \cdot 2 = 2 \Rightarrow 9 - 2 = \)<span class="hl">7</span> → múltiplo de 7 ✓
                     </div>
                 </div>
@@ -338,9 +200,9 @@
                 </div>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex">1535467886<span class="hl">128</span> → 128 é múltiplo de 8 ✓</div>
-                    <div class="tr-ex">1535467886<span class="hl">768</span> → 768 é múltiplo de 8 ✓</div>
-                    <div class="tr-ex">35<span class="hl">100</span> → 100 não é múltiplo de 8 ✗</div>
+                    <div class="tr-ex">7<span class="hl">128</span> → 128 é múltiplo de 8 ✓</div>
+                    <div class="tr-ex">5<span class="hl">256</span> → 256 é múltiplo de 8 ✓</div>
+                    <div class="tr-ex">3<span class="hl">100</span> → 100 não é múltiplo de 8 ✗</div>
                 </div>
             </div>
 
@@ -364,6 +226,57 @@
                 </div>
             </div>
 
+            <!-- POR 10 -->
+            <div class="tr-section" id="sec-10">
+                <div class="tr-section-header">
+                    <div class="tr-badge" style="font-size:13px">10</div>
+                    <div>
+                        <div class="tr-section-title">Divisibilidade por 10</div>
+                        <div class="tr-section-sub">Último dígito 0</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um número é divisível por 10 quando o <strong>último dígito é 0</strong>.
+                </div>
+                <p>Como \(10 = 2 \times 5\), ser divisível por 10 equivale a ser divisível por 2 <em>e</em> por 5 ao mesmo tempo
+                — ou seja, terminar em 0 (condição que satisfaz ambas as regras simultaneamente).</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">15<span class="hl">0</span> → termina em 0 ✓</div>
+                    <div class="tr-ex">487<span class="hl">0</span> → termina em 0 ✓</div>
+                    <div class="tr-ex">32<span class="hl">5</span> → termina em 5, divisível por 5 mas não por 10 ✗</div>
+                </div>
+            </div>
+
+            <!-- POR 11 -->
+            <div class="tr-section" id="sec-11">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra" style="font-size:13px">11</div>
+                    <div>
+                        <div class="tr-section-title">Divisibilidade por 11</div>
+                        <div class="tr-section-sub">Soma alternada dos algarismos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um número é divisível por 11 quando a <strong>soma alternada dos seus algarismos</strong>
+                    (subtraindo e somando da esquerda para a direita) for múltipla de 11 (incluindo zero).
+                </div>
+                <p>Percorra os algarismos da esquerda para a direita alternando os sinais \(+\) e \(-\), começando com \(+\).
+                Se o resultado for \(0\) ou múltiplo de \(11\), o número é divisível por 11.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        \(253 \Rightarrow +2-5+3 = \)<span class="hl">0</span> → múltiplo de 11 ✓
+                    </div>
+                    <div class="tr-ex">
+                        \(1452 \Rightarrow +1-4+5-2 = \)<span class="hl">0</span> → múltiplo de 11 ✓
+                    </div>
+                    <div class="tr-ex">
+                        \(123 \Rightarrow +1-2+3 = \)<span class="hl">2</span> → não múltiplo de 11 ✗
+                    </div>
+                </div>
+            </div>
+
             <!-- DIVISORES -->
             <div class="tr-section" id="sec-div">
                 <div class="tr-section-header">
@@ -374,7 +287,9 @@
                     </div>
                 </div>
 
-                <p>Para encontrar todos os divisores de um número, decomponha-o em fatores primos e aplique o método abaixo.</p>
+                <p>Para encontrar todos os divisores de um número, decomponha-o em fatores primos e aplique o método abaixo.
+                A ideia é: para cada fator primo da decomposição, multiplique <strong>todos os divisores já encontrados</strong>
+                por esse fator e acrescente os resultados novos à lista.</p>
 
                 <h4>Exemplo — divisores de 60</h4>
 
@@ -414,7 +329,7 @@
                     </table>
                 </div>
 
-                <p><strong>Passo 4</strong> — Segundo fator (2): \(2{\cdot}1=2\) (já existe), \(2{\cdot}2=4\). Acrescente <span class="hl">4</span>:</p>
+                <p><strong>Passo 4</strong> — Segundo fator (2): multiplique toda a lista atual \(\{1, 2\}\) por 2 → \(2{\cdot}1=2\) (já existe), \(2{\cdot}2=4\). Acrescente <span class="hl">4</span>:</p>
                 <div class="fact-wrap">
                     <table class="fact-table">
                         <tr><td class="sep">&#160;</td><td class="sep">&#160;</td><td>1</td></tr>
@@ -426,7 +341,7 @@
                     </table>
                 </div>
 
-                <p><strong>Passo 5</strong> — Fator 3: \(3{\cdot}1=3\), \(3{\cdot}2=6\), \(3{\cdot}4=12\). Acrescente <span class="hl">3, 6, 12</span>:</p>
+                <p><strong>Passo 5</strong> — Fator 3: multiplique toda a lista \(\{1, 2, 4\}\) por 3 → \(3{\cdot}1=3\), \(3{\cdot}2=6\), \(3{\cdot}4=12\). Acrescente <span class="hl">3, 6, 12</span>:</p>
                 <div class="fact-wrap">
                     <table class="fact-table">
                         <tr><td class="sep">&#160;</td><td class="sep">&#160;</td><td>1</td></tr>
@@ -438,7 +353,7 @@
                     </table>
                 </div>
 
-                <p><strong>Passo 6</strong> — Fator 5: \(5{\cdot}1=5\), \(5{\cdot}2=10\), \(5{\cdot}4=20\), \(5{\cdot}3=15\), \(5{\cdot}6=30\), \(5{\cdot}12=60\). Acrescente <span class="hl">5, 10, 20, 15, 30, 60</span>:</p>
+                <p><strong>Passo 6</strong> — Fator 5: multiplique toda a lista \(\{1, 2, 4, 3, 6, 12\}\) por 5 → \(5{\cdot}1=5\), \(5{\cdot}2=10\), \(5{\cdot}4=20\), \(5{\cdot}3=15\), \(5{\cdot}6=30\), \(5{\cdot}12=60\). Acrescente <span class="hl">5, 10, 20, 15, 30, 60</span>:</p>
                 <div class="fact-wrap">
                     <table class="fact-table">
                         <tr><td class="sep">&#160;</td><td class="sep">&#160;</td><td>1</td></tr>
@@ -464,6 +379,21 @@
                     <span class="tr-divisor">20</span>
                     <span class="tr-divisor">30</span>
                     <span class="tr-divisor">60</span>
+                </div>
+
+                <h4>Atalho — quantidade de divisores</h4>
+                <p>Não é preciso listar todos os divisores para saber <em>quantos</em> existem.
+                Se \(n = p_1^{a_1} \cdot p_2^{a_2} \cdots\), o total de divisores é:</p>
+                <div class="tr-rule">
+                    \(d(n) = (a_1 + 1)(a_2 + 1) \cdots\)
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        \(60 = 2^2 \cdot 3^1 \cdot 5^1 \Rightarrow d(60) = (2{+}1)(1{+}1)(1{+}1) = 3 \cdot 2 \cdot 2 = \)<span class="hl">12</span> divisores
+                    </div>
+                    <div class="tr-ex">
+                        \(36 = 2^2 \cdot 3^2 \Rightarrow d(36) = (2{+}1)(2{+}1) = 3 \cdot 3 = \)<span class="hl">9</span> divisores
+                    </div>
                 </div>
             </div>
 

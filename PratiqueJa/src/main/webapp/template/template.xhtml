@@ -521,7 +521,10 @@
 
 				var matches = hrefPath === path;
 				if (matches && hrefParams.has('assunto')) {
-					matches = hrefParams.get('assunto') === currentParams.get('assunto');
+					matches = hrefParams.get('assunto').toLowerCase() === currentParams.get('assunto').toLowerCase();
+				}
+				if (!matches && hrefParams.has('assunto') && currentParams.has('assunto')) {
+					matches = hrefParams.get('assunto').toLowerCase() === currentParams.get('assunto').toLowerCase();
 				}
 
 				if (matches) {

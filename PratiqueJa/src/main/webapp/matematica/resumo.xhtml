@@ -6,6 +6,7 @@
 
 <h:body >
 	<ui:composition>
+
 		<!-- HERO -->
 		<div class="as-hero">
 			<div class="as-hero-content">
@@ -18,7 +19,7 @@
 				<h:outputText styleClass="as-desc"
 					rendered="#{not empty assuntoCursoBean.entidade.descricao}"
 					value="#{assuntoCursoBean.entidade.descricao}" />
-	
+
 				<div class="as-stats">
 					<div class="as-stat">
 						<span class="as-stat-label">Exercícios</span>
@@ -40,12 +41,12 @@
 					</h:panelGroup>
 				</div>
 			</div>
-	
+
 			<div class="as-hero-image">
 				<img src="#{assuntoCursoBean.entidade.endImageCapa()}" alt="#{assuntoCursoBean.entidade.nome}" />
 			</div>
 		</div>
-	
+
 		<!-- PROGRESSO -->
 		<div class="as-progress-section">
 			<div class="as-progress-card">
@@ -68,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-	
+
 			<div class="as-continue-card">
 				<h3 class="as-continue-title">Continue de onde parou</h3>
 				<p class="as-continue-desc">Nenhuma atividade iniciada ainda. Comece pelos exercícios ou pelas anotações de teoria.</p>
@@ -82,15 +83,15 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<!-- BOTÕES DE NAVEGAÇÃO -->
 		<div class="as-tabs" id="asTabs">
 			<h:panelGroup layout="block"
 				rendered="#{assuntoCursoBean.entidade.showAnotacao}"
-				styleClass="as-tab" onclick="location.href='#{assuntoCursoBean.entidade.endTeoria()}'">
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" onclick="location.href='#{assuntoCursoBean.entidade.endTeoria()}'">
 				<i class="pi pi-book"></i> Teoria
 			</h:panelGroup>
-			
+
 			<h:panelGroup layout="block"
 				rendered="#{assuntoCursoBean.entidade.showExercicio}"
 				styleClass="as-tab" onclick="asShowTab('exercicios', this)">
@@ -106,6 +107,6 @@
 			</div>
 		</div>
 
-	</ui:composition>		
+	</ui:composition>
 </h:body>
 </html>
