@@ -4,6 +4,13 @@ reloadMathJax();
 
 window.addEventListener('resize', height);
 window.addEventListener('load', height);
+window.addEventListener('load', function() {
+    var pos = sessionStorage.getItem('scrollPos');
+    if (pos !== null) {
+        window.scrollTo(0, parseInt(pos));
+        sessionStorage.removeItem('scrollPos');
+    }
+});
 
 //let t = -1;
 //let delay = 1000;
@@ -120,6 +127,11 @@ function enableEnterSubmit(formId) {
 //        }
 //    });
 //});
+
+function navegarComScroll(url) {
+    sessionStorage.setItem('scrollPos', window.scrollY);
+    location.href = url;
+}
 
 function focusFistCampo(idElement) 
 {
