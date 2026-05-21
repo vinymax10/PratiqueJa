@@ -1,0 +1,439 @@
+% ============================================================
+%  Divisibilidade — Layout Hero | PratiqueJa
+%  Engine: XeLaTeX  |  Font: Inter via fontspec
+% ============================================================
+\documentclass[12pt]{article}
+
+% ── Idioma ───────────────────────────────────────────────────
+\usepackage[brazil]{babel}
+
+% ── Fontes (XeLaTeX + fontspec) ──────────────────────────────
+\usepackage{fontspec}
+\setmainfont[
+  BoldFont       = Inter-Bold,
+  ItalicFont     = Inter-Italic,
+  BoldItalicFont = Inter-BoldItalic,
+]{Inter-Regular}
+\usepackage{microtype}
+
+% ── Geometria da página ──────────────────────────────────────
+\usepackage[
+  a4paper,
+  top=1cm,
+  bottom=2.8cm,
+  left=1.5cm,
+  right=1.5cm,
+  includefoot
+]{geometry}
+
+% ── Cores (baseadas em teoria.css + template.css do PratiqueJa) ──
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+
+\definecolor{primary}{HTML}{2563EB}      % azul principal — badge, .hl, border
+\definecolor{primarydark}{HTML}{1E40AF}  % azul escuro — texto de regra
+\definecolor{heroback}{HTML}{1D4ED8}     % hero header — azul médio (mais suave)
+\definecolor{lightblue}{HTML}{60A5FA}    % azul claro — gradiente badge
+\definecolor{navybrand}{HTML}{07142F}    % navy — "Pratique" na marca
+\definecolor{softbg}{HTML}{F0F5FF}       % fundo tintado — .tr-rule bg
+\definecolor{chipbg}{HTML}{EFF6FF}       % chips divisores
+\definecolor{chipborder}{HTML}{BFDBFE}   % borda chips
+\definecolor{bodytext}{HTML}{374151}     % texto principal
+\definecolor{titletext}{HTML}{07142F}    % títulos de seção
+\definecolor{mutedtext}{HTML}{9CA3AF}    % texto secundário
+\definecolor{exborder}{HTML}{E5E7EB}     % borda exemplos
+\definecolor{gold}{HTML}{F5A623}         % acento dourado no hero
+
+% Alias para compatibilidade com \textcolor{iris}{...} no conteúdo
+\colorlet{iris}{primary}
+\colorlet{bluebell}{lightblue}
+
+% ── Matemática ───────────────────────────────────────────────
+\usepackage{amsmath,amssymb}
+
+% ── Layout ───────────────────────────────────────────────────
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{array}
+
+% ── Caixas estilizadas ───────────────────────────────────────
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% ── Rodapé ───────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.6pt}
+\fancyfoot[L]{\small\color{mutedtext}© Copyright, Pratique Já}
+\fancyfoot[C]{\color{primary}\textbf{pratiqueja.com}}
+
+% ============================================================
+%  COMANDOS PERSONALIZADOS
+% ============================================================
+
+% ── Título de seção — faixa azul sólida ──────────────────────
+\newcommand{\TW}[1]{%
+  \begin{tcolorbox}[
+    enhanced,
+    arc        = 6pt,
+    boxrule    = 0pt,
+    colback    = primary,
+    colframe   = primary,
+    left       = 8pt,
+    right      = 8pt,
+    top        = 5pt,
+    bottom     = 5pt,
+    drop shadow = {opacity=0.2, color=primarydark},
+  ]
+    \centering\bfseries\large\color{white}#1
+  \end{tcolorbox}%
+  \vspace{3pt}%
+}
+
+% ── Subtítulo de tópico — fundo tintado + borda esquerda azul
+\newcommand{\TM}[1]{%
+  \vspace{5pt}%
+  \noindent
+  \begin{tcolorbox}[
+    enhanced,
+    arc        = 3pt,
+    boxrule    = 0pt,
+    colback    = softbg,
+    colframe   = softbg,
+    left       = 5pt,
+    right      = 5pt,
+    top        = 2pt,
+    bottom     = 2pt,
+    borderline west = {3pt}{0pt}{primary},
+  ]
+    \color{primarydark}\bfseries\small #1
+  \end{tcolorbox}%
+  \vspace{2pt}%
+}
+
+% ── Logo da marca: Pratique em branco + Já em gold ───────────
+\newcommand{\brandlogo}{%
+  {\fontsize{24}{28}\selectfont\bfseries
+    \textcolor{white}{Pratique}\textcolor{gold}{Já}}%
+}
+
+% ── Cabeçalho hero — azul médio com faixa dourada ────────────
+\newcommand{\heroheader}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    arc        = 0pt,
+    boxrule    = 0pt,
+    colback    = heroback,
+    colframe   = heroback,
+    left       = 18pt,
+    right      = 18pt,
+    top        = 16pt,
+    bottom     = 16pt,
+    borderline south = {4pt}{0pt}{gold},
+  ]
+    \begin{minipage}[c]{0.26\linewidth}
+      \centering
+      \brandlogo
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.70\linewidth}
+      \centering
+      {\fontsize{34}{40}\selectfont\bfseries\color{white}#1}\par
+      \vspace{6pt}
+      {\color{gold}\rule{0.5\linewidth}{1.8pt}}\par
+      \vspace{6pt}
+      {\color{white!80}\large\itshape #2}
+    \end{minipage}
+  \end{tcolorbox}%
+  \vspace{8pt}%
+}
+
+% ============================================================
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+\color{bodytext}
+
+\heroheader{Divisibilidade}{Regras, Divisores e Aplicações}
+
+\begin{multicols}{2}
+
+\TW{Definição}
+
+\vspace{4pt}
+Um número é divisível por um determinado divisor se e somente se o
+resto da divisão for igual a zero.
+\vspace{4pt}
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 2:}
+
+Todo número par é divisível por 2 — quando o último dígito é
+0, 2, 4, 6 ou 8.
+
+\TM{Exemplos:}
+
+$2,4,6,8,10, \ldots$
+
+$13\textcolor{primary}{8} \Rightarrow$ último dígito 8 $\Rightarrow$ divisível.
+
+$47\textcolor{primary}{5} \Rightarrow$ último dígito 5 $\Rightarrow$ não divisível.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 3:}
+
+Quando a soma dos algarismos for múltipla de 3.
+
+\TM{Exemplos:}
+
+$132 \Rightarrow 1+3+2 = 6$ que é múltiplo de 3.
+
+$531 \Rightarrow 5+3+1 = 9$ que é múltiplo de 3.
+
+$124 \Rightarrow 1+2+4 = 7$ que não é múltiplo de 3.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 4:}
+
+Quando o número formado pelos 2 últimos dígitos é divisível por 4.
+
+\TM{Exemplos:}
+
+$5\textcolor{primary}{24} \Rightarrow$ 24 é múltiplo de 4.
+
+$13\textcolor{primary}{36} \Rightarrow$ 36 é múltiplo de 4.
+
+$5\textcolor{primary}{14} \Rightarrow$ 14 não é múltiplo de 4.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 5:}
+
+Quando o último dígito é igual a 0 ou 5.
+
+\TM{Exemplos:}
+
+$32\textcolor{primary}{5} \Rightarrow$ termina em 5.
+
+$14\textcolor{primary}{0} \Rightarrow$ termina em 0.
+
+$78\textcolor{primary}{3} \Rightarrow$ termina em 3, não divisível.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 6:}
+
+Quando o número é divisível por 2 e por 3 simultaneamente.
+
+\TM{Exemplos:}
+
+$654 \Rightarrow 6+5+4=15$ que é múltiplo de 3 e é par.
+
+$312 \Rightarrow 3+1+2=6$ que é múltiplo de 3 e é par.
+
+$125 \Rightarrow$ ímpar, logo não é divisível por 6.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 7:}
+
+Multiplique o último dígito por 2 e subtraia do número sem o último
+dígito. Repita até que o resultado seja visivelmente divisível ou não
+por 7.
+
+\TM{Exemplos:}
+
+$16\textcolor{primary}{1} \Rightarrow 1{\cdot}2=2 \Rightarrow 16-2=14$ é múltiplo de 7.
+
+$109\textcolor{primary}{9} \Rightarrow 9{\cdot}2=18 \Rightarrow 109-18=91$
+
+Repete com 91: $9\textcolor{primary}{1} \Rightarrow 1{\cdot}2=2 \Rightarrow 9-2=7$ é múltiplo de 7.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 8:}
+
+Quando o número formado pelos 3 últimos dígitos é divisível por 8.
+
+\TM{Exemplos:}
+
+$7\textcolor{primary}{128} \Rightarrow$ 128 é múltiplo de 8.
+
+$5\textcolor{primary}{256} \Rightarrow$ 256 é múltiplo de 8.
+
+$3\textcolor{primary}{100} \Rightarrow$ 100 não é múltiplo de 8.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 9:}
+
+Quando a soma dos algarismos for múltipla de 9.
+
+\TM{Exemplos:}
+
+$432 \Rightarrow 4+3+2=9$ que é múltiplo de 9.
+
+$6561 \Rightarrow 6+5+6+1=18$ que é múltiplo de 9.
+
+$124 \Rightarrow 1+2+4=7$ que não é múltiplo de 9.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 10:}
+
+Quando o último dígito é 0. Como $10=2\times5$, isso equivale a ser
+divisível por 2 e por 5 simultaneamente.
+
+\TM{Exemplos:}
+
+$15\textcolor{primary}{0} \Rightarrow$ termina em 0.
+
+$487\textcolor{primary}{0} \Rightarrow$ termina em 0.
+
+$32\textcolor{primary}{5} \Rightarrow$ termina em 5, divisível por 5 mas não por 10.
+
+%─────────────────────────────────────────────────────────────
+\TM{Divisibilidade por 11:}
+
+Quando a soma alternada dos algarismos (alternando $+$ e $-$ da
+esquerda para a direita) for múltipla de 11 (incluindo zero).
+
+\TM{Exemplos:}
+
+$253 \Rightarrow +2-5+3=0$ que é múltiplo de 11.
+
+$1452 \Rightarrow +1-4+5-2=0$ que é múltiplo de 11.
+
+$123 \Rightarrow +1-2+3=2$ que não é múltiplo de 11.
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Divisores de um número}
+
+\vspace{4pt}
+Para encontrar todos os divisores de um número, decomponha-o em
+fatores primos. Para cada fator primo, multiplique \textbf{todos os
+divisores já encontrados} por esse fator e acrescente os resultados
+novos à lista.
+
+\TM{Exemplo: divisores de 60}
+
+Os divisores de 60 são: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60.
+
+\vspace{4pt}
+Decomposição em fatores primos:
+\vspace{6pt}
+
+\noindent
+$\begin{array}[t]{r|l}
+60 & 2 \\
+30 & 2 \\
+15 & 3 \\
+ 5 & 5 \\
+\hline
+ 1 &   \\
+\end{array}$
+
+\vspace{8pt}
+Acrescente uma coluna de divisores à direita, começando com 1:
+
+\vspace{6pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & \textcolor{primary}{1} \\
+60 & 2 & \\
+30 & 2 & \\
+15 & 3 & \\
+ 5 & 5 & \\
+\hline
+ 1 &   & \\
+\end{array}$
+
+\vspace{8pt}
+Fator $\mathbf{2}$ — multiplica $\{1\}$: obtém $2$.
+
+\vspace{6pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & 1 \\
+60 & \textcolor{primary}{2} & \textcolor{primary}{2} \\
+30 & 2 & \\
+15 & 3 & \\
+ 5 & 5 & \\
+\hline
+ 1 &   & \\
+\end{array}$
+
+\vspace{8pt}
+Fator $\mathbf{2}$ — multiplica $\{1,2\}$: $2$ já existe, $4$ novo.
+
+\vspace{6pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & 1 \\
+60 & 2 & 2 \\
+30 & \textcolor{primary}{2} & \textcolor{primary}{4} \\
+15 & 3 & \\
+ 5 & 5 & \\
+\hline
+ 1 &   & \\
+\end{array}$
+
+\vspace{8pt}
+Fator $\mathbf{3}$ — multiplica $\{1,2,4\}$: obtém $3, 6, 12$.
+
+\vspace{6pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & 1 \\
+60 & 2 & 2 \\
+30 & 2 & 4 \\
+15 & \textcolor{primary}{3} & \textcolor{primary}{3,\ 6,\ 12} \\
+ 5 & 5 & \\
+\hline
+ 1 &   & \\
+\end{array}$
+
+\vspace{8pt}
+Fator $\mathbf{5}$ — multiplica $\{1,2,4,3,6,12\}$: obtém $5,10,20,15,30,60$.
+
+\vspace{6pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & 1 \\
+60 & 2 & 2 \\
+30 & 2 & 4 \\
+15 & 3 & 3,\ 6,\ 12 \\
+ 5 & \textcolor{primary}{5} & \textcolor{primary}{5,\ 10,\ 20,\ 15,\ 30,\ 60} \\
+\hline
+ 1 &   & \\
+\end{array}$
+
+%─────────────────────────────────────────────────────────────
+\vspace{6pt}
+\TW{Quantidade de Divisores}
+
+\vspace{4pt}
+Se $n = p_1^{a_1} \cdot p_2^{a_2} \cdots$, o total de divisores é:
+
+\begin{tcolorbox}[
+  enhanced,
+  arc      = 5pt,
+  boxrule  = 0pt,
+  colback  = softbg,
+  colframe = softbg,
+  borderline west = {3pt}{0pt}{gold},
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+]
+  \centering\color{primarydark}
+  $d(n) = (a_1+1)(a_2+1)\cdots$
+\end{tcolorbox}
+
+\TM{Exemplos:}
+
+$60 = 2^2 \cdot 3^1 \cdot 5^1 \Rightarrow d(60)=(2{+}1)(1{+}1)(1{+}1)=12$
+
+$36 = 2^2 \cdot 3^2 \Rightarrow d(36)=(2{+}1)(2{+}1)=9$
+
+\vspace{4pt}
+
+\end{multicols}
+
+\end{document}

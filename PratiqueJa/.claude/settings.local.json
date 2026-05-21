@@ -19,7 +19,8 @@
       "Bash(Select-Object -Property FullName, PSIsContainer)",
       "Bash(Sort-Object FullName)",
       "Bash(Format-Table -AutoSize)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "Bash(xelatex -interaction=nonstopmode 10-Divisibilidade.tex)"
     ]
   }
 }
