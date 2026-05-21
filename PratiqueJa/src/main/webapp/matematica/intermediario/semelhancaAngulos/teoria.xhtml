@@ -1,0 +1,299 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- ── 1. ÂNGULOS OPOSTOS PELO VÉRTICE ────────────────── -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Ângulos Opostos pelo Vértice</div>
+                        <div class="tr-section-sub">Também chamados de ângulos verticais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois ângulos opostos pelo vértice sempre possuem a mesma medida — são <strong>congruentes</strong>.
+                </div>
+                <p>Quando duas retas se cruzam, formam quatro ângulos. Dois ângulos que compartilham um vértice
+                e um lado são chamados de <strong>ângulos adjacentes</strong> — na interseção de duas retas eles
+                são sempre suplementares. Os ângulos <strong>não adjacentes</strong> são os
+                <strong>ângulos opostos pelo vértice</strong> (também chamados de <strong>ângulos verticais</strong>).</p>
+                <p>Na figura, os dois ângulos em vermelho (\(\alpha\)) são opostos pelo vértice e têm a mesma medida.
+                O mesmo vale para os dois em verde (\(\beta\)). Observe ainda que \(\alpha\) e \(\beta\) são
+                adjacentes e portanto <strong>suplementares</strong>: \(\alpha + \beta = 180°\).</p>
+
+                <div style="text-align:center;margin:16px 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190">
+                  <path d="M110,90 L140,90 A30,30 0 0,1 85,107 Z"  fill="rgba(40,167,69,0.25)"/>
+                  <path d="M110,90 L80,90 A30,30 0 0,1 135,73 Z"   fill="rgba(40,167,69,0.25)"/>
+                  <path d="M110,90 L135,73 A30,30 0 0,1 140,90 Z"  fill="rgba(220,53,69,0.3)"/>
+                  <path d="M110,90 L85,107 A30,30 0 0,1 80,90 Z"   fill="rgba(220,53,69,0.3)"/>
+                  <line x1="30"  y1="90" x2="190" y2="90"  stroke="#3b5bdb" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="36"  y1="142" x2="184" y2="38" stroke="#3b5bdb" stroke-width="2.5" stroke-linecap="round"/>
+                  <text x="140" y="84"  font-size="15" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="72"  y="103" font-size="15" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="120" y="130" font-size="15" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                  <text x="94"  y="59"  font-size="15" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                </svg>
+                </div>
+
+                <h4>Exemplo resolvido</h4>
+                <p>Na figura, \(\alpha = 60°\). Encontre \(x\) (oposto a \(\alpha\)) e \(\beta\) (adjacente a \(\alpha\)).</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(x = \alpha = \)<span class="hl">60°</span>&#160;(opostos pelo vértice → congruentes)</div>
+                    <div class="tr-ex">\(\beta = 180° - 60° = \)<span class="hl">120°</span>&#160;(adjacentes → suplementares)</div>
+                </div>
+            </div>
+
+            <!-- ── 2. COMPLEMENTARES ───────────────────────────────── -->
+            <div class="tr-section" id="sec-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge" style="background:#2f9e44">90°</div>
+                    <div>
+                        <div class="tr-section-title">Ângulos Complementares</div>
+                        <div class="tr-section-sub">Soma igual a 90°</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois ângulos são <strong>complementares</strong> quando a soma de suas medidas é igual a <strong>90°</strong>.
+                    O complemento de \(\alpha\) é \(90° - \alpha\).
+                </div>
+                <p>Os ângulos não precisam ser adjacentes para serem complementares — basta que suas medidas somem 90°.
+                Ângulos complementares aparecem com frequência em <strong>triângulos retângulos</strong>, onde os dois
+                ângulos agudos são sempre complementares entre si.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(30° + 60° = \)<span class="hl">90°</span> → complementares ✓</div>
+                    <div class="tr-ex">\(45° + 45° = \)<span class="hl">90°</span> → complementares ✓</div>
+                    <div class="tr-ex">\(50° + 60° = 110° \neq 90°\) → não complementares ✗</div>
+                </div>
+                <h4>Encontrando o complemento</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">Se \(\alpha = 37°\), o complemento é \(90° - 37° = \)<span class="hl">53°</span></div>
+                    <div class="tr-ex">Se \(\alpha = 72°\), o complemento é \(90° - 72° = \)<span class="hl">18°</span></div>
+                </div>
+            </div>
+
+            <!-- ── 3. SUPLEMENTARES ───────────────────────────────── -->
+            <div class="tr-section" id="sec-sup">
+                <div class="tr-section-header">
+                    <div class="tr-badge" style="background:#e03131">180°</div>
+                    <div>
+                        <div class="tr-section-title">Ângulos Suplementares</div>
+                        <div class="tr-section-sub">Soma igual a 180°</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois ângulos são <strong>suplementares</strong> quando a soma de suas medidas é igual a <strong>180°</strong>.
+                    O suplemento de \(\alpha\) é \(180° - \alpha\).
+                </div>
+                <p>Ângulos suplementares adjacentes formam uma linha reta. Como visto na seção anterior,
+                na interseção de duas retas cada ângulo é sempre suplementar aos seus dois vizinhos adjacentes.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(60° + 120° = \)<span class="hl">180°</span> → suplementares ✓</div>
+                    <div class="tr-ex">\(90° + 90° = \)<span class="hl">180°</span> → suplementares ✓</div>
+                    <div class="tr-ex">\(70° + 80° = 150° \neq 180°\) → não suplementares ✗</div>
+                </div>
+                <h4>Encontrando o suplemento</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">Se \(\alpha = 30°\), o suplemento é \(180° - 30° = \)<span class="hl">150°</span></div>
+                    <div class="tr-ex">Se \(\alpha = 110°\), o suplemento é \(180° - 110° = \)<span class="hl">70°</span></div>
+                </div>
+            </div>
+
+            <!-- ── 4. RETAS PARALELAS ─────────────────────────────── -->
+            <div class="tr-section" id="sec-par">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#8741;</div>
+                    <div>
+                        <div class="tr-section-title">Retas Paralelas e Transversal</div>
+                        <div class="tr-section-sub">Correspondentes, alternos e colaterais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando uma reta transversal corta duas retas paralelas, formam-se <strong>8 ângulos</strong>
+                    com relações bem definidas: ângulos <strong>correspondentes</strong> e <strong>alternos</strong>
+                    são iguais; ângulos <strong>colaterais</strong> são suplementares (somam \(180°\)).
+                </div>
+
+                <div style="text-align:center;margin:16px 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="300" height="205" viewBox="0 0 300 205">
+                  <line x1="20"  y1="65"  x2="262" y2="65"  stroke="#7048e8" stroke-width="2.5"/>
+                  <line x1="20"  y1="148" x2="262" y2="148" stroke="#7048e8" stroke-width="2.5"/>
+                  <line x1="85"  y1="15"  x2="195" y2="188" stroke="#e67700" stroke-width="2.5"/>
+                  <path d="M117,65 L135,65 A18,18 0 0,1 127,80 Z" fill="rgba(220,53,69,0.3)"/>
+                  <path d="M117,65 L127,80 A18,18 0 0,1 99,65 Z"  fill="rgba(40,167,69,0.3)"/>
+                  <path d="M117,65 L99,65 A18,18 0 0,1 107,50 Z"  fill="rgba(220,53,69,0.3)"/>
+                  <path d="M117,65 L107,50 A18,18 0 0,1 135,65 Z" fill="rgba(40,167,69,0.3)"/>
+                  <path d="M170,148 L188,148 A18,18 0 0,1 180,163 Z" fill="rgba(220,53,69,0.3)"/>
+                  <path d="M170,148 L180,163 A18,18 0 0,1 152,148 Z" fill="rgba(40,167,69,0.3)"/>
+                  <path d="M170,148 L152,148 A18,18 0 0,1 160,133 Z" fill="rgba(220,53,69,0.3)"/>
+                  <path d="M170,148 L160,133 A18,18 0 0,1 188,148 Z" fill="rgba(40,167,69,0.3)"/>
+                  <text x="136" y="79"  font-size="11" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="100" y="88"  font-size="11" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                  <text x="92"  y="54"  font-size="11" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="127" y="43"  font-size="11" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                  <text x="189" y="162" font-size="11" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="153" y="171" font-size="11" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                  <text x="145" y="137" font-size="11" fill="#c92a2a" font-weight="bold" font-family="serif">&#945;</text>
+                  <text x="180" y="126" font-size="11" fill="#2f9e44" font-weight="bold" font-family="serif">&#946;</text>
+                  <text x="246" y="61"  font-size="13" fill="#555" font-style="italic">r</text>
+                  <text x="246" y="144" font-size="13" fill="#555" font-style="italic">s</text>
+                  <text x="190" y="186" font-size="11" fill="#888">r &#8741; s</text>
+                </svg>
+                </div>
+
+                <h4>Tipos de ângulos formados</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Correspondentes</strong><br/>
+                        Mesmo lado da transversal, um em cada paralela.<br/>
+                        \(\alpha_r = \alpha_s\)
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Alternos internos</strong><br/>
+                        Entre as paralelas, lados <em>opostos</em> da transversal.<br/>
+                        \(\alpha_r = \alpha_s\)
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Alternos externos</strong><br/>
+                        Fora das paralelas, lados <em>opostos</em> da transversal.<br/>
+                        \(\alpha_r = \alpha_s\)
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Colaterais co-internos</strong><br/>
+                        Entre as paralelas, <em>mesmo lado</em> da transversal.<br/>
+                        \(\alpha + \beta = 180°\)
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Colaterais co-externos</strong><br/>
+                        Fora das paralelas, <em>mesmo lado</em> da transversal.<br/>
+                        \(\alpha + \beta = 180°\)
+                    </div>
+                </div>
+
+                <!-- Callout atenção -->
+                <div style="background:#fff8e1;border-left:4px solid #f59f00;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;font-size:.93rem;">
+                    <strong>Atenção — erro comum:</strong> Alternos internos e colaterais co-internos ficam
+                    ambos <em>entre</em> as paralelas, mas têm relações opostas: alternos são
+                    <strong>iguais</strong> (lados opostos da transversal), colaterais são
+                    <strong>suplementares</strong> (mesmo lado da transversal).
+                </div>
+
+                <h4>Exemplos resolvidos</h4>
+                <p><strong>1) Ângulo correspondente</strong> — ângulo \(\alpha\) na reta \(r\) mede \(50°\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">Correspondente em \(s\): \(\alpha_s = 50°\)&#160;(iguais)</div>
+                    <div class="tr-ex">Adjacente \(\beta\) em \(r\): \(\beta = 180° - 50° = \)<span class="hl">130°</span></div>
+                </div>
+                <p style="margin-top:12px;"><strong>2) Ângulo alterno interno</strong> — ângulo \(\alpha\) em \(r\) mede \(70°\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">Alterno interno em \(s\): \(\alpha_s = 70°\)&#160;(iguais — lados opostos)</div>
+                </div>
+                <p style="margin-top:12px;"><strong>3) Ângulo colateral co-interno</strong> — ângulo \(\alpha\) em \(r\) mede \(30°\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">Colateral em \(s\): \(\beta = 180° - 30° = \)<span class="hl">150°</span>&#160;(suplementares — mesmo lado)</div>
+                </div>
+
+                <!-- Teorema recíproco -->
+                <div class="tr-rule" style="background:#f3f0ff;border-color:#7048e8;margin-top:20px;">
+                    <strong>Teorema recíproco:</strong> Se dois ângulos correspondentes (ou alternos) formados
+                    por uma transversal forem iguais, então as duas retas cortadas são necessariamente
+                    <strong>paralelas</strong>. Essa propriedade é usada para provar paralelismo.
+                </div>
+            </div>
+
+            <!-- ── 5. TABELA RESUMO ────────────────────────────────── -->
+            <div class="tr-section" id="sec-resumo">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#8801;</div>
+                    <div>
+                        <div class="tr-section-title">Tabela Resumo</div>
+                        <div class="tr-section-sub">Todas as relações angulares</div>
+                    </div>
+                </div>
+                <div class="fact-wrap">
+                    <table class="fact-table" style="width:100%;border-collapse:collapse;text-align:left;">
+                        <tr style="background:#3b5bdb;color:#fff;">
+                            <th style="padding:8px 12px;text-align:left;">Tipo</th>
+                            <th style="padding:8px 12px;text-align:left;">Contexto</th>
+                            <th style="padding:8px 12px;text-align:left;">Fórmula</th>
+                            <th style="padding:8px 12px;text-align:left;">Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;text-align:left;">Opostos pelo vértice</td>
+                            <td style="padding:8px 12px;text-align:left;">Interseção de duas retas</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha_1 = \alpha_2\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 50°\), o oposto é \(50°\)</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:8px 12px;text-align:left;">Complementares</td>
+                            <td style="padding:8px 12px;text-align:left;">Par cuja soma é \(90°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha + \beta = 90°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">\(30° + 60° = 90°\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;text-align:left;">Suplementares</td>
+                            <td style="padding:8px 12px;text-align:left;">Par cuja soma é \(180°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha + \beta = 180°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">\(60° + 120° = 180°\)</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:8px 12px;text-align:left;">Correspondentes</td>
+                            <td style="padding:8px 12px;text-align:left;">Paralelas + transversal</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha_r = \alpha_s\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 70°\), correspondente é \(70°\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;text-align:left;">Alternos internos</td>
+                            <td style="padding:8px 12px;text-align:left;">Paralelas + transversal</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha_r = \alpha_s\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 70°\), alterno é \(70°\)</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:8px 12px;text-align:left;">Alternos externos</td>
+                            <td style="padding:8px 12px;text-align:left;">Paralelas + transversal</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha_r = \alpha_s\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 70°\), alterno externo é \(70°\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;text-align:left;">Colaterais co-internos</td>
+                            <td style="padding:8px 12px;text-align:left;">Paralelas + transversal</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha + \beta = 180°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 70°\), colateral é \(110°\)</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:8px 12px;text-align:left;">Colaterais co-externos</td>
+                            <td style="padding:8px 12px;text-align:left;">Paralelas + transversal</td>
+                            <td style="padding:8px 12px;text-align:left;">\(\alpha + \beta = 180°\)</td>
+                            <td style="padding:8px 12px;text-align:left;">Se \(\alpha = 70°\), col. externo é \(110°\)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

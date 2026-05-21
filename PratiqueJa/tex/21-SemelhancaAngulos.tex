@@ -8,14 +8,19 @@
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
-    \textbf{\Huge \textcolor{bluebell}{Semelhança entre Ângulos}}
+    \textbf{\Huge \textcolor{bluebell}{Relações entre Ângulos}}
 \end{center}
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+\TW{Ângulos Opostos pelo Vértice}
+\textit{Também chamados de ângulos verticais}
 
-Todo ângulo oposto pelo vértice formado por duas semi-retas possuem a mesma medida, ou seja, são ângulos congruentes. Dizemos que dois ângulos são complementares quando a soma entre eles é igual a $\ang{90}$ e suplementar quando a soma é igual a $\ang{180}$.
+\vspace{4pt}
+
+Quando duas retas se cruzam, formam quatro ângulos. Dois ângulos que compartilham um vértice e um lado são chamados de \textbf{ângulos adjacentes}. Os ângulos \textbf{não adjacentes} são os \textbf{ângulos opostos pelo vértice} (também chamados de \textbf{ângulos verticais}) --- eles sempre possuem a mesma medida, sendo portanto \textbf{congruentes}.
+
+Na figura, os dois ângulos em vermelho ($\alpha$) são opostos pelo vértice, assim como os dois em verde ($\beta$). Note que $\alpha$ e $\beta$ são adjacentes e portanto \textbf{suplementares}: $\alpha + \beta = \ang{180}$.
 
 \begin{center}
 \begin{tikzpicture}
@@ -24,59 +29,77 @@ Todo ângulo oposto pelo vértice formado por duas semi-retas possuem a mesma me
 \tikzstyle{angleA}=[draw=none,fill=red!30!white]
 \tikzstyle{angleB}=[draw=none,fill=green!30!white]
 
-\begin{scope}[shift={(2,1.25)}]
-    \draw[angleA] (0,0) -- (-30:0.5) arc (-30:30:0.5);
-    \draw[angleA] (0,0) -- (150:0.5) arc (150:210:0.5);
-    \draw[angleB] (0,0) -- (30:0.5) arc (30:150:0.5);
-    \draw[angleB] (0,0) -- (210:0.5) arc (210:330:0.5);
+\begin{scope}[shift={(2,0.93)}]
+    \draw[angleA] (0,0) -- (-25:0.55) arc (-25:25:0.55);
+    \draw[angleA] (0,0) -- (155:0.55) arc (155:205:0.55);
+    \draw[angleB] (0,0) -- (25:0.55) arc (25:155:0.55);
+    \draw[angleB] (0,0) -- (205:0.55) arc (205:335:0.55);
 \end{scope}
 
-\draw[line,stealth-stealth] (0,0) -- (4,2.5);
-\draw[line,stealth-stealth] (0,2.5) -- (4,0);
-\node[texto] at (1.25,1.25) {\textbf{$\alpha$}};
-\node[texto] at (2.8,1.25) {\textbf{$\alpha$}};
-\node[texto] at (2,2) {\textbf{$\beta$}};
-\node[texto] at (2,0.5) {\textbf{$\beta$}};
+\draw[line,stealth-stealth] (0,0.32) -- (4,2.18);
+\draw[line,stealth-stealth] (0,2.18) -- (4,0.32);
+\node[texto] at (2.9,1.05) {\textbf{$\alpha$}};
+\node[texto] at (1.1,0.85) {\textbf{$\alpha$}};
+\node[texto] at (2,1.8) {\textbf{$\beta$}};
+\node[texto] at (2,0.15) {\textbf{$\beta$}};
 \end{tikzpicture}
 \end{center}
 
 \TM{Exemplo:}
 
+Na figura, $\alpha = \ang{60}$. Encontre $x$ (oposto a $\alpha$) e $\beta$ (adjacente a $\alpha$).
+
+Como $x$ é oposto pelo vértice a $\ang{60}$, temos $x = \ang{60}$.
+
+Como $\beta$ é adjacente (suplementar) a $x$:
+
+$\beta + x = \ang{180}$
+
+$\beta = \ang{180} - \ang{60} = \ang{120}$
+
+\columnbreak
+
+\T{Ângulos Complementares}
+
+Dois ângulos são \textbf{complementares} quando a soma de suas medidas é igual a $\ang{90}$. O complemento de $\alpha$ é $\ang{90} - \alpha$.
+
+Os ângulos não precisam ser adjacentes para serem complementares --- basta que as medidas somem $\ang{90}$. Essa relação aparece com frequência em \textbf{triângulos retângulos}, onde os dois ângulos agudos são sempre complementares entre si.
+
 \begin{center}
-\begin{tikzpicture}
-\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
-\tikzstyle{line}=[blue!50!white,fill=blue!20!white,line width=2pt]
-\tikzstyle{angleA}=[draw=none,fill=red!30!white]
-\tikzstyle{angleB}=[draw=none,fill=green!30!white]
-
-\begin{scope}[shift={(2,1.25)}]
-    \draw[angleA] (0,0) -- (-30:0.5) arc (-30:30:0.5);
-    \draw[angleA] (0,0) -- (150:0.5) arc (150:210:0.5);
-    \draw[angleB] (0,0) -- (30:0.5) arc (30:150:0.5);
-\end{scope}
-
-\draw[line,stealth-stealth] (0,0) -- (4,2.5);
-\draw[line,stealth-stealth] (0,2.5) -- (4,0);
-\node[texto] at (1.1,1.25) {\textbf{$\ang{60}$}};
-\node[texto] at (2.8,1.25) {\textbf{$x$}};
-\node[texto] at (2,2) {\textbf{$y$}};
-\end{tikzpicture}
+\begin{tabular}{l}
+$\ang{30} + \ang{60} = \ang{90}$ \checkmark \\
+$\ang{45} + \ang{45} = \ang{90}$ \checkmark \\
+\end{tabular}
 \end{center}
 
-Conforme definição deduzimos que $x=\ang{60}$. Como $y$ é suplemento de $x$ então temos que:
+\TM{Encontrando o complemento:}
 
-$y + x = 180$
+Se $\alpha = \ang{37}$: complemento $= \ang{90} - \ang{37} = \ang{53}$
 
-$y = 180 - x$
+Se $\alpha = \ang{72}$: complemento $= \ang{90} - \ang{72} = \ang{18}$
 
-$y = 180 - 60$
+\T{Ângulos Suplementares}
 
-$y = 120$
+Dois ângulos são \textbf{suplementares} quando a soma de suas medidas é igual a $\ang{180}$. O suplemento de $\alpha$ é $\ang{180} - \alpha$.
 
+Ângulos suplementares adjacentes formam uma linha reta. Como visto acima, na interseção de duas retas cada ângulo é sempre suplementar aos seus dois vizinhos adjacentes.
 
-\T{Retas paralelas}
+\begin{center}
+\begin{tabular}{l}
+$\ang{60} + \ang{120} = \ang{180}$ \checkmark \\
+$\ang{90} + \ang{90} = \ang{180}$ \checkmark \\
+\end{tabular}
+\end{center}
 
-Os ângulos correspondentes formados por duas retas paralelas e uma transversal são iguais (congruentes). Na figura abaixo temos duas retas paralelas $s$ e $r$ que são cortadas por uma reta transversal formando 4 ângulos $\alpha$ e 4 ângulos $\beta$ de modo que $\alpha$ é suplemento de $\beta$.
+\TM{Encontrando o suplemento:}
+
+Se $\alpha = \ang{30}$: suplemento $= \ang{180} - \ang{30} = \ang{150}$
+
+Se $\alpha = \ang{110}$: suplemento $= \ang{180} - \ang{110} = \ang{70}$
+
+\T{Retas Paralelas e Transversal}
+
+Quando uma \textbf{reta transversal} corta duas retas paralelas, formam-se 8 ângulos. Os ângulos \textbf{correspondentes} e \textbf{alternos} são iguais; os ângulos \textbf{colaterais} são suplementares (somam $\ang{180}$).
 
 \begin{center}
 \begin{tikzpicture}
@@ -117,57 +140,71 @@ Os ângulos correspondentes formados por duas retas paralelas e uma transversal 
 \end{tikzpicture}
 \end{center}
 
-\TM{Exemplo:}
+As relações entre os ângulos formados são:
 
-\begin{center}
-\begin{tikzpicture}
-\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
-\tikzstyle{line}=[violet!50!white,line width=2pt]
-\tikzstyle{angleA}=[draw=none,fill=red!30!white]
-\tikzstyle{angleB}=[draw=none,fill=blue!30!white]
-\begin{scope}[shift={(3.8,2)}]
-    \draw[angleA] (0,0) -- (0:0.5) arc (0:50:0.5);
-    %\draw[angleA] (0,0) -- (180:0.5) arc (180:230:0.5);
-    %\draw[angleB] (0,0) -- (50:0.5) arc (50:180:0.5);
-    %\draw[angleB] (0,0) -- (230:0.5) arc (230:360:0.5);
-\end{scope}
+\begin{itemize}
+    \item \textbf{Correspondentes:} mesmo lado da transversal, um em cada paralela~--- \textbf{iguais}.
+    \item \textbf{Alternos internos:} entre as paralelas, lados \textit{opostos} da transversal~--- \textbf{iguais}.
+    \item \textbf{Alternos externos:} fora das paralelas, lados \textit{opostos} da transversal~--- \textbf{iguais}.
+    \item \textbf{Colaterais co-internos:} entre as paralelas, \textit{mesmo lado} da transversal~--- \textbf{soma} $= \ang{180}$.
+    \item \textbf{Colaterais co-externos:} fora das paralelas, \textit{mesmo lado} da transversal~--- \textbf{soma} $= \ang{180}$.
+\end{itemize}
 
-\begin{scope}[shift={(2.2,0)}]
-   % \draw[angleA] (0,0) -- (0:0.5) arc (0:50:0.5);
-    \draw[angleA] (0,0) -- (180:0.5) arc (180:230:0.5);
-    \draw[angleB] (0,0) -- (50:0.5) arc (50:180:0.5);
-    %\draw[angleB] (0,0) -- (230:0.5) arc (230:360:0.5);
-\end{scope}
+\textbf{Atenção:} Alternos internos e colaterais co-internos ficam ambos \textit{entre} as paralelas, mas têm relações opostas: alternos são \textbf{iguais} (lados opostos), colaterais são \textbf{suplementares} (mesmo lado).
 
-\draw[line,stealth-stealth] (0,0) -- (6,0);
-\draw[line,stealth-stealth] (0,2) -- (6,2);
-\draw[line,stealth-stealth] (1,-1.5) -- (5,3.5);
+\TM{Exemplos:}
 
-\node[texto] at (4.6,2.3) {\textbf{$\ang{30}$}};
-%\node[texto] at (3.2,1.75) {\textbf{$\alpha$}};
-%\node[texto] at (2.8,0.3) {\textbf{$\alpha$}};
-\node[texto] at (1.6,-0.3) {\textbf{$x$}};
-%\node[texto] at (3.6,2.6) {\textbf{$\beta$}};
-%\node[texto] at (4.1,1.35) {\textbf{$\beta$}};
-\node[texto] at (1.9,0.6) {\textbf{$y$}};
-%\node[texto] at (2.4,-0.7) {\textbf{$\beta$}};
+\textbf{1) Ângulo correspondente} --- $\alpha$ em $r$ mede $\ang{50}$:
 
-\node[texto] at (5.5,0.2) {\textbf{$s$}};
-\node[texto] at (5.5,2.2) {\textbf{$r$}};
-\node[texto] at (5.5,-1) {\textbf{$s \parallel r$}};
-\end{tikzpicture}
-\end{center}
+O correspondente em $s$: $\alpha_s = \ang{50}$ (iguais).
 
-Neste exemplo temos que $x=\ang{30}$ e $y + x = 180 $.
+O ângulo adjacente $\beta$: $\beta = \ang{180} - \ang{50} = \ang{130}$.
 
-$y + 30 = 180 $
+\textbf{2) Ângulo alterno interno} --- $\alpha$ em $r$ mede $\ang{70}$:
 
+O alterno interno em $s$: $\alpha_s = \ang{70}$ (iguais --- lados opostos).
 
-$y = 180 - 30 $
+\textbf{3) Ângulo colateral co-interno} --- $\alpha$ em $r$ mede $\ang{30}$:
 
-$y = 150$
+O colateral em $s$: $\beta = \ang{180} - \ang{30} = \ang{150}$ (suplementares --- mesmo lado).
+
+\textbf{Teorema recíproco:} Se dois ângulos correspondentes (ou alternos) formados por uma transversal forem iguais, então as duas retas cortadas são necessariamente \textbf{paralelas}. Essa propriedade é usada para provar paralelismo.
 
 \end{multicols}
+
+\begin{center}
+    \textbf{\large \textcolor{bluebell}{Tabela Resumo}}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{|l|l|c|l|}
+\hline
+\rowcolor{blue!20}
+\textbf{Tipo} & \textbf{Contexto} & \textbf{Fórmula} & \textbf{Exemplo} \\
+\hline
+Opostos pelo vértice & Interseção de duas retas & $\alpha_1 = \alpha_2$ & Se $\alpha = \ang{50}$, oposto $= \ang{50}$ \\
+\hline
+\rowcolor{gray!10}
+Complementares & Par cuja soma é $\ang{90}$ & $\alpha + \beta = \ang{90}$ & $\ang{30} + \ang{60} = \ang{90}$ \\
+\hline
+Suplementares & Par cuja soma é $\ang{180}$ & $\alpha + \beta = \ang{180}$ & $\ang{60} + \ang{120} = \ang{180}$ \\
+\hline
+\rowcolor{gray!10}
+Correspondentes & Paralelas + transversal & $\alpha_r = \alpha_s$ & Se $\alpha = \ang{70}$, corresp. $= \ang{70}$ \\
+\hline
+Alternos internos & Paralelas + transversal & $\alpha_r = \alpha_s$ & Se $\alpha = \ang{70}$, alterno $= \ang{70}$ \\
+\hline
+\rowcolor{gray!10}
+Alternos externos & Paralelas + transversal & $\alpha_r = \alpha_s$ & Se $\alpha = \ang{70}$, alt.\ ext.\ $= \ang{70}$ \\
+\hline
+Colaterais co-internos & Paralelas + transversal & $\alpha + \beta = \ang{180}$ & Se $\alpha = \ang{70}$, colateral $= \ang{110}$ \\
+\hline
+\rowcolor{gray!10}
+Colaterais co-externos & Paralelas + transversal & $\alpha + \beta = \ang{180}$ & Se $\alpha = \ang{70}$, col.\ ext.\ $= \ang{110}$ \\
+\hline
+\end{tabular}
+\end{center}
 
 \input{rodape}
 \end{document}
