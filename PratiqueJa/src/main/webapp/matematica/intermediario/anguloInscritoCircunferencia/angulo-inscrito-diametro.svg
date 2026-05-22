@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="270" height="185" viewBox="0 0 270 185">
+    <circle cx="130" cy="92" r="75" fill="none" stroke="#aa88cc" stroke-width="1.8"/>
+    <path d="M 205 92 A 75 75 0 0 1 143 166" fill="none" stroke="#3366cc" stroke-width="3.5"/>
+    <path d="M 55 92 A 75 75 0 0 0 143 166" fill="none" stroke="#ee8800" stroke-width="3.5"/>
+    <line x1="55"  y1="92"  x2="205" y2="92"  stroke="#aa88cc" stroke-width="1.8"/>
+    <line x1="55"  y1="92"  x2="143" y2="166" stroke="#aa88cc" stroke-width="1.8"/>
+    <circle cx="130" cy="92"  r="3" fill="#aa88cc"/>
+    <circle cx="55"  cy="92"  r="4" fill="#ff8800" opacity="0.8"/>
+    <circle cx="205" cy="92"  r="4" fill="#ff8800" opacity="0.8"/>
+    <circle cx="143" cy="166" r="4" fill="#ff8800" opacity="0.8"/>
+    <text x="190" y="152" font-size="15" font-style="italic" fill="#3366cc" font-family="serif" font-weight="bold">α</text>
+    <text x="65"  y="158" font-size="15" font-style="italic" fill="#ee8800" font-family="serif" font-weight="bold">β</text>
+</svg>

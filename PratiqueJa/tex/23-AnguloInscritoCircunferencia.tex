@@ -17,12 +17,12 @@
 
 O ângulo inscrito na circunferência é um ângulo cujo vértice está sobre a circunferência e seus lados são segmentos de reta que interceptam a circunferência em dois pontos diferentes.
 
-A principal característica do ângulo inscrito é que ele é sempre metade do ângulo central que subtende o mesmo arco da circunferência. Em outras palavras, se um ângulo central e um ângulo inscrito subtendem o mesmo arco, o ângulo inscrito será a metade do ângulo central.
+A principal característica do ângulo inscrito é que ele é sempre metade do ângulo central que subtende o mesmo arco da circunferência. Geometricamente, isso ocorre porque o triângulo formado pelo centro e pelos dois pontos do arco é isósceles (lados iguais ao raio), e o ângulo externo do vértice inscrito é igual à soma dos dois ângulos da base — exatamente o dobro do ângulo inscrito.
 
 Se $\beta$ for o ângulo inscrito e $\alpha$ for o ângulo central que subtende o mesmo arco, então:
 
 \Formula{
-\beta  = \dfrac{\alpha}{2}
+\beta = \dfrac{\alpha}{2} \quad \Longleftrightarrow \quad \alpha = 2\,\beta
 }
 
 \begin{center}
@@ -120,9 +120,7 @@ $x= 30$
 \vspace{8px}
 $35 = \dfrac{x}{2}$ \vspace{8px}
 
-$\dfrac{x}{2} = 35$ \vspace{8px}
-
-$ x = 35 \cdot 2$
+$x = 35 \cdot 2$
 
 $x = 70$
 
@@ -132,7 +130,7 @@ A seguir iremos apresentar as principais propriedades importantes:
 
 \TM{Teorema de Tales}
 
-O Teorema de Tales afirma que, em um círculo, se um triângulo é formado por um diâmetro e uma linha que intercepta a circunferência em dois pontos, o ângulo formado entre esses dois pontos será sempre reto (90º). Ou seja, qualquer ângulo inscrito que subtenda o diâmetro de um círculo será um ângulo reto. Esse teorema é fundamental na geometria circular e é amplamente utilizado na resolução de problemas envolvendo círculos e triângulos. A seguir temos a figura que ilustra esse teorema:
+Todo ângulo inscrito cujo lado subtende um diâmetro é necessariamente um ângulo reto (\ang{90}). É um caso especial direto da propriedade do ângulo inscrito: o ângulo central que subtende o diâmetro mede \ang{180} (semicírculo), portanto o ângulo inscrito correspondente mede $\dfrac{180}{2} = \ang{90}$.
 
 \begin{center}
 \begin{tikzpicture}
@@ -240,7 +238,9 @@ $x = \dfrac{60}{2} = 30$ \vspace{8px}
 
 \TM{Diâmetro}
 
-Todo arco formado por uma reta que passa pelo centro da circunferência irá formar um ângulo de $\ang{180}$. No exemplo da figura abaixo temos que $\alpha + \beta = \ang{180}$.
+O diâmetro divide a circunferência em dois semicírculos de $\ang{180}$ cada. Se um ponto $P$ na circunferência forma os arcos $\alpha$ e $\beta$ com as extremidades do diâmetro, então esses dois arcos complementam o círculo inteiro:
+
+\Formula{\alpha + \beta = \ang{180}}
 
 \begin{center}
 \begin{tikzpicture}
@@ -327,6 +327,27 @@ $60+y=180$
 $y=180-60$
 
 $y=120$
+
+\TM{Quadrilátero Inscrito}
+
+Quando um quadrilátero tem todos os seus vértices sobre uma circunferência, dizemos que ele é um \textbf{quadrilátero inscrito}. Nesses quadriláteros, os ângulos opostos são sempre suplementares:
+
+\Formula{A + C = \ang{180} \qquad B + D = \ang{180}}
+
+Isso é consequência direta da propriedade do ângulo inscrito: cada par de ângulos opostos subtende arcos que juntos completam os \ang{360} da circunferência, portanto cada ângulo inscrito vale metade de \ang{360}, ou seja, \ang{180} somados.
+
+\TM{Exemplo:}
+
+Em um quadrilátero inscrito, três ângulos medem $\ang{80}$, $\ang{95}$ e $\ang{110}$. Qual é o quarto ângulo?
+
+Usando $A + C = \ang{180}$ e $B + D = \ang{180}$:
+
+\vspace{8px}
+$\ang{80} + C = \ang{180}$ \quad $\Rightarrow$ \quad $C = \ang{100}$
+
+$\ang{95} + D = \ang{180}$ \quad $\Rightarrow$ \quad $D = \ang{85}$
+
+Verificação: $80 + 95 + 100 + 85 = \ang{360}$ \checkmark
 
 \end{multicols}
 

@@ -1,0 +1,187 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <!--
+              Triângulo 1 — Definição (α β γ)
+              Tikz: A=(0,0) B=(5,0) C=(1.5,2.5)
+              Scale=50, margin=20. SVG_y = (2.5 – tikz_y)×50 + 20
+              A=(20,145) B=(270,145) C=(95,20)  canvas 290×165
+              Arcos M centro L início A 25 25 0 0 1(CW) fim Z  (tikz CCW → SVG CW sweep=1)
+                α: arc(0°→60°)    início=(45,145)      fim=(32.5,123.4)
+                γ: arc(145°→180°) início=(249.5,130.7) fim=(245,145)
+                β: arc(240°→325°) início=(82.5,41.7)   fim=(115.5,34.3)
+              Labels tikz→SVG: α(0.6,0.35)→(50,128) γ(4.3,0.2)→(235,135) β(1.6,1.8)→(100,56)
+            -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Soma dos ângulos internos de um triângulo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A soma dos ângulos internos de qualquer triângulo é sempre igual a \(180°\).
+                </div>
+                <p>Dados os ângulos internos \(\alpha\), \(\beta\) e \(\gamma\) de um triângulo, temos:</p>
+                <div class="tr-rule">
+                    \(\alpha + \beta + \gamma = 180°\)
+                </div>
+                <p>Essa propriedade é válida para <strong>qualquer triângulo</strong>, seja ele escaleno, isósceles ou equilátero.
+                Ela tem diversas aplicações: encontrar ângulos desconhecidos em problemas geométricos,
+                auxiliar construções em engenharia e arquitetura, e fundamentar identidades trigonométricas.</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/somaAngulosTriangulo/triangulo-definicao.svg" alt="Triângulo com ângulos internos α, β e γ" />
+                </div>
+            </div>
+
+            <!-- EXEMPLO 1 -->
+            <!--
+              Triângulo 2 — Exemplo (65°, 30°, x)
+              Mesmo triângulo. Arcos idênticos ao Triângulo 1.
+              Labels: 65°(0.7,0.35)→(55,128) 30°(4.2,0.25)→(230,133) x(1.6,1.8)→(100,56)
+            -->
+            <div class="tr-section" id="sec-ex1">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplo</div>
+                        <div class="tr-section-sub">Encontrando um ângulo desconhecido</div>
+                    </div>
+                </div>
+                <p>Em um triângulo com ângulos de \(65°\) e \(30°\), qual é o terceiro ângulo \(x\)?</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/somaAngulosTriangulo/triangulo-exemplo1.svg" alt="Triângulo com ângulos 65°, 30° e x" />
+                </div>
+                <h4>Resolução</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(65° + 30° + x = 180°\)</div>
+                    <div class="tr-ex">\(95° + x = 180°\)</div>
+                    <div class="tr-ex">\(x = 180° - 95°\)</div>
+                    <div class="tr-ex">\(x = \)<span class="hl">85°</span></div>
+                </div>
+            </div>
+
+            <!-- TRIÂNGULO ISÓSCELES -->
+            <!--
+              Triângulo 3 — Isósceles (α, α, β)
+              Tikz: A=(0,0) B=(3,0) C=(1.5,3)
+              Scale=50, margin=20. SVG_y = (3 – tikz_y)×50 + 20
+              A=(20,170) B=(170,170) C=(95,20)  canvas 190×190
+              Arcos:
+                α-A: arc(0°→65°)    início=(45,170)      fim=(30.6,147.3)
+                α-B: arc(115°→180°) início=(159.4,147.3) fim=(145,170)
+                β-C: arc(245°→295°) início=(84.4,42.7)   fim=(105.6,42.7)
+              Labels: α(0.6,0.35)→(50,153) α(2.3,0.35)→(135,153) β(1.5,2.2)→(89,60)
+              Marcas: AC mid=(57.5,95) BC mid=(132.5,95) perp±7px
+            -->
+            <div class="tr-section" id="sec-iso">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Iso</div>
+                    <div>
+                        <div class="tr-section-title">Triângulo Isósceles</div>
+                        <div class="tr-section-sub">Dois lados e dois ângulos iguais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    No triângulo isósceles, os dois ângulos da base são sempre iguais.
+                </div>
+                <p>O triângulo isósceles possui <strong>dois lados com a mesma medida</strong>.
+                O terceiro lado, de medida diferente, é chamado de <strong>base</strong>.
+                Os dois ângulos formados pela base e os lados congruentes têm a mesma medida.</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/somaAngulosTriangulo/triangulo-isosceles.svg" alt="Triângulo isósceles com ângulos α, α e β" />
+                </div>
+            </div>
+
+            <!-- EXEMPLO ISÓSCELES -->
+            <!--
+              Triângulo 4 — Isósceles exemplo (x, x, 40°)
+              Mesmo triângulo. Arcos idênticos ao Triângulo 3.
+              Labels: x(0.6,0.35)→(50,153) x(2.3,0.35)→(135,153) 40°(1.5,2.2)→(83,60)
+            -->
+            <div class="tr-section" id="sec-ex2">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplo — Triângulo Isósceles</div>
+                        <div class="tr-section-sub">Usando a igualdade dos ângulos da base</div>
+                    </div>
+                </div>
+                <p>Um triângulo isósceles tem o ângulo do vértice igual a \(40°\). Qual é o valor dos ângulos da base \(x\)?</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/somaAngulosTriangulo/triangulo-isosceles-ex.svg" alt="Triângulo isósceles com ângulos x, x e 40°" />
+                </div>
+                <h4>Resolução</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(x + x + 40° = 180°\)</div>
+                    <div class="tr-ex">\(2x + 40° = 180°\)</div>
+                    <div class="tr-ex">\(2x = 180° - 40°\)</div>
+                    <div class="tr-ex">\(2x = 140°\)</div>
+                    <div class="tr-ex">\(x = \dfrac{140°}{2}\)</div>
+                    <div class="tr-ex">\(x = \)<span class="hl">70°</span></div>
+                </div>
+            </div>
+
+            <!-- ÂNGULO EXTERNO -->
+            <!--
+              Triângulo 5 — Ângulo externo
+              Mesmo triângulo + extensão (5,0)→(6.5,0)
+              Canvas 360×165. Extensão: (345,145)
+              Arcos em A e C idênticos. Arco interno em B idêntico ao Triângulo 1.
+              Arco externo em B: arc(0°→150°)
+                início=(295,145) fim=(248.4,132.5)
+              Label α+β tikz(5.2,0.8)→SVG(280,105)
+            -->
+            <div class="tr-section" id="sec-ext">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ext</div>
+                    <div>
+                        <div class="tr-section-title">Ângulo Externo</div>
+                        <div class="tr-section-sub">Igual à soma dos ângulos internos não adjacentes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O ângulo externo de um triângulo é igual à soma dos dois ângulos internos não adjacentes a ele.
+                </div>
+                <p>Se \(\alpha\) e \(\beta\) são os ângulos internos não adjacentes ao ângulo externo, então:</p>
+                <div class="tr-rule">
+                    \(\text{ângulo externo} = \alpha + \beta\)
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/somaAngulosTriangulo/triangulo-angulo-externo.svg" alt="Triângulo com ângulo externo igual a α+β" />
+                </div>
+                <h4>Por quê?</h4>
+                <p>Como a soma de todos os ângulos internos é \(180°\) e o ângulo externo é suplementar ao ângulo interno adjacente,
+                temos que o ângulo externo \(= 180° - \gamma = \alpha + \beta\).</p>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

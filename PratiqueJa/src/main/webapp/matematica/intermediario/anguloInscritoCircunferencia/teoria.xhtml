@@ -1,0 +1,198 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Ângulo inscrito e ângulo central</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O ângulo inscrito é sempre metade do ângulo central que subtende o mesmo arco:
+                    \(\;\beta = \dfrac{\alpha}{2}\;\Longleftrightarrow\;\alpha = 2\,\beta\)
+                </div>
+                <p>O <strong>ângulo inscrito</strong> é um ângulo cujo vértice está sobre a circunferência e cujos lados são cordas que a interceptam em dois outros pontos distintos.</p>
+                <p>A principal propriedade é que o ângulo inscrito é sempre <strong>metade do ângulo central</strong> que subtende o mesmo arco. Se \(\alpha\) é o ângulo central e \(\beta\) o ângulo inscrito correspondente, a relação acima é sempre válida para qualquer triângulo inscrito na circunferência.</p>
+                <div class="tr-fig-center">
+                    <!--
+                      Circle center (115,92) r=75
+                      P(+30°)=(180,55)  P(-30°)=(180,129)
+                      O=(115,92)  V=P(180°)=(40,92)
+                      Central arc at O r=18: start=(130.6,101) end=(130.6,83)
+                      Inscribed arc at V r=18: start=(57.4,96.6) end=(57.4,87.4)
+                      Highlight arc P(-30°)→P(+30°) sweep=0
+                    -->
+                    <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-definicao.svg" alt="Ângulo inscrito β e ângulo central α sobre o mesmo arco" />
+                </div>
+            </div>
+
+            <!-- EXEMPLO 1 -->
+            <div class="tr-section" id="sec-ex1">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplo 1</div>
+                        <div class="tr-section-sub">Dado o ângulo central, encontrar o inscrito</div>
+                    </div>
+                </div>
+                <p>O ângulo central é \(60°\). Qual é o valor do ângulo inscrito \(x\)?</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-exemplo1.svg" alt="Ângulo central 60° e ângulo inscrito x" />
+                </div>
+                <h4>Resolução</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(x = \dfrac{60°}{2}\)</div>
+                    <div class="tr-ex">\(x = \)<span class="hl">30°</span></div>
+                </div>
+            </div>
+
+            <!-- EXEMPLO 2 -->
+            <div class="tr-section" id="sec-ex2">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplo 2</div>
+                        <div class="tr-section-sub">Dado o ângulo inscrito, encontrar o arco</div>
+                    </div>
+                </div>
+                <p>O ângulo inscrito é \(35°\). Qual é a medida do arco \(x\)?</p>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-exemplo2.svg" alt="Ângulo inscrito 35° e arco x" />
+                </div>
+                <h4>Resolução</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(35° = \dfrac{x}{2}\)</div>
+                    <div class="tr-ex">\(x = 35° \times 2\)</div>
+                    <div class="tr-ex span-full">\(x = \)<span class="hl">70°</span></div>
+                </div>
+            </div>
+
+            <!-- TEOREMA DE TALES -->
+            <div class="tr-section" id="sec-tales">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Tal</div>
+                    <div>
+                        <div class="tr-section-title">Teorema de Tales</div>
+                        <div class="tr-section-sub">Ângulo inscrito que subtende o diâmetro</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Todo ângulo inscrito que subtende um diâmetro é um ângulo reto (90°).
+                </div>
+                <p>Se as duas cordas do ângulo inscrito têm como extremidades opostas as duas extremidades de um <strong>diâmetro</strong>, então o ângulo inscrito sempre mede <strong>90°</strong>, independentemente da posição do vértice sobre a circunferência.</p>
+                <div class="tr-fig-center">
+                    <!--
+                      Circle center (125,82) r=75
+                      P(180°)=(50,82)  P(0°)=(200,82)  P(80°)=(138,8)
+                      Right angle mark at (138,8): path M 144.4 15.7 L 136.7 22.1 L 130.3 14.4
+                    -->
+                    <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-tales.svg" alt="Ângulo inscrito no diâmetro igual a 90°" />
+                </div>
+            </div>
+
+            <!-- ÂNGULOS INSCRITOS IGUAIS -->
+            <div class="tr-section" id="sec-iguais">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ang</div>
+                    <div>
+                        <div class="tr-section-title">Ângulos Inscritos Iguais</div>
+                        <div class="tr-section-sub">Mesmo arco → mesma medida</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Todos os ângulos inscritos que subtendem o mesmo arco têm a mesma medida.
+                </div>
+                <p>Independentemente da posição do vértice na circunferência, enquanto ele subtendar o mesmo arco, o ângulo inscrito terá sempre a mesma medida.</p>
+                <div class="tr-fig-center">
+                    <!--
+                      Circle center (115,92) r=75
+                      V1=P(130°)=(67,34)  V2=P(230°)=(67,150)
+                      Arc endpoints P(30°)=(180,55)  P(-30°)=(180,129)
+                      Arc at V1: M 67 34 L 80.8 45.6 A 18 18 0 0 0 84.7 37.3 Z
+                      Arc at V2: M 67 150 L 84.7 146.7 A 18 18 0 0 0 80.8 138.4 Z
+                    -->
+                    <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-iguais.svg" alt="Dois ângulos inscritos α iguais subentendendo o mesmo arco" />
+                </div>
+                <h4>Exemplo</h4>
+                <p>Se o arco vale \(60°\), qualquer ângulo inscrito que o subtenha mede
+                \(x = y = \dfrac{60°}{2} = \)<span class="hl">30°</span>.</p>
+            </div>
+
+            <!-- ARCOS E O DIÂMETRO -->
+            <div class="tr-section	" id="sec-diam">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Di&#226;</div>
+                    <div>
+                        <div class="tr-section-title">Arcos e o Diâmetro</div>
+                        <div class="tr-section-sub">Arcos opostos ao diâmetro somam 180°</div>
+                    </div>
+                </div>
+                <p>Uma corda que passa pelo centro (diâmetro) divide a circunferência em dois semicírculos de \(180°\) cada.
+                Se um ponto \(P\) na circunferência forma os arcos \(\alpha\) e \(\beta\) com as extremidades do diâmetro, então:</p>
+                <div class="tr-rule">\(\alpha + \beta = 180°\)</div>
+
+                <div style="display:flex; gap:24px; flex-wrap:wrap; margin-top:16px; align-items:flex-start;">
+
+                    <!-- diagrama -->
+                    <div style="flex:1; min-width:240px;">
+                        <div class="tr-fig-center" style="margin-top:0;">
+                            <!--
+                              Circle center (130,92) r=75
+                              P(180°)=(55,92)  P(0°)=(205,92)  P(-80°)=(143,166)
+                              Arc alpha: M 205 92 A 75 75 0 0 1 143 166 (CW/sweep=1)
+                              Arc beta:  M 55 92 A 75 75 0 0 0 143 166 (CCW/sweep=0)
+                            -->
+                            <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-diametro.svg" alt="Arcos α e β formados pelo diâmetro e ponto P" />
+                        </div>
+                    </div>
+
+                    <!-- exemplo -->
+                    <div style="flex:1; min-width:240px;">
+                        <p>O ângulo inscrito no vértice esquerdo mede \(30°\). Usando a propriedade do ângulo inscrito e a relação \(\alpha + \beta = 180°\), calcule \(x\) e \(y\).</p>
+                        <div class="tr-fig-center">
+                            <img src="#{request.contextPath}/matematica/intermediario/anguloInscritoCircunferencia/angulo-inscrito-diametro-ex.svg" alt="Exemplo com ângulo inscrito 30°, arcos x e y" />
+                        </div>
+                        <h4>Resolução</h4>
+                        <div class="tr-examples">
+                            <div class="tr-ex">\(30° = \dfrac{x}{2}\)</div>
+                            <div class="tr-ex">\(x = \)<span class="hl">60°</span></div>
+                            <div class="tr-ex">\(x + y = 180°\)</div>
+                            <div class="tr-ex">\(60° + y = 180°\)</div>
+                            <div class="tr-ex span-full">\(y = \)<span class="hl">120°</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

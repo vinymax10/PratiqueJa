@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190">
+    <path d="M 20 170 L 45 170 A 25 25 0 0 0 30.6 147.3 Z"      fill="rgba(220,190,0,0.50)"/>
+    <path d="M 170 170 L 159.4 147.3 A 25 25 0 0 0 145 170 Z"   fill="rgba(220,190,0,0.50)"/>
+    <path d="M 95 20 L 84.4 42.7 A 25 25 0 0 0 105.6 42.7 Z"    fill="rgba(210,50,50,0.30)"/>
+    <polygon points="20,170 170,170 95,20" fill="none" stroke="#8855cc" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="50"  y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">x</text>
+    <text x="135" y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">x</text>
+    <text x="83"  y="60"  font-size="13" fill="#444" font-family="sans-serif">40°</text>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190">
+    <path d="M 20 170 L 45 170 A 25 25 0 0 0 30.6 147.3 Z"      fill="rgba(30,100,210,0.28)"/>
+    <path d="M 170 170 L 159.4 147.3 A 25 25 0 0 0 145 170 Z"   fill="rgba(30,100,210,0.28)"/>
+    <path d="M 95 20 L 84.4 42.7 A 25 25 0 0 0 105.6 42.7 Z"    fill="rgba(40,160,80,0.30)"/>
+    <polygon points="20,170 170,170 95,20" fill="none" stroke="#e080a0" stroke-width="2.5" stroke-linejoin="round"/>
+    <line x1="51.2" y1="91.9" x2="63.8" y2="98.1" stroke="#e080a0" stroke-width="2"/>
+    <line x1="126.2" y1="98.1" x2="138.8" y2="91.9" stroke="#e080a0" stroke-width="2"/>
+    <text x="50"  y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+    <text x="135" y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+    <text x="89"  y="60"  font-size="15" font-style="italic" fill="#444" font-family="serif">β</text>
+</svg>

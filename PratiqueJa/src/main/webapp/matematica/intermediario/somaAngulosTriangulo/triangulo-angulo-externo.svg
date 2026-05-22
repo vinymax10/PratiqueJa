@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="165" viewBox="0 0 360 165">
+    <path d="M 20 145 L 45 145 A 25 25 0 0 0 32.5 123.4 Z"    fill="rgba(220,50,50,0.30)"/>
+    <path d="M 270 145 L 249.5 130.7 A 25 25 0 0 0 245 145 Z" fill="rgba(40,160,80,0.30)"/>
+    <path d="M 95 20 L 82.5 41.7 A 25 25 0 0 0 115.5 34.3 Z"  fill="rgba(220,190,0,0.50)"/>
+    <path d="M 270 145 L 295 145 A 25 25 0 0 0 248.4 132.5 Z" fill="rgba(255,140,0,0.38)"/>
+    <polygon points="20,145 270,145 95,20" fill="none" stroke="#4477cc" stroke-width="2.5" stroke-linejoin="round"/>
+    <line x1="270" y1="145" x2="345" y2="145" stroke="#4477cc" stroke-width="2.5"/>
+    <text x="50"  y="128" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+    <text x="235" y="135" font-size="15" font-style="italic" fill="#444" font-family="serif">γ</text>
+    <text x="100" y="56"  font-size="15" font-style="italic" fill="#444" font-family="serif">β</text>
+    <text x="276" y="106" font-size="13" font-style="italic" fill="#8B4500" font-family="serif">α+β</text>
+</svg>

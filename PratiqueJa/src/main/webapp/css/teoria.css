@@ -140,6 +140,11 @@
 /* step-by-step examples already fill one grid cell each */
 .tr-ex.tr-steps { min-width: 0; }
 
+/* ===== FIGURE / SVG ===== */
+.tr-fig-center { text-align: center; margin: 16px 0; }
+.tr-fig-center svg,
+.tr-fig-center img { max-width: 100%; height: auto; }
+
 /* ===== FACTORIZATION TABLE ===== */
 .fact-wrap { overflow-x: auto; margin: 14px 0; }
 .fact-table { border-collapse: collapse; font-size: 14px; }

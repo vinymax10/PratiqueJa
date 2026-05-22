@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="290" height="185" viewBox="0 0 290 185">
+    <path d="M 40 92 L 57.4 96.6 A 18 18 0 0 0 57.4 87.4 Z" fill="rgba(40,160,80,0.30)"/>
+    <path d="M 115 92 L 130.6 101 A 18 18 0 0 0 130.6 83 Z" fill="rgba(210,60,60,0.30)"/>
+    <circle cx="115" cy="92" r="75" fill="none" stroke="#5588cc" stroke-width="2"/>
+    <line x1="115" y1="92" x2="180" y2="55"  stroke="#5588cc" stroke-width="1.8"/>
+    <line x1="115" y1="92" x2="180" y2="129" stroke="#5588cc" stroke-width="1.8"/>
+    <line x1="40"  y1="92" x2="180" y2="55"  stroke="#5588cc" stroke-width="1.8"/>
+    <line x1="40"  y1="92" x2="180" y2="129" stroke="#5588cc" stroke-width="1.8"/>
+    <path d="M 180 129 A 75 75 0 0 0 180 55" fill="none" stroke="#cc3333" stroke-width="3.5"/>
+    <circle cx="115" cy="92" r="3" fill="#5588cc"/>
+    <text x="133" y="97" font-size="15" font-style="italic" fill="#cc3333" font-family="serif" font-weight="bold">α</text>
+    <text x="60"  y="97" font-size="15" font-style="italic" fill="#228833" font-family="serif" font-weight="bold">β</text>
+    <text x="107" y="104" font-size="12" fill="#888" font-family="sans-serif">O</text>
+    <text x="29"  y="104" font-size="12" fill="#888" font-family="sans-serif">V</text>
+</svg>

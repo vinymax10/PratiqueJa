@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soma dos Ângulos de um Triângulo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script>
+    window.MathJax = {
+      tex: { macros: { ang: ['{#1}^\\circ', 1] } }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      line-height: 1.75;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 40%, #3949ab 70%, #5c6bc0 100%);
+      color: white;
+      text-align: center;
+      padding: 64px 40px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 22px,
+        rgba(255,255,255,0.04) 22px, rgba(255,255,255,0.04) 44px
+      );
+    }
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.82;
+      margin-top: 10px;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 1.55rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .card { padding: 20px 18px; }
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      padding: 4px 13px;
+      border-radius: 20px;
+      color: white;
+      margin-bottom: 14px;
+    }
+    .tag-def   { background: linear-gradient(135deg, #1a237e, #3949ab); }
+    .tag-ex    { background: linear-gradient(135deg, #01579b, #0288d1); }
+    .tag-topic { background: linear-gradient(135deg, #004d40, #00897b); }
+
+    p { margin-bottom: 12px; font-size: 1.02rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .formula-box {
+      text-align: center;
+      background: linear-gradient(135deg, #e8eaf6, #ede7f6);
+      border: 2px solid #7986cb;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin: 14px 0;
+      font-size: 1.15rem;
+    }
+
+    .steps {
+      background: #f5f7ff;
+      border-left: 4px solid #3949ab;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+    }
+    .steps p { margin-bottom: 5px; font-size: 1.05rem; }
+    .steps .answer { font-weight: 700; color: #1a237e; }
+
+    .fig {
+      background: #f8f9ff;
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .fig svg { display: block; margin: 0 auto; }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      color: #718096;
+      font-size: 0.88rem;
+      border-top: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Soma dos Ângulos de um Triângulo</h1>
+  <p class="hero-sub">Geometria &nbsp;·&nbsp; Nível Intermediário</p>
+</header>
+
+<main>
+
+  <!-- ═══ DEFINIÇÃO ═══ -->
+  <div class="card">
+    <span class="tag tag-def">Definição</span>
+    <div class="two-col">
+      <div>
+        <p>
+          A soma dos ângulos internos de um triângulo é sempre igual a \(180°\).
+          Dados os ângulos internos \(\alpha\), \(\beta\) e \(\gamma\), temos:
+        </p>
+        <div class="formula-box">
+          \(\alpha + \beta + \gamma = 180°\)
+        </div>
+        <p>
+          Essa propriedade tem diversas aplicações práticas: resolução de problemas
+          geométricos para encontrar ângulos desconhecidos, auxílio à construção e
+          navegação em engenharia e arquitetura, e desenvolvimento de fórmulas e
+          identidades trigonométricas que envolvem os ângulos internos dos triângulos.
+        </p>
+      </div>
+      <div class="fig">
+        <!--
+          Triângulo 1 — Definição (α β γ)
+          Tikz: A=(0,0)  B=(5,0)  C=(1.5,2.5)
+          Scale=50, margin=20.  SVG y = (max_y – tikz_y)×50 + 20  (max_y=2.5)
+          A=(20,145)  B=(270,145)  C=(95,20)   canvas 290×165
+          Arcos: M centro L início-arco A 25 25 0 large-arc 1(CW) fim-arco Z
+            α: arc(0°→60°)   início=(45,145)   fim=(32.5,123.4)
+            γ: arc(145°→180°) início=(249.5,130.7) fim=(245,145)
+            β: arc(240°→325°) início=(82.5,41.7)  fim=(115.5,34.3)
+          Labels tikz→SVG: α(0.6,0.35)→(50,128)  γ(4.3,0.2)→(235,135)  β(1.6,1.8)→(100,56)
+        -->
+        <svg width="290" height="165" viewBox="0 0 290 165" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 145 L 45 145 A 25 25 0 0 032.5 123.4 Z"    fill="rgba(220,50,50,0.30)"/>
+          <path d="M 270 145 L 249.5 130.7 A 25 25 0 0 0245 145 Z" fill="rgba(40,160,80,0.30)"/>
+          <path d="M 95 20 L 82.5 41.7 A 25 25 0 0 0115.5 34.3 Z"  fill="rgba(220,190,0,0.50)"/>
+          <polygon points="20,145 270,145 95,20"
+                   fill="none" stroke="#4477cc" stroke-width="2.5" stroke-linejoin="round"/>
+          <text x="50"  y="128" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+          <text x="235" y="135" font-size="15" font-style="italic" fill="#444" font-family="serif">γ</text>
+          <text x="100" y="56"  font-size="15" font-style="italic" fill="#444" font-family="serif">β</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EXEMPLO 1 ═══ -->
+  <div class="card">
+    <span class="tag tag-ex">Exemplo</span>
+    <div class="two-col">
+      <div>
+        <p>Encontre o valor do ângulo \(x\) no triângulo ao lado:</p>
+        <div class="steps">
+          <p>\(65° + 30° + x = 180°\)</p>
+          <p>\(95° + x = 180°\)</p>
+          <p>\(x = 180° - 95°\)</p>
+          <p class="answer">\(x = 85°\)</p>
+        </div>
+      </div>
+      <div class="fig">
+        <!--
+          Triângulo 2 — Exemplo (65°, 30°, x)
+          Mesmo triângulo. Arcos idênticos ao Triângulo 1.
+          Labels tikz→SVG: 65°(0.7,0.35)→(55,128)  30°(4.2,0.25)→(230,133)  x(1.6,1.8)→(100,56)
+        -->
+        <svg width="290" height="165" viewBox="0 0 290 165" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 145 L 45 145 A 25 25 0 0 032.5 123.4 Z"    fill="rgba(30,100,210,0.28)"/>
+          <path d="M 270 145 L 249.5 130.7 A 25 25 0 0 0245 145 Z" fill="rgba(40,160,80,0.30)"/>
+          <path d="M 95 20 L 82.5 41.7 A 25 25 0 0 0115.5 34.3 Z"  fill="rgba(220,190,0,0.50)"/>
+          <polygon points="20,145 270,145 95,20"
+                   fill="none" stroke="#cc4444" stroke-width="2.5" stroke-linejoin="round"/>
+          <text x="46"  y="128" font-size="13" fill="#444" font-family="'Open Sans',sans-serif">65°</text>
+          <text x="229" y="133" font-size="13" fill="#444" font-family="'Open Sans',sans-serif">30°</text>
+          <text x="100" y="56"  font-size="15" font-style="italic" fill="#444" font-family="serif">x</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TRIÂNGULO ISÓSCELES ═══ -->
+  <div class="card">
+    <span class="tag tag-topic">Triângulo Isósceles</span>
+    <div class="two-col">
+      <div>
+        <p>
+          O triângulo isósceles possui <strong>dois lados com a mesma medida</strong>.
+          O terceiro lado, de medida diferente, é chamado de <strong>base</strong>.
+          Os dois ângulos formados pela base e os lados congruentes possuem
+          <strong>a mesma medida</strong>.
+        </p>
+      </div>
+      <div class="fig">
+        <!--
+          Triângulo 3 — Isósceles (α, α, β)
+          Tikz: A=(0,0)  B=(3,0)  C=(1.5,3)
+          Scale=50, margin=20.  SVG y = (3 – tikz_y)×50 + 20
+          A=(20,170)  B=(170,170)  C=(95,20)   canvas 190×190
+          Arcos (R=25):
+            α-A: arc(0°→65°)   início=(45,170)   fim=(30.6,147.3)
+            α-B: arc(115°→180°) início=(159.4,147.3) fim=(145,170)
+            β-C: arc(245°→295°) início=(84.4,42.7)  fim=(105.6,42.7)
+          Labels tikz→SVG: α(0.6,0.35)→(50,153) α(2.3,0.35)→(135,153) β(1.5,2.2)→(95,60)
+          Marcas de lado igual: tick perpendicular nos meios de AC e BC
+            AC mid=(57.5,95) perp-dir=(0.894,0.447) tick ±7 → (51.2,91.9)→(63.8,98.1)
+            BC mid=(132.5,95) perp-dir=(0.894,-0.447) tick ±7 → (126.2,98.1)→(138.8,91.9)
+        -->
+        <svg width="190" height="190" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 170 L 45 170 A 25 25 0 0 030.6 147.3 Z"      fill="rgba(30,100,210,0.28)"/>
+          <path d="M 170 170 L 159.4 147.3 A 25 25 0 0 0145 170 Z"   fill="rgba(30,100,210,0.28)"/>
+          <path d="M 95 20 L 84.4 42.7 A 25 25 0 0 0105.6 42.7 Z"    fill="rgba(40,160,80,0.30)"/>
+          <polygon points="20,170 170,170 95,20"
+                   fill="none" stroke="#e080a0" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- marcas de lado igual -->
+          <line x1="51.2" y1="91.9" x2="63.8" y2="98.1" stroke="#e080a0" stroke-width="2"/>
+          <line x1="126.2" y1="98.1" x2="138.8" y2="91.9" stroke="#e080a0" stroke-width="2"/>
+          <text x="50"  y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+          <text x="135" y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+          <text x="89"  y="60"  font-size="15" font-style="italic" fill="#444" font-family="serif">β</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EXEMPLO ISÓSCELES ═══ -->
+  <div class="card">
+    <span class="tag tag-ex">Exemplo — Triângulo Isósceles</span>
+    <div class="two-col">
+      <div>
+        <p>Encontre o valor de \(x\) no triângulo isósceles ao lado:</p>
+        <div class="steps">
+          <p>\(x + x + 40° = 180°\)</p>
+          <p>\(2x + 40° = 180°\)</p>
+          <p>\(2x = 180° - 40° = 140°\)</p>
+          <p>\(x = \dfrac{140°}{2}\)</p>
+          <p class="answer">\(x = 70°\)</p>
+        </div>
+      </div>
+      <div class="fig">
+        <!--
+          Triângulo 4 — Isósceles exemplo (x, x, 40°)
+          Mesmo triângulo. Arcos idênticos ao Triângulo 3.
+          Labels: x(0.6,0.35)→(50,153)  x(2.3,0.35)→(135,153)  40°(1.5,2.2)→(95,60)
+        -->
+        <svg width="190" height="190" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 170 L 45 170 A 25 25 0 0 030.6 147.3 Z"      fill="rgba(220,190,0,0.50)"/>
+          <path d="M 170 170 L 159.4 147.3 A 25 25 0 0 0145 170 Z"   fill="rgba(220,190,0,0.50)"/>
+          <path d="M 95 20 L 84.4 42.7 A 25 25 0 0 0105.6 42.7 Z"    fill="rgba(210,50,50,0.30)"/>
+          <polygon points="20,170 170,170 95,20"
+                   fill="none" stroke="#8855cc" stroke-width="2.5" stroke-linejoin="round"/>
+          <text x="50"  y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">x</text>
+          <text x="135" y="153" font-size="15" font-style="italic" fill="#444" font-family="serif">x</text>
+          <text x="83"  y="60"  font-size="13" fill="#444" font-family="'Open Sans',sans-serif">40°</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ÂNGULO EXTERNO ═══ -->
+  <div class="card">
+    <span class="tag tag-def">Ângulo Externo</span>
+    <div class="two-col">
+      <div>
+        <p>
+          Em todo triângulo, qualquer <strong>ângulo externo</strong> é igual
+          à soma dos dois ângulos internos <em>não adjacentes</em> a ele:
+        </p>
+        <div class="formula-box">
+          \(\text{ângulo externo} = \alpha + \beta\)
+        </div>
+      </div>
+      <div class="fig">
+        <!--
+          Triângulo 5 — Ângulo externo
+          Mesmo triângulo + extensão (5,0)→(6.5,0)
+          Canvas 360×165. Extensão: (345,145)
+          Arcos em A e C idênticos ao Triângulo 1.
+          Arco interno em B: arc(145°→180°) idêntico ao Triângulo 1.
+          Arco externo em B: arc(0°→150°)
+            início=(295,145) fim=(248.4,132.5)
+          Label α+β: tikz(5.2,0.8)→SVG(280,105)
+        -->
+        <svg width="360" height="165" viewBox="0 0 360 165" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 145 L 45 145 A 25 25 0 0 032.5 123.4 Z"     fill="rgba(220,50,50,0.30)"/>
+          <path d="M 270 145 L 249.5 130.7 A 25 25 0 0 0245 145 Z"  fill="rgba(40,160,80,0.30)"/>
+          <path d="M 95 20 L 82.5 41.7 A 25 25 0 0 0115.5 34.3 Z"   fill="rgba(220,190,0,0.50)"/>
+          <path d="M 270 145 L 295 145 A 25 25 0 0 0248.4 132.5 Z"  fill="rgba(255,140,0,0.38)"/>
+          <polygon points="20,145 270,145 95,20"
+                   fill="none" stroke="#4477cc" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="270" y1="145" x2="345" y2="145" stroke="#4477cc" stroke-width="2.5"/>
+          <text x="50"  y="128" font-size="15" font-style="italic" fill="#444" font-family="serif">α</text>
+          <text x="235" y="135" font-size="15" font-style="italic" fill="#444" font-family="serif">γ</text>
+          <text x="100" y="56"  font-size="15" font-style="italic" fill="#444" font-family="serif">β</text>
+          <text x="276" y="106" font-size="13" font-style="italic" fill="#8B4500" font-family="serif">α+β</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  PratiqueJá &nbsp;·&nbsp; Matemática Intermediária
+</footer>
+
+</body>
+</html>
