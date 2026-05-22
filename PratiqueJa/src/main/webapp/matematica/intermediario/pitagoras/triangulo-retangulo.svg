@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="195" viewBox="0 0 200 130">
+    <polygon points="20,110 180,110 20,10" fill="none" stroke="#059669" stroke-width="2.5"/>
+    <polyline points="20,90 40,90 40,110" fill="none" stroke="#059669" stroke-width="2"/>
+    <text x="6"   y="65"  font-size="16" font-weight="bold" fill="#374151">c</text>
+    <text x="93"  y="127" font-size="16" font-weight="bold" fill="#374151">b</text>
+    <text x="108" y="55"  font-size="16" font-weight="bold" fill="#374151">a</text>
+    <text x="18"  y="128" font-size="10" fill="#9ca3af">a = hipotenusa</text>
+    <text x="138" y="128" font-size="10" fill="#9ca3af">b, c = catetos</text>
+</svg>

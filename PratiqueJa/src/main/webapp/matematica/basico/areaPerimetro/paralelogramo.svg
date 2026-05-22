@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="153" viewBox="0 0 150 100">
+    <polygon points="25,85 10,15 125,15 140,85" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+    <line x1="25" y1="15" x2="25" y2="85" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <polyline points="25,70 39,70 39,85" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="75" y="98" text-anchor="middle" font-size="15" font-weight="bold" fill="#15803d">b</text>
+    <text x="10" y="60" text-anchor="middle" font-size="15" font-weight="bold" fill="#15803d">h</text>
+    <text x="143" y="53" text-anchor="middle" font-size="15" font-weight="bold" fill="#15803d">a</text>
+</svg>
