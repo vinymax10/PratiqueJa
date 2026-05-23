@@ -1,0 +1,325 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é uma equação do 2º grau?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma equação do 2º grau (ou equação quadrática) é toda equação que pode ser
+                    escrita na forma \(ax^2 + bx + c = 0\), onde \(a, b, c \in \mathbb{R}\) e \(a \neq 0\).
+                </div>
+                <p>O valor de <strong>\(a\)</strong> é o <strong>coeficiente do termo quadrático</strong>,
+                <strong>\(b\)</strong> é o <strong>coeficiente do termo linear</strong> e
+                <strong>\(c\)</strong> é o <strong>termo independente</strong>.</p>
+                <p>As <strong>raízes</strong> (ou soluções) da equação são os valores de \(x\) que tornam
+                a igualdade verdadeira. Uma equação do 2º grau tem no máximo duas raízes reais.</p>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Equação: \(2x^2 - 7x + 3 = 0\)</span>
+                        <span>\(a = 2\), \(b = -7\), \(c = 3\)</span>
+                        <span class="hl">É uma equação completa pois \(a \neq 0\), \(b \neq 0\) e \(c \neq 0\).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULA DE BHASKARA -->
+            <div class="tr-section" id="sec-bhaskara">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Δ</div>
+                    <div>
+                        <div class="tr-section-title">Fórmula de Bhaskara</div>
+                        <div class="tr-section-sub">Cálculo das raízes pelo discriminante</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As raízes da equação de 2º grau são calculadas pela <strong>Fórmula de Bhaskara</strong>,
+                    que usa o <strong>discriminante \(\Delta\)</strong> (delta):
+                </div>
+                <div class="tr-rule">
+                    \(\Delta = b^2 - 4ac\)
+                </div>
+                <div class="tr-rule">
+                    \(x = \dfrac{-b \pm \sqrt{\Delta}}{2a}\)
+                </div>
+                <div class="tr-note">
+                    <strong>Natureza das raízes:</strong>
+                    se \(\Delta &gt; 0\) → duas raízes reais distintas (\(x_1 \neq x_2\));
+                    se \(\Delta = 0\) → uma raiz real repetida (\(x_1 = x_2\));
+                    se \(\Delta &lt; 0\) → nenhuma raiz real (raízes complexas).
+                </div>
+                <h4>Exemplo — resolução completa</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Encontre as raízes de \(2x^2 - 7x + 3 = 0\). Temos \(a=2\), \(b=-7\), \(c=3\).</span>
+                        <span><strong>Passo 1 — Calcular \(\Delta\):</strong>
+                            \(\Delta = (-7)^2 - 4 \cdot 2 \cdot 3 = 49 - 24 = 25\)</span>
+                        <span><strong>Passo 2 — Aplicar Bhaskara:</strong>
+                            \(x = \dfrac{-(-7) \pm \sqrt{25}}{2 \cdot 2} = \dfrac{7 \pm 5}{4}\)</span>
+                        <span>\(x_1 = \dfrac{7 + 5}{4} = \dfrac{12}{4} = 3\)</span>
+                        <span class="hl">\(x_2 = \dfrac{7 - 5}{4} = \dfrac{2}{4} = \dfrac{1}{2}\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">\(\Delta = 25 &gt; 0\) → duas raízes reais distintas: \(x_1 = 3\) e \(x_2 = \frac{1}{2}\).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRÁFICO — PARÁBOLA -->
+            <div class="tr-section" id="sec-grafico">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Graf</div>
+                    <div>
+                        <div class="tr-section-title">Gráfico — A Parábola</div>
+                        <div class="tr-section-sub">Representação gráfica da função quadrática</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A função quadrática \(f(x) = ax^2 + bx + c\) é representada por uma <strong>parábola</strong>.
+                    O sinal de \(a\) determina a concavidade:
+                    se \(a &gt; 0\) a parábola abre para <strong>cima</strong> (ponto mínimo);
+                    se \(a &lt; 0\) abre para <strong>baixo</strong> (ponto máximo).
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/equacaoSegundoGrau/fig-parabola.svg"
+                         alt="Parábola com concavidade para cima mostrando vértice, raízes e eixo de simetria" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\Delta &gt; 0\) — dois pontos de cruzamento</span>
+                        <span>A parábola intercepta o eixo \(x\) em dois pontos distintos \(x_1\) e \(x_2\).</span>
+                        <span class="hl">Duas raízes reais: \(x_1 \neq x_2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\Delta = 0\) — tangente ao eixo</span>
+                        <span>A parábola toca o eixo \(x\) em exatamente um ponto — o vértice.</span>
+                        <span class="hl">Raiz dupla: \(x_1 = x_2 = \dfrac{-b}{2a}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\Delta &lt; 0\) — não cruza o eixo</span>
+                        <span>A parábola fica inteiramente acima (\(a &gt; 0\)) ou abaixo (\(a &lt; 0\)) do eixo \(x\).</span>
+                        <span class="hl">Nenhuma raiz real.</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    O <strong>eixo de simetria</strong> da parábola é a reta vertical \(x = x_v = \dfrac{-b}{2a}\).
+                    As raízes, quando existem, são simétricas em relação a esse eixo:
+                    \(x_v = \dfrac{x_1 + x_2}{2}\).
+                </div>
+            </div>
+
+            <!-- VÉRTICE DA PARÁBOLA -->
+            <div class="tr-section" id="sec-vertice">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">V</div>
+                    <div>
+                        <div class="tr-section-title">Vértice da Parábola</div>
+                        <div class="tr-section-sub">Ponto de máximo ou mínimo da função</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O vértice \(V(x_v, y_v)\) é o ponto onde a parábola muda de sentido —
+                    ponto mínimo se \(a &gt; 0\) e ponto máximo se \(a &lt; 0\).
+                </div>
+                <div class="tr-rule">
+                    \(x_v = \dfrac{-b}{2a} \qquad\qquad y_v = \dfrac{-\Delta}{4a}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dada a equação \(x^2 - 10x + 9 = 0\), com \(a=1\), \(b=-10\), \(c=9\).</span>
+                        <span><strong>Calculando \(\Delta\):</strong>
+                            \(\Delta = (-10)^2 - 4 \cdot 1 \cdot 9 = 100 - 36 = 64\)</span>
+                        <span>\(x_v = \dfrac{-(-10)}{2 \cdot 1} = \dfrac{10}{2} = 5\)</span>
+                        <span>\(y_v = \dfrac{-64}{4 \cdot 1} = \dfrac{-64}{4} = -16\)</span>
+                        <span class="hl">Vértice: \(V(5,\,-16)\) — ponto mínimo, pois \(a = 1 &gt; 0\).</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Valor ótimo:</strong> \(y_v\) é o <strong>valor mínimo</strong> de \(f(x)\)
+                    quando \(a &gt; 0\), e o <strong>valor máximo</strong> quando \(a &lt; 0\).
+                    Isso é útil para resolver problemas de otimização (menor custo, maior área, altura máxima, etc.).
+                </div>
+            </div>
+
+            <!-- ESTUDO DO SINAL -->
+            <div class="tr-section" id="sec-sinal">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">±</div>
+                    <div>
+                        <div class="tr-section-title">Estudo do Sinal</div>
+                        <div class="tr-section-sub">Quando f(x) é positiva, nula ou negativa</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dados \(\Delta &gt; 0\) com raízes \(x_1 &lt; x_2\), o sinal de \(f(x) = ax^2 + bx + c\)
+                    depende do sinal de \(a\) e da posição de \(x\) em relação às raízes.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Se \(a &gt; 0\) (concavidade ↑):</span>
+                        <span>\(f(x) &gt; 0\) para \(x &lt; x_1\) ou \(x &gt; x_2\)</span>
+                        <span>\(f(x) = 0\) para \(x = x_1\) ou \(x = x_2\)</span>
+                        <span class="hl">\(f(x) &lt; 0\) para \(x_1 &lt; x &lt; x_2\) (entre as raízes)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Se \(a &lt; 0\) (concavidade ↓):</span>
+                        <span>\(f(x) &lt; 0\) para \(x &lt; x_1\) ou \(x &gt; x_2\)</span>
+                        <span>\(f(x) = 0\) para \(x = x_1\) ou \(x = x_2\)</span>
+                        <span class="hl">\(f(x) &gt; 0\) para \(x_1 &lt; x &lt; x_2\) (entre as raízes)</span>
+                    </div>
+                </div>
+                <h4>Exemplo — inequação do 2º grau</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Para quais valores de \(x\) temos \(x^2 - 5x + 6 &lt; 0\)?</span>
+                        <span>Raízes: \(\Delta = 25 - 24 = 1\) → \(x_1 = 2\) e \(x_2 = 3\)</span>
+                        <span>Como \(a = 1 &gt; 0\), \(f(x) &lt; 0\) entre as raízes.</span>
+                        <span class="hl">Solução: \(x \in (2,\, 3)\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RELAÇÕES DE VIETA -->
+            <div class="tr-section" id="sec-vieta">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">S/P</div>
+                    <div>
+                        <div class="tr-section-title">Relações de Vieta</div>
+                        <div class="tr-section-sub">Soma e produto das raízes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Conhecidas as raízes \(x_1\) e \(x_2\), valem as seguintes relações sem
+                    necessidade de calcular Bhaskara individualmente:
+                </div>
+                <div class="tr-rule">
+                    \(x_1 + x_2 = \dfrac{-b}{a} \qquad\qquad x_1 \cdot x_2 = \dfrac{c}{a}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Para \(2x^2 - 7x + 3 = 0\) com \(x_1=3\) e \(x_2=\frac{1}{2}\):</span>
+                        <span>Soma: \(3 + \dfrac{1}{2} = \dfrac{7}{2} = \dfrac{-(-7)}{2} = \dfrac{-b}{a}\) ✓</span>
+                        <span class="hl">Produto: \(3 \cdot \dfrac{1}{2} = \dfrac{3}{2} = \dfrac{c}{a}\) ✓</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Construa uma equação com raízes \(x_1 = 2\) e \(x_2 = 5\).</span>
+                        <span>Soma \(= 7\), Produto \(= 10\)</span>
+                        <span class="hl">\(x^2 - 7x + 10 = 0\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Forma geral: \(x^2 - (x_1+x_2)x + x_1 x_2 = 0\).</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Forma fatorada:</strong> se \(\Delta \geq 0\), a função quadrática pode ser escrita como
+                    \(f(x) = a(x - x_1)(x - x_2)\). Isso facilita identificar as raízes e o sinal de \(f(x)\)
+                    por inspeção.
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES / CASOS INCOMPLETOS -->
+            <div class="tr-section" id="sec-casos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Esp</div>
+                    <div>
+                        <div class="tr-section-title">Equações Incompletas</div>
+                        <div class="tr-section-sub">Casos especiais com b = 0 ou c = 0</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando \(b = 0\) ou \(c = 0\), existem atalhos mais rápidos do que Bhaskara.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span style="font-weight:600;">Caso \(b = 0\): \(ax^2 + c = 0\)</span>
+                        <span>Isola \(x^2\) diretamente: \(x^2 = -\dfrac{c}{a}\)</span>
+                        <span>\(x = \pm\sqrt{-\dfrac{c}{a}}\) (se \(-c/a \geq 0\))</span>
+                        <span class="hl">Exemplo: \(2x^2 - 8 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \pm 2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span style="font-weight:600;">Caso \(c = 0\): \(ax^2 + bx = 0\)</span>
+                        <span>Fatore \(x\) em evidência: \(x(ax + b) = 0\)</span>
+                        <span>\(x_1 = 0 \quad\text{ou}\quad x_2 = -\dfrac{b}{a}\)</span>
+                        <span class="hl">Exemplo: \(3x^2 - 6x = 0\) </span>
+                        <span class="hl"> \(x(3x-6)=0 \Rightarrow x_1=0,\; x_2=2\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Propriedade útil:</strong> o coeficiente \(c\) é sempre o valor da função
+                    em \(x = 0\): \(f(0) = a \cdot 0^2 + b \cdot 0 + c = c\).
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação da equação do 2º grau em situações reais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar os coeficientes \(a\), \(b\) e \(c\);
+                    (2) calcular \(\Delta\); (3) aplicar Bhaskara; (4) interpretar as raízes no contexto do problema.
+                </div>
+                <h4>Problema 1 — Área de um retângulo</h4>
+                <p>Um retângulo tem comprimento \(3\) cm maior que sua largura. Sabendo que a área é
+                \(40\) cm², quais são as dimensões do retângulo?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Largura \(= x\), comprimento \(= x + 3\). Área: \(x(x+3) = 40\)</span>
+                        <span>\(x^2 + 3x - 40 = 0\) → \(a=1\), \(b=3\), \(c=-40\)</span>
+                        <span>\(\Delta = 9 + 160 = 169\)</span>
+                        <span>\(x = \dfrac{-3 \pm 13}{2}\) → \(x_1 = 5\) e \(x_2 = -8\) (descartado, pois \(x &gt; 0\))</span>
+                        <span class="hl">Largura \(= 5\) cm e comprimento \(= 8\) cm.</span>
+                    </div>
+                </div>
+                <h4>Problema 2 — Lançamento vertical</h4>
+                <p>Um objeto é lançado verticalmente para cima com velocidade inicial de \(20\) m/s
+                a partir do solo. A altura em metros é dada por \(h(t) = 20t - 5t^2\).
+                (a) Em que instante(s) o objeto está a \(15\) m de altura?
+                (b) Qual é a altura máxima atingida?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>(a)</strong> \(20t - 5t^2 = 15 \;\Rightarrow\; t^2 - 4t + 3 = 0\)</span>
+                        <span>\(\Delta = 16 - 12 = 4\) → \(t = \dfrac{4 \pm 2}{2}\) → \(t_1 = 1\) s e \(t_2 = 3\) s</span>
+                        <span class="hl">O objeto passa por \(15\) m na subida (\(t=1\) s) e na descida (\(t=3\) s).</span>
+                        <span><strong>(b)</strong> \(h(t) = -5t^2 + 20t\) → \(a = -5 &lt; 0\) (máximo no vértice)</span>
+                        <span>\(t_v = \dfrac{-20}{2 \cdot (-5)} = 2\) s</span>
+                        <span class="hl">Altura máxima: \(h(2) = 20 \cdot 2 - 5 \cdot 4 = 40 - 20 = 20\) m</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

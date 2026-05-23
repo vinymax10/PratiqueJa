@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Números Complexos</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+    }
+
+    .hero-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 60%, #7c3aed 100%);
+      color: white;
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .hero-header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .hero-header p  { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.85; }
+
+    .content { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem 3rem; }
+
+    h2 { font-size: 1.6rem; color: #1e3a5f; border-bottom: 3px solid #2563eb; padding-bottom: 0.4rem; margin: 2rem 0 0.75rem; }
+    h3 { font-size: 1.25rem; color: #2563eb; margin: 1.5rem 0 0.5rem; }
+    p  { line-height: 1.75; margin-bottom: 1rem; font-size: 1.05rem; }
+
+    .theorem-box {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+      border-left: 5px solid #2563eb;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.12);
+    }
+    .theorem-box .theorem-title { font-weight: 700; color: #1e3a5f; font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+    .formula-box {
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border-left: 5px solid #10b981;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(16,185,129,0.12);
+    }
+
+    .example-box {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .example-box .example-title { font-weight: 700; color: #7c3aed; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+
+    .note-box {
+      background: #fffbeb;
+      border-left: 5px solid #f59e0b;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #374151;
+    }
+
+    .math-steps { background: #fff; border-radius: 10px; padding: 1rem 1.5rem; margin: 1rem 0; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .math-steps p { margin-bottom: 0.4rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 0.4rem; }
+    .math-steps p:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .fig-center { text-align: center; margin: 1.5rem 0; }
+    .fig-center svg { max-width: 380px; width: 100%; }
+
+    mjx-container[display="true"] { margin: 1rem 0 !important; overflow-x: auto; }
+
+    @media (max-width: 600px) {
+      .hero-header h1 { font-size: 1.8rem; }
+      .content { padding: 0 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-header">
+  <h1>Números Complexos</h1>
+  <p>Matemática · Nível Avançado</p>
+</div>
+
+<div class="content">
+
+  <!-- Definição -->
+  <h2>Definição</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Número Complexo</div>
+    <p>Um número complexo é toda expressão da forma \(z = a + bi\), onde \(a, b \in \mathbb{R}\)
+    e \(i\) é a <strong>unidade imaginária</strong>, definida por \(i^2 = -1\).</p>
+  </div>
+
+  <div class="formula-box">
+    \[z = a + bi \qquad i^2 = -1\]
+  </div>
+
+  <p><strong>\(a = \text{Re}(z)\)</strong> é a <strong>parte real</strong> e
+  <strong>\(b = \text{Im}(z)\)</strong> é a <strong>parte imaginária</strong> de \(z\).
+  O conjunto dos números complexos é denotado por \(\mathbb{C}\).</p>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Para \(z = 3 + 4i\): \(\;\text{Re}(z) = 3\) e \(\text{Im}(z) = 4\).</p>
+  </div>
+
+  <!-- Plano de Argand-Gauss -->
+  <h2>Plano de Argand-Gauss</h2>
+
+  <p>Um número complexo \(z = a + bi\) pode ser representado geometricamente como o ponto
+  \((a, b)\) no <strong>plano complexo</strong> (plano de Argand-Gauss), onde o eixo
+  horizontal é o eixo real e o eixo vertical é o eixo imaginário.</p>
+
+  <div class="fig-center">
+    <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" width="300" height="260"
+         aria-label="Plano de Argand-Gauss mostrando o número complexo z=3+4i">
+      <!-- eixos -->
+      <line x1="20" y1="150" x2="280" y2="150" stroke="#f9a8d4" stroke-width="2"/>
+      <line x1="150" y1="20"  x2="150" y2="250" stroke="#f9a8d4" stroke-width="2"/>
+      <polygon points="280,150 272,146 272,154" fill="#f9a8d4"/>
+      <polygon points="150,20 146,28 154,28"   fill="#f9a8d4"/>
+      <text x="283" y="154" font-size="13" fill="#9ca3af" font-family="sans-serif">Re</text>
+      <text x="155" y="18"  font-size="13" fill="#9ca3af" font-family="sans-serif">Im</text>
+      <!-- ponto z = 3+4i → SVG (210, 70): Re=3 → +60px, Im=4 → -80px -->
+      <line x1="150" y1="150" x2="210" y2="70" stroke="#93c5fd" stroke-width="2"/>
+      <!-- projeções -->
+      <line x1="210" y1="70"  x2="210" y2="150" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <line x1="210" y1="70"  x2="150" y2="70"  stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <!-- ponto -->
+      <circle cx="210" cy="70" r="6" fill="#60a5fa"/>
+      <!-- labels -->
+      <text x="215" y="66"  font-size="13" fill="#60a5fa" font-family="sans-serif" font-weight="600">z = 3+4i</text>
+      <text x="205" y="164" font-size="12" fill="#fdba74" font-family="sans-serif">3</text>
+      <text x="133" y="74"  font-size="12" fill="#fdba74" font-family="sans-serif">4</text>
+      <!-- módulo label -->
+      <text x="163" y="118" font-size="11" fill="#93c5fd" font-family="sans-serif" font-style="italic">|z|=5</text>
+      <!-- origem -->
+      <text x="134" y="165" font-size="12" fill="#9ca3af" font-family="sans-serif">O</text>
+    </svg>
+  </div>
+
+  <!-- Operações -->
+  <h2>Operações</h2>
+
+  <h3>Soma e Subtração</h3>
+  <p>Somam-se/subtraem-se as partes reais entre si e as imaginárias entre si:</p>
+  <div class="formula-box">
+    \[(a+bi) \pm (c+di) = (a \pm c) + (b \pm d)\,i\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplos</div>
+    <div class="math-steps">
+      <p>\((3+4i) + (1+2i) = (3+1) + (4+2)i = 4 + 6i\)</p>
+      <p>\((5+3i) - (2+7i) = (5-2) + (3-7)i = 3 - 4i\)</p>
+    </div>
+  </div>
+
+  <h3>Multiplicação</h3>
+  <p>Usa-se a distributiva e a substituição \(i^2 = -1\):</p>
+  <div class="formula-box">
+    \[(a+bi)(c+di) = (ac - bd) + (ad + bc)\,i\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <div class="math-steps">
+      <p>\((3+4i)(1+2i) = 3 + 6i + 4i + 8i^2\)</p>
+      <p>\(= 3 + 10i + 8(-1)\)</p>
+      <p>\(= -5 + 10i\)</p>
+    </div>
+  </div>
+
+  <!-- Conjugado -->
+  <h2>Conjugado</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Conjugado de um Número Complexo</div>
+    <p>O conjugado de \(z = a + bi\) é \(\bar{z} = a - bi\) — troca-se o sinal da parte imaginária.</p>
+  </div>
+
+  <div class="formula-box">
+    \[z \cdot \bar{z} = a^2 + b^2 = |z|^2\]
+  </div>
+
+  <p>O produto de um número complexo pelo seu conjugado é sempre um número real não-negativo.
+  Essa propriedade é a base da divisão de complexos.</p>
+
+  <!-- Divisão -->
+  <h2>Divisão</h2>
+  <p>Multiplica-se numerador e denominador pelo conjugado do denominador:</p>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <div class="math-steps">
+      <p>\(\dfrac{3+4i}{1+2i} = \dfrac{(3+4i)(1-2i)}{(1+2i)(1-2i)}\)</p>
+      <p>\(= \dfrac{3 - 6i + 4i - 8i^2}{1 - 4i^2} = \dfrac{3 - 2i + 8}{1 + 4}\)</p>
+      <p>\(= \dfrac{11 - 2i}{5} = \dfrac{11}{5} - \dfrac{2}{5}i\)</p>
+    </div>
+  </div>
+
+  <!-- Módulo -->
+  <h2>Módulo</h2>
+
+  <p>O módulo de \(z = a + bi\) é a distância do ponto \((a, b)\) à origem no plano complexo:</p>
+
+  <div class="formula-box">
+    \[|z| = \sqrt{a^2 + b^2}\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Para \(z = 3 + 4i\):</p>
+    <div class="math-steps">
+      <p>\(|z| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = \boxed{5}\)</p>
+    </div>
+  </div>
+
+  <!-- Potências de i -->
+  <h2>Potências de i</h2>
+
+  <p>As potências de \(i\) se repetem em ciclos de 4:</p>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Ciclo das Potências de i</div>
+    \[i^1 = i \qquad i^2 = -1 \qquad i^3 = -i \qquad i^4 = 1\]
+    <p style="margin-top:.5rem;font-size:.95rem;color:#374151;">Para calcular \(i^n\), divide-se \(n\) por 4 e usa-se o resto:
+    resto 0 → 1; resto 1 → \(i\); resto 2 → \(-1\); resto 3 → \(-i\).</p>
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>\(i^{23}\): \(23 = 4 \times 5 + 3\) → resto 3 → \(i^{23} = -i\)</p>
+  </div>
+
+</div>
+</body>
+</html>

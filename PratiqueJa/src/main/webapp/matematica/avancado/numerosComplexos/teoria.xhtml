@@ -1,0 +1,345 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é um número complexo?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>número complexo</strong> é toda expressão da forma \(z = a + bi\),
+                    onde \(a, b \in \mathbb{R}\) e \(i\) é a <strong>unidade imaginária</strong>,
+                    definida por \(i^2 = -1\).
+                </div>
+                <p><strong>\(a = \text{Re}(z)\)</strong> é a <strong>parte real</strong> e
+                <strong>\(b = \text{Im}(z)\)</strong> é a <strong>parte imaginária</strong>.
+                O conjunto dos números complexos é denotado por \(\mathbb{C}\).</p>
+                <p>Os números reais são um caso particular de complexos com \(b = 0\).
+                Os números puramente imaginários têm \(a = 0\).</p>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(z = 3 + 4i\)</span>
+                        <span>\(\text{Re}(z) = 3\)</span>
+                        <span class="hl">\(\text{Im}(z) = 4\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(z = -2 - 5i\)</span>
+                        <span>\(\text{Re}(z) = -2\)</span>
+                        <span class="hl">\(\text{Im}(z) = -5\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANO DE ARGAND-GAUSS -->
+            <div class="tr-section" id="sec-plano">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Graf</div>
+                    <div>
+                        <div class="tr-section-title">Plano de Argand-Gauss</div>
+                        <div class="tr-section-sub">Representação geométrica dos números complexos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um número complexo \(z = a + bi\) é representado pelo ponto \((a, b)\)
+                    no <strong>plano complexo</strong>: o eixo horizontal é o <strong>eixo real</strong>
+                    e o eixo vertical é o <strong>eixo imaginário</strong>.
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/numerosComplexos/fig-plano-complexo.svg"
+                         alt="Plano de Argand-Gauss mostrando o número complexo z=3+4i" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Eixo real (horizontal)</span>
+                        <span>Representa a parte real \(a\) do número complexo.</span>
+                        <span class="hl">Números reais ficam sobre esse eixo.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Eixo imaginário (vertical)</span>
+                        <span>Representa a parte imaginária \(b\) do número complexo.</span>
+                        <span class="hl">Números puramente imaginários ficam sobre esse eixo.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMA TRIGONOMÉTRICA -->
+            <div class="tr-section" id="sec-forma-trig">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Trig</div>
+                    <div>
+                        <div class="tr-section-title">Forma Trigonométrica</div>
+                        <div class="tr-section-sub">Representação polar de um número complexo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Todo número complexo \(z = a + bi\) pode ser escrito na <strong>forma trigonométrica</strong>
+                    (ou polar) usando seu módulo \(r = |z|\) e seu <strong>argumento</strong> \(\theta\)
+                    (ângulo que o vetor faz com o eixo real positivo):
+                </div>
+                <div class="tr-rule">
+                    \(z = r(\cos\theta + i\sin\theta)\)
+                </div>
+                <p>As relações entre as formas algébrica e trigonométrica são:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span style="font-weight:600;">Módulo e argumento</span>
+                        <span>\(r = |z| = \sqrt{a^2 + b^2}\)</span>
+                        <span>\(\tan\theta = \dfrac{b}{a}\) (ajustar quadrante)</span>
+                        <span class="hl">\(a = r\cos\theta, \quad b = r\sin\theta\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span style="font-weight:600;">Produto na forma polar</span>
+                        <span>Se \(z_1 = r_1(\cos\theta_1 + i\sin\theta_1)\) e \(z_2 = r_2(\cos\theta_2 + i\sin\theta_2)\):</span>
+                        <span>\(z_1 \cdot z_2 = r_1 r_2\bigl(\cos(\theta_1+\theta_2) + i\sin(\theta_1+\theta_2)\bigr)\)</span>
+                        <span class="hl">Módulos se multiplicam; argumentos se somam.</span>
+                    </div>
+                </div>
+                <h4>Exemplo — converter para forma trigonométrica</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Escreva \(z = 1 + \sqrt{3}\,i\) na forma trigonométrica.</span>
+                        <span>\(r = \sqrt{1^2 + (\sqrt{3})^2} = \sqrt{1+3} = 2\)</span>
+                        <span>\(\tan\theta = \dfrac{\sqrt{3}}{1} = \sqrt{3} \Rightarrow \theta = 60° = \dfrac{\pi}{3}\)</span>
+                        <span class="hl">\(z = 2\!\left(\cos 60° + i\sin 60°\right)\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULA DE DE MOIVRE -->
+            <div class="tr-section" id="sec-moivre">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Moi</div>
+                    <div>
+                        <div class="tr-section-title">Fórmula de De Moivre</div>
+                        <div class="tr-section-sub">Potenciação de complexos na forma polar</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para qualquer número complexo na forma trigonométrica e \(n \in \mathbb{Z}\):
+                </div>
+                <div class="tr-rule">
+                    \(\bigl[r(\cos\theta + i\sin\theta)\bigr]^n = r^n(\cos n\theta + i\sin n\theta)\)
+                </div>
+                <p>A fórmula de De Moivre permite calcular potências e raízes de números
+                complexos de forma eficiente, sem expandir produtos sucessivos.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \(\left(\cos 30° + i\sin 30°\right)^6\).</span>
+                        <span>\(r = 1\), \(n = 6\), \(\theta = 30°\)</span>
+                        <span>\(= \cos(6 \cdot 30°) + i\sin(6 \cdot 30°)\)</span>
+                        <span>\(= \cos 180° + i\sin 180°\)</span>
+                        <span class="hl">\(= -1 + 0i = -1\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \((1+i)^8\).</span>
+                        <span>\(r = \sqrt{2}\), \(\theta = 45°\)</span>
+                        <span>\((1+i)^8 = (\sqrt{2})^8\!\left(\cos 360° + i\sin 360°\right)\)</span>
+                        <span>\(= 16 \cdot (1 + 0i)\)</span>
+                        <span class="hl">\(= 16\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPERAÇÕES -->
+            <div class="tr-section" id="sec-operacoes">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Op</div>
+                    <div>
+                        <div class="tr-section-title">Operações</div>
+                        <div class="tr-section-sub">Soma, subtração e multiplicação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Soma e subtração:</strong> operam-se as partes reais entre si
+                    e as partes imaginárias entre si.
+                    \((a+bi) \pm (c+di) = (a \pm c) + (b \pm d)\,i\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Multiplicação:</strong> usa-se a distributiva e \(i^2 = -1\).
+                    \((a+bi)(c+di) = (ac - bd) + (ad + bc)\,i\)
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((3+4i) + (1+2i)\)</span>
+                        <span>\(= (3+1) + (4+2)i\)</span>
+                        <span class="hl">\(= 4 + 6i\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\((5+3i) - (2+7i)\)</span>
+                        <span>\(= (5-2) + (3-7)i\)</span>
+                        <span class="hl">\(= 3 - 4i\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\((3+4i) \cdot (1+2i)\)</span>
+                        <span>\(= 3 + 6i + 4i + 8i^2\)</span>
+                        <span>\(= 3 + 10i + 8(-1)\)</span>
+                        <span class="hl">\(= -5 + 10i\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONJUGADO -->
+            <div class="tr-section" id="sec-conjugado">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">z̄</div>
+                    <div>
+                        <div class="tr-section-title">Conjugado</div>
+                        <div class="tr-section-sub">Troca do sinal da parte imaginária</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O conjugado de \(z = a + bi\) é \(\bar{z} = a - bi\).
+                    O produto de \(z\) pelo seu conjugado é sempre real:
+                </div>
+                <div class="tr-rule">
+                    \(z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2 = |z|^2\)
+                </div>
+                <div class="tr-note">
+                    <strong>Igualdade de complexos:</strong>
+                    \(a + bi = c + di \Leftrightarrow a = c\) e \(b = d\).
+                    Dois complexos são iguais se e somente se têm partes reais iguais
+                    <em>e</em> partes imaginárias iguais.
+                </div>
+                <div class="tr-note">
+                    <strong>Propriedades do conjugado:</strong>
+                    \(\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2\);
+                    \(\overline{z_1 \cdot z_2} = \bar{z}_1 \cdot \bar{z}_2\);
+                    \(\overline{(\bar{z})} = z\).
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(z = 3 + 4i \;\Rightarrow\; \bar{z} = 3 - 4i\)</span>
+                        <span>\(z \cdot \bar{z} = (3+4i)(3-4i) = 9 - 16i^2 = 9 + 16\)</span>
+                        <span class="hl">\(z \cdot \bar{z} = 25 = |z|^2\) ✓</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISÃO -->
+            <div class="tr-section" id="sec-divisao">
+                <div class="tr-section-header">
+                    <div class="tr-badge">÷</div>
+                    <div>
+                        <div class="tr-section-title">Divisão</div>
+                        <div class="tr-section-sub">Técnica do conjugado do denominador</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para dividir \(z_1\) por \(z_2\), multiplica-se numerador e denominador
+                    pelo conjugado \(\bar{z}_2\), tornando o denominador real:
+                </div>
+                <div class="tr-rule">
+                    \(\dfrac{z_1}{z_2} = \dfrac{z_1 \cdot \bar{z}_2}{z_2 \cdot \bar{z}_2} = \dfrac{z_1 \cdot \bar{z}_2}{|z_2|^2}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(\dfrac{3+4i}{1+2i} = \dfrac{(3+4i)(1-2i)}{(1+2i)(1-2i)}\)</span>
+                        <span>Numerador: \((3+4i)(1-2i) = 3-6i+4i-8i^2 = 3-2i+8 = 11-2i\)</span>
+                        <span>Denominador: \((1+2i)(1-2i) = 1+4 = 5\)</span>
+                        <span class="hl">\(\dfrac{3+4i}{1+2i} = \dfrac{11-2i}{5} = \dfrac{11}{5} - \dfrac{2}{5}i\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO -->
+            <div class="tr-section" id="sec-modulo">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">|z|</div>
+                    <div>
+                        <div class="tr-section-title">Módulo</div>
+                        <div class="tr-section-sub">Distância à origem no plano complexo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O módulo de \(z = a + bi\) é a distância do ponto \((a,b)\) à origem:
+                </div>
+                <div class="tr-rule">
+                    \(|z| = \sqrt{a^2 + b^2}\)
+                </div>
+                <p>O módulo é sempre um número real não-negativo. Geometricamente, é o
+                comprimento do vetor que representa \(z\) no plano complexo.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(z = 3 + 4i\)</span>
+                        <span>\(|z| = \sqrt{9 + 16} = \sqrt{25}\)</span>
+                        <span class="hl">\(|z| = 5\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(z = -1 + \sqrt{3}\,i\)</span>
+                        <span>\(|z| = \sqrt{1 + 3} = \sqrt{4}\)</span>
+                        <span class="hl">\(|z| = 2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POTÊNCIAS DE i -->
+            <div class="tr-section" id="sec-potencias">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">iⁿ</div>
+                    <div>
+                        <div class="tr-section-title">Potências de i</div>
+                        <div class="tr-section-sub">Ciclo de período 4</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As potências de \(i\) se repetem em ciclo de período 4:
+                    \(i^1 = i,\quad i^2 = -1,\quad i^3 = -i,\quad i^4 = 1,\quad i^5 = i, \ldots\)
+                </div>
+                <p>Para calcular \(i^n\): divida \(n\) por \(4\) e use o <strong>resto</strong>:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Resto 0 → \(i^n = 1\)</span>
+                        <span style="font-weight:600;">Resto 1 → \(i^n = i\)</span>
+                        <span style="font-weight:600;">Resto 2 → \(i^n = -1\)</span>
+                        <span style="font-weight:600;">Resto 3 → \(i^n = -i\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \(i^{23}\).</span>
+                        <span>\(23 = 4 \times 5 + 3\) → resto \(3\)</span>
+                        <span class="hl">\(i^{23} = -i\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção para expoentes negativos:</strong>
+                    \(i^{-1} = \dfrac{1}{i} = \dfrac{i}{i^2} = \dfrac{i}{-1} = -i\).
+                    Para negativos, some múltiplos de 4 até tornar o expoente positivo.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

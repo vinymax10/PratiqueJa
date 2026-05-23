@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="300" height="225">
+  <!--
+    Triângulo CAB: C=(122,89), A=(45,320), B=(430,320)
+    Reta DE paralela a AB: D=(84,205), E=(276,205)
+    Ajuste os atributos x e y das tags <text> para reposicionar rótulos.
+  -->
+
+  <!-- Triângulo CAB -->
+  <polygon points="122,89 45,320 430,320" fill="none" stroke="#cc6688" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Reta DE paralela a AB -->
+  <line x1="84" y1="205" x2="276" y2="205" stroke="#cc6688" stroke-width="2.5"/>
+
+  <!-- Rótulos dos vértices -->
+  <text id="label-A" x="22"  y="342" font-size="22" font-weight="bold" fill="#333" font-family="sans-serif">A</text>
+  <text id="label-B" x="438" y="342" font-size="22" font-weight="bold" fill="#333" font-family="sans-serif">B</text>
+  <text id="label-C" x="110" y="68"  font-size="22" font-weight="bold" fill="#333" font-family="sans-serif">C</text>
+  <text id="label-D" x="52"  y="210" font-size="22" font-weight="bold" fill="#333" font-family="sans-serif">D</text>
+  <text id="label-E" x="286" y="210" font-size="22" font-weight="bold" fill="#333" font-family="sans-serif">E</text>
+</svg>

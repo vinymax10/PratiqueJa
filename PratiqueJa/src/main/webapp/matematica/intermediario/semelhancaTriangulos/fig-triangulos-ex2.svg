@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="300" height="225">
+  <!--
+    Triângulo CAB: C=(122,89), A=(45,320), B=(430,320)
+    Reta DE paralela a AB: D=(84,205), E=(276,205)
+    Valores: CD=4, DA=6, CE=8, EB=x
+    Ajuste os atributos x e y das tags <text> para reposicionar rótulos.
+  -->
+
+  <!-- Triângulo CAB -->
+  <polygon points="122,89 45,320 430,320" fill="none" stroke="#9966cc" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Reta DE paralela a AB -->
+  <line x1="84" y1="205" x2="276" y2="205" stroke="#9966cc" stroke-width="2.5"/>
+
+  <!-- Rótulos dos vértices -->
+  <text id="label-A" x="22"  y="342" font-size="30"  fill="#333" font-family="sans-serif">A</text>
+  <text id="label-B" x="438" y="342" font-size="30"  fill="#333" font-family="sans-serif">B</text>
+  <text id="label-C" x="110" y="68"  font-size="30"  fill="#333" font-family="sans-serif">C</text>
+  <text id="label-D" x="52"  y="210" font-size="30"  fill="#333" font-family="sans-serif">D</text>
+  <text id="label-E" x="286" y="210" font-size="30"  fill="#333" font-family="sans-serif">E</text>
+
+  <!-- Rótulos dos valores -->
+  <text id="label-CD" x="90"  y="142" font-size="30"  fill="#333" text-anchor="end"    font-family="sans-serif">4</text>
+  <text id="label-DA" x="46"  y="265" font-size="30"  fill="#333" text-anchor="end"    font-family="sans-serif">6</text>
+  <text id="label-CE" x="218" y="145" font-size="30"  fill="#333" text-anchor="start"  font-family="sans-serif">8</text>
+  <text id="label-EB" x="378" y="265" font-size="30"  fill="#333" text-anchor="start"  font-family="sans-serif">x</text>
+</svg>

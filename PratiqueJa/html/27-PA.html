@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Progressão Aritmética</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+    }
+
+    .hero-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 60%, #7c3aed 100%);
+      color: white;
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .hero-header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .hero-header p  { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.85; }
+
+    .content { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem 3rem; }
+
+    h2 { font-size: 1.6rem; color: #1e3a5f; border-bottom: 3px solid #2563eb; padding-bottom: 0.4rem; margin: 2rem 0 0.75rem; }
+    h3 { font-size: 1.25rem; color: #2563eb; margin: 1.5rem 0 0.5rem; }
+    p  { line-height: 1.75; margin-bottom: 1rem; font-size: 1.05rem; }
+
+    .theorem-box {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+      border-left: 5px solid #2563eb;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.12);
+    }
+    .theorem-box .theorem-title { font-weight: 700; color: #1e3a5f; font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+    .formula-box {
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border-left: 5px solid #10b981;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(16,185,129,0.12);
+    }
+
+    .example-box {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .example-box .example-title { font-weight: 700; color: #7c3aed; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+
+    .note-box {
+      background: #fffbeb;
+      border-left: 5px solid #f59e0b;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #374151;
+    }
+
+    .math-steps { background: #fff; border-radius: 10px; padding: 1rem 1.5rem; margin: 1rem 0; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .math-steps p { margin-bottom: 0.4rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 0.4rem; }
+    .math-steps p:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .seq-display {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1e3a5f;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 10px;
+      margin: 1rem 0;
+      letter-spacing: 0.05em;
+    }
+
+    mjx-container[display="true"] { margin: 1rem 0 !important; overflow-x: auto; }
+
+    @media (max-width: 600px) {
+      .hero-header h1 { font-size: 1.8rem; }
+      .content { padding: 0 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-header">
+  <h1>Progressão Aritmética</h1>
+  <p>Matemática · Nível Avançado</p>
+</div>
+
+<div class="content">
+
+  <!-- Definição -->
+  <h2>Definição</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Progressão Aritmética (PA)</div>
+    <p>Uma PA é uma sequência numérica em que a diferença entre dois termos consecutivos é sempre
+    constante. Essa diferença constante é chamada de <strong>razão</strong> \(r\).</p>
+  </div>
+
+  <div class="seq-display">
+    \(a_1,\; a_2,\; a_3,\; \ldots,\; a_n\)
+  </div>
+
+  <p>O primeiro termo é \(a_1\), e cada termo seguinte é obtido somando \(r\) ao anterior.
+  Se \(r > 0\) a PA é <strong>crescente</strong>; se \(r < 0\) é <strong>decrescente</strong>;
+  se \(r = 0\) é <strong>constante</strong>.</p>
+
+  <p>A razão pode ser calculada subtraindo qualquer termo pelo seu antecessor:</p>
+
+  <div class="formula-box">
+    \[r = a_n - a_{n-1}, \quad \forall\; n > 1\]
+  </div>
+
+  <!-- Termo Geral -->
+  <h2>Termo Geral</h2>
+
+  <p>A <strong>fórmula do termo geral</strong> permite calcular diretamente qualquer termo
+  da PA sem listar todos os anteriores:</p>
+
+  <div class="formula-box">
+    \[a_n = a_1 + (n-1) \cdot r\]
+  </div>
+
+  <p>Onde \(a_n\) é o n-ésimo termo, \(a_1\) é o primeiro termo, \(n\) é a posição do termo
+  e \(r\) é a razão.</p>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo 1 — Termo Geral</div>
+    <p>Dada a PA \(3, 5, 7, 9, 11, 13, \ldots\), temos \(a_1 = 3\) e \(r = 5 - 3 = 2\).
+    Qual é o 20º termo?</p>
+    <div class="math-steps">
+      <p>\(a_{20} = 3 + (20-1) \cdot 2\)</p>
+      <p>\(a_{20} = 3 + 19 \cdot 2\)</p>
+      <p>\(a_{20} = 3 + 38\)</p>
+      <p>\(a_{20} = \boxed{41}\)</p>
+    </div>
+  </div>
+
+  <!-- Soma dos Termos -->
+  <h2>Soma dos Termos</h2>
+
+  <p>A soma dos primeiros \(n\) termos de uma PA é calculada pela fórmula:</p>
+
+  <div class="formula-box">
+    \[S_n = \frac{(a_1 + a_n) \cdot n}{2}\]
+  </div>
+
+  <p>Essa fórmula é equivalente à média entre o primeiro e o último termo, multiplicada
+  pelo número de termos. Intuitivamente, os termos de uma PA se "emparelham" simetricamente
+  em torno da média.</p>
+
+  <div class="note-box">
+    <strong>Observação:</strong> para usar a fórmula da soma, é necessário conhecer (ou calcular
+    antes) o valor de \(a_n\). Use a fórmula do termo geral quando \(a_n\) não for dado.
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo 2 — Soma dos Termos</div>
+    <p>Qual é a soma dos 12 primeiros termos da PA \(5, 8, 11, 14, \ldots\)?
+    Temos \(a_1 = 5\) e \(r = 3\).</p>
+    <p><strong>Passo 1 — Calcular \(a_{12}\):</strong></p>
+    <div class="math-steps">
+      <p>\(a_{12} = 5 + (12-1) \cdot 3\)</p>
+      <p>\(a_{12} = 5 + 33 = \boxed{38}\)</p>
+    </div>
+    <p><strong>Passo 2 — Aplicar a fórmula da soma:</strong></p>
+    <div class="math-steps">
+      <p>\(S_{12} = \dfrac{(5 + 38) \cdot 12}{2}\)</p>
+      <p>\(S_{12} = \dfrac{43 \cdot 12}{2}\)</p>
+      <p>\(S_{12} = \dfrac{516}{2}\)</p>
+      <p>\(S_{12} = \boxed{258}\)</p>
+    </div>
+  </div>
+
+  <!-- Propriedades -->
+  <h2>Propriedades</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Propriedade 1 — Termo Médio</div>
+    <p>Em qualquer PA, um termo é a média aritmética de seus vizinhos imediatos:</p>
+    \[a_k = \frac{a_{k-1} + a_{k+1}}{2}\]
+  </div>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Propriedade 2 — Soma de Termos Equidistantes</div>
+    <p>A soma de dois termos equidistantes dos extremos é sempre igual à soma dos extremos:</p>
+    \[a_k + a_{n-k+1} = a_1 + a_n\]
+    <p style="font-size:.95rem;color:#374151;">Exemplo: na PA \(2, 5, 8, 11, 14\), temos \(a_2 + a_4 = 5 + 11 = 16 = a_1 + a_5 = 2 + 14\).</p>
+  </div>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Propriedade 3 — PA com Número Ímpar de Termos</div>
+    <p>Quando uma PA tem número ímpar de termos, a soma é igual ao termo central
+    multiplicado pelo número de termos:</p>
+    \[S_n = a_{\text{central}} \cdot n\]
+  </div>
+
+</div>
+</body>
+</html>

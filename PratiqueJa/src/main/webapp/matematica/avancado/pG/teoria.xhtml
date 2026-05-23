@@ -1,0 +1,311 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é uma Progressão Geométrica?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma <strong>Progressão Geométrica (PG)</strong> é uma sequência numérica em que
+                    cada termo, a partir do segundo, é obtido multiplicando o anterior por uma
+                    constante chamada <strong>razão \(q\)</strong>.
+                </div>
+                <p>A razão é calculada dividindo qualquer termo pelo seu antecessor:</p>
+                <div class="tr-rule">
+                    \(q = \dfrac{a_n}{a_{n-1}}, \quad \forall\; n &gt; 1\)
+                </div>
+                <p>O comportamento da PG depende do valor de \(q\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Crescente — \(q &gt; 1\)</span>
+                        <span>Termos aumentam a cada posição.</span>
+                        <span class="hl">Exemplo: \(2, 6, 18, 54, \ldots\) com \(q = 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Decrescente — \(0 &lt; q &lt; 1\)</span>
+                        <span>Termos positivos diminuem a cada posição.</span>
+                        <span class="hl">Exemplo: \(16, 8, 4, 2, \ldots\) com \(q = \frac{1}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Alternante — \(q &lt; 0\)</span>
+                        <span>Os sinais dos termos alternam entre positivo e negativo.</span>
+                        <span class="hl">Exemplo: \(2, -6, 18, -54, \ldots\) com \(q = -3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Constante — \(q = 1\)</span>
+                        <span>Todos os termos são iguais.</span>
+                        <span class="hl">Exemplo: \(5, 5, 5, 5, \ldots\) com \(q = 1\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TERMO GERAL -->
+            <div class="tr-section" id="sec-geral">
+                <div class="tr-section-header">
+                    <div class="tr-badge">aₙ</div>
+                    <div>
+                        <div class="tr-section-title">Termo Geral</div>
+                        <div class="tr-section-sub">Calculando qualquer termo sem listar todos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A fórmula do termo geral permite calcular diretamente o n-ésimo termo da PG,
+                    conhecendo apenas o primeiro termo \(a_1\) e a razão \(q\):
+                </div>
+                <div class="tr-rule">
+                    \(a_n = a_1 \cdot q^{n-1}\)
+                </div>
+                <p>Essa fórmula também permite encontrar \(a_1\), \(q\) ou \(n\) quando os
+                demais valores são conhecidos.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dada a PG \(3, 6, 12, 24, \ldots\), qual é o 10º termo?</span>
+                        <span>\(a_1 = 3\), \(q = 2\), \(n = 10\)</span>
+                        <span>\(a_{10} = 3 \cdot 2^9 = 3 \cdot 512\)</span>
+                        <span class="hl">\(a_{10} = 1536\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Em uma PG, \(a_1 = 5\) e \(q = 2\). Para qual \(n\) temos \(a_n = 160\)?</span>
+                        <span>\(160 = 5 \cdot 2^{n-1} \Rightarrow 2^{n-1} = 32\)</span>
+                        <span>\(2^{n-1} = 2^5 \Rightarrow n - 1 = 5\)</span>
+                        <span class="hl">\(n = 6\) — o termo 160 é o 6º.</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Em uma PG, \(a_2 = 6\) e \(a_5 = 48\). Determine \(a_1\) e \(q\).</span>
+                        <span>Usando \(a_5 = a_2 \cdot q^{5-2}\): \(\;48 = 6 \cdot q^3 \Rightarrow q^3 = 8\)</span>
+                        <span>\(q = 2\). Então \(a_2 = a_1 \cdot q \Rightarrow 6 = a_1 \cdot 2\)</span>
+                        <span class="hl">\(a_1 = 3\) e \(q = 2\) → PG: \(3, 6, 12, 24, 48, \ldots\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOMA DOS TERMOS -->
+            <div class="tr-section" id="sec-soma">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Sₙ</div>
+                    <div>
+                        <div class="tr-section-title">Soma dos Termos</div>
+                        <div class="tr-section-sub">Soma dos n primeiros termos da PG</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A soma dos primeiros \(n\) termos de uma PG com \(q \neq 1\) é:
+                </div>
+                <div class="tr-rule">
+                    \(S_n = \dfrac{a_1 \cdot (q^n - 1)}{q - 1}\)
+                </div>
+                <div class="tr-note">
+                    <strong>Caso especial \(q = 1\):</strong> todos os termos são iguais a \(a_1\),
+                    portanto \(S_n = a_1 \cdot n\).
+                </div>
+                <p>Quando o último termo \(a_n\) já é conhecido, é mais prático usar a forma alternativa:</p>
+                <div class="tr-rule">
+                    \(S_n = \dfrac{a_n \cdot q - a_1}{q - 1}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Qual é a soma dos 6 primeiros termos da PG \(2, 6, 18, 54, \ldots\)?
+                            Temos \(a_1 = 2\) e \(q = 3\).</span>
+                        <span>\(S_6 = \dfrac{2 \cdot (3^6 - 1)}{3 - 1} = \dfrac{2 \cdot (729 - 1)}{2}\)</span>
+                        <span>\(S_6 = \dfrac{2 \cdot 728}{2} = 728\)</span>
+                        <span class="hl">\(S_6 = 728\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PG INFINITA -->
+            <div class="tr-section" id="sec-infinita">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">S∞</div>
+                    <div>
+                        <div class="tr-section-title">PG Infinita Decrescente</div>
+                        <div class="tr-section-sub">Soma de infinitos termos quando |q| &lt; 1</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando \(|q| &lt; 1\), os termos da PG se aproximam de zero e a soma de
+                    infinitos termos converge para um valor finito:
+                </div>
+                <div class="tr-rule">
+                    \(S_\infty = \dfrac{a_1}{1 - q}\)
+                </div>
+                <div class="tr-note">
+                    <strong>Condição de convergência:</strong> a fórmula \(S_\infty\) só é válida
+                    quando \(|q| &lt; 1\). Se \(|q| \geq 1\), a soma diverge (cresce sem limite).
+                </div>
+                <p>Essa fórmula tem aplicação direta em dízimas periódicas e em problemas de
+                física e finanças que envolvem decaimento geométrico.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule a soma da PG \(8, 4, 2, 1, \dfrac{1}{2}, \ldots\)</span>
+                        <span>\(a_1 = 8\), \(q = \dfrac{1}{2}\)</span>
+                        <span>\(S_\infty = \dfrac{8}{1 - \frac{1}{2}} = \dfrac{8}{\frac{1}{2}}\)</span>
+                        <span class="hl">\(S_\infty = 16\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Escreva \(0{,}\overline{3}\) como fração usando PG infinita.</span>
+                        <span>\(0{,}\overline{3} = 0{,}3 + 0{,}03 + 0{,}003 + \ldots\)</span>
+                        <span>\(a_1 = 0{,}3\), \(q = 0{,}1\)</span>
+                        <span class="hl">\(S_\infty = \dfrac{0{,}3}{1 - 0{,}1} = \dfrac{0{,}3}{0{,}9} = \dfrac{1}{3}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERPOLAÇÃO GEOMÉTRICA -->
+            <div class="tr-section" id="sec-interpolacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Int</div>
+                    <div>
+                        <div class="tr-section-title">Interpolação Geométrica</div>
+                        <div class="tr-section-sub">Inserir meios geométricos entre dois termos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Interpolar \(k\) <strong>meios geométricos</strong> entre dois valores \(a\) e \(b\)
+                    (com \(a, b &gt; 0\)) significa construir uma PG em que \(a\) é o primeiro termo,
+                    \(b\) é o último, e há exatamente \(k\) termos entre eles. A razão é:
+                </div>
+                <div class="tr-rule">
+                    \(q = \sqrt[k+1]{\dfrac{b}{a}} = \left(\dfrac{b}{a}\right)^{\!\frac{1}{k+1}}\)
+                </div>
+                <p>A PG resultante tem \(k + 2\) termos no total: \(a,\; aq,\; aq^2,\; \ldots,\; b\).</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Insira 2 meios geométricos entre \(3\) e \(24\).</span>
+                        <span>\(q = \sqrt[3]{\dfrac{24}{3}} = \sqrt[3]{8} = 2\)</span>
+                        <span class="hl">PG: \(3,\; 6,\; 12,\; 24\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Verificação: \(24 = 3 \cdot 2^3\) ✓</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Insira 3 meios geométricos entre \(1\) e \(16\).</span>
+                        <span>\(q = \sqrt[4]{\dfrac{16}{1}} = \sqrt[4]{16} = 2\)</span>
+                        <span class="hl">PG: \(1,\; 2,\; 4,\; 8,\; 16\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">5 termos no total (\(k+2 = 5\)).</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> para que a interpolação geométrica seja possível com
+                    razão real, \(a\) e \(b\) devem ter o mesmo sinal quando \(k\) é par,
+                    ou qualquer sinal quando \(k\) é ímpar.
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Prop</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades</div>
+                        <div class="tr-section-sub">Relações entre os termos de uma PG</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Média geométrica</span>
+                        <span>Qualquer termo é a média geométrica de seus vizinhos:</span>
+                        <span>\(a_k^2 = a_{k-1} \cdot a_{k+1}\)</span>
+                        <span class="hl">Ex: na PG \(2, 6, 18\): \(6^2 = 36 = 2 \times 18\) ✓</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Produto de equidistantes</span>
+                        <span>O produto de termos equidistantes dos extremos é constante:</span>
+                        <span>\(a_k \cdot a_{n-k+1} = a_1 \cdot a_n\)</span>
+                        <span class="hl">Ex: \(1,2,4,8,16\): \(a_2 \cdot a_4 = 2 \cdot 8 = 16 = a_1 \cdot a_5\) ✓</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Logaritmos de uma PG</span>
+                        <span>Se \((a_1, a_2, \ldots)\) é PG, então \((\log a_1, \log a_2, \ldots)\) é PA com razão \(\log q\).</span>
+                        <span class="hl">Ex: \(\log 2, \log 4, \log 8\) → PA com \(r = \log 2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Forma fatorada alternativa</span>
+                        <span>O n-ésimo termo pode ser escrito em relação a qualquer termo \(a_k\):</span>
+                        <span>\(a_n = a_k \cdot q^{n-k}\)</span>
+                        <span class="hl">Evita calcular a partir de \(a_1\) quando \(a_k\) é mais conveniente.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação da PG em situações reais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar \(a_1\) e \(q\) no enunciado;
+                    (2) decidir entre termo geral, soma finita ou soma infinita;
+                    (3) aplicar a fórmula e interpretar o resultado.
+                </div>
+                <h4>Problema 1 — Juros compostos</h4>
+                <p>Um capital de R$ 1.000,00 é aplicado a juros compostos de 10% ao mês.
+                Qual será o montante após 5 meses?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(a_1 = 1000\), \(q = 1{,}10\), \(n = 6\) (mês 0 ao mês 5)</span>
+                        <span>\(a_6 = 1000 \cdot (1{,}10)^5 = 1000 \cdot 1{,}61051\)</span>
+                        <span class="hl">Montante após 5 meses: R$ 1.610,51</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Cada mês o valor é multiplicado por \(q = 1{,}10\) → crescimento geométrico.</span>
+                    </div>
+                </div>
+                <h4>Problema 2 — Bactérias</h4>
+                <p>Uma colônia de bactérias dobra de tamanho a cada hora. Se havia
+                500 bactérias no início, quantas haverá após 8 horas?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(a_1 = 500\), \(q = 2\), \(n = 9\) (hora 0 à hora 8)</span>
+                        <span>\(a_9 = 500 \cdot 2^8 = 500 \cdot 256\)</span>
+                        <span class="hl">Após 8 horas: 128.000 bactérias.</span>
+                    </div>
+                </div>
+                <h4>Problema 3 — Dízima periódica</h4>
+                <p>Escreva a dízima \(0{,}\overline{27}\) como fração irredutível.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(0{,}\overline{27} = 0{,}27 + 0{,}0027 + 0{,}000027 + \ldots\)</span>
+                        <span>\(a_1 = 0{,}27\), \(q = 0{,}01\)</span>
+                        <span>\(S_\infty = \dfrac{0{,}27}{1 - 0{,}01} = \dfrac{0{,}27}{0{,}99} = \dfrac{27}{99}\)</span>
+                        <span class="hl">\(0{,}\overline{27} = \dfrac{3}{11}\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

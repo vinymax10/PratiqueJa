@@ -1,0 +1,385 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é semelhança de triângulos?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois triângulos são semelhantes quando possuem ângulos correspondentes iguais
+                    e lados correspondentes proporcionais.
+                </div>
+                <p>Dizemos que o triângulo \(ABC\) é semelhante ao triângulo \(A'B'C'\), denotado
+                \(ABC \sim A'B'C'\), quando existe um valor \(k\) — chamado de
+                <strong>razão de semelhança</strong> — tal que:</p>
+                <div class="tr-rule">
+                    \(\dfrac{AB}{A'B'} = \dfrac{BC}{B'C'} = \dfrac{AC}{A'C'} = k\)
+                </div>
+                <p>Se \(k = 1\) os triângulos são congruentes. Se \(k \neq 1\) são semelhantes
+                mas de tamanhos diferentes.</p>
+                <div class="tr-note">
+                    <strong>Atenção — ordem dos vértices:</strong> a notação \(ABC \sim A'B'C'\)
+                    exige correspondência posicional. O vértice \(A\) corresponde a \(A'\), \(B\) a \(B'\)
+                    e \(C\) a \(C'\). Escrever os vértices fora de ordem altera quais lados e ângulos
+                    são considerados correspondentes e invalida a proporção.
+                </div>
+            </div>
+
+            <!-- TEOREMA DE TALES -->
+            <div class="tr-section" id="sec-tales">
+                <div class="tr-section-header">
+                    <div class="tr-badge">TT</div>
+                    <div>
+                        <div class="tr-section-title">Teorema de Tales</div>
+                        <div class="tr-section-sub">Feixe de retas paralelas cortadas por transversais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Se duas retas transversais cortam um feixe de retas paralelas, os segmentos
+                    determinados em uma transversal são proporcionais aos segmentos correspondentes
+                    na outra transversal.
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/semelhancaTriangulos/fig-tales-diagrama.svg"
+                         alt="Diagrama Teorema de Tales — retas paralelas cortadas por transversais" />
+                </div>
+
+                <div class="tr-rule">
+                    \(\dfrac{\alpha}{\beta} = \dfrac{\gamma}{\phi}\)
+                </div>
+
+                <p>A proporção também se mantém ao substituir um segmento pela soma de segmentos adjacentes:</p>
+                <div class="tr-rule">
+                    \(\dfrac{\alpha+\beta}{\beta} = \dfrac{\gamma+\phi}{\phi}
+                    \qquad \text{e} \qquad
+                    \dfrac{\alpha}{\alpha+\beta} = \dfrac{\gamma}{\gamma+\phi}\)
+                </div>
+
+                <h4>Exemplos</h4>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/semelhancaTriangulos/fig-tales-exemplo.svg"
+                         alt="Exemplo Teorema de Tales com valores 5, 10, x, 12" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dados \(\alpha = 5\), \(\beta = 10\), \(\gamma = x\) e \(\phi = 12\)</span>
+                        <span>\(\dfrac{5}{10} = \dfrac{x}{12}\)</span>
+                        <span>\(\dfrac{x}{12} = \dfrac{1}{2}\)</span>
+                        <span class="hl">\(x = 6\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Dados \(\alpha = 3\), \(\beta = 9\), \(\gamma = 2\) e \(\phi = x\)</span>
+                        <span>\(\dfrac{3}{9} = \dfrac{2}{x}\)</span>
+                        <span>\(3x = 18\)</span>
+                        <span class="hl">\(x = 6\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRITÉRIO AA -->
+            <div class="tr-section" id="sec-aa">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">AA</div>
+                    <div>
+                        <div class="tr-section-title">Critério AA (Ângulo-Ângulo)</div>
+                        <div class="tr-section-sub">Dois ângulos iguais garantem semelhança</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Se dois triângulos possuem dois ângulos correspondentes iguais, então são semelhantes.
+                </div>
+                <p>Como a soma dos ângulos internos de qualquer triângulo é \(180°\), basta que dois
+                ângulos sejam iguais para que o terceiro também seja. Com isso, os lados ficam
+                necessariamente proporcionais.</p>
+                <p>Na figura, a reta \(DE\) é paralela à base \(AB\), de modo que
+                \(\angle CDE = \angle CAB\) e \(\angle CED = \angle CBA\) (ângulos correspondentes).
+                Portanto \(\triangle CDE \sim \triangle CAB\):</p>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/semelhancaTriangulos/fig-triangulos-diagrama.svg"
+                         alt="Triângulo ABC com reta DE paralela a AB" />
+                </div>
+
+                <div class="tr-rule">
+                    \(\dfrac{CD}{CA} = \dfrac{CE}{CB} = \dfrac{DE}{AB}\)
+                </div>
+            </div>
+
+            <!-- CRITÉRIO LAL -->
+            <div class="tr-section" id="sec-lal">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">LAL</div>
+                    <div>
+                        <div class="tr-section-title">Critério LAL (Lado-Ângulo-Lado)</div>
+                        <div class="tr-section-sub">Dois lados proporcionais com ângulo entre eles igual</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois triângulos são semelhantes quando dois pares de lados correspondentes são
+                    proporcionais e os ângulos formados entre esses lados são iguais.
+                </div>
+                <p>Dados \(\triangle ABC\) e \(\triangle DEF\), se \(\angle A = \angle D\) e
+                \(\dfrac{AB}{DE} = \dfrac{AC}{DF}\), então \(\triangle ABC \sim \triangle DEF\).</p>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\triangle ABC\): \(AB = 4\), \(AC = 6\), \(\angle A = 50°\)</span>
+                        <span>\(\triangle DEF\): \(DE = 8\), \(DF = 12\), \(\angle D = 50°\)</span>
+                        <span>\(\dfrac{AB}{DE} = \dfrac{4}{8} = \dfrac{1}{2}\) &#160;e&#160;
+                              \(\dfrac{AC}{DF} = \dfrac{6}{12} = \dfrac{1}{2}\)</span>
+                        <span>Razões iguais e ângulo incluído igual →
+                              <span class="hl">LAL ⇒ \(\triangle ABC \sim \triangle DEF\) com \(k = 2\)</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRITÉRIO LLL -->
+            <div class="tr-section" id="sec-lll">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">LLL</div>
+                    <div>
+                        <div class="tr-section-title">Critério LLL (Lado-Lado-Lado)</div>
+                        <div class="tr-section-sub">Os três pares de lados proporcionais garantem semelhança</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois triângulos são semelhantes quando os três pares de lados correspondentes são
+                    proporcionais, ou seja, quando existe um único valor \(k\) que relaciona todos os pares.
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\triangle ABC\): lados \(3\), \(4\) e \(6\)</span>
+                        <span>\(\triangle DEF\): lados \(6\), \(8\) e \(12\)</span>
+                        <span>\(\dfrac{3}{6} = \dfrac{4}{8} = \dfrac{6}{12} = \dfrac{1}{2}\)</span>
+                        <span>Todas as razões iguais →
+                              <span class="hl">LLL ⇒ \(\triangle ABC \sim \triangle DEF\) com \(k = 2\)</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Pr</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades dos Triângulos Semelhantes</div>
+                        <div class="tr-section-sub">Razão de semelhança, perímetro, área, alturas e medianas</div>
+                    </div>
+                </div>
+                <p>Se dois triângulos são semelhantes com razão de semelhança \(k\), então:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\dfrac{P}{P'} = k\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">razão dos perímetros — cresce na mesma proporção dos lados</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\dfrac{A}{A'} = k^2\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">razão das áreas — cresce com o <strong>quadrado</strong> da razão de semelhança</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\dfrac{h}{h'} = k\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">razão das alturas correspondentes — igual à razão de semelhança</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(\dfrac{m}{m'} = k\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">razão das medianas correspondentes — igual à razão de semelhança</span>
+                    </div>
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dois triângulos semelhantes com \(k = 3\); menor tem área \(10\,\text{cm}^2\)</span>
+                        <span>\(A' = 10 \cdot 3^2 = 10 \cdot 9\)</span>
+                        <span class="hl">\(A' = 90\,\text{cm}^2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Perímetro do menor é \(12\,\text{cm}\) e \(k = 2\)</span>
+                        <span>\(P' = 12 \cdot 2\)</span>
+                        <span class="hl">\(P' = 24\,\text{cm}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMELHANÇA EM TRIÂNGULOS RETÂNGULOS -->
+            <div class="tr-section" id="sec-ret">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Ret</div>
+                    <div>
+                        <div class="tr-section-title">Semelhança em Triângulos Retângulos</div>
+                        <div class="tr-section-sub">Altitude sobre a hipotenusa gera três triângulos semelhantes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Ao traçar a altura \(h\) relativa à hipotenusa de um triângulo retângulo,
+                    formam-se <strong>três triângulos semelhantes entre si</strong>:
+                    o triângulo original e os dois menores formados pela altura.
+                </div>
+                <p>No triângulo retângulo \(ABC\) com ângulo reto em \(C\), ao traçar \(CH \perp AB\):</p>
+                <div class="tr-rule">
+                    \(\triangle ABC \sim \triangle ACH \sim \triangle CBH\)
+                </div>
+                <p>Essa semelhança tripla fundamenta as <strong>Relações Métricas no Triângulo Retângulo</strong>.
+                Sendo \(m\) e \(n\) as projeções dos catetos sobre a hipotenusa \((a = m + n)\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(h^2 = m \cdot n\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">altitude ao quadrado = produto das projeções</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(b^2 = a \cdot m\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">cateto ao quadrado = hipotenusa × sua projeção</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(c^2 = a \cdot n\)</span>
+                        <span style="font-size:.85rem;color:#6b7280;">cateto ao quadrado = hipotenusa × sua projeção</span>
+                    </div>
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Triângulo retângulo com catetos \(b = 6\) e \(c = 8\) — calcular \(h\)</span>
+                        <span>Hipotenusa: \(a = \sqrt{6^2 + 8^2} = \sqrt{100} = 10\)</span>
+                        <span>Projeções: \(m = \dfrac{b^2}{a} = \dfrac{36}{10} = 3{,}6\)
+                              &#160;e&#160; \(n = \dfrac{c^2}{a} = \dfrac{64}{10} = 6{,}4\)</span>
+                        <span>\(h^2 = m \cdot n = 3{,}6 \times 6{,}4 = 23{,}04\)</span>
+                        <span class="hl">\(h = 4{,}8\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Verificação: \(a \cdot h = 10 \times 4{,}8 = 48 = b \cdot c = 6 \times 8\) &#10003;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXEMPLOS RESOLVIDOS -->
+            <div class="tr-section" id="sec-ex">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplos Resolvidos</div>
+                        <div class="tr-section-sub">Aplicação dos critérios de semelhança</div>
+                    </div>
+                </div>
+
+                <h4>Exemplo 1 — Teorema de Tales com triângulo</h4>
+                <p>No triângulo \(CAB\), a reta \(DE \parallel AB\) com \(CD = 4\), \(DE = 6\)
+                e \(AB = 12\). Calcule \(DA = x\).</p>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/semelhancaTriangulos/fig-triangulos-ex1.svg"
+                         alt="Triângulo semelhante — exemplo 1" />
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(DE \parallel AB\) → \(\triangle CDE \sim \triangle CAB\) pelo critério AA</span>
+                        <span>\(\dfrac{CD}{CA} = \dfrac{DE}{AB} \Rightarrow \dfrac{4}{4+x} = \dfrac{6}{12} = \dfrac{1}{2}\)</span>
+                        <span>\(4 \cdot 2 = 4 + x \Rightarrow 8 = 4 + x\)</span>
+                        <span class="hl">\(x = 4\)</span>
+                    </div>
+                </div>
+
+                <h4>Exemplo 2 — Proporcionalidade de lados</h4>
+                <p>No mesmo triângulo, \(CD = 4\), \(DA = 6\), \(CE = 8\) e \(EB = x\). Calcule \(x\).</p>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/semelhancaTriangulos/fig-triangulos-ex2.svg"
+                         alt="Triângulo semelhante — exemplo 2" />
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Pelo Teorema de Tales: \(\dfrac{CD}{DA} = \dfrac{CE}{EB}\)</span>
+                        <span>\(\dfrac{4}{6} = \dfrac{8}{x}\)</span>
+                        <span>\(4x = 8 \cdot 6 = 48\)</span>
+                        <span class="hl">\(x = 12\)</span>
+                    </div>
+                </div>
+
+                <h4>Exemplo 3 — Cálculo de lados com razão de semelhança</h4>
+                <p>Um triângulo tem lados \(4\), \(6\) e \(8\). Um triângulo semelhante tem
+                o menor lado igual a \(6\). Calcule os outros lados.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Razão de semelhança: \(k = \dfrac{6}{4} = \dfrac{3}{2}\)</span>
+                        <span>Segundo lado: \(6 \cdot \dfrac{3}{2} = \)<span class="hl">9</span></span>
+                        <span>Terceiro lado: \(8 \cdot \dfrac{3}{2} = \)<span class="hl">12</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação em situações reais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar os triângulos semelhantes ocultos no problema;
+                    (2) estabelecer a proporção correta entre os lados correspondentes;
+                    (3) resolver a equação e interpretar o resultado.
+                </div>
+
+                <h4>Problema 1 — Altura de uma árvore</h4>
+                <p>Um poste de \(2\,\text{m}\) projeta uma sombra de \(3\,\text{m}\). No mesmo instante,
+                uma árvore projeta uma sombra de \(12\,\text{m}\). Qual é a altura da árvore?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Os raios solares são paralelos → os triângulos formados são semelhantes (AA)</span>
+                        <span>\(\dfrac{\text{poste}}{\text{árvore}} = \dfrac{\text{sombra do poste}}{\text{sombra da árvore}}\)</span>
+                        <span>\(\dfrac{2}{h} = \dfrac{3}{12}\)</span>
+                        <span>\(3h = 24\)</span>
+                        <span class="hl">\(h = 8\,\text{m}\)</span>
+                    </div>
+                </div>
+
+                <h4>Problema 2 — Largura de um rio</h4>
+                <p>Um topógrafo quer medir a largura \(AB\) de um rio sem atravessá-lo.
+                Ele marca pontos \(C\), \(D\) e \(E\) na margem de modo que \(DE \parallel AB\),
+                com \(CD = 10\,\text{m}\), \(DA = 5\,\text{m}\) e \(DE = 8\,\text{m}\). Calcule \(AB\).</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(DE \parallel AB\) → \(\triangle CDE \sim \triangle CAB\) pelo critério AA</span>
+                        <span>\(CA = CD + DA = 10 + 5 = 15\,\text{m}\)</span>
+                        <span>\(\dfrac{DE}{AB} = \dfrac{CD}{CA} \Rightarrow \dfrac{8}{AB} = \dfrac{10}{15} = \dfrac{2}{3}\)</span>
+                        <span>\(2 \cdot AB = 8 \cdot 3 = 24\)</span>
+                        <span class="hl">\(AB = 12\,\text{m}\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

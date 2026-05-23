@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 425 305" width="300" height="215">
+  <defs>
+    <marker id="arr-e" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#5599ff"/>
+    </marker>
+    <marker id="arr-s" markerWidth="7" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+      <polygon points="0 0, 7 3, 0 6" fill="#5599ff"/>
+    </marker>
+  </defs>
+
+  <!-- Transversal inferior -->
+  <line x1="15" y1="188" x2="405" y2="263" stroke="#5599ff" stroke-width="2.5"
+        marker-start="url(#arr-s)" marker-end="url(#arr-e)"/>
+  <!-- Transversal superior -->
+  <line x1="15" y1="145" x2="405" y2="60" stroke="#5599ff" stroke-width="2.5"
+        marker-start="url(#arr-s)" marker-end="url(#arr-e)"/>
+  <!-- Paralela esquerda -->
+  <line x1="80" y1="15" x2="80" y2="290" stroke="#5599ff" stroke-width="2.5"
+        marker-start="url(#arr-s)" marker-end="url(#arr-e)"/>
+  <!-- Paralela central -->
+  <line x1="210" y1="15" x2="210" y2="290" stroke="#5599ff" stroke-width="2.5"
+        marker-start="url(#arr-s)" marker-end="url(#arr-e)"/>
+  <!-- Paralela direita -->
+  <line x1="345" y1="15" x2="345" y2="290" stroke="#5599ff" stroke-width="2.5"
+        marker-start="url(#arr-s)" marker-end="url(#arr-e)"/>
+
+  <!-- Rótulos: ajuste x e y conforme necessário -->
+  <text id="label-alpha" x="145" y="235" font-size="30"  fill="#333" text-anchor="middle" font-family="serif">α</text>
+  <text id="label-beta"  x="278" y="263" font-size="30"  fill="#333" text-anchor="middle" font-family="serif">β</text>
+  <text id="label-gamma" x="145" y="100"  font-size="30"  fill="#333" text-anchor="middle" font-family="serif">γ</text>
+  <text id="label-phi"   x="278" y="70"  font-size="30"  fill="#333" text-anchor="middle" font-family="serif">φ</text>
+</svg>

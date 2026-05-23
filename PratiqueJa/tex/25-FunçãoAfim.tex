@@ -13,51 +13,59 @@
 
 \begin{multicols}{2}
 
-\TW{Função Afim} 
+% ── DEFINIÇÃO ──────────────────────────────────────────────────────────────
+\TW{Definição}
 
-A função afim é também conhecida como função de 1º grau e é uma função $f : \mathbb{R} \rightarrow \mathbb{R}$ definida como $f(x) = ax +b$, onde $a, b \in \mathbb{R}$. Nessa função o valor de $a$ representa o coeficiente angular da reta, ou seja, é a taxa de variação da função. O valor de $b$ representa o coeficiente linear da reta, ou seja, é o valor da função quando $x=0$. Essa função no plano cartesiano é representada por $y=ax+b$.
+A função afim é uma função $f : \mathbb{R} \rightarrow \mathbb{R}$ definida por $f(x) = ax + b$,
+onde $a, b \in \mathbb{R}$ e $a \neq 0$. No plano cartesiano é representada por uma
+\textbf{reta não horizontal} $y = ax + b$, por isso também chamada de \textbf{função de 1º grau}.
+
+O valor de $a$ é o \textbf{coeficiente angular} (inclinação / taxa de variação) e $b$ é o
+\textbf{coeficiente linear} (valor de $f(0)$ — onde a reta cruza o eixo $y$).
+
+\Formula{f(x) = ax + b \qquad a \neq 0}
+
+\TM{Exemplo:}
+
+$f(x) = 3x + 4$ \quad ($a = 3$, $b = 4$)
+
+$f(2) = 3 \cdot 2 + 4 = 6 + 4 = \boxed{10}$
+
+% ── COEFICIENTE ANGULAR ────────────────────────────────────────────────────
+\TW{Coeficiente Angular}
+
+Dados dois pontos $A = (x_A, y_A)$ e $B = (x_B, y_B)$ pertencentes à reta:
+
+\Formula{a = \dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B - x_A}}
+
+Se $a > 0$ a função é \textbf{crescente}; se $a < 0$ é \textbf{decrescente}.
 
 \TM{Exemplos:}
 
-$f(x) = 3x+4$
+Dados $A = (2, 3)$ e $B = (3, 5)$:\vspace{4pt}
+
+$a = \dfrac{5-3}{3-2} = \dfrac{2}{1} = \boxed{2}$ \quad \textit{(crescente)}
+
 \vspace{0.3cm}
+Dados $A = (1, 4)$ e $B = (3, 0)$:\vspace{4pt}
 
-Temos que o coeficiente angular é igual a $3$ e o coeficiente linear é igual a $4$.
+$a = \dfrac{0-4}{3-1} = \dfrac{-4}{2} = \boxed{-2}$ \quad \textit{(decrescente)}
 
-Para calcular o valor de $f(2)$ temos:
+% ── COEFICIENTE LINEAR ─────────────────────────────────────────────────────
+\TW{Coeficiente Linear}
 
-$f(2) = 3 \cdot 2 + 4$
+O coeficiente linear $b$ é o valor de $f(0)$. Para calculá-lo a partir de dois pontos,
+encontre $a$ primeiro e substitua as coordenadas de qualquer ponto em $y = ax + b$:
 
-$f(2) = 6+4$
+\Formula{b = y - a \cdot x}
 
-$f(2) = 10$
+\TM{Exemplo 1 — cálculo direto:}
 
-\TM{Coeficiente Angular}
+A reta passa por $(2, 7)$ e tem $a = 3$:\vspace{4pt}
 
-Para calcular o coeficiente angular dado dois pontos $A=(x_A,y_A)$ e $B=(x_B,y_B)$ basta calcular a distância a variação dos dois pontos no eixo $y$ dividido pela variação em $x$.
+$b = 7 - 3 \cdot 2 = 7 - 6 = \boxed{1} \;\Rightarrow\; f(x) = 3x + 1$
 
-\Formula{
-a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}
-}
-
-\TM{Exemplos:}
-
-Dados os pontos $A=(2,3)$ e $B=(3,5)$, temos que:
-
-\vspace{8px}
-$a=\dfrac{5-3}{3-2}$ \vspace{8px}
-
-$a=\dfrac{2}{1}$ \vspace{8px}
-
-$a=2$
-
-\TM{Coeficiente Linear}
-
-Para calcular o coeficiente linear dado dois pontos $A$ e $B$ é necessário calcular o coeficiente angular $a$ e em seguida calcular o valor de $b$ utilizando um ponto pertencente à reta.
-
-\TM{Exemplos:}
-
-Dado o seguinte gráfico, podemos calcular o coeficiente linear da seguinte forma:
+\TM{Exemplo 2 — determinando a função pelo gráfico:}
 
 \begin{center}
 \begin{tikzpicture}[scale=0.3]
@@ -65,7 +73,6 @@ Dado o seguinte gráfico, podemos calcular o coeficiente linear da seguinte form
 \tikzstyle{line}=[blue!50!white,line width=2pt]
 \tikzstyle{line2}=[violet!50!white,line width=2pt]
 \tikzstyle{eixo}=[pink!50!white,line width=2pt]
-
 \tikzstyle{no}=[orange!50!white]
 
 \draw[eixo,stealth-stealth] (-10,0) -- (10,0);
@@ -73,6 +80,7 @@ Dado o seguinte gráfico, podemos calcular o coeficiente linear da seguinte form
 \draw[line] (-6,-5) -- (6,7);
 \filldraw[no] (-5,-4) circle (6pt);
 \filldraw[no] (5,6) circle (6pt);
+\filldraw[green!60!white] (0,1) circle (5pt);
 \draw[dotted,line2] (-5,-4) -- (-5,0);
 \draw[dotted,line2] (-5,-4) -- (0,-4);
 \draw[dotted,line2] (5,6) -- (5,0);
@@ -84,32 +92,125 @@ Dado o seguinte gráfico, podemos calcular o coeficiente linear da seguinte form
 \node[texto] at (1,-4) {\large$-4$};
 \node[texto] at (5,-1) {\large$5$};
 \node[texto] at (-1,6) {\large$6$};
-
+\node[texto] at (1.5,1) {\small$b{=}1$};
 \end{tikzpicture}
 \end{center}
 
-$a=\dfrac{6-(-4)}{5-(-5)}=\dfrac{10}{10}=1$ \vspace{8px}
+\textbf{Passo 1} — Coeficiente angular:\vspace{4pt}
 
-Deste modo, temos a seguinte função:
+$a = \dfrac{6-(-4)}{5-(-5)} = \dfrac{10}{10} = 1$\vspace{6pt}
 
-$y=1x+b$
+\textbf{Passo 2} — Coeficiente linear (usando o ponto $(5, 6)$):\vspace{4pt}
+
+$6 = 1 \cdot 5 + b \Rightarrow b = 6 - 5 = 1$\vspace{6pt}
+
+$\boxed{f(x) = x + 1}$
+
+% ── ZERO DA FUNÇÃO ─────────────────────────────────────────────────────────
+\TW{Zero da Função (Raiz)}
+
+O zero da função afim é o valor de $x$ para o qual $f(x) = 0$ —
+ponto onde a reta intercepta o eixo $x$.
+
+\Formula{ax + b = 0 \;\Rightarrow\; x_0 = -\dfrac{b}{a}}
+
+O zero é único para toda função afim ($a \neq 0$).
+
+\TM{Exemplos:}
+
+Zero de $f(x) = 2x - 6$:\vspace{4pt}
+
+$2x - 6 = 0 \Rightarrow 2x = 6 \Rightarrow \boxed{x_0 = 3}$\vspace{6pt}
+
+Zero de $f(x) = -3x + 9$:\vspace{4pt}
+
+$-3x + 9 = 0 \Rightarrow -3x = -9 \Rightarrow \boxed{x_0 = 3}$\vspace{6pt}
+
+Zero de $f(x) = x + 1$:\vspace{4pt}
+
+$x + 1 = 0 \Rightarrow \boxed{x_0 = -1}$
+
+% ── ESTUDO DO SINAL ────────────────────────────────────────────────────────
+\TW{Estudo do Sinal}
+
+O sinal de $f(x)$ muda no zero $x_0 = -b/a$ e depende do sinal de $a$:
+
 \vspace{0.3cm}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ & $a > 0$ (crescente) & $a < 0$ (decrescente) \\
+\hline
+$x < x_0$ & $f(x) < 0$ & $f(x) > 0$ \\
+$x = x_0$ & $f(x) = 0$ & $f(x) = 0$ \\
+$x > x_0$ & $f(x) > 0$ & $f(x) < 0$ \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
 
-Considerando o ponto $(6,5)$, temos:
+\TM{Exemplos — inequações de 1º grau:}
 
-$6=1 \cdot 5+b$
+Para quais $x$ temos $2x - 6 > 0$?
 
-$6=5+b$
+$x_0 = 3$, $a = 2 > 0$ (crescente) $\Rightarrow f(x) > 0$ para $x > x_0$
 
-$b+5=6$
+$\boxed{x \in (3, +\infty)}$\vspace{6pt}
 
-$b=6-5$
+Para quais $x$ temos $-3x + 9 \geq 0$?
 
-$b=1$
+$x_0 = 3$, $a = -3 < 0$ (decrescente) $\Rightarrow f(x) \geq 0$ para $x \leq x_0$
 
-Após a definição de $b$ temos a função:
+$\boxed{x \in (-\infty, 3]}$
 
-$f(x)=x+1$
+% ── CASOS PARTICULARES ─────────────────────────────────────────────────────
+\TW{Casos Particulares}
+
+\TM{Função Linear — $b = 0$:}
+
+$f(x) = ax$ — a reta passa pela \textbf{origem} $(0, 0)$.
+É um caso especial da função afim.
+
+Exemplo: $f(x) = 5x$ → zero em $x_0 = 0$.
+
+\TM{Função Constante — $a = 0$:}
+
+$f(x) = b$ — reta \textbf{horizontal}, mesmo valor para todo $x$.
+\textbf{Não é função afim} pois $a = 0$.
+
+Exemplo: $f(x) = 4$ → sem zero real.
+
+\vspace{0.2cm}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Atenção:} toda função linear é afim, mas nem toda função afim é linear.
+A função constante não é afim e não é linear.
+}}
+
+% ── PROBLEMA CONTEXTUALIZADO ───────────────────────────────────────────────
+\TW{Problema Contextualizado}
+
+\TM{Problema 1 — Táxi:}
+
+Um táxi cobra R\$ 5,00 de bandeirada e R\$ 2,50 por km rodado.
+A partir de quantos km a corrida ultrapassa R\$ 30,00?
+
+$f(x) = 2{,}50x + 5$\vspace{4pt}
+
+$2{,}50x + 5 > 30 \Rightarrow 2{,}50x > 25$\vspace{4pt}
+
+$\boxed{x > 10 \text{ km}}$
+
+\TM{Problema 2 — Temperatura:}
+
+Uma peça resfria linearmente de $80°C$ perdendo $5°C$ por minuto.
+Após quantos minutos atinge $30°C$?
+
+$T(x) = -5x + 80$\vspace{4pt}
+
+$-5x + 80 = 30 \Rightarrow -5x = -50$\vspace{4pt}
+
+$\boxed{x = 10 \text{ minutos}}$
+
 \end{multicols}
 
 \input{rodape}

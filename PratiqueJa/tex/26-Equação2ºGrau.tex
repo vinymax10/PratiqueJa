@@ -13,64 +13,198 @@
 
 \begin{multicols}{2}
 
-\TW{Equação do 2º Grau} 
+% ── DEFINIÇÃO ──────────────────────────────────────────────────────────────
+\TW{Definição}
 
-A equação de 2º grau é representada por um polinômio de grau 2 do tipo $ax^2+bx+c$, onde $a,b$ e $c$ são coeficientes reais da equação. As raízes da equação de 2º grau representam os valores para $x$ onde $ax^2+bx+c=0$. As raízes da equação podem ser encontradas utilizando a seguinte fórmula: 
+Uma equação do 2º grau (ou \textbf{equação quadrática}) é toda equação que pode ser
+escrita na forma:
 
-\Formula{
-x=\dfrac{-b \pm \sqrt{\Delta}}{2a}
-}
-\vspace{-10px}
-\Formula{
-\Delta=b^2-4ac.
-}
+\Formula{ax^2 + bx + c = 0 \qquad a,b,c \in \mathbb{R},\; a \neq 0}
 
-\TM{Exemplos:}
+O valor de $a$ é o \textbf{coeficiente do termo quadrático}, $b$ é o \textbf{coeficiente
+do termo linear} e $c$ é o \textbf{termo independente}. As \textbf{raízes} são os
+valores de $x$ que satisfazem a igualdade.
 
-Para encontrar as raízes da seguinte equação $2x^2-7x+3=0$ temos:
+% ── FÓRMULA DE BHASKARA ────────────────────────────────────────────────────
+\TW{Fórmula de Bhaskara}
 
-$\Delta=(-7)^2-4\cdot 2 \cdot 3$
+As raízes são calculadas pelo \textbf{discriminante $\Delta$} (delta):
 
-$\Delta=49-24$
+\Formula{\Delta = b^2 - 4ac}
+\vspace{-10pt}
+\Formula{x = \dfrac{-b \pm \sqrt{\Delta}}{2a}}
 
-$\Delta=25$
+\vspace{0.2cm}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Natureza das raízes:}
+$\Delta > 0$ → duas raízes reais distintas;
+$\Delta = 0$ → raiz dupla ($x_1 = x_2$);
+$\Delta < 0$ → nenhuma raiz real.
+}}
 
-\M{x&=\frac{-(-7) \pm \sqrt{25}}{2 \cdot 2}}
-\M{x&=\frac{7 \pm 5}{4}}
-\M{x_1&=\frac{7 + 5}{4} = \frac{12}{4}= 3 }
-\M{x_2&=\frac{7 - 5}{4} = \frac{2}{4}= \frac{1}{2} }
+\TM{Exemplo:}
 
-Nesse resultado a raiz maior é representada por $x_1$ e a raiz menor é representada por $x_2$.
+Para $2x^2-7x+3=0$; $a=2$, $b=-7$, $c=3$:
 
-\TM{Vértice da Parábola}
+$\Delta = (-7)^2 - 4\cdot 2\cdot 3 = 49 - 24 = 25$
 
-O vértice da parábola é o ponto onde a curva da parábola muda de sentido. Se o valor de $a$ for positivo, então o vértice será o ponto mínimo da função e se $a$ for negativo então será o ponto máximo. As coordenadas $(x_v,y_v)$ do vértice da parábola são calculadas por:   
+\M{x &= \dfrac{7 \pm 5}{4}}
+\M{x_1 &= \dfrac{12}{4} = \boxed{3}}
+\M{x_2 &= \dfrac{2}{4} = \boxed{\dfrac{1}{2}}}
 
-\Formula{x_v=\dfrac{-b}{2a}}
-\vspace{-10px}
-\Formula{y_v =\dfrac{-\Delta}{4a}}
+$\Delta = 25 > 0$ → duas raízes reais distintas.
 
-\TM{Exemplos:}
+% ── GRÁFICO — PARÁBOLA ─────────────────────────────────────────────────────
+\TW{Gráfico — A Parábola}
 
-Dada a equação $x^2-10x+9=0$ temos que:
+A função $f(x) = ax^2+bx+c$ é representada por uma \textbf{parábola}.
+Se $a > 0$ abre para \textbf{cima} (mínimo); se $a < 0$ abre para \textbf{baixo} (máximo).
 
-\M{x_v&=\frac{-(-10)}{2\cdot 1} = \frac{10}{2} = 5}
-\M{y_v&=\frac{-((-10)^2-4\cdot 1 \cdot 9)}{4\cdot 1} }
-\M{y_v& = \frac{-(100-36)}{4} = \frac{-64}{4} = -16}
+\begin{center}
+\begin{tikzpicture}[scale=0.3]
+\tikzstyle{texto}=[draw=none,fill=none,black!60!white]
+\tikzstyle{line}=[blue!50!white,line width=2pt]
+\tikzstyle{eixo}=[pink!50!white,line width=2pt]
+\tikzstyle{no}=[orange!50!white]
 
-\TM{Propriedades:}
+\draw[eixo,stealth-stealth] (-4,0) -- (6,0);
+\draw[eixo,stealth-stealth] (0,-5.5) -- (0,5);
 
-Dado que $f(x)=ax^2+bx+c$, temos que $f(0)=c$.
+% parábola f(x) = x²-2x-3 → raízes x=-1 e x=3, vértice V(1,-4)
+\draw[line,domain=-2:4,smooth,samples=40] plot (\x, {\x*\x - 2*\x - 3});
 
-Se na equação $ax^2+bx+c=0$ tivermos $b=0$, então temos que:
+% raízes
+\filldraw[no] (-1,0) circle (6pt);
+\filldraw[no] (3,0) circle (6pt);
 
-\M{x&= \pm \sqrt{\frac{-c}{a}}}  
+% vértice
+\filldraw[green!60!white] (1,-4) circle (6pt);
 
-Se na equação $ax^2+bx+c=0$ tivermos $c=0$, então temos que:
+% eixo de simetria
+\draw[dotted,violet!50!white,line width=1.5pt] (1,-5) -- (1,1);
 
-$x_1=0$
+% ponto c = f(0) = -3
+\filldraw[yellow!80!white] (0,-3) circle (5pt);
 
-\M{x_2&= \frac{-b}{a}}  
+% labels
+\node[texto] at (5.5,-0.6) {\large$x$};
+\node[texto] at (0.7,4.5) {\large$y$};
+\node[texto] at (-1,-0.9) {\small$x_2$};
+\node[texto] at (3,-0.9) {\small$x_1$};
+\node[texto] at (2.5,-4) {\small$V(x_v,y_v)$};
+\node[texto] at (1.5,-2.6) {\small$c{=}f(0)$};
+\node[texto] at (3,0.9) {\small$x_v{=}{-b/2a}$};
+\node[texto,blue!40!white] at (-3,3.5) {\small$a{>}0$};
+\end{tikzpicture}
+\end{center}
+
+% ── VÉRTICE DA PARÁBOLA ────────────────────────────────────────────────────
+\TW{Vértice da Parábola}
+
+O vértice $V(x_v, y_v)$ é o ponto onde a parábola muda de sentido.
+$y_v$ é o \textbf{valor mínimo} de $f(x)$ se $a > 0$ e o \textbf{valor máximo} se $a < 0$.
+
+\Formula{x_v = \dfrac{-b}{2a} \qquad\qquad y_v = \dfrac{-\Delta}{4a}}
+
+\TM{Exemplo:}
+
+Para $x^2-10x+9=0$: $\Delta = 100-36 = 64$
+
+\M{x_v &= \dfrac{10}{2} = \boxed{5}}
+\M{y_v &= \dfrac{-64}{4} = \boxed{-16}}
+
+Vértice $V(5,\,-16)$ — ponto mínimo, pois $a = 1 > 0$.
+
+% ── ESTUDO DO SINAL ────────────────────────────────────────────────────────
+\TW{Estudo do Sinal}
+
+Com $\Delta > 0$ e raízes $x_1 < x_2$, o sinal de $f(x)$ depende de $a$:
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Intervalo & $a > 0$ & $a < 0$ \\
+\hline
+$x < x_1$ ou $x > x_2$ & $f(x) > 0$ & $f(x) < 0$ \\
+$x = x_1$ ou $x = x_2$ & $f(x) = 0$ & $f(x) = 0$ \\
+$x_1 < x < x_2$ & $f(x) < 0$ & $f(x) > 0$ \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+
+\TM{Exemplo — Inequação:}
+
+Para quais $x$ temos $x^2-5x+6 < 0$?
+
+Raízes: $\Delta=1$ → $x_1=2$ e $x_2=3$. Como $a=1>0$, $f(x)<0$ entre as raízes.
+
+$\boxed{x \in (2,\,3)}$
+
+% ── RELAÇÕES DE VIETA ──────────────────────────────────────────────────────
+\TW{Relações de Vieta}
+
+Dadas as raízes $x_1$ e $x_2$ de $ax^2+bx+c=0$:
+
+\Formula{x_1 + x_2 = \dfrac{-b}{a} \qquad x_1 \cdot x_2 = \dfrac{c}{a}}
+
+A \textbf{forma fatorada} é $f(x) = a(x-x_1)(x-x_2)$.
+
+\TM{Exemplo:}
+
+Construa uma equação com raízes $x_1=2$ e $x_2=5$:
+
+Soma $= 7$, Produto $= 10$ $\Rightarrow \boxed{x^2 - 7x + 10 = 0}$
+
+% ── EQUAÇÕES INCOMPLETAS ───────────────────────────────────────────────────
+\TW{Equações Incompletas}
+
+\TM{Caso $b = 0$: \;$ax^2 + c = 0$}
+
+Isola $x^2$ diretamente: $x = \pm\sqrt{-c/a}$ (se $-c/a \geq 0$)
+
+Exemplo: $2x^2 - 8 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \pm 2$
+
+\TM{Caso $c = 0$: \;$ax^2 + bx = 0$}
+
+Fatoração: $x(ax+b) = 0 \Rightarrow x_1 = 0$ e $x_2 = -b/a$
+
+Exemplo: $3x^2 - 6x = 0 \Rightarrow x_1 = 0,\; x_2 = 2$
+
+\vspace{0.2cm}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Propriedade:} $f(0) = c$ — o coeficiente $c$ é sempre o valor da função em $x = 0$.
+}}
+
+% ── PROBLEMAS CONTEXTUALIZADOS ─────────────────────────────────────────────
+\TW{Problemas Contextualizados}
+
+\TM{Problema 1 — Área de retângulo:}
+
+Um retângulo tem comprimento $3$ cm maior que sua largura e área de $40$ cm².
+Quais são as dimensões?
+
+Largura $= x$, comprimento $= x+3$: $x(x+3) = 40$
+
+$x^2 + 3x - 40 = 0$, \; $\Delta = 9 + 160 = 169$
+
+$x = \dfrac{-3 \pm 13}{2}$ → $x_1 = 5$ (válido), $x_2 = -8$ (descartado)
+
+$\boxed{\text{Largura} = 5\text{ cm}, \text{ comprimento} = 8\text{ cm}}$
+
+\TM{Problema 2 — Lançamento vertical:}
+
+Altura: $h(t) = 20t - 5t^2$.
+
+\textbf{(a)} Quando $h = 15$ m?\vspace{4pt}
+
+$t^2 - 4t + 3 = 0$, $\Delta = 4$ → $t_1 = 1$ s e $t_2 = 3$ s
+
+\textbf{(b)} Altura máxima?\vspace{4pt}
+
+$t_v = \dfrac{20}{10} = 2$ s $\;\Rightarrow\; \boxed{h_{\max} = h(2) = 20\text{ m}}$
+
 \end{multicols}
 
 \input{rodape}

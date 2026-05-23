@@ -24,7 +24,8 @@
       "PowerShell(& \"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex\\\\21-SemelhancaAngulos.tex\" --standalone --mathjax --metadata title=\"Semelhança entre Ângulos\" -o \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\html\\\\21-SemelhancaAngulos.html\" 2>&1)",
       "PowerShell(New-Item *)",
       "Bash(\"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" tex/23-AnguloInscritoCircunferencia.tex --from=latex --to=html5 --mathjax --standalone --output=html/23-AnguloInscritoCircunferencia-raw.html)",
-      "Bash(\"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" tex/24-SemelhancaTriangulos.tex --from=latex --to=html5 --mathjax --standalone --output=html/24-SemelhancaTriangulos.html)"
+      "Bash(\"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" tex/24-SemelhancaTriangulos.tex --from=latex --to=html5 --mathjax --standalone --output=html/24-SemelhancaTriangulos.html)",
+      "Bash(dir *)"
     ]
   }
 }

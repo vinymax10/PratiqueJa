@@ -13,47 +13,183 @@
 
 \begin{multicols}{2}
 
-\TW{Definição} 
+% ── DEFINIÇÃO ──────────────────────────────────────────────────────────────
+\TW{Definição}
 
-A progressão geométrica (PG) é uma sequência numérica onde cada termo, a partir do segundo, é obtido multiplicando o termo anterior por uma constante chamada razão. Ou seja, em uma PG, a relação entre dois termos consecutivos é sempre a mesma. A fórmula geral para o n-ésimo termo de uma PG é dada por:
+Uma \textbf{Progressão Geométrica (PG)} é uma sequência numérica em que cada
+termo, a partir do segundo, é obtido multiplicando o anterior por uma constante
+chamada \textbf{razão $q$}.
 
-\Formula{a_n=a_1 \cdot q^{n-1}} 
+A razão é calculada dividindo qualquer termo pelo seu antecessor:
 
-Onde $a_n$ é o n-ésimo termo, $a_1$ é o primeiro termo e $q$ é a razão. Se $q>1$, os termos da PG aumentam; se $0<q<1$ os termos diminuem. Se $q<0$, teremos uma série alternativa, ou seja, os sinais dos termos alternam-se entre positivo e negativo, o que faz a sequência oscilar. A razão pode ser calculada como sendo a divisão de um termo pelo termo antecessor.
+\Formula{q = \dfrac{a_n}{a_{n-1}}, \quad \forall\; n > 1}
 
-\Formula{q=\dfrac{a_n}{a_{n-1}}, ~\forall~ n>1} 
+Dependendo do valor de $q$, a PG pode ser:
 
-\TM{Exemplos:}
+\begin{itemize}
+  \item \textbf{Crescente} ($q > 1$): termos aumentam. Ex.: $2, 6, 18, 54, \ldots$
+  \item \textbf{Decrescente} ($0 < q < 1$): termos diminuem. Ex.: $16, 8, 4, 2, \ldots$
+  \item \textbf{Alternante} ($q < 0$): sinais alternam. Ex.: $2, -6, 18, -54, \ldots$
+  \item \textbf{Constante} ($q = 1$): todos os termos iguais. Ex.: $5, 5, 5, \ldots$
+\end{itemize}
 
-Dada a seguinte PG: $3,6,12,24,48,\ldots$, temos que $a_1=3$ e $q=\dfrac{6}{3}=2$.
+% ── TERMO GERAL ────────────────────────────────────────────────────────────
+\TW{Termo Geral}
 
-Para identificar o 10º termo da PG, podemos utilizar a fórmula geral considerando $n=10$. Deste modo temos:
+A fórmula do termo geral permite calcular diretamente qualquer termo da PG:
 
-$a_{10}=3 \cdot 2^{10-1} $
+\Formula{a_n = a_1 \cdot q^{n-1}}
 
-$a_{10}=3 \cdot 2^{9} $
+\TM{Exemplo 1 — calcular um termo:}
 
-$a_{10}=3 \cdot 512 $
+Dada a PG $3, 6, 12, 24, \ldots$, qual é o 10º termo?
 
-$a_{10}=1536$
+$a_1 = 3$, $q = 2$:
 
-\TM{Soma dos termos de uma PG}
+$a_{10} = 3 \cdot 2^9 = 3 \cdot 512 = \boxed{1536}$
 
-A soma dos primeiros $n$ termos de uma PG pode ser calculada pela fórmula: 
+\TM{Exemplo 2 — encontrar a posição:}
 
-\Formula{S_n=\dfrac{a_1 \cdot ( q^n - 1)}{q-1}}
-		
-Onde $S_n$ representa a soma dos $n$ primeiros termos da PG. 
+Em uma PG com $a_1 = 5$ e $q = 2$, para qual $n$ temos $a_n = 160$?
 
-\TM{Exemplos:}
+$160 = 5 \cdot 2^{n-1} \Rightarrow 2^{n-1} = 32 = 2^5 \Rightarrow \boxed{n = 6}$
 
-Se quisermos saber qual é a soma dos 6 primeiros termos da PG 
-$2,6,18,54,\ldots$, temos que $a_1=2$ e $q=\dfrac{6}{2}=3$. Para calcular a soma podemos fazer:
+\TM{Exemplo 3 — dois termos não consecutivos:}
 
-\M{S_6&=\dfrac{2 \cdot ( 3^6 - 1)}{3-1}}
-\M{S_6&=\dfrac{2 \cdot ( 729 - 1)}{2}}
-\M{S_6&=\dfrac{2 \cdot  728}{2}}
-\M{S_6&=728}
+Em uma PG, $a_2 = 6$ e $a_5 = 48$. Determine $a_1$ e $q$.
+
+$a_5 = a_2 \cdot q^3 \Rightarrow 48 = 6q^3 \Rightarrow q^3 = 8 \Rightarrow q = 2$
+
+$a_2 = a_1 \cdot q \Rightarrow 6 = 2a_1 \Rightarrow \boxed{a_1 = 3}$
+
+PA: $3, 6, 12, 24, 48, \ldots$
+
+% ── SOMA DOS TERMOS ────────────────────────────────────────────────────────
+\TW{Soma dos Termos}
+
+A soma dos primeiros $n$ termos de uma PG com $q \neq 1$ é:
+
+\Formula{S_n = \dfrac{a_1 \cdot (q^n - 1)}{q - 1}}
+
+Quando o último termo $a_n$ já é conhecido, usa-se a forma alternativa:
+
+\Formula{S_n = \dfrac{a_n \cdot q - a_1}{q - 1}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Caso especial $q = 1$:} todos os termos são iguais,
+portanto $S_n = a_1 \cdot n$.
+}}
+
+\TM{Exemplo:}
+
+Soma dos 6 primeiros termos da PG $2, 6, 18, 54, \ldots$
+
+$a_1 = 2$, $q = 3$:
+
+\M{S_6 &= \dfrac{2 \cdot (3^6 - 1)}{3 - 1} = \dfrac{2 \cdot 728}{2} = \boxed{728}}
+
+% ── PG INFINITA ────────────────────────────────────────────────────────────
+\TW{PG Infinita Decrescente}
+
+Quando $|q| < 1$, os termos se aproximam de zero e a soma de infinitos termos
+converge para:
+
+\Formula{S_\infty = \dfrac{a_1}{1 - q}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Atenção:} essa fórmula só é válida para $|q| < 1$.
+Se $|q| \geq 1$, a soma diverge.
+}}
+
+\TM{Exemplo 1:}
+
+Soma da PG $8, 4, 2, 1, \dfrac{1}{2}, \ldots$ \;($a_1 = 8$, $q = \frac{1}{2}$):
+
+$S_\infty = \dfrac{8}{1 - \frac{1}{2}} = \dfrac{8}{\frac{1}{2}} = \boxed{16}$
+
+\TM{Exemplo 2 — dízima periódica:}
+
+$0{,}\overline{3} = 0{,}3 + 0{,}03 + \ldots$ \;($a_1 = 0{,}3$, $q = 0{,}1$):
+
+$S_\infty = \dfrac{0{,}3}{1 - 0{,}1} = \dfrac{0{,}3}{0{,}9} = \boxed{\dfrac{1}{3}}$
+
+% ── INTERPOLAÇÃO GEOMÉTRICA ───────────────────────────────────────────────
+\TW{Interpolação Geométrica}
+
+Interpolar $k$ \textbf{meios geométricos} entre dois valores $a$ e $b$
+($a, b > 0$) significa construir uma PG com $a$ como primeiro termo, $b$ como
+último e $k$ termos intermediários. A razão é:
+
+\Formula{q = \sqrt[k+1]{\dfrac{b}{a}} = \left(\dfrac{b}{a}\right)^{\!\frac{1}{k+1}}}
+
+\TM{Exemplo 1:}
+
+Insira 2 meios geométricos entre 3 e 24.
+
+$q = \sqrt[3]{\dfrac{24}{3}} = \sqrt[3]{8} = 2$
+
+PG: $\boxed{3,\; 6,\; 12,\; 24}$
+
+\TM{Exemplo 2:}
+
+Insira 3 meios geométricos entre 1 e 16.
+
+$q = \sqrt[4]{\dfrac{16}{1}} = \sqrt[4]{16} = 2$
+
+PG: $\boxed{1,\; 2,\; 4,\; 8,\; 16}$ \quad (5 termos)
+
+% ── PROPRIEDADES ───────────────────────────────────────────────────────────
+\TW{Propriedades}
+
+\TM{Média geométrica:}
+
+Qualquer termo é a média geométrica de seus vizinhos:
+
+\Formula{a_k^2 = a_{k-1} \cdot a_{k+1}}
+
+Exemplo: na PG $2, 6, 18$: $6^2 = 36 = 2 \times 18$ \checkmark
+
+\TM{Produto de equidistantes:}
+
+O produto de termos equidistantes dos extremos é constante:
+
+\Formula{a_k \cdot a_{n-k+1} = a_1 \cdot a_n}
+
+\TM{Logaritmos de uma PG:}
+
+Se $(a_1, a_2, \ldots)$ é PG, então $(\log a_1, \log a_2, \ldots)$ é PA com razão $\log q$.
+
+\TM{Forma alternativa do termo geral:}
+
+$a_n = a_k \cdot q^{n-k}$ — útil quando $a_k$ é mais conveniente que $a_1$.
+
+% ── PROBLEMAS CONTEXTUALIZADOS ─────────────────────────────────────────────
+\TW{Problemas Contextualizados}
+
+\TM{Problema 1 — Juros compostos:}
+
+Um capital de R\$ 1.000,00 é aplicado a juros compostos de 10\% ao mês.
+Qual o montante após 5 meses?
+
+$a_1 = 1000$, $q = 1{,}10$:
+
+$M = 1000 \cdot (1{,}10)^5 = 1000 \cdot 1{,}61051 \approx \boxed{R\$\; 1.610{,}51}$
+
+\TM{Problema 2 — Bactérias:}
+
+Uma colônia de 500 bactérias dobra a cada hora. Quantas após 8 horas?
+
+$a_1 = 500$, $q = 2$:
+
+$a_9 = 500 \cdot 2^8 = 500 \cdot 256 = \boxed{128.000}$ bactérias
+
+\TM{Problema 3 — Dízima periódica:}
+
+Escreva $0{,}\overline{27}$ como fração irredutível.
+
+$a_1 = 0{,}27$, $q = 0{,}01$:
+
+$S_\infty = \dfrac{0{,}27}{0{,}99} = \dfrac{27}{99} = \boxed{\dfrac{3}{11}}$
 
 \end{multicols}
 
