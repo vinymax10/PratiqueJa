@@ -1,0 +1,390 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- INTRODUÇÃO -->
+            <div class="tr-section" id="sec-intro">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Combinatória</div>
+                        <div class="tr-section-sub">Contar sem listar — permutação, arranjo e combinação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Combinatória é a área da matemática que estuda as possibilidades de contar, agrupar ou
+                    organizar elementos de um conjunto <strong>sem precisar listar todos os casos</strong>.
+                </div>
+                <p>Os quatro conceitos fundamentais se distinguem por duas perguntas-chave:</p>
+                <table style="width:100%;border-collapse:collapse;margin:0.6rem 0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <thead>
+                        <tr>
+                            <th style="background:#3b0764;color:white;padding:0.6rem 0.9rem;text-align:left;">Conceito</th>
+                            <th style="background:#3b0764;color:white;padding:0.6rem 0.9rem;text-align:left;">Usa todos?</th>
+                            <th style="background:#3b0764;color:white;padding:0.6rem 0.9rem;text-align:left;">Ordem importa?</th>
+                            <th style="background:#3b0764;color:white;padding:0.6rem 0.9rem;text-align:left;">Fórmula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#3b0764;">Permutação simples</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Sim</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Sim</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">\(n!\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#3b0764;background:#f8fafc;">Permutação circular</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;background:#f8fafc;">Sim</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;background:#f8fafc;">Sim (em círculo)</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;background:#f8fafc;">\((n-1)!\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#7c3aed;">Arranjo simples</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Não</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Sim</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">\(\dfrac{n!}{(n-k)!}\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;font-weight:700;color:#7c3aed;">Combinação simples</td>
+                            <td style="padding:0.6rem 0.9rem;">Não</td>
+                            <td style="padding:0.6rem 0.9rem;">Não</td>
+                            <td style="padding:0.6rem 0.9rem;">\(\dfrac{n!}{k!\,(n-k)!}\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PRINCÍPIO DA MULTIPLICAÇÃO -->
+            <div class="tr-section" id="sec-multiplicacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">PM</div>
+                    <div>
+                        <div class="tr-section-title">Princípio Fundamental da Contagem</div>
+                        <div class="tr-section-sub">Base de toda a análise combinatória</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Se uma ação é realizada em etapas <strong>sucessivas e independentes</strong>, o número total
+                    de possibilidades é o <strong>produto</strong> do número de opções em cada etapa:
+                    \(n_1 \cdot n_2 \cdots n_k\).
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        <strong>Combinação de roupas:</strong> 3 camisetas &#215; 2 calças &#215; 4 pares de sapato:
+                        \(3 \cdot 2 \cdot 4 = \)<span class="hl">24</span> combinações
+                    </div>
+                    <div class="tr-ex span-full">
+                        <strong>Senhas numéricas:</strong> senha de 4 dígitos (0–9) com repetição:
+                        \(10 \cdot 10 \cdot 10 \cdot 10 = 10^4 = \)<span class="hl">10.000</span> possibilidades
+                    </div>
+                    <div class="tr-ex span-full">
+                        <strong>Placas de carro (modelo antigo):</strong> 3 letras (26 opções cada) seguidas de
+                        4 dígitos (10 opções cada): \(26^3 \cdot 10^4 = \)<span class="hl">175.760.000</span> placas
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Princípio da Adição (casos excludentes):</strong> quando as etapas são
+                    <em>alternativas mutuamente exclusivas</em> (ou uma ou outra, nunca ambas),
+                    o total é a <strong>soma</strong> das possibilidades de cada alternativa.
+                    Ex.: uma comissão formada por 1 homem OU 1 mulher de um grupo de 4 homens e 3 mulheres:
+                    \(4 + 3 = 7\) possibilidades.
+                </div>
+            </div>
+
+            <!-- PERMUTAÇÃO SIMPLES -->
+            <div class="tr-section" id="sec-perm-simples">
+                <div class="tr-section-header">
+                    <div class="tr-badge">P</div>
+                    <div>
+                        <div class="tr-section-title">Permutação Simples</div>
+                        <div class="tr-section-sub">Todos os elementos distintos, a ordem importa</div>
+                    </div>
+                </div>
+                <p>Dado um conjunto com \(n\) elementos <strong>distintos</strong>, uma permutação é qualquer
+                arranjo ordenado usando <strong>todos</strong> os elementos. O número total de permutações é:</p>
+                <div class="tr-rule">
+                    \(P(n) = n! = n \cdot (n-1) \cdot (n-2) \cdots 2 \cdot 1\)
+                </div>
+                <div class="tr-note">
+                    <strong>Convenção:</strong> \(0! = 1\) por definição.
+                </div>
+                <h4>Exemplo 1 — permutações de {1, 2, 3}</h4>
+                <p>As \(P(3) = 3! = 6\) permutações possíveis são:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">(1, 2, 3)</div>
+                    <div class="tr-ex">(1, 3, 2)</div>
+                    <div class="tr-ex">(2, 1, 3)</div>
+                    <div class="tr-ex">(2, 3, 1)</div>
+                    <div class="tr-ex">(3, 1, 2)</div>
+                    <div class="tr-ex">(3, 2, 1)</div>
+                </div>
+                <h4>Exemplo 2 — anagramas de "CELTA"</h4>
+                <p>As 5 letras são todas distintas. Quantos anagramas existem?</p>
+                <div class="tr-steps">
+                    <div>\(P(5) = 5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = \mathbf{120}\) anagramas</div>
+                </div>
+            </div>
+
+            <!-- PERMUTAÇÃO COM REPETIÇÃO -->
+            <div class="tr-section" id="sec-perm-rep">
+                <div class="tr-section-header">
+                    <div class="tr-badge">P*</div>
+                    <div>
+                        <div class="tr-section-title">Permutação com Repetição</div>
+                        <div class="tr-section-sub">Elementos iguais reduzem as permutações distintas</div>
+                    </div>
+                </div>
+                <p>Se há elementos repetidos, divide-se pelos fatoriais das repetições para eliminar as
+                permutações idênticas. Com um elemento repetido \(k\) vezes e outro repetido \(m\) vezes:</p>
+                <div class="tr-rule">
+                    \(P_{n}^{k,\,m,\,\ldots} = \dfrac{n!}{k! \cdot m! \cdots}\)
+                </div>
+                <h4>Exemplo — anagramas de "BANANA"</h4>
+                <p>Letras: B, A, N, A, N, A &#8594; total \(n = 6\).<br/>
+                Repetições: A aparece <strong>3 vezes</strong>, N aparece <strong>2 vezes</strong>.</p>
+                <div class="tr-steps">
+                    <div>\(P_{6}^{3,\,2} = \dfrac{6!}{3! \cdot 2!} = \dfrac{720}{6 \cdot 2} = \dfrac{720}{12} = \mathbf{60}\)</div>
+                </div>
+                <div class="tr-note">
+                    <strong>Por que dividir?</strong> As 3 letras A são indistinguíveis entre si — trocar suas
+                    posições entre si não gera um novo anagrama. O mesmo vale para os 2 Ns. Dividir pelos
+                    fatoriais elimina essas contagens duplicadas.
+                </div>
+            </div>
+
+            <!-- PERMUTAÇÃO CIRCULAR -->
+            <div class="tr-section" id="sec-perm-circular">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Pc</div>
+                    <div>
+                        <div class="tr-section-title">Permutação Circular</div>
+                        <div class="tr-section-sub">Arranjos em círculo — rotações equivalentes</div>
+                    </div>
+                </div>
+                <p>Quando os elementos são dispostos em <strong>círculo</strong>, rotações de um mesmo
+                arranjo são consideradas idênticas. Fixamos um elemento como referência e permutamos
+                os demais:</p>
+                <div class="tr-rule">
+                    \(P_c(n) = (n-1)!\)
+                </div>
+                <div class="tr-note">
+                    <strong>Intuição:</strong> ao fixar um elemento, eliminamos as \(n\) rotações que
+                    gerariam o mesmo arranjo circular. Por isso o fatorial parte de \((n-1)\) e não de \(n\).
+                </div>
+                <h4>Exemplo — pessoas ao redor de uma mesa redonda</h4>
+                <p>De quantas formas 5 pessoas podem se sentar ao redor de uma mesa redonda?</p>
+                <div class="tr-steps">
+                    <div>\(P_c(5) = (5-1)! = 4! = 4 \cdot 3 \cdot 2 \cdot 1 = \mathbf{24}\) formas</div>
+                </div>
+                <p>Compare: em fila (permutação simples) seriam \(5! = 120\) formas — 5 vezes mais, pois
+                cada arranjo circular corresponde a 5 rotações equivalentes na fila.</p>
+            </div>
+
+            <!-- ARRANJO SIMPLES -->
+            <div class="tr-section" id="sec-arranjo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">A</div>
+                    <div>
+                        <div class="tr-section-title">Arranjo Simples</div>
+                        <div class="tr-section-sub">Parte dos elementos, a ordem importa</div>
+                    </div>
+                </div>
+                <p>Um arranjo simples seleciona e ordena \(k\) elementos distintos de um conjunto com \(n\) elementos.
+                A ordem <strong>importa</strong> e não há repetição.</p>
+                <div class="tr-rule">
+                    \(A(n,\,k) = \dfrac{n!}{(n-k)!} = n \cdot (n-1) \cdots (n-k+1)\)
+                </div>
+                <div class="tr-note">
+                    <strong>Relação com permutação:</strong> \(P(n) = A(n, n)\) — a permutação é um
+                    caso especial de arranjo onde \(k = n\), tornando \((n-k)! = 0! = 1\).
+                </div>
+                <h4>Exemplo — pódio de corrida</h4>
+                <p>De quantas formas pode-se distribuir ouro, prata e bronze entre 8 atletas?
+                A ordem importa (1.º &#8800; 2.º &#8800; 3.º), \(n = 8\), \(k = 3\):</p>
+                <div class="tr-steps">
+                    <div>\(A(8,\,3) = \dfrac{8!}{(8-3)!} = \dfrac{8!}{5!} = 8 \cdot 7 \cdot 6 = \mathbf{336}\) formas</div>
+                </div>
+                <h4>Exemplo 2 — números de dois algarismos distintos com {1, 2, 3, 4}</h4>
+                <div class="tr-steps">
+                    <div>\(A(4,\,2) = \dfrac{4!}{2!} = 4 \cdot 3 = \mathbf{12}\)</div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">12</div><div class="tr-ex">13</div><div class="tr-ex">14</div>
+                    <div class="tr-ex">21</div><div class="tr-ex">23</div><div class="tr-ex">24</div>
+                    <div class="tr-ex">31</div><div class="tr-ex">32</div><div class="tr-ex">34</div>
+                    <div class="tr-ex">41</div><div class="tr-ex">42</div><div class="tr-ex">43</div>
+                </div>
+            </div>
+
+            <!-- COMBINAÇÃO SIMPLES -->
+            <div class="tr-section" id="sec-comb-simples">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">C</div>
+                    <div>
+                        <div class="tr-section-title">Combinação Simples</div>
+                        <div class="tr-section-sub">Parte dos elementos, a ordem NÃO importa</div>
+                    </div>
+                </div>
+                <p>Uma combinação simples é um agrupamento <strong>não ordenado</strong> de \(k\) elementos
+                escolhidos de um conjunto com \(n\) elementos, sem repetição.</p>
+                <div class="tr-rule">
+                    \(C(n,\,k) = \binom{n}{k} = \dfrac{n!}{k! \cdot (n-k)!}\)
+                </div>
+                <div class="tr-note">
+                    <strong>Relação com Arranjo:</strong> \(C(n,k) = \dfrac{A(n,k)}{k!}\).
+                    Ao não importar a ordem, dividimos o arranjo pelas \(k!\) permutações internas
+                    de cada grupo — que são todas equivalentes na combinação.
+                </div>
+                <h4>Propriedades importantes</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        <strong>Simetria:</strong> \(\binom{n}{k} = \binom{n}{n-k}\) — escolher \(k\)
+                        elementos equivale a excluir \(n-k\).
+                    </div>
+                    <div class="tr-ex span-full">
+                        <strong>Casos extremos:</strong> \(\binom{n}{0} = \binom{n}{n} = 1\).
+                    </div>
+                    <div class="tr-ex span-full">
+                        <strong>Recursividade (Pascal):</strong> \(\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}\).
+                    </div>
+                </div>
+                <h4>Exemplo — formação de comitê</h4>
+                <p>Quantos comitês de 3 pessoas podem ser formados a partir de 5 candidatos?
+                A ordem não importa. \(n = 5\), \(k = 3\):</p>
+                <div class="tr-steps">
+                    <div>\(C(5,\,3) = \dfrac{5!}{3! \cdot 2!} = \dfrac{5 \cdot 4}{2} = \mathbf{10}\)</div>
+                </div>
+                <p>As 10 combinações (candidatos A, B, C, D, E):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">ABC</div><div class="tr-ex">ABD</div><div class="tr-ex">ABE</div>
+                    <div class="tr-ex">ACD</div><div class="tr-ex">ACE</div><div class="tr-ex">ADE</div>
+                    <div class="tr-ex">BCD</div><div class="tr-ex">BCE</div><div class="tr-ex">BDE</div>
+                    <div class="tr-ex">CDE</div>
+                </div>
+            </div>
+
+            <!-- TRIÂNGULO DE PASCAL -->
+            <div class="tr-section" id="sec-pascal">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#9651;</div>
+                    <div>
+                        <div class="tr-section-title">Triângulo de Pascal</div>
+                        <div class="tr-section-sub">Ferramenta visual para calcular combinações</div>
+                    </div>
+                </div>
+                <p>O Triângulo de Pascal organiza os coeficientes binomiais \(\binom{n}{k}\) em linhas, onde
+                cada linha \(n\) contém as combinações \(\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}\).
+                Cada valor é a <strong>soma dos dois valores acima</strong> (propriedade da recursividade).</p>
+
+                <div style="font-family:monospace;text-align:center;line-height:2.2;font-size:1.05rem;margin:1rem 0;background:#f5f3ff;border-radius:10px;padding:1rem 0.5rem;">
+                    <div style="color:#999;font-size:0.85rem;margin-bottom:0.2rem;">n=0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1</div>
+                    <div style="color:#999;font-size:0.85rem;">n=1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;1</div>
+                    <div style="color:#999;font-size:0.85rem;">n=2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;2&#160;&#160;&#160;1</div>
+                    <div style="color:#999;font-size:0.85rem;">n=3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;3&#160;&#160;&#160;3&#160;&#160;&#160;1</div>
+                    <div style="color:#7c3aed;font-weight:700;">n=4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;4&#160;&#160;&#160;6&#160;&#160;&#160;4&#160;&#160;&#160;1</div>
+                    <div style="color:#999;font-size:0.85rem;">n=5&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;5&#160;&#160;10&#160;&#160;10&#160;&#160;&#160;5&#160;&#160;&#160;1</div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Leitura da linha n=4:</strong> \(\binom{4}{0}=1,\ \binom{4}{1}=4,\ \binom{4}{2}=6,\
+                    \binom{4}{3}=4,\ \binom{4}{4}=1\). A soma de cada linha é \(2^n\) — o número total de subconjuntos
+                    de um conjunto com \(n\) elementos.
+                </div>
+            </div>
+
+            <!-- COMBINAÇÃO COM REPETIÇÃO -->
+            <div class="tr-section" id="sec-comb-rep">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">CR</div>
+                    <div>
+                        <div class="tr-section-title">Combinação com Repetição</div>
+                        <div class="tr-section-sub">Elementos podem ser escolhidos mais de uma vez</div>
+                    </div>
+                </div>
+                <p>Usada quando os elementos podem ser escolhidos <strong>mais de uma vez</strong> e a ordem
+                não importa. Exemplo clássico: escolher sabores de sorvete permitindo repetição.</p>
+                <div class="tr-rule">
+                    \(CR(n,\,k) = \binom{n+k-1}{k} = \dfrac{(n+k-1)!}{k! \cdot (n-1)!}\)
+                </div>
+                <div class="tr-note">
+                    <strong>Intuição (estrelas e barras):</strong> imagine \(k\) objetos idênticos (estrelas &#9733;)
+                    distribuídos em \(n\) categorias, separadas por \(n-1\) divisórias (barras |). Contar as disposições
+                    dessas \(k+(n-1)\) posições é equivalente a \(\binom{n+k-1}{k}\).
+                </div>
+                <h4>Exemplo 1 — bolas com repetição de cores</h4>
+                <p>Quantas combinações de 3 bolas são possíveis entre 4 cores, com repetição?
+                \(n = 4\), \(k = 3\):</p>
+                <div class="tr-steps">
+                    <div>\(CR(4,\,3) = \binom{4+3-1}{3} = \binom{6}{3} = \dfrac{6!}{3! \cdot 3!} = \dfrac{720}{36} = \mathbf{20}\)</div>
+                </div>
+                <h4>Exemplo 2 — sabores de sorvete</h4>
+                <p>Uma sorveteria tem 5 sabores. Quantas combinações de 2 bolas (podendo repetir) são possíveis?
+                \(n = 5\), \(k = 2\):</p>
+                <div class="tr-steps">
+                    <div>\(CR(5,\,2) = \binom{5+2-1}{2} = \binom{6}{2} = \dfrac{6!}{2! \cdot 4!} = \dfrac{6 \cdot 5}{2} = \mathbf{15}\)</div>
+                </div>
+            </div>
+
+            <!-- PROBLEMAS PRÁTICOS -->
+            <div class="tr-section" id="sec-problemas">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Resolvidos</div>
+                        <div class="tr-section-sub">Identificar o conceito correto é a chave</div>
+                    </div>
+                </div>
+
+                <h4>Problema 1 — Comissão com restrição</h4>
+                <p>De um grupo de 4 homens e 3 mulheres, quantas comissões de 3 pessoas podem ser formadas
+                contendo <strong>pelo menos 1 mulher</strong>?</p>
+                <div class="tr-steps">
+                    <div><strong>Estratégia:</strong> total de comissões &#8722; comissões sem mulher</div>
+                    <div>\(\text{Total} = C(7,3) = \dfrac{7!}{3! \cdot 4!} = 35\)</div>
+                    <div>\(\text{Sem mulher (só homens)} = C(4,3) = 4\)</div>
+                    <div>\(\text{Com pelo menos 1 mulher} = 35 - 4 = \mathbf{31}\) comissões</div>
+                </div>
+
+                <h4 style="margin-top:1.2rem;">Problema 2 — Senha com restrição</h4>
+                <p>Quantas senhas de 4 dígitos <strong>distintos</strong> e em <strong>ordem crescente</strong>
+                podem ser formadas com os dígitos {1, 2, 3, 4, 5, 6}?</p>
+                <div class="tr-steps">
+                    <div><strong>Chave:</strong> se os 4 dígitos são distintos e a ordem é fixada (crescente),
+                    basta escolher quais 4 dígitos usar — a ordem é determinada automaticamente.</div>
+                    <div>\(C(6,4) = \dfrac{6!}{4! \cdot 2!} = \dfrac{6 \cdot 5}{2} = \mathbf{15}\) senhas</div>
+                </div>
+
+                <h4 style="margin-top:1.2rem;">Problema 3 — Mesa redonda com restrição</h4>
+                <p>De quantas formas 6 pessoas podem se sentar ao redor de uma mesa redonda se 2 pessoas
+                específicas (A e B) <strong>não podem sentar adjacentes</strong>?</p>
+                <div class="tr-steps">
+                    <div>\(\text{Total circular} = P_c(6) = 5! = 120\)</div>
+                    <div>\(\text{A e B adjacentes: trate o par como 1 bloco} \Rightarrow P_c(5) \cdot 2! = 4! \cdot 2 = 48\)</div>
+                    <div>\(\text{A e B não adjacentes} = 120 - 48 = \mathbf{72}\) formas</div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

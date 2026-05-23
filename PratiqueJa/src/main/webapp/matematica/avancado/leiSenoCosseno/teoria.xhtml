@@ -1,0 +1,225 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DESCRIÇÃO -->
+            <div class="tr-section" id="sec-desc">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Lei dos Senos e Cossenos</div>
+                        <div class="tr-section-sub">Resolução de triângulos quaisquer</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As leis dos senos e dos cossenos permitem resolver triângulos
+                    <strong>não retângulos</strong> — calculando lados e ângulos quando
+                    o Teorema de Pitágoras não pode ser utilizado.
+                </div>
+                <p>
+                    Em qualquer triângulo <strong>ABC</strong>, adotamos a convenção:
+                    o lado <strong>a</strong> é oposto ao ângulo <strong>A</strong>,
+                    o lado <strong>b</strong> é oposto ao ângulo <strong>B</strong> e
+                    o lado <strong>c</strong> é oposto ao ângulo <strong>C</strong>.
+                </p>
+                <div class="tr-note">
+                    <strong>Propriedade fundamental:</strong> a soma dos ângulos internos de qualquer
+                    triângulo é \(A + B + C = 180°\). Após encontrar dois ângulos, o terceiro é
+                    imediato: \(C = 180° - A - B\).
+                </div>
+            </div>
+
+            <!-- GUIA DE ESCOLHA -->
+            <div class="tr-section" id="sec-guia">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Guia</div>
+                    <div>
+                        <div class="tr-section-title">Quando Usar Cada Lei</div>
+                        <div class="tr-section-sub">Escolha rápida pelo caso do triângulo</div>
+                    </div>
+                </div>
+
+                <table style="width:100%;border-collapse:collapse;margin:0.6rem 0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <thead>
+                        <tr>
+                            <th style="background:#0c1445;color:white;padding:0.6rem 0.9rem;text-align:left;">Caso</th>
+                            <th style="background:#0c1445;color:white;padding:0.6rem 0.9rem;text-align:left;">Dados conhecidos</th>
+                            <th style="background:#0c1445;color:white;padding:0.6rem 0.9rem;text-align:left;">Lei a usar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#1d4ed8;">AAS / ASA</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">2 ângulos + 1 lado</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Lei dos <strong>Senos</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#1d4ed8;background:#f8fafc;">SSA</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;background:#f8fafc;">2 lados + ângulo oposto a um deles</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;background:#f8fafc;">Lei dos <strong>Senos</strong> (atenção: caso ambíguo)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;font-weight:700;color:#dc2626;">LAL</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">2 lados + ângulo entre eles</td>
+                            <td style="padding:0.6rem 0.9rem;border-bottom:1px solid #e2e8f0;">Lei dos <strong>Cossenos</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.6rem 0.9rem;font-weight:700;color:#dc2626;background:#f8fafc;">LLL</td>
+                            <td style="padding:0.6rem 0.9rem;background:#f8fafc;">3 lados conhecidos</td>
+                            <td style="padding:0.6rem 0.9rem;background:#f8fafc;">Lei dos <strong>Cossenos</strong> (forma inversa)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tr-note">
+                    <strong>Estratégia de resolução completa:</strong> após aplicar a lei adequada e encontrar
+                    um elemento, use \(A + B + C = 180°\) e a Lei dos Senos para completar os elementos restantes.
+                </div>
+            </div>
+
+            <!-- LEI DOS SENOS -->
+            <div class="tr-section" id="sec-senos">
+                <div class="tr-section-header">
+                    <div class="tr-badge">sen</div>
+                    <div>
+                        <div class="tr-section-title">Lei dos Senos</div>
+                        <div class="tr-section-sub">Lados proporcionais aos senos dos ângulos opostos</div>
+                    </div>
+                </div>
+
+                <p>Em qualquer triângulo ABC, a razão entre cada lado e o seno do ângulo oposto é constante:</p>
+
+                <div class="tr-rule">
+                    \(\dfrac{a}{\text{sen}\, A} = \dfrac{b}{\text{sen}\, B} = \dfrac{c}{\text{sen}\, C} = 2R\)
+                </div>
+
+                <p>onde \(R\) é o raio da <strong>circunferência circunscrita</strong> ao triângulo.</p>
+
+                <h4>Exemplo — resolução completa (caso AAS)</h4>
+
+                <div style="display:flex;justify-content:center;margin:1.2rem 0;">
+                    <img src="#{request.contextPath}/matematica/avancado/leiSenoCosseno/triangulo-lei-senos.svg"
+                         width="300" height="225"
+                         alt="Triângulo ABC com ângulo A igual a 30 graus, lado a igual a 7 e lado b igual a 10"/>
+                </div>
+
+                <p>Dados \(a = 7\), \(b = 10\) e \(A = 30°\). Resolver o triângulo completamente:</p>
+
+                <h4>Passo 1 — encontrar B</h4>
+                <div class="tr-steps">
+                    <div>\(\dfrac{7}{\text{sen}\, 30°} = \dfrac{10}{\text{sen}\, B}\)</div>
+                    <div>\(\text{sen}\, B = \dfrac{10 \cdot \text{sen}\, 30°}{7} = \dfrac{10 \cdot \frac{1}{2}}{7} = \dfrac{5}{7} \approx 0{,}7143\)</div>
+                    <div>\(B \approx \mathbf{45{,}57°}\)</div>
+                </div>
+
+                <h4>Passo 2 — encontrar C</h4>
+                <div class="tr-steps">
+                    <div>\(C = 180° - 30° - 45{,}57° = \mathbf{104{,}43°}\)</div>
+                </div>
+
+                <h4>Passo 3 — encontrar c</h4>
+                <div class="tr-steps">
+                    <div>\(\dfrac{7}{\text{sen}\, 30°} = \dfrac{c}{\text{sen}\, 104{,}43°}\)</div>
+                    <div>\(c = \dfrac{7 \cdot \text{sen}\, 104{,}43°}{\text{sen}\, 30°} = \dfrac{7 \cdot 0{,}9686}{0{,}5} \approx \mathbf{13{,}56}\)</div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Caso ambíguo (SSA):</strong> quando se conhecem dois lados e um ângulo oposto a um deles,
+                    podem existir <strong>0, 1 ou 2 triângulos</strong> válidos. Sempre verifique se
+                    \(\text{sen}\, B \leq 1\) e considere a possibilidade de \(B' = 180° - B\)
+                    quando \(B\) é agudo e \(a \lt b\).
+                </div>
+            </div>
+
+            <!-- LEI DOS COSSENOS -->
+            <div class="tr-section" id="sec-cossenos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">cos</div>
+                    <div>
+                        <div class="tr-section-title">Lei dos Cossenos</div>
+                        <div class="tr-section-sub">Generalização do Teorema de Pitágoras</div>
+                    </div>
+                </div>
+
+                <p>A Lei dos Cossenos relaciona os três lados de um triângulo com o cosseno de um de seus ângulos:</p>
+
+                <div class="tr-rule">
+                    \(a^2 = b^2 + c^2 - 2bc \cdot \cos A\)
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">\(b^2 = a^2 + c^2 - 2ac \cdot \cos B\)</div>
+                    <div class="tr-ex span-full">\(c^2 = a^2 + b^2 - 2ab \cdot \cos C\)</div>
+                </div>
+
+                <h4>Forma inversa — encontrar ângulo (caso LLL)</h4>
+                <div class="tr-rule">
+                    \(\cos A = \dfrac{b^2 + c^2 - a^2}{2bc}\)
+                </div>
+
+                <div class="tr-note">
+                    <strong>Caso especial:</strong> quando \(A = 90°\), temos \(\cos 90° = 0\) e a Lei dos Cossenos
+                    se reduz ao Teorema de Pitágoras: \(a^2 = b^2 + c^2\).
+                </div>
+
+                <h4>Exemplo 1 — encontrar lado a (caso LAL)</h4>
+
+                <div style="display:flex;justify-content:center;margin:1.2rem 0;">
+                    <img src="#{request.contextPath}/matematica/avancado/leiSenoCosseno/triangulo-lei-cossenos.svg"
+                         width="300" height="225"
+                         alt="Triângulo ABC com ângulo A igual a 60 graus, b igual a 12 e c igual a 9"/>
+                </div>
+
+                <p>Dados \(b = 12\), \(c = 9\) e \(A = 60°\):</p>
+                <div class="tr-steps">
+                    <div>\(a^2 = 12^2 + 9^2 - 2 \cdot 12 \cdot 9 \cdot \cos 60°\)</div>
+                    <div>\(a^2 = 144 + 81 - 216 \cdot \dfrac{1}{2} = 225 - 108 = 117\)</div>
+                    <div>\(a = \sqrt{117} \approx \mathbf{10{,}82}\)</div>
+                </div>
+                <p>Para completar o triângulo, use a Lei dos Senos com o valor encontrado de \(a\):</p>
+                <div class="tr-steps">
+                    <div>\(\text{sen}\, B = \dfrac{b \cdot \text{sen}\, A}{a} = \dfrac{12 \cdot \text{sen}\, 60°}{10{,}82} \approx \dfrac{10{,}39}{10{,}82} \approx 0{,}960\)</div>
+                    <div>\(B \approx 73{,}78° \quad \Rightarrow \quad C = 180° - 60° - 73{,}78° \approx \mathbf{46{,}22°}\)</div>
+                </div>
+
+                <h4 style="margin-top:1.2rem;">Exemplo 2 — encontrar ângulo A (caso LLL)</h4>
+                <p>Dados \(a = 8\), \(b = 6\) e \(c = 7\). Encontrar o maior ângulo primeiro (oposto ao maior lado \(a\)):</p>
+                <div class="tr-steps">
+                    <div>\(\cos A = \dfrac{6^2 + 7^2 - 8^2}{2 \cdot 6 \cdot 7} = \dfrac{36 + 49 - 64}{84} = \dfrac{21}{84} = \dfrac{1}{4}\)</div>
+                    <div>\(A = \cos^{-1}\!\left(\dfrac{1}{4}\right) \approx \mathbf{75{,}52°}\)</div>
+                </div>
+                <p>Em seguida, use a Lei dos Senos para os demais ângulos:</p>
+                <div class="tr-steps">
+                    <div>\(\text{sen}\, B = \dfrac{6 \cdot \text{sen}\, 75{,}52°}{8} \approx \dfrac{6 \cdot 0{,}9682}{8} \approx 0{,}726 \Rightarrow B \approx \mathbf{46{,}57°}\)</div>
+                    <div>\(C = 180° - 75{,}52° - 46{,}57° \approx \mathbf{57{,}91°}\)</div>
+                </div>
+                <div class="tr-note">
+                    No caso LLL, sempre resolva o <strong>maior ângulo primeiro</strong> (oposto ao maior lado)
+                    para evitar o caso ambíguo ao aplicar a Lei dos Senos nos ângulos restantes —
+                    o maior ângulo nunca pode ter um segundo valor válido.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

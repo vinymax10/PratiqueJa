@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lei dos Senos e Cossenos</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+    }
+
+    .hero-header {
+      background: linear-gradient(135deg, #0c1445 0%, #1d4ed8 60%, #3b82f6 100%);
+      color: white;
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .hero-header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .hero-header p  { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.85; }
+
+    .content { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem 3rem; }
+
+    h2 { font-size: 1.6rem; color: #0c1445; border-bottom: 3px solid #1d4ed8; padding-bottom: 0.4rem; margin: 2rem 0 0.75rem; }
+    h3 { font-size: 1.15rem; color: #1d4ed8; margin: 1.2rem 0 0.4rem; font-weight: 600; }
+    p  { line-height: 1.75; margin-bottom: 1rem; font-size: 1.05rem; }
+
+    .formula-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 5px solid #1d4ed8;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.2rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(29,78,216,0.12);
+      overflow-x: auto;
+    }
+
+    .example-box {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .attention-box {
+      background: #fef3c7;
+      border-left: 5px solid #f59e0b;
+      border-radius: 0 12px 12px 0;
+      padding: 1rem 1.4rem;
+      margin: 1.2rem 0;
+      font-size: 0.97rem;
+      color: #78350f;
+    }
+    .attention-box strong { color: #92400e; }
+
+    .svg-center { display: flex; justify-content: center; margin: 1.5rem 0; }
+
+    .step { font-size: 1.05rem; line-height: 2.4; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.2rem 0;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    @media (max-width: 600px) {
+      .hero-header h1 { font-size: 1.8rem; }
+      .content { padding: 0 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero-header">
+  <h1>Lei dos Senos e Cossenos</h1>
+  <p>Resolução de triângulos quaisquer — não apenas retângulos</p>
+</header>
+
+<div class="content">
+
+  <!-- ── DESCRIÇÃO ──────────────────────────────────────────────────────── -->
+  <h2>Descrição</h2>
+
+  <p>As leis dos senos e dos cossenos são fundamentais na trigonometria para resolver
+  triângulos, especialmente os <strong>não retângulos</strong>, permitindo calcular lados e ângulos
+  quando o Teorema de Pitágoras não pode ser utilizado.</p>
+
+  <p>Em qualquer triângulo <strong>ABC</strong>, adotamos a convenção: o lado <strong>a</strong> é oposto ao ângulo
+  <strong>A</strong>, o lado <strong>b</strong> é oposto ao ângulo <strong>B</strong> e o lado <strong>c</strong>
+  é oposto ao ângulo <strong>C</strong>.</p>
+
+  <!-- ── LEI DOS SENOS ──────────────────────────────────────────────────── -->
+  <h2>Lei dos Senos</h2>
+
+  <p>A Lei dos Senos relaciona os comprimentos dos lados de um triângulo com os senos
+  de seus ângulos opostos. Em qualquer triângulo ABC:</p>
+
+  <div class="formula-box">
+    \[\dfrac{a}{\text{sen}\, A} = \dfrac{b}{\text{sen}\, B} = \dfrac{c}{\text{sen}\, C}\]
+  </div>
+
+  <h3>Exemplo — Lei dos Senos</h3>
+
+  <!-- SVG: triângulo Lei dos Senos (azul) -->
+  <!-- Vértices TikZ: C=(0,0), A=(5,0), B=(1,3)  →  escala 50px, offset(30,210), y-flip -->
+  <!-- C=(30,210), A=(280,210), B=(80,60) -->
+  <div class="svg-center">
+    <svg viewBox="0 0 340 260" width="320" height="240" xmlns="http://www.w3.org/2000/svg"
+         aria-label="Triângulo ABC com ângulo A=30°, lado a=7, lado b=10">
+      <!-- Triângulo -->
+      <polygon points="30,210 280,210 80,60" fill="none" stroke="#5b8dd9" stroke-width="2.5"/>
+      <!-- Arco 30° em A=(280,210): de 147° a 180° TikZ → sweep=1 em SVG -->
+      <!-- endpoint 147°: (251,191), endpoint 180°: (245,210) -->
+      <path d="M 280,210 L 245,210 A 35,35 0 0,1 251,191 Z" fill="rgba(220,38,38,0.2)" stroke="none"/>
+      <path d="M 80,60 L 107,82 A 35,35 0 0,1 68,93 Z" fill="rgba(34,197,94,0.25)" stroke="none"/>
+      <!-- Labels vértices -->
+      <text x="286" y="215" font-size="18" font-weight="700" fill="#333" font-family="sans-serif">A</text>
+      <text x="68"  y="48"  font-size="18" font-weight="700" fill="#333" font-family="sans-serif">B</text>
+      <text x="12"  y="215" font-size="18" font-weight="700" fill="#333" font-family="sans-serif">C</text>
+      <!-- Labels ângulos e lados -->
+      <text x="235" y="200" font-size="16" font-weight="600" fill="#666" font-family="serif">30°</text>
+      <text x="37"  y="137" font-size="18" font-weight="600" fill="#666" font-family="serif">7</text>
+      <text x="147" y="232" font-size="18" font-weight="600" fill="#666" font-family="serif">10</text>
+    </svg>
+  </div>
+
+  <p>Nesse triângulo temos \(a = 7\), \(b = 10\) e \(A = 30°\). Para encontrar o ângulo \(B\):</p>
+
+  <div class="example-box">
+    <div class="step">
+      \[\dfrac{7}{\text{sen}\, 30°} = \dfrac{10}{\text{sen}\, B}\]
+      \[7 \cdot \text{sen}\, B = 10 \cdot \text{sen}\, 30° = 10 \cdot \dfrac{1}{2} = 5\]
+      \[\text{sen}\, B = \dfrac{5}{7} \approx 0{,}7143\]
+      \[B \approx \text{sen}^{-1}(0{,}7143) \approx 45{,}57°\]
+    </div>
+  </div>
+
+  <!-- ── LEI DOS COSSENOS ───────────────────────────────────────────────── -->
+  <h2>Lei dos Cossenos</h2>
+
+  <p>A Lei dos Cossenos é usada para calcular um lado quando os outros dois lados e o
+  ângulo entre eles são conhecidos, ou para determinar um ângulo quando todos os três
+  lados são conhecidos:</p>
+
+  <div class="formula-box">
+    \[a^2 = b^2 + c^2 - 2bc \cdot \cos A\]
+  </div>
+
+  <p>As formas análogas para os outros lados são:</p>
+
+  <div class="formula-box">
+    \[b^2 = a^2 + c^2 - 2ac \cdot \cos B \qquad c^2 = a^2 + b^2 - 2ab \cdot \cos C\]
+  </div>
+
+  <h3>Exemplo — Lei dos Cossenos</h3>
+
+  <!-- SVG: triângulo Lei dos Cossenos (vermelho) -->
+  <!-- Vértices TikZ: C=(0,0), A=(5,0), B=(3.5,3) → escala 50px, offset(30,210), y-flip -->
+  <!-- C=(30,210), A=(280,210), B=(205,60) -->
+  <div class="svg-center">
+    <svg viewBox="0 0 340 260" width="320" height="240" xmlns="http://www.w3.org/2000/svg"
+         aria-label="Triângulo ABC com ângulo A=60°, lados b=12, c=9, lado a desconhecido">
+      <!-- Triângulo -->
+      <polygon points="30,210 280,210 205,60" fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+      <!-- Arco 60° em A=(280,210): de 120° a 180° TikZ → sweep=1 em SVG -->
+      <!-- 120°: A+(0.7·cos120°, 0.7·sin120°)=(4.65,0.606)→SVG(262,180) -->
+      <!-- 180°: A+(−0.7,0)=(4.3,0)→SVG(245,210) -->
+      <path d="M 280,210 L 245,210 A 35,35 0 0,1 263,180 Z" fill="rgba(96,165,250,0.3)" stroke="none"/>
+      <!-- Labels vértices -->
+      <text x="286" y="215" font-size="18" font-weight="700" fill="#333" font-family="sans-serif">A</text>
+      <text x="200" y="48"  font-size="18" font-weight="700" fill="#333" font-family="sans-serif">B</text>
+      <text x="12"  y="215" font-size="18" font-weight="700" fill="#333" font-family="sans-serif">C</text>
+      <!-- Labels ângulos e lados -->
+      <text x="235" y="195" font-size="16" font-weight="600" fill="#666" font-family="serif">60°</text>
+      <text x="100" y="135" font-size="18" font-weight="600" fill="#666" font-family="serif">a</text>
+      <text x="147" y="232" font-size="18" font-weight="600" fill="#666" font-family="serif">12</text>
+      <text x="252" y="138" font-size="18" font-weight="600" fill="#666" font-family="serif">9</text>
+    </svg>
+  </div>
+
+  <p>Nesse triângulo temos \(b = 12\), \(c = 9\) e \(A = 60°\), com \(\cos 60° = \tfrac{1}{2}\).
+  Para encontrar o lado \(a\):</p>
+
+  <div class="example-box">
+    <div class="step">
+      \[a^2 = 12^2 + 9^2 - 2 \cdot 12 \cdot 9 \cdot \cos 60°\]
+      \[a^2 = 144 + 81 - 216 \cdot \dfrac{1}{2}\]
+      \[a^2 = 225 - 108 = 117\]
+      \[a = \sqrt{117} \approx 10{,}82\]
+    </div>
+  </div>
+
+</div><!-- /content -->
+</body>
+</html>

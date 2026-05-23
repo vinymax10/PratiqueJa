@@ -1,0 +1,276 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DESCRIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Razões Trigonométricas</div>
+                        <div class="tr-section-sub">Relação entre lados e ângulos do triângulo retângulo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As razões trigonométricas relacionam os lados de um triângulo retângulo
+                    aos seus ângulos agudos.
+                </div>
+
+                <!-- SVG 1 — triângulo genérico -->
+                <div style="display:flex;justify-content:center;margin:1.2rem 0;">
+                    <img src="#{request.contextPath}/matematica/intermediario/razoesTrigonometricas/triangulo-generico.svg"
+                         width="300" height="210"
+                         alt="Triângulo retângulo com lados h, co, ca e ângulo alfa"/>
+                </div>
+
+                <p>Nesse triângulo retângulo temos:</p>
+                <ul style="margin:0.5rem 0 0.8rem 1.4rem;line-height:2;">
+                    <li><strong>Hipotenusa (h):</strong> lado oposto ao ângulo reto — sempre o maior lado.</li>
+                    <li><strong>Cateto oposto (co):</strong> lado oposto ao ângulo \(\alpha\).</li>
+                    <li><strong>Cateto adjacente (ca):</strong> lado adjacente ao ângulo \(\alpha\), que forma o ângulo junto com a hipotenusa.</li>
+                </ul>
+            </div>
+
+            <!-- FÓRMULAS -->
+            <div class="tr-section" id="sec-formulas">
+                <div class="tr-section-header">
+                    <div class="tr-badge">f(&#945;)</div>
+                    <div>
+                        <div class="tr-section-title">Definição das Razões</div>
+                        <div class="tr-section-sub">Seno, cosseno e tangente</div>
+                    </div>
+                </div>
+
+                <div class="tr-rule">
+                    \(\text{sen}(\alpha) = \dfrac{\text{cateto oposto}}{\text{hipotenusa}} = \dfrac{co}{h}\)
+                </div>
+                <div class="tr-rule">
+                    \(\cos(\alpha) = \dfrac{\text{cateto adjacente}}{\text{hipotenusa}} = \dfrac{ca}{h}\)
+                </div>
+                <div class="tr-rule">
+                    \(\tan(\alpha) = \dfrac{\text{cateto oposto}}{\text{cateto adjacente}} = \dfrac{co}{ca}\)
+                </div>
+
+                <div class="tr-note">
+                    <strong>Macete SOH-CAH-TOA:</strong>&#160;
+                    <em>S</em>eno = <em>O</em>posto / <em>H</em>ipotenusa &#160;|&#160;
+                    <em>C</em>osseno = <em>A</em>djacente / <em>H</em>ipotenusa &#160;|&#160;
+                    <em>T</em>angente = <em>O</em>posto / <em>A</em>djacente.
+                </div>
+
+                <h4>Relação entre as razões</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        \(\tan(\alpha) = \dfrac{\text{sen}(\alpha)}{\cos(\alpha)}\)
+                        &#160;&#160;&#8212;&#160;&#160;
+                        a tangente é o quociente entre seno e cosseno.
+                    </div>
+                </div>
+            </div>
+
+            <!-- IDENTIDADE PITAGÓRICA E ÂNGULOS COMPLEMENTARES -->
+            <div class="tr-section" id="sec-identidades">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">ID</div>
+                    <div>
+                        <div class="tr-section-title">Identidades Fundamentais</div>
+                        <div class="tr-section-sub">Relações sempre verdadeiras</div>
+                    </div>
+                </div>
+
+                <h4>Identidade Pitagórica</h4>
+                <div class="tr-rule">
+                    \(\text{sen}^2(\alpha) + \cos^2(\alpha) = 1\)
+                </div>
+                <p>
+                    Decorre diretamente do Teorema de Pitágoras: \(co^2 + ca^2 = h^2\).
+                    Dividindo tudo por \(h^2\):
+                    \(\left(\dfrac{co}{h}\right)^2 + \left(\dfrac{ca}{h}\right)^2 = 1\).
+                </p>
+
+                <h4>Ângulos Complementares</h4>
+                <p>
+                    Dois ângulos são complementares quando somam 90°. Em um triângulo retângulo,
+                    os dois ângulos agudos são sempre complementares. Portanto:
+                </p>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">\(\text{sen}(\alpha) = \cos(90° - \alpha)\)</div>
+                    <div class="tr-ex span-full">\(\cos(\alpha) = \text{sen}(90° - \alpha)\)</div>
+                    <div class="tr-ex span-full">\(\tan(\alpha) = \dfrac{1}{\tan(90° - \alpha)}\)</div>
+                </div>
+                <div class="tr-note">
+                    Exemplo: \(\text{sen}(30°) = \cos(60°) = \dfrac{1}{2}\)
+                    e \(\cos(30°) = \text{sen}(60°) = \dfrac{\sqrt{3}}{2}\).
+                </div>
+            </div>
+
+            <!-- EXEMPLO 6-8-10 -->
+            <div class="tr-section" id="sec-ex1">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplo</div>
+                        <div class="tr-section-sub">Triângulo com lados 6, 8 e 10</div>
+                    </div>
+                </div>
+
+                <!-- SVG 2 — triângulo 6-8-10 -->
+                <div style="display:flex;justify-content:center;margin:1.2rem 0;">
+                    <img src="#{request.contextPath}/matematica/intermediario/razoesTrigonometricas/triangulo-6-8-10.svg"
+                         width="300" height="210"
+                         alt="Triângulo retângulo com lados 10, 6 e 8"/>
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        \(\text{sen}(\alpha) = \dfrac{6}{10} = \dfrac{3}{5}\)
+                    </div>
+                    <div class="tr-ex span-full">
+                        \(\cos(\alpha) = \dfrac{8}{10} = \dfrac{4}{5}\)
+                    </div>
+                    <div class="tr-ex span-full">
+                        \(\tan(\alpha) = \dfrac{6}{8} = \dfrac{3}{4}\)
+                    </div>
+                </div>
+
+                <div class="tr-note">
+                    Verificação pela identidade pitagórica:
+                    \(\left(\dfrac{3}{5}\right)^2 + \left(\dfrac{4}{5}\right)^2 = \dfrac{9}{25} + \dfrac{16}{25} = \dfrac{25}{25} = 1\) &#10003;
+                </div>
+            </div>
+
+            <!-- ÂNGULOS NOTÁVEIS -->
+            <div class="tr-section" id="sec-notaveis">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Ângulos Notáveis</div>
+                        <div class="tr-section-sub">30°, 45° e 60°</div>
+                    </div>
+                </div>
+
+                <p>
+                    As razões dos ângulos 30°, 45° e 60° são as mais cobradas em provas.
+                    Uma forma de memorizá-las: os valores do seno seguem a sequência
+                    \(\dfrac{1}{2},\ \dfrac{\sqrt{2}}{2},\ \dfrac{\sqrt{3}}{2}\)
+                    e o cosseno é o complemento (sequência inversa).
+                </p>
+
+                <table style="width:100%;border-collapse:collapse;margin:0.8rem 0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <thead>
+                        <tr>
+                            <th style="background:#1e1b4b;color:white;padding:0.65rem 1rem;text-align:center;">\(\alpha\)</th>
+                            <th style="background:#1e1b4b;color:white;padding:0.65rem 1rem;text-align:center;">30&#176;</th>
+                            <th style="background:#1e1b4b;color:white;padding:0.65rem 1rem;text-align:center;">45&#176;</th>
+                            <th style="background:#1e1b4b;color:white;padding:0.65rem 1rem;text-align:center;">60&#176;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#1e1b4b;background:#ede9fe;border-bottom:1px solid #e2e8f0;"><em>sen</em></td>
+                            <td style="padding:0.75rem 1rem;text-align:center;border-bottom:1px solid #e2e8f0;">\(\dfrac{1}{2}\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;border-bottom:1px solid #e2e8f0;">\(\dfrac{\sqrt{2}}{2}\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;border-bottom:1px solid #e2e8f0;">\(\dfrac{\sqrt{3}}{2}\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#1e1b4b;background:#ede9fe;border-bottom:1px solid #e2e8f0;"><em>cos</em></td>
+                            <td style="padding:0.75rem 1rem;text-align:center;background:#f5f3ff;border-bottom:1px solid #e2e8f0;">\(\dfrac{\sqrt{3}}{2}\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;background:#f5f3ff;border-bottom:1px solid #e2e8f0;">\(\dfrac{\sqrt{2}}{2}\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;background:#f5f3ff;border-bottom:1px solid #e2e8f0;">\(\dfrac{1}{2}\)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#1e1b4b;background:#ede9fe;"><em>tan</em></td>
+                            <td style="padding:0.75rem 1rem;text-align:center;">\(\dfrac{\sqrt{3}}{3}\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;">\(1\)</td>
+                            <td style="padding:0.75rem 1rem;text-align:center;">\(\sqrt{3}\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tr-note">
+                    <strong>Macete da tabela:</strong> para o seno, escreva
+                    \(\dfrac{\sqrt{0}}{2},\ \dfrac{\sqrt{1}}{2},\ \dfrac{\sqrt{2}}{2},\ \dfrac{\sqrt{3}}{2},\ \dfrac{\sqrt{4}}{2}\)
+                    para 0°, 30°, 45°, 60° e 90°, respectivamente. Para o cosseno, leia a sequência ao contrário.
+                </div>
+            </div>
+
+            <!-- EXEMPLOS COM ÂNGULOS NOTÁVEIS -->
+            <div class="tr-section" id="sec-ex2">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ex+</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Aplicando ângulos notáveis</div>
+                    </div>
+                </div>
+
+                <!-- Problema 1 — sen(30°) -->
+                <h4>Problema 1 — Cateto oposto (sen 30°)</h4>
+
+                <div style="display:flex;justify-content:center;margin:1rem 0;">
+                    <img src="#{request.contextPath}/matematica/intermediario/razoesTrigonometricas/triangulo-30-notavel.svg"
+                         width="280" height="200"
+                         alt="Triângulo retângulo com ângulo de 30 graus, hipotenusa 16 e cateto oposto x"/>
+                </div>
+
+                <p>
+                    Ângulo 30°, hipotenusa = 16. Encontrar o cateto oposto \(x\).
+                    Usando \(\text{sen}(30°) = \dfrac{1}{2}\):
+                </p>
+                <div class="tr-steps">
+                    <div>\(\dfrac{1}{2} = \dfrac{x}{16}\)</div>
+                    <div>\(2x = 16\)</div>
+                    <div>\(x = \dfrac{16}{2} = \mathbf{8}\)</div>
+                </div>
+
+                <!-- Problema 2 — cos(60°) -->
+                <h4 style="margin-top:1.5rem;">Problema 2 — Hipotenusa (cos 60°)</h4>
+                <p>
+                    Ângulo 60°, cateto adjacente = 5. Encontrar a hipotenusa \(h\).
+                    Usando \(\cos(60°) = \dfrac{1}{2}\):
+                </p>
+                <div class="tr-steps">
+                    <div>\(\dfrac{1}{2} = \dfrac{5}{h}\)</div>
+                    <div>\(h = 5 \cdot 2 = \mathbf{10}\)</div>
+                </div>
+
+                <!-- Problema 3 — tan(45°) -->
+                <h4 style="margin-top:1.5rem;">Problema 3 — Cateto adjacente (tan 45°)</h4>
+                <p>
+                    Ângulo 45°, cateto oposto = 7. Encontrar o cateto adjacente \(ca\).
+                    Usando \(\tan(45°) = 1\):
+                </p>
+                <div class="tr-steps">
+                    <div>\(1 = \dfrac{7}{ca}\)</div>
+                    <div>\(ca = 7\)</div>
+                </div>
+                <div class="tr-note">
+                    Quando \(\tan(\alpha) = 1\), o triângulo é isósceles — os dois catetos são iguais.
+                    Isso ocorre exatamente no ângulo de 45°.
+                </div>
+
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

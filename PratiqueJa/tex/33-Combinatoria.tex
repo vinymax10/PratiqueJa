@@ -13,219 +13,231 @@
 
 \begin{multicols}{2}
 
-Combinatória é a área da matemática que estuda as possibilidades de contar, agrupar ou organizar elementos de um conjunto, sem precisar listar todos os casos. Três principais conceitos da combinatória:
+% ── INTRODUÇÃO ──────────────────────────────────────────────────────────────
+\TW{Introdução}
 
-\textbf{Permutação} – quando todos os elementos são usados e a ordem importa.
+Combinatória é a área da matemática que estuda as possibilidades de
+\textbf{contar, agrupar ou organizar} elementos de um conjunto
+\textbf{sem precisar listar todos os casos}.
 
-\textbf{Arranjo} – quando só parte dos elementos é usada e a ordem importa.
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Conceito} & \textbf{Ordem?} & \textbf{Todos?} \\ \hline
+Permutação simples & Sim & Sim \\ \hline
+Permut. circular   & Sim (círculo) & Sim \\ \hline
+Arranjo simples    & Sim & Não \\ \hline
+Combinação simples & Não & Não \\ \hline
+\end{tabular}
+\end{center}
 
-\textbf{Combinação} – quando só parte dos elementos é usada, mas a ordem não importa.
+% ── PRINCÍPIO FUNDAMENTAL DA CONTAGEM ───────────────────────────────────────
+\TW{Princípio Fundamental da Contagem}
 
-\vspace{0.4cm}
+Se uma ação é realizada em etapas \textbf{sucessivas e independentes},
+o número total de possibilidades é o \textbf{produto} das opções de cada etapa:
+
+\Formula{n_1 \cdot n_2 \cdots n_k}
+
+\TM{Exemplos}
+
+\textbf{Roupas:} 3 camisetas $\times$ 2 calças $\times$ 4 sapatos:
+$$3 \cdot 2 \cdot 4 = 24 \text{ combinações}$$
+
+\textbf{Senhas (4 dígitos com repetição):}
+$$10^4 = 10.000 \text{ possibilidades}$$
+
+\textbf{Placas (3 letras + 4 dígitos):}
+$$26^3 \cdot 10^4 = 175.760.000 \text{ placas}$$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Princípio da Adição:} quando as alternativas são
+\emph{mutuamente exclusivas} (ou uma ou outra), o total é a
+\textbf{soma} das possibilidades de cada alternativa.
+}}
+
+% ── PERMUTAÇÃO SIMPLES ──────────────────────────────────────────────────────
 \TW{Permutação Simples}
 
-Dado um conjunto com $n$ elementos distintos, uma permutação é qualquer arranjo ordenado desses elementos. O número total de permutações possíveis é dado por:
+Dado um conjunto com $n$ elementos \textbf{distintos}, uma permutação
+é qualquer arranjo ordenado usando \textbf{todos} os elementos:
 
-\Formula{
-P(n) = n!
-}
+\Formula{P(n) = n! = n \cdot (n-1) \cdots 2 \cdot 1}
 
-onde o fatorial de $n$, representado por $n!$, é o produto de todos os números inteiros positivos de 1 até $n$:
-$$
-n! = n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot 2 \cdot 1
-$$
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Convenção:} $0! = 1$ por definição.
+}}
 
-\TM{Exemplo}
+\TM{Exemplo 1 — permutações de $\{1,2,3\}$}
 
-Considere o conjunto $A = \{1, 2, 3\}$. As permutações possíveis são:
+$P(3) = 3! = 6$. As 6 permutações:
+(1,2,3), (1,3,2), (2,1,3), (2,3,1), (3,1,2), (3,2,1).
 
-1. (1, 2, 3)
+\TM{Exemplo 2 — anagramas de "CELTA"}
 
-2. (1, 3, 2)
+5 letras distintas:
+$$P(5) = 5! = 120 \text{ anagramas}$$
 
-3. (2, 1, 3)
+% ── PERMUTAÇÃO COM REPETIÇÃO ────────────────────────────────────────────────
+\TW{Permutação com Repetição}
 
-4. (2, 3, 1)
+Se há elementos repetidos, divide-se pelos fatoriais das repetições
+para eliminar contagens duplicadas:
 
-5. (3, 1, 2)
+\Formula{P_{n}^{k,\,m,\,\ldots} = \dfrac{n!}{k! \cdot m! \cdots}}
 
-6. (3, 2, 1)
+\TM{Exemplo — anagramas de "BANANA"}
 
-Como o conjunto tem 3 elementos, temos $n = 3$, logo:
-$$
-P(3) = 3! = 3 \cdot 2 \cdot 1 = 6
-$$
+Letras: B, A, N, A, N, A $\to$ $n=6$;
+A repete 3 vezes, N repete 2 vezes.
 
-Portanto, existem 6 permutações distintas.
+\M{P_{6}^{3,\,2} &= \dfrac{6!}{3! \cdot 2!} = \dfrac{720}{12} = \boxed{60}}
 
-\vspace{0.4cm}
-\TW{Permutação Repetição}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Por que dividir?} As 3 letras A são indistinguíveis;
+trocar suas posições não gera novo anagrama. O mesmo vale para os 2
+Ns. Dividir pelos fatoriais elimina essas duplicatas.
+}}
 
-Se há elementos repetidos no conjunto, o número de permutações distintas é ajustado para evitar contagem duplicada. Se um elemento se repete $k$ vezes, o número de permutações distintas é:
-\Formula{
-P_{n}^{k}=\dfrac{n!}{k!}
-}
-\vspace{0.5cm}
+% ── PERMUTAÇÃO CIRCULAR ─────────────────────────────────────────────────────
+\TW{Permutação Circular}
 
-Se houver múltiplas repetições (por exemplo, um elemento repete $k$ vezes e outro repete $m$ vezes), a fórmula se torna:
-\vspace{0.4cm}
-\Formula{
-P_{n}^{k,m}=\frac{n!}{k! \cdot m!}
-}
-\vspace{0.4cm}
+Quando os elementos são dispostos em \textbf{círculo}, rotações de um
+mesmo arranjo são consideradas idênticas. Fixamos um elemento como
+referência e permutamos os demais:
 
-\TM{Exemplo}
-Quantos anagramas tem a palavra "BANANA"?  
+\Formula{P_c(n) = (n-1)!}
 
-- Letras: B, A, N, A, N, A  
+\TM{Exemplo — mesa redonda}
 
-- Total de letras: \( n = 6 \)  
+De quantas formas 5 pessoas podem sentar ao redor de uma mesa redonda?
 
-- Repetições: 
+\M{P_c(5) &= (5-1)! = 4! = \boxed{24} \text{ formas}}
 
-\quad "A" aparece 3 vezes, então divide por $3!$
+Compare: em fila seriam $5! = 120$ formas — 5 vezes mais, pois cada
+arranjo circular corresponde a 5 rotações equivalentes em fila.
 
-\quad "N" aparece 2 vezes, então divide por $2!$  
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Intuição:} ao fixar um elemento, eliminamos as $n$
+rotações que gerariam o mesmo arranjo circular.
+}}
 
-Número de permutações distintas:
-
-\[
-P_{6}^{3,2}=\dfrac{6!}{3! \cdot 2!} = \dfrac{6 \cdot  5\cdot 4\cdot 3!}{3! \cdot 2!} =
-\]
-
-\[
-\dfrac{6 \cdot  5\cdot 4}{2!} = \dfrac{120}{2} = 60
-\]
-
+% ── ARRANJO SIMPLES ─────────────────────────────────────────────────────────
 \TW{Arranjo Simples}
 
-Em combinatória, um arranjo simples é uma forma de selecionar e ordenar $k$ elementos distintos de um conjunto com $n$ elementos. Nesse tipo de agrupamento:
+Seleciona e ordena $k$ elementos distintos de um conjunto com $n$
+elementos. A \textbf{ordem importa} e não há repetição:
 
-\quad - A ordem dos elementos importa
+\Formula{A(n,\,k) = \dfrac{n!}{(n-k)!} = n \cdot (n-1) \cdots (n-k+1)}
 
-\quad - Não há repetição de elementos
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Relação:} $P(n) = A(n,n)$ — a permutação simples é o
+caso especial de arranjo com $k = n$.
+}}
 
-A quantidade de arranjos simples possíveis é dada pela fórmula:
+\TM{Exemplo 1 — pódio de corrida}
 
-\Formula{
-A(n, k) = \dfrac{n!}{(n - k)!}
-}
+De quantas formas distribuir ouro, prata e bronze entre 8 atletas?
+($n=8$, $k=3$):
 
-Onde:
+\M{A(8,\,3) &= \dfrac{8!}{5!} = 8 \cdot 7 \cdot 6 = \boxed{336} \text{ formas}}
 
-\quad - $n$ é o número total de elementos disponíveis
+\TM{Exemplo 2 — dígitos $\{1,2,3,4\}$, 2 algarismos distintos}
 
-\quad - $k$ é o número de elementos escolhidos para cada agrupamento (com $k \leq n$)
+\M{A(4,\,2) &= \dfrac{4!}{2!} = 4 \cdot 3 = \boxed{12}}
 
-\TM{Exemplo}
+Os 12 arranjos: 12, 13, 14, 21, 23, 24, 31, 32, 34, 41, 42, 43.
 
-Quantos números de dois algarismos distintos podem ser formados com os dígitos {1, 2, 3, 4}?
-
-\quad - A ordem importa (por exemplo, 12 é diferente de 21)
-
-\quad - Não há repetição (números como 11 ou 22 não são permitidos)
-
-Temos $n = 4$ e $k = 2$:
-$$
-A(4, 2) = \dfrac{4!}{(4 - 2)!} = \dfrac{4 \cdot 3 \cdot 2 \cdot 1}{2!} = 
-$$
-$$
-\dfrac{24}{2} = 12
-$$
-Os 12 arranjos possíveis são:
-
-(12, 13, 14, 21, 23, 24, 31, 32, 34, 41, 42, 43)
-
-\vspace{0.4cm}
-\TW{Princípio da Multiplicação}
-
-O princípio da multiplicação é uma regra fundamental da combinatória utilizada para calcular o número total de possibilidades quando uma ação é realizada em etapas sucessivas e independentes.
-
-Se uma primeira etapa pode ser realizada de $m$ maneiras diferentes e, para cada uma dessas, uma segunda etapa pode ser realizada de $n$ maneiras, então o total de maneiras de realizar as duas etapas em sequência é:
-\Formula{
-m \cdot n
-}
-
-De forma geral, se há $k$ etapas independentes, com $n_1, n_2, \dots, n_k$ possibilidades em cada uma, o número total de combinações possíveis é:
-$$
-n_1 \cdot n_2 \cdot \dots \cdot n_k
-$$
-\TM{Exemplos}
-
-1. Combinação de roupas:
-
-Suponha que se tenha 3 camisetas, 2 calças e 4 pares de sapato. O número total de combinações possíveis é:
-$$
-3 \cdot 2 \cdot 4 = 24 \text{ combinações}
-$$
-2. Senhas numéricas:
-
-Uma senha formada por 4 dígitos, onde cada dígito pode variar de 0 a 9, possui:
-$$
-10 \cdot 10 \cdot 10 \cdot 10 = 10^4 = 10.000 \text{ possibilidades}
-$$
-
-\vspace{0.4cm}
+% ── COMBINAÇÃO SIMPLES ──────────────────────────────────────────────────────
 \TW{Combinação Simples}
 
-Em combinatória, uma combinação simples é um agrupamento não ordenado de elementos selecionados de um conjunto, onde a ordem não importa e não há repetição dos elementos.
+Agrupamento \textbf{não ordenado} de $k$ elementos de um conjunto com
+$n$ elementos, sem repetição:
 
-Dado um conjunto com $n$ elementos distintos, o número de combinações de $k$ elementos (com \( k \leq n \)) é calculado por:  
+\Formula{C(n,\,k) = \binom{n}{k} = \dfrac{n!}{k! \cdot (n-k)!}}
 
-\Formula{
-C(n,k) = \binom{n}{k} = \dfrac{n!}{k! \cdot (n - k)!}
-}
+\TM{Propriedades}
 
-Onde:
+\begin{itemize}
+  \item \textbf{Simetria:} $\binom{n}{k} = \binom{n}{n-k}$
+  \item \textbf{Extremos:} $\binom{n}{0} = \binom{n}{n} = 1$
+  \item \textbf{Relação com arranjo:} $C(n,k) = \dfrac{A(n,k)}{k!}$
+  \item \textbf{Recursividade (Pascal):} $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$
+\end{itemize}
 
-- $n$ é o número total de elementos disponíveis.
+\TM{Exemplo — comitê de 3 entre 5 candidatos}
 
-- $k$ é o número de elementos escolhidos para cada agrupamento (com $k \leq n$).
+\M{C(5,\,3) &= \dfrac{5!}{3! \cdot 2!} = \dfrac{20}{2} = \boxed{10}}
 
-\TM{Exemplos}
+Combinações (A,B,C,D,E): ABC, ABD, ABE, ACD, ACE, ADE, BCD, BCE, BDE, CDE.
 
-Quantos comitês de 3 pessoas podem ser formados a partir de 5 candidatos?  
+% ── TRIÂNGULO DE PASCAL ─────────────────────────────────────────────────────
+\TW{Triângulo de Pascal}
 
-\quad - Ordem não importa (Ana, João, Maria = João, Maria, Ana). 
+Cada linha $n$ contém os valores $\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}$.
+Cada elemento é a \textbf{soma dos dois acima}:
 
-\quad - Sem repetição (ninguém pode ser escolhido duas vezes).  
-\[
-C(5,3) = \dfrac{5!}{3! \cdot 2!} = \dfrac{5 \cdot 4\cdot 3 \cdot 2 \cdot 1}{6 \cdot 2} 
-\] 
-\[
-\dfrac{120}{12} = 10 \text{ combinações.}
-\] 
+\begin{center}
+\begin{tabular}{rccccccccc}
+$n=0$: & & & & & 1 & & & & \\
+$n=1$: & & & & 1 & & 1 & & & \\
+$n=2$: & & & 1 & & 2 & & 1 & & \\
+$n=3$: & & 1 & & 3 & & 3 & & 1 & \\
+$n=4$: & 1 & & 4 & & 6 & & 4 & & 1 \\
+\end{tabular}
+\end{center}
 
-Lista das combinações (supondo os candidatos A, B, C, D, E): 
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small A soma dos elementos de cada linha $n$ é $2^n$ — o número
+total de subconjuntos de um conjunto com $n$ elementos.
+}}
 
-ABC, ABD, ABE, ACD, ACE, ADE, BCD, BCE, BDE, CDE.  
-
-\vspace{0.4cm}
+% ── COMBINAÇÃO COM REPETIÇÃO ────────────────────────────────────────────────
 \TW{Combinação com Repetição}
 
-A combinação com repetição é usada quando os elementos de um conjunto podem ser escolhidos mais de uma vez nos agrupamentos. Um exemplo clássico é a escolha de bolas ou sabores de sorvete, em que repetições são permitidas.
+Usada quando os elementos podem ser escolhidos \textbf{mais de uma vez}
+e a ordem não importa:
 
-A fórmula para calcular o número de combinações com repetição de $k$ elementos a partir de um conjunto com $n$ elementos distintos é:
-\Formula{
-CR(n, k) = \binom{n + k - 1}{k} = \dfrac{(n + k - 1)!}{k! \cdot (n - 1)!}
-}
+\Formula{CR(n,\,k) = \binom{n+k-1}{k} = \dfrac{(n+k-1)!}{k! \cdot (n-1)!}}
 
-\TM{Exemplo}
+\TM{Exemplo 1 — bolas com repetição de cores}
 
-Quantas combinações de 3 bolas são possíveis, escolhidas entre 4 cores diferentes, permitindo repetições?
+3 bolas entre 4 cores com repetição ($n=4$, $k=3$):
 
-Neste caso, temos $n = 4$ e $k = 3$. Aplicando a fórmula:
-$$
-CR(4, 3) = \binom{4 + 3 - 1}{3} = \binom{6}{3} = \dfrac{6!}{3! \cdot 3!}
-$$
+\M{CR(4,\,3) &= \binom{6}{3} = \dfrac{6!}{3!\cdot 3!} = \boxed{20}}
 
-Desenvolvendo os cálculos:
-$$
-\dfrac{6 \cdot 5 \cdot 4 \cdot 3!}{3! \cdot 3!} = \dfrac{6 \cdot 5 \cdot 4}{3!} = \dfrac{120}{6} = 20
-$$
+\TM{Exemplo 2 — sorvete}
 
-Portanto, há 20 combinações possíveis.
+2 bolas entre 5 sabores com repetição ($n=5$, $k=2$):
 
+\M{CR(5,\,2) &= \binom{6}{2} = \dfrac{6 \cdot 5}{2} = \boxed{15}}
+
+% ── PROBLEMAS RESOLVIDOS ────────────────────────────────────────────────────
+\TW{Problemas Resolvidos}
+
+\TM{Problema 1 — comissão com pelo menos 1 mulher}
+
+De 4 homens e 3 mulheres, comissões de 3 com pelo menos 1 mulher:
+
+\M{\text{Total} &= C(7,3) = 35}
+\M{\text{Só homens} &= C(4,3) = 4}
+\M{\text{Resultado} &= 35 - 4 = \boxed{31}}
+
+\TM{Problema 2 — senha crescente}
+
+Senhas de 4 dígitos distintos em ordem crescente com $\{1,\ldots,6\}$.
+A ordem é fixada: basta escolher 4 dígitos.
+
+\M{C(6,4) &= \dfrac{6!}{4!\cdot 2!} = \boxed{15} \text{ senhas}}
+
+\TM{Problema 3 — mesa redonda com restrição}
+
+6 pessoas em mesa redonda, A e B não podem ser adjacentes:
+
+\M{\text{Total} &= P_c(6) = 5! = 120}
+\M{\text{A e B adj.} &= P_c(5)\cdot 2! = 4!\cdot 2 = 48}
+\M{\text{Resultado} &= 120 - 48 = \boxed{72} \text{ formas}}
 
 \end{multicols}
 \input{rodape}

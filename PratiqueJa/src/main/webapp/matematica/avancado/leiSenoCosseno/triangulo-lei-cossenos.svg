@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 340 260" width="300" height="225"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-label="Triângulo ABC com ângulo A igual a 60 graus, b igual a 12 e c igual a 9">
+    <polygon points="30,210 280,210 205,60"
+             fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+    <!-- Arco em A=(280,210): L ao ponto horizontal primeiro, arc ao ponto superior -->
+    <path d="M 280,210 L 245,210 A 35,35 0 0,1 263,180 Z"
+          fill="rgba(96,165,250,0.3)" stroke="none"/>
+    <text x="286" y="215" font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">A</text>
+    <text x="200" y="48"  font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">B</text>
+    <text x="12"  y="215" font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">C</text>
+    <text x="223" y="197" font-size="18" font-weight="600"
+          fill="#666" font-family="serif">60°</text>
+    <text x="100" y="138" font-size="20" font-weight="600"
+          fill="#666" font-family="serif">a</text>
+    <text x="147" y="232" font-size="20" font-weight="600"
+          fill="#666" font-family="serif">12</text>
+    <text x="252" y="140" font-size="20" font-weight="600"
+          fill="#666" font-family="serif">9</text>
+</svg>

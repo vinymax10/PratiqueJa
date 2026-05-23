@@ -1,0 +1,590 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é subtração?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A subtração é a operação que determina a <strong>diferença</strong> entre dois números naturais.
+                    Dado \(a \geq b\), temos \(a - b = c\) onde \(c\) é o único natural tal que \(b + c = a\).
+                </div>
+                <p>Os termos da subtração têm nomes específicos:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex"><strong>Minuendo</strong> — o número do qual se subtrai (fica em cima)</div>
+                    <div class="tr-ex"><strong>Subtraendo</strong> — o número que é subtraído (fica embaixo)</div>
+                    <div class="tr-ex"><strong>Diferença</strong> — o resultado da subtração</div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> a subtração nos naturais só é possível quando o minuendo é
+                    <strong>maior ou igual</strong> ao subtraendo. Caso contrário, o resultado não é um número natural.
+                </div>
+            </div>
+
+            <!-- SUBTRAÇÃO COLUNA -->
+            <div class="tr-section" id="sec-col">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Col</div>
+                    <div>
+                        <div class="tr-section-title">Subtração em Coluna</div>
+                        <div class="tr-section-sub">Números com mais de um dígito</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Coloque o maior número em cima e o menor embaixo, alinhando os algarismos da
+                    <strong>direita para a esquerda</strong>. Subtraia coluna por coluna, da direita para a esquerda.
+                </div>
+
+                <h4>Exemplo — 186 − 53</h4>
+                <p>Subtraia cada coluna começando pelas unidades:</p>
+
+                <div style="display:flex; align-items:center; gap:1.2rem; 
+                flex-wrap:wrap; margin:1rem 0;">
+
+                    <!-- passo 1: unidades -->
+                    <table style="border-collapse:collapse; font-size:1.35rem;">
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">8</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">6</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">5</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">3</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">3</td>
+                        </tr>
+                    </table>
+
+                    <span style="font-size:1.6rem; color:#94a3b8; font-weight:300;">⟹</span>
+
+                    <!-- passo 2: dezenas -->
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">8</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">6</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">5</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">3</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">3</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">3</td>
+                        </tr>
+                    </table>
+
+                    <span style="font-size:1.6rem; color:#94a3b8; font-weight:300;">⟹</span>
+
+                    <!-- passo 3: centenas -->
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">8</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">6</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">5</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">3</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">1</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">3</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">3</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <p>Resultado: \(186 - 53 = \mathbf{133}\)</p>
+            </div>
+
+            <!-- EMPRÉSTIMO -->
+            <div class="tr-section" id="sec-emp">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Emp</div>
+                    <div>
+                        <div class="tr-section-title">Empréstimo (Reagrupamento)</div>
+                        <div class="tr-section-sub">Quando o dígito de cima é menor que o de baixo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando o dígito de cima é <strong>menor</strong> que o de baixo, empresta-se
+                    <strong>1 unidade da coluna à esquerda</strong>. Isso acrescenta <strong>10</strong>
+                    ao dígito atual, permitindo realizar a subtração. O dígito emprestado fica riscado.
+                </div>
+
+                <h4>Exemplo — 332 − 14</h4>
+                <p>Unidades: 2 &lt; 4 → necessário emprestar. Dezenas: 3 → empresta 1 → vira 2. Unidades: 10 + 2 = 12.</p>
+
+                <div style="display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; margin:1rem 0;">
+
+                    <!-- passo 1: empréstimo nas unidades -->
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                   		<tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span style="">2</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">3</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                            
+                                <span style="color:#ec4899; text-decoration:line-through;">3</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">
+                                12
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">4</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">8</td>
+                        </tr>
+                    </table>
+
+                    <span style="font-size:1.6rem; color:#94a3b8; font-weight:300;">⟹</span>
+
+                    <!-- passo 2: dezenas -->
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                    	<tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span style="color:#4f46e5;">2</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">3</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; ">
+                                <span style=" text-decoration:line-through;">3</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                12
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">4</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">1</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">8</td>
+                        </tr>
+                    </table>
+
+                    <span style="font-size:1.6rem; color:#94a3b8; font-weight:300;">⟹</span>
+
+                    <!-- passo 3: centenas -->
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                    	<tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span style="">2</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">3</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span style="text-decoration:line-through;">3</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                12
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">1</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">4</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px; color:#4f46e5;">3</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">1</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">8</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <p>Resultado: \(332 - 14 = \mathbf{318}\)</p>
+
+                <div class="tr-note">
+                    <strong>Lembre-se:</strong> o dígito riscado (em rosa) indica que a coluna cedeu 1 unidade
+                    à direita. O <sup style="color:#4f46e5; font-size:0.8em;">1</sup> pequeno antes do dígito
+                    da direita representa a dezena recebida pelo empréstimo.
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Prop</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades da Subtração</div>
+                        <div class="tr-section-sub">Diferenças em relação à adição</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A subtração <strong>não é comutativa</strong> nem <strong>associativa</strong>.
+                    Esses fatos a distinguem fundamentalmente da adição.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex"><strong>Elemento neutro à direita:</strong> \(a - 0 = a\) &#160;→&#160; \(7 - 0 = 7\)</div>
+                    <div class="tr-ex"><strong>Subtração de si mesmo:</strong> \(a - a = 0\) &#160;→&#160; \(15 - 15 = 0\)</div>
+                    <div class="tr-ex"><strong>Não comutativa:</strong> \(8 - 3 = 5\), mas \(3 - 8\) não é natural</div>
+                    <div class="tr-ex span-full"><strong>Não associativa:</strong> \((9-4)-2 = 3\), mas \(9-(4-2) = 7\) — os parênteses importam!</div>
+                </div>
+            </div>
+
+            <!-- PROVA REAL -->
+            <div class="tr-section" id="sec-prova">
+                <div class="tr-section-header">
+                    <div class="tr-badge">PR</div>
+                    <div>
+                        <div class="tr-section-title">Prova Real da Subtração</div>
+                        <div class="tr-section-sub">Verificando o resultado pela adição</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A subtração é a operação inversa da adição. Se \(a - b = c\), então
+                    \(c + b = a\). Some a diferença com o subtraendo: o resultado deve ser o minuendo.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        Resultado: \(186 - 53 = 133\)<br/>
+                        Prova: \(133 + 53 = 186\) ✓
+                    </div>
+                    <div class="tr-ex">
+                        Resultado: \(332 - 14 = 318\)<br/>
+                        Prova: \(318 + 14 = 332\) ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMPRÉSTIMO COM ZEROS -->
+            <div class="tr-section" id="sec-zeros">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">0s</div>
+                    <div>
+                        <div class="tr-section-title">Empréstimo com Zeros</div>
+                        <div class="tr-section-sub">Quando a coluna vizinha é zero</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando o dígito da coluna vizinha é <strong>zero</strong>, não é possível emprestar
+                    diretamente. O empréstimo deve ser buscado em uma coluna mais à esquerda —
+                    o processo se <strong>propaga em cascata</strong>.
+                </div>
+
+                <h4>Exemplo — 500 − 237</h4>
+                <p>Unidades: 0 &lt; 7 → quer emprestar das dezenas, mas dezenas = 0.
+                Solução: centenas cedem 1 às dezenas; dezenas viram 10, cedem 1 às unidades e ficam com 9.</p>
+
+                <div style="display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; margin:1rem 0;">
+                    <table style="border-collapse:collapse;font-size:1.35rem;">
+                    	<tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span >4</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span >9</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">
+                                <span style="color:#ec4899; text-decoration:line-through;">5</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; color:#4f46e5;">
+                                <span style="color:#ec4899; text-decoration:line-through;">10</span>
+                            </td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px; ">
+                                10
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 8px; text-align:left; min-width:28px;">−</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">2</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">3</td>
+                            <td style="padding:2px 8px; text-align:right; min-width:28px;">7</td>
+                        </tr>
+                        <tr style="border-top:2.5px solid #334155;">
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;"></td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">2</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">6</td>
+                            <td style="padding:4px 8px; text-align:right; min-width:28px;">3</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex">Unidades: \(10 - 7 = 3\)</div>
+                    <div class="tr-ex">Dezenas: \(9 - 3 = 6\)</div>
+                    <div class="tr-ex">Centenas: \(4 - 2 = 2\)</div>
+                    <div class="tr-ex">Prova real: \(263 + 237 = 500\) ✓</div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Regra prática:</strong> ao encontrar um zero no caminho do empréstimo,
+                    continue buscando à esquerda até achar um dígito diferente de zero. Depois redistribua
+                    de volta para a direita, coluna a coluna.
+                </div>
+            </div>
+
+            <!-- TABUADA -->
+            <div class="tr-section" id="sec-tab">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Tabuada de Subtração</div>
+                        <div class="tr-section-sub">Subtraendos de 1 a 10 — formato equação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Cada coluna mostra a tabuada de um subtraendo. Leia linha por linha:
+                    <strong>minuendo − subtraendo = diferença</strong>.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+
+                    <!-- col 1 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 1</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            2 − 1 = <strong>1</strong><br/>
+                            3 − 1 = <strong>2</strong><br/>
+                            4 − 1 = <strong>3</strong><br/>
+                            5 − 1 = <strong>4</strong><br/>
+                            6 − 1 = <strong>5</strong><br/>
+                            7 − 1 = <strong>6</strong><br/>
+                            8 − 1 = <strong>7</strong><br/>
+                            9 − 1 = <strong>8</strong><br/>
+                            10 − 1 = <strong>9</strong><br/>
+                            11 − 1 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 2 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 2</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            3 − 2 = <strong>1</strong><br/>
+                            4 − 2 = <strong>2</strong><br/>
+                            5 − 2 = <strong>3</strong><br/>
+                            6 − 2 = <strong>4</strong><br/>
+                            7 − 2 = <strong>5</strong><br/>
+                            8 − 2 = <strong>6</strong><br/>
+                            9 − 2 = <strong>7</strong><br/>
+                            10 − 2 = <strong>8</strong><br/>
+                            11 − 2 = <strong>9</strong><br/>
+                            12 − 2 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 3 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 3</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            4 − 3 = <strong>1</strong><br/>
+                            5 − 3 = <strong>2</strong><br/>
+                            6 − 3 = <strong>3</strong><br/>
+                            7 − 3 = <strong>4</strong><br/>
+                            8 − 3 = <strong>5</strong><br/>
+                            9 − 3 = <strong>6</strong><br/>
+                            10 − 3 = <strong>7</strong><br/>
+                            11 − 3 = <strong>8</strong><br/>
+                            12 − 3 = <strong>9</strong><br/>
+                            13 − 3 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 4 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 4</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            5 − 4 = <strong>1</strong><br/>
+                            6 − 4 = <strong>2</strong><br/>
+                            7 − 4 = <strong>3</strong><br/>
+                            8 − 4 = <strong>4</strong><br/>
+                            9 − 4 = <strong>5</strong><br/>
+                            10 − 4 = <strong>6</strong><br/>
+                            11 − 4 = <strong>7</strong><br/>
+                            12 − 4 = <strong>8</strong><br/>
+                            13 − 4 = <strong>9</strong><br/>
+                            14 − 4 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 5 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 5</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            6 − 5 = <strong>1</strong><br/>
+                            7 − 5 = <strong>2</strong><br/>
+                            8 − 5 = <strong>3</strong><br/>
+                            9 − 5 = <strong>4</strong><br/>
+                            10 − 5 = <strong>5</strong><br/>
+                            11 − 5 = <strong>6</strong><br/>
+                            12 − 5 = <strong>7</strong><br/>
+                            13 − 5 = <strong>8</strong><br/>
+                            14 − 5 = <strong>9</strong><br/>
+                            15 − 5 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 6 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 6</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            7 − 6 = <strong>1</strong><br/>
+                            8 − 6 = <strong>2</strong><br/>
+                            9 − 6 = <strong>3</strong><br/>
+                            10 − 6 = <strong>4</strong><br/>
+                            11 − 6 = <strong>5</strong><br/>
+                            12 − 6 = <strong>6</strong><br/>
+                            13 − 6 = <strong>7</strong><br/>
+                            14 − 6 = <strong>8</strong><br/>
+                            15 − 6 = <strong>9</strong><br/>
+                            16 − 6 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 7 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 7</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            8 − 7 = <strong>1</strong><br/>
+                            9 − 7 = <strong>2</strong><br/>
+                            10 − 7 = <strong>3</strong><br/>
+                            11 − 7 = <strong>4</strong><br/>
+                            12 − 7 = <strong>5</strong><br/>
+                            13 − 7 = <strong>6</strong><br/>
+                            14 − 7 = <strong>7</strong><br/>
+                            15 − 7 = <strong>8</strong><br/>
+                            16 − 7 = <strong>9</strong><br/>
+                            17 − 7 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 8 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 8</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            9 − 8 = <strong>1</strong><br/>
+                            10 − 8 = <strong>2</strong><br/>
+                            11 − 8 = <strong>3</strong><br/>
+                            12 − 8 = <strong>4</strong><br/>
+                            13 − 8 = <strong>5</strong><br/>
+                            14 − 8 = <strong>6</strong><br/>
+                            15 − 8 = <strong>7</strong><br/>
+                            16 − 8 = <strong>8</strong><br/>
+                            17 − 8 = <strong>9</strong><br/>
+                            18 − 8 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 9 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 9</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            10 − 9 = <strong>1</strong><br/>
+                            11 − 9 = <strong>2</strong><br/>
+                            12 − 9 = <strong>3</strong><br/>
+                            13 − 9 = <strong>4</strong><br/>
+                            14 − 9 = <strong>5</strong><br/>
+                            15 − 9 = <strong>6</strong><br/>
+                            16 − 9 = <strong>7</strong><br/>
+                            17 − 9 = <strong>8</strong><br/>
+                            18 − 9 = <strong>9</strong><br/>
+                            19 − 9 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 10 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 10</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            11 − 10 = <strong>1</strong><br/>
+                            12 − 10 = <strong>2</strong><br/>
+                            13 − 10 = <strong>3</strong><br/>
+                            14 − 10 = <strong>4</strong><br/>
+                            15 − 10 = <strong>5</strong><br/>
+                            16 − 10 = <strong>6</strong><br/>
+                            17 − 10 = <strong>7</strong><br/>
+                            18 − 10 = <strong>8</strong><br/>
+                            19 − 10 = <strong>9</strong><br/>
+                            20 − 10 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

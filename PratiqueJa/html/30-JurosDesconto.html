@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juros e Desconto</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+    }
+
+    .hero-header {
+      background: linear-gradient(135deg, #064e3b 0%, #059669 60%, #10b981 100%);
+      color: white;
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .hero-header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .hero-header p  { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.85; }
+
+    .content { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem 3rem; }
+
+    h2 { font-size: 1.6rem; color: #064e3b; border-bottom: 3px solid #059669; padding-bottom: 0.4rem; margin: 2rem 0 0.75rem; }
+    h3 { font-size: 1.25rem; color: #059669; margin: 1.5rem 0 0.5rem; }
+    p  { line-height: 1.75; margin-bottom: 1rem; font-size: 1.05rem; }
+
+    .theorem-box {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border-left: 5px solid #059669;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 10px rgba(5,150,105,0.12);
+    }
+    .theorem-box .theorem-title { font-weight: 700; color: #064e3b; font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+    .formula-box {
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border-left: 5px solid #10b981;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(16,185,129,0.12);
+    }
+
+    .example-box {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .example-box .example-title { font-weight: 700; color: #7c3aed; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+
+    .note-box {
+      background: #fffbeb;
+      border-left: 5px solid #f59e0b;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #374151;
+    }
+    .note-box strong { color: #92400e; }
+
+    .math-steps { background: #fff; border-radius: 10px; padding: 1rem 1.5rem; margin: 1rem 0; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .math-steps p { margin-bottom: 0.4rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 0.4rem; }
+    .math-steps p:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .var-list { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 1rem; margin: 0.75rem 0 1rem; font-size: 1rem; }
+    .var-list dt { font-weight: 700; color: #059669; }
+    .var-list dd { color: #374151; }
+
+    mjx-container[display="true"] { margin: 1rem 0 !important; overflow-x: auto; }
+
+    @media (max-width: 600px) {
+      .hero-header h1 { font-size: 1.8rem; }
+      .content { padding: 0 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-header">
+  <h1>Juros e Desconto</h1>
+  <p>Matemática · Nível Avançado · Matemática Financeira</p>
+</div>
+
+<div class="content">
+
+  <!-- ── Juros Simples ── -->
+  <h2>Juros Simples</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">O que são Juros Simples?</div>
+    <p>No juros simples, o valor dos juros é calculado <strong>apenas sobre o capital inicial</strong>
+    durante todo o período. Os juros não se acumulam sobre os juros já calculados — a base de cálculo
+    é sempre o valor original.</p>
+  </div>
+
+  <div class="formula-box">
+    \[J = C \cdot i \cdot t\]
+  </div>
+
+  <dl class="var-list">
+    <dt>\(J\)</dt><dd>juros simples</dd>
+    <dt>\(C\)</dt><dd>capital inicial (valor principal)</dd>
+    <dt>\(i\)</dt><dd>taxa de juros por período (em decimal)</dd>
+    <dt>\(t\)</dt><dd>tempo de aplicação (mesmo período da taxa)</dd>
+  </dl>
+
+  <h3>Montante</h3>
+  <p>O montante \(M\) é o valor total ao final da aplicação: capital mais juros.</p>
+
+  <div class="formula-box">
+    \[M = C + J = C \cdot (1 + i \cdot t)\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Investimento de R$ 1.000,00 a 5% ao mês por 6 meses:</p>
+    <div class="math-steps">
+      <p>\(J = 1000 \cdot 0{,}05 \cdot 6 = \mathbf{300)</p>
+      <p>\(M = 1000 + 300 =\) <strong>R$ 1.300,00</strong></p>
+    </div>
+  </div>
+
+  <!-- ── Juros Compostos ── -->
+  <h2>Juros Compostos</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">O que são Juros Compostos?</div>
+    <p>Nos juros compostos, o valor dos juros é calculado sobre o <strong>capital inicial e também
+    sobre os juros acumulados</strong> de períodos anteriores. A cada período o montante se torna
+    o novo capital — os juros geram mais juros.</p>
+  </div>
+
+  <div class="formula-box">
+    \[M = C \cdot (1 + i)^t\]
+  </div>
+
+  <dl class="var-list">
+    <dt>\(M\)</dt><dd>montante final</dd>
+    <dt>\(C\)</dt><dd>capital inicial</dd>
+    <dt>\(i\)</dt><dd>taxa de juros por período (em decimal)</dd>
+    <dt>\(t\)</dt><dd>tempo (número de períodos)</dd>
+  </dl>
+
+  <p>O juros composto total é obtido por:</p>
+  <div class="formula-box">
+    \[J = M - C\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Investimento de R$ 1.000,00 a 10% ao ano por 2 anos:</p>
+    <div class="math-steps">
+      <p>\(M = 1000 \cdot (1 + 0{,}10)^2\)</p>
+      <p>\(M = 1000 \cdot (1{,}1)^2 = 1000 \cdot 1{,}21\)</p>
+      <p>\(M =\) <strong>R$ 1.210,00</strong></p>
+    </div>
+  </div>
+
+  <!-- ── Taxas Proporcionais e Equivalentes ── -->
+  <h2>Taxas Proporcionais e Equivalentes</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Conversão de taxas entre períodos</div>
+    <p><strong>Taxas proporcionais</strong> são usadas no regime de juros simples — conversão por regra de três.
+    <strong>Taxas equivalentes</strong> são usadas no regime de juros compostos — conversão por potenciação.</p>
+  </div>
+
+  <h3>Taxas Proporcionais — Juros Simples</h3>
+  <div class="formula-box">
+    \[i_2 = i_1 \cdot \frac{t_2}{t_1}\]
+  </div>
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Taxa mensal de 3% → taxa anual proporcional:</p>
+    <div class="math-steps">
+      <p>\(i_a = 3\% \times 12 = 36\%\) ao ano</p>
+    </div>
+  </div>
+
+  <h3>Taxas Equivalentes — Juros Compostos</h3>
+  <div class="formula-box">
+    \[(1 + i_a) = (1 + i_m)^{12}\]
+  </div>
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Taxa anual de 26,82% → taxa mensal equivalente:</p>
+    <div class="math-steps">
+      <p>\((1 + 0{,}2682) = (1 + i_m)^{12)</p>
+      <p>\(i_m = (1{,}2682)^{1/12} - 1 \approx 0{,}02\)</p>
+      <p>\(i_m \approx \mathbf{2\%) ao mês</p>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Atenção:</strong> nunca converta taxas de juros compostos por regra de três — isso gera erro.
+    Use sempre a fórmula de equivalência.
+  </div>
+
+  <!-- ── Desconto Simples ── -->
+  <h2>Desconto Simples</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">O que é Desconto Simples?</div>
+    <p>O desconto simples calcula a <strong>redução linear</strong> no valor nominal de um título,
+    aplicada diretamente sobre o valor de face. O desconto não incide sobre desconto anterior —
+    a base de cálculo é sempre o valor nominal.</p>
+  </div>
+
+  <div class="formula-box">
+    \[D = N \cdot i \cdot t\]
+  </div>
+
+  <dl class="var-list">
+    <dt>\(D\)</dt><dd>desconto</dd>
+    <dt>\(N\)</dt><dd>valor nominal do título</dd>
+    <dt>\(i\)</dt><dd>taxa de desconto por período (em decimal)</dd>
+    <dt>\(t\)</dt><dd>tempo (prazo até o vencimento)</dd>
+  </dl>
+
+  <h3>Valor Atual</h3>
+  <p>O valor atual \(A\) é o que o devedor paga antecipadamente, após o desconto:</p>
+
+  <div class="formula-box">
+    \[A = N - D = N \cdot (1 - i \cdot t)\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Título de R$ 1.000,00, taxa de desconto 10% ao ano, prazo de 1 ano:</p>
+    <div class="math-steps">
+      <p>\(D = 1000 \cdot 0{,}10 \cdot 1 = \mathbf{100)</p>
+      <p>\(A = 1000 - 100 =\) <strong>R$ 900,00</strong></p>
+    </div>
+  </div>
+
+  <!-- ── Desconto Composto ── -->
+  <h2>Desconto Composto</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">O que é Desconto Composto?</div>
+    <p>No desconto composto, o desconto é aplicado de forma <strong>sucessiva a cada período</strong>
+    sobre o saldo remanescente — a base de cálculo diminui progressivamente. É o inverso do
+    regime de juros compostos.</p>
+  </div>
+
+  <div class="formula-box">
+    \[A = N \cdot (1 - i)^t\]
+  </div>
+
+  <dl class="var-list">
+    <dt>\(A\)</dt><dd>valor atual (recebido após o desconto)</dd>
+    <dt>\(N\)</dt><dd>valor nominal (total a pagar no vencimento)</dd>
+    <dt>\(i\)</dt><dd>taxa de desconto por período (em decimal)</dd>
+    <dt>\(t\)</dt><dd>tempo (número de períodos)</dd>
+  </dl>
+
+  <p>O desconto total aplicado é:</p>
+  <div class="formula-box">
+    \[D = N - A\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo</div>
+    <p>Título de R$ 5.000,00 com desconto composto de 5% ao mês por 3 meses:</p>
+    <div class="math-steps">
+      <p>\(A = 5000 \cdot (1 - 0{,}05)^3 = 5000 \cdot (0{,}95)^3\)</p>
+      <p>\(A = 5000 \cdot 0{,}857375 \approx\) <strong>R$ 4.287,00</strong></p>
+      <p>\(D = 5000 - 4287 =\) <strong>R$ 713,00</strong></p>
+    </div>
+  </div>
+
+  <!-- ── Desconto por Fora vs. por Dentro ── -->
+  <h2>Desconto por Fora vs. por Dentro</h2>
+
+  <div class="theorem-box">
+    <div class="theorem-title">Desconto Comercial e Desconto Racional</div>
+    <p>O <strong>desconto por fora (comercial)</strong> incide sobre o valor nominal \(N\).
+    O <strong>desconto por dentro (racional)</strong> incide sobre o valor atual \(A\) —
+    equivale a juros simples sobre o capital antecipado.</p>
+  </div>
+
+  <h3>Desconto Comercial (por fora)</h3>
+  <div class="formula-box">
+    \[D_{\text{fora}} = N \cdot i \cdot t \qquad A = N \cdot (1 - i \cdot t)\]
+  </div>
+
+  <h3>Desconto Racional (por dentro)</h3>
+  <div class="formula-box">
+    \[D_{\text{dentro}} = A \cdot i \cdot t \qquad A = \frac{N}{1 + i \cdot t}\]
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Exemplo Comparativo — Título R$ 1.000,00, 10% a.a., 1 ano</div>
+    <div class="math-steps">
+      <p><strong>Por fora:</strong> \(A = 1000 \cdot (1 - 0{,}10) =\) <strong>R$ 900,00</strong></p>
+      <p><strong>Por dentro:</strong> \(A = \dfrac{1000}{1 + 0{,}10} \approx\) <strong>R$ 909,09</strong></p>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Regra:</strong> o desconto comercial é mais vantajoso para o credor (banco).
+    O desconto racional é mais vantajoso para o devedor. Em títulos de longo prazo a diferença é significativa.
+  </div>
+
+  <!-- ── Problemas ── -->
+  <h2>Problemas Contextualizados</h2>
+
+  <div class="example-box">
+    <div class="example-title">Problema 1 — Juros Simples</div>
+    <p>Um comerciante tomou R$ 8.000,00 a juros simples de 4% ao mês. Após 5 meses, qual o montante?</p>
+    <div class="math-steps">
+      <p>\(J = 8000 \cdot 0{,}04 \cdot 5 = 1600\)</p>
+      <p>\(M = 8000 + 1600 =\) <strong>R$ 9.600,00</strong></p>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Problema 2 — Juros Compostos</div>
+    <p>Quanto rende R$ 2.000,00 a 12% ao ano (composto) em 3 anos?</p>
+    <div class="math-steps">
+      <p>\(M = 2000 \cdot (1{,}12)^3 = 2000 \cdot 1{,}404928\)</p>
+      <p>\(M \approx\) <strong>R$ 2.809,86</strong> &nbsp;→&nbsp; Juros = R$ 809,86</p>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="example-title">Problema 3 — Desconto Comercial</div>
+    <p>Uma duplicata de R$ 3.500,00 com vencimento em 90 dias é descontada comercialmente a 3% ao mês.
+    Qual o valor líquido recebido?</p>
+    <div class="math-steps">
+      <p>90 dias = 3 meses</p>
+      <p>\(D = 3500 \cdot 0{,}03 \cdot 3 = 315\)</p>
+      <p>\(A = 3500 - 315 =\) <strong>R$ 3.185,00</strong></p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

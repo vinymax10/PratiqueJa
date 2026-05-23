@@ -13,22 +13,55 @@
 
 \begin{multicols}{2}
 
-\vspace{0.4cm}
-\TW{Descrição} 
+% ── DESCRIÇÃO ──────────────────────────────────────────────────────────────
+\TW{Descrição}
 
-As leis dos senos e dos cossenos são fundamentais na trigonometria para resolver triângulos, especialmente os não retângulos, permitindo calcular lados e ângulos quando o Teorema de Pitágoras não pode ser utilizado.
+As leis dos senos e dos cossenos são fundamentais para resolver triângulos
+\textbf{não retângulos}, permitindo calcular lados e ângulos quando o Teorema de
+Pitágoras não pode ser utilizado.
 
-\vspace{0.4cm}
+Em qualquer triângulo $ABC$: o lado $a$ é oposto ao ângulo $A$, o lado $b$
+é oposto ao ângulo $B$ e o lado $c$ é oposto ao ângulo $C$.
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Propriedade fundamental:} $A + B + C = 180°$.
+Após encontrar dois ângulos, o terceiro é imediato:
+$C = 180° - A - B$.
+}}
+
+% ── GUIA DE ESCOLHA ────────────────────────────────────────────────────────
+\TW{Quando Usar Cada Lei}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Caso} & \textbf{Dados} & \textbf{Lei} \\ \hline
+AAS / ASA & 2 ângulos + 1 lado & \textbf{Senos} \\ \hline
+SSA & 2 lados + ângulo oposto & \textbf{Senos}* \\ \hline
+LAL & 2 lados + ângulo entre eles & \textbf{Cossenos} \\ \hline
+LLL & 3 lados & \textbf{Cossenos} inv. \\ \hline
+\end{tabular}
+\end{center}
+
+{\small *Atenção: possível caso ambíguo.}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Estratégia:} após encontrar um elemento com a lei adequada,
+use $A + B + C = 180°$ e a Lei dos Senos para completar os demais.
+}}
+
+% ── LEI DOS SENOS ──────────────────────────────────────────────────────────
 \TW{Lei dos Senos}
 
-A Lei dos Senos relaciona os comprimentos dos lados de um triângulo com os senos de seus ângulos opostos. Em qualquer triângulo \(ABC\), com lados \(a\), \(b\), e \(c\) opostos aos ângulos \(A\), \(B\) e \(C\), a Lei dos Senos é expressa por:
+Em qualquer triângulo $ABC$, a razão entre cada lado e o seno do ângulo
+oposto é constante e igual a $2R$ (diâmetro da circunferência circunscrita):
 
 \Formula{
-\dfrac{a}{sen~ A} = \dfrac{b}{sen~ B} = \dfrac{c}{sen~ C}
+\dfrac{a}{\text{sen}~A} = \dfrac{b}{\text{sen}~B} = \dfrac{c}{\text{sen}~C} = 2R
 }
 
-\vspace{-0.2cm}
-\TM{Exemplo:}
+\TM{Exemplo — resolução completa (caso AAS):}
 
 \begin{center}
 \begin{tikzpicture}
@@ -45,39 +78,56 @@ A Lei dos Senos relaciona os comprimentos dos lados de um triângulo com os seno
 \end{scope}
 \draw[line] (0,0) -- (5,0) -- (1,3) -- cycle;
 
-\node[texto] at (4,0.3) {\textbf{\textbf{30°}}};
-\node[texto] at (5.2,0) {\textbf{\textbf{A}}};
-\node[texto] at (1,3.2) {\textbf{\textbf{B}}};
-\node[texto] at (-0.2,0) {\textbf{\textbf{C}}};
+\node[texto] at (4,0.3) {\textbf{30°}};
+\node[texto] at (5.2,0) {\textbf{A}};
+\node[texto] at (1,3.2) {\textbf{B}};
+\node[texto] at (-0.2,0) {\textbf{C}};
 \node[texto] at (0.3,1.5) {\textbf{7}};
 \node[texto] at (2.3,-0.3) {\textbf{10}};
 \end{tikzpicture}
 \end{center}
-\vspace{-0.3cm}
-Nesse triângulo temos, \(a=7\), \(b=10\) e \(A = 30^\circ\).
-Para encontrar o ângulo \(B\) temos:
 
-\[
-\dfrac{7}{sen~ 30^\circ} = \dfrac{10}{sen~ B}
-\]
+Dados $a=7$, $b=10$ e $A = 30°$. Resolver o triângulo completamente:
 
-\M{7 \cdot sen~ B &= 10 \cdot sen~ 30^\circ = 10 \cdot \dfrac{1}{2}}
-\M{7 \cdot sen~ B &= 5}
-\M{sen~ B &= \dfrac{5}{7} \approx 0.7143}
-\M{B &\approx sen~^{-1}(0.7143) \approx 45.57^\circ}
+\TM{Passo 1 — encontrar B:}
+\M{\dfrac{7}{\text{sen}~30°} &= \dfrac{10}{\text{sen}~B}}
+\M{\text{sen}~B &= \dfrac{10 \cdot \frac{1}{2}}{7} = \dfrac{5}{7} \approx 0{,}7143}
+\M{B &\approx \boxed{45{,}57°}}
 
+\TM{Passo 2 — encontrar C:}
+\M{C &= 180° - 30° - 45{,}57° \approx \boxed{104{,}43°}}
+
+\TM{Passo 3 — encontrar c:}
+\M{\dfrac{7}{\text{sen}~30°} &= \dfrac{c}{\text{sen}~104{,}43°}}
+\M{c &= \dfrac{7 \cdot 0{,}9686}{0{,}5} \approx \boxed{13{,}56}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Caso ambíguo (SSA):} podem existir 0, 1 ou 2 triângulos válidos.
+Verifique se $\text{sen}~B \leq 1$ e considere $B' = 180° - B$ quando
+$B$ é agudo e $a < b$.
+}}
+
+% ── LEI DOS COSSENOS ───────────────────────────────────────────────────────
 \TW{Lei dos Cossenos}
 
-A Lei dos Cossenos é usada para calcular um lado de um triângulo quando os outros dois lados e o ângulo entre eles são conhecidos, ou para determinar um ângulo quando todos os lados do triângulo são conhecidos.
-Em um triângulo \(ABC\), a Lei dos Cossenos é expressa por:
+Usada quando há dois lados e o ângulo entre eles (LAL) ou os três lados (LLL):
 
-\Formula{
-a^2 = b^2 + c^2 - 2bc \cdot \cos A
-}
+\Formula{a^2 = b^2 + c^2 - 2bc \cdot \cos A}
 
-\vspace{-0.2cm}
-\TM{Exemplo:}
-\vspace{-0.3cm}
+As formas análogas: $b^2 = a^2 + c^2 - 2ac \cdot \cos B$ e
+$c^2 = a^2 + b^2 - 2ab \cdot \cos C$.
+
+\TM{Forma inversa — encontrar ângulo:}
+
+\Formula{\cos A = \dfrac{b^2 + c^2 - a^2}{2bc}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Caso especial:} quando $A = 90°$, $\cos 90° = 0$ e a Lei dos
+Cossenos reduz-se ao Teorema de Pitágoras: $a^2 = b^2 + c^2$.
+}}
+
+\TM{Exemplo 1 — encontrar lado $a$ (caso LAL):}
+
 \begin{center}
 \begin{tikzpicture}
 \tikzstyle{texto}=[draw=none,fill=none,black!60!white]
@@ -90,24 +140,41 @@ a^2 = b^2 + c^2 - 2bc \cdot \cos A
 
 \draw[line] (0,0) -- (5,0) -- (3.5,3) -- cycle;
 
-\node[texto] at (4.2,0.5) {\textbf{\textbf{60°}}};
-\node[texto] at (5.2,0) {\textbf{\textbf{A}}};
-\node[texto] at (3.5,3.2) {\textbf{\textbf{B}}};
-\node[texto] at (-0.2,0) {\textbf{\textbf{C}}};
+\node[texto] at (4.2,0.5) {\textbf{60°}};
+\node[texto] at (5.2,0) {\textbf{A}};
+\node[texto] at (3.5,3.2) {\textbf{B}};
+\node[texto] at (-0.2,0) {\textbf{C}};
 \node[texto] at (1.5,1.7) {\textbf{a}};
 \node[texto] at (2.3,-0.3) {\textbf{12}};
 \node[texto] at (4.5,1.6) {\textbf{9}};
 \end{tikzpicture}
 \end{center}
-\vspace{-0.3cm}
-Nesse triângulo temos, \(b = 12\), \(c = 9\) e \(A = 60^\circ\). Sabemos que \(\cos~60^\circ = \frac{1}{2}\).
 
-Para encontrar o valor de \(a\) temos:
+Dados $b=12$, $c=9$ e $A = 60°$:
 
-\M{a^2 &= 12^2 + 9^2 - 2 \cdot 12 \cdot 9 \cdot \cos~60^\circ}
-\M{a^2 &= 144 + 81 - 216 \cdot \dfrac{1}{2}}
-\M{a^2 &= 225 - 108 = 117}
-\M{a &= \sqrt{117}\approx 10,81}
+\M{a^2 &= 12^2 + 9^2 - 2 \cdot 12 \cdot 9 \cdot \dfrac{1}{2}}
+\M{a^2 &= 144 + 81 - 108 = 117}
+\M{a &= \sqrt{117} \approx \boxed{10{,}82}}
+
+Para completar o triângulo pela Lei dos Senos:
+
+\M{\text{sen}~B &= \dfrac{12 \cdot \text{sen}~60°}{10{,}82} \approx 0{,}960}
+\M{B &\approx 73{,}78° \quad C \approx \boxed{46{,}22°}}
+
+\TM{Exemplo 2 — encontrar ângulo $A$ (caso LLL):}
+
+Dados $a=8$, $b=6$ e $c=7$. Resolver pelo maior ângulo:
+
+\M{\cos A &= \dfrac{6^2 + 7^2 - 8^2}{2 \cdot 6 \cdot 7} = \dfrac{21}{84} = \dfrac{1}{4}}
+\M{A &\approx \boxed{75{,}52°}}
+
+Pela Lei dos Senos: $B \approx 46{,}57°$ e $C \approx 57{,}91°$.
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small No caso LLL, resolva sempre o \textbf{maior ângulo primeiro}
+(oposto ao maior lado) — ele nunca gera caso ambíguo ao usar os Senos
+nos demais ângulos.
+}}
 
 \end{multicols}
 \input{rodape}

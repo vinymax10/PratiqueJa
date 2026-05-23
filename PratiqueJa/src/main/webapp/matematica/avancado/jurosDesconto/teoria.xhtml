@@ -1,0 +1,317 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- JUROS SIMPLES -->
+            <div class="tr-section" id="sec-js">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">JS</div>
+                    <div>
+                        <div class="tr-section-title">Juros Simples</div>
+                        <div class="tr-section-sub">Juros calculados apenas sobre o capital inicial</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    No juros simples, o valor dos juros é calculado <strong>apenas sobre o capital inicial</strong>
+                    durante todo o período. A base de cálculo não muda — os juros não geram novos juros.
+                </div>
+                <p>A fórmula dos juros simples é:</p>
+                \[J = C \cdot i \cdot t\]
+                <div class="tr-examples">
+                    <div class="tr-ex">\(J\) — juros simples</div>
+                    <div class="tr-ex">\(C\) — capital inicial (valor principal)</div>
+                    <div class="tr-ex">\(i\) — taxa de juros por período (em decimal)</div>
+                    <div class="tr-ex">\(t\) — tempo (mesmo período da taxa)</div>
+                </div>
+
+                <h4>Montante</h4>
+                <p>O montante \(M\) é o valor total ao final: capital mais juros.</p>
+                \[M = C + J = C \cdot (1 + i \cdot t)\]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo</strong> — R$ 1.000,00 a 5% a.m. por 6 meses</span>
+                        <span>\(J = 1000 \cdot 0,05 \cdot 6 = 300\)</span>
+                        <span>\(M = 1000 + 300\)</span>
+                        <span class="hl">R$ 1.300,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUROS COMPOSTOS -->
+            <div class="tr-section" id="sec-jc">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">JC</div>
+                    <div>
+                        <div class="tr-section-title">Juros Compostos</div>
+                        <div class="tr-section-sub">Juros sobre capital + juros acumulados</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Nos juros compostos, a cada período o montante (capital + juros acumulados) torna-se
+                    o novo capital. Os <strong>juros geram mais juros</strong> — o crescimento é exponencial.
+                </div>
+                <p>A fórmula do montante composto é:</p>
+                \[M = C \cdot (1 + i)^t\]
+                <div class="tr-examples">
+                    <div class="tr-ex">\(M\) — montante final</div>
+                    <div class="tr-ex">\(C\) — capital inicial</div>
+                    <div class="tr-ex">\(i\) — taxa de juros por período (em decimal)</div>
+                    <div class="tr-ex">\(t\) — número de períodos</div>
+                </div>
+                <p>O juros composto total é:</p>
+                \[J = M - C\]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo</strong> — R$ 1.000,00 a 10% a.a. por 2 anos</span>
+                        <span>\(M = 1000 \cdot (1 + 0,10)^2 = 1000 \cdot (1,1)^2\)</span>
+                        <span>\(M = 1000 \cdot 1,21\)</span>
+                        <span class="hl">R$ 1.210,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARATIVO JS x JC -->
+            <div class="tr-section" id="sec-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">JS×JC</div>
+                    <div>
+                        <div class="tr-section-title">Comparativo: Simples × Composto</div>
+                        <div class="tr-section-sub">Quando usar cada regime</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para \(t = 1\) período, juros simples e compostos produzem o mesmo resultado.
+                    Para \(t &gt; 1\), os juros compostos sempre superam os simples.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex"><strong>Juros Simples</strong> — crescimento linear; usado em operações de curto prazo (cheque especial, carnês)</div>
+                    <div class="tr-ex"><strong>Juros Compostos</strong> — crescimento exponencial; usado em investimentos, financiamentos e cartões de crédito</div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> no Brasil, a maioria das operações financeiras (CDB, poupança, financiamentos, cartões)
+                    utiliza o regime de <strong>juros compostos</strong>.
+                </div>
+            </div>
+
+            <!-- TAXAS PROPORCIONAIS E EQUIVALENTES -->
+            <div class="tr-section" id="sec-taxas">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Taxa</div>
+                    <div>
+                        <div class="tr-section-title">Taxas Proporcionais e Equivalentes</div>
+                        <div class="tr-section-sub">Conversão de taxas entre períodos diferentes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Taxas proporcionais</strong> são usadas no regime de <em>juros simples</em>:
+                    a conversão é feita por regra de três. <strong>Taxas equivalentes</strong> são usadas no regime de
+                    <em>juros compostos</em>: a conversão envolve potenciação.
+                </div>
+
+                <h4>Taxas Proporcionais — Juros Simples</h4>
+                <p>Duas taxas são proporcionais quando guardam a mesma razão que seus períodos:</p>
+                \[i_2 = i_1 \cdot \frac{t_2}{t_1}\]
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Taxa mensal de 3% → taxa anual proporcional</span>
+                        <span>\(i_a = 3\% \cdot 12 = 36\%\) ao ano</span>
+                        <span class="hl">36% a.a. é proporcional a 3% a.m.</span>
+                    </div>
+                </div>
+
+                <h4>Taxas Equivalentes — Juros Compostos</h4>
+                <p>Duas taxas são equivalentes quando produzem o mesmo montante no mesmo prazo:</p>
+                \[(1 + i_a) = (1 + i_m)^{12}\]
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Taxa anual de 26,82% → taxa mensal equivalente</span>
+                        <span>\((1 + 0,2682) = (1 + i_m)^{12}\)</span>
+                        <span>\(i_m = (1,2682)^{1/12} - 1 \approx 0,02\)</span>
+                        <span class="hl">\(i_m \approx 2\%\) ao mês</span>
+                    </div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Atenção:</strong> nunca converta taxas de juros compostos usando regra de três —
+                    isso gera erro. Use sempre a fórmula de equivalência \((1+i_a) = (1+i_m)^{12}\).
+                </div>
+            </div>
+
+            <!-- DESCONTO SIMPLES -->
+            <div class="tr-section" id="sec-ds">
+                <div class="tr-section-header">
+                    <div class="tr-badge">DS</div>
+                    <div>
+                        <div class="tr-section-title">Desconto Simples</div>
+                        <div class="tr-section-sub">Redução linear sobre o valor nominal</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O desconto simples calcula a redução <strong>linear</strong> no valor nominal de um título.
+                    O desconto incide sempre sobre o valor de face — não sobre saldo acumulado.
+                </div>
+                <p>A fórmula do desconto simples é:</p>
+                \[D = N \cdot i \cdot t\]
+                <div class="tr-examples">
+                    <div class="tr-ex">\(D\) — desconto</div>
+                    <div class="tr-ex">\(N\) — valor nominal do título</div>
+                    <div class="tr-ex">\(i\) — taxa de desconto por período (em decimal)</div>
+                    <div class="tr-ex">\(t\) — prazo até o vencimento</div>
+                </div>
+
+                <h4>Valor Atual</h4>
+                <p>O valor atual \(A\) é o que o devedor paga antecipadamente:</p>
+                \[A = N - D = N \cdot (1 - i \cdot t)\]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo</strong> — Título R$ 1.000,00, desconto 10% a.a., prazo 1 ano</span>
+                        <span>\(D = 1000 \cdot 0,10 \cdot 1 = 100\)</span>
+                        <span>\(A = 1000 - 100\)</span>
+                        <span class="hl">R$ 900,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESCONTO COMPOSTO -->
+            <div class="tr-section" id="sec-dc">
+                <div class="tr-section-header">
+                    <div class="tr-badge">DC</div>
+                    <div>
+                        <div class="tr-section-title">Desconto Composto</div>
+                        <div class="tr-section-sub">Desconto aplicado sucessivamente a cada período</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    No desconto composto, o desconto é aplicado de forma <strong>sucessiva</strong>
+                    sobre o saldo remanescente de cada período. O valor descontado diminui progressivamente
+                    — é o inverso do regime de juros compostos.
+                </div>
+                <p>A fórmula do desconto composto é:</p>
+                \[A = N \cdot (1 - i)^t\]
+                <div class="tr-examples">
+                    <div class="tr-ex">\(A\) — valor atual (recebido após o desconto)</div>
+                    <div class="tr-ex">\(N\) — valor nominal (total no vencimento)</div>
+                    <div class="tr-ex">\(i\) — taxa de desconto por período (em decimal)</div>
+                    <div class="tr-ex">\(t\) — número de períodos</div>
+                </div>
+                <p>O desconto total aplicado é:</p>
+                \[D = N - A\]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo</strong> — Título R$ 5.000,00, desconto composto 5% a.m. por 3 meses</span>
+                        <span>\(A = 5000 \cdot (1 - 0,05)^3 = 5000 \cdot (0,95)^3\)</span>
+                        <span>\(A = 5000 \cdot 0,857375 \approx\) R$ 4.287,00</span>
+                        <span>\(D = 5000 - 4287\)</span>
+                        <span class="hl">R$ 713,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESCONTO POR DENTRO vs. POR FORA -->
+            <div class="tr-section" id="sec-tipos-desc">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">D∥D</div>
+                    <div>
+                        <div class="tr-section-title">Desconto por Fora vs. por Dentro</div>
+                        <div class="tr-section-sub">Desconto comercial e desconto racional</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>desconto por fora (comercial)</strong> é calculado sobre o valor nominal \(N\).
+                    O <strong>desconto por dentro (racional)</strong> é calculado sobre o valor atual \(A\)
+                    — equivale a juros simples sobre o capital antecipado.
+                </div>
+
+                <h4>Desconto Comercial (por fora)</h4>
+                \[D_{\text{fora}} = N \cdot i \cdot t \qquad A = N \cdot (1 - i \cdot t)\]
+
+                <h4>Desconto Racional (por dentro)</h4>
+                \[D_{\text{dentro}} = A \cdot i \cdot t \qquad A = \frac{N}{1 + i \cdot t}\]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo comparativo</strong> — Título R$ 1.000,00, 10% a.a., 1 ano</span>
+                        <span>Por fora: \(A = 1000 \cdot (1 - 0,10) =\) R$ 900,00</span>
+                        <span>Por dentro: \(A = \dfrac{1000}{1 + 0,10} \approx\) R$ 909,09</span>
+                        <span class="hl">O desconto racional é sempre menor que o comercial.</span>
+                    </div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Regra:</strong> o desconto comercial (por fora) é mais vantajoso para quem desconta
+                    (banco/financeira). O desconto racional (por dentro) é mais vantajoso para o devedor.
+                    Em títulos de longo prazo a diferença pode ser significativa.
+                </div>
+            </div>
+
+            <!-- PROBLEMAS -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Aplicando juros e desconto em situações reais</div>
+                    </div>
+                </div>
+
+                <h4>Problema 1 — Juros Simples</h4>
+                <p>Um comerciante tomou um empréstimo de R$ 8.000,00 a juros simples de 4% ao mês.
+                Após 5 meses, qual o montante a pagar?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(J = 8000 \cdot 0,04 \cdot 5 = 1600\)</span>
+                        <span>\(M = 8000 + 1600\)</span>
+                        <span class="hl">Montante = R$ 9.600,00</span>
+                    </div>
+                </div>
+
+                <h4>Problema 2 — Juros Compostos</h4>
+                <p>Quanto rende uma aplicação de R$ 2.000,00 a 12% ao ano, pelo regime composto, em 3 anos?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(M = 2000 \cdot (1,12)^3 = 2000 \cdot 1,404928\)</span>
+                        <span>\(M \approx\) R$ 2.809,86</span>
+                        <span class="hl">Juros = R$ 809,86</span>
+                    </div>
+                </div>
+
+                <h4>Problema 3 — Desconto Comercial</h4>
+                <p>Uma duplicata de R$ 3.500,00 com vencimento em 90 dias é descontada comercialmente
+                a uma taxa de 3% ao mês. Qual o valor líquido recebido?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>90 dias = 3 meses</span>
+                        <span>\(D = 3500 \cdot 0,03 \cdot 3 = 315\)</span>
+                        <span>\(A = 3500 - 315\)</span>
+                        <span class="hl">Valor líquido = R$ 3.185,00</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

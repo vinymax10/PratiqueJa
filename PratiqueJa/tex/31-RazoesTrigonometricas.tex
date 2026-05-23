@@ -13,10 +13,11 @@
 
 \begin{multicols}{2}
 
-\vspace{0.4cm}
-\TW{Descrição} 
+% ── DESCRIÇÃO ──────────────────────────────────────────────────────────────
+\TW{Razões Trigonométricas}
 
-As razões trigonométricas relacionam os lados de um triângulo retângulo aos ângulos agudos desse triângulo.  
+As razões trigonométricas relacionam os lados de um triângulo retângulo
+aos seus ângulos agudos.
 
 \begin{center}
 \begin{tikzpicture}
@@ -43,29 +44,68 @@ As razões trigonométricas relacionam os lados de um triângulo retângulo aos 
 \vspace{-0.2cm}
 Nesse triângulo retângulo temos:
 
--Hipotenusa (h): lado oposto ao ângulo reto.  
+\begin{itemize}
+  \item \textbf{Hipotenusa (h):} lado oposto ao ângulo reto — sempre o maior lado.
+  \item \textbf{Cateto oposto (co):} lado oposto ao ângulo \(\alpha\).
+  \item \textbf{Cateto adjacente (ca):} lado adjacente ao ângulo \(\alpha\).
+\end{itemize}
 
--Cateto oposto (co): lado oposto ao ângulo \(\alpha\). 
+% ── DEFINIÇÃO DAS RAZÕES ───────────────────────────────────────────────────
+\TW{Definição das Razões}
 
--Cateto adjacente (ca): ao lado do ângulo \(\alpha\).  
-
-\TM{Seno (sen):}  
+\TM{Seno (sen):}
 \Formula{
-sen(\alpha) = \dfrac{\text{cateto oposto}}{\text{hipotenusa}} = \dfrac{co}{h}
+\text{sen}(\alpha) = \dfrac{\text{cateto oposto}}{\text{hipotenusa}} = \dfrac{co}{h}
 }
 
-\TM{Cosseno (cos):}  
+\TM{Cosseno (cos):}
 \Formula{
 \cos(\alpha) = \dfrac{\text{cateto adjacente}}{\text{hipotenusa}} = \dfrac{ca}{h}
 }
 
-\TM{Tangente (tan):}  
+\TM{Tangente (tan):}
 \Formula{
 \tan(\alpha) = \dfrac{\text{cateto oposto}}{\text{cateto adjacente}} = \dfrac{co}{ca}
 }
 
-\vspace{-0.2cm}
-\TM{Exemplo:}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Macete SOH-CAH-TOA:}
+\textit{S}eno = \textit{O}posto/\textit{H}ipotenusa $\cdot$
+\textit{C}osseno = \textit{A}djacente/\textit{H}ipotenusa $\cdot$
+\textit{T}angente = \textit{O}posto/\textit{A}djacente.
+}}
+
+\TM{Relação entre as razões:}
+
+\Formula{\tan(\alpha) = \dfrac{\text{sen}(\alpha)}{\cos(\alpha)}}
+
+% ── IDENTIDADES FUNDAMENTAIS ───────────────────────────────────────────────
+\TW{Identidades Fundamentais}
+
+\TM{Identidade Pitagórica:}
+
+\Formula{\text{sen}^2(\alpha) + \cos^2(\alpha) = 1}
+
+Decorre do Teorema de Pitágoras: $co^2 + ca^2 = h^2$.
+Dividindo por $h^2$:
+$\left(\dfrac{co}{h}\right)^2 + \left(\dfrac{ca}{h}\right)^2 = 1$.
+
+\TM{Ângulos Complementares:}
+
+Dois ângulos agudos de um triângulo retângulo são sempre complementares (somam 90°).
+Portanto:
+
+\M{\text{sen}(\alpha) &= \cos(90° - \alpha)}
+\M{\cos(\alpha) &= \text{sen}(90° - \alpha)}
+\M{\tan(\alpha) &= \dfrac{1}{\tan(90° - \alpha)}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small Exemplo: $\text{sen}(30°) = \cos(60°) = \dfrac{1}{2}$ e
+$\cos(30°) = \text{sen}(60°) = \dfrac{\sqrt{3}}{2}$.
+}}
+
+% ── EXEMPLO (6-8-10) ───────────────────────────────────────────────────────
+\TW{Exemplo}
 
 \begin{center}
 \begin{tikzpicture}
@@ -88,29 +128,47 @@ sen(\alpha) = \dfrac{\text{cateto oposto}}{\text{hipotenusa}} = \dfrac{co}{h}
 \node[texto] at (2.3,-0.3) {\textbf{8}};
 \end{tikzpicture}
 \end{center}
+
 \[
-sen(\alpha) = \dfrac{6}{10} = \dfrac{3}{5}
-\]  
-\[
-cos(\alpha) = \dfrac{8}{10}=\dfrac{4}{5}
-\] 
-\[
-tan(\alpha) = \dfrac{6}{8}=\dfrac{3}{4}
-\]  
-A seguir apresentamos os principais ângulos notáveis.
-%\vspace{-0.5cm}
+\text{sen}(\alpha) = \dfrac{6}{10} = \dfrac{3}{5}
+\quad
+\cos(\alpha) = \dfrac{8}{10} = \dfrac{4}{5}
+\quad
+\tan(\alpha) = \dfrac{6}{8} = \dfrac{3}{4}
+\]
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Verificação:}
+$\left(\dfrac{3}{5}\right)^2 + \left(\dfrac{4}{5}\right)^2
+= \dfrac{9}{25} + \dfrac{16}{25} = 1$ \checkmark
+}}
+
+% ── ÂNGULOS NOTÁVEIS ───────────────────────────────────────────────────────
+\TW{Ângulos Notáveis}
+
 \begin{center}
-\renewcommand{\arraystretch}{1.8} % aumenta 50% o espaçamento das linhas
+\renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{$\alpha$} & \textbf{30°} & \textbf{45°} & \textbf{60°} \\ \hline
-\textbf{\textit{sen}}         & $\dfrac{1}{2}$        & $\dfrac{\sqrt{2}}{2}$        & $\dfrac{\sqrt{3}}{2}$        \\ \hline
-\textbf{\textit{cos}}          & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$        & $\dfrac{1}{2}$               \\ \hline
-\textbf{\textit{tan}}          & $\dfrac{\sqrt{3}}{3}$ & $1$                         & $\sqrt{3}$                  \\ \hline
+\textbf{\textit{sen}} & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ \\ \hline
+\textbf{\textit{cos}} & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ \\ \hline
+\textbf{\textit{tan}} & $\dfrac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ \\ \hline
 \end{tabular}
 \end{center}
 
-%\vspace{-0.7cm}
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Macete:} o seno segue
+$\dfrac{\sqrt{0}}{2}, \dfrac{\sqrt{1}}{2}, \dfrac{\sqrt{2}}{2}, \dfrac{\sqrt{3}}{2}, \dfrac{\sqrt{4}}{2}$
+para $0°, 30°, 45°, 60°, 90°$.
+O cosseno é a sequência inversa.
+}}
+
+% ── PROBLEMAS ──────────────────────────────────────────────────────────────
+\TW{Problemas Contextualizados}
+
+\TM{Problema 1 — sen(30°), cateto oposto:}
+
 \begin{center}
 \begin{tikzpicture}
 \tikzstyle{texto}=[draw=none,fill=none,black!60!white]
@@ -129,14 +187,36 @@ A seguir apresentamos os principais ângulos notáveis.
 \node[texto] at (4,0.2) {\textbf{30°}};
 \node[texto] at (2.5,1.8) {\textbf{16}};
 \node[texto] at (-0.3,1.5) {x};
-%\node[texto] at (2.3,-0.3) {\textbf{12}};
 \end{tikzpicture}
 \end{center}
-Utilizando a tabela com os ângulos notáveis, podemos identificar o valor de x por meio do sen 30° $= \dfrac{1}{2}$.
+
+Usando $\text{sen}(30°) = \dfrac{1}{2}$:
 
 \M{\dfrac{1}{2} &= \dfrac{x}{16}}
-\M{2x &= 16}
-\M{x &= \dfrac{16}{2}=8}
+\M{x &= \boxed{8}}
+
+\TM{Problema 2 — cos(60°), hipotenusa:}
+
+Ângulo $60°$, cateto adjacente $= 5$. Encontrar $h$.
+
+Usando $\cos(60°) = \dfrac{1}{2}$:
+
+\M{\dfrac{1}{2} &= \dfrac{5}{h}}
+\M{h &= 5 \cdot 2 = \boxed{10}}
+
+\TM{Problema 3 — tan(45°), cateto adjacente:}
+
+Ângulo $45°$, cateto oposto $= 7$. Encontrar $ca$.
+
+Usando $\tan(45°) = 1$:
+
+\M{1 &= \dfrac{7}{ca}}
+\M{ca &= \boxed{7}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small Quando $\tan(\alpha) = 1$, os catetos são iguais (triângulo isósceles)
+— isso ocorre exatamente em $\alpha = 45°$.
+}}
 
 \end{multicols}
 \input{rodape}

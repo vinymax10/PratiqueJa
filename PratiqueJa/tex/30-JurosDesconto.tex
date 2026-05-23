@@ -13,127 +13,181 @@
 
 \begin{multicols}{2}
 
-%Neste assunto iremos abordar o Juros simples e composto bem como o desconto simples e composto.
+% ── JUROS SIMPLES ──────────────────────────────────────────────────────────
+\TW{Juros Simples}
 
-\vspace{0.4cm}
-\TW{Juros simples} 
+No juros simples, o valor dos juros é calculado \textbf{apenas sobre o capital inicial}
+durante todo o período. A base de cálculo não muda — os juros não geram novos juros.
 
-O Juros Simples é um tipo de cálculo de juros onde o valor dos juros é calculado apenas sobre o capital inicial (ou valor principal) durante todo o período da aplicação ou do empréstimo. Ou seja, os juros não se acumulam sobre os juros já calculados, mas apenas sobre o valor original. A fórmula para calcular os juros simples é:
 \Formula{J = C \cdot i \cdot t}
-\vspace{10px}
 
-Onde \( J \) = juros simples, \( C \) = capital inicial (ou valor principal), \( i \) = taxa de juros por período
-e \( t \) = tempo de aplicação ou de empréstimo, expresso no mesmo período de tempo da taxa de juros.
+Onde $J$ = juros simples, $C$ = capital inicial, $i$ = taxa de juros por período
+(em decimal) e $t$ = tempo (mesmo período da taxa).
 
 \TM{Montante:}
 
-O montante (\( M \)) após a aplicação de juros simples é o valor total que o investidor ou tomador de empréstimo terá que pagar ou receber no final, e é dado por:
+O montante $M$ é o valor total ao final: capital mais juros.
 
-\Formula{M = C + J}
-
-Ou seja:
-\Formula{M = C \cdot (1 + i \cdot t)}
+\Formula{M = C + J = C \cdot (1 + i \cdot t)}
 
 \TM{Exemplo:}
 
-Se você investir R\$ 1.000,00 a uma taxa de 5\% ao mês por 6 meses, os juros simples seriam:
+R\$ 1.000,00 a 5\% a.m. por 6 meses:
 
-$J = 1000 \cdot 0,05 \cdot 6 = 300$
+$J = 1000 \cdot 0{,}05 \cdot 6 = 300$
 
-O montante total seria:
+$M = 1000 + 300 = \text{R\$ } 1.300{,}00$
 
-$M = 1000 + 300 = 1300$
-
-\vspace{0.7cm}
+% ── JUROS COMPOSTOS ────────────────────────────────────────────────────────
 \TW{Juros Compostos}
 
-Juros Compostos é um tipo de cálculo de juros em que o valor dos juros é calculado sobre o capital inicial e também sobre os juros acumulados de períodos anteriores. Em outras palavras, os juros geram mais juros a cada novo período.
-
-No juros simples, os juros são calculados apenas sobre o capital inicial durante toda a aplicação ou empréstimo. Já nos juros compostos, o valor dos juros vai crescendo, pois a cada período o montante (capital + juros acumulados) é considerado como novo capital para o cálculo dos juros. A fórmula dos Juros Compostos é:
+Nos juros compostos, a cada período o montante (capital + juros acumulados)
+torna-se o novo capital. Os \textbf{juros geram mais juros} — crescimento exponencial.
 
 \Formula{M = C \cdot (1 + i)^t}
-\vspace{5px}
 
-Onde \( M \) = montante final (valor total após o cálculo dos juros), \( C \) = capital inicial (o valor aplicado ou emprestado), \( i \) = taxa de juros por período (expressa em decimal) e \( t \) = tempo (número de períodos). O juros pode ser calculado por:
+Onde $M$ = montante final, $C$ = capital inicial, $i$ = taxa por período (decimal)
+e $t$ = número de períodos. O juros total é:
 
 \Formula{J = M - C}
 
 \TM{Exemplo:}
 
-Se você investir R\$ 1.000,00 a uma taxa de 10\% ao ano, por 2 anos, o cálculo será:
+R\$ 1.000,00 a 10\% a.a. por 2 anos:
 
-$ M = 1000 \cdot (1 + 0,10)^2$
+$M = 1000 \cdot (1{,}10)^2 = 1000 \cdot 1{,}21 = \text{R\$ } 1.210{,}00$
 
-$M = 1000 \cdot (1,1)^2$
+% ── COMPARATIVO JS × JC ────────────────────────────────────────────────────
+\TW{Comparativo: Simples $\times$ Composto}
 
-$M = 1000 \cdot 1,21=1210$
+Para $t = 1$ período, ambos os regimes produzem o mesmo resultado.
+Para $t > 1$, os juros compostos sempre superam os simples.
 
-Portanto, ao final de 2 anos, o montante será de R\$ 1.210,00.
+\begin{itemize}
+  \item \textbf{Juros Simples} — crescimento linear; usado em carnês, cheque especial e operações de curto prazo.
+  \item \textbf{Juros Compostos} — crescimento exponencial; usado em investimentos, financiamentos e cartões de crédito.
+\end{itemize}
 
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Atenção:} no Brasil, a maioria das operações financeiras (CDB, poupança,
+financiamentos, cartões) utiliza o regime de \textbf{juros compostos}.
+}}
 
-\vspace{1.4cm}
+% ── TAXAS PROPORCIONAIS E EQUIVALENTES ────────────────────────────────────
+\TW{Taxas Proporcionais e Equivalentes}
+
+\TM{Taxas Proporcionais — Juros Simples:}
+
+Conversão por regra de três: $i_2 = i_1 \cdot \dfrac{t_2}{t_1}$
+
+Exemplo: 3\% a.m. $\Rightarrow$ 36\% a.a. proporcional ($3 \times 12$)
+
+\TM{Taxas Equivalentes — Juros Compostos:}
+
+\Formula{(1 + i_a) = (1 + i_m)^{12}}
+
+Exemplo: 26{,}82\% a.a. $\Rightarrow$ $i_m = (1{,}2682)^{1/12} - 1 \approx 2\%$ a.m.
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Atenção:} nunca converta taxas compostas por regra de três —
+use sempre a fórmula de equivalência.
+}}
+
+% ── DESCONTO SIMPLES ───────────────────────────────────────────────────────
 \TW{Desconto Simples}
 
-Desconto Simples é uma operação financeira utilizada para calcular a redução no valor nominal de um título ou dívida, com base em uma taxa de desconto aplicada sobre o valor de face do título, considerando um prazo específico. Esse tipo de desconto é chamado de "simples" porque o valor do desconto é calculado diretamente sobre o valor nominal, sem considerar juros sobre juros, ou seja, o desconto é linear. A fórmula do Desconto Simples é:
+O desconto simples calcula a redução \textbf{linear} no valor nominal de um título.
+O desconto incide sempre sobre o valor de face.
 
 \Formula{D = N \cdot i \cdot t}
 
-Onde \( D \) = desconto, \( N \) = valor nominal do título, \( i \) = taxa de desconto (em decimal) e \( t \) = tempo (geralmente em dias, meses ou anos).
+Onde $D$ = desconto, $N$ = valor nominal, $i$ = taxa de desconto (decimal)
+e $t$ = prazo até o vencimento.
 
 \TM{Valor Atual:}
 
-O valor atual (\( A \)) de um título é o valor que o devedor paga após o desconto, e pode ser calculado pela fórmula:
+\Formula{A = N - D = N \cdot (1 - i \cdot t)}
 
-\Formula{A = N - D}
-
-Ou, substituindo \( D \) na fórmula:
-
-\Formula{A = N \cdot (1 - i \cdot t)}
-
-\vspace{-0.5cm}
 \TM{Exemplo:}
 
-Se um título tem o valor nominal de R\$ 1.000,00, com uma taxa de desconto de 10\% ao ano, e o prazo de desconto é de 1 ano, o desconto será:
+Título de R\$ 1.000,00, desconto 10\% a.a., prazo 1 ano:
 
-$D = 1000 \cdot 0,10 \cdot 1 = 100$
+$D = 1000 \cdot 0{,}10 \cdot 1 = 100$
 
-O valor atual do título será:
+$A = 1000 - 100 = \text{R\$ } 900{,}00$
 
-$A = 1000 - 100 = 900$
-
-Portanto, o valor atual após o desconto será de R\$ 900,00.
-
-\vspace{1cm}
-
-%O desconto simples é amplamente utilizado em operações comerciais e financeiras para antecipação de recebíveis ou para a concessão de descontos em títulos de dívida.
-
-\vspace{0.4cm}
+% ── DESCONTO COMPOSTO ──────────────────────────────────────────────────────
 \TW{Desconto Composto}
 
-O desconto composto é uma forma de cálculo utilizada para determinar o valor atual de um título antes do seu vencimento, considerando que o desconto é aplicado sobre o valor nominal de forma sucessiva a cada período. Diferente do desconto simples, onde a redução ocorre de maneira linear, no desconto composto o valor descontado diminui progressivamente, pois a base de cálculo é sempre o saldo remanescente após cada período. A fórmula do desconto composto é:
+No desconto composto, o desconto é aplicado de forma \textbf{sucessiva} sobre o
+saldo remanescente de cada período — é o inverso do regime de juros compostos.
 
 \Formula{A = N \cdot (1 - i)^t}
 
-Onde \( A \) = valor atual do título (valor recebido após o desconto), \( N \) = valor nominal do título (valor total a ser pago no vencimento), \( i \) = taxa de desconto por período e \( t \) = tempo (número de períodos de desconto). O desconto total aplicado pode ser encontrado por:  
-
-\Formula{D = N - A}
+O desconto total: $D = N - A$
 
 \TM{Exemplo:}
-Um título de R\$ 5.000,00 sofre um desconto composto de 5\% ao mês por 3 meses. Qual será o valor atual recebido?  
 
-$A = 5000 \cdot (1 - 0,05)^3$
+Título de R\$ 5.000,00, desconto composto de 5\% a.m. por 3 meses:
 
-$A = 5000 \cdot (0,95)^3$
+$A = 5000 \cdot (0{,}95)^3 = 5000 \cdot 0{,}8574 \approx \text{R\$ } 4.287{,}00$
 
-$A = 5000 \cdot 0,8574$
+$D = 5000 - 4287 = \text{R\$ } 713{,}00$
 
-$A \approx 4287,00$
+% ── DESCONTO POR FORA vs. POR DENTRO ──────────────────────────────────────
+\TW{Desconto por Fora $\times$ por Dentro}
 
-O desconto total será:  
+\TM{Desconto Comercial (por fora):}
 
-$D = 5000 - 4287 = 713,00$
+Incide sobre o valor nominal $N$:
 
-Assim, o valor recebido será R\$ 4.287,00 e o desconto aplicado foi R\$ 713,00.
+\Formula{D = N \cdot i \cdot t \qquad A = N \cdot (1 - i \cdot t)}
+
+\TM{Desconto Racional (por dentro):}
+
+Incide sobre o valor atual $A$:
+
+\Formula{D = A \cdot i \cdot t \qquad A = \dfrac{N}{1 + i \cdot t}}
+
+\TM{Exemplo comparativo:}
+
+Título R\$ 1.000,00, 10\% a.a., prazo 1 ano:
+
+Por fora: $A = 1000 \cdot 0{,}90 = \text{R\$ } 900{,}00$
+
+Por dentro: $A = \dfrac{1000}{1{,}10} \approx \text{R\$ } 909{,}09$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small O desconto racional é \textbf{sempre menor} que o comercial —
+mais vantajoso para o devedor.
+}}
+
+% ── PROBLEMAS ──────────────────────────────────────────────────────────────
+\TW{Problemas Contextualizados}
+
+\TM{Problema 1 — Juros Simples:}
+
+Empréstimo de R\$ 8.000,00 a 4\% a.m. por 5 meses.
+
+$J = 8000 \cdot 0{,}04 \cdot 5 = 1600$
+
+$M = 8000 + 1600 = \boxed{\text{R\$ } 9.600{,}00}$
+
+\TM{Problema 2 — Juros Compostos:}
+
+Aplicação de R\$ 2.000,00 a 12\% a.a. composto por 3 anos.
+
+$M = 2000 \cdot (1{,}12)^3 \approx 2000 \cdot 1{,}4049 \approx \boxed{\text{R\$ } 2.809{,}86}$
+
+Juros = R\$ 809{,}86
+
+\TM{Problema 3 — Desconto Comercial:}
+
+Duplicata de R\$ 3.500,00, vencimento em 90 dias, taxa 3\% a.m.
+
+$D = 3500 \cdot 0{,}03 \cdot 3 = 315$
+
+$A = 3500 - 315 = \boxed{\text{R\$ } 3.185{,}00}$
 
 \end{multicols}
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 340 260" width="300" height="225"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-label="Triângulo ABC com ângulo A igual a 30 graus, lado a igual a 7 e lado b igual a 10">
+    <polygon points="30,210 280,210 80,60"
+             fill="none" stroke="#5b8dd9" stroke-width="2.5"/>
+    <!-- Arco em A=(280,210): L ao ponto horizontal primeiro, arc ao ponto superior -->
+    <path d="M 280,210 L 245,210 A 35,35 0 0,1 251,191 Z"
+          fill="rgba(220,38,38,0.2)" stroke="none"/>
+    <!-- Arco em B=(80,60): L ao ponto inferior-direito primeiro, arc ao inferior-esquerdo -->
+    <path d="M 80,60 L 107,82 A 35,35 0 0,1 68,93 Z"
+          fill="rgba(34,197,94,0.25)" stroke="none"/>
+    <text x="286" y="215" font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">A</text>
+    <text x="68"  y="48"  font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">B</text>
+    <text x="12"  y="215" font-size="20" font-weight="600"
+          fill="#333" font-family="sans-serif">C</text>
+    <text x="220" y="202" font-size="18" font-weight="600"
+          fill="#666" font-family="serif">30°</text>
+    <text x="37"  y="140" font-size="20" font-weight="600"
+          fill="#666" font-family="serif">7</text>
+    <text x="147" y="232" font-size="20" font-weight="600"
+          fill="#666" font-family="serif">10</text>
+</svg>

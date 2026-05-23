@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 340 250" width="300" height="210"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-label="Triângulo retângulo com lados 10, 6 e 8">
+    <polygon points="30,210 280,210 30,60"
+             fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+    <polyline points="30,195 45,195 45,210"
+              fill="none" stroke="#e05a5a" stroke-width="2"/>
+    <circle cx="37.5" cy="202.5" r="1.5" fill="#e05a5a"/>
+    <path d="M 280,210 L 245,210 A 35,35 0 0,1 250,192 Z"
+          fill="rgba(96,165,250,0.25)" stroke="none"/>
+    <text x="227" y="200" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">α</text>
+    <text x="148" y="118" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">10</text>
+    <text x="7"   y="138" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">6</text>
+    <text x="138" y="232" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">8</text>
+</svg>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 340 250" width="300" height="210"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-label="Triângulo retângulo com lados h, co, ca e ângulo alfa">
+    <polygon points="30,210 280,210 30,60"
+             fill="none" stroke="#5b8dd9" stroke-width="2.5"/>
+    <polyline points="30,195 45,195 45,210"
+              fill="none" stroke="#5b8dd9" stroke-width="2"/>
+    <circle cx="37.5" cy="202.5" r="1.5" fill="#5b8dd9"/>
+    <path d="M 280,210 L 245,210 A 35,35 0 0,1 250,192 Z"
+          fill="rgba(220,38,38,0.2)" stroke="none"/>
+    <text x="227" y="200" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">α</text>
+    <text x="148" y="118" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">h</text>
+    <text x="5"   y="138" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">co</text>
+    <text x="138" y="232" font-size="20" font-weight="600"
+          fill="#555" font-family="serif">ca</text>
+</svg>
