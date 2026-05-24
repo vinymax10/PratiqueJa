@@ -4,80 +4,224 @@
 
 \begin{document}
 \pagenumbering{gobble}
-%\setstretch{1.5}
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
     \textbf{\Huge \textcolor{bluebell}{Divisão com Naturais}}
 \end{center}
+\vspace{0.5cm}
 
 \begin{multicols}{2}
 
-\T{Divisão de números com mais de um dígito } 
- 
-Passo 1: Selecione uma quantidade de dígitos do dividendo da esquerda para direita de modo que o número resultante seja imediatamente maior igual ao divisor.
+\T{Definição}
 
-Passo 2: Divida esse número pelo divisor e coloque no quociente a parte inteira dessa divisão.
+Dividir é repartir uma quantidade em partes iguais ou determinar quantas vezes um número cabe dentro de outro. Dados $a$ (dividendo) e $b$ (divisor), com $b \neq 0$, a divisão determina o \textbf{quociente} $q$ e o \textbf{resto} $r$ tais que:
 
-Passo 3: Multiplique o divisor pelo quociente obtido no passo 2 e subtraia do número selecionado no passo 1.
+\Formula{a = b \times q + r \quad \text{com} \quad 0 \leq r < b}
 
-Passo 4: Acrescente os dígitos ainda não selecionados ao resto da subtração do passo 3 até que o número resultante seja imediatamente maior igual ao divisor e volte para o passo 2. Faça isso até que não seja mais possível dividir.
+\textbf{Dividendo} ($a$) — número que será dividido.
 
+\textbf{Divisor} ($b$) — número pelo qual se divide ($\neq 0$).
 
-\TM{Exemplos:}
+\textbf{Quociente} ($q$) — resultado da divisão.
 
-\vspace{0.5cm}
+\textbf{Resto} ($r$) — sobra após a divisão; sempre $0 \leq r < b$.
 
-$\begin{array}[t]{lllll}&\textcolor{iris}{6}&8& & \begin{array}[t]{|l}4 \\ \hline \end{array} \\
+\TM{Exemplo}
+
+$17 \div 5$: \quad $17 = 5 \times 3 + 2$ \quad Quociente $= 3$, Resto $= 2$.
+
+\vspace{4pt}
+\textbf{Divisão por zero é indefinida.} Não existe $q$ tal que $0 \times q = a$ para $a \neq 0$. O divisor nunca pode ser zero.
+
+\T{Propriedades}
+
+\Formula{a \div 1 = a}
+\Formula{a \div a = 1 \quad (a \neq 0)}
+\Formula{0 \div a = 0 \quad (a \neq 0)}
+
+\textbf{Não é comutativa:} $a \div b \neq b \div a$ em geral. Ex.: $12 \div 4 = 3$, mas $4 \div 12$ não é natural.
+
+\textbf{Relação com multiplicação:} divisão e multiplicação são operações inversas. Se $a \times b = p$, então $p \div b = a$ e $p \div a = b$.
+
+\TM{Exemplo}
+
+$6 \times 7 = 42 \Rightarrow 42 \div 6 = 7$ e $42 \div 7 = 6$ \checkmark
+
+\T{Divisão por 10, 100 e 1000}
+
+Dividir um natural (com zeros suficientes à direita) por uma potência de 10 é remover zeros — um zero para cada zero da potência.
+
+\TM{Exemplos}
+
+$4500 \div 10 = 450$ \quad $3080 \div 10 = 308$
+
+\vspace{4pt}
+$4500 \div 100 = 45$ \quad $70000 \div 100 = 700$
+
+\vspace{4pt}
+$45000 \div 1000 = 45$ \quad $8000 \div 1000 = 8$
+
+\vspace{4pt}
+\textbf{Atenção:} $453 \div 10$ não resulta em número natural ($= 45{,}3$).
+
+\T{Divisão Exata e Inexata}
+
+\textbf{Exata:} resto zero — dividendo é múltiplo do divisor.
+
+\textbf{Inexata:} resto diferente de zero, com $0 < r < b$.
+
+\TM{Exemplos}
+
+$68 \div 4$: $68 = 4 \times 17 + 0$ \quad Resto $= 0$ — exata \checkmark
+
+$71 \div 4$: $71 = 4 \times 17 + 3$ \quad Resto $= 3$ — inexata
+
+\T{Algoritmo da Divisão}
+
+\textbf{Passo 1 —} Selecione dígitos do dividendo da esquerda até obter número $\geq$ divisor.
+
+\textbf{Passo 2 —} Escreva no quociente o maior dígito cujo produto pelo divisor não ultrapasse o número selecionado.
+
+\textbf{Passo 3 —} Multiplique divisor $\times$ quociente parcial e subtraia.
+
+\textbf{Passo 4 —} Baixe o próximo dígito e repita. Continue até não restar dígitos.
+
+\vspace{4pt}
+\textbf{Dica:} use a tabuada do divisor para estimar o dígito do quociente. Ex.: para $28 \div 4$, a tabuada do 4 dá $4 \times 7 = 28$ — quociente parcial $= 7$.
+
+\TM{Exemplo 1 — $68 \div 4$ (início $\geq$ divisor)}
+
+\vspace{0.3cm}
+
+$\begin{array}[t]{lllll}
+&\textcolor{iris}{6}&8& &\begin{array}[t]{|l}4 \\ \hline \end{array} \\
 -&\textcolor{iris}{4}&&&1\\
 \cline{1-4}
 &\textcolor{iris}{2}&\\
 \end{array}$
 ~~~~$\Rightarrow$~~~~
-$\begin{array}[t]{lllll}&6&\textcolor{iris}{8}& & \begin{array}[t]{|l}4 \\ \hline \end{array} \\
+$\begin{array}[t]{lllll}
+&6&\textcolor{iris}{8}& &\begin{array}[t]{|l}4 \\ \hline \end{array} \\
 -&4&&&17\\
 \cline{1-4}
 &\textcolor{iris}{2}&\textcolor{iris}{8}\\
 -&\textcolor{iris}{2}&\textcolor{iris}{8}\\
-\cline{1-4}&\textcolor{iris}{0}&\textcolor{iris}{0}\\
+\cline{1-4}
+&\textcolor{iris}{0}&\textcolor{iris}{0}\\
 \end{array}$
 
+\vspace{4pt}
+Resultado: $68 \div 4 = 17$, resto $0$ \checkmark
+
+\TM{Exemplo 2 — $368 \div 5$ (início $<$ divisor)}
+
+\vspace{0.3cm}
+
+$\begin{array}[t]{llllll}
+&\textcolor{iris}{3}&\textcolor{iris}{6}&8&&\begin{array}[t]{|l}5\\\hline\end{array}\\
+-&\textcolor{iris}{3}&\textcolor{iris}{5}&&&73\\
+\cline{1-5}
+&&\textcolor{iris}{1}&\textcolor{iris}{8}\\
+-&&\textcolor{iris}{1}&\textcolor{iris}{5}\\
+\cline{1-5}
+&&&\textcolor{iris}{3}\\
+\end{array}$
+
+\vspace{4pt}
+Resultado: $368 \div 5 = 73$, resto $3$. Prova: $5 \times 73 + 3 = 368$ \checkmark
+
+\TM{Exemplo 3 — $95 \div 7$ (divisão inexata)}
+
+\vspace{0.3cm}
+
+$\begin{array}[t]{lllll}
+&\textcolor{iris}{9}&5&&\begin{array}[t]{|l}7\\\hline\end{array}\\
+-&\textcolor{iris}{7}&&&13\\
+\cline{1-4}
+&\textcolor{iris}{2}&\textcolor{iris}{5}\\
+-&\textcolor{iris}{2}&\textcolor{iris}{1}\\
+\cline{1-4}
+&&\textcolor{iris}{4}\\
+\end{array}$
+
+\vspace{4pt}
+Resultado: $95 \div 7 = 13$, resto $4$. Prova: $7 \times 13 + 4 = 95$ \checkmark
+
+\T{Prova Real da Divisão}
+
+\Formula{\text{divisor} \times \text{quociente} + \text{resto} = \text{dividendo}}
+
+\TM{Exemplos}
+
+$68 \div 4 = 17$, resto $0$: \quad $4 \times 17 + 0 = 68$ \checkmark
+
+$368 \div 5 = 73$, resto $3$: \quad $5 \times 73 + 3 = 368$ \checkmark
+
+\vspace{4pt}
+\textbf{Atenção:} o resto deve ser sempre menor que o divisor. Se $r \geq b$, o quociente está errado — ainda é possível dividir mais uma vez.
+
+\T{Problemas Contextualizados}
+
+\textbf{Estratégia:} (1) identifique o que é repartido e em quantas partes; (2) escreva a divisão; (3) calcule; (4) interprete o quociente \emph{e} o resto no contexto.
+
+\TM{Problema 1 — divisão exata}
+
+48 balas entre 6 crianças. Quantas balas cada criança recebe?
+
+$48 \div 6 = 8$, resto $0$ \quad \textbf{Cada criança recebe 8 balas.} \checkmark
+
+\TM{Problema 2 — com resto}
+
+50 balas entre 6 crianças. Quantas cada uma recebe e quantas sobram?
+
+$50 \div 6 = 8$, resto $2$ \quad \textbf{8 balas cada, sobram 2 balas.}
+
+\TM{Problema 3 — quantas vezes cabe?}
+
+Uma fita de 96\,cm cortada em pedaços de 8\,cm. Quantos pedaços saem?
+
+$96 \div 8 = 12$, resto $0$ \quad \textbf{12 pedaços exatos.} \checkmark
+
+\TM{Problema 4 — organização em grupos}
+
+37 alunos em grupos de 5. Quantos grupos completos e quantos ficam sem grupo?
+
+$37 \div 5 = 7$, resto $2$ \quad \textbf{7 grupos completos, 2 alunos sem grupo.}
 
 \end{multicols}
 
-\vspace{0.5cm}
-
 \begin{center}
-     \textbf{\Large Tabuada}
+     \textbf{\Large Tabuada da Divisão}
 \end{center}
 
 \setlength{\tabcolsep}{17pt}
 \begin{tabular}{lllll}
-$	1\div1=1	$&$	2\div2=1	$&$	3\div3=1	$&$	4\div4=1	$&$	5\div5=1	$\\
-$	2\div1=2	$&$	4\div2=2	$&$	6\div3=2	$&$	8\div4=2	$&$	10\div5=2	$\\
-$	3\div1=3	$&$	6\div2=3	$&$	9\div3=3	$&$	12\div4=3	$&$	15\div5=3	$\\
-$	4\div1=4	$&$	8\div2=4	$&$	12\div3=4	$&$	16\div4=4	$&$	20\div5=4	$\\
-$	5\div1=5	$&$	10\div2=5	$&$	15\div3=5	$&$	20\div4=5	$&$	25\div5=5	$\\
-$	6\div1=6	$&$	12\div2=6	$&$	18\div3=6	$&$	24\div4=6	$&$	30\div5=6	$\\
-$	7\div1=7	$&$	14\div2=7	$&$	21\div3=7	$&$	28\div4=7	$&$	35\div5=7	$\\
-$	8\div1=8	$&$	16\div2=8	$&$	24\div3=8	$&$	32\div4=8	$&$	40\div5=8	$\\
-$	9\div1=9	$&$	18\div2=9	$&$	27\div3=9	$&$	36\div4=9	$&$	45\div5=9	$\\
-$	10\div1=10	$&$	20\div2=10	$&$	30\div3=10	$&$	40\div4=10	$&$	50\div5=10	$\\
-\end{tabular} 
+$1\div1=1$  &$2\div2=1$  &$3\div3=1$  &$4\div4=1$  &$5\div5=1$  \\
+$2\div1=2$  &$4\div2=2$  &$6\div3=2$  &$8\div4=2$  &$10\div5=2$ \\
+$3\div1=3$  &$6\div2=3$  &$9\div3=3$  &$12\div4=3$ &$15\div5=3$ \\
+$4\div1=4$  &$8\div2=4$  &$12\div3=4$ &$16\div4=4$ &$20\div5=4$ \\
+$5\div1=5$  &$10\div2=5$ &$15\div3=5$ &$20\div4=5$ &$25\div5=5$ \\
+$6\div1=6$  &$12\div2=6$ &$18\div3=6$ &$24\div4=6$ &$30\div5=6$ \\
+$7\div1=7$  &$14\div2=7$ &$21\div3=7$ &$28\div4=7$ &$35\div5=7$ \\
+$8\div1=8$  &$16\div2=8$ &$24\div3=8$ &$32\div4=8$ &$40\div5=8$ \\
+$9\div1=9$  &$18\div2=9$ &$27\div3=9$ &$36\div4=9$ &$45\div5=9$ \\
+$10\div1=10$&$20\div2=10$&$30\div3=10$&$40\div4=10$&$50\div5=10$\\
+\end{tabular}
 
 \vspace{0.5cm}
 
 \begin{tabular}{lllll}
-$	6\div6=1	$&$	7\div7=1	$&$	8\div8=1	$&$	9\div9=1	$&$	10\div10=1	$\\
-$	12\div6=2	$&$	14\div7=2	$&$	16\div8=2	$&$	18\div9=2	$&$	20\div10=2	$\\
-$	18\div6=3	$&$	21\div7=3	$&$	24\div8=3	$&$	27\div9=3	$&$	30\div10=3	$\\
-$	24\div6=4	$&$	28\div7=4	$&$	32\div8=4	$&$	36\div9=4	$&$	40\div10=4	$\\
-$	30\div6=5	$&$	35\div7=5	$&$	40\div8=5	$&$	45\div9=5	$&$	50\div10=5	$\\
-$	36\div6=6	$&$	42\div7=6	$&$	48\div8=6	$&$	54\div9=6	$&$	60\div10=6	$\\
-$	42\div6=7	$&$	49\div7=7	$&$	56\div8=7	$&$	63\div9=7	$&$	70\div10=7	$\\
-$	48\div6=8	$&$	56\div7=8	$&$	64\div8=8	$&$	72\div9=8	$&$	80\div10=8	$\\
-$	54\div6=9	$&$	63\div7=9	$&$	72\div8=9	$&$	81\div9=9	$&$	90\div10=9	$\\
-$	60\div6=10	$&$	70\div7=10	$&$	80\div8=10	$&$	90\div9=10	$&$	100\div10=10	$\\
+$6\div6=1$  &$7\div7=1$  &$8\div8=1$  &$9\div9=1$  &$10\div10=1$  \\
+$12\div6=2$ &$14\div7=2$ &$16\div8=2$ &$18\div9=2$ &$20\div10=2$  \\
+$18\div6=3$ &$21\div7=3$ &$24\div8=3$ &$27\div9=3$ &$30\div10=3$  \\
+$24\div6=4$ &$28\div7=4$ &$32\div8=4$ &$36\div9=4$ &$40\div10=4$  \\
+$30\div6=5$ &$35\div7=5$ &$40\div8=5$ &$45\div9=5$ &$50\div10=5$  \\
+$36\div6=6$ &$42\div7=6$ &$48\div8=6$ &$54\div9=6$ &$60\div10=6$  \\
+$42\div6=7$ &$49\div7=7$ &$56\div8=7$ &$63\div9=7$ &$70\div10=7$  \\
+$48\div6=8$ &$56\div7=8$ &$64\div8=8$ &$72\div9=8$ &$80\div10=8$  \\
+$54\div6=9$ &$63\div7=9$ &$72\div8=9$ &$81\div9=9$ &$90\div10=9$  \\
+$60\div6=10$&$70\div7=10$&$80\div8=10$&$90\div9=10$&$100\div10=10$\\
 \end{tabular}
 
 \input{rodape}

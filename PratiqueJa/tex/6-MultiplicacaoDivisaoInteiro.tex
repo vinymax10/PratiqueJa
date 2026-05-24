@@ -1,63 +1,218 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,twoside]{article}
 
 \input{caput}
 
 \begin{document}
 \pagenumbering{gobble}
-\setstretch{1.4}
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
     \textbf{\Huge \textcolor{bluebell}{Multiplicação e Divisão com Inteiros}}
 \end{center}
+\vspace{0.5cm}
 
 \begin{multicols}{2}
 
-\T{Sinais iguais } 
+\T{Por que $(-) \times (-) = (+)$?}
 
-A multiplicação ou a divisão de dois números com sinais iguais tem como resultado valores positivos.
+Observe o padrão da sequência de $n \times (-2)$ à medida que $n$ decresce:
 
-\TM{Sinais iguais \Large \textcolor{iris}{+}}
+\vspace{4pt}
+$3 \times (-2) = -6$
 
-$(+) ~ (+)=(+)$
+$2 \times (-2) = -4$
 
-$(-) ~ (-)=(+)$
+$1 \times (-2) = -2$
 
-\TM{Exemplos:}
+$0 \times (-2) = \phantom{+}0$
 
-$(+7) \times (+3) = +21$
+$-1 \times (-2) = +2$ \quad $\leftarrow$ o padrão exige que suba $+2$
 
-$(+15) \div (+3) = +5$
+$-2 \times (-2) = +4$ \quad $\leftarrow$ negativo $\times$ negativo $=$ positivo \checkmark
 
-$(-7) \times (-3) = +21$
+\vspace{4pt}
+\textbf{Interpretação:} multiplicar por $-1$ inverte o sinal. Inverter duas vezes retorna ao original: $(-1)\times(-1)\times a = +a$. O negativo do negativo é o positivo.
 
-$(-15) \div (-3) = +5$
+\T{Sinais Iguais $\Rightarrow$ Resultado Positivo}
 
-\vspace{0.5cm} 
- 
-\T{Sinais Diferentes}
+A multiplicação ou divisão de dois números com \textbf{sinais iguais} resulta sempre em valor \textbf{positivo}.
 
-A multiplicação ou a divisão de dois números com sinais diferentes tem como resultado valores negativos.
+\Formula{(+)\times(+)=(+) \qquad (-)\times(-)=(+)}
+\Formula{(+)\div(+)=(+) \qquad (-)\div(-)=(+)}
 
-\TM{Sinais diferentes \textcolor{iris}{\huge  -}}
+\TM{Exemplos}
 
-$(+) ~ (-) =(-)$
+$(+7)\times(+3) = +21$
 
-$(+) ~ (-) =(-)$
+$(+15)\div(+3) = +5$
 
-\TM{Exemplos:}
+$(-7)\times(-3) = +21$
 
-$(+7) \times (-3) = -21$
+$(-15)\div(-3) = +5$
 
-$(-15) \div (+3) = -5$
+\vspace{4pt}
+\textbf{Regra prática:} sinais iguais $\Rightarrow$ resultado \emph{positivo}.
 
-$(-7) \times (+3) = -21$
+\T{Sinais Diferentes $\Rightarrow$ Resultado Negativo}
 
-$(+15) \div (-3) = -5$
- 
+A multiplicação ou divisão de dois números com \textbf{sinais diferentes} resulta sempre em valor \textbf{negativo}.
+
+\Formula{(+)\times(-)=(-) \qquad (-)\times(+)=(-)}
+\Formula{(+)\div(-)=(-) \qquad (-)\div(+)=(-)}
+
+\TM{Exemplos}
+
+$(+7)\times(-3) = -21$
+
+$(+15)\div(-3) = -5$
+
+$(-7)\times(+3) = -21$
+
+$(-15)\div(+3) = -5$
+
+\vspace{4pt}
+\textbf{Regra prática:} sinais diferentes $\Rightarrow$ resultado \emph{negativo}.
+
+\T{Algoritmo de Cálculo}
+
+\textbf{Passo 1 —} Determine o sinal do resultado pela regra dos sinais.
+
+\textbf{Passo 2 —} Multiplique (ou divida) os valores absolutos normalmente.
+
+\textbf{Passo 3 —} Aplique o sinal ao resultado.
+
+\TM{Exemplo 1 — $(-12)\times(+5)$}
+
+Sinais diferentes $\Rightarrow$ negativo. $\;12\times5=60$. \quad Resultado: $-60$ \checkmark
+
+\TM{Exemplo 2 — $(-48)\div(-6)$}
+
+Sinais iguais $\Rightarrow$ positivo. $\;48\div6=8$. \quad Resultado: $+8$ \checkmark
+
+\TM{Exemplo 3 — $(-3)\times(+7)$}
+
+Sinais diferentes $\Rightarrow$ negativo. $\;3\times7=21$. \quad Resultado: $-21$ \checkmark
+
+\T{Múltiplos Fatores}
+
+Em um produto com três ou mais fatores, conte a quantidade de fatores negativos:
+
+\textbf{Quantidade par de negativos $\Rightarrow$ resultado positivo.}
+
+\textbf{Quantidade ímpar de negativos $\Rightarrow$ resultado negativo.}
+
+\TM{Exemplos}
+
+$(-2)\times(-3)\times(-4)$: \textbf{3 negativos} (ímpar) $\Rightarrow$ $-(2\times3\times4) = -24$ \checkmark
+
+$(-1)\times(-2)\times(-3)\times(-4)$: \textbf{4 negativos} (par) $\Rightarrow$ $+(1\times2\times3\times4) = +24$ \checkmark
+
+$(+5)\times(-2)\times(+3)\times(-1)$: \textbf{2 negativos} (par) $\Rightarrow$ $+30$ \checkmark
+
+\T{Potências de Inteiros Negativos}
+
+\Formula{(-a)^n = \begin{cases} +a^n & \text{se } n \text{ é par} \\ -a^n & \text{se } n \text{ é ímpar} \end{cases}}
+
+\TM{Exemplos}
+
+$(-3)^2 = (-3)\times(-3) = +9$ \quad (par $\Rightarrow$ positivo)
+
+$(-3)^3 = (-3)\times(-3)\times(-3) = -27$ \quad (ímpar $\Rightarrow$ negativo)
+
+$(-2)^4 = +16$ \quad $(-2)^5 = -32$ \quad $(-1)^{101} = -1$
+
+\vspace{4pt}
+\textbf{Atenção — o parêntese faz diferença:}
+
+$(-2)^2 = +4$ \quad (eleva $-2$ ao quadrado)
+
+$-2^2 = -4$ \quad (eleva $2$ ao quadrado e aplica $-$ depois)
+
+\T{Propriedades da Multiplicação}
+
+\Formula{a \times b = b \times a \quad \text{(comutativa)}}
+\Formula{(a\times b)\times c = a\times(b\times c) \quad \text{(associativa)}}
+\Formula{a\times(b+c) = a\times b + a\times c \quad \text{(distributiva)}}
+\Formula{a \times 1 = a \quad \text{(elemento neutro)}}
+\Formula{a \times 0 = 0 \quad \text{(elemento absorvente)}}
+\Formula{(-1)\times a = -a \quad \text{(inversor de sinal)}}
+
+\TM{Exemplo — distributiva}
+
+$(-3)\times(4+2) = (-3)\times4 + (-3)\times2 = -12+(-6) = -18$
+
+Verificação: $(-3)\times6 = -18$ \checkmark
+
+\T{Relação $\times$ e $\div$ — Prova Real}
+
+\Formula{\text{Se } a\times b = c \text{, então } c\div b = a \text{ e } c\div a = b}
+
+\TM{Exemplos}
+
+$(-4)\times(+5) = -20$
+
+Prova: $(-20)\div(+5) = -4$ \checkmark \quad e \quad $(-20)\div(-4) = +5$ \checkmark
+
+\vspace{4pt}
+$(-6)\times(-7) = +42$
+
+Prova: $(+42)\div(-7) = -6$ \checkmark \quad e \quad $(+42)\div(-6) = -7$ \checkmark
+
+\T{Problemas Contextualizados}
+
+\TM{Temperatura}
+
+A temperatura cai $3\,°C$ por hora. Variação em 5 horas?
+
+$(-3)\times(+5) = -15\,°C$ \checkmark
+
+\TM{Dívida}
+
+João tem 4 dívidas de R\$\,12 cada. Saldo total?
+
+$4\times(-12) = -R\$\,48$ \checkmark
+
+\TM{Divisão de dívida}
+
+Dívida de R\$\,60 dividida entre 5 pessoas. Quanto cada uma deve?
+
+$(-60)\div(+5) = -R\$\,12$ \checkmark
+
+\TM{Movimento}
+
+Submarino desce $8\,m/min$ ($-8$). Em quanto tempo chega a $-56\,m$?
+
+$(-56)\div(-8) = +7$ minutos \checkmark
+
+\T{Erros Comuns}
+
+\textbf{$(-)\times(-) = (-)$:} $(-3)\times(-4) \neq -12$. Sinais iguais $\Rightarrow$ positivo: $+12$.
+
+\textbf{$(-2)^2$ vs $-2^2$:} $(-2)^2 = +4$ mas $-2^2 = -4$. O parêntese muda o resultado!
+
+\textbf{Sinal no quociente:} $(-20)\div(+4) = -5$, não $+5$.
+
+\textbf{Produto ímpar de negativos:} $(-1)\times(-1)\times(-1) = -1$, não $+1$.
+
 \end{multicols}
 
 \vspace{0.5cm}
+
+\begin{center}
+    \textbf{\Large Tabela de Sinais — Multiplicação e Divisão}
+\end{center}
+
+\setlength{\tabcolsep}{14pt}
+\begin{tabular}{lll}
+\hline
+\textbf{Combinação} & \textbf{Sinal do resultado} & \textbf{Exemplo} \\
+\hline
+$(+)\times(+)$ ou $(+)\div(+)$ & Positivo $(+)$ & $(+7)\times(+3)=+21$ \\
+$(-)\times(-)$ ou $(-)\div(-)$ & Positivo $(+)$ & $(-7)\times(-3)=+21$ \\
+$(+)\times(-)$ ou $(+)\div(-)$ & Negativo $(-)$ & $(+7)\times(-3)=-21$ \\
+$(-)\times(+)$ ou $(-)\div(+)$ & Negativo $(-)$ & $(-7)\times(+3)=-21$ \\
+\hline
+\end{tabular}
 
 \input{rodape}
 \end{document}

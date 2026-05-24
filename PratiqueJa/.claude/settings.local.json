@@ -28,7 +28,9 @@
       "Bash(dir *)",
       "Bash(/mnt/c/Users/USUARIO/Documents/RStudio/bin/pandoc/pandoc.exe --version)",
       "Bash(sudo apt-get install pandoc -y)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(cmd.exe /c \"C:\\\\Users\\\\USUARIO\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" --version)",
+      "Bash(cmd.exe *)"
     ]
   }
 }

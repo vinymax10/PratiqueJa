@@ -1,0 +1,379 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- CONJUNTO DOS INTEIROS -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Conjunto dos Inteiros</div>
+                        <div class="tr-section-sub">Números positivos, negativos e zero</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\mathbb{Z} = \{\ldots,\ -3,\ -2,\ -1,\ 0,\ +1,\ +2,\ +3,\ \ldots\}\]
+                </div>
+                <p>O conjunto dos inteiros estende os naturais incluindo os <strong>opostos negativos</strong>.
+                O <strong>valor absoluto</strong> (módulo) de um inteiro é sua distância até zero na reta numérica —
+                sempre positivo ou nulo: \(|{+7}| = 7\) e \(|{-7}| = 7\).</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(\mathbb{Z}^+ = \{+1,\ +2,\ +3,\ \ldots\}\) — inteiros positivos</span>
+                        <span>\(\mathbb{Z}^- = \{-1,\ -2,\ -3,\ \ldots\}\) — inteiros negativos</span>
+                        <span class="hl">O zero não é positivo nem negativo: \(0 \in \mathbb{Z}\)</span>
+                    </div>
+                </div>
+
+                <!-- Reta numérica -->
+                <div class="tr-fig-center" style="margin:16px 0;">
+                    <img src="fig-reta-numerica.svg" alt="Reta numérica dos inteiros de -5 a +5"
+                         style="max-width:500px;width:100%;display:block;margin:0 auto;" />
+                </div>
+                <div class="tr-note">
+                    Na reta numérica, números maiores ficam sempre à <strong>direita</strong>.
+                    Portanto \(-1 > -5\), mesmo que \(|-5| > |-1|\).
+                </div>
+            </div>
+
+            <!-- SUBTRAÇÃO COMO ADIÇÃO DO OPOSTO -->
+            <div class="tr-section" id="sec-oposto">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">a−b</div>
+                    <div>
+                        <div class="tr-section-title">Subtração = Adição do Oposto</div>
+                        <div class="tr-section-sub">Conceito unificador das duas operações</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[a - b = a + (-b)\]
+                </div>
+                <p>Subtrair um número é o mesmo que <strong>somar o seu oposto</strong>.
+                Isso unifica adição e subtração em uma única operação e elimina a necessidade
+                de memorizar regras separadas para cada caso.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(8 - 5 = 8 + (-5) = +3\)</span>
+                        <span>\(4 - 9 = 4 + (-9) = -5\)</span>
+                        <span class="hl">\(-3 - 7 = -3 + (-7) = -10\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(-3 - (-5) = -3 + (+5) = +2\)</span>
+                        <span>\(6 - (-4) = 6 + (+4) = +10\)</span>
+                        <span class="hl">\(0 - (-8) = 0 + 8 = +8\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>O oposto de \(a\)</strong> é \(-a\): o número que somado a \(a\) resulta zero.
+                    Todo inteiro tem exatamente um oposto: oposto de \(-7\) é \(+7\); oposto de \(0\) é \(0\).
+                </div>
+            </div>
+
+            <!-- SINAIS IGUAIS -->
+            <div class="tr-section" id="sec-iguais">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">+/+</div>
+                    <div>
+                        <div class="tr-section-title">Sinais Iguais</div>
+                        <div class="tr-section-sub">Soma os módulos e repete o sinal</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[(+a) + (+b) = +(a+b)\]
+                    \[(-a) + (-b) = -(a+b)\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Positivo + Positivo → Positivo</strong></span>
+                        <span>\(+7 + (+3) = +(7+3) = +10\)</span>
+                        <span class="hl">\(+15 + (+8) = +23\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Negativo + Negativo → Negativo</strong></span>
+                        <span>\(-7 + (-3) = -(7+3) = -10\)</span>
+                        <span class="hl">\(-15 + (-8) = -23\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Regra prática:</strong> sinais iguais → <em>soma</em> os módulos e <em>repete o sinal</em>.
+                </div>
+            </div>
+
+            <!-- SINAIS DIFERENTES -->
+            <div class="tr-section" id="sec-diferentes">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">+/−</div>
+                    <div>
+                        <div class="tr-section-title">Sinais Diferentes</div>
+                        <div class="tr-section-sub">Subtrai os módulos e usa o sinal do maior</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Subtraia o menor módulo do maior e use o sinal do número de <strong>maior valor absoluto</strong>.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(+4 + (-6)\)</strong> — \(|-6| = 6 \gt |{+4}| = 4\) → sinal negativo</span>
+                        <span>\(6 - 4 = 2\)</span>
+                        <span class="hl">Resultado: \(-2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(+8 + (-5)\)</strong> — \(|{+8}| = 8 \gt |-5| = 5\) → sinal positivo</span>
+                        <span>\(8 - 5 = 3\)</span>
+                        <span class="hl">Resultado: \(+3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(-12 + (+7)\)</strong> — \(|-12| = 12 \gt |{+7}| = 7\) → sinal negativo</span>
+                        <span>\(12 - 7 = 5\)</span>
+                        <span class="hl">Resultado: \(-5\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Regra prática:</strong> sinais diferentes → <em>subtrai</em> os módulos e usa o sinal do <em>maior módulo</em>.
+                    Se os módulos forem iguais, o resultado é zero: \(+5 + (-5) = 0\).
+                </div>
+            </div>
+
+            <!-- SINAL NEGATIVO ANTES DO PARÊNTESE -->
+            <div class="tr-section" id="sec-parentese">
+                <div class="tr-section-header">
+                    <div class="tr-badge">−( )</div>
+                    <div>
+                        <div class="tr-section-title">Sinal antes do Parêntese</div>
+                        <div class="tr-section-sub">Sinal negativo inverte; positivo mantém</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[-(+a) = -a \qquad -(-a) = +a\]
+                    \[+(+a) = +a \qquad +(-a) = -a\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(+4 - (-6)\)</strong></span>
+                        <span>\(-(-6) = +6\) → \(+4 + 6\)</span>
+                        <span class="hl">Resultado: \(+10\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(+8 - (+5)\)</strong></span>
+                        <span>\(-(+5) = -5\) → \(+8 - 5\)</span>
+                        <span class="hl">Resultado: \(+3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>\(-3 - (-9)\)</strong></span>
+                        <span>\(-(-9) = +9\) → \(-3 + 9\)</span>
+                        <span class="hl">Resultado: \(+6\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Prop</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades da Adição</div>
+                        <div class="tr-section-sub">Leis que valem para todos os inteiros</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Comutativa:</strong> \(a + b = b + a\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Associativa:</strong> \((a + b) + c = a + (b + c)\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Elemento neutro:</strong> \(a + 0 = 0 + a = a\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Elemento oposto:</strong> \(a + (-a) = 0\)
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps  span-full">
+                        <span>Comutativa: \((-3) + (+8) = (+8) + (-3) = +5\)</span>
+                        <span>Associativa: \((-2 + 5) + (-3) = -2 + (5 + (-3)) = 0\)</span>
+                        <span class="hl">Oposto: \(-7 + (+7) = 0\) &#x2713;</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    A <strong>subtração não é comutativa</strong>: \(8 - 3 \neq 3 - 8\) em geral.
+                    Mas ao converter em adição do oposto, podemos usar a comutatividade da adição.
+                </div>
+            </div>
+
+            <!-- EXPRESSÕES COM MÚLTIPLOS TERMOS -->
+            <div class="tr-section" id="sec-expr">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Expr</div>
+                    <div>
+                        <div class="tr-section-title">Expressões com Múltiplos Termos</div>
+                        <div class="tr-section-sub">Estratégia: eliminar parênteses, agrupar por sinal</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) elimine os parênteses aplicando as regras de sinal;
+                    (2) agrupe os positivos e some; (3) agrupe os negativos e some;
+                    (4) aplique a regra de sinais diferentes ao resultado.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo:</strong> \(+5 - 3 + (-2) - (-4)\)</span>
+                        <span>Eliminar parênteses: \(+5 - 3 - 2 + 4\)</span>
+                        <span>Agrupar positivos: \(+5 + 4 = +9\)</span>
+                        <span>Agrupar negativos: \(-3 - 2 = -5\)</span>
+                        <span>\(+9 + (-5)\) — sinais diferentes, \(|{+9}| \gt |-5|\) → positivo</span>
+                        <span class="hl">Resultado: \(+4\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo:</strong> \(-8 + (-3) - (-5) + 2\)</span>
+                        <span>Eliminar parênteses: \(-8 - 3 + 5 + 2\)</span>
+                        <span>Positivos: \(+5 + 2 = +7\) · Negativos: \(-8 - 3 = -11\)</span>
+                        <span>\(+7 + (-11)\) — sinais diferentes, \(|-11| \gt |{+7}|\) → negativo</span>
+                        <span class="hl">Resultado: \(-4\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABELA DE REGRAS DOS SINAIS -->
+            <div class="tr-section" id="sec-tabela">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Tabela de Regras dos Sinais</div>
+                        <div class="tr-section-sub">Resumo completo</div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+
+                    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 16px;min-width:140px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#166534;border-bottom:2px solid #166534;margin-bottom:8px;padding-bottom:4px;text-align:center;">Sinais iguais</div>
+                        <div style="font-size:.9rem;line-height:2.2;">
+                            \((+)+(+)=+\)<br/>
+                            \((-)+(-)=-\)
+                        </div>
+                        <div style="font-size:.75rem;color:#166534;margin-top:6px;">Soma · repete o sinal</div>
+                    </div>
+
+                    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 16px;min-width:140px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#991b1b;border-bottom:2px solid #991b1b;margin-bottom:8px;padding-bottom:4px;text-align:center;">Sinais diferentes</div>
+                        <div style="font-size:.9rem;line-height:2.2;">
+                            \((+)+(-)=?\)<br/>
+                            \((-)+(+)=?\)
+                        </div>
+                        <div style="font-size:.75rem;color:#991b1b;margin-top:6px;">Subtrai · sinal do maior</div>
+                    </div>
+
+                    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 16px;min-width:140px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e40af;border-bottom:2px solid #1e40af;margin-bottom:8px;padding-bottom:4px;text-align:center;">Sinal − antes ( )</div>
+                        <div style="font-size:.9rem;line-height:2.2;">
+                            \(-(-)=+\)<br/>
+                            \(-(+)=-\)
+                        </div>
+                        <div style="font-size:.75rem;color:#1e40af;margin-top:6px;">Inverte todos os sinais</div>
+                    </div>
+
+                    <div style="background:#fefce8;border:1px solid #fef08a;border-radius:10px;padding:10px 16px;min-width:140px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#854d0e;border-bottom:2px solid #854d0e;margin-bottom:8px;padding-bottom:4px;text-align:center;">Sinal + antes ( )</div>
+                        <div style="font-size:.9rem;line-height:2.2;">
+                            \(+(+)=+\)<br/>
+                            \(+(-)=-\)
+                        </div>
+                        <div style="font-size:.75rem;color:#854d0e;margin-top:6px;">Mantém os sinais</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PROBLEMAS CONTEXTUALIZADOS -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Temperatura, andares, finanças e cronologia</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 1 — Temperatura</strong></span>
+                        <span>O termômetro marca \(-3\,°C\). A temperatura sobe \(8\,°C\). Qual a temperatura final?</span>
+                        <span>\(-3 + 8\) — sinais diferentes, \(|8| \gt |-3|\) → positivo</span>
+                        <span class="hl">Temperatura final: \(+5\,°C\) &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 2 — Elevador</strong></span>
+                        <span>Um elevador está no \(4°\) subsolo (\(-4\)). Sobe 10 andares. Em que andar para?</span>
+                        <span>\(-4 + 10 = +6\)</span>
+                        <span class="hl">Para no \(6°\) andar &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 3 — Finanças</strong></span>
+                        <span>Maria tem uma dívida de R$\,150 (ou seja, \(-150\)). Recebe R$\,200. Qual o saldo?</span>
+                        <span>\(-150 + 200\) — sinais diferentes, \(|200| \gt |-150|\) → positivo</span>
+                        <span class="hl">Saldo: \(+R\$\,50\) &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 4 — Cronologia</strong></span>
+                        <span>Uma batalha ocorreu em 48 a.C. (\(-48\)). Quanto tempo passou até 2025 d.C. (\(+2025\))?</span>
+                        <span>\(2025 - (-48) = 2025 + 48\)</span>
+                        <span class="hl">Passaram-se \(2073\) anos &#x2713;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ERROS COMUNS -->
+            <div class="tr-section" id="sec-erros">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">!</div>
+                    <div>
+                        <div class="tr-section-title">Erros Comuns</div>
+                        <div class="tr-section-sub">O que evitar nas provas</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x274C; Erro 1 — Duplo negativo</strong></span>
+                        <span>Pensar que \(-(-5) = -5\). <strong>Errado!</strong></span>
+                        <span class="hl">&#x2713; Correto: \(-(-5) = +5\). O sinal muda!</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x274C; Erro 2 — Somar em vez de subtrair com sinais diferentes</strong></span>
+                        <span>Calcular \(+3 + (-8) = +11\) (somando os módulos). <strong>Errado!</strong></span>
+                        <span class="hl">&#x2713; Correto: sinais diferentes → subtrai → \(8 - 3 = 5\), sinal do maior (\(-8\)) → \(-5\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x274C; Erro 3 — Inverter só o primeiro sinal dentro do parêntese</strong></span>
+                        <span>Calcular \(-(+3 - 2) = -3 - 2\). <strong>Errado!</strong></span>
+                        <span class="hl">&#x2713; Correto: o sinal \(-\) inverte <em>todos</em> os termos: \(-(+3 - 2) = -3 + 2 = -1\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x274C; Erro 4 — Confundir módulo com valor</strong></span>
+                        <span>Achar que \(-8 \gt -3\) porque \(8 \gt 3\). <strong>Errado!</strong></span>
+                        <span class="hl">&#x2713; Correto: na reta numérica, \(-3 \gt -8\). Módulo maior não significa valor maior em negativos.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

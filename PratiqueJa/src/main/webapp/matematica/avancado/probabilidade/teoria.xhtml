@@ -1,0 +1,547 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é probabilidade?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Probabilidade é a medida numérica da chance de um evento ocorrer,
+                    variando de \(0\) (evento impossível) a \(1\) (evento certo).
+                </div>
+                <p>É calculada pela razão entre os resultados favoráveis e o total de resultados possíveis
+                (quando todos são igualmente prováveis). A probabilidade é usada para fazer previsões,
+                analisar riscos e tomar decisões em jogos, estatística, economia e ciências.</p>
+                <div class="tr-note">
+                    <strong>Representação:</strong> a probabilidade pode ser expressa como fração,
+                    decimal ou porcentagem. Ex.: \(\frac{1}{4} = 0{,}25 = 25\%\).
+                </div>
+                <div class="tr-note">
+                    <strong>Visão clássica vs. frequentista:</strong> na definição <em>clássica</em> (Laplace),
+                    todos os resultados são igualmente prováveis e \(P(A) = \frac{n(A)}{n(\Omega)}\).
+                    Na visão <em>frequentista</em>, \(P(A)\) é o limite da frequência relativa de \(A\)
+                    em muitas repetições do experimento. Ambas levam às mesmas fórmulas na prática escolar,
+                    mas a distinção é importante em estatística aplicada.
+                </div>
+            </div>
+
+            <!-- ESPAÇO AMOSTRAL -->
+            <div class="tr-section" id="sec-espaco">
+                <div class="tr-section-header">
+                    <div class="tr-badge">1</div>
+                    <div>
+                        <div class="tr-section-title">Espaço Amostral</div>
+                        <div class="tr-section-sub">Resultados, eventos e nomenclatura</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>espaço amostral</strong> \(\Omega\) é o conjunto de <em>todos</em> os resultados
+                    possíveis de um experimento aleatório. Cada elemento de \(\Omega\) é chamado de
+                    <strong>ponto amostral</strong>. Um <strong>evento</strong> \(A\) é qualquer subconjunto de \(\Omega\).
+                </div>
+                <h4>Exemplo — lançamento de um dado</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Espaço amostral: \(\Omega = \{1,2,3,4,5,6\}\), \(n(\Omega)=6\)</span>
+                        <span>Evento "número par": \(A = \{2,4,6\}\), \(n(A)=3\)</span>
+                        <span class="hl">Evento "maior que 4": \(B = \{5,6\}\), \(n(B)=2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Evento certo:</strong> \(\Omega\) — sempre ocorre, \(P(\Omega)=1\)</span>
+                        <span><strong>Evento impossível:</strong> \(\varnothing\) — nunca ocorre, ex.: "sair 7"; \(P(\varnothing)=0\)</span>
+                        <span class="hl"><strong>Eventos exclusivos:</strong> \(A \cap B = \varnothing\) — não ocorrem juntos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES FUNDAMENTAIS -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ax</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades Fundamentais</div>
+                        <div class="tr-section-sub">Axiomas de Kolmogorov que toda probabilidade deve satisfazer</div>
+                    </div>
+                </div>
+                <p>Qualquer função de probabilidade válida obedece aos três axiomas de Kolmogorov:</p>
+                <div class="tr-rule">
+                    <strong>Axioma 1 — Não-negatividade:</strong>
+                    \(0 \leq P(A) \leq 1\) para todo evento \(A\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Axioma 2 — Normalização:</strong>
+                    \(P(\Omega) = 1 \qquad P(\varnothing) = 0\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Axioma 3 — Aditividade:</strong>
+                    Se \(A \cap B = \varnothing\) (eventos mutuamente exclusivos), então
+                    \[P(A \cup B) = P(A) + P(B)\]
+                    De modo geral, se \(A \subset B\), então \(P(A) \leq P(B)\).
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(P(\text{sair 1 no dado}) = \frac{1}{6} \approx 0{,}167\)</span>
+                        <span class="hl">\(0 \leq \frac{1}{6} \leq 1\) &#x2713; — Axioma 1 satisfeito</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>"Par" \(\subset\) "Par ou Ímpar" = \(\Omega\)</span>
+                        <span class="hl">\(P(\text{par}) = \frac{1}{2} \leq P(\Omega) = 1\) &#x2713; — Axioma 2 e 3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÁLCULO DE PROBABILIDADE -->
+            <div class="tr-section" id="sec-calc">
+                <div class="tr-section-header">
+                    <div class="tr-badge">2</div>
+                    <div>
+                        <div class="tr-section-title">Cálculo de Probabilidade</div>
+                        <div class="tr-section-sub">Fórmula clássica de Laplace</div>
+                    </div>
+                </div>
+                <p>Válida quando todos os resultados do espaço amostral são <strong>igualmente prováveis</strong>:</p>
+                <div class="tr-rule">
+                    \[P(A) = \dfrac{n(A)}{n(\Omega)}\]
+                    \(n(A)\) = número de resultados favoráveis a \(A\).<br/>
+                    \(n(\Omega)\) = número total de resultados possíveis.
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Probabilidade de obter face <strong>par</strong> ao lançar um dado:</span>
+                        <span>\(n(A) = 3\) (faces 2, 4 e 6) \(\quad n(\Omega) = 6\)</span>
+                        <span class="hl">\(P(A) = \dfrac{3}{6} = \dfrac{1}{2} = 50\%\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EVENTOS COMPLEMENTARES -->
+            <div class="tr-section" id="sec-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">A<sup>c</sup></div>
+                    <div>
+                        <div class="tr-section-title">Eventos Complementares</div>
+                        <div class="tr-section-sub">Probabilidade do evento não ocorrer</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[P(A^c) = 1 - P(A)\]
+                    O complementar \(A^c\) reúne todos os pontos de \(\Omega\) que <strong>não</strong>
+                    pertencem a \(A\). Como \(A\) e \(A^c\) particionam \(\Omega\): \(P(A) + P(A^c) = 1\).
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Pote com 12 lápis pretos, 16 azuis e 2 vermelhos.
+                              Qual a probabilidade de <strong>não</strong> tirar um lápis vermelho?</span>
+                        <span>\(n(A)=2\), \(n(\Omega)=30\) \(\Rightarrow P(A)=\dfrac{2}{30}=\dfrac{1}{15}\)</span>
+                        <span class="hl">\(P(A^c)=1-\dfrac{1}{15}=\dfrac{14}{15} \approx 93{,}3\%\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Estratégia útil:</strong> quando calcular \(P(A)\) diretamente é difícil
+                    (muitos casos favoráveis), calcule \(P(A^c)\) e subtraia de 1. Muito comum em problemas de concurso.
+                </div>
+            </div>
+
+            <!-- AO MENOS UM -->
+            <div class="tr-section" id="sec-aomenos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">≥1</div>
+                    <div>
+                        <div class="tr-section-title">Probabilidade de "Ao Menos Um"</div>
+                        <div class="tr-section-sub">Aplicação direta do evento complementar</div>
+                    </div>
+                </div>
+                <p>Problemas do tipo "probabilidade de que <em>ao menos um</em> evento ocorra" são
+                resolvidos pelo complementar: é mais fácil calcular a chance de <em>nenhum</em>
+                evento ocorrer e subtrair de 1.</p>
+                <div class="tr-rule">
+                    \[P(\text{ao menos um}) = 1 - P(\text{nenhum})\]
+                </div>
+                <h4>Exemplo 1 — lançamento de moeda</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Uma moeda é lançada <strong>3 vezes</strong>. Qual a probabilidade de sair
+                              <strong>ao menos uma cara</strong>?</span>
+                        <span>Complementar: P(nenhuma cara) = P(3 coroas) \(= \left(\dfrac{1}{2}\right)^3 = \dfrac{1}{8}\)</span>
+                        <span class="hl">\(P(\text{ao menos uma cara}) = 1 - \dfrac{1}{8} = \dfrac{7}{8} = 87{,}5\%\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — lançamento de dado</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Um dado é lançado <strong>4 vezes</strong>. Qual a probabilidade de sair o número 6
+                              em <strong>ao menos um</strong> lançamento?</span>
+                        <span>P(não sair 6 em um lançamento) \(= \dfrac{5}{6}\)</span>
+                        <span>P(não sair 6 em nenhum dos 4) \(= \left(\dfrac{5}{6}\right)^4 = \dfrac{625}{1296}\)</span>
+                        <span class="hl">\(P(\text{ao menos um 6}) = 1 - \dfrac{625}{1296} = \dfrac{671}{1296} \approx 51{,}8\%\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> essa técnica funciona quando os lançamentos/tentativas são
+                    <em>independentes</em>. Se os eventos forem dependentes (ex.: retiradas sem reposição),
+                    é necessário listar os casos ou usar combinações.
+                </div>
+            </div>
+
+            <!-- PROBABILIDADE CONDICIONAL -->
+            <div class="tr-section" id="sec-cond">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">P|A</div>
+                    <div>
+                        <div class="tr-section-title">Probabilidade Condicional</div>
+                        <div class="tr-section-sub">Probabilidade de B dado que A ocorreu</div>
+                    </div>
+                </div>
+                <p>Quando a ocorrência de um evento \(A\) fornece informação sobre \(B\), usamos a
+                <strong>probabilidade condicional</strong>:</p>
+                <div class="tr-rule">
+                    \[P(B \mid A) = \dfrac{P(A \cap B)}{P(A)}, \quad P(A) \neq 0\]
+                    Lê-se: "probabilidade de \(B\) <em>dado que</em> \(A\) ocorreu."
+                </div>
+                <h4>Exemplo — urna sem reposição</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Urna com <strong>3 bolas vermelhas</strong> e <strong>2 azuis</strong>.
+                              Sabendo que a 1ª retirada foi vermelha, qual a probabilidade de a 2ª ser azul?</span>
+                        <span>Após retirar 1 bola vermelha, restam <strong>4 bolas</strong> na urna: 2 vermelhas e 2 azuis.</span>
+                        <span class="hl">\(P(B \mid A) = \dfrac{2}{4} = \dfrac{1}{2} = 50\%\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Interpretação:</strong> a informação de que a 1ª bola foi vermelha
+                    <em>atualiza</em> o espaço amostral — passamos de 5 para 4 bolas. A probabilidade
+                    condicional captura exatamente essa atualização.
+                </div>
+            </div>
+
+            <!-- TEOREMA DE BAYES -->
+            <div class="tr-section" id="sec-bayes">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Bayes</div>
+                    <div>
+                        <div class="tr-section-title">Teorema de Bayes</div>
+                        <div class="tr-section-sub">Invertendo a condicional — atualização de probabilidades</div>
+                    </div>
+                </div>
+                <p>O Teorema de Bayes permite calcular \(P(A \mid B)\) a partir de \(P(B \mid A)\),
+                invertendo a direção da condicional. É a base do raciocínio bayesiano, presente em
+                diagnósticos médicos, filtros de spam e inteligência artificial.</p>
+                <div class="tr-rule">
+                    \[P(A \mid B) = \dfrac{P(B \mid A) \cdot P(A)}{P(B)}\]
+                    onde \(P(B) = P(B \mid A)\cdot P(A) + P(B \mid A^c)\cdot P(A^c)\)
+                    é a <strong>probabilidade total</strong> de \(B\).
+                </div>
+                <h4>Exemplo — teste médico</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Uma doença afeta <strong>1%</strong> da população. Um teste tem
+                              <strong>sensibilidade de 95%</strong> (detecta a doença quando ela existe)
+                              e <strong>5% de falso-positivo</strong> (indica positivo em quem não tem a doença).
+                              Uma pessoa testa positivo — qual a probabilidade real de estar doente?</span>
+                        <span>
+                            \(P(D) = 0{,}01\) &#x2014; prevalência da doença<br/>
+                            \(P(+ \mid D) = 0{,}95\) &#x2014; sensibilidade<br/>
+                            \(P(+ \mid D^c) = 0{,}05\) &#x2014; falso-positivo
+                        </span>
+                        <span>
+                            Probabilidade total de testar positivo:<br/>
+                            \(P(+) = 0{,}95 \times 0{,}01 + 0{,}05 \times 0{,}99 = 0{,}0095 + 0{,}0495 = 0{,}059\)
+                        </span>
+                        <span class="hl">
+                            \(P(D \mid +) = \dfrac{0{,}95 \times 0{,}01}{0{,}059} = \dfrac{0{,}0095}{0{,}059} \approx 16{,}1\%\)
+                        </span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Resultado contraintuitivo:</strong> mesmo com um teste 95% preciso, apenas
+                    ~16% dos que testam positivo estão de fato doentes — porque a doença é rara (1%).
+                    Esse fenômeno, chamado de <em>paradoxo do falso-positivo</em>, reforça a importância
+                    da probabilidade <em>a priori</em> \(P(D)\) no cálculo de Bayes.
+                </div>
+            </div>
+
+            <!-- REGRA DA SOMA -->
+            <div class="tr-section" id="sec-soma">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#x222A;</div>
+                    <div>
+                        <div class="tr-section-title">Regra da Soma</div>
+                        <div class="tr-section-sub">Probabilidade de A ou B ocorrerem</div>
+                    </div>
+                </div>
+                <p>Para eventos <strong>mutuamente exclusivos</strong> (\(A \cap B = \varnothing\)):</p>
+                <div class="tr-rule">
+                    \[P(A \cup B) = P(A) + P(B)\]
+                </div>
+                <p>Para eventos <strong>não exclusivos</strong> (podem ocorrer ao mesmo tempo),
+                subtrai-se a interseção para não contá-la duas vezes:</p>
+                <div class="tr-rule">
+                    \[P(A \cup B) = P(A) + P(B) - P(A \cap B)\]
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/probabilidade/fig-venn-soma.svg"
+                         alt="Diagrama de Venn mostrando eventos A e B com interseção A∩B" />
+                </div>
+                <h4>Exemplo 1 — eventos mutuamente exclusivos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Probabilidade de sair <strong>2 ou 5</strong> ao lançar um dado:</span>
+                        <span>\(P(A) = \dfrac{1}{6}\), \(P(B) = \dfrac{1}{6}\) — exclusivos: dado não mostra 2 e 5 simultaneamente</span>
+                        <span class="hl">\(P(A \cup B) = \dfrac{1}{6}+\dfrac{1}{6} = \dfrac{2}{6} = \dfrac{1}{3}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — eventos não exclusivos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Turma de 30 alunos: 18 estudam Matemática (\(A\)), 12 estudam Física (\(B\)), 5 estudam ambas.</span>
+                        <span>\(P(A)=\dfrac{18}{30}\), \(P(B)=\dfrac{12}{30}\), \(P(A \cap B)=\dfrac{5}{30}\)</span>
+                        <span class="hl">\(P(A \cup B) = \dfrac{18}{30}+\dfrac{12}{30}-\dfrac{5}{30} = \dfrac{25}{30} = \dfrac{5}{6}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REGRA DO PRODUTO -->
+            <div class="tr-section" id="sec-prod">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#x2229;</div>
+                    <div>
+                        <div class="tr-section-title">Regra do Produto</div>
+                        <div class="tr-section-sub">Probabilidade de A e B ocorrerem juntos</div>
+                    </div>
+                </div>
+                <p>Para eventos <strong>independentes</strong> (o resultado de um não afeta o outro),
+                a caracterização formal é: \(A\) e \(B\) são independentes se e somente se \(P(A \cap B) = P(A) \cdot P(B)\).</p>
+                <div class="tr-rule">
+                    \[P(A \cap B) = P(A) \cdot P(B) \quad \text{(eventos independentes)}\]
+                </div>
+                <p>Para eventos <strong>dependentes</strong>, utiliza-se a probabilidade condicional:</p>
+                <div class="tr-rule">
+                    \[P(A \cap B) = P(A) \cdot P(B \mid A) \quad \text{(eventos dependentes)}\]
+                </div>
+                <h4>Exemplo 1 — independentes (moeda e dado)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Probabilidade de obter <strong>cara</strong> na moeda <strong>e</strong> número <strong>4</strong> no dado:</span>
+                        <span>\(P(A) = \dfrac{1}{2}\), \(P(B) = \dfrac{1}{6}\) — lançamentos independentes</span>
+                        <span class="hl">\(P(A \cap B) = \dfrac{1}{2} \cdot \dfrac{1}{6} = \dfrac{1}{12}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — dependentes (bolas sem reposição)</h4>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/probabilidade/fig-arvore-probabilidade.svg"
+                         alt="Árvore de probabilidade para retirada de bolas vermelha e azul sem reposição" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Caixa com 5 bolas vermelhas e 3 azuis. Probabilidade de tirar 1 vermelha e depois 1 azul, sem reposição:</span>
+                        <span>\(P(A) = \dfrac{5}{8}\) — 1ª retirada vermelha</span>
+                        <span>Após remover 1 vermelha restam 7 bolas, 3 azuis: \(P(B \mid A) = \dfrac{3}{7}\)</span>
+                        <span class="hl">\(P(A \cap B) = \dfrac{5}{8} \cdot \dfrac{3}{7} = \dfrac{15}{56}\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> sorteios <strong>sem reposição</strong> sempre geram eventos dependentes —
+                    use obrigatoriamente \(P(A) \cdot P(B \mid A)\).
+                    Sorteios <strong>com reposição</strong> produzem eventos independentes — use \(P(A) \cdot P(B)\).
+                </div>
+            </div>
+
+            <!-- PROBABILIDADE E COMBINATÓRIA -->
+            <div class="tr-section" id="sec-comb">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Cn</div>
+                    <div>
+                        <div class="tr-section-title">Probabilidade e Combinatória</div>
+                        <div class="tr-section-sub">Usando combinações para contar casos</div>
+                    </div>
+                </div>
+                <p>Em problemas de sorteio, baralho e urnas com múltiplas retiradas simultâneas,
+                \(n(A)\) e \(n(\Omega)\) são contados com <strong>combinações</strong>:</p>
+                <div class="tr-rule">
+                    \[P(A) = \dfrac{C_{n,k}}{C_{N,k}} \quad \text{onde} \quad C_{n,k} = \dfrac{n!}{k!\,(n-k)!}\]
+                </div>
+                <h4>Exemplo 1 — urna com retirada simultânea</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Urna com 4 bolas brancas e 3 pretas. Retira-se 2 bolas simultaneamente.
+                              Qual a probabilidade de <strong>as duas serem brancas</strong>?</span>
+                        <span>\(n(\Omega) = C_{7,2} = \dfrac{7!}{2!\cdot 5!} = 21\) \(\quad\)
+                              \(n(A) = C_{4,2} = \dfrac{4!}{2!\cdot 2!} = 6\)</span>
+                        <span class="hl">\(P(A) = \dfrac{6}{21} = \dfrac{2}{7} \approx 28{,}6\%\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — cores diferentes</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Mesma urna. Qual a probabilidade de as 2 bolas serem de <strong>cores diferentes</strong>?</span>
+                        <span>\(n(B) = C_{4,1} \cdot C_{3,1} = 4 \cdot 3 = 12\) — escolher 1 branca e 1 preta</span>
+                        <span class="hl">\(P(B) = \dfrac{12}{21} = \dfrac{4}{7} \approx 57{,}1\%\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Verificação:</strong> \(P(\text{BB}) + P(\text{BP}) + P(\text{PP}) =
+                    \dfrac{6}{21} + \dfrac{12}{21} + \dfrac{3}{21} = \dfrac{21}{21} = 1\) &#x2713;
+                </div>
+            </div>
+
+            <!-- DISTRIBUIÇÃO BINOMIAL -->
+            <div class="tr-section" id="sec-binom">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">B(n,p)</div>
+                    <div>
+                        <div class="tr-section-title">Distribuição Binomial</div>
+                        <div class="tr-section-sub">Experimentos de Bernoulli repetidos</div>
+                    </div>
+                </div>
+                <p>Um <strong>experimento de Bernoulli</strong> tem exatamente dois resultados possíveis:
+                <em>sucesso</em> (probabilidade \(p\)) ou <em>fracasso</em> (probabilidade \(1-p\)).
+                Quando o experimento é repetido \(n\) vezes de forma <strong>independente</strong>,
+                a variável aleatória \(X\) = "número de sucessos" segue a
+                <strong>distribuição binomial</strong> \(X \sim B(n, p)\).</p>
+                <div class="tr-rule">
+                    \[P(X = k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}, \quad k = 0, 1, 2, \ldots, n\]
+                    onde \(\binom{n}{k} = C_{n,k} = \dfrac{n!}{k!\,(n-k)!}\).
+                </div>
+                <h4>Exemplo 1 — lançamento de dado</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Um dado é lançado <strong>5 vezes</strong>. Qual a probabilidade de o número 6
+                              sair <strong>exatamente 2 vezes</strong>?</span>
+                        <span>\(n=5\), \(k=2\), \(p=\dfrac{1}{6}\), \(1-p=\dfrac{5}{6}\)</span>
+                        <span>\(P(X=2) = C_{5,2} \cdot \left(\dfrac{1}{6}\right)^2 \cdot \left(\dfrac{5}{6}\right)^3
+                              = 10 \cdot \dfrac{1}{36} \cdot \dfrac{125}{216}\)</span>
+                        <span class="hl">\(P(X=2) = \dfrac{1250}{7776} \approx 16{,}1\%\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — controle de qualidade</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Uma fábrica produz peças com <strong>10% de defeito</strong>. Num lote de
+                              <strong>4 peças</strong>, qual a probabilidade de <strong>nenhuma</strong> ser defeituosa?</span>
+                        <span>\(n=4\), \(k=0\), \(p=0{,}10\)</span>
+                        <span>\(P(X=0) = C_{4,0} \cdot (0{,}10)^0 \cdot (0{,}90)^4 = 1 \cdot 1 \cdot 0{,}6561\)</span>
+                        <span class="hl">\(P(X=0) = 0{,}6561 = 65{,}61\%\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Quando usar:</strong> a distribuição binomial exige que os experimentos sejam
+                    (1) independentes entre si, (2) com a mesma probabilidade \(p\) de sucesso, e
+                    (3) o número de repetições \(n\) deve ser fixo. Se qualquer condição falhar, o modelo
+                    binomial não se aplica.
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação integrando os conceitos do capítulo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia geral:</strong>
+                    (1) identificar o experimento e definir \(\Omega\);
+                    (2) identificar o evento pedido;
+                    (3) contar \(n(A)\) e \(n(\Omega)\) — se necessário, usar combinações;
+                    (4) aplicar as regras de complementar, soma ou produto conforme o enunciado.
+                </div>
+                <h4>Problema — baralho comum</h4>
+                <p>Um baralho comum tem 52 cartas: 4 naipes (copas, ouros, paus, espadas) com 13 cartas cada.
+                Uma carta é retirada ao acaso. Calcule:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>(a) P(carta de copas)</strong></span>
+                        <span>\(n(A)=13\), \(n(\Omega)=52\)</span>
+                        <span class="hl">\(P=\dfrac{13}{52}=\dfrac{1}{4}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>(b) P(carta de figura: J, Q ou K)</strong></span>
+                        <span>\(n(B)=4\times 3=12\)</span>
+                        <span class="hl">\(P=\dfrac{12}{52}=\dfrac{3}{13}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>(c) P(figura de copas)</strong> — interseção de (a) e (b)</span>
+                        <span>\(n(A \cap B)=3\) (J, Q e K de copas)</span>
+                        <span class="hl">\(P=\dfrac{3}{52}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>(d) P(copas ou figura)</strong> — não exclusivos</span>
+                        <span>\(P(A \cup B)=\dfrac{13}{52}+\dfrac{12}{52}-\dfrac{3}{52}\)</span>
+                        <span class="hl">\(=\dfrac{22}{52}=\dfrac{11}{26} \approx 42{,}3\%\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DICAS E ERROS COMUNS -->
+            <div class="tr-section" id="sec-dicas">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">!</div>
+                    <div>
+                        <div class="tr-section-title">Dicas e Erros Comuns</div>
+                        <div class="tr-section-sub">O que mais cai em vestibular e concurso</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x26A0; Com vs. sem reposição</strong></span>
+                        <span>Retiradas <em>sem reposição</em> — eventos dependentes: use \(P(A) \cdot P(B \mid A)\).</span>
+                        <span class="hl">Retiradas <em>com reposição</em> — eventos independentes: use \(P(A) \cdot P(B)\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x26A0; "Ao menos um" — use o complementar</strong></span>
+                        <span>Calcular diretamente exige somar vários casos. O caminho rápido:</span>
+                        <span class="hl">\(P(\text{ao menos um}) = 1 - P(\text{nenhum})\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x26A0; Regra da Soma — não esqueça a interseção</strong></span>
+                        <span>Para eventos não exclusivos, somar apenas \(P(A)+P(B)\) conta a interseção em dobro.</span>
+                        <span class="hl">Sempre subtraia: \(P(A \cup B) = P(A)+P(B)-P(A \cap B)\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>&#x26A0; Independência ≠ Exclusividade</strong></span>
+                        <span>Eventos mutuamente exclusivos com \(P(A),P(B) \gt 0\) são <em>dependentes</em>
+                              (se \(A\) ocorre, \(B\) não pode ocorrer).</span>
+                        <span class="hl">Independência significa \(P(A \cap B) = P(A)\cdot P(B)\), não \(A \cap B = \varnothing\).</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Checklist rápido:</strong> (1) Os eventos são excludentes? Use Soma simples.
+                    (2) As retiradas têm reposição? Eventos independentes. (3) O enunciado diz "ao menos"?
+                    Use complementar. (4) Há "dado que"? Use probabilidade condicional ou Bayes.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

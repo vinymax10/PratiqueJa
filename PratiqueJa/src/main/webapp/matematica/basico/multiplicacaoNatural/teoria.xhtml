@@ -1,0 +1,548 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é multiplicação?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Multiplicar dois números naturais é somar um deles tantas vezes quantas indica o outro.
+                </div>
+                <p>Dados dois fatores \(a\) e \(b\), o produto \(a \times b\) representa \(a\) somado
+                \(b\) vezes. Os elementos recebem os seguintes nomes:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(a \times b = p\)</span>
+                        <span><strong>Multiplicando</strong> (\(a\)) — número que é multiplicado</span>
+                        <span><strong>Multiplicador</strong> (\(b\)) — número pelo qual se multiplica</span>
+                        <span class="hl"><strong>Produto</strong> (\(p\)) — resultado da multiplicação</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Exemplo: \(3 \times 4\)</span>
+                        <span>\(3 + 3 + 3 + 3 = 12\) — somamos 3 por quatro vezes</span>
+                        <span class="hl">\(3 \times 4 = 12\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Verificação:</strong> a divisão é a operação inversa da multiplicação.
+                    Se \(a \times b = p\), então \(p \div b = a\). Use isso para conferir resultados:
+                    \(342 \times 2 = 684 \Rightarrow 684 \div 2 = 342\) &#x2713;
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Prop</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades</div>
+                        <div class="tr-section-sub">Leis que facilitam o cálculo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Comutativa:</strong> \(a \times b = b \times a\) — a ordem dos fatores não altera o produto
+                </div>
+                <div class="tr-rule">
+                    <strong>Associativa:</strong> \((a \times b) \times c = a \times (b \times c)\) — o agrupamento não altera o produto
+                </div>
+                <div class="tr-rule">
+                    <strong>Distributiva:</strong> \(a \times (b + c) = a \times b + a \times c\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Elemento neutro:</strong> \(a \times 1 = a\) — qualquer número multiplicado por 1 é ele mesmo
+                </div>
+                <div class="tr-rule">
+                    <strong>Elemento absorvente:</strong> \(a \times 0 = 0\) — qualquer número multiplicado por 0 é zero
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Comutativa: \(6 \times 4 = 4 \times 6 = 24\)</span>
+                        <span class="hl">Se você sabe \(3 \times 7\), já sabe \(7 \times 3\) — metade da tabuada é automática!</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Distributiva: \(5 \times 12 = 5 \times (10 + 2)\)</span>
+                        <span>\(= 5 \times 10 + 5 \times 2 = 50 + 10\)</span>
+                        <span class="hl">\(= 60\) — decomponha um fator para facilitar o cálculo mental</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO POR 10, 100, 1000 -->
+            <div class="tr-section" id="sec-pot10">
+                <div class="tr-section-header">
+                    <div class="tr-badge">×10</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação por 10, 100 e 1000</div>
+                        <div class="tr-section-sub">Acrescentar zeros à direita</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Multiplicar um número natural por uma potência de 10 é acrescentar zeros à direita do número — um zero para cada zero da potência.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\times\ 10\) → acrescenta <strong>1 zero</strong></span>
+                        <span>\(45 \times 10 = 450\)</span>
+                        <span class="hl">\(308 \times 10 = 3080\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\times\ 100\) → acrescenta <strong>2 zeros</strong></span>
+                        <span>\(45 \times 100 = 4500\)</span>
+                        <span class="hl">\(7 \times 100 = 700\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\times\ 1000\) → acrescenta <strong>3 zeros</strong></span>
+                        <span>\(45 \times 1000 = 45000\)</span>
+                        <span class="hl">\(12 \times 1000 = 12000\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Por que funciona?</strong> O sistema decimal é posicional: deslocar todos os algarismos uma casa para a esquerda equivale a multiplicar por 10. Acrescentar um zero à direita faz exatamente esse deslocamento.
+                </div>
+            </div>
+
+            <!-- ALGORITMO BÁSICO -->
+            <div class="tr-section" id="sec-basico">
+                <div class="tr-section-header">
+                    <div class="tr-badge">1</div>
+                    <div>
+                        <div class="tr-section-title">Algoritmo da Multiplicação</div>
+                        <div class="tr-section-sub">Multiplicar por 1 dígito — da direita para a esquerda</div>
+                    </div>
+                </div>
+                <p>Coloque o multiplicando em cima e o multiplicador embaixo. Multiplique o dígito de baixo
+                por cada dígito de cima, da <strong>direita para a esquerda</strong>.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo:</strong> \(342 \times 2\)</span>
+                        <span><strong>Passo 1</strong> — unidades: \(2 \times 2 = 4\)</span>
+                        <span><strong>Passo 2</strong> — dezenas: \(2 \times 4 = 8\)</span>
+                        <span><strong>Passo 3</strong> — centenas: \(2 \times 3 = 6\)</span>
+                        <span class="hl">Resultado: \(342 \times 2 = 684\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Disposição vertical:</strong>
+                    \[\begin{array}{rrrr}
+                    &amp; 3 &amp; 4 &amp; 2 \\
+                    \times &amp; &amp; &amp; 2 \\
+                    \hline
+                    &amp; 6 &amp; 8 &amp; 4
+                    \end{array}\]
+                </div>
+            </div>
+
+            <!-- RESERVA / VAI UM -->
+            <div class="tr-section" id="sec-reserva">
+                <div class="tr-section-header">
+                    <div class="tr-badge">2</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação com Reserva</div>
+                        <div class="tr-section-sub">Quando o produto de um dígito tem 2 algarismos</div>
+                    </div>
+                </div>
+                <p>Quando a multiplicação de um dígito resulta em um número com 2 algarismos,
+                registra-se o algarismo das <strong>unidades</strong> no resultado e
+                <strong>reserva-se</strong> o algarismo das dezenas para somar na próxima coluna.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo:</strong> \(852 \times 6\)</span>
+                        <span><strong>Passo 1</strong> — unidades: \(6 \times 2 = 12\) → escreve <strong>2</strong>, reserva <strong>1</strong></span>
+                        <span><strong>Passo 2</strong> — dezenas: \(6 \times 5 = 30\), mais reserva: \(30 + 1 = 31\) → escreve <strong>1</strong>, reserva <strong>3</strong></span>
+                        <span><strong>Passo 3</strong> — centenas: \(6 \times 8 = 48\), mais reserva: \(48 + 3 = 51\) → escreve <strong>51</strong></span>
+                        <span class="hl">Resultado: \(852 \times 6 = 5112\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Disposição vertical com reserva</strong> (reservas indicadas em cima):
+                    \[\begin{array}{rrrrr}
+                    &amp; &amp; ^3 &amp; ^1 &amp; \\
+                    &amp; &amp; 8 &amp; 5 &amp; 2 \\
+                    \times &amp; &amp; &amp; &amp; 6 \\
+                    \hline
+                    &amp; 5 &amp; 1 &amp; 1 &amp; 2
+                    \end{array}\]
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO POR 2 DÍGITOS -->
+            <div class="tr-section" id="sec-dois-digitos">
+                <div class="tr-section-header">
+                    <div class="tr-badge">3</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação por 2 ou Mais Dígitos</div>
+                        <div class="tr-section-sub">Produtos parciais e soma final</div>
+                    </div>
+                </div>
+                <p>Quando o multiplicador tem 2 ou mais dígitos, calcula-se um <strong>produto parcial</strong>
+                para cada dígito do multiplicador. Cada produto parcial é deslocado uma casa para a esquerda
+                em relação ao anterior e, ao final, somam-se todos os parciais.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Exemplo:</strong> \(34 \times 23\)</span>
+                        <span><strong>Parcial 1</strong> — multiplique por 3 (unidades do multiplicador): \(34 \times 3 = 102\)</span>
+                        <span><strong>Parcial 2</strong> — multiplique por 2 (dezenas do multiplicador): \(34 \times 2 = 68\), deslocado uma posição à esquerda → vale \(680\)</span>
+                        <span><strong>Soma:</strong> \(102 + 680 = 782\)</span>
+                        <span class="hl">Resultado: \(34 \times 23 = 782\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Disposição vertical:</strong>
+                    \[\begin{array}{rrrr}
+                    &amp; &amp; 3 &amp; 4 \\
+                    \times &amp; &amp; 2 &amp; 3 \\
+                    \hline
+                    &amp; 1 &amp; 0 &amp; 2 \\
+                    6 &amp; 8 &amp; 0 &amp; \\
+                    \hline
+                    7 &amp; 8 &amp; 2 &amp;
+                    \end{array}\]
+                </div>
+                <div class="tr-note">
+                    <strong>Por que deslocar?</strong> O dígito das dezenas vale 10 vezes mais que o das unidades.
+                    Deslocar o parcial uma casa à esquerda equivale a multiplicar por 10, o que reflete corretamente o valor posicional.
+                </div>
+            </div>
+
+            <!-- ESTIMATIVA -->
+            <div class="tr-section" id="sec-estimativa">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Est</div>
+                    <div>
+                        <div class="tr-section-title">Estimativa do Resultado</div>
+                        <div class="tr-section-sub">Arredonde antes de calcular para verificar a ordem de grandeza</div>
+                    </div>
+                </div>
+                <p>Antes de fazer a multiplicação exata, estime o resultado arredondando os fatores para o
+                número redondo mais próximo. Se o resultado calculado estiver muito diferente da estimativa,
+                há provavelmente um erro.</p>
+                <div class="tr-rule">
+                    Arredonde → multiplique → compare com o resultado exato
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Estimativa de \(48 \times 23\):</strong></span>
+                        <span>\(48 \approx 50\) e \(23 \approx 20\)</span>
+                        <span>\(50 \times 20 = 1000\)</span>
+                        <span class="hl">Resultado exato: \(48 \times 23 = 1104\) — próximo de 1000 &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Estimativa de \(31 \times 19\):</strong></span>
+                        <span>\(31 \approx 30\) e \(19 \approx 20\)</span>
+                        <span>\(30 \times 20 = 600\)</span>
+                        <span class="hl">Resultado exato: \(31 \times 19 = 589\) — próximo de 600 &#x2713;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRUQUES DE CÁLCULO MENTAL -->
+            <div class="tr-section" id="sec-mental">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">&#x1F4A1;</div>
+                    <div>
+                        <div class="tr-section-title">Truques de Cálculo Mental</div>
+                        <div class="tr-section-sub">Atalhos para multiplicar sem papel</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 2 — dobro</strong></span>
+                        <span>Some o número a si mesmo</span>
+                        <span class="hl">\(37 \times 2 = 37 + 37 = 74\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 5</strong></span>
+                        <span>Multiplique por 10 e divida por 2</span>
+                        <span class="hl">\(48 \times 5 = 480 \div 2 = 240\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 9</strong></span>
+                        <span>Multiplique por 10 e subtraia o número</span>
+                        <span class="hl">\(7 \times 9 = 70 - 7 = 63\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 11 (1 dígito)</strong></span>
+                        <span>Repita o dígito duas vezes</span>
+                        <span class="hl">\(7 \times 11 = 77 \quad 8 \times 11 = 88\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 25</strong></span>
+                        <span>Multiplique por 100 e divida por 4</span>
+                        <span class="hl">\(12 \times 25 = 1200 \div 4 = 300\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Multiplicar por 4</strong></span>
+                        <span>Dobre duas vezes (×2 depois ×2)</span>
+                        <span class="hl">\(23 \times 4 = 46 \times 2 = 92\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABUADA -->
+            <div class="tr-section" id="sec-tabuada">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Tabuada da Multiplicação</div>
+                        <div class="tr-section-sub">Produtos de 1 a 10 — formato equação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Cada cartão mostra a tabuada de um número. Leia linha por linha:
+                    <strong>fator × fator = produto</strong>. Graças à propriedade comutativa,
+                    se você sabe \(3 \times 7\), já sabe \(7 \times 3\) — metade da tabuada é automática!
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+
+                    <!-- col 1 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 1</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            1 × 1 = <strong>1</strong><br/>
+                            1 × 2 = <strong>2</strong><br/>
+                            1 × 3 = <strong>3</strong><br/>
+                            1 × 4 = <strong>4</strong><br/>
+                            1 × 5 = <strong>5</strong><br/>
+                            1 × 6 = <strong>6</strong><br/>
+                            1 × 7 = <strong>7</strong><br/>
+                            1 × 8 = <strong>8</strong><br/>
+                            1 × 9 = <strong>9</strong><br/>
+                            1 × 10 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 2 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 2</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            2 × 1 = <strong>2</strong><br/>
+                            2 × 2 = <strong>4</strong><br/>
+                            2 × 3 = <strong>6</strong><br/>
+                            2 × 4 = <strong>8</strong><br/>
+                            2 × 5 = <strong>10</strong><br/>
+                            2 × 6 = <strong>12</strong><br/>
+                            2 × 7 = <strong>14</strong><br/>
+                            2 × 8 = <strong>16</strong><br/>
+                            2 × 9 = <strong>18</strong><br/>
+                            2 × 10 = <strong>20</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 3 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 3</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            3 × 1 = <strong>3</strong><br/>
+                            3 × 2 = <strong>6</strong><br/>
+                            3 × 3 = <strong>9</strong><br/>
+                            3 × 4 = <strong>12</strong><br/>
+                            3 × 5 = <strong>15</strong><br/>
+                            3 × 6 = <strong>18</strong><br/>
+                            3 × 7 = <strong>21</strong><br/>
+                            3 × 8 = <strong>24</strong><br/>
+                            3 × 9 = <strong>27</strong><br/>
+                            3 × 10 = <strong>30</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 4 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 4</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            4 × 1 = <strong>4</strong><br/>
+                            4 × 2 = <strong>8</strong><br/>
+                            4 × 3 = <strong>12</strong><br/>
+                            4 × 4 = <strong>16</strong><br/>
+                            4 × 5 = <strong>20</strong><br/>
+                            4 × 6 = <strong>24</strong><br/>
+                            4 × 7 = <strong>28</strong><br/>
+                            4 × 8 = <strong>32</strong><br/>
+                            4 × 9 = <strong>36</strong><br/>
+                            4 × 10 = <strong>40</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 5 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 5</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            5 × 1 = <strong>5</strong><br/>
+                            5 × 2 = <strong>10</strong><br/>
+                            5 × 3 = <strong>15</strong><br/>
+                            5 × 4 = <strong>20</strong><br/>
+                            5 × 5 = <strong>25</strong><br/>
+                            5 × 6 = <strong>30</strong><br/>
+                            5 × 7 = <strong>35</strong><br/>
+                            5 × 8 = <strong>40</strong><br/>
+                            5 × 9 = <strong>45</strong><br/>
+                            5 × 10 = <strong>50</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 6 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 6</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            6 × 1 = <strong>6</strong><br/>
+                            6 × 2 = <strong>12</strong><br/>
+                            6 × 3 = <strong>18</strong><br/>
+                            6 × 4 = <strong>24</strong><br/>
+                            6 × 5 = <strong>30</strong><br/>
+                            6 × 6 = <strong>36</strong><br/>
+                            6 × 7 = <strong>42</strong><br/>
+                            6 × 8 = <strong>48</strong><br/>
+                            6 × 9 = <strong>54</strong><br/>
+                            6 × 10 = <strong>60</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 7 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 7</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            7 × 1 = <strong>7</strong><br/>
+                            7 × 2 = <strong>14</strong><br/>
+                            7 × 3 = <strong>21</strong><br/>
+                            7 × 4 = <strong>28</strong><br/>
+                            7 × 5 = <strong>35</strong><br/>
+                            7 × 6 = <strong>42</strong><br/>
+                            7 × 7 = <strong>49</strong><br/>
+                            7 × 8 = <strong>56</strong><br/>
+                            7 × 9 = <strong>63</strong><br/>
+                            7 × 10 = <strong>70</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 8 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 8</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            8 × 1 = <strong>8</strong><br/>
+                            8 × 2 = <strong>16</strong><br/>
+                            8 × 3 = <strong>24</strong><br/>
+                            8 × 4 = <strong>32</strong><br/>
+                            8 × 5 = <strong>40</strong><br/>
+                            8 × 6 = <strong>48</strong><br/>
+                            8 × 7 = <strong>56</strong><br/>
+                            8 × 8 = <strong>64</strong><br/>
+                            8 × 9 = <strong>72</strong><br/>
+                            8 × 10 = <strong>80</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 9 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 9</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            9 × 1 = <strong>9</strong><br/>
+                            9 × 2 = <strong>18</strong><br/>
+                            9 × 3 = <strong>27</strong><br/>
+                            9 × 4 = <strong>36</strong><br/>
+                            9 × 5 = <strong>45</strong><br/>
+                            9 × 6 = <strong>54</strong><br/>
+                            9 × 7 = <strong>63</strong><br/>
+                            9 × 8 = <strong>72</strong><br/>
+                            9 × 9 = <strong>81</strong><br/>
+                            9 × 10 = <strong>90</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 10 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:110px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Tabuada do 10</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            10 × 1 = <strong>10</strong><br/>
+                            10 × 2 = <strong>20</strong><br/>
+                            10 × 3 = <strong>30</strong><br/>
+                            10 × 4 = <strong>40</strong><br/>
+                            10 × 5 = <strong>50</strong><br/>
+                            10 × 6 = <strong>60</strong><br/>
+                            10 × 7 = <strong>70</strong><br/>
+                            10 × 8 = <strong>80</strong><br/>
+                            10 × 9 = <strong>90</strong><br/>
+                            10 × 10 = <strong>100</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tr-note">
+                    <strong>Truque da tabuada do 9:</strong> os algarismos do resultado somam sempre 9
+                    e o dígito das dezenas é sempre uma unidade a menos que o multiplicador.
+                    Ex.: \(9 \times 7 = 63\) → dezenas = 6 = 7−1, e \(6+3=9\) &#x2713;
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Aplicação em situações do dia a dia</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identifique o que está sendo repetido e quantas vezes;
+                    (2) escreva a multiplicação; (3) calcule; (4) verifique se a resposta faz sentido.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 1 — compras</strong></span>
+                        <span>Uma caixa de lápis tem 12 unidades. Uma escola comprou 24 caixas. Quantos lápis ao total?</span>
+                        <span>Estimativa: \(12 \times 24 \approx 10 \times 25 = 250\)</span>
+                        <span>\(12 \times 24 = 12 \times 20 + 12 \times 4 = 240 + 48\)</span>
+                        <span class="hl">Total: \(288\) lápis. Próximo da estimativa &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 2 — organização em fileiras</strong></span>
+                        <span>Uma sala tem 8 fileiras com 7 carteiras cada. Quantas carteiras no total?</span>
+                        <span>Reconheça a tabuada: \(8 \times 7\)</span>
+                        <span class="hl">Total: \(56\) carteiras</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 3 — tempo</strong></span>
+                        <span>Um filme dura 1 hora e 45 minutos. Quantos minutos no total?</span>
+                        <span>\(1 \times 60 = 60\) minutos (1 hora)</span>
+                        <span>\(60 + 45 = 105\) minutos — mas como multiplicação: \(1{,}75 \times 60\)...</span>
+                        <span class="hl">Mais simples: \(60 + 45 = 105\) minutos &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 4 — grandezas</strong></span>
+                        <span>Uma fazenda tem formato retangular, com 125 m de comprimento e 80 m de largura. Qual a área?</span>
+                        <span>Área = comprimento × largura = \(125 \times 80\)</span>
+                        <span>\(125 \times 80 = 125 \times 8 \times 10 = 1000 \times 10\)</span>
+                        <span class="hl">Área: \(10\,000\) m² &#x2713;</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 60">
+    <!-- Regiões coloridas -->
+    <rect x="30" y="10" width="220" height="18" rx="3" fill="#fee2e2" opacity="0.85"/>
+    <rect x="250" y="10" width="220" height="18" rx="3" fill="#dcfce7" opacity="0.85"/>
+    <!-- Rótulos Z- e Z+ -->
+    <text x="140" y="10" text-anchor="middle" font-size="15" fill="#dc2626" font-style="italic">ℤ⁻</text>
+    <text x="370" y="10" text-anchor="middle" font-size="15" fill="#16a34a" font-style="italic">ℤ⁺</text>
+    <!-- Eixo -->
+    <line x1="10" y1="19" x2="490" y2="19" stroke="#374151" stroke-width="2"/>
+    <!-- Setas -->
+    <polygon points="5,19 17,14 17,24" fill="#374151"/>
+    <polygon points="495,19 483,14 483,24" fill="#374151"/>
+    <!-- Ticks e labels: passo 44px, -5 em x=30 -->
+    <line x1="30"  y1="14" x2="30"  y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="30"   y="42" text-anchor="middle" font-size="12" fill="#374151">-5</text>
+    <line x1="74"  y1="14" x2="74"  y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="74"   y="42" text-anchor="middle" font-size="12" fill="#374151">-4</text>
+    <line x1="118" y1="14" x2="118" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="118"  y="42" text-anchor="middle" font-size="12" fill="#374151">-3</text>
+    <line x1="162" y1="14" x2="162" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="162"  y="42" text-anchor="middle" font-size="12" fill="#374151">-2</text>
+    <line x1="206" y1="14" x2="206" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="206"  y="42" text-anchor="middle" font-size="12" fill="#374151">-1</text>
+    <!-- Zero destacado -->
+    <circle cx="250" cy="19" r="5" fill="#1d4ed8"/>
+    <text x="250"  y="42" text-anchor="middle" font-size="13" fill="#1d4ed8" font-weight="bold">0</text>
+    <line x1="294" y1="14" x2="294" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="294"  y="42" text-anchor="middle" font-size="12" fill="#374151">+1</text>
+    <line x1="338" y1="14" x2="338" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="338"  y="42" text-anchor="middle" font-size="12" fill="#374151">+2</text>
+    <line x1="382" y1="14" x2="382" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="382"  y="42" text-anchor="middle" font-size="12" fill="#374151">+3</text>
+    <line x1="426" y1="14" x2="426" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="426"  y="42" text-anchor="middle" font-size="12" fill="#374151">+4</text>
+    <line x1="470" y1="14" x2="470" y2="24" stroke="#374151" stroke-width="1.5"/>
+    <text x="470"  y="42" text-anchor="middle" font-size="12" fill="#374151">+5</text>
+</svg>

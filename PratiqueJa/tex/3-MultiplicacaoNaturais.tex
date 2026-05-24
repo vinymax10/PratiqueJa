@@ -4,7 +4,6 @@
 
 \begin{document}
 \pagenumbering{gobble}
-%\setstretch{1.5}
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
@@ -14,47 +13,97 @@
 
 \begin{multicols}{2}
 
-\T{Multiplicando números com mais de um dígito } 
- 
-Primeiramente coloque o maior número em cima e o menor embaixo. Depois efetue a multiplicação do número debaixo pelos dígitos do número de cima da direita para esquerda.
+\T{Definição}
 
-\TM{Exemplos:}
+Multiplicar dois números naturais é somar um deles tantas vezes quantas indica o outro. Dados dois fatores $a$ e $b$, o produto $a \times b$ representa $a$ somado $b$ vezes.
 
-\vspace{0.5cm}
+\vspace{4pt}
+\textbf{Multiplicando} ($a$) — número que é multiplicado.
+
+\textbf{Multiplicador} ($b$) — número pelo qual se multiplica.
+
+\textbf{Produto} ($p$) — resultado da multiplicação.
+
+\TM{Exemplo}
+
+$3 \times 4 = 3 + 3 + 3 + 3 = 12$
+
+\vspace{4pt}
+\textbf{Verificação:} a divisão é a operação inversa. Se $a \times b = p$, então $p \div b = a$. Ex.: $342 \times 2 = 684 \Rightarrow 684 \div 2 = 342$ \checkmark
+
+\T{Propriedades}
+
+\Formula{a \times b = b \times a \quad \text{(comutativa)}}
+\Formula{(a \times b) \times c = a \times (b \times c) \quad \text{(associativa)}}
+\Formula{a \times (b + c) = a \times b + a \times c \quad \text{(distributiva)}}
+\Formula{a \times 1 = a \quad \text{(elemento neutro)}}
+\Formula{a \times 0 = 0 \quad \text{(elemento absorvente)}}
+
+\TM{Exemplos}
+
+Comutativa: $6 \times 4 = 4 \times 6 = 24$. Se você sabe $3 \times 7$, já sabe $7 \times 3$ — metade da tabuada é automática!
+
+Distributiva: $5 \times 12 = 5 \times (10 + 2) = 50 + 10 = 60$.
+
+\T{Multiplicação por 10, 100 e 1000}
+
+Multiplicar por uma potência de 10 é acrescentar zeros à direita do número — um zero para cada zero da potência.
+
+\TM{Exemplos}
+
+$45 \times 10 = 450$ \quad $308 \times 10 = 3080$
+\vspace{4pt}
+
+$45 \times 100 = 4500$ \quad $7 \times 100 = 700$
+\vspace{4pt}
+
+$45 \times 1000 = 45000$ \quad $12 \times 1000 = 12000$
+
+\vspace{4pt}
+\textbf{Por que funciona?} O sistema decimal é posicional: deslocar os algarismos uma casa para a esquerda equivale a multiplicar por 10.
+
+\T{Algoritmo da Multiplicação}
+
+Coloque o multiplicando em cima e o multiplicador embaixo. Multiplique o dígito de baixo pelos dígitos de cima, da \textbf{direita para a esquerda}.
+
+\TM{Exemplo — $342 \times 2$}
+
+\vspace{0.3cm}
 
 $\begin{array}{rrrr}
-&3&4&\textcolor{iris}{2}\\ 
+&3&4&\textcolor{iris}{2}\\
 \times &&&\textcolor{iris}{2}\\
 \hline&&&\textcolor{iris}{4}\\
 \end{array}$
 $\Rightarrow$
 $\begin{array}{rrrr}
-&3&\textcolor{iris}{4}&2\\ 
+&3&\textcolor{iris}{4}&2\\
 \times &&&\textcolor{iris}{2}\\
 \hline&&\textcolor{iris}{8}&4\\
 \end{array}$
 $\Rightarrow$
-\vspace{0.5cm}
 
+\vspace{0.2cm}
 $\begin{array}{rrrr}
-&\textcolor{iris}{3}&4&2\\ 
+&\textcolor{iris}{3}&4&2\\
 \times &&&\textcolor{iris}{2}\\
 \hline&\textcolor{iris}{6}&8&4\\
 \end{array}$
-\vspace{0.7cm}
-%\includegraphics[width=8cm]{MultiplicacaoNaturais/MultiplicacaoNaturais1.png}
 
-\T{Subindo os dígitos da dezena}
+\vspace{4pt}
+Resultado: $342 \times 2 = 684$
 
-Quando a multiplicação de um dígito tem como resultado um número com 2 dígitos, então é necessário enviar o dígito da dezena para cima da próxima coluna. Nesse caso, na próxima multiplicação, teremos que somar o dígito  de cima.
+\T{Multiplicação com Reserva}
 
-\TM{Exemplos:}
+Quando a multiplicação de um dígito resulta em número com 2 algarismos, registra-se o algarismo das \textbf{unidades} e \textbf{reserva-se} o das dezenas para somar na próxima coluna.
 
-\vspace{0.5cm}
+\TM{Exemplo — $852 \times 6$}
+
+\vspace{0.3cm}
 
 $\begin{array}{rrrrr}
-&&&\textcolor{iris}{1}&\\ 
-&&8&5&\textcolor{iris}{2}\\ 
+&&&\textcolor{iris}{1}&\\
+&&8&5&\textcolor{iris}{2}\\
 \times &&&&\textcolor{iris}{6}\\
 \hline
 &&&&\textcolor{iris}{2}\\
@@ -62,63 +111,137 @@ $\begin{array}{rrrrr}
 $\Rightarrow$
 $\begin{array}{rrrrr}
 &&\textcolor{iris}{3}&\textcolor{iris}{1}&\\
-&&8&\textcolor{iris}{5}&2\\ 
+&&8&\textcolor{iris}{5}&2\\
 \times &&&&\textcolor{iris}{6}\\
 \hline
 &&&\textcolor{iris}{1}&2\\
 \end{array}$
 $\Rightarrow$
-\vspace{0.2cm}
 
+\vspace{0.2cm}
 $\begin{array}{rrrrr}
 &&\textcolor{iris}{3}&\textcolor{iris}{1}&\\
-&&\textcolor{iris}{8}&5&2\\ 
+&&\textcolor{iris}{8}&5&2\\
 \times &&&&\textcolor{iris}{6}\\
 \hline
 &\textcolor{iris}{5}&\textcolor{iris}{1}&1&2\\
 \end{array}$
 
+\vspace{4pt}
+Resultado: $852 \times 6 = 5112$
 
-%\includegraphics[width=8cm]{MultiplicacaoNaturais/MultiplicacaoNaturais2.png}
+\T{Multiplicação por 2 ou Mais Dígitos}
 
-%\T{Quando os 2 números têm mais de um dígito}
+Calcula-se um \textbf{produto parcial} para cada dígito do multiplicador, deslocando uma casa para a esquerda a cada novo parcial, e soma-se tudo ao final.
 
-%Efetue a multiplicação do o primeiro dígito e em seguida multiplique o segundo dígito colocando o resultado desolcando uma coluna a esquerda. Ao final some os resultados.
+\TM{Exemplo — $34 \times 23$}
+
+Parcial 1: $34 \times 3 = 102$
+
+Parcial 2: $34 \times 2 = 68$ (vale $680$, pois é dezena)
+
+\vspace{0.3cm}
+$\begin{array}{rrrr}
+&&3&4\\
+\times &&2&3\\
+\hline
+&1&0&2\\
+6&8&0&\\
+\hline
+7&8&2&
+\end{array}$
+
+\vspace{4pt}
+Resultado: $34 \times 23 = 782$
+
+\vspace{4pt}
+\textbf{Dica:} o deslocamento de uma casa à esquerda equivale a multiplicar por 10, refletindo o valor posicional do dígito das dezenas.
+
+\T{Estimativa do Resultado}
+
+Arredonde os fatores para números redondos, calcule a estimativa e compare com o resultado exato. Se estiverem muito diferentes, há um erro.
+
+\TM{Exemplos}
+
+$48 \times 23 \approx 50 \times 20 = 1000$ \quad (exato: $1104$) \checkmark
+
+$31 \times 19 \approx 30 \times 20 = 600$ \quad (exato: $589$) \checkmark
+
+\T{Truques de Cálculo Mental}
+
+\textbf{$\times 2$} — some o número a si mesmo: $37 \times 2 = 37 + 37 = 74$
+
+\textbf{$\times 5$} — multiplique por 10 e divida por 2: $48 \times 5 = 480 \div 2 = 240$
+
+\textbf{$\times 9$} — multiplique por 10 e subtraia: $7 \times 9 = 70 - 7 = 63$
+
+\textbf{$\times 11$} (1 dígito) — repita o dígito: $7 \times 11 = 77$
+
+\textbf{$\times 25$} — multiplique por 100 e divida por 4: $12 \times 25 = 1200 \div 4 = 300$
+
+\textbf{$\times 4$} — dobre duas vezes: $23 \times 4 = 46 \times 2 = 92$
+
+\T{Problemas Contextualizados}
+
+\textbf{Estratégia:} (1) identifique o que é repetido e quantas vezes; (2) escreva a multiplicação; (3) calcule; (4) verifique se a resposta faz sentido.
+
+\TM{Problema 1 — compras}
+
+Uma caixa de lápis tem 12 unidades. Uma escola comprou 24 caixas. Quantos lápis ao total?
+
+Estimativa: $12 \times 24 \approx 10 \times 25 = 250$
+
+$12 \times 24 = 12 \times 20 + 12 \times 4 = 240 + 48 = \mathbf{288}$ lápis \checkmark
+
+\TM{Problema 2 — fileiras}
+
+Uma sala tem 8 fileiras com 7 carteiras cada. Quantas carteiras no total?
+
+$8 \times 7 = \mathbf{56}$ carteiras \checkmark
+
+\TM{Problema 3 — área}
+
+Uma fazenda tem 125\,m de comprimento e 80\,m de largura. Qual a área?
+
+$125 \times 80 = 125 \times 8 \times 10 = 1000 \times 10 = \mathbf{10\,000}\ \text{m}^2$ \checkmark
 
 \end{multicols}
 
 \begin{center}
-     \textbf{\Large Tabuada}
+     \textbf{\Large Tabuada da Multiplicação}
 \end{center}
 
 \setlength{\tabcolsep}{17pt}
 \begin{tabular}{lllll}
-$	1\times1=1	$&$	2\times1=2	$&$	3\times1=3	$&$	4\times1=4	$&$	5\times1=5	$\\
-$	1\times2=2	$&$	2\times2=4	$&$	3\times2=6	$&$	4\times2=8	$&$	5\times2=10	$\\
-$	1\times3=3	$&$	2\times3=6	$&$	3\times3=9	$&$	4\times3=12	$&$	5\times3=15	$\\
-$	1\times4=4	$&$	2\times4=8	$&$	3\times4=12	$&$	4\times4=16	$&$	5\times4=20	$\\
-$	1\times5=5	$&$	2\times5=10	$&$	3\times5=15	$&$	4\times5=20	$&$	5\times5=25	$\\
-$	1\times6=6	$&$	2\times6=12	$&$	3\times6=18	$&$	4\times6=24	$&$	5\times6=30	$\\
-$	1\times7=7	$&$	2\times7=14	$&$	3\times7=21	$&$	4\times7=28	$&$	5\times7=35	$\\
-$	1\times8=8	$&$	2\times8=16	$&$	3\times8=24	$&$	4\times8=32	$&$	5\times8=40	$\\
-$	1\times9=9	$&$	2\times9=18	$&$	3\times9=27	$&$	4\times9=36	$&$	5\times9=45	$\\
-$	1\times10=10	$&$	2\times10=20	$&$	3\times10=30	$&$	4\times10=40	$&$	5\times10=50	$\\
-\end{tabular} 
+$1\times1=1$  &$2\times1=2$  &$3\times1=3$  &$4\times1=4$  &$5\times1=5$  \\
+$1\times2=2$  &$2\times2=4$  &$3\times2=6$  &$4\times2=8$  &$5\times2=10$ \\
+$1\times3=3$  &$2\times3=6$  &$3\times3=9$  &$4\times3=12$ &$5\times3=15$ \\
+$1\times4=4$  &$2\times4=8$  &$3\times4=12$ &$4\times4=16$ &$5\times4=20$ \\
+$1\times5=5$  &$2\times5=10$ &$3\times5=15$ &$4\times5=20$ &$5\times5=25$ \\
+$1\times6=6$  &$2\times6=12$ &$3\times6=18$ &$4\times6=24$ &$5\times6=30$ \\
+$1\times7=7$  &$2\times7=14$ &$3\times7=21$ &$4\times7=28$ &$5\times7=35$ \\
+$1\times8=8$  &$2\times8=16$ &$3\times8=24$ &$4\times8=32$ &$5\times8=40$ \\
+$1\times9=9$  &$2\times9=18$ &$3\times9=27$ &$4\times9=36$ &$5\times9=45$ \\
+$1\times10=10$&$2\times10=20$&$3\times10=30$&$4\times10=40$&$5\times10=50$\\
+\end{tabular}
 
 \vspace{0.5cm}
 
 \begin{tabular}{lllll}
-$	6\times1=6	$&$	7\times1=7	$&$	8\times1=8	$&$	9\times1=9	$&$	10\times1=10	$\\
-$	6\times2=12	$&$	7\times2=14	$&$	8\times2=16	$&$	9\times2=18	$&$	10\times2=20	$\\
-$	6\times3=18	$&$	7\times3=21	$&$	8\times3=24	$&$	9\times3=27	$&$	10\times3=30	$\\
-$	6\times4=24	$&$	7\times4=28	$&$	8\times4=32	$&$	9\times4=36	$&$	10\times4=40	$\\
-$	6\times5=30	$&$	7\times5=35	$&$	8\times5=40	$&$	9\times5=45	$&$	10\times5=50	$\\
-$	6\times6=36	$&$	7\times6=42	$&$	8\times6=48	$&$	9\times6=54	$&$	10\times6=60	$\\
-$	6\times7=42	$&$	7\times7=49	$&$	8\times7=56	$&$	9\times7=63	$&$	10\times7=70	$\\
-$	6\times8=48	$&$	7\times8=56	$&$	8\times8=64	$&$	9\times8=72	$&$	10\times8=80	$\\
-$	6\times9=54	$&$	7\times9=63	$&$	8\times9=72	$&$	9\times9=81	$&$	10\times9=90	$\\
-$	6\times10=60	$&$	7\times10=70	$&$	8\times10=80	$&$	9\times10=90	$&$	10\times10=100	$\\
+$6\times1=6$  &$7\times1=7$  &$8\times1=8$  &$9\times1=9$  &$10\times1=10$  \\
+$6\times2=12$ &$7\times2=14$ &$8\times2=16$ &$9\times2=18$ &$10\times2=20$  \\
+$6\times3=18$ &$7\times3=21$ &$8\times3=24$ &$9\times3=27$ &$10\times3=30$  \\
+$6\times4=24$ &$7\times4=28$ &$8\times4=32$ &$9\times4=36$ &$10\times4=40$  \\
+$6\times5=30$ &$7\times5=35$ &$8\times5=40$ &$9\times5=45$ &$10\times5=50$  \\
+$6\times6=36$ &$7\times6=42$ &$8\times6=48$ &$9\times6=54$ &$10\times6=60$  \\
+$6\times7=42$ &$7\times7=49$ &$8\times7=56$ &$9\times7=63$ &$10\times7=70$  \\
+$6\times8=48$ &$7\times8=56$ &$8\times8=64$ &$9\times8=72$ &$10\times8=80$  \\
+$6\times9=54$ &$7\times9=63$ &$8\times9=72$ &$9\times9=81$ &$10\times9=90$  \\
+$6\times10=60$&$7\times10=70$&$8\times10=80$&$9\times10=90$&$10\times10=100$\\
 \end{tabular}
+
+\vspace{6pt}
+\textbf{Truque do 9:} os algarismos do produto somam sempre 9 e o dígito das dezenas é sempre uma unidade a menos que o multiplicador. Ex.: $9 \times 7 = 63$ → $6 = 7-1$ e $6+3=9$ \checkmark
 
 \input{rodape}
 \end{document}

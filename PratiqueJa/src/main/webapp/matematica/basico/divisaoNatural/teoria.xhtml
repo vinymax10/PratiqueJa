@@ -1,0 +1,508 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é divisão e seus elementos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dividir é repartir uma quantidade em partes iguais ou determinar quantas vezes
+                    um número cabe dentro de outro.
+                </div>
+                <p>Dados dois números naturais \(a\) (dividendo) e \(b\) (divisor), com \(b \neq 0\),
+                a divisão determina o <strong>quociente</strong> \(q\) e o <strong>resto</strong> \(r\)
+                tais que:</p>
+                <div class="tr-rule">
+                    \[a = b \times q + r \qquad \text{com} \quad 0 \leq r \lt b\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Dividendo</strong> (\(a\)) — número que será dividido</span>
+                        <span><strong>Divisor</strong> (\(b\)) — número pelo qual se divide (\(\neq 0\))</span>
+                        <span><strong>Quociente</strong> (\(q\)) — resultado da divisão</span>
+                        <span class="hl"><strong>Resto</strong> (\(r\)) — sobra após a divisão, sempre \(0 \leq r \lt b\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Exemplo: \(17 \div 5\)</span>
+                        <span>\(17 = 5 \times 3 + 2\)</span>
+                        <span>Quociente \(= 3\), Resto \(= 2\)</span>
+                        <span class="hl">"17 dividido por 5 é 3, resto 2"</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Divisão por zero é indefinida.</strong> Não existe número \(q\) tal que
+                    \(0 \times q = a\) para \(a \neq 0\). Por isso o divisor nunca pode ser zero.
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES -->
+            <div class="tr-section" id="sec-prop">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Prop</div>
+                    <div>
+                        <div class="tr-section-title">Propriedades</div>
+                        <div class="tr-section-sub">O que a divisão preserva — e o que não preserva</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Não é comutativa:</strong> \(a \div b \neq b \div a\) em geral
+                </div>
+                <div class="tr-rule">
+                    <strong>Não é associativa:</strong> \((a \div b) \div c \neq a \div (b \div c)\) em geral
+                </div>
+                <div class="tr-rule">
+                    <strong>Divisão por 1:</strong> \(a \div 1 = a\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Igual dividido por igual:</strong> \(a \div a = 1\) para \(a \neq 0\)
+                </div>
+                <div class="tr-rule">
+                    <strong>Zero dividido por qualquer número:</strong> \(0 \div a = 0\) para \(a \neq 0\)
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Não comutativa: \(12 \div 4 = 3\)</span>
+                        <span class="hl">mas \(4 \div 12\) não é natural — a ordem importa!</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Relação com multiplicação:</strong> divisão e multiplicação são operações inversas</span>
+                        <span>Se \(a \times b = p\), então \(p \div b = a\) e \(p \div a = b\)</span>
+                        <span class="hl">Ex.: \(6 \times 7 = 42 \Rightarrow 42 \div 6 = 7\) e \(42 \div 7 = 6\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISÃO POR 10, 100, 1000 -->
+            <div class="tr-section" id="sec-pot10">
+                <div class="tr-section-header">
+                    <div class="tr-badge">÷10</div>
+                    <div>
+                        <div class="tr-section-title">Divisão por 10, 100 e 1000</div>
+                        <div class="tr-section-sub">Remover zeros à direita</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dividir um número natural (divisível pela potência de 10) por 10, 100 ou 1000
+                    é remover zeros à direita — um zero para cada zero da potência.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\div\ 10\) → remove <strong>1 zero</strong></span>
+                        <span>\(4500 \div 10 = 450\)</span>
+                        <span class="hl">\(3080 \div 10 = 308\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\div\ 100\) → remove <strong>2 zeros</strong></span>
+                        <span>\(4500 \div 100 = 45\)</span>
+                        <span class="hl">\(70000 \div 100 = 700\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(\div\ 1000\) → remove <strong>3 zeros</strong></span>
+                        <span>\(45000 \div 1000 = 45\)</span>
+                        <span class="hl">\(8000 \div 1000 = 8\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> esta regra só funciona quando o número termina em zeros suficientes.
+                    \(453 \div 10\) não resulta em número natural — o resultado seria \(45{,}3\),
+                    que pertence aos racionais, não aos naturais.
+                </div>
+            </div>
+
+            <!-- DIVISÃO EXATA E INEXATA -->
+            <div class="tr-section" id="sec-tipos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">r=0</div>
+                    <div>
+                        <div class="tr-section-title">Divisão Exata e Inexata</div>
+                        <div class="tr-section-sub">Classificação pelo valor do resto</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Divisão exata:</strong> resto zero — o dividendo é múltiplo do divisor.
+                </div>
+                <div class="tr-rule">
+                    <strong>Divisão inexata:</strong> resto diferente de zero, com \(0 \lt r \lt b\).
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Exata:</strong> \(68 \div 4\)</span>
+                        <span>\(68 = 4 \times 17 + 0\)</span>
+                        <span class="hl">Quociente \(= 17\), Resto \(= 0\) &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Inexata:</strong> \(71 \div 4\)</span>
+                        <span>\(71 = 4 \times 17 + 3\)</span>
+                        <span class="hl">Quociente \(= 17\), Resto \(= 3\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Relação com divisibilidade:</strong> dizer que \(a\) é divisível por \(b\)
+                    equivale a dizer que \(a \div b\) é exata (resto zero).
+                </div>
+            </div>
+
+            <!-- ALGORITMO DA DIVISÃO -->
+            <div class="tr-section" id="sec-algo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Alg</div>
+                    <div>
+                        <div class="tr-section-title">Algoritmo da Divisão</div>
+                        <div class="tr-section-sub">Chave de divisão — passo a passo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Passo 1 —</strong> Selecione dígitos do dividendo da esquerda para a direita
+                    até obter um número maior ou igual ao divisor.<br/>
+                    <strong>Passo 2 —</strong> Estime e escreva no quociente o maior dígito cujo produto
+                    pelo divisor não ultrapasse o número selecionado.<br/>
+                    <strong>Passo 3 —</strong> Multiplique divisor × quociente parcial e subtraia do número selecionado.<br/>
+                    <strong>Passo 4 —</strong> Baixe o próximo dígito e repita a partir do Passo 1.
+                    Continue até não restar dígitos.
+                </div>
+                <div class="tr-note">
+                    <strong>Como estimar o dígito do quociente (Passo 2):</strong> use a tabuada do divisor.
+                    Encontre o maior múltiplo que não ultrapassa o número selecionado.
+                    Ex.: para \(28 \div 4\), a tabuada do 4 dá \(4 \times 7 = 28\) → quociente parcial = <strong>7</strong>.
+                </div>
+
+                <h4>Exemplo 1 — \(68 \div 4\) (início maior que divisor)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Passo 1</strong> — "6" ≥ 4: selecionamos o "6"</span>
+                        <span><strong>Passo 2</strong> — tabuada do 4: \(4 \times 1 = 4\) ✓ → quociente parcial <strong>1</strong></span>
+                        <span><strong>Passo 3</strong> — \(6 - 4 = 2\) (resto parcial)</span>
+                        <span><strong>Passo 4</strong> — baixa o "8": novo número = <strong>28</strong></span>
+                        <span><strong>Passo 2</strong> — tabuada do 4: \(4 \times 7 = 28\) ✓ → quociente parcial <strong>7</strong></span>
+                        <span><strong>Passo 3</strong> — \(28 - 28 = 0\) — sem mais dígitos</span>
+                        <span class="hl">Quociente = <strong>17</strong>, Resto = <strong>0</strong> &#x2713;</span>
+                    </div>
+                    <div class="tr-ex span-full">
+                        <span><strong>Na chave:</strong></span>
+                        <div style="margin:6px 0;">
+                            \(\begin{array}[t]{l|l}
+                              \begin{array}[t]{r}68 \\ -4 \\ \hline 28 \\ -28 \\ \hline 0\end{array}
+                              &amp;
+                              \begin{array}[t]{l}4 \\ \hline 17\end{array}
+                            \end{array}\)
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Exemplo 2 — \(368 \div 5\) (início menor que divisor)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Passo 1</strong> — "3" &lt; 5: não é suficiente. Tomamos "36"</span>
+                        <span><strong>Passo 2</strong> — tabuada do 5: \(5 \times 7 = 35\) ✓ (pois \(5 \times 8 = 40 \gt 36\)) → quociente parcial <strong>7</strong></span>
+                        <span><strong>Passo 3</strong> — \(36 - 35 = 1\)</span>
+                        <span><strong>Passo 4</strong> — baixa o "8": novo número = <strong>18</strong></span>
+                        <span><strong>Passo 2</strong> — tabuada do 5: \(5 \times 3 = 15\) ✓ → quociente parcial <strong>3</strong></span>
+                        <span><strong>Passo 3</strong> — \(18 - 15 = 3\) — sem mais dígitos, \(3 \lt 5\)</span>
+                        <span class="hl">Quociente = <strong>73</strong>, Resto = <strong>3</strong> — prova: \(5 \times 73 + 3 = 365 + 3 = 368\) &#x2713;</span>
+                    </div>
+                </div>
+
+                <h4>Exemplo 3 — \(95 \div 7\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Passo 1–3</strong> — "9" ≥ 7: \(7 \times 1 = 7\) ✓ → parcial <strong>1</strong>; \(9 - 7 = 2\)</span>
+                        <span><strong>Passo 4</strong> — baixa o "5": novo número = <strong>25</strong></span>
+                        <span><strong>Passo 2–3</strong> — \(7 \times 3 = 21\) ✓ → parcial <strong>3</strong>; \(25 - 21 = 4\)</span>
+                        <span class="hl">Quociente = <strong>13</strong>, Resto = <strong>4</strong> — prova: \(7 \times 13 + 4 = 91 + 4 = 95\) &#x2713;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROVA REAL -->
+            <div class="tr-section" id="sec-prova">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">&#x2713;</div>
+                    <div>
+                        <div class="tr-section-title">Prova Real da Divisão</div>
+                        <div class="tr-section-sub">Verificar o resultado usando a multiplicação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\text{divisor} \times \text{quociente} + \text{resto} = \text{dividendo}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(68 \div 4 = 17\), resto \(0\)</span>
+                        <span>Prova: \(4 \times 17 + 0 = 68\)</span>
+                        <span class="hl">\(68 = 68\) &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(368 \div 5 = 73\), resto \(3\)</span>
+                        <span>Prova: \(5 \times 73 + 3 = 365 + 3 = 368\)</span>
+                        <span class="hl">\(368 = 368\) &#x2713;</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Condição obrigatória do resto:</strong> o resto deve ser sempre
+                    <em>menor que o divisor</em>. Se \(r \geq b\), o quociente está errado —
+                    ainda é possível dividir mais uma vez.
+                    Ex.: se após subtrair sobrar 6 e o divisor é 4, o quociente parcial deveria ser
+                    1 a mais.
+                </div>
+            </div>
+
+            <!-- PROBLEMAS CONTEXTUALIZADOS -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Aplicação em situações do dia a dia</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identifique o que está sendo repartido e em quantas partes;
+                    (2) escreva a divisão; (3) calcule; (4) interprete o quociente <em>e</em> o resto no contexto.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 1 — divisão exata</strong></span>
+                        <span>48 balas serão repartidas igualmente entre 6 crianças. Quantas balas cada criança recebe?</span>
+                        <span>\(48 \div 6 = 8\), resto \(0\)</span>
+                        <span class="hl">Cada criança recebe <strong>8 balas</strong>. Não sobra nenhuma. &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 2 — com resto significativo</strong></span>
+                        <span>50 balas entre 6 crianças. Quantas cada uma recebe e quantas sobram?</span>
+                        <span>\(50 \div 6 = 8\), resto \(2\)</span>
+                        <span class="hl">Cada criança recebe <strong>8 balas</strong> e sobram <strong>2 balas</strong>.</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 3 — quantas vezes cabe?</strong></span>
+                        <span>Uma fita de 96 cm será cortada em pedaços de 8 cm. Quantos pedaços saem?</span>
+                        <span>\(96 \div 8 = 12\), resto \(0\)</span>
+                        <span class="hl">Saem <strong>12 pedaços</strong> exatos, sem desperdício. &#x2713;</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span><strong>Problema 4 — organização em grupos</strong></span>
+                        <span>Uma turma de 37 alunos será dividida em grupos de 5. Quantos grupos completos se formam? Quantos alunos ficam sem grupo?</span>
+                        <span>\(37 \div 5 = 7\), resto \(2\)</span>
+                        <span class="hl">Formam-se <strong>7 grupos</strong> completos e <strong>2 alunos</strong> ficam sem grupo.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABUADA DA DIVISÃO -->
+            <div class="tr-section" id="sec-tabuada">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Tabuada da Divisão</div>
+                        <div class="tr-section-sub">Quocientes de 1 a 10 — formato equação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A tabuada da divisão é o inverso da tabuada da multiplicação.
+                    Se você sabe que \(6 \times 7 = 42\), então sabe que \(42 \div 6 = 7\) e \(42 \div 7 = 6\) —
+                    cada fato da multiplicação gera <strong>dois</strong> fatos de divisão.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+
+                    <!-- col 1 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 1</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            1 ÷ 1 = <strong>1</strong><br/>
+                            2 ÷ 1 = <strong>2</strong><br/>
+                            3 ÷ 1 = <strong>3</strong><br/>
+                            4 ÷ 1 = <strong>4</strong><br/>
+                            5 ÷ 1 = <strong>5</strong><br/>
+                            6 ÷ 1 = <strong>6</strong><br/>
+                            7 ÷ 1 = <strong>7</strong><br/>
+                            8 ÷ 1 = <strong>8</strong><br/>
+                            9 ÷ 1 = <strong>9</strong><br/>
+                            10 ÷ 1 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 2 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 2</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            2 ÷ 2 = <strong>1</strong><br/>
+                            4 ÷ 2 = <strong>2</strong><br/>
+                            6 ÷ 2 = <strong>3</strong><br/>
+                            8 ÷ 2 = <strong>4</strong><br/>
+                            10 ÷ 2 = <strong>5</strong><br/>
+                            12 ÷ 2 = <strong>6</strong><br/>
+                            14 ÷ 2 = <strong>7</strong><br/>
+                            16 ÷ 2 = <strong>8</strong><br/>
+                            18 ÷ 2 = <strong>9</strong><br/>
+                            20 ÷ 2 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 3 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 3</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            3 ÷ 3 = <strong>1</strong><br/>
+                            6 ÷ 3 = <strong>2</strong><br/>
+                            9 ÷ 3 = <strong>3</strong><br/>
+                            12 ÷ 3 = <strong>4</strong><br/>
+                            15 ÷ 3 = <strong>5</strong><br/>
+                            18 ÷ 3 = <strong>6</strong><br/>
+                            21 ÷ 3 = <strong>7</strong><br/>
+                            24 ÷ 3 = <strong>8</strong><br/>
+                            27 ÷ 3 = <strong>9</strong><br/>
+                            30 ÷ 3 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 4 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 4</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            4 ÷ 4 = <strong>1</strong><br/>
+                            8 ÷ 4 = <strong>2</strong><br/>
+                            12 ÷ 4 = <strong>3</strong><br/>
+                            16 ÷ 4 = <strong>4</strong><br/>
+                            20 ÷ 4 = <strong>5</strong><br/>
+                            24 ÷ 4 = <strong>6</strong><br/>
+                            28 ÷ 4 = <strong>7</strong><br/>
+                            32 ÷ 4 = <strong>8</strong><br/>
+                            36 ÷ 4 = <strong>9</strong><br/>
+                            40 ÷ 4 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 5 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 5</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            5 ÷ 5 = <strong>1</strong><br/>
+                            10 ÷ 5 = <strong>2</strong><br/>
+                            15 ÷ 5 = <strong>3</strong><br/>
+                            20 ÷ 5 = <strong>4</strong><br/>
+                            25 ÷ 5 = <strong>5</strong><br/>
+                            30 ÷ 5 = <strong>6</strong><br/>
+                            35 ÷ 5 = <strong>7</strong><br/>
+                            40 ÷ 5 = <strong>8</strong><br/>
+                            45 ÷ 5 = <strong>9</strong><br/>
+                            50 ÷ 5 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 6 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 6</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            6 ÷ 6 = <strong>1</strong><br/>
+                            12 ÷ 6 = <strong>2</strong><br/>
+                            18 ÷ 6 = <strong>3</strong><br/>
+                            24 ÷ 6 = <strong>4</strong><br/>
+                            30 ÷ 6 = <strong>5</strong><br/>
+                            36 ÷ 6 = <strong>6</strong><br/>
+                            42 ÷ 6 = <strong>7</strong><br/>
+                            48 ÷ 6 = <strong>8</strong><br/>
+                            54 ÷ 6 = <strong>9</strong><br/>
+                            60 ÷ 6 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 7 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 7</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            7 ÷ 7 = <strong>1</strong><br/>
+                            14 ÷ 7 = <strong>2</strong><br/>
+                            21 ÷ 7 = <strong>3</strong><br/>
+                            28 ÷ 7 = <strong>4</strong><br/>
+                            35 ÷ 7 = <strong>5</strong><br/>
+                            42 ÷ 7 = <strong>6</strong><br/>
+                            49 ÷ 7 = <strong>7</strong><br/>
+                            56 ÷ 7 = <strong>8</strong><br/>
+                            63 ÷ 7 = <strong>9</strong><br/>
+                            70 ÷ 7 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 8 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 8</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            8 ÷ 8 = <strong>1</strong><br/>
+                            16 ÷ 8 = <strong>2</strong><br/>
+                            24 ÷ 8 = <strong>3</strong><br/>
+                            32 ÷ 8 = <strong>4</strong><br/>
+                            40 ÷ 8 = <strong>5</strong><br/>
+                            48 ÷ 8 = <strong>6</strong><br/>
+                            56 ÷ 8 = <strong>7</strong><br/>
+                            64 ÷ 8 = <strong>8</strong><br/>
+                            72 ÷ 8 = <strong>9</strong><br/>
+                            80 ÷ 8 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 9 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 9</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            9 ÷ 9 = <strong>1</strong><br/>
+                            18 ÷ 9 = <strong>2</strong><br/>
+                            27 ÷ 9 = <strong>3</strong><br/>
+                            36 ÷ 9 = <strong>4</strong><br/>
+                            45 ÷ 9 = <strong>5</strong><br/>
+                            54 ÷ 9 = <strong>6</strong><br/>
+                            63 ÷ 9 = <strong>7</strong><br/>
+                            72 ÷ 9 = <strong>8</strong><br/>
+                            81 ÷ 9 = <strong>9</strong><br/>
+                            90 ÷ 9 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                    <!-- col 10 -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 14px;min-width:115px;">
+                        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e3a8a;border-bottom:2px solid #1e3a8a;margin-bottom:6px;padding-bottom:4px;text-align:center;">Divisão por 10</div>
+                        <div style="font-size:.88rem;line-height:2;">
+                            10 ÷ 10 = <strong>1</strong><br/>
+                            20 ÷ 10 = <strong>2</strong><br/>
+                            30 ÷ 10 = <strong>3</strong><br/>
+                            40 ÷ 10 = <strong>4</strong><br/>
+                            50 ÷ 10 = <strong>5</strong><br/>
+                            60 ÷ 10 = <strong>6</strong><br/>
+                            70 ÷ 10 = <strong>7</strong><br/>
+                            80 ÷ 10 = <strong>8</strong><br/>
+                            90 ÷ 10 = <strong>9</strong><br/>
+                            100 ÷ 10 = <strong>10</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

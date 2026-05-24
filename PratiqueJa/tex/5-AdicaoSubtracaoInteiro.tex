@@ -1,73 +1,208 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,twoside]{article}
 
 \input{caput}
 
 \begin{document}
 \pagenumbering{gobble}
-\setstretch{1.4}
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
     \textbf{\Huge \textcolor{bluebell}{Adição e Subtração com Inteiros}}
 \end{center}
+\vspace{0.5cm}
 
 \begin{multicols}{2}
 
-\T{Sinais iguais } 
+\T{Conjunto dos Inteiros}
 
-Quando dois números inteiros têm o mesmo sinal, somamos os valores absolutos e mantemos o sinal comum.
+O conjunto dos números inteiros estende os naturais incluindo os opostos negativos:
 
-\TM{Soma e repete o sinal}
+\Formula{\mathbb{Z} = \{\ldots,\ -3,\ -2,\ -1,\ 0,\ +1,\ +2,\ +3,\ \ldots\}}
 
-$(+) ~ (+)=(+)$
+\textbf{Valor absoluto} (módulo): distância até zero, sempre $\geq 0$.
 
-$(-) ~ (-)=(-)$
+\vspace{4pt}
+$|{+7}| = 7$ \quad $|{-7}| = 7$ \quad $|0| = 0$
 
-\TM{Exemplos:}
+\vspace{4pt}
+$\mathbb{Z}^+ = \{+1, +2, +3, \ldots\}$ — inteiros positivos
 
-$+7 +3 = +10$
+$\mathbb{Z}^- = \{-1, -2, -3, \ldots\}$ — inteiros negativos
 
-$-7 -3 = -10$
+\vspace{4pt}
+\textbf{Reta numérica:} negativos à esquerda, positivos à direita. Logo $-1 > -5$, mesmo que $|-5| > |-1|$.
 
-\vspace{0.5cm} 
- 
+\T{Subtração = Adição do Oposto}
+
+Subtrair um número é somar o seu oposto. Essa unificação elimina regras separadas:
+
+\Formula{a - b = a + (-b)}
+
+\TM{Exemplos}
+
+$8 - 5 = 8 + (-5) = +3$
+
+$4 - 9 = 4 + (-9) = -5$
+
+$-3 - 7 = -3 + (-7) = -10$
+
+$-3 - (-5) = -3 + (+5) = +2$
+
+$6 - (-4) = 6 + (+4) = +10$
+
+\vspace{4pt}
+\textbf{Oposto de $a$} é $-a$: o número tal que $a + (-a) = 0$. O oposto de $-7$ é $+7$; o oposto de $0$ é $0$.
+
+\T{Sinais Iguais}
+
+Quando dois inteiros têm o \textbf{mesmo sinal}, some os valores absolutos e mantenha o sinal comum.
+
+\Formula{(+a) + (+b) = +(a+b)}
+\Formula{(-a) + (-b) = -(a+b)}
+
+\TM{Exemplos}
+
+$+7 + (+3) = +(7+3) = +10$
+
+$-7 + (-3) = -(7+3) = -10$
+
+$+15 + (+8) = +23$
+
+$-15 + (-8) = -23$
+
+\vspace{4pt}
+\textbf{Regra prática:} sinais iguais $\Rightarrow$ \emph{soma} os módulos e \emph{repete o sinal}.
+
 \T{Sinais Diferentes}
 
-Quando os números têm sinais opostos, subtraímos os valores absolutos e colocamos o sinal do número com maior valor absoluto.
+Quando os inteiros têm \textbf{sinais opostos}, subtraia o menor módulo do maior e use o sinal do número de maior valor absoluto.
 
-\TM{Subtrai e dá o sinal do maior}
+\TM{Exemplos}
 
-\small$(+)$ ~ \Large$(-)$ \normalsize $=(-)$
+$+4 + (-6)$: $\;|-6| > |+4|$ $\Rightarrow$ sinal $-$;\; $6-4=2$ $\Rightarrow$ $-2$
 
-\Large$(+)$ ~ \small$(-)$ \normalsize $=(+)$
+$+8 + (-5)$: $\;|+8| > |-5|$ $\Rightarrow$ sinal $+$;\; $8-5=3$ $\Rightarrow$ $+3$
 
-\TM{Exemplos:}
+$-12 + (+7)$: $\;|-12| > |+7|$ $\Rightarrow$ sinal $-$;\; $12-7=5$ $\Rightarrow$ $-5$
 
-$+4 -6 = -2$
+\vspace{4pt}
+\textbf{Regra prática:} sinais diferentes $\Rightarrow$ \emph{subtrai} os módulos e usa o sinal do \emph{maior módulo}. Se os módulos forem iguais, o resultado é zero.
 
-$+8 -5 = +3$
+\T{Sinal antes do Parêntese}
 
-\vspace{0.5cm} 
+Um sinal antes de um parêntese age em \textbf{todos} os termos internos:
 
-\T{Sinal negativo antes do parênteses}
+\Formula{-(+a) = -a \qquad -(-a) = +a}
+\Formula{+(+a) = +a \qquad +(-a) = -a}
 
-Se o sinal negativo estiver antes de um parêntese, ele vai alterar o sinal de todos os termos dentro do parêntese.
+\TM{Exemplos}
 
-\TM{Troca o sinal de dentro}
+$+4 - (-6) = +4 + 6 = +10$
 
-$-(-)  =(+)$
+$+8 - (+5) = +8 - 5 = +3$
 
-$-(+)  =(-)$
+$-3 - (-9) = -3 + 9 = +6$
 
-\TM{Exemplos:}
+\T{Propriedades da Adição}
 
-$+4 -(-6) = +4 +6 = 10$
+\Formula{a + b = b + a \quad \text{(comutativa)}}
+\Formula{(a + b) + c = a + (b + c) \quad \text{(associativa)}}
+\Formula{a + 0 = a \quad \text{(elemento neutro)}}
+\Formula{a + (-a) = 0 \quad \text{(elemento oposto)}}
 
-$+8 -(+5) = +8 -5 = +3$
- 
+\TM{Exemplos}
+
+Comutativa: $(-3) + (+8) = (+8) + (-3) = +5$ \checkmark
+
+Oposto: $-7 + 7 = 0$ \checkmark
+
+\vspace{4pt}
+\textbf{Atenção:} a subtração \textbf{não} é comutativa: $8 - 3 \neq 3 - 8$.
+
+\T{Expressões com Múltiplos Termos}
+
+\textbf{Estratégia:} (1) elimine parênteses; (2) agrupe positivos; (3) agrupe negativos; (4) aplique sinais diferentes ao resultado.
+
+\TM{Exemplo 1}
+
+$+5 - 3 + (-2) - (-4)$
+
+$= +5 - 3 - 2 + 4$
+
+Positivos: $+5 + 4 = +9$ \quad Negativos: $-3 - 2 = -5$
+
+$+9 + (-5) = +4$ \checkmark
+
+\TM{Exemplo 2}
+
+$-8 + (-3) - (-5) + 2$
+
+$= -8 - 3 + 5 + 2$
+
+Positivos: $+5 + 2 = +7$ \quad Negativos: $-8 - 3 = -11$
+
+$+7 + (-11) = -4$ \checkmark
+
+\T{Problemas Contextualizados}
+
+\textbf{Estratégia:} identifique os inteiros do problema, monte a operação e interprete o sinal do resultado.
+
+\TM{Temperatura}
+
+O termômetro marca $-3\,°C$ e a temperatura sobe $8\,°C$.
+
+$-3 + 8 = +5\,°C$ \checkmark
+
+\TM{Elevador}
+
+Elevador no $4°$ subsolo ($-4$). Sobe 10 andares.
+
+$-4 + 10 = +6$ — para no $6°$ andar \checkmark
+
+\TM{Finanças}
+
+Dívida de R\$\,150 ($-150$). Recebe R\$\,200.
+
+$-150 + 200 = +50$ — saldo positivo de R\$\,50 \checkmark
+
+\TM{Cronologia}
+
+Batalha em 48 a.C. ($-48$). Quanto tempo até 2025 d.C.?
+
+$2025 - (-48) = 2025 + 48 = 2073$ anos \checkmark
+
+\T{Erros Comuns}
+
+\textbf{Duplo negativo:} $-(-5) = +5$, não $-5$. O sinal muda!
+
+\textbf{Sinais diferentes:} $+3 + (-8) = -5$, não $+11$. Deve subtrair os módulos, não somar.
+
+\textbf{Parêntese:} $-(+3-2) = -3+2 = -1$. O sinal inverte \textbf{todos} os termos, não só o primeiro.
+
+\textbf{Módulo $\neq$ valor:} $-3 > -8$ na reta numérica. Módulo maior não significa valor maior em negativos.
+
 \end{multicols}
 
 \vspace{0.5cm}
+
+\begin{center}
+\textbf{\Large Tabela de Regras dos Sinais}
+\end{center}
+
+\setlength{\tabcolsep}{12pt}
+\begin{tabular}{llll}
+\hline
+\textbf{Situação} & \textbf{Operação} & \textbf{Sinal} & \textbf{Exemplo} \\
+\hline
+Sinais iguais ($+$ e $+$) & Soma módulos & $+$ & $+7+(+3)=+10$ \\
+Sinais iguais ($-$ e $-$) & Soma módulos & $-$ & $-7+(-3)=-10$ \\
+Sinais diferentes         & Subtrai módulos & sinal do maior & $+4+(-6)=-2$ \\
+$-(-)$                    & —               & $+$            & $-(-5)=+5$ \\
+$-(+)$                    & —               & $-$            & $-(+5)=-5$ \\
+$+(-)$                    & —               & $-$            & $+(-5)=-5$ \\
+$+(+)$                    & —               & $+$            & $+(+5)=+5$ \\
+\hline
+\end{tabular}
 
 \input{rodape}
 \end{document}

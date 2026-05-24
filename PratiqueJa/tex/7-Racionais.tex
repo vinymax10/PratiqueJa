@@ -1,171 +1,243 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,twoside]{article}
 
 \input{caput}
 
 \begin{document}
 \pagenumbering{gobble}
-\setstretch{1.3}
 
 \includegraphics[width=4cm]{Logo2.png}
 \begin{center}
-    \textbf{\Huge \textcolor{bluebell}{Racionais}}
+    \textbf{\Huge \textcolor{bluebell}{Números Racionais}}
 \end{center}
+\vspace{0.5cm}
 
 \begin{multicols}{2}
 
+\T{Conjunto dos Racionais}
 
-\TW{Definição} 
+\Formula{\mathbb{Q} = \left\{ \frac{a}{b} \;\middle|\; a \in \mathbb{Z},\ b \in \mathbb{Z}^* \right\}}
 
-$\mathbb{Q} = \{ \frac{a}{b} ~|~ a \in \mathbb{Z}~e~b~ \in \mathbb{Z}^* \}$ onde $a$ é numerador e o e $b$ é o denominador.
+Todo número racional pode ser escrito como fração $\frac{a}{b}$, onde $a$ é o \textbf{numerador} e $b$ é o \textbf{denominador} ($b \neq 0$). O resultado da divisão pode ser:
 
-\TM{Exemplos:}
+\TM{Número inteiro}
 
-Números Inteiros
+$\dfrac{6}{2} = 3$ \qquad $\dfrac{-10}{5} = -2$
 
-\vspace{0.3cm}
-$\dfrac{6}{2} = 3$
-\vspace{0.3cm}
+\TM{Decimal exato}
 
-Números Decimais Exatos
+$\dfrac{1}{2} = 0{,}5$ \qquad $\dfrac{3}{4} = 0{,}75$
 
-\vspace{0.3cm}
-$\dfrac{1}{2} = 0,5$
-\vspace{0.3cm}
+\TM{Dízima periódica simples} (período logo após a vírgula)
 
-Dízima periódica simples
+$\dfrac{1}{3} = 0{,}333\ldots = 0{,}\overline{3}$
 
-\vspace{0.3cm}
-$\dfrac{1}{3} = 0,333 \ldots ~=~ 0,\overline{3}$
-\vspace{0.3cm}
+$\dfrac{7}{11} = 0{,}6363\ldots = 0{,}\overline{63}$
 
-$\dfrac{7}{11} = 0,6363 \ldots ~=~ 0,\overline{63}$
-\vspace{0.3cm}
+\TM{Dízima periódica composta} (parte não periódica antes do período)
 
-Dízima periódica composta
+$\dfrac{7}{12} = 0{,}5833\ldots = 0{,}58\overline{3}$
 
-\vspace{0.3cm}
-$\dfrac{7}{12} = 0,5833 \ldots ~=~ 0,58\overline{3}$
-
-\vspace{0.3cm}
-
-$\dfrac{5}{6} = 0,8333 \ldots ~=~ 0,8\overline{3}$
+$\dfrac{5}{6} = 0{,}8333\ldots = 0{,}8\overline{3}$
 
 \T{Tipos de Fração}
 
-\TM{Fração Própria:}
+\TM{Fração Própria} — numerador \emph{menor} que o denominador
 
-O numerador é menor que o denominador.
+$\dfrac{2}{6},\quad\dfrac{3}{4},\quad\dfrac{5}{9}$ \quad (resultado entre 0 e 1)
 
-\TM{Exemplos:}
+\TM{Fração Imprópria} — numerador \emph{maior} que o denominador
 
-\vspace{0.3cm}
-$\dfrac{2}{6}, ~\dfrac{3}{4}, ~\dfrac{5}{9}$
+$\dfrac{7}{2},\quad\dfrac{5}{3},\quad\dfrac{8}{5}$ \quad (resultado maior que 1)
 
-\TM{Fração Imprópria:}
+\TM{Fração Aparente} — numerador é múltiplo do denominador
 
-O numerador é menor que o denominador.
+$\dfrac{8}{2}=4,\quad\dfrac{6}{3}=2,\quad\dfrac{12}{4}=3$
 
-\TM{Exemplos:}
-\vspace{0.3cm}
- 
-$\dfrac{7}{2}, ~\dfrac{5}{3}, ~\dfrac{8}{5}$
+Todo inteiro $n$ é racional: $n = \dfrac{n}{1}$
 
-\TM{Fração Aparente:}
+\TM{Fração Mista} — parte inteira + fração própria
 
-O numerador é múltiplo do denominador.
+$2\dfrac{3}{5},\quad 4\dfrac{1}{3},\quad 3\dfrac{3}{7}$
 
-\TM{Exemplos:}
+Conversão: $2\dfrac{3}{5} = \dfrac{2\times5+3}{5} = \dfrac{13}{5}$
 
-\vspace{0.3cm}
-$\dfrac{8}{2}=4, ~\dfrac{6}{3}=2, ~\dfrac{12}{4}=3$
+\T{Frações Equivalentes e Simplificação}
 
-\TM{Fração Mista:}
+\Formula{\frac{a}{b} = \frac{a \times k}{b \times k} \quad (k \neq 0)}
 
-Possui um número inteiro seguido de uma fração.
+Multiplicar (ou dividir) numerador e denominador por um mesmo número não altera o valor da fração.
 
-\TM{Exemplos:}
+\TM{Amplificação}
 
-\vspace{0.3cm}
-$2\dfrac{3}{5}, ~4\dfrac{1}{3}, ~3\dfrac{3}{7}$
+$\dfrac{1}{3} = \dfrac{2}{6} = \dfrac{4}{12}$ — todas equivalentes
 
-\T{Soma e Subtração}
+\TM{Simplificação — dividir pelo MDC}
 
-\TM{Denominador igual:}
+Divida pelo MDC até obter a \textbf{fração irredutível} (MDC = 1).
 
-Some/Subtraia os numeradores.
+$\dfrac{12}{18}$ — MDC$(12,18) = 6$ $\;\Rightarrow\;$ $\dfrac{12\div6}{18\div6} = \dfrac{2}{3}$ \checkmark
 
-\TM{Exemplos:}
+$\dfrac{30}{45}$ — MDC$(30,45) = 15$ $\;\Rightarrow\;$ $\dfrac{30\div15}{45\div15} = \dfrac{2}{3}$ \checkmark
 
-\vspace{0.3cm}
-$\dfrac{2}{4} + \dfrac{1}{4}= \dfrac{3}{4}$
+\T{Conversão: Mista $\Leftrightarrow$ Imprópria}
 
-\vspace{0.3cm}
+\TM{Mista $\rightarrow$ Imprópria}
 
-$\dfrac{2}{4} - \dfrac{1}{4}= \dfrac{1}{4}$
+\Formula{n\frac{p}{q} = \frac{n \times q + p}{q}}
 
-\TM{Denominador diferente:}
+$3\dfrac{2}{5} = \dfrac{3\times5+2}{5} = \dfrac{17}{5}$ \qquad $4\dfrac{1}{3} = \dfrac{13}{3}$
 
-Calcula o Mínimo Múltiplo Comum (MMC), coloque o MMC como novo denominador das duas frações. Depois divide o MMC pelo denominador e multiplica o numerador. Processe essas contas em cada fração e em seguida realize a operação de soma ou subtração tendo em vista que agora as frações possuem o mesmo denominador.
+\TM{Imprópria $\rightarrow$ Mista (divisão euclidiana)}
 
-\vspace{0.3cm}
+Divida numerador pelo denominador: o quociente é a parte inteira, o resto é o novo numerador.
 
-$\dfrac{2}{3} + \dfrac{1}{4} = \dfrac{(2 \times (\frac{12}{3}))}{12} + \dfrac{(1 \times (\frac{12}{4}))}{12} = \vspace{0.3cm}  \\ \dfrac{(2 \times 4)}{12} + \dfrac{(1 \times 3)}{12} = \dfrac{8}{12} + \dfrac{3}{12} = \dfrac{11}{12}$
+$\dfrac{17}{5}$: $\;17 \div 5 = 3$ (resto $2$) $\;\Rightarrow\; 3\dfrac{2}{5}$
 
-\T{Soma e Subtração 2ª Opção}
+$\dfrac{22}{7}$: $\;22 \div 7 = 3$ (resto $1$) $\;\Rightarrow\; 3\dfrac{1}{7}$
 
-Essa opção é adequada para somar ou subtrair frações com denominadores diferentes e não muito grandes. Multiplique os denominadores para compor o novo denominador da fração. Depois multiplique cruzado o numerador de uma fração com o denominador da outra fração. Em seguida efetue a operação de soma ou subtração.
+\T{Comparação de Frações}
 
-\vspace{0.3cm} 
-$\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{(a \times d) + (c \times b)}{b \times d}$
+\TM{Mesmo denominador} — compare os numeradores
 
-\vspace{0.3cm}
+$\dfrac{3}{7} < \dfrac{5}{7}$ \quad (3 < 5)
 
-$\dfrac{a}{b} - \dfrac{c}{d} = \dfrac{(a \times d) - (c \times b)}{b \times d}$
+\TM{Denominadores diferentes} — reduza ao MMC
 
-\TM{Exemplo de soma:}
+$\dfrac{3}{4}$ vs $\dfrac{5}{6}$ — MMC$(4,6)=12$:
 
-\vspace{0.3cm} 
-$\dfrac{2}{3} + \dfrac{1}{4} = \dfrac{(2 \times 4) + (1 \times 3)}{12} = \dfrac{8 + 3}{12} = \dfrac{11}{12} $
+$\dfrac{9}{12}$ vs $\dfrac{10}{12}$ $\;\Rightarrow\;$ $\dfrac{3}{4} < \dfrac{5}{6}$
 
-\TM{Exemplo de subtração}
+\TM{Método rápido — produto cruzado}
 
-\vspace{0.3cm} 
-$\dfrac{5}{2} - \dfrac{3}{7} = \dfrac{(5 \times 7) - (3 \times 2)}{14} = \dfrac{35 - 6}{14} = \dfrac{29}{14}$
+\Formula{\frac{a}{b} \;\square\; \frac{c}{d} \;\Leftrightarrow\; a\times d \;\square\; c\times b}
 
-\vspace{0.5cm}
-\T{Multiplicação e Divisão}
+$\dfrac{3}{4}$ vs $\dfrac{5}{6}$: $\;3\times6=18$ vs $5\times4=20$ $\;\Rightarrow\;$ $18 < 20 \;\Rightarrow\; \dfrac{3}{4} < \dfrac{5}{6}$ \checkmark
 
-\TM{Multiplicação:}
+\T{Dízima Periódica $\rightarrow$ Fração}
 
-Multiplique os numeradores entre si e faça o mesmo com os denominadores.
+Chame a dízima de $x$. Multiplique por uma potência de 10 que alinha os períodos e subtraia.
 
-\vspace{0.3cm} 
-$\dfrac{a}{b} \times \dfrac{c}{d} = \dfrac{a \times b}{b \times d} $
+\TM{Dízima simples}
 
-\TM{Exemplos:}
+$x = 0{,}\overline{3}$ $\;\Rightarrow\;$ $10x = 3{,}\overline{3}$ $\;\Rightarrow\;$ $9x = 3$ $\;\Rightarrow\;$ $x = \dfrac{1}{3}$ \checkmark
 
-\vspace{0.3cm} 
-$\dfrac{2}{3} \times \dfrac{3}{4}= \dfrac{2 \times 3}{3\times4} = \dfrac{6}{12} = \dfrac{1}{2}$
+$x = 0{,}\overline{63}$ $\;\Rightarrow\;$ $99x = 63$ $\;\Rightarrow\;$ $x = \dfrac{63}{99} = \dfrac{7}{11}$ \checkmark
 
-\vspace{0.3cm}
+\TM{Dízima composta}
 
-$\dfrac{5}{2} \times \dfrac{3}{7}= \dfrac{5 \times 3}{2\times7} = \dfrac{15}{14}$
+$x = 0{,}58\overline{3}$
 
-\TM{Divisão:}
+$100x = 58{,}\overline{3}$ \quad $10x = 5{,}8\overline{3}$
 
-Multiplique a primeira fração pelo inverso da segunda.
+$90x = 52{,}5 \;\Rightarrow\; 900x = 525 \;\Rightarrow\; x = \dfrac{525}{900} = \dfrac{7}{12}$ \checkmark
 
-\vspace{0.3cm} 
-$\dfrac{a}{b} \div \dfrac{c}{d} = \dfrac{a}{b} \times \dfrac{d}{c} = \dfrac{a \times d}{b \times c}$
+\textbf{Atalho:} $\dfrac{\text{com período} - \text{sem período}}{\underbrace{9\ldots9}_{\text{período}}\underbrace{0\ldots0}_{\text{não periódico}}}$
 
-\TM{Exemplos:}
+Ex.: $0{,}58\overline{3} = \dfrac{583-58}{900} = \dfrac{525}{900} = \dfrac{7}{12}$
 
-\vspace{0.3cm} 
-$\dfrac{2}{3} \div \dfrac{4}{6}= \dfrac{2}{3} \times \dfrac{6}{4} = \dfrac{2 \times 6}{3\times4} = \dfrac{12}{12} = 1$
+\T{Soma e Subtração de Frações}
 
-\vspace{0.3cm}
+\TM{Denominadores iguais}
 
-$\dfrac{\dfrac{3}{4} }{ \dfrac{8}{5}}= \dfrac{3}{4} \times \dfrac{5}{8} = \dfrac{3 \times 5}{4\times8} = \dfrac{15}{32}$
+\Formula{\frac{a}{c} \pm \frac{b}{c} = \frac{a \pm b}{c}}
+
+$\dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}$ \qquad $\dfrac{2}{4} - \dfrac{1}{4} = \dfrac{1}{4}$
+
+\TM{Método MMC}
+
+$\dfrac{2}{3} + \dfrac{1}{4}$ — MMC$(3,4) = 12$:
+
+$\dfrac{2\times4}{12} + \dfrac{1\times3}{12} = \dfrac{8+3}{12} = \dfrac{11}{12}$ \checkmark
+
+\TM{Método Cruzado}
+
+\Formula{\frac{a}{b} + \frac{c}{d} = \frac{a \times d + c \times b}{b \times d}}
+
+\Formula{\frac{a}{b} - \frac{c}{d} = \frac{a \times d - c \times b}{b \times d}}
+
+$\dfrac{2}{3} + \dfrac{1}{4} = \dfrac{8+3}{12} = \dfrac{11}{12}$ \checkmark
+
+$\dfrac{5}{2} - \dfrac{3}{7} = \dfrac{35-6}{14} = \dfrac{29}{14}$ \checkmark
+
+\textbf{Quando usar:} MMC é mais eficiente com denominadores que têm fatores comuns. O método cruzado é mais direto para denominadores primos entre si.
+
+\T{Multiplicação e Divisão de Frações}
+
+\TM{Multiplicação}
+
+\Formula{\frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}}
+
+$\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{6}{12} = \dfrac{1}{2}$ \qquad $\dfrac{5}{2} \times \dfrac{3}{7} = \dfrac{15}{14}$
+
+\textbf{Simplificação prévia:} $\dfrac{2}{3}\times\dfrac{3}{4}$ — o 3 cancela: $\dfrac{2}{1}\times\dfrac{1}{4} = \dfrac{1}{2}$
+
+\TM{Divisão — multiplica pelo inverso}
+
+\Formula{\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} = \frac{a \times d}{b \times c}}
+
+$\dfrac{2}{3} \div \dfrac{4}{6} = \dfrac{2}{3} \times \dfrac{6}{4} = \dfrac{12}{12} = 1$ \checkmark
+
+$\dfrac{\;^3\!/_4}{\;^8\!/_5} = \dfrac{3}{4} \times \dfrac{5}{8} = \dfrac{15}{32}$ \checkmark
+
+\T{Potenciação de Frações}
+
+\Formula{\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \qquad \left(\frac{a}{b}\right)^{-n} = \frac{b^n}{a^n}}
+
+$\left(\dfrac{2}{3}\right)^3 = \dfrac{8}{27}$ \qquad $\left(\dfrac{3}{4}\right)^2 = \dfrac{9}{16}$
+
+Expoente negativo — inverte e eleva:
+
+$\left(\dfrac{2}{3}\right)^{-2} = \left(\dfrac{3}{2}\right)^2 = \dfrac{9}{4}$
+
+Expoente zero: $\left(\dfrac{5}{7}\right)^0 = 1$
+
+\T{Operações com Frações Mistas}
+
+Converta para imprópria, opere, e converta de volta se necessário.
+
+\TM{Soma}
+
+$2\dfrac{1}{3} + 1\dfrac{3}{4} = \dfrac{7}{3} + \dfrac{7}{4} = \dfrac{28+21}{12} = \dfrac{49}{12} = 4\dfrac{1}{12}$ \checkmark
+
+\TM{Multiplicação}
+
+$1\dfrac{1}{2} \times 2\dfrac{2}{3} = \dfrac{3}{2} \times \dfrac{8}{3} = \dfrac{24}{6} = 4$ \checkmark
+
+\T{Problemas Contextualizados}
+
+\TM{Receita}
+
+Uma receita pede $\dfrac{3}{4}$ de xícara de farinha. Para fazer $\dfrac{1}{2}$ da receita:
+
+$\dfrac{3}{4} \times \dfrac{1}{2} = \dfrac{3}{8}$ xícara \checkmark
+
+\TM{Área}
+
+Jardim $2\dfrac{1}{2}\,\text{m} \times 1\dfrac{3}{4}\,\text{m}$:
+
+$\dfrac{5}{2} \times \dfrac{7}{4} = \dfrac{35}{8} = 4\dfrac{3}{8}\,\text{m}^2$ \checkmark
+
+\TM{Velocidade média}
+
+Ciclista percorre $\dfrac{5}{2}\,\text{km}$ em $\dfrac{1}{4}\,\text{h}$:
+
+$v = \dfrac{5}{2} \div \dfrac{1}{4} = \dfrac{5}{2} \times 4 = 10\,\text{km/h}$ \checkmark
+
+\TM{Desconto}
+
+Produto de R\$\,120 com desconto de $\dfrac{1}{5}$:
+
+Desconto: $120 \times \dfrac{1}{5} = 24$ $\;\Rightarrow\;$ Preço final: R\$\,96 \checkmark
+
+\T{Erros Comuns}
+
+\textbf{Somar denominadores:} $\dfrac{1}{2}+\dfrac{1}{3} \neq \dfrac{2}{5}$. Correto: $\dfrac{5}{6}$.
+
+\textbf{Não inverter na divisão:} $\dfrac{2}{3}\div\dfrac{4}{5} \neq \dfrac{8}{15}$. Correto: $\dfrac{2}{3}\times\dfrac{5}{4}=\dfrac{5}{6}$.
+
+\textbf{Não simplificar:} $\dfrac{6}{9}$ não está na forma irredutível. Correto: $\dfrac{2}{3}$.
+
+\textbf{Operar mista diretamente:} sempre converta para imprópria antes de multiplicar ou dividir.
 
 \end{multicols}
 

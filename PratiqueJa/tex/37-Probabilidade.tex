@@ -15,163 +15,248 @@
 
 \T{Definição}
 
-Probabilidade é a medida de quão provável é ocorrer um determinado evento. Ela expressa a chance de um acontecimento acontecer, variando de 0 (evento impossível) a 1 (evento certeza). Pode ser calculada dividindo o número de resultados favoráveis pelo total de resultados possíveis. A probabilidade é usada para fazer previsões, analisar riscos, tomar decisões e modelar situações aleatórias em diversas áreas, como jogos, estatística, economia e ciências.
+Probabilidade é a medida numérica da chance de um evento ocorrer, variando de \(0\) (evento impossível) a \(1\) (evento certo). É calculada pela razão entre os resultados favoráveis e o total de resultados possíveis, quando todos são igualmente prováveis. A probabilidade é usada para fazer previsões, analisar riscos e tomar decisões em jogos, estatística, economia e ciências.
 
-\T{Eventos e Espaço Amostral}
+\vspace{4px}
+\textbf{Representação:} a probabilidade pode ser expressa como fração, decimal ou porcentagem. Ex.: $\frac{1}{4} = 0{,}25 = 25\%$.
 
-Eventos e espaço amostral são conceitos fundamentais na teoria da probabilidade. O espaço amostral é o conjunto de todos os resultados possíveis de um experimento aleatório, como lançar um dado ou tirar uma carta de um baralho. Cada elemento desse conjunto é chamado de resultado ou elemento. Um evento, por sua vez, é qualquer subconjunto do espaço amostral, ou seja, um conjunto de resultados favoráveis a uma determinada situação. 
+\vspace{4px}
+\textbf{Visão clássica vs.\ frequentista:} na definição \textit{clássica} (Laplace), todos os resultados são igualmente prováveis e $P(A) = \frac{n(A)}{n(\Omega)}$. Na visão \textit{frequentista}, $P(A)$ é o limite da frequência relativa de $A$ em muitas repetições do experimento.
+
+\T{Espaço Amostral}
+
+O \textbf{espaço amostral} $\Omega$ é o conjunto de \textit{todos} os resultados possíveis de um experimento aleatório. Cada elemento de $\Omega$ é chamado de \textbf{ponto amostral}. Um \textbf{evento} $A$ é qualquer subconjunto de $\Omega$.
+
+\TM{Tipos de evento}
+
+\textbf{Evento certo:} $\Omega$ — sempre ocorre, $P(\Omega)=1$.
+
+\textbf{Evento impossível:} $\varnothing$ — nunca ocorre; ex.: sair 7 num dado, $P(\varnothing)=0$.
+
+\textbf{Eventos mutuamente exclusivos:} $A \cap B = \varnothing$ — não ocorrem juntos.
+
+\TM{Exemplo}
+
+Ao lançar um dado: $\Omega = \{1,2,3,4,5,6\}$, $n(\Omega)=6$.
+
+Evento ``número par'': $A = \{2,4,6\}$, $n(A)=3$.
+
+Evento ``maior que 4'': $B = \{5,6\}$, $n(B)=2$.
+
+\T{Propriedades Fundamentais}
+
+Qualquer função de probabilidade válida obedece aos três \textbf{axiomas de Kolmogorov}:
+
+\vspace{4px}
+\textbf{Axioma 1 — Não-negatividade:}
+\Formula{0 \leq P(A) \leq 1 \text{ para todo evento } A}
+
+\textbf{Axioma 2 — Normalização:}
+\Formula{P(\Omega) = 1 \qquad P(\varnothing) = 0}
+
+\textbf{Axioma 3 — Aditividade:} se $A \cap B = \varnothing$, então
+\Formula{P(A \cup B) = P(A) + P(B)}
+
+De modo geral, se $A \subset B$, então $P(A) \leq P(B)$.
+
+\TM{Cálculo de Probabilidade — Fórmula de Laplace}
+
+Válida quando todos os resultados do espaço amostral são \textbf{igualmente prováveis}:
+
+\Formula{P(A) = \dfrac{n(A)}{n(\Omega)}}
+
+$n(A) =$ número de resultados favoráveis ao evento $A$.
+
+$n(\Omega)=$ número total de resultados possíveis.
 
 \TM{Exemplo}
 
-Ao lançar um dado, o espaço amostral é \(\{1,2,3,4,5,6\}\), enquanto o evento “obter um número par” corresponde ao subconjunto \(\{2,4,6\}\). Assim, os eventos representam ocorrências específicas dentro do universo total de resultados possíveis, e o estudo da probabilidade busca calcular a chance desses eventos acontecerem.
+Probabilidade de tirar face par ao lançar um dado:
 
-\TM{Cálculo de Probabilidade}
+$n(A) = 3$ (faces 2, 4 e 6), $\quad n(\Omega) = 6$
+\vspace{5px}
 
-Para um evento $A$ simples (com resultados igualmente prováveis) podemos usar a seguinte fórmula:
-
-\Formula{
-P(A) = \dfrac{n(A)}{n(\Omega)}
-}
-
-$n(A) =$ número de casos favoráveis ao evento A.
-
-$n(\Omega)=$ número total de casos possíveis.
-
-\TM{Exemplo}
-  
-Probabilidade de tirar uma face com número par ao lançar um dado:  
-
-Evento A: resultado par.
-
-$n(A) = 3, \quad n(\Omega)=6$
-\vspace{10px}
-
-$
-P(A)= \dfrac{3}{6} = \dfrac{1}{2}
-$
-\vspace{10px}
+$P(A) = \dfrac{3}{6} = \dfrac{1}{2} = 50\%$
 
 \T{Regras da Probabilidade}
 
 \TM{Regra de Eventos Complementares}
 
-A probabilidade de um evento não acontecer (\(A^c\)) é:
+O complementar $A^c$ reúne todos os pontos de $\Omega$ que \textbf{não} pertencem a $A$. Como $A$ e $A^c$ particionam $\Omega$:
 
-\Formula{
-P(A^c) = 1 - P(A)
-}
+\Formula{P(A^c) = 1 - P(A)}
 
 \TM{Exemplo}
 
-Um pote guarda 12 lápis pretos, 16 lápis azuis e 2 lápis vermelhos. Qual a chance de não tirar um lápis vermelho?
+Um pote guarda 12 lápis pretos, 16 azuis e 2 vermelhos. Qual a chance de \textbf{não} tirar um lápis vermelho?
 
-$A$: lápis vermelho
-
-$n(A)=2,\quad n(\Omega)=12+16+2=30 $
+$n(A)=2,\quad n(\Omega)=30$
 \vspace{5px}
 
 $P(A)=\dfrac{2}{30}=\dfrac{1}{15}$
 \vspace{5px}
 
-$P(A^c)=1-\dfrac{1}{15}=\dfrac{14}{15}$
+$P(A^c)=1-\dfrac{1}{15}=\dfrac{14}{15} \approx 93{,}3\%$
+
+\vspace{4px}
+\textbf{Estratégia:} quando calcular $P(A)$ diretamente é difícil, calcule $P(A^c)$ e subtraia de 1.
+
+\TM{Probabilidade de ``Ao Menos Um''}
+
+Problemas do tipo ``ao menos um'' são resolvidos pelo complementar:
+
+\Formula{P(\text{ao menos um}) = 1 - P(\text{nenhum})}
+
+\TM{Exemplo}
+
+Uma moeda é lançada 3 vezes. Qual a probabilidade de sair \textbf{ao menos uma cara}?
+
+Complementar: $P(\text{nenhuma cara}) = \left(\dfrac{1}{2}\right)^3 = \dfrac{1}{8}$
 \vspace{5px}
+
+$P(\text{ao menos uma cara}) = 1 - \dfrac{1}{8} = \dfrac{7}{8} = 87{,}5\%$
 
 \TM{Regra da Soma}
 
-Para eventos mutuamente exclusivos (não podem acontecer ao mesmo tempo):
+Para eventos \textbf{mutuamente exclusivos} ($A \cap B = \varnothing$):
 
-\Formula{
-P(A \cup B) = P(A) + P(B)
-}
+\Formula{P(A \cup B) = P(A) + P(B)}
 
-\TM{Exemplo}
+Para eventos \textbf{não exclusivos} (podem ocorrer juntos), subtrai-se a interseção para não contá-la duas vezes:
 
-Imagine lançar um dado. A probabilidade de sair o número 2 é $P(A) = \frac{1}{6}$ e a probabilidade de sair o número 5 é $P(B) = \frac{1}{6}$. Esses eventos são mutuamente exclusivos, pois o dado não pode mostrar 2 e 5 ao mesmo tempo. Assim, pela Regra da Soma:
+\Formula{P(A \cup B) = P(A) + P(B) - P(A \cap B)}
+
+\TM{Exemplo 1 — exclusivos}
+
+Probabilidade de sair 2 \textbf{ou} 5 ao lançar um dado:
+
+$P(A) = \dfrac{1}{6}$, $P(B) = \dfrac{1}{6}$
 \vspace{5px}
 
-$
-P(A \cup B) = \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{2}{6} = \dfrac{1}{3}
-$
+$P(A \cup B) = \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{2}{6} = \dfrac{1}{3}$
+
+\TM{Exemplo 2 — não exclusivos}
+
+Turma de 30 alunos: 18 estudam Matemática ($A$), 12 estudam Física ($B$), 5 estudam ambas.
+
+$P(A)=\dfrac{18}{30}$,\quad $P(B)=\dfrac{12}{30}$,\quad $P(A \cap B)=\dfrac{5}{30}$
 \vspace{5px}
 
-Portanto, a probabilidade de sair os números 2 ou 5 em um único lançamento é $\frac{1}{3}$.
-\vspace{5px}
-
-Regra da Soma para eventos não mutuamente exclusivos (quando eles podem ocorrer juntos) — ou seja, quando os eventos são dependentes ou simplesmente não se excluem:
-
-\Formula{
-P(A \cup B) = P(A) + P(B) - P(A \cap B)
-}
-
-Imagine que, em uma turma de 30 alunos, 18 estudam Matemática (evento A) e 12 estudam Física (evento B). Destes, 5 estudam Matemática e Física ao mesmo tempo.
-
-Então temos:
-\vspace{5px}
-
-$P(A) = \dfrac{18}{30} = \dfrac{9}{15}, \quad P(B) = \dfrac{12}{30} = \dfrac{6}{15}$
-\vspace{5px}
-
-$P(A \cap B) = \dfrac{5}{30} = \dfrac{1}{6} $
-\vspace{5px}
-
-Usando a Regra da Soma:
-\vspace{5px}
-
-$
-P(A \cup B) = \dfrac{9}{15} + \dfrac{6}{15} - \dfrac{1}{6} = \dfrac{5}{6} 
-$
-\vspace{5px}
-
-Portanto, a probabilidade de um aluno da turma estudar Matemática ou Física (ou ambas) é $\frac{5}{6}$.
+$P(A \cup B) = \dfrac{18}{30}+\dfrac{12}{30}-\dfrac{5}{30} = \dfrac{25}{30} = \dfrac{5}{6}$
 
 \TM{Regra do Produto}
 
-Para eventos independentes (acontecimentos que não influenciam um ao outro):
+Para eventos \textbf{independentes} (o resultado de um não afeta o outro):
 
-\Formula{
-P(A \cap B) = P(A) \cdot P(B)
-}
+\Formula{P(A \cap B) = P(A) \cdot P(B)}
 
 \TM{Exemplo}
 
-Suponha que você lance uma moeda e um dado ao mesmo tempo. A probabilidade de sair \textbf{cara} na moeda é $P(A) = \frac{1}{2}$ e a probabilidade de sair o número 4 no dado é $P(B) = \frac{1}{6}$. Esses eventos são independentes, pois o resultado da moeda não afeta o resultado do dado. Assim, pela Regra do Produto:
-\vspace{5px}
+Lançamento de moeda e dado simultaneamente. $P(\text{cara}) = \frac{1}{2}$, $P(\text{4 no dado}) = \frac{1}{6}$.
 
-$
-P(A \cap B) = \dfrac{1}{2} \cdot \dfrac{1}{6} = \dfrac{1}{12}
-$
-\vspace{5px}
+$P(A \cap B) = \dfrac{1}{2} \cdot \dfrac{1}{6} = \dfrac{1}{12}$
 
-Portanto, a probabilidade de obter \textbf{cara} na moeda e 4 no dado ao mesmo tempo é $\frac{1}{12}$.
+\TM{Probabilidade Condicional e Eventos Dependentes}
 
-\TM{Probabilidade de Eventos Dependentes}
+A \textbf{probabilidade condicional} é a probabilidade de $B$ ocorrer \textit{dado que} $A$ já ocorreu:
 
-Se os eventos não forem independentes:
+\Formula{P(B \mid A) = \dfrac{P(A \cap B)}{P(A)},\quad P(A) \neq 0}
 
-\Formula{
-P(A \cap B) = P(A) \cdot P(B|A)
-}
+Para eventos \textbf{dependentes}, a Regra do Produto usa a condicional:
 
-onde \(P(B|A)\) é a probabilidade de \(B\) ocorrer dado que \(A\) já ocorreu.
+\Formula{P(A \cap B) = P(A) \cdot P(B \mid A)}
 
 \TM{Exemplo}
 
-Suponha que você tenha uma caixa com 5 bolas vermelhas e 3 bolas azuis. Você retira uma bola sem reposição e depois retira outra. Qual é a probabilidade de a primeira ser vermelha (evento A) e a segunda ser azul (evento B)?
+Caixa com 5 bolas vermelhas e 3 azuis. Probabilidade de tirar 1 vermelha e depois 1 azul, sem reposição:
+
+$P(A) = \dfrac{5}{8}$ (1ª retirada vermelha)
 \vspace{5px}
 
-$P(A) = \frac{5}{8}$ (probabilidade de tirar uma bola vermelha na primeira retirada).
-
-Depois de tirar uma vermelha, restam 7 bolas, sendo 3 azuis. Logo, $P(B|A) = \frac{3}{7}$.
-
-Assim, pela fórmula para eventos dependentes:
-\vspace{0px}
-
-$
-P(A \cap B) = \dfrac{5}{8} \cdot \dfrac{3}{7} = \dfrac{15}{56}.
-$
+Após remover 1 vermelha, restam 7 bolas, 3 azuis: $P(B \mid A) = \dfrac{3}{7}$
 \vspace{5px}
 
-Portanto, a probabilidade de retirar primeiro uma bola vermelha e depois uma azul, sem reposição, é $\frac{15}{56}$.
+$P(A \cap B) = \dfrac{5}{8} \cdot \dfrac{3}{7} = \dfrac{15}{56}$
+
+\vspace{4px}
+\textbf{Atenção:} retiradas \textbf{sem reposição} geram eventos dependentes — use $P(A) \cdot P(B \mid A)$. Com reposição, use $P(A) \cdot P(B)$.
+
+\T{Teorema de Bayes}
+
+O Teorema de Bayes permite ``inverter'' a probabilidade condicional — calcular $P(A \mid B)$ a partir de $P(B \mid A)$:
+
+\Formula{P(A \mid B) = \dfrac{P(B \mid A) \cdot P(A)}{P(B)}}
+
+onde $P(B) = P(B \mid A)\cdot P(A) + P(B \mid A^c)\cdot P(A^c)$ é a \textbf{probabilidade total} de $B$.
+
+\TM{Exemplo — teste médico}
+
+Uma doença afeta 1\% da população. Um teste tem sensibilidade de 95\% e taxa de falso-positivo de 5\%. Uma pessoa testa positivo — qual a probabilidade real de estar doente?
+
+$P(D) = 0{,}01$, \quad $P(+\mid D) = 0{,}95$, \quad $P(+\mid D^c) = 0{,}05$
+\vspace{5px}
+
+$P(+) = 0{,}95\times 0{,}01 + 0{,}05\times 0{,}99 = 0{,}059$
+\vspace{5px}
+
+$P(D \mid +) = \dfrac{0{,}95 \times 0{,}01}{0{,}059} \approx 16{,}1\%$
+
+\vspace{4px}
+\textbf{Resultado contraintuitivo:} mesmo com um teste 95\% preciso, apenas $\approx 16\%$ dos que testam positivo estão de fato doentes — pois a doença é rara (1\%). Esse fenômeno é chamado de \textit{paradoxo do falso-positivo}.
+
+\T{Probabilidade e Combinatória}
+
+Em problemas com retiradas simultâneas, $n(A)$ e $n(\Omega)$ são contados com \textbf{combinações}:
+
+\Formula{P(A) = \dfrac{C_{n,k}}{C_{N,k}} \qquad C_{n,k} = \dfrac{n!}{k!\,(n-k)!}}
+
+\TM{Exemplo}
+
+Urna com 4 bolas brancas e 3 pretas. Retira-se 2 simultaneamente. Probabilidade de \textbf{as duas serem brancas}:
+
+$n(\Omega) = C_{7,2} = 21$, \quad $n(A) = C_{4,2} = 6$
+\vspace{5px}
+
+$P(A) = \dfrac{6}{21} = \dfrac{2}{7} \approx 28{,}6\%$
+
+\T{Distribuição Binomial}
+
+Um \textbf{experimento de Bernoulli} tem dois resultados: \textit{sucesso} (probabilidade $p$) ou \textit{fracasso} ($1-p$). Repetindo-o $n$ vezes de forma independente, o número de sucessos $X$ segue a distribuição $X \sim B(n, p)$:
+
+\Formula{P(X = k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}}
+
+onde $k = 0, 1, 2, \ldots, n$.
+
+\TM{Exemplo 1 — lançamento de dado}
+
+Um dado é lançado 5 vezes. Probabilidade de o número 6 sair \textbf{exatamente 2 vezes}:
+
+$n=5$,\quad $k=2$,\quad $p=\dfrac{1}{6}$
+\vspace{5px}
+
+$P(X=2) = C_{5,2} \cdot \left(\dfrac{1}{6}\right)^2 \cdot \left(\dfrac{5}{6}\right)^3 = 10 \cdot \dfrac{125}{7776} \approx 16{,}1\%$
+
+\TM{Exemplo 2 — controle de qualidade}
+
+Fábrica com 10\% de peças defeituosas. Num lote de 4 peças, probabilidade de \textbf{nenhuma} ser defeituosa:
+
+$P(X=0) = C_{4,0} \cdot (0{,}10)^0 \cdot (0{,}90)^4 = 0{,}6561 = 65{,}61\%$
+
+\vspace{4px}
+\textbf{Quando usar:} experimentos independentes, mesma probabilidade $p$ de sucesso, número $n$ de repetições fixo.
+
+\T{Dicas e Erros Comuns}
+
+\textbf{Com vs.\ sem reposição:} sem reposição $\Rightarrow$ eventos dependentes ($P(A) \cdot P(B\mid A)$); com reposição $\Rightarrow$ eventos independentes ($P(A) \cdot P(B)$).
+
+\vspace{4px}
+\textbf{``Ao menos um'' — use o complementar:} calcular diretamente exige somar muitos casos. Use $1 - P(\text{nenhum})$.
+
+\vspace{4px}
+\textbf{Regra da Soma — não esqueça a interseção:} para eventos não exclusivos, somar $P(A)+P(B)$ conta a interseção em dobro. Sempre subtraia $P(A \cap B)$.
+
+\vspace{4px}
+\textbf{Independência $\neq$ Exclusividade:} eventos mutuamente exclusivos com $P(A), P(B) > 0$ são \textit{dependentes} (se $A$ ocorre, $B$ não pode). Independência significa $P(A \cap B) = P(A)\cdot P(B)$.
 
 \end{multicols}
 \input{rodape}
