@@ -1,0 +1,233 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é um sistema de equações?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um sistema de equações é um conjunto de duas ou mais equações que compartilham as mesmas variáveis.
+                    O objetivo é encontrar os valores das variáveis que satisfazem <strong>todas</strong> as equações simultaneamente.
+                </div>
+                <p>Focaremos nos <strong>sistemas lineares</strong> — formados por equações do primeiro grau.
+                Geometricamente, cada equação linear representa uma reta (em 2 variáveis) ou um plano (em 3 variáveis),
+                e a solução do sistema é o ponto de interseção entre elas.</p>
+                <h4>Exemplo de sistema</h4>
+                <div class="tr-rule" style="overflow-x:auto">
+                    \[
+                      \begin{cases}
+                        2x + 3y = 6 \\
+                        x - y = 2
+                      \end{cases}
+                    \]
+                </div>
+            </div>
+
+            <!-- TIPOS DE SOLUÇÃO -->
+            <div class="tr-section" id="sec-tipos">
+                <div class="tr-section-header">
+                    <div class="tr-badge">1</div>
+                    <div>
+                        <div class="tr-section-title">Tipos de Solução</div>
+                        <div class="tr-section-sub">Consistente, dependente ou inconsistente</div>
+                    </div>
+                </div>
+                <div class="se-sol-grid">
+                    <div class="se-sol-card unique">
+                        <strong>Solução Única</strong>
+                        Sistema <em>consistente e independente</em>. Existe exatamente um conjunto de valores
+                        que satisfaz todas as equações. As retas se cruzam em um único ponto.
+                    </div>
+                    <div class="se-sol-card infinite">
+                        <strong>Infinitas Soluções</strong>
+                        Sistema <em>consistente e dependente</em>. As equações representam a mesma reta —
+                        são múltiplos uma da outra. Qualquer ponto da reta é solução.
+                    </div>
+                    <div class="se-sol-card none">
+                        <strong>Nenhuma Solução</strong>
+                        Sistema <em>inconsistente</em>. As equações representam retas paralelas que nunca se cruzam.
+                        Não existe valor que satisfaça todas as equações.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÉTODO DA SUBSTITUIÇÃO -->
+            <div class="tr-section" id="sec-subst">
+                <div class="tr-section-header">
+                    <div class="tr-badge">2</div>
+                    <div>
+                        <div class="tr-section-title">Método da Substituição</div>
+                        <div class="tr-section-sub">Isolar uma variável e substituir na outra equação</div>
+                    </div>
+                </div>
+                <p>Isola-se uma das variáveis em uma das equações e substitui-se na outra.
+                Recomendado quando uma das variáveis tem coeficiente 1 ou é fácil de isolar.</p>
+                <h4>Exemplo</h4>
+                <div class="tr-rule" style="overflow-x:auto">
+                    \[
+                      \begin{cases}
+                        x + y = 5 \quad \text{(1)} \\
+                        2x - y = 4 \quad \text{(2)}
+                      \end{cases}
+                    \]
+                </div>
+                <div class="se-steps">
+                    <div class="se-step">
+                        <span class="se-step-num">1</span>
+                        <div class="se-step-body">
+                            Escolher a equação (1) e isolar \(x\):
+                            <span class="ml">\(x + y = 5 \implies x = 5 - y\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">2</span>
+                        <div class="se-step-body">
+                            Substituir \(x = 5 - y\) na equação (2):
+                            <span class="ml">\(2(5 - y) - y = 4\)</span>
+                            <span class="ml">\(10 - 2y - y = 4\)</span>
+                            <span class="ml">\(-3y = 4 - 10 = -6\)</span>
+                            <span class="ml">\(y = \dfrac{-6}{-3} = 2\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">3</span>
+                        <div class="se-step-body">
+                            Substituir \(y = 2\) em \(x = 5 - y\):
+                            <span class="ml">\(x = 5 - 2 = 3\)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="se-result">Solução: \(x = 3\) e \(y = 2\)</div>
+            </div>
+
+            <!-- MÉTODO DA ADIÇÃO -->
+            <div class="tr-section" id="sec-adicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge">3</div>
+                    <div>
+                        <div class="tr-section-title">Método da Adição</div>
+                        <div class="tr-section-sub">Eliminar uma variável somando as equações</div>
+                    </div>
+                </div>
+                <p>Multiplica-se uma ou ambas as equações por constantes de modo que, ao somá-las,
+                uma das incógnitas seja eliminada. Útil quando os coeficientes de uma variável
+                já são opostos (ou facilmente tornam-se opostos).</p>
+                <h4>Exemplo</h4>
+                <div class="tr-rule" style="overflow-x:auto">
+                    \[
+                      \begin{cases}
+                        2x + y = 5 \quad \text{(1)} \\
+                        x - y = 1 \quad \text{(2)}
+                      \end{cases}
+                    \]
+                </div>
+                <div class="se-steps">
+                    <div class="se-step">
+                        <span class="se-step-num">1</span>
+                        <div class="se-step-body">
+                            Observar que os coeficientes de \(y\) são \(+1\) e \(-1\) — já opostos.
+                            Basta somar as equações diretamente:
+                            <span class="ml">\((2x + y) + (x - y) = 5 + 1\)</span>
+                            <span class="ml">\(3x = 6 \implies x = 2\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">2</span>
+                        <div class="se-step-body">
+                            Substituir \(x = 2\) na equação (2):
+                            <span class="ml">\(2 - y = 1 \implies y = 1\)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="se-result">Solução: \(x = 2\) e \(y = 1\)</div>
+                <h4>Quando os coeficientes não são opostos</h4>
+                <p>Multiplique uma (ou ambas) as equações por uma constante para tornar os coeficientes
+                de uma variável opostos em módulo, e então some as equações para eliminá-la.</p>
+            </div>
+
+            <!-- MÉTODO DA COMPARAÇÃO -->
+            <div class="tr-section" id="sec-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge">4</div>
+                    <div>
+                        <div class="tr-section-title">Método da Comparação</div>
+                        <div class="tr-section-sub">Isolar a mesma variável em ambas as equações e igualar</div>
+                    </div>
+                </div>
+                <p>Isola-se a <strong>mesma variável</strong> nas duas equações e igualam-se as expressões obtidas,
+                reduzindo o sistema a uma única equação com uma incógnita.</p>
+                <h4>Exemplo</h4>
+                <div class="tr-rule" style="overflow-x:auto">
+                    \[
+                      \begin{cases}
+                        7x + y = 140 \quad \text{(1)} \\
+                        -8x + y = -145 \quad \text{(2)}
+                      \end{cases}
+                    \]
+                </div>
+                <div class="se-steps">
+                    <div class="se-step">
+                        <span class="se-step-num">1</span>
+                        <div class="se-step-body">
+                            Isolar \(y\) na equação (1):
+                            <span class="ml">\(y = 140 - 7x\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">2</span>
+                        <div class="se-step-body">
+                            Isolar \(y\) na equação (2):
+                            <span class="ml">\(y = -145 + 8x\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">3</span>
+                        <div class="se-step-body">
+                            Igualar as duas expressões e resolver:
+                            <span class="ml">\(140 - 7x = -145 + 8x\)</span>
+                            <span class="ml">\(-7x - 8x = -145 - 140\)</span>
+                            <span class="ml">\(-15x = -285\)</span>
+                            <span class="ml">\(x = \dfrac{285}{15} = 19\)</span>
+                        </div>
+                    </div>
+                    <div class="se-step">
+                        <span class="se-step-num">4</span>
+                        <div class="se-step-body">
+                            Substituir \(x = 19\) em \(y = 140 - 7x\):
+                            <span class="ml">\(y = 140 - 7 \cdot 19 = 140 - 133 = 7\)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="se-result">Solução: \(x = 19\) e \(y = 7\)</div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+</ui:decorate>

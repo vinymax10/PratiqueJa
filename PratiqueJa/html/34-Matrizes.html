@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matrizes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'none'
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HERO ===== */
+    .pj-hero {
+      background: linear-gradient(135deg, #07142f 0%, #0d1d47 100%);
+      padding: 52px 32px 80px;
+      text-align: center;
+    }
+    .pj-brand {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .pj-brand span { color: #3b82f6; }
+    .pj-hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .pj-badge {
+      display: inline-block;
+      background: rgba(37,99,235,0.25);
+      color: #93c5fd;
+      border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .pj-hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .pj-hero-stat { text-align: center; }
+    .pj-hero-stat strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    .pj-hero-stat span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .pj-layout {
+      max-width: 900px;
+      margin: -44px auto 64px;
+      padding: 0 24px;
+      flex: 1;
+    }
+
+    /* ===== CONTEÚDO ===== */
+    .pj-content { width: 100%; min-width: 0; }
+
+    /* ===== SECTION CARD ===== */
+    .pj-section {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 44px;
+      box-shadow: 0 8px 40px rgba(15,23,42,0.06);
+      margin-bottom: 24px;
+      scroll-margin-top: 24px;
+    }
+    .pj-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+    .pj-section-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .pj-section-badge.def {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      font-size: 13px;
+    }
+    .pj-section-badge.extra {
+      background: linear-gradient(135deg, #059669, #34d399);
+      font-size: 13px;
+    }
+    .pj-section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #07142f;
+      line-height: 1.2;
+    }
+    .pj-section-subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* ===== TEXT INSIDE CARDS ===== */
+    .pj-section p {
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 1em;
+      font-size: 1rem;
+    }
+    .pj-section p:last-child { margin-bottom: 0; }
+
+    .pj-section h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #9ca3af;
+      margin: 20px 0 8px;
+    }
+
+    /* ===== RULE BOX ===== */
+    .pj-rule {
+      background: #f0f5ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      color: #1e40af;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* ===== EXAMPLES ===== */
+    .pj-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .pj-ex {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .pj-ex.wide { width: 100%; }
+    .hl { color: #2563eb; font-weight: 700; }
+
+    /* ===== MATH DISPLAY ===== */
+    .math-display {
+      display: block;
+      background: #f0f5ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-size: 1.05em;
+      color: #1e40af;
+    }
+
+    /* ===== MATRIX EXAMPLE ===== */
+    .pj-matrix-step {
+      background: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+    .pj-matrix-step p { margin-bottom: 0.5em; font-size: 0.95rem; }
+
+    /* ===== RODAPÉ ===== */
+    .pj-footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .pj-footer a { color: #2563eb; text-decoration: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .pj-hero { padding: 36px 20px 64px; }
+      .pj-hero-title { font-size: 2.1rem; }
+      .pj-layout { padding: 0 12px; margin-top: -32px; }
+      .pj-section { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="pj-hero">
+    <a class="pj-brand" href="https://pratiqueja.com">Pratique<span>Já</span></a>
+    <div style="margin-bottom:14px">
+      <span class="pj-badge">Álgebra Linear · Avançado</span>
+    </div>
+    <h1 class="pj-hero-title">Matrizes</h1>
+    <div class="pj-hero-stats">
+      <div class="pj-hero-stat">
+        <strong>7</strong>
+        <span>Seções</span>
+      </div>
+      <div class="pj-hero-stat">
+        <strong>7</strong>
+        <span>Fórmulas</span>
+      </div>
+      <div class="pj-hero-stat">
+        <strong>10+</strong>
+        <span>Exemplos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="pj-layout">
+    <div class="pj-content">
+
+      <!-- INTRODUÇÃO -->
+      <section class="pj-section" id="sec-intro">
+        <div class="pj-section-header">
+          <div class="pj-section-badge def">Def</div>
+          <div>
+            <div class="pj-section-title">Introdução</div>
+            <div class="pj-section-subtitle">O que são matrizes?</div>
+          </div>
+        </div>
+        <div class="pj-rule">
+          Uma matriz de ordem \(n \times m\) é uma tabela retangular com \(n\) linhas e \(m\) colunas, cujos elementos são denotados por \(a_{i,j}\), onde \(i\) indica a linha e \(j\) indica a coluna.
+        </div>
+        <p>
+          As matrizes são ferramentas fundamentais na álgebra linear e são amplamente usadas em matemática, física, estatística e programação. Elas permitem representar e resolver sistemas de equações, transformações geométricas, redes e muito mais.
+        </p>
+        <p>
+          Uma matriz quadrada tem o mesmo número de linhas e colunas (\(n = m\)). A <strong>matriz identidade</strong> \(I_n\) é a matriz quadrada de ordem \(n\) com 1 na diagonal principal e 0 nos demais elementos.
+        </p>
+        <div class="math-display">
+          \[
+            I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
+            I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+          \]
+        </div>
+      </section>
+
+      <!-- SOMA -->
+      <section class="pj-section" id="sec-soma">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">1</div>
+          <div>
+            <div class="pj-section-title">Soma de Matrizes</div>
+            <div class="pj-section-subtitle">Elemento por elemento — mesma ordem</div>
+          </div>
+        </div>
+        <p>
+          Duas matrizes só podem ser somadas se tiverem a <strong>mesma ordem</strong> (mesmo número de linhas e colunas). A soma é realizada elemento por elemento.
+        </p>
+        <div class="pj-rule">
+          \[
+            A_{(n\times m)} + B_{(n\times m)} = C_{(n\times m)}, \quad c_{i,j} = a_{i,j} + b_{i,j}, \;\forall\; i,j
+          \]
+        </div>
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            \[
+              A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \quad
+              B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}
+            \]
+            \[
+              A + B = \begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}
+            \]
+          </div>
+        </div>
+        <h4>Propriedades</h4>
+        <div class="pj-examples">
+          <div class="pj-ex"><strong>Comutativa:</strong> \(A + B = B + A\)</div>
+          <div class="pj-ex"><strong>Associativa:</strong> \((A + B) + C = A + (B + C)\)</div>
+          <div class="pj-ex"><strong>Elemento neutro:</strong> \(A + O = A\) (onde \(O\) é a matriz nula)</div>
+        </div>
+      </section>
+
+      <!-- SUBTRAÇÃO -->
+      <section class="pj-section" id="sec-sub">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">2</div>
+          <div>
+            <div class="pj-section-title">Subtração de Matrizes</div>
+            <div class="pj-section-subtitle">Elemento por elemento — mesma ordem</div>
+          </div>
+        </div>
+        <p>
+          Assim como na soma, as matrizes devem ter a <strong>mesma ordem</strong>. Subtrai-se elemento por elemento.
+        </p>
+        <div class="pj-rule">
+          \[
+            A_{(n\times m)} - B_{(n\times m)} = C_{(n\times m)}, \quad c_{i,j} = a_{i,j} - b_{i,j}, \;\forall\; i,j
+          \]
+        </div>
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            Usando as mesmas matrizes \(A\) e \(B\) da seção anterior:
+            \[
+              A - B = \begin{bmatrix} 1-5 & 2-6 \\ 3-7 & 4-8 \end{bmatrix} = \begin{bmatrix} -4 & -4 \\ -4 & -4 \end{bmatrix}
+            \]
+          </div>
+        </div>
+      </section>
+
+      <!-- MULTIPLICAÇÃO POR ESCALAR -->
+      <section class="pj-section" id="sec-escalar">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">3</div>
+          <div>
+            <div class="pj-section-title">Multiplicação por Escalar</div>
+            <div class="pj-section-subtitle">Cada elemento multiplicado por uma constante</div>
+          </div>
+        </div>
+        <p>
+          Multiplica-se cada elemento da matriz por um número real chamado <strong>escalar</strong>.
+        </p>
+        <div class="pj-rule">
+          \[
+            k \cdot A_{(n\times m)} = B_{(n\times m)}, \quad b_{i,j} = k \cdot a_{i,j}, \;\forall\; i,j
+          \]
+        </div>
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            \[
+              3 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}
+              = \begin{bmatrix} 3 \cdot 1 & 3 \cdot 2 \\ 3 \cdot 3 & 3 \cdot 4 \end{bmatrix}
+              = \begin{bmatrix} 3 & 6 \\ 9 & 12 \end{bmatrix}
+            \]
+          </div>
+        </div>
+        <h4>Propriedades</h4>
+        <div class="pj-examples">
+          <div class="pj-ex">\(k(A + B) = kA + kB\)</div>
+          <div class="pj-ex">\((k + l)A = kA + lA\)</div>
+          <div class="pj-ex">\(k(lA) = (kl)A\)</div>
+          <div class="pj-ex">\(1 \cdot A = A\)</div>
+        </div>
+      </section>
+
+      <!-- MATRIZ TRANSPOSTA -->
+      <section class="pj-section" id="sec-transposta">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">4</div>
+          <div>
+            <div class="pj-section-title">Matriz Transposta</div>
+            <div class="pj-section-subtitle">Troca de linhas por colunas</div>
+          </div>
+        </div>
+        <p>
+          A matriz transposta de \(A\) é obtida trocando as linhas por colunas. Se \(A\) tem ordem \(n \times m\), então \(A^T\) tem ordem \(m \times n\).
+        </p>
+        <div class="pj-rule">
+          \[
+            A = (a_{i,j})_{(n\times m)} \implies A^T = (a_{j,i})_{(m\times n)}
+          \]
+        </div>
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            \[
+              A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}_{3\times 2}
+              \implies
+              A^T = \begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}_{2\times 3}
+            \]
+          </div>
+        </div>
+        <h4>Propriedades</h4>
+        <div class="pj-examples">
+          <div class="pj-ex">\((A^T)^T = A\)</div>
+          <div class="pj-ex">\((A + B)^T = A^T + B^T\)</div>
+          <div class="pj-ex">\((k \cdot A)^T = k \cdot A^T\)</div>
+          <div class="pj-ex">\((A \cdot B)^T = B^T \cdot A^T\)</div>
+        </div>
+        <p style="margin-top:12px">
+          Uma matriz é dita <strong>simétrica</strong> quando \(A = A^T\), e <strong>antissimétrica</strong> quando \(A = -A^T\).
+        </p>
+      </section>
+
+      <!-- MULTIPLICAÇÃO DE MATRIZES -->
+      <section class="pj-section" id="sec-mult">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">5</div>
+          <div>
+            <div class="pj-section-title">Multiplicação de Matrizes</div>
+            <div class="pj-section-subtitle">Linhas por colunas — dimensões compatíveis</div>
+          </div>
+        </div>
+        <p>
+          Para multiplicar \(A \cdot B\), o <strong>número de colunas de \(A\)</strong> deve ser igual ao <strong>número de linhas de \(B\)</strong>. Cada elemento da matriz resultante é a soma dos produtos linha-coluna correspondentes.
+        </p>
+        <div class="pj-rule">
+          \[
+            A_{(n\times m)} \cdot B_{(m\times p)} = C_{(n\times p)}, \quad
+            c_{ij} = \sum_{k=1}^{m} a_{ik} \cdot b_{kj}, \;\forall\; i,j
+          \]
+        </div>
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            \[
+              A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \quad
+              B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}
+            \]
+            \[
+              A \cdot B = \begin{bmatrix}
+                1\cdot5 + 2\cdot7 & 1\cdot6 + 2\cdot8 \\
+                3\cdot5 + 4\cdot7 & 3\cdot6 + 4\cdot8
+              \end{bmatrix}
+              = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
+            \]
+          </div>
+        </div>
+        <h4>Atenção</h4>
+        <div class="pj-examples">
+          <div class="pj-ex">Em geral, \(A \cdot B \neq B \cdot A\) (não é comutativa)</div>
+          <div class="pj-ex">\(A \cdot I = I \cdot A = A\) (identidade é elemento neutro)</div>
+          <div class="pj-ex">\(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva)</div>
+        </div>
+      </section>
+
+      <!-- DETERMINANTE -->
+      <section class="pj-section" id="sec-det">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">6</div>
+          <div>
+            <div class="pj-section-title">Determinante</div>
+            <div class="pj-section-subtitle">Número associado a matrizes quadradas</div>
+          </div>
+        </div>
+        <p>
+          O determinante é um número real associado a uma matriz quadrada. Ele indica, entre outras coisas, se a matriz possui inversa: a matriz tem inversa se e somente se \(\det A \neq 0\).
+        </p>
+
+        <h4>Determinante 2×2</h4>
+        <p>
+          Dada uma matriz \(A = \begin{bmatrix} a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2} \end{bmatrix}\), o determinante é:
+        </p>
+        <div class="pj-rule">
+          \[
+            \det A = a_{1,1} \cdot a_{2,2} - a_{1,2} \cdot a_{2,1}
+          \]
+        </div>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            \[
+              \det \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = 1\cdot4 - 2\cdot3 = 4 - 6 = -2
+            \]
+          </div>
+        </div>
+
+        <h4>Determinante 3×3 — Regra de Sarrus</h4>
+        <p>
+          A Regra de Sarrus estabelece que o determinante é a diferença entre a soma das diagonais principais (\(sd_p\)) e a soma das diagonais secundárias (\(sd_s\)):
+        </p>
+        <div class="pj-rule">
+          \[
+            \det A = sd_p - sd_s
+          \]
+          \[
+            sd_p = a_{1,1}a_{2,2}a_{3,3} + a_{1,2}a_{2,3}a_{3,1} + a_{1,3}a_{2,1}a_{3,2}
+          \]
+          \[
+            sd_s = a_{1,3}a_{2,2}a_{3,1} + a_{1,1}a_{2,3}a_{3,2} + a_{1,2}a_{2,1}a_{3,3}
+          \]
+        </div>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            <p>Para \(A = \begin{bmatrix}-14 & 0 & 14 \\ 3 & 18 & -3 \\ -2 & -7 & 4\end{bmatrix}\):</p>
+            <p>\(sd_p = (-14)(18)(4) + (0)(-3)(-2) + (14)(3)(-7) = -1008 + 0 - 294 = -1302\)</p>
+            <p>\(sd_s = (14)(18)(-2) + (-14)(-3)(-7) + (0)(3)(4) = -504 - 294 + 0 = -798\)</p>
+            <p>\(\det A = -1302 - (-798) = -504\)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MATRIZ INVERSA -->
+      <section class="pj-section" id="sec-inv">
+        <div class="pj-section-header">
+          <div class="pj-section-badge extra">Inv</div>
+          <div>
+            <div class="pj-section-title">Matriz Inversa</div>
+            <div class="pj-section-subtitle">Somente para matrizes quadradas com det ≠ 0</div>
+          </div>
+        </div>
+        <p>
+          A matriz inversa \(A^{-1}\) é aquela que satisfaz:
+        </p>
+        <div class="pj-rule">
+          \[
+            A \cdot A^{-1} = A^{-1} \cdot A = I
+          \]
+        </div>
+        <p>Onde \(I\) é a matriz identidade de mesma ordem.</p>
+
+        <h4>Condições para existência</h4>
+        <div class="pj-examples">
+          <div class="pj-ex">1. A matriz deve ser <strong>quadrada</strong></div>
+          <div class="pj-ex">2. O determinante deve ser <strong>diferente de zero</strong> (\(\det A \neq 0\))</div>
+        </div>
+
+        <h4>Fórmula para inversa 2×2</h4>
+        <div class="pj-rule">
+          \[
+            A^{-1} = \dfrac{1}{\det A} \cdot \begin{bmatrix} a_{2,2} & -a_{1,2} \\ -a_{2,1} & a_{1,1} \end{bmatrix}
+          \]
+        </div>
+
+        <h4>Exemplo</h4>
+        <div class="pj-examples">
+          <div class="pj-ex wide">
+            <p>Dada \(A = \begin{bmatrix} 8 & 17 \\ 8 & 11 \end{bmatrix}\):</p>
+            <p>\(\det A = 8 \cdot 11 - 17 \cdot 8 = 88 - 136 = -48\)</p>
+            \[
+              A^{-1} = \dfrac{1}{-48} \cdot \begin{bmatrix} 11 & -17 \\ -8 & 8 \end{bmatrix}
+              = \begin{bmatrix} \dfrac{-11}{48} & \dfrac{17}{48} \\[8pt] \dfrac{1}{6} & \dfrac{-1}{6} \end{bmatrix}
+            \]
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /pj-content -->
+  </div><!-- /pj-layout -->
+
+  <div class="pj-footer">
+    &copy; Pratique Já &mdash; <a href="https://pratiqueja.com">pratiqueja.com</a>
+  </div>
+
+
+</body>
+</html>

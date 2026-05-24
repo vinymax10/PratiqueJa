@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Equações</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'none'
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HERO ===== */
+    .pj-hero {
+      background: linear-gradient(135deg, #07142f 0%, #0d1d47 100%);
+      padding: 52px 32px 80px;
+      text-align: center;
+    }
+    .pj-brand {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .pj-brand span { color: #3b82f6; }
+    .pj-hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .pj-badge {
+      display: inline-block;
+      background: rgba(37,99,235,0.25);
+      color: #93c5fd;
+      border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .pj-hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .pj-hero-stat { text-align: center; }
+    .pj-hero-stat strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    .pj-hero-stat span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .pj-layout {
+      max-width: 900px;
+      margin: -44px auto 64px;
+      padding: 0 24px;
+      flex: 1;
+    }
+    .pj-content { width: 100%; min-width: 0; }
+
+    /* ===== SECTION CARD ===== */
+    .pj-section {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 44px;
+      box-shadow: 0 8px 40px rgba(15,23,42,0.06);
+      margin-bottom: 24px;
+      scroll-margin-top: 24px;
+    }
+    .pj-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+    .pj-section-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .pj-section-badge.def  { background: linear-gradient(135deg, #7c3aed, #a78bfa); font-size: 13px; }
+    .pj-section-badge.warn { background: linear-gradient(135deg, #d97706, #fbbf24); font-size: 13px; }
+    .pj-section-badge.ok   { background: linear-gradient(135deg, #059669, #34d399); font-size: 13px; }
+    .pj-section-title    { font-size: 1.35rem; font-weight: 700; color: #07142f; line-height: 1.2; }
+    .pj-section-subtitle { font-size: 13px; color: #9ca3af; font-weight: 500; margin-top: 2px; }
+
+    .pj-section p {
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 1em;
+      font-size: 1rem;
+    }
+    .pj-section p:last-child { margin-bottom: 0; }
+
+    .pj-section h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #9ca3af;
+      margin: 20px 0 8px;
+    }
+
+    /* ===== RULE / FORMULA BOX ===== */
+    .pj-rule {
+      background: #f0f5ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      color: #1e40af;
+      font-weight: 500;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    /* ===== SOLUTION TYPES ===== */
+    .pj-sol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .pj-sol-card {
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+    .pj-sol-card.unique   { background: #f0fdf4; border: 1px solid #86efac; }
+    .pj-sol-card.infinite { background: #fffbeb; border: 1px solid #fcd34d; }
+    .pj-sol-card.none     { background: #fef2f2; border: 1px solid #fca5a5; }
+    .pj-sol-card strong   { display: block; margin-bottom: 6px; font-size: 0.95rem; }
+    .pj-sol-card.unique strong   { color: #15803d; }
+    .pj-sol-card.infinite strong { color: #b45309; }
+    .pj-sol-card.none strong     { color: #b91c1c; }
+
+    /* ===== STEP-BY-STEP ===== */
+    .pj-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+    .pj-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .pj-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      background: #2563eb;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .pj-step-body { flex: 1; font-size: 0.95rem; color: #374151; line-height: 1.7; overflow-x: auto; }
+    .pj-step-body .math-line {
+      display: block;
+      margin: 4px 0;
+    }
+
+    /* ===== RESULT BOX ===== */
+    .pj-result {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 10px 18px;
+      margin-top: 16px;
+      font-weight: 600;
+      color: #15803d;
+      font-size: 0.95rem;
+    }
+
+    /* ===== EXAMPLES ===== */
+    .pj-examples { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .pj-ex {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .pj-ex.wide { width: 100%; overflow-x: auto; }
+
+    /* ===== RODAPÉ ===== */
+    .pj-footer { text-align: center; padding: 32px; font-size: 13px; color: #9ca3af; }
+    .pj-footer a { color: #2563eb; text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .pj-hero { padding: 36px 20px 64px; }
+      .pj-hero-title { font-size: 2.1rem; }
+      .pj-layout { padding: 0 12px; margin-top: -32px; }
+      .pj-section { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="pj-hero">
+    <a class="pj-brand" href="https://pratiqueja.com">Pratique<span>Já</span></a>
+    <div style="margin-bottom:14px">
+      <span class="pj-badge">Álgebra · Avançado</span>
+    </div>
+    <h1 class="pj-hero-title">Sistema de Equações</h1>
+    <div class="pj-hero-stats">
+      <div class="pj-hero-stat"><strong>3</strong><span>Métodos</span></div>
+      <div class="pj-hero-stat"><strong>3</strong><span>Tipos de Solução</span></div>
+      <div class="pj-hero-stat"><strong>3</strong><span>Exemplos</span></div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="pj-layout">
+    <div class="pj-content">
+
+      <!-- DEFINIÇÃO -->
+      <section class="pj-section" id="sec-def">
+        <div class="pj-section-header">
+          <div class="pj-section-badge def">Def</div>
+          <div>
+            <div class="pj-section-title">Definição</div>
+            <div class="pj-section-subtitle">O que é um sistema de equações?</div>
+          </div>
+        </div>
+        <div class="pj-rule">
+          Um sistema de equações é um conjunto de duas ou mais equações que compartilham as mesmas variáveis. O objetivo é encontrar os valores das variáveis que satisfazem <strong>todas</strong> as equações simultaneamente.
+        </div>
+        <p>
+          Focaremos nos <strong>sistemas lineares</strong> — formados por equações do primeiro grau. Geometricamente, cada equação linear representa uma reta (em 2 variáveis) ou um plano (em 3 variáveis), e a solução do sistema é o ponto de interseção entre elas.
+        </p>
+        <h4>Exemplo de sistema</h4>
+        <div class="pj-rule">
+          \[
+            \begin{cases}
+              2x + 3y = 6 \\
+              x - y = 2
+            \end{cases}
+          \]
+        </div>
+      </section>
+
+      <!-- TIPOS DE SOLUÇÃO -->
+      <section class="pj-section" id="sec-tipos">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">1</div>
+          <div>
+            <div class="pj-section-title">Tipos de Solução</div>
+            <div class="pj-section-subtitle">Consistente, dependente ou inconsistente</div>
+          </div>
+        </div>
+        <div class="pj-sol-grid">
+          <div class="pj-sol-card unique">
+            <strong>Solução Única</strong>
+            Sistema <em>consistente e independente</em>. Existe exatamente um conjunto de valores que satisfaz todas as equações. As retas se cruzam em um único ponto.
+          </div>
+          <div class="pj-sol-card infinite">
+            <strong>Infinitas Soluções</strong>
+            Sistema <em>consistente e dependente</em>. As equações representam a mesma reta — são múltiplos uma da outra. Qualquer ponto da reta é solução.
+          </div>
+          <div class="pj-sol-card none">
+            <strong>Nenhuma Solução</strong>
+            Sistema <em>inconsistente</em>. As equações representam retas paralelas que nunca se cruzam. Não existe valor que satisfaça todas as equações.
+          </div>
+        </div>
+      </section>
+
+      <!-- MÉTODO DA SUBSTITUIÇÃO -->
+      <section class="pj-section" id="sec-subst">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">2</div>
+          <div>
+            <div class="pj-section-title">Método da Substituição</div>
+            <div class="pj-section-subtitle">Isolar uma variável e substituir na outra equação</div>
+          </div>
+        </div>
+        <p>
+          Isola-se uma das variáveis em uma das equações e substitui-se na outra. Recomendado quando uma das variáveis tem coeficiente 1 ou é fácil de isolar.
+        </p>
+        <h4>Exemplo</h4>
+        <div class="pj-rule">
+          \[
+            \begin{cases}
+              x + y = 5 \quad \text{(1)}\\
+              2x - y = 4 \quad \text{(2)}
+            \end{cases}
+          \]
+        </div>
+        <div class="pj-steps">
+          <div class="pj-step">
+            <span class="pj-step-num">1</span>
+            <div class="pj-step-body">
+              Escolher a equação (1) e isolar \(x\):
+              <span class="math-line">\(x + y = 5 \implies x = 5 - y\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">2</span>
+            <div class="pj-step-body">
+              Substituir \(x = 5 - y\) na equação (2):
+              <span class="math-line">\(2(5 - y) - y = 4\)</span>
+              <span class="math-line">\(10 - 2y - y = 4\)</span>
+              <span class="math-line">\(-3y = 4 - 10 = -6\)</span>
+              <span class="math-line">\(y = \dfrac{-6}{-3} = 2\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">3</span>
+            <div class="pj-step-body">
+              Substituir \(y = 2\) em \(x = 5 - y\):
+              <span class="math-line">\(x = 5 - 2 = 3\)</span>
+            </div>
+          </div>
+        </div>
+        <div class="pj-result">Solução: \(x = 3\) e \(y = 2\)</div>
+      </section>
+
+      <!-- MÉTODO DA ADIÇÃO -->
+      <section class="pj-section" id="sec-adicao">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">3</div>
+          <div>
+            <div class="pj-section-title">Método da Adição</div>
+            <div class="pj-section-subtitle">Eliminar uma variável somando as equações</div>
+          </div>
+        </div>
+        <p>
+          Multiplica-se uma ou ambas as equações por constantes de modo que, ao somá-las, uma das incógnitas seja eliminada. Útil quando os coeficientes de uma variável já são opostos (ou facilmente tornam-se opostos).
+        </p>
+        <h4>Exemplo</h4>
+        <div class="pj-rule">
+          \[
+            \begin{cases}
+              2x + y = 5 \quad \text{(1)}\\
+              x - y = 1 \quad \text{(2)}
+            \end{cases}
+          \]
+        </div>
+        <div class="pj-steps">
+          <div class="pj-step">
+            <span class="pj-step-num">1</span>
+            <div class="pj-step-body">
+              Observar que os coeficientes de \(y\) são \(+1\) e \(-1\) — já opostos. Basta somar as equações diretamente:
+              <span class="math-line">\((2x + y) + (x - y) = 5 + 1\)</span>
+              <span class="math-line">\(3x = 6 \implies x = 2\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">2</span>
+            <div class="pj-step-body">
+              Substituir \(x = 2\) na equação (2):
+              <span class="math-line">\(2 - y = 1 \implies y = 1\)</span>
+            </div>
+          </div>
+        </div>
+        <div class="pj-result">Solução: \(x = 2\) e \(y = 1\)</div>
+        <h4>Quando os coeficientes não são opostos</h4>
+        <p>
+          Multiplique uma (ou ambas) as equações por uma constante para tornar os coeficientes de uma variável opostos em módulo, e então some as equações para eliminá-la.
+        </p>
+      </section>
+
+      <!-- MÉTODO DA COMPARAÇÃO -->
+      <section class="pj-section" id="sec-comp">
+        <div class="pj-section-header">
+          <div class="pj-section-badge">4</div>
+          <div>
+            <div class="pj-section-title">Método da Comparação</div>
+            <div class="pj-section-subtitle">Isolar a mesma variável em ambas as equações e igualar</div>
+          </div>
+        </div>
+        <p>
+          Isola-se a <strong>mesma variável</strong> nas duas equações e igualam-se as expressões obtidas, reduzindo o sistema a uma única equação com uma incógnita.
+        </p>
+        <h4>Exemplo</h4>
+        <div class="pj-rule">
+          \[
+            \begin{cases}
+              7x + y = 140 \quad \text{(1)}\\
+              -8x + y = -145 \quad \text{(2)}
+            \end{cases}
+          \]
+        </div>
+        <div class="pj-steps">
+          <div class="pj-step">
+            <span class="pj-step-num">1</span>
+            <div class="pj-step-body">
+              Isolar \(y\) na equação (1):
+              <span class="math-line">\(y = 140 - 7x\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">2</span>
+            <div class="pj-step-body">
+              Isolar \(y\) na equação (2):
+              <span class="math-line">\(y = -145 + 8x\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">3</span>
+            <div class="pj-step-body">
+              Igualar as duas expressões e resolver:
+              <span class="math-line">\(140 - 7x = -145 + 8x\)</span>
+              <span class="math-line">\(-7x - 8x = -145 - 140\)</span>
+              <span class="math-line">\(-15x = -285\)</span>
+              <span class="math-line">\(x = \dfrac{285}{15} = 19\)</span>
+            </div>
+          </div>
+          <div class="pj-step">
+            <span class="pj-step-num">4</span>
+            <div class="pj-step-body">
+              Substituir \(x = 19\) em \(y = 140 - 7x\):
+              <span class="math-line">\(y = 140 - 7 \cdot 19 = 140 - 133 = 7\)</span>
+            </div>
+          </div>
+        </div>
+        <div class="pj-result">Solução: \(x = 19\) e \(y = 7\)</div>
+      </section>
+
+    </div><!-- /pj-content -->
+  </div><!-- /pj-layout -->
+
+  <div class="pj-footer">
+    &copy; Pratique Já &mdash; <a href="https://pratiqueja.com">pratiqueja.com</a>
+  </div>
+
+</body>
+</html>

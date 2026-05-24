@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 320 200" width="320" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de Venn com |A-B|=2, |A∩B|=2, |B-A|=1">
+    <title>Diagrama de Venn — exemplo numérico da fórmula alternativa</title>
+    <!-- Retângulo universo -->
+    <rect x="1" y="1" width="318" height="198" fill="none" stroke="#4ade80" stroke-width="2"/>
+    <!-- Círculo A -->
+    <circle cx="108" cy="100" r="80" fill="rgba(74,222,128,0.10)" stroke="#4ade80" stroke-width="2.5"/>
+    <!-- Círculo B -->
+    <circle cx="212" cy="100" r="80" fill="rgba(74,222,128,0.10)" stroke="#4ade80" stroke-width="2.5"/>
+    <!-- Rótulos -->
+    <text x="72"  y="38" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#f97316">A</text>
+    <text x="242" y="38" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#f97316">B</text>
+    <text x="298" y="18" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#f97316">U</text>
+    <!-- Números nas regiões -->
+    <text x="85"  y="107" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#374151">2</text>
+    <text x="155" y="107" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#374151">2</text>
+    <text x="225" y="107" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#374151">1</text>
+</svg>

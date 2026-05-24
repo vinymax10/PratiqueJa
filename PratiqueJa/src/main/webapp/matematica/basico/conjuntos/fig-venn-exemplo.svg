@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 320 200" width="320" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de Venn com A={1,3,5,6,7} e B={2,4,5,7,8}">
+    <title>Diagrama de Venn — A e B com interseção</title>
+    <!-- Retângulo universo -->
+    <rect x="1" y="1" width="318" height="198" fill="none" stroke="#f472b6" stroke-width="2"/>
+    <!-- Círculo A -->
+    <circle cx="108" cy="100" r="80" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" stroke-width="2.5"/>
+    <!-- Círculo B -->
+    <circle cx="212" cy="100" r="80" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" stroke-width="2.5"/>
+    <!-- Rótulos -->
+    <text x="72"  y="38"  font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#3b82f6">A</text>
+    <text x="242" y="38"  font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#3b82f6">B</text>
+    <text x="298" y="18"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#3b82f6">U</text>
+    <!-- Elementos só em A -->
+    <text x="58"  y="95"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">1</text>
+    <text x="90"  y="78"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">3</text>
+    <text x="90"  y="122" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">6</text>
+    <!-- Elementos na interseção -->
+    <text x="155" y="92"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">5</text>
+    <text x="155" y="116" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">7</text>
+    <!-- Elementos só em B -->
+    <text x="248" y="95"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">2</text>
+    <text x="218" y="78"  font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">4</text>
+    <text x="218" y="122" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#374151">8</text>
+</svg>

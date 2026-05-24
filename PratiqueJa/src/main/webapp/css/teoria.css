@@ -168,6 +168,55 @@
     padding: 5px 12px; font-size: 13px; font-weight: 600; color: #1d4ed8;
 }
 
+/* ===== SISTEMA DE EQUAÇÕES ===== */
+.se-sol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+.se-sol-card {
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.91rem;
+    line-height: 1.6;
+}
+.se-sol-card.unique   { background: #f0fdf4; border: 1px solid #86efac; }
+.se-sol-card.infinite { background: #fffbeb; border: 1px solid #fcd34d; }
+.se-sol-card.none     { background: #fef2f2; border: 1px solid #fca5a5; }
+.se-sol-card strong   { display: block; margin-bottom: 5px; font-size: 0.93rem; }
+.se-sol-card.unique strong   { color: #15803d; }
+.se-sol-card.infinite strong { color: #b45309; }
+.se-sol-card.none strong     { color: #b91c1c; }
+.se-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+.se-step  { display: flex; gap: 12px; align-items: flex-start; }
+.se-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    background: #2563eb;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.se-step-body { flex: 1; font-size: 0.92rem; color: #374151; line-height: 1.7; overflow-x: auto; }
+.se-step-body .ml { display: block; margin: 3px 0; }
+.se-result {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-top: 14px;
+    font-weight: 600;
+    color: #15803d;
+    font-size: 0.93rem;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1300px) {
     .tr-toc { position: static; }

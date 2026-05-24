@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 320 200" width="320" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de Venn mostrando |A-B|, |A∩B| e |B-A|">
+    <title>Diagrama de Venn — cardinalidade das regiões</title>
+    <!-- Retângulo universo -->
+    <rect x="1" y="1" width="318" height="198" fill="none" stroke="#60a5fa" stroke-width="2"/>
+    <!-- Círculo A -->
+    <circle cx="108" cy="100" r="80" fill="rgba(37,99,235,0.10)" stroke="#60a5fa" stroke-width="2.5"/>
+    <!-- Círculo B -->
+    <circle cx="212" cy="100" r="80" fill="rgba(37,99,235,0.10)" stroke="#60a5fa" stroke-width="2.5"/>
+    <!-- Rótulos -->
+    <text x="72"  y="38" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#ef4444">A</text>
+    <text x="242" y="38" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#ef4444">B</text>
+    <text x="298" y="18" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#ef4444">U</text>
+    <!-- Cardinalidades das regiões -->
+    <text x="55"  y="107" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#374151">|A−B|</text>
+    <text x="138" y="107" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#374151">|A∩B|</text>
+    <text x="228" y="107" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#374151">|B−A|</text>
+</svg>

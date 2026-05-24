@@ -108,7 +108,27 @@ Conjunto Finito: Possui um número limitado de elementos.
  
 Conjunto Infinito: Possui um número ilimitado de elementos.
 
-\hspace{1cm}Exemplo: O conjunto dos números naturais ($\mathbb{N} = \{1, 2, 3, ...\}$).
+\hspace{1cm}Exemplo: O conjunto dos números naturais ($\mathbb{N} = \{0, 1, 2, 3, \ldots\}$). O conjunto dos naturais sem o zero é representado por $\mathbb{N}^* = \{1, 2, 3, \ldots\}$.
+
+\T{Subconjunto ($\subseteq$ e $\subset$)}
+
+Dizemos que $A$ é subconjunto de $B$ (ou que $A$ está contido em $B$) quando todo elemento de $A$ também pertence a $B$.
+
+\Formula{A \subseteq B \iff (x \in A \Rightarrow x \in B)}
+
+Quando $A \subseteq B$ e $A \neq B$, dizemos que $A$ é um \textbf{subconjunto próprio} de $B$, e escrevemos $A \subset B$.
+
+\TM{Propriedades importantes}
+
+\hspace{1cm}$\emptyset \subseteq A$, para qualquer conjunto $A$ (o vazio é subconjunto de qualquer conjunto).
+
+\hspace{1cm}$A \subseteq A$ (todo conjunto é subconjunto de si mesmo).
+
+\hspace{1cm}$A = B \iff A \subseteq B$ e $B \subseteq A$.
+
+\TM{Exemplo}
+
+Se $A = \{1, 2\}$ e $B = \{1, 2, 3, 4\}$, então $A \subset B$ (subconjunto próprio, pois $A \neq B$).
 
 \T{União ($\cup$)}
 
@@ -118,6 +138,16 @@ A operação de união de conjuntos representa o conjunto de todos os elementos 
 
 Se $A = \{1, 2, 3\}$ e $B = \{3, 4, 5\}$, então $A \cup B = \{1, 2, 3, 4, 5\}$.
 
+\TM{Propriedades da União}
+
+\hspace{1cm}Comutativa: $A \cup B = B \cup A$
+
+\hspace{1cm}Associativa: $(A \cup B) \cup C = A \cup (B \cup C)$
+
+\hspace{1cm}Elemento neutro: $A \cup \emptyset = A$
+
+\hspace{1cm}Idempotência: $A \cup A = A$
+
 \T{Interseção ($\cap$)}
 
 Essa operação representa o conjunto de todos os elementos que pertencem a ambos os conjuntos.
@@ -125,6 +155,16 @@ Essa operação representa o conjunto de todos os elementos que pertencem a ambo
 \TM{Exemplo}
 
 Se $A = \{1, 2, 3\}$ e $B = \{3, 4, 5\}$, então $A \cap B = \{3\}$.
+
+\TM{Propriedades da Interseção}
+
+\hspace{1cm}Comutativa: $A \cap B = B \cap A$
+
+\hspace{1cm}Associativa: $(A \cap B) \cap C = A \cap (B \cap C)$
+
+\hspace{1cm}Elemento neutro: $A \cap U = A$
+
+\hspace{1cm}Idempotência: $A \cap A = A$
 
 \T{Diferença ($-$ ou $\setminus$)}
 
@@ -134,13 +174,29 @@ O conjunto de todos os elementos que pertencem ao primeiro conjunto, mas não pe
 
 Se $A = \{1, 2, 3\}$ e $B = \{3, 4, 5\}$, então $A - B = \{1, 2\}$.
 
-\T{Complementar ($A^c$ ou $\bar{A}$ ou $A'$)}
- 
-Em relação a um conjunto universo $U$, o complementar de $A$ é o conjunto de todos os elementos de $U$ que não estão em $A$.
+\T{Complementar ($A^c$, $\bar{A}$ ou $A'$)}
+
+Em relação a um conjunto universo $U$, o complementar de $A$ é o conjunto de todos os elementos de $U$ que não estão em $A$. As notações $A^c$, $\bar{A}$ e $A'$ são equivalentes e representam o mesmo conjunto.
 
 \TM{Exemplo}
 
 Se $U = \{1, 2, 3, 4, 5\}$ e $A = \{1, 2\}$, então $A^c = \{3, 4, 5\}$.
+
+\T{Leis de De Morgan}
+
+As Leis de De Morgan relacionam as operações de complementar, união e interseção, sendo fundamentais para simplificar expressões com conjuntos.
+
+\Formula{(A \cup B)^c = A^c \cap B^c}
+
+\Formula{(A \cap B)^c = A^c \cup B^c}
+
+\TM{Exemplo}
+
+Se $U = \{1, 2, 3, 4, 5\}$, $A = \{1, 2, 3\}$ e $B = \{3, 4\}$:
+
+$A \cup B = \{1, 2, 3, 4\}$, portanto $(A \cup B)^c = \{5\}$.
+
+$A^c = \{4, 5\}$ e $B^c = \{1, 2, 5\}$, portanto $A^c \cap B^c = \{5\}$. \checkmark
 
 \T{Fórmula da Diferença de Conjuntos}
 
@@ -163,7 +219,7 @@ $|A - B| = |A| - |A \cap B|$
 
 $|A - B| = 5 - 2 = 3$
 
-Deste modo, sabemos que o número de elementos que estão no conjunto a e não estão no conjunto B é 3. 
+Deste modo, sabemos que o número de elementos que estão no conjunto A e não estão no conjunto B é 3.
 
 \T{Fórmula da União de Conjuntos}
 
@@ -193,7 +249,7 @@ Usando a formula da subtração de dois conjuntos podemos elaborar uma outra ver
 
 \Formula{|A \cup B| = |A-B| + |B-A| + |A \cap B|}
 
-Nesta fórmula temos que a união dos conjuntos $A$ e $B$ é presentada pela soma do número de elementos exclusivos de $A$ mais os elementos exclusivos de $B$ mais os elementos da intersecção de $A \cap B$.
+Nesta fórmula temos que a união dos conjuntos $A$ e $B$ é apresentada pela soma do número de elementos exclusivos de $A$, mais os elementos exclusivos de $B$, mais os elementos da interseção $A \cap B$.
 
 A seguir apresentamos o diagrama de Venn apresentando a cardinalidade das principais partes dos conjuntos.
 
@@ -269,6 +325,18 @@ $|A \cup B| = 2 + 1 + 2 = 5$
 \end{center}
 
 
+
+\T{Fórmula da União — Três Conjuntos}
+
+A fórmula da união pode ser estendida para três conjuntos, aplicando o Princípio da Inclusão-Exclusão:
+
+\Formula{|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|}
+
+\TM{Exemplo}
+
+Em uma turma de 50 alunos: 30 gostam de Matemática ($M$), 25 gostam de Física ($F$) e 20 gostam de Química ($Q$). Sabe-se que 10 gostam de $M$ e $F$, 8 gostam de $M$ e $Q$, 7 gostam de $F$ e $Q$, e 4 gostam das três disciplinas. Quantos alunos gostam de pelo menos uma?
+
+$|M \cup F \cup Q| = 30 + 25 + 20 - 10 - 8 - 7 + 4 = 54$
 
 As noções de conjunto são a base para muitos outros conceitos na matemática, como funções, relações, probabilidade e lógica. Compreender esses fundamentos é crucial para o estudo avançado de diversas áreas da matemática e outras ciências.
 

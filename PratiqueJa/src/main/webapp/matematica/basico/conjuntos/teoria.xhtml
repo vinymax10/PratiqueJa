@@ -1,0 +1,324 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é um conjunto?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um conjunto é uma coleção bem definida de elementos (objetos, números, pessoas etc.).
+                    Os elementos de um conjunto devem ser distintos e claramente identificáveis.
+                </div>
+                <p>A teoria dos conjuntos é a base de praticamente toda a matemática moderna.
+                As noções de conjunto são fundamentais para o estudo de funções, relações, probabilidade e lógica.</p>
+            </div>
+
+            <!-- FORMAS DE REPRESENTAÇÃO -->
+            <div class="tr-section" id="sec-repr">
+                <div class="tr-section-header">
+                    <div class="tr-badge">1</div>
+                    <div>
+                        <div class="tr-section-title">Formas de Representação</div>
+                        <div class="tr-section-sub">Como descrever um conjunto</div>
+                    </div>
+                </div>
+
+                <h4>Listagem ou Enumeração</h4>
+                <p>Consiste em listar todos os elementos entre chaves.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(A = \{1, 2, 3, 4, 5\}\)</div>
+                </div>
+
+                <h4>Propriedade Característica</h4>
+                <p>Os elementos são descritos por uma propriedade em comum.
+                Lê-se "<em>x</em> tal que <em>x</em> satisfaz a propriedade".</p>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        \(B = \{x \mid x \text{ é um número par}\}\) — lemos: "\(x\) tal que \(x\) é um número par"
+                    </div>
+                </div>
+
+                <h4>Diagrama de Venn</h4>
+                <p>Representação gráfica que usa círculos dentro de um retângulo (o universo \(U\))
+                para mostrar as relações entre conjuntos.</p>
+
+                <div class="tr-fig-center">
+                    <img src="fig-venn-exemplo.svg" alt="Diagrama de Venn com A={1,3,5,6,7} e B={2,4,5,7,8}" style="max-width:100%;height:auto;" />
+                </div>
+                <p>\(A = \{1, 3, 5, 6, 7\}\) e \(B = \{2, 4, 5, 7, 8\}\).
+                Os elementos 5 e 7 pertencem aos dois conjuntos (interseção).</p>
+            </div>
+
+            <!-- CARDINALIDADE -->
+            <div class="tr-section" id="sec-card">
+                <div class="tr-section-header">
+                    <div class="tr-badge">2</div>
+                    <div>
+                        <div class="tr-section-title">Cardinalidade</div>
+                        <div class="tr-section-sub">Número de elementos de um conjunto</div>
+                    </div>
+                </div>
+                <p>A cardinalidade de um conjunto é o número de elementos distintos que ele contém.
+                A notação principal é \(|A|\).</p>
+                <div class="tr-rule">
+                    \(|A|\) = número de elementos distintos do conjunto \(A\)
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">Se \(A = \{2, 6, 9\}\), então \(|A| = 3\)</div>
+                    <div class="tr-ex">Se \(B = \{a, b, c, d\}\), então \(|B| = 4\)</div>
+                    <div class="tr-ex">Se \(C = \emptyset\), então \(|C| = 0\)</div>
+                </div>
+            </div>
+
+            <!-- PERTINÊNCIA -->
+            <div class="tr-section" id="sec-pert">
+                <div class="tr-section-header">
+                    <div class="tr-badge">3</div>
+                    <div>
+                        <div class="tr-section-title">Pertinência \((\in)\)</div>
+                        <div class="tr-section-sub">Um elemento pertence (ou não) a um conjunto</div>
+                    </div>
+                </div>
+                <p>O símbolo \(\in\) indica que um elemento pertence a um conjunto.
+                O símbolo \(\notin\) indica que não pertence.</p>
+                <div class="tr-rule">
+                    \(x \in A\) — "\(x\) pertence a \(A\)" &#160;|&#160; \(x \notin A\) — "\(x\) não pertence a \(A\)"
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">Dado \(A = \{3, 6, 7, 11\}\):</div>
+                    <div class="tr-ex">\(3 \in A\) ✓ — 3 pertence a \(A\)</div>
+                    <div class="tr-ex">\(4 \notin A\) — 4 não pertence a \(A\)</div>
+                </div>
+            </div>
+
+            <!-- TIPOS ESPECIAIS -->
+            <div class="tr-section" id="sec-tipos">
+                <div class="tr-section-header">
+                    <div class="tr-badge">4</div>
+                    <div>
+                        <div class="tr-section-title">Tipos Especiais de Conjuntos</div>
+                        <div class="tr-section-sub">Vazio, unitário, universo, finito e infinito</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        <strong>Conjunto Vazio</strong> \((\emptyset\) ou \(\{\})\) — não possui nenhum elemento.<br />
+                        Exemplo: conjunto de todos os números pares que são ímpares.
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Conjunto Unitário</strong> — possui exatamente um elemento.<br />
+                        Exemplo: \(\{5\}\).
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Conjunto Universo</strong> \((U)\) — contém todos os elementos considerados no contexto.
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Conjunto Finito</strong> — número limitado de elementos.<br />
+                        Exemplo: \(\{1, 2, 3, 4, 5\}\).
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Conjunto Infinito</strong> — infinitos elementos.<br />
+                        Exemplo: \(\mathbb{N} = \{1, 2, 3, \ldots\}\).
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIÃO -->
+            <div class="tr-section" id="sec-uniao">
+                <div class="tr-section-header">
+                    <div class="tr-badge">5</div>
+                    <div>
+                        <div class="tr-section-title">União \((\cup)\)</div>
+                        <div class="tr-section-sub">Todos os elementos de A ou de B</div>
+                    </div>
+                </div>
+                <p>Representa o conjunto de todos os elementos que pertencem a
+                <strong>pelo menos um</strong> dos conjuntos.</p>
+                <div class="tr-rule">
+                    \(A \cup B = \{x \mid x \in A \text{ ou } x \in B\}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        Se \(A = \{1, 2, 3\}\) e \(B = \{3, 4, 5\}\), então \(A \cup B = \{1, 2, 3, 4, 5\}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERSEÇÃO -->
+            <div class="tr-section" id="sec-inter">
+                <div class="tr-section-header">
+                    <div class="tr-badge">6</div>
+                    <div>
+                        <div class="tr-section-title">Interseção \((\cap)\)</div>
+                        <div class="tr-section-sub">Apenas os elementos comuns a A e B</div>
+                    </div>
+                </div>
+                <p>Representa o conjunto de todos os elementos que pertencem
+                <strong>simultaneamente</strong> aos dois conjuntos.</p>
+                <div class="tr-rule">
+                    \(A \cap B = \{x \mid x \in A \text{ e } x \in B\}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        Se \(A = \{1, 2, 3\}\) e \(B = \{3, 4, 5\}\), então \(A \cap B = \{3\}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIFERENÇA -->
+            <div class="tr-section" id="sec-dif">
+                <div class="tr-section-header">
+                    <div class="tr-badge">7</div>
+                    <div>
+                        <div class="tr-section-title">Diferença \((A - B)\)</div>
+                        <div class="tr-section-sub">Elementos de A que não estão em B</div>
+                    </div>
+                </div>
+                <p>Representa os elementos que pertencem a \(A\) mas <strong>não</strong> pertencem a \(B\).</p>
+                <div class="tr-rule">
+                    \(A - B = \{x \mid x \in A \text{ e } x \notin B\}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        Se \(A = \{1, 2, 3\}\) e \(B = \{3, 4, 5\}\), então \(A - B = \{1, 2\}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPLEMENTAR -->
+            <div class="tr-section" id="sec-comp">
+                <div class="tr-section-header">
+                    <div class="tr-badge">8</div>
+                    <div>
+                        <div class="tr-section-title">Complementar \((A^c)\)</div>
+                        <div class="tr-section-sub">Elementos do universo que não estão em A</div>
+                    </div>
+                </div>
+                <p>Em relação a um conjunto universo \(U\), o complementar de \(A\) é o conjunto
+                de todos os elementos de \(U\) que <strong>não</strong> estão em \(A\).</p>
+                <div class="tr-rule">
+                    \(A^c = U - A = \{x \mid x \in U \text{ e } x \notin A\}\)
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full">
+                        Se \(U = \{1, 2, 3, 4, 5\}\) e \(A = \{1, 2\}\), então \(A^c = \{3, 4, 5\}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULA DA DIFERENÇA -->
+            <div class="tr-section" id="sec-fdif">
+                <div class="tr-section-header">
+                    <div class="tr-badge">9</div>
+                    <div>
+                        <div class="tr-section-title">Fórmula da Diferença</div>
+                        <div class="tr-section-sub">Cardinalidade de A − B</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[|A - B| = |A| - |A \cap B|\]
+                </div>
+                <p>A cardinalidade de \(A - B\) é a cardinalidade de \(A\) menos o número de
+                elementos da interseção entre \(A\) e \(B\).</p>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full" style="overflow-x:auto">
+                        <span style="display:block;margin-bottom:0.35em">\(A = \{1, 2, 3, 4, 5\},\quad |A| = 5\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(B = \{4, 5, 6, 7\},\quad |B| = 4\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(A \cap B = \{4, 5\},\quad |A \cap B| = 2\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(|A - B| = 5 - 2 = 3\)</span>
+                        <span style="display:block">Portanto, 3 elementos de \(A\) não pertencem a \(B\).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULA DA UNIÃO -->
+            <div class="tr-section" id="sec-funiao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">F</div>
+                    <div>
+                        <div class="tr-section-title">Fórmula da União</div>
+                        <div class="tr-section-sub">Cardinalidade de A ∪ B</div>
+                    </div>
+                </div>
+                <p>Uma das fórmulas mais importantes da teoria dos conjuntos. Garante que elementos
+                da interseção não sejam contados em duplicidade.</p>
+                <div class="tr-rule">
+                    \[|A \cup B| = |A| + |B| - |A \cap B|\]
+                </div>
+
+                <h4>Versão alternativa</h4>
+                <div class="tr-rule">
+                    \[|A \cup B| = |A - B| + |B - A| + |A \cap B|\]
+                </div>
+                <p>A união é a soma dos elementos exclusivos de \(A\), dos exclusivos de \(B\) e dos elementos comuns.</p>
+
+                <div class="tr-fig-center">
+                    <img src="fig-venn-cardinalidade.svg" alt="Diagrama de Venn mostrando |A-B|, |A∩B| e |B-A|" style="max-width:100%;height:auto;" />
+                </div>
+
+                <h4>Exemplo — fórmula principal</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full" style="overflow-x:auto">
+                        <span style="display:block;margin-bottom:0.35em">\(A = \{1, 2, 3, 4\},\quad |A| = 4\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(B = \{3, 4, 5, 6\},\quad |B| = 4\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(A \cap B = \{3, 4\},\quad |A \cap B| = 2\)</span>
+                        <span style="display:block">\(|A \cup B| = 4 + 4 - 2 = 6\)</span>
+                    </div>
+                </div>
+
+                <h4>Exemplo — versão alternativa</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex span-full" style="overflow-x:auto">
+                        <span style="display:block;margin-bottom:0.35em">\(A = \{2, 4, 5, 7\},\quad B = \{2, 4, 8\}\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(A - B = \{5, 7\},\quad |A - B| = 2\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(B - A = \{8\},\quad |B - A| = 1\)</span>
+                        <span style="display:block;margin-bottom:0.35em">\(A \cap B = \{2, 4\},\quad |A \cap B| = 2\)</span>
+                        <span style="display:block">\(|A \cup B| = 2 + 1 + 2 = 5\)</span>
+                    </div>
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="fig-venn-numeros.svg" alt="Diagrama de Venn com |A-B|=2, |A∩B|=2, |B-A|=1" style="max-width:100%;height:auto;" />
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

@@ -25,7 +25,10 @@
       "PowerShell(New-Item *)",
       "Bash(\"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" tex/23-AnguloInscritoCircunferencia.tex --from=latex --to=html5 --mathjax --standalone --output=html/23-AnguloInscritoCircunferencia-raw.html)",
       "Bash(\"C:\\\\Users\\\\maximovrm\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" tex/24-SemelhancaTriangulos.tex --from=latex --to=html5 --mathjax --standalone --output=html/24-SemelhancaTriangulos.html)",
-      "Bash(dir *)"
+      "Bash(dir *)",
+      "Bash(/mnt/c/Users/USUARIO/Documents/RStudio/bin/pandoc/pandoc.exe --version)",
+      "Bash(sudo apt-get install pandoc -y)",
+      "Bash(python3 *)"
     ]
   }
 }
