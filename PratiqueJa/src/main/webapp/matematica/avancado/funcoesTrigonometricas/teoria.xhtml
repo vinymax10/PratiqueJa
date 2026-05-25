@@ -1,0 +1,351 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- RADIANO -->
+            <div class="tr-section" id="sec-radiano">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Radiano</div>
+                        <div class="tr-section-sub">Unidade natural de medida de ângulos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>radiano</strong> é o ângulo central que intercepta um arco cujo comprimento
+                    é igual ao raio da circunferência. Em um círculo de raio \(r\), a volta completa
+                    tem comprimento \(2\pi r\), logo \(2\pi\) radianos equivalem a \(360°\):
+                    \[
+                        \pi \text{ rad} = 180° \qquad\Rightarrow\qquad
+                        1 \text{ rad} \approx 57{,}3°
+                    \]
+                </div>
+                <h4>Conversão grau ↔ radiano</h4>
+                <div class="tr-rule">
+                    \(\text{rad} = \text{grau} \times \dfrac{\pi}{180} \qquad\qquad
+                    \text{grau} = \text{rad} \times \dfrac{180}{\pi}\)
+                </div>
+                <h4>Arcos notáveis</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(30° = \dfrac{\pi}{6}\)</span>
+                        <span>\(45° = \dfrac{\pi}{4}\)</span>
+                        <span>\(60° = \dfrac{\pi}{3}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(90° = \dfrac{\pi}{2}\)</span>
+                        <span>\(180° = \pi\)</span>
+                        <span>\(270° = \dfrac{3\pi}{2}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(360° = 2\pi\)</span>
+                        <span>\(120° = \dfrac{2\pi}{3}\)</span>
+                        <span>\(150° = \dfrac{5\pi}{6}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos de conversão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Converter \(135°\) para radianos:</span>
+                        <span>\(135 \times \dfrac{\pi}{180} = \dfrac{135\pi}{180} = \dfrac{3\pi}{4}\)</span>
+                        <span class="hl">\(135° = \dfrac{3\pi}{4}\) rad</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Converter \(\dfrac{5\pi}{6}\) para graus:</span>
+                        <span>\(\dfrac{5\pi}{6} \times \dfrac{180}{\pi} = \dfrac{5 \times 180}{6} = 150\)</span>
+                        <span class="hl">\(\dfrac{5\pi}{6}\) rad \(= 150°\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CICLO TRIGONOMÉTRICO -->
+            <div class="tr-section" id="sec-ciclo">
+                <div class="tr-section-header">
+                    <div class="tr-badge">Cic</div>
+                    <div>
+                        <div class="tr-section-title">Ciclo Trigonométrico</div>
+                        <div class="tr-section-sub">Seno e cosseno no círculo unitário</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>ciclo trigonométrico</strong> é uma circunferência de raio 1 centrada
+                    na origem. Para um ângulo \(\theta\), o ponto \(P\) sobre o ciclo tem coordenadas:
+                    \[
+                        P = (\cos\theta,\; \operatorname{sen}\theta)
+                    \]
+                    O <strong>cosseno</strong> é a projeção horizontal de \(P\) e o
+                    <strong>seno</strong> é a projeção vertical.
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/funcoesTrigonometricas/fig-ciclo-trigonometrico.svg"
+                         alt="Ciclo trigonométrico com ponto P em 60°, mostrando projeções de seno e cosseno" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">1º Quadrante (0° a 90°)</span>
+                        <span class="hl">sen \(&gt; 0\) e cos \(&gt; 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">2º Quadrante (90° a 180°)</span>
+                        <span class="hl">sen \(&gt; 0\) e cos \(&lt; 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">3º Quadrante (180° a 270°)</span>
+                        <span class="hl">sen \(&lt; 0\) e cos \(&lt; 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">4º Quadrante (270° a 360°)</span>
+                        <span class="hl">sen \(&lt; 0\) e cos \(&gt; 0\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    Como o ciclo tem raio 1, os valores de seno e cosseno sempre satisfazem
+                    \(-1 \leq \operatorname{sen}\theta \leq 1\) e \(-1 \leq \cos\theta \leq 1\).
+                </div>
+            </div>
+
+            <!-- TABELA DE VALORES NOTÁVEIS -->
+            <div class="tr-section" id="sec-tabela">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Tab</div>
+                    <div>
+                        <div class="tr-section-title">Valores Notáveis</div>
+                        <div class="tr-section-sub">Seno, cosseno e tangente dos ângulos principais</div>
+                    </div>
+                </div>
+                <p>Estes valores devem ser memorizados — aparecem em quase toda questão de trigonometria:</p>
+                <div style="overflow-x:auto;margin:14px 0">
+                    <table style="width:100%;border-collapse:collapse;font-size:.92rem;text-align:center">
+                        <thead>
+                            <tr style="background:#1e293b;color:#e2e8f0">
+                                <th style="padding:8px 12px;border:1px solid #334155">Ângulo</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">0°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">30°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">45°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">60°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">90°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">180°</th>
+                                <th style="padding:8px 12px;border:1px solid #334155">270°</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color:#cbd5e1">
+                            <tr>
+                                <td style="padding:8px 12px;border:1px solid #334155;font-weight:600;color:#93c5fd">Radianos</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\pi}{6}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\pi}{4}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\pi}{3}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\pi}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\pi\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{3\pi}{2}\)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 12px;border:1px solid #334155;font-weight:600;color:#86efac">sen</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{1}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\sqrt{2}}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\sqrt{3}}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">1</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">−1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 12px;border:1px solid #334155;font-weight:600;color:#fdba74">cos</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">1</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\sqrt{3}}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\sqrt{2}}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{1}{2}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">−1</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 12px;border:1px solid #334155;font-weight:600;color:#c4b5fd">tg</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\frac{\sqrt{3}}{3}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">1</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">\(\sqrt{3}\)</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">∄</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">0</td>
+                                <td style="padding:8px 12px;border:1px solid #334155">∄</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tr-note">
+                    <strong>Macete do seno:</strong> \(0°\to\frac{\sqrt{0}}{2}\), \(30°\to\frac{\sqrt{1}}{2}\),
+                    \(45°\to\frac{\sqrt{2}}{2}\), \(60°\to\frac{\sqrt{3}}{2}\), \(90°\to\frac{\sqrt{4}}{2}=1\).
+                    O cosseno segue o padrão inverso.
+                </div>
+            </div>
+
+            <!-- GRÁFICOS DE SENO E COSSENO -->
+            <div class="tr-section" id="sec-graficos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Graf</div>
+                    <div>
+                        <div class="tr-section-title">Gráficos de Seno e Cosseno</div>
+                        <div class="tr-section-sub">Período, amplitude e comportamento periódico</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As funções \(f(x) = \operatorname{sen} x\) e \(g(x) = \cos x\) são <strong>periódicas</strong>
+                    com período \(2\pi\): repetem o mesmo padrão a cada volta completa no ciclo.
+                    Ambas têm <strong>amplitude</strong> 1, domínio \(\mathbb{R}\) e imagem \([-1, 1]\).
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/funcoesTrigonometricas/fig-grafico-seno-cosseno.svg"
+                         alt="Gráficos de seno (verde) e cosseno (laranja) de 0 a 2π" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Seno \(f(x) = \operatorname{sen} x\)</span>
+                        <span>Começa em 0, sobe até 1 em \(\frac{\pi}{2}\), volta a 0 em \(\pi\),</span>
+                        <span>desce até −1 em \(\frac{3\pi}{2}\), retorna a 0 em \(2\pi\).</span>
+                        <span class="hl">Zeros: \(x = k\pi\) para \(k \in \mathbb{Z}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Cosseno \(g(x) = \cos x\)</span>
+                        <span>Começa em 1, desce a 0 em \(\frac{\pi}{2}\), atinge −1 em \(\pi\),</span>
+                        <span>sobe a 0 em \(\frac{3\pi}{2}\), retorna a 1 em \(2\pi\).</span>
+                        <span class="hl">Zeros: \(x = \frac{\pi}{2} + k\pi\) para \(k \in \mathbb{Z}\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Relação entre seno e cosseno:</strong>
+                    \(\cos x = \operatorname{sen}\!\left(x + \frac{\pi}{2}\right)\) —
+                    o cosseno é o seno deslocado \(\frac{\pi}{2}\) à esquerda.
+                </div>
+            </div>
+
+            <!-- TANGENTE -->
+            <div class="tr-section" id="sec-tangente">
+                <div class="tr-section-header">
+                    <div class="tr-badge">tg</div>
+                    <div>
+                        <div class="tr-section-title">Função Tangente</div>
+                        <div class="tr-section-sub">Período π e assíntotas verticais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A tangente é definida como a razão entre seno e cosseno:
+                    \[
+                        \operatorname{tg} x = \dfrac{\operatorname{sen} x}{\cos x}
+                    \]
+                    A função não está definida quando \(\cos x = 0\),
+                    ou seja, nos pontos \(x = \frac{\pi}{2} + k\pi\) (\(k \in \mathbb{Z}\)).
+                    Nesses pontos há <strong>assíntotas verticais</strong>.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Domínio</span>
+                        <span class="hl">\(\mathbb{R} \setminus \!\left\{\frac{\pi}{2} + k\pi,\; k \in \mathbb{Z}\right\}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Imagem</span>
+                        <span class="hl">\(\mathbb{R}\) (assume qualquer valor real)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Período</span>
+                        <span class="hl">\(\pi\) (metade do período de seno/cosseno)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Crescimento</span>
+                        <span class="hl">Crescente em cada intervalo do domínio</span>
+                    </div>
+                </div>
+                <h4>Valores notáveis</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\operatorname{tg} 0° = 0\)</span>
+                        <span>\(\operatorname{tg} 30° = \dfrac{\sqrt{3}}{3} \approx 0{,}577\)</span>
+                        <span>\(\operatorname{tg} 45° = 1\)</span>
+                        <span class="hl">\(\operatorname{tg} 60° = \sqrt{3} \approx 1{,}732\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IDENTIDADES TRIGONOMÉTRICAS -->
+            <div class="tr-section" id="sec-identidades">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Id</div>
+                    <div>
+                        <div class="tr-section-title">Identidades Trigonométricas</div>
+                        <div class="tr-section-sub">Relações fundamentais entre seno, cosseno e tangente</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A identidade fundamental decorre diretamente do Teorema de Pitágoras aplicado
+                    ao círculo unitário (hipotenusa = 1):
+                    \[
+                        \operatorname{sen}^2 x + \cos^2 x = 1
+                    \]
+                </div>
+                <h4>Identidades derivadas</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dividindo tudo por \(\cos^2 x\):</span>
+                        <span class="hl">\(\operatorname{tg}^2 x + 1 = \sec^2 x\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">onde \(\sec x = \dfrac{1}{\cos x}\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Dividindo tudo por \(\operatorname{sen}^2 x\):</span>
+                        <span class="hl">\(1 + \operatorname{cotg}^2 x = \csc^2 x\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">onde \(\operatorname{cotg} x = \dfrac{\cos x}{\operatorname{sen} x}\) e \(\csc x = \dfrac{1}{\operatorname{sen} x}\)</span>
+                    </div>
+                </div>
+                <h4>Relação fundamental da tangente</h4>
+                <div class="tr-rule">
+                    \[\operatorname{tg} x = \dfrac{\operatorname{sen} x}{\cos x}\]
+                </div>
+                <h4>Uso das identidades — exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dado \(\operatorname{sen} x = \dfrac{3}{5}\) com \(x\) no 1º quadrante, calcule \(\cos x\).</span>
+                        <span>\(\operatorname{sen}^2 x + \cos^2 x = 1\)</span>
+                        <span>\(\dfrac{9}{25} + \cos^2 x = 1\)</span>
+                        
+                        <span>\(\cos^2 x = \dfrac{16}{25}\)</span>
+                        <span class="hl">\(\cos x = \dfrac{4}{5}\) &#160;<em style="font-size:.83rem;color:#9ca3af">(positivo no 1º quadrante)</em></span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Simplifique: \(\dfrac{\operatorname{sen}^2 x + \cos^2 x}{\cos^2 x}\)</span>
+                        <span>\(= \dfrac{1}{\cos^2 x}\)</span>
+                        <span class="hl">\(= \sec^2 x = 1 + \operatorname{tg}^2 x\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Ângulos suplementares:</strong>
+                    \(\operatorname{sen}(180° - \theta) = \operatorname{sen}\theta\) e \(\cos(180° - \theta) = -\cos\theta\).
+                    <br/>
+                    <strong>Ângulos opostos:</strong>
+                    \(\operatorname{sen}(-\theta) = -\operatorname{sen}\theta\) e \(\cos(-\theta) = \cos\theta\).
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

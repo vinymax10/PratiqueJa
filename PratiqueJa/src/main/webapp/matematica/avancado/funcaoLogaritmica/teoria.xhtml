@@ -1,0 +1,190 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">f(x) = log_a(x) como função</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A função logarítmica de base \(a\) é definida por \(f(x) = \log_a x\),
+                    onde \(a &gt; 0\), \(a \neq 1\) e \(x &gt; 0\).
+                    O <strong>domínio</strong> é \((0, +\infty)\) e a <strong>imagem</strong> é
+                    \(\mathbb{R}\) (assume qualquer valor real).
+                </div>
+                <p>A restrição \(x &gt; 0\) surge diretamente da definição de logaritmo:
+                não existe logaritmo de zero ou de número negativo.
+                O valor \(x = 1\) é especial porque \(\log_a 1 = 0\) para qualquer base —
+                portanto o gráfico sempre cruza o eixo \(x\) no ponto \((1, 0)\).</p>
+                <h4>Exemplos de imagem</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(f(x) = \log_2 x\)</span>
+                        <span>\(f(1) = 0\) &#160;&#160; \(f(2) = 1\) &#160;&#160; \(f(4) = 2\)</span>
+                        <span class="hl">\(f\!\left(\tfrac{1}{2}\right) = -1\) &#160;&#160; \(f\!\left(\tfrac{1}{4}\right) = -2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(f(x) = \log_{10} x\) &#160;<em style="font-size:.83rem;color:#9ca3af">(log decimal)</em></span>
+                        <span>\(f(1) = 0\) &#160;&#160; \(f(10) = 1\) &#160;&#160; \(f(100) = 2\)</span>
+                        <span class="hl">\(f(0{,}1) = -1\) &#160;&#160; \(f(0{,}01) = -2\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    As operações e propriedades dos logaritmos (produto, quociente, potência, mudança
+                    de base) estão em <strong>Logaritmo</strong>. Este assunto foca na função
+                    como objeto de análise (gráfico, domínio, imagem, crescimento).
+                </div>
+            </div>
+
+            <!-- GRÁFICO -->
+            <div class="tr-section" id="sec-grafico">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Graf</div>
+                    <div>
+                        <div class="tr-section-title">Gráfico</div>
+                        <div class="tr-section-sub">Assíntota vertical, zero e crescimento</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O gráfico de \(f(x) = \log_a x\) tem o eixo \(y\) como <strong>assíntota vertical</strong>
+                    (\(x = 0\)) — a curva se aproxima da reta \(x = 0\) mas nunca a alcança.
+                    O comportamento de crescimento depende da base \(a\):
+                    se \(a &gt; 1\), a função é <strong>crescente</strong>;
+                    se \(0 &lt; a &lt; 1\), a função é <strong>decrescente</strong>.
+                    Em ambos os casos a curva passa por \((1, 0)\).
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/funcaoLogaritmica/fig-grafico-logaritmo.svg"
+                         alt="Gráficos de log_2(x) crescente e log_{1/2}(x) decrescente com assíntota vertical em x=0" />
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(a &gt; 1\) → crescente</span>
+                        <span>Valores de \(x\) entre 0 e 1 → \(f(x) &lt; 0\)</span>
+                        <span>\(x = 1\) → \(f(x) = 0\) (zero da função)</span>
+                        <span class="hl">\(x &gt; 1\) → \(f(x) &gt; 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">\(0 &lt; a &lt; 1\) → decrescente</span>
+                        <span>Valores de \(x\) entre 0 e 1 → \(f(x) &gt; 0\)</span>
+                        <span>\(x = 1\) → \(f(x) = 0\) (zero da função)</span>
+                        <span class="hl">\(x &gt; 1\) → \(f(x) &lt; 0\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVERSA DA EXPONENCIAL -->
+            <div class="tr-section" id="sec-inversa">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">f⁻¹</div>
+                    <div>
+                        <div class="tr-section-title">Inversa da Função Exponencial</div>
+                        <div class="tr-section-sub">Logarítmica e exponencial são funções inversas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A função logarítmica \(f(x) = \log_a x\) é a <strong>inversa</strong> da função
+                    exponencial \(g(x) = a^x\). Isso significa que uma desfaz o que a outra faz:
+                    \[
+                        g(f(x)) = a^{\log_a x} = x \qquad \text{e} \qquad f(g(x)) = \log_a(a^x) = x
+                    \]
+                </div>
+                <p>Geometricamente, os gráficos de \(f(x) = \log_a x\) e \(g(x) = a^x\) são
+                <strong>simétricos em relação à reta \(y = x\)</strong> — se você dobrar o papel na
+                diagonal, as duas curvas se sobrepõem.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Ponto \((3, 8)\) pertence a \(g(x) = 2^x\) pois \(2^3 = 8\).</span>
+                        <span class="hl">Ponto \((8, 3)\) pertence a \(f(x) = \log_2 x\) pois \(\log_2 8 = 3\).</span>
+                        <span style="font-size:.83rem;color:#6b7280;">As coordenadas se invertem — reflexão em \(y = x\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Domínio de \(g(x) = a^x\): \(\mathbb{R}\) → Imagem: \((0,+\infty)\)</span>
+                        <span class="hl">Domínio de \(f(x) = \log_a x\): \((0,+\infty)\) → Imagem: \(\mathbb{R}\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Domínio e imagem se invertem — propriedade geral das funções inversas.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANÁLISE: DOMÍNIO, IMAGEM, SINAL -->
+            <div class="tr-section" id="sec-analise">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">±</div>
+                    <div>
+                        <div class="tr-section-title">Análise da Função</div>
+                        <div class="tr-section-sub">Domínio, imagem, crescimento e sinal</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para \(f(x) = \log_a x\) com \(a &gt; 1\):
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Domínio</span>
+                        <span class="hl">\(D = (0, +\infty)\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">Apenas valores positivos de \(x\) têm logaritmo real.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Imagem</span>
+                        <span class="hl">\(Im = \mathbb{R}\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">A função assume qualquer valor real.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Zero da função</span>
+                        <span>\(\log_a x = 0 \;\Rightarrow\; x = a^0 = 1\)</span>
+                        <span class="hl">Zero em \(x = 1\) para qualquer base.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Sinal (para \(a &gt; 1\))</span>
+                        <span>\(f(x) &lt; 0\) para \(0 &lt; x &lt; 1\)</span>
+                        <span>\(f(x) = 0\) para \(x = 1\)</span>
+                        <span class="hl">\(f(x) &gt; 0\) para \(x &gt; 1\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo de aplicação</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Para quais valores de \(x\) temos \(\log_3 x \geq 2\)?</span>
+                        <span>Como \(a = 3 &gt; 1\) a função é crescente: \(\log_3 x \geq \log_3 3^2\)</span>
+                        <span>Logo \(x \geq 3^2\)</span>
+                        <span class="hl">\(x \geq 9\), lembrando que \(x &gt; 0\) → solução: \(x \in [9, +\infty)\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção ao sentido da desigualdade:</strong>
+                    com \(a &gt; 1\) (crescente), o sentido se mantém;
+                    com \(0 &lt; a &lt; 1\) (decrescente), o sentido <strong>inverte</strong>.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

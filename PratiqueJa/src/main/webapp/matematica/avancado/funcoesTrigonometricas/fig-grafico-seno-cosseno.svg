@@ -1,0 +1,62 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" width="400" height="200"
+     aria-label="Gráficos de seno (verde) e cosseno (laranja) de 0 a 2pi com período e amplitude indicados">
+
+  <!-- eixo x -->
+  <line x1="20"  y1="100" x2="380" y2="100" stroke="#f9a8d4" stroke-width="2"/>
+  <polygon points="380,100 372,96 372,104" fill="#f9a8d4"/>
+  <text x="382" y="104" font-size="12" fill="#9ca3af" font-family="sans-serif">x</text>
+
+  <!-- eixo y -->
+  <line x1="40" y1="20" x2="40" y2="180" stroke="#f9a8d4" stroke-width="2"/>
+  <polygon points="40,20 36,28 44,28" fill="#f9a8d4"/>
+  <text x="44" y="18" font-size="12" fill="#9ca3af" font-family="sans-serif">y</text>
+
+  <!-- SVG_x = 40 + x*30 (x em rad); SVG_y = 100 - y*40 -->
+  <!-- ticks eixo x: π/2=87, π=134, 3π/2=181, 2π=228 -->
+  <line x1="87"  y1="96" x2="87"  y2="104" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="79"  y="115" font-size="11" fill="#9ca3af" font-family="sans-serif">π/2</text>
+  <line x1="134" y1="96" x2="134" y2="104" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="130" y="115" font-size="11" fill="#9ca3af" font-family="sans-serif">π</text>
+  <line x1="181" y1="96" x2="181" y2="104" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="172" y="115" font-size="11" fill="#9ca3af" font-family="sans-serif">3π/2</text>
+  <line x1="228" y1="96" x2="228" y2="104" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="224" y="115" font-size="11" fill="#9ca3af" font-family="sans-serif">2π</text>
+
+  <!-- ticks eixo y: 1 e -1 -->
+  <line x1="36" y1="60" x2="44" y2="60" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="22" y="64" font-size="11" fill="#9ca3af" font-family="sans-serif">1</text>
+  <line x1="36" y1="140" x2="44" y2="140" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="18" y="144" font-size="11" fill="#9ca3af" font-family="sans-serif">−1</text>
+
+  <!-- guia horizontal y=1 e y=-1 (dashed) -->
+  <line x1="40" y1="60"  x2="260" y2="60"  stroke="#334155" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="40" y1="140" x2="260" y2="140" stroke="#334155" stroke-width="1" stroke-dasharray="3,4"/>
+
+  <!-- sen(x) — curva verde -->
+  <!-- pontos: 40,100 52,85 64,72 75,63 87,60 99,63 111,72 122,85 134,100 146,115 158,128 170,137 181,140 193,137 205,128 217,115 228,100 -->
+  <polyline
+    points="40,100 52,85 64,72 75,63 87,60 99,63 111,72 122,85 134,100 146,115 158,128 170,137 181,140 193,137 205,128 217,115 228,100"
+    stroke="#86efac" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+
+  <!-- cos(x) — curva laranja -->
+  <!-- pontos: 40,60 52,63 64,72 75,85 87,100 99,115 111,128 122,137 134,140 146,137 158,128 170,115 181,100 193,85 205,72 217,63 228,60 -->
+  <polyline
+    points="40,60 52,63 64,72 75,85 87,100 99,115 111,128 122,137 134,140 146,137 158,128 170,115 181,100 193,85 205,72 217,63 228,60"
+    stroke="#fdba74" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+
+  <!-- labels das curvas -->
+  <text x="232" y="97" font-size="12" fill="#86efac" font-family="sans-serif" font-style="italic">sen x</text>
+  <text x="232" y="57" font-size="12" fill="#fdba74" font-family="sans-serif" font-style="italic">cos x</text>
+
+  <!-- seta indicando período 2π -->
+  <line x1="40" y1="172" x2="228" y2="172" stroke="#c4b5fd" stroke-width="1.5"/>
+  <polygon points="228,172 220,168 220,176" fill="#c4b5fd"/>
+  <polygon points="40,172 48,168 48,176"   fill="#c4b5fd"/>
+  <text x="112" y="186" font-size="11" fill="#c4b5fd" font-family="sans-serif" text-anchor="middle">período = 2π</text>
+
+  <!-- seta amplitude sen -->
+  <line x1="265" y1="60"  x2="265" y2="140" stroke="#86efac" stroke-width="1.5"/>
+  <polygon points="265,60  261,68  269,68"  fill="#86efac"/>
+  <polygon points="265,140 261,132 269,132" fill="#86efac"/>
+  <text x="270" y="104" font-size="11" fill="#86efac" font-family="sans-serif">amp = 1</text>
+</svg>

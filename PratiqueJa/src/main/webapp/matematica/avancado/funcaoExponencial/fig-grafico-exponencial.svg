@@ -1,0 +1,53 @@
+<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" width="360" height="220"
+     aria-label="Gráficos de f(x)=2^x crescente e f(x)=(1/2)^x decrescente, ambas passando por (0,1)">
+
+  <!-- eixos -->
+  <!-- SVG_x = 150 + x*35 ; SVG_y = 195 - y*23 -->
+  <line x1="20"  y1="195" x2="340" y2="195" stroke="#f9a8d4" stroke-width="2"/>
+  <line x1="150" y1="10"  x2="150" y2="205" stroke="#f9a8d4" stroke-width="2"/>
+  <!-- setas -->
+  <polygon points="340,195 332,191 332,199" fill="#f9a8d4"/>
+  <polygon points="150,10 146,18 154,18"   fill="#f9a8d4"/>
+  <!-- labels eixos -->
+  <text x="342" y="200" font-size="14" fill="#9ca3af" font-family="sans-serif">x</text>
+  <text x="155" y="16"  font-size="14" fill="#9ca3af" font-family="sans-serif">y</text>
+
+  <!-- assíntota horizontal y=0 -->
+  <text x="0" y="180" font-size="14" fill="#c4b5fd" font-family="sans-serif" font-style="italic">y = 0 (assíntota)</text>
+
+  <!-- f(x) = 2^x — curva azul (crescente) -->
+  <!-- SVG_x = 150 + x*35 ; SVG_y = 195 - 2^x * 23  (passo 0.2, valores decimais) -->
+  <polyline
+    points="45,192.1 52,191.7 59,191.2 66,190.6 73,190.0 80,189.3 87,188.4 94,187.4 101,186.3 108,185.0 115,183.5 122,181.8 129,179.8 136,177.6 143,175.0 150,172.0 157,168.6 164,164.6 171,160.1 178,154.9 185,149.0 192,142.2 199,134.3 206,125.3 213,114.9 220,103.0 227,89.3 234,73.6 241,55.6 248,35.2 255,11.0"
+    stroke="#93c5fd" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- f(x) = (1/2)^x — curva laranja (decrescente) -->
+  <polyline
+    points="45,11.0 52,35.2 59,55.6 66,73.6 73,89.3 80,103.0 87,114.9 94,125.3 101,134.3 108,142.2 115,149.0 122,154.9 129,160.1 136,164.6 143,168.6 150,172.0 157,175.0 164,177.6 171,179.8 178,181.8 185,183.5 192,185.0 199,186.3 206,187.4 213,188.4 220,189.3 227,190.0 234,190.6 241,191.2 248,191.7 255,192.1"
+    stroke="#fdba74" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- ponto de cruzamento (0,1) = SVG (150, 172) -->
+  <circle cx="150" cy="172" r="5" fill="#86efac"/>
+  <text x="155" y="169" font-size="14" fill="#86efac" font-family="sans-serif">(0, 1)</text>
+
+  <!-- tick y=1 no eixo y -->
+  <line x1="146" y1="172" x2="154" y2="172" stroke="#9ca3af" stroke-width="1.5"/>
+
+  <!-- ticks eixo x -->
+  <line x1="115" y1="191" x2="115" y2="199" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="108" y="211" font-size="14" fill="#9ca3af" font-family="sans-serif">−1</text>
+  <line x1="185" y1="191" x2="185" y2="199" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="182" y="211" font-size="14" fill="#9ca3af" font-family="sans-serif">1</text>
+  <line x1="220" y1="191" x2="220" y2="199" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="217" y="211" font-size="14" fill="#9ca3af" font-family="sans-serif">2</text>
+
+  <!-- labels das curvas -->
+  <text x="258" y="18"  font-size="14" fill="#93c5fd" font-family="sans-serif" font-style="italic">f(x) = 2ˣ</text>
+  <text x="53"  y="18"  font-size="14" fill="#fdba74" font-family="sans-serif" font-style="italic">f(x) = (½)ˣ</text>
+
+  <!-- anotações de comportamento -->
+  <text x="260" y="100" font-size="14" fill="#93c5fd" font-family="sans-serif">a &gt; 1</text>
+  <text x="260" y="116" font-size="14" fill="#9ca3af" font-family="sans-serif">(crescente)</text>
+  <text x="20"  y="120" font-size="14" fill="#fdba74" font-family="sans-serif">0 &lt; a &lt; 1</text>
+  <text x="0"  y="136" font-size="14" fill="#9ca3af" font-family="sans-serif">(decrescente)</text>
+</svg>

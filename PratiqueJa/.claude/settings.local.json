@@ -30,7 +30,16 @@
       "Bash(sudo apt-get install pandoc -y)",
       "Bash(python3 *)",
       "Bash(cmd.exe /c \"C:\\\\Users\\\\USUARIO\\\\Downloads\\\\pandoc-3.9.0.2-windows-x86_64\\\\pandoc-3.9.0.2\\\\pandoc.exe\" --version)",
-      "Bash(cmd.exe *)"
+      "Bash(cmd.exe *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\matematica\" -Recurse | Sort-Object FullName | ForEach-Object { if \\($_.PSIsContainer\\) { \"[DIR]  \" + $_.FullName } else { \"[FILE] \" + $_.FullName } })",
+      "Bash(xargs grep -l \"create table\\\\|INSERT\\\\|assunto\")",
+      "Bash(xargs grep -l \"AssuntoCurso\\\\|Modulo.Basico\\\\|Modulo.Intermediario\")",
+      "Bash(xargs grep -l \"@PostConstruct\\\\|@WebListener\\\\|contextInitialized\")",
+      "Bash(xargs grep -l \"select.*from.*assunto\\\\|INSERT\\\\|seed\\\\|fixtures\")",
+      "Bash(xargs grep -l \"AssuntoCurso\\\\|assunto.*curso\")",
+      "Bash(xargs grep -l \"new AssuntoCurso\\\\|AssuntoCurso\\(\")",
+      "Bash(xargs grep -l \"insertAssunto\\\\|saveAssunto\\\\|createAssunto\\\\|persist\")",
+      "Bash(xargs grep -l \"class.*Init\\\\|class.*Startup\\\\|class.*Boot\\\\|class.*Seed\")"
     ]
   }
 }
