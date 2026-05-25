@@ -1,0 +1,335 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- PONTO NO PLANO -->
+            <div class="tr-section" id="sec-ponto">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Ponto no Plano Cartesiano</div>
+                        <div class="tr-section-sub">Coordenadas, distância entre pontos e ponto médio</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Todo ponto \(P\) no plano é identificado por um par ordenado \((x, y)\), onde
+                    \(x\) é a <strong>abscissa</strong> (posição horizontal) e \(y\) é a
+                    <strong>ordenada</strong> (posição vertical). A origem \(O = (0, 0)\) é a
+                    interseção dos dois eixos.
+                </div>
+
+                <h4>Distância entre dois pontos</h4>
+                <p>Dados \(A = (x_1, y_1)\) e \(B = (x_2, y_2)\), a fórmula da distância vem
+                diretamente do Teorema de Pitágoras: \(\Delta x\) e \(\Delta y\) são os catetos e
+                \(d_{AB}\) é a hipotenusa.</p>
+                \[
+                    d_{AB} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+                \]
+
+                <h4>Ponto médio</h4>
+                <p>O ponto médio \(M\) do segmento \(AB\) tem coordenadas iguais às médias aritméticas:</p>
+                \[
+                    M = \left(\frac{x_1 + x_2}{2},\; \frac{y_1 + y_2}{2}\right)
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dados \(A(1, 2)\) e \(B(4, 6)\), calcule \(d_{AB}\) e o ponto médio \(M\).</span>
+                        <span>\(d_{AB} = \sqrt{(4-1)^2 + (6-2)^2} \)</span>
+                        <span>\(d_{AB} = \sqrt{9 + 16} = \sqrt{25}\)</span>
+                        
+                        <span class="hl">\(d_{AB} = 5\)</span>
+                        <span>\(M = \left(\dfrac{1+4}{2},\; \dfrac{2+6}{2}\right) = \left(\dfrac{5}{2},\; 4\right)\)</span>
+                        <span class="hl">\(M = (2{,}5\;;\; 4)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dados \(A(-3, 1)\) e \(B(1, -3)\), calcule \(d_{AB}\).</span>
+                        <span>\(d_{AB} = \sqrt{(1-(-3))^2 + (-3-1)^2} \)</span>
+                        <span>\(d_{AB} = \sqrt{16 + 16} = \sqrt{32}\)</span>
+                        
+                        <span class="hl">\(d_{AB} = 4\sqrt{2} \approx 5{,}66\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Dica ENEM:</strong> a distância usa o mesmo Teorema de Pitágoras da
+                    geometria plana — \(\Delta x\) e \(\Delta y\) são os catetos.
+                </div>
+            </div>
+
+            <!-- EQUAÇÃO DA RETA -->
+            <div class="tr-section" id="sec-reta">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Eq</div>
+                    <div>
+                        <div class="tr-section-title">Equação da Reta</div>
+                        <div class="tr-section-sub">Formas reduzida, ponto-inclinação e geral</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma reta no plano cartesiano pode ser escrita de três formas equivalentes.
+                    A mais comum é a <strong>forma reduzida</strong>, que explicita a inclinação e
+                    o ponto de interseção com o eixo \(y\).
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaAnalitica/fig-plano-cartesiano-reta.svg"
+                         alt="Plano cartesiano com reta y=(2/3)x+1/3 e triângulo de inclinação mostrando Δx=3 e Δy=2"
+                         width="400" />
+                </div>
+
+                <h4>Forma reduzida (slope-intercept)</h4>
+                \[
+                    y = mx + b
+                \]
+                <p>\(m\) é o <strong>coeficiente angular</strong> (inclinação) e \(b\) é o
+                <strong>coeficiente linear</strong> (onde a reta corta o eixo \(y\)).</p>
+
+                <h4>Forma ponto-inclinação</h4>
+                \[
+                    y - y_1 = m(x - x_1)
+                \]
+                <p>Usada quando se conhece um ponto \((x_1, y_1)\) e a inclinação \(m\).</p>
+
+                <h4>Forma geral</h4>
+                \[
+                    ax + by + c = 0 \qquad (a \text{ e } b \text{ não ambos nulos})
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Equação da reta que passa por \(A(1, 1)\) e \(B(4, 3)\).</span>
+                        <span>\(m = \dfrac{3-1}{4-1} = \dfrac{2}{3}\)</span>
+                        <span>\(y - 1 = \dfrac{2}{3}(x - 1) \)</span>
+                        <span>\(y = \dfrac{2}{3}x + \dfrac{1}{3}\)</span>
+                        <span class="hl">Forma geral: \(2x - 3y + 1 = 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Na reta \(y = -2x + 5\), identifique \(m\) e \(b\).</span>
+                        <span>\(m = -2\) &#160;<em style="font-size:.83rem;color:#9ca3af">(inclinação negativa → decrescente)</em></span>
+                        <span class="hl">\(b = 5\) &#160;<em style="font-size:.83rem;color:#9ca3af">(corta o eixo \(y\) em \((0, 5)\))</em></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COEFICIENTE ANGULAR -->
+            <div class="tr-section" id="sec-coef">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">m</div>
+                    <div>
+                        <div class="tr-section-title">Coeficiente Angular</div>
+                        <div class="tr-section-sub">Inclinação e retas paralelas / perpendiculares</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O coeficiente angular \(m\) mede a inclinação da reta. Dados dois pontos
+                    \(A(x_1, y_1)\) e \(B(x_2, y_2)\) com \(x_1 \neq x_2\):
+                    \[
+                        m = \dfrac{\Delta y}{\Delta x} = \dfrac{y_2 - y_1}{x_2 - x_1}
+                    \]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Retas paralelas</span>
+                        <span>Duas retas distintas são paralelas se e somente se têm o mesmo coeficiente angular.</span>
+                        <span class="hl">\(r_1 \parallel r_2 \;\Leftrightarrow\; m_1 = m_2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Retas perpendiculares</span>
+                        <span>Duas retas não verticais são perpendiculares quando o produto dos coeficientes angulares é \(-1\).</span>
+                        <span class="hl">\(r_1 \perp r_2 \;\Leftrightarrow\; m_1 \cdot m_2 = -1\)</span>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>A reta \(r: y = 3x - 2\) tem \(m = 3\). Qual a inclinação de uma reta perpendicular?</span>
+                        <span>\(m_\perp \cdot 3 = -1 \;\Rightarrow\; m_\perp = -\dfrac{1}{3}\)</span>
+                        <span class="hl">Ex.: \(y = -\dfrac{1}{3}x + 4\) é perpendicular a \(r\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Retas \(y = 2x + 1\) e \(y = 2x - 5\): qual a relação entre elas?</span>
+                        <span>\(m_1 = m_2 = 2\), mas \(b_1 \neq b_2\).</span>
+                        <span class="hl">Paralelas distintas — nunca se cruzam.</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Casos especiais:</strong> reta horizontal tem \(m = 0\) → equação \(y = k\);
+                    reta vertical não possui \(m\) definido → equação \(x = k\).
+                </div>
+            </div>
+
+            <!-- POSIÇÕES RELATIVAS -->
+            <div class="tr-section" id="sec-posicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Pos</div>
+                    <div>
+                        <div class="tr-section-title">Posições Relativas de Duas Retas</div>
+                        <div class="tr-section-sub">Paralelas, concorrentes e coincidentes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dadas duas retas no plano, há três possibilidades:
+                    <ul style="margin-top:.5rem; line-height:1.8">
+                        <li><strong>Paralelas distintas</strong> — mesmo \(m\), diferentes \(b\): zero pontos comuns</li>
+                        <li><strong>Concorrentes</strong> — coeficientes angulares diferentes: exatamente um ponto de interseção</li>
+                        <li><strong>Coincidentes</strong> — mesmo \(m\) e mesmo \(b\): infinitos pontos em comum (são a mesma reta)</li>
+                    </ul>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(r_1: y = 2x + 3\) e \(r_2: y = 2x - 1\)</span>
+                        <span>\(m_1 = m_2 = 2\), mas \(b_1 = 3 \neq b_2 = -1\)</span>
+                        <span class="hl">Paralelas distintas</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(r_1: y = x + 1\) e \(r_2: y = -x + 5\)</span>
+                        <span>\(m_1 = 1 \neq m_2 = -1\) → concorrentes</span>
+                        <span>\(x + 1 = -x + 5 \;\Rightarrow\; 2x = 4 \)</span>
+                        <span>\(x = 2,\; y = 3\)</span>
+                        
+                        <span class="hl">Ponto de interseção: \((2,\; 3)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>\(r_1: 2x - y + 3 = 0\) e \(r_2: 4x - 2y + 6 = 0\)</span>
+                        <span>Dividindo \(r_2\) por 2: \(2x - y + 3 = 0\) — idêntica a \(r_1\).</span>
+                        <span class="hl">Coincidentes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISTÂNCIA PONTO-RETA -->
+            <div class="tr-section" id="sec-dist-reta">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Eq</div>
+                    <div>
+                        <div class="tr-section-title">Distância Ponto–Reta</div>
+                        <div class="tr-section-sub">Fórmula direta a partir da forma geral</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A distância do ponto \(P(x_0, y_0)\) à reta \(r: ax + by + c = 0\) é:
+                    \[
+                        d(P,\, r) = \dfrac{\,|ax_0 + by_0 + c|\,}{\sqrt{a^2 + b^2}}
+                    \]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Distância do ponto \(P(3, -1)\) à reta \(r: 2x - y + 4 = 0\).</span>
+                        <span>\(a=2,\; b=-1,\; c=4,\; x_0=3,\; y_0=-1\)</span>
+                        <span>\(d = \dfrac{|2(3) + (-1)(-1) + 4|}{\sqrt{4+1}} = \dfrac{|6+1+4|}{\sqrt{5}} = \dfrac{11}{\sqrt{5}}\)</span>
+                        <span class="hl">\(d = \dfrac{11\sqrt{5}}{5} \approx 4{,}92\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Distância da origem \(O(0,0)\) à reta \(3x + 4y - 15 = 0\).</span>
+                        <span>\(d = \dfrac{|3(0) + 4(0) - 15|}{\sqrt{9+16}} = \dfrac{15}{\sqrt{25}} = \dfrac{15}{5}\)</span>
+                        <span class="hl">\(d = 3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EQUAÇÃO DA CIRCUNFERÊNCIA -->
+            <div class="tr-section" id="sec-circ">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Eq</div>
+                    <div>
+                        <div class="tr-section-title">Equação da Circunferência</div>
+                        <div class="tr-section-sub">Forma canônica e forma geral</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A circunferência de centro \(C(a, b)\) e raio \(r\) é o conjunto de todos os pontos
+                    do plano à distância \(r\) do centro. Aplicando a fórmula de distância, obtemos:
+                    \[
+                        (x - a)^2 + (y - b)^2 = r^2 \qquad \text{(forma canônica)}
+                    \]
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaAnalitica/fig-circunferencia-analitica.svg"
+                         alt="Circunferência de centro C(2,1) e raio 2 no plano cartesiano"
+                         width="400" />
+                </div>
+
+                <h4>Forma geral</h4>
+                <p>Expandindo a forma canônica:</p>
+                \[
+                    x^2 + y^2 + Dx + Ey + F = 0
+                \]
+                <p>onde \(D = -2a\), \(E = -2b\) e \(F = a^2 + b^2 - r^2\).
+                Para converter da forma geral à canônica, use <strong>completamento de quadrados</strong>.</p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Centro \(C(3, -2)\) e raio \(r = 4\): escreva a equação.</span>
+                        <span>\((x - 3)^2 + (y + 2)^2 = 16\)</span>
+                        <span class="hl">Forma geral: \(x^2 + y^2 - 6x + 4y - 3 = 0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Identifique centro e raio: \(x^2 + y^2 - 4x + 6y + 4 = 0\)</span>
+                        <span>Complete o quadrado: \((x^2 - 4x + 4) + (y^2 + 6y + 9) =\)</span>
+                       	<span>\( -4 + 4 + 9\)</span>
+                        
+                        <span>\((x-2)^2 + (y+3)^2 = 9\)</span>
+                        <span class="hl">Centro \(C(2,\,-3)\), raio \(r = 3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSIÇÃO PONTO–CIRCUNFERÊNCIA -->
+            <div class="tr-section" id="sec-pos-circ">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Pos</div>
+                    <div>
+                        <div class="tr-section-title">Posição Relativa Ponto–Circunferência</div>
+                        <div class="tr-section-sub">Interior, na curva ou exterior</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para verificar a posição do ponto \(P(x_0, y_0)\) em relação à circunferência de
+                    centro \(C(a, b)\) e raio \(r\), calcule \(d = d(P, C)\):
+                    <ul style="margin-top:.5rem; line-height:1.8">
+                        <li>\(d \;&lt;\; r\) → \(P\) está no <strong>interior</strong></li>
+                        <li>\(d \;=\; r\) → \(P\) está <strong>na circunferência</strong></li>
+                        <li>\(d \;&gt;\; r\) → \(P\) está no <strong>exterior</strong></li>
+                    </ul>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Circunferência \((x-2)^2 + (y-1)^2 = 9\), centro \(C(2,1)\), \(r = 3\).
+                        Classifique os pontos \(A(5, 1)\), \(B(0, 0)\) e \(D(2, 4)\).</span>
+                        <span>\(d(A,C) = \sqrt{9+0} = 3 = r\) &#160;→ <strong>na circunferência</strong></span>
+                        <span>\(d(B,C) = \sqrt{4+1} = \sqrt{5} \approx 2{,}24 &lt; 3\) &#160;→ <strong>interior</strong></span>
+                        <span>\(d(D,C) = \sqrt{0+9} = 3 = r\) &#160;→ <strong>na circunferência</strong></span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atalho:</strong> substitua \((x_0, y_0)\) no lado esquerdo da equação.
+                    Compare o resultado com \(r^2\): menor → interior; igual → na curva; maior → exterior.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

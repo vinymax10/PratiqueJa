@@ -1,0 +1,54 @@
+<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" width="380" height="230"
+     aria-label="Cilindro à esquerda e cone à direita, com raio r e altura h indicados em cada figura">
+
+  <!-- ======= CILINDRO (centro x=95) ======= -->
+
+  <ellipse cx="95" cy="165" rx="55" ry="16" stroke="#6ee7b7" stroke-width="2" fill="#0f2033" opacity="0.9"/>
+  <ellipse cx="95" cy="55"  rx="55" ry="16" stroke="#6ee7b7" stroke-width="2" fill="#0f2033" opacity="0.9"/>
+  <line x1="40"  y1="55"  x2="40"  y2="165" stroke="#6ee7b7" stroke-width="2"/>
+  <line x1="150" y1="55"  x2="150" y2="165" stroke="#6ee7b7" stroke-width="2"/>
+
+  <!-- raio r cilindro -->
+  <line x1="95"  y1="55"  x2="150" y2="55"  stroke="#fdba74" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="95" cy="55" r="3" fill="#fdba74"/>
+  <text x="116" y="52" font-size="14" fill="#fdba74" font-family="sans-serif" font-style="italic">r</text>
+
+  <!-- altura h cilindro -->
+  <line x1="162" y1="55"  x2="162" y2="165" stroke="#fca5a5" stroke-width="1.5"/>
+  <polygon points="162,55  158,65  166,65"  fill="#fca5a5"/>
+  <polygon points="162,165 158,155 166,155" fill="#fca5a5"/>
+  <text x="167" y="115" font-size="14" fill="#fca5a5" font-family="sans-serif" font-style="italic">h</text>
+
+  <!-- labels cilindro -->
+  <text x="95"  y="20"  font-size="14" fill="#6ee7b7" font-family="sans-serif" font-weight="600" text-anchor="middle">Cilindro</text>
+  <text x="95"  y="193" font-size="14" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">V = πr²h</text>
+  <text x="95"  y="212" font-size="14" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">A<tspan font-size="10" dy="3">lat</tspan><tspan dy="-3"> = 2πrh</tspan></text>
+
+  <!-- ======= CONE (centro x=285) ======= -->
+
+  <ellipse cx="285" cy="165" rx="55" ry="16" stroke="#a5b4fc" stroke-width="2" fill="#0f2033" opacity="0.9"/>
+  <line x1="230" y1="165" x2="285" y2="45"  stroke="#a5b4fc" stroke-width="2"/>
+  <line x1="340" y1="165" x2="285" y2="45"  stroke="#a5b4fc" stroke-width="2"/>
+  <circle cx="285" cy="45" r="4" fill="#a5b4fc"/>
+
+  <!-- raio r cone -->
+  <line x1="285" y1="165" x2="340" y2="165" stroke="#fdba74" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="285" cy="165" r="3" fill="#fdba74"/>
+  <text x="310" y="175" font-size="14" fill="#fdba74" font-family="sans-serif" font-style="italic">r</text>
+
+  <!-- altura h cone -->
+  <line x1="285" y1="45"  x2="285" y2="165" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="285" y="155" width="9" height="9" fill="none" stroke="#fca5a5" stroke-width="1.2"/>
+  <text x="269" y="108" font-size="14" fill="#fca5a5" font-family="sans-serif" font-style="italic">h</text>
+
+  <!-- geratriz g -->
+  <text x="315" y="100" font-size="14" fill="#c4b5fd" font-family="sans-serif" font-style="italic">g</text>
+
+  <!-- labels cone -->
+  <text x="285" y="20"  font-size="14" fill="#a5b4fc" font-family="sans-serif" font-weight="600" text-anchor="middle">Cone</text>
+  <text x="285" y="193" font-size="14" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">V = πr²h/3</text>
+  <text x="285" y="212" font-size="14" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">A<tspan font-size="10" dy="3">lat</tspan><tspan dy="-3"> = πrg</tspan></text>
+
+  <!-- separador central -->
+  <line x1="190" y1="15" x2="190" y2="220" stroke="#374151" stroke-width="1" stroke-dasharray="3,5"/>
+</svg>

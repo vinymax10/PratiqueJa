@@ -1,0 +1,38 @@
+<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg" width="300" height="230"
+     aria-label="Pirâmide de base quadrada com indicação do ápice, altura h e apótema">
+
+  <!-- arestas ocultas -->
+  <line x1="75"  y1="152" x2="205" y2="152" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="40"  y1="175" x2="75"  y2="152" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="122" y1="40"  x2="75"  y2="152" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- face frontal -->
+  <polygon points="122,40 40,175 170,175"
+           fill="#1e3a5f" stroke="#93c5fd" stroke-width="2" opacity="0.65"/>
+
+  <!-- face direita -->
+  <polygon points="122,40 170,175 205,152"
+           fill="#172554" stroke="#93c5fd" stroke-width="2" opacity="0.5"/>
+
+  <!-- arestas visíveis da base -->
+  <line x1="40"  y1="175" x2="170" y2="175" stroke="#93c5fd" stroke-width="2"/>
+  <line x1="170" y1="175" x2="205" y2="152" stroke="#93c5fd" stroke-width="2"/>
+  <line x1="122" y1="40"  x2="205" y2="152" stroke="#93c5fd" stroke-width="2"/>
+
+  <!-- ápice -->
+  <circle cx="122" cy="40" r="4" fill="#a5b4fc"/>
+  <text x="126" y="38" font-size="14" fill="#a5b4fc" font-family="sans-serif" font-weight="600">V (ápice)</text>
+
+  <!-- altura h tracejada -->
+  <line x1="122" y1="40" x2="122" y2="175" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="112" y="165" width="10" height="10" fill="none" stroke="#fca5a5" stroke-width="1.2"/>
+  <text x="127" y="115" font-size="14" fill="#fca5a5" font-family="sans-serif" font-style="italic">h</text>
+
+  <!-- apótema -->
+  <line x1="122" y1="40" x2="105" y2="175" stroke="#86efac" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="93" y="118" font-size="14" fill="#86efac" font-family="sans-serif" font-style="italic">aₚ</text>
+
+  <!-- fórmulas -->
+  <text x="0" y="18" font-size="14" fill="#9ca3af" font-family="sans-serif">A<tspan font-size="10" dy="3">lat</tspan><tspan dy="-3"> = (P<tspan font-size="10" dy="3">base</tspan><tspan dy="-3"> × aₚ) / 2</tspan></tspan></text>
+  <text x="0" y="38" font-size="14" fill="#c4b5fd" font-family="sans-serif" font-weight="600">V = (A<tspan font-size="10" dy="3">base</tspan><tspan dy="-3"> × h) / 3</tspan></text>
+</svg>

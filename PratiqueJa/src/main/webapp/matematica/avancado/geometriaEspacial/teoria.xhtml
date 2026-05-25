@@ -1,0 +1,303 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- PRISMAS -->
+            <div class="tr-section" id="sec-prisma">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Prismas</div>
+                        <div class="tr-section-sub">Área total e volume</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>prisma</strong> é um sólido com duas bases congruentes e paralelas
+                    (polígonos) ligadas por faces laterais retangulares (no caso reto). O nome vem
+                    do formato da base: prisma triangular, quadrangular, hexagonal etc.
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaEspacial/fig-prisma.svg"
+                         alt="Prisma retangular com indicação de altura h, base b e profundidade d" />
+                </div>
+
+                <p>Sendo \(P_{\text{base}}\) o perímetro da base e \(h\) a altura do prisma:</p>
+                \[
+                    A_{\text{lateral}} = P_{\text{base}} \times h
+                \]
+                \[
+                    A_{\text{total}} = A_{\text{lateral}} + 2 \cdot A_{\text{base}}
+                \]
+                \[
+                    V = A_{\text{base}} \times h
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Uma caixa retangular tem dimensões \(5 \times 3 \times 4\,\text{cm}\).
+                        Calcule a área total e o volume.</span>
+                        <span>\(A_{\text{base}} = 5 \times 3 = 15\,\text{cm}^2\) &#160;&#160;
+                        \(P_{\text{base}} = 2(5+3) = 16\,\text{cm}\)</span>
+                        <span>\(A_{\text{lateral}} = 16 \times 4 = 64\,\text{cm}^2\)</span>
+                        <span>\(A_{\text{total}} = 64 + 2 \times 15 = 94\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = 15 \times 4 = 60\,\text{cm}^3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Prisma de base equilátera com lado \(a = 6\,\text{cm}\) e \(h = 10\,\text{cm}\).</span>
+                        <span>\(A_{\text{base}} = \dfrac{\sqrt{3}}{4} \times 36 = 9\sqrt{3}\,\text{cm}^2\)</span>
+                        <span>\(P_{\text{base}} = 18\,\text{cm}\) &#160;&#160;
+                        \(A_{\text{lateral}} = 18 \times 10 = 180\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = 9\sqrt{3} \times 10 = 90\sqrt{3} \approx 155{,}9\,\text{cm}^3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIRÂMIDES -->
+            <div class="tr-section" id="sec-piramide">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Pirâmides</div>
+                        <div class="tr-section-sub">Área lateral, área total e volume</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma <strong>pirâmide</strong> tem uma base poligonal e faces laterais triangulares
+                    que convergem para um único ponto, o <strong>ápice</strong>. A altura \(h\) é a
+                    distância do ápice à base. A <strong>apótema</strong> \(a_p\) é a altura de uma
+                    face triangular lateral.
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaEspacial/fig-piramide.svg"
+                         alt="Pirâmide de base quadrada com indicação da altura h, apótema e aresta lateral" />
+                </div>
+
+                \[
+                    A_{\text{lateral}} = \frac{P_{\text{base}} \times a_p}{2}
+                \]
+                \[
+                    A_{\text{total}} = A_{\text{lateral}} + A_{\text{base}}
+                \]
+                \[
+                    V = \frac{A_{\text{base}} \times h}{3}
+                \]
+
+                <div class="tr-note">
+                    O volume da pirâmide é sempre <strong>1/3</strong> do volume do prisma de mesma
+                    base e altura — fato muito cobrado no ENEM.
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Pirâmide de base quadrada com lado \(4\,\text{cm}\) e \(h = 3\,\text{cm}\):
+                        calcule a apótema, área lateral e volume.</span>
+                        <span>Apótema da base (centro ao meio do lado): \(\dfrac{4}{2} = 2\,\text{cm}\)</span>
+                        <span>\(a_p = \sqrt{h^2 + 2^2} = \sqrt{9+4} = \sqrt{13}\,\text{cm}\)</span>
+                        <span>\(A_{\text{lateral}} = \dfrac{16 \times \sqrt{13}}{2} = 8\sqrt{13} \approx 28{,}8\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = \dfrac{16 \times 3}{3} = 16\,\text{cm}^3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CILINDRO -->
+            <div class="tr-section" id="sec-cilindro">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Cil</div>
+                    <div>
+                        <div class="tr-section-title">Cilindro</div>
+                        <div class="tr-section-sub">Área lateral, área total e volume</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>cilindro reto circular</strong> tem duas bases circulares de raio \(r\)
+                    e altura \(h\). A área lateral corresponde ao retângulo que se forma ao
+                    "desenrolar" a superfície lateral (base \(2\pi r\), altura \(h\)).
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaEspacial/fig-cilindro-cone.svg"
+                         alt="Cilindro à esquerda e cone à direita, com raio r e altura h indicados" />
+                </div>
+
+                \[
+                    A_{\text{lateral}} = 2\pi r h
+                \]
+                \[
+                    A_{\text{total}} = 2\pi r\,(h + r)
+                \]
+                \[
+                    V = \pi r^2 h
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Cilindro com \(r = 3\,\text{cm}\) e \(h = 10\,\text{cm}\).</span>
+                        <span>\(A_{\text{lateral}} = 2\pi \cdot 3 \cdot 10 = 60\pi\,\text{cm}^2\)</span>
+                        <span>\(A_{\text{total}} = 2\pi \cdot 3 \cdot (10 + 3) = 78\pi\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = \pi \cdot 9 \cdot 10 = 90\pi\,\text{cm}^3 \approx 282{,}7\,\text{cm}^3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Volume \(V = 200\pi\,\text{cm}^3\) e \(r = 5\,\text{cm}\). Qual a altura?</span>
+                        <span>\(200\pi = \pi \cdot 25 \cdot h \;\Rightarrow\; 25h = 200\)</span>
+                        <span class="hl">\(h = 8\,\text{cm}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONE -->
+            <div class="tr-section" id="sec-cone">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Con</div>
+                    <div>
+                        <div class="tr-section-title">Cone</div>
+                        <div class="tr-section-sub">Geratriz, área lateral e volume</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>cone reto circular</strong> tem uma base circular de raio \(r\), altura
+                    \(h\) e <strong>geratriz</strong> \(g\) — distância do ápice a qualquer ponto
+                    da circunferência da base. Pelo Teorema de Pitágoras:
+                    \[
+                        g = \sqrt{r^2 + h^2}
+                    \]
+                </div>
+
+                \[
+                    A_{\text{lateral}} = \pi r g
+                \]
+                \[
+                    A_{\text{total}} = \pi r\,(g + r)
+                \]
+                \[
+                    V = \frac{\pi r^2 h}{3}
+                \]
+
+                <div class="tr-note">
+                    Assim como a pirâmide, \(V_{\text{cone}} = \dfrac{1}{3}\,V_{\text{cilindro}}\)
+                    de mesma base e altura.
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Cone com \(r = 6\,\text{cm}\) e \(h = 8\,\text{cm}\).</span>
+                        <span>\(g = \sqrt{36 + 64} = \sqrt{100} = 10\,\text{cm}\)</span>
+                        <span>\(A_{\text{lateral}} = \pi \cdot 6 \cdot 10 = 60\pi\,\text{cm}^2\)</span>
+                        <span>\(A_{\text{total}} = \pi \cdot 6 \cdot (10 + 6) = 96\pi\,\text{cm}^2 \approx 301{,}6\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = \dfrac{\pi \cdot 36 \cdot 8}{3} = 96\pi\,\text{cm}^3 \approx 301{,}6\,\text{cm}^3\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESFERA -->
+            <div class="tr-section" id="sec-esfera">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Esf</div>
+                    <div>
+                        <div class="tr-section-title">Esfera</div>
+                        <div class="tr-section-sub">Área da superfície e volume</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>esfera</strong> é o conjunto de todos os pontos do espaço à distância
+                    \(r\) (raio) de um ponto fixo (centro). Toda secção plana que passa pelo centro
+                    é chamada de <strong>círculo máximo</strong>.
+                </div>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/geometriaEspacial/fig-esfera.svg"
+                         alt="Esfera com raio r, equador e meridiano indicados" />
+                </div>
+
+                \[
+                    A_{\text{sup}} = 4\pi r^2
+                \]
+                \[
+                    V = \frac{4\pi r^3}{3}
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Esfera de raio \(r = 3\,\text{cm}\).</span>
+                        <span>\(A_{\text{sup}} = 4\pi \cdot 9 = 36\pi\,\text{cm}^2 \approx 113{,}1\,\text{cm}^2\)</span>
+                        <span class="hl">\(V = \dfrac{4\pi \cdot 27}{3} = 36\pi\,\text{cm}^3 \approx 113{,}1\,\text{cm}^3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Volume \(V = 288\pi\,\text{cm}^3\). Qual o raio?</span>
+                        <span>\(\dfrac{4\pi r^3}{3} = 288\pi \;\Rightarrow\; r^3 = 216\)</span>
+                        <span class="hl">\(r = \sqrt[3]{216} = 6\,\text{cm}\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Relação curiosa:</strong> a área da esfera (\(4\pi r^2\)) é exatamente
+                    4 vezes a área do círculo máximo (\(\pi r^2\)).
+                </div>
+            </div>
+
+            <!-- SÓLIDOS DE REVOLUÇÃO -->
+            <div class="tr-section" id="sec-revolucao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Rev</div>
+                    <div>
+                        <div class="tr-section-title">Sólidos de Revolução</div>
+                        <div class="tr-section-sub">Cilindro e cone gerados por rotação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>sólido de revolução</strong> é gerado pela rotação de uma figura plana
+                    em torno de um eixo. Os dois casos mais importantes do Ensino Médio são:
+                    <ul style="margin-top:.5rem; line-height:1.8">
+                        <li>Retângulo girado em torno de um lado → <strong>cilindro</strong></li>
+                        <li>Triângulo retângulo girado em torno de um cateto → <strong>cone</strong></li>
+                    </ul>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Retângulo de lados \(r\) e \(h\) girado em torno de \(h\)</span>
+                        <span>O lado \(r\) descreve um círculo de raio \(r\); o sólido gerado é um cilindro.</span>
+                        <span class="hl">\(V = \pi r^2 h\) &#160;&#160; \(A_{\text{lat}} = 2\pi r h\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Triângulo retângulo de catetos \(r\) e \(h\) girado em torno de \(h\)</span>
+                        <span>O cateto \(r\) descreve um círculo; a hipotenusa gera a superfície cônica.</span>
+                        <span class="hl">\(V = \dfrac{\pi r^2 h}{3}\) &#160;&#160; \(g = \sqrt{r^2 + h^2}\)</span>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Um retângulo \(3 \times 5\,\text{cm}\) gira em torno do lado de \(5\,\text{cm}\).
+                        Calcule \(V\) e \(A_{\text{total}}\).</span>
+                        <span>Cilindro com \(r = 3\,\text{cm}\) e \(h = 5\,\text{cm}\).</span>
+                        <span>\(V = \pi \cdot 9 \cdot 5 = 45\pi\,\text{cm}^3\)</span>
+                        <span class="hl">\(A_{\text{total}} = 2\pi \cdot 3 \cdot (5 + 3) = 48\pi\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

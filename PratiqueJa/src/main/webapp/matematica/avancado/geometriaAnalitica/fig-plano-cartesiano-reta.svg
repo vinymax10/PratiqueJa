@@ -1,0 +1,61 @@
+<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" width="360" height="240"
+     aria-label="Plano cartesiano com reta y=(2/3)x+1/3 passando por A(1,1) e B(4,3), triângulo de inclinação com delta x=3 e delta y=2">
+
+  <!-- eixo x -->
+  <line x1="20"  y1="200" x2="340" y2="200" stroke="#f9a8d4" stroke-width="2"/>
+  <polygon points="340,200 332,196 332,204" fill="#f9a8d4"/>
+  <text x="343" y="204" font-size="14" fill="#9ca3af" font-family="sans-serif">x</text>
+
+  <!-- eixo y -->
+  <line x1="90" y1="230" x2="90" y2="15" stroke="#f9a8d4" stroke-width="2"/>
+  <polygon points="90,15 86,23 94,23" fill="#f9a8d4"/>
+  <text x="94" y="19" font-size="14" fill="#9ca3af" font-family="sans-serif">y</text>
+
+  <!-- reta y = (2/3)x + 1/3 — de x=0 a x=4.8 -->
+  <line x1="90" y1="185" x2="306" y2="41" stroke="#93c5fd" stroke-width="2.5"
+        stroke-linecap="round"/>
+  <text x="308" y="40" font-size="14" fill="#93c5fd" font-family="sans-serif" font-style="italic">y = ⅔x + ⅓</text>
+
+  <!-- triângulo de inclinação: A(135,155) → ângulo reto (270,155) → B(270,65) -->
+  <line x1="135" y1="155" x2="270" y2="155" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="270" y1="155" x2="270" y2="65"  stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- ângulo reto -->
+  <rect x="260" y="145" width="10" height="10" fill="none" stroke="#fca5a5" stroke-width="1.2"/>
+
+  <!-- labels do triângulo -->
+  <text x="192" y="172" font-size="14" fill="#fca5a5" font-family="sans-serif" text-anchor="middle">Δx = 3</text>
+  <text x="284" y="113" font-size="14" fill="#fca5a5" font-family="sans-serif">Δy = 2</text>
+
+  <!-- m = Δy/Δx -->
+  <text x="130" y="92" font-size="14" fill="#93c5fd" font-family="sans-serif">m = Δy/Δx = ⅔</text>
+
+  <!-- ponto A(1,1) = SVG(135, 155) -->
+  <circle cx="135" cy="155" r="5" fill="#86efac"/>
+  <text x="108" y="142" font-size="14" fill="#86efac" font-family="sans-serif">A(1, 1)</text>
+
+  <!-- ponto B(4,3) = SVG(270, 65) -->
+  <circle cx="270" cy="65" r="5" fill="#86efac"/>
+  <text x="280" y="72" font-size="14" fill="#86efac" font-family="sans-serif">B(4, 3)</text>
+
+  <!-- origem -->
+  <circle cx="90" cy="200" r="2.5" fill="#9ca3af"/>
+  <text x="73" y="218" font-size="14" fill="#9ca3af" font-family="sans-serif">O</text>
+
+  <!-- ticks eixo x -->
+  <line x1="135" y1="196" x2="135" y2="204" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="131" y="218" font-size="14" fill="#9ca3af" font-family="sans-serif">1</text>
+  <line x1="180" y1="196" x2="180" y2="204" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="176" y="218" font-size="14" fill="#9ca3af" font-family="sans-serif">2</text>
+  <line x1="225" y1="196" x2="225" y2="204" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="221" y="218" font-size="14" fill="#9ca3af" font-family="sans-serif">3</text>
+  <line x1="270" y1="196" x2="270" y2="204" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="266" y="218" font-size="14" fill="#9ca3af" font-family="sans-serif">4</text>
+
+  <!-- ticks eixo y -->
+  <line x1="86" y1="155" x2="94" y2="155" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="70" y="159" font-size="14" fill="#9ca3af" font-family="sans-serif">1</text>
+  <line x1="86" y1="110" x2="94" y2="110" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="70" y="114" font-size="14" fill="#9ca3af" font-family="sans-serif">2</text>
+  <line x1="86" y1="65"  x2="94" y2="65"  stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="70" y="69"  font-size="14" fill="#9ca3af" font-family="sans-serif">3</text>
+</svg>

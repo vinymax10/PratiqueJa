@@ -221,8 +221,8 @@ FASE 1 — Funções
   [x] 1.3  avancado/funcoesTrigonometricas/teoria.xhtml   + 2 SVGs
 
 FASE 2 — Geometria
-  [ ] 2.1  avancado/geometriaAnalitica/teoria.xhtml       + 2 SVGs
-  [ ] 2.2  avancado/geometriaEspacial/teoria.xhtml        + 4 SVGs
+  [x] 2.1  avancado/geometriaAnalitica/teoria.xhtml       + 2 SVGs
+  [x] 2.2  avancado/geometriaEspacial/teoria.xhtml        + 4 SVGs
 
 FASE 3 — Estatística
   [ ] 3.1  avancado/estatistica/teoria.xhtml              + 1 SVG
