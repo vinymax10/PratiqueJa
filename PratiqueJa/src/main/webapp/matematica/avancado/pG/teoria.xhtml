@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -43,22 +43,22 @@
                 </div>
                 <p>O comportamento da PG depende do valor de \(q\):</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Crescente — \(q &gt; 1\)</span>
                         <span>Termos aumentam a cada posição.</span>
                         <span class="hl">Exemplo: \(2, 6, 18, 54, \ldots\) com \(q = 3\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Decrescente — \(0 &lt; q &lt; 1\)</span>
                         <span>Termos positivos diminuem a cada posição.</span>
                         <span class="hl">Exemplo: \(16, 8, 4, 2, \ldots\) com \(q = \frac{1}{2}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Alternante — \(q &lt; 0\)</span>
                         <span>Os sinais dos termos alternam entre positivo e negativo.</span>
                         <span class="hl">Exemplo: \(2, -6, 18, -54, \ldots\) com \(q = -3\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Constante — \(q = 1\)</span>
                         <span>Todos os termos são iguais.</span>
                         <span class="hl">Exemplo: \(5, 5, 5, 5, \ldots\) com \(q = 1\)</span>
@@ -86,13 +86,13 @@
                 demais valores são conhecidos.</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Dada a PG \(3, 6, 12, 24, \ldots\), qual é o 10º termo?</span>
                         <span>\(a_1 = 3\), \(q = 2\), \(n = 10\)</span>
                         <span>\(a_{10} = 3 \cdot 2^9 = 3 \cdot 512\)</span>
                         <span class="hl">\(a_{10} = 1536\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Em uma PG, \(a_1 = 5\) e \(q = 2\). Para qual \(n\) temos \(a_n = 160\)?</span>
                         <span>\(160 = 5 \cdot 2^{n-1} \Rightarrow 2^{n-1} = 32\)</span>
                         <span>\(2^{n-1} = 2^5 \Rightarrow n - 1 = 5\)</span>
@@ -166,13 +166,13 @@
                 física e finanças que envolvem decaimento geométrico.</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Calcule a soma da PG \(8, 4, 2, 1, \dfrac{1}{2}, \ldots\)</span>
                         <span>\(a_1 = 8\), \(q = \dfrac{1}{2}\)</span>
                         <span>\(S_\infty = \dfrac{8}{1 - \frac{1}{2}} = \dfrac{8}{\frac{1}{2}}\)</span>
                         <span class="hl">\(S_\infty = 16\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Escreva \(0{,}\overline{3}\) como fração usando PG infinita.</span>
                         <span>\(0{,}\overline{3} = 0{,}3 + 0{,}03 + 0{,}003 + \ldots\)</span>
                         <span>\(a_1 = 0{,}3\), \(q = 0{,}1\)</span>
@@ -201,13 +201,13 @@
                 <p>A PG resultante tem \(k + 2\) termos no total: \(a,\; aq,\; aq^2,\; \ldots,\; b\).</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Insira 2 meios geométricos entre \(3\) e \(24\).</span>
                         <span>\(q = \sqrt[3]{\dfrac{24}{3}} = \sqrt[3]{8} = 2\)</span>
                         <span class="hl">PG: \(3,\; 6,\; 12,\; 24\)</span>
                         <span style="font-size:.83rem;color:#6b7280;">Verificação: \(24 = 3 \cdot 2^3\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Insira 3 meios geométricos entre \(1\) e \(16\).</span>
                         <span>\(q = \sqrt[4]{\dfrac{16}{1}} = \sqrt[4]{16} = 2\)</span>
                         <span class="hl">PG: \(1,\; 2,\; 4,\; 8,\; 16\)</span>
@@ -231,24 +231,24 @@
                     </div>
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Média geométrica</span>
                         <span>Qualquer termo é a média geométrica de seus vizinhos:</span>
                         <span>\(a_k^2 = a_{k-1} \cdot a_{k+1}\)</span>
                         <span class="hl">Ex: na PG \(2, 6, 18\): \(6^2 = 36 = 2 \times 18\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Produto de equidistantes</span>
                         <span>O produto de termos equidistantes dos extremos é constante:</span>
                         <span>\(a_k \cdot a_{n-k+1} = a_1 \cdot a_n\)</span>
                         <span class="hl">Ex: \(1,2,4,8,16\): \(a_2 \cdot a_4 = 2 \cdot 8 = 16 = a_1 \cdot a_5\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Logaritmos de uma PG</span>
                         <span>Se \((a_1, a_2, \ldots)\) é PG, então \((\log a_1, \log a_2, \ldots)\) é PA com razão \(\log q\).</span>
                         <span class="hl">Ex: \(\log 2, \log 4, \log 8\) → PA com \(r = \log 2\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Forma fatorada alternativa</span>
                         <span>O n-ésimo termo pode ser escrito em relação a qualquer termo \(a_k\):</span>
                         <span>\(a_n = a_k \cdot q^{n-k}\)</span>

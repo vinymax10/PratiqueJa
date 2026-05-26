@@ -39,7 +39,9 @@
       "Bash(xargs grep -l \"AssuntoCurso\\\\|assunto.*curso\")",
       "Bash(xargs grep -l \"new AssuntoCurso\\\\|AssuntoCurso\\(\")",
       "Bash(xargs grep -l \"insertAssunto\\\\|saveAssunto\\\\|createAssunto\\\\|persist\")",
-      "Bash(xargs grep -l \"class.*Init\\\\|class.*Startup\\\\|class.*Boot\\\\|class.*Seed\")"
+      "Bash(xargs grep -l \"class.*Init\\\\|class.*Startup\\\\|class.*Boot\\\\|class.*Seed\")",
+      "PowerShell($env:PATH -split ';' | Where-Object { $_ -match -join\\('mysql','|maria'\\) })",
+      "PowerShell(& \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\fix-span-full.ps1\")"
     ]
   }
 }

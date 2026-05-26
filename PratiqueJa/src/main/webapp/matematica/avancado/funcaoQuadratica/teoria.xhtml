@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -59,15 +59,15 @@
                          alt="Parábola com concavidade para cima mostrando vértice, raízes e eixo de simetria" />
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">\(\Delta &gt; 0\) — dois zeros</span>
                         <span>A parábola cruza o eixo \(x\) em dois pontos \(x_1\) e \(x_2\).</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">\(\Delta = 0\) — tangente ao eixo</span>
                         <span>A parábola toca o eixo \(x\) apenas no vértice: raiz dupla \(x_v\).</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">\(\Delta &lt; 0\) — não cruza o eixo</span>
                         <span>A parábola fica inteiramente acima (\(a &gt; 0\)) ou abaixo (\(a &lt; 0\)) do eixo \(x\).</span>
                     </div>
@@ -116,7 +116,7 @@
                     Geometricamente, são os pontos de interseção com o eixo \(x\).
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\Delta &gt; 0\): dois zeros distintos \(x_1 = \dfrac{-b-\sqrt{\Delta}}{2a}\) e \(x_2 = \dfrac{-b+\sqrt{\Delta}}{2a}\)</span>
                         <span>\(\Delta = 0\): um zero duplo \(x_v = \dfrac{-b}{2a}\)</span>
                         <span>\(\Delta &lt; 0\): nenhum zero real</span>
@@ -128,7 +128,7 @@
                 </div>
                 <h4>Exemplo — \(f(x) = 2x^2 - 8x + 6\)</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\Delta = 64 - 48 = 16 \;\Rightarrow\; x = \dfrac{8 \pm 4}{4}\)</span>
                         <span>\(x_1 = 1,\quad x_2 = 3\)</span>
                         <span>Forma fatorada: \(f(x) = 2(x-1)(x-3)\)</span>
@@ -149,12 +149,12 @@
                     Dados \(\Delta &gt; 0\) com zeros \(x_1 &lt; x_2\), o sinal depende de \(a\) e da posição de \(x\):
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Se \(a &gt; 0\) (concavidade ↑):</span>
                         <span>\(f(x) &gt; 0\) para \(x &lt; x_1\) ou \(x &gt; x_2\)</span>
                         <span class="hl">\(f(x) &lt; 0\) para \(x_1 &lt; x &lt; x_2\) (entre as raízes)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Se \(a &lt; 0\) (concavidade ↓):</span>
                         <span>\(f(x) &lt; 0\) para \(x &lt; x_1\) ou \(x &gt; x_2\)</span>
                         <span class="hl">\(f(x) &gt; 0\) para \(x_1 &lt; x &lt; x_2\) (entre as raízes)</span>
@@ -180,7 +180,7 @@
                 </div>
                 <h4>Intervalos de crescimento / decrescimento</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(a &gt; 0\): decrescente em \((-\infty,\, x_v]\), crescente em \([x_v,\, +\infty)\)</span>
                         <span>\(a &lt; 0\): crescente em \((-\infty,\, x_v]\), decrescente em \([x_v,\, +\infty)\)</span>
                     </div>
@@ -211,7 +211,7 @@
                 <h4>Problema 1 — altura máxima de projétil</h4>
                 <p>\(h(t) = -5t^2 + 20t\) (metros). Qual a altura máxima e quando ocorre?</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(a = -5 &lt; 0\) → máximo no vértice</span>
                         <span>\(t_v = \dfrac{-20}{2(-5)} = 2\,\text{s}\)</span>
                         <span>\(h_{\max} = -5(4) + 20(2) = -20 + 40 = \)<span class="hl">20 m</span></span>
@@ -220,7 +220,7 @@
                 <h4>Problema 2 — maximizar área</h4>
                 <p>Uma cerca de 40 m fecha um retângulo. Maximize a área.</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Largura \(x\), comprimento \(20 - x\) (semi-perímetro = 20)</span>
                         <span>\(A(x) = x(20 - x) = -x^2 + 20x\)</span>
                         <span>\(x_v = \dfrac{-20}{-2} = 10 \;\Rightarrow\; A_{\max} = 10 \times 10 = \)<span class="hl">100 m²</span></span>
@@ -229,7 +229,7 @@
                 <h4>Problema 3 — lucro máximo</h4>
                 <p>Lucro: \(L(x) = -2x^2 + 80x - 600\) (R\$ por unidade). Qual a produção ótima?</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(x_v = \dfrac{-80}{-4} = 20\) unidades</span>
                         <span>\(L_{\max} = -2(400) + 80(20) - 600 = -800 + 1600 - 600 = \)<span class="hl">R\$ 200</span></span>
                     </div>

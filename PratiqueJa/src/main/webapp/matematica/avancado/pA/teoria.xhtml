@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -40,22 +40,22 @@
                 <p>O primeiro termo é \(a_1\), e cada termo seguinte é obtido somando \(r\) ao anterior.
                 Dependendo do valor de \(r\), a PA pode ser:</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Crescente — \(r &gt; 0\)</span>
                         <span>Os termos aumentam a cada posição.</span>
                         <span class="hl">Exemplo: \(2, 5, 8, 11, \ldots\) com \(r = 3\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Decrescente — \(r &lt; 0\)</span>
                         <span>Os termos diminuem a cada posição.</span>
                         <span class="hl">Exemplo: \(10, 7, 4, 1, \ldots\) com \(r = -3\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Constante — \(r = 0\)</span>
                         <span>Todos os termos são iguais.</span>
                         <span class="hl">Exemplo: \(5, 5, 5, 5, \ldots\) com \(r = 0\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Cálculo da razão</span>
                         <span>A razão é a diferença entre qualquer termo e seu antecessor:</span>
                         <span class="hl">\(r = a_n - a_{n-1}, \quad \forall\; n &gt; 1\)</span>
@@ -83,14 +83,14 @@
                 para encontrar \(a_1\), \(r\) ou \(n\) quando os outros valores são conhecidos.</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Dada a PA \(3, 5, 7, 9, \ldots\), qual é o 20º termo?</span>
                         <span>\(a_1 = 3\), \(r = 2\), \(n = 20\)</span>
                         <span>\(a_{20} = 3 + (20-1) \cdot 2\)</span>
                         <span>\(a_{20} = 3 + 38\)</span>
                         <span class="hl">\(a_{20} = 41\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Em qual posição está o termo \(47\) na PA \(3, 5, 7, \ldots\)?</span>
                         <span>\(47 = 3 + (n-1) \cdot 2\)</span>
                         <span>\(44 = (n-1) \cdot 2 \Rightarrow n-1 = 22\)</span>
@@ -160,13 +160,13 @@
                 <p>A PA resultante tem \(k + 2\) termos no total: \(a,\; a+r,\; a+2r,\; \ldots,\; b\).</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Insira 3 meios aritméticos entre \(2\) e \(18\).</span>
                         <span>\(r = \dfrac{18 - 2}{3 + 1} = \dfrac{16}{4} = 4\)</span>
                         <span class="hl">PA: \(2,\; 6,\; 10,\; 14,\; 18\)</span>
                         <span style="font-size:.83rem;color:#6b7280;">Verificação: \(18 = 2 + 4 \cdot 4\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Insira 5 meios aritméticos entre \(1\) e \(13\).</span>
                         <span>\(r = \dfrac{13 - 1}{5 + 1} = \dfrac{12}{6} = 2\)</span>
                         <span class="hl">PA: \(1,\; 3,\; 5,\; 7,\; 9,\; 11,\; 13\)</span>
@@ -190,25 +190,25 @@
                     </div>
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Termo médio</span>
                         <span>Qualquer termo é a média aritmética de seus vizinhos:</span>
                         <span>\(a_k = \dfrac{a_{k-1} + a_{k+1}}{2}\)</span>
                         <span class="hl">Ex: na PA \(3,5,7,9\): \(a_2 = \frac{3+7}{2} = 5\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Termos equidistantes</span>
                         <span>A soma de dois termos equidistantes dos extremos é constante:</span>
                         <span>\(a_k + a_{n-k+1} = a_1 + a_n\)</span>
                         <span class="hl">Ex: \(2,5,8,11,14\): \(a_2+a_4 = 5+11 = 16 = a_1+a_5\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">PA com número ímpar de termos</span>
                         <span>A soma equivale ao termo central multiplicado por \(n\):</span>
                         <span>\(S_n = a_{\text{central}} \cdot n\)</span>
                         <span class="hl">Ex: \(1,3,5,7,9\): \(S_5 = 5 \cdot 5 = 25\) ✓</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Soma alternativa</span>
                         <span>Substituindo \(a_n = a_1 + (n-1)r\) em \(S_n\):</span>
                         <span>\(S_n = \dfrac{2a_1 + (n-1) \cdot r}{2} \cdot n\)</span>

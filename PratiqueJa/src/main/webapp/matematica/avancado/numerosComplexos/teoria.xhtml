@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -44,12 +44,12 @@
                 Os números puramente imaginários têm \(a = 0\).</p>
                 <h4>Exemplo</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(z = 3 + 4i\)</span>
                         <span>\(\text{Re}(z) = 3\)</span>
                         <span class="hl">\(\text{Im}(z) = 4\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(z = -2 - 5i\)</span>
                         <span>\(\text{Re}(z) = -2\)</span>
                         <span class="hl">\(\text{Im}(z) = -5\)</span>
@@ -76,12 +76,12 @@
                          alt="Plano de Argand-Gauss mostrando o número complexo z=3+4i" />
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Eixo real (horizontal)</span>
                         <span>Representa a parte real \(a\) do número complexo.</span>
                         <span class="hl">Números reais ficam sobre esse eixo.</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Eixo imaginário (vertical)</span>
                         <span>Representa a parte imaginária \(b\) do número complexo.</span>
                         <span class="hl">Números puramente imaginários ficam sobre esse eixo.</span>
@@ -151,14 +151,14 @@
                 complexos de forma eficiente, sem expandir produtos sucessivos.</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Calcule \(\left(\cos 30° + i\sin 30°\right)^6\).</span>
                         <span>\(r = 1\), \(n = 6\), \(\theta = 30°\)</span>
                         <span>\(= \cos(6 \cdot 30°) + i\sin(6 \cdot 30°)\)</span>
                         <span>\(= \cos 180° + i\sin 180°\)</span>
                         <span class="hl">\(= -1 + 0i = -1\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Calcule \((1+i)^8\).</span>
                         <span>\(r = \sqrt{2}\), \(\theta = 45°\)</span>
                         <span>\((1+i)^8 = (\sqrt{2})^8\!\left(\cos 360° + i\sin 360°\right)\)</span>
@@ -188,12 +188,12 @@
                 </div>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\((3+4i) + (1+2i)\)</span>
                         <span>\(= (3+1) + (4+2)i\)</span>
                         <span class="hl">\(= 4 + 6i\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\((5+3i) - (2+7i)\)</span>
                         <span>\(= (5-2) + (3-7)i\)</span>
                         <span class="hl">\(= 3 - 4i\)</span>
@@ -291,12 +291,12 @@
                 comprimento do vetor que representa \(z\) no plano complexo.</p>
                 <h4>Exemplos</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(z = 3 + 4i\)</span>
                         <span>\(|z| = \sqrt{9 + 16} = \sqrt{25}\)</span>
                         <span class="hl">\(|z| = 5\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(z = -1 + \sqrt{3}\,i\)</span>
                         <span>\(|z| = \sqrt{1 + 3} = \sqrt{4}\)</span>
                         <span class="hl">\(|z| = 2\)</span>
@@ -319,13 +319,13 @@
                 </div>
                 <p>Para calcular \(i^n\): divida \(n\) por \(4\) e use o <strong>resto</strong>:</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span style="font-weight:600;">Resto 0 → \(i^n = 1\)</span>
                         <span style="font-weight:600;">Resto 1 → \(i^n = i\)</span>
                         <span style="font-weight:600;">Resto 2 → \(i^n = -1\)</span>
                         <span style="font-weight:600;">Resto 3 → \(i^n = -i\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Calcule \(i^{23}\).</span>
                         <span>\(23 = 4 \times 5 + 3\) → resto \(3\)</span>
                         <span class="hl">\(i^{23} = -i\)</span>

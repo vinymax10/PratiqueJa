@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -38,12 +38,12 @@
                 \(a\) é o <strong>numerador</strong> e \(b\) é o <strong>denominador</strong> (\(b \neq 0\)).
                 Ao efetuar a divisão, o resultado pode ser:</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Número inteiro</strong></span>
                         <span>\(\dfrac{6}{2} = 3\)</span>
                         <span class="hl">\(\dfrac{-10}{5} = -2\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Decimal exato</strong></span>
                         <span>\(\dfrac{1}{2} = 0{,}5\)</span>
                         <span class="hl">\(\dfrac{3}{4} = 0{,}75\)</span>
@@ -111,7 +111,7 @@
 
                 <h4>Amplificação — multiplicar por \(k\)</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{1}{3} = \dfrac{1\times2}{3\times2} = \dfrac{2}{6} = \dfrac{1\times4}{3\times4} = \dfrac{4}{12}\)</span>
                         <span class="hl">Todas equivalentes: \(\dfrac{1}{3} = \dfrac{2}{6} = \dfrac{4}{12}\)</span>
                     </div>
@@ -167,11 +167,11 @@
                     \[\frac{a}{b} \;\Rightarrow\; a \div b = q \text{ (resto } r\text{)} \;\Rightarrow\; q\frac{r}{b}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{17}{5}\) — divide: \(17 \div 5 = 3\) (resto \(2\))</span>
                         <span class="hl">\(= 3\dfrac{2}{5}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{22}{7}\) — divide: \(22 \div 7 = 3\) (resto \(1\))</span>
                         <span class="hl">\(= 3\dfrac{1}{7}\)</span>
                     </div>
@@ -284,7 +284,7 @@
                     \[\frac{a}{c} + \frac{b}{c} = \frac{a+b}{c} \qquad \frac{a}{c} - \frac{b}{c} = \frac{a-b}{c}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}\)</span>
                         <span class="hl">\(\dfrac{2}{4} - \dfrac{1}{4} = \dfrac{1}{4}\)</span>
                     </div>
@@ -309,12 +309,12 @@
                     \[\frac{a}{b} - \frac{c}{d} = \frac{(a \times d) - (c \times b)}{b \times d}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Soma:</strong> \(\dfrac{2}{3} + \dfrac{1}{4}\)</span>
                         <span>\(= \dfrac{(2\times4)+(1\times3)}{3\times4} = \dfrac{8+3}{12}\)</span>
                         <span class="hl">\(= \dfrac{11}{12}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Subtração:</strong> \(\dfrac{5}{2} - \dfrac{3}{7}\)</span>
                         <span>\(= \dfrac{(5\times7)-(3\times2)}{2\times7} = \dfrac{35-6}{14}\)</span>
                         <span class="hl">\(= \dfrac{29}{14}\)</span>
@@ -341,7 +341,7 @@
                     \[\frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{2\times3}{3\times4} = \dfrac{6}{12} = \dfrac{1}{2}\)</span>
                         <span class="hl">\(\dfrac{5}{2} \times \dfrac{3}{7} = \dfrac{15}{14}\)</span>
                     </div>
@@ -352,7 +352,7 @@
                     \[\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} = \frac{a \times d}{b \times c}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\dfrac{2}{3} \div \dfrac{4}{6} = \dfrac{2}{3} \times \dfrac{6}{4} = \dfrac{12}{12} = 1\)</span>
                         <span class="hl">\(\dfrac{\;^3\!/_4}{\;^8\!/_5} = \dfrac{3}{4} \times \dfrac{5}{8} = \dfrac{15}{32}\)</span>
                     </div>
@@ -377,11 +377,11 @@
                     \[\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \qquad \left(\frac{a}{b}\right)^{-n} = \left(\frac{b}{a}\right)^n = \frac{b^n}{a^n}\]
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\left(\dfrac{2}{3}\right)^3 = \dfrac{2^3}{3^3} = \dfrac{8}{27}\)</span>
                         <span class="hl">\(\left(\dfrac{3}{4}\right)^2 = \dfrac{9}{16}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Expoente zero:</strong> \(\left(\dfrac{5}{7}\right)^0 = 1\)</span>
                         <span class="hl">Qualquer fração não nula elevada a 0 é igual a 1</span>
                     </div>
@@ -541,17 +541,17 @@
                 </ul>
 
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Classifique \(\sqrt{9}\).</span>
                         <span>\(\sqrt{9} = 3 \in \mathbb{N}\)</span>
                         <span class="hl">Natural, inteiro, racional e real</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Classifique \(\sqrt{2}\).</span>
                         <span>Não é fração; dízima não periódica.</span>
                         <span class="hl">Irracional (portanto real, mas não racional)</span>
                     </div>
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>Classifique \(-\dfrac{5}{3}\).</span>
                         <span>Fração com \(a, b \in \mathbb{Z}\).</span>
                         <span class="hl">Racional e real, mas não inteiro</span>

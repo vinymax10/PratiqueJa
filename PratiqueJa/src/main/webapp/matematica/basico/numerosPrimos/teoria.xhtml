@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -37,7 +37,7 @@
                     (possui pelo menos um divisor além de 1 e si mesmo).
                 </div>
                 <div class="tr-examples" style="margin-top:8px;">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span><strong>Primos:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31…</span>
                         <span><strong>Compostos:</strong> 4, 6, 8, 9, 10, 12, 14, 15…</span>
                         <span><strong>Observação:</strong> 1 não é primo nem composto por convenção.</span>
@@ -59,7 +59,7 @@
                     Para encontrar todos os primos até \(N\):
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>1. Liste todos os inteiros de 2 até \(N\).</span>
                         <span>2. Comece com \(p = 2\). Marque como compostos todos os múltiplos de \(p\) maiores que \(p\).</span>
                         <span>3. Avance para o próximo número não marcado e repita.</span>
@@ -89,31 +89,35 @@
                     (Teorema Fundamental da Aritmética). Divida successivamente pelo menor
                     primo que o divide até chegar em 1.
                 </div>
-                <h4>Exemplo — decompor 60</h4>
-                <div class="fact-wrap">
-                    <table class="fact-table">
-                        <tr><td class="sep">60</td><td>2</td></tr>
-                        <tr><td class="sep">30</td><td>2</td></tr>
-                        <tr><td class="sep">15</td><td>3</td></tr>
-                        <tr><td class="sep">5</td><td>5</td></tr>
-                        <tr class="hline"><td class="sep">1</td><td></td></tr>
-                    </table>
-                </div>
+                
                 <div class="tr-examples">
-                    <div class="tr-ex">\(60 = 2^2 \times 3 \times 5\)</div>
-                </div>
-                <h4>Exemplo — decompor 84</h4>
-                <div class="fact-wrap">
-                    <table class="fact-table">
-                        <tr><td class="sep">84</td><td>2</td></tr>
-                        <tr><td class="sep">42</td><td>2</td></tr>
-                        <tr><td class="sep">21</td><td>3</td></tr>
-                        <tr><td class="sep">7</td><td>7</td></tr>
-                        <tr class="hline"><td class="sep">1</td><td></td></tr>
-                    </table>
-                </div>
-                <div class="tr-examples">
-                    <div class="tr-ex">\(84 = 2^2 \times 3 \times 7\)</div>
+                	<div class="tr-ex tr-steps">
+	                	<h4>Exemplo — decompor 60</h4>
+	                	<div class="fact-wrap">
+		                    <table class="fact-table">
+		                        <tr><td class="sep">60</td><td>2</td></tr>
+		                        <tr><td class="sep">30</td><td>2</td></tr>
+		                        <tr><td class="sep">15</td><td>3</td></tr>
+		                        <tr><td class="sep">5</td><td>5</td></tr>
+		                        <tr class="hline"><td class="sep">1</td><td></td></tr>
+		                    </table>
+		                </div>
+	                   \(60 = 2^2 \times 3 \times 5\)
+                   </div>
+                	<div class="tr-ex tr-steps">
+                    <h4>Exemplo — decompor 84</h4>
+	                <div class="fact-wrap">
+	                    <table class="fact-table">
+	                        <tr><td class="sep">84</td><td>2</td></tr>
+	                        <tr><td class="sep">42</td><td>2</td></tr>
+	                        <tr><td class="sep">21</td><td>3</td></tr>
+	                        <tr><td class="sep">7</td><td>7</td></tr>
+	                        <tr class="hline"><td class="sep">1</td><td></td></tr>
+	                    </table>
+	                </div>
+                    \(84 = 2^2 \times 3 \times 7\)
+                    
+                    </div>
                 </div>
             </div>
 
@@ -133,7 +137,7 @@
                 </div>
                 <h4>Exemplo — MDC e MMC de 60 e 84</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(60 = 2^2 \times 3 \times 5\)</span>
                         <span>\(84 = 2^2 \times 3 \times 7\)</span>
                         <span>MDC: fatores comuns com menor exp.: \(2^2 \times 3 = \)<span class="hl">12</span></span>
@@ -157,7 +161,7 @@
                 </div>
                 <h4>Exemplo — verificar 97</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps">
+                    <div class="tr-ex tr-steps span-full">
                         <span>\(\sqrt{97} \approx 9{,}8\) → testar primos até 9: 2, 3, 5, 7</span>
                         <span>97 não é divisível por nenhum deles.</span>
                         <span>Logo, <span class="hl">97 é primo</span>.</span>
