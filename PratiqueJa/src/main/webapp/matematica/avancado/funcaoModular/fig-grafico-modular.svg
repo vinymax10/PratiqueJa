@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 220" width="340" height="220" font-family="sans-serif">
+
+  <!-- Background -->
+  <rect width="340" height="220" fill="#f9f9fc" rx="6"/>
+
+  <!-- Grid lines (light) -->
+  <g stroke="#ddd" stroke-width="0.8">
+    <!-- vertical -->
+    <line x1="60"  y1="20" x2="60"  y2="195"/>
+    <line x1="100" y1="20" x2="100" y2="195"/>
+    <line x1="140" y1="20" x2="140" y2="195"/>
+    <line x1="220" y1="20" x2="220" y2="195"/>
+    <line x1="260" y1="20" x2="260" y2="195"/>
+    <line x1="300" y1="20" x2="300" y2="195"/>
+    <!-- horizontal -->
+    <line x1="30" y1="55"  x2="325" y2="55"/>
+    <line x1="30" y1="95"  x2="325" y2="95"/>
+    <line x1="30" y1="135" x2="325" y2="135"/>
+    <line x1="30" y1="175" x2="325" y2="175"/>
+  </g>
+
+  <!-- Axes -->
+  <line x1="30" y1="175" x2="325" y2="175" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="180" y1="200" x2="180" y2="18"  stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+  <text x="328" y="179" font-size="12" fill="#555">x</text>
+  <text x="183" y="15"  font-size="12" fill="#555">y</text>
+  <text x="176" y="188" font-size="11" fill="#555">0</text>
+
+  <!-- Tick labels x-axis -->
+  <text x="136" y="188" font-size="10" fill="#555" text-anchor="middle">-1</text>
+  <text x="96"  y="188" font-size="10" fill="#555" text-anchor="middle">-2</text>
+  <text x="56"  y="188" font-size="10" fill="#555" text-anchor="middle">-3</text>
+  <text x="220" y="188" font-size="10" fill="#555" text-anchor="middle">1</text>
+  <text x="260" y="188" font-size="10" fill="#555" text-anchor="middle">2</text>
+  <text x="300" y="188" font-size="10" fill="#555" text-anchor="middle">3</text>
+
+  <!-- Tick labels y-axis -->
+  <text x="168" y="139" font-size="10" fill="#555" text-anchor="end">1</text>
+  <text x="168" y="99"  font-size="10" fill="#555" text-anchor="end">2</text>
+  <text x="168" y="59"  font-size="10" fill="#555" text-anchor="end">3</text>
+
+  <!-- f(x) = |x| — blue V-shape, vertex at origin (180,175) -->
+  <polyline points="50,95 180,175 310,95"
+            fill="none" stroke="#3b6fd4" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="312" y="92" font-size="12" fill="#3b6fd4">f(x)=|x|</text>
+
+  <!-- g(x) = |x-1|+1 — red V-shape, vertex at (1,1) = pixel(220,135) -->
+  <polyline points="50,215 220,135 330,45"
+            fill="none" stroke="#e04c4c" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="6,3"/>
+  <text x="280" y="42" font-size="12" fill="#e04c4c">g(x)=|x−1|+1</text>
+
+  <!-- vertex dots -->
+  <circle cx="180" cy="175" r="4" fill="#3b6fd4"/>
+  <circle cx="220" cy="135" r="4" fill="#e04c4c"/>
+
+  <!-- vertex labels -->
+  <text x="188" y="170" font-size="10" fill="#3b6fd4">(0,0)</text>
+  <text x="228" y="132" font-size="10" fill="#e04c4c">(1,1)</text>
+
+</svg>

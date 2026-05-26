@@ -1,0 +1,177 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- FÓRMULAS DE ADIÇÃO -->
+            <div class="tr-section" id="sec-adicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Fórmulas de Adição e Subtração</div>
+                        <div class="tr-section-sub">Seno, cosseno e tangente da soma/diferença de arcos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Seno:</strong>
+                    \[\sin(a + b) = \sin a \cos b + \cos a \sin b\]
+                    \[\sin(a - b) = \sin a \cos b - \cos a \sin b\]
+                </div>
+                <div class="tr-rule">
+                    <strong>Cosseno:</strong>
+                    \[\cos(a + b) = \cos a \cos b - \sin a \sin b\]
+                    \[\cos(a - b) = \cos a \cos b + \sin a \sin b\]
+                </div>
+                <div class="tr-rule">
+                    <strong>Tangente:</strong>
+                    \[\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a \tan b} \qquad
+                      \tan(a - b) = \frac{\tan a - \tan b}{1 + \tan a \tan b}\]
+                    (válidas quando os denominadores \(\neq 0\))
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo 1 — \(\sin 75°\)</strong>
+                        <div class="tr-steps">
+                            \(\sin 75° = \sin(45° + 30°)\)<br/>
+                            \(= \sin 45°\cos 30° + \cos 45°\sin 30°\)<br/>
+                            \(= \dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2} + \dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}\)<br/>
+                            <span class="hl">\(= \dfrac{\sqrt{6}+\sqrt{2}}{4}\)</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo 2 — \(\cos 15°\)</strong>
+                        <div class="tr-steps">
+                            \(\cos 15° = \cos(45° - 30°)\)<br/>
+                            \(= \cos 45°\cos 30° + \sin 45°\sin 30°\)<br/>
+                            \(= \dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2} + \dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}\)<br/>
+                            <span class="hl">\(= \dfrac{\sqrt{6}+\sqrt{2}}{4}\)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULAS DE DUPLICAÇÃO -->
+            <div class="tr-section" id="sec-duplo">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">2a</div>
+                    <div>
+                        <div class="tr-section-title">Fórmulas de Duplicação (Arco Duplo)</div>
+                        <div class="tr-section-sub">Obtidas fazendo \(b = a\) nas fórmulas de adição</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\sin(2a) = 2\sin a \cos a\]
+                    \[\cos(2a) = \cos^2 a - \sin^2 a = 1 - 2\sin^2 a = 2\cos^2 a - 1\]
+                    \[\tan(2a) = \frac{2\tan a}{1 - \tan^2 a}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo 3 — \(\sin(2a)\) dado \(\sin a = \tfrac{3}{5}\), \(a\) no 1º quadrante</strong>
+                        <div class="tr-steps">
+                            \(\cos a = \tfrac{4}{5}\) (Pitágoras)<br/>
+                            \(\sin(2a) = 2 \cdot \tfrac{3}{5} \cdot \tfrac{4}{5}\)<br/>
+                            <span class="hl">\(= \tfrac{24}{25}\)</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo 4 — \(\cos^2 a - \sin^2 a\) para \(a = 30°\)</strong>
+                        <div class="tr-steps">
+                            \(\cos(2 \cdot 30°) = \cos 60° = \tfrac{1}{2}\)<br/>
+                            Verif.: \(\left(\tfrac{\sqrt{3}}{2}\right)^2 - \left(\tfrac{1}{2}\right)^2 = \tfrac{3}{4} - \tfrac{1}{4}\)<br/>
+                            <span class="hl">\(= \tfrac{1}{2}\) ✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULAS DE METADE -->
+            <div class="tr-section" id="sec-metade">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">a/2</div>
+                    <div>
+                        <div class="tr-section-title">Fórmulas de Bissecção (Arco Metade)</div>
+                        <div class="tr-section-sub">Expressam \(\sin^2\) e \(\cos^2\) em termos de \(\cos(2a)\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Das fórmulas de duplicação do cosseno, isolamos:
+                    \[\sin^2 a = \frac{1 - \cos(2a)}{2} \qquad \cos^2 a = \frac{1 + \cos(2a)}{2}\]
+                    Fazendo \(a \to \tfrac{a}{2}\):
+                    \[\sin^2\!\tfrac{a}{2} = \frac{1 - \cos a}{2} \qquad \cos^2\!\tfrac{a}{2} = \frac{1 + \cos a}{2}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo 5 — \(\cos^2 15°\)</strong>
+                        <div class="tr-steps">
+                            \(\cos^2 15° = \dfrac{1 + \cos 30°}{2} = \dfrac{1 + \frac{\sqrt{3}}{2}}{2}\)<br/>
+                            <span class="hl">\(= \dfrac{2 + \sqrt{3}}{4}\)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUTO EM SOMA -->
+            <div class="tr-section" id="sec-produto">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">P→S</div>
+                    <div>
+                        <div class="tr-section-title">Produto em Soma (e Soma em Produto)</div>
+                        <div class="tr-section-sub">Simplificam integrais e expressões trigonométricas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Produto em soma</strong> (somando/subtraindo as fórmulas de adição):
+                    \[\sin a \cos b = \tfrac{1}{2}[\sin(a+b) + \sin(a-b)]\]
+                    \[\cos a \cos b = \tfrac{1}{2}[\cos(a-b) + \cos(a+b)]\]
+                    \[\sin a \sin b = \tfrac{1}{2}[\cos(a-b) - \cos(a+b)]\]
+                </div>
+                <div class="tr-rule">
+                    <strong>Soma em produto</strong> (fazendo \(p = a+b\), \(q = a-b\)):
+                    \[\sin p + \sin q = 2\sin\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}\]
+                    \[\cos p + \cos q = 2\cos\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo 6 — simplificar \(\sin 70° + \sin 10°\)</strong>
+                        <div class="tr-steps">
+                            \(= 2\sin\tfrac{80°}{2}\cos\tfrac{60°}{2} = 2\sin 40°\cos 30°\)<br/>
+                            <span class="hl">\(= \sqrt{3}\sin 40°\)</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo 7 — provar \(\cos^2 a - \sin^2 b = \cos(a+b)\cos(a-b)\)</strong>
+                        <div class="tr-steps">
+                            Lado direito \(= [\cos a\cos b - \sin a\sin b][\cos a\cos b + \sin a\sin b]\)<br/>
+                            \(= \cos^2 a\cos^2 b - \sin^2 a\sin^2 b\)<br/>
+                            \(= \cos^2 a(1-\sin^2 b) - \sin^2 b(1-\cos^2 a)\)<br/>
+                            <span class="hl">\(= \cos^2 a - \sin^2 b\) ✓</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    As fórmulas de adição são a base de todas as demais: duplicação, bissecção e produto em soma
+                    derivam diretamente delas.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

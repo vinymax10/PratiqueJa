@@ -1,0 +1,179 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Forma \(a \times 10^n\) com \(1 \leq a &lt; 10\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>notação científica</strong> representa números muito grandes ou muito pequenos na forma
+                    \(a \times 10^n\), onde \(1 \leq a &lt; 10\) e \(n\) é um inteiro.
+                    Isso facilita a leitura, comparação e operações com esses números.
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>\(n &gt; 0\) → número grande: \(3{,}2 \times 10^6 = 3.200.000\)</span>
+                        <span>\(n &lt; 0\) → número pequeno: \(5 \times 10^{-4} = 0{,}0005\)</span>
+                        <span>\(n = 0\) → \(a \times 10^0 = a\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    O expoente \(n\) indica quantas casas a vírgula se deslocou da posição original.
+                </div>
+            </div>
+
+            <!-- CONVERSÃO -->
+            <div class="tr-section" id="sec-conversao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">↔</div>
+                    <div>
+                        <div class="tr-section-title">Conversão</div>
+                        <div class="tr-section-sub">Número decimal ↔ notação científica</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Número → Notação científica:</strong> desloque a vírgula até restar exatamente 1 algarismo
+                    significativo antes dela. O expoente é o número de casas deslocadas
+                    (positivo se a vírgula vai para a esquerda, negativo se vai para a direita).
+                </div>
+                <h4>Exemplos — número grande</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(186.000.000 = 1{,}86 \times 10^8\) &nbsp;<em style="font-size:12px;color:#9ca3af">(vírgula andou 8 casas à esquerda)</em></span>
+                        <span>\(45.700 = 4{,}57 \times 10^4\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos — número pequeno</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(0{,}000032 = 3{,}2 \times 10^{-5}\) &nbsp;<em style="font-size:12px;color:#9ca3af">(vírgula andou 5 casas à direita)</em></span>
+                        <span>\(0{,}008 = 8 \times 10^{-3}\)</span>
+                    </div>
+                </div>
+                <div class="tr-rule" style="margin-top:8px;">
+                    <strong>Notação científica → Número:</strong> desloque a vírgula conforme o expoente.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(6{,}02 \times 10^{23}\) → 602 seguido de 21 zeros</span>
+                        <span>\(9{,}1 \times 10^{-31}\) → \(0{,}000\ldots091\) (30 zeros após a vírgula)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO E DIVISÃO -->
+            <div class="tr-section" id="sec-mult-div">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">× ÷</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação e Divisão</div>
+                        <div class="tr-section-sub">Some ou subtraia os expoentes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \((a \times 10^m) \times (b \times 10^n) = (a \times b) \times 10^{m+n}\)
+                    <br/>
+                    \((a \times 10^m) \div (b \times 10^n) = (a \div b) \times 10^{m-n}\)
+                    <br/>
+                    Se o resultado de \(a \times b\) sair do intervalo \([1, 10)\), ajuste a vírgula e corrija o expoente.
+                </div>
+                <h4>Exemplo 1 — multiplicação</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((3 \times 10^4) \times (2 \times 10^3)\)</span>
+                        <span>\(= 6 \times 10^7\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — com ajuste</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((4 \times 10^5) \times (3 \times 10^2) = 12 \times 10^7\)</span>
+                        <span>\(= 1{,}2 \times 10^8\) &nbsp;<em style="font-size:12px;color:#9ca3af">(12 = 1,2 × 10¹ → expoente +1)</em></span>
+                    </div>
+                </div>
+                <h4>Exemplo 3 — divisão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((9 \times 10^6) \div (3 \times 10^2) = 3 \times 10^4\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADIÇÃO E SUBTRAÇÃO -->
+            <div class="tr-section" id="sec-soma">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">+ −</div>
+                    <div>
+                        <div class="tr-section-title">Adição e Subtração</div>
+                        <div class="tr-section-sub">Iguale os expoentes antes de operar</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para somar ou subtrair em notação científica, os expoentes devem ser
+                    <strong>iguais</strong>. Ajuste um dos termos antes de operar, depois simplifique.
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3{,}2 \times 10^5 + 4{,}0 \times 10^4\)</span>
+                        <span>\(= 3{,}2 \times 10^5 + 0{,}4 \times 10^5\) &nbsp;<em style="font-size:12px;color:#9ca3af">(igualando expoentes)</em></span>
+                        <span>\(= 3{,}6 \times 10^5\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APLICAÇÕES -->
+            <div class="tr-section" id="sec-aplicacoes">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Aplic.</div>
+                    <div>
+                        <div class="tr-section-title">Aplicações</div>
+                        <div class="tr-section-sub">Ciência, tecnologia e ENEM</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Distância Terra-Sol:</strong> \(1{,}496 \times 10^{11}\,\text{m}\)</span>
+                        <span><strong>Massa do próton:</strong> \(1{,}67 \times 10^{-27}\,\text{kg}\)</span>
+                        <span><strong>Tamanho de um vírus:</strong> \(10^{-7}\,\text{m}\) a \(10^{-6}\,\text{m}\)</span>
+                        <span><strong>Velocidade da luz:</strong> \(3 \times 10^8\,\text{m/s}\)</span>
+                    </div>
+                </div>
+                <h4>Problema — ENEM</h4>
+                <p>O número de bactérias em uma colônia dobra a cada hora. Iniciando com \(5 \times 10^3\) bactérias, após 4 horas há:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(5 \times 10^3 \times 2^4 = 5 \times 10^3 \times 16\)</span>
+                        <span>\(= 80 \times 10^3 = \)<span class="hl">\(8 \times 10^4\) bactérias</span></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

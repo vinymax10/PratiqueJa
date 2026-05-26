@@ -1,0 +1,112 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Funções}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+% ── DEFINIÇÃO ────────────────────────────────────────────────────────────────
+\TW{Definição}
+
+Uma \textbf{função} $f: A \to B$ é uma regra que associa a \textbf{cada} elemento de $A$
+\textbf{exatamente um} elemento de $B$.
+
+\Formula{f: A \to B \quad \Leftrightarrow \quad \forall\, x \in A,\; \exists!\, y \in B: y = f(x)}
+
+\TM{Terminologia}
+
+\textbf{Domínio} $D(f) = A$: conjunto de entradas (valores de $x$).
+
+\textbf{Contradomínio} $CD = B$: conjunto de saídas possíveis.
+
+\textbf{Imagem} $\text{Im}(f) \subseteq B$: valores de $B$ \emph{realmente} atingidos.
+
+\TM{Exemplo}
+
+$f(x) = x^2$, $D = \mathbb{R}$, $CD = \mathbb{R}$, mas $\text{Im}(f) = [0, +\infty)$.
+
+% ── TESTE DA RETA VERTICAL ────────────────────────────────────────────────────
+\TW{Teste da Reta Vertical}
+
+Um gráfico representa uma função se e somente se qualquer reta vertical o intercepta
+em \textbf{no máximo um ponto}.
+
+\checkmark \; $y = x^2$ — é função.
+
+\ding{55} \; $x^2 + y^2 = 25$ — não é função (circunferência).
+
+% ── TIPOS ────────────────────────────────────────────────────────────────────
+\TW{Tipos de Função}
+
+\textbf{Injetora (1-1):} $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$.
+Cada imagem tem um único pré-imagem.
+
+\textbf{Sobrejetora:} $\text{Im}(f) = CD$. Todo elemento de $B$ é atingido.
+
+\textbf{Bijetora:} injetora e sobrejetora. Admite inversa $f^{-1}$.
+
+\TM{Exemplos}
+
+$f(x) = 2x+1$: bijetora em $\mathbb{R}$.
+
+$f(x) = x^2$ em $\mathbb{R}$: nem injetora nem sobrejetora.
+
+$f(x) = x^2$ em $[0,+\infty) \to [0,+\infty)$: bijetora.
+
+% ── FUNÇÃO COMPOSTA ───────────────────────────────────────────────────────────
+\TW{Função Composta}
+
+\Formula{(g \circ f)(x) = g(f(x))}
+
+Aplica-se $f$ primeiro, depois $g$. Em geral $g \circ f \neq f \circ g$.
+
+\TM{Exemplo — $f(x) = 2x$, $g(x) = x + 3$}
+
+\M{
+  (g \circ f)(x) &= g(2x) = 2x + 3 \\
+  (f \circ g)(x) &= f(x+3) = 2x + 6
+}
+
+% ── FUNÇÃO INVERSA ────────────────────────────────────────────────────────────
+\TW{Função Inversa}
+
+Existe apenas para funções \textbf{bijetoras}.
+
+\Formula{f^{-1}(f(x)) = x \quad \text{e} \quad f(f^{-1}(y)) = y}
+
+Graficamente: $f^{-1}$ é o reflexo de $f$ em relação à reta $y = x$.
+
+\TM{Como calcular}
+
+1. Escreva $y = f(x)$.
+2. Isole $x$ em função de $y$.
+3. Troque $x \leftrightarrow y$.
+
+\TM{Exemplo — $f(x) = 3x - 2$}
+
+\M{
+  y &= 3x-2 \;\Rightarrow\; x = \dfrac{y+2}{3} \\
+  f^{-1}(x) &= \dfrac{x+2}{3}
+}
+
+\TM{Verificação}
+
+$f(f^{-1}(x)) = 3 \cdot \dfrac{x+2}{3} - 2 = x$ \checkmark
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Atenção:} $f^{-1}(x)$ não é $\dfrac{1}{f(x)}$.
+A notação ``$-1$'' indica inversa funcional, não potência.
+}}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

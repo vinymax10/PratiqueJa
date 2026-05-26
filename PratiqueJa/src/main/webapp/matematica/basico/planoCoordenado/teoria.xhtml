@@ -1,0 +1,203 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- EIXOS E ORIGEM -->
+            <div class="tr-section" id="sec-eixos">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Eixos e Origem</div>
+                        <div class="tr-section-sub">A estrutura do plano cartesiano e os quatro quadrantes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>plano cartesiano</strong> é formado por duas retas numéricas perpendiculares que se cruzam na <strong>origem</strong>:
+                    <ul>
+                        <li><strong>Eixo x</strong> (horizontal) — também chamado de eixo das abscissas</li>
+                        <li><strong>Eixo y</strong> (vertical) — também chamado de eixo das ordenadas</li>
+                        <li><strong>Origem O(0, 0)</strong> — ponto de interseção dos dois eixos</li>
+                    </ul>
+                </div>
+                <div class="tr-rule">
+                    Os dois eixos dividem o plano em quatro regiões chamadas <strong>quadrantes</strong>, numerados em sentido anti-horário:
+                </div>
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/basico/planoCoordenado/fig-plano-cartesiano.svg"
+                         alt="Plano cartesiano com os quatro quadrantes e pontos A(2,2), B(-1,1), C(-2,-1) e D(3,-2)" />
+                </div>
+                <div class="tr-rule">
+                    <table style="border-collapse:collapse; width:100%; font-size:0.93em;">
+                        <tr style="background:#eef2fb;">
+                            <th style="padding:4px 10px; border:1px solid #ccd5ee;">Quadrante</th>
+                            <th style="padding:4px 10px; border:1px solid #ccd5ee;">x</th>
+                            <th style="padding:4px 10px; border:1px solid #ccd5ee;">y</th>
+                            <th style="padding:4px 10px; border:1px solid #ccd5ee;">Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;"><strong>I</strong></td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">positivo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">positivo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">A(2, 2)</td>
+                        </tr>
+                        <tr style="background:#f7f8fc;">
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;"><strong>II</strong></td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">negativo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">positivo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">B(−1, 1)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;"><strong>III</strong></td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">negativo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">negativo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">C(−2, −1)</td>
+                        </tr>
+                        <tr style="background:#f7f8fc;">
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;"><strong>IV</strong></td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">positivo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">negativo</td>
+                            <td style="padding:4px 10px; border:1px solid #ccd5ee; text-align:center;">D(3, −2)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tr-note">
+                    Pontos sobre os eixos não pertencem a nenhum quadrante: \((3, 0)\) está no eixo x e \((0, -2)\) está no eixo y.
+                </div>
+            </div>
+
+            <!-- LOCALIZAÇÃO DE PONTOS -->
+            <div class="tr-section" id="sec-localizacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Loc</div>
+                    <div>
+                        <div class="tr-section-title">Localização de Pontos</div>
+                        <div class="tr-section-sub">Par ordenado \((x,\, y)\) — abscissa e ordenada</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Cada ponto do plano é identificado por um <strong>par ordenado</strong> \((x, y)\):
+                    <ul>
+                        <li><strong>Abscissa</strong> (\(x\)): distância horizontal até o eixo y (positiva à direita, negativa à esquerda)</li>
+                        <li><strong>Ordenada</strong> (\(y\)): distância vertical até o eixo x (positiva acima, negativa abaixo)</li>
+                    </ul>
+                    A ordem importa: \((2, 3) \neq (3, 2)\).
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Como marcar o ponto P(3, −1):</strong>
+                        <div class="tr-steps">
+                            1. A partir da origem, mova <span class="hl">3 unidades para a direita</span> (x = 3)<br/>
+                            2. A partir daí, mova <span class="hl">1 unidade para baixo</span> (y = −1)<br/>
+                            3. Marque o ponto P nessa posição.
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Em qual quadrante está Q(−4, 2)?</strong>
+                        <div class="tr-steps">
+                            x = −4 (negativo) e y = 2 (positivo)<br/>
+                            <span class="hl">Quadrante II</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISTÂNCIA À ORIGEM -->
+            <div class="tr-section" id="sec-distancia">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Dist</div>
+                    <div>
+                        <div class="tr-section-title">Distância à Origem</div>
+                        <div class="tr-section-sub">Usando o Teorema de Pitágoras no plano</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A distância de um ponto \(P(x, y)\) até a origem \(O(0, 0)\) é calculada com o Teorema de Pitágoras:
+                    os catetos são as projeções \(|x|\) (horizontal) e \(|y|\) (vertical).
+                    \[d(P, O) = \sqrt{x^2 + y^2}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo 1 — \(A(3, 4)\)</strong>
+                        <div class="tr-steps">
+                            \(d = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25}\)<br/>
+                            <span class="hl">\(d = 5\) unidades</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo 2 — \(B(-1, -1)\)</strong>
+                        <div class="tr-steps">
+                            \(d = \sqrt{(-1)^2 + (-1)^2} = \sqrt{1 + 1} = \sqrt{2}\)<br/>
+                            <span class="hl">\(d = \sqrt{2} \approx 1{,}41\) unidades</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo 3 — ponto sobre o eixo x: \(C(5, 0)\)</strong>
+                        <div class="tr-steps">
+                            \(d = \sqrt{5^2 + 0^2} = 5\)<br/>
+                            <span class="hl">A distância à origem é o próprio valor de \(|x|\).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARES SIMÉTRICOS -->
+            <div class="tr-section" id="sec-simetria">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Sim</div>
+                    <div>
+                        <div class="tr-section-title">Pares Simétricos</div>
+                        <div class="tr-section-sub">Reflexão em relação ao eixo x, ao eixo y e à origem</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dado um ponto \(P(a, b)\), seus simétricos são:
+                    \[P'_x = (a,\; -b) \quad \text{(reflexão em relação ao eixo } x\text{)}\]
+                    \[P'_y = (-a,\; b) \quad \text{(reflexão em relação ao eixo } y\text{)}\]
+                    \[P'_O = (-a,\; -b) \quad \text{(reflexão em relação à origem)}\]
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <strong>Exemplo — \(P(3, 2)\)</strong>
+                        <div class="tr-steps">
+                            Simétrico ao eixo x: <span class="hl">\((3, -2)\)</span><br/>
+                            Simétrico ao eixo y: <span class="hl">\((-3, 2)\)</span><br/>
+                            Simétrico à origem: <span class="hl">\((-3, -2)\)</span>
+                        </div>
+                    </div>
+                    <div class="tr-ex">
+                        <strong>Exemplo — \(Q(-4, 1)\)</strong>
+                        <div class="tr-steps">
+                            Simétrico ao eixo x: \((-4, -1)\) — Quadrante III<br/>
+                            Simétrico ao eixo y: \((4, 1)\) — Quadrante I<br/>
+                            Simétrico à origem: \((4, -1)\) — Quadrante IV
+                        </div>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    O ponto simétrico ao eixo x tem a mesma abscissa e ordenada oposta.
+                    O simétrico à origem inverte os dois sinais — equivale a duas reflexões seguidas.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

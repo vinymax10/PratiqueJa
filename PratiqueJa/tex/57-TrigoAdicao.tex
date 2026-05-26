@@ -1,0 +1,92 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Trigonometria — Adição e Duplicação}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+% ── FÓRMULAS DE ADIÇÃO ────────────────────────────────────────────────────────
+\TW{Fórmulas de Adição}
+
+\Formula{\sin(a \pm b) = \sin a \cos b \pm \cos a \sin b}
+
+\Formula{\cos(a \pm b) = \cos a \cos b \mp \sin a \sin b}
+
+\Formula{\tan(a \pm b) = \frac{\tan a \pm \tan b}{1 \mp \tan a \tan b}}
+
+\TM{Exemplo 1 — $\sin 75°$}
+
+\M{
+  \sin 75° &= \sin(45°+30°) \\
+           &= \tfrac{\sqrt{2}}{2}\cdot\tfrac{\sqrt{3}}{2} + \tfrac{\sqrt{2}}{2}\cdot\tfrac{1}{2}
+            = \frac{\sqrt{6}+\sqrt{2}}{4}
+}
+
+\TM{Exemplo 2 — $\cos 15°$}
+
+\M{
+  \cos 15° &= \cos(45°-30°) \\
+           &= \tfrac{\sqrt{2}}{2}\cdot\tfrac{\sqrt{3}}{2} + \tfrac{\sqrt{2}}{2}\cdot\tfrac{1}{2}
+            = \frac{\sqrt{6}+\sqrt{2}}{4}
+}
+
+% ── FÓRMULAS DE DUPLICAÇÃO ────────────────────────────────────────────────────
+\TW{Fórmulas de Duplicação}
+
+\Formula{\sin 2a = 2\sin a \cos a}
+
+\Formula{\cos 2a = \cos^2 a - \sin^2 a = 1-2\sin^2 a = 2\cos^2 a-1}
+
+\Formula{\tan 2a = \frac{2\tan a}{1-\tan^2 a}}
+
+\TM{Exemplo 3 — $\sin 2a$, dado $\sin a = \frac{3}{5}$ (1º quad.)}
+
+\M{
+  \cos a &= \tfrac{4}{5} \;\Rightarrow\;
+  \sin 2a = 2\cdot\tfrac{3}{5}\cdot\tfrac{4}{5} = \tfrac{24}{25}
+}
+
+% ── FÓRMULAS DE METADE ────────────────────────────────────────────────────────
+\TW{Fórmulas de Bissecção (Arco Metade)}
+
+\Formula{\sin^2\!\tfrac{a}{2} = \frac{1-\cos a}{2} \qquad \cos^2\!\tfrac{a}{2} = \frac{1+\cos a}{2}}
+
+\TM{Exemplo 4 — $\cos^2 15°$}
+
+$$\cos^2 15° = \frac{1+\cos 30°}{2} = \frac{2+\sqrt{3}}{4}$$
+
+% ── PRODUTO EM SOMA ────────────────────────────────────────────────────────────
+\TW{Produto em Soma}
+
+$$\sin a \cos b = \tfrac{1}{2}[\sin(a{+}b)+\sin(a{-}b)]$$
+
+$$\cos a \cos b = \tfrac{1}{2}[\cos(a{-}b)+\cos(a{+}b)]$$
+
+$$\sin a \sin b = \tfrac{1}{2}[\cos(a{-}b)-\cos(a{+}b)]$$
+
+\TW{Soma em Produto}
+
+$$\sin p + \sin q = 2\sin\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}$$
+
+$$\cos p + \cos q = 2\cos\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}$$
+
+\TM{Exemplo 5 — $\sin 70° + \sin 10°$}
+
+$$= 2\sin 40°\cos 30° = \sqrt{3}\sin 40°$$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small Todas as fórmulas derivam das de adição: faça $b=a$ para duplicação, $p=(a+b)$, $q=(a-b)$ para soma em produto.
+}}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

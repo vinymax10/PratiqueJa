@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 110 110">
+  <!-- Hexágono regular, centro (55,55), raio 44 -->
+  <!-- Vértices: (99,55) (77,93) (33,93) (11,55) (33,17) (77,17) -->
+  <!-- Triângulo central (fatia destacada): centro, V0(99,55), V1(77,93) -->
+  <polygon points="55,55 99,55 77,93"
+           fill="#dbeafe" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,1.5"/>
+  <!-- Hexágono completo -->
+  <polygon points="99,55 77,93 33,93 11,55 33,17 77,17"
+           fill="none" stroke="#1e40af" stroke-width="2"/>
+  <!-- Apótema: do centro (55,55) ao meio do lado inferior V2V3: meio de (33,93)-(77,93) = (55,93) -->
+  <line x1="55" y1="55" x2="55" y2="93" stroke="#dc2626" stroke-width="2"/>
+  <!-- Ponto no meio do lado -->
+  <circle cx="55" cy="93" r="2" fill="#dc2626"/>
+  <!-- Ângulo reto no pé do apótema -->
+  <rect x="55" y="88" width="5" height="5" fill="none" stroke="#dc2626" stroke-width="1"/>
+  <!-- Raio (centro ao vértice) -->
+  <line x1="55" y1="55" x2="99" y2="55" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <!-- Centro -->
+  <circle cx="55" cy="55" r="2.5" fill="#1e293b"/>
+  <!-- Labels -->
+  <text x="57" y="78" font-size="10" font-weight="bold" fill="#dc2626" font-family="sans-serif">a</text>
+  <text x="74" y="52" font-size="9" font-weight="bold" fill="#7c3aed" font-family="sans-serif">r = l</text>
+  <text x="57" y="57" font-size="7" fill="#1e293b" font-family="sans-serif">O</text>
+  <!-- Label lado -->
+  <text x="78" y="78" font-size="9" fill="#1e40af" font-family="sans-serif">l</text>
+</svg>

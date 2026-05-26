@@ -1,0 +1,204 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">Variável, constante, termo, coeficiente</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Uma <strong>expressão algébrica</strong> combina números e letras (variáveis) por meio de operações.
+                    Cada parte separada por + ou − é chamada de <strong>termo</strong>.
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Variável:</strong> letra que representa um valor desconhecido — \(x\), \(y\), \(a\)</span>
+                        <span><strong>Constante:</strong> número fixo — 3, −7, \(\frac{1}{2}\)</span>
+                        <span><strong>Coeficiente:</strong> número que multiplica a variável — em \(5x^2\), o coeficiente é 5</span>
+                        <span><strong>Parte literal:</strong> a(s) variável(is) com expoente — em \(5x^2\), é \(x^2\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos de expressões</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3x + 2\) — binômio (2 termos)</span>
+                        <span>\(4x^2 - 3x + 7\) — trinômio (3 termos)</span>
+                        <span>\(-\dfrac{2}{5}ab^2\) — monômio (1 termo)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALOR NUMÉRICO -->
+            <div class="tr-section" id="sec-valor-numerico">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">V(x)</div>
+                    <div>
+                        <div class="tr-section-title">Valor Numérico</div>
+                        <div class="tr-section-sub">Substituir a variável e calcular</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>valor numérico</strong> de uma expressão é o resultado obtido ao
+                    substituir cada variável por um número específico e calcular seguindo a hierarquia das operações.
+                </div>
+                <h4>Exemplo 1 — \(E(x) = 2x^2 - 3x + 1\) para \(x = 2\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(E(2) = 2 \cdot 2^2 - 3 \cdot 2 + 1\)</span>
+                        <span>\(= 2 \cdot 4 - 6 + 1\)</span>
+                        <span>\(= 8 - 6 + 1 = \)<span class="hl">3</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — \(E(a,b) = a^2 + 2ab\) para \(a=3\), \(b=-1\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(= 3^2 + 2 \cdot 3 \cdot (-1)\)</span>
+                        <span>\(= 9 - 6 = \)<span class="hl">3</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TERMOS SEMELHANTES -->
+            <div class="tr-section" id="sec-semelhantes">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">±</div>
+                    <div>
+                        <div class="tr-section-title">Termos Semelhantes</div>
+                        <div class="tr-section-sub">Mesma parte literal — podem ser somados</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois termos são <strong>semelhantes</strong> quando têm <em>exatamente</em> a mesma parte literal
+                    (mesma variável e mesmo expoente). Só termos semelhantes podem ser somados ou subtraídos —
+                    basta operar os coeficientes.
+                </div>
+                <h4>Exemplo 1 — simplificar</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(5x^2 - 3x + 2x^2 + 7x - 1\)</span>
+                        <span>\(= (5x^2 + 2x^2) + (-3x + 7x) - 1\)</span>
+                        <span>\(= \)<span class="hl">\(7x^2 + 4x - 1\)</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — soma de polinômios</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((3x^2 + 2x - 5) + (x^2 - 4x + 3)\)</span>
+                        <span>\(= 4x^2 - 2x - 2\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    \(3x^2\) e \(3x\) <strong>não</strong> são semelhantes — partes literais diferentes (\(x^2 \neq x\)).
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO DE MONÔMIOS -->
+            <div class="tr-section" id="sec-monomios">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">×</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação de Monômios</div>
+                        <div class="tr-section-sub">Coeficientes × coeficientes, literais × literais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para multiplicar monômios: multiplique os <strong>coeficientes</strong> e some os
+                    <strong>expoentes</strong> das variáveis iguais.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3x^2 \times 4x^3 = 12x^5\)</span>
+                        <span>\((-2ab^2)(5a^2b) = -10a^3b^3\)</span>
+                        <span>\(2x \times 3y = 6xy\) &nbsp;<em style="font-size:12px;color:#9ca3af">(variáveis diferentes: justapostas)</em></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISTRIBUTIVA -->
+            <div class="tr-section" id="sec-distributiva">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">a(b+c)</div>
+                    <div>
+                        <div class="tr-section-title">Propriedade Distributiva</div>
+                        <div class="tr-section-sub">Expandir e simplificar</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \(a \cdot (b + c) = a \cdot b + a \cdot c\) — o fator externo multiplica <em>cada</em> termo do parêntese.
+                    Atenção ao sinal quando o fator externo é negativo.
+                </div>
+                <h4>Exemplo 1</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3x(2x - 5) = 6x^2 - 15x\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — fator negativo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(-2(x^2 - 3x + 1) = -2x^2 + 6x - 2\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 3 — expandir e simplificar</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2(x + 3) - 3(x - 1)\)</span>
+                        <span>\(= 2x + 6 - 3x + 3\)</span>
+                        <span>\(= -x + 9\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXEMPLOS CONTEXTUALIZADOS -->
+            <div class="tr-section" id="sec-contexto">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Aplic.</div>
+                    <div>
+                        <div class="tr-section-title">Exemplos Contextualizados</div>
+                        <div class="tr-section-sub">Área, perímetro e velocidade em linguagem algébrica</div>
+                    </div>
+                </div>
+                <h4>Área de um retângulo</h4>
+                <p>Um retângulo tem largura \(x\) e comprimento \(2x + 3\). Sua área é:</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = x \cdot (2x + 3) = 2x^2 + 3x\)</span>
+                        <span>Para \(x = 4\): \(A = 2(16) + 12 = \)<span class="hl">\(44\)</span></span>
+                    </div>
+                </div>
+                <h4>Perímetro</h4>
+                <p>Triângulo com lados \(a\), \(a+2\) e \(2a-1\):</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(P = a + (a+2) + (2a-1) = 4a + 1\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

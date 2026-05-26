@@ -1,0 +1,312 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- CONCEITOS INICIAIS -->
+            <div class="tr-section" id="sec-conceitos">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Conceitos Iniciais</div>
+                        <div class="tr-section-sub">População, amostra e tipos de variável</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>estatística</strong> organiza e interpreta dados para auxiliar na
+                    tomada de decisões. O ponto de partida é distinguir o conjunto total de elementos
+                    (<strong>população</strong>) do subconjunto efetivamente observado
+                    (<strong>amostra</strong>).
+                </div>
+
+                <h4>Tipos de variável</h4>
+                <ul style="line-height:1.9; margin-top:.4rem">
+                    <li><strong>Quantitativa discreta</strong> — valores inteiros contáveis
+                        <em style="color:#9ca3af">(qtd. de filhos, número de gols)</em></li>
+                    <li><strong>Quantitativa contínua</strong> — qualquer valor num intervalo
+                        <em style="color:#9ca3af">(altura, temperatura, tempo)</em></li>
+                    <li><strong>Qualitativa nominal</strong> — categorias sem ordem natural
+                        <em style="color:#9ca3af">(cor dos olhos, estado civil)</em></li>
+                    <li><strong>Qualitativa ordinal</strong> — categorias com ordem definida
+                        <em style="color:#9ca3af">(escolaridade: fundamental &lt; médio &lt; superior)</em></li>
+                </ul>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Classifique: "número de gols em uma partida".</span>
+                        <span>Assume valores 0, 1, 2, … (inteiros contáveis).</span>
+                        <span class="hl">Quantitativa discreta</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Classifique: "tempo de reação em segundos".</span>
+                        <span>Pode assumir 0,31 s; 0,312 s; … qualquer valor &#160;→ contínua.</span>
+                        <span class="hl">Quantitativa contínua</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Classifique: "satisfação: ruim, regular, bom, ótimo".</span>
+                        <span>Categorias com ordem definida.</span>
+                        <span class="hl">Qualitativa ordinal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEDIDAS DE TENDÊNCIA CENTRAL -->
+            <div class="tr-section" id="sec-tendencia">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Méd</div>
+                    <div>
+                        <div class="tr-section-title">Medidas de Tendência Central</div>
+                        <div class="tr-section-sub">Média, mediana e moda</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As <strong>medidas de tendência central</strong> indicam um valor representativo
+                    do conjunto. As três principais são a <strong>média aritmética</strong>,
+                    a <strong>mediana</strong> e a <strong>moda</strong>.
+                </div>
+
+                <h4>Média aritmética simples</h4>
+                <p>Soma de todos os valores dividida pela quantidade de elementos \(n\):</p>
+                \[
+                    \bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}
+                \]
+
+                <h4>Média aritmética ponderada</h4>
+                <p>Cada valor \(x_i\) recebe um peso \(w_i\):</p>
+                \[
+                    \bar{x}_p = \frac{x_1 w_1 + x_2 w_2 + \cdots + x_n w_n}{w_1 + w_2 + \cdots + w_n}
+                \]
+
+                <h4>Mediana (Me)</h4>
+                <p>Valor central do <em>rol</em> (dados em ordem crescente):</p>
+                <ul style="line-height:1.8; margin-top:.4rem">
+                    <li>\(n\) <strong>ímpar</strong>: elemento da posição \(\dfrac{n+1}{2}\)</li>
+                    <li>\(n\) <strong>par</strong>: média dos elementos das posições \(\dfrac{n}{2}\) e \(\dfrac{n}{2}+1\)</li>
+                </ul>
+
+                <h4>Moda (Mo)</h4>
+                <p>Valor que aparece com maior frequência. Um conjunto pode ser
+                <strong>amodal</strong> (sem moda), <strong>unimodal</strong>,
+                <strong>bimodal</strong> etc.</p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Notas de 5 alunos: 5, 6, 6, 7, 10. Calcule \(\bar{x}\), Me e Mo.</span>
+                        <span>\(\bar{x} = \dfrac{5+6+6+7+10}{5} = \dfrac{34}{5}\)</span>
+                        <span class="hl">\(\bar{x} = 6{,}8\)</span>
+                        <span>\(n = 5\) (ímpar) → posição \(\dfrac{5+1}{2} = 3\) → Me = 6</span>
+                        <span class="hl">Me = 6 &#160;&#160; Mo = 6 <em style="font-size:.83rem; color:#9ca3af">(aparece 2×)</em></span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Médias ponderadas: N₁ = 7 (peso 2), N₂ = 5 (peso 3), N₃ = 8 (peso 5).</span>
+                        <span>\(\bar{x}_p = \dfrac{7 \cdot 2 + 5 \cdot 3 + 8 \cdot 5}{2+3+5} = \dfrac{14+15+40}{10} = \dfrac{69}{10}\)</span>
+                        <span class="hl">\(\bar{x}_p = 6{,}9\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Quando usar cada uma?</strong> A média é influenciada por valores
+                    extremos (outliers); a mediana é mais robusta nesses casos.
+                    A moda indica o valor mais típico da distribuição.
+                </div>
+            </div>
+
+            <!-- MEDIDAS DE DISPERSÃO -->
+            <div class="tr-section" id="sec-dispersao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Dis</div>
+                    <div>
+                        <div class="tr-section-title">Medidas de Dispersão</div>
+                        <div class="tr-section-sub">Amplitude, variância e desvio padrão</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Duas turmas podem ter a mesma média e ser muito diferentes entre si.
+                    As <strong>medidas de dispersão</strong> quantificam o quanto os dados
+                    se afastam do valor central.
+                </div>
+
+                <h4>Amplitude total</h4>
+                \[
+                    A = x_{\max} - x_{\min}
+                \]
+
+                <h4>Variância (\(\sigma^2\)) e desvio padrão (\(\sigma\))</h4>
+                <p>O <strong>desvio</strong> de cada valor em relação à média é
+                \(d_i = x_i - \bar{x}\). A variância é a média dos quadrados desses desvios:</p>
+                \[
+                    \sigma^2 = \frac{\displaystyle\sum_{i=1}^{n}(x_i - \bar{x})^2}{n}
+                \]
+                <p>O <strong>desvio padrão</strong> \(\sigma = \sqrt{\sigma^2}\) tem a mesma
+                unidade dos dados, facilitando a interpretação prática.</p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Notas de 5 alunos: 4, 6, 7, 8, 10. Calcule \(A\), \(\sigma^2\) e \(\sigma\).</span>
+                        <span>\(\bar{x} = \dfrac{4+6+7+8+10}{5} = \dfrac{35}{5} = 7\)</span>
+                        <span>\(A = 10 - 4 = 6\)</span>
+                        <span>Desvios: \(-3,\; -1,\; 0,\; +1,\; +3\)</span>
+                        <span>\(\sigma^2 = \dfrac{(-3)^2+(-1)^2+0^2+1^2+3^2}{5} = \dfrac{9+1+0+1+9}{5} = \dfrac{20}{5} = 4\)</span>
+                        <span class="hl">\(\sigma = \sqrt{4} = 2\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Regra prática:</strong> \(\sigma\) pequeno indica dados concentrados
+                    perto da média; \(\sigma\) grande indica dados espalhados. No ENEM, basta
+                    saber calcular \(\sigma^2\) a partir dos desvios e extrair a raiz quadrada.
+                </div>
+            </div>
+
+            <!-- DISTRIBUIÇÃO DE FREQUÊNCIAS -->
+            <div class="tr-section" id="sec-freq">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Fr</div>
+                    <div>
+                        <div class="tr-section-title">Distribuição de Frequências</div>
+                        <div class="tr-section-sub">Frequência absoluta, relativa e acumulada</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando há muitos dados, organizamos em uma <strong>tabela de distribuição
+                    de frequências</strong>. Cada intervalo de classe \([a, b)\) agrupa os
+                    valores com \(a \leq x &lt; b\).
+                </div>
+
+                <h4>Definições</h4>
+                <ul style="line-height:1.9; margin-top:.4rem">
+                    <li>\(f_i\) — <strong>frequência absoluta</strong>: quantidade de dados na classe \(i\)</li>
+                    <li>\(fr_i = f_i \,/\, n\) — <strong>frequência relativa</strong>: proporção (0 a 1)</li>
+                    <li>\(F_i = f_1 + f_2 + \cdots + f_i\) — <strong>frequência acumulada</strong></li>
+                </ul>
+
+                <h4>Exemplo — notas de 10 alunos</h4>
+                <table style="width:100%; border-collapse:collapse; margin:1rem 0; font-size:.93rem;">
+                    <thead>
+                        <tr style="border-bottom:1px solid #374151; color:#6ee7b7;">
+                            <th style="padding:.5rem 1rem; text-align:left; font-weight:600;">Classe</th>
+                            <th style="padding:.5rem 1rem; text-align:center; font-weight:600;">\(f_i\)</th>
+                            <th style="padding:.5rem 1rem; text-align:center; font-weight:600;">\(fr_i\)</th>
+                            <th style="padding:.5rem 1rem; text-align:center; font-weight:600;">\(F_i\)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color:#d1d5db;">
+                        <tr style="border-bottom:1px solid #1f2937;">
+                            <td style="padding:.4rem 1rem;">[0, 2)</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">1</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">0,10</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">1</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #1f2937;">
+                            <td style="padding:.4rem 1rem;">[2, 4)</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">2</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">0,20</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">3</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #1f2937;">
+                            <td style="padding:.4rem 1rem;">[4, 6)</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">4</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">0,40</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">7</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #1f2937;">
+                            <td style="padding:.4rem 1rem;">[6, 8)</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">2</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">0,20</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">9</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #374151;">
+                            <td style="padding:.4rem 1rem;">[8, 10]</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">1</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">0,10</td>
+                            <td style="padding:.4rem 1rem; text-align:center;">10</td>
+                        </tr>
+                        <tr style="color:#6ee7b7; font-weight:600;">
+                            <td style="padding:.5rem 1rem;">Total</td>
+                            <td style="padding:.5rem 1rem; text-align:center;">10</td>
+                            <td style="padding:.5rem 1rem; text-align:center;">1,00</td>
+                            <td style="padding:.5rem 1rem; text-align:center;">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tr-note">
+                    <strong>Leitura:</strong> \(F_3 = 7\) significa que 7 alunos obtiveram nota
+                    abaixo de 6 (três primeiras classes). \(fr_3 = 0{,}40\) indica que 40%
+                    dos alunos estão na classe [4, 6).
+                </div>
+            </div>
+
+            <!-- GRÁFICOS ESTATÍSTICOS -->
+            <div class="tr-section" id="sec-graficos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Grá</div>
+                    <div>
+                        <div class="tr-section-title">Gráficos Estatísticos</div>
+                        <div class="tr-section-sub">Histograma, polígono de frequências e boxplot</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Representações gráficas revelam padrões que tabelas numéricas ocultam.
+                    Os três tipos mais cobrados no ENEM são o <strong>histograma</strong>,
+                    o <strong>polígono de frequências</strong> e o <strong>boxplot</strong>.
+                </div>
+
+                <h4>Histograma e Polígono de Frequências</h4>
+                <p>O <strong>histograma</strong> representa as frequências por barras
+                <em>justapostas</em> (sem espaço entre elas), uma por classe. O
+                <strong>polígono de frequências</strong> é obtido ligando os pontos médios
+                do topo de cada barra.</p>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/avancado/estatistica/fig-histograma.svg"
+                         alt="Histograma com 5 barras simétricas (fi=1,2,4,2,1) e polígono de frequências ligando os pontos médios"
+                         width="380" />
+                </div>
+
+                <h4>Boxplot (diagrama de caixa)</h4>
+                <p>O boxplot resume a distribuição em <strong>cinco valores</strong>: mínimo,
+                \(Q_1\), mediana (\(Q_2\)), \(Q_3\) e máximo. A <strong>caixa</strong> vai
+                de \(Q_1\) a \(Q_3\); a linha interna indica a mediana; os
+                <strong>bigodes</strong> se estendem ao mínimo e ao máximo.</p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dados em ordem crescente: 2, 4, 5, 6, 7, 8, 9 &#160;(\(n = 7\)).</span>
+                        <span>\(Q_2\) (mediana): posição 4 &#160;→&#160; \(Q_2 = 6\)</span>
+                        <span>Metade inferior \(\{2, 4, 5\}\) &#160;→&#160; \(Q_1 = 4\)</span>
+                        <span>Metade superior \(\{7, 8, 9\}\) &#160;→&#160; \(Q_3 = 8\)</span>
+                        <span class="hl">Mín = 2 &#160;&#160; \(Q_1\) = 4 &#160;&#160; \(Q_2\) = 6 &#160;&#160; \(Q_3\) = 8 &#160;&#160; Máx = 9</span>
+                    </div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Amplitude interquartílica:</strong> \(IQR = Q_3 - Q_1\).
+                    Valores fora do intervalo \([Q_1 - 1{,}5 \cdot IQR,\; Q_3 + 1{,}5 \cdot IQR]\)
+                    são considerados <em>outliers</em> e aparecem como pontos isolados no boxplot.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

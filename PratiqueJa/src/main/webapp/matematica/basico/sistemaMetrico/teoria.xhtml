@@ -1,0 +1,183 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- COMPRIMENTO -->
+            <div class="tr-section" id="sec-comprimento">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">m</div>
+                    <div>
+                        <div class="tr-section-title">Comprimento</div>
+                        <div class="tr-section-sub">Unidade base: metro (m)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A unidade padrão de comprimento é o <strong>metro (m)</strong>.
+                    As demais unidades são múltiplos ou submúltiplos do metro,
+                    separados por fatores de 10.
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>km → hm → dam → <strong>m</strong> → dm → cm → mm</span>
+                        <span>Cada passo à direita: <strong>÷ 10</strong></span>
+                        <span>Cada passo à esquerda: <strong>× 10</strong></span>
+                    </div>
+                </div>
+                <h4>Exemplos de conversão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3{,}5\,\text{km} = 3500\,\text{m}\) &nbsp;<em style="font-size:12px;color:#9ca3af">(× 1000)</em></span>
+                        <span>\(250\,\text{cm} = 2{,}5\,\text{m}\) &nbsp;<em style="font-size:12px;color:#9ca3af">(÷ 100)</em></span>
+                        <span>\(45\,\text{mm} = 4{,}5\,\text{cm}\) &nbsp;<em style="font-size:12px;color:#9ca3af">(÷ 10)</em></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MASSA -->
+            <div class="tr-section" id="sec-massa">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">kg</div>
+                    <div>
+                        <div class="tr-section-title">Massa</div>
+                        <div class="tr-section-sub">Unidade base: quilograma (kg)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A unidade padrão de massa no SI é o <strong>quilograma (kg)</strong>,
+                    embora na escala métrica o <em>grama (g)</em> seja o ponto central das conversões.
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>t → \(\ldots\) → kg → hg → dag → <strong>g</strong> → dg → cg → mg</span>
+                        <span>\(1\,\text{t} = 1000\,\text{kg}\)</span>
+                        <span>\(1\,\text{kg} = 1000\,\text{g}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos de conversão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2{,}5\,\text{kg} = 2500\,\text{g}\)</span>
+                        <span>\(350\,\text{g} = 0{,}35\,\text{kg}\)</span>
+                        <span>\(1{,}5\,\text{t} = 1500\,\text{kg}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAPACIDADE -->
+            <div class="tr-section" id="sec-capacidade">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">L</div>
+                    <div>
+                        <div class="tr-section-title">Capacidade</div>
+                        <div class="tr-section-sub">Unidade base: litro (L)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A unidade de capacidade é o <strong>litro (L)</strong>.
+                    As conversões seguem o mesmo padrão de múltiplos e submúltiplos de 10.
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>kL → hL → daL → <strong>L</strong> → dL → cL → mL</span>
+                        <span>\(1\,\text{L} = 1000\,\text{mL}\)</span>
+                        <span>\(1\,\text{kL} = 1000\,\text{L}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos de conversão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2\,\text{L} = 2000\,\text{mL}\)</span>
+                        <span>\(500\,\text{mL} = 0{,}5\,\text{L}\)</span>
+                        <span>\(3{,}5\,\text{kL} = 3500\,\text{L}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÁREA E VOLUME -->
+            <div class="tr-section" id="sec-area-volume">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">m²/m³</div>
+                    <div>
+                        <div class="tr-section-title">Área e Volume</div>
+                        <div class="tr-section-sub">Conversões quadráticas e cúbicas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para <strong>área</strong>, cada passo na escala de comprimento equivale a um
+                    fator de <strong>100</strong> (10²). Para <strong>volume</strong>, cada passo equivale a
+                    <strong>1000</strong> (10³).
+                </div>
+                <h4>Área</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>km² → hm² → dam² → <strong>m²</strong> → dm² → cm² → mm²</span>
+                        <span>Cada passo: × 100 (direita→esquerda) ou ÷ 100 (esquerda→direita)</span>
+                        <span>\(1\,\text{m}^2 = 10\,000\,\text{cm}^2\)</span>
+                        <span>\(1\,\text{km}^2 = 1\,000\,000\,\text{m}^2\)</span>
+                    </div>
+                </div>
+                <h4>Volume</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Cada passo: × 1000 ou ÷ 1000</span>
+                        <span>\(1\,\text{m}^3 = 1\,000\,000\,\text{cm}^3\)</span>
+                        <span>\(1\,\text{dm}^3 = 1\,\text{L}\) &nbsp;<em style="font-size:12px;color:#9ca3af">(equivalência com capacidade)</em></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEMPO -->
+            <div class="tr-section" id="sec-tempo">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">h</div>
+                    <div>
+                        <div class="tr-section-title">Tempo</div>
+                        <div class="tr-section-sub">Conversão entre horas, minutos e segundos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    As unidades de tempo <strong>não</strong> seguem o padrão decimal:
+                    usam fatores fixos de 60 (entre segundos, minutos e horas) e 24 (horas no dia).
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>\(1\,\text{h} = 60\,\text{min}\)</span>
+                        <span>\(1\,\text{min} = 60\,\text{s}\)</span>
+                        <span>\(1\,\text{h} = 3600\,\text{s}\)</span>
+                        <span>\(1\,\text{dia} = 24\,\text{h}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplos de conversão</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2{,}5\,\text{h} = 2\,\text{h}\,30\,\text{min} = 150\,\text{min}\)</span>
+                        <span>\(90\,\text{min} = 1{,}5\,\text{h} = 1\,\text{h}\,30\,\text{min}\)</span>
+                        <span>\(7200\,\text{s} = 120\,\text{min} = 2\,\text{h}\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.tr-content -->
+    </div><!-- /.tr-layout -->
+
+</ui:decorate>

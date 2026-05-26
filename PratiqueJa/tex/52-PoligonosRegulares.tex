@@ -1,0 +1,97 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Polígonos Regulares}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+% ── DEFINIÇÃO ────────────────────────────────────────────────────────────────
+\TW{Definição}
+
+Um \textbf{polígono regular} tem todos os lados congruentes e todos os ângulos internos congruentes.
+É ao mesmo tempo \textbf{equilátero} e \textbf{equiângulo}.
+
+Exemplos: triângulo equilátero ($n=3$), quadrado ($n=4$), pentágono ($n=5$),
+hexágono ($n=6$), octógono ($n=8$).
+
+% ── SOMA DOS ÂNGULOS INTERNOS ────────────────────────────────────────────────
+\TW{Soma dos Ângulos Internos}
+
+\Formula{S_i = (n-2) \times 180°}
+
+Cada ângulo interno de um polígono regular:
+
+\Formula{\alpha_i = \dfrac{(n-2) \times 180°}{n}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Polígono} & $n$ & $S_i$ & $\alpha_i$ \\ \hline
+Triângulo & 3 & 180° & 60° \\ \hline
+Quadrado  & 4 & 360° & 90° \\ \hline
+Pentágono & 5 & 540° & 108° \\ \hline
+Hexágono  & 6 & 720° & 120° \\ \hline
+Octógono  & 8 & 1080° & 135° \\ \hline
+\end{tabular}
+\end{center}
+
+% ── ÂNGULO EXTERNO ────────────────────────────────────────────────────────────
+\TW{Ângulo Externo}
+
+A soma de todos os ângulos externos de qualquer polígono convexo é $360°$.
+
+\Formula{\alpha_e = \dfrac{360°}{n} \qquad \alpha_i + \alpha_e = 180°}
+
+Hexágono: $\alpha_e = 60°$ \quad Octógono: $\alpha_e = 45°$
+
+% ── APÓTEMA E ÁREA ────────────────────────────────────────────────────────────
+\TW{Apótema e Área}
+
+O \textbf{apótema} ($a$) é a distância do centro ao ponto médio de um lado.
+Ele é perpendicular ao lado e calculado pelo triângulo retângulo central.
+
+\Formula{A = \dfrac{P \cdot a}{2} \qquad \text{onde } P = n \cdot l}
+
+\TM{Exemplo — hexágono, $l = 4\,\text{cm}$}
+
+\M{
+  a &= \dfrac{l\sqrt{3}}{2} = 2\sqrt{3}\,\text{cm} \\
+  P &= 6 \times 4 = 24\,\text{cm} \\
+  A &= \dfrac{24 \times 2\sqrt{3}}{2} = 24\sqrt{3} \approx 41{,}6\,\text{cm}^2
+}
+
+% ── HEXÁGONO REGULAR ─────────────────────────────────────────────────────────
+\TW{Hexágono Regular — Caso Especial}
+
+No hexágono regular, o \textbf{lado é igual ao raio} da circunscrita: $l = R$.
+
+\Formula{A_{\text{hex}} = \dfrac{3\sqrt{3}}{2}\,l^2}
+
+O hexágono divide-se em 6 triângulos equiláteros de lado $l$:
+cada um com área $\dfrac{\sqrt{3}}{4}l^2$, logo $6 \times \dfrac{\sqrt{3}}{4}l^2 = \dfrac{3\sqrt{3}}{2}l^2$.
+
+\TM{Exemplo — $l = 6\,\text{cm}$}
+
+\M{
+  A &= \dfrac{3\sqrt{3}}{2} \times 36 = 54\sqrt{3} \approx 93{,}5\,\text{cm}^2
+}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Macete:} para encontrar $n$ de um polígono regular sabendo $\alpha_e$:
+$n = 360° \div \alpha_e$.\\
+Ex.: $\alpha_e = 36°$ $\Rightarrow$ $n = 10$ (decágono).
+}}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

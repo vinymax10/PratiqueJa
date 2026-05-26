@@ -1,0 +1,198 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- LEITURA E ESCRITA -->
+            <div class="tr-section" id="sec-leitura">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Leitura e Escrita</div>
+                        <div class="tr-section-sub">Valor posicional dos algarismos decimais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Em um número decimal, a <strong>vírgula</strong> separa a parte inteira da parte decimal.
+                    Cada posição à direita da vírgula representa uma fração de potência de 10:
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>1ª casa: <strong>décimos</strong> (\(\div 10\))</span>
+                        <span>2ª casa: <strong>centésimos</strong> (\(\div 100\))</span>
+                        <span>3ª casa: <strong>milésimos</strong> (\(\div 1000\))</span>
+                    </div>
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(3{,}5 = 3 + \dfrac{5}{10}\) → "três vírgula cinco"</span>
+                        <span>\(2{,}47 = 2 + \dfrac{4}{10} + \dfrac{7}{100}\) → "dois vírgula quarenta e sete"</span>
+                        <span>\(0{,}008\) → "oito milésimos"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARAÇÃO -->
+            <div class="tr-section" id="sec-comparacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">&lt; &gt;</div>
+                    <div>
+                        <div class="tr-section-title">Comparação de Decimais</div>
+                        <div class="tr-section-sub">Comparar posição a posição</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Compare os algarismos da <strong>esquerda para a direita</strong>, posição a posição.
+                    Se necessário, complete com zeros à direita para igualar o número de casas decimais.
+                </div>
+                <h4>Exemplo — ordenar: 3,4 &nbsp; 3,45 &nbsp; 3,04</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Reescreva: 3,40 &nbsp; 3,45 &nbsp; 3,04</span>
+                        <span>Parte inteira igual (3). Compare décimos: 0 &lt; 4</span>
+                        <span>Ordem crescente: <span class="hl">3,04 &lt; 3,40 &lt; 3,45</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADIÇÃO E SUBTRAÇÃO -->
+            <div class="tr-section" id="sec-adicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">+ −</div>
+                    <div>
+                        <div class="tr-section-title">Adição e Subtração</div>
+                        <div class="tr-section-sub">Alinhar as vírgulas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Escreva os números <strong>alinhando as vírgulas</strong> e complete com zeros se necessário.
+                    Some ou subtraia coluna a coluna, da direita para a esquerda.
+                </div>
+                <h4>Exemplo — \(4{,}5 + 2{,}37\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>4,50</span>
+                        <span>+ 2,37</span>
+                        <span>= <span class="hl">6,87</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo — \(7{,}2 - 3{,}85\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>7,20 − 3,85 = <span class="hl">3,35</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO -->
+            <div class="tr-section" id="sec-multiplicacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">×</div>
+                    <div>
+                        <div class="tr-section-title">Multiplicação de Decimais</div>
+                        <div class="tr-section-sub">Ignore a vírgula, depois recoloque</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Multiplique ignorando a vírgula e, no resultado, coloque a vírgula
+                    a partir da direita contando o <strong>total de casas decimais</strong> dos dois fatores.
+                </div>
+                <h4>Exemplo — \(1{,}2 \times 0{,}3\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(12 \times 3 = 36\) &nbsp;<em style="font-size:12px;color:#9ca3af">(1+1 = 2 casas decimais)</em></span>
+                        <span>Resultado: <span class="hl">0,36</span></span>
+                    </div>
+                </div>
+                <h4>Multiplicar por 10, 100, 1000…</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2{,}54 \times 10 = 25{,}4\) &nbsp;<em style="font-size:12px;color:#9ca3af">(vírgula anda 1 casa à direita)</em></span>
+                        <span>\(2{,}54 \times 100 = 254\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISÃO -->
+            <div class="tr-section" id="sec-divisao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">÷</div>
+                    <div>
+                        <div class="tr-section-title">Divisão de Decimais</div>
+                        <div class="tr-section-sub">Transformar em divisão inteira</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Multiplique dividendo e divisor pela mesma potência de 10 para
+                    <strong>eliminar as casas decimais do divisor</strong>, depois divida normalmente.
+                </div>
+                <h4>Exemplo — \(3{,}6 \div 0{,}4\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Multiplique ambos por 10: \(36 \div 4\)</span>
+                        <span>= <span class="hl">9</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo — \(0{,}72 \div 0{,}08\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Multiplique por 100: \(72 \div 8 = \)<span class="hl">9</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONVERSÃO COM FRAÇÕES -->
+            <div class="tr-section" id="sec-conversao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">↔</div>
+                    <div>
+                        <div class="tr-section-title">Conversão com Frações</div>
+                        <div class="tr-section-sub">Decimal ↔ Fração</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Decimal → Fração:</strong> coloque os dígitos decimais no numerador e a
+                    potência de 10 correspondente no denominador, depois simplifique.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(0{,}5 = \dfrac{5}{10} = \dfrac{1}{2}\)</span>
+                        <span>\(0{,}75 = \dfrac{75}{100} = \dfrac{3}{4}\)</span>
+                        <span>\(1{,}25 = \dfrac{125}{100} = \dfrac{5}{4}\)</span>
+                    </div>
+                </div>
+                <div class="tr-rule" style="margin-top:8px;">
+                    <strong>Fração → Decimal:</strong> divida numerador pelo denominador.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\dfrac{3}{4} = 3 \div 4 = 0{,}75\)</span>
+                        <span>\(\dfrac{7}{8} = 7 \div 8 = 0{,}875\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.tr-content -->
+    </div><!-- /.tr-layout -->
+
+</ui:decorate>

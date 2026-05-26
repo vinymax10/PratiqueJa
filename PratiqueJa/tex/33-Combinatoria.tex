@@ -239,6 +239,38 @@ A ordem é fixada: basta escolher 4 dígitos.
 \M{\text{A e B adj.} &= P_c(5)\cdot 2! = 4!\cdot 2 = 48}
 \M{\text{Resultado} &= 120 - 48 = \boxed{72} \text{ formas}}
 
+% ── BINÔMIO DE NEWTON ──────────────────────────────────────────────────────
+\TW{Binômio de Newton}
+
+O \textbf{Binômio de Newton} generaliza a expansão de $(a+b)^n$ para todo $n \in \mathbb{N}$:
+
+\Formula{(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k}
+
+O \textbf{termo geral} de índice $k+1$ é:
+
+\Formula{T_{k+1} = \binom{n}{k} \cdot a^{n-k} \cdot b^k}
+
+\TM{Exemplo 1 — $(x+2)^4$:}
+
+$\binom{4}{0}x^4 + \binom{4}{1}x^3\cdot2 + \binom{4}{2}x^2\cdot4 + \binom{4}{3}x\cdot8 + \binom{4}{4}\cdot16$
+
+$= x^4 + 8x^3 + 24x^2 + 32x + 16$
+
+\TM{Exemplo 2 — $(2a-b)^3$:}
+
+$(2a)^3 - 3(2a)^2b + 3(2a)b^2 - b^3$
+
+$= 8a^3 - 12a^2b + 6ab^2 - b^3$
+
+\TM{Exemplo 3 — 3º termo de $(x+3)^6$:}
+
+$k = 2$: \; $T_3 = \binom{6}{2} x^4 \cdot 3^2 = 15 \cdot x^4 \cdot 9 = 135x^4$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Soma dos coeficientes:} fazendo $a = b = 1$ obtém-se $(1+1)^n = 2^n$ —
+a soma de todos os coeficientes do binômio na linha $n$ do Triângulo de Pascal.
+}}
+
 \end{multicols}
 \input{rodape}
 \end{document}

@@ -1,0 +1,189 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Polígono Regular</div>
+                        <div class="tr-section-sub">Todos os lados e ângulos iguais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>polígono regular</strong> tem todos os lados congruentes e todos os ângulos internos congruentes.
+                    É ao mesmo tempo equilátero (lados iguais) e equiângulo (ângulos iguais).
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span>Triângulo equilátero (\(n=3\)) — lados e ângulos de 60°</span>
+                        <span>Quadrado (\(n=4\)) — lados iguais e ângulos de 90°</span>
+                        <span>Pentágono regular (\(n=5\)), hexágono (\(n=6\)), octógono (\(n=8\))…</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOMA DOS ÂNGULOS INTERNOS -->
+            <div class="tr-section" id="sec-angulos-internos">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">S<sub>i</sub></div>
+                    <div>
+                        <div class="tr-section-title">Soma dos Ângulos Internos</div>
+                        <div class="tr-section-sub">\(S_i = (n-2) \times 180°\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\displaystyle S_i = (n - 2) \times 180°\]
+                    Para um polígono regular, cada ângulo interno mede \(\dfrac{(n-2) \times 180°}{n}\).
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        <table style="border-collapse:collapse;width:100%;font-size:14px;">
+                            <tr style="background:#f1f5f9;font-weight:bold;">
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Polígono</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">\(n\)</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">\(S_i\)</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Ângulo</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Triângulo</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">3</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">180°</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">60°</td>
+                            </tr>
+                            <tr style="background:#f8fafc;">
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Quadrado</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">4</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">360°</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">90°</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Pentágono</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">5</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">540°</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">108°</td>
+                            </tr>
+                            <tr style="background:#f8fafc;">
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Hexágono</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">6</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">720°</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">120°</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">Octógono</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">8</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">1080°</td>
+                                <td style="padding:6px 10px;border:1px solid #e2e8f0;">135°</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÂNGULO EXTERNO -->
+            <div class="tr-section" id="sec-angulo-externo">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">S<sub>e</sub></div>
+                    <div>
+                        <div class="tr-section-title">Ângulo Externo</div>
+                        <div class="tr-section-sub">Soma sempre 360°</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <img src="poligono-angulos.svg" alt="Ângulos interno e externo" width="200" height="200" style="display:inline-block;"/>
+                </div>
+                <div class="tr-rule">
+                    O ângulo externo é suplementar ao interno: \(\alpha_e = 180° - \alpha_i\).
+                    A soma de todos os ângulos externos de qualquer polígono convexo é sempre:
+                    \[\displaystyle S_e = 360°\]
+                    Cada ângulo externo de um polígono regular: \(\alpha_e = \dfrac{360°}{n}\)
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Hexágono: \(\alpha_e = 360°/6 = 60°\); \(\alpha_i = 120°\) ✓</span>
+                        <span>Octógono: \(\alpha_e = 360°/8 = 45°\); \(\alpha_i = 135°\) ✓</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APÓTEMA E ÁREA -->
+            <div class="tr-section" id="sec-apotema">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">a</div>
+                    <div>
+                        <div class="tr-section-title">Apótema e Área</div>
+                        <div class="tr-section-sub">Distância do centro ao lado; \(A = \frac{P \cdot a}{2}\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>apótema</strong> (\(a\)) é a distância do centro ao ponto médio de um lado.
+                    Ele é perpendicular ao lado e pode ser calculado pelo triângulo retângulo formado
+                    pelo centro, pelo vértice e pelo ponto médio do lado.
+                    <br/><br/>
+                    A área do polígono regular é:
+                    \[\displaystyle A = \frac{P \cdot a}{2}\]
+                    onde \(P = n \cdot l\) é o perímetro e \(l\) é o comprimento do lado.
+                </div>
+                <h4>Exemplo — hexágono regular com lado \(l = 4\,\text{cm}\)</h4>
+                <div style="text-align:center;margin:1rem 0;">
+                    <img src="hexagono-apotema.svg" alt="Hexágono com apótema" width="200" height="200" style="display:inline-block;"/>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Apótema: \(a = \dfrac{l\sqrt{3}}{2} = \dfrac{4\sqrt{3}}{2} = 2\sqrt{3}\,\text{cm}\)</span>
+                        <span>Perímetro: \(P = 6 \times 4 = 24\,\text{cm}\)</span>
+                        <span>\(A = \dfrac{24 \times 2\sqrt{3}}{2} = 24\sqrt{3} \approx 41{,}57\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HEXÁGONO REGULAR — CASO ESPECIAL -->
+            <div class="tr-section" id="sec-hexagono">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">⬡</div>
+                    <div>
+                        <div class="tr-section-title">Hexágono Regular</div>
+                        <div class="tr-section-sub">Caso especial: lado = raio</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    No hexágono regular, o <strong>lado é igual ao raio</strong> da circunferência circunscrita.
+                    Isso torna os cálculos particularmente simples:
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(l = R\) (raio da circunscrita)</span>
+                        <span>Apótema: \(a = \dfrac{l\sqrt{3}}{2}\)</span>
+                        <span>Área: \(A = \dfrac{3\sqrt{3}}{2}\,l^2\)</span>
+                        <span>Para \(l = 6\): \(A = \dfrac{3\sqrt{3}}{2} \times 36 = 54\sqrt{3} \approx 93{,}5\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    O hexágono regular divide-se em 6 triângulos equiláteros congruentes com lado \(l\).
+                    A área de cada triângulo é \(\dfrac{\sqrt{3}}{4}\,l^2\), logo a área total é \(6 \times \dfrac{\sqrt{3}}{4}\,l^2 = \dfrac{3\sqrt{3}}{2}\,l^2\).
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

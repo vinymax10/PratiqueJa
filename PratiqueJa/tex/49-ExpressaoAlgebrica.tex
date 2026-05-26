@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Expressões Algébricas}}
+\end{center}
+
+\begin{multicols}{2}
+
+% ── DEFINIÇÃO ────────────────────────────────────────────────────────────────
+\TW{Definição}
+
+Uma \textbf{expressão algébrica} combina números e letras (variáveis) pelas quatro operações.
+Cada parte separada por $+$ ou $-$ é um \textbf{termo}.
+
+\TM{Terminologia}
+
+\begin{itemize}
+  \item \textbf{Variável:} letra com valor desconhecido — $x$, $y$, $a$
+  \item \textbf{Constante:} número fixo — $3$, $-7$, $\tfrac{1}{2}$
+  \item \textbf{Coeficiente:} número que multiplica a variável — em $5x^2$, é 5
+  \item \textbf{Parte literal:} variável(is) com expoente — em $5x^2$, é $x^2$
+  \item \textbf{Monômio:} 1 termo \quad \textbf{Binômio:} 2 \quad \textbf{Trinômio:} 3
+\end{itemize}
+
+\TM{Exemplos}
+
+$3x + 2$ \hfill (binômio)
+
+$4x^2 - 3x + 7$ \hfill (trinômio)
+
+$-\dfrac{2}{5}ab^2$ \hfill (monômio)
+
+% ── VALOR NUMÉRICO ───────────────────────────────────────────────────────────
+\TW{Valor Numérico}
+
+Substitua cada variável pelo valor dado e calcule seguindo a hierarquia das operações.
+
+\TM{Exemplo 1 — $E(x) = 2x^2 - 3x + 1$ para $x = 2$}
+
+\M{
+  E(2) &= 2 \cdot 4 - 3 \cdot 2 + 1 = 8 - 6 + 1 = \boxed{3}
+}
+
+\TM{Exemplo 2 — $E(a,b) = a^2 + 2ab$ para $a=3$, $b=-1$}
+
+\M{
+  &= 9 + 2(3)(-1) = 9 - 6 = \boxed{3}
+}
+
+% ── TERMOS SEMELHANTES ────────────────────────────────────────────────────────
+\TW{Termos Semelhantes}
+
+Termos são \textbf{semelhantes} quando têm exatamente a mesma parte literal.
+Só eles podem ser somados — opera-se os coeficientes.
+
+\TM{Exemplo — simplificar}
+
+\M{
+  5x^2 - 3x + 2x^2 + 7x - 1 &= 7x^2 + 4x - 1
+}
+
+\TM{Soma de polinômios}
+
+\M{
+  (3x^2+2x-5)+(x^2-4x+3) &= 4x^2 - 2x - 2
+}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small $3x^2$ e $3x$ \textbf{não} são semelhantes — partes literais diferentes.
+}}
+
+% ── MULTIPLICAÇÃO DE MONÔMIOS ─────────────────────────────────────────────────
+\TW{Multiplicação de Monômios}
+
+Multiplique os \textbf{coeficientes} e some os \textbf{expoentes} das variáveis iguais.
+
+$3x^2 \times 4x^3 = 12x^5$
+
+$(-2ab^2)(5a^2b) = -10a^3b^3$
+
+$2x \times 3y = 6xy$
+
+% ── DISTRIBUTIVA ─────────────────────────────────────────────────────────────
+\TW{Propriedade Distributiva}
+
+\Formula{a(b+c) = ab + ac}
+
+Atenção ao sinal quando o fator externo é negativo.
+
+\TM{Exemplos}
+
+$3x(2x-5) = 6x^2 - 15x$
+
+$-2(x^2-3x+1) = -2x^2+6x-2$
+
+\TM{Expandir e simplificar}
+
+\M{
+  2(x+3) - 3(x-1) &= 2x+6-3x+3 = -x+9
+}
+
+% ── APLICAÇÕES ───────────────────────────────────────────────────────────────
+\TW{Aplicações Contextualizadas}
+
+\TM{Área de retângulo — largura $x$, comp. $2x+3$}
+
+\M{
+  A &= x(2x+3) = 2x^2+3x
+}
+
+Para $x=4$: $A = 32+12 = \boxed{44}$
+
+\TM{Perímetro — lados $a$, $a+2$, $2a-1$}
+
+\M{
+  P &= a+(a+2)+(2a-1) = 4a+1
+}
+
+\end{multicols}
+\input{rodape}
+\end{document}

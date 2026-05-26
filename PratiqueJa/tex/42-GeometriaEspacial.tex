@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Geometria Espacial}}
+\end{center}
+
+\begin{multicols}{2}
+
+% ── PRISMAS ────────────────────────────────────────────────────────────────
+\TW{Prismas}
+
+Um \textbf{prisma} é um sólido com duas bases congruentes e paralelas (polígonos) unidas
+por faces laterais retangulares. O nome vem do formato da base: triangular, quadrangular etc.
+
+Sendo $P_{\text{base}}$ o perímetro da base e $h$ a altura:
+
+\Formula{A_{\text{lat}} = P_{\text{base}} \times h}
+\vspace{-8pt}
+\Formula{A_{\text{tot}} = A_{\text{lat}} + 2\,A_{\text{base}}}
+\vspace{-8pt}
+\Formula{V = A_{\text{base}} \times h}
+
+\TM{Exemplo — caixa $5 \times 3 \times 4$ cm:}
+
+$A_{\text{base}} = 15$ cm² \; $P_{\text{base}} = 16$ cm
+
+$A_{\text{lat}} = 16 \times 4 = 64$ cm² \; $A_{\text{tot}} = 94$ cm²
+
+$V = 15 \times 4 = \boxed{60\;\text{cm}^3}$
+
+\TM{Prisma de base equilátera — lado 6 cm, $h = 10$ cm:}
+
+$A_{\text{base}} = \dfrac{\sqrt{3}}{4} \times 36 = 9\sqrt{3}$ cm²
+
+$V = 9\sqrt{3} \times 10 = 90\sqrt{3} \approx 155{,}9\;\text{cm}^3$
+
+% ── PIRÂMIDES ──────────────────────────────────────────────────────────────
+\TW{Pirâmides}
+
+Uma \textbf{pirâmide} tem base poligonal e faces triangulares laterais que convergem
+para o \textbf{ápice}. A \textbf{apótema} $a_p$ é a altura de uma face triangular lateral.
+
+\Formula{A_{\text{lat}} = \dfrac{P_{\text{base}} \times a_p}{2}}
+\vspace{-8pt}
+\Formula{A_{\text{tot}} = A_{\text{lat}} + A_{\text{base}}}
+\vspace{-8pt}
+\Formula{V = \dfrac{A_{\text{base}} \times h}{3}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Regra:} o volume da pirâmide é sempre $\tfrac{1}{3}$ do volume do prisma
+de mesma base e altura — fato muito cobrado no ENEM.
+}}
+
+\TM{Exemplo — base quadrada 4 cm, $h = 3$ cm:}
+
+Apótema da base (do centro ao meio do lado): 2 cm
+
+$a_p = \sqrt{3^2 + 2^2} = \sqrt{13}$ cm
+
+$A_{\text{lat}} = \dfrac{16\sqrt{13}}{2} = 8\sqrt{13} \approx 28{,}8\;\text{cm}^2$
+
+$V = \dfrac{16 \times 3}{3} = \boxed{16\;\text{cm}^3}$
+
+% ── CILINDRO ───────────────────────────────────────────────────────────────
+\TW{Cilindro}
+
+Duas bases circulares de raio $r$ e altura $h$. A superfície lateral é um retângulo
+ao "desenrolar" (base $2\pi r$, altura $h$):
+
+\Formula{A_{\text{lat}} = 2\pi r h}
+\vspace{-8pt}
+\Formula{A_{\text{tot}} = 2\pi r\,(h + r)}
+\vspace{-8pt}
+\Formula{V = \pi r^2 h}
+
+\TM{Exemplo — $r = 3$ cm, $h = 10$ cm:}
+
+$A_{\text{lat}} = 2\pi \cdot 3 \cdot 10 = 60\pi\;\text{cm}^2$
+
+$A_{\text{tot}} = 2\pi \cdot 3 \cdot 13 = 78\pi\;\text{cm}^2$
+
+$V = \pi \cdot 9 \cdot 10 = 90\pi \approx 282{,}7\;\text{cm}^3$
+
+\TM{Exemplo — $V = 200\pi\;\text{cm}^3$, $r = 5$ cm. Qual $h$?}
+
+$200\pi = 25\pi h \;\Rightarrow\; h = \boxed{8\;\text{cm}}$
+
+% ── CONE ───────────────────────────────────────────────────────────────────
+\TW{Cone}
+
+Base circular de raio $r$, altura $h$ e \textbf{geratriz} $g$ (apótema):
+
+\Formula{g = \sqrt{r^2 + h^2}}
+\vspace{-8pt}
+\Formula{A_{\text{lat}} = \pi r g}
+\vspace{-8pt}
+\Formula{A_{\text{tot}} = \pi r\,(g + r)}
+\vspace{-8pt}
+\Formula{V = \dfrac{\pi r^2 h}{3}}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small $V_{\text{cone}} = \dfrac{1}{3}\,V_{\text{cilindro}}$ de mesma base e altura
+— mesma relação da pirâmide com o prisma.
+}}
+
+\TM{Exemplo — $r = 6$ cm, $h = 8$ cm:}
+
+$g = \sqrt{36+64} = \sqrt{100} = 10$ cm
+
+$A_{\text{lat}} = \pi \cdot 6 \cdot 10 = 60\pi$ cm²
+
+$A_{\text{tot}} = \pi \cdot 6 \cdot 16 = 96\pi \approx 301{,}6$ cm²
+
+$V = \dfrac{\pi \cdot 36 \cdot 8}{3} = 96\pi \approx 301{,}6\;\text{cm}^3$
+
+% ── ESFERA ─────────────────────────────────────────────────────────────────
+\TW{Esfera}
+
+Conjunto de todos os pontos do espaço à distância $r$ (raio) do centro.
+
+\Formula{A_{\text{sup}} = 4\pi r^2}
+\vspace{-8pt}
+\Formula{V = \dfrac{4\pi r^3}{3}}
+
+\TM{Exemplo — $r = 3$ cm:}
+
+$A_{\text{sup}} = 4\pi \cdot 9 = 36\pi \approx 113{,}1$ cm²
+
+$V = \dfrac{4\pi \cdot 27}{3} = 36\pi \approx 113{,}1$ cm³
+
+\TM{Exemplo — $V = 288\pi$ cm³. Qual o raio?}
+
+$\dfrac{4\pi r^3}{3} = 288\pi \;\Rightarrow\; r^3 = 216 \;\Rightarrow\; r = \boxed{6\;\text{cm}}$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small A área da esfera ($4\pi r^2$) é exatamente 4 vezes a área do círculo máximo ($\pi r^2$).
+}}
+
+% ── SÓLIDOS DE REVOLUÇÃO ───────────────────────────────────────────────────
+\TW{Sólidos de Revolução}
+
+Gerados pela rotação de uma figura plana em torno de um eixo:
+
+$\bullet$ Retângulo girado em torno de um lado $\;\rightarrow\;$ \textbf{cilindro}
+
+$\bullet$ Triângulo retângulo girado em torno de um cateto $\;\rightarrow\;$ \textbf{cone}
+
+\TM{Exemplo — retângulo $3 \times 5$ cm girando em torno do lado de 5 cm:}
+
+Cilindro com $r = 3$, $h = 5$:
+
+$V = \pi \cdot 9 \cdot 5 = 45\pi\;\text{cm}^3$
+
+$A_{\text{tot}} = 2\pi \cdot 3 \cdot (5+3) = 48\pi\;\text{cm}^2$
+
+\TM{Triângulo retângulo catetos 3 e 4 cm girando em torno do cateto de 4:}
+
+Cone com $r = 3$, $h = 4$: \quad $g = \sqrt{9+16} = 5$ cm
+
+$V = \dfrac{\pi \cdot 9 \cdot 4}{3} = 12\pi\;\text{cm}^3$
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

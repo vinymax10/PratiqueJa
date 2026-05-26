@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Expressão Numérica}}
+\end{center}
+
+\begin{multicols}{2}
+
+% ── HIERARQUIA DAS OPERAÇÕES ────────────────────────────────────────────────
+\TW{Hierarquia das Operações}
+
+Ao calcular uma expressão numérica, as operações obedecem à seguinte \textbf{ordem de prioridade}:
+
+\begin{enumerate}
+  \item \textbf{Potenciação e Radiciação}
+  \item \textbf{Multiplicação e Divisão}
+  \item \textbf{Adição e Subtração}
+\end{enumerate}
+
+Operações de mesma prioridade são resolvidas da \textbf{esquerda para a direita}.
+
+% ── AGRUPADORES ─────────────────────────────────────────────────────────────
+\TW{Parênteses, Colchetes e Chaves}
+
+Quando há agrupadores, resolva \textbf{de dentro para fora}:
+primeiro os \textbf{parênteses} ( ), depois os \textbf{colchetes} [ ], e por fim as \textbf{chaves} \{ \}.
+
+\TM{Exemplo}
+
+\M{
+  \{3 \times [2 + (4-1)]\} + 5 &= \{3 \times [2+3]\} + 5 \\
+  &= \{3 \times 5\} + 5 \\
+  &= 15 + 5 = \boxed{20}
+}
+
+% ── EXPRESSÕES SEM AGRUPADORES ──────────────────────────────────────────────
+\TW{Expressões com as 4 Operações}
+
+\TM{Exemplo 1 — sem agrupadores}
+
+\M{
+  8 + 6 \div 2 - 3 \times 2 &= 8 + 3 - 6 = \boxed{5}
+}
+
+{\small\textit{Divisão e multiplicação resolvidas antes da adição/subtração.}}
+
+\TM{Exemplo 2 — com parênteses}
+
+\M{
+  (8+6) \div 2 - 3 \times 2 &= 14 \div 2 - 6 = 7 - 6 = \boxed{1}
+}
+
+% ── POTENCIAÇÃO ─────────────────────────────────────────────────────────────
+\TW{Expressões com Potenciação}
+
+\TM{Exemplo 1}
+
+\M{
+  2^3 + 4 \times 2 - 5 &= 8 + 8 - 5 = \boxed{11}
+}
+
+\TM{Exemplo 2 — agrupadores e potência}
+
+\M{
+  [3^2 - (4+1)] \times 2 &= [9 - 5] \times 2 = 4 \times 2 = \boxed{8}
+}
+
+% ── EXEMPLOS RESOLVIDOS ─────────────────────────────────────────────────────
+\TW{Exemplos Resolvidos}
+
+\TM{Exercício 1}
+
+Calcule $\{[(12 \div 4) + 3^2] \times 2\} - 10$.
+
+\M{
+  &= \{[3 + 9] \times 2\} - 10 \\
+  &= \{12 \times 2\} - 10 \\
+  &= 24 - 10 = \boxed{14}
+}
+
+\TM{Exercício 2}
+
+Calcule $5 + 3 \times (2^2 - 1) \div 3$.
+
+\M{
+  &= 5 + 3 \times (4-1) \div 3 \\
+  &= 5 + 3 \times 3 \div 3 \\
+  &= 5 + 9 \div 3 \\
+  &= 5 + 3 = \boxed{8}
+}
+
+\TM{Exercício 3 — completo}
+
+Calcule $2^4 - \{3 \times [10 \div (8 - 3)]\} + 1$.
+
+\M{
+  &= 16 - \{3 \times [10 \div 5]\} + 1 \\
+  &= 16 - \{3 \times 2\} + 1 \\
+  &= 16 - 6 + 1 = \boxed{11}
+}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Erro comum:} calcular da esquerda para a direita ignorando a hierarquia.
+Exemplo: $8 + 6 \div 2 \neq 7$. Correto: $6 \div 2 = 3$ primeiro, depois $8 + 3 = 11$.
+}}
+
+\end{multicols}
+\input{rodape}
+\end{document}

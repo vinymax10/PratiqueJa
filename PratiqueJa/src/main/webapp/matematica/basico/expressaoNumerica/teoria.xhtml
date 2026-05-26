@@ -1,0 +1,161 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- HIERARQUIA DAS OPERAÇÕES -->
+            <div class="tr-section" id="sec-hierarquia">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Hierarquia das Operações</div>
+                        <div class="tr-section-sub">A ordem em que as operações são realizadas</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Ao calcular uma expressão numérica, as operações <strong>não</strong> são realizadas da esquerda para a direita — elas obedecem a uma <strong>ordem de prioridade</strong>:
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>1º</strong> Potenciação e Radiciação</span>
+                        <span><strong>2º</strong> Multiplicação e Divisão</span>
+                        <span><strong>3º</strong> Adição e Subtração</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    Operações de mesma prioridade são resolvidas da <strong>esquerda para a direita</strong>.
+                </div>
+            </div>
+
+            <!-- PARÊNTESES, COLCHETES E CHAVES -->
+            <div class="tr-section" id="sec-agrupadores">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">( )</div>
+                    <div>
+                        <div class="tr-section-title">Parênteses, Colchetes e Chaves</div>
+                        <div class="tr-section-sub">Agrupadores alteram a prioridade</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Quando há agrupadores, resolva <strong>de dentro para fora</strong>:
+                    primeiro os <strong>parênteses ( )</strong>, depois os <strong>colchetes [ ]</strong> e por fim as <strong>chaves { }</strong>.
+                    O que está dentro de um agrupador tem prioridade máxima.
+                </div>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\{3 \times [2 + (4 - 1)]\} + 5\)</span>
+                        <span>\(= \{3 \times [2 + 3]\} + 5\)</span>
+                        <span>\(= \{3 \times 5\} + 5\)</span>
+                        <span>\(= 15 + 5 = \)<span class="hl">20</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPRESSÕES COM AS 4 OPERAÇÕES -->
+            <div class="tr-section" id="sec-expressoes">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">±×÷</div>
+                    <div>
+                        <div class="tr-section-title">Expressões com as 4 Operações</div>
+                        <div class="tr-section-sub">Aplicando a hierarquia correta</div>
+                    </div>
+                </div>
+                <h4>Exemplo 1 — sem agrupadores</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(8 + 6 \div 2 - 3 \times 2\)</span>
+                        <span>\(= 8 + 3 - 6\) &nbsp;<em style="font-size:12px;color:#9ca3af">(divisão e multiplicação primeiro)</em></span>
+                        <span>\(= 11 - 6 = \)<span class="hl">5</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — com parênteses</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\((8 + 6) \div 2 - 3 \times 2\)</span>
+                        <span>\(= 14 \div 2 - 3 \times 2\)</span>
+                        <span>\(= 7 - 6 = \)<span class="hl">1</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPRESSÕES COM POTENCIAÇÃO -->
+            <div class="tr-section" id="sec-potenciacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">aⁿ</div>
+                    <div>
+                        <div class="tr-section-title">Expressões com Potenciação</div>
+                        <div class="tr-section-sub">Potências têm prioridade máxima</div>
+                    </div>
+                </div>
+                <h4>Exemplo 1</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(2^3 + 4 \times 2 - 5\)</span>
+                        <span>\(= 8 + 4 \times 2 - 5\) &nbsp;<em style="font-size:12px;color:#9ca3af">(potenciação primeiro)</em></span>
+                        <span>\(= 8 + 8 - 5 = \)<span class="hl">11</span></span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — com agrupadores e potências</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\([3^2 - (4 + 1)] \times 2\)</span>
+                        <span>\(= [9 - 5] \times 2\)</span>
+                        <span>\(= 4 \times 2 = \)<span class="hl">8</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXEMPLOS CONTEXTUALIZADOS -->
+            <div class="tr-section" id="sec-contexto">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Exemplos Resolvidos</div>
+                        <div class="tr-section-sub">Exercícios completos com resolução</div>
+                    </div>
+                </div>
+                <h4>Exercício 1</h4>
+                <p>Calcule: \(\{[(12 \div 4) + 3^2] \times 2\} - 10\)</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(= \{[3 + 9] \times 2\} - 10\) &nbsp;<em style="font-size:12px;color:#9ca3af">(parênteses e potência)</em></span>
+                        <span>\(= \{12 \times 2\} - 10\)</span>
+                        <span>\(= 24 - 10 = \)<span class="hl">14</span></span>
+                    </div>
+                </div>
+                <h4>Exercício 2</h4>
+                <p>Calcule: \(5 + 3 \times (2^2 - 1) \div 3\)</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(= 5 + 3 \times (4 - 1) \div 3\)</span>
+                        <span>\(= 5 + 3 \times 3 \div 3\)</span>
+                        <span>\(= 5 + 9 \div 3\)</span>
+                        <span>\(= 5 + 3 = \)<span class="hl">8</span></span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.tr-content -->
+    </div><!-- /.tr-layout -->
+
+</ui:decorate>

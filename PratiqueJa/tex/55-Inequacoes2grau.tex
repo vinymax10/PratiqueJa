@@ -1,0 +1,107 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Inequações do 2º Grau}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+% ── REVISÃO ──────────────────────────────────────────────────────────────────
+\TW{Revisão — Inequações do 1º Grau}
+
+As mesmas regras valem, com uma exceção crucial:
+multiplicar ou dividir por um número \textbf{negativo} \textbf{inverte} o sentido.
+
+$3x - 6 > 0 \Rightarrow x > 2 \Rightarrow x \in (2, +\infty)$
+
+$-2x + 4 \leq 0 \Rightarrow x \geq 2 \Rightarrow x \in [2, +\infty)$
+
+% ── MÉTODO GRÁFICO ────────────────────────────────────────────────────────────
+\TW{Método Gráfico}
+
+\textbf{Regra de ouro} — dados zeros $x_1 < x_2$:
+
+$a > 0$ (↑): $f < 0$ \emph{entre} as raízes; $f > 0$ \emph{fora}.
+
+$a < 0$ (↓): $f > 0$ \emph{entre} as raízes; $f < 0$ \emph{fora}.
+
+% ── PASSO A PASSO ────────────────────────────────────────────────────────────
+\TW{Passo a Passo}
+
+\begin{enumerate}
+  \item Passe tudo para um lado: $ax^2 + bx + c \;\square\; 0$
+  \item Calcule $\Delta$ e encontre as raízes $x_1 \leq x_2$
+  \item Analise o sinal de $a$ (concavidade)
+  \item Monte a solução conforme o sinal pedido
+\end{enumerate}
+
+\TM{Exemplo 1 — $x^2 - 5x + 6 \leq 0$}
+
+$\Delta = 25 - 24 = 1 \Rightarrow x_1 = 2,\; x_2 = 3$
+
+$a = 1 > 0$ → parábola ↑ → negativo \emph{entre} as raízes
+
+$$\boxed{x \in [2,\, 3]}$$
+
+\TM{Exemplo 2 — $-x^2 + 4x - 3 > 0$}
+
+$\Delta = 16-12 = 4 \Rightarrow x_1=1,\; x_2=3$
+
+$a = -1 < 0$ → parábola ↓ → positivo entre as raízes
+
+$$\boxed{x \in (1,\, 3)}$$
+
+% ── CASOS ESPECIAIS ───────────────────────────────────────────────────────────
+\TW{Casos Especiais — $\Delta \leq 0$}
+
+\textbf{$\Delta < 0$}: parábola não cruza o eixo $x$. Sinal constante igual ao de $a$.
+
+$x^2 + 1 > 0$: $a = 1 > 0$ e $\Delta < 0$ $\Rightarrow$ $f > 0$ sempre.
+$$\boxed{x \in \mathbb{R}}$$
+
+$x^2 + 1 < 0$: impossível.
+$$\boxed{S = \emptyset}$$
+
+\textbf{$\Delta = 0$}: raiz dupla $x_v$.
+
+$(x-3)^2 \leq 0$: $(x-3)^2 \geq 0$ sempre; igualdade só em $x=3$.
+$$\boxed{x = 3}$$
+
+% ── INEQUAÇÃO FATORADA ────────────────────────────────────────────────────────
+\TW{Inequação Fatorada — Tabela de Sinais}
+
+\TM{Exemplo — $(x-1)(x-4) \leq 0$}
+
+Zeros: $x_1 = 1$, $x_2 = 4$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & $(-\infty,1)$ & $1$ & $(1,4)$ & $4$ & $(4,+\infty)$ \\ \hline
+$(x-1)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\ \hline
+$(x-4)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\ \hline
+\textbf{Prod.} & $+$ & $0$ & \textcolor{verde}{$-$} & $0$ & $+$ \\ \hline
+\end{tabular}
+\end{center}
+
+Produto $\leq 0$ em $[1, 4]$ \checkmark
+
+$$\boxed{x \in [1,\, 4]}$$
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Macete:} o produto de dois fatores é negativo quando eles têm
+sinais opostos. Localize os zeros, teste um ponto em cada intervalo.
+}}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

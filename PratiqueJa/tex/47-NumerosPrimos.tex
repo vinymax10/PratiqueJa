@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+\setstretch{1.3}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Números Primos}}
+\end{center}
+
+\begin{multicols}{2}
+
+% ── DEFINIÇÃO ────────────────────────────────────────────────────────────────
+\TW{Primos e Compostos}
+
+Um número natural maior que 1 é \textbf{primo} se seus únicos divisores são \textbf{1 e ele mesmo}.
+Caso contrário, é \textbf{composto}.
+
+\TM{Exemplos}
+
+\textbf{Primos:} 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37\ldots
+
+\textbf{Compostos:} 4, 6, 8, 9, 10, 12, 14, 15, 16, 18\ldots
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Convenções:} o número 1 não é primo nem composto.
+O 2 é o único número primo par.
+}}
+
+% ── CRIVO DE ERATÓSTENES ─────────────────────────────────────────────────────
+\TW{Crivo de Eratóstenes}
+
+Para encontrar todos os primos até $N$:
+
+\begin{enumerate}
+  \item Liste todos os inteiros de 2 a $N$.
+  \item Tome $p = 2$. Marque como compostos todos os múltiplos de $p$ maiores que $p$.
+  \item Avance para o próximo número não marcado e repita.
+  \item Pare quando $p^2 > N$. Os restantes são primos.
+\end{enumerate}
+
+\TM{Primos até 30}
+
+Eliminando múltiplos de 2, 3 e 5:
+$$\{2,\;3,\;5,\;7,\;11,\;13,\;17,\;19,\;23,\;29\}$$
+
+% ── DECOMPOSIÇÃO ─────────────────────────────────────────────────────────────
+\TW{Decomposição em Fatores Primos}
+
+Todo número composto pode ser escrito como \textbf{produto de fatores primos}
+(Teorema Fundamental da Aritmética). Divida pelo menor primo que o divide
+sucessivamente até chegar em 1.
+
+\TM{Exemplo — 60}
+
+\begin{tabular}{r|l}
+60 & 2 \\
+30 & 2 \\
+15 & 3 \\
+5  & 5 \\
+1  &   \\
+\end{tabular}
+
+$$60 = 2^2 \times 3 \times 5$$
+
+\TM{Exemplo — 84}
+
+\begin{tabular}{r|l}
+84 & 2 \\
+42 & 2 \\
+21 & 3 \\
+7  & 7 \\
+1  &   \\
+\end{tabular}
+
+$$84 = 2^2 \times 3 \times 7$$
+
+% ── APLICAÇÃO: MMC E MDC ─────────────────────────────────────────────────────
+\TW{Aplicação: MMC e MDC}
+
+Com a decomposição em fatores primos:
+
+$\bullet$ \textbf{MDC}: produto dos fatores \emph{comuns} com o \emph{menor} expoente.
+
+$\bullet$ \textbf{MMC}: produto de \emph{todos} os fatores com o \emph{maior} expoente.
+
+\TM{Exemplo — MDC e MMC de 60 e 84}
+
+$60 = 2^2 \times 3 \times 5$ \quad $84 = 2^2 \times 3 \times 7$
+
+\M{
+  \text{MDC} &= 2^2 \times 3 = \boxed{12} \\
+  \text{MMC} &= 2^2 \times 3 \times 5 \times 7 = \boxed{420}
+}
+
+% ── TESTE DE PRIMALIDADE ─────────────────────────────────────────────────────
+\TW{Teste de Primalidade}
+
+Para verificar se $n$ é primo, teste a divisibilidade por todos os primos
+$p \leq \sqrt{n}$. Se nenhum divide $n$, então $n$ é primo.
+
+\TM{Exemplo — 97 é primo?}
+
+$\sqrt{97} \approx 9{,}8$ → testar 2, 3, 5, 7.
+
+97 não é divisível por nenhum $\;\Rightarrow\;$ \textbf{97 é primo}. \checkmark
+
+\TM{Exemplo — 91 é primo?}
+
+$\sqrt{91} \approx 9{,}5$ → testar 2, 3, 5, 7.
+
+$91 = 7 \times 13$ $\;\Rightarrow\;$ \textbf{91 é composto}. \checkmark
+
+\end{multicols}
+\input{rodape}
+\end{document}

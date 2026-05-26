@@ -1,0 +1,171 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Números Primos e Compostos</div>
+                        <div class="tr-section-sub">Divisores e classificação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um número natural maior que 1 é <strong>primo</strong> se seus únicos divisores são
+                    <strong>1 e ele mesmo</strong>. Caso contrário, é <strong>composto</strong>
+                    (possui pelo menos um divisor além de 1 e si mesmo).
+                </div>
+                <div class="tr-examples" style="margin-top:8px;">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Primos:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31…</span>
+                        <span><strong>Compostos:</strong> 4, 6, 8, 9, 10, 12, 14, 15…</span>
+                        <span><strong>Observação:</strong> 1 não é primo nem composto por convenção.</span>
+                        <span>2 é o único número primo par.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRIVO DE ERATÓSTENES -->
+            <div class="tr-section" id="sec-crivo">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Crivo</div>
+                    <div>
+                        <div class="tr-section-title">Crivo de Eratóstenes</div>
+                        <div class="tr-section-sub">Método para encontrar todos os primos até N</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para encontrar todos os primos até \(N\):
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>1. Liste todos os inteiros de 2 até \(N\).</span>
+                        <span>2. Comece com \(p = 2\). Marque como compostos todos os múltiplos de \(p\) maiores que \(p\).</span>
+                        <span>3. Avance para o próximo número não marcado e repita.</span>
+                        <span>4. Pare quando \(p^2 &gt; N\). Os não marcados são primos.</span>
+                    </div>
+                </div>
+                <h4>Primos até 30</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex">
+                        Eliminando múltiplos de 2, 3, 5:
+                        <span class="hl">2, 3, 5, 7, 11, 13, 17, 19, 23, 29</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DECOMPOSIÇÃO EM FATORES PRIMOS -->
+            <div class="tr-section" id="sec-decomposicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">÷p</div>
+                    <div>
+                        <div class="tr-section-title">Decomposição em Fatores Primos</div>
+                        <div class="tr-section-sub">Todo composto é produto de primos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Todo número composto pode ser escrito como produto de fatores primos
+                    (Teorema Fundamental da Aritmética). Divida successivamente pelo menor
+                    primo que o divide até chegar em 1.
+                </div>
+                <h4>Exemplo — decompor 60</h4>
+                <div class="fact-wrap">
+                    <table class="fact-table">
+                        <tr><td class="sep">60</td><td>2</td></tr>
+                        <tr><td class="sep">30</td><td>2</td></tr>
+                        <tr><td class="sep">15</td><td>3</td></tr>
+                        <tr><td class="sep">5</td><td>5</td></tr>
+                        <tr class="hline"><td class="sep">1</td><td></td></tr>
+                    </table>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(60 = 2^2 \times 3 \times 5\)</div>
+                </div>
+                <h4>Exemplo — decompor 84</h4>
+                <div class="fact-wrap">
+                    <table class="fact-table">
+                        <tr><td class="sep">84</td><td>2</td></tr>
+                        <tr><td class="sep">42</td><td>2</td></tr>
+                        <tr><td class="sep">21</td><td>3</td></tr>
+                        <tr><td class="sep">7</td><td>7</td></tr>
+                        <tr class="hline"><td class="sep">1</td><td></td></tr>
+                    </table>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex">\(84 = 2^2 \times 3 \times 7\)</div>
+                </div>
+            </div>
+
+            <!-- APLICAÇÃO: MMC E MDC -->
+            <div class="tr-section" id="sec-aplicacao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Aplic.</div>
+                    <div>
+                        <div class="tr-section-title">Aplicação: MMC e MDC</div>
+                        <div class="tr-section-sub">A decomposição como ferramenta</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Com a decomposição em fatores primos, obtemos MMC e MDC de forma direta:
+                    <br/>• <strong>MDC</strong>: produto dos fatores primos <em>comuns</em> com o <em>menor</em> expoente.
+                    <br/>• <strong>MMC</strong>: produto de <em>todos</em> os fatores primos com o <em>maior</em> expoente.
+                </div>
+                <h4>Exemplo — MDC e MMC de 60 e 84</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(60 = 2^2 \times 3 \times 5\)</span>
+                        <span>\(84 = 2^2 \times 3 \times 7\)</span>
+                        <span>MDC: fatores comuns com menor exp.: \(2^2 \times 3 = \)<span class="hl">12</span></span>
+                        <span>MMC: todos os fatores com maior exp.: \(2^2 \times 3 \times 5 \times 7 = \)<span class="hl">420</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TESTES DE PRIMALIDADE -->
+            <div class="tr-section" id="sec-teste">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">?</div>
+                    <div>
+                        <div class="tr-section-title">Teste de Primalidade</div>
+                        <div class="tr-section-sub">Como verificar se um número é primo</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Para verificar se \(n\) é primo, teste a divisibilidade por todos os primos
+                    \(p \leq \sqrt{n}\). Se nenhum divide \(n\), então \(n\) é primo.
+                </div>
+                <h4>Exemplo — verificar 97</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\sqrt{97} \approx 9{,}8\) → testar primos até 9: 2, 3, 5, 7</span>
+                        <span>97 não é divisível por nenhum deles.</span>
+                        <span>Logo, <span class="hl">97 é primo</span>.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.tr-content -->
+    </div><!-- /.tr-layout -->
+
+</ui:decorate>

@@ -1,0 +1,112 @@
+\documentclass[12pt,twoside]{article}
+
+\input{caput}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\includegraphics[width=4cm]{Logo2.png}
+\begin{center}
+    \textbf{\Huge \textcolor{bluebell}{Circunferência e Círculo}}
+\end{center}
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+% ── DEFINIÇÃO ────────────────────────────────────────────────────────────────
+\TW{Definição e Elementos}
+
+A \textbf{circunferência} é o conjunto de pontos equidistantes de um centro — apenas o contorno.
+O \textbf{círculo} inclui o interior.
+
+\TM{Elementos}
+
+\textbf{Raio (r):} do centro a qualquer ponto da circunferência.
+
+\textbf{Diâmetro (d):} corda que passa pelo centro; $d = 2r$.
+
+\textbf{Corda:} segmento com extremos na circunferência.
+
+\textbf{Arco:} parte da circunferência entre dois pontos.
+
+\textbf{Setor circular:} "fatia" limitada por dois raios e um arco.
+
+% ── COMPRIMENTO ──────────────────────────────────────────────────────────────
+\TW{Comprimento da Circunferência}
+
+\Formula{C = 2\pi r = \pi d}
+
+$\pi \approx 3{,}14159\ldots$ (use $\pi \approx 3{,}14$ em cálculos aproximados)
+
+\TM{Exemplos}
+
+$r = 5\,\text{cm}$: $C = 10\pi \approx 31{,}4\,\text{cm}$
+
+$d = 14\,\text{cm}$: $C = 14\pi \approx 44{,}0\,\text{cm}$
+
+% ── ÁREA ─────────────────────────────────────────────────────────────────────
+\TW{Área do Círculo}
+
+\Formula{A = \pi r^2}
+
+\TM{Exemplos}
+
+$r = 3\,\text{m}$: $A = 9\pi \approx 28{,}27\,\text{m}^2$
+
+$d = 10\,\text{cm}$ ($r=5$): $A = 25\pi \approx 78{,}54\,\text{cm}^2$
+
+% ── SETOR CIRCULAR ────────────────────────────────────────────────────────────
+\TW{Arco e Setor Circular}
+
+Um ângulo central $\theta$ (graus) recorta uma proporção $\dfrac{\theta}{360°}$:
+
+\Formula{\ell = \dfrac{\theta}{360} \times 2\pi r}
+
+\Formula{A_s = \dfrac{\theta}{360} \times \pi r^2}
+
+\TM{Exemplo — $r = 6\,\text{cm}$, $\theta = 60°$}
+
+\M{
+  \ell &= \tfrac{60}{360} \times 12\pi = 2\pi \approx 6{,}28\,\text{cm} \\
+  A_s &= \tfrac{60}{360} \times 36\pi = 6\pi \approx 18{,}85\,\text{cm}^2
+}
+
+% ── COROA CIRCULAR ────────────────────────────────────────────────────────────
+\TW{Coroa Circular}
+
+\Formula{A_{\text{coroa}} = \pi(R^2 - r^2)}
+
+onde $R$ é o raio maior e $r$ o raio menor (círculos concêntricos).
+
+\TM{Exemplo — pista: $R = 10\,\text{m}$, $r = 8\,\text{m}$}
+
+\M{
+  A &= \pi(100 - 64) = 36\pi \approx 113{,}1\,\text{m}^2
+}
+
+% ── PROBLEMAS ─────────────────────────────────────────────────────────────────
+\TW{Problemas Contextualizados}
+
+\TM{Pizza — $d = 30\,\text{cm}$, 8 fatias iguais}
+
+$r = 15$; $\theta = 45°$
+
+\M{
+  A_{\text{fatia}} &= \tfrac{45}{360} \times \pi \times 225 = \tfrac{225\pi}{8} \approx 88{,}4\,\text{cm}^2
+}
+
+\TM{Ponteiro — $r = 10\,\text{cm}$, $\theta = 90°$ em 15 min}
+
+\M{
+  \ell &= \tfrac{90}{360} \times 20\pi = 5\pi \approx 15{,}7\,\text{cm}
+}
+
+\fcolorbox{laranja}{white}{\parbox{0.85\linewidth}{
+\small\textbf{Nota:} deixe as respostas em forma de $\pi$ quando o enunciado não pedir aproximação.
+Isso evita erros de arredondamento.
+}}
+
+\end{multicols}
+
+\input{rodape}
+\end{document}

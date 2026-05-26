@@ -384,6 +384,61 @@
                 </div>
             </div>
 
+
+            <!-- BINÔMIO DE NEWTON -->
+            <div class="tr-section" id="sec-binomio">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">BN</div>
+                    <div>
+                        <div class="tr-section-title">Binômio de Newton</div>
+                        <div class="tr-section-sub">Expansão de \((a+b)^n\) com coeficientes binomiais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O <strong>Binômio de Newton</strong> expande \((a+b)^n\) diretamente, sem
+                    multiplicações repetidas. Os coeficientes de cada termo são as combinações
+                    \(\binom{n}{k}\) — os mesmos valores do Triângulo de Pascal na linha \(n\).
+                </div>
+
+                \[
+                    (a + b)^n = \sum_{k=0}^{n} \binom{n}{k}\, a^{n-k}\, b^k
+                    = \binom{n}{0}a^n + \binom{n}{1}a^{n-1}b + \cdots + \binom{n}{n}b^n
+                \]
+
+                <h4>Termo geral</h4>
+                <p>O <strong>\((k+1)\)-ésimo termo</strong> da expansão é:</p>
+                \[
+                    T_{k+1} = \binom{n}{k}\, a^{n-k}\, b^k \qquad (k = 0,\, 1,\, \ldots,\, n)
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Expanda \((x + 2)^4\). Linha \(n = 4\) de Pascal: \(1,\;4,\;6,\;4,\;1\).</span>
+                        <span>\(\binom{4}{0}x^4 + \binom{4}{1}x^3 \cdot 2 + \binom{4}{2}x^2 \cdot 4 + \binom{4}{3}x \cdot 8 + \binom{4}{4} \cdot 16\)</span>
+                        <span>\(= x^4 + 8x^3 + 24x^2 + 32x + 16\)</span>
+                        <span class="hl">\((x+2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Expanda \((2a - b)^3\). Escreva \(b = -b\); Pascal \(n=3\): \(1,\;3,\;3,\;1\).</span>
+                        <span>\((2a)^3 + 3(2a)^2(-b) + 3(2a)(-b)^2 + (-b)^3\)</span>
+                        <span>\(= 8a^3 - 12a^2b + 6ab^2 - b^3\)</span>
+                        <span class="hl">\((2a-b)^3 = 8a^3 - 12a^2b + 6ab^2 - b^3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Determine o 3º termo da expansão de \((x + 3)^6\).</span>
+                        <span>\(T_3 = T_{2+1} \;\Rightarrow\; k = 2\)</span>
+                        <span>\(T_3 = \binom{6}{2}\, x^{6-2}\, 3^2 = 15 \cdot x^4 \cdot 9\)</span>
+                        <span class="hl">\(T_3 = 135x^4\)</span>
+                    </div>
+                </div>
+
+                <div class="tr-note">
+                    <strong>Soma dos coeficientes:</strong> fazendo \(a = b = 1\), obtemos
+                    \((1+1)^n = 2^n\) — confirmando que a soma de cada linha \(n\) do Triângulo
+                    de Pascal é \(2^n\).
+                </div>
+            </div>
+
         </div><!-- /tr-content -->
     </div><!-- /tr-layout -->
 

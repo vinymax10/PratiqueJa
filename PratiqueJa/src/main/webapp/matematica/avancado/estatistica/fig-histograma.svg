@@ -1,0 +1,65 @@
+<svg viewBox="0 0 380 245" xmlns="http://www.w3.org/2000/svg" width="380" height="245"
+     aria-label="Histograma com polígono de frequências para distribuição de notas de 10 alunos">
+
+  <!-- Grid lines -->
+  <line x1="55" y1="160" x2="350" y2="160" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="55" y1="115" x2="350" y2="115" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="55" y1="70"  x2="350" y2="70"  stroke="#1f2937" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="55" y1="25"  x2="350" y2="25"  stroke="#1f2937" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Bars (fi = 1, 2, 4, 2, 1 ; scale 45px/unit) -->
+  <rect x="55"  y="160" width="59" height="45"  fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+  <rect x="114" y="115" width="59" height="90"  fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+  <rect x="173" y="25"  width="59" height="180" fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+  <rect x="232" y="115" width="59" height="90"  fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+  <rect x="291" y="160" width="59" height="45"  fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+
+  <!-- fi labels (just above each bar or inside the tallest) -->
+  <text x="84"  y="155" font-size="12" fill="#6ee7b7" font-family="sans-serif" text-anchor="middle">1</text>
+  <text x="143" y="110" font-size="12" fill="#6ee7b7" font-family="sans-serif" text-anchor="middle">2</text>
+  <text x="202" y="43"  font-size="12" fill="#6ee7b7" font-family="sans-serif" text-anchor="middle">4</text>
+  <text x="261" y="110" font-size="12" fill="#6ee7b7" font-family="sans-serif" text-anchor="middle">2</text>
+  <text x="320" y="155" font-size="12" fill="#6ee7b7" font-family="sans-serif" text-anchor="middle">1</text>
+
+  <!-- Polygon of frequencies (midpoints of bar tops) -->
+  <polyline points="84.5,160 143.5,115 202.5,25 261.5,115 320.5,160"
+            stroke="#fdba74" stroke-width="2" fill="none"/>
+  <circle cx="84.5"  cy="160" r="4" fill="#fdba74"/>
+  <circle cx="143.5" cy="115" r="4" fill="#fdba74"/>
+  <circle cx="202.5" cy="25"  r="4" fill="#fdba74"/>
+  <circle cx="261.5" cy="115" r="4" fill="#fdba74"/>
+  <circle cx="320.5" cy="160" r="4" fill="#fdba74"/>
+
+  <!-- X-axis -->
+  <line x1="55" y1="205" x2="350" y2="205" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="55"  y1="205" x2="55"  y2="209" stroke="#6b7280" stroke-width="1"/>
+  <line x1="114" y1="205" x2="114" y2="209" stroke="#6b7280" stroke-width="1"/>
+  <line x1="173" y1="205" x2="173" y2="209" stroke="#6b7280" stroke-width="1"/>
+  <line x1="232" y1="205" x2="232" y2="209" stroke="#6b7280" stroke-width="1"/>
+  <line x1="291" y1="205" x2="291" y2="209" stroke="#6b7280" stroke-width="1"/>
+  <line x1="350" y1="205" x2="350" y2="209" stroke="#6b7280" stroke-width="1"/>
+  <text x="55"  y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">0</text>
+  <text x="114" y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">2</text>
+  <text x="173" y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">4</text>
+  <text x="232" y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">6</text>
+  <text x="291" y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">8</text>
+  <text x="350" y="220" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="middle">10</text>
+  <text x="202" y="237" font-size="12" fill="#9ca3af" font-family="sans-serif" text-anchor="middle" font-style="italic">nota</text>
+
+  <!-- Y-axis -->
+  <line x1="55" y1="25" x2="55" y2="205" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="50" y="209" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="end">0</text>
+  <text x="50" y="164" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="end">1</text>
+  <text x="50" y="119" font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="end">2</text>
+  <text x="50" y="74"  font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="end">3</text>
+  <text x="50" y="29"  font-size="11" fill="#9ca3af" font-family="sans-serif" text-anchor="end">4</text>
+  <text x="13" y="115" font-size="12" fill="#9ca3af" font-family="sans-serif" text-anchor="middle"
+        transform="rotate(-90, 13, 115)" font-style="italic">fi</text>
+
+  <!-- Legend (upper-right, above short bars) -->
+  <rect x="282" y="42" width="12" height="10" fill="#0f3460" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="298" y="52" font-size="11" fill="#9ca3af" font-family="sans-serif">histograma</text>
+  <line x1="282" y1="67" x2="294" y2="67" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="288" cy="67" r="3" fill="#fdba74"/>
+  <text x="298" y="71" font-size="11" fill="#9ca3af" font-family="sans-serif">polígono</text>
+</svg>

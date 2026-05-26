@@ -1,0 +1,184 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+    <div class="tr-layout">
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO E ELEMENTOS -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">○</div>
+                    <div>
+                        <div class="tr-section-title">Circunferência e Círculo</div>
+                        <div class="tr-section-sub">Definição e elementos fundamentais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>circunferência</strong> é o conjunto de todos os pontos equidistantes de um ponto central — apenas o contorno.
+                    O <strong>círculo</strong> é a região limitada pela circunferência, incluindo o interior.
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <img src="circulo-elementos.svg" alt="Elementos do círculo" width="220" height="220" style="display:inline-block;"/>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Centro (O):</strong> ponto equidistante de todos os pontos da circunferência</span>
+                        <span><strong>Raio (r):</strong> segmento do centro a qualquer ponto da circunferência</span>
+                        <span><strong>Diâmetro (d):</strong> corda que passa pelo centro; \(d = 2r\)</span>
+                        <span><strong>Corda:</strong> segmento com extremos na circunferência (não passa pelo centro)</span>
+                        <span><strong>Arco:</strong> parte da circunferência entre dois pontos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPRIMENTO DA CIRCUNFERÊNCIA -->
+            <div class="tr-section" id="sec-comprimento">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">C</div>
+                    <div>
+                        <div class="tr-section-title">Comprimento da Circunferência</div>
+                        <div class="tr-section-sub">\(C = 2\pi r\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\displaystyle C = 2\pi r = \pi d\]
+                    onde \(\pi \approx 3{,}14159\ldots\) É comum usar \(\pi \approx 3{,}14\) em cálculos aproximados.
+                </div>
+                <h4>Exemplo 1 — raio \(r = 5\,\text{cm}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(C = 2 \times \pi \times 5 = 10\pi \approx 31{,}4\,\text{cm}\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — diâmetro \(d = 14\,\text{cm}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(C = \pi \times 14 = 14\pi \approx 43{,}96\,\text{cm}\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÁREA DO CÍRCULO -->
+            <div class="tr-section" id="sec-area">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">A</div>
+                    <div>
+                        <div class="tr-section-title">Área do Círculo</div>
+                        <div class="tr-section-sub">\(A = \pi r^2\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    \[\displaystyle A = \pi r^2\]
+                </div>
+                <h4>Exemplo 1 — \(r = 3\,\text{m}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \pi \times 3^2 = 9\pi \approx 28{,}27\,\text{m}^2\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — \(d = 10\,\text{cm}\), logo \(r = 5\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \pi \times 25 = 25\pi \approx 78{,}54\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARCO E SETOR CIRCULAR -->
+            <div class="tr-section" id="sec-setor">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">θ</div>
+                    <div>
+                        <div class="tr-section-title">Arco e Setor Circular</div>
+                        <div class="tr-section-sub">Proporção com o ângulo central</div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin:1rem 0;">
+                    <img src="setor-circular.svg" alt="Setor circular" width="200" height="200" style="display:inline-block;"/>
+                </div>
+                <div class="tr-rule">
+                    Um ângulo central \(\theta\) (em graus) recorta do círculo um setor proporcional a \(\theta / 360°\):
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Comprimento do arco:</strong> \(\ell = \dfrac{\theta}{360} \times 2\pi r\)</span>
+                        <span><strong>Área do setor:</strong> \(A_s = \dfrac{\theta}{360} \times \pi r^2\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo — \(r = 6\,\text{cm}\), \(\theta = 60°\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\ell = \dfrac{60}{360} \times 2\pi \times 6 = \dfrac{1}{6} \times 12\pi = 2\pi \approx 6{,}28\,\text{cm}\)</span>
+                        <span>\(A_s = \dfrac{60}{360} \times \pi \times 36 = \dfrac{36\pi}{6} = 6\pi \approx 18{,}85\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COROA CIRCULAR -->
+            <div class="tr-section" id="sec-coroa">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">◎</div>
+                    <div>
+                        <div class="tr-section-title">Coroa Circular</div>
+                        <div class="tr-section-sub">Área entre dois círculos concêntricos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A <strong>coroa circular</strong> é a região entre dois círculos concêntricos (mesmo centro)
+                    com raios \(R\) (maior) e \(r\) (menor):
+                    \[\displaystyle A_{\text{coroa}} = \pi R^2 - \pi r^2 = \pi(R^2 - r^2)\]
+                </div>
+                <h4>Exemplo — pista de corrida circular: \(R = 10\,\text{m}\), \(r = 8\,\text{m}\)</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(A = \pi(10^2 - 8^2) = \pi(100 - 64) = 36\pi \approx 113{,}1\,\text{m}^2\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROBLEMAS CONTEXTUALIZADOS -->
+            <div class="tr-section" id="sec-problemas">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Ex</div>
+                    <div>
+                        <div class="tr-section-title">Problemas Contextualizados</div>
+                        <div class="tr-section-sub">Pizza, relógio, pista de corrida</div>
+                    </div>
+                </div>
+                <h4>Pizza</h4>
+                <p>Uma pizza de 30 cm de diâmetro é dividida em 8 fatias iguais. Qual a área de cada fatia?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(r = 15\,\text{cm}\); cada fatia tem \(\theta = 360° \div 8 = 45°\)</span>
+                        <span>\(A_{\text{fatia}} = \dfrac{45}{360} \times \pi \times 15^2 = \dfrac{225\pi}{8} \approx 88{,}4\,\text{cm}^2\)</span>
+                    </div>
+                </div>
+                <h4>Ponteiro de relógio</h4>
+                <p>Um ponteiro de 10 cm percorre 90° em 15 minutos. Qual arco ele percorre?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>\(\ell = \dfrac{90}{360} \times 2\pi \times 10 = \dfrac{20\pi}{4} = 5\pi \approx 15{,}7\,\text{cm}\)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ui:decorate>

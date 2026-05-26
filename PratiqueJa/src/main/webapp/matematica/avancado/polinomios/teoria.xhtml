@@ -1,0 +1,416 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO E NOMENCLATURA -->
+            <div class="tr-section" id="sec-definicao">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição e Nomenclatura</div>
+                        <div class="tr-section-sub">Grau, coeficientes e termos semelhantes</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Um <strong>polinômio</strong> em \(x\) é uma expressão da forma
+                    \[
+                        p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
+                    \]
+                    onde os <strong>coeficientes</strong> \(a_i\) são números reais e os
+                    expoentes são inteiros não negativos. O <strong>grau</strong> de \(p(x)\)
+                    é o maior expoente cujo coeficiente é não nulo.
+                </div>
+
+                <h4>Nomenclatura por número de termos</h4>
+                <ul style="line-height:1.9; margin-top:.4rem">
+                    <li><strong>Monômio</strong> — 1 termo &#160;<em style="color:#9ca3af">(\(3x^2\))</em></li>
+                    <li><strong>Binômio</strong> — 2 termos &#160;<em style="color:#9ca3af">(\(x^3 - 5\))</em></li>
+                    <li><strong>Trinômio</strong> — 3 termos &#160;<em style="color:#9ca3af">(\(x^2 + 4x - 1\))</em></li>
+                    <li><strong>Polinômio</strong> — 4 ou mais termos</li>
+                </ul>
+
+                <p style="margin-top:.8rem">
+                    <strong>Termos semelhantes</strong> possuem a mesma parte literal (mesma variável
+                    com mesmo expoente) e podem ser somados: \(3x^2 + 5x^2 = 8x^2\).
+                </p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Identifique o grau e o coeficiente líder de \(p(x) = 3x^4 - 2x^2 + 5x - 1\).</span>
+                        <span>Maior expoente: 4 &#160;→&#160; <strong>grau 4</strong></span>
+                        <span class="hl">Coeficiente líder: \(a_4 = 3\) &#160;&#160; Termo independente: \(a_0 = -1\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Simplifique: \(4x^3 - x^2 + 3x^3 + 5x^2 - 2x\).</span>
+                        <span>Agrupe semelhantes: \((4+3)x^3 + (-1+5)x^2 - 2x\)</span>
+                        <span class="hl">\(7x^3 + 4x^2 - 2x\) &#160;(grau 3)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    O <strong>polinômio nulo</strong> tem todos os coeficientes iguais a zero
+                    e, por convenção, não possui grau definido. O polinômio constante não nulo
+                    tem grau 0.
+                </div>
+            </div>
+
+            <!-- OPERAÇÕES -->
+            <div class="tr-section" id="sec-operacoes">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Op</div>
+                    <div>
+                        <div class="tr-section-title">Operações com Polinômios</div>
+                        <div class="tr-section-sub">Adição, subtração e multiplicação</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Polinômios são somados e subtraídos agrupando <strong>termos semelhantes</strong>.
+                    Na multiplicação, aplica-se a <strong>lei distributiva</strong> e somam-se
+                    os expoentes de fatores com a mesma base.
+                </div>
+
+                <h4>Adição e Subtração</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dados \(p(x) = 3x^3 - x^2 + 4x - 2\) e \(q(x) = -x^3 + 2x^2 - x + 5\),
+                        calcule \(p(x) + q(x)\) e \(p(x) - q(x)\).</span>
+                        <span>\(p+q = (3-1)x^3 + (-1+2)x^2 + (4-1)x + (-2+5)\)</span>
+                        <span class="hl">\(p+q = 2x^3 + x^2 + 3x + 3\)</span>
+                        <span>\(p-q = (3+1)x^3 + (-1-2)x^2 + (4+1)x + (-2-5)\)</span>
+                        <span class="hl">\(p-q = 4x^3 - 3x^2 + 5x - 7\)</span>
+                    </div>
+                </div>
+
+                <h4>Multiplicação</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Calcule \((x + 2)(x^2 - 3x + 1)\).</span>
+                        <span>\(x \cdot (x^2-3x+1) + 2 \cdot (x^2-3x+1)\)</span>
+                        <span>\(= x^3 - 3x^2 + x + 2x^2 - 6x + 2\)</span>
+                        <span class="hl">\(= x^3 - x^2 - 5x + 2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Calcule \((2x - 1)(3x^2 + x - 4)\).</span>
+                        <span>\(2x(3x^2+x-4) - 1(3x^2+x-4)\)</span>
+                        <span>\(= 6x^3+2x^2-8x - 3x^2-x+4\)</span>
+                        <span class="hl">\(= 6x^3 - x^2 - 9x + 4\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASOS NOTÁVEIS -->
+            <div class="tr-section" id="sec-casos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">CN</div>
+                    <div>
+                        <div class="tr-section-title">Casos Notáveis</div>
+                        <div class="tr-section-sub">Produtos especiais com resultado memorável</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Certos produtos de polinômios aparecem com tanta frequência que valem ser
+                    memorizados. Eles são a base tanto de expansões rápidas quanto da fatoração.
+                </div>
+
+                <h4>Quadrado da soma e da diferença</h4>
+                \[
+                    (a + b)^2 = a^2 + 2ab + b^2
+                \]
+                \[
+                    (a - b)^2 = a^2 - 2ab + b^2
+                \]
+
+                <h4>Produto da soma pela diferença</h4>
+                \[
+                    (a + b)(a - b) = a^2 - b^2
+                \]
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Expanda \((2x + 3)^2\).</span>
+                        <span>\(a = 2x,\; b = 3\)</span>
+                        <span>\((2x)^2 + 2 \cdot 2x \cdot 3 + 3^2\)</span>
+                        <span class="hl">\(4x^2 + 12x + 9\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Expanda \((3x - 1)^2\).</span>
+                        <span>\((3x)^2 - 2 \cdot 3x \cdot 1 + 1^2\)</span>
+                        <span class="hl">\(9x^2 - 6x + 1\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \((x + 5)(x - 5)\).</span>
+                        <span>\(a = x,\; b = 5\)</span>
+                        <span class="hl">\(x^2 - 25\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule \((2x + 7)(2x - 7)\).</span>
+                        <span>\(a = 2x,\; b = 7\)</span>
+                        <span class="hl">\(4x^2 - 49\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atalho ENEM:</strong> \((a+b)(a-b) = a^2 - b^2\) é muito usado para
+                    calcular produtos como \(51 \times 49 = (50+1)(50-1) = 2500 - 1 = 2499\).
+                </div>
+            </div>
+
+            <!-- FATORAÇÃO -->
+            <div class="tr-section" id="sec-fatoracao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Fat</div>
+                    <div>
+                        <div class="tr-section-title">Fatoração de Polinômios</div>
+                        <div class="tr-section-sub">Fator comum, agrupamento, trinômio perfeito e diferença de quadrados</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Fatorar é escrever o polinômio como um <strong>produto de fatores</strong> de
+                    grau menor. As quatro técnicas principais são aplicadas em sequência: verifique
+                    sempre se há fator comum antes de tentar as demais.
+                </div>
+
+                <h4>1. Fator comum em evidência</h4>
+                <p>Identifique o MDC dos coeficientes e a menor potência de cada variável comum a
+                todos os termos.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(6x^3 - 4x^2 + 2x\).</span>
+                        <span>MDC dos coef.: 2; menor potência de \(x\): \(x^1\).</span>
+                        <span class="hl">\(2x(3x^2 - 2x + 1)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(x^3 - x\).</span>
+                        <span>\(x(x^2 - 1)\)</span>
+                        <span class="hl">\(x(x+1)(x-1)\) &#160;<em style="font-size:.83rem;color:#9ca3af">(+ diferença de quadrados)</em></span>
+                    </div>
+                </div>
+
+                <h4>2. Agrupamento</h4>
+                <p>Agrupe pares de termos de forma que cada grupo revele um fator comum,
+                que depois é colocado em evidência.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Fatore \(x^3 + 2x^2 + x + 2\).</span>
+                        <span>\(x^2(x + 2) + 1(x + 2)\)</span>
+                        <span class="hl">\((x^2 + 1)(x + 2)\)</span>
+                    </div>
+                </div>
+
+                <h4>3. Trinômio quadrado perfeito</h4>
+                <p>Reconheça o padrão \(a^2 \pm 2ab + b^2 = (a \pm b)^2\) — o inverso dos
+                casos notáveis.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(x^2 + 6x + 9\).</span>
+                        <span>\(a = x,\; b = 3\) &#160;→&#160; \(2ab = 6x\;\checkmark\)</span>
+                        <span class="hl">\((x + 3)^2\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(4x^2 - 20x + 25\).</span>
+                        <span>\(a = 2x,\; b = 5\) &#160;→&#160; \(2ab = 20x\;\checkmark\)</span>
+                        <span class="hl">\((2x - 5)^2\)</span>
+                    </div>
+                </div>
+
+                <h4>4. Diferença de quadrados</h4>
+                <p>Reconheça \(a^2 - b^2 = (a + b)(a - b)\). <strong>Atenção:</strong> soma de
+                quadrados (\(a^2 + b^2\)) não fatora nos reais.</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(4x^2 - 9\).</span>
+                        <span>\(a = 2x,\; b = 3\)</span>
+                        <span class="hl">\((2x + 3)(2x - 3)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Fatore \(x^4 - 16\).</span>
+                        <span>\((x^2 + 4)(x^2 - 4)\)</span>
+                        <span class="hl">\((x^2 + 4)(x + 2)(x - 2)\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISÃO DE POLINÔMIOS — BRIOT-RUFFINI -->
+            <div class="tr-section" id="sec-divisao">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">BR</div>
+                    <div>
+                        <div class="tr-section-title">Divisão de Polinômios — Briot-Ruffini</div>
+                        <div class="tr-section-sub">Algoritmo de divisão por \((x - a)\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O algoritmo de <strong>Briot-Ruffini</strong> realiza a divisão de um
+                    polinômio \(p(x)\) pelo binômio \((x - a)\) de forma compacta, operando
+                    apenas sobre os coeficientes. O resultado é o <strong>quociente</strong>
+                    \(q(x)\) (grau \(n-1\)) e o <strong>resto</strong> \(r\).
+                </div>
+
+                <h4>Passo a passo</h4>
+                <ol style="line-height:1.9; margin-top:.4rem">
+                    <li>Escreva os coeficientes de \(p(x)\) em ordem decrescente de grau
+                    (use <strong>0</strong> para potências ausentes).</li>
+                    <li>Anote o valor de \(a\) à esquerda.</li>
+                    <li>Desça o primeiro coeficiente.</li>
+                    <li>Multiplique o valor descido por \(a\) e some ao próximo coeficiente.
+                    Repita até o fim.</li>
+                    <li>O último resultado é o <strong>resto</strong>; os anteriores são os
+                    coeficientes do <strong>quociente</strong>.</li>
+                </ol>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Divida \(p(x) = x^3 - 6x^2 + 11x - 6\) por \((x - 1)\).</span>
+                        <span>Coeficientes: 1, −6, 11, −6 &#160;&#160; \(a = 1\)</span>
+                        <span>
+                            <table style="border-collapse:collapse; font-size:.95rem; margin:.5rem 0; font-family:'Courier New',monospace;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; padding:.3rem .9rem; color:#fdba74; font-weight:700;">1</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">1</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">−6</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">11</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">−6</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; padding:.3rem .9rem;"></td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc;"></td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">1</td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">−5</td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">6</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; border-top:1px solid #374151; padding:.3rem .9rem;"></td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">1</td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">−5</td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">6</td>
+                                        <td style="border-top:1px solid #374151; border-left:1px solid #374151; padding:.3rem .9rem; color:#fdba74; font-weight:700;">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                        <span>Quociente: \(x^2 - 5x + 6\) &#160;&#160; Resto: \(0\)</span>
+                        <span>\(x^2 - 5x + 6 = (x-2)(x-3)\)</span>
+                        <span class="hl">\(p(x) = (x-1)(x-2)(x-3)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Divida \(p(x) = 2x^3 - 3x^2 - 8x + 12\) por \((x - 2)\).</span>
+                        <span>Coeficientes: 2, −3, −8, 12 &#160;&#160; \(a = 2\)</span>
+                        <span>
+                            <table style="border-collapse:collapse; font-size:.95rem; margin:.5rem 0; font-family:'Courier New',monospace;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; padding:.3rem .9rem; color:#fdba74; font-weight:700;">2</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">2</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">−3</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">−8</td>
+                                        <td style="padding:.3rem .9rem; color:#d1d5db;">12</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; padding:.3rem .9rem;"></td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc;"></td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">4</td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">2</td>
+                                        <td style="padding:.3rem .9rem; color:#a5b4fc; text-align:right;">−12</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right:2px solid #6b7280; border-top:1px solid #374151; padding:.3rem .9rem;"></td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">2</td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">1</td>
+                                        <td style="border-top:1px solid #374151; padding:.3rem .9rem; color:#6ee7b7; font-weight:700;">−6</td>
+                                        <td style="border-top:1px solid #374151; border-left:1px solid #374151; padding:.3rem .9rem; color:#fdba74; font-weight:700;">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                        <span>Quociente: \(2x^2 + x - 6 = (2x - 3)(x + 2)\)</span>
+                        <span class="hl">\(p(x) = (x-2)(2x-3)(x+2)\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Potência ausente:</strong> se \(p(x) = x^3 - 4x + 1\), o coeficiente
+                    de \(x^2\) é <strong>0</strong> — use a sequência 1, 0, −4, 1 na tabela.
+                </div>
+            </div>
+
+            <!-- TEOREMA DO RESTO E DAS RAÍZES -->
+            <div class="tr-section" id="sec-teorema">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Teo</div>
+                    <div>
+                        <div class="tr-section-title">Teorema do Resto e das Raízes</div>
+                        <div class="tr-section-sub">\(p(a) = 0 \;\Leftrightarrow\; (x - a)\) é fator de \(p(x)\)</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Ao dividir \(p(x)\) por \((x - a)\), o <strong>resto é igual a \(p(a)\)</strong>.
+                    Isso elimina a necessidade de executar a divisão quando só o resto interessa.
+                </div>
+
+                <h4>Teorema do Resto</h4>
+                \[
+                    p(x) = (x - a) \cdot q(x) + r \quad\Longrightarrow\quad r = p(a)
+                \]
+
+                <h4>Teorema das Raízes (Fator)</h4>
+                \[
+                    p(a) = 0 \;\Longleftrightarrow\; (x - a) \text{ é fator de } p(x)
+                \]
+                <p>Em outras palavras, \(a\) é <strong>raiz</strong> do polinômio se e somente
+                se o resto da divisão por \((x - a)\) for zero.</p>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Qual o resto da divisão de \(q(x) = 2x^3 + x^2 - 3x + 4\) por \((x - 1)\)?</span>
+                        <span>Pelo Teorema do Resto: resto \(= q(1)\)</span>
+                        <span>\(q(1) = 2(1)^3 + (1)^2 - 3(1) + 4 = 2 + 1 - 3 + 4\)</span>
+                        <span class="hl">Resto \(= 4\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Verifique que \(x = 1,\; x = -2\) e \(x = 3\) são raízes de
+                        \(p(x) = x^3 - 2x^2 - 5x + 6\).</span>
+                        <span>\(p(1) = 1 - 2 - 5 + 6 = 0\;\checkmark \;\Rightarrow\; (x-1)\) é fator</span>
+                        <span>\(p(-2) = -8 - 8 + 10 + 6 = 0\;\checkmark \;\Rightarrow\; (x+2)\) é fator</span>
+                        <span>\(p(3) = 27 - 18 - 15 + 6 = 0\;\checkmark \;\Rightarrow\; (x-3)\) é fator</span>
+                        <span class="hl">\(p(x) = (x-1)(x+2)(x-3)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Para qual valor de \(k\) o polinômio \(p(x) = x^3 - kx + 2\) tem
+                        \(x = 2\) como raiz?</span>
+                        <span>Se \(x = 2\) é raiz, então \(p(2) = 0\).</span>
+                        <span>\(8 - 2k + 2 = 0 \;\Rightarrow\; 2k = 10\)</span>
+                        <span class="hl">\(k = 5\)</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Estratégia prática:</strong> para fatorar completamente um polinômio
+                    de grau 3, procure uma raiz inteira entre os divisores do termo independente,
+                    aplique Briot-Ruffini e fatore o quociente de grau 2 com fórmula de Bhaskara
+                    se necessário.
+                </div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

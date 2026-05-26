@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+  <!-- Círculo de fundo -->
+  <circle cx="50" cy="50" r="42" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+  <!-- Setor (60°): de -90° a -30°, em coordenadas de tela de 0° a 60° a partir do topo -->
+  <!-- Centro (50,50), r=42. Ângulo 0° = topo (50,8). Setor de 0° a 60° no sentido horário -->
+  <!-- Ponto A (0°): (50, 8) -->
+  <!-- Ponto B (60°): (50 + 42*sin60°, 50 - 42*cos60°) = (50+36.37, 50-21) = (86.37, 29) -->
+  <path d="M 50 50 L 50 8 A 42 42 0 0 1 86 29 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Arco do setor destacado -->
+  <path d="M 50 8 A 42 42 0 0 1 86 29" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+  <!-- Raios do setor -->
+  <line x1="50" y1="50" x2="50" y2="8" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="50" y1="50" x2="86" y2="29" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Ângulo central (pequeno arco perto do centro) -->
+  <path d="M 50 35 A 15 15 0 0 1 63 42" fill="none" stroke="#dc2626" stroke-width="1.2"/>
+  <!-- Centro -->
+  <circle cx="50" cy="50" r="2" fill="#1e293b"/>
+  <!-- Labels -->
+  <text x="52" y="49" font-size="8" fill="#1e293b" font-family="sans-serif">O</text>
+  <text x="54" y="20" font-size="9" font-weight="bold" fill="#2563eb" font-family="sans-serif">r</text>
+  <text x="70" y="37" font-size="9" font-weight="bold" fill="#2563eb" font-family="sans-serif">r</text>
+  <text x="56" y="38" font-size="8" fill="#dc2626" font-family="sans-serif">θ</text>
+  <text x="64" y="15" font-size="8" fill="#7c3aed" font-family="sans-serif">ℓ (arco)</text>
+</svg>
