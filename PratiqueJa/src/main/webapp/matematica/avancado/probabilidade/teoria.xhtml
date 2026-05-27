@@ -67,12 +67,12 @@
                 </div>
                 <h4>Exemplo — lançamento de um dado</h4>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span>Espaço amostral: \(\Omega = \{1,2,3,4,5,6\}\), \(n(\Omega)=6\)</span>
                         <span>Evento "número par": \(A = \{2,4,6\}\), \(n(A)=3\)</span>
                         <span class="hl">Evento "maior que 4": \(B = \{5,6\}\), \(n(B)=2\)</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>Evento certo:</strong> \(\Omega\) — sempre ocorre, \(P(\Omega)=1\)</span>
                         <span><strong>Evento impossível:</strong> \(\varnothing\) — nunca ocorre, ex.: "sair 7"; \(P(\varnothing)=0\)</span>
                         <span class="hl"><strong>Eventos exclusivos:</strong> \(A \cap B = \varnothing\) — não ocorrem juntos</span>
@@ -105,11 +105,11 @@
                     De modo geral, se \(A \subset B\), então \(P(A) \leq P(B)\).
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span>\(P(\text{sair 1 no dado}) = \frac{1}{6} \approx 0{,}167\)</span>
                         <span class="hl">\(0 \leq \frac{1}{6} \leq 1\) &#x2713; — Axioma 1 satisfeito</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span>"Par" \(\subset\) "Par ou Ímpar" = \(\Omega\)</span>
                         <span class="hl">\(P(\text{par}) = \frac{1}{2} \leq P(\Omega) = 1\) &#x2713; — Axioma 2 e 3</span>
                     </div>
@@ -479,22 +479,22 @@
                 <p>Um baralho comum tem 52 cartas: 4 naipes (copas, ouros, paus, espadas) com 13 cartas cada.
                 Uma carta é retirada ao acaso. Calcule:</p>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>(a) P(carta de copas)</strong></span>
                         <span>\(n(A)=13\), \(n(\Omega)=52\)</span>
                         <span class="hl">\(P=\dfrac{13}{52}=\dfrac{1}{4}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>(b) P(carta de figura: J, Q ou K)</strong></span>
                         <span>\(n(B)=4\times 3=12\)</span>
                         <span class="hl">\(P=\dfrac{12}{52}=\dfrac{3}{13}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>(c) P(figura de copas)</strong> — interseção de (a) e (b)</span>
                         <span>\(n(A \cap B)=3\) (J, Q e K de copas)</span>
                         <span class="hl">\(P=\dfrac{3}{52}\)</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>(d) P(copas ou figura)</strong> — não exclusivos</span>
                         <span>\(P(A \cup B)=\dfrac{13}{52}+\dfrac{12}{52}-\dfrac{3}{52}\)</span>
                         <span class="hl">\(=\dfrac{22}{52}=\dfrac{11}{26} \approx 42{,}3\%\)</span>
@@ -512,22 +512,22 @@
                     </div>
                 </div>
                 <div class="tr-examples">
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>&#x26A0; Com vs. sem reposição</strong></span>
                         <span>Retiradas <em>sem reposição</em> — eventos dependentes: use \(P(A) \cdot P(B \mid A)\).</span>
                         <span class="hl">Retiradas <em>com reposição</em> — eventos independentes: use \(P(A) \cdot P(B)\).</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>&#x26A0; "Ao menos um" — use o complementar</strong></span>
                         <span>Calcular diretamente exige somar vários casos. O caminho rápido:</span>
                         <span class="hl">\(P(\text{ao menos um}) = 1 - P(\text{nenhum})\)</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>&#x26A0; Regra da Soma — não esqueça a interseção</strong></span>
                         <span>Para eventos não exclusivos, somar apenas \(P(A)+P(B)\) conta a interseção em dobro.</span>
                         <span class="hl">Sempre subtraia: \(P(A \cup B) = P(A)+P(B)-P(A \cap B)\).</span>
                     </div>
-                    <div class="tr-ex tr-steps span-full">
+                    <div class="tr-ex tr-steps">
                         <span><strong>&#x26A0; Independência ≠ Exclusividade</strong></span>
                         <span>Eventos mutuamente exclusivos com \(P(A),P(B) \gt 0\) são <em>dependentes</em>
                               (se \(A\) ocorre, \(B\) não pode ocorrer).</span>

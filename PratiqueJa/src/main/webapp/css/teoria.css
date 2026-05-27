@@ -217,10 +217,17 @@
     font-size: 0.93rem;
 }
 
+
+@media (max-width: 900px) 
+{
+    .tr-examples { grid-template-columns: 1fr; }
+}
+
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1300px) {
+@media (max-width: 1450px) {
     .tr-toc { position: static; }
     .tr-toc-title { border-right: none; padding-right: 0; margin-right: 0; width: 100%; padding-bottom: 6px; }
     .tr-section { padding: 20px 16px; }
     .tr-content { column-count: 1; }
+
 }
