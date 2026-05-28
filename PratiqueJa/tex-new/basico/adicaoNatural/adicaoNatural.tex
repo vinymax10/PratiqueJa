@@ -1,0 +1,268 @@
+% ============================================================
+%  Adição de Números Naturais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Adição de Naturais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Adição de Números Naturais}%
+           {Algoritmo, Vai Um e Propriedades}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é adição e seus elementos}
+
+\regra{A \textbf{adição} reúne duas ou mais quantidades em uma única
+quantidade total, chamada de \textbf{soma}. Os números somados são
+chamados de \textbf{parcelas}.}
+
+\formula{$\text{parcela} + \text{parcela} = \text{soma}$}
+
+\SH{Propriedades}
+
+\exemp{%
+  \textbf{Comutativa:} $a+b = b+a$\\[-1pt]
+  {\small\color{mutedtext}Ordem não altera a soma}\ \
+  $\hlm{3+5=5+3=8}$\\[4pt]
+  \textbf{Associativa:} $(a+b)+c = a+(b+c)$\\[-1pt]
+  {\small\color{mutedtext}Agrupamento não altera}\ \
+  $\hlm{(2{+}3){+}4=9}$\\[4pt]
+  \textbf{Elemento neutro:} $a+0=a$\ \
+  $\hlm{7+0=7}$\\[4pt]
+  \textbf{Fechamento:} soma de naturais é sempre natural\\
+  $\hlm{4+6=10\in\mathbb{N}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Met}{darkblue}{Somando com Mais de Um Dígito}{Algoritmo coluna a coluna, da direita para a esquerda}
+
+\regra{Alinhe os números pela \textbf{direita} — unidades sob
+unidades, dezenas sob dezenas. Some coluna por coluna, sempre da
+\textbf{direita para a esquerda}.}
+
+\SH{Exemplo — 143 + 26}
+
+\exemp{%
+  \begin{center}\vspace{-6pt}
+  $\begin{array}{r@{}r@{}r@{}r}
+      & 1 & 4 & 3 \\
+    + &   & 2 & 6 \\ \hline
+      & 1 & 6 & 9
+  \end{array}$
+  \vspace{-6pt}\end{center}
+  Unid.: $3{+}6=9$ \quad Dez.: $4{+}2=6$ \quad Cent.: $1$\\
+  $\hlm{143 + 26 = 169}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{+1}{darkblue}{Vai Um (Reserva)}{Quando a soma da coluna ultrapassa 9}
+
+\regra{Quando a soma de uma coluna for $\geq 10$, escreva o
+\textbf{dígito das unidades} e carregue o restante para a próxima
+coluna à esquerda — esse dígito carregado é o \textbf{vai um}
+(ou \textbf{reserva}).}
+
+\SH{Exemplo — 476 + 48}
+
+\exemp{%
+  \begin{center}\vspace{-6pt}
+  $\begin{array}{r@{}r@{}r@{}r}
+      & \scriptstyle 1 & \scriptstyle 1 & \\[-4pt]
+      & 4 & 7 & 6 \\
+    + &   & 4 & 8 \\ \hline
+      & 5 & 2 & 4
+  \end{array}$
+  \vspace{-6pt}\end{center}
+  Unid.: $6{+}8=14$ → escreve 4, reserva 1\\
+  Dez.: $7{+}4{+}1=12$ → escreve 2, reserva 1\\
+  Cent.: $4{+}1=5$\\
+  $\hlm{476 + 48 = 524}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{+1+1}{darkblue}{Vai Um em Múltiplas Colunas}{Reserva ocorre em mais de uma coluna}
+
+\regra{O \textbf{vai um} se repete independentemente em cada coluna.
+Inclua sempre a reserva ao somar a coluna seguinte.}
+
+\SH{Exemplo — 987 + 456}
+
+\exemp{%
+  \begin{center}\vspace{-6pt}
+  $\begin{array}{r@{}r@{}r@{}r@{}r}
+      & \scriptstyle 1 & \scriptstyle 1 & \scriptstyle 1 & \\[-4pt]
+      &   & 9 & 8 & 7 \\
+    + &   & 4 & 5 & 6 \\ \hline
+      & 1 & 4 & 4 & 3
+  \end{array}$
+  \vspace{-6pt}\end{center}
+  Unid.: $7{+}6=13$ → escreve 3, reserva 1\\
+  Dez.: $8{+}5{+}1=14$ → escreve 4, reserva 1\\
+  Cent.: $9{+}4{+}1=14$ → escreve 4, reserva 1\\
+  Mil.: $0{+}1=1$\\
+  $\hlm{987 + 456 = 1443}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{3+}{darkblue}{Adição de Três Parcelas}{Algoritmo funciona igual para mais de dois números}
+
+\regra{Alinhe todos os números pela direita e some coluna por coluna.
+Aplique o \textbf{vai um} normalmente quando a soma ultrapassar 9.}
+
+\SH{Exemplo — 124 + 31 + 205}
+
+\exemp{%
+  \begin{center}\vspace{-6pt}
+  $\begin{array}{r@{}r@{}r@{}r}
+      &   & \scriptstyle 1 & \\[-4pt]
+      & 1 & 2 & 4 \\
+      &   & 3 & 1 \\
+    + & 2 & 0 & 5 \\ \hline
+      & 3 & 6 & 0
+  \end{array}$
+  \vspace{-6pt}\end{center}
+  Unid.: $4{+}1{+}5=10$ → escreve 0, reserva 1\\
+  Dez.: $2{+}3{+}0{+}1=6$\\
+  Cent.: $1{+}0{+}2=3$\\
+  $\hlm{124 + 31 + 205 = 360}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Inv}{badgegreen}{Verificação do Resultado}{Usar a subtração para conferir a soma}
+
+\regra{Adição e subtração são operações \textbf{inversas}: se
+$a{+}b=c$, então $c{-}b=a$. Subtraia uma parcela da soma — o
+resultado deve ser a outra parcela.}
+
+\exemp{%
+  $143{+}26=169$ \quad \textbf{Conf.:} $169{-}26=\hlm{143}$ \ok\\[3pt]
+  $476{+}48=524$ \quad \textbf{Conf.:} $524{-}48=\hlm{476}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prob}{badgepurple}{Problema Contextualizado}{Aplicar a adição em situações do cotidiano}
+
+\regra{\textbf{Estratégia:} (1) identifique as quantidades;
+(2) perceba que estão sendo \emph{reunidas}; (3) some;
+(4) responda com unidade.}
+
+\exemp{%
+  \textbf{Prob. 1 —} Uma turma tem 143 livros. A escola doou
+  mais 26. Quantos livros tem agora?\\[2pt]
+  $143 + 26 = \hlm{169}$ \quad \hl{A turma tem 169 livros.}\\[5pt]
+  \textbf{Prob. 2 —} Em uma festa havia 476 convidados;
+  chegaram mais 48. Quantas pessoas ao todo?\\[2pt]
+  $476 + 48 = \hlm{524}$ \quad \hl{Havia 524 pessoas.}%
+}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Tab}{darkblue}{Tabuada da Adição}{Somas básicas de 1 a 10 — parcela + parcela = soma}
+
+\regra{Memorize as somas básicas. Cada coluna traz a tabuada de um
+número; leia linha por linha.}
+
+% Tabuadas 1–5
+\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 1}\par\vspace{2pt}
+{\footnotesize
+$1{+}1=\mathbf{2}$\\$1{+}2=\mathbf{3}$\\$1{+}3=\mathbf{4}$\\
+$1{+}4=\mathbf{5}$\\$1{+}5=\mathbf{6}$\\$1{+}6=\mathbf{7}$\\
+$1{+}7=\mathbf{8}$\\$1{+}8=\mathbf{9}$\\$1{+}9=\mathbf{10}$\\
+$1{+}10=\mathbf{11}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 2}\par\vspace{2pt}
+{\footnotesize
+$2{+}1=\mathbf{3}$\\$2{+}2=\mathbf{4}$\\$2{+}3=\mathbf{5}$\\
+$2{+}4=\mathbf{6}$\\$2{+}5=\mathbf{7}$\\$2{+}6=\mathbf{8}$\\
+$2{+}7=\mathbf{9}$\\$2{+}8=\mathbf{10}$\\$2{+}9=\mathbf{11}$\\
+$2{+}10=\mathbf{12}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 3}\par\vspace{2pt}
+{\footnotesize
+$3{+}1=\mathbf{4}$\\$3{+}2=\mathbf{5}$\\$3{+}3=\mathbf{6}$\\
+$3{+}4=\mathbf{7}$\\$3{+}5=\mathbf{8}$\\$3{+}6=\mathbf{9}$\\
+$3{+}7=\mathbf{10}$\\$3{+}8=\mathbf{11}$\\$3{+}9=\mathbf{12}$\\
+$3{+}10=\mathbf{13}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 4}\par\vspace{2pt}
+{\footnotesize
+$4{+}1=\mathbf{5}$\\$4{+}2=\mathbf{6}$\\$4{+}3=\mathbf{7}$\\
+$4{+}4=\mathbf{8}$\\$4{+}5=\mathbf{9}$\\$4{+}6=\mathbf{10}$\\
+$4{+}7=\mathbf{11}$\\$4{+}8=\mathbf{12}$\\$4{+}9=\mathbf{13}$\\
+$4{+}10=\mathbf{14}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 5}\par\vspace{2pt}
+{\footnotesize
+$5{+}1=\mathbf{6}$\\$5{+}2=\mathbf{7}$\\$5{+}3=\mathbf{8}$\\
+$5{+}4=\mathbf{9}$\\$5{+}5=\mathbf{10}$\\$5{+}6=\mathbf{11}$\\
+$5{+}7=\mathbf{12}$\\$5{+}8=\mathbf{13}$\\$5{+}9=\mathbf{14}$\\
+$5{+}10=\mathbf{15}$}
+\end{minipage}
+
+% Tabuadas 6–10
+\vspace{10pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 6}\par\vspace{2pt}
+{\footnotesize
+$6{+}1=\mathbf{7}$\\$6{+}2=\mathbf{8}$\\$6{+}3=\mathbf{9}$\\
+$6{+}4=\mathbf{10}$\\$6{+}5=\mathbf{11}$\\$6{+}6=\mathbf{12}$\\
+$6{+}7=\mathbf{13}$\\$6{+}8=\mathbf{14}$\\$6{+}9=\mathbf{15}$\\
+$6{+}10=\mathbf{16}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 7}\par\vspace{2pt}
+{\footnotesize
+$7{+}1=\mathbf{8}$\\$7{+}2=\mathbf{9}$\\$7{+}3=\mathbf{10}$\\
+$7{+}4=\mathbf{11}$\\$7{+}5=\mathbf{12}$\\$7{+}6=\mathbf{13}$\\
+$7{+}7=\mathbf{14}$\\$7{+}8=\mathbf{15}$\\$7{+}9=\mathbf{16}$\\
+$7{+}10=\mathbf{17}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 8}\par\vspace{2pt}
+{\footnotesize
+$8{+}1=\mathbf{9}$\\$8{+}2=\mathbf{10}$\\$8{+}3=\mathbf{11}$\\
+$8{+}4=\mathbf{12}$\\$8{+}5=\mathbf{13}$\\$8{+}6=\mathbf{14}$\\
+$8{+}7=\mathbf{15}$\\$8{+}8=\mathbf{16}$\\$8{+}9=\mathbf{17}$\\
+$8{+}10=\mathbf{18}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 9}\par\vspace{2pt}
+{\footnotesize
+$9{+}1=\mathbf{10}$\\$9{+}2=\mathbf{11}$\\$9{+}3=\mathbf{12}$\\
+$9{+}4=\mathbf{13}$\\$9{+}5=\mathbf{14}$\\$9{+}6=\mathbf{15}$\\
+$9{+}7=\mathbf{16}$\\$9{+}8=\mathbf{17}$\\$9{+}9=\mathbf{18}$\\
+$9{+}10=\mathbf{19}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 10}\par\vspace{2pt}
+{\footnotesize
+$10{+}1=\mathbf{11}$\\$10{+}2=\mathbf{12}$\\$10{+}3=\mathbf{13}$\\
+$10{+}4=\mathbf{14}$\\$10{+}5=\mathbf{15}$\\$10{+}6=\mathbf{16}$\\
+$10{+}7=\mathbf{17}$\\$10{+}8=\mathbf{18}$\\$10{+}9=\mathbf{19}$\\
+$10{+}10=\mathbf{20}$}
+\end{minipage}
+
+\end{document}

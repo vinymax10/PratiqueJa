@@ -1,0 +1,209 @@
+% ============================================================
+%  Adição e Subtração de Inteiros — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Adição e Subtração de Inteiros}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Adição e Subtração de Inteiros}%
+           {Sinais, Módulos e Regras de Cálculo}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Conjunto dos Inteiros}{Números positivos, negativos e zero}
+
+\regra{$\mathbb{Z} = \{\ldots,\ -3,\ -2,\ -1,\ 0,\ +1,\ +2,\ +3,\ \ldots\}$\\[4pt]
+O \textbf{valor absoluto} (módulo) é a distância até zero — sempre
+positivo ou nulo: $|{+7}| = 7$ e $|{-7}| = 7$.}
+
+\exemp{%
+  $\mathbb{Z}^+ = \{+1,\ +2,\ +3,\ \ldots\}$ — inteiros positivos\\[2pt]
+  $\mathbb{Z}^- = \{-1,\ -2,\ -3,\ \ldots\}$ — inteiros negativos\\[2pt]
+  $\hlm{0 \in \mathbb{Z}}$ — o zero não é positivo nem negativo%
+}
+
+\nota{Na reta numérica, números maiores ficam à \textbf{direita}.
+Logo $-1 > -5$, mesmo que $|-5| > |-1|$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{a-b}{darkblue}{Subtração = Adição do Oposto}{Conceito unificador das duas operações}
+
+\regra{Subtrair é o mesmo que \textbf{somar o oposto}:}
+
+\formula{$a - b = a + (-b)$}
+
+\exemp{%
+  $8-5 = 8+(-5) = \hlm{+3}$\quad
+  $4-9 = 4+(-9) = \hlm{-5}$\\
+  $-3-7 = -3+(-7) = \hlm{-10}$\\[3pt]
+  $-3-(-5) = -3+(+5) = \hlm{+2}$\\
+  $6-(-4) = 6+(+4) = \hlm{+10}$\quad
+  $0-(-8) = \hlm{+8}$%
+}
+
+\nota{O \textbf{oposto} de $a$ é $-a$: o número que somado a $a$
+resulta zero. Oposto de $-7$ é $+7$; oposto de $0$ é $0$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{+/+}{darkblue}{Sinais Iguais}{Soma os módulos e repete o sinal}
+
+\regra{$(+a)+(+b) = +(a+b)$\\[2pt]
+$(-a)+(-b) = -(a+b)$}
+
+\exemp{%
+  \textbf{Positivo + Positivo → Positivo}\\
+  $+7+(+3) = \hlm{+10}$ \quad $+15+(+8) = \hlm{+23}$\\[3pt]
+  \textbf{Negativo + Negativo → Negativo}\\
+  $-7+(-3) = \hlm{-10}$ \quad $-15+(-8) = \hlm{-23}$%
+}
+
+\nota{\textbf{Regra prática:} sinais iguais → \emph{soma} os módulos
+e \emph{repete} o sinal.}
+
+%─────────────────────────────────────────────────────────────
+\TW{+/-}{darkblue}{Sinais Diferentes}{Subtrai os módulos e usa o sinal do maior}
+
+\regra{Subtraia o menor módulo do maior e use o sinal do número de
+\textbf{maior valor absoluto}.}
+
+\exemp{%
+  $+4+(-6)$: $|-6|=6 > |{+4}|=4$ → sinal $-$\\
+  $6-4=2$ \quad $\hlm{-2}$\\[3pt]
+  $+8+(-5)$: $|{+8}|=8 > |-5|=5$ → sinal $+$\\
+  $8-5=3$ \quad $\hlm{+3}$\\[3pt]
+  $-12+(+7)$: $|-12|=12 > |{+7}|=7$ → sinal $-$\\
+  $12-7=5$ \quad $\hlm{-5}$%
+}
+
+\nota{\textbf{Regra prática:} sinais diferentes → \emph{subtrai},
+usa o sinal do \emph{maior módulo}. Se módulos iguais: $+5+(-5)=0$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{-()}{darkblue}{Sinal antes do Parêntese}{Sinal negativo inverte; positivo mantém}
+
+\regra{$-(+a) = -a \qquad -(-a) = +a$\\[2pt]
+$+(+a) = +a \qquad +(-a) = -a$}
+
+\exemp{%
+  $+4-(-6)$: $-(-6)=+6$ → $4+6 = \hlm{+10}$\\[2pt]
+  $+8-(+5)$: $-(+5)=-5$ → $8-5 = \hlm{+3}$\\[2pt]
+  $-3-(-9)$: $-(-9)=+9$ → $-3+9 = \hlm{+6}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prop}{badgegreen}{Propriedades da Adição}{Leis que valem para todos os inteiros}
+
+\regra{%
+  \textbf{Comutativa:} $a+b = b+a$\\[2pt]
+  \textbf{Associativa:} $(a+b)+c = a+(b+c)$\\[2pt]
+  \textbf{Elemento neutro:} $a+0 = a$\\[2pt]
+  \textbf{Elemento oposto:} $a+(-a) = 0$%
+}
+
+\exemp{%
+  Comutativa: $(-3)+(+8) = (+8)+(-3) = \hlm{+5}$\\[2pt]
+  Associativa: $(-2+5)+(-3) = -2+(5+(-3)) = \hlm{0}$\\[2pt]
+  Oposto: $-7+(+7) = \hlm{0}$ \ok%
+}
+
+\nota{A \textbf{subtração não é comutativa}: $8-3 \neq 3-8$.
+Mas convertendo em adição do oposto, podemos usar a comutatividade.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Expr}{darkblue}{Expressões com Múltiplos Termos}{Eliminar parênteses, agrupar por sinal}
+
+\regra{\textbf{Estratégia:} (1) elimine os parênteses pelas regras de
+sinal; (2) agrupe os positivos e some; (3) agrupe os negativos e some;
+(4) aplique a regra de sinais diferentes.}
+
+\exemp{%
+  $+5-3+(-2)-(-4)$\\
+  → elimina parênteses: $+5-3-2+4$\\
+  Pos.: $+5+4=+9$ \quad Neg.: $-3-2=-5$\\
+  $+9+(-5)$ → $\hlm{+4}$\\[4pt]
+  $-8+(-3)-(-5)+2$\\
+  → elimina parênteses: $-8-3+5+2$\\
+  Pos.: $+7$ \quad Neg.: $-11$\\
+  $+7+(-11)$ → $\hlm{-4}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tab}{badgegreen}{Tabela de Regras dos Sinais}{Resumo completo}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=white, colframe=vegreen,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{vegreen}\bfseries\small SINAIS IGUAIS}%
+\hfill{\footnotesize\color{vegreen}Soma · repete o sinal}\par\vspace{2pt}
+{\small\color{bodytext}$(+)+(+)=+$ \qquad $(-)+(-)=-$}
+\end{tcolorbox}\vspace{3pt}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=white, colframe=vered,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{vered}\bfseries\small SINAIS DIFERENTES}%
+\hfill{\footnotesize\color{vered}Subtrai · sinal do maior}\par\vspace{2pt}
+{\small\color{bodytext}$(+)+(-)=\,?$ \qquad $(-)+({+})=\,?$}
+\end{tcolorbox}\vspace{3pt}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{darkblue}\bfseries\small SINAL $-$ ANTES DE (\ )}%
+\hfill{\footnotesize\color{darkblue}Inverte os sinais}\par\vspace{2pt}
+{\small\color{bodytext}$-(-)=+$ \qquad $-(+)=-$}
+\end{tcolorbox}\vspace{3pt}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=notebg, colframe=noteborder,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{notetext}\bfseries\small SINAL $+$ ANTES DE (\ )}%
+\hfill{\footnotesize\color{notetext}Mantém os sinais}\par\vspace{2pt}
+{\small\color{bodytext}$+(+)=+$ \qquad $+(-)=-$}
+\end{tcolorbox}
+
+%─────────────────────────────────────────────────────────────
+\columnbreak
+\TW{Ex}{badgepurple}{Problemas Contextualizados}{Temperatura, andares, finanças e cronologia}
+
+\exemp{%
+  \textbf{Temperatura —} Termômetro em $-3\,°C$; sobe $8\,°C$.\\
+  $-3+8$: sinais diferentes, $|8|>|-3|$ → pos.\ → $\hlm{+5\,°C}$\\[4pt]
+  \textbf{Elevador —} $4°$ subsolo ($-4$); sobe 10 andares.\\
+  $-4+10 = \hlm{+6}$ → para no $6°$ andar\\[4pt]
+  \textbf{Finanças —} Dívida de R\$\,150 ($-150$); recebe R\$\,200.\\
+  $-150+200 = \hlm{+50}$ → saldo de R\$\,50\\[4pt]
+  \textbf{Cronologia —} 48 a.C. ($-48$) até 2025 d.C. ($+2025$).\\
+  $2025-(-48) = 2025+48 = \hlm{2073}$ anos%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{!}{vered}{Erros Comuns}{O que evitar nas provas}
+
+\exemp{%
+  \nok\ \textbf{Duplo negativo:} $-(-5) = -5$\\
+  \ok\ Correto: $-(-5) = \hlm{+5}$. O sinal muda!\\[4pt]
+  \nok\ \textbf{Somar módulos com sinais diferentes:}
+  $+3+(-8) = +11$\\
+  \ok\ Correto: subtrai → $8-3=5$, sinal de $-8$ → $\hlm{-5}$\\[4pt]
+  \nok\ \textbf{Inverter só o primeiro sinal:}
+  $-(+3-2) = -3-2$\\
+  \ok\ Correto: inverte \emph{todos} → $-3+2 = \hlm{-1}$\\[4pt]
+  \nok\ \textbf{Módulo maior = valor maior:} $-8>-3$ pois $8>3$\\
+  \ok\ Correto: na reta, $-3>-8$. Módulo $\neq$ valor em negativos%
+}
+
+\end{multicols}
+
+\end{document}

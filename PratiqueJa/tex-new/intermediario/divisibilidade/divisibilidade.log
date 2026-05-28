@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.5.28)  28 MAY 2026 08:50
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.5.28)  28 MAY 2026 10:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./10-DivisibilidadeNew6.tex
-(10-DivisibilidadeNew6.tex
+**./divisibilidade.tex
+(divisibilidade.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -23,9 +23,12 @@ File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 )
-(pratiqueja.sty
-Package: pratiqueja 2026/05/28 PratiqueJa Apostila Template
+(../pratiqueja.sty
 
+LaTeX Warning: You have requested package `../pratiqueja',
+               but the package provides `pratiqueja'.
+
+Package: pratiqueja 2026/05/28 PratiqueJa Apostila Template
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
 Package: babel 2025/12/11 v25.17 The multilingual framework for LuaLaTeX, pdfLa
 TeX and XeLaTeX
@@ -952,11 +955,11 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthC=\skip72
 \f@nch@widthR=\skip73
 \@temptokenb=\toks43
-)) (10-DivisibilidadeNew6.aux
+)) (divisibilidade.aux
 Package babel Info: 'brazil' activates 'portuges' shorthands.
 (babel)             Reported on input line 5.
 )
-\openout1 = `10-DivisibilidadeNew6.aux'.
+\openout1 = `divisibilidade.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -1119,19 +1122,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--178
 [] [] [] [] [] [] [] [] []
  []
 
-[3] (10-DivisibilidadeNew6.aux)
+[3] (divisibilidade.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26682 strings out of 402987
- 596711 string characters out of 5447696
- 1180039 words of memory out of 5000000
- 54983 multiletter control sequences out of 15000+600000
+ 26690 strings out of 402987
+ 596787 string characters out of 5447696
+ 1193237 words of memory out of 5000000
+ 54990 multiletter control sequences out of 15000+600000
  634122 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 113i,11n,122p,1020b,950s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,12n,122p,1013b,1014s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 10-DivisibilidadeNew6.pdf (3 pages).
+Output written on divisibilidade.pdf (3 pages).

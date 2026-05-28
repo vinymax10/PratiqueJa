@@ -1,0 +1,211 @@
+% ============================================================
+%  Área e Perímetro — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Área e Perímetro}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Área e Perímetro}%
+           {Fórmulas das Principais Figuras Planas}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Área e Perímetro}
+
+\regra{A \textbf{área} de uma figura plana é a medida da superfície
+que ela ocupa — imagine a figura coberta por quadradinhos de lado 1;
+a quantidade de quadradinhos é a área. A unidade é sempre
+\textbf{quadrática}: cm², m², km²…}
+
+\regra{O \textbf{perímetro} de um polígono é a soma de todos os seus
+lados — a medida total do contorno. A unidade é \textbf{linear}:
+cm, m, km…}
+
+\formula{$P = l_1 + l_2 + \cdots + l_n$}
+
+%─────────────────────────────────────────────────────────────
+\TW{Quad}{darkblue}{Quadrado}{Todos os lados iguais, ângulos retos}
+
+\regra{$A = l^2 \qquad P = 4\,l$}
+
+\exemp{%
+  Exemplo — $l = 5$\\
+  $A = 5^2 = \hlm{25}$ \quad $P = 4 \cdot 5 = \hlm{20}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ret}{darkblue}{Retângulo}{Lados opostos iguais, ângulos retos}
+
+\regra{$A = b \cdot h \qquad P = 2\,(b + h)$}
+
+\exemp{%
+  Exemplo — $b = 4,\; h = 3$\\
+  $A = 4 \cdot 3 = \hlm{12}$ \quad $P = 2 \cdot (4+3) = \hlm{14}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Par}{darkblue}{Paralelogramo}{Lados opostos paralelos e iguais}
+
+\regra{$A = b \cdot h \qquad P = 2\,(a + b)$\\[2pt]
+{\small $b$ = base, $h$ = altura perpendicular, $a$ = lado oblíquo}}
+
+\exemp{%
+  Exemplo — $b = 5,\; h = 2,\; a = 4$\\
+  $A = 5 \cdot 2 = \hlm{10}$ \quad $P = 2 \cdot (4+5) = \hlm{18}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tri}{darkblue}{Triângulo}{Base e altura perpendicular}
+
+\regra{$\displaystyle A = \frac{b \cdot h}{2} \qquad P = a + b + c$}
+
+\exemp{%
+  Exemplo — $b = 6,\; h = 3,\; a = 3,\; c = 5$\\
+  $A = \dfrac{6 \cdot 3}{2} = \hlm{9}$ \quad $P = 3+6+5 = \hlm{14}$%
+}
+
+\nota{A \textbf{altura} é sempre perpendicular à base — pode cair
+\emph{fora} do triângulo nos casos obtusângulos.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Equi}{darkblue}{Triângulo Equilátero}{Três lados iguais, ângulos de 60°}
+
+\regra{$\displaystyle A = \frac{l^2\sqrt{3}}{4} \qquad P = 3\,l$}
+
+\exemp{%
+  Exemplo — $l = 4$\\
+  $A = \dfrac{16\sqrt{3}}{4} = 4\sqrt{3} \approx \hlm{6{,}93}$\\[4pt]
+  $P = 3 \cdot 4 = \hlm{12}$%
+}
+
+\nota{A altura do equilátero é $h = \dfrac{l\sqrt{3}}{2}$,
+o que origina a fórmula da área.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Trap}{darkblue}{Trapézio}{Um par de lados paralelos (bases)}
+
+\regra{$\displaystyle A = \frac{(B+b)\cdot h}{2} \qquad P = a+b+c+d$\\[2pt]
+{\small $B$ = base maior, $b$ = base menor, $h$ = altura}}
+
+\exemp{%
+  Exemplo — $B=7,\; b=3,\; h=2$, lados $= 4$\\
+  $A = \dfrac{(7+3)\cdot 2}{2} = \hlm{10}$\\[4pt]
+  $P = 7+3+4+4 = \hlm{18}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Los}{darkblue}{Losango}{Quatro lados iguais, diagonais perpendiculares}
+
+\regra{$\displaystyle A = \frac{D \cdot d}{2} \qquad P = 4\,l$\\[6pt]
+$\displaystyle l = \sqrt{\left(\frac{D}{2}\right)^{\!2}+\left(\frac{d}{2}\right)^{\!2}}$\\[2pt]
+{\small $D$ = diagonal maior, $d$ = diagonal menor}}
+
+\exemp{%
+  Exemplo — $D=8,\; d=6$\\
+  $l = \sqrt{4^2+3^2} = \sqrt{25} = \hlm{5}$\\[4pt]
+  $A = \dfrac{8 \cdot 6}{2} = \hlm{24}$ \quad $P = 4 \cdot 5 = \hlm{20}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Circ}{badgegreen}{Círculo}{Área e comprimento da circunferência}
+
+\regra{$A = \pi r^2 \qquad C = 2\pi r$\\[2pt]
+{\small $r$ = raio, $C$ = circunferência, $\pi \approx 3{,}14159$}}
+
+\exemp{%
+  Exemplo — $r = 3$\\
+  $A = \pi \cdot 9 = 9\pi \approx \hlm{28{,}27}$\\[4pt]
+  $C = 6\pi \approx \hlm{18{,}85}$%
+}
+
+\nota{O \textbf{diâmetro} é $d = 2r$; pode-se escrever
+$C = \pi d$ e $A = \pi\!\left(\dfrac{d}{2}\right)^{\!2}$.}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{6pt}
+\TW{Tab}{badgegreen}{Resumo das Fórmulas}{Área (A) e Perímetro (P) de cada figura}
+
+% Linha 1 — Quadrado · Retângulo · Paralelogramo
+\vspace{6pt}\noindent
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small QUADRADO}\par\vspace{4pt}
+{\small\color{bodytext}$A = l^2$\par $P = 4\,l$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small RETÂNGULO}\par\vspace{4pt}
+{\small\color{bodytext}$A = b \cdot h$\par $P = 2(b+h)$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small PARALELOGRAMO}\par\vspace{4pt}
+{\small\color{bodytext}$A = b \cdot h$\par $P = 2(a+b)$}
+\end{tcolorbox}
+\end{minipage}
+
+% Linha 2 — Triângulo · Equilátero · Trapézio
+\vspace{6pt}\noindent
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small TRIÂNGULO}\par\vspace{4pt}
+{\small\color{bodytext}$A = \dfrac{b \cdot h}{2}$\par\vspace{3pt} $P = a+b+c$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small TRIÂNG. EQUILÁTERO}\par\vspace{4pt}
+{\small\color{bodytext}$A = \dfrac{l^2\sqrt{3}}{4}$\par\vspace{3pt} $P = 3\,l$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{5.5cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small TRAPÉZIO}\par\vspace{4pt}
+{\small\color{bodytext}$A = \dfrac{(B+b)\cdot h}{2}$\par\vspace{3pt} $P = a+b+c+d$}
+\end{tcolorbox}
+\end{minipage}
+
+% Linha 3 — Losango · Círculo
+\vspace{6pt}\noindent
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small LOSANGO}\par\vspace{4pt}
+{\small\color{bodytext}$A = \dfrac{D \cdot d}{2}$ \quad $P = 4\,l$\par\vspace{3pt}
+$l = \sqrt{(D/2)^2+(d/2)^2}$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=notebg, colframe=noteborder,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{notetext}\bfseries\small CÍRCULO}\par\vspace{4pt}
+{\small\color{bodytext}$A = \pi r^2$ \quad $C = 2\pi r$}
+\end{tcolorbox}
+\end{minipage}
+
+\end{document}

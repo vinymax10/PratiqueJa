@@ -53,7 +53,21 @@
       "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew2.pdf\")",
       "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew4.pdf\")",
       "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew5.pdf\")",
-      "Bash(xelatex -interaction=nonstopmode \"10-DivisibilidadeNew5.tex\")"
+      "Bash(xelatex -interaction=nonstopmode \"10-DivisibilidadeNew5.tex\")",
+      "Bash(\"/c/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe\" -interaction=nonstopmode \"10-DivisibilidadeNew6.tex\")",
+      "Bash(\"/c/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode \"10-DivisibilidadeNew6.tex\")",
+      "Bash(\"/c/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/fc-list.exe\")",
+      "Bash(fc-list)",
+      "Bash(start *)",
+      "Bash(\"/c/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode \"racionais.tex\")",
+      "Bash(\"/c/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode \"divisibilidade.tex\")",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Write-Host \"=== Conteúdo de src\\\\main\\\\webapp\\\\matematica ===\" ; Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\matematica\" | ForEach-Object { Write-Host $_.Name \" - $\\($_.PSIsContainer\\)\" })",
+      "PowerShell(Write-Host \"=== Conteúdo de tex-new ===\" ; Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex-new\" | ForEach-Object { Write-Host $_.Name \" - $\\($_.PSIsContainer\\)\" })",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Write-Host \"=== ESTRUTURA DE tex-new ===\" ; Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex-new\" -Recurse | Where-Object { $_.PSIsContainer } | Select-Object @{Name='Path';Expression={$_.FullName -replace [regex]::Escape\\(\"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex-new\\\\\"\\), ''}} | ForEach-Object { Write-Host $_.Path })",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -output-directory \"tex-new/basico/adicaoNatural\" \"tex-new/basico/adicaoNatural/adicaoNatural.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -output-directory \"tex-new/basico/adicaoSubtracaoInteiro\" \"tex-new/basico/adicaoSubtracaoInteiro/adicaoSubtracaoInteiro.tex\")"
     ]
   }
 }

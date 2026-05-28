@@ -1,0 +1,311 @@
+% ============================================================
+%  Números Racionais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{cancel}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Números Racionais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Números Racionais}%
+           {Frações, Operações e Dízimas Periódicas}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Conjunto dos Racionais}{Frações, decimais e inteiros}
+
+\formula{$\displaystyle\mathbb{Q} = \left\{ \frac{a}{b} \;\middle|\; a \in \mathbb{Z},\ b \in \mathbb{Z}^{*} \right\}$}
+
+\small\color{bodytext}%
+Todo número racional é escrito como $\frac{a}{b}$: $a$ é o \textbf{numerador}
+e $b$ o \textbf{denominador} ($b\neq0$). Ao dividir, o resultado pode ser:
+
+\exemp{%
+  \textbf{Inteiro:}\quad
+    $\dfrac{6}{2}=3$\qquad $\dfrac{-10}{5}=-2$\\[3pt]
+  \textbf{Decimal exato:}\quad
+    $\dfrac{1}{2}=0{,}5$\qquad $\dfrac{3}{4}=0{,}75$\\[3pt]
+  \textbf{Dízima simples} (período logo após a vírgula):\\
+  \quad $\dfrac{1}{3}=0{,}333\ldots=0{,}\overline{3}$\quad
+        $\dfrac{7}{11}=0{,}\overline{63}$\\[3pt]
+  \textbf{Dízima composta} (parte não periódica antes):\\
+  \quad $\dfrac{7}{12}=0{,}58\overline{3}$\quad
+        $\dfrac{5}{6}=0{,}8\overline{3}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tipos}{badgegreen}{Tipos de Fração}{Própria, imprópria, aparente e mista}
+
+\exemp{%
+  \textbf{Própria} — num $<$ den, resultado entre 0 e 1:\\
+  \quad $\dfrac{2}{6},\quad\dfrac{3}{4},\quad\dfrac{5}{9}$\\[3pt]
+  \textbf{Imprópria} — num $>$ den, resultado $>1$:\\
+  \quad $\dfrac{7}{2},\quad\dfrac{5}{3},\quad\dfrac{8}{5}$\\[3pt]
+  \textbf{Aparente} — numerador múltiplo do denominador:\\
+  \quad $\dfrac{8}{2}=4,\quad\dfrac{6}{3}=2,\quad\dfrac{12}{4}=3$\\[3pt]
+  \textbf{Mista} — parte inteira + fração própria:\\
+  \quad $2\dfrac{3}{5}=\dfrac{2\times5+3}{5}=\hlm{\dfrac{13}{5}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{=}{darkblue}{Frações Equivalentes}{Amplificação e simplificação}
+
+\regra{$\dfrac{a}{b} = \dfrac{a\times k}{b\times k}$ \quad $(k\neq0)$ —
+multiplicar ou dividir num. e den. por $k$ não altera o valor.}
+
+\SH{Amplificação — multiplicar por $k$}
+\exemp{$\dfrac{1}{3}=\dfrac{2}{6}=\dfrac{4}{12}$ — todas equivalentes}
+
+\SH{Simplificação — dividir pelo MDC}
+\exemp{%
+  $\dfrac{12}{18}$: MDC$(12,18)=6$
+    $\;\Rightarrow\;\dfrac{12\div6}{18\div6}=\hlm{\dfrac{2}{3}}$\\[3pt]
+  $\dfrac{30}{45}$: MDC$(30,45)=15$
+    $\;\Rightarrow\;\dfrac{30\div15}{45\div15}=\hlm{\dfrac{2}{3}}$%
+}
+\obs{Fração \textbf{irredutível}: MDC(numerador, denominador) = 1.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Conv}{badgegreen}{Conversão: Mista $\leftrightarrow$ Imprópria}{Divisão euclidiana}
+
+\SH{Mista $\to$ Imprópria}
+\formula{$n\,\dfrac{p}{q} = \dfrac{n\times q + p}{q}$}
+
+\exemp{%
+  $3\dfrac{2}{5}=\dfrac{3\times5+2}{5}=\hlm{\dfrac{17}{5}}$\\[3pt]
+  $4\dfrac{1}{3}=\dfrac{4\times3+1}{3}=\hlm{\dfrac{13}{3}}=4{,}333\ldots$%
+}
+
+\SH{Imprópria $\to$ Mista (divisão euclidiana)}
+\exemp{%
+  $\dfrac{17}{5}$: $17\div5=3$ (resto $2$)
+    $\;\Rightarrow\;\hlm{3\dfrac{2}{5}}$\\[3pt]
+  $\dfrac{22}{7}$: $22\div7=3$ (resto $1$)
+    $\;\Rightarrow\;\hlm{3\dfrac{1}{7}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$<\!>$}{darkblue}{Comparação de Frações}{Qual fração é maior?}
+
+\SH{Mesmo denominador — compare os numeradores}
+\exemp{%
+  $\dfrac{3}{7}$ vs $\dfrac{5}{7}$: $3<5$
+    $\;\Rightarrow\;\hlm{\dfrac{3}{7}<\dfrac{5}{7}}$%
+}
+
+\SH{Produto cruzado — método rápido}
+\regra{$\dfrac{a}{b}\;\square\;\dfrac{c}{d}
+       \;\Leftrightarrow\; a\times d \;\square\; c\times b$}
+
+\exemp{%
+  $\dfrac{3}{4}$ vs $\dfrac{5}{6}$:
+    $3\times6=18$,\; $5\times4=20$\\
+  $18<20\;\Rightarrow\;\hlm{\dfrac{3}{4}<\dfrac{5}{6}}$\\[3pt]
+  $\dfrac{7}{9}$ vs $\dfrac{5}{6}$:
+    $7\times6=42$,\; $5\times9=45$\\
+  $42<45\;\Rightarrow\;\hlm{\dfrac{7}{9}<\dfrac{5}{6}}$%
+}
+
+\SH{Denominadores diferentes — MMC}
+\exemp{%
+  $\dfrac{3}{4}$ vs $\dfrac{5}{6}$ — MMC$(4,6)=12$:\\
+  $\hlm{\dfrac{9}{12}}$ vs $\hlm{\dfrac{10}{12}}$
+    $\;\Rightarrow\;\dfrac{3}{4}<\dfrac{5}{6}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{D\'iz}{badgepurple}{Dízima Periódica $\to$ Fração}{Técnica da equação: eliminar o período}
+
+\small\color{bodytext}%
+Chame a dízima de $x$. Multiplique por potência de 10 que alinhe os
+períodos e subtraia.
+
+\SH{Dízima simples — período logo após a vírgula}
+\exemp{%
+  $x=0{,}\overline{3}$\;→\; $10x=3{,}333\ldots$\\
+  $10x-x=3$\;→\; $9x=3$
+    \;→\; $\hlm{x=\dfrac{3}{9}=\dfrac{1}{3}}$\\[4pt]
+  $x=0{,}\overline{63}$\;→\; $100x=63{,}6363\ldots$\\
+  $100x-x=63$\;→\; $99x=63$
+    \;→\; $\hlm{x=\dfrac{63}{99}=\dfrac{7}{11}}$%
+}
+
+\SH{Dízima composta — parte não periódica antes}
+\exemp{%
+  $x=0{,}58\overline{3}$ (1 não-per., 1 per.)\\
+  $10x=5{,}8\overline{3}$\quad $100x=58{,}\overline{3}$\\
+  $90x=52{,}5\;\Rightarrow\;900x=525$
+    \;→\; $\hlm{x=\dfrac{7}{12}}$%
+}
+\nota{\textbf{Atalho:}\;
+$\dfrac{\text{com período}-\text{sem período}}%
+       {\underbrace{9\cdots9}_{\text{peri.}}%
+        \underbrace{0\cdots0}_{\text{não peri.}}}$\quad
+Ex.: $0{,}58\overline{3}=\dfrac{583-58}{900}=\dfrac{7}{12}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{$+$/$-$}{darkblue}{Soma e Subtração de Frações}{Denominadores iguais e diferentes}
+
+\SH{Mesmo denominador — some/subtraia os numeradores}
+\formula{$\dfrac{a}{c}\pm\dfrac{b}{c}=\dfrac{a\pm b}{c}$}
+\exemp{%
+  $\dfrac{2}{4}+\dfrac{1}{4}=\hlm{\dfrac{3}{4}}$\qquad
+  $\dfrac{2}{4}-\dfrac{1}{4}=\hlm{\dfrac{1}{4}}$%
+}
+
+\SH{Método MMC — denominadores diferentes}
+\exemp{%
+  $\dfrac{2}{3}+\dfrac{1}{4}$ — MMC$(3,4)=12$\\
+  $\dfrac{8}{12}+\dfrac{3}{12}=\hlm{\dfrac{11}{12}}$%
+}
+
+\SH{Método cruzado — mais rápido para 2 frações}
+\regra{$\dfrac{a}{b}\pm\dfrac{c}{d}=\dfrac{(a\times d)\pm(c\times b)}{b\times d}$}
+\exemp{%
+  \textbf{Soma:}\;
+    $\dfrac{2}{3}+\dfrac{1}{4}=\dfrac{8+3}{12}=\hlm{\dfrac{11}{12}}$\\[3pt]
+  \textbf{Subtração:}\;
+    $\dfrac{5}{2}-\dfrac{3}{7}=\dfrac{35-6}{14}=\hlm{\dfrac{29}{14}}$%
+}
+\nota{\textbf{Quando usar cada método:} o MMC é mais eficiente quando
+os denominadores têm fatores comuns (ex.: 4 e 6 → MMC=12, não 24).
+O cruzado é direto quando são primos entre si.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times$/$\div$}{darkblue}{Multiplicação e Divisão}{Num.$\times$num., den.$\times$den.; inverso na divisão}
+
+\SH{Multiplicação — direto}
+\formula{$\dfrac{a}{b}\times\dfrac{c}{d}=\dfrac{a\times c}{b\times d}$}
+\exemp{%
+  $\dfrac{2}{3}\times\dfrac{3}{4}=\dfrac{6}{12}=\hlm{\dfrac{1}{2}}$\qquad
+  $\dfrac{5}{2}\times\dfrac{3}{7}=\hlm{\dfrac{15}{14}}$%
+}
+
+\SH{Divisão — multiplica pelo inverso}
+\formula{$\dfrac{a}{b}\div\dfrac{c}{d}=\dfrac{a}{b}\times\dfrac{d}{c}=\dfrac{a\times d}{b\times c}$}
+\exemp{%
+  $\dfrac{2}{3}\div\dfrac{4}{6}
+    =\dfrac{2}{3}\times\dfrac{6}{4}=\dfrac{12}{12}=\hlm{1}$\\[3pt]
+  $\dfrac{3}{4}\div\dfrac{8}{5}
+    =\dfrac{3}{4}\times\dfrac{5}{8}=\hlm{\dfrac{15}{32}}$%
+}
+\nota{\textbf{Simplifique antes de multiplicar} quando possível —
+cancele fatores entre numeradores e denominadores de frações
+\emph{diferentes} antes de efetuar a conta:\\
+$\dfrac{2}{\cancel{3}}\times\dfrac{\cancel{3}}{4}
+ =\dfrac{2}{1}\times\dfrac{1}{4}=\hlm{\dfrac{1}{2}}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{$a^n$}{darkblue}{Potenciação de Frações}{Eleva numerador e denominador ao expoente}
+
+\formula{$\left(\dfrac{a}{b}\right)^{\!n}=\dfrac{a^n}{b^n}$
+         \qquad
+         $\left(\dfrac{a}{b}\right)^{\!-n}=\dfrac{b^n}{a^n}$}
+
+\exemp{%
+  $\left(\dfrac{2}{3}\right)^3=\hlm{\dfrac{8}{27}}$\qquad
+  $\left(\dfrac{3}{4}\right)^2=\hlm{\dfrac{9}{16}}$\\[3pt]
+  \textbf{Expoente zero:}\;
+    $\left(\dfrac{5}{7}\right)^0=\hlm{1}$
+    — qualquer fração não nula\\[3pt]
+  \textbf{Expoente negativo:}\;
+    $\left(\dfrac{2}{3}\right)^{-2}
+    =\left(\dfrac{3}{2}\right)^2=\hlm{\dfrac{9}{4}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Mista}{badgegreen}{Operações com Frações Mistas}{Converta para imprópria antes de operar}
+
+\small\color{bodytext}%
+O procedimento padrão é \textbf{converter as mistas em impróprias},
+operar e, se necessário, converter o resultado de volta.
+
+\exemp{%
+  \textbf{Soma:}\;
+    $2\dfrac{1}{3}+1\dfrac{3}{4}=\dfrac{7}{3}+\dfrac{7}{4}$\\
+  MMC$(3,4)=12$:\;
+    $\dfrac{28}{12}+\dfrac{21}{12}=\dfrac{49}{12}=\hlm{4\dfrac{1}{12}}$\\[4pt]
+  \textbf{Multiplicação:}\;
+    $1\dfrac{1}{2}\times2\dfrac{2}{3}=\dfrac{3}{2}\times\dfrac{8}{3}$\\
+  $=\dfrac{\cancel{3}}{2}\times\dfrac{8}{\cancel{3}}=\dfrac{8}{2}=\hlm{4}$%
+}
+\nota{Em somas de mistas com denominadores iguais é possível somar
+as partes inteiras separadamente e as fracionárias separadamente,
+reagrupando ao final. Mesmo assim, a conversão para imprópria
+é sempre a abordagem mais segura.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prob}{badgegreen}{Problemas Contextualizados}{Receitas, áreas, velocidade e descontos}
+
+\exemp{%
+  \textbf{Receita:} pede $\dfrac{3}{4}$ xíc.; fazer $\dfrac{1}{2}$ da receita:\\
+  $\dfrac{3}{4}\times\dfrac{1}{2}=\hlm{\dfrac{3}{8}}$ xícara\\[4pt]
+  \textbf{Área:} jardim $2\dfrac{1}{2}\,$m $\times$ $1\dfrac{3}{4}\,$m:\\
+  $\dfrac{5}{2}\times\dfrac{7}{4}=\dfrac{35}{8}=\hlm{4\dfrac{3}{8}\,\text{m}^2}$\\[4pt]
+  \textbf{Velocidade:} $\dfrac{5}{2}$\,km em $\dfrac{1}{4}$\,h:\\
+  $v=\dfrac{5}{2}\div\dfrac{1}{4}=\dfrac{5}{2}\times4=\hlm{10\,\text{km/h}}$\\[4pt]
+  \textbf{Desconto:} R\$\,120 com $\dfrac{1}{5}$ de desconto:\\
+  $120\times\dfrac{1}{5}=24\;\Rightarrow$ preço final: \hl{R\$\,96}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{!}{vered}{Erros Comuns}{Armadilhas frequentes com frações}
+
+\exemp{%
+  \textbf{Somar denominadores \nok}\\
+  $\dfrac{1}{2}+\dfrac{1}{3}\neq\dfrac{2}{5}$\quad
+  Correto: $\dfrac{3+2}{6}=\hlm{\dfrac{5}{6}}$\\[4pt]
+  \textbf{Não inverter na divisão \nok}\\
+  $\dfrac{2}{3}\div\dfrac{4}{5}\neq\dfrac{8}{15}$\quad
+  Correto: $\dfrac{2}{3}\times\dfrac{5}{4}=\hlm{\dfrac{5}{6}}$\\[4pt]
+  \textbf{Deixar sem simplificar \nok}\\
+  $\dfrac{6}{9}$ incompleto $\;\Rightarrow\;$ MDC$=3$
+    $\;\Rightarrow\;\hlm{\dfrac{2}{3}}$\\[4pt]
+  \textbf{Operar fração mista diretamente \nok}\\
+  Converta sempre:
+  $2\dfrac{1}{3}\times3=\dfrac{7}{3}\times3=\hlm{7}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\mathbb{R}$}{badgegreen}{Irracionais e Reais}{Dízimas não periódicas e o conjunto $\mathbb{R}$}
+
+\regra{Um número \textbf{irracional} \emph{não} pode ser escrito como
+$\dfrac{a}{b}$ com $a,b\in\mathbb{Z}$ e $b\neq0$. Em decimal:
+dízima \textbf{não periódica e infinita}.}
+
+\SH{Irracionais famosos}
+\exemp{%
+  $\sqrt{2}=1{,}41421\ldots$\quad $\pi=3{,}14159\ldots$\\
+  $e=2{,}71828\ldots$\quad
+  $\sqrt{3},\;\sqrt{5},\;\sqrt{7},\ldots$%
+}
+
+\SH{Diagrama de inclusão}
+\formula{$\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}$}
+
+\exemp{%
+  $\sqrt{9}=3$\;→\; \hl{natural, inteiro, racional, real}\\
+  $\sqrt{2}$\;→\; \hl{irracional (real, mas não racional)}\\
+  $-\dfrac{5}{3}$\;→\; \hl{racional e real, não inteiro}%
+}
+\nota{\textbf{Como identificar irracionais:} $\sqrt{n}$ é irracional
+sempre que $n$ não for um quadrado perfeito.\\
+Quadrados de 1 a 100: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100.}
+
+\end{multicols}
+\end{document}
