@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.5.20)  27 MAY 2026 19:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.5.20)  27 MAY 2026 20:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./10-Divisibilidade.tex
-(10-Divisibilidade.tex
+**./10-DivisibilidadeNew.tex
+(10-DivisibilidadeNew.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -892,102 +892,102 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@olf=\skip66
 \f@nch@O@orf=\skip67
 )
-(10-Divisibilidade.aux)
-\openout1 = `10-Divisibilidade.aux'.
+(10-DivisibilidadeNew.aux)
+\openout1 = `10-DivisibilidadeNew.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 190.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-73.
+90.
 
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 190.
+LaTeX Font Info:    ... okay on input line 190.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 173.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 173.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 173.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 173.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 173.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 173.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 173.
-LaTeX Font Info:    Redeclaring math accent \check on input line 173.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 173.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 173.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 173.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 173.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 173.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 190.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 190.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 190.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 190.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 190.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 190.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 190.
+LaTeX Font Info:    Redeclaring math accent \check on input line 190.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 190.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 190.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 190.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 190.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 173.
+(Font)              `operators' in the math version `normal' on input line 190.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/Inter-Regular(0)/m/n on input line 1
-73.
+90.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 173.
+(Font)              `operators' in the math version `bold' on input line 190.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/Inter-Regular(0)/m/n on input line 
-173.
+190.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/Inter-Regular(0)/m/n --> TU/Inter-Regular(0)/m/n on 
-input line 173.
+input line 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/Inter-Regular(0)/m/it on input line
- 173.
+ 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/Inter-Regular(0)/b/n on input line 
-173.
+190.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 173.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 173.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 190.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/Inter-Regular(0)/m/n --> TU/Inter-Regular(0)/b/n on 
-input line 173.
+input line 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/Inter-Regular(0)/b/it on input lin
-e 173.
+e 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 173.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 190.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 173.
-LaTeX Info: Redefining \microtypecontext on input line 173.
-Package microtype Info: Applying patch `item' on input line 173.
-Package microtype Info: Applying patch `toc' on input line 173.
-Package microtype Info: Applying patch `eqnum' on input line 173.
-Package microtype Info: Applying patch `footnote' on input line 173.
-Package microtype Info: Applying patch `verbatim' on input line 173.
-LaTeX Info: Redefining \microtypesetup on input line 173.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 190.
+LaTeX Info: Redefining \microtypecontext on input line 190.
+Package microtype Info: Applying patch `item' on input line 190.
+Package microtype Info: Applying patch `toc' on input line 190.
+Package microtype Info: Applying patch `eqnum' on input line 190.
+Package microtype Info: Applying patch `footnote' on input line 190.
+Package microtype Info: Applying patch `verbatim' on input line 190.
+LaTeX Info: Redefining \microtypesetup on input line 190.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -1036,7 +1036,7 @@ Package microtype Info: Character `"AD (= "AD)' is missing
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count342
-LaTeX Font Info:    Trying to load font information for U+msa on input line 178
+LaTeX Font Info:    Trying to load font information for U+msa on input line 197
 .
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1044,7 +1044,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:\Program Files\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 178
+LaTeX Font Info:    Trying to load font information for U+msb on input line 197
 .
 
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1059,23 +1059,23 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 ) [1
 
 ] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 360--363
-[] [] [] [] [] [] [] []
+Underfull \hbox (badness 10000) in paragraph at lines 356--360
+[] [] [] [] [] [] [] [] []
  []
 
-[3] [4] (10-Divisibilidade.aux)
+[3] (10-DivisibilidadeNew.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26339 strings out of 409616
- 586732 string characters out of 5773180
- 1961191 words of memory out of 5000000
- 48038 multiletter control sequences out of 15000+600000
- 564462 words of font info for 85 fonts, out of 8000000 for 9000
+ 26321 strings out of 409616
+ 586435 string characters out of 5773180
+ 1957191 words of memory out of 5000000
+ 48021 multiletter control sequences out of 15000+600000
+ 564454 words of font info for 84 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 91i,11n,99p,1016b,930s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 91i,12n,99p,1019b,930s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 10-Divisibilidade.pdf (4 pages).
+Output written on 10-DivisibilidadeNew.pdf (3 pages).

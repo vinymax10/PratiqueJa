@@ -1,0 +1,380 @@
+% ============================================================
+%  Divisibilidade — Apostila Premium | PratiqueJa
+%  Engine: XeLaTeX | Font: Inter
+% ============================================================
+\documentclass[12pt]{article}
+
+\usepackage[brazil]{babel}
+\usepackage{fontspec}
+\setmainfont[
+  BoldFont=Inter-Bold, ItalicFont=Inter-Italic,
+  BoldItalicFont=Inter-BoldItalic,
+]{Inter-Regular}
+\usepackage{microtype}
+
+\usepackage[a4paper, top=1.5cm, bottom=2.8cm,
+            left=1.5cm, right=1.5cm]{geometry}
+\setlength{\footskip}{1.3cm}
+
+% ── Paleta profissional ───────────────────────────────────────
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+
+\definecolor{darkblue}{HTML}{1E3A8A}
+\definecolor{accentblue}{HTML}{38BDF8}
+\definecolor{graycolor}{HTML}{64748B}
+\definecolor{vegreen}{HTML}{22C55E}
+\definecolor{vered}{HTML}{EF4444}
+\definecolor{badgepurple}{HTML}{7C3AED}
+\definecolor{badgegreen}{HTML}{059669}
+
+\definecolor{rulebg}{HTML}{EEF2FF}
+\definecolor{exbg}{HTML}{F8FAFC}
+\definecolor{obsbg}{HTML}{F9FAFB}
+\definecolor{exborder}{HTML}{E2E8F0}
+\definecolor{sepcolor}{HTML}{E2E8F0}
+\definecolor{bodytext}{HTML}{374151}
+\definecolor{titletext}{HTML}{0F172A}
+\definecolor{mutedtext}{HTML}{64748B}
+
+% ── Pacotes ───────────────────────────────────────────────────
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{array}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% ── Rodapé — linha na cor darkblue ───────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.6pt}
+\makeatletter
+\renewcommand{\footrule}{%
+  {\color{darkblue}%
+   \vskip-3.5pt\vskip-\footrulewidth%
+   \hrule\@width\headwidth\@height\footrulewidth%
+   \vskip 3.5pt}}
+\makeatother
+\fancyfoot[L]{\small\color{mutedtext}%
+  \textbf{Pratique}\textcolor{darkblue}{\textbf{Já}}}
+\fancyfoot[C]{\small\color{mutedtext}\itshape Divisibilidade}
+\fancyfoot[R]{\small\color{mutedtext}\thepage}
+
+% ============================================================
+%  ATALHOS TIPOGRÁFICOS
+% ============================================================
+\newcommand{\hl}[1]{\textcolor{darkblue}{\textbf{#1}}}  % dígito destacado
+\newcommand{\ok}{{\bfseries\textcolor{vegreen}{✓}}}
+\newcommand{\nok}{{\bfseries\textcolor{vered}{✗}}}
+
+% ============================================================
+%  COMPONENTES VISUAIS
+% ============================================================
+
+% ── Cabeçalho da apostila ─────────────────────────────────────
+\newcommand{\heroheader}[3]{%
+  \begin{tcolorbox}[
+    enhanced, arc=0pt, boxrule=0pt,
+    colback=white, colframe=white,
+    left=14pt, right=14pt, top=10pt, bottom=10pt,
+    borderline west={5pt}{0pt}{darkblue},
+    borderline south={0.8pt}{0pt}{sepcolor},
+  ]
+    \noindent
+    {\color{titletext}\fontsize{20}{24}\selectfont\bfseries #1}\hfill
+    {\color{mutedtext}\small
+      \textbf{Pratique}\textcolor{darkblue}{\textbf{Já}}
+      \ ·\ \itshape #3}\par
+    \vspace{2pt}
+    {\color{mutedtext}\normalsize\itshape #2}
+  \end{tcolorbox}%
+  \vspace{6pt}%
+}
+
+% ── Badge inline ──────────────────────────────────────────────
+\newcommand{\badge}[2]{%
+  \tcbox[
+    on line, enhanced, arc=5pt, boxrule=0pt,
+    colback=#2, colframe=#2,
+    left=5pt, right=5pt, top=3pt, bottom=3pt,
+    nobeforeafter,
+  ]{\small\bfseries\color{white}#1}%
+}
+
+% ── Cabeçalho de seção ────────────────────────────────────────
+\newcommand{\TW}[4]{%
+  \vspace{7pt}%
+  \noindent{\color{#2}\rule{\linewidth}{2pt}}\par\nopagebreak
+  \vspace{3pt}%
+  \noindent\badge{#1}{#2}\hspace{6pt}%
+  {\color{titletext}\bfseries\normalsize #3}%
+  {\color{mutedtext}\ ·\ \small\itshape #4}\par\nopagebreak
+  \vspace{3pt}%
+  {\color{sepcolor}\rule{\linewidth}{0.8pt}}%
+  \vspace{4pt}%
+}
+
+% ── Regra ─────────────────────────────────────────────────────
+\newcommand{\regra}[1]{%
+  \begin{tcolorbox}[
+    enhanced, arc=0pt, boxrule=0pt,
+    colback=rulebg, colframe=rulebg,
+    left=10pt, right=8pt, top=6pt, bottom=6pt,
+    borderline west={3.5pt}{0pt}{darkblue},
+  ]
+    \color{darkblue}\small #1
+  \end{tcolorbox}%
+  \vspace{2pt}%
+}
+
+% ── Exemplos agrupados ────────────────────────────────────────
+\newcommand{\exemp}[1]{%
+  \vspace{2pt}%
+  \begin{tcolorbox}[
+    arc=5pt, boxrule=0.6pt,
+    colback=exbg, colframe=exborder,
+    left=9pt, right=9pt, top=5pt, bottom=5pt,
+  ]
+    \setlength{\parskip}{1.5pt}%
+    \small\color{bodytext}#1
+  \end{tcolorbox}%
+  \vspace{1pt}%
+}
+
+% ── Fórmula ───────────────────────────────────────────────────
+\newcommand{\formula}[1]{%
+  \vspace{3pt}%
+  \begin{tcolorbox}[
+    arc=5pt, boxrule=0.8pt,
+    colback=rulebg, colframe=darkblue,
+    left=10pt, right=10pt, top=7pt, bottom=7pt,
+  ]
+    \centering\color{darkblue}\normalsize\bfseries #1
+  \end{tcolorbox}%
+  \vspace{3pt}%
+}
+
+% ── Observação ────────────────────────────────────────────────
+\newcommand{\obs}[1]{%
+  \vspace{2pt}%
+  \begin{tcolorbox}[
+    enhanced, arc=0pt, boxrule=0pt,
+    colback=obsbg, colframe=obsbg,
+    left=8pt, right=8pt, top=4pt, bottom=4pt,
+    borderline west={2.5pt}{0pt}{graycolor},
+  ]
+    {\color{graycolor}\fontsize{7.5}{9}\selectfont\bfseries OBS\ }%
+    \small\color{bodytext}#1
+  \end{tcolorbox}%
+  \vspace{1pt}%
+}
+
+% ── Rótulo interno h4 ─────────────────────────────────────────
+\newcommand{\SH}[1]{%
+  \vspace{4pt}%
+  \noindent{\color{mutedtext}\fontsize{7.5}{9}\selectfont
+            \bfseries\MakeUppercase{#1}}\par
+  \vspace{1pt}%
+}
+
+% ── Chips de divisor ──────────────────────────────────────────
+\newcommand{\divisorchip}[1]{%
+  \tcbox[
+    on line, enhanced, arc=5pt, boxrule=0.5pt,
+    colback=rulebg, colframe=exborder,
+    left=4pt, right=4pt, top=2pt, bottom=2pt,
+    nobeforeafter,
+  ]{\small\bfseries\color{darkblue}#1}\hspace{2pt}%
+}
+
+% ============================================================
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Divisibilidade}%
+           {Regras, Divisores e Aplicações}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Divisibilidade}
+
+\regra{Dizemos que $a$ é \textbf{divisível} por $b$ quando existe
+$q \in \mathbb{Z}$ tal que $a = b \cdot q$, ou seja, o \textbf{resto
+da divisão é zero}. Chamamos $b$ de \textbf{divisor} de $a$ e $a$
+de \textbf{múltiplo} de $b$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{2}{darkblue}{Divisibilidade por 2}{Números pares}
+
+\regra{O \textbf{último dígito} deve ser \textbf{0, 2, 4, 6 ou 8}.}
+
+\exemp{%
+  13\hl{8} → último dígito 8 → divisível \ok\\
+  47\hl{5} → último dígito 5 → não divisível \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{3}{darkblue}{Divisibilidade por 3}{Soma dos algarismos}
+
+\regra{A \textbf{soma dos algarismos} deve ser múltipla de \textbf{3}.}
+
+\exemp{%
+  132 → 1+3+2=\hl{6} → múltiplo de 3 \ok\\
+  531 → 5+3+1=\hl{9} → múltiplo de 3 \ok\\
+  124 → 1+2+4=\hl{7} → não múltiplo de 3 \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{4}{darkblue}{Divisibilidade por 4}{Dois últimos dígitos}
+
+\regra{Os \textbf{2 últimos dígitos} devem formar número divisível
+por 4. Os demais algarismos não influenciam.}
+
+\exemp{%
+  5\hl{24} → 24 é múltiplo de 4 \ok\\
+  13\hl{36} → 36 é múltiplo de 4 \ok\\
+  5\hl{14} → 14 não é múltiplo de 4 \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{5}{darkblue}{Divisibilidade por 5}{Último dígito 0 ou 5}
+
+\regra{O \textbf{último dígito} deve ser \textbf{0} ou \textbf{5}.}
+
+\exemp{%
+  32\hl{5} → termina em 5 \ok\quad
+  14\hl{0} → termina em 0 \ok\\
+  78\hl{3} → termina em 3 → não divisível \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{6}{darkblue}{Divisibilidade por 6}{Divisível por 2 e por 3}
+
+\regra{Deve ser \textbf{par} e a soma dos algarismos deve ser
+\textbf{múltipla de 3} — ambas as condições simultaneamente.}
+
+\exemp{%
+  654: par e 6+5+4=\hl{15} (÷3) \ok\\
+  312: par e 3+1+2=\hl{6} (÷3) \ok\\
+  125: ímpar → não divisível por 6 \nok%
+}
+\obs{Basta uma condição falhar para o número não ser divisível por 6.}
+
+%─────────────────────────────────────────────────────────────
+\TW{7}{darkblue}{Divisibilidade por 7}{Regra do duplo}
+
+\regra{Multiplique o \textbf{último dígito por 2} e subtraia do
+número sem esse dígito. Repita até concluir.}
+
+\exemp{%
+  16\hl{1} → 1·2=2 → 16−2=\hl{14} \ok\\
+  109\hl{9} → 9·2=18 → 109−18=91 → 9−2=\hl{7} \ok%
+}
+\obs{Para números pequenos, a divisão direta costuma ser mais prática.}
+
+%─────────────────────────────────────────────────────────────
+\TW{8}{darkblue}{Divisibilidade por 8}{Três últimos dígitos}
+
+\regra{Os \textbf{3 últimos dígitos} devem formar número divisível
+por 8. Os demais não influenciam.}
+
+\exemp{%
+  7\hl{128} → 128 é múltiplo de 8 \ok\\
+  5\hl{256} → 256 é múltiplo de 8 \ok\\
+  3\hl{100} → 100 não é múltiplo de 8 \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{9}{darkblue}{Divisibilidade por 9}{Soma dos algarismos}
+
+\regra{A \textbf{soma dos algarismos} deve ser múltipla de \textbf{9}.}
+
+\exemp{%
+  432 → 4+3+2=\hl{9} \ok\quad
+  124 → 1+2+4=\hl{7} \nok\\
+  6561 → 6+5+6+1=\hl{18} → múltiplo de 9 \ok%
+}
+\obs{Todo número divisível por 9 também é divisível por 3.}
+
+%─────────────────────────────────────────────────────────────
+\TW{10}{darkblue}{Divisibilidade por 10}{Último dígito 0}
+
+\regra{O \textbf{último dígito deve ser 0}. Como $10=2{\times}5$,
+equivale a ser divisível por 2 e por 5 simultaneamente.}
+
+\exemp{%
+  15\hl{0} → termina em 0 \ok\quad
+  487\hl{0} → termina em 0 \ok\\
+  32\hl{5} → termina em 5 → divisível por 5, mas não por 10 \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{11}{badgegreen}{Divisibilidade por 11}{Soma alternada dos algarismos}
+
+\regra{A \textbf{soma alternada} dos algarismos (alternando $+$ e
+$-$ da esquerda para a direita) deve ser múltipla de 11 ou zero.}
+
+\exemp{%
+  253 → +2−5+3=\hl{0} → múltiplo de 11 \ok\\
+  1452 → +1−4+5−2=\hl{0} \ok\\
+  123 → +1−2+3=\hl{2} → não divisível \nok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Div}{badgegreen}{Divisores de um Número}{Como encontrar todos os divisores naturais}
+
+Para cada fator primo da decomposição, multiplique \textbf{todos os
+divisores já encontrados} por esse fator e acrescente os novos.
+
+\SH{Exemplo — divisores de 60}
+
+$60 = 2^2 \cdot 3^1 \cdot 5^1$
+
+\vspace{3pt}
+\noindent
+$\begin{array}[t]{r|l|l}
+  & & \textcolor{darkblue}{1} \\
+60 & \textcolor{darkblue}{2} & \textcolor{darkblue}{2} \\
+30 & \textcolor{darkblue}{2} & \textcolor{darkblue}{4} \\
+15 & \textcolor{darkblue}{3} & \textcolor{darkblue}{3,\ 6,\ 12} \\
+ 5 & \textcolor{darkblue}{5} & \textcolor{darkblue}{5,\ 10,\ 20,\ 15,\ 30,\ 60} \\
+\hline
+ 1 & & \\
+\end{array}$
+
+\SH{Todos os divisores de 60}
+
+\noindent
+\divisorchip{1}\divisorchip{2}\divisorchip{3}\divisorchip{4}%
+\divisorchip{5}\divisorchip{6}\divisorchip{10}\divisorchip{12}%
+\divisorchip{15}\divisorchip{20}\divisorchip{30}\divisorchip{60}
+
+\SH{Quantidade de divisores}
+
+Se $n = p_1^{a_1} \cdot p_2^{a_2} \cdots$, o total de divisores é:
+
+\formula{$d(n) = (a_1+1)\cdot(a_2+1)\cdots$}
+
+\exemp{%
+  $60 = 2^2{\cdot}3^1{\cdot}5^1
+  \Rightarrow d(60)=(3)(2)(2)=\hl{12}$ divisores\\
+  $36 = 2^2{\cdot}3^2
+  \Rightarrow d(36)=(3)(3)=\hl{9}$ divisores%
+}
+
+\end{multicols}
+
+\end{document}
