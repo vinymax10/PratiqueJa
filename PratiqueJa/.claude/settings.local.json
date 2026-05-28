@@ -67,7 +67,20 @@
       "PowerShell(Test-Path *)",
       "PowerShell(Write-Host \"=== ESTRUTURA DE tex-new ===\" ; Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex-new\" -Recurse | Where-Object { $_.PSIsContainer } | Select-Object @{Name='Path';Expression={$_.FullName -replace [regex]::Escape\\(\"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex-new\\\\\"\\), ''}} | ForEach-Object { Write-Host $_.Path })",
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -output-directory \"tex-new/basico/adicaoNatural\" \"tex-new/basico/adicaoNatural/adicaoNatural.tex\")",
-      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -output-directory \"tex-new/basico/adicaoSubtracaoInteiro\" \"tex-new/basico/adicaoSubtracaoInteiro/adicaoSubtracaoInteiro.tex\")"
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -output-directory \"tex-new/basico/adicaoSubtracaoInteiro\" \"tex-new/basico/adicaoSubtracaoInteiro/adicaoSubtracaoInteiro.tex\")",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\\" -Directory | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\matematica\\\\\" -Directory | ForEach-Object { $_.Name })",
+      "PowerShell(head *)",
+      "PowerShell(\\(Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\matematica\\\\intermediario\\\\\" -Directory\\).Count; Get-ChildItem -Path \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\src\\\\main\\\\webapp\\\\matematica\\\\intermediario\\\\\" -Directory | Select-Object -First 10 Name)",
+      "PowerShell(C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe --shell-escape -output-directory \"tex-new/basico/areaPerimetro\" \"tex-new/basico/areaPerimetro/areaPerimetro.tex\" 2>&1 | Select-Object -Last 30)",
+      "Bash(python -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
+      "Bash(python -c \"from svglib.svglib import svg2rlg; print\\('svglib ok'\\)\")",
+      "Bash(python -c \"from PIL import Image; print\\('pillow ok'\\)\")",
+      "Bash(python -c \"import subprocess; r=subprocess.run\\(['pip','list'],capture_output=True,text=True\\); print\\(r.stdout[:500]\\)\")",
+      "PowerShell(Get-Process *)",
+      "PowerShell(C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe -output-directory \"tex-new/basico/areaPerimetro\" \"tex-new/basico/areaPerimetro/areaPerimetro.tex\" 2>&1 | Select-Object -Last 15)",
+      "PowerShell(C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe -output-directory \"tex-new/basico/areaPerimetro\" \"tex-new/basico/areaPerimetro/areaPerimetro.tex\" 2>&1)",
+      "PowerShell(Start-Process \"tex-new\\\\basico\\\\areaPerimetro\\\\areaPerimetro.pdf\"; Start-Sleep -Seconds 3; Write-Host \"opened\")"
     ]
   }
 }

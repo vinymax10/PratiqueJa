@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="230" height="195" viewBox="0 0 130 110">
     <polygon points="65,8 10,100 120,100" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-    <text x="65" y="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d4ed8">l</text>
-    <text x="28" y="62" font-size="15" font-weight="bold" fill="#1d4ed8">l</text>
-    <text x="100" y="62" font-size="15" font-weight="bold" fill="#1d4ed8">l</text>
+    <text x="65" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8">l</text>
+    <text x="28" y="62" font-size="14" font-weight="bold" fill="#1d4ed8">l</text>
+    <text x="100" y="62" font-size="14" font-weight="bold" fill="#1d4ed8">l</text>
 </svg>

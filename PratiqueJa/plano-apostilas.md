@@ -123,6 +123,11 @@ C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe `
 C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe `
   -output-directory "tex-new/intermediario/divisibilidade" `
   "tex-new/intermediario/divisibilidade/divisibilidade.tex"
+
+# Básico — areaPerimetro
+C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe `
+  -output-directory "tex-new/basico/areaPerimetro" `
+  "tex-new/basico/areaPerimetro/areaPerimetro.tex"
 ```
 
 **Atenção:** usar `xelatex.exe` — nunca `pdflatex` (fontspec exige XeLaTeX).
@@ -198,6 +203,20 @@ O arquivo `pratiqueja.sty` fica **somente** em `tex-new/`. Cada `.tex` aponta co
 ```
 O `\hfill` distribui o espaço restante igualmente. Largura de 3.3cm por minipage funciona bem para 5 colunas em página A4 com margens de 1.5cm.
 
+### Figuras geométricas — usar TikZ
+Para assuntos com figuras (quadrado, triângulo, círculo, etc.), usar TikZ diretamente no `.tex`:
+- Adicionar `\usepackage{tikz}` após `\usepackage{../../pratiqueja}`
+- Definir estilos com `\tikzset{...}` para cores consistentes
+- Inserir a figura após `\TW{...}` e antes de `\regra{}`:
+  ```latex
+  \begin{center}\vspace{-4pt}
+  \begin{tikzpicture}[scale=0.85]
+  % ... shapes ...
+  \end{tikzpicture}
+  \vspace{-4pt}\end{center}
+  ```
+- Referência: ver `tex-new/basico/areaPerimetro/areaPerimetro.tex` para padrão completo
+
 ### Fonte Inter 18pt
 Instalada pelo usuário nas fontes de usuário (não sistema). Se o PDF sair com fontes erradas (nullfont), verificar se a fonte está instalada e usar o nome exato `Inter 18pt` no `\setmainfont`.
 
@@ -210,7 +229,7 @@ Instalada pelo usuário nas fontes de usuário (não sistema). Se o PDF sair com
 - [x] racionais
 - [x] adicaoNatural
 - [x] adicaoSubtracaoInteiro
-- [ ] areaPerimetro
+- [x] areaPerimetro
 - [ ] conjuntos
 - [ ] divisaoNatural
 - [ ] expressaoNumerica

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="230" height="181" viewBox="0 0 140 110">
     <rect x="10" y="10" width="120" height="80" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
     <polyline points="10,26 24,26 24,10" fill="none" stroke="#db2777" stroke-width="1.5"/>
-    <text x="70" y="105" text-anchor="middle" font-size="15" font-weight="bold" fill="#9d174d">b</text>
-    <text x="137" y="53" text-anchor="middle" font-size="15" font-weight="bold" fill="#9d174d">h</text>
+    <text x="70" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#9d174d">b</text>
+    <text x="137" y="53" text-anchor="middle" font-size="14" font-weight="bold" fill="#9d174d">h</text>
 </svg>
