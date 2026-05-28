@@ -41,7 +41,19 @@
       "Bash(xargs grep -l \"insertAssunto\\\\|saveAssunto\\\\|createAssunto\\\\|persist\")",
       "Bash(xargs grep -l \"class.*Init\\\\|class.*Startup\\\\|class.*Boot\\\\|class.*Seed\")",
       "PowerShell($env:PATH -split ';' | Where-Object { $_ -match -join\\('mysql','|maria'\\) })",
-      "PowerShell(& \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\fix-span-full.ps1\")"
+      "PowerShell(& \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\fix-span-full.ps1\")",
+      "Bash(where xelatex *)",
+      "Bash(xelatex -interaction=nonstopmode \"10-Divisibilidade.tex\")",
+      "Bash(Start-Process *)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-Divisibilidade.pdf\")",
+      "WebFetch(domain:localhost)",
+      "Bash(xelatex -interaction=nonstopmode \"10-DivisibilidadeNew.tex\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew.pdf\")",
+      "Bash(xelatex -interaction=nonstopmode \"10-DivisibilidadeNew2.tex\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew2.pdf\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew4.pdf\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\\\\tex2\\\\10-DivisibilidadeNew5.pdf\")",
+      "Bash(xelatex -interaction=nonstopmode \"10-DivisibilidadeNew5.tex\")"
     ]
   }
 }
