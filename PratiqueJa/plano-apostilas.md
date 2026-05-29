@@ -281,19 +281,21 @@ Instalada pelo usuário nas fontes de usuário (não sistema). Se o PDF sair com
 - [x] funcaoQuadratica
 - [x] funcoes
 - [x] funcoesTrigonometricas
-- [ ] geometriaAnalitica
-- [ ] geometriaEspacial
-- [ ] inequacoes2grau
-- [ ] jurosDesconto
-- [ ] leiSenoCosseno
-- [ ] matrizes
-- [ ] numerosComplexos
-- [ ] pA
-- [ ] pG
-- [ ] polinomios
-- [ ] probabilidade
-- [ ] sistemaEquacoes
-- [ ] trigoAdicao
+- [x] geometriaAnalitica
+- [x] geometriaEspacial
+- [x] inequacoes2grau
+- [x] jurosDesconto
+- [x] leiSenoCosseno
+- [x] matrizes
+- [x] numerosComplexos
+- [x] pA
+- [x] pG
+- [x] polinomios
+- [x] probabilidade
+- [x] sistemaEquacoes
+- [x] trigoAdicao
+
+✅ **Módulo Avançado completo!**
 
 ---
 

@@ -1,0 +1,176 @@
+% ============================================================
+%  Matrizes — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Matrizes}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Matrizes}%
+           {Operações, transposta, determinante e inversa}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Introdução}{O que são matrizes?}
+
+\regra{
+Uma matriz de ordem $n \times m$ é uma tabela retangular com $n$ linhas e $m$ colunas. O elemento $a_{i,j}$ está na linha $i$ e coluna $j$.
+
+A \hl{matriz identidade} $I_n$ tem 1 na diagonal principal e 0 nos demais elementos:
+\[
+  I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \quad
+  I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\]
+}
+
+\TW{1}{darkblue}{Soma de Matrizes}{Elemento por elemento — mesma ordem}
+
+\regra{
+Duas matrizes só podem ser somadas se tiverem a \hl{mesma ordem}:
+\[
+  A_{(n \times m)} + B_{(n \times m)} = C_{(n \times m)}, \quad c_{ij} = a_{ij} + b_{ij}
+\]
+}
+
+\exemp{
+$A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix},\quad B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}$
+
+$A + B = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}$
+
+Propriedades: $A+B = B+A$; \;\; $A+(B+C)=(A+B)+C$; \;\; $A+O=A$
+}
+
+\TW{2}{darkblue}{Subtração de Matrizes}{Elemento por elemento — mesma ordem}
+
+\regra{
+\[
+  A_{(n \times m)} - B_{(n \times m)} = C_{(n \times m)}, \quad c_{ij} = a_{ij} - b_{ij}
+\]
+}
+
+\exemp{
+$A - B = \begin{bmatrix} 1-5 & 2-6 \\ 3-7 & 4-8 \end{bmatrix} = \begin{bmatrix} -4 & -4 \\ -4 & -4 \end{bmatrix}$
+}
+
+\TW{3}{darkblue}{Multiplicação por Escalar}{Cada elemento multiplicado por uma constante}
+
+\regra{
+\[
+  k \cdot A_{(n \times m)} = B_{(n \times m)}, \quad b_{ij} = k \cdot a_{ij}
+\]
+}
+
+\exemp{
+$3 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 & 6 \\ 9 & 12 \end{bmatrix}$
+
+Propriedades: $k(A+B)=kA+kB$; \quad $(k+l)A=kA+lA$; \quad $1\cdot A=A$
+}
+
+\TW{4}{darkblue}{Matriz Transposta}{Troca de linhas por colunas}
+
+\regra{
+A transposta de $A$ é obtida trocando linhas por colunas. Se $A$ é $n \times m$, então $A^T$ é $m \times n$:
+\[
+  A = (a_{ij})_{n \times m} \;\Rightarrow\; A^T = (a_{ji})_{m \times n}
+\]
+}
+
+\exemp{
+$A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}_{3\times 2} \;\Rightarrow\;
+A^T = \begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}_{2\times 3}$
+
+Propriedades: $(A^T)^T = A$; \quad $(A+B)^T = A^T+B^T$; \quad $(AB)^T = B^T A^T$
+
+\hl{Simétrica}: $A = A^T$ \quad \hl{Antissimétrica}: $A = -A^T$
+}
+
+\TW{5}{darkblue}{Multiplicação de Matrizes}{Linhas por colunas — dimensões compatíveis}
+
+\regra{
+Para $A \cdot B$, o número de colunas de $A$ deve ser igual ao número de linhas de $B$:
+\[
+  A_{(n\times m)} \cdot B_{(m\times p)} = C_{(n\times p)}, \quad c_{ij} = \sum_{k=1}^{m} a_{ik} b_{kj}
+\]
+}
+
+\exemp{
+$\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \cdot \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 1{\cdot}5{+}2{\cdot}7 & 1{\cdot}6{+}2{\cdot}8 \\ 3{\cdot}5{+}4{\cdot}7 & 3{\cdot}6{+}4{\cdot}8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$
+
+Em geral $A \cdot B \neq B \cdot A$ (não comutativa)
+
+$A \cdot I = I \cdot A = A$ (identidade é elemento neutro)
+}
+
+\TW{6}{darkblue}{Determinante}{Número associado a matrizes quadradas}
+
+\SH{Determinante 2×2}
+
+\regra{
+$\det A = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}$
+}
+
+\exemp{
+$\det\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = 1{\cdot}4 - 2{\cdot}3 = 4 - 6 = \hlm{-2}$
+}
+
+\SH{Determinante 3×3 — Regra de Sarrus}
+
+\regra{
+$\det A = sd_p - sd_s$, onde:
+
+$sd_p = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}$
+
+$sd_s = a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33}$
+}
+
+\exemp{
+$A = \begin{bmatrix}-14 & 0 & 14 \\ 3 & 18 & -3 \\ -2 & -7 & 4\end{bmatrix}$
+
+$sd_p = (-14)(18)(4) + (0)(-3)(-2) + (14)(3)(-7)$
+
+$sd_p = -1008 + 0 - 294 = -1302$
+
+$sd_s = (14)(18)(-2) + (-14)(-3)(-7) + (0)(3)(4)$
+
+$sd_s = -504 - 294 + 0 = -798$
+
+$\hlm{\det A = -1302 - (-798) = -504}$
+}
+
+\TW{Inv}{badgepurple}{Matriz Inversa}{Somente para matrizes quadradas com $\det \neq 0$}
+
+\regra{
+A inversa $A^{-1}$ satisfaz $A \cdot A^{-1} = A^{-1} \cdot A = I$.
+
+Existe somente se: (1) $A$ é quadrada e (2) $\det A \neq 0$.
+
+Para 2×2:
+\[
+  A^{-1} = \dfrac{1}{\det A} \cdot \begin{bmatrix} a_{22} & -a_{12} \\ -a_{21} & a_{11} \end{bmatrix}
+\]
+}
+
+\exemp{
+$A = \begin{bmatrix} 8 & 17 \\ 8 & 11 \end{bmatrix}$
+
+$\det A = 88 - 136 = -48$
+
+$A^{-1} = \dfrac{1}{-48}\begin{bmatrix} 11 & -17 \\ -8 & 8 \end{bmatrix} = \begin{bmatrix} -\frac{11}{48} & \frac{17}{48} \\[4pt] \frac{1}{6} & -\frac{1}{6} \end{bmatrix}$
+}
+
+\end{multicols}
+
+\end{document}

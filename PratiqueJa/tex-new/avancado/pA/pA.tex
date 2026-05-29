@@ -1,0 +1,182 @@
+% ============================================================
+%  Progressão Aritmética — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Progressão Aritmética}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Progressão Aritmética (PA)}%
+           {Termo geral, soma e interpolação aritmética}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição}{O que é uma Progressão Aritmética?}
+
+\regra{
+Uma \hl{Progressão Aritmética (PA)} é uma sequência em que a diferença entre dois termos consecutivos é sempre constante, chamada \hl{razão $r$}.
+
+$r = a_n - a_{n-1}, \quad \forall\; n > 1$
+}
+
+\exemp{
+\textbf{Crescente} ($r > 0$): $2, 5, 8, 11, \ldots$ com $r = 3$
+
+\textbf{Decrescente} ($r < 0$): $10, 7, 4, 1, \ldots$ com $r = -3$
+
+\textbf{Constante} ($r = 0$): $5, 5, 5, 5, \ldots$ com $r = 0$
+}
+
+\TW{$a_n$}{darkblue}{Termo Geral}{Calculando qualquer termo sem listar todos}
+
+\regra{
+Conhecendo o primeiro termo $a_1$ e a razão $r$, o $n$-ésimo termo é:
+\[
+  a_n = a_1 + (n-1) \cdot r
+\]
+}
+
+\exemp{
+\textbf{PA $3, 5, 7, 9, \ldots$ — qual o 20º termo?}
+
+$a_1 = 3$, $r = 2$, $n = 20$
+
+$a_{20} = 3 + 19 \cdot 2 = 3 + 38 = \hlm{41}$
+
+\textbf{Em qual posição está o termo $47$ na PA $3, 5, 7, \ldots$?}
+
+$47 = 3 + (n-1) \cdot 2 \Rightarrow n - 1 = 22$
+
+$\hlm{n = 23}$ — o termo 47 é o 23º.
+
+\textbf{O 3º termo é $7$ e o 8º é $22$. Determine $a_1$ e $r$:}
+
+$a_8 = a_3 + 5r \Rightarrow 22 = 7 + 5r \Rightarrow r = 3$
+
+$a_3 = a_1 + 2r \Rightarrow 7 = a_1 + 6$
+
+$\hlm{a_1 = 1}$, $\hlm{r = 3}$ → PA: $1, 4, 7, 10, \ldots$
+}
+
+\TW{$S_n$}{darkblue}{Soma dos Termos}{Soma dos $n$ primeiros termos da PA}
+
+\regra{
+A soma dos primeiros $n$ termos é a média entre o primeiro e o último termo, multiplicada pelo número de termos:
+\[
+  S_n = \frac{(a_1 + a_n) \cdot n}{2}
+\]
+}
+
+\nota{\textbf{Atenção:} é preciso conhecer $a_n$. Se não for dado, calcule primeiro com a fórmula do termo geral.}
+
+\exemp{
+\textbf{Soma dos 12 primeiros termos da PA $5, 8, 11, 14, \ldots$:}
+
+$a_1 = 5$, $r = 3$
+
+Passo 1 — calcular $a_{12}$:
+
+$a_{12} = 5 + 11 \cdot 3 = 38$
+
+Passo 2 — aplicar $S_n$:
+
+$S_{12} = \dfrac{(5 + 38) \cdot 12}{2} = \dfrac{516}{2} = \hlm{258}$
+}
+
+\TW{Int}{badgepurple}{Interpolação Aritmética}{Inserir meios aritméticos entre dois termos}
+
+\regra{
+Interpolar $k$ \hl{meios aritméticos} entre $a$ e $b$ cria uma PA com $k+2$ termos. A razão é:
+\[
+  r = \frac{b - a}{k + 1}
+\]
+PA resultante: $a,\; a{+}r,\; a{+}2r,\; \ldots,\; b$
+}
+
+\exemp{
+\textbf{3 meios entre $2$ e $18$:}
+
+$r = \dfrac{18-2}{4} = 4$
+
+$\hlm{\text{PA: } 2,\; 6,\; 10,\; 14,\; 18}$
+
+\textbf{5 meios entre $1$ e $13$:}
+
+$r = \dfrac{13-1}{6} = 2$
+
+$\hlm{\text{PA: } 1,\; 3,\; 5,\; 7,\; 9,\; 11,\; 13}$ \quad (7 termos)
+}
+
+\nota{\textbf{Atenção:} $r$ pode ser não inteiro — isso é matematicamente válido.}
+
+\TW{Prop}{badgepurple}{Propriedades}{Relações entre os termos de uma PA}
+
+\exemp{
+\textbf{Termo médio:} qualquer termo é a média de seus vizinhos:
+\[
+  a_k = \frac{a_{k-1} + a_{k+1}}{2}
+\]
+Ex: $3, \mathbf{5}, 7$: $\quad 5 = \frac{3+7}{2}$ \;\ok
+
+\textbf{Termos equidistantes:} a soma é constante:
+\[
+  a_k + a_{n-k+1} = a_1 + a_n
+\]
+Ex: $2, 5, 8, 11, 14$: \;\; $5 + 11 = 16 = 2 + 14$ \;\ok
+
+\textbf{$n$ ímpar:} $S_n = a_{\text{central}} \cdot n$
+
+Ex: $1, 3, 5, 7, 9$: \;\; $S_5 = 5 \cdot 5 = 25$ \;\ok
+
+\textbf{Fórmula alternativa} (sem $a_n$):
+\[
+  S_n = \frac{2a_1 + (n-1)r}{2} \cdot n
+\]
+}
+
+\TW{Prob}{badgepurple}{Problemas Contextualizados}{Aplicação da PA em situações reais}
+
+\exemp{
+\textbf{Prob. 1 — Economia:}
+
+Poupança: R\$\,20,00 na 1ª semana, +R\$\,5,00/semana.
+
+$a_1 = 20$, $r = 5$, $n = 10$
+
+$a_{10} = 20 + 9 \cdot 5 = \hlm{\text{R\$}\;65{,}00}$
+
+$S_{10} = \dfrac{(20+65) \cdot 10}{2} = \hlm{\text{R\$}\;425{,}00}$
+
+\textbf{Prob. 2 — Arquibancada:}
+
+15 fileiras, 1ª fileira: 20 cadeiras, +4/fileira.
+
+$a_{15} = 20 + 14 \cdot 4 = \hlm{76}$ cadeiras
+
+$S_{15} = \dfrac{(20+76) \cdot 15}{2} = \hlm{720}$ pessoas
+
+\textbf{Prob. 3 — Atleta:}
+
+$a_1 = 5\,\text{km}$, $a_8 = 33\,\text{km}$, $n = 8$
+
+$r = \dfrac{33-5}{7} = 4\,\text{km/semana}$
+
+$S_8 = \dfrac{(5+33) \cdot 8}{2} = \hlm{152\,\text{km}}$
+}
+
+\end{multicols}
+
+\end{document}

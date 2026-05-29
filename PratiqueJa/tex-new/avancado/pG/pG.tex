@@ -1,0 +1,195 @@
+% ============================================================
+%  Progressão Geométrica — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Progressão Geométrica}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Progressão Geométrica (PG)}%
+           {Termo geral, soma finita, PG infinita e interpolação}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição}{O que é uma Progressão Geométrica?}
+
+\regra{
+Uma \hl{Progressão Geométrica (PG)} é uma sequência em que cada termo, a partir do segundo, é obtido multiplicando o anterior por uma constante chamada \hl{razão $q$}.
+
+\[
+  q = \frac{a_n}{a_{n-1}}, \quad \forall\; n > 1
+\]
+}
+
+\exemp{
+\textbf{Crescente} ($q > 1$): $2, 6, 18, 54, \ldots$ com $q = 3$
+
+\textbf{Decrescente} ($0 < q < 1$): $16, 8, 4, 2, \ldots$ com $q = \frac{1}{2}$
+
+\textbf{Alternante} ($q < 0$): $2, -6, 18, -54, \ldots$ com $q = -3$
+
+\textbf{Constante} ($q = 1$): $5, 5, 5, 5, \ldots$
+}
+
+\TW{$a_n$}{darkblue}{Termo Geral}{Calculando qualquer termo sem listar todos}
+
+\regra{
+\[
+  a_n = a_1 \cdot q^{n-1}
+\]
+}
+
+\exemp{
+\textbf{PG $3, 6, 12, 24, \ldots$ — qual o 10º termo?}
+
+$a_1 = 3$, $q = 2$
+
+$a_{10} = 3 \cdot 2^9 = 3 \cdot 512 = \hlm{1536}$
+
+\textbf{$a_1 = 5$, $q = 2$. Para qual $n$ temos $a_n = 160$?}
+
+$160 = 5 \cdot 2^{n-1} \Rightarrow 2^{n-1} = 32 = 2^5$
+
+$\hlm{n = 6}$ — o termo 160 é o 6º.
+
+\textbf{$a_2 = 6$ e $a_5 = 48$. Determine $a_1$ e $q$:}
+
+$a_5 = a_2 \cdot q^3 \Rightarrow 48 = 6q^3 \Rightarrow q^3 = 8 \Rightarrow q = 2$
+
+$a_1 = a_2 / q = 6/2 = \hlm{3}$
+
+PG: $3, 6, 12, 24, 48, \ldots$
+}
+
+\TW{$S_n$}{darkblue}{Soma dos Termos}{Soma dos $n$ primeiros termos da PG}
+
+\regra{
+Para $q \neq 1$:
+\[
+  S_n = \frac{a_1 \cdot (q^n - 1)}{q - 1}
+\]
+Quando $a_n$ é conhecido: $\;\; S_n = \dfrac{a_n \cdot q - a_1}{q - 1}$
+}
+
+\nota{\textbf{Caso $q = 1$:} todos os termos são iguais a $a_1$, portanto $S_n = a_1 \cdot n$.}
+
+\exemp{
+\textbf{Soma dos 6 primeiros termos da PG $2, 6, 18, 54, \ldots$:}
+
+$a_1 = 2$, $q = 3$
+
+$S_6 = \dfrac{2 \cdot (3^6 - 1)}{3 - 1} = \dfrac{2 \cdot 728}{2} = \hlm{728}$
+}
+
+\TW{$S_\infty$}{badgepurple}{PG Infinita Decrescente}{Soma de infinitos termos quando $|q| < 1$}
+
+\regra{
+Quando $|q| < 1$, os termos se aproximam de zero e a soma converge:
+\[
+  S_\infty = \frac{a_1}{1 - q}
+\]
+}
+
+\nota{\textbf{Condição:} a fórmula $S_\infty$ só vale quando $|q| < 1$. Para $|q| \geq 1$, a soma diverge.}
+
+\exemp{
+\textbf{PG $8, 4, 2, 1, \frac{1}{2}, \ldots$:}
+
+$a_1 = 8$, $q = \frac{1}{2}$
+
+$S_\infty = \dfrac{8}{1 - \frac{1}{2}} = \dfrac{8}{\frac{1}{2}} = \hlm{16}$
+
+\textbf{Dízima $0{,}\overline{3}$ como fração:}
+
+$0{,}\overline{3} = 0{,}3 + 0{,}03 + \ldots$ \;\; $a_1 = 0{,}3$, $q = 0{,}1$
+
+$S_\infty = \dfrac{0{,}3}{1 - 0{,}1} = \dfrac{0{,}3}{0{,}9} = \hlm{\dfrac{1}{3}}$
+}
+
+\TW{Int}{badgepurple}{Interpolação Geométrica}{Inserir meios geométricos entre dois termos}
+
+\regra{
+Interpolar $k$ \hl{meios geométricos} entre $a$ e $b$ (com $a, b > 0$) cria uma PG com $k+2$ termos. A razão é:
+\[
+  q = \sqrt[k+1]{\frac{b}{a}} = \left(\frac{b}{a}\right)^{\!\frac{1}{k+1}}
+\]
+}
+
+\exemp{
+\textbf{2 meios entre $3$ e $24$:}
+
+$q = \sqrt[3]{\frac{24}{3}} = \sqrt[3]{8} = 2$
+
+$\hlm{\text{PG: } 3,\; 6,\; 12,\; 24}$
+
+\textbf{3 meios entre $1$ e $16$:}
+
+$q = \sqrt[4]{16} = 2$
+
+$\hlm{\text{PG: } 1,\; 2,\; 4,\; 8,\; 16}$ \quad (5 termos)
+}
+
+\nota{\textbf{Atenção:} para $k$ par, $a$ e $b$ devem ter o mesmo sinal para que $q$ seja real.}
+
+\TW{Prop}{badgepurple}{Propriedades}{Relações entre os termos de uma PG}
+
+\exemp{
+\textbf{Média geométrica:} qualquer termo é a média geométrica dos vizinhos:
+\[
+  a_k^2 = a_{k-1} \cdot a_{k+1}
+\]
+Ex: $2, \mathbf{6}, 18$: $\quad 6^2 = 36 = 2 \times 18$ \;\ok
+
+\textbf{Produto equidistante:} constante entre extremos:
+\[
+  a_k \cdot a_{n-k+1} = a_1 \cdot a_n
+\]
+Ex: $1, 2, 4, 8, 16$: $\;\;a_2 \cdot a_4 = 16 = a_1 \cdot a_5$ \;\ok
+
+\textbf{Logaritmos:} se $(a_1, a_2, \ldots)$ é PG, então $(\log a_1, \log a_2, \ldots)$ é PA com razão $\log q$.
+
+\textbf{Forma alternativa:} $a_n = a_k \cdot q^{n-k}$ (útil quando $a_k$ é mais conveniente que $a_1$)
+}
+
+\TW{Prob}{badgepurple}{Problemas Contextualizados}{Aplicação da PG em situações reais}
+
+\exemp{
+\textbf{Prob. 1 — Juros compostos:}
+
+R\$\,1.000,00 a 10\% a.m. por 5 meses.
+
+$a_1 = 1000$, $q = 1{,}10$, $n = 6$ (mês 0 ao mês 5)
+
+$M = 1000 \cdot (1{,}10)^5 \approx \hlm{\text{R\$}\;1.610{,}51}$
+
+\textbf{Prob. 2 — Bactérias:}
+
+500 bactérias, $q = 2$ por hora.
+
+$a_9 = 500 \cdot 2^8 = 500 \cdot 256 = \hlm{128.000}$ bactérias após 8 h.
+
+\textbf{Prob. 3 — Dízima periódica:}
+
+$0{,}\overline{27} = 0{,}27 + 0{,}0027 + \ldots$
+
+$a_1 = 0{,}27$, $q = 0{,}01$
+
+$S_\infty = \dfrac{0{,}27}{0{,}99} = \dfrac{27}{99} = \hlm{\dfrac{3}{11}}$
+}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,226 @@
+% ============================================================
+%  Polinômios — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Polinômios}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Polinômios}%
+           {Operações, fatoração e Teorema do Resto}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição e Nomenclatura}{Grau, coeficientes e termos semelhantes}
+
+\regra{
+Um \hl{polinômio} em $x$ é uma expressão da forma
+\[
+  p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
+\]
+O \hl{grau} é o maior expoente com coeficiente não nulo.
+}
+
+\begin{itemize}
+  \item \textbf{Monômio} — 1 termo \quad ($3x^2$)
+  \item \textbf{Binômio} — 2 termos \quad ($x^3 - 5$)
+  \item \textbf{Trinômio} — 3 termos \quad ($x^2 + 4x - 1$)
+  \item \textbf{Polinômio} — 4 ou mais termos
+\end{itemize}
+
+\textbf{Termos semelhantes}: mesma parte literal — podem ser somados: $3x^2 + 5x^2 = 8x^2$.
+
+\exemp{
+$p(x) = 3x^4 - 2x^2 + 5x - 1$: \hl{grau 4}, coef. líder $a_4 = 3$, termo ind. $a_0 = -1$
+
+$4x^3 - x^2 + 3x^3 + 5x^2 - 2x = \hlm{7x^3 + 4x^2 - 2x}$ (grau 3)
+}
+
+\nota{O \textbf{polinômio nulo} (todos coef. = 0) não tem grau definido. O polinômio constante não nulo tem grau 0.}
+
+\TW{Op}{darkblue}{Operações com Polinômios}{Adição, subtração e multiplicação}
+
+\regra{
+\textbf{Adição/Subtração:} agrupar termos semelhantes.
+
+\textbf{Multiplicação:} lei distributiva — somar expoentes de mesma base.
+}
+
+\exemp{
+$p = 3x^3 - x^2 + 4x - 2$ \quad $q = -x^3 + 2x^2 - x + 5$
+
+$p+q = 2x^3 + x^2 + 3x + 3$
+
+$p-q = 4x^3 - 3x^2 + 5x - 7$
+
+$(x+2)(x^2-3x+1) = x^3-3x^2+x+2x^2-6x+2$
+
+$\hlm{= x^3 - x^2 - 5x + 2}$
+
+$(2x-1)(3x^2+x-4) = 6x^3+2x^2-8x-3x^2-x+4$
+
+$\hlm{= 6x^3 - x^2 - 9x + 4}$
+}
+
+\TW{CN}{badgepurple}{Casos Notáveis}{Produtos especiais com resultado memorável}
+
+\regra{
+$(a + b)^2 = a^2 + 2ab + b^2$
+
+$(a - b)^2 = a^2 - 2ab + b^2$
+
+$(a + b)(a - b) = a^2 - b^2$
+}
+
+\exemp{
+$(2x+3)^2 = 4x^2 + 12x + 9$
+
+$(3x-1)^2 = 9x^2 - 6x + 1$
+
+$(x+5)(x-5) = x^2 - 25$
+
+$(2x+7)(2x-7) = 4x^2 - 49$
+}
+
+\nota{\textbf{Atalho ENEM:} $51 \times 49 = (50+1)(50-1) = 2500 - 1 = 2499$.}
+
+\TW{Fat}{badgepurple}{Fatoração de Polinômios}{Fator comum, agrupamento, trinômio perfeito e diferença de quadrados}
+
+\regra{
+Fatorar é escrever o polinômio como produto de fatores de grau menor. As quatro técnicas aplicadas em sequência:
+
+\textbf{1. Fator comum em evidência:} MDC dos coef. e menor potência da variável.
+
+\textbf{2. Agrupamento:} agrupar pares que revelam fator comum.
+
+\textbf{3. Trinômio perfeito:} $a^2 \pm 2ab + b^2 = (a \pm b)^2$.
+
+\textbf{4. Diferença de quadrados:} $a^2 - b^2 = (a+b)(a-b)$.
+}
+
+\exemp{
+\textbf{1. Fator comum:}
+
+$6x^3 - 4x^2 + 2x = \hlm{2x(3x^2 - 2x + 1)}$
+
+$x^3 - x = x(x^2-1) = \hlm{x(x+1)(x-1)}$
+
+\textbf{2. Agrupamento:}
+
+$x^3+2x^2+x+2 = x^2(x+2)+1(x+2) = \hlm{(x^2+1)(x+2)}$
+
+\textbf{3. Trinômio perfeito:}
+
+$x^2+6x+9 = \hlm{(x+3)^2}$
+
+$4x^2-20x+25 = \hlm{(2x-5)^2}$
+
+\textbf{4. Diferença de quadrados:}
+
+$4x^2-9 = \hlm{(2x+3)(2x-3)}$
+
+$x^4-16 = (x^2+4)(x^2-4) = \hlm{(x^2+4)(x+2)(x-2)}$
+}
+
+\TW{BR}{darkblue}{Divisão de Polinômios — Briot-Ruffini}{Algoritmo de divisão por $(x - a)$}
+
+\regra{
+O algoritmo de \hl{Briot-Ruffini} divide $p(x)$ pelo binômio $(x-a)$ usando apenas os coeficientes. Resultado: quociente $q(x)$ (grau $n-1$) e resto $r$.
+
+\textbf{Passo a passo:} escreva os coef. em ordem decrescente (0 para potências ausentes); anote $a$ à esquerda; desça o 1º coef.; multiplique por $a$ e some ao próximo coef.; repita. O último valor é o resto.
+}
+
+\exemp{
+\textbf{Divida $p(x) = x^3 - 6x^2 + 11x - 6$ por $(x-1)$:}
+
+\vspace{4pt}
+\noindent
+\begin{minipage}[t]{\linewidth}
+\footnotesize
+\begin{tabular}{r|rrrr}
+$1$ & $1$ & $-6$ & $11$ & $-6$ \\
+  &   & $1$ & $-5$ & $6$ \\
+\hline
+  & $1$ & $-5$ & $6$ & $\mathbf{0}$ \\
+\end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+Quociente: $x^2 - 5x + 6 = (x-2)(x-3)$
+
+$\hlm{p(x) = (x-1)(x-2)(x-3)}$
+
+\textbf{Divida $2x^3 - 3x^2 - 8x + 12$ por $(x-2)$:}
+
+\vspace{4pt}
+\noindent
+\begin{minipage}[t]{\linewidth}
+\footnotesize
+\begin{tabular}{r|rrrr}
+$2$ & $2$ & $-3$ & $-8$ & $12$ \\
+  &   & $4$ & $2$ & $-12$ \\
+\hline
+  & $2$ & $1$ & $-6$ & $\mathbf{0}$ \\
+\end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+$2x^2+x-6 = (2x-3)(x+2)$
+
+$\hlm{p(x) = (x-2)(2x-3)(x+2)}$
+}
+
+\nota{\textbf{Potência ausente:} para $p(x) = x^3 - 4x + 1$, use coef. $1, 0, -4, 1$ na tabela.}
+
+\TW{Teo}{darkblue}{Teorema do Resto e das Raízes}{$p(a) = 0 \;\Leftrightarrow\; (x-a)$ é fator de $p(x)$}
+
+\regra{
+Ao dividir $p(x)$ por $(x-a)$, o \hl{resto é igual a $p(a)$}:
+\[
+  p(x) = (x-a) \cdot q(x) + r \quad\Longrightarrow\quad r = p(a)
+\]
+\[
+  p(a) = 0 \;\Longleftrightarrow\; (x-a) \text{ é fator de } p(x)
+\]
+}
+
+\exemp{
+\textbf{Resto de $q(x) = 2x^3+x^2-3x+4$ por $(x-1)$:}
+
+$r = q(1) = 2+1-3+4 = \hlm{4}$
+
+\textbf{Verifique que $x=1$, $x=-2$, $x=3$ são raízes de $x^3-2x^2-5x+6$:}
+
+$p(1) = 1-2-5+6 = 0$ \;\ok \quad $(x-1)$ é fator
+
+$p(-2) = -8-8+10+6 = 0$ \;\ok \quad $(x+2)$ é fator
+
+$p(3) = 27-18-15+6 = 0$ \;\ok \quad $(x-3)$ é fator
+
+$\hlm{p(x) = (x-1)(x+2)(x-3)}$
+
+\textbf{Para qual $k$ é $x=2$ raiz de $x^3-kx+2$?}
+
+$p(2) = 8 - 2k + 2 = 0 \Rightarrow 2k = 10$
+
+$\hlm{k = 5}$
+}
+
+\nota{\textbf{Estratégia:} para fatorar um grau 3, procure raiz entre os divisores do termo independente, aplique Briot-Ruffini e fatore o quociente de grau 2 com Bhaskara se necessário.}
+
+\end{multicols}
+
+\end{document}

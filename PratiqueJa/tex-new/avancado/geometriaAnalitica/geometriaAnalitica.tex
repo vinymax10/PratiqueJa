@@ -1,0 +1,264 @@
+% ============================================================
+%  Geometria Analítica — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Geometria Analítica}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Geometria Analítica}%
+           {Pontos, retas e circunferências no plano cartesiano}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Ponto no Plano Cartesiano}{Coordenadas, distância entre pontos e ponto médio}
+
+\regra{
+Todo ponto $P$ no plano é identificado por um par ordenado $(x, y)$, onde $x$ é a \hl{abscissa} (posição horizontal) e $y$ é a \hl{ordenada} (posição vertical). A origem $O = (0, 0)$ é a interseção dos dois eixos.
+}
+
+\SH{Distância entre dois pontos}
+
+Dados $A = (x_1, y_1)$ e $B = (x_2, y_2)$, a fórmula vem do Teorema de Pitágoras: $\Delta x$ e $\Delta y$ são os catetos e $d_{AB}$ é a hipotenusa.
+
+\formula{$d_{AB} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$}
+
+\SH{Ponto médio}
+
+\formula{$M = \left(\dfrac{x_1 + x_2}{2},\;\dfrac{y_1 + y_2}{2}\right)$}
+
+\exemp{
+\textbf{Dados $A(1, 2)$ e $B(4, 6)$, calcule $d_{AB}$ e $M$:}
+
+$d_{AB} = \sqrt{(4-1)^2 + (6-2)^2} = \sqrt{9 + 16} = \sqrt{25}$
+
+$\hlm{d_{AB} = 5}$
+
+$M = \left(\dfrac{1+4}{2},\; \dfrac{2+6}{2}\right)$
+
+$\hlm{M = (2{,}5\;;\; 4)}$
+
+\textbf{Dados $A(-3, 1)$ e $B(1, -3)$, calcule $d_{AB}$:}
+
+$d_{AB} = \sqrt{(1+3)^2 + (-3-1)^2} = \sqrt{16 + 16}$
+
+$\hlm{d_{AB} = 4\sqrt{2} \approx 5{,}66}$
+}
+
+\nota{\textbf{Dica ENEM:} a distância usa o mesmo Teorema de Pitágoras da geometria plana — $\Delta x$ e $\Delta y$ são os catetos.}
+
+\TW{Eq}{darkblue}{Equação da Reta}{Formas reduzida, ponto-inclinação e geral}
+
+\regra{
+Uma reta no plano cartesiano pode ser escrita de três formas equivalentes. A mais comum é a \hl{forma reduzida}, que explicita a inclinação e o ponto de interseção com o eixo $y$.
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.75]
+  \draw[gray!30, very thin] (-0.5,-0.5) grid (4.5,3.5);
+  \draw[->, gray!60, thick] (-0.5,0) -- (4.5,0) node[right, gray] {\footnotesize$x$};
+  \draw[->, gray!60, thick] (0,-0.5) -- (0,3.5) node[above, gray] {\footnotesize$y$};
+  \draw[darkblue, thick, domain=-0.2:4.3] plot(\x, {2/3*\x + 1/3});
+  \draw[dashed, gray] (1,1) -- (4,1) -- (4,3);
+  \draw[<->, exborder, thick] (1,0.7) -- node[below, font=\footnotesize] {$\Delta x{=}3$} (4,0.7);
+  \draw[<->, exborder, thick] (4.25,1) -- node[right, font=\footnotesize] {$\Delta y{=}2$} (4.25,3);
+  \filldraw[darkblue] (1,1) circle (2pt) node[above left, font=\tiny] {$A(1,\!1)$};
+  \filldraw[darkblue] (4,3) circle (2pt) node[above left, font=\tiny] {$B(4,\!3)$};
+  \foreach \x in {1,2,3,4} \draw (\x,0.06) -- (\x,-0.06) node[below, font=\tiny] {\x};
+  \foreach \y in {1,2,3} \draw (0.06,\y) -- (-0.06,\y) node[left, font=\tiny] {\y};
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\SH{Forma reduzida}
+
+\formula{$y = mx + b$}
+
+$m$ = \hl{coeficiente angular} (inclinação); $b$ = \hl{coeficiente linear} (interseção com eixo $y$).
+
+\SH{Forma ponto-inclinação}
+
+\formula{$y - y_1 = m(x - x_1)$}
+
+\SH{Forma geral}
+
+\formula{$ax + by + c = 0$}
+
+\exemp{
+\textbf{Equação da reta por $A(1, 1)$ e $B(4, 3)$:}
+
+$m = \dfrac{3-1}{4-1} = \dfrac{2}{3}$
+
+$y - 1 = \dfrac{2}{3}(x - 1) \;\Rightarrow\; y = \dfrac{2}{3}x + \dfrac{1}{3}$
+
+$\hlm{\text{Forma geral: } 2x - 3y + 1 = 0}$
+
+\textbf{Na reta $y = -2x + 5$:}
+
+$m = -2$ (decrescente) $\;\;\hlm{b = 5}$ (corta $y$ em $(0,5)$)
+}
+
+\TW{m}{badgepurple}{Coeficiente Angular}{Inclinação e retas paralelas / perpendiculares}
+
+\regra{
+Dados $A(x_1, y_1)$ e $B(x_2, y_2)$ com $x_1 \neq x_2$:
+\[
+  m = \dfrac{\Delta y}{\Delta x} = \dfrac{y_2 - y_1}{x_2 - x_1}
+\]
+}
+
+\exemp{
+\textbf{Retas paralelas:} mesmo coeficiente angular:
+\[
+  r_1 \parallel r_2 \;\Leftrightarrow\; \hlm{m_1 = m_2}
+\]
+
+\textbf{Retas perpendiculares:} produto dos coef. angulares é $-1$:
+\[
+  r_1 \perp r_2 \;\Leftrightarrow\; \hlm{m_1 \cdot m_2 = -1}
+\]
+
+$r: y = 3x - 2 \Rightarrow m_\perp = -\dfrac{1}{3}$
+
+$y = 2x + 1$ e $y = 2x - 5$ ($m_1 = m_2 = 2$) → \hl{Paralelas}
+}
+
+\nota{\textbf{Casos especiais:} reta horizontal $m = 0 \Rightarrow y = k$; reta vertical: $m$ indefinido $\Rightarrow x = k$.}
+
+\TW{Pos}{badgepurple}{Posições Relativas de Duas Retas}{Paralelas, concorrentes e coincidentes}
+
+\regra{
+Dadas duas retas no plano, há três possibilidades:
+\begin{itemize}
+  \item \textbf{Paralelas distintas} — mesmo $m$, diferentes $b$: zero pontos comuns
+  \item \textbf{Concorrentes} — $m_1 \neq m_2$: um ponto de interseção
+  \item \textbf{Coincidentes} — mesmo $m$ e mesmo $b$: infinitos pontos em comum
+\end{itemize}
+}
+
+\exemp{
+$r_1{:}\;y = 2x + 3$ e $r_2{:}\;y = 2x - 1$ → $m_1 = m_2$, $b_1 \neq b_2$
+
+$\hlm{\text{Paralelas distintas}}$
+
+$r_1{:}\;y = x + 1$ e $r_2{:}\;y = -x + 5$ → $m_1 \neq m_2$
+
+$x + 1 = -x + 5 \Rightarrow x = 2,\; y = 3$
+
+$\hlm{\text{Interseção: } (2,\; 3)}$
+
+$r_1{:}\;2x - y + 3 = 0$ e $r_2{:}\;4x - 2y + 6 = 0$
+
+Dividindo $r_2$ por 2: idêntica a $r_1$ → $\hlm{\text{Coincidentes}}$
+}
+
+\TW{Eq}{darkblue}{Distância Ponto--Reta}{Fórmula direta a partir da forma geral}
+
+\regra{
+A distância do ponto $P(x_0, y_0)$ à reta $ax + by + c = 0$:
+\[
+  d(P,\, r) = \dfrac{\,|ax_0 + by_0 + c|\,}{\sqrt{a^2 + b^2}}
+\]
+}
+
+\exemp{
+\textbf{$P(3, -1)$ à reta $2x - y + 4 = 0$:}
+
+$d = \dfrac{|6 + 1 + 4|}{\sqrt{4+1}} = \dfrac{11}{\sqrt{5}}$
+
+$\hlm{d = \dfrac{11\sqrt{5}}{5} \approx 4{,}92}$
+
+\textbf{$O(0,0)$ à reta $3x + 4y - 15 = 0$:}
+
+$d = \dfrac{|-15|}{\sqrt{9+16}} = \dfrac{15}{5}$
+
+$\hlm{d = 3}$
+}
+
+\TW{Eq}{darkblue}{Equação da Circunferência}{Forma canônica e forma geral}
+
+\regra{
+A circunferência de centro $C(a, b)$ e raio $r$ é o conjunto de pontos à distância $r$ do centro:
+\[
+  (x - a)^2 + (y - b)^2 = r^2 \quad \text{(forma canônica)}
+\]
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.65]
+  \draw[gray!30, very thin] (-0.5,-1.5) grid (4.5,3.5);
+  \draw[->, gray!60, thick] (-0.5,0) -- (4.5,0) node[right, gray] {\footnotesize$x$};
+  \draw[->, gray!60, thick] (0,-1.5) -- (0,3.5) node[above, gray] {\footnotesize$y$};
+  \draw[darkblue, thick] (2,1) circle (2);
+  \filldraw[darkblue] (2,1) circle (2.5pt) node[above right, font=\small] {$C(2,1)$};
+  \draw[exborder, dashed] (2,1) -- (4,1) node[midway, above, font=\footnotesize] {$r{=}2$};
+  \foreach \x in {1,2,3,4} \draw (\x,0.07) -- (\x,-0.07) node[below, font=\tiny] {\x};
+  \foreach \y in {-1,1,2,3} \draw (0.07,\y) -- (-0.07,\y) node[left, font=\tiny] {\y};
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\SH{Forma geral}
+
+Expandindo: $x^2 + y^2 + Dx + Ey + F = 0$
+
+onde $D{=}{-}2a$, $E{=}{-}2b$, $F{=}a^2{+}b^2{-}r^2$. Para converter da forma geral à canônica, use \hl{completamento de quadrados}.
+
+\exemp{
+\textbf{Centro $C(3, -2)$, $r = 4$:}
+
+$(x - 3)^2 + (y + 2)^2 = 16$
+
+$\hlm{x^2 + y^2 - 6x + 4y - 3 = 0}$
+
+\textbf{Identifique centro e raio: $x^2 + y^2 - 4x + 6y + 4 = 0$}
+
+$(x^2 - 4x + 4) + (y^2 + 6y + 9) = -4 + 4 + 9$
+
+$(x-2)^2 + (y+3)^2 = 9$
+
+$\hlm{C(2,\,-3),\;\; r = 3}$
+}
+
+\columnbreak
+
+\TW{Pos}{badgepurple}{Posição Relativa}{Ponto--Circunferência: interior, na curva ou exterior}
+
+\regra{
+Para o ponto $P(x_0, y_0)$ e circunferência de centro $C(a, b)$ e raio $r$, calcule $d = d(P, C)$:
+\begin{itemize}
+  \item $d < r$ → $P$ está no \textbf{interior}
+  \item $d = r$ → $P$ está \textbf{na circunferência}
+  \item $d > r$ → $P$ está no \textbf{exterior}
+\end{itemize}
+}
+
+\exemp{
+$(x-2)^2 + (y-1)^2 = 9$, $C(2,1)$, $r = 3$.
+
+Classifique $A(5, 1)$, $B(0, 0)$ e $D(2, 4)$:
+
+$d(A,C) = \sqrt{9+0} = 3 = r$ → \hl{na circunferência}
+
+$d(B,C) = \sqrt{4+1} = \sqrt{5} \approx 2{,}24 < 3$ → \hl{interior}
+
+$d(D,C) = \sqrt{0+9} = 3 = r$ → \hl{na circunferência}
+}
+
+\nota{\textbf{Atalho:} substitua $(x_0, y_0)$ no lado esquerdo. Compare com $r^2$: menor → interior; igual → na curva; maior → exterior.}
+
+\end{multicols}
+
+\end{document}

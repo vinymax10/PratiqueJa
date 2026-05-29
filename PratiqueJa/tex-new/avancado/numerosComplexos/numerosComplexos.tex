@@ -1,0 +1,217 @@
+% ============================================================
+%  Números Complexos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Números Complexos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Números Complexos}%
+           {Forma algébrica, trigonométrica e fórmula de De Moivre}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição}{O que é um número complexo?}
+
+\regra{
+Um \hl{número complexo} é toda expressão da forma $z = a + bi$, onde $a, b \in \mathbb{R}$ e $i$ é a \hl{unidade imaginária}, definida por $i^2 = -1$.
+
+$a = \mathrm{Re}(z)$ é a \textbf{parte real} e $b = \mathrm{Im}(z)$ é a \textbf{parte imaginária}. O conjunto dos números complexos é $\mathbb{C}$.
+}
+
+Os reais são caso particular com $b = 0$. Os \hl{puramente imaginários} têm $a = 0$.
+
+\exemp{
+$z = 3 + 4i$: \;\; $\mathrm{Re}(z) = 3$ \;\; $\hlm{\mathrm{Im}(z) = 4}$
+
+$z = -2 - 5i$: \;\; $\mathrm{Re}(z) = -2$ \;\; $\hlm{\mathrm{Im}(z) = -5}$
+}
+
+\TW{Op}{darkblue}{Operações}{Soma, subtração e multiplicação}
+
+\regra{
+\textbf{Soma e subtração:} operam-se partes reais e imaginárias separadamente:
+\[
+  (a+bi) \pm (c+di) = (a \pm c) + (b \pm d)\,i
+\]
+
+\textbf{Multiplicação:} usa-se a distributiva com $i^2 = -1$:
+\[
+  (a+bi)(c+di) = (ac-bd) + (ad+bc)\,i
+\]
+}
+
+\exemp{
+$(3+4i) + (1+2i) = 4+6i$
+
+$(5+3i) - (2+7i) = 3-4i$
+
+$(3+4i)(1+2i) = 3 + 6i + 4i + 8i^2$
+
+$= 3 + 10i + 8(-1)$
+
+$\hlm{= -5 + 10i}$
+}
+
+\TW{$\bar{z}$}{badgepurple}{Conjugado}{Troca do sinal da parte imaginária}
+
+\regra{
+O conjugado de $z = a + bi$ é $\bar{z} = a - bi$. O produto $z \cdot \bar{z}$ é sempre real:
+\[
+  z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2 = |z|^2
+\]
+}
+
+\exemp{
+$z = 3 + 4i \;\Rightarrow\; \bar{z} = 3 - 4i$
+
+$z \cdot \bar{z} = (3+4i)(3-4i) = 9 - 16i^2 = 9 + 16 = \hlm{25}$
+}
+
+\nota{\textbf{Igualdade:} $a+bi = c+di \Leftrightarrow a=c$ e $b=d$.
+
+Propriedades: $\overline{z_1+z_2} = \bar{z}_1+\bar{z}_2$; \;\; $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$; \;\; $\overline{(\bar{z})} = z$.}
+
+\TW{÷}{darkblue}{Divisão}{Técnica do conjugado do denominador}
+
+\regra{
+Multiplica-se numerador e denominador pelo conjugado $\bar{z}_2$, tornando o denominador real:
+\[
+  \dfrac{z_1}{z_2} = \dfrac{z_1 \cdot \bar{z}_2}{|z_2|^2}
+\]
+}
+
+\exemp{
+$\dfrac{3+4i}{1+2i} = \dfrac{(3+4i)(1-2i)}{(1+2i)(1-2i)}$
+
+Numerador: $(3+4i)(1-2i) = 3-2i+8 = 11-2i$
+
+Denominador: $(1+2i)(1-2i) = 1+4 = 5$
+
+$\hlm{\dfrac{3+4i}{1+2i} = \dfrac{11}{5} - \dfrac{2}{5}i}$
+}
+
+\TW{|z|}{badgepurple}{Módulo}{Distância à origem no plano complexo}
+
+\regra{
+O módulo de $z = a + bi$ é a distância do ponto $(a,b)$ à origem:
+\[
+  |z| = \sqrt{a^2 + b^2}
+\]
+O módulo é sempre real não-negativo.
+}
+
+\exemp{
+$z = 3+4i$: \;\; $|z| = \sqrt{9+16} = \sqrt{25} = \hlm{5}$
+
+$z = -1+\sqrt{3}\,i$: \;\; $|z| = \sqrt{1+3} = \hlm{2}$
+}
+
+\TW{Graf}{darkblue}{Plano de Argand-Gauss}{Representação geométrica dos números complexos}
+
+\regra{
+$z = a + bi$ é representado pelo ponto $(a, b)$ no \hl{plano complexo}: eixo horizontal = eixo real; eixo vertical = eixo imaginário.
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.7]
+  \draw[gray!30, very thin] (-1.5,-1.5) grid (4.5,4.5);
+  \draw[->, gray!60, thick] (-1.5,0) -- (4.5,0) node[right, gray] {\footnotesize Re};
+  \draw[->, gray!60, thick] (0,-1.5) -- (0,4.5) node[above, gray] {\footnotesize Im};
+  % ponto z=3+4i
+  \draw[darkblue, dashed] (3,0) -- (3,4) -- (0,4);
+  \filldraw[darkblue] (3,4) circle (2.5pt) node[above right, font=\small] {$z = 3+4i$};
+  % raio
+  \draw[exborder, thick] (0,0) -- (3,4) node[midway, above left, font=\footnotesize] {$|z|=5$};
+  % eixo labels
+  \foreach \x in {1,2,3,4} \draw (\x,0.08) -- (\x,-0.08) node[below, font=\tiny] {\x};
+  \foreach \y in {1,2,3,4} \draw (0.08,\y) -- (-0.08,\y) node[left, font=\tiny] {\y};
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\TW{Trig}{darkblue}{Forma Trigonométrica}{Representação polar de um número complexo}
+
+\regra{
+Todo $z = a+bi$ pode ser escrito em \hl{forma trigonométrica} usando módulo $r = |z|$ e argumento $\theta$ (ângulo com o eixo real positivo):
+\[
+  z = r(\cos\theta + i\sin\theta)
+\]
+com $r = \sqrt{a^2+b^2}$ e $\tan\theta = \dfrac{b}{a}$ (ajustar quadrante).
+}
+
+\exemp{
+\textbf{Converter $z = 1 + \sqrt{3}\,i$ para forma trigonométrica:}
+
+$r = \sqrt{1 + 3} = 2$
+
+$\tan\theta = \dfrac{\sqrt{3}}{1} = \sqrt{3} \;\Rightarrow\; \theta = 60°$
+
+$\hlm{z = 2(\cos 60° + i\sin 60°)}$
+
+\textbf{Produto na forma polar:}
+
+$z_1 \cdot z_2 = r_1 r_2\bigl(\cos(\theta_1+\theta_2) + i\sin(\theta_1+\theta_2)\bigr)$
+
+Módulos se multiplicam; argumentos se somam.
+}
+
+\TW{Moi}{badgepurple}{Fórmula de De Moivre}{Potenciação de complexos na forma polar}
+
+\regra{
+Para $n \in \mathbb{Z}$:
+\[
+  \bigl[r(\cos\theta + i\sin\theta)\bigr]^n = r^n(\cos n\theta + i\sin n\theta)
+\]
+Permite calcular potências e raízes sem expandir produtos sucessivos.
+}
+
+\exemp{
+$(\cos 30° + i\sin 30°)^6$:
+
+$= \cos(180°) + i\sin(180°) = \hlm{-1}$
+
+$(1+i)^8$: \;\; $r = \sqrt{2}$, $\theta = 45°$
+
+$= (\sqrt{2})^8(\cos 360° + i\sin 360°) = 16 \cdot 1 = \hlm{16}$
+}
+
+\TW{$i^n$}{badgepurple}{Potências de $i$}{Ciclo de período 4}
+
+\regra{
+As potências de $i$ se repetem em ciclo de período 4:
+
+$i^1 = i$ \;\; $i^2 = -1$ \;\; $i^3 = -i$ \;\; $i^4 = 1$ \;\; $i^5 = i \ldots$
+
+Para calcular $i^n$: divida $n$ por $4$ e use o \hl{resto}:
+
+\begin{itemize}
+  \item Resto 0 → $1$ \;\; Resto 1 → $i$
+  \item Resto 2 → $-1$ \;\; Resto 3 → $-i$
+\end{itemize}
+}
+
+\exemp{
+$i^{23}$: $\;\; 23 = 4 \times 5 + 3$ → resto $3$
+
+$\hlm{i^{23} = -i}$
+}
+
+\nota{\textbf{Expoentes negativos:} $i^{-1} = \dfrac{1}{i} = \dfrac{i}{i^2} = -i$. Para negativos, some múltiplos de 4 até o expoente ficar positivo.}
+
+\end{multicols}
+
+\end{document}

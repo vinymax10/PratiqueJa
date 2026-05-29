@@ -1,0 +1,224 @@
+% ============================================================
+%  Geometria Espacial — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Geometria Espacial}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Geometria Espacial}%
+           {Prismas, pirâmides, cilindro, cone e esfera}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Prismas}{Área total e volume}
+
+\regra{
+Um \hl{prisma} é um sólido com duas bases congruentes e paralelas (polígonos) ligadas por faces laterais retangulares. O nome vem do formato da base: triangular, quadrangular, hexagonal etc.
+}
+
+Sendo $P_{\text{base}}$ o perímetro da base e $h$ a altura:
+
+\formula{$A_{\text{lat}} = P_{\text{base}} \times h$}
+\formula{$A_{\text{total}} = A_{\text{lat}} + 2 A_{\text{base}}$}
+\formula{$V = A_{\text{base}} \times h$}
+
+\exemp{
+\textbf{Caixa retangular $5 \times 3 \times 4\,\text{cm}$:}
+
+$A_{\text{base}} = 15\,\text{cm}^2$ \quad $P_{\text{base}} = 16\,\text{cm}$
+
+$A_{\text{lat}} = 16 \times 4 = 64\,\text{cm}^2$
+
+$A_{\text{total}} = 64 + 30 = 94\,\text{cm}^2$
+
+$\hlm{V = 15 \times 4 = 60\,\text{cm}^3}$
+
+\textbf{Prisma triangular equilátero, $a{=}6\,\text{cm}$, $h{=}10\,\text{cm}$:}
+
+$A_{\text{base}} = \dfrac{\sqrt{3}}{4} \times 36 = 9\sqrt{3}\,\text{cm}^2$
+
+$P_{\text{base}} = 18\,\text{cm}$ \quad $A_{\text{lat}} = 180\,\text{cm}^2$
+
+$\hlm{V = 9\sqrt{3} \times 10 = 90\sqrt{3} \approx 155{,}9\,\text{cm}^3}$
+}
+
+\TW{Def}{darkblue}{Pirâmides}{Área lateral, área total e volume}
+
+\regra{
+Uma \hl{pirâmide} tem uma base poligonal e faces laterais triangulares que convergem para o \hl{ápice}. A \hl{apótema} $a_p$ é a altura de uma face lateral triangular.
+}
+
+\formula{$A_{\text{lat}} = \dfrac{P_{\text{base}} \times a_p}{2}$}
+\formula{$A_{\text{total}} = A_{\text{lat}} + A_{\text{base}}$}
+\formula{$V = \dfrac{A_{\text{base}} \times h}{3}$}
+
+\nota{O volume da pirâmide é sempre $\mathbf{\frac{1}{3}}$ do volume do prisma de mesma base e altura — muito cobrado no ENEM.}
+
+\exemp{
+\textbf{Pirâmide quadrada, lado $4\,\text{cm}$, $h{=}3\,\text{cm}$:}
+
+Apótema da base (centro ao meio do lado): $2\,\text{cm}$
+
+$a_p = \sqrt{3^2 + 2^2} = \sqrt{13}\,\text{cm}$
+
+$A_{\text{lat}} = \dfrac{16 \times \sqrt{13}}{2} = 8\sqrt{13} \approx 28{,}8\,\text{cm}^2$
+
+$\hlm{V = \dfrac{16 \times 3}{3} = 16\,\text{cm}^3}$
+}
+
+\columnbreak
+
+\TW{Cil}{darkblue}{Cilindro}{Área lateral, área total e volume}
+
+\regra{
+O \hl{cilindro reto circular} tem duas bases circulares de raio $r$ e altura $h$. A área lateral corresponde ao retângulo obtido ao "desenrolar" a superfície (base $2\pi r$, altura $h$).
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.65]
+  % cilindro
+  \draw[darkblue,thick] (0,0) ellipse (1 and 0.3);
+  \draw[darkblue,thick] (-1,0) -- (-1,2);
+  \draw[darkblue,thick] (1,0) -- (1,2);
+  \draw[darkblue,thick] (0,2) ellipse (1 and 0.3);
+  \draw[black!70,<->] (1.15,0) -- node[right,font=\footnotesize]{$h$} (1.15,2);
+  \draw[black!70,<->] (0,2.45) -- node[above,font=\footnotesize]{$r$} (1,2.45);
+  % cone
+  \draw[darkblue,thick] (3,0) ellipse (1 and 0.3);
+  \draw[darkblue,thick] (2,0) -- (3,2);
+  \draw[darkblue,thick] (4,0) -- (3,2);
+  \draw[black!70,<->] (4.15,0) -- node[right,font=\footnotesize]{$h$} (4.15,2);
+  \draw[black!70,dashed] (3,0) -- node[below,font=\footnotesize]{$r$} (4,0);
+  \node[font=\footnotesize,darkblue] at (0,-0.7) {Cilindro};
+  \node[font=\footnotesize,darkblue] at (3,-0.7) {Cone};
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\formula{$A_{\text{lat}} = 2\pi r h$}
+\formula{$A_{\text{total}} = 2\pi r\,(h + r)$}
+\formula{$V = \pi r^2 h$}
+
+\exemp{
+\textbf{$r = 3\,\text{cm}$, $h = 10\,\text{cm}$:}
+
+$A_{\text{lat}} = 2\pi \cdot 3 \cdot 10 = 60\pi\,\text{cm}^2$
+
+$A_{\text{total}} = 2\pi \cdot 3 \cdot 13 = 78\pi\,\text{cm}^2$
+
+$\hlm{V = \pi \cdot 9 \cdot 10 = 90\pi\,\text{cm}^3 \approx 282{,}7\,\text{cm}^3}$
+
+\textbf{$V = 200\pi\,\text{cm}^3$, $r = 5\,\text{cm}$. Qual $h$?}
+
+$200\pi = \pi \cdot 25 \cdot h \Rightarrow \hlm{h = 8\,\text{cm}}$
+}
+
+\TW{Con}{darkblue}{Cone}{Geratriz, área lateral e volume}
+
+\regra{
+O \hl{cone reto circular} tem base circular de raio $r$, altura $h$ e \hl{geratriz} $g$ (distância do ápice à circunferência da base). Pelo Teorema de Pitágoras:
+\[
+  g = \sqrt{r^2 + h^2}
+\]
+}
+
+\formula{$A_{\text{lat}} = \pi r g$}
+\formula{$A_{\text{total}} = \pi r\,(g + r)$}
+\formula{$V = \dfrac{\pi r^2 h}{3}$}
+
+\nota{Assim como a pirâmide, $V_{\text{cone}} = \dfrac{1}{3}\,V_{\text{cilindro}}$ de mesma base e altura.}
+
+\exemp{
+\textbf{$r = 6\,\text{cm}$, $h = 8\,\text{cm}$:}
+
+$g = \sqrt{36 + 64} = \sqrt{100} = 10\,\text{cm}$
+
+$A_{\text{lat}} = \pi \cdot 6 \cdot 10 = 60\pi\,\text{cm}^2$
+
+$A_{\text{total}} = \pi \cdot 6 \cdot 16 = 96\pi\,\text{cm}^2 \approx 301{,}6\,\text{cm}^2$
+
+$\hlm{V = \dfrac{\pi \cdot 36 \cdot 8}{3} = 96\pi\,\text{cm}^3 \approx 301{,}6\,\text{cm}^3}$
+}
+
+\TW{Esf}{badgepurple}{Esfera}{Área da superfície e volume}
+
+\regra{
+A \hl{esfera} é o conjunto de todos os pontos do espaço à distância $r$ (raio) de um ponto fixo (centro). Toda secção plana pelo centro é um \hl{círculo máximo}.
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.7]
+  \draw[darkblue,thick] (0,0) circle (1.2);
+  \draw[darkblue,dashed] (0,0) ellipse (1.2 and 0.35);
+  \draw[exborder,<->] (0,0) -- node[above,font=\footnotesize]{$r$} (0.85,0.85);
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\formula{$A_{\text{sup}} = 4\pi r^2$}
+\formula{$V = \dfrac{4\pi r^3}{3}$}
+
+\exemp{
+\textbf{$r = 3\,\text{cm}$:}
+
+$A_{\text{sup}} = 4\pi \cdot 9 = 36\pi\,\text{cm}^2 \approx 113{,}1\,\text{cm}^2$
+
+$\hlm{V = \dfrac{4\pi \cdot 27}{3} = 36\pi\,\text{cm}^3 \approx 113{,}1\,\text{cm}^3}$
+
+\textbf{$V = 288\pi\,\text{cm}^3$. Qual o raio?}
+
+$\dfrac{4\pi r^3}{3} = 288\pi \Rightarrow r^3 = 216$
+
+$\hlm{r = \sqrt[3]{216} = 6\,\text{cm}}$
+}
+
+\nota{\textbf{Relação:} $A_{\text{sup}} = 4\pi r^2$ é exatamente 4 vezes a área do círculo máximo ($\pi r^2$).}
+
+\TW{Rev}{badgepurple}{Sólidos de Revolução}{Cilindro e cone gerados por rotação}
+
+\regra{
+Um \hl{sólido de revolução} é gerado pela rotação de uma figura plana em torno de um eixo:
+\begin{itemize}
+  \item Retângulo girado em torno de um lado → \textbf{cilindro}
+  \item Triângulo retângulo girado em torno de um cateto → \textbf{cone}
+\end{itemize}
+}
+
+\exemp{
+\textbf{Retângulo de lados $r$ e $h$ girado em torno de $h$:}
+
+O lado $r$ descreve um círculo de raio $r$.
+
+$\hlm{V = \pi r^2 h}$ \quad $\hlm{A_{\text{lat}} = 2\pi r h}$
+
+\textbf{Triângulo retângulo, catetos $r$ e $h$, girado em torno de $h$:}
+
+O cateto $r$ gera a base circular; a hipotenusa gera a superfície cônica.
+
+$\hlm{V = \dfrac{\pi r^2 h}{3}}$ \quad $\hlm{g = \sqrt{r^2 + h^2}}$
+
+\textbf{Retângulo $3 \times 5\,\text{cm}$ girado em torno do lado $5\,\text{cm}$:}
+
+Cilindro: $r = 3\,\text{cm}$, $h = 5\,\text{cm}$
+
+$V = \pi \cdot 9 \cdot 5 = 45\pi\,\text{cm}^3$
+
+$\hlm{A_{\text{total}} = 2\pi \cdot 3 \cdot 8 = 48\pi\,\text{cm}^2}$
+}
+
+\end{multicols}
+
+\end{document}

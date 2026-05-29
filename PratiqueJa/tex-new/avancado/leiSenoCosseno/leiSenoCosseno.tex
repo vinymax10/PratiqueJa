@@ -1,0 +1,185 @@
+% ============================================================
+%  Lei dos Senos e Cossenos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Lei dos Senos e Cossenos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Lei dos Senos e Cossenos}%
+           {Resolução de triângulos quaisquer}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Lei dos Senos e Cossenos}{Resolução de triângulos quaisquer}
+
+\regra{
+As leis dos senos e cossenos permitem resolver triângulos \hl{não retângulos} — calculando lados e ângulos quando o Teorema de Pitágoras não pode ser utilizado.
+
+Em qualquer triângulo \textbf{ABC}, o lado \textbf{a} é oposto ao ângulo \textbf{A}, \textbf{b} é oposto a \textbf{B} e \textbf{c} é oposto a \textbf{C}.
+}
+
+\nota{\textbf{Propriedade fundamental:} $A + B + C = 180°$. Após encontrar dois ângulos, o terceiro é imediato: $C = 180° - A - B$.}
+
+\TW{Guia}{badgepurple}{Quando Usar Cada Lei}{Escolha rápida pelo caso do triângulo}
+
+\regra{
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Caso} & \textbf{Dados conhecidos} & \textbf{Lei} \\
+\hline
+\textcolor{darkblue}{\textbf{AAS/ASA}} & 2 ângulos + 1 lado & Senos \\
+\hline
+\textcolor{darkblue}{\textbf{SSA}} & 2 lados + ângulo oposto & Senos* \\
+\hline
+\textcolor{red!70!black}{\textbf{LAL}} & 2 lados + ângulo entre eles & Cossenos \\
+\hline
+\textcolor{red!70!black}{\textbf{LLL}} & 3 lados conhecidos & Cossenos \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2pt}
+{\footnotesize * SSA = caso ambíguo: pode ter 0, 1 ou 2 triângulos.}
+}
+
+\nota{\textbf{Estratégia:} após aplicar a lei e encontrar um elemento, use $A+B+C=180°$ e a Lei dos Senos para completar os restantes.}
+
+\TW{sen}{darkblue}{Lei dos Senos}{Lados proporcionais aos senos dos ângulos opostos}
+
+\regra{
+Em qualquer triângulo ABC, a razão entre cada lado e o seno do ângulo oposto é constante e igual ao diâmetro $2R$ da circunferência circunscrita:
+\[
+  \frac{a}{\operatorname{sen} A} = \frac{b}{\operatorname{sen} B} = \frac{c}{\operatorname{sen} C} = 2R
+\]
+}
+
+\begin{center}\vspace{-4pt}
+\begin{tikzpicture}[scale=0.85]
+  % triângulo com A=30°, a=7, b=10
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3.5,0);
+  \coordinate (C) at (2.5,2.2);
+  \draw[darkblue,thick] (A) -- (B) -- (C) -- cycle;
+  % rótulos dos vértices
+  \node[left, font=\small] at (A) {$A$};
+  \node[right, font=\small] at (B) {$B$};
+  \node[above, font=\small] at (C) {$C$};
+  % rótulos dos lados
+  \node[below, font=\small] at (1.75,0) {$c$};
+  \node[right, font=\small] at (3.05,1.1) {$a$};
+  \node[left, font=\small] at (1.2,1.1) {$b$};
+  % ângulo A
+  \draw[exborder] (0.4,0) arc (0:41:0.4);
+  \node[font=\tiny, exborder] at (0.55,0.17) {$A$};
+\end{tikzpicture}
+\vspace{-4pt}\end{center}
+
+\SH{Exemplo — caso AAS}
+
+Dados $a = 7$, $b = 10$, $A = 30°$. Resolver completamente:
+
+\exemp{
+\textbf{Passo 1 — encontrar B:}
+
+$\dfrac{7}{\operatorname{sen} 30°} = \dfrac{10}{\operatorname{sen} B}$
+
+$\operatorname{sen} B = \dfrac{10 \cdot \frac{1}{2}}{7} = \dfrac{5}{7} \approx 0{,}7143$
+
+$\hlm{B \approx 45{,}57°}$
+
+\textbf{Passo 2 — encontrar C:}
+
+$C = 180° - 30° - 45{,}57°$
+
+$\hlm{C \approx 104{,}43°}$
+
+\textbf{Passo 3 — encontrar c:}
+
+$\dfrac{7}{\operatorname{sen} 30°} = \dfrac{c}{\operatorname{sen} 104{,}43°}$
+
+$c = \dfrac{7 \cdot 0{,}9686}{0{,}5}$
+
+$\hlm{c \approx 13{,}56}$
+}
+
+\nota{\textbf{Caso ambíguo (SSA):} quando $\operatorname{sen} B \leq 1$, verifique $B' = 180° - B$ quando $B$ é agudo e $a < b$. Podem existir 0, 1 ou 2 triângulos.}
+
+\TW{cos}{darkblue}{Lei dos Cossenos}{Generalização do Teorema de Pitágoras}
+
+\regra{
+A Lei dos Cossenos relaciona os três lados com o cosseno de um ângulo:
+\[
+  a^2 = b^2 + c^2 - 2bc \cdot \cos A
+\]
+\[
+  b^2 = a^2 + c^2 - 2ac \cdot \cos B
+\]
+\[
+  c^2 = a^2 + b^2 - 2ab \cdot \cos C
+\]
+}
+
+\SH{Forma inversa — encontrar ângulo (LLL)}
+
+\formula{$\cos A = \dfrac{b^2 + c^2 - a^2}{2bc}$}
+
+\nota{\textbf{Caso especial:} $A = 90° \Rightarrow \cos 90° = 0$, recuperando Pitágoras: $a^2 = b^2 + c^2$.}
+
+\SH{Exemplo 1 — lado (LAL)}
+
+Dados $b = 12$, $c = 9$, $A = 60°$:
+
+\exemp{
+$a^2 = 144 + 81 - 2 \cdot 12 \cdot 9 \cdot \cos 60°$
+
+$a^2 = 225 - 216 \cdot \dfrac{1}{2} = 225 - 108 = 117$
+
+$\hlm{a = \sqrt{117} \approx 10{,}82}$
+
+Completando com Lei dos Senos:
+
+$\operatorname{sen} B = \dfrac{12 \cdot \operatorname{sen} 60°}{10{,}82} \approx 0{,}960$
+
+$B \approx 73{,}78°$
+
+$\hlm{C = 180° - 60° - 73{,}78° \approx 46{,}22°}$
+}
+
+\SH{Exemplo 2 — ângulo (LLL)}
+
+Dados $a = 8$, $b = 6$, $c = 7$. Maior ângulo primeiro:
+
+\exemp{
+$\cos A = \dfrac{6^2 + 7^2 - 8^2}{2 \cdot 6 \cdot 7} = \dfrac{36 + 49 - 64}{84} = \dfrac{21}{84} = \dfrac{1}{4}$
+
+$\hlm{A = \cos^{-1}\!\left(\tfrac{1}{4}\right) \approx 75{,}52°}$
+
+$\operatorname{sen} B = \dfrac{6 \cdot \operatorname{sen} 75{,}52°}{8} \approx 0{,}726$
+
+$\hlm{B \approx 46{,}57°}$
+
+$\hlm{C \approx 57{,}91°}$
+}
+
+\nota{No caso LLL, resolva o \textbf{maior ângulo primeiro} (oposto ao maior lado) para evitar o caso ambíguo ao aplicar a Lei dos Senos nos demais.}
+
+\end{multicols}
+
+\end{document}

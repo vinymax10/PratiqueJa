@@ -1,0 +1,142 @@
+% ============================================================
+%  Inequações do 2º Grau — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Inequações do 2.º Grau}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Inequações do 2.º Grau}%
+           {Método gráfico, tabela de sinais e casos especiais}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Rev.}{badgepurple}{Revisão — Inequações do 1.º Grau}{Notação de intervalo e regra do negativo}
+
+\regra{
+Uma \hl{inequação} estabelece uma desigualdade com incógnita. Ao multiplicar ou dividir por um número \hl{negativo}, o sentido da desigualdade \textbf{inverte}.
+}
+
+\exemp{
+$3x - 6 > 0 \;\Rightarrow\; x > 2 \;\Rightarrow\; \hlm{x \in (2, +\infty)}$
+
+$-2x + 4 \leq 0 \;\Rightarrow\; x \geq 2 \;\Rightarrow\; \hlm{x \in [2, +\infty)}$
+}
+
+\nota{Notação: $(a,b)$ aberto, $[a,b]$ fechado, $(a,b]$ e $[a,b)$ semi-abertos.}
+
+\TW{Graf}{darkblue}{Método Gráfico}{Usar a parábola para determinar o sinal}
+
+\regra{
+A inequação $ax^2 + bx + c \;\square\; 0$ pede os valores de $x$ onde a parábola $f(x) = ax^2 + bx + c$ está acima ($>0$), abaixo ($<0$) ou tocando ($=0$) o eixo $x$.
+
+\begin{itemize}
+  \item $a > 0$ (parábola $\cup$): $f(x) < 0$ \textbf{entre} as raízes; $f(x) > 0$ \textbf{fora}
+  \item $a < 0$ (parábola $\cap$): $f(x) > 0$ \textbf{entre} as raízes; $f(x) < 0$ \textbf{fora}
+\end{itemize}
+}
+
+\TW{1·2·3}{darkblue}{Método Passo a Passo}{Raízes → concavidade → solução}
+
+\regra{
+\textbf{1.} Passe tudo para um lado: $ax^2 + bx + c \;\square\; 0$
+
+\textbf{2.} Calcule $\Delta$ e encontre as raízes $x_1 \leq x_2$ (se existirem)
+
+\textbf{3.} Analise o sinal de $a$ para saber a concavidade
+
+\textbf{4.} Monte a solução com base no sinal pedido
+}
+
+\exemp{
+\textbf{Exemplo — $x^2 - 5x + 6 \leq 0$:}
+
+$\Delta = 25 - 24 = 1 \;\Rightarrow\; x_1 = 2,\; x_2 = 3$
+
+$a = 1 > 0$ → parábola $\cup$ → $f(x) \leq 0$ \emph{entre} as raízes
+
+$\hlm{x \in [2,\, 3]}$
+
+\textbf{Exemplo — $-x^2 + 4x - 3 > 0$:}
+
+$\Delta = 16 - 12 = 4 \;\Rightarrow\; x_1 = 1,\; x_2 = 3$
+
+$a = -1 < 0$ → parábola $\cap$ → $f(x) > 0$ \emph{entre} as raízes
+
+$\hlm{x \in (1,\, 3)}$
+}
+
+\TW{Esp}{badgepurple}{Casos Especiais — $\Delta \leq 0$}{Solução é $\emptyset$ ou $\mathbb{R}$}
+
+\regra{
+Quando $\Delta < 0$, a parábola não cruza o eixo $x$. O sinal de $f(x)$ é constante (igual ao sinal de $a$) para todo $x$.
+
+Quando $\Delta = 0$, existe apenas uma raiz (raiz dupla): $x_v$.
+}
+
+\exemp{
+$x^2 + 1 > 0$: $\Delta < 0$; $a > 0$ → $f(x) > 0$ sempre
+
+$\hlm{x \in \mathbb{R}}$
+
+$x^2 + 1 < 0$: mesma função, sinal contrário ao pedido
+
+$\hlm{S = \emptyset}$
+
+$-x^2 + 4 \geq 0 \;\Leftrightarrow\; x^2 - 4 \leq 0$: $\Delta = 16$; $x_1 = -2$, $x_2 = 2$
+
+$\hlm{x \in [-2,\, 2]}$
+
+$(x-3)^2 \leq 0$: $\Delta = 0$, raiz dupla $x_v = 3$
+
+$(x-3)^2 \geq 0$ sempre; $\leq 0$ só quando $(x-3)^2 = 0$
+
+$\hlm{x = 3}$ (apenas o vértice)
+}
+
+\TW{( )( )}{badgepurple}{Inequação Fatorada}{Estudo de sinal por tabela}
+
+\regra{
+Quando $f(x)$ está na forma fatorada $a(x - x_1)(x - x_2)$, use uma \hl{tabela de sinais}: analise o sinal de cada fator separadamente e combine-os pelo produto.
+}
+
+\exemp{
+\textbf{$(x-1)(x-4) \leq 0$ — zeros: $x = 1$ e $x = 4$:}
+
+\vspace{4pt}
+\noindent
+\begin{minipage}[t]{\linewidth}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & $({-}\infty,1)$ & $1$ & $(1,4)$ & $4$ & $(4,{+}\infty)$ \\
+\hline
+$(x-1)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$(x-4)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\textbf{Prod.} & $+$ & $0$ & \textcolor{green!50!black}{$-$} & $0$ & $+$ \\
+\hline
+\end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+$\hlm{\text{Solução }(\leq 0)\text{: } x \in [1,\, 4]}$
+}
+
+\end{multicols}
+
+\end{document}

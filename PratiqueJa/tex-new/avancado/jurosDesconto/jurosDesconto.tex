@@ -1,0 +1,235 @@
+% ============================================================
+%  Juros e Desconto — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Juros e Desconto}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Juros e Desconto}%
+           {Regimes simples e compostos, taxas e descontos}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{JS}{darkblue}{Juros Simples}{Juros calculados apenas sobre o capital inicial}
+
+\regra{
+Nos \hl{juros simples}, o valor dos juros é calculado \textbf{apenas sobre o capital inicial} durante todo o período. A base de cálculo não muda — os juros não geram novos juros.
+}
+
+\formula{$J = C \cdot i \cdot t$}
+
+\begin{itemize}
+  \item $J$ — juros simples
+  \item $C$ — capital inicial (valor principal)
+  \item $i$ — taxa de juros por período (em decimal)
+  \item $t$ — tempo (mesmo período da taxa)
+\end{itemize}
+
+\SH{Montante}
+
+O montante $M$ é capital mais juros:
+
+\formula{$M = C + J = C \cdot (1 + i \cdot t)$}
+
+\exemp{
+\textbf{R\$ 1.000,00 a 5\% a.m. por 6 meses:}
+
+$J = 1000 \cdot 0{,}05 \cdot 6 = 300$
+
+$M = 1000 + 300$
+
+$\hlm{M = \text{R\$ } 1.300{,}00}$
+}
+
+\TW{JC}{darkblue}{Juros Compostos}{Juros sobre capital + juros acumulados}
+
+\regra{
+Nos \hl{juros compostos}, a cada período o montante (capital + juros acumulados) torna-se o novo capital. Os \textbf{juros geram mais juros} — o crescimento é exponencial.
+}
+
+\formula{$M = C \cdot (1 + i)^t$}
+
+\begin{itemize}
+  \item $M$ — montante final
+  \item $C$ — capital inicial
+  \item $i$ — taxa de juros por período (em decimal)
+  \item $t$ — número de períodos
+\end{itemize}
+
+O juros composto total: $J = M - C$
+
+\exemp{
+\textbf{R\$ 1.000,00 a 10\% a.a. por 2 anos:}
+
+$M = 1000 \cdot (1{,}10)^2 = 1000 \cdot 1{,}21$
+
+$\hlm{M = \text{R\$ } 1.210{,}00}$
+}
+
+\TW{JS×JC}{badgepurple}{Comparativo: Simples × Composto}{Quando usar cada regime}
+
+\regra{
+Para $t = 1$ período, ambos os regimes produzem o mesmo resultado. Para $t > 1$, os juros compostos sempre superam os simples.
+
+\begin{itemize}
+  \item \textbf{Juros Simples} — crescimento linear; operações de curto prazo
+  \item \textbf{Juros Compostos} — crescimento exponencial; investimentos, financiamentos
+\end{itemize}
+}
+
+\nota{\textbf{Atenção:} no Brasil, a maioria das operações financeiras (CDB, poupança, financiamentos, cartões) utiliza o regime de \textbf{juros compostos}.}
+
+\TW{Taxa}{badgepurple}{Taxas Proporcionais e Equivalentes}{Conversão de taxas entre períodos diferentes}
+
+\regra{
+\textbf{Taxas proporcionais} — regime simples; conversão por regra de três:
+\[
+  i_2 = i_1 \cdot \frac{t_2}{t_1}
+\]
+
+\textbf{Taxas equivalentes} — regime composto; conversão por potenciação:
+\[
+  (1 + i_a) = (1 + i_m)^{12}
+\]
+}
+
+\exemp{
+\textbf{Taxa mensal 3\% → anual proporcional (JS):}
+
+$i_a = 3\% \cdot 12 = \hlm{36\%\text{ a.a.}}$
+
+\textbf{Taxa anual 26,82\% → mensal equivalente (JC):}
+
+$(1 + 0{,}2682) = (1 + i_m)^{12}$
+
+$i_m = (1{,}2682)^{1/12} - 1 \approx 0{,}02$
+
+$\hlm{i_m \approx 2\%\text{ ao mês}}$
+}
+
+\nota{\textbf{Atenção:} nunca converta taxas de juros compostos usando regra de três — isso gera erro. Use sempre a fórmula de equivalência.}
+
+\TW{DS}{darkblue}{Desconto Simples}{Redução linear sobre o valor nominal}
+
+\regra{
+O \hl{desconto simples} calcula a redução \textbf{linear} no valor nominal de um título. O desconto incide sempre sobre o valor de face.
+}
+
+\formula{$D = N \cdot i \cdot t$}
+
+\begin{itemize}
+  \item $D$ — desconto
+  \item $N$ — valor nominal do título
+  \item $i$ — taxa de desconto por período (em decimal)
+  \item $t$ — prazo até o vencimento
+\end{itemize}
+
+\SH{Valor Atual}
+
+\formula{$A = N - D = N \cdot (1 - i \cdot t)$}
+
+\exemp{
+\textbf{Título R\$ 1.000,00, desconto 10\% a.a., prazo 1 ano:}
+
+$D = 1000 \cdot 0{,}10 \cdot 1 = 100$
+
+$A = 1000 - 100$
+
+$\hlm{A = \text{R\$ } 900{,}00}$
+}
+
+\TW{DC}{darkblue}{Desconto Composto}{Desconto aplicado sucessivamente a cada período}
+
+\regra{
+No \hl{desconto composto}, o desconto é aplicado de forma \textbf{sucessiva} sobre o saldo remanescente de cada período — é o inverso do regime de juros compostos.
+}
+
+\formula{$A = N \cdot (1 - i)^t$}
+
+O desconto total: $D = N - A$
+
+\exemp{
+\textbf{Título R\$ 5.000,00, desconto composto 5\% a.m. por 3 meses:}
+
+$A = 5000 \cdot (0{,}95)^3 = 5000 \cdot 0{,}857375$
+
+$A \approx \text{R\$ } 4.287{,}00$
+
+$\hlm{D = 5000 - 4287 = \text{R\$ } 713{,}00}$
+}
+
+\TW{D∥D}{badgepurple}{Desconto por Fora vs. por Dentro}{Desconto comercial e desconto racional}
+
+\regra{
+\textbf{Desconto comercial (por fora):} calculado sobre o valor nominal $N$.
+\[
+  D_{\text{fora}} = N \cdot i \cdot t \quad A = N(1 - it)
+\]
+
+\textbf{Desconto racional (por dentro):} calculado sobre o valor atual $A$.
+\[
+  D_{\text{dentro}} = A \cdot i \cdot t \quad A = \frac{N}{1 + it}
+\]
+}
+
+\exemp{
+\textbf{Título R\$ 1.000,00, 10\% a.a., 1 ano:}
+
+Por fora: $A = 1000 \cdot (1 - 0{,}10) = \text{R\$ } 900{,}00$
+
+Por dentro: $A = \dfrac{1000}{1 + 0{,}10} \approx \text{R\$ } 909{,}09$
+
+\hl{Desconto racional é sempre menor que o comercial.}
+}
+
+\nota{\textbf{Regra:} desconto comercial (por fora) favorece o banco; desconto racional (por dentro) favorece o devedor.}
+
+\TW{Prob}{badgepurple}{Problemas Contextualizados}{Aplicando juros e desconto em situações reais}
+
+\exemp{
+\textbf{Prob. 1 — Juros Simples:}
+
+R\$ 8.000,00 a 4\% a.m. por 5 meses.
+
+$J = 8000 \cdot 0{,}04 \cdot 5 = 1600$
+
+$\hlm{M = \text{R\$ } 9.600{,}00}$
+
+\textbf{Prob. 2 — Juros Compostos:}
+
+R\$ 2.000,00 a 12\% a.a. por 3 anos.
+
+$M = 2000 \cdot (1{,}12)^3 = 2000 \cdot 1{,}404928$
+
+$M \approx \text{R\$ } 2.809{,}86$
+
+$\hlm{J \approx \text{R\$ } 809{,}86}$
+
+\textbf{Prob. 3 — Desconto Comercial:}
+
+Duplicata R\$ 3.500,00, 90 dias, taxa 3\% a.m.
+
+$90\,\text{dias} = 3\,\text{meses}$
+
+$D = 3500 \cdot 0{,}03 \cdot 3 = 315$
+
+$\hlm{A = \text{R\$ } 3.185{,}00}$
+}
+
+\end{multicols}
+
+\end{document}

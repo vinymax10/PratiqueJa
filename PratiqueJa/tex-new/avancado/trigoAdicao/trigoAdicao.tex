@@ -1,0 +1,195 @@
+% ============================================================
+%  Trigonometria: Adição de Arcos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Trigonometria: Adição de Arcos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Trigonometria: Adição de Arcos}%
+           {Fórmulas de adição, duplicação, bissecção e produto}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Fórmulas de Adição e Subtração}{Seno, cosseno e tangente da soma/diferença de arcos}
+
+\regra{
+\textbf{Seno:}
+\[
+  \sin(a + b) = \sin a \cos b + \cos a \sin b
+\]
+\[
+  \sin(a - b) = \sin a \cos b - \cos a \sin b
+\]
+\textbf{Cosseno:}
+\[
+  \cos(a + b) = \cos a \cos b - \sin a \sin b
+\]
+\[
+  \cos(a - b) = \cos a \cos b + \sin a \sin b
+\]
+\textbf{Tangente:}
+\[
+  \tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a \tan b}
+\]
+\[
+  \tan(a - b) = \frac{\tan a - \tan b}{1 + \tan a \tan b}
+\]
+(válidas quando os denominadores $\neq 0$)
+}
+
+\exemp{
+\textbf{Exemplo 1 — $\sin 75°$:}
+
+$\sin 75° = \sin(45° + 30°)$
+
+$= \sin 45°\cos 30° + \cos 45°\sin 30°$
+
+$= \dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2} + \dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}$
+
+$\hlm{= \dfrac{\sqrt{6}+\sqrt{2}}{4}}$
+
+\textbf{Exemplo 2 — $\cos 15°$:}
+
+$\cos 15° = \cos(45° - 30°)$
+
+$= \cos 45°\cos 30° + \sin 45°\sin 30°$
+
+$= \dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2} + \dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}$
+
+$\hlm{= \dfrac{\sqrt{6}+\sqrt{2}}{4}}$
+}
+
+\TW{2a}{darkblue}{Fórmulas de Duplicação (Arco Duplo)}{Obtidas fazendo $b = a$ nas fórmulas de adição}
+
+\regra{
+\[
+  \sin(2a) = 2\sin a \cos a
+\]
+\[
+  \cos(2a) = \cos^2 a - \sin^2 a = 1 - 2\sin^2 a = 2\cos^2 a - 1
+\]
+\[
+  \tan(2a) = \frac{2\tan a}{1 - \tan^2 a}
+\]
+}
+
+\exemp{
+\textbf{Exemplo 3 — $\sin(2a)$ com $\sin a = \frac{3}{5}$, 1º quadrante:}
+
+$\cos a = \dfrac{4}{5}$ (Pitágoras)
+
+$\sin(2a) = 2 \cdot \dfrac{3}{5} \cdot \dfrac{4}{5} = \hlm{\dfrac{24}{25}}$
+
+\textbf{Exemplo 4 — $\cos^2 a - \sin^2 a$ para $a = 30°$:}
+
+$\cos(60°) = \dfrac{1}{2}$
+
+Verif.: $\left(\dfrac{\sqrt{3}}{2}\right)^2 - \left(\dfrac{1}{2}\right)^2 = \dfrac{3}{4} - \dfrac{1}{4} = \hlm{\dfrac{1}{2}}$ \;\ok
+}
+
+\TW{a/2}{badgepurple}{Fórmulas de Bissecção (Arco Metade)}{Expressam $\sin^2$ e $\cos^2$ em termos de $\cos(2a)$}
+
+\regra{
+Das fórmulas de duplicação do cosseno:
+\[
+  \sin^2 a = \frac{1 - \cos(2a)}{2} \qquad \cos^2 a = \frac{1 + \cos(2a)}{2}
+\]
+Fazendo $a \to \frac{a}{2}$:
+\[
+  \sin^2\!\tfrac{a}{2} = \frac{1 - \cos a}{2} \qquad \cos^2\!\tfrac{a}{2} = \frac{1 + \cos a}{2}
+\]
+}
+
+\exemp{
+\textbf{Exemplo 5 — $\cos^2 15°$:}
+
+$\cos^2 15° = \dfrac{1 + \cos 30°}{2} = \dfrac{1 + \frac{\sqrt{3}}{2}}{2}$
+
+$\hlm{= \dfrac{2 + \sqrt{3}}{4}}$
+}
+
+\TW{P→S}{badgepurple}{Produto em Soma (e Soma em Produto)}{Simplificam expressões trigonométricas}
+
+\regra{
+\textbf{Produto em soma:}
+\[
+  \sin a \cos b = \tfrac{1}{2}[\sin(a+b) + \sin(a-b)]
+\]
+\[
+  \cos a \cos b = \tfrac{1}{2}[\cos(a-b) + \cos(a+b)]
+\]
+\[
+  \sin a \sin b = \tfrac{1}{2}[\cos(a-b) - \cos(a+b)]
+\]
+
+\textbf{Soma em produto} (com $p = a+b$, $q = a-b$):
+\[
+  \sin p + \sin q = 2\sin\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}
+\]
+\[
+  \cos p + \cos q = 2\cos\!\tfrac{p+q}{2}\cos\!\tfrac{p-q}{2}
+\]
+}
+
+\exemp{
+\textbf{Exemplo 6 — simplificar $\sin 70° + \sin 10°$:}
+
+$= 2\sin\!\dfrac{80°}{2}\cos\!\dfrac{60°}{2} = 2\sin 40°\cos 30°$
+
+$\hlm{= \sqrt{3}\sin 40°}$
+
+\textbf{Exemplo 7 — provar $\cos^2 a - \sin^2 b = \cos(a+b)\cos(a-b)$:}
+
+Lado direito:
+
+$= [\cos a\cos b - \sin a\sin b][\cos a\cos b + \sin a\sin b]$
+
+$= \cos^2 a\cos^2 b - \sin^2 a\sin^2 b$
+
+$= \cos^2 a(1{-}\sin^2 b) - \sin^2 b(1{-}\cos^2 a)$
+
+$\hlm{= \cos^2 a - \sin^2 b}$ \;\ok
+}
+
+\nota{As fórmulas de adição são a base de todas as demais: duplicação, bissecção e produto em soma derivam diretamente delas.}
+
+\TW{Ref}{badgepurple}{Valores de Referência}{Ângulos notáveis de 0° a 90°}
+
+\regra{
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\theta$ & $\sin\theta$ & $\cos\theta$ & $\tan\theta$ \\
+\hline
+$0°$ & $0$ & $1$ & $0$ \\
+\hline
+$30°$ & $\frac{1}{2}$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{3}}{3}$ \\
+\hline
+$45°$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{2}}{2}$ & $1$ \\
+\hline
+$60°$ & $\frac{\sqrt{3}}{2}$ & $\frac{1}{2}$ & $\sqrt{3}$ \\
+\hline
+$90°$ & $1$ & $0$ & indef. \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\end{multicols}
+
+\end{document}

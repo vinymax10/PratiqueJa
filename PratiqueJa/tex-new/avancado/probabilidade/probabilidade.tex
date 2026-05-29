@@ -1,0 +1,260 @@
+% ============================================================
+%  Probabilidade — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Probabilidade}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Probabilidade}%
+           {Espaço amostral, regras e distribuição binomial}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição}{O que é probabilidade?}
+
+\regra{
+Probabilidade é a medida numérica da chance de um evento ocorrer, variando de $0$ (evento impossível) a $1$ (evento certo).
+}
+
+\nota{\textbf{Representação:} fração, decimal ou porcentagem. Ex.: $\dfrac{1}{4} = 0{,}25 = 25\%$.}
+
+\TW{1}{darkblue}{Espaço Amostral}{Resultados, eventos e nomenclatura}
+
+\regra{
+O \hl{espaço amostral} $\Omega$ é o conjunto de \emph{todos} os resultados possíveis. Um \hl{evento} $A$ é qualquer subconjunto de $\Omega$.
+}
+
+\exemp{
+Dado: $\Omega = \{1,2,3,4,5,6\}$, $n(\Omega) = 6$
+
+Evento "par": $A = \{2,4,6\}$, $n(A) = 3$
+
+Evento "maior que 4": $B = \{5,6\}$, $n(B) = 2$
+
+\textbf{Evento certo:} $\Omega$ — $P(\Omega) = 1$
+
+\textbf{Evento impossível:} $\varnothing$ — $P(\varnothing) = 0$
+
+\textbf{Eventos exclusivos:} $A \cap B = \varnothing$
+}
+
+\TW{2}{darkblue}{Cálculo de Probabilidade}{Fórmula clássica de Laplace}
+
+\regra{
+Válida quando todos os resultados são \hl{igualmente prováveis}:
+\[
+  P(A) = \dfrac{n(A)}{n(\Omega)}
+\]
+}
+
+\exemp{
+\textbf{P(face par) num dado:}
+
+$n(A) = 3$ \quad $n(\Omega) = 6$
+
+$\hlm{P(A) = \dfrac{3}{6} = \dfrac{1}{2} = 50\%}$
+}
+
+\TW{$A^c$}{badgepurple}{Eventos Complementares}{Probabilidade do evento não ocorrer}
+
+\regra{
+\[
+  P(A^c) = 1 - P(A)
+\]
+$A^c$ = pontos de $\Omega$ que \textbf{não} pertencem a $A$.
+}
+
+\exemp{
+Pote: 12 pretos, 16 azuis, 2 vermelhos ($n(\Omega) = 30$).
+
+$P(\text{vermelho}) = \dfrac{2}{30} = \dfrac{1}{15}$
+
+$\hlm{P(\text{não vermelho}) = 1 - \dfrac{1}{15} = \dfrac{14}{15} \approx 93{,}3\%}$
+}
+
+\nota{\textbf{Estratégia:} quando $P(A)$ tem muitos casos favoráveis, calcule $P(A^c)$ e subtraia de 1.}
+
+\TW{$\geq$1}{badgepurple}{Probabilidade de ``Ao Menos Um''}{Aplicação direta do evento complementar}
+
+\regra{
+\[
+  P(\text{ao menos um}) = 1 - P(\text{nenhum})
+\]
+}
+
+\exemp{
+\textbf{Moeda lançada 3 vezes — ao menos uma cara:}
+
+$P(\text{nenhuma cara}) = \left(\dfrac{1}{2}\right)^3 = \dfrac{1}{8}$
+
+$\hlm{P(\text{ao menos uma cara}) = \dfrac{7}{8} = 87{,}5\%}$
+
+\textbf{Dado lançado 4 vezes — ao menos um 6:}
+
+$P(\text{não sair 6}) = \dfrac{5}{6}$ por lançamento
+
+$P(\text{nenhum}) = \left(\dfrac{5}{6}\right)^4 = \dfrac{625}{1296}$
+
+$\hlm{P(\text{ao menos um 6}) = 1 - \dfrac{625}{1296} = \dfrac{671}{1296} \approx 51{,}8\%}$
+}
+
+\nota{\textbf{Atenção:} funciona para lançamentos/tentativas \emph{independentes}. Para eventos dependentes, use combinações.}
+
+\TW{P|A}{darkblue}{Probabilidade Condicional}{Probabilidade de B dado que A ocorreu}
+
+\regra{
+\[
+  P(B \mid A) = \dfrac{P(A \cap B)}{P(A)}, \quad P(A) \neq 0
+\]
+}
+
+\exemp{
+Urna: 3 bolas vermelhas + 2 azuis.
+
+Sabendo que a 1ª foi vermelha, restam 4 bolas (2V, 2A):
+
+$\hlm{P(B \mid A) = \dfrac{2}{4} = \dfrac{1}{2} = 50\%}$
+}
+
+\TW{$\cup$}{darkblue}{Regra da Soma}{Probabilidade de A ou B ocorrerem}
+
+\regra{
+\textbf{Eventos mutuamente exclusivos} ($A \cap B = \varnothing$):
+\[
+  P(A \cup B) = P(A) + P(B)
+\]
+
+\textbf{Eventos não exclusivos:}
+\[
+  P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+}
+
+\exemp{
+\textbf{P(sair 2 ou 5) no dado:}
+
+Exclusivos: $\hlm{P = \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{1}{3}}$
+
+\textbf{Turma: 18 estudam Mat. $(A)$, 12 Fís. $(B)$, 5 ambas:}
+
+$P(A \cup B) = \dfrac{18}{30} + \dfrac{12}{30} - \dfrac{5}{30} = \hlm{\dfrac{25}{30} = \dfrac{5}{6}}$
+}
+
+\TW{$\cap$}{darkblue}{Regra do Produto}{Probabilidade de A e B ocorrerem juntos}
+
+\regra{
+\textbf{Eventos independentes:}
+\[
+  P(A \cap B) = P(A) \cdot P(B)
+\]
+\textbf{Eventos dependentes:}
+\[
+  P(A \cap B) = P(A) \cdot P(B \mid A)
+\]
+}
+
+\exemp{
+\textbf{Cara na moeda E 4 no dado (independentes):}
+
+$P = \dfrac{1}{2} \cdot \dfrac{1}{6} = \hlm{\dfrac{1}{12}}$
+
+\textbf{Caixa: 5 vermelhas + 3 azuis — vermelho depois azul (s/ reposição):}
+
+$P(A) = \dfrac{5}{8}$ \quad $P(B \mid A) = \dfrac{3}{7}$
+
+$\hlm{P(A \cap B) = \dfrac{5}{8} \cdot \dfrac{3}{7} = \dfrac{15}{56}}$
+}
+
+\nota{\textbf{Sem reposição} → dependentes: use $P(A) \cdot P(B|A)$.
+
+\textbf{Com reposição} → independentes: use $P(A) \cdot P(B)$.}
+
+\TW{$C_n$}{badgepurple}{Probabilidade e Combinatória}{Usando combinações para contar casos}
+
+\regra{
+Em retiradas simultâneas, use combinações para contar:
+\[
+  P(A) = \dfrac{C_{n,k}}{C_{N,k}}, \quad C_{n,k} = \dfrac{n!}{k!\,(n-k)!}
+\]
+}
+
+\exemp{
+Urna: 4 brancas + 3 pretas. Retira-se 2 simultaneamente.
+
+$n(\Omega) = C_{7,2} = 21$ \quad $n(A) = C_{4,2} = 6$
+
+$\hlm{P(\text{2 brancas}) = \dfrac{6}{21} = \dfrac{2}{7} \approx 28{,}6\%}$
+
+\textbf{P(cores diferentes):}
+
+$n(B) = C_{4,1} \cdot C_{3,1} = 12$
+
+$\hlm{P(B) = \dfrac{12}{21} = \dfrac{4}{7} \approx 57{,}1\%}$
+}
+
+\TW{B(n,p)}{badgepurple}{Distribuição Binomial}{Experimentos de Bernoulli repetidos}
+
+\regra{
+Quando um experimento com $P(\text{sucesso}) = p$ é repetido $n$ vezes de forma independente, a probabilidade de exatamente $k$ sucessos é:
+\[
+  P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+}
+
+\exemp{
+\textbf{Dado lançado 5 vezes — exatamente 2 faces "6":}
+
+$n=5$, $k=2$, $p=\frac{1}{6}$
+
+$P = C_{5,2} \cdot \left(\frac{1}{6}\right)^2 \cdot \left(\frac{5}{6}\right)^3 = 10 \cdot \frac{125}{7776}$
+
+$\hlm{P \approx 16{,}1\%}$
+
+\textbf{Fábrica: 10\% defeituosas, lote de 4. P(nenhuma defeituosa):}
+
+$P(X=0) = (0{,}90)^4 = \hlm{0{,}6561 = 65{,}61\%}$
+}
+
+\nota{\textbf{Quando usar:} experimentos (1) independentes, (2) com mesmo $p$ de sucesso e (3) $n$ fixo.}
+
+\TW{!}{badgepurple}{Dicas e Erros Comuns}{O que mais cai em vestibular e concurso}
+
+\exemp{
+\textbf{Com vs. sem reposição:}
+
+Sem reposição = dependentes → use $P(A) \cdot P(B|A)$
+
+Com reposição = independentes → use $P(A) \cdot P(B)$
+
+\textbf{``Ao menos um'' → use complementar:}
+
+$P(\text{ao menos um}) = 1 - P(\text{nenhum})$
+
+\textbf{Regra da Soma — não esqueça a interseção:}
+
+$P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+\textbf{Independência $\neq$ Exclusividade:}
+
+Exclusivos com $P > 0$ são \emph{dependentes}.
+
+Independência: $P(A \cap B) = P(A) \cdot P(B)$.
+}
+
+\end{multicols}
+
+\end{document}
