@@ -1,0 +1,356 @@
+% ============================================================
+%  Conjuntos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Conjuntos}
+
+% Estilos TikZ para diagramas de Venn
+% Contornos (cA, cB) NÃO têm fill — as regiões são pintadas à parte.
+\tikzset{
+  univ/.style={draw=graycolor, line width=1pt},
+  cA/.style={draw=badgepurple!80!black, line width=1.4pt},
+  cB/.style={draw=accentblue!70!black,  line width=1.4pt},
+  rA/.style={fill=badgepurple!16!white},   % região só de A
+  rB/.style={fill=accentblue!18!white},    % região só de B
+  rI/.style={fill=badgegreen!28!white},    % interseção
+  rhl/.style={fill=darkblue!11!white},     % destaque claro
+  rhld/.style={fill=darkblue!22!white},    % destaque forte (região-resultado)
+  vlbl/.style={font=\footnotesize\bfseries, black!70!white},
+  vset/.style={font=\small\bfseries},
+}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Conjuntos}%
+           {Representação, Operações e Diagramas de Venn}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é um conjunto?}
+
+\regra{Um \textbf{conjunto} é uma coleção bem definida de elementos
+(objetos, números, pessoas etc.). Os elementos devem ser
+\textbf{distintos} e claramente identificáveis.}
+
+\small\color{bodytext}%
+A teoria dos conjuntos é a base de praticamente toda a matemática
+moderna — fundamenta o estudo de funções, relações, probabilidade
+e lógica.
+
+%─────────────────────────────────────────────────────────────
+\TW{1}{darkblue}{Formas de Representação}{Como descrever um conjunto}
+
+\SH{Listagem ou enumeração}
+\exemp{%
+  Lista-se todos os elementos entre chaves:\\[2pt]
+  $A = \{1,\,2,\,3,\,4,\,5\}$%
+}
+
+\SH{Propriedade característica}
+\exemp{%
+  Os elementos são descritos por uma propriedade comum:\\[2pt]
+  $B = \{x \mid x \text{ é um número par}\}$\\[2pt]
+  {\footnotesize Lê-se: ``$x$ tal que $x$ é um número par''.}%
+}
+
+\SH{Diagrama de Venn}
+\small\color{bodytext}%
+Representação gráfica: círculos dentro de um retângulo (o universo
+$U$) mostram as relações entre conjuntos.
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.9]
+\draw[univ] (-2.6,-1.7) rectangle (2.6,1.7);
+\node[vlbl] at (2.3,1.45) {$U$};
+\fill[rA] (-0.55,0) circle (1.25);
+\fill[rB] (0.55,0) circle (1.25);
+\begin{scope}
+  \clip (-0.55,0) circle (1.25);
+  \fill[rI] (0.55,0) circle (1.25);
+\end{scope}
+\draw[cA] (-0.55,0) circle (1.25);
+\draw[cB] (0.55,0) circle (1.25);
+\node[vset, badgepurple!75!black] at (-1.55,1.05) {$A$};
+\node[vset, accentblue!60!black]  at (1.55,1.05) {$B$};
+% elementos só de A
+\node at (-1.15,0.35) {\footnotesize 1};
+\node at (-1.15,-0.35) {\footnotesize 3};
+\node at (-0.65,-0.7) {\footnotesize 6};
+% interseção
+\node at (0,0.3) {\footnotesize 5};
+\node at (0,-0.35) {\footnotesize 7};
+% só de B
+\node at (1.15,0.35) {\footnotesize 2};
+\node at (1.15,-0.35) {\footnotesize 4};
+\node at (0.65,-0.7) {\footnotesize 8};
+\end{tikzpicture}
+\vspace{2pt}\end{center}
+
+\exemp{%
+  $A = \{1,3,5,6,7\}$ \quad e \quad $B = \{2,4,5,7,8\}$\\[2pt]
+  Os elementos \hlm{5} e \hlm{7} pertencem aos dois conjuntos
+  (interseção).%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{2}{darkblue}{Cardinalidade}{Número de elementos do conjunto}
+
+\regra{$|A|$ = número de elementos \textbf{distintos} do conjunto $A$.}
+
+\exemp{%
+  $A = \{2,6,9\} \;\Rightarrow\; \hlm{|A| = 3}$\\[3pt]
+  $B = \{a,b,c,d\} \;\Rightarrow\; \hlm{|B| = 4}$\\[3pt]
+  $C = \emptyset \;\Rightarrow\; \hlm{|C| = 0}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{3}{darkblue}{Pertinência $(\in)$}{Elemento pertence ou não ao conjunto}
+
+\regra{$x \in A$ — ``$x$ \textbf{pertence} a $A$''\\[2pt]
+$x \notin A$ — ``$x$ \textbf{não pertence} a $A$''}
+
+\exemp{%
+  Dado $A = \{3,6,7,11\}$:\\[3pt]
+  $3 \in A$ \ok\; — 3 pertence a $A$\\[3pt]
+  $4 \notin A$ \nok\; — 4 não pertence a $A$%
+}
+
+\obs{Pertinência ($\in$) relaciona \textbf{elemento} e conjunto.
+Inclusão ($\subset$) relaciona \textbf{conjunto} e conjunto.}
+
+%─────────────────────────────────────────────────────────────
+\TW{4}{badgegreen}{Tipos Especiais}{Vazio, unitário, universo, finito e infinito}
+
+\exemp{%
+  \textbf{Vazio} $(\emptyset$ ou $\{\,\})$ — nenhum elemento.\\
+  \quad Ex.: pares que são ímpares.\\[3pt]
+  \textbf{Unitário} — exatamente um elemento.\\
+  \quad Ex.: $\{5\}$.\\[3pt]
+  \textbf{Universo} $(U)$ — todos os elementos do contexto.\\[3pt]
+  \textbf{Finito} — número limitado de elementos.\\
+  \quad Ex.: $\{1,2,3,4,5\}$.\\[3pt]
+  \textbf{Infinito} — infinitos elementos.\\
+  \quad Ex.: $\mathbb{N} = \{1,2,3,\ldots\}$.%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\cup$}{darkblue}{União}{Todos os elementos de $A$ ou de $B$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.62]
+\draw[univ] (-2.6,-1.7) rectangle (2.6,1.7);
+\fill[rhl] (-0.55,0) circle (1.25);
+\fill[rhl] (0.55,0) circle (1.25);
+\begin{scope}
+  \clip (-0.55,0) circle (1.25);
+  \fill[rhld] (0.55,0) circle (1.25);
+\end{scope}
+\draw[cA] (-0.55,0) circle (1.25);
+\draw[cB] (0.55,0) circle (1.25);
+\node[vset, badgepurple!75!black] at (-1.55,1.05) {$A$};
+\node[vset, accentblue!60!black]  at (1.55,1.05) {$B$};
+\end{tikzpicture}
+\vspace{1pt}\end{center}
+
+\regra{$A \cup B = \{x \mid x \in A \ \textbf{ou}\ x \in B\}$\\[2pt]
+{\small Elementos que pertencem a \textbf{pelo menos um} conjunto.}}
+
+\exemp{%
+  $A = \{1,2,3\}$, \ $B = \{3,4,5\}$\\[2pt]
+  $A \cup B = \hlm{\{1,2,3,4,5\}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\cap$}{darkblue}{Interseção}{Apenas os elementos comuns a $A$ e $B$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.62]
+\draw[univ] (-2.6,-1.7) rectangle (2.6,1.7);
+\begin{scope}
+  \clip (-0.55,0) circle (1.25);
+  \fill[rhld] (0.55,0) circle (1.25);
+\end{scope}
+\draw[cA] (-0.55,0) circle (1.25);
+\draw[cB] (0.55,0) circle (1.25);
+\node[vset, badgepurple!75!black] at (-1.55,1.05) {$A$};
+\node[vset, accentblue!60!black]  at (1.55,1.05) {$B$};
+\end{tikzpicture}
+\vspace{1pt}\end{center}
+
+\regra{$A \cap B = \{x \mid x \in A \ \textbf{e}\ x \in B\}$\\[2pt]
+{\small Elementos que pertencem \textbf{simultaneamente} aos dois.}}
+
+\exemp{%
+  $A = \{1,2,3\}$, \ $B = \{3,4,5\}$\\[2pt]
+  $A \cap B = \hlm{\{3\}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$-$}{darkblue}{Diferença $(A - B)$}{Elementos de $A$ que não estão em $B$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.62]
+\draw[univ] (-2.6,-1.7) rectangle (2.6,1.7);
+\begin{scope}
+  \clip (-0.55,0) circle (1.25);
+  \fill[rhld] (-2.6,-1.7) rectangle (2.6,1.7);
+  \clip (0.55,0) circle (1.25);
+  \fill[white] (-2.6,-1.7) rectangle (2.6,1.7);
+\end{scope}
+\draw[cA] (-0.55,0) circle (1.25);
+\draw[cB] (0.55,0) circle (1.25);
+\node[vset, badgepurple!75!black] at (-1.55,1.05) {$A$};
+\node[vset, accentblue!60!black]  at (1.55,1.05) {$B$};
+\end{tikzpicture}
+\vspace{1pt}\end{center}
+
+\regra{$A - B = \{x \mid x \in A \ \textbf{e}\ x \notin B\}$}
+
+\exemp{%
+  $A = \{1,2,3\}$, \ $B = \{3,4,5\}$\\[2pt]
+  $A - B = \hlm{\{1,2\}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$A^c$}{darkblue}{Complementar}{Elementos do universo que não estão em $A$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.62]
+\fill[rhld] (-2.6,-1.7) rectangle (2.6,1.7);
+\fill[white] (0,0) circle (1.25);
+\draw[univ] (-2.6,-1.7) rectangle (2.6,1.7);
+\draw[cA] (0,0) circle (1.25);
+\node[vset, badgepurple!75!black] at (0,0) {$A$};
+\node[vlbl] at (2.3,1.45) {$U$};
+\end{tikzpicture}
+\vspace{1pt}\end{center}
+
+\regra{$A^c = U - A = \{x \mid x \in U \ \textbf{e}\ x \notin A\}$}
+
+\exemp{%
+  $U = \{1,2,3,4,5\}$, \ $A = \{1,2\}$\\[2pt]
+  $A^c = \hlm{\{3,4,5\}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{9}{badgegreen}{Fórmula da Diferença}{Cardinalidade de $A - B$}
+
+\formula{$|A - B| = |A| - |A \cap B|$}
+
+\exemp{%
+  $A = \{1,2,3,4,5\},\quad |A| = 5$\\[3pt]
+  $B = \{4,5,6,7\},\quad |B| = 4$\\[3pt]
+  $A \cap B = \{4,5\},\quad |A \cap B| = 2$\\[3pt]
+  $|A - B| = 5 - 2 = \hlm{3}$\\[3pt]
+  {\footnotesize Logo, 3 elementos de $A$ não pertencem a $B$.}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{F}{badgegreen}{Fórmula da União}{Cardinalidade de $A \cup B$}
+
+\small\color{bodytext}%
+Uma das fórmulas mais importantes — garante que os elementos da
+interseção \textbf{não sejam contados em duplicidade}.
+
+\formula{$|A \cup B| = |A| + |B| - |A \cap B|$}
+
+\SH{Versão alternativa}
+\formula{$|A \cup B| = |A{-}B| + |B{-}A| + |A \cap B|$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\draw[univ] (-3.0,-1.85) rectangle (3.0,1.85);
+\fill[rA] (-0.7,0) circle (1.35);
+\fill[rB] (0.7,0) circle (1.35);
+\begin{scope}
+  \clip (-0.7,0) circle (1.35);
+  \fill[rI] (0.7,0) circle (1.35);
+\end{scope}
+\draw[cA] (-0.7,0) circle (1.35);
+\draw[cB] (0.7,0) circle (1.35);
+\node[vset, badgepurple!75!black] at (-2.0,1.2) {$A$};
+\node[vset, accentblue!60!black]  at (2.0,1.2) {$B$};
+\node[font=\scriptsize\bfseries] at (-1.25,0) {$A{-}B$};
+\node[font=\scriptsize\bfseries] at (0,0) {$A{\cap}B$};
+\node[font=\scriptsize\bfseries] at (1.25,0) {$B{-}A$};
+\end{tikzpicture}
+\vspace{1pt}\end{center}
+
+\exemp{%
+  \textbf{Fórmula principal}\\[2pt]
+  $A = \{1,2,3,4\},\ B = \{3,4,5,6\}$\\[2pt]
+  $A \cap B = \{3,4\},\quad |A \cap B| = 2$\\[2pt]
+  $|A \cup B| = 4 + 4 - 2 = \hlm{6}$%
+}
+
+\exemp{%
+  \textbf{Versão alternativa}\\[2pt]
+  $A = \{2,4,5,7\},\ B = \{2,4,8\}$\\[2pt]
+  $A - B = \{5,7\} \Rightarrow |A-B| = 2$\\[2pt]
+  $B - A = \{8\} \Rightarrow |B-A| = 1$\\[2pt]
+  $A \cap B = \{2,4\} \Rightarrow |A\cap B| = 2$\\[2pt]
+  $|A \cup B| = 2 + 1 + 2 = \hlm{5}$%
+}
+
+\nota{\textbf{Conjuntos disjuntos:} quando $A \cap B = \emptyset$,
+a fórmula simplifica para $|A \cup B| = |A| + |B|$.}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{6pt}
+\TW{Tab}{badgegreen}{Resumo das Operações}{Símbolos, definições e exemplos}
+
+\vspace{6pt}\noindent
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small UNIÃO $(A \cup B)$}\par\vspace{4pt}
+{\small\color{bodytext}$x \in A$ \textbf{ou} $x \in B$\par\vspace{2pt}
+$\{1,2,3\}\cup\{3,4,5\}=\{1,2,3,4,5\}$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small INTERSEÇÃO $(A \cap B)$}\par\vspace{4pt}
+{\small\color{bodytext}$x \in A$ \textbf{e} $x \in B$\par\vspace{2pt}
+$\{1,2,3\}\cap\{3,4,5\}=\{3\}$}
+\end{tcolorbox}
+\end{minipage}
+
+\vspace{6pt}\noindent
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=rulebg, colframe=darkblue,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{darkblue}\bfseries\small DIFERENÇA $(A - B)$}\par\vspace{4pt}
+{\small\color{bodytext}$x \in A$ \textbf{e} $x \notin B$\par\vspace{2pt}
+$\{1,2,3\}-\{3,4,5\}=\{1,2\}$}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{8.7cm}
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=notebg, colframe=noteborder,
+  left=8pt, right=8pt, top=6pt, bottom=8pt]
+{\color{notetext}\bfseries\small COMPLEMENTAR $(A^c)$}\par\vspace{4pt}
+{\small\color{bodytext}$x \in U$ \textbf{e} $x \notin A$\par\vspace{2pt}
+$U{=}\{1,..,5\},\,A{=}\{1,2\}\Rightarrow A^c{=}\{3,4,5\}$}
+\end{tcolorbox}
+\end{minipage}
+
+\end{document}

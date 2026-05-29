@@ -1,0 +1,210 @@
+% ============================================================
+%  Ângulo Inscrito na Circunferência — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{angles, calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  circ/.style={draw=darkblue, line width=1pt},
+  arco/.style={draw=accentblue!70!black, line width=2.4pt, line cap=round},
+  radii/.style={draw=badgepurple!80!black, line width=1pt},
+  chord/.style={draw=badgegreen!60!black, line width=1pt},
+  dpt/.style={circle, fill=darkblue, inner sep=1.2pt},
+  amk/.style={line width=0.8pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Ângulo Inscrito na Circunferência}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Ângulo Inscrito}%
+           {Relação com o Ângulo Central e Arcos}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Ângulo inscrito e ângulo central}
+
+\regra{O \textbf{ângulo inscrito} tem o vértice \emph{sobre} a
+circunferência e lados que são cordas. Ele é sempre \textbf{metade}
+do ângulo central que subtende o mesmo arco:}
+\formula{$\beta = \dfrac{\alpha}{2} \;\Longleftrightarrow\; \alpha = 2\beta$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.05]
+\coordinate (O) at (0,0); \def\R{1.7}
+\coordinate (A) at (40:\R); \coordinate (B) at (-40:\R);
+\coordinate (V) at (180:\R);
+\draw[circ] (O) circle (\R);
+\draw[arco] (-40:\R) arc (-40:40:\R);
+\draw[radii] (O)--(A); \draw[radii] (O)--(B);
+\draw[chord] (V)--(A); \draw[chord] (V)--(B);
+\pic[draw=badgepurple, amk, angle radius=0.55cm]{angle=B--O--A};
+\pic[draw=badgegreen!60!black, amk, angle radius=0.7cm]{angle=B--V--A};
+\node[cl, badgepurple!70!black] at ($(O)+(0:0.92)$){$\alpha$};
+\node[cl, badgegreen!50!black] at ($(V)+(0:1.0)$){$\beta$};
+\foreach \p in {A,B,V,O}{\node[dpt] at (\p){};}
+\node[right=1pt] at (A){\footnotesize A};
+\node[right=1pt] at (B){\footnotesize B};
+\node[left=1pt] at (V){\footnotesize V};
+\node[below left=-1pt] at (O){\footnotesize O};
+\end{tikzpicture}
+\end{center}
+
+\obs{$\alpha$ = ângulo central (vértice em $O$); $\beta$ = ângulo
+inscrito (vértice $V$). Ambos subtendem o arco $AB$ destacado.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex 1}{darkblue}{Exemplo 1}{Dado o central, achar o inscrito}
+
+O ângulo central mede $60°$. Qual o ângulo inscrito $x$?
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\coordinate (O) at (0,0); \def\R{1.6}
+\coordinate (A) at (30:\R); \coordinate (B) at (-30:\R);
+\coordinate (V) at (180:\R);
+\draw[circ] (O) circle (\R);
+\draw[arco] (-30:\R) arc (-30:30:\R);
+\draw[radii] (O)--(A); \draw[radii] (O)--(B);
+\draw[chord] (V)--(A); \draw[chord] (V)--(B);
+\pic[draw=badgepurple, amk, angle radius=0.5cm]{angle=B--O--A};
+\pic[draw=badgegreen!60!black, amk, angle radius=0.62cm]{angle=B--V--A};
+\node[cl, badgepurple!70!black] at ($(O)+(0:0.95)$){$60°$};
+\node[cl, badgegreen!50!black] at ($(V)+(0:0.95)$){$x$};
+\foreach \p in {A,B,V,O}{\node[dpt] at (\p){};}
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  $x = \dfrac{60°}{2} = \hlm{30°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex 2}{darkblue}{Exemplo 2}{Dado o inscrito, achar o arco}
+
+O ângulo inscrito mede $35°$. Qual a medida do arco $x$?
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\coordinate (O) at (0,0); \def\R{1.6}
+\coordinate (A) at (35:\R); \coordinate (B) at (-35:\R);
+\coordinate (V) at (180:\R);
+\draw[circ] (O) circle (\R);
+\draw[arco] (-35:\R) arc (-35:35:\R);
+\node[accentblue!60!black, cl] at (1.95,0){$x$};
+\draw[chord] (V)--(A); \draw[chord] (V)--(B);
+\pic[draw=badgegreen!60!black, amk, angle radius=0.62cm]{angle=B--V--A};
+\node[cl, badgegreen!50!black] at ($(V)+(0:0.98)$){$35°$};
+\foreach \p in {A,B,V}{\node[dpt] at (\p){};}
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  $35° = \dfrac{x}{2} \;\Rightarrow\; x = 35° \times 2 = \hlm{70°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tal}{badgegreen}{Teorema de Tales}{Ângulo inscrito no diâmetro}
+
+\regra{Todo ângulo inscrito que subtende um \textbf{diâmetro} é
+\textbf{reto} $(90°)$ — qualquer que seja a posição do vértice.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\coordinate (O) at (0,0); \def\R{1.6}
+\coordinate (A) at (180:\R); \coordinate (B) at (0:\R);
+\coordinate (V) at (75:\R);
+\draw[circ] (O) circle (\R);
+\draw[radii] (A)--(B);
+\draw[chord] (V)--(A); \draw[chord] (V)--(B);
+\pic[draw=vered, amk, angle radius=0.4cm]{angle=A--V--B};
+\node[cl, vered!80!black] at ($(V)+(-90:0.78)$){$90°$};
+\foreach \p in {A,B,V,O}{\node[dpt] at (\p){};}
+\node[left=1pt] at (A){\footnotesize A};
+\node[right=1pt] at (B){\footnotesize B};
+\node[above=1pt] at (V){\footnotesize V};
+\end{tikzpicture}
+\end{center}
+
+\obs{$A$ e $B$ são extremos de um diâmetro; o arco subtendido é a
+semicircunferência $(180°)$, logo o inscrito vale $180°/2 = 90°$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ang}{badgegreen}{Ângulos Inscritos Iguais}{Mesmo arco → mesma medida}
+
+\regra{Todos os ângulos inscritos que subtendem o \textbf{mesmo arco}
+têm a \textbf{mesma medida}, independentemente do vértice.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\coordinate (O) at (0,0); \def\R{1.7}
+\coordinate (A) at (30:\R); \coordinate (B) at (-30:\R);
+\coordinate (U) at (130:\R); \coordinate (W) at (210:\R);
+\draw[circ] (O) circle (\R);
+\draw[arco] (-30:\R) arc (-30:30:\R);
+\draw[chord] (U)--(A); \draw[chord] (U)--(B);
+\draw[chord] (W)--(A); \draw[chord] (W)--(B);
+\pic[draw=badgegreen!60!black, amk, angle radius=0.55cm]{angle=B--U--A};
+\pic[draw=badgegreen!60!black, amk, angle radius=0.55cm]{angle=B--W--A};
+\node[cl, badgegreen!50!black] at ($(U)+(-25:0.82)$){$x$};
+\node[cl, badgegreen!50!black] at ($(W)+(15:0.82)$){$y$};
+\foreach \p in {A,B,U,W}{\node[dpt] at (\p){};}
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  Se o arco vale $60°$, qualquer inscrito que o subtenda mede\\
+  $x = y = \dfrac{60°}{2} = \hlm{30°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Diâ}{badgepurple}{Arcos e o Diâmetro}{Arcos opostos somam 180°}
+
+\regra{Um diâmetro divide a circunferência em duas semicircunferências
+de $180°$. Um ponto $P$ forma com seus extremos os arcos
+$\alpha$ e $\beta$, com:}
+\formula{$\alpha + \beta = 180°$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\coordinate (O) at (0,0); \def\R{1.6}
+\coordinate (A) at (180:\R); \coordinate (B) at (0:\R);
+\coordinate (P) at (-70:\R);
+\draw[radii] (A)--(B);
+\draw[arco] (0:\R) arc (0:-70:\R);
+\node[accentblue!60!black, cl] at ($(O)+(-35:2.0)$){$\alpha$};
+\draw[draw=badgepurple!70!black, line width=2.4pt, line cap=round]
+     (180:\R) arc (180:290:\R);
+\node[badgepurple!70!black, cl] at ($(O)+(235:2.0)$){$\beta$};
+\draw[circ] (O) circle (\R);
+\foreach \p in {A,B,P,O}{\node[dpt] at (\p){};}
+\node[left=1pt] at (A){\footnotesize A};
+\node[right=1pt] at (B){\footnotesize B};
+\node[below=1pt] at (P){\footnotesize P};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  Inscrito de $30°$ subtende o arco $x$:\\
+  $30° = \dfrac{x}{2} \;\Rightarrow\; x = \hlm{60°}$\\[3pt]
+  Como $x + y = 180°$:\\
+  $60° + y = 180° \;\Rightarrow\; y = \hlm{120°}$%
+}
+
+\end{multicols}
+
+\end{document}

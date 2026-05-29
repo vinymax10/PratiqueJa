@@ -1,0 +1,151 @@
+% ============================================================
+%  Polígonos Regulares — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{angles, calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  poly/.style={draw=darkblue, line width=1.2pt, fill=accentblue!12!white},
+  radii/.style={draw=badgepurple!80!black, line width=1pt},
+  apo/.style={draw=badgegreen!55!black, line width=1pt},
+  ext/.style={draw=vered!70!black, line width=1pt, dashed},
+  ra/.style={draw=darkblue, line width=0.8pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Polígonos Regulares}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Polígonos Regulares}%
+           {Ângulos, Apótema e Área}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Polígono Regular}{Todos os lados e ângulos iguais}
+
+\regra{Um \textbf{polígono regular} tem todos os lados congruentes e
+todos os ângulos internos congruentes — é \textbf{equilátero} e
+\textbf{equiângulo} ao mesmo tempo.}
+
+\exemp{%
+  Triângulo equilátero $(n=3)$ — ângulos de $60°$\\[2pt]
+  Quadrado $(n=4)$ — ângulos de $90°$\\[2pt]
+  Pentágono $(n=5)$, hexágono $(n=6)$, octógono $(n=8)\ldots$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$S_i$}{darkblue}{Soma dos Ângulos Internos}{$S_i = (n-2)\times180°$}
+
+\formula{$S_i = (n-2)\times180° \qquad \alpha_i = \dfrac{(n-2)\times180°}{n}$}
+
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{l c c c}
+\rowcolor{rulebg}\textbf{Polígono} & \textbf{$n$} & \textbf{$S_i$} & \textbf{$\alpha_i$}\\
+Triângulo & 3 & $180°$  & $60°$\\
+Quadrado  & 4 & $360°$  & $90°$\\
+Pentágono & 5 & $540°$  & $108°$\\
+Hexágono  & 6 & $720°$  & $120°$\\
+Octógono  & 8 & $1080°$ & $135°$\\
+\end{tabular}
+\end{center}
+
+%─────────────────────────────────────────────────────────────
+\TW{$S_e$}{darkblue}{Ângulo Externo}{Soma sempre 360°}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\coordinate (A) at (-2.1,0); \coordinate (B) at (0,0);
+\coordinate (C) at (1.0,1.45); \coordinate (D) at (1.5,0);
+\draw[poly, fill=none] (A)--(B)--(C);
+\draw[ext] (B)--(D);
+% ângulo interno (entre BA e BC)
+\draw[apo] ([shift=(180:0.55)]B) arc (180:55:0.55);
+\node[cl, badgegreen!45!black] at ($(B)+(120:0.85)$){$\alpha_i$};
+% ângulo externo (entre BC e BD)
+\draw[ext, dashed=false, draw=vered!70!black, line width=0.8pt]
+     ([shift=(55:0.5)]B) arc (55:0:0.5);
+\node[cl, vered!70!black] at ($(B)+(27:0.78)$){$\alpha_e$};
+\foreach \p in {A,B,C}{\fill[darkblue] (\p) circle (1.3pt);}
+\end{tikzpicture}
+\end{center}
+
+\regra{O ângulo externo é suplementar ao interno:
+$\alpha_e = 180° - \alpha_i$. A soma de todos os externos de
+qualquer polígono convexo é $360°$.}
+\formula{$S_e = 360° \qquad \alpha_e = \dfrac{360°}{n}$}
+
+\exemp{%
+  Hexágono: $\alpha_e = 360°/6 = 60°$; $\alpha_i = 120°$ \ok\\[2pt]
+  Octógono: $\alpha_e = 360°/8 = 45°$; $\alpha_i = 135°$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{a}{badgegreen}{Apótema e Área}{Distância do centro ao lado}
+
+\regra{O \textbf{apótema} $(a)$ é a distância do centro ao ponto médio
+de um lado (perpendicular a ele). A área é:}
+\formula{$A = \dfrac{P\cdot a}{2}, \qquad P = n\cdot l$}
+
+\needspace{20\baselineskip}
+\SH{Hexágono regular com lado $l = 4\,$cm}
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\def\R{1.6}
+\coordinate (O) at (0,0);
+\foreach \k in {0,...,5}{\coordinate (V\k) at ({60*\k}:\R);}
+\draw[poly] (V0)--(V1)--(V2)--(V3)--(V4)--(V5)--cycle;
+\coordinate (M) at (270:{\R*0.8660});
+\draw[apo] (O)--(M);
+\draw[radii] (O)--(V5);
+\draw[ra] ($(M)+(0.24,0)$)--($(M)+(0.24,0.24)$)--($(M)+(0,0.24)$);
+\fill[darkblue] (O) circle (1.3pt);
+\node[cl, badgegreen!45!black] at ($(M)+(-0.28,0.55)$){$a$};
+\node[cl, badgepurple!70!black] at (323:1.0){$R$};
+\node[cl] at (0.45,-1.62){$l$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  Apótema: $a = \dfrac{l\sqrt{3}}{2} = 2\sqrt{3}\,$cm\\[3pt]
+  Perímetro: $P = 6\times4 = 24\,$cm\\[3pt]
+  $A = \dfrac{24\times2\sqrt{3}}{2} = 24\sqrt{3} \approx \hlm{41{,}57\,\text{cm}^2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\needspace{8\baselineskip}
+\TW{Hex}{badgepurple}{Hexágono Regular}{Caso especial: lado = raio}
+
+\regra{No hexágono regular, o \textbf{lado é igual ao raio} da
+circunferência circunscrita — o que simplifica os cálculos.}
+
+\exemp{%
+  $l = R$ (raio da circunscrita)\\[2pt]
+  Apótema: $a = \dfrac{l\sqrt{3}}{2}$\\[3pt]
+  Área: $A = \dfrac{3\sqrt{3}}{2}\,l^2$\\[3pt]
+  Para $l = 6$: $A = \dfrac{3\sqrt{3}}{2}\times36 = 54\sqrt{3} \approx \hlm{93{,}5\,\text{cm}^2}$%
+}
+
+\nota{O hexágono se divide em \textbf{6 triângulos equiláteros} de
+lado $l$. Cada um tem área $\dfrac{\sqrt{3}}{4}l^2$, logo o total é
+$6\times\dfrac{\sqrt{3}}{4}l^2 = \dfrac{3\sqrt{3}}{2}l^2$.}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,149 @@
+% ============================================================
+%  Números Decimais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Números Decimais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Números Decimais}%
+           {Operações, Comparação e Conversão}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Leitura e Escrita}{Valor posicional dos algarismos decimais}
+
+\regra{A \textbf{vírgula} separa a parte inteira da decimal. Cada casa
+à direita vale uma fração de potência de $10$:}
+
+\exemp{%
+  1ª casa: \textbf{décimos} $(\div 10)$\\
+  2ª casa: \textbf{centésimos} $(\div 100)$\\
+  3ª casa: \textbf{milésimos} $(\div 1000)$%
+}
+
+\exemp{%
+  $3{,}5 = 3 + \dfrac{5}{10}$ → ``três vírgula cinco''\\[3pt]
+  $2{,}47 = 2 + \dfrac{4}{10} + \dfrac{7}{100}$\\[3pt]
+  $0{,}008$ → ``oito milésimos''%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$<\,>$}{darkblue}{Comparação de Decimais}{Comparar posição a posição}
+
+\regra{Compare os algarismos da \textbf{esquerda para a direita},
+posição a posição. Complete com zeros à direita para igualar o número
+de casas.}
+
+\SH{Exemplo — ordenar $3{,}4$ \ $3{,}45$ \ $3{,}04$}
+\exemp{%
+  Reescreva: $3{,}40$ \quad $3{,}45$ \quad $3{,}04$\\
+  Parte inteira igual $(3)$; compare décimos: $0 < 4$\\[2pt]
+  Crescente: $\hlm{3{,}04 < 3{,}40 < 3{,}45}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$+\,-$}{darkblue}{Adição e Subtração}{Alinhar as vírgulas}
+
+\regra{Escreva os números \textbf{alinhando as vírgulas}, complete com
+zeros e opere coluna a coluna, da direita para a esquerda.}
+
+\SH{Soma — $4{,}5 + 2{,}37$}
+\exemp{%
+  Complete $4{,}5 = 4{,}50$ e some por coluna:\\[3pt]
+  \centering$\begin{array}{r r @{} l}
+      & 4 & {,}50\\
+    + & 2 & {,}37\\
+    \hline
+      & 6 & {,}87
+  \end{array}$\par\vspace{2pt}
+  \raggedright $4{,}5 + 2{,}37 = \hlm{6{,}87}$%
+}
+
+\SH{Subtração — $7{,}2 - 3{,}85$ (com empréstimo)}
+\exemp{%
+  Complete $7{,}2 = 7{,}20$. Onde o dígito de cima é menor, faça
+  \textbf{empréstimo}:\\[3pt]
+  \centering$\begin{array}{r r @{} l}
+      & 7 & {,}20\\
+    - & 3 & {,}85\\
+    \hline
+      & 3 & {,}35
+  \end{array}$\par\vspace{2pt}
+  \raggedright {\footnotesize Centésimos: $10-5=5$ (empresta);
+  décimos: $11-8=3$ (empresta); unidades: $6-3=3$.}\\[2pt]
+  $7{,}2 - 3{,}85 = \hlm{3{,}35}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times$}{darkblue}{Multiplicação de Decimais}{Ignore a vírgula, depois recoloque}
+
+\regra{Multiplique ignorando a vírgula. No resultado, conte da direita
+o \textbf{total de casas decimais dos dois fatores} e ponha a vírgula.}
+
+\exemp{%
+  \textbf{$1{,}2 \times 0{,}3$}\\
+  $12 \times 3 = 36$ \;{\footnotesize($1+1 = 2$ casas)}\\
+  Resultado: $\hlm{0{,}36}$%
+}
+
+\SH{Multiplicar por 10, 100, 1000…}
+\exemp{%
+  A vírgula anda para a \textbf{direita}:\\
+  $2{,}54 \times 10 = \hlm{25{,}4}$\\
+  $2{,}54 \times 100 = \hlm{254}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\div$}{darkblue}{Divisão de Decimais}{Transformar em divisão inteira}
+
+\regra{Multiplique dividendo e divisor pela mesma potência de $10$ para
+\textbf{eliminar as casas decimais do divisor}; depois divida.}
+
+\exemp{%
+  \textbf{$3{,}6 \div 0{,}4$}\\
+  $\times 10$ em ambos: $36 \div 4 = \hlm{9}$\\[3pt]
+  \textbf{$0{,}72 \div 0{,}08$}\\
+  $\times 100$ em ambos: $72 \div 8 = \hlm{9}$%
+}
+
+\nota{Dividir por $10$, $100$, $1000$ move a vírgula para a
+\textbf{esquerda}: $25{,}4 \div 10 = 2{,}54$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\leftrightarrow$}{badgegreen}{Conversão com Frações}{Decimal $\leftrightarrow$ Fração}
+
+\SH{Decimal → Fração}
+\regra{Dígitos decimais no numerador, a potência de $10$ no
+denominador; depois simplifique.}
+\exemp{%
+  $0{,}5 = \dfrac{5}{10} = \hlm{\dfrac{1}{2}}$\\[4pt]
+  $0{,}75 = \dfrac{75}{100} = \hlm{\dfrac{3}{4}}$\\[4pt]
+  $1{,}25 = \dfrac{125}{100} = \hlm{\dfrac{5}{4}}$%
+}
+
+\SH{Fração → Decimal}
+\regra{Divida o numerador pelo denominador.}
+\exemp{%
+  $\dfrac{3}{4} = 3 \div 4 = \hlm{0{,}75}$\\[4pt]
+  $\dfrac{7}{8} = 7 \div 8 = \hlm{0{,}875}$%
+}
+
+\end{multicols}
+
+\end{document}

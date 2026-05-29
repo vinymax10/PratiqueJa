@@ -230,35 +230,37 @@ Instalada pelo usuário nas fontes de usuário (não sistema). Se o PDF sair com
 - [x] adicaoNatural
 - [x] adicaoSubtracaoInteiro
 - [x] areaPerimetro
-- [ ] conjuntos
-- [ ] divisaoNatural
-- [ ] expressaoNumerica
-- [ ] expressoesAlgebricas ⚠️ *(verificar se teoria.xhtml existe)*
-- [ ] expressoesNumericas ⚠️ *(verificar se teoria.xhtml existe)*
-- [ ] mmcMdc
-- [ ] multiplicacaoDivisaoInteiro
-- [ ] multiplicacaoNatural
-- [ ] numerosDecimais
-- [ ] numerosPrimos
-- [ ] planoCoordenado
-- [ ] regraTres
-- [ ] sistemaMetrico
-- [ ] subtracaoNatural
+- [x] conjuntos
+- [x] divisaoNatural
+- [x] expressaoNumerica
+- [~] ~~expressoesAlgebricas~~ — pasta não existe (ignorar)
+- [~] ~~expressoesNumericas~~ — pasta não existe; coberto por expressaoNumerica
+- [x] mmcMdc
+- [x] multiplicacaoDivisaoInteiro
+- [x] multiplicacaoNatural
+- [x] numerosDecimais
+- [x] numerosPrimos
+- [x] planoCoordenado
+- [x] regraTres
+- [x] sistemaMetrico
+- [x] subtracaoNatural
+
+✅ **Módulo Básico completo!**
 
 ### Intermediário
 
 - [x] divisibilidade
-- [ ] anguloInscritoCircunferencia
-- [ ] circulo
-- [ ] decimal ⚠️ *(verificar se teoria.xhtml existe)*
-- [ ] dizima
-- [ ] equacoes
-- [ ] expressaoAlgebrica
-- [ ] logaritmo
-- [ ] notacaoCientifica
-- [ ] pitagoras
-- [ ] poligonosRegulares
-- [ ] potenciacao
+- [x] anguloInscritoCircunferencia
+- [x] circulo
+- [~] ~~decimal~~ — pasta não existe (ignorar)
+- [x] dizima
+- [x] equacoes
+- [x] expressaoAlgebrica
+- [x] logaritmo
+- [x] notacaoCientifica
+- [x] pitagoras
+- [x] poligonosRegulares
+- [x] potenciacao
 - [ ] radiciacao
 - [ ] razoesTrigonometricas
 - [ ] semelhancaAngulos

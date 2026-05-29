@@ -1,0 +1,315 @@
+% ============================================================
+%  Multiplicação de Naturais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Multiplicação de Naturais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Multiplicação de Naturais}%
+           {Algoritmo, Cálculo Mental e Tabuada}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é multiplicação?}
+
+\regra{Multiplicar dois naturais é somar um deles tantas vezes
+quantas indica o outro.}
+
+\small\color{bodytext}%
+No produto $a\times b = p$:
+
+\exemp{%
+  \textbf{Multiplicando} $(a)$ — número que é multiplicado\\[2pt]
+  \textbf{Multiplicador} $(b)$ — número pelo qual se multiplica\\[2pt]
+  \textbf{Produto} $(p)$ — resultado da multiplicação%
+}
+
+\exemp{%
+  Exemplo: $3 \times 4$\\
+  $3 + 3 + 3 + 3 = 12$ \;{\footnotesize(soma de 3, quatro vezes)}\\
+  $3 \times 4 = \hlm{12}$%
+}
+
+\nota{\textbf{Verificação:} a divisão é a inversa da multiplicação.
+Se $a\times b = p$, então $p\div b = a$.\\
+$342\times2 = 684 \Rightarrow 684\div2 = 342$ \ok}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prop}{badgegreen}{Propriedades}{Leis que facilitam o cálculo}
+
+\regra{%
+\textbf{Comutativa:} $a\times b = b\times a$\\[2pt]
+\textbf{Associativa:} $(a\times b)\times c = a\times(b\times c)$\\[2pt]
+\textbf{Distributiva:} $a\times(b+c) = a\times b + a\times c$\\[2pt]
+\textbf{Neutro:} $a\times 1 = a$\\[2pt]
+\textbf{Absorvente:} $a\times 0 = 0$}
+
+\exemp{%
+  \textbf{Comutativa:} $6\times4 = 4\times6 = 24$\\
+  {\footnotesize Sabendo $3\times7$ você já sabe $7\times3$ — metade
+  da tabuada é automática!}\\[3pt]
+  \textbf{Distributiva:} $5\times12 = 5\times(10+2)$\\
+  $= 5\times10 + 5\times2 = 50+10 = \hlm{60}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times10$}{darkblue}{Multiplicação por 10, 100 e 1000}{Acrescentar zeros à direita}
+
+\regra{Multiplicar um natural por uma potência de $10$ é
+\textbf{acrescentar zeros à direita} — um zero para cada zero da
+potência.}
+
+\exemp{%
+  $\times\,10$ → \textbf{1 zero}\\
+  $45\times10 = \hlm{450}$ \qquad $308\times10 = \hlm{3080}$\\[3pt]
+  $\times\,100$ → \textbf{2 zeros}\\
+  $45\times100 = \hlm{4500}$ \qquad $7\times100 = \hlm{700}$\\[3pt]
+  $\times\,1000$ → \textbf{3 zeros}\\
+  $45\times1000 = \hlm{45000}$ \qquad $12\times1000 = \hlm{12000}$%
+}
+
+\nota{\textbf{Por quê?} O sistema decimal é posicional: deslocar os
+algarismos uma casa à esquerda equivale a multiplicar por $10$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{1}{darkblue}{Algoritmo da Multiplicação}{Por 1 dígito — da direita para a esquerda}
+
+\small\color{bodytext}%
+Multiplique o dígito de baixo por cada dígito de cima, da
+\textbf{direita para a esquerda}.
+
+\exemp{%
+  \textbf{Exemplo:} $342 \times 2$\\
+  P1 — unidades: $2\times2 = 4$\\
+  P2 — dezenas: $2\times4 = 8$\\
+  P3 — centenas: $2\times3 = 6$\\[2pt]
+  $342\times2 = \hlm{684}$\\[4pt]
+  \centering$\begin{array}{r r r r}
+     & 3 & 4 & 2\\
+    \times & & & 2\\
+    \hline
+     & 6 & 8 & 4
+  \end{array}$\par
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{2}{darkblue}{Multiplicação com Reserva}{Quando o produto de um dígito tem 2 algarismos}
+
+\small\color{bodytext}%
+Escreve-se o algarismo das \textbf{unidades} e \textbf{reserva-se} o
+das dezenas para a coluna seguinte.
+
+\exemp{%
+  \textbf{Exemplo:} $852 \times 6$\\
+  P1: $6\times2 = 12$ → escreve \textbf{2}, reserva \textbf{1}\\
+  P2: $6\times5 = 30$, $+1 = 31$ → escreve \textbf{1}, reserva \textbf{3}\\
+  P3: $6\times8 = 48$, $+3 = 51$ → escreve \textbf{51}\\[2pt]
+  $852\times6 = \hlm{5112}$\\[4pt]
+  \centering$\begin{array}{r r r r r}
+     & & \scriptstyle 3 & \scriptstyle 1 & \\
+     & & 8 & 5 & 2\\
+    \times & & & & 6\\
+    \hline
+     & 5 & 1 & 1 & 2
+  \end{array}$\par
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{3}{darkblue}{Multiplicação por 2 ou Mais Dígitos}{Produtos parciais e soma final}
+
+\small\color{bodytext}%
+Calcule um \textbf{produto parcial} para cada dígito do multiplicador,
+deslocando cada um uma casa à esquerda; depois some.
+
+\exemp{%
+  \textbf{Exemplo:} $34 \times 23$\\
+  Parcial 1 — por $3$: $34\times3 = 102$\\
+  Parcial 2 — por $2$: $34\times2 = 68$ → vale $680$\\
+  Soma: $102 + 680 = \hlm{782}$\\[4pt]
+  \centering$\begin{array}{r r r r}
+     & & 3 & 4\\
+    \times & & 2 & 3\\
+    \hline
+     & 1 & 0 & 2\\
+    6 & 8 & 0 & \\
+    \hline
+    7 & 8 & 2 &
+  \end{array}$\par
+}
+
+\nota{\textbf{Por que deslocar?} O dígito das dezenas vale $10$ vezes
+mais; deslocar uma casa à esquerda equivale a multiplicar por $10$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Est}{badgegreen}{Estimativa do Resultado}{Arredonde antes para conferir a ordem de grandeza}
+
+\regra{Arredonde → multiplique → compare com o resultado exato.}
+
+\exemp{%
+  $48\times23$: \ $48\approx50$, $23\approx20$\\
+  $50\times20 = 1000$\\
+  Exato: $48\times23 = \hlm{1104}$ — perto de 1000 \ok\\[3pt]
+  $31\times19$: \ $31\approx30$, $19\approx20$\\
+  $30\times20 = 600$\\
+  Exato: $31\times19 = \hlm{589}$ — perto de 600 \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dica}{darkblue}{Truques de Cálculo Mental}{Atalhos para multiplicar sem papel}
+
+\exemp{%
+  \textbf{Por 2 (dobro):} some o número a si mesmo\\
+  $37\times2 = 37+37 = \hlm{74}$\\[3pt]
+  \textbf{Por 5:} $\times10$ e divida por $2$\\
+  $48\times5 = 480\div2 = \hlm{240}$\\[3pt]
+  \textbf{Por 9:} $\times10$ e subtraia o número\\
+  $7\times9 = 70-7 = \hlm{63}$%
+}
+
+\exemp{%
+  \textbf{Por 11 (1 dígito):} repita o dígito\\
+  $7\times11 = \hlm{77}$ \qquad $8\times11 = \hlm{88}$\\[3pt]
+  \textbf{Por 25:} $\times100$ e divida por $4$\\
+  $12\times25 = 1200\div4 = \hlm{300}$\\[3pt]
+  \textbf{Por 4:} dobre duas vezes\\
+  $23\times4 = 46\times2 = \hlm{92}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgegreen}{Problemas Contextualizados}{Aplicação no dia a dia}
+
+\regra{\textbf{Estratégia:} (1) identifique o que se repete e quantas
+vezes; (2) escreva a multiplicação; (3) calcule; (4) confira se faz
+sentido.}
+
+\exemp{%
+  \textbf{P1 — compras:} caixa com 12 lápis, 24 caixas.\\
+  $12\times24 = 240 + 48 = \hlm{288}$ lápis\\[3pt]
+  \textbf{P2 — fileiras:} 8 fileiras de 7 carteiras.\\
+  $8\times7 = \hlm{56}$ carteiras%
+}
+
+\exemp{%
+  \textbf{P3 — tempo:} 1 hora e 45 min em minutos.\\
+  $1\times60 + 45 = \hlm{105}$ minutos\\[3pt]
+  \textbf{P4 — área:} terreno $125\,$m $\times\ 80\,$m.\\
+  $125\times80 = 125\times8\times10 = \hlm{10\,000\text{ m}^2}$%
+}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Tab}{darkblue}{Tabuada da Multiplicação}{Produtos de 1 a 10 — fator × fator = produto}
+
+\regra{Pela propriedade comutativa, se você sabe $3\times7$ já sabe
+$7\times3$ — metade da tabuada é automática!}
+
+% Tabuadas 1–5
+\vspace{6pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 1}\par\vspace{2pt}
+{\footnotesize
+$1\times1=\mathbf{1}$\\$1\times2=\mathbf{2}$\\$1\times3=\mathbf{3}$\\
+$1\times4=\mathbf{4}$\\$1\times5=\mathbf{5}$\\$1\times6=\mathbf{6}$\\
+$1\times7=\mathbf{7}$\\$1\times8=\mathbf{8}$\\$1\times9=\mathbf{9}$\\
+$1\times10=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 2}\par\vspace{2pt}
+{\footnotesize
+$2\times1=\mathbf{2}$\\$2\times2=\mathbf{4}$\\$2\times3=\mathbf{6}$\\
+$2\times4=\mathbf{8}$\\$2\times5=\mathbf{10}$\\$2\times6=\mathbf{12}$\\
+$2\times7=\mathbf{14}$\\$2\times8=\mathbf{16}$\\$2\times9=\mathbf{18}$\\
+$2\times10=\mathbf{20}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 3}\par\vspace{2pt}
+{\footnotesize
+$3\times1=\mathbf{3}$\\$3\times2=\mathbf{6}$\\$3\times3=\mathbf{9}$\\
+$3\times4=\mathbf{12}$\\$3\times5=\mathbf{15}$\\$3\times6=\mathbf{18}$\\
+$3\times7=\mathbf{21}$\\$3\times8=\mathbf{24}$\\$3\times9=\mathbf{27}$\\
+$3\times10=\mathbf{30}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 4}\par\vspace{2pt}
+{\footnotesize
+$4\times1=\mathbf{4}$\\$4\times2=\mathbf{8}$\\$4\times3=\mathbf{12}$\\
+$4\times4=\mathbf{16}$\\$4\times5=\mathbf{20}$\\$4\times6=\mathbf{24}$\\
+$4\times7=\mathbf{28}$\\$4\times8=\mathbf{32}$\\$4\times9=\mathbf{36}$\\
+$4\times10=\mathbf{40}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 5}\par\vspace{2pt}
+{\footnotesize
+$5\times1=\mathbf{5}$\\$5\times2=\mathbf{10}$\\$5\times3=\mathbf{15}$\\
+$5\times4=\mathbf{20}$\\$5\times5=\mathbf{25}$\\$5\times6=\mathbf{30}$\\
+$5\times7=\mathbf{35}$\\$5\times8=\mathbf{40}$\\$5\times9=\mathbf{45}$\\
+$5\times10=\mathbf{50}$}
+\end{minipage}
+
+% Tabuadas 6–10
+\vspace{10pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 6}\par\vspace{2pt}
+{\footnotesize
+$6\times1=\mathbf{6}$\\$6\times2=\mathbf{12}$\\$6\times3=\mathbf{18}$\\
+$6\times4=\mathbf{24}$\\$6\times5=\mathbf{30}$\\$6\times6=\mathbf{36}$\\
+$6\times7=\mathbf{42}$\\$6\times8=\mathbf{48}$\\$6\times9=\mathbf{54}$\\
+$6\times10=\mathbf{60}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 7}\par\vspace{2pt}
+{\footnotesize
+$7\times1=\mathbf{7}$\\$7\times2=\mathbf{14}$\\$7\times3=\mathbf{21}$\\
+$7\times4=\mathbf{28}$\\$7\times5=\mathbf{35}$\\$7\times6=\mathbf{42}$\\
+$7\times7=\mathbf{49}$\\$7\times8=\mathbf{56}$\\$7\times9=\mathbf{63}$\\
+$7\times10=\mathbf{70}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 8}\par\vspace{2pt}
+{\footnotesize
+$8\times1=\mathbf{8}$\\$8\times2=\mathbf{16}$\\$8\times3=\mathbf{24}$\\
+$8\times4=\mathbf{32}$\\$8\times5=\mathbf{40}$\\$8\times6=\mathbf{48}$\\
+$8\times7=\mathbf{56}$\\$8\times8=\mathbf{64}$\\$8\times9=\mathbf{72}$\\
+$8\times10=\mathbf{80}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 9}\par\vspace{2pt}
+{\footnotesize
+$9\times1=\mathbf{9}$\\$9\times2=\mathbf{18}$\\$9\times3=\mathbf{27}$\\
+$9\times4=\mathbf{36}$\\$9\times5=\mathbf{45}$\\$9\times6=\mathbf{54}$\\
+$9\times7=\mathbf{63}$\\$9\times8=\mathbf{72}$\\$9\times9=\mathbf{81}$\\
+$9\times10=\mathbf{90}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 10}\par\vspace{2pt}
+{\footnotesize
+$10\times1=\mathbf{10}$\\$10\times2=\mathbf{20}$\\$10\times3=\mathbf{30}$\\
+$10\times4=\mathbf{40}$\\$10\times5=\mathbf{50}$\\$10\times6=\mathbf{60}$\\
+$10\times7=\mathbf{70}$\\$10\times8=\mathbf{80}$\\$10\times9=\mathbf{90}$\\
+$10\times10=\mathbf{100}$}
+\end{minipage}
+
+\vspace{8pt}
+\nota{\textbf{Truque da tabuada do 9:} os algarismos do resultado
+somam sempre $9$, e as dezenas são uma unidade a menos que o
+multiplicador. Ex.: $9\times7 = 63$ → dezenas $=6=7-1$ e $6+3=9$ \ok}
+
+\end{document}

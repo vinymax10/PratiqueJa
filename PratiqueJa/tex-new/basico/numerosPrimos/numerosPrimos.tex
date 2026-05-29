@@ -1,0 +1,146 @@
+% ============================================================
+%  Números Primos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+% Células do crivo: primo / composto / unidade
+\newcommand{\pc}[1]{\cellcolor{rulebg}\textcolor{darkblue}{\bfseries #1}}
+\newcommand{\uc}[1]{\cellcolor{obsbg}\textcolor{mutedtext}{#1}}
+
+\setsubject{Números Primos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Números Primos}%
+           {Crivo, Decomposição e Primalidade}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Primos e Compostos}{Divisores e classificação}
+
+\regra{Um natural maior que $1$ é \textbf{primo} se seus únicos
+divisores são \textbf{$1$ e ele mesmo}. Caso contrário é
+\textbf{composto} (tem algum divisor além de $1$ e de si).}
+
+\exemp{%
+  \textbf{Primos:} $2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31\ldots$\\[3pt]
+  \textbf{Compostos:} $4, 6, 8, 9, 10, 12, 14, 15\ldots$%
+}
+
+\nota{$1$ \textbf{não} é primo nem composto (convenção). E $2$ é o
+\textbf{único} primo par.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Crivo}{darkblue}{Crivo de Eratóstenes}{Encontrar todos os primos até $N$}
+
+\regra{%
+\textbf{1.} Liste de $2$ até $N$.\\[2pt]
+\textbf{2.} Com $p=2$, marque como compostos os múltiplos de $p$
+maiores que $p$.\\[2pt]
+\textbf{3.} Avance para o próximo não marcado e repita.\\[2pt]
+\textbf{4.} Pare quando $p^2 > N$. Os não marcados são primos.}
+
+\SH{Primos até 30}
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabular}{|*{10}{c|}}
+\hline
+\uc{1} & \pc{2} & \pc{3} & 4 & \pc{5} & 6 & \pc{7} & 8 & 9 & 10\\
+\hline
+\pc{11} & 12 & \pc{13} & 14 & 15 & 16 & \pc{17} & 18 & \pc{19} & 20\\
+\hline
+21 & 22 & \pc{23} & 24 & 25 & 26 & 27 & 28 & \pc{29} & 30\\
+\hline
+\end{tabular}
+\end{center}
+
+\exemp{Primos até 30: \hlm{2, 3, 5, 7, 11, 13, 17, 19, 23, 29}}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\div p$}{darkblue}{Decomposição em Fatores Primos}{Todo composto é produto de primos}
+
+\regra{\textbf{Teorema Fundamental da Aritmética:} todo composto se
+escreve como produto de primos. Divida sempre pelo \textbf{menor}
+primo que o divide, até chegar a $1$.}
+
+\SH{Exemplo — decompor 60}
+\begin{center}\vspace{1pt}
+\renewcommand{\arraystretch}{1.2}\small
+\begin{tabular}{r|l}
+60 & 2\\
+30 & 2\\
+15 & 3\\
+ 5 & 5\\
+\hline
+ 1 & \\
+\end{tabular}
+\end{center}
+\exemp{$60 = 2^2 \times 3 \times 5$}
+
+\SH{Exemplo — decompor 84}
+\begin{center}\vspace{1pt}
+\renewcommand{\arraystretch}{1.2}\small
+\begin{tabular}{r|l}
+84 & 2\\
+42 & 2\\
+21 & 3\\
+ 7 & 7\\
+\hline
+ 1 & \\
+\end{tabular}
+\end{center}
+\exemp{$84 = 2^2 \times 3 \times 7$}
+
+%─────────────────────────────────────────────────────────────
+\TW{Aplic.}{badgegreen}{Aplicação: MMC e MDC}{A decomposição como ferramenta}
+
+\regra{%
+\textbf{MDC:} produto dos fatores \emph{comuns} com o \textbf{menor}
+expoente.\\[2pt]
+\textbf{MMC:} produto de \emph{todos} os fatores com o \textbf{maior}
+expoente.}
+
+\SH{Exemplo — 60 e 84}
+\exemp{%
+  $60 = 2^2 \times 3 \times 5$\\
+  $84 = 2^2 \times 3 \times 7$\\[3pt]
+  MDC $= 2^2 \times 3 = \hlm{12}$\\
+  {\footnotesize(comuns, menor expoente)}\\[3pt]
+  MMC $= 2^2 \times 3 \times 5 \times 7 = \hlm{420}$\\
+  {\footnotesize(todos, maior expoente)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{?}{darkblue}{Teste de Primalidade}{Como verificar se um número é primo}
+
+\regra{Para testar se $n$ é primo, verifique a divisibilidade pelos
+primos $p \leq \sqrt{n}$. Se nenhum divide $n$, então $n$ é primo.}
+
+\SH{Exemplo — verificar 97}
+\exemp{%
+  $\sqrt{97} \approx 9{,}8$ → testar primos até $9$: $2, 3, 5, 7$\\[2pt]
+  $97$ não é divisível por nenhum deles.\\[2pt]
+  Logo, \hlm{97 é primo}.%
+}
+
+\nota{\textbf{Por que só até $\sqrt{n}$?} Se $n = a\times b$ com
+$a \leq b$, então $a \leq \sqrt{n}$. Basta procurar o fator menor.}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,141 @@
+% ============================================================
+%  Sistema Métrico — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  deg/.style={draw=accentblue!60!black, line width=0.8pt, fill=accentblue!12!white, rounded corners=2pt},
+  degb/.style={draw=darkblue, line width=1pt, fill=rulebg, rounded corners=2pt},
+}
+
+\setsubject{Sistema Métrico}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Sistema Métrico}%
+           {Conversão de Unidades de Medida}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{m}{badgepurple}{Comprimento}{Unidade base: metro (m)}
+
+\regra{A unidade padrão é o \textbf{metro (m)}. As demais são
+múltiplos ou submúltiplos, separados por fatores de $10$.}
+
+\SH{A escada das unidades}
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\foreach \i/\u in {0/km,1/hm,2/dam} {
+  \fill[deg] (\i*1.0,-\i*0.52) rectangle ++(0.95,0.46);
+  \node[font=\footnotesize\bfseries, accentblue!50!black]
+        at (\i*1.0+0.47,-\i*0.52+0.23) {\u};
+}
+\fill[degb] (3*1.0,-3*0.52) rectangle ++(0.95,0.46);
+\node[font=\footnotesize\bfseries, darkblue] at (3*1.0+0.47,-3*0.52+0.23) {m};
+\foreach \i/\u in {4/dm,5/cm,6/mm} {
+  \fill[deg] (\i*1.0,-\i*0.52) rectangle ++(0.95,0.46);
+  \node[font=\footnotesize\bfseries, accentblue!50!black]
+        at (\i*1.0+0.47,-\i*0.52+0.23) {\u};
+}
+\node[font=\scriptsize, vegreen!50!black] at (1.4,0.55) {$\times 10$ ←};
+\node[font=\scriptsize, vered!80!black] at (5.0,-3.35) {→ $\div 10$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Cada passo à \textbf{direita}: $\div10$. \quad Cada passo à
+\textbf{esquerda}: $\times10$.}
+
+\exemp{%
+  $3{,}5\,\text{km} = \hlm{3500\,\text{m}}$ \;{\footnotesize($\times1000$)}\\[3pt]
+  $250\,\text{cm} = \hlm{2{,}5\,\text{m}}$ \;{\footnotesize($\div100$)}\\[3pt]
+  $45\,\text{mm} = \hlm{4{,}5\,\text{cm}}$ \;{\footnotesize($\div10$)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{kg}{darkblue}{Massa}{Unidade base: quilograma (kg)}
+
+\regra{A unidade do SI é o \textbf{quilograma (kg)}, mas o
+\emph{grama (g)} é o centro das conversões na escala métrica.}
+
+\formula{t \;→\; kg \;→\; hg \;→\; dag \;→\; g \;→\; dg \;→\; cg \;→\; mg}
+
+\exemp{%
+  $1\,\text{t} = 1000\,\text{kg}$ \qquad $1\,\text{kg} = 1000\,\text{g}$\\[3pt]
+  $2{,}5\,\text{kg} = \hlm{2500\,\text{g}}$\\[3pt]
+  $350\,\text{g} = \hlm{0{,}35\,\text{kg}}$\\[3pt]
+  $1{,}5\,\text{t} = \hlm{1500\,\text{kg}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{L}{darkblue}{Capacidade}{Unidade base: litro (L)}
+
+\regra{A unidade é o \textbf{litro (L)}; as conversões seguem o mesmo
+padrão de múltiplos e submúltiplos de $10$.}
+
+\formula{kL \;→\; hL \;→\; daL \;→\; L \;→\; dL \;→\; cL \;→\; mL}
+
+\exemp{%
+  $1\,\text{L} = 1000\,\text{mL}$ \qquad $1\,\text{kL} = 1000\,\text{L}$\\[3pt]
+  $2\,\text{L} = \hlm{2000\,\text{mL}}$\\[3pt]
+  $500\,\text{mL} = \hlm{0{,}5\,\text{L}}$\\[3pt]
+  $3{,}5\,\text{kL} = \hlm{3500\,\text{L}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{m²/m³}{badgegreen}{Área e Volume}{Conversões quadráticas e cúbicas}
+
+\regra{\textbf{Área:} cada passo na escala de comprimento vale
+$\times100$ ($10^2$).\\[2pt]
+\textbf{Volume:} cada passo vale $\times1000$ ($10^3$).}
+
+\SH{Área (passo $\times100$ / $\div100$)}
+\exemp{%
+  km² → hm² → dam² → m² → dm² → cm² → mm²\\[2pt]
+  $1\,\text{m}^2 = \hlm{10\,000\,\text{cm}^2}$\\[3pt]
+  $1\,\text{km}^2 = \hlm{1\,000\,000\,\text{m}^2}$%
+}
+
+\SH{Volume (passo $\times1000$ / $\div1000$)}
+\exemp{%
+  $1\,\text{m}^3 = \hlm{1\,000\,000\,\text{cm}^3}$\\[3pt]
+  $1\,\text{dm}^3 = \hlm{1\,\text{L}}$ \;{\footnotesize(elo com a capacidade)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{h}{badgegreen}{Tempo}{Horas, minutos e segundos}
+
+\nota{O tempo \textbf{não} é decimal: usa fatores fixos de $60$
+(entre s, min e h) e $24$ (horas no dia).}
+
+\formula{$1\,\text{h} = 60\,\text{min}$ \quad $1\,\text{min} = 60\,\text{s}$\\[3pt]
+$1\,\text{h} = 3600\,\text{s}$ \quad $1\,\text{dia} = 24\,\text{h}$}
+
+\exemp{%
+  $2{,}5\,\text{h} = 2\,\text{h}\,30\,\text{min} = \hlm{150\,\text{min}}$\\[3pt]
+  $90\,\text{min} = 1{,}5\,\text{h} = \hlm{1\,\text{h}\,30\,\text{min}}$\\[3pt]
+  $7200\,\text{s} = 120\,\text{min} = \hlm{2\,\text{h}}$%
+}
+
+\nota{\textbf{Cuidado:} $2{,}5\,\text{h}$ \emph{não} é
+$2\,\text{h}\,50\,\text{min}$. A parte decimal é fração de hora:
+$0{,}5\,\text{h} = 30\,\text{min}$.}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,124 @@
+% ============================================================
+%  Expressões Numéricas — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Expressões Numéricas}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Expressões Numéricas}%
+           {Hierarquia das Operações e Agrupadores}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Hierarquia das Operações}{A ordem em que as operações são feitas}
+
+\regra{Ao calcular uma expressão numérica, as operações \textbf{não}
+são feitas da esquerda para a direita — elas obedecem a uma
+\textbf{ordem de prioridade}.}
+
+\formula{%
+\begin{tabular}{cl}
+\textbf{1\textsuperscript{o}} & Potenciação e Radiciação\\[2pt]
+\textbf{2\textsuperscript{o}} & Multiplicação e Divisão\\[2pt]
+\textbf{3\textsuperscript{o}} & Adição e Subtração
+\end{tabular}}
+
+\nota{Operações de \textbf{mesma prioridade} são resolvidas da
+\textbf{esquerda para a direita}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$(\,)$}{darkblue}{Parênteses, Colchetes e Chaves}{Agrupadores alteram a prioridade}
+
+\regra{Com agrupadores, resolva \textbf{de dentro para fora}:
+primeiro os \textbf{parênteses} $(\,)$, depois os \textbf{colchetes}
+$[\,]$ e por fim as \textbf{chaves} $\{\,\}$. O que está dentro tem
+prioridade máxima.}
+
+\SH{Exemplo}
+\exemp{%
+  $\{3 \times [2 + (4 - 1)]\} + 5$\\
+  $= \{3 \times [2 + 3]\} + 5$\\
+  $= \{3 \times 5\} + 5$\\
+  $= 15 + 5 = \hlm{20}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\pm\times\div$}{darkblue}{Expressões com as 4 Operações}{Aplicando a hierarquia correta}
+
+\SH{Exemplo 1 — sem agrupadores}
+\exemp{%
+  $8 + 6 \div 2 - 3 \times 2$\\
+  $= 8 + 3 - 6$ \quad{\footnotesize\itshape(÷ e × primeiro)}\\
+  $= 11 - 6 = \hlm{5}$%
+}
+
+\SH{Exemplo 2 — com parênteses}
+\exemp{%
+  $(8 + 6) \div 2 - 3 \times 2$\\
+  $= 14 \div 2 - 3 \times 2$\\
+  $= 7 - 6 = \hlm{1}$%
+}
+
+\obs{Compare: o mesmo conjunto de números dá resultados diferentes
+($5$ e $1$) só pela presença dos parênteses.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$a^n$}{darkblue}{Expressões com Potenciação}{Potências têm prioridade máxima}
+
+\SH{Exemplo 1}
+\exemp{%
+  $2^3 + 4 \times 2 - 5$\\
+  $= 8 + 4 \times 2 - 5$ \quad{\footnotesize\itshape(potência primeiro)}\\
+  $= 8 + 8 - 5 = \hlm{11}$%
+}
+
+\SH{Exemplo 2 — agrupadores e potências}
+\exemp{%
+  $[3^2 - (4 + 1)] \times 2$\\
+  $= [9 - 5] \times 2$\\
+  $= 4 \times 2 = \hlm{8}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgegreen}{Exemplos Resolvidos}{Exercícios completos com resolução}
+
+\SH{Exercício 1}
+\exemp{%
+  Calcule: $\{[(12 \div 4) + 3^2] \times 2\} - 10$\\[2pt]
+  $= \{[3 + 9] \times 2\} - 10$ \quad{\footnotesize\itshape(parênt. e potência)}\\
+  $= \{12 \times 2\} - 10$\\
+  $= 24 - 10 = \hlm{14}$%
+}
+
+\SH{Exercício 2}
+\exemp{%
+  Calcule: $5 + 3 \times (2^2 - 1) \div 3$\\[2pt]
+  $= 5 + 3 \times (4 - 1) \div 3$\\
+  $= 5 + 3 \times 3 \div 3$\\
+  $= 5 + 9 \div 3$\\
+  $= 5 + 3 = \hlm{8}$%
+}
+
+\nota{\textbf{Dica de revisão:} ao terminar, refaça os passos
+conferindo se cada etapa respeitou a prioridade e os agrupadores
+de dentro para fora.}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,198 @@
+% ============================================================
+%  MMC e MDC — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+% Tabela de fatoração simultânea (a "chave")
+% Uso: \begin{fatora} <linhas> \end{fatora}
+\newenvironment{fatora}{%
+  \par\vspace{2pt}\begin{center}
+  \renewcommand{\arraystretch}{1.25}%
+  \small
+}{%
+  \end{center}\vspace{2pt}\par
+}
+
+\setsubject{MMC e MDC}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{MMC e MDC}%
+           {Mínimo Múltiplo e Máximo Divisor Comum}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{MMC}{badgepurple}{Mínimo Múltiplo Comum}{Definição e método de cálculo}
+
+\regra{O \textbf{MMC} de dois ou mais inteiros positivos é o
+\textbf{menor inteiro diferente de zero} que é múltiplo de todos
+eles ao mesmo tempo.}
+
+\small\color{bodytext}%
+$a$ é múltiplo de $b$ quando existe inteiro $q$ com $a = b\cdot q$.
+Ex.: $10 = 5\cdot2$ e $18 = 6\cdot3$.
+
+\regra{\textbf{Fatoração simultânea:} divida pelo menor primo que
+divida \emph{ao menos um} dos números, carregando os demais
+inalterados. Repita até todos chegarem a $1$. O MMC é o
+\textbf{produto de todos os fatores primos usados}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{2}{darkblue}{MMC com 2 números}{Exemplo — MMC de 12 e 18}
+
+Quando um número não é divisível pelo fator, ele é \textbf{carregado}
+para a linha seguinte sem alteração.
+
+\begin{fatora}
+\begin{tabular}{r@{,\;}l|l}
+12 & 18 & 2\\
+ 6 &  9 & 2 \;{\footnotesize\color{mutedtext}(9 carregado)}\\
+ 3 &  9 & 3\\
+ 1 &  3 & 3 \;{\footnotesize\color{mutedtext}(1 carregado)}\\
+\hline
+ 1 &  1 & \\
+\end{tabular}
+\end{fatora}
+
+\exemp{MMC$(12,18) = 2^2\cdot3^2 = 4\cdot9 = \hlm{36}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{3}{darkblue}{MMC com 3 números}{Exemplo — MMC de 90, 30 e 25}
+
+\begin{fatora}
+\begin{tabular}{r@{,\;}r@{,\;}l|l}
+90 & 30 & 25 & 2\\
+45 & 15 & 25 & 3\\
+15 &  5 & 25 & 3\\
+ 5 &  5 & 25 & 5\\
+ 1 &  1 &  5 & 5\\
+\hline
+ 1 &  1 &  1 & \\
+\end{tabular}
+\end{fatora}
+
+\exemp{MMC$(90,30,25) = 2\cdot3^2\cdot5^2 = 2\cdot9\cdot25 = \hlm{450}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{MDC}{badgepurple}{Máximo Divisor Comum}{Definição e método de cálculo}
+
+\regra{O \textbf{MDC} de dois ou mais inteiros é o \textbf{maior
+inteiro positivo} que divide todos eles sem deixar resto.}
+
+\regra{\textbf{Decomposição simultânea:} divida pelo menor primo que
+divida \emph{todos} ao mesmo tempo. \textbf{Pare} quando não existir
+mais primo que divida todos juntos. O MDC é o produto dos fatores
+usados.}
+
+\obs{Diferença para o MMC: no MDC o fator só vale se dividir
+\emph{todos} os números da linha. As linhas \hl{destacadas} abaixo
+são essas.}
+
+%─────────────────────────────────────────────────────────────
+\TW{2}{badgegreen}{MDC com 2 números}{Exemplo — MDC de 32 e 24}
+
+Dividimos enquanto o fator divide \textbf{os dois}. Quando isso deixa
+de ser possível, paramos.
+
+\begin{fatora}
+\begin{tabular}{r@{,\;}l|l}
+\rowcolor{rulebg}32 & 24 & 2\\
+\rowcolor{rulebg}16 & 12 & 2\\
+\rowcolor{rulebg} 8 &  6 & 2\\
+\hline
+ 4 &  3 & \\
+\end{tabular}
+\end{fatora}
+
+$4$ e $3$ não têm fator primo comum — paramos aqui.
+
+\exemp{MDC$(32,24) = 2^3 = \hlm{8}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{3}{badgegreen}{MDC com 3 números}{Exemplo — MDC de 120, 30 e 45}
+
+Como $45$ é ímpar, nenhuma divisão por $2$ serve aos três —
+começamos pelo $3$.
+
+\begin{fatora}
+\begin{tabular}{r@{,\;}r@{,\;}l|l}
+\rowcolor{rulebg}120 & 30 & 45 & 3\\
+\rowcolor{rulebg} 40 & 10 & 15 & 5\\
+\hline
+  8 &  2 &  3 & \\
+\end{tabular}
+\end{fatora}
+
+$8$, $2$ e $3$ não têm fator comum — paramos.
+
+\exemp{MDC$(120,30,45) = 3\cdot5 = \hlm{15}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\star$}{darkblue}{Propriedades}{Relações entre MMC e MDC}
+
+\formula{MMC$(a,b)\times$MDC$(a,b) = a\times b$}
+
+\SH{Verificação com 12 e 18}
+\exemp{%
+  MDC$(12,18) = \hlm{6}$ \;{\footnotesize(comuns: $2\cdot3$)}\\
+  MMC$(12,18) = \hlm{36}$\\
+  $36\times6 = 216 = 12\times18$ \ok%
+}
+
+\SH{Números coprimos}
+\regra{Dois números são \textbf{coprimos} (primos entre si) quando
+MDC $= 1$ — não compartilham nenhum fator primo.}
+\exemp{%
+  MDC$(9,16) = 1$: \ $9=3^2$, $16=2^4$ \ok\\
+  MDC$(35,48) = 1$: \ $35=5\cdot7$, $48=2^4\cdot3$ \ok%
+}
+
+\SH{Casos especiais}
+\exemp{%
+  \textbf{Consecutivos} são sempre coprimos:\\
+  MDC$(13,14) = \hlm{1}$\\[3pt]
+  \textbf{Se $a$ divide $b$:} MDC$(a,b)=a$ e MMC$(a,b)=b$\\
+  Ex.: MDC$(5,30)=\hlm{5}$ e MMC$(5,30)=\hlm{30}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ap}{badgegreen}{Aplicação Prática}{Quando usar MMC e quando usar MDC}
+
+\regra{Use o \textbf{MMC} para o \emph{menor momento em que dois
+ciclos coincidem} (encontros, sinais, repetições).}
+
+\SH{Problema — encontro de ônibus}
+\exemp{%
+  Um ônibus passa a cada $12$\,min e outro a cada $18$\,min,
+  partindo juntos. Quando voltam a partir juntos?\\[2pt]
+  MMC$(12,18) = 2^2\cdot3^2 = \hlm{36\text{ minutos}}$%
+}
+
+\regra{Use o \textbf{MDC} para o \emph{maior tamanho ou quantidade
+igual} que cabe exatamente em dois ou mais totais (sem sobras).}
+
+\SH{Problema — divisão em grupos}
+\exemp{%
+  Dividir $32$ meninos e $24$ meninas em grupos de mesmo tamanho,
+  sem misturar. Maior grupo possível?\\[2pt]
+  MDC$(32,24) = 2^3 = \hlm{8\text{ alunos por grupo}}$\\[2pt]
+  {\footnotesize Resultado: 4 grupos de meninos + 3 de meninas.}%
+}
+
+\end{multicols}
+
+\end{document}

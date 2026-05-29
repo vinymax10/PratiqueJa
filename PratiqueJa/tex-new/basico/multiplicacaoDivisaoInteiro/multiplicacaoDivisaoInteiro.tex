@@ -1,0 +1,232 @@
+% ============================================================
+%  Multiplicação e Divisão de Inteiros — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Multiplicação e Divisão de Inteiros}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Multiplicação e Divisão de Inteiros}%
+           {Regra dos Sinais, Potências e Aplicações}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{?}{badgepurple}{Por que $(-)\times(-)=(+)$?}{Intuição pelo padrão da tabuada}
+
+\regra{Observe a sequência de $n \times (-2)$ à medida que $n$
+decresce — cada passo \emph{sobe} $+2$:}
+
+\exemp{%
+  $3 \times (-2) = -6$\\
+  $2 \times (-2) = -4$\\
+  $1 \times (-2) = -2$\\
+  $0 \times (-2) = \phantom{+}0$\\
+  $-1 \times (-2) = +2$ \;{\footnotesize\color{mutedtext}(sobe $+2$)}\\
+  $-2 \times (-2) = \hlm{+4}$ \;{\footnotesize\color{mutedtext}(neg.$\times$neg.$=$pos.)}%
+}
+
+\nota{\textbf{Interpretação:} multiplicar por $-1$ inverte o sinal.
+Inverter duas vezes volta ao original:
+$(-1)\times(-1)\times a = +a$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$+/+$}{darkblue}{Sinais Iguais → Positivo}{Pos.$\times$Pos. ou Neg.$\times$Neg.}
+
+\formula{$(+)\times(+)=(+) \qquad (-)\times(-)=(+)$\\[3pt]
+$(+)\div(+)=(+) \qquad (-)\div(-)=(+)$}
+
+\exemp{%
+  \textbf{Positivo $\times$ Positivo}\\
+  $(+7)\times(+3) = +21$ \qquad $(+15)\div(+3) = \hlm{+5}$\\[3pt]
+  \textbf{Negativo $\times$ Negativo}\\
+  $(-7)\times(-3) = +21$ \qquad $(-15)\div(-3) = \hlm{+5}$%
+}
+
+\nota{\textbf{Regra prática:} sinais \textbf{iguais} → resultado
+\emph{positivo}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$+/-$}{darkblue}{Sinais Diferentes → Negativo}{Pos.$\times$Neg. ou Neg.$\times$Pos.}
+
+\formula{$(+)\times(-)=(-) \qquad (-)\times(+)=(-)$\\[3pt]
+$(+)\div(-)=(-) \qquad (-)\div(+)=(-)$}
+
+\exemp{%
+  \textbf{Positivo $\times$ Negativo}\\
+  $(+7)\times(-3) = -21$ \qquad $(+15)\div(-3) = \hlm{-5}$\\[3pt]
+  \textbf{Negativo $\times$ Positivo}\\
+  $(-7)\times(+3) = -21$ \qquad $(-15)\div(+3) = \hlm{-5}$%
+}
+
+\nota{\textbf{Regra prática:} sinais \textbf{diferentes} → resultado
+\emph{negativo}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Alg}{darkblue}{Algoritmo de Cálculo}{Sinal primeiro, módulo depois}
+
+\regra{%
+\textbf{1.} Determine o sinal pela regra dos sinais.\\[2pt]
+\textbf{2.} Multiplique (ou divida) os valores absolutos.\\[2pt]
+\textbf{3.} Aplique o sinal ao resultado.}
+
+\exemp{%
+  \textbf{$(-12)\times(+5)$}\\
+  P1: sinais diferentes → \textbf{negativo}\\
+  P2: $12\times5 = 60$\\
+  P3: $\hlm{-60}$ \ok%
+}
+
+\exemp{%
+  \textbf{$(-48)\div(-6)$}\\
+  P1: sinais iguais → \textbf{positivo}\\
+  P2: $48\div6 = 8$\\
+  P3: $\hlm{+8}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$n$ fat.}{badgegreen}{Múltiplos Fatores}{Conte os fatores negativos}
+
+\regra{Em um produto com vários fatores, conte os negativos:\\[3pt]
+\textbf{Quantidade par} de negativos → resultado \textbf{positivo}\\[2pt]
+\textbf{Quantidade ímpar} de negativos → resultado \textbf{negativo}}
+
+\exemp{%
+  $(-2)\times(-3)\times(-4)$ — \textbf{3 neg.} (ímpar)\\
+  $2\times3\times4 = 24 \;\Rightarrow\; \hlm{-24}$ \ok\\[3pt]
+  $(-1)\times(-2)\times(-3)\times(-4)$ — \textbf{4 neg.} (par)\\
+  $1\times2\times3\times4 = 24 \;\Rightarrow\; \hlm{+24}$ \ok\\[3pt]
+  $(+5)\times(-2)\times(+3)\times(-1)$ — \textbf{2 neg.} (par)\\
+  $5\times2\times3\times1 = 30 \;\Rightarrow\; \hlm{+30}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$a^n$}{darkblue}{Potências de Inteiros Negativos}{Par → positivo · Ímpar → negativo}
+
+\formula{$(-a)^n = \begin{cases}
+  +a^n & \text{se } n \text{ é par}\\
+  -a^n & \text{se } n \text{ é ímpar}
+\end{cases}$}
+
+\exemp{%
+  \textbf{Expoente par → positivo}\\
+  $(-3)^2 = (-3)\times(-3) = +9$\\
+  $(-2)^4 = +16$ \qquad $(-5)^2 = \hlm{+25}$\\[3pt]
+  \textbf{Expoente ímpar → negativo}\\
+  $(-3)^3 = -27$ \qquad $(-2)^5 = -32$\\
+  $(-1)^{101} = \hlm{-1}$%
+}
+
+\nota{\textbf{O parêntese faz diferença:}\\
+$(-2)^2 = +4$ (eleva $-2$ ao quadrado)\\
+$-2^2 = -4$ (eleva $2$ e aplica o $-$ depois)}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prop}{badgegreen}{Propriedades da Multiplicação}{Leis válidas para todos os inteiros}
+
+\regra{%
+\textbf{Comutativa:} $a\times b = b\times a$\\[2pt]
+\textbf{Associativa:} $(a\times b)\times c = a\times(b\times c)$\\[2pt]
+\textbf{Distributiva:} $a\times(b+c) = a\times b + a\times c$\\[2pt]
+\textbf{Neutro:} $a\times 1 = a$\\[2pt]
+\textbf{Absorvente:} $a\times 0 = 0$\\[2pt]
+\textbf{Inversor de sinal:} $(-1)\times a = -a$}
+
+\exemp{%
+  \textbf{Distributiva:}\\
+  $(-3)\times(4+2) = (-3)\times4 + (-3)\times2$\\
+  $= -12 + (-6) = -18$\\
+  Verificação: $(-3)\times6 = \hlm{-18}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\checkmark$}{darkblue}{Relação $\times$ e $\div$ — Prova Real}{Divisão é a inversa da multiplicação}
+
+\formula{Se $a\times b = c$, então $c\div b = a$ e $c\div a = b$}
+
+\exemp{%
+  $(-4)\times(+5) = -20$\\
+  $(-20)\div(+5) = -4$ \ok\\
+  $(-20)\div(-4) = \hlm{+5}$ \ok\\[3pt]
+  $(-6)\times(-7) = +42$\\
+  $(+42)\div(-7) = -6$ \ok\\
+  $(+42)\div(-6) = \hlm{-7}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tab}{badgegreen}{Tabela de Sinais}{Resumo das quatro combinações}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=white, colframe=vegreen,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{vegreen}\bfseries\small SINAIS IGUAIS}%
+\hfill{\footnotesize\color{vegreen}resultado positivo}\par\vspace{2pt}
+{\small\color{bodytext}$(+)\times(+)=+$ \qquad $(-)\times(-)=+$}
+\end{tcolorbox}\vspace{3pt}
+
+\begin{tcolorbox}[arc=5pt, boxrule=0.8pt, colback=white, colframe=vered,
+  left=8pt, right=8pt, top=5pt, bottom=5pt]
+{\color{vered}\bfseries\small SINAIS DIFERENTES}%
+\hfill{\footnotesize\color{vered}resultado negativo}\par\vspace{2pt}
+{\small\color{bodytext}$(+)\times(-)=-$ \qquad $(-)\times(+)=-$}
+\end{tcolorbox}
+
+\obs{A mesma regra vale para a divisão: basta trocar $\times$ por
+$\div$ em qualquer das linhas acima.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgepurple}{Problemas Contextualizados}{Temperatura, finanças e movimento}
+
+\exemp{%
+  \textbf{P1 — Temperatura:} cai $3\,$°C por hora; em 5 horas?\\
+  $(-3)\times(+5) = \hlm{-15}$ → cai $15\,$°C. \ok\\[3pt]
+  \textbf{P2 — Dívida:} 4 dívidas de R\$\,12 cada.\\
+  $4\times(-12) = \hlm{-48}$ → deve R\$\,48. \ok%
+}
+
+\columnbreak
+
+\exemp{%
+  \textbf{P3 — Compartilhar dívida:} R\$\,60 entre 5 pessoas.\\
+  $(-60)\div(+5) = \hlm{-12}$ → cada um deve R\$\,12. \ok\\[3pt]
+  \textbf{P4 — Movimento:} submarino a $-8\,$m/min; chega a $-56\,$m?\\
+  $-56\div(-8) = \hlm{+7}$ → em $7$ minutos. \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{!}{vered}{Erros Comuns}{O que evitar nas provas}
+
+\exemp{%
+  \textbf{\nok\ Erro 1 — $(-)\times(-)=(-)$}\\
+  $(-3)\times(-4) \neq -12$\\
+  \ok\ Correto: sinais iguais → $\hlm{+12}$\\[4pt]
+  \textbf{\nok\ Erro 2 — confundir $(-2)^2$ e $-2^2$}\\
+  $(-2)^2 = +4$ \quad $-2^2 = -4$\\
+  \ok\ O parêntese muda o resultado!%
+}
+
+\exemp{%
+  \textbf{\nok\ Erro 3 — esquecer o sinal no quociente}\\
+  $(-20)\div(+4) \neq 5$\\
+  \ok\ Correto: sinais diferentes → $\hlm{-5}$\\[4pt]
+  \textbf{\nok\ Erro 4 — contagem de negativos}\\
+  $(-1)\times(-1)\times(-1) \neq +1$\\
+  \ok\ 3 negativos (ímpar) → $\hlm{-1}$%
+}
+
+\end{multicols}
+
+\end{document}

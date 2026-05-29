@@ -1,0 +1,223 @@
+% ============================================================
+%  Teorema de Pitágoras — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  tri/.style={draw=darkblue, line width=1.2pt, fill=accentblue!12!white},
+  trj/.style={draw=darkblue, line width=1.2pt, fill=badgegreen!12!white},
+  hl/.style={draw=badgepurple!80!black, line width=1pt},
+  ra/.style={draw=darkblue, line width=0.8pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Teorema de Pitágoras}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Teorema de Pitágoras}%
+           {Catetos, Hipotenusa e Relações Métricas}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Relação entre hipotenusa e catetos}
+
+\regra{Num \textbf{triângulo retângulo}, o quadrado da
+\textbf{hipotenusa} é igual à soma dos quadrados dos
+\textbf{catetos}.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.8]
+\coordinate (A) at (0,0); \coordinate (B) at (3.6,0); \coordinate (C) at (0,2.6);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[ra] (0.42,0) -- (0.42,0.42) -- (0,0.42);   % ângulo reto
+\node[cl] at (1.8,-0.32){$b$};
+\node[cl] at (-0.32,1.3){$c$};
+\node[cl] at (2.1,1.55){$a$};
+\node[font=\scriptsize] at (3.85,-0.05){};
+\end{tikzpicture}
+\end{center}
+
+\formula{$a^2 = b^2 + c^2$}
+
+\obs{$a$ = \textbf{hipotenusa} (oposta ao ângulo reto); $b, c$ =
+\textbf{catetos} (formam o ângulo reto).}
+
+%─────────────────────────────────────────────────────────────
+\TW{Met}{darkblue}{Como Aplicar}{Isolar o lado desconhecido}
+
+\regra{Hipotenusa desconhecida: $a = \sqrt{b^2 + c^2}$.\\[2pt]
+Cateto desconhecido: $b = \sqrt{a^2 - c^2}$.}
+
+\SH{Encontrando a hipotenusa}
+\exemp{%
+  $b=4,\, c=3$: \ $a^2 = 16 + 9 = 25 \Rightarrow a = \hlm{5}$\\[3pt]
+  $b=5,\, c=12$: \ $a^2 = 25 + 144 = 169 \Rightarrow a = \hlm{13}$%
+}
+
+\SH{Encontrando um cateto}
+\exemp{%
+  $a=15,\, c=9$: \ $b^2 = 225 - 81 = 144 \Rightarrow b = \hlm{12}$\\[3pt]
+  $a=10,\, c=6$: \ $b^2 = 100 - 36 = 64 \Rightarrow b = \hlm{8}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{3,4,5}{badgegreen}{Ternas Pitagóricas}{Inteiros que satisfazem o teorema}
+
+\regra{Uma \textbf{terna pitagórica} é um trio de inteiros
+$(a,b,c)$ com $a^2 = b^2 + c^2$. Reconhecê-las evita calcular raízes.}
+
+\exemp{%
+  $(3,4,5)$ — $25 = 16 + 9$\\[2pt]
+  $(5,12,13)$ — $169 = 144 + 25$\\[2pt]
+  $(8,15,17)$ — $289 = 225 + 64$\\[2pt]
+  $(7,24,25)$ — $625 = 576 + 49$%
+}
+
+\nota{Múltiplos também são ternas: $(6,8,10)$, $(9,12,15)$,
+$(10,24,26)\ldots$}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\Leftrightarrow$}{darkblue}{Recíproca e Classificação}{Identificar o tipo pelo maior lado}
+
+\regra{Com lados $a \geq b \geq c$, compare $a^2$ com $b^2 + c^2$:}
+
+\exemp{%
+  $a^2 = b^2 + c^2$ → \hlm{retângulo}\\
+  {\footnotesize $5^2 = 3^2 + 4^2 \Rightarrow 25 = 25$ \ok}\\[3pt]
+  $a^2 > b^2 + c^2$ → \hlm{obtusângulo}\\
+  {\footnotesize lados $4,5,7$: $49 > 41$ \ok}\\[3pt]
+  $a^2 < b^2 + c^2$ → \hlm{acutângulo}\\
+  {\footnotesize lados $4,5,6$: $36 < 41$ \ok}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{45°}{badgepurple}{Triângulos Notáveis}{45°-45°-90° e 30°-60°-90°}
+
+\SH{Isósceles retângulo — 45°-45°-90°}
+\begin{center}\vspace{1pt}
+\begin{tikzpicture}[scale=0.8]
+\coordinate (A) at (0,0); \coordinate (B) at (2.4,0); \coordinate (C) at (0,2.4);
+\draw[trj] (A)--(B)--(C)--cycle;
+\draw[ra] (0.4,0)--(0.4,0.4)--(0,0.4);
+\node[cl] at (1.2,-0.32){$\ell$};
+\node[cl] at (-0.32,1.2){$\ell$};
+\node[cl] at (1.6,1.55){$\ell\sqrt{2}$};
+\draw[graycolor, line width=0.7pt] ([shift=(135:0.5)]B) arc (135:180:0.5);
+\node[font=\scriptsize] at ($(B)+(157.5:0.82)$){45°};
+\draw[graycolor, line width=0.7pt] ([shift=(270:0.5)]C) arc (270:315:0.5);
+\node[font=\scriptsize] at ($(C)+(292.5:0.72)$){45°};
+\end{tikzpicture}
+\end{center}
+\exemp{%
+  $a^2 = \ell^2 + \ell^2 = 2\ell^2 \;\Rightarrow\; a = \hlm{\ell\sqrt{2}}$\\
+  {\footnotesize cateto $5$ → hipotenusa $5\sqrt{2} \approx 7{,}07$}%
+}
+
+\SH{Semi-equilátero — 30°-60°-90°}
+\begin{center}\vspace{1pt}
+\begin{tikzpicture}[scale=0.8]
+\coordinate (A) at (0,0); \coordinate (B) at (3.0,0); \coordinate (C) at (0,1.732);
+\draw[trj] (A)--(B)--(C)--cycle;
+\draw[ra] (0.4,0)--(0.4,0.4)--(0,0.4);
+\node[cl] at (1.5,-0.32){$\ell\sqrt{3}$};
+\node[cl] at (-0.32,0.87){$\ell$};
+\node[cl] at (1.8,1.05){$2\ell$};
+\draw[graycolor, line width=0.7pt] ([shift=(150:0.6)]B) arc (150:180:0.6);
+\node[font=\scriptsize] at ($(B)+(165:0.92)$){30°};
+\draw[graycolor, line width=0.7pt] ([shift=(270:0.5)]C) arc (270:330:0.5);
+\node[font=\scriptsize] at ($(C)+(300:0.7)$){60°};
+\end{tikzpicture}
+\end{center}
+\exemp{%
+  Relação $\;\ell : \ell\sqrt{3} : 2\ell\;$\\
+  {\footnotesize cateto menor $3$ → cateto maior $3\sqrt{3}$, hipotenusa $6$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Rel}{darkblue}{Relações Métricas}{Altura sobre a hipotenusa}
+
+\regra{A \textbf{altura} $h$ relativa à hipotenusa divide-a em duas
+projeções $m$ e $n$ $(m+n=a)$. Daí decorrem quatro relações.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.42]
+\coordinate (A) at (0,0); \coordinate (B) at (10,0);
+\coordinate (C) at (3.6,4.8); \coordinate (H) at (3.6,0);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[hl] (C)--(H);
+% ângulo reto em C
+\draw[ra] (3.0,4.0)--(3.8,3.4)--(4.4,4.2);
+% ângulo reto em H
+\draw[ra] (3.6,0.7)--(4.3,0.7)--(4.3,0);
+\node[cl] at (1.4,2.7){$c$};
+\node[cl] at (7.2,2.9){$b$};
+\node[cl] at (4.5,2.5){$h$};
+\node[cl] at (1.8,-0.6){$m$};
+\node[cl] at (6.8,-0.6){$n$};
+\node[font=\scriptsize] at (3.6,-1.0){\scriptsize $H$};
+\end{tikzpicture}
+\end{center}
+
+\formula{$h^2 = m\cdot n \quad\;\; b^2 = a\cdot m \quad\;\; c^2 = a\cdot n \quad\;\; a\cdot h = b\cdot c$}
+
+\exemp{%
+  \textbf{$b=6,\, c=8$ — achar $h, m, n$:}\\
+  $a = \sqrt{36+64} = 10$\\
+  $c^2 = a\cdot m \Rightarrow m = \dfrac{36}{10} = 3{,}6$\\
+  $b^2 = a\cdot n \Rightarrow n = \dfrac{64}{10} = 6{,}4$\\
+  $h^2 = m\cdot n = 23{,}04 \Rightarrow h = \hlm{4{,}8}$\\
+  {\footnotesize Verif.: $a\cdot h = 48 = b\cdot c$ \ok}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{d}{badgegreen}{Distância entre Dois Pontos}{Aplicação no plano cartesiano}
+
+\regra{A distância entre $(x_1,y_1)$ e $(x_2,y_2)$ vem de Pitágoras
+aplicado às diferenças de coordenadas:}
+\formula{$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$}
+
+\exemp{%
+  Entre $(15,14)$ e $(31,26)$:\\
+  $d = \sqrt{16^2 + 12^2} = \sqrt{400} = \hlm{20}$\\[3pt]
+  Entre $(1,1)$ e $(4,5)$:\\
+  $d = \sqrt{9 + 16} = \sqrt{25} = \hlm{5}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\needspace{16\baselineskip}
+\TW{Prob}{badgegreen}{Problema Contextualizado}{Triângulo retângulo oculto}
+
+\exemp{%
+  \textbf{P1 — escada:} escada de $5$\,m, pé a $3$\,m da parede.\\
+  $5^2 = h^2 + 3^2 \Rightarrow h^2 = 16$\\
+  Altura: $h = \hlm{4\text{ m}}$%
+}
+
+\columnbreak
+
+\exemp{%
+  \textbf{P2 — diagonal:} retângulo $6 \times 8$\,cm.\\
+  $d^2 = 6^2 + 8^2 = 100$\\
+  Diagonal: $d = \hlm{10\text{ cm}}$%
+}
+
+\end{multicols}
+
+\end{document}

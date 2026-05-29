@@ -1,0 +1,145 @@
+% ============================================================
+%  Plano Cartesiano — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  axe/.style={->, line width=1pt, gray!60!black},
+  gridln/.style={very thin, gray!25},
+  pt/.style={circle, fill=darkblue, inner sep=1.6pt},
+  ptlbl/.style={font=\footnotesize\bfseries, darkblue},
+  quad/.style={font=\large\bfseries, gray!45},
+}
+
+\setsubject{Plano Cartesiano}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Plano Cartesiano}%
+           {Eixos, Quadrantes, Pontos e Simetria}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Eixos e Origem}{A estrutura do plano e os quatro quadrantes}
+
+\regra{O \textbf{plano cartesiano} é formado por duas retas numéricas
+perpendiculares que se cruzam na \textbf{origem}:\\[3pt]
+\textbf{Eixo $x$} (horizontal) — das \emph{abscissas}\\
+\textbf{Eixo $y$} (vertical) — das \emph{ordenadas}\\
+\textbf{Origem} $O(0,0)$ — interseção dos eixos}
+
+\begin{center}\vspace{1pt}
+\begin{tikzpicture}[scale=0.52]
+% grid
+\draw[gridln] (-3.4,-3.4) grid (4.4,3.4);
+% eixos
+\draw[axe] (-3.6,0) -- (4.7,0) node[right, font=\small\bfseries, black]{$x$};
+\draw[axe] (0,-3.6) -- (0,3.7) node[above, font=\small\bfseries, black]{$y$};
+\node[below left, font=\footnotesize] at (0,0) {$O$};
+% rótulos de quadrante
+\node[quad] at (2.4,2.4) {I};
+\node[quad] at (-2.4,2.4) {II};
+\node[quad] at (-2.4,-2.4) {III};
+\node[quad] at (2.4,-2.4) {IV};
+% pontos
+\node[pt] at (2,2) {};   \node[ptlbl, above right] at (2,2) {A(2,2)};
+\node[pt] at (-1,1) {};  \node[ptlbl, above left] at (-1,1) {B(-1,1)};
+\node[pt] at (-2,-1) {}; \node[ptlbl, below left] at (-2,-1) {C(-2,-1)};
+\node[pt] at (3,-2) {};  \node[ptlbl, below right] at (3,-2) {D(3,-2)};
+\end{tikzpicture}
+\end{center}
+
+\SH{Os quatro quadrantes (anti-horário)}
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c c c c}
+\rowcolor{rulebg}\textbf{Quad.} & \textbf{$x$} & \textbf{$y$} & \textbf{Ex.}\\
+\textbf{I}   & $+$ & $+$ & A(2,2)\\
+\textbf{II}  & $-$ & $+$ & B(-1,1)\\
+\textbf{III} & $-$ & $-$ & C(-2,-1)\\
+\textbf{IV}  & $+$ & $-$ & D(3,-2)\\
+\end{tabular}
+\end{center}
+
+\nota{Pontos \textbf{sobre os eixos} não pertencem a quadrante algum:
+$(3,0)$ está no eixo $x$ e $(0,-2)$ no eixo $y$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Loc}{darkblue}{Localização de Pontos}{Par ordenado $(x,y)$ — abscissa e ordenada}
+
+\regra{Cada ponto é um \textbf{par ordenado} $(x,y)$:\\[3pt]
+\textbf{Abscissa} $(x)$ — distância horizontal (direita $+$, esq.\ $-$)\\
+\textbf{Ordenada} $(y)$ — distância vertical (cima $+$, baixo $-$)\\[3pt]
+A ordem importa: $(2,3) \neq (3,2)$.}
+
+\exemp{%
+  \textbf{Marcar $P(3,-1)$:}\\
+  1. da origem, \hlm{3 à direita} $(x=3)$\\
+  2. depois \hlm{1 para baixo} $(y=-1)$\\
+  3. marque $P$ nessa posição%
+}
+
+\exemp{%
+  \textbf{Em que quadrante está $Q(-4,2)$?}\\
+  $x=-4$ (neg.) e $y=2$ (pos.) → \hlm{Quadrante II}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dist}{badgegreen}{Distância à Origem}{Teorema de Pitágoras no plano}
+
+\regra{Os catetos são as projeções $|x|$ e $|y|$:}
+\formula{$d(P,O) = \sqrt{x^2 + y^2}$}
+
+\exemp{%
+  \textbf{$A(3,4)$:}\\
+  $d = \sqrt{3^2+4^2} = \sqrt{9+16} = \sqrt{25} = \hlm{5}$\\[3pt]
+  \textbf{$B(-1,-1)$:}\\
+  $d = \sqrt{(-1)^2+(-1)^2} = \sqrt{2} \approx \hlm{1{,}41}$\\[3pt]
+  \textbf{$C(5,0)$ (sobre o eixo $x$):}\\
+  $d = \sqrt{5^2+0^2} = \hlm{5} = |x|$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Sim}{badgegreen}{Pares Simétricos}{Reflexão nos eixos e na origem}
+
+\regra{Dado $P(a,b)$, seus simétricos são:\\[3pt]
+$P'_x = (a,\,-b)$ — reflexão no eixo $x$\\
+$P'_y = (-a,\,b)$ — reflexão no eixo $y$\\
+$P'_O = (-a,\,-b)$ — reflexão na origem}
+
+\exemp{%
+  \textbf{$P(3,2)$:}\\
+  eixo $x$: $\hlm{(3,-2)}$\\
+  eixo $y$: $\hlm{(-3,2)}$\\
+  origem: $\hlm{(-3,-2)}$%
+}
+
+\exemp{%
+  \textbf{$Q(-4,1)$:}\\
+  eixo $x$: $(-4,-1)$ — Quadrante III\\
+  eixo $y$: $(4,1)$ — Quadrante I\\
+  origem: $(4,-1)$ — Quadrante IV%
+}
+
+\nota{O simétrico ao eixo $x$ mantém a abscissa e inverte a ordenada.
+O simétrico à origem inverte \emph{os dois} sinais — equivale a duas
+reflexões seguidas.}
+
+\end{multicols}
+
+\end{document}

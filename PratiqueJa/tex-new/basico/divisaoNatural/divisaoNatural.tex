@@ -1,0 +1,312 @@
+% ============================================================
+%  Divisão de Naturais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Divisão de Naturais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Divisão de Naturais}%
+           {Elementos, Algoritmo da Chave e Prova Real}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é divisão e seus elementos}
+
+\regra{Dividir é repartir uma quantidade em partes iguais ou
+determinar quantas vezes um número cabe dentro de outro.}
+
+\small\color{bodytext}%
+Dados $a$ (dividendo) e $b$ (divisor), com $b\neq0$, a divisão
+determina o \textbf{quociente} $q$ e o \textbf{resto} $r$:
+
+\formula{$a = b \times q + r \qquad (0 \leq r < b)$}
+
+\exemp{%
+  \textbf{Dividendo} $(a)$ — número que será dividido\\[2pt]
+  \textbf{Divisor} $(b)$ — número pelo qual se divide $(\neq 0)$\\[2pt]
+  \textbf{Quociente} $(q)$ — resultado da divisão\\[2pt]
+  \textbf{Resto} $(r)$ — sobra, sempre $0 \leq r < b$%
+}
+
+\exemp{%
+  Exemplo: $17 \div 5$\\[2pt]
+  $17 = 5 \times 3 + 2$\\[2pt]
+  Quociente $= 3$, \ Resto $= 2$\\[2pt]
+  \hlm{``17 dividido por 5 é 3, resto 2''}%
+}
+
+\nota{\textbf{Divisão por zero é indefinida.} Não existe $q$ tal que
+$0 \times q = a$ para $a \neq 0$. Por isso o divisor nunca pode ser
+zero.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prop}{badgegreen}{Propriedades}{O que a divisão preserva — e o que não}
+
+\regra{\textbf{Não é comutativa:} $a \div b \neq b \div a$ em geral.\\[3pt]
+\textbf{Não é associativa:} $(a \div b)\div c \neq a \div(b \div c)$.\\[3pt]
+\textbf{Por 1:} $a \div 1 = a$\\[3pt]
+\textbf{Igual por igual:} $a \div a = 1$ \ $(a\neq0)$\\[3pt]
+\textbf{Zero por qualquer:} $0 \div a = 0$ \ $(a\neq0)$}
+
+\exemp{%
+  \textbf{Não comutativa:} $12 \div 4 = 3$,\\
+  mas $4 \div 12$ \hlm{não é natural} — a ordem importa!%
+}
+
+\SH{Relação com a multiplicação}
+\regra{Divisão e multiplicação são operações \textbf{inversas}:
+se $a \times b = p$, então $p \div b = a$ e $p \div a = b$.}
+
+\exemp{%
+  $6 \times 7 = 42 \;\Rightarrow\;
+   42 \div 6 = \hlm{7}$ \ e \ $42 \div 7 = \hlm{6}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\div10$}{darkblue}{Divisão por 10, 100 e 1000}{Remover zeros à direita}
+
+\regra{Dividir um natural (terminado em zeros) por $10$, $100$ ou
+$1000$ é \textbf{remover zeros à direita} — um zero para cada zero
+da potência.}
+
+\exemp{%
+  $\div\,10$ → remove \textbf{1 zero}\\
+  $4500 \div 10 = \hlm{450}$\qquad $3080 \div 10 = \hlm{308}$\\[3pt]
+  $\div\,100$ → remove \textbf{2 zeros}\\
+  $4500 \div 100 = \hlm{45}$\qquad $70000 \div 100 = \hlm{700}$\\[3pt]
+  $\div\,1000$ → remove \textbf{3 zeros}\\
+  $45000 \div 1000 = \hlm{45}$\qquad $8000 \div 1000 = \hlm{8}$%
+}
+
+\nota{\textbf{Atenção:} só funciona se o número terminar em zeros
+suficientes. $453 \div 10 = 45{,}3$ — racional, não natural.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$r{=}0$}{badgepurple}{Divisão Exata e Inexata}{Classificação pelo resto}
+
+\regra{\textbf{Exata:} resto zero — o dividendo é múltiplo do divisor.\\[3pt]
+\textbf{Inexata:} resto diferente de zero, com $0 < r < b$.}
+
+\exemp{%
+  \textbf{Exata:} \ $68 \div 4$\\
+  $68 = 4 \times 17 + 0$\\
+  Quociente $= \hlm{17}$, \ Resto $= \hlm{0}$ \ok\\[3pt]
+  \textbf{Inexata:} \ $71 \div 4$\\
+  $71 = 4 \times 17 + 3$\\
+  Quociente $= \hlm{17}$, \ Resto $= \hlm{3}$%
+}
+
+\nota{\textbf{Relação com divisibilidade:} dizer que $a$ é divisível
+por $b$ equivale a dizer que $a \div b$ é exata (resto zero).}
+
+%─────────────────────────────────────────────────────────────
+\TW{Alg}{darkblue}{Algoritmo da Divisão}{Chave de divisão — passo a passo}
+
+\regra{%
+\textbf{1.} Selecione dígitos do dividendo (esq.→dir.) até obter um
+número $\geq$ divisor.\\[2pt]
+\textbf{2.} Escreva no quociente o maior dígito cujo produto pelo
+divisor não ultrapasse o número selecionado.\\[2pt]
+\textbf{3.} Multiplique divisor $\times$ quociente parcial e subtraia.\\[2pt]
+\textbf{4.} Baixe o próximo dígito e repita até acabar.}
+
+\nota{\textbf{Como estimar (Passo 2):} use a tabuada do divisor — o
+maior múltiplo que não passa do número. Ex.: $28 \div 4$ → $4\times7=28$
+→ parcial \textbf{7}.}
+
+\SH{Exemplo 1 — $68 \div 4$}
+\exemp{%
+  \textbf{P1} — ``6''$\geq4$: seleciona o ``6''\\
+  \textbf{P2} — $4 \times 1 = 4$ → parcial \textbf{1}\\
+  \textbf{P3} — $6 - 4 = 2$\\
+  \textbf{P4} — baixa ``8'': número $= 28$\\
+  \textbf{P2} — $4 \times 7 = 28$ → parcial \textbf{7}\\
+  \textbf{P3} — $28 - 28 = 0$\\[3pt]
+  Quociente $= \hlm{17}$, \ Resto $= \hlm{0}$ \ok\\[5pt]
+  \textbf{Na chave:}\\[2pt]
+  $\begin{array}[t]{r|l}
+     68 & \,4\\[-1pt]
+     \cline{2-2}
+     -4 & \,17\\
+     \cline{1-1}
+     28 & \\[-1pt]
+     -28 & \\
+     \cline{1-1}
+     \phantom{-}0 &
+   \end{array}$%
+}
+
+\SH{Exemplo 2 — $368 \div 5$ (início $<$ divisor)}
+\exemp{%
+  \textbf{P1} — ``3''$<5$: toma ``36''\\
+  \textbf{P2} — $5 \times 7 = 35$ ($5\times8=40>36$) → parcial \textbf{7}\\
+  \textbf{P3} — $36 - 35 = 1$\\
+  \textbf{P4} — baixa ``8'': número $= 18$\\
+  \textbf{P2} — $5 \times 3 = 15$ → parcial \textbf{3}\\
+  \textbf{P3} — $18 - 15 = 3$ \ $(3<5)$\\[3pt]
+  Quociente $= \hlm{73}$, \ Resto $= \hlm{3}$\\
+  Prova: $5 \times 73 + 3 = 368$ \ok%
+}
+
+\SH{Exemplo 3 — $95 \div 7$}
+\exemp{%
+  \textbf{P1–3} — ``9''$\geq7$: $7\times1=7$ → \textbf{1}; \ $9-7=2$\\
+  \textbf{P4} — baixa ``5'': número $= 25$\\
+  \textbf{P2–3} — $7\times3=21$ → \textbf{3}; \ $25-21=4$\\[3pt]
+  Quociente $= \hlm{13}$, \ Resto $= \hlm{4}$\\
+  Prova: $7 \times 13 + 4 = 95$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\checkmark$}{badgegreen}{Prova Real da Divisão}{Verificar usando multiplicação}
+
+\formula{divisor $\times$ quociente $+$ resto $=$ dividendo}
+
+\exemp{%
+  $68 \div 4 = 17$, resto $0$\\
+  $4 \times 17 + 0 = \hlm{68}$ \ok\\[3pt]
+  $368 \div 5 = 73$, resto $3$\\
+  $5 \times 73 + 3 = 365 + 3 = \hlm{368}$ \ok%
+}
+
+\nota{\textbf{Condição do resto:} sempre \emph{menor que o divisor}.
+Se $r \geq b$, o quociente está errado — ainda dá para dividir mais
+uma vez.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgegreen}{Problemas Contextualizados}{Interprete o quociente e o resto}
+
+\regra{\textbf{Estratégia:} (1) identifique o que se reparte e em
+quantas partes; (2) escreva a divisão; (3) calcule; (4) interprete
+quociente \emph{e} resto no contexto.}
+
+\exemp{%
+  \textbf{P1 — exata:} 48 balas para 6 crianças.\\
+  $48 \div 6 = 8$, resto $0$\\
+  \hlm{8 balas} cada; não sobra nenhuma. \ok\\[4pt]
+  \textbf{P2 — com resto:} 50 balas para 6 crianças.\\
+  $50 \div 6 = 8$, resto $2$\\
+  \hlm{8 balas} cada e \hlm{sobram 2}.%
+}
+
+\exemp{%
+  \textbf{P3 — quantas vezes cabe?} fita de 96\,cm em pedaços de 8\,cm.\\
+  $96 \div 8 = 12$, resto $0$\\
+  \hlm{12 pedaços} exatos, sem desperdício. \ok\\[4pt]
+  \textbf{P4 — grupos:} 37 alunos em grupos de 5.\\
+  $37 \div 5 = 7$, resto $2$\\
+  \hlm{7 grupos} completos; \hlm{2 alunos} sem grupo.%
+}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Tab}{darkblue}{Tabuada da Divisão}{Quocientes de 1 a 10 — o inverso da multiplicação}
+
+\regra{Cada fato da multiplicação gera \textbf{dois} de divisão: se
+$6 \times 7 = 42$, então $42 \div 6 = 7$ e $42 \div 7 = 6$.}
+
+% Divisões por 1–5
+\vspace{6pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 1}\par\vspace{2pt}
+{\footnotesize
+$1\div1=\mathbf{1}$\\$2\div1=\mathbf{2}$\\$3\div1=\mathbf{3}$\\
+$4\div1=\mathbf{4}$\\$5\div1=\mathbf{5}$\\$6\div1=\mathbf{6}$\\
+$7\div1=\mathbf{7}$\\$8\div1=\mathbf{8}$\\$9\div1=\mathbf{9}$\\
+$10\div1=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 2}\par\vspace{2pt}
+{\footnotesize
+$2\div2=\mathbf{1}$\\$4\div2=\mathbf{2}$\\$6\div2=\mathbf{3}$\\
+$8\div2=\mathbf{4}$\\$10\div2=\mathbf{5}$\\$12\div2=\mathbf{6}$\\
+$14\div2=\mathbf{7}$\\$16\div2=\mathbf{8}$\\$18\div2=\mathbf{9}$\\
+$20\div2=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 3}\par\vspace{2pt}
+{\footnotesize
+$3\div3=\mathbf{1}$\\$6\div3=\mathbf{2}$\\$9\div3=\mathbf{3}$\\
+$12\div3=\mathbf{4}$\\$15\div3=\mathbf{5}$\\$18\div3=\mathbf{6}$\\
+$21\div3=\mathbf{7}$\\$24\div3=\mathbf{8}$\\$27\div3=\mathbf{9}$\\
+$30\div3=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 4}\par\vspace{2pt}
+{\footnotesize
+$4\div4=\mathbf{1}$\\$8\div4=\mathbf{2}$\\$12\div4=\mathbf{3}$\\
+$16\div4=\mathbf{4}$\\$20\div4=\mathbf{5}$\\$24\div4=\mathbf{6}$\\
+$28\div4=\mathbf{7}$\\$32\div4=\mathbf{8}$\\$36\div4=\mathbf{9}$\\
+$40\div4=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 5}\par\vspace{2pt}
+{\footnotesize
+$5\div5=\mathbf{1}$\\$10\div5=\mathbf{2}$\\$15\div5=\mathbf{3}$\\
+$20\div5=\mathbf{4}$\\$25\div5=\mathbf{5}$\\$30\div5=\mathbf{6}$\\
+$35\div5=\mathbf{7}$\\$40\div5=\mathbf{8}$\\$45\div5=\mathbf{9}$\\
+$50\div5=\mathbf{10}$}
+\end{minipage}
+
+% Divisões por 6–10
+\vspace{10pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 6}\par\vspace{2pt}
+{\footnotesize
+$6\div6=\mathbf{1}$\\$12\div6=\mathbf{2}$\\$18\div6=\mathbf{3}$\\
+$24\div6=\mathbf{4}$\\$30\div6=\mathbf{5}$\\$36\div6=\mathbf{6}$\\
+$42\div6=\mathbf{7}$\\$48\div6=\mathbf{8}$\\$54\div6=\mathbf{9}$\\
+$60\div6=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 7}\par\vspace{2pt}
+{\footnotesize
+$7\div7=\mathbf{1}$\\$14\div7=\mathbf{2}$\\$21\div7=\mathbf{3}$\\
+$28\div7=\mathbf{4}$\\$35\div7=\mathbf{5}$\\$42\div7=\mathbf{6}$\\
+$49\div7=\mathbf{7}$\\$56\div7=\mathbf{8}$\\$63\div7=\mathbf{9}$\\
+$70\div7=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 8}\par\vspace{2pt}
+{\footnotesize
+$8\div8=\mathbf{1}$\\$16\div8=\mathbf{2}$\\$24\div8=\mathbf{3}$\\
+$32\div8=\mathbf{4}$\\$40\div8=\mathbf{5}$\\$48\div8=\mathbf{6}$\\
+$56\div8=\mathbf{7}$\\$64\div8=\mathbf{8}$\\$72\div8=\mathbf{9}$\\
+$80\div8=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 9}\par\vspace{2pt}
+{\footnotesize
+$9\div9=\mathbf{1}$\\$18\div9=\mathbf{2}$\\$27\div9=\mathbf{3}$\\
+$36\div9=\mathbf{4}$\\$45\div9=\mathbf{5}$\\$54\div9=\mathbf{6}$\\
+$63\div9=\mathbf{7}$\\$72\div9=\mathbf{8}$\\$81\div9=\mathbf{9}$\\
+$90\div9=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Divisão por 10}\par\vspace{2pt}
+{\footnotesize
+$10\div10=\mathbf{1}$\\$20\div10=\mathbf{2}$\\$30\div10=\mathbf{3}$\\
+$40\div10=\mathbf{4}$\\$50\div10=\mathbf{5}$\\$60\div10=\mathbf{6}$\\
+$70\div10=\mathbf{7}$\\$80\div10=\mathbf{8}$\\$90\div10=\mathbf{9}$\\
+$100\div10=\mathbf{10}$}
+\end{minipage}
+
+\end{document}

@@ -1,0 +1,172 @@
+% ============================================================
+%  Círculo e Circunferência — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{angles, calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  circ/.style={draw=darkblue, line width=1pt},
+  arco/.style={draw=accentblue!70!black, line width=2.4pt, line cap=round},
+  radii/.style={draw=badgepurple!80!black, line width=1pt},
+  raio/.style={draw=badgegreen!55!black, line width=1pt},
+  corda/.style={draw=vered!70!black, line width=1pt},
+  dpt/.style={circle, fill=darkblue, inner sep=1.2pt},
+  amk/.style={line width=0.8pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Círculo e Circunferência}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Círculo e Circunferência}%
+           {Elementos, Comprimento, Área e Setores}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Circ}{badgepurple}{Circunferência e Círculo}{Definição e elementos}
+
+\regra{A \textbf{circunferência} é o conjunto dos pontos equidistantes
+do centro (só o contorno). O \textbf{círculo} é a região limitada por
+ela, incluindo o interior.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.05]
+\coordinate (O) at (0,0); \def\R{1.8}
+\draw[circ] (O) circle (\R);
+\draw[arco] (52:\R) arc (52:112:\R);
+\draw[radii] (200:\R)--(20:\R);          % diâmetro
+\draw[raio] (O)--(-52:\R);               % raio
+\draw[corda] (132:\R)--(172:\R);         % corda
+\node[dpt] at (O){};
+\node[below=1.5pt] at (O){\footnotesize O};
+\node[cl, badgegreen!45!black] at ($(O)+(-52:0.9)+(-142:0.3)$){r};
+\node[cl, badgepurple!70!black] at ($(O)+(20:0.95)+(110:0.3)$){d};
+\node[cl, vered!70!black] at (152:2.25){\footnotesize corda};
+\node[cl, accentblue!55!black] at (82:2.2){\footnotesize arco};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{Centro $O$} — equidista de toda a circunferência\\[2pt]
+  \textbf{Raio $r$} — do centro a um ponto da circunferência\\[2pt]
+  \textbf{Diâmetro $d$} — corda pelo centro; $d = 2r$\\[2pt]
+  \textbf{Corda} — extremos na circunferência (sem passar no centro)\\[2pt]
+  \textbf{Arco} — parte da circunferência entre dois pontos%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{C}{darkblue}{Comprimento da Circunferência}{O ``perímetro'' do círculo}
+
+\formula{$C = 2\pi r = \pi d$}
+
+\small\color{bodytext}%
+Com $\pi \approx 3{,}14159\ldots$ (use $3{,}14$ em aproximações).
+
+\exemp{%
+  \textbf{Raio $r = 5\,$cm:}\\
+  $C = 2\pi\cdot5 = 10\pi \approx \hlm{31{,}4\,\text{cm}}$\\[3pt]
+  \textbf{Diâmetro $d = 14\,$cm:}\\
+  $C = \pi\cdot14 = 14\pi \approx \hlm{43{,}96\,\text{cm}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{A}{darkblue}{Área do Círculo}{Superfície da região interna}
+
+\formula{$A = \pi r^2$}
+
+\exemp{%
+  \textbf{$r = 3\,$m:}\\
+  $A = \pi\cdot3^2 = 9\pi \approx \hlm{28{,}27\,\text{m}^2}$\\[3pt]
+  \textbf{$d = 10\,$cm} → $r = 5$:\\
+  $A = \pi\cdot25 = 25\pi \approx \hlm{78{,}54\,\text{cm}^2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\theta$}{badgegreen}{Arco e Setor Circular}{Proporção com o ângulo central}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\coordinate (O) at (0,0); \def\R{1.7}
+\coordinate (P) at (0:\R); \coordinate (Q) at (62:\R);
+\fill[accentblue!14!white] (O)--(P) arc (0:62:\R)--cycle;
+\draw[circ] (O) circle (\R);
+\draw[radii] (O)--(P); \draw[radii] (O)--(Q);
+\draw[arco] (0:\R) arc (0:62:\R);
+\pic[draw=badgegreen!60!black, amk, angle radius=0.55cm]{angle=P--O--Q};
+\node[cl, badgegreen!45!black] at (31:0.92){$\theta$};
+\node[cl, accentblue!55!black] at (31:2.0){$\ell$};
+\node[dpt] at (O){};
+\end{tikzpicture}
+\end{center}
+
+\regra{Um ângulo central $\theta$ (graus) recorta um setor proporcional
+a $\theta/360°$:}
+\formula{$\ell = \dfrac{\theta}{360°}\cdot2\pi r \qquad
+A_s = \dfrac{\theta}{360°}\cdot\pi r^2$}
+
+\exemp{%
+  \textbf{$r = 6\,$cm, $\theta = 60°$:}\\
+  $\ell = \dfrac{60}{360}\cdot12\pi = 2\pi \approx \hlm{6{,}28\,\text{cm}}$\\[3pt]
+  $A_s = \dfrac{60}{360}\cdot36\pi = 6\pi \approx \hlm{18{,}85\,\text{cm}^2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Coroa}{badgepurple}{Coroa Circular}{Área entre dois círculos concêntricos}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=1.0]
+\coordinate (O) at (0,0); \def\Rb{1.8}\def\rb{1.15}
+\fill[badgepurple!14!white, even odd rule] (O) circle (\Rb) (O) circle (\rb);
+\draw[circ] (O) circle (\Rb);
+\draw[circ] (O) circle (\rb);
+\draw[radii] (O)--(40:\Rb);
+\draw[raio] (O)--(215:\rb);
+\node[cl, badgepurple!70!black] at ($(O)+(40:0.95)+(130:0.32)$){R};
+\node[cl, badgegreen!45!black] at ($(O)+(215:0.6)+(305:0.3)$){r};
+\node[dpt] at (O){};
+\end{tikzpicture}
+\end{center}
+
+\regra{Região entre dois círculos de mesmo centro, raios $R$ (maior) e
+$r$ (menor):}
+\formula{$A_{\text{coroa}} = \pi R^2 - \pi r^2 = \pi(R^2 - r^2)$}
+
+\exemp{%
+  \textbf{Pista circular: $R = 10\,$m, $r = 8\,$m:}\\
+  $A = \pi(10^2 - 8^2) = \pi(100-64)$\\
+  $= 36\pi \approx \hlm{113{,}1\,\text{m}^2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgegreen}{Problemas Contextualizados}{Pizza e ponteiro de relógio}
+
+\exemp{%
+  \textbf{Pizza:} diâmetro $30\,$cm, $8$ fatias iguais.\\
+  $r = 15$; cada fatia: $\theta = 360°\div8 = 45°$\\
+  $A = \dfrac{45}{360}\cdot\pi\cdot15^2 = \dfrac{225\pi}{8} \approx \hlm{88{,}4\,\text{cm}^2}$%
+}
+
+\exemp{%
+  \textbf{Ponteiro:} $10\,$cm percorre $90°$.\\
+  $\ell = \dfrac{90}{360}\cdot2\pi\cdot10 = 5\pi \approx \hlm{15{,}7\,\text{cm}}$%
+}
+
+\end{multicols}
+
+\end{document}

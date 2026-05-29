@@ -1,0 +1,134 @@
+% ============================================================
+%  Expressões Algébricas — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Expressões Algébricas}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Expressões Algébricas}%
+           {Termos, Valor Numérico e Operações}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Variável, constante, termo e coeficiente}
+
+\regra{Uma \textbf{expressão algébrica} combina números e letras
+(variáveis) por operações. Cada parte separada por $+$ ou $-$ é um
+\textbf{termo}.}
+
+\exemp{%
+  \textbf{Variável:} letra de valor desconhecido — $x, y, a$\\[2pt]
+  \textbf{Constante:} número fixo — $3, -7, \tfrac{1}{2}$\\[2pt]
+  \textbf{Coeficiente:} número que multiplica — em $5x^2$ é $5$\\[2pt]
+  \textbf{Parte literal:} a variável com expoente — em $5x^2$ é $x^2$%
+}
+
+\exemp{%
+  $3x + 2$ — binômio (2 termos)\\[2pt]
+  $4x^2 - 3x + 7$ — trinômio (3 termos)\\[2pt]
+  $-\dfrac{2}{5}ab^2$ — monômio (1 termo)%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{V(x)}{darkblue}{Valor Numérico}{Substituir a variável e calcular}
+
+\regra{O \textbf{valor numérico} é o resultado de substituir cada
+variável por um número e calcular pela hierarquia das operações.}
+
+\exemp{%
+  \textbf{$E(x) = 2x^2 - 3x + 1$, \ $x = 2$:}\\
+  $E(2) = 2\cdot2^2 - 3\cdot2 + 1$\\
+  $= 8 - 6 + 1 = \hlm{3}$%
+}
+
+\exemp{%
+  \textbf{$E(a,b) = a^2 + 2ab$, \ $a=3, b=-1$:}\\
+  $= 3^2 + 2\cdot3\cdot(-1)$\\
+  $= 9 - 6 = \hlm{3}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\pm$}{darkblue}{Termos Semelhantes}{Mesma parte literal — podem ser somados}
+
+\regra{Termos são \textbf{semelhantes} quando têm \emph{exatamente} a
+mesma parte literal. Só semelhantes se somam/subtraem — basta operar
+os coeficientes.}
+
+\exemp{%
+  \textbf{Simplificar:}\\
+  $5x^2 - 3x + 2x^2 + 7x - 1$\\
+  $= (5x^2 + 2x^2) + (-3x + 7x) - 1$\\
+  $= \hlm{7x^2 + 4x - 1}$%
+}
+
+\exemp{%
+  \textbf{Soma de polinômios:}\\
+  $(3x^2 + 2x - 5) + (x^2 - 4x + 3)$\\
+  $= \hlm{4x^2 - 2x - 2}$%
+}
+
+\nota{$3x^2$ e $3x$ \textbf{não} são semelhantes — partes literais
+diferentes ($x^2 \neq x$).}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times$}{darkblue}{Multiplicação de Monômios}{Coeficientes $\times$ coef., literais $\times$ literais}
+
+\regra{Multiplique os \textbf{coeficientes} e \textbf{some os
+expoentes} das variáveis iguais.}
+
+\exemp{%
+  $3x^2 \times 4x^3 = \hlm{12x^5}$\\[3pt]
+  $(-2ab^2)(5a^2b) = \hlm{-10a^3b^3}$\\[3pt]
+  $2x \times 3y = \hlm{6xy}$ \;{\footnotesize(variáveis diferentes: justapostas)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dist}{badgegreen}{Propriedade Distributiva}{Expandir e simplificar}
+
+\formula{$a\cdot(b + c) = a\cdot b + a\cdot c$}
+
+\small\color{bodytext}%
+O fator externo multiplica \emph{cada} termo. Atenção ao sinal quando
+ele é negativo.
+
+\exemp{%
+  $3x(2x - 5) = \hlm{6x^2 - 15x}$\\[3pt]
+  \textbf{Fator negativo:}\\
+  $-2(x^2 - 3x + 1) = \hlm{-2x^2 + 6x - 2}$\\[3pt]
+  \textbf{Expandir e simplificar:}\\
+  $2(x + 3) - 3(x - 1) = 2x + 6 - 3x + 3 = \hlm{-x + 9}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Aplic.}{badgegreen}{Exemplos Contextualizados}{Área e perímetro em linguagem algébrica}
+
+\exemp{%
+  \textbf{Área do retângulo:} largura $x$, comprimento $2x+3$.\\
+  $A = x(2x + 3) = 2x^2 + 3x$\\
+  Para $x = 4$: $A = 2(16) + 12 = \hlm{44}$%
+}
+
+\exemp{%
+  \textbf{Perímetro:} triângulo de lados $a$, $a+2$, $2a-1$.\\
+  $P = a + (a+2) + (2a-1) = \hlm{4a + 1}$%
+}
+
+\end{multicols}
+
+\end{document}

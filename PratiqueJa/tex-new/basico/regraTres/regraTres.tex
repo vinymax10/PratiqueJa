@@ -1,0 +1,211 @@
+% ============================================================
+%  Regra de Três e Porcentagem — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Regra de Três e Porcentagem}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Regra de Três e Porcentagem}%
+           {Proporções Simples, Compostas e \%}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Razão, proporção e regra de três}
+
+\regra{Uma \textbf{proporção} é a igualdade entre duas razões:
+$\dfrac{a}{b} = \dfrac{c}{d}$. A regra de três acha um valor
+desconhecido $x$ a partir de três conhecidos.}
+
+\small\color{bodytext}%
+Com \textbf{duas} grandezas: regra de três \textbf{simples}. Com
+\textbf{três ou mais}: \textbf{composta}.
+
+\nota{\textbf{Como identificar o tipo:} ``Se A aumenta, B aumenta ou
+diminui?''\\
+Aumenta → \textbf{direta} $(\downarrow\downarrow)$\\
+Diminui → \textbf{inversa} $(\downarrow\uparrow)$}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times$}{darkblue}{Produto Cruzado}{Método geral de resolução}
+
+\regra{Em $\dfrac{a}{b} = \dfrac{c}{d}$, o \textbf{produto dos
+extremos é igual ao dos meios}:}
+\formula{$a \cdot d = b \cdot c$}
+
+\exemp{%
+  $\dfrac{2}{x} = \dfrac{1}{3} \;\Rightarrow\; 2\cdot3 = 1\cdot x
+   \;\Rightarrow\; x = \hlm{6}$\\[4pt]
+  $\dfrac{x}{6} = \dfrac{2}{4} \;\Rightarrow\; 4x = 2\cdot6
+   \;\Rightarrow\; x = \dfrac{12}{4} = \hlm{3}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dir}{darkblue}{Simples — Proporção Direta}{Grandezas que crescem na mesma razão}
+
+\regra{\textbf{Diretamente proporcionais:} o aumento de uma provoca
+o aumento da outra na mesma razão.}
+
+\SH{Exemplo 1 — horas e peças}
+1 peça em 2 horas; quantas horas para 3 peças? \emph{Mais peças,
+mais horas → direta.}
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c|c}
+\textbf{Horas $\downarrow$} & \textbf{Peças $\downarrow$}\\
+\hline
+2 & 1\\
+\rowcolor{rulebg}$x$ & 3\\
+\end{tabular}
+\end{center}
+\exemp{%
+  $\dfrac{2}{x} = \dfrac{1}{3} \;\Rightarrow\; 1\cdot x = 2\cdot3$\\
+  $x = \hlm{6\text{ horas}}$%
+}
+
+\SH{Exemplo 2 — distância e tempo}
+120\,km em 2 horas; quantos km em 5 horas?
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c|c}
+\textbf{km $\downarrow$} & \textbf{Horas $\downarrow$}\\
+\hline
+120 & 2\\
+\rowcolor{rulebg}$x$ & 5\\
+\end{tabular}
+\end{center}
+\exemp{%
+  $\dfrac{120}{x} = \dfrac{2}{5} \;\Rightarrow\; 2x = 600$\\
+  $x = \hlm{300\text{ km}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Inv}{badgegreen}{Simples — Proporção Inversa}{Grandezas em sentidos opostos}
+
+\regra{\textbf{Inversamente proporcionais:} o aumento de uma provoca
+a diminuição da outra. A fração da grandeza inversa é
+\textbf{invertida} antes do produto cruzado.}
+
+\SH{Exemplo 1 — dias e funcionários}
+2 funcionários em 6 dias; quantos dias com 4? \emph{Mais
+funcionários, menos dias → inversa.}
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c|c}
+\textbf{Dias $\downarrow$} & \textbf{Func. $\uparrow$}\\
+\hline
+6 & 2\\
+\rowcolor{rulebg}$x$ & 4\\
+\end{tabular}
+\end{center}
+\exemp{%
+  Invertendo a fração de Dias:\\
+  $\dfrac{x}{6} = \dfrac{2}{4} \;\Rightarrow\; 4x = 12$\\
+  $x = \hlm{3\text{ dias}}$%
+}
+
+\SH{Exemplo 2 — canos e tempo}
+1 cano enche em 12 horas; e 3 canos iguais?
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c|c}
+\textbf{Horas $\downarrow$} & \textbf{Canos $\uparrow$}\\
+\hline
+12 & 1\\
+\rowcolor{rulebg}$x$ & 3\\
+\end{tabular}
+\end{center}
+\exemp{%
+  $\dfrac{x}{12} = \dfrac{1}{3} \;\Rightarrow\; 3x = 12$\\
+  $x = \hlm{4\text{ horas}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Comp}{badgepurple}{Regra de Três Composta}{Três ou mais grandezas}
+
+\regra{Multiplica-se a fração principal pelo produto das demais.
+\textbf{Diretas} entram com $\frac{v_1}{v_2}$; \textbf{inversas}
+com a fração \textbf{invertida} $\frac{v_2}{v_1}$.}
+
+\SH{Passo a passo}
+\exemp{%
+  \textbf{1.} Identifique a grandeza com $x$ (principal).\\
+  \textbf{2.} Para cada outra: se aumenta, a principal aumenta ou
+  diminui?\\
+  \textbf{3.} Monte $\dfrac{\text{princ.}_1}{x} = \prod$ frações
+  ($\frac{v_1}{v_2}$ diretas, $\frac{v_2}{v_1}$ inversas).\\
+  \textbf{4.} Resolva com produto cruzado.%
+}
+
+\SH{Exemplo — pedreiros, paredes e dias}
+3 pedreiros constroem 2 paredes em 4 dias. Quantos dias 6 pedreiros
+levam para 6 paredes?
+\begin{center}\vspace{1pt}
+\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.25}\small
+\begin{tabular}{c|c|c}
+\textbf{Dias $\downarrow$} & \textbf{Pedr. $\uparrow$} & \textbf{Pared. $\downarrow$}\\
+\hline
+4 & 3 & 2\\
+\rowcolor{rulebg}$x$ & 6 & 6\\
+\end{tabular}
+\end{center}
+\exemp{%
+  Pedreiros \textbf{inversa} → $\tfrac{6}{3}$; \ Paredes
+  \textbf{direta} → $\tfrac{2}{6}$:\\[2pt]
+  $\dfrac{4}{x} = \dfrac{6}{3}\cdot\dfrac{2}{6}
+   = \dfrac{12}{18} = \dfrac{2}{3}$\\
+  $2x = 12 \;\Rightarrow\; x = \hlm{6\text{ dias}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{\%}{badgegreen}{Porcentagem}{Razão de 100, conversões e aplicações}
+
+\regra{\textbf{Porcentagem} é uma razão de denominador $100$:}
+\formula{$p\% = \dfrac{p}{100}$}
+
+\SH{Conversões: fração ↔ decimal ↔ \%}
+\exemp{%
+  $25\% = \dfrac{25}{100} = 0{,}25$ \;→\; $\dfrac{1}{4} = \hlm{25\%}$\\[3pt]
+  $0{,}08 = \dfrac{8}{100} = \hlm{8\%}$\\[3pt]
+  $\dfrac{3}{5} = \dfrac{60}{100} = \hlm{60\%}$%
+}
+
+\SH{Porcentagem de um valor}
+\formula{$\text{resultado} = V \times \dfrac{p}{100}$}
+\exemp{%
+  $30\%$ de R\$\,250: $\;250\times0{,}30 = \hlm{75}$\\[3pt]
+  Que \% é 18 de 120? $\;\dfrac{18}{120}\times100 = \hlm{15\%}$%
+}
+
+\SH{Aumento e desconto}
+\exemp{%
+  \textbf{Aumento} de $p\%$: fator $(1+p/100)$\\
+  R\$\,180 com $+15\%$: $\;180\times1{,}15 = \hlm{207}$\\[3pt]
+  \textbf{Desconto} de $p\%$: fator $(1-p/100)$\\
+  R\$\,350 com $-20\%$: $\;350\times0{,}80 = \hlm{280}$\\[3pt]
+  \textbf{Variação:} R\$\,40 → R\$\,52\\
+  $\dfrac{52-40}{40}\times100 = \hlm{30\%}$ de aumento%
+}
+
+\nota{\textbf{Sucessivos não se somam:} $+20\%$ seguido de $-20\%$
+\emph{não} volta ao original — $1{,}20\times0{,}80 = 0{,}96$, ou seja,
+$4\%$ abaixo.}
+
+\end{multicols}
+
+\end{document}

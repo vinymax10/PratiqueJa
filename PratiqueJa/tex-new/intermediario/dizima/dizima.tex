@@ -1,0 +1,157 @@
+% ============================================================
+%  Dízimas Periódicas — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Dízimas Periódicas}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Dízimas Periódicas}%
+           {Fração Geratriz e o Método Algébrico}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Dízima periódica e números racionais}
+
+\regra{Uma \textbf{dízima periódica} é um decimal cuja parte decimal
+se repete infinitamente. A parte que se repete é o \textbf{período},
+indicado por $\overline{\;\cdot\;}$.}
+
+\small\color{bodytext}%
+Toda dízima periódica é um \textbf{número racional}: pode ser escrita
+como $\frac{a}{b}$. Essa fração é a \textbf{fração geratriz}.
+
+\exemp{%
+  $0{,}333\ldots = 0{,}\overline{3}$\\[2pt]
+  $1{,}272727\ldots = 1{,}\overline{27}$\\[2pt]
+  $0{,}1666\ldots = 0{,}1\overline{6}$%
+}
+
+\SH{Tipos}
+\obs{\textbf{Simples:} a parte decimal contém \emph{só} o período.
+Ex.: $0{,}\overline{6}$, $2{,}\overline{56}$.}
+\obs{\textbf{Composta:} há uma parte \emph{não periódica} antes do
+período. Ex.: $0{,}5\overline{2}$, $1{,}68\overline{74}$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Alg}{darkblue}{Método Algébrico}{De onde vêm as fórmulas}
+
+\regra{Chame a dízima de $x$. Multiplique por potências de $10$ para
+alinhar os períodos e \textbf{subtraia}: a parte periódica se cancela
+e sobra uma equação inteira.}
+
+\SH{Simples — $0{,}\overline{7}$}
+\exemp{%
+  $x = 0{,}777\ldots$\\
+  $10x = 7{,}777\ldots$\\
+  $10x - x = 7 \;\Rightarrow\; 9x = 7$\\
+  $x = \hlm{\dfrac{7}{9}}$%
+}
+\nota{O denominador tem $p$ noves porque
+$10^p x - x = (10^p - 1)x$.}
+
+\SH{Composta — $1{,}5\overline{3}$}
+\exemp{%
+  $x = 1{,}5333\ldots$\\
+  $10x = 15{,}333\ldots$ {\footnotesize(desloca não-periódica)}\\
+  $100x = 153{,}333\ldots$ {\footnotesize(desloca período)}\\
+  $100x - 10x = 138 \;\Rightarrow\; 90x = 138$\\
+  $x = \dfrac{138}{90} = \hlm{\dfrac{23}{15}}$%
+}
+\nota{$10^{n+p} - 10^n$ = $p$ noves seguidos de $n$ zeros.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dica}{badgegreen}{Atalho Mental}{Cálculo rápido da geratriz}
+
+\regra{\textbf{Simples:} numerador $=$ período; denominador $=$ $p$
+noves.\\[3pt]
+\textbf{Composta:} numerador $=$ (número sem vírgula) $-$ (parte não
+periódica); denominador $=$ $p$ noves seguidos de $n$ zeros.}
+
+\SH{Simples}
+\exemp{%
+  $0{,}\overline{3} = \dfrac{3}{9} = \hlm{\dfrac{1}{3}}$\\[3pt]
+  $0{,}\overline{37} = \hlm{\dfrac{37}{99}}$\\[3pt]
+  $0{,}\overline{259} = \dfrac{259}{999} = \hlm{\dfrac{7}{27}}$\\[3pt]
+  $2{,}\overline{56} = 2 + \dfrac{56}{99} = \hlm{\dfrac{254}{99}}$%
+}
+
+\SH{Composta}
+\exemp{%
+  $0{,}5\overline{2} = \dfrac{52 - 5}{90} = \hlm{\dfrac{47}{90}}$\\[3pt]
+  $0{,}1\overline{6} = \dfrac{16 - 1}{90} = \dfrac{15}{90} = \hlm{\dfrac{1}{6}}$\\[3pt]
+  $1{,}68\overline{74} = \dfrac{16874 - 168}{9900} = \hlm{\dfrac{8353}{4950}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{FG}{darkblue}{Fração Geratriz — Simples}{Fórmula e exemplos}
+
+\regra{Período de $p$ algarismos; o denominador $10^p - 1$ é sempre
+$p$ noves $(9, 99, 999\ldots)$:}
+\formula{$x = \dfrac{x\cdot10^{p} - x}{10^{p} - 1}$}
+
+\SH{$0{,}\overline{7}$ \quad $(p=1)$}
+\exemp{%
+  $\dfrac{7{,}\overline{7} - 0{,}\overline{7}}{10 - 1}
+   = \hlm{\dfrac{7}{9}}$ \;{\footnotesize(irredutível)}%
+}
+
+\SH{$0{,}\overline{259}$ \quad $(p=3)$}
+\exemp{%
+  $\dfrac{259{,}\overline{259} - 0{,}\overline{259}}{999}
+   = \dfrac{259}{999}$\\
+  MDC$(259,999) = 37 \;\Rightarrow\; \hlm{\dfrac{7}{27}}$%
+}
+
+\needspace{6\baselineskip}
+\SH{$2{,}\overline{56}$ \quad $(p=2)$}
+\exemp{%
+  $\dfrac{256{,}\overline{56} - 2{,}\overline{56}}{99}
+   = \dfrac{254}{99}$\\
+  MDC$(254,99) = 1 \;\Rightarrow\; \hlm{\dfrac{254}{99}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{FG}{badgepurple}{Fração Geratriz — Composta}{Com parte não periódica}
+
+\regra{$n$ = dígitos \textbf{não periódicos}; $p$ = dígitos
+\textbf{periódicos}. Denominador $10^{n+p} - 10^n$ = $p$ noves e $n$
+zeros:}
+\formula{$x = \dfrac{x\cdot10^{n+p} - x\cdot10^{n}}{10^{n+p} - 10^{n}}$}
+
+\SH{$1{,}5\overline{3}$ \quad $(n=1,\,p=1,\,\text{den.}=90)$}
+\exemp{%
+  $\dfrac{153 - 15}{90} = \dfrac{138}{90}$\\
+  MDC$(138,90) = 6 \;\Rightarrow\; \hlm{\dfrac{23}{15}}$%
+}
+
+\SH{$2{,}74\overline{63}$ \quad $(n=2,\,p=2,\,\text{den.}=9900)$}
+\exemp{%
+  $\dfrac{27463 - 274}{9900} = \dfrac{27189}{9900}$\\
+  MDC$(27189,9900) = 9 \;\Rightarrow\; \hlm{\dfrac{3021}{1100}}$%
+}
+
+\SH{$0{,}5\overline{2}$ \quad $(n=1,\,p=1,\,\text{den.}=90)$}
+\exemp{%
+  $\dfrac{52 - 5}{90} = \dfrac{47}{90}$\\
+  MDC$(47,90) = 1 \;\Rightarrow\; \hlm{\dfrac{47}{90}}$ {\footnotesize(irredut.)}%
+}
+
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,237 @@
+% ============================================================
+%  Subtração de Naturais — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{cancel}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+% atalhos para subtração com empréstimo
+\newcommand{\nv}[1]{\color{darkblue}\scriptstyle #1}   % novo valor (anotação acima)
+\newcommand{\ri}[1]{\color{badgepurple}\cancel{#1}}    % dígito riscado
+
+\setsubject{Subtração de Naturais}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Subtração de Naturais}%
+           {Coluna, Empréstimo e Prova Real}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é subtração?}
+
+\regra{A subtração determina a \textbf{diferença} entre dois naturais.
+Dado $a \geq b$: \ $a - b = c$, onde $c$ é o único natural com
+$b + c = a$.}
+
+\exemp{%
+  \textbf{Minuendo} — de onde se subtrai (em cima)\\[2pt]
+  \textbf{Subtraendo} — o que é subtraído (embaixo)\\[2pt]
+  \textbf{Diferença} — o resultado%
+}
+
+\nota{Nos naturais, a subtração só é possível se o minuendo for
+\textbf{maior ou igual} ao subtraendo. Senão, o resultado não é
+natural.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Col}{darkblue}{Subtração em Coluna}{Números com mais de um dígito}
+
+\regra{Alinhe os algarismos pela \textbf{direita} (maior em cima) e
+subtraia coluna a coluna, da direita para a esquerda.}
+
+\SH{Exemplo — $186 - 53$}
+\exemp{%
+  Unidades: $6-3=3$\\
+  Dezenas: $8-5=3$\\
+  Centenas: $1-0=1$\\[3pt]
+  \centering$\begin{array}{r r r r}
+      & 1 & 8 & 6\\
+    - &   & 5 & 3\\
+    \hline
+      & 1 & 3 & 3
+  \end{array}$\par\vspace{2pt}
+  \raggedright $186 - 53 = \hlm{133}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Emp}{badgegreen}{Empréstimo (Reagrupamento)}{Quando o dígito de cima é menor}
+
+\regra{Se o dígito de cima é \textbf{menor}, empresta-se $1$ da coluna
+à esquerda, somando $\mathbf{10}$ ao dígito atual. O dígito que cedeu
+fica \textbf{riscado}.}
+
+\SH{Exemplo — $332 - 14$}
+\exemp{%
+  Unidades: $2<4$ → empresta; $3$ vira $2$ e $2$ vira $12$:\\[4pt]
+  \centering$\begin{array}{r r r r}
+      &   & {\nv{2}} & {\nv{12}}\\[1pt]
+      & 3 & {\ri{3}} & {\ri{2}}\\
+    - &   & 1 & 4\\
+    \hline
+      & 3 & 1 & 8
+  \end{array}$\par\vspace{2pt}
+  \raggedright {\footnotesize Unidades: $12-4=8$; \ dezenas:
+  $2-1=1$; \ centenas: $3$.}\\[2pt]
+  $332 - 14 = \hlm{318}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prop}{badgegreen}{Propriedades}{Diferenças em relação à adição}
+
+\regra{A subtração \textbf{não é comutativa} nem \textbf{associativa}
+— o que a distingue da adição.}
+
+\exemp{%
+  \textbf{Neutro à direita:} $a-0=a$ → $7-0=7$\\[3pt]
+  \textbf{De si mesmo:} $a-a=0$ → $15-15=0$\\[3pt]
+  \textbf{Não comutativa:} $8-3=5$, mas $3-8$ não é natural\\[3pt]
+  \textbf{Não associativa:} $(9-4)-2 = 3$, mas $9-(4-2) = 7$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{PR}{darkblue}{Prova Real}{Verificando pela adição}
+
+\regra{A subtração é a inversa da adição: se $a-b=c$, então $c+b=a$.
+Some a diferença ao subtraendo — deve dar o minuendo.}
+
+\exemp{%
+  $186-53 = 133$ → $133+53 = \hlm{186}$ \ok\\[3pt]
+  $332-14 = 318$ → $318+14 = \hlm{332}$ \ok%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{0s}{badgepurple}{Empréstimo com Zeros}{Quando a coluna vizinha é zero}
+
+\regra{Se a coluna vizinha é \textbf{zero}, não dá para emprestar dela
+direto: busca-se mais à esquerda e o empréstimo se propaga em
+\textbf{cascata}.}
+
+\SH{Exemplo — $500 - 237$}
+\exemp{%
+  Unidades querem emprestar das dezenas, mas são $0$. As centenas
+  cedem: dezenas viram $10$, cedem $1$ e ficam $9$; unidades viram
+  $10$:\\[4pt]
+  \centering$\begin{array}{r r r r}
+      & {\nv{4}} & {\nv{9}} & {\nv{10}}\\[1pt]
+      & {\ri{5}} & {\ri{0}} & {\ri{0}}\\
+    - & 2 & 3 & 7\\
+    \hline
+      & 2 & 6 & 3
+  \end{array}$\par\vspace{2pt}
+  \raggedright {\footnotesize $10-7=3$; \ $9-3=6$; \ $4-2=2$.}\\[2pt]
+  Prova: $263+237 = \hlm{500}$ \ok%
+}
+
+\nota{\textbf{Regra prática:} ao achar um zero no caminho do
+empréstimo, continue à esquerda até um dígito não-nulo; depois
+redistribua de volta, coluna a coluna.}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Tab}{darkblue}{Tabuada de Subtração}{Subtraendos de 1 a 10 — minuendo − subtraendo = diferença}
+
+\regra{Cada coluna traz a tabuada de um subtraendo; leia linha por
+linha. A diferença vai sempre de $1$ a $10$.}
+
+% Subtraendos 1–5
+\vspace{6pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 1}\par\vspace{2pt}
+{\footnotesize
+$2-1=\mathbf{1}$\\$3-1=\mathbf{2}$\\$4-1=\mathbf{3}$\\
+$5-1=\mathbf{4}$\\$6-1=\mathbf{5}$\\$7-1=\mathbf{6}$\\
+$8-1=\mathbf{7}$\\$9-1=\mathbf{8}$\\$10-1=\mathbf{9}$\\
+$11-1=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 2}\par\vspace{2pt}
+{\footnotesize
+$3-2=\mathbf{1}$\\$4-2=\mathbf{2}$\\$5-2=\mathbf{3}$\\
+$6-2=\mathbf{4}$\\$7-2=\mathbf{5}$\\$8-2=\mathbf{6}$\\
+$9-2=\mathbf{7}$\\$10-2=\mathbf{8}$\\$11-2=\mathbf{9}$\\
+$12-2=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 3}\par\vspace{2pt}
+{\footnotesize
+$4-3=\mathbf{1}$\\$5-3=\mathbf{2}$\\$6-3=\mathbf{3}$\\
+$7-3=\mathbf{4}$\\$8-3=\mathbf{5}$\\$9-3=\mathbf{6}$\\
+$10-3=\mathbf{7}$\\$11-3=\mathbf{8}$\\$12-3=\mathbf{9}$\\
+$13-3=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 4}\par\vspace{2pt}
+{\footnotesize
+$5-4=\mathbf{1}$\\$6-4=\mathbf{2}$\\$7-4=\mathbf{3}$\\
+$8-4=\mathbf{4}$\\$9-4=\mathbf{5}$\\$10-4=\mathbf{6}$\\
+$11-4=\mathbf{7}$\\$12-4=\mathbf{8}$\\$13-4=\mathbf{9}$\\
+$14-4=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 5}\par\vspace{2pt}
+{\footnotesize
+$6-5=\mathbf{1}$\\$7-5=\mathbf{2}$\\$8-5=\mathbf{3}$\\
+$9-5=\mathbf{4}$\\$10-5=\mathbf{5}$\\$11-5=\mathbf{6}$\\
+$12-5=\mathbf{7}$\\$13-5=\mathbf{8}$\\$14-5=\mathbf{9}$\\
+$15-5=\mathbf{10}$}
+\end{minipage}
+
+% Subtraendos 6–10
+\vspace{10pt}\noindent
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 6}\par\vspace{2pt}
+{\footnotesize
+$7-6=\mathbf{1}$\\$8-6=\mathbf{2}$\\$9-6=\mathbf{3}$\\
+$10-6=\mathbf{4}$\\$11-6=\mathbf{5}$\\$12-6=\mathbf{6}$\\
+$13-6=\mathbf{7}$\\$14-6=\mathbf{8}$\\$15-6=\mathbf{9}$\\
+$16-6=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 7}\par\vspace{2pt}
+{\footnotesize
+$8-7=\mathbf{1}$\\$9-7=\mathbf{2}$\\$10-7=\mathbf{3}$\\
+$11-7=\mathbf{4}$\\$12-7=\mathbf{5}$\\$13-7=\mathbf{6}$\\
+$14-7=\mathbf{7}$\\$15-7=\mathbf{8}$\\$16-7=\mathbf{9}$\\
+$17-7=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 8}\par\vspace{2pt}
+{\footnotesize
+$9-8=\mathbf{1}$\\$10-8=\mathbf{2}$\\$11-8=\mathbf{3}$\\
+$12-8=\mathbf{4}$\\$13-8=\mathbf{5}$\\$14-8=\mathbf{6}$\\
+$15-8=\mathbf{7}$\\$16-8=\mathbf{8}$\\$17-8=\mathbf{9}$\\
+$18-8=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 9}\par\vspace{2pt}
+{\footnotesize
+$10-9=\mathbf{1}$\\$11-9=\mathbf{2}$\\$12-9=\mathbf{3}$\\
+$13-9=\mathbf{4}$\\$14-9=\mathbf{5}$\\$15-9=\mathbf{6}$\\
+$16-9=\mathbf{7}$\\$17-9=\mathbf{8}$\\$18-9=\mathbf{9}$\\
+$19-9=\mathbf{10}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.3cm}
+\noindent\textcolor{darkblue}{\bfseries\small Tabuada do 10}\par\vspace{2pt}
+{\footnotesize
+$11-10=\mathbf{1}$\\$12-10=\mathbf{2}$\\$13-10=\mathbf{3}$\\
+$14-10=\mathbf{4}$\\$15-10=\mathbf{5}$\\$16-10=\mathbf{6}$\\
+$17-10=\mathbf{7}$\\$18-10=\mathbf{8}$\\$19-10=\mathbf{9}$\\
+$20-10=\mathbf{10}$}
+\end{minipage}
+
+\end{document}

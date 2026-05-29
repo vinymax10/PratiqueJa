@@ -1,0 +1,122 @@
+% ============================================================
+%  Notação Científica — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Notação Científica}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Notação Científica}%
+           {Forma $a \times 10^n$, Conversão e Operações}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Forma $a\times10^n$ com $1\leq a<10$}
+
+\regra{A \textbf{notação científica} representa números muito grandes
+ou muito pequenos na forma $a \times 10^n$, com $1 \leq a < 10$ e $n$
+inteiro.}
+
+\formula{$a \times 10^{n}, \qquad 1 \leq a < 10$}
+
+\exemp{%
+  $n > 0$ → grande: $3{,}2 \times 10^6 = 3\,200\,000$\\[3pt]
+  $n < 0$ → pequeno: $5 \times 10^{-4} = 0{,}0005$\\[3pt]
+  $n = 0$ → $a \times 10^0 = a$%
+}
+
+\nota{O expoente $n$ indica quantas casas a vírgula se deslocou da
+posição original.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\leftrightarrow$}{darkblue}{Conversão}{Decimal $\leftrightarrow$ notação científica}
+
+\regra{\textbf{Número → científica:} desloque a vírgula até restar
+\textbf{1 algarismo} antes dela. O expoente é o nº de casas
+(esquerda $\Rightarrow +$, direita $\Rightarrow -$).}
+
+\SH{Número grande}
+\exemp{%
+  $186\,000\,000 = \hlm{1{,}86 \times 10^8}$ {\footnotesize(8 casas à esq.)}\\[3pt]
+  $45\,700 = \hlm{4{,}57 \times 10^4}$%
+}
+
+\SH{Número pequeno}
+\exemp{%
+  $0{,}000032 = \hlm{3{,}2 \times 10^{-5}}$ {\footnotesize(5 casas à dir.)}\\[3pt]
+  $0{,}008 = \hlm{8 \times 10^{-3}}$%
+}
+
+\SH{Científica → número}
+\exemp{%
+  $6{,}02 \times 10^{23}$ → 602 seguido de 21 zeros\\[3pt]
+  $9{,}1 \times 10^{-31}$ → $0{,}\underbrace{00\ldots0}_{30}91$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times\,\div$}{darkblue}{Multiplicação e Divisão}{Some ou subtraia os expoentes}
+
+\formula{$(a\times10^m)(b\times10^n) = (a\cdot b)\times10^{m+n}$\\[3pt]
+$(a\times10^m)\div(b\times10^n) = (a\div b)\times10^{m-n}$}
+
+\obs{Se $a\cdot b$ sair de $[1,10)$, ajuste a vírgula e corrija o
+expoente.}
+
+\exemp{%
+  \textbf{Multiplicação:}\\
+  $(3\times10^4)(2\times10^3) = \hlm{6\times10^7}$\\[3pt]
+  \textbf{Com ajuste:}\\
+  $(4\times10^5)(3\times10^2) = 12\times10^7 = \hlm{1{,}2\times10^8}$\\[3pt]
+  \textbf{Divisão:}\\
+  $(9\times10^6)\div(3\times10^2) = \hlm{3\times10^4}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$+\,-$}{darkblue}{Adição e Subtração}{Iguale os expoentes antes de operar}
+
+\regra{Os expoentes devem ser \textbf{iguais}. Ajuste um dos termos,
+opere e simplifique.}
+
+\exemp{%
+  $3{,}2\times10^5 + 4{,}0\times10^4$\\
+  $= 3{,}2\times10^5 + 0{,}4\times10^5$ {\footnotesize(igualando)}\\
+  $= \hlm{3{,}6\times10^5}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\needspace{11\baselineskip}
+\TW{Aplic.}{badgegreen}{Aplicações}{Ciência, tecnologia e ENEM}
+
+\exemp{%
+  \textbf{Distância Terra–Sol:} $1{,}496\times10^{11}\,$m\\[2pt]
+  \textbf{Massa do próton:} $1{,}67\times10^{-27}\,$kg\\[2pt]
+  \textbf{Tamanho de um vírus:} $10^{-7}$ a $10^{-6}\,$m\\[2pt]
+  \textbf{Velocidade da luz:} $3\times10^8\,$m/s%
+}
+
+\SH{Problema — ENEM}
+\exemp{%
+  Uma colônia de bactérias dobra a cada hora. Iniciando com
+  $5\times10^3$, após 4 horas:\\[2pt]
+  $5\times10^3 \times 2^4 = 5\times10^3 \times 16$\\
+  $= 80\times10^3 = \hlm{8\times10^4}$ bactérias%
+}
+
+\end{multicols}
+
+\end{document}

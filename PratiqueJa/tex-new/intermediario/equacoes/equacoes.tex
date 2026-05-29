@@ -1,0 +1,221 @@
+% ============================================================
+%  Equações e Inequações do 1º Grau — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Equações e Inequações do 1º Grau}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Equações do 1º Grau}%
+           {Resolução, Casos Especiais e Inequações}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Igualdade com incógnita, grau e solução}
+
+\regra{Uma \textbf{equação} é uma igualdade com \textbf{incógnitas}.
+O valor que torna a igualdade verdadeira é a \textbf{raiz} (solução).
+O \textbf{grau} é o maior expoente da incógnita.}
+
+\small\color{bodytext}%
+No 1º grau a incógnita tem expoente $1$. Forma geral:
+
+\formula{$ax + b = 0 \quad (a \neq 0) \;\Rightarrow\; x = -\dfrac{b}{a}$}
+
+\exemp{%
+  $2x - 3 = 7$ \qquad $6x - 1 = 4$\\[2pt]
+  $2 - 5x = 9$ \qquad $3x - x - 5 = 3$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Met}{darkblue}{Como Resolver}{Transposição e roteiro}
+
+\regra{Isole a incógnita: termos com $x$ de um lado, constantes do
+outro. Ao \textbf{trocar de lado}, inverta o operador. Ao final,
+\textbf{verifique} substituindo a raiz.}
+
+\SH{Regras de transposição}
+\exemp{%
+  $+$ vira $-$ \qquad $-$ vira $+$\\[2pt]
+  $\times$ vira $\div$ \qquad $\div$ vira $\times$%
+}
+
+\SH{Roteiro}
+\obs{\textbf{1.} Expandir parênteses. \;\textbf{2.} Transpor: $x$ à
+esquerda, constantes à direita. \;\textbf{3.} Somar semelhantes.
+\;\textbf{4.} Dividir pelo coeficiente de $x$. \;\textbf{5.}
+Verificar.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgegreen}{Exemplos Básicos}{Incógnita em um lado, com verificação}
+
+\exemp{%
+  $4x - 6 = 2$\\
+  $4x = 2 + 6 = 8$ \;{\footnotesize($-6$ vira $+6$)}\\
+  $x = \dfrac{8}{4} = \hlm{2}$\\
+  {\footnotesize Verif.: $4\cdot2 - 6 = 2$ \ok}%
+}
+
+\exemp{%
+  $3x - x - 5 = 3$\\
+  $2x = 3 + 5 = 8$\\
+  $x = \hlm{4}$\\
+  {\footnotesize Verif.: $12 - 4 - 5 = 3$ \ok}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{2x}{darkblue}{Incógnita nos Dois Lados}{Juntar os $x$ do mesmo lado}
+
+\regra{Transporte todos os termos com $x$ para a esquerda e as
+constantes para a direita, depois simplifique.}
+
+\exemp{%
+  $3x + 2 = x + 8$\\
+  $3x - x = 8 - 2 \;\Rightarrow\; 2x = 6$\\
+  $x = \hlm{3}$ \quad{\footnotesize($11 = 11$ \ok)}%
+}
+
+\exemp{%
+  $5x - 4 = 2x + 11$\\
+  $5x - 2x = 11 + 4 \;\Rightarrow\; 3x = 15$\\
+  $x = \hlm{5}$ \quad{\footnotesize($21 = 21$ \ok)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$(\,)$}{darkblue}{Equações com Parênteses}{Expandir antes de transpor}
+
+\regra{Com parênteses, \textbf{expanda primeiro} (distributiva); só
+então transponha.}
+
+\exemp{%
+  $2(x + 3) = 10$\\
+  $2x + 6 = 10 \;\Rightarrow\; 2x = 4$\\
+  $x = \hlm{2}$ \quad{\footnotesize($2\cdot5 = 10$ \ok)}%
+}
+
+\exemp{%
+  $3(2x - 1) = 2(x + 4)$\\
+  $6x - 3 = 2x + 8$\\
+  $4x = 11 \;\Rightarrow\; x = \hlm{\dfrac{11}{4}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Frac}{badgepurple}{Equações com Frações}{Eliminar denominadores pelo MMC}
+
+\regra{Multiplique \textbf{todos os termos} pelo MMC dos
+denominadores para eliminar as frações.}
+
+\exemp{%
+  $\dfrac{x}{2} + 1 = 3$ \;{\footnotesize(MMC $=2$)}\\
+  $x + 2 = 6 \;\Rightarrow\; x = \hlm{4}$\\
+  {\footnotesize Verif.: $\frac{4}{2}+1 = 3$ \ok}%
+}
+
+\exemp{%
+  $\dfrac{2x - 1}{3} = 5$ \;{\footnotesize(MMC $=3$)}\\
+  $2x - 1 = 15 \;\Rightarrow\; 2x = 16$\\
+  $x = \hlm{8}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{!}{vered}{Casos Especiais}{Sem solução e infinitas soluções}
+
+\regra{Se a incógnita \textbf{desaparece}, analise a igualdade: se
+for \textbf{falsa}, não há solução; se \textbf{verdadeira}, há
+infinitas.}
+
+\exemp{%
+  \textbf{Impossível:}\\
+  $2x + 3 = 2x + 7 \;\Rightarrow\; 0 = 4$ \nok\\
+  Não tem solução: $\hlm{S = \emptyset}$\\[3pt]
+  \textbf{Identidade:}\\
+  $3(x+1) = 3x + 3 \;\Rightarrow\; 0 = 0$ \ok\\
+  Infinitas soluções: $\hlm{S = \mathbb{R}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prob}{badgegreen}{Problema Contextualizado}{Montar e resolver a partir do enunciado}
+
+\regra{\textbf{Estratégia:} (1) defina a incógnita; (2) traduza o
+enunciado; (3) resolva; (4) interprete.}
+
+\exemp{%
+  \textbf{P1:} a soma de dois consecutivos é $15$.\\
+  $x + (x+1) = 15 \;\Rightarrow\; 2x + 1 = 15$\\
+  $2x = 14 \;\Rightarrow\; x = 7$\\
+  $\hlm{\text{os números são 7 e 8}}$%
+}
+
+\exemp{%
+  \textbf{P2:} um número $+5$ é o dobro dele $-3$.\\
+  $x + 5 = 2x - 3$\\
+  $5 + 3 = 2x - x \;\Rightarrow\; x = \hlm{8}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ineq}{badgepurple}{Inequações do 1º Grau}{Desigualdades e intervalo solução}
+
+\regra{Uma \textbf{inequação} é uma desigualdade com incógnita. Sua
+solução é um \textbf{intervalo} na reta real, não um ponto.}
+
+\SH{Símbolos}
+\obs{$<$ menor \quad $>$ maior \quad $\leq$ menor/igual \quad
+$\geq$ maior/igual}
+
+\SH{Regra de inversão}
+\regra{Ao multiplicar ou dividir por um número \textbf{negativo}, o
+sentido da desigualdade \textbf{inverte}: $a < b \Rightarrow -a > -b$.
+Somar/subtrair nunca muda o sentido.}
+
+\exemp{%
+  $3x - 2 > 7 \;\Rightarrow\; 3x > 9$\\
+  $\hlm{x > 3} \;\Rightarrow\; x \in (3,\,+\infty)$\\[3pt]
+  $-2x + 1 \leq 5 \;\Rightarrow\; -2x \leq 4$\\
+  $\div(-2)$ inverte: $\hlm{x \geq -2} \;\Rightarrow\; x \in [-2,\,+\infty)$\\[3pt]
+  $5 - 3x \leq 2x + 10 \;\Rightarrow\; -5x \leq 5$\\
+  $\div(-5)$ inverte: $\hlm{x \geq -1}$%
+}
+
+\SH{Notação de intervalo}
+\begin{center}\vspace{1pt}
+\begin{tikzpicture}[scale=1]
+% reta superior: fechado [-2, +inf)
+\draw[line width=1pt, gray!50] (-2.3,0.45) -- (2.5,0.45);
+\foreach \x in {-2,-1,0,1,2}{\draw[gray!50] (\x,0.38)--(\x,0.52);}
+\draw[line width=2pt, darkblue] (-1,0.45) -- (2.5,0.45);
+\fill[darkblue] (-1,0.45) circle (2.4pt);
+\node[font=\scriptsize, below] at (-1,0.32){$-2$};
+\node[font=\scriptsize, darkblue] at (1.9,0.78){$[-2,+\infty)$};
+% reta inferior: aberto (3, +inf) -> aqui ilustro (a) aberto
+\draw[line width=1pt, gray!50] (-2.3,-0.55) -- (2.5,-0.55);
+\foreach \x in {-2,-1,0,1,2}{\draw[gray!50] (\x,-0.62)--(\x,-0.48);}
+\draw[line width=2pt, badgegreen!60!black] (0,-0.55) -- (2.5,-0.55);
+\draw[badgegreen!60!black, line width=1.5pt, fill=white] (0,-0.55) circle (2.4pt);
+\node[font=\scriptsize, below] at (0,-0.68){$a$};
+\node[font=\scriptsize, badgegreen!50!black] at (1.7,-0.25){$(a,+\infty)$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Bolinha \textbf{cheia} / colchete $[\,]$ = extremo \emph{incluído}
+$(\leq,\geq)$. Bolinha \textbf{vazia} / parêntese $(\,)$ = extremo
+\emph{excluído} $(<,>)$.}
+
+\end{multicols}
+
+\end{document}
