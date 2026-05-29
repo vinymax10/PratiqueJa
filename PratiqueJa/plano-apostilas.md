@@ -261,24 +261,26 @@ Instalada pelo usuário nas fontes de usuário (não sistema). Se o PDF sair com
 - [x] pitagoras
 - [x] poligonosRegulares
 - [x] potenciacao
-- [ ] radiciacao
-- [ ] razoesTrigonometricas
-- [ ] semelhancaAngulos
-- [ ] semelhancaTriangulos
-- [ ] somaAngulosTriangulo
+- [x] radiciacao
+- [x] razoesTrigonometricas
+- [x] semelhancaAngulos
+- [x] semelhancaTriangulos
+- [x] somaAngulosTriangulo
+
+✅ **Módulo Intermediário completo!**
 
 ### Avançado
 
-- [ ] combinatoria
-- [ ] equacaoSegundoGrau
-- [ ] estatistica
-- [ ] funcaoAfim
-- [ ] funcaoExponencial
-- [ ] funcaoLogaritmica
-- [ ] funcaoModular
-- [ ] funcaoQuadratica
-- [ ] funcoes
-- [ ] funcoesTrigonometricas
+- [x] combinatoria
+- [x] equacaoSegundoGrau
+- [x] estatistica
+- [x] funcaoAfim
+- [x] funcaoExponencial
+- [x] funcaoLogaritmica
+- [x] funcaoModular
+- [x] funcaoQuadratica
+- [x] funcoes
+- [x] funcoesTrigonometricas
 - [ ] geometriaAnalitica
 - [ ] geometriaEspacial
 - [ ] inequacoes2grau

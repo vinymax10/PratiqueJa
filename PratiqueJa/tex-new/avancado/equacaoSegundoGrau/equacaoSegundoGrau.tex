@@ -1,0 +1,136 @@
+% ============================================================
+%  Equação do 2º Grau — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Equação do 2º Grau}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Equação do 2º Grau}%
+           {Bhaskara, Equações Incompletas e Relações de Vieta}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é uma equação do 2º grau?}
+
+\regra{Toda equação que pode ser escrita na forma
+$ax^2 + bx + c = 0$, com $a,b,c \in \mathbb{R}$ e $\mathbf{a \neq 0}$.}
+
+\obs{$a$ = coeficiente \textbf{quadrático}; $b$ = coeficiente
+\textbf{linear}; $c$ = termo \textbf{independente}. As \textbf{raízes}
+são os valores de $x$ que satisfazem a igualdade — no máximo duas reais.}
+
+\nota{O \emph{gráfico}, o \emph{vértice} e o comportamento de
+$f(x)=ax^2+bx+c$ pertencem ao assunto \emph{Função Quadrática}. Aqui o
+foco é \textbf{encontrar as raízes}.}
+
+\exemp{%
+  $2x^2 - 7x + 3 = 0$\\
+  $a = 2,\ b = -7,\ c = 3$\\[2pt]
+  Equação \textbf{completa} ($a,b,c \neq 0$).%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\Delta$}{darkblue}{Fórmula de Bhaskara}{Raízes pelo discriminante}
+
+\regra{As raízes vêm da \textbf{Fórmula de Bhaskara}, que usa o
+\textbf{discriminante} $\Delta$:}
+\formula{$\Delta = b^2 - 4ac \qquad x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$}
+
+\nota{\textbf{Natureza das raízes:}\\
+$\Delta > 0$ → duas raízes reais distintas;\\
+$\Delta = 0$ → uma raiz real (dupla);\\
+$\Delta < 0$ → nenhuma raiz real (complexas).}
+
+\SH{Exemplo — resolução completa}
+\exemp{%
+  $2x^2 - 7x + 3 = 0$ \ ($a=2,\ b=-7,\ c=3$)\\[2pt]
+  \textbf{1)} $\Delta = (-7)^2 - 4\cdot2\cdot3 = 49 - 24 = 25$\\[2pt]
+  \textbf{2)} $x = \dfrac{7 \pm \sqrt{25}}{4} = \dfrac{7 \pm 5}{4}$\\[2pt]
+  $x_1 = \dfrac{12}{4} = \hlm{3} \qquad x_2 = \dfrac{2}{4} = \hlm{\tfrac12}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Esp}{badgegreen}{Equações Incompletas}{Atalhos quando $b=0$ ou $c=0$}
+
+\regra{Quando $b=0$ ou $c=0$ há atalhos mais rápidos que Bhaskara.}
+
+\SH{Caso $b=0$: \ $ax^2 + c = 0$}
+\exemp{%
+  Isola $x^2$: $x^2 = -\dfrac{c}{a} \Rightarrow x = \pm\sqrt{-\tfrac{c}{a}}$\\[2pt]
+  $2x^2 - 8 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \hlm{\pm 2}$%
+}
+
+\SH{Caso $c=0$: \ $ax^2 + bx = 0$}
+\exemp{%
+  Fatora $x$: $x(ax+b) = 0$\\[2pt]
+  $3x^2 - 6x = 0 \Rightarrow x(3x-6)=0$\\
+  $x_1 = \hlm{0} \quad x_2 = \hlm{2}$%
+}
+
+\obs{O termo $c$ é o valor da função em $x=0$: $f(0) = c$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{S/P}{badgepurple}{Relações de Vieta}{Soma e produto das raízes}
+
+\regra{Sem calcular Bhaskara, as raízes $x_1, x_2$ satisfazem:}
+\formula{$x_1 + x_2 = -\dfrac{b}{a} \qquad x_1 \cdot x_2 = \dfrac{c}{a}$}
+
+\exemp{%
+  \textbf{Verificar} ($2x^2-7x+3=0$, $x_1=3,\ x_2=\tfrac12$):\\
+  soma $= 3 + \tfrac12 = \tfrac72 = \dfrac{-b}{a}$ \ok\\
+  produto $= 3\cdot\tfrac12 = \tfrac32 = \dfrac{c}{a}$ \ok%
+}
+
+\exemp{%
+  \textbf{Montar} equação com raízes $2$ e $5$:\\
+  soma $=7$, produto $=10$\\
+  $x^2 - (x_1{+}x_2)x + x_1 x_2 = 0$\\
+  $\Rightarrow \hlm{x^2 - 7x + 10 = 0}$%
+}
+
+\obs{\textbf{Forma fatorada} (se $\Delta \geq 0$):
+$a(x-x_1)(x-x_2) = 0$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Prob}{badgegreen}{Problemas Contextualizados}{Aplicação em situações reais}
+
+\regra{\textbf{Estratégia:} (1) identificar $a,b,c$; (2) calcular
+$\Delta$; (3) aplicar Bhaskara; (4) interpretar as raízes no contexto.}
+
+\SH{P1 — Área de um retângulo}
+\exemp{%
+  Comprimento $3$ maior que a largura, área $40\,\text{cm}^2$:\\
+  $x(x+3) = 40 \Rightarrow x^2 + 3x - 40 = 0$\\
+  $\Delta = 9 + 160 = 169$\\
+  $x = \dfrac{-3 \pm 13}{2} \Rightarrow x_1 = 5,\ x_2 = -8$ (descartado)\\
+  \hlm{Largura $5$\,cm, comprimento $8$\,cm}%
+}
+
+\SH{P2 — Produto de consecutivos}
+\exemp{%
+  Dois inteiros consecutivos com produto $182$:\\
+  $n(n+1) = 182 \Rightarrow n^2 + n - 182 = 0$\\
+  $\Delta = 1 + 728 = 729 = 27^2$\\
+  $n = \dfrac{-1 + 27}{2} = 13$\\
+  \hlm{Os números são $13$ e $14$}%
+}
+
+\end{multicols}
+
+\end{document}

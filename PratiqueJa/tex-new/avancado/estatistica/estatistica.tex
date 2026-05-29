@@ -1,0 +1,184 @@
+% ============================================================
+%  Estatística — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Estatística}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Estatística}%
+           {Médias, Dispersão, Frequências e Gráficos}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Conceitos Iniciais}{População, amostra e variáveis}
+
+\regra{A \textbf{estatística} organiza e interpreta dados para apoiar
+decisões. \textbf{População} = conjunto total; \textbf{amostra} =
+subconjunto observado.}
+
+\SH{Tipos de variável}
+\obs{%
+  \textbf{Quantitativa discreta:} inteiros contáveis (nº de filhos).\\[2pt]
+  \textbf{Quantitativa contínua:} qualquer valor de um intervalo (altura).\\[2pt]
+  \textbf{Qualitativa nominal:} categorias sem ordem (cor dos olhos).\\[2pt]
+  \textbf{Qualitativa ordinal:} categorias ordenadas (escolaridade).%
+}
+
+\exemp{%
+  ``nº de gols'' → \hlm{discreta}\\[2pt]
+  ``tempo em segundos'' → \hlm{contínua}\\[2pt]
+  ``satisfação: ruim$<$\,\ldots\,$<$ótimo'' → \hlm{qualitativa ordinal}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Méd}{darkblue}{Tendência Central}{Média, mediana e moda}
+
+\regra{Indicam um \textbf{valor representativo} do conjunto.}
+
+\SH{Média simples e ponderada}
+\formula{$\bar{x} = \dfrac{x_1 + x_2 + \cdots + x_n}{n}$\\[6pt]
+$\bar{x}_p = \dfrac{x_1 w_1 + \cdots + x_n w_n}{w_1 + \cdots + w_n}$}
+
+\SH{Mediana (Me) — valor central do rol}
+\obs{$n$ \textbf{ímpar}: elemento da posição $\frac{n+1}{2}$.\\
+$n$ \textbf{par}: média das posições $\frac{n}{2}$ e $\frac{n}{2}+1$.}
+
+\SH{Moda (Mo) — valor mais frequente}
+\obs{Pode ser \textbf{amodal} (sem moda), \textbf{unimodal},
+\textbf{bimodal} etc.}
+
+\exemp{%
+  \textbf{Notas} $5,6,6,7,10$:\\
+  $\bar{x} = \dfrac{34}{5} = \hlm{6{,}8}$\\
+  $n=5$ (ímpar) → posição $3$ → Me $= \hlm{6}$ \quad Mo $= \hlm{6}$%
+}
+\exemp{%
+  \textbf{Ponderada} $7(\times2),\,5(\times3),\,8(\times5)$:\\
+  $\bar{x}_p = \dfrac{14+15+40}{10} = \hlm{6{,}9}$%
+}
+\nota{A média sofre com \textbf{outliers}; a mediana é mais robusta;
+a moda indica o valor mais típico.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Dis}{badgegreen}{Medidas de Dispersão}{Amplitude, variância e desvio padrão}
+
+\regra{Quantificam o quanto os dados se \textbf{afastam} do centro
+(duas amostras de mesma média podem diferir muito).}
+
+\formula{$A = x_{\max} - x_{\min}$}
+\formula{$\sigma^2 = \dfrac{\sum (x_i - \bar{x})^2}{n} \qquad \sigma = \sqrt{\sigma^2}$}
+\obs{O desvio padrão $\sigma$ tem a \textbf{mesma unidade} dos dados.}
+
+\exemp{%
+  \textbf{Notas} $4,6,7,8,10$: \ $\bar{x} = \dfrac{35}{5} = 7$\\
+  $A = 10 - 4 = 6$\\
+  desvios: $-3,\,-1,\,0,\,+1,\,+3$\\
+  $\sigma^2 = \dfrac{9+1+0+1+9}{5} = \dfrac{20}{5} = 4$\\
+  $\sigma = \sqrt{4} = \hlm{2}$%
+}
+\nota{$\sigma$ pequeno → dados concentrados; $\sigma$ grande →
+dados espalhados.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Fr}{badgepurple}{Distribuição de Frequências}{Absoluta, relativa e acumulada}
+
+\regra{Muitos dados são organizados em \textbf{classes} $[a,b)$, que
+agrupam os valores com $a \leq x < b$.}
+
+\obs{$f_i$ = freq.\ \textbf{absoluta} (qtd.\ na classe);
+$fr_i = f_i/n$ = \textbf{relativa};
+$F_i = f_1 + \cdots + f_i$ = \textbf{acumulada}.}
+
+\begin{center}\vspace{2pt}
+\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.25}\footnotesize
+\begin{tabular}{cccc}
+\rowcolor{darkblue}
+\textcolor{white}{\textbf{Classe}} & \textcolor{white}{$\mathbf{f_i}$} &
+\textcolor{white}{$\mathbf{fr_i}$} & \textcolor{white}{$\mathbf{F_i}$}\\
+$[0,2)$  & 1 & 0,10 & 1\\
+\rowcolor{exbg}
+$[2,4)$  & 2 & 0,20 & 3\\
+$[4,6)$  & 4 & 0,40 & 7\\
+\rowcolor{exbg}
+$[6,8)$  & 2 & 0,20 & 9\\
+$[8,10]$ & 1 & 0,10 & 10\\
+\rowcolor{rulebg}
+\textbf{Total} & \textbf{10} & \textbf{1,00} & —\\
+\end{tabular}
+\end{center}
+
+\nota{$F_3 = 7$: sete alunos com nota abaixo de $6$. $fr_3 = 0{,}40$:
+$40\%$ dos alunos na classe $[4,6)$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Grá}{darkblue}{Gráficos Estatísticos}{Histograma, polígono e boxplot}
+
+\SH{Histograma e polígono de frequências}
+\obs{\textbf{Histograma:} barras \emph{justapostas}, uma por classe.
+\textbf{Polígono:} liga os pontos médios dos topos das barras.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.42cm,y=0.5cm]
+\foreach \i/\h in {0/1,1/2,2/4,3/2,4/1}{
+  \fill[accentblue!28!white] (\i*2,0) rectangle (\i*2+2,\h);
+  \draw[darkblue,line width=0.8pt] (\i*2,0) rectangle (\i*2+2,\h);
+}
+\draw[line width=1pt] (0,0)--(10.4,0);
+\draw[line width=1pt] (0,0)--(0,4.7);
+\foreach \x in {0,2,4,6,8,10} \node[font=\scriptsize] at (\x,-0.5){\x};
+\foreach \y in {1,2,3,4} \node[font=\scriptsize] at (-0.7,\y){\y};
+\draw[vered,line width=1pt] (1,1)--(3,2)--(5,4)--(7,2)--(9,1);
+\foreach \p in {(1,1),(3,2),(5,4),(7,2),(9,1)} \fill[vered] \p circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\SH{Boxplot (diagrama de caixa)}
+\obs{Resume a distribuição em \textbf{cinco valores}: mínimo, $Q_1$,
+mediana $(Q_2)$, $Q_3$ e máximo. A caixa vai de $Q_1$ a $Q_3$; os
+\textbf{bigodes} vão ao mín.\ e ao máx.\\[2pt]
+Ex.: $2,4,5,6,7,8,9$ → inferior $\{2,4,5\}\Rightarrow Q_1{=}4$;
+superior $\{7,8,9\}\Rightarrow Q_3{=}8$.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+\draw[line width=0.8pt] (0,-0.15)--(10.3,-0.15);
+\foreach \x in {0,2,4,6,8,10} {\draw (\x,-0.15)--(\x,-0.35); \node[font=\scriptsize] at (\x,-0.7){\x};}
+\draw[darkblue,line width=1pt] (2,0.7)--(4,0.7);
+\draw[darkblue,line width=1pt] (8,0.7)--(9,0.7);
+\draw[darkblue,line width=1pt] (2,0.4)--(2,1.0);
+\draw[darkblue,line width=1pt] (9,0.4)--(9,1.0);
+\fill[accentblue!25!white] (4,0.2) rectangle (8,1.2);
+\draw[darkblue,line width=1pt] (4,0.2) rectangle (8,1.2);
+\draw[vered,line width=1.4pt] (6,0.2)--(6,1.2);
+\node[font=\scriptsize] at (2,1.55){Mín};
+\node[font=\scriptsize,darkblue] at (4,1.55){$Q_1$};
+\node[font=\scriptsize,vered] at (6,1.55){$Q_2$};
+\node[font=\scriptsize,darkblue] at (8,1.55){$Q_3$};
+\node[font=\scriptsize] at (9,1.55){Máx};
+\end{tikzpicture}
+\end{center}
+
+\nota{\textbf{IQR} $= Q_3 - Q_1$. Valores fora de
+$[\,Q_1 - 1{,}5\,\text{IQR},\ Q_3 + 1{,}5\,\text{IQR}\,]$ são
+\textbf{outliers}.}
+
+\end{multicols}
+
+\end{document}

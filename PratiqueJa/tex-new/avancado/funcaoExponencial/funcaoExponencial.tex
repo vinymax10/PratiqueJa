@@ -1,0 +1,148 @@
+% ============================================================
+%  Função Exponencial — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Função Exponencial}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Função Exponencial}%
+           {Gráfico, Número de Euler, Equações e Aplicações}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é a função exponencial?}
+
+\regra{Definida por $f(x) = a^x$, onde a \textbf{base} $a$ é constante
+com $\mathbf{a > 0}$ e $\mathbf{a \neq 1}$, e o \textbf{expoente} $x$ é a
+variável.}
+
+\obs{Domínio $\mathbb{R}$; imagem $(0,+\infty)$ — nunca é zero nem
+negativa. $a\neq1$ porque $1^x=1$ (seria constante); $a>0$ garante
+$a^x$ real.}
+
+\exemp{%
+  $f(x)=2^x$ {\footnotesize(crescente)}:\\
+  $f(3)=8$ \quad $f(-2)=\tfrac14$ \quad $f(0)=1$%
+}
+\exemp{%
+  $f(x)=\left(\tfrac12\right)^x$ {\footnotesize(decrescente)}:\\
+  $f(3)=\tfrac18$ \quad $f(-2)=4$ \quad
+  {\footnotesize$\left(\tfrac12\right)^x=2^{-x}$}%
+}
+\nota{$a^0 = 1$ para qualquer base → o gráfico passa por $(0,1)$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Graf}{darkblue}{Gráfico}{Crescimento, decrescimento e assíntota}
+
+\regra{$a>1$ → \textbf{crescente}; \ $0<a<1$ → \textbf{decrescente}.
+Sempre passa por $(0,1)$; o eixo $x$ é \textbf{assíntota horizontal}.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.7cm,y=0.45cm,font=\scriptsize,>=stealth]
+\draw[->,line width=0.7pt] (-3,0)--(3,0) node[right]{$x$};
+\draw[->,line width=0.7pt] (0,-0.4)--(0,6.3) node[above]{$y$};
+\draw[vered,line width=1.1pt,domain=-2.55:2.55,samples=60,smooth] plot (\x,{2^(-\x)});
+\draw[darkblue,line width=1.1pt,domain=-2.55:2.55,samples=60,smooth] plot (\x,{2^(\x)});
+\fill (0,1) circle (2.4pt);
+\draw[graycolor,line width=0.4pt] (-0.07,1.25)--(-0.28,2.35);
+\node[anchor=east,font=\scriptsize] at (-0.28,2.5){$(0,1)$};
+\node[darkblue,anchor=west] at (2.05,3.6){$2^x$};
+\node[vered,anchor=east] at (-2.05,3.6){$\left(\tfrac12\right)^x$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{$a>1$:} maior $x$, maior $f$; \ $x\to-\infty \Rightarrow f\to 0^+$\\[2pt]
+  \textbf{$0<a<1$:} maior $x$, menor $f$; \ $x\to+\infty \Rightarrow f\to 0^+$%
+}
+\obs{A imagem é sempre $(0,+\infty)$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{e}{badgegreen}{Número de Euler}{A base natural das exponenciais}
+
+\regra{Base da \textbf{exponencial natural}:}
+\formula{$\mathrm{e} = \displaystyle\lim_{n\to\infty}\!\left(1+\tfrac1n\right)^n \approx 2{,}71828\ldots$}
+\obs{$f(x)=e^x$ é a exponencial mais importante (crescimento contínuo,
+física, probabilidade). Sua derivada é ela mesma.}
+
+\exemp{%
+  $e^1 \approx 2{,}718$ \quad $e^2 \approx 7{,}389$ \quad $e^0 = 1$\\[2pt]
+  $e^{-1} \approx 0{,}368$ \quad $\ln(\mathrm{e}) = 1$
+  {\footnotesize($\ln$ = log de base $e$)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Eq}{badgepurple}{Equações Exponenciais}{Incógnita no expoente}
+
+\regra{Estratégia: \textbf{igualar as bases} — se $a^{f(x)} = a^{g(x)}$,
+então $f(x) = g(x)$. Se as bases não se igualam, aplica-se
+\textbf{logaritmo}.}
+
+\SH{Tipo 1 — igualar bases}
+\exemp{%
+  $2^x = 32 = 2^5 \Rightarrow \hlm{x=5}$\\[2pt]
+  $3^{2x-1} = 3^3 \Rightarrow 2x-1=3 \Rightarrow \hlm{x=2}$\\[2pt]
+  $4^x = 8$: \ $2^{2x}=2^3 \Rightarrow \hlm{x=\tfrac32}$\\[2pt]
+  $9^x = \tfrac1{27}$: \ $3^{2x}=3^{-3} \Rightarrow \hlm{x=-\tfrac32}$%
+}
+
+\SH{Tipo 2 — bases diferentes (logaritmo)}
+\exemp{%
+  $2^x = 5$: \ $x\log 2 = \log 5$\\
+  $x = \dfrac{\log 5}{\log 2} \approx \hlm{2{,}32}$%
+}
+
+\SH{Tipo 3 — quadrática (substituição)}
+\exemp{%
+  $4^x - 5\cdot2^x + 4 = 0$. Seja $y = 2^x$:\\
+  $y^2 - 5y + 4 = 0 \Rightarrow y=1$ ou $y=4$\\
+  $2^x=1 \Rightarrow x=0$; \ $2^x=4 \Rightarrow x=2$\\
+  \hlm{$x=0$ e $x=2$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Apl}{darkblue}{Aplicações}{Crescimento, decaimento e juros compostos}
+
+\regra{Modela grandezas que mudam por um \textbf{fator multiplicativo
+constante} a cada intervalo de tempo.}
+
+\SH{Crescimento populacional}
+\exemp{%
+  Bactérias dobram a cada hora, início $500$:\\
+  $N(t) = 500\cdot2^t \Rightarrow N(6) = 500\cdot64 = \hlm{32\,000}$%
+}
+
+\SH{Decaimento radioativo}
+\exemp{%
+  C-14, meia-vida $5730$ anos, amostra $200$\,g.\\
+  Após $11460$ anos ($=2$ meias-vidas):\\
+  $M = 200\cdot\left(\tfrac12\right)^2 = \hlm{50\text{ g}}$%
+}
+
+\SH{Juros compostos}
+\exemp{%
+  R\$\,$2000$ a $5\%$/mês durante $4$ meses:\\
+  $M = C(1+i)^t = 2000\cdot(1{,}05)^4 \approx \hlm{\text{R\$}\,2431{,}01}$\\
+  {\footnotesize(juros simples dariam R\$\,$2400$ — compostos rendem mais)}%
+}
+
+\end{multicols}
+
+\end{document}

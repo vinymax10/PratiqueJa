@@ -1,0 +1,216 @@
+% ============================================================
+%  Semelhança de Triângulos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  tri/.style={draw=darkblue, line width=1.2pt, fill=accentblue!12!white},
+  trj/.style={draw=darkblue, line width=1.2pt, fill=badgegreen!12!white},
+  ra/.style={draw=darkblue, line width=0.8pt},
+  hl/.style={draw=badgepurple!80!black, line width=1pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Semelhança de Triângulos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Semelhança de Triângulos}%
+           {Teorema de Tales, Critérios AA/LAL/LLL e Relações Métricas}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{O que é semelhança de triângulos?}
+
+\regra{Dois triângulos são \textbf{semelhantes} quando têm ângulos
+correspondentes \textbf{iguais} e lados correspondentes
+\textbf{proporcionais}.}
+
+\obs{$ABC \sim A'B'C'$ quando existe a \textbf{razão de semelhança} $k$:}
+\formula{$\dfrac{AB}{A'B'} = \dfrac{BC}{B'C'} = \dfrac{AC}{A'C'} = k$}
+\obs{$k = 1$ → triângulos \textbf{congruentes}. \quad $k \neq 1$ →
+semelhantes de tamanhos diferentes.}
+
+\nota{\textbf{Ordem dos vértices:} em $ABC \sim A'B'C'$, $A$ corresponde
+a $A'$, $B$ a $B'$, $C$ a $C'$. Trocar a ordem altera quais lados são
+correspondentes e invalida a proporção.}
+
+%─────────────────────────────────────────────────────────────
+\TW{TT}{darkblue}{Teorema de Tales}{Feixe de paralelas cortado por transversais}
+
+\regra{Duas transversais cortando um feixe de \textbf{retas paralelas}
+determinam segmentos \textbf{proporcionais}.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.92]
+\foreach \y in {2.2,0.8,-0.6}{
+  \draw[line width=1pt, darkblue] (-0.5,\y)--(3.9,\y);}
+\coordinate (L1) at (0.86,2.2); \coordinate (L2) at (0.44,0.8); \coordinate (L3) at (0.02,-0.6);
+\coordinate (R1) at (2.54,2.2); \coordinate (R2) at (2.96,0.8); \coordinate (R3) at (3.38,-0.6);
+\draw[line width=1pt, graycolor] (1.07,2.9)--(-0.19,-1.3);
+\draw[line width=1pt, graycolor] (2.33,2.9)--(3.59,-1.3);
+\foreach \p in {L1,L2,L3,R1,R2,R3}{\fill[vered] (\p) circle (1.6pt);}
+\node[cl] at (0.95,1.5){$\alpha$};
+\node[cl] at (0.53,0.1){$\beta$};
+\node[cl] at (2.45,1.5){$\gamma$};
+\node[cl] at (2.87,0.1){$\phi$};
+\end{tikzpicture}
+\end{center}
+
+\formula{$\dfrac{\alpha}{\beta} = \dfrac{\gamma}{\phi}$}
+
+\obs{A proporção mantém-se somando segmentos adjacentes:
+$\dfrac{\alpha+\beta}{\beta} = \dfrac{\gamma+\phi}{\phi}$.}
+
+\SH{Exemplos}
+\exemp{%
+  $\alpha=5,\ \beta=10,\ \phi=12$, achar $\gamma=x$:\\
+  $\dfrac{5}{10} = \dfrac{x}{12} = \dfrac12 \Rightarrow x = \hlm{6}$\\[3pt]
+  $\alpha=3,\ \beta=9,\ \gamma=2$, achar $\phi=x$:\\
+  $\dfrac{3}{9} = \dfrac{2}{x} \Rightarrow 3x = 18 \Rightarrow x = \hlm{6}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{AA}{badgegreen}{Critério AA}{Dois ângulos iguais garantem semelhança}
+
+\regra{Se dois triângulos têm \textbf{dois ângulos} correspondentes
+iguais, então são semelhantes (o terceiro também será, pois a soma é
+$180°$).}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95]
+\coordinate (C) at (1.4,2.6); \coordinate (A) at (0,0); \coordinate (B) at (3.4,0);
+\coordinate (D) at (0.7,1.3); \coordinate (E) at (2.4,1.3);
+\draw[tri] (C)--(A)--(B)--cycle;
+\draw[hl] (D)--(E);
+\node[cl] at (1.4,2.85){$C$};
+\node[cl] at (-0.22,-0.1){$A$};
+\node[cl] at (3.6,-0.1){$B$};
+\node[cl] at (0.42,1.38){$D$};
+\node[cl] at (2.68,1.38){$E$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Com $DE \parallel AB$: $\angle CDE = \angle CAB$ e
+$\angle CED = \angle CBA$, logo $\triangle CDE \sim \triangle CAB$:}
+\formula{$\dfrac{CD}{CA} = \dfrac{CE}{CB} = \dfrac{DE}{AB}$}
+
+%─────────────────────────────────────────────────────────────
+\TW{LAL}{badgepurple}{Critério LAL}{Dois lados proporcionais e o ângulo entre eles}
+
+\regra{Semelhantes quando \textbf{dois pares de lados} são proporcionais
+e os \textbf{ângulos entre eles} são iguais. Se $\angle A = \angle D$ e
+$\dfrac{AB}{DE} = \dfrac{AC}{DF}$, então $\triangle ABC \sim \triangle DEF$.}
+
+\exemp{%
+  $\triangle ABC$: $AB=4,\ AC=6,\ \angle A=50°$\\
+  $\triangle DEF$: $DE=8,\ DF=12,\ \angle D=50°$\\[2pt]
+  $\dfrac{AB}{DE} = \dfrac48 = \dfrac12$ \ e \ $\dfrac{AC}{DF} = \dfrac{6}{12} = \dfrac12$\\[2pt]
+  ângulo incluído igual → \hlm{$\triangle ABC \sim \triangle DEF,\ k=2$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{LLL}{darkblue}{Critério LLL}{Os três pares de lados proporcionais}
+
+\regra{Semelhantes quando os \textbf{três pares} de lados
+correspondentes são proporcionais — existe um único $k$ para todos.}
+
+\exemp{%
+  $\triangle ABC$: lados $3,\ 4,\ 6$ \qquad $\triangle DEF$: lados $6,\ 8,\ 12$\\[2pt]
+  $\dfrac36 = \dfrac48 = \dfrac{6}{12} = \dfrac12$\\[2pt]
+  todas as razões iguais → \hlm{$\triangle ABC \sim \triangle DEF,\ k=2$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Pr}{badgegreen}{Propriedades}{Perímetro, área, alturas e medianas}
+
+\regra{Se a razão de semelhança é $k$, então:}
+\formula{$\dfrac{P}{P'} = \dfrac{h}{h'} = \dfrac{m}{m'} = k$\\[4pt]
+$\dfrac{A}{A'} = k^2$}
+\obs{Perímetros, alturas e medianas crescem na razão $k$; a \textbf{área}
+cresce com o \textbf{quadrado} $k^2$.}
+
+\exemp{%
+  $k=3$, área menor $=10\,\text{cm}^2$:\\
+  $A' = 10\cdot3^2 = \hlm{90\,\text{cm}^2}$\\[3pt]
+  $k=2$, perímetro menor $=12\,\text{cm}$:\\
+  $P' = 12\cdot2 = \hlm{24\,\text{cm}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ret}{darkblue}{Triângulos Retângulos}{A altura sobre a hipotenusa gera 3 semelhantes}
+
+\regra{Traçando a altura $h$ sobre a hipotenusa, formam-se \textbf{três
+triângulos semelhantes}: $\triangle ABC \sim \triangle ACH \sim \triangle CBH$.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.46]
+\coordinate (A) at (0,0); \coordinate (B) at (10,0);
+\coordinate (C) at (3.6,4.8); \coordinate (H) at (3.6,0);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[hl] (C)--(H);
+\draw[ra] (3.0,4.0)--(3.8,3.4)--(4.4,4.2);
+\draw[ra] (3.6,0.7)--(4.3,0.7)--(4.3,0);
+\node[cl] at (1.4,2.7){$c$};
+\node[cl] at (7.2,2.9){$b$};
+\node[cl] at (4.5,2.5){$h$};
+\node[cl] at (1.8,-0.6){$m$};
+\node[cl] at (6.8,-0.6){$n$};
+\node[font=\scriptsize] at (3.6,-1.0){$H$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Sendo $m, n$ as projeções dos catetos sobre a hipotenusa
+$a$ $(a=m+n)$:}
+\formula{$h^2 = m\cdot n \qquad b^2 = a\cdot m \qquad c^2 = a\cdot n$}
+
+\exemp{%
+  Catetos $b=6,\ c=8$, achar $h$:\\
+  $a = \sqrt{6^2+8^2} = 10$\\
+  $m = \dfrac{36}{10} = 3{,}6$ \quad $n = \dfrac{64}{10} = 6{,}4$\\
+  $h^2 = 3{,}6\cdot6{,}4 = 23{,}04 \Rightarrow h = \hlm{4{,}8}$\\
+  {\footnotesize Verif.: $a\cdot h = 48 = b\cdot c$ \ok}%
+}
+
+\columnbreak
+
+%─────────────────────────────────────────────────────────────
+\TW{Prob}{badgegreen}{Problemas Contextualizados}{Semelhança em situações reais}
+
+\regra{\textbf{Estratégia:} (1) identificar os triângulos semelhantes;
+(2) montar a proporção entre lados correspondentes; (3) resolver.}
+
+\SH{P1 — Altura de uma árvore}
+\exemp{%
+  Poste $2\,$m → sombra $3\,$m; árvore → sombra $12\,$m.
+  Raios solares paralelos → semelhança (AA):\\
+  $\dfrac{2}{h} = \dfrac{3}{12} \Rightarrow 3h = 24 \Rightarrow h = \hlm{8\,\text{m}}$%
+}
+
+\SH{P2 — Largura de um rio}
+\exemp{%
+  $DE \parallel AB$, $CD=10,\ DA=5,\ DE=8$. Achar $AB$:\\
+  $CA = 10+5 = 15$\\
+  $\dfrac{DE}{AB} = \dfrac{CD}{CA} \Rightarrow \dfrac{8}{AB} = \dfrac{10}{15} = \dfrac23$\\
+  $2\cdot AB = 24 \Rightarrow AB = \hlm{12\,\text{m}}$%
+}
+
+\end{multicols}
+
+\end{document}

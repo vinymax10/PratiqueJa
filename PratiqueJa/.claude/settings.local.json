@@ -117,7 +117,24 @@
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -jobname=_chk -output-directory \"tex-new/intermediario/pitagoras\" \"tex-new/intermediario/pitagoras/pitagoras.tex\")",
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/poligonosRegulares\" \"tex-new/intermediario/poligonosRegulares/poligonosRegulares.tex\")",
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -jobname=_chk -output-directory \"tex-new/intermediario/poligonosRegulares\" \"tex-new/intermediario/poligonosRegulares/poligonosRegulares.tex\")",
-      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/potenciacao\" \"tex-new/intermediario/potenciacao/potenciacao.tex\")"
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/potenciacao\" \"tex-new/intermediario/potenciacao/potenciacao.tex\")",
+      "Bash(grep -n \"begin{tabular}\\\\|array\\\\|hline\\\\|\\\\\\\\\\\\\\\\vert\\\\|multicolumn\" \"C:/Users/maximovrm/git/PratiqueJa/PratiqueJa/tex-new/basico/numerosPrimos/numerosPrimos.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/radiciacao\" \"tex-new/intermediario/radiciacao/radiciacao.tex\")",
+      "Bash(grep *)",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/razoesTrigonometricas\" \"tex-new/intermediario/razoesTrigonometricas/razoesTrigonometricas.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/semelhancaAngulos\" \"tex-new/intermediario/semelhancaAngulos/semelhancaAngulos.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/semelhancaTriangulos\" \"tex-new/intermediario/semelhancaTriangulos/semelhancaTriangulos.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/intermediario/somaAngulosTriangulo\" \"tex-new/intermediario/somaAngulosTriangulo/somaAngulosTriangulo.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/combinatoria\" \"tex-new/avancado/combinatoria/combinatoria.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/equacaoSegundoGrau\" \"tex-new/avancado/equacaoSegundoGrau/equacaoSegundoGrau.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/estatistica\" \"tex-new/avancado/estatistica/estatistica.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcaoAfim\" \"tex-new/avancado/funcaoAfim/funcaoAfim.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcaoExponencial\" \"tex-new/avancado/funcaoExponencial/funcaoExponencial.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcaoLogaritmica\" \"tex-new/avancado/funcaoLogaritmica/funcaoLogaritmica.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcaoModular\" \"tex-new/avancado/funcaoModular/funcaoModular.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcaoQuadratica\" \"tex-new/avancado/funcaoQuadratica/funcaoQuadratica.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcoes\" \"tex-new/avancado/funcoes/funcoes.tex\")",
+      "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/funcoesTrigonometricas\" \"tex-new/avancado/funcoesTrigonometricas/funcoesTrigonometricas.tex\")"
     ]
   }
 }

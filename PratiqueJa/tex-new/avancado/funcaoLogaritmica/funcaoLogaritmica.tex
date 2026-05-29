@@ -1,0 +1,102 @@
+% ============================================================
+%  Função Logarítmica — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Função Logarítmica}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Função Logarítmica}%
+           {Gráfico, Inversa da Exponencial e Análise}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{$f(x)=\log_a x$ como função}
+
+\regra{Definida por $f(x) = \log_a x$, com $a>0$, $a\neq1$ e $\mathbf{x>0}$.
+\textbf{Domínio} $(0,+\infty)$; \textbf{imagem} $\mathbb{R}$.}
+
+\obs{Não existe log de zero nem de negativo (daí $x>0$). Como
+$\log_a 1 = 0$ para toda base, o gráfico cruza o eixo $x$ em $(1,0)$.}
+
+\exemp{%
+  $f(x)=\log_2 x$: \ $f(1)=0,\ f(2)=1,\ f(4)=2$;\\
+  $f(\tfrac12)=-1,\ f(\tfrac14)=-2$ \quad
+  {\footnotesize($\log_{10}100=2$)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Graf}{darkblue}{Gráfico}{Assíntota vertical, zero e crescimento}
+
+\regra{O eixo $y$ ($x=0$) é \textbf{assíntota vertical}. $a>1$ →
+\textbf{crescente}; \ $0<a<1$ → \textbf{decrescente}. Sempre passa por
+$(1,0)$.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.48cm,y=0.43cm,font=\scriptsize,>=stealth]
+\draw[->,line width=0.7pt] (-0.3,0)--(6.4,0) node[right]{$x$};
+\draw[->,line width=0.7pt] (0,-3.5)--(0,3.7) node[above]{$y$};
+\draw[vered,line width=1.1pt,domain=0.09:6,samples=90,smooth] plot (\x,{-ln(\x)/ln(2)});
+\draw[darkblue,line width=1.1pt,domain=0.09:6,samples=90,smooth] plot (\x,{ln(\x)/ln(2)});
+\fill (1,0) circle (2.4pt);
+\draw[graycolor,line width=0.4pt] (1.05,-0.15)--(1.35,-0.9);
+\node[anchor=north,font=\scriptsize] at (1.35,-0.95){$(1,0)$};
+\node[darkblue,anchor=south] at (4.3,2.5){$\log_2 x$};
+\node[vered,anchor=north] at (4.3,-2.5){$\log_{1/2} x$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{$a>1$:} $f<0$ se $0<x<1$; \ $f>0$ se $x>1$\\[2pt]
+  \textbf{$0<a<1$:} sinais invertidos ($f>0$ se $0<x<1$)%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$f^{-1}$}{badgegreen}{Inversa da Exponencial}{Logarítmica e exponencial são inversas}
+
+\regra{$f(x)=\log_a x$ é a \textbf{inversa} de $g(x)=a^x$ — uma desfaz o
+que a outra faz; os gráficos são \textbf{simétricos à reta $y=x$}:}
+\formula{$a^{\log_a x} = x \qquad \log_a(a^x) = x$}
+
+\exemp{%
+  $(3,8)\in g$ ($2^3{=}8$) $\Rightarrow (8,3)\in f$ ($\log_2 8{=}3$):
+  as coordenadas se invertem — reflexão em $y=x$. Domínio e imagem
+  também se invertem.%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\pm$}{badgepurple}{Análise e Inequações}{Domínio, imagem, sinal e desigualdades}
+
+\exemp{%
+  \textbf{Domínio:} $(0,+\infty)$ \quad \textbf{Imagem:} $\mathbb{R}$\\[2pt]
+  \textbf{Zero:} $x=1$\\[2pt]
+  \textbf{Sinal} ($a>1$): $f<0$ se $0<x<1$; \ $f>0$ se $x>1$%
+}
+
+\SH{Exemplo — inequação}
+\exemp{%
+  $\log_3 x \geq 2$. Como $a=3>1$ (crescente):\\
+  $\log_3 x \geq \log_3 3^2 \Rightarrow x \geq 9$\\
+  (com $x>0$) → \hlm{$x \in [9,+\infty)$}\\[2pt]
+  {\footnotesize\textbf{Sentido:} $a>1$ mantém; $0<a<1$ inverte.}%
+}
+
+\end{multicols}
+
+\end{document}

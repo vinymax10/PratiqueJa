@@ -1,0 +1,96 @@
+% ============================================================
+%  Função Modular — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Função Modular}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Função Modular}%
+           {Módulo, Gráfico em V, Equações e Inequações}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Função Modular}{$f(x)=|x|$ — definida por casos}
+
+\regra{O \textbf{módulo} (valor absoluto) de um real é sua \textbf{distância
+à origem}: $\;|5|=5,\ \ |-3|=3,\ \ |0|=0$.}
+\formula{$|x| = \begin{cases} x & \text{se } x \geq 0\\ -x & \text{se } x<0 \end{cases}$}
+
+\obs{A \textbf{função modular} $f(x)=|g(x)|$ tem imagem $[0,+\infty)$:
+resultado sempre \textbf{não negativo}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Graf}{darkblue}{Gráfico — Forma em V}{Vértice e deslocamentos}
+
+\regra{$f(x)=|x|$ tem forma de \textbf{V} com vértice na origem.
+$f(x)=|x-h|+k$ desloca o vértice para $(h,k)$.}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.40,font=\scriptsize,>=stealth]
+\draw[->,line width=0.7pt] (-3.6,0)--(4.4,0) node[right]{$x$};
+\draw[->,line width=0.7pt] (0,-0.4)--(0,4.6) node[above]{$y$};
+\draw[darkblue,line width=1.2pt] (-3,3)--(0,0)--(3,3);
+\draw[vered,line width=1.2pt,dashed] (-2,4)--(1,1)--(4,4);
+\fill[darkblue] (0,0) circle (2.5pt);
+\fill[vered] (1,1) circle (2.5pt);
+\draw[graycolor,line width=0.4pt] (1.05,0.95)--(1.5,0.55);
+\node[anchor=west,font=\scriptsize] at (1.5,0.5){$(1,1)$};
+\node[darkblue,anchor=north] at (-2.0,1.0){$|x|$};
+\node[vered,anchor=west] at (0.25,3.9){$|x{-}1|{+}1$};
+\end{tikzpicture}
+\end{center}
+
+\obs{\textbf{Dom:} $\mathbb{R}$; \textbf{Im:} $[k,+\infty)$. Decrescente
+em $(-\infty,h]$, crescente em $[h,+\infty)$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Eq}{badgegreen}{Equações Modulares}{$|f(x)|=k$ — dois casos}
+
+\regra{$|f(x)| = k$ $(k\geq0) \Rightarrow f(x)=k$ ou $f(x)=-k$.
+Se $k<0$: $S=\emptyset$.}
+
+\exemp{%
+  \textbf{$|2x-3|=5$:}\\
+  $2x-3=5 \Rightarrow x=4$; \ $2x-3=-5 \Rightarrow x=-1$\\
+  \hlm{$S=\{-1,\,4\}$}%
+}
+\regra{\textbf{Dois módulos} — $|f(x)|=|g(x)| \Rightarrow f=g$ ou $f=-g$.}
+\exemp{%
+  \textbf{$|x+2|=|x-1|$:}\\
+  $x+2=x-1$ (impossível); \ $x+2=-(x-1) \Rightarrow x=-\tfrac12$\\
+  \hlm{$S=\left\{-\tfrac12\right\}$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ineq}{badgepurple}{Inequações Modulares}{Intervalo ou união}
+
+\regra{Com $k>0$:\\[2pt]
+\textbf{$|f(x)|<k$} → intervalo $-k<f(x)<k$ \ {\footnotesize(\emph{menor: and})}\\[2pt]
+\textbf{$|f(x)|>k$} → união $f(x)<-k$ ou $f(x)>k$ \ {\footnotesize(\emph{maior: or})}}
+
+\exemp{%
+  \textbf{$|x+1|\leq4$:} \ $-4\leq x+1\leq4 \Rightarrow \hlm{S=[-5,3]}$\\[2pt]
+  \textbf{$|3x-1|>2$:} \ $x>1$ ou $x<-\tfrac13$\\
+  $\Rightarrow \hlm{S=\left(-\infty,-\tfrac13\right)\cup(1,+\infty)}$%
+}
+
+\end{multicols}
+
+\end{document}

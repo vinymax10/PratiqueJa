@@ -1,0 +1,146 @@
+% ============================================================
+%  Função Quadrática — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Função Quadrática}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Função Quadrática}%
+           {Parábola, Vértice, Zeros, Sinal e Otimização}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Função Quadrática}{$f(x)=ax^2+bx+c$, com $a\neq0$}
+
+\regra{$f(x) = ax^2 + bx + c$ com $a,b,c\in\mathbb{R}$ e $\mathbf{a\neq0}$.
+Domínio $\mathbb{R}$; o gráfico é uma \textbf{parábola}.}
+
+\nota{A \emph{equação} $ax^2+bx+c=0$ pergunta \emph{quando} $f(x)=0$;
+a \emph{função} descreve $f(x)$ para \textbf{todo} $x$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Graf}{darkblue}{Gráfico — A Parábola}{Concavidade e eixo de simetria}
+
+\regra{O sinal de $a$ dá a \textbf{concavidade}: $a>0$ abre para
+\textbf{cima} (mínimo no vértice); $a<0$ para \textbf{baixo} (máximo).}
+
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.45cm,font=\scriptsize,>=stealth]
+\draw[graycolor,dashed,line width=0.5pt] (1,-2.4)--(1,3.0);
+\draw[->,line width=0.7pt] (-2.4,0)--(4.6,0) node[right]{$x$};
+\draw[->,line width=0.7pt] (0,-2.6)--(0,3.3) node[above]{$y$};
+\draw[darkblue,line width=1.2pt,domain=-1.95:3.95,samples=60,smooth] plot (\x,{0.5*((\x-1)^2)-2});
+\fill[vered] (-1,0) circle (2.2pt);
+\node[vered,anchor=south east] at (-1,0.1){$x_1$};
+\fill[vered] (3,0) circle (2.2pt);
+\node[vered,anchor=south west] at (3,0.1){$x_2$};
+\fill[badgegreen] (1,-2) circle (2.2pt);
+\node[badgegreen,anchor=north] at (1.15,-2.05){$V$};
+\node[graycolor,anchor=south,font=\scriptsize] at (1,3.0){eixo $x_v$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{$\Delta>0$:} cruza o eixo $x$ em $x_1, x_2$\\[2pt]
+  \textbf{$\Delta=0$:} tangencia — raiz dupla $x_v$\\[2pt]
+  \textbf{$\Delta<0$:} não cruza o eixo%
+}
+\obs{\textbf{Eixo de simetria:} reta $x = x_v = \dfrac{-b}{2a}$; as raízes
+são simétricas em relação a ele.}
+
+%─────────────────────────────────────────────────────────────
+\TW{V}{badgegreen}{Vértice da Parábola}{Ponto de máximo ou mínimo}
+
+\formula{$x_v = \dfrac{-b}{2a} \qquad y_v = \dfrac{-\Delta}{4a}$}
+
+\exemp{%
+  \textbf{$f(x)=x^2-10x+9$:}\\
+  $\Delta = 100-36 = 64$\\
+  $x_v = \dfrac{10}{2} = 5 \qquad y_v = \dfrac{-64}{4} = -16$\\
+  \hlm{$V(5,-16)$} — mínimo ($a>0$)%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{f(x){=}0}{badgepurple}{Zeros da Função}{Onde a parábola cruza o eixo $x$}
+
+\regra{Os \textbf{zeros} são as raízes de $ax^2+bx+c=0$ (Bhaskara) — as
+interseções com o eixo $x$.}
+\exemp{%
+  $\Delta>0$: dois zeros distintos\\[2pt]
+  $\Delta=0$: zero duplo $x_v$ \quad $\Delta<0$: nenhum zero real%
+}
+\regra{\textbf{Forma fatorada} ($\Delta\geq0$): $\ f(x)=a(x-x_1)(x-x_2)$.}
+\exemp{%
+  \textbf{$f(x)=2x^2-8x+6$:} $\Delta=16$, $x_1=1$, $x_2=3$\\
+  \hlm{$f(x)=2(x-1)(x-3)$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\pm$}{darkblue}{Estudo do Sinal}{Quando $f$ é positiva, nula ou negativa}
+
+\regra{Com $\Delta>0$ e zeros $x_1<x_2$:}
+\exemp{%
+  \textbf{$a>0$:} $f>0$ fora de $[x_1,x_2]$; \ $f<0$ \emph{entre} as raízes\\[2pt]
+  \textbf{$a<0$:} $f<0$ fora; \ $f>0$ \emph{entre} as raízes%
+}
+\obs{Se $\Delta<0$: $f$ tem \textbf{sinal constante} (igual ao de $a$)
+para todo $x$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{D/Im}{badgegreen}{Domínio, Imagem e Variação}{Imagem e crescimento pelo vértice}
+
+\regra{$D(f)=\mathbb{R}$. A imagem é limitada por $y_v$:}
+\formula{$\text{Im}(f) = \begin{cases} [y_v,+\infty) & \text{se } a>0\\ (-\infty,y_v] & \text{se } a<0 \end{cases}$}
+\obs{\textbf{$a>0$:} decresce em $(-\infty,x_v]$, cresce em $[x_v,+\infty)$.
+\textbf{$a<0$:} o inverso.}
+\exemp{%
+  \textbf{$f(x)=x^2-4x+3$:} $x_v=2$, $y_v=-1$\\
+  $D=\mathbb{R}$, $\text{Im}=[-1,+\infty)$\\
+  \hlm{decresce em $(-\infty,2]$, cresce em $[2,+\infty)$}%
+}
+
+\columnbreak
+
+%─────────────────────────────────────────────────────────────
+\TW{Opt}{badgepurple}{Aplicações de Otimização}{Máximo e mínimo em situações reais}
+
+\regra{O \textbf{vértice} dá o valor ótimo. Identifique $a,b,c$ e calcule
+$x_v$ e $y_v$.}
+
+\SH{P1 — altura de projétil}
+\exemp{%
+  $h(t)=-5t^2+20t$ ($a<0$ → máximo):\\
+  $t_v = \dfrac{-20}{-10} = 2$\,s; \ $h_{\max} = -20+40 = \hlm{20\text{ m}}$%
+}
+\SH{P2 — maximizar área}
+\exemp{%
+  Cerca $40$\,m: largura $x$, comprimento $20-x$:\\
+  $A(x)=x(20-x)=-x^2+20x$; \ $x_v=10$\\
+  $A_{\max} = \hlm{100\text{ m}^2}$%
+}
+\SH{P3 — lucro máximo}
+\exemp{%
+  $L(x)=-2x^2+80x-600$: \ $x_v=\dfrac{-80}{-4}=20$\\
+  $L_{\max} = -800+1600-600 = \hlm{\text{R\$}\,200}$%
+}
+
+\end{multicols}
+
+\end{document}

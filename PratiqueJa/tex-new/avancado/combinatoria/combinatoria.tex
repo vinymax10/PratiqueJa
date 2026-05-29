@@ -1,0 +1,246 @@
+% ============================================================
+%  Análise Combinatória — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Análise Combinatória}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Análise Combinatória}%
+           {Permutação, Arranjo, Combinação e Binômio de Newton}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Combinatória}{Contar sem listar todos os casos}
+
+\regra{Estuda como \textbf{contar, agrupar ou organizar} elementos de um
+conjunto \textbf{sem listar todos os casos}. Os quatro conceitos
+distinguem-se por duas perguntas: \emph{usa todos?} e \emph{a ordem
+importa?} — ver o quadro comparativo no final.}
+
+%─────────────────────────────────────────────────────────────
+\TW{PFC}{darkblue}{Princípio Fundamental}{Base de toda a contagem}
+
+\regra{Ações em etapas \textbf{sucessivas e independentes}: o total é o
+\textbf{produto} das opções de cada etapa — $n_1 \cdot n_2 \cdots n_k$.}
+
+\exemp{%
+  \textbf{Roupas:} $3$ camisetas $\times\,2$ calças $\times\,4$ sapatos
+  $= \hlm{24}$\\[2pt]
+  \textbf{Senha} de $4$ dígitos com repetição: $10^4 = \hlm{10\,000}$\\[2pt]
+  \textbf{Placas} ($3$ letras $+\,4$ dígitos): $26^3\cdot10^4 = \hlm{175\,760\,000}$%
+}
+
+\nota{\textbf{Princípio da adição:} alternativas \emph{mutuamente
+exclusivas} (ou uma ou outra) → \textbf{soma}. Ex.: $1$ homem OU $1$
+mulher de $4$H e $3$M: $4+3 = 7$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{P}{badgegreen}{Permutação Simples}{Todos distintos, a ordem importa}
+
+\regra{Ordenar \textbf{todos} os $n$ elementos distintos:}
+\formula{$P(n) = n! = n(n-1)(n-2)\cdots 2\cdot 1$}
+\obs{Convenção: $0! = 1$.}
+
+\exemp{%
+  \textbf{$\{1,2,3\}$} → $3! = 6$:\\
+  $(1,2,3)\ (1,3,2)\ (2,1,3)$\\
+  $(2,3,1)\ (3,1,2)\ (3,2,1)$\\[2pt]
+  \textbf{Anagramas de CELTA} ($5$ letras distintas):
+  $5! = \hlm{120}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{P*}{badgepurple}{Permutação com Repetição}{Elementos iguais reduzem os casos}
+
+\regra{Divide-se pelos fatoriais das repetições:}
+\formula{$P_n^{k,\,m,\,\ldots} = \dfrac{n!}{k!\cdot m!\cdots}$}
+
+\exemp{%
+  \textbf{Anagramas de BANANA:} $n=6$, A$\times3$, N$\times2$\\
+  $P_6^{3,2} = \dfrac{6!}{3!\cdot2!} = \dfrac{720}{12} = \hlm{60}$%
+}
+\obs{As $3$ letras A são indistinguíveis — trocá-las não gera novo
+anagrama; dividir elimina essas repetições.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Pc}{darkblue}{Permutação Circular}{Em círculo, rotações são iguais}
+
+\regra{Fixa-se um elemento e permutam-se os demais:}
+\formula{$P_c(n) = (n-1)!$}
+
+\exemp{%
+  \textbf{$5$ pessoas} numa mesa redonda:
+  $P_c(5) = 4! = \hlm{24}$\\[2pt]
+  {\footnotesize Em fila seriam $5! = 120$ — $5\times$ mais, pois cada
+  arranjo circular tem $5$ rotações.}%
+}
+\obs{Fixar um elemento elimina as $n$ rotações que dariam o mesmo
+arranjo.}
+
+%─────────────────────────────────────────────────────────────
+\TW{A}{badgegreen}{Arranjo Simples}{Parte dos elementos, a ordem importa}
+
+\regra{Selecionar e \textbf{ordenar} $k$ de $n$ elementos, sem repetição:}
+\formula{$A(n,k) = \dfrac{n!}{(n-k)!} = n(n-1)\cdots(n-k+1)$}
+\obs{$P(n) = A(n,n)$ — a permutação é o arranjo com $k=n$.}
+
+\exemp{%
+  \textbf{Pódio} (ouro/prata/bronze, $8$ atletas):\\
+  $A(8,3) = \dfrac{8!}{5!} = 8\cdot7\cdot6 = \hlm{336}$\\[2pt]
+  \textbf{Números} de $2$ algarismos distintos de $\{1,2,3,4\}$:
+  $A(4,2) = 4\cdot3 = \hlm{12}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{C}{badgepurple}{Combinação Simples}{Parte dos elementos, a ordem NÃO importa}
+
+\regra{Agrupamento \textbf{não ordenado} de $k$ de $n$ elementos:}
+\formula{$C(n,k) = \binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$}
+\obs{$C(n,k) = \dfrac{A(n,k)}{k!}$ — divide pelas $k!$ ordens internas
+(equivalentes na combinação).}
+
+\SH{Propriedades}
+\exemp{%
+  \textbf{Simetria:} $\binom{n}{k} = \binom{n}{n-k}$\\[2pt]
+  \textbf{Extremos:} $\binom{n}{0} = \binom{n}{n} = 1$\\[2pt]
+  \textbf{Pascal:} $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$%
+}
+
+\SH{Exemplo — comitê}
+\exemp{%
+  $3$ pessoas de $5$ candidatos: $C(5,3) = \dfrac{5\cdot4}{2} = \hlm{10}$\\[2pt]
+  {\footnotesize ABC ABD ABE ACD ACE ADE BCD BCE BDE CDE}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\triangle$}{darkblue}{Triângulo de Pascal}{Ferramenta visual das combinações}
+
+\obs{Cada linha $n$ traz $\binom{n}{0},\ldots,\binom{n}{n}$; cada valor é
+a \textbf{soma dos dois acima}.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.62cm,y=0.6cm,font=\small]
+\foreach \r/\vals [count=\i from 0] in {
+  0/{1}, 1/{1,1}, 2/{1,2,1}, 3/{1,3,3,1}, 4/{1,4,6,4,1}, 5/{1,5,10,10,5,1}}{
+  \node[graycolor,font=\scriptsize] at (-3.4,-\r){$n{=}\r$};
+}
+% linhas (centradas: x = (k - n/2))
+\node at (0,0){1};
+\node at (-0.5,-1){1}; \node at (0.5,-1){1};
+\node at (-1,-2){1}; \node at (0,-2){2}; \node at (1,-2){1};
+\node at (-1.5,-3){1}; \node at (-0.5,-3){3}; \node at (0.5,-3){3}; \node at (1.5,-3){1};
+\node[badgepurple,font=\small\bfseries] at (-2,-4){1};
+\node[badgepurple,font=\small\bfseries] at (-1,-4){4};
+\node[badgepurple,font=\small\bfseries] at (0,-4){6};
+\node[badgepurple,font=\small\bfseries] at (1,-4){4};
+\node[badgepurple,font=\small\bfseries] at (2,-4){1};
+\node at (-2.5,-5){1}; \node at (-1.5,-5){5}; \node at (-0.5,-5){10};
+\node at (0.5,-5){10}; \node at (1.5,-5){5}; \node at (2.5,-5){1};
+\end{tikzpicture}
+\end{center}
+
+\nota{Linha $n=4$: $1,4,6,4,1$. A soma de cada linha é $2^n$ — o número
+total de subconjuntos de um conjunto com $n$ elementos.}
+
+%─────────────────────────────────────────────────────────────
+\TW{CR}{badgegreen}{Combinação com Repetição}{Elementos podem repetir}
+
+\regra{Ordem não importa e elementos podem repetir:}
+\formula{$CR(n,k) = \binom{n+k-1}{k}$}
+\obs{\textbf{Estrelas e barras:} $k$ objetos idênticos em $n$ categorias,
+separadas por $n-1$ barras.}
+
+\exemp{%
+  \textbf{$3$ bolas, $4$ cores:}
+  $CR(4,3) = \binom{6}{3} = \hlm{20}$\\[2pt]
+  \textbf{$2$ bolas, $5$ sabores:}
+  $CR(5,2) = \binom{6}{2} = \hlm{15}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ex}{badgepurple}{Problemas Resolvidos}{Identificar o conceito é a chave}
+
+\SH{P1 — Comissão com restrição}
+\exemp{%
+  $3$ pessoas de $4$H$+3$M, \textbf{$\geq 1$ mulher}:\\
+  total $- $ só homens $= C(7,3) - C(4,3)$\\
+  $= 35 - 4 = \hlm{31}$%
+}
+
+\SH{P2 — Senha crescente}
+\exemp{%
+  $4$ dígitos distintos \textbf{crescentes} de $\{1\text{–}6\}$:
+  a ordem é fixa, basta escolher quais:\\
+  $C(6,4) = \dfrac{6\cdot5}{2} = \hlm{15}$%
+}
+
+\SH{P3 — Mesa redonda com restrição}
+\exemp{%
+  $6$ pessoas, A e B \textbf{não} adjacentes:\\
+  total $- $ (A,B juntos como bloco)\\
+  $= 5! - 4!\cdot2! = 120 - 48 = \hlm{72}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{BN}{darkblue}{Binômio de Newton}{Expansão de $(a+b)^n$}
+
+\regra{Expande $(a+b)^n$ com coeficientes $\binom{n}{k}$ (linha $n$ de
+Pascal):}
+\formula{$(a+b)^n = \displaystyle\sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k$}
+
+\SH{Termo geral}
+\formula{$T_{k+1} = \binom{n}{k} a^{n-k} b^k$}
+
+\exemp{%
+  \textbf{$(x+2)^4$} — Pascal $1,4,6,4,1$:\\
+  $\hlm{x^4 + 8x^3 + 24x^2 + 32x + 16}$\\[3pt]
+  \textbf{$(2a-b)^3$} — Pascal $1,3,3,1$:\\
+  $\hlm{8a^3 - 12a^2b + 6ab^2 - b^3}$\\[3pt]
+  \textbf{$3^\text{o}$ termo de $(x+3)^6$} ($k=2$):\\
+  $T_3 = \binom{6}{2} x^4\cdot 3^2 = \hlm{135x^4}$%
+}
+
+\nota{\textbf{Soma dos coeficientes:} fazendo $a=b=1$ →
+$(1+1)^n = 2^n$ (soma da linha $n$ de Pascal).}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{$\equiv$}{badgegreen}{Quadro Comparativo}{Quando usar cada conceito}
+
+\vspace{6pt}
+\begin{center}
+\setlength{\tabcolsep}{14pt}\renewcommand{\arraystretch}{1.6}\small
+\begin{tabular}{lccc}
+\rowcolor{darkblue}
+\textcolor{white}{\textbf{Conceito}} & \textcolor{white}{\textbf{Usa todos?}} &
+\textcolor{white}{\textbf{Ordem importa?}} & \textcolor{white}{\textbf{Fórmula}}\\
+Permutação simples   & Sim & Sim            & $n!$\\
+\rowcolor{exbg}
+Permutação circular  & Sim & Sim (círculo)  & $(n-1)!$\\
+Arranjo simples      & Não & Sim            & $\dfrac{n!}{(n-k)!}$\\
+\rowcolor{exbg}
+Combinação simples   & Não & Não            & $\dfrac{n!}{k!\,(n-k)!}$\\
+Combinação com repetição & Não & Não        & $\dbinom{n+k-1}{k}$\\
+\end{tabular}
+\end{center}
+
+\end{document}

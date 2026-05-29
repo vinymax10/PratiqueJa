@@ -1,0 +1,189 @@
+% ============================================================
+%  Funções Trigonométricas — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+\definecolor{laranja}{HTML}{EA8C00}
+
+\setsubject{Funções Trigonométricas}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Funções Trigonométricas}%
+           {Radiano, Ciclo, Gráficos, Tangente e Identidades}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Radiano}{Unidade natural de medida de ângulos}
+
+\regra{Um \textbf{radiano} é o ângulo central cujo arco tem comprimento
+igual ao raio. Volta completa $=2\pi$\,rad$=360°$:}
+\formula{$\pi\,\text{rad} = 180° \;\Rightarrow\; 1\,\text{rad} \approx 57{,}3°$}
+
+\SH{Conversão grau $\leftrightarrow$ radiano}
+\formula{$\text{rad} = \text{grau}\cdot\dfrac{\pi}{180} \qquad
+\text{grau} = \text{rad}\cdot\dfrac{180}{\pi}$}
+
+\exemp{%
+  \textbf{Arcos notáveis:}
+  $30°{=}\tfrac{\pi}{6}$, \ $45°{=}\tfrac{\pi}{4}$, \ $60°{=}\tfrac{\pi}{3}$,
+  \ $90°{=}\tfrac{\pi}{2}$, \ $180°{=}\pi$, \ $270°{=}\tfrac{3\pi}{2}$%
+}
+\exemp{%
+  $135° = 135\cdot\tfrac{\pi}{180} = \hlm{\tfrac{3\pi}{4}}$\,rad\\[2pt]
+  $\tfrac{5\pi}{6}\cdot\tfrac{180}{\pi} = \hlm{150°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Cic}{darkblue}{Ciclo Trigonométrico}{Seno e cosseno no círculo unitário}
+
+\regra{Circunferência de raio $1$ na origem. Para o ângulo $\theta$:
+$P=(\cos\theta,\operatorname{sen}\theta)$ — cosseno é a projeção
+horizontal, seno a vertical.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.95,font=\scriptsize,>=stealth]
+\draw[->,line width=0.6pt] (-1.3,0)--(1.45,0) node[right]{$\cos$};
+\draw[->,line width=0.6pt] (0,-1.3)--(0,1.45) node[above]{$\operatorname{sen}$};
+\draw[darkblue,line width=1pt] (0,0) circle (1);
+\coordinate (P) at (60:1);
+\draw[graycolor,dashed,line width=0.5pt] (P)--(0.5,0);
+\draw[graycolor,dashed,line width=0.5pt] (P)--(0,0.866);
+\draw[vered,line width=1pt] (0,0)--(P);
+\fill[vered] (P) circle (1.3pt);
+\node[anchor=south west,vered] at (P){$P$};
+\draw[badgegreen,line width=0.8pt] (0.32,0) arc (0:60:0.32);
+\node[badgegreen] at (28:0.5){$\theta$};
+\node[laranja,anchor=north,font=\tiny] at (0.5,-0.04){$\cos\theta$};
+\node[vegreen,anchor=east,font=\tiny] at (-0.03,0.866){$\operatorname{sen}\theta$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{Sinais por quadrante:}\\
+  1º: $\operatorname{sen}{+}$, $\cos{+}$ \qquad 2º: $\operatorname{sen}{+}$, $\cos{-}$\\
+  3º: $\operatorname{sen}{-}$, $\cos{-}$ \qquad 4º: $\operatorname{sen}{-}$, $\cos{+}$%
+}
+\obs{Como o raio é $1$: \ $-1\leq\operatorname{sen}\theta\leq1$ e
+$-1\leq\cos\theta\leq1$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tab}{badgegreen}{Valores Notáveis}{Seno, cosseno e tangente}
+
+\begin{center}\vspace{2pt}
+\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.3}\footnotesize
+\begin{tabular}{c|cccc}
+\rowcolor{darkblue}
+\textcolor{white}{\textbf{âng.}} & \textcolor{white}{\textbf{rad}} &
+\textcolor{white}{\textbf{sen}} & \textcolor{white}{\textbf{cos}} &
+\textcolor{white}{\textbf{tg}}\\
+$0°$   & $0$              & $0$               & $1$               & $0$\\
+\rowcolor{exbg}
+$30°$  & $\tfrac{\pi}{6}$ & $\tfrac12$        & $\tfrac{\sqrt3}{2}$ & $\tfrac{\sqrt3}{3}$\\
+$45°$  & $\tfrac{\pi}{4}$ & $\tfrac{\sqrt2}{2}$ & $\tfrac{\sqrt2}{2}$ & $1$\\
+\rowcolor{exbg}
+$60°$  & $\tfrac{\pi}{3}$ & $\tfrac{\sqrt3}{2}$ & $\tfrac12$        & $\sqrt3$\\
+$90°$  & $\tfrac{\pi}{2}$ & $1$               & $0$               & $\nexists$\\
+\rowcolor{exbg}
+$180°$ & $\pi$            & $0$               & $-1$              & $0$\\
+$270°$ & $\tfrac{3\pi}{2}$ & $-1$             & $0$               & $\nexists$\\
+\end{tabular}
+\end{center}
+
+\nota{\textbf{Macete do seno:}
+$\tfrac{\sqrt0}{2},\tfrac{\sqrt1}{2},\tfrac{\sqrt2}{2},\tfrac{\sqrt3}{2},\tfrac{\sqrt4}{2}$
+para $0°,30°,45°,60°,90°$. O cosseno segue o padrão inverso.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Graf}{darkblue}{Gráficos de Seno e Cosseno}{Período, amplitude e periodicidade}
+
+\regra{$\operatorname{sen}x$ e $\cos x$ são \textbf{periódicas} (período
+$2\pi$), com amplitude $1$, domínio $\mathbb{R}$ e imagem $[-1,1]$.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[x=0.44cm,y=0.6cm,font=\tiny,>=stealth]
+\draw[->,line width=0.6pt] (-0.2,0)--(7.1,0) node[right]{$x$};
+\draw[->,line width=0.6pt] (0,-1.35)--(0,1.5) node[above]{$y$};
+\foreach \xv/\lab in {1.5708/\frac{\pi}{2}, 3.1416/\pi, 4.7124/\frac{3\pi}{2}, 6.2832/2\pi}{
+  \draw[graycolor,line width=0.3pt] (\xv,0.06)--(\xv,-0.06);
+}
+\node[font=\tiny,anchor=north] at (1.5708,-0.1){$\frac{\pi}{2}$};
+\node[font=\tiny,anchor=north] at (3.1416,-0.1){$\pi$};
+\node[font=\tiny,anchor=north] at (4.7124,-0.12){$\frac{3\pi}{2}$};
+\node[font=\tiny,anchor=north] at (6.2832,-0.1){$2\pi$};
+\draw[vegreen,line width=1pt,domain=0:6.4,samples=90,smooth] plot (\x,{sin(\x r)});
+\draw[laranja,line width=1pt,domain=0:6.4,samples=90,smooth] plot (\x,{cos(\x r)});
+\node[vegreen,anchor=south,font=\tiny] at (1.0,1.0){$\operatorname{sen}x$};
+\node[laranja,anchor=north,font=\tiny] at (3.7,-0.95){$\cos x$};
+\end{tikzpicture}
+\end{center}
+
+\exemp{%
+  \textbf{\textcolor{vegreen}{sen}:} $0\to1\to0\to-1\to0$; \ zeros $x=k\pi$\\[2pt]
+  \textbf{\textcolor{laranja}{cos}:} $1\to0\to-1\to0\to1$; \ zeros $x=\tfrac{\pi}{2}+k\pi$%
+}
+\obs{$\cos x = \operatorname{sen}\!\left(x+\tfrac{\pi}{2}\right)$ — o cosseno
+é o seno deslocado $\tfrac{\pi}{2}$ à esquerda.}
+
+%─────────────────────────────────────────────────────────────
+\TW{tg}{badgepurple}{Função Tangente}{Período $\pi$ e assíntotas verticais}
+
+\regra{$\operatorname{tg}x = \dfrac{\operatorname{sen}x}{\cos x}$.
+Indefinida onde $\cos x=0$ ($x=\tfrac{\pi}{2}+k\pi$) — há
+\textbf{assíntotas verticais}.}
+
+\exemp{%
+  \textbf{Domínio:} $\mathbb{R}\setminus\{\tfrac{\pi}{2}+k\pi\}$\\[2pt]
+  \textbf{Imagem:} $\mathbb{R}$ \qquad \textbf{Período:} $\pi$\\[2pt]
+  Crescente em cada intervalo do domínio%
+}
+\exemp{%
+  $\operatorname{tg}0°=0$ \quad $\operatorname{tg}30°=\tfrac{\sqrt3}{3}$\\
+  $\operatorname{tg}45°=1$ \quad $\operatorname{tg}60°=\sqrt3$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Id}{badgegreen}{Identidades Trigonométricas}{Relações fundamentais}
+
+\regra{Identidade fundamental (Pitágoras no círculo unitário):}
+\formula{$\operatorname{sen}^2 x + \cos^2 x = 1$}
+
+\exemp{%
+  Dividindo por $\cos^2 x$: \ $\operatorname{tg}^2 x + 1 = \sec^2 x$\\[2pt]
+  Dividindo por $\operatorname{sen}^2 x$: \ $1 + \operatorname{cotg}^2 x = \csc^2 x$\\[2pt]
+  {\footnotesize$\sec x=\tfrac1{\cos x}$, \ $\csc x=\tfrac1{\operatorname{sen}x}$,
+  \ $\operatorname{cotg}x=\tfrac{\cos x}{\operatorname{sen}x}$}%
+}
+
+\SH{Usando as identidades}
+\exemp{%
+  $\operatorname{sen}x=\tfrac35$ (1º quad), achar $\cos x$:\\
+  $\cos^2 x = 1-\tfrac{9}{25} = \tfrac{16}{25} \Rightarrow \hlm{\cos x=\tfrac45}$%
+}
+\exemp{%
+  $\dfrac{\operatorname{sen}^2 x+\cos^2 x}{\cos^2 x}
+  = \dfrac{1}{\cos^2 x} = \hlm{\sec^2 x}$%
+}
+\obs{\textbf{Suplementares:} $\operatorname{sen}(180°{-}\theta)=\operatorname{sen}\theta$,
+$\cos(180°{-}\theta)=-\cos\theta$. \quad
+\textbf{Opostos:} $\operatorname{sen}(-\theta)=-\operatorname{sen}\theta$,
+$\cos(-\theta)=\cos\theta$.}
+
+\end{multicols}
+
+\end{document}

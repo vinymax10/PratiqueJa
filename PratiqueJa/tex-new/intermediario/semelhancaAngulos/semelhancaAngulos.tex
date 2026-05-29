@@ -1,0 +1,184 @@
+% ============================================================
+%  Ângulos: Relações Angulares — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Relações Angulares}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Relações entre Ângulos}%
+           {Opostos, Complementares, Suplementares e Paralelas}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Opostos pelo Vértice}{Também chamados de ângulos verticais}
+
+\regra{Dois ângulos \textbf{opostos pelo vértice} têm sempre a mesma
+medida — são \textbf{congruentes}.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.8]
+\draw[line width=1pt, darkblue] (60:2.1)--(240:2.1);
+\draw[line width=1pt, darkblue] (120:2.1)--(300:2.1);
+\draw[vered, line width=1.4pt] (60:0.7) arc (60:120:0.7);
+\draw[vered, line width=1.4pt] (240:0.7) arc (240:300:0.7);
+\draw[vegreen, line width=1.4pt] (-60:0.7) arc (-60:60:0.7);
+\draw[vegreen, line width=1.4pt] (120:0.7) arc (120:240:0.7);
+\node[vered, font=\small\bfseries] at (90:1.05){$\alpha$};
+\node[vered, font=\small\bfseries] at (270:1.05){$\alpha$};
+\node[vegreen, font=\small\bfseries] at (0:1.2){$\beta$};
+\node[vegreen, font=\small\bfseries] at (180:1.2){$\beta$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Os pares \textbf{não adjacentes} são opostos pelo vértice ($\alpha$
+e $\alpha$, $\beta$ e $\beta$). Já $\alpha$ e $\beta$ são adjacentes e
+\textbf{suplementares}: $\alpha + \beta = 180°$.}
+
+\SH{Exemplo — $\alpha = 60°$}
+\exemp{%
+  $x = \alpha = \hlm{60°}$ {\footnotesize(oposto → congruente)}\\[2pt]
+  $\beta = 180° - 60° = \hlm{120°}$ {\footnotesize(adjacente → suplementar)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{90°}{badgegreen}{Ângulos Complementares}{Soma igual a $90°$}
+
+\regra{Dois ângulos são \textbf{complementares} quando somam $90°$.
+O complemento de $\alpha$ é $90° - \alpha$.}
+
+\obs{Não precisam ser adjacentes. Aparecem nos \textbf{triângulos
+retângulos}, onde os ângulos agudos são sempre complementares.}
+
+\exemp{%
+  $30° + 60° = \hlm{90°}$ \ok \qquad $45° + 45° = \hlm{90°}$ \ok\\[2pt]
+  $50° + 60° = 110° \neq 90°$ \nok%
+}
+
+\SH{Encontrando o complemento}
+\exemp{%
+  $\alpha = 37° \Rightarrow 90° - 37° = \hlm{53°}$\\[2pt]
+  $\alpha = 72° \Rightarrow 90° - 72° = \hlm{18°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{180°}{vered}{Ângulos Suplementares}{Soma igual a $180°$}
+
+\regra{Dois ângulos são \textbf{suplementares} quando somam $180°$.
+O suplemento de $\alpha$ é $180° - \alpha$.}
+
+\obs{Suplementares adjacentes formam uma \textbf{linha reta} — cada
+ângulo é suplementar a seus vizinhos adjacentes.}
+
+\exemp{%
+  $60° + 120° = \hlm{180°}$ \ok \qquad $90° + 90° = \hlm{180°}$ \ok\\[2pt]
+  $70° + 80° = 150° \neq 180°$ \nok%
+}
+
+\SH{Encontrando o suplemento}
+\exemp{%
+  $\alpha = 30° \Rightarrow 180° - 30° = \hlm{150°}$\\[2pt]
+  $\alpha = 110° \Rightarrow 180° - 110° = \hlm{70°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\parallel$}{darkblue}{Paralelas e Transversal}{Correspondentes, alternos e colaterais}
+
+\regra{Uma transversal cortando duas paralelas forma \textbf{8 ângulos}:
+\textbf{correspondentes} e \textbf{alternos} são iguais; \textbf{colaterais}
+são suplementares ($180°$).}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.72]
+\coordinate (P1) at (0.63,1.4);
+\coordinate (P2) at (-0.63,-1.4);
+\draw[line width=1pt, darkblue] (-2.8,1.4)--(2.8,1.4) node[right,font=\footnotesize\bfseries]{$r$};
+\draw[line width=1pt, darkblue] (-2.8,-1.4)--(2.8,-1.4) node[right,font=\footnotesize\bfseries]{$s$};
+\draw[line width=1pt, graycolor] (0.945,2.1)--(-0.945,-2.1) node[below,font=\footnotesize\bfseries]{$t$};
+% P1
+\draw[vered, line width=1.1pt] ([shift=(0:0.45)]P1) arc (0:66:0.45);
+\draw[vegreen, line width=1.1pt] ([shift=(66:0.4)]P1) arc (66:180:0.4);
+\node[vered, font=\footnotesize\bfseries] at ($(P1)+(33:0.74)$){$\alpha$};
+\node[vegreen, font=\footnotesize\bfseries] at ($(P1)+(123:0.66)$){$\beta$};
+% P2
+\draw[vered, line width=1.1pt] ([shift=(0:0.45)]P2) arc (0:66:0.45);
+\draw[vegreen, line width=1.1pt] ([shift=(66:0.4)]P2) arc (66:180:0.4);
+\node[vered, font=\footnotesize\bfseries] at ($(P2)+(33:0.74)$){$\alpha$};
+\node[vegreen, font=\footnotesize\bfseries] at ($(P2)+(123:0.66)$){$\beta$};
+\end{tikzpicture}
+\end{center}
+
+\SH{Tipos de ângulos formados}
+\exemp{%
+  \textbf{Correspondentes:} mesmo lado da transversal, um em cada
+  paralela → \hlm{iguais}\\[2pt]
+  \textbf{Alternos} (internos/externos): lados \emph{opostos} da
+  transversal → \hlm{iguais}\\[2pt]
+  \textbf{Colaterais} (co-internos/externos): \emph{mesmo lado} da
+  transversal → \hlm{suplementares}%
+}
+
+\nota{\textbf{Erro comum:} alternos internos e colaterais co-internos
+ficam ambos \emph{entre} as paralelas, mas alternos são \textbf{iguais}
+(lados opostos) e colaterais são \textbf{suplementares} (mesmo lado).}
+
+\SH{Exemplos resolvidos}
+\exemp{%
+  \textbf{1) Correspondente} — $\alpha = 50°$ em $r$:\\
+  correspondente em $s = \hlm{50°}$; adjacente $\beta = 180°-50° = \hlm{130°}$\\[3pt]
+  \textbf{2) Alterno interno} — $\alpha = 70°$ em $r$:\\
+  alterno em $s = \hlm{70°}$ {\footnotesize(iguais — lados opostos)}\\[3pt]
+  \textbf{3) Colateral co-interno} — $\alpha = 30°$ em $r$:\\
+  colateral em $s = 180°-30° = \hlm{150°}$ {\footnotesize(suplementares)}%
+}
+
+\obs{\textbf{Teorema recíproco:} se dois ângulos correspondentes (ou
+alternos) são iguais, então as retas cortadas são \textbf{paralelas} —
+usado para provar paralelismo.}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{$\equiv$}{badgegreen}{Tabela Resumo}{Todas as relações angulares}
+
+\vspace{6pt}
+\begin{center}
+\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.3}\small
+\begin{tabular}{llcl}
+\rowcolor{darkblue}
+\textcolor{white}{\textbf{Tipo}} & \textcolor{white}{\textbf{Contexto}} &
+\textcolor{white}{\textbf{Fórmula}} & \textcolor{white}{\textbf{Exemplo}}\\
+Opostos pelo vértice   & Interseção de duas retas   & $\alpha_1 = \alpha_2$      & Se $\alpha=50°$, o oposto é $50°$\\
+\rowcolor{exbg}
+Complementares         & Par cuja soma é $90°$      & $\alpha + \beta = 90°$     & $30° + 60° = 90°$\\
+Suplementares          & Par cuja soma é $180°$     & $\alpha + \beta = 180°$    & $60° + 120° = 180°$\\
+\rowcolor{exbg}
+Correspondentes        & Paralelas + transversal    & $\alpha_r = \alpha_s$      & Se $\alpha=70°$, corresp.\ é $70°$\\
+Alternos internos      & Paralelas + transversal    & $\alpha_r = \alpha_s$      & Se $\alpha=70°$, alterno é $70°$\\
+\rowcolor{exbg}
+Alternos externos      & Paralelas + transversal    & $\alpha_r = \alpha_s$      & Se $\alpha=70°$, alt.\ ext.\ é $70°$\\
+Colaterais co-internos & Paralelas + transversal    & $\alpha + \beta = 180°$    & Se $\alpha=70°$, colateral é $110°$\\
+\rowcolor{exbg}
+Colaterais co-externos & Paralelas + transversal    & $\alpha + \beta = 180°$    & Se $\alpha=70°$, col.\ ext.\ é $110°$\\
+\end{tabular}
+\end{center}
+
+\end{document}

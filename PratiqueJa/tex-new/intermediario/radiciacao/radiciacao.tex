@@ -1,0 +1,250 @@
+% ============================================================
+%  Radiciação — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Radiciação}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Radiciação}%
+           {Simplificação, Propriedades e Racionalização}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Operação inversa da potenciação}
+
+\regra{A \textbf{radiciação} é a operação \textbf{inversa da potenciação}:
+determinar o número que, elevado ao índice $n$, resulta no radicando $a$.
+$a$ = \textbf{radicando}, $n$ = \textbf{índice}.}
+
+\formula{$\sqrt[n]{a} = b \;\Leftrightarrow\; a = b^n$}
+
+\obs{Sem índice indicado, usa-se $n=2$ (raiz quadrada). Quando $n$ é
+\textbf{par}, exige-se $a \geq 0$.}
+
+\exemp{%
+  Índice $2$ = raiz \textbf{quadrada} \quad índice $3$ = raiz \textbf{cúbica}\\[2pt]
+  $\sqrt{16} = \sqrt{4^2} = \hlm{4}$ \qquad $\sqrt[3]{27} = \sqrt[3]{3^3} = \hlm{3}$%
+}
+
+\nota{Raízes de números que \textbf{não são quadrados perfeitos} são
+\textbf{irracionais} — decimal infinita e não periódica:\\[2pt]
+$\sqrt{2} \approx 1{,}4142\ldots$ \quad $\sqrt{3} \approx 1{,}7320\ldots$ \quad
+mas $\sqrt{4} = 2$.}
+
+\SH{Raiz como potência fracionária}
+\formula{$\sqrt[n]{a} = a^{\frac{1}{n}}$}
+\exemp{%
+  $\sqrt{16} = 16^{\frac12} = (2^4)^{\frac12} = 2^2 = \hlm{4}$\\[2pt]
+  $\sqrt[3]{8} = 8^{\frac13} = (2^3)^{\frac13} = 2^1 = \hlm{2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Fat}{darkblue}{Resolvendo Números Grandes}{Decomposição em fatores primos}
+
+\regra{Decomponha o radicando em \textbf{fatores primos}, agrupe em
+potências com expoente igual ao índice e remova cada grupo com a raiz.}
+
+\SH{Exemplo — $\sqrt{576}$}
+\begin{center}\vspace{1pt}
+\renewcommand{\arraystretch}{1.2}\small
+\begin{tabular}{r|l}
+576 & 2\\
+288 & 2\\
+144 & 2\\
+ 72 & 2\\
+ 36 & 2\\
+ 18 & 2\\
+  9 & 3\\
+  3 & 3\\
+\hline
+  1 & \\
+\end{tabular}
+\end{center}
+\exemp{%
+  $\sqrt{576} = \sqrt{2^2\cdot2^2\cdot2^2\cdot3^2}$\\
+  $= 2\cdot2\cdot2\cdot3 = \hlm{24}$%
+}
+
+\exemp{%
+  $\sqrt{900} = \sqrt{(2\cdot3\cdot5)^2} = \hlm{30}$\\[2pt]
+  $\sqrt[3]{216} = \sqrt[3]{6^3} = \hlm{6}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Sim}{darkblue}{Simplificação de Radicais}{Extraindo fatores perfeitos da raiz}
+
+\regra{Identifique o \textbf{maior fator quadrado perfeito} (ou cúbico
+perfeito) do radicando, separe-o pela propriedade do produto e retire-o
+da raiz. Resultado: parte fora $\cdot$ parte irredutível dentro.}
+
+\SH{Raiz quadrada}
+\exemp{%
+  $\sqrt{48} = \sqrt{16\cdot3} = \sqrt{16}\cdot\sqrt{3} = \hlm{4\sqrt{3}}$\\[2pt]
+  $\sqrt{75} = \sqrt{25\cdot3} = \hlm{5\sqrt{3}}$\\[2pt]
+  $\sqrt{72} = \sqrt{36\cdot2} = \hlm{6\sqrt{2}}$\\[2pt]
+  $\sqrt{200} = \sqrt{100\cdot2} = \hlm{10\sqrt{2}}$%
+}
+
+\SH{Raiz cúbica}
+\exemp{%
+  $\sqrt[3]{54} = \sqrt[3]{27\cdot2} = \hlm{3\sqrt[3]{2}}$\\[2pt]
+  $\sqrt[3]{250} = \sqrt[3]{125\cdot2} = \hlm{5\sqrt[3]{2}}$%
+}
+
+\SH{Com expressões algébricas}
+\exemp{%
+  $\sqrt{4x^2} = 2|x|$ \qquad $\sqrt{a^2 b} = |a|\sqrt{b}$\\[2pt]
+  $\sqrt{9x^4} = 3x^2$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\pm$}{badgegreen}{Adição e Subtração}{Radicais semelhantes — mesmo índice e radicando}
+
+\regra{Só se soma ou subtrai radicais com \textbf{mesmo índice} e
+\textbf{mesmo radicando} (semelhantes). Se os radicandos diferem,
+\textbf{simplifique primeiro} e verifique se tornam semelhantes.}
+
+\SH{Radicais já semelhantes}
+\exemp{%
+  $3\sqrt{2} + 5\sqrt{2} = \hlm{8\sqrt{2}}$ \qquad
+  $7\sqrt{3} - 2\sqrt{3} = \hlm{5\sqrt{3}}$\\[2pt]
+  $4\sqrt[3]{5} + \sqrt[3]{5} = \hlm{5\sqrt[3]{5}}$%
+}
+
+\SH{Simplificar para obter semelhantes}
+\exemp{%
+  $\sqrt{12} + \sqrt{27} = 2\sqrt{3} + 3\sqrt{3} = \hlm{5\sqrt{3}}$\\[2pt]
+  $2\sqrt{50} - \sqrt{8} = 10\sqrt{2} - 2\sqrt{2} = \hlm{8\sqrt{2}}$\\[2pt]
+  $\sqrt{45} + \sqrt{20} - \sqrt{5} = 3\sqrt{5}+2\sqrt{5}-\sqrt{5} = \hlm{4\sqrt{5}}$%
+}
+
+\nota{\textbf{Não se simplificam:}
+$\sqrt{2}+\sqrt{3}$ (radicandos diferentes) \quad
+$\sqrt{2}+\sqrt[3]{2}$ (índices diferentes).}
+
+%─────────────────────────────────────────────────────────────
+\TW{P¹²³}{darkblue}{Propriedades 1ª a 3ª}{Cancelamento, produto e quociente}
+
+\SH{1ª — Raiz cancela potência de mesmo índice}
+\formula{$\sqrt[n]{a^n} = a \quad (a \geq 0 \text{ se } n \text{ par})$}
+\exemp{%
+  $\sqrt[3]{8} = \sqrt[3]{2^3} = 2$ \quad $\sqrt[4]{81} = \sqrt[4]{3^4} = 3$ \quad
+  $\sqrt{x^2} = |x|$%
+}
+
+\SH{2ª — Produto de raízes de mesmo índice}
+\formula{$\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a\cdot b}$}
+\exemp{%
+  $\sqrt{2}\cdot\sqrt{18} = \sqrt{36} = \hlm{6}$\\[2pt]
+  $\sqrt{4x^2} = \sqrt{4}\cdot\sqrt{x^2} = 2|x|$\\[2pt]
+  $\sqrt[3]{4}\cdot\sqrt[3]{2} = \sqrt[3]{8} = \hlm{2}$%
+}
+
+\SH{3ª — Quociente de raízes de mesmo índice}
+\formula{$\dfrac{\sqrt[n]{a}}{\sqrt[n]{b}} = \sqrt[n]{\dfrac{a}{b}} \quad (b \neq 0)$}
+\exemp{%
+  $\dfrac{\sqrt{108}}{\sqrt{12}} = \sqrt{\dfrac{108}{12}} = \sqrt{9} = \hlm{3}$\\[4pt]
+  $\sqrt{\dfrac{a^2}{b^2}} = \dfrac{\sqrt{a^2}}{\sqrt{b^2}} = \dfrac{a}{b}$
+  {\footnotesize$(a,b\geq0)$}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{P⁴⁵}{badgepurple}{Propriedades 4ª e 5ª}{Amplificação, simplificação e raiz de raiz}
+
+\SH{4ª — Amplificação / Simplificação}
+\obs{Multiplica-se (ou divide-se) índice e expoente do radicando pelo
+mesmo $c \neq 0$ sem alterar o valor.}
+\formula{$\sqrt[n]{a^b} = \sqrt[\,n\cdot c\,]{a^{\,b\cdot c}}$}
+\exemp{%
+  \textbf{Amplificar} ($\times2$): $\sqrt{3} = \sqrt[4]{3^2} = \sqrt[4]{9}$\\[2pt]
+  \textbf{Simplificar} ($\div3$): $\sqrt[6]{64} = \sqrt[6]{4^3} = \sqrt{4} = \hlm{2}$\\[2pt]
+  $\sqrt{8}\cdot\sqrt[4]{4} = \sqrt[4]{8^2}\cdot\sqrt[4]{4} = \sqrt[4]{256} = \hlm{4}$%
+}
+
+\SH{5ª — Raiz de raiz (multiplica os índices)}
+\formula{$\sqrt[n]{\sqrt[b]{a}} = \sqrt[\,n\cdot b\,]{a}$}
+\exemp{%
+  $\sqrt{\sqrt{81}} = \sqrt[4]{81} = \sqrt[4]{3^4} = \hlm{3}$\\[2pt]
+  $\sqrt{\sqrt{8}}\cdot\sqrt[4]{2} = \sqrt[4]{8}\cdot\sqrt[4]{2} = \sqrt[4]{16} = \hlm{2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Rac}{badgegreen}{Racionalização de Denominador}{Eliminando radicais do denominador}
+
+\regra{\textbf{Eliminar radicais do denominador} sem alterar o valor da
+fração. Multiplica-se numerador e denominador pelo fator que completa uma
+potência perfeita. Com $a \pm \sqrt{b}$, usa-se o \textbf{conjugado},
+pois $(a+b)(a-b) = a^2 - b^2$ elimina a raiz.}
+
+\SH{Tipo 1 — denominador $\sqrt{a}$}
+\exemp{%
+  $\dfrac{1}{\sqrt{2}} = \dfrac{1}{\sqrt{2}}\cdot\dfrac{\sqrt{2}}{\sqrt{2}}
+   = \dfrac{\sqrt{2}}{2} \Rightarrow \hlm{\dfrac{\sqrt{2}}{2}}$\\[4pt]
+  $\dfrac{4}{\sqrt{5}} = \dfrac{4}{\sqrt{5}}\cdot\dfrac{\sqrt{5}}{\sqrt{5}}
+   = \hlm{\dfrac{4\sqrt{5}}{5}}$%
+}
+
+\SH{Tipo 2 — conjugado $(a \pm \sqrt{b})$}
+\exemp{%
+  $\dfrac{5}{\sqrt{3}+1}\cdot\dfrac{\sqrt{3}-1}{\sqrt{3}-1}
+   = \dfrac{5(\sqrt{3}-1)}{(\sqrt{3})^2 - 1^2} = \hlm{\dfrac{5\sqrt{3}-5}{2}}$\\[4pt]
+  $\dfrac{3}{\sqrt{5}+\sqrt{2}}\cdot\dfrac{\sqrt{5}-\sqrt{2}}{\sqrt{5}-\sqrt{2}}
+   = \dfrac{3(\sqrt{5}-\sqrt{2})}{5-2} = \hlm{\sqrt{5}-\sqrt{2}}$%
+}
+
+\SH{Tipo 3 — raiz cúbica $\sqrt[3]{a}$}
+\obs{Multiplica-se por $\sqrt[3]{a^2}$ para completar $\sqrt[3]{a^3}=a$.}
+\exemp{%
+  $\dfrac{1}{\sqrt[3]{2}}\cdot\dfrac{\sqrt[3]{2^2}}{\sqrt[3]{2^2}}
+   = \dfrac{\sqrt[3]{4}}{\sqrt[3]{2^3}} = \hlm{\dfrac{\sqrt[3]{4}}{2}}$\\[4pt]
+  $\dfrac{6}{\sqrt[3]{3}}\cdot\dfrac{\sqrt[3]{9}}{\sqrt[3]{9}}
+   = \dfrac{6\sqrt[3]{9}}{3} = \hlm{2\sqrt[3]{9}}$%
+}
+
+\end{multicols}
+
+%─────────────────────────────────────────────────────────────
+\vspace{4pt}
+\TW{Ref}{badgegreen}{Principais Raízes}{Tabela de referência — quadradas e cúbicas}
+
+\vspace{6pt}
+\begin{center}
+\setlength{\tabcolsep}{12pt}\renewcommand{\arraystretch}{1.3}\small
+\begin{tabular}{cccc|cc}
+\rowcolor{rulebg}
+\multicolumn{4}{c|}{\textbf{Raízes Quadradas}} & \multicolumn{2}{c}{\textbf{Raízes Cúbicas}}\\
+$\sqrt{0}=0$  & $\sqrt{100}=10$ & $\sqrt{400}=20$  & $\sqrt{900}=30$  & $\sqrt[3]{0}=0$    & $\sqrt[3]{1000}=10$\\
+\rowcolor{exbg}
+$\sqrt{1}=1$  & $\sqrt{121}=11$ & $\sqrt{441}=21$  & $\sqrt{961}=31$  & $\sqrt[3]{1}=1$    & $\sqrt[3]{1331}=11$\\
+$\sqrt{4}=2$  & $\sqrt{144}=12$ & $\sqrt{484}=22$  & $\sqrt{1024}=32$ & $\sqrt[3]{8}=2$    & $\sqrt[3]{1728}=12$\\
+\rowcolor{exbg}
+$\sqrt{9}=3$  & $\sqrt{169}=13$ & $\sqrt{529}=23$  & $\sqrt{1089}=33$ & $\sqrt[3]{27}=3$   & $\sqrt[3]{2197}=13$\\
+$\sqrt{16}=4$ & $\sqrt{196}=14$ & $\sqrt{576}=24$  & $\sqrt{1156}=34$ & $\sqrt[3]{64}=4$   & $\sqrt[3]{2744}=14$\\
+\rowcolor{exbg}
+$\sqrt{25}=5$ & $\sqrt{225}=15$ & $\sqrt{625}=25$  & $\sqrt{1225}=35$ & $\sqrt[3]{125}=5$  & $\sqrt[3]{3375}=15$\\
+$\sqrt{36}=6$ & $\sqrt{256}=16$ & $\sqrt{676}=26$  & $\sqrt{1296}=36$ & $\sqrt[3]{216}=6$  & $\sqrt[3]{4096}=16$\\
+\rowcolor{exbg}
+$\sqrt{49}=7$ & $\sqrt{289}=17$ & $\sqrt{729}=27$  & $\sqrt{1369}=37$ & $\sqrt[3]{343}=7$  & $\sqrt[3]{4913}=17$\\
+$\sqrt{64}=8$ & $\sqrt{324}=18$ & $\sqrt{784}=28$  & $\sqrt{1444}=38$ & $\sqrt[3]{512}=8$  & $\sqrt[3]{5832}=18$\\
+\rowcolor{exbg}
+$\sqrt{81}=9$ & $\sqrt{361}=19$ & $\sqrt{841}=29$  & $\sqrt{1521}=39$ & $\sqrt[3]{729}=9$  & $\sqrt[3]{6859}=19$\\
+\end{tabular}
+\end{center}
+
+\end{document}
