@@ -7,6 +7,19 @@
 
 \newcommand{\hlm}[1]{{\color{darkblue}#1}}
 
+% \needspace não funciona dentro de multicols (quebra de coluna ocorre em passo
+% separado) e dispara quebras prematuras antes dos \TW. Redefine sem ele.
+\renewcommand{\TW}[4]{%
+  \noindent{\color{#2}\rule{\linewidth}{2pt}}\par\nopagebreak
+  \vspace{3pt}%
+  \noindent\badge{#1}{#2}\hspace{6pt}%
+  {\color{titletext}\bfseries\normalsize #3}\\[1pt]
+  {\color{mutedtext}\small\itshape #4}%
+  \par\nopagebreak
+  \vspace{-4pt}%
+  {\color{sepcolor}\rule{\linewidth}{0.8pt}}%
+}
+
 \setsubject{Sistema de Equações}
 
 \begin{document}
@@ -166,19 +179,15 @@ $\begin{cases} x + y = 50 \\ 10x + 5y = 380 \end{cases}$
 
 Adição: mult. (1) por $-5$: $-5x - 5y = -250$
 
-$(10x+5y) + (-5x-5y) = 380 - 250$
+$(10x+5y) + (-5x-5y) = 380 - 250 \Rightarrow 5x = 130$
 
-$5x = 130 \Rightarrow \hlm{x = 26}$ ingressos inteiros
-
-$\hlm{y = 24}$ meias-entradas
+$\hlm{x = 26}$ inteiros, \;$\hlm{y = 24}$ meias-entradas
 
 \textbf{Prob. 3 — Velocidade:}
 
 Trem A a 80 km/h e trem B a 100 km/h partem em sentido contrário a 360 km de distância.
 
-$\begin{cases} 80t + 100t = 360 \end{cases}$
-
-$180t = 360 \Rightarrow \hlm{t = 2 \text{ horas}}$
+$80t + 100t = 360 \Rightarrow 180t = 360 \Rightarrow \hlm{t = 2 \text{ horas}}$
 }
 
 \end{multicols}

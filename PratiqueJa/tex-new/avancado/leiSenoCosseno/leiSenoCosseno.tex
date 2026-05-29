@@ -5,6 +5,7 @@
 \documentclass[12pt]{article}
 \usepackage{../../pratiqueja}
 \usepackage{tikz}
+\usepackage{tabularx}
 
 \newcommand{\hlm}[1]{{\color{darkblue}#1}}
 
@@ -38,9 +39,10 @@ Em qualquer triângulo \textbf{ABC}, o lado \textbf{a} é oposto ao ângulo \tex
 \TW{Guia}{badgepurple}{Quando Usar Cada Lei}{Escolha rápida pelo caso do triângulo}
 
 \regra{
-\begin{center}
-\footnotesize
-\begin{tabular}{|c|l|l|}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{|c|X|c|}
 \hline
 \textbf{Caso} & \textbf{Dados conhecidos} & \textbf{Lei} \\
 \hline
@@ -52,8 +54,7 @@ Em qualquer triângulo \textbf{ABC}, o lado \textbf{a} é oposto ao ângulo \tex
 \hline
 \textcolor{red!70!black}{\textbf{LLL}} & 3 lados conhecidos & Cossenos \\
 \hline
-\end{tabular}
-\end{center}
+\end{tabularx}}
 
 \vspace{2pt}
 {\footnotesize * SSA = caso ambíguo: pode ter 0, 1 ou 2 triângulos.}
@@ -70,8 +71,8 @@ Em qualquer triângulo ABC, a razão entre cada lado e o seno do ângulo oposto 
 \]
 }
 
-\begin{center}\vspace{-4pt}
-\begin{tikzpicture}[scale=0.85]
+\vspace{-6pt}\begin{center}\vspace{-6pt}
+\begin{tikzpicture}[scale=0.72]
   % triângulo com A=30°, a=7, b=10
   \coordinate (A) at (0,0);
   \coordinate (B) at (3.5,0);
@@ -86,14 +87,15 @@ Em qualquer triângulo ABC, a razão entre cada lado e o seno do ângulo oposto 
   \node[right, font=\small] at (3.05,1.1) {$a$};
   \node[left, font=\small] at (1.2,1.1) {$b$};
   % ângulo A
-  \draw[exborder] (0.4,0) arc (0:41:0.4);
-  \node[font=\tiny, exborder] at (0.55,0.17) {$A$};
+  \draw[darkblue,thick] (0.45,0) arc (0:41:0.45);
+  \node[font=\scriptsize, darkblue] at (0.66,0.2) {$A$};
 \end{tikzpicture}
-\vspace{-4pt}\end{center}
+\vspace{-10pt}\end{center}
 
 \SH{Exemplo — caso AAS}
 
 Dados $a = 7$, $b = 10$, $A = 30°$. Resolver completamente:
+\vspace{-2pt}
 
 \exemp{
 \textbf{Passo 1 — encontrar B:}
@@ -114,9 +116,8 @@ $\hlm{C \approx 104{,}43°}$
 
 $\dfrac{7}{\operatorname{sen} 30°} = \dfrac{c}{\operatorname{sen} 104{,}43°}$
 
-$c = \dfrac{7 \cdot 0{,}9686}{0{,}5}$
+$c = \dfrac{7 \cdot 0{,}9686}{0{,}5} \hlm{ \approx 13{,}56}$
 
-$\hlm{c \approx 13{,}56}$
 }
 
 \nota{\textbf{Caso ambíguo (SSA):} quando $\operatorname{sen} B \leq 1$, verifique $B' = 180° - B$ quando $B$ é agudo e $a < b$. Podem existir 0, 1 ou 2 triângulos.}
