@@ -1,0 +1,291 @@
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/template/template.xhtml">
+
+    <ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+    </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="assunto" value="#{assuntoCursoBean.assunto}" />
+        <f:viewAction action="#{assuntoCursoBean.init()}" />
+    </f:metadata>
+
+    <ui:include src="/matematica/resumo.xhtml" />
+
+
+    <!-- ===== LAYOUT: seções ===== -->
+    <div class="tr-layout">
+
+        <!-- SEÇÕES -->
+        <div class="tr-content">
+
+            <!-- DEFINIÇÃO -->
+            <div class="tr-section" id="sec-def">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Def</div>
+                    <div>
+                        <div class="tr-section-title">Definição</div>
+                        <div class="tr-section-sub">O que é a função afim?</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    A função afim é uma função \(f : \mathbb{R} \rightarrow \mathbb{R}\) definida por
+                    \(f(x) = ax + b\), onde \(a, b \in \mathbb{R}\) e \(a \neq 0\).
+                </div>
+                <p>No plano cartesiano, a função afim é representada por uma <strong>reta não horizontal</strong>
+                de equação \(y = ax + b\). Por isso também é chamada de <strong>função de 1º grau</strong>.</p>
+                <p>O valor de <strong>\(a\)</strong> é o <strong>coeficiente angular</strong> —
+                representa a inclinação da reta (taxa de variação). O valor de <strong>\(b\)</strong>
+                é o <strong>coeficiente linear</strong> — é o valor de \(f(0)\), ou seja, o ponto
+                onde a reta cruza o eixo \(y\).</p>
+                <h4>Exemplo</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Dada \(f(x) = 3x + 4\): \(a = 3\) e \(b = 4\)</span>
+                        <span>\(f(2) = 3 \cdot 2 + 4 = 6 + 4\)</span>
+                        <span class="hl">\(f(2) = 10\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COEFICIENTE ANGULAR -->
+            <div class="tr-section" id="sec-angular">
+                <div class="tr-section-header">
+                    <div class="tr-badge">a</div>
+                    <div>
+                        <div class="tr-section-title">Coeficiente Angular</div>
+                        <div class="tr-section-sub">Taxa de variação e inclinação da reta</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dados dois pontos \(A = (x_A, y_A)\) e \(B = (x_B, y_B)\) pertencentes à reta,
+                    o coeficiente angular é a razão entre a variação de \(y\) e a variação de \(x\):
+                </div>
+                <div class="tr-rule">
+                    \(a = \dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B - x_A}\)
+                </div>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Dados \(A = (2, 3)\) e \(B = (3, 5)\)</span>
+                        <span>\(a = \dfrac{5 - 3}{3 - 2} = \dfrac{2}{1}\)</span>
+                        <span class="hl">\(a = 2\) → função <strong>crescente</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">A cada 1 unidade em \(x\), \(y\) aumenta 2.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Dados \(A = (1, 4)\) e \(B = (3, 0)\)</span>
+                        <span>\(a = \dfrac{0 - 4}{3 - 1} = \dfrac{-4}{2}\)</span>
+                        <span class="hl">\(a = -2\) → função <strong>decrescente</strong></span>
+                        <span style="font-size:.83rem;color:#6b7280;">A cada 1 unidade em \(x\), \(y\) diminui 2.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COEFICIENTE LINEAR -->
+            <div class="tr-section" id="sec-linear">
+                <div class="tr-section-header">
+                    <div class="tr-badge">b</div>
+                    <div>
+                        <div class="tr-section-title">Coeficiente Linear</div>
+                        <div class="tr-section-sub">Interseção com o eixo y</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O coeficiente linear \(b\) é o valor de \(f(0)\) — ponto onde a reta corta o eixo \(y\).
+                    Para calculá-lo a partir de dois pontos: encontre \(a\) primeiro, depois substitua
+                    as coordenadas de qualquer ponto na equação \(y = ax + b\) e isole \(b\).
+                </div>
+                <div class="tr-rule">
+                    \(b = y - a \cdot x\)
+                </div>
+                <h4>Exemplo 1 — cálculo direto</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>A reta passa por \((2, 7)\) e tem \(a = 3\). Calcule \(b\).</span>
+                        <span>\(b = 7 - 3 \cdot 2 = 7 - 6\)</span>
+                        <span class="hl">\(b = 1 \;\Rightarrow\; f(x) = 3x + 1\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo 2 — determinando a função pelo gráfico</h4>
+                <p>O gráfico abaixo passa pelos pontos \((-5,\,-4)\) e \((5,\,6)\).
+                Determine \(f(x) = ax + b\).</p>
+
+                <div class="tr-fig-center">
+                    <img src="#{request.contextPath}/matematica/intermediario/funcaoAfim/fig-grafico-afim.svg"
+                         alt="Gráfico cartesiano da função afim passando por (-5,-4) e (5,6)" />
+                </div>
+
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 1 — Coeficiente angular:</strong></span>
+                        <span>\(a = \dfrac{6 - (-4)}{5 - (-5)} = \dfrac{10}{10}\)</span>
+                        <span class="hl">\(a = 1\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span><strong>Passo 2 — Coeficiente linear</strong> (usando o ponto \((5, 6)\)):</span>
+                        <span>\(6 = 1 \cdot 5 + b \Rightarrow b = 6 - 5\)</span>
+                        <span class="hl">\(b = 1 \;\Rightarrow\; f(x) = x + 1\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ZERO DA FUNÇÃO -->
+            <div class="tr-section" id="sec-zero">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">x₀</div>
+                    <div>
+                        <div class="tr-section-title">Zero da Função (Raiz)</div>
+                        <div class="tr-section-sub">Ponto onde a reta cruza o eixo x</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O zero da função afim é o valor de \(x\) para o qual \(f(x) = 0\).
+                    Geometricamente, é o ponto onde a reta intercepta o eixo \(x\).
+                </div>
+                <div class="tr-rule">
+                    \(f(x) = 0 \;\Rightarrow\; ax + b = 0 \;\Rightarrow\; x_0 = -\dfrac{b}{a}\)
+                </div>
+                <p>O zero existe para qualquer função afim (com \(a \neq 0\)) e é único,
+                pois uma reta não horizontal intercepta o eixo \(x\) em exatamente um ponto.</p>
+                <h4>Exemplos</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule o zero de \(f(x) = 2x - 6\)</span>
+                        <span>\(2x - 6 = 0 \Rightarrow 2x = 6\)</span>
+                        <span class="hl">\(x_0 = 3\)</span>
+                        <span style="font-size:.83rem;color:#6b7280;">A reta cruza o eixo \(x\) no ponto \((3, 0)\).</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule o zero de \(f(x) = -3x + 9\)</span>
+                        <span>\(-3x + 9 = 0 \Rightarrow -3x = -9\)</span>
+                        <span class="hl">\(x_0 = 3\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Calcule o zero de \(f(x) = x + 1\) (do exemplo anterior)</span>
+                        <span>\(x + 1 = 0\)</span>
+                        <span class="hl">\(x_0 = -1\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESTUDO DO SINAL -->
+            <div class="tr-section" id="sec-sinal">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">±</div>
+                    <div>
+                        <div class="tr-section-title">Estudo do Sinal</div>
+                        <div class="tr-section-sub">Quando f(x) é positiva, nula ou negativa</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    O sinal de \(f(x)\) muda no zero da função \(x_0 = -b/a\) e depende
+                    do sinal do coeficiente angular \(a\).
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Se \(a &gt; 0\) (função crescente):</span>
+                        <span>\(f(x) &lt; 0\) para \(x &lt; x_0\)</span>
+                        <span>\(f(x) = 0\) para \(x = x_0\)</span>
+                        <span class="hl">\(f(x) &gt; 0\) para \(x &gt; x_0\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Se \(a &lt; 0\) (função decrescente):</span>
+                        <span>\(f(x) &gt; 0\) para \(x &lt; x_0\)</span>
+                        <span>\(f(x) = 0\) para \(x = x_0\)</span>
+                        <span class="hl">\(f(x) &lt; 0\) para \(x &gt; x_0\)</span>
+                    </div>
+                </div>
+                <h4>Exemplo — resolução de inequação</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span>Para quais valores de \(x\) temos \(2x - 6 &gt; 0\)?</span>
+                        <span>Zero: \(x_0 = 3\). Como \(a = 2 &gt; 0\) (crescente):</span>
+                        <span>\(f(x) &gt; 0\) quando \(x &gt; x_0\)</span>
+                        <span class="hl">Solução: \(x &gt; 3\), ou seja, \(x \in (3, +\infty)\)</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span>Para quais valores de \(x\) temos \(-3x + 9 \geq 0\)?</span>
+                        <span>Zero: \(x_0 = 3\). Como \(a = -3 &lt; 0\) (decrescente):</span>
+                        <span>\(f(x) \geq 0\) quando \(x \leq x_0\)</span>
+                        <span class="hl">Solução: \(x \leq 3\), ou seja, \(x \in (-\infty, 3]\)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASOS PARTICULARES -->
+            <div class="tr-section" id="sec-casos">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">Esp</div>
+                    <div>
+                        <div class="tr-section-title">Casos Particulares</div>
+                        <div class="tr-section-sub">Função linear e função constante</div>
+                    </div>
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Função Linear — \(b = 0\)</span>
+                        <span>\(f(x) = ax\) — a reta passa pela <strong>origem</strong> \((0, 0)\)</span>
+                        <span>Exemplo: \(f(x) = 5x\) → zero em \(x_0 = 0\)</span>
+                        <span class="hl">É um caso especial da função afim.</span>
+                    </div>
+                    <div class="tr-ex tr-steps">
+                        <span style="font-weight:600;">Função Constante — \(a = 0\)</span>
+                        <span>\(f(x) = b\) — reta <strong>horizontal</strong>, mesmo valor para todo \(x\)</span>
+                        <span>Exemplo: \(f(x) = 4\) → nunca cruza o eixo \(x\) (sem zero)</span>
+                        <span class="hl">Não é função afim pois \(a = 0\).</span>
+                    </div>
+                </div>
+                <div class="tr-note">
+                    <strong>Atenção:</strong> toda função linear é afim, mas nem toda função afim é linear.
+                    A função constante não é afim e não é linear.
+                </div>
+            </div>
+
+            <!-- PROBLEMA CONTEXTUALIZADO -->
+            <div class="tr-section" id="sec-prob">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Prob</div>
+                    <div>
+                        <div class="tr-section-title">Problema Contextualizado</div>
+                        <div class="tr-section-sub">Aplicação da função afim em situações reais</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    <strong>Estratégia:</strong> (1) identificar a taxa de variação (\(a\)) e o valor
+                    inicial (\(b\)); (2) montar a função \(f(x) = ax + b\);
+                    (3) responder às perguntas do problema.
+                </div>
+                <h4>Problema 1 — Táxi</h4>
+                <p>Um táxi cobra R$ 5,00 de bandeirada e R$ 2,50 por quilômetro rodado.
+                Qual é o valor da corrida para \(x\) quilômetros? A partir de quantos km a corrida
+                ultrapassa R$ 30,00?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>Taxa de variação: \(a = 2{,}50\) (R$/km). Valor inicial: \(b = 5\).</span>
+                        <span>\(f(x) = 2{,}50x + 5\)</span>
+                        <span>Para \(f(x) &gt; 30\): \(2{,}50x + 5 &gt; 30 \Rightarrow 2{,}50x &gt; 25\)</span>
+                    </div>
+                </div>
+                <div class="se-result">\(x &gt; 10\) km</div>
+                <h4>Problema 2 — Temperatura</h4>
+                <p>A temperatura de uma peça resfriada decresce de forma linear, partindo de \(80°C\)
+                e perdendo \(5°C\) por minuto. Após quantos minutos a temperatura atinge \(30°C\)?</p>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(a = -5\) (queda por minuto), \(b = 80\): \(\;T(x) = -5x + 80\)</span>
+                        <span>\(-5x + 80 = 30 \Rightarrow -5x = -50\)</span>
+                    </div>
+                </div>
+                <div class="se-result">\(x = 10\) minutos</div>
+            </div>
+
+        </div><!-- /tr-content -->
+    </div><!-- /tr-layout -->
+
+
+</ui:decorate>

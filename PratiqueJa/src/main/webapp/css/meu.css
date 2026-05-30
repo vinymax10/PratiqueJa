@@ -622,8 +622,8 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 }
 
 .title {
-	font-weight: 600;
-	font-size: 1.1rem;
+	font-weight: 500;
+	font-size: 1rem;
 	color: var(--cinza-claro);
 }
 

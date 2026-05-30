@@ -141,7 +141,18 @@
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/sistemaEquacoes\" \"tex-new/avancado/sistemaEquacoes/sistemaEquacoes.tex\")",
       "Bash(pdfinfo tex-new/avancado/sistemaEquacoes/sistemaEquacoes.pdf)",
       "Bash(\"C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe\" -interaction=nonstopmode -output-directory \"tex-new/avancado/trigoAdicao\" \"tex-new/avancado/trigoAdicao/trigoAdicao.tex\")",
-      "Bash(pdfinfo tex-new/avancado/trigoAdicao/trigoAdicao.pdf)"
+      "Bash(pdfinfo tex-new/avancado/trigoAdicao/trigoAdicao.pdf)",
+      "Bash(ls -1 java/matematica)",
+      "Bash(ls -1 java/matematica/__TRACKED_VAR__)",
+      "Bash(git mv *)",
+      "Bash(awk ' *)",
+      "Bash(python _regroup_menu.py)",
+      "Bash(rm -f _regroup_menu.py)",
+      "Bash(cd \"C:/Servidor/wildfly-35.0.1.Final-PratiqueJa/wildfly-35.0.1.Final\")",
+      "Bash(ls -1 standalone/configuration/)",
+      "Bash([ -e \"src/main/java/matematica/$p\" ])",
+      "Bash([ -d \"src/main/java/matematica/$p\" ])",
+      "Bash(ls -d src/main/webapp/image/matematica/intermediario/decimal)"
     ]
   }
 }

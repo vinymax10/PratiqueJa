@@ -1,0 +1,195 @@
+% ============================================================
+%  Sistema de Equações — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+% \needspace não funciona dentro de multicols (quebra de coluna ocorre em passo
+% separado) e dispara quebras prematuras antes dos \TW. Redefine sem ele.
+\renewcommand{\TW}[4]{%
+  \noindent{\color{#2}\rule{\linewidth}{2pt}}\par\nopagebreak
+  \vspace{3pt}%
+  \noindent\badge{#1}{#2}\hspace{6pt}%
+  {\color{titletext}\bfseries\normalsize #3}\\[1pt]
+  {\color{mutedtext}\small\itshape #4}%
+  \par\nopagebreak
+  \vspace{-4pt}%
+  {\color{sepcolor}\rule{\linewidth}{0.8pt}}%
+}
+
+\setsubject{Sistema de Equações}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Sistema de Equações}%
+           {Substituição, adição, comparação e tipos de solução}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+\TW{Def}{darkblue}{Definição}{O que é um sistema de equações?}
+
+\regra{
+Um \hl{sistema de equações} é um conjunto de duas ou mais equações que compartilham as mesmas variáveis. O objetivo é encontrar os valores que satisfazem \textbf{todas} as equações simultaneamente.
+
+Focaremos nos \hl{sistemas lineares} — formados por equações do 1º grau. Cada equação representa uma reta, e a solução é o ponto de interseção entre elas.
+}
+
+\exemp{
+\[
+  \begin{cases}
+    2x + 3y = 6 \\
+    x - y = 2
+  \end{cases}
+\]
+}
+
+\TW{1}{badgepurple}{Tipos de Solução}{Consistente, dependente ou inconsistente}
+
+\regra{
+\begin{itemize}
+  \item \textbf{Solução única} — sistema \hl{consistente e independente}. As retas se cruzam em um único ponto.
+  \item \textbf{Infinitas soluções} — sistema \hl{consistente e dependente}. As equações representam a mesma reta (são múltiplos uma da outra).
+  \item \textbf{Nenhuma solução} — sistema \hl{inconsistente}. Retas paralelas — nunca se cruzam.
+\end{itemize}
+}
+
+\TW{2}{darkblue}{Método da Substituição}{Isolar uma variável e substituir na outra equação}
+
+\regra{
+Isola-se uma das variáveis em uma das equações e substitui-se na outra. Recomendado quando uma variável tem coeficiente 1 ou é fácil de isolar.
+}
+
+\exemp{
+\[
+  \begin{cases}
+    x + y = 5 \quad \text{(1)} \\
+    2x - y = 4 \quad \text{(2)}
+  \end{cases}
+\]
+
+\textbf{Passo 1} — Isolar $x$ em (1): $x = 5 - y$
+
+\textbf{Passo 2} — Substituir em (2):
+
+$2(5-y) - y = 4$
+
+$10 - 2y - y = 4$
+
+$-3y = -6 \;\Rightarrow\; y = 2$
+
+\textbf{Passo 3} — $x = 5 - 2 = 3$
+
+$\hlm{x = 3 \;\;\text{e}\;\; y = 2}$
+}
+
+\TW{3}{darkblue}{Método da Adição}{Eliminar uma variável somando as equações}
+
+\regra{
+Multiplica-se uma ou ambas as equações por constantes de modo que, ao somá-las, uma das incógnitas seja eliminada.
+}
+
+\exemp{
+\[
+  \begin{cases}
+    2x + y = 5 \quad \text{(1)} \\
+    x - y = 1 \quad \text{(2)}
+  \end{cases}
+\]
+
+Os coef. de $y$ são $+1$ e $-1$ — já opostos:
+
+$(2x+y) + (x-y) = 5+1$
+
+$3x = 6 \;\Rightarrow\; x = 2$
+
+Substituindo em (2): $2 - y = 1 \;\Rightarrow\; y = 1$
+
+$\hlm{x = 2 \;\;\text{e}\;\; y = 1}$
+}
+
+\obs{Quando os coeficientes não são opostos, multiplique uma ou ambas as equações por uma constante para torná-los opostos antes de somar.}
+
+\TW{4}{darkblue}{Método da Comparação}{Isolar a mesma variável em ambas e igualar}
+
+\regra{
+Isola-se a \hl{mesma variável} nas duas equações e igualam-se as expressões obtidas, reduzindo o sistema a uma única equação com uma incógnita.
+}
+
+\exemp{
+\[
+  \begin{cases}
+    7x + y = 140 \quad \text{(1)} \\
+    -8x + y = -145 \quad \text{(2)}
+  \end{cases}
+\]
+
+(1) $y = 140 - 7x$
+
+(2) $y = -145 + 8x$
+
+Igualando: $140 - 7x = -145 + 8x$
+
+$285 = 15x \;\Rightarrow\; x = 19$
+
+$y = 140 - 7 \cdot 19 = 140 - 133 = 7$
+
+$\hlm{x = 19 \;\;\text{e}\;\; y = 7}$
+}
+
+\TW{Prat}{badgepurple}{Qual Método Usar?}{Guia rápido de escolha}
+
+\regra{
+\begin{itemize}
+  \item Uma variável tem coef. 1 → \textbf{Substituição}
+  \item Coeficientes de uma variável são opostos (ou facilmente tornam-se opostos) → \textbf{Adição}
+  \item Fácil isolar a mesma variável nas duas equações → \textbf{Comparação}
+\end{itemize}
+Todos os métodos levam ao mesmo resultado — escolha o mais rápido para cada sistema.
+}
+
+\TW{Prob}{badgepurple}{Problemas Contextualizados}{Sistemas aplicados em situações reais}
+
+\exemp{
+\textbf{Prob. 1 — Idades:}
+
+A soma das idades de Ana e Bruno é 30 anos. Bruno é 6 anos mais velho.
+
+$\begin{cases} a + b = 30 \\ b = a + 6 \end{cases}$
+
+Substituindo: $a + (a+6) = 30 \Rightarrow 2a = 24$
+
+$\hlm{a = 12 \text{ anos}}$ \quad $\hlm{b = 18 \text{ anos}}$
+
+\textbf{Prob. 2 — Ingresso:}
+
+50 ingressos vendidos: inteira (R\$\,10) + meia (R\$\,5) = R\$\,380.
+
+$\begin{cases} x + y = 50 \\ 10x + 5y = 380 \end{cases}$
+
+Adição: mult. (1) por $-5$: $-5x - 5y = -250$
+
+$(10x+5y) + (-5x-5y) = 380 - 250 \Rightarrow 5x = 130$
+
+$\hlm{x = 26}$ inteiros, \;$\hlm{y = 24}$ meias-entradas
+
+\textbf{Prob. 3 — Velocidade:}
+
+Trem A a 80 km/h e trem B a 100 km/h partem em sentido contrário a 360 km de distância.
+
+$80t + 100t = 360 \Rightarrow 180t = 360 \Rightarrow \hlm{t = 2 \text{ horas}}$
+}
+
+\end{multicols}
+
+\end{document}

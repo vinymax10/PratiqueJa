@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import matematica.expressao.MyExpression;
-import matematica.intermediario.somaangulostriangulo.Angulo;
+import matematica.basico.somaangulostriangulo.Angulo;
 
 
 public class AuxSemelhancaAngulos

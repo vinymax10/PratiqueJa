@@ -1,0 +1,132 @@
+% ============================================================
+%  Soma dos Ângulos de um Triângulo — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\tikzset{
+  tri/.style={draw=darkblue, line width=1.2pt, fill=accentblue!12!white},
+  aalpha/.style={vered, line width=1.2pt},
+  abeta/.style={badgepurple, line width=1.2pt},
+  agamma/.style={badgegreen, line width=1.2pt},
+  cl/.style={font=\footnotesize\bfseries},
+}
+
+\setsubject{Soma dos Ângulos de um Triângulo}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Ângulos do Triângulo}%
+           {Soma dos Internos, Isósceles e Ângulo Externo}%
+           {Matemática · Básico}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Soma dos ângulos internos}
+
+\regra{A soma dos ângulos internos de \textbf{qualquer triângulo} é
+sempre igual a $180°$.}
+
+\formula{$\alpha + \beta + \gamma = 180°$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.82]
+\coordinate (A) at (0,0); \coordinate (B) at (5,0); \coordinate (C) at (1.5,2.5);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[aalpha]  (A)++(0:0.55) arc (0:59:0.55);
+\draw[agamma]  (B)++(145:0.55) arc (145:180:0.55);
+\draw[abeta]   (C)++(239:0.55) arc (239:324:0.55);
+\node[vered,cl]      at (0.66,0.30){$\alpha$};
+\node[badgegreen,cl] at (4.22,0.22){$\gamma$};
+\node[badgepurple,cl] at (1.5,1.78){$\beta$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Vale para escaleno, isósceles ou equilátero. Serve para achar
+ângulos desconhecidos e fundamenta identidades trigonométricas.}
+
+\SH{Exemplo — achar o 3º ângulo}
+\exemp{%
+  Ângulos de $65°$ e $30°$, achar $x$:\\
+  $65° + 30° + x = 180°$\\
+  $95° + x = 180° \Rightarrow x = 180° - 95° = \hlm{85°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Iso}{badgegreen}{Triângulo Isósceles}{Dois lados e dois ângulos iguais}
+
+\regra{No triângulo \textbf{isósceles}, os dois ângulos da \textbf{base}
+são sempre iguais.}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.78]
+\coordinate (A) at (0,0); \coordinate (B) at (3,0); \coordinate (C) at (1.5,3);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[aalpha] (A)++(0:0.55) arc (0:63:0.55);
+\draw[aalpha] (B)++(117:0.55) arc (117:180:0.55);
+\draw[abeta]  (C)++(244:0.5) arc (244:296:0.5);
+% marcas de lados congruentes
+\draw[darkblue,line width=1pt] ($(0.75,1.5)+(153:0.12)$)--($(0.75,1.5)+(153:-0.12)$);
+\draw[darkblue,line width=1pt] ($(2.25,1.5)+(27:0.12)$)--($(2.25,1.5)+(27:-0.12)$);
+\node[vered,cl]       at (0.62,0.32){$\alpha$};
+\node[vered,cl]       at (2.38,0.32){$\alpha$};
+\node[badgepurple,cl] at (1.5,2.18){$\beta$};
+\end{tikzpicture}
+\end{center}
+
+\obs{Possui \textbf{dois lados de mesma medida}; o terceiro é a
+\textbf{base}. Os ângulos entre a base e os lados congruentes são iguais.}
+
+\SH{Exemplo — ângulo do vértice $40°$}
+\exemp{%
+  Ângulos da base $x$ iguais, vértice $40°$:\\
+  $x + x + 40° = 180° \Rightarrow 2x = 140°$\\
+  $x = \dfrac{140°}{2} = \hlm{70°}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Ext}{darkblue}{Ângulo Externo}{Igual à soma dos internos não adjacentes}
+
+\regra{O \textbf{ângulo externo} é igual à \textbf{soma dos dois ângulos
+internos não adjacentes} a ele.}
+
+\formula{$\text{externo} = \alpha + \beta$}
+
+\begin{center}\vspace{2pt}
+\begin{tikzpicture}[scale=0.78]
+\coordinate (A) at (0,0); \coordinate (B) at (5,0); \coordinate (C) at (1.5,2.5);
+\coordinate (X) at (6.5,0);
+\draw[tri] (A)--(B)--(C)--cycle;
+\draw[line width=1.2pt, darkblue] (B)--(X);
+\draw[aalpha] (A)++(0:0.55) arc (0:59:0.55);
+\draw[abeta]  (C)++(239:0.55) arc (239:324:0.55);
+\draw[agamma] (B)++(145:0.5) arc (145:180:0.5);
+\draw[vered, line width=1.2pt] (B)++(0:0.6) arc (0:145:0.6);
+\node[vered,cl]       at (0.66,0.30){$\alpha$};
+\node[badgepurple,cl] at (1.5,1.78){$\beta$};
+\node[badgegreen,cl]  at (4.3,0.24){$\gamma$};
+\node[vered,cl]       at (5.55,0.92){$\alpha{+}\beta$};
+\end{tikzpicture}
+\end{center}
+
+\obs{\textbf{Por quê?} O externo é suplementar ao interno adjacente
+$\gamma$:\\
+externo $= 180° - \gamma = \alpha + \beta$ (pois $\alpha+\beta+\gamma=180°$).}
+
+\end{multicols}
+
+\end{document}

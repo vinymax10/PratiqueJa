@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
-import matematica.intermediario.somaangulostriangulo.Angulo;
-import matematica.intermediario.somaangulostriangulo.Config;
+import matematica.basico.somaangulostriangulo.Angulo;
+import matematica.basico.somaangulostriangulo.Config;
 
 
 public class ConfigSemelhancaAngulos4 extends Config

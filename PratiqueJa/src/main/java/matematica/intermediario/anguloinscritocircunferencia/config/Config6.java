@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
-import matematica.intermediario.somaangulostriangulo.Config;
+import matematica.basico.somaangulostriangulo.Config;
 
 public class Config6 extends Config
 {

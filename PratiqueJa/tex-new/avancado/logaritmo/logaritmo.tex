@@ -1,0 +1,176 @@
+% ============================================================
+%  Logaritmos — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Logaritmos}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Logaritmos}%
+           {Definição, Propriedades e Equações}%
+           {Matemática · Avançado}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Relação entre logaritmo e potenciação}
+
+\regra{O logaritmo de $a$ na base $b$ é o expoente $x$ ao qual $b$
+deve ser elevada para dar $a$. ($b$ = base, $a$ = logaritmando,
+$x$ = logaritmo.)}
+
+\formula{$\log_b a = x \;\iff\; a = b^x$}
+
+\obs{\textbf{Condições:} $b>0$, $b\neq1$ e $a>0$. Não existe log de
+número negativo ou zero, nem base $1$.}
+
+\exemp{%
+  $\log_2 8$: $\;8 = 2^x \Rightarrow 2^3 = 2^x \Rightarrow \hlm{x=3}$\\[3pt]
+  $\log_3 81$: $\;3^4 = 3^x \Rightarrow \hlm{x=4}$\\[3pt]
+  $\log_5 25$: $\;5^2 = 5^x \Rightarrow \hlm{x=2}$%
+}
+
+\SH{Tipos comuns}
+\obs{\textbf{Natural} $(\ln)$: base $e \approx 2{,}718$; $\ln a = \log_e a$.
+\quad \textbf{Decimal} $(\log)$: base $10$; $\log a = \log_{10} a$.}
+
+\SH{Comportamento}
+\obs{$b>1$ → função \textbf{crescente}; \quad $0<b<1$ → função
+\textbf{decrescente}.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Esp}{badgegreen}{Logaritmos Especiais}{Resultados imediatos da definição}
+
+\regra{Decorrem direto da definição — memorize:}
+
+\exemp{%
+  $\log_b 1 = 0$ \;{\footnotesize(pois $b^0=1$)}\\
+  \quad $\log_2 1 = 0$, \ $\log_{10} 1 = 0$\\[3pt]
+  $\log_b b = 1$ \;{\footnotesize(pois $b^1=b$)}\\
+  \quad $\log_2 2 = 1$, \ $\log_{10} 10 = 1$\\[3pt]
+  $\log_b b^n = n$ \;{\footnotesize(log cancela a potência)}\\
+  \quad $\log_2 2^5 = 5$, \ $\log_{10} 10^3 = 3$\\[3pt]
+  $b^{\log_b a} = a$ \;{\footnotesize(pot.\ e log se cancelam)}\\
+  \quad $2^{\log_2 7} = 7$, \ $10^{\log 5} = 5$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{MB}{darkblue}{Mudança de Base}{Reescrever em qualquer base}
+
+\regra{Todo logaritmo é a razão de dois logaritmos numa base auxiliar
+$c$ — essencial na calculadora (só tem $\log$ e $\ln$).}
+
+\formula{$\log_b a = \dfrac{\log_c a}{\log_c b}$}
+
+\exemp{%
+  $\log_8 16 = \dfrac{\log_2 16}{\log_2 8} = \hlm{\dfrac{4}{3}}$\\[4pt]
+  $\log_2 5 = \dfrac{\log 5}{\log 2} \approx \dfrac{0{,}699}{0{,}301}
+   \approx \hlm{2{,}322}$%
+}
+
+\nota{\textbf{Consequências:} $\log_b a \cdot \log_a b = 1$ \ e \
+$\log_b a = \dfrac{1}{\log_a b}$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\times\,\div$}{darkblue}{Produto e Quociente}{Log transforma $\times$ em $+$ e $\div$ em $-$}
+
+\SH{Produto — soma dos logaritmos}
+\formula{$\log_b a + \log_b c = \log_b(a\cdot c)$}
+\exemp{%
+  $\log_6 4 + \log_6 9 = \log_6 36 = \hlm{2}$\\[3pt]
+  $\log_2 4 + \log_2 8 = \log_2 32 = \hlm{5}$%
+}
+
+\SH{Quociente — diferença dos logaritmos}
+\formula{$\log_b a - \log_b c = \log_b\!\left(\dfrac{a}{c}\right)$}
+\exemp{%
+  $\log_3 54 - \log_3 2 = \log_3 27 = \hlm{3}$\\[3pt]
+  $\log_{10} 500 - \log_{10} 5 = \log_{10} 100 = \hlm{2}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Exp}{darkblue}{Potência e Base Potência}{Movendo expoentes}
+
+\SH{Potência — o expoente desce como fator}
+\formula{$c\cdot\log_b a = \log_b(a^c)$}
+\exemp{%
+  $\log_2 8^3 = 3\cdot\log_2 8 = 3\cdot3 = \hlm{9}$\\[3pt]
+  $2\cdot\log_2 \sqrt{8} = \log_2 8 = \hlm{3}$%
+}
+
+\SH{Base potência — divide pelo expoente da base}
+\formula{$\log_{b^c} a = \dfrac{1}{c}\cdot\log_b a$}
+\exemp{%
+  $\log_4 8 = \log_{2^2} 8 = \dfrac{1}{2}\cdot3 = \hlm{\dfrac{3}{2}}$\\[3pt]
+  $\log_9 27 = \log_{3^2} 3^3 = \dfrac{1}{2}\cdot3 = \hlm{\dfrac{3}{2}}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Eq}{badgepurple}{Equações Logarítmicas}{Incógnita no logaritmando}
+
+\regra{Isole o log e converta para forma exponencial (ou una os
+termos com as propriedades antes). \textbf{Sempre verifique} as
+condições de existência.}
+
+\SH{Tipo 1 — logaritmo isolado}
+\exemp{%
+  $\log_2 x = 3 \;\Rightarrow\; x = 2^3 = \hlm{8}$\\[3pt]
+  $\log_5 x = -2 \;\Rightarrow\; x = 5^{-2} = \hlm{\dfrac{1}{25}}$%
+}
+
+\SH{Tipo 2 — usando propriedades}
+\exemp{%
+  $\log_2 x + \log_2 4 = 5$\\
+  $\log_2(4x) = 5 \Rightarrow 4x = 32 \Rightarrow x = \hlm{8}$\\[3pt]
+  $\log_3 x - \log_3 2 = 2$\\
+  $\log_3\!\left(\tfrac{x}{2}\right) = 2 \Rightarrow \tfrac{x}{2} = 9
+   \Rightarrow x = \hlm{18}$%
+}
+
+\SH{Combinando propriedades}
+\exemp{%
+  $\log_2 4 + \log_2 8 - \log_2 2$\\
+  $= \log_2\!\left(\dfrac{32}{2}\right) = \log_2 16 = \hlm{4}$%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{Apl}{badgegreen}{Aplicações Práticas}{Escalas científicas (ordens de magnitude)}
+
+\regra{Logaritmos modelam grandezas que crescem em \textbf{ordens de
+magnitude} — cada unidade na escala é uma multiplicação, não uma
+soma.}
+
+\exemp{%
+  \textbf{Escala Richter} (sismos):\\
+  $M = \log\!\left(\dfrac{A}{A_0}\right)$\\
+  {\footnotesize Magnitude 7 é $10\times$ mais intensa que 6.}%
+}
+
+\exemp{%
+  \textbf{pH} (química):\\
+  $\text{pH} = -\log[\text{H}^+]$\\
+  $\text{pH} = 7 \Rightarrow [\text{H}^+] = 10^{-7}\,$mol/L%
+}
+
+\exemp{%
+  \textbf{Decibéis} (acústica):\\
+  $\text{dB} = 10\cdot\log\!\left(\dfrac{I}{I_0}\right)$\\
+  {\footnotesize Duplicar a intensidade soma só $\approx3$ dB.}%
+}
+
+\end{multicols}
+
+\end{document}

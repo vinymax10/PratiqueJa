@@ -1,0 +1,122 @@
+% ============================================================
+%  Funções — Apostila Premium | PratiqueJá
+%  Engine: XeLaTeX
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage{../../pratiqueja}
+
+% \hlm — destaque de resultado em modo-math (cor sem bold)
+\newcommand{\hlm}[1]{{\color{darkblue}#1}}
+
+\setsubject{Funções}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\heroheader{Funções}%
+           {Domínio, Tipos, Composta e Inversa}%
+           {Matemática · Intermediário}
+
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.5pt}
+\def\columnseprulecolor{\color{exborder}}
+
+\begin{multicols}{2}
+
+%─────────────────────────────────────────────────────────────
+\TW{Def}{badgepurple}{Definição}{Função, domínio, contradomínio e imagem}
+
+\regra{Uma \textbf{função} $f:A\to B$ associa a \textbf{cada} elemento de
+$A$ \textbf{exatamente um} de $B$. Associar a mais de um → \textbf{não é
+função}.}
+
+\obs{\textbf{Domínio} $D(f)=A$ (entradas); \textbf{Contradomínio}
+$CD=B$ (saídas possíveis); \textbf{Imagem} $\text{Im}(f)\subseteq B$
+(saídas realmente atingidas).}
+
+\nota{$f(x)=x^2$ com $D=\mathbb{R}$: \ $CD=\mathbb{R}$, mas
+$\text{Im}(f)=[0,+\infty)$ — negativos nunca são atingidos.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Rep}{darkblue}{Representações}{Fórmula, tabela, diagrama e gráfico}
+
+\regra{A mesma função pode ser descrita de \textbf{quatro} formas:}
+\exemp{%
+  \textbf{Fórmula:} $f(x)=2x+1$\\[2pt]
+  \textbf{Tabela:} $(0,1),(1,3),(2,5),(-1,-1)$\\[2pt]
+  \textbf{Diagrama de setas:} cada $x$ aponta para um único $f(x)$\\[2pt]
+  \textbf{Gráfico:} pontos $(x,f(x))$ no plano%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{?}{badgegreen}{Identificar se é Função}{Teste da reta vertical}
+
+\regra{\textbf{Reta vertical:} uma curva é gráfico de função se, e só
+se, toda reta vertical a corta em \textbf{no máximo um ponto}.}
+
+\exemp{%
+  \ok \ $y=x^2$ — é função\\[2pt]
+  \nok \ $x^2+y^2=25$ (circunf.) — não (em $x=3$, $y=\pm4$)\\[2pt]
+  \ok \ $y=\sqrt{x}$, $x\geq0$ — é função (só raiz positiva)%
+}
+\obs{\textbf{No diagrama:} é função se nenhum elemento de $A$ tem duas
+setas saindo (um de $B$ pode receber várias).}
+
+%─────────────────────────────────────────────────────────────
+\TW{Tipos}{badgepurple}{Tipos de Função}{Injetora, sobrejetora e bijetora}
+
+\exemp{%
+  \textbf{Injetora} (1-1): $f(x_1)=f(x_2)\Rightarrow x_1=x_2$\\[2pt]
+  \textbf{Sobrejetora:} $\text{Im}(f)=CD$\\[2pt]
+  \textbf{Bijetora:} injetora \emph{e} sobrejetora (admite inversa)%
+}
+\exemp{%
+  $f(x)=2x+1$ ($\mathbb{R}\to\mathbb{R}$) — \hlm{bijetora}\\[2pt]
+  $f(x)=x^2$ ($\mathbb{R}\to\mathbb{R}$) — nem injetora
+  ($f(2)=f(-2)$) nem sobrejetora\\[2pt]
+  $f(x)=x^2$ ($[0,\infty)\to[0,\infty)$) — \hlm{bijetora}%
+}
+
+%─────────────────────────────────────────────────────────────
+\needspace{11\baselineskip}
+\TW{$g\circ f$}{darkblue}{Função Composta}{$(g\circ f)(x)=g(f(x))$}
+\nopagebreak
+\regra{A \textbf{composição} aplica $f$ primeiro e depois $g$:
+$(g\circ f)(x)=g(f(x))$. A saída de $f$ deve estar no domínio de $g$.
+Em geral $g\circ f \neq f\circ g$.}
+
+\exemp{%
+  \textbf{$f(x)=2x$, $g(x)=x+3$:}\\
+  $(g\circ f)(x)=g(2x)=2x+3$\\
+  $(f\circ g)(x)=f(x+3)=2x+6$\\
+  \hlm{$g\circ f \neq f\circ g$}%
+}
+\exemp{%
+  \textbf{$f(x)=x^2$, $g(x)=\sqrt{x}$:}\\
+  $(g\circ f)(x)=\sqrt{x^2}=|x|$\\
+  $(f\circ g)(x)=(\sqrt{x})^2=x$ {\footnotesize($x\geq0$)}%
+}
+
+%─────────────────────────────────────────────────────────────
+\TW{$f^{-1}$}{badgegreen}{Função Inversa}{Desfaz $f$ — só para bijetoras}
+
+\regra{Se $f$ é \textbf{bijetora}, existe $f^{-1}$ com
+$f^{-1}(f(x))=x$ e $f(f^{-1}(y))=y$. Dom de $f^{-1}$ = Im de $f$.
+Graficamente: reflexo de $f$ na reta $y=x$.}
+
+\obs{\textbf{Como calcular:} (1) escreva $y=f(x)$; (2) isole $x$;
+(3) troque $x\leftrightarrow y$.}
+
+\exemp{%
+  \textbf{$f(x)=3x-2$:}\\
+  $y=3x-2 \Rightarrow x=\dfrac{y+2}{3}$\\
+  \hlm{$f^{-1}(x)=\dfrac{x+2}{3}$}\\
+  {\footnotesize Verif.: $3\cdot\frac{x+2}{3}-2 = x$ \ok}\\[3pt]
+  \textbf{$f(x)=x^3$:} \ $f^{-1}(x)=\sqrt[3]{x}$%
+}
+
+\end{multicols}
+
+\end{document}

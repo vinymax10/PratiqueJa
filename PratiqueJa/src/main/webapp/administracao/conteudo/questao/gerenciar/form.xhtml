@@ -20,7 +20,14 @@
 		<h4 class="title-divisor" >Questão</h4>
 
 		<div class="ui-fluid gride" >
-			
+
+			<!-- ID -->
+			<h:panelGroup
+			styleClass="m-2 col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
+				<h:outputText styleClass="title" value="ID" />
+				<h:outputText styleClass="status" value="#{questaoBean.entidade.id}" />
+			</h:panelGroup>
+
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Disciplina" />
 				<p:selectOneMenu value="#{questaoBean.entidade.disciplina}"

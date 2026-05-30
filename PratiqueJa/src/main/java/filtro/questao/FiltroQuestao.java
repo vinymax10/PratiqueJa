@@ -24,7 +24,7 @@ public class FiltroQuestao implements Serializable
 	private Boolean revisada;
 	private int ordemInsercao;
 	private String chave;
-	private long id;
+	private Long id;
 	private Boolean resolucaoLatex;
 	private AssuntoCurso assuntoCurso;
 	private Boolean acertei;
@@ -41,7 +41,8 @@ public class FiltroQuestao implements Serializable
 		revisada = null;
 		ordemInsercao = 0;
 		chave = null;
-		id = 0;
+		id = null;
+		resolucaoLatex = null;
 		assuntoCurso = null;
 		acertei = null;
 		respondida = null;
@@ -138,12 +139,12 @@ public class FiltroQuestao implements Serializable
 		this.chave = chave;
 	}
 
-	public long getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(long id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

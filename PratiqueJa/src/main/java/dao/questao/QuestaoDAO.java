@@ -158,7 +158,7 @@ public class QuestaoDAO extends DAO<Questao>
 			predicates.add(builder.equal(fromQuestao.get("ordemInsercao"), filtroQuestao.getOrdemInsercao()));
 		}
 
-		if(filtroQuestao.getId() != 0)
+		if(filtroQuestao.getId() != null && filtroQuestao.getId() != 0)
 		{
 			predicates.add(builder.equal(fromQuestao.<Long>get("id"), filtroQuestao.getId()));
 		}
@@ -175,9 +175,13 @@ public class QuestaoDAO extends DAO<Questao>
 		if(filtroQuestao.getResolucaoLatex() != null)
 		{
 			if(filtroQuestao.getResolucaoLatex().booleanValue())
-				predicates.add(builder.notEqual(fromQuestao.get("resolucao"),""));
+				predicates.add(builder.and(
+					builder.isNotNull(fromQuestao.get("resolucao")),
+					builder.notEqual(builder.trim(fromQuestao.<String>get("resolucao")), "")));
 			else
-				predicates.add(builder.isNull(fromQuestao.get("resolucao")));
+				predicates.add(builder.or(
+					builder.isNull(fromQuestao.get("resolucao")),
+					builder.equal(builder.trim(fromQuestao.<String>get("resolucao")), "")));
 		}
 		
 		Usuario usuario = Sessao.getUsuarioLogado();
