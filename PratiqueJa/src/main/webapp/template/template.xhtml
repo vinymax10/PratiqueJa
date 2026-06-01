@@ -152,7 +152,12 @@
 			<a href="/download/download.xhtml" class="t2-menu-item">
 				<i class="pi pi-download"></i> Download
 			</a>
-
+			
+			<a href="/post/configuracao.xhtml?configPost=#{sessaoBean.usuario.configPost.id}"
+			class="t2-menu-item">
+				<i class="fa-brands fa-instagram"></i> Post
+			</a>
+			
 			<div class="t2-menu-title">Matemática</div>
 
 			<div class="t2-menu-item t2-has-sub" onclick="t2ToggleSub(this)">
@@ -405,6 +410,7 @@
 					<i class="t2-sub-arrow pi pi-chevron-down"></i>
 				</div>
 				<div class="t2-submenu">
+				
 					<a href="/administracao/marketing/hashtag/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="fa-solid fa-hashtag"></i> Hashtag
 					</a>

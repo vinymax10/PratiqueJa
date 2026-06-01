@@ -4,7 +4,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-// Obsoleto: EnvioSpamBean agora usa @Inject ServletContext diretamente via CDI.
+// Obsoleto: EnvioSpamService agora usa @Inject ServletContext diretamente via CDI.
 @WebListener
 public class EmailServletContextListener implements ServletContextListener
 {

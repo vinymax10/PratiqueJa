@@ -113,6 +113,17 @@ public class Questao implements Serializable, Entidade
 	@AuditLabel(value = "revisada", genero = GeneroGramatical.FEMININO)
 	private boolean revisada;
 
+	@AuditLabel(value = "mal formulada", genero = GeneroGramatical.FEMININO)
+	private boolean malFormulada;
+
+	@AuditLabel(value = "multi assunto")
+	private boolean multiAssunto;
+
+	@Column(length = 512)
+	@Size(max = 512)
+	@AuditLabel(value = "observação da revisão", genero = GeneroGramatical.FEMININO)
+	private String obsRevisao;
+
 	@Transient
 	Alternativa alternativaEscolhida;
 

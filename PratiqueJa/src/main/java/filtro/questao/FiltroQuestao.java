@@ -9,7 +9,9 @@ import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
+import lombok.Data;
 
+@Data
 public class FiltroQuestao implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -29,6 +31,8 @@ public class FiltroQuestao implements Serializable
 	private AssuntoCurso assuntoCurso;
 	private Boolean acertei;
 	private Boolean respondida;
+	private Boolean malFormulada;
+	private Boolean multiAssunto;
 
 	public void limpar()
 	{
@@ -43,6 +47,8 @@ public class FiltroQuestao implements Serializable
 		chave = null;
 		id = null;
 		resolucaoLatex = null;
+		malFormulada = null;
+		multiAssunto = null;
 		assuntoCurso = null;
 		acertei = null;
 		respondida = null;

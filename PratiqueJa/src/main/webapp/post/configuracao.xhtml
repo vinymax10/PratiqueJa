@@ -5,190 +5,186 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Configuração de Post" />
+	</ui:define>
+
 	<f:metadata>
 	    <f:viewParam name="configPost" value="#{configPostBean.idConfigPost}" converter="jakarta.faces.Long"/>
 	    <f:viewAction action="#{configPostBean.carregarConfigPost()}" />
 	</f:metadata>
-			    
-    <div class="grid" style="display: flex; align-items: flex-end; gap: 2rem;margin:0 30px;">
-		<h2>Configuração de Post</h2>
-		<h5>Usuário: #{configPostBean.configPost.usuario.nome}</h5>
+
+	<div class="post-tabmenu">
 		<ui:include src="/post/tabMenu.xhtml" />
-    </div>
-    		    
-     <h:form id="form" >
-	    <div class="p-d-flex" style="margin:0 30px;">
-			
-	    	<div class="grid" style="margin:0; width:100%;">
-				
-				<div class="ui-fluid formgrid grid" style="width:100%;margin-top:1rem;">
-					<div class="campoMsg col-12 xl:col-4">
-						<p:outputLabel for="nome" value="Nome" />
-						<p:inputText id="nome" placeholder="Nome" maxlength="37"
-						title="Nome utilizado no rodapé do conteúdo."
-						value="#{configPostBean.configPost.nome}" required="true" 
-						requiredMessage="O nome é obrigatório"/>
-						<p:message for="nome" display="text" />
-					</div>
-					
-					<div class="campo col-12 md:col-2">
-						<p:outputLabel for="@next" value="Cor da Fonte" style="display:block" />
-						<p:colorPicker id="corFonte" value="#{configPostBean.configPost.corFonte}"
-						title="Cor utilizada no exercício e resolução."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-                    	closeButton="true" alpha="false"  >
-						</p:colorPicker>
-					</div>
-			        
-			        <div class="campo col-12 md:col-2">
-						<p:outputLabel for="@next" value="Cor do Título" style="display:block"/>
-						<p:colorPicker id="corTitulo" value="#{configPostBean.configPost.corTitulo}"
-						title="Cor utilizada no assunto do exercício."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-                    	closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-					
-					<div class="campo col-12 md:col-2">
-						<p:outputLabel for="@next" value="Cor do Nome" style="display:block"/>
-						<p:colorPicker id="corNome" value="#{configPostBean.configPost.corNome}"
-						title="Cor utilizada no nome contido no rodapé."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-                    	closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-					
-					<div class="campo col-12 md:col-2">
-						<p:outputLabel for="@next" value="Cor da Fórmula" style="display:block"/>
-						<p:colorPicker id="corFormula" value="#{configPostBean.configPost.corFormula}"
-						title="Cor utilizada nas fórmulas das resoluções."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-                    	closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-					
-					<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
-						<p:outputLabel for="transparencia" value="Transparência" />
-			            <p:inputText id="transparencia" value="#{configPostBean.configPost.transparencia}"
-			            title="Transparência utilizada na imagem do background." />
-			            <p:slider for="transparencia"/>
-			        </div>
-					
-					<div class="campoMsg col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
-						<p:outputLabel for="@next" value="Último Envio" />
-						<p:datePicker id="data" value="#{configPostBean.configPost.ultimoEnvio}"
-							locale="pt" required="true" requiredMessage="A data é obrigatória"  />
-						<p:message for="data" display="text"/>
-					</div>
-					
-					<div class="campoMsg col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
-		                <p:outputLabel for="@next" value="Finalidade da Cta"/>
-		                <p:selectOneMenu id="finalidadeCta" value="#{configPostBean.configPost.finalidadeCta}" 
-		                filter="true" filterMatchMode="contains" required="true" 
-		                requiredMessage="A finalidade da Cta é obrigatória" >
-		                    <f:selectItems value="#{finalidadeCtaBean.opcoes}" var="finalidadeCta" 
-		                    itemLabel="#{finalidadeCta.nome}" itemValue="#{finalidadeCta}"/>
-		                </p:selectOneMenu>
-		                <p:message for="finalidadeCta" display="text"/>
-		            </div>
-					
-					<div class="campoMsg col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
-		                <p:outputLabel for="@next" value="Perfil"/>
-		                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.perfilCriador}" 
-		                filter="true" filterMatchMode="contains" required="true" requiredMessage="O intervalo de envio é obrigatório" >
-		                    <f:selectItems value="#{perfilCriadorBean.opcoes}" var="perfil" 
-		                    itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
-		                </p:selectOneMenu>
-		                <p:message for="perfilCriador" display="text"/>
-		            </div>
-		            
-		            <div class="campo col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
-						<p:outputLabel for="@next" value="Ativo" />
-						<p:selectBooleanButton 
-							value="#{configPostBean.configPost.ativo}"
-							onLabel="Sim" offLabel="Não" 
-							onIcon="fa fa-solid fa-thumbs-up" offIcon="fa fa-solid fa-thumbs-down"
-							style="width-min:8rem;display:block;">
-						</p:selectBooleanButton>
-					</div>
-		            
-		            <div class="campo p-col-12 #{configPostBean.configPost.perfilCriador=='Master'? '':'hidden'}">
-						<p:outputLabel for="@next" value="Descrição das CTA" />
-						<p:inputTextarea rows="5" maxlength="4096"
-						placeholder="Descreva como as legendas devem ser configuradas para que possam ser personalizadas."
-						value="#{configPostBean.configPost.descricaoCTA}" />
-					</div>
-					
-					<div class="col-12">
-						<p:fieldset legend="Logomarca" styleClass="meu-fieldset-half" >
-							<div class="ui-fluid formgrid grid">
-								<div class="col-12 xl:col-6 mb-4">
-									<p:fileUpload listener="#{configPostBean.uploadLogo}" 
-						    		label="Escolha um arquivo."
-							    	invalidFileMessage="São permitidos somente arquivos png."
-									invalidSizeMessage="O tamanho máximo permitido é de 10MB."
-							    	auto="true"
-							    	update="form:imagem"	 >
-							    		<p:validateFile  sizeLimit="5002400" virusScan="true" 
-										allowTypes="/(\.|\/)(png)$/"/>
-									</p:fileUpload>
-								</div>
-								<div class="col-12 xl:col-6">
-									<h:panelGroup id="imagem" >
-										<p:panel  header="Logomarca"  styleClass="titleSlim mb-4" rendered="#{configPostBean.configPost.logo!=null}"  >
-											<f:facet name="actions">
-									            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
-									             action="#{configPostBean.removerLogo}" update="form:configPost:imagem,:growl">
-								                    <i class="pi pi-times" style="line-height: 2;"></i>
-									            </p:commandLink>
-									        </f:facet>
-											<p:graphicImage  value="#{configPostBean.configPost.logo.endImagem}" 
-								       		style="width:100%;padding-top:5px;">
-											</p:graphicImage>
-										</p:panel>
-									</h:panelGroup>
-								</div>
-						        <div class="col-12">
-								
-									<p:staticMessage severity="info" summary="Detalhes do arquivo" display="text"
-						       		detail="A logomarca deve estar no formato PNG, com fundo transparente e tamanho de 400 x 100 pixels. Se o upload for realizado em um tamanho diferente, o sistema fará o redimensionamento da imagem, o que pode causar distorções." 
-						       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
-								</div>
-							</div>
-						</p:fieldset>
-					</div>
-				</div>
-					
-				<p:divider />
-		
-				<div class="p-grid" style="width:100%">
-					
-					<div class="p-col-6" >
-						<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
-						title="Restaura a configuração default."
-						styleClass="ui-button-raised ui-button-help ui-button-flat" 
-						action="#{configPostBean.configDefault()}" update="@form, :growl"  process="@form"	>
-						</p:commandButton>
-					</div>
-					
-					<div class="p-col-6 p-text-right" >
-					
-						<p:commandButton id="salvarGerais" value="Salvar" 
-						styleClass="ui-button-raised buttonBlue mr-2"  icon="pi pi-check" 
-						action="#{configPostBean.salvar}" update="@form, :growl"  process="@form"	>
-							<p:defaultCommand target="form:salvarGerais"/>
-						</p:commandButton>
-						
-					</div>
-				</div>
-								
-			</div>
+	</div>
+
+	<h:form id="form" class="form">
+
+		<div class="title-divisor-button">
+			<h4 style="margin:0;padding:0;border:0;">Configuração de Post</h4>
+			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
 		</div>
-		<br/>
-		<br/>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 xl:col-4">
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" placeholder="Nome" maxlength="37"
+				title="Nome utilizado no rodapé do conteúdo."
+				value="#{configPostBean.configPost.nome}" required="true"
+				requiredMessage="O nome é obrigatório"/>
+				<p:message for="nome" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2">
+				<p:outputLabel for="@next" value="Cor da Fonte" style="display:block" />
+				<p:colorPicker id="corFonte" value="#{configPostBean.configPost.corFonte}"
+				title="Cor utilizada no exercício e resolução."
+				disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+				theme="polaroid" formatToggle="true" clearButton="true"
+                closeButton="true" alpha="false"  >
+				</p:colorPicker>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2">
+				<p:outputLabel for="@next" value="Cor do Título" style="display:block"/>
+				<p:colorPicker id="corTitulo" value="#{configPostBean.configPost.corTitulo}"
+				title="Cor utilizada no assunto do exercício."
+				disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+				theme="polaroid" formatToggle="true" clearButton="true"
+                closeButton="true" alpha="false" >
+				</p:colorPicker>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2">
+				<p:outputLabel for="@next" value="Cor do Nome" style="display:block"/>
+				<p:colorPicker id="corNome" value="#{configPostBean.configPost.corNome}"
+				title="Cor utilizada no nome contido no rodapé."
+				disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+				theme="polaroid" formatToggle="true" clearButton="true"
+                closeButton="true" alpha="false" >
+				</p:colorPicker>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-2">
+				<p:outputLabel for="@next" value="Cor da Fórmula" style="display:block"/>
+				<p:colorPicker id="corFormula" value="#{configPostBean.configPost.corFormula}"
+				title="Cor utilizada nas fórmulas das resoluções."
+				disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+				theme="polaroid" formatToggle="true" clearButton="true"
+                closeButton="true" alpha="false" >
+				</p:colorPicker>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
+				<p:outputLabel for="transparencia" value="Transparência" />
+	            <p:inputText id="transparencia" value="#{configPostBean.configPost.transparencia}"
+	            title="Transparência utilizada na imagem do background." />
+	            <p:slider for="transparencia"/>
+	        </h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-2">
+				<p:outputLabel for="@next" value="Último Envio" />
+				<p:datePicker id="data" value="#{configPostBean.configPost.ultimoEnvio}"
+					locale="pt" required="true" requiredMessage="A data é obrigatória"  />
+				<p:message for="data" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
+                <p:outputLabel for="@next" value="Finalidade da Cta"/>
+                <p:selectOneMenu id="finalidadeCta" value="#{configPostBean.configPost.finalidadeCta}"
+                filter="true" filterMatchMode="contains" required="true"
+                requiredMessage="A finalidade da Cta é obrigatória" >
+                    <f:selectItems value="#{finalidadeCtaBean.opcoes}" var="finalidadeCta"
+                    itemLabel="#{finalidadeCta.nome}" itemValue="#{finalidadeCta}"/>
+                </p:selectOneMenu>
+                <p:message for="finalidadeCta" display="text"/>
+            </h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
+                <p:outputLabel for="@next" value="Perfil"/>
+                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.perfilCriador}"
+                filter="true" filterMatchMode="contains" required="true" requiredMessage="O intervalo de envio é obrigatório" >
+                    <f:selectItems value="#{perfilCriadorBean.opcoes}" var="perfil"
+                    itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
+                </p:selectOneMenu>
+                <p:message for="perfilCriador" display="text"/>
+            </h:panelGroup>
+
+            <h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2 #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}">
+				<p:outputLabel for="@next" value="Ativo" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{configPostBean.configPost.ativo}" />
+			</h:panelGroup>
+
+            <h:panelGroup styleClass="campo col-12 #{configPostBean.configPost.perfilCriador=='Master'? '':'hidden'}">
+				<p:outputLabel for="@next" value="Descrição das CTA" />
+				<p:inputTextarea rows="5" maxlength="4096"
+				placeholder="Descreva como as legendas devem ser configuradas para que possam ser personalizadas."
+				value="#{configPostBean.configPost.descricaoCTA}" />
+			</h:panelGroup>
+
+			<div class="col-12">
+				<p:fieldset legend="Logomarca" styleClass="meu-fieldset-half" >
+					<div class="ui-fluid formgrid grid">
+						<div class="col-12 xl:col-6 mb-4">
+							<p:fileUpload listener="#{configPostBean.uploadLogo}"
+				    		label="Escolha um arquivo."
+					    	invalidFileMessage="São permitidos somente arquivos png."
+							invalidSizeMessage="O tamanho máximo permitido é de 10MB."
+					    	auto="true"
+					    	update="form:imagem"	 >
+					    		<p:validateFile  sizeLimit="5002400" virusScan="true"
+								allowTypes="/(\.|\/)(png)$/"/>
+							</p:fileUpload>
+						</div>
+						<div class="col-12 xl:col-6">
+							<h:panelGroup id="imagem" >
+								<p:panel  header="Logomarca"  styleClass="titleSlim mb-4" rendered="#{configPostBean.configPost.logo!=null}"  >
+									<f:facet name="actions">
+							            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+							             action="#{configPostBean.removerLogo}" update="form:configPost:imagem,:growl">
+						                    <i class="pi pi-times" style="line-height: 2;"></i>
+							            </p:commandLink>
+							        </f:facet>
+									<img src="/images#{configPostBean.configPost.logo.endImagem}" 
+									alt="#{configPostBean.configPost.logo.nome}" style="width:100%;padding-top:5px;"/>
+								</p:panel>
+							</h:panelGroup>
+						</div>
+				        <div class="col-12">
+
+							<p:staticMessage severity="info" summary="Detalhes do arquivo" display="text"
+				       		detail="A logomarca deve estar no formato PNG, com fundo transparente e tamanho de 400 x 100 pixels. Se o upload for realizado em um tamanho diferente, o sistema fará o redimensionamento da imagem, o que pode causar distorções."
+				       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
+						</div>
+					</div>
+				</p:fieldset>
+			</div>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
+				title="Restaura a configuração default."
+				styleClass="ui-button-raised ui-button-help"
+				action="#{configPostBean.configDefault()}" update="@form, :growl"  process="@form"	>
+				</p:commandButton>
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton id="salvarGerais" value="Salvar"
+				styleClass="ui-button-raised ui-button-primary"  icon="pi pi-check"
+				action="#{configPostBean.salvar}" update="@form, :growl"  process="@form"	>
+					<p:defaultCommand target="salvarGerais"/>
+				</p:commandButton>
+			</div>
+
+		</div>
+
 	</h:form>
 </ui:decorate>

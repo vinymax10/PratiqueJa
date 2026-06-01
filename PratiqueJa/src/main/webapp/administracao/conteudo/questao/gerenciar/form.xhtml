@@ -126,6 +126,23 @@
 				value="#{questaoBean.entidade.revisada}" />
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Mal Formulada" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{questaoBean.entidade.malFormulada}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Multi Assunto" />
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{questaoBean.entidade.multiAssunto}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-12 lg:col-9 xl:col-6">
+				<p:outputLabel for="@next" value="Observação da Revisão" />
+				<p:inputText value="#{questaoBean.entidade.obsRevisao}" maxlength="512" />
+			</h:panelGroup>
+
 		</div>
 
 		<ui:include rendered="#{!questaoBean.cadastro}"

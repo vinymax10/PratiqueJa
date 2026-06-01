@@ -152,7 +152,17 @@
       "Bash(ls -1 standalone/configuration/)",
       "Bash([ -e \"src/main/java/matematica/$p\" ])",
       "Bash([ -d \"src/main/java/matematica/$p\" ])",
-      "Bash(ls -d src/main/webapp/image/matematica/intermediario/decimal)"
+      "Bash(ls -d src/main/webapp/image/matematica/intermediario/decimal)",
+      "Bash(echo '9364 | malformada: só 1 alternativa \\(sem distratores\\) - corrigir manualmente')",
+      "Bash(echo '9367 | calculo financeiro complexo \\(mora + correcao + juros + multa\\) - revisar manualmente')",
+      "Bash(ls \"/c/Python\"*)",
+      "Bash(py --version)",
+      "Bash(py _rev_apply.py)",
+      "Bash*",
+      "Bash(cd \"C:/Users/maximovrm/git/PratiqueJa/PratiqueJa\")",
+      "Bash(python -c 'import xml.dom.minidom,sys; xml.dom.minidom.parse\\('\\\\''__TRACKED_VAR__'\\\\''\\); print\\('\\\\''OK  __TRACKED_VAR__'\\\\''\\)')",
+      "PowerShell(mvn *)",
+      "PowerShell(try { [xml]$x = Get-Content -Raw -Encoding UTF8 \"src/main/webapp/post/programacao.xhtml\"; Write-Output \"OK programacao.xhtml\" } catch { Write-Output \"FAIL -> $\\($_.Exception.Message\\)\" })"
     ]
   }
 }

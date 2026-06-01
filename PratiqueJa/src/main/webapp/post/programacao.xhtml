@@ -5,116 +5,118 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Programação de Post" />
+	</ui:define>
+
 	<f:metadata>
 	    <f:viewParam name="configPost" value="#{configPostBean.idConfigPost}" converter="jakarta.faces.Long"/>
 	    <f:viewAction action="#{configPostBean.carregarConfigPost()}" />
 	</f:metadata>
-			  
-    <div class="grid" style="display: flex; align-items: flex-end; gap: 2rem;margin:0 30px;">
-		<h2>Programação de Post</h2>
-		<h5>Usuário: #{configPostBean.configPost.usuario.nome}</h5>
-		<ui:include src="/post/tabMenu.xhtml" />
-    </div>
-    				    
-     <h:form id="form" >
-	    <div class="p-d-flex" style="margin:0 30px;">
-			
-	    	<div class="grid" style="margin:0; width:100%;">
-				
-   				<div class="formgrid grid" style="width:100%;margin-top:1rem;">
-					
-					<div class="p-col-6" >
-						<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
-						title="Restaura a configuração default utilizando todos os assuntos um por dia."
-						styleClass="ui-button-raised ui-button-help ui-button-flat mr-6"
-						action="#{programacaoPostBean.programacaoDefault()}" update="@form, :growl"
-						process="@this" 
-						style="margin-bottom:1rem;" />
-					
-						<p:commandButton value="Remover Todos" icon="pi pi-trash"
-						title="Remove todas as configurações."
-						styleClass="ui-button-raised ui-button-danger ui-button-flat "
-						action="#{programacaoPostBean.removerTodosAcao()}" update="@form, :growl"
-						process="@this" 
-						style="margin-bottom:1rem;" />
-					</div>
-					
-					<div class="p-col-6 comandRight" >
-					 	
-						<p:commandButton value="Adicionar" icon="pi pi-plus"
-						styleClass="ui-button-raised ui-button-success ui-button-flat"
-						action="#{programacaoPostBean.cadastrar}" update="@form, :dialog-adicionar-programacaoPost"
-						process="@this" oncomplete="PF('dialogAdicionarProgramacaoPost').show()"  resetValues="true" 
-						style="margin-bottom:1rem;" />
-						
-					</div>
-				</div>
-				
-				<p:staticMessage styleClass="mt-2" severity="info" summary="Como reprogramar" display="text"
-	       		detail="Para editar clique na respectiva linha e para mudar a ordem basta arrastar a linha para outra posição." 
-	       		style="background: #ecf1ff !important;margin:15px 0 0 0;"/>
-	       		
-				<p:dataTable id="tabela" class="table mt-3" stripedRows="true" reflow="true"
-				var="programacaoPost" value="#{configPostBean.configPost.programacoesPost}"
-				selection="#{programacaoPostBean.programacaoPost}"
-				selectionMode="single" rowKey="#{programacaoPost.id}"
-				rows="30" paginator="true"	paginatorAlwaysVisible="false" draggableRows="true" >
-				
-				<p:ajax event="rowSelect" update="@form, dialog-editar-programacaoPost" 
-				oncomplete="PF('dialogEditarProgramacaoPost').show()"	 resetValues="true"/>
-				
-				<p:ajax event="rowReorder" listener="#{programacaoPostBean.onRowReorder}" update="@form"/>
-				
-				<p:column headerText="Imagem" width="4rem" responsivePriority="1" >
-		    		<img class="rectangleTable" 
-                    src="/image/matematica/#{programacaoPost.assuntoCurso.getModuloImage()}/#{programacaoPost.assuntoCurso.getChaveImage()}/#{programacaoPost.assuntoCurso.getChaveImage()}.png" />
-		    	</p:column>
-		    	
-		    	<p:column headerText="Assunto"  >
-					<h:outputText value="#{programacaoPost.assuntoCurso.nome}" />
-				</p:column>
-				
-				<p:column headerText="Background Feed"  >
-					<h:outputText value="Escolha: #{programacaoPost.backgroundAleatorioFeed? 'Aleatória' : 'Específica'}" style="display:block" />
-					<h:outputText value="Base de dados: #{programacaoPost.basePadraoFeed? 'Padrão' : 'Personalizada'}" />
-				</p:column>
-				
-				<p:column headerText="Background Reel"  >
-					<h:outputText value="Escolha: #{programacaoPost.backgroundAleatorioReel? 'Aleatória' : 'Específica'}" style="display:block" />
-					<h:outputText value="Base de dados: #{programacaoPost.basePadraoReel? 'Padrão' : 'Personalizada'}" />
-				</p:column>
-				
-				<p:column headerText="Data" >
-					<h:outputText value="#{programacaoPost.data}">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
-					</h:outputText>
-				</p:column>
-				
-				<p:column  headerText="Alternativa"  responsivePriority="2">
-					<h:outputText value="#{programacaoPost.alternativaReel}" converter="simNaoConverter"/>
-				</p:column>
-	
-				<p:column headerText="Remover"  style="width:4rem">
-					<p:commandLink title="Remover a Programação de Post"
-						action="#{programacaoPostBean.remover(programacaoPost)}" update="@form, :growl"
-						process="@this">
-						<div class="buttonIcon">
-							<i class="pi pi-trash despesa"></i>
-						</div>
-					</p:commandLink>
-		
-	            </p:column>				
-			</p:dataTable>
-							
-			</div>
-		</div>
-		<br/>
-		<br/>
-	</h:form>
-	
-	<ui:include src="/post/programacao/dialogProgramacaoEditar.xhtml" />
-	
-	<ui:include src="/post/programacao/dialogProgramacaoAdicionar.xhtml" />	
-</ui:decorate>
 
-	
+	<div class="post-tabmenu">
+		<ui:include src="/post/tabMenu.xhtml" />
+	</div>
+
+	<h:form id="form" class="form">
+
+		<div class="title-divisor-button">
+			<h4 style="margin:0;padding:0;border:0;">Programação de Post</h4>
+			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
+		</div>
+
+		<div class="content-button">
+
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton value="Default" icon="fa fa-solid fa-bookmark"
+				title="Restaura a configuração default utilizando todos os assuntos um por dia."
+				styleClass="ui-button-raised ui-button-help"
+				action="#{programacaoPostBean.programacaoDefault()}" update="@form, :growl"
+				process="@this" />
+
+				<p:commandButton value="Remover Todos" icon="pi pi-trash"
+				title="Remove todas as configurações."
+				styleClass="ui-button-raised ui-button-danger"
+				action="#{programacaoPostBean.removerTodosAcao()}" update="@form, :growl"
+				process="@this" />
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton value="Enviar agora" icon="pi pi-send"
+				title="Gera e envia por e-mail as publicações com data para hoje (ou anterior)."
+				styleClass="ui-button-raised ui-button-primary"
+				action="#{programacaoPostBean.enviarAgora()}" update="@form, :growl"
+				process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+						message="Deseja gerar e enviar agora as publicações com data para hoje? O conteúdo será enviado para o seu e-mail." />
+				</p:commandButton>
+
+				<p:commandButton value="Adicionar" icon="pi pi-plus"
+				styleClass="ui-button-raised ui-button-success"
+				action="#{programacaoPostBean.cadastrar}" update="@form, :dialog-adicionar-programacaoPost"
+				process="@this" oncomplete="PF('dialogAdicionarProgramacaoPost').show()"  resetValues="true" />
+			</div>
+
+		</div>
+
+		<p:staticMessage styleClass="mt-2" severity="info" summary="Como reprogramar" display="text"
+   		detail="Para editar clique na respectiva linha e para mudar a ordem basta arrastar a linha para outra posição."
+   		style="background: #ecf1ff !important;margin:0 1rem;width:100%;"/>
+
+		<p:dataTable id="tabela" class="table mt-3" stripedRows="true" reflow="true"
+		var="programacaoPost" value="#{configPostBean.configPost.programacoesPost}"
+		selection="#{programacaoPostBean.programacaoPost}"
+		selectionMode="single" rowKey="#{programacaoPost.id}"
+		rows="30" paginator="true"	paginatorAlwaysVisible="false" draggableRows="true" >
+
+			<p:ajax event="rowSelect" update="@form, dialog-editar-programacaoPost"
+			oncomplete="PF('dialogEditarProgramacaoPost').show()"	 resetValues="true"/>
+
+			<p:ajax event="rowReorder" listener="#{programacaoPostBean.onRowReorder}" update="@form"/>
+
+			<p:column headerText="Imagem" width="4rem" responsivePriority="1" >
+	    		<img class="rectangleTable"
+                src="/image/matematica/#{programacaoPost.assuntoCurso.getModuloImage()}/#{programacaoPost.assuntoCurso.getChaveImage()}/#{programacaoPost.assuntoCurso.getChaveImage()}.png" />
+	    	</p:column>
+
+	    	<p:column headerText="Assunto"  >
+				<h:outputText value="#{programacaoPost.assuntoCurso.nome}" />
+			</p:column>
+
+			<p:column headerText="Background Feed"  >
+				<h:outputText value="Escolha: #{programacaoPost.backgroundAleatorioFeed? 'Aleatória' : 'Específica'}" style="display:block" />
+				<h:outputText value="Base de dados: #{programacaoPost.basePadraoFeed? 'Padrão' : 'Personalizada'}" />
+			</p:column>
+
+			<p:column headerText="Background Reel"  >
+				<h:outputText value="Escolha: #{programacaoPost.backgroundAleatorioReel? 'Aleatória' : 'Específica'}" style="display:block" />
+				<h:outputText value="Base de dados: #{programacaoPost.basePadraoReel? 'Padrão' : 'Personalizada'}" />
+			</p:column>
+
+			<p:column headerText="Data" >
+				<h:outputText value="#{programacaoPost.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+				</h:outputText>
+			</p:column>
+
+			<p:column  headerText="Alternativa"  responsivePriority="2">
+				<h:outputText value="#{programacaoPost.alternativaReel}" converter="simNaoConverter"/>
+			</p:column>
+
+			<p:column headerText="Remover"  style="width:4rem">
+				<p:commandLink title="Remover a Programação de Post"
+					action="#{programacaoPostBean.remover(programacaoPost)}" update="@form, :growl"
+					process="@this">
+					<div class="buttonIcon">
+						<i class="pi pi-trash vermelho"></i>
+					</div>
+				</p:commandLink>
+            </p:column>
+		</p:dataTable>
+
+	</h:form>
+
+	<ui:include src="/post/programacao/dialogProgramacaoEditar.xhtml" />
+
+	<ui:include src="/post/programacao/dialogProgramacaoAdicionar.xhtml" />
+</ui:decorate>

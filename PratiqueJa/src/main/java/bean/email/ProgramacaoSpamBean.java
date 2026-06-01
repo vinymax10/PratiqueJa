@@ -17,8 +17,8 @@ import modelo.academico.AssuntoCurso;
 import modelo.email.ConfigSpam;
 import modelo.email.ProgramacaoSpam;
 import bean.academico.AssuntoCursoBean;
-import bean.publicacao.EnvioPostBean;
 import bean.util.Mensagem;
+import service.publicacao.EnvioPostService;
 
 @Data
 @Named
@@ -45,7 +45,7 @@ public class ProgramacaoSpamBean implements Serializable
 	private int ordem;
 
 	@Inject
-	private EnvioPostBean envioPostBean;
+	private EnvioPostService envioPostService;
 
 	public String cadastrar()
 	{
@@ -179,6 +179,6 @@ public class ProgramacaoSpamBean implements Serializable
 		ProgramacaoSpam ps = programacaoSpamDefault();
 		ps.setAssuntoCurso(assuntoCurso);
 		programacaoSpamDAO.salvar(ps);
-		envioPostBean.acorda();
+		envioPostService.acorda();
 	}
 }

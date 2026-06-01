@@ -5,70 +5,69 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Background Padrão" />
+	</ui:define>
+
 	<f:metadata>
 	    <f:viewAction action="#{configPostBean.init()}" />
 	</f:metadata>
-			    
-    <div class="grid" style="display: flex; align-items: flex-end; gap: 2rem;margin:0 30px;">
-		<h2>Background Padrão</h2>
-		<h5>Usuário: #{configPostBean.configPost.usuario.nome}</h5>
+
+	<div class="post-tabmenu">
 		<ui:include src="/post/tabMenu.xhtml" />
-    </div>
+	</div>
 
-    <h:form id="form" >
-	    <div class="p-d-flex" style="margin:0 30px;">
-			
-	    	<div class="grid" style="margin:0; width:100%;">
-				
-   				<div class="formgrid grid" style="width:100%;margin-top:1rem;">
-    				
-					<div class="col-12 lg:col-6" style="padding: 1rem;">
-						<p:fieldset legend="Background Feed" styleClass="meu-fieldset-half"	 >
+	<h:form id="form" class="form">
 
-						    <p:galleria value="#{imagemPostBean.imagensFeed}" var="image" numVisible="5" 
-				            showCaption="true" showItemNavigators="true" 
-				            circular="true" 
-				            responsiveOptions="#{imagemPostBean.responsiveOptions}"
-				            >
-						        <p:graphicImage value="#{image.endereco}" alt="#{image.nome}" 
-						        style="width: 100%; height:auto; display: block;" oncontextmenu="return false;" />
-						        <f:facet name="caption">
-						            <h4 class="mb-2">#{image.nome}</h4>
-						        </f:facet>
-						        <f:facet name="thumbnail">
-						            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
-						            alt="#{image.nome}" style="width: 80px; display: block;" />
-						        </f:facet>
-						    </p:galleria>
-
-					    </p:fieldset>
-					</div>
-					<div class="col-12 lg:col-6" style="padding: 1rem;">
-						<p:fieldset legend="Background Reel" styleClass="meu-fieldset-half" >
-						
-						    <p:galleria value="#{imagemPostBean.imagensReel}" var="image" numVisible="5" 
-						    showCaption="true" showItemNavigators="true" 
-						    circular="true" 
-						    responsiveOptions="#{imagemPostBean.responsiveOptions}" >
-						        <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;" 
-						        alt="#{image.nome}" style="width: 100%; display: block;" />
-						        <f:facet name="caption">
-						            <h4 class="mb-2">#{image.nome}</h4>
-						        </f:facet>
-						        <f:facet name="thumbnail">
-						            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
-						             alt="#{image.nome}" style="width: 80px; display: block;" />
-						        </f:facet>
-						    </p:galleria>
-					    </p:fieldset>
-					</div>
-			   </div>
-				
-			</div>
+		<div class="title-divisor-button">
+			<h4 style="margin:0;padding:0;border:0;">Background Padrão</h4>
+			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
 		</div>
-		<br/>
-		<br/>
+
+		<div class="ui-fluid gride">
+
+			<div class="col-12 lg:col-6" style="padding: 1rem;">
+				<p:fieldset legend="Background Feed" styleClass="meu-fieldset-half"	 >
+
+				    <p:galleria value="#{imagemPostBean.imagensFeed}" var="image" numVisible="5"
+			            showCaption="true" showItemNavigators="true"
+			            circular="true"
+			            responsiveOptions="#{imagemPostBean.responsiveOptions}"
+			            >
+					        <p:graphicImage value="#{image.endereco}" alt="#{image.nome}"
+					        style="width: 100%; height:auto; display: block;" oncontextmenu="return false;" />
+					        <f:facet name="caption">
+					            <h4 class="mb-2">#{image.nome}</h4>
+					        </f:facet>
+					        <f:facet name="thumbnail">
+					            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
+					            alt="#{image.nome}" style="width: 80px; display: block;" />
+					        </f:facet>
+					    </p:galleria>
+
+			    </p:fieldset>
+			</div>
+			<div class="col-12 lg:col-6" style="padding: 1rem;">
+				<p:fieldset legend="Background Reel" styleClass="meu-fieldset-half" >
+
+				    <p:galleria value="#{imagemPostBean.imagensReel}" var="image" numVisible="5"
+				    showCaption="true" showItemNavigators="true"
+				    circular="true"
+				    responsiveOptions="#{imagemPostBean.responsiveOptions}" >
+				        <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
+				        alt="#{image.nome}" style="width: 100%; display: block;" />
+				        <f:facet name="caption">
+				            <h4 class="mb-2">#{image.nome}</h4>
+				        </f:facet>
+				        <f:facet name="thumbnail">
+				            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
+				             alt="#{image.nome}" style="width: 80px; display: block;" />
+				        </f:facet>
+				    </p:galleria>
+			    </p:fieldset>
+			</div>
+
+		</div>
+
 	</h:form>
 </ui:decorate>
-
-	

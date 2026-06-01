@@ -15,6 +15,7 @@ import modelo.academico.AssuntoCurso;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import bean.util.Mensagem;
+import service.publicacao.EnvioPostService;
 import service.publicacao.ProgramacaoPostService;
 
 @Data
@@ -36,7 +37,7 @@ public class ProgramacaoPostBean implements Serializable
 	private int ordem;
 
 	@Inject
-	private EnvioPostBean envioPostBean;
+	private EnvioPostService envioPostService;
 
 	@Inject
 	private ProgramacaoPostService programacaoPostService;
@@ -120,6 +121,40 @@ public class ProgramacaoPostBean implements Serializable
 		return "";
 	}
 
+	public String enviarAgora()
+	{
+		ConfigPost configPost = configPostBean.getConfigPost();
+
+		if(!configPost.podeGerar())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN,
+			"Não é possível enviar: verifique se a configuração está ativa e possui nome, logomarca e e-mail cadastrados.");
+			return "";
+		}
+
+		try
+		{
+			int enviados = envioPostService.enviarConfig(configPost);
+
+			if(enviados == EnvioPostService.OCUPADO)
+				Mensagem.send("growl", FacesMessage.SEVERITY_WARN,
+				"Já existe um envio em andamento. Aguarde alguns instantes e tente novamente.");
+			else if(enviados == 0)
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Nenhuma programação com data para hoje (ou anterior). Nada foi enviado.");
+			else
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				enviados + " publicação(ões) gerada(s) e enviada(s) para o seu e-mail.");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível enviar a publicação.");
+		}
+
+		return "";
+	}
+
 	public String removerTodosAcao()
 	{
 		programacaoPostService.removerTodos(configPostBean.getConfigPost());
@@ -143,7 +178,7 @@ public class ProgramacaoPostBean implements Serializable
 		programacaoPost.setAssuntoCurso(assuntoCurso);
 		programacaoPost.setAvulsa(true);
 		programacaoPostService.persistir(programacaoPost);
-		envioPostBean.acorda();
+		envioPostService.acorda();
 	}
 
 	public ConfigPost getConfigPost()

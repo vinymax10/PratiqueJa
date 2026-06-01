@@ -172,6 +172,12 @@ public class QuestaoDAO extends DAO<Questao>
 		if(filtroQuestao.getRevisada() != null)
 			predicates.add(builder.equal(fromQuestao.get("revisada"), filtroQuestao.getRevisada().booleanValue()));
 
+		if(filtroQuestao.getMalFormulada() != null)
+			predicates.add(builder.equal(fromQuestao.get("malFormulada"), filtroQuestao.getMalFormulada().booleanValue()));
+
+		if(filtroQuestao.getMultiAssunto() != null)
+			predicates.add(builder.equal(fromQuestao.get("multiAssunto"), filtroQuestao.getMultiAssunto().booleanValue()));
+
 		if(filtroQuestao.getResolucaoLatex() != null)
 		{
 			if(filtroQuestao.getResolucaoLatex().booleanValue())

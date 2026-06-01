@@ -32,6 +32,17 @@
 
 ## Padrão da resolução (simples e objetivo)
 
+- **Definir as variáveis no início** quando a questão introduz uma incógnita (ex.:
+  `n = nº de revistas`, `x = idade`, `C = capital`). Deixa a resolução autoexplicativa.
+  (Pedido do usuário em 2026-05-30, a partir da Q25125.)
+- **Fórmula primeiro, depois a aplicação:** quando usar uma fórmula, escrever a **fórmula
+  geral** em uma linha e só então substituir os valores, para o aluno reconhecer de onde
+  vem a conta. Ex.: `S_n=\dfrac{n(a_1+a_n)}{2}` → depois `=\dfrac{10(2+20)}{2}=110`;
+  `A=\dfrac{(B+b)\,h}{2}` → depois com números; `J=C\cdot i\cdot t` → depois.
+  (Pedido do usuário em 2026-05-30.)
+- **Frações: usar `\dfrac{}{}` (não `\frac{}{}`)** — `\dfrac` mantém a fração em tamanho
+  cheio (display); `\frac` fica achatado/pequeno inline. Vale também em `\tfrac` → trocar
+  por `\dfrac`. (Pedido do usuário em 2026-05-30.)
 - Um bloco `\( ... \)` com a solução em **passos curtos**, `\\` entre linhas.
 - Fluxo: dado → cálculo-chave → resultado. **2 a 5 linhas**, sem prosa longa.
 - Destacar o resultado final (ex.: `= \mathbf{65\,\text{m}^2}` ou `\color{darkblue}{...}`).
@@ -76,13 +87,20 @@ Para **cada questão**:
 
 ### Fase 2 — Automática via /loop (RUNBOOK — cada ciclo)
 Disparada pelo usuário com `/loop` (autônomo). **A cada ciclo do loop:**
-1. Buscar próximo lote (~8–12) de não-revisadas de Matemática, **priorizando sem imagem e
+1. Buscar próximo lote (**~40** — ajustado de 20 em 2026-05-30 a pedido do usuário) de não-revisadas de Matemática, **priorizando sem imagem e
    sem LaTeX ainda** (`d.nome LIKE '%atem%' AND revisada=0`), excluindo as `#@SKIP`.
 2. Para cada questão: resolver o problema, reescrever enunciado/alternativas em LaTeX
    (regras do padrão), escrever resolução (math em linhas ≤40 chars com `\\`; texto-corrido
    com math inline). Unidades por extenso nas alternativas quando o original é por extenso.
 3. **Pular casos sem confiança** (cálculo muito complexo, dados ambíguos, imagem duvidosa):
-   NÃO marcar revisada; **registrar o id em `_revisao_skip.txt`** (id | motivo).
+   NÃO marcar revisada; registrar o id em `_revisao_skip.txt` (id | motivo). Além disso,
+   gravar o flag na própria questão (colunas novas em `questao`):
+   - **Gabarito furado / estrutura quebrada** → `UPDATE questao SET malFormulada=1,
+     obsRevisao='<motivo>' WHERE id=...` (deixar `revisada=0`).
+   - **Aborda mais de um assuntoCurso** (ex.: "Leia as afirmativas: I… II… III…" com tópicos
+     distintos) → `multiAssunto=1` (+ `obsRevisao`).
+   - Apenas "complexa demais p/ o automático" (questão válida) → só skip list, **não** marcar
+     malFormulada.
 4. Aplicar via `_rev_apply.py` (arquivo de lote `#Q/#P/#A/#R` → UNHEX → transação). Backup
    do lote em `_backup_revisao/batch_*.sql` antes de aplicar.
 5. Reportar progrésso (revisadas / faltam) e seguir para o próximo ciclo.

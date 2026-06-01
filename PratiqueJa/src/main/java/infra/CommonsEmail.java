@@ -2,14 +2,19 @@ package infra;
 
 import java.util.Properties;
 
-import modelo.email.Email;
+import jakarta.activation.DataHandler;
 import jakarta.mail.Authenticator;
 import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.util.ByteArrayDataSource;
+import modelo.email.Email;
+import service.email.EmailParaEnvio;
 
 public class CommonsEmail
 {
@@ -19,7 +24,7 @@ public class CommonsEmail
 //		Senha de app
 	static String senha = "wmgsacflxogbtwtv";
 
-	public static void mandarEmailSimples(Email emailPersit)
+	private static Session criarSession()
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
@@ -27,17 +32,68 @@ public class CommonsEmail
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.enable", "true");
 
-		Session session = Session.getInstance(props, new Authenticator()
+		return Session.getInstance(props, new Authenticator()
 		{
 			protected PasswordAuthentication getPasswordAuthentication()
 			{
 				return new PasswordAuthentication(usuario, senha);
 			}
 		});
+	}
 
+	/**
+	 * Envia um e-mail (com eventuais anexos) via SMTP. Propaga
+	 * {@link MessagingException} em caso de falha, para que o chamador possa
+	 * registrar a tentativa.
+	 */
+	public static void mandarEmail(EmailParaEnvio email) throws MessagingException
+	{
+		MimeMessage message = new MimeMessage(criarSession());
+		message.setFrom(new InternetAddress(usuario));
+		message.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(email.getDestinatario()));
+		message.setSubject(email.getAssunto(), "UTF-8");
+
+		if(email.getAnexos().isEmpty())
+		{
+			message.setText(email.getMensagem(), "UTF-8");
+		}
+		else
+		{
+			MimeMultipart multipart = new MimeMultipart();
+
+			MimeBodyPart corpo = new MimeBodyPart();
+			corpo.setText(email.getMensagem(), "UTF-8");
+			multipart.addBodyPart(corpo);
+
+			for(EmailParaEnvio.Anexo anexo : email.getAnexos())
+			{
+				String nome = anexo.getNome() != null ? anexo.getNome() : "anexo";
+				MimeBodyPart parte = new MimeBodyPart();
+				parte.setDataHandler(new DataHandler(new ByteArrayDataSource(anexo.getDados(), tipoMime(nome))));
+				parte.setFileName(nome);
+				multipart.addBodyPart(parte);
+			}
+
+			message.setContent(multipart);
+		}
+
+		Transport.send(message);
+	}
+
+	private static String tipoMime(String nome)
+	{
+		String n = nome.toLowerCase();
+		if(n.endsWith(".png")) return "image/png";
+		if(n.endsWith(".jpg") || n.endsWith(".jpeg")) return "image/jpeg";
+		if(n.endsWith(".pdf")) return "application/pdf";
+		return "application/octet-stream";
+	}
+
+	public static void mandarEmailSimples(Email emailPersit)
+	{
 		try
 		{
-			MimeMessage message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(criarSession());
 			message.setFrom(new InternetAddress(usuario));
 			message.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(emailPersit.getDestinatario()));
 			message.setSubject(emailPersit.getAssunto());
@@ -52,30 +108,6 @@ public class CommonsEmail
 			throw new RuntimeException(e);
 		}
 	}
-
-//			SimpleEmail email = new SimpleEmail();
-//			try
-//			{
-//				email.setCharset("UTF8");
-//				email.setDebug(true);
-//				email.setHostName(host);
-//				email.setSmtpPort(port);
-//				email.setAuthenticator(new DefaultAuthenticator("orcamentodigitalsuporte", senha));
-//				email.setSSLOnConnect(true);
-//				email.setStartTLSEnabled(false);
-//				email.setFrom(usuario); // será passado o email que você fará a autenticação
-//				email.addTo(emailPersit.getDestinatario().trim().split(" "));
-//				email.setSubject(emailPersit.getAssunto());
-//				email.setMsg(emailPersit.getMensagem());
-//				email.send();
-//				return true;
-//			}
-//			catch(EmailException e)
-//			{
-//				e.printStackTrace();
-//				return false;
-//			}
-//		}
 
 	public static void main(String[] args)
 	{

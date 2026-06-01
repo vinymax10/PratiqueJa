@@ -639,8 +639,8 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 }
 
 .status {
-	font-size: 1.2rem;
-	font-weight: 600;
+	font-size: 1.1rem;
+	font-weight: 500;
 	color: var(--azul);
 	word-break: break-all;
 	overflow-wrap: anywhere;
@@ -668,6 +668,15 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
+}
+
+.post-tabmenu {
+	margin: 0 10px 1rem;
+}
+
+.post-tabmenu .ui-tabmenu {
+	border: 0;
+	background: transparent;
 }
 
 .title-card {
