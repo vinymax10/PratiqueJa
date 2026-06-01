@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import util.ClasseAux;
 import filtro.configuracao.FiltroConfig;
 import infra.Log;
@@ -25,6 +28,8 @@ public abstract class DAO<T extends Entidade> implements Serializable, DAOInterf
 	protected EntityManager em;
 
 	private Class<T> classe;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(DAO.class);
 
 	public DAO(Class<T> classe)
 	{
@@ -34,13 +39,14 @@ public abstract class DAO<T extends Entidade> implements Serializable, DAOInterf
 	@Transactional
 	public void adicionar(T entidade)
 	{
+		LOG.info("Adicionou entidade '{}'", entidade);
 		em.persist(entidade);
 	}
 
 	@Transactional
 	public T salvar(T entidade)
 	{
-		Log.escrever("salvou entidade: " + entidade);
+		LOG.info("Salvou entidade '{}'", entidade);
 		if(entidade.getId() == null)
 		{
 			em.persist(entidade);
@@ -65,7 +71,7 @@ public abstract class DAO<T extends Entidade> implements Serializable, DAOInterf
 			entidade = em.find(classe, entidade.getId());
 
 		em.remove(entidade);
-		Log.escrever("removido com sucesso: " + entidade);
+		LOG.info("Removeu entidade '{}'", entidade);
 	}
 
 	@Transactional
