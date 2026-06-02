@@ -62,7 +62,6 @@ public class Matrizes1 extends Conta
 //		resolucaoLatex+="C="+AuxMatriz.matrizStr(c,posI,posJ);
 //		resolucaoLatex+="\\\\ \\\\ c_{"+(posI+1)+","+(posJ+1)+"}="+resultadoCorreto;
 
-//		System.out.println(pergunta);
 		if(size==3)
 			sizeFontTextLatex="\\scriptsize";
 		

@@ -33,6 +33,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.questao.Alternativa;
 import modelo.questao.Dificuldade;
 import modelo.questao.ImagemFile;
@@ -46,6 +47,7 @@ import modelo.academico.Orgao;
 import scraping.QuestaoQ;
 import web.session.SessionContext;
 
+@Data
 @Named
 @ViewScoped
 public class GestaoQuestaoBean implements Serializable
@@ -194,8 +196,6 @@ public class GestaoQuestaoBean implements Serializable
 //			{
 //				questao.setResolucaoComentadaFile(null);
 //				questaoDAO.salvar(questao);
-//				
-//				System.out.println("questao: "+questao.getChave());
 //			}
 //		}
 	}
@@ -477,122 +477,12 @@ public class GestaoQuestaoBean implements Serializable
 		questaoDAO.salvar(questao);
 	}
 
-	public QuestaoDAO getQuestaoDAO()
-	{
-		return questaoDAO;
-	}
-
-	public String getNome()
-	{
-		return nome;
-	}
-
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	public List<Questao> getQuestoes()
-	{
-		return questoes;
-	}
-
-	public void setQuestoes(List<Questao> questoes)
-	{
-		this.questoes = questoes;
-	}
-
-	public Questao getQuestao()
-	{
-		return questao;
-	}
-
-	public void setQuestao(Questao questao)
-	{
-		this.questao = questao;
-	}
-
-	public boolean isCadastro()
-	{
-		return cadastro;
-	}
-
-	public void setCadastro(boolean cadastro)
-	{
-		this.cadastro = cadastro;
-	}
-
-	public UploadedFile getUploadedFile()
-	{
-		return uploadedFile;
-	}
-
-	public void setUploadedFile(UploadedFile uploadedFile)
-	{
-		this.uploadedFile = uploadedFile;
-	}
-
-	public int getActiveIndex()
-	{
-		return activeIndex;
-	}
-
 	public void setActiveIndex(int activeIndex)
 	{
 		this.activeIndex = activeIndex;
 		if(questao!=null)
 			FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts()
 			.add("history.pushState({}, null, 'questao?questao=" + questao.getId() + "&tab=" + activeIndex + "');");
-	}
-
-	public int getInicioCarregamento()
-	{
-		return inicioCarregamento;
-	}
-
-	public void setInicioCarregamento(int inicioCarregamento)
-	{
-		this.inicioCarregamento = inicioCarregamento;
-	}
-
-	public int getFimCarregamento()
-	{
-		return fimCarregamento;
-	}
-
-	public void setFimCarregamento(int fimCarregamento)
-	{
-		this.fimCarregamento = fimCarregamento;
-	}
-
-	public FiltroQuestao getFiltroQuestao()
-	{
-		return filtroQuestao;
-	}
-
-	public void setFiltroQuestao(FiltroQuestao filtroQuestao)
-	{
-		this.filtroQuestao = filtroQuestao;
-	}
-
-	public long getIdQuestao()
-	{
-		return idQuestao;
-	}
-
-	public void setIdQuestao(long idQuestao)
-	{
-		this.idQuestao = idQuestao;
-	}
-
-	public ConfigDownload getConfigDownload()
-	{
-		return configDownload;
-	}
-
-	public void setConfigDownload(ConfigDownload configDownload)
-	{
-		this.configDownload = configDownload;
 	}
 
 }

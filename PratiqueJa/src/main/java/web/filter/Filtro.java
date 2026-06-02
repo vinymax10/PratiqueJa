@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import infra.Log;
-
 public abstract class Filtro implements Filter
 {
 
@@ -25,15 +23,12 @@ public abstract class Filtro implements Filter
 	{
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-//		System.out.println("chain.doFilter: " + ((HttpServletRequest) request).getServletPath());
-
 		if(acesso)
 		{
 			HttpSession session = ((HttpServletRequest) request).getSession(true);
 			if(session!=null&&session.getAttribute("page")!=null
 			&&!session.getAttribute("page").equals(httpRequest.getRequestURI()))
 			{
-				Log.escrever("RequestURI: " + httpRequest.getRequestURI());
 				session.setAttribute("page", httpRequest.getRequestURI());
 			}
 			
@@ -44,16 +39,13 @@ public abstract class Filtro implements Filter
 		}
 		else
 		{
-			System.out.println("redireciona: " + ((HttpServletRequest) request).getServletPath());
 			if(isAjax(httpRequest))
 			{
-				System.out.println("Ajax /matematica/painel.xhtml");
 				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/matematica/painel.xhtml"));
 				httpResponse.flushBuffer();
 			}
 			else
 			{
-				System.out.println("request /matematica/painel.xhtml");
 				String contextPath = ((HttpServletRequest) request).getContextPath();
 				httpResponse.sendRedirect(contextPath + "/matematica/painel.xhtml");
 			}

@@ -539,14 +539,9 @@ public class TextoAnagramas
 //    				list.add(p1);
 //    			else
 //    			{
-//    				if(p1.length()>=8)
-//    					System.out.println("mais de 7 letras: "+p1);
-//    				else
-//    					System.out.println("sem repeti��o: "+p1);
 //    			}
 //            }
 //        } catch (IOException e) {
-//            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
 //        }
 //        
 		String palavras[] = TextoAnagramas.palavras;
@@ -559,13 +554,6 @@ public class TextoAnagramas
 
 			if(p1.length()<8&&AuxCombinacao.contarRepeticao(p1)>0)
 				list.add(p1);
-			else
-			{
-				if(p1.length()>=8)
-					System.out.println("mais de 7 letras: "+p1);
-				else
-					System.out.println("sem repetição: "+p1);
-			}
 		}
 		
 //		remove palavras repetidas
@@ -578,7 +566,6 @@ public class TextoAnagramas
 				if(p1.equals(p2))
 				{
 					list.remove(p1);
-					System.out.println("repetida "+p1);
 					break;
 				}
 			}
@@ -596,22 +583,11 @@ public class TextoAnagramas
 				if(a==b&&(a=='a'||a=='e'||a=='i'||a=='o'||a=='u'))
 				{
 					list.remove(palavra);
-					System.out.println("vogal repetida "+palavra);
 					break;
 				}
 				
 			}
 		}
-		
-		System.out.println("lista final");
-		int cont=0;
-		for(int i = 0; i < list.size(); i++)
-		{
-			System.out.print("\""+list.get(i)+"\",");
-			if((++cont)%10==0)
-				System.out.println();
-		}
-		
 	}
 	
 }

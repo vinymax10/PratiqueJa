@@ -66,9 +66,13 @@ import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
 import modelo.matematica.Conta;
 import modelo.usuario.Usuario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExercicioPDF
 {
+	private static final Logger LOG = LoggerFactory.getLogger(ExercicioPDF.class);
+
 	static int margin = 40;
 	static BaseColor cor = new BaseColor(102, 102, 102);
 	public static final Font BOLD = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
@@ -119,7 +123,7 @@ public class ExercicioPDF
 		}
 		catch(DocumentException de)
 		{
-			System.err.println(de.getMessage());
+			LOG.error("Erro ao gerar PDF de exercícios", de);
 		}
 		document.close();
 
@@ -528,11 +532,11 @@ public class ExercicioPDF
 		}
 		catch(DocumentException de)
 		{
-			System.err.println(de.getMessage());
+			LOG.error("Erro ao gerar PDF de exercícios", de);
 		}
 		catch(IOException ioe)
 		{
-			System.err.println(ioe.getMessage());
+			LOG.error("Erro ao gerar PDF de exercícios", ioe);
 		}
 		document.close();
 	}

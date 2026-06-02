@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -12,13 +15,14 @@ import jakarta.inject.Named;
 @Named
 public class TabStateManager implements Serializable
 {
+	private static final Logger LOG = LoggerFactory.getLogger(TabStateManager.class);
 
 	private final Map<String, Map<String, Object>> statePorAba = new ConcurrentHashMap<>();
 
 	public <T> T getState(Class<T> type)
 	{
 		String tabId = getTabId();
-		System.out.println("getState tabId: "+tabId);
+		LOG.debug("getState tabId: {}", tabId);
 		if( tabId!=null)
 		{
 			String key = type.getName();
@@ -30,7 +34,7 @@ public class TabStateManager implements Serializable
 	public <T> void putState(T value)
 	{
 		String tabId = getTabId();
-		System.out.println("putState tabId: "+tabId);
+		LOG.debug("putState tabId: {}", tabId);
 		if(tabId!=null)
 		{
 			String key = value.getClass().getName();
@@ -41,7 +45,6 @@ public class TabStateManager implements Serializable
 	public boolean hasState(Class<?> type)
 	{
 		String tabId = getTabId();
-//		System.out.println("hasState tabId: "+tabId);
 		String key = type.getName();
 		return tabId!=null&&statePorAba.containsKey(tabId)
         && statePorAba.get(tabId).containsKey(key);

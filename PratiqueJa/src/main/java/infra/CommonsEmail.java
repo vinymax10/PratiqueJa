@@ -2,6 +2,9 @@ package infra;
 
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.activation.DataHandler;
 import jakarta.mail.Authenticator;
 import jakarta.mail.MessagingException;
@@ -18,6 +21,8 @@ import service.email.EmailParaEnvio;
 
 public class CommonsEmail
 {
+	private static final Logger LOG = LoggerFactory.getLogger(CommonsEmail.class);
+
 	static String host = "smtp.gmail.com";
 	static int port = 465;
 	static String usuario = "pratiqueja.com@gmail.com";
@@ -100,7 +105,7 @@ public class CommonsEmail
 			message.setText(emailPersit.getMensagem());
 
 			Transport.send(message);
-			System.out.println("Email enviado com sucesso!");
+			LOG.info("Email enviado com sucesso!");
 
 		}
 		catch(MessagingException e)

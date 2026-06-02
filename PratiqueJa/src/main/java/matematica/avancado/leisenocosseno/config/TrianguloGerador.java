@@ -116,7 +116,6 @@ public class TrianguloGerador {
     {
 //        List<Triangulo> oitentaTriangulos = gerarTriangulos(160);
 //        for (Triangulo triangulo : oitentaTriangulos) {
-//            System.out.println(triangulo);
 //        }
     }
 }

@@ -18,12 +18,16 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.usuario.Usuario;
 
 public class QuestoesPDF
 {
+	private static final Logger LOG = LoggerFactory.getLogger(QuestoesPDF.class);
 
 	public static final Font BOLD = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
 	public static Font small = new Font(FontFamily.HELVETICA, 8);
@@ -195,13 +199,11 @@ public class QuestoesPDF
 //			
 //			document.add(table);
 //		}
-//		catch(DocumentException de) 
+//		catch(DocumentException de)
 //		{
-//			System.err.println(de.getMessage());
 //		}
-//		catch(IOException ioe) 
+//		catch(IOException ioe)
 //		{
-//			System.err.println(ioe.getMessage());
 //		}
 //		document.close();
 //		
@@ -350,11 +352,11 @@ public class QuestoesPDF
 		}
 		catch(DocumentException de)
 		{
-			System.err.println(de.getMessage());
+			LOG.error("Erro ao gerar PDF de questões", de);
 		}
 		catch(IOException ioe)
 		{
-			System.err.println(ioe.getMessage());
+			LOG.error("Erro ao gerar PDF de questões", ioe);
 		}
 		document.close();
 	}

@@ -29,8 +29,6 @@ public class ResolucaoLogaritmo
 		}
 		if(resultado.denominador == 1)
 			resolucaoLatex += resolucao1((int)resultado.numerador, c, x);
-		else
-			System.out.println("Erro--------------");
 
 		return resolucaoLatex;
 	}
@@ -45,8 +43,6 @@ public class ResolucaoLogaritmo
 		{
 			resolucaoLatex += resolucao1((int)resultado.numerador, c, x);
 		}
-		else
-			System.out.println("Erro--------------");
 
 		return resolucaoLatex;
 	}

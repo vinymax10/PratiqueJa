@@ -8,7 +8,9 @@ import filtro.PeriodoPreset;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 
+@Data
 @Named
 @SessionScoped
 public class PeriodoPresetBean implements Serializable
@@ -21,10 +23,5 @@ public class PeriodoPresetBean implements Serializable
 	public void init()
 	{
 		opcoes = Arrays.asList(PeriodoPreset.values());
-	}
-
-	public List<PeriodoPreset> getOpcoes()
-	{
-		return opcoes;
 	}
 }

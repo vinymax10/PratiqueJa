@@ -7,6 +7,8 @@ import java.util.Base64;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import util.ValidaSenha;
 import dao.seguranca.PasswordResetTokenDAO;
@@ -34,6 +36,7 @@ import bean.util.Mensagem;
 public class RecuperarSenhaBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(RecuperarSenhaBean.class);
 
 	@Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", message = "Email inválido.")
 	private String email;
@@ -95,13 +98,13 @@ public class RecuperarSenhaBean implements Serializable
 		}
 		catch(IllegalStateException e)
 		{
-			System.out.println(e.getMessage());
+			LOG.warn("Falha ao redefinir senha: {}", e.getMessage());
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
 			return urlInicial;
 		}
 		catch (IllegalArgumentException e)
 		{
-			System.out.println(e.getMessage());
+			LOG.warn("Senha inválida ao redefinir: {}", e.getMessage());
 		    Mensagem.send("form:senha", FacesMessage.SEVERITY_ERROR, e.getMessage());
 		    return "";
 		}
@@ -129,7 +132,7 @@ public class RecuperarSenhaBean implements Serializable
 
 	public String recupearSenha()
 	{
-		System.out.println("recupearSenha: " + email);
+		LOG.debug("recupearSenha: {}", email);
 		usuario = usuarioDAO.getUsuario(email, "");
 
 		if(usuario != null)

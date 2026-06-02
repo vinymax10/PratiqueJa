@@ -199,6 +199,5 @@ public class Algebra
 
 	public static void main(String[] args)
 	{
-		System.out.println(Algebra.fatorial(7,3));
 	}
 }

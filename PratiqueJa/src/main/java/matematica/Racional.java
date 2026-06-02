@@ -108,8 +108,6 @@ public class Racional
 
 		if(x.denominador == 1)
 			return new Racional((long) Math.pow(num.numerador, x.numerador), (long) Math.pow(num.denominador, x.numerador));
-		else
-			System.out.println("Não sei fazer essa conta.");
 		return num;
 	}
 
@@ -321,7 +319,6 @@ public class Racional
 	{
 		Racional racional = new Racional(100000, -30000);
 		racional.fatoracao(2);
-		System.out.println(racional);
 	}
 
 }

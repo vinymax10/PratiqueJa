@@ -20,7 +20,6 @@ public class Probabilidade1 extends Conta
 		resultadoCorreto = "" + problema.resultado().toString();
 
 		resolucaoLatex = problema.resolucao();
-//		System.out.println(pergunta);
 	}
 
 	public static void main(String[] args)

@@ -291,10 +291,8 @@ public class NumeroComplexo
 		String []listNumerador=numeradorResolucao.split("=");
 		String []listDenominador=denominadorResolucao.split("=");
 //		for(String string : listDenominador)
-//			System.out.println(string);
 //		
 //		for(String string : listNumerador)
-//			System.out.println(string);
 		
 		int contNumerador=0,contDenominador=0;
 		int limite=Math.max(listNumerador.length, listDenominador.length);

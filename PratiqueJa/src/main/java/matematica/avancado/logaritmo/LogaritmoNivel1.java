@@ -35,6 +35,5 @@ public class LogaritmoNivel1 extends Conta
 	{
 		new LogaritmoNivel1(1);
 //		String resolucaoLatex = ResolucaoLogaritmo.resolucao1(27, 3, 7);
-//		System.out.println(resolucaoLatex);
 	}
 }

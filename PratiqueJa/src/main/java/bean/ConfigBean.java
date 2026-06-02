@@ -10,6 +10,8 @@ import java.util.List;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.ReorderEvent;
 import org.primefaces.event.SelectEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import util.ClasseAux;
 import util.ListAux;
@@ -33,6 +35,8 @@ import service.auditoria.AuditoriaService;
 @Named
 public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implements Serializable
 {
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigBean.class);
+
 	protected String nome;
 
 	protected T entidade;
@@ -235,8 +239,7 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		{
 			if(ListAux.containsNome(nome,opcoes,classe,this.entidade.getId()))
 			{
-				System.out.println("emitir mensagem de erro ");
-				
+				LOG.debug("Nome já existente: {}", nome);
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nome já existente.", "Nome já existente.");
 				throw new ValidatorException(msg);
 			}

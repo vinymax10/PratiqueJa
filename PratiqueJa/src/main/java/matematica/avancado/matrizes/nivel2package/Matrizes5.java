@@ -51,7 +51,6 @@ public class Matrizes5 extends Conta
 		resolucaoLatex+="C="+AuxMatriz.matrizStr(c)+"\\\\ \\\\";
 		resolucaoLatex+=AuxMatriz.somaStr(c);
 
-//		System.out.println(pergunta);
 		if(size==3)
 			sizeFontTextLatex="\\scriptsize";
 		

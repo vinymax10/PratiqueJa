@@ -28,6 +28,5 @@ public class AdicaoNaturalNivel1 extends Conta {
 
 	public static void main(String[] args) {
 		String resolucaoLatex=ResolucaoNatural.divisao(30,2,true);
-//		System.out.println(resolucaoLatex);
 	}
 }

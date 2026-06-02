@@ -37,9 +37,6 @@ public class Dizima1 extends Conta
 		resultadoCorreto = ResolucaoDizima.resultadoCorreto(strInteira, strNaoPeriodica, strPeriodica);
 
 		resolucaoLatex = ResolucaoDizima.resolucaoSimples(strInteira,strPeriodica);
-		System.out.println("textLatex: "+textLatex);
-		System.out.println("resultadoCorreto: "+resultadoCorreto);
-		System.out.println("resolucaoLatex: "+resolucaoLatex);
 	}
 
 	public static void main(String[] args)

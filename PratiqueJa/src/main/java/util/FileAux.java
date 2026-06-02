@@ -5,20 +5,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FileAux
 {
+	private static final Logger LOG = LoggerFactory.getLogger(FileAux.class);
+
 	public static void gravarFile(String pasta,String nome,byte[] bytes)
 	{
-		System.out.println("pasta: "+pasta);
+		LOG.debug("gravarFile pasta={} ({})", pasta, new File(pasta).getPath());
 		File theDir = new File(pasta);
-		System.out.println("theDir: "+theDir.getPath());
-		System.out.println("theDir.exists(): "+theDir.exists());
 		if(!theDir.exists())
 		{
 			boolean criou= theDir.mkdirs();
-			System.out.println("conseguiu criar a pasta: "+criou);
+			if(!criou)
+				LOG.warn("Não foi possível criar a pasta: {}", theDir.getPath());
 		}
-		System.out.println("theDir.exists(): "+theDir.exists());
 
 		File outputFile = new File(pasta+nome);
 		OutputStream outputStream;
@@ -30,7 +33,7 @@ public class FileAux
 		}
 		catch(IOException e)
 		{
-			e.printStackTrace();
+			LOG.error("Erro ao gravar arquivo {}", outputFile.getPath(), e);
 		}
 	}
 	

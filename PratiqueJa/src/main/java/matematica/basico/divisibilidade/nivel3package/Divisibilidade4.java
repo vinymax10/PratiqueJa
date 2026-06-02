@@ -25,8 +25,6 @@ public class Divisibilidade4 extends Conta
 
 		resultadoCorreto = "" +resolucaoDivisores.somaDividoresResultado(number);
 		resolucaoLatex=resolucaoDivisores.somaDividores(number);
-		System.out.println("resultadoCorreto: "+resultadoCorreto);
-		System.out.println("resolucaoLatex: "+resolucaoLatex);
 	}
 
 	public Divisibilidade4()

@@ -7,9 +7,11 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.questao.Dificuldade;
 
 
+@Data
 @Named
 @SessionScoped
 public class DificuldadeBean implements Serializable
@@ -22,15 +24,5 @@ public class DificuldadeBean implements Serializable
 	public void init()
 	{
 		opcoes = Arrays.asList(Dificuldade.values());
-	}
-
-	public List<Dificuldade> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<Dificuldade> opcoes)
-	{
-		this.opcoes = opcoes;
 	}
 }

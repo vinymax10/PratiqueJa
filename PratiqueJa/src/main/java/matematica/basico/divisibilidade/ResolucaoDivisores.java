@@ -327,7 +327,6 @@ public class ResolucaoDivisores
 	{
 //		ResolucaoDivisores resolucaoDivisores=new ResolucaoDivisores();
 //		String resolucaoLatex=resolucaoDivisores.numerosDividores(28);
-//		System.out.println(resolucaoLatex);
 	}
 
 }

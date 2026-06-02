@@ -810,6 +810,5 @@ public abstract class Resolucao
 		String complementos[] = { "a,c", "c,b", "b,d", "d,a"};
 		
 		ResolucaoExercicio1 resolucaoExercicio = new ResolucaoExercicio1(graph,complementos);
-		System.out.println(resolucaoExercicio.gerarSolucao1Conhecidos(false));
 	}
 }

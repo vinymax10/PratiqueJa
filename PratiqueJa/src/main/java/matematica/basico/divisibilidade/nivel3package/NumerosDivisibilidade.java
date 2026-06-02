@@ -62,9 +62,7 @@ public class NumerosDivisibilidade
 //		{
 //			if(i%2==1&&resolucaoDivisores.numerosDividoresResultado(i)>4)
 //			{
-//				System.out.print(i+",");
 //				if(++cont%10==0)
-//					System.out.println();
 //			}
 //		}
 		

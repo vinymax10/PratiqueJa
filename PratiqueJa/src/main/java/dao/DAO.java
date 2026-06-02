@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import util.ClasseAux;
 import filtro.configuracao.FiltroConfig;
-import infra.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

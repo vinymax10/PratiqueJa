@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import bean.PaiBean;
 import bean.download.Diretorio;
@@ -35,6 +37,7 @@ import web.session.Sessao;
 public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPadrao<Exercicio>>
 {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(ExercicioBean.class);
 
 	@Inject
 	private FiltroExercicio filtro;
@@ -92,7 +95,7 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	@Override
 	public String adicionar(boolean fica)
 	{
-		System.out.println("adicionar");
+		LOG.debug("adicionar");
 		try
 		{
 			exercicioService.construirExercicio(entidade);

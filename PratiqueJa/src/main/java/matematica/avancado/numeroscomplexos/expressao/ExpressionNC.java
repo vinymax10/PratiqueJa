@@ -474,9 +474,6 @@ public class ExpressionNC
 	public static void main(String[] args)
 	{
 		ExpressionNC expressao = new ExpressionNC("1/2+6/8-5i");
-		System.out.println(expressao.imprimir());
 		String resolucaoLatex = expressao.resolverLatex();
-		System.out.println("-------------");
-		System.out.println(resolucaoLatex.replaceAll("\\\\\\\\", "\n"));
 	}
 }

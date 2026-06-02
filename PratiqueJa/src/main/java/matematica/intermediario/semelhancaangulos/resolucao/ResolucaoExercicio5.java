@@ -29,8 +29,6 @@ public class ResolucaoExercicio5 extends Resolucao
 		"h,i", "i,j", "j,g" };
 		boolean facil=false;
 		ResolucaoExercicio5 resolucaoExercicio = new ResolucaoExercicio5(graph,complementos);
-		System.out.println(resolucaoExercicio.gerarSolucao1Conhecidos(facil));
-		System.out.println(resolucaoExercicio.gerarSolucao2Conhecidos());
 
 
 	}

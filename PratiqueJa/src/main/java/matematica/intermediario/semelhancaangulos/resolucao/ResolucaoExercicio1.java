@@ -29,8 +29,6 @@ public class ResolucaoExercicio1 extends Resolucao
 //		4- SemelhancaAngulos4 A, c, d | b
 		boolean facil=true;
 		ResolucaoExercicio1 resolucaoExercicio = new ResolucaoExercicio1(graph,complementos);
-		System.out.println(resolucaoExercicio.gerarSolucao1Conhecidos(facil));
-		System.out.println(resolucaoExercicio.gerarSolucao2Conhecidos());
 	}
 
 }

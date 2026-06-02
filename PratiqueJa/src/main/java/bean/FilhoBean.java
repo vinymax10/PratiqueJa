@@ -7,6 +7,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 import org.primefaces.event.SelectEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import util.ClasseAux;
 import bean.util.Mensagem;
@@ -27,6 +29,7 @@ import service.auditoria.AuditoriaService;
 public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(FilhoBean.class);
 
 	protected String nome;
 
@@ -152,7 +155,7 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 	public void onRowSelect(SelectEvent<T> event)
 	{
 		cadastro = false;
-		System.out.println("entidadeOriginal: "+entidadeOriginal);
+		LOG.debug("entidadeOriginal: {}", entidadeOriginal);
 		this.entidade = mapper.clone(entidadeOriginal); // clone
 	}
 	

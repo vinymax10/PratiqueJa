@@ -30,6 +30,8 @@ import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -42,6 +44,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class Convert
 {
+	private static final Logger LOG = LoggerFactory.getLogger(Convert.class);
 
 	public static final int PDF = 0;
 	public static final int PS = 1;
@@ -226,7 +229,7 @@ public class Convert
 		}
 		catch(Exception e)
 		{
-			System.out.println("Problem when exporting " + inSVG + " to " + out + "!\n" + e.toString());
+			LOG.error("Problem when exporting {} to {}!", inSVG, out, e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -236,9 +239,6 @@ public class Convert
 	public static void main(String[] args)
 	{
 		String latex = "\\sqrt{490} \\times \\sqrt{10}=\\sqrt{490\\times10}=\\sqrt{4900}=\\sqrt{2^{2} \\times 5^{2} \\times 7^{2}}= 2 \\times 5 \\times 7=70";
-		String resultado = includeLineBreak(latex,180);
-		
-		System.out.println(resultado);
-
+		includeLineBreak(latex,180);
 	}
 }

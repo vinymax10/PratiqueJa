@@ -30,8 +30,6 @@ public class ResolucaoExercicio6 extends Resolucao
 
 		boolean facil=false;
 		ResolucaoExercicio6 resolucaoExercicio = new ResolucaoExercicio6(graph,complementos);
-		System.out.println(resolucaoExercicio.gerarSolucao1Conhecidos(facil));
-		System.out.println(resolucaoExercicio.gerarSolucao2Conhecidos());
 
 
 	}

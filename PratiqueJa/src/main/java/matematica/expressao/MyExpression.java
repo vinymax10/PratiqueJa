@@ -492,9 +492,6 @@ public class MyExpression
 	public static void main(String[] args)
 	{
 		MyExpression expressao = new MyExpression("2/2x=5");
-		System.out.println(expressao.imprimir());
 		String resolucaoLatex = expressao.resolverLatex();
-		System.out.println("-------------");
-		System.out.println(resolucaoLatex.replaceAll("\\\\\\\\", "\n"));
 	}
 }

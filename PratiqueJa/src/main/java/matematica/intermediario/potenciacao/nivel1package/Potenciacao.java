@@ -25,9 +25,6 @@ public class Potenciacao extends Conta
 
 		resultadoCorreto = "" + Integer.valueOf((int) Math.pow(a, p));
 		resolucaoLatex = ResolucaoPotencia.resolucao(a, p);
-//		System.out.println("textLatex: "+textLatex);
-//		System.out.println("resultadoCorreto: "+resultadoCorreto);
-//		System.out.println("resolucaoLatex: "+resolucaoLatex);
 	}
 
 	public static void main(String[] args)

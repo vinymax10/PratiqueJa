@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ import modelo.exercicio.Nivel;
 public class ConfigSpam implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigSpam.class);
 
 	@DiffIgnore
 	@Id
@@ -75,7 +78,7 @@ public class ConfigSpam implements Serializable, Entidade
 	{
 		if(!ativo)
 		{
-			System.out.println("Não pode gerar ConfigSpam pois não está ativo.");
+			LOG.debug("Não pode gerar ConfigSpam pois não está ativo.");
 			return false;
 		}
 		return true;

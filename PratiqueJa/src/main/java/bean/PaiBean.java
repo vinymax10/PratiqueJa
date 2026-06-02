@@ -7,6 +7,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 import org.primefaces.event.ReorderEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import util.ClasseAux;
 import infra.Cripto;
@@ -31,6 +33,7 @@ import web.session.TabStateManager;
 public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends Permissao<T>> implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(PaiBean.class);
 
 	protected String nome;
 
@@ -77,7 +80,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	public void mostrarFiltroToggle()
 	{
 		mostrarFiltro=!mostrarFiltro;
-		System.out.println("mostrarFiltroToggle: "+mostrarFiltro);
+		LOG.debug("mostrarFiltroToggle: {}", mostrarFiltro);
 	}
 	
 	public void onSelected()
@@ -289,7 +292,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 
 	public void carregar() 
 	{
-		System.out.println("carregar: "+classe.getSimpleName());
+		LOG.debug("carregar: {}", classe.getSimpleName());
 		if(chave != null)
 		{
 			id = Long.valueOf(Cripto.descriptografar(chave));

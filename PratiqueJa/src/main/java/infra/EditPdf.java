@@ -22,8 +22,6 @@ public class EditPdf
 		{
 
 			reader = new PdfReader(new FileInputStream(file));
-			System.out.println("NÚMERO DE PAGINAS: " + reader.getNumberOfPages() + " - " + reader.getInfo() + " - " + reader.getFileLength());
-
 			PdfStamper pdfStamper = new PdfStamper(reader, new FileOutputStream(fileNew));
 
 			int totalPaginas = reader.getNumberOfPages() + 1;

@@ -540,7 +540,6 @@ public class ExpressaoExt
 		coeficientes[2] = new Racional(2);
 
 		ExpressaoExt expressao = new ExpressaoExt(" (A * B) - C ", coeficientes);
-		System.out.println(expressao.calcular());
 
 	}
 

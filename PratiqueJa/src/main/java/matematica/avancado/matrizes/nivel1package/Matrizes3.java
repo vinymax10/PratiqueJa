@@ -52,7 +52,6 @@ public class Matrizes3 extends Conta
 		resolucaoLatex+="B="+AuxMatriz.matrizStr(b)+"\\\\ \\\\";
 		resolucaoLatex+=AuxMatriz.somaStr(b);
 
-//		System.out.println(pergunta);
 		
 		textLatex="";
 		textLatex+="A="+AuxMatriz.matrizStr(a);

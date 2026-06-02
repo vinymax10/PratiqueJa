@@ -3,10 +3,11 @@ package bean.download;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lombok.Data;
 import bean.exercicio.ConfigDownload;
@@ -34,7 +35,7 @@ import web.session.Sessao;
 public class DownloadBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(DownloadBean.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(DownloadBean.class);
 
 	@Inject
 	private SetDownload setDownload;
@@ -62,12 +63,11 @@ public class DownloadBean implements Serializable
 
 	public StreamedContent download()
 	{
-		System.out.println("download");
+		LOG.debug("download");
 		if (!verificarAcesso())
 			return null;
 
-		System.out.println("download 1");
-		System.out.println("setDownload: "+setDownload);
+		LOG.debug("setDownload: {}", setDownload);
 		int totalPartes = montadorPdfService.calcularTotalPartes(setDownload);
 		
 		if (totalPartes == 0)
@@ -88,9 +88,7 @@ public class DownloadBean implements Serializable
 							+ ", ou diminua a quantidade do número de listas de exercícios.");
 			return null;
 		}
-		System.out.println("download 3");
-		
-		logger.fine(setDownload.toString());
+		LOG.debug(setDownload.toString());
 		porcentagem = 0;
 		Usuario usuario = prepararUsuario();
 		ConfigDownload configExercicio = buildConfigDownload(usuario, true);
@@ -112,7 +110,7 @@ public class DownloadBean implements Serializable
 		if (!verificarAcesso())
 			return null;
 
-		logger.fine(setDownload.toString());
+		LOG.debug(setDownload.toString());
 		porcentagem = 0;
 		Usuario usuario = prepararUsuario();
 		ConfigDownload configExercicio = buildConfigDownload(usuario, true);

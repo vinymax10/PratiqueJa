@@ -7,9 +7,11 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import lombok.Data;
 import modelo.questao.TipoFiltro;
 
 
+@Data
 @Named
 @SessionScoped
 public class TipoFiltroBean implements Serializable
@@ -22,15 +24,5 @@ public class TipoFiltroBean implements Serializable
 	public void init()
 	{
 		opcoes = Arrays.asList(TipoFiltro.values());
-	}
-
-	public List<TipoFiltro> getOpcoes()
-	{
-		return opcoes;
-	}
-
-	public void setOpcoes(List<TipoFiltro> opcoes)
-	{
-		this.opcoes = opcoes;
 	}
 }

@@ -18,12 +18,8 @@ public class Conjuntos2 extends Conta
 		resultadoCorreto = "" + problema.resultado();
 		
 		resolucaoLatex = problema.resolucao();
-//		System.out.println(""+pergunta);
 
-//		System.out.println("pergunta: "+pergunta);
-//		System.out.println("resultadoCorreto: "+resultadoCorreto);
 //
-//		System.out.println("resolucaoLatex: "+resolucaoLatex);
 
 		
 	}

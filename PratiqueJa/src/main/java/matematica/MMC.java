@@ -31,8 +31,5 @@ public class MMC
 
 	public static void main(String[] args)
 	{
-		System.out.println("MMC");
-		System.out.printf("mmc(30, 60) = %d\n", mmc(12, 6));
-		System.out.printf("mmc(60, 100) = %d\n", mmc(5, 2));
 	}
 }

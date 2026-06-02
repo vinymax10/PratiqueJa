@@ -35,9 +35,6 @@ public class Exercicio1 extends Conta
 		resolucaoLatex += "d =\\sqrt{"+b.quad()+" + "+c.quad()+"}\\\\";
 		resolucaoLatex += "d =\\sqrt{"+(b.quad()+c.quad())+"} = "+a.show()+"\\\\";
 		
-		System.out.println(pergunta);
-		System.out.println(resultadoCorreto);
-		System.out.println(resolucaoLatex);
 	}
 	
 	public static void main(String[] args)
