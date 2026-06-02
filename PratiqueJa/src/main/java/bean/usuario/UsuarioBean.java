@@ -1,19 +1,10 @@
 package bean.usuario;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.EnumSet;
 import java.util.List;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.validator.ValidatorException;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.primefaces.event.FileUploadEvent;
@@ -24,11 +15,19 @@ import bean.publicacao.ConfigPostBean;
 import dao.usuario.UsuarioDAO;
 import filtro.usuario.FiltroUsuario;
 import infra.Graphics;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.validator.ValidatorException;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.seguranca.PermissaoPadrao;
 import modelo.publicacao.ConfigPost;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;

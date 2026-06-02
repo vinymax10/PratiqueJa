@@ -139,6 +139,16 @@ public class Questao implements Serializable, Entidade
 	@Transient
 	protected boolean jaFezQuestao = false;
 
+	/** Feedback inline após clicar Responder. null = ainda não respondeu. */
+	@Transient
+	private Boolean feedbackAcertou;
+
+	@Transient
+	private String feedbackLetraCorreta;
+
+	@Transient
+	private boolean feedbackSemSelecao;
+
 	public void toogleResolucaoComentada()
 	{
 		if(showEstatistica)

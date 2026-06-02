@@ -20,7 +20,6 @@ import lombok.ToString;
 import modelo.Entidade;
 import modelo.academico.AssuntoCurso;
 import modelo.auditoria.AuditLabel;
-import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "alunos", "assuntoAtual" })

@@ -30,7 +30,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import modelo.academico.Ano;
 import modelo.academico.AssuntoCurso;
+import modelo.academico.Banca;
+import modelo.academico.Orgao;
 import modelo.auditoria.TipoEvento;
 import modelo.questao.Alternativa;
 import modelo.questao.Dificuldade;
@@ -90,6 +93,9 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	private int inicio;
 	private int fim;
 
+	/** Seleção combinada de situação: ACERTEI | ERREI | NAO_RESPONDIDA | null=Todas */
+	private String situacao;
+
 	public QuestaoBean()
 	{
 		super(Questao.class, "Questão");
@@ -102,6 +108,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		if(tabState.hasState(FiltroQuestao.class))
 			filtro = tabState.getState(FiltroQuestao.class);
+		filtrarEstudante();
 	}
 
 	public void filtrar()
@@ -166,10 +173,55 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	/** Para views de aluno: filtro com revisada=true forçado. */
 	public void filtrarEstudante()
 	{
+		if ("ACERTEI".equals(situacao)) {
+			filtro.setAcertei(true);
+			filtro.setRespondida(null);
+		} else if ("ERREI".equals(situacao)) {
+			filtro.setAcertei(false);
+			filtro.setRespondida(null);
+		} else if ("NAO_RESPONDIDA".equals(situacao)) {
+			filtro.setAcertei(null);
+			filtro.setRespondida(false);
+		} else {
+			filtro.setAcertei(null);
+			filtro.setRespondida(null);
+		}
 		filtro.setRevisada(true);
 		filtro.setResolucaoLatex(true);
 		questoes = entidadeDAO.filtrar(filtro);
 		atualizarOverview();
+	}
+
+	public void limparFiltroEstudante()
+	{
+		filtro.limpar();
+		situacao = null;
+		filtrarEstudante();
+	}
+
+	public void removerAssuntoCurso(AssuntoCurso ac) { filtro.getAssuntosCurso().remove(ac); filtrarEstudante(); }
+	public void removerBanca(Banca b) { filtro.getBancas().remove(b); filtrarEstudante(); }
+	public void removerOrgao(Orgao o) { filtro.getOrgaos().remove(o); filtrarEstudante(); }
+	public void removerAno(Ano a) { filtro.getAnos().remove(a); filtrarEstudante(); }
+	public void removerDificuldade(Dificuldade d) { filtro.getDificuldades().remove(d); filtrarEstudante(); }
+	public void removerSituacao() { situacao = null; filtrarEstudante(); }
+
+	public boolean temFiltrosAtivos()
+	{
+		return (filtro.getAssuntosCurso() != null && !filtro.getAssuntosCurso().isEmpty())
+			|| (filtro.getBancas() != null && !filtro.getBancas().isEmpty())
+			|| (filtro.getOrgaos() != null && !filtro.getOrgaos().isEmpty())
+			|| (filtro.getAnos() != null && !filtro.getAnos().isEmpty())
+			|| (filtro.getDificuldades() != null && !filtro.getDificuldades().isEmpty())
+			|| (situacao != null && !situacao.isBlank());
+	}
+
+	public String getSituacaoLabel()
+	{
+		if ("ACERTEI".equals(situacao)) return "Acertei";
+		if ("ERREI".equals(situacao)) return "Errei";
+		if ("NAO_RESPONDIDA".equals(situacao)) return "Não respondida";
+		return "";
 	}
 
 	public void toogleResolucaoComentada(Questao questao)
@@ -256,6 +308,10 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 
 	public String estaCorreta(Questao questao)
 	{
+		questao.setFeedbackAcertou(null);
+		questao.setFeedbackLetraCorreta(null);
+		questao.setFeedbackSemSelecao(false);
+
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			if(controleAcessoBean.podeFazerQuestao())
@@ -265,14 +321,14 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 					computarAlternativaEscolhida(questao.getAlternativaEscolhida());
 					salvarResultadoQuestao(questao);
 
-					if(questao.getAlternativaEscolhida().isCorreta())
-						Mensagem.send("msg", FacesMessage.SEVERITY_INFO, "Resposta correta.");
-					else
+					boolean acertou = questao.getAlternativaEscolhida().isCorreta();
+					questao.setFeedbackAcertou(acertou);
+
+					if(!acertou)
 					{
 						Alternativa correta = entidadeDAO.getAlternativaCorreta(questao);
 						if(correta != null)
-							Mensagem.send("msg", FacesMessage.SEVERITY_ERROR,
-							"Resposta errada. A alternativa correta é a letra " + correta.getLetra());
+							questao.setFeedbackLetraCorreta(correta.getLetra());
 					}
 
 					if(!questao.isJaFezQuestao())
@@ -282,7 +338,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 					}
 				}
 				else
-					Mensagem.send("msg", FacesMessage.SEVERITY_ERROR, "Por favor escolha uma alternativa.");
+					questao.setFeedbackSemSelecao(true);
 			}
 			else
 				controleAcessoBean.showUpgrade("Limite mensal para resolver as questões foi excedido."

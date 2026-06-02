@@ -1,6 +1,8 @@
 package filtro.questao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.academico.AssuntoCurso;
 import modelo.questao.Dificuldade;
@@ -20,6 +22,13 @@ public class FiltroQuestao implements Serializable
 	private Ano ano;
 	private Banca banca;
 	private Orgao orgao;
+
+	// Seleção múltipla (vista de estudante)
+	private List<Ano> anos = new ArrayList<>();
+	private List<Banca> bancas = new ArrayList<>();
+	private List<Orgao> orgaos = new ArrayList<>();
+	private List<AssuntoCurso> assuntosCurso = new ArrayList<>();
+	private List<Dificuldade> dificuldades = new ArrayList<>();
 	private Assunto assunto;
 	private Disciplina disciplina;
 	private Dificuldade dificuldade;
@@ -53,6 +62,11 @@ public class FiltroQuestao implements Serializable
 		acertei = null;
 		respondida = null;
 		conteudo = "";
+		anos = new ArrayList<>();
+		bancas = new ArrayList<>();
+		orgaos = new ArrayList<>();
+		assuntosCurso = new ArrayList<>();
+		dificuldades = new ArrayList<>();
 	}
 
 	public Ano getAno()

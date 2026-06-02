@@ -3,9 +3,8 @@ package dao.teste;
 import java.util.ArrayList;
 import java.util.List;
 
-import filtro.teste.FiltroResultadoTeste;
 import dao.DAO;
-import jakarta.persistence.TypedQuery;
+import filtro.teste.FiltroResultadoTeste;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

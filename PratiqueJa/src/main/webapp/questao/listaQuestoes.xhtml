@@ -4,134 +4,144 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:body >
+	<h:body>
 		<ui:composition>
-			    
-		    <ui:repeat id="laco" value="#{questaoBean.questoesOverview}" var="questao"
+
+			<ui:repeat id="laco" value="#{questaoBean.questoesOverview}" var="questao"
 			varStatus="status">
-				<div class="p-col-12" style="padding:0;">
-					<p:tag value="#{status.index+1+questaoBean.inicio}"
-						style="margin-right:1rem;font-weight: bold;color:#fffff; background:var(--laranja);" />
-	
-					<h:outputText class="titleQuestao" value="Q#{questao.id}"
-						style="margin-right:1rem;" />
-	
-					<h:outputText class="titleQuestao" value="Ano: " />
-					<h:outputText class="titleQuestaoText" value="#{questao.ano.nome}" />
-	
-					<h:outputText class="titleQuestao" value="Banca: " />
-					<h:outputText class="titleQuestaoText"
-						value="#{questao.banca.sigla}" />
-	
-					<h:outputText class="titleQuestao" value="Orgão: " />
-					<h:outputText class="titleQuestaoText"
-						value="#{questao.orgao.sigla}" />
-	
-					<h:outputText class="titleQuestao" value="Prova: " />
-					<h:outputText class="titleQuestaoText" value="#{questao.prova}" />
-	
-					<h:outputText class="titleQuestao" value="Assunto: " />
-					<h:outputText class="titleQuestaoText"
-						value="#{questao.assuntoCurso.nome}" />
-	
-					<p:divider />
-	
-					<ui:repeat value="#{questao.paragrafos}" var="paragrafo">
-	
-						<h:outputText
-							style="display:block;margin-bottom:1rem;padding-left:.5rem"
-							value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
-	
-						<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
-							cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
-							style="margin-bottom:1rem;">
-						</p:graphicImage>
-					</ui:repeat>
-	
+
+				<div class="qz-card">
+
+					<div class="qz-card-header">
+
+						<div class="qz-card-num">#{status.index+1+questaoBean.inicio}</div>
+
+						<div class="qz-card-id">Q#{questao.id}</div>
+
+						<div class="qz-card-meta">
+							<span class="qz-chip">
+								<i class="pi pi-calendar" style="font-size:10px" />
+								#{questao.ano.nome}
+							</span>
+							<span class="qz-chip">#{questao.banca.sigla}</span>
+							<span class="qz-chip">#{questao.orgao.sigla}</span>
+							<span class="qz-chip">#{questao.prova}</span>
+							<span class="qz-chip qz-chip-assunto">
+								<i class="pi pi-tag" style="font-size:10px" />
+								#{questao.assuntoCurso.nome}
+							</span>
+						</div>
+
+					</div>
+
+					<div class="qz-card-body">
+						<ui:repeat value="#{questao.paragrafos}" var="paragrafo">
+							<h:outputText
+								style="display:block;margin-bottom:1rem"
+								value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
+							<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
+								cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+								style="margin-bottom:1rem;max-width:100%;display:block">
+							</p:graphicImage>
+						</ui:repeat>
+					</div>
+
 					<h:panelGroup id="resposta">
-	
+
 						<p:selectOneRadio id="alternativas"
 							value="#{questao.alternativaEscolhida}" converter="generic"
 							layout="custom" columns="1" styleClass="grid-radio"
-							style="color: #495057;font-weight: bold;">
+							style="color:#495057;font-weight:bold">
 							<f:selectItems value="#{questao.alternativas}" var="alternativa"
 								itemValue="#{alternativa}" />
 						</p:selectOneRadio>
-	
+
 						<ui:repeat id="alt" value="#{questao.alternativas}"
 							var="alternativa" varStatus="statusAlt">
-							<h:panelGrid columns="3" cellpadding="5" style="color: #495057;">
-	
+							<h:panelGrid columns="3" cellpadding="5" style="color:#495057;">
 								<p:radioButton id="opt"
 									for="@this:@parent:@parent:@parent:alternativas"
 									itemIndex="#{statusAlt.index}" />
 								<h:outputLabel for="opt"
-									value="#{alternativa.letra})" style="font-weight: bold;" />
+									value="#{alternativa.letra})" style="font-weight:bold;" />
 								<h:outputLabel for="opt"
-									value="#{alternativa.texto}" style="display: block;"/>
-	
+									value="#{alternativa.texto}" style="display:block;" />
 							</h:panelGrid>
 						</ui:repeat>
-	
-						<p:commandButton value="Responder" process="@parent"
-							update="msg, :growl, dialogUpgrade"
-							action="#{questaoBean.estaCorreta(questao)}"
-							style="margin-top:1.9rem;margin-right:1rem"
-							styleClass="ui-button-raised ui-button-primary ui-button-flat" />
-							
-						<p:commandButton  value="Editar" process="@parent" icon="fa fa-solid fa-pen"
-						rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
-							action="#{gestaoQuestaoBean.carregar(questao)}"
-							style="margin-top:1.9rem;margin-right:1rem"
-							styleClass="ui-button-raised ui-button-primary ui-button-flat" />
-	
-						<div class="p-col-12 p-md-4">
-							<p:messages id="msg" for="msg" showDetail="true" closable="true"
-								styleClass="successMsg">
-							</p:messages>
-						</div>
-	
+
+						<h:panelGroup id="feedbackResposta" layout="block">
+							<h:panelGroup rendered="#{questao.feedbackAcertou != null and questao.feedbackAcertou}">
+								<span class="qz-feedback qz-feedback-acerto">
+									<i class="pi pi-check-circle" /> Resposta correta
+								</span>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{questao.feedbackAcertou != null and !questao.feedbackAcertou}">
+								<span class="qz-feedback qz-feedback-erro">
+									<i class="pi pi-times-circle" />
+									Incorreta
+									<h:panelGroup rendered="#{not empty questao.feedbackLetraCorreta}">
+										— Correta: <strong>#{questao.feedbackLetraCorreta}</strong>
+									</h:panelGroup>
+								</span>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{questao.feedbackSemSelecao}">
+								<span class="qz-feedback qz-feedback-aviso">
+									<i class="pi pi-exclamation-triangle" /> Selecione uma alternativa
+								</span>
+							</h:panelGroup>
+						</h:panelGroup>
+
 					</h:panelGroup>
-					
-					<p:commandButton value="Resposta Comentada" icon="pi pi-pencil" styleClass="ui-button-flat ui-button-plain"
-				     action="#{questaoBean.toogleResolucaoComentada(questao)}" process="@this" oncomplete="reloadMathJax();"
-				     update="resolucaoComentada, estatistica, :growl, dialogUpgrade"
-				     style="margin-right:1rem" />	
-						
-				    <p:commandButton value="Resolução" icon="pi pi-video" styleClass="ui-button-flat ui-button-plain" 
-				    style="margin-right:1rem"/>	
-						
-				    <p:commandButton value="Estatística" icon="pi pi-chart-bar" process="@this" 
-				    update="resolucaoComentada, estatistica"
-				    action="#{questao.toogleEstatistica()}" styleClass="ui-button-flat ui-button-plain" />	
-						
-					<h:panelGroup id="estatistica" >
-						<div class="ui-fluid  p-grid">
-								
-				            <div class="field col-12 lg:col-6 xl:col-4">
-							     <p:chart  value="#{questaoBean.createBarModel(questao) }" 
-							     rendered="#{questao.showEstatistica}" style="width: 100%; height: 350px;"/>
-						     </div>
-					     </div>
-					</h:panelGroup>	
-					
-					<h:panelGroup id="resolucaoComentada" >
-								
-							<h:panelGroup rendered="#{questao.showResolucaoComentada}">
-								<h:outputLabel value="#{questao.resolucao}"	style="display:block;"/>
-								
-								<h:outputLabel  value="Alternativa #{questao.correta().letra}" 
-								style="margin:20px 0;color:var(--verde); font-weight: bold; display:block;"/>
-								
-							</h:panelGroup>	
-							
-					</h:panelGroup>	
-	
-					<p:divider />
+
+					<div class="qz-card-actions">
+
+						<p:commandButton value="Responder" process="@form"
+							update="feedbackResposta, :growl, dialogUpgrade"
+							action="#{questaoBean.estaCorreta(questao)}"
+							styleClass="ui-button-raised btn-primary" />
+
+						<p:commandButton value="Resposta Comentada" icon="pi pi-pencil"
+							styleClass="ui-button-flat ui-button-plain"
+							action="#{questaoBean.toogleResolucaoComentada(questao)}"
+							process="@this" oncomplete="reloadMathJax();"
+							update="resolucaoComentada, estatistica, :growl, dialogUpgrade" />
+
+						<p:commandButton value="Resolução" icon="pi pi-video"
+							styleClass="ui-button-flat ui-button-plain" />
+
+						<p:commandButton value="Estatística" icon="pi pi-chart-bar"
+							process="@this"
+							update="resolucaoComentada, estatistica"
+							action="#{questao.toogleEstatistica()}"
+							styleClass="ui-button-flat ui-button-plain" />
+
+					</div>
+
+					<h:panelGroup id="estatistica">
+						<div class="ui-fluid p-grid">
+							<div class="field col-12 lg:col-6 xl:col-4">
+								<p:chart value="#{questaoBean.createBarModel(questao)}"
+									rendered="#{questao.showEstatistica}"
+									style="width:100%;height:350px;" />
+							</div>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup id="resolucaoComentada">
+						<h:panelGroup rendered="#{questao.showResolucaoComentada}">
+							<div class="qz-resolucao">
+								<h:outputLabel value="#{questao.resolucao}"
+									style="display:block;margin-bottom:8px;color:#374151" />
+								<h:outputLabel value="Alternativa correta: #{questao.correta().letra}"
+									style="font-weight:800;color:#15803d;font-size:1rem" />
+							</div>
+						</h:panelGroup>
+					</h:panelGroup>
+
 				</div>
+
 			</ui:repeat>
-		</ui:composition>		
+
+		</ui:composition>
 	</h:body>
 </html>
-
-	

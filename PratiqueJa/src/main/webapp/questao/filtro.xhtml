@@ -6,107 +6,209 @@
 
 	<h:body>
 		<ui:composition>
-			<div id="filtros" style="width: 100%;display:none;">
+			<div class="qz-filter-panel">
 
-				<p:card class="newBorder mb-3" style="width: 100%;">
-					<div class="ui-fluid gride">
-						<h4 class="title-card">Filtro</h4>
+				<div class="qz-filter-divider"></div>
 
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Assunto" />
-							<p:selectOneMenu value="#{questaoBean.filtro.assuntoCurso}"
-							converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-								var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-								itemValue="#{assuntoCurso}" />
-							</p:selectOneMenu>
-						</div>
+				<div class="ui-fluid gride">
 
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Banca" />
-							<p:selectOneMenu value="#{questaoBean.filtro.banca}"
-							converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{bancaBean.opcoes}" var="banca"
-								itemLabel="#{banca.nome}" itemValue="#{banca}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Órgão" />
-							<p:selectOneMenu value="#{questaoBean.filtro.orgao}"
-							converter="generic" filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{orgaoBean.opcoes}" var="orgao"
-								itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Ano" />
-							<p:selectOneMenu value="#{questaoBean.filtro.ano}"
-							converter="generic">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{anoBean.opcoes}" var="ano"
-								itemLabel="#{ano.nome}" itemValue="#{ano}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Dificuldade" />
-							<p:selectOneMenu value="#{questaoBean.filtro.dificuldade}">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{questaoBean.dificuldadeValues}" var="d"
-								itemLabel="#{d.nome}" itemValue="#{d}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Acertei" />
-							<p:selectOneMenu value="#{questaoBean.filtro.acertei}">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItem itemLabel="Acertei" itemValue="#{true}" />
-								<f:selectItem itemLabel="Errei" itemValue="#{false}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Respondida" />
-							<p:selectOneMenu value="#{questaoBean.filtro.respondida}">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItem itemLabel="Respondida" itemValue="#{true}" />
-								<f:selectItem itemLabel="Não Respondida" itemValue="#{false}" />
-							</p:selectOneMenu>
-						</div>
-
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="ID" />
-							<p:inputText value="#{questaoBean.filtro.id}" />
-						</div>
-
+					<div class="campo col-12">
+						<p:outputLabel for="@next" value="Conteúdo" />
+						<span class="ui-input-icon-left" style="width:100%">
+							<i class="pi pi-search" />
+							<p:inputText value="#{questaoBean.filtro.conteudo}"
+							placeholder="Buscar por conteúdo" styleClass="w-full">
+								<p:ajax event="keyup" delay="500" process="@form"
+								update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+								listener="#{questaoBean.filtrarEstudante}"
+								oncomplete="reloadMathJax();" />
+							</p:inputText>
+						</span>
 					</div>
 
-					<div class="content-button-right">
-
-						<div class="divisor"></div>
-
-						<p:commandButton value="Limpar"
-						styleClass="ui-button-flat ui-button-plain"
-						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
-						action="#{questaoBean.filtrarInit}" update="@form">
-						</p:commandButton>
-
-						<p:commandButton id="filtrar" value="Filtrar"
-						styleClass="ui-button-raised ui-button-primary"
-						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
-						action="#{questaoBean.filtrarEstudante}" update="@form, :growl" process="@form">
-							<p:defaultCommand target="form:filtrar" />
-						</p:commandButton>
-
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+						<p:outputLabel for="@next" value="Assunto" />
+						<p:selectCheckboxMenu value="#{questaoBean.filtro.assuntosCurso}"
+						panelStyleClass="qz-dark-select-panel"
+						converter="generic" filter="true" filterMatchMode="contains"
+						scrollHeight="300" style="width:100%">
+							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
+							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
+							itemValue="#{assuntoCurso}" />
+							<p:ajax event="change" delay="300" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectCheckboxMenu>
 					</div>
 
-				</p:card>
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+						<p:outputLabel for="@next" value="Banca" />
+						<p:selectCheckboxMenu value="#{questaoBean.filtro.bancas}"
+						panelStyleClass="qz-dark-select-panel"
+						converter="generic" filter="true" filterMatchMode="contains"
+						scrollHeight="300" style="width:100%">
+							<f:selectItems value="#{bancaBean.opcoes}" var="banca"
+							itemLabel="#{banca.sigla}" itemValue="#{banca}" />
+							<p:ajax event="change" delay="300" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectCheckboxMenu>
+					</div>
+
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+						<p:outputLabel for="@next" value="Órgão" />
+						<p:selectCheckboxMenu value="#{questaoBean.filtro.orgaos}"
+						panelStyleClass="qz-dark-select-panel"
+						converter="generic" filter="true" filterMatchMode="contains"
+						scrollHeight="300" style="width:100%">
+							<f:selectItems value="#{orgaoBean.opcoes}" var="orgao"
+							itemLabel="#{orgao.sigla}" itemValue="#{orgao}" />
+							<p:ajax event="change" delay="300" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectCheckboxMenu>
+					</div>
+
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						<p:outputLabel for="@next" value="Ano" />
+						<p:selectCheckboxMenu value="#{questaoBean.filtro.anos}"
+						panelStyleClass="qz-dark-select-panel"
+						converter="generic" filter="true" filterMatchMode="contains"
+						scrollHeight="300" style="width:100%">
+							<f:selectItems value="#{anoBean.opcoes}" var="ano"
+							itemLabel="#{ano.nome}" itemValue="#{ano}" />
+							<p:ajax event="change" delay="300" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectCheckboxMenu>
+					</div>
+
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						<p:outputLabel for="@next" value="Dificuldade" />
+						<p:selectCheckboxMenu value="#{questaoBean.filtro.dificuldades}"
+						panelStyleClass="qz-dark-select-panel qz-select-no-filter"
+						scrollHeight="300" style="width:100%">
+							<f:selectItems value="#{questaoBean.dificuldadeValues}" var="d"
+							itemLabel="#{d.nome}" itemValue="#{d}" />
+							<p:ajax event="change" delay="300" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectCheckboxMenu>
+					</div>
+
+					<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+						<p:outputLabel for="@next" value="Situação" />
+						<p:selectOneMenu value="#{questaoBean.situacao}"
+						panelStyleClass="qz-dark-select-panel">
+							<f:selectItem itemLabel="Todas" itemValue="#{null}" noSelectionOption="true" />
+							<f:selectItem itemLabel="Acertei" itemValue="ACERTEI" />
+							<f:selectItem itemLabel="Errei" itemValue="ERREI" />
+							<f:selectItem itemLabel="Não respondida" itemValue="NAO_RESPONDIDA" />
+							<p:ajax event="change" process="@form"
+							update=":form:resultados, :form:contadorQuestoes, :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarEstudante}"
+							oncomplete="reloadMathJax();" />
+						</p:selectOneMenu>
+					</div>
+
+				</div>
+
+				<!-- Chips de filtros ativos -->
+				<h:panelGroup id="filtrosAtivos" layout="block">
+					<div class="qz-active-filters" style="#{questaoBean.temFiltrosAtivos() ? '' : 'display:none'}">
+						<ui:repeat value="#{questaoBean.filtro.assuntosCurso}" var="ac">
+							<span class="qz-active-chip">
+								<i class="pi pi-tag" />
+								#{ac.nome}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerAssuntoCurso(ac)}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</ui:repeat>
+						<ui:repeat value="#{questaoBean.filtro.bancas}" var="banca">
+							<span class="qz-active-chip">
+								<i class="pi pi-building" />
+								#{banca.sigla}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerBanca(banca)}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</ui:repeat>
+						<ui:repeat value="#{questaoBean.filtro.orgaos}" var="orgao">
+							<span class="qz-active-chip">
+								<i class="pi pi-sitemap" />
+								#{orgao.sigla}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerOrgao(orgao)}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</ui:repeat>
+						<ui:repeat value="#{questaoBean.filtro.anos}" var="ano">
+							<span class="qz-active-chip">
+								<i class="pi pi-calendar" />
+								#{ano.nome}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerAno(ano)}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</ui:repeat>
+						<ui:repeat value="#{questaoBean.filtro.dificuldades}" var="dif">
+							<span class="qz-active-chip">
+								<i class="pi pi-chart-bar" />
+								#{dif.nome}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerDificuldade(dif)}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</ui:repeat>
+						<h:panelGroup rendered="#{not empty questaoBean.situacao}">
+							<span class="qz-active-chip">
+								<i class="pi pi-check-circle" />
+								#{questaoBean.situacaoLabel}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerSituacao()}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</h:panelGroup>
+					</div>
+				</h:panelGroup>
+
+				<div class="qz-filter-actions">
+
+					<h:panelGroup id="contadorQuestoes" layout="block" style="flex:1">
+						<span class="qz-filter-count">
+							<i class="pi pi-list" />
+							<strong>#{questaoBean.questoes.size()}</strong> questões encontradas
+						</span>
+					</h:panelGroup>
+
+					<p:commandButton value="Download"
+					process="@this" action="#{questaoBean.podeFazerDownloadMassa()}"
+					icon="pi pi-download" update=":growl, dialogUpgrade"
+					styleClass="ui-button-raised ui-button-flat qz-btn-download" />
+
+					<p:commandButton value="Limpar"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-solid fa-eraser"
+					action="#{questaoBean.limparFiltroEstudante}" update="@form"
+					oncomplete="reloadMathJax();">
+					</p:commandButton>
+
+					<p:commandButton id="filtrar" value="Filtrar"
+					styleClass="ui-button-raised ui-button-flat"
+					icon="pi pi-search"
+					action="#{questaoBean.filtrarEstudante}" update="@form, :growl" process="@form"
+					oncomplete="reloadMathJax();">
+						<p:defaultCommand target="form:filtrar" />
+					</p:commandButton>
+
+				</div>
+
 			</div>
 		</ui:composition>
 	</h:body>

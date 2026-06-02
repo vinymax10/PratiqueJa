@@ -9,51 +9,71 @@
 		<h:outputText class="linkPage" value="Questões" />
 	</ui:define>
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/questao-page.css" type="text/css" />
+	</ui:define>
+
 	<h:form id="form" class="form">
 
-		<div class="content-button flex-column lg:flex-row xl:flex-row">
+		<!-- ===== HERO ===== -->
+		<div class="qz-hero">
 
-			<div class="flex gap-3 align-items-center w-full md:w-full lg:w-6 xl:w-6">
+			<!-- Camada decorativa (overflow:hidden isolado) -->
+			<div class="qz-hero-bg"></div>
 
-				<div class="w-full">
-					<span class="ui-input-icon-left" style="width:100%">
-						<i class="pi pi-search" />
-						<p:inputText value="#{questaoBean.filtro.conteudo}"
-						placeholder="Conteúdo" styleClass="w-full">
-							<p:ajax event="keyup" delay="500" update="@form" listener="#{questaoBean.filtrarEstudante}" />
-						</p:inputText>
-					</span>
+			<!-- Linha superior: conteúdo + arte -->
+			<div class="qz-hero-top">
+
+				<div class="qz-hero-content">
+
+					<div class="qz-hero-label">
+						<i class="fa-solid fa-book" />
+						Banco de Questões
+					</div>
+
+					<h1 class="qz-hero-title">Questões de Concursos</h1>
+					<p class="qz-hero-desc">
+						Pratique com questões reais de concursos públicos.
+						Filtre por assunto, banca, órgão, ano ou dificuldade.
+					</p>
+
+	
+</div>
+
+				<!-- Arte decorativa -->
+				<div class="qz-hero-art">
+					<div class="qz-hero-art-icon">
+						<i class="fa-solid fa-square-root-variable" />
+					</div>
+					<div class="qz-hero-art-dots">
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+						<div class="qz-hero-art-dot"></div>
+					</div>
 				</div>
 
-				<p:button value="Filtros" icon="fa-solid fa-filter"
-				onclick="slideToggle('filtros'); return false;"
-				styleClass="ui-button-outlined ui-button-secondary" />
-
 			</div>
 
-			<div class="flex gap-3 align-items-center justify-content-end">
-
-				<p:commandButton value="Download"
-				process="@this" action="#{questaoBean.podeFazerDownloadMassa()}"
-				icon="pi pi-download" update=":growl, dialogUpgrade"
-				styleClass="ui-button-raised ui-button-flat" />
-
-			</div>
+			<!-- Filtro deslizante dentro do hero -->
+			<ui:include src="/questao/filtro.xhtml" />
 
 		</div>
+		<!-- ===== FIM HERO ===== -->
 
-		<ui:include src="/questao/filtro.xhtml" />
-
-		<p:staticMessage severity="info" summary="Questões carregadas"
-		detail="#{questaoBean.questoes.size()} questões"
-		display="text"
-		style="background: #ecf1ff !important;margin:0 0 1rem 0;width:100%" />
-
-		<ui:include src="/questao/barraNavegacao.xhtml" />
-
-		<ui:include src="/questao/listaQuestoes.xhtml" />
-
-		<ui:include src="/questao/barraNavegacao.xhtml" />
+		<h:panelGroup id="resultados" layout="block" style="width:100%">
+			<ui:include src="/questao/barraNavegacao.xhtml" />
+			<ui:include src="/questao/listaQuestoes.xhtml" />
+			<ui:include src="/questao/barraNavegacao.xhtml" />
+		</h:panelGroup>
 
 		<p:dialog id="dialogDownloadQuestao" header="Download de Questões"
 		showEffect="fade" hideEffect="fade" modal="true"

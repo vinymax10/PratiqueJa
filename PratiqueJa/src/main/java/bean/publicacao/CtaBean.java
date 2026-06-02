@@ -3,23 +3,24 @@ package bean.publicacao;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import lombok.Data;
-import modelo.publicacao.Cta;
-import modelo.publicacao.FinalidadeCta;
-
 import org.primefaces.event.CellEditEvent;
 
 import bean.ConfigBean;
 import bean.util.Mensagem;
 import dao.publicacao.CtaDAO;
 import exceptions.RelacaoException;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import modelo.publicacao.Cta;
+import modelo.publicacao.FinalidadeCta;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
 public class CtaBean extends ConfigBean<Cta, CtaDAO>

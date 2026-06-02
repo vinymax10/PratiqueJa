@@ -4,20 +4,18 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.primefaces.event.ReorderEvent;
+
+import bean.academico.AssuntoCursoBean;
+import bean.util.Mensagem;
+import dao.email.ProgramacaoSpamDAO;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import org.primefaces.event.ReorderEvent;
-
-import dao.email.ProgramacaoSpamDAO;
 import lombok.Data;
 import modelo.academico.AssuntoCurso;
-import modelo.email.ConfigSpam;
 import modelo.email.ProgramacaoSpam;
-import bean.academico.AssuntoCursoBean;
-import bean.util.Mensagem;
 import service.publicacao.EnvioPostService;
 
 @Data

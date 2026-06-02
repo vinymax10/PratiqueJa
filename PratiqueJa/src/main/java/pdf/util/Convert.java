@@ -123,19 +123,19 @@ public class Convert
 			return latex;
 	}
 
-	private static String includeVSpace(String latex)
+	public static String includeVSpace(String latex)
 	{
 		String newLatex = "";
 		String lista[] = latex.split("\\\\\\\\");
-		TeXFormula formula;
-		TeXIcon icon;
+//		TeXFormula formula;
+//		TeXIcon icon;
 		for(int i = 0; i < lista.length - 1; i++)
 		{
-			formula = new TeXFormula(lista[i + 1]);
-
-			icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 11);
+//			formula = new TeXFormula(lista[i + 1]);
+//
+//			icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 11);
 //			float width = (float) icon.getIconWidth();
-			float height = (float) icon.getIconHeight();
+//			float height = (float) icon.getIconHeight();
 
 			lista[i] += "\\\\ \\vspace{" + 12 + "px}";
 			newLatex += lista[i];

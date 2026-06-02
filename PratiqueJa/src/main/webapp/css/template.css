@@ -77,13 +77,13 @@
 	position: relative;
 	/* Garante que o fundo da sidebar se estende até o final da página */
 	background:
-		linear-gradient(180deg, #07142f 0%, #0d1d47 100%) 0 0 / 280px 100% no-repeat,
+		linear-gradient(180deg, #07142f 0%, #0d1d47 100%) 0 0 / 320px 100% no-repeat,
 		#f5f7fb;
 }
 
 /* ---- SIDEBAR (fluxo normal, rola com a página) ---- */
 .t2-sidebar {
-	width: 280px;
+	width: 320px;
 	flex-shrink: 0;
 	background: linear-gradient(180deg, #07142f 0%, #0d1d47 100%);
 	color: white;

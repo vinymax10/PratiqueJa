@@ -7,53 +7,24 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.BadElementException;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.BaseColor;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Chunk;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Document;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.DocumentException;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Element;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Font;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Font.FontFamily;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Image;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.PageSize;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Paragraph;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.Phrase;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.pdf.PdfPCell;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.pdf.PdfPTable;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.pdf.PdfWriter;
-import pdf.base.CustomDashedLineSeparator;
-import pdf.util.Convert;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import bean.exercicio.ConfigDownload;
@@ -66,8 +37,8 @@ import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
 import modelo.matematica.Conta;
 import modelo.usuario.Usuario;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pdf.base.CustomDashedLineSeparator;
+import pdf.util.Convert;
 
 public class ExercicioPDF
 {

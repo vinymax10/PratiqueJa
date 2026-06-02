@@ -118,35 +118,33 @@ public class QuestaoDAO extends DAO<Questao>
 			predicates.add(builder.like(paragrafoJoin.get("texto"), "%" + filtroQuestao.getConteudo()+"%"));
 		}
 		
-		if(filtroQuestao.getAno() != null)
-		{
+		if(filtroQuestao.getAnos() != null && !filtroQuestao.getAnos().isEmpty())
+			predicates.add(fromQuestao.get("ano").in(filtroQuestao.getAnos()));
+		else if(filtroQuestao.getAno() != null)
 			predicates.add(builder.equal(fromQuestao.get("ano").get("id"), filtroQuestao.getAno().getId()));
-		}
 
-		if(filtroQuestao.getBanca() != null)
-		{
+		if(filtroQuestao.getBancas() != null && !filtroQuestao.getBancas().isEmpty())
+			predicates.add(fromQuestao.get("banca").in(filtroQuestao.getBancas()));
+		else if(filtroQuestao.getBanca() != null)
 			predicates.add(builder.equal(fromQuestao.get("banca").get("id"), filtroQuestao.getBanca().getId()));
-		}
 
-		if(filtroQuestao.getOrgao() != null)
-		{
+		if(filtroQuestao.getOrgaos() != null && !filtroQuestao.getOrgaos().isEmpty())
+			predicates.add(fromQuestao.get("orgao").in(filtroQuestao.getOrgaos()));
+		else if(filtroQuestao.getOrgao() != null)
 			predicates.add(builder.equal(fromQuestao.get("orgao").get("id"), filtroQuestao.getOrgao().getId()));
-		}
 
 		if(filtroQuestao.getDisciplina() != null)
-		{
 			predicates.add(builder.equal(fromQuestao.get("disciplina").get("id"), filtroQuestao.getDisciplina().getId()));
-		}
 
-		if(filtroQuestao.getAssuntoCurso() != null)
-		{
+		if(filtroQuestao.getAssuntosCurso() != null && !filtroQuestao.getAssuntosCurso().isEmpty())
+			predicates.add(fromQuestao.get("assuntoCurso").in(filtroQuestao.getAssuntosCurso()));
+		else if(filtroQuestao.getAssuntoCurso() != null)
 			predicates.add(builder.equal(fromQuestao.get("assuntoCurso").get("id"), filtroQuestao.getAssuntoCurso().getId()));
-		}
 
-		if(filtroQuestao.getDificuldade() != null)
-		{
+		if(filtroQuestao.getDificuldades() != null && !filtroQuestao.getDificuldades().isEmpty())
+			predicates.add(fromQuestao.get("dificuldade").in(filtroQuestao.getDificuldades()));
+		else if(filtroQuestao.getDificuldade() != null)
 			predicates.add(builder.equal(fromQuestao.get("dificuldade"), filtroQuestao.getDificuldade()));
-		}
 
 		if(filtroQuestao.getChave()!=null&&!filtroQuestao.getChave().isBlank())
 		{

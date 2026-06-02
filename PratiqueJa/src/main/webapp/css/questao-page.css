@@ -1,0 +1,657 @@
+/* ===== QUESTÃO PAGE ===== */
+
+/* ---- HERO ---- */
+.qz-hero {
+    background: linear-gradient(135deg, #07142f 0%, #0d1d47 65%, #1a2a5e 100%);
+    border-radius: 24px;
+    padding: 24px 28px 20px;
+    margin-bottom: 28px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: visible; /* deixa os painéis de select escaparem */
+}
+
+/* Camada decorativa com overflow:hidden próprio
+   para não clipar os dropdowns de selectOneMenu */
+.qz-hero-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+.qz-hero-bg::before,
+.qz-hero-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+}
+.qz-hero-bg::before { width: 340px; height: 340px; top: -120px; right: -60px; }
+.qz-hero-bg::after  { width: 180px; height: 180px; bottom: -60px; right: 140px; }
+
+/* Linha superior: conteúdo + arte decorativa */
+.qz-hero-top {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 24px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.qz-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.qz-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(37, 99, 235, 0.22);
+    border: 1px solid rgba(37, 99, 235, 0.38);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 14px;
+}
+
+.qz-hero-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+}
+
+.qz-hero-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.58);
+    margin: 0 0 28px 0;
+    line-height: 1.7;
+}
+
+/* Barra de busca */
+.qz-hero-search {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Input dentro do hero */
+.qz-hero-search .ui-inputtext {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+.qz-hero-search .ui-inputtext:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.30) !important;
+    outline: none !important;
+}
+.qz-hero-search .ui-icon,
+.qz-hero-search .pi-search { color: rgba(255, 255, 255, 0.50) !important; }
+
+/* Botão Filtros / outlined secondary */
+.qz-hero-search .ui-button-outlined.ui-button-secondary,
+.qz-hero-search .ui-button-flat.ui-button-secondary {
+    background: rgba(255, 255, 255, 0.09) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 10px !important;
+}
+.qz-hero-search .ui-button-outlined.ui-button-secondary:hover,
+.qz-hero-search .ui-button-flat.ui-button-secondary:hover {
+    background: rgba(255, 255, 255, 0.17) !important;
+    color: white !important;
+}
+
+/* Botão Download */
+.qz-hero-search .ui-button-raised.ui-button-flat {
+    background: rgba(37, 99, 235, 0.30) !important;
+    border: 1px solid rgba(37, 99, 235, 0.48) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+.qz-hero-search .ui-button-raised.ui-button-flat:hover {
+    background: rgba(37, 99, 235, 0.46) !important;
+}
+
+/* Stats */
+.qz-hero-stats {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.qz-stat {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 14px;
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.qz-stat-value {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+.qz-stat-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.50);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+/* Arte decorativa (coluna direita) */
+.qz-hero-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+.qz-hero-art-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(37, 99, 235, 0.22);
+    border: 1px solid rgba(37, 99, 235, 0.40);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: #60a5fa;
+}
+.qz-hero-art-dots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+}
+.qz-hero-art-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+}
+.qz-hero-art-dot:nth-child(3n+1) { background: rgba(37, 99, 235, 0.45); }
+
+/* ---- FILTRO NATIVO DO HERO ---- */
+.qz-hero #filtros {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.qz-filter-panel {
+    width: 100%;
+}
+
+/* Linha separadora entre busca e campos */
+.qz-filter-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    margin-bottom: 24px;
+}
+
+/* Labels dos campos */
+.qz-filter-panel .ui-outputlabel,
+.qz-filter-panel label {
+    color: rgba(255, 255, 255, 0.68) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* SelectOneMenu — aparência escura */
+.qz-filter-panel .ui-selectonemenu {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 10px !important;
+    transition: background 0.15s, border-color 0.15s !important;
+}
+.qz-filter-panel .ui-selectonemenu .ui-selectonemenu-label {
+    color: white !important;
+    background: transparent !important;
+    border: none !important;
+}
+.qz-filter-panel .ui-selectonemenu .ui-selectonemenu-trigger {
+    background: transparent !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.50) !important;
+}
+.qz-filter-panel .ui-selectonemenu:not(.ui-state-disabled):hover {
+    background: rgba(255, 255, 255, 0.13) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+}
+.qz-filter-panel .ui-selectonemenu.ui-state-focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.30) !important;
+    outline: none !important;
+}
+
+/* Ícone de busca dentro do campo Conteúdo */
+.qz-filter-panel .ui-icon,
+.qz-filter-panel .pi-search { color: rgba(255, 255, 255, 0.45) !important; }
+
+/* InputText */
+.qz-filter-panel .ui-inputtext {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+.qz-filter-panel .ui-inputtext:focus {
+    background: rgba(255, 255, 255, 0.13) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.30) !important;
+    outline: none !important;
+}
+
+/* ---- CHIPS DE FILTROS ATIVOS ---- */
+.qz-active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 0 4px;
+}
+
+.qz-active-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(37, 99, 235, 0.22);
+    border: 1px solid rgba(37, 99, 235, 0.42);
+    border-radius: 999px;
+    padding: 5px 6px 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #93c5fd;
+    white-space: nowrap;
+}
+.qz-active-chip i { font-size: 10px; opacity: 0.75; }
+
+.qz-chip-remove-btn.ui-button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: rgba(147, 197, 253, 0.65) !important;
+    padding: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 0 !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.qz-chip-remove-btn.ui-button:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: white !important;
+}
+.qz-chip-remove-btn .ui-button-icon { font-size: 10px !important; }
+
+/* Botões do filtro */
+.qz-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Contador de questões — lado esquerdo da barra de ações */
+.qz-filter-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+}
+.qz-filter-count i { font-size: 13px; color: rgba(255, 255, 255, 0.35); }
+.qz-filter-count strong { color: white; font-size: 15px; font-weight: 800; }
+
+/* Botão Limpar */
+.qz-filter-actions .ui-button-flat.ui-button-plain {
+    color: rgba(255, 255, 255, 0.75) !important;
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 10px !important;
+}
+.qz-filter-actions .ui-button-flat.ui-button-plain:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+/* Botão Download — tom neutro translúcido, menos proeminente que Filtrar */
+.qz-btn-download.ui-button {
+    background: rgba(255, 255, 255, 0.13) !important;
+    border: 1px solid rgba(255, 255, 255, 0.26) !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    border-radius: 10px !important;
+}
+.qz-btn-download.ui-button:hover {
+    background: rgba(255, 255, 255, 0.22) !important;
+    color: white !important;
+}
+
+/* Botão Filtrar — igual ao Download */
+.qz-filter-actions .ui-button-raised.ui-button-flat:not(.qz-btn-download) {
+    background: rgba(37, 99, 235, 0.30) !important;
+    border: 1px solid rgba(37, 99, 235, 0.48) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+.qz-filter-actions .ui-button-raised.ui-button-flat:hover {
+    background: rgba(37, 99, 235, 0.46) !important;
+}
+
+/* ---- PAINEL DO SELECT NO TEMA ESCURO ---- */
+.qz-dark-select-panel {
+    background: #0d1d47 !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Input de filtro interno (busca dentro do painel) */
+.qz-dark-select-panel .ui-selectonemenu-filter-container {
+    padding: 8px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+    background: transparent !important;
+}
+.qz-dark-select-panel .ui-selectonemenu-filter {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+.qz-dark-select-panel .ui-selectonemenu-filter:focus {
+    border-color: #3b82f6 !important;
+    outline: none !important;
+}
+
+/* Lista de itens */
+.qz-dark-select-panel .ui-selectonemenu-items-wrapper { border-radius: 0 0 12px 12px !important; }
+.qz-dark-select-panel .ui-selectonemenu-items { padding: 6px !important; }
+
+.qz-dark-select-panel .ui-selectonemenu-item {
+    color: rgba(255, 255, 255, 0.82) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    transition: background 0.12s !important;
+}
+.qz-dark-select-panel .ui-selectonemenu-item:hover,
+.qz-dark-select-panel .ui-selectonemenu-item.ui-state-hover {
+    background: rgba(37, 99, 235, 0.28) !important;
+    color: white !important;
+}
+.qz-dark-select-panel .ui-selectonemenu-item.ui-state-highlight {
+    background: rgba(37, 99, 235, 0.45) !important;
+    color: white !important;
+}
+
+/* ---- SELECT CHECKBOX MENU — trigger escuro ---- */
+.qz-filter-panel .ui-selectcheckboxmenu {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 10px !important;
+    transition: background 0.15s, border-color 0.15s !important;
+}
+.qz-filter-panel .ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+    color: rgba(255, 255, 255, 0.82) !important;
+    background: transparent !important;
+    border: none !important;
+}
+.qz-filter-panel .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger {
+    background: transparent !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.50) !important;
+}
+.qz-filter-panel .ui-selectcheckboxmenu:not(.ui-state-disabled):hover {
+    background: rgba(255, 255, 255, 0.13) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+}
+.qz-filter-panel .ui-selectcheckboxmenu.ui-state-focus,
+.qz-filter-panel .ui-selectcheckboxmenu.ui-state-active {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.30) !important;
+    outline: none !important;
+}
+
+/* Painel do checkboxmenu */
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel {
+    background: #0d1d47 !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    padding: 8px 12px !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox,
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-close {
+    display: none !important;
+}
+.qz-select-no-filter.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
+    padding: 0 !important;
+    border: none !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-filter-container {
+    padding: 8px !important;
+    
+    background: transparent !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-filter {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-filter:focus {
+    border-color: #3b82f6 !important;
+    outline: none !important;
+}
+.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container .ui-icon,
+ .ui-input-icon-left > i:first-of-type {
+    left: 1rem !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items {
+    padding: 6px !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-item {
+    color: rgba(255, 255, 255, 0.82) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    transition: background 0.12s !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-item:hover,
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-item.ui-state-hover {
+    background: rgba(37, 99, 235, 0.28) !important;
+    color: white !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-chkbox-box {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 4px !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-chkbox-box.ui-state-active {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+}
+.qz-dark-select-panel.ui-selectcheckboxmenu-panel .ui-chkbox-icon {
+    color: white !important;
+}
+
+/* ---- CARD DE QUESTÃO ---- */
+.qz-card {
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    margin-bottom: 20px;
+    border: 1px solid #f1f5f9;
+    transition: box-shadow 0.2s, transform 0.15s;
+}
+.qz-card:hover {
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.10);
+    transform: translateY(-1px);
+}
+
+.qz-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f3f4f6;
+    flex-wrap: wrap;
+}
+
+.qz-card-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #de7b40, #f59e0b);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+    padding: 0 10px;
+}
+
+.qz-card-id {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #07142f;
+    flex-shrink: 0;
+}
+
+.qz-card-meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex: 1;
+    align-items: center;
+}
+
+.qz-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+.qz-chip-assunto {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+}
+
+.qz-card-body {
+    color: #374151;
+    line-height: 1.85;
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+.qz-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 12px;
+}
+
+/* ---- FEEDBACK INLINE DE RESPOSTA ---- */
+.qz-feedback {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 14px;
+}
+.qz-feedback i { font-size: 14px; }
+
+.qz-feedback-acerto {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+.qz-feedback-erro {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+}
+.qz-feedback-aviso {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.qz-resolucao {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    border-radius: 0 12px 12px 0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* ---- RESPONSIVO ---- */
+@media (max-width: 1100px) {
+    .qz-hero-top { grid-template-columns: 1fr; }
+    .qz-hero-art { display: none; }
+    .qz-hero { padding: 32px 28px 28px; }
+    .qz-hero-title { font-size: 2rem; }
+}
+@media (max-width: 600px) {
+    .qz-hero { padding: 24px 18px 20px; }
+    .qz-hero-title { font-size: 1.7rem; }
+    .qz-card { padding: 20px 16px; }
+    .qz-hero-search { flex-direction: column; align-items: stretch; }
+}
