@@ -1,85 +1,56 @@
 package infra;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import software.xdev.chartjs.model.charts.BarChart;
-import software.xdev.chartjs.model.data.BarData;
-import software.xdev.chartjs.model.dataset.BarDataset;
 
 public class GraficoPeriodo
 {
-	public static String criarGraficoBarras(DadosGrafico dadosGrafico)
+	private static final String[] BG_COLORS = { "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)",
+	"rgba(54, 162, 235, 0.2)" };
+	private static final String[] BORDER_COLORS = { "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)" };
+
+	public static String criarGraficoBarras(DadosGrafico dados)
 	{
-		BarChart barModel = new BarChart();
-		BarData data = new BarData();
+		List<String> labels = dados.getLabels();
+		List<Number> values = dados.getValues();
 
-		BarDataset barDataSet = new BarDataset();
-		barDataSet.setLabel(dadosGrafico.getTitutlo());
+		StringBuilder lb = new StringBuilder();
+		StringBuilder dt = new StringBuilder();
+		StringBuilder bg = new StringBuilder();
+		StringBuilder bd = new StringBuilder();
 
-		List<String> bgColor = new ArrayList<>();
-		List<String> borderColor = new ArrayList<>();
+		for(int i = 0; i < labels.size(); i++)
+		{
+			if(i > 0)
+			{
+				lb.append(",");
+				dt.append(",");
+				bg.append(",");
+				bd.append(",");
+			}
+			lb.append("\"").append(labels.get(i)).append("\"");
+			dt.append(i < values.size() ? values.get(i) : 0);
+			bg.append("\"").append(BG_COLORS[i % BG_COLORS.length]).append("\"");
+			bd.append("\"").append(BORDER_COLORS[i % BORDER_COLORS.length]).append("\"");
+		}
 
-		bgColor.add("rgba(255, 99, 132, 0.2)");
-		bgColor.add("rgba(255, 159, 64, 0.2)");
-		bgColor.add("rgba(255, 205, 86, 0.2)");
-		bgColor.add("rgba(75, 192, 192, 0.2)");
-		bgColor.add("rgba(54, 162, 235, 0.2)");
+		StringBuilder json = new StringBuilder();
+		json.append("{\"type\":\"bar\",\"data\":{\"labels\":[").append(lb).append("],").append("\"datasets\":[{\"label\":\"").append(escape(dados.getTitulo()))
+		.append("\",").append("\"data\":[").append(dt).append("],").append("\"backgroundColor\":[").append(bg).append("],").append("\"borderColor\":[")
+		.append(bd).append("],").append("\"borderWidth\":1}]},").append("\"options\":{\"responsive\":true,\"maintainAspectRatio\":false,");
 
-		borderColor.add("rgb(255, 99, 132)");
-		borderColor.add("rgb(255, 159, 64)");
-		borderColor.add("rgb(255, 205, 86)");
-		borderColor.add("rgb(75, 192, 192)");
-		borderColor.add("rgb(54, 162, 235)");
+		if(dados.getIndexAxis() != null)
+			json.append("\"indexAxis\":\"").append(dados.getIndexAxis()).append("\",");
 
-		barDataSet.setData(dadosGrafico.getValues());
-		barDataSet.setBackgroundColor(bgColor);
-		barDataSet.setBorderColor(borderColor);
-		barDataSet.setBorderWidth(1);
+		json.append("\"plugins\":{\"title\":{\"display\":").append(dados.getTitulo() != null).append(",\"text\":\"").append(escape(dados.getTitulo()))
+		.append("\"}}}}");
 
-		data.addDataset(barDataSet);
-
-		data.setLabels(dadosGrafico.getLabels());
-		barModel.setData(data);
-
-		// Options
-//		BarOptions options = new BarOptions();
-//		CartesianScales cScales = new CartesianScales();
-//		CartesianLinearAxes linearAxes = new CartesianLinearAxes();
-//		linearAxes.setOffset(true);
-//		CartesianLinearTicks ticks = new CartesianLinearTicks();
-////		ticks.setBeginAtZero(true);
-//		linearAxes.setTicks(ticks);
-//		cScales.addYAxesData(linearAxes);
-//		options.setScales(cScales);
-//
-//		Title title = new Title();
-//		title.setDisplay(true);
-////		title.setText("Q"+questao.getId());
-//		options.setTitle(title);
-//
-//		Legend legend = new Legend();
-//		legend.setDisplay(true);
-//		legend.setPosition("top");
-//		LegendLabel legendLabels = new LegendLabel();
-//		legendLabels.setFontStyle("bold");
-//		legendLabels.setFontColor("#2980B9");
-//		legendLabels.setFontSize(24);
-//		legend.setLabels(legendLabels);
-//		options.setLegend(legend);
-//
-//		// disable animation
-//		Animation animation = new Animation();
-//		animation.setDuration(0);
-//		options.setAnimation(animation);
-
-//		barModel.setOptions(options);
-
-		return barModel.toJson();
+		return json.toString();
 	}
 
-	public static void main(String[] args)
+	private static String escape(String s)
 	{
+		if(s == null)
+			return "";
+		return s.replace("\\", "\\\\").replace("\"", "\\\"");
 	}
-
 }

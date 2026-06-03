@@ -133,6 +133,18 @@ function navegarComScroll(url) {
     location.href = url;
 }
 
+function asShowTab(tabName, el) {
+    document.querySelectorAll('.as-panel-content').forEach(function(p) {
+        p.style.display = 'none';
+    });
+    var panel = document.getElementById('asPanel-' + tabName);
+    if (panel) panel.style.display = 'block';
+    document.querySelectorAll('#asTabs .as-tab').forEach(function(t) {
+        t.classList.remove('as-tab-active');
+    });
+    if (el) el.classList.add('as-tab-active');
+}
+
 function focusFistCampo(idElement) 
 {
 	console.log(idElement);

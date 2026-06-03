@@ -164,7 +164,11 @@
       "PowerShell(mvn *)",
       "PowerShell(try { [xml]$x = Get-Content -Raw -Encoding UTF8 \"src/main/webapp/post/programacao.xhtml\"; Write-Output \"OK programacao.xhtml\" } catch { Write-Output \"FAIL -> $\\($_.Exception.Message\\)\" })",
       "Bash(mvn -v)",
-      "Bash(mvn -q -o compile)"
+      "Bash(mvn -q -o compile)",
+      "Bash(cd /tmp)",
+      "Bash(jar tf *)",
+      "Bash(unzip -p ~/.m2/repository/org/primefaces/primefaces/15.0.12/primefaces-15.0.12-jakarta.jar \"META-INF/resources/primefaces/selectcheckboxmenu/selectcheckboxmenu.js\")",
+      "Bash(Select-Object -ExpandProperty Name)"
     ]
   }
 }

@@ -16,6 +16,7 @@ import lombok.ToString;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
+import modelo.exercicio.Exercicio;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "questao" })
@@ -48,6 +49,10 @@ public class Alternativa implements Serializable, Entidade
 	@DiffIgnore
 	@ManyToOne
 	private Questao questao;
+	
+	@DiffIgnore
+	@ManyToOne
+	private Exercicio exercicio;
 
 	public void incrementaQtnEscolhida()
 	{

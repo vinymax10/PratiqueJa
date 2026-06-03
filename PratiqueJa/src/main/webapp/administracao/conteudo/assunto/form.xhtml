@@ -101,6 +101,40 @@
 				<p:inputTextarea rows="5" value="#{assuntoBean.entidade.descricao}"
 				placeholder="Descrição do assunto." maxlength="4095" />
 			</h:panelGroup>
+			
+			<div class="title-divisor-button" >
+				
+				<h4 class="m-0" >Contadores</h4>
+				<div class="flex gap-2 justify-content-end">
+					<p:commandButton value="Atualizar" icon="fa-solid fa-arrows-rotate"
+						styleClass="ui-button-raised ui-button-success"
+						action="#{assuntoBean.atualziar()}" update="@form :growl" process="@this" />
+				</div>
+			</div>
+			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Qtd. Exercícios" />
+				<p:inputNumber value="#{assuntoBean.entidade.qtdExercicios}"
+				minValue="0" decimalPlaces="0" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Qtd. Questões" />
+				<p:inputNumber value="#{assuntoBean.entidade.qtdQuestoes}"
+				minValue="0" decimalPlaces="0" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Qtd. Videoaulas" />
+				<p:inputNumber value="#{assuntoBean.entidade.qtdVideosAula}"
+				minValue="0" decimalPlaces="0" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Qtd. PDFs" />
+				<p:inputNumber value="#{assuntoBean.entidade.qtdPdf}"
+				minValue="0" decimalPlaces="0" />
+			</h:panelGroup>
 
 		</div>
 

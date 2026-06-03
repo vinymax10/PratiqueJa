@@ -3,6 +3,8 @@ package bean.academico;
 import java.util.EnumSet;
 import java.util.List;
 
+import bean.util.Mensagem;
+import jakarta.faces.application.FacesMessage;
 import bean.PaiBean;
 import dao.academico.AssuntoDAO;
 import dao.teste.ResultadoTesteDAO;
@@ -168,6 +170,25 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 			return resultadoTesteDAO.melhorResultado(assunto, usuario);
 		else
 			return 0;
+	}
+
+	public void atualziar()
+	{
+		int qtd = entidadeDAO.contarQuestoes(entidade);
+		entidade.setQtdQuestoes(qtd);
+		entidadeDAO.salvar(entidade);
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Contadores atualizados: " + qtd + " questão(ões).");
+	}
+
+	public void atualziarAll()
+	{
+		List<Assunto> todos = entidadeDAO.listarTudo();
+		for(Assunto a : todos)
+		{
+			a.setQtdQuestoes(entidadeDAO.contarQuestoes(a));
+			entidadeDAO.salvar(a);
+		}
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, todos.size() + " assunto(s) atualizados.");
 	}
 
 	public List<Assunto> getTodosAssuntos(Modulo modulo)

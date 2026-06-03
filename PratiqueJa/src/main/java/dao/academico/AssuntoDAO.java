@@ -12,6 +12,7 @@ import jakarta.persistence.criteria.Root;
 import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.ExercicioPadrao;
+import modelo.questao.Questao;
 import dao.DAO;
 
 public class AssuntoDAO extends DAO<Assunto>
@@ -140,6 +141,18 @@ public class AssuntoDAO extends DAO<Assunto>
 		List<Assunto> list = typedQuery.getResultList();
 
 		return list;
+	}
+
+	public int contarQuestoes(Assunto assunto)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> query = builder.createQuery(Long.class);
+		Root<Questao> fromQuestao = query.from(Questao.class);
+
+		query.select(builder.count(fromQuestao))
+			.where(builder.isMember(assunto, fromQuestao.get("assuntos")));
+
+		return em.createQuery(query).getSingleResult().intValue();
 	}
 
 	public List<ExercicioPadrao> getExerciciosPadrao(Assunto assunto)

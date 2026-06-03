@@ -6,7 +6,8 @@ public class DadosGrafico
 {
 	private List<String> labels;
 	private List<Number> values;
-	private String titutlo;
+	private String titulo;
+	private String indexAxis;
 
 	public List<String> getLabels()
 	{
@@ -18,14 +19,14 @@ public class DadosGrafico
 		this.labels = labels;
 	}
 
-	public String getTitutlo()
+	public String getTitulo()
 	{
-		return titutlo;
+		return titulo;
 	}
 
-	public void setTitutlo(String titutlo)
+	public void setTitulo(String titulo)
 	{
-		this.titutlo = titutlo;
+		this.titulo = titulo;
 	}
 
 	public List<Number> getValues()
@@ -38,4 +39,13 @@ public class DadosGrafico
 		this.values = values;
 	}
 
+	public String getIndexAxis()
+	{
+		return indexAxis;
+	}
+
+	public void setIndexAxis(String indexAxis)
+	{
+		this.indexAxis = indexAxis;
+	}
 }

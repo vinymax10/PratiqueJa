@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-ex-alternativa"
+		class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+		header="Alternativa"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true"
+		widgetVar="dialogExAlternativa" responsive="true">
+
+			<h:form id="formExAlternativa" class="form">
+				<div class="ui-fluid gride">
+
+					<h:panelGroup styleClass="campoMsg col-12">
+						<p:outputLabel for="@next" value="Texto" />
+						<p:inputTextarea value="#{exercicioAlternativaBean.entidade.texto}"
+						rows="5" autoResize="false" maxlength="1023" styleClass="w-full"
+						required="true" requiredMessage="O texto é obrigatório" />
+						<p:message for="@previous" display="text" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+						<p:outputLabel for="@next" value="Correta" />
+						<p:toggleSwitch class="toggleSwitch-form"
+						value="#{exercicioAlternativaBean.entidade.correta}" />
+					</h:panelGroup>
+
+				</div>
+
+				<div class="content-button">
+
+					<div class="divisor"></div>
+
+					<div class="flex gap-3 flex-wrap">
+						<p:commandButton value="Remover" icon="pi pi-trash"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{exercicioAlternativaBean.remover}"
+						update="formExAlternativa form:alternativasTabela :growl"
+						process="@this" oncomplete="PF('dialogExAlternativa').hide()"
+						rendered="#{!exercicioAlternativaBean.cadastro}">
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover esta Alternativa?" />
+						</p:commandButton>
+					</div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton id="salvarExAlternativa" value="Salvar"
+						rendered="#{!exercicioAlternativaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{exercicioAlternativaBean.salvar}"
+						update="formExAlternativa form:alternativasTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogExAlternativa').hide()">
+							<p:defaultCommand target="salvarExAlternativa" />
+						</p:commandButton>
+
+						<p:commandButton id="adicionarExAlternativa" value="Adicionar"
+						rendered="#{exercicioAlternativaBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-check"
+						action="#{exercicioAlternativaBean.adicionar}"
+						update="formExAlternativa form:alternativasTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogExAlternativa').hide()">
+							<p:defaultCommand target="adicionarExAlternativa" />
+						</p:commandButton>
+
+					</div>
+				</div>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

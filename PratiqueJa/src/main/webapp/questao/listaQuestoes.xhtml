@@ -117,13 +117,14 @@
 							
 						<p:button value="Editar" icon="pi pi-pencil"
 						rendered="#{sessaoBean.podeVerAdministracao()}"
-						styleClass="ui-button-raised ui-button-primary"
+						styleClass="ui-button-flat ui-button-plain"
+						target="_blank"
 							href="#{questaoBean.getUrlEdicao(questao)}" />
 
 					</div>
 
-					<h:panelGroup id="estatistica">
-						<div class="ui-fluid p-grid">
+					<h:panelGroup id="estatistica" layout="block">
+						<div class="ui-fluid p-grid" style="#{not questao.showEstatistica ? 'display:none' : ''}">
 							<div class="field col-12 lg:col-6 xl:col-4">
 								<p:chart value="#{questaoBean.createBarModel(questao)}"
 									rendered="#{questao.showEstatistica}"
@@ -132,8 +133,8 @@
 						</div>
 					</h:panelGroup>
 
-					<h:panelGroup id="resolucaoComentada">
-						<h:panelGroup rendered="#{questao.showResolucaoComentada}">
+					<h:panelGroup id="resolucaoComentada" layout="block">
+						<h:panelGroup layout="block" rendered="#{questao.showResolucaoComentada}">
 							<div class="qz-resolucao">
 								<h:outputLabel value="#{questao.resolucao}"
 									style="display:block;margin-bottom:8px;color:#374151" />

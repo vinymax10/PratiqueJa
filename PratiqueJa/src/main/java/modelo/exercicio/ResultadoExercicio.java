@@ -18,7 +18,7 @@ import modelo.auditoria.GeneroGramatical;
 import modelo.usuario.Usuario;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "usuario", "exercicioPadrao" })
+@ToString(exclude = { "usuario", "exercicio" })
 @Data
 @Entity
 public class ResultadoExercicio implements Serializable, Entidade
@@ -37,7 +37,7 @@ public class ResultadoExercicio implements Serializable, Entidade
 
 	@DiffIgnore
 	@ManyToOne
-	private ExercicioPadrao exercicioPadrao;
+	private Exercicio exercicio;
 
 	@AuditLabel(value = "realização", genero = GeneroGramatical.FEMININO)
 	private LocalDate realizacao;

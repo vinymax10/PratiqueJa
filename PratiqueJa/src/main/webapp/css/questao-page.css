@@ -206,6 +206,13 @@
     width: 100%;
 }
 
+.qz-filter-card {
+    background: linear-gradient(135deg, #07142f 0%, #0d1d47 65%, #1a2a5e 100%);
+    border-radius: 20px;
+    padding: 20px 24px 24px;
+    margin-bottom: 24px;
+}
+
 /* Linha separadora entre busca e campos */
 .qz-filter-divider {
     height: 1px;
@@ -217,8 +224,8 @@
 .qz-filter-panel .ui-outputlabel,
 .qz-filter-panel label {
     color: rgba(255, 255, 255, 0.68) !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
     letter-spacing: 0.3px !important;
 }
 
@@ -607,6 +614,13 @@
     color: #475569;
     border: 1px solid #e2e8f0;
     white-space: nowrap;
+    max-width: 100%;
+}
+@media (max-width: 600px) {
+    .qz-chip {
+        white-space: normal;
+        word-break: break-word;
+    }
 }
 .qz-chip-assunto {
     background: #eff6ff;
@@ -682,4 +696,17 @@
     .qz-hero-title { font-size: 1.7rem; }
     .qz-card { padding: 20px 16px; }
     .qz-hero-search { flex-direction: column; align-items: stretch; }
+
+    .qz-filter-actions {
+        flex-wrap: wrap;
+    }
+    .qz-filter-actions > .qz-filter-count,
+    .qz-filter-actions > [id$="contadorQuestoes"] {
+        width: 100%;
+        flex: none;
+    }
+    .qz-filter-actions .ui-button {
+        flex: 1;
+        justify-content: center;
+    }
 }

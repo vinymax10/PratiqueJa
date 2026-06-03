@@ -15,6 +15,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import modelo.usuario.Usuario;
@@ -62,17 +63,43 @@ public class AutenticacaoBean implements Serializable
 		usuario = usuarioDAO.getUsuario(email, "");
 		if(validarLogin())
 		{
+			String paginaOrigem = obterPaginaOrigem();
 			iniciarSessaoUsuario();
 			if(usuario.isResetSenha())
 				Navegacao.redirect(urlRedefinirSenha);
 			else
 			{
 				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso");
-				Navegacao.redirect(sessaoBean.getUrlInicial());
+				Navegacao.redirect(paginaOrigem);
 			}
 		}
-	
+
 		return "";
+	}
+
+	private String obterPaginaOrigem()
+	{
+		try
+		{
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest();
+			String referer = request.getHeader("Referer");
+			if(referer != null)
+			{
+				java.net.URL url = new java.net.URL(referer);
+				String path = url.getPath();
+				String contextPath = request.getContextPath();
+				if(path.startsWith(contextPath))
+					path = path.substring(contextPath.length());
+				if(!path.contains("/login/") && !path.isBlank())
+				{
+					String query = url.getQuery();
+					return query != null ? path + "?" + query : path;
+				}
+			}
+		}
+		catch(Exception ignored) {}
+		return sessaoBean.getUrlInicial();
 	}
 
 	private boolean validarLogin()

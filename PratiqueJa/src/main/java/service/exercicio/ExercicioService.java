@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
 import java.util.List;
 
 import bean.download.Diretorio;
@@ -18,7 +16,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
-import modelo.matematica.Conta;
+import modelo.questao.Alternativa;
 import modelo.usuario.Usuario;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -37,49 +35,29 @@ public class ExercicioService
 	private UsuarioDAO usuarioDAO;
 
 	public void construirExercicio(Exercicio exercicio)
-	throws ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
-		String classe = exercicio.getExercicioPadrao().getClasse();
-		for(int i = 0; i < exercicio.getExercicioPadrao().getQuantidade(); i++)
-		{
-			Conta conta = (Conta) Class.forName(classe).getConstructor(Integer.TYPE).newInstance(i + 1);
-			conta.setExercicio(exercicio);
-			conta.setTipoExercicio(exercicio.getExercicioPadrao().getTipoExercicio());
-			exercicio.getContas().add(conta);
-		}
-
-		if(exercicio.getPrazo() == null)
-			exercicio.setPrazo(LocalDate.now());
-
 		exercicioDAO.salvar(exercicio);
 	}
 
-	public void registrarResposta(Exercicio exercicio, Conta conta)
+	public void registrarResposta(Exercicio exercicio)
 	{
-		conta.setRespondida(true);
-		if(conta.isCorreta())
-			exercicio.incrementaContasCorretas();
-
-		exercicio.incrementaContasRealizadas();
-		exercicio.calculaNota();
-		exercicio.setRealizacao(LocalDate.now());
-		exercicio.setRealizado(true);
-
-		if(exercicio.getResultadoExercicio() == null)
+		Alternativa escolhida = exercicio.getAlternativaEscolhida();
+		if(escolhida == null)
 		{
-			ResultadoExercicio resultado = new ResultadoExercicio();
-			resultado.setExercicioPadrao(exercicio.getExercicioPadrao());
-			resultado.setUsuario(exercicio.getUsuario());
-			resultado.setRealizacao(LocalDate.now());
-			resultado.setNota(exercicio.getNota());
-			resultadoExercicioDAO.salvar(resultado);
-			exercicio.setResultadoExercicio(resultado);
+			exercicio.setFeedbackSemSelecao(true);
+			exercicio.setFeedbackAcertou(null);
+			return;
 		}
-		else
+
+		escolhida.incrementaQtnEscolhida();
+		boolean acertou = escolhida.isCorreta();
+		exercicio.setFeedbackAcertou(acertou);
+		exercicio.setFeedbackSemSelecao(false);
+
+		if(!acertou)
 		{
-			ResultadoExercicio resultado = exercicio.getResultadoExercicio();
-			resultado.setNota(exercicio.getNota());
-			resultadoExercicioDAO.salvar(resultado);
+			Alternativa correta = exercicio.correta();
+			exercicio.setFeedbackLetraCorreta(correta != null ? correta.getLetra() : null);
 		}
 
 		exercicioDAO.salvar(exercicio);
@@ -107,40 +85,12 @@ public class ExercicioService
 
 	public List<Exercicio> meusExercicios(Usuario usuario, Boolean realizada)
 	{
-		return exercicioDAO.meusExercicios(usuario, realizada);
+		return exercicioDAO.buscarGlobais();
 	}
 
 	public Long numeroMeusExercicios(Usuario usuario, Boolean realizado)
 	{
-		return exercicioDAO.numeroMeusExercicios(usuario, realizado);
+		return (long) exercicioDAO.buscarGlobais().size();
 	}
 
-	public StreamedContent gerarPdfExercicio(Exercicio exercicio, ConfigDownload configDownload, Diretorio diretorio, Usuario usuario)
-	{
-		usuario = usuarioDAO.carrega(usuario.getId());
-		configDownload.setUsuario(usuario);
-
-		GerarLatexExercicio gerarLatex = new GerarLatexExercicio(diretorio);
-		gerarLatex.gerarPDFExercicio(exercicio, configDownload);
-		gerarLatex.gerar();
-
-		File initialFile = new File(diretorio.getEnderecoPdf());
-		InputStream inStream;
-		StreamedContent file = null;
-		try
-		{
-			inStream = new FileInputStream(initialFile);
-			file = DefaultStreamedContent.builder()
-				.name("Exercicio" + exercicio.getExercicioPadrao().getAssunto().getChave() + exercicio.getExercicioPadrao().getNivel() + ".pdf")
-				.contentType("aplication/pdf")
-				.stream(() -> inStream)
-				.build();
-		}
-		catch(FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-
-		return file;
-	}
 }

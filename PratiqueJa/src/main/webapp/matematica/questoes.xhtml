@@ -1,107 +1,284 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
 
-<h:body >
-	<ui:composition>
-		<p:tab title="Questões" rendered="#{assuntoBean.entidade.showQuestao}" >
-			
-			<div class=" p-grid" style="margin-top:.5rem;width:100%">
-				<div class="p-field p-col-12 p-md-9 " >
-					<p:selectOneButton value="#{questaoBean.tipoFiltro}" >
-						<p:ajax event="change" 
-						listener="#{questaoBean.buscaQuestao(assuntoBean.entidade)}" 
-						process="@this" update="form:tabView"
-						oncomplete="reloadMathJax();" />
-						
-						<f:selectItems value="#{tipoFiltroBean.opcoes}" 
-			            var="tipoFiltro" itemLabel="#{tipoFiltro.nome}" itemValue="#{tipoFiltro}"/>
-			        </p:selectOneButton>
-		        </div>
-				<div class="p-field p-col-12 p-md-3 p-text-right" style="padding:0;">
-					<p:commandButton value="Download" update="dialogUpgrade"
-					process="@this" action="#{questaoBean.podeFazerDownloadAssunto()}"
-					icon="pi pi-download" 
-					styleClass="ui-button-raised ui-button-flat">
-					</p:commandButton>
+	<ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+	    <link rel="stylesheet" href="/css/questao-page.css" type="text/css" />
+    </ui:define>
+
+	<f:metadata>
+		<f:viewParam name="assunto" value="#{assuntoBean.assunto}" />
+		<f:viewAction action="#{assuntoBean.init()}" />
+		<f:viewAction action="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}" />
+	</f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+	<h:form id="form">
+
+		<!-- FILTRO -->
+		<div class="qz-filter-card">
+		<div class="qz-filter-panel">
+
+			<div class="ui-fluid gride">
+
+				<div class="campo col-12 ">
+					<p:outputLabel for="@next" value="Conteúdo" />
+					<span class="ui-input-icon-left" style="width:100%">
+						<i class="pi pi-search" />
+						<p:inputText value="#{questaoBean.filtro.conteudo}"
+						placeholder="Buscar por conteúdo" styleClass="w-full">
+							<p:ajax event="keyup" delay="500" process="@form"
+							update=":form:resultados :form:contadorQuestoes :form:filtrosAtivos"
+							listener="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}"
+							oncomplete="reloadMathJax();" />
+						</p:inputText>
+					</span>
 				</div>
-		     </div>
-				
-			<div class=" p-grid" >
-				<p:tag styleClass="p-mr-2" value="Total de #{questaoBean.questoes.size()} questões" 
-				style="margin:.5rem;"></p:tag>
-			
+
+				<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
+					<p:outputLabel for="@next" value="Banca" />
+					<p:selectCheckboxMenu value="#{questaoBean.filtro.bancas}"
+					panelStyleClass="qz-dark-select-panel"
+					converter="generic" filter="true" filterMatchMode="contains"
+					scrollHeight="380" style="width:100%">
+						<f:selectItems value="#{bancaBean.opcoes}" var="banca"
+						itemLabel="#{banca.sigla}" itemValue="#{banca}" />
+						<p:ajax event="change" delay="300" process="@form"
+						update=":form:resultados :form:contadorQuestoes :form:filtrosAtivos"
+						listener="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}"
+						oncomplete="reloadMathJax();" />
+					</p:selectCheckboxMenu>
+				</div>
+
+				<div class="campo col-12 md:col-6 lg:col-6 xl:col-2">
+					<p:outputLabel for="@next" value="Ano" />
+					<p:selectCheckboxMenu value="#{questaoBean.filtro.anos}"
+					panelStyleClass="qz-dark-select-panel"
+					converter="generic" filter="true" filterMatchMode="contains"
+					scrollHeight="380" style="width:100%">
+						<f:selectItems value="#{anoBean.opcoes}" var="ano"
+						itemLabel="#{ano.nome}" itemValue="#{ano}" />
+						<p:ajax event="change" delay="300" process="@form"
+						update=":form:resultados :form:contadorQuestoes :form:filtrosAtivos"
+						listener="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}"
+						oncomplete="reloadMathJax();" />
+					</p:selectCheckboxMenu>
+				</div>
+
+				<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+					<p:outputLabel for="@next" value="Dificuldade" />
+					<p:selectCheckboxMenu value="#{questaoBean.filtro.dificuldades}"
+					panelStyleClass="qz-dark-select-panel qz-select-no-filter"
+					scrollHeight="300" style="width:100%">
+						<f:selectItems value="#{questaoBean.dificuldadeValues}" var="d"
+						itemLabel="#{d.nome}" itemValue="#{d}" />
+						<p:ajax event="change" delay="300" process="@form"
+						update=":form:resultados :form:contadorQuestoes :form:filtrosAtivos"
+						listener="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}"
+						oncomplete="reloadMathJax();" />
+					</p:selectCheckboxMenu>
+				</div>
+
+				<div class="campo col-12 md:col-6 lg:col-6 xl:col-3">
+					<p:outputLabel for="@next" value="Situação" />
+					<p:selectOneMenu value="#{questaoBean.situacao}"
+					panelStyleClass="qz-dark-select-panel">
+						<f:selectItem itemLabel="Todas" itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItem itemLabel="Acertei" itemValue="ACERTEI" />
+						<f:selectItem itemLabel="Errei" itemValue="ERREI" />
+						<f:selectItem itemLabel="Não respondida" itemValue="NAO_RESPONDIDA" />
+						<p:ajax event="change" process="@form"
+						update=":form:resultados :form:contadorQuestoes :form:filtrosAtivos"
+						listener="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}"
+						oncomplete="reloadMathJax();" />
+					</p:selectOneMenu>
+				</div>
+
 			</div>
-			
+
+			<!-- Chips de filtros ativos -->
+			<h:panelGroup id="filtrosAtivos" layout="block">
+				<div class="qz-active-filters"
+				style="#{(not empty questaoBean.filtro.bancas or not empty questaoBean.filtro.orgaos or not empty questaoBean.filtro.anos or not empty questaoBean.filtro.dificuldades or not empty questaoBean.situacao) ? '' : 'display:none'}">
+
+					<h:panelGroup layout="block" styleClass="qz-filter-group"
+					rendered="#{not empty questaoBean.filtro.bancas}">
+						<span class="qz-filter-group-label"><i class="pi pi-building" /> Bancas</span>
+						<div class="qz-filter-group-chips">
+							<ui:repeat value="#{questaoBean.filtro.bancas}" var="banca">
+								<span class="qz-active-chip">
+									#{banca.sigla}
+									<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+									process="@this" action="#{questaoBean.removerBanca(banca)}"
+									update="@form" oncomplete="reloadMathJax();" />
+								</span>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="qz-filter-group"
+					rendered="#{not empty questaoBean.filtro.orgaos}">
+						<span class="qz-filter-group-label"><i class="pi pi-sitemap" /> Órgãos</span>
+						<div class="qz-filter-group-chips">
+							<ui:repeat value="#{questaoBean.filtro.orgaos}" var="orgao">
+								<span class="qz-active-chip">
+									#{orgao.sigla}
+									<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+									process="@this" action="#{questaoBean.removerOrgao(orgao)}"
+									update="@form" oncomplete="reloadMathJax();" />
+								</span>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="qz-filter-group"
+					rendered="#{not empty questaoBean.filtro.anos}">
+						<span class="qz-filter-group-label"><i class="pi pi-calendar" /> Anos</span>
+						<div class="qz-filter-group-chips">
+							<ui:repeat value="#{questaoBean.filtro.anos}" var="ano">
+								<span class="qz-active-chip">
+									#{ano.nome}
+									<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+									process="@this" action="#{questaoBean.removerAno(ano)}"
+									update="@form" oncomplete="reloadMathJax();" />
+								</span>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="qz-filter-group"
+					rendered="#{not empty questaoBean.filtro.dificuldades}">
+						<span class="qz-filter-group-label"><i class="pi pi-chart-bar" /> Dificuldade</span>
+						<div class="qz-filter-group-chips">
+							<ui:repeat value="#{questaoBean.filtro.dificuldades}" var="dif">
+								<span class="qz-active-chip">
+									#{dif.nome}
+									<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+									process="@this" action="#{questaoBean.removerDificuldade(dif)}"
+									update="@form" oncomplete="reloadMathJax();" />
+								</span>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="qz-filter-group"
+					rendered="#{not empty questaoBean.situacao}">
+						<span class="qz-filter-group-label"><i class="pi pi-check-circle" /> Situação</span>
+						<div class="qz-filter-group-chips">
+							<span class="qz-active-chip">
+								#{questaoBean.situacaoLabel}
+								<p:commandButton icon="pi pi-times" styleClass="qz-chip-remove-btn"
+								process="@this" action="#{questaoBean.removerSituacao()}"
+								update="@form" oncomplete="reloadMathJax();" />
+							</span>
+						</div>
+					</h:panelGroup>
+
+				</div>
+			</h:panelGroup>
+
+			<div class="qz-filter-actions">
+
+				<h:panelGroup id="contadorQuestoes" layout="block" style="flex:1">
+					<span class="qz-filter-count">
+						<i class="pi pi-list" />
+						<strong>#{questaoBean.questoes.size()}</strong> questões encontradas
+					</span>
+				</h:panelGroup>
+
+				<p:commandButton value="Limpar"
+				styleClass="ui-button-flat ui-button-plain"
+				icon="fa-solid fa-eraser"
+				action="#{questaoBean.limparFiltroPorAssunto(assuntoBean.entidade)}" update="@form"
+				oncomplete="reloadMathJax();" />
+
+				<p:commandButton id="filtrar" value="Filtrar"
+				styleClass="ui-button-raised ui-button-flat"
+				icon="pi pi-search"
+				action="#{questaoBean.filtrarPorAssunto(assuntoBean.entidade)}" update="@form :growl" process="@form"
+				oncomplete="reloadMathJax();">
+					<p:defaultCommand target="form:filtrar" />
+				</p:commandButton>
+
+			</div>
+
+		</div>
+		</div>
+
+		<script type="text/javascript" src="/js/selectMenuForceDown.js"></script>
+
+		<!-- RESULTADOS -->
+		<h:panelGroup id="resultados" layout="block">
 			<ui:include src="/questao/barraNavegacao.xhtml" />
-			
 			<ui:include src="/questao/listaQuestoes.xhtml" />
-
 			<ui:include src="/questao/barraNavegacao.xhtml" />
-				
-			<p:dialog id="dialogDownloadQuestao" class="p-col-8 p-md-6 p-md-offset-1 p-lg-4 p-lg-offset-2" 
-			header="Download de Questões" 
-			showEffect="fade" hideEffect="fade" width="100%;" modal="true"  
-			widgetVar="downloadQuestaoWidget" responsive="true" >
-				
-				<p:outputPanel id="downloadQuestaoContent" class="ui-fluid">
-					
-					<div class="p-col-12" >
-						<h:outputText style="color: var(--iris);" value="Módulo #{assuntoBean.entidade.modulo.nome}" />
-				    	 - 
-				    	<h:outputText style="color: var(--verde);" value="Assunto #{assuntoBean.entidade.nome}" />
-		    		</div>
-		    		
-		    		<div class="p-col-12" >
-						<h:outputText value="Selecione a configuração do pdf de questões:" />
-		    		</div>
-		    		
-					<div class="ui-fluid p-formgrid p-grid">
-			        				    		
-                		<div class="p-field p-col-12">
-			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.identificacao}" 
-			                onLabel="Com Identificação" offLabel="Sem Identificação"
-							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-							style="width:12rem; margin-top:15px;" />
-						</div>
-						
-						<div class="p-field p-col-12">
-			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.respostas}" 
-			                onLabel="Com Respostas" offLabel="Sem Respostas"
-							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-							style="width:12rem; margin-top:15px;" />
-						</div>
-						
-						<div class="p-field p-col-12">
-			                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.resolucao}" 
-			                onLabel="Com Resolução" offLabel="Sem Resolução"
-							onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-							style="width:12rem; margin-top:15px;" />
-						</div>
-			            
-	           		</div>
-				</p:outputPanel>
-				<f:facet name="footer">
-				
-					<p:commandButton  value="Cancelar" 
-					styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-					onclick="PF('downloadQuestaoWidget').hide()"  icon="pi pi-times" />
+		</h:panelGroup>
 
-					<p:commandButton value="Download" style="margin-right:15px;"
-					icon="pi pi-download" ajax="false"
-					onclick="PrimeFaces.monitorDownload('', PF('downloadQuestaoWidget').hide());" 
-					styleClass="ui-button-raised ui-button-flat">
-						<p:fileDownload value="#{questaoBean.download(false)}"/>
-					</p:commandButton>
-					
-      				</f:facet>
-				
-			</p:dialog>
-       	</p:tab>
-			
-	</ui:composition>		
-</h:body>
-</html>
+		<!-- DIALOG DOWNLOAD -->
+		<p:dialog id="dialogDownloadQuestao" class="p-col-8 p-md-6 p-md-offset-1 p-lg-4 p-lg-offset-2"
+		header="Download de Questões"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true"
+		widgetVar="downloadQuestaoWidget" responsive="true" >
 
+			<p:outputPanel id="downloadQuestaoContent" class="ui-fluid">
+
+				<div class="p-col-12" >
+					<h:outputText style="color: var(--iris);" value="Módulo #{assuntoBean.entidade.modulo.nome}" />
+			    	 -
+			    	<h:outputText style="color: var(--verde);" value="Assunto #{assuntoBean.entidade.nome}" />
+	    		</div>
+
+	    		<div class="p-col-12" >
+					<h:outputText value="Selecione a configuração do pdf de questões:" />
+	    		</div>
+
+				<div class="ui-fluid p-formgrid p-grid">
+
+                	<div class="p-field p-col-12">
+		                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.identificacao}"
+		                onLabel="Com Identificação" offLabel="Sem Identificação"
+						onIcon="pi pi-check-square" offIcon="pi pi-stop"
+						style="width:12rem; margin-top:15px;" />
+					</div>
+
+					<div class="p-field p-col-12">
+		                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.respostas}"
+		                onLabel="Com Respostas" offLabel="Sem Respostas"
+						onIcon="pi pi-check-square" offIcon="pi pi-stop"
+						style="width:12rem; margin-top:15px;" />
+					</div>
+
+					<div class="p-field p-col-12">
+		                <p:selectBooleanButton value="#{gestaoQuestaoBean.configDownload.resolucao}"
+		                onLabel="Com Resolução" offLabel="Sem Resolução"
+						onIcon="pi pi-check-square" offIcon="pi pi-stop"
+						style="width:12rem; margin-top:15px;" />
+					</div>
+
+	           	</div>
+			</p:outputPanel>
+			<f:facet name="footer">
+
+				<p:commandButton value="Cancelar"
+				styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+				onclick="PF('downloadQuestaoWidget').hide()" icon="pi pi-times" />
+
+				<p:commandButton value="Download" style="margin-right:15px;"
+				icon="pi pi-download" ajax="false"
+				onclick="PrimeFaces.monitorDownload('', PF('downloadQuestaoWidget').hide());"
+				styleClass="ui-button-raised ui-button-flat">
+					<p:fileDownload value="#{questaoBean.download(false)}"/>
+				</p:commandButton>
+
+  			</f:facet>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:decorate>

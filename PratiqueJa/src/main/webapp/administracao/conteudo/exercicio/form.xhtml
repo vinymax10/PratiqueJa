@@ -21,11 +21,10 @@
 
 		<div class="ui-fluid gride">
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-5">
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-8 xl:col-6">
 				<p:outputLabel for="@next" value="Exercício Padrão" />
 				<p:selectOneMenu value="#{exercicioBean.entidade.exercicioPadrao}"
-				converter="generic" filter="true" filterMatchMode="contains"
-				required="true" requiredMessage="O exercício padrão é obrigatório">
+				converter="generic" filter="true" filterMatchMode="contains">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
 					<f:selectItems value="#{exercicioPadraoBean.listaTudo}" var="ep"
 					itemLabel="#{ep.assunto.modulo.nome} - #{ep.assunto.nome} - #{ep.nivel.nome}"
@@ -34,25 +33,36 @@
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-5">
-				<p:outputLabel for="@next" value="Usuário" />
-				<p:selectOneMenu value="#{exercicioBean.entidade.usuario}"
-				converter="generic" filter="true" filterMatchMode="contains"
-				required="true" requiredMessage="O usuário é obrigatório">
-					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{usuarioBean.todosUsuarios}" var="usuario"
-					itemLabel="#{usuario.nome}" itemValue="#{usuario}"/>
-				</p:selectOneMenu>
-				<p:message for="@previous" display="text"/>
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Global" />
+				<p:toggleSwitch class="toggleSwitch-form"
+					value="#{exercicioBean.entidade.global}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-2">
-				<p:outputLabel for="@next" value="Prazo" />
-				<p:datePicker value="#{exercicioBean.entidade.prazo}"
-				locale="pt" monthNavigator="true" yearNavigator="select"
-				focusOnSelect="true" />
+			<h:panelGroup styleClass="campo col-12">
+				<p:outputLabel for="@next" value="Enunciado" />
+				<p:inputTextarea rows="6" value="#{exercicioBean.entidade.enunciado}"
+				placeholder="Texto do enunciado do exercício." maxlength="4095" styleClass="w-full" />
 			</h:panelGroup>
 
+		</div>
+
+		<ui:include rendered="#{!exercicioBean.cadastro}"
+		src="/administracao/conteudo/exercicio/alternativa/alternativa.xhtml" />
+
+		<h4 class="title-divisor">Resolução</h4>
+
+		<div class="ui-fluid gride">
+			<div class="gride col-12 p-0">
+				<div class="campo col-6">
+					<p:outputLabel for="@next" value="Resolução" />
+					<p:inputTextarea rows="10" value="#{exercicioBean.entidade.resolucao}" styleClass="w-full" />
+				</div>
+				<div class="campo col-6">
+					<p:outputLabel for="@next" value="Preview" style="display:block;margin-bottom:15px;" />
+					<p:outputLabel value="#{exercicioBean.entidade.resolucao}" />
+				</div>
+			</div>
 		</div>
 
 		<div class="content-button">
@@ -79,6 +89,15 @@
 
 			<div class="flex gap-3 flex-wrap">
 
+				<p:commandButton id="auditoria" value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !exercicioBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(exercicioBean.entidade, exercicioBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
 				<p:button value="Voltar"
 				styleClass="ui-button-outlined"
 				icon="pi pi-chevron-left" href="/administracao/conteudo/exercicio/list.xhtml" />
@@ -87,7 +106,7 @@
 					rendered="#{exercicioBean.cadastro}"
 					styleClass="ui-button-raised ui-button-success"
 					icon="pi pi-plus"
-					action="#{exercicioBean.adicionar(false)}" update="@form, :growl"
+					action="#{exercicioBean.adicionar(true)}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="adicionarCadastro" />
 				</p:commandButton>
@@ -105,5 +124,7 @@
 		</div>
 
 	</h:form>
+
+	<ui:include src="/administracao/conteudo/exercicio/alternativa/dialog-cadastro.xhtml" />
 
 </ui:decorate>

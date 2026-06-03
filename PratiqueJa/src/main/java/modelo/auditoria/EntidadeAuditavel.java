@@ -1,14 +1,19 @@
 package modelo.auditoria;
 
 import modelo.DocumentoFile;
+import modelo.academico.Ano;
 import modelo.academico.Assunto;
+import modelo.academico.Banca;
+import modelo.academico.Disciplina;
+import modelo.academico.Orgao;
 import modelo.configuracao.ConfigCleanup;
 import modelo.configuracao.ConfigLatex;
 import modelo.configuracao.Edicao;
+import modelo.email.ConfigSpam;
 import modelo.email.Email;
+import modelo.email.ProgramacaoSpam;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.exercicio.ResultadoExercicio;
 import modelo.matematica.Conta;
 import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
@@ -22,13 +27,7 @@ import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
-import modelo.academico.Ano;
-import modelo.academico.Banca;
-import modelo.academico.Disciplina;
-import modelo.academico.Orgao;
 import modelo.seguranca.Acesso;
-import modelo.email.ConfigSpam;
-import modelo.email.ProgramacaoSpam;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.ResultadoTeste;
@@ -55,7 +54,6 @@ public enum EntidadeAuditavel
 //	Exercício
 	ExercicioPadrao(ExercicioPadrao.class, "Exercício Padrão"),
 	Exercicio(Exercicio.class, "Exercício"),
-	ResultadoExercicio(ResultadoExercicio.class, "Resultado de Exercício"),
 	Conta(Conta.class, "Conta"),
 
 //	Questão

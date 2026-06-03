@@ -43,8 +43,8 @@ public class CleanupService
 		}
 		try
 		{
-			removerExercicios(exercicioDAO.exerciciosRealizados(config.getDiasRemoverExercicioRealizado()));
-			removerExercicios(exercicioDAO.exerciciosNaoRealizados(config.getDiasRemoverExercicioNaoRealizado()));
+//			removerExercicios(exercicioDAO.exerciciosRealizados(config.getDiasRemoverExercicioRealizado()));
+//			removerExercicios(exercicioDAO.exerciciosNaoRealizados(config.getDiasRemoverExercicioNaoRealizado()));
 		}
 		catch(Exception e)
 		{

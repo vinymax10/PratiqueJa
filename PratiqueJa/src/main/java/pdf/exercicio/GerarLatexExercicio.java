@@ -67,35 +67,6 @@ public class GerarLatexExercicio
 		
 	}
 	
-	public void gerarPDFExercicio(Exercicio exercicio, ConfigDownload configDownload)
-	{
-		this.exercicio=exercicio.getExercicioPadrao();
-		this.configDownload=configDownload;
-		diretorioBean.limparDiretorios();
-		listaContas=exercicio.getContas();
-		
-		gerarImagens();
-		caput();
-		cabecalho();
-		listaExercicios();
-		if(configDownload.isRespostas())
-			rodape();
-		
-		if(configDownload.isResolucao()	&& listaContas.get(0).possuiResolucao())
-		{
-			latex+="\\newpage \r\n";
-			cabecalho();
-			listaResolucao();
-		}
-		
-		latex+="\\end{document}";
-		
-		Arquivo arq=new Arquivo(diretorioBean.getEnderecoTex());
-		arq.escrever(latex);
-		arq.finalizar();
-		
-	}
-	
 	private void gravarLogo()
 	{
 		File logo = new File(diretorioBean.getEnderecoLogo());

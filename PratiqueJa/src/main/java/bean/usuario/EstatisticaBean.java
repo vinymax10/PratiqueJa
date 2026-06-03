@@ -60,7 +60,7 @@ public class EstatisticaBean implements Serializable
 	public String graficoControleAcessoAnual(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo(titulo);
+		dadosGrafico.setTitulo(titulo);
 
 		LocalDate fim = LocalDate.now();
 		LocalDate inicio = fim.plusDays(-365);
@@ -89,7 +89,7 @@ public class EstatisticaBean implements Serializable
 	public String graficoControleAcessoMensal(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo(titulo);
+		dadosGrafico.setTitulo(titulo);
 
 		int periodo = 7;
 		int numeroBarras = 12;
@@ -120,7 +120,7 @@ public class EstatisticaBean implements Serializable
 	public String graficoControleAcessoSemanal(String titulo, Field field)
 	{
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo(titulo);
+		dadosGrafico.setTitulo(titulo);
 
 		int periodo = 1;
 		int numeroBarras = 12;
@@ -188,7 +188,7 @@ public class EstatisticaBean implements Serializable
 		carregarUsuario();
 
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo("Frequência diária");
+		dadosGrafico.setTitulo("Frequência diária");
 
 		int periodo = 1;
 		int numeroBarras = 12;
@@ -221,7 +221,7 @@ public class EstatisticaBean implements Serializable
 		carregarUsuario();
 
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo("Frequência Semanal");
+		dadosGrafico.setTitulo("Frequência Semanal");
 
 		int periodo = 7;
 		int numeroBarras = 12;
@@ -254,7 +254,7 @@ public class EstatisticaBean implements Serializable
 		carregarUsuario();
 
 		DadosGrafico dadosGrafico = new DadosGrafico();
-		dadosGrafico.setTitutlo("Frequência Mensal");
+		dadosGrafico.setTitulo("Frequência Mensal");
 
 		LocalDate fim = LocalDate.now();
 		LocalDate inicio = fim.plusDays(-365);

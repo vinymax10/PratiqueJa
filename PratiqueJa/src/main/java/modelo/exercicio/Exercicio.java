@@ -1,31 +1,31 @@
 package modelo.exercicio;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
-import modelo.auditoria.GeneroGramatical;
-import modelo.matematica.Conta;
-import modelo.usuario.Usuario;
+import modelo.questao.Alternativa;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "exercicioPadrao", "contas", "usuario", "resultadoExercicio" })
+@ToString(exclude = { "exercicioPadrao", "resultadosExercicio" })
 @Data
 @Entity
 public class Exercicio implements Serializable, Entidade
@@ -43,53 +43,65 @@ public class Exercicio implements Serializable, Entidade
 	@JoinColumn(nullable = true)
 	private ExercicioPadrao exercicioPadrao;
 
+	@AuditLabel(value = "global")
+	private boolean global;
+
+	@Column(length = 4095)
+	@Size(max = 4095)
+	@AuditLabel(value = "enunciado")
+	private String enunciado;
+
+	@Column(length = 4095)
+	@Size(max = 4095)
+	@AuditLabel(value = "resolução", genero = modelo.auditoria.GeneroGramatical.FEMININO)
+	private String resolucao;
+
 	@DiffIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "exercicio")
-	private List<Conta> contas = new ArrayList<Conta>();
-
-	@AuditLabel(value = "realizado")
-	private boolean realizado = false;
-
-	@AuditLabel(value = "número de contas realizadas")
-	private double numContasRealizadas;
-
-	@AuditLabel(value = "número de corretas")
-	private int numCorretas;
-
-	@AuditLabel(value = "realização", genero = GeneroGramatical.FEMININO)
-	private LocalDate realizacao;
-
-	@AuditLabel(value = "prazo")
-	private LocalDate prazo;
-
-	@AuditLabel(value = "nota", genero = GeneroGramatical.FEMININO)
-	private double nota;
+	@OrderBy("ordem")
+	private List<Alternativa> alternativas = new ArrayList<>();
 
 	@DiffIgnore
-	@ManyToOne
-	private Usuario usuario;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "exercicio")
+	private List<ResultadoExercicio> resultadosExercicio = new ArrayList<>();
 
-	@DiffIgnore
-	@OneToOne
-	private ResultadoExercicio resultadoExercicio;
+	@Transient
+	private Alternativa alternativaEscolhida;
 
-	public void calculaNota()
+	@Transient
+	private boolean showEstatistica;
+
+	@Transient
+	private boolean showResolucaoComentada;
+
+	@Transient
+	private Boolean feedbackAcertou;
+
+	@Transient
+	private String feedbackLetraCorreta;
+
+	@Transient
+	private boolean feedbackSemSelecao;
+
+	public void toogleResolucaoComentada()
 	{
-		nota = 100 * (double) numCorretas / numContasRealizadas;
+		if(showEstatistica)
+			showEstatistica = false;
+		showResolucaoComentada = !showResolucaoComentada;
 	}
 
-	public void incrementaContasRealizadas()
+	public void toogleEstatistica()
 	{
-		numContasRealizadas++;
+		if(showResolucaoComentada)
+			showResolucaoComentada = false;
+		showEstatistica = !showEstatistica;
 	}
 
-	public void incrementaContasCorretas()
+	public Alternativa correta()
 	{
-		numCorretas++;
-	}
-
-	public double getNotaPorcentagem()
-	{
-		return nota;
+		for(Alternativa alternativa : alternativas)
+			if(alternativa.isCorreta())
+				return alternativa;
+		return null;
 	}
 }

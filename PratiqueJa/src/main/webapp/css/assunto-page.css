@@ -53,6 +53,16 @@
 	min-width: 100px;
 }
 
+.as-stat--blue   { background: #eff6ff; border-color: #bfdbfe; }
+.as-stat--green  { background: #f0fdf4; border-color: #bbf7d0; }
+.as-stat--purple { background: #faf5ff; border-color: #e9d5ff; }
+.as-stat--orange { background: #fff7ed; border-color: #fed7aa; }
+
+.as-stat--blue   .as-stat-value { color: #2563eb; }
+.as-stat--green  .as-stat-value { color: #16a34a; }
+.as-stat--purple .as-stat-value { color: #7c3aed; }
+.as-stat--orange .as-stat-value { color: #ea580c; }
+
 .as-stat-label {
 	font-size: 12px;
 	color: #6b7280;
@@ -103,32 +113,46 @@
 
 /* ===== PROGRESSO ===== */
 .as-progress-section {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
-	gap: 24px;
 	margin-bottom: 24px;
 }
 
-.as-progress-card {
-	background: white;
-	border-radius: 20px;
-	padding: 28px;
-	box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+.as-progress-inline {
+	width: 100%;
+	margin-top: 20px;
+	padding-top: 18px;
+	border-top: 1px solid #e5e7eb;
 }
 
-.as-progress-title {
-	font-size: 18px;
+.as-progress-inline-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.as-progress-inline-label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #9ca3af;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.as-progress-inline-pct {
+	font-size: 13px;
 	font-weight: 700;
-	color: #111827;
-	margin: 0 0 16px 0;
+	color: #2563eb;
 }
 
-.as-progress-bar {
-	height: 16px;
+.as-progress-bar-sm {
+	height: 7px;
 	background: #e5e7eb;
 	border-radius: 999px;
 	overflow: hidden;
-	margin-bottom: 26px;
+	margin-bottom: 9px;
 }
 
 .as-progress-fill {
@@ -138,29 +162,16 @@
 	transition: width 0.4s ease;
 }
 
-.as-progress-stats {
+.as-progress-inline-meta {
 	display: flex;
-	justify-content: space-between;
-	gap: 16px;
-	flex-wrap: wrap;
+	align-items: center;
+	gap: 7px;
+	font-size: 12px;
+	color: #9ca3af;
 }
 
-.as-progress-item {
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-}
-
-.as-progress-item strong {
-	display: block;
-	font-size: 32px;
-	font-weight: 800;
-	color: #2563eb;
-}
-
-.as-progress-item span {
-	font-size: 14px;
-	color: #6b7280;
+.as-progress-dot {
+	opacity: 0.5;
 }
 
 /* Continue de onde parou */
@@ -243,7 +254,6 @@
 .as-tab.as-tab-active {
 	background: linear-gradient(90deg, #2563eb, #3b82f6);
 	color: white;
-	border-color: transparent;
 	box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
 }
 

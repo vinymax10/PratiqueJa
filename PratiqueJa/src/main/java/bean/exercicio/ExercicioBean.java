@@ -3,12 +3,10 @@ package bean.exercicio;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
-import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bean.PaiBean;
-import bean.download.Diretorio;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioDAO;
@@ -24,7 +22,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Conta;
 import modelo.seguranca.PermissaoPadrao;
 import service.configuracao.DiretorioService;
 import service.exercicio.ExercicioService;
@@ -106,11 +103,6 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 			else
 				Navegacao.redirect(urlLista);
 		}
-		catch(ClassNotFoundException | NoSuchMethodException e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Tipo de exercício não encontrado.");
-		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
@@ -131,7 +123,6 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		{
 			entidade = new Exercicio();
 			entidade.setExercicioPadrao(exercicioPadrao);
-			entidade.setUsuario(Sessao.getUsuarioLogado());
 
 			try
 			{
@@ -149,41 +140,15 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		return "";
 	}
 
-	public String responder(Conta conta)
+	public String responder()
 	{
-		exercicioService.registrarResposta(entidade, conta);
+		exercicioService.registrarResposta(entidade);
 		return "";
 	}
 
-	public StreamedContent download(boolean criarNovo)
+	public void toogleResolucao()
 	{
-		if(criarNovo)
-		{
-			entidade = new Exercicio();
-			entidade.setExercicioPadrao(exercicioPadrao);
-			entidade.setUsuario(Sessao.getUsuarioLogado());
-
-			try
-			{
-				exercicioService.construirExercicio(entidade);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-				return null;
-			}
-		}
-
-		Diretorio diretorio = diretorioService.criarDiretorio();
-		StreamedContent file = exercicioService.gerarPdfExercicio(entidade, configDownload, diretorio, Sessao.getUsuarioLogado());
-		controleAcessoBean.registrarDownload(diretorio.getEnderecoPdf());
-		diretorioService.freeDiretorio(diretorio);
-		return file;
-	}
-
-	public void toogleResolucao(Conta conta)
-	{
-		conta.toogleShowResolucao();
+		entidade.toogleResolucaoComentada();
 		controleAcessoBean.registrarResolucaoExercicio();
 	}
 

@@ -89,6 +89,18 @@ public class Assunto extends Config implements Entidade
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)
 	private String descricao;
 
+	@AuditLabel(value = "quantidade exercícios")
+	private int qtdExercicios;
+
+	@AuditLabel(value = "quantidade questões")
+	private int qtdQuestoes;
+
+	@AuditLabel(value = "quantidade videoaulas")
+	private int qtdVideosAula;
+
+	@AuditLabel(value = "quantidade PDFs")
+	private int qtdPdf;
+
 	public String endTeoria()
 	{
 		return "/matematica/"+getModuloImage()+"/"+getChaveImage()+"/teoria.xhtml?assunto="+getChaveImage();

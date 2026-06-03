@@ -2,148 +2,114 @@ package util.grafico;
 
 import java.util.List;
 
-import software.xdev.chartjs.model.charts.BarChart;
-import software.xdev.chartjs.model.charts.LineChart;
-import software.xdev.chartjs.model.charts.PieChart;
-import software.xdev.chartjs.model.data.BarData;
-import software.xdev.chartjs.model.data.LineData;
-import software.xdev.chartjs.model.data.PieData;
-import software.xdev.chartjs.model.dataset.BarDataset;
-import software.xdev.chartjs.model.dataset.LineDataset;
-import software.xdev.chartjs.model.dataset.PieDataset;
-import software.xdev.chartjs.model.options.BarOptions;
-import software.xdev.chartjs.model.options.LineOptions;
-import software.xdev.chartjs.model.options.PieOptions;
-import software.xdev.chartjs.model.options.Plugins;
-import software.xdev.chartjs.model.options.Title;
-import software.xdev.chartjs.model.options.scale.Scales;
-import software.xdev.chartjs.model.options.scale.cartesian.CartesianScaleOptions;
-import software.xdev.chartjs.model.options.scale.cartesian.CartesianTickOptions;
-import software.xdev.chartjs.model.options.scale.cartesian.linear.LinearScaleOptions;
-
 public class Grafico
 {
-	
-	public static String criarGraficoPie(String titulo, DadoGrafico dadosGrafico) {
-
-	    Cores cores = new Cores();
-
-	    // Converter Number -> BigDecimal
-
-	    PieChart pieChart = new PieChart()
-	        .setData(new PieData()
-	            .addDataset(new PieDataset()
-	                .setData(dadosGrafico.getValues())
-	                .addBackgroundColors(cores.getBgColor())   // adaptar sua classe
-	                .setLabel(titulo)
-	            )
-	            .setLabels(dadosGrafico.getLabels())
-	        );
-	    
-	    PieOptions options = new PieOptions(); // ou PieOptions options = new PieOptions<>()...
-
-	    options.setPlugins(new Plugins()
-	        .setTitle(new Title()
-	            .setDisplay(true)
-	            .setText(titulo)
-	        )
-	    );
-        
-	    pieChart.setOptions(options);
-
-	    return pieChart.toJson();
-	}
-	
-	public static String criarGraficoBarra(String titulo, DadoGrafico dadoGrafico) {
-
-	    Cores cores = new Cores();
-
-	    BarData data = new BarData()
-	            .addDataset(new BarDataset()
-	                    .setLabel(titulo)
-	                    .setData(dadoGrafico.getValues())
-	                    .setBackgroundColor(cores.getBgColor())     // array de cores
-	                    .setBorderColor(cores.getBorderColor())     // array de cores
-	                    .setBorderWidth(1)
-	            )
-	            .setLabels(dadoGrafico.getLabels());
-
-	    BarChart chart = new BarChart()
-	            .setData(data)
-	            .setOptions(new BarOptions()
-	                    .setResponsive(true)
-	                    .setMaintainAspectRatio(false)
-	                    .setScales(new Scales()
-		                    .addScale(Scales.ScaleAxis.Y, new CartesianScaleOptions()
-	                        .setStacked(true)
-	                        .setTicks(new CartesianTickOptions())
-	                        )
-	                    )
-	                    .setPlugins(new Plugins()
-	                            .setTitle(new Title()
-	                                    .setDisplay(true)
-	                                    .setText(titulo)
-	                            )
-	                    )
-	            );
-
-	    return chart.toJson();
-	}
-	
-	public static String criarGraficoLinha(String titulo, List<DadoGrafico> dadosGrafico) {
-
-	    Cores cores = new Cores();
-
-	    LineData data = new LineData();
-
-	    int cont = 0;
-
-	    for (DadoGrafico dado : dadosGrafico) 
-	    {
-
-	        LineDataset dataset = new LineDataset()
-	                .setLabel(dado.getTitutlo())
-	                .setData(dado.getValues())
-	                .setBorderColor(cores.getBorderColor(cont))
-	                .setBackgroundColor(cores.getBgColor(cont))
-	                .setBorderWidth(2)
-	                .setLineTension(0.1f)
-	                .setFill(false);
-
-	        data.addDataset(dataset);
-
-	        // Labels só no primeiro
-	        if (cont == 0) {
-	            data.setLabels(dado.getLabels());
-	        }
-
-	        cont++;
-	    }
-
-	    LineChart chart = new LineChart()
-	            .setData(data)
-	            .setOptions(new LineOptions()
-	                    .setMaintainAspectRatio(false)
-	                    .setResponsive(true)
-	                    .setScales(new Scales()
-	                            .addScale(Scales.ScaleAxis.Y,
-	                                    new LinearScaleOptions()
-	                                            .setPosition(software.xdev.chartjs.model.enums.ScalesPosition.LEFT)
-	                            )
-	                    )
-	                    .setPlugins(new Plugins()
-	                            .setTitle(new Title()
-	                                    .setDisplay(true)
-	                                    .setText(titulo)
-	                            )
-	                    )
-	            );
-
-	    return chart.toJson();
-	}
-	
-	public static void main(String[] args)
+	public static String criarGraficoPie(String titulo, DadoGrafico dadosGrafico)
 	{
+		Cores cores = new Cores();
+		List<String> labels = dadosGrafico.getLabels();
+		List<Number> values = dadosGrafico.getValues();
+		List<String> bgColors = cores.getBgColor();
+
+		StringBuilder lb = new StringBuilder();
+		StringBuilder dt = new StringBuilder();
+		StringBuilder bg = new StringBuilder();
+
+		for(int i = 0; i < labels.size(); i++)
+		{
+			if(i > 0) { lb.append(","); dt.append(","); bg.append(","); }
+			lb.append("\"").append(escape(labels.get(i))).append("\"");
+			dt.append(i < values.size() ? values.get(i) : 0);
+			bg.append("\"").append(bgColors.get(i % bgColors.size())).append("\"");
+		}
+
+		return "{\"type\":\"pie\",\"data\":{\"labels\":[" + lb + "],"
+			+ "\"datasets\":[{\"label\":\"" + escape(titulo) + "\","
+			+ "\"data\":[" + dt + "],"
+			+ "\"backgroundColor\":[" + bg + "]}]},"
+			+ "\"options\":{\"responsive\":true,\"maintainAspectRatio\":false,"
+			+ "\"plugins\":{\"title\":{\"display\":true,\"text\":\"" + escape(titulo) + "\"}}}}";
 	}
 
+	public static String criarGraficoBarra(String titulo, DadoGrafico dadoGrafico)
+	{
+		Cores cores = new Cores();
+		List<String> labels = dadoGrafico.getLabels();
+		List<Number> values = dadoGrafico.getValues();
+		List<String> bgColors = cores.getBgColor();
+		List<String> bdColors = cores.getBorderColor();
+
+		StringBuilder lb = new StringBuilder();
+		StringBuilder dt = new StringBuilder();
+		StringBuilder bg = new StringBuilder();
+		StringBuilder bd = new StringBuilder();
+
+		for(int i = 0; i < labels.size(); i++)
+		{
+			if(i > 0) { lb.append(","); dt.append(","); bg.append(","); bd.append(","); }
+			lb.append("\"").append(escape(labels.get(i))).append("\"");
+			dt.append(i < values.size() ? values.get(i) : 0);
+			bg.append("\"").append(bgColors.get(i % bgColors.size())).append("\"");
+			bd.append("\"").append(bdColors.get(i % bdColors.size())).append("\"");
+		}
+
+		return "{\"type\":\"bar\",\"data\":{\"labels\":[" + lb + "],"
+			+ "\"datasets\":[{\"label\":\"" + escape(titulo) + "\","
+			+ "\"data\":[" + dt + "],"
+			+ "\"backgroundColor\":[" + bg + "],"
+			+ "\"borderColor\":[" + bd + "],"
+			+ "\"borderWidth\":1}]},"
+			+ "\"options\":{\"responsive\":true,\"maintainAspectRatio\":false,"
+			+ "\"scales\":{\"y\":{\"stacked\":true}},"
+			+ "\"plugins\":{\"title\":{\"display\":true,\"text\":\"" + escape(titulo) + "\"}}}}";
+	}
+
+	public static String criarGraficoLinha(String titulo, List<DadoGrafico> dadosGrafico)
+	{
+		Cores cores = new Cores();
+
+		String labels = null;
+		StringBuilder datasets = new StringBuilder();
+
+		for(int cont = 0; cont < dadosGrafico.size(); cont++)
+		{
+			DadoGrafico dado = dadosGrafico.get(cont);
+
+			if(cont == 0)
+			{
+				StringBuilder lb = new StringBuilder();
+				for(int i = 0; i < dado.getLabels().size(); i++)
+				{
+					if(i > 0) lb.append(",");
+					lb.append("\"").append(escape(dado.getLabels().get(i))).append("\"");
+				}
+				labels = lb.toString();
+			}
+
+			StringBuilder dt = new StringBuilder();
+			for(int i = 0; i < dado.getValues().size(); i++)
+			{
+				if(i > 0) dt.append(",");
+				dt.append(dado.getValues().get(i));
+			}
+
+			if(cont > 0) datasets.append(",");
+			datasets.append("{\"label\":\"").append(escape(dado.getTitutlo())).append("\",")
+				.append("\"data\":[").append(dt).append("],")
+				.append("\"borderColor\":\"").append(cores.getBorderColor(cont)).append("\",")
+				.append("\"backgroundColor\":\"").append(cores.getBgColor(cont)).append("\",")
+				.append("\"borderWidth\":2,\"tension\":0.1,\"fill\":false}");
+		}
+
+		return "{\"type\":\"line\",\"data\":{\"labels\":[" + labels + "],"
+			+ "\"datasets\":[" + datasets + "]},"
+			+ "\"options\":{\"maintainAspectRatio\":false,\"responsive\":true,"
+			+ "\"plugins\":{\"title\":{\"display\":true,\"text\":\"" + escape(titulo) + "\"}}}}";
+	}
+
+	private static String escape(String s)
+	{
+		if(s == null) return "";
+		return s.replace("\\", "\\\\").replace("\"", "\\\"");
+	}
 }

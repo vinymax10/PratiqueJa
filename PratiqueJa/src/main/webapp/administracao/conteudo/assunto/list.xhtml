@@ -37,6 +37,11 @@
 
 			<div class="flex gap-3 align-items-center justify-content-end">
 				
+				<p:commandButton value="Atualizar" class="text-right"  icon="fa-solid fa-arrows-rotate" 
+					styleClass="ui-button-flat ui-button-plain"
+					action="#{assuntoBean.atualziarAll()}" update="@form"  process="@this" >
+				</p:commandButton>
+					
 				<ui:include src="/exportar/exportar.xhtml" >
 					<ui:param name="id" value="form:tabela" />
 					<ui:param name="nome" value="Assuntos" />

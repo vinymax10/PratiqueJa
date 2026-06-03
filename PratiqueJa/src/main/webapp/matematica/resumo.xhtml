@@ -21,24 +21,40 @@
 					value="#{assuntoBean.entidade.descricao}" />
 
 				<div class="as-stats">
-					<div class="as-stat">
+					<div class="as-stat as-stat--blue">
 						<span class="as-stat-label">Exercícios</span>
-						<strong class="as-stat-value">#{assuntoBean.exerciciosPadrao.size()}</strong>
+						<strong class="as-stat-value">#{assuntoBean.entidade.qtdExercicios}</strong>
 					</div>
-					<div class="as-stat">
+					<div class="as-stat as-stat--green">
 						<span class="as-stat-label">Questões</span>
-						<strong class="as-stat-value">#{assuntoBean.entidade.questoes.size()}</strong>
+						<strong class="as-stat-value">#{assuntoBean.entidade.qtdQuestoes}</strong>
 					</div>
-					<h:panelGroup layout="block" styleClass="as-stat"
-						>
+					<h:panelGroup layout="block" styleClass="as-stat as-stat--purple">
 						<span class="as-stat-label">Videoaulas</span>
-						<strong class="as-stat-value">12</strong>
+						<strong class="as-stat-value">#{assuntoBean.entidade.qtdVideosAula}</strong>
 					</h:panelGroup>
-					<h:panelGroup layout="block" styleClass="as-stat"
+					<h:panelGroup layout="block" styleClass="as-stat as-stat--orange"
 						rendered="#{assuntoBean.entidade.showAnotacao}">
-						<span class="as-stat-label">Anotações</span>
-						<strong class="as-stat-value">15</strong>
+						<span class="as-stat-label">PDF's</span>
+						<strong class="as-stat-value">#{assuntoBean.entidade.qtdPdf}</strong>
 					</h:panelGroup>
+				</div>
+				
+				<div class="as-progress-inline">
+					<div class="as-progress-inline-header">
+						<span class="as-progress-inline-label">
+							<i class="pi pi-chart-line"></i> Progresso
+						</span>
+						<span class="as-progress-inline-pct">0%</span>
+					</div>
+					<div class="as-progress-bar-sm">
+						<div class="as-progress-fill" style="width: 0%"></div>
+					</div>
+					<div class="as-progress-inline-meta">
+						<span>0 exercícios resolvidos</span>
+						<span class="as-progress-dot">·</span>
+						<span>0 questões respondidas</span>
+					</div>
 				</div>
 			</div>
 
@@ -49,46 +65,28 @@
 
 		<!-- PROGRESSO -->
 		<div class="as-progress-section">
-			<div class="as-progress-card">
-				<h3 class="as-progress-title">Seu progresso no assunto</h3>
-				<div class="as-progress-bar">
-					<div class="as-progress-fill" style="width: 0%"></div>
-				</div>
-				<div class="as-progress-stats">
-					<div class="as-progress-item">
-						<strong>0</strong>
-						<span>Exercícios resolvidos</span>
-					</div>
-					<div class="as-progress-item">
-						<strong>0</strong>
-						<span>Questões respondidas</span>
-					</div>
-					<div class="as-progress-item">
-						<strong>0%</strong>
-						<span>Concluído</span>
-					</div>
-				</div>
-			</div>
+			
 
-			<div class="as-continue-card">
-				<h3 class="as-continue-title">Continue de onde parou</h3>
-				<p class="as-continue-desc">Nenhuma atividade iniciada ainda. Comece pelos exercícios ou pelas anotações de teoria.</p>
-				<div class="as-continue-actions">
-					<div class="as-tab as-continue-btn" onclick="asShowTab('exercicios', this)">
-						<i class="pi pi-pencil"></i> Ir para Exercícios
-					</div>
-					<div class="as-tab as-continue-btn" onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
-						<i class="pi pi-book"></i> Ver Teoria
-					</div>
-				</div>
-			</div>
+<!-- 			<div class="as-continue-card"> -->
+<!-- 				<h3 class="as-continue-title">Continue de onde parou</h3> -->
+<!-- 				<p class="as-continue-desc">Nenhuma atividade iniciada ainda. Comece pelos exercícios ou pelas anotações de teoria.</p> -->
+<!-- 				<div class="as-continue-actions"> -->
+<!-- 					<div class="as-tab as-continue-btn" onclick="asShowTab('exercicios', this)"> -->
+<!-- 						<i class="pi pi-pencil"></i> Ir para Exercícios -->
+<!-- 					</div> -->
+<!-- 					<div class="as-tab as-continue-btn" onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')"> -->
+<!-- 						<i class="pi pi-book"></i> Ver Teoria -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 
 		<!-- BOTÕES DE NAVEGAÇÃO -->
 		<div class="as-tabs" id="asTabs">
 			<h:panelGroup layout="block"
 				rendered="#{assuntoBean.entidade.showAnotacao}"
-				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" 
+				onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
 				<i class="pi pi-book"></i> Teoria
 			</h:panelGroup>
 
@@ -101,6 +99,11 @@
 				rendered="#{assuntoBean.entidade.showAula}"
 				styleClass="as-tab" onclick="asShowTab('videoaulas', this)">
 				<i class="pi pi-video"></i> Videoaulas
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{assuntoBean.entidade.showQuestao}"
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/questoes') ? 'as-tab-active' : ''}" onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">
+				<i class="pi pi-question-circle"></i> Questões
 			</h:panelGroup>
 			<div class="as-tab" onclick="asShowTab('pdfs', this)">
 				<i class="pi pi-download"></i> PDFs
