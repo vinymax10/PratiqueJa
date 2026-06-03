@@ -6,10 +6,10 @@
 
 <h:body >
 	<ui:composition>
-		<p:tab title="Exercícios" rendered="#{assuntoCursoBean.entidade.showExercicio}">
+		<p:tab title="Exercícios" rendered="#{assuntoBean.entidade.showExercicio}">
 		   <div class="p-grid">
 				
-	   		 	<ui:repeat id="repeat" value="#{assuntoCursoBean.exerciciosPadrao}" var="exercicioPadrao" >
+	   		 	<ui:repeat id="repeat" value="#{assuntoBean.exerciciosPadrao}" var="exercicioPadrao" >
 				
 		        	<div class="p-col-12 p-lg-6 p-xl-4">
 		        		<p:card class="newBorder" style="margin:10px;width: auto;">
@@ -17,7 +17,7 @@
 						        <img alt="user header"  style="border-radius:  16px 16px 0 0;margin-top: 1rem;"  src="#{exercicioPadrao.enderecoImage()}"/>
 						    </f:facet>
 						    <f:facet name="title" >
-						        #{exercicioPadrao.assuntoCurso.nome}
+						        #{exercicioPadrao.assunto.nome}
 						    </f:facet>
 						    <f:facet name="subtitle" style="text-align:right!important;">
 						        #{exercicioPadrao.nivel.nome} 
@@ -58,9 +58,9 @@
 					<p:outputPanel id="manage-usuario-content" class="ui-fluid">
 						
 						<div class="p-col-12" >
-							<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicioPadrao.assuntoCurso.modulo.nome}" />
+							<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicioPadrao.assunto.modulo.nome}" />
 					    	 - 
-					    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicioPadrao.assuntoCurso.nome}" />
+					    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicioPadrao.assunto.nome}" />
 					    	- 
 					    	<h:outputText style="color: var(--cinza);" value="#{exercicioBean.exercicioPadrao.nivel.nome}" />
 			    		</div>

@@ -18,7 +18,7 @@
 						converter="generic" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{exercicioPadraoBean.listaTudo}" var="ep"
-							itemLabel="#{ep.assuntoCurso.modulo.nome} - #{ep.assuntoCurso.nome} - #{ep.nivel.nome}"
+							itemLabel="#{ep.assunto.modulo.nome} - #{ep.assunto.nome} - #{ep.nivel.nome}"
 							itemValue="#{ep}"/>
 						</p:selectOneMenu>
 					</div>

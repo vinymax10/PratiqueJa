@@ -124,11 +124,11 @@
 
 			<p:column headerText="Imagem" width="4rem" responsivePriority="1">
 				<img class="rectangleTable"
-					src="/image/matematica/#{programacaoSpam.assuntoCurso.getModuloImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}/#{programacaoSpam.assuntoCurso.getChaveImage()}.png" />
+					src="/image/matematica/#{programacaoSpam.assunto.getModuloImage()}/#{programacaoSpam.assunto.getChaveImage()}/#{programacaoSpam.assunto.getChaveImage()}.png" />
 			</p:column>
 
 			<p:column headerText="Assunto" responsivePriority="2">
-				<h:outputText value="#{programacaoSpam.assuntoCurso.nome}" />
+				<h:outputText value="#{programacaoSpam.assunto.nome}" />
 			</p:column>
 
 			<p:column headerText="Data" responsivePriority="3">
@@ -178,17 +178,17 @@
 				</h:panelGroup>
 
 				<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-8">
-					<p:outputLabel for="assuntoCurso" value="Assunto" />
-					<p:selectOneMenu id="assuntoCurso"
-						value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+					<p:outputLabel for="assunto" value="Assunto" />
+					<p:selectOneMenu id="assunto"
+						value="#{programacaoSpamBean.programacaoSpam.assunto}"
 						converter="generic" required="true"
 						requiredMessage="O assunto é obrigatório"
 						filter="true" filterMatchMode="contains">
-						<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-							itemValue="#{assuntoCurso}" />
+						<f:selectItems value="#{assuntoBean.listaAtivas}"
+							var="assunto" itemLabel="#{assunto.nome}"
+							itemValue="#{assunto}" />
 					</p:selectOneMenu>
-					<p:message for="assuntoCurso" display="text" />
+					<p:message for="assunto" display="text" />
 				</h:panelGroup>
 
 			</div>
@@ -225,14 +225,14 @@
 				<h:panelGroup styleClass="campoMsg col-12 lg:col-9 xl:col-10">
 					<p:outputLabel for="@next" value="Assunto" />
 					<p:selectOneMenu
-						value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+						value="#{programacaoSpamBean.programacaoSpam.assunto}"
 						converter="generic" required="true"
 						requiredMessage="O assunto é obrigatório"
 						filter="true" filterMatchMode="contains">
 						<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-						<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-							itemValue="#{assuntoCurso}" />
+						<f:selectItems value="#{assuntoBean.listaAtivas}"
+							var="assunto" itemLabel="#{assunto.nome}"
+							itemValue="#{assunto}" />
 					</p:selectOneMenu>
 					<p:message for="@previous" display="text" />
 				</h:panelGroup>

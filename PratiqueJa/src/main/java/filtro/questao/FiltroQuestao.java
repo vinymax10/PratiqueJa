@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.questao.Dificuldade;
 import modelo.academico.Ano;
-import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
@@ -27,9 +26,8 @@ public class FiltroQuestao implements Serializable
 	private List<Ano> anos = new ArrayList<>();
 	private List<Banca> bancas = new ArrayList<>();
 	private List<Orgao> orgaos = new ArrayList<>();
-	private List<AssuntoCurso> assuntosCurso = new ArrayList<>();
+	private List<Assunto> assuntos = new ArrayList<>();
 	private List<Dificuldade> dificuldades = new ArrayList<>();
-	private Assunto assunto;
 	private Disciplina disciplina;
 	private Dificuldade dificuldade;
 	private Boolean revisada;
@@ -37,18 +35,16 @@ public class FiltroQuestao implements Serializable
 	private String chave;
 	private Long id;
 	private Boolean resolucaoLatex;
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 	private Boolean acertei;
 	private Boolean respondida;
 	private Boolean malFormulada;
-	private Boolean multiAssunto;
 
 	public void limpar()
 	{
 		ano = null;
 		banca = null;
 		orgao = null;
-		assunto = null;
 		disciplina = null;
 		dificuldade = null;
 		revisada = null;
@@ -57,15 +53,14 @@ public class FiltroQuestao implements Serializable
 		id = null;
 		resolucaoLatex = null;
 		malFormulada = null;
-		multiAssunto = null;
-		assuntoCurso = null;
+		assunto = null;
 		acertei = null;
 		respondida = null;
 		conteudo = "";
 		anos = new ArrayList<>();
 		bancas = new ArrayList<>();
 		orgaos = new ArrayList<>();
-		assuntosCurso = new ArrayList<>();
+		assuntos = new ArrayList<>();
 		dificuldades = new ArrayList<>();
 	}
 
@@ -97,16 +92,6 @@ public class FiltroQuestao implements Serializable
 	public void setOrgao(Orgao orgao)
 	{
 		this.orgao = orgao;
-	}
-
-	public Assunto getAssunto()
-	{
-		return assunto;
-	}
-
-	public void setAssunto(Assunto assunto)
-	{
-		this.assunto = assunto;
 	}
 
 	public Disciplina getDisciplina()
@@ -169,14 +154,14 @@ public class FiltroQuestao implements Serializable
 		this.id = id;
 	}
 
-	public AssuntoCurso getAssuntoCurso()
+	public Assunto getAssunto()
 	{
-		return assuntoCurso;
+		return assunto;
 	}
 
-	public void setAssuntoCurso(AssuntoCurso assuntoCurso)
+	public void setAssunto(Assunto assunto)
 	{
-		this.assuntoCurso = assuntoCurso;
+		this.assunto = assunto;
 	}
 
 	public Boolean getAcertei()
@@ -223,13 +208,13 @@ public class FiltroQuestao implements Serializable
 	public String toString()
 	{
 		return (ano != null ? "ano=" + ano + ", " : "") + (banca != null ? "banca=" + banca + ", " : "")
-		+ (orgao != null ? "orgao=" + orgao + ", " : "") + (assunto != null ? "assunto=" + assunto + ", " : "")
+		+ (orgao != null ? "orgao=" + orgao + ", " : "")
 		+ (disciplina != null ? "disciplina=" + disciplina + ", " : "")
 		+ (dificuldade != null ? "dificuldade=" + dificuldade + ", " : "")
 		+ (revisada != null ? "revisada=" + revisada + ", " : "") + "ordemInsercao=" + ordemInsercao + ", "
 		+ (chave != null ? "chave=" + chave + ", " : "") + "id=" + id + ", "
 		+ (resolucaoLatex != null ? "resolucaoLatex=" + resolucaoLatex + ", " : "")
-		+ (assuntoCurso != null ? "assuntoCurso=" + assuntoCurso + ", " : "")
+		+ (assunto != null ? "assunto=" + assunto + ", " : "")
 		+ (acertei != null ? "acertei=" + acertei + ", " : "") + (respondida != null ? "respondida=" + respondida : "");
 	}
 

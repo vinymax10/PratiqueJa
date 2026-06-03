@@ -23,7 +23,7 @@ import dao.exercicio.ExercicioPadraoDAO;
 import dao.questao.QuestaoDAO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ProgramacaoPost;
@@ -78,17 +78,17 @@ public class MontadorPdfService
 			document.open();
 			pageContentByte = pdfWriter.getDirectContent();
 
-			for (AssuntoCurso assuntoCurso : setDownload.getAssuntosCurso())
+			for (Assunto assunto : setDownload.getAssuntos())
 			{
 				if (setDownload.isAnotacao())
-					addAnotacao(assuntoCurso, basePath);
+					addAnotacao(assunto, basePath);
 
-				addNivel(assuntoCurso, Nivel.Nivel1, setDownload.getQuantidadeNivel1());
-				addNivel(assuntoCurso, Nivel.Nivel2, setDownload.getQuantidadeNivel2());
-				addNivel(assuntoCurso, Nivel.Nivel3, setDownload.getQuantidadeNivel3());
+				addNivel(assunto, Nivel.Nivel1, setDownload.getQuantidadeNivel1());
+				addNivel(assunto, Nivel.Nivel2, setDownload.getQuantidadeNivel2());
+				addNivel(assunto, Nivel.Nivel3, setDownload.getQuantidadeNivel3());
 
 				if (setDownload.isQuestao())
-					addQuestao(assuntoCurso);
+					addQuestao(assunto);
 			}
 
 			document.close();
@@ -110,7 +110,7 @@ public class MontadorPdfService
 		this.diretorio = diretorio;
 		this.onProgress = onProgress;
 
-		totalPartes = 2 * setDownload.getAssuntosCurso().size() *
+		totalPartes = 2 * setDownload.getAssuntos().size() *
 				(setDownload.getQuantidadeNivel1() + setDownload.getQuantidadeNivel2() + setDownload.getQuantidadeNivel3());
 		totalExercicios = 0;
 		totalQuestoes = 0;
@@ -131,11 +131,11 @@ public class MontadorPdfService
 			document.open();
 			pageContentByte = pdfWriter.getDirectContent();
 
-			for (AssuntoCurso assuntoCurso : setDownload.getAssuntosCurso())
+			for (Assunto assunto : setDownload.getAssuntos())
 			{
-				addNivelInstagram(assuntoCurso, Nivel.Nivel1, setDownload.getQuantidadeNivel1(), programacaoPost, feed);
-				addNivelInstagram(assuntoCurso, Nivel.Nivel2, setDownload.getQuantidadeNivel2(), programacaoPost, feed);
-				addNivelInstagram(assuntoCurso, Nivel.Nivel3, setDownload.getQuantidadeNivel3(), programacaoPost, feed);
+				addNivelInstagram(assunto, Nivel.Nivel1, setDownload.getQuantidadeNivel1(), programacaoPost, feed);
+				addNivelInstagram(assunto, Nivel.Nivel2, setDownload.getQuantidadeNivel2(), programacaoPost, feed);
+				addNivelInstagram(assunto, Nivel.Nivel3, setDownload.getQuantidadeNivel3(), programacaoPost, feed);
 			}
 
 			document.close();
@@ -151,49 +151,49 @@ public class MontadorPdfService
 
 	public int calcularTotalPartes(SetDownload setDownload)
 	{
-		int total = setDownload.getAssuntosCurso().size() *
+		int total = setDownload.getAssuntos().size() *
 				(setDownload.getQuantidadeNivel1() + setDownload.getQuantidadeNivel2() + setDownload.getQuantidadeNivel3());
 
 		if (setDownload.isResolucaoExercicio())
 			total *= 2;
 
 		if (setDownload.isAnotacao())
-			total += setDownload.getAssuntosCurso().size();
+			total += setDownload.getAssuntos().size();
 
 		if (setDownload.isQuestao())
-			for (AssuntoCurso a : setDownload.getAssuntosCurso())
+			for (Assunto a : setDownload.getAssuntos())
 				if (a.isShowQuestao())
 					total++;
 
 		return total;
 	}
 
-	private void addNivel(AssuntoCurso assuntoCurso, Nivel nivel, int quantidade)
+	private void addNivel(Assunto assunto, Nivel nivel, int quantidade)
 	{
 		if (quantidade <= 0)
 			return;
 
-		ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assuntoCurso, nivel);
+		ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assunto, nivel);
 		for (int i = 0; i < quantidade; i++)
 			addExercicio(exercicio);
 	}
 
-	private void addNivelInstagram(AssuntoCurso assuntoCurso, Nivel nivel, int quantidade,
+	private void addNivelInstagram(Assunto assunto, Nivel nivel, int quantidade,
 	                                ProgramacaoPost programacaoPost, boolean feed)
 	{
 		if (quantidade <= 0)
 			return;
 
-		ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assuntoCurso, nivel);
+		ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assunto, nivel);
 		for (int i = 0; i < quantidade; i++)
 			addExercicioInstagram(exercicio, programacaoPost, feed);
 	}
 
-	private void addAnotacao(AssuntoCurso assuntoCurso, String basePath)
+	private void addAnotacao(Assunto assunto, String basePath)
 	{
 		File file = new File(basePath,
-				"pdf" + File.separator + assuntoCurso.getModulo().toString().toLowerCase()
-				+ File.separator + assuntoCurso.getChave() + ".pdf");
+				"pdf" + File.separator + assunto.getModulo().toString().toLowerCase()
+				+ File.separator + assunto.getChave() + ".pdf");
 
 		try (InputStream inputStream = new FileInputStream(file))
 		{
@@ -245,9 +245,9 @@ public class MontadorPdfService
 		notificarProgresso(2);
 	}
 
-	private void addQuestao(AssuntoCurso assuntoCurso)
+	private void addQuestao(Assunto assunto)
 	{
-		List<Questao> questoes = questaoDAO.buscaAssuntoCurso(assuntoCurso, null, null);
+		List<Questao> questoes = questaoDAO.buscaAssunto(assunto, null, null);
 		if (questoes.isEmpty())
 			return;
 

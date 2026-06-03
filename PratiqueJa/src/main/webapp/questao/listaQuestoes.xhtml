@@ -28,7 +28,7 @@
 							<span class="qz-chip">#{questao.prova}</span>
 							<span class="qz-chip qz-chip-assunto">
 								<i class="pi pi-tag" style="font-size:10px" />
-								#{questao.assuntoCurso.nome}
+								#{questao.assuntosNomes}
 							</span>
 						</div>
 
@@ -114,6 +114,11 @@
 							update="resolucaoComentada, estatistica"
 							action="#{questao.toogleEstatistica()}"
 							styleClass="ui-button-flat ui-button-plain" />
+							
+						<p:button value="Editar" icon="pi pi-pencil"
+						rendered="#{sessaoBean.podeVerAdministracao()}"
+						styleClass="ui-button-raised ui-button-primary"
+							href="#{questaoBean.getUrlEdicao(questao)}" />
 
 					</div>
 

@@ -65,15 +65,15 @@ public class QuestaoEBook
 	{
 		List<Modulo> modulos=new ArrayList<Modulo>();
 		if(questoes.size()>0)
-			assuntoTexto=questoes.get(0).getAssuntoCurso().getNome();
+			assuntoTexto=questoes.get(0).getAssunto().getNome();
 		
 		for(Questao questao : questoes)
 		{
-			if(!assuntoTexto.equals(questao.getAssuntoCurso().getNome()))
+			if(!assuntoTexto.equals(questao.getAssunto().getNome()))
 				assuntoTexto="Diversos";
 			
-			if(!modulos.contains(questao.getAssuntoCurso().getModulo()))
-				modulos.add(questao.getAssuntoCurso().getModulo());
+			if(!modulos.contains(questao.getAssunto().getModulo()))
+				modulos.add(questao.getAssunto().getModulo());
 		}
 		
 		Collections.sort(modulos, (a, b) -> 

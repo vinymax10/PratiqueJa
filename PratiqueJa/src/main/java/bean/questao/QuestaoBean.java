@@ -31,7 +31,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Ano;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Orgao;
 import modelo.auditoria.TipoEvento;
@@ -162,10 +162,10 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	public void setFiltroQuestao(FiltroQuestao f) { this.filtro = f; }
 
 	/** Para views de aluno: carrega questões de um assunto com filtros de revisada/resolução. */
-	public List<Questao> buscaQuestao(AssuntoCurso assuntoCurso)
+	public List<Questao> buscaQuestao(Assunto assunto)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();
-		questoes = entidadeDAO.buscaAssuntoCurso(assuntoCurso, tipoFiltro, usuario);
+		questoes = entidadeDAO.buscaAssunto(assunto, tipoFiltro, usuario);
 		atualizarOverview();
 		return questoes;
 	}
@@ -199,7 +199,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 		filtrarEstudante();
 	}
 
-	public void removerAssuntoCurso(AssuntoCurso ac) { filtro.getAssuntosCurso().remove(ac); filtrarEstudante(); }
+	public void removerAssunto(Assunto ac) { filtro.getAssuntos().remove(ac); filtrarEstudante(); }
 	public void removerBanca(Banca b) { filtro.getBancas().remove(b); filtrarEstudante(); }
 	public void removerOrgao(Orgao o) { filtro.getOrgaos().remove(o); filtrarEstudante(); }
 	public void removerAno(Ano a) { filtro.getAnos().remove(a); filtrarEstudante(); }
@@ -208,7 +208,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 
 	public boolean temFiltrosAtivos()
 	{
-		return (filtro.getAssuntosCurso() != null && !filtro.getAssuntosCurso().isEmpty())
+		return (filtro.getAssuntos() != null && !filtro.getAssuntos().isEmpty())
 			|| (filtro.getBancas() != null && !filtro.getBancas().isEmpty())
 			|| (filtro.getOrgaos() != null && !filtro.getOrgaos().isEmpty())
 			|| (filtro.getAnos() != null && !filtro.getAnos().isEmpty())

@@ -6,11 +6,11 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="#{assuntoCursoBean.nome}" />
+		<h:outputText class="linkPage" value="#{assuntoBean.nome}" />
 	</ui:define>
 
 	<f:metadata>
-	    <f:viewAction action="#{assuntoCursoBean.filtrar()}" />
+	    <f:viewAction action="#{assuntoBean.filtrar()}" />
 	</f:metadata>
 
 	<h:form id="form" class="form" >
@@ -22,9 +22,9 @@
 				<div class="w-full">
 					<span class="ui-input-icon-left" style="width:100%">
 						<i class="pi pi-search" />
-						<p:inputText id="globalFilter" value="#{assuntoCursoBean.filtro.nomeAssuntoCurso}"
+						<p:inputText id="globalFilter" value="#{assuntoBean.filtro.nomeAssunto}"
 						placeholder="Nome" styleClass="w-full" >
-							<p:ajax event="keyup" delay="500" update="tabela" listener="#{assuntoCursoBean.filtrar}" />
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{assuntoBean.filtrar}" />
 						</p:inputText>
 					</span>
 				</div>
@@ -44,23 +44,23 @@
 				
 				<p:button value="Adicionar" icon="pi pi-plus"
 				styleClass="ui-button-raised ui-button-success"
-				href="/administracao/conteudo/assunto-curso/form.xhtml?cadastro=true" />
+				href="/administracao/conteudo/assunto/form.xhtml?cadastro=true" />
 
 			</div>
 		</div>
 
-		<ui:include src="/administracao/conteudo/assunto-curso/filtro.xhtml" />
+		<ui:include src="/administracao/conteudo/assunto/filtro.xhtml" />
 
 		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
-			var="entidade" value="#{assuntoCursoBean.lista}" reflow="true"
-			selection="#{assuntoCursoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
+			var="entidade" value="#{assuntoBean.lista}" reflow="true"
+			selection="#{assuntoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
 			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"
 			rowSelector="td:not(.coluna-ativo)">
 
-			<p:ajax event="rowSelect" update="@form" listener="#{assuntoCursoBean.onSelected}"
+			<p:ajax event="rowSelect" update="@form" listener="#{assuntoBean.onSelected}"
 			resetValues="true"/>
 
-			<p:ajax event="rowReorder" listener="#{assuntoCursoBean.onRowReorder}" update="@form"/>
+			<p:ajax event="rowReorder" listener="#{assuntoBean.onRowReorder}" update="@form"/>
 
 			<p:column headerText="Nome" responsivePriority="1" width="30%">
 				<h:outputText value="#{entidade.nome}"/>
@@ -78,7 +78,7 @@
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.habilidado}" >
 					<p:ajax event="change" process="@this"
-					listener="#{assuntoCursoBean.salvar(entidade)}" />
+					listener="#{assuntoBean.salvar(entidade)}" />
 				</p:toggleSwitch>
 			</p:column>
 
@@ -86,7 +86,7 @@
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showExercicio}" >
 					<p:ajax event="change" process="@this"
-					listener="#{assuntoCursoBean.salvar(entidade)}" />
+					listener="#{assuntoBean.salvar(entidade)}" />
 				</p:toggleSwitch>
 			</p:column>
 
@@ -94,7 +94,7 @@
 			styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showQuestao}" >
 					<p:ajax event="change" process="@this"
-					listener="#{assuntoCursoBean.salvar(entidade)}" />
+					listener="#{assuntoBean.salvar(entidade)}" />
 				</p:toggleSwitch>
 			</p:column>
 

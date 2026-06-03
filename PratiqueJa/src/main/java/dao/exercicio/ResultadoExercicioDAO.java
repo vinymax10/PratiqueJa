@@ -66,11 +66,11 @@ public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 		if(filtro.getNomeUsuario() != null && !filtro.getNomeUsuario().isBlank())
 			predicates.add(builder.like(from.<Usuario>get("usuario").get("nome"), "%" + filtro.getNomeUsuario() + "%"));
 
-		if(filtro.getAssuntoCurso() != null)
-			predicates.add(builder.equal(from.get("exercicioPadrao").get("assuntoCurso").get("id"), filtro.getAssuntoCurso().getId()));
+		if(filtro.getAssunto() != null)
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("assunto").get("id"), filtro.getAssunto().getId()));
 
 		if(filtro.getModulo() != null)
-			predicates.add(builder.equal(from.get("exercicioPadrao").get("assuntoCurso").get("modulo"), filtro.getModulo()));
+			predicates.add(builder.equal(from.get("exercicioPadrao").get("assunto").get("modulo"), filtro.getModulo()));
 
 		if(filtro.getNivel() != null)
 			predicates.add(builder.equal(from.get("exercicioPadrao").get("nivel"), filtro.getNivel()));

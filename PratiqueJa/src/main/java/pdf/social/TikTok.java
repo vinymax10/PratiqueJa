@@ -396,9 +396,9 @@ public class TikTok
 
 	private String addSizeAssunto()
 	{
-		if(exercicio.getAssuntoCurso().getNome().length()<=23)
+		if(exercicio.getAssunto().getNome().length()<=23)
 			return "\\Large\r\n";
-		if(exercicio.getAssuntoCurso().getNome().length()<=28)
+		if(exercicio.getAssunto().getNome().length()<=28)
 			return "\\large\r\n";
 		else
 			return "\\normalsize\r\n";
@@ -412,7 +412,7 @@ public class TikTok
 		+ "\\vspace{-10px}\r\n" 
 		+ "\\begin{center}\r\n"
 		+addSizeAssunto()
-		+ "\\BI{" + exercicio.getAssuntoCurso().getNome() + "}\r\n\r\n"
+		+ "\\BI{" + exercicio.getAssunto().getNome() + "}\r\n\r\n"
 		+"\\vspace{10px}\r\n"
 		+"\\bfseries\r\n\r\n"
 		+"\\boldmath\r\n\r\n"

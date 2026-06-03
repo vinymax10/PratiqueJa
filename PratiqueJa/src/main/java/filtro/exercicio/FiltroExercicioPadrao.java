@@ -3,7 +3,7 @@ package filtro.exercicio;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
@@ -13,7 +13,7 @@ public class FiltroExercicioPadrao implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	private Modulo modulo;
 
@@ -29,7 +29,7 @@ public class FiltroExercicioPadrao implements Serializable
 
 	public void limpar()
 	{
-		assuntoCurso = null;
+		assunto = null;
 		modulo = null;
 		nivel = null;
 		nomeEnunciadoDescricao = null;

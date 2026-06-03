@@ -32,17 +32,17 @@
 					</h:panelGroup>
 
 					<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-8">
-						<p:outputLabel for="assuntoCurso" value="Assunto" />
-						<p:selectOneMenu id="assuntoCurso"
-							value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+						<p:outputLabel for="assunto" value="Assunto" />
+						<p:selectOneMenu id="assunto"
+							value="#{programacaoSpamBean.programacaoSpam.assunto}"
 							converter="generic" required="true"
 							requiredMessage="O assunto é obrigatório"
 							filter="true" filterMatchMode="contains">
-							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-								var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-								itemValue="#{assuntoCurso}" />
+							<f:selectItems value="#{assuntoBean.listaAtivas}"
+								var="assunto" itemLabel="#{assunto.nome}"
+								itemValue="#{assunto}" />
 						</p:selectOneMenu>
-						<p:message for="assuntoCurso" display="text" />
+						<p:message for="assunto" display="text" />
 					</h:panelGroup>
 
 				</div>

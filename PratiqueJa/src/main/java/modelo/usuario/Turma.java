@@ -18,7 +18,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -47,5 +47,5 @@ public class Turma implements Serializable, Entidade
 	@ManyToOne(optional = true)
 	@JoinColumn(nullable = true)
 	@AuditLabel(value = "assunto atual", atributo = "nome")
-	private AssuntoCurso assuntoAtual;
+	private Assunto assuntoAtual;
 }

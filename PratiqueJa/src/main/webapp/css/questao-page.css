@@ -271,8 +271,36 @@
 .qz-active-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 10px;
     padding: 14px 0 4px;
+}
+
+/* Mini-card que agrupa os chips de uma mesma categoria */
+.qz-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    padding: 8px 10px 10px;
+}
+.qz-filter-group-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(148, 163, 184, 0.85);
+}
+.qz-filter-group-label i { font-size: 11px; opacity: 0.9; }
+.qz-filter-group-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .qz-active-chip {

@@ -119,8 +119,8 @@ public class ExercicioEBook
 		+"\\setlength\\parindent{0pt} \r\n"
 		+"\\begin{tabular}{p{0.19\\textwidth} p{0.61\\textwidth} p{0.2\\textwidth}}\r\n" 
 		+"\\BB{\\Large Exercícios } & \\footnotesize "
-		+ "\\BI{Módulo "+exercicio.getAssuntoCurso().getModulo().getNome()+"}"
-		+" \\BL{-} \\BV{"+exercicio.getAssuntoCurso().getNome() +"} "
+		+ "\\BI{Módulo "+exercicio.getAssunto().getModulo().getNome()+"}"
+		+" \\BL{-} \\BV{"+exercicio.getAssunto().getNome() +"} "
 		+"\\BL{-} \\BC{Nível "+exercicio.getNivelRomano()+"} & Nota:    \\\\  \r\n" 
 		+"\\end{tabular}\r\n" 
 		+ "\\vspace{0.3cm}\r\n" 
@@ -135,8 +135,8 @@ public class ExercicioEBook
 		+"\\setlength{\\tabcolsep}{0em} \r\n"
 		+"\\setlength\\parindent{0pt} \r\n"
 		+"\\BB{\\Large Resolução} \\quad \\footnotesize "
-		+ "\\BI{Módulo "+exercicio.getAssuntoCurso().getModulo().getNome()+"}"
-		+" \\BL{-} \\BV{"+exercicio.getAssuntoCurso().getNome() +"} "
+		+ "\\BI{Módulo "+exercicio.getAssunto().getModulo().getNome()+"}"
+		+" \\BL{-} \\BV{"+exercicio.getAssunto().getNome() +"} "
 		+"\\BL{-} \\BC{Nível "+exercicio.getNivelRomano()+"}\r\n"
 		+ "\\vspace{0.3cm}\r\n\r\n" ;
 	}

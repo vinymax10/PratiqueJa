@@ -27,7 +27,7 @@ import dao.exercicio.ExercicioPadraoDAO;
 import dao.questao.QuestaoDAO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.email.ConfigSpam;
 import modelo.exercicio.ExercicioPadrao;
@@ -67,17 +67,17 @@ public class EBookService
 	private InputStream inputStream;
 	private Diretorio diretorio;
 	private List<ItemSumario> itens;
-	private List<AssuntoCurso> assuntosCurso;
+	private List<Assunto> assuntos;
 	private int numListas;
 	private int contPartes, totalPartes;
 	private int numExercicios, numQuestoes, numPaginas, totalPaginas;
 	private Consumer<Double> onProgress;
 
 	public ByteArrayOutputStream construirEBook(Modulo modulo, int edicao, int numListasParam, boolean capa,
-	                                             List<AssuntoCurso> assuntosCursoParam, String basePath,
+	                                             List<Assunto> assuntosParam, String basePath,
 	                                             Consumer<Double> progressCallback)
 	{
-		this.assuntosCurso = assuntosCursoParam;
+		this.assuntos = assuntosParam;
 		this.numListas = numListasParam;
 		this.onProgress = progressCallback;
 		itens = new ArrayList<>();
@@ -105,27 +105,27 @@ public class EBookService
 			addFolhaRosto(modulo, edicao);
 
 			int cont = 1;
-			for(AssuntoCurso assuntoCurso : assuntosCurso)
+			for(Assunto assunto : assuntos)
 			{
-				itens.add(new ItemSumario(assuntoCurso.getNome(), "" + cont++, "" + (pdfWriter.getPageNumber() + passoPage)));
+				itens.add(new ItemSumario(assunto.getNome(), "" + cont++, "" + (pdfWriter.getPageNumber() + passoPage)));
 				logger.fine("itemSumario: " + itens.get(itens.size() - 1));
 
-				addDocumento(basePath, "/pdf/" + assuntoCurso.getModulo().toString().toLowerCase() + "/" + assuntoCurso.getChave() + ".pdf", true);
+				addDocumento(basePath, "/pdf/" + assunto.getModulo().toString().toLowerCase() + "/" + assunto.getChave() + ".pdf", true);
 
 				ExercicioPadrao exercicio;
-				exercicio = exercicioPadraoDAO.buscar(assuntoCurso, Nivel.Nivel1);
+				exercicio = exercicioPadraoDAO.buscar(assunto, Nivel.Nivel1);
 				for(int i = 0; i < numListas; i++)
 					addExercicioEBook(exercicio);
 
-				exercicio = exercicioPadraoDAO.buscar(assuntoCurso, Nivel.Nivel2);
+				exercicio = exercicioPadraoDAO.buscar(assunto, Nivel.Nivel2);
 				for(int i = 0; i < numListas; i++)
 					addExercicioEBook(exercicio);
 
-				exercicio = exercicioPadraoDAO.buscar(assuntoCurso, Nivel.Nivel3);
+				exercicio = exercicioPadraoDAO.buscar(assunto, Nivel.Nivel3);
 				for(int i = 0; i < numListas; i++)
 					addExercicioEBook(exercicio);
 
-				addQuestao(assuntoCurso);
+				addQuestao(assunto);
 			}
 
 			if(capa)
@@ -171,14 +171,14 @@ public class EBookService
 				if(itens.size() > (indexAssunto + 1) && itens.get(indexAssunto + 1).pagina.equals("" + (i + passoPage - 1)))
 					indexAssunto++;
 
-				AssuntoCurso assuntoCurso = assuntosCurso.get(indexAssunto);
+				Assunto assunto = assuntos.get(indexAssunto);
 				if(capa && i > (readerOriginal.getNumberOfPages() - 2))
 				{
 					header.setAssunto("");
 					header.setAddPage(false);
 				}
 				else
-					header.setAssunto(assuntoCurso.getNome());
+					header.setAssunto(assunto.getNome());
 
 				document.newPage();
 				page = pdfWriter.getImportedPage(readerOriginal, i);
@@ -200,7 +200,7 @@ public class EBookService
 		return null;
 	}
 
-	public ByteArrayOutputStream construirListasExercicios(AssuntoCurso assuntoCurso, Nivel nivel, int numListasParam,
+	public ByteArrayOutputStream construirListasExercicios(Assunto assunto, Nivel nivel, int numListasParam,
 	                                                        String basePath, Consumer<Double> progressCallback)
 	{
 		this.numListas = numListasParam;
@@ -221,9 +221,9 @@ public class EBookService
 			document.open();
 			pageContentByte = pdfWriter.getDirectContent();
 
-			addDocumento(basePath, "/pdf/" + assuntoCurso.getModulo().toString().toLowerCase() + "/" + assuntoCurso.getChave() + ".pdf", false);
+			addDocumento(basePath, "/pdf/" + assunto.getModulo().toString().toLowerCase() + "/" + assunto.getChave() + ".pdf", false);
 
-			ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assuntoCurso, nivel);
+			ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assunto, nivel);
 			for(int i = 0; i < numListas; i++)
 				addExercicioLista(exercicio);
 
@@ -242,7 +242,7 @@ public class EBookService
 		return null;
 	}
 
-	public ByteArrayOutputStream construirListasExercicios(AssuntoCurso assuntoCurso, ConfigSpam configSpam,
+	public ByteArrayOutputStream construirListasExercicios(Assunto assunto, ConfigSpam configSpam,
 	                                                        String basePath, Consumer<Double> progressCallback)
 	{
 		this.onProgress = progressCallback;
@@ -263,11 +263,11 @@ public class EBookService
 			document.open();
 			pageContentByte = pdfWriter.getDirectContent();
 
-			addDocumento(basePath, "/pdf/" + assuntoCurso.getModulo().toString().toLowerCase() + "/" + assuntoCurso.getChave() + ".pdf", false);
+			addDocumento(basePath, "/pdf/" + assunto.getModulo().toString().toLowerCase() + "/" + assunto.getChave() + ".pdf", false);
 
 			for(Nivel nivel : niveis)
 			{
-				ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assuntoCurso, nivel);
+				ExercicioPadrao exercicio = exercicioPadraoDAO.buscar(assunto, nivel);
 				for(int i = 0; i < configSpam.qtn(nivel); i++)
 					addExercicioLista(exercicio);
 			}
@@ -290,12 +290,12 @@ public class EBookService
 	private void iniciarPorcentagem(boolean capa)
 	{
 		int numeroNiveis = 3;
-		totalPartes = assuntosCurso.size() + 2 + (assuntosCurso.size() * numeroNiveis * numListas);
+		totalPartes = assuntos.size() + 2 + (assuntos.size() * numeroNiveis * numListas);
 		if(capa)
 			totalPartes += 2;
 
-		for(AssuntoCurso assuntoCurso : assuntosCurso)
-			if(assuntoCurso.isShowQuestao())
+		for(Assunto assunto : assuntos)
+			if(assunto.isShowQuestao())
 				totalPartes++;
 
 		numExercicios = 0;
@@ -307,11 +307,11 @@ public class EBookService
 	private Resumo montarResumo()
 	{
 		Resumo resumo = new Resumo();
-		resumo.setAssuntos(assuntosCurso.size() + "");
+		resumo.setAssuntos(assuntos.size() + "");
 		resumo.setPaginas(totalPaginas + "");
 		resumo.setExecicios(numExercicios + "");
 		resumo.setQuestoes(numQuestoes + "");
-		resumo.setListas(assuntosCurso.size() * numListas * 3 + "");
+		resumo.setListas(assuntos.size() * numListas * 3 + "");
 		return resumo;
 	}
 
@@ -378,9 +378,9 @@ public class EBookService
 		addDocumento(new File(diretorio.getEnderecoPdf()), false);
 	}
 
-	private void addQuestao(AssuntoCurso assuntoCurso)
+	private void addQuestao(Assunto assunto)
 	{
-		List<Questao> questoes = questaoDAO.buscaAssuntoCurso(assuntoCurso, null, null);
+		List<Questao> questoes = questaoDAO.buscaAssunto(assunto, null, null);
 		if(!questoes.isEmpty())
 		{
 			QuestaoEBook gerarLatex = new QuestaoEBook(diretorio);

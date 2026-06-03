@@ -101,7 +101,7 @@ public class TesteConfigPostBean implements Serializable
 	private void gerarConteudo(boolean feed)
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssuntoCurso(), nivel);
+		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssunto(), nivel);
 
 		if(feed)
 		{

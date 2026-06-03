@@ -3,7 +3,7 @@ package filtro.teste;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 
 @Data
 public class FiltroTestePadrao implements Serializable
@@ -16,13 +16,13 @@ public class FiltroTestePadrao implements Serializable
 
 	private Double notaMinima;
 
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	public void limpar()
 	{
 		nome = null;
 		duracao = null;
 		notaMinima = null;
-		assuntoCurso = null;
+		assunto = null;
 	}
 }

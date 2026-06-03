@@ -21,7 +21,7 @@ import modelo.auditoria.AuditLabel;
 import modelo.questao.Questao;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "assuntos", "questoes" })
+@ToString(exclude = { "questoes" })
 @Data
 @Entity
 @ValueObject
@@ -39,10 +39,6 @@ public class Disciplina extends Config implements Entidade
 	@Size(max = 255)
 	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
-
-	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "disciplina")
-	private List<Assunto> assuntos = new ArrayList<Assunto>();
 
 	@DiffIgnore
 	@OneToMany(mappedBy = "disciplina")

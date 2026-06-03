@@ -14,7 +14,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.teste.Teste;
 import modelo.usuario.Turma;
 import modelo.usuario.Usuario;
@@ -83,12 +83,12 @@ public class TesteBean implements Serializable
 		return "";
 	}
 
-	public String criarTeste(AssuntoCurso assuntoCurso)
+	public String criarTeste(Assunto assunto)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			teste = new Teste();
-			teste.setTestePadrao(assuntoCurso.getTestePadrao());
+			teste.setTestePadrao(assunto.getTestePadrao());
 			teste.setUsuario(Sessao.getUsuarioLogado());
 
 			try

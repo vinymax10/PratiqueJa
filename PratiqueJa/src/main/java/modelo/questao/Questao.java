@@ -9,6 +9,8 @@ import org.javers.core.metamodel.annotation.DiffIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -23,17 +25,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.academico.Ano;
-import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "assuntoCurso", "assuntos", "paragrafos", "alternativas", "resultadosQuestao" })
+@ToString(exclude = { "assuntos", "paragrafos", "alternativas", "resultadosQuestao" })
 @Data
 @Entity
 public class Questao implements Serializable, Entidade
@@ -61,21 +62,20 @@ public class Questao implements Serializable, Entidade
 	@AuditLabel(value = "órgão", atributo = "nome")
 	private Orgao orgao;
 
-	@DiffIgnore
-	@ManyToMany
-	@JoinTable(name = "questaoHasAssunto")
-	private List<Assunto> assuntos = new ArrayList<Assunto>();
-
 	@ManyToOne(optional = true)
 	@JoinColumn(nullable = true)
 	@AuditLabel(value = "disciplina", genero = GeneroGramatical.FEMININO, atributo = "nome")
 	private Disciplina disciplina;
 
 	@DiffIgnore
-	@ManyToOne
-	private AssuntoCurso assuntoCurso;
+	@ManyToMany
+	@JoinTable(name = "questao_assunto",
+		joinColumns = @JoinColumn(name = "questao_id"),
+		inverseJoinColumns = @JoinColumn(name = "assunto_id"))
+	private List<Assunto> assuntos = new ArrayList<Assunto>();
 
 	@AuditLabel(value = "dificuldade", genero = GeneroGramatical.FEMININO)
+	@Enumerated(EnumType.STRING)
 	private Dificuldade dificuldade;
 
 	@AuditLabel(value = "ordem de inserção")
@@ -115,9 +115,6 @@ public class Questao implements Serializable, Entidade
 
 	@AuditLabel(value = "mal formulada", genero = GeneroGramatical.FEMININO)
 	private boolean malFormulada;
-
-	@AuditLabel(value = "multi assunto")
-	private boolean multiAssunto;
 
 	@Column(length = 512)
 	@Size(max = 512)
@@ -171,5 +168,26 @@ public class Questao implements Serializable, Entidade
 				return alternativa;
 		}
 		return null;
+	}
+
+	/** Primeiro assunto da questão (ou null). Conveniência para exibição/compatibilidade. */
+	public Assunto getAssunto()
+	{
+		return (assuntos == null || assuntos.isEmpty()) ? null : assuntos.get(0);
+	}
+
+	/** Nomes dos assuntos da questão separados por vírgula. */
+	public String getAssuntosNomes()
+	{
+		if(assuntos == null || assuntos.isEmpty())
+			return "";
+		StringBuilder sb = new StringBuilder();
+		for(Assunto a : assuntos)
+		{
+			if(sb.length() > 0)
+				sb.append(", ");
+			sb.append(a.getNome());
+		}
+		return sb.toString();
 	}
 }

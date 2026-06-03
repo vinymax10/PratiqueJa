@@ -15,12 +15,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "assuntoCurso", "resultados" })
+@ToString(exclude = { "assunto", "resultados" })
 @Data
 @Entity
 public class ExercicioPadrao implements Serializable, Entidade
@@ -35,7 +35,7 @@ public class ExercicioPadrao implements Serializable, Entidade
 
 	@DiffIgnore
 	@ManyToOne
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	@AuditLabel(value = "nível")
 	private Nivel nivel;
@@ -72,10 +72,10 @@ public class ExercicioPadrao implements Serializable, Entidade
 	{
 		String prefixo = "/image/matematica/";
 		String sufixo = ".png";
-		String modulo = assuntoCurso.getModulo().toString().toLowerCase();
-		String assunto = assuntoCurso.getChave().substring(0, 1).toLowerCase() + assuntoCurso.getChave().substring(1);
+		String modulo = assunto.getModulo().toString().toLowerCase();
+		String assuntoStr = assunto.getChave().substring(0, 1).toLowerCase() + assunto.getChave().substring(1);
 		String nivel = this.nivel.toString().toLowerCase();
-		return prefixo + modulo + "/" + assunto + "/" + nivel + sufixo;
+		return prefixo + modulo + "/" + assuntoStr + "/" + nivel + sufixo;
 	}
 
 	public List<Integer> numEstrelas()
@@ -89,7 +89,7 @@ public class ExercicioPadrao implements Serializable, Entidade
 
 	public String getClasse()
 	{
-		return "matematica." + assuntoCurso.getModulo().toString().toLowerCase() + "." + assuntoCurso.getChave().toLowerCase() + "." + nome;
+		return "matematica." + assunto.getModulo().toString().toLowerCase() + "." + assunto.getChave().toLowerCase() + "." + nome;
 	}
 
 	public String getNivelRomano()

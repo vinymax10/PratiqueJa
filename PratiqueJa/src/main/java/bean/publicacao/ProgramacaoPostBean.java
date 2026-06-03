@@ -11,7 +11,7 @@ import jakarta.inject.Named;
 import org.primefaces.event.ReorderEvent;
 
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import bean.util.Mensagem;
@@ -172,10 +172,10 @@ public class ProgramacaoPostBean implements Serializable
 		return programacaoPost;
 	}
 
-	public void gerarConteudo(AssuntoCurso assuntoCurso)
+	public void gerarConteudo(Assunto assunto)
 	{
 		ProgramacaoPost programacaoPost = programacaoPostDefault();
-		programacaoPost.setAssuntoCurso(assuntoCurso);
+		programacaoPost.setAssunto(assunto);
 		programacaoPost.setAvulsa(true);
 		programacaoPostService.persistir(programacaoPost);
 		envioPostService.acorda();

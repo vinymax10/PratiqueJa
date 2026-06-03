@@ -6,7 +6,7 @@ import java.util.List;
 
 import filtro.PeriodoPreset;
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.teste.TestePadrao;
 
 @Data
@@ -25,7 +25,7 @@ public class FiltroTeste implements Serializable
 
 	private Double nota;
 
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	public void limpar()
 	{
@@ -35,7 +35,7 @@ public class FiltroTeste implements Serializable
 		periodo = null;
 		preset = null;
 		nota = null;
-		assuntoCurso = null;
+		assunto = null;
 	}
 
 	public void resetPreset()

@@ -6,7 +6,7 @@ import java.util.List;
 
 import filtro.PeriodoPreset;
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
@@ -19,7 +19,7 @@ public class FiltroResultadoExercicio implements Serializable
 
 	private String nomeUsuario;
 
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	private Modulo modulo;
 
@@ -38,7 +38,7 @@ public class FiltroResultadoExercicio implements Serializable
 	public void limpar()
 	{
 		nomeUsuario = null;
-		assuntoCurso = null;
+		assunto = null;
 		modulo = null;
 		nivel = null;
 		tipoExercicio = null;

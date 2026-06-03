@@ -131,7 +131,7 @@ public class ExercicioService
 		{
 			inStream = new FileInputStream(initialFile);
 			file = DefaultStreamedContent.builder()
-				.name("Exercicio" + exercicio.getExercicioPadrao().getAssuntoCurso().getChave() + exercicio.getExercicioPadrao().getNivel() + ".pdf")
+				.name("Exercicio" + exercicio.getExercicioPadrao().getAssunto().getChave() + exercicio.getExercicioPadrao().getNivel() + ".pdf")
 				.contentType("aplication/pdf")
 				.stream(() -> inStream)
 				.build();

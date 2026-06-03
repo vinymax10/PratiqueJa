@@ -85,7 +85,7 @@ public class ConteudoPublicacaoService
 		String mensagem = "Olá, " + nome + ".\r\n\r\n";
 		mensagem += "Segue em anexo o material preparado para sua próxima postagem no Instagram:\r\n";
 		mensagem += "📌 Carrossel de imagens já ajustado para o " + feed + ".\r\n";
-		mensagem += "Assunto: " + exercicioPadrao.getAssuntoCurso().getNome() + "\r\n";
+		mensagem += "Assunto: " + exercicioPadrao.getAssunto().getNome() + "\r\n";
 		mensagem += "Nível: " + exercicioPadrao.getNivelRomano() + "\r\n\r\n";
 		mensagem += "✍️ Texto sugestivo para a legenda, que você pode usar como está ou adaptar ao seu estilo de comunicação.\r\n\r\n";
 		mensagem += "---------------------------------------------\r\n";
@@ -98,7 +98,7 @@ public class ConteudoPublicacaoService
 
 		if(configPost.getPerfilCriador() != PerfilCriador.Basico)
 		{
-			mensagem += exercicioPadrao.getAssuntoCurso().getHashtag() + " ";
+			mensagem += exercicioPadrao.getAssunto().getHashtag() + " ";
 			mensagem += hashtagDAO.getAny(3) + "\r\n";
 		}
 

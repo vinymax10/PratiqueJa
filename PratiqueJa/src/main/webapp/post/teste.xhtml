@@ -36,12 +36,12 @@
 			<h:panelGroup styleClass="campo col-12  xl:col-8">
 				<p:outputLabel for="@next" value="Assunto" />
 				<p:selectOneMenu
-					value="#{testeConfigPostBean.programacaoPost.assuntoCurso}"
+					value="#{testeConfigPostBean.programacaoPost.assunto}"
 					converter="generic" required="true" filter="true"
 					filterMatchMode="contains">
-					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-					var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-					itemValue="#{assuntoCurso}" />
+					<f:selectItems value="#{assuntoBean.listaAtivas}"
+					var="assunto" itemLabel="#{assunto.nome}"
+					itemValue="#{assunto}" />
 				</p:selectOneMenu>
 			</h:panelGroup>
 

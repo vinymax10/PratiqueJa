@@ -1,7 +1,7 @@
 package modelo.auditoria;
 
 import modelo.DocumentoFile;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.configuracao.ConfigCleanup;
 import modelo.configuracao.ConfigLatex;
 import modelo.configuracao.Edicao;
@@ -23,7 +23,6 @@ import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.academico.Ano;
-import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
@@ -71,10 +70,9 @@ public enum EntidadeAuditavel
 	Banca(Banca.class, "Banca"),
 	Orgao(Orgao.class, "Órgão"),
 	Disciplina(Disciplina.class, "Disciplina"),
-	Assunto(Assunto.class, "Assunto"),
 
-//	Assunto do Curso
-	AssuntoCurso(AssuntoCurso.class, "Assunto do Curso"),
+//	Assunto
+	Assunto(Assunto.class, "Assunto"),
 
 //	Teste
 	TestePadrao(TestePadrao.class, "Teste Padrão"),

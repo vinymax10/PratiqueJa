@@ -2,7 +2,7 @@ package filtro.usuario;
 
 import java.io.Serializable;
 
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 
 public class FiltroTurma implements Serializable
 {
@@ -12,7 +12,7 @@ public class FiltroTurma implements Serializable
 
 	private String nome;
 	
-	private AssuntoCurso assuntoAtual;
+	private Assunto assuntoAtual;
 
 	public Long getId()
 	{
@@ -32,11 +32,11 @@ public class FiltroTurma implements Serializable
 		this.nome = nome;
 	}
 
-	public AssuntoCurso getAssuntoAtual() {
+	public Assunto getAssuntoAtual() {
 		return assuntoAtual;
 	}
 
-	public void setAssuntoAtual(AssuntoCurso assuntoAtual) {
+	public void setAssuntoAtual(Assunto assuntoAtual) {
 		this.assuntoAtual = assuntoAtual;
 	}
 

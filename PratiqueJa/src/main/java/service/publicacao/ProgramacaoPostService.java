@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
-import dao.academico.AssuntoCursoDAO;
+import dao.academico.AssuntoDAO;
 import dao.publicacao.BackgroundDAO;
 import dao.publicacao.ConfigPostDAO;
 import dao.publicacao.ImagemPostDAO;
@@ -12,7 +12,7 @@ import dao.publicacao.ProgramacaoPostDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ImagemPost;
@@ -31,7 +31,7 @@ public class ProgramacaoPostService
 	private ImagemPostDAO imagemPostDAO;
 
 	@Inject
-	private AssuntoCursoDAO assuntoCursoDAO;
+	private AssuntoDAO assuntoDAO;
 
 	@Inject
 	private ConfigPostDAO configPostDAO;
@@ -126,14 +126,14 @@ public class ProgramacaoPostService
 	public void programacaoDefault(ConfigPost configPost)
 	{
 		removerTodos(configPost);
-		List<AssuntoCurso> assuntos = assuntoCursoDAO.listarOpcoesAtivas();
+		List<Assunto> assuntos = assuntoDAO.listarOpcoesAtivas();
 		for(int i = 0; i < assuntos.size(); i++)
 		{
 			ProgramacaoPost p = new ProgramacaoPost();
 			p.setOrdem(i);
 			p.setConfigPost(configPost);
 			p.updateData();
-			p.setAssuntoCurso(assuntos.get(i));
+			p.setAssunto(assuntos.get(i));
 			setImagemPost(p);
 			programacaoPostDAO.salvar(p);
 			configPost.getProgramacoesPost().add(i, p);

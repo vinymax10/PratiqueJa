@@ -72,7 +72,7 @@ public class DownloadBean implements Serializable
 		
 		if (totalPartes == 0)
 		{
-			if (setDownload.getAssuntosCurso().isEmpty())
+			if (setDownload.getAssuntos().isEmpty())
 				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Escolha pelo menos um Assunto.");
 			else
 				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR,
@@ -173,8 +173,8 @@ public class DownloadBean implements Serializable
 	{
 		String nome = setDownload.getNomeArquivo();
 		if (nome == null || nome.isBlank())
-			return setDownload.getAssuntosCurso().size() == 1
-					? setDownload.getAssuntosCurso().get(0).getChave()
+			return setDownload.getAssuntos().size() == 1
+					? setDownload.getAssuntos().get(0).getChave()
 					: "pratiqueJa";
 		return nome;
 	}

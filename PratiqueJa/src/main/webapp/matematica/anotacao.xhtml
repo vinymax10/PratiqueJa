@@ -6,10 +6,10 @@
 
 <h:body >
 	<ui:composition>
-		<p:tab title="Anotações" rendered="#{assuntoCursoBean.entidade.showAnotacao}">
-<!--        		<embed src="#{assuntoCursoBean.pdfAnotacao()}?embedded=true" width="100%" style="height: 1150px;"  -->
+		<p:tab title="Anotações" rendered="#{assuntoBean.entidade.showAnotacao}">
+<!--        		<embed src="#{assuntoBean.pdfAnotacao()}?embedded=true" width="100%" style="height: 1150px;"  -->
 <!--  				type="application/pdf"/> -->
-<!--        			<iframe src="#{assuntoCursoBean.pdfAnotacao()}" width="100%" style="height: 1150px;" ></iframe> -->
+<!--        			<iframe src="#{assuntoBean.pdfAnotacao()}" width="100%" style="height: 1150px;" ></iframe> -->
 			<div id="adobe-dc-view" style="width: 100%;"></div>
 			<script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
 			<script type="text/javascript">
@@ -18,11 +18,11 @@
 				let element=document.querySelector('#adobe-dc-view');
 				element.style.height=element.offsetWidth*1.2+"px"; 
 				 
-			    var adobeDCView = new AdobeDC.View({clientId: "#{assuntoCursoBean.getKeyPdfEmbedAdobe()}", divId: "adobe-dc-view"});
+			    var adobeDCView = new AdobeDC.View({clientId: "#{assuntoBean.getKeyPdfEmbedAdobe()}", divId: "adobe-dc-view"});
 			    adobeDCView.previewFile({
 			      content:{ location:
-			        { url: "#{assuntoCursoBean.pdfAnotacao()}"}},
-			      metaData:{fileName: "#{assuntoCursoBean.pdfName()}"},
+			        { url: "#{assuntoBean.pdfAnotacao()}"}},
+			      metaData:{fileName: "#{assuntoBean.pdfName()}"},
 			    },
 			    {
 			      embedMode: "SIZED_CONTAINER"

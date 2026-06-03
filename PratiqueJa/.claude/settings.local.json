@@ -162,7 +162,9 @@
       "Bash(cd \"C:/Users/maximovrm/git/PratiqueJa/PratiqueJa\")",
       "Bash(python -c 'import xml.dom.minidom,sys; xml.dom.minidom.parse\\('\\\\''__TRACKED_VAR__'\\\\''\\); print\\('\\\\''OK  __TRACKED_VAR__'\\\\''\\)')",
       "PowerShell(mvn *)",
-      "PowerShell(try { [xml]$x = Get-Content -Raw -Encoding UTF8 \"src/main/webapp/post/programacao.xhtml\"; Write-Output \"OK programacao.xhtml\" } catch { Write-Output \"FAIL -> $\\($_.Exception.Message\\)\" })"
+      "PowerShell(try { [xml]$x = Get-Content -Raw -Encoding UTF8 \"src/main/webapp/post/programacao.xhtml\"; Write-Output \"OK programacao.xhtml\" } catch { Write-Output \"FAIL -> $\\($_.Exception.Message\\)\" })",
+      "Bash(mvn -v)",
+      "Bash(mvn -q -o compile)"
     ]
   }
 }

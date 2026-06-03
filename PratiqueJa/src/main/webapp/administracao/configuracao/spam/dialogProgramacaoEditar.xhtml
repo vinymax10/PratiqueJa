@@ -25,14 +25,14 @@
 					<h:panelGroup styleClass="campoMsg col-12 lg:col-9 xl:col-10">
 						<p:outputLabel for="@next" value="Assunto" />
 						<p:selectOneMenu
-							value="#{programacaoSpamBean.programacaoSpam.assuntoCurso}"
+							value="#{programacaoSpamBean.programacaoSpam.assunto}"
 							converter="generic" required="true"
 							requiredMessage="O assunto é obrigatório"
 							filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-								var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-								itemValue="#{assuntoCurso}" />
+							<f:selectItems value="#{assuntoBean.listaAtivas}"
+								var="assunto" itemLabel="#{assunto.nome}"
+								itemValue="#{assunto}" />
 						</p:selectOneMenu>
 						<p:message for="@previous" display="text" />
 					</h:panelGroup>

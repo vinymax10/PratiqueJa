@@ -29,13 +29,13 @@
 			<h:panelGroup styleClass="campoMsg col-12 lg:col-6 xl:col-6">
 				<p:outputLabel for="@next" value="Assuntos" />
 				<p:selectCheckboxMenu emptyLabel="Escolha os Assuntos" updateLabel="true"
-					value="#{downloadBean.setDownload.assuntosCurso}"
+					value="#{downloadBean.setDownload.assuntos}"
 					converter="generic"
 					multiple="true" filter="true" filterMatchMode="contains" dynamic="true">
 					<f:attribute name="collectionType" value="java.util.ArrayList" />
-					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-						var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-						itemValue="#{assuntoCurso}" />
+					<f:selectItems value="#{assuntoBean.listaAtivas}"
+						var="assunto" itemLabel="#{assunto.nome}"
+						itemValue="#{assunto}" />
 				</p:selectCheckboxMenu>
 			</h:panelGroup>
 

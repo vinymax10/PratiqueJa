@@ -17,7 +17,7 @@ import org.primefaces.model.StreamedContent;
 import lombok.Data;
 import bean.configuracao.EdicaoBean;
 import bean.util.Mensagem;
-import dao.academico.AssuntoCursoDAO;
+import dao.academico.AssuntoDAO;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.push.Push;
@@ -25,7 +25,7 @@ import jakarta.faces.push.PushContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.Nivel;
 import service.ebook.EBookService;
@@ -48,7 +48,7 @@ public class DownloadEbookBean implements Serializable
 	private EdicaoBean edicaoBean;
 
 	@Inject
-	private AssuntoCursoDAO assuntoCursoDAO;
+	private AssuntoDAO assuntoDAO;
 
 	@Inject
 	@Push(channel = "push")
@@ -90,28 +90,28 @@ public class DownloadEbookBean implements Serializable
 	private java.io.ByteArrayOutputStream construirEBook()
 	{
 		edicaoBean.salvar();
-		List<AssuntoCurso> assuntosCurso = assuntoCursoDAO.buscar(modulo);
+		List<Assunto> assuntos = assuntoDAO.buscar(modulo);
 		String basePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("");
 		int edicao = edicaoBean.getEdicao().edicaoModulo(modulo);
 		Consumer<Double> onProgress = p -> { porcentagem = p; push.send("update"); };
-		java.io.ByteArrayOutputStream result = ebookService.construirEBook(modulo, edicao, numListas, capa, assuntosCurso, basePath, onProgress);
+		java.io.ByteArrayOutputStream result = ebookService.construirEBook(modulo, edicao, numListas, capa, assuntos, basePath, onProgress);
 		edicaoBean.incrementa(modulo);
 		return result;
 	}
 
 	public String gerarListasExercicios()
 	{
-		List<AssuntoCurso> assuntosCurso = assuntoCursoDAO.buscar(modulo);
+		List<Assunto> assuntos = assuntoDAO.buscar(modulo);
 		List<Nivel> niveis = Arrays.asList(Nivel.values());
 		String basePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("");
 
-		int totalCalls = niveis.size() * assuntosCurso.size();
+		int totalCalls = niveis.size() * assuntos.size();
 		int[] callsDone = {0};
 		porcentagem = 0;
 
 		try
 		{
-			for(AssuntoCurso assuntoCurso : assuntosCurso)
+			for(Assunto assunto : assuntos)
 			{
 				for(Nivel nivel : niveis)
 				{
@@ -120,8 +120,8 @@ public class DownloadEbookBean implements Serializable
 						porcentagem = (base + p) / totalCalls;
 						push.send("update");
 					};
-					byte[] bytes = ebookService.construirListasExercicios(assuntoCurso, nivel, numListas, basePath, onProgress).toByteArray();
-					String nomeFile = (assuntoCurso.getOrdem() + 1) + "_" + assuntoCurso.getNome() + "_" + nivel.getNome();
+					byte[] bytes = ebookService.construirListasExercicios(assunto, nivel, numListas, basePath, onProgress).toByteArray();
+					String nomeFile = (assunto.getOrdem() + 1) + "_" + assunto.getNome() + "_" + nivel.getNome();
 					File file = new File(ebookService.getDiretorio().getConfigLatex().getEnderecoEBook() + "/" + nomeFile + ".pdf");
 					Files.copy(new ByteArrayInputStream(bytes), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				}

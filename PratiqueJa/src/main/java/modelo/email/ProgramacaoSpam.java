@@ -13,12 +13,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "configSpam", "assuntoCurso" })
+@ToString(exclude = { "configSpam", "assunto" })
 @Data
 @Entity
 public class ProgramacaoSpam implements Serializable, Entidade
@@ -37,9 +37,9 @@ public class ProgramacaoSpam implements Serializable, Entidade
 	@AuditLabel(value = "ordem")
 	private int ordem;
 
-	@AuditLabel(value = "assunto do curso", atributo = "nome")
+	@AuditLabel(value = "assunto", atributo = "nome")
 	@ManyToOne
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	@DiffIgnore
 	@ManyToOne
@@ -48,7 +48,7 @@ public class ProgramacaoSpam implements Serializable, Entidade
 	public ProgramacaoSpam clone()
 	{
 		ProgramacaoSpam clone = new ProgramacaoSpam();
-		clone.assuntoCurso = this.assuntoCurso;
+		clone.assunto = this.assunto;
 		clone.configSpam = this.configSpam;
 		clone.data = this.data;
 		clone.ordem = this.ordem;

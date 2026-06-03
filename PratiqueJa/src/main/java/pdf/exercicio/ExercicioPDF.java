@@ -30,7 +30,7 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import bean.exercicio.ConfigDownload;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
@@ -120,10 +120,10 @@ public class ExercicioPDF
 			table.addCell(cell);
 
 			p = new Paragraph();
-			p.add(new Phrase("   " + exercicio.getAssuntoCurso().getModulo().getNome(),
+			p.add(new Phrase("   " + exercicio.getAssunto().getModulo().getNome(),
 			new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(151, 162, 255))));
 			p.add(new Phrase(" - ", new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(255, 147, 84))));
-			p.add(new Phrase(exercicio.getAssuntoCurso().getNome(),
+			p.add(new Phrase(exercicio.getAssunto().getNome(),
 			new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(17, 199, 170))));
 
 //			p.add(exercicio.getNivel().getNome());
@@ -203,10 +203,10 @@ public class ExercicioPDF
 			p.add(
 			new Phrase("Gabarito     ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(255, 147, 84))));
 
-			p.add(new Phrase(exercicio.getAssuntoCurso().getModulo().getNome(),
+			p.add(new Phrase(exercicio.getAssunto().getModulo().getNome(),
 			new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(151, 162, 255))));
 			p.add(new Phrase(" - ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, cor)));
-			p.add(new Phrase(exercicio.getAssuntoCurso().getNome(),
+			p.add(new Phrase(exercicio.getAssunto().getNome(),
 			new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(17, 199, 170))));
 
 			document.add(p);
@@ -219,7 +219,7 @@ public class ExercicioPDF
 				p.add(
 				new Phrase((i + 1) + ") ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(151, 162, 255))));
 
-				if(exercicio.getAssuntoCurso().getChave().equals("Divisibilidade"))
+				if(exercicio.getAssunto().getChave().equals("Divisibilidade"))
 					p.add(new Phrase(listaContas.get(i).resultadoCorretoBolTexto(), small));
 				else
 					p.add(new Phrase(listaContas.get(i).getResultadoCorreto(), small));
@@ -522,11 +522,11 @@ public class ExercicioPDF
 		exercicio.setNome("FuncaoAfimNivel2");
 		exercicio.setQuantidade(6);
 		exercicio.setTipoExercicio(TipoExercicio.Image);
-		AssuntoCurso assuntoCurso = new AssuntoCurso();
-		assuntoCurso.setChave("FuncaoAfim");
-		assuntoCurso.setNome("Função Afim");
-		assuntoCurso.setModulo(Modulo.Basico);
-		exercicio.setAssuntoCurso(assuntoCurso);
+		Assunto assunto = new Assunto();
+		assunto.setChave("FuncaoAfim");
+		assunto.setNome("Função Afim");
+		assunto.setModulo(Modulo.Basico);
+		exercicio.setAssunto(assunto);
 		ConfigDownload configDownload = new ConfigDownload();
 		ExercicioPDF.gerarPDFFisico(exercicio, configDownload);
 

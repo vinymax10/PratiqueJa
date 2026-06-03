@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.usuario.Usuario;
 
 @Data
@@ -33,7 +33,7 @@ public class SetDownload implements Serializable
 
 	private Usuario usuario;
 
-	private List<AssuntoCurso> assuntosCurso = new ArrayList<>();;
+	private List<Assunto> assuntos = new ArrayList<>();;
 
 	private int quantidadeNivel1=1;
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.primefaces.event.ReorderEvent;
 
-import bean.academico.AssuntoCursoBean;
+import bean.academico.AssuntoBean;
 import bean.util.Mensagem;
 import dao.email.ProgramacaoSpamDAO;
 import jakarta.faces.application.FacesMessage;
@@ -14,7 +14,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.email.ProgramacaoSpam;
 import service.publicacao.EnvioPostService;
 
@@ -36,7 +36,7 @@ public class ProgramacaoSpamBean implements Serializable
 	private String nome = "Programação de Spam";
 
 	@Inject
-	private AssuntoCursoBean assuntoCursoBean;
+	private AssuntoBean assuntoBean;
 
 	private int quantidade = 1;
 
@@ -128,15 +128,15 @@ public class ProgramacaoSpamBean implements Serializable
 	public String programacaoDefault()
 	{
 		removerTodos();
-		List<AssuntoCurso> assuntos = assuntoCursoBean.getListaAtivas();
+		List<Assunto> assuntos = assuntoBean.getListaAtivas();
 		for(int i = 0; i < assuntos.size(); i++)
 		{
-			AssuntoCurso assuntoCurso = assuntos.get(i);
+			Assunto assunto = assuntos.get(i);
 			programacaoSpam = new ProgramacaoSpam();
 			programacaoSpam.setOrdem(i);
 			programacaoSpam.setConfigSpam(configSpamBean.getConfigSpam());
 			programacaoSpam.updateData();
-			programacaoSpam.setAssuntoCurso(assuntoCurso);
+			programacaoSpam.setAssunto(assunto);
 			programacaoSpamDAO.salvar(programacaoSpam);
 			configSpamBean.getConfigSpam().getProgramacoesSpam().add(i, programacaoSpam);
 		}
@@ -172,10 +172,10 @@ public class ProgramacaoSpamBean implements Serializable
 		return ps;
 	}
 
-	public void gerarConteudo(AssuntoCurso assuntoCurso)
+	public void gerarConteudo(Assunto assunto)
 	{
 		ProgramacaoSpam ps = programacaoSpamDefault();
-		ps.setAssuntoCurso(assuntoCurso);
+		ps.setAssunto(assunto);
 		programacaoSpamDAO.salvar(ps);
 		envioPostService.acorda();
 	}

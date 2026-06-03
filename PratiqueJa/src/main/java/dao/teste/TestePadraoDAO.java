@@ -35,8 +35,8 @@ public class TestePadraoDAO extends DAO<TestePadrao>
 		if(filtroTestePadrao.getNome() != null && !filtroTestePadrao.getNome().isBlank())
 			predicates.add(builder.like(fromTestePadrao.get("nome"), "%" + filtroTestePadrao.getNome() + "%"));
 		
-		if(filtroTestePadrao.getAssuntoCurso() != null)
-			predicates.add(builder.equal(fromTestePadrao.<Usuario>get("assuntoCurso").get("id"), filtroTestePadrao.getAssuntoCurso().getId()));
+		if(filtroTestePadrao.getAssunto() != null)
+			predicates.add(builder.equal(fromTestePadrao.<Usuario>get("assunto").get("id"), filtroTestePadrao.getAssunto().getId()));
 		
 		if(filtroTestePadrao.getNotaMinima() != null)
 			predicates.add(builder.equal(fromTestePadrao.<Usuario>get("notaMinima"), filtroTestePadrao.getNotaMinima()));

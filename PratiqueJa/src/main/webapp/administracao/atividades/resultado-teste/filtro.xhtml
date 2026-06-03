@@ -14,12 +14,12 @@
 
 					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
 						<p:outputLabel for="@next" value="Assunto Curso" />
-						<p:selectOneMenu value="#{resultadoTesteBean.filtro.assuntoCurso}"
+						<p:selectOneMenu value="#{resultadoTesteBean.filtro.assunto}"
 						converter="generic" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
-							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-							var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-							itemValue="#{assuntoCurso}" />
+							<f:selectItems value="#{assuntoBean.listaAtivas}"
+							var="assunto" itemLabel="#{assunto.nome}"
+							itemValue="#{assunto}" />
 						</p:selectOneMenu>
 					</h:panelGroup>
 

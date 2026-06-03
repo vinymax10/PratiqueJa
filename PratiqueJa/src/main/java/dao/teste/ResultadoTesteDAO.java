@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.teste.ResultadoTeste;
 import modelo.usuario.Usuario;
 
@@ -22,7 +22,7 @@ public class ResultadoTesteDAO extends DAO<ResultadoTeste>
 		super(ResultadoTeste.class);
 	}
 
-	public Double melhorResultado(AssuntoCurso assuntoCurso, Usuario usuario)
+	public Double melhorResultado(Assunto assunto, Usuario usuario)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Double> query = builder.createQuery(Double.class);
@@ -30,8 +30,8 @@ public class ResultadoTesteDAO extends DAO<ResultadoTeste>
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(assuntoCurso != null)
-			predicates.add(builder.equal(fromResultadoTeste.get("testePadrao").get("assuntoCurso").get("id"), assuntoCurso.getId()));
+		if(assunto != null)
+			predicates.add(builder.equal(fromResultadoTeste.get("testePadrao").get("assunto").get("id"), assunto.getId()));
 
 		if(usuario != null)
 			predicates.add(builder.equal(fromResultadoTeste.get("usuario").get("id"), usuario.getId()));
@@ -62,11 +62,11 @@ public class ResultadoTesteDAO extends DAO<ResultadoTeste>
 		if(filtro.getTestePadrao() != null)
 			predicates.add(builder.equal(from.get("testePadrao").get("id"), filtro.getTestePadrao().getId()));
 
-		if(filtro.getAssuntoCurso() != null)
-			predicates.add(builder.equal(from.get("testePadrao").get("assuntoCurso").get("id"), filtro.getAssuntoCurso().getId()));
+		if(filtro.getAssunto() != null)
+			predicates.add(builder.equal(from.get("testePadrao").get("assunto").get("id"), filtro.getAssunto().getId()));
 
 		if(filtro.getModulo() != null)
-			predicates.add(builder.equal(from.get("testePadrao").get("assuntoCurso").get("modulo"), filtro.getModulo()));
+			predicates.add(builder.equal(from.get("testePadrao").get("assunto").get("modulo"), filtro.getModulo()));
 
 		if(filtro.getPeriodo() != null && filtro.getPeriodo().size() == 2)
 		{

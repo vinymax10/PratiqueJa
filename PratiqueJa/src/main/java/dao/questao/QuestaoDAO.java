@@ -13,13 +13,12 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.questao.Alternativa;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
-import modelo.academico.Assunto;
 import modelo.usuario.Usuario;
 import web.session.Sessao;
 
@@ -32,7 +31,7 @@ public class QuestaoDAO extends DAO<Questao>
 		super(Questao.class);
 	}
 
-	public List<Questao> buscaAssuntoCurso(AssuntoCurso assuntoCurso, TipoFiltro tipoFiltro, Usuario usuario)
+	public List<Questao> buscaAssunto(Assunto assunto, TipoFiltro tipoFiltro, Usuario usuario)
 	{
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -44,9 +43,10 @@ public class QuestaoDAO extends DAO<Questao>
 		predicates.add(builder.equal(fromQuestao.get("revisada"), true));
 		predicates.add(builder.notEqual(fromQuestao.get("resolucao"),""));
 
-		if(assuntoCurso != null)
+		if(assunto != null)
 		{
-			predicates.add(builder.equal(fromQuestao.get("assuntoCurso").get("id"), assuntoCurso.getId()));
+			Join<Questao, Assunto> assuntoJoin = fromQuestao.join("assuntos");
+			predicates.add(builder.equal(assuntoJoin.get("id"), assunto.getId()));
 		}
 
 		if(tipoFiltro != null && usuario != null)
@@ -92,7 +92,7 @@ public class QuestaoDAO extends DAO<Questao>
 //		fromQuestao.fetch("disciplina");
 //		fromQuestao.fetch("banca");
 //		fromQuestao.fetch("orgao");
-//		fromQuestao.fetch("assuntoCurso");
+//		fromQuestao.fetch("assunto");
 //		
 		TypedQuery<Questao> typedQuery = em
 		.createQuery(query.select(fromQuestao).where(predicates.toArray(new Predicate[0])).distinct(true)
@@ -136,10 +136,14 @@ public class QuestaoDAO extends DAO<Questao>
 		if(filtroQuestao.getDisciplina() != null)
 			predicates.add(builder.equal(fromQuestao.get("disciplina").get("id"), filtroQuestao.getDisciplina().getId()));
 
-		if(filtroQuestao.getAssuntosCurso() != null && !filtroQuestao.getAssuntosCurso().isEmpty())
-			predicates.add(fromQuestao.get("assuntoCurso").in(filtroQuestao.getAssuntosCurso()));
-		else if(filtroQuestao.getAssuntoCurso() != null)
-			predicates.add(builder.equal(fromQuestao.get("assuntoCurso").get("id"), filtroQuestao.getAssuntoCurso().getId()));
+		if((filtroQuestao.getAssuntos() != null && !filtroQuestao.getAssuntos().isEmpty()) || filtroQuestao.getAssunto() != null)
+		{
+			Join<Questao, Assunto> assuntoJoin = fromQuestao.join("assuntos");
+			if(filtroQuestao.getAssuntos() != null && !filtroQuestao.getAssuntos().isEmpty())
+				predicates.add(assuntoJoin.in(filtroQuestao.getAssuntos()));
+			else
+				predicates.add(builder.equal(assuntoJoin.get("id"), filtroQuestao.getAssunto().getId()));
+		}
 
 		if(filtroQuestao.getDificuldades() != null && !filtroQuestao.getDificuldades().isEmpty())
 			predicates.add(fromQuestao.get("dificuldade").in(filtroQuestao.getDificuldades()));
@@ -161,20 +165,11 @@ public class QuestaoDAO extends DAO<Questao>
 			predicates.add(builder.equal(fromQuestao.<Long>get("id"), filtroQuestao.getId()));
 		}
 
-		if(filtroQuestao.getAssunto() != null)
-		{
-			Join<Questao, Assunto> assuntoJoin = fromQuestao.join("assuntos");
-			predicates.add(builder.equal(assuntoJoin.get("id"), filtroQuestao.getAssunto().getId()));
-		}
-
 		if(filtroQuestao.getRevisada() != null)
 			predicates.add(builder.equal(fromQuestao.get("revisada"), filtroQuestao.getRevisada().booleanValue()));
 
 		if(filtroQuestao.getMalFormulada() != null)
 			predicates.add(builder.equal(fromQuestao.get("malFormulada"), filtroQuestao.getMalFormulada().booleanValue()));
-
-		if(filtroQuestao.getMultiAssunto() != null)
-			predicates.add(builder.equal(fromQuestao.get("multiAssunto"), filtroQuestao.getMultiAssunto().booleanValue()));
 
 		if(filtroQuestao.getResolucaoLatex() != null)
 		{

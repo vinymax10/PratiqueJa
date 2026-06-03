@@ -22,14 +22,14 @@
 		<div class="ui-fluid gride" >
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
-				<p:outputLabel for="@next" value="Assunto Curso" />
-				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.assuntoCurso}"
+				<p:outputLabel for="@next" value="Assunto" />
+				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.assunto}"
 				converter="generic" filter="true" filterMatchMode="contains"
-				required="true" requiredMessage="O assunto do curso é obrigatório">
+				required="true" requiredMessage="O assunto é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-					var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-					itemValue="#{assuntoCurso}" />
+					<f:selectItems value="#{assuntoBean.listaAtivas}"
+					var="assunto" itemLabel="#{assunto.nome}"
+					itemValue="#{assunto}" />
 				</p:selectOneMenu>
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>

@@ -122,7 +122,7 @@ public class EnvioPostService
 		ColorHolder.setCOLOR(configPost.getCorFonte());
 		ColorHolder.setFORMULA(configPost.getCorFormula());
 
-		for(ExercicioPadrao exercicioPadrao : programacaoPost.getAssuntoCurso().getExerciciosPadrao())
+		for(ExercicioPadrao exercicioPadrao : programacaoPost.getAssunto().getExerciciosPadrao())
 		{
 			conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
 			conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);

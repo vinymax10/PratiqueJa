@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.TipoExercicio;
@@ -53,14 +53,14 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 			));
 		}
 
-		if(filtroExercicio.getAssuntoCurso() != null)
+		if(filtroExercicio.getAssunto() != null)
 		{
-			predicates.add(builder.equal(fromExercicio.<AssuntoCurso>get("assuntoCurso").get("id"), filtroExercicio.getAssuntoCurso().getId()));
+			predicates.add(builder.equal(fromExercicio.<Assunto>get("assunto").get("id"), filtroExercicio.getAssunto().getId()));
 		}
 
 		if(filtroExercicio.getModulo() != null)
 		{
-			predicates.add(builder.equal(fromExercicio.<AssuntoCurso>get("assuntoCurso").get("modulo"), filtroExercicio.getModulo()));
+			predicates.add(builder.equal(fromExercicio.<Assunto>get("assunto").get("modulo"), filtroExercicio.getModulo()));
 		}
 
 		if(filtroExercicio.getNivel() != null)
@@ -77,8 +77,8 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 			query.select(fromExercicio)
 			.where(predicates.toArray(new Predicate[0]))
 			.orderBy(
-				builder.asc(fromExercicio.get("assuntoCurso").get("modulo")),
-				builder.asc(fromExercicio.get("assuntoCurso").get("ordem")),
+				builder.asc(fromExercicio.get("assunto").get("modulo")),
+				builder.asc(fromExercicio.get("assunto").get("ordem")),
 				builder.asc(fromExercicio.get("nivel"))
 			)
 		);
@@ -103,7 +103,7 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 		if(setDownload.getQuantidadeNivel3() == 0)
 			predicates.add(builder.notEqual(fromExercicio.<Nivel>get("nivel"), Nivel.Nivel3));
 
-		predicates.add(builder.and(fromExercicio.get("assuntoCurso").in(setDownload.getAssuntosCurso())));
+		predicates.add(builder.and(fromExercicio.get("assunto").in(setDownload.getAssuntos())));
 
 		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(
 			query.select(fromExercicio)
@@ -114,7 +114,7 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 		return typedQuery.getResultList();
 	}
 
-	public ExercicioPadrao buscar(AssuntoCurso assuntoCurso, Nivel nivel)
+	public ExercicioPadrao buscar(Assunto assunto, Nivel nivel)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<ExercicioPadrao> query = builder.createQuery(ExercicioPadrao.class);
@@ -122,7 +122,7 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(builder.equal(fromExercicio.<Nivel>get("nivel"), nivel));
-		predicates.add(builder.equal(fromExercicio.get("assuntoCurso").get("id"), assuntoCurso.getId()));
+		predicates.add(builder.equal(fromExercicio.get("assunto").get("id"), assunto.getId()));
 
 		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(
 			query.select(fromExercicio)

@@ -14,12 +14,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "configPost", "backgroundFeed", "backgroundReel", "padraoFeed", "padraoReel", "assuntoCurso" })
+@ToString(exclude = { "configPost", "backgroundFeed", "backgroundReel", "padraoFeed", "padraoReel", "assunto" })
 @Data
 @Entity
 public class ProgramacaoPost implements Serializable, Entidade
@@ -79,9 +79,9 @@ public class ProgramacaoPost implements Serializable, Entidade
 	@JoinColumn(nullable = true)
 	private Background padraoReel;
 
-	@AuditLabel(value = "assunto do curso", atributo = "nome")
+	@AuditLabel(value = "assunto", atributo = "nome")
 	@ManyToOne
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	@DiffIgnore
 	@ManyToOne
@@ -91,7 +91,7 @@ public class ProgramacaoPost implements Serializable, Entidade
 	{
 		ProgramacaoPost clone = new ProgramacaoPost();
 		clone.alternativaReel = this.alternativaReel;
-		clone.assuntoCurso = this.assuntoCurso;
+		clone.assunto = this.assunto;
 		clone.backgroundAleatorioFeed = this.backgroundAleatorioFeed;
 		clone.backgroundAleatorioReel = this.backgroundAleatorioReel;
 		clone.backgroundFeed = this.backgroundFeed;

@@ -31,15 +31,15 @@
 
 					<h:panelGroup styleClass="campoMsg col-12 xl:col-7">
 						<p:outputLabel for="@next" value="Assunto" />
-						<p:selectOneMenu id="assuntoCurso"
-							value="#{programacaoPostBean.programacaoPost.assuntoCurso}"
+						<p:selectOneMenu id="assunto"
+							value="#{programacaoPostBean.programacaoPost.assunto}"
 							converter="generic" required="true" requiredMessage="O assunto é obrigatório" filter="true"
 							filterMatchMode="contains">
-							<f:selectItems value="#{assuntoCursoBean.listaAtivas}"
-										var="assuntoCurso" itemLabel="#{assuntoCurso.nome}"
-										itemValue="#{assuntoCurso}" />
+							<f:selectItems value="#{assuntoBean.listaAtivas}"
+										var="assunto" itemLabel="#{assunto.nome}"
+										itemValue="#{assunto}" />
 						</p:selectOneMenu>
-						<p:message for="assuntoCurso" display="text"/>
+						<p:message for="assunto" display="text"/>
 					</h:panelGroup>
 
 				</div>

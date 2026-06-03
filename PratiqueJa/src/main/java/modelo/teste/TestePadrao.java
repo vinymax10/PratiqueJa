@@ -18,12 +18,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "assuntoCurso", "conteudosTeste" })
+@ToString(exclude = { "assunto", "conteudosTeste" })
 @Data
 @Entity
 public class TestePadrao implements Serializable, Entidade
@@ -43,7 +43,7 @@ public class TestePadrao implements Serializable, Entidade
 
 	@DiffIgnore
 	@OneToOne(mappedBy = "testePadrao")
-	private AssuntoCurso assuntoCurso;
+	private Assunto assunto;
 
 	@DiffIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "testePadrao")

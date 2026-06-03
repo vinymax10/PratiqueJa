@@ -10,24 +10,24 @@
 		<!-- HERO -->
 		<div class="as-hero">
 			<div class="as-hero-content">
-				<span class="as-modulo as-modulo-#{assuntoCursoBean.entidade.modulo.toString().toLowerCase()}">
-					<h:outputText value="#{assuntoCursoBean.entidade.modulo.nome}" />
+				<span class="as-modulo as-modulo-#{assuntoBean.entidade.modulo.toString().toLowerCase()}">
+					<h:outputText value="#{assuntoBean.entidade.modulo.nome}" />
 				</span>
 				<h1 class="as-title">
-					<h:outputText value="#{assuntoCursoBean.entidade.nome}" />
+					<h:outputText value="#{assuntoBean.entidade.nome}" />
 				</h1>
 				<h:outputText styleClass="as-desc"
-					rendered="#{not empty assuntoCursoBean.entidade.descricao}"
-					value="#{assuntoCursoBean.entidade.descricao}" />
+					rendered="#{not empty assuntoBean.entidade.descricao}"
+					value="#{assuntoBean.entidade.descricao}" />
 
 				<div class="as-stats">
 					<div class="as-stat">
 						<span class="as-stat-label">Exercícios</span>
-						<strong class="as-stat-value">#{assuntoCursoBean.exerciciosPadrao.size()}</strong>
+						<strong class="as-stat-value">#{assuntoBean.exerciciosPadrao.size()}</strong>
 					</div>
 					<div class="as-stat">
 						<span class="as-stat-label">Questões</span>
-						<strong class="as-stat-value">#{assuntoCursoBean.entidade.questoes.size()}</strong>
+						<strong class="as-stat-value">#{assuntoBean.entidade.questoes.size()}</strong>
 					</div>
 					<h:panelGroup layout="block" styleClass="as-stat"
 						>
@@ -35,7 +35,7 @@
 						<strong class="as-stat-value">12</strong>
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="as-stat"
-						rendered="#{assuntoCursoBean.entidade.showAnotacao}">
+						rendered="#{assuntoBean.entidade.showAnotacao}">
 						<span class="as-stat-label">Anotações</span>
 						<strong class="as-stat-value">15</strong>
 					</h:panelGroup>
@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="as-hero-image">
-				<img src="#{assuntoCursoBean.entidade.endImageCapa()}" alt="#{assuntoCursoBean.entidade.nome}" />
+				<img src="#{assuntoBean.entidade.endImageCapa()}" alt="#{assuntoBean.entidade.nome}" />
 			</div>
 		</div>
 
@@ -77,7 +77,7 @@
 					<div class="as-tab as-continue-btn" onclick="asShowTab('exercicios', this)">
 						<i class="pi pi-pencil"></i> Ir para Exercícios
 					</div>
-					<div class="as-tab as-continue-btn" onclick="navegarComScroll('#{assuntoCursoBean.entidade.endTeoria()}')">
+					<div class="as-tab as-continue-btn" onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
 						<i class="pi pi-book"></i> Ver Teoria
 					</div>
 				</div>
@@ -87,18 +87,18 @@
 		<!-- BOTÕES DE NAVEGAÇÃO -->
 		<div class="as-tabs" id="asTabs">
 			<h:panelGroup layout="block"
-				rendered="#{assuntoCursoBean.entidade.showAnotacao}"
-				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" onclick="navegarComScroll('#{assuntoCursoBean.entidade.endTeoria()}')">
+				rendered="#{assuntoBean.entidade.showAnotacao}"
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
 				<i class="pi pi-book"></i> Teoria
 			</h:panelGroup>
 
 			<h:panelGroup layout="block"
-				rendered="#{assuntoCursoBean.entidade.showExercicio}"
+				rendered="#{assuntoBean.entidade.showExercicio}"
 				styleClass="as-tab" onclick="asShowTab('exercicios', this)">
 				<i class="pi pi-pencil"></i> Exercícios
 			</h:panelGroup>
 			<h:panelGroup layout="block"
-				rendered="#{assuntoCursoBean.entidade.showAula}"
+				rendered="#{assuntoBean.entidade.showAula}"
 				styleClass="as-tab" onclick="asShowTab('videoaulas', this)">
 				<i class="pi pi-video"></i> Videoaulas
 			</h:panelGroup>

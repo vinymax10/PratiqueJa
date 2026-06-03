@@ -23,7 +23,7 @@ import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import modelo.DocumentoFile;
-import modelo.academico.AssuntoCurso;
+import modelo.academico.Assunto;
 import modelo.email.ConfigSpam;
 import modelo.email.ProgramacaoSpam;
 import modelo.publicacao.FinalidadeCta;
@@ -98,10 +98,10 @@ public class EnvioSpamService implements Serializable
 
 	public void gerarListaExercicio()
 	{
-		AssuntoCurso assuntoCurso = programacaoSpam.getAssuntoCurso();
+		Assunto assunto = programacaoSpam.getAssunto();
 		String basePath = servletContext.getRealPath("");
 
-		ByteArrayOutputStream exercicioOutputStream = ebookService.construirListasExercicios(assuntoCurso, configSpam, basePath, p -> {});
+		ByteArrayOutputStream exercicioOutputStream = ebookService.construirListasExercicios(assunto, configSpam, basePath, p -> {});
 		InputStream inStream = new ByteArrayInputStream(exercicioOutputStream.toByteArray());
 
 		DocumentoFile documentoFile = new DocumentoFile();
@@ -109,14 +109,14 @@ public class EnvioSpamService implements Serializable
 		{
 			SerialBlob serialBlob = new SerialBlob(IOUtils.toByteArray(inStream));
 			documentoFile.setFile(serialBlob);
-			documentoFile.setEndDocumentacao((assuntoCurso.getOrdem() + 1) + "_" + assuntoCurso.getNome() + ".pdf");
+			documentoFile.setEndDocumentacao((assunto.getOrdem() + 1) + "_" + assunto.getNome() + ".pdf");
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 
-		enviarEmail("Lista de exercícios do Pratique Já", documentoFile, assuntoCurso.getNome());
+		enviarEmail("Lista de exercícios do Pratique Já", documentoFile, assunto.getNome());
 	}
 
 	private void enviarEmail(String assuntoEmail, DocumentoFile documentoFile, String assunto)

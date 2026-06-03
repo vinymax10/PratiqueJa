@@ -78,9 +78,9 @@ public class TesteDAO extends DAO<Teste>
 		if(filtroTeste.getRealizado() != null)
 			predicates.add(builder.equal(fromTeste.get("realizado"), filtroTeste.getRealizado().booleanValue()));
 
-		if(filtroTeste.getAssuntoCurso() != null)
+		if(filtroTeste.getAssunto() != null)
 		{
-			predicates.add(builder.equal(fromTeste.get("testePadrao").get("assuntoCurso").get("id"), filtroTeste.getAssuntoCurso().getId()));
+			predicates.add(builder.equal(fromTeste.get("testePadrao").get("assunto").get("id"), filtroTeste.getAssunto().getId()));
 		}
 		
 		if(filtroTeste.getTestePadrao() != null)

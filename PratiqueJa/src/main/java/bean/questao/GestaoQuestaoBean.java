@@ -19,7 +19,6 @@ import org.primefaces.model.file.UploadedFile;
 
 import bean.exercicio.ConfigDownload;
 import bean.academico.AnoBean;
-import bean.academico.AssuntoBean;
 import bean.academico.BancaBean;
 import bean.academico.DisciplinaBean;
 import bean.academico.OrgaoBean;
@@ -40,7 +39,6 @@ import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.academico.Ano;
-import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
@@ -80,9 +78,6 @@ public class GestaoQuestaoBean implements Serializable
 
 	@Inject
 	private DisciplinaBean disciplinaBean;
-
-	@Inject
-	private AssuntoBean assuntoBean;
 
 	private int inicioCarregamento;
 
@@ -325,47 +320,6 @@ public class GestaoQuestaoBean implements Serializable
 			{
 				disciplina = disciplinas.get(0);
 				questao.setDisciplina(disciplina);
-			}
-
-			for(String str : questaoQ.getAssuntos())
-			{
-				str = str.trim();
-				if(!str.equals(""))
-				{
-					List<Assunto> assuntos = assuntoBean.getEntidadeDAO().filtrar(str);
-					if(assuntos.size() > 0)
-					{
-						Assunto bestAssunto = null;
-						if(assuntos.size() > 1)
-						{
-							int distMin = Integer.MAX_VALUE;
-							int dist;
-							for(Assunto assunto : assuntos)
-							{
-								dist = Levenshtein.distance(assunto.getNome(), str);
-								if(dist < distMin)
-								{
-									distMin = dist;
-									bestAssunto = assunto;
-								}
-							}
-						}
-						else
-							bestAssunto = assuntos.get(0);
-
-						questao.getAssuntos().add(bestAssunto);
-					}
-					else
-					{
-						Assunto assunto = new Assunto();
-						assunto.setDisciplina(disciplina);
-						assunto.setNome(str);
-						disciplina.getAssuntos().add(assunto);
-						assuntoBean.getEntidadeDAO().salvar(assunto);
-						disciplinaBean.getEntidadeDAO().salvar(disciplina);
-						questao.getAssuntos().add(assunto);
-					}
-				}
 			}
 
 			questaoDAO.salvar(questao);
