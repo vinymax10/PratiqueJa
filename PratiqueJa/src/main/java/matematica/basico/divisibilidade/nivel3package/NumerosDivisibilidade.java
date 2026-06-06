@@ -53,19 +53,4 @@ public class NumerosDivisibilidade
 			return getNumeroPar();
 	}
 	
-	public static void main(String[] args)
-	{
-//		ResolucaoDivisores resolucaoDivisores=new ResolucaoDivisores();
-//
-//		int cont=0;
-//		for(int i = 1; i <= 500; i++)
-//		{
-//			if(i%2==1&&resolucaoDivisores.numerosDividoresResultado(i)>4)
-//			{
-//				if(++cont%10==0)
-//			}
-//		}
-		
-	}
-	
 }

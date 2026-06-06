@@ -1,44 +1,18 @@
 package matematica.basico.regratres.nivel3package;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-
+import matematica.GeradorExercicio;
 import matematica.basico.regratres.ProblemaRegraTres;
-import modelo.matematica.Conta;
 
-
-public class RegraTres1 extends Conta
+public class RegraTres1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RegraTres1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		
-		ProblemaRegraTres problema=TextoRegraTresComposta.getProblemaProporcao();
-		problema.gerarValores();	
-		pergunta=problema.getPergunta();
-		
-		resultadoCorreto = "" + problema.resultado().toString();
-		
-		resolucaoLatex = problema.resolucao();
-	}
+		ProblemaRegraTres problema = TextoRegraTresComposta.getProblemaProporcao();
+		problema.gerarValores();
 
-	public static void main(String[] args)
-	{
-		try
-		{
-			System.setOut(new PrintStream(System.out, true, "UTF-8"));
-		}
-		catch(UnsupportedEncodingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//        for(int i = 0; i < 50; i++)
-//		{
-        	new RegraTres1(1);
-//		}
+		addParagrafo(problema.getPergunta());
+		gerarAlternativas("" + problema.resultado().toString());
+		setResolucao("\\(" + problema.resolucao() + "\\)");
 	}
-
 }

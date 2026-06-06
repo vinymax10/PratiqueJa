@@ -2,41 +2,28 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrianguloEquilatero;
-import modelo.matematica.Conta;
-
 
 //	triângulo
-public class Image15 extends Conta
+public class Image15 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image15(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int l = 2 * (3 + rand.nextInt(13));
 
-		int l = 2*(3 + rand.nextInt(13));
-		
-		pergunta="Qual o perímetro do triângulo?";
-		textLatex = "Image15" + l + "-" + l+ "-" + l;
+		String resultadoCorreto = "" + (3 * l);
+		String resolucao = ResolucaoAreaPerimetro.perimetroTrianguloEquilatero(l);
 
-		resultadoCorreto = "" + (3*l);
+		Config config = new ConfigTrianguloEquilatero("" + l, false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		resolucaoLatex=ResolucaoAreaPerimetro.perimetroTrianguloEquilatero(l);
-		
-		Config config=new ConfigTrianguloEquilatero(""+l,false);
-		
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image15(1);
+		addParagrafo("Qual o perímetro do triângulo?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

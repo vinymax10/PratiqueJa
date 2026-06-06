@@ -27,7 +27,6 @@ import modelo.Ativo;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
-import modelo.exercicio.Exercicio;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.publicacao.ConfigPost;
 import modelo.questao.ResultadoQuestao;
@@ -73,10 +72,6 @@ public class Usuario extends Ativo implements Entidade
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<ResultadoQuestao> resultadosQuestoes = new ArrayList<ResultadoQuestao>();
-
-	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
-	private List<Exercicio> exercicios = new ArrayList<Exercicio>();
 
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")

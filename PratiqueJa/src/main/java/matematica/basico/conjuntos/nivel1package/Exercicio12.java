@@ -1,39 +1,30 @@
 package matematica.basico.conjuntos.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.Conjunto;
-import modelo.matematica.Conta;
 
-
-public class Exercicio12 extends Conta
+public class Exercicio12 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Exercicio12(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		int sizeA=3+rand.nextInt(5);
-		int sizeB=3+rand.nextInt(5);
-		int limit=25;
-		Conjunto a=new Conjunto(sizeA,limit);
-		Conjunto b=new Conjunto(sizeB,limit);
+		int sizeA = 3 + rand.nextInt(5);
+		int sizeB = 3 + rand.nextInt(5);
+		int limit = 25;
+		Conjunto a = new Conjunto(sizeA, limit);
+		Conjunto b = new Conjunto(sizeB, limit);
 		a.contruirInterseccao(b);
-		
-		Conjunto c=a.menos(b);
-		
-		pergunta="Quantos elementos tem \\(A - B ~\\)?";
-		textLatex="A="+a+"\\newline B="+b;
-		
-		resultadoCorreto = ""+c.size();
-		
-		resolucaoLatex="A - B = "+c+"\\\\";
-		resolucaoLatex+="|A - B|="+resultadoCorreto;
-		
-	}
-	
-	public static void main(String[] args)
-	{
-		new Exercicio12(1);
-	}
 
+		Conjunto c = a.menos(b);
+		int correto = c.size();
+
+		addParagrafo("Quantos elementos tem \\(A - B\\)?");
+		addParagrafo("\\(A = " + a + "\\)");
+		addParagrafo("\\(B = " + b + "\\)");
+		gerarAlternativasInteiras(correto);
+
+		String resolucao = "\\(A - B = " + c + "\\\\";
+		resolucao += "|A - B|=" + correto + "\\)";
+		setResolucao(resolucao);
+	}
 }

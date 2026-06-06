@@ -2,19 +2,13 @@ package matematica.intermediario.semelhancaangulos.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import jakarta.persistence.Transient;
-
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.semelhancaangulos.AuxSemelhancaAngulos;
 import matematica.intermediario.semelhancaangulos.nivel2package.ConfigSemelhancaAngulos6;
-import modelo.matematica.Conta;
-
-
-public class Exercicio6 extends Conta
+public class Exercicio6 extends GeradorExercicio
 {
 	private static final long serialVersionUID = 1L;
 	
-	@Transient
 	String [][] problemas= {
 	
 	//1Conhecido
@@ -181,9 +175,9 @@ public class Exercicio6 extends Conta
 	{"m=x,f,j", "l=y", "i=l,c=m->l+m"},
 	};
 	
-	public Exercicio6(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int pos=rand.nextInt(problemas.length);
 		String angleImage=problemas[pos][0];
 		String angleResult=problemas[pos][1];
@@ -201,31 +195,23 @@ public class Exercicio6 extends Conta
 		ConfigSemelhancaAngulos6 config = new ConfigSemelhancaAngulos6(a, b, c, d, e, f, g, h, i, j, l, m, n, o);
 
 		int resultado=1 + rand.nextInt(50);
-		resultadoCorreto = "" + resultado+"°";
+		String resultadoCorreto = "" + resultado+"°";
 		
 		AuxSemelhancaAngulos.mostrarAngulosExpressao(angleImage, config, resultado);
 
-		textLatex = config.getTextLatex();
+		String texto = config.getTextLatex();
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleResult, config);
 
-		resolucaoLatex=AuxSemelhancaAngulos.resolucao(instrucao,config);
-		if(!angleResult.equals(""))
-		{
-			BufferedImage imageResolucao = config.criarImagem(index);
-			baosResolucao = Graphics.salvar(imageResolucao, false, "");
-		}
+		String resolucao = AuxSemelhancaAngulos.resolucao(instrucao, config);
 
-		carregarBlob();
-	}
-
-
-	public static void main(String[] args)
-	{
-		new Exercicio6(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
 }

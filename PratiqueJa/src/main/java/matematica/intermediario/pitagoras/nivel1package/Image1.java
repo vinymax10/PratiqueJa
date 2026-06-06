@@ -2,43 +2,31 @@ package matematica.intermediario.pitagoras.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.pitagoras.ResolucaoPitagoras;
 import matematica.intermediario.pitagoras.config.Config;
 import matematica.intermediario.pitagoras.dados.Dados;
 import matematica.intermediario.pitagoras.dados.DadosBase;
-import modelo.matematica.Conta;
 
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		Dados dados = new DadosBase(20);
+		dados.hipotenusa.str = "a";
 
-		Dados dados=new DadosBase(20);
-		dados.hipotenusa.str="a";
-
-		pergunta="Qual o valor de \\(a\\)?";
-		
-		resultadoCorreto = ""+dados.hipotenusa.show();
-		
-		resolucaoLatex = ResolucaoPitagoras.resolucaoXBC(dados);
-		
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.hipotenusa.show();
+		String resolucao = ResolucaoPitagoras.resolucaoXBC(dados);
+		String texto = dados.toString();
 
 		Config config = Config.build1(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-
-//		Graphics.salvar(image, true, "pitagoras.PNG");
-	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
+		addParagrafo("Qual o valor de \\(a\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

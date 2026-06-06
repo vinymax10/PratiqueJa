@@ -3,86 +3,80 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	template="/template/template.xhtml">
-	
+
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" value="Exercício" />
 	</ui:define>
-	
-	
+
 	<f:metadata>
-	    <f:viewParam name="id" value="#{exercicioBean.id}" converter="jakarta.faces.Long" />
-	    <f:viewAction action="#{exercicioBean.init()}" />
+		<f:viewParam name="id" value="#{exercicioBean.id}" converter="jakarta.faces.Long" />
+		<f:viewAction action="#{exercicioBean.init()}" />
 	</f:metadata>
 
-	<p:remoteCommand name="update" action="#{exercicioBean.update}" 
-   	process="@this"  /> 
+	<h:form id="form" class="form" style="width:100%;">
 
-	<div class="p-d-flex">
-			
-	    <h:form id="form" style="margin-bottom:0;width:100%;">
-			<div class="grid" style="margin:0 15px;">
-				<div class="p-col-6" >
-					<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicio.exercicioPadrao.assunto.modulo.nome}" />
-			    	 - 
-			    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicio.exercicioPadrao.assunto.nome}" />
-			    	- 
-			    	<h:outputText style="color: var(--cinza);" value="#{exercicioBean.exercicio.exercicioPadrao.nivel.nome}" />
-	    		</div>
-	    		
-	    	 	<div class="p-col-6" style="text-align:right;">
-	    	 	<h:panelGroup id="nota" >
-	    	 		<h:panelGroup rendered="#{exercicioBean.exercicio.numContasRealizadas>0}">
-				
-		    	 		<h:outputText style="font-weight: bold;color:var(--iris);" value="Nota: " />
-						<h:outputText style="font-weight: bold;" value="#{exercicioBean.exercicio.notaPorcentagem}" >
-							<f:convertNumber pattern="#,##0.00" />
-						</h:outputText>
-						<h:outputText style="margin-right:15px; font-weight: bold;" value=" \%" />
-					</h:panelGroup>
-	    	 	</h:panelGroup>
-	    	 	</div>			
-				
-				<div class="col-12" >
-					<h:outputText style="margin-bottom:10px;font-weight: bold;color:var(--laranja)" 
-					value="Instrução: " />
-				   <h:outputText style="margin-bottom:10px;" 
-					value="#{exercicioBean.exercicio.exercicioPadrao.enunciado}"/> 
-		        </div>
-			</div> 
-			 
-		    <br/>  
-			    
-			<div class="grid ui-fluid">
-				<c:forEach items="#{exercicioBean.exercicio.contas}" var="conta" varStatus="status">
-					<ui:insert>
-						<ui:include src="#{conta.getFileTipoExercicio()}" />
-					</ui:insert>
-				</c:forEach>
+		<div class="grid" style="margin:0 15px;">
+			<div class="p-col-12">
+				<h:outputText style="color: var(--iris);" rendered="#{not empty exercicioBean.exercicio.assunto}"
+				value="Módulo #{exercicioBean.exercicio.assunto.modulo.nome}" />
+				<h:outputText rendered="#{not empty exercicioBean.exercicio.assunto}" value=" - " />
+				<h:outputText style="color: var(--verde);" rendered="#{not empty exercicioBean.exercicio.assunto}"
+				value="Assunto #{exercicioBean.exercicio.assunto.nome}" />
+				<h:outputText rendered="#{not empty exercicioBean.exercicio.assunto}" value=" - " />
+				<h:outputText style="color: var(--cinza);"
+				value="#{exercicioBean.exercicio.nivel.nome}" />
 			</div>
-			
-			<div class="p-grid" style="margin:0 15px;">
-				<div class="p-col-6" >
-				
-					<p:button value="Voltar" styleClass="ui-button-raised ui-button-secondary ui-button-flat" 
-					onclick="window.history.go(-1); return false;" style="width: auto" icon="pi pi-chevron-left" />
-					
-<!-- 	      			<p:button value="Voltar" styleClass="ui-button-raised ui-button-secondary ui-button-flat"  -->
-<!-- 					href="/minhasExercicios/minhasExercicios.xhtml" style="width: auto" icon="pi pi-chevron-left" /> -->
-	      		</div> 
-	      		        
-<!-- 				<div class="p-col-6" style="text-align:right;"> -->
-<!-- 					<p:commandButton styleClass="ui-button-raised ui-button-flat ui-button-success" value="Finalizar" -->
-<!-- 					icon="pi pi-check" action="#{exercicioBean.finalizar}"  update="@form, :growl"  -->
-<!-- 					oncomplete="reloadMathJax();" style="width: auto" > -->
-<!-- 					</p:commandButton> -->
-<!-- 				</div> -->
+		</div>
+
+		<h4 class="title-divisor">Enunciado</h4>
+
+		<div class="grid ui-fluid" style="margin:0 15px;">
+			<ui:repeat value="#{exercicioBean.exercicio.paragrafos}" var="paragrafo">
+				<div class="col-12" style="margin-bottom:8px;">
+					<h:outputText rendered="#{!paragrafo.tipoImagem}" value="#{paragrafo.texto}" escape="false" />
+					<p:graphicImage rendered="#{paragrafo.tipoImagem}"
+					value="#{paragrafo.imagemFile.imagem()}" style="max-width:100%;" />
+				</div>
+			</ui:repeat>
+		</div>
+
+		<h4 class="title-divisor">Alternativas</h4>
+
+		<div class="grid ui-fluid" style="margin:0 15px;">
+			<ui:repeat value="#{exercicioBean.exercicio.alternativas}" var="alternativa">
+				<div class="col-12" style="margin-bottom:6px;">
+					<h:outputText styleClass="font-bold" style="color:var(--iris);"
+					value="#{alternativa.letra}) " />
+					<h:outputText value="#{alternativa.texto}" escape="false" />
+					<i class="pi pi-check ml-2" style="color:var(--green-500);"
+					rendered="#{alternativa.correta}" />
+				</div>
+			</ui:repeat>
+		</div>
+
+		<h:panelGroup rendered="#{not empty exercicioBean.exercicio.resolucao}">
+			<h4 class="title-divisor">Resolução</h4>
+			<div class="grid ui-fluid" style="margin:0 15px;">
+				<div class="col-12">
+					<h:outputText value="#{exercicioBean.exercicio.resolucao}" escape="false" />
+				</div>
 			</div>
-		</h:form>
-	</div>
-	<br/>   <br/>
-	
-	
+		</h:panelGroup>
+
+		<div class="content-button">
+			<div class="divisor"></div>
+			<div class="flex gap-3 flex-wrap">
+				<p:button value="Voltar" styleClass="ui-button-outlined" icon="pi pi-chevron-left"
+				href="/administracao/conteudo/exercicio/list.xhtml" />
+				<p:button value="Editar" styleClass="ui-button-raised ui-button-primary" icon="pi pi-pencil"
+				href="#{exercicioBean.getUrlEdicao(exercicioBean.exercicio)}"
+				rendered="#{not empty exercicioBean.exercicio.id}" />
+			</div>
+		</div>
+
+	</h:form>
+
+	<h:outputScript target="body">if (typeof reloadMathJax === 'function') reloadMathJax();</h:outputScript>
+
 </ui:decorate>
-	

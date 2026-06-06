@@ -2,28 +2,24 @@ package matematica.intermediario.funcaoafim.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import matematica.intermediario.funcaoafim.config.ConfigRetaReal;
 import matematica.expressao.MyExpression;
-import modelo.matematica.Conta;
+import matematica.intermediario.funcaoafim.config.ConfigRetaReal;
 
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int pontoAx = -(2 + rand.nextInt(7));
 		int pontoAy = 2 + rand.nextInt(7);
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 			pontoAy *= -1;
 
 		int pontoBx = 2 + rand.nextInt(7);
 		int pontoBy = 2 + rand.nextInt(7);
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 			pontoBy *= -1;
 
 		double a = (double) (pontoBy - pontoAy) / (pontoBx - pontoAx);
@@ -33,30 +29,21 @@ public class Image2 extends Conta
 		Racional bRacional = new Racional(pontoAy).minus(aRacional.mult(new Racional(pontoAx)));
 
 		bRacional.fatoracao(2);
-		resultadoCorreto = "" + bRacional;
 
-		textLatex = a + "" + b;
-		pergunta = "Encontre o valor de b:  \\( f(x)="+aRacional.toStringLatex()+"x+b \\)";
+		ConfigRetaReal config = new ConfigRetaReal(a, b, pontoAx, pontoAy, pontoBx, pontoBy);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		ConfigRetaReal config=new ConfigRetaReal(a,b,pontoAx,pontoAy,pontoBx,pontoBy);
-		BufferedImage image=config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
-		
-		resolucaoLatex="";
-		resolucaoLatex+="\\text{O coeficiente linear } b \\text{ pode ser calculado por: }\\\\";
+		String resolucao = "";
+		resolucao += "\\text{O coeficiente linear } b \\text{ pode ser calculado por: }\\\\";
+		resolucao += "y=" + aRacional.toStringLatex() + "x + b\\\\";
+		resolucao += "\\text{Considerando o ponto } (" + pontoAx + "," + pontoAy + "), \\text{ temos: }\\\\";
 
-		resolucaoLatex+="y="+aRacional.toStringLatex()+"x + b\\\\";
-		resolucaoLatex+="\\text{Considerando o ponto } ("+pontoAx+","+pontoAy+"), \\text{ temos: }\\\\";
-		
-		MyExpression expressao = new MyExpression(pontoAy+" = "+aRacional.toString()+"*"+pontoAx+"+b");
-		resolucaoLatex+=expressao.resolverLatex();
-		
-		carregarBlob();
+		MyExpression expressao = new MyExpression(pontoAy + " = " + aRacional.toString() + "*" + pontoAx + "+b");
+		resolucao += expressao.resolverLatex();
+
+		addParagrafo("Encontre o valor de b:  \\( f(x)=" + aRacional.toStringLatex() + "x+b \\)");
+		addParagrafoImagem(image);
+		gerarAlternativas("" + bRacional);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
-	}
-
 }

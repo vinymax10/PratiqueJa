@@ -16,18 +16,17 @@ import bean.exercicio.ConfigDownload;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.ServletContext;
+import matematica.ExercicioFactory;
 import modelo.configuracao.SistemaOperacional;
-import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.exercicio.TipoExercicio;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
 
 public class GerarLatexExercicio
 {
 	ExercicioPadrao exercicio;
 	ConfigDownload configDownload;
 	String latex;
-	List<Conta> listaContas;
+	List<Exercicio> listaContas;
 	Diretorio diretorioBean;
     private ServletContext servletContext;
 
@@ -51,7 +50,8 @@ public class GerarLatexExercicio
 		if(configDownload.isRespostas())
 			rodape();
 		
-		if(configDownload.isResolucao()	&& listaContas.get(0).possuiResolucao())
+		if(configDownload.isResolucao() && !listaContas.isEmpty()
+		&& listaContas.get(0).getResolucao() != null && !listaContas.get(0).getResolucao().isEmpty())
 		{
 			latex+="\\newpage \r\n";
 			cabecalho();
@@ -94,56 +94,14 @@ public class GerarLatexExercicio
 	private void gerarImagens()
 	{
 		gravarLogo();
-		
-		Conta conta;
-		
-		File outputFile;
-		OutputStream outputStream;
-		
-		for(int i = 0; i < listaContas.size(); i++)
-		{
-			conta=listaContas.get(i);
-			
-			try
-			{
-				if(conta.getBaos()!=null)
-				{
-					outputFile = new File(diretorioBean.getEnderecoImagens()+"conta"+i+".png");
-					outputStream = new FileOutputStream(outputFile);
-					conta.getBaos().writeTo(outputStream);
-				}
-				
-				if(conta.getBaosResolucao()!=null)
-				{
-					outputFile = new File(diretorioBean.getEnderecoImagensResolucao()+"conta"+i+".png");
-					outputStream = new FileOutputStream(outputFile);
-					conta.getBaosResolucao().writeTo(outputStream);
-				}
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		// TODO migrar geração de imagens para o novo Exercicio (parágrafos/alternativas + ImagemFile).
 	}
 	
 	private void gerarListaContas()
 	{
-		listaContas = new ArrayList<Conta>();
-		Conta conta;
+		listaContas = new ArrayList<Exercicio>();
 		for(int i = 0; i < exercicio.getQuantidade(); i++)
-		{
-			try
-			{
-				conta = (Conta) Class.forName(exercicio.getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-				listaContas.add(conta);
-			}
-			catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-		}
+			listaContas.add(ExercicioFactory.gerar(exercicio.getClasse(), i + 1));
 	}
 	
 	public void cabecalho()
@@ -243,106 +201,12 @@ public class GerarLatexExercicio
 	
 	public void listaExercicios()
 	{
-		double alturaTotal = (double)(21.6+((6-(listaContas.size()/2))*0.2))/(listaContas.size()/2);
-		if(!configDownload.isRespostas())
-			alturaTotal = (double)(23.5+((6-(listaContas.size()/2))*0.2))/(listaContas.size()/2);
-		
-		latex+="\\small\r\n" 
-		+"\\textcolor{laranja}{Instruções: } \\textcolor{cinza}{"+exercicio.getEnunciado()+"}\r\n" 
-		+"\\vspace{0.1cm}\r\n" 
-		+"\r\n" 
-		+"\\setstretch{1.3}\r\n"
-		+"\\footnotesize\r\n" 
-		+"\\begin{tblr}{\r\n" 
-		+"colspec={p{0.46\\textwidth}|[1pt,cinza]p{0.46\\textwidth}},\r\n" 
-		+"columns = {colsep=0pt, rightsep=10pt},\r\n" 
-		+"column{2} = {leftsep=8pt},\r\n"
-		+"rows={valign=h, ht="+alturaTotal+"cm},\r\n"
-		+ "}\r\n";
-		Conta conta;
-		String pergunta="";
-		String texto="";
-
-		for(int i = 0; i < listaContas.size(); i++)
-		{
-			conta=listaContas.get(i);
-			
-			if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
-			{
-				if(conta.getBaos()==null)
-					pergunta=conta.getPergunta()+"\\vspace{5px}  \\newline";
-				else
-					pergunta=conta.getPergunta()+" \\newline";
-			}
-			else
-				pergunta="";
-			
-			if(conta.getBaos()!=null)
-				texto="\\includegraphics[valign=t,width=4.6cm]{"+diretorioBean.getConfigLatex().getImagens()+"/conta"+i+".png}";
-			else if(conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-				texto="$"+conta.getTextLatex()+"$";
-			else
-				texto="";
-			
-			if(i%2!=0) latex+=" &";
-			
-			latex+="\\BI{"+conta.getIndex()+")~}"+pergunta+texto;
-			
-			if(i%2!=0) latex+=" \\\\ \r\n";
-		}
-		 
-		 latex+="\\end{tblr}\r\n" 
-		+"\r\n" ;
-
+		// TODO migrar renderização do enunciado (parágrafos/alternativas) do novo Exercicio para LaTeX.
 	}
 	
 	public void listaResolucao()
 	{
-		double alturaTotal = (double)(23.5+((6-(listaContas.size()/2))*0.2))/(listaContas.size()/2);
-		
-		latex+="\\small\r\n" 
-		+"\\textcolor{laranja}{Instruções: } \\textcolor{cinza}{"+exercicio.getEnunciado()+"}\r\n" 
-		+"\\vspace{0.1cm}\r\n" 
-		+"\r\n" 
-		+"\r\n" 
-		+"\r\n" 
-		+"\\setstretch{1.5}\r\n"
-		+"\\footnotesize\r\n" 
-		+"\\begin{tblr}{\r\n" 
-		+"colspec={p{0.46\\textwidth}|[1pt,cinza]p{0.46\\textwidth}},\r\n" 
-		+"columns = {colsep=0pt, rightsep=10pt},\r\n" 
-		+"column{2} = {leftsep=8pt},\r\n"
-		+"rows={valign=h, ht="+alturaTotal+"cm},\r\n"
-		+ "}\r\n";
-		Conta conta;
-		String texto;
-		
-		for(int i = 0; i < listaContas.size(); i++)
-		{
-			conta=listaContas.get(i);
-			texto="";
-			
-			if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
-			{
-				if(conta.getBaos()==null&&conta.getBaosResolucao()==null)
-					texto+="{"+conta.getPergunta()+"}"+"\\vspace{5px}  \\newline \r\n";
-				else
-					texto+="{"+conta.getPergunta()+"}"+" \\newline \r\n";
-			}
-			
-			texto+=getTextoResolucao(conta,i);
-			
-			if(i%2!=0) latex+=" &";
-			
-			latex+="\\BI{"+conta.getIndex()+")~}"+texto;
-			
-			if(i%2!=0) latex+=" \\\\ \r\n";
-			
-		}
-		 
-		 latex+="\\end{tblr}\r\n" 
-		+"\r\n" ;
-
+		// TODO migrar renderização da resolução do novo Exercicio para LaTeX.
 	}
 	
 	private String widthImagem()
@@ -353,29 +217,10 @@ public class GerarLatexExercicio
 		return "4.6cm";
 	}
 	
-	private String getTextoResolucao(Conta conta,int index) 
+	private String getTextoResolucao(Exercicio conta,int index)
 	{
-		String texto="";
-		
-		if(conta.getBaosResolucao()!=null)
-		{
-			texto+="\\includegraphics[valign=t,width="+widthImagem()+"]{"+diretorioBean.getConfigLatex().getImagensResolucao()+"/conta"+index+".png} \\newline  \r\n \r\n ";
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
-		else if(conta.getBaos()!=null)
-		{
-			texto+="\\includegraphics[valign=t,width="+widthImagem()+"]{"+diretorioBean.getConfigLatex().getImagens()+"/conta"+index+".png} \\newline \r\n \r\n";
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
-		else
-		{
-			if(exercicio.isMostrarResolucao()&&conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-				texto+="{ $"+conta.getTextLatex()+"$}"+" \\vspace{5px} \\newline \r\n";
-			
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
-		
-		return texto;
+		// TODO migrar para o novo Exercicio (conta.getResolucao()).
+		return "";
 	}
 	
 	private String addSpace(String texto)
@@ -432,23 +277,7 @@ public class GerarLatexExercicio
 		
 		latex+="}\r\n"; 
 		 
-		Conta conta;
-		String resultado="";
-		
-		for(int i = 0; i < listaContas.size(); i++)
-		{
-			conta=listaContas.get(i);
-			if(exercicio.getTipoExercicio()==TipoExercicio.Boolean)
-				resultado="\\text{"+conta.resultadoCorretoBolTexto()+"}";
-			else
-				resultado=conta.getResultadoCorreto();
-			
-			latex+="\\BI{"+conta.getIndex()+")} ~"+"$"+resultado+"$";
-			if(i==(listaContas.size()/2)-1||(i==listaContas.size()-1))
-				latex+="\\\\ [4pt]\r\n";
-			else
-				latex+="&";
-		}
+		// TODO migrar gabarito para o novo Exercicio (alternativa correta).
 		latex+="\\end{tabular}\r\n"
 		+"\r\n" 
 		+"\r\n" 

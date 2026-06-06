@@ -2,40 +2,32 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadrado3;
-import modelo.matematica.Conta;
 
 //Quadrado com circunferencia dentro
-public class Image12 extends Conta
+public class Image12 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image12(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int raio = 1 + rand.nextInt(10);
 		String strRaio = "" + raio;
-		textLatex = "Image12" +raio;
 
-		pergunta="Se \\(r="+strRaio+"\\), qual o perímetro do quadrado?";
-		int l=2*raio;
+		int l = 2 * raio;
 
-		resultadoCorreto = "" + (4*l);
-		resolucaoLatex="l=2r= 2 \\cdot"+raio+"="+l+"\\\\";
-		resolucaoLatex+=ResolucaoAreaPerimetro.formulaPerimetroQuadrado()+"\\\\";
-		resolucaoLatex+="P=4 \\cdot "+l+"="+(4*l);
-		
-		ConfigQuadrado3 config=new ConfigQuadrado3("l","r",false);
-		BufferedImage image=config.criarImagem(index);
+		String resultadoCorreto = "" + (4 * l);
+		String resolucao = "l=2r= 2 \\cdot" + raio + "=" + l + "\\\\";
+		resolucao += ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
+		resolucao += "P=4 \\cdot " + l + "=" + (4 * l);
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigQuadrado3 config = new ConfigQuadrado3("l", "r", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image12(1);
+		addParagrafo("Se \\(r=" + strRaio + "\\), qual o perímetro do quadrado?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -2,19 +2,14 @@ package matematica.basico.somaangulostriangulo.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image17 extends Conta
+public class Image17 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image17(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 30 + rand.nextInt(10);
 		int d = 30 + rand.nextInt(10);
 		int b = 90 - a;
@@ -23,38 +18,29 @@ public class Image17 extends Conta
 		int e = b - d;
 		int f = 90 - e - a;
 
-//		17- Retangulo d, f | g
 		ConfigRetangulo config = new ConfigRetangulo(a, b, c, d, e, f, g);
 		config.d.mostrar();
 		config.f.mostrar();
 		config.f.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + f + "°";
-		resolucaoLatex = resolucao(a, b, c, d, e, f, g);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + f + "°";
+		String resolucao = resolucao(a, b, c, d, e, f, g);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		config.g.mostrar();
-		config.g.nome = "y";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
-	public String resolucao(int a, int b, int c, int d, int e, int f, int g)
+	private String resolucao(int a, int b, int c, int d, int e, int f, int g)
 	{
 		String resolucaoLatex = ResolucaoSAT2.complemento90("y", d);
 		resolucaoLatex += ResolucaoSAT2.complemento180("x", g, 90);
 
 		return resolucaoLatex;
-	}
-
-	public static void main(String[] args)
-	{
-		new Image17(1);
 	}
 }

@@ -1,22 +1,14 @@
 package matematica.basico.multiplicacaonatural;
 
-
-
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.basico.resolucaonatural.ResolucaoNatural;
-import modelo.matematica.Conta;
 
-@Entity
-public class MultiplicacaoNaturalNivel2 extends Conta
+public class MultiplicacaoNaturalNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public MultiplicacaoNaturalNivel2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
-		int a,b;
+		int a, b;
 		if(rand.nextBoolean())
 		{
 			a = 10 + rand.nextInt(90);
@@ -27,24 +19,16 @@ public class MultiplicacaoNaturalNivel2 extends Conta
 			a = 10 + rand.nextInt(90);
 			b = 10 + rand.nextInt(90);
 		}
-		
-		if(a<b)
+		if(a < b)
 		{
-			int aux=a;
-			a=b;
-			b=aux;
+			int aux = a;
+			a = b;
+			b = aux;
 		}
-		
-		textLatex = ResolucaoNatural.multiplicacao(a,b,false);
 
-		resultadoCorreto = ""+(a*b);
-		
-		resolucaoLatex=ResolucaoNatural.multiplicacao(a,b,true);
-
+		addParagrafo("Calcule a seguinte multiplicação:");
+		addParagrafo("\\(" + ResolucaoNatural.multiplicacao(a, b, false) + "\\)");
+		gerarAlternativasInteiras(a * b);
+		setResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
 	}
-
-	public MultiplicacaoNaturalNivel2()
-	{
-	}
-
 }

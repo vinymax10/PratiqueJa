@@ -2,39 +2,28 @@ package matematica.basico.conjuntos.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.ResolucaoConjuntos;
-import modelo.matematica.Conta;
 
-public class Image5 extends Conta
+public class Image5 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image5(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		DadosAB dados = new DadosAB();
+		dados.aMbStr = "";
 
-		DadosAB dados=new DadosAB();
-		dados.aMbStr="";
-//		dados.bMaStr="";
-
-		pergunta="Se \\(|A \\cup B| = "+dados.aUb+"\\), qual o valor de \\(|A|\\)?";
-		
-		resultadoCorreto = ""+dados.a;
-		
-		resolucaoLatex=ResolucaoConjuntos.uniaoA(dados);
-		
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.a;
+		String resolucao = ResolucaoConjuntos.uniaoA(dados);
+		String texto = dados.toString();
 
 		ConfigAB config = new ConfigAB(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image5(1);
+		addParagrafo("Se \\(|A \\cup B| = " + dados.aUb + "\\), qual o valor de \\(|A|\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

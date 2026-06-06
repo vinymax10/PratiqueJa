@@ -2,48 +2,37 @@ package matematica.intermediario.razoestrigonometricas.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 import matematica.intermediario.razoestrigonometricas.dados.DadosBase;
-import modelo.matematica.Conta;
 
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		Dados dados=new DadosBase();
-		String angle="30°";
-		dados.strAngleAltura=angle;
-		dados.strBase="";
-		dados.strAltura="x";
-		dados.altura=rand.nextInt(100);
-		dados.hipotenusa=dados.altura*2;
-		dados.strHipotenusa=dados.hipotenusa+"";
-		
-		pergunta="Qual o valor de x?";
+		Dados dados = new DadosBase();
+		String angle = "30°";
+		dados.strAngleAltura = angle;
+		dados.strBase = "";
+		dados.strAltura = "x";
+		dados.altura = rand.nextInt(100);
+		dados.hipotenusa = dados.altura * 2;
+		dados.strHipotenusa = dados.hipotenusa + "";
 
-		resultadoCorreto = ""+dados.altura;
-		resolucaoLatex = ResolucaoRazoesTrigonometricas.sen30COX(dados.hipotenusa);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.altura;
+		String resolucao = ResolucaoRazoesTrigonometricas.sen30COX(dados.hipotenusa);
+		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		BufferedImage image = config.criarImagem(index);
-
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-
-	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
+		addParagrafo("Qual o valor de x?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

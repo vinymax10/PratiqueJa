@@ -1,46 +1,13 @@
 package matematica.avancado.pg;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class PGNivel3 extends Conta
+public class PGNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public PGNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(9);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Expressao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-
-	}
-
-	public PGNivel3()
-	{
-
-	}
-	
-	public boolean isCorreta()
-	{
-		return respostaAluno.trim().equals(resultadoCorreto) || respostaAluno.trim().equals(resultadoCorreto.replaceAll("°", ""));
-	}
-
-	public static void main(String[] args)
-	{
-//		new Image8(1,true,"anguloInscritoCircunferencia.PNG");
+		int tipo = 1 + rand.nextInt(9);
+		delegar(instanciar(".nivel3package.Expressao" + tipo));
 	}
 }

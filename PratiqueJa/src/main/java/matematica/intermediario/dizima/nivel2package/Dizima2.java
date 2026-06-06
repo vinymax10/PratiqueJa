@@ -1,48 +1,36 @@
 package matematica.intermediario.dizima.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.intermediario.dizima.ResolucaoDizima;
-import modelo.matematica.Conta;
 
-
-public class Dizima2 extends Conta
+public class Dizima2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Dizima2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int inteira = 1 + rand.nextInt(10);
 		int periodica;
 
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 		{
 			do
 				periodica = 10 + rand.nextInt(89);
-			while (periodica % 11 == 0);
+			while(periodica % 11 == 0);
 		}
 		else
 		{
 			do
 				periodica = 100 + rand.nextInt(889);
-			while (periodica % 111 == 0);
+			while(periodica % 111 == 0);
 		}
 
 		String strNaoPeriodica = "";
-
 		String strInteira = String.valueOf(inteira);
 		String strPeriodica = String.valueOf(periodica);
 
-		textLatex = ResolucaoDizima.textLatex(strInteira, strNaoPeriodica, strPeriodica) + " = ";
-
-		resultadoCorreto = ResolucaoDizima.resultadoCorreto(strInteira, strNaoPeriodica, strPeriodica);
-
-		resolucaoLatex = ResolucaoDizima.resolucaoSimples(strInteira, strPeriodica);
+		addParagrafo("Escreva a dízima periódica a seguir na forma de fração:");
+		addParagrafo("\\(" + ResolucaoDizima.textLatex(strInteira, strNaoPeriodica, strPeriodica) + " = \\,?\\)");
+		gerarAlternativas(ResolucaoDizima.resultadoCorreto(strInteira, strNaoPeriodica, strPeriodica));
+		setResolucao("\\(" + ResolucaoDizima.resolucaoSimples(strInteira, strPeriodica) + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Dizima2(1);
-	}
-
 }

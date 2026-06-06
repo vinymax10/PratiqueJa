@@ -2,42 +2,30 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrapezio2;
-import modelo.matematica.Conta;
-
-public class Image6 extends Conta
-{
-	private static final long serialVersionUID = 1L;
 
 //	trapézio
-	public Image6(int index)
+public class Image6 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int h = 2 * (2 + rand.nextInt(8));
+		int b = (int) (((double) h) * 1.2);
+		int B = (int) (((double) h) * 1.8);
 
-		int h = 2*(2 + rand.nextInt(8));
-		int b = (int)(((double)h)*1.2);
-		int B = (int)(((double)h)*1.8);
+		String resultadoCorreto = "" + (((B + b) * h) / 2);
+		String resolucao = ResolucaoAreaPerimetro.areaTrapezio(h, B, b);
 
-		pergunta="Qual a área do trapézio?";
+		Config config = new ConfigTrapezio2(B + "", b + "", h + "", "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		textLatex = "Image6" + h + "-" + b + "-" + B;
-		resultadoCorreto = "" + (((B + b) * h) / 2);
-
-		resolucaoLatex=ResolucaoAreaPerimetro.areaTrapezio(h, B, b);
-
-		Config config=new ConfigTrapezio2(B+"", b+"", h+"","",true);
-		
-		BufferedImage image = config.criarImagem(index);
-
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image6(1);
+		addParagrafo("Qual a área do trapézio?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

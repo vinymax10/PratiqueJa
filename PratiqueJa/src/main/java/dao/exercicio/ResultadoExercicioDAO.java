@@ -75,9 +75,6 @@ public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 		if(filtro.getNivel() != null)
 			predicates.add(builder.equal(from.get("exercicioPadrao").get("nivel"), filtro.getNivel()));
 
-		if(filtro.getTipoExercicio() != null)
-			predicates.add(builder.equal(from.get("exercicioPadrao").get("tipoExercicio"), filtro.getTipoExercicio()));
-
 		if(filtro.getNomeEnunciadoDescricao() != null && !filtro.getNomeEnunciadoDescricao().isBlank())
 		{
 			String like = "%" + filtro.getNomeEnunciadoDescricao() + "%";

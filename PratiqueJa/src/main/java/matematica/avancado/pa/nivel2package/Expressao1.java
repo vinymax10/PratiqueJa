@@ -1,36 +1,25 @@
 package matematica.avancado.pa.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.Racional;
 import matematica.avancado.pa.ResolucaoPA;
-import modelo.matematica.Conta;
 
-public class Expressao1 extends Conta
+public class Expressao1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int n = 4 + rand.nextInt(20);
-		
-		Racional a1=new Racional(1 + rand.nextInt(20));
-		Racional r=new Racional(1 + rand.nextInt(20));
+
+		Racional a1 = new Racional(1 + rand.nextInt(20));
+		Racional r = new Racional(1 + rand.nextInt(20));
 		Racional an = ResolucaoPA.a(a1, r, n);
-		
-		textLatex = "" + a1.showDfrac() + 
-		", \\ldots, "+an.showDfrac()+"";
 
-		pergunta="Qual é a soma da PA que possui "+n+" termos?";
-		
-		resultadoCorreto = "" + ResolucaoPA.soma(a1, an, n).toString();
-		
-		resolucaoLatex=ResolucaoPA.resolucaoSoma(a1, r, an, n);
-		
-	}
+		String enunciado = "" + a1.showDfrac() + ", \\ldots, " + an.showDfrac() + "";
 
-	public static void main(String[] args)
-	{
-		new Expressao1(1);
+		addParagrafo("Qual é a soma da PA que possui " + n + " termos?");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativas(ResolucaoPA.soma(a1, an, n).toString());
+		setResolucao("\\(" + ResolucaoPA.resolucaoSoma(a1, r, an, n) + "\\)");
 	}
 }

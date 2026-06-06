@@ -2,46 +2,35 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrapezio;
-import modelo.matematica.Conta;
 
-
-public class Image33 extends Conta
+public class Image33 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image33(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		int a = 2*(5 + rand.nextInt(15));
-		int b = (int)(((double)a)*0.65);
-		int l = (int)(((double)a)*0.7);
-		
-		String perimetro = "" + (a+b+l+l);
-		
-		textLatex = "Image33" + l + "-" + b + "-" + a;
+		int a = 2 * (5 + rand.nextInt(15));
+		int b = (int) (((double) a) * 0.65);
+		int l = (int) (((double) a) * 0.7);
 
-		resultadoCorreto = "" + b;
-		pergunta="Se o perímetro do trapézio é \\("+perimetro+"\\), qual o valor de \\(b\\)?";
+		String perimetro = "" + (a + b + l + l);
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaPerimetroTrapezio()+"\\\\";
-		resolucaoLatex+="a="+a+",\\quad c="+l+",\\quad d="+l+"\\\\";
-		resolucaoLatex+=a+"+b+"+l+"+"+l+"="+perimetro+"\\\\";
-		resolucaoLatex+="b="+perimetro+"-"+a+"-"+l+"-"+l+"="+b;
-		
-		Config config = new ConfigTrapezio(""+a, "b", "",l+"",l+"",false);
-		BufferedImage image = config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		String resultadoCorreto = "" + b;
 
-	public static void main(String[] args)
-	{
-		new Image33(1);
+		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTrapezio() + "\\\\";
+		resolucao += "a=" + a + ",\\quad c=" + l + ",\\quad d=" + l + "\\\\";
+		resolucao += a + "+b+" + l + "+" + l + "=" + perimetro + "\\\\";
+		resolucao += "b=" + perimetro + "-" + a + "-" + l + "-" + l + "=" + b;
+
+		Config config = new ConfigTrapezio("" + a, "b", "", l + "", l + "", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se o perímetro do trapézio é \\(" + perimetro + "\\), qual o valor de \\(b\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -2,19 +2,14 @@ package matematica.basico.somaangulostriangulo.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image25 extends Conta
+public class Image25 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image25(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 30 + rand.nextInt(10);
 		int d = 30 + rand.nextInt(10);
 		int b = 90 - a;
@@ -23,43 +18,31 @@ public class Image25 extends Conta
 		int e = b - d;
 		int f = 90 - e - a;
 
-//		25- Retangulo C, e, f | g, d
 		ConfigRetangulo config = new ConfigRetangulo(a, b, c, d, e, f, g);
 		config.c.mostrar();
 		config.e.mostrar();
 		config.f.mostrar();
 		config.c.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + c + "°";
-		resolucaoLatex = resolucao(a, b, c, d, e, f, g);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + c + "°";
+		String resolucao = resolucao(a, b, c, d, e, f, g);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		config.g.mostrar();
-		config.g.nome = "y";
-
-		config.d.mostrar();
-		config.d.nome = "z";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
-	public String resolucao(int a, int b, int c, int d, int e, int f, int g)
+	private String resolucao(int a, int b, int c, int d, int e, int f, int g)
 	{
 		String resolucaoLatex = ResolucaoSAT2.complemento180("y", f, 90);
 		resolucaoLatex += ResolucaoSAT2.complemento90("z", g);
 		resolucaoLatex += ResolucaoSAT2.complemento180("x", d, e);
 
 		return resolucaoLatex;
-	}
-
-	public static void main(String[] args)
-	{
-		new Image25(1);
 	}
 }

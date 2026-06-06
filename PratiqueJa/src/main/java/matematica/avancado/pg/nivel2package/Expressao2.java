@@ -1,38 +1,25 @@
 package matematica.avancado.pg.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.Racional;
 import matematica.avancado.pg.ResolucaoPG;
-import modelo.matematica.Conta;
 
-public class Expressao2 extends Conta
+public class Expressao2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		Racional a1 = new Racional(1 + rand.nextInt(10));
+		Racional q = new Racional(2 + rand.nextInt(6));
 
-		Racional a1=new Racional(1 + rand.nextInt(10));
-		
-		Racional q=new Racional(2 + rand.nextInt(6));
-		
-		double nMaximo=(Math.log(50000/a1.numerador)/Math.log(q.numerador))+1;
-		
-		int n = 4 + rand.nextInt(Math.min(Math.max(1,(int)(nMaximo-4)),20));
-		
-		textLatex = "" + a1.showDfrac() + "+"+ResolucaoPG.a(a1, q, 2).showDfrac()+
-		"+ \\ldots ="+ResolucaoPG.soma(a1, q, n).showDfrac();
+		double nMaximo = (Math.log(50000 / a1.numerador) / Math.log(q.numerador)) + 1;
+		int n = 4 + rand.nextInt(Math.min(Math.max(1, (int) (nMaximo - 4)), 20));
 
-		pergunta="Quantos termos tem a PG?";
-		
-		resultadoCorreto = "" + n;
-		
-		resolucaoLatex=ResolucaoPG.resolucaoSoma2(a1, q,  n);
-		
-	}
+		String enunciado = "" + a1.showDfrac() + "+" + ResolucaoPG.a(a1, q, 2).showDfrac() + "+ \\ldots =" + ResolucaoPG.soma(a1, q, n).showDfrac();
 
-	public static void main(String[] args)
-	{
-		new Expressao2(1);
+		addParagrafo("Quantos termos tem a PG?");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativas("" + n);
+		setResolucao("\\(" + ResolucaoPG.resolucaoSoma2(a1, q, n) + "\\)");
 	}
 }

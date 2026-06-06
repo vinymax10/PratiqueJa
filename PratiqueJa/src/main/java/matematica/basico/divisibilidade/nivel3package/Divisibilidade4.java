@@ -1,38 +1,19 @@
 package matematica.basico.divisibilidade.nivel3package;
 
-
-
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.basico.divisibilidade.ResolucaoDivisores;
-import modelo.matematica.Conta;
 
-@Entity
-public class Divisibilidade4 extends Conta
+public class Divisibilidade4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Divisibilidade4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		ResolucaoDivisores resolucaoDivisores = new ResolucaoDivisores();
 
-		ResolucaoDivisores resolucaoDivisores=new ResolucaoDivisores();
+		int number = NumerosDivisibilidade.getNumero();
 
-		int number=NumerosDivisibilidade.getNumero();
-		
-		pergunta="Qual é a soma dos divisores naturais"
-				+ " do número "+number+"?";
-
-		resultadoCorreto = "" +resolucaoDivisores.somaDividoresResultado(number);
-		resolucaoLatex=resolucaoDivisores.somaDividores(number);
-	}
-
-	public Divisibilidade4()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new Divisibilidade4(1);
+		addParagrafo("Qual é a soma dos divisores naturais do número " + number + "?");
+		gerarAlternativas("" + resolucaoDivisores.somaDividoresResultado(number));
+		setResolucao("\\(" + resolucaoDivisores.somaDividores(number) + "\\)");
 	}
 }

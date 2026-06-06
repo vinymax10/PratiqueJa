@@ -2,47 +2,35 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
-import modelo.matematica.Conta;
 
 //	triangulo isosceles
-public class Image15 extends Conta
+public class Image15 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image15(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (3 + rand.nextInt(13));
+		int a = (int) (((double) b) * 0.7);// altura
 
-		int b = 2*(3 + rand.nextInt(13));
-		int a = (int)(((double)b)*0.7);//altura
-		
-		int meiaBase=b/2;
-		
-		textLatex = "Image15" + b+" - "+a+" - "+meiaBase;
+		int meiaBase = b / 2;
 
-		pergunta="Qual o perímetro do triângulo?";
+		String resultadoCorreto = "" + ((2 * a) + b);
 
-		resultadoCorreto = "" + ((2*a)+b);
+		String resolucao = "";
+		resolucao += ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\\\";
+		resolucao += "a=" + a + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\\\";
+		resolucao += "P=2 \\cdot " + a + "+" + b + "=" + (2 * a) + "+" + b + "=" + ((2 * a) + b);
 
-		resolucaoLatex="";		
-		resolucaoLatex+=ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles()+"\\\\";
-		resolucaoLatex+="a="+a+", \\quad b="+meiaBase+" \\cdot 2="+b+"\\\\";
-		resolucaoLatex+="P=2 \\cdot "+a+"+"+b+"="+(2*a)+"+"+b+"="+((2*a)+b);
-		
-		Config config=new ConfigTrianguloIsosceles(""," ",""+meiaBase,""+a,false);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		Config config = new ConfigTrianguloIsosceles("", " ", "" + meiaBase, "" + a, false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Qual o perímetro do triângulo?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image15(1);
-	}
-
 }

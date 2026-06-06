@@ -3,21 +3,21 @@ package bean.exercicio;
 import java.util.EnumSet;
 
 import bean.FilhoBean;
-import dao.questao.AlternativaDAO;
+import dao.matematica.AlternativaExercicioDAO;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.exercicio.Exercicio;
-import modelo.questao.Alternativa;
+import modelo.matematica.AlternativaExercicio;
+import modelo.matematica.Exercicio;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class ExercicioAlternativaBean extends FilhoBean<Alternativa, AlternativaDAO>
+public class ExercicioAlternativaBean extends FilhoBean<AlternativaExercicio, AlternativaExercicioDAO>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -26,13 +26,13 @@ public class ExercicioAlternativaBean extends FilhoBean<Alternativa, Alternativa
 
 	public ExercicioAlternativaBean()
 	{
-		super(Alternativa.class, "Alternativa");
+		super(AlternativaExercicio.class, "Alternativa");
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
 	}
 
 	public String cadastrar()
 	{
-		entidade = new Alternativa();
+		entidade = new AlternativaExercicio();
 		entidade.setExercicio(exercicioBean.getEntidade());
 		cadastro = true;
 		return "";

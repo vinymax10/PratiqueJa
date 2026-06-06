@@ -1,21 +1,17 @@
 package matematica.basico.subtracaonatural;
 
-
-
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 import matematica.basico.resolucaonatural.ResolucaoNatural;
-import modelo.matematica.Conta;
 
-@Entity
-public class SubtracaoNaturalNivel2 extends Conta
+/**
+ * Subtração de naturais (nível 2): conta armada (\begin{array}) no enunciado.
+ */
+public class SubtracaoNaturalNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public SubtracaoNaturalNivel2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
-		int a,b;
+		int a, b;
 		if(rand.nextBoolean())
 		{
 			a = 10 + rand.nextInt(90);
@@ -26,8 +22,6 @@ public class SubtracaoNaturalNivel2 extends Conta
 			a = 10 + rand.nextInt(90);
 			b = 10 + rand.nextInt(90);
 		}
-
-
 		if(a < b)
 		{
 			int c = a;
@@ -35,19 +29,9 @@ public class SubtracaoNaturalNivel2 extends Conta
 			b = c;
 		}
 
-		textLatex=ResolucaoNatural.subtracao(a,b,false);
-
-		resultadoCorreto = "" + (a-b);
-		
-		resolucaoLatex=ResolucaoNatural.subtracao(a,b,true);
+		addParagrafo("Calcule a seguinte subtração:");
+		addParagrafo("\\(" + ResolucaoNatural.subtracao(a, b, false) + "\\)");
+		gerarAlternativasInteiras(a - b);
+		setResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
 	}
-
-	public SubtracaoNaturalNivel2()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-	}
-
 }

@@ -1,71 +1,50 @@
 package matematica.avancado.matrizes.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.matrizes.AuxMatriz;
-import modelo.matematica.Conta;
 
-
-public class Matrizes1 extends Conta
+public class Matrizes1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-//	Adição de matrizes
-	public Matrizes1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		int lin=2+rand.nextInt(2);
-		int col=2+rand.nextInt(2);
+		int lin = 2 + rand.nextInt(2);
+		int col = 2 + rand.nextInt(2);
 
-		int [][]a=AuxMatriz.contruirMatriz(lin, col, 50);
-		int [][]b=AuxMatriz.contruirMatriz(lin, col, 50);
-		
-		pergunta="Se \\(A+B=C\\), qual a soma dos elementos de \\(C\\)?";
-		
-		int c[][]=new int [lin][col];
+		int[][] a = AuxMatriz.contruirMatriz(lin, col, 50);
+		int[][] b = AuxMatriz.contruirMatriz(lin, col, 50);
+
+		int c[][] = new int[lin][col];
+		for(int i = 0; i < lin; i++)
+			for(int j = 0; j < col; j++)
+				c[i][j] = a[i][j] + b[i][j];
+
+		String resultadoCorreto = AuxMatriz.soma(c) + "";
+
+		String resolucao = "C=\\begin{bmatrix}";
 		for(int i = 0; i < lin; i++)
 		{
 			for(int j = 0; j < col; j++)
 			{
-				c[i][j]=a[i][j]+b[i][j];
-			}
-		}
-		
-		resultadoCorreto = AuxMatriz.soma(c)+"";
-		
-		resolucaoLatex="C=\\begin{bmatrix}";
-		
-		for(int i = 0; i < lin; i++)
-		{
-			for(int j = 0; j < col; j++)
-			{
-				if(b[i][j]>=0)
-					resolucaoLatex+=a[i][j]+"+"+b[i][j];
+				if(b[i][j] >= 0)
+					resolucao += a[i][j] + "+" + b[i][j];
 				else
-					resolucaoLatex+=a[i][j]+""+b[i][j];
+					resolucao += a[i][j] + "" + b[i][j];
 
-				if(j<(col-1))
-					resolucaoLatex+="&";
+				if(j < (col - 1))
+					resolucao += "&";
 			}
-			resolucaoLatex+="\\\\";
+			resolucao += "\\\\";
 		}
-		resolucaoLatex+="\\end{bmatrix}"+"\\\\ \\\\";
-		resolucaoLatex+="C="+AuxMatriz.matrizStr(c)+"\\\\ \\\\";
-		resolucaoLatex+=AuxMatriz.somaStr(c);
+		resolucao += "\\end{bmatrix}" + "\\\\ \\\\";
+		resolucao += "C=" + AuxMatriz.matrizStr(c) + "\\\\ \\\\";
+		resolucao += AuxMatriz.somaStr(c);
 
-		if(lin==3)
-			sizeFontTextLatex="\\scriptsize";
-		
-		textLatex="";
-		textLatex+="A="+AuxMatriz.matrizStr(a);
-		textLatex+=",~B="+AuxMatriz.matrizStr(b);
-		
+		String texto = "A=" + AuxMatriz.matrizStr(a) + ",~B=" + AuxMatriz.matrizStr(b);
+
+		addParagrafo("Se \\(A+B=C\\), qual a soma dos elementos de \\(C\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-//		for(int i = 0; i < 100; i++)
-//		{
-			new Matrizes1(1);
-//		}
-	}
-
 }

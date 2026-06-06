@@ -2,38 +2,27 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigCircunferencia;
-import modelo.matematica.Conta;
 
-//	Quadrado
-public class Image8 extends Conta
+//	Círculo
+public class Image8 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image8(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int r = (3 + rand.nextInt(20));
 
-		pergunta="Se a área do círculo é \\(A=x\\pi\\), qual o valor de \\(x\\)?";
-		textLatex = "Image8" + r;
-		resultadoCorreto = "" + (r * r);
+		String resultadoCorreto = "" + (r * r);
+		String resolucao = ResolucaoAreaPerimetro.areaCirculo(r);
 
-		resolucaoLatex=ResolucaoAreaPerimetro.areaCirculo(r);
+		ConfigCircunferencia config = new ConfigCircunferencia("" + r, true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		ConfigCircunferencia config=new ConfigCircunferencia(""+r,true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		addParagrafo("Se a área do círculo é \\(A=x\\pi\\), qual o valor de \\(x\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image8(1);
-	}
-
 }

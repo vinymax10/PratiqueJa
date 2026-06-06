@@ -2,19 +2,14 @@ package matematica.basico.somaangulostriangulo.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
-import modelo.matematica.Conta;
 
-
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 25 + rand.nextInt(30);
 		int x = 1 + rand.nextInt(20);
 		int c = 1 + rand.nextInt(20);
@@ -24,25 +19,21 @@ public class Image1 extends Conta
 		MyExpression expressao = new MyExpression(c + "x+" + d);
 		String str1 = expressao.imprimir();
 
-//		1- Triangulo4 b, C | 
 		ConfigTriangulo4 config = new ConfigTriangulo4(a, b, a);
 		config.b.mostrar();
 		config.c.mostrar();
 		config.c.nome = str1;
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + x + "°";
-		MyExpression resolucao = new MyExpression(str1 + "+" + str1 + "+" + b + "=180");
-		resolucaoLatex = resolucao.resolverLatex();
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + x + "°";
+		String resolucao = new MyExpression(str1 + "+" + str1 + "+" + b + "=180").resolverLatex();
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

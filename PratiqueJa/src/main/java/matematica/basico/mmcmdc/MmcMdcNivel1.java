@@ -1,41 +1,13 @@
 package matematica.basico.mmcmdc;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class MmcMdcNivel1 extends Conta
+public class MmcMdcNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public MmcMdcNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(1);
-			clone(
-			(Conta) Class.forName( this.getClass().getPackage().getName()+ ".nivel1package.MmcMdc" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public MmcMdcNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new MmcMdcNivel1(1);
+		int tipo = 1 + rand.nextInt(1);
+		delegar(instanciar(".nivel1package.MmcMdc" + tipo));
 	}
 }

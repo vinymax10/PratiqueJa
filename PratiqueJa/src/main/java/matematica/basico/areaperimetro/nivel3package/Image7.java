@@ -2,45 +2,33 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigRetangulo;
-import modelo.matematica.Conta;
 
-
-public class Image7 extends Conta
+public class Image7 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image7(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (3 + rand.nextInt(12));
+		int h = (int) (((double) b) * 0.7);
 
-		int b = 2*(3 + rand.nextInt(12));
-		int h = (int)(((double)b)*0.7);
-		
-		int area=b * h;
-		
-		resultadoCorreto = "" + h;
-		
-		textLatex = "Image7" + b + "-" + h;
-		
-		pergunta="Se a área do retângulo é \\("+area+"\\), qual o valor de \\(h\\)?";
+		int area = b * h;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaAreaRetangulo()+"\\\\";
-		resolucaoLatex+="b="+b+"\\\\";
-		resolucaoLatex+=b+"h="+area+"\\\\";
-		resolucaoLatex+="h=\\dfrac{"+area+"}{"+b+"}="+h+"\\\\";
-		
-		ConfigRetangulo config=new ConfigRetangulo(""+b,"h",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		String resultadoCorreto = "" + h;
 
-	public static void main(String[] args)
-	{
-		new Image7(1);
+		String resolucao = ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
+		resolucao += "b=" + b + "\\\\";
+		resolucao += b + "h=" + area + "\\\\";
+		resolucao += "h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\\\";
+
+		ConfigRetangulo config = new ConfigRetangulo("" + b, "h", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se a área do retângulo é \\(" + area + "\\), qual o valor de \\(h\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

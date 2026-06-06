@@ -1,27 +1,12 @@
 package matematica.intermediario.dizima;
 
+import matematica.GeradorExercicio;
 
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-import matematica.intermediario.dizima.nivel3package.Dizima;
-
-@Entity
-public class DizimaNivel3 extends Conta
+public class DizimaNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public DizimaNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		clone(new Dizima(index));
-
-	}
-
-	public DizimaNivel3()
-	{
+		delegar(instanciar(".nivel3package.Dizima"));
 	}
 }

@@ -1,42 +1,17 @@
 package matematica.avancado.probabilidade.nivel2package;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-public class Probabilidade2 extends Conta
+public class Probabilidade2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Probabilidade2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		ProblemaProbabilidadeUniao problema = TextoProbabilidadeUniao.getProblemaProporcao();
 		problema.gerarValores();
-		pergunta = problema.getPergunta();
 
-		resultadoCorreto = "" + problema.resultado().toString();
-
-		resolucaoLatex = problema.resolucao();
+		addParagrafo(problema.getPergunta());
+		gerarAlternativas("" + problema.resultado());
+		setResolucao("\\(" + problema.resolucao() + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-        try
-		{
-			System.setOut(new PrintStream(System.out, true, "UTF-8"));
-		}
-		catch(UnsupportedEncodingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        for(int i = 0; i < 50; i++)
-		{
-        	new Probabilidade2(1);
-		}
-	}
-
 }

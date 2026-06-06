@@ -32,8 +32,4 @@ public class DadosAltura extends Dados
 		+ (strBase != null ? "strAltura=" + strBase : "");
 	}
 	
-    public static void main(String[] args) {
-    }
-
-
 }

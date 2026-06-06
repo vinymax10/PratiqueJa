@@ -22,8 +22,8 @@
 				<div class="w-full">
 					<span class="ui-input-icon-left" style="width:100%">
 						<i class="pi pi-search" />
-						<p:inputText id="globalFilter" value="#{exercicioBean.filtro.nome}"
-						placeholder="Nome / Enunciado / Descrição" styleClass="w-full" >
+						<p:inputText id="globalFilter" value="#{exercicioBean.filtro.texto}"
+						placeholder="Enunciado" styleClass="w-full" >
 							<p:ajax event="keyup" delay="500" update="tabela" listener="#{exercicioBean.filtrar}" />
 						</p:inputText>
 					</span>
@@ -44,7 +44,7 @@
 
 				<p:button value="Adicionar" icon="pi pi-plus"
 				styleClass="ui-button-raised ui-button-success"
-				href="/administracao/conteudo/exercicio/form.xhtml?cadastro=true" />
+				href="/administracao/conteudo/exercicio/cadastro.xhtml" />
 
 			</div>
 		</div>
@@ -59,48 +59,37 @@
 			<p:ajax event="rowSelect" update="@form" listener="#{exercicioBean.onSelected}"
 			resetValues="true"/>
 
-			<p:column headerText="Usuário" responsivePriority="1">
-				<h:outputText value="#{entidade.usuario.nome}" />
-			</p:column>
-
 			<p:column headerText="Assunto" responsivePriority="1">
-				<h:outputText value="#{entidade.exercicioPadrao.assunto.nome}" />
+				<h:outputText value="#{entidade.assunto.modulo.nome} - #{entidade.assunto.nome}"
+				rendered="#{not empty entidade.assunto}" />
+				<h:outputText value="—" rendered="#{empty entidade.assunto}" />
 			</p:column>
 
 			<p:column headerText="Nível" responsivePriority="2">
-				<h:outputText value="#{entidade.exercicioPadrao.nivel.nome}" />
+				<h:outputText value="#{entidade.nivel.nome}" />
 			</p:column>
 
-			<p:column headerText="Prazo" responsivePriority="3">
-				<h:outputText value="#{entidade.prazo}">
-					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
-				</h:outputText>
+			<p:column headerText="Enunciado" responsivePriority="1">
+				<h:outputText value="#{entidade.enunciadoResumo}"
+				style="display:block;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" />
 			</p:column>
 
-			<p:column headerText="Realização" responsivePriority="3">
-				<h:outputText value="#{entidade.realizacao}" rendered="#{entidade.realizado}">
-					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
-				</h:outputText>
+			<p:column headerText="Alternativas" responsivePriority="3" style="text-align:center">
+				<h:outputText value="#{entidade.alternativas.size()}" />
 			</p:column>
 
-			<p:column headerText="Nota" responsivePriority="2">
-				<h:outputText value="#{entidade.nota}" rendered="#{entidade.realizado}">
-					<f:convertNumber pattern="#,##0.00" />
-				</h:outputText>
+			<p:column headerText="Global" responsivePriority="2">
+				<h:outputText value="#{entidade.global}" converter="simNaoConverter"/>
 			</p:column>
 
-			<p:column headerText="Realizado" responsivePriority="4">
-				<h:outputText value="#{entidade.realizado}" converter="simNaoConverter"/>
-			</p:column>
-			
-			<p:column headerText="Visializar" responsivePriority="3">
-							
-				<p:button styleClass="ui-button-raised ui-button-flat ui-button-success" value="Visializar"
-				icon="pi pi-caret-right" href="/administracao/conteudo/exercicio/verExercicio.xhtml?id=#{entidade.id}" 
-				update="@form, :growl" 
+			<p:column headerText="Visualizar" responsivePriority="3">
+
+				<p:button styleClass="ui-button-raised ui-button-flat ui-button-success" value="Visualizar"
+				icon="pi pi-caret-right" href="/administracao/conteudo/exercicio/verExercicio.xhtml?id=#{entidade.id}"
+				update="@form, :growl"
 				oncomplete="reloadMathJax();" style="width: auto" >
 				</p:button>
-				
+
 			</p:column>
 
 		</p:dataTable>

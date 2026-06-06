@@ -1,30 +1,19 @@
 package matematica.basico.multiplicacaonatural;
 
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-@Entity
-public class MultiplicacaoNaturalNivel1 extends Conta
+public class MultiplicacaoNaturalNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public MultiplicacaoNaturalNivel1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 1 + rand.nextInt(10);
 		int b = 1 + rand.nextInt(10);
+		int correto = a * b;
 
-		textLatex = a + "\\times" + b + "=";
-
-		resultadoCorreto = "" + (a * b);
-
-		resolucaoLatex = a + "\\times" + b + "=" + (a * b);
-
-	}
-
-	public MultiplicacaoNaturalNivel1()
-	{
+		addParagrafo("Calcule o valor da seguinte multiplicação:");
+		addParagrafo("\\(" + a + " \\times " + b + " = \\,?\\)");
+		gerarAlternativasInteiras(correto);
+		setResolucao("\\(" + a + " \\times " + b + " = " + correto + "\\)");
 	}
 }

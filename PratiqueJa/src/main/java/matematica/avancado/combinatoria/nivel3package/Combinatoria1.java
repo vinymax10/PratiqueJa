@@ -1,35 +1,17 @@
 package matematica.avancado.combinatoria.nivel3package;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-
-public class Combinatoria1 extends Conta
+public class Combinatoria1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Combinatoria1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
+		ProblemaPermutacaoRepeticao problema = TextoPermutacaoRepeticao.getProblema();
+		problema.gerarValores();
 
-		ProblemaPermutacaoRepeticao problema=TextoPermutacaoRepeticao.getProblema();
-		problema.gerarValores();	
-		pergunta=problema.getPergunta();
-		
-		resultadoCorreto = "" + problema.resultado();
-		
-		resolucaoLatex = problema.resolucao();
+		addParagrafo(problema.getPergunta());
+		gerarAlternativas("" + problema.resultado());
+		setResolucao("\\(" + problema.resolucao() + "\\)");
 	}
-
-	public static void main(String[] args) throws UnsupportedEncodingException
-	{
-//		for(int i = 0; i < 100; i++)
-//		{
-		System.setOut(new PrintStream(System.out, true, "UTF-8"));
-			new Combinatoria1(1);
-//		}
-	}
-
 }

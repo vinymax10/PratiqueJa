@@ -2,26 +2,21 @@ package matematica.basico.somaangulostriangulo.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
-import modelo.matematica.Conta;
 
-
-public class Image7 extends Conta
+public class Image7 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image7(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 50 + rand.nextInt(30);
 		int b = 180 - (2 * a);
 		int x = 1 + rand.nextInt(20);
 		int c = 1 + rand.nextInt(20);
 		int e = 1 + rand.nextInt(20);
 
-		while (e == c)
+		while(e == c)
 			e = 1 + rand.nextInt(20);
 
 		int d = 180 - a - (c * x);
@@ -29,34 +24,22 @@ public class Image7 extends Conta
 		MyExpression expressao = new MyExpression(c + "x+" + d);
 		String strD = expressao.imprimir();
 
-//		7- Triangulo6 a, D | 
 		ConfigTriangulo6 config = new ConfigTriangulo6(a, b, a, 180 - a, 180 - a);
 		config.d.mostrar();
 		config.a.mostrar();
 		config.d.nome = strD;
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + x + "°";
-		MyExpression resolucao = new MyExpression("y=" + a);
-		resolucaoLatex = resolucao.resolverLatex();
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + x + "°";
+		String resolucao = new MyExpression("y=" + a).resolverLatex();
+		resolucao += "\\\\" + new MyExpression(a + "+" + strD + "=180").resolverLatex();
 
-		resolucao = new MyExpression(a + "+" + strD + "=180");
-		resolucaoLatex += "\\\\" + resolucao.resolverLatex();
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
-
-		config.c.mostrar();
-		config.c.nome = "y";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image7(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

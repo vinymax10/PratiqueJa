@@ -1,36 +1,19 @@
 package matematica.basico.divisibilidade.nivel3package;
 
-
-
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.basico.divisibilidade.ResolucaoDivisores;
-import modelo.matematica.Conta;
 
-@Entity
-public class Divisibilidade1 extends Conta
+public class Divisibilidade1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Divisibilidade1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		ResolucaoDivisores resolucaoDivisores=new ResolucaoDivisores();
+		ResolucaoDivisores resolucaoDivisores = new ResolucaoDivisores();
 
-		int number=NumerosDivisibilidade.getNumero();
-		pergunta="Quantos divisores naturais"
-		+ " possui o número "+number+"?";
+		int number = NumerosDivisibilidade.getNumero();
 
-		resultadoCorreto = "" +resolucaoDivisores.numerosDividoresResultado(number);
-		resolucaoLatex=resolucaoDivisores.numerosDividores(number);
-	}
-
-	public Divisibilidade1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new Divisibilidade1(1);
+		addParagrafo("Quantos divisores naturais possui o número " + number + "?");
+		gerarAlternativas("" + resolucaoDivisores.numerosDividoresResultado(number));
+		setResolucao("\\(" + resolucaoDivisores.numerosDividores(number) + "\\)");
 	}
 }

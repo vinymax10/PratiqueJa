@@ -2,42 +2,34 @@ package matematica.basico.somaangulostriangulo.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image5 extends Conta
+public class Image5 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image5(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int b = 50 + rand.nextInt(20);
 		int c = 20 + rand.nextInt(20);
 		int a = 180 - b - c;
 
-//		5- ConfigTriangulo1 a, b, C | 
 		ConfigTriangulo1 config = new ConfigTriangulo1(a, b, c);
 		config.a.mostrar();
 		config.b.mostrar();
 		config.c.mostrar();
 		config.c.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + c + "°";
-		resolucaoLatex = ResolucaoSAT2.complemento180("x", a, b);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + c + "°";
+		String resolucao = ResolucaoSAT2.complemento180("x", a, b);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image5(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

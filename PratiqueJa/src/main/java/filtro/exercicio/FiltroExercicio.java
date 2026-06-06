@@ -3,21 +3,24 @@ package filtro.exercicio;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.exercicio.ExercicioPadrao;
+import modelo.academico.Assunto;
+import modelo.exercicio.Nivel;
 
 @Data
 public class FiltroExercicio implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private ExercicioPadrao exercicioPadrao;
+	private Assunto assunto;
+	private Nivel nivel;
 	private Boolean global;
-	private String enunciado;
+	private String texto;
 
 	public void limpar()
 	{
-		exercicioPadrao = null;
+		assunto = null;
+		nivel = null;
 		global = null;
-		enunciado = null;
+		texto = null;
 	}
 }

@@ -1,42 +1,27 @@
 package matematica.basico.mmcmdc.nivel1package;
 
-
-
 import matematica.MMC;
+import matematica.GeradorExercicio;
 import matematica.basico.mmcmdc.ResolucaoMmcMdc;
-import modelo.matematica.Conta;
 
-public class MmcMdc3 extends Conta
+public class MmcMdc3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public MmcMdc3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 2 + rand.nextInt(29);
 		int b = 2 + rand.nextInt(29);
 		int c = 2 + rand.nextInt(29);
-		
-		while(a==b)
+
+		while(a == b)
 			b = 2 + rand.nextInt(29);
 
-		while(b==c)
+		while(b == c)
 			c = 2 + rand.nextInt(29);
-		
-		textLatex = "\\text{MMC}~ " + a + ", " + b + ", " + c + "=";
 
-		resultadoCorreto = "" + MMC.mmc(a, b, c);
-		
-		resolucaoLatex=ResolucaoMmcMdc.mmc(a, b, c);
-	}
-
-	public MmcMdc3()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new MmcMdc3(1);
+		addParagrafo("Calcule:");
+		addParagrafo("\\(\\text{MMC}~ " + a + ", " + b + ", " + c + "=\\)");
+		gerarAlternativasInteiras((int) MMC.mmc(a, b, c));
+		setResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b, c) + "\\)");
 	}
 }

@@ -2,52 +2,40 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTriangulo;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
 import matematica.basico.areaperimetro.config.ConfigTrianguloRetangulo;
-import modelo.matematica.Conta;
-
 
 //	triângulo
-public class Image4 extends Conta
+public class Image4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (3 + rand.nextInt(13));
+		int h = (int) (((double) b) * 0.6);
 
-		int b = 2*(3 + rand.nextInt(13));
-		int h = (int)(((double)b)*0.6);
-		
-		pergunta="Qual a área do triângulo?";
-		textLatex = "Image4" + b + "-" + h;
+		String resultadoCorreto = "" + ((b * h) / 2);
+		String resolucao = ResolucaoAreaPerimetro.areaTriangulo(b, h);
 
-		resultadoCorreto = "" + ((b * h)/2);
+		Config config = null;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.areaTriangulo(b, h);
-		
-		Config config=null;
-		
-		int num=rand.nextInt(3);
+		int num = rand.nextInt(3);
 		switch(num)
 		{
-			case 0: config=new ConfigTriangulo(""+b,""+h,"","",true);break;
-			case 1: config=new ConfigTrianguloRetangulo(""+b, ""+h,"",true);break;
-			case 2: config=new ConfigTrianguloIsosceles(""+b,""+h,"","",true);break;
+			case 0: config = new ConfigTriangulo("" + b, "" + h, "", "", true); break;
+			case 1: config = new ConfigTrianguloRetangulo("" + b, "" + h, "", true); break;
+			case 2: config = new ConfigTrianguloIsosceles("" + b, "" + h, "", "", true); break;
 		}
 
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image4(1);
+		addParagrafo("Qual a área do triângulo?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

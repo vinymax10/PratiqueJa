@@ -1,23 +1,18 @@
 package matematica.basico.expressaonumerica.nivel1package;
 
-import util.Algebra;
 import matematica.ExpressaoExt;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
+import util.Algebra;
 
-
-public class Expressao1 extends Conta
+public class Expressao1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
 		int num;
-
 		boolean temDiv = false;
 
-//		definindo os nomes e coeficiente
 		int size = 3 + rand.nextInt(3);
 		Racional[] coeficientes = new Racional[size];
 		String nomes[] = new String[size];
@@ -28,7 +23,6 @@ public class Expressao1 extends Conta
 			nomes[i] = "" + (char) (65 + i);
 		}
 
-//		definindo os nomes os operadores
 		String operadoresList[] = { "+", "-", "*", "/" };
 		String operadores[] = new String[size - 1];
 
@@ -48,17 +42,17 @@ public class Expressao1 extends Conta
 			}
 		}
 
-		textLatex = "";
+		String texto = "";
 		String exp = nomes[0];
-		textLatex += "" + coeficientes[0];
+		texto += "" + coeficientes[0];
 
 		for(int i = 0; i < size - 1; i++)
 		{
 			exp += operadores[i] + nomes[i + 1];
-			textLatex += " " + Algebra.converter(operadores[i]) + " " + coeficientes[i + 1];
+			texto += " " + Algebra.converter(operadores[i]) + " " + coeficientes[i + 1];
 		}
 
-		textLatex += "=";
+		texto += "=";
 
 		ExpressaoExt expressao;
 		Racional resultado = null;
@@ -72,13 +66,10 @@ public class Expressao1 extends Conta
 			e.printStackTrace();
 		}
 
-		textLatex = textLatex.replace("(", "\\left(").replace(")", "\\right)");
+		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
 
-		resultadoCorreto = "" + resultado.toString();
-	}
-
-	public static void main(String[] args)
-	{
-		new Expressao1(1);
+		addParagrafo("Calcule o valor da expressão:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + resultado);
 	}
 }

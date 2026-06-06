@@ -2,57 +2,43 @@ package matematica.basico.somaangulostriangulo.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image6 extends Conta
+public class Image6 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image6(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int b = 60 + rand.nextInt(20);
 		int e = 40 + rand.nextInt(20);
 		int d = 90 - e;
 		int c = d;
 		int a = 180 - b - d;
 
-//		6- Trapezio c, D | e
 		ConfigTrapezio config = new ConfigTrapezio(a, b, c, d, e);
 		config.c.mostrar();
 		config.d.mostrar();
 		config.d.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + d + "°";
-		resolucaoLatex = resolucao(a, b, c, d, e);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + d + "°";
+		String resolucao = resolucao(a, b, c, d, e);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		config.e.mostrar();
-		config.e.nome = "y";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
-	public String resolucao(int a, int b, int c, int d, int e)
+	private String resolucao(int a, int b, int c, int d, int e)
 	{
-		resolucaoLatex = ResolucaoSAT2.complemento180("y", c, 90);
-		resolucaoLatex += ResolucaoSAT2.complemento90("x", d);
+		String resolucao = ResolucaoSAT2.complemento180("y", c, 90);
+		resolucao += ResolucaoSAT2.complemento90("x", d);
 
-		return resolucaoLatex;
-	}
-
-	public static void main(String[] args)
-	{
-		new Image6(1);
+		return resolucao;
 	}
 }

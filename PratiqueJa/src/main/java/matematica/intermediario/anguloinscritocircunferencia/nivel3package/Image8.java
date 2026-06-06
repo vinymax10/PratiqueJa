@@ -2,66 +2,49 @@ package matematica.intermediario.anguloinscritocircunferencia.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
 import matematica.intermediario.anguloinscritocircunferencia.config.Config6;
 import matematica.intermediario.anguloinscritocircunferencia.config.DadosConfig6;
-import modelo.matematica.Conta;
 
-
-public class Image8 extends Conta
+public class Image8 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image8(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 55 + rand.nextInt(20);
 		int intAnguloExterno = 10 + rand.nextInt(20);
 		int c = a - intAnguloExterno;
 
 		String lateralEsq = 2 * a + "°";
 		String anguloExterno = intAnguloExterno + "°";
-		String lateralDir = 2 * c + "°";
-		resultadoCorreto = "" + lateralDir;
 
-		textLatex = lateralEsq;
+		String resultadoCorreto = "" + 2 * c + "°";
 
-		resolucaoLatex ="";
-		resolucaoLatex += "a=\\dfrac{"+(2 * a)+"}{2}="+a+"\\\\";
-		
-		MyExpression expressao = new MyExpression(a+"+b=180");
-		resolucaoLatex+=expressao.resolverLatex()+"\\\\";
-		int b=180-a;
-//		resolucaoLatex += "a+b+c=180\\\\";
-		
-		expressao = new MyExpression(intAnguloExterno+"+"+b+"+c=180");
-		resolucaoLatex+=expressao.resolverLatex()+"\\\\";
-		
-		expressao = new MyExpression("x=2*"+c);
-		resolucaoLatex+=expressao.resolverLatex();
-		
+		String resolucao = "";
+		resolucao += "a=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\\\";
+
+		MyExpression expressao = new MyExpression(a + "+b=180");
+		resolucao += expressao.resolverLatex() + "\\\\";
+		int b = 180 - a;
+
+		expressao = new MyExpression(intAnguloExterno + "+" + b + "+c=180");
+		resolucao += expressao.resolverLatex() + "\\\\";
+
+		expressao = new MyExpression("x=2*" + c);
+		resolucao += expressao.resolverLatex();
+
 		DadosConfig6 dados = new DadosConfig6();
 		dados.lateralEsq = lateralEsq;
 		dados.lateralDir = "x";
 		dados.anguloExterno = anguloExterno;
-		
-		Config6 config = new Config6(dados);
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
-		
-		dados.superiorEsq = "a";
-		dados.superiorDir = "b";
-		dados.inferiorEsq = "c";
-		config=new Config6(dados);
-		image=config.criarImagem(index);
-		baosResolucao = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
 
-	public static void main(String[] args)
-	{
-		new Image8(1);
+		Config6 config = new Config6(dados);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

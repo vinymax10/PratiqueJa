@@ -1,18 +1,15 @@
 package matematica.basico.expressaonumerica.nivel3package;
 
-import util.Algebra;
 import matematica.ExpressaoExt;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
+import util.Algebra;
 
-public class Expressao5 extends Conta
+public class Expressao5 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao5(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int size = 5;
 		Racional[] coeficientes = new Racional[size];
 
@@ -25,14 +22,12 @@ public class Expressao5 extends Conta
 
 		exp = "(A" + ope1 + "B)" + ope2 + "((C" + ope3 + "D)" + ope4 + "E)";
 
-//		gerando os coeficientes;
 		for(int i = 0; i < size; i++)
 			coeficientes[i] = new Racional(1 + rand.nextInt(20));
-//		-------------------------		
 
-		textLatex = "(" + coeficientes[0] + ope1 + coeficientes[1] + ")" + ope2 + "\\dfrac{" + coeficientes[2] + ope3 + coeficientes[3] + "}{" + coeficientes[4]
+		String texto = "(" + coeficientes[0] + ope1 + coeficientes[1] + ")" + ope2 + "\\dfrac{" + coeficientes[2] + ope3 + coeficientes[3] + "}{" + coeficientes[4]
 		+ "}";
-		textLatex = textLatex.replace("*", "\\times");
+		texto = texto.replace("*", "\\times");
 
 		ExpressaoExt expressao;
 		Racional resultado = null;
@@ -46,12 +41,8 @@ public class Expressao5 extends Conta
 			e.printStackTrace();
 		}
 
-		resultadoCorreto = "" + resultado.toString();
-	}
-
-	public static void main(String[] args)
-	{
-		for(int i = 0; i < 1000; i++)
-			new Expressao5(1);
+		addParagrafo("Calcule o valor da expressão:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + resultado);
 	}
 }

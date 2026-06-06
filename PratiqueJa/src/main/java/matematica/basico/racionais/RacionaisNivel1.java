@@ -1,43 +1,13 @@
 package matematica.basico.racionais;
 
+import matematica.GeradorExercicio;
 
-
-import java.lang.reflect.InvocationTargetException;
-
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class RacionaisNivel1 extends Conta
+public class RacionaisNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RacionaisNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(2);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Racionais" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		int tipo = 1 + rand.nextInt(2);
+		delegar(instanciar(".nivel1package.Racionais" + tipo));
 	}
-	
-	public RacionaisNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new RacionaisNivel1(1);
-
-	}
-
 }

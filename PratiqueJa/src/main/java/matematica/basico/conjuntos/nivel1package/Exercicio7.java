@@ -1,39 +1,30 @@
 package matematica.basico.conjuntos.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.Conjunto;
-import modelo.matematica.Conta;
 
-
-public class Exercicio7 extends Conta
+public class Exercicio7 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Exercicio7(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		int sizeA=3+rand.nextInt(5);
-		int sizeB=3+rand.nextInt(5);
-		int limit=25;
-		Conjunto a=new Conjunto(sizeA,limit);
-		Conjunto b=new Conjunto(sizeB,limit);
+		int sizeA = 3 + rand.nextInt(5);
+		int sizeB = 3 + rand.nextInt(5);
+		int limit = 25;
+		Conjunto a = new Conjunto(sizeA, limit);
+		Conjunto b = new Conjunto(sizeB, limit);
 		a.contruirInterseccao(b);
-		
-		Conjunto c=a.menos(b);
-		
-		pergunta="Qual o maior elemento de \\(A - B ~\\)?";
-		textLatex="A="+a+"\\newline B="+b;
-		
-		resultadoCorreto = ""+c.maior();
-		
-		resolucaoLatex="A - B = "+c+"\\\\";
-		resolucaoLatex+="\\text{Maior elemento de}~ A - B \\text{ é }"+resultadoCorreto;
-		
-	}
-	
-	public static void main(String[] args)
-	{
-		new Exercicio7(1);
-	}
 
+		Conjunto c = a.menos(b);
+		int correto = c.maior();
+
+		addParagrafo("Qual o maior elemento de \\(A - B\\)?");
+		addParagrafo("\\(A = " + a + "\\)");
+		addParagrafo("\\(B = " + b + "\\)");
+		gerarAlternativasInteiras(correto);
+
+		String resolucao = "\\(A - B = " + c + "\\\\";
+		resolucao += "\\text{Maior elemento de}~ A - B \\text{ é }" + correto + "\\)";
+		setResolucao(resolucao);
+	}
 }

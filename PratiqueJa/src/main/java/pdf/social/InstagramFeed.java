@@ -6,22 +6,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ProcessBuilder.Redirect;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Random;
 
 import util.CorAux;
 import bean.download.Diretorio;
+import matematica.ExercicioFactory;
 import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
+import modelo.matematica.ParagrafoExercicio;
 import modelo.publicacao.ProgramacaoPost;
 
 public class InstagramFeed
 {
 	ExercicioPadrao exercicio;
 	String latex;
-	Conta conta;
+	Exercicio conta;
 	Diretorio diretorio;
 	String alternaticaCorreta;
 	ProgramacaoPost programacaoPost;
@@ -159,41 +162,32 @@ public class InstagramFeed
 		File outputFile;
 		OutputStream outputStream;
 		
-		try
+		int p = 0;
+		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 		{
-			if(conta.getBaos()!=null)
+			if(paragrafo.isTipoImagem())
 			{
-				outputFile = new File(diretorio.getEnderecoImagens()+"conta.png");
-				outputStream = new FileOutputStream(outputFile);
-				conta.getBaos().writeTo(outputStream);
+				try
+				{
+					Blob blob = paragrafo.getImagemFile().getFile();
+					outputFile = new File(diretorio.getEnderecoImagens() + "conta_" + p + ".png");
+					outputStream = new FileOutputStream(outputFile);
+					outputStream.write(blob.getBytes(1, (int) blob.length()));
+					outputStream.close();
+				}
+				catch(IOException | SQLException e)
+				{
+					e.printStackTrace();
+				}
 			}
-			
-			if(conta.getBaosResolucao()!=null)
-			{
-				outputFile = new File(diretorio.getEnderecoImagensResolucao()+"conta.png");
-				outputStream = new FileOutputStream(outputFile);
-				conta.getBaosResolucao().writeTo(outputStream);
-			}
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
+			p++;
 		}
 	}
-	
+
 	private void gerarConta()
 	{
-		Random rand=new Random();
-		int index=rand.nextInt(12);
-		try
-		{
-			conta = (Conta) Class.forName(exercicio.getClasse()).getConstructor(Integer.TYPE).newInstance(index);
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-		| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		int index = new Random().nextInt(12);
+		conta = ExercicioFactory.gerar(exercicio.getClasse(), index);
 	}
 	
 	public void cabecalho()
@@ -321,28 +315,21 @@ public class InstagramFeed
 		+"\\normalsize\r\n";
 //		+"\\large\r\n";
 		
-		String texto="";
-		
-		if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
-			latex+=conta.getPergunta();
-		else
-			latex+=exercicio.getEnunciadoSingular();
-		
+		latex+=exercicio.getEnunciadoSingular();
+
 		latex+="\\vspace{10px} \r\n\r\n";
-		
+
 		addSizeFont();
 
-		if(conta.getBaos()!=null)
+		int p = 0;
+		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 		{
-//			texto+="\\vspace{-10px}\r\n";
-			texto+="\\includegraphics[width="+widthImagem(true)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta.png}\r\n";
+			if(paragrafo.isTipoImagem())
+				latex+="\\includegraphics[width="+widthImagem(true)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta_"+p+".png}\r\n";
+			else if(paragrafo.getTexto()!=null&&!paragrafo.getTexto().isEmpty())
+				latex+=getTexto(paragrafo.getTexto())+" \\newline \r\n";
+			p++;
 		}
-		else if(conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-			texto="$"+conta.getTextLatex()+"$";
-		else
-			texto="";
-		
-		latex+=texto;
 		
 		latex+="\r\n" 
 		
@@ -379,52 +366,49 @@ public class InstagramFeed
 		else
 			latex+="\\fontsize{8}{8}\\selectfont\r\n\r\n";
 			
-		if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
-		{
-			latex+="\\vspace{-10px}\r\n";
-			latex+="\\begin{center}\r\n";
-			latex+=conta.getPergunta()+" \r\n\r\n";
-			latex+="\\end{center}\r\n";
-		}
-//		latex+="\\normalfont\r\n";
 		latex+=getTextoResolucao();
 		
 		latex+="\r\n" 
 		+"\\vfill\r\n";
 	}
 	
-	private String getTextoResolucao() 
+	private String getTextoResolucao()
 	{
 		String texto="";
-		
-		if(conta.getBaosResolucao()!=null)
+
+		boolean temImagem=false;
+		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
+			if(paragrafo.isTipoImagem())
+				temImagem=true;
+
+		if(temImagem)
 		{
 			texto+="\\vspace{-10px}\r\n\r\n";
 			texto+="\\begin{center}\r\n";
-			texto+="\\includegraphics[width="+widthImagem(false)+"]{"+diretorio.getConfigLatex().getImagensResolucao()+"/conta.png}\r\n";
+			int p = 0;
+			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
+			{
+				if(paragrafo.isTipoImagem())
+					texto+="\\includegraphics[width="+widthImagem(false)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta_"+p+".png}\r\n";
+				p++;
+			}
 			texto+="\\end{center}\r\n\r\n";
-		}
-		else if(conta.getBaos()!=null)
-		{	
-			texto+="\\vspace{-10px}\r\n\r\n";
-			texto+="\\begin{center}\r\n";
-			texto+="\\includegraphics[width="+widthImagem(false)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta.png}\r\n";
-			texto+="\\end{center}\r\n\r\n";
-		}
-		else if(exercicio.isMostrarResolucao()
-		&&conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-		{
-			texto+="\\begin{math}\r\n";
-			texto+=conta.getTextLatex()+" \\vspace{5px} \\newline \r\n";
-			texto+="\\end{math}\r\n";
 		}
 		else
 			texto+="\\vspace{10px}\r\n\r\n";
-		
-		texto+="\\begin{math}\r\n";
-		texto+=addSpace(conta.getResolucaoLatex())+"\r\n";
-		texto+="\\end{math}\r\n";
+
+		if(conta.getResolucao()!=null&&!conta.getResolucao().isEmpty())
+			texto+=addSpace(conta.getResolucao())+"\r\n";
+
 		return texto;
+	}
+
+	private String getTexto(String texto)
+	{
+		if(texto != null && !texto.equals(""))
+			return texto.replaceAll("\\$", "\\\\\\$").replaceAll("%", "\\\\%");
+		else
+			return "";
 	}
 	
 	private String addSpace(String texto)

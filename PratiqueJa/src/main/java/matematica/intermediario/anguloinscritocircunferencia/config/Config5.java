@@ -104,21 +104,4 @@ public class Config5 extends Config
 		return image;
 	}
 
-	public static void main(String[] args)
-	{
-//		DadosConfig5 dados = new DadosConfig5();
-//		dados.lateralEsq = "a";
-//		dados.centroEsq = "b";
-//		dados.centroDir = "c";
-//		dados.lateralDir = "d";
-//		dados.superiorDir = "e";
-//		dados.superiorEsq = "f";
-//		dados.superiorCentro = "x";
-//		
-//		Config5 config = new Config5(dados);
-//		BufferedImage image = config.criarImagem(1);
-//
-//		Graphics.salvar(image, true, "areaPoligono.PNG");
-	}
-
 }

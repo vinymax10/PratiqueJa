@@ -2,40 +2,30 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadrado;
-import modelo.matematica.Conta;
 
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int l = 3 + rand.nextInt(20);
 
 		String area = "" + l * l;
-		resultadoCorreto = "" + l;
-		textLatex = "Image1" + l + "";
+		String resultadoCorreto = "" + l;
 
-		pergunta="Se a área do quadrado é \\("+area+"\\), qual o valor de \\(l\\)?";
+		String resolucao = ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
+		resolucao += "l^2=" + area + "\\\\";
+		resolucao += "l=" + "\\sqrt{" + area + "} = " + l + "\\\\";
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaAreaQuadrado()+"\\\\";
-		resolucaoLatex+="l^2="+area+"\\\\";
-		resolucaoLatex+="l="+"\\sqrt{"+area+"} = "+l+"\\\\";
+		ConfigQuadrado config = new ConfigQuadrado("l", "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		ConfigQuadrado config=new ConfigQuadrado("l","",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
+		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(l\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -2,42 +2,31 @@ package matematica.intermediario.anguloinscritocircunferencia.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
 import matematica.intermediario.anguloinscritocircunferencia.config.Config1;
-import modelo.matematica.Conta;
 
-
-public class Image4 extends Conta
+public class Image4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 30 + rand.nextInt(30);
 		int x = a * 2;
 
 		String strA = a + "°";
 
-		resultadoCorreto = "" + x + "°";
+		String resultadoCorreto = "" + x + "°";
 
-		textLatex = strA;
+		MyExpression expressao = new MyExpression("x=" + a + "*2");
+		String resolucao = expressao.resolverLatex();
 
-		MyExpression expressao = new MyExpression("x="+a+"*2");
-		resolucaoLatex = expressao.resolverLatex();
+		Config1 config = new Config1(strA, "", "x");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		Config1 config=new Config1(strA, "", "x" );
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image4(1);
-	}
-
 }

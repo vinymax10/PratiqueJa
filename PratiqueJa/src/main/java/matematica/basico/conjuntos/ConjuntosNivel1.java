@@ -1,41 +1,17 @@
 package matematica.basico.conjuntos;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class ConjuntosNivel1 extends Conta
+/**
+ * Conjuntos (nível 1) — dispatcher: sorteia um tipo e delega para a folha
+ * correspondente em {@code nivel1package}.
+ */
+public class ConjuntosNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ConjuntosNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(12);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Exercicio" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public ConjuntosNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new ConjuntosNivel1(1);
+		int tipo = 1 + rand.nextInt(12);
+		delegar(instanciar(".nivel1package.Exercicio" + tipo));
 	}
 }

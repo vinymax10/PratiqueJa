@@ -1,60 +1,49 @@
 package matematica.avancado.matrizes.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.matrizes.AuxMatriz;
-import modelo.matematica.Conta;
 
-
-public class Matrizes2 extends Conta
+public class Matrizes2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Matrizes2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		int size=2+rand.nextInt(2);
+		int size = 2 + rand.nextInt(2);
 
-		int [][]a=AuxMatriz.contruirMatriz(1, size, 50);
-		int [][]aT=AuxMatriz.contruirTransposta(a);
+		int[][] a = AuxMatriz.contruirMatriz(1, size, 50);
+		int[][] aT = AuxMatriz.contruirTransposta(a);
 
-		pergunta="Qual o resultado de \\(A \\cdot A^T\\)?";
-		
-		resolucaoLatex="";
-		resolucaoLatex+="A \\cdot A^T=";
-		resolucaoLatex+=AuxMatriz.matrizStr(a)+"\\cdot"+AuxMatriz.matrizStr(aT)+"=\\\\";
-		int resultado=0;
+		String resolucao = "";
+		resolucao += "A \\cdot A^T=";
+		resolucao += AuxMatriz.matrizStr(a) + "\\cdot" + AuxMatriz.matrizStr(aT) + "=\\\\";
+		int resultado = 0;
 		for(int i = 0; i < size; i++)
 		{
-			if(a[0][i]>=0)
-				resolucaoLatex+=a[0][i]+"^2";
+			if(a[0][i] >= 0)
+				resolucao += a[0][i] + "^2";
 			else
-				resolucaoLatex+="("+a[0][i]+")^2";
-			if(i<(size-1))
-				resolucaoLatex+="+";
+				resolucao += "(" + a[0][i] + ")^2";
+			if(i < (size - 1))
+				resolucao += "+";
 		}
-		resolucaoLatex+="=";
+		resolucao += "=";
 
 		for(int i = 0; i < size; i++)
 		{
-			resolucaoLatex+=a[0][i]*a[0][i];
-			resultado+=a[0][i]*a[0][i];
-			if(i<(size-1))
-				resolucaoLatex+="+";
+			resolucao += a[0][i] * a[0][i];
+			resultado += a[0][i] * a[0][i];
+			if(i < (size - 1))
+				resolucao += "+";
 		}
-		resolucaoLatex+="="+resultado;
+		resolucao += "=" + resultado;
 
-		resultadoCorreto = resultado+"";
+		String resultadoCorreto = resultado + "";
 
-		textLatex="";
-		textLatex+="A="+AuxMatriz.matrizStr(a);
-		
+		String texto = "A=" + AuxMatriz.matrizStr(a);
+
+		addParagrafo("Qual o resultado de \\(A \\cdot A^T\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-//		for(int i = 0; i < 100; i++)
-//		{
-			new Matrizes2(1);
-//		}
-	}
-
 }

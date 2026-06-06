@@ -803,12 +803,4 @@ public abstract class Resolucao
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		String graph[] = { "a->b", "b->a", "c->d", "d->c"};
-
-		String complementos[] = { "a,c", "c,b", "b,d", "d,a"};
-		
-		ResolucaoExercicio1 resolucaoExercicio = new ResolucaoExercicio1(graph,complementos);
-	}
 }

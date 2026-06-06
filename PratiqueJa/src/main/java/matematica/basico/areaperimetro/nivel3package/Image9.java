@@ -2,42 +2,32 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigRetangulo;
-import modelo.matematica.Conta;
 
-
-public class Image9 extends Conta
+public class Image9 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image9(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int h = 4 + rand.nextInt(16);
 
-		resultadoCorreto = "" + h;
-		int area=h * (2 * h);
-		textLatex = "Image9" + h ;
+		String resultadoCorreto = "" + h;
+		int area = h * (2 * h);
 
-		pergunta="Se a área do retângulo é \\("+area+"\\), qual o valor de \\(h\\)?";
+		String resolucao = ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
+		resolucao += "2h \\cdot h=" + area + "\\\\";
+		resolucao += "2h^2=" + area + "\\\\";
+		resolucao += "h^2=\\dfrac{" + area + "}{" + 2 + "}=" + (h * h) + "\\\\";
+		resolucao += "h=\\sqrt{" + (h * h) + "}=" + h + "\\\\";
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaAreaRetangulo()+"\\\\";
-		resolucaoLatex+="2h \\cdot h="+area+"\\\\";
-		resolucaoLatex+="2h^2="+area+"\\\\";
-		resolucaoLatex+="h^2=\\dfrac{"+area+"}{"+2+"}="+(h*h)+"\\\\";
-		resolucaoLatex+="h=\\sqrt{"+(h*h)+"}="+h+"\\\\";
-		
-		ConfigRetangulo config=new ConfigRetangulo("2h","h",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigRetangulo config = new ConfigRetangulo("2h", "h", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image9(1);
+		addParagrafo("Se a área do retângulo é \\(" + area + "\\), qual o valor de \\(h\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

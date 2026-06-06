@@ -1,47 +1,42 @@
 package matematica.avancado.numeroscomplexos.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.numeroscomplexos.NumeroComplexo;
-import modelo.matematica.Conta;
 
-public class Expressao3 extends Conta
+public class Expressao3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		NumeroComplexo a=NumeroComplexo.contruirFrac(10);
-		NumeroComplexo b=NumeroComplexo.contruirFrac(10);
+		NumeroComplexo a = NumeroComplexo.contruirFrac(10);
+		NumeroComplexo b = NumeroComplexo.contruirFrac(10);
 
-		resolucaoLatex=a.resolucaoMinus(b);
+		String texto = "(" + a + ")-(" + b + ")=";
+		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
 
-		textLatex="("+a+")-("+b+")=";
-		textLatex = textLatex.replace("(", "\\left(").replace(")", "\\right)");
+		String resolucao = a.resolucaoMinus(b);
+		resolucao = resolucao.replace("(", "\\left(").replace(")", "\\right)");
 
-		resolucaoLatex=a.resolucaoMinus(b);
-		resolucaoLatex = resolucaoLatex.replace("(", "\\left(").replace(")", "\\right)");
+		NumeroComplexo resultado = a.minus(b);
 
-		NumeroComplexo resultado=a.minus(b);
-		
-		boolean real=rand.nextBoolean();
+		String pergunta, resultadoCorreto;
+		boolean real = rand.nextBoolean();
 		if(real)
 		{
-			pergunta="Qual a parte real da subtração?";
+			pergunta = "Qual a parte real da subtração?";
 			resultadoCorreto = "" + resultado.real;
-			resolucaoLatex+="\\\\ \\text{Parte real}="+resultado.real.showDfrac();
+			resolucao += "\\\\ \\text{Parte real}=" + resultado.real.showDfrac();
 		}
 		else
 		{
-			pergunta="Qual a parte imaginária da subtração?";
+			pergunta = "Qual a parte imaginária da subtração?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucaoLatex+="\\\\ \\text{Parte imaginária}="+resultado.imaginaria.showDfrac();
+			resolucao += "\\\\ \\text{Parte imaginária}=" + resultado.imaginaria.showDfrac();
 		}
-		
-	}
 
-	public static void main(String[] args)
-	{
-		new Expressao3(1);
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

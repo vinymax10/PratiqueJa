@@ -1,33 +1,25 @@
 package matematica.basico.divisibilidade.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.basico.divisibilidade.ResolucaoDivisibilidade;
-import modelo.matematica.Conta;
 
-public class Divisibilidade2 extends Conta
+public class Divisibilidade2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Divisibilidade2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int ref = 2;
 		int number = 1000 + rand.nextInt(9000);
 
-		resultadoCorretoBol = rand.nextBoolean();
+		boolean correta = rand.nextBoolean();
 		int resto = number % ref;
-		if(resultadoCorretoBol)
+		if(correta)
 			number += (ref - resto);
 		else if(resto == 0)
 			number++;
 
-		pergunta = "" + (number) + " é divisível por " + ref + "?";
-
-		resolucaoLatex = ResolucaoDivisibilidade.resolucao2(resultadoCorretoBol, number);
-
-	}
-
-	public static void main(String[] args)
-	{
-		new Divisibilidade2(1);
+		addParagrafo("" + number + " é divisível por " + ref + "?");
+		gerarAlternativasBoolean(correta);
+		setResolucao("\\(" + ResolucaoDivisibilidade.resolucao2(correta, number) + "\\)");
 	}
 }

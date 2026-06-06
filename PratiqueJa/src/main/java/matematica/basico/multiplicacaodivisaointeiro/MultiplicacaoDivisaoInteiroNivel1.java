@@ -1,52 +1,39 @@
 package matematica.basico.multiplicacaodivisaointeiro;
 
+import matematica.GeradorExercicio;
 
-
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class MultiplicacaoDivisaoInteiroNivel1 extends Conta
+public class MultiplicacaoDivisaoInteiroNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public MultiplicacaoDivisaoInteiroNivel1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 1 + rand.nextInt(10);
 		if(rand.nextBoolean())
-			a*=-1;
-		
+			a *= -1;
+
 		int b = 1 + rand.nextInt(10);
 		if(rand.nextBoolean())
-			b*=-1;
-		
-		boolean divisao=rand.nextBoolean();
-		
+			b *= -1;
+
+		boolean divisao = rand.nextBoolean();
+		int correto;
+		String enunciado, resolucao;
 		if(divisao)
 		{
-			textLatex=""+(a * b)+"\\div "+b+"=";
-			resultadoCorreto = ""+a;
-			resolucaoLatex=ResolucaoMDInteiro.divisao((a * b),b);
+			enunciado = (a * b) + "\\div " + b + " =";
+			correto = a;
+			resolucao = ResolucaoMDInteiro.divisao(a * b, b);
 		}
 		else
 		{
-			textLatex=""+a+"\\times "+b+"=";
-			resultadoCorreto = ""+(a * b);
-			resolucaoLatex=ResolucaoMDInteiro.multiplicacao(a,b);
+			enunciado = a + "\\times " + b + " =";
+			correto = a * b;
+			resolucao = ResolucaoMDInteiro.multiplicacao(a, b);
 		}
-		
-	}
 
-	public MultiplicacaoDivisaoInteiroNivel1()
-	{
+		addParagrafo("Calcule o valor da seguinte expressão:");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativasInteirasComNegativos(correto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new MultiplicacaoDivisaoInteiroNivel1(1);
-	}
-
 }

@@ -1,37 +1,13 @@
 package matematica.intermediario.expressaoalgebrica;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class ExpressaoAlgebricaNivel2 extends Conta
+public class ExpressaoAlgebricaNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ExpressaoAlgebricaNivel2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(6);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Expressao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public ExpressaoAlgebricaNivel2()
-	{
-
+		int tipo = 1 + rand.nextInt(6);
+		delegar(instanciar(".nivel2package.Expressao" + tipo));
 	}
 }

@@ -13,66 +13,33 @@
 					<h4 class="title-card">Filtro</h4>
 
 					<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-						<p:outputLabel for="@next" value="Exercício Padrão"/>
-						<p:selectOneMenu value="#{exercicioBean.filtro.exercicioPadrao}"
+						<p:outputLabel for="@next" value="Assunto"/>
+						<p:selectOneMenu value="#{exercicioBean.filtro.assunto}"
 						converter="generic" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
-							<f:selectItems value="#{exercicioPadraoBean.listaTudo}" var="ep"
-							itemLabel="#{ep.assunto.modulo.nome} - #{ep.assunto.nome} - #{ep.nivel.nome}"
-							itemValue="#{ep}"/>
+							<f:selectItems value="#{assuntoBean.listaAtivas}" var="assunto"
+							itemLabel="#{assunto.modulo.nome} - #{assunto.nome}"
+							itemValue="#{assunto}"/>
+						</p:selectOneMenu>
+					</div>
+
+					<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
+						<p:outputLabel for="@next" value="Nível"/>
+						<p:selectOneMenu value="#{exercicioBean.filtro.nivel}"
+						filter="true" filterMatchMode="contains">
+							<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{nivelBean.opcoes}" var="opcao"
+							itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
 						</p:selectOneMenu>
 					</div>
 
 					<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
-						<p:outputLabel for="@next" value="Realizada"/>
-						<p:selectOneMenu value="#{exercicioBean.filtro.realizada}">
+						<p:outputLabel for="@next" value="Global"/>
+						<p:selectOneMenu value="#{exercicioBean.filtro.global}">
 							<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItem itemLabel="Sim" itemValue="#{true}"/>
 							<f:selectItem itemLabel="Não" itemValue="#{false}"/>
 						</p:selectOneMenu>
-					</div>
-
-					<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:outputLabel for="@next" value="Períodos Comuns"/>
-						<p:selectOneMenu id="preset"
-						                 value="#{exercicioBean.filtro.preset}"
-						                 filter="true" filterMatchMode="contains">
-							<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
-							<f:selectItems value="#{periodoPresetBean.opcoes}" var="opcao"
-							               itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
-							<p:ajax event="change"
-							        listener="#{exercicioBean.filtro.aplicarPreset}"
-							        update="form:periodo"/>
-						</p:selectOneMenu>
-					</div>
-
-					<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:outputLabel for="@next" value="Período de Realização"/>
-						<p:datePicker id="periodo"
-						              value="#{exercicioBean.filtro.periodo}"
-						              selectionMode="range"
-						              placeholder="Período"
-						              locale="pt"
-						              monthNavigator="true"
-						              yearNavigator="select"
-						              readonlyInput="true"
-						              hideOnRangeSelection="true">
-							<p:ajax event="change"
-							        listener="#{exercicioBean.filtro.resetPreset}"
-							        update="form:preset"/>
-						</p:datePicker>
-					</div>
-
-					<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:outputLabel for="@next" value="Início Prazo"/>
-						<p:datePicker value="#{exercicioBean.filtro.inicioPrazo}"
-						locale="pt" monthNavigator="true" yearNavigator="select"/>
-					</div>
-
-					<div class="campo col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:outputLabel for="@next" value="Término Prazo"/>
-						<p:datePicker value="#{exercicioBean.filtro.terminoPrazo}"
-						locale="pt" monthNavigator="true" yearNavigator="select"/>
 					</div>
 
 				</div>

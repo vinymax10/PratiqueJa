@@ -1,5 +1,6 @@
 package bean.exercicio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
@@ -20,8 +21,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import modelo.exercicio.Exercicio;
+import matematica.ExercicioFactory;
+import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
+import modelo.matematica.Exercicio;
 import modelo.seguranca.PermissaoPadrao;
 import service.configuracao.DiretorioService;
 import service.exercicio.ExercicioService;
@@ -52,6 +55,18 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	private ControleAcessoBean controleAcessoBean;
 
 	private ExercicioPadrao exercicioPadrao;
+
+	/** Seleção múltipla de exercícios padrão no cadastro. */
+	private List<ExercicioPadrao> exerciciosPadrao = new ArrayList<>();
+
+	/** Usado apenas na tela de cadastro (não persiste na entidade). */
+	private boolean global=true;
+
+	/** Quantidade de exercícios a gerar no cadastro. */
+	private int quantidade = 1;
+
+	/** Exercícios do assunto exibidos na aba "Exercícios" (matematica/exercicio.xhtml). */
+	private List<Exercicio> exercicios;
 
 	public ExercicioBean()
 	{
@@ -117,12 +132,49 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		entidadeDAO.salvar(entidade);
 	}
 
+	/**
+	 * Cadastro admin: gera o Exercício a partir do Exercício Padrão escolhido
+	 * (usa getClasse() para instanciar o gerador) + valor global, persiste e
+	 * redireciona para a tela de edição (form.xhtml).
+	 */
+	public String adicionarDoPadrao()
+	{
+		try
+		{
+			int total = 0;
+			for(ExercicioPadrao padrao : exerciciosPadrao)
+			{
+				for(int i = 0; i < quantidade; i++)
+				{
+					Exercicio exercicio = ExercicioFactory.gerar(padrao.getClasse(), i + 1);
+					exercicio.setAssunto(padrao.getAssunto());
+					exercicio.setNivel(padrao.getNivel());
+					exercicio.setGlobal(global);
+
+					exercicioService.construirExercicio(exercicio);
+					total++;
+				}
+			}
+
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO,
+			total + " " + nome + "(s) adicionado(s) com sucesso.");
+			Navegacao.redirect(urlLista);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível adicionar o " + nome);
+		}
+		return "";
+	}
+
 	public String criarExercicio(ExercicioPadrao exercicioPadrao)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			entidade = new Exercicio();
-			entidade.setExercicioPadrao(exercicioPadrao);
+			entidade = ExercicioFactory.gerar(exercicioPadrao.getClasse(), 0);
+			entidade.setAssunto(exercicioPadrao.getAssunto());
+			entidade.setNivel(exercicioPadrao.getNivel());
 
 			try
 			{
@@ -143,6 +195,20 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	public String responder()
 	{
 		exercicioService.registrarResposta(entidade);
+		return "";
+	}
+
+	/** Carrega os exercícios do assunto para a aba "Exercícios". */
+	public void filtrarPorAssunto(Assunto assunto)
+	{
+		if(assunto != null)
+			exercicios = entidadeDAO.buscarPorAssunto(assunto);
+	}
+
+	/** Registra a resposta de um exercício específico (cards da aba). */
+	public String responder(Exercicio exercicio)
+	{
+		exercicioService.registrarResposta(exercicio);
 		return "";
 	}
 

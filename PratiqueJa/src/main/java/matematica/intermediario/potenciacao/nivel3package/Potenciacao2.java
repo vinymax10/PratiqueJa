@@ -1,36 +1,26 @@
 package matematica.intermediario.potenciacao.nivel3package;
 
-import modelo.matematica.Conta;
+import matematica.GeradorExercicio;
 
-
-public class Potenciacao2 extends Conta
+public class Potenciacao2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Potenciacao2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 2 + rand.nextInt(19);
-		
-		int p1 =2+ rand.nextInt(9);
-		int p2 =2+ rand.nextInt(9);
 
-		pergunta="Qual o valor de \\(x\\)?";
-		
-		textLatex=a+"^{"+p1+"} \\cdot "+a+"^{"+p2+"}="+a+"^{x}";
-		
-		resultadoCorreto = "" + (p1+p2);
-		resolucaoLatex = a+"^{"+p1+"+"+p2+"}="+a+"^{x}\\\\";
-		resolucaoLatex += a+"^{"+(p1+p2)+"}="+a+"^{x}\\\\";
+		int p1 = 2 + rand.nextInt(9);
+		int p2 = 2 + rand.nextInt(9);
 
-		resolucaoLatex+="x="+(p1+p2);
+		String texto = a + "^{" + p1 + "} \\cdot " + a + "^{" + p2 + "}=" + a + "^{x}";
 
+		String resolucao = a + "^{" + p1 + "+" + p2 + "}=" + a + "^{x}\\\\";
+		resolucao += a + "^{" + (p1 + p2) + "}=" + a + "^{x}\\\\";
+		resolucao += "x=" + (p1 + p2);
+
+		addParagrafo("Qual o valor de \\(x\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + (p1 + p2));
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Potenciacao2(1);
-	}
-
 }

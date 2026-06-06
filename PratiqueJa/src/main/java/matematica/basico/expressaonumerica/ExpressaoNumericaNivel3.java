@@ -1,36 +1,13 @@
 package matematica.basico.expressaonumerica;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class ExpressaoNumericaNivel3 extends Conta
+public class ExpressaoNumericaNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ExpressaoNumericaNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(13);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Expressao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public ExpressaoNumericaNivel3()
-	{
+		int tipo = 1 + rand.nextInt(13);
+		delegar(instanciar(".nivel3package.Expressao" + tipo));
 	}
 }

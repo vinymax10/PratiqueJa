@@ -1,35 +1,13 @@
 package matematica.intermediario.razoestrigonometricas;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class RazoesTrigonometricasNivel2 extends Conta
+public class RazoesTrigonometricasNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RazoesTrigonometricasNivel2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(12);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Image" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		int tipo = 1 + rand.nextInt(12);
+		delegar(instanciar(".nivel2package.Image" + tipo));
 	}
-
-	public RazoesTrigonometricasNivel2()
-	{
-	}
-
 }

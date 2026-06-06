@@ -1,39 +1,20 @@
 package matematica.avancado.logaritmo;
 
+import matematica.GeradorExercicio;
 
-
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class LogaritmoNivel1 extends Conta
+public class LogaritmoNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public LogaritmoNivel1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int c = 2 + rand.nextInt(9);
 		int maxBase = (int) Math.min((Math.log(1000) / Math.log(c)), 10);
-		int x = 1+ rand.nextInt(maxBase + 1);
+		int x = 1 + rand.nextInt(maxBase + 1);
+		int a = (int) Math.pow(c, x);
 
-		int a;
-		a = (int) Math.pow(c, x);
-		textLatex = "\\log_{" + c + "}" + a + "=";
-		resolucaoLatex = ResolucaoLogaritmo.resolucao1(a, c, x);
-
-		resultadoCorreto = "" + x;
-	}
-
-	public LogaritmoNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new LogaritmoNivel1(1);
-//		String resolucaoLatex = ResolucaoLogaritmo.resolucao1(27, 3, 7);
+		addParagrafo("Calcule o valor do logaritmo:");
+		addParagrafo("\\(\\log_{" + c + "}" + a + " = \\,?\\)");
+		gerarAlternativas("" + x);
+		setResolucao("\\(" + ResolucaoLogaritmo.resolucao1(a, c, x) + "\\)");
 	}
 }

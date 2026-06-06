@@ -2,62 +2,45 @@ package matematica.basico.somaangulostriangulo.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int b = 60 + rand.nextInt(20);
 		int e = 40 + rand.nextInt(20);
 		int d = 90 - e;
 		int c = d;
 		int a = 180 - b - d;
 
-//		2- Trapezio a, B, c | d, e
 		ConfigTrapezio config = new ConfigTrapezio(a, b, c, d, e);
 		config.a.mostrar();
 		config.b.mostrar();
 		config.c.mostrar();
 		config.b.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + b + "°";
-		resolucaoLatex = resolucao(a, b, c, d, e);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + b + "°";
+		String resolucao = resolucao(a, b, c, d, e);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		config.d.mostrar();
-		config.d.nome = "y";
-
-		config.e.mostrar();
-		config.e.nome = "z";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
-	public String resolucao(int a, int b, int c, int d, int e)
+	private String resolucao(int a, int b, int c, int d, int e)
 	{
 		String resolucaoLatex = ResolucaoSAT2.complemento180("z", c, 90);
 		resolucaoLatex += ResolucaoSAT2.complemento90("y", e);
 		resolucaoLatex += ResolucaoSAT2.complemento180("x", a, d);
 
 		return resolucaoLatex;
-	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
 	}
 }

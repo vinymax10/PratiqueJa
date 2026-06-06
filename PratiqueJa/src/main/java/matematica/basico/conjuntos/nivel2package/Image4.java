@@ -2,39 +2,27 @@ package matematica.basico.conjuntos.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.ResolucaoConjuntos;
-import modelo.matematica.Conta;
 
-public class Image4 extends Conta
+public class Image4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		DadosAB dados = new DadosAB();
 
-		DadosAB dados=new DadosAB();
-//		dados.aIbStr="";
-//		dados.bMaStr="";
-
-		pergunta="Qual o valor de \\(|A \\cup B|\\)?";
-		
-		resultadoCorreto = ""+dados.aUb;
-		
-		resolucaoLatex=ResolucaoConjuntos.uniaoAUniaoB2(dados);
-		
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.aUb;
+		String resolucao = ResolucaoConjuntos.uniaoAUniaoB2(dados);
+		String texto = dados.toString();
 
 		ConfigAB config = new ConfigAB(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image4(1);
+		addParagrafo("Qual o valor de \\(|A \\cup B|\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

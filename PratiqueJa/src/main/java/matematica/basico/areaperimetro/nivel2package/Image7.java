@@ -2,51 +2,39 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
-import modelo.matematica.Conta;
 
 //	triangulo isosceles
-public class Image7 extends Conta
+public class Image7 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image7(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (5 + rand.nextInt(16));
+		int h = (int) (((double) b) * 0.6);
 
-		int b = 2*(5 + rand.nextInt(16));
-		int h = (int)(((double)b)*0.6);
-		
-		int meiaBase=b/2;
-		
-		textLatex = "Image7" + b+" - "+h+" - "+meiaBase;
+		int meiaBase = b / 2;
 
 		String strAltura = "" + h;
 
-		pergunta="Qual a área do triângulo?";
+		String resultadoCorreto = "" + (b * h) / 2;
 
-		resultadoCorreto = "" + (b * h)/2;
+		String resolucao = "";
+		resolucao += ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\\\";
+		resolucao += "h=" + h + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\\\";
+		resolucao += "A=\\dfrac{" + b + " \\cdot " + h + "}{2}=";
+		resolucao += "\\dfrac{" + b * h + "}{2}=";
+		resolucao += (b * h) / 2;
 
-		resolucaoLatex="";		
-		resolucaoLatex+=ResolucaoAreaPerimetro.formulaAreaTriangulo()+"\\\\";
-		resolucaoLatex+="h="+h+", \\quad b="+meiaBase+" \\cdot 2="+b+"\\\\";
-		resolucaoLatex+="A=\\dfrac{"+b+" \\cdot "+h+"}{2}=";
-		resolucaoLatex+="\\dfrac{"+b*h+"}{2}=";
-		resolucaoLatex+=(b*h)/2;
-		
-		Config config=new ConfigTrianguloIsosceles("",strAltura,""+meiaBase,"",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		Config config = new ConfigTrianguloIsosceles("", strAltura, "" + meiaBase, "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Qual a área do triângulo?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image7(1);
-	}
-
 }

@@ -105,7 +105,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		if(tabState.hasState(FiltroQuestao.class))
 			filtro = tabState.getState(FiltroQuestao.class);
-		filtrarEstudante();
+		filtrar();
 	}
 
 	public void filtrar()
@@ -124,16 +124,15 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		try
 		{
-			validar(!permissao.isPodeRemover(), Mensagem.messagePermissaoNegada());
-			podeRemover(entidade);
+//			validar(!permissao.isPodeRemover(), Mensagem.messagePermissaoNegada());
 			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
-				auditoriaService.registrarExclusao(classe, entidade.getId(), entidade);
+				auditoriaService.registrarExclusao(classe, questao.getId(), questao);
 
-			if(lista.contains(questao))
-				lista.remove(entidade);
+			if(lista != null)
+				lista.remove(questao);
 
-			getListaTudo().remove(entidade);
-			entidadeDAO.remover(entidade);
+			getListaTudo().remove(questao);
+			entidadeDAO.remover(questao);
 			if(ClasseAux.possuiAtributo(classe, "ordem"))
 				onRowReorder(null);
 
@@ -142,10 +141,10 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, nome + " removido(a) com sucesso.");
 			Navegacao.redirect(urlLista);
 		}
-		catch(RelacaoException e)
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
-		}
+//		catch(RelacaoException e)
+//		{
+//			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
+//		}
 		catch(Exception e)
 		{
 			e.printStackTrace();

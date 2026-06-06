@@ -1,46 +1,37 @@
 package matematica.basico.conjuntos.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.Conjunto;
-import modelo.matematica.Conta;
 
-
-public class Exercicio6 extends Conta
+public class Exercicio6 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Exercicio6(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		int sizeA=3+rand.nextInt(5);
-		int sizeB=3+rand.nextInt(5);
-		int limit=25;
-		Conjunto a=new Conjunto(sizeA,limit);
-		Conjunto b=new Conjunto(sizeB,limit);
+		int sizeA = 3 + rand.nextInt(5);
+		int sizeB = 3 + rand.nextInt(5);
+		int limit = 25;
+		Conjunto a = new Conjunto(sizeA, limit);
+		Conjunto b = new Conjunto(sizeB, limit);
 		a.contruirInterseccao(b);
-		
-		Conjunto c=a.uniao(b);
-		
-		pergunta="Qual a soma dos elementos da união \\(A \\cup B ~\\)?";
-		textLatex="A="+a+"\\newline B="+b;
-		
-		resultadoCorreto = ""+c.soma();
-		
-		resolucaoLatex="A \\cup B = "+c+"\\\\";
-		
-		if(c.size()>1)
+
+		Conjunto c = a.uniao(b);
+		int correto = c.soma();
+
+		addParagrafo("Qual a soma dos elementos da união \\(A \\cup B\\)?");
+		addParagrafo("\\(A = " + a + "\\)");
+		addParagrafo("\\(B = " + b + "\\)");
+		gerarAlternativasInteiras(correto);
+
+		String resolucao = "\\(A \\cup B = " + c + "\\\\";
+		if(c.size() > 1)
 		{
-			resolucaoLatex+="\\text{Soma dos elementos de}~ A \\cup B \\text{ é: }\\\\";
-			resolucaoLatex+=c.somaStr()+"="+resultadoCorreto;
+			resolucao += "\\text{Soma dos elementos de}~ A \\cup B \\text{ é: }\\\\";
+			resolucao += c.somaStr() + "=" + correto;
 		}
 		else
-			resolucaoLatex+="\\text{Soma dos elementos de}~ A \\cup B  = "+resultadoCorreto;
-		
+			resolucao += "\\text{Soma dos elementos de}~ A \\cup B  = " + correto;
+		resolucao += "\\)";
+		setResolucao(resolucao);
 	}
-	
-	public static void main(String[] args)
-	{
-		new Exercicio6(1);
-	}
-
 }

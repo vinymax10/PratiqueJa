@@ -2,40 +2,27 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigLozango;
-import modelo.matematica.Conta;
 
-
-public class Image7 extends Conta
+public class Image7 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-//	lozango
-	public Image7(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int D = 2 * (3 + rand.nextInt(13));
+		int d = (int) (((double) D) * 0.7);
 
-		int D = 2*(3 + rand.nextInt(13));
-		int d = (int)(((double)D)*0.7);
-		
-		pergunta="Qual a área do losango?";
+		String resultadoCorreto = "" + (D / 2 * d);
+		String resolucao = ResolucaoAreaPerimetro.losango(D, d);
 
-		textLatex = "Image7" + D + "-" + d;
-		resultadoCorreto = "" + (D/2 * d);
-		
-		resolucaoLatex=ResolucaoAreaPerimetro.losango(D, d);
-		
-		ConfigLozango config=new ConfigLozango(""+D, ""+d,"","","",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigLozango config = new ConfigLozango("" + D, "" + d, "", "", "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image7(1);
+		addParagrafo("Qual a área do losango?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

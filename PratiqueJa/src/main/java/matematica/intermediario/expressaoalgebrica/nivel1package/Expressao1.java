@@ -1,30 +1,21 @@
 package matematica.intermediario.expressaoalgebrica.nivel1package;
 
-import jakarta.persistence.Transient;
-
-import util.Algebra;
 import matematica.ExpressaoExt;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
+import util.Algebra;
 
-
-public class Expressao1 extends Conta
+public class Expressao1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
+	private int posX;
+	private Racional[] coeficientes;
 
-	@Transient
-	int posX;
-
-	@Transient
-	Racional[] coeficientes;
-
-	public Expressao1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int num;
 		boolean temDiv = false;
 
-//		definindo os nomes e coeficiente
 		int size = 2 + rand.nextInt(3);
 		coeficientes = new Racional[size];
 		String nomes[] = new String[size];
@@ -35,7 +26,6 @@ public class Expressao1 extends Conta
 			nomes[i] = "" + (char) (65 + i);
 		}
 
-//		definindo os nomes os operadores
 		String operadoresList[] = { "+", "-", "*", "/" };
 		String operadores[] = new String[size - 1];
 
@@ -57,17 +47,17 @@ public class Expressao1 extends Conta
 
 		posX = rand.nextInt(size);
 
-		textLatex = "";
+		String texto = "";
 		String exp = nomes[0];
-		textLatex += "" + getCoeficiente(0);
+		texto += "" + getCoeficiente(0);
 
 		for(int i = 0; i < size - 1; i++)
 		{
 			exp += operadores[i] + nomes[i + 1];
-			textLatex += " " + Algebra.converter(operadores[i]) + " " + getCoeficiente(i + 1);
+			texto += " " + Algebra.converter(operadores[i]) + " " + getCoeficiente(i + 1);
 		}
 
-		textLatex += "=";
+		texto += "=";
 
 		ExpressaoExt expressao;
 		Racional resultado = null;
@@ -81,11 +71,12 @@ public class Expressao1 extends Conta
 			e.printStackTrace();
 		}
 
-		textLatex = textLatex.replace("(", "\\left(").replace(")", "\\right)");
+		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
+		texto = "\\begin{align}&" + "\\text{Para}~ x = " + coeficientes[posX] + ",\\\\ &" + texto + "\\end{align}";
 
-		textLatex = "\\begin{align}&" + "\\text{Para}~ x = " + coeficientes[posX] + ",\\\\ &" + textLatex + "\\end{align}";
-
-		resultadoCorreto = "" + resultado.toString();
+		addParagrafo("Calcule o valor da expressão algébrica:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + resultado);
 	}
 
 	private String getCoeficiente(int index)
@@ -94,10 +85,5 @@ public class Expressao1 extends Conta
 			return "x";
 		else
 			return "" + coeficientes[index];
-	}
-
-	public static void main(String[] args)
-	{
-		new Expressao1(1);
 	}
 }

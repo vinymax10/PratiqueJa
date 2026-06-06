@@ -168,7 +168,9 @@
       "Bash(cd /tmp)",
       "Bash(jar tf *)",
       "Bash(unzip -p ~/.m2/repository/org/primefaces/primefaces/15.0.12/primefaces-15.0.12-jakarta.jar \"META-INF/resources/primefaces/selectcheckboxmenu/selectcheckboxmenu.js\")",
-      "Bash(Select-Object -ExpandProperty Name)"
+      "Bash(Select-Object -ExpandProperty Name)",
+      "Bash(mvn -o compile)",
+      "Read(//tmp/**)"
     ]
   }
 }

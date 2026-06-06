@@ -1,29 +1,19 @@
 package matematica.basico.divisaonatural;
 
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.basico.resolucaonatural.ResolucaoNatural;
-import modelo.matematica.Conta;
 
-@Entity
-public class DivisaoNaturalNivel3 extends Conta
+public class DivisaoNaturalNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public DivisaoNaturalNivel3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		int a, b;
-		
-		a = 100 + rand.nextInt(900);
-		b = 10 + rand.nextInt(90);
+		int a = 100 + rand.nextInt(900);
+		int b = 10 + rand.nextInt(90);
 
-		textLatex = ResolucaoNatural.divisao((a * b), b, false);
-		resultadoCorreto = "" + a;
-		resolucaoLatex = ResolucaoNatural.divisao((a * b), b, true);
-	}
-
-	public DivisaoNaturalNivel3()
-	{
+		addParagrafo("Calcule a seguinte divisão:");
+		addParagrafo("\\(" + ResolucaoNatural.divisao(a * b, b, false) + "\\)");
+		gerarAlternativasInteiras(a);
+		setResolucao("\\(" + ResolucaoNatural.divisao(a * b, b, true) + "\\)");
 	}
 }

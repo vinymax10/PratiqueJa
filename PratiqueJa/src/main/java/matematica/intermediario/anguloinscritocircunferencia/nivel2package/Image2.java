@@ -2,21 +2,16 @@ package matematica.intermediario.anguloinscritocircunferencia.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
 import matematica.Auxiliar;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
 import matematica.intermediario.anguloinscritocircunferencia.config.Config1;
-import modelo.matematica.Conta;
 
-
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int x = 1 + rand.nextInt(20);
 		int c = 1 + rand.nextInt(20);
 
@@ -24,27 +19,21 @@ public class Image2 extends Conta
 
 		int d = 2 * a - (c * x);
 
-		String str1 = Auxiliar.getNumber(c,"x",true) + Auxiliar.getNumber(d,"",false);
+		String str1 = Auxiliar.getNumber(c, "x", true) + Auxiliar.getNumber(d, "", false);
 
 		String strA = a + "°";
 
-		resultadoCorreto = "" + x + "°";
+		String resultadoCorreto = "" + x + "°";
 
-		textLatex = strA;
+		MyExpression expressao = new MyExpression(str1 + "=" + a + "*2");
+		String resolucao = expressao.resolverLatex();
 
-		MyExpression expressao = new MyExpression(str1+"="+ a+"*2");
-		resolucaoLatex = expressao.resolverLatex();
+		Config1 config = new Config1(strA, "", str1);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		Config1 config=new Config1(strA, "", str1);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
-	}
-
 }

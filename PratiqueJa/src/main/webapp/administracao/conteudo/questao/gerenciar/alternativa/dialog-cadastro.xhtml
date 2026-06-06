@@ -41,7 +41,7 @@
 						styleClass="ui-button-danger ui-button-flat"
 						action="#{alternativaBean.remover}"
 						update="formAlternativa form:alternativasTabela :growl"
-						process="@this" oncomplete="PF('dialogAlternativa').hide()"
+						process="@this" oncomplete="PF('dialogAlternativa').hide(); reloadMathJax();"
 						rendered="#{!alternativaBean.cadastro}">
 							<p:confirm header="Confirmação" icon="pi pi-info-circle"
 							message="Você tem certeza que deseja remover esta Alternativa?" />
@@ -67,7 +67,7 @@
 						action="#{alternativaBean.salvar}"
 						update="formAlternativa form:alternativasTabela :growl"
 						process="@form"
-						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide()">
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide(); reloadMathJax();">
 							<p:defaultCommand target="salvarAlternativa" />
 						</p:commandButton>
 
@@ -78,7 +78,7 @@
 						action="#{alternativaBean.adicionar}"
 						update="formAlternativa form:alternativasTabela :growl"
 						process="@form"
-						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide()">
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogAlternativa').hide(); reloadMathJax();">
 							<p:defaultCommand target="adicionarAlternativa" />
 						</p:commandButton>
 

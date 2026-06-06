@@ -1,36 +1,13 @@
 package matematica.intermediario.radiciacao;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class RadiciacaoNivel2 extends Conta
+public class RadiciacaoNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RadiciacaoNivel2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(8);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Radiciacao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public RadiciacaoNivel2()
-	{
+		int tipo = 1 + rand.nextInt(8);
+		delegar(instanciar(".nivel2package.Radiciacao" + tipo));
 	}
 }

@@ -1,35 +1,13 @@
 package matematica.intermediario.pitagoras;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class PitagorasNivel3 extends Conta
+public class PitagorasNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public PitagorasNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(2);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Exercicio" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		int tipo = 1 + rand.nextInt(2);
+		delegar(instanciar(".nivel3package.Exercicio" + tipo));
 	}
-
-	public PitagorasNivel3()
-	{
-	}
-
 }

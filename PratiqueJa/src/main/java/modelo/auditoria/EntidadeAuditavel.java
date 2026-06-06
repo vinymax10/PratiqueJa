@@ -12,9 +12,10 @@ import modelo.configuracao.Edicao;
 import modelo.email.ConfigSpam;
 import modelo.email.Email;
 import modelo.email.ProgramacaoSpam;
-import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Conta;
+import modelo.matematica.AlternativaExercicio;
+import modelo.matematica.Exercicio;
+import modelo.matematica.ParagrafoExercicio;
 import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ConviteGrupo;
@@ -54,7 +55,8 @@ public enum EntidadeAuditavel
 //	Exercício
 	ExercicioPadrao(ExercicioPadrao.class, "Exercício Padrão"),
 	Exercicio(Exercicio.class, "Exercício"),
-	Conta(Conta.class, "Conta"),
+	ParagrafoExercicio(ParagrafoExercicio.class, "Parágrafo de Exercício"),
+	AlternativaExercicio(AlternativaExercicio.class, "Alternativa de Exercício"),
 
 //	Questão
 	Questao(Questao.class, "Questão"),

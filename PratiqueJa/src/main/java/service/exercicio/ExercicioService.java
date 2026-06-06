@@ -1,26 +1,16 @@
 package service.exercicio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
-import bean.download.Diretorio;
-import bean.exercicio.ConfigDownload;
 import dao.exercicio.ExercicioDAO;
 import dao.exercicio.ResultadoExercicioDAO;
 import dao.usuario.UsuarioDAO;
 import filtro.exercicio.FiltroExercicio;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import modelo.exercicio.Exercicio;
-import modelo.exercicio.ResultadoExercicio;
-import modelo.questao.Alternativa;
+import modelo.matematica.AlternativaExercicio;
+import modelo.matematica.Exercicio;
 import modelo.usuario.Usuario;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import pdf.exercicio.GerarLatexExercicio;
 
 @ApplicationScoped
 public class ExercicioService
@@ -41,7 +31,7 @@ public class ExercicioService
 
 	public void registrarResposta(Exercicio exercicio)
 	{
-		Alternativa escolhida = exercicio.getAlternativaEscolhida();
+		AlternativaExercicio escolhida = exercicio.getAlternativaEscolhida();
 		if(escolhida == null)
 		{
 			exercicio.setFeedbackSemSelecao(true);
@@ -56,7 +46,7 @@ public class ExercicioService
 
 		if(!acertou)
 		{
-			Alternativa correta = exercicio.correta();
+			AlternativaExercicio correta = exercicio.correta();
 			exercicio.setFeedbackLetraCorreta(correta != null ? correta.getLetra() : null);
 		}
 

@@ -1,18 +1,15 @@
 package matematica.basico.expressaonumerica.nivel2package;
 
-import util.Algebra;
 import matematica.ExpressaoExt;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
+import util.Algebra;
 
-public class Expressao3 extends Conta
+public class Expressao3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int size = 4;
 		Racional[] coeficientes = new Racional[size];
 
@@ -34,7 +31,7 @@ public class Expressao3 extends Conta
 		while(coeficientes[2].equals(coeficientes[3]))
 			coeficientes[3] = new Racional(1 + rand.nextInt(20));
 
-		textLatex = Algebra.gerarTextLatexEN(expLatex, coeficientes);
+		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
 
 		ExpressaoExt expressao;
 		Racional resultado = null;
@@ -48,14 +45,8 @@ public class Expressao3 extends Conta
 			e.printStackTrace();
 		}
 
-		resultadoCorreto = "" + resultado.toString();
-	}
-
-	public static void main(String[] args)
-	{
-		for(int i = 0; i < 1000; i++)
-		{
-			new Expressao3(1);
-		}
+		addParagrafo("Calcule o valor da expressão:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + resultado);
 	}
 }

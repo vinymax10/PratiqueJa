@@ -1,44 +1,37 @@
 package matematica.intermediario.equacaosegundograu.nivel1package;
 
 import matematica.Auxiliar;
+import matematica.GeradorExercicio;
 import matematica.intermediario.equacaosegundograu.ResolucaoEq2Grau;
-import modelo.matematica.Conta;
 
-public class Expressao2 extends Conta
+public class Expressao2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int x = 1 + rand.nextInt(9);
 		int delta = 1 + rand.nextInt(9);
 		int a = 1 + rand.nextInt(9);
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 			a *= -1;
 
 		int b = -delta - (2 * a * x);
 		int c = (+x * delta) + (a * x * x);
 
-		textLatex = "";
+		String texto = "";
+		texto += Auxiliar.getNumber(a, "x^2", true);
+		texto += Auxiliar.getNumber(b, "x", false);
+		texto += Auxiliar.getNumber(c, "", false);
 
-		textLatex += Auxiliar.getNumber(a, "x^2", true);
-		textLatex += Auxiliar.getNumber(b, "x", false);
-		textLatex += Auxiliar.getNumber(c, "", false);
-
-		if (a < 0)
+		String pergunta;
+		if(a < 0)
 			pergunta = "Encontre a raiz maior";
 		else
 			pergunta = "Encontre a raiz menor";
 
-		resultadoCorreto = "" + x;
-		resolucaoLatex=ResolucaoEq2Grau.resolucaoX2(a,b,c);
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + x);
+		setResolucao("\\(" + ResolucaoEq2Grau.resolucaoX2(a, b, c) + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Expressao2(1);
-	}
-
 }

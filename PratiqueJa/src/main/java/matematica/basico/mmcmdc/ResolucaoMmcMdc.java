@@ -238,8 +238,4 @@ public class ResolucaoMmcMdc
 		return resolucaoLatex;
 	}
 	
-	public static void main(String[] args)
-	{
-	}
-
 }

@@ -2,51 +2,39 @@ package matematica.intermediario.razoestrigonometricas.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 import matematica.intermediario.razoestrigonometricas.dados.DadosBase;
-import modelo.matematica.Conta;
 
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		Dados dados=new DadosBase();
-		String angle="30°";
-		dados.strAngleAltura=angle;
+		Dados dados = new DadosBase();
+		String angle = "30°";
+		dados.strAngleAltura = angle;
 
-		dados.altura=rand.nextInt(100);
-		dados.hipotenusa=dados.altura*2;
+		dados.altura = rand.nextInt(100);
+		dados.hipotenusa = dados.altura * 2;
 
-		dados.strBase="";
-		dados.strAltura=dados.altura+"";
-		dados.strHipotenusa="x";
-		
-		pergunta="Qual o valor de x?";
+		dados.strBase = "";
+		dados.strAltura = dados.altura + "";
+		dados.strHipotenusa = "x";
 
-		resultadoCorreto = ""+dados.hipotenusa;
-		resolucaoLatex = ResolucaoRazoesTrigonometricas.sen30HX(dados.altura);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.hipotenusa;
+		String resolucao = ResolucaoRazoesTrigonometricas.sen30HX(dados.altura);
+		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-//		Config config = new Config1(dados);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		BufferedImage image = config.criarImagem(index);
-
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-
-	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
+		addParagrafo("Qual o valor de x?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "exercicioPadrao", "contas", "teste" })
@@ -41,7 +41,7 @@ public class EtapaTeste implements Serializable, Entidade
 
 	@DiffIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "etapaTeste")
-	private List<Conta> contas = new ArrayList<Conta>();
+	private List<Exercicio> contas = new ArrayList<Exercicio>();
 
 	@DiffIgnore
 	@ManyToOne

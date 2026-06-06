@@ -2,42 +2,30 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrianguloEquilatero;
-import modelo.matematica.Conta;
 
-//	triangulo isosceles
-public class Image8 extends Conta
+//	triangulo equilatero
+public class Image8 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image8(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int l = 2 * (2 + rand.nextInt(10));
 
-		int l = 2*(2 + rand.nextInt(10));
-		
-		pergunta="Se a área do triângulo é \\(A=x\\sqrt{3}\\), qual o valor de \\(x\\)?";
+		String resultadoCorreto = "" + (l * l) / 4;
 
-		textLatex = "Image8" + l + "-" + l;
-		
-		resultadoCorreto = "" + (l*l)/4;
+		String resolucao = "";
+		resolucao += ResolucaoAreaPerimetro.areaTrianguloEquilatero(l);
 
-		resolucaoLatex="";		
-		resolucaoLatex+=ResolucaoAreaPerimetro.areaTrianguloEquilatero(l);
-		
-		Config config=new ConfigTrianguloEquilatero(""+l,true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		Config config = new ConfigTrianguloEquilatero("" + l, true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se a área do triângulo é \\(A=x\\sqrt{3}\\), qual o valor de \\(x\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image8(1);
-	}
-
 }

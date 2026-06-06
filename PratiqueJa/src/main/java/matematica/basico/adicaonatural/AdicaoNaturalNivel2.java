@@ -1,16 +1,19 @@
 package matematica.basico.adicaonatural;
 
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 import matematica.basico.resolucaonatural.ResolucaoNatural;
-import modelo.matematica.Conta;
 
-@Entity
-public class AdicaoNaturalNivel2 extends Conta {
-	private static final long serialVersionUID = 1L;
-
-	public AdicaoNaturalNivel2(int indice) {
-		super(indice);
-		int a,b;
+/**
+ * Adição de naturais (nível 2): uma parcela de 2 dígitos com outra de 1 ou 2
+ * dígitos, apresentada como conta armada (\begin{array}) no enunciado.
+ * Constrói por composição (não é entidade nem herda Exercicio).
+ */
+public class AdicaoNaturalNivel2 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
+	{
+		int a, b;
 		if(rand.nextBoolean())
 		{
 			a = 10 + rand.nextInt(90);
@@ -22,17 +25,14 @@ public class AdicaoNaturalNivel2 extends Conta {
 			b = 10 + rand.nextInt(90);
 		}
 
-		textLatex=ResolucaoNatural.soma(a,b,false);
+		// Enunciado: conta armada em LaTeX (\( \) para o MathJax).
+		addParagrafo("Calcule a seguinte adição:");
+		addParagrafo("\\(" + ResolucaoNatural.soma(a, b, false) + "\\)");
 
-		resultadoCorreto = "" + (a+b);
-		
-		resolucaoLatex=ResolucaoNatural.soma(a,b,true);
+		// Alternativas: correta + distratores numéricos plausíveis.
+		gerarAlternativasInteiras(a + b);
+
+		// Resolução com o "vai um" passo a passo (expressão crua).
+		setResolucao("\\(" +ResolucaoNatural.soma(a, b, true)+ "\\)");
 	}
-
-	public AdicaoNaturalNivel2() {
-	}
-
-	public static void main(String[] args) {
-	}
-
 }

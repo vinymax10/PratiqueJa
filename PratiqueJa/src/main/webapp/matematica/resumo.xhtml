@@ -92,7 +92,8 @@
 
 			<h:panelGroup layout="block"
 				rendered="#{assuntoBean.entidade.showExercicio}"
-				styleClass="as-tab" onclick="asShowTab('exercicios', this)">
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/exercicio') ? 'as-tab-active' : ''}" 
+				onclick="navegarComScroll('/matematica/exercicio.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-pencil"></i> Exercícios
 			</h:panelGroup>
 			<h:panelGroup layout="block"
@@ -102,7 +103,8 @@
 			</h:panelGroup>
 			<h:panelGroup layout="block"
 				rendered="#{assuntoBean.entidade.showQuestao}"
-				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/questoes') ? 'as-tab-active' : ''}" onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/questoes') ? 'as-tab-active' : ''}" 
+				onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-question-circle"></i> Questões
 			</h:panelGroup>
 			<div class="as-tab" onclick="asShowTab('pdfs', this)">

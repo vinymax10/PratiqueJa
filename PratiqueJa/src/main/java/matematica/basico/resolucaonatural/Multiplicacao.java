@@ -140,7 +140,4 @@ public class Multiplicacao
 		return resolucaoLatex;
 	}
 
-	public static void main(String[] args) 
-	{
-	}
 }

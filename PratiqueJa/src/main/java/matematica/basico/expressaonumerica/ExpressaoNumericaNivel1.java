@@ -1,26 +1,12 @@
 package matematica.basico.expressaonumerica;
 
+import matematica.GeradorExercicio;
 
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-import matematica.basico.expressaonumerica.nivel1package.Expressao1;
-
-@Entity
-public class ExpressaoNumericaNivel1 extends Conta
+public class ExpressaoNumericaNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ExpressaoNumericaNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		clone(new Expressao1(index));
-	}
-
-	public ExpressaoNumericaNivel1()
-	{
+		delegar(instanciar(".nivel1package.Expressao1"));
 	}
 }

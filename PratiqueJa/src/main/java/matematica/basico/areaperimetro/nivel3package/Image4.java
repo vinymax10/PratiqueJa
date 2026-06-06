@@ -2,42 +2,32 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigParalelogramo;
-import modelo.matematica.Conta;
 
-
-public class Image4 extends Conta
+public class Image4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (3 + rand.nextInt(12));
+		int h = (int) (((double) b) * 0.7);
 
-		int b = 2*(3 + rand.nextInt(12));
-		int h = (int)(((double)b)*0.7);
-		
 		String area = "" + b * h;
-		resultadoCorreto = "" + h;
-		pergunta="Se a área do paralelogramo é \\("+area+"\\), qual o valor de \\(h\\)?";
-		textLatex = "Image4" + b + "-" + h;
+		String resultadoCorreto = "" + h;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaAreaRetangulo()+"\\\\";
-		resolucaoLatex+="b="+b+"\\\\";
-		resolucaoLatex+=b+"h="+area+"\\\\";
-		resolucaoLatex+="h=\\dfrac{"+area+"}{"+b+"}="+h+"\\\\";
-		
-		ConfigParalelogramo config=new ConfigParalelogramo(""+b,"h","",true);
-		BufferedImage image=config.criarImagem(index);
+		String resolucao = ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
+		resolucao += "b=" + b + "\\\\";
+		resolucao += b + "h=" + area + "\\\\";
+		resolucao += "h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\\\";
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "h", "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image4(1);
+		addParagrafo("Se a área do paralelogramo é \\(" + area + "\\), qual o valor de \\(h\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -2,39 +2,29 @@ package matematica.basico.conjuntos.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.ResolucaoConjuntos;
-import modelo.matematica.Conta;
 
-public class Image3 extends Conta
+public class Image3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		DadosAB dados = new DadosAB();
+		dados.aMbStr = "";
+		dados.bMaStr = "";
 
-		DadosAB dados=new DadosAB();
-		dados.aMbStr="";
-		dados.bMaStr="";
-
-		pergunta="Se \\(|A|="+dados.a+"\\) qual o valor de \\(|A - B|\\)?";
-		
-		resultadoCorreto = ""+dados.aMb;
-		
-		resolucaoLatex=ResolucaoConjuntos.menosAMenosB(dados);
-		
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.aMb;
+		String resolucao = ResolucaoConjuntos.menosAMenosB(dados);
+		String texto = dados.toString();
 
 		ConfigAB config = new ConfigAB(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image3(1);
+		addParagrafo("Se \\(|A|=" + dados.a + "\\) qual o valor de \\(|A - B|\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -6,10 +6,12 @@
 	template="/template/template.xhtml">
 
 	<link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+	<link rel="stylesheet" href="/css/questao-page.css" type="text/css" />
 
 	<f:metadata>
 		<f:viewParam name="assunto" value="#{assuntoBean.assunto}" />
 		<f:viewAction action="#{assuntoBean.init()}" />
+		<f:viewAction action="#{exercicioBean.filtrarPorAssunto(assuntoBean.entidade)}" />
 	</f:metadata>
 
 	<ui:include src="/matematica/resumo.xhtml" />

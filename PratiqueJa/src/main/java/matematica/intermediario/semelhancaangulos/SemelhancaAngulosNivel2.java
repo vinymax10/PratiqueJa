@@ -1,47 +1,13 @@
 package matematica.intermediario.semelhancaangulos;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class SemelhancaAngulosNivel2 extends Conta
+public class SemelhancaAngulosNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public SemelhancaAngulosNivel2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(3);
-			clone((Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Exercicio" + tipo)
-			.getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-		| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public SemelhancaAngulosNivel2()
-	{
-	}
-
-	public boolean isCorreta()
-	{
-		return respostaAluno.trim().equals(resultadoCorreto)
-		|| respostaAluno.trim().equals(resultadoCorreto.replaceAll("°", ""));
-	}
-
-	public static void main(String[] args)
-	{
-//		new Image4(1,true,"duasRetas.PNG");
+		int tipo = 1 + rand.nextInt(3);
+		delegar(instanciar(".nivel2package.Exercicio" + tipo));
 	}
 }

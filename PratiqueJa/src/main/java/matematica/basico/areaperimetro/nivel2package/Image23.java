@@ -2,47 +2,37 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadradoCircunferencia;
-import modelo.matematica.Conta;
 
-
-public class Image23 extends Conta
+public class Image23 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image23(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 2 + rand.nextInt(18);
 
-		textLatex = "Image23" + a + "";
-		String perimetro = "" + (4 * a) +"\\sqrt{2}";
-		
-		resultadoCorreto = "" + a;
-		pergunta="Se o perímetro do quadrado é \\("+perimetro+"\\), qual o valor de \\(r\\)?";
+		String perimetro = "" + (4 * a) + "\\sqrt{2}";
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaPerimetroQuadrado()+"\\\\";
-		resolucaoLatex+="4 \\cdot l="+perimetro+"\\\\";
-		resolucaoLatex+="l="+"\\dfrac{"+perimetro+"}{4}="+a+" \\sqrt{2} \\\\";
-		resolucaoLatex+=ResolucaoAreaPerimetro.formulaDiagonalQuadrado()+", \\quad ";
-		resolucaoLatex+="d=2r\\\\";
-		resolucaoLatex+="2r=l\\sqrt{2}\\\\";
-		resolucaoLatex+="2r="+a+"\\sqrt{2} \\cdot \\sqrt{2}\\\\";
-		resolucaoLatex+="2r="+a+"(\\sqrt{2})^2 = "+a+"\\cdot 2 ="+(a * 2)+"\\\\";
-		resolucaoLatex+="r=\\dfrac{"+(a * 2)+"}{2} = "+a+"\\\\";
+		String resultadoCorreto = "" + a;
 
-		ConfigQuadradoCircunferencia config=new ConfigQuadradoCircunferencia("r","l",false);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
+		resolucao += "4 \\cdot l=" + perimetro + "\\\\";
+		resolucao += "l=" + "\\dfrac{" + perimetro + "}{4}=" + a + " \\sqrt{2} \\\\";
+		resolucao += ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ", \\quad ";
+		resolucao += "d=2r\\\\";
+		resolucao += "2r=l\\sqrt{2}\\\\";
+		resolucao += "2r=" + a + "\\sqrt{2} \\cdot \\sqrt{2}\\\\";
+		resolucao += "2r=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\\\";
+		resolucao += "r=\\dfrac{" + (a * 2) + "}{2} = " + a + "\\\\";
 
-	public static void main(String[] args)
-	{
-		new Image23(1);
+		ConfigQuadradoCircunferencia config = new ConfigQuadradoCircunferencia("r", "l", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se o perímetro do quadrado é \\(" + perimetro + "\\), qual o valor de \\(r\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

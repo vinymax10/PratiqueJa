@@ -7,6 +7,7 @@ import bean.util.Mensagem;
 import jakarta.faces.application.FacesMessage;
 import bean.PaiBean;
 import dao.academico.AssuntoDAO;
+import dao.exercicio.ExercicioDAO;
 import dao.teste.ResultadoTesteDAO;
 import exceptions.RelacaoException;
 import filtro.academico.FiltroAssunto;
@@ -38,6 +39,9 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 
 	@Inject
 	private ResultadoTesteDAO resultadoTesteDAO;
+
+	@Inject
+	private ExercicioDAO exercicioDAO;
 	
 	private String assunto;
 
@@ -174,10 +178,13 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 
 	public void atualziar()
 	{
-		int qtd = entidadeDAO.contarQuestoes(entidade);
-		entidade.setQtdQuestoes(qtd);
+		int qtdQuestoes = entidadeDAO.contarQuestoes(entidade);
+		int qtdExercicios = (int) exercicioDAO.contarExercicios(entidade);
+		entidade.setQtdQuestoes(qtdQuestoes);
+		entidade.setQtdExercicios(qtdExercicios);
 		entidadeDAO.salvar(entidade);
-		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Contadores atualizados: " + qtd + " questão(ões).");
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+		"Contadores atualizados: " + qtdQuestoes + " questão(ões), " + qtdExercicios + " exercício(s).");
 	}
 
 	public void atualziarAll()
@@ -186,6 +193,7 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 		for(Assunto a : todos)
 		{
 			a.setQtdQuestoes(entidadeDAO.contarQuestoes(a));
+			a.setQtdExercicios((int) exercicioDAO.contarExercicios(a));
 			entidadeDAO.salvar(a);
 		}
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, todos.size() + " assunto(s) atualizados.");

@@ -6,11 +6,17 @@
 
 	<h:body >
 		<ui:composition>
-			<div id="filtros" style="width: 100%;display:none;">
+			<div id="filtros" style="width: 100%;">
 
 				<p:card class="newBorder mb-3" style="width: 100%;">
 					<div class="ui-fluid gride" >
 						<h4 class="title-card" >Filtro</h4>
+
+						<div class="campo col-12">
+							<p:outputLabel for="@next" value="IDs (separados por vírgula)"/>
+							<p:inputText value="#{questaoBean.filtro.ids}"
+							placeholder="Ex.: 12, 34, 56" />
+						</div>
 
 						<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
 							<p:outputLabel for="@next" value="ID"/>
@@ -118,6 +124,10 @@
 					<div class="content-button-right" >
 
 						<div class="divisor" ></div>
+
+						<h:outputText styleClass="status"
+						style="margin-right:auto;align-self:center;font-weight:600;color:#475569;"
+						value="#{empty questaoBean.lista ? 0 : questaoBean.lista.size()} questões" />
 
 						<p:commandButton value="Limpar"
 						styleClass="ui-button-flat ui-button-plain"

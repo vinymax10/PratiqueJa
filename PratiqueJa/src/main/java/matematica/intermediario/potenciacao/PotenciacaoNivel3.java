@@ -1,34 +1,13 @@
 package matematica.intermediario.potenciacao;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class PotenciacaoNivel3 extends Conta
+public class PotenciacaoNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public PotenciacaoNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(7);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Potenciacao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public PotenciacaoNivel3()
-	{
+		int tipo = 1 + rand.nextInt(7);
+		delegar(instanciar(".nivel3package.Potenciacao" + tipo));
 	}
 }

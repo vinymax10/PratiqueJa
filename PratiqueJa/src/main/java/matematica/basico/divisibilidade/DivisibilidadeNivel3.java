@@ -1,36 +1,13 @@
 package matematica.basico.divisibilidade;
 
+import matematica.GeradorExercicio;
 
-
-import java.lang.reflect.InvocationTargetException;
-
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class DivisibilidadeNivel3 extends Conta
+public class DivisibilidadeNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public DivisibilidadeNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(4);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Divisibilidade" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public DivisibilidadeNivel3()
-	{
+		int tipo = 1 + rand.nextInt(4);
+		delegar(instanciar(".nivel3package.Divisibilidade" + tipo));
 	}
 }

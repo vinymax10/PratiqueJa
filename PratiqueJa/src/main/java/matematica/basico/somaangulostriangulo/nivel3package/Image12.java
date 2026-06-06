@@ -2,19 +2,14 @@ package matematica.basico.somaangulostriangulo.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.expressao.MyExpression;
-import modelo.matematica.Conta;
 
-
-public class Image12 extends Conta
+public class Image12 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image12(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 35 + rand.nextInt(20);
 		int x = 1 + rand.nextInt(20);
 		int c = 1 + rand.nextInt(20);
@@ -24,34 +19,22 @@ public class Image12 extends Conta
 		MyExpression expressao = new MyExpression(c + "x+" + d);
 		String strC = expressao.imprimir();
 
-//		12- Triangulo8 a, C | 
 		ConfigTriangulo8 config = new ConfigTriangulo8(a, b, 180 - b);
 		config.a.mostrar();
 		config.c.mostrar();
 		config.c.nome = strC;
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + x + "°";
-		MyExpression resolucao = new MyExpression("y+" + a + "+90=180");
-		resolucaoLatex = resolucao.resolverLatex();
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + x + "°";
+		String resolucao = new MyExpression("y+" + a + "+90=180").resolverLatex();
+		resolucao += "\\\\" + new MyExpression(b + "+" + strC + "=180").resolverLatex();
 
-		resolucao = new MyExpression(b + "+" + strC + "=180");
-		resolucaoLatex += "\\\\" + resolucao.resolverLatex();
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
-
-		config.b.mostrar();
-		config.b.nome = "y";
-
-		BufferedImage imageResolucao = config.criarImagem(index);
-		baosResolucao = Graphics.salvar(imageResolucao, false, "");
-
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image12(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

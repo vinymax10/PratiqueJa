@@ -12,18 +12,18 @@ import java.util.Random;
 
 import util.CorAux;
 import bean.download.Diretorio;
+import matematica.ExercicioFactory;
 import matematica.Racional;
 import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.exercicio.TipoExercicio;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
 import modelo.publicacao.ProgramacaoPost;
 
 public class TikTok
 {
 	ExercicioPadrao exercicio;
 	String latex;
-	Conta conta;
+	Exercicio conta;
 	Diretorio diretorioBean;
 	String alternaticaCorreta;
 	ProgramacaoPost programacaoPost;
@@ -157,44 +157,14 @@ public class TikTok
 		else
 			gravarBackgroundEspecifico();
 
-		File outputFile;
-		OutputStream outputStream;
-
-		try
-		{
-			if(conta.getBaos() != null)
-			{
-				outputFile = new File(diretorioBean.getEnderecoImagens() + "conta.png");
-				outputStream = new FileOutputStream(outputFile);
-				conta.getBaos().writeTo(outputStream);
-			}
-
-			if(conta.getBaosResolucao() != null)
-			{
-				outputFile = new File(diretorioBean.getEnderecoImagensResolucao() + "conta.png");
-				outputStream = new FileOutputStream(outputFile);
-				conta.getBaosResolucao().writeTo(outputStream);
-			}
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		// TODO migrar geração de imagens para o novo Exercicio (parágrafos/alternativas + ImagemFile).
 	}
 
 	private void gerarConta()
 	{
 		Random rand = new Random();
 		int index = rand.nextInt(12);
-		try
-		{
-			conta = (Conta) Class.forName(exercicio.getClasse()).getConstructor(Integer.TYPE).newInstance(index);
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-		| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		conta = ExercicioFactory.gerar(exercicio.getClasse(), index);
 	}
 
 	public void cabecalho()
@@ -277,37 +247,7 @@ public class TikTok
 
 	public void alternativas()
 	{
-		Random rand = new Random();
-
-		String alternativaA = alternativa(conta.getResultadoCorreto());
-
-		String alternativaB = alternativa(conta.getResultadoCorreto());
-		while(alternativaB.equals(alternativaA))
-			alternativaB = alternativa(conta.getResultadoCorreto());
-
-		String alternativaC = alternativa(conta.getResultadoCorreto());
-		while(alternativaC.equals(alternativaA) || alternativaC.equals(alternativaB))
-			alternativaC = alternativa(conta.getResultadoCorreto());
-
-		String resultadoCorreto = resultadoCorretoLatex(conta.getResultadoCorreto());
-		switch(rand.nextInt(3))
-		{
-			case 0:
-				alternativaA = resultadoCorreto;
-				alternaticaCorreta = "A";
-				break;
-			case 1:
-				alternativaB = resultadoCorreto;
-				alternaticaCorreta = "B";
-				break;
-			case 2:
-				alternativaC = resultadoCorreto;
-				alternaticaCorreta = "C";
-				break;
-		}
-
-		latex += "\\BC{A)} $" + alternativaA + "$\\vspace{15px} \r\n\r\n" + "\\BC{B)} $" + alternativaB
-		+ "$ \\vspace{15px}\r\n\r\n" + "\\BC{C)} $" + alternativaC + "$ \r\n\r\n";
+		// TODO migrar alternativas para o novo Exercicio (getAlternativas()).
 	}
 
 	public String resultadoCorretoLatex(String resultadoCorreto)
@@ -352,28 +292,7 @@ public class TikTok
 
 	public void alternativasBoolean()
 	{
-		Random rand = new Random();
-		String resultadoCorreto = conta.resultadoCorretoBolTexto();
-
-		String alternativaA, alternativaB;
-
-		if(rand.nextBoolean())
-		{
-			alternativaA = "Sim";
-			alternativaB = "Não";
-		}
-		else
-		{
-			alternativaA = "Não";
-			alternativaB = "Sim";
-		}
-
-		if(alternativaA.equals(resultadoCorreto))
-			alternaticaCorreta = "A";
-		else
-			alternaticaCorreta = "B";
-
-		latex += "\\BC{A)} " + alternativaA + "\\vspace{15px} \r\n\r\n" + "\\BC{B)} " + alternativaB + " \r\n\r\n";
+		// TODO migrar alternativas (boolean) para o novo Exercicio.
 	}
 
 	private String widthImagem(boolean primeiraPage)
@@ -420,25 +339,14 @@ public class TikTok
 		
 		String texto = "";
 
-		if(conta.getPergunta() != null && !conta.getPergunta().equals(""))
-			latex += conta.getPergunta();
-		else
-			latex += exercicio.getEnunciadoSingular();
+		latex += exercicio.getEnunciadoSingular();
 
 		latex += "\\vspace{10px} \r\n\r\n";
 
 		addSizeFont();
 
-		if(conta.getBaos() != null)
-		{
-//			texto+="\\vspace{-10px}\r\n";
-			texto += "\\includegraphics[width=" + widthImagem(true) + "]{" + diretorioBean.getConfigLatex().getImagens()
-			+ "/conta.png}\r\n";
-		}
-		else if(conta.getTextLatex() != null && !conta.getTextLatex().equals(""))
-			texto = "$" + conta.getTextLatex() + "$";
-		else
-			texto = "";
+		// TODO migrar conteúdo (parágrafos/alternativas) do novo Exercicio.
+		texto = "";
 
 		latex += texto;
 
@@ -447,12 +355,7 @@ public class TikTok
 		+ "\\end{center}\r\n\r\n" + "\\vfill\r\n" + "\\large\r\n";
 
 		if(programacaoPost.isAlternativaReel())
-		{
-			if(exercicio.getTipoExercicio() == TipoExercicio.Boolean)
-				alternativasBoolean();
-			else
-				alternativas();
-		}
+			alternativas();
 	}
 
 	private void addSizeFont()
@@ -476,9 +379,6 @@ public class TikTok
 	{
 		latex += "\\normalsize\r\n" + "\\vspace{-10px}\r\n" + "\\begin{center}\r\n";
 
-		if(conta.getPergunta() != null && !conta.getPergunta().equals(""))
-			latex += conta.getPergunta() + " \r\n\r\n";
-
 		latex += "\\end{center}\r\n";
 
 		addSizeFont();
@@ -489,37 +389,8 @@ public class TikTok
 
 	private String getTextoResolucao()
 	{
-		String texto = "";
-
-		if(conta.getBaosResolucao() != null)
-		{
-			texto += "\\vspace{-20px}\r\n\r\n";
-			texto += "\\begin{center}\r\n";
-			texto += "\\includegraphics[width=" + widthImagem(false) + "]{"
-			+ diretorioBean.getConfigLatex().getImagensResolucao() + "/conta.png}\r\n";
-			texto += "\\end{center}\r\n\r\n";
-		}
-		else if(conta.getBaos() != null)
-		{
-			texto += "\\vspace{-20px}\r\n\r\n";
-			texto += "\\begin{center}\r\n";
-			texto += "\\includegraphics[width=" + widthImagem(false) + "]{" + diretorioBean.getConfigLatex().getImagens()
-			+ "/conta.png}\r\n";
-			texto += "\\end{center}\r\n\r\n";
-		}
-		else if(exercicio.isMostrarResolucao() && conta.getTextLatex() != null && !conta.getTextLatex().equals(""))
-		{
-			texto += "\\begin{math}\r\n";
-			texto += conta.getTextLatex() + " \\vspace{10px} \\newline \r\n";
-			texto += "\\end{math}\r\n\r\n";
-		}
-		else
-			texto += "\\vspace{10px}\r\n\r\n";
-
-		texto += "\\begin{math}\r\n";
-		texto += addSpace(conta.getResolucaoLatex()) + "\r\n";
-		texto += "\\end{math}\r\n";
-		return texto;
+		// TODO migrar resolução para o novo Exercicio (conta.getResolucao()).
+		return "";
 	}
 
 	private String addSpace(String texto)

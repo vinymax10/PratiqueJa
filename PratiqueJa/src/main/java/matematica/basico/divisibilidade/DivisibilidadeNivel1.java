@@ -1,46 +1,30 @@
 package matematica.basico.divisibilidade;
 
-
-
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.basico.divisibilidade.nivel1package.Divisibilidade10;
 import matematica.basico.divisibilidade.nivel1package.Divisibilidade2;
 import matematica.basico.divisibilidade.nivel1package.Divisibilidade3;
 import matematica.basico.divisibilidade.nivel1package.Divisibilidade5;
-import modelo.matematica.Conta;
 
-@Entity
-public class DivisibilidadeNivel1 extends Conta
+public class DivisibilidadeNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public DivisibilidadeNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		switch(rand.nextInt(4)) {
-		case 0:
-			clone(new Divisibilidade10(index));
-			break;
-		case 1:
-			clone(new Divisibilidade2(index));
-			break;
-		case 2:
-			clone(new Divisibilidade5(index));
-		case 3:
-			clone(new Divisibilidade3(index));
-			break;
+		switch(rand.nextInt(4))
+		{
+			case 0:
+				delegar(new Divisibilidade10());
+				break;
+			case 1:
+				delegar(new Divisibilidade2());
+				break;
+			case 2:
+				delegar(new Divisibilidade5());
+				break;
+			case 3:
+				delegar(new Divisibilidade3());
+				break;
 		}
 	}
-
-	public boolean isCorreta()
-	{
-		return respostaAlunoBol == resultadoCorretoBol;
-	}
-
-	public DivisibilidadeNivel1()
-	{
-	}
-
 }

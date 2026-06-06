@@ -81,8 +81,4 @@ public class ResolucaoRadiciacao
 		return resolucaoLatex;
 	}
 	
-	public static void main(String[] args)
-	{
-	}
-	
 }

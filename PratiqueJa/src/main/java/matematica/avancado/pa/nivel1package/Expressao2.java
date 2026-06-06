@@ -1,42 +1,30 @@
 package matematica.avancado.pa.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.Racional;
 import matematica.avancado.pa.ResolucaoPA;
-import modelo.matematica.Conta;
 
-public class Expressao2 extends Conta
+public class Expressao2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int termo = 4 + rand.nextInt(20);
 		int razao = 1 + rand.nextInt(20);
-		int a1= 1 + rand.nextInt(20);
-		
-		Racional a1Racional=new Racional(a1);
-		Racional razaoRacional=new Racional(razao);
+		int a1 = 1 + rand.nextInt(20);
+
+		Racional a1Racional = new Racional(a1);
+		Racional razaoRacional = new Racional(razao);
 		Racional an = new Racional(a1);
-		for(int i = 0; i < termo-1; i++)
-			an=an.add(razaoRacional);
-		
-		textLatex = "" + a1Racional.showDfrac() + 
-		", " + (a1Racional.add(razaoRacional).showDfrac())+", \\ldots, "+an.showDfrac()+"";
+		for(int i = 0; i < termo - 1; i++)
+			an = an.add(razaoRacional);
 
-		textLatex = textLatex.replace("(", "\\left(").replace(")", "\\right)");
+		String enunciado = "" + a1Racional.showDfrac() + ", " + (a1Racional.add(razaoRacional).showDfrac()) + ", \\ldots, " + an.showDfrac() + "";
+		enunciado = enunciado.replace("(", "\\left(").replace(")", "\\right)");
 
-		pergunta="Quantos termos tem a PA?";
-		
-		resultadoCorreto = "" + termo;
-		
-		resolucaoLatex=ResolucaoPA.numeroTermos(a1Racional, razaoRacional, an);
-		
-	}
-
-	public static void main(String[] args)
-	{
-		new Expressao2(1);
+		addParagrafo("Quantos termos tem a PA?");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativas("" + termo);
+		setResolucao("\\(" + ResolucaoPA.numeroTermos(a1Racional, razaoRacional, an) + "\\)");
 	}
 }

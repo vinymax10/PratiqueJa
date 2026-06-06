@@ -2,48 +2,37 @@ package matematica.basico.areaperimetro.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.Config;
 import matematica.basico.areaperimetro.config.ConfigTrapezio;
 import matematica.expressao.MyExpression;
-import modelo.matematica.Conta;
 
-
-public class Image13 extends Conta
+public class Image13 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image13(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int h = 2 * (2 + rand.nextInt(8));
+		int b = (int) (((double) h) * 1.2);
+		int B = (int) (((double) h) * 2.1);
 
-		int h = 2*(2 + rand.nextInt(8));
-		int b = (int)(((double)h)*1.2);
-		int B = (int)(((double)h)*2.1);
-		
-		String area = "" + (B + b) * h/2;
-		
-		textLatex = "Image13" + h + "-"+b+ "-"+B;
+		String area = "" + (B + b) * h / 2;
 
-		resultadoCorreto = "" + B;
-		pergunta="Se a área do trapézio é \\("+area+"\\), qual o valor de \\(B\\)?";
+		String resultadoCorreto = "" + B;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaAreaTrapezio()+"\\\\";
-		resolucaoLatex+="b="+b+",\\quad h="+h+"\\\\";
-		resolucaoLatex+="\\dfrac{(B+"+b+")\\cdot"+h+"}{2} = "+area+"\\\\";
-		MyExpression expressao = new MyExpression("(B+"+b+")*"+h+"="+area+"*2");
-		resolucaoLatex+=expressao.resolverLatex();
-		
-		Config config = new ConfigTrapezio("B", b+"", h+"","","",true);
-		BufferedImage image = config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		String resolucao = ResolucaoAreaPerimetro.formulaAreaTrapezio() + "\\\\";
+		resolucao += "b=" + b + ",\\quad h=" + h + "\\\\";
+		resolucao += "\\dfrac{(B+" + b + ")\\cdot" + h + "}{2} = " + area + "\\\\";
+		MyExpression expressao = new MyExpression("(B+" + b + ")*" + h + "=" + area + "*2");
+		resolucao += expressao.resolverLatex();
 
-	public static void main(String[] args)
-	{
-		new Image13(1);
+		Config config = new ConfigTrapezio("B", b + "", h + "", "", "", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se a área do trapézio é \\(" + area + "\\), qual o valor de \\(B\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

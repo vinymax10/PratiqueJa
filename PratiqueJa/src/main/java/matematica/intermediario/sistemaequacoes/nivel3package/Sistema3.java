@@ -1,34 +1,24 @@
 package matematica.intermediario.sistemaequacoes.nivel3package;
 
+import matematica.GeradorExercicio;
 import matematica.intermediario.sistemaequacoes.ResolucaoSubtituicao;
 import matematica.intermediario.sistemaequacoes.SistemaEquacoes;
-import modelo.matematica.Conta;
 
-
-public class Sistema3 extends Conta
+public class Sistema3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-//	Sistema metodo subtituição
-	public Sistema3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		
-		SistemaEquacoes sistema=new SistemaEquacoes();
+		SistemaEquacoes sistema = new SistemaEquacoes();
 		sistema.construirY1(true);
-		
-		pergunta="Encontre \\(z\\) pelo método da substituição.";
-		
-		resultadoCorreto = ""+sistema.tres.valor;
-		
-		resolucaoLatex=ResolucaoSubtituicao.substituicaoX(sistema);
-		
-		textLatex=sistema.latex();
-	}
 
-	public static void main(String[] args)
-	{
-		new Sistema3(1);
-	}
+		String resultadoCorreto = "" + sistema.tres.valor;
+		String resolucao = ResolucaoSubtituicao.substituicaoX(sistema);
+		String texto = sistema.latex();
 
+		addParagrafo("Encontre \\(z\\) pelo método da substituição.");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
+	}
 }

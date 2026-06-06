@@ -89,6 +89,13 @@ public class ParagrafoBean extends FilhoBean<Paragrafo, ParagrafoDAO>
 		});
 	}
 
+	/** Remoção direta pela linha da tabela (ícone na coluna Ação). */
+	public String remover(Paragrafo paragrafo)
+	{
+		this.entidade = paragrafo;
+		return remover();
+	}
+
 	public void uploadNovo(FileUploadEvent event)
 	{
 		uploadedFile = event.getFile();

@@ -14,7 +14,6 @@ import jakarta.persistence.criteria.Root;
 import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
-import modelo.exercicio.TipoExercicio;
 
 public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 {
@@ -66,11 +65,6 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 		if(filtroExercicio.getNivel() != null)
 		{
 			predicates.add(builder.equal(fromExercicio.<Nivel>get("nivel"), filtroExercicio.getNivel()));
-		}
-
-		if(filtroExercicio.getTipoExercicio() != null)
-		{
-			predicates.add(builder.equal(fromExercicio.<TipoExercicio>get("tipoExercicio"), filtroExercicio.getTipoExercicio()));
 		}
 
 		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(

@@ -2,45 +2,33 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadrado;
-import modelo.matematica.Conta;
 
 //Quadrado com lateralEsq
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int l = 3 + rand.nextInt(20);
 
 		String strDiagonal = "" + l + "\\sqrt{2}";
 
-		pergunta="Se \\(d="+strDiagonal+"\\), qual a área do quadrado?";
+		String resultadoCorreto = "" + l * l;
 
-		textLatex = "Image1" + l;
-		resultadoCorreto = "" + l * l;
-		
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaDiagonalQuadrado()+
-		", \\quad "+ResolucaoAreaPerimetro.formulaAreaQuadrado()+"\\\\";
-		resolucaoLatex+="l="+l+"\\\\";
-		resolucaoLatex+="A="+l+"^2="+l+" \\cdot "+l+"="+(l*l);
+		String resolucao = ResolucaoAreaPerimetro.formulaDiagonalQuadrado() +
+		", \\quad " + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
+		resolucao += "l=" + l + "\\\\";
+		resolucao += "A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l);
 
-		ConfigQuadrado config=new ConfigQuadrado("l","d",true);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		ConfigQuadrado config = new ConfigQuadrado("l", "d", true);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Se \\(d=" + strDiagonal + "\\), qual a área do quadrado?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
-	}
-
-
 }

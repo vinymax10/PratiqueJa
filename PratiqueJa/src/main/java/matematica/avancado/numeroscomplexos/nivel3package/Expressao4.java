@@ -1,41 +1,38 @@
 package matematica.avancado.numeroscomplexos.nivel3package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.numeroscomplexos.NumeroComplexo;
-import modelo.matematica.Conta;
 
-public class Expressao4 extends Conta
+public class Expressao4 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao4(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		NumeroComplexo a=NumeroComplexo.contruir(10);
-		NumeroComplexo b=NumeroComplexo.contruir(10);
-		
-		textLatex="\\dfrac{"+a+"}{"+b+"}=";
-		resolucaoLatex=a.resolucaoDivisao(b);
-		NumeroComplexo resultado=a.div(b);
-		
-		boolean real=rand.nextBoolean();
+		NumeroComplexo a = NumeroComplexo.contruir(10);
+		NumeroComplexo b = NumeroComplexo.contruir(10);
+
+		String texto = "\\dfrac{" + a + "}{" + b + "}=";
+		String resolucao = a.resolucaoDivisao(b);
+		NumeroComplexo resultado = a.div(b);
+
+		String pergunta, resultadoCorreto;
+		boolean real = rand.nextBoolean();
 		if(real)
 		{
-			pergunta="Qual a parte real da divisão?";
+			pergunta = "Qual a parte real da divisão?";
 			resultadoCorreto = "" + resultado.real;
-			resolucaoLatex+="\\\\ \\text{Parte real}="+resultado.real.showDfrac();
+			resolucao += "\\\\ \\text{Parte real}=" + resultado.real.showDfrac();
 		}
 		else
 		{
-			pergunta="Qual a parte imaginária da divisão?";
+			pergunta = "Qual a parte imaginária da divisão?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucaoLatex+="\\\\ \\text{Parte imaginária}="+resultado.imaginaria.showDfrac();
+			resolucao += "\\\\ \\text{Parte imaginária}=" + resultado.imaginaria.showDfrac();
 		}
-		
-	}
 
-	public static void main(String[] args)
-	{
-		new Expressao4(1);
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

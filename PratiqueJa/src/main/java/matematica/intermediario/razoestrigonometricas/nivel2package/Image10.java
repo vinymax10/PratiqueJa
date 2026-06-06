@@ -2,45 +2,37 @@ package matematica.intermediario.razoestrigonometricas.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 import matematica.intermediario.razoestrigonometricas.dados.DadosBase;
 import matematica.intermediario.razoestrigonometricas.dados.LetrasGregas;
-import modelo.matematica.Conta;
 
-public class Image10 extends Conta
+public class Image10 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image10(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		Dados dados = new DadosBase();
+		String angle = LetrasGregas.getLetra();
+		dados.strAngleBase = angle;
+		dados.strBase = "";
+		dados.strHipotenusa = "x";
 
-		Dados dados=new DadosBase();
-		String angle=LetrasGregas.getLetra();
-		dados.strAngleBase=angle;
-		dados.strBase="";
-		dados.strHipotenusa="x";
+		String pergunta = "Se o \\(cos~" + angle + "=" + dados.cosAngleBase.showDfrac() + "\\), qual o valor de x?";
 
-		pergunta="Se o \\(cos~"+angle+"="+dados.cosAngleBase.showDfrac()+"\\), qual o valor de x?";
-
-		resultadoCorreto = ""+dados.hipotenusa;
-		resolucaoLatex = ResolucaoRazoesTrigonometricas.cosHX(angle,dados.cosAngleBase,dados.altura);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.hipotenusa;
+		String resolucao = ResolucaoRazoesTrigonometricas.cosHX(angle, dados.cosAngleBase, dados.altura);
+		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-
-	}
-
-	public static void main(String[] args)
-	{
-		new Image10(1);
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

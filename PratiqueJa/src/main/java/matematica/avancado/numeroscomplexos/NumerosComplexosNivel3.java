@@ -1,45 +1,13 @@
 package matematica.avancado.numeroscomplexos;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class NumerosComplexosNivel3 extends Conta
+public class NumerosComplexosNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public NumerosComplexosNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(4);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.Expressao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public NumerosComplexosNivel3()
-	{
-
-	}
-
-	public boolean isCorreta()
-	{
-		return respostaAluno.trim().equals(resultadoCorreto) || respostaAluno.trim().equals(resultadoCorreto.replaceAll("°", ""));
-	}
-
-	public static void main(String[] args)
-	{
-		new NumerosComplexosNivel3(1);
+		int tipo = 1 + rand.nextInt(4);
+		delegar(instanciar(".nivel3package.Expressao" + tipo));
 	}
 }

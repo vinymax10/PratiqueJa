@@ -1,25 +1,12 @@
 package matematica.intermediario.potenciacao;
 
+import matematica.GeradorExercicio;
 
-
-import jakarta.persistence.Entity;
-
-import matematica.intermediario.potenciacao.nivel1package.Potenciacao;
-import modelo.matematica.Conta;
-
-@Entity
-public class PotenciacaoNivel1 extends Conta
+public class PotenciacaoNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public PotenciacaoNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		clone(new Potenciacao(index));
-	}
-
-	public PotenciacaoNivel1()
-	{
+		delegar(instanciar(".nivel1package.Potenciacao"));
 	}
 }

@@ -1,27 +1,12 @@
 package matematica.intermediario.radiciacao;
 
+import matematica.GeradorExercicio;
 
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-import matematica.intermediario.radiciacao.nivel1package.Radiciacao;
-
-@Entity
-public class RadiciacaoNivel1 extends Conta
+public class RadiciacaoNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RadiciacaoNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		clone(new Radiciacao(index));
+		delegar(instanciar(".nivel1package.Radiciacao"));
 	}
-
-	public RadiciacaoNivel1()
-	{
-	}
-
 }

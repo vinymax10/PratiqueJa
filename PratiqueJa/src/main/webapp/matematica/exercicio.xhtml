@@ -1,122 +1,152 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
 
-<h:body >
-	<ui:composition>
-		<p:tab title="Exercícios" rendered="#{assuntoBean.entidade.showExercicio}">
-		   <div class="p-grid">
-				
-	   		 	<ui:repeat id="repeat" value="#{assuntoBean.exerciciosPadrao}" var="exercicioPadrao" >
-				
-		        	<div class="p-col-12 p-lg-6 p-xl-4">
-		        		<p:card class="newBorder" style="margin:10px;width: auto;">
-						    <f:facet name="header" >
-						        <img alt="user header"  style="border-radius:  16px 16px 0 0;margin-top: 1rem;"  src="#{exercicioPadrao.enderecoImage()}"/>
-						    </f:facet>
-						    <f:facet name="title" >
-						        #{exercicioPadrao.assunto.nome}
-						    </f:facet>
-						    <f:facet name="subtitle" style="text-align:right!important;">
-						        #{exercicioPadrao.nivel.nome} 
-						        <ui:repeat value="#{exercicioPadrao.numEstrelas()}" var="estrelas" >
-									<i class="pi pi-star" style="color:#836FFF;" ></i>
-								</ui:repeat>
-						    </f:facet>
-							
-							<div style="display:flex;height:4rem;">
-							#{exercicioPadrao.descricao}
-							</div>	
-						    <f:facet name="footer" >
-						    
-				        		<p:commandButton value="Download" style="margin-right:15px;"
-								process="@this" action="#{exercicioBean.podeFazerDownload(exercicioPadrao)}"
-								icon="pi pi-download" update="dialogUpgrade"
-								styleClass="ui-button-raised ui-button-flat">
-								</p:commandButton>
-<!-- 									<f:setPropertyActionListener value="#{exercicio}" target="#{exercicioBean.exercicio}"/> -->
-								
-								<p:commandButton value="Fazer" 
-								process="@this" action="#{exercicioBean.criarExercicio(exercicioPadrao)}"
-								icon="pi pi-table"  
-								styleClass="ui-button-raised ui-button-flat ui-button-success">
-								</p:commandButton>
-								
-						    </f:facet>
-						</p:card>
-		        	</div>	
-	
-			    </ui:repeat>
-			    
-	   			<p:dialog id="dialogDownloadExercicio" class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 p-xl-4 p-xl-offset-4" 
-				header="Download do Exercício" 
-				showEffect="fade" hideEffect="fade" width="100%;" modal="true"  
-				widgetVar="downloadExercicioWidget" responsive="true" >
-					
-					<p:outputPanel id="manage-usuario-content" class="ui-fluid">
-						
-						<div class="p-col-12" >
-							<h:outputText style="color: var(--iris);" value="Módulo #{exercicioBean.exercicioPadrao.assunto.modulo.nome}" />
-					    	 - 
-					    	<h:outputText style="color: var(--verde);" value="Assunto #{exercicioBean.exercicioPadrao.assunto.nome}" />
-					    	- 
-					    	<h:outputText style="color: var(--cinza);" value="#{exercicioBean.exercicioPadrao.nivel.nome}" />
-			    		</div>
-			    		
-			    		<div class="p-col-12" >
-							<h:outputText value="Selecione a configuração do pdf do exercício:" />
-			    		</div>
-			    		
-						<div class="ui-fluid p-formgrid p-grid">
-				        				    		
-	                		<div class="p-field p-col-12">
-				                <p:selectBooleanButton value="#{exercicioBean.configDownload.identificacao}" 
-				                onLabel="Com Identificação" offLabel="Sem Identificação"
-								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-								style="width:12rem; margin-top:15px;" />
-							</div>
-							
-							<div class="p-field p-col-12">
-				                <p:selectBooleanButton value="#{exercicioBean.configDownload.respostas}" 
-				                onLabel="Com Respostas" offLabel="Sem Respostas"
-								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-								style="width:12rem; margin-top:15px;" />
-							</div>
-							
-							<div class="p-field p-col-12">
-				                <p:selectBooleanButton value="#{exercicioBean.configDownload.resolucao}" 
-				                onLabel="Com Resolução" offLabel="Sem Resolução"
-								onIcon="pi pi-check-square" offIcon="pi pi-stop" 
-								style="width:12rem; margin-top:15px;" />
-							</div>
-				            
-		           		</div>
-					</p:outputPanel>
-					<f:facet name="footer">
-						<p:commandButton  value="Cancelar" 
-						styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-						onclick="PF('downloadExercicioWidget').hide()"  icon="pi pi-times" />
+	<ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+	    <link rel="stylesheet" href="/css/exercicio-page.css" type="text/css" />
+    </ui:define>
 
-						<p:commandButton value="Download" ajax="false" style="margin-right:15px;"
-						icon="pi pi-download" update="form:tabView:dialogDownloadExercicio"
-						onclick="PrimeFaces.monitorDownload('', PF('downloadExercicioWidget').hide());"
-						styleClass="ui-button-raised ui-button-flat">
-							<p:fileDownload value="#{exercicioBean.download(true)}"/>
-						</p:commandButton>
-						
-       				</f:facet>
-					
-				</p:dialog>
-	
-        	</div>
-		
-       	</p:tab>
-			
-	</ui:composition>	
-		
-</h:body>
-</html>
+	<f:metadata>
+		<f:viewParam name="assunto" value="#{assuntoBean.assunto}" />
+		<f:viewAction action="#{assuntoBean.init()}" />
+		<f:viewAction action="#{exercicioBean.filtrarPorAssunto(assuntoBean.entidade)}" />
+	</f:metadata>
 
-	
+	<ui:include src="/matematica/resumo.xhtml" />
+
+	<h:form id="form">
+
+	  <div class="ex-grid">
+
+		<ui:repeat id="laco" value="#{exercicioBean.exercicios}" var="exercicio" varStatus="status">
+
+			<div class="ex-card">
+
+				<div class="ex-card-header">
+
+					<div class="ex-card-num">#{status.index+1}</div>
+
+					<div class="ex-card-id">E#{exercicio.id}</div>
+
+					<div class="ex-card-meta">
+						<span class="ex-chip ex-chip-assunto">
+							<i class="pi pi-tag" style="font-size:10px" />
+							#{exercicio.assunto.nome}
+						</span>
+						<span class="ex-chip ex-chip-#{exercicio.nivel}">#{exercicio.nivel.nome}</span>
+					</div>
+
+				</div>
+
+				<div class="ex-card-body">
+					<ui:repeat value="#{exercicio.paragrafos}" var="paragrafo">
+						<h:outputText escape="false"
+							style="display:block;margin-bottom:1rem"
+							value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
+						<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
+							cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+							style="margin-bottom:1rem;max-width:100%;display:block">
+						</p:graphicImage>
+					</ui:repeat>
+				</div>
+
+				<h:panelGroup id="resposta">
+
+					<p:selectOneRadio id="alternativas"
+						value="#{exercicio.alternativaEscolhida}" converter="generic"
+						layout="custom" columns="1" styleClass="grid-radio"
+						style="color:#495057;font-weight:bold">
+						<f:selectItems value="#{exercicio.alternativas}" var="alternativa"
+							itemValue="#{alternativa}" />
+					</p:selectOneRadio>
+
+					<ui:repeat id="alt" value="#{exercicio.alternativas}"
+						var="alternativa" varStatus="statusAlt">
+						<h:panelGrid columns="3" cellpadding="5" style="color:#495057;">
+							<p:radioButton id="opt"
+								for="@this:@parent:@parent:@parent:alternativas"
+								itemIndex="#{statusAlt.index}" />
+							<h:outputLabel for="opt"
+								value="#{alternativa.letra})" style="font-weight:bold;" />
+							<h:outputLabel for="opt" escape="false"
+								value="#{alternativa.texto}" style="display:block;" />
+						</h:panelGrid>
+					</ui:repeat>
+
+					<h:panelGroup id="feedbackResposta" layout="block">
+						<h:panelGroup rendered="#{exercicio.feedbackAcertou != null and exercicio.feedbackAcertou}">
+							<span class="ex-feedback ex-feedback-acerto">
+								<i class="pi pi-check-circle" /> Resposta correta
+							</span>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{exercicio.feedbackAcertou != null and !exercicio.feedbackAcertou}">
+							<span class="ex-feedback ex-feedback-erro">
+								<i class="pi pi-times-circle" />
+								Incorreta
+								<h:panelGroup rendered="#{not empty exercicio.feedbackLetraCorreta}">
+									— Correta: <strong>#{exercicio.feedbackLetraCorreta}</strong>
+								</h:panelGroup>
+							</span>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{exercicio.feedbackSemSelecao}">
+							<span class="ex-feedback ex-feedback-aviso">
+								<i class="pi pi-exclamation-triangle" /> Selecione uma alternativa
+							</span>
+						</h:panelGroup>
+					</h:panelGroup>
+
+				</h:panelGroup>
+
+				<div class="ex-card-actions">
+
+					<p:commandButton value="Responder" process="@form"
+						update="feedbackResposta, :growl"
+						action="#{exercicioBean.responder(exercicio)}"
+						styleClass="ui-button-raised btn-primary" />
+
+					<p:commandButton value="Resposta Comentada" icon="pi pi-pencil"
+						styleClass="ui-button-flat ui-button-plain"
+						action="#{exercicio.toogleResolucaoComentada()}"
+						process="@this" oncomplete="reloadMathJax();"
+						update="resolucaoComentada" />
+
+					<p:button value="Editar" icon="pi pi-pencil"
+						rendered="#{sessaoBean.podeVerAdministracao()}"
+						styleClass="ui-button-flat ui-button-plain"
+						target="_blank"
+						href="#{exercicioBean.getUrlEdicao(exercicio)}" />
+
+				</div>
+
+				<h:panelGroup id="resolucaoComentada" layout="block">
+					<h:panelGroup layout="block" rendered="#{exercicio.showResolucaoComentada}">
+						<div class="ex-resolucao">
+							<h:outputLabel value="#{exercicio.resolucao}" escape="false"
+								style="display:block;margin-bottom:8px;color:#374151" />
+							<h:outputLabel value="Alternativa correta: #{exercicio.correta().letra}"
+								rendered="#{not empty exercicio.correta()}"
+								style="font-weight:800;color:#15803d;font-size:1rem" />
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
+
+			</div>
+
+		</ui:repeat>
+
+	  </div>
+
+		<h:panelGroup layout="block" rendered="#{empty exercicioBean.exercicios}">
+			<p style="text-align:center;padding:2rem;color:#6b7280;">
+				Nenhum exercício disponível para este assunto.
+			</p>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:decorate>

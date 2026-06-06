@@ -2,7 +2,7 @@ package matematica.avancado.leisenocosseno.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.avancado.leisenocosseno.Resolucao;
 import matematica.avancado.leisenocosseno.config.Config;
 import matematica.avancado.leisenocosseno.config.Dados;
@@ -10,36 +10,27 @@ import matematica.avancado.leisenocosseno.config.TipoDado;
 import matematica.avancado.leisenocosseno.config.Triangulo;
 import matematica.avancado.leisenocosseno.config.Triangulos;
 import matematica.intermediario.razoestrigonometricas.dados.LetrasGregas;
-import modelo.matematica.Conta;
 
-public class Image3 extends Conta
+public class Image3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	
-	public Image3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		Triangulo triangulo = Triangulos.getTriangulo();
-		Config config = new Config(TipoDado.AB,triangulo);
-		
-		Dados dados=config.getDados();
-		String angle=LetrasGregas.getLetra();
-		dados.strAngleC=angle;
+		Config config = new Config(TipoDado.AB, triangulo);
 
-		pergunta="Qual o \\(cos~"+dados.strAngleC+"\\)?";
+		Dados dados = config.getDados();
+		String angle = LetrasGregas.getLetra();
+		dados.strAngleC = angle;
 
-		resultadoCorreto = ""+dados.cosAngleC.toString();
-		resolucaoLatex = Resolucao.leiCosCosseno(angle, dados.ladoC,dados.ladoA, dados.ladoB);
+		String resultadoCorreto = "" + dados.cosAngleC.toString();
+		String resolucao = Resolucao.leiCosCosseno(angle, dados.ladoC, dados.ladoA, dados.ladoB);
 
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image3(1);
+		addParagrafo("Qual o \\(cos~" + dados.strAngleC + "\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

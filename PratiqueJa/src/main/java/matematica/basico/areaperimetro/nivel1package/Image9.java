@@ -2,38 +2,27 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadrado;
-import modelo.matematica.Conta;
 
-//	Perimetro Quadrado
-public class Image9 extends Conta
+//	Perímetro Quadrado
+public class Image9 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image9(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int l = 3 + rand.nextInt(20);
-		
-		pergunta="Qual o perímetro do quadrado?";
-		textLatex = "Image9" + l;
-		resultadoCorreto = "" + (4 * l);
-		
-		resolucaoLatex=ResolucaoAreaPerimetro.perimetroQuadrado(l);
-		
-		ConfigQuadrado config=new ConfigQuadrado(""+l,"",false);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
 
-	public static void main(String[] args)
-	{
-		new Image9(1);
-	}
+		String resultadoCorreto = "" + (4 * l);
+		String resolucao = ResolucaoAreaPerimetro.perimetroQuadrado(l);
 
+		ConfigQuadrado config = new ConfigQuadrado("" + l, "", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+
+		addParagrafo("Qual o perímetro do quadrado?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
+	}
 }

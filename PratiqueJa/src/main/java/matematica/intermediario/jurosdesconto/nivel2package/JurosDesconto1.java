@@ -1,29 +1,17 @@
 package matematica.intermediario.jurosdesconto.nivel2package;
 
-import modelo.matematica.Conta;
+import matematica.GeradorExercicio;
 
-
-public class JurosDesconto1 extends Conta
+public class JurosDesconto1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public JurosDesconto1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
+		ProblemaDescontoSimples problema = TextoDescontoSimples.getProblemaDesconto();
+		problema.gerarValores();
 
-		ProblemaDescontoSimples problema=TextoDescontoSimples.getProblemaDesconto();
-		problema.gerarValores();	
-		pergunta=problema.getPergunta();
-		
-		resultadoCorreto = "" + problema.resultado();
-		
-		resolucaoLatex = problema.resolucao();
-		
+		addParagrafo(problema.getPergunta());
+		gerarAlternativas("" + problema.resultado());
+		setResolucao("\\(" + problema.resolucao() + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new JurosDesconto1(1);
-	}
-
 }

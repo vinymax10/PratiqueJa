@@ -26,11 +26,15 @@
 				selection="#{paragrafoBean.entidadeOriginal}" reflow="true"
 				selectionMode="single" rowKey="#{entidade.id}"
 				rows="30" paginator="true" paginatorAlwaysVisible="false"
-				rowSelector="td:not(.coluna-ativo)">
+				draggableRows="true">
 
 					<p:ajax event="rowSelect" update="dialog-paragrafo"
 					listener="#{paragrafoBean.onRowSelect}"
 					oncomplete="PF('dialogParagrafo').show()" resetValues="true"/>
+
+					<p:ajax event="rowReorder"
+					listener="#{paragrafoBean.onRowReorder(questaoBean.entidade.paragrafos)}"
+					update="form:paragrafosTabela, :growl" oncomplete="reloadMathJax();" />
 
 					<p:column headerText="Ordem" responsivePriority="1" width="10%">
 						<h:outputText value="#{entidade.ordem}" />
@@ -43,8 +47,27 @@
 					<p:column headerText="Conteúdo" responsivePriority="3">
 						<h:outputText rendered="#{!entidade.tipoImagem}"
 						value="#{entidade.texto}" style="white-space:pre-wrap;" />
-						<h:outputText rendered="#{entidade.tipoImagem}"
-						value="#{entidade.imagemFile.endImagem}" />
+						<h:panelGroup rendered="#{entidade.tipoImagem}" layout="block"
+						styleClass="flex flex-column gap-1">
+							<p:graphicImage value="#{entidade.imagemFile.imagem()}"
+							stream="false" cache="false"
+							style="max-width:220px;max-height:140px;border-radius:6px;display:block;" />
+							<h:outputText value="#{entidade.imagemFile.endImagem}" styleClass="status" />
+						</h:panelGroup>
+					</p:column>
+
+					<p:column headerText="Ação" responsivePriority="1" style="width:6rem"
+					styleClass="coluna-ativo" exportable="false">
+						<p:commandLink title="Remover parágrafo"
+						action="#{paragrafoBean.remover(entidade)}"
+						update="form:paragrafosTabela, :growl" process="@this"
+						oncomplete="reloadMathJax();">
+							<div class="buttonIcon">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+								message="Você tem certeza que deseja remover este parágrafo?" />
+								<i class="pi pi-trash vermelho"></i>
+							</div>
+						</p:commandLink>
 					</p:column>
 
 				</p:dataTable>

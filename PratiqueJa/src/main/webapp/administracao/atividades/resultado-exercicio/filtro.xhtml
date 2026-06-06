@@ -43,16 +43,6 @@
 							</p:selectOneMenu>
 						</h:panelGroup>
 
-						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
-							<p:outputLabel for="@next" value="Tipo de Exercício"/>
-							<p:selectOneMenu value="#{resultadoExercicioBean.filtro.tipoExercicio}"
-							filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
-								<f:selectItems value="#{tipoExercicioBean.opcoes}" var="opcao"
-								itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
-							</p:selectOneMenu>
-						</h:panelGroup>
-
 						<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-6">
 							<p:outputLabel for="@next" value="Nome / Enunciado / Descrição"/>
 							<p:inputText value="#{resultadoExercicioBean.filtro.nomeEnunciadoDescricao}"

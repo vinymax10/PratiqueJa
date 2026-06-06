@@ -165,6 +165,27 @@ public class QuestaoDAO extends DAO<Questao>
 			predicates.add(builder.equal(fromQuestao.<Long>get("id"), filtroQuestao.getId()));
 		}
 
+		if(filtroQuestao.getIds() != null && !filtroQuestao.getIds().isBlank())
+		{
+			List<Long> listaIds = new ArrayList<>();
+			for(String parte : filtroQuestao.getIds().split(","))
+			{
+				String t = parte.trim();
+				if(!t.isEmpty())
+				{
+					try
+					{
+						listaIds.add(Long.valueOf(t));
+					}
+					catch(NumberFormatException ignored)
+					{
+					}
+				}
+			}
+			if(!listaIds.isEmpty())
+				predicates.add(fromQuestao.<Long>get("id").in(listaIds));
+		}
+
 		if(filtroQuestao.getRevisada() != null)
 			predicates.add(builder.equal(fromQuestao.get("revisada"), filtroQuestao.getRevisada().booleanValue()));
 

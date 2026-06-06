@@ -43,16 +43,6 @@
 							</p:selectOneMenu>
 						</div>
 
-						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
-							<p:outputLabel for="@next" value="Tipo de Exercício"/>
-							<p:selectOneMenu value="#{exercicioPadraoBean.filtro.tipoExercicio}"
-							filter="true" filterMatchMode="contains">
-								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
-								<f:selectItems value="#{tipoExercicioBean.opcoes}" var="opcao"
-								itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
-							</p:selectOneMenu>
-						</div>
-
 						<div class="campo col-12 md:col-6 lg:col-6 xl:col-2">
 							<p:outputLabel for="@next" value="Mostrar Resolução"/>
 							<p:selectOneMenu value="#{exercicioPadraoBean.filtro.mostrarResolucao}">

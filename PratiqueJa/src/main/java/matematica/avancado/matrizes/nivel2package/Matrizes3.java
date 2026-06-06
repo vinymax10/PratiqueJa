@@ -1,60 +1,48 @@
 package matematica.avancado.matrizes.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.matrizes.AuxMatriz;
-import modelo.matematica.Conta;
 
-
-public class Matrizes3 extends Conta
+public class Matrizes3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Matrizes3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		int size=2+rand.nextInt(2);
+		int size = 2 + rand.nextInt(2);
 
-		int [][]a=AuxMatriz.contruirMatriz(1, size, 50);
-		int [][]b=AuxMatriz.contruirMatriz(size, 1, 50);
+		int[][] a = AuxMatriz.contruirMatriz(1, size, 50);
+		int[][] b = AuxMatriz.contruirMatriz(size, 1, 50);
 
-		pergunta="Qual o resultado de \\(A \\cdot B\\)?";
-		
-		resolucaoLatex="";
-		resolucaoLatex+="A \\cdot B=";
-		resolucaoLatex+=AuxMatriz.matrizStr(a)+"\\cdot"+AuxMatriz.matrizStr(b)+"=\\\\ \\\\";
-		int resultado=0;
+		String resolucao = "";
+		resolucao += "A \\cdot B=";
+		resolucao += AuxMatriz.matrizStr(a) + "\\cdot" + AuxMatriz.matrizStr(b) + "=\\\\ \\\\";
+		int resultado = 0;
 		for(int i = 0; i < size; i++)
 		{
-			resolucaoLatex+=AuxMatriz.parenteses(a[0][i])+"\\cdot"+AuxMatriz.parenteses(b[i][0]);
-			
-			if(i<(size-1))
-				resolucaoLatex+="+";
+			resolucao += AuxMatriz.parenteses(a[0][i]) + "\\cdot" + AuxMatriz.parenteses(b[i][0]);
+
+			if(i < (size - 1))
+				resolucao += "+";
 		}
-		resolucaoLatex+="=\\\\";
+		resolucao += "=\\\\";
 
 		for(int i = 0; i < size; i++)
 		{
-			if(i>0&&a[0][i]*b[i][0]>=0)
-				resolucaoLatex+="+";
+			if(i > 0 && a[0][i] * b[i][0] >= 0)
+				resolucao += "+";
 
-			resolucaoLatex+=a[0][i]*b[i][0];
-			resultado+=a[0][i]*b[i][0];
+			resolucao += a[0][i] * b[i][0];
+			resultado += a[0][i] * b[i][0];
 		}
-		resolucaoLatex+="="+resultado;
+		resolucao += "=" + resultado;
 
-		resultadoCorreto = resultado+"";
+		String resultadoCorreto = resultado + "";
 
-		textLatex="";
-		textLatex+="A="+AuxMatriz.matrizStr(a);
-		textLatex+=",~B="+AuxMatriz.matrizStr(b);
+		String texto = "A=" + AuxMatriz.matrizStr(a) + ",~B=" + AuxMatriz.matrizStr(b);
 
+		addParagrafo("Qual o resultado de \\(A \\cdot B\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-//		for(int i = 0; i < 100; i++)
-//		{
-			new Matrizes3(1);
-//		}
-	}
-
 }

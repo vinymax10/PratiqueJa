@@ -2,42 +2,31 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigLozango;
-import modelo.matematica.Conta;
 
-
-public class Image31 extends Conta
+public class Image31 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image31(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int l = 3 + rand.nextInt(20);
 
 		String perimetro = "" + (4 * l);
-		
-		resultadoCorreto = "" + l;
-		textLatex = "Image31" + l + "";
 
-		pergunta="Se o perímetro do lozango é \\("+perimetro+"\\), qual o valor de \\(l\\)?";
+		String resultadoCorreto = "" + l;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaPerimetroQuadrado()+"\\\\";
-		resolucaoLatex+="4 \\cdot l="+perimetro+"\\\\";
-		resolucaoLatex+="l=\\dfrac{"+perimetro+"}{4}="+l+"\\\\";
-		
-		ConfigLozango config=new ConfigLozango("", "","","","l",false);
-		BufferedImage image=config.criarImagem(index);
+		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
+		resolucao += "4 \\cdot l=" + perimetro + "\\\\";
+		resolucao += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\\\";
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigLozango config = new ConfigLozango("", "", "", "", "l", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image31(1);
+		addParagrafo("Se o perímetro do lozango é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

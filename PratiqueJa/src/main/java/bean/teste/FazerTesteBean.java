@@ -17,7 +17,8 @@ import jakarta.inject.Named;
 import dao.teste.ResultadoTesteDAO;
 import dao.teste.TesteDAO;
 import lombok.Data;
-import modelo.matematica.Conta;
+import matematica.ExercicioFactory;
+import modelo.matematica.Exercicio;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.ResultadoTeste;
@@ -59,7 +60,7 @@ public class FazerTesteBean implements Serializable
 	private void clone(Teste teste)
 	{
 		Teste clone = new Teste();
-		Conta conta;
+		Exercicio conta;
 		int index = 1;
 		try
 		{
@@ -73,10 +74,8 @@ public class FazerTesteBean implements Serializable
 				{
 					do
 					{
-						conta = (Conta) Class.forName(conteudoTeste.getExercicioPadrao().getClasse())
-							.getConstructor(Integer.TYPE).newInstance(index);
-						conta.setEtapaTeste(etapaTeste);
-						conta.setTipoExercicio(conteudoTeste.getExercicioPadrao().getTipoExercicio());
+						conta = ExercicioFactory.gerar(conteudoTeste.getExercicioPadrao().getClasse(), index);
+						// TODO religar conta à etapaTeste no novo modelo (sem etapaTeste/tipoExercicio do Conta).
 					}
 					while(etapaTeste.getContas().contains(conta));
 					etapaTeste.getContas().add(conta);
@@ -135,12 +134,7 @@ public class FazerTesteBean implements Serializable
 			{
 				totalContas += etapaTeste.getContas().size();
 
-				for(Conta conta : etapaTeste.getContas())
-				{
-					conta.setRespondida(true);
-					if(conta.isCorreta())
-						numCorretas++;
-				}
+				// TODO migrar correção para o novo Exercicio (alternativa escolhida/correta).
 			}
 			teste.setRealizado(true);
 			teste.setRealizacao(LocalDate.now());

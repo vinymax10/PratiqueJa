@@ -64,7 +64,4 @@ public class Adicao
 		return "Operacao [vaiUm=" + vaiUm + ", primeiro=" + primeiro + ", segundo=" + segundo + "]";
 	}
 
-	public static void main(String[] args) 
-	{
-	}
 }

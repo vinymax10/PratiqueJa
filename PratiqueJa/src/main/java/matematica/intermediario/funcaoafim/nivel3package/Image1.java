@@ -2,28 +2,24 @@ package matematica.intermediario.funcaoafim.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.Racional;
 import matematica.intermediario.funcaoafim.ResolucaoFuncaoAfim;
 import matematica.intermediario.funcaoafim.config.ConfigRetaReal;
-import modelo.matematica.Conta;
 
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int pontoAx = -(2 + rand.nextInt(7));
 		int pontoAy = 2 + rand.nextInt(7);
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 			pontoAy *= -1;
 
 		int pontoBx = 2 + rand.nextInt(7);
 		int pontoBy = 2 + rand.nextInt(7);
-		if (rand.nextBoolean())
+		if(rand.nextBoolean())
 			pontoBy *= -1;
 
 		double a = (double) (pontoBy - pontoAy) / (pontoBx - pontoAx);
@@ -31,28 +27,19 @@ public class Image1 extends Conta
 
 		Racional aRacional = new Racional((pontoBy - pontoAy)).div(new Racional(pontoBx - pontoAx));
 		aRacional.fatoracao(2);
-		resultadoCorreto = "" + aRacional;
 
-		textLatex = a + "" + b;
-		pergunta = "Encontre o coeficiente angular da reta:";
+		ConfigRetaReal config = new ConfigRetaReal(a, b, pontoAx, pontoAy, pontoBx, pontoBy);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		ConfigRetaReal config=new ConfigRetaReal(a,b,pontoAx,pontoAy,pontoBx,pontoBy);
-		BufferedImage image=config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		String resolucao = "";
+		resolucao += "\\text{Dados os pontos } A=(" + pontoAx + "," + pontoAy + ") \\text{ e }";
+		resolucao += "B=(" + pontoBx + "," + pontoBy + "), \\\\";
+		resolucao += "\\text{temos que o coeficiente angular } a \\\\ \\text{ é calculado por: }\\\\";
+		resolucao += ResolucaoFuncaoAfim.resolucao(pontoAx, pontoAy, pontoBx, pontoBy);
 
-        resolucaoLatex="";
-		resolucaoLatex+="\\text{Dados os pontos } A=("+pontoAx+","+pontoAy+") \\text{ e }";
-		resolucaoLatex+="B=("+pontoBx+","+pontoBy+"), \\\\";
-		resolucaoLatex+="\\text{temos que o coeficiente angular } a \\\\ \\text{ é calculado por: }\\\\";
-		
-		resolucaoLatex+=ResolucaoFuncaoAfim.resolucao(pontoAx,pontoAy,pontoBx,pontoBy);
-		
-		carregarBlob();
+		addParagrafo("Encontre o coeficiente angular da reta:");
+		addParagrafoImagem(image);
+		gerarAlternativas("" + aRacional);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
-	}
-
 }

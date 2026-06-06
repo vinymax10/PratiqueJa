@@ -2,43 +2,31 @@ package matematica.intermediario.pitagoras.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.pitagoras.ResolucaoPitagoras;
 import matematica.intermediario.pitagoras.config.Config;
 import matematica.intermediario.pitagoras.dados.Dados;
 import matematica.intermediario.pitagoras.dados.DadosBase2;
-import modelo.matematica.Conta;
 
-
-public class Image3 extends Conta
+public class Image3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		Dados dados = new DadosBase2(20);
+		dados.altura.str = "c";
 
-		Dados dados=new DadosBase2(20);
-		dados.altura.str="c";
-
-		pergunta="Qual o valor de \\(c\\)?";
-		
-		resultadoCorreto = ""+dados.altura.show();
-		
-		resolucaoLatex = ResolucaoPitagoras.resolucaoABX(dados);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.altura.show();
+		String resolucao = ResolucaoPitagoras.resolucaoABX(dados);
+		String texto = dados.toString();
 
 		Config config = Config.build2(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		addParagrafo("Qual o valor de \\(c\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image3(1);
-	}
-
 }

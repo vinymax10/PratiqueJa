@@ -2,38 +2,27 @@ package matematica.basico.areaperimetro.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigCircunferencia;
-import modelo.matematica.Conta;
 
-//	Quadrado
-public class Image19 extends Conta
+//	Circunferência
+public class Image19 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image19(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int r = (3 + rand.nextInt(20));
 
-		pergunta="Se o comprimento da circunferência é \\(C=x\\pi\\), qual o valor de \\(x\\)?";
-		resultadoCorreto = "" + (2 * r);
-		textLatex = "Image19" + r;
+		String resultadoCorreto = "" + (2 * r);
+		String resolucao = ResolucaoAreaPerimetro.comprimentoCircunferencia(r);
 
-		resolucaoLatex=ResolucaoAreaPerimetro.comprimentoCircunferencia(r);
+		ConfigCircunferencia config = new ConfigCircunferencia("" + r, false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		ConfigCircunferencia config=new ConfigCircunferencia(""+r,false);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		addParagrafo("Se o comprimento da circunferência é \\(C=x\\pi\\), qual o valor de \\(x\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image19(1);
-	}
-
 }

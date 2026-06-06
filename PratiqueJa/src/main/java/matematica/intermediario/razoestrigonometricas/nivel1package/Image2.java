@@ -2,43 +2,34 @@ package matematica.intermediario.razoestrigonometricas.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 import matematica.intermediario.razoestrigonometricas.dados.DadosAltura;
 import matematica.intermediario.razoestrigonometricas.dados.LetrasGregas;
-import modelo.matematica.Conta;
 
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		Dados dados = new DadosAltura();
+		String angle = LetrasGregas.getLetra();
+		dados.strAngleAltura = angle;
+		dados.strAltura = "";
 
-		Dados dados=new DadosAltura();
-		String angle=LetrasGregas.getLetra();
-		dados.strAngleAltura=angle;
-		dados.strAltura="";
-
-		pergunta="Qual o \\(cos~"+angle+"\\)?";
-
-		resultadoCorreto = ""+dados.cosAngleAltura;
-		resolucaoLatex = ResolucaoRazoesTrigonometricas.cos(angle,dados.base,dados.hipotenusa);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.cosAngleAltura;
+		String resolucao = ResolucaoRazoesTrigonometricas.cos(angle, dados.base, dados.hipotenusa);
+		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
+		addParagrafo("Qual o \\(cos~" + angle + "\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

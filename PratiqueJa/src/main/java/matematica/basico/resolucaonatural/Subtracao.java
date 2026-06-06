@@ -61,17 +61,4 @@ public class Subtracao
 		return resolucaoLatex;
 	}
 
-	public static void main(String[] args) 
-	{
-		Subtracao subtracao=new Subtracao();
-
-		try
-		{
-			Convert.toSVG(subtracao.subtrair(111, 77,true),"areaPoligono.svg",true);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
 }

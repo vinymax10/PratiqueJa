@@ -25,8 +25,7 @@
 				var="entidade" value="#{questaoBean.entidade.alternativas}"
 				selection="#{alternativaBean.entidadeOriginal}" reflow="true"
 				selectionMode="single" rowKey="#{entidade.id}"
-				rows="30" paginator="true" paginatorAlwaysVisible="false"
-				rowSelector="td:not(.coluna-ativo)">
+				rows="30" paginator="true" paginatorAlwaysVisible="false">
 
 					<p:ajax event="rowSelect" update="dialog-alternativa"
 					listener="#{alternativaBean.onRowSelect}"

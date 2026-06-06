@@ -1,19 +1,15 @@
 package matematica.basico.expressaonumerica.nivel2package;
 
-import util.Algebra;
 import matematica.ExpressaoExt;
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
+import util.Algebra;
 
-
-public class Expressao10 extends Conta
+public class Expressao10 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao10(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int size = 6;
 		Racional[] coeficientes = new Racional[size];
 
@@ -23,18 +19,13 @@ public class Expressao10 extends Conta
 		String expLatex = "( A " + Algebra.sinalPlusMinus() + " B ) " + Algebra.sinalMenosDiv() + " ( C " + Algebra.sinalPlusMinus() + " D ) / ( E "
 		+ Algebra.sinalPlusMinus() + " F )";
 
-//		gerando os coeficientes;
 		for(int i = 0; i < size; i++)
 			coeficientes[i] = new Racional(1 + rand.nextInt(20));
-//		-------------------------		
-
-//		evitando coeficientes iguais
 
 		while(coeficientes[4].equals(coeficientes[5]))
 			coeficientes[5] = new Racional(1 + rand.nextInt(20));
-//		-------------------------				
 
-		textLatex = Algebra.gerarTextLatexEN(expLatex, coeficientes);
+		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
 
 		ExpressaoExt expressao;
 		Racional resultado = null;
@@ -48,12 +39,8 @@ public class Expressao10 extends Conta
 			e.printStackTrace();
 		}
 
-		resultadoCorreto = "" + resultado.toString();
-	}
-
-	public static void main(String[] args)
-	{
-		for(int i = 0; i < 1000; i++)
-			new Expressao10(1);
+		addParagrafo("Calcule o valor da expressão:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + resultado);
 	}
 }

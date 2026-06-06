@@ -21,31 +21,40 @@
 
 		<div class="ui-fluid gride">
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-8 xl:col-6">
-				<p:outputLabel for="@next" value="Exercício Padrão" />
-				<p:selectOneMenu value="#{exercicioBean.entidade.exercicioPadrao}"
-				converter="generic" filter="true" filterMatchMode="contains">
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Assunto" />
+				<p:selectOneMenu value="#{exercicioBean.entidade.assunto}"
+				converter="generic" filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O assunto é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{exercicioPadraoBean.listaTudo}" var="ep"
-					itemLabel="#{ep.assunto.modulo.nome} - #{ep.assunto.nome} - #{ep.nivel.nome}"
-					itemValue="#{ep}"/>
+					<f:selectItems value="#{assuntoBean.listaAtivas}"
+					var="assunto" itemLabel="#{assunto.nome}" itemValue="#{assunto}" />
 				</p:selectOneMenu>
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Nível" />
+				<p:selectOneMenu value="#{exercicioBean.entidade.nivel}"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O nível é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{nivelBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Global" />
 				<p:toggleSwitch class="toggleSwitch-form"
 					value="#{exercicioBean.entidade.global}" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12">
-				<p:outputLabel for="@next" value="Enunciado" />
-				<p:inputTextarea rows="6" value="#{exercicioBean.entidade.enunciado}"
-				placeholder="Texto do enunciado do exercício." maxlength="4095" styleClass="w-full" />
-			</h:panelGroup>
-
 		</div>
+
+		<ui:include rendered="#{!exercicioBean.cadastro}"
+		src="/administracao/conteudo/exercicio/paragrafo/paragrafo.xhtml" />
 
 		<ui:include rendered="#{!exercicioBean.cadastro}"
 		src="/administracao/conteudo/exercicio/alternativa/alternativa.xhtml" />
@@ -59,7 +68,7 @@
 					<p:inputTextarea rows="10" value="#{exercicioBean.entidade.resolucao}" styleClass="w-full" />
 				</div>
 				<div class="campo col-6">
-					<p:outputLabel for="@next" value="Preview" style="display:block;margin-bottom:15px;" />
+					<p:outputLabel value="Preview" style="display:block;margin-bottom:15px;" />
 					<p:outputLabel value="#{exercicioBean.entidade.resolucao}" />
 				</div>
 			</div>
@@ -125,6 +134,7 @@
 
 	</h:form>
 
+	<ui:include src="/administracao/conteudo/exercicio/paragrafo/dialog-cadastro.xhtml" />
 	<ui:include src="/administracao/conteudo/exercicio/alternativa/dialog-cadastro.xhtml" />
 
 </ui:decorate>

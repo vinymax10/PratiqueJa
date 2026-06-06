@@ -2,44 +2,34 @@ package matematica.intermediario.razoestrigonometricas.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.razoestrigonometricas.ResolucaoRazoesTrigonometricas;
 import matematica.intermediario.razoestrigonometricas.config.Config;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 import matematica.intermediario.razoestrigonometricas.dados.DadosBase;
 import matematica.intermediario.razoestrigonometricas.dados.LetrasGregas;
-import modelo.matematica.Conta;
 
-public class Image1 extends Conta
+public class Image1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		Dados dados=new DadosBase();
-		String angle=LetrasGregas.getLetra();
-		dados.strAngleAltura=angle;
-		dados.strBase="";
+		Dados dados = new DadosBase();
+		String angle = LetrasGregas.getLetra();
+		dados.strAngleAltura = angle;
+		dados.strBase = "";
 
-		pergunta="Qual o \\(sen~"+angle+"\\)?";
-
-		resultadoCorreto = ""+dados.senAngleAltura;
-		resolucaoLatex = ResolucaoRazoesTrigonometricas.sen(angle,dados.altura,dados.hipotenusa);
-
-		textLatex = dados.toString();
+		String resultadoCorreto = "" + dados.senAngleAltura;
+		String resolucao = ResolucaoRazoesTrigonometricas.sen(angle, dados.altura, dados.hipotenusa);
+		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(index);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-//		Graphics.salvar(image, true, "RazoesTrigonometricas.PNG");
-	}
-
-	public static void main(String[] args)
-	{
-		new Image1(1);
+		addParagrafo("Qual o \\(sen~" + angle + "\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -2,17 +2,13 @@ package matematica.intermediario.semelhancaangulos.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import jakarta.persistence.Transient;
-
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.semelhancaangulos.AuxSemelhancaAngulos;
-import modelo.matematica.Conta;
 
-public class Exercicio2 extends Conta
+public class Exercicio2 extends GeradorExercicio
 {
 	private static final long serialVersionUID = 1L;
 	
-	@Transient
 	String [][] problemas= {
 	//1Conhecido
 	{"b=x,g", "h=y", "c=h->g+h,i=b,"},
@@ -101,9 +97,9 @@ public class Exercicio2 extends Conta
 	{"j=x,d,f", "e=y", "c=e->d+e+f,i=j"},
 	};
 	
-	public Exercicio2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
 		int pos=rand.nextInt(problemas.length);
 //		int pos=index;
 
@@ -122,31 +118,23 @@ public class Exercicio2 extends Conta
 		
 		ConfigSemelhancaAngulos5 config = new ConfigSemelhancaAngulos5(a, b, c, d, e, f, g, h, i, j);
 
-		resultadoCorreto = "" + AuxSemelhancaAngulos.getAnguloLabel(angleImage, config, "x").angulo + "°";
+		String resultadoCorreto = "" + AuxSemelhancaAngulos.getAnguloLabel(angleImage, config, "x").angulo + "°";
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleImage, config);
 
-		textLatex = config.getTextLatex();
+		String texto = config.getTextLatex();
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleResult, config);
 
-		resolucaoLatex=AuxSemelhancaAngulos.resolucao(instrucao,config);
-		
-		if(!angleResult.equals(""))
-		{
-			BufferedImage imageResolucao = config.criarImagem(index);
-			baosResolucao = Graphics.salvar(imageResolucao, false, "");
-		}
+		String resolucao = AuxSemelhancaAngulos.resolucao(instrucao, config);
 
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Exercicio2(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 
 }

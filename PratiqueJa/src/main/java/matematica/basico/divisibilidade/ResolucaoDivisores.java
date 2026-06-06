@@ -323,10 +323,4 @@ public class ResolucaoDivisores
 		return resolucaoLatex;
 	}
 	
-	public static void main(String[] args)
-	{
-//		ResolucaoDivisores resolucaoDivisores=new ResolucaoDivisores();
-//		String resolucaoLatex=resolucaoDivisores.numerosDividores(28);
-	}
-
 }

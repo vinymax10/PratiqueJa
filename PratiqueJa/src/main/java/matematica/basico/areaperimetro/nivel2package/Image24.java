@@ -2,43 +2,33 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigParalelogramo;
-import modelo.matematica.Conta;
 
-
-public class Image24 extends Conta
+public class Image24 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image24(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
+		int b = 2 * (3 + rand.nextInt(12));
+		int a = (int) (((double) b) * 0.7);
 
-		int b = 2*(3 + rand.nextInt(12));
-		int a = (int)(((double)b)*0.7);
-		
-		String perimetro = "" + (2*(b+a));
-		resultadoCorreto = "" + a;
-		pergunta="Se o perímetro do paralelogramo é \\("+perimetro+"\\), qual o valor de \\(a\\)?";
-		textLatex = "Image24" + b + "-" + a;
+		String perimetro = "" + (2 * (b + a));
+		String resultadoCorreto = "" + a;
 
-		resolucaoLatex=ResolucaoAreaPerimetro.formulaPerimetroParalelogramo()+"\\\\";
-		resolucaoLatex+="b="+b+"\\\\";
-		resolucaoLatex+="2 \\cdot(a + "+b+")="+perimetro+"\\\\";
-		resolucaoLatex+="a +"+b+"=\\dfrac{"+perimetro+"}{2}="+(b+a)+"\\\\";
-		resolucaoLatex+="a="+(b+a)+"-"+b+"="+a+"\\\\";
+		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroParalelogramo() + "\\\\";
+		resolucao += "b=" + b + "\\\\";
+		resolucao += "2 \\cdot(a + " + b + ")=" + perimetro + "\\\\";
+		resolucao += "a +" + b + "=\\dfrac{" + perimetro + "}{2}=" + (b + a) + "\\\\";
+		resolucao += "a=" + (b + a) + "-" + b + "=" + a + "\\\\";
 
-		ConfigParalelogramo config=new ConfigParalelogramo(""+b,"","a",false);
-		BufferedImage image=config.criarImagem(index);
+		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "", "a", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image24(1);
+		addParagrafo("Se o perímetro do paralelogramo é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

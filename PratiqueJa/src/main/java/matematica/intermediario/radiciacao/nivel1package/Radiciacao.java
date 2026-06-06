@@ -1,31 +1,24 @@
 package matematica.intermediario.radiciacao.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.intermediario.radiciacao.ResolucaoRadiciacao;
-import modelo.matematica.Conta;
 import pdf.util.Convert;
 
-
-public class Radiciacao extends Conta
+public class Radiciacao extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Radiciacao(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 1 + rand.nextInt(20);
 
-		textLatex = "\\sqrt{" + (int) (Math.pow(a, 2)) + "}" + "=";
-		resultadoCorreto = "" + a;
-		
-		resolucaoLatex=ResolucaoRadiciacao.resolucao(a*a,2);
-		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,180);
+		String texto = "\\sqrt{" + (int) (Math.pow(a, 2)) + "}" + "=";
 
+		String resolucao = ResolucaoRadiciacao.resolucao(a * a, 2);
+		resolucao = Convert.includeLineBreak(resolucao, 180);
+
+		addParagrafo("Calcule:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + a);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Radiciacao(1);
-	}
-
 }

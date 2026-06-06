@@ -2,79 +2,56 @@ package matematica.intermediario.semelhancaangulos.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import jakarta.persistence.Transient;
-
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.intermediario.semelhancaangulos.AuxSemelhancaAngulos;
-import modelo.matematica.Conta;
 
-public class Exercicio1 extends Conta
+public class Exercicio1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-	
-	@Transient
-	String [][] problemas= {
-	//1Conhecido
-
-	//2Conhecido
-	{"a=x,b,c", "", "s=a->a->c+b"},
-	{"a=x,b,e", "c=y", "c=c->c+e,s=a->a->b+c"},
-	{"a=x,c,d", "b=y", "c=b->b+d,s=a->a->b+c"},
-	{"b=x,a,c", "", "s=b->b+c->a"},
-	{"b=x,a,e", "c=y", "c=c->c+e,s=b->c+b->a"},
-	{"c=x,a,b", "", "s=c->c+b->a"},
-	{"c=x,a,d", "b=y", "c=b->b+d,s=c->c+b->a"},
-	{"d=x,a,c", "b=y", "s=b->c+b->a,c=d->b+d"},
-	{"e=x,a,b", "c=y", "s=c->c+b->a,c=e->c+e"},
+	String[][] problemas = {
+	{ "a=x,b,c", "", "s=a->a->c+b" },
+	{ "a=x,b,e", "c=y", "c=c->c+e,s=a->a->b+c" },
+	{ "a=x,c,d", "b=y", "c=b->b+d,s=a->a->b+c" },
+	{ "b=x,a,c", "", "s=b->b+c->a" },
+	{ "b=x,a,e", "c=y", "c=c->c+e,s=b->c+b->a" },
+	{ "c=x,a,b", "", "s=c->c+b->a" },
+	{ "c=x,a,d", "b=y", "c=b->b+d,s=c->c+b->a" },
+	{ "d=x,a,c", "b=y", "s=b->c+b->a,c=d->b+d" },
+	{ "e=x,a,b", "c=y", "s=c->c+b->a,c=e->c+e" },
 	};
-	
-	public Exercicio1(int index)
-	{
-		super(index);
-		int pos=rand.nextInt(problemas.length);
-//		int pos=index;
 
-		String angleImage=problemas[pos][0];
-		String angleResult=problemas[pos][1];
-		String instrucao=problemas[pos][2];
-		
+	@Override
+	protected void construir()
+	{
+		int pos = rand.nextInt(problemas.length);
+
+		String angleImage = problemas[pos][0];
+		String angleResult = problemas[pos][1];
+		String instrucao = problemas[pos][2];
+
 		int b = 10 + rand.nextInt(15);
 		int c = 10 + rand.nextInt(15);
 		int a = c + b;
 		int d = 180 - b;
 		int e = 180 - c;
-		
+
 		ConfigSemelhancaAngulos4 config = new ConfigSemelhancaAngulos4(a, b, c, d, e);
 
-		resultadoCorreto = "" + AuxSemelhancaAngulos.getAnguloLabel(angleImage, config, "x").angulo + "°";
+		String resultadoCorreto = "" + AuxSemelhancaAngulos.getAnguloLabel(angleImage, config, "x").angulo + "°";
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleImage, config);
 
-		textLatex = config.getTextLatex();
+		String texto = config.getTextLatex();
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleResult, config);
 
-		resolucaoLatex=AuxSemelhancaAngulos.resolucao(instrucao,config);
-		
-		if(!angleResult.equals(""))
-		{
-			BufferedImage imageResolucao = config.criarImagem(index);
-			baosResolucao = Graphics.salvar(imageResolucao, false, "");
-		}
+		String resolucao = AuxSemelhancaAngulos.resolucao(instrucao, config);
 
-		carregarBlob();
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-
-	public static void main(String[] args)
-	{
-		for(int i = 1; i < 11; i++)
-		{
-			new Exercicio1(i);
-		}
-	}
-
 }

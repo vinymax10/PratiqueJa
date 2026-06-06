@@ -102,19 +102,4 @@ public class Config6 extends Config
 		return image;
 	}
 
-	public static void main(String[] args)
-	{
-//		DadosConfig6 dados = new DadosConfig6();
-//		dados.lateralEsq = "le";
-//		dados.lateralDir = "ld";
-//		dados.anguloExterno = "a";
-//		dados.superiorDir = "sd";
-//		dados.superiorEsq = "se";
-//		dados.inferiorEsq = "ie";
-//
-//		Config6 config = new Config6(dados);
-//		BufferedImage image = config.criarImagem(1);
-//
-	}
-
 }

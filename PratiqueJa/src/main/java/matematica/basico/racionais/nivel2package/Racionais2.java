@@ -1,20 +1,18 @@
 package matematica.basico.racionais.nivel2package;
 
+import matematica.GeradorExercicio;
 import matematica.Racional;
 import matematica.basico.racionais.ResolucaoRacionais;
-import modelo.matematica.Conta;
 
-public class Racionais2 extends Conta
+public class Racionais2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Racionais2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 2 + rand.nextInt(20);
 		int b = 2 + rand.nextInt(20);
-		while(a==b)	b = 2 + rand.nextInt(20);
+		while(a == b)
+			b = 2 + rand.nextInt(20);
 
 		int c = 2 + rand.nextInt(20);
 		int d = 2 + rand.nextInt(20);
@@ -25,24 +23,16 @@ public class Racionais2 extends Conta
 		Racional aRacional = new Racional(a, b);
 		Racional bRacional = new Racional(c, d);
 
-		textLatex = aRacional.showDfrac() + "-" + bRacional.showDfrac() + "=";
+		String enunciado = aRacional.showDfrac() + "-" + bRacional.showDfrac() + "=";
 
 		Racional resultado = aRacional.minus(bRacional);
 		resultado.fatoracao(2);
 
-		resultadoCorreto = resultado.toString();
+		String resolucao = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, false);
 
-		resolucaoLatex = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, false);
+		addParagrafo("Calcule:");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativas(resultado.toString());
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public Racionais2()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new Racionais2(1);
-
-	}
-
 }

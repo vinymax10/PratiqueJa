@@ -9,7 +9,6 @@ import lombok.Data;
 import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.Nivel;
-import modelo.exercicio.TipoExercicio;
 import modelo.usuario.Usuario;
 
 @Data
@@ -25,8 +24,6 @@ public class FiltroResultadoExercicio implements Serializable
 
 	private Nivel nivel;
 
-	private TipoExercicio tipoExercicio;
-
 	private String nomeEnunciadoDescricao;
 
 	private Usuario usuario;
@@ -41,7 +38,6 @@ public class FiltroResultadoExercicio implements Serializable
 		assunto = null;
 		modulo = null;
 		nivel = null;
-		tipoExercicio = null;
 		nomeEnunciadoDescricao = null;
 		usuario = null;
 		periodo = null;

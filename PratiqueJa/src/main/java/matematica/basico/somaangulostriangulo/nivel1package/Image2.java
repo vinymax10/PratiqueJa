@@ -2,40 +2,32 @@ package matematica.basico.somaangulostriangulo.nivel1package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
-import modelo.matematica.Conta;
 
-
-public class Image2 extends Conta
+public class Image2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int a = 50 + rand.nextInt(30);
 		int b = 90 - a;
 
-//		2- TrianguloRetangulo A, b | 
 		ConfigTrianguloRetangulo config = new ConfigTrianguloRetangulo(a, b);
 		config.a.mostrar();
 		config.b.mostrar();
 		config.a.nome = "x";
 
-		textLatex = config.getTextLatex();
-		resultadoCorreto = "" + a + "°";
-		resolucaoLatex = ResolucaoSAT2.complemento180("x", b, 90);
+		String texto = config.getTextLatex();
+		String resultadoCorreto = "" + a + "°";
+		String resolucao = ResolucaoSAT2.complemento180("x", b, 90);
 
-		BufferedImage image = config.criarImagem(index);
-		baos = Graphics.salvar(image, false, "");
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-		carregarBlob();
-	}
-
-	public static void main(String[] args)
-	{
-		new Image2(1);
+		addParagrafo("Encontre o valor de \\(x\\):");
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

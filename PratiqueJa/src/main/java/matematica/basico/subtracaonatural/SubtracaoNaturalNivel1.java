@@ -1,39 +1,28 @@
 package matematica.basico.subtracaonatural;
 
+import matematica.GeradorExercicio;
 
-
-import jakarta.persistence.Entity;
-
-import modelo.matematica.Conta;
-
-@Entity
-public class SubtracaoNaturalNivel1 extends Conta
+/**
+ * Subtração de naturais (nível 1). Constrói por composição (não é entidade nem herda Exercicio).
+ */
+public class SubtracaoNaturalNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public SubtracaoNaturalNivel1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 1 + rand.nextInt(10);
 		int b = 1 + rand.nextInt(10);
-
 		if(a < b)
 		{
 			int c = a;
 			a = b;
 			b = c;
 		}
+		int correto = a - b;
 
-		textLatex=a+"-"+b+"=";
-
-		resultadoCorreto = "" + (a-b);
-		
-		resolucaoLatex=a+"-"+b+"="+(a-b);
+		addParagrafo("Calcule o valor da seguinte subtração:");
+		addParagrafo("\\(" + a + " - " + b + " = \\,?\\)");
+		gerarAlternativasInteiras(correto);
+		setResolucao("\\(" + a + " - " + b + " = " + correto + "\\)");
 	}
-
-	public SubtracaoNaturalNivel1()
-	{
-	}
-
 }

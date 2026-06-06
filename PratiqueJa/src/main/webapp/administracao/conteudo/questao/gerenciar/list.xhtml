@@ -146,7 +146,7 @@
 
 						<!-- Alternativas -->
 						<h:panelGroup rendered="#{not empty entidade.alternativas}"
-						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column">
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-2">
 							<h:outputText styleClass="title" value="Alternativas" />
 							<ui:repeat value="#{entidade.alternativas}" var="alt">
 								<h:panelGroup styleClass="flex flex-row align-items-center gap-2">
@@ -174,7 +174,7 @@
 
 					</div>
 					
-					<div class="content-button" >
+				<div class="content-button" >
 
 			<div class="divisor" ></div>
 
@@ -198,7 +198,7 @@
 			<div class="flex gap-3 flex-wrap">
 
 				<p:button value="Editar" icon="pi pi-pencil"
-					styleClass="ui-button-raised ui-button-primary"
+					styleClass="ui-button-raised ui-button-primary" target="_blank"
 							href="#{questaoBean.getUrlEdicao(entidade)}" />
 
 			</div>

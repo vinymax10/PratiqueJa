@@ -1,37 +1,13 @@
 package matematica.basico.regratres;
 
-import java.lang.reflect.InvocationTargetException;
-import modelo.matematica.Conta;
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 
-@Entity
-public class RegraTresNivel3 extends Conta
+public class RegraTresNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public RegraTresNivel3(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(1);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel3package.RegraTres" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public RegraTresNivel3()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new RegraTresNivel3(1);
+		int tipo = 1 + rand.nextInt(1);
+		delegar(instanciar(".nivel3package.RegraTres" + tipo));
 	}
 }

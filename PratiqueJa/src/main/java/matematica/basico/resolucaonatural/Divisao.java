@@ -136,7 +136,4 @@ public class Divisao
 		return resolucaoLatex;
 	}
 
-	public static void main(String[] args) 
-	{
-	}
 }

@@ -39,6 +39,25 @@ function reloadMathJax()
 //	MathJax.typesetPromise()// versao 3...
 }
 
+// Recarrega o MathJax após QUALQUER ajax do PrimeFaces (paginação, diálogos,
+// filtros, reordenação...). Evita ter que chamar reloadMathJax() em cada oncomplete.
+(function registrarReloadMathJaxAposAjax()
+{
+	if(window.$ && window.$.fn)
+	{
+		$(document).on('pfAjaxComplete', function()
+		{
+			if(window.MathJax && typeof reloadMathJax === 'function')
+				reloadMathJax();
+		});
+	}
+	else
+	{
+		// jQuery (PrimeFaces) ainda não carregou; tenta novamente em breve.
+		setTimeout(registrarReloadMathJaxAposAjax, 200);
+	}
+})();
+
 function height() 
 {
 	var heights=document.getElementsByClassName("latex");

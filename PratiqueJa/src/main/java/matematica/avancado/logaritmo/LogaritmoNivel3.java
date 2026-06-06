@@ -1,18 +1,13 @@
 package matematica.avancado.logaritmo;
 
-import jakarta.persistence.Entity;
-
+import matematica.GeradorExercicio;
 import matematica.Racional;
-import modelo.matematica.Conta;
 
-@Entity
-public class LogaritmoNivel3 extends Conta
+public class LogaritmoNivel3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public LogaritmoNivel3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
 		int a = 1 + rand.nextInt(5);
 		int c = 2 + rand.nextInt(9);
 		int b = 1 + rand.nextInt(10);
@@ -23,27 +18,21 @@ public class LogaritmoNivel3 extends Conta
 		Racional x = new Racional(d * b, a);
 		x.fatoracao(2);
 
+		String enunciado, resolucao;
 		if(a == 1)
 		{
-			textLatex = b + " \\cdot \\log_{" + c + "}" + (int) Math.pow(c, d) + "=";
-			resolucaoLatex = ResolucaoLogaritmo.resolucao3A1(b, c, d, x);
+			enunciado = b + " \\cdot \\log_{" + c + "}" + (int) Math.pow(c, d) + "=";
+			resolucao = ResolucaoLogaritmo.resolucao3A1(b, c, d, x);
 		}
 		else
 		{
-			textLatex = b + " \\cdot \\log_{" + c + "} \\sqrt[" + a + "]{" + (int) Math.pow(c, d) + "}=";
-			resolucaoLatex = ResolucaoLogaritmo.resolucao3(a, b, c, d, x);
+			enunciado = b + " \\cdot \\log_{" + c + "} \\sqrt[" + a + "]{" + (int) Math.pow(c, d) + "}=";
+			resolucao = ResolucaoLogaritmo.resolucao3(a, b, c, d, x);
 		}
 
-		resultadoCorreto = "" + x;
+		addParagrafo("Calcule o valor da expressão:");
+		addParagrafo("\\(" + enunciado + "\\)");
+		gerarAlternativas("" + x);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public LogaritmoNivel3()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new LogaritmoNivel3(1);
-	}
-
 }

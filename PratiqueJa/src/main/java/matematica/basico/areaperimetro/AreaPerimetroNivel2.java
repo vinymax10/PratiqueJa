@@ -1,37 +1,13 @@
 package matematica.basico.areaperimetro;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class AreaPerimetroNivel2 extends Conta
+public class AreaPerimetroNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public AreaPerimetroNivel2(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(38);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel2package.Image" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public AreaPerimetroNivel2()
-	{
-
+		int tipo = 1 + rand.nextInt(38);
+		delegar(instanciar(".nivel2package.Image" + tipo));
 	}
 }

@@ -6,20 +6,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ProcessBuilder.Redirect;
-import java.lang.reflect.InvocationTargetException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import bean.download.Diretorio;
+import matematica.ExercicioFactory;
 import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
+import modelo.matematica.ParagrafoExercicio;
 
 public class ExercicioEBook
 {
 	ExercicioPadrao exercicio;
 	String latex;
-	List<Conta> listaContas;
+	List<Exercicio> listaContas;
 	Diretorio diretorioBean;
 	
 	public ExercicioEBook(Diretorio diretorioBean)
@@ -40,7 +43,7 @@ public class ExercicioEBook
 		listaExercicios();
 //		rodape(pagina);
 		
-		if(listaContas.size()>0&&listaContas.get(0).possuiResolucao())
+		if(listaContas.size()>0&&listaContas.get(0).getResolucao()!=null&&!listaContas.get(0).getResolucao().isEmpty())
 		{
 			latex+="\\newpage \r\n";
 			cabecalhoResolucao();
@@ -59,55 +62,37 @@ public class ExercicioEBook
 	
 	private void gerarImagens()
 	{
-		Conta conta;
-		
-		File outputFile;
-		OutputStream outputStream;
-		
 		for(int i = 0; i < listaContas.size(); i++)
 		{
-			conta=listaContas.get(i);
-			
-			try
+			Exercicio conta = listaContas.get(i);
+			int p = 0;
+			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
-				if(conta.getBaos()!=null)
+				if(paragrafo.isTipoImagem())
 				{
-					outputFile = new File(diretorioBean.getEnderecoImagens()+"conta"+i+".png");
-					outputStream = new FileOutputStream(outputFile);
-					conta.getBaos().writeTo(outputStream);
+					try
+					{
+						Blob blob = paragrafo.getImagemFile().getFile();
+						File outputFile = new File(diretorioBean.getEnderecoImagens() + "conta" + i + "_" + p + ".png");
+						OutputStream outputStream = new FileOutputStream(outputFile);
+						outputStream.write(blob.getBytes(1, (int) blob.length()));
+						outputStream.close();
+					}
+					catch(IOException | SQLException e)
+					{
+						e.printStackTrace();
+					}
 				}
-				
-				if(conta.getBaosResolucao()!=null)
-				{
-					outputFile = new File(diretorioBean.getEnderecoImagensResolucao()+"conta"+i+".png");
-					outputStream = new FileOutputStream(outputFile);
-					conta.getBaosResolucao().writeTo(outputStream);
-				}
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
+				p++;
 			}
 		}
 	}
-	
+
 	private void gerarListaContas()
 	{
-		listaContas = new ArrayList<Conta>();
-		Conta conta;
+		listaContas = new ArrayList<Exercicio>();
 		for(int i = 0; i < exercicio.getQuantidade(); i++)
-		{
-			try
-			{
-				conta = (Conta) Class.forName(exercicio.getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-				listaContas.add(conta);
-			}
-			catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-		}
+			listaContas.add(ExercicioFactory.gerar(exercicio.getClasse(), i + 1));
 	}
 	
 	public void cabecalhoExercicio()
@@ -228,35 +213,25 @@ public class ExercicioEBook
 		+"column{2} = {leftsep=8pt},\r\n"
 		+"rows={valign=h, ht="+alturaTotal+"cm},\r\n"
 		+ "}\r\n";
-		Conta conta;
-		String pergunta="";
-		String texto="";
-
 		for(int i = 0; i < listaContas.size(); i++)
 		{
-			conta=listaContas.get(i);
-			
-			if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
+			Exercicio conta = listaContas.get(i);
+
+			String conteudo = "";
+			int p = 0;
+			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
-				if(conta.getBaos()==null)
-					pergunta=conta.getPergunta()+"\\vspace{5px}  \\newline";
-				else
-					pergunta=conta.getPergunta()+" \\newline";
+				if(paragrafo.isTipoImagem())
+					conteudo += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfigLatex().getImagens() + "/conta" + i + "_" + p + ".png} \\newline ";
+				else if(paragrafo.getTexto() != null && !paragrafo.getTexto().isEmpty())
+					conteudo += getTexto(paragrafo.getTexto()) + " \\newline ";
+				p++;
 			}
-			else
-				pergunta="";
-			
-			if(conta.getBaos()!=null)
-				texto="\\includegraphics[valign=t,width=4.6cm]{"+diretorioBean.getConfigLatex().getImagens()+"/conta"+i+".png}";
-			else if(conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-				texto="$"+conta.getTextLatex()+"$";
-			else
-				texto="";
-			
+
 			if(i%2!=0) latex+=" &";
-			
-			latex+="\\BI{"+conta.getIndex()+")~}"+pergunta+texto;
-			
+
+			latex+="\\BI{"+(i + 1)+")~}"+conteudo;
+
 			if(i%2!=0) latex+=" \\\\ \r\n";
 		}
 		 
@@ -283,30 +258,29 @@ public class ExercicioEBook
 		+"column{2} = {leftsep=8pt},\r\n"
 		+"rows={valign=h, ht="+alturaTotal+"cm},\r\n"
 		+ "}\r\n";
-		Conta conta;
-		String texto;
-		
 		for(int i = 0; i < listaContas.size(); i++)
 		{
-			conta=listaContas.get(i);
-			texto="";
-			
-			if(conta.getPergunta()!=null&&!conta.getPergunta().equals(""))
+			Exercicio conta = listaContas.get(i);
+			String texto = "";
+
+			int p = 0;
+			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
-				if(conta.getBaos()==null&&conta.getBaosResolucao()==null)
-					texto+="{"+conta.getPergunta()+"}"+"\\vspace{5px}  \\newline \r\n";
-				else
-					texto+="{"+conta.getPergunta()+"}"+" \\newline \r\n";
+				if(paragrafo.isTipoImagem())
+					texto += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfigLatex().getImagens() + "/conta" + i + "_" + p + ".png} \\newline \r\n \r\n";
+				else if(paragrafo.getTexto() != null && !paragrafo.getTexto().isEmpty())
+					texto += getTexto(paragrafo.getTexto()) + " \\newline \r\n";
+				p++;
 			}
-			
-			texto+=getTextoResolucao(conta,i);
-			
+
+			if(conta.getResolucao() != null && !conta.getResolucao().isEmpty())
+				texto += addSpace(conta.getResolucao());
+
 			if(i%2!=0) latex+=" &";
-			
-			latex+="\\BI{"+conta.getIndex()+")~}"+texto;
-			
+
+			latex+="\\BI{"+(i + 1)+")~}"+texto;
+
 			if(i%2!=0) latex+=" \\\\ \r\n";
-			
 		}
 		 
 		 latex+="\\end{tblr}\r\n" 
@@ -322,29 +296,12 @@ public class ExercicioEBook
 		return "4.6cm";
 	}
 	
-	private String getTextoResolucao(Conta conta,int index) 
+	private String getTexto(String texto)
 	{
-		String texto="";
-		
-		if(conta.getBaosResolucao()!=null)
-		{
-			texto+="\\includegraphics[valign=t,width="+widthImagem()+"]{"+diretorioBean.getConfigLatex().getImagensResolucao()+"/conta"+index+".png} \\newline  \r\n \r\n ";
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
-		else if(conta.getBaos()!=null)
-		{
-			texto+="\\includegraphics[valign=t,width="+widthImagem()+"]{"+diretorioBean.getConfigLatex().getImagens()+"/conta"+index+".png} \\newline \r\n \r\n";
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
+		if(texto != null && !texto.equals(""))
+			return texto.replaceAll("\\$", "\\\\\\$").replaceAll("%", "\\\\%");
 		else
-		{
-			if(exercicio.isMostrarResolucao()&&conta.getTextLatex()!=null&&!conta.getTextLatex().equals(""))
-				texto+="{ $"+conta.getTextLatex()+"$}"+" \\vspace{5px} \\newline \r\n";
-			
-			texto+="{$"+addSpace(conta.getResolucaoLatex())+"$}";
-		}
-		
-		return texto;
+			return "";
 	}
 	
 	private String addSpace(String texto)

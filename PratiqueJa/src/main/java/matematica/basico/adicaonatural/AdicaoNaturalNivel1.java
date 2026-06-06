@@ -1,32 +1,29 @@
 package matematica.basico.adicaonatural;
 
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 
-import matematica.basico.resolucaonatural.ResolucaoNatural;
-import modelo.matematica.Conta;
-
-@Entity
-public class AdicaoNaturalNivel1 extends Conta {
-	private static final long serialVersionUID = 1L;
-
-	public AdicaoNaturalNivel1(int indice) {
-		super(indice);
-
+/**
+ * Gera uma adição de naturais (nível 1) no formato flexível de Exercicio:
+ * enunciado em parágrafos + alternativas de múltipla escolha. Constrói por
+ * composição (não é entidade nem herda Exercicio).
+ */
+public class AdicaoNaturalNivel1 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
+	{
 		int a = 1 + rand.nextInt(10);
 		int b = 1 + rand.nextInt(10);
+		int correto = a + b;
 
-		textLatex=a+"+"+b+"=";
+		// Enunciado em parágrafos (LaTeX inline em \( \), renderizado pelo MathJax).
+		addParagrafo("Calcule o valor da seguinte adição:");
+		addParagrafo("\\(" + a + " + " + b + " = \\,?\\)");
 
-		resultadoCorreto = "" + (a+b);
-		
-		resolucaoLatex=a+"+"+b+"="+(a+b);
+		// Alternativas: resposta correta + distratores numéricos plausíveis.
+		gerarAlternativasInteiras(correto);
 
-	}
-
-	public AdicaoNaturalNivel1() {
-	}
-
-	public static void main(String[] args) {
-		String resolucaoLatex=ResolucaoNatural.divisao(30,2,true);
+		// Resolução (expressão crua, como no padrão anterior).
+		setResolucao("\\(" +a + " + " + b + " = " + correto+ "\\)");
 	}
 }

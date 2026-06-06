@@ -1,41 +1,13 @@
 package matematica.avancado.probabilidade;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class ProbabilidadeNivel1 extends Conta
+public class ProbabilidadeNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ProbabilidadeNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(2);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Probabilidade" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public ProbabilidadeNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new ProbabilidadeNivel1(1);
+		int tipo = 1 + rand.nextInt(2);
+		delegar(instanciar(".nivel1package.Probabilidade" + tipo));
 	}
 }

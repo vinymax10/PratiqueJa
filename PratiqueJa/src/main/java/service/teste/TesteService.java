@@ -5,7 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import dao.teste.TesteDAO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import modelo.matematica.Conta;
+import matematica.ExercicioFactory;
+import modelo.matematica.Exercicio;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.Teste;
@@ -20,7 +21,7 @@ public class TesteService
 		throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 		InvocationTargetException, NoSuchMethodException
 	{
-		Conta conta;
+		Exercicio conta;
 		int index = 1;
 		for(ConteudoTeste conteudoTeste : teste.getTestePadrao().getConteudosTeste())
 		{
@@ -32,10 +33,8 @@ public class TesteService
 			{
 				do
 				{
-					conta = (Conta) Class.forName(conteudoTeste.getExercicioPadrao().getClasse())
-						.getConstructor(Integer.TYPE).newInstance(index);
-					conta.setEtapaTeste(etapaTeste);
-					conta.setTipoExercicio(conteudoTeste.getExercicioPadrao().getTipoExercicio());
+					conta = ExercicioFactory.gerar(conteudoTeste.getExercicioPadrao().getClasse(), index);
+					// TODO religar conta à etapaTeste no novo modelo (sem etapaTeste/tipoExercicio do Conta).
 				}
 				while(etapaTeste.getContas().contains(conta));
 				etapaTeste.getContas().add(conta);

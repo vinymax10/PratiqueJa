@@ -1,40 +1,26 @@
 package matematica.basico.adicaosubtracaointeiro;
 
-
-
-import jakarta.persistence.Entity;
-
 import matematica.Auxiliar;
-import modelo.matematica.Conta;
+import matematica.GeradorExercicio;
 
-@Entity
-public class AdicaoSubtracaoInteiroNivel2 extends Conta
+public class AdicaoSubtracaoInteiroNivel2 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public AdicaoSubtracaoInteiroNivel2(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
 		int a = 1 + rand.nextInt(100);
 		if(rand.nextBoolean())
-			a*=-1;
-		
+			a *= -1;
+
 		int b = 1 + rand.nextInt(100);
 		if(rand.nextBoolean())
-			b*=-1;
-		
-		textLatex = Auxiliar.getNumber(a,"",true) + Auxiliar.getNumber(b,"",false)+"=";
-		resultadoCorreto = ""+(a+b);
-		resolucaoLatex=ResolucaoASInteiro.soma(a,b);
-	}
+			b *= -1;
 
-	public AdicaoSubtracaoInteiroNivel2()
-	{
-	}
+		int correto = a + b;
 
-	public static void main(String[] args)
-	{
-		new AdicaoSubtracaoInteiroNivel2(1);
+		addParagrafo("Calcule o valor da seguinte expressão:");
+		addParagrafo("\\(" + Auxiliar.getNumber(a, "", true) + Auxiliar.getNumber(b, "", false) + " = \\,?\\)");
+		gerarAlternativasInteirasComNegativos(correto);
+		setResolucao("\\(" + ResolucaoASInteiro.soma(a, b) + "\\)");
 	}
-
 }

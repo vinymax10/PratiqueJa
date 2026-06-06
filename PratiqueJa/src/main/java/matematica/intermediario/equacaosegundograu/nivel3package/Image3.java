@@ -2,45 +2,37 @@ package matematica.intermediario.equacaosegundograu.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
 import matematica.Auxiliar;
+import matematica.GeradorExercicio;
 import matematica.intermediario.equacaosegundograu.ResolucaoEq2Grau;
 import matematica.intermediario.equacaosegundograu.config.ConfigEq2Grau;
 import matematica.intermediario.equacaosegundograu.config.DadosEq2Grau;
-import modelo.matematica.Conta;
 
-public class Image3 extends Conta
+public class Image3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
+		DadosEq2Grau dadosEq2Grau = new DadosEq2Grau();
 
-		DadosEq2Grau dadosEq2Grau=new DadosEq2Grau();
-
-		resultadoCorreto = "" + dadosEq2Grau.c;
-		
-		textLatex = dadosEq2Grau.toString();
-		pergunta = "Encontre \\( c\\), dado \\( f(x)=" 
+		String resultadoCorreto = "" + dadosEq2Grau.c;
+		String texto = dadosEq2Grau.toString();
+		String pergunta = "Encontre \\( c\\), dado \\( f(x)="
 		+ dadosEq2Grau.a + "x^2" + Auxiliar.getNumber(dadosEq2Grau.b, "", false) + "x+c \\)";
-		
-		resolucaoLatex=ResolucaoEq2Grau.resolucaoC(dadosEq2Grau.a,dadosEq2Grau.b,dadosEq2Grau.c,dadosEq2Grau.x1);
-		
-		ConfigEq2Grau config=new ConfigEq2Grau(dadosEq2Grau);
-		config.indice=indice;
-		config.pontoX1.label=""+dadosEq2Grau.x1;
-		config.pontoX1.mostrar=true;
-		
-		BufferedImage image=config.criarImagem();
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
 
-	public static void main(String[] args)
-	{
-		new Image3(1);
-	}
+		String resolucao = ResolucaoEq2Grau.resolucaoC(dadosEq2Grau.a, dadosEq2Grau.b, dadosEq2Grau.c, dadosEq2Grau.x1);
 
+		ConfigEq2Grau config = new ConfigEq2Grau(dadosEq2Grau);
+		config.indice = 1 + rand.nextInt(10);
+		config.pontoX1.label = "" + dadosEq2Grau.x1;
+		config.pontoX1.mostrar = true;
+
+		BufferedImage image = config.criarImagem();
+
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
+	}
 }

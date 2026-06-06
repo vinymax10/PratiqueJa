@@ -1,33 +1,19 @@
 package matematica.basico.divisaonatural;
 
-import jakarta.persistence.Entity;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-@Entity
-public class DivisaoNaturalNivel1 extends Conta
+public class DivisaoNaturalNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public DivisaoNaturalNivel1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-
 		int a = 1 + rand.nextInt(10);
 		int b = 1 + rand.nextInt(10);
+		int dividendo = a * b;
 
-		textLatex = (a * b) + "\\div" + b + "=";
-		resultadoCorreto = "" + a;
-		resolucaoLatex = (a * b) + "\\div" + b + "=" + a;
+		addParagrafo("Calcule o valor da seguinte divisão:");
+		addParagrafo("\\(" + dividendo + " \\div " + b + " = \\,?\\)");
+		gerarAlternativasInteiras(a);
+		setResolucao("\\(" + dividendo + " \\div " + b + " = " + a + "\\)");
 	}
-
-	public DivisaoNaturalNivel1()
-	{
-	}
-
-	public static void main(String[] args)
-	{
-		new DivisaoNaturalNivel1(1);
-	}
-
 }

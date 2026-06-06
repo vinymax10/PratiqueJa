@@ -2,47 +2,38 @@ package matematica.intermediario.equacaosegundograu.nivel3package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
 import matematica.Auxiliar;
+import matematica.GeradorExercicio;
 import matematica.intermediario.equacaosegundograu.ResolucaoEq2Grau;
 import matematica.intermediario.equacaosegundograu.config.ConfigEq2Grau;
 import matematica.intermediario.equacaosegundograu.config.DadosEq2Grau;
-import modelo.matematica.Conta;
 
-
-public class Image11 extends Conta
+public class Image11 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image11(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
+		DadosEq2Grau dadosEq2Grau = new DadosEq2Grau();
 
-		DadosEq2Grau dadosEq2Grau=new DadosEq2Grau();
+		String resultadoCorreto = "" + dadosEq2Grau.c;
+		String texto = dadosEq2Grau.toString();
+		String pergunta = "Encontre \\( c\\), dado \\( f(x)=" + dadosEq2Grau.a + "x^2"
+		+ Auxiliar.getNumber(dadosEq2Grau.b, "x", false) + "+c \\)";
 
-		resultadoCorreto = "" + dadosEq2Grau.c;
+		String resolucao = ResolucaoEq2Grau.resolucaoCYv(dadosEq2Grau.a, dadosEq2Grau.b,
+		dadosEq2Grau.c, dadosEq2Grau.yVerticeRacional);
 
-		textLatex = dadosEq2Grau.toString();
-		pergunta = "Encontre \\( c\\), dado \\( f(x)=" + dadosEq2Grau.a + "x^2" 
-		+Auxiliar.getNumber(dadosEq2Grau.b, "x", false) + "+c \\)";
+		ConfigEq2Grau config = new ConfigEq2Grau(dadosEq2Grau);
+		config.indice = 1 + rand.nextInt(10);
+		config.pontoYv.mostrar = true;
+		config.pontoYv.label = dadosEq2Grau.yVerticeRacional.showFrac();
 
-		resolucaoLatex=ResolucaoEq2Grau.resolucaoCYv(dadosEq2Grau.a,dadosEq2Grau.b,
-		dadosEq2Grau.c,dadosEq2Grau.yVerticeRacional);
-		
-		ConfigEq2Grau config=new ConfigEq2Grau(dadosEq2Grau);
-		config.indice=indice;
-		config.pontoYv.mostrar=true;
-		config.pontoYv.label=dadosEq2Grau.yVerticeRacional.showFrac();
-		
-		BufferedImage image=config.criarImagem();
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
+		BufferedImage image = config.criarImagem();
+
+		addParagrafo(pergunta);
+		addParagrafo("\\(" + texto + "\\)");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Image11(1);
-	}
-
 }

@@ -28,14 +28,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import bean.exercicio.ConfigDownload;
+import matematica.ExercicioFactory;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import modelo.academico.Assunto;
 import modelo.academico.Modulo;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
-import modelo.exercicio.TipoExercicio;
-import modelo.matematica.Conta;
+import modelo.matematica.Exercicio;
 import modelo.usuario.Usuario;
 import pdf.base.CustomDashedLineSeparator;
 import pdf.util.Convert;
@@ -52,21 +52,9 @@ public class ExercicioPDF
 
 	public static ByteArrayOutputStream gerarPDF(ExercicioPadrao exercicioPadrao, ConfigDownload configDownload)
 	{
-		List<Conta> listaContas = new ArrayList<Conta>();
-		Conta conta;
+		List<Exercicio> listaContas = new ArrayList<Exercicio>();
 		for(int i = 0; i < exercicioPadrao.getQuantidade(); i++)
-		{
-			try
-			{
-				conta = (Conta) Class.forName(exercicioPadrao.getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-				listaContas.add(conta);
-			}
-			catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-		}
+			listaContas.add(ExercicioFactory.gerar(exercicioPadrao.getClasse(), i + 1));
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Document document = new Document();
@@ -84,7 +72,8 @@ public class ExercicioPDF
 			if(configDownload.isRespostas())
 				rodape(document, listaContas, exercicioPadrao);
 
-			if(configDownload.isResolucao()	&& listaContas.get(0).possuiResolucao())
+			if(configDownload.isResolucao() && !listaContas.isEmpty()
+			&& listaContas.get(0).getResolucao() != null && !listaContas.get(0).getResolucao().isEmpty())
 			{
 				document.newPage();
 				cabecalho(document, exercicioPadrao, configDownload);
@@ -179,7 +168,7 @@ public class ExercicioPDF
 		return imagem;
 	}
 
-	private static void rodape(Document document, List<Conta> listaContas, ExercicioPadrao exercicio)
+	private static void rodape(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicio)
 	{
 		PdfPTable table;
 		PdfPCell cell;
@@ -219,10 +208,7 @@ public class ExercicioPDF
 				p.add(
 				new Phrase((i + 1) + ") ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(151, 162, 255))));
 
-				if(exercicio.getAssunto().getChave().equals("Divisibilidade"))
-					p.add(new Phrase(listaContas.get(i).resultadoCorretoBolTexto(), small));
-				else
-					p.add(new Phrase(listaContas.get(i).getResultadoCorreto(), small));
+				// TODO migrar gabarito para o novo Exercicio (alternativa correta).
 
 				cell = new PdfPCell(p);
 				cell.setBorder(0);
@@ -237,7 +223,7 @@ public class ExercicioPDF
 		}
 	}
 
-	private static void listaResolucao(Document document, List<Conta> listaContas, ExercicioPadrao exercicio,
+	private static void listaResolucao(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicio,
 	PdfWriter pdfWriter)
 	{
 
@@ -279,31 +265,7 @@ public class ExercicioPDF
 				cellMin.addElement(p);
 				tableMin.addCell(cellMin);
 
-				if(listaContas.get(i).possuiResolucao())
-				{
-					cellMin = new PdfPCell();
-					cellMin.setBorder(0);
-					
-					if(exercicio.isMostrarResolucao())
-					{
-						Image imageConta = getImageResolucao(listaContas.get(i),pdfWriter);
-						cellMin.addElement(imageConta);
-						p = new Paragraph(7);
-						p.add(new Phrase(" ", new Font(FontFamily.HELVETICA, 10, Font.BOLD, new BaseColor(151, 162, 255))));
-						cellMin.addElement(p);
-					}
-					
-					if(listaContas.get(i).possuiResolucaoLatex())
-					{
-						Image imageResolucao;
-						imageResolucao = Convert.toSVGImgTemplate(listaContas.get(i).getResolucaoLatex(), pdfWriter, 260, true);
-						imageResolucao.setWidthPercentage(100 * (float) imageResolucao.getWidth() / (523 / 2));
-						cellMin.addElement(imageResolucao);
-					}
-					
-					tableMin.addCell(cellMin);
-					cell.addElement(tableMin);
-				}
+				// TODO migrar renderização da resolução para o novo Exercicio (conta.getResolucao()).
 
 				cell.setFixedHeight(720 / (listaContas.size() / 2));
 				cell.setVerticalAlignment(Element.ALIGN_TOP);
@@ -320,65 +282,25 @@ public class ExercicioPDF
 
 			document.add(table);
 		}
-		catch(DocumentException | IOException e)
+		catch(DocumentException e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	private static Image getImageConta(Conta conta, PdfWriter pdfWriter)
+	private static Image getImageConta(Exercicio conta, PdfWriter pdfWriter)
 	{
-		Image image=null;
-		try
-		{
-			if(conta.getBaos() != null)
-			{
-				image = Image.getInstance(conta.getBaos().toByteArray());
-				image.scalePercent(60);
-			}
-			else
-			{
-				image = Convert.toSVGImgTemplate(conta.getTextLatex(), pdfWriter, 200, false);
-				image.setWidthPercentage(100 * (float) image.getWidth() / (523 / 2));
-			}
-		}
-		catch(IOException | BadElementException e)
-		{
-			e.printStackTrace();
-		}
-		return image;
+		// TODO migrar para o novo Exercicio.
+		return null;
 	}
 	
-	private static Image getImageResolucao(Conta conta, PdfWriter pdfWriter)
+	private static Image getImageResolucao(Exercicio conta, PdfWriter pdfWriter)
 	{
-		Image image=null;
-		try
-		{
-			if(conta.getBaosResolucao() != null)
-			{
-				image = Image.getInstance(conta.getBaosResolucao().toByteArray());
-				image.setWidthPercentage(60);
-			}
-			else if(conta.getBaos() != null)
-			{
-				image = Image.getInstance(conta.getBaos().toByteArray());
-				image.setWidthPercentage(60);
-			}
-			else
-			{
-				image = Convert.toSVGImgTemplate(conta.getTextLatex(), pdfWriter, 200, false);
-				image.setWidthPercentage(100 * (float) image.getWidth() / (523 / 2));
-			}
-			
-		}
-		catch(IOException | BadElementException e)
-		{
-			e.printStackTrace();
-		}
-		return image;
+		// TODO migrar para o novo Exercicio (conta.getResolucao()).
+		return null;
 	}
 	
-	private static void listaExercicios(Document document, List<Conta> listaContas, ExercicioPadrao exercicioPadrao,
+	private static void listaExercicios(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicioPadrao,
 	PdfWriter pdfWriter, ConfigDownload configDownload)
 	{
 		PdfPTable table;
@@ -430,19 +352,7 @@ public class ExercicioPDF
 				tableMin.addCell(cellMin);
 				cell.addElement(tableMin);
 
-				if(listaContas.get(i).getPergunta() != null)
-				{
-					image = Convert.toSVGImgTemplate(listaContas.get(i).getPergunta(), pdfWriter, 200, false);
-					image.setWidthPercentage(100 * (float) image.getWidth() / (523 / 2));
-					tableMin = new PdfPTable(1);
-					tableMin.setWidthPercentage(100);
-					cellMin = new PdfPCell();
-					cellMin.setBorder(0);
-					cellMin.setPaddingTop(10);
-					cellMin.addElement(image);
-					tableMin.addCell(cellMin);
-					cell.addElement(tableMin);
-				}
+				// TODO migrar "pergunta" para o novo Exercicio (parágrafos do enunciado).
 
 				int alturaTotal = 670;
 				if(!configDownload.isRespostas())
@@ -463,7 +373,7 @@ public class ExercicioPDF
 
 			document.add(table);
 		}
-		catch(DocumentException | IOException e)
+		catch(DocumentException e)
 		{
 			e.printStackTrace();
 		}
@@ -471,21 +381,9 @@ public class ExercicioPDF
 
 	public static void gerarPDFFisico(ExercicioPadrao exercicioPadrao, ConfigDownload configDownload)
 	{
-		List<Conta> listaContas = new ArrayList<Conta>();
-		Conta conta;
+		List<Exercicio> listaContas = new ArrayList<Exercicio>();
 		for(int i = 0; i < exercicioPadrao.getQuantidade(); i++)
-		{
-			try
-			{
-				conta = (Conta) Class.forName(exercicioPadrao.getClasse()).getConstructor(Integer.TYPE).newInstance(i + 1);
-				listaContas.add(conta);
-			}
-			catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| NoSuchMethodException | SecurityException | ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-		}
+			listaContas.add(ExercicioFactory.gerar(exercicioPadrao.getClasse(), i + 1));
 
 		Document document = new Document();
 		try
@@ -521,7 +419,6 @@ public class ExercicioPDF
 		exercicio.setNivel(Nivel.Nivel2);
 		exercicio.setNome("FuncaoAfimNivel2");
 		exercicio.setQuantidade(6);
-		exercicio.setTipoExercicio(TipoExercicio.Image);
 		Assunto assunto = new Assunto();
 		assunto.setChave("FuncaoAfim");
 		assunto.setNome("Função Afim");

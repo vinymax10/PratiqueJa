@@ -1,28 +1,12 @@
 package matematica.intermediario.expressaoalgebrica;
 
+import matematica.GeradorExercicio;
 
-
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-import matematica.intermediario.expressaoalgebrica.nivel1package.Expressao1;
-
-@Entity
-public class ExpressaoAlgebricaNivel1 extends Conta
+public class ExpressaoAlgebricaNivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public ExpressaoAlgebricaNivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		clone(new Expressao1(index));
+		delegar(instanciar(".nivel1package.Expressao1"));
 	}
-
-	public ExpressaoAlgebricaNivel1()
-	{
-
-	}
-
 }

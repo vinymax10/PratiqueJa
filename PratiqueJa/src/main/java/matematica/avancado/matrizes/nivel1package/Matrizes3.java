@@ -1,69 +1,50 @@
 package matematica.avancado.matrizes.nivel1package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.matrizes.AuxMatriz;
-import modelo.matematica.Conta;
 
-
-public class Matrizes3 extends Conta
+public class Matrizes3 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-//	Multiplicação por escalar
-	public Matrizes3(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
-		int lin=2+rand.nextInt(2);
-		int col=2+rand.nextInt(2);
+		int lin = 2 + rand.nextInt(2);
+		int col = 2 + rand.nextInt(2);
 
-		int escalar=2+rand.nextInt(10);
+		int escalar = 2 + rand.nextInt(10);
 		if(rand.nextBoolean())
-			escalar*=-1;
-		
-		int [][]a=AuxMatriz.contruirMatriz(lin, col, 50);
-		
-		pergunta="Se \\("+escalar+" \\cdot A=B\\), qual a soma dos elementos de \\(B\\)?";
-		
-		int b[][]=new int [lin][col];
+			escalar *= -1;
+
+		int[][] a = AuxMatriz.contruirMatriz(lin, col, 50);
+
+		int b[][] = new int[lin][col];
+		for(int i = 0; i < lin; i++)
+			for(int j = 0; j < col; j++)
+				b[i][j] = a[i][j] * escalar;
+
+		String resultadoCorreto = AuxMatriz.soma(b) + "";
+
+		String resolucao = "B=\\begin{bmatrix}";
 		for(int i = 0; i < lin; i++)
 		{
 			for(int j = 0; j < col; j++)
 			{
-				b[i][j]=a[i][j]*escalar;
+				resolucao += escalar + " \\cdot " + AuxMatriz.parenteses(a[i][j]);
+
+				if(j < (col - 1))
+					resolucao += "&";
 			}
+			resolucao += "\\\\";
 		}
-		
-		resultadoCorreto = AuxMatriz.soma(b)+"";
-		
-		resolucaoLatex="B=\\begin{bmatrix}";
-		
-		for(int i = 0; i < lin; i++)
-		{
-			for(int j = 0; j < col; j++)
-			{
-				resolucaoLatex+=escalar+" \\cdot "+AuxMatriz.parenteses(a[i][j]);
+		resolucao += "\\end{bmatrix}" + "\\\\ \\\\";
+		resolucao += "B=" + AuxMatriz.matrizStr(b) + "\\\\ \\\\";
+		resolucao += AuxMatriz.somaStr(b);
 
-				if(j<(col-1))
-					resolucaoLatex+="&";
-			}
-			resolucaoLatex+="\\\\";
-		}
-		
-		resolucaoLatex+="\\end{bmatrix}"+"\\\\ \\\\";
-		resolucaoLatex+="B="+AuxMatriz.matrizStr(b)+"\\\\ \\\\";
-		resolucaoLatex+=AuxMatriz.somaStr(b);
+		String texto = "A=" + AuxMatriz.matrizStr(a);
 
-		
-		textLatex="";
-		textLatex+="A="+AuxMatriz.matrizStr(a);
-		
+		addParagrafo("Se \\(" + escalar + " \\cdot A=B\\), qual a soma dos elementos de \\(B\\)?");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-//		for(int i = 0; i < 100; i++)
-//		{
-			new Matrizes3(1);
-//		}
-	}
-
 }

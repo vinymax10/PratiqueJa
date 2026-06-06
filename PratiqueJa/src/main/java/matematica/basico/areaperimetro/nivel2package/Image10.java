@@ -2,47 +2,37 @@ package matematica.basico.areaperimetro.nivel2package;
 
 import java.awt.image.BufferedImage;
 
-import infra.Graphics;
+import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
 import matematica.basico.areaperimetro.config.ConfigQuadradoCircunferencia;
-import modelo.matematica.Conta;
 
 //Quadrado inscrito na circunferência
-public class Image10 extends Conta
+public class Image10 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Image10(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
 		int raio = 1 + rand.nextInt(10);
 
 		String strRaio = raio + "\\sqrt{2}";
-		textLatex = "Image10" + raio;
 
-		pergunta="Se \\(r="+strRaio+"\\), qual o perímetro do quadrado?";
+		int l = (2 * raio);
+		String resultadoCorreto = "" + (4 * l);
 
-		int l=(2*raio);
-		resultadoCorreto = "" + (4*l);
-		
-		resolucaoLatex="";
-		resolucaoLatex+="\\text{Seja~} d \\text{~a diagonal do quadrado}\\\\";
-		resolucaoLatex+="d=2r = 2 \\cdot"+raio+"\\sqrt{2} = "+(2*raio)+"\\sqrt{2}\\\\";
-		resolucaoLatex+=ResolucaoAreaPerimetro.formulaDiagonalQuadrado()+""
-		+ ",\\quad"+ResolucaoAreaPerimetro.formulaPerimetroQuadrado()+"\\\\";
-		resolucaoLatex+="l="+(2*raio)+"\\\\";
-		resolucaoLatex+="P=4 \\cdot "+l+"="+(4*l);
+		String resolucao = "";
+		resolucao += "\\text{Seja~} d \\text{~a diagonal do quadrado}\\\\";
+		resolucao += "d=2r = 2 \\cdot" + raio + "\\sqrt{2} = " + (2 * raio) + "\\sqrt{2}\\\\";
+		resolucao += ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ""
+		+ ",\\quad" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
+		resolucao += "l=" + (2 * raio) + "\\\\";
+		resolucao += "P=4 \\cdot " + l + "=" + (4 * l);
 
-		ConfigQuadradoCircunferencia config=new ConfigQuadradoCircunferencia("r","l",false);
-		BufferedImage image=config.criarImagem(index);
-		
-		baos = Graphics.salvar(image, false, "");
-		carregarBlob();
-	}
+		ConfigQuadradoCircunferencia config = new ConfigQuadradoCircunferencia("r", "l", false);
+		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
 
-	public static void main(String[] args)
-	{
-		new Image10(1);
+		addParagrafo("Se \\(r=" + strRaio + "\\), qual o perímetro do quadrado?");
+		addParagrafoImagem(image);
+		gerarAlternativas(resultadoCorreto);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
 }

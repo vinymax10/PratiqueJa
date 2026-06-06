@@ -20,7 +20,7 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "assunto", "resultados" })
+@ToString(exclude = { "assunto" })
 @Data
 @Entity
 public class ExercicioPadrao implements Serializable, Entidade
@@ -55,18 +55,11 @@ public class ExercicioPadrao implements Serializable, Entidade
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)
 	private String descricao;
 
-	@AuditLabel(value = "tipo de exercício")
-	private TipoExercicio tipoExercicio;
-
 	@AuditLabel(value = "mostrar resolução")
 	private boolean mostrarResolucao;
 
 	@AuditLabel(value = "imagem quadrada", genero = GeneroGramatical.FEMININO)
 	private boolean imagemQuadrada;
-
-	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "exercicioPadrao")
-	private List<ResultadoExercicio> resultados = new ArrayList<ResultadoExercicio>();
 
 	public String enderecoImage()
 	{

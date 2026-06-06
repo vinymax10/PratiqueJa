@@ -1,18 +1,15 @@
 package matematica.intermediario.radiciacao.nivel3package;
 
+import matematica.GeradorExercicio;
 import matematica.intermediario.radiciacao.FatoresPrimos;
 import matematica.intermediario.radiciacao.ResolucaoRadiciacao;
-import modelo.matematica.Conta;
 import pdf.util.Convert;
 
-
-public class Radiciacao1 extends Conta
+public class Radiciacao1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Radiciacao1(int indice)
+	@Override
+	protected void construir()
 	{
-		super(indice);
 		int x = 2 + rand.nextInt(3);
 		int y = 2 + rand.nextInt(9);
 		int z = 2 + rand.nextInt(9);
@@ -23,35 +20,29 @@ public class Radiciacao1 extends Conta
 		int d = z * y;
 		int a = y * y * z;
 
-		textLatex = " \\sqrt{" + a + "} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
-		
-		resolucaoLatex="\\sqrt{" + a + "} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
-		resolucaoLatex+="\\sqrt[" + c + "]{" + a + "^"+ x +"} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
-		resolucaoLatex+="\\sqrt[" + c + "]{" + a + "^"+ x +"\\cdot " + b + "}=";
-		FatoresPrimos fatoresPrimosA=ResolucaoRadiciacao.fatoresPrimos(a);
-		resolucaoLatex+="\\sqrt[" + c + "]{(" + fatoresPrimosA.latex() + ")^"+ x +"\\cdot " + b + "}=";
-		
+		String texto = " \\sqrt{" + a + "} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
+
+		String resolucao = "\\sqrt{" + a + "} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
+		resolucao += "\\sqrt[" + c + "]{" + a + "^" + x + "} \\cdot \\sqrt[" + c + "]{" + b + "} " + "=";
+		resolucao += "\\sqrt[" + c + "]{" + a + "^" + x + "\\cdot " + b + "}=";
+		FatoresPrimos fatoresPrimosA = ResolucaoRadiciacao.fatoresPrimos(a);
+		resolucao += "\\sqrt[" + c + "]{(" + fatoresPrimosA.latex() + ")^" + x + "\\cdot " + b + "}=";
+
 		fatoresPrimosA.multiplicarPotencias(x);
-		resolucaoLatex+="\\sqrt[" + c + "]{" + fatoresPrimosA.latex() + "\\cdot " + b + "}=";
+		resolucao += "\\sqrt[" + c + "]{" + fatoresPrimosA.latex() + "\\cdot " + b + "}=";
 
-		FatoresPrimos fatoresPrimosB=ResolucaoRadiciacao.fatoresPrimos(b);
+		FatoresPrimos fatoresPrimosB = ResolucaoRadiciacao.fatoresPrimos(b);
 
-		resolucaoLatex+="\\sqrt[" + c + "]{" + fatoresPrimosA.latex() + "\\cdot " + fatoresPrimosB.latex() + "}=";
+		resolucao += "\\sqrt[" + c + "]{" + fatoresPrimosA.latex() + "\\cdot " + fatoresPrimosB.latex() + "}=";
 
 		fatoresPrimosA.juntar(fatoresPrimosB);
-		
-//		resolucaoLatex+="\\sqrt[" + c + "]{" + fatoresPrimosA.latex() + "}=";
 
-		resolucaoLatex+=ResolucaoRadiciacao.resolucao(fatoresPrimosA, c);
-		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,200);
+		resolucao += ResolucaoRadiciacao.resolucao(fatoresPrimosA, c);
+		resolucao = Convert.includeLineBreak(resolucao, 200);
 
-		resultadoCorreto = "" + d;
-
+		addParagrafo("Calcule:");
+		addParagrafo("\\(" + texto + "\\)");
+		gerarAlternativas("" + d);
+		setResolucao("\\(" + resolucao + "\\)");
 	}
-
-	public static void main(String[] args)
-	{
-		new Radiciacao1(1);
-	}
-
 }

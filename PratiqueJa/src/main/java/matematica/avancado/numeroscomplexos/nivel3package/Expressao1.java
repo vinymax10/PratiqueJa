@@ -1,30 +1,18 @@
 package matematica.avancado.numeroscomplexos.nivel3package;
 
+import matematica.GeradorExercicio;
 import matematica.avancado.numeroscomplexos.NumeroComplexo;
-import modelo.matematica.Conta;
 
-public class Expressao1 extends Conta
+public class Expressao1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public Expressao1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-		
-		NumeroComplexo a=NumeroComplexo.contruirModulo(30);
-		
-//		a.real.numerador=0;
-		pergunta="Calcule |z|";
-		textLatex="z="+a;
-		
-		resultadoCorreto = "" + a.modulo;
-		
-		resolucaoLatex=a.resolucaoModulo();
-		
-	}
+		NumeroComplexo a = NumeroComplexo.contruirModulo(30);
 
-	public static void main(String[] args)
-	{
-		new Expressao1(1);
+		addParagrafo("Calcule \\(|z|\\)");
+		addParagrafo("\\(z=" + a + "\\)");
+		gerarAlternativas("" + a.modulo);
+		setResolucao("\\(" + a.resolucaoModulo() + "\\)");
 	}
 }

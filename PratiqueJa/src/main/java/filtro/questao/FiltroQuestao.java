@@ -34,6 +34,7 @@ public class FiltroQuestao implements Serializable
 	private int ordemInsercao;
 	private String chave;
 	private Long id;
+	private String ids;
 	private Boolean resolucaoLatex;
 	private Assunto assunto;
 	private Boolean acertei;
@@ -51,6 +52,7 @@ public class FiltroQuestao implements Serializable
 		ordemInsercao = 0;
 		chave = null;
 		id = null;
+		ids = null;
 		resolucaoLatex = null;
 		malFormulada = null;
 		assunto = null;

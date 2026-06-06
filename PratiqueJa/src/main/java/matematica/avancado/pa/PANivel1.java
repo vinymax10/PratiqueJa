@@ -1,45 +1,13 @@
 package matematica.avancado.pa;
 
-import java.lang.reflect.InvocationTargetException;
+import matematica.GeradorExercicio;
 
-import modelo.matematica.Conta;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class PANivel1 extends Conta
+public class PANivel1 extends GeradorExercicio
 {
-	private static final long serialVersionUID = 1L;
-
-	public PANivel1(int index)
+	@Override
+	protected void construir()
 	{
-		super(index);
-
-		try
-		{
-			int tipo = 1 + rand.nextInt(6);
-			clone(
-			(Conta) Class.forName(this.getClass().getPackage().getName() + ".nivel1package.Expressao" + tipo).getConstructor(Integer.TYPE).newInstance(index));
-		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
-		| ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public PANivel1()
-	{
-
-	}
-
-	public boolean isCorreta()
-	{
-		return respostaAluno.trim().equals(resultadoCorreto) || respostaAluno.trim().equals(resultadoCorreto.replaceAll("°", ""));
-	}
-
-	public static void main(String[] args)
-	{
-		new PANivel1(1);
+		int tipo = 1 + rand.nextInt(6);
+		delegar(instanciar(".nivel1package.Expressao" + tipo));
 	}
 }
