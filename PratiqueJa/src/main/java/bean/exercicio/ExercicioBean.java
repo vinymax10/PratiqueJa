@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import bean.PaiBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
+import exceptions.RelacaoException;
+import modelo.auditoria.TipoEvento;
 import dao.exercicio.ExercicioDAO;
 import filtro.exercicio.FiltroExercicio;
 import infra.Cripto;
@@ -67,6 +69,9 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 
 	/** Exercícios do assunto exibidos na aba "Exercícios" (matematica/exercicio.xhtml). */
 	private List<Exercicio> exercicios;
+
+	/** Assunto corrente carregado pela aba de exercícios (matematica/exercicio.xhtml). */
+	private Assunto assuntoAtual;
 
 	public ExercicioBean()
 	{
@@ -202,7 +207,26 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	public void filtrarPorAssunto(Assunto assunto)
 	{
 		if(assunto != null)
+		{
+			assuntoAtual = assunto;
 			exercicios = entidadeDAO.buscarPorAssunto(assunto);
+		}
+	}
+
+	public void renovarExercicios()
+	{
+		if(assuntoAtual == null) return;
+		try
+		{
+			exercicios = exercicioService.renovarExercicios(assuntoAtual);
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				exercicios.size() + " exercício(s) renovado(s) com sucesso.");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível renovar os exercícios.");
+		}
 	}
 
 	/** Registra a resposta de um exercício específico (cards da aba). */
@@ -240,4 +264,68 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	{
 		return exercicioService.numeroMeusExercicios(Sessao.getUsuarioLogado(), realizado);
 	}
+
+	public void remover(Exercicio exercicio)
+	{
+		try
+		{
+			this.entidade = exercicio;
+			carregarPermissao();
+			validar(!permissao.isPodeRemover(), Mensagem.messagePermissaoNegada());
+			podeRemover(exercicio);
+			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
+				auditoriaService.registrarExclusao(classe, exercicio.getId(), exercicio);
+			if(lista != null)
+				lista.remove(exercicio);
+			getListaTudo().remove(exercicio);
+			entidadeDAO.remover(exercicio);
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido(a) com sucesso.");
+		}
+		catch(RelacaoException e)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o(a) " + nome);
+		}
+	}
+
+	public void removerTodos()
+	{
+		if(lista == null || lista.isEmpty())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Nenhum exercício para remover.");
+			return;
+		}
+		try
+		{
+			this.entidade = lista.get(0);
+			carregarPermissao();
+			validar(!permissao.isPodeRemover(), Mensagem.messagePermissaoNegada());
+
+			List<Exercicio> copia = new ArrayList<>(lista);
+			for(Exercicio exercicio : copia)
+			{
+				podeRemover(exercicio);
+				if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
+					auditoriaService.registrarExclusao(classe, exercicio.getId(), exercicio);
+				getListaTudo().remove(exercicio);
+				entidadeDAO.remover(exercicio);
+			}
+			lista.clear();
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, copia.size() + " " + nome + "(s) removido(s) com sucesso.");
+		}
+		catch(RelacaoException e)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover os(as) " + nome + "s");
+		}
+	}
+
 }

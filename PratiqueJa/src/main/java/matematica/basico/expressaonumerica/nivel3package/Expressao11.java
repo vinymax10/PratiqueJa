@@ -1,71 +1,53 @@
-package matematica.basico.expressaonumerica.nivel3package;
+﻿package matematica.basico.expressaonumerica.nivel3package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao11 extends GeradorExercicio
+// dfrac{(A op1 B) op2 C}{D op3 (E op4 F)} — fração: numerador com paren esquerda, denom com paren direita
+public class Expressao11 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 6;
-		ExpressaoExt expressao;
-		Racional resultado = null;
+		String op1 = opPM();
+		String op2 = opPM();
+		String op3 = opPM();
+		String op4 = opPM();
 
-		Racional[] coeficientes = new Racional[size];
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
-
-		String ope1 = Algebra.sinalPlusMinus();
-		String ope2 = Algebra.sinalMenosDiv();
-		String ope3 = "/";
-		String ope4 = Algebra.sinalMenosDiv();
-		String ope5 = Algebra.sinalPlusMinus();
-
-		String exp = "((A" + ope1 + "B)" + ope2 + "C)" + ope3 + "(D" + ope4 + "(E" + ope5 + "F))";
-
-		String exp2 = "(A" + ope4 + "(B" + ope5 + "C))";
-
-		Racional[] coeficientes2 = new Racional[3];
+		int a, b, c, d, e, f, p1, p2, num, den;
 		do
 		{
-			for(int i = 0; i < coeficientes2.length; i++)
-				coeficientes2[i] = new Racional(1 + rand.nextInt(20));
-
-			try
-			{
-				expressao = new ExpressaoExt(exp2, coeficientes2);
-				resultado = expressao.calcular();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
+			a = 2 + rand.nextInt(8); b = 1 + rand.nextInt(7);
+			c = 2 + rand.nextInt(8);
+			d = 2 + rand.nextInt(8);
+			e = 2 + rand.nextInt(8); f = 1 + rand.nextInt(7);
+			if(op1.equals("-") && b > a) { int t = a; a = b; b = t; }
+			if(op4.equals("-") && f > e) { int t = e; e = f; f = t; }
+			p1  = computar(a, b, op1);
+			num = computar(p1, c, op2);
+			p2  = computar(e, f, op4);
+			den = computar(d, p2, op3);
 		}
-		while(resultado.numerador == 0);
+		while(den <= 0 || num % den != 0);
 
-		for(int i = 0; i < coeficientes2.length; i++)
-			coeficientes[i + 3] = coeficientes2[i];
+		int result = num / den;
 
-		String texto = "\\dfrac{(" + coeficientes[0] + ope1 + coeficientes[1] + ")" + ope2 + coeficientes[2] + "}{" + coeficientes[3] + ope4 + "("
-		+ coeficientes[4] + ope5 + coeficientes[5] + ")}";
+		String t1   = opTex(op1);
+		String t2   = opTex(op2);
+		String t3   = opTex(op3);
+		String t4   = opTex(op4);
+		String par1 = "\\left(" + a + " " + t1 + " " + b + "\\right)";
+		String par2 = "\\left(" + e + " " + t4 + " " + f + "\\right)";
 
-		texto = texto.replace("*", "\\times");
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(\\dfrac{" + par1 + " " + t2 + " " + c + "}{" + d + " " + t3 + " " + par2 + "} = \\,?\\)");
+		gerarAlternativas("" + result);
 
-		try
-		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& \\dfrac{" + par1 + " " + t2 + " " + c + "}{" + d + " " + t3 + " " + par2 + "} = \\\\" +
+			"& \\dfrac{" + p1 + " " + t2 + " " + c + "}{" + d + " " + t3 + " " + p2 + "} = \\\\" +
+			"& \\dfrac{" + num + "}{" + den + "} = " + result +
+			"\\end{aligned}\\)"
+		);
 	}
 }

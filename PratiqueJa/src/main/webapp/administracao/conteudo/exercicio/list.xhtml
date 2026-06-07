@@ -37,6 +37,14 @@
 
 			<div class="flex gap-3 align-items-center justify-content-end">
 
+				<p:commandButton value="Remover Todos" icon="pi pi-trash"
+				styleClass="ui-button-danger ui-button-flat"
+				action="#{exercicioBean.removerTodos()}" update="@form, :growl"
+				process="@form">
+					<p:confirm header="Confirmação" icon="pi pi-exclamation-triangle"
+					message="Remover todos os #{exercicioBean.lista.size()} exercícios listados?" />
+				</p:commandButton>
+
 				<ui:include src="/exportar/exportar.xhtml" >
 					<ui:param name="id" value="form:tabela" />
 					<ui:param name="nome" value="Exercícios" />
@@ -90,6 +98,16 @@
 				oncomplete="reloadMathJax();" style="width: auto" >
 				</p:button>
 
+			</p:column>
+
+			<p:column headerText="Remover" responsivePriority="3" exportable="false" style="width:5rem;text-align:center">
+				<p:commandButton icon="pi pi-trash"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{exercicioBean.remover(entidade)}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Exercício?" />
+				</p:commandButton>
 			</p:column>
 
 		</p:dataTable>

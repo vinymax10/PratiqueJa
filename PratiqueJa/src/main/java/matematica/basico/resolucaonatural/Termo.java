@@ -22,12 +22,12 @@ public class Termo
 	public String latex()
 	{
 		String str="";
-		
+
 		if(temNovoDigito)
-			str+=getNumero(novoDigito)+"\\textcolor{babypink}{\\cancel{"+getNumero(digito)+"}}";
+			str+="\\overset{\\textstyle\\textcolor{iris}{"+getNumero(novoDigito)+"}}{\\textcolor{babypink}{\\cancel{"+getNumero(digito)+"}}}";
 		else
 			str+=getNumero(digito);
-			
+
 		return str;
 	}
 	

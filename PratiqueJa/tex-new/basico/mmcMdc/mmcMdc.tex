@@ -51,6 +51,9 @@ divida \emph{ao menos um} dos números, carregando os demais
 inalterados. Repita até todos chegarem a $1$. O MMC é o
 \textbf{produto de todos os fatores primos usados}.}
 
+\obs{Pré-requisito: decomposição em fatores primos — ver apostila
+\textit{Números Primos}.}
+
 %─────────────────────────────────────────────────────────────
 \TW{2}{darkblue}{MMC com 2 números}{Exemplo — MMC de 12 e 18}
 
@@ -153,19 +156,9 @@ $8$, $2$ e $3$ não têm fator comum — paramos.
   $36\times6 = 216 = 12\times18$ \ok%
 }
 
-\SH{Números coprimos}
-\regra{Dois números são \textbf{coprimos} (primos entre si) quando
-MDC $= 1$ — não compartilham nenhum fator primo.}
+\SH{Caso especial: divisibilidade direta}
 \exemp{%
-  MDC$(9,16) = 1$: \ $9=3^2$, $16=2^4$ \ok\\
-  MDC$(35,48) = 1$: \ $35=5\cdot7$, $48=2^4\cdot3$ \ok%
-}
-
-\SH{Casos especiais}
-\exemp{%
-  \textbf{Consecutivos} são sempre coprimos:\\
-  MDC$(13,14) = \hlm{1}$\\[3pt]
-  \textbf{Se $a$ divide $b$:} MDC$(a,b)=a$ e MMC$(a,b)=b$\\
+  \textbf{Se $a$ divide $b$:} MDC$(a,b)=a$ e MMC$(a,b)=b$\\[2pt]
   Ex.: MDC$(5,30)=\hlm{5}$ e MMC$(5,30)=\hlm{30}$%
 }
 

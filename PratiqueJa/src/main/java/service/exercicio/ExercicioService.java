@@ -3,11 +3,16 @@ package service.exercicio;
 import java.util.List;
 
 import dao.exercicio.ExercicioDAO;
+import dao.exercicio.ExercicioPadraoDAO;
 import dao.exercicio.ResultadoExercicioDAO;
 import dao.usuario.UsuarioDAO;
 import filtro.exercicio.FiltroExercicio;
+import filtro.exercicio.FiltroExercicioPadrao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import matematica.ExercicioFactory;
+import modelo.academico.Assunto;
+import modelo.exercicio.ExercicioPadrao;
 import modelo.matematica.AlternativaExercicio;
 import modelo.matematica.Exercicio;
 import modelo.usuario.Usuario;
@@ -17,6 +22,9 @@ public class ExercicioService
 {
 	@Inject
 	private ExercicioDAO exercicioDAO;
+
+	@Inject
+	private ExercicioPadraoDAO exercicioPadraoDAO;
 
 	@Inject
 	private ResultadoExercicioDAO resultadoExercicioDAO;
@@ -81,6 +89,32 @@ public class ExercicioService
 	public Long numeroMeusExercicios(Usuario usuario, Boolean realizado)
 	{
 		return (long) exercicioDAO.buscarGlobais().size();
+	}
+
+	public List<Exercicio> renovarExercicios(Assunto assunto)
+	{
+		List<Exercicio> existentes = exercicioDAO.buscarPorAssunto(assunto);
+		for(Exercicio e : existentes)
+			exercicioDAO.remover(e);
+
+		FiltroExercicioPadrao filtro = new FiltroExercicioPadrao();
+		filtro.setAssunto(assunto);
+		List<ExercicioPadrao> padroes = exercicioPadraoDAO.buscar(filtro);
+
+		for(ExercicioPadrao padrao : padroes)
+		{
+			int qtd = padrao.getQuantidade() > 0 ? padrao.getQuantidade() : 1;
+			for(int i = 0; i < qtd; i++)
+			{
+				Exercicio novo = ExercicioFactory.gerar(padrao.getClasse(), i + 1);
+				novo.setAssunto(padrao.getAssunto());
+				novo.setNivel(padrao.getNivel());
+				novo.setGlobal(true);
+				exercicioDAO.salvar(novo);
+			}
+		}
+
+		return exercicioDAO.buscarPorAssunto(assunto);
 	}
 
 }

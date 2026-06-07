@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.5.28)  28 MAY 2026 19:56
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.5.28)  7 JUN 2026 10:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./tex-new/basico/numerosPrimos/numerosPrimos.tex
-(tex-new/basico/numerosPrimos/numerosPrimos.tex
+**./numerosPrimos.tex
+(numerosPrimos.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -23,7 +23,7 @@ File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
 )
-(C:\Users\maximovrm\git\PratiqueJa\PratiqueJa\tex-new\pratiqueja.sty
+(../../pratiqueja.sty
 
 LaTeX Warning: You have requested package `../../pratiqueja',
                but the package provides `pratiqueja'.
@@ -894,7 +894,7 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@olf=\skip66
 \f@nch@O@orf=\skip67
 ))
-No file numerosPrimos.aux.
+(numerosPrimos.aux)
 \openout1 = `numerosPrimos.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
@@ -908,6 +908,7 @@ LaTeX Font Info:    ... okay on input line 17.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
 7.
+
 (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -1056,21 +1057,19 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 ) [1
 
 ] [2]
-(C:\Users\maximovrm\git\PratiqueJa\PratiqueJa\tex-new\basico\numerosPrimos\nume
-rosPrimos.aux)
+(numerosPrimos.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26326 strings out of 409616
- 586869 string characters out of 5773180
- 1952191 words of memory out of 5000000
- 48020 multiletter control sequences out of 15000+600000
- 562917 words of font info for 79 fonts, out of 8000000 for 9000
+ 26344 strings out of 409616
+ 586736 string characters out of 5773180
+ 1960191 words of memory out of 5000000
+ 48037 multiletter control sequences out of 15000+600000
+ 564454 words of font info for 84 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 106i,11n,113p,1041b,1000s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 106i,11n,113p,1012b,1000s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on C:\Users\maximovrm\git\PratiqueJa\PratiqueJa\tex-new\basico\n
-umerosPrimos\numerosPrimos.pdf (2 pages).
+Output written on numerosPrimos.pdf (2 pages).

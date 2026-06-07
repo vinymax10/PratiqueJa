@@ -1,50 +1,40 @@
-package matematica.basico.expressaonumerica.nivel2package;
+﻿package matematica.basico.expressaonumerica.nivel2package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao1 extends GeradorExercicio
+// A op1 (B op2 C) — parênteses à direita
+public class Expressao1 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 3;
-		Racional[] coeficientes = new Racional[size];
-		String ope1 = Algebra.sinal();
-		String ope2 = Algebra.sinalPlusMinus();
-		String exp, expLatex;
+		String op2 = opPM();
+		String op1 = opPMM();
 
-		exp = "A" + ope1 + "(B" + ope2 + "C)";
+		int b = 2 + rand.nextInt(8);
+		int c = 1 + rand.nextInt(7);
+		if(op2.equals("-") && c > b) { int t = b; b = c; c = t; }
+		int p1 = computar(b, c, op2);
 
-		if(ope1.equals("/"))
-			expLatex = "A" + ope1 + "B" + ope2 + "C";
-		else
-			expLatex = exp;
+		int a;
+		if(op1.equals("*"))       a = 2 + rand.nextInt(5);
+		else if(op1.equals("-"))  a = p1 + rand.nextInt(10);
+		else                      a = 2 + rand.nextInt(18);
 
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
+		int result = computar(a, p1, op1);
 
-		while(coeficientes[1].equals(coeficientes[2]))
-			coeficientes[2] = new Racional(1 + rand.nextInt(20));
+		String t1  = opTex(op1);
+		String t2  = opTex(op2);
+		String par = "\\left(" + b + " " + t2 + " " + c + "\\right)";
 
-		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(" + a + " " + t1 + " " + par + " = \\,?\\)");
+		gerarAlternativas("" + result);
 
-		ExpressaoExt expressao;
-		Racional resultado = null;
-		try
-		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& " + a + " " + t1 + " " + par + " = \\\\" +
+			"& " + a + " " + t1 + " " + p1 + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

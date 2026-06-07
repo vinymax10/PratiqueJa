@@ -128,7 +128,7 @@ public class Numero
 		{
 			strDigito="";
 			if(!getDigitoStrDir(i).equals("0"))
-				strDigito=" \\scriptsize \\textcolor{iris}{"+getDigitoStrDir(i)+"}";
+				strDigito=" \\small \\textcolor{iris}{"+getDigitoStrDir(i)+"}";
 			
 			resolucaoLatex=strDigito+resolucaoLatex;
 			

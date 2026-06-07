@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialog-ex-paragrafo"
+		class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
+		header="Parágrafo"
+		showEffect="fade" hideEffect="fade" width="100%;" modal="true" widgetVar="dialogExParagrafo" responsive="true">
+
+			<h:form id="formExParagrafo" class="form" enctype="multipart/form-data">
+				<div class="ui-fluid gride">
+
+					<!-- Texto -->
+					<h:panelGroup styleClass="campo col-12"
+					rendered="#{!exercicioParagrafoBean.entidade.tipoImagem}">
+						<p:outputLabel for="@next" value="Texto" />
+						<p:inputTextarea value="#{exercicioParagrafoBean.entidade.texto}"
+						rows="6" autoResize="false" maxlength="4095" styleClass="w-full" />
+					</h:panelGroup>
+
+					<!-- Upload de Imagem -->
+					<h:panelGroup styleClass="campo col-12 md:col-6">
+						<p:outputLabel value="Imagem" />
+						<p:fileUpload listener="#{exercicioParagrafoBean.uploadNovo}"
+						mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						update="formExParagrafo" process="@this"
+						label="Selecionar imagem" />
+					</h:panelGroup>
+
+					<!-- Imagem atual -->
+					<h:panelGroup styleClass="campo col-12 md:col-6 flex flex-column gap-2"
+					rendered="#{exercicioParagrafoBean.entidade.tipoImagem}">
+						<p:outputLabel value="Imagem atual" />
+						<p:graphicImage value="#{exercicioParagrafoBean.entidade.imagemFile.imagem()}"
+						stream="false" cache="false"
+						style="max-width:100%;max-height:220px;border-radius:6px;display:block;" />
+						<h:outputText styleClass="status"
+						value="#{exercicioParagrafoBean.entidade.imagemFile.endImagem}" />
+						<p:commandButton value="Remover Imagem" icon="pi pi-times"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{exercicioParagrafoBean.removerImagem()}"
+						update="formExParagrafo" process="@this" />
+					</h:panelGroup>
+
+				</div>
+
+				<div class="content-button">
+
+					<div class="divisor"></div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Remover" icon="pi pi-trash"
+						styleClass="ui-button-danger ui-button-flat"
+						action="#{exercicioParagrafoBean.remover}"
+						update="formExParagrafo form:exParagrafosTabela :growl"
+						process="@this" oncomplete="PF('dialogExParagrafo').hide(); reloadMathJax();"
+						rendered="#{!exercicioParagrafoBean.cadastro}">
+							<p:confirm header="Confirmação" icon="pi pi-info-circle"
+							message="Você tem certeza que deseja remover este Parágrafo?" />
+						</p:commandButton>
+
+					</div>
+
+					<div class="flex gap-3 flex-wrap">
+
+						<p:commandButton value="Auditoria"
+						rendered="#{sessaoBean.podeVerAuditoria and !exercicioParagrafoBean.cadastro}"
+						styleClass="ui-button-flat ui-button-plain"
+						icon="fa-regular fa-eye"
+						action="#{auditoriaBean.carregar(exercicioParagrafoBean.entidade, exercicioParagrafoBean.nome)}"
+						update="dialog-auditoria"
+						process="@this" oncomplete="PF('dialogAuditoria').show()">
+						</p:commandButton>
+
+						<p:commandButton id="salvarExParagrafo" value="Salvar"
+						rendered="#{!exercicioParagrafoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{exercicioParagrafoBean.salvar}"
+						update="formExParagrafo form:exParagrafosTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogExParagrafo').hide(); reloadMathJax();">
+							<p:defaultCommand target="salvarExParagrafo" />
+						</p:commandButton>
+
+						<p:commandButton id="adicionarExParagrafo" value="Adicionar"
+						rendered="#{exercicioParagrafoBean.cadastro}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-check"
+						action="#{exercicioParagrafoBean.adicionar}"
+						update="formExParagrafo form:exParagrafosTabela :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogExParagrafo').hide(); reloadMathJax();">
+							<p:defaultCommand target="adicionarExParagrafo" />
+						</p:commandButton>
+
+					</div>
+				</div>
+
+			</h:form>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+				<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

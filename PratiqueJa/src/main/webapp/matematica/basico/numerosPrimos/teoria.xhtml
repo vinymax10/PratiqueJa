@@ -121,31 +121,6 @@
                 </div>
             </div>
 
-            <!-- APLICAÇÃO: MMC E MDC -->
-            <div class="tr-section" id="sec-aplicacao">
-                <div class="tr-section-header">
-                    <div class="tr-badge extra">Aplic.</div>
-                    <div>
-                        <div class="tr-section-title">Aplicação: MMC e MDC</div>
-                        <div class="tr-section-sub">A decomposição como ferramenta</div>
-                    </div>
-                </div>
-                <div class="tr-rule">
-                    Com a decomposição em fatores primos, obtemos MMC e MDC de forma direta:
-                    <br/>• <strong>MDC</strong>: produto dos fatores primos <em>comuns</em> com o <em>menor</em> expoente.
-                    <br/>• <strong>MMC</strong>: produto de <em>todos</em> os fatores primos com o <em>maior</em> expoente.
-                </div>
-                <h4>Exemplo — MDC e MMC de 60 e 84</h4>
-                <div class="tr-examples">
-                    <div class="tr-ex tr-steps span-full">
-                        <span>\(60 = 2^2 \times 3 \times 5\)</span>
-                        <span>\(84 = 2^2 \times 3 \times 7\)</span>
-                        <span>MDC: fatores comuns com menor exp.: \(2^2 \times 3 = \)<span class="hl">12</span></span>
-                        <span>MMC: todos os fatores com maior exp.: \(2^2 \times 3 \times 5 \times 7 = \)<span class="hl">420</span></span>
-                    </div>
-                </div>
-            </div>
-
             <!-- TESTES DE PRIMALIDADE -->
             <div class="tr-section" id="sec-teste">
                 <div class="tr-section-header">
@@ -165,6 +140,60 @@
                         <span>\(\sqrt{97} \approx 9{,}8\) → testar primos até 9: 2, 3, 5, 7</span>
                         <span>97 não é divisível por nenhum deles.</span>
                         <span>Logo, <span class="hl">97 é primo</span>.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NÚMEROS COPRIMOS -->
+            <div class="tr-section" id="sec-coprimos">
+                <div class="tr-section-header">
+                    <div class="tr-badge def">Co</div>
+                    <div>
+                        <div class="tr-section-title">Números Coprimos</div>
+                        <div class="tr-section-sub">Quando dois números não compartilham fatores primos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Dois números são <strong>coprimos</strong> (ou <em>primos entre si</em>) quando não
+                    compartilham nenhum fator primo em comum — isto é, seu MDC é igual a 1.
+                </div>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(9 = 3^2\) e \(16 = 2^4\) — sem fatores comuns → MDC(9, 16) = <span class="hl">1</span> ✓</span>
+                        <span>\(35 = 5 \times 7\) e \(48 = 2^4 \times 3\) — sem fatores comuns → MDC(35, 48) = <span class="hl">1</span> ✓</span>
+                        <span>Números <strong>consecutivos</strong> são sempre coprimos: MDC(13, 14) = <span class="hl">1</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NÚMERO DE DIVISORES -->
+            <div class="tr-section" id="sec-divisores">
+                <div class="tr-section-header">
+                    <div class="tr-badge extra">τ</div>
+                    <div>
+                        <div class="tr-section-title">Número de Divisores</div>
+                        <div class="tr-section-sub">Fórmula a partir dos fatores primos</div>
+                    </div>
+                </div>
+                <div class="tr-rule">
+                    Se \(n = p_1^{a_1} \times p_2^{a_2} \times \cdots \times p_k^{a_k}\), o número total
+                    de divisores de \(n\) é:
+                    \[\tau(n) = (a_1+1)(a_2+1)\cdots(a_k+1)\]
+                    Cada expoente contribui com \((a_i + 1)\) escolhas: 0, 1, …, \(a_i\).
+                </div>
+                <h4>Exemplo — divisores de 60</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(60 = 2^2 \times 3^1 \times 5^1\)</span>
+                        <span>\(\tau(60) = (2+1)(1+1)(1+1) = 3 \times 2 \times 2 = \)<span class="hl">12 divisores</span></span>
+                        <span>Divisores de 60: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60 ✓</span>
+                    </div>
+                </div>
+                <h4>Exemplo — divisores de 72</h4>
+                <div class="tr-examples">
+                    <div class="tr-ex tr-steps span-full">
+                        <span>\(72 = 2^3 \times 3^2\)</span>
+                        <span>\(\tau(72) = (3+1)(2+1) = 4 \times 3 = \)<span class="hl">12 divisores</span></span>
                     </div>
                 </div>
             </div>

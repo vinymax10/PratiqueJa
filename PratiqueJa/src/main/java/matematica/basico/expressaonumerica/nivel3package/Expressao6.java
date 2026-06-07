@@ -1,46 +1,43 @@
-package matematica.basico.expressaonumerica.nivel3package;
+﻿package matematica.basico.expressaonumerica.nivel3package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao6 extends GeradorExercicio
+// A op1 dfrac{B op2 C}{D} — número operando com fração
+public class Expressao6 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 4;
-		Racional[] coeficientes = new Racional[size];
+		String op1 = opPM();
+		String op2 = opPM();
 
-		String ope1 = Algebra.sinalMenosDiv();
-		String ope2 = Algebra.sinalPlusMinus();
-		String ope3 = "/";
-
-		String exp;
-
-		exp = "A" + ope1 + "((B" + ope2 + "C)" + ope3 + "D)";
-
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
-
-		String texto = "" + coeficientes[0] + ope1 + "\\dfrac{" + coeficientes[1] + ope2 + coeficientes[2] + "}{" + coeficientes[3] + "}";
-		texto = texto.replace("*", "\\times");
-
-		ExpressaoExt expressao;
-		Racional resultado = null;
-		try
+		int b, c, d, p1;
+		do
 		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
+			d  = 2 + rand.nextInt(8);
+			b  = 2 + rand.nextInt(18);
+			c  = 1 + rand.nextInt(17);
+			if(op2.equals("-") && c > b) { int t = b; b = c; c = t; }
+			p1 = computar(b, c, op2);
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		while(p1 <= 0 || p1 % d != 0);
+		int frac1 = p1 / d;
 
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		int a      = 2 + rand.nextInt(18);
+		int result = computar(a, frac1, op1);
+
+		String t1 = opTex(op1);
+		String t2 = opTex(op2);
+
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(" + a + " " + t1 + " \\dfrac{" + b + " " + t2 + " " + c + "}{" + d + "} = \\,?\\)");
+		gerarAlternativas("" + result);
+
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& " + a + " " + t1 + " \\dfrac{" + b + " " + t2 + " " + c + "}{" + d + "} = \\\\" +
+			"& " + a + " " + t1 + " \\dfrac{" + p1 + "}{" + d + "} = \\\\" +
+			"& " + a + " " + t1 + " " + frac1 + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

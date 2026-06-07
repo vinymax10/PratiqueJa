@@ -21,6 +21,19 @@
 
 	<h:form id="form">
 
+		<h:panelGroup layout="block"
+			rendered="#{sessaoBean.podeVerAdministracao()}"
+			style="display:flex;justify-content:flex-end;padding:0.5rem 1rem 0">
+			<p:commandButton value="Renovar Exercícios" icon="pi pi-refresh"
+				styleClass="ui-button-outlined ui-button-secondary"
+				action="#{exercicioBean.renovarExercicios()}"
+				update="@form, :growl" process="@this"
+				oncomplete="reloadMathJax();">
+				<p:confirm header="Confirmação" icon="pi pi-exclamation-triangle"
+					message="Substituir todos os exercícios deste assunto por novos gerados automaticamente?" />
+			</p:commandButton>
+		</h:panelGroup>
+
 	  <div class="ex-grid">
 
 		<ui:repeat id="laco" value="#{exercicioBean.exercicios}" var="exercicio" varStatus="status">
@@ -50,7 +63,7 @@
 							value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
 						<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
 							cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
-							style="margin-bottom:1rem;max-width:100%;display:block">
+							style="margin-bottom:1rem;max-width:300px;display:block">
 						</p:graphicImage>
 					</ui:repeat>
 				</div>

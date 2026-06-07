@@ -1,48 +1,51 @@
-package matematica.basico.expressaonumerica.nivel3package;
+﻿package matematica.basico.expressaonumerica.nivel3package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao3 extends GeradorExercicio
+// dfrac{A op1 B}{C} op2 (D op3 E) — fração com parêntese à direita
+public class Expressao3 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 5;
-		Racional[] coeficientes = new Racional[size];
+		String op1 = opPM();
+		String op2 = opPM();
+		String op3 = opPM();
 
-		String ope1 = Algebra.sinalPlusMinus();
-		String ope2 = "/";
-		String ope3 = Algebra.sinalMenosDiv();
-		String ope4 = Algebra.sinalPlusMinus();
-
-		String exp;
-
-		exp = "((A" + ope1 + "B)" + ope2 + "C)" + ope3 + "(D" + ope4 + "E)";
-
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
-
-		String texto = "\\dfrac{" + coeficientes[0] + ope1 + coeficientes[1] + "}{" + coeficientes[2] + "}" + ope3 + "(" + coeficientes[3] + ope4 + coeficientes[4]
-		+ ")";
-		texto = texto.replace("*", "\\times");
-
-		ExpressaoExt expressao;
-		Racional resultado = null;
-		try
+		int a, b, c, p1;
+		do
 		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
+			c  = 2 + rand.nextInt(8);
+			a  = 2 + rand.nextInt(18);
+			b  = 1 + rand.nextInt(17);
+			if(op1.equals("-") && b > a) { int t = a; a = b; b = t; }
+			p1 = computar(a, b, op1);
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		while(p1 <= 0 || p1 % c != 0);
 
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		int frac1 = p1 / c;
+
+		int d = 2 + rand.nextInt(8);
+		int e = 1 + rand.nextInt(7);
+		if(op3.equals("-") && e > d) { int t = d; d = e; e = t; }
+		int p2 = computar(d, e, op3);
+
+		int result = computar(frac1, p2, op2);
+
+		String t1  = opTex(op1);
+		String t2  = opTex(op2);
+		String t3  = opTex(op3);
+		String par = "\\left(" + d + " " + t3 + " " + e + "\\right)";
+
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(\\dfrac{" + a + " " + t1 + " " + b + "}{" + c + "} " + t2 + " " + par + " = \\,?\\)");
+		gerarAlternativas("" + result);
+
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& \\dfrac{" + a + " " + t1 + " " + b + "}{" + c + "} " + t2 + " " + par + " = \\\\" +
+			"& \\dfrac{" + p1 + "}{" + c + "} " + t2 + " " + p2 + " = \\\\" +
+			"& " + frac1 + " " + t2 + " " + p2 + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

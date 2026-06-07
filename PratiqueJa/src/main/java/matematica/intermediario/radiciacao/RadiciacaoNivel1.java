@@ -7,6 +7,7 @@ public class RadiciacaoNivel1 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		delegar(instanciar(".nivel1package.Radiciacao"));
+		String[] tipos = {"Radiciacao", "Radiciacao2"};
+		delegar(instanciar(".nivel1package." + tipos[rand.nextInt(tipos.length)]));
 	}
 }

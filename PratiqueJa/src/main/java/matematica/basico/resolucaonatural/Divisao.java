@@ -132,8 +132,24 @@ public class Divisao
 		}
 		
 		resolucaoLatex+="\\end{array}";
-		
+
 		return resolucaoLatex;
+	}
+
+	public static void main(String[] args)
+	{
+		Divisao d = new Divisao();
+		System.out.println("=== Sem empréstimo: 96 / 3 ===");
+		System.out.println(d.dividir(96, 3, true));
+		System.out.println();
+		System.out.println("=== Com empréstimo: 85 / 5 ===");
+		System.out.println(d.dividir(85, 5, true));
+		System.out.println();
+		System.out.println("=== Empréstimo encadeado: 100 / 4 ===");
+		System.out.println(d.dividir(100, 4, true));
+		System.out.println();
+		System.out.println("=== Empréstimo encadeado: 504 / 7 ===");
+		System.out.println(d.dividir(504, 7, true));
 	}
 
 }

@@ -1,52 +1,42 @@
-package matematica.basico.expressaonumerica.nivel2package;
+﻿package matematica.basico.expressaonumerica.nivel2package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao3 extends GeradorExercicio
+// (A op1 B) op2 (C op3 D) — dois pares de parênteses
+public class Expressao3 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 4;
-		Racional[] coeficientes = new Racional[size];
+		String op1 = opPM();
+		String op2 = opPMM();
+		String op3 = opPM();
 
-		String ope1 = Algebra.sinalPlusMinus();
-		String ope2 = Algebra.sinal();
-		String ope3 = Algebra.sinalPlusMinus();
-		String exp, expLatex;
+		int a = 2 + rand.nextInt(8);
+		int b = 1 + rand.nextInt(7);
+		int c = 2 + rand.nextInt(8);
+		int d = 1 + rand.nextInt(7);
+		if(op1.equals("-") && b > a) { int t = a; a = b; b = t; }
+		if(op3.equals("-") && d > c) { int t = c; c = d; d = t; }
 
-		exp = "(A" + ope1 + "B)" + ope2 + "(C" + ope3 + "D)";
+		int p1     = computar(a, b, op1);
+		int p2     = computar(c, d, op3);
+		int result = computar(p1, p2, op2);
 
-		if(ope2.equals("/"))
-			expLatex = "A" + ope1 + "B" + ope2 + "C" + ope3 + "D";
-		else
-			expLatex = exp;
+		String t1   = opTex(op1);
+		String t2   = opTex(op2);
+		String t3   = opTex(op3);
+		String par1 = "\\left(" + a + " " + t1 + " " + b + "\\right)";
+		String par2 = "\\left(" + c + " " + t3 + " " + d + "\\right)";
 
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(" + par1 + " " + t2 + " " + par2 + " = \\,?\\)");
+		gerarAlternativas("" + result);
 
-		while(coeficientes[2].equals(coeficientes[3]))
-			coeficientes[3] = new Racional(1 + rand.nextInt(20));
-
-		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
-
-		ExpressaoExt expressao;
-		Racional resultado = null;
-		try
-		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& " + par1 + " " + t2 + " " + par2 + " = \\\\" +
+			"& " + p1 + " " + t2 + " " + p2 + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

@@ -1,48 +1,40 @@
-package matematica.basico.expressaonumerica.nivel2package;
+﻿package matematica.basico.expressaonumerica.nivel2package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao2 extends GeradorExercicio
+// (A op1 B) op2 C — parênteses à esquerda
+public class Expressao2 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 3;
-		Racional[] coeficientes = new Racional[size];
+		String op1 = opPM();
+		String op2 = opPMM();
 
-		String ope1 = Algebra.sinalPlusMinus();
-		String ope2 = Algebra.sinal();
-		String exp, expLatex;
+		int a = 2 + rand.nextInt(8);
+		int b = 1 + rand.nextInt(7);
+		if(op1.equals("-") && b > a) { int t = a; a = b; b = t; }
+		int p1 = computar(a, b, op1);
 
-		exp = "(A" + ope1 + "B)" + ope2 + "C";
+		int c;
+		if(op2.equals("*"))       c = 2 + rand.nextInt(5);
+		else if(op2.equals("-"))  c = p1 + rand.nextInt(10);
+		else                      c = 2 + rand.nextInt(18);
 
-		if(ope2.equals("/"))
-			expLatex = "A" + ope1 + "B" + ope2 + "C";
-		else
-			expLatex = exp;
+		int result = computar(p1, c, op2);
 
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
+		String t1  = opTex(op1);
+		String t2  = opTex(op2);
+		String par = "\\left(" + a + " " + t1 + " " + b + "\\right)";
 
-		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(" + par + " " + t2 + " " + c + " = \\,?\\)");
+		gerarAlternativas("" + result);
 
-		ExpressaoExt expressao;
-		Racional resultado = null;
-		try
-		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& " + par + " " + t2 + " " + c + " = \\\\" +
+			"& " + p1 + " " + t2 + " " + c + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

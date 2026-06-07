@@ -1,75 +1,49 @@
-package matematica.basico.expressaonumerica.nivel2package;
+﻿package matematica.basico.expressaonumerica.nivel2package;
 
-import matematica.ExpressaoExt;
-import matematica.GeradorExercicio;
-import matematica.Racional;
-import util.Algebra;
+import matematica.basico.expressaonumerica.AgrupadorExercicio;
 
-public class Expressao8 extends GeradorExercicio
+// (A op1 B) op2 [C op3 (D op4 E)] — parêntese esquerda + colchete com parêntese interno
+public class Expressao8 extends AgrupadorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int size = 5;
-		ExpressaoExt expressao;
-		Racional resultado = null;
+		String op1 = opPM();
+		String op4 = opPM();
+		String op3 = opPM();
+		String op2 = opPMM();
 
-		Racional[] coeficientes = new Racional[size];
-		for(int i = 0; i < size; i++)
-			coeficientes[i] = new Racional(1 + rand.nextInt(20));
+		int a = 2 + rand.nextInt(8);
+		int b = 1 + rand.nextInt(7);
+		if(op1.equals("-") && b > a) { int t = a; a = b; b = t; }
+		int p1 = computar(a, b, op1);
 
-		String ope1 = Algebra.sinalPlusMinus();
-		String ope2 = Algebra.sinal();
-		String ope3 = Algebra.sinalMenosDiv();
-		String ope4 = Algebra.sinalPlusMinus();
+		int d = 2 + rand.nextInt(8);
+		int e = 1 + rand.nextInt(7);
+		if(op4.equals("-") && e > d) { int t = d; d = e; e = t; }
+		int p2 = computar(d, e, op4);
 
-		String exp = "(A" + ope1 + "B)" + ope2 + "(C" + ope3 + "(D" + ope4 + "E))";
+		int c = op3.equals("-") ? p2 + rand.nextInt(8) + 1 : 2 + rand.nextInt(8);
+		int p3 = computar(c, p2, op3);
 
-		String exp2 = "A" + ope3 + "(B" + ope4 + "C)";
+		int result = computar(p1, p3, op2);
 
-		String expLatex;
-		if(ope2.equals("/"))
-		{
-			expLatex = "A" + ope1 + "B" + ope2 + "C" + ope3 + "(D" + ope4 + "E)";
+		String t1    = opTex(op1);
+		String t2    = opTex(op2);
+		String t3    = opTex(op3);
+		String t4    = opTex(op4);
+		String par1  = "\\left(" + a + " " + t1 + " " + b + "\\right)";
+		String inner = "\\left(" + d + " " + t4 + " " + e + "\\right)";
 
-			Racional[] coeficientes2 = new Racional[3];
-			do
-			{
-				for(int i = 0; i < coeficientes2.length; i++)
-					coeficientes2[i] = new Racional(1 + rand.nextInt(20));
+		addParagrafo("Calcule o valor da expressão numérica:");
+		addParagrafo("\\(" + par1 + " " + t2 + " [" + c + " " + t3 + " " + inner + "] = \\,?\\)");
+		gerarAlternativas("" + result);
 
-				try
-				{
-					expressao = new ExpressaoExt(exp2, coeficientes2);
-					resultado = expressao.calcular();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			while(resultado.numerador == 0);
-
-			for(int i = 0; i < coeficientes2.length; i++)
-				coeficientes[i + 2] = coeficientes2[i];
-		}
-		else
-			expLatex = "(A" + ope1 + "B)" + ope2 + "[C" + ope3 + "(D" + ope4 + "E)]";
-
-		String texto = Algebra.gerarTextLatexEN(expLatex, coeficientes);
-
-		try
-		{
-			expressao = new ExpressaoExt(exp, coeficientes);
-			resultado = expressao.calcular();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		addParagrafo("Calcule o valor da expressão:");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		setResolucao(
+			"\\(\\begin{aligned}" +
+			"& " + par1 + " " + t2 + " [" + c + " " + t3 + " " + inner + "] = \\\\" +
+			"& " + p1 + " " + t2 + " [" + c + " " + t3 + " " + p2 + "] = \\\\" +
+			"& " + p1 + " " + t2 + " " + p3 + " = " + result + "\\end{aligned}\\)"
+		);
 	}
 }

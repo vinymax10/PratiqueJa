@@ -20,7 +20,7 @@
 \color{bodytext}
 
 \heroheader{Números Primos}%
-           {Crivo, Decomposição e Primalidade}%
+           {Crivo, Coprimos e Número de Divisores}%
            {Matemática · Básico}
 
 \setlength{\columnsep}{18pt}
@@ -107,25 +107,6 @@ primo que o divide, até chegar a $1$.}
 \exemp{$84 = 2^2 \times 3 \times 7$}
 
 %─────────────────────────────────────────────────────────────
-\TW{Aplic.}{badgegreen}{Aplicação: MMC e MDC}{A decomposição como ferramenta}
-
-\regra{%
-\textbf{MDC:} produto dos fatores \emph{comuns} com o \textbf{menor}
-expoente.\\[2pt]
-\textbf{MMC:} produto de \emph{todos} os fatores com o \textbf{maior}
-expoente.}
-
-\SH{Exemplo — 60 e 84}
-\exemp{%
-  $60 = 2^2 \times 3 \times 5$\\
-  $84 = 2^2 \times 3 \times 7$\\[3pt]
-  MDC $= 2^2 \times 3 = \hlm{12}$\\
-  {\footnotesize(comuns, menor expoente)}\\[3pt]
-  MMC $= 2^2 \times 3 \times 5 \times 7 = \hlm{420}$\\
-  {\footnotesize(todos, maior expoente)}%
-}
-
-%─────────────────────────────────────────────────────────────
 \TW{?}{darkblue}{Teste de Primalidade}{Como verificar se um número é primo}
 
 \regra{Para testar se $n$ é primo, verifique a divisibilidade pelos
@@ -140,6 +121,45 @@ primos $p \leq \sqrt{n}$. Se nenhum divide $n$, então $n$ é primo.}
 
 \nota{\textbf{Por que só até $\sqrt{n}$?} Se $n = a\times b$ com
 $a \leq b$, então $a \leq \sqrt{n}$. Basta procurar o fator menor.}
+
+%─────────────────────────────────────────────────────────────
+\TW{Co}{badgepurple}{Números Coprimos}{Sem fatores primos em comum}
+
+\regra{Dois números são \textbf{coprimos} (primos entre si) quando
+não compartilham nenhum fator primo — isto é, MDC $= 1$.}
+
+\exemp{%
+  $9 = 3^2$ e $16 = 2^4$ — sem fatores comuns\\
+  MDC$(9,16) = \hlm{1}$ \ok\\[3pt]
+  $35 = 5\times7$ e $48 = 2^4\times3$ — sem fatores comuns\\
+  MDC$(35,48) = \hlm{1}$ \ok%
+}
+
+\nota{Números \textbf{consecutivos} são sempre coprimos:\\[2pt]
+MDC$(13,14) = \hlm{1}$, pois $13$ é primo e não divide $14$.}
+
+%─────────────────────────────────────────────────────────────
+\TW{$\tau$}{darkblue}{Número de Divisores}{Fórmula a partir dos fatores primos}
+
+\regra{Se $n = p_1^{a_1}\times p_2^{a_2}\times\cdots\times p_k^{a_k}$,
+o número total de divisores é:}
+
+\formula{$\tau(n) = (a_1{+}1)(a_2{+}1)\cdots(a_k{+}1)$}
+
+Cada expoente $a_i$ contribui com $(a_i+1)$ escolhas: $0,1,\ldots,a_i$.
+
+\SH{Exemplo — divisores de 60}
+\exemp{%
+  $60 = 2^2\times3^1\times5^1$\\[2pt]
+  $\tau(60) = (2{+}1)(1{+}1)(1{+}1) = 3\times2\times2 = \hlm{12}$\\[2pt]
+  $1,2,3,4,5,6,10,12,15,20,30,60$ \ok%
+}
+
+\SH{Exemplo — divisores de 72}
+\exemp{%
+  $72 = 2^3\times3^2$\\[2pt]
+  $\tau(72) = (3{+}1)(2{+}1) = 4\times3 = \hlm{12}$%
+}
 
 \end{multicols}
 

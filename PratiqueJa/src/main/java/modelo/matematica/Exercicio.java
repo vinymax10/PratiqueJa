@@ -9,12 +9,9 @@ import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -38,8 +35,6 @@ import modelo.teste.EtapaTeste;
 @ToString(exclude = { })
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Exercicio", length = 255)
 public class Exercicio implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;

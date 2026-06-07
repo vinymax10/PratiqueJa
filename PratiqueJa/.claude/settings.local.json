@@ -158,7 +158,6 @@
       "Bash(ls \"/c/Python\"*)",
       "Bash(py --version)",
       "Bash(py _rev_apply.py)",
-      "Bash*",
       "Bash(cd \"C:/Users/maximovrm/git/PratiqueJa/PratiqueJa\")",
       "Bash(python -c 'import xml.dom.minidom,sys; xml.dom.minidom.parse\\('\\\\''__TRACKED_VAR__'\\\\''\\); print\\('\\\\''OK  __TRACKED_VAR__'\\\\''\\)')",
       "PowerShell(mvn *)",
@@ -170,7 +169,13 @@
       "Bash(unzip -p ~/.m2/repository/org/primefaces/primefaces/15.0.12/primefaces-15.0.12-jakarta.jar \"META-INF/resources/primefaces/selectcheckboxmenu/selectcheckboxmenu.js\")",
       "Bash(Select-Object -ExpandProperty Name)",
       "Bash(mvn -o compile)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(Select-Object -First 30)",
+      "PowerShell(mvn compile *)",
+      "PowerShell(cd \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\"; $output = mvn compile 2>&1; $output | Where-Object { $_ -match \"numerosprimos\" })",
+      "Bash(mvn compile *)",
+      "Bash(xelatex -interaction=nonstopmode numerosPrimos.tex)",
+      "Bash(xelatex -interaction=nonstopmode mmcMdc.tex)"
     ]
   }
 }
