@@ -175,7 +175,11 @@
       "PowerShell(cd \"C:\\\\Users\\\\maximovrm\\\\git\\\\PratiqueJa\\\\PratiqueJa\"; $output = mvn compile 2>&1; $output | Where-Object { $_ -match \"numerosprimos\" })",
       "Bash(mvn compile *)",
       "Bash(xelatex -interaction=nonstopmode numerosPrimos.tex)",
-      "Bash(xelatex -interaction=nonstopmode mmcMdc.tex)"
+      "Bash(xelatex -interaction=nonstopmode mmcMdc.tex)",
+      "Bash(mysql *)",
+      "PowerShell(ls \"C:\\\\Program Files\\\\\" | Select-Object Name)",
+      "Bash($MYSQL *)",
+      "Bash(Select-Object -First 100)"
     ]
   }
 }

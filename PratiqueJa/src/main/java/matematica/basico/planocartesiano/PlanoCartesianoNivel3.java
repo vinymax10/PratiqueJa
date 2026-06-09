@@ -1,0 +1,13 @@
+package matematica.basico.planocartesiano;
+
+import matematica.GeradorExercicio;
+
+public class PlanoCartesianoNivel3 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
+	{
+		int tipo = 1 + rand.nextInt(3);
+		delegar(instanciar(".nivel3package.Image" + tipo));
+	}
+}
