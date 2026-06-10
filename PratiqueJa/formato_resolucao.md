@@ -211,6 +211,95 @@ embaralharEAdicionarAlternativas("\\(" + resultadoCorreto + "\\)", distrLatex);
 
 ---
 
+## Resposta final em `\mathbf{}`
+
+O último bloco math da resolução deve sempre envolver o resultado em `\mathbf{}`:
+
+```java
+// Correto
+"\\(|A| = " + x + " + " + y + " = \\mathbf{" + resultado + "}\\)"
+"\\(" + val + " \\times 1000 = \\mathbf{" + resultado + "}\\,\\text{m}\\)"
+
+// Errado — resultado sem destaque
+"\\(|A| = " + x + " + " + y + " = " + resultado + "\\)"
+```
+
+---
+
+## Unidades físicas dentro de math: `\,\text{}`
+
+Usar `\,` (espaço fino) antes da unidade e `\text{}` para o nome da unidade. Nunca escrever unidade em texto simples fora do math quando acompanha um número numa fórmula:
+
+```java
+// Correto
+"\\(" + val + "\\,\\text{km}\\)"
+"\\(" + val + "\\,\\text{m}^2\\)"
+"\\(" + val + "\\,\\text{kg/m}^3\\)"
+
+// Errado — unidade fora do ambiente math
+val + " km"
+```
+
+Operações descritas em texto introdutório usam `\(…\)` inline para os fatores:
+
+```java
+// Correto — frase de texto seguida de fórmulas
+"\\(1\\,\\text{km} = 1000\\,\\text{m}\\), logo multiplicar por 1000:" +
+"\\(\\\\\\)" +
+"\\(" + val + " \\times 1000 = \\mathbf{" + resultado + "}\\,\\text{m}\\)"
+
+// Correto — operador descrito em texto com inline math
+"Converter km para m (\\(\\times 1000\\)) e h para s (\\(\\times 3600\\)):" +
+"\\(\\\\\\)" +
+"\\(\\dfrac{" + kmh + "\\,\\text{km}}{\\text{h}} = \\dfrac{" + ms + "\\,\\text{m}}{3600\\,\\text{s}} = \\mathbf{" + ms + "}\\,\\text{m/s}\\)"
+```
+
+---
+
+## Vários valores conhecidos numa linha: `\quad`
+
+Quando uma linha lista múltiplos valores conhecidos antes de resolver, usar `\\quad` para separá-los dentro do mesmo bloco math:
+
+```java
+"\\(|B| = " + b + ", \\quad |A \\cup B| = " + aUb + ", \\quad |A \\cap B| = " + aIb + "\\)"
+```
+
+---
+
+## Caixa de fórmula de referência (ParCor)
+
+Quando a resolução começa com uma fórmula de referência colorida (ex.: `ParCor.formula(…)`), envolvê-la em `\(…\)` e separar das etapas seguintes com `\(\\\)`:
+
+```java
+// formulaMenos() retorna: \definecolor{…}\textcolor{azulEscuro}{|A-B|=|A|-|A∩B|}
+return "\\(" + formulaMenos() + "\\)" +
+    "\\(\\\\\\)" +
+    "\\(|A-B| = " + aMb + ", \\quad |A \\cap B| = " + aIb + "\\)" +
+    "\\(\\\\\\)" +
+    "\\(|A| - " + aIb + " = " + aMb + "\\)" +
+    "\\(\\\\\\)" +
+    "\\(|A| = " + aMb + " + " + aIb + " = \\mathbf{" + a + "}\\)";
+```
+
+O chamador usa `setResolucao(resolucao)` diretamente, **sem** `"\\(" + resolucao + "\\)"`.
+
+---
+
+## Rótulo em math, descrição em texto corrido
+
+Quando um rótulo curto é matemático mas o valor associado é texto descritivo (ex.: nome de conjunto), colocar o rótulo em `\(…\)` e a descrição em texto normal:
+
+```java
+// Correto: "A =" em math, descrição em texto
+resolucaoLatex += "\\(A =\\) " + descricaoA;
+resolucaoLatex += "\\(\\\\\\)";
+resolucaoLatex += "\\(B =\\) " + descricaoB;
+resolucaoLatex += "\\(\\\\\\)";
+// ... etapas seguintes
+```
+
+---
+
 ## Resumo dos tokens em Java
 
 | Efeito desejado | Código Java |
@@ -221,6 +310,11 @@ embaralharEAdicionarAlternativas("\\(" + resultadoCorreto + "\\)", distrLatex);
 | `\dfrac{n}{d}` (fração) | `resultado.toStringLatex()` |
 | Grupo negativo com parênteses | `"\\left(" + g + "\\right)"` (quando `g < 0`) |
 | `\;` (espaço fino em math) | `\\;` dentro de `\\(…\\)` |
+| Espaço fino antes de unidade | `\\,` antes de `\\text{unidade}` |
+| Unidade física em math | `\\,\\text{km}`, `\\,\\text{m}^2`, `\\,\\text{kg/m}^3` |
+| Resultado final em negrito | `\\mathbf{" + resultado + "}` no último bloco |
+| Vários valores conhecidos na mesma linha | `\\quad` entre eles dentro de `\\(…\\)` |
+| Rótulo math + descrição em texto | `"\\(A =\\) " + descricaoTexto` |
 
 ---
 
