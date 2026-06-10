@@ -35,23 +35,25 @@ public class Primo2 extends AgrupadorPrimo
 				primoDivisor = p;
 		}
 
-		StringBuilder res = new StringBuilder("\\(\\begin{aligned}");
-		res.append("& \\sqrt{").append(n).append("} \\approx ")
+		StringBuilder res = new StringBuilder();
+		res.append("\\(\\sqrt{").append(n).append("} \\approx ")
 		   .append(sqrtInt).append("{,}").append(sqrtDec)
-		   .append(" \\Rightarrow \\text{testar: }").append(primos).append("\\\\");
+		   .append(" \\Rightarrow\\) testar: \\(").append(primos).append("\\). ");
+		res.append("\\(\\\\\\) ");
 		if(ePrimo)
 		{
-			res.append("& ").append(n).append("\\text{ não é divisível por nenhum}\\\\");
-			res.append("& \\therefore ").append(n).append("\\text{ é }\\mathbf{primo}");
+			res.append("\\(").append(n).append("\\) não é divisível por nenhum. ");
+			res.append("\\(\\\\\\) ");
+			res.append("\\(\\therefore ").append(n).append("\\) é primo.");
 		}
 		else
 		{
-			res.append("& ").append(n).append(" \\div ").append(primoDivisor)
+			res.append("\\(").append(n).append(" \\div ").append(primoDivisor)
 			   .append(" = ").append(n / primoDivisor)
-			   .append(" \\Rightarrow \\text{divisível por } ").append(primoDivisor).append("\\\\");
-			res.append("& \\therefore ").append(n).append("\\text{ é }\\mathbf{composto}");
+			   .append(" \\Rightarrow\\) divisível por \\(").append(primoDivisor).append("\\). ");
+			res.append("\\(\\\\\\) ");
+			res.append("\\(\\therefore ").append(n).append("\\) é composto.");
 		}
-		res.append("\\end{aligned}\\)");
 
 		addParagrafo("Pelo teste de primalidade, o número \\(" + n + "\\) é:");
 		embaralharEAdicionarAlternativas(correta,

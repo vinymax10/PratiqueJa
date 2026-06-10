@@ -28,7 +28,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 h = 60 min → multiplicar por 60:" +
+				"\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo multiplicar por 60:" +
 				"\\(\\\\\\)" +
 				"\\(" + h + " \\times 60 = \\mathbf{" + min + "}\\,\\text{min}\\)"
 			);
@@ -50,7 +50,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 min = 60 s → multiplicar por 60:" +
+				"\\(1\\,\\text{min} = 60\\,\\text{s}\\), logo multiplicar por 60:" +
 				"\\(\\\\\\)" +
 				"\\(" + min + " \\times 60 = \\mathbf{" + s + "}\\,\\text{s}\\)"
 			);
@@ -72,7 +72,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 h = 60 min e 1 min = 60 s, logo 1 h = 3600 s:" +
+				"\\(1\\,\\text{h} = 60\\,\\text{min}\\) e \\(1\\,\\text{min} = 60\\,\\text{s}\\), logo \\(1\\,\\text{h} = 3600\\,\\text{s}\\):" +
 				"\\(\\\\\\)" +
 				"\\(" + h + " \\times 3600 = \\mathbf{" + s + "}\\,\\text{s}\\)"
 			);
@@ -94,7 +94,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 h = 60 min → dividir por 60:" +
+				"\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo dividir por 60:" +
 				"\\(\\\\\\)" +
 				"\\(" + min + " \\div 60 = \\mathbf{" + h + "}\\,\\text{h}\\)"
 			);

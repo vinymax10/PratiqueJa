@@ -14,6 +14,6 @@ public class Divisibilidade3 extends GeradorExercicio
 
 		addParagrafo("Quantos divisores naturais ímpares possui o número " + number + "?");
 		gerarAlternativas("" + resolucaoDivisores.numerosDividoresResultadoPares(number, false));
-		setResolucao("\\(" + resolucaoDivisores.numerosDividoresParesImpares(number, false) + "\\)");
+		setResolucao(resolucaoDivisores.numerosDividoresParesImpares(number, false));
 	}
 }

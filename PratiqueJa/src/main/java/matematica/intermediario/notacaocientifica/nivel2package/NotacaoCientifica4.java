@@ -35,7 +35,7 @@ public class NotacaoCientifica4 extends GeradorExercicio
 			"\\(\\\\\\)" +
 			"\\(" + nLatex + " \\rightarrow " + mantissa + "\\ldots\\)" +
 			"\\(\\\\\\)" +
-			"Contar " + k + " casas deslocadas → expoente " + k + ":" +
+			"Contar \\(" + k + "\\) casas deslocadas, expoente \\(" + k + "\\):" +
 			"\\(\\\\\\)" +
 			"\\(" + nLatex + " = \\mathbf{" + mantissa + " \\times 10^{" + k + "}}\\)"
 		);

@@ -27,9 +27,11 @@ public class OperacoesMenos
 	public String resolucao()
 	{
 		String resolucaoLatex = "";
-		resolucaoLatex+="A=\\text{"+descricaoA+"}\\\\";
-		resolucaoLatex+="B=\\text{"+descricaoB+"}\\\\";
-		
+		resolucaoLatex += "\\(A =\\) " + descricaoA;
+		resolucaoLatex += "\\(\\\\\\)";
+		resolucaoLatex += "\\(B =\\) " + descricaoB;
+		resolucaoLatex += "\\(\\\\\\)";
+
 		switch(tipoOperacao)
 		{
 			case A: 

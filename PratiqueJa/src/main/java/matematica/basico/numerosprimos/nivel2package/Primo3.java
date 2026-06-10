@@ -36,7 +36,7 @@ public class Primo3 extends AgrupadorPrimo
 
 		setResolucao(
 			resolucaoFatoracao(n) +
-			" \\(\\\\\\\\ \\text{Maior fator primo: } \\mathbf{" + maiorFator + "}\\)"
+			" \\(\\\\\\) Maior fator primo: \\(\\mathbf{" + maiorFator + "}\\)"
 		);
 	}
 }

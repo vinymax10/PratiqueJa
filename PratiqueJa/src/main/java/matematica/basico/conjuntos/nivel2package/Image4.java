@@ -21,6 +21,6 @@ public class Image4 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(|A \\cup B|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

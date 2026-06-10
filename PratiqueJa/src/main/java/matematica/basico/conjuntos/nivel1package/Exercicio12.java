@@ -23,8 +23,10 @@ public class Exercicio12 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A - B = " + c + "\\\\";
-		resolucao += "|A - B|=" + correto + "\\)";
-		setResolucao(resolucao);
+		setResolucao(
+			"\\(A - B = " + c + "\\)" +
+			"\\(\\\\\\)" +
+			"\\(|A - B| = \\mathbf{" + correto + "}\\)"
+		);
 	}
 }

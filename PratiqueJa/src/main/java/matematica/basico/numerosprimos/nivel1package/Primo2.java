@@ -26,10 +26,9 @@ public class Primo2 extends AgrupadorPrimo
 		gerarAlternativasInteiras(contDiv);
 
 		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& \\text{Divisores de } " + n + ": \\{" + divStr + "\\}\\\\" +
-			"& \\text{Total: } \\mathbf{" + contDiv + "} \\text{ divisores.}" +
-			"\\end{aligned}\\)"
+			"Divisores de \\(" + n + "\\): \\(\\{" + divStr + "\\}\\). " +
+			"\\(\\\\\\) " +
+			"Total: \\(\\mathbf{" + contDiv + "}\\) divisores."
 		);
 	}
 }

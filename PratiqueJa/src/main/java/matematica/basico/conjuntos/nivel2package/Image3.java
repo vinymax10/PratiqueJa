@@ -23,6 +23,6 @@ public class Image3 extends GeradorExercicio
 		addParagrafo("Se \\(|A|=" + dados.a + "\\) qual o valor de \\(|A - B|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

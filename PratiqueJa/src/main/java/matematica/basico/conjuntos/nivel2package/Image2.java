@@ -22,6 +22,6 @@ public class Image2 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(|A|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

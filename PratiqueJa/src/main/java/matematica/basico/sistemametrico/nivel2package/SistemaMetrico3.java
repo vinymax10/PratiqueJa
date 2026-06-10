@@ -28,7 +28,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"Para área, cada passo vale × 100 (não × 10):" +
+				"Para área, cada passo vale \\(\\times 100\\) (não \\(\\times 10\\)):" +
 				"\\(\\\\\\)" +
 				"\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\)" +
 				"\\(\\\\\\)" +
@@ -54,7 +54,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 m² = 10 000 cm² → dividir por 10 000:" +
+				"\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\), logo dividir por 10 000:" +
 				"\\(\\\\\\)" +
 				"\\(" + cm2 + " \\div 10{.}000 = \\mathbf{" + m2Str + "}\\,\\text{m}^2\\)"
 			);
@@ -76,7 +76,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 km² = 1 000 000 m² (dois passos de × 100 = × 10 000... não: km→m é ×1000, logo km²→m² é ×1000² = ×1 000 000):" +
+				"\\(1\\,\\text{km}^2 = 1{.}000{.}000\\,\\text{m}^2\\), pois km para m é \\(\\times 1000\\), logo \\(\\text{km}^2\\) para \\(\\text{m}^2\\) é \\(\\times 1000^2 = 1{.}000{.}000\\):" +
 				"\\(\\\\\\)" +
 				"\\(" + km2 + " \\times 1{.}000{.}000 = \\mathbf{" + m2 + "}\\,\\text{m}^2\\)"
 			);

@@ -31,7 +31,7 @@ public class Expressao3 extends GeradorExercicio
 		int term2 = coefCte;
 
 		String res = "Aplicamos a propriedade distributiva: \\(\\\\\\)";
-		res += "\\(" + exprLatex + " = " + expandida + "\\) \\(\\\\\\)";
+		res += "\\(" + exprLatex + " = " + expandida + "\\\\ \\)";
 		res += "Substituindo \\(x = " + v + "\\): \\(\\\\\\)";
 		res += "\\(" + term1 + " " + sinalStr + " " + term2 + " = " + resultado + "\\)";
 		setResolucao(res);

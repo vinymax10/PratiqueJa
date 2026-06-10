@@ -23,8 +23,10 @@ public class Exercicio5 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A \\cup B = " + c + "\\\\";
-		resolucao += "\\text{Menor elemento de}~ A \\cup B \\text{ é }" + correto + "\\)";
-		setResolucao(resolucao);
+		setResolucao(
+			"\\(A \\cup B = " + c + "\\)" +
+			"\\(\\\\\\)" +
+			"Menor elemento de \\(A \\cup B\\) é \\(" + correto + "\\)"
+		);
 	}
 }

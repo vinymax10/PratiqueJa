@@ -23,8 +23,10 @@ public class Exercicio11 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A \\cup B = " + c + "\\\\";
-		resolucao += "|A \\cup B|=" + correto + "\\)";
-		setResolucao(resolucao);
+		setResolucao(
+			"\\(A \\cup B = " + c + "\\)" +
+			"\\(\\\\\\)" +
+			"\\(|A \\cup B| = \\mathbf{" + correto + "}\\)"
+		);
 	}
 }

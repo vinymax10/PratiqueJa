@@ -27,11 +27,8 @@ public class Potenciacao5 extends GeradorExercicio
 		gerarAlternativas("" + resultado);
 		setResolucao(
 			"\\((" + a + " \\cdot " + b + ")^{" + p + "}" +
-			" = " + a + "^{" + p + "} \\cdot " + b + "^{" + p + "}\\)" +
+			" = " + a + "^{" + p + "} \\cdot " + b + "^{" + p + "} =\\)" +
 			"\\(\\\\\\)" +
-			"\\(= " + an + " \\cdot " + bn + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + resultado + "}\\)"
-		);
+			"\\(" + an + " \\cdot " + bn + " = \\mathbf{" + resultado +"}\\)");
 	}
 }

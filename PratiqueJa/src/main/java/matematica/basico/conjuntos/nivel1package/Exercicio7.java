@@ -23,8 +23,10 @@ public class Exercicio7 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A - B = " + c + "\\\\";
-		resolucao += "\\text{Maior elemento de}~ A - B \\text{ é }" + correto + "\\)";
-		setResolucao(resolucao);
+		setResolucao(
+			"\\(A - B = " + c + "\\)" +
+			"\\(\\\\\\)" +
+			"Maior elemento de \\(A - B\\) é \\(" + correto + "\\)"
+		);
 	}
 }

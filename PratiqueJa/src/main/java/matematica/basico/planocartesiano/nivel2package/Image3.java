@@ -49,7 +49,7 @@ public class Image3 extends GeradorExercicio
 		res += "Aplicando a fórmula do ponto médio: \\(\\\\\\)";
 		res += "\\(M = \\left(\\dfrac{x_A + x_B}{2},\\;\\dfrac{y_A + y_B}{2}\\right)\\). \\(\\\\\\)";
 		res += "\\(M = \\left(\\dfrac{" + ax + " + " + bx + "}{2},\\;\\dfrac{" + ay + " + " + by + "}{2}\\right) =\\\\ ";
-		res += "\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\).";
+		res += "\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\)";
 
 		setResolucao(res);
 	}

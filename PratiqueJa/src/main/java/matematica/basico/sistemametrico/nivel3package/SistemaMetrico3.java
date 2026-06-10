@@ -56,7 +56,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 h = 3600 s → dividir por 3600:" +
+				"\\(1\\,\\text{h} = 3600\\,\\text{s}\\), logo dividir por 3600:" +
 				"\\(\\\\\\)" +
 				"\\(" + s + " \\div 3600 = \\mathbf{" + h + "}\\,\\text{h}\\)"
 			);
@@ -88,7 +88,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 					? " com resto " + m30 + " min"
 					: " exato (sem resto)") +
 				"\\(\\\\\\)" +
-				"\\(= \\mathbf{" + hStr + "}\\)"
+				"\\(\\mathbf{" + hStr + "}\\)"
 			);
 		}
 		else
@@ -109,7 +109,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 dia = 24 h → multiplicar por 24:" +
+				"\\(1\\,\\text{dia} = 24\\,\\text{h}\\), logo multiplicar por 24:" +
 				"\\(\\\\\\)" +
 				"\\(" + dias + " \\times 24 = \\mathbf{" + h + "}\\,\\text{h}\\)"
 			);

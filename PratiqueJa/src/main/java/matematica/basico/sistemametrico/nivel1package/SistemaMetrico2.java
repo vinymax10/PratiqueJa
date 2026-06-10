@@ -30,7 +30,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 m = 100 cm → dividir por 100:" +
+				"\\(1\\,\\text{m} = 100\\,\\text{cm}\\), logo dividir por 100:" +
 				"\\(\\\\\\)" +
 				"\\(" + cm + " \\div 100 = \\mathbf{" + mStr + "}\\,\\text{m}\\)"
 			);
@@ -52,7 +52,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 km = 1000 m → dividir por 1000:" +
+				"\\(1\\,\\text{km} = 1000\\,\\text{m}\\), logo dividir por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + m + " \\div 1000 = \\mathbf{" + km + "}\\,\\text{km}\\)"
 			);
@@ -74,7 +74,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 cm = 10 mm → dividir por 10:" +
+				"\\(1\\,\\text{cm} = 10\\,\\text{mm}\\), logo dividir por 10:" +
 				"\\(\\\\\\)" +
 				"\\(" + mm + " \\div 10 = \\mathbf{" + cm + "}\\,\\text{cm}\\)"
 			);

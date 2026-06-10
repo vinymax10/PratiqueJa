@@ -21,6 +21,6 @@ public class AdicaoSubtracaoInteiroNivel2 extends GeradorExercicio
 		addParagrafo("Calcule o valor da seguinte expressão:");
 		addParagrafo("\\(" + Auxiliar.getNumber(a, "", true) + Auxiliar.getNumber(b, "", false) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(correto);
-		setResolucao("\\(" + ResolucaoASInteiro.soma(a, b) + "\\)");
+		setResolucao(ResolucaoASInteiro.soma(a, b));
 	}
 }

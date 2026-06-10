@@ -28,7 +28,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"km → m (×1000) → cm (×100):" +
+				"km para m (\\(\\times 1000\\)) e m para cm (\\(\\times 100\\)):" +
 				"\\(\\\\\\)" +
 				"\\(" + km + "\\,\\text{km} = " + (km * 1000) + "\\,\\text{m} = \\mathbf{" + cm + "}\\,\\text{cm}\\)"
 			);
@@ -50,7 +50,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"m → cm (×100) → mm (×10), ou diretamente m → mm (×1000):" +
+				"m para cm (\\(\\times 100\\)) e cm para mm (\\(\\times 10\\)), ou diretamente m para mm (\\(\\times 1000\\)):" +
 				"\\(\\\\\\)" +
 				"\\(" + m + " \\times 1000 = \\mathbf{" + mm + "}\\,\\text{mm}\\)"
 			);
@@ -72,7 +72,7 @@ public class SistemaMetrico2 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 km = 1000 m; 0,5 km = 500 m → somar:" +
+				"\\(1\\,\\text{km} = 1000\\,\\text{m}\\); \\(0{,}5\\,\\text{km} = 500\\,\\text{m}\\); somar:" +
 				"\\(\\\\\\)" +
 				"\\(" + intPart + "{,}5 \\times 1000 = \\mathbf{" + m + "}\\,\\text{m}\\)"
 			);

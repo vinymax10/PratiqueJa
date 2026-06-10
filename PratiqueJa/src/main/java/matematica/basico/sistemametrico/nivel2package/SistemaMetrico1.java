@@ -28,7 +28,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 L = 1000 mL → multiplicar por 1000:" +
+				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)"
 			);
@@ -50,7 +50,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 kL = 1000 L → multiplicar por 1000:" +
+				"\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + kl + " \\times 1000 = \\mathbf{" + l + "}\\,\\text{L}\\)"
 			);
@@ -74,7 +74,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 L = 1000 mL → dividir por 1000:" +
+				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)"
 			);
@@ -96,7 +96,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 kL = 1000 L → dividir por 1000:" +
+				"\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo dividir por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + l + " \\div 1000 = \\mathbf{" + kl + "}\\,\\text{kL}\\)"
 			);

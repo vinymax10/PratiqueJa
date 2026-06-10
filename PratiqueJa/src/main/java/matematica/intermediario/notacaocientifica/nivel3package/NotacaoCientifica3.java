@@ -37,9 +37,9 @@ public class NotacaoCientifica3 extends GeradorExercicio
 			"\\(\\\\\\)" +
 			"\\(" + produto + " \\times 10^{" + m + "}\\)" +
 			"\\(\\\\\\)" +
-			"Reajustar: " + produto + " ≥ 10 → " + r + " × 10¹:" +
+			"Reajustar: \\(" + produto + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)"
+			"\\(" + r + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)"
 		);
 	}
 }

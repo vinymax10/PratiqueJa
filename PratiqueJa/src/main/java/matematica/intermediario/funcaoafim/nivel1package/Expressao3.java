@@ -36,14 +36,14 @@ public class Expressao3 extends GeradorExercicio
 
 		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
 
-		String resolucao = DefinicaoCores.irisBabypink();
-		resolucao += "\\text{O coeficiente linear da reta } \\\\ "
-		+ "\\text{formada pela função } \\\\ " + "f(x)=" + nomeA + "x" + "\\textcolor{iris}{" + nomeB + "}"
-		+ "\\text{ é } \\textcolor{iris}{" + b + "}";
+		String resolucao = "\\("+DefinicaoCores.irisBabypink()+"\\)";
+		resolucao += "O coeficiente linear da reta formada pela função "
+		+"\\(f(x)=" + nomeA + "x" + "\\textcolor{iris}{" + nomeB + "} \\)"
+		+ " é  \\(\\textcolor{iris}{" + b + "}\\)";
 
 		addParagrafo("Encontre o coeficiente linear");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao( resolucao );
 	}
 }

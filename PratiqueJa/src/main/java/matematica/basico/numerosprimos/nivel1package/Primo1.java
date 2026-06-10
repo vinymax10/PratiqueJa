@@ -29,10 +29,9 @@ public class Primo1 extends AgrupadorPrimo
 		if(ePrimo)
 		{
 			setResolucao(
-				"\\(\\begin{aligned}" +
-				"& \\text{Divisores de } " + n + "\\text{: apenas } 1 \\text{ e } " + n + ".\\\\" +
-				"& \\therefore " + n + " \\text{ é } \\mathbf{primo}." +
-				"\\end{aligned}\\)"
+				"Divisores de \\(" + n + "\\): apenas \\(1\\) e \\(" + n + "\\). " +
+				"\\(\\\\\\) " +
+				"\\(\\therefore " + n + "\\) é primo."
 			);
 		}
 		else
@@ -40,11 +39,9 @@ public class Primo1 extends AgrupadorPrimo
 			Map<Integer, Integer> f = fatorar(n);
 			int p = f.keySet().iterator().next();
 			setResolucao(
-				"\\(\\begin{aligned}" +
-				"& " + n + " \\div " + p + " = " + (n / p) +
-				" \\Rightarrow \\text{ divisível por } " + p + ".\\\\" +
-				"& \\therefore " + n + " \\text{ é } \\mathbf{composto}." +
-				"\\end{aligned}\\)"
+				"\\(" + n + " \\div " + p + " = " + (n / p) + " \\Rightarrow\\) divisível por \\(" + p + "\\). " +
+				"\\(\\\\\\) " +
+				"\\(\\therefore " + n + "\\) é composto."
 			);
 		}
 	}

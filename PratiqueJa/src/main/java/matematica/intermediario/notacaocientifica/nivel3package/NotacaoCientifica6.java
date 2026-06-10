@@ -44,11 +44,9 @@ public class NotacaoCientifica6 extends GeradorExercicio
 		setResolucao(
 			"Separar a operação com as mantissas e com as potências:" +
 			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + " \\times " + b + "}{" + c + "} \\times \\dfrac{10^{" + m + "} \\times 10^{" + n + "}}{10^{" + p + "}}\\)" +
+			"\\(\\dfrac{" + a + " \\times " + b + "}{" + c + "} \\times \\dfrac{10^{" + m + "} \\times 10^{" + n + "}}{10^{" + p + "}} =\\)" +
 			"\\(\\\\\\)" +
-			"\\(= " + r + " \\times 10^{" + m + " + " + n + " - " + p + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)"
+			"\\(" + r + " \\times 10^{" + m + " + " + n + " - " + p + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}} \\)"
 		);
 	}
 }

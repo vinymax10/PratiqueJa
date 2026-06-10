@@ -23,6 +23,6 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("Se \\(|A|=" + dados.a + "\\) qual o valor de \\(|A \\cap B|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

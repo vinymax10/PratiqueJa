@@ -36,14 +36,14 @@ public class Expressao2 extends GeradorExercicio
 
 		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
 
-		String resolucao = DefinicaoCores.irisBabypink();
-		resolucao += "\\text{O coeficiente angular da reta } \\\\ "
-		+ "\\text{formada pela função }  \\\\ " + "f(x)=\\textcolor{iris}{" + nomeA + "} x" + nomeB
-		+ "\\text{ é } \\textcolor{iris}{" + a + "}";
+		String resolucao = "\\("+DefinicaoCores.irisBabypink()+"\\)";
+		resolucao += "O coeficiente angular da reta formada pela função "
+		+ "\\(f(x)=\\textcolor{iris}{" + nomeA + "} x" + nomeB +"\\)"
+		+ " é  \\(\\textcolor{iris}{" + a + "}\\)";
 
 		addParagrafo("Encontre o coeficiente angular");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao( resolucao );
 	}
 }

@@ -28,7 +28,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"Para volume, cada passo vale × 1000 (= 10³):" +
+				"Para volume, cada passo vale \\(\\times 1000\\,(= 10^3)\\):" +
 				"\\(\\\\\\)" +
 				"\\(1\\,\\text{m}^3 = 1{.}000{.}000\\,\\text{cm}^3\\)" +
 				"\\(\\\\\\)" +

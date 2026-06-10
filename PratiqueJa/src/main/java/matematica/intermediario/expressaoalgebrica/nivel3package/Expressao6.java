@@ -48,8 +48,8 @@ public class Expressao6 extends GeradorExercicio
 		gerarAlternativasInteiras(resultado);
 
 		String res = "Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\): \\(\\\\\\)";
-		res += "\\(" + resSubst + " = \\\\ \\)";
-		res += "\\(" + resCalc + " = " + resultado + "\\)";
+		res += "\\(" + resSubst + " = \\\\ ";
+		res += "" + resCalc + " = " + resultado + "\\)";
 		setResolucao(res);
 	}
 }

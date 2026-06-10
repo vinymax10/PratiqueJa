@@ -28,7 +28,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 km = 1000 m → multiplicar por 1000:" +
+				"\\(1\\,\\text{km} = 1000\\,\\text{m}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + km + " \\times 1000 = \\mathbf{" + m + "}\\,\\text{m}\\)"
 			);
@@ -50,7 +50,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 m = 100 cm → multiplicar por 100:" +
+				"\\(1\\,\\text{m} = 100\\,\\text{cm}\\), logo multiplicar por 100:" +
 				"\\(\\\\\\)" +
 				"\\(" + m + " \\times 100 = \\mathbf{" + cm + "}\\,\\text{cm}\\)"
 			);
@@ -72,7 +72,7 @@ public class SistemaMetrico1 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 cm = 10 mm → multiplicar por 10:" +
+				"\\(1\\,\\text{cm} = 10\\,\\text{mm}\\), logo multiplicar por 10:" +
 				"\\(\\\\\\)" +
 				"\\(" + cm + " \\times 10 = \\mathbf{" + mm + "}\\,\\text{mm}\\)"
 			);

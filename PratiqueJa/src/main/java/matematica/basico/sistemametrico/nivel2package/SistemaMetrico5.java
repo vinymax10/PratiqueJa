@@ -41,7 +41,7 @@ public class SistemaMetrico5 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 kg = 1000 g → dividir por 1000:" +
+				"\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo dividir por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + g + " \\div 1000 = \\mathbf{" + kgStr + "}\\,\\text{kg}\\)"
 			);
@@ -62,7 +62,7 @@ public class SistemaMetrico5 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 kg = 1000 g → multiplicar por 1000:" +
+				"\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + kg + " \\times 1000 = \\mathbf{" + g + "}\\,\\text{g}\\)"
 			);

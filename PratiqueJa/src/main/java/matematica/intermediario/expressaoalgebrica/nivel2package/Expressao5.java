@@ -68,8 +68,8 @@ public class Expressao5 extends GeradorExercicio
 		String step2 = coeficientes[0].numerador + " " + Algebra.converter(op1) + " " + g1Str
 				+ " " + Algebra.converter(op3) + " " + g2Str;
 		String res = "Substituindo na expressão: \\(\\\\\\)";
-		res += "\\(" + expSubs + " = \\\\ \\)";
-		res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";
+		res += "\\(" + expSubs + " = \\\\ ";
+		res += "" + step2 + " = " + resultado.toStringLatex() + "\\)";
 		setResolucao(res);
 	}
 }

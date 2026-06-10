@@ -28,7 +28,7 @@ public class Expressao2 extends GeradorExercicio
 
 			String res = "Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes. \\(\\\\\\)";
 			res += "\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} = \\\\ \\)";
-			res += "\\(" + coefR + "x^{" + expR + "}\\) \\(\\\\\\)";
+			res += "\\(" + coefR + "x^{" + expR + "} \\\\ \\)";
 			res += "O coeficiente é \\(" + coefR + "\\).";
 			setResolucao(res);
 		}
@@ -40,7 +40,7 @@ public class Expressao2 extends GeradorExercicio
 
 			String res = "Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes. \\(\\\\\\)";
 			res += "\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} = \\\\ \\)";
-			res += "\\(" + coefR + "x^{" + expR + "}\\) \\(\\\\\\)";
+			res += "\\(" + coefR + "x^{" + expR + "} \\\\ \\)";
 			res += "O expoente de \\(x\\) no resultado é \\(" + expR + "\\).";
 			setResolucao(res);
 		}

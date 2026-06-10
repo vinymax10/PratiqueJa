@@ -31,7 +31,7 @@ public class NotacaoCientifica8 extends GeradorExercicio
 			"\\(\\\\\\)" +
 			"\\((10^{" + n + "})^2 = 10^{" + n + " \\times 2} = 10^{" + (2 * n) + "}\\)" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + aSq + " \\times 10^{" + (2 * n) + "}}\\)"
+			"\\(\\mathbf{" + aSq + " \\times 10^{" + (2 * n) + "}}\\)"
 		);
 	}
 }

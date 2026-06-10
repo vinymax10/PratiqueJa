@@ -28,7 +28,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 t = 1000 kg → multiplicar por 1000:" +
+				"\\(1\\,\\text{t} = 1000\\,\\text{kg}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + t + " \\times 1000 = \\mathbf{" + kg + "}\\,\\text{kg}\\)"
 			);
@@ -50,7 +50,7 @@ public class SistemaMetrico3 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 kg = 1000 g → multiplicar por 1000:" +
+				"\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + kg + " \\times 1000 = \\mathbf{" + g + "}\\,\\text{g}\\)"
 			);

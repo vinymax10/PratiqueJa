@@ -42,7 +42,7 @@ public class SistemaMetrico4 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 L = 1000 mL → dividir por 1000:" +
+				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)"
 			);
@@ -64,7 +64,7 @@ public class SistemaMetrico4 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 L = 1000 mL → multiplicar por 1000:" +
+				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:" +
 				"\\(\\\\\\)" +
 				"\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)"
 			);

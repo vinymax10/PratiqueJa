@@ -29,13 +29,13 @@ public class NotacaoCientifica4 extends GeradorExercicio
 		setResolucao(
 			"Verificar a condição \\(1 \\leq a < 10\\) em cada opção:" +
 			"\\(\\\\\\)" +
-			"\\(" + cGrande + " \\times 10^{" + (k - 1) + "}\\): mantissa " + cGrande + " ≥ 10 → inválido" +
+			"\\(" + cGrande + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cGrande + " \\geq 10\\), inválido" +
 			"\\(\\\\\\)" +
-			"\\(0{,}" + cPeq + " \\times 10^{" + (k + 1) + "}\\): mantissa < 1 → inválido" +
+			"\\(0{,}" + cPeq + " \\times 10^{" + (k + 1) + "}\\): mantissa \\(< 1\\), inválido" +
 			"\\(\\\\\\)" +
-			"\\(" + cNaoAjustado + " \\times 10^{" + (k - 1) + "}\\): mantissa " + cNaoAjustado + " ≥ 10 → inválido" +
+			"\\(" + cNaoAjustado + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cNaoAjustado + " \\geq 10\\), inválido" +
 			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + c + " \\times 10^{" + k + "}}\\): mantissa " + c + " satisfaz \\(1 \\leq " + c + " < 10\\) ✓"
+			"\\(\\mathbf{" + c + " \\times 10^{" + k + "}}\\): mantissa \\(1 \\leq " + c + " < 10\\), correta"
 		);
 	}
 }

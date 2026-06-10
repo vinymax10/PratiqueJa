@@ -23,15 +23,13 @@ public class Exercicio3 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A \\cap B = " + c + "\\\\";
+		String resolucao = "\\(A \\cap B = " + c + "\\)" +
+			"\\(\\\\\\)" +
+			"Soma dos elementos de \\(A \\cap B\\):";
 		if(c.size() > 1)
-		{
-			resolucao += "\\text{Soma dos elementos de}~ A \\cap B \\text{ é: }\\\\";
-			resolucao += c.somaStr() + "=" + correto;
-		}
+			resolucao += "\\(\\\\\\)\\(" + c.somaStr() + " = " + correto + "\\)";
 		else
-			resolucao += "\\text{Soma dos elementos de}~ A \\cap B  = " + correto;
-		resolucao += "\\)";
+			resolucao += " \\(" + correto + "\\)";
 		setResolucao(resolucao);
 	}
 }

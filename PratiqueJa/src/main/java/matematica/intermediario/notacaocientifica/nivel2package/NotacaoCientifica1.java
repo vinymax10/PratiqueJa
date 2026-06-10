@@ -39,7 +39,7 @@ public class NotacaoCientifica1 extends GeradorExercicio
 			"\\(\\\\\\)" +
 			"\\(10^{" + m + "} \\times 10^{" + n + "} = 10^{" + m + " + " + n + "} = 10^{" + exp + "}\\)" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + prod + " \\times 10^{" + exp + "}}\\)"
+			"\\(\\mathbf{" + prod + " \\times 10^{" + exp + "}}\\)"
 		);
 	}
 }

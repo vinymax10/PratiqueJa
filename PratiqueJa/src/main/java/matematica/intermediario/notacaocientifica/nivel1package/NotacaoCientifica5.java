@@ -26,7 +26,7 @@ public class NotacaoCientifica5 extends GeradorExercicio
 		addParagrafo("Qual é o maior número?");
 		embaralharEAdicionarAlternativas(maior, Arrays.asList(e1, e2, e3));
 		setResolucao(
-			"Comparar pelos expoentes (maior expoente → maior número):" +
+			"Comparar pelos expoentes: maior expoente corresponde ao maior número." +
 			"\\(\\\\\\)" +
 			"\\(10^{" + exps[3] + "} > 10^{" + exps[2] + "} > 10^{" + exps[1] + "} > 10^{" + exps[0] + "}\\)" +
 			"\\(\\\\\\)" +

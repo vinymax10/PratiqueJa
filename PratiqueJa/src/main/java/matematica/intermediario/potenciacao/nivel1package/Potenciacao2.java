@@ -38,7 +38,7 @@ public class Potenciacao2 extends GeradorExercicio
 		sb.append("Expoente ").append(par ? "par" : "ímpar")
 		  .append(" → sinal ").append(par ? "positivo" : "negativo").append(".");
 		sb.append("\\(\\\\\\)");
-		sb.append("\\(= \\mathbf{").append(resultado).append("}\\)");
+		sb.append("\\((-").append(a).append(")^{").append(p).append("} = \\mathbf{").append(resultado).append("}\\)");
 		setResolucao(sb.toString());
 	}
 }

@@ -31,11 +31,11 @@ public class SistemaMetrico4 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"Converter km → m (×1000) e h → s (×3600):" +
+				"Converter km para m (\\(\\times 1000\\)) e h para s (\\(\\times 3600\\)):" +
 				"\\(\\\\\\)" +
-				"\\(\\dfrac{" + kmh + "\\,\\text{km}}{\\text{h}} = \\dfrac{" + (kmh * 1000) + "\\,\\text{m}}{3600\\,\\text{s}}\\)" +
+				"\\(\\dfrac{" + kmh + "\\,\\text{km}}{\\text{h}} = \\dfrac{" + (kmh * 1000) + "\\,\\text{m}}{3600\\,\\text{s}} =\\)" +
 				"\\(\\\\\\)" +
-				"\\(= \\dfrac{" + (kmh * 1000) + "}{3600} = \\mathbf{" + ms + "}\\,\\text{m/s}\\)"
+				"\\(\\dfrac{" + (kmh * 1000) + "}{3600} = \\mathbf{" + ms + "}\\,\\text{m/s}\\)"
 			);
 		}
 		else if (tipo == 1)
@@ -57,11 +57,11 @@ public class SistemaMetrico4 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"Converter g→kg (÷1000) e cm³→m³ (÷1 000 000):" +
+				"Converter g para kg (\\(\\div 1000\\)) e \\(\\text{cm}^3\\) para \\(\\text{m}^3\\) (\\(\\div 1{.}000{.}000\\)):" +
 				"\\(\\\\\\)" +
 				"\\(\\dfrac{\\text{g}}{\\text{cm}^3} \\times \\dfrac{1\\,\\text{kg}}{1000\\,\\text{g}} \\times \\dfrac{1{.}000{.}000\\,\\text{cm}^3}{1\\,\\text{m}^3}\\)" +
 				"\\(\\\\\\)" +
-				"\\(= \\times 1000\\)" +
+				"Fator resultante: \\(\\times 1000\\)" +
 				"\\(\\\\\\)" +
 				"\\(" + gcm3 + " \\times 1000 = \\mathbf{" + kgm3 + "}\\,\\text{kg/m}^3\\)"
 			);
@@ -84,7 +84,7 @@ public class SistemaMetrico4 extends GeradorExercicio
 				)
 			);
 			setResolucao(
-				"1 ha = 1 hm² = 10 000 m² → multiplicar por 10 000:" +
+				"\\(1\\,\\text{ha} = 1\\,\\text{hm}^2 = 10{.}000\\,\\text{m}^2\\), logo multiplicar por 10 000:" +
 				"\\(\\\\\\)" +
 				"\\(" + ha + " \\times 10{.}000 = \\mathbf{" + m2 + "}\\,\\text{m}^2\\)"
 			);

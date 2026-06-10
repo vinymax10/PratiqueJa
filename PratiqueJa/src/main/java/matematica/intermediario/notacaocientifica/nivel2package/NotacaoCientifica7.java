@@ -40,9 +40,9 @@ public class NotacaoCientifica7 extends GeradorExercicio
 		setResolucao(
 			"Multiplicar pelo fator de conversão \\(10^{" + fator + "}\\):" +
 			"\\(\\\\\\)" +
-			"\\(" + a + " \\times 10^{" + mBase + "} \\times 10^{" + fator + "}\\)" +
+			"\\(" + a + " \\times 10^{" + mBase + "} \\times 10^{" + fator + "} =\\)" +
 			"\\(\\\\\\)" +
-			"\\(= " + a + " \\times 10^{" + mBase + " + (" + fator + ")} = \\mathbf{" + a + " \\times 10^{" + expResult + "}}\\)"
+			"\\(" + a + " \\times 10^{" + mBase + " + (" + fator + ")} = \\mathbf{" + a + " \\times 10^{" + expResult + "}}\\)"
 		);
 	}
 }

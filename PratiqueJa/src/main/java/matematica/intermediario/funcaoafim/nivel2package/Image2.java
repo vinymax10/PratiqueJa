@@ -27,16 +27,16 @@ public class Image2 extends GeradorExercicio
 		int pontoAy = (int) config.pontoAy;
 
 		String resolucao = "";
-		resolucao += "\\text{O coeficiente linear } b \\text{ pode ser calculado por: }\\\\";
-		resolucao += "y=" + a + "x + b\\\\";
-		resolucao += "\\text{Considerando o ponto } (" + pontoAx + "," + pontoAy + "), \\text{ temos: }\\\\";
+		resolucao += "O coeficiente linear  \\(b\\) pode ser calculado por: \\(\\\\ \\)";
+		resolucao += "\\(y=" + a + "x + b\\) \\(\\\\ \\)";
+		resolucao += "Considerando o ponto (" + pontoAx + "," + pontoAy + "), temos: \\( \\\\ \\)";
 
 		MyExpression expressao = new MyExpression(pontoAy + " = " + a + "*" + pontoAx + "+b");
-		resolucao += expressao.resolverLatex();
+		resolucao += "\\("+expressao.resolverLatex()+"\\)";
 
 		addParagrafo("Encontre o valor de b: \\( f(x)=" + a + "x+b \\)");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + b);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao( resolucao );
 	}
 }

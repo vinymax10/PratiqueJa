@@ -35,9 +35,9 @@ public class Potenciacao8 extends GeradorExercicio
 			resolucao =
 				"Agrupar mantissas e potências de 10:" +
 				"\\(\\\\\\)" +
-				"\\((" + a + " \\times " + b + ") \\times 10^{" + p + "+" + q + "}\\)" +
+				"\\((" + a + " \\times " + b + ") \\times 10^{" + p + "+" + q + "} =\\)" +
 				"\\(\\\\\\)" +
-				"\\(= \\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
+				"\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
 		}
 		else
 		{
@@ -52,9 +52,9 @@ public class Potenciacao8 extends GeradorExercicio
 			resolucao =
 				"Dividir mantissas e subtrair expoentes:" +
 				"\\(\\\\\\)" +
-				"\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + p + "-" + q + "}\\)" +
+				"\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + p + "-" + q + "} =\\)" +
 				"\\(\\\\\\)" +
-				"\\(= \\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
+				"\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
 		}
 
 		addParagrafo("Calcule e expresse em notação científica:");

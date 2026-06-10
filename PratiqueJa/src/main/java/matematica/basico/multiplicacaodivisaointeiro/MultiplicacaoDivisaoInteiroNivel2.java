@@ -34,6 +34,6 @@ public class MultiplicacaoDivisaoInteiroNivel2 extends GeradorExercicio
 		addParagrafo("Calcule o valor da seguinte expressão:");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativasInteirasComNegativos(correto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

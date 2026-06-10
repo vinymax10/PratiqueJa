@@ -42,8 +42,8 @@ public class Expressao5 extends GeradorExercicio
 		String simplif = buildBinomio(coefXRes, constRes, var);
 
 		String res = "O sinal negativo distribui-se a todos os termos do segundo parêntese: \\(\\\\\\)";
-		res += "\\(" + inter + " = \\\\ \\)";
-		res += "\\(" + simplif + "\\) \\(\\\\\\)";
+		res += "\\(" + inter + " = \\\\ ";
+		res += "" + simplif + "\\\\ \\)";
 		if(perguntaConst)
 			res += "O termo independente é \\(" + constRes + "\\).";
 		else

@@ -28,13 +28,11 @@ public class Primo5 extends AgrupadorPrimo
 		);
 		gerarAlternativasInteiras(count);
 
-		String listaStr = primosStr.length() > 0 ? primosStr.toString() : "\\text{nenhum}";
+		String listaStr = primosStr.length() > 0 ? "\\(" + primosStr + "\\)" : "nenhum";
 		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& \\text{Primos em } [" + a + ",\\," + b + "]: \\\\" +
-			"& " + listaStr + "\\\\" +
-			"& \\text{Total: } \\mathbf{" + count + "}" +
-			"\\end{aligned}\\)"
+			"Primos em \\([" + a + ",\\," + b + "]\\): " + listaStr + ". " +
+			"\\(\\\\\\) " +
+			"Total: \\(\\mathbf{" + count + "}\\)"
 		);
 	}
 }

@@ -102,8 +102,8 @@ public class Expressao1 extends GeradorExercicio
 				}
 			}
 			inter.append(running);
-			res += "\\(" + textoValores + " = \\\\ \\)";
-			res += "\\(" + inter + " = " + resultado.toStringLatex() + "\\)";
+			res += "\\(" + textoValores + " = \\\\ ";
+			res += "" + inter + " = " + resultado.toStringLatex() + "\\)";
 		}
 		else
 		{

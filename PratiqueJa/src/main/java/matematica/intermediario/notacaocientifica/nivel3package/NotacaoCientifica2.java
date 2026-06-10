@@ -34,11 +34,11 @@ public class NotacaoCientifica2 extends GeradorExercicio
 		setResolucao(
 			"Dividir as massas:" +
 			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + " \\times 10^{" + m + "}}{" + b + " \\times 10^{" + n + "}}\\)" +
+			"\\(\\dfrac{" + a + " \\times 10^{" + m + "}}{" + b + " \\times 10^{" + n + "}} =\\)" +
 			"\\(\\\\\\)" +
-			"\\(= \\dfrac{" + a + "}{" + b + "} \\times 10^{" + m + " - " + n + "}\\)" +
+			"\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + m + " - " + n + "} =\\)" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + ratio + " \\times 10^{" + diff + "}}\\)"
+			"\\(\\mathbf{" + ratio + " \\times 10^{" + diff + "}}\\)"
 		);
 	}
 }

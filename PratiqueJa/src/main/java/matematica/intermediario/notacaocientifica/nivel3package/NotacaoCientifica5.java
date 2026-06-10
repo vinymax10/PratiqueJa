@@ -49,9 +49,9 @@ public class NotacaoCientifica5 extends GeradorExercicio
 			"\\(\\\\\\)" +
 			"\\(" + soma + " \\times 10^{" + m + "}\\)" +
 			"\\(\\\\\\)" +
-			"Reajustar: " + soma + " ≥ 10 → " + mantissa + " × 10¹:" +
+			"Reajustar: \\(" + soma + " \\geq 10\\), escrever como \\(" + mantissa + " \\times 10^1\\):" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + mantissa + " \\times 10^{" + expResult + "}}\\)"
+			"\\(" + mantissa + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + mantissa + " \\times 10^{" + expResult + "}}\\)"
 		);
 	}
 }

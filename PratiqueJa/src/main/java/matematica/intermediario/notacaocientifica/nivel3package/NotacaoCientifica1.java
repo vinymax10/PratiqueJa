@@ -39,15 +39,15 @@ public class NotacaoCientifica1 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
 		setResolucao(
-			"distância = velocidade × tempo:" +
+			"\\(d = v \\times t\\):" +
 			"\\(\\\\\\)" +
 			"\\(" + v + " \\times " + t + " = " + prod + "\\)" +
 			"\\(\\\\\\)" +
 			"\\(" + prod + " \\times 10^{" + m + " + " + n + "} = " + prod + " \\times 10^{" + (m + n) + "}\\)" +
 			"\\(\\\\\\)" +
-			"Reajustar: " + prod + " ≥ 10 → " + r + " × 10¹:" +
+			"Reajustar: \\(" + prod + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):" +
 			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\) m"
+			"\\(" + r + " \\times 10^1 \\times 10^{" + (m + n) + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\) m"
 		);
 	}
 }
