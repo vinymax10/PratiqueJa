@@ -1,4 +1,4 @@
-﻿	package matematica.basico.expressaonumerica.nivel1package;
+	package matematica.basico.expressaonumerica.nivel1package;
 
 import matematica.basico.expressaonumerica.AgrupadorExercicio;
 

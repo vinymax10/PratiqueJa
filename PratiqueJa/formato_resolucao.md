@@ -13,66 +13,201 @@ Texto explicativo fica **fora** de `\(…\)`. Expressões matemáticas ficam em 
 
 Chamar `setResolucao(res)` diretamente — nunca `setResolucao("\\(" + res + "\\)")`.
 
-**Why:** Fica mais legível, a quebra de linha acontece naturalmente no texto e só é forçada onde é necessário (dentro do matemático).
+**Why:** Fica mais legível, a quebra de linha acontece naturalmente no texto e só é forçada onde é necessário.
 
 ---
 
-## Quebra de linha entre blocos: `\(\\\)`
+## Dois tokens de quebra de linha
 
-Para separar visualmente parágrafos ou etapas da resolução, inserir o token `\\(\\\\\\)` no Java (renderiza como `\(\\\)`), que força uma quebra de linha.
+### 1. `\(\\\)` — quebra entre bloco de texto e bloco math
 
-### Quando usar `\(\\\)`
+Código Java: `\\(\\\\\\)`. Usado **entre** segmentos de texto/fórmula distintos.
 
 | Situação | Exemplo Java |
 |---|---|
-| Após frase que termina com `:` e é seguida de fórmula | `"Pelo Teorema de Pitágoras: \\(\\\\\\)"` |
-| Após fórmula (`.`) antes da próxima etapa de texto | `"\\(d = \\sqrt{x^2+y^2}\\). \\(\\\\\\)"` |
-| Após leitura de dados do gráfico antes de calcular | `"...lemos \\(x = 3\\) e \\(y = 4\\). \\(\\\\\\)"` |
-| Após enunciar a regra geral antes de aplicar ao caso concreto | `"\\(P(a,b) \\to P'(a,-b)\\). \\(\\\\\\)"` |
+| Após frase terminada em `:` seguida de fórmula | `"Substituindo \\(x = 3\\) na expressão: \\(\\\\\\)"` |
+| Após fórmula antes de próxima etapa de texto | `"\\(d = \\sqrt{25}\\). \\(\\\\\\)"` |
+| Após enunciar regra antes de aplicar ao caso | `"\\(P(a,b) \\to P'(a,-b)\\). \\(\\\\\\)"` |
 
-### Quando NÃO usar `\(\\\)`
+### 2. `= \\ ` — quebra dentro de `\(…\)`, cadeia de igualdades
 
-- Na última linha da resolução (não colocar quebra depois do resultado final).
-- Entre frases de prosa contínua que não introduzem fórmula.
-
-### Exemplo completo (distância à origem)
+Código Java: `= \\\\ ` (espaço após). Usado **dentro** de um bloco math para quebrar uma cadeia longa de igualdades.
 
 ```java
-String res = "A distância de um ponto \\(P(x,\\;y)\\) à origem é a hipotenusa ";
-res += "do triângulo retângulo cujos catetos são \\(|x|\\) e \\(|y|\\). ";
-res += "Pelo Teorema de Pitágoras: \\(\\\\\\) ";
-res += "\\(d(P,\\;O) = \\sqrt{x^2 + y^2}\\). \\(\\\\\\)";
-res += "Substituindo \\(x = " + px + "\\) e \\(y = " + py + "\\): \\(\\\\\\)";
-res += "\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ "
-    + "\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = " + dist + "\\).";
-setResolucao(res);
+// Correto: = ao final da linha, quebra dentro do bloco
+res += "\\(" + expSubs + " = \\\\ \\)";
+res += "\\(" + step2 + " = " + resultado + "\\)";
 ```
 
-### Exemplo completo (simetria)
-
+**Nunca** abrir um novo bloco math começando com `=`:
 ```java
-res = "A simetria em relação ao eixo \\(x\\) mantém a abscissa e inverte a ordenada: \\(\\\\\\)";
-res += "\\(P(a,\\;b) \\to P'(a,\\;{-b})\\). \\(\\\\\\)";
-res += "Do plano, identificamos \\(P = (" + a + ",\\;" + b + ")\\). \\(\\\\\\)";
-res += "Aplicando a regra: \\(P' = (" + rx + ",\\;" + ry + ")\\).";
-setResolucao(res);
+// ERRADO — = no início da linha seguinte
+res += "\\(" + expSubs + "\\) \\(\\\\\\)";
+res += "\\(= " + resultado + "\\)";   // ← proibido
+
+// CORRETO — = ao final da linha anterior
+res += "\\(" + expSubs + " = \\\\ \\)";
+res += "\\(" + resultado + "\\)";
 ```
 
 ---
 
-## Quebra de linha dentro de `\(…\)`: `=\\`
+## Quando quebrar vs. quando manter na mesma linha
 
-Para cadeias de igualdades longas (4+ membros), quebrar na metade com `=\\\\ ` no Java (renderiza como `=\\` dentro do math).
-
-Quebrar **após** a etapa de substituição de valores, antes de calcular:
+Só quebrar se a expressão for longa. Expressões curtas ficam numa única linha:
 
 ```java
-// d = √(px² + py²) =\\ √(px2 + py2) = √d2
-res += "\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ "
-    + "\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "}\\).";
+// Desnecessário — expressão curta
+res += "\\(" + s2 + " = \\\\ \\)";
+res += "\\(" + resultado + "\\)";   // ← evitar para "12 + 5 = 17"
+
+// Correto — tudo na mesma linha
+res += "\\(" + s2 + " = " + resultado + "\\)";
 ```
 
-**How to apply:** Sempre que uma expressão math ultrapasse ~60 caracteres renderizados, quebrar num `=` natural.
+**Critério:** se a linha com `= resultado` cabe confortavelmente (≤ ~50 chars renderizados), não quebrar.
+
+---
+
+## Passos intermediários em expressões complexas
+
+Não saltar etapas de cálculo. Mostrar cada grupo avaliado antes de combinar.
+
+### Padrão para expressão com parênteses: `(A op1 B) op2 (C op3 D)`
+
+```java
+// Capturar operadores ANTES de montar a string exp
+String op1 = Algebra.sinalPlusMinus();
+String op2 = Algebra.sinal();
+
+// Calcular valor de cada grupo
+int g1 = op1.equals("+") ? A + B : A - B;
+int g2 = op3.equals("+") ? C + D : C - D;
+String g1Str = g1 < 0 ? "\\left(" + g1 + "\\right)" : "" + g1;
+String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
+String step2 = g1Str + " " + Algebra.converter(op2) + " " + g2Str;
+
+String res = "Substituindo na expressão: \\(\\\\\\)";
+res += "\\(" + expSubs + " = \\\\ \\)";      // com grupos expandidos
+res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";  // grupos avaliados
+setResolucao(res);
+```
+
+### Padrão para `*/÷` antes de `+/-` (nível 1)
+
+Verificar se há multiplicação/divisão e mostrar o resultado parcial antes de somar:
+
+```java
+boolean hasMulDiv = false;
+for(String op : operadores)
+    if(op.equals("*") || op.equals("/")) { hasMulDiv = true; break; }
+
+if(hasMulDiv)
+{
+    // construir inter: colapsa os produtos/divisões, mantém somas/subtrações
+    res += "\\(" + textoValores + " = \\\\ \\)";
+    res += "\\(" + inter + " = " + resultado.toStringLatex() + "\\)";
+}
+else
+    res += "\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)";
+```
+
+### Padrão para potência antes de multiplicar (nível 1, Expressao2)
+
+Mostrar o passo `x² → valor` antes de multiplicar:
+
+```java
+// s1: expressão com potência  (ex.: "3·2² + 4·2 - 1")
+// s1b: potência computada     (ex.: "3·4 + 4·2 - 1")
+// s2: todos os produtos feitos (ex.: "12 + 8 - 1 = 19")
+res += "\\(" + s1 + " = \\\\ \\)";
+res += "\\(" + s1b + " = \\\\ \\)";
+res += "\\(" + s2 + " = " + resultado + "\\)";
+```
+
+### Grupos negativos entre parênteses
+
+Quando um grupo avaliado é negativo, envolver em `\left(\right)` para não confundir com o operador:
+
+```java
+String gStr = g < 0 ? "\\left(" + g + "\\right)" : "" + g;
+```
+
+---
+
+## Frações: `\dfrac{}{}`
+
+### Na resolução
+
+Usar `resultado.toStringLatex()` em vez de `"" + resultado` quando o resultado for um `Racional`:
+
+```java
+// ERRADO
+res += "\\(" + textoValores + " = " + resultado + "\\)";    // imprime "18/7"
+
+// CORRETO
+res += "\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)";  // imprime "\dfrac{18}{7}"
+```
+
+`toStringLatex()` retorna `\dfrac{n}{d}` para frações e `"n"` para inteiros (denominador 1).
+
+### Nas alternativas
+
+Usar o overload `gerarAlternativas(Racional)` em vez de `gerarAlternativas("" + resultado)`:
+
+```java
+// ERRADO — produz alternativas com "18/7" em texto
+gerarAlternativas("" + resultado);
+
+// CORRETO — produz alternativas com \dfrac{18}{7}
+gerarAlternativas(resultado);
+```
+
+O overload em `GeradorExercicio`:
+```java
+protected void gerarAlternativas(Racional resultado)
+{
+    if(resultado == null) return;
+    resultado.fatoracao(2);   // simplifica in-place antes de gerar distratores
+    gerarAlternativas(resultado.toString());
+}
+```
+
+A chamada a `fatoracao(2)` simplifica a fração antes de gerar os distratores e também beneficia eventuais chamadas a `toStringLatex()` posteriores na mesma execução de `construir()`.
+
+---
+
+## Alternativas para resultados algébricos (strings com variável)
+
+Quando o resultado não é numérico (ex.: `"3a - 2"`), `gerarAlternativas(String)` falha silenciosamente e exibe apenas uma alternativa. Nesse caso, gerar distratores manualmente variando os coeficientes:
+
+```java
+Set<String> usados = new HashSet<>();
+usados.add(resultadoCorreto);
+List<String> distratores = new ArrayList<>();
+int[] deltas = {1, -1, 2, -2, 3, -3, 4, -4};
+
+// variar coeficiente da variável
+for(int dx : deltas)
+{
+    if(distratores.size() >= 3) break;
+    long cx = x.numerador + dx;
+    if(cx == 0) continue;
+    String alt = buildResultado(cx, naoX.numerador, variavel);
+    if(usados.add(alt)) distratores.add(alt);
+}
+// variar constante, se necessário completar
+for(int dc : deltas)
+{
+    if(distratores.size() >= 3) break;
+    String alt = buildResultado(x.numerador, naoX.numerador + dc, variavel);
+    if(usados.add(alt)) distratores.add(alt);
+}
+
+List<String> distrLatex = new ArrayList<>();
+for(String d : distratores) distrLatex.add("\\(" + d + "\\)");
+embaralharEAdicionarAlternativas("\\(" + resultadoCorreto + "\\)", distrLatex);
+```
 
 ---
 
@@ -80,7 +215,34 @@ res += "\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ "
 
 | Efeito desejado | Código Java |
 |---|---|
-| Quebra entre blocos de texto/fórmula | `\\(\\\\\\)` |
-| Quebra dentro de `\(…\)` | `=\\\\ ` (espaço depois) |
+| Quebra entre texto e fórmula (blocos separados) | `\\(\\\\\\)` |
+| Quebra dentro de `\(…\)` com `=` ao final | `= \\\\ ` (espaço depois) |
 | Inline math simples | `\\(expressão\\)` |
+| `\dfrac{n}{d}` (fração) | `resultado.toStringLatex()` |
+| Grupo negativo com parênteses | `"\\left(" + g + "\\right)"` (quando `g < 0`) |
 | `\;` (espaço fino em math) | `\\;` dentro de `\\(…\\)` |
+
+---
+
+## Exemplo completo: expressão com dois grupos
+
+```java
+String op1 = Algebra.sinalPlusMinus();   // entre A e B
+String op2 = Algebra.sinal();            // entre grupos
+String op3 = Algebra.sinalPlusMinus();   // entre C e D
+String exp = "( A " + op1 + " B ) " + op2 + " ( C " + op3 + " D )";
+
+// [... gerar coeficientes, calcular resultado ...]
+
+int g1 = op1.equals("+") ? A + B : A - B;
+int g2 = op3.equals("+") ? C + D : C - D;
+String g1Str = g1 < 0 ? "\\left(" + g1 + "\\right)" : "" + g1;
+String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
+String step2 = g1Str + " " + Algebra.converter(op2) + " " + g2Str;
+
+String res = "Substituindo na expressão: \\(\\\\\\)";
+res += "\\(" + expSubs + " = \\\\ \\)";
+res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";
+setResolucao(res);
+gerarAlternativas(resultado);   // Racional overload — usa \dfrac nas alternativas
+```

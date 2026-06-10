@@ -12,7 +12,9 @@ public class Expressao2 extends GeradorExercicio
 	{
 		int size = 3;
 		Racional[] coeficientes = new Racional[size];
-		String exp = "( A " + Algebra.sinalPlusMinus() + " B ) " + Algebra.sinal() + " C";
+		String op1 = Algebra.sinalPlusMinus();
+		String op2 = Algebra.sinal();
+		String exp = "( A " + op1 + " B ) " + op2 + " C";
 		for(int i = 0; i < size; i++)
 			coeficientes[i] = new Racional(1 + rand.nextInt(20));
 
@@ -35,6 +37,20 @@ public class Expressao2 extends GeradorExercicio
 
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		gerarAlternativas(resultado);
+
+		String expSubs = exp;
+		for(int i = 0; i < coeficientes.length; i++)
+			expSubs = expSubs.replace("" + (char)(65 + i), coeficientes[i].toString());
+		expSubs = expSubs.replace("*", " \\times ").replace("/", " \\div ")
+				.replace("(", "\\left(").replace(")", "\\right)");
+		int g = (int) (op1.equals("+") ? coeficientes[0].numerador + coeficientes[1].numerador
+				: coeficientes[0].numerador - coeficientes[1].numerador);
+		String gStr = g < 0 ? "\\left(" + g + "\\right)" : "" + g;
+		String step2 = gStr + " " + Algebra.converter(op2) + " " + coeficientes[2].numerador;
+		String res = "Substituindo na expressão: \\(\\\\\\)";
+		res += "\\(" + expSubs + " = \\\\ \\)";
+		res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";
+		setResolucao(res);
 	}
 }

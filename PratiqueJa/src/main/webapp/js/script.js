@@ -224,3 +224,52 @@ function manterFiltroAberto(id) {
   }
 }
 
+//contrle do tabId para manter o filtro atualizado na volta
+document.addEventListener("DOMContentLoaded", function () 
+{
+	if (!sessionStorage.getItem("tabId")) {
+	       sessionStorage.setItem("tabId", crypto.randomUUID());
+	   }
+	   
+    const tabId = sessionStorage.getItem("tabId");
+    document.querySelectorAll("form").forEach(form => {
+        let input = form.querySelector("input[name$='tabId']");
+        if (!input) {
+            input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "tabId";
+            form.appendChild(input);
+        }
+        input.value = tabId;
+    });
+	
+	// Injeta em todos os links (GET)
+    document.querySelectorAll("a[href]").forEach(link => {
+        const url = new URL(link.href);
+        if (!url.searchParams.has("tabId")) {
+            url.searchParams.append("tabId", tabId);
+            link.href = url.toString();
+        }
+    });
+	
+	(function () {
+	    const originalOpen = window.open;
+	    window.open = function (url, target, features) {
+	        if (url && typeof url === "string" && !url.includes("tabId=")) {
+	            const tabId = sessionStorage.getItem("tabId");
+	            if (tabId) {
+	                const separator = url.includes("?") ? "&" : "?";
+	                url = url + separator + "tabId=" + encodeURIComponent(tabId);
+	            }
+	        }
+	        return originalOpen.call(window, url, target, features);
+	    };
+	})();
+	
+	// 4️⃣ Atualiza a URL atual do navegador (sem reload)
+	   const currentUrl = new URL(window.location.href);
+	   if (!currentUrl.searchParams.has("tabId")) {
+	       currentUrl.searchParams.append("tabId", tabId);
+	       window.history.replaceState({}, "", currentUrl.toString());
+	   }
+});

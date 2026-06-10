@@ -7,6 +7,7 @@ public class ExpressaoAlgebricaNivel1 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		delegar(instanciar(".nivel1package.Expressao1"));
+		int tipo = 1 + rand.nextInt(2);
+		delegar(instanciar(".nivel1package.Expressao" + tipo));
 	}
 }

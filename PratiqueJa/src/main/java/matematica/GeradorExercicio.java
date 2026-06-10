@@ -134,6 +134,14 @@ public abstract class GeradorExercicio
 		return "\\(" + valor + "\\)";
 	}
 
+	/** Overload para Racional: simplifica e delega para a versão String. */
+	protected void gerarAlternativas(Racional resultado)
+	{
+		if(resultado == null) return;
+		resultado.fatoracao(2);
+		gerarAlternativas(resultado.toString());
+	}
+
 	/**
 	 * Gera alternativas a partir de uma resposta textual: inteiro → distratores
 	 * inteiros; fração/decimal/porcentagem → distratores via {@link Racional}

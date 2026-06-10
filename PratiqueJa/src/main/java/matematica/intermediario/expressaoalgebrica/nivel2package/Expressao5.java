@@ -12,8 +12,11 @@ public class Expressao5 extends GeradorExercicio
 	{
 		int size = 5;
 		Racional[] coeficientes = new Racional[size];
-		String exp = "A " + Algebra.sinalMenosDiv() + " ( B " + Algebra.sinalPlusMinus() + " C ) " + Algebra.sinal() + " ( D " + Algebra.sinalPlusMinus()
-		+ " E )";
+		String op1 = Algebra.sinalMenosDiv();
+		String op2 = Algebra.sinalPlusMinus();
+		String op3 = Algebra.sinal();
+		String op4 = Algebra.sinalPlusMinus();
+		String exp = "A " + op1 + " ( B " + op2 + " C ) " + op3 + " ( D " + op4 + " E )";
 		for(int i = 0; i < size; i++)
 			coeficientes[i] = new Racional(1 + rand.nextInt(20));
 
@@ -49,6 +52,24 @@ public class Expressao5 extends GeradorExercicio
 
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		gerarAlternativas(resultado);
+
+		String expSubs = exp;
+		for(int i = 0; i < coeficientes.length; i++)
+			expSubs = expSubs.replace("" + (char)(65 + i), coeficientes[i].toString());
+		expSubs = expSubs.replace("*", " \\times ").replace("/", " \\div ")
+				.replace("(", "\\left(").replace(")", "\\right)");
+		int g1 = (int) (op2.equals("+") ? coeficientes[1].numerador + coeficientes[2].numerador
+				: coeficientes[1].numerador - coeficientes[2].numerador);
+		int g2 = (int) (op4.equals("+") ? coeficientes[3].numerador + coeficientes[4].numerador
+				: coeficientes[3].numerador - coeficientes[4].numerador);
+		String g1Str = g1 < 0 ? "\\left(" + g1 + "\\right)" : "" + g1;
+		String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
+		String step2 = coeficientes[0].numerador + " " + Algebra.converter(op1) + " " + g1Str
+				+ " " + Algebra.converter(op3) + " " + g2Str;
+		String res = "Substituindo na expressão: \\(\\\\\\)";
+		res += "\\(" + expSubs + " = \\\\ \\)";
+		res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";
+		setResolucao(res);
 	}
 }

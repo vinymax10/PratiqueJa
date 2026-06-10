@@ -154,8 +154,23 @@ public class Conjunto
 		Random rand=new Random();
 		return list.get(rand.nextInt(list.size()));
 	}
-	
-	
+
+	public boolean contem(int x)
+	{
+		return list.contains(x);
+	}
+
+	public Conjunto subconjunto(int tamanho)
+	{
+		List<Integer> copia = new ArrayList<>(list);
+		Collections.shuffle(copia, new Random());
+		Conjunto sub = new Conjunto();
+		for (int i = 0; i < tamanho && i < copia.size(); i++)
+			sub.list.add(copia.get(i));
+		sub.ordenar();
+		return sub;
+	}
+
 	public void contruirInterseccao(Conjunto b)
 	{
 		int element;

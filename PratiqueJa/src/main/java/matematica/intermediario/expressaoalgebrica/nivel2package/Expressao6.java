@@ -13,11 +13,13 @@ public class Expressao6 extends GeradorExercicio
 		int size = 6;
 		Racional[] coeficientes = new Racional[size];
 
-		String exp = "(( A " + Algebra.sinalPlusMinus() + " B ) " + Algebra.sinalMenosDiv() + " ( C " + Algebra.sinalPlusMinus() + " D )) / ( E "
-		+ Algebra.sinalPlusMinus() + " F )";
+		String s1 = Algebra.sinalPlusMinus();
+		String s2 = Algebra.sinalMenosDiv();
+		String s3 = Algebra.sinalPlusMinus();
+		String s4 = Algebra.sinalPlusMinus();
 
-		String expLatex = "( A " + Algebra.sinalPlusMinus() + " B ) " + Algebra.sinalMenosDiv() + " ( C " + Algebra.sinalPlusMinus() + " D ) / ( E "
-		+ Algebra.sinalPlusMinus() + " F )";
+		String exp = "(( A " + s1 + " B ) " + s2 + " ( C " + s3 + " D )) / ( E " + s4 + " F )";
+		String expLatex = "( A " + s1 + " B ) " + s2 + " ( C " + s3 + " D ) / ( E " + s4 + " F )";
 
 		for(int i = 0; i < size; i++)
 			coeficientes[i] = new Racional(1 + rand.nextInt(20));
@@ -51,6 +53,30 @@ public class Expressao6 extends GeradorExercicio
 
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		gerarAlternativas(resultado);
+
+		String expSubs = expLatex;
+		for(int i = 0; i < coeficientes.length; i++)
+			expSubs = expSubs.replace("" + (char)(65 + i), coeficientes[i].toString());
+		expSubs = expSubs.replace("*", " \\times ");
+		String[] partes = expSubs.split("/");
+		if(partes.length > 1)
+			expSubs = "\\dfrac{" + partes[0].trim().replace("(", "\\left(").replace(")", "\\right)")
+					+ "}{" + partes[1].trim().replace("(", "\\left(").replace(")", "\\right)") + "}";
+		else
+			expSubs = expSubs.replace("(", "\\left(").replace(")", "\\right)");
+		int g1 = (int) (s1.equals("+") ? coeficientes[0].numerador + coeficientes[1].numerador
+				: coeficientes[0].numerador - coeficientes[1].numerador);
+		int g2 = (int) (s3.equals("+") ? coeficientes[2].numerador + coeficientes[3].numerador
+				: coeficientes[2].numerador - coeficientes[3].numerador);
+		int g3 = (int) (s4.equals("+") ? coeficientes[4].numerador + coeficientes[5].numerador
+				: coeficientes[4].numerador - coeficientes[5].numerador);
+		String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
+		String interNum = g1 + " " + Algebra.converter(s2) + " " + g2Str;
+		String step2 = "\\dfrac{" + interNum + "}{" + g3 + "}";
+		String res = "Substituindo na expressão: \\(\\\\\\)";
+		res += "\\(" + expSubs + " = \\\\ \\)";
+		res += "\\(" + step2 + " = " + resultado.toStringLatex() + "\\)";
+		setResolucao(res);
 	}
 }

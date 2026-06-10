@@ -76,7 +76,40 @@ public class Expressao1 extends GeradorExercicio
 
 		addParagrafo("Calcule o valor da expressão algébrica:");
 		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
+		gerarAlternativas(resultado);
+
+		String textoValores = "" + coeficientes[0];
+		for(int i = 0; i < operadores.length; i++)
+			textoValores += " " + Algebra.converter(operadores[i]) + " " + coeficientes[i + 1];
+
+		boolean hasMulDiv = false;
+		for(String op : operadores)
+			if(op.equals("*") || op.equals("/")) { hasMulDiv = true; break; }
+
+		String res = "Substituindo \\(x = " + coeficientes[posX] + "\\) na expressão: \\(\\\\\\)";
+		if(hasMulDiv)
+		{
+			StringBuilder inter = new StringBuilder();
+			long running = coeficientes[0].numerador;
+			for(int i = 0; i < operadores.length; i++)
+			{
+				if(operadores[i].equals("*"))      running *= coeficientes[i + 1].numerador;
+				else if(operadores[i].equals("/")) running /= coeficientes[i + 1].numerador;
+				else
+				{
+					inter.append(running).append(" ").append(Algebra.converter(operadores[i])).append(" ");
+					running = coeficientes[i + 1].numerador;
+				}
+			}
+			inter.append(running);
+			res += "\\(" + textoValores + " = \\\\ \\)";
+			res += "\\(" + inter + " = " + resultado.toStringLatex() + "\\)";
+		}
+		else
+		{
+			res += "\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)";
+		}
+		setResolucao(res);
 	}
 
 	private String getCoeficiente(int index)
