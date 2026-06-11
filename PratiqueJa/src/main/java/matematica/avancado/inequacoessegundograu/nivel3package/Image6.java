@@ -1,0 +1,62 @@
+package matematica.avancado.inequacoessegundograu.nivel3package;
+
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
+import matematica.Auxiliar;
+import matematica.GeradorExercicio;
+import matematica.avancado.inequacoessegundograu.config.ConfigInequacao;
+
+// Graph: parabola opening DOWN (a < 0), one negative root.  Asks where f(x) < 0  →  outside roots.
+public class Image6 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
+	{
+		int rPos = 1 + rand.nextInt(4);
+		int r1 = -rPos;                     // negative root
+		int r2 = 1 + rand.nextInt(5);       // positive root
+		int a = -(1 + rand.nextInt(2));
+		int b = -a * (r1 + r2);
+		int c = a * r1 * r2;
+
+		boolean strict = rand.nextBoolean();
+		String sinal = strict ? "<" : "\\leq";
+		String abre = strict ? "(" : "[";
+		String fecha = strict ? ")" : "]";
+
+		String funcao = "f(x)=" + Auxiliar.getNumber(a, "x^2", true)
+				+ Auxiliar.getNumber(b, "x", false)
+				+ Auxiliar.getNumber(c, "", false);
+
+		String lEsq = "(-\\infty,\\," + r1 + fecha;
+		String lDir = abre + r2 + ",\\,+\\infty)";
+
+		String correta = "\\(x \\in " + lEsq + " \\cup " + lDir + "\\)";
+		String d1 = "\\(x \\in (" + r1 + ",\\," + r2 + ")\\)";
+		String d2 = strict
+				? "\\(x \\in (-\\infty,\\," + r1 + "] \\cup [" + r2 + ",\\,+\\infty)\\)"
+				: "\\(x \\in (-\\infty,\\," + r1 + ") \\cup (" + r2 + ",\\,+\\infty)\\)";
+		String d3 = "\\(x \\in (-\\infty,\\," + (r1 - 1) + ") \\cup (" + (r2 + 1) + ",\\,+\\infty)\\)";
+
+		List<String> distratores = new ArrayList<>();
+		distratores.add(d1);
+		distratores.add(d2);
+		distratores.add(d3);
+
+		ConfigInequacao config = new ConfigInequacao(a, b, c, r1, r2);
+		config.indice = 1 + rand.nextInt(10);
+		BufferedImage image = config.criarImagem();
+
+		String res = "Do gráfico, as raízes são \\(x_1=" + r1 + "\\) e \\(x_2=" + r2 + "\\)" + "\\(\\\\\\)";
+		res += "A parábola abre para baixo (\\(a=" + a + "<0\\)): \\(f(x)" + sinal + "0\\) fora das raízes" + (strict ? "." : " (incluindo os zeros).") + " \\(\\\\\\)";
+		res += "\\(\\mathbf{x \\in " + lEsq + " \\cup " + lDir + "}\\)";
+
+		addParagrafo("Com base no gráfico, determine o conjunto solução de \\(f(x)" + sinal + "0\\)");
+		addParagrafo("\\(" + funcao + "\\)");
+		addParagrafoImagem(image);
+		embaralharEAdicionarAlternativas(correta, distratores);
+		setResolucao(res);
+	}
+}

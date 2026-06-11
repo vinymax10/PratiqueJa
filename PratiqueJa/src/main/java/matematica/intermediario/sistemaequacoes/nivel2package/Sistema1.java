@@ -19,6 +19,6 @@ public class Sistema1 extends GeradorExercicio
 		addParagrafo("Encontre \\(x\\) pelo método da substituição.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

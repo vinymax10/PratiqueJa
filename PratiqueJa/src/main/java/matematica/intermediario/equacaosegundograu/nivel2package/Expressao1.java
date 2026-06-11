@@ -2,34 +2,40 @@ package matematica.intermediario.equacaosegundograu.nivel2package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
+import matematica.ParCor;
 import matematica.Racional;
-import matematica.intermediario.equacaosegundograu.ResolucaoEq2Grau;
 
 public class Expressao1 extends GeradorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int x = 1 + rand.nextInt(9);
+		int x1 = 1 + rand.nextInt(9);
 		int delta = 1 + rand.nextInt(9);
 		int a = 1 + rand.nextInt(9);
-		if(rand.nextBoolean())
-			a *= -1;
+		if(rand.nextBoolean()) a *= -1;
 
-		int b = delta - (2 * a * x);
-		int c = (-x * delta) + (a * x * x);
+		int b = delta - (2 * a * x1);
+		int c = (-x1 * delta) + (a * x1 * x1);
 
-		String texto = "";
-		texto += Auxiliar.getNumber(a, "x^2", true);
-		texto += Auxiliar.getNumber(b, "x", false);
-		texto += Auxiliar.getNumber(c, "", false);
+		String eq = Auxiliar.getNumber(a, "x^2", true);
+		eq += Auxiliar.getNumber(b, "x", false);
+		eq += Auxiliar.getNumber(c, "", false);
+		eq += "=0";
 
-		Racional resultado = new Racional(-b).div(new Racional(2 * a));
+		Racional resultado = new Racional(-b, a);
 		resultado.fatoracao(2);
 
-		addParagrafo("Encontre o \\( x \\) do vértice");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
-		setResolucao("\\(" + ResolucaoEq2Grau.resolucaoXVertice(a, b, c) + "\\)");
+		String res = "\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)" + "\\(\\\\\\)";
+		res += "\\(a=" + a + ", \\quad b=" + b + "\\)" + "\\(\\\\\\)";
+		if(b < 0)
+			res += "\\(x_1+x_2=\\dfrac{-(" + b + ")}{" + a + "}=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
+		else
+			res += "\\(x_1+x_2=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
+
+		addParagrafo("Encontre a soma das raízes");
+		addParagrafo("\\(" + eq + "\\)");
+		gerarAlternativas(resultado);
+		setResolucao(res);
 	}
 }

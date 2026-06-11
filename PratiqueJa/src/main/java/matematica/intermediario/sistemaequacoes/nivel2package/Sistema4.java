@@ -19,6 +19,6 @@ public class Sistema4 extends GeradorExercicio
 		addParagrafo("Encontre \\(y\\) pelo método da comparação.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

@@ -19,6 +19,6 @@ public class Sistema4 extends GeradorExercicio
 		addParagrafo("Encontre \\(z\\) pelo método da substituição.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

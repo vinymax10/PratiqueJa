@@ -19,6 +19,6 @@ public class Sistema3 extends GeradorExercicio
 		addParagrafo("Encontre \\(x\\) pelo método da comparação.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

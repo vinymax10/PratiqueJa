@@ -2,34 +2,37 @@ package matematica.intermediario.equacaosegundograu.nivel2package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
+import matematica.ParCor;
 import matematica.Racional;
-import matematica.intermediario.equacaosegundograu.ResolucaoEq2Grau;
 
 public class Expressao2 extends GeradorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int x = 1 + rand.nextInt(9);
+		int x1 = 1 + rand.nextInt(9);
 		int delta = 1 + rand.nextInt(9);
 		int a = 1 + rand.nextInt(9);
-		if(rand.nextBoolean())
-			a *= -1;
+		if(rand.nextBoolean()) a *= -1;
 
-		int b = delta - (2 * a * x);
-		int c = (-x * delta) + (a * x * x);
+		int b = delta - (2 * a * x1);
+		int c = (-x1 * delta) + (a * x1 * x1);
 
-		String texto = "";
-		texto += Auxiliar.getNumber(a, "x^2", true);
-		texto += Auxiliar.getNumber(b, "x", false);
-		texto += Auxiliar.getNumber(c, "", false);
+		String eq = Auxiliar.getNumber(a, "x^2", true);
+		eq += Auxiliar.getNumber(b, "x", false);
+		eq += Auxiliar.getNumber(c, "", false);
+		eq += "=0";
 
-		Racional resultado = new Racional(-(delta * delta)).div(new Racional(4 * a));
+		Racional resultado = new Racional(c, a);
 		resultado.fatoracao(2);
 
-		addParagrafo("Encontre o \\( y \\) do vértice");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + resultado);
-		setResolucao("\\(" + ResolucaoEq2Grau.resolucaoYVertice(a, b, c) + "\\)");
+		String res = "\\(" + ParCor.formula("x_1\\cdot x_2=\\dfrac{c}{a}") + "\\)" + "\\(\\\\\\)";
+		res += "\\(a=" + a + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
+		res += "\\(x_1\\cdot x_2=\\dfrac{" + c + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
+
+		addParagrafo("Encontre o produto das raízes");
+		addParagrafo("\\(" + eq + "\\)");
+		gerarAlternativas(resultado);
+		setResolucao(res);
 	}
 }

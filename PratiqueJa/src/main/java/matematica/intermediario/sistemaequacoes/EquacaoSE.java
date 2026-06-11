@@ -26,6 +26,16 @@ public class EquacaoSE
 	
 	public boolean equivalete(EquacaoSE equacao)
 	{
+		if (valor == 0 && equacao.valor == 0)
+		{
+			Racional xProp = new Racional(coeficienteX, equacao.coeficienteX);
+			Racional yProp = new Racional(coeficienteY, equacao.coeficienteY);
+			xProp.fatoracao(2);
+			yProp.fatoracao(2);
+			return xProp.igual(yProp);
+		}
+		if (valor == 0 || equacao.valor == 0)
+			return false;
 		Racional xProp=new Racional(coeficienteX,equacao.coeficienteX);
 		Racional yProp=new Racional(coeficienteY,equacao.coeficienteY);
 		Racional vProp=new Racional(valor,equacao.valor);
@@ -34,7 +44,7 @@ public class EquacaoSE
 		vProp.fatoracao(2);
 		if(xProp.igual(yProp)&&yProp.igual(vProp))
 			return true;
-		
+
 		return false;
 	}
 	

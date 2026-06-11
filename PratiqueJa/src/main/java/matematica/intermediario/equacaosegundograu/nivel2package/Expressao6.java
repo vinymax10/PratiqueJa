@@ -1,42 +1,34 @@
 package matematica.intermediario.equacaosegundograu.nivel2package;
 
-import matematica.Auxiliar;
 import matematica.GeradorExercicio;
-import matematica.expressao.MyExpression;
+import matematica.ParCor;
 
 public class Expressao6 extends GeradorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int x = 1 + rand.nextInt(9);
-		int delta = 1 + rand.nextInt(9);
-		int a = 1 + rand.nextInt(9);
-		if(rand.nextBoolean())
-			a *= -1;
+		int x1 = 1 + rand.nextInt(9);
+		int x2 = 1 + rand.nextInt(9);
+		if(rand.nextBoolean()) x2 *= -1;
 
-		int b = delta - (2 * a * x);
-		int c = (-x * delta) + (a * x * x);
+		int soma = x1 + x2;
+		int produto = x1 * x2;
+		int b = -soma;
+		int c = produto;
 
-		String texto = "f(x)=";
-		texto += Auxiliar.getNumber(a, "x^2", true);
-		texto += Auxiliar.getNumber(b, "x", false);
-		texto += "+c";
+		String res = "\\(" + ParCor.formula("c=a\\cdot x_1\\cdot x_2, \\quad a=1") + "\\)" + "\\(\\\\\\)";
+		res += "\\(x_1\\cdot x_2=" + produto + "\\)" + "\\(\\\\\\)";
+		res += "\\(c=1\\cdot " + produto + "=\\mathbf{" + c + "}\\)";
 
-		int num = 1 + rand.nextInt(19);
+		String enunciado = "";
+		if(soma >= 0)
+			enunciado = "x_1+x_2=" + soma;
+		else
+			enunciado = "x_1+x_2=\\left(" + soma + "\\right)";
 
-		int resultado = (a * num * num) + (b * num) + c;
-
-		String resolucao = "f(" + num + ")=" + a + " \\cdot " + num + "^2" + Auxiliar.getNumber(b, "", false) + " \\cdot " + num +
-		"+c =" + resultado + "\\\\";
-
-		MyExpression expressao = new MyExpression(a + "*" + (num * num) + Auxiliar.getNumber(b, "", false) + "*" + num +
-		"+c=" + resultado);
-		resolucao += expressao.resolverLatex();
-
-		addParagrafo("Encontre \\( c \\) tendo \\( f(" + num + ")=" + resultado + " \\)");
-		addParagrafo("\\(" + texto + "\\)");
+		addParagrafo("Dada \\(x^2+bx+c=0\\), com \\(" + enunciado + "\\) e \\(x_1\\cdot x_2=" + produto + "\\), encontre \\(c\\)");
 		gerarAlternativas("" + c);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(res);
 	}
 }

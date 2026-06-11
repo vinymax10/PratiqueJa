@@ -19,6 +19,6 @@ public class Sistema2 extends GeradorExercicio
 		addParagrafo("Encontre \\(y\\) pelo método da adição.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		setResolucao(resolucao);
 	}
 }

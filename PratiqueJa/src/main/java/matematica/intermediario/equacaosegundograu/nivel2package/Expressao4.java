@@ -2,41 +2,40 @@ package matematica.intermediario.equacaosegundograu.nivel2package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
-import matematica.expressao.MyExpression;
+import matematica.ParCor;
+import matematica.Racional;
 
 public class Expressao4 extends GeradorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int x = 1 + rand.nextInt(9);
-		int delta = 1 + rand.nextInt(9);
-		int a = 1 + rand.nextInt(9);
-		if(rand.nextBoolean())
-			a *= -1;
+		int x1 = 1 + rand.nextInt(9);
+		int x2 = 1 + rand.nextInt(9);
+		if(rand.nextBoolean()) x2 *= -1;
 
-		int b = delta - (2 * a * x);
-		int c = (-x * delta) + (a * x * x);
+		int a = 1 + rand.nextInt(5);
+		if(rand.nextBoolean()) a *= -1;
 
-		String texto = "f(x)=ax^2";
-		texto += Auxiliar.getNumber(b, "x", false);
-		texto += Auxiliar.getNumber(c, "", false);
+		int b = -a * (x1 + x2);
+		int c = a * x1 * x2;
 
-		int num = 1 + rand.nextInt(19);
+		String eq = Auxiliar.getNumber(a, "x^2", true);
+		eq += Auxiliar.getNumber(b, "x", false);
+		eq += Auxiliar.getNumber(c, "", false);
+		eq += "=0";
 
-		int resultado = (a * num * num) + (b * num) + c;
+		Racional soma = new Racional(-b, a);
+		soma.fatoracao(2);
 
-		String resolucao = "f(" + num + ")=a" + num + "^2" + Auxiliar.getNumber(b, "", false) + " \\cdot " + num +
-		"" + Auxiliar.getNumber(c, "", false) + "=" + resultado + "\\\\";
+		String res = "\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)" + "\\(\\\\\\)";
+		res += "Sabendo que \\(x_1=" + x1 + "\\): \\(\\\\\\)";
+		res += "\\(" + x1 + "+x_2=" + soma.toStringLatex() + "\\)" + "\\(\\\\\\)";
+		res += "\\(x_2=" + soma.toStringLatex() + "-" + x1 + "=\\mathbf{" + x2 + "}\\)";
 
-		MyExpression expressao = new MyExpression("a" + (num * num) + Auxiliar.getNumber(b, "", false) + "*" + num +
-		"" + Auxiliar.getNumber(c, "", false) + "=" + resultado);
-
-		resolucao += expressao.resolverLatex();
-
-		addParagrafo("Encontre \\( a \\) tendo  \\( f(" + num + ")=" + resultado + " \\)");
-		addParagrafo("\\(" + texto + "\\)");
-		gerarAlternativas("" + a);
-		setResolucao("\\(" + resolucao + "\\)");
+		addParagrafo("Encontre \\(x_2\\), sabendo que \\(x_1=" + x1 + "\\)");
+		addParagrafo("\\(" + eq + "\\)");
+		gerarAlternativas("" + x2);
+		setResolucao(res);
 	}
 }
