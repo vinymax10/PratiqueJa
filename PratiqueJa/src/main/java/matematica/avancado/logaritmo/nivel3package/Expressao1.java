@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel3package;
+﻿package matematica.avancado.logaritmo.nivel3package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -22,9 +22,9 @@ public class Expressao1 extends GeradorExercicio
 		if (a == 1)
 		{
 			enunciado = "\\(" + b + " \\cdot \\log_{" + c + "} " + val + "\\)";
-			res = "Propriedade da potência: \\(k \\cdot \\log_b a = \\log_b a^k\\) \\(\\\\\\)";
-			res += "\\(\\log_{" + c + "} " + val + "^{" + b + "} = \\log_{" + c + "} " + c + "^{" + (d * b) + "}\\) \\(\\\\\\)";
-			res += "\\(= \\mathbf{" + x.toStringLatex() + "}\\)";
+			res = "Propriedade da potência: \\(k \\cdot \\log_b a = \\log_b a^k\\\\";
+			res += "\\log_{" + c + "} " + val + "^{" + b + "} = \\log_{" + c + "} " + c + "^{" + (d * b) + "}\\\\";
+			res += "= \\mathbf{" + x.toStringLatex() + "}\\)";
 		}
 		else
 		{
@@ -32,8 +32,8 @@ public class Expressao1 extends GeradorExercicio
 			Racional potRac = new Racional(b, a);
 			potRac.fatoracao(2);
 			res = "Reescrevendo a raiz como potência e aplicando a propriedade: \\(\\\\\\)";
-			res += "\\(" + b + " \\cdot \\log_{" + c + "} " + val + "^{1/" + a + "} = \\log_{" + c + "} " + val + "^{" + potRac.showFrac() + "}\\) \\(\\\\\\)";
-			res += "\\(= \\log_{" + c + "} " + c + "^{" + x.showFrac() + "} = \\mathbf{" + x.toStringLatex() + "}\\)";
+			res += "\\(" + b + " \\cdot \\log_{" + c + "} " + val + "^{1/" + a + "} = \\log_{" + c + "} " + val + "^{" + potRac.showFrac() + "}\\\\";
+			res += "= \\log_{" + c + "} " + c + "^{" + x.showFrac() + "} = \\mathbf{" + x.toStringLatex() + "}\\)";
 		}
 
 		addParagrafo("Calcule o valor da expressão:");

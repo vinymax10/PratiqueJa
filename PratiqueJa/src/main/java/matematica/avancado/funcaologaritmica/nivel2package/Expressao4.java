@@ -1,4 +1,4 @@
-package matematica.avancado.funcaologaritmica.nivel2package;
+﻿package matematica.avancado.funcaologaritmica.nivel2package;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ public class Expressao4 extends GeradorExercicio
 		embaralharEAdicionarAlternativas(correto, dist);
 
 		String res = "Base \\(" + a + " > 1\\): função crescente, a desigualdade é preservada. \\(\\\\\\)";
-		res += "\\(\\log_{" + a + "}(x) \\geq " + n + " \\Leftrightarrow x \\geq " + a + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "\\(x \\geq \\mathbf{" + xMin + "}\\)";
+		res += "\\(\\log_{" + a + "}(x) \\geq " + n + " \\Leftrightarrow x \\geq " + a + "^{" + n + "}\\\\";
+		res += "x \\geq \\mathbf{" + xMin + "}\\)";
 		setResolucao(res);
 	}
 }

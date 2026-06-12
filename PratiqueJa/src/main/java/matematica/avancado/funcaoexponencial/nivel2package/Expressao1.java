@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel2package;
+﻿package matematica.avancado.funcaoexponencial.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -19,10 +19,10 @@ public class Expressao1 extends GeradorExercicio
 
 		int dc = d - c;
 		String res = "As bases são iguais, então igualamos os expoentes: \\(\\\\\\)";
-		res += "\\(" + expo + " = " + d + "\\) \\(\\\\\\)";
-		res += "\\(" + b + "x = " + d + " - (" + c + ")\\) \\(\\\\\\)";
-		res += "\\(" + b + "x = " + dc + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + dc + "}{" + b + "} = \\mathbf{" + x + "}\\)";
+		res += "\\(" + expo + " = " + d + "\\\\";
+		res += "" + b + "x = " + d + " - (" + c + ")\\\\";
+		res += "" + b + "x = " + dc + "\\\\";
+		res += "x = \\dfrac{" + dc + "}{" + b + "} = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

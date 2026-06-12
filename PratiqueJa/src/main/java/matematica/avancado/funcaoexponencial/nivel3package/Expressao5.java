@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel3package;
+﻿package matematica.avancado.funcaoexponencial.nivel3package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -24,11 +24,11 @@ public class Expressao5 extends GeradorExercicio
 
 		String res = "Reescrevemos ambos os lados com base \\(" + p + "\\): \\(\\\\\\)";
 		res += "\\(" + leftBase + " = " + p + "^{" + m + "}\\) \\(\\quad\\) e \\(\\quad\\)";
-		res += "\\(\\dfrac{1}{" + rightDen + "} = " + p + "^{-" + n + "}\\) \\(\\\\\\)";
-		res += "\\((" + p + "^{" + m + "})^x = " + p + "^{-" + n + "}\\) \\(\\\\\\)";
-		res += "\\(" + p + "^{" + m + "x} = " + p + "^{-" + n + "}\\) \\(\\\\\\)";
-		res += "Igualando os expoentes: \\(" + m + "x = -" + n + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{-" + n + "}{" + m + "} = \\mathbf{" + x.toStringLatex() + "}\\)";
+		res += "\\(\\dfrac{1}{" + rightDen + "} = " + p + "^{-" + n + "}\\\\";
+		res += "(" + p + "^{" + m + "})^x = " + p + "^{-" + n + "}\\\\";
+		res += "" + p + "^{" + m + "x} = " + p + "^{-" + n + "}\\) \\(\\\\\\)";
+		res += "Igualando os expoentes: \\(" + m + "x = -" + n + "\\\\";
+		res += "x = \\dfrac{-" + n + "}{" + m + "} = \\mathbf{" + x.toStringLatex() + "}\\)";
 
 		gerarAlternativas(x);
 		setResolucao(res);

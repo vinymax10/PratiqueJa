@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoquadratica.nivel2package;
+﻿package matematica.avancado.funcaoquadratica.nivel2package;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,10 +46,10 @@ public class Expressao7 extends GeradorExercicio
 
 		String res = "Calculamos \\(\\Delta\\): \\(\\\\\\)";
 		res += "\\(\\Delta = (" + b + ")^2 - 4 \\cdot 1 \\cdot (" + c + ") = "
-			+ (b * b) + Auxiliar.getNumber(-4 * c, "", false) + " = " + delta + "\\) \\(\\\\\\)";
-		res += "\\(\\sqrt{\\Delta} = " + sqrtDelta + "\\) \\(\\\\\\)";
-		res += "\\(x_1 = \\dfrac{" + negB + " - " + sqrtDelta + "}{2} = \\dfrac{" + num1 + "}{2} = \\mathbf{" + x1 + "}\\) \\(\\\\\\)";
-		res += "\\(x_2 = \\dfrac{" + negB + " + " + sqrtDelta + "}{2} = \\dfrac{" + num2 + "}{2} = " + x2 + "\\)";
+			+ (b * b) + Auxiliar.getNumber(-4 * c, "", false) + " = " + delta + "\\\\";
+		res += "\\sqrt{\\Delta} = " + sqrtDelta + "\\\\";
+		res += "x_1 = \\dfrac{" + negB + " - " + sqrtDelta + "}{2} = \\dfrac{" + num1 + "}{2} = \\mathbf{" + x1 + "}\\\\";
+		res += "x_2 = \\dfrac{" + negB + " + " + sqrtDelta + "}{2} = \\dfrac{" + num2 + "}{2} = " + x2 + "\\)";
 
 		setResolucao(res);
 	}

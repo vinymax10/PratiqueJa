@@ -7,7 +7,7 @@ public class PGNivel3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(9);
+		int tipo = 1 + rand.nextInt(10);
 		delegar(instanciar(".nivel3package.Expressao" + tipo));
 	}
 }

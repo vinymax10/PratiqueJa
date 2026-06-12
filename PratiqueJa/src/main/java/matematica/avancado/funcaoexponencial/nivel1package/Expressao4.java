@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel1package;
+﻿package matematica.avancado.funcaoexponencial.nivel1package;
 
 import matematica.GeradorExercicio;
 
@@ -16,8 +16,8 @@ public class Expressao4 extends GeradorExercicio
 
 		String res = "Reescrevemos \\(" + aPowN + "\\) como potência de base \\(" + a + "\\): \\(\\\\\\)";
 		res += "\\(" + aPowN + " = " + a + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "Igualando bases: \\(" + a + "^x = " + a + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + n + "}\\)";
+		res += "Igualando bases: \\(" + a + "^x = " + a + "^{" + n + "}\\\\";
+		res += "x = \\mathbf{" + n + "}\\)";
 
 		gerarAlternativas("" + n);
 		setResolucao(res);

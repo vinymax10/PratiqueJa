@@ -1,4 +1,4 @@
-package matematica.avancado.funcaomodular.nivel3package;
+﻿package matematica.avancado.funcaomodular.nivel3package;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -48,8 +48,8 @@ public class Image2 extends GeradorExercicio
 		dist.add("\\(x < " + (low - 1) + "\\) ou \\(x > " + (high + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "\\(f(x) > " + c + " \\Leftrightarrow |x - (" + h + ")| + " + k + " > " + c + "\\) \\(\\\\\\)";
-		res += "\\(|x - " + h + "| > " + delta + "\\) \\(\\\\\\)";
+		String res = "\\(f(x) > " + c + " \\Leftrightarrow |x - (" + h + ")| + " + k + " > " + c + "\\\\";
+		res += "|x - " + h + "| > " + delta + "\\) \\(\\\\\\)";
 		res += "Regra: \\(|u| > r \\Leftrightarrow u < -r\\) ou \\(u > r\\): \\(\\\\\\)";
 		res += "\\(x - " + h + " < -" + delta + "\\) ou \\(x - " + h + " > " + delta + "\\) \\(\\\\\\)";
 		res += "\\(\\mathbf{x < " + low + "}\\) ou \\(\\mathbf{x > " + high + "}\\)";

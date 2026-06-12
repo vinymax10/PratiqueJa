@@ -7,7 +7,7 @@ public class AreaPerimetroNivel3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(20);
+		int tipo = 1 + rand.nextInt(22);
 		delegar(instanciar(".nivel3package.Image" + tipo));
 	}
 }

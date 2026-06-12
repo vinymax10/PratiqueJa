@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel3package;
+﻿package matematica.avancado.logaritmo.nivel3package;
 
 import matematica.GeradorExercicio;
 
@@ -19,8 +19,8 @@ public class Expressao3 extends GeradorExercicio
 		String res = "Aplicando a propriedade do quociente: \\(\\\\\\)";
 		res += "\\(\\log_{" + b + "}\\!\\left(\\dfrac{x}{" + k + "}\\right) = " + n + "\\) \\(\\\\\\)";
 		res += "Convertendo para forma exponencial: \\(\\\\\\)";
-		res += "\\(\\dfrac{x}{" + k + "} = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\) \\(\\\\\\)";
-		res += "\\(x = " + (int) Math.pow(b, n) + " \\cdot " + k + " = \\mathbf{" + x + "}\\)";
+		res += "\\(\\dfrac{x}{" + k + "} = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\\\";
+		res += "x = " + (int) Math.pow(b, n) + " \\cdot " + k + " = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

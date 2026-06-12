@@ -514,6 +514,87 @@ public class ResolucaoPG
 		return an;
 	}
 
+	public static String resolucaoSomaInfinita(Racional a1, Racional q)
+	{
+		String resolucao = formulaSomaInfinita() + "\\\\";
+		resolucao += "a_1=" + a1.showDfrac() + ", q=" + q.showDfrac() + "\\\\";
+
+		Racional umMenosQ = new Racional(1).minus(q);
+		umMenosQ.fatoracao(2);
+
+		resolucao += "S_\\infty = \\dfrac{" + a1.showDfrac() + "}{1-" + q.showDfrac() + "}\\\\";
+		resolucao += "S_\\infty = \\dfrac{" + a1.showDfrac() + "}{" + umMenosQ.showDfrac() + "}\\\\";
+
+		Racional resultado = a1.div(umMenosQ);
+		resultado.fatoracao(2);
+
+		resolucao += "S_\\infty = " + a1.showDfrac() + " \\cdot " + umMenosQ.inverter().showDfrac();
+		resolucao += " = " + resultado.showDfrac();
+
+		return resolucao;
+	}
+
+	public static String resolucaoSomaInfinitaFrac(Racional a1, Racional q)
+	{
+		String resolucao = formulaSomaInfinita() + "\\\\";
+		resolucao += "a_1=" + a1.showDfrac() + "\\\\";
+		resolucao += "q=" + a(a1, q, 2).showDfrac() + " \\div " + a1.showDfrac() + " = "
+				+ a(a1, q, 2).showDfrac() + " \\cdot " + a1.inverter().showDfrac() + " = " + q.showDfrac() + "\\\\";
+
+		Racional umMenosQ = new Racional(1).minus(q);
+		umMenosQ.fatoracao(2);
+
+		resolucao += "S_\\infty = \\dfrac{" + a1.showDfrac() + "}{1 - (" + q.showDfrac() + ")}\\\\";
+		resolucao += "S_\\infty = \\dfrac{" + a1.showDfrac() + "}{" + umMenosQ.showDfrac() + "}\\\\";
+		resolucao += "S_\\infty = " + a1.showDfrac() + " \\cdot " + umMenosQ.inverter().showDfrac();
+
+		Racional resultado = a1.div(umMenosQ);
+		resultado.fatoracao(2);
+
+		resolucao += " = " + resultado.showDfrac();
+
+		return resolucao;
+	}
+
+	public static Racional somaInfinita(Racional a1, Racional q)
+	{
+		Racional umMenosQ = new Racional(1).minus(q);
+		umMenosQ.fatoracao(2);
+		Racional res = a1.div(umMenosQ);
+		res.fatoracao(2);
+		return res;
+	}
+
+	public static String resolucaoMediaGeometrica(Racional prev, Racional next, Racional mid)
+	{
+		String resolucao = ParCor.formula("a_k^2 = a_{k-1} \\cdot a_{k+1}") + "\\\\";
+
+		Racional produto = prev.mult(next);
+		produto.fatoracao(2);
+
+		resolucao += "a_k^2 = " + prev.showDfrac() + " \\cdot " + next.showDfrac();
+		resolucao += " = " + produto.showDfrac() + "\\\\";
+		resolucao += "a_k = \\sqrt{" + produto.showDfrac() + "}";
+		resolucao += " = " + mid.showDfrac();
+
+		return resolucao;
+	}
+
+	public static String resolucaoInterpolacao(Racional a1, Racional an, int k, Racional q)
+	{
+		String resolucao = ParCor.formula("q = \\sqrt[k+1]{\\dfrac{b}{a}}") + "\\\\";
+		resolucao += "a=" + a1.showDfrac() + ", b=" + an.showDfrac() + ", k=" + k + "\\\\";
+		resolucao += "q = \\sqrt[" + (k + 1) + "]{\\dfrac{" + an.showDfrac() + "}{" + a1.showDfrac() + "}}\\\\";
+
+		Racional razao = an.div(a1);
+		razao.fatoracao(2);
+
+		resolucao += "q = \\sqrt[" + (k + 1) + "]{" + razao.showDfrac() + "}";
+		resolucao += " = " + q.showDfrac();
+
+		return resolucao;
+	}
+
 	public static String formula()
 	{
 		return ParCor.formula("a_n=a_1 \\cdot q^{(n-1)}");
@@ -522,5 +603,10 @@ public class ResolucaoPG
 	public static String formulaSoma()
 	{
 		return ParCor.formula("S_n=\\dfrac{a_1 \\cdot ( q^n - 1)}{q-1}");
+	}
+
+	public static String formulaSomaInfinita()
+	{
+		return ParCor.formula("S_\\infty=\\dfrac{a_1}{1-q}");
 	}
 }

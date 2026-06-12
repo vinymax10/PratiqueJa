@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel2package;
+﻿package matematica.avancado.logaritmo.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -21,8 +21,8 @@ public class Expressao4 extends GeradorExercicio
 		String res = "Aplicando a propriedade do produto: \\(\\\\\\)";
 		res += "\\(\\log_{" + b + "}(x \\cdot " + k + ") = " + n + "\\) \\(\\\\\\)";
 		res += "Convertendo para forma exponencial: \\(\\\\\\)";
-		res += "\\(" + k + "x = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + (int) Math.pow(b, n) + "}{" + k + "} = \\mathbf{" + x + "}\\)";
+		res += "\\(" + k + "x = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\\\";
+		res += "x = \\dfrac{" + (int) Math.pow(b, n) + "}{" + k + "} = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

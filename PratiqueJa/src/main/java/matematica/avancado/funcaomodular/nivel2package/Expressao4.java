@@ -1,4 +1,4 @@
-package matematica.avancado.funcaomodular.nivel2package;
+﻿package matematica.avancado.funcaomodular.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -24,9 +24,9 @@ public class Expressao4 extends GeradorExercicio
 
 		String res  = "\\(|f| = |g| \\Rightarrow f = g\\) ou \\(f = -g\\): \\(\\\\\\)";
 		res += "Caso 1: \\(x + " + a + " = x + " + b + " \\Rightarrow " + a + " = " + b + "\\) (impossível) \\(\\\\\\)";
-		res += "Caso 2: \\(x + " + a + " = -(x + " + b + ")\\) \\(\\\\\\)";
-		res += "\\(x + " + a + " = -x - " + b + " \\Rightarrow 2x = -" + (a + b) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + x + "}\\)";
+		res += "Caso 2: \\(x + " + a + " = -(x + " + b + ")\\\\";
+		res += "x + " + a + " = -x - " + b + " \\Rightarrow 2x = -" + (a + b) + "\\\\";
+		res += "x = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel1package;
+﻿package matematica.avancado.funcaoexponencial.nivel1package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -20,8 +20,8 @@ public class Expressao6 extends GeradorExercicio
 		addParagrafo("Dada \\(f(x) = " + baseStr + "^x\\), calcule \\(f(" + n + ")\\).");
 
 		String res = "Substituindo \\(x = " + n + "\\): \\(\\\\\\)";
-		res += "\\(f(" + n + ") = " + baseStr + "^{" + n + "} = \\dfrac{1^{" + n + "}}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\) \\(\\\\\\)";
-		res += "\\(f(" + n + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+		res += "\\(f(" + n + ") = " + baseStr + "^{" + n + "} = \\dfrac{1^{" + n + "}}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\\\";
+		res += "f(" + n + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 
 		gerarAlternativas(resultado);
 		setResolucao(res);

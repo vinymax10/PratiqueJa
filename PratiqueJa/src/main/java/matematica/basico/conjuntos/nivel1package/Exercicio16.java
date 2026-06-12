@@ -1,4 +1,4 @@
-package matematica.basico.conjuntos.nivel1package;
+﻿package matematica.basico.conjuntos.nivel1package;
 
 import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.Conjunto;
@@ -21,8 +21,8 @@ public class Exercicio16 extends GeradorExercicio
 		gerarAlternativasInteiras(correto);
 
 		String res = "O complementar \\(A^c\\) reúne todos os elementos de \\(U\\) que não estão em \\(A\\). \\(\\\\\\)";
-		res += "\\(A^c = U - A = " + comp + "\\) \\(\\\\\\)";
-		res += "\\(|A^c| = " + correto + "\\)";
+		res += "\\(A^c = U - A = " + comp + "\\\\";
+		res += "|A^c| = " + correto + "\\)";
 		setResolucao(res);
 	}
 }

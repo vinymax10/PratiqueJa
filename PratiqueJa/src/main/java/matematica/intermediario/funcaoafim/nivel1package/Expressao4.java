@@ -1,4 +1,4 @@
-package matematica.intermediario.funcaoafim.nivel1package;
+﻿package matematica.intermediario.funcaoafim.nivel1package;
 
 import matematica.GeradorExercicio;
 
@@ -26,8 +26,8 @@ public class Expressao4 extends GeradorExercicio
 		}
 		else if(a == -1)
 		{
-			res += "\\(-x = " + menosB + "\\) \\(\\\\\\)";
-			res += "\\(x = \\mathbf{" + x0 + "}\\)";
+			res += "\\(-x = " + menosB + "\\\\";
+			res += "x = \\mathbf{" + x0 + "}\\)";
 		}
 		else
 		{

@@ -5,17 +5,17 @@ import matematica.GeradorExercicio;
 public class RegraTres2 extends GeradorExercicio
 {
 	private static final String[] TEXTOS_DESCONTO = {
-		"Uma peça de roupa custa R\\(\\$\\)$V,00 e está com $P% de desconto. Qual o preço final?",
-		"Um produto custava R\\(\\$\\)$V,00 e teve $P% de desconto. Quanto custa agora?",
-		"Um eletrodoméstico custa R\\(\\$\\)$V,00. O vendedor oferece $P% de desconto. Qual o valor a pagar?",
-		"Uma passagem aérea custa R\\(\\$\\)$V,00. Com $P% de desconto antecipado, qual o preço final?",
+		"Uma peça de roupa custa R$$V,00 e está com $P% de desconto. Qual o preço final?",
+		"Um produto custava R$$V,00 e teve $P% de desconto. Quanto custa agora?",
+		"Um eletrodoméstico custa R$$V,00. O vendedor oferece $P% de desconto. Qual o valor a pagar?",
+		"Uma passagem aérea custa R$$V,00. Com $P% de desconto antecipado, qual o preço final?",
 	};
 
 	private static final String[] TEXTOS_AUMENTO = {
-		"Um produto custa R\\(\\$\\)$V,00 e sofreu um reajuste de $P%. Qual o novo preço?",
-		"O salário de R\\(\\$\\)$V,00 foi reajustado em $P%. Qual o novo salário?",
-		"Um aluguel de R\\(\\$\\)$V,00 sofreu aumento de $P%. Qual o novo valor?",
-		"Um produto custava R\\(\\$\\)$V,00 e teve $P% de aumento. Quanto custa agora?",
+		"Um produto custa R$$V,00 e sofreu um reajuste de $P%. Qual o novo preço?",
+		"O salário de R$$V,00 foi reajustado em $P%. Qual o novo salário?",
+		"Um aluguel de R$$V,00 sofreu aumento de $P%. Qual o novo valor?",
+		"Um produto custava R$$V,00 e teve $P% de aumento. Quanto custa agora?",
 	};
 
 	@Override

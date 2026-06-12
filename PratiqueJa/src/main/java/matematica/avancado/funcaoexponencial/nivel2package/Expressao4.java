@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel2package;
+﻿package matematica.avancado.funcaoexponencial.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -17,8 +17,8 @@ public class Expressao4 extends GeradorExercicio
 
 		String res = "O modelo de crescimento é \\(N(t) = N_0 \\cdot 2^t\\). \\(\\\\\\)";
 		res += "Com \\(N_0 = " + n0 + "\\) e \\(t = " + t + "\\): \\(\\\\\\)";
-		res += "\\(N(" + t + ") = " + n0 + " \\cdot 2^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(2, t) + "\\) \\(\\\\\\)";
-		res += "\\(N(" + t + ") = \\mathbf{" + resultado + "}\\) bactérias";
+		res += "\\(N(" + t + ") = " + n0 + " \\cdot 2^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(2, t) + "\\\\";
+		res += "N(" + t + ") = \\mathbf{" + resultado + "}\\) bactérias";
 
 		gerarAlternativas("" + resultado);
 		setResolucao(res);

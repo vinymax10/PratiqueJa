@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel2package;
+﻿package matematica.avancado.funcaoexponencial.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -23,10 +23,10 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Resolva a equação \\(" + a + "^{" + expo1 + "} = " + a + "^{" + expo2 + "}\\).");
 
 		String res = "As bases são iguais, então igualamos os expoentes: \\(\\\\\\)";
-		res += "\\(" + expo1 + " = " + expo2 + "\\) \\(\\\\\\)";
-		res += "\\(" + m1 + "x - " + m2 + "x = " + c2 + " - " + c1 + "\\) \\(\\\\\\)";
-		res += "\\(" + (m1 - m2) + "x = " + ((m1 - m2) * x) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + x + "}\\)";
+		res += "\\(" + expo1 + " = " + expo2 + "\\\\";
+		res += "" + m1 + "x - " + m2 + "x = " + c2 + " - " + c1 + "\\\\";
+		res += "" + (m1 - m2) + "x = " + ((m1 - m2) * x) + "\\\\";
+		res += "x = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

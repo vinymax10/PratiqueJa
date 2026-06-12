@@ -1,4 +1,4 @@
-package matematica.intermediario.expressaoalgebrica.nivel3package;
+﻿package matematica.intermediario.expressaoalgebrica.nivel3package;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -145,8 +145,8 @@ public class Expressao1 extends GeradorExercicio
 		if(termosVar.length() > 0)
 			res += "Termos em \\(" + variavel + "\\): \\(" + termosVar + "\\) \\(\\\\\\)";
 		if(termosCte.length() > 0)
-			res += "Constantes: \\(" + termosCte + "\\) \\(\\\\\\)";
-		res += "\\(" + resultadoCorreto + "\\)";
+			res += "Constantes: \\(" + termosCte + "\\\\";
+		res += "" + resultadoCorreto + "\\)";
 		setResolucao(res);
 	}
 

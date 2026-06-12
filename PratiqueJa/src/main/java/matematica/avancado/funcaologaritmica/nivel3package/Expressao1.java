@@ -1,4 +1,4 @@
-package matematica.avancado.funcaologaritmica.nivel3package;
+﻿package matematica.avancado.funcaologaritmica.nivel3package;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,8 @@ public class Expressao1 extends GeradorExercicio
 		String res = "Base \\(" + baseStr + " < 1\\): função \\(\\mathbf{decrescente}\\), "
 			+ "o sentido da desigualdade \\(\\mathbf{inverte}\\) ao remover o logaritmo. \\(\\\\\\)";
 		res += "\\(\\log_{\\frac{1}{" + den + "}}(x) \\leq " + rhs
-			+ " = \\log_{\\frac{1}{" + den + "}} " + xMin + "\\) \\(\\\\\\)";
-		res += "\\(\\Leftrightarrow x \\geq " + xMin + "\\) (sentido invertido) \\(\\\\\\)";
+			+ " = \\log_{\\frac{1}{" + den + "}} " + xMin + "\\\\";
+		res += "\\Leftrightarrow x \\geq " + xMin + "\\) (sentido invertido) \\(\\\\\\)";
 		res += "Solução: \\(\\mathbf{x \\geq " + xMin + "}\\)";
 		setResolucao(res);
 	}

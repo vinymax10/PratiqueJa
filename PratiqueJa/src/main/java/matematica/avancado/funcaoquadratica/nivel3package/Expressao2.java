@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoquadratica.nivel3package;
+﻿package matematica.avancado.funcaoquadratica.nivel3package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
@@ -34,8 +34,8 @@ public class Expressao2 extends GeradorExercicio
 		String x2s = "" + x2;
 
 		String res = "Expandindo \\(f(x) = " + fatorada + "\\): \\(\\\\\\)";
-		res += "\\(f(x) = " + aPref + "[x^2 - (" + x1 + " + " + x2 + ")x + (" + x1 + ") \\cdot (" + x2 + ")]\\) \\(\\\\\\)";
-		res += "\\(f(x) = " + aPref + "[x^2" + Auxiliar.getNumber(-(x1 + x2), "x", false)
+		res += "\\(f(x) = " + aPref + "[x^2 - (" + x1 + " + " + x2 + ")x + (" + x1 + ") \\cdot (" + x2 + ")]\\\\";
+		res += "f(x) = " + aPref + "[x^2" + Auxiliar.getNumber(-(x1 + x2), "x", false)
 			+ Auxiliar.getNumber(prod, "", false) + "]\\) \\(\\\\\\)";
 		res += "Portanto \\(c = a \\cdot x_1 \\cdot x_2 = " + a + " \\cdot (" + x1s + ") \\cdot (" + x2s + ") = "
 			+ (a * prod) + "\\). \\(\\\\\\)";

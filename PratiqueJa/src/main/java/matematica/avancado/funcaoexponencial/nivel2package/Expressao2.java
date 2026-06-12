@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel2package;
+﻿package matematica.avancado.funcaoexponencial.nivel2package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -24,10 +24,10 @@ public class Expressao2 extends GeradorExercicio
 		String res = "Reescrevemos ambos os lados com base \\(" + p + "\\): \\(\\\\\\)";
 		res += "\\(" + leftBase + " = " + p + "^{" + m + "}\\) \\(\\quad\\) e \\(\\quad\\)";
 		res += "\\(" + rightVal + " = " + p + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "Substituindo: \\((" + p + "^{" + m + "})^x = " + p + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "\\(" + p + "^{" + m + "x} = " + p + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "Igualando os expoentes: \\(" + m + "x = " + n + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+		res += "Substituindo: \\((" + p + "^{" + m + "})^x = " + p + "^{" + n + "}\\\\";
+		res += "" + p + "^{" + m + "x} = " + p + "^{" + n + "}\\) \\(\\\\\\)";
+		res += "Igualando os expoentes: \\(" + m + "x = " + n + "\\\\";
+		res += "x = \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 
 		gerarAlternativas(resultado);
 		setResolucao(res);

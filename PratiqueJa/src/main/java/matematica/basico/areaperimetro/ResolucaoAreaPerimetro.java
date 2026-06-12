@@ -234,4 +234,9 @@ public class ResolucaoAreaPerimetro
 		resolucaoLatex+=(baseMenor + baseMaior) * altura/2;
 		return resolucaoLatex;
 	}
+
+	public static String formulaLadoLosango()
+	{
+		return ParCor.formula("l=\\sqrt{\\left(\\dfrac{D}{2}\\right)^2+\\left(\\dfrac{d}{2}\\right)^2}");
+	}
 }

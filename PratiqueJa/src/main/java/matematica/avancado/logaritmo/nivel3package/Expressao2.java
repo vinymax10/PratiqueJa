@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel3package;
+﻿package matematica.avancado.logaritmo.nivel3package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -24,8 +24,8 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("\\(\\log_{" + leftBase + "} " + rightArg + " = \\,?\\)");
 
 		String res = "Fórmula de mudança de base com base auxiliar \\(" + p + "\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + leftBase + "} " + rightArg + " = \\dfrac{\\log_{" + p + "} " + rightArg + "}{\\log_{" + p + "} " + leftBase + "}\\) \\(\\\\\\)";
-		res += "\\(= \\dfrac{\\log_{" + p + "} " + p + "^{" + n + "}}{\\log_{" + p + "} " + p + "^{" + m + "}} = \\dfrac{" + n + "}{" + m + "}\\) \\(\\\\\\)";
+		res += "\\(\\log_{" + leftBase + "} " + rightArg + " = \\dfrac{\\log_{" + p + "} " + rightArg + "}{\\log_{" + p + "} " + leftBase + "}\\\\";
+		res += "= \\dfrac{\\log_{" + p + "} " + p + "^{" + n + "}}{\\log_{" + p + "} " + p + "^{" + m + "}} = \\dfrac{" + n + "}{" + m + "}\\) \\(\\\\\\)";
 		if (resultado.denominador != 1)
 			res += "\\(= " + resultado.showDfrac() + " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 		else

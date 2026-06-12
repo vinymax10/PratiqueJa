@@ -1,4 +1,4 @@
-package matematica.intermediario.funcaoafim.nivel2package;
+﻿package matematica.intermediario.funcaoafim.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -29,9 +29,9 @@ public class Expressao1 extends GeradorExercicio
 
 		String res = "Taxa de variação: \\(a = " + a + "\\) (R$/h), taxa fixa: \\(b = " + b + "\\). \\(\\\\\\)";
 		res += "Modelo: \\(f(x) = " + a + "x + " + b + "\\). Igualamos a \\(" + k + "\\): \\(\\\\\\)";
-		res += "\\(" + a + "x + " + b + " = " + k + "\\) \\(\\\\\\)";
-		res += "\\(" + a + "x = " + (k - b) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) horas";
+		res += "\\(" + a + "x + " + b + " = " + k + "\\\\";
+		res += "" + a + "x = " + (k - b) + "\\\\";
+		res += "x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) horas";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);
@@ -56,9 +56,9 @@ public class Expressao1 extends GeradorExercicio
 		int bMinusK = b - k;
 		String res = "Taxa de variação: \\(a = -" + a + "\\) (°C/min), temp. inicial: \\(b = " + b + "\\). \\(\\\\\\)";
 		res += "Modelo: \\(T(x) = -" + a + "x + " + b + "\\). Igualamos a \\(" + k + "\\): \\(\\\\\\)";
-		res += "\\(-" + a + "x + " + b + " = " + k + "\\) \\(\\\\\\)";
-		res += "\\(-" + a + "x = " + (k - b) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + bMinusK + "}{" + a + "} = \\mathbf{" + x + "}\\) minutos";
+		res += "\\(-" + a + "x + " + b + " = " + k + "\\\\";
+		res += "-" + a + "x = " + (k - b) + "\\\\";
+		res += "x = \\dfrac{" + bMinusK + "}{" + a + "} = \\mathbf{" + x + "}\\) minutos";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);
@@ -77,9 +77,9 @@ public class Expressao1 extends GeradorExercicio
 
 		String res = "Taxa de poupança: \\(a = " + a + "\\) (R$/mês), saldo inicial: \\(b = " + b + "\\). \\(\\\\\\)";
 		res += "Modelo: \\(f(x) = " + a + "x + " + b + "\\). Igualamos a \\(" + k + "\\): \\(\\\\\\)";
-		res += "\\(" + a + "x + " + b + " = " + k + "\\) \\(\\\\\\)";
-		res += "\\(" + a + "x = " + (k - b) + "\\) \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) meses";
+		res += "\\(" + a + "x + " + b + " = " + k + "\\\\";
+		res += "" + a + "x = " + (k - b) + "\\\\";
+		res += "x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) meses";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

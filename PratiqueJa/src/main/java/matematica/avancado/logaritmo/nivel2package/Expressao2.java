@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel2package;
+﻿package matematica.avancado.logaritmo.nivel2package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -24,8 +24,8 @@ public class Expressao2 extends GeradorExercicio
 
 		String res = "Reconhecemos \\(" + leftBase + " = " + p + "^{" + m + "}\\) e \\(" + rightArg + " = " + p + "^{" + n + "}\\). \\(\\\\\\)";
 		res += "Pela propriedade \\(\\log_{b^c} a = \\dfrac{1}{c} \\cdot \\log_b a\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + p + "^{" + m + "}} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot \\log_{" + p + "} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot " + n + "\\) \\(\\\\\\)";
-		res += "\\(= \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+		res += "\\(\\log_{" + p + "^{" + m + "}} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot \\log_{" + p + "} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot " + n + "\\\\";
+		res += "= \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 
 		gerarAlternativas(resultado);
 		setResolucao(res);

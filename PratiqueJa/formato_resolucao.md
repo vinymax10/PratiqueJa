@@ -52,6 +52,40 @@ res += "\\(" + resultado + "\\)";
 
 ---
 
+## Sequência de passos puramente matemáticos — bloco único
+
+Quando múltiplos passos consecutivos são **todos matemáticos** (sem texto entre eles), **não** fechar e reabrir `\(…\)` a cada linha. Usar um único bloco com `\\` (Java: `\\\\`) para separar os passos:
+
+```java
+// ERRADO — abre e fecha desnecessariamente entre cada passo
+res += "\\(formula_geral\\) \\(\\\\\\)";
+res += "\\(formula_substituida\\) \\(\\\\\\)";
+res += "\\(resultado\\)";
+
+// CORRETO — um único bloco, \\ entre os passos, \) só no final
+res += "\\(formula_geral \\\\";
+res += "formula_substituida \\\\";
+res += "resultado\\)";
+```
+
+A regra de quando fechar `\)`:
+
+| Próximo segmento | Ação |
+|---|---|
+| Outro passo matemático | Não fechar — usar `\\\\` e continuar no mesmo bloco |
+| Texto ou nova frase | Fechar `\\)`, depois `\\(\\\\\\)` como separador |
+
+**Why:** `\\(\\\\\\)` é um separador texto↔math. Usá-lo entre dois blocos math introduz um "bloco vazio" desnecessário e dificulta a leitura do código.
+
+**Exceção:** se houver **texto no meio** (ex.: "Para k = 2, temos..."), os blocos math ficam separados naturalmente:
+```java
+res += "\\(propriedade_geral\\) \\(\\\\\\)";   // fecha — texto vem a seguir
+res += "Para k = 2, temos \\(a_2 = ...\\): \\(\\\\\\)";  // texto + inline math
+res += "\\(calculo_especifico = resultado\\)";  // reabre — só math aqui
+```
+
+---
+
 ## Quando quebrar vs. quando manter na mesma linha
 
 Só quebrar se a expressão for longa. Expressões curtas ficam numa única linha:
@@ -305,6 +339,7 @@ resolucaoLatex += "\\(\\\\\\)";
 | Efeito desejado | Código Java |
 |---|---|
 | Quebra entre texto e fórmula (blocos separados) | `\\(\\\\\\)` |
+| Quebra entre passos matemáticos no mesmo bloco | `\\\\ ` no final da linha (sem fechar `\\)`) |
 | Quebra dentro de `\(…\)` com `=` ao final | `= \\\\ ` (espaço depois) |
 | Inline math simples | `\\(expressão\\)` |
 | `\dfrac{n}{d}` (fração) | `resultado.toStringLatex()` |

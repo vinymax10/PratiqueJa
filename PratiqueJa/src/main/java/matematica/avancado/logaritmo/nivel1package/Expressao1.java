@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel1package;
+﻿package matematica.avancado.logaritmo.nivel1package;
 
 import matematica.GeradorExercicio;
 
@@ -16,9 +16,9 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("\\(\\log_{" + c + "} " + a + " = \\,?\\)");
 
 		String res = "Pela definição \\(\\log_b a = x \\iff b^x = a\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + c + "} " + a + " = x \\Rightarrow " + c + "^x = " + a + "\\) \\(\\\\\\)";
-		res += "\\(" + c + "^x = " + c + "^{" + x + "}\\) \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + x + "}\\)";
+		res += "\\(\\log_{" + c + "} " + a + " = x \\Rightarrow " + c + "^x = " + a + "\\\\";
+		res += "" + c + "^x = " + c + "^{" + x + "}\\\\";
+		res += "x = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

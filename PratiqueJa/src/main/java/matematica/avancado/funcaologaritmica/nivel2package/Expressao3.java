@@ -1,4 +1,4 @@
-package matematica.avancado.funcaologaritmica.nivel2package;
+﻿package matematica.avancado.funcaologaritmica.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -16,8 +16,8 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Resolva a equação: \\(\\log_{" + a + "}(x) = " + n + "\\)");
 
 		String res = "Converter para forma exponencial: \\(\\\\\\)";
-		res += "\\(\\log_{" + a + "}(x) = " + n + " \\Leftrightarrow x = " + a + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + x + "}\\)";
+		res += "\\(\\log_{" + a + "}(x) = " + n + " \\Leftrightarrow x = " + a + "^{" + n + "}\\\\";
+		res += "x = \\mathbf{" + x + "}\\)";
 
 		gerarAlternativas("" + x);
 		setResolucao(res);

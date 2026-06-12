@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoquadratica.nivel3package;
+﻿package matematica.avancado.funcaoquadratica.nivel3package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
@@ -39,18 +39,18 @@ public class Expressao1 extends GeradorExercicio
 		String res;
 		if(pedirSoma)
 		{
-			res = "Pela relação de Vieta: \\(x_1 + x_2 = \\dfrac{-b}{a}\\) \\(\\\\\\)";
-			res += "\\(a = " + a + ", \\quad b = " + b + "\\) \\(\\\\\\)";
-			res += "\\(x_1 + x_2 = \\dfrac{-(" + b + ")}{" + a + "} = \\dfrac{" + (-b) + "}{" + a + "}";
+			res = "Pela relação de Vieta: \\(x_1 + x_2 = \\dfrac{-b}{a}\\\\";
+			res += "a = " + a + ", \\quad b = " + b + "\\\\";
+			res += "x_1 + x_2 = \\dfrac{-(" + b + ")}{" + a + "} = \\dfrac{" + (-b) + "}{" + a + "}";
 			if(resultado.denominador != 1)
 				res += " = " + resultado.showDfrac();
 			res += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 		}
 		else
 		{
-			res = "Pela relação de Vieta: \\(x_1 \\cdot x_2 = \\dfrac{c}{a}\\) \\(\\\\\\)";
-			res += "\\(a = " + a + ", \\quad c = " + c + "\\) \\(\\\\\\)";
-			res += "\\(x_1 \\cdot x_2 = \\dfrac{" + c + "}{" + a + "}";
+			res = "Pela relação de Vieta: \\(x_1 \\cdot x_2 = \\dfrac{c}{a}\\\\";
+			res += "a = " + a + ", \\quad c = " + c + "\\\\";
+			res += "x_1 \\cdot x_2 = \\dfrac{" + c + "}{" + a + "}";
 			if(resultado.denominador != 1)
 				res += " = " + resultado.showDfrac();
 			res += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";

@@ -1,4 +1,4 @@
-package matematica.avancado.logaritmo.nivel3package;
+﻿package matematica.avancado.logaritmo.nivel3package;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,8 @@ public class Expressao5 extends GeradorExercicio
 			+ "que um de magnitude \\(" + m2 + "\\)? Use \\(M = \\log\\!\\left(\\dfrac{A}{A_0}\\right)\\).");
 
 		String res = "Sendo \\(M_1 = " + m1 + "\\) e \\(M_2 = " + m2 + "\\): \\(\\\\\\)";
-		res += "\\(M_1 - M_2 = \\log A_1 - \\log A_2 = \\log\\!\\left(\\dfrac{A_1}{A_2}\\right) = " + k + "\\) \\(\\\\\\)";
-		res += "\\(\\dfrac{A_1}{A_2} = 10^{" + k + "} = \\mathbf{" + resultado + "}\\) vezes mais intenso";
+		res += "\\(M_1 - M_2 = \\log A_1 - \\log A_2 = \\log\\!\\left(\\dfrac{A_1}{A_2}\\right) = " + k + "\\\\";
+		res += "\\dfrac{A_1}{A_2} = 10^{" + k + "} = \\mathbf{" + resultado + "}\\) vezes mais intenso";
 
 		gerarAlternativas("" + resultado);
 		setResolucao(res);
@@ -47,9 +47,9 @@ public class Expressao5 extends GeradorExercicio
 			+ "Use \\(\\text{pH} = -\\log[\\text{H}^+]\\).");
 
 		String res = "Substituindo na fórmula: \\(\\\\\\)";
-		res += "\\(\\text{pH} = -\\log(10^{-" + n + "})\\) \\(\\\\\\)";
-		res += "\\(= -(-" + n + ") \\cdot \\log 10 = " + n + " \\cdot 1\\) \\(\\\\\\)";
-		res += "\\(\\text{pH} = \\mathbf{" + n + "}\\)";
+		res += "\\(\\text{pH} = -\\log(10^{-" + n + "})\\\\";
+		res += "= -(-" + n + ") \\cdot \\log 10 = " + n + " \\cdot 1\\\\";
+		res += "\\text{pH} = \\mathbf{" + n + "}\\)";
 
 		gerarAlternativas("" + n);
 		setResolucao(res);
@@ -71,8 +71,8 @@ public class Expressao5 extends GeradorExercicio
 			+ "Qual é o nível sonoro em dB? Use \\(\\text{dB} = 10 \\cdot \\log\\!\\left(\\dfrac{I}{I_0}\\right)\\).");
 
 		String res = "Substituindo \\(I/I_0 = 10^{" + n + "}\\): \\(\\\\\\)";
-		res += "\\(\\text{dB} = 10 \\cdot \\log(10^{" + n + "}) = 10 \\cdot " + n + " \\cdot \\log 10 = 10 \\cdot " + n + "\\) \\(\\\\\\)";
-		res += "\\(\\text{dB} = \\mathbf{" + db + "}\\,\\text{dB}\\)";
+		res += "\\(\\text{dB} = 10 \\cdot \\log(10^{" + n + "}) = 10 \\cdot " + n + " \\cdot \\log 10 = 10 \\cdot " + n + "\\\\";
+		res += "\\text{dB} = \\mathbf{" + db + "}\\,\\text{dB}\\)";
 
 		embaralharEAdicionarAlternativas("" + db, dist);
 		setResolucao(res);

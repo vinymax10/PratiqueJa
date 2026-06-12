@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoquadratica.nivel1package;
+﻿package matematica.avancado.funcaoquadratica.nivel1package;
 
 import matematica.Auxiliar;
 import matematica.GeradorExercicio;
@@ -24,9 +24,9 @@ public class Expressao2 extends GeradorExercicio
 		int bSq = b * b;
 		int term4ac = -4 * a * c;
 
-		String res = "\\(\\Delta = b^2 - 4ac\\) \\(\\\\\\)";
-		res += "\\(\\Delta = (" + b + ")^2 - 4 \\cdot (" + a + ") \\cdot (" + c + ")\\) \\(\\\\\\)";
-		res += "\\(\\Delta = " + bSq + Auxiliar.getNumber(term4ac, "", false) + " = \\mathbf{" + delta + "}\\)";
+		String res = "\\(\\Delta = b^2 - 4ac\\\\";
+		res += "\\Delta = (" + b + ")^2 - 4 \\cdot (" + a + ") \\cdot (" + c + ")\\\\";
+		res += "\\Delta = " + bSq + Auxiliar.getNumber(term4ac, "", false) + " = \\mathbf{" + delta + "}\\)";
 
 		gerarAlternativas("" + delta);
 		setResolucao(res);

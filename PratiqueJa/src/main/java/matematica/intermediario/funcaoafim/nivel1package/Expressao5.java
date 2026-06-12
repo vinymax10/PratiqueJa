@@ -1,4 +1,4 @@
-package matematica.intermediario.funcaoafim.nivel1package;
+﻿package matematica.intermediario.funcaoafim.nivel1package;
 
 import matematica.GeradorExercicio;
 
@@ -33,8 +33,8 @@ public class Expressao5 extends GeradorExercicio
 			if(b > 0)
 				res += "\\(-x = " + k + " - " + b + " = " + kmb + "\\) \\(\\\\\\)";
 			else
-				res += "\\(-x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\) \\(\\\\\\)";
-			res += "\\(x = \\mathbf{" + xResult + "}\\)";
+				res += "\\(-x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\\\";
+			res += "x = \\mathbf{" + xResult + "}\\)";
 		}
 		else
 		{

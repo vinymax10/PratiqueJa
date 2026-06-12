@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel1package;
+﻿package matematica.avancado.funcaoexponencial.nivel1package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;
@@ -18,8 +18,8 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Dada \\(f(x) = " + a + "^x\\), calcule \\(f(" + negX + ")\\).");
 
 		String res = "Usando a propriedade \\(a^{-n} = \\dfrac{1}{a^n}\\): \\(\\\\\\)";
-		res += "\\(f(" + negX + ") = " + a + "^{" + negX + "} = \\dfrac{1}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\) \\(\\\\\\)";
-		res += "\\(f(" + negX + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+		res += "\\(f(" + negX + ") = " + a + "^{" + negX + "} = \\dfrac{1}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\\\";
+		res += "f(" + negX + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)";
 
 		gerarAlternativas(resultado);
 		setResolucao(res);

@@ -9,7 +9,7 @@ public class TextoRegraTresSimples
 {
 	static ProblemaRegraTres  problemas[]= {
 	new ProblemaRegraTres(
-	"Se $a livros custam R\\(\\$\\) $b,00, quanto custam $c livros no mesmo preço unitário?",
+	"Se $a livros custam R$ $b,00, quanto custam $c livros no mesmo preço unitário?",
 	"Livros","Preço","",TipoProporcao.ABCX,1,50),
 	new ProblemaRegraTres(
 	"Uma máquina imprime $a páginas em $b minuto. Quantas páginas ela imprimirá em $c minutos?",
@@ -21,13 +21,13 @@ public class TextoRegraTresSimples
 	"Se a água de uma piscina aumenta sua altura em $a cm a cada $b minutos, quanto tempo será necessário para que a altura da água aumente em $c cm?",
 	"Cm","Minutos","",TipoProporcao.ABCX,1,10),
 	new ProblemaRegraTres(
-	"Se $a Kg de arroz custam R\\(\\$\\) $b,00, quanto custam $c kg de arroz?",
+	"Se $a Kg de arroz custam R$ $b,00, quanto custam $c kg de arroz?",
 	"Kg","Preço","",TipoProporcao.ABCX,1,4),
 	new ProblemaRegraTres(
 	"Uma empresa tem $a funcionários para produzir $b unidades de um produto por dia. Quantos funcionários seriam necessários para produzir $c unidades por dia?",
 	"Funcionários","Unidades","",TipoProporcao.ABXC,1,100),
 	new ProblemaRegraTres(
-	"Um trabalhador ganha R\\(\\$\\) $a,00 por $b horas. Quanto ele receberia se trabalhasse $c horas, mantendo a mesma taxa?",
+	"Um trabalhador ganha R$ $a,00 por $b horas. Quanto ele receberia se trabalhasse $c horas, mantendo a mesma taxa?",
 	"Valor","Hora","",TipoProporcao.ABXC,50,1),
 	new ProblemaRegraTres(
 	"Se $a pães pesam $b gramas (g), qual é o peso de $c pães?",
@@ -48,13 +48,13 @@ public class TextoRegraTresSimples
 	"Em uma escola, $a alunos leem $b páginas por semana. Quantas páginas serão lidas por $c alunos em uma semana?",
 	"Alunos","Páginas","",TipoProporcao.ABCX,1,50),
 	new ProblemaRegraTres(
-	"Se $a kg de açúcar custam R\\(\\$\\)$b,00, quanto custariam $c kg de açúcar?",
+	"Se $a kg de açúcar custam R$$b,00, quanto custariam $c kg de açúcar?",
 	"kg","Valor","",TipoProporcao.ABCX,1,1),
 	new ProblemaRegraTres(
 	"Uma receita para $a pessoas leva $b gramas (g), de arroz. Quanto de arroz é necessário para $c pessoas?",
 	"Pessoas","Gramas","",TipoProporcao.ABCX,1,50),
 	new ProblemaRegraTres(
-	"Se $a metros de fio elétrico custam R\\(\\$\\)$b,00, quanto custa $c metros de fio elétrico?",
+	"Se $a metros de fio elétrico custam R$$b,00, quanto custa $c metros de fio elétrico?",
 	"Metros","Valor","",TipoProporcao.ABCX,1,2),
 	new ProblemaRegraTres(
 	"Se $a pedreiros constroem $b \\(m^2\\) de parede por dia, quantos pedreiros serão necessários para construir $c \\(m^2\\) por dia?",
@@ -72,19 +72,19 @@ public class TextoRegraTresSimples
 	"Em uma fábrica, $a máquinas produzem $b peças por hora. Quantas peças serão produzidas por hora utilizando $c máquinas?",
 	"Máquinas","Peças","",TipoProporcao.ABCX,1,100),
 	new ProblemaRegraTres(
-	"Se $a kg de bolo custam R\\(\\$\\)$b,00, qual é o preço de $c kg de bolo?",
+	"Se $a kg de bolo custam R$$b,00, qual é o preço de $c kg de bolo?",
 	"Kg","Valor","",TipoProporcao.ABCX,1,15),
 	new ProblemaRegraTres(
 	"$a livros são lidos em $b dias. Quantos livros seriam lidos em $c dias, mantendo o mesmo ritmo?",
 	"Livro","Dias","",TipoProporcao.ABXC,1,5),
 	new ProblemaRegraTres(
-	"Se $a kg de maçãs custam R\\(\\$\\)$b,00, qual seria o preço de $c kg de maçãs?",
+	"Se $a kg de maçãs custam R$$b,00, qual seria o preço de $c kg de maçãs?",
 	"Kg","Valor","",TipoProporcao.ABCX,1,5),
 	new ProblemaRegraTres(
 	"Em uma empresa, $a empregados produzem $b peças por dia. Quantos empregados são necessários para produzir $c peças por dia?",
 	"Empregados","Peças","",TipoProporcao.ABXC,1,100),
 	new ProblemaRegraTres(
-	"Se $a litros de suco de laranja custam R\\(\\$\\)$b,00, qual seria o preço de $c litros de suco de laranja?",
+	"Se $a litros de suco de laranja custam R$$b,00, qual seria o preço de $c litros de suco de laranja?",
 	"Litros","Valor","",TipoProporcao.ABCX,1,5),
 	new ProblemaRegraTres(
 	"Se $a metros de fita decorativa são suficientes para decorar $b árvores, quantos metros seriam necessários para decorar $c árvores?",
@@ -96,7 +96,7 @@ public class TextoRegraTresSimples
 	"Em uma plantação, $a árvores produzem $b maçãs por ano. Quantas maçãs seriam produzidas por $c árvores ao ano?",
 	"Árvores","Maçãs","",TipoProporcao.ABCX,1,300),
 	new ProblemaRegraTres(
-	"Se $a lápis custam R\\(\\$\\)$b,00, quanto custariam $c lápis?",
+	"Se $a lápis custam R$$b,00, quanto custariam $c lápis?",
 	"Lápis","Valor","",TipoProporcao.ABCX,1,1),
 	new ProblemaRegraTres(
 	"Se uma máquina imprime $a páginas em $b minutos, quantas páginas serão impressas em $c minutos de trabalho contínuo?",
@@ -114,13 +114,13 @@ public class TextoRegraTresSimples
 	"Se um carro percorre $a km com $b litros de combustível, quantos quilômetros esse carro percorreria com $c litros?",
 	"Km","Litros","",TipoProporcao.ABXC,30,1),
 	new ProblemaRegraTres(
-	"Se $a biscoitos custam R\\(\\$\\)$b,00, quanto custariam $c biscoitos?",
+	"Se $a biscoitos custam R$$b,00, quanto custariam $c biscoitos?",
 	"Biscoitos","Valor","",TipoProporcao.ABCX,1,1),
 	new ProblemaRegraTres(
 	"Em uma fábrica, $a máquinas produzem $b peças por hora. Quantas peças serão produzidas por $c máquinas em 1 hora?",
 	"Máquinas","Peças","",TipoProporcao.ABCX,1,100),
 	new ProblemaRegraTres(
-	"Se $a horas de trabalho de um mecânico custam R\\(\\$\\)$b,00, quanto custariam $c horas de trabalho?",
+	"Se $a horas de trabalho de um mecânico custam R$$b,00, quanto custariam $c horas de trabalho?",
 	"Horas","Valor","",TipoProporcao.ABCX,1,30),
 	new ProblemaRegraTres(
 	"Se $a kg, de feijão são suficientes para $b refeições, quantas kg de feijão seriam necessários para $c refeições?",

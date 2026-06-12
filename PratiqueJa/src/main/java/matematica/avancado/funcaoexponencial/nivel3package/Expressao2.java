@@ -1,4 +1,4 @@
-package matematica.avancado.funcaoexponencial.nivel3package;
+﻿package matematica.avancado.funcaoexponencial.nivel3package;
 
 import matematica.GeradorExercicio;
 
@@ -36,9 +36,9 @@ public class Expressao2 extends GeradorExercicio
 			+ "Use \\((" + baseStr + ")^{" + t + "} = " + decStr + "\\).");
 
 		String res = "O montante é dado por \\(M = C \\cdot (1 + i)^t\\): \\(\\\\\\)";
-		res += "\\(M = " + C + " \\cdot (1 + 0{,}" + (p < 10 ? "0" : "") + p + ")^{" + t + "}\\) \\(\\\\\\)";
-		res += "\\(M = " + C + " \\cdot (" + baseStr + ")^{" + t + "}\\) \\(\\\\\\)";
-		res += "\\(M = " + C + " \\cdot " + decStr + " = \\mathbf{R\\$\\," + M + "{,}00}\\)";
+		res += "\\(M = " + C + " \\cdot (1 + 0{,}" + (p < 10 ? "0" : "") + p + ")^{" + t + "}\\\\";
+		res += "M = " + C + " \\cdot (" + baseStr + ")^{" + t + "}\\\\";
+		res += "M = " + C + " \\cdot " + decStr + " = \\mathbf{R\\$\\," + M + "{,}00}\\)";
 
 		gerarAlternativas("" + M);
 		setResolucao(res);

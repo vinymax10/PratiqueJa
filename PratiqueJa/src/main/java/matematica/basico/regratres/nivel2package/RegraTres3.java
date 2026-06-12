@@ -9,16 +9,16 @@ import matematica.GeradorExercicio;
 public class RegraTres3 extends GeradorExercicio
 {
 	private static final String[] TEXTOS_AUMENTO = {
-		"Um produto passou de R\\(\\$\\)$A,00 para R\\(\\$\\)$B,00. Qual o percentual de aumento?",
-		"O salário aumentou de R\\(\\$\\)$A,00 para R\\(\\$\\)$B,00. Qual o percentual de aumento?",
+		"Um produto passou de R$$A,00 para R$$B,00. Qual o percentual de aumento?",
+		"O salário aumentou de R$$A,00 para R$$B,00. Qual o percentual de aumento?",
 		"A produção passou de $A para $B unidades. Qual o percentual de aumento?",
-		"O preço de um imóvel subiu de R\\(\\$\\)$A,00 para R\\(\\$\\)$B,00. Qual o percentual de aumento?",
+		"O preço de um imóvel subiu de R$$A,00 para R$$B,00. Qual o percentual de aumento?",
 	};
 
 	private static final String[] TEXTOS_REDUCAO = {
-		"Um produto passou de R\\(\\$\\)$A,00 para R\\(\\$\\)$B,00. Qual o percentual de redução?",
+		"Um produto passou de R$$A,00 para R$$B,00. Qual o percentual de redução?",
 		"O estoque caiu de $A para $B unidades. Qual o percentual de redução?",
-		"Um salário diminuiu de R\\(\\$\\)$A,00 para R\\(\\$\\)$B,00. Qual a redução percentual?",
+		"Um salário diminuiu de R$$A,00 para R$$B,00. Qual a redução percentual?",
 		"O consumo de energia caiu de $A para $B kWh. Qual o percentual de redução?",
 	};
 
@@ -49,9 +49,9 @@ public class RegraTres3 extends GeradorExercicio
 			if (distr.size() >= 3) break;
 			int alt = p + d;
 			if (alt > 0 && alt < 100 && usados.add(alt))
-				distr.add("\\(" + alt + "\\%\\)");
+				distr.add(alt + "%");
 		}
-		embaralharEAdicionarAlternativas("\\(" + p + "\\%\\)", distr);
+		embaralharEAdicionarAlternativas(p + "%", distr);
 
 		String tipo = isAumento ? "aumento" : "redução";
 		String res = "Fórmula: \\(\\% = \\dfrac{\\text{variação}}{\\text{valor inicial}} \\times 100\\). \\(\\\\\\)";

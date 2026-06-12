@@ -1,4 +1,4 @@
-package matematica.avancado.funcaomodular.nivel3package;
+﻿package matematica.avancado.funcaomodular.nivel3package;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class Expressao3 extends GeradorExercicio
 		dist.add("\\(" + (low - 1) + " \\leq x \\leq " + (high + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res  = "Regra: \\(|f(x)| \\leq k \\Leftrightarrow -k \\leq f(x) \\leq k\\) \\(\\\\\\)";
-		res += "\\(-" + k + " \\leq " + bStr + " \\leq " + k + "\\) \\(\\\\\\)";
+		String res  = "Regra: \\(|f(x)| \\leq k \\Leftrightarrow -k \\leq f(x) \\leq k\\\\";
+		res += "-" + k + " \\leq " + bStr + " \\leq " + k + "\\) \\(\\\\\\)";
 		res += "Subtraindo \\(" + b + "\\) em todos os termos: \\(\\\\\\)";
 		res += "\\(\\mathbf{" + low + " \\leq x \\leq " + high + "}\\)";
 		setResolucao(res);
