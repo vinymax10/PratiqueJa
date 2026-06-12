@@ -7,7 +7,8 @@ public class FuncaoAfimNivel2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(2);
-		delegar(instanciar(".nivel2package.Image" + tipo));
+		String[] tipos = {".nivel2package.Image1", ".nivel2package.Image2",
+			".nivel2package.Expressao1", ".nivel2package.Expressao2"};
+		delegar(instanciar(tipos[rand.nextInt(tipos.length)]));
 	}
 }

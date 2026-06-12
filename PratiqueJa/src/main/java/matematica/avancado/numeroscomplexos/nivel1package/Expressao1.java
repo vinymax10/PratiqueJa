@@ -21,13 +21,13 @@ public class Expressao1 extends GeradorExercicio
 		{
 			pergunta = "Qual a parte real da soma?";
 			resultadoCorreto = "" + resultado.real;
-			resolucao += "\\\\ \\text{Parte real}=" + resultado.real.showDfrac();
+			resolucao += "\\\\ \\operatorname{Re}(z)=" + resultado.real.showDfrac();
 		}
 		else
 		{
 			pergunta = "Qual a parte imaginária da soma?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucao += "\\\\ \\text{Parte imaginária}=" + resultado.imaginaria.showDfrac();
+			resolucao += "\\\\ \\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac();
 		}
 
 		addParagrafo(pergunta);

@@ -7,7 +7,10 @@ public class FuncaoQuadraticaNivel3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(6);
-		delegar(instanciar(".nivel3package.Image" + tipo));
+		int sorteio = rand.nextInt(9);
+		if(sorteio < 6)
+			delegar(instanciar(".nivel3package.Image" + (sorteio + 1)));
+		else
+			delegar(instanciar(".nivel3package.Expressao" + (sorteio - 5)));
 	}
 }

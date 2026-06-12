@@ -7,7 +7,7 @@ public class NumerosComplexosNivel2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(3);
+		int tipo = 1 + rand.nextInt(5);
 		delegar(instanciar(".nivel2package.Expressao" + tipo));
 	}
 }

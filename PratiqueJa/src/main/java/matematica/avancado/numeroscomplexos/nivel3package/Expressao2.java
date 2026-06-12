@@ -20,13 +20,13 @@ public class Expressao2 extends GeradorExercicio
 		{
 			pergunta = "Qual a parte real do quadrado?";
 			resultadoCorreto = "" + resultado.real;
-			resolucao += "\\\\ \\text{Parte real}=" + resultado.real.showDfrac();
+			resolucao += "\\\\ \\operatorname{Re}(z)=" + resultado.real.showDfrac();
 		}
 		else
 		{
 			pergunta = "Qual a parte imaginária do quadrado?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucao += "\\\\ \\text{Parte imaginária}=" + resultado.imaginaria.showDfrac();
+			resolucao += "\\\\ \\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac();
 		}
 
 		addParagrafo(pergunta);

@@ -77,7 +77,11 @@ public class Exercicio3 extends GeradorExercicio
 		if(!d3.equals(imagemCorreta) && !distratores.contains(d3)) distratores.add(d3);
 		while(distratores.size() < 3) distratores.add(toSetLatex(imagemVals.subList(0, 1)));
 
-		embaralharEAdicionarAlternativas(imagemCorreta, distratores.subList(0, 3));
+		List<String> distWrap = new ArrayList<>();
+		for(String str : distratores.subList(0, 3)) 
+			distWrap.add("\\(" + str + "\\)");
+		
+		embaralharEAdicionarAlternativas("\\(" + imagemCorreta + "\\)", distWrap);
 
 		// Resolução
 		StringBuilder mapeamentos = new StringBuilder();

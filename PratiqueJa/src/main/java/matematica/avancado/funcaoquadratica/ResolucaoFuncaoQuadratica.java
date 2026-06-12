@@ -35,9 +35,9 @@ public class ResolucaoFuncaoQuadratica
 				+ "=\\mathbf{" + (r1 + r2 + c) + "}";
 
 		return "Substituindo \\(x=" + x + "\\) na função: \\(\\\\\\)" +
-			   "\\(" + s1 + " = \\\\ \\)" +
-			   "\\(" + s2 + " = \\\\ \\)" +
-			   "\\(" + s3 + "\\)";
+			   "\\(" + s1 + " = \\\\ " +
+			   "" + s2 + " = \\\\ " +
+			   "" + s3 + "\\)";
 	}
 
 	public static String resolucaoXv(int a, int b, int c)
@@ -52,8 +52,8 @@ public class ResolucaoFuncaoQuadratica
 			sub = "X_v=\\dfrac{" + (-b) + "}{2\\cdot " + a + "}=\\dfrac{" + (-b) + "}{" + (2 * a) + "}";
 
 		String res = formulaXv();
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + sub;
+		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\\\" ;
+		res += "" + sub;
 		if(resultado.denominador != 1)
 			res += "=" + resultado.showDfrac();
 		res += "=\\mathbf{" + resultado.toStringLatex() + "}\\)";
@@ -67,10 +67,10 @@ public class ResolucaoFuncaoQuadratica
 		resultado.fatoracao(2);
 
 		String res = formulaYv();
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + b + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=" + delta + "\\)" + "\\(\\\\\\)";
-		res += "\\(Y_v=\\dfrac{-(" + delta + ")}{4\\cdot " + a + "}=\\dfrac{" + (-delta) + "}{" + (4 * a) + "}";
+		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\\\" ;
+		res += "\\Delta=" + b + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ ";
+		res += "\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=" + delta + "\\\\" ;
+		res += "Y_v=\\dfrac{-(" + delta + ")}{4\\cdot " + a + "}=\\dfrac{" + (-delta) + "}{" + (4 * a) + "}";
 		if(resultado.denominador != 1)
 			res += "=" + resultado.showDfrac();
 		res += "=\\mathbf{" + resultado.toStringLatex() + "}\\)";
@@ -87,9 +87,9 @@ public class ResolucaoFuncaoQuadratica
 				+ Auxiliar.getNumber(c, "", false) + "=" + fx);
 
 		return "Substituindo \\(f(" + x + ")=" + fx + "\\): \\(\\\\\\)" +
-			   "\\(" + sub + "\\)" + "\\(\\\\\\)" +
-			   "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)" +
-			   "\\(a=\\mathbf{" + a + "}\\)";
+			   "\\(" + sub + "\\\\"  +
+			   "" + expressao.resolverLatex() + "\\\\" +
+			   "a=\\mathbf{" + a + "}\\)";
 	}
 
 	public static String resolucaoAcharB(int a, int b, int c, int x, int fx)
@@ -100,9 +100,9 @@ public class ResolucaoFuncaoQuadratica
 				+ Auxiliar.getNumber(c, "", false) + "=" + fx);
 
 		return "Substituindo \\(f(" + x + ")=" + fx + "\\): \\(\\\\\\)" +
-			   "\\(" + sub + "\\)" + "\\(\\\\\\)" +
-			   "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)" +
-			   "\\(b=\\mathbf{" + b + "}\\)";
+			   "\\(" + sub + "\\\\" +
+			   "" + expressao.resolverLatex() + "\\\\" +
+			   "b=\\mathbf{" + b + "}\\)";
 	}
 
 	public static String resolucaoAcharC(int a, int b, int c, int x, int fx)
@@ -113,57 +113,57 @@ public class ResolucaoFuncaoQuadratica
 				+ Auxiliar.getNumber(b, "", false) + "*" + x + "+c=" + fx);
 
 		return "Substituindo \\(f(" + x + ")=" + fx + "\\): \\(\\\\\\)" +
-			   "\\(" + sub + "\\)" + "\\(\\\\\\)" +
-			   "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)" +
-			   "\\(c=\\mathbf{" + c + "}\\)";
+			   "\\(" + sub + "\\\\"  +
+			   "" + expressao.resolverLatex() + "\\\\" +
+			   "c=\\mathbf{" + c + "}\\)";
 	}
 
 	public static String resolucaoAcharB_Xv(int a, int b, int c, Racional xv)
 	{
 		String res = formulaXv();
-		res += "\\(a=" + a + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + xv.showFrac() + "=\\dfrac{-b}{2\\cdot " + a + "}=\\dfrac{-b}{" + (2 * a) + "}\\)" + "\\(\\\\\\)";
+		res += "\\(a=" + a + ", \\quad c=" + c + "\\\\" ;
+		res += "" + xv.showFrac() + "=\\dfrac{-b}{2\\cdot " + a + "}=\\dfrac{-b}{" + (2 * a) + "}\\\\" ;
 		MyExpression expressao = new MyExpression(xv.toString() + "*" + (2 * a) + "=-b");
-		res += "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)";
-		res += "\\(b=\\mathbf{" + b + "}\\)";
+		res += "" + expressao.resolverLatex() + "\\\\";
+		res += "b=\\mathbf{" + b + "}\\)";
 		return res;
 	}
 
 	public static String resolucaoAcharA_Xv(int a, int b, int c, Racional xv)
 	{
 		String res = formulaXv();
-		res += "\\(b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
+		res += "\\(b=" + b + ", \\quad c=" + c + "\\\\" ;
 		if(b < 0)
-			res += "\\(" + xv.showFrac() + "=\\dfrac{-(" + b + ")}{2a}=\\dfrac{" + (-b) + "}{2a}\\)" + "\\(\\\\\\)";
+			res += "" + xv.showFrac() + "=\\dfrac{-(" + b + ")}{2a}=\\dfrac{" + (-b) + "}{2a}\\\\" ;
 		else
-			res += "\\(" + xv.showFrac() + "=\\dfrac{" + (-b) + "}{2a}\\)" + "\\(\\\\\\)";
+			res += "" + xv.showFrac() + "=\\dfrac{" + (-b) + "}{2a}\\\\";
 		MyExpression expressao = new MyExpression(xv.toString() + "*2a=" + (-b));
-		res += "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=\\mathbf{" + a + "}\\)";
+		res += "" + expressao.resolverLatex() + "\\\\" ;
+		res += "a=\\mathbf{" + a + "}\\)";
 		return res;
 	}
 
 	public static String resolucaoAcharA_Yv(int a, int b, int c, Racional yv)
 	{
 		String res = formulaYv();
-		res += "\\(b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot a\\cdot " + c + ")}{4a}\\)" + "\\(\\\\\\)";
-		res += "\\(" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * c, "a", false) + ")}{4a}\\)" + "\\(\\\\\\)";
+		res += "\\(b=" + b + ", \\quad c=" + c + "\\\\";
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot a\\cdot " + c + ")}{4a}\\\\";
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * c, "a", false) + ")}{4a}\\\\" ;
 		MyExpression expressao = new MyExpression(yv.toString() + "*4a=" + (-(b * b)) + Auxiliar.getNumber(4 * c, "a", false));
-		res += "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=\\mathbf{" + a + "}\\)";
+		res += "" + expressao.resolverLatex() + "\\\\" ;
+		res += "a=\\mathbf{" + a + "}\\)";
 		return res;
 	}
 
 	public static String resolucaoAcharC_Yv(int a, int b, int c, Racional yv)
 	{
 		String res = formulaYv();
-		res += "\\(a=" + a + ", \\quad b=" + b + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot " + a + "\\cdot c)}{4\\cdot " + a + "}\\)" + "\\(\\\\\\)";
-		res += "\\(" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * a, "c", false) + ")}{" + (4 * a) + "}\\)" + "\\(\\\\\\)";
+		res += "\\(a=" + a + ", \\quad b=" + b + "\\\\" ;
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot " + a + "\\cdot c)}{4\\cdot " + a + "}\\\\";
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * a, "c", false) + ")}{" + (4 * a) + "}\\\\" ;
 		MyExpression expressao = new MyExpression(yv.toString() + "*" + (4 * a) + "=" + (-(b * b)) + Auxiliar.getNumber(4 * a, "c", false));
-		res += "\\(" + expressao.resolverLatex() + "\\)" + "\\(\\\\\\)";
-		res += "\\(c=\\mathbf{" + c + "}\\)";
+		res += "" + expressao.resolverLatex() + "\\\\" ;
+		res += "c=\\mathbf{" + c + "}\\)";
 		return res;
 	}
 }
