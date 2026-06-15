@@ -7,11 +7,14 @@ import java.util.List;
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+import matematica.LayoutLista;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
@@ -57,6 +60,10 @@ public class ExercicioPadrao implements Serializable, Entidade
 
 	@AuditLabel(value = "mostrar resolução")
 	private boolean mostrarResolucao;
+
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "layout da lista")
+	private LayoutLista layoutLista = LayoutLista.PADRAO;
 
 	@AuditLabel(value = "imagem quadrada", genero = GeneroGramatical.FEMININO)
 	private boolean imagemQuadrada;

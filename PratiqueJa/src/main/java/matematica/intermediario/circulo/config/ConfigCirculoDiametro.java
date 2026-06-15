@@ -7,11 +7,13 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
+import matematica.ConfigImagem;
+
 import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 
-public class ConfigCirculoDiametro
+public class ConfigCirculoDiametro implements ConfigImagem
 {
 	String diametro;
 	boolean area;
@@ -22,12 +24,12 @@ public class ConfigCirculoDiametro
 		this.area = area;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width = 1250;
-		int height = 750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index - 1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -57,6 +59,10 @@ public class ConfigCirculoDiametro
 		Ellipse2D dot2 = new Ellipse2D.Double(cx + r - 8, cy - 8, 16, 16);
 		g2.fill(dot1);
 		g2.fill(dot2);
+
+		// Center dot — distinguishes diameter from a chord
+		int dotR = 10;
+		g2.fill(new Ellipse2D.Double(cx - dotR, cy - dotR, 2 * dotR, 2 * dotR));
 
 		// Label d above the diameter line (centered)
 		Graphics.addLabel(g2, diametro, cx, cy, Alinhamento.BottomCenter);

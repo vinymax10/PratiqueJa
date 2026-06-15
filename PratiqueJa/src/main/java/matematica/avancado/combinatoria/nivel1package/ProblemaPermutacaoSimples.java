@@ -27,19 +27,16 @@ public class ProblemaPermutacaoSimples
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formulaPermutacaoSimples() + "\\\\";
-		resolucaoLatex += "n=" + n + "\\\\";
-		resolucaoLatex += "P("+n+")=" + n + "!\\\\";
-		resolucaoLatex += "P("+n+")=" + AuxCombinacao.fatorialString(n)+"="+resultado();
-		
-		return resolucaoLatex;
-	}
+		String res = "A permutação simples de \\(n\\) elementos distintos é dada por:";
+		res += "\\(\\\\\\)";
+		res += "\\(" + ParCor.formula("P(n) = n!") + "\\)";
+		res += "\\(\\\\\\)";
+		res += "Com \\(n = " + n + "\\):";
+		res += "\\(\\\\\\)";
+		res += "\\(P(" + n + ") = " + n + "! = \\\\ ";
+		res += AuxCombinacao.fatorialString(n) + " = \\mathbf{" + resultado() + "}\\)";
 
-	private String formulaPermutacaoSimples()
-	{
-		return "\\text{Permutação Simples}\\\\"
-		+ParCor.formula("P(n)=n!");
+		return res;
 	}
 
 	public String resultado()

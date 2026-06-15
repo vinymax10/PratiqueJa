@@ -21,13 +21,11 @@ public class Image4 extends GeradorExercicio
 
 		String resultadoCorreto = "" + dados.senAngleBase;
 		String resolucao = ResolucaoRazoesTrigonometricas.sen(angle, dados.base, dados.hipotenusa);
-		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o \\(sen~" + angle + "\\)?");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

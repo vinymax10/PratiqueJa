@@ -25,7 +25,7 @@ public class Image22 extends GeradorExercicio
 		res += "l = \\sqrt{" + (4 * k) + "} = \\mathbf{" + l + "}\\)";
 
 		ConfigTrianguloEquilatero config = new ConfigTrianguloEquilatero("l", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do triângulo equilátero é \\(" + k + "\\sqrt{3}\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);

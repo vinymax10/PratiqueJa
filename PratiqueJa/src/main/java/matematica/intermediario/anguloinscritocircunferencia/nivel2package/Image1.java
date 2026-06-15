@@ -29,7 +29,7 @@ public class Image1 extends GeradorExercicio
 		String resolucao = expressao.resolverLatex();
 
 		Config1 config = new Config1(str1, "", strA);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);

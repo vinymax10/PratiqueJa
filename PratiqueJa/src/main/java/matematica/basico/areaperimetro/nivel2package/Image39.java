@@ -32,7 +32,7 @@ public class Image39 extends GeradorExercicio
 		res += "\\(P=4 \\cdot " + l + "=\\mathbf{" + perimetro + "}\\)";
 
 		ConfigLozango config = new ConfigLozango("" + D, "" + d, "", "", "", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o perímetro do losango?");
 		addParagrafoImagem(image);

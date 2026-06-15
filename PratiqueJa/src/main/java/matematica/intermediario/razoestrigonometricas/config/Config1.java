@@ -19,12 +19,12 @@ public class Config1 extends Config
 		super(dados);
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();
@@ -36,12 +36,12 @@ public class Config1 extends Config
 
 		if(angleAltura!=null&&!angleAltura.equals(""))
 			Graphics.setAngleSemBorda(g2, 1200-raio/2, 620-raio/2,
-			raio, 180, -32,	ParCor.parCor(index + 1), parCor);
+			raio, 180, -32,	ParCor.parCorAleatorio(), parCor);
 		
 		
 		if(angleBase!=null&&!angleBase.equals(""))
 			Graphics.setAngleSemBorda(g2, 225-raio/2, 25-raio/2,
-			raio, 270, 58,	ParCor.parCor(index + 2), parCor);
+			raio, 270, 58,	ParCor.parCorAleatorio(), parCor);
 		
 		Polygon triangulo = new Polygon();
 

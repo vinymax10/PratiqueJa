@@ -25,12 +25,12 @@ public class Config2 extends Config
 		this.inferior = inferior;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -48,15 +48,15 @@ public class Config2 extends Config
 
 		int raio = 200;
 		arc = new Arc2D.Double(55 - raio / 2, 245 - raio / 2, raio, raio, -32, 45, Arc2D.PIE);
-		g2.setColor(Color.decode(ParCor.parCor(index).getCorFraca()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorFraca()));
 		g2.fill(arc);
 
 		arc = new Arc2D.Double(55 - raio / 2, 505 - raio / 2, raio, raio, -10, 45, Arc2D.PIE);
-		g2.setColor(Color.decode(ParCor.parCor(index +1).getCorFraca()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorFraca()));
 		g2.fill(arc);
 
 		g2.setStroke(new BasicStroke(10));
-		g2.setColor(Color.decode(ParCor.parCor(index-1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Line2D line1 = new Line2D.Double(55, 245, 630, 140);
 		g2.draw(line1);

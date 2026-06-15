@@ -34,6 +34,43 @@
 			</p:commandButton>
 		</h:panelGroup>
 
+		<!-- ── Download Lista PDF ─────────────────────────────────── -->
+		<div style="display:flex;align-items:center;gap:0.75rem;
+		            padding:0.75rem 1rem;border-bottom:1px solid #e5e7eb;
+		            flex-wrap:wrap;">
+
+			<span style="font-size:0.8rem;font-weight:600;color:#6b7280;
+			             text-transform:uppercase;letter-spacing:0.05em;">
+				Download Lista PDF
+			</span>
+
+			<!-- Nível 1 — liberado para todos -->
+			<p:commandButton value="Nível I" icon="pi pi-download"
+				ajax="false"
+				styleClass="ui-button-outlined ui-button-secondary"
+				style="font-size:0.85rem">
+				<p:fileDownload value="#{downloadListaBean.baixarLista(assuntoBean.entidade, 'Nivel1')}" />
+			</p:commandButton>
+
+			<!-- Nível 2 — Premium -->
+			<p:commandButton ajax="false"
+				styleClass="ui-button-outlined"
+				style="font-size:0.85rem;border-color:#7c3aed;color:#7c3aed">
+				<h:outputText value="⭐ Nível II" />
+				<p:fileDownload value="#{downloadListaBean.baixarLista(assuntoBean.entidade, 'Nivel2')}" />
+			</p:commandButton>
+
+			<!-- Nível 3 — Premium -->
+			<p:commandButton ajax="false"
+				styleClass="ui-button-outlined"
+				style="font-size:0.85rem;border-color:#7c3aed;color:#7c3aed">
+				<h:outputText value="⭐ Nível III" />
+				<p:fileDownload value="#{downloadListaBean.baixarLista(assuntoBean.entidade, 'Nivel3')}" />
+			</p:commandButton>
+
+		</div>
+		<!-- ── fim Download Lista PDF ─────────────────────────────── -->
+
 	  <div class="ex-grid">
 
 		<ui:repeat id="laco" value="#{exercicioBean.exercicios}" var="exercicio" varStatus="status">

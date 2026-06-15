@@ -52,7 +52,7 @@ public class Image3 extends GeradorExercicio
 		String correta = simplificado[0] > 1 ? "\\(" + raizStr + "\\)" : "\\(\\sqrt{" + d2 + "}\\)";
 
 		ConfigPlanoCartesianoAB config = new ConfigPlanoCartesianoAB(ax, ay, bx, by);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Os pontos A e B estão indicados no plano. Calcule a distância \\( d(A,B) \\). Simplifique o radical, se possível.");
 		addParagrafoImagem(image);
@@ -79,8 +79,9 @@ public class Image3 extends GeradorExercicio
 
 		String res = "Do plano, lemos: \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\). \\(\\\\\\)";
 		res += "Aplicando a fórmula da distância entre dois pontos: \\(\\\\\\)";
-		res += "\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}\\\\";
-		res += "= \\sqrt{(" + innerX + ")^2 + (" + innerY + ")^2} = \\sqrt{" + strDx + "^2 + " + strDy + "^2} =\\\\ ";
+		res += "\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2} = \\\\";
+		res += "\\sqrt{(" + innerX + ")^2 + (" + innerY + ")^2} = \\\\"
+		+ "\\sqrt{" + strDx + "^2 + " + strDy + "^2} =\\\\ ";
 		res += "\\sqrt{" + dx2 + " + " + dy2 + "} = \\sqrt{" + d2 + "}\\\\ \\) ";
 		res += simplStr;
 		res += "Portanto, \\(d(A,B) = " + raizStr + "\\).";

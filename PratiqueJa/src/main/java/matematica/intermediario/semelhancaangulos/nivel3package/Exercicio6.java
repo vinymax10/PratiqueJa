@@ -199,16 +199,13 @@ public class Exercicio6 extends GeradorExercicio
 		
 		AuxSemelhancaAngulos.mostrarAngulosExpressao(angleImage, config, resultado);
 
-		String texto = config.getTextLatex();
-
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleResult, config);
 
 		String resolucao = AuxSemelhancaAngulos.resolucao(instrucao, config);
 
 		addParagrafo("Encontre o valor de \\(x\\):");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

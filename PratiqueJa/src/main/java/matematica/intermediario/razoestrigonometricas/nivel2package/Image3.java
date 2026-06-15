@@ -24,13 +24,11 @@ public class Image3 extends GeradorExercicio
 
 		String resultadoCorreto = "" + dados.base;
 		String resolucao = ResolucaoRazoesTrigonometricas.cosCAX(angle, dados.cosAngleAltura, dados.hipotenusa);
-		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo(pergunta);
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

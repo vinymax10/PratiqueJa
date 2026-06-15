@@ -96,7 +96,7 @@ public class Exercicio implements Serializable, Entidade
 	private boolean showEstatistica;
 
 	@Transient
-	private boolean showResolucaoComentada;
+	private boolean showResolucaoComentada=true;
 
 	@Transient
 	private boolean jaMostrouResolucaoComentada;

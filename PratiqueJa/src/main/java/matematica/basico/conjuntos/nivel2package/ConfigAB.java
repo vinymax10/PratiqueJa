@@ -6,11 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
+import matematica.ConfigImagem;
+
 import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 
-public class ConfigAB
+public class ConfigAB implements ConfigImagem
 {
 	DadosAB dados;
 	
@@ -18,12 +20,12 @@ public class ConfigAB
 		this.dados=dados;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();

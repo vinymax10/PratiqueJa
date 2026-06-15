@@ -26,7 +26,7 @@ public class Image12 extends GeradorExercicio
 		resolucao += expressao.resolverLatex();
 
 		ConfigLozango config = new ConfigLozango("D", d + "", "", "", "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do lozango é \\(" + area + "\\), qual o valor de \\(D\\)?");
 		addParagrafoImagem(image);

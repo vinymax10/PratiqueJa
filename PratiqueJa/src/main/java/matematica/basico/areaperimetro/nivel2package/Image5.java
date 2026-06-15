@@ -24,7 +24,7 @@ public class Image5 extends GeradorExercicio
 		resolucao += "A=" + b + " \\cdot " + h + "=" + (b * h);
 
 		ConfigRetangulo2 config = new ConfigRetangulo2(b + "", "h", "r", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + raio + "\\), qual a área do retângulo?");
 		addParagrafoImagem(image);

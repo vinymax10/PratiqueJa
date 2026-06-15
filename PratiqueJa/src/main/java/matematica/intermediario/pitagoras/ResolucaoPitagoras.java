@@ -61,5 +61,10 @@ public class ResolucaoPitagoras
 	{
 		return ParCor.formula("d= \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}");
 	}
-	
+
+	public static String formulaMetricaAltura()
+	{
+		return ParCor.formula("h^2 = m \\cdot n");
+	}
+
 }

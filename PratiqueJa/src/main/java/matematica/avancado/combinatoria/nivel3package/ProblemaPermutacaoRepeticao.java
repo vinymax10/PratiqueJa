@@ -31,22 +31,24 @@ public class ProblemaPermutacaoRepeticao
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formulaArranjoSimples() + "\\\\";
-		resolucaoLatex += "\\text{\""+palavra+"\""+" possui "+n+" letras},\\quad n="+n+"\\\\";
+		String res = "Na permutação com repetição, dividimos o fatorial do total de letras pelos fatoriais das repetições.";
+		res += "\\(\\\\\\)";
+		res += "A palavra \"" + palavra + "\" possui " + n + " letras, logo \\(n = " + n + "\\).";
+		res += "\\(\\\\\\)";
 
         Map<Character, Integer> contador = new HashMap<>();
 
-        for (char c : palavra.toCharArray()) 
+        for (char c : palavra.toCharArray())
             contador.put(c, contador.getOrDefault(c, 0) + 1);
 
         List<Integer> list=new ArrayList<Integer>();
-        
-        for (Map.Entry<Character, Integer> entry : contador.entrySet()) 
+
+        for (Map.Entry<Character, Integer> entry : contador.entrySet())
         {
-            if (entry.getValue() > 1) 
+            if (entry.getValue() > 1)
             {
-            	resolucaoLatex+="\\text{'" + entry.getKey() + "' aparece " + entry.getValue() + " vezes: dividir por }"+ entry.getValue()+"! \\\\";
+            	res += "A letra '" + entry.getKey() + "' aparece " + entry.getValue() + " vezes: dividir por \\(" + entry.getValue() + "!\\).";
+            	res += "\\(\\\\\\)";
             	list.add(entry.getValue());
             }
         }
@@ -66,22 +68,24 @@ public class ProblemaPermutacaoRepeticao
         		dParcial+=" \\cdot ";
         	}
 		}
-        
-        resolucaoLatex+="\\text{Total}=\\dfrac{"+n+"!}{"+dInicial+"}\\\\";
-        resolucaoLatex+="\\text{Total}=\\dfrac{"+Algebra.fatorial(n)+"}{"+dParcial+"}=";
-        resolucaoLatex+="\\dfrac{"+Algebra.fatorial(n)+"}{"+dFinal+"}";
+
+        res += "Aplicando a fórmula:";
+        res += "\\(\\\\\\)";
         Racional resultado=new Racional(Algebra.fatorial(n),dFinal);
         resultado.fatoracao(2);
+        String fracFinal = "\\dfrac{" + Algebra.fatorial(n) + "}{" + dFinal + "}";
+        res += "\\(\\text{Total} = \\dfrac{" + n + "!}{" + dInicial + "} = \\\\ ";
         if(resultado.isSimplificou())
-        	resolucaoLatex+="="+resultado.showDfrac();
+        {
+        	res += "\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} = \\\\ ";
+        	res += fracFinal + " = \\mathbf{" + resultado.showDfrac() + "}\\)";
+        }
+        else
+        {
+        	res += "\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} = \\mathbf{" + fracFinal + "}\\)";
+        }
 
-		return resolucaoLatex;
-
-	}
-	
-	private String formulaArranjoSimples()
-	{
-		return "\\text{Permutação com Repetição}";
+		return res;
 	}
 
 	public String resultado()

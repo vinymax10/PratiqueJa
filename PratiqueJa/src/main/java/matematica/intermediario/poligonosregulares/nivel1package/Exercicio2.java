@@ -27,7 +27,7 @@ public class Exercicio2 extends GeradorExercicio
 		res += "\\(\\alpha_i = \\dfrac{(" + n + " - 2) \\times 180^\\circ}{" + n + "} = \\dfrac{" + si + "^\\circ}{" + n + "} = \\mathbf{" + ai + "^\\circ}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual é a medida de cada ângulo interno de um polígono regular de \\(" + n + "\\) lados?");
 		addParagrafoImagem(image);

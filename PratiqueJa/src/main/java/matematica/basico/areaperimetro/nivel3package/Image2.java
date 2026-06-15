@@ -24,7 +24,7 @@ public class Image2 extends GeradorExercicio
 		resolucao += "d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\\\";
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(d\\)?");
 		addParagrafoImagem(image);

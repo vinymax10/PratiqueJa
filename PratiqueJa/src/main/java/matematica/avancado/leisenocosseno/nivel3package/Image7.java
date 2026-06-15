@@ -31,7 +31,7 @@ public class Image7 extends GeradorExercicio
 		String resultadoCorreto = "" + dados.senAngleC.toString();
 		String resolucao = Resolucao.leiSenoDenominador(angleC, angleA, dados.ladoC, dados.ladoA, dados.senAngleA);
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo(pergunta);
 		addParagrafoImagem(image);

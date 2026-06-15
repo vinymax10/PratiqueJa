@@ -22,7 +22,7 @@ public class Image5 extends GeradorExercicio
 		String resolucao = expressao.resolverLatex();
 
 		Config3 config = new Config3("x", strA);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);

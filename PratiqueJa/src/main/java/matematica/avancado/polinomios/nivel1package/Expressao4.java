@@ -39,8 +39,7 @@ public class Expressao4 extends GeradorExercicio
 
 		String res = "Usando o caso notável \\((a+b)(a-b) = a^2 - b^2\\):\\(\\\\\\)";
 		res += "\\(a = " + aStr + "x, \\quad b = " + b + "\\)\\(\\\\\\)";
-		res += "\\((" + aStr + "x)^2 - " + b + "^2 = \\\\ \\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
+		res += "\\((" + aStr + "x)^2 - " + b + "^2 = \\mathbf{" + correct + "}\\)";
 
 		addParagrafo("Expanda a expressão usando casos notáveis.");
 		addParagrafo("\\(" + expr + "\\)");

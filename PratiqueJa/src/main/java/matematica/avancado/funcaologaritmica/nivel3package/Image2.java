@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaologaritmica.nivel3package;
+package matematica.avancado.funcaologaritmica.nivel3package;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

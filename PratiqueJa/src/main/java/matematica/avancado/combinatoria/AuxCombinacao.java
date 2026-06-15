@@ -3,8 +3,25 @@ package matematica.avancado.combinatoria;
 import java.util.HashMap;
 import java.util.Map;
 
+import util.Algebra;
+
 public class AuxCombinacao
 {
+	/** Coeficiente binomial C(n,k) = n! / (k!(n-k)!). */
+	public static int combinacao(int n, int k)
+	{
+		return Algebra.fatorial(n) / (Algebra.fatorial(k) * Algebra.fatorial(n - k));
+	}
+
+	/** Potência inteira base^expoente (expoente >= 0). */
+	public static int potencia(int base, int expoente)
+	{
+		int r = 1;
+		for(int i = 0; i < expoente; i++)
+			r *= base;
+		return r;
+	}
+
 	public static int contarRepeticao(String palavra)
 	{
         Map<Character, Integer> contador = new HashMap<>();

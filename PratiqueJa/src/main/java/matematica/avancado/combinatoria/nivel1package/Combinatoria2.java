@@ -12,6 +12,6 @@ public class Combinatoria2 extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		gerarAlternativas("" + problema.resultado());
-		setResolucao("\\(" + problema.resolucao() + "\\)");
+		setResolucao(problema.resolucao());
 	}
 }

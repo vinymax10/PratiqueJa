@@ -24,15 +24,13 @@ public class Image4 extends GeradorExercicio
 		config.d.mostrar();
 		config.d.nome = str1;
 
-		String texto = config.getTextLatex();
 		String resultadoCorreto = "" + x + "°";
 		String resolucao = new MyExpression("y+y+" + b + "=180").resolverLatex();
 		resolucao += "\\\\" + new MyExpression(a + "+" + str1 + "=180").resolverLatex();
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

@@ -24,7 +24,7 @@ public class Image13 extends GeradorExercicio
 		resolucao += "P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot " + (b + h) + "=" + (2 * (b + h));
 
 		ConfigRetangulo2 config = new ConfigRetangulo2(b + "", "h", "r", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + raio + "\\), qual o perímetro do retângulo?");
 		addParagrafoImagem(image);

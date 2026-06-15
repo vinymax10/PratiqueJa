@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTriangulo;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
 import matematica.basico.areaperimetro.config.ConfigTrianguloRetangulo;
@@ -27,7 +27,7 @@ public class Image19 extends GeradorExercicio
 		MyExpression expressao = new MyExpression("b * " + h + "=" + area + "*2");
 		resolucao += expressao.resolverLatex();
 
-		Config config = null;
+		ConfigImagem config = null;
 
 		int num = rand.nextInt(3);
 		switch(num)
@@ -36,7 +36,7 @@ public class Image19 extends GeradorExercicio
 			case 1: config = new ConfigTrianguloRetangulo("b", h + "", "", true); break;
 			case 2: config = new ConfigTrianguloIsosceles("b", h + "", "", "", true); break;
 		}
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do triângulo é \\(" + area + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);

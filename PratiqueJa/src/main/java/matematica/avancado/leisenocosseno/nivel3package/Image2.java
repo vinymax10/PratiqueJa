@@ -30,7 +30,7 @@ public class Image2 extends GeradorExercicio
 		String resultadoCorreto = "" + dados.ladoB.toString();
 		String resolucao = Resolucao.leiCosLado(angle, dados.ladoA, dados.ladoC, dados.cosAngleB);
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo(pergunta);
 		addParagrafoImagem(image);

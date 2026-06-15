@@ -28,12 +28,12 @@ public class ConfigRetangulo extends Config
 		this.g = new Angulo(this, g, false, g + "°");
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -46,31 +46,31 @@ public class ConfigRetangulo extends Config
 		
 		if (a.mostrar)
 			Graphics.setAngleSemBorda(g2, 1200 - raio / 2, 50 - raio / 2, raio, 229, 41,
-			ParCor.parCor(index + a.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (b.mostrar)
 			Graphics.setAngleSemBorda(g2, 650 - raio / 2, 700 - raio / 2, raio, 0, 50,
-			ParCor.parCor(index + b.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (c.mostrar)
 			Graphics.setAngleSemBorda(g2, 650 - raio / 2, 700 - raio / 2, raio, 50, 130,
-			ParCor.parCor(index + c.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (d.mostrar)
 			Graphics.setAngleSemBorda(g2, 50 - raio / 2, 700 - raio / 2, raio, 0, 30,
-			ParCor.parCor(index + d.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (e.mostrar)
 			Graphics.setAngleSemBorda(g2, 1200 - raio / 2, 50 - raio / 2, raio, 210, 20,
-			ParCor.parCor(index + e.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (f.mostrar)
 			Graphics.setAngleSemBorda(g2, 1200 - raio / 2, 50 - raio / 2, raio, 180, 30,
-			ParCor.parCor(index + f.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (g.mostrar)
 			Graphics.setAngleSemBorda(g2, 50 - raio / 2, 700 - raio / 2, raio, 30, 60,
-			ParCor.parCor(index + g.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		Polygon retangulo = new Polygon();
 		retangulo.addPoint(50, 700);

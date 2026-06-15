@@ -1,0 +1,612 @@
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(lista_template.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo))
+(../pratiqueja.sty
+
+LaTeX Warning: You have requested package `../pratiqueja',
+               but the package provides `pratiqueja'.
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/babel\xebabel.def
+)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/latex/babel-portuges\brazil.ldf))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\x
+parse.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend
+-xetex.def)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec-x
+etex.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.c
+fg))) (C:\Program Files\MiKTeX\tex/latex/microtype\microtype.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.s
+ty) (C:\Program Files\MiKTeX\tex/latex/microtype\microtype-xetex.def)
+(C:\Program Files\MiKTeX\tex/latex/microtype\microtype.cfg))
+(C:\Program Files\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Program Files\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.
+cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.
+def)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.
+ltx))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.d
+ef)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\svgnam.def)
+(C:\Program Files\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty)
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+ (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.st
+y
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.s
+ty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty)
+ (C:\Program Files\MiKTeX\tex/latex/setspace\setspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/parskip\parskip.sty
+(C:\Program Files\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+(C:\Program Files\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Program Files\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphi
+cs.cfg))) (C:\Program Files\MiKTeX\tex/latex/needspace\needspace.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcolorbox
+.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.
+sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrc
+s.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+util-common.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+util-latex.def)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+rcs.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.
+tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfc
+ore.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgf
+sys.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keys.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keyslibraryfiltered.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gf.cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-xetex.def
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-dvipdfmx.def
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-common-pdf.def))))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsyssoftpath.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsysprotocol.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcore.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.
+code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathu
+til.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathp
+arser.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.basic.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.trigonometric.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.random.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.comparison.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.base.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.round.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.misc.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.integerarithmetics.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathc
+alc.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+loat.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.c
+ode.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepoints.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathconstruct.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathusage.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorescopes.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoregraphicstate.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoretransformations.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorequick.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreobjects.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathprocessing.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorearrows.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreshade.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreimage.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreexternal.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorelayers.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoretransparency.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepatterns.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorerdf.code.tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+duleshapes.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+duleplot.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\p
+gfcomp-version-0-65.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\p
+gfcomp-version-1-18.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty)
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/environ\environ.sty
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\trimspac
+es.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbraster
+.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbskins.
+code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\t
+ikz.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffo
+r.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfke
+ys.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keys.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.st
+y
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.
+code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+for.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz\tikz.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgf
+libraryplothandlers.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+dulematrix.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Program Files\MiKTeX\tex/latex/tikzfill\tikzfill.image.sty
+(C:\Program Files\MiKTeX\tex/latex/tikzfill\tikzlibraryfill.image.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbskinsj
+igsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.2.0'
+))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbbreaka
+ble.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.2.0'
+(C:\Program Files\MiKTeX\tex/latex/pdfcol\pdfcol.sty
+(C:\Program Files\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbhooks.
+code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbtheore
+ms.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbfittin
+g.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gs.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.st
+y)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.c
+fg))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbproces
+sing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.2.0'
+))))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbextern
+al.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbmagazi
+ne.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbvignet
+te.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz/libraries\tikzlibraryfadings.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgf
+libraryfadings.code.tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbposter
+.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.2.0'
+)) (C:\Program Files\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty))
+(C:\Program Files\MiKTeX\tex/latex/tabularray\tabularray.sty)
+(lista_template.aux)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(C:\Program Files\MiKTeX\tex/latex/ninecolors\ninecolors.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-cmr.cfg) [1] [2] [3] [4]
+[5] [6] (lista_template.aux) )
+Output written on lista_template.pdf (6 pages).
+Transcript written on lista_template.log.
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(lista_template.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo))
+(../pratiqueja.sty
+
+LaTeX Warning: You have requested package `../pratiqueja',
+               but the package provides `pratiqueja'.
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/babel\xebabel.def
+)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/latex/babel-portuges\brazil.ldf))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\x
+parse.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend
+-xetex.def)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec-x
+etex.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.c
+fg))) (C:\Program Files\MiKTeX\tex/latex/microtype\microtype.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.s
+ty) (C:\Program Files\MiKTeX\tex/latex/microtype\microtype-xetex.def)
+(C:\Program Files\MiKTeX\tex/latex/microtype\microtype.cfg))
+(C:\Program Files\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Program Files\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.
+cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.
+def)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.
+ltx))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.d
+ef)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\svgnam.def)
+(C:\Program Files\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty)
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+ (C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.st
+y
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.s
+ty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty)
+ (C:\Program Files\MiKTeX\tex/latex/setspace\setspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/parskip\parskip.sty
+(C:\Program Files\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+(C:\Program Files\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Program Files\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphi
+cs.cfg))) (C:\Program Files\MiKTeX\tex/latex/needspace\needspace.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcolorbox
+.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.
+sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrc
+s.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+util-common.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+util-latex.def)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+rcs.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.
+tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfc
+ore.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgf
+sys.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keys.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keyslibraryfiltered.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gf.cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-xetex.def
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-dvipdfmx.def
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsys-common-pdf.def))))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsyssoftpath.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\p
+gfsysprotocol.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcore.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.
+code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathu
+til.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathp
+arser.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.basic.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.trigonometric.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.random.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.comparison.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.base.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.round.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.misc.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+unctions.integerarithmetics.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathc
+alc.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathf
+loat.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.c
+ode.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepoints.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathconstruct.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathusage.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorescopes.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoregraphicstate.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoretransformations.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorequick.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreobjects.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepathprocessing.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorearrows.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreshade.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreimage.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoreexternal.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorelayers.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcoretransparency.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorepatterns.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pg
+fcorerdf.code.tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+duleshapes.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+duleplot.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\p
+gfcomp-version-0-65.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\p
+gfcomp-version-1-18.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty)
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/environ\environ.sty
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\trimspac
+es.sty))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbraster
+.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbskins.
+code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\t
+ikz.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffo
+r.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfke
+ys.sty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+keys.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.st
+y
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.
+code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgf
+for.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz\tikz.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgf
+libraryplothandlers.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmo
+dulematrix.code.tex)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Program Files\MiKTeX\tex/latex/tikzfill\tikzfill.image.sty
+(C:\Program Files\MiKTeX\tex/latex/tikzfill\tikzlibraryfill.image.code.tex))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbskinsj
+igsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.2.0'
+))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbbreaka
+ble.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.2.0'
+(C:\Program Files\MiKTeX\tex/latex/pdfcol\pdfcol.sty
+(C:\Program Files\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbhooks.
+code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbtheore
+ms.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbfittin
+g.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gs.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.s
+ty
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.st
+y)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.c
+fg))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcblistin
+gscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbproces
+sing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.2.0'
+))))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbextern
+al.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbmagazi
+ne.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.2.0'
+)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbvignet
+te.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.2.0'
+
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer
+/tikz/libraries\tikzlibraryfadings.code.tex
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgf
+libraryfadings.code.tex)))
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbposter
+.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.2.0'
+)) (C:\Program Files\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty))
+(C:\Program Files\MiKTeX\tex/latex/tabularray\tabularray.sty)
+(lista_template.aux)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(C:\Program Files\MiKTeX\tex/latex/ninecolors\ninecolors.sty)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Users\maximovrm\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+(C:\Program Files\MiKTeX\tex/latex/microtype\mt-cmr.cfg) [1] [2] [3] [4]
+[5] [6] (lista_template.aux) )
+Output written on lista_template.pdf (6 pages).
+Transcript written on lista_template.log.

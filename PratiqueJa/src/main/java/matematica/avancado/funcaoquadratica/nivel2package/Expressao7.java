@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaoquadratica.nivel2package;
+package matematica.avancado.funcaoquadratica.nivel2package;
 
 import java.util.ArrayList;
 import java.util.HashSet;

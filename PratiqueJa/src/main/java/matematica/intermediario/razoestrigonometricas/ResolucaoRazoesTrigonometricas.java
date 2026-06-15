@@ -279,4 +279,66 @@ public class ResolucaoRazoesTrigonometricas
 		String formula=ParCor.formula("tan~"+angle+"=\\dfrac{\\text{Cateto Oposto}}{\\text{Cateto Adjacente}}");
 		return formula;
 	}
+
+	public static String tan45COX(int base)
+	{
+		String angle="\\alpha";
+		String resolucao=formulaTag(angle)+"\\\\"+angle+"=45°, \\quad tan~45° = 1\\\\";
+		resolucao+="1=\\dfrac{x}{"+base+"}\\\\";
+		resolucao+="x="+base;
+		return resolucao;
+	}
+
+	public static String tan45CAX(int altura)
+	{
+		String angle="\\alpha";
+		String resolucao=formulaTag(angle)+"\\\\"+angle+"=45°, \\quad tan~45° = 1\\\\";
+		resolucao+="1=\\dfrac{"+altura+"}{x}\\\\";
+		resolucao+="x="+altura;
+		return resolucao;
+	}
+
+	public static String sen45COX(int hyp2)
+	{
+		int y=(int)Math.sqrt(hyp2/2);
+		String angle="\\alpha";
+		String resolucao=formulaSen(angle)+"\\\\"+angle+"=45°, \\quad sen~45° = \\dfrac{\\sqrt{2}}{2}\\\\";
+		resolucao+="\\dfrac{\\sqrt{2}}{2}=\\dfrac{x}{\\sqrt{"+hyp2+"}}\\\\";
+		resolucao+="x=\\dfrac{\\sqrt{2}}{2}\\cdot\\sqrt{"+hyp2+"}=\\dfrac{\\sqrt{"+(2*hyp2)+"}}{2}\\\\";
+		resolucao+="x=\\dfrac{"+(2*y)+"}{2}="+y;
+		return resolucao;
+	}
+
+	public static String cos45CAX(int hyp2)
+	{
+		int y=(int)Math.sqrt(hyp2/2);
+		String angle="\\alpha";
+		String resolucao=formulaCos(angle)+"\\\\"+angle+"=45°, \\quad cos~45° = \\dfrac{\\sqrt{2}}{2}\\\\";
+		resolucao+="\\dfrac{\\sqrt{2}}{2}=\\dfrac{x}{\\sqrt{"+hyp2+"}}\\\\";
+		resolucao+="x=\\dfrac{\\sqrt{2}}{2}\\cdot\\sqrt{"+hyp2+"}=\\dfrac{\\sqrt{"+(2*hyp2)+"}}{2}\\\\";
+		resolucao+="x=\\dfrac{"+(2*y)+"}{2}="+y;
+		return resolucao;
+	}
+
+	public static String identidadePitagorica(String angle, int p, int q, int r)
+	{
+		String resolucao=ParCor.formula("\\text{sen}^2~"+angle+" + \\cos^2~"+angle+" = 1")+"\\\\";
+		resolucao+="\\left(\\dfrac{"+p+"}{"+r+"}\\right)^2+\\cos^2~"+angle+"=1\\\\";
+		resolucao+="\\dfrac{"+(p*p)+"}{"+( r*r)+"}+\\cos^2~"+angle+"=1\\\\";
+		resolucao+="\\cos^2~"+angle+"=1-\\dfrac{"+(p*p)+"}{"+( r*r)+"}=\\dfrac{"+(r*r-p*p)+"}{"+( r*r)+"}\\\\";
+		resolucao+="\\cos~"+angle+"=\\dfrac{"+q+"}{"+r+"}";
+		Racional cosVal=new Racional(q,r);
+		cosVal.fatoracao(2);
+		if(cosVal.isSimplificou())
+			resolucao+="="+cosVal.showDfrac();
+		return resolucao;
+	}
+
+	public static String angulosComplementares(int alpha, int beta, int p, int r)
+	{
+		Racional senVal=new Racional(p,r);
+		String resolucao=ParCor.formula("\\text{sen}~\\alpha=\\cos(90°-\\alpha)")+"\\\\";
+		resolucao+="\\cos~"+beta+"°=\\text{sen}~"+alpha+"°="+senVal.showDfrac();
+		return resolucao;
+	}
 }

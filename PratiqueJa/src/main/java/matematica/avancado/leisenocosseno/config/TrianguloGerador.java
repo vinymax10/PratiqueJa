@@ -1,5 +1,8 @@
 package matematica.avancado.leisenocosseno.config;
 
+import static matematica.ConfigImagem.IMG_H;
+import static matematica.ConfigImagem.IMG_W;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +10,8 @@ import java.util.Random;
 
 public class TrianguloGerador {
 
-    private static final int WIDTH = 1250;
-    private static final int HEIGHT = 750;
+    private static final int width = IMG_W;
+    private static final int height = IMG_H;
     private static final int MIN_DISTANCE = 25;
     private static final int MIN_ANGLE = 30;
     private static final Random rand = new Random();
@@ -85,12 +88,12 @@ public class TrianguloGerador {
     }
 
     private static boolean dentroDasBordas(Triangulo t) {
-        return t.p1.x >= MIN_DISTANCE && t.p1.x <= WIDTH - MIN_DISTANCE &&
-               t.p1.y >= MIN_DISTANCE && t.p1.y <= HEIGHT - MIN_DISTANCE &&
-               t.p2.x >= MIN_DISTANCE && t.p2.x <= WIDTH - MIN_DISTANCE &&
-               t.p2.y >= MIN_DISTANCE && t.p2.y <= HEIGHT - MIN_DISTANCE &&
-               t.p3.x >= MIN_DISTANCE && t.p3.x <= WIDTH - MIN_DISTANCE &&
-               t.p3.y >= MIN_DISTANCE && t.p3.y <= HEIGHT - MIN_DISTANCE;
+        return t.p1.x >= MIN_DISTANCE && t.p1.x <= width - MIN_DISTANCE &&
+               t.p1.y >= MIN_DISTANCE && t.p1.y <= height - MIN_DISTANCE &&
+               t.p2.x >= MIN_DISTANCE && t.p2.x <= width - MIN_DISTANCE &&
+               t.p2.y >= MIN_DISTANCE && t.p2.y <= height - MIN_DISTANCE &&
+               t.p3.x >= MIN_DISTANCE && t.p3.x <= width - MIN_DISTANCE &&
+               t.p3.y >= MIN_DISTANCE && t.p3.y <= height - MIN_DISTANCE;
     }
 
     private static boolean angulosValidos(Triangulo t) {

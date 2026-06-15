@@ -22,7 +22,7 @@ public class Exercicio2 extends GeradorExercicio
 		res += "\\(A = \\pi \\cdot " + r + "^2 = \\mathbf{" + k + "}\\pi\\)";
 
 		ConfigCircunferencia config = new ConfigCircunferencia("" + r, true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do círculo de raio \\(" + r + "\\)?");
 		addParagrafoImagem(image);

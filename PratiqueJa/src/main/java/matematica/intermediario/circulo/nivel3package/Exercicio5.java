@@ -19,7 +19,7 @@ public class Exercicio5 extends GeradorExercicio
 		int m = triple[1];
 		int r = triple[2];
 
-		String res = "\\(" + ResolucaoCirculo.formulaArco() + "\\), \\quad ";
+		String res = "\\(" + ResolucaoCirculo.formulaArco() + "\\), ";
 		res += "\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)";
 		res += "\\(\\\\\\)";
 		res += "Dividindo \\(A_s\\) por \\(\\ell\\): \\(\\\\\\)";
@@ -29,7 +29,7 @@ public class Exercicio5 extends GeradorExercicio
 		res += "r = \\dfrac{2 \\cdot " + m + "}{" + k + "} = \\mathbf{" + r + "}\\)";
 
 		ConfigSetor config = new ConfigSetor("r", 90);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um setor circular tem comprimento de arco \\(" + k + "\\pi\\) e área \\(" + m + "\\pi\\). Qual é o raio?");
 		addParagrafoImagem(image);

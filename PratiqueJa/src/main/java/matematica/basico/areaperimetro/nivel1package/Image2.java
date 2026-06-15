@@ -19,7 +19,7 @@ public class Image2 extends GeradorExercicio
 		String resolucao = ResolucaoAreaPerimetro.areaRetangulo(b, h);
 
 		ConfigRetangulo config = new ConfigRetangulo("" + b, "" + h, true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do retângulo?");
 		addParagrafoImagem(image);

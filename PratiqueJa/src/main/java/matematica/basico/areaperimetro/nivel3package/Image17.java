@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrapezio2;
 import matematica.expressao.MyExpression;
 
@@ -27,8 +27,8 @@ public class Image17 extends GeradorExercicio
 		MyExpression expressao = new MyExpression("(" + B + "+" + b + ") * h" + "=" + area + "*2");
 		resolucao += expressao.resolverLatex();
 
-		Config config = new ConfigTrapezio2(B + "", b + "", "h", "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrapezio2(B + "", b + "", "h", "", true);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do trapézio é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);

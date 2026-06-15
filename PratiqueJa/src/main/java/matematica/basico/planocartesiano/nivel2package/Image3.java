@@ -28,7 +28,7 @@ public class Image3 extends GeradorExercicio
 		while (ax == 0 || bx == 0 || ay == 0 || by == 0 || ax == bx || ay == by);
 
 		ConfigPlanoCartesianoAB config = new ConfigPlanoCartesianoAB(ax, ay, bx, by);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Os pontos A e B estão indicados no plano. Qual é o ponto médio do segmento \\( \\overline{AB} \\)?");
 		addParagrafoImagem(image);

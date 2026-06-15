@@ -27,7 +27,7 @@ public class Exercicio1 extends GeradorExercicio
 		res += "R = \\sqrt{" + (k + smallR * smallR) + "} = \\mathbf{" + bigR + "}\\)";
 
 		ConfigCoroa config = new ConfigCoroa("R", "" + smallR);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de uma coroa circular é \\(" + k + "\\pi\\) e o raio interno mede \\(" + smallR + "\\). Qual é o raio externo \\(R\\)?");
 		addParagrafoImagem(image);

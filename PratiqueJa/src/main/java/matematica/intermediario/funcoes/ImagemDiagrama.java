@@ -13,8 +13,8 @@ import matematica.ParCor;
 public class ImagemDiagrama
 {
 	// Dimensões da tela
-	private static final int W  = 1200;
-	private static final int H  = 700;
+	private static final int W  = 1250;
+	private static final int H  = 750;
 	// Ovals
 	private static final int OY = 50;
 	private static final int OW = 380;
@@ -28,7 +28,7 @@ public class ImagemDiagrama
 		Graphics2D g2 = img.createGraphics();
 		Graphics.setHint(g2);
 
-		ParCor cor = ParCor.parCor(corIndex);
+		ParCor cor = ParCor.parCorAleatorio();
 		g2.setColor(Color.decode(cor.getCorForte()));
 		g2.setStroke(new BasicStroke(8));
 

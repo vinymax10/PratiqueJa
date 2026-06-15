@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaoexponencial.nivel2package;
+package matematica.avancado.funcaoexponencial.nivel2package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;

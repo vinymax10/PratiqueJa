@@ -25,7 +25,7 @@ public class Image30 extends GeradorExercicio
 		resolucao += "b=" + (b + a) + "-" + a + "=" + b + "\\\\";
 
 		ConfigParalelogramo config = new ConfigParalelogramo("b", "", "" + a, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do paralelogramo é \\(" + perimetro + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);

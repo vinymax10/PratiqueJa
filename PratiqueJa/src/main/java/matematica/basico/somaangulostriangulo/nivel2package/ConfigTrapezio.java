@@ -26,12 +26,12 @@ public class ConfigTrapezio extends Config
 		this.e = new Angulo(this, e, false, e + "°");
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -44,23 +44,23 @@ public class ConfigTrapezio extends Config
 		
 		if (a.mostrar)
 			Graphics.setAngleSemBorda(g2, 50 - raio / 2, 700 - raio / 2, raio, 0, 70,
-			ParCor.parCor(index + a.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (b.mostrar)
 			Graphics.setAngleSemBorda(g2, 275 - raio / 2, 50 - raio / 2, raio, 251, 71,
-			ParCor.parCor(index + b.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (c.mostrar)
 			Graphics.setAngleSemBorda(g2, 275 - raio / 2, 50 - raio / 2, raio, 316, 44,
-			ParCor.parCor(index + c.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (d.mostrar)
 			Graphics.setAngleSemBorda(g2, 925 - raio / 2, 700 - raio / 2, raio, 180, -45,
-			ParCor.parCor(index + d.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (e.mostrar)
 			Graphics.setAngleSemBorda(g2, 925 - raio / 2, 700 - raio / 2, raio, 135, -46,
-			ParCor.parCor(index + e.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		Polygon paralelogramo = new Polygon();
 		paralelogramo.addPoint(50, 700);

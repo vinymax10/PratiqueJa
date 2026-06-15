@@ -17,7 +17,7 @@ public class GraficoFuncaoMod extends Config
 	private static final int INI_X_IMG = 50;
 	private static final int INI_Y_IMG = 50;
 	private static final int FIM_X_IMG = 1200;
-	private static final int FIM_Y_IMG = 1200;
+	private static final int FIM_Y_IMG = 700;
 
 	private static final double INI_X_GRF = -5.5;
 	private static final double FIM_X_GRF = 5.5;
@@ -25,26 +25,24 @@ public class GraficoFuncaoMod extends Config
 	private static final double FIM_Y_GRF = 9.0;
 
 	private final DadosFuncaoMod dados;
-	private final int            indice;
 
-	public GraficoFuncaoMod(DadosFuncaoMod dados, int indice)
+	public GraficoFuncaoMod(DadosFuncaoMod dados)
 	{
-		this.dados  = dados;
-		this.indice = indice;
+		this.dados = dados;
 	}
 
 	public Graphics2D carregamentoInicial(BufferedImage image)
 	{
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
-		g2.setColor(Color.decode(ParCor.parCor(indice - 1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		g2.setStroke(new BasicStroke(10));
 		return g2;
 	}
 
 	public void inserirEixos(Graphics2D g2)
 	{
-		g2.setColor(Color.decode(ParCor.parCor(indice).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		g2.setStroke(new BasicStroke(10));
 
 		Graphics.arrow(g2,
@@ -62,7 +60,7 @@ public class GraficoFuncaoMod extends Config
 	/** Desenha o V: dois segmentos de reta convergindo no vértice (h, k). */
 	public void inserirCurva(Graphics2D g2)
 	{
-		g2.setColor(Color.decode(ParCor.parCor(indice + 1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		g2.setStroke(new BasicStroke(12));
 
 		// Braço esquerdo: inclina de (xLeft, yLeft) até vértice
@@ -97,7 +95,7 @@ public class GraficoFuncaoMod extends Config
 	 */
 	public void inserirLinhaHorizontal(Graphics2D g2, int yVal, String label)
 	{
-		g2.setColor(Color.decode(ParCor.parCor(indice + 2).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		float[] dash = {25.0f, 12.0f};
 		g2.setStroke(new BasicStroke(8, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f));
 
@@ -118,7 +116,7 @@ public class GraficoFuncaoMod extends Config
 		double py  = dados.pontoY;
 		int raio   = 30;
 
-		g2.setColor(Color.decode(ParCor.parCor(indice - 1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		// linha tracejada vertical ao eixo x
 		Graphics.setLineTracejada(g2, tx(px), ty(py), tx(px), ty(0), false, false);

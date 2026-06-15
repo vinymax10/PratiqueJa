@@ -22,7 +22,7 @@ public class Exercicio6 extends GeradorExercicio
 		res += "\\(C = \\pi \\cdot " + d + " = \\mathbf{" + k + "}\\pi\\)";
 
 		ConfigCirculoDiametro config = new ConfigCirculoDiametro("" + d, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o comprimento da circunferência de diâmetro \\(" + d + "\\)?");
 		addParagrafoImagem(image);

@@ -26,25 +26,19 @@ public class ProblemaPrincipioMultiplicacao
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formulaArranjoSimples() + "\\\\";
+		String res = "Pelo Princípio da Multiplicação, multiplicamos o número de possibilidades de cada etapa:";
+		res += "\\(\\\\\\)";
 		switch(tipo)
 		{
-			case Duas: 
-				resolucaoLatex += a+"\\cdot"+b+"="+(a*b);
+			case Duas:
+				res += "\\(" + a + " \\cdot " + b + " = \\mathbf{" + (a*b) + "}\\)";
 				break;
 			case Tres:
-				resolucaoLatex += a+"\\cdot"+b+"\\cdot"+c+"="+(a*b*c);
+				res += "\\(" + a + " \\cdot " + b + " \\cdot " + c + " = \\mathbf{" + (a*b*c) + "}\\)";
 				break;
 		}
 
-		return resolucaoLatex;
-
-	}
-
-	private String formulaArranjoSimples()
-	{
-		return "\\text{Princípio da Multiplicação}";
+		return res;
 	}
 
 	public String resultado()

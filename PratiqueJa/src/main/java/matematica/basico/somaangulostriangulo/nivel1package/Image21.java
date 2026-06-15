@@ -25,14 +25,12 @@ public class Image21 extends GeradorExercicio
 		config.a.mostrar();
 		config.e.nome = "x";
 
-		String texto = config.getTextLatex();
 		String resultadoCorreto = "" + e + "°";
 		String resolucao = ResolucaoSAT2.complemento180("x", a, b, f);
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

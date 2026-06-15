@@ -19,7 +19,7 @@ public class Image3 extends GeradorExercicio
 		String resolucao = ResolucaoAreaPerimetro.areaRetangulo(b, h);
 
 		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "" + h, "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do paralelogramo?");
 		addParagrafoImagem(image);

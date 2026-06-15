@@ -22,14 +22,14 @@ public class ConfigDivisaoNatural
 		this.quociente = quociente;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
 		int size = 100;
 		
 		int width=Graphics.widthLabel(dividendo);
 		int height=Graphics.HeightLabel(dividendo);
 		
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) (300), (Math.max(size, height) + 50), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);

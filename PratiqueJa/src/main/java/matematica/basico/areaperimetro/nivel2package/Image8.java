@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrianguloEquilatero;
 
 //	triangulo equilatero
@@ -20,8 +20,8 @@ public class Image8 extends GeradorExercicio
 		String resolucao = "";
 		resolucao += ResolucaoAreaPerimetro.areaTrianguloEquilatero(l);
 
-		Config config = new ConfigTrianguloEquilatero("" + l, true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrianguloEquilatero("" + l, true);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do triângulo é \\(A=x\\sqrt{3}\\), qual o valor de \\(x\\)?");
 		addParagrafoImagem(image);

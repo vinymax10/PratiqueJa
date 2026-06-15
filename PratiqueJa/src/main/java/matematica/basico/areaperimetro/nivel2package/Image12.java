@@ -23,7 +23,7 @@ public class Image12 extends GeradorExercicio
 		resolucao += "P=4 \\cdot " + l + "=" + (4 * l);
 
 		ConfigQuadrado3 config = new ConfigQuadrado3("l", "r", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + strRaio + "\\), qual o perímetro do quadrado?");
 		addParagrafoImagem(image);

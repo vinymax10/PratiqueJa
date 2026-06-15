@@ -21,7 +21,7 @@ public class Image2 extends GeradorExercicio
 		}
 
 		ConfigRetaInteiro config = new ConfigRetaInteiro(a, b);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		int pontoAx = (int) config.pontoAx;
 		int pontoAy = (int) config.pontoAy;

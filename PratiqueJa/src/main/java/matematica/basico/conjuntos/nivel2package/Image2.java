@@ -17,7 +17,7 @@ public class Image2 extends GeradorExercicio
 		String resolucao = ResolucaoConjuntos.menosA(dados);
 
 		ConfigAB config = new ConfigAB(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o valor de \\(|A|\\)?");
 		addParagrafoImagem(image);

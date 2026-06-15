@@ -70,6 +70,26 @@ public class Resolucao
 		return resolucaoLatex;
 	}
 	
+	public static String raioCircunscrito(String angle, Racional lado, Racional sen)
+	{
+		String resolucaoLatex = ParCor.formula("R = \\dfrac{a}{2 \\cdot \\text{sen}~A}")+"\\\\";
+		resolucaoLatex += "R = \\dfrac{"+lado.showDfrac()+"}{2 \\cdot "+sen.showDfrac()+"}\\\\";
+		Racional r = lado.div(new Racional(2).mult(sen));
+		r.fatoracao(2);
+		resolucaoLatex += "R = "+r.showDfrac();
+		return resolucaoLatex;
+	}
+
+	public static String ladoPorRaio(String angle, Racional r, Racional sen)
+	{
+		String resolucaoLatex = ParCor.formula("a = 2R \\cdot \\text{sen}~A")+"\\\\";
+		resolucaoLatex += "x = 2 \\cdot "+r.showDfrac()+" \\cdot "+sen.showDfrac()+"\\\\";
+		Racional resultado = new Racional(2).mult(r).mult(sen);
+		resultado.fatoracao(2);
+		resolucaoLatex += "x = "+resultado.showDfrac();
+		return resolucaoLatex;
+	}
+
 	public static String leiCosCosseno(String angle,
 	Racional lado1, Racional lado2, Racional lado3)
 	{

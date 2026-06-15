@@ -22,7 +22,7 @@ public class Image31 extends GeradorExercicio
 		resolucao += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\\\";
 
 		ConfigLozango config = new ConfigLozango("", "", "", "", "l", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do lozango é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);

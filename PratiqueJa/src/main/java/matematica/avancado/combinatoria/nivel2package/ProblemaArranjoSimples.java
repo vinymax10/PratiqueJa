@@ -28,20 +28,17 @@ public class ProblemaArranjoSimples
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formulaArranjoSimples() + "\\\\";
-		resolucaoLatex += "n=" + n +",\\quad k="+k+"\\\\";
-		resolucaoLatex += "A("+n+","+k+")=\\dfrac{"+ n + "!}{("+n+"-"+k+")!}\\\\";
-		resolucaoLatex += "A("+n+","+k+")=\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k))+"\\cdot "+(n-k)+"!}{"+(n-k)+"!}\\\\";
-		resolucaoLatex += "A("+n+","+k+")="+AuxCombinacao.fatorialString(n,(n-k))+"="+resultado();
+		String res = "O arranjo simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dado por:";
+		res += "\\(\\\\\\)";
+		res += "\\(" + ParCor.formula("A(n,k) = \\dfrac{n!}{(n-k)!}") + "\\)";
+		res += "\\(\\\\\\)";
+		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
+		res += "\\(\\\\\\)";
+		res += "\\(A(" + n + "," + k + ") = \\dfrac{" + n + "!}{(" + n + "-" + k + ")!} = \\\\ ";
+		res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + (n-k) + "!} = \\\\ ";
+		res += AuxCombinacao.fatorialString(n,(n-k)) + " = \\mathbf{" + resultado() + "}\\)";
 
-		return resolucaoLatex;
-	}
-	
-	private String formulaArranjoSimples()
-	{
-		return "\\text{Arranjo Simples}\\\\"
-		+ParCor.formula("A(n,k)=\\dfrac{n!}{(n-k)!}");
+		return res;
 	}
 
 	public String resultado()

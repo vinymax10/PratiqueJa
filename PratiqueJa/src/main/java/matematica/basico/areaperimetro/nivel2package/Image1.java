@@ -24,7 +24,7 @@ public class Image1 extends GeradorExercicio
 		resolucao += "A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l);
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strDiagonal + "\\), qual a área do quadrado?");
 		addParagrafoImagem(image);

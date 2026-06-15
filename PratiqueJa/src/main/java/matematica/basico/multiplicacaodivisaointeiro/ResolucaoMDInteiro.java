@@ -1,4 +1,4 @@
-﻿package matematica.basico.multiplicacaodivisaointeiro;
+package matematica.basico.multiplicacaodivisaointeiro;
 
 import matematica.DefinicaoCores;
 import matematica.basico.resolucaonatural.ResolucaoNatural;

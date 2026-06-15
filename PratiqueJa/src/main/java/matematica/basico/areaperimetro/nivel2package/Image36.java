@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTriangulo;
 
 public class Image36 extends GeradorExercicio
@@ -25,8 +25,8 @@ public class Image36 extends GeradorExercicio
 		resolucao += "a+" + b + "+" + c + "=" + perimetro + "\\\\";
 		resolucao += "a=" + perimetro + "-" + b + "-" + c + "=" + a;
 
-		Config config = new ConfigTriangulo("" + b, "", "a", "" + c, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTriangulo("" + b, "", "a", "" + c, false);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do triângulo é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);

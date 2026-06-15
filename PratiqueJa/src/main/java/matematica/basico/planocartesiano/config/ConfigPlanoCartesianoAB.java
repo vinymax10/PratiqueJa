@@ -17,11 +17,10 @@ public class ConfigPlanoCartesianoAB extends Config
 	private static final int INI_X_IMG = 50;
 	private static final int INI_Y_IMG = 50;
 	private static final int FIM_X_IMG = 1200;
-	private static final int FIM_Y_IMG = 1200;
+	private static final int FIM_Y_IMG = 700;
 
 	public final int ax, ay, bx, by;
 	private final int range;
-	private int indice;
 
 	public ConfigPlanoCartesianoAB(int ax, int ay, int bx, int by)
 	{
@@ -36,18 +35,17 @@ public class ConfigPlanoCartesianoAB extends Config
 		this.range = range;
 	}
 
-	public BufferedImage criarImagem(int indice)
+	public BufferedImage criarImagem()
 	{
-		this.indice = indice;
-		BufferedImage image = new BufferedImage(1250, 1250, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(IMG_W, IMG_H, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
 		g2.setStroke(new BasicStroke(10));
-		g2.setColor(Color.decode(ParCor.parCor(indice - 1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		inserirEixos(g2);
 		inserirSegmento(g2);
-		inserirPonto(g2, ax, ay, "A", indice + 1, indice - 1);
-		inserirPonto(g2, bx, by, "B", indice + 2, indice);
+		inserirPonto(g2, ax, ay, "A");
+		inserirPonto(g2, bx, by, "B");
 		return image;
 	}
 
@@ -57,29 +55,29 @@ public class ConfigPlanoCartesianoAB extends Config
 		int meioX = INI_X_IMG + (FIM_X_IMG - INI_X_IMG) / 2;
 		Graphics.arrow(g2, INI_X_IMG, meioY, FIM_X_IMG, meioY, false, true);
 		Graphics.arrow(g2, meioX, FIM_Y_IMG, meioX, INI_Y_IMG, false, true);
-		g2.setColor(Color.decode(ParCor.parCor(indice).getCorForte()));
-		Graphics.addLabel(g2, "x", 1200, 650, Alinhamento.TopRight, 70);
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
+		Graphics.addLabel(g2, "x", 1200, 400, Alinhamento.TopRight, 70);
 		Graphics.addLabel(g2, "y", 625, 0, Alinhamento.TopRight, 70);
 	}
 
 	private void inserirSegmento(Graphics2D g2)
 	{
-		g2.setColor(Color.decode(ParCor.parCor(indice + 3).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		g2.setStroke(new BasicStroke(6));
 		g2.draw(new Line2D.Double(tx(ax), ty(ay), tx(bx), ty(by)));
 		g2.setStroke(new BasicStroke(10));
 	}
 
-	private void inserirPonto(Graphics2D g2, int px, int py, String label, int corTracejada, int corPonto)
+	private void inserirPonto(Graphics2D g2, int px, int py, String label)
 	{
 		int size = 30;
 
-		g2.setColor(Color.decode(ParCor.parCor(corTracejada).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Graphics.setLineTracejada(g2, tx(px), ty(py), tx(px), ty(0), false, false);
 		if (py != 0)
 			Graphics.setLineTracejada(g2, tx(px), ty(py), tx(0), ty(py), false, false);
 
-		g2.setColor(Color.decode(ParCor.parCor(corPonto).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D dot = new Ellipse2D.Double(tx(px) - size / 2.0, ty(py) - size / 2.0, size, size);
 		g2.fill(dot);
 

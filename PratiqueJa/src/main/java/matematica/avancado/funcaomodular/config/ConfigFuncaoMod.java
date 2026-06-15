@@ -2,6 +2,9 @@ package matematica.avancado.funcaomodular.config;
 
 import java.awt.image.BufferedImage;
 
+import static matematica.ConfigImagem.IMG_H;
+import static matematica.ConfigImagem.IMG_W;
+
 public class ConfigFuncaoMod
 {
 	public int          indice;
@@ -19,8 +22,8 @@ public class ConfigFuncaoMod
 
 	public BufferedImage criarImagem()
 	{
-		BufferedImage image = new BufferedImage(1250, 1250, BufferedImage.TYPE_INT_ARGB);
-		GraficoFuncaoMod g = new GraficoFuncaoMod(dados, indice);
+		BufferedImage image = new BufferedImage(IMG_W, IMG_H, BufferedImage.TYPE_INT_ARGB);
+		GraficoFuncaoMod g = new GraficoFuncaoMod(dados);
 
 		var g2 = g.carregamentoInicial(image);
 		g.inserirEixos(g2);

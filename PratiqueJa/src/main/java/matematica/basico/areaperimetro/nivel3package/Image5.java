@@ -22,7 +22,7 @@ public class Image5 extends GeradorExercicio
 		resolucao += "r=\\dfrac{l}{2}=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\\\";
 
 		ConfigQuadrado3 config = new ConfigQuadrado3("l", "r", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(r\\)?");
 		addParagrafoImagem(image);

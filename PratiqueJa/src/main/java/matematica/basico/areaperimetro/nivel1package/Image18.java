@@ -17,7 +17,7 @@ public class Image18 extends GeradorExercicio
 		String resolucao = ResolucaoAreaPerimetro.perimetroQuadrado(l);
 
 		ConfigLozango config = new ConfigLozango("", "", "", "", "" + l, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o perímetro do losango?");
 		addParagrafoImagem(image);

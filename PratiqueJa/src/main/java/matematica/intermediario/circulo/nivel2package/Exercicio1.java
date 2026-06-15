@@ -21,7 +21,7 @@ public class Exercicio1 extends GeradorExercicio
 		res += "r = \\dfrac{" + k + "\\pi}{2\\pi} = \\mathbf{" + r + "}\\)";
 
 		ConfigCircunferencia config = new ConfigCircunferencia("r", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de uma circunferência é \\(" + k + "\\pi\\). Qual é o raio?");
 		addParagrafoImagem(image);

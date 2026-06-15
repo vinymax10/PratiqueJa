@@ -27,7 +27,7 @@ public class Exercicio1 extends GeradorExercicio
 		res += "n = \\mathbf{" + n + "}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A soma dos ângulos internos de um polígono regular é \\(" + si + "^\\circ\\). Quantos lados ele tem?");
 		addParagrafoImagem(image);

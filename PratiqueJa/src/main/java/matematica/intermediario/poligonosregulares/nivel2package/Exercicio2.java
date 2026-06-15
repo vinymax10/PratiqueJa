@@ -26,7 +26,7 @@ public class Exercicio2 extends GeradorExercicio
 		res += "n = \\dfrac{360^\\circ}{" + ae + "^\\circ} = \\mathbf{" + n + "}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Cada ângulo externo de um polígono regular mede \\(" + ae + "^\\circ\\). Quantos lados ele tem?");
 		addParagrafoImagem(image);

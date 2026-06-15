@@ -33,7 +33,7 @@ public class Image21 extends GeradorExercicio
 		res += "\\dfrac{D}{2}=\\sqrt{" + (halfD * halfD) + "}=" + halfD + " \\Rightarrow D=\\mathbf{" + D + "}\\)";
 
 		ConfigLozango config = new ConfigLozango("D", "" + d, "", "", "", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do losango é \\(" + perimetro + "\\) e \\(d=" + d + "\\), qual o valor de \\(D\\)?");
 		addParagrafoImagem(image);

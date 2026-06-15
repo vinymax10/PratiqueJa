@@ -27,13 +27,13 @@ public class Config1 extends Config
 		this.lateralDir = lateralDir;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
 //		int size = 500;
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();
@@ -57,18 +57,18 @@ public class Config1 extends Config
 
 			arc = new Arc2D.Double((int) circulo.getCenterX() - raio / 2, (int) circulo.getCenterY() - raio / 2, raio, raio,
 			-45, 90, Arc2D.PIE);
-			g2.setColor(Color.decode(ParCor.parCor(index).getCorFraca()));
+			g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorFraca()));
 			g2.fill(arc);
 		}
 
 		if(!lateralEsq.equals(""))
 		{
 			arc = new Arc2D.Double(25 - raio / 2, (int) circulo.getCenterY() - raio / 2, raio, raio, -22, 45, Arc2D.PIE);
-			g2.setColor(Color.decode(ParCor.parCor(index +1).getCorFraca()));
+			g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorFraca()));
 			g2.fill(arc);
 		}
 
-		g2.setColor(Color.decode(ParCor.parCor(index-1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		if(!centro.equals(""))
 		{
@@ -90,12 +90,12 @@ public class Config1 extends Config
 		{
 			arc = new Arc2D.Double(circulo.getCenterX() - circulo.getWidth() / 2,
 			circulo.getCenterY() - circulo.getWidth() / 2, circulo.getWidth(), circulo.getWidth(), -45, 90, Arc2D.OPEN);
-			g2.setColor(Color.decode(ParCor.parCor(index).getCorForte()));
+			g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 			g2.setStroke(new BasicStroke(20));
 			g2.draw(arc);
 
 			g2.setStroke(new BasicStroke(10));
-			g2.setColor(Color.decode(ParCor.parCor(index-1).getCorForte()));
+			g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		}
 		
 		if(!lateralEsq.equals(""))

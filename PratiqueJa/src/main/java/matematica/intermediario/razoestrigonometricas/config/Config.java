@@ -3,9 +3,10 @@ package matematica.intermediario.razoestrigonometricas.config;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import matematica.ConfigImagem;
 import matematica.intermediario.razoestrigonometricas.dados.Dados;
 
-public abstract class Config
+public abstract class Config implements ConfigImagem
 {
 	String base,altura,hipotenusa;
 	String angleBase,angleAltura;
@@ -19,7 +20,7 @@ public abstract class Config
 		this.angleAltura = dados.strAngleAltura;
 	}
 	
-	public BufferedImage criarImagem(int index) {
+	public BufferedImage criarImagem() {
 		return null;
 	}
 	

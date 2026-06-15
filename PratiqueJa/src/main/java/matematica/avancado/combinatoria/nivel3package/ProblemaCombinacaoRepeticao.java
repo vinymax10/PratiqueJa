@@ -28,36 +28,31 @@ public class ProblemaCombinacaoRepeticao
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formula() + "\\\\";
-		resolucaoLatex += "n=" + n +",\\quad k="+k+"\\\\";
 		int newN=n+k-1;
-		resolucaoLatex += "CR("+n+","+k+")=\\dfrac{("+ n+"+"+k+"-1" + ")!}{"+k+"!\\cdot("+n+"- 1)!}\\\\";
-		resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+ newN + "!}{"+k+"!\\cdot"+(n-1)+"!}\\\\";
-
+		String res = "A combinação com repetição de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dada por:";
+		res += "\\(\\\\\\)";
+		res += "\\(" + ParCor.formula("CR(n,k) = \\binom{n+k-1}{k} = \\dfrac{(n+k-1)!}{k!\\cdot(n-1)!}") + "\\)";
+		res += "\\(\\\\\\)";
+		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
+		res += "\\(\\\\\\)";
+		res += "\\(CR(" + n + "," + k + ") = \\dfrac{(" + n + "+" + k + "-1)!}{" + k + "!\\cdot(" + n + "-1)!} = \\\\ ";
+		res += "\\dfrac{" + newN + "!}{" + k + "!\\cdot" + (n-1) + "!} = \\\\ ";
 		if((n-1)>k)
 		{
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{" + AuxCombinacao.fatorialString(newN,(newN-k))+"\\cdot "+(newN-k)+"!}{"+k+"!\\cdot"+(newN-k)+"!}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(newN,(newN-k))+"}{"+k+"!}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(newN,(newN-k))+"}{"+AuxCombinacao.fatorialString(k)+"}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+Algebra.fatorial(newN,(newN-k))+"}{"+Algebra.fatorial(k)+"}="+resultado();
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,(newN-k)) + "\\cdot " + (newN-k) + "!}{" + k + "!\\cdot" + (newN-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,(newN-k)) + "}{" + k + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,(newN-k)) + "}{" + AuxCombinacao.fatorialString(k) + "} = \\\\ ";
+			res += "\\dfrac{" + Algebra.fatorial(newN,(newN-k)) + "}{" + Algebra.fatorial(k) + "} = \\mathbf{" + resultado() + "}\\)";
 		}
 		else
 		{
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{" + AuxCombinacao.fatorialString(newN,k)+"\\cdot "+k+"!}{"+k+"!\\cdot"+(newN-k)+"!}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(newN,k)+"}{"+(newN-k)+"!}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(newN,k)+"}{"+AuxCombinacao.fatorialString(newN-k)+"}\\\\";
-			resolucaoLatex += "CR("+n+","+k+")=\\dfrac{"+Algebra.fatorial(newN,k)+"}{"+Algebra.fatorial(newN-k)+"}="+resultado();
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,k) + "\\cdot " + k + "!}{" + k + "!\\cdot" + (newN-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,k) + "}{" + (newN-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(newN,k) + "}{" + AuxCombinacao.fatorialString(newN-k) + "} = \\\\ ";
+			res += "\\dfrac{" + Algebra.fatorial(newN,k) + "}{" + Algebra.fatorial(newN-k) + "} = \\mathbf{" + resultado() + "}\\)";
 		}
 
-		return resolucaoLatex;
-
-	}
-
-	private String formula()
-	{
-		return "\\text{Combinação com Repetição}\\\\ "
-		+ParCor.formula("CR(n, k)=\\binom{n+k-1}{k}=\\dfrac{(n + k - 1)!}{k! \\cdot (n - 1)!}");
+		return res;
 	}
 
 	public String resultado()

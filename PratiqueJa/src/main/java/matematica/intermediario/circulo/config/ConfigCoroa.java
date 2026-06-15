@@ -8,11 +8,13 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
+import matematica.ConfigImagem;
+
 import infra.Graphics;
 import matematica.Alinhamento;
 import matematica.ParCor;
 
-public class ConfigCoroa
+public class ConfigCoroa implements ConfigImagem
 {
 	String R;
 	String r;
@@ -23,12 +25,12 @@ public class ConfigCoroa
 		this.r = r;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width = 1250;
-		int height = 750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index - 1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -52,6 +54,10 @@ public class ConfigCoroa
 		g2.setStroke(new BasicStroke(8));
 		g2.draw(outer);
 		g2.draw(inner);
+
+		// Center dot
+		int dotR = 10;
+		g2.fill(new Ellipse2D.Double(cx - dotR, cy - dotR, 2 * dotR, 2 * dotR));
 
 		// R: horizontal right line from center to outer edge
 		g2.setStroke(new BasicStroke(5));

@@ -19,7 +19,7 @@ public class Image1 extends GeradorExercicio
 		if (rand.nextBoolean()) b = -b;
 
 		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(a, b);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		int tipo = rand.nextInt(3);
 		String nomeRef;

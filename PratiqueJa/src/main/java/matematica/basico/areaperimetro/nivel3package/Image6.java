@@ -24,7 +24,7 @@ public class Image6 extends GeradorExercicio
 		resolucao += "b=\\dfrac{" + area + "}{" + h + "}=" + b + "\\\\";
 
 		ConfigRetangulo config = new ConfigRetangulo("b", "" + h, true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do retângulo é \\(" + area + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);

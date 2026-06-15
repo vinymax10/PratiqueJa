@@ -24,7 +24,7 @@ public class Image9 extends GeradorExercicio
 		resolucao += "P=4 \\cdot " + l + "=" + (4 * l);
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strDiagonal + "\\), qual o perímetro do quadrado?");
 		addParagrafoImagem(image);

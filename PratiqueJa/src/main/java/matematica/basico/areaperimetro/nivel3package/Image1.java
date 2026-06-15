@@ -21,7 +21,7 @@ public class Image1 extends GeradorExercicio
 		resolucao += "l=" + "\\sqrt{" + area + "} = " + l + "\\\\";
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);

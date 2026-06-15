@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
 
 //	triangulo isosceles
@@ -25,8 +25,8 @@ public class Image15 extends GeradorExercicio
 		resolucao += "a=" + a + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\\\";
 		resolucao += "P=2 \\cdot " + a + "+" + b + "=" + (2 * a) + "+" + b + "=" + ((2 * a) + b);
 
-		Config config = new ConfigTrianguloIsosceles("", " ", "" + meiaBase, "" + a, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrianguloIsosceles("", " ", "" + meiaBase, "" + a, false);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o perímetro do triângulo?");
 		addParagrafoImagem(image);

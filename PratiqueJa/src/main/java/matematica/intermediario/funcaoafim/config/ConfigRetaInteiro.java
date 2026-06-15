@@ -18,7 +18,7 @@ public class ConfigRetaInteiro extends Config
 	private static int iniXImagem = 50;
 	private static int iniYImagem = 50;
 	private static int fimXImagem = 1200;
-	private static int fimYImagem = 1200;
+	private static int fimYImagem = 700;
 
 	private static int iniXGrafico = -10;
 	private static int fimXGrafico = 10;
@@ -27,7 +27,6 @@ public class ConfigRetaInteiro extends Config
 	
 	int a,b;
 	ParCor cores[];
-	int index;
 	Random rand=new Random();
 	
 	public double pontoAx,pontoAy,pontoBx,pontoBy;
@@ -39,14 +38,12 @@ public class ConfigRetaInteiro extends Config
 		this.b = b;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		this.index=index;
-		
-		int sizeX = 1250;
-		int sizeY = 1250;
+		int sizeX = IMG_W;
+		int sizeY = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) sizeX, sizeY, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -74,7 +71,7 @@ public class ConfigRetaInteiro extends Config
 
 		Graphics.arrow(g2, axImagem, ayImagem, bxImagem, byImagem, false, false);
 
-		g2.setColor(Color.decode(ParCor.parCor(index).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 	}
 
 	private void inserirEixoCartesiano(Graphics2D g2)
@@ -85,9 +82,9 @@ public class ConfigRetaInteiro extends Config
 		Graphics.arrow(g2, iniXImagem + (fimXImagem - iniXImagem) / 2, fimYImagem,
 		iniXImagem + (fimXImagem - iniXImagem) / 2, iniYImagem, false, true); // eixo y
 
-		g2.setColor(Color.decode(ParCor.parCor(index).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
-		Graphics.addLabel(g2, "x", 1200, 650, Alinhamento.TopRight,70);
+		Graphics.addLabel(g2, "x", 1200, 400, Alinhamento.TopRight,70);
 		Graphics.addLabel(g2, "y", 625, 0, Alinhamento.TopRight,70);
 	}
 
@@ -114,7 +111,7 @@ public class ConfigRetaInteiro extends Config
 
 		pontoBy = a * pontoBx + b;
 
-		g2.setColor(Color.decode(ParCor.parCor(index +1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Graphics.setLineTracejada(g2, transladaX(pontoBx), transladaY(pontoBy), transladaX(pontoBx), transladaY(0),
 		false, false);
@@ -123,7 +120,7 @@ public class ConfigRetaInteiro extends Config
 			Graphics.setLineTracejada(g2, transladaX(pontoBx), transladaY(pontoBy), transladaX(0), transladaY(pontoBy),
 			false, false);
 
-		g2.setColor(Color.decode(ParCor.parCor(index-1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D ponto = new Ellipse2D.Double(transladaX(pontoBx) - size/2, transladaY(pontoBy) - size/2, size, size);
 		g2.fill(ponto);
 
@@ -162,7 +159,7 @@ public class ConfigRetaInteiro extends Config
 
 		pontoAy = a * pontoAx + b;
 
-		g2.setColor(Color.decode(ParCor.parCor(index +1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Graphics.setLineTracejada(g2, transladaX(pontoAx), transladaY(pontoAy), transladaX(pontoAx), transladaY(0),
 		false, false);
@@ -171,7 +168,7 @@ public class ConfigRetaInteiro extends Config
 			Graphics.setLineTracejada(g2, transladaX(pontoAx), transladaY(pontoAy), transladaX(0), transladaY(pontoAy),
 			false, false);
 
-		g2.setColor(Color.decode(ParCor.parCor(index-1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D ponto = new Ellipse2D.Double(transladaX(pontoAx) - size/2, transladaY(pontoAy) - size/2, size, size);
 		g2.fill(ponto);
 

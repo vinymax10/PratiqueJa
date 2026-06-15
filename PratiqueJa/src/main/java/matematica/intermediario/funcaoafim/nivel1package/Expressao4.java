@@ -1,4 +1,4 @@
-﻿package matematica.intermediario.funcaoafim.nivel1package;
+package matematica.intermediario.funcaoafim.nivel1package;
 
 import matematica.GeradorExercicio;
 

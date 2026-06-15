@@ -1,4 +1,4 @@
-﻿package matematica.basico.conjuntos.nivel1package;
+package matematica.basico.conjuntos.nivel1package;
 
 import matematica.GeradorExercicio;
 import matematica.basico.conjuntos.Conjunto;

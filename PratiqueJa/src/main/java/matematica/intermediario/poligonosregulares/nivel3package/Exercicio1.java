@@ -35,7 +35,7 @@ public class Exercicio1 extends GeradorExercicio
 		res += "\\(S_i = (" + n + " - 2) \\times 180^\\circ = \\mathbf{" + si + "^\\circ}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Cada ângulo interno de um polígono regular mede \\(" + ai + "^\\circ\\). Qual é a soma dos ângulos internos desse polígono?");
 		addParagrafoImagem(image);

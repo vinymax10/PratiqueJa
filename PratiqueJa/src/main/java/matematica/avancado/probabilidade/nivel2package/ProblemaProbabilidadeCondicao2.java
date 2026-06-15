@@ -61,69 +61,45 @@ public class ProblemaProbabilidadeCondicao2
 	
 	public String resolucao()
 	{
-//		String num1, String den1, String num2, String den2
-		String resolucaoLatex = formulaCondicao()+"\\\\";
-		Racional pa,pi,result;
+		String resolucaoLatex = "\\(" + formulaCondicao() + "\\)" + "\\(\\\\\\)";
 		switch(tipoProbabilidade)
 		{
-			case AB:
-				resolucaoLatex += "A: \\text{"+eventoA+"}\\\\";
-				resolucaoLatex += "B: \\text{"+eventoB+"}\\\\";
-
-				resolucaoLatex += "n(A)="+a+",\\quad "+"n(\\Omega)="+t+", \\quad n(A \\cap B)="+i+"\\\\";
-				pa=new Racional(a,t);
-				resolucaoLatex += "P(A)="+pa.showDfrac();
-				pa.fatoracao(2);
-				if(pa.isSimplificou())
-					resolucaoLatex += "="+pa.showDfrac();
-
-				pi=new Racional(i,t);
-				resolucaoLatex += "\\\\P(A \\cap B)="+pi.showDfrac();
-				pi.fatoracao(2);
-				if(pi.isSimplificou())
-					resolucaoLatex += "="+pi.showDfrac();
-				
-				resolucaoLatex += "\\\\P(B|A)=\\dfrac{"+pi.showDfrac()+"}{"+pa.showDfrac()+"}=";
-				resolucaoLatex += ""+pi.showDfrac()+"\\cdot"+pa.inverter().showDfrac()+"=";
-
-				result=pi.div(pa);
-				resolucaoLatex += result.showDfrac();
-				result.fatoracao(2);
-				if(result.isSimplificou())
-					resolucaoLatex += "="+result.showDfrac();
-
+			case AB: {
+				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
+				resolucaoLatex += "\\(B =\\) " + eventoB + "\\(\\\\\\)";
+				Racional pa = new Racional(a, t);
+				String fraPA = pa.showDfrac(); pa.fatoracao(2); boolean paSimp = pa.isSimplificou();
+				Racional pi = new Racional(i, t);
+				String fraPI = pi.showDfrac(); pi.fatoracao(2); boolean piSimp = pi.isSimplificou();
+				Racional result = pi.div(pa);
+				String fraResult = result.showDfrac(); result.fatoracao(2);
+				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
+				resolucaoLatex += "P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + " \\\\";
+				resolucaoLatex += "P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + " \\\\";
+				resolucaoLatex += "P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}=";
+				resolucaoLatex += pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "=";
+				resolucaoLatex += (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)";
 				break;
-				
-			case BA:
-				resolucaoLatex += "A: \\text{"+eventoB+"}\\\\";
-				resolucaoLatex += "B: \\text{"+eventoA+"}\\\\";
-
-				resolucaoLatex += "n(A)="+b+",\\quad "+"n(\\Omega)="+t+", \\quad n(A \\cap B)="+i+"\\\\";
-				pa=new Racional(b,t);
-				resolucaoLatex += "P(A)="+pa.showDfrac();
-				pa.fatoracao(2);
-				if(pa.isSimplificou())
-					resolucaoLatex += "="+pa.showDfrac();
-
-				pi=new Racional(i,t);
-				resolucaoLatex += "\\\\P(A \\cap B)="+pi.showDfrac();
-				pi.fatoracao(2);
-				if(pi.isSimplificou())
-					resolucaoLatex += "="+pi.showDfrac();
-				
-				resolucaoLatex += "\\\\P(B|A)=\\dfrac{"+pi.showDfrac()+"}{"+pa.showDfrac()+"}=";
-				resolucaoLatex += ""+pi.showDfrac()+"\\cdot"+pa.inverter().showDfrac()+"=";
-
-				result=pi.div(pa);
-				resolucaoLatex += result.showDfrac();
-				result.fatoracao(2);
-				if(result.isSimplificou())
-					resolucaoLatex += "="+result.showDfrac();
-
+			}
+			case BA: {
+				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
+				resolucaoLatex += "\\(B =\\) " + eventoA + "\\(\\\\\\)";
+				Racional pa = new Racional(b, t);
+				String fraPA = pa.showDfrac(); pa.fatoracao(2); boolean paSimp = pa.isSimplificou();
+				Racional pi = new Racional(i, t);
+				String fraPI = pi.showDfrac(); pi.fatoracao(2); boolean piSimp = pi.isSimplificou();
+				Racional result = pi.div(pa);
+				String fraResult = result.showDfrac(); result.fatoracao(2);
+				resolucaoLatex += "\\(n(A)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
+				resolucaoLatex += "P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + " \\\\";
+				resolucaoLatex += "P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + " \\\\";
+				resolucaoLatex += "P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}=";
+				resolucaoLatex += pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "=";
+				resolucaoLatex += (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)";
 				break;
-				
+			}
 		}
-		
+
 		return resolucaoLatex;
 	}
 	

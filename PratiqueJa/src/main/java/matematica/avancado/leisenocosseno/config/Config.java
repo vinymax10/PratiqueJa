@@ -1,5 +1,8 @@
 package matematica.avancado.leisenocosseno.config;
 
+import static matematica.ConfigImagem.IMG_H;
+import static matematica.ConfigImagem.IMG_W;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -23,12 +26,12 @@ public class Config
 		dados=new Dados(tipoDado,a,b,c);		
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();
@@ -38,15 +41,15 @@ public class Config
 		
 		if(dados.strAngleA!=null&&!dados.strAngleA.equals(""))
 			Graphics.setAngleSemBorda(g2, a, b, c,
-			raio, ParCor.parCor(index + 1), parCor);
+			raio, ParCor.parCorAleatorio(), parCor);
 		
 		if(dados.strAngleB!=null&&!dados.strAngleB.equals(""))
 			Graphics.setAngleSemBorda(g2, b, a, c, 
-			raio, ParCor.parCor(index + 2), parCor);
+			raio, ParCor.parCorAleatorio(), parCor);
 
 		if(dados.strAngleC!=null&&!dados.strAngleC.equals(""))
 			Graphics.setAngleSemBorda(g2, c, b, a, 
-			raio, ParCor.parCor(index + 3), parCor);
+			raio, ParCor.parCorAleatorio(), parCor);
 		
 		Polygon triangulo = new Polygon();
 

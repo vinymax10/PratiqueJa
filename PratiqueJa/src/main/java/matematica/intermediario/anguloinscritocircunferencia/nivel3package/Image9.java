@@ -39,7 +39,7 @@ public class Image9 extends GeradorExercicio
 		dados.anguloExterno = "x";
 
 		Config6 config = new Config6(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);

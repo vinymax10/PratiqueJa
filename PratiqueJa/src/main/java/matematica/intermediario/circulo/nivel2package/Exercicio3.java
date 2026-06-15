@@ -26,7 +26,7 @@ public class Exercicio3 extends GeradorExercicio
 		res += "\\theta = \\dfrac{360 \\cdot " + k + "}{2 \\cdot " + r + "} = \\dfrac{" + (360 * k) + "}{" + (2 * r) + "} = \\mathbf{" + theta + "}^\\circ\\)";
 
 		ConfigSetor config = new ConfigSetor("" + r, theta);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um arco de raio \\(" + r + "\\) tem comprimento \\(" + k + "\\pi\\). Qual é o ângulo central?");
 		addParagrafoImagem(image);

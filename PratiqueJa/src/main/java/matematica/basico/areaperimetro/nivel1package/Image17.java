@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrapezio2;
 
 //	trapézio
@@ -21,8 +21,8 @@ public class Image17 extends GeradorExercicio
 		String resultadoCorreto = "" + (B + b + h + l);
 		String resolucao = ResolucaoAreaPerimetro.perimetroTrapezio(B, b, h, l);
 
-		Config config = new ConfigTrapezio2(B + "", b + "", "" + h, "" + l, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrapezio2(B + "", b + "", "" + h, "" + l, false);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o perímetro do trapézio?");
 		addParagrafoImagem(image);

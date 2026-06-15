@@ -3,7 +3,10 @@ package matematica.intermediario.equacaosegundograu.config;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class ConfigEq2Grau 
+import static matematica.ConfigImagem.IMG_H;
+import static matematica.ConfigImagem.IMG_W;
+
+public class ConfigEq2Grau
 {
 	public int indice;
 	public Ponto pontoX1=new Ponto();
@@ -21,9 +24,9 @@ public class ConfigEq2Grau
 	
 	public BufferedImage criarImagem()
 	{
-		BufferedImage image = new BufferedImage((int) 1250, 1250, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(IMG_W, IMG_H, BufferedImage.TYPE_INT_ARGB);
 		
-		Grafico grafico=new Grafico(dadosEq2Grau,indice);
+		Grafico grafico=new Grafico(dadosEq2Grau);
 		
 		Graphics2D g2=grafico.carregamentoInicial(image);
 

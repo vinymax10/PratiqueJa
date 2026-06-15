@@ -23,7 +23,7 @@ public class Image9 extends GeradorExercicio
 		resolucao += "h=\\sqrt{" + (h * h) + "}=" + h + "\\\\";
 
 		ConfigRetangulo config = new ConfigRetangulo("2h", "h", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do retângulo é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);

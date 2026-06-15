@@ -28,33 +28,29 @@ public class ProblemaCombinacaoSimples
 
 	public String resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += formulaArranjoSimples() + "\\\\";
-		resolucaoLatex += "n=" + n +",\\quad k="+k+"\\\\";
-		resolucaoLatex += "C("+n+","+k+")=\\dfrac{"+ n + "!}{"+k+"!\\cdot("+n+"-"+k+")!}\\\\";
+		String res = "A combinação simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dada por:";
+		res += "\\(\\\\\\)";
+		res += "\\(" + ParCor.formula("C(n,k) = \\dfrac{n!}{k!\\cdot(n-k)!}") + "\\)";
+		res += "\\(\\\\\\)";
+		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
+		res += "\\(\\\\\\)";
+		res += "\\(C(" + n + "," + k + ") = \\dfrac{" + n + "!}{" + k + "!\\cdot(" + n + "-" + k + ")!} = \\\\ ";
 		if((n-k)>k)
 		{
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k))+"\\cdot "+(n-k)+"!}{"+k+"!\\cdot"+(n-k)+"!}\\\\";
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(n,(n-k))+"}{"+k+"!}\\\\";
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(n,(n-k))+"}{"+AuxCombinacao.fatorialString(k)+"}=";
-			resolucaoLatex += "\\dfrac{"+Algebra.fatorial(n,(n-k))+"}{"+Algebra.fatorial(k)+"}="+resultado();
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + k + "!\\cdot" + (n-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + k + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + AuxCombinacao.fatorialString(k) + "} = \\\\ ";
+			res += "\\dfrac{" + Algebra.fatorial(n,(n-k)) + "}{" + Algebra.fatorial(k) + "} = \\mathbf{" + resultado() + "}\\)";
 		}
 		else
 		{
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{" + AuxCombinacao.fatorialString(n,k)+"\\cdot "+k+"!}{"+k+"!\\cdot"+(n-k)+"!}\\\\";
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(n,k)+"}{"+(n-k)+"!}\\\\";
-			resolucaoLatex += "C("+n+","+k+")=\\dfrac{"+AuxCombinacao.fatorialString(n,k)+"}{"+AuxCombinacao.fatorialString(n-k)+"}=";
-			resolucaoLatex += "\\dfrac{"+Algebra.fatorial(n,k)+"}{"+Algebra.fatorial(n-k)+"}="+resultado();
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "\\cdot " + k + "!}{" + k + "!\\cdot" + (n-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + (n-k) + "!} = \\\\ ";
+			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + AuxCombinacao.fatorialString(n-k) + "} = \\\\ ";
+			res += "\\dfrac{" + Algebra.fatorial(n,k) + "}{" + Algebra.fatorial(n-k) + "} = \\mathbf{" + resultado() + "}\\)";
 		}
 
-		return resolucaoLatex;
-
-	}
-
-	private String formulaArranjoSimples()
-	{
-		return "\\text{Combinação Simples}\\\\"
-		+ParCor.formula("C(n,k)=\\dfrac{n!}{k!\\cdot(n-k)!}");
+		return res;
 	}
 
 	public String resultado()

@@ -32,7 +32,7 @@ public class Exercicio3 extends GeradorExercicio
 		res += "\\(A = \\dfrac{" + p + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "l", "a");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O perímetro de um hexágono regular é \\(" + p + "\\). Sabendo que a área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);

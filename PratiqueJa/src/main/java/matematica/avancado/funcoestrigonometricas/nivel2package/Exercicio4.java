@@ -1,0 +1,32 @@
+package matematica.avancado.funcoestrigonometricas.nivel2package;
+
+import java.util.ArrayList;
+import java.util.List;
+import matematica.GeradorExercicio;
+
+public class Exercicio4 extends GeradorExercicio
+{
+	@Override
+	protected void construir()
+	{
+		// Ângulo suplementar: sen(180°-θ) = sen(θ)
+		int[][] triples = {{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}};
+		int[] t = triples[rand.nextInt(triples.length)];
+		int p = t[0], r = t[2];
+
+		addParagrafo("Sabendo que \\(\\operatorname{sen}\\,\\theta = \\dfrac{" + p + "}{" + r
+				+ "}\\), calcule \\(\\operatorname{sen}(180° - \\theta)\\).");
+
+		String correta = "\\(\\dfrac{" + p + "}{" + r + "}\\)";
+		List<String> distratores = new ArrayList<>();
+		distratores.add("\\(-\\dfrac{" + p + "}{" + r + "}\\)");
+		distratores.add("\\(\\dfrac{" + (r - p) + "}{" + r + "}\\)");
+		distratores.add("\\(0\\)");
+		embaralharEAdicionarAlternativas(correta, distratores);
+
+		String res = "Usando a propriedade \\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta\\):"
+				+ "\\(\\\\\\)"
+				+ "\\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta = \\mathbf{\\dfrac{" + p + "}{" + r + "}}\\)";
+		setResolucao(res);
+	}
+}

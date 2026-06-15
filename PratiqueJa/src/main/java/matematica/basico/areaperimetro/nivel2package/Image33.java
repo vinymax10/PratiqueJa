@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrapezio;
 
 public class Image33 extends GeradorExercicio
@@ -25,8 +25,8 @@ public class Image33 extends GeradorExercicio
 		resolucao += a + "+b+" + l + "+" + l + "=" + perimetro + "\\\\";
 		resolucao += "b=" + perimetro + "-" + a + "-" + l + "-" + l + "=" + b;
 
-		Config config = new ConfigTrapezio("" + a, "b", "", l + "", l + "", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrapezio("" + a, "b", "", l + "", l + "", false);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do trapézio é \\(" + perimetro + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);

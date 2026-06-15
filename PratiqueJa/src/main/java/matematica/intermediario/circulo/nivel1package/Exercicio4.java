@@ -49,7 +49,7 @@ public class Exercicio4 extends GeradorExercicio
 		res += "A_s = \\dfrac{" + (theta * r * r) + "}{360}\\pi = \\mathbf{" + k + "}\\pi\\)";
 
 		ConfigSetor config = new ConfigSetor("" + r, theta);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do setor circular de raio \\(" + r + "\\) e ângulo central \\(" + theta + "^\\circ\\)?");
 		addParagrafoImagem(image);

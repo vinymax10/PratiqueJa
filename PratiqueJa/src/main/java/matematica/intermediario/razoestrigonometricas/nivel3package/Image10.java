@@ -27,13 +27,11 @@ public class Image10 extends GeradorExercicio
 
 		String resultadoCorreto = "" + y * 3;
 		String resolucao = ResolucaoRazoesTrigonometricas.tag30CAX(dados.altura);
-		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o valor de x?");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

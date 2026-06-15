@@ -22,7 +22,7 @@ public class Image25 extends GeradorExercicio
 		resolucao += "r=\\dfrac{l}{2}=\\dfrac{" + l + "}{2}=" + r + "\\\\";
 
 		ConfigQuadrado3 config = new ConfigQuadrado3("l", "r", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do quadrado é \\(" + perimetro + "\\), qual o valor de \\(r\\)?");
 		addParagrafoImagem(image);

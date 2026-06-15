@@ -1,4 +1,4 @@
-﻿package matematica.avancado.logaritmo.nivel2package;
+package matematica.avancado.logaritmo.nivel2package;
 
 import matematica.GeradorExercicio;
 import matematica.Racional;

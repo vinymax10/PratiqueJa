@@ -34,6 +34,8 @@ public class ParCor
 		this.corFraca = corFraca;
 	}
 	
+	private static final java.util.Random RAND = new java.util.Random();
+
 	public static ParCor parCor(int indice)
 	{
 		indice=indice%6;
@@ -47,6 +49,11 @@ public class ParCor
 			case 5: return new ParCor("#766E62","#C6BDAF");// Cinza
 			default: return new ParCor("#6370FF", "#969FFF");// Azul
 		}
+	}
+
+	public static ParCor parCorAleatorio()
+	{
+		return parCor(RAND.nextInt(6));
 	}
 
 	public static String formula(String formula)

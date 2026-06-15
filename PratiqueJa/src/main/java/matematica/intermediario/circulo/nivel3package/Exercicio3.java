@@ -26,7 +26,7 @@ public class Exercicio3 extends GeradorExercicio
 		res += "r = \\dfrac{180 \\cdot " + k + "}{" + theta + "} = \\dfrac{" + (180 * k) + "}{" + theta + "} = \\mathbf{" + r + "}\\)";
 
 		ConfigSetor config = new ConfigSetor("r", theta);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de um arco é \\(" + k + "\\pi\\) e o ângulo central é \\(" + theta + "^\\circ\\). Qual é o raio \\(r\\)?");
 		addParagrafoImagem(image);

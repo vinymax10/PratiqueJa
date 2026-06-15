@@ -42,8 +42,7 @@ public class Expressao1 extends GeradorExercicio
 
 		String res = "Usando o caso notável \\((a-b)^2 = a^2 - 2ab + b^2\\):\\(\\\\\\)";
 		res += "\\(a = " + a + "x, \\quad b = " + b + "\\)\\(\\\\\\)";
-		res += "\\((" + a + "x)^2 - 2 \\cdot " + a + "x \\cdot " + b + " + " + b + "^2 = \\\\ \\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
+		res += "\\((" + a + "x)^2 - 2 \\cdot " + a + "x \\cdot " + b + " + " + b + "^2 = \\mathbf{" + correct + "}\\)";
 
 		addParagrafo("Expanda a expressão usando casos notáveis.");
 		addParagrafo("\\(" + expr + "\\)");

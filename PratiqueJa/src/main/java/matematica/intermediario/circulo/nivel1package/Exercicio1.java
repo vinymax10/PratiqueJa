@@ -22,7 +22,7 @@ public class Exercicio1 extends GeradorExercicio
 		res += "\\(C = 2\\pi \\cdot " + r + " = \\mathbf{" + k + "}\\pi\\)";
 
 		ConfigCircunferencia config = new ConfigCircunferencia("" + r, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o comprimento da circunferência de raio \\(" + r + "\\)?");
 		addParagrafoImagem(image);

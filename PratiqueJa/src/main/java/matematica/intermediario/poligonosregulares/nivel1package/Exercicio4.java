@@ -22,7 +22,7 @@ public class Exercicio4 extends GeradorExercicio
 		res += "\\(a = \\dfrac{" + l + "\\sqrt{3}}{2} = \\mathbf{" + m + "}\\sqrt{3}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "" + l, "a");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um hexágono regular tem lado \\(" + l + "\\). Sabendo que o apótema é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);

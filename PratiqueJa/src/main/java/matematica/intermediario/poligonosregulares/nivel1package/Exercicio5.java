@@ -21,7 +21,7 @@ public class Exercicio5 extends GeradorExercicio
 		res += "\\(A = \\dfrac{3\\sqrt{3}}{2} \\cdot " + l + "^2 = \\dfrac{3\\sqrt{3}}{2} \\cdot " + (l * l) + " = \\mathbf{" + x + "}\\sqrt{3}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "" + l, "a");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um hexágono regular tem lado \\(" + l + "\\). Sabendo que sua área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);

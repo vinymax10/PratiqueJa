@@ -23,12 +23,12 @@ public class ConfigTrianguloRetangulo extends Config
 		this.b = new Angulo(this, b, false, b + "°");
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -43,11 +43,11 @@ public class ConfigTrianguloRetangulo extends Config
 
 		if (a.mostrar)
 			Graphics.setAngleSemBorda(g2, minX - raio / 2, minY - raio / 2, raio, -90, 57,
-			ParCor.parCor(index + a.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if (b.mostrar)
 			Graphics.setAngleSemBorda(g2, maxX - raio / 2, maxY - raio / 2, raio, 147, 33,
-			ParCor.parCor(index + b.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		Line2D line1 = new Line2D.Double(minX, maxY, maxX, maxY);
 		g2.draw(line1);

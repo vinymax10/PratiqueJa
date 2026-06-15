@@ -2,9 +2,9 @@ package matematica.intermediario.semelhancatriangulos;
 
 import java.awt.image.BufferedImage;
 
-import matematica.ParCor;
+import matematica.ConfigImagem;
 
-public abstract class ConfigSemelhancaAngulos
+public abstract class ConfigSemelhancaAngulos implements ConfigImagem
 {
 	public Arco a, b, c, d;
 
@@ -25,14 +25,9 @@ public abstract class ConfigSemelhancaAngulos
 			d.nome = configValores.nome;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
 		return null;
-	}
-
-	public String getTextLatex()
-	{
-		return a.nome + "-" + b.nome+"-" + c.nome+"-" + d.nome;
 	}
 
 	@Override

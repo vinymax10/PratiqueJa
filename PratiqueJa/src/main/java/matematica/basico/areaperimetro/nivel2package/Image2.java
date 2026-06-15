@@ -29,7 +29,7 @@ public class Image2 extends GeradorExercicio
 		resolucao += "A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l);
 
 		ConfigQuadradoCircunferencia config = new ConfigQuadradoCircunferencia("r", "l", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + strRaio + "\\), qual a área do quadrado?");
 		addParagrafoImagem(image);

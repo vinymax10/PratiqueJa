@@ -27,7 +27,7 @@ public class Image3 extends GeradorExercicio
 		resolucao += "A=" + b + " \\cdot " + h + "=" + (b * h);
 
 		ConfigRetangulo3 config = new ConfigRetangulo3("d", "" + sobra, true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strD + "\\), qual a área do retângulo?");
 		addParagrafoImagem(image);

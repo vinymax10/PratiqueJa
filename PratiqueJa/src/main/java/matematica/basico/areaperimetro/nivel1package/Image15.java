@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTrianguloEquilatero;
 
 //	triângulo
@@ -18,8 +18,8 @@ public class Image15 extends GeradorExercicio
 		String resultadoCorreto = "" + (3 * l);
 		String resolucao = ResolucaoAreaPerimetro.perimetroTrianguloEquilatero(l);
 
-		Config config = new ConfigTrianguloEquilatero("" + l, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		ConfigImagem config = new ConfigTrianguloEquilatero("" + l, false);
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o perímetro do triângulo?");
 		addParagrafoImagem(image);

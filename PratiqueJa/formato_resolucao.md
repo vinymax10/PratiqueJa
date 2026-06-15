@@ -103,6 +103,44 @@ res += "\\(" + s2 + " = " + resultado + "\\)";
 
 ---
 
+## Regra de quebra por "passos" (cadeias de igualdades)
+
+Numa cadeia `A = B = C = D`, pense em **"passos"** = cada pedaço separado por `=`. A quebra deve evitar dois extremos: linha larga demais (sem quebra) e linha com uma fração/número órfão.
+
+Aplicar nesta **ordem de prioridade**:
+
+1. **~2 passos por linha.** Agrupe cerca de dois passos por linha renderizada.
+2. **Passo "pesado" ocupa a linha sozinho.** Se um passo for fração composta/aninhada (`\dfrac` dentro de `\dfrac`), raiz dentro de fração, ou vários termos com potências, ele fica numa linha própria (com o `=` que o introduz).
+3. **Nunca uma fração ou número sozinho numa linha** — mesmo fração aninhada, mesmo com `=` ao lado. Se uma quebra deixaria uma fração isolada, **não quebre ali**: junte-a ao passo vizinho.
+4. **`=` no fim da linha** (ver seção acima) e o resultado `\mathbf{...}` nunca vai sozinho — fica junto do passo que o gera.
+
+**Conflito entre (1) e (3): a regra (3) vence** — prefira uma linha mais larga a deixar fração órfã.
+
+**Medida de largura (proxy interno):** dígito/símbolo/operador ≈ 1; `\dfrac{a}{b}` conta como o **maior** entre numerador e denominador (empilha, não soma); `\sqrt{x}` ≈ x+1; nome de função (`\cos`, `\operatorname{sen}`) ≈ 3. Mira ~20–30 unidades por linha.
+
+```java
+// ERRADO — cadeia inteira numa linha só (larga demais)
+"\\(\\cos(2 \\cdot 60°) = \\left(\\dfrac{1}{2}\\right)^2 - \\left(\\dfrac{\\sqrt{3}}{2}\\right)^2 = \\dfrac{1}{4} - \\dfrac{3}{4} = \\mathbf{-\\dfrac{1}{2}}\\)"
+
+// CORRETO — ~2 passos por linha, = no fim da linha
+"\\(\\cos(2 \\cdot 60°) = \\left(\\dfrac{1}{2}\\right)^2 - \\left(\\dfrac{\\sqrt{3}}{2}\\right)^2 = \\\\"
++ "\\dfrac{1}{4} - \\dfrac{3}{4} = \\mathbf{-\\dfrac{1}{2}}\\)"
+```
+
+```java
+// ERRADO — fração aninhada órfã numa linha (viola regra 3)
+"\\(\\operatorname{tg}(2\\alpha) = \\dfrac{2 \\cdot \\dfrac{3}{4}}{1 - \\dfrac{9}{16}} = \\\\"
++ "\\dfrac{\\dfrac{6}{4}}{\\dfrac{7}{16}} = \\\\"   // ← fração sozinha, proibido
++ "\\dfrac{6}{4} \\cdot \\dfrac{16}{7} = \\mathbf{\\dfrac{24}{7}}\\)"
+
+// CORRETO — passo pesado (fração aninhada) sozinho na linha 1; demais juntos
+"\\(\\operatorname{tg}(2\\alpha) = \\dfrac{2 \\cdot \\dfrac{3}{4}}{1 - \\dfrac{9}{16}} = \\\\"
++ "\\dfrac{\\dfrac{6}{4}}{\\dfrac{7}{16}} = "   // sem quebra: não isolar a fração
++ "\\dfrac{6}{4} \\cdot \\dfrac{16}{7} = \\mathbf{\\dfrac{24}{7}}\\)"
+```
+
+---
+
 ## Passos intermediários em expressões complexas
 
 Não saltar etapas de cálculo. Mostrar cada grupo avaliado antes de combinar.

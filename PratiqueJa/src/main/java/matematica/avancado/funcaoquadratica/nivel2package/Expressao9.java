@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaoquadratica.nivel2package;
+package matematica.avancado.funcaoquadratica.nivel2package;
 
 import matematica.GeradorExercicio;
 

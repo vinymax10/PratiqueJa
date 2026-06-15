@@ -3,6 +3,9 @@ package matematica.avancado.inequacoessegundograu.config;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import static matematica.ConfigImagem.IMG_H;
+import static matematica.ConfigImagem.IMG_W;
+
 import matematica.intermediario.equacaosegundograu.config.DadosEq2Grau;
 import matematica.intermediario.equacaosegundograu.config.Grafico;
 
@@ -47,8 +50,8 @@ public class ConfigInequacao
 
 	public BufferedImage criarImagem()
 	{
-		BufferedImage image = new BufferedImage(1250, 1250, BufferedImage.TYPE_INT_ARGB);
-		Grafico grafico = new Grafico(dados, indice);
+		BufferedImage image = new BufferedImage(IMG_W, IMG_H, BufferedImage.TYPE_INT_ARGB);
+		Grafico grafico = new Grafico(dados);
 		Graphics2D g2 = grafico.carregamentoInicial(image);
 		grafico.inserirEixoCartesiano(g2);
 		grafico.inserirCurva(g2);

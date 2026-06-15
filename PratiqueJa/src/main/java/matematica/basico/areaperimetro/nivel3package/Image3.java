@@ -28,7 +28,7 @@ public class Image3 extends GeradorExercicio
 		resolucao += "r=\\dfrac{" + (a * 2) + "}{2} = " + a + "\\\\";
 
 		ConfigQuadradoCircunferencia config = new ConfigQuadradoCircunferencia("r", "l", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(r\\)?");
 		addParagrafoImagem(image);

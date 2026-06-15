@@ -18,7 +18,7 @@ public class Image7 extends GeradorExercicio
 		String resolucao = ResolucaoAreaPerimetro.losango(D, d);
 
 		ConfigLozango config = new ConfigLozango("" + D, "" + d, "", "", "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do losango?");
 		addParagrafoImagem(image);

@@ -22,26 +22,26 @@ public class Config5 extends Config
 		this.dados = dados;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 		int raio = 200;
 		
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
 
 		if(!dados.superiorEsq.equals(""))
-			Graphics.setAngleSemBorda(g2, 310 - raio / 2, 150 - raio / 2, raio, -30, 25, ParCor.parCor(index + 2), parCor);
+			Graphics.setAngleSemBorda(g2, 310 - raio / 2, 150 - raio / 2, raio, -30, 25, ParCor.parCorAleatorio(), parCor);
 
 		if(!dados.superiorDir.equals(""))
-			Graphics.setAngleSemBorda(g2, 860 - raio / 2, 180 - raio / 2, raio, 180, 30, ParCor.parCor(index + 1), parCor);
+			Graphics.setAngleSemBorda(g2, 860 - raio / 2, 180 - raio / 2, raio, 180, 30, ParCor.parCorAleatorio(), parCor);
 		
 		if(!dados.superiorCentro.equals(""))
 			Graphics.setAngleSemBorda(g2, 600 - raio / 2, (int) 330 - raio / 2, raio, 30, 118, 
-			ParCor.parCor(index+3), parCor);
+			ParCor.parCorAleatorio(), parCor);
 
 		g2.setColor(Color.decode(parCor.getCorForte()));
 		g2.setStroke(new BasicStroke(10));
@@ -54,11 +54,11 @@ public class Config5 extends Config
 		
 		if(!dados.centroDir.equals(""))
 			Graphics.setAngleSemBorda(g2, 600 - raio / 2, (int) 330 - raio / 2, raio, -32, 58, 
-			ParCor.parCor(index), parCor);
+			ParCor.parCorAleatorio(), parCor);
 		
 		if(!dados.centroEsq.equals(""))
 			Graphics.setAngleSemBorda(g2, 600 - raio / 2, (int) 330 - raio / 2, raio, -209, 60, 
-			ParCor.parCor(index), parCor);
+			ParCor.parCorAleatorio(), parCor);
 		
 		Line2D line1 = new Line2D.Double(860, 180, 270, 530);
 		g2.draw(line1);
@@ -74,11 +74,11 @@ public class Config5 extends Config
 		
 		Graphics.setArco(g2, (int)(circulo.getCenterX() - circulo.getWidth() / 2), 
 		(int) (circulo.getCenterY() - circulo.getWidth() / 2), (int) circulo.getWidth(), 
-		-23, 56, ParCor.parCor(index + 1), parCor);
+		-23, 56, ParCor.parCorAleatorio(), parCor);
 		
 		Graphics.setArco(g2, (int)(circulo.getCenterX() - circulo.getWidth() / 2), 
 		(int)(circulo.getCenterY() - circulo.getWidth() / 2),(int) circulo.getWidth(),
-		-155, -64,ParCor.parCor(index + 2),ParCor.parCor(index -1));
+		-155, -64,ParCor.parCorAleatorio(),ParCor.parCorAleatorio());
 		
 		if(!dados.lateralDir.equals(""))
 			Graphics.addLabel(g2, dados.lateralDir, 925, 330, Alinhamento.MiddleLeft);

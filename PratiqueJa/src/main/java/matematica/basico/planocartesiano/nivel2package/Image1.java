@@ -16,7 +16,7 @@ public class Image1 extends GeradorExercicio
 		if (rand.nextBoolean()) py = -py;
 
 		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		boolean pedirOrdenada = rand.nextBoolean();
 		int resposta = pedirOrdenada ? py : px;

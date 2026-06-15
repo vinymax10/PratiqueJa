@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+\usepackage{../pratiqueja}
+\usepackage{tabularray}
+
+\newcommand{\numex}[1]{%
+  \begin{tcolorbox}[
+    enhanced, arc=3pt, boxrule=0pt,
+    colback=rulebg, colframe=rulebg,
+    left=4pt, right=4pt, top=1pt, bottom=1pt,
+    nobeforeafter, on line,
+  ]{\bfseries\small\color{darkblue}#1}\end{tcolorbox}%
+  \hspace{4pt}%
+}
+\newcommand{\altline}[2]{%
+  \def\altph{---}\def\altarg{#2}%
+  \ifx\altarg\altph\else\noindent{\bfseries\color{darkblue}\small(#1)}~{\small#2}\par\fi}
+\newcommand{\alts}[5]{%
+  \par\vspace{1cm}%
+  \altline{A}{#1}\altline{B}{#2}\altline{C}{#3}\altline{D}{#4}\altline{E}{#5}}
+\newcommand{\ex}[7]{%
+  \noindent\numex{#1}{\small\color{bodytext}#2}\alts{#3}{#4}{#5}{#6}{#7}}
+
+\begin{document}
+\setstretch{1.2}
+\color{bodytext}
+
+\message{^^JPAGETOTAL_BEFORE=\the\pagetotal^^J}
+\begin{tblr}{
+  colspec  = {p{0.455\textwidth}|[1.5pt,sepcolor]p{0.455\textwidth}},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  rows     = {ht=7.0cm, valign=t, rowsep=0pt},
+  hlines   = {0.5pt, dashed, exborder},
+  hline{1} = {1.5pt, solid, darkblue},
+  hline{4} = {1.5pt, solid, darkblue},
+}
+\ex{01}{De quantas formas podemos ordenar as letras da palavra RATA?}{6}{12}{18}{24}{36} &
+\ex{02}{De quantas maneiras 5 pessoas podem se sentar em fila?}{24}{60}{100}{120}{240} \
+\ex{03}{Enunciado do exercício 03.}{a}{b}{c}{d}{e} &
+\ex{04}{Enunciado do exercício 04.}{a}{b}{c}{d}{e} \
+\ex{05}{Enunciado do exercício 05.}{a}{b}{c}{d}{e} &
+\ex{06}{Enunciado do exercício 06.}{a}{b}{c}{d}{e} \
+\end{tblr}
+\message{^^JPAGETOTAL_AFTER=\the\pagetotal^^J}
+
+\end{document}

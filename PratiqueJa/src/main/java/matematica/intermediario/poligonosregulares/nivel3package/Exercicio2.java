@@ -32,7 +32,7 @@ public class Exercicio2 extends GeradorExercicio
 		res += "\\(A = \\dfrac{" + (6 * l) + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)";
 
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "l", "" + m + "\\sqrt{3}");
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O apótema de um hexágono regular mede \\(" + m + "\\sqrt{3}\\). Sabendo que a área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);

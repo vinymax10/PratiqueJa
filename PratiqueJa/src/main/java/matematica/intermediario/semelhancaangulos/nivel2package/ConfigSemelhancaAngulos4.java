@@ -25,12 +25,12 @@ public class ConfigSemelhancaAngulos4 extends Config
 		this.e = new Angulo(this, e, false, e + "°");
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -51,23 +51,23 @@ public class ConfigSemelhancaAngulos4 extends Config
 		
 		if(a.mostrar)
 			Graphics.setAngleSemBorda(g2, x1 - raio / 2, y1 - raio / 2, raio, 154, 52,
-			ParCor.parCor(index + a.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(b.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 155, 26,
-			ParCor.parCor(index + b.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(c.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 180, 26,
-			ParCor.parCor(index + c.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(d.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 0, 154,
-			ParCor.parCor(index + d.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(e.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 206, 154,
-			ParCor.parCor(index + e.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 			Graphics.arrow(g2, 50, 250, 1200, 250, true, true);
 

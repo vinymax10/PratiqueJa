@@ -1,4 +1,4 @@
-﻿package matematica.intermediario.funcaoafim.nivel2package;
+package matematica.intermediario.funcaoafim.nivel2package;
 
 import matematica.GeradorExercicio;
 
@@ -27,7 +27,7 @@ public class Expressao1 extends GeradorExercicio
 			+ "\\(R\\$\\ " + a + ",00\\) por hora de serviço. "
 			+ "Quantas horas de serviço correspondem ao total de \\(R\\$\\ " + k + ",00\\)?");
 
-		String res = "Taxa de variação: \\(a = " + a + "\\) (R$/h), taxa fixa: \\(b = " + b + "\\). \\(\\\\\\)";
+		String res = "Taxa de variação: \\(a = " + a + "\\) (R\\$/h), taxa fixa: \\(b = " + b + "\\). \\(\\\\\\)";
 		res += "Modelo: \\(f(x) = " + a + "x + " + b + "\\). Igualamos a \\(" + k + "\\): \\(\\\\\\)";
 		res += "\\(" + a + "x + " + b + " = " + k + "\\\\";
 		res += "" + a + "x = " + (k - b) + "\\\\";
@@ -75,7 +75,7 @@ public class Expressao1 extends GeradorExercicio
 			+ "\\(R\\$\\ " + a + ",00\\) por mês. "
 			+ "Em quantos meses ele terá \\(R\\$\\ " + k + ",00\\)?");
 
-		String res = "Taxa de poupança: \\(a = " + a + "\\) (R$/mês), saldo inicial: \\(b = " + b + "\\). \\(\\\\\\)";
+		String res = "Taxa de poupança: \\(a = " + a + "\\) (R\\$/mês), saldo inicial: \\(b = " + b + "\\). \\(\\\\\\)";
 		res += "Modelo: \\(f(x) = " + a + "x + " + b + "\\). Igualamos a \\(" + k + "\\): \\(\\\\\\)";
 		res += "\\(" + a + "x + " + b + " = " + k + "\\\\";
 		res += "" + a + "x = " + (k - b) + "\\\\";

@@ -17,12 +17,10 @@ public class Exercicio2 extends GeradorExercicio
 
 		String resultadoCorreto = configValores.incognita.toString();
 		String resolucao = configValores.resolucaoLatex;
-		String texto = config.getTextLatex();
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

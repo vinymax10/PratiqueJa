@@ -25,7 +25,7 @@ public class Image26 extends GeradorExercicio
 		resolucao += "b=" + (b + h) + "-" + h + "=" + b + "\\\\";
 
 		ConfigRetangulo config = new ConfigRetangulo("b", "" + h, false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do retângulo é \\(" + perimetro + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);

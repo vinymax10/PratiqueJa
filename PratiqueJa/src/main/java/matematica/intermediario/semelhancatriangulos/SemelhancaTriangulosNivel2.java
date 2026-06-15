@@ -7,7 +7,7 @@ public class SemelhancaTriangulosNivel2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(3);
+		int tipo = 1 + rand.nextInt(5);
 		delegar(instanciar(".nivel2package.Exercicio" + tipo));
 	}
 }

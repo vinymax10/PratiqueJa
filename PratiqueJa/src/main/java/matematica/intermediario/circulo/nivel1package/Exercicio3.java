@@ -56,7 +56,7 @@ public class Exercicio3 extends GeradorExercicio
 		res += "\\ell = \\mathbf{" + k + "}\\pi\\)";
 
 		ConfigSetor config = new ConfigSetor("" + r, theta);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o comprimento do arco de círculo de raio \\(" + r + "\\) e ângulo central \\(" + theta + "^\\circ\\)?");
 		addParagrafoImagem(image);

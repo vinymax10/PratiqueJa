@@ -21,13 +21,11 @@ public class Image3 extends GeradorExercicio
 
 		String resultadoCorreto = "" + dados.tagAngleAltura;
 		String resolucao = ResolucaoRazoesTrigonometricas.tag(angle, dados.altura, dados.base);
-		String texto = dados.toString();
 
 		Config config = Config.buildConfig(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a \\(tan~" + angle + "\\)?");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

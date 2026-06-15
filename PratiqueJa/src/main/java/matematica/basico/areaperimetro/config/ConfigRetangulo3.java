@@ -9,10 +9,11 @@ import java.awt.image.BufferedImage;
 
 import infra.Graphics;
 import matematica.Alinhamento;
+import matematica.ConfigImagem;
 import matematica.ParCor;
 
 //Retangulo com quadrado dentro
-public class ConfigRetangulo3 implements Config
+public class ConfigRetangulo3 implements ConfigImagem
 {
 	String diagonal,sobra;
 	boolean area;
@@ -24,17 +25,17 @@ public class ConfigRetangulo3 implements Config
 		this.area=area;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 		int raioAngulo=50;
 		int ladoRetangulo=600;
 		int baseRetangulo=950;
 
 		int deslocamentoTracejada=40;
 		
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();

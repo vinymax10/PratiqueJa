@@ -23,14 +23,12 @@ public class Image39 extends GeradorExercicio
 		config.d.mostrar();
 		config.a.nome = "x";
 
-		String texto = config.getTextLatex();
 		String resultadoCorreto = "" + a + "°";
 		String resolucao = resolucao(a, b, c, d, e, f);
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

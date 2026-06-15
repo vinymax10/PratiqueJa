@@ -8,9 +8,9 @@
 \RequirePackage{microtype}
 
 % ── Página ────────────────────────────────────────────────────
-\RequirePackage[a4paper, top=1.5cm, bottom=2.8cm,
+\RequirePackage[a4paper, top=1.2cm, bottom=2cm,
                 left=1.5cm, right=1.5cm]{geometry}
-\setlength{\footskip}{1.3cm}
+\setlength{\footskip}{0.6cm}
 
 % ── Paleta de cores ───────────────────────────────────────────
 \RequirePackage[dvipsnames,svgnames,table]{xcolor}
@@ -95,7 +95,29 @@
     \vspace{2pt}
     {\color{mutedtext}\normalsize\itshape #2}
   \end{tcolorbox}%
-  \vspace{6pt}%
+  
+}
+
+% ── Cabeçalho compacto para lista de exercícios ───────────────
+% Usado em TODAS as páginas da lista para manter overhead uniforme.
+% #1 = título  #2 = nível (subtítulo)  #3 = categoria  #4 = instrução
+\newcommand{\listheader}[4]{%
+  \begin{tcolorbox}[
+    enhanced, arc=0pt, boxrule=0pt,
+    colback=white, colframe=white,
+    left=14pt, right=14pt, top=6pt, bottom=5pt,
+    borderline west={5pt}{0pt}{darkblue},
+    borderline south={0.8pt}{0pt}{sepcolor},
+  ]
+    \noindent
+    {\color{titletext}\fontsize{16}{20}\selectfont\bfseries #1}\hfill
+    {\color{mutedtext}\small
+      \textbf{Pratique}\textcolor{darkblue}{\textbf{Já}}
+      \ ·\ \itshape #3\ ·\ #2}\par
+    \vspace{2pt}%
+    {\color{mutedtext}\small\itshape #4}%
+  \end{tcolorbox}%
+  \vspace{4pt}%
 }
 
 % ── Badge inline ──────────────────────────────────────────────

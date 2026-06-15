@@ -26,7 +26,7 @@ public class Image3 extends GeradorExercicio
 		String resultadoCorreto = "" + dados.cosAngleC.toString();
 		String resolucao = Resolucao.leiCosCosseno(angle, dados.ladoC, dados.ladoA, dados.ladoB);
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o \\(cos~" + dados.strAngleC + "\\)?");
 		addParagrafoImagem(image);

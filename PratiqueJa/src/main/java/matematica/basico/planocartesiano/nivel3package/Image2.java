@@ -46,7 +46,7 @@ public class Image2 extends GeradorExercicio
 		}
 
 		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O ponto P está indicado no plano. Calcule a distância de P à origem \\( O(0,\\;0) \\). Simplifique o radical, se possível.");
 		addParagrafoImagem(image);

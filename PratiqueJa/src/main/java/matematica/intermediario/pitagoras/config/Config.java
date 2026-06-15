@@ -8,6 +8,9 @@ import matematica.intermediario.pitagoras.dados.Dados;
 
 public abstract class Config
 {
+	protected static final int IMG_W = matematica.ConfigImagem.IMG_W;
+	protected static final int IMG_H = matematica.ConfigImagem.IMG_H;
+
 	Dados dados;
 	Point a, b, c, d;
 	
@@ -16,7 +19,7 @@ public abstract class Config
 		this.dados=dados;		
 	}
 	
-	public BufferedImage criarImagem(int index){
+	public BufferedImage criarImagem(){
 		return null;
 	}
 	

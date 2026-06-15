@@ -35,12 +35,12 @@ public class ConfigSemelhancaAngulos6 extends Config
 		this.o = new Angulo(this, o, false, o + "°");
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
@@ -61,59 +61,59 @@ public class ConfigSemelhancaAngulos6 extends Config
 		
 		if(a.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 344, 38,
-			ParCor.parCor(index + a.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(b.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 283, 61,
-			ParCor.parCor(index + b.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(c.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 205, 78,
-			ParCor.parCor(index + c.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(d.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 163, 42,
-			ParCor.parCor(index + d.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(e.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 103, 58,
-			ParCor.parCor(index + e.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(f.mostrar)
 			Graphics.setAngleSemBorda(g2, x3 - raio / 2, y3 - raio / 2, raio, 22, 80,
-			ParCor.parCor(index + f.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(g.mostrar)
 			Graphics.setAngleSemBorda(g2, x1 - raio / 2, y1 - raio / 2, raio, -18, 120,
-			ParCor.parCor(index + g.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(h.mostrar)
 			Graphics.setAngleSemBorda(g2, x1 - raio / 2, y1 - raio / 2, raio, -77, 58,
-			ParCor.parCor(index + h.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(i.mostrar)
 			Graphics.setAngleSemBorda(g2, x1 - raio / 2, y1 - raio / 2, raio, -197, 120,
-			ParCor.parCor(index + i.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(j.mostrar)
 			Graphics.setAngleSemBorda(g2, x1 - raio / 2, y1 - raio / 2, raio, 103, 60,
-			ParCor.parCor(index + j.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 		
 		if(l.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 24, 78,
-			ParCor.parCor(index + l.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(m.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 283, 101,
-			ParCor.parCor(index + m.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(n.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 203, 80,
-			ParCor.parCor(index + n.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 		if(o.mostrar)
 			Graphics.setAngleSemBorda(g2, x2 - raio / 2, y2 - raio / 2, raio, 103, 100,
-			ParCor.parCor(index + o.ordemInsercao), ParCor.parCor(index-1));
+			ParCor.parCorAleatorio(), ParCor.parCorAleatorio());
 
 			Graphics.arrow(g2, 244, 25, 400, 700, true, true);
 			Graphics.arrow(g2, 794, 25, 950, 700, true, true);

@@ -18,13 +18,11 @@ public class Image6 extends GeradorExercicio
 
 		String resultadoCorreto = "" + dados.altura.show();
 		String resolucao = ResolucaoPitagoras.resolucaoABX(dados);
-		String texto = dados.toString();
 
 		Config config = Config.build3(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o valor de \\(c\\)?");
-		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

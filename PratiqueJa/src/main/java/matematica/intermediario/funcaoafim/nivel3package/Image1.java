@@ -29,7 +29,7 @@ public class Image1 extends GeradorExercicio
 		aRacional.fatoracao(2);
 
 		ConfigRetaReal config = new ConfigRetaReal(a, b, pontoAx, pontoAy, pontoBx, pontoBy);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		String resolucao = "";
 		resolucao += "Dados os pontos  \\(A=(" + pontoAx + "," + pontoAy + ")\\)  e ";

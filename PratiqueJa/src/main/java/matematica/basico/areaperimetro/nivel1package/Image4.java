@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
 import matematica.basico.areaperimetro.ResolucaoAreaPerimetro;
-import matematica.basico.areaperimetro.config.Config;
+import matematica.ConfigImagem;
 import matematica.basico.areaperimetro.config.ConfigTriangulo;
 import matematica.basico.areaperimetro.config.ConfigTrianguloIsosceles;
 import matematica.basico.areaperimetro.config.ConfigTrianguloRetangulo;
@@ -21,7 +21,7 @@ public class Image4 extends GeradorExercicio
 		String resultadoCorreto = "" + ((b * h) / 2);
 		String resolucao = ResolucaoAreaPerimetro.areaTriangulo(b, h);
 
-		Config config = null;
+		ConfigImagem config = null;
 
 		int num = rand.nextInt(3);
 		switch(num)
@@ -31,7 +31,7 @@ public class Image4 extends GeradorExercicio
 			case 2: config = new ConfigTrianguloIsosceles("" + b, "" + h, "", "", true); break;
 		}
 
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do triângulo?");
 		addParagrafoImagem(image);

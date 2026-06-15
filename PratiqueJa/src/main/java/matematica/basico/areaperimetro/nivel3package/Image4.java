@@ -23,7 +23,7 @@ public class Image4 extends GeradorExercicio
 		resolucao += "h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\\\";
 
 		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "h", "", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do paralelogramo é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);

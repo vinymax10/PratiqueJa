@@ -23,7 +23,7 @@ public class Image29 extends GeradorExercicio
 		resolucao += "h=\\dfrac{" + (perimetro / 2) + "}{3}=" + h + "\\\\";
 
 		ConfigRetangulo config = new ConfigRetangulo("2h", "h", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do retângulo é \\(" + perimetro + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);

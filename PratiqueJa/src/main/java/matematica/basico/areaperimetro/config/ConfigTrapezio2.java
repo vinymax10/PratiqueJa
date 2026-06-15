@@ -8,9 +8,10 @@ import java.awt.image.BufferedImage;
 
 import infra.Graphics;
 import matematica.Alinhamento;
+import matematica.ConfigImagem;
 import matematica.ParCor;
 
-public class ConfigTrapezio2 implements Config
+public class ConfigTrapezio2 implements ConfigImagem
 {
 	String baseMaior,baseMenor,altura,lateralDir;
 	boolean area;
@@ -24,12 +25,12 @@ public class ConfigTrapezio2 implements Config
 		this.area=area;
 	}
 
-	public BufferedImage criarImagem(int index)
+	public BufferedImage criarImagem()
 	{
-		int width=1250;
-		int height=750;
+		int width = IMG_W;
+		int height = IMG_H;
 
-		ParCor parCor = ParCor.parCor(index-1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		BufferedImage image = new BufferedImage((int) width,(int) height, BufferedImage.TYPE_INT_ARGB);
 		
 		Graphics2D g2 = image.createGraphics();

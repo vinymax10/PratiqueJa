@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaologaritmica.nivel2package;
+package matematica.avancado.funcaologaritmica.nivel2package;
 
 import java.util.ArrayList;
 import java.util.List;

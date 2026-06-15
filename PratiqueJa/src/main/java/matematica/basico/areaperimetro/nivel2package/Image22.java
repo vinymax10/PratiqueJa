@@ -24,7 +24,7 @@ public class Image22 extends GeradorExercicio
 		resolucao += "d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\\\";
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do quadrado é \\(" + perimetro + "\\), qual o valor de \\(d\\)?");
 		addParagrafoImagem(image);

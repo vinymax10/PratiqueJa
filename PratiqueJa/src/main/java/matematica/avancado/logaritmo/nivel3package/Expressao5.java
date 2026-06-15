@@ -1,4 +1,4 @@
-﻿package matematica.avancado.logaritmo.nivel3package;
+package matematica.avancado.logaritmo.nivel3package;
 
 import java.util.ArrayList;
 import java.util.List;

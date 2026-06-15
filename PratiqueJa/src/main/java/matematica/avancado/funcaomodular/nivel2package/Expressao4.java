@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaomodular.nivel2package;
+package matematica.avancado.funcaomodular.nivel2package;
 
 import matematica.GeradorExercicio;
 

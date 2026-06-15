@@ -1,4 +1,4 @@
-﻿package matematica.avancado.funcaomodular.nivel3package;
+package matematica.avancado.funcaomodular.nivel3package;
 
 import java.util.ArrayList;
 import java.util.List;

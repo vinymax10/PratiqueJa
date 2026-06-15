@@ -28,7 +28,7 @@ public class Exercicio5 extends GeradorExercicio
 		res += "\\(A = \\pi \\cdot " + m + "^2 = \\mathbf{" + aCoef + "}\\pi\\)";
 
 		ConfigCircunferencia config = new ConfigCircunferencia("r", true);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de uma circunferência é \\(" + k + "\\pi\\). Qual é a área do círculo?");
 		addParagrafoImagem(image);

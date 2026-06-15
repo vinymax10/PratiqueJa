@@ -19,25 +19,23 @@ public class Grafico extends Config
 	private int iniXImagem = 50;
 	private int iniYImagem = 50;
 	private int fimXImagem = 1200;
-	private int fimYImagem = 1200;
+	private int fimYImagem = 700;
 	double fimXGrafico, iniXGrafico;
 	double iniYGrafico, fimYGrafico;
-	private int indice;
 	Random rand=new Random();
-	
+
 //	ax^2+bx+c
 	DadosEq2Grau dadosEq2Grau;
-	
-	public Grafico(DadosEq2Grau dadosEq2Grau, int indice) 
+
+	public Grafico(DadosEq2Grau dadosEq2Grau)
 	{
 		super();
 		this.dadosEq2Grau=dadosEq2Grau;
-		this.indice=indice;
 	}
 
 	public Graphics2D carregamentoInicial(BufferedImage image)
 	{
-		ParCor parCor = ParCor.parCor(indice -1);
+		ParCor parCor = ParCor.parCorAleatorio();
 		Graphics2D g2 = image.createGraphics();
 		Graphics.setHint(g2);
 
@@ -86,7 +84,7 @@ public class Grafico extends Config
 
 		p.lineTo(transladaX(fimXGrafico), transladaY(f(fimXGrafico)));
 
-		g2.setColor(Color.decode(ParCor.parCor(indice).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		g2.draw(p);
 	}
@@ -99,7 +97,7 @@ public class Grafico extends Config
 		Graphics.arrow(g2, (int) transladaX(0), (int) transladaY(iniYGrafico), (int) transladaX(0),
 		(int) transladaY(fimYGrafico), false, true); // eixo y
 
-		g2.setColor(Color.decode(ParCor.parCor(indice).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Graphics.addLabel(g2, "x", 1200, (int) transladaY(0), Alinhamento.TopRight);
 		Graphics.addLabel(g2, "y", (int) transladaX(0), 0, Alinhamento.TopRight);
@@ -109,7 +107,7 @@ public class Grafico extends Config
 	{
 
 		int raio = 30;
-		g2.setColor(Color.decode(ParCor.parCor(indice -1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Ellipse2D ponto = new Ellipse2D.Double((int) transladaX(dadosEq2Grau.xVertice) - raio / 2,
 		(int) transladaY(dadosEq2Grau.yVertice) - (raio / 2), raio, raio);
@@ -128,7 +126,7 @@ public class Grafico extends Config
 	public void inserirPontoYVertice(Graphics2D g2, String label)
 	{
 		int raio = 30;
-		g2.setColor(Color.decode(ParCor.parCor(indice -1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 
 		Ellipse2D ponto = new Ellipse2D.Double((int) transladaX(dadosEq2Grau.xVertice) - raio / 2,
 		(int) transladaY(dadosEq2Grau.yVertice) - (raio / 2), raio, raio);
@@ -149,7 +147,7 @@ public class Grafico extends Config
 	public void inserirPontoX1(Graphics2D g2, String label)
 	{
 		int raio = 30;
-		g2.setColor(Color.decode(ParCor.parCor(indice -1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D ponto = new Ellipse2D.Double((int) transladaX(dadosEq2Grau.x1) - raio / 2, (int) transladaY(0) - (raio / 2), raio,
 		raio);
 		g2.fill(ponto);
@@ -163,7 +161,7 @@ public class Grafico extends Config
 	public void inserirPontoX2(Graphics2D g2, String label)
 	{
 		int raio = 30;
-		g2.setColor(Color.decode(ParCor.parCor(indice -1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D ponto = new Ellipse2D.Double((int) transladaX(dadosEq2Grau.x2) - raio / 2, (int) transladaY(0) - (raio / 2), raio,
 		raio);
 		g2.fill(ponto);
@@ -177,7 +175,7 @@ public class Grafico extends Config
 	public void inserirPontoC(Graphics2D g2, String label)
 	{
 		int raio = 30;
-		g2.setColor(Color.decode(ParCor.parCor(indice -1).getCorForte()));
+		g2.setColor(Color.decode(ParCor.parCorAleatorio().getCorForte()));
 		Ellipse2D ponto = new Ellipse2D.Double((int) transladaX(0) - raio / 2, (int) transladaY(dadosEq2Grau.c) - (raio / 2), raio,
 		raio);
 		g2.fill(ponto);

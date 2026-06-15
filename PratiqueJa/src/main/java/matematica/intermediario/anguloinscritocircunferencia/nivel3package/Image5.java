@@ -44,7 +44,7 @@ public class Image5 extends GeradorExercicio
 		dados.lateralDir = arcoDir;
 
 		Config5 config = new Config5(dados);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);

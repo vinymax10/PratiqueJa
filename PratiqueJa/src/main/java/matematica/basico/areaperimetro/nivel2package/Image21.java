@@ -21,7 +21,7 @@ public class Image21 extends GeradorExercicio
 		resolucao += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\\\";
 
 		ConfigQuadrado config = new ConfigQuadrado("l", "", false);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do quadrado é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);

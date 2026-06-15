@@ -28,7 +28,7 @@ public class Exercicio2 extends GeradorExercicio
 		res += "r = \\sqrt{" + r2 + "} = \\mathbf{" + r + "}\\)";
 
 		ConfigSetor config = new ConfigSetor("r", theta);
-		BufferedImage image = config.criarImagem(1 + rand.nextInt(10));
+		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de um setor circular é \\(" + k + "\\pi\\) e o ângulo central é \\(" + theta + "^\\circ\\). Qual é o raio \\(r\\)?");
 		addParagrafoImagem(image);

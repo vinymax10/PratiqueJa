@@ -1,4 +1,4 @@
-﻿package matematica.intermediario.expressaoalgebrica.nivel3package;
+package matematica.intermediario.expressaoalgebrica.nivel3package;
 
 import java.util.ArrayList;
 import java.util.HashSet;
