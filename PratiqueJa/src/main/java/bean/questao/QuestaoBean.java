@@ -44,7 +44,7 @@ import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
-import pdf.questao.GerarLatexQuestao;
+import pdfAntigo.questao.GerarLatexQuestao;
 import service.configuracao.DiretorioService;
 import util.ClasseAux;
 import web.session.Sessao;

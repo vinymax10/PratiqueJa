@@ -2,27 +2,23 @@ package matematica.basico.subtracaonatural;
 
 import matematica.GeradorExercicio;
 
-/**
- * Subtração de naturais (nível 1). Constrói por composição (não é entidade nem herda Exercicio).
- */
 public class SubtracaoNaturalNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.ElementoNeutro",
+		".nivel1package.TermosSubtracao",
+		".nivel1package.ProvaReal",
+		".nivel1package.Contextualizada",
+		".nivel1package.NaoComutativa",
+		".nivel1package.NaoAssociativa",
+		".nivel1package.MissingMinuendo",
+		".nivel1package.MissingSubtraendo",
+		".nivel1package.Diferenca"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 1 + rand.nextInt(10);
-		int b = 1 + rand.nextInt(10);
-		if(a < b)
-		{
-			int c = a;
-			a = b;
-			b = c;
-		}
-		int correto = a - b;
-
-		addParagrafo("Calcule o valor da seguinte subtração:");
-		addParagrafo("\\(" + a + " - " + b + " = \\,?\\)");
-		gerarAlternativasInteiras(correto);
-		setResolucao("\\(" + a + " - " + b + " = " + correto + "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

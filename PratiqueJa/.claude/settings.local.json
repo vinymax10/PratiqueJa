@@ -202,7 +202,15 @@
       "Bash(xelatex -interaction=nonstopmode lista_template.tex)",
       "Read(//c/Users/maximovrm/Documents/latex/UWFPHjKNRFeLZAAGRPIV/**)",
       "Read(//c/Users/maximovrm/Documents/latex/nMdthkKrsUzGopLSQLdS/**)",
-      "Read(//c/Users/maximovrm/Documents/latex/zcjkNoMjNNdQDSBOvABi/**)"
+      "Read(//c/Users/maximovrm/Documents/latex/zcjkNoMjNNdQDSBOvABi/**)",
+      "PowerShell(Get-Command *)",
+      "Bash(java -version)",
+      "Bash(javac -version)",
+      "Bash(javac -cp /c/Users/maximovrm/git/PratiqueJa/PratiqueJa/target/classes:/c/Users/maximovrm/.m2/repository/com/mysql/mysql-connector-j/9.2.0/mysql-connector-j-9.2.0.jar:/c/Users/maximovrm/.m2/repository/org/scilab/forge/jlatexmath/1.0.7/jlatexmath-1.0.7.jar:/c/Users/maximovrm/.m2/repository/net/coobird/thumbnailator/0.4.20/thumbnailator-0.4.20.jar /c/Users/maximovrm/git/PratiqueJa/PratiqueJa/src/main/java/admin/AtualizarLayoutListaMain.java -d /c/Users/maximovrm/git/PratiqueJa/PratiqueJa/target/classes)",
+      "Bash(java -cp /c/Users/maximovrm/git/PratiqueJa/PratiqueJa/target/classes:/c/Users/maximovrm/.m2/repository/com/mysql/mysql-connector-j/9.2.0/mysql-connector-j-9.2.0.jar:/c/Users/maximovrm/.m2/repository/org/scilab/forge/jlatexmath/1.0.7/jlatexmath-1.0.7.jar:/c/Users/maximovrm/.m2/repository/net/coobird/thumbnailator/0.4.20/thumbnailator-0.4.20.jar admin.AtualizarLayoutListaMain)",
+      "Bash(/c/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe *)",
+      "Bash('/c/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe' -u user -pTiquinho*10 pratiqueja -e ' *)",
+      "Bash(./mvnw compile *)"
     ]
   }
 }

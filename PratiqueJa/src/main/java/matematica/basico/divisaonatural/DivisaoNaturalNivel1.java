@@ -4,16 +4,22 @@ import matematica.GeradorExercicio;
 
 public class DivisaoNaturalNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.TermosDivisao",
+		".nivel1package.ElementoNeutro",
+		".nivel1package.ProvaReal",
+		".nivel1package.Contextualizada",
+		".nivel1package.DivisaoPorPotencia10",
+		".nivel1package.ExataVsInexata",
+		".nivel1package.Tabuada",
+		".nivel1package.NaoComutativa",
+		".nivel1package.QuantasVezes",
+		".nivel1package.MissingFator"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 1 + rand.nextInt(10);
-		int b = 1 + rand.nextInt(10);
-		int dividendo = a * b;
-
-		addParagrafo("Calcule o valor da seguinte divisão:");
-		addParagrafo("\\(" + dividendo + " \\div " + b + " = \\,?\\)");
-		gerarAlternativasInteiras(a);
-		setResolucao("\\(" + dividendo + " \\div " + b + " = " + a + "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

@@ -12,15 +12,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
-import matematica.LayoutLista;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
 import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
+import pdf.exercicio.LayoutLista;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "assunto" })
@@ -58,15 +57,9 @@ public class ExercicioPadrao implements Serializable, Entidade
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)
 	private String descricao;
 
-	@AuditLabel(value = "mostrar resolução")
-	private boolean mostrarResolucao;
-
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "layout da lista")
 	private LayoutLista layoutLista = LayoutLista.PADRAO;
-
-	@AuditLabel(value = "imagem quadrada", genero = GeneroGramatical.FEMININO)
-	private boolean imagemQuadrada;
 
 	public String enderecoImage()
 	{

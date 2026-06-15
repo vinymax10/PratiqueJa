@@ -22,8 +22,6 @@ public class FiltroExercicioPadrao implements Serializable
 
 	private int quantidade;
 
-	private Boolean mostrarResolucao;
-
 	public void limpar()
 	{
 		assunto = null;
@@ -31,7 +29,6 @@ public class FiltroExercicioPadrao implements Serializable
 		nivel = null;
 		nomeEnunciadoDescricao = null;
 		quantidade = 0;
-		mostrarResolucao = null;
 	}
 
 }

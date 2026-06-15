@@ -1,0 +1,98 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Gerar Lista PDF" />
+	</ui:define>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Gerar Lista de Exercícios em PDF</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Assunto" />
+				<p:selectOneMenu value="#{gerarPdfBean.assunto}"
+				converter="generic" filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="O assunto é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{assuntoBean.listaAtivas}"
+					var="assunto" itemLabel="#{assunto.nome}" itemValue="#{assunto}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Nível" />
+				<p:selectOneMenu value="#{gerarPdfBean.nivel}"
+				required="true" requiredMessage="O nível é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{nivelBean.opcoes}"
+					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Visibilidade" />
+				<p:selectOneMenu value="#{gerarPdfBean.visibilidade}"
+				required="true" requiredMessage="A visibilidade é obrigatória">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{visibilidadePdfBean.opcoes}"
+					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Com Alternativas" />
+				<p:toggleSwitch class="toggleSwitch-form" 
+				value="#{gerarPdfBean.comAlternativas}" />
+			</h:panelGroup>
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap justify-content-end">
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/list.xhtml" />
+
+				<p:commandButton value="Gerar Todos"
+					styleClass="ui-button-raised ui-button-secondary"
+					icon="pi pi-sync"
+					action="#{gerarPdfBean.gerarTodos()}" update=":growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Gerar PDFs para todos os assuntos e configs pode demorar vários minutos. Deseja continuar?" />
+				</p:commandButton>
+
+				<p:commandButton id="gerarBtn" value="Gerar"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-file-pdf"
+					action="#{gerarPdfBean.gerar()}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="gerarBtn" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+			<p:commandButton value="Não" type="button"
+			styleClass="ui-confirmdialog-no ui-button-flat" />
+			<p:commandButton value="Sim" type="button"
+			styleClass="ui-confirmdialog-yes" />
+		</p:confirmDialog>
+
+	</h:form>
+
+</ui:decorate>

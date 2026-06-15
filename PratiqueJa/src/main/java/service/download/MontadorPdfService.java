@@ -28,10 +28,10 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.Questao;
-import pdf.exercicio.GerarLatexExercicio;
-import pdf.questao.GerarLatexQuestao;
-import pdf.social.InstagramFeed;
-import pdf.social.TikTok;
+import pdfAntigo.exercicio.GerarLatexExercicio;
+import pdfAntigo.questao.GerarLatexQuestao;
+import pdfAntigo.social.InstagramFeed;
+import pdfAntigo.social.TikTok;
 
 @RequestScoped
 public class MontadorPdfService

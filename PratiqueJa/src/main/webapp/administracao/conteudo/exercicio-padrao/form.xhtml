@@ -61,19 +61,7 @@
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
-				<p:outputLabel for="@next" value="Mostrar na Resolução" />
-				<p:toggleSwitch class="toggleSwitch-form"
-				value="#{exercicioPadraoBean.entidade.mostrarResolucao}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
-				<p:outputLabel for="@next" value="Imagem Quadrada" />
-				<p:toggleSwitch class="toggleSwitch-form"
-				value="#{exercicioPadraoBean.entidade.imagemQuadrada}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campoMsg col-12">
+<h:panelGroup styleClass="campoMsg col-12">
 				<p:outputLabel for="@next" value="Enunciado" />
 				<p:inputText value="#{exercicioPadraoBean.entidade.enunciado}"
 				required="true" requiredMessage="O enunciado é obrigatório" maxlength="511" />

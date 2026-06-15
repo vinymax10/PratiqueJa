@@ -23,8 +23,8 @@ import modelo.publicacao.ConfigPost;
 import modelo.publicacao.FinalidadeCta;
 import modelo.publicacao.PerfilCriador;
 import modelo.publicacao.ProgramacaoPost;
-import pdf.social.InstagramFeed;
-import pdf.social.TikTok;
+import pdfAntigo.social.InstagramFeed;
+import pdfAntigo.social.TikTok;
 import service.configuracao.DiretorioService;
 import service.email.EmailService;
 

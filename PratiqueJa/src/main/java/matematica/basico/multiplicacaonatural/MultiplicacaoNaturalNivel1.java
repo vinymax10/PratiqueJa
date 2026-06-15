@@ -4,16 +4,21 @@ import matematica.GeradorExercicio;
 
 public class MultiplicacaoNaturalNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.MultipliPor10",
+		".nivel1package.FatorFaltante",
+		".nivel1package.Comutativa",
+		".nivel1package.Contextualizada",
+		".nivel1package.Distributiva",
+		".nivel1package.TruqueMental",
+		".nivel1package.Sequencia",
+		".nivel1package.ElementoEspecial",
+		".nivel1package.Associativa"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 1 + rand.nextInt(10);
-		int b = 1 + rand.nextInt(10);
-		int correto = a * b;
-
-		addParagrafo("Calcule o valor da seguinte multiplicação:");
-		addParagrafo("\\(" + a + " \\times " + b + " = \\,?\\)");
-		gerarAlternativasInteiras(correto);
-		setResolucao("\\(" + a + " \\times " + b + " = " + correto + "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

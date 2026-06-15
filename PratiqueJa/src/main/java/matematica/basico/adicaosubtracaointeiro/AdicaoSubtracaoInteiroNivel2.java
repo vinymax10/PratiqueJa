@@ -1,26 +1,20 @@
 package matematica.basico.adicaosubtracaointeiro;
 
-import matematica.Auxiliar;
 import matematica.GeradorExercicio;
 
 public class AdicaoSubtracaoInteiroNivel2 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel2package.SomaDoisTermos",
+		".nivel2package.SubtracaoOposto",
+		".nivel2package.TresTermos",
+		".nivel2package.MissingTermo",
+		".nivel2package.Contextualizada"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 1 + rand.nextInt(100);
-		if(rand.nextBoolean())
-			a *= -1;
-
-		int b = 1 + rand.nextInt(100);
-		if(rand.nextBoolean())
-			b *= -1;
-
-		int correto = a + b;
-
-		addParagrafo("Calcule o valor da seguinte expressão:");
-		addParagrafo("\\(" + Auxiliar.getNumber(a, "", true) + Auxiliar.getNumber(b, "", false) + " = \\,?\\)");
-		gerarAlternativasInteirasComNegativos(correto);
-		setResolucao(ResolucaoASInteiro.soma(a, b));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

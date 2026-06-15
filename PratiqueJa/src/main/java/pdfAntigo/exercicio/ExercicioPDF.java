@@ -1,0 +1,431 @@
+package pdfAntigo.exercicio;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
+
+import bean.exercicio.ConfigDownload;
+import matematica.ExercicioFactory;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import modelo.academico.Assunto;
+import modelo.academico.Modulo;
+import modelo.exercicio.ExercicioPadrao;
+import modelo.exercicio.Nivel;
+import modelo.matematica.Exercicio;
+import modelo.usuario.Usuario;
+import pdfAntigo.base.CustomDashedLineSeparator;
+import pdfAntigo.util.Convert;
+
+public class ExercicioPDF
+{
+	private static final Logger LOG = LoggerFactory.getLogger(ExercicioPDF.class);
+
+	static int margin = 40;
+	static BaseColor cor = new BaseColor(102, 102, 102);
+	public static final Font BOLD = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
+	public static Font small = new Font(FontFamily.HELVETICA, 8, Font.NORMAL, cor);
+	public static Font smallBold = new Font(FontFamily.HELVETICA, 8, Font.BOLD);
+
+	public static ByteArrayOutputStream gerarPDF(ExercicioPadrao exercicioPadrao, ConfigDownload configDownload)
+	{
+		List<Exercicio> listaContas = new ArrayList<Exercicio>();
+		for(int i = 0; i < exercicioPadrao.getQuantidade(); i++)
+			listaContas.add(ExercicioFactory.gerar(exercicioPadrao.getClasse(), i + 1));
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		Document document = new Document();
+		try
+		{
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, baos);
+			document.setPageSize(PageSize.A4);
+			document.setMargins(margin, margin, margin - 10, margin - 10);
+			document.open();
+
+			cabecalho(document, exercicioPadrao, configDownload);
+
+			listaExercicios(document, listaContas, exercicioPadrao, pdfWriter, configDownload);
+
+			if(configDownload.isRespostas())
+				rodape(document, listaContas, exercicioPadrao);
+
+			if(configDownload.isResolucao() && !listaContas.isEmpty()
+			&& listaContas.get(0).getResolucao() != null && !listaContas.get(0).getResolucao().isEmpty())
+			{
+				document.newPage();
+				cabecalho(document, exercicioPadrao, configDownload);
+				listaResolucao(document, listaContas, exercicioPadrao, pdfWriter);
+			}
+
+		}
+		catch(DocumentException de)
+		{
+			LOG.error("Erro ao gerar PDF de exercícios", de);
+		}
+		document.close();
+
+		return baos;
+	}
+
+	private static void cabecalho(Document document, ExercicioPadrao exercicio, ConfigDownload configDownload)
+	{
+		PdfPTable table;
+		PdfPCell cell;
+		Paragraph p;
+
+		try
+		{
+			table = new PdfPTable(2);
+			table.setWidthPercentage(100);
+			table.setWidths(new int[] { 20, 80 });
+			Image imagem = getLogo();
+			imagem.scaleAbsolute(100, 25);
+//			imagem.setWidthPercentage(10);
+			cell = new PdfPCell(imagem, false);
+			cell.setBorder(0);
+			table.addCell(cell);
+
+			p = new Paragraph();
+			p.add(new Phrase("   " + exercicio.getAssunto().getModulo().getNome(),
+			new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(151, 162, 255))));
+			p.add(new Phrase(" - ", new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(255, 147, 84))));
+			p.add(new Phrase(exercicio.getAssunto().getNome(),
+			new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(17, 199, 170))));
+
+//			p.add(exercicio.getNivel().getNome());
+			p.add(new Phrase("   Nota: ", new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(151, 162, 255))));
+
+			p.add(new Phrase("            Data: ", new Font(FontFamily.HELVETICA, 12, Font.BOLD, cor)));
+			p.setAlignment(Element.ALIGN_MIDDLE);
+			cell = new PdfPCell(p);
+			cell.setBorder(0);
+			cell.setPaddingTop(5);
+			table.addCell(cell);
+			document.add(table);
+
+			p = new Paragraph(10);
+			p.add(new Phrase("www.pratiqueja.com   ", new Font(FontFamily.HELVETICA, 10, Font.BOLD, cor)));
+
+			if(configDownload.isIdentificacao())
+				p.add(new Phrase("     Nome: " + configDownload.getUsuario().getNome(), small));
+			else
+				p.add(new Phrase("     Nome: ", small));
+
+			LineSeparator line = new LineSeparator(1, 100, cor, 0, -5);
+			p.add(line);
+
+			document.add(p);
+		}
+		catch(DocumentException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static Image getLogo()
+	{
+		Image imagem = null;
+		try
+		{
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			imagem = Image.getInstance(externalContext.getRealPath("image") + "/logo.png");
+		}
+		catch(java.lang.NoSuchMethodError | BadElementException | IOException e)
+		{
+			try
+			{
+				imagem = Image.getInstance("src/main/webapp/image/logo.png");
+			}
+			catch(BadElementException | IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+
+		return imagem;
+	}
+
+	private static void rodape(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicio)
+	{
+		PdfPTable table;
+		PdfPCell cell;
+		Paragraph p;
+
+		try
+		{
+			CustomDashedLineSeparator separator = new CustomDashedLineSeparator();
+			separator.setDash(10);
+			separator.setGap(7);
+			separator.setLineColor(cor);
+			Chunk linebreak = new Chunk(separator);
+			linebreak.setLineHeight(2);
+			document.add(linebreak);
+
+			p = new Paragraph(new Phrase("dobre ou recorte", small));
+			p.setLeading(-2);
+			document.add(p);
+
+			p = new Paragraph();
+			p.add(
+			new Phrase("Gabarito     ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(255, 147, 84))));
+
+			p.add(new Phrase(exercicio.getAssunto().getModulo().getNome(),
+			new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(151, 162, 255))));
+			p.add(new Phrase(" - ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, cor)));
+			p.add(new Phrase(exercicio.getAssunto().getNome(),
+			new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(17, 199, 170))));
+
+			document.add(p);
+
+			table = new PdfPTable(listaContas.size() / 2);
+			table.setWidthPercentage(100);
+			for(int i = 0; i < listaContas.size(); i++)
+			{
+				p = new Paragraph();
+				p.add(
+				new Phrase((i + 1) + ") ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(151, 162, 255))));
+
+				// TODO migrar gabarito para o novo Exercicio (alternativa correta).
+
+				cell = new PdfPCell(p);
+				cell.setBorder(0);
+				table.addCell(cell);
+			}
+
+			document.add(table);
+		}
+		catch(DocumentException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static void listaResolucao(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicio,
+	PdfWriter pdfWriter)
+	{
+
+		PdfPTable table;
+		PdfPCell cell;
+		Paragraph p;
+
+		try
+		{
+			p = new Paragraph();
+			p
+			.add(new Phrase("Instruções: ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(255, 147, 84))));
+//			p.add(new Phrase("Instruções: ", smallBold));
+
+			p.add(new Phrase(exercicio.getEnunciado(), small));
+			p.setSpacingBefore(5);
+			p.setLeading(10);
+			p.setSpacingAfter(5);
+			document.add(p);
+
+			table = new PdfPTable(2);
+			table.setWidthPercentage(100);
+
+			for(int i = 0; i < listaContas.size(); i++)
+			{
+				cell = new PdfPCell();
+
+				PdfPTable tableMin = new PdfPTable(2);
+				tableMin.setWidthPercentage(100);
+				if(i < 9)
+					tableMin.setWidths(new int[] { 6, 94 });
+				else
+					tableMin.setWidths(new int[] { 8, 92 });
+
+				PdfPCell cellMin = new PdfPCell();
+				cellMin.setBorder(0);
+				p = new Paragraph(7);
+				p.add(new Phrase((i + 1) + ")", new Font(FontFamily.HELVETICA, 10, Font.BOLD, new BaseColor(151, 162, 255))));
+				cellMin.addElement(p);
+				tableMin.addCell(cellMin);
+
+				// TODO migrar renderização da resolução para o novo Exercicio (conta.getResolucao()).
+
+				cell.setFixedHeight(720 / (listaContas.size() / 2));
+				cell.setVerticalAlignment(Element.ALIGN_TOP);
+
+				cell.setBorder(0);
+				cell.setBorderColor(cor);
+				if(i % 2 == 0)
+					cell.setBorderWidthRight(1);
+				else
+					cell.setPaddingLeft(5);
+
+				table.addCell(cell);
+			}
+
+			document.add(table);
+		}
+		catch(DocumentException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static Image getImageConta(Exercicio conta, PdfWriter pdfWriter)
+	{
+		// TODO migrar para o novo Exercicio.
+		return null;
+	}
+	
+	private static Image getImageResolucao(Exercicio conta, PdfWriter pdfWriter)
+	{
+		// TODO migrar para o novo Exercicio (conta.getResolucao()).
+		return null;
+	}
+	
+	private static void listaExercicios(Document document, List<Exercicio> listaContas, ExercicioPadrao exercicioPadrao,
+	PdfWriter pdfWriter, ConfigDownload configDownload)
+	{
+		PdfPTable table;
+		PdfPCell cell;
+		Paragraph p;
+
+		try
+		{
+			p = new Paragraph();
+			p
+			.add(new Phrase("Instruções: ", new Font(FontFamily.HELVETICA, 8, Font.BOLD, new BaseColor(255, 147, 84))));
+//			p.add(new Phrase("Instruções: ", smallBold));
+
+			p.add(new Phrase(exercicioPadrao.getEnunciado(), small));
+			p.setSpacingBefore(5);
+			p.setLeading(10);
+			p.setSpacingAfter(5);
+			document.add(p);
+
+			table = new PdfPTable(2);
+			table.setWidthPercentage(100);
+
+			for(int i = 0; i < listaContas.size(); i++)
+			{
+				cell = new PdfPCell();
+
+				Image image;
+
+				PdfPTable tableMin = new PdfPTable(2);
+				tableMin.setWidthPercentage(100);
+				if(i < 9)
+					tableMin.setWidths(new int[] { 6, 94 });
+				else
+					tableMin.setWidths(new int[] { 8, 92 });
+
+				PdfPCell cellMin = new PdfPCell();
+				cellMin.setBorder(0);
+				p = new Paragraph(7);
+				p.add(
+				new Phrase((i + 1) + ")", new Font(FontFamily.HELVETICA, 10, Font.BOLD, new BaseColor(151, 162, 255))));
+				cellMin.addElement(p);
+				tableMin.addCell(cellMin);
+				
+				image = getImageConta(listaContas.get(i),pdfWriter);
+
+				cellMin = new PdfPCell();
+				cellMin.setBorder(0);
+				cellMin.addElement(image);
+				tableMin.addCell(cellMin);
+				cell.addElement(tableMin);
+
+				// TODO migrar "pergunta" para o novo Exercicio (parágrafos do enunciado).
+
+				int alturaTotal = 670;
+				if(!configDownload.isRespostas())
+					alturaTotal = 710;
+
+				cell.setFixedHeight(alturaTotal / (listaContas.size() / 2));
+				cell.setVerticalAlignment(Element.ALIGN_TOP);
+
+				cell.setBorder(0);
+				cell.setBorderColor(cor);
+				if(i % 2 == 0)
+					cell.setBorderWidthRight(1);
+				else
+					cell.setPaddingLeft(5);
+
+				table.addCell(cell);
+			}
+
+			document.add(table);
+		}
+		catch(DocumentException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void gerarPDFFisico(ExercicioPadrao exercicioPadrao, ConfigDownload configDownload)
+	{
+		List<Exercicio> listaContas = new ArrayList<Exercicio>();
+		for(int i = 0; i < exercicioPadrao.getQuantidade(); i++)
+			listaContas.add(ExercicioFactory.gerar(exercicioPadrao.getClasse(), i + 1));
+
+		Document document = new Document();
+		try
+		{
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("PDF_LinhaCodigo.pdf"));
+			document.open();
+			document.setPageSize(PageSize.A4);
+			document.setMargins(7, 7, 7, 7);
+
+			cabecalho(document, exercicioPadrao, configDownload);
+
+			listaExercicios(document, listaContas, exercicioPadrao, pdfWriter, configDownload);
+
+			rodape(document, listaContas, exercicioPadrao);
+		}
+		catch(DocumentException de)
+		{
+			LOG.error("Erro ao gerar PDF de exercícios", de);
+		}
+		catch(IOException ioe)
+		{
+			LOG.error("Erro ao gerar PDF de exercícios", ioe);
+		}
+		document.close();
+	}
+
+	public static void main(String[] args)
+	{
+
+		Usuario usuario = new Usuario();
+		usuario.setNome("Vinícius Rosa Máximo");
+		ExercicioPadrao exercicio = new ExercicioPadrao();
+		exercicio.setNivel(Nivel.Nivel2);
+		exercicio.setNome("FuncaoAfimNivel2");
+		exercicio.setQuantidade(6);
+		Assunto assunto = new Assunto();
+		assunto.setChave("FuncaoAfim");
+		assunto.setNome("Função Afim");
+		assunto.setModulo(Modulo.Basico);
+		exercicio.setAssunto(assunto);
+		ConfigDownload configDownload = new ConfigDownload();
+		ExercicioPDF.gerarPDFFisico(exercicio, configDownload);
+
+	}
+}

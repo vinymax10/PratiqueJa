@@ -1,34 +1,22 @@
 package matematica.basico.multiplicacaonatural;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
 
 public class MultiplicacaoNaturalNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Calculo",
+		".nivel3package.Contextualizada",
+		".nivel3package.Estimativa",
+		".nivel3package.TresFatores",
+		".nivel3package.FatorFaltante",
+		".nivel3package.Expressao",
+		".nivel3package.ProblemaMultiPassos"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a, b;
-		if(rand.nextBoolean())
-		{
-			a = 100 + rand.nextInt(900);
-			b = 100 + rand.nextInt(900);
-		}
-		else
-		{
-			a = 100 + rand.nextInt(900);
-			b = 10 + rand.nextInt(90);
-		}
-		if(a < b)
-		{
-			int aux = a;
-			a = b;
-			b = aux;
-		}
-
-		addParagrafo("Calcule a seguinte multiplicação:");
-		addParagrafo("\\(" + ResolucaoNatural.multiplicacao(a, b, false) + "\\)");
-		gerarAlternativasInteiras(a * b);
-		setResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

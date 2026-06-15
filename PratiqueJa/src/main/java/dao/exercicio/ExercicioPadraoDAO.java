@@ -37,11 +37,6 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 			predicates.add(builder.equal(fromExercicio.get("quantidade"), filtroExercicio.getQuantidade()));
 		}
 
-		if(filtroExercicio.getMostrarResolucao() != null)
-		{
-			predicates.add(builder.equal(fromExercicio.get("mostrarResolucao"), filtroExercicio.getMostrarResolucao()));
-		}
-
 		if(filtroExercicio.getNomeEnunciadoDescricao() != null && !filtroExercicio.getNomeEnunciadoDescricao().isBlank())
 		{
 			String like = "%" + filtroExercicio.getNomeEnunciadoDescricao() + "%";

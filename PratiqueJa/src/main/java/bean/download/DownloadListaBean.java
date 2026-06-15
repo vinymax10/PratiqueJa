@@ -17,12 +17,12 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
-import matematica.GeradorListaPDF;
-import matematica.LayoutLista;
 import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.usuario.PerfilUsuario;
+import pdf.exercicio.GeradorListaPDF;
+import pdf.exercicio.LayoutLista;
 import service.configuracao.DiretorioService;
 import web.session.Sessao;
 

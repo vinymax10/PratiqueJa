@@ -2,28 +2,22 @@ package matematica.basico.adicaonatural;
 
 import matematica.GeradorExercicio;
 
-/**
- * Gera uma adição de naturais (nível 1) no formato flexível de Exercicio:
- * enunciado em parágrafos + alternativas de múltipla escolha. Constrói por
- * composição (não é entidade nem herda Exercicio).
- */
 public class AdicaoNaturalNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.Comutativa",
+		".nivel1package.ElementoNeutro",
+		".nivel1package.TresParcelas",
+		".nivel1package.Contextualizada",
+		".nivel1package.Verificacao",
+		".nivel1package.Associativa",
+		".nivel1package.ParcelaMissing",
+		".nivel1package.Multiplos10"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 1 + rand.nextInt(10);
-		int b = 1 + rand.nextInt(10);
-		int correto = a + b;
-
-		// Enunciado em parágrafos (LaTeX inline em \( \), renderizado pelo MathJax).
-		addParagrafo("Calcule o valor da seguinte adição:");
-		addParagrafo("\\(" + a + " + " + b + " = \\,?\\)");
-
-		// Alternativas: resposta correta + distratores numéricos plausíveis.
-		gerarAlternativasInteiras(correto);
-
-		// Resolução (expressão crua, como no padrão anterior).
-		setResolucao("\\(" +a + " + " + b + " = " + correto+ "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

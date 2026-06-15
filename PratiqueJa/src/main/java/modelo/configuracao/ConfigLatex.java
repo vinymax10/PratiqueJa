@@ -37,6 +37,9 @@ public class ConfigLatex implements Serializable, Entidade
 	@AuditLabel(value = "endereço do e-book")
 	private String enderecoEBook;
 
+	@AuditLabel(value = "endereço do e-book")
+	private String enderecoPdf;
+
 	@AuditLabel(value = "nome", atributo = "nome")
 	private String nome;
 

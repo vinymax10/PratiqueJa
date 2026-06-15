@@ -1,19 +1,22 @@
 package matematica.basico.divisaonatural;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
 
 public class DivisaoNaturalNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.ColunaDiv",
+		".nivel3package.ComResto",
+		".nivel3package.Contextualizada",
+		".nivel3package.ProvaReal",
+		".nivel3package.QuantasVezes",
+		".nivel3package.MissingDividendo",
+		".nivel3package.TresEtapas"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int a = 100 + rand.nextInt(900);
-		int b = 10 + rand.nextInt(90);
-
-		addParagrafo("Calcule a seguinte divisão:");
-		addParagrafo("\\(" + ResolucaoNatural.divisao(a * b, b, false) + "\\)");
-		gerarAlternativasInteiras(a);
-		setResolucao("\\(" + ResolucaoNatural.divisao(a * b, b, true) + "\\)");
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

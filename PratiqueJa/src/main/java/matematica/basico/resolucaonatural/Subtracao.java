@@ -1,7 +1,7 @@
 package matematica.basico.resolucaonatural;
 
 import matematica.DefinicaoCores;
-import pdf.util.Convert;
+import pdfAntigo.util.Convert;
 
 public class Subtracao
 {

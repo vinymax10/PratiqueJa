@@ -17,8 +17,8 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
-import pdf.social.InstagramFeed;
-import pdf.social.TikTok;
+import pdfAntigo.social.InstagramFeed;
+import pdfAntigo.social.TikTok;
 import service.publicacao.ImagemPostService;
 import service.publicacao.ProgramacaoPostService;
 

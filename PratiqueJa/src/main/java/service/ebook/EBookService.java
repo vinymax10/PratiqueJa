@@ -33,13 +33,13 @@ import modelo.email.ConfigSpam;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.questao.Questao;
-import pdf.ebook.ExercicioEBook;
-import pdf.ebook.FolhaRosto;
-import pdf.ebook.ItemSumario;
-import pdf.ebook.QuestaoEBook;
-import pdf.ebook.Resumo;
-import pdf.ebook.Sumario;
-import pdf.exercicio.GerarLatexExercicio;
+import pdfAntigo.ebook.ExercicioEBook;
+import pdfAntigo.ebook.FolhaRosto;
+import pdfAntigo.ebook.ItemSumario;
+import pdfAntigo.ebook.QuestaoEBook;
+import pdfAntigo.ebook.Resumo;
+import pdfAntigo.ebook.Sumario;
+import pdfAntigo.exercicio.GerarLatexExercicio;
 import service.configuracao.DiretorioService;
 
 @RequestScoped
