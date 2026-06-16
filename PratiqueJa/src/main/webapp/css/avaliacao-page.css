@@ -1,0 +1,498 @@
+/* ============================================================
+   /avaliacao/form — prefixo av-
+   ============================================================ */
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.av-hero {
+    background: linear-gradient(135deg, #07142f 0%, #0d1d47 60%, #1a2f6e 100%);
+    border-radius: 20px;
+    padding: 44px 48px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.av-hero::after {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: 180px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+}
+
+.av-hero-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #93c5fd;
+    margin-bottom: 18px;
+}
+
+.av-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+}
+
+.av-hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.15;
+}
+
+.av-hero-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 500px;
+}
+
+/* ── STATS DO HERO ────────────────────────────────────────── */
+.av-hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.av-stat {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.av-stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.av-stat-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.av-stat--green  .av-stat-value { color: #34d399; }
+.av-stat--orange .av-stat-value { color: #fbbf24; }
+
+.av-no-plan {
+    background: rgba(251, 191, 36, 0.10);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.av-no-plan-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fbbf24;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.av-no-plan-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+}
+
+/* ── PAINEL BRANCO ────────────────────────────────────────── */
+.av-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 24px;
+}
+
+/* ── PAINEL EM ANDAMENTO ──────────────────────────────────── */
+.av-panel--andamento {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border: 1px solid #bfdbfe;
+}
+
+.av-progress-card {
+    background: white;
+    border: 1px solid #e0e7ff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.06);
+}
+
+.av-progress-card:last-child { margin-bottom: 0; }
+
+.av-progress-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.av-progress-code {
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 14px;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 4px 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.av-progress-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.av-progress-pct {
+    font-size: 18px;
+    font-weight: 800;
+    color: #2563eb;
+    flex-shrink: 0;
+}
+
+.av-progress-bar.ui-progressbar {
+    height: 14px !important;
+    border-radius: 999px !important;
+    background: #e0e7ff !important;
+    border: none !important;
+}
+
+.av-progress-bar.ui-progressbar .ui-progressbar-value {
+    background: linear-gradient(90deg, #2563eb, #3b82f6) !important;
+    border-radius: 999px !important;
+    transition: width 0.4s ease !important;
+}
+
+.av-progress-bar.ui-progressbar .ui-progressbar-label { display: none !important; }
+
+.av-progress-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.av-progress-status i { color: #2563eb; }
+
+/* ── TÍTULOS DE SEÇÃO ─────────────────────────────────────── */
+.av-section-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #07142f;
+    margin: 0 0 28px 0;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.av-section-title i { font-size: 16px; color: #2563eb; }
+
+.av-section-sub {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b5563;
+    margin: 28px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.av-section-sub i { font-size: 13px; }
+
+/* ── INPUTS (altura/padding padrão do tema) ───────────────── */
+.av-panel .ui-inputtext:focus,
+.av-panel input.ui-inputtext:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+    outline: none !important;
+}
+
+/* ── BOTÃO DE AJUDA (?) ───────────────────────────────────── */
+.av-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.av-help-btn.ui-button {
+    background: transparent !important;
+    border: none !important;
+    color: #cbd5e1 !important;
+    padding: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 0 !important;
+    box-shadow: none !important;
+    border-radius: 50% !important;
+}
+
+.av-help-btn.ui-button .ui-button-icon {
+    font-size: 13px !important;
+    line-height: 18px !important;
+    margin: 0 !important;
+}
+
+.av-help-btn.ui-button:hover { color: #2563eb !important; }
+
+/* Overlay do help — estilo dialog */
+.av-help-panel.ui-overlaypanel {
+    width: 320px;
+    max-width: 320px;
+    border-radius: 14px !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16) !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.av-help-panel .ui-overlaypanel-content {
+    padding: 0 !important;
+}
+
+.av-help-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.av-help-header i {
+    font-size: 15px;
+    color: #2563eb;
+    flex-shrink: 0;
+}
+
+.av-help-header-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.av-help-body {
+    padding: 14px 18px 18px;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #4b5563;
+}
+
+.av-help-body strong {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* ── GRID DE CAMPOS ───────────────────────────────────────── */
+.av-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.av-field-wide { grid-column: span 2; }
+
+.av-field { display: flex; flex-direction: column; gap: 7px; }
+
+/* ── LINHA DE ADICIONAR ITEM ──────────────────────────────── */
+.av-add-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 110px auto;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+/* ── CARDS DE ITENS ───────────────────────────────────────── */
+.av-item-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.av-item-card:hover {
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    border-color: #d1d5db;
+}
+
+.av-item-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+    padding: 0 8px;
+}
+
+.av-item-info { flex: 1; min-width: 0; }
+
+.av-item-assunto {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.av-item-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.av-item-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.av-item-chip--nivel {
+    background: #f0fdf4;
+    color: #166534;
+    border-color: #bbf7d0;
+}
+
+.av-item-chip--qtd {
+    background: #faf5ff;
+    color: #6b21a8;
+    border-color: #e9d5ff;
+}
+
+.av-item-chip--formato {
+    background: #fff7ed;
+    color: #9a3412;
+    border-color: #fed7aa;
+}
+
+.av-item-actions { display: flex; gap: 10px; flex-shrink: 0; }
+
+.av-item-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    font-size: 14px;
+    background: #f8fafc;
+    border: 2px dashed #e5e7eb;
+    border-radius: 14px;
+    line-height: 1.6;
+}
+
+.av-item-empty i { display: block; font-size: 28px; margin-bottom: 8px; color: #d1d5db; }
+
+/* ── TOTALIZADOR ──────────────────────────────────────────── */
+.av-totalizer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.av-totalizer i { color: #9ca3af; }
+.av-totalizer b { color: #07142f; font-weight: 700; }
+
+.av-totalizer--warn {
+    background: #fff7ed;
+    border-color: #fed7aa;
+    color: #92400e;
+}
+
+.av-totalizer--warn i { color: #f59e0b; }
+.av-totalizer--warn b { color: #92400e; }
+
+/* ── AÇÕES ────────────────────────────────────────────────── */
+.av-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 28px;
+}
+
+/* ── RESPONSIVO ───────────────────────────────────────────── */
+@media (max-width: 960px) {
+    .av-hero { grid-template-columns: 1fr; padding: 32px 28px; gap: 28px; }
+    .av-hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .av-stat { min-width: 130px; flex: 1; }
+    .av-hero-title { font-size: 1.75rem; }
+    .av-field-wide { grid-column: span 1; }
+    .av-panel { padding: 24px 20px; }
+    .av-add-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    .av-fields { grid-template-columns: 1fr; }
+    .av-add-row { grid-template-columns: 1fr; }
+}

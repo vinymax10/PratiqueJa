@@ -1,0 +1,72 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Config. de Avaliações" />
+	</ui:define>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Configuração — Confecção de Avaliações</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Máx. exercícios por avaliação" />
+				<p:inputText
+					id="maxExercicios"
+					placeholder="Ex.: 40"
+					value="#{configPedidoAvaliacaoBean.config.maxExerciciosPorAvaliacao}"
+					required="true"
+					requiredMessage="Informe o máximo de exercícios por avaliação." />
+				<p:message for="maxExercicios" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Máx. avaliações por solicitação" />
+				<p:inputText
+					id="maxAvaliacoes"
+					placeholder="Ex.: 50"
+					value="#{configPedidoAvaliacaoBean.config.maxAvaliacoesPorSolicitacao}"
+					required="true"
+					requiredMessage="Informe o máximo de avaliações por solicitação." />
+				<p:message for="maxAvaliacoes" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Dias de retenção do PDF" />
+				<p:inputText
+					id="diasRetencao"
+					placeholder="Ex.: 30"
+					value="#{configPedidoAvaliacaoBean.config.diasRetencaoPdf}"
+					required="true"
+					requiredMessage="Informe os dias de retenção dos PDFs gerados." />
+				<p:message for="diasRetencao" display="text" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+			<div class="divisor"></div>
+			<div></div>
+			<div class="flex gap-3 flex-wrap">
+				<p:commandButton
+					id="salvar"
+					value="Salvar"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{configPedidoAvaliacaoBean.salvar}"
+					update="@form, :growl"
+					process="@form">
+					<p:defaultCommand target="salvar" />
+				</p:commandButton>
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

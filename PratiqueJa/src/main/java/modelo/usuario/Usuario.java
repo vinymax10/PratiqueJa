@@ -28,6 +28,7 @@ import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.ResultadoExercicio;
+import modelo.avaliacao.PlanoAvaliacao;
 import modelo.publicacao.ConfigPost;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
@@ -89,6 +90,10 @@ public class Usuario extends Ativo implements Entidade
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "perfil")
 	private PerfilUsuario perfil = PerfilUsuario.Bronze;
+
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "plano de avaliações")
+	private PlanoAvaliacao planoAvaliacao;
 
 	@AuditLabel(value = "criador")
 	private boolean criador;

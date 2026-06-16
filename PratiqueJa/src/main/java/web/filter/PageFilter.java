@@ -36,9 +36,11 @@ public class PageFilter extends Filtro
 			|| httpRequest.getRequestURI().contains("/download/")
 			|| httpRequest.getRequestURI().contains("/questao/"))
 				acesso = true;
-			
+
 			if(usuario != null)
 			{
+				if(httpRequest.getRequestURI().contains("/avaliacao/"))
+					acesso = true;
 				MDC.put("usuario", String.valueOf(usuario.getId()));
 				if(httpRequest.getRequestURI().contains("/atividades/")
 				||httpRequest.getRequestURI().contains("/exercicio/exercicio/verExercicio")

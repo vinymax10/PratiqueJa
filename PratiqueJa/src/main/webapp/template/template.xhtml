@@ -149,6 +149,11 @@
 			<a href="/questao/questao.xhtml" class="t2-menu-item">
 				<i class="pi pi-question-circle"></i> Questões
 			</a>
+			<h:panelGroup rendered="#{sessaoBean.logado}" layout="block">
+				<a href="/avaliacao/form.xhtml" class="t2-menu-item">
+					<i class="pi pi-file-edit"></i> Confecção de Avaliações
+				</a>
+			</h:panelGroup>
 			<a href="/download/download.xhtml" class="t2-menu-item">
 				<i class="pi pi-download"></i> Download
 			</a>
@@ -445,6 +450,9 @@
 					</a>
 					<a href="/administracao/configuracao/cleanup/config.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-trash"></i> Cleanup
+					</a>
+					<a href="/administracao/configuracao/pedido-avaliacao/config.xhtml" class="t2-menu-item t2-sub-item">
+						<i class="pi pi-file-edit"></i> Config. de Avaliações
 					</a>
 					<a href="/administracao/configuracao/spam/config.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-ban"></i> Spam

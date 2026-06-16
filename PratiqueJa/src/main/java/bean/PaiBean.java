@@ -30,7 +30,7 @@ import web.session.TabStateManager;
 
 @Data
 @Named
-public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends Permissao<T>> implements Serializable
+public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>, P extends Permissao<T>> implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(PaiBean.class);
@@ -64,25 +64,25 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	protected AuditoriaService auditoriaService;
 
 	protected EnumSet<TipoEvento> auditoriasAtivas = EnumSet.noneOf(TipoEvento.class);
-	
+
 	@Inject
 	protected TabStateManager tabState;
-	
+
 	@Inject
 	protected P permissao;
-	
+
 	public PaiBean(Class<T> classe, String nome)
 	{
 		this.classe = classe;
 		this.nome = nome;
 	}
-	
+
 	public void mostrarFiltroToggle()
 	{
-		mostrarFiltro=!mostrarFiltro;
+		mostrarFiltro = !mostrarFiltro;
 		LOG.debug("mostrarFiltroToggle: {}", mostrarFiltro);
 	}
-	
+
 	public void onSelected()
 	{
 		cadastro = false;
@@ -93,7 +93,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	{
 		return getUrlEdicao(entidade);
 	}
-	
+
 	public String getUrlEdicao(T entidade)
 	{
 		return urlCadastro + "?chave=" + Cripto.criptografar(String.valueOf(entidade.getId()));
@@ -115,7 +115,9 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		}
 	}
 
-	public void personalizarCadastrar(){}
+	public void personalizarCadastrar()
+	{
+	}
 
 	public String cadastrar()
 	{
@@ -142,15 +144,15 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	{
 		try
 		{
-			validar(!permissao.isPodeAdicionar(),Mensagem.messagePermissaoNegada());
+			validar(!permissao.isPodeAdicionar(), Mensagem.messagePermissaoNegada());
 			personalizarAdicionar();
 			setOrdem(entidade, getListaTudo().size());
 			entidadeDAO.adicionar(entidade);
 			carregarPermissao();
-			
+
 			if(auditoriasAtivas.contains(TipoEvento.CRIACAO))
 				auditoriaService.registrarCriacao(classe, entidade.getId(), entidade);
-			
+
 			getListaTudo().add(entidade);
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado(a) com sucesso.");
 
@@ -170,16 +172,16 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		}
 		return "";
 	}
-	
+
 	public T somenteSalvar()
 	{
 		try
 		{
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidade.getId(), entidade);
-			
+
 			entidade = entidadeDAO.salvar(entidade);
-			
+
 			carregarPermissao();
 		}
 		catch(Exception e)
@@ -189,20 +191,22 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		}
 		return entidade;
 	}
-	
-	public void personalizarSalvar(){}
+
+	public void personalizarSalvar()
+	{
+	}
 
 	public String salvar(boolean fica)
 	{
 		try
 		{
-			validar(!permissao.isPodeEditar(),Mensagem.messagePermissaoNegada());
+			validar(!permissao.isPodeEditar(), Mensagem.messagePermissaoNegada());
 			personalizarSalvar();
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidade.getId(), entidade);
-			
+
 			entidade = entidadeDAO.salvar(entidade);
-			
+
 			carregarPermissao();
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, nome + " salvo(a) com sucesso.");
 			if(fica)
@@ -221,18 +225,18 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		}
 		return "";
 	}
-	
+
 	public void salvar(T entidade)
 	{
 		try
 		{
-			this.entidade=entidade;
+			this.entidade = entidade;
 			personalizarSalvar();
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidade.getId(), entidade);
-			
+
 			entidade = entidadeDAO.salvar(entidade);
-			
+
 			carregarPermissao(entidade);
 		}
 		catch(Exception e)
@@ -246,18 +250,18 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	{
 		try
 		{
-			validar(!permissao.isPodeRemover(),Mensagem.messagePermissaoNegada());
+			validar(!permissao.isPodeRemover(), Mensagem.messagePermissaoNegada());
 			podeRemover(entidade);
 			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
 				auditoriaService.registrarExclusao(classe, entidade.getId(), entidade);
-			
+
 			getListaTudo().remove(entidade);
 			entidadeDAO.remover(entidade);
 			if(ClasseAux.possuiAtributo(classe, "ordem"))
 				onRowReorder(null);
-			
+
 			personalizarRemover();
-			
+
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, nome + " removido(a) com sucesso.");
 			Navegacao.redirect(urlLista);
 		}
@@ -272,10 +276,14 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		}
 		return "";
 	}
-	
-	protected void podeRemover(T entidade) throws RelacaoException{}
-	
-	public void personalizarRemover(){}
+
+	protected void podeRemover(T entidade) throws RelacaoException
+	{
+	}
+
+	public void personalizarRemover()
+	{
+	}
 
 	public void onRowReorder(ReorderEvent event)
 	{
@@ -290,7 +298,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 
 //	public void personalizarCarregar(){}
 
-	public void carregar() 
+	public void carregar()
 	{
 		LOG.debug("carregar: {}", classe.getSimpleName());
 		if(chave != null)
@@ -298,9 +306,9 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 			id = Long.valueOf(Cripto.descriptografar(chave));
 			entidade = entidadeDAO.carrega(id);
 			cadastro = false;
-			
+
 			carregarPermissao();
-			
+
 			if(!permissao.isPodeCarregar())
 			{
 				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, Mensagem.messagePermissaoNegada());
@@ -310,7 +318,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		else if(cadastro)
 		{
 			cadastrar();
-			
+
 			if(!permissao.isPodeAdicionar())
 			{
 				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, Mensagem.messagePermissaoNegada());
@@ -318,26 +326,26 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 			}
 		}
 	}
-	
+
 	public List<T> getListaTudo()
 	{
-		if(listaTudo == null )
+		if(listaTudo == null)
 			this.listaTudo = entidadeDAO.listarTudo();
-		
+
 		return listaTudo;
 	}
 
 	public void carregarPermissao(T entidade)
 	{
 		Usuario usuario = Sessao.getUsuarioLogado();
-		permissao.update(entidade,usuario);
+		permissao.update(entidade, usuario);
 	}
-	
+
 	public void carregarPermissao()
 	{
 		carregarPermissao(entidade);
 	}
-	
+
 	public List<T> getListaAtivas()
 	{
 		if(ClasseAux.possuiAtributo(classe, "ativo") && listaAtivas == null)
@@ -346,8 +354,7 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 		return listaAtivas;
 	}
 
-	public String alterarStatus(Validacao validacao, 
-	Runnable setStatus, String msgSucesso)
+	public String alterarStatus(Validacao validacao, Runnable setStatus, String msgSucesso)
 	{
 		try
 		{
@@ -381,10 +388,10 @@ public abstract class PaiBean<T extends Entidade, TDAO extends DAO<T>,P extends 
 	{
 		void validar() throws RelacaoException;
 	}
-	
+
 	public void validar(boolean condicao, String mensagem) throws RelacaoException
 	{
-	    if(condicao)
-	        throw new RelacaoException(mensagem);
+		if(condicao)
+			throw new RelacaoException(mensagem);
 	}
 }

@@ -34,40 +34,40 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 	protected String nome;
 
 	protected T entidade;
-	
+
 	protected T entidadeOriginal;
-	
+
 	@Inject
 	protected TDAO entidadeDAO;
 
 	protected boolean cadastro = true;
 
 	protected Class<T> classe;
-	
+
 	protected BaseMapper<T> mapper = new GenericMapper<>();
-	
+
 	@Inject
 	protected AuditoriaService auditoriaService;
-	
+
 	protected EnumSet<TipoEvento> auditoriasAtivas = EnumSet.noneOf(TipoEvento.class);
 
 	public FilhoBean(Class<T> classe, String nome)
 	{
 		this.classe = classe;
-		this.nome=nome;
+		this.nome = nome;
 	}
-	
+
 	public String adicionar(Runnable setStatus)
 	{
 		try
 		{
 			podeAdicionar();
-			if(setStatus!=null)
+			if(setStatus != null)
 				setStatus.run();
 
 			if(auditoriasAtivas.contains(TipoEvento.CRIACAO))
 				auditoriaService.registrarCriacao(classe, entidade.getId(), entidade);
-			
+
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado(a) com sucesso.");
 		}
 		catch(RelacaoException e)
@@ -83,23 +83,25 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 
 		return "";
 	}
-	
-	public void podeAdicionar() throws RelacaoException {}
-	
+
+	public void podeAdicionar() throws RelacaoException
+	{
+	}
+
 	public String salvar(Runnable antesSalvar, Runnable salvar)
 	{
 		try
 		{
 			podeEditar(entidade);
-			if(antesSalvar!=null)
+			if(antesSalvar != null)
 				antesSalvar.run();
 
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidadeOriginal.getId(), entidadeOriginal);
-			
-			if(salvar!=null)
+
+			if(salvar != null)
 				salvar.run();
-			
+
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
 		}
 		catch(RelacaoException e)
@@ -114,9 +116,11 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 
 		return "";
 	}
-	
-	public void podeEditar(T entidade) throws RelacaoException {}
-	
+
+	public void podeEditar(T entidade) throws RelacaoException
+	{
+	}
+
 	public String remover(Runnable setStatus)
 	{
 		try
@@ -124,10 +128,10 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 			podeRemover(entidade);
 			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
 				auditoriaService.registrarExclusao(classe, entidade.getId(), entidade);
-			
-			if(setStatus!=null)
+
+			if(setStatus != null)
 				setStatus.run();
-			
+
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
 		}
 		catch(RelacaoException e)
@@ -142,15 +146,19 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 
 		return "";
 	}
-	
-	public void podeRemover(T entidade) throws RelacaoException{}
-	
+
+	public void podeRemover(T entidade) throws RelacaoException
+	{
+	}
+
 	public void cancelar()
 	{
-		entidade=null;
+		entidade = null;
 	}
-	
-	protected void removeListaPai() {}
+
+	protected void removeListaPai()
+	{
+	}
 
 	public void onRowSelect(SelectEvent<T> event)
 	{
@@ -158,17 +166,17 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 		LOG.debug("entidadeOriginal: {}", entidadeOriginal);
 		this.entidade = mapper.clone(entidadeOriginal); // clone
 	}
-	
+
 	public void onRowReorder(List<T> list)
 	{
 		for(int i = 0; i < list.size(); i++)
 		{
 			entidade = list.get(i);
-			setOrdem(entidade,i);
+			setOrdem(entidade, i);
 			entidadeDAO.salvar(entidade);
 		}
 	}
-	
+
 	private void setOrdem(T entidade, int ordem)
 	{
 		if(ClasseAux.possuiAtributo(classe, "ordem"))
@@ -184,9 +192,8 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 			}
 		}
 	}
-	
-	public String alterarStatus(Validacao validacao, 
-	Runnable setStatus, Runnable salvar, String msgSucesso)
+
+	public String alterarStatus(Validacao validacao, Runnable setStatus, Runnable salvar, String msgSucesso)
 	{
 		try
 		{
@@ -218,10 +225,10 @@ public abstract class FilhoBean<T extends Entidade, TDAO extends DAO<T>> impleme
 	{
 		void validar() throws RelacaoException;
 	}
-	
+
 	public void validar(boolean condicao, String mensagem) throws RelacaoException
 	{
-	    if(condicao)
-	        throw new RelacaoException(mensagem);
+		if(condicao)
+			throw new RelacaoException(mensagem);
 	}
 }

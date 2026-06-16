@@ -50,23 +50,23 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 	protected boolean cadastro = true;
 
 	protected Class<T> classe;
-	
+
 	protected boolean mostrarFiltro;
-	
+
 	@Inject
 	protected FiltroConfig filtroConfig;
-	
+
 	@Inject
 	protected AuditoriaService auditoriaService;
-	
+
 	protected EnumSet<TipoEvento> auditoriasAtivas = EnumSet.noneOf(TipoEvento.class);
-	
+
 	public ConfigBean(Class<T> classe, String nome)
 	{
 		this.classe = classe;
-		this.nome=nome;
+		this.nome = nome;
 	}
-	
+
 	private void setOrdem(T entidade, int ordem)
 	{
 		if(ClasseAux.possuiAtributo(classe, "ordem"))
@@ -82,16 +82,16 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 			}
 		}
 	}
-	
-	public void onCellEdit(CellEditEvent<T> event) 
+
+	public void onCellEdit(CellEditEvent<T> event)
 	{
-    	int index = event.getRowIndex();
-    	T entidade = opcoes.get(index);
-    	entidade=entidadeDAO.salvar(entidade);
-    	
-    	Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo(a) com sucesso.");
-	}	
-	
+		int index = event.getRowIndex();
+		T entidade = opcoes.get(index);
+		entidade = entidadeDAO.salvar(entidade);
+
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo(a) com sucesso.");
+	}
+
 	public void onRowReorder(ReorderEvent event)
 	{
 		T entidade;
@@ -102,7 +102,7 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 			entidadeDAO.salvar(entidade);
 		}
 	}
-	
+
 	public String cadastrar()
 	{
 		cadastro = true;
@@ -110,14 +110,14 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		{
 			entidade = classe.getConstructor().newInstance();
 		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-		| NoSuchMethodException | SecurityException e)
+		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+		| SecurityException e)
 		{
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
+
 	public String adicionar()
 	{
 		try
@@ -126,9 +126,9 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 			entidadeDAO.adicionar(entidade);
 			if(auditoriasAtivas.contains(TipoEvento.CRIACAO))
 				auditoriaService.registrarCriacao(classe, entidade.getId(), entidade);
-			
+
 			opcoes.add(entidade);
-			entidade=null;
+			entidade = null;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " adicionado(a) com sucesso.");
 		}
 		catch(Exception e)
@@ -138,16 +138,16 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		}
 		return "";
 	}
-	
+
 	public String salvar()
 	{
 		try
 		{
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidade.getId(), entidade);
-			
-			entidade=entidadeDAO.salvar(entidade);
-			entidade=null;
+
+			entidade = entidadeDAO.salvar(entidade);
+			entidade = null;
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo(a) com sucesso.");
 		}
 		catch(Exception e)
@@ -157,16 +157,16 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		}
 		return "";
 	}
-	
+
 	public void salvar(T entidade)
 	{
 		try
 		{
 			if(auditoriasAtivas.contains(TipoEvento.EDICAO))
 				auditoriaService.registrarEdicao(classe, entidade.getId(), entidade);
-			
-			entidade=entidadeDAO.salvar(entidade);
-			entidade=null;
+
+			entidade = entidadeDAO.salvar(entidade);
+			entidade = null;
 		}
 		catch(Exception e)
 		{
@@ -174,7 +174,7 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar o(a) " + nome);
 		}
 	}
-	
+
 	public String remover(T entidade)
 	{
 		try
@@ -183,7 +183,7 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 			opcoes.remove(entidade);
 			if(auditoriasAtivas.contains(TipoEvento.EXCLUSAO))
 				auditoriaService.registrarExclusao(classe, entidade.getId(), entidade);
-			
+
 			entidadeDAO.remover(entidade);
 			onRowReorder(null);
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " removido(a) com sucesso.");
@@ -199,29 +199,31 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		}
 		return "";
 	}
-	
+
 	public String remover()
 	{
 		return remover(entidade);
 	}
-	
-	protected void podeRemover(T entidade) throws RelacaoException{}
-	
+
+	protected void podeRemover(T entidade) throws RelacaoException
+	{
+	}
+
 	public void onRowSelect(SelectEvent<T> event)
 	{
 		cadastro = false;
 	}
-	
+
 	public void cancelar()
 	{
-		entidade=null;
+		entidade = null;
 	}
-	
+
 	public void filtrar()
 	{
 		this.opcoes = entidadeDAO.buscar(filtroConfig);
 	}
-	
+
 	@PostConstruct
 	public void init()
 	{
@@ -230,20 +232,22 @@ public abstract class ConfigBean<T extends Entidade, TDAO extends DAO<T>> implem
 		this.opcoesAtivas = entidadeDAO.listarOpcoesAtivas();
 	}
 
-	public void adicionarDefault(){}
-	
+	public void adicionarDefault()
+	{
+	}
+
 	public void validateNomeRepetido(FacesContext context, UIComponent component, Object object)
 	{
 		String nome = (String) object;
 		if(ClasseAux.possuiAtributo(classe, "nome"))
 		{
-			if(ListAux.containsNome(nome,opcoes,classe,this.entidade.getId()))
+			if(ListAux.containsNome(nome, opcoes, classe, this.entidade.getId()))
 			{
 				LOG.debug("Nome já existente: {}", nome);
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nome já existente.", "Nome já existente.");
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome já existente.", "Nome já existente.");
 				throw new ValidatorException(msg);
 			}
 		}
 	}
-	
+
 }

@@ -1,0 +1,608 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Confecção de Avaliações" />
+	</ui:define>
+
+	<!-- ═══════════════════════════════════════════════════════ HERO -->
+	<div class="av-hero">
+		<div>
+<!-- 			<div class="av-hero-icon"><i class="pi pi-file-edit" /></div> -->
+			<span class="av-hero-badge"><i class="pi pi-star" /> Área do Professor</span>
+			<h1 class="av-hero-title">Confecção de Avaliações</h1>
+			<p class="av-hero-desc">
+				Gere provas, testes e avaliações personalizadas para seus alunos,
+				com exercícios sorteados por assunto e nível de dificuldade.
+				Cada exemplar recebe um código único para identificação do gabarito.
+			</p>
+		</div>
+
+		<h:panelGroup layout="block" styleClass="av-hero-stats"
+			rendered="#{sessaoBean.usuario.planoAvaliacao != null}">
+			<div class="av-stat">
+				<span class="av-stat-label">Plano ativo</span>
+				<strong class="av-stat-value">#{sessaoBean.usuario.planoAvaliacao.nome}</strong>
+			</div>
+			<div class="av-stat">
+				<span class="av-stat-label">Usadas no mês</span>
+				<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadasNoMes}</strong>
+			</div>
+			<div class="av-stat av-stat--green">
+				<span class="av-stat-label">Restantes</span>
+				<strong class="av-stat-value">#{pedidoAvaliacaoBean.limiteMensalRestante()}</strong>
+			</div>
+		</h:panelGroup>
+
+		<h:panelGroup layout="block" styleClass="av-hero-stats"
+			rendered="#{sessaoBean.usuario.planoAvaliacao == null}">
+			<div class="av-no-plan">
+				<span class="av-no-plan-label"><i class="pi pi-lock" /> Sem plano ativo</span>
+				<span class="av-no-plan-text">
+					Entre em contato para ativar seu plano e começar a confeccionar avaliações.
+				</span>
+			</div>
+		</h:panelGroup>
+	</div>
+
+	<!-- ═══════════════════════════════════════════════ FORMULÁRIO -->
+	<h:form id="form">
+
+		<div class="av-panel">
+
+			<div class="av-section-title">
+				<i class="pi pi-plus-circle" /> Nova Solicitação
+			</div>
+
+			<!-- ─── Dados da Avaliação ─── -->
+			<div class="av-section-sub"><i class="pi pi-info-circle" /> Dados da Avaliação</div>
+
+			<div class="av-fields">
+
+				<div class="av-field av-field-wide">
+					<div class="av-label">
+						Título *
+						<p:commandButton id="hTitulo" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hTitulo" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-tag" />
+								<span class="av-help-header-title">Título da avaliação</span>
+							</div>
+							<div class="av-help-body">
+								Aparece em destaque no cabeçalho do PDF, logo abaixo do nome do documento.
+								Identifica o conteúdo ou período avaliado.<br/><br/>
+								Exemplo: <em>Avaliação Bimestral — 2º Bimestre</em>
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:inputText id="titulo"
+						placeholder="Ex.: Avaliação Bimestral — 2º Bimestre"
+						value="#{pedidoAvaliacaoBean.pedido.titulo}"
+						required="true"
+						requiredMessage="Informe o título da avaliação." />
+					<p:message for="titulo" display="text" />
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Nome no PDF
+						<p:commandButton id="hNomeDoc" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hNomeDoc" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-file" />
+								<span class="av-help-header-title">Nome do documento</span>
+							</div>
+							<div class="av-help-body">
+								Define o rótulo principal exibido em destaque no topo do PDF.
+								Escolha o que melhor representa o contexto:<br/><br/>
+								<strong>Prova</strong> — avaliação formal com nota<br/>
+								<strong>Avaliação</strong> — termo geral<br/>
+								<strong>Simulado</strong> — preparação para exames<br/>
+								<strong>Teste</strong> — verificação rápida
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:selectOneMenu id="nomeDocumento"
+						value="#{pedidoAvaliacaoBean.pedido.nomeDocumento}">
+						<f:selectItems value="#{pedidoAvaliacaoBean.nomesDocumento}"
+							var="nd" itemLabel="#{nd.nome}" itemValue="#{nd}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Escola
+						<p:commandButton id="hEscola" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hEscola" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-building" />
+								<span class="av-help-header-title">Escola</span>
+							</div>
+							<div class="av-help-body">
+								Nome da instituição de ensino. Exibido no cabeçalho do PDF
+								ao lado do nome do professor.<br/><br/>
+								Campo opcional — se não preenchido, não aparece no documento.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:inputText id="escola"
+						placeholder="(opcional)"
+						value="#{pedidoAvaliacaoBean.pedido.escola}" />
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Professor(a)
+						<p:commandButton id="hProf" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hProf" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-user" />
+								<span class="av-help-header-title">Professor(a)</span>
+							</div>
+							<div class="av-help-body">
+								Nome do professor responsável pela avaliação.
+								Aparece no cabeçalho de cada exemplar do PDF.<br/><br/>
+								Campo opcional — se não preenchido, não aparece no documento.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:inputText id="professor"
+						placeholder="(opcional)"
+						value="#{pedidoAvaliacaoBean.pedido.nomeProfessor}" />
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Data da avaliação
+						<p:commandButton id="hData" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hData" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-calendar" />
+								<span class="av-help-header-title">Data da avaliação</span>
+							</div>
+							<div class="av-help-body">
+								Data de aplicação da avaliação. Aparece no cabeçalho
+								do PDF junto com os demais dados do cabeçalho.<br/><br/>
+								Campo opcional — se não preenchido, não aparece no documento.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:datePicker id="dataAvaliacao"
+						value="#{pedidoAvaliacaoBean.pedido.dataAvaliacao}"
+						pattern="dd/MM/yyyy"
+						placeholder="(opcional)" />
+				</div>
+
+			</div>
+
+			<!-- ─── Formato ─── -->
+			<div class="av-section-sub"><i class="pi pi-sliders-h" /> Formato</div>
+
+			<div class="av-fields">
+
+				<div class="av-field">
+					<div class="av-label">
+						Gabarito
+						<p:commandButton id="hGabarito" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hGabarito" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-check-square" />
+								<span class="av-help-header-title">Tipo de gabarito</span>
+							</div>
+							<div class="av-help-body">
+								<strong>Somente Gabarito</strong> — exibe apenas a resposta correta de cada questão,
+								de forma compacta e objetiva.<br/><br/>
+								<strong>Com Resolução</strong> — inclui o passo a passo detalhado de cada questão,
+								com o raciocínio completo para chegar à resposta.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:selectOneMenu id="tipoGabarito"
+						value="#{pedidoAvaliacaoBean.pedido.tipoGabarito}">
+						<f:selectItems value="#{pedidoAvaliacaoBean.tiposGabarito}"
+							var="tg" itemLabel="#{tg.nome}" itemValue="#{tg}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Posição do gabarito
+						<p:commandButton id="hPosicao" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hPosicao" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-sort-alt" />
+								<span class="av-help-header-title">Posição do gabarito</span>
+							</div>
+							<div class="av-help-body">
+								<strong>Após cada avaliação</strong> — o gabarito segue imediatamente após cada prova.
+								Ideal quando professor e aluno corrigem juntos.<br/><br/>
+								<strong>Agrupado no final</strong> — todas as provas ficam juntas e todos os gabaritos
+								são agrupados ao final do arquivo. Ideal para imprimir provas e gabaritos
+								separadamente e distribuir em momentos diferentes.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:selectOneMenu id="posicaoGabarito"
+						value="#{pedidoAvaliacaoBean.pedido.posicaoGabarito}">
+						<f:selectItems value="#{pedidoAvaliacaoBean.posicoes}"
+							var="pg" itemLabel="#{pg.nome}" itemValue="#{pg}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Formato de saída
+						<p:commandButton id="hFormato" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hFormato" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-download" />
+								<span class="av-help-header-title">Formato de saída</span>
+							</div>
+							<div class="av-help-body">
+								<strong>PDF único</strong> — todas as avaliações em um único arquivo PDF.
+								Mais prático para imprimir tudo de uma vez.<br/><br/>
+								<strong>ZIP</strong> — um arquivo PDF por avaliação, compactados juntos.
+								Ideal para enviar individualmente para cada aluno por e-mail ou aplicativo.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:selectOneMenu id="formatoSaida"
+						value="#{pedidoAvaliacaoBean.pedido.formatoSaida}">
+						<f:selectItems value="#{pedidoAvaliacaoBean.formatosSaida}"
+							var="fs" itemLabel="#{fs.nome}" itemValue="#{fs}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div class="av-field">
+					<div class="av-label">
+						Quantidade *
+						<p:commandButton id="hQtd" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+						<p:overlayPanel for="hQtd" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+							<div class="av-help-header">
+								<i class="pi pi-copy" />
+								<span class="av-help-header-title">Quantidade de exemplares</span>
+							</div>
+							<div class="av-help-body">
+								Número de avaliações a gerar nesta solicitação.
+								Cada exemplar recebe exercícios diferentes sorteados aleatoriamente
+								e um código único (ex.: A3F7-001) que identifica seu gabarito correspondente.<br/><br/>
+								Máximo por solicitação: #{pedidoAvaliacaoBean.config.maxAvaliacoesPorSolicitacao} exemplares.
+							</div>
+						</p:overlayPanel>
+					</div>
+					<p:inputText id="quantidade"
+						value="#{pedidoAvaliacaoBean.pedido.quantidade}"
+						required="true"
+						requiredMessage="Informe a quantidade de avaliações." />
+					<p:message for="quantidade" display="text" />
+				</div>
+
+			</div>
+
+			<!-- ─── Conteúdo ─── -->
+			<div class="av-section-sub"><i class="pi pi-list" /> Conteúdo</div>
+
+			<div style="display:flex;justify-content:flex-end;margin-bottom:16px">
+				<p:commandButton
+					value="Adicionar assunto"
+					icon="pi pi-plus"
+					styleClass="ui-button-raised ui-button-success"
+					action="#{pedidoAvaliacaoBean.prepararNovoItem}"
+					update=":dialogItem"
+					process="@this"
+					oncomplete="PF('wDialogItem').show()"
+					resetValues="true" />
+			</div>
+
+			<!-- Lista de itens como cards -->
+			<h:panelGroup id="listaItens" layout="block">
+				<ui:repeat value="#{pedidoAvaliacaoBean.pedido.itens}" var="item" varStatus="st">
+					<div class="av-item-card">
+						<div class="av-item-num">
+							<h:outputText value="#{st.index + 1}" />
+						</div>
+						<div class="av-item-info">
+							<span class="av-item-assunto">
+								<h:outputText value="#{item.assunto.nome}" />
+							</span>
+							<div class="av-item-meta">
+								<span class="av-item-chip av-item-chip--nivel">
+									<h:outputText value="#{item.nivel.nome}" />
+								</span>
+								<span class="av-item-chip av-item-chip--formato">
+									<h:outputText value="#{item.formato.nome}" />
+								</span>
+								<span class="av-item-chip av-item-chip--qtd">
+									<h:outputText value="#{item.quantidade} exercício#{item.quantidade != 1 ? 's' : ''}" />
+								</span>
+							</div>
+						</div>
+						<div class="av-item-actions">
+							<p:commandButton icon="pi pi-arrow-up"
+								styleClass="ui-button-flat ui-button-secondary"
+								title="Subir"
+								action="#{pedidoAvaliacaoBean.subirItem(item)}"
+								update="form:listaItens" process="@this" />
+							<p:commandButton icon="pi pi-arrow-down"
+								styleClass="ui-button-flat ui-button-secondary"
+								title="Descer"
+								action="#{pedidoAvaliacaoBean.descerItem(item)}"
+								update="form:listaItens" process="@this" />
+							<p:commandButton icon="pi pi-pencil"
+								styleClass="ui-button-flat ui-button-secondary"
+								title="Editar"
+								action="#{pedidoAvaliacaoBean.prepararEdicaoItem(item)}"
+								update=":dialogItem" process="@this"
+								oncomplete="PF('wDialogItem').show()"
+								resetValues="true" />
+							<p:commandButton icon="pi pi-trash"
+								styleClass="ui-button-danger ui-button-flat"
+								title="Remover"
+								action="#{pedidoAvaliacaoBean.removerItem(item)}"
+								update="form:listaItens form:totalizador" process="@this">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+									message="Você tem certeza que deseja remover '#{item.assunto.nome}' desta avaliação?" />
+							</p:commandButton>
+						</div>
+					</div>
+				</ui:repeat>
+
+				<h:panelGroup layout="block"
+					rendered="#{empty pedidoAvaliacaoBean.pedido.itens}">
+					<div class="av-item-empty">
+						<i class="pi pi-inbox" />
+						Nenhum assunto adicionado ainda.<br/>
+						Clique em <b>Adicionar assunto</b> para definir o conteúdo da avaliação.
+					</div>
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<!-- Totalizador como componente JSF para poder ser atualizado via AJAX -->
+			<h:panelGroup id="totalizador" layout="block">
+				<div class="av-totalizer #{pedidoAvaliacaoBean.totalExercicios() >= pedidoAvaliacaoBean.config.maxExerciciosPorAvaliacao ? 'av-totalizer--warn' : ''}">
+					<i class="pi pi-list" />
+					Total de exercícios:
+					<b><h:outputText value="#{pedidoAvaliacaoBean.totalExercicios()}" /></b>
+					de
+					<b><h:outputText value="#{pedidoAvaliacaoBean.config.maxExerciciosPorAvaliacao}" /></b>
+					máx.
+				</div>
+			</h:panelGroup>
+
+			<div class="av-actions">
+				<p:commandButton
+					id="solicitar"
+					value="Solicitar Confecção"
+					icon="pi pi-send"
+					styleClass="ui-button-raised ui-button-primary"
+					action="#{pedidoAvaliacaoBean.solicitar}"
+					update="@form :growl :painelHistorico"
+					process="@form">
+					<p:defaultCommand target="solicitar" />
+				</p:commandButton>
+			</div>
+
+		</div>
+
+	</h:form>
+
+	<!-- ══════════════════════════════════════════════ EM ANDAMENTO -->
+	<h:form id="painelAndamento">
+
+		<p:poll interval="2"
+			listener="#{pedidoAvaliacaoBean.atualizarProgresso}"
+			update="painelAndamento :painelHistorico"
+			rendered="#{pedidoAvaliacaoBean.temGerandoEmProgresso()}" />
+
+		<h:panelGroup layout="block" styleClass="av-panel av-panel--andamento"
+			rendered="#{pedidoAvaliacaoBean.temGerandoEmProgresso()}">
+
+			<div class="av-section-title">
+				<i class="pi pi-spin pi-spinner" style="color:#2563eb" /> Confecção em andamento
+			</div>
+
+			<ui:repeat value="#{pedidoAvaliacaoBean.pedidosEmAndamento}" var="p">
+				<div class="av-progress-card">
+					<div class="av-progress-header">
+						<span class="av-progress-code">#{p.codigoBatch}</span>
+						<span class="av-progress-title">
+							#{p.nomeDocumento.nome}: #{p.titulo}
+						</span>
+						<span class="av-progress-pct">
+							<h:outputText value="#{p.progresso}">
+								<f:convertNumber maxFractionDigits="0" />
+							</h:outputText>%
+						</span>
+					</div>
+					<p:progressBar value="#{p.progresso}" styleClass="av-progress-bar" />
+					<div class="av-progress-status">
+						<h:panelGroup rendered="#{p.status.name() == 'AGUARDANDO'}">
+							<i class="pi pi-clock" /> Aguardando início da confecção…
+						</h:panelGroup>
+						<h:panelGroup rendered="#{p.status.name() == 'GERANDO'}">
+							<i class="pi pi-cog pi-spin" /> Gerando exercícios e compilando PDFs…
+						</h:panelGroup>
+					</div>
+				</div>
+			</ui:repeat>
+
+		</h:panelGroup>
+
+	</h:form>
+
+	<!-- ══════════════════════════════════════════════ HISTÓRICO -->
+	<h:form id="painelHistorico">
+
+		<div class="av-panel">
+
+			<div class="av-section-title">
+				<i class="pi pi-history" /> Histórico de Solicitações
+			</div>
+
+			<p:dataTable
+				value="#{pedidoAvaliacaoBean.historico}"
+				var="p"
+				emptyMessage="Nenhuma solicitação encontrada."
+				paginator="true"
+				rows="10">
+
+				<p:column headerText="Código" style="width:100px">
+					<h:outputText value="#{p.codigoBatch}"
+						style="font-family:monospace;font-weight:700;color:#2563eb;font-size:15px" />
+				</p:column>
+
+				<p:column headerText="Documento">
+					<h:outputText value="#{p.nomeDocumento.nome}: #{p.titulo}" />
+				</p:column>
+
+				<p:column headerText="Qtd." style="width:55px">
+					<h:outputText value="#{p.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Solicitado" style="width:130px">
+					<h:outputText value="#{p.dataSolicitacao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Expira" style="width:95px">
+					<h:outputText value="#{p.dataExpiracao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Status" style="width:155px">
+					<h:panelGroup rendered="#{p.status.name() == 'GERANDO'}">
+						<p:progressBar value="#{p.progresso}" style="height:10px;border-radius:999px" />
+						<div style="font-size:11px;text-align:center;margin-top:4px;color:#6b7280">
+							<h:outputText value="#{p.progresso}">
+								<f:convertNumber maxFractionDigits="0" />
+							</h:outputText>%
+						</div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{p.status.name() != 'GERANDO'}">
+						<p:tag value="#{p.status.nome}"
+							severity="#{p.status.name() == 'CONCLUIDO' ? 'success' : p.status.name() == 'ERRO' ? 'danger' : 'info'}" />
+					</h:panelGroup>
+				</p:column>
+
+				<p:column headerText="Download" style="width:110px;text-align:center">
+					<p:commandButton
+						value="Baixar"
+						icon="pi pi-download"
+						styleClass="ui-button-outlined ui-button-success"
+						rendered="#{p.status.name() == 'CONCLUIDO' and !pedidoAvaliacaoBean.estaExpirado(p)}"
+						ajax="false">
+						<p:fileDownload value="#{pedidoAvaliacaoBean.download(p)}" />
+					</p:commandButton>
+					<h:outputText
+						value="Expirado"
+						styleClass="text-color-secondary"
+						style="font-size:12px;color:#9ca3af"
+						rendered="#{pedidoAvaliacaoBean.estaExpirado(p)}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</div>
+
+	</h:form>
+
+	<!-- ═══════════════════════════════ DIALOG: ADICIONAR/EDITAR ITEM -->
+	<p:dialog id="dialogItem"
+		header="#{pedidoAvaliacaoBean.editando ? 'Editar assunto' : 'Adicionar assunto à avaliação'}"
+		widgetVar="wDialogItem"
+		modal="true"
+		responsive="true"
+		showEffect="fade"
+		hideEffect="fade"
+		width="520">
+
+		<h:form id="formItem" class="form">
+
+			<div class="ui-fluid gride">
+
+				<h:panelGroup styleClass="campo col-12">
+					<p:outputLabel for="@next" value="Assunto" />
+					<p:selectOneMenu value="#{pedidoAvaliacaoBean.novoItem.assunto}"
+						converter="generic" filter="true" filterMatchMode="contains"
+						required="true" requiredMessage="Selecione um assunto.">
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{pedidoAvaliacaoBean.assuntos}"
+							var="a" itemLabel="#{a.nome}" itemValue="#{a}" />
+					</p:selectOneMenu>
+					<p:message for="@previous" display="text" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campo col-12 md:col-6">
+					<p:outputLabel for="@next" value="Nível" />
+					<p:selectOneMenu value="#{pedidoAvaliacaoBean.novoItem.nivel}"
+						required="true" requiredMessage="Selecione o nível.">
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{pedidoAvaliacaoBean.niveis}"
+							var="n" itemLabel="#{n.nome}" itemValue="#{n}" />
+					</p:selectOneMenu>
+					<p:message for="@previous" display="text" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campo col-12 md:col-6">
+					<p:outputLabel for="@next" value="Tipo de questão" />
+					<p:selectOneMenu value="#{pedidoAvaliacaoBean.novoItem.formato}"
+						required="true" requiredMessage="Selecione o tipo de questão.">
+						<f:selectItems value="#{pedidoAvaliacaoBean.formatosAvaliacao}"
+							var="fa" itemLabel="#{fa.nome}" itemValue="#{fa}" />
+					</p:selectOneMenu>
+					<p:message for="@previous" display="text" />
+				</h:panelGroup>
+
+				<h:panelGroup styleClass="campo col-12 md:col-6">
+					<p:outputLabel for="@next" value="Quantidade de exercícios" />
+					<p:inputNumber minValue="1" maxValue="100" decimalPlaces="0"
+						value="#{pedidoAvaliacaoBean.novoItem.quantidade}"
+						required="true" requiredMessage="Informe a quantidade." />
+					<p:message for="@previous" display="text" />
+				</h:panelGroup>
+
+			</div>
+
+			<div class="content-button">
+				<div class="divisor"></div>
+				<div class="flex gap-3 flex-wrap justify-content-end">
+					<p:commandButton value="Cancelar"
+						type="button"
+						styleClass="ui-button-outlined"
+						icon="pi pi-times"
+						onclick="PF('wDialogItem').hide()" />
+					<p:commandButton id="btnSalvarItem"
+						value="#{pedidoAvaliacaoBean.editando ? 'Salvar' : 'Adicionar'}"
+						icon="pi pi-check"
+						styleClass="ui-button-raised ui-button-success"
+						action="#{pedidoAvaliacaoBean.salvarItem}"
+						update="@form :form:listaItens :form:totalizador :growl"
+						process="@form"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('wDialogItem').hide()">
+						<p:defaultCommand target="btnSalvarItem" />
+					</p:commandButton>
+				</div>
+			</div>
+
+		</h:form>
+
+	</p:dialog>
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Confirmar" type="button"
+			styleClass="ui-confirmdialog-yes ui-button-danger" icon="pi pi-check" />
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no ui-button-outlined" icon="pi pi-times" />
+	</p:confirmDialog>
+
+</ui:decorate>
