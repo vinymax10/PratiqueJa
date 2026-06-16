@@ -72,7 +72,7 @@ public class Expressao1 extends GeradorExercicio
 		}
 
 		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
-		texto = "\\begin{align}&" + "\\text{Para}~ x = " + coeficientes[posX] + ",\\\\ &" + texto + "\\end{align}";
+		texto = "\\text{Para } x = " + coeficientes[posX] + ", \\\\ " + texto;
 
 		addParagrafo("Calcule o valor da expressão algébrica:");
 		addParagrafo("\\(" + texto + "\\)");

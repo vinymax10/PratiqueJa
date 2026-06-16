@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -54,6 +56,8 @@ public class ExercicioPadrao implements Serializable, Entidade
 	@AuditLabel(value = "enunciado singular")
 	private String enunciadoSingular;
 
+	@Column(length = 1023)
+	@Size(max = 1023)
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)
 	private String descricao;
 

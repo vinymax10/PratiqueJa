@@ -34,6 +34,17 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Nível" />
+				<p:selectOneMenu value="#{pdfBean.entidade.nivel}"
+				required="true" requiredMessage="O nível é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{nivelBean.opcoes}"
+					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Visibilidade" />
 				<p:selectOneMenu value="#{pdfBean.entidade.visibilidade}"
 				required="true" requiredMessage="A visibilidade é obrigatória">
@@ -53,7 +64,7 @@
 
 			<h:panelGroup styleClass="campo col-12">
 				<p:outputLabel for="@next" value="Descrição" />
-				<p:inputText value="#{pdfBean.entidade.descricao}" maxlength="511" />
+				<p:inputTextarea rows="3" value="#{pdfBean.entidade.descricao}" maxlength="511" />
 			</h:panelGroup>
 
 		</div>

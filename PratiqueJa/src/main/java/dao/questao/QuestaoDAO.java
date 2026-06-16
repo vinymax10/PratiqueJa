@@ -192,6 +192,18 @@ public class QuestaoDAO extends DAO<Questao>
 		if(filtroQuestao.getMalFormulada() != null)
 			predicates.add(builder.equal(fromQuestao.get("malFormulada"), filtroQuestao.getMalFormulada().booleanValue()));
 
+		if(filtroQuestao.getQualidadeFormulacaoMin() != null)
+			predicates.add(builder.greaterThanOrEqualTo(fromQuestao.<Integer>get("qualidadeFormulacao"), filtroQuestao.getQualidadeFormulacaoMin()));
+
+		if(filtroQuestao.getQualidadeFormulacaoMax() != null)
+			predicates.add(builder.lessThanOrEqualTo(fromQuestao.<Integer>get("qualidadeFormulacao"), filtroQuestao.getQualidadeFormulacaoMax()));
+
+		if(filtroQuestao.getQualidadeResolucaoMin() != null)
+			predicates.add(builder.greaterThanOrEqualTo(fromQuestao.<Integer>get("qualidadeResolucao"), filtroQuestao.getQualidadeResolucaoMin()));
+
+		if(filtroQuestao.getQualidadeResolucaoMax() != null)
+			predicates.add(builder.lessThanOrEqualTo(fromQuestao.<Integer>get("qualidadeResolucao"), filtroQuestao.getQualidadeResolucaoMax()));
+
 		if(filtroQuestao.getResolucaoLatex() != null)
 		{
 			if(filtroQuestao.getResolucaoLatex().booleanValue())

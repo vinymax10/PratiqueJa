@@ -75,6 +75,18 @@
 				</p:selectOneMenu>
 			</h:panelGroup>
 			
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Qualidade da Formulação" />
+				<p:inputNumber value="#{questaoBean.entidade.qualidadeFormulacao}"
+				decimalPlaces="0" minValue="0" maxValue="100" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Qualidade da Resolução" />
+				<p:inputNumber value="#{questaoBean.entidade.qualidadeResolucao}"
+				decimalPlaces="0" minValue="0" maxValue="100" />
+			</h:panelGroup>
+
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-9 xl:col-6">
 				<p:outputLabel for="@next" value="Chave" />
 				<p:inputText value="#{questaoBean.entidade.chave}" maxlength="255" />

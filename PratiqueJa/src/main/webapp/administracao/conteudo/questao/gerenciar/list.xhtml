@@ -110,6 +110,20 @@
 							<h:outputText styleClass="status" value="#{entidade.dificuldade.nome}" />
 						</h:panelGroup>
 						
+						<!-- Qualidade da Formulação -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
+							<h:outputText styleClass="title" value="Qualidade da Formulação" />
+							<h:outputText styleClass="status" value="#{entidade.qualidadeFormulacao}" />
+						</h:panelGroup>
+
+						<!-- Qualidade da Resolução -->
+						<h:panelGroup
+						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
+							<h:outputText styleClass="title" value="Qualidade da Resolução" />
+							<h:outputText styleClass="status" value="#{entidade.qualidadeResolucao}" />
+						</h:panelGroup>
+
 						<!-- Banca -->
 						<h:panelGroup
 						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start">

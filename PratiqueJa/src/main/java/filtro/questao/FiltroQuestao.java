@@ -40,6 +40,10 @@ public class FiltroQuestao implements Serializable
 	private Boolean acertei;
 	private Boolean respondida;
 	private Boolean malFormulada;
+	private Integer qualidadeFormulacaoMin;
+	private Integer qualidadeFormulacaoMax;
+	private Integer qualidadeResolucaoMin;
+	private Integer qualidadeResolucaoMax;
 
 	public void limpar()
 	{
@@ -58,6 +62,10 @@ public class FiltroQuestao implements Serializable
 		assunto = null;
 		acertei = null;
 		respondida = null;
+		qualidadeFormulacaoMin = null;
+		qualidadeFormulacaoMax = null;
+		qualidadeResolucaoMin = null;
+		qualidadeResolucaoMax = null;
 		conteudo = "";
 		anos = new ArrayList<>();
 		bancas = new ArrayList<>();

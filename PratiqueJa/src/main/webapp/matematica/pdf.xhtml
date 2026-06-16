@@ -1,0 +1,78 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+        <link rel="stylesheet" href="/css/assunto-page.css" type="text/css" />
+        <link rel="stylesheet" href="/css/teoria.css" type="text/css" />
+	    <link rel="stylesheet" href="/css/pdf-page.css" type="text/css" />
+    </ui:define>
+
+	<f:metadata>
+		<f:viewParam name="assunto" value="#{assuntoBean.assunto}" />
+		<f:viewAction action="#{assuntoBean.init()}" />
+		<f:viewAction action="#{pdfAssuntoBean.filtrarPorAssunto(assuntoBean.entidade)}" />
+	</f:metadata>
+
+	<ui:include src="/matematica/resumo.xhtml" />
+
+	<h:form id="form">
+
+		<div class="pdf-grid">
+
+			<ui:repeat value="#{pdfAssuntoBean.pdfs}" var="pdf">
+
+				<div class="pdf-card #{pdf.visibilidade == 'Premium' ? 'pdf-card--premium' : ''}">
+
+					<div class="pdf-card-top">
+
+						<span class="pdf-badge pdf-badge--premium"
+							style="#{pdf.visibilidade == 'Premium' ? '' : 'display:none'}">
+							<i class="pi pi-crown" /> Premium
+						</span>
+
+						<span class="pdf-badge pdf-badge--free"
+							style="#{pdf.visibilidade == 'Premium' ? 'display:none' : ''}">
+							<i class="pi pi-lock-open" /> Grátis
+						</span>
+
+						<span class="pdf-file-icon"><i class="pi pi-file-pdf" /></span>
+
+					</div>
+
+					<div class="pdf-card-body">
+						<h3 class="pdf-card-title">
+							<h:outputText value="#{pdf.tipo.nome}" rendered="#{not empty pdf.tipo}" />
+							<h:outputText value="PDF" rendered="#{empty pdf.tipo}" />
+						</h3>
+						<p class="pdf-card-desc">
+							<h:outputText value="#{pdf.descricao}" />
+						</p>
+					</div>
+
+					<div class="pdf-card-actions">
+						<p:commandButton ajax="false" value="Baixar" icon="pi pi-download"
+							styleClass="pdf-download-btn #{pdf.visibilidade == 'Premium' ? 'pdf-download-btn--premium' : ''}"
+							rendered="#{not empty pdf.caminho}">
+							<p:fileDownload value="#{pdfAssuntoBean.download(pdf)}" />
+						</p:commandButton>
+					</div>
+
+				</div>
+
+			</ui:repeat>
+
+		</div>
+
+		<h:panelGroup layout="block" rendered="#{empty pdfAssuntoBean.pdfs}">
+			<p style="text-align:center;padding:2rem;color:#6b7280;">
+				Nenhum PDF disponível para este assunto.
+			</p>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:decorate>

@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.seguranca.PermissaoPadrao;
+import pdf.exercicio.LayoutLista;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,6 +33,11 @@ public class ExercicioPadraoBean extends PaiBean<ExercicioPadrao, ExercicioPadra
 		urlLista = "/administracao/conteudo/exercicio-padrao/list.xhtml";
 
 		auditoriasAtivas = EnumSet.allOf(TipoEvento.class);
+	}
+
+	public LayoutLista[] getLayoutListas()
+	{
+		return LayoutLista.values();
 	}
 
 	public void filtrar()

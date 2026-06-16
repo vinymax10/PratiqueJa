@@ -107,9 +107,11 @@
 				onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-question-circle"></i> Questões
 			</h:panelGroup>
-			<div class="as-tab" onclick="asShowTab('pdfs', this)">
+			<h:panelGroup layout="block"
+				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/pdf') ? 'as-tab-active' : ''}"
+				onclick="navegarComScroll('/matematica/pdf.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-download"></i> PDFs
-			</div>
+			</h:panelGroup>
 		</div>
 
 	</ui:composition>

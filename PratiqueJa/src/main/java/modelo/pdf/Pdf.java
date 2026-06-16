@@ -17,6 +17,7 @@ import lombok.ToString;
 import modelo.Entidade;
 import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
+import modelo.exercicio.Nivel;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "assunto" })
@@ -36,9 +37,17 @@ public class Pdf implements Serializable, Entidade
 	@ManyToOne
 	private Assunto assunto;
 
+	@AuditLabel(value = "nível")
+	@Enumerated(EnumType.STRING)
+	private Nivel nivel;
+	
 	@Size(max = 511)
 	@AuditLabel(value = "caminho")
 	private String caminho;
+
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "tipo")
+	private TipoPdf tipo;
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "visibilidade", genero = modelo.auditoria.GeneroGramatical.FEMININO)

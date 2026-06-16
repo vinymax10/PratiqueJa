@@ -158,7 +158,7 @@ public class Algebra
 		textLatex += "=";
 
 		textLatex = textLatex.replace("(", "\\left(").replace(")", "\\right)");
-		textLatex = "\\begin{align}&" + "\\text{Para}~" + variavel + " = " + coeficientes[posX[0]] + ",\\\\ &" + textLatex + "\\end{align}";
+		textLatex = "\\text{Para } " + variavel + " = " + coeficientes[posX[0]] + ", \\\\ " + textLatex;
 
 		return textLatex;
 	}

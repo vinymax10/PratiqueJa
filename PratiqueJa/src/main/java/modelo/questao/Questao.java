@@ -77,6 +77,12 @@ public class Questao implements Serializable, Entidade
 	@AuditLabel(value = "dificuldade", genero = GeneroGramatical.FEMININO)
 	@Enumerated(EnumType.STRING)
 	private Dificuldade dificuldade;
+	
+	@AuditLabel(value = "qualidade da formulação")
+	private int qualidadeFormulacao;
+
+	@AuditLabel(value = "qualidade da resolução", genero = GeneroGramatical.FEMININO)
+	private int qualidadeResolucao;
 
 	@AuditLabel(value = "ordem de inserção")
 	private int ordemInsercao;

@@ -195,7 +195,10 @@ public class GeradorListaPDF
 			"% Gerado automaticamente por GeradorListaPDF — não editar manualmente\n"
 			+ "\\documentclass[12pt]{article}\n"
 			+ "\\usepackage{pratiqueja}\n"
-			+ "\\usepackage{tabularray}\n\n"
+			+ "\\usepackage{tabularray}\n"
+			+ "\\usepackage{cancel}\n"
+			+ "\\definecolor{iris}{rgb}{0.39, 0.44, 1}\n"
+			+ "\\definecolor{babypink}{rgb}{1, 0.42, 0.52}\n\n"
 			+ macros()
 			+ "\\setsubject{" + titulo + " · " + subtitulo + "}\n\n"
 			+ "\\begin{document}\n"
@@ -396,7 +399,7 @@ public class GeradorListaPDF
 	private String macroGabarito(int num, Exercicio e)
 	{
 		String numStr = String.format("%02d", num);
-		String resolucao = e.getResolucao() != null ? e.getResolucao() : "";
+		String resolucao = e.getResolucao() != null ? escaparTexto(e.getResolucao()) : "";
 		AlternativaExercicio correta = comAlternativas ? e.correta() : null;
 
 		if (correta == null)
@@ -418,7 +421,7 @@ public class GeradorListaPDF
 			if (p.isTipoImagem())
 				parte = includegraphics(num, p);
 			else if (p.getTexto() != null && !p.getTexto().isBlank())
-				parte = p.getTexto();
+				parte = escaparTexto(p.getTexto());
 			else
 				continue;
 
@@ -459,6 +462,19 @@ public class GeradorListaPDF
 		return nome;
 	}
 
+	/**
+	 * Escapa caracteres especiais do LaTeX que nunca aparecem de forma legítima
+	 * "crua" no texto do enunciado: "%" (comentário) e "$" (alterna modo math).
+	 * Não toca em ocorrências já escapadas (precedidas por "\"). Demais especiais
+	 * (_, ^, {, }, &) são preservados pois fazem parte da matemática em \(...\).
+	 */
+	private String escaparTexto(String s)
+	{
+		if (s == null) return "";
+		return s.replaceAll("(?<!\\\\)%", "\\\\%")
+		        .replaceAll("(?<!\\\\)\\$", "\\\\\\$");
+	}
+
 	/** Enunciado apenas com os parágrafos de texto (sem imagens), separados por \par. */
 	private String enunciadoSemImagem(Exercicio e)
 	{
@@ -470,7 +486,7 @@ public class GeradorListaPDF
 			if (p.getTexto() == null || p.getTexto().isBlank()) continue;
 
 			if (!primeiro) sb.append("\\par ");
-			sb.append(p.getTexto());
+			sb.append(escaparTexto(p.getTexto()));
 			primeiro = false;
 		}
 		return sb.toString();
@@ -497,7 +513,7 @@ public class GeradorListaPDF
 	{
 		String[] textos = {"---", "---", "---", "---", "---"};
 		for (int i = 0; i < Math.min(alts.size(), 5); i++)
-			textos[i] = alts.get(i).getTexto() != null ? alts.get(i).getTexto() : "---";
+			textos[i] = alts.get(i).getTexto() != null ? escaparTexto(alts.get(i).getTexto()) : "---";
 		return textos;
 	}
 

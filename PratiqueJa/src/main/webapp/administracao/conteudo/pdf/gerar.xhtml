@@ -17,7 +17,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
 				<p:outputLabel for="@next" value="Assunto" />
-				<p:selectOneMenu value="#{gerarPdfBean.assunto}"
+				<p:selectOneMenu value="#{gerarListaExerciciosBean.assunto}"
 				converter="generic" filter="true" filterMatchMode="contains"
 				required="true" requiredMessage="O assunto é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
@@ -29,7 +29,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Nível" />
-				<p:selectOneMenu value="#{gerarPdfBean.nivel}"
+				<p:selectOneMenu value="#{gerarListaExerciciosBean.nivel}"
 				required="true" requiredMessage="O nível é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{nivelBean.opcoes}"
@@ -40,7 +40,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Visibilidade" />
-				<p:selectOneMenu value="#{gerarPdfBean.visibilidade}"
+				<p:selectOneMenu value="#{gerarListaExerciciosBean.visibilidade}"
 				required="true" requiredMessage="A visibilidade é obrigatória">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{visibilidadePdfBean.opcoes}"
@@ -52,7 +52,7 @@
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Com Alternativas" />
 				<p:toggleSwitch class="toggleSwitch-form" 
-				value="#{gerarPdfBean.comAlternativas}" />
+				value="#{gerarListaExerciciosBean.comAlternativas}" />
 			</h:panelGroup>
 		</div>
 
@@ -69,7 +69,7 @@
 				<p:commandButton value="Gerar Todos"
 					styleClass="ui-button-raised ui-button-secondary"
 					icon="pi pi-sync"
-					action="#{gerarPdfBean.gerarTodos()}" update=":growl"
+					action="#{gerarListaExerciciosBean.gerarTodos()}" update=":growl"
 					process="@this">
 					<p:confirm header="Confirmação" icon="pi pi-info-circle"
 					message="Gerar PDFs para todos os assuntos e configs pode demorar vários minutos. Deseja continuar?" />
@@ -78,7 +78,7 @@
 				<p:commandButton id="gerarBtn" value="Gerar"
 					styleClass="ui-button-raised ui-button-primary"
 					icon="pi pi-file-pdf"
-					action="#{gerarPdfBean.gerar()}" update="@form, :growl"
+					action="#{gerarListaExerciciosBean.gerar()}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="gerarBtn" />
 				</p:commandButton>

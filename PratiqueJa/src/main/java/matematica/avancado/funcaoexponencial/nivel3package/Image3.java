@@ -29,11 +29,11 @@ public class Image3 extends GeradorExercicio
 			+ "\\(f(x) = " + base + "^x\\)?");
 		addParagrafoImagem(image);
 
-		String correta = "(0, 1)";
+		String correta = "\\((0,\\, 1)\\)";
 		List<String> dist = new ArrayList<>();
-		dist.add("(1, 0)");
-		dist.add("(0, 0)");
-		dist.add("(1, " + base + "\\cdot 2)");
+		dist.add("\\((1,\\, 0)\\)");
+		dist.add("\\((0,\\, 0)\\)");
+		dist.add("\\((1,\\, " + base + " \\cdot 2)\\)");
 		embaralharEAdicionarAlternativas(correta, dist);
 
 		String res = "Toda função exponencial \\(f(x) = a^x\\) satisfaz \\(a^0 = 1\\). \\(\\\\\\)";

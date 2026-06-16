@@ -61,6 +61,17 @@
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Layout da Lista" />
+				<p:selectOneMenu value="#{exercicioPadraoBean.entidade.layoutLista}"
+				required="true" requiredMessage="O layout é obrigatório">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{exercicioPadraoBean.layoutListas}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
 <h:panelGroup styleClass="campoMsg col-12">
 				<p:outputLabel for="@next" value="Enunciado" />
 				<p:inputText value="#{exercicioPadraoBean.entidade.enunciado}"
@@ -75,7 +86,7 @@
 
 			<h:panelGroup styleClass="campo col-12">
 				<p:outputLabel for="@next" value="Descrição" />
-				<p:inputText value="#{exercicioPadraoBean.entidade.descricao}" maxlength="511" />
+				<p:inputTextarea rows="3" value="#{exercicioPadraoBean.entidade.descricao}" maxlength="1023" />
 			</h:panelGroup>
 
 		</div>

@@ -21,14 +21,17 @@ public enum LayoutLista
 	 * Layout padrão: 18 exercícios em 3 páginas de 6 (3 linhas por página).
 	 * Indicado para exercícios com enunciado curto e alternativas simples.
 	 */
-	PADRAO(3, 6, "7.8cm"),
+	PADRAO("Padrão", 3, 6, "7.8cm"),
 
 	/**
 	 * Layout espaçoso: 12 exercícios em 3 páginas de 4 (2 linhas por página).
 	 * Indicado para exercícios com enunciado longo, imagem ou resolução grande
 	 * (ex.: geometria, sistemas de equações).
 	 */
-	ESPACOSO(4, 4, "11.7cm");
+	ESPACOSO("Espaçoso", 4, 4, "11.7cm");
+
+	/** Rótulo amigável para exibição. */
+	public final String nome;
 
 	/** Número de páginas de exercícios. */
 	public final int paginas;
@@ -39,11 +42,17 @@ public enum LayoutLista
 	/** Altura de linha (ht) da grade de exercícios. */
 	public final String alturaLinha;
 
-	LayoutLista(int paginas, int exerciciosPorPagina, String alturaLinha)
+	LayoutLista(String nome, int paginas, int exerciciosPorPagina, String alturaLinha)
 	{
+		this.nome                = nome;
 		this.paginas             = paginas;
 		this.exerciciosPorPagina = exerciciosPorPagina;
 		this.alturaLinha         = alturaLinha;
+	}
+
+	public String getNome()
+	{
+		return nome;
 	}
 
 	/** Total de exercícios gerados com este layout. */
