@@ -222,7 +222,7 @@ public class ExercicioEBook
 			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
 				if(paragrafo.isTipoImagem())
-					conteudo += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfigLatex().getImagens() + "/conta" + i + "_" + p + ".png} \\newline ";
+					conteudo += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfig().getImagens() + "/conta" + i + "_" + p + ".png} \\newline ";
 				else if(paragrafo.getTexto() != null && !paragrafo.getTexto().isEmpty())
 					conteudo += getTexto(paragrafo.getTexto()) + " \\newline ";
 				p++;
@@ -267,7 +267,7 @@ public class ExercicioEBook
 			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
 				if(paragrafo.isTipoImagem())
-					texto += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfigLatex().getImagens() + "/conta" + i + "_" + p + ".png} \\newline \r\n \r\n";
+					texto += "\\includegraphics[valign=t,width=" + widthImagem() + "]{" + diretorioBean.getConfig().getImagens() + "/conta" + i + "_" + p + ".png} \\newline \r\n \r\n";
 				else if(paragrafo.getTexto() != null && !paragrafo.getTexto().isEmpty())
 					texto += getTexto(paragrafo.getTexto()) + " \\newline \r\n";
 				p++;
@@ -342,12 +342,12 @@ public class ExercicioEBook
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb; 
-		if(diretorioBean.getConfigLatex().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfigLatex().getNome())
+		if(diretorioBean.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
+			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		else 
-			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfigLatex().getNome())
+			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		

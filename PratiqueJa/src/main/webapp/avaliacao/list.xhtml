@@ -1,0 +1,123 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Confecção de Avaliações" />
+	</ui:define>
+
+	<!-- ═══════════════════════════════════════════════════════ HERO -->
+	<ui:include src="/avaliacao/hero.xhtml" />
+
+	<!-- ══════════════════════════════════════════════ HISTÓRICO -->
+	<h:form id="painelHistorico">
+
+		<p:poll interval="2"
+			listener="#{pedidoAvaliacaoBean.atualizarProgresso}"
+			update="@form"
+			rendered="#{pedidoAvaliacaoBean.temGerandoEmProgresso()}" />
+
+		<div class="av-panel">
+
+			<div class="av-shero">
+				<span class="av-shero-eyebrow"><i class="pi pi-clock" /> Suas avaliações</span>
+				<h2 class="av-shero-title"><i class="pi pi-history" /> Histórico de Solicitações</h2>
+				<p class="av-shero-sub">Clique em uma linha para ver os detalhes e baixar o arquivo.</p>
+			</div>
+
+			<div class="av-list-actions">
+				<p:button value="Nova avaliação"
+					icon="pi pi-plus"
+					outcome="/avaliacao/form"
+					styleClass="ui-button-raised ui-button-success" />
+			</div>
+
+			<p:dataTable
+				value="#{pedidoAvaliacaoBean.historico}"
+				var="pedido"
+				emptyMessage="Nenhuma solicitação encontrada."
+				rows="30" paginator="true" paginatorAlwaysVisible="false"
+				selectionMode="single"
+				selection="#{pedidoAvaliacaoBean.pedidoSelecionado}"
+				rowKey="#{pedido.id}"
+				rowStyleClass="#{pedido.codigoBatch == pedidoAvaliacaoBean.codigoDestaque ? 'av-row-novo' : null}"
+				styleClass="av-historico-table">
+
+				<p:ajax event="rowSelect"
+					listener="#{pedidoAvaliacaoBean.aoSelecionarPedido}"
+					update=":dialogDetalhe"
+					oncomplete="PF('wDialogDetalhe').show()" />
+
+				<p:column headerText="Código" style="width:100px">
+					<h:outputText value="#{pedido.codigoBatch}"
+						style="font-family:monospace;font-weight:700;color:#2563eb;font-size:15px" />
+				</p:column>
+
+				<p:column headerText="Documento">
+					<h:outputText value="#{pedido.nomeDocumento.nome}: #{pedido.titulo}" />
+				</p:column>
+
+				<p:column headerText="Qtd." style="width:55px">
+					<h:outputText value="#{pedido.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Solicitado" style="width:130px">
+					<h:outputText value="#{pedido.dataSolicitacao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Expira" style="width:95px">
+					<h:outputText value="#{pedido.dataExpiracao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Status" style="width:155px">
+					<h:panelGroup rendered="#{pedido.status.name() == 'GERANDO'}">
+						<p:progressBar value="#{pedido.progresso}" style="height:10px;border-radius:999px" />
+						<div style="font-size:11px;text-align:center;margin-top:4px;color:#6b7280">
+							<h:outputText value="#{pedido.progresso}">
+								<f:convertNumber maxFractionDigits="0" />
+							</h:outputText>%
+						</div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{pedido.status.name() != 'GERANDO'}">
+						<p:tag value="#{pedido.status.nome}"
+							severity="#{pedido.status.name() == 'CONCLUIDO' ? 'success' : pedido.status.name() == 'ERRO' ? 'danger' : 'info'}" />
+					</h:panelGroup>
+				</p:column>
+
+				<p:column headerText="Download" style="width:110px;text-align:center">
+					<p:commandButton
+						value="Baixar"
+						icon="pi pi-download"
+						styleClass="ui-button-outlined ui-button-success"
+						rendered="#{pedido.status.name() == 'CONCLUIDO' and !pedidoAvaliacaoBean.estaExpirado(pedido)}"
+						ajax="false">
+						<p:fileDownload value="#{pedidoAvaliacaoBean.download(pedido)}" />
+					</p:commandButton>
+					<h:outputText
+						value="Expirado"
+						styleClass="text-color-secondary"
+						style="font-size:12px;color:#9ca3af"
+						rendered="#{pedidoAvaliacaoBean.estaExpirado(pedido)}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</div>
+
+	</h:form>
+
+	<!-- ═══════════════════════════════ DIALOG: DETALHES DA SOLICITAÇÃO -->
+	<ui:include src="/avaliacao/dialog-detalhe.xhtml" />
+
+</ui:decorate>

@@ -22,7 +22,7 @@ public class ProblemaArranjoSimples
 	public void gerarValores()
 	{
 		Random rand = new Random();
-		n = 4 + rand.nextInt(4);
+		n = 4 + rand.nextInt(7);
 		k = 2 + rand.nextInt(n-2);
 	}
 

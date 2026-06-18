@@ -210,7 +210,15 @@
       "Bash(java -cp /c/Users/maximovrm/git/PratiqueJa/PratiqueJa/target/classes:/c/Users/maximovrm/.m2/repository/com/mysql/mysql-connector-j/9.2.0/mysql-connector-j-9.2.0.jar:/c/Users/maximovrm/.m2/repository/org/scilab/forge/jlatexmath/1.0.7/jlatexmath-1.0.7.jar:/c/Users/maximovrm/.m2/repository/net/coobird/thumbnailator/0.4.20/thumbnailator-0.4.20.jar admin.AtualizarLayoutListaMain)",
       "Bash(/c/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe *)",
       "Bash('/c/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe' -u user -pTiquinho*10 pratiqueja -e ' *)",
-      "Bash(./mvnw compile *)"
+      "Bash(./mvnw compile *)",
+      "PowerShell($mysql = \\(Get-Command mysql -ErrorAction SilentlyContinue\\).Source; if \\(-not $mysql\\) { $mysql = \\(Get-ChildItem \"C:\\\\Program Files\\\\MySQL\" -Recurse -Filter mysql.exe -ErrorAction SilentlyContinue | Select-Object -First 1\\).FullName }; if \\(-not $mysql\\) { $mysql = \\(Get-ChildItem \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -ErrorAction SilentlyContinue\\).FullName }; Write-Output $mysql)",
+      "PowerShell($m=\"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\"; $cnf=\"$env:USERPROFILE\\\\mysql_temp.cnf\"; & $m --defaults-extra-file=\"$cnf\" pratiqueja -e \"SHOW COLUMNS FROM ExercicioPadrao;\"; Write-Output \"=== ASSUNTO ===\"; & $m --defaults-extra-file=\"$cnf\" pratiqueja -e \"SHOW COLUMNS FROM Assunto;\")",
+      "PowerShell($m=\"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\"; $cnf=\"$env:USERPROFILE\\\\mysql_temp.cnf\"; & $m --defaults-extra-file=\"$cnf\" pratiqueja -e \"SELECT a.id, a.chave, ep.nome FROM Assunto a JOIN ExercicioPadrao ep ON ep.assunto_id=a.id WHERE ep.nivel=0 ORDER BY a.id LIMIT 20;\")",
+      "PowerShell($m=\"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\"; $cnf=\"$env:USERPROFILE\\\\mysql_temp.cnf\"; & $m --defaults-extra-file=\"$cnf\" pratiqueja -e \"source C:/Users/maximovrm/git/PratiqueJa/PratiqueJa/sql/cria_exerciciopadrao_faltantes.sql\"; if \\($?\\) { Write-Output 'OK' })",
+      "Read(//c/Users/maximovrm/**)",
+      "Read(//c/Users/maximovrm/git/PratiqueJa/**)",
+      "Bash($MYSQL *)",
+      "Bash('/c/Program Files/MySQL/MySQL *)"
     ]
   }
 }

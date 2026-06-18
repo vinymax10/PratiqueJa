@@ -13,8 +13,8 @@ public class Expressao1 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int a = 2 + rand.nextInt(2);
-		int b = 2 + rand.nextInt(5);
+		int a = 2 + rand.nextInt(5);
+		int b = 2 + rand.nextInt(9);
 
 		int c2 = a * a;
 		int c1 = -2 * a * b;

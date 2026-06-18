@@ -1,6 +1,7 @@
 package matematica.basico.subtracaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Diferenca extends GeradorExercicio
 {
@@ -11,6 +12,7 @@ public class Diferenca extends GeradorExercicio
 		int a = b + 10 + rand.nextInt(50);
 		int dif = a - b;
 
+		String nomeM = Nomes.masculino(rand), nomeM2 = Nomes.masculinoDiferente(rand, nomeM);
 		int tipo = rand.nextInt(4);
 		switch (tipo)
 		{
@@ -21,7 +23,7 @@ public class Diferenca extends GeradorExercicio
 				addParagrafo("Uma loja vendeu \\(" + a + "\\) peças no mês e outra vendeu \\(" + b + "\\). Qual é a diferença de vendas?");
 				break;
 			case 2:
-				addParagrafo("Pedro marcou \\(" + a + "\\) pontos num jogo e Carlos marcou \\(" + b + "\\). Quantos pontos de diferença houve entre eles?");
+				addParagrafo(nomeM + " marcou \\(" + a + "\\) pontos num jogo e " + nomeM2 + " marcou \\(" + b + "\\). Quantos pontos de diferença houve entre eles?");
 				break;
 			default:
 				addParagrafo("Uma fazenda colheu \\(" + a + "\\) kg de laranja e \\(" + b + "\\) kg de limão. Quantos kg a mais de laranja foram colhidos?");

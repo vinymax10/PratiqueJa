@@ -1,6 +1,7 @@
 package matematica.basico.divisaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class QuantasVezes extends GeradorExercicio
 {
@@ -24,7 +25,7 @@ public class QuantasVezes extends GeradorExercicio
 				addParagrafo("Uma caixa comporta \\(" + b + "\\) livros. Quantas caixas cheias precisamos para guardar \\(" + a + "\\) livros?");
 				break;
 			default:
-				addParagrafo("Cada passo de Lucas mede \\(" + b + "\\) palmos. Quantos passos ele dá para percorrer \\(" + a + "\\) palmos?");
+				addParagrafo("Cada passo de " + Nomes.masculino(rand) + " mede \\(" + b + "\\) palmos. Quantos passos ele dá para percorrer \\(" + a + "\\) palmos?");
 				break;
 		}
 

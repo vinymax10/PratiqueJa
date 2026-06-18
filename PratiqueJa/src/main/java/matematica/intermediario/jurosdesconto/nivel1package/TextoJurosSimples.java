@@ -15,7 +15,7 @@ public class TextoJurosSimples
 	"Um capital de R$ $c,00 foi investido a uma taxa de $i% ao mês. Qual será o valor dos juros após $t meses?",
 	TipoJurosSimples.XCIT),
 	new ProblemaJurosSimples(
-	"João emprestou R$ $c,00 a um amigo com uma taxa de $i% ao mês. Se o empréstimo for pago em $t meses, quanto João receberá de juros?",
+	"$nomeM emprestou R$ $c,00 a um amigo com uma taxa de $i% ao mês. Se o empréstimo for pago em $t meses, quanto $nomeM receberá de juros?",
 	TipoJurosSimples.XCIT),
 	new ProblemaJurosSimples(
 	"Uma loja vende um produto financiado por R$ $c,00, com juros simples de $i% ao mês por $t meses. Qual será o valor final do produto?",
@@ -27,7 +27,7 @@ public class TextoJurosSimples
 	"Uma dívida de R$ $c,00 tem juros simples de $i% ao mês. Se o pagamento for feito após $t meses, qual será o valor total pago?",
 	TipoJurosSimples.XJCIT),
 	new ProblemaJurosSimples(
-	"Pedro fez uma aplicação de R$ $c,00 a uma taxa de $i% ao mês. Qual o total de juros que ele ganhará após $t meses?",
+	"$nomeM fez uma aplicação de R$ $c,00 a uma taxa de $i% ao mês. Qual o total de juros que ele ganhará após $t meses?",
 	TipoJurosSimples.XCIT),
 	new ProblemaJurosSimples(
 	"Um comerciante toma um empréstimo de  R$ $c,00 com taxa de juros simples de $i% ao mês por $t meses. Qual o valor dos juros?",
@@ -45,7 +45,7 @@ public class TextoJurosSimples
 	"Um banco cobra juros simples de $i% ao mês sobre um empréstimo de  R$ $c,00. Se o cliente pagar após $t meses, quanto ele pagará de juros?",
 	TipoJurosSimples.XCIT),
 	new ProblemaJurosSimples(
-	"Maria pegou um empréstimo de R$ $c,00 com juros simples de $i% ao ano. Quanto pagará de juros após $t anos?",
+	"$nomeF pegou um empréstimo de R$ $c,00 com juros simples de $i% ao ano. Quanto pagará de juros após $t anos?",
 	TipoJurosSimples.XCIT),
 	new ProblemaJurosSimples(
 	"Uma aplicação de R$ $c,00 rende juros simples de $i% ao mês. Quanto o investidor terá após $t meses?",

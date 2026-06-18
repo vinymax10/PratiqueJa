@@ -51,7 +51,7 @@ public class Exercicio9 extends GeradorExercicio
 			distratores.add(fCosMenos);
 		}
 
-		addParagrafo("Qual das alternativas representa a expansão correta de " + formula + "?");
+		addParagrafo("Qual é a expansão de " + formula + "?");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		setResolucao("Pela fórmula de adição/subtração trigonométrica:"

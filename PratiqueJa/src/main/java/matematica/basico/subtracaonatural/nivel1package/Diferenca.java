@@ -1,6 +1,7 @@
 package matematica.basico.subtracaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Diferenca extends GeradorExercicio
 {
@@ -11,17 +12,18 @@ public class Diferenca extends GeradorExercicio
 		int a = b + 5 + rand.nextInt(20);
 		int dif = a - b;
 
+		String nomeM = Nomes.masculino(rand), nomeF = Nomes.feminino(rand);
 		int tipo = rand.nextInt(4);
 		switch (tipo)
 		{
 			case 0:
-				addParagrafo("João tem \\(" + a + "\\) figurinhas e Maria tem \\(" + b + "\\). Quantas figurinhas a mais João tem do que Maria?");
+				addParagrafo(nomeM + " tem \\(" + a + "\\) figurinhas e " + nomeF + " tem \\(" + b + "\\). Quantas figurinhas a mais " + nomeM + " tem do que " + nomeF + "?");
 				break;
 			case 1:
-				addParagrafo("Carlos tem \\(" + a + "\\) anos e seu irmão tem \\(" + b + "\\) anos. Quantos anos mais velho Carlos é?");
+				addParagrafo(nomeM + " tem \\(" + a + "\\) anos e seu irmão tem \\(" + b + "\\) anos. Quantos anos mais velho " + nomeM + " é?");
 				break;
 			case 2:
-				addParagrafo("Numa prova, Ana tirou \\(" + a + "\\) pontos e Bruno tirou \\(" + b + "\\) pontos. Qual foi a diferença de pontuação?");
+				addParagrafo("Numa prova, " + nomeF + " tirou \\(" + a + "\\) pontos e " + nomeM + " tirou \\(" + b + "\\) pontos. Qual foi a diferença de pontuação?");
 				break;
 			default:
 				addParagrafo("Um carro percorreu \\(" + a + "\\) km e outro percorreu \\(" + b + "\\) km. Qual é a diferença de distância percorrida?");

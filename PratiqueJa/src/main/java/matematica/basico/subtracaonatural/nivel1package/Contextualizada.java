@@ -1,6 +1,7 @@
 package matematica.basico.subtracaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Contextualizada extends GeradorExercicio
 {
@@ -15,10 +16,10 @@ public class Contextualizada extends GeradorExercicio
 		switch (tipo)
 		{
 			case 0:
-				addParagrafo("Numa caixa havia \\(" + a + "\\) balas. Maria comeu \\(" + b + "\\) balas. Quantas balas restaram?");
+				addParagrafo("Numa caixa havia \\(" + a + "\\) balas. " + Nomes.feminino(rand) + " comeu \\(" + b + "\\) balas. Quantas balas restaram?");
 				break;
 			case 1:
-				addParagrafo("Carlos tinha \\(" + a + "\\) figurinhas e deu \\(" + b + "\\) para seu amigo. Com quantas figurinhas ele ficou?");
+				addParagrafo(Nomes.masculino(rand) + " tinha \\(" + a + "\\) figurinhas e deu \\(" + b + "\\) para seu amigo. Com quantas figurinhas ele ficou?");
 				break;
 			case 2:
 				addParagrafo("Uma livraria tinha \\(" + a + "\\) livros e vendeu \\(" + b + "\\) durante o dia. Quantos livros restaram?");

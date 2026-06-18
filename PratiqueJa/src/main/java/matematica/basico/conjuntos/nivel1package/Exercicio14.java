@@ -22,12 +22,12 @@ public class Exercicio14 extends GeradorExercicio
 				naoMembros.add(c);
 		}
 
-		addParagrafo("Qual dos elementos abaixo pertence ao conjunto \\(A\\)?");
-		addParagrafo("\\(A = " + a + "\\)");
-
 		List<String> distratores = new ArrayList<>();
 		for (int d : naoMembros)
 			distratores.add(formatarNumero(d));
+
+		addParagrafo("Qual dos elementos " + listarOpcoes(formatarNumero(pertence), distratores) + " pertence ao conjunto \\(A\\)?");
+		addParagrafo("\\(A = " + a + "\\)");
 		embaralharEAdicionarAlternativas(formatarNumero(pertence), distratores);
 
 		String res = "Um elemento pertence a \\(A\\) se e somente se está listado no conjunto. \\(\\\\\\)";

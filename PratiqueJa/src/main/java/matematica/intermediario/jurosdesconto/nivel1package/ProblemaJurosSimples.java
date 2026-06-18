@@ -3,6 +3,7 @@ package matematica.intermediario.jurosdesconto.nivel1package;
 import java.util.Random;
 
 import matematica.DefinicaoCores;
+import matematica.Nomes;
 import matematica.ParCor;
 import matematica.Racional;
 
@@ -140,6 +141,10 @@ public class ProblemaJurosSimples
 			pergunta = pergunta.replace("$i", i.porcentagem());
 		if(pergunta.contains("$t"))
 			pergunta = pergunta.replace("$t", t.toString());
+		if(pergunta.contains("$nomeM"))
+			pergunta = pergunta.replace("$nomeM", Nomes.masculino(new Random()));
+		if(pergunta.contains("$nomeF"))
+			pergunta = pergunta.replace("$nomeF", Nomes.feminino(new Random()));
 
 		return pergunta;
 	}

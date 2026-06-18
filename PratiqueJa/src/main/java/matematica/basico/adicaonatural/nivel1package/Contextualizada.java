@@ -1,6 +1,7 @@
 package matematica.basico.adicaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Contextualizada extends GeradorExercicio
 {
@@ -15,13 +16,13 @@ public class Contextualizada extends GeradorExercicio
 		switch (tipo)
 		{
 			case 0:
-				addParagrafo("Ana leu \\(" + a + "\\) livros de ficção e \\(" + b + "\\) livros de aventura. Quantos livros ela leu no total?");
+				addParagrafo(Nomes.feminino(rand) + " leu \\(" + a + "\\) livros de ficção e \\(" + b + "\\) livros de aventura. Quantos livros ela leu no total?");
 				break;
 			case 1:
 				addParagrafo("Uma frutaria vendeu \\(" + a + "\\) laranjas pela manhã e \\(" + b + "\\) laranjas à tarde. Quantas laranjas foram vendidas no dia?");
 				break;
 			case 2:
-				addParagrafo("Carlos marcou \\(" + a + "\\) pontos na primeira fase e \\(" + b + "\\) pontos na segunda fase de um jogo. Quantos pontos ele marcou no total?");
+				addParagrafo(Nomes.masculino(rand) + " marcou \\(" + a + "\\) pontos na primeira fase e \\(" + b + "\\) pontos na segunda fase de um jogo. Quantos pontos ele marcou no total?");
 				break;
 			case 3:
 				addParagrafo("Uma escola tem \\(" + a + "\\) alunos no turno da manhã e \\(" + b + "\\) alunos no turno da tarde. Quantos alunos a escola tem no total?");

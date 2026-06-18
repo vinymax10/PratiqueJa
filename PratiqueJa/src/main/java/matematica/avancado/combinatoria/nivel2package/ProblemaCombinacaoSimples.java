@@ -22,7 +22,7 @@ public class ProblemaCombinacaoSimples
 	public void gerarValores()
 	{
 		Random rand = new Random();
-		n = 6 + rand.nextInt(5);
+		n = 6 + rand.nextInt(7);
 		k = 3 + rand.nextInt(n-4);
 	}
 

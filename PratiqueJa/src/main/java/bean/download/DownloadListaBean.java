@@ -104,7 +104,7 @@ public class DownloadListaBean implements Serializable
 		throws Exception
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		Path workDir = Path.of(diretorio.getConfigLatex().getEndereco())
+		Path workDir = Path.of(diretorio.getConfig().getEnderecoLatex())
 			.resolve(diretorio.getDiretorio());
 		try
 		{

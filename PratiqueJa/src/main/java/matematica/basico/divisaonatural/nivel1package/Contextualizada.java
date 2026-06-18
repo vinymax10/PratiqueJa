@@ -1,6 +1,7 @@
 package matematica.basico.divisaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Contextualizada extends GeradorExercicio
 {
@@ -27,7 +28,7 @@ public class Contextualizada extends GeradorExercicio
 				addParagrafo("\\(" + a + "\\) estudantes foram organizados em \\(" + b + "\\) filas com o mesmo número de pessoas. Quantos estudantes há em cada fila?");
 				break;
 			default:
-				addParagrafo("Pedro tem \\(" + a + "\\) figurinhas e quer dividi-las igualmente em \\(" + b + "\\) álbuns. Quantas figurinhas irão para cada álbum?");
+				addParagrafo(Nomes.masculino(rand) + " tem \\(" + a + "\\) figurinhas e quer dividi-las igualmente em \\(" + b + "\\) álbuns. Quantas figurinhas irão para cada álbum?");
 				break;
 		}
 

@@ -13,7 +13,16 @@ public class SubtracaoNaturalNivel1 extends GeradorExercicio
 		".nivel1package.NaoAssociativa",
 		".nivel1package.MissingMinuendo",
 		".nivel1package.MissingSubtraendo",
-		".nivel1package.Diferenca"
+		".nivel1package.Diferenca",
+		".nivel1package.Coluna1",
+		".nivel1package.Tabuada1",
+		".nivel1package.Tabuada2",
+		".nivel1package.Diferenca2",
+		".nivel1package.ProvaReal2",
+		".nivel1package.MissingMinuendo2",
+		".nivel1package.MissingSubtraendo2",
+		".nivel1package.TresEtapas1",
+		".nivel1package.Problema1"
 	};
 
 	@Override

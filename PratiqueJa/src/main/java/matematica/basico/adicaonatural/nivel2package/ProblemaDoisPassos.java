@@ -1,6 +1,7 @@
 package matematica.basico.adicaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class ProblemaDoisPassos extends GeradorExercicio
 {
@@ -20,7 +21,7 @@ public class ProblemaDoisPassos extends GeradorExercicio
 				addParagrafo("Uma padaria vendeu \\(" + a + "\\) pães pela manhã, \\(" + b + "\\) à tarde e \\(" + c + "\\) à noite. Quantos pães foram vendidos no total?");
 				break;
 			case 1:
-				addParagrafo("Pedro caminhou \\(" + a + "\\) km na segunda-feira, \\(" + b + "\\) km na terça e \\(" + c + "\\) km na quarta. Quantos km caminhou ao todo?");
+				addParagrafo(Nomes.masculino(rand) + " caminhou \\(" + a + "\\) km na segunda-feira, \\(" + b + "\\) km na terça e \\(" + c + "\\) km na quarta. Quantos km caminhou ao todo?");
 				break;
 			case 2:
 				addParagrafo("Numa gincana, o time azul marcou \\(" + a + "\\) pontos na primeira rodada, \\(" + b + "\\) na segunda e \\(" + c + "\\) na terceira. Qual foi a pontuação total?");

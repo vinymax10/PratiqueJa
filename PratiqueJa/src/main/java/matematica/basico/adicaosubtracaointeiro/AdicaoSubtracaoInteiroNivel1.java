@@ -12,7 +12,17 @@ public class AdicaoSubtracaoInteiroNivel1 extends GeradorExercicio
 		".nivel1package.SinaisIguais",
 		".nivel1package.SinaisDiferentes",
 		".nivel1package.SubtracaoOposto",
-		".nivel1package.Contextualizada"
+		".nivel1package.Contextualizada",
+		".nivel1package.Soma2",
+		".nivel1package.Parenteses1",
+		".nivel1package.ValorAbsoluto2",
+		".nivel1package.Oposto2",
+		".nivel1package.Comparar1",
+		".nivel1package.MissingTermo1",
+		".nivel1package.TresTermos1",
+		".nivel1package.Problema1",
+		".nivel1package.Soma3",
+		".nivel1package.Parenteses2"
 	};
 
 	@Override

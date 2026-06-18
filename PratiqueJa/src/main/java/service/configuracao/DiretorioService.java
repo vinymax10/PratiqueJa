@@ -10,8 +10,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import util.FileAux;
-import dao.configuracao.ConfigLatexDAO;
-import modelo.configuracao.ConfigLatex;
+import dao.configuracao.ConfigDAO;
+import modelo.configuracao.Config;
 import bean.download.Diretorio;
 
 @ApplicationScoped
@@ -21,27 +21,27 @@ public class DiretorioService implements Serializable
 
 	private List<String> diretorios = new ArrayList<>();
 
-	private ConfigLatex configLatex;
+	private Config config;
 
 	@Inject
-	private ConfigLatexDAO configLatexDAO;
+	private ConfigDAO configDAO;
 
 	public Diretorio criarDiretorio()
 	{
 		String diretorioStr = gerarDiretorio();
 		diretorios.add(diretorioStr);
-		return new Diretorio(configLatex, diretorioStr);
+		return new Diretorio(config, diretorioStr);
 	}
 
 	public Diretorio criarDiretorioSemReserva()
 	{
-		return new Diretorio(configLatex, "");
+		return new Diretorio(config, "");
 	}
 
 	public void freeDiretorio(Diretorio diretorio)
 	{
-		if(configLatex.isRemoveDiretorios())
-			FileAux.limparPasta(configLatex.getEndereco());
+		if(config.isRemoveDiretorios())
+			FileAux.limparPasta(config.getEnderecoLatex());
 
 		diretorios.remove(diretorio.getDiretorio());
 	}
@@ -61,13 +61,13 @@ public class DiretorioService implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		configLatex = configLatexDAO.buscar();
-		if(configLatex == null)
+		config = configDAO.buscar();
+		if(config == null)
 		{
-			configLatex = new ConfigLatex();
-			configLatex.setEndereco("C:\\Users\\maximovrm\\Documents\\latex");
-			configLatex.setNome("exercicio");
-			configLatexDAO.salvar(configLatex);
+			config = new Config();
+			// Endereço-raiz; os demais caminhos derivam dele
+			config.setEndereco("C:\\Users\\maximovrm\\Documents");
+			configDAO.salvar(config);
 		}
 	}
 }

@@ -7,9 +7,9 @@ public class Matrizes7 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int coef = 2 + rand.nextInt(3);  // coeficiente de x: 2, 3 ou 4
-		int xVal = 1 + rand.nextInt(8);  // resposta: x = 1..8
-		int cst  = rand.nextInt(5);      // constante: 0..4
+		int coef = 2 + rand.nextInt(5);  // coeficiente de x: 2..6
+		int xVal = 1 + rand.nextInt(12); // resposta: x = 1..12
+		int cst  = rand.nextInt(10);     // constante: 0..9
 		int dVal = coef * xVal + cst;    // elemento a_{2,1} (valor conhecido)
 		int a11  = rand.nextInt(21) - 10;
 		int a22  = rand.nextInt(21) - 10;

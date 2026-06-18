@@ -1,0 +1,7 @@
+-- Define layoutLista de ExercicioPadrao: ESPACOSO se o gerador do nivel produz imagem (addParagrafoImagem), senao PADRAO.
+DROP TEMPORARY TABLE IF EXISTS _img_set;
+CREATE TEMPORARY TABLE _img_set (chave VARCHAR(255), nivel INT);
+INSERT INTO _img_set (chave, nivel) VALUES ('funcaoexponencial',1),('funcaoexponencial',2),('funcaologaritmica',1),('funcaologaritmica',2),('funcaomodular',1),('funcaomodular',2),('funcaoquadratica',2),('inequacoessegundograu',2),('leisenocosseno',0),('leisenocosseno',1),('leisenocosseno',2),('areaperimetro',0),('areaperimetro',1),('areaperimetro',2),('conjuntos',1),('planocartesiano',1),('planocartesiano',2),('somaangulostriangulo',0),('somaangulostriangulo',1),('somaangulostriangulo',2),('anguloinscritocircunferencia',0),('anguloinscritocircunferencia',1),('anguloinscritocircunferencia',2),('circulo',0),('circulo',1),('circulo',2),('equacaosegundograu',2),('funcaoafim',1),('funcaoafim',2),('funcoes',0),('pitagoras',0),('pitagoras',1),('poligonosregulares',0),('poligonosregulares',1),('poligonosregulares',2),('razoestrigonometricas',0),('razoestrigonometricas',1),('razoestrigonometricas',2),('semelhancaangulos',0),('semelhancaangulos',1),('semelhancaangulos',2),('semelhancatriangulos',0),('semelhancatriangulos',1),('semelhancatriangulos',2);
+UPDATE ExercicioPadrao ep JOIN Assunto a ON a.id = ep.assunto_id
+SET ep.layoutLista = CASE WHEN EXISTS (SELECT 1 FROM _img_set s WHERE s.chave = LOWER(a.chave) AND s.nivel = ep.nivel) THEN 'ESPACOSO' ELSE 'PADRAO' END;
+DROP TEMPORARY TABLE _img_set;

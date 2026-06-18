@@ -13,9 +13,9 @@ public class Expressao4 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int r1 = 1 + rand.nextInt(3);
-		int r2 = r1 + 1 + rand.nextInt(2);
-		int r3 = r2 + 1 + rand.nextInt(2);
+		int r1 = 1 + rand.nextInt(5);
+		int r2 = r1 + 1 + rand.nextInt(3);
+		int r3 = r2 + 1 + rand.nextInt(3);
 
 		// p(x) = (x−r1)(x−r2)(x−r3) = x³ − (r1+r2+r3)x² + (r1r2+r1r3+r2r3)x − r1r2r3
 		int B = -(r1 + r2 + r3);

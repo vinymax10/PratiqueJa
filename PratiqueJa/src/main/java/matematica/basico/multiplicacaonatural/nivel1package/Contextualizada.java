@@ -1,6 +1,7 @@
 package matematica.basico.multiplicacaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Contextualizada extends GeradorExercicio
 {
@@ -28,7 +29,7 @@ public class Contextualizada extends GeradorExercicio
 					+ "\\) assentos em cada fileira. Quantos assentos há no ônibus?";
 				break;
 			case 3:
-				enunciado = "Pedro treina \\(" + b + "\\) horas por dia. Quantas horas ele treina em \\(" + a
+				enunciado = Nomes.masculino(rand) + " treina \\(" + b + "\\) horas por dia. Quantas horas ele treina em \\(" + a
 					+ "\\) dias?";
 				break;
 			case 4:

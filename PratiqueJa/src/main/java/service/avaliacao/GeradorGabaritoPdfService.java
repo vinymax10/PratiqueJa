@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -24,8 +25,17 @@ public class GeradorGabaritoPdfService implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public byte[] gerarGabarito(PedidoAvaliacao pedido, List<BlocoExercicio> blocos,
-		String codigoAvaliacao, Path pratiquejaStyDir, String xelatexExe, Path workDir)
+	/**
+	 * Gera UM único PDF com os gabaritos de todos os exemplares (modo AGRUPADO_NO_FINAL).
+	 * <ul>
+	 *   <li>Somente gabarito: cada exemplar em modo compacto, separados por linha tracejada
+	 *       (vários por página, fluindo);</li>
+	 *   <li>Com resolução: cada exemplar começa em uma nova página.</li>
+	 * </ul>
+	 * O mapa deve preservar a ordem dos exemplares (use LinkedHashMap): chave = código, valor = blocos.
+	 */
+	public byte[] gerarGabaritosCombinados(PedidoAvaliacao pedido,
+		Map<String, List<BlocoExercicio>> porExemplar, Path pratiquejaStyDir, String xelatexExe, Path workDir)
 		throws IOException, InterruptedException
 	{
 		Files.createDirectories(workDir);
@@ -33,40 +43,90 @@ public class GeradorGabaritoPdfService implements Serializable
 
 		boolean comResolucao = pedido.getTipoGabarito() == TipoGabarito.COM_RESOLUCAO;
 
-		String nomeBase = "gabarito_" + codigoAvaliacao.replace("-", "_").toLowerCase();
-		String tex = construirTex(pedido, codigoAvaliacao, blocos, comResolucao);
+		String nomeBase = "gabaritos_" + pedido.getCodigoBatch().replace("-", "_").toLowerCase();
+		String tex = construirTexCombinado(pedido, porExemplar, comResolucao);
 
 		Path texFile = workDir.resolve(nomeBase + ".tex");
 		Files.writeString(texFile, tex, StandardCharsets.UTF_8);
 
 		compilar(texFile, xelatexExe);
 
-		byte[] bytes = Files.readAllBytes(workDir.resolve(nomeBase + ".pdf"));
+		Path pdfFile = workDir.resolve(nomeBase + ".pdf");
+		byte[] bytes = Files.exists(pdfFile) ? Files.readAllBytes(pdfFile) : new byte[0];
+		if (!pdfValido(bytes))
+			throw new IOException("XeLaTeX não produziu um PDF válido para " + texFile
+				+ "\n──── trecho do .log ────\n" + extrairErroDoLog(texFile));
+
 		limparAuxiliares(workDir, nomeBase);
 		return bytes;
 	}
 
+	/** Valida que os bytes são de um PDF íntegro (cabeçalho %PDF- e trailer %%EOF),
+	 *  para não propagar um PDF truncado/vazio ao merge (erro "Missing root object"). */
+	private boolean pdfValido(byte[] bytes)
+	{
+		if (bytes == null || bytes.length < 8)
+			return false;
+		String head = new String(bytes, 0, 5, StandardCharsets.US_ASCII);
+		if (!head.equals("%PDF-"))
+			return false;
+		int from = Math.max(0, bytes.length - 1024);
+		String tail = new String(bytes, from, bytes.length - from, StandardCharsets.ISO_8859_1);
+		return tail.contains("%%EOF");
+	}
+
 	// ── Construção do .tex ────────────────────────────────────────────
 
-	private String construirTex(PedidoAvaliacao pedido, String codigoAvaliacao,
-		List<BlocoExercicio> blocos, boolean comResolucao)
+	private String construirTexCombinado(PedidoAvaliacao pedido,
+		Map<String, List<BlocoExercicio>> porExemplar, boolean comResolucao)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(preambulo());
-		sb.append(cabecalhoGabarito(pedido, codigoAvaliacao));
 
-		int numInicial = 1;
-		for (BlocoExercicio bloco : blocos)
+		// Rodapé central (\pj@subject) = título da avaliação, no lugar do placeholder "Assunto".
+		sb.append("\\setsubject{")
+		  .append(escapar(pedido.getNomeDocumento().getNome()))
+		  .append(": ")
+		  .append(escapar(pedido.getTitulo()))
+		  .append("}\n\n");
+
+		boolean primeiro = true;
+		for (Map.Entry<String, List<BlocoExercicio>> exemplar : porExemplar.entrySet())
 		{
-			if (bloco.isAlternativas() && !comResolucao)
-				sb.append(gabaritoCompacto(bloco.getExercicios(), numInicial));
+			if (!primeiro)
+				sb.append(comResolucao ? "\\newpage\n\n" : separadorTracejado());
+
+			sb.append(cabecalhoGabarito(pedido, exemplar.getKey()));
+
+			if (!comResolucao)
+			{
+				// Somente gabarito: todos os itens num único fluxo contínuo (quebra só no fim da linha).
+				sb.append(gabaritoCompacto(exemplar.getValue()));
+			}
 			else
-				sb.append(gabaritoComResolucao(bloco.getExercicios(), bloco.isAlternativas(), numInicial));
-			numInicial += bloco.getExercicios().size();
+			{
+				// Com resolução: passo a passo, por bloco.
+				int numInicial = 1;
+				for (BlocoExercicio bloco : exemplar.getValue())
+				{
+					sb.append(gabaritoComResolucao(bloco.getExercicios(), bloco.isAlternativas(), numInicial));
+					numInicial += bloco.getExercicios().size();
+				}
+			}
+			primeiro = false;
 		}
 
 		sb.append("\n\\end{document}\n");
 		return sb.toString();
+	}
+
+	/** Linha tracejada que separa o gabarito de um exemplar do próximo (modo somente gabarito). */
+	private String separadorTracejado()
+	{
+		return
+			"\n\\par\\vspace{12pt}\\noindent\n"
+			+ "\\tikz\\draw[dashed, line width=0.7pt, color=graycolor] (0,0) -- (\\linewidth,0);\n"
+			+ "\\par\\vspace{12pt}\\noindent\n\n";
 	}
 
 	private String preambulo()
@@ -76,6 +136,7 @@ public class GeradorGabaritoPdfService implements Serializable
 			+ "\\usepackage{pratiqueja}\n"
 			+ "\\usepackage{tabularray}\n"
 			+ "\\usepackage{cancel}\n"
+			+ "\\usepackage{tikz}\n"
 			+ "\\definecolor{iris}{rgb}{0.39, 0.44, 1}\n"
 			+ "\\definecolor{babypink}{rgb}{1, 0.42, 0.52}\n\n"
 			+ macros()
@@ -86,48 +147,77 @@ public class GeradorGabaritoPdfService implements Serializable
 
 	private String cabecalhoGabarito(PedidoAvaliacao pedido, String codigoAvaliacao)
 	{
+		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda, wordmark "PratiqueJá".
+		String documento = escapar(pedido.getNomeDocumento().getNome()) + ": " + escapar(pedido.getTitulo());
+
 		return
-			"\\begin{tcolorbox}[enhanced, arc=4pt, boxrule=1pt,\n"
-			+ "  colback=rulebg, colframe=darkblue,\n"
-			+ "  left=8pt, right=8pt, top=4pt, bottom=4pt]\n"
-			+ "  {\\large\\bfseries\\color{darkblue} GABARITO}\\enspace"
-			+ "{\\normalsize\\color{mutedtext}---}\\enspace"
-			+ "{\\normalsize\\color{bodytext}" + escapar(pedido.getNomeDocumento().getNome())
-			+ ": " + escapar(pedido.getTitulo()) + "}"
-			+ "\\hfill{\\footnotesize\\color{mutedtext}\\texttt{" + codigoAvaliacao + "}}\n"
+			"\\begin{tcolorbox}[\n"
+			+ "  enhanced, arc=0pt, boxrule=0pt,\n"
+			+ "  colback=white, colframe=white,\n"
+			+ "  left=14pt, right=14pt, top=6pt, bottom=5pt,\n"
+			+ "  borderline west={5pt}{0pt}{darkblue},\n"
+			+ "  borderline south={0.8pt}{0pt}{sepcolor},\n"
+			+ "]\n"
+			+ "  \\noindent\n"
+			+ "  {\\color{titletext}\\fontsize{16}{20}\\selectfont\\bfseries GABARITO}\\hfill\n"
+			+ "  {\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}\\par\n"
+			+ "  \\vspace{3pt}\n"
+			+ "  {\\color{mutedtext}\\small " + documento
+			+ "\\hfill\\texttt{Cód.: " + codigoAvaliacao + "}}\n"
 			+ "\\end{tcolorbox}\n\n"
-			+ "\\vspace{6pt}\n\n";
+			+ "\\vspace{4pt}\n\n";
 	}
 
-	private String gabaritoCompacto(List<Exercicio> exercicios, int numInicial)
+	private String gabaritoCompacto(List<BlocoExercicio> blocos)
 	{
+		// Modo compacto: "NN) R" (número em azul + parêntese, resposta em verde) de TODOS os itens
+		// num único fluxo contínuo, quebrando só ao chegar no fim da linha/página. O parêntese evita
+		// confusão com sinal negativo. A resposta é a letra (alternativas) ou o conteúdo da
+		// alternativa correta (discursiva).
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\noindent\\small\n");
-		for (int i = 0; i < exercicios.size(); i++)
+		int num = 1;
+		for (BlocoExercicio bloco : blocos)
 		{
-			AlternativaExercicio correta = exercicios.get(i).correta();
-			String letra = correta != null ? correta.getLetra() : "?";
-			sb.append(String.format("\\resheader{%02d}{%s}\\enspace ", numInicial + i, letra));
+			boolean mostrarLetra = bloco.isAlternativas();
+			for (Exercicio e : bloco.getExercicios())
+			{
+				sb.append("{\\bfseries\\color{darkblue}")
+				  .append(String.format("%02d", num))
+				  .append(")}~{\\bfseries\\color{vegreen}")
+				  .append(respostaCompacta(e, mostrarLetra))
+				  .append("}\\hspace{16pt}%\n");
+				num++;
+			}
 		}
 		sb.append("\n\n");
 		return sb.toString();
+	}
+
+	/** Resposta do gabarito compacto: a letra (alternativas) ou o conteúdo da alternativa
+	 *  correta (discursiva — o exercício não exibe alternativas, então mostra a resposta). */
+	private String respostaCompacta(Exercicio e, boolean mostrarLetra)
+	{
+		AlternativaExercicio correta = e.correta();
+		if (correta == null)
+			return "?";
+		if (mostrarLetra)
+			return correta.getLetra();
+		return correta.getTexto() != null ? escapar(correta.getTexto()) : "?";
 	}
 
 	private String gabaritoComResolucao(List<Exercicio> exercicios, boolean comAlternativas, int numInicial)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(abrirGradeGabarito());
-		boolean primeiro = true;
 		for (int i = 0; i < exercicios.size(); i += 2)
 		{
-			if (!primeiro) sb.append("\\\\\\hline\n");
 			Exercicio esq = exercicios.get(i);
 			Exercicio dir = (i + 1 < exercicios.size()) ? exercicios.get(i + 1) : null;
 			sb.append(macroGabarito(numInicial + i, esq, comAlternativas))
 			  .append(" &\n")
 			  .append(dir != null ? macroGabarito(numInicial + i + 1, dir, comAlternativas) : "")
 			  .append(" \\\\\n");
-			primeiro = false;
 		}
 		sb.append(fecharGradeGabarito());
 		return sb.toString();
@@ -183,12 +273,12 @@ public class GeradorGabaritoPdfService implements Serializable
 			+ "\\color{vegreen}#2}\\end{tcolorbox}\\hspace{4pt}}\n"
 			+ "\\newcommand{\\res}[3]{%\n"
 			+ "  \\noindent\\resheader{#1}{#2}\\hspace{0.3cm}"
-			+ "{\\fontsize{10}{12}\\selectfont\\color{bodytext}#3\\par}"
-			+ "\\vspace{0.4cm}}\n"
+			+ "{\\fontsize{10}{12}\\selectfont\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{8pt}\\color{bodytext}#3\\par}"
+			+ "\\vspace{0.5cm}}\n"
 			+ "\\newcommand{\\resd}[2]{%\n"
 			+ "  \\noindent\\numex{#1}\\hspace{0.3cm}"
-			+ "{\\fontsize{10}{12}\\selectfont\\color{bodytext}#2\\par}"
-			+ "\\vspace{0.4cm}}\n\n";
+			+ "{\\fontsize{10}{12}\\selectfont\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{8pt}\\color{bodytext}#2\\par}"
+			+ "\\vspace{0.5cm}}\n\n";
 	}
 
 	// ── Helpers ───────────────────────────────────────────────────────
@@ -223,7 +313,38 @@ public class GeradorGabaritoPdfService implements Serializable
 
 			int exitCode = pb.start().waitFor();
 			if (exitCode != 0 && passagem == 2)
-				throw new IOException("XeLaTeX falhou (código " + exitCode + ") em " + texFile);
+				throw new IOException("XeLaTeX falhou (código " + exitCode + ") em " + texFile
+					+ "\n──── trecho do .log ────\n" + extrairErroDoLog(texFile));
+		}
+	}
+
+	private String extrairErroDoLog(Path texFile)
+	{
+		String nomeBase = texFile.getFileName().toString().replaceFirst("\\.tex$", "");
+		Path logFile = texFile.getParent().resolve(nomeBase + ".log");
+		if (!Files.exists(logFile))
+			return "(arquivo .log não encontrado em " + logFile + ")";
+
+		try
+		{
+			List<String> linhas = Files.readAllLines(logFile, StandardCharsets.UTF_8);
+			StringBuilder erro = new StringBuilder();
+			for (int i = 0; i < linhas.size(); i++)
+			{
+				String l = linhas.get(i);
+				if (l.startsWith("!") || l.startsWith("l."))
+				{
+					int fim = Math.min(linhas.size(), i + 6);
+					for (int j = i; j < fim; j++)
+						erro.append(linhas.get(j)).append('\n');
+					erro.append("...\n");
+				}
+			}
+			return erro.length() > 0 ? erro.toString() : "(nenhum erro explícito; veja: " + logFile + ")";
+		}
+		catch (IOException ex)
+		{
+			return "(falha ao ler .log: " + ex.getMessage() + ")";
 		}
 	}
 

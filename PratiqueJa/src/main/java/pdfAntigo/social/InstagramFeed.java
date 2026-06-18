@@ -325,7 +325,7 @@ public class InstagramFeed
 		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 		{
 			if(paragrafo.isTipoImagem())
-				latex+="\\includegraphics[width="+widthImagem(true)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta_"+p+".png}\r\n";
+				latex+="\\includegraphics[width="+widthImagem(true)+"]{"+diretorio.getConfig().getImagens()+"/conta_"+p+".png}\r\n";
 			else if(paragrafo.getTexto()!=null&&!paragrafo.getTexto().isEmpty())
 				latex+=getTexto(paragrafo.getTexto())+" \\newline \r\n";
 			p++;
@@ -389,7 +389,7 @@ public class InstagramFeed
 			for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 			{
 				if(paragrafo.isTipoImagem())
-					texto+="\\includegraphics[width="+widthImagem(false)+"]{"+diretorio.getConfigLatex().getImagens()+"/conta_"+p+".png}\r\n";
+					texto+="\\includegraphics[width="+widthImagem(false)+"]{"+diretorio.getConfig().getImagens()+"/conta_"+p+".png}\r\n";
 				p++;
 			}
 			texto+="\\end{center}\r\n\r\n";
@@ -462,12 +462,12 @@ public class InstagramFeed
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb; 
-		if(diretorio.getConfigLatex().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdflatex", diretorio.getConfigLatex().getNome())
+		if(diretorio.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
+			pb= new ProcessBuilder("sudo", "pdflatex", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		else 
-			pb = new ProcessBuilder("pdflatex", diretorio.getConfigLatex().getNome())
+			pb = new ProcessBuilder("pdflatex", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		
@@ -492,14 +492,14 @@ public class InstagramFeed
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb; 
-		if(diretorio.getConfigLatex().getSistemaOperacional()==SistemaOperacional.Linux)
+		if(diretorio.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
 			pb= new ProcessBuilder("sudo", "pdftopng","-r","300",
-			diretorio.getConfigLatex().getNome()+".pdf", diretorio.getConfigLatex().getNome())
+			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		else 
 			pb = new ProcessBuilder("pdftopng","-r","300", 
-			diretorio.getConfigLatex().getNome()+".pdf", diretorio.getConfigLatex().getNome())
+			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		

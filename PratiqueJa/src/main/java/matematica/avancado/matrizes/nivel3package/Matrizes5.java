@@ -8,7 +8,7 @@ public class Matrizes5 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int[][] a  = AuxMatriz.contruirMatriz(2, 2, 5);
+		int[][] a  = AuxMatriz.contruirMatriz(2, 2, 9);
 		int[][] a2 = new int[2][2];
 		for (int i = 0; i < 2; i++)
 			for (int j = 0; j < 2; j++)

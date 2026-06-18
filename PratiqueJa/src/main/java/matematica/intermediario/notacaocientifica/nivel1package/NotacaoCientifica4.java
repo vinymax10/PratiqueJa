@@ -1,6 +1,9 @@
 package matematica.intermediario.notacaocientifica.nivel1package;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import matematica.GeradorExercicio;
 
 // Identificar qual opção está corretamente em notação científica (1 ≤ a < 10)
@@ -24,7 +27,9 @@ public class NotacaoCientifica4 extends GeradorExercicio
 		String e2     = "\\(0{,}" + cPeq + " \\times 10^{" + (k + 1) + "}\\)";
 		String e3     = "\\(" + cNaoAjustado + " \\times 10^{" + (k - 1) + "}\\)";
 
-		addParagrafo("Qual das opções está escrita corretamente em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\)?");
+		List<String> opcoes = new ArrayList<>(Arrays.asList(correta, e1, e2, e3));
+		Collections.shuffle(opcoes, rand);
+		addParagrafo("Qual das opções " + listar(opcoes) + " está escrita corretamente em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\)?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
 		setResolucao(
 			"Verificar a condição \\(1 \\leq a < 10\\) em cada opção:" +

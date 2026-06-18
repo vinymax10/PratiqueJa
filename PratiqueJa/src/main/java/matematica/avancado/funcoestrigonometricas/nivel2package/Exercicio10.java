@@ -59,7 +59,7 @@ public class Exercicio10 extends GeradorExercicio
 					+ "(Em \\(90°\\) e \\(270°\\) a tangente não está definida.)";
 		}
 
-		addParagrafo("Em qual dos ângulos abaixo a função " + funcao + " vale zero?");
+		addParagrafo("Em qual dos ângulos " + listarOpcoes(correta, distratores) + " a função " + funcao + " vale zero?");
 		embaralharEAdicionarAlternativas(correta, distratores);
 		setResolucao(res);
 	}

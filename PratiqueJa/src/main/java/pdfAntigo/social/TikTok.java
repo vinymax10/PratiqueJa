@@ -468,11 +468,11 @@ public class TikTok
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb;
-		if(diretorioBean.getConfigLatex().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfigLatex().getNome()).inheritIO()
+		if(diretorioBean.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
+			pb = new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfig().getNome()).inheritIO()
 			.directory(new File(diretorioBean.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfigLatex().getNome()).inheritIO()
+			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfig().getNome()).inheritIO()
 			.directory(new File(diretorioBean.getEndereco()));
 
 		pb.redirectErrorStream(true);
@@ -496,12 +496,12 @@ public class TikTok
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb;
-		if(diretorioBean.getConfigLatex().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdftopng", "-r", "300", diretorioBean.getConfigLatex().getNome() + ".pdf",
-			diretorioBean.getConfigLatex().getNome()).inheritIO().directory(new File(diretorioBean.getEndereco()));
+		if(diretorioBean.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
+			pb = new ProcessBuilder("sudo", "pdftopng", "-r", "300", diretorioBean.getConfig().getNome() + ".pdf",
+			diretorioBean.getConfig().getNome()).inheritIO().directory(new File(diretorioBean.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftopng", "-r", "300", diretorioBean.getConfigLatex().getNome() + ".pdf",
-			diretorioBean.getConfigLatex().getNome()).inheritIO().directory(new File(diretorioBean.getEndereco()));
+			pb = new ProcessBuilder("pdftopng", "-r", "300", diretorioBean.getConfig().getNome() + ".pdf",
+			diretorioBean.getConfig().getNome()).inheritIO().directory(new File(diretorioBean.getEndereco()));
 
 		pb.redirectErrorStream(true);
 		pb.redirectOutput(Redirect.appendTo(new File(diretorioBean.getEnderecoOutputLog())));

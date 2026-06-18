@@ -25,6 +25,7 @@ import modelo.matematica.AlternativaExercicio;
 import modelo.matematica.Exercicio;
 import modelo.matematica.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
+import pdf.exercicio.LayoutLista;
 
 /**
  * Gera o PDF de uma única avaliação a partir de um PedidoAvaliacao.
@@ -42,7 +43,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	/** Gera e retorna os exercícios para uma avaliação, agrupados por item (cada bloco mantém
 	 *  o formato — alternativas ou discursiva — do seu item). Deve ser chamado uma vez e o
-	 *  resultado compartilhado entre gerarAvaliacao() e GeradorGabaritoPdfService.gerarGabarito(). */
+	 *  resultado compartilhado entre gerarAvaliacao() e GeradorGabaritoPdfService.gerarGabaritosCombinados(). */
 	public List<BlocoExercicio> gerarExercicios(PedidoAvaliacao pedido)
 	{
 		List<BlocoExercicio> blocos = new ArrayList<>();
@@ -57,7 +58,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			for (int i = 0; i < item.getQuantidade(); i++)
 				exercicios.add(instanciarGerador(classeNome).gerar());
 
-			blocos.add(new BlocoExercicio(item.getFormato(), exercicios));
+			blocos.add(new BlocoExercicio(item.getFormato(), padrao.getLayoutLista(), exercicios));
 		}
 		return blocos;
 	}
@@ -70,16 +71,35 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		copiarSty(pratiquejaStyDir, workDir);
 
 		String nomeBase = "avaliacao_" + codigoAvaliacao.replace("-", "_").toLowerCase();
-		String tex = construirTex(pedido, codigoAvaliacao, blocos, incluirGabarito);
+		String tex = construirTex(pedido, codigoAvaliacao, blocos, incluirGabarito, workDir);
 
 		Path texFile = workDir.resolve(nomeBase + ".tex");
 		Files.writeString(texFile, tex, StandardCharsets.UTF_8);
 
 		compilar(texFile, xelatexExe);
 
-		byte[] bytes = Files.readAllBytes(workDir.resolve(nomeBase + ".pdf"));
+		Path pdfFile = workDir.resolve(nomeBase + ".pdf");
+		byte[] bytes = Files.exists(pdfFile) ? Files.readAllBytes(pdfFile) : new byte[0];
+		if (!pdfValido(bytes))
+			throw new IOException("XeLaTeX não produziu um PDF válido para " + texFile
+				+ "\n──── trecho do .log ────\n" + extrairErroDoLog(texFile));
+
 		limparAuxiliares(workDir, nomeBase);
 		return bytes;
+	}
+
+	/** Valida que os bytes são de um PDF íntegro (cabeçalho %PDF- e trailer %%EOF),
+	 *  para não propagar um PDF truncado/vazio ao merge (erro "Missing root object"). */
+	private boolean pdfValido(byte[] bytes)
+	{
+		if (bytes == null || bytes.length < 8)
+			return false;
+		String head = new String(bytes, 0, 5, StandardCharsets.US_ASCII);
+		if (!head.equals("%PDF-"))
+			return false;
+		int from = Math.max(0, bytes.length - 1024);
+		String tail = new String(bytes, from, bytes.length - from, StandardCharsets.ISO_8859_1);
+		return tail.contains("%%EOF");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -100,14 +120,14 @@ public class GeradorAvaliacaoPdfService implements Serializable
 	// ── Construção do .tex ────────────────────────────────────────────
 
 	private String construirTex(PedidoAvaliacao pedido, String codigoAvaliacao,
-		List<BlocoExercicio> blocos, boolean incluirGabarito)
+		List<BlocoExercicio> blocos, boolean incluirGabarito, Path workDir)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(preambulo());
 		sb.append(cabecalhoAvaliacao(pedido, codigoAvaliacao));
 		sb.append(linhaAluno());
 		sb.append("\\vspace{6pt}\n\n");
-		sb.append(blocoQuestoes(blocos));
+		sb.append(blocoQuestoes(blocos, workDir));
 
 		if (incluirGabarito && pedido.getTipoGabarito() != null)
 		{
@@ -142,100 +162,112 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	private String cabecalhoAvaliacao(PedidoAvaliacao pedido, String codigoAvaliacao)
 	{
+		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda, wordmark "PratiqueJá".
+		String titulo = escapar(pedido.getNomeDocumento().getNome()) + ": " + escapar(pedido.getTitulo());
+
 		StringBuilder sb = new StringBuilder();
-		sb.append("\\begin{tcolorbox}[enhanced, arc=4pt, boxrule=1pt,\n")
-		  .append("  colback=white, colframe=darkblue,\n")
-		  .append("  left=8pt, right=8pt, top=6pt, bottom=6pt]\n");
-
-		if (pedido.getEscola() != null && !pedido.getEscola().isBlank())
-			sb.append("  {\\small\\bfseries\\color{darkblue} ESCOLA:}\\enspace{\\small ")
-			  .append(escapar(pedido.getEscola())).append("}\\\\\n");
-
-		if (pedido.getNomeProfessor() != null && !pedido.getNomeProfessor().isBlank())
-		{
-			sb.append("  {\\small\\bfseries\\color{darkblue} PROFESSOR(A):}\\enspace{\\small ")
-			  .append(escapar(pedido.getNomeProfessor())).append("}");
-
-			if (pedido.getDataAvaliacao() != null)
-				sb.append("\\hfill{\\small\\bfseries\\color{darkblue} DATA:}\\enspace{\\small ")
-				  .append(pedido.getDataAvaliacao().format(FMT_DATA)).append("}");
-
-			sb.append("\\\\\n");
-		}
-		else if (pedido.getDataAvaliacao() != null)
-		{
-			sb.append("  {\\small\\bfseries\\color{darkblue} DATA:}\\enspace{\\small ")
-			  .append(pedido.getDataAvaliacao().format(FMT_DATA)).append("}\\\\\n");
-		}
-
-		sb.append("  \\vspace{4pt}\n")
-		  .append("  {\\centering\\large\\bfseries\\color{darkblue} ")
-		  .append(escapar(pedido.getNomeDocumento().getNome().toUpperCase()))
-		  .append(": ").append(escapar(pedido.getTitulo()))
-		  .append("\\par}\n")
-		  .append("  \\hfill{\\footnotesize\\color{mutedtext} Cód.: \\texttt{")
-		  .append(codigoAvaliacao).append("}}\n")
+		sb.append("\\begin{tcolorbox}[\n")
+		  .append("  enhanced, arc=0pt, boxrule=0pt,\n")
+		  .append("  colback=white, colframe=white,\n")
+		  .append("  left=14pt, right=14pt, top=6pt, bottom=5pt,\n")
+		  .append("  borderline west={5pt}{0pt}{darkblue},\n")
+		  .append("  borderline south={0.8pt}{0pt}{sepcolor},\n")
+		  .append("]\n")
+		  .append("  \\noindent\n")
+		  .append("  {\\color{titletext}\\fontsize{16}{20}\\selectfont\\bfseries ").append(titulo).append("}\\hfill\n")
+		  .append("  {\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}\\par\n")
+		  .append("  \\vspace{3pt}\n")
+		  .append("  {\\color{mutedtext}\\small ").append(linhaInfoCabecalho(pedido))
+		  .append("\\hfill\\texttt{Cód.: ").append(codigoAvaliacao).append("}}\n")
 		  .append("\\end{tcolorbox}\n\n");
 
 		return sb.toString();
+	}
+
+	/** Linha secundária do cabeçalho: Escola · Prof.(a) · Data (só os preenchidos). */
+	private String linhaInfoCabecalho(PedidoAvaliacao pedido)
+	{
+		List<String> partes = new ArrayList<>();
+		if (pedido.getEscola() != null && !pedido.getEscola().isBlank())
+			partes.add("{\\bfseries\\color{darkblue}Escola:}\\enspace " + escapar(pedido.getEscola()));
+		if (pedido.getNomeProfessor() != null && !pedido.getNomeProfessor().isBlank())
+			partes.add("{\\bfseries\\color{darkblue}Prof.(a):}\\enspace " + escapar(pedido.getNomeProfessor()));
+		if (pedido.getDataAvaliacao() != null)
+			partes.add("{\\bfseries\\color{darkblue}Data:}\\enspace " + pedido.getDataAvaliacao().format(FMT_DATA));
+		return String.join("\\quad ", partes);
 	}
 
 	private String linhaAluno()
 	{
 		return
 			"\\vspace{4pt}\n"
-			+ "\\noindent\\small\n"
+			+ "\\noindent\\footnotesize\n"
 			+ "\\begin{tabular}{p{9cm}p{3.5cm}p{3cm}}\n"
-			+ "NOME:\\enspace\\hrulefill & TURMA:\\enspace\\hrulefill & NOTA:\\enspace\\hrulefill\n"
+			+ "Nome:\\enspace\\hrulefill & Turma:\\enspace\\hrulefill & Nota:\\enspace\\hrulefill\n"
 			+ "\\end{tabular}\n\n";
 	}
 
 	// ── Bloco de questões ─────────────────────────────────────────────
 
-	private String blocoQuestoes(List<BlocoExercicio> blocos)
+	/** Uma questão da prova: o exercício + se as alternativas devem ser exibidas (discursiva = não). */
+	private static final class Questao
 	{
-		StringBuilder sb = new StringBuilder();
-		int numInicial = 1;
+		final Exercicio exercicio;
+		final boolean mostrarAlternativas;
+
+		Questao(Exercicio exercicio, boolean mostrarAlternativas)
+		{
+			this.exercicio = exercicio;
+			this.mostrarAlternativas = mostrarAlternativas;
+		}
+	}
+
+	private String blocoQuestoes(List<BlocoExercicio> blocos, Path workDir)
+	{
+		// Todas as questões (alternativas e discursivas) numa única grade de 2 colunas, com
+		// paginação contínua. Discursivas usam o mesmo layout, só sem mostrar as alternativas.
+		// Se qualquer bloco for Espaçoso, a grade inteira usa Espaçoso (4/página, linhas mais altas).
+		List<Questao> questoes = new ArrayList<>();
+		boolean espacoso = false;
 		for (BlocoExercicio bloco : blocos)
 		{
-			if (bloco.isAlternativas())
-				sb.append(blocoComAlternativas(bloco.getExercicios(), numInicial));
-			else
-				sb.append(blocoDiscursivo(bloco.getExercicios(), numInicial));
-			numInicial += bloco.getExercicios().size();
+			boolean mostrarAlternativas = bloco.isAlternativas();
+			for (Exercicio e : bloco.getExercicios())
+				questoes.add(new Questao(e, mostrarAlternativas));
+			espacoso = espacoso || bloco.getLayout() == LayoutLista.ESPACOSO;
 		}
-		return sb.toString();
+
+		if (questoes.isEmpty())
+			return "";
+
+		return blocoGrade(questoes, espacoso ? LayoutLista.ESPACOSO : LayoutLista.PADRAO, workDir);
 	}
 
-	private String blocoComAlternativas(List<Exercicio> exercicios, int numInicial)
+	private String blocoGrade(List<Questao> questoes, LayoutLista layout, Path workDir)
 	{
+		// Quantidade por página vem do layout (Padrão = 6/página, Espaçoso = 4/página).
+		// A altura da linha é a da avaliação: 3 linhas de 7cm ou 2 de 10,5cm preenchem ~21cm,
+		// que cabe abaixo do cabeçalho na página 1.
+		int porPagina = layout.exerciciosPorPagina;
+		String altura = layout == LayoutLista.ESPACOSO ? "10.5cm" : "7cm";
+
 		StringBuilder sb = new StringBuilder();
-		sb.append(abrirGrade());
-		boolean primeiro = true;
-		for (int i = 0; i < exercicios.size(); i += 2)
+		// \cellheight controla a altura do parbox de cada questão — casa com a altura da linha
+		sb.append("\\setlength{\\cellheight}{").append(altura).append("}\n");
+		sb.append(abrirGrade(altura));
+		for (int i = 0; i < questoes.size(); i += 2)
 		{
-			if (!primeiro) sb.append("\\hline\n");
-			Exercicio esq = exercicios.get(i);
-			Exercicio dir = (i + 1 < exercicios.size()) ? exercicios.get(i + 1) : null;
-			int numEsq = numInicial + i;
-			int numDir = dir != null ? numInicial + i + 1 : 0;
-			sb.append(linhaExercicio(numEsq, esq, numDir, dir));
-			primeiro = false;
+			// Ao atingir o limite por página, fecha a grade, pula de página e reabre na seguinte
+			if (i > 0 && i % porPagina == 0)
+				sb.append(fecharGrade()).append("\\newpage\n").append(abrirGrade(altura));
+
+			Questao esq = questoes.get(i);
+			Questao dir = (i + 1 < questoes.size()) ? questoes.get(i + 1) : null;
+			int numEsq = i + 1;
+			int numDir = dir != null ? i + 2 : 0;
+			sb.append(linhaExercicio(numEsq, esq, numDir, dir, workDir));
 		}
 		sb.append(fecharGrade());
-		return sb.toString();
-	}
-
-	private String blocoDiscursivo(List<Exercicio> exercicios, int numInicial)
-	{
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < exercicios.size(); i++)
-		{
-			int num = numInicial + i;
-			sb.append("\\noindent\\numex{").append(String.format("%02d", num)).append("}")
-			  .append("{\\small\\color{bodytext}").append(enunciado(num, exercicios.get(i))).append("}\n\n")
-			  .append("\\vspace{3cm}\n\n");
-		}
 		return sb.toString();
 	}
 
@@ -254,52 +286,64 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 		boolean comResolucao = pedido.getTipoGabarito() == TipoGabarito.COM_RESOLUCAO;
 
-		int numInicial = 1;
-		for (BlocoExercicio bloco : blocos)
+		if (!comResolucao)
 		{
-			if (bloco.isAlternativas() && !comResolucao)
-			{
-				sb.append(gabaritoCompacto(bloco.getExercicios(), numInicial));
-			}
-			else
+			// Somente gabarito: todos os itens num único fluxo contínuo (quebra só no fim da linha).
+			sb.append(gabaritoCompacto(blocos));
+		}
+		else
+		{
+			// Com resolução: passo a passo, por bloco.
+			int numInicial = 1;
+			for (BlocoExercicio bloco : blocos)
 			{
 				sb.append(gabaritoComResolucao(bloco.getExercicios(), bloco.isAlternativas(), numInicial));
+				numInicial += bloco.getExercicios().size();
 			}
-			numInicial += bloco.getExercicios().size();
 		}
 
 		return sb.toString();
 	}
 
-	private String gabaritoCompacto(List<Exercicio> exercicios, int numInicial)
+	private String gabaritoCompacto(List<BlocoExercicio> blocos)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\vspace{4pt}\n\\noindent\\small\n");
-		for (int i = 0; i < exercicios.size(); i++)
+		int num = 1;
+		for (BlocoExercicio bloco : blocos)
 		{
-			AlternativaExercicio correta = exercicios.get(i).correta();
-			String letra = correta != null ? correta.getLetra() : "?";
-			sb.append(String.format("\\resheader{%02d}{%s}\\enspace ", numInicial + i, letra));
+			boolean mostrarLetra = bloco.isAlternativas();
+			for (Exercicio e : bloco.getExercicios())
+				sb.append(String.format("\\resheader{%02d}{%s}\\enspace ", num++, respostaCompacta(e, mostrarLetra)));
 		}
 		sb.append("\n\n");
 		return sb.toString();
+	}
+
+	/** Resposta do gabarito compacto: a letra (alternativas) ou o conteúdo da alternativa
+	 *  correta (discursiva — o exercício não exibe alternativas, então mostra a resposta). */
+	private String respostaCompacta(Exercicio e, boolean mostrarLetra)
+	{
+		AlternativaExercicio correta = e.correta();
+		if (correta == null)
+			return "?";
+		if (mostrarLetra)
+			return correta.getLetra();
+		return correta.getTexto() != null ? escapar(correta.getTexto()) : "?";
 	}
 
 	private String gabaritoComResolucao(List<Exercicio> exercicios, boolean comAlternativas, int numInicial)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(abrirGradeGabarito());
-		boolean primeiro = true;
 		for (int i = 0; i < exercicios.size(); i += 2)
 		{
-			if (!primeiro) sb.append("\\\\\\hline\n");
 			Exercicio esq = exercicios.get(i);
 			Exercicio dir = (i + 1 < exercicios.size()) ? exercicios.get(i + 1) : null;
 			sb.append(macroGabarito(numInicial + i, esq, comAlternativas))
 			  .append(" &\n")
 			  .append(dir != null ? macroGabarito(numInicial + i + 1, dir, comAlternativas) : "")
 			  .append(" \\\\\n");
-			primeiro = false;
 		}
 		sb.append(fecharGradeGabarito());
 		return sb.toString();
@@ -307,7 +351,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	// ── Grades ────────────────────────────────────────────────────────
 
-	private String abrirGrade()
+	private String abrirGrade(String alturaLinha)
 	{
 		return
 			"\\noindent\n"
@@ -317,7 +361,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},\n"
 			+ "  column{1} = {leftsep=0pt},\n"
 			+ "  column{2} = {rightsep=0pt},\n"
-			+ "  rows     = {ht=7cm, valign=t, rowsep=0pt},\n"
+			+ "  rows     = {ht=" + alturaLinha + ", valign=t, rowsep=0pt},\n"
 			+ "}\n";
 	}
 
@@ -345,22 +389,24 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	// ── Linhas de questão e gabarito ──────────────────────────────────
 
-	private String linhaExercicio(int numEsq, Exercicio esq, int numDir, Exercicio dir)
+	private String linhaExercicio(int numEsq, Questao esq, int numDir, Questao dir, Path workDir)
 	{
-		String dirTex = dir != null ? macroExercicio(numDir, dir) : "";
-		return macroExercicio(numEsq, esq) + " &\n" + dirTex + " \\\\\n";
+		String dirTex = dir != null ? macroExercicio(numDir, dir, workDir) : "";
+		return macroExercicio(numEsq, esq, workDir) + " &\n" + dirTex + " \\\\\n";
 	}
 
-	private String macroExercicio(int num, Exercicio e)
+	private String macroExercicio(int num, Questao q, Path workDir)
 	{
 		String numStr = String.format("%02d", num);
+		Exercicio e = q.exercicio;
 		List<AlternativaExercicio> alts = e.getAlternativas();
 
-		if (alts == null || alts.isEmpty())
-			return "\\exd{" + numStr + "}{" + enunciado(num, e) + "}";
+		// Discursiva (ou exercício sem alternativas): só o enunciado, sem as opções (\exd)
+		if (!q.mostrarAlternativas || alts == null || alts.isEmpty())
+			return "\\exd{" + numStr + "}{" + enunciado(num, e, workDir) + "}";
 
 		String[] textos = alternativasTexto(alts);
-		return "\\ex{" + numStr + "}{" + enunciado(num, e) + "}"
+		return "\\ex{" + numStr + "}{" + enunciado(num, e, workDir) + "}"
 			+ "{" + textos[0] + "}"
 			+ "{" + textos[1] + "}"
 			+ "{" + textos[2] + "}"
@@ -420,17 +466,17 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "\\color{vegreen}#2}\\end{tcolorbox}\\hspace{4pt}}\n"
 			+ "\\newcommand{\\res}[3]{%\n"
 			+ "  \\noindent\\resheader{#1}{#2}\\hspace{0.3cm}"
-			+ "{\\fontsize{10}{12}\\selectfont\\color{bodytext}#3\\par}"
-			+ "\\vspace{0.4cm}}\n"
+			+ "{\\fontsize{10}{12}\\selectfont\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{8pt}\\color{bodytext}#3\\par}"
+			+ "\\vspace{0.5cm}}\n"
 			+ "\\newcommand{\\resd}[2]{%\n"
 			+ "  \\noindent\\numex{#1}\\hspace{0.3cm}"
-			+ "{\\fontsize{10}{12}\\selectfont\\color{bodytext}#2\\par}"
-			+ "\\vspace{0.4cm}}\n\n";
+			+ "{\\fontsize{10}{12}\\selectfont\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{8pt}\\color{bodytext}#2\\par}"
+			+ "\\vspace{0.5cm}}\n\n";
 	}
 
 	// ── Helpers de texto ──────────────────────────────────────────────
 
-	private String enunciado(int num, Exercicio e)
+	private String enunciado(int num, Exercicio e, Path workDir)
 	{
 		StringBuilder sb = new StringBuilder();
 		boolean primeiro = true;
@@ -438,7 +484,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		{
 			String parte;
 			if (p.isTipoImagem())
-				parte = includegraphics(num, p);
+				parte = includegraphics(num, p, workDir);
 			else if (p.getTexto() != null && !p.getTexto().isBlank())
 				parte = escapar(p.getTexto());
 			else
@@ -451,12 +497,17 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		return sb.toString();
 	}
 
-	private String includegraphics(int num, ParagrafoExercicio p)
+	private String includegraphics(int num, ParagrafoExercicio p, Path workDir)
 	{
-		return "{\\centering\\includegraphics[width=0.6\\linewidth]{" + gravarImagem(num, p) + "}\\par}";
+		String nome = gravarImagem(num, p, workDir);
+		if (nome == null)
+			return "{\\itshape\\color{mutedtext}[imagem indisponível]}";
+		return "{\\centering\\includegraphics[width=0.6\\linewidth]{" + nome + "}\\par}";
 	}
 
-	private String gravarImagem(int num, ParagrafoExercicio p)
+	/** Grava a imagem do parágrafo no diretório de trabalho do xelatex (onde ele a procura).
+	 *  Retorna o nome do arquivo se gravou, ou null se a imagem estiver ausente/ilegível. */
+	private String gravarImagem(int num, ParagrafoExercicio p, Path workDir)
 	{
 		String nome = String.format("img_%02d_%d.png", num, p.getOrdem());
 		try
@@ -468,7 +519,11 @@ public class GeradorAvaliacaoPdfService implements Serializable
 				if (blob != null)
 				{
 					byte[] bytes = blob.getBytes(1, (int) blob.length());
-					Files.write(Path.of(nome), bytes);
+					if (bytes != null && bytes.length > 0)
+					{
+						Files.write(workDir.resolve(nome), bytes);
+						return nome;
+					}
 				}
 			}
 		}
@@ -476,7 +531,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		{
 			ex.printStackTrace();
 		}
-		return nome;
+		return null;
 	}
 
 	private String[] alternativasTexto(List<AlternativaExercicio> alts)

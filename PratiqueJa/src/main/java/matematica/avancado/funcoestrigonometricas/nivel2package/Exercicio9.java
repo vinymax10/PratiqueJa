@@ -55,7 +55,7 @@ public class Exercicio9 extends GeradorExercicio
 					+ "Portanto \\(1 - \\operatorname{sen}^2\\theta = \\mathbf{\\cos^2\\theta}\\)";
 		}
 
-		addParagrafo("Qual das expressões abaixo é equivalente a " + expressao + "?");
+		addParagrafo("Qual das expressões " + listarOpcoes(correta, distratores) + " é equivalente a " + expressao + "?");
 		embaralharEAdicionarAlternativas(correta, distratores);
 		setResolucao(res);
 	}

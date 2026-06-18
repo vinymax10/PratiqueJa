@@ -1,6 +1,5 @@
 package bean.avaliacao;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bean.PaiBean;
+import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.academico.AssuntoDAO;
 import dao.avaliacao.ConfigPedidoAvaliacaoDAO;
-import dao.avaliacao.ItemPedidoAvaliacaoDAO;
 import dao.avaliacao.PedidoAvaliacaoDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
 import modelo.avaliacao.ConfigPedidoAvaliacao;
 import modelo.avaliacao.FormatoAvaliacao;
@@ -31,15 +33,17 @@ import modelo.avaliacao.PosicaoGabarito;
 import modelo.avaliacao.StatusPedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
 import modelo.exercicio.Nivel;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
 import service.avaliacao.MontadorPedidoAvaliacaoService;
 import web.session.Sessao;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class PedidoAvaliacaoBean implements Serializable
+public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliacaoDAO, PermissaoPadrao<PedidoAvaliacao>>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -47,10 +51,11 @@ public class PedidoAvaliacaoBean implements Serializable
 
 	// ── Estado da view ────────────────────────────────────────────────
 
-	private PedidoAvaliacao pedido;
-	private ItemPedidoAvaliacao novoItem;
-	private ItemPedidoAvaliacao itemEditando;
 	private List<PedidoAvaliacao> historico;
+	private PedidoAvaliacao pedidoSelecionado;
+
+	/** Código do pedido recém-criado, para realçar a linha na list (vem do flash após o redirect). */
+	private String codigoDestaque;
 
 	private List<Assunto> assuntos;
 	private ConfigPedidoAvaliacao config;
@@ -60,12 +65,6 @@ public class PedidoAvaliacaoBean implements Serializable
 	// ── Injeções ──────────────────────────────────────────────────────
 
 	@Inject
-	private PedidoAvaliacaoDAO pedidoAvaliacaoDAO;
-
-	@Inject
-	private ItemPedidoAvaliacaoDAO itemPedidoAvaliacaoDAO;
-
-	@Inject
 	private ConfigPedidoAvaliacaoDAO configPedidoAvaliacaoDAO;
 
 	@Inject
@@ -73,6 +72,16 @@ public class PedidoAvaliacaoBean implements Serializable
 
 	@Inject
 	private MontadorPedidoAvaliacaoService montadorService;
+
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
+	public PedidoAvaliacaoBean()
+	{
+		super(PedidoAvaliacao.class, "Avaliação");
+		urlLista = "/avaliacao/list.xhtml";
+		urlCadastro = "/avaliacao/form.xhtml";
+	}
 
 	// ── Inicialização ─────────────────────────────────────────────────
 
@@ -116,157 +125,69 @@ public class PedidoAvaliacaoBean implements Serializable
 		{
 			LOG.error("Falha ao calcular uso mensal", e);
 		}
+		try
+		{
+			Object novo = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("avNovoCodigo");
+			if(novo != null)
+				codigoDestaque = novo.toString();
+		}
+		catch(Exception e)
+		{
+			LOG.error("Falha ao ler código em destaque", e);
+		}
 	}
 
 	private void novoPedido()
 	{
-		pedido = new PedidoAvaliacao();
-		pedido.setUsuario(getUsuarioLogado());
-		novoItem = new ItemPedidoAvaliacao();
-	}
-
-	// ── Itens da avaliação ────────────────────────────────────────────
-
-	public void prepararNovoItem()
-	{
-		itemEditando = null;
-		novoItem = new ItemPedidoAvaliacao();
-	}
-
-	public void prepararEdicaoItem(ItemPedidoAvaliacao item)
-	{
-		itemEditando = item;
-		novoItem = new ItemPedidoAvaliacao();
-		novoItem.setAssunto(item.getAssunto());
-		novoItem.setNivel(item.getNivel());
-		novoItem.setFormato(item.getFormato());
-		novoItem.setQuantidade(item.getQuantidade());
-	}
-
-	public boolean isEditando()
-	{
-		return itemEditando != null;
-	}
-
-	public void salvarItem()
-	{
-		int qtdAtualDoItem = itemEditando != null ? itemEditando.getQuantidade() : 0;
-		if(totalExercicios() - qtdAtualDoItem + novoItem.getQuantidade() > config.getMaxExerciciosPorAvaliacao())
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Limite de " + config.getMaxExerciciosPorAvaliacao() + " exercícios por avaliação atingido.");
-			return;
-		}
-
-		if(itemEditando != null)
-		{
-			itemEditando.setAssunto(novoItem.getAssunto());
-			itemEditando.setNivel(novoItem.getNivel());
-			itemEditando.setFormato(novoItem.getFormato());
-			itemEditando.setQuantidade(novoItem.getQuantidade());
-			itemEditando = null;
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Assunto atualizado.");
-		}
-		else
-		{
-			novoItem.setPedidoAvaliacao(pedido);
-			novoItem.setOrdem(pedido.getItens().size() + 1);
-			pedido.getItens().add(novoItem);
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Assunto adicionado.");
-		}
-		novoItem = new ItemPedidoAvaliacao();
-	}
-
-	public void removerItem(ItemPedidoAvaliacao item)
-	{
-		int idx = indiceDoItem(item);
-		if(idx >= 0)
-		{
-			pedido.getItens().remove(idx);
-			reordenar();
-		}
-	}
-
-	public void subirItem(ItemPedidoAvaliacao item)
-	{
-		int idx = indiceDoItem(item);
-		if(idx > 0)
-		{
-			List<ItemPedidoAvaliacao> itens = pedido.getItens();
-			itens.remove(idx);
-			itens.add(idx - 1, item);
-			reordenar();
-		}
-	}
-
-	public void descerItem(ItemPedidoAvaliacao item)
-	{
-		List<ItemPedidoAvaliacao> itens = pedido.getItens();
-		int idx = indiceDoItem(item);
-		if(idx >= 0 && idx < itens.size() - 1)
-		{
-			itens.remove(idx);
-			itens.add(idx + 1, item);
-			reordenar();
-		}
-	}
-
-	private int indiceDoItem(ItemPedidoAvaliacao item)
-	{
-		List<ItemPedidoAvaliacao> itens = pedido.getItens();
-		for(int i = 0; i < itens.size(); i++)
-		{
-			if(itens.get(i) == item)
-				return i;
-		}
-		return -1;
-	}
-
-	private void reordenar()
-	{
-		List<ItemPedidoAvaliacao> itens = pedido.getItens();
-		for(int i = 0; i < itens.size(); i++)
-			itens.get(i).setOrdem(i + 1);
+		entidade = new PedidoAvaliacao();
+		entidade.setUsuario(getUsuarioLogado());
 	}
 
 	// ── Validação e solicitação ───────────────────────────────────────
 
-	public void solicitar()
+	public String solicitar()
 	{
+		// Não logado: abre a tela de login (igual ao fluxo de responder questão sem login).
+		// Após logar, o usuário clica em Solicitar novamente.
+		if(!controleAcessoBean.verificaEstaLogado())
+			return null;
+
 		if(!validar())
-			return;
+			return null;
 
-		pedido.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
-		pedido.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
-		pedido.setProgresso(0);
-		pedido.setDataSolicitacao(LocalDateTime.now());
-		pedido.setDataExpiracao(LocalDateTime.now().plusDays(config.getDiasRetencaoPdf()));
-		pedido.setUsuario(getUsuarioLogado());
+		entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
+		entidade.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
+		entidade.setProgresso(0);
+		entidade.setDataSolicitacao(LocalDateTime.now());
+		entidade.setDataExpiracao(LocalDateTime.now().plusDays(config.getDiasRetencaoPdf()));
+		entidade.setUsuario(getUsuarioLogado());
 
-		pedidoAvaliacaoDAO.salvar(pedido);
-		montadorService.montar(pedido.getId());
+		entidadeDAO.salvar(entidade);
+		montadorService.montar(entidade.getId());
 
-		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Solicitação registrada! Código: " + pedido.getCodigoBatch() + ". Acompanhe o progresso abaixo.");
+		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Solicitação registrada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");
 
-		carregarHistorico();
-		calcularUsoMensal();
-		novoPedido();
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("avNovoCodigo", entidade.getCodigoBatch());
+
+		// Redirect ajax-safe via outcome (mantém a mensagem no flash até a list)
+		return urlLista + "?faces-redirect=true";
 	}
 
 	private boolean validar()
 	{
-		if(pedido.getTitulo() == null || pedido.getTitulo().isBlank())
+		if(entidade.getTitulo() == null || entidade.getTitulo().isBlank())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Informe o título da avaliação.");
 			return false;
 		}
 
-		if(pedido.getItens().isEmpty())
+		if(entidade.getItens().isEmpty())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Adicione ao menos um assunto.");
 			return false;
 		}
 
-		if(pedido.getQuantidade() < 1 || pedido.getQuantidade() > config.getMaxAvaliacoesPorSolicitacao())
+		if(entidade.getQuantidade() < 1 || entidade.getQuantidade() > config.getMaxAvaliacoesPorSolicitacao())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Quantidade deve ser entre 1 e " + config.getMaxAvaliacoesPorSolicitacao() + ".");
 			return false;
@@ -284,7 +205,7 @@ public class PedidoAvaliacaoBean implements Serializable
 		}
 
 		int limiteRestante = plano.getLimiteMensal() - avaliacoesUsadasNoMes;
-		if(pedido.getQuantidade() > limiteRestante)
+		if(entidade.getQuantidade() > limiteRestante)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Cota mensal insuficiente. Restam " + limiteRestante + " avaliações neste mês.");
 			return false;
@@ -304,7 +225,7 @@ public class PedidoAvaliacaoBean implements Serializable
 			if(p.getStatus() == StatusPedidoAvaliacao.GERANDO
 			|| p.getStatus() == StatusPedidoAvaliacao.AGUARDANDO)
 			{
-				PedidoAvaliacao atualizado = pedidoAvaliacaoDAO.carrega(p.getId());
+				PedidoAvaliacao atualizado = entidadeDAO.carrega(p.getId());
 				p.setProgresso(atualizado.getProgresso());
 				p.setStatus(atualizado.getStatus());
 				p.setCaminhoArquivo(atualizado.getCaminhoArquivo());
@@ -313,14 +234,11 @@ public class PedidoAvaliacaoBean implements Serializable
 		}
 	}
 
-	public List<PedidoAvaliacao> getPedidosEmAndamento()
+	// ── Detalhes da solicitação ───────────────────────────────────────
+
+	public void aoSelecionarPedido(org.primefaces.event.SelectEvent<PedidoAvaliacao> event)
 	{
-		if(historico == null)
-			return java.util.Collections.emptyList();
-		return historico.stream()
-			.filter(p -> p.getStatus() == StatusPedidoAvaliacao.GERANDO
-			          || p.getStatus() == StatusPedidoAvaliacao.AGUARDANDO)
-			.toList();
+		pedidoSelecionado = event.getObject();
 	}
 
 	// ── Download ──────────────────────────────────────────────────────
@@ -343,7 +261,7 @@ public class PedidoAvaliacaoBean implements Serializable
 
 	public int totalExercicios()
 	{
-		return pedido.getItens().stream().mapToInt(ItemPedidoAvaliacao::getQuantidade).sum();
+		return entidade.getItens().stream().mapToInt(ItemPedidoAvaliacao::getQuantidade).sum();
 	}
 
 	public int limiteExerciciosRestante()
@@ -415,14 +333,14 @@ public class PedidoAvaliacaoBean implements Serializable
 
 	private void carregarHistorico()
 	{
-		historico = pedidoAvaliacaoDAO.buscarPorUsuario(getUsuarioLogado());
+		historico = entidadeDAO.buscarPorUsuario(getUsuarioLogado());
 	}
 
 	private void calcularUsoMensal()
 	{
 		LocalDateTime inicioMes = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
 		LocalDateTime inicioProximo = inicioMes.plusMonths(1);
-		avaliacoesUsadasNoMes = pedidoAvaliacaoDAO.somarAvaliacoesNoMes(getUsuarioLogado(), inicioMes, inicioProximo);
+		avaliacoesUsadasNoMes = entidadeDAO.somarAvaliacoesNoMes(getUsuarioLogado(), inicioMes, inicioProximo);
 	}
 
 	private Usuario getUsuarioLogado()

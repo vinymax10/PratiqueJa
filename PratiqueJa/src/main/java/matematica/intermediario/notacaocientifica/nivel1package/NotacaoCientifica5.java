@@ -1,6 +1,9 @@
 package matematica.intermediario.notacaocientifica.nivel1package;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import matematica.GeradorExercicio;
 
 // Comparação de grandezas: identificar o maior número entre quatro em NC
@@ -23,7 +26,16 @@ public class NotacaoCientifica5 extends GeradorExercicio
 		String e2   = "\\(" + mant[1] + " \\times 10^{" + exps[1] + "}\\)";
 		String e3   = "\\(" + mant[2] + " \\times 10^{" + exps[2] + "}\\)";
 
-		addParagrafo("Qual é o maior número?");
+		List<String> opcoes = new ArrayList<>(Arrays.asList(maior, e1, e2, e3));
+		Collections.shuffle(opcoes, rand);
+		StringBuilder numeros = new StringBuilder();
+		for (int i = 0; i < opcoes.size(); i++)
+		{
+			if (i > 0) numeros.append(i == opcoes.size() - 1 ? " e " : ", ");
+			numeros.append(opcoes.get(i));
+		}
+
+		addParagrafo("Qual é o maior número entre " + numeros + "?");
 		embaralharEAdicionarAlternativas(maior, Arrays.asList(e1, e2, e3));
 		setResolucao(
 			"Comparar pelos expoentes: maior expoente corresponde ao maior número." +

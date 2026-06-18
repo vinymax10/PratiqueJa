@@ -53,7 +53,7 @@ public class Primo3 extends AgrupadorPrimo
 
 		addParagrafo(
 			"Dado \\(N = " + p + " \\times " + q + " = " + n + "\\), " +
-			"qual dos números abaixo é coprimo com \\(N\\) (\\(\\text{MDC} = 1\\))?"
+			"qual dos números " + listarOpcoes("\\(" + correto + "\\)", erradas) + " é coprimo com \\(N\\) (\\(\\text{MDC} = 1\\))?"
 		);
 		embaralharEAdicionarAlternativas("\\(" + correto + "\\)", erradas);
 

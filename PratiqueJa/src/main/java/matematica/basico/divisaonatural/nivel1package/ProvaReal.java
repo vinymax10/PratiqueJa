@@ -1,6 +1,7 @@
 package matematica.basico.divisaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class ProvaReal extends GeradorExercicio
 {
@@ -11,7 +12,7 @@ public class ProvaReal extends GeradorExercicio
 		int b = 2 + rand.nextInt(8);
 		int a = q * b;
 
-		addParagrafo("Ana calculou \\(" + a + " \\div " + b + " = " + q + "\\). Para verificar, ela multiplicou o quociente pelo divisor. Qual deve ser o resultado?");
+		addParagrafo(Nomes.feminino(rand) + " calculou \\(" + a + " \\div " + b + " = " + q + "\\). Para verificar, ela multiplicou o quociente pelo divisor. Qual deve ser o resultado?");
 		gerarAlternativasInteiras(a);
 
 		String res = "A prova real da divisão é: divisor \\(\\times\\) quociente \\(+\\) resto \\(=\\) dividendo. \\(\\\\\\)";

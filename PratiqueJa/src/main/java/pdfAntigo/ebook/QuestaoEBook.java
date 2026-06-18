@@ -241,7 +241,7 @@ public class QuestaoEBook
 			for(Paragrafo paragrafo : questao.getParagrafos())
 			{
 				if(paragrafo.getImagemFile()!=null)
-					latex+="\\includegraphics[valign=t,scale=0.5, max width=\\columnwidth]{"+diretorioBean.getConfigLatex().getImagens()+"/"+paragrafo.getId()+".jpeg}"
+					latex+="\\includegraphics[valign=t,scale=0.5, max width=\\columnwidth]{"+diretorioBean.getConfig().getImagens()+"/"+paragrafo.getId()+".jpeg}"
 					+ " \r\n \\vspace{0.3cm} \r\n \r\n";
 				else
 					latex+=getTexto(paragrafo.getTexto())+" \r\n \r\n";
@@ -284,7 +284,7 @@ public class QuestaoEBook
 			for(Paragrafo paragrafo : questao.getParagrafos())
 			{
 				if(paragrafo.getImagemFile()!=null)
-					latex+="\\includegraphics[valign=t,scale=0.5, max width=\\columnwidth]{"+diretorioBean.getConfigLatex().getImagens()+"/"+paragrafo.getId()+".jpeg}"
+					latex+="\\includegraphics[valign=t,scale=0.5, max width=\\columnwidth]{"+diretorioBean.getConfig().getImagens()+"/"+paragrafo.getId()+".jpeg}"
 					+ " \r\n \\vspace{0.3cm} \r\n \r\n";
 				else
 					latex+=getTexto(paragrafo.getTexto())+" \r\n \r\n";
@@ -379,12 +379,12 @@ public class QuestaoEBook
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb; 
-		if(diretorioBean.getConfigLatex().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfigLatex().getNome())
+		if(diretorioBean.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
+			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		else 
-			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfigLatex().getNome())
+			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		

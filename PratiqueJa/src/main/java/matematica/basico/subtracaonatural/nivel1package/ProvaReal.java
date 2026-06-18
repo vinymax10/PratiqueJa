@@ -1,6 +1,7 @@
 package matematica.basico.subtracaonatural.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class ProvaReal extends GeradorExercicio
 {
@@ -11,7 +12,7 @@ public class ProvaReal extends GeradorExercicio
 		int b = 5 + rand.nextInt(15);
 		int c = a - b;
 
-		addParagrafo("Pedro calculou que \\(" + a + " - " + b + " = " + c + "\\). Para verificar pela prova real, ele somou \\(" + c + " + " + b + "\\). Qual deve ser o resultado?");
+		addParagrafo(Nomes.masculino(rand) + " calculou que \\(" + a + " - " + b + " = " + c + "\\). Para verificar pela prova real, ele somou \\(" + c + " + " + b + "\\). Qual deve ser o resultado?");
 
 		gerarAlternativasInteiras(a);
 

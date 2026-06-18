@@ -10,11 +10,11 @@ public class Matrizes4 extends GeradorExercicio
 	{
 		// A = [[p, b], [c, x]];  det = p·x - b·c = 0  →  x = b·c/p
 		// Garante x inteiro: b é múltiplo de p
-		int p    = 1 + rand.nextInt(4);          // p = 1..4 (a_{1,1})
-		int mult = 1 + rand.nextInt(4);          // b = p·mult → b/p = mult (inteiro)
+		int p    = 1 + rand.nextInt(6);          // p = 1..6 (a_{1,1})
+		int mult = 1 + rand.nextInt(6);          // b = p·mult → b/p = mult (inteiro)
 		int b    = p * mult;
 		if (rand.nextBoolean()) b = -b;          // b pode ser negativo
-		int c    = 1 + rand.nextInt(6);          // c = 1..6 (a_{2,1})
+		int c    = 1 + rand.nextInt(9);          // c = 1..9 (a_{2,1})
 		if (rand.nextBoolean()) c = -c;
 		int xVal = (b / p) * c;                  // x = (b/p)·c = mult·c (inteiro)
 

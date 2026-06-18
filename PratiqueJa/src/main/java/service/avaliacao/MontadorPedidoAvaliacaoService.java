@@ -7,26 +7,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
 import jakarta.inject.Inject;
 
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import dao.avaliacao.PedidoAvaliacaoDAO;
-import dao.configuracao.ConfigLatexDAO;
+import dao.configuracao.ConfigDAO;
 import modelo.avaliacao.FormatoSaida;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.PosicaoGabarito;
 import modelo.avaliacao.StatusPedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
-import modelo.configuracao.ConfigLatex;
+import modelo.configuracao.Config;
 
 /**
  * Orquestra a geração assíncrona de todas as avaliações de um PedidoAvaliacao.
@@ -46,9 +50,10 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 	private PedidoAvaliacaoDAO pedidoAvaliacaoDAO;
 
 	@Inject
-	private ConfigLatexDAO configLatexDAO;
+	private ConfigDAO configDAO;
 
 	@Asynchronous
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void montar(Long pedidoId)
 	{
 		PedidoAvaliacao pedido = pedidoAvaliacaoDAO.carrega(pedidoId);
@@ -60,8 +65,9 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 
 		try
 		{
-			ConfigLatex config = configLatexDAO.buscar();
-			Path baseDir = Path.of(config.getEndereco(), "avaliacoes", pedido.getCodigoBatch());
+			Config config = configDAO.buscar();
+			// Diretório das avaliações derivado da raiz: {endereco}/avaliacoes/{codigoBatch}
+			Path baseDir = Path.of(config.getEnderecoAvaliacao(), pedido.getCodigoBatch());
 			Files.createDirectories(baseDir);
 
 			boolean comGabaritoIndividual =
@@ -69,7 +75,9 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 
 			int total = pedido.getQuantidade();
 			List<byte[]> pdfsAvaliacao = new ArrayList<>(total);
-			List<byte[]> pdfsGabarito = new ArrayList<>(total);
+			List<byte[]> pdfsGabarito = new ArrayList<>(1);
+			// Blocos de cada exemplar, na ordem, para montar um único PDF de gabaritos ao final
+			Map<String, List<BlocoExercicio>> gabaritosPorExemplar = new LinkedHashMap<>();
 
 			Path styDir = Path.of("C:/Users/maximovrm/git/PratiqueJa/PratiqueJa/tex-new");
 			String xelatex = resolverXelatex(config);
@@ -97,15 +105,16 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 				atualizarProgresso(pedido, etapaAtual, totalEtapas);
 
 				if (!comGabaritoIndividual && temGabarito(pedido))
-				{
-					byte[] pdfGab = geradorGabarito.gerarGabarito(
-						pedido, blocos, codigoAvaliacao, styDir, xelatex, workDir
-					);
-					pdfsGabarito.add(pdfGab);
-				}
+					gabaritosPorExemplar.put(codigoAvaliacao, blocos);
 				etapaAtual++;
 				atualizarProgresso(pedido, etapaAtual, totalEtapas);
 			}
+
+			// Todos os gabaritos (AGRUPADO_NO_FINAL) em um único PDF: compacto + linha tracejada
+			// entre exemplares, ou 1 página por exemplar quando for com resolução.
+			if (!gabaritosPorExemplar.isEmpty())
+				pdfsGabarito.add(geradorGabarito.gerarGabaritosCombinados(
+					pedido, gabaritosPorExemplar, styDir, xelatex, baseDir.resolve("gabaritos")));
 
 			byte[] arquivoFinal;
 			String nomeDownload;
@@ -220,7 +229,7 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			+ "_" + pedido.getCodigoBatch();
 	}
 
-	private String resolverXelatex(ConfigLatex config)
+	private String resolverXelatex(Config config)
 	{
 		return (config.getNome() != null && config.getNome().contains("xelatex"))
 			? config.getNome()

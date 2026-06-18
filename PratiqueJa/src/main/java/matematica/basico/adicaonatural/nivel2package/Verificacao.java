@@ -1,6 +1,7 @@
 package matematica.basico.adicaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Verificacao extends GeradorExercicio
 {
@@ -11,7 +12,7 @@ public class Verificacao extends GeradorExercicio
 		int b = 20 + rand.nextInt(60);
 		int c = a + b;
 
-		addParagrafo("João calculou que \\(" + a + " + " + b + " = " + c + "\\). Para conferir o resultado, ele subtraiu \\(" + c + " - " + b + "\\). Qual deve ser o resultado dessa subtração?");
+		addParagrafo(Nomes.masculino(rand) + " calculou que \\(" + a + " + " + b + " = " + c + "\\). Para conferir o resultado, ele subtraiu \\(" + c + " - " + b + "\\). Qual deve ser o resultado dessa subtração?");
 
 		gerarAlternativasInteiras(a);
 

@@ -2,7 +2,7 @@ package service.pdf;
 
 /**
  * Sinaliza uma falha de validação esperada na geração de listas de
- * exercícios em PDF (ex.: exercício padrão inexistente, ConfigLatex não
+ * exercícios em PDF (ex.: exercício padrão inexistente, Config não
  * configurada). A camada de apresentação traduz para uma mensagem ao usuário.
  *
  * O atributo {@code erro} indica a severidade: {@code true} para erro,

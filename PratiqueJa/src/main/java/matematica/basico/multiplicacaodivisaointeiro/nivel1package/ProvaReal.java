@@ -1,6 +1,7 @@
 package matematica.basico.multiplicacaodivisaointeiro.nivel1package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 import matematica.basico.multiplicacaodivisaointeiro.ResolucaoMDInteiro;
 
 public class ProvaReal extends GeradorExercicio
@@ -19,7 +20,7 @@ public class ProvaReal extends GeradorExercicio
 		boolean checkFirst = rand.nextBoolean();
 		if (checkFirst)
 		{
-			addParagrafo("Carlos calculou \\(" + aParens + " \\times " + bParens + " = " + cStr + "\\). Para verificar, dividiu \\(" + cStr + " \\div " + bParens + "\\). Qual deve ser o resultado?");
+			addParagrafo(Nomes.masculino(rand) + " calculou \\(" + aParens + " \\times " + bParens + " = " + cStr + "\\). Para verificar, dividiu \\(" + cStr + " \\div " + bParens + "\\). Qual deve ser o resultado?");
 			gerarAlternativasInteirasComNegativos(a);
 			setResolucao(ResolucaoMDInteiro.divisao(c, b));
 		}

@@ -1,6 +1,7 @@
 package matematica.intermediario.funcaoafim.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Expressao1 extends GeradorExercicio
 {
@@ -71,7 +72,7 @@ public class Expressao1 extends GeradorExercicio
 		int x = 2 + rand.nextInt(9);
 		int k = a * x + b;
 
-		addParagrafo("Carlos tem \\(R\\$\\ " + b + ",00\\) poupados e economiza "
+		addParagrafo(Nomes.masculino(rand) + " tem \\(R\\$\\ " + b + ",00\\) poupados e economiza "
 			+ "\\(R\\$\\ " + a + ",00\\) por mês. "
 			+ "Em quantos meses ele terá \\(R\\$\\ " + k + ",00\\)?");
 

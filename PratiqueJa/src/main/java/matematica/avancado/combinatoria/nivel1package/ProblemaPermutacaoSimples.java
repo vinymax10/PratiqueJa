@@ -22,7 +22,7 @@ public class ProblemaPermutacaoSimples
 	public void gerarValores()
 	{
 		Random rand = new Random();
-		n = 3 + rand.nextInt(5);
+		n = 3 + rand.nextInt(7);
 	}
 
 	public String resolucao()

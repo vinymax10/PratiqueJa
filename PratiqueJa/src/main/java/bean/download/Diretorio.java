@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 
 import lombok.Data;
-import modelo.configuracao.ConfigLatex;
+import modelo.configuracao.Config;
 import modelo.configuracao.SistemaOperacional;
 
 @Data
@@ -12,21 +12,21 @@ public class Diretorio implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private ConfigLatex configLatex;
+	private Config config;
 	
 	private String diretorio;
 	
-	public Diretorio(ConfigLatex configLatex, String diretorio)
+	public Diretorio(Config config, String diretorio)
 	{
-		this.configLatex = configLatex;
+		this.config = config;
 		this.diretorio = diretorio;
 	}
 
 	public void limparDiretorios()
 	{
-		gerarDiretorios(converte(configLatex.getEndereco()+"/"+diretorio+"/"));
-		gerarDiretorios(converte(configLatex.getEndereco()+"/"+diretorio+"/"+configLatex.getImagens()));
-		gerarDiretorios(converte(configLatex.getEndereco()+"/"+diretorio+"/"+configLatex.getImagensResolucao()));
+		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"));
+		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"+config.getImagens()));
+		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"+config.getImagensResolucao()));
 	}
 	
 	private void gerarDiretorios(String endereco)
@@ -46,17 +46,17 @@ public class Diretorio implements Serializable
 	
 	public String getEnderecoPdf()
 	{
-		return converte(getEndereco()+"/"+configLatex.getNome()+".pdf");
+		return converte(getEndereco()+"/"+config.getNome()+".pdf");
 	}
 	
 	public String getEnderecoExercicioPNG()
 	{
-		return converte(getEndereco()+"/"+configLatex.getNome()+"-000001.png");
+		return converte(getEndereco()+"/"+config.getNome()+"-000001.png");
 	}
 	
 	public String getEnderecoResolucaoPNG()
 	{
-		return converte(getEndereco()+"/"+configLatex.getNome()+"-000002.png");
+		return converte(getEndereco()+"/"+config.getNome()+"-000002.png");
 	}
 	
 	public String getEnderecoLogo()
@@ -71,27 +71,27 @@ public class Diretorio implements Serializable
 	
 	public String getEnderecoTex()
 	{
-		return converte(getEndereco()+"/"+configLatex.getNome()+".tex");
+		return converte(getEndereco()+"/"+config.getNome()+".tex");
 	}
 	
 	public String getEndereco()
 	{
-		return converte(configLatex.getEndereco()+"/"+diretorio);
+		return converte(config.getEnderecoLatex()+"/"+diretorio);
 	}
 	
 	public String getEndBackgroundServidor()
 	{
-		return converte(configLatex.getEndBackground());
+		return converte(config.getEndBackground());
 	}
 	
 	public String getEnderecoImagens()
 	{
-		return converte(getEndereco()+"/"+configLatex.getImagens()+"/");
+		return converte(getEndereco()+"/"+config.getImagens()+"/");
 	}
 	
 	public String getEnderecoImagensResolucao()
 	{
-		return converte(getEndereco()+"/"+configLatex.getImagensResolucao()+"/");
+		return converte(getEndereco()+"/"+config.getImagensResolucao()+"/");
 	}
 	
 	public String getEnderecoOutputLog()
@@ -101,7 +101,7 @@ public class Diretorio implements Serializable
 	
 	private String converte(String texto)
 	{
-		if(configLatex.getSistemaOperacional()==SistemaOperacional.Windows)
+		if(config.getSistemaOperacional()==SistemaOperacional.Windows)
 		{
 			return texto.replace("/", "\\");
 		}

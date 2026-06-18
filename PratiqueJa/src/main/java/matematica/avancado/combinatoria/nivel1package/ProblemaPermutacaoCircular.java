@@ -21,7 +21,7 @@ public class ProblemaPermutacaoCircular
 	public void gerarValores()
 	{
 		Random rand = new Random();
-		n = 4 + rand.nextInt(5);
+		n = 4 + rand.nextInt(7);
 	}
 
 	public String resolucao()

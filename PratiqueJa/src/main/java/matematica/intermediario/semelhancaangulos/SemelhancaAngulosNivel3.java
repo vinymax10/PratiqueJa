@@ -7,8 +7,7 @@ public class SemelhancaAngulosNivel3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int[] tipos = {1, 2, 6};
-		int tipo = tipos[rand.nextInt(tipos.length)];
+		int tipo = 1 + rand.nextInt(18);
 		delegar(instanciar(".nivel3package.Exercicio" + tipo));
 	}
 }

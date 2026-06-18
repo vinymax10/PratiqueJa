@@ -10,11 +10,11 @@ public class Matrizes6 extends GeradorExercicio
 	{
 		int lin = 2 + rand.nextInt(2);
 		int col = 2 + rand.nextInt(2);
-		int k = 2 + rand.nextInt(4); // 2..5
+		int k = 2 + rand.nextInt(6); // 2..7
 		if (rand.nextBoolean()) k = -k;
 
-		int[][] a  = AuxMatriz.contruirMatriz(lin, col, 8);
-		int[][] b  = AuxMatriz.contruirMatriz(lin, col, 8);
+		int[][] a  = AuxMatriz.contruirMatriz(lin, col, 12);
+		int[][] b  = AuxMatriz.contruirMatriz(lin, col, 12);
 		int[][] kA = new int[lin][col];
 		int[][] c  = new int[lin][col];
 		for (int i = 0; i < lin; i++)

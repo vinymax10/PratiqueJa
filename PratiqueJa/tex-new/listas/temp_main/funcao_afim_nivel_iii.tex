@@ -1,0 +1,162 @@
+% Gerado automaticamente por GeradorListaPDF — não editar manualmente
+\documentclass[12pt]{article}
+\usepackage{pratiqueja}
+\usepackage{tabularray}
+
+\newcommand{\numex}[1]{%
+  \begin{tcolorbox}[enhanced,arc=3pt,boxrule=0pt,colback=rulebg,colframe=rulebg,left=4pt,right=4pt,top=1pt,bottom=1pt,nobeforeafter,on line]{\bfseries\small\color{darkblue}#1}\end{tcolorbox}\hspace{4pt}}
+\newcommand{\altline}[2]{%
+  \def\altph{---}%
+  \def\altarg{#2}%
+  \ifx\altarg\altph\else
+    \noindent{\bfseries\color{darkblue}\small(#1)}~{\small#2}\par
+  \fi}
+\newlength{\cellheight}
+\setlength{\cellheight}{11.7cm}
+\newcommand{\alts}[5]{%
+  \altline{A}{#1}%
+  \altline{B}{#2}%
+  \altline{C}{#3}%
+  \altline{D}{#4}%
+  \altline{E}{#5}
+  \vspace{0.3cm}}
+\newcommand{\ex}[7]{%
+  \parbox[t][\cellheight][t]{\linewidth}{%
+    \setlength{\parskip}{6pt}%
+    \noindent\numex{#1}{\small\color{bodytext}#2}\par\vfill
+    \alts{#3}{#4}{#5}{#6}{#7}}}
+\newcommand{\exImg}[8]{%
+  \parbox[t][\cellheight][t]{\linewidth}{%
+    \setlength{\parskip}{6pt}%
+    \noindent\numex{#1}{\small\color{bodytext}#2}\par
+    {\centering #3\par}%
+    \vfill
+    \alts{#4}{#5}{#6}{#7}{#8}}}
+\newcommand{\exd}[2]{%
+  \parbox[t][\cellheight][t]{\linewidth}{%
+    \setlength{\parskip}{6pt}%
+    \noindent\numex{#1}{\small\color{bodytext}#2}}}
+\newcommand{\resheader}[2]{%
+  \begin{tcolorbox}[enhanced,arc=3pt,boxrule=0pt,colback=rulebg,colframe=rulebg,left=4pt,right=4pt,top=1pt,bottom=1pt,nobeforeafter,on line]{\bfseries\small\color{darkblue}#1\hspace{5pt}{\color{mutedtext}\tiny\textbullet}\hspace{5pt}\color{vegreen}#2}\end{tcolorbox}\hspace{4pt}}
+\newcommand{\res}[3]{%
+  \noindent\resheader{#1}{#2}\hspace{0.3cm}{\fontsize{10}{12}\selectfont\setlength{\lineskip}{6pt}\setlength{\lineskiplimit}{2pt}\setlength{\jot}{8pt}\color{bodytext}#3\par}\vspace{0.4cm}}
+\newcommand{\resd}[2]{%
+  \noindent\numex{#1}\hspace{0.3cm}{\fontsize{10}{12}\selectfont\setlength{\lineskip}{6pt}\setlength{\lineskiplimit}{2pt}\setlength{\jot}{8pt}\color{bodytext}#2\par}\vspace{0.4cm}}
+
+\setsubject{Função Afim · Nível III}
+
+\begin{document}
+\pagenumbering{arabic}
+\setstretch{1.2}
+\color{bodytext}
+
+\listheader{Função Afim}{Nível III}{Matemática · Intermediário}{Resolva as questões abaixo mostrando o desenvolvimento completo.}
+
+\noindent
+\begin{tblr}{
+  width    = \textwidth,
+  colspec  = {X|[1.5pt,sepcolor]X},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  column{1} = {leftsep=0pt},
+  column{2} = {rightsep=0pt},
+  rows     = {ht=11.7cm, valign=t, rowsep=0pt},
+}
+\exd{01}{Encontre o valor de b:  \( f(x)=\dfrac{-7}{9}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_01_1.png}\par}} &
+\exd{02}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 9 < 0\).} \\
+\exd{03}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 18 > 0\).} &
+\exd{04}{Encontre o valor de b:  \( f(x)=\dfrac{-10}{14}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_04_1.png}\par}} \\
+\end{tblr}
+
+\newpage
+
+\listheader{Função Afim}{Nível III}{Matemática · Intermediário}{Resolva as questões abaixo mostrando o desenvolvimento completo.}
+
+\noindent
+\begin{tblr}{
+  width    = \textwidth,
+  colspec  = {X|[1.5pt,sepcolor]X},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  column{1} = {leftsep=0pt},
+  column{2} = {rightsep=0pt},
+  rows     = {ht=11.7cm, valign=t, rowsep=0pt},
+}
+\exd{05}{A função afim \(f(x) = ax + b\) passa pelos pontos \(A = (-4,\ -4)\) e \(B = (3,\ 1)\). Calcule \(f(4)\).} &
+\exd{06}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_06_1.png}\par}} \\
+\exd{07}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_07_1.png}\par}} &
+\exd{08}{Encontre o valor de b:  \( f(x)=0x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_08_1.png}\par}} \\
+\end{tblr}
+
+\newpage
+
+\listheader{Função Afim}{Nível III}{Matemática · Intermediário}{Resolva as questões abaixo mostrando o desenvolvimento completo.}
+
+\noindent
+\begin{tblr}{
+  width    = \textwidth,
+  colspec  = {X|[1.5pt,sepcolor]X},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  column{1} = {leftsep=0pt},
+  column{2} = {rightsep=0pt},
+  rows     = {ht=11.7cm, valign=t, rowsep=0pt},
+}
+\exd{09}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 18 > 0\).} &
+\exd{10}{Determine os valores de \(x\) para os quais \(f(x) = -4x + 20 > 0\).} \\
+\exd{11}{A função afim \(f(x) = ax + b\) passa pelos pontos \(A = (-2,\ -1)\) e \(B = (4,\ 2)\). Calcule \(f(1)\).} &
+\exd{12}{Determine os valores de \(x\) para os quais \(f(x) = -4x - 32 > 0\).} \\
+\end{tblr}
+
+\newpage
+
+\listheader{Função Afim}{Nível III}{Matemática · Intermediário}{Resolva as questões abaixo mostrando o desenvolvimento completo.}
+
+\noindent
+\begin{tblr}{
+  width    = \textwidth,
+  colspec  = {X|[1.5pt,sepcolor]X},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  column{1} = {leftsep=0pt},
+  column{2} = {rightsep=0pt},
+  rows     = {ht=11.7cm, valign=t, rowsep=0pt},
+}
+\exd{13}{Determine os valores de \(x\) para os quais \(f(x) = -4x + 32 < 0\).} &
+\exd{14}{Encontre o valor de b:  \( f(x)=\dfrac{7}{9}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_14_1.png}\par}} \\
+\exd{15}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_15_1.png}\par}} &
+\exd{16}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_16_1.png}\par}} \\
+\end{tblr}
+
+\clearpage
+
+\listheader{Função Afim}{Nível III}{Matemática · Intermediário}{Gabarito — Resolução comentada}
+
+\DefTblrTemplate{caption}{default}{}
+\DefTblrTemplate{conthead}{default}{}
+\DefTblrTemplate{conthead-text}{default}{}
+\DefTblrTemplate{contfoot}{default}{}
+\DefTblrTemplate{contfoot-text}{default}{}
+\begin{longtblr}[label=none]{
+  width    = \textwidth,
+  colspec  = {X|[1.5pt,sepcolor]X},
+  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},
+  column{1} = {leftsep=0pt},
+  column{2} = {rightsep=0pt},
+  rows     = {valign=t, rowsep=0pt},
+}
+\resd{01}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-7}{9}x + b \\ \)Considerando o ponto (-3,4),  temos: \(\\ \)\(4 = -\dfrac{7}{9} \cdot -3 +b \\4 = \dfrac{7}{3} +b \\-b = \dfrac{7}{3} -4 = -\dfrac{5}{3} \\b = \dfrac{5}{3} \)} &
+\resd{02}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 9 = 0\) \(\\\)\(x_0 = \dfrac{9}{3} = \mathbf{3}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > 3}\)} \\
+\resd{03}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 18 = 0\) \(\\\)\(x_0 = \dfrac{18}{3} = \mathbf{6}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 6}\)} &
+\resd{04}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-10}{14}x + b \\ \)Considerando o ponto (-8,6),  temos: \(\\ \)\(6 = -\dfrac{10}{14} \cdot -8 +b \\6 = \dfrac{40}{7} +b \\-b = \dfrac{40}{7} -6 = -\dfrac{2}{7} \\b = \dfrac{2}{7} \)} \\
+\resd{05}{Coeficiente angular \(a\): \(\\\)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{1 - (-4)}{3-(-4)}= \dfrac{1+4}{3+4}=\dfrac{5}{7}\) \(\\\)Coeficiente linear \(b\) usando \(A = (-4,\ -4)\): \(\\\)\(-4 = \dfrac{5}{7} \cdot \left(-4\right) + b\) \(\\\)\(b = -4 + \dfrac{20}{7} = \mathbf{\dfrac{-8}{7}}\) \(\\\)Logo \(f(x) = \dfrac{5}{7}x - \dfrac{8}{7}\): \(\\\)\(f(4) = \dfrac{5}{7} \cdot 4 + \dfrac{-8}{7} = \dfrac{20}{7} - \dfrac{8}{7} = \mathbf{\dfrac{12}{7}}\)} &
+\resd{06}{Dados os pontos  \(A=(-5,-2)\)  e \(B=(6,-6)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-6 - (-2)}{6-(-5)}= \dfrac{-6+2}{6+5}=\dfrac{-4}{11}\)} \\
+\resd{07}{Dados os pontos  \(A=(-8,4)\)  e \(B=(6,-6)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-6 - 4}{6-(-8)}= \dfrac{-6-4}{6+8}=\dfrac{-10}{14}=\dfrac{-5}{7}\)} &
+\resd{08}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=0x + b \\ \)Considerando o ponto (-6,-8),  temos: \(\\ \)\(-8 = 0 \cdot -6 +b \\-8 = 0 +b \\-b = 0 +8 = 8 \\b = -8 \)} \\
+\resd{09}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 18 = 0\) \(\\\)\(x_0 = \dfrac{18}{3} = \mathbf{6}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 6}\)} &
+\resd{10}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x + 20 = 0\) \(\\\)\(x_0 = \dfrac{20}{4} = \mathbf{5}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 5}\)} \\
+\resd{11}{Coeficiente angular \(a\): \(\\\)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{2 - (-1)}{4-(-2)}= \dfrac{2+1}{4+2}=\dfrac{3}{6}=\dfrac{1}{2}\) \(\\\)Coeficiente linear \(b\) usando \(A = (-2,\ -1)\): \(\\\)\(-1 = \dfrac{1}{2} \cdot \left(-2\right) + b\) \(\\\)\(b = -1 + 1 = \mathbf{0}\) \(\\\)Logo \(f(x) = \dfrac{1}{2}x\): \(\\\)\(f(1) = \dfrac{1}{2} \cdot 1 + 0 = \dfrac{1}{2} = \mathbf{\dfrac{1}{2}}\)} &
+\resd{12}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x - 32 = 0\) \(\\\)\(x_0 = -\dfrac{32}{4} = \mathbf{-8}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < -8}\)} \\
+\resd{13}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x + 32 = 0\) \(\\\)\(x_0 = \dfrac{32}{4} = \mathbf{8}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > 8}\)} &
+\resd{14}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{7}{9}x + b \\ \)Considerando o ponto (-7,-5),  temos: \(\\ \)\(-5 = \dfrac{7}{9} \cdot -7 +b \\-5 = -\dfrac{49}{9} +b \\-b = -\dfrac{49}{9} +5 = -\dfrac{4}{9} \\b = \dfrac{4}{9} \)} \\
+\resd{15}{Dados os pontos  \(A=(-3,8)\)  e \(B=(5,2)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{2 - 8}{5-(-3)}= \dfrac{2-8}{5+3}=\dfrac{-6}{8}=\dfrac{-3}{4}\)} &
+\resd{16}{Dados os pontos  \(A=(-2,-3)\)  e \(B=(8,4)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{4 - (-3)}{8-(-2)}= \dfrac{4+3}{8+2}=\dfrac{7}{10}\)} \\
+\end{longtblr}
+
+\end{document}

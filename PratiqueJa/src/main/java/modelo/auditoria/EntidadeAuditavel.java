@@ -7,7 +7,7 @@ import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
 import modelo.configuracao.ConfigCleanup;
-import modelo.configuracao.ConfigLatex;
+import modelo.configuracao.Config;
 import modelo.configuracao.Edicao;
 import modelo.email.ConfigSpam;
 import modelo.email.Email;
@@ -100,7 +100,7 @@ public enum EntidadeAuditavel
 
 //	Configuração geral
 	ConfigCleanup(ConfigCleanup.class, "Configuração de Limpeza"),
-	ConfigLatex(ConfigLatex.class, "Configuração LaTeX"),
+	Config(Config.class, "Configuração LaTeX"),
 	Edicao(Edicao.class, "Edição");
 
 	private final String nome;

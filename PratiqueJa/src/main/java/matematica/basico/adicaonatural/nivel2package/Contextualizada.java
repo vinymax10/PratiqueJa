@@ -1,6 +1,7 @@
 package matematica.basico.adicaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class Contextualizada extends GeradorExercicio
 {
@@ -18,7 +19,7 @@ public class Contextualizada extends GeradorExercicio
 				addParagrafo("Uma livraria vendeu \\(" + a + "\\) livros pela manhã e \\(" + b + "\\) livros à tarde. Quantos livros foram vendidos no dia?");
 				break;
 			case 1:
-				addParagrafo("Pedro andou \\(" + a + "\\) km de bicicleta na segunda-feira e \\(" + b + "\\) km na terça-feira. Quantos km ele andou ao todo?");
+				addParagrafo(Nomes.masculino(rand) + " andou \\(" + a + "\\) km de bicicleta na segunda-feira e \\(" + b + "\\) km na terça-feira. Quantos km ele andou ao todo?");
 				break;
 			case 2:
 				addParagrafo("A turma coletou \\(" + a + "\\) tampinhas de garrafa na primeira semana e \\(" + b + "\\) na segunda semana. Quantas tampinhas foram coletadas no total?");
@@ -27,7 +28,7 @@ public class Contextualizada extends GeradorExercicio
 				addParagrafo("Uma fazenda colheu \\(" + a + "\\) laranjas pela manhã e \\(" + b + "\\) laranjas à tarde. Quantas laranjas foram colhidas no total?");
 				break;
 			default:
-				addParagrafo("Numa competição, Carlos obteve \\(" + a + "\\) pontos na primeira prova e \\(" + b + "\\) pontos na segunda prova. Quantos pontos ele acumulou no total?");
+				addParagrafo("Numa competição, " + Nomes.masculino(rand) + " obteve \\(" + a + "\\) pontos na primeira prova e \\(" + b + "\\) pontos na segunda prova. Quantos pontos ele acumulou no total?");
 				break;
 		}
 

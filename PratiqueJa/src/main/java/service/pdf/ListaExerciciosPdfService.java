@@ -7,7 +7,7 @@ import java.util.List;
 
 import bean.download.Diretorio;
 import dao.academico.AssuntoDAO;
-import dao.configuracao.ConfigLatexDAO;
+import dao.configuracao.ConfigDAO;
 import dao.exercicio.ExercicioPadraoDAO;
 import dao.pdf.ConfigExercicioDAO;
 import dao.pdf.PdfDAO;
@@ -16,7 +16,7 @@ import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import modelo.academico.Assunto;
-import modelo.configuracao.ConfigLatex;
+import modelo.configuracao.Config;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.pdf.ConfigExercicio;
@@ -50,7 +50,7 @@ public class ListaExerciciosPdfService
 	@Inject
 	private DiretorioService diretorioService;
 	@Inject
-	private ConfigLatexDAO configLatexDAO;
+	private ConfigDAO configDAO;
 	@Inject
 	private PdfDAO pdfDAO;
 
@@ -58,7 +58,7 @@ public class ListaExerciciosPdfService
 	 * Gera o PDF da lista de exercícios para um único assunto/nível.
 	 *
 	 * @throws ListaExerciciosPdfException se não houver exercício padrão ou
-	 *         ConfigLatex válida.
+	 *         Config válida.
 	 */
 	public Pdf gerar(Assunto assunto, Nivel nivel, VisibilidadePdf visibilidade, boolean comAlternativas)
 	throws IOException, InterruptedException
@@ -67,7 +67,7 @@ public class ListaExerciciosPdfService
 		if(padrao == null)
 			throw new ListaExerciciosPdfException("Não existe exercício padrão cadastrado para este assunto e nível.");
 
-		ConfigLatex config = configValido();
+		Config config = configValido();
 
 		Path outputPath = resolverOutputPath(config, assunto, nivel, comAlternativas, visibilidade);
 		Files.createDirectories(outputPath.getParent());
@@ -83,7 +83,7 @@ public class ListaExerciciosPdfService
 	 * Gera os PDFs de todos os assuntos para cada Config Exercício cadastrada.
 	 *
 	 * @throws ListaExerciciosPdfException se faltarem configs, assuntos ou
-	 *         ConfigLatex válida.
+	 *         Config válida.
 	 */
 	public ResultadoLote gerarTodos()
 	{
@@ -95,7 +95,7 @@ public class ListaExerciciosPdfService
 		if(assuntos.isEmpty())
 			throw new ListaExerciciosPdfException("Nenhum assunto habilitado.");
 
-		ConfigLatex config = configValido();
+		Config config = configValido();
 
 		int gerados = 0;
 		int ignorados = 0;
@@ -123,8 +123,10 @@ public class ListaExerciciosPdfService
 					salvarEntidade(padrao, assuntoAtual, cfg.getNivel(), cfg.getVisibilidade(), cfg.isComAlternativas(), outputPath);
 					gerados++;
 				}
-				catch(Exception e)
+				catch(Exception | LinkageError e)
 				{
+					// LinkageError (ex.: NoClassDefFoundError de um gerador ausente no deploy) é Error,
+					// não Exception: sem isto, um único gerador quebrado abortaria o lote inteiro.
 					e.printStackTrace();
 					erros++;
 				}
@@ -134,15 +136,15 @@ public class ListaExerciciosPdfService
 		return new ResultadoLote(gerados, ignorados, erros);
 	}
 
-	private ConfigLatex configValido()
+	private Config configValido()
 	{
-		ConfigLatex config = configLatexDAO.buscar();
+		Config config = configDAO.buscar();
 		if(config == null || config.getEnderecoPdf() == null)
-			throw new ListaExerciciosPdfException("Endereço de PDF não configurado. Configure em ConfigLatex.", true);
+			throw new ListaExerciciosPdfException("Endereço de PDF não configurado. Configure em Config.", true);
 		return config;
 	}
 
-	private byte[] gerarBytes(ExercicioPadrao padrao, Assunto assunto, ConfigLatex config, String instrucao, boolean premium, boolean comAlternativas)
+	private byte[] gerarBytes(ExercicioPadrao padrao, Assunto assunto, Config config, String instrucao, boolean premium, boolean comAlternativas)
 	throws IOException, InterruptedException
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
@@ -160,7 +162,7 @@ public class ListaExerciciosPdfService
 		}
 	}
 
-	private Path resolverOutputPath(ConfigLatex config, Assunto assunto, Nivel nivel, boolean comAlternativas, VisibilidadePdf visibilidade)
+	private Path resolverOutputPath(Config config, Assunto assunto, Nivel nivel, boolean comAlternativas, VisibilidadePdf visibilidade)
 	{
 		String assuntoDir = assunto.getChave().toLowerCase();
 		String n = nivel.name().replace("Nivel", "");

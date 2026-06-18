@@ -74,7 +74,7 @@ public class DownloadEbookBean implements Serializable
 			{
 				byte[] bytes = construirEBook().toByteArray();
 				String nomeFile = modulo.getNome() + "_" + (edicaoBean.getEdicao().edicaoModulo(modulo) - 1);
-				File file = new File(ebookService.getDiretorio().getConfigLatex().getEnderecoEBook() + "/" + nomeFile + ".pdf");
+				File file = new File(ebookService.getDiretorio().getConfig().getEnderecoEBook() + "/" + nomeFile + ".pdf");
 				Files.copy(new ByteArrayInputStream(bytes), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				numEBookAtual++;
 			}
@@ -122,7 +122,7 @@ public class DownloadEbookBean implements Serializable
 					};
 					byte[] bytes = ebookService.construirListasExercicios(assunto, nivel, numListas, basePath, onProgress).toByteArray();
 					String nomeFile = (assunto.getOrdem() + 1) + "_" + assunto.getNome() + "_" + nivel.getNome();
-					File file = new File(ebookService.getDiretorio().getConfigLatex().getEnderecoEBook() + "/" + nomeFile + ".pdf");
+					File file = new File(ebookService.getDiretorio().getConfig().getEnderecoEBook() + "/" + nomeFile + ".pdf");
 					Files.copy(new ByteArrayInputStream(bytes), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				}
 			}

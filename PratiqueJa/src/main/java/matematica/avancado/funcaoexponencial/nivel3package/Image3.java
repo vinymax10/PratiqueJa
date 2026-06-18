@@ -25,15 +25,15 @@ public class Image3 extends GeradorExercicio
 
 		BufferedImage image = config.criarImagem();
 
-		addParagrafo("Qual dos pontos abaixo pertence obrigatoriamente ao gráfico de "
-			+ "\\(f(x) = " + base + "^x\\)?");
-		addParagrafoImagem(image);
-
 		String correta = "\\((0,\\, 1)\\)";
 		List<String> dist = new ArrayList<>();
 		dist.add("\\((1,\\, 0)\\)");
 		dist.add("\\((0,\\, 0)\\)");
 		dist.add("\\((1,\\, " + base + " \\cdot 2)\\)");
+
+		addParagrafo("Dentre os pontos " + listarOpcoes(correta, dist) + ", qual pertence obrigatoriamente ao gráfico de "
+			+ "\\(f(x) = " + base + "^x\\)?");
+		addParagrafoImagem(image);
 		embaralharEAdicionarAlternativas(correta, dist);
 
 		String res = "Toda função exponencial \\(f(x) = a^x\\) satisfaz \\(a^0 = 1\\). \\(\\\\\\)";

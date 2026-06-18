@@ -134,6 +134,32 @@ public abstract class GeradorExercicio
 		return "\\(" + valor + "\\)";
 	}
 
+	/**
+	 * Junta itens em texto "a, b, c e d" para enunciados de seleção
+	 * (ex.: "Qual dos números a, b, c e d é primo?"), de modo que o enunciado
+	 * seja autossuficiente — funcione discursivo ou com alternativas.
+	 */
+	protected String listar(List<String> itens)
+	{
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < itens.size(); i++)
+		{
+			if(i > 0)
+				sb.append(i == itens.size() - 1 ? " e " : ", ");
+			sb.append(itens.get(i));
+		}
+		return sb.toString();
+	}
+
+	/** Lista embaralhada de todos os candidatos (correta + distratores) para o enunciado. */
+	protected String listarOpcoes(String correta, List<String> distratores)
+	{
+		List<String> todas = new ArrayList<>(distratores);
+		todas.add(correta);
+		Collections.shuffle(todas, rand);
+		return listar(todas);
+	}
+
 	/** Overload para Racional: simplifica e delega para a versão String. */
 	protected void gerarAlternativas(Racional resultado)
 	{

@@ -36,13 +36,13 @@ public class ComparaSemCalcular extends GeradorExercicio
 		int a = opts[maxIdx][0], b = opts[maxIdx][1];
 		int maiorProduto = produtos[maxIdx];
 
-		addParagrafo("Sem calcular exatamente, qual das multiplicações abaixo resulta no maior produto?");
-
 		String correta = "\\(" + a + " \\times " + b + "\\)";
 		List<String> distrais = new ArrayList<>();
 		for (int i = 0; i < 4; i++)
 			if (i != maxIdx)
 				distrais.add("\\(" + opts[i][0] + " \\times " + opts[i][1] + "\\)");
+
+		addParagrafo("Sem calcular exatamente, qual das multiplicações " + listarOpcoes(correta, distrais) + " resulta no maior produto?");
 		embaralharEAdicionarAlternativas(correta, distrais);
 
 		String res = "Calculando cada produto: \\(\\\\\\)";

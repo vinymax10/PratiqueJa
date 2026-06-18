@@ -1,6 +1,7 @@
 package matematica.basico.subtracaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
+import matematica.Nomes;
 
 public class TresEtapas extends GeradorExercicio
 {
@@ -20,7 +21,7 @@ public class TresEtapas extends GeradorExercicio
 				addParagrafo("Uma caixa tinha \\(" + a + "\\) chocolates. Foram dados \\(" + b + "\\) para a turma A e \\(" + c + "\\) para a turma B. Quantos chocolates restaram?");
 				break;
 			case 1:
-				addParagrafo("João tinha \\(" + a + "\\) reais. Gastou \\(" + b + "\\) reais no mercado e \\(" + c + "\\) reais numa livraria. Quanto lhe sobrou?");
+				addParagrafo(Nomes.masculino(rand) + " tinha \\(" + a + "\\) reais. Gastou \\(" + b + "\\) reais no mercado e \\(" + c + "\\) reais numa livraria. Quanto lhe sobrou?");
 				break;
 			default:
 				addParagrafo("Uma fazenda tinha \\(" + a + "\\) animais. Foram vendidos \\(" + b + "\\) na feira de segunda e \\(" + c + "\\) na feira de quarta. Quantos animais restaram?");

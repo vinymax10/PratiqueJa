@@ -176,12 +176,12 @@ public class FolhaRosto
 	{
 //		 -synctex=1 -interaction=nonstopmode --shell-escape
 		ProcessBuilder pb; 
-		if(diretorioBean.getConfigLatex().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfigLatex().getNome())
+		if(diretorioBean.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
+			pb= new ProcessBuilder("sudo", "pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		else 
-			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfigLatex().getNome())
+			pb = new ProcessBuilder("pdflatex", diretorioBean.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorioBean.getEndereco()));
 		

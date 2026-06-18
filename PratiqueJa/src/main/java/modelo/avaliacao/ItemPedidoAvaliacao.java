@@ -17,10 +17,11 @@ import lombok.ToString;
 import modelo.Entidade;
 import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
+import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "pedidoAvaliacao", "assunto" })
+@ToString(exclude = { "pedidoAvaliacao", "assunto", "exercicioPadrao" })
 @Data
 @Entity
 public class ItemPedidoAvaliacao implements Serializable, Entidade
@@ -40,6 +41,10 @@ public class ItemPedidoAvaliacao implements Serializable, Entidade
 	@ManyToOne
 	@AuditLabel(value = "assunto")
 	private Assunto assunto;
+
+	@DiffIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	private ExercicioPadrao exercicioPadrao;
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "nível")
