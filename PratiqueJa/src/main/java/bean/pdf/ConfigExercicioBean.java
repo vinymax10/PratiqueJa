@@ -25,8 +25,8 @@ public class ConfigExercicioBean extends PaiBean<ConfigExercicio, ConfigExercici
 	{
 		super(ConfigExercicio.class, "Config Exercício");
 
-		urlCadastro = "/administracao/conteudo/pdf/config-exercicio/form.xhtml";
-		urlLista    = "/administracao/conteudo/pdf/config-exercicio/list.xhtml";
+		urlCadastro = "/administracao/conteudo/pdf/exercicio/config-exercicio/form.xhtml";
+		urlLista    = "/administracao/conteudo/pdf/exercicio/config-exercicio/list.xhtml";
 	}
 
 	public void filtrar()

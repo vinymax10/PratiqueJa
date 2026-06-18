@@ -5,7 +5,7 @@ import java.util.List;
 
 import matematica.GeradorExercicio;
 import matematica.Nomes;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 // Base com helpers de exercício para divisão de naturais (Fase 2).
 public abstract class AgrupadorDivisao extends GeradorExercicio

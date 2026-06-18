@@ -30,10 +30,13 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(r);
 
+		String dxStr = dx < 0 ? "(" + dx + ")" : Integer.toString(dx);
+		String dyStr = dy < 0 ? "(" + dy + ")" : Integer.toString(dy);
+
 		String res = "O raio é a distância \\(d(C, P)\\):"
 				+ "\\(\\\\\\)"
 				+ "\\(r = \\sqrt{(" + px + " - " + cx + ")^2 + (" + py + " - " + cy + ")^2}"
-				+ " = \\sqrt{" + dx + "^2 + " + dy + "^2}"
+				+ " = \\sqrt{" + dxStr + "^2 + " + dyStr + "^2}"
 				+ " = \\\\ \\sqrt{" + dx2 + " + " + dy2 + "}"
 				+ " = \\sqrt{" + soma + "} = \\mathbf{" + r + "}\\)";
 		setResolucao(res);

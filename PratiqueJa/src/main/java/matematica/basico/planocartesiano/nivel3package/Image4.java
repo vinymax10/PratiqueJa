@@ -49,7 +49,8 @@ public class Image4 extends GeradorExercicio
 			res += "\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\). \\(\\\\\\)";
 		}
 
-		addParagrafo("O ponto P está indicado no plano. Qual é o ponto simétrico de P em relação ao " + nomeRef + "?");
+		String preposicao = nomeRef.equals("origem") ? "à" : "ao";
+		addParagrafo("O ponto P está indicado no plano. Qual é o ponto simétrico de P em relação " + preposicao + " " + nomeRef + "?");
 		addParagrafoImagem(image);
 
 		String correta = par(rx, ry);

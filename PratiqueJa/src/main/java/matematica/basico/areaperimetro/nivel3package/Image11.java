@@ -28,7 +28,7 @@ public class Image11 extends GeradorExercicio
 		ConfigLozango config = new ConfigLozango(D + "", "d", "", "", "", true);
 		BufferedImage image = config.criarImagem();
 
-		addParagrafo("Se a área do lozango é \\(" + area + "\\), qual o valor de \\(d\\)?");
+		addParagrafo("Se a área do losango é \\(" + area + "\\), qual o valor de \\(d\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

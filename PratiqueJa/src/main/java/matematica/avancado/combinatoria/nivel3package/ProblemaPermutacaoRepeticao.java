@@ -96,10 +96,10 @@ public class ProblemaPermutacaoRepeticao
             contador.put(c, contador.getOrDefault(c, 0) + 1);
 
         int dFinal=1;
-        for (Map.Entry<Character, Integer> entry : contador.entrySet()) 
+        for (Map.Entry<Character, Integer> entry : contador.entrySet())
         {
-            if (entry.getValue() > 1) 
-            	dFinal*=entry.getValue();
+            if (entry.getValue() > 1)
+            	dFinal*=Algebra.fatorial(entry.getValue());
         }
         Racional resultado=new Racional(Algebra.fatorial(n),dFinal);
         resultado.fatoracao(2);

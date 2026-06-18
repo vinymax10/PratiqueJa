@@ -43,7 +43,7 @@ public class GerarListaExerciciosBean implements Serializable
 		{
 			listaExerciciosPdfService.gerar(assunto, nivel, visibilidade, comAlternativas);
 			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "PDF gerado com sucesso.");
-			Navegacao.redirect("/administracao/conteudo/pdf/list.xhtml");
+			Navegacao.redirect("/administracao/conteudo/pdf/exercicio/list.xhtml");
 		}
 		catch(ListaExerciciosPdfException e)
 		{

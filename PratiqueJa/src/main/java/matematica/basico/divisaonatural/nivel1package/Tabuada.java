@@ -18,7 +18,7 @@ public class Tabuada extends GeradorExercicio
 				addParagrafo("Sabendo que \\(" + b + " \\times " + q + " = " + a + "\\), qual é o valor de \\(" + a + " \\div " + b + "\\)?");
 				break;
 			case 1:
-				addParagrafo("A multiplicação \\(" + q + " \\times " + b + " = " + a + "\\) implica que \\(" + a + " \\div " + q + " =\\) ?");
+				addParagrafo("A multiplicação \\(" + q + " \\times " + b + " = " + a + "\\) implica que \\(" + a + " \\div " + b + " =\\) ?");
 				break;
 			case 2:
 				addParagrafo("Se \\(" + b + "\\) grupos de \\(" + q + "\\) itens formam \\(" + a + "\\) itens no total, quantos itens há em cada grupo se dividirmos \\(" + a + "\\) em \\(" + b + "\\) partes?");

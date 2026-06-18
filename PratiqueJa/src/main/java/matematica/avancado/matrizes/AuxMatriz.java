@@ -167,17 +167,18 @@ public class AuxMatriz
 		return somaRacional;
 	}
 	
-	public static String parcialMult(int [][] a, int [][] b, int posI, int posJ) 
+	public static String parcialMult(int [][] a, int [][] b, int posI, int posJ)
 	{
 		String str="c_{"+(posI+1)+","+(posJ+1)+"}=";
 		int size=a.length;
 		int resultado=0;
 		for(int i = 0; i < size; i++)
 		{
+			String aStr = (i>0 && a[posI][i]<0) ? "("+a[posI][i]+")" : ""+a[posI][i];
 			if(b[i][posJ]<0)
-				str+=a[posI][i]+" \\cdot ("+b[i][posJ]+")";
+				str+=aStr+" \\cdot ("+b[i][posJ]+")";
 			else
-				str+=a[posI][i]+" \\cdot "+b[i][posJ];
+				str+=aStr+" \\cdot "+b[i][posJ];
 
 			resultado+=a[posI][i]*b[i][posJ];
 			if(i<(size-1))

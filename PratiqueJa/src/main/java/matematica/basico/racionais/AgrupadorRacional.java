@@ -15,7 +15,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 	{
 		int a = 1 + rand.nextInt(maxNum), b = 2 + rand.nextInt(maxDen - 1);
 		int c = 1 + rand.nextInt(maxNum), d = 2 + rand.nextInt(maxDen - 1);
-		String resol = ResolucaoRacionais.simplesSoma(new Racional(a, b), new Racional(c, d));
+		String resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, true);
 		Racional res = new Racional(a, b).add(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");
@@ -33,7 +33,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 			c = 1 + rand.nextInt(maxNum); d = 2 + rand.nextInt(maxDen - 1);
 		}
 		while(a * d - c * b <= 0); // garante resultado positivo
-		String resol = ResolucaoRacionais.simplesMenos(new Racional(a, b), new Racional(c, d));
+		String resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, false);
 		Racional res = new Racional(a, b).minus(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");

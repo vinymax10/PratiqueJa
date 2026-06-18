@@ -53,7 +53,7 @@ public class Expressao7 extends GeradorExercicio
 		if(b == 0)
 			res += "\\(\\Delta=0^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
 		else
-			res += "\\(\\Delta=" + b + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
+			res += "\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
 		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + delta + "}\\)" + "\\(\\\\\\)";
 
 		if(delta > 0)

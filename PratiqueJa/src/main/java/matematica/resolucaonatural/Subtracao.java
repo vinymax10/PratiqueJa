@@ -1,4 +1,4 @@
-package matematica.basico.resolucaonatural;
+package matematica.resolucaonatural;
 
 import matematica.DefinicaoCores;
 import pdfAntigo.util.Convert;

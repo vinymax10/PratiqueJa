@@ -14,7 +14,7 @@ public class Expressao11 extends GeradorExercicio
 		Racional[] coeficientes = new Racional[size];
 		String op1 = Algebra.sinalMenosDiv();
 		String op2 = Algebra.sinalPlusMinus();
-		String op3 = Algebra.sinal();
+		String op3 = Algebra.sinalMenosDiv();
 		String op4 = Algebra.sinalPlusMinus();
 		String exp = "A " + op1 + " ( B " + op2 + " C ) " + op3 + " ( D " + op4 + " E )";
 		for(int i = 0; i < size; i++)

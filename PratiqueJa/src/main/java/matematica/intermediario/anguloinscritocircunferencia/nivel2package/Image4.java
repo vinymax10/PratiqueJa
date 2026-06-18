@@ -16,7 +16,7 @@ public class Image4 extends GeradorExercicio
 
 		String strA = a + "°";
 
-		String resultadoCorreto = "" + x + "°";
+		String resultadoCorreto = "" + (180 - 2 * a) + "°";
 
 		MyExpression expressao = new MyExpression("2*" + a + "+x=180");
 		String resolucao = expressao.resolverLatex();

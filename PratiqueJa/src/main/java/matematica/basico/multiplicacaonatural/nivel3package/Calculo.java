@@ -1,7 +1,7 @@
 package matematica.basico.multiplicacaonatural.nivel3package;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 public class Calculo extends GeradorExercicio
 {

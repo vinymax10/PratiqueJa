@@ -23,6 +23,11 @@ public class ResolucaoEq2Grau
 		return ParCor.formula("Y_v=\\dfrac{-\\Delta}{4a}, \\quad \\Delta = b^2-4ac")+"\\\\";
 	}
 
+	private static String bSq(int b)
+	{
+		return (b < 0 ? "(" + b + ")" : "" + b) + "^2";
+	}
+
 	public static String resolucao(int a, int b, int c, int x)
 	{
 		String resolucaoLatex = "";
@@ -80,7 +85,7 @@ public class ResolucaoEq2Grau
 		String resolucaoLatex = formulaYv();
 		resolucaoLatex += "b=" + b + ",~c=" + c + "\\\\";
 
-		resolucaoLatex += yv.showDfrac() + "=\\dfrac{-(" + b + "^2 -4 \\cdot a \\cdot " + c + ") }{4a}";
+		resolucaoLatex += yv.showDfrac() + "=\\dfrac{-(" + bSq(b) + " -4 \\cdot a \\cdot " + c + ") }{4a}";
 		resolucaoLatex += "=\\dfrac{-(" + (b * b) + " " + Auxiliar.getNumber((-4 * c), "a", false) + ") }{4a}\\\\";
 
 		MyExpression expressao = new MyExpression(
@@ -96,7 +101,7 @@ public class ResolucaoEq2Grau
 		resolucaoLatex += "a=" + a + ",~b=" + b + "\\\\";
 
 		resolucaoLatex += "y_v=\\dfrac{-(b^2-4ac)}{4a}\\\\";
-		resolucaoLatex += yv.showDfrac() + "=\\dfrac{-(" + b + "^2 -4 \\cdot " + a + " \\cdot c) }{4 \\cdot " + a
+		resolucaoLatex += yv.showDfrac() + "=\\dfrac{-(" + bSq(b) + " -4 \\cdot " + a + " \\cdot c) }{4 \\cdot " + a
 		+ "}";
 		resolucaoLatex += "=\\dfrac{-(" + (b * b) + " " + Auxiliar.getNumber((-4 * a), "c", false) + ") }{" + (4 * a)
 		+ "}\\\\";
@@ -155,7 +160,7 @@ public class ResolucaoEq2Grau
 		int delta = (int) (b * b) + (-4 * a * c);
 		int raiz = (int) Math.sqrt(delta);
 
-		resolucaoLatex += "\\Delta=" + b + "^2-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
+		resolucaoLatex += "\\Delta=" + bSq(b) + "-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
 		+ Auxiliar.getNumber((-4 * a * c), "", false) + "=" + ((b * b) + (-4 * a * c)) + "\\\\";
 
 		if(b < 0)
@@ -182,7 +187,7 @@ public class ResolucaoEq2Grau
 		int delta = (int) (b * b) + (-4 * a * c);
 		int raiz = (int) Math.sqrt(delta);
 
-		resolucaoLatex += "\\Delta=" + b + "^2-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
+		resolucaoLatex += "\\Delta=" + bSq(b) + "-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
 		+ Auxiliar.getNumber((-4 * a * c), "", false) + "=" + ((b * b) + (-4 * a * c)) + "\\\\";
 
 		if(b < 0)
@@ -228,7 +233,7 @@ public class ResolucaoEq2Grau
 		resolucaoLatex = formulaYv();
 		resolucaoLatex += "a=" + a + ",~b=" + b + ",~c=" + c + "\\\\";
 		int delta = (int) (b * b) + (-4 * a * c);
-		resolucaoLatex += "\\Delta=" + b + "^2-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
+		resolucaoLatex += "\\Delta=" + bSq(b) + "-4 \\cdot " + a + " \\cdot " + c + "\\\\" + " \\Delta= " + (b * b)
 		+ Auxiliar.getNumber((-4 * a * c), "", false) + "=" + ((b * b) + (-4 * a * c)) + "\\\\";
 
 		resolucaoLatex += "Y_v=\\dfrac{" + (-delta) + "}{4 \\cdot " + a + "}";

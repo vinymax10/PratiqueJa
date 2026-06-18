@@ -1,7 +1,7 @@
 package matematica.basico.multiplicacaodivisaointeiro;
 
 import matematica.DefinicaoCores;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 public class ResolucaoMDInteiro
 {

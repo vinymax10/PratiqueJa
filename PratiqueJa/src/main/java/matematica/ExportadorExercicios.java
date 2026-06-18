@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 import modelo.matematica.AlternativaExercicio;
@@ -42,7 +43,7 @@ public class ExportadorExercicios
 
 	// Padrões usados quando o main roda sem argumentos (edite à vontade):
 	private static final String ASSUNTO_PADRAO = "adicaonatural";
-	private static final int QTD_POR_NIVEL_PADRAO = 20;
+	private static final int QTD_POR_NIVEL_PADRAO = 30;
 
 	private static final String[] TIERS = { "basico", "intermediario", "avancado" };
 
@@ -51,12 +52,28 @@ public class ExportadorExercicios
 		String alvo = args.length > 0 ? args[0] : ASSUNTO_PADRAO;
 		int qtdPorNivel = args.length > 1 ? Integer.parseInt(args[1]) : QTD_POR_NIVEL_PADRAO;
 
+		if("todos".equalsIgnoreCase(alvo) || "all".equalsIgnoreCase(alvo))
+		{
+			List<String> assuntos = listarTodosAssuntos();
+			System.out.println("Exportando " + assuntos.size() + " assuntos (" + qtdPorNivel + " exercícios/nível)...\n");
+			int totalGeral = 0;
+			for(String a : assuntos)
+				totalGeral += exportar(a, qtdPorNivel);
+			System.out.println("\n=== Concluído: " + totalGeral + " exercícios gerados no total. ===");
+			return;
+		}
+
+		exportar(alvo, qtdPorNivel);
+	}
+
+	private static int exportar(String alvo, int qtdPorNivel) throws Exception
+	{
 		String pacote = alvo.contains(".") ? alvo : resolverPacote(alvo);
 		if(pacote == null)
 		{
 			System.err.println("Assunto não encontrado: '" + alvo + "'. "
 				+ "Informe o nome da pasta do assunto ou o pacote completo.");
-			return;
+			return 0;
 		}
 
 		String assunto = pacote.substring(pacote.lastIndexOf('.') + 1);
@@ -64,7 +81,7 @@ public class ExportadorExercicios
 		if(prefixo == null)
 		{
 			System.err.println("Não foi possível descobrir o dispatcher (classe *Nivel1) em: " + pacote);
-			return;
+			return 0;
 		}
 
 		Path pasta = Paths.get(PASTA_SAIDA);
@@ -72,7 +89,7 @@ public class ExportadorExercicios
 		Path arquivo = pasta.resolve(assunto + ".txt");
 
 		int total = 0;
-		try(PrintWriter writer = new PrintWriter(Files.newBufferedWriter(arquivo, StandardCharsets.UTF_8)))
+		try(PrintWriter writer = new PrintWriter(Files.newBufferedWriter(arquivo, StandardCharsets.UTF_8), true))
 		{
 			writer.println(linha("nivel", "enunciado", "resposta", "resolucao"));
 
@@ -102,7 +119,7 @@ public class ExportadorExercicios
 						writer.println(linhaExercicio(nivel, exercicio));
 						gerados++;
 					}
-					catch(RuntimeException | ReflectiveOperationException falha)
+					catch(Throwable falha)
 					{
 						System.out.println("Falha ao gerar exercício de " + nomeClasse + ": " + falha);
 					}
@@ -112,7 +129,38 @@ public class ExportadorExercicios
 			}
 		}
 
-		System.out.println("\nOK: " + total + " exercícios de '" + assunto + "' gravados em:\n" + arquivo);
+		System.out.println("OK: " + total + " exercícios de '" + assunto + "' → " + arquivo);
+		return total;
+	}
+
+	/** Lista todos os assuntos disponíveis varrendo os três tiers. */
+	private static List<String> listarTodosAssuntos()
+	{
+		List<String> assuntos = new java.util.ArrayList<>();
+		for(String tier : TIERS)
+		{
+			String pacoteTier = "matematica." + tier;
+			String relativo = pacoteTier.replace('.', File.separatorChar);
+
+			for(Path base : new Path[]{ Paths.get("target", "classes", relativo),
+			                            Paths.get("src", "main", "java", relativo) })
+			{
+				if(!Files.isDirectory(base))
+					continue;
+				try(Stream<Path> dirs = Files.list(base))
+				{
+					dirs.filter(Files::isDirectory)
+					    .map(p -> p.getFileName().toString())
+					    .filter(nome -> !assuntos.contains(nome))
+					    .sorted()
+					    .forEach(assuntos::add);	
+				}
+				catch(IOException ignored) {}
+				break;
+			}
+		}
+		assuntos.sort(String::compareTo);
+		return assuntos;
 	}
 
 	/** Procura o pacote do assunto nos três tiers (via classes compiladas ou fonte). */

@@ -127,7 +127,7 @@ public class TextoRegraTresSimples
 	"Kg","Refeições","",TipoProporcao.ABXC,1,5),
 	new ProblemaRegraTres(
 	"Se uma caminhonete transporta $a toneladas de carga em $b viagens, quantas toneladas ela transportaria em $c viagens?",
-	"Toneladas","Viagens","",TipoProporcao.ABCX,1,3),
+	"Toneladas","Viagens","",TipoProporcao.ABXC,1,3),
 	new ProblemaRegraTres(
 	"Se $a metros de tecido são suficientes para fazer $b cortinas, quantos metros de tecido são necessários para fazer $c cortinas?",
 	"Metros","Cortinas","",TipoProporcao.ABXC,10,1),

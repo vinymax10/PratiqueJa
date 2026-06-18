@@ -36,7 +36,8 @@ public class Expressao15 extends GeradorExercicio
 			rx = -a; ry = -b;
 		}
 
-		addParagrafo("Qual é o ponto simétrico de \\( P(" + a + ",\\;" + b + ") \\) em relação ao " + nomeRef + "?");
+		String preposicao = nomeRef.equals("origem") ? "à" : "ao";
+		addParagrafo("Qual é o ponto simétrico de \\( P(" + a + ",\\;" + b + ") \\) em relação " + preposicao + " " + nomeRef + "?");
 
 		List<String> alts = new ArrayList<>();
 		alts.add(par(a, b));

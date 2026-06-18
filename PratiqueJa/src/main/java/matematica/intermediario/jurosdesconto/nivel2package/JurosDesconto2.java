@@ -35,7 +35,7 @@ public class JurosDesconto2 extends GeradorExercicio
 		{
 			case 0:
 				addParagrafo("Um título de R$ " + n + ",00 é descontado racionalmente à taxa de "
-						+ i.porcentagem() + "% ao mês por " + t + " meses. Qual é o valor atual?");
+						+ i.porcentagem() + "% ao mês por " + t + (t.toString().equals("1") ? " mês" : " meses") + ". Qual é o valor atual?");
 				gerarAlternativas(a.toString());
 				resolucao += "N=" + n + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "A=\\dfrac{" + n + "}{1+" + i.showDfrac() + " \\cdot " + t + "}\\\\";
@@ -45,7 +45,7 @@ public class JurosDesconto2 extends GeradorExercicio
 
 			case 1:
 				addParagrafo("O valor atual de um título é R$ " + a + ",00 após desconto racional de "
-						+ i.porcentagem() + "% ao mês por " + t + " meses. Qual é o valor nominal?");
+						+ i.porcentagem() + "% ao mês por " + t + (t.toString().equals("1") ? " mês" : " meses") + ". Qual é o valor nominal?");
 				gerarAlternativas(n.toString());
 				resolucao += "A=" + a + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "N=A \\cdot (1+i \\cdot t)\\\\";
@@ -55,7 +55,7 @@ public class JurosDesconto2 extends GeradorExercicio
 
 			default:
 				addParagrafo("Um título de R$ " + n + ",00 é descontado racionalmente à taxa de "
-						+ i.porcentagem() + "% ao mês por " + t + " meses. Qual é o valor do desconto?");
+						+ i.porcentagem() + "% ao mês por " + t + (t.toString().equals("1") ? " mês" : " meses") + ". Qual é o valor do desconto?");
 				gerarAlternativas(d.toString());
 				resolucao += "N=" + n + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "A=\\dfrac{" + n + "}{" + denominador.showDfrac() + "}=" + a.showDfrac() + "\\\\";

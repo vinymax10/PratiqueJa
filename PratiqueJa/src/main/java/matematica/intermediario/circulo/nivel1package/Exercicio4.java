@@ -42,11 +42,13 @@ public class Exercicio4 extends GeradorExercicio
 			k = 2 * m * m;
 		}
 
+		String kPi = k == 1 ? "\\pi" : k + "\\pi";
+
 		String res = "\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)";
 		res += "\\(\\\\\\)";
 		res += "\\(A_s = \\dfrac{" + theta + "}{360} \\cdot \\pi \\cdot " + r + "^2 \\\\ ";
 		res += "A_s = \\dfrac{" + theta + " \\cdot " + (r * r) + "}{360}\\pi \\\\ ";
-		res += "A_s = \\dfrac{" + (theta * r * r) + "}{360}\\pi = \\mathbf{" + k + "}\\pi\\)";
+		res += "A_s = \\dfrac{" + (theta * r * r) + "}{360}\\pi = \\mathbf{" + kPi + "}\\)";
 
 		ConfigSetor config = new ConfigSetor("" + r, theta);
 		BufferedImage image = config.criarImagem();
@@ -73,6 +75,7 @@ public class Exercicio4 extends GeradorExercicio
 				distr.add("\\(" + cand + "\\pi\\)");
 			}
 		}
-		embaralharEAdicionarAlternativas("\\(" + k + "\\pi\\)", distr);
+		String correta = k == 1 ? "\\(\\pi\\)" : "\\(" + k + "\\pi\\)";
+		embaralharEAdicionarAlternativas(correta, distr);
 	}
 }

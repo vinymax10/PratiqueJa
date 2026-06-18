@@ -24,7 +24,7 @@ public class Image31 extends GeradorExercicio
 		ConfigLozango config = new ConfigLozango("", "", "", "", "l", false);
 		BufferedImage image = config.criarImagem();
 
-		addParagrafo("Se o perímetro do lozango é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
+		addParagrafo("Se o perímetro do losango é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		setResolucao("\\(" + resolucao + "\\)");

@@ -18,8 +18,7 @@ public class Image18 extends GeradorExercicio
 
 		String perimetro = "" + (b + a + c);
 
-		// NOTA: bug do original — pergunta pede "c" mas resultadoCorreto = b (preservado fielmente)
-		String resultadoCorreto = "" + b;
+		String resultadoCorreto = "" + c;
 
 		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTriangulo() + "\\\\";
 		resolucao += "a=" + a + ",\\quad b=" + b + "\\\\";

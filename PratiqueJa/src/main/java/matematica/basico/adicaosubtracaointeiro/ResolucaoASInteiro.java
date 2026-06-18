@@ -1,7 +1,7 @@
 package matematica.basico.adicaosubtracaointeiro;
 
 import matematica.DefinicaoCores;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 public class ResolucaoASInteiro
 {

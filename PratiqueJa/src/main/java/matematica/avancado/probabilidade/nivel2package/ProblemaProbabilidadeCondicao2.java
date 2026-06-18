@@ -114,11 +114,11 @@ public class ProblemaProbabilidadeCondicao2
 		switch(tipoProbabilidade)
 		{
 			case AB:
-				x=new Racional(i,b);
-				break;
-				
-			case BA:
 				x=new Racional(i,a);
+				break;
+
+			case BA:
+				x=new Racional(i,b);
 				break;
 		}
 		

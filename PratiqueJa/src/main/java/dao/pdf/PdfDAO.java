@@ -12,6 +12,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import modelo.academico.Assunto;
 import modelo.pdf.Pdf;
+import modelo.pdf.TipoPdf;
 import modelo.pdf.VisibilidadePdf;
 
 public class PdfDAO extends DAO<Pdf>
@@ -36,6 +37,9 @@ public class PdfDAO extends DAO<Pdf>
 
 		if (filtro.getVisibilidade() != null)
 			predicates.add(builder.equal(from.<VisibilidadePdf>get("visibilidade"), filtro.getVisibilidade()));
+
+		if (filtro.getTipo() != null)
+			predicates.add(builder.equal(from.<TipoPdf>get("tipo"), filtro.getTipo()));
 
 		if (filtro.getDescricao() != null && !filtro.getDescricao().isBlank())
 			predicates.add(builder.like(from.<String>get("descricao"), "%" + filtro.getDescricao() + "%"));

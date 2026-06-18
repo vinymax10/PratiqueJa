@@ -19,6 +19,8 @@ public class Expressao6 extends GeradorExercicio
 		String resSubst;
 		String resCalc;
 
+		String pStr = p == 1 ? "" : p + "";
+		String qStr = q == 1 ? "" : q + "";
 		if(comQuadrado)
 		{
 			// E(a, b) = p·a² + q·b
@@ -26,7 +28,7 @@ public class Expressao6 extends GeradorExercicio
 			int pva2   = p * va2;
 			int qvb    = q * vb;
 			resultado  = pva2 + qvb;
-			exprLatex  = p + "a^2 + " + q + "b";
+			exprLatex  = pStr + "a^2 + " + qStr + "b";
 			resSubst   = p + " \\cdot " + va + "^{2} + " + q + " \\cdot " + vb;
 			resCalc    = p + " \\cdot " + va2 + " + " + qvb;
 		}
@@ -38,7 +40,7 @@ public class Expressao6 extends GeradorExercicio
 			int qvb = q * vb;
 			resultado = pva + qvb + r;
 			String rPart = r > 0 ? " + " + r : r < 0 ? " - " + Math.abs(r) : "";
-			exprLatex  = p + "a + " + q + "b" + rPart;
+			exprLatex  = pStr + "a + " + qStr + "b" + rPart;
 			resSubst   = p + " \\cdot " + va + " + " + q + " \\cdot " + vb + rPart;
 			resCalc    = pva + " + " + qvb + rPart;
 		}

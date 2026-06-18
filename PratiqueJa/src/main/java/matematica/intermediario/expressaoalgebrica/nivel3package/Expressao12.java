@@ -33,7 +33,9 @@ public class Expressao12 extends GeradorExercicio
 		gerarAlternativasInteiras(resposta);
 
 		// passo intermediário: todos os termos expandidos
-		String inter = a1 + var + " + " + a2 + var;
+		String a1Str = a1 == 1 ? "" : a1 + "";
+		String a2Str = a2 == 1 ? "" : a2 + "";
+		String inter = a1Str + var + " + " + a2Str + var;
 		if(b1 > 0) inter += " + " + b1;
 		else if(b1 < 0) inter += " - " + Math.abs(b1);
 		if(b2 > 0) inter += " + " + b2;

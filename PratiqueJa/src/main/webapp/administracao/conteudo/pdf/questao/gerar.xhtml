@@ -6,18 +6,18 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="Gerar Lista PDF" />
+		<h:outputText class="linkPage" value="Gerar Lista de Questões PDF" />
 	</ui:define>
 
 	<h:form id="form" class="form">
 
-		<h4 class="title-divisor">Gerar Lista de Exercícios em PDF</h4>
+		<h4 class="title-divisor">Gerar Lista de Questões em PDF</h4>
 
 		<div class="ui-fluid gride">
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
 				<p:outputLabel for="@next" value="Assunto" />
-				<p:selectOneMenu value="#{gerarListaExerciciosBean.assunto}"
+				<p:selectOneMenu value="#{gerarListaQuestoesBean.assunto}"
 				converter="generic" filter="true" filterMatchMode="contains"
 				required="true" requiredMessage="O assunto é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
@@ -28,19 +28,17 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
-				<p:outputLabel for="@next" value="Nível" />
-				<p:selectOneMenu value="#{gerarListaExerciciosBean.nivel}"
-				required="true" requiredMessage="O nível é obrigatório">
-					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
-					<f:selectItems value="#{nivelBean.opcoes}"
+				<p:outputLabel for="@next" value="Dificuldade" />
+				<p:selectOneMenu value="#{gerarListaQuestoesBean.dificuldade}">
+					<f:selectItem itemLabel="Todas" itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{dificuldadeBean.opcoes}"
 					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
 				</p:selectOneMenu>
-				<p:message for="@previous" display="text" />
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Visibilidade" />
-				<p:selectOneMenu value="#{gerarListaExerciciosBean.visibilidade}"
+				<p:selectOneMenu value="#{gerarListaQuestoesBean.visibilidade}"
 				required="true" requiredMessage="A visibilidade é obrigatória">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{visibilidadePdfBean.opcoes}"
@@ -49,11 +47,16 @@
 				<p:message for="@previous" display="text" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-3">
-				<p:outputLabel for="@next" value="Com Alternativas" />
-				<p:toggleSwitch class="toggleSwitch-form" 
-				value="#{gerarListaExerciciosBean.comAlternativas}" />
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-6">
+				<p:outputLabel for="@next" value="Gabarito" />
+				<p:selectOneMenu value="#{gerarListaQuestoesBean.tipoGabarito}"
+				required="true" requiredMessage="O tipo de gabarito é obrigatório">
+					<f:selectItems value="#{tipoGabaritoBean.opcoes}"
+					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text" />
 			</h:panelGroup>
+
 		</div>
 
 		<div class="content-button">
@@ -64,21 +67,21 @@
 
 				<p:button value="Voltar"
 				styleClass="ui-button-outlined"
-				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/list.xhtml" />
+				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/questao/list.xhtml" />
 
 				<p:commandButton value="Gerar Todos"
 					styleClass="ui-button-raised ui-button-secondary"
 					icon="pi pi-sync"
-					action="#{gerarListaExerciciosBean.gerarTodos()}" update=":growl"
+					action="#{gerarListaQuestoesBean.gerarTodos()}" update=":growl"
 					process="@this">
 					<p:confirm header="Confirmação" icon="pi pi-info-circle"
-					message="Gerar PDFs para todos os assuntos e configs pode demorar vários minutos. Deseja continuar?" />
+					message="Gerar PDFs para todos os assuntos pode demorar vários minutos. Deseja continuar?" />
 				</p:commandButton>
 
 				<p:commandButton id="gerarBtn" value="Gerar"
 					styleClass="ui-button-raised ui-button-primary"
 					icon="pi pi-file-pdf"
-					action="#{gerarListaExerciciosBean.gerar()}" update="@form, :growl"
+					action="#{gerarListaQuestoesBean.gerar()}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="gerarBtn" />
 				</p:commandButton>

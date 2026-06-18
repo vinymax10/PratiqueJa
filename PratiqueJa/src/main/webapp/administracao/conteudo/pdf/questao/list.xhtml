@@ -6,11 +6,11 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="#{pdfBean.nome}" />
+		<h:outputText class="linkPage" value="#{pdfQuestaoBean.nome}" />
 	</ui:define>
 
 	<f:metadata>
-		<f:viewAction action="#{pdfBean.filtrar()}" />
+		<f:viewAction action="#{pdfQuestaoBean.filtrar()}" />
 	</f:metadata>
 
 	<h:form id="form" class="form">
@@ -22,9 +22,9 @@
 				<div class="w-full">
 					<span class="ui-input-icon-left" style="width:100%">
 						<i class="pi pi-search" />
-						<p:inputText id="globalFilter" value="#{pdfBean.filtro.descricao}"
+						<p:inputText id="globalFilter" value="#{pdfQuestaoBean.filtro.descricao}"
 						placeholder="Descrição" styleClass="w-full">
-							<p:ajax event="keyup" delay="500" update="tabela" listener="#{pdfBean.filtrar}" />
+							<p:ajax event="keyup" delay="500" update="tabela" listener="#{pdfQuestaoBean.filtrar}" />
 						</p:inputText>
 					</span>
 				</div>
@@ -39,13 +39,13 @@
 
 				<p:commandButton value="Remover Todos" icon="pi pi-trash"
 				styleClass="ui-button-danger ui-button-flat"
-				action="#{pdfBean.removerTodos}" update="@form, :growl"
+				action="#{pdfQuestaoBean.removerTodos}" update="@form, :growl"
 				process="@this">
 					<p:confirm header="Confirmação" icon="pi pi-info-circle"
 					message="Você tem certeza que deseja remover todos os PDFs listados?" />
 				</p:commandButton>
-				
-				
+
+
 				<ui:include src="/exportar/exportar.xhtml">
 					<ui:param name="id" value="form:tabela" />
 					<ui:param name="nome" value="PDFs" />
@@ -53,19 +53,19 @@
 
 				<p:button value="Adicionar" icon="pi pi-plus"
 				styleClass="ui-button-raised ui-button-success"
-				href="/administracao/conteudo/pdf/gerar.xhtml" />
+				href="/administracao/conteudo/pdf/questao/gerar.xhtml" />
 
 			</div>
 		</div>
 
-		<ui:include src="/administracao/conteudo/pdf/filtro.xhtml" />
+		<ui:include src="/administracao/conteudo/pdf/questao/filtro.xhtml" />
 
 		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
-			var="entidade" value="#{pdfBean.lista}" reflow="true"
-			selection="#{pdfBean.entidade}" selectionMode="single"
+			var="entidade" value="#{pdfQuestaoBean.lista}" reflow="true"
+			selection="#{pdfQuestaoBean.entidade}" selectionMode="single"
 			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">
 
-			<p:ajax event="rowSelect" update="@form" listener="#{pdfBean.onSelected}" resetValues="true" />
+			<p:ajax event="rowSelect" update="@form" listener="#{pdfQuestaoBean.onSelected}" resetValues="true" />
 
 			<p:column headerText="Assunto" responsivePriority="1" width="30%">
 				<h:outputText value="#{entidade.assunto.nome}" />
@@ -88,7 +88,7 @@
 					styleClass="ui-button-flat ui-button-plain"
 					title="Baixar PDF"
 					rendered="#{not empty entidade.caminho}">
-					<p:fileDownload value="#{pdfBean.download(entidade)}" />
+					<p:fileDownload value="#{pdfQuestaoBean.download(entidade)}" />
 				</p:commandButton>
 			</p:column>
 

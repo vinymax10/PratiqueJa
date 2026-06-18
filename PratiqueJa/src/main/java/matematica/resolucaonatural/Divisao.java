@@ -1,4 +1,4 @@
-package matematica.basico.resolucaonatural;
+package matematica.resolucaonatural;
 
 import java.util.ArrayList;
 import java.util.List;

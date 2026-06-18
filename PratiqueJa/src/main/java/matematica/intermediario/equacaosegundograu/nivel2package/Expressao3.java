@@ -26,7 +26,7 @@ public class Expressao3 extends GeradorExercicio
 
 		String res = "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
 		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + b + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
+		res += "\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
 		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + deltaCal + "}\\)";
 
 		addParagrafo("Calcule o discriminante \\(\\Delta\\)");

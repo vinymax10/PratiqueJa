@@ -21,7 +21,7 @@ public class Image6 extends GeradorExercicio
 		config.d.mostrar();
 		config.d.nome = "x";
 
-		String resultadoCorreto = "" + d + "°";
+		String resultadoCorreto = "" + e + "°";
 		String resolucao = resolucao(a, b, c, d, e);
 
 		BufferedImage image = config.criarImagem();

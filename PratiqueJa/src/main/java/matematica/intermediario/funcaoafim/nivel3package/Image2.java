@@ -33,15 +33,17 @@ public class Image2 extends GeradorExercicio
 		ConfigRetaReal config = new ConfigRetaReal(a, b, pontoAx, pontoAy, pontoBx, pontoBy);
 		BufferedImage image = config.criarImagem();
 
+		String aStr = aRacional.toStringLatex();
+		String aDisp = aStr.equals("1") ? "" : (aStr.equals("-1") ? "-" : aStr);
 		String resolucao = "";
 		resolucao += "O coeficiente linear  \\(b\\)  pode ser calculado por: \\(\\\\ \\)";
-		resolucao += "\\(y=" + aRacional.toStringLatex() + "x + b \\\\ \\)";
+		resolucao += "\\(y=" + aDisp + "x + b \\\\ \\)";
 		resolucao += "Considerando o ponto (" + pontoAx + "," + pontoAy + "),  temos: \\(\\\\ \\)";
 
 		MyExpression expressao = new MyExpression(pontoAy + " = " + aRacional.toString() + "*" + pontoAx + "+b");
 		resolucao += "\\("+expressao.resolverLatex()+"\\)";
 
-		addParagrafo("Encontre o valor de b:  \\( f(x)=" + aRacional.toStringLatex() + "x+b \\)");
+		addParagrafo("Encontre o valor de b:  \\( f(x)=" + aDisp + "x+b \\)");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + bRacional);
 		setResolucao(resolucao);

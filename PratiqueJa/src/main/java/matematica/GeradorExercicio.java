@@ -83,6 +83,9 @@ public abstract class GeradorExercicio
 	 */
 	protected void gerarAlternativasInteiras(int correto, int quantidade, boolean naoNegativos)
 	{
+		if(naoNegativos && correto < 0)
+			naoNegativos = false;
+
 		List<String> distratores = new ArrayList<>();
 		List<Integer> usados = new ArrayList<>();
 		usados.add(correto);

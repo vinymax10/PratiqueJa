@@ -48,7 +48,9 @@ public class Image12 extends GeradorExercicio
 		String res = "Do plano, lemos: \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\). \\(\\\\\\)";
 		res += "Aplicando a fórmula do ponto médio: \\(\\\\\\)";
 		res += "\\(M = \\left(\\dfrac{x_A + x_B}{2},\\;\\dfrac{y_A + y_B}{2}\\right)\\). \\(\\\\\\)";
-		res += "\\(M = \\left(\\dfrac{" + ax + " + " + bx + "}{2},\\;\\dfrac{" + ay + " + " + by + "}{2}\\right) =\\\\ ";
+		String bxStr = bx < 0 ? "(" + bx + ")" : "" + bx;
+		String byStr = by < 0 ? "(" + by + ")" : "" + by;
+		res += "\\(M = \\left(\\dfrac{" + ax + " + " + bxStr + "}{2},\\;\\dfrac{" + ay + " + " + byStr + "}{2}\\right) =\\\\ ";
 		res += "\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\)";
 
 		setResolucao(res);

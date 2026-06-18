@@ -1,7 +1,7 @@
 package matematica.basico.divisaonatural.nivel3package;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 public class ColunaDiv extends GeradorExercicio
 {

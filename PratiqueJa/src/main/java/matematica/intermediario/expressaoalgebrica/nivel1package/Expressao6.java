@@ -23,7 +23,7 @@ public class Expressao6 extends GeradorExercicio
 		int resultado = av2 + bv + c;
 
 		// Enunciado: ax² ± bx ± c
-		String expr = a + "x^2" + termoLinear(b) + termoCte(c);
+		String expr = (a == 1 ? "" : a + "") + "x^2" + termoLinear(b) + termoCte(c);
 
 		addParagrafo("Calcule o valor da expressão para \\(x = " + v + "\\):");
 		addParagrafo("\\(" + expr + "\\)");

@@ -41,8 +41,11 @@ public class Expressao6 extends GeradorExercicio
 		distratores.add("\\(" + distr3 + "\\)");
 
 		// Build intermediate step: group1 (from ax·trinomio) + group2 (from b·trinomio)
-		// group2 uses false=not-first to ensure sign is shown
-		String group1 = Polinomio.formatar(a * c, a * d, a * e);
+		// ax·(cx²+dx+e) = (ac)x³ + (ad)x² + (ae)x
+		String group1 = Polinomio.termo(a * c, 3, true)
+				+ Polinomio.termo(a * d, 2, false)
+				+ Polinomio.termo(a * e, 1, false);
+		// b·(cx²+dx+e) = (bc)x² + (bd)x + (be)
 		String group2 = Polinomio.termo(b * c, 2, false)
 				+ Polinomio.termo(b * d, 1, false)
 				+ Auxiliar.getNumber(b * e, "", false);

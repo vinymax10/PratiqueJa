@@ -6,13 +6,13 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="#{pdfBean.nome}" />
+		<h:outputText class="linkPage" value="#{pdfQuestaoBean.nome}" />
 	</ui:define>
 
 	<f:metadata>
-		<f:viewParam name="chave" value="#{pdfBean.chave}" />
-		<f:viewParam name="cadastro" value="#{pdfBean.cadastro}" converter="jakarta.faces.Boolean" />
-		<f:viewAction action="#{pdfBean.carregar()}" />
+		<f:viewParam name="chave" value="#{pdfQuestaoBean.chave}" />
+		<f:viewParam name="cadastro" value="#{pdfQuestaoBean.cadastro}" converter="jakarta.faces.Boolean" />
+		<f:viewAction action="#{pdfQuestaoBean.carregar()}" />
 	</f:metadata>
 
 	<h:form id="form" class="form">
@@ -23,7 +23,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
 				<p:outputLabel for="@next" value="Assunto" />
-				<p:selectOneMenu value="#{pdfBean.entidade.assunto}"
+				<p:selectOneMenu value="#{pdfQuestaoBean.entidade.assunto}"
 				converter="generic" filter="true" filterMatchMode="contains"
 				required="true" requiredMessage="O assunto é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
@@ -34,19 +34,8 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
-				<p:outputLabel for="@next" value="Nível" />
-				<p:selectOneMenu value="#{pdfBean.entidade.nivel}"
-				required="true" requiredMessage="O nível é obrigatório">
-					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
-					<f:selectItems value="#{nivelBean.opcoes}"
-					var="opcao" itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
-				</p:selectOneMenu>
-				<p:message for="@previous" display="text" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
 				<p:outputLabel for="@next" value="Visibilidade" />
-				<p:selectOneMenu value="#{pdfBean.entidade.visibilidade}"
+				<p:selectOneMenu value="#{pdfQuestaoBean.entidade.visibilidade}"
 				required="true" requiredMessage="A visibilidade é obrigatória">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{visibilidadePdfBean.opcoes}"
@@ -57,14 +46,14 @@
 
 			<h:panelGroup styleClass="campoMsg col-12">
 				<p:outputLabel for="@next" value="Caminho" />
-				<p:inputText value="#{pdfBean.entidade.caminho}" maxlength="511"
+				<p:inputText value="#{pdfQuestaoBean.entidade.caminho}" maxlength="511"
 				required="true" requiredMessage="O caminho é obrigatório" />
 				<p:message for="@previous" display="text" />
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12">
 				<p:outputLabel for="@next" value="Descrição" />
-				<p:inputTextarea rows="3" value="#{pdfBean.entidade.descricao}" maxlength="511" />
+				<p:inputTextarea rows="3" value="#{pdfQuestaoBean.entidade.descricao}" maxlength="511" />
 			</h:panelGroup>
 
 		</div>
@@ -76,9 +65,9 @@
 			<div class="flex gap-3 flex-wrap">
 
 				<p:commandButton value="Remover" icon="pi pi-trash"
-					rendered="#{!pdfBean.cadastro}"
+					rendered="#{!pdfQuestaoBean.cadastro}"
 					styleClass="ui-button-danger ui-button-flat"
-					action="#{pdfBean.remover}" update="@form, :growl"
+					action="#{pdfQuestaoBean.remover}" update="@form, :growl"
 					process="@this">
 					<p:confirm header="Confirmação" icon="pi pi-info-circle"
 					message="Você tem certeza que deseja remover este PDF?" />
@@ -89,10 +78,10 @@
 			<div class="flex gap-3 flex-wrap">
 
 				<p:commandButton id="auditoria" value="Auditoria"
-					rendered="#{sessaoBean.podeVerAuditoria and !pdfBean.cadastro}"
+					rendered="#{sessaoBean.podeVerAuditoria and !pdfQuestaoBean.cadastro}"
 					styleClass="ui-button-flat ui-button-plain"
 					icon="fa-regular fa-eye"
-					action="#{auditoriaBean.carregar(pdfBean.entidade, pdfBean.nome)}"
+					action="#{auditoriaBean.carregar(pdfQuestaoBean.entidade, pdfQuestaoBean.nome)}"
 					update="dialog-auditoria"
 					process="@this" oncomplete="PF('dialogAuditoria').show()">
 				</p:commandButton>
@@ -100,28 +89,28 @@
 				<p:commandButton ajax="false" value="Baixar"
 					icon="pi pi-download"
 					styleClass="ui-button-outlined"
-					rendered="#{!pdfBean.cadastro and not empty pdfBean.entidade.caminho}">
-					<p:fileDownload value="#{pdfBean.download(pdfBean.entidade)}" />
+					rendered="#{!pdfQuestaoBean.cadastro and not empty pdfQuestaoBean.entidade.caminho}">
+					<p:fileDownload value="#{pdfQuestaoBean.download(pdfQuestaoBean.entidade)}" />
 				</p:commandButton>
 
 				<p:button value="Voltar"
 				styleClass="ui-button-outlined"
-				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/list.xhtml" />
+				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/questao/list.xhtml" />
 
 				<p:commandButton id="adicionarCadastro" value="Adicionar"
-					rendered="#{pdfBean.cadastro}"
+					rendered="#{pdfQuestaoBean.cadastro}"
 					styleClass="ui-button-raised ui-button-success"
 					icon="pi pi-plus"
-					action="#{pdfBean.adicionar(false)}" update="@form, :growl"
+					action="#{pdfQuestaoBean.adicionar(false)}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="adicionarCadastro" />
 				</p:commandButton>
 
 				<p:commandButton id="salvarCadastro" value="Salvar"
-					rendered="#{!pdfBean.cadastro}"
+					rendered="#{!pdfQuestaoBean.cadastro}"
 					styleClass="ui-button-raised ui-button-primary"
 					icon="pi pi-check"
-					action="#{pdfBean.salvar(false)}" update="@form, :growl"
+					action="#{pdfQuestaoBean.salvar(false)}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="salvarCadastro" />
 				</p:commandButton>

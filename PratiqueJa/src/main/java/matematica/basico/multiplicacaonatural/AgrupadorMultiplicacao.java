@@ -1,7 +1,7 @@
 package matematica.basico.multiplicacaonatural;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 // Base com helpers de exercício para multiplicação de naturais (Fase 2).
 public abstract class AgrupadorMultiplicacao extends GeradorExercicio

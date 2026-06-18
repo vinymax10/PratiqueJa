@@ -23,11 +23,14 @@ public class Exercicio11 extends GeradorExercicio
 
 		gerarAlternativasInteiras(F, 4, false);
 
+		String cxStr = cx < 0 ? "(" + cx + ")" : Integer.toString(cx);
+		String cyStr = cy < 0 ? "(" + cy + ")" : Integer.toString(cy);
+
 		String res = "A forma canônica é \\((x" + sinalCx + ")^2 + (y" + sinalCy + ")^2 = " + r2 + "\\)."
 				+ "\\(\\\\\\)"
 				+ "Expandindo e identificando \\(F = a^2 + b^2 - r^2\\):"
 				+ "\\(\\\\\\)"
-				+ "\\(F = " + cx + "^2 + (" + cy + ")^2 - " + r + "^2\\\\"
+				+ "\\(F = " + cxStr + "^2 + " + cyStr + "^2 - " + r + "^2\\\\"
 				+ "F = " + (cx*cx) + " + " + (cy*cy) + " - " + r2 + " = \\mathbf{" + F + "}\\)";
 		setResolucao(res);
 	}

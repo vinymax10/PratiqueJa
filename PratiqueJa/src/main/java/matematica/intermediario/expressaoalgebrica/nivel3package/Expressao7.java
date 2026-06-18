@@ -19,7 +19,9 @@ public class Expressao7 extends GeradorExercicio
 		int qvb2     = q * vb2;
 		int resultado = pva2 + qvb2;
 
-		String exprLatex = p + "a^2 + " + q + "b^2";
+		String pStr = p == 1 ? "" : p + "";
+		String qStr = q == 1 ? "" : q + "";
+		String exprLatex = pStr + "a^2 + " + qStr + "b^2";
 
 		addParagrafo("Calcule o valor da expressão para \\(a = " + va + "\\) e \\(b = " + vb + "\\):");
 		addParagrafo("\\(" + exprLatex + "\\)");

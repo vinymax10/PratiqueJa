@@ -14,7 +14,7 @@
 
 						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
 							<p:outputLabel for="@next" value="Assunto"/>
-							<p:selectOneMenu value="#{pdfBean.filtro.assunto}"
+							<p:selectOneMenu value="#{pdfExercicioBean.filtro.assunto}"
 							converter="generic" filter="true" filterMatchMode="contains">
 								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{assuntoBean.listaAtivas}"
@@ -25,7 +25,7 @@
 
 						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
 							<p:outputLabel for="@next" value="Visibilidade"/>
-							<p:selectOneMenu value="#{pdfBean.filtro.visibilidade}">
+							<p:selectOneMenu value="#{pdfExercicioBean.filtro.visibilidade}">
 								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{visibilidadePdfBean.opcoes}" var="opcao"
 								itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
@@ -41,13 +41,13 @@
 						<p:commandButton value="Limpar"
 						styleClass="ui-button-flat ui-button-plain"
 						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
-						action="#{pdfBean.filtrarInit}" update="@form" >
+						action="#{pdfExercicioBean.filtrarInit}" update="@form" >
 						</p:commandButton>
 
 						<p:commandButton id="filtrar" value="Filtrar"
 						styleClass="ui-button-raised ui-button-primary"
 						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
-						action="#{pdfBean.filtrar}" update="@form, :growl" process="@form" >
+						action="#{pdfExercicioBean.filtrar}" update="@form, :growl" process="@form" >
 							<p:defaultCommand target="form:filtrar"/>
 						</p:commandButton>
 

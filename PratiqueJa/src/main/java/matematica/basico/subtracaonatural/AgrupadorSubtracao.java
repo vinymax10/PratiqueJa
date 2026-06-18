@@ -2,7 +2,7 @@ package matematica.basico.subtracaonatural;
 
 import matematica.GeradorExercicio;
 import matematica.Nomes;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 // Base com helpers de exercício para subtração de naturais (Fase 2).
 public abstract class AgrupadorSubtracao extends GeradorExercicio

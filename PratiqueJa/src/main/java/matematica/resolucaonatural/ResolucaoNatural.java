@@ -1,4 +1,4 @@
-package matematica.basico.resolucaonatural;
+package matematica.resolucaonatural;
 
 
 public class ResolucaoNatural

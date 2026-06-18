@@ -1,7 +1,7 @@
 package matematica.basico.adicaonatural.nivel2package;
 
 import matematica.GeradorExercicio;
-import matematica.basico.resolucaonatural.ResolucaoNatural;
+import matematica.resolucaonatural.ResolucaoNatural;
 
 public class ColunaSoma extends GeradorExercicio
 {

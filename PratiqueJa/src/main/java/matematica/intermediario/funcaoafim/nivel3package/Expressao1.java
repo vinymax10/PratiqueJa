@@ -63,8 +63,9 @@ public class Expressao1 extends GeradorExercicio
 			res += "\\(b = " + y1 + " - " + ax1r.toStringLatex() + " = \\mathbf{" + bStr + "}\\) \\(\\\\\\)";
 		}
 
-		res += "Logo \\(f(x) = " + aStr + "x" + bTermStr(bRac) + "\\): \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + aStr + " \\cdot " + v + " + " + bStr
+		String aLeading = a.toString().equals("1") ? "" : (a.toString().equals("-1") ? "-" : aStr);
+		res += "Logo \\(f(x) = " + aLeading + "x" + bTermStr(bRac) + "\\): \\(\\\\\\)";
+		res += "\\(f(" + v + ") = " + aStr + " \\cdot " + v + bTermStr(bRac)
 			+ " = " + avStr + bTermStr(bRac) + " = \\mathbf{" + fvStr + "}\\)";
 
 		gerarAlternativas(fvr);

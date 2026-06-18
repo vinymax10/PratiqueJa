@@ -19,23 +19,24 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.pdf.Pdf;
+import modelo.pdf.TipoPdf;
 import modelo.seguranca.PermissaoPadrao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Named
 @ViewScoped
-public class PdfBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
+public class PdfExercicioBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
 {
 	@Inject
 	private FiltroPdf filtro;
 
-	public PdfBean()
+	public PdfExercicioBean()
 	{
-		super(Pdf.class, "PDF");
+		super(Pdf.class, "PDF de Lista de Exercícios");
 
-		urlCadastro = "/administracao/conteudo/pdf/form.xhtml";
-		urlLista    = "/administracao/conteudo/pdf/list.xhtml";
+		urlCadastro = "/administracao/conteudo/pdf/exercicio/form.xhtml";
+		urlLista    = "/administracao/conteudo/pdf/exercicio/list.xhtml";
 	}
 
 	public StreamedContent download(Pdf pdf)
@@ -57,6 +58,18 @@ public class PdfBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
 				catch (IOException e) { e.printStackTrace(); return InputStream.nullInputStream(); }
 			})
 			.build();
+	}
+
+	@Override
+	public void personalizarAdicionar()
+	{
+		entidade.setTipo(TipoPdf.ListaExercicios);
+	}
+
+	@Override
+	public void personalizarSalvar()
+	{
+		entidade.setTipo(TipoPdf.ListaExercicios);
 	}
 
 	@Override
@@ -104,6 +117,7 @@ public class PdfBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
 
 	public void filtrar()
 	{
+		filtro.setTipo(TipoPdf.ListaExercicios);
 		this.lista = entidadeDAO.buscar(filtro);
 		tabState.putState(filtro);
 	}
