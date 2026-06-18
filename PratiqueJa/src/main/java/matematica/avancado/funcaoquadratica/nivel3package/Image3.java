@@ -15,7 +15,8 @@ public class Image3 extends GeradorExercicio
 	{
 		DadosEq2Grau dados = new DadosEq2Grau();
 
-		String funcao = "f(x)=" + dados.a + "x^2+bx"
+		String aDisp = dados.a == 1 ? "" : (dados.a == -1 ? "-" : dados.a + "");
+		String funcao = "f(x)=" + aDisp + "x^2+bx"
 				+ Auxiliar.getNumber(dados.c, "", false);
 
 		ConfigEq2Grau config = new ConfigEq2Grau(dados);
@@ -25,7 +26,7 @@ public class Image3 extends GeradorExercicio
 
 		BufferedImage image = config.criarImagem();
 
-		addParagrafo("Encontre \\(b\\), dado \\(f(x)=" + dados.a + "x^2+bx"
+		addParagrafo("Encontre \\(b\\), dado \\(f(x)=" + aDisp + "x^2+bx"
 				+ Auxiliar.getNumber(dados.c, "", false) + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + dados.b);

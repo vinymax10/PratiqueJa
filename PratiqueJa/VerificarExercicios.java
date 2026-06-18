@@ -4,6 +4,10 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 
+//poderia verificar os arquivos em C:\Users\maximovrm\git\PratiqueJa\PratiqueJa\exercicios\ e encontrar os exercicos que foram gerados com erro e corrigir os geradores
+//que geraram esse exercicio defeituoso. Verifique principalmente se a solução está batendo com o resultado do exercicio. Se vc encontrar algum erro, tente encontrar o
+//gerador que está com problema e corrija-o.
+
 public class VerificarExercicios {
     static final Path DIR = Paths.get("C:\\Users\\maximovrm\\git\\PratiqueJa\\PratiqueJa\\exercicios");
     static List<String> erros = new ArrayList<>();

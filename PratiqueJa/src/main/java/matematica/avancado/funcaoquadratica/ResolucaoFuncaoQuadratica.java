@@ -66,9 +66,12 @@ public class ResolucaoFuncaoQuadratica
 		Racional resultado = new Racional(-delta, 4 * a);
 		resultado.fatoracao(2);
 
+		String bStr = b < 0 ? "(" + b + ")" : "" + b;
+		String aStr = a < 0 ? "(" + a + ")" : "" + a;
+		String cStr = c < 0 ? "(" + c + ")" : "" + c;
 		String res = formulaYv();
 		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\\\" ;
-		res += "\\Delta=" + b + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ ";
+		res += "\\Delta=" + bStr + "^2-4\\cdot " + aStr + "\\cdot " + cStr + " = \\\\ ";
 		res += "\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=" + delta + "\\\\" ;
 		res += "Y_v=\\dfrac{-(" + delta + ")}{4\\cdot " + a + "}=\\dfrac{" + (-delta) + "}{" + (4 * a) + "}";
 		if(resultado.denominador != 1)
@@ -145,9 +148,11 @@ public class ResolucaoFuncaoQuadratica
 
 	public static String resolucaoAcharA_Yv(int a, int b, int c, Racional yv)
 	{
+		String bStr = b < 0 ? "(" + b + ")" : "" + b;
+		String cStr = c < 0 ? "(" + c + ")" : "" + c;
 		String res = formulaYv();
 		res += "\\(b=" + b + ", \\quad c=" + c + "\\\\";
-		res += "" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot a\\cdot " + c + ")}{4a}\\\\";
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + bStr + "^2-4\\cdot a\\cdot " + cStr + ")}{4a}\\\\";
 		res += "" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * c, "a", false) + ")}{4a}\\\\" ;
 		MyExpression expressao = new MyExpression(yv.toString() + "*4a=" + (-(b * b)) + Auxiliar.getNumber(4 * c, "a", false));
 		res += "" + expressao.resolverLatex() + "\\\\" ;
@@ -157,9 +162,11 @@ public class ResolucaoFuncaoQuadratica
 
 	public static String resolucaoAcharC_Yv(int a, int b, int c, Racional yv)
 	{
+		String bStr = b < 0 ? "(" + b + ")" : "" + b;
+		String aStr = a < 0 ? "(" + a + ")" : "" + a;
 		String res = formulaYv();
 		res += "\\(a=" + a + ", \\quad b=" + b + "\\\\" ;
-		res += "" + yv.showDfrac() + "=\\dfrac{-(" + b + "^2-4\\cdot " + a + "\\cdot c)}{4\\cdot " + a + "}\\\\";
+		res += "" + yv.showDfrac() + "=\\dfrac{-(" + bStr + "^2-4\\cdot " + aStr + "\\cdot c)}{4\\cdot " + aStr + "}\\\\";
 		res += "" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * a, "c", false) + ")}{" + (4 * a) + "}\\\\" ;
 		MyExpression expressao = new MyExpression(yv.toString() + "*" + (4 * a) + "=" + (-(b * b)) + Auxiliar.getNumber(4 * a, "c", false));
 		res += "" + expressao.resolverLatex() + "\\\\" ;
