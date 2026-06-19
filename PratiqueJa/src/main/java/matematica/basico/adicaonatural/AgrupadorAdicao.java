@@ -16,23 +16,6 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		gerarAlternativasInteiras(a + b);
 		setResolucao("\\(" + ResolucaoNatural.soma(a, b, true) + "\\)");
 	}
-
-	protected void tresParcelas(int min, int range)
-	{
-		int a = min + rand.nextInt(range);
-		int b = min + rand.nextInt(range);
-		int c = min + rand.nextInt(range);
-		int ab = a + b;
-		addParagrafo("Calcule a soma das três parcelas:");
-		addParagrafo("\\(" + a + " + " + b + " + " + c + "\\)");
-		gerarAlternativasInteiras(ab + c);
-		String res = "Somamos as duas primeiras parcelas: \\(\\\\\\)";
-		res += "\\(" + ResolucaoNatural.soma(a, b, true) + "\\) \\(\\\\\\)";
-		res += "Somamos o resultado \\(" + ab + "\\) com a terceira parcela: \\(\\\\\\)";
-		res += "\\(" + ResolucaoNatural.soma(ab, c, true) + "\\)";
-		setResolucao(res);
-	}
-
 	protected void quatroParcelas(int min, int range)
 	{
 		int a = min + rand.nextInt(range), b = min + rand.nextInt(range);
@@ -56,37 +39,6 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		gerarAlternativasInteiras(a + b);
 		setResolucao("\\(" + a + " + " + b + " = \\mathbf{" + (a + b) + "}\\)");
 	}
-
-	protected void parcelaMissing(int min, int range)
-	{
-		int a = min + rand.nextInt(range);
-		int x = min + rand.nextInt(range);
-		int c = a + x;
-		boolean naEsquerda = rand.nextBoolean();
-		if(naEsquerda)
-			addParagrafo("Qual é o valor de \\(\\square\\) na equação \\(\\square + " + a + " = " + c + "\\)?");
-		else
-			addParagrafo("Qual é o valor de \\(\\square\\) na equação \\(" + a + " + \\square = " + c + "\\)?");
-		gerarAlternativasInteiras(x);
-		setResolucao(
-			"A parcela desconhecida é a diferença entre a soma e a parcela conhecida: \\(\\\\\\)" +
-			"\\(\\square = " + c + " - " + a + " = \\mathbf{" + x + "}\\)"
-		);
-	}
-
-	protected void verificacao(int min, int range)
-	{
-		int a = min + rand.nextInt(range);
-		int b = min + rand.nextInt(range);
-		int c = a + b;
-		addParagrafo(Nomes.feminino(rand) + " calculou que \\(" + a + " + " + b + " = " + c + "\\). Para verificar, ela subtraiu \\(" + c + " - " + b + "\\). Qual deve ser o resultado?");
-		gerarAlternativasInteiras(a);
-		setResolucao(
-			"A verificação da adição usa a operação inversa: se \\(a + b = c\\), então \\(c - b = a\\). \\(\\\\\\)" +
-			"\\(" + c + " - " + b + " = \\mathbf{" + a + "}\\)"
-		);
-	}
-
 	protected void problema(int min, int range)
 	{
 		int a = min + rand.nextInt(range);

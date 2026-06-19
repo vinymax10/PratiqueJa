@@ -4,10 +4,18 @@ import matematica.GeradorExercicio;
 
 public class EquacoesNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.Equacao1",
+		".nivel1package.Equacao2",
+		".nivel1package.Equacao3",
+		".nivel1package.Equacao4",
+		".nivel1package.Equacao6",
+		".nivel1package.Equacao7"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel1package.Equacao" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

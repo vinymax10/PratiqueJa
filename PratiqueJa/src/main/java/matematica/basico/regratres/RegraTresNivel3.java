@@ -4,10 +4,17 @@ import matematica.GeradorExercicio;
 
 public class RegraTresNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.RegraTres1",
+		".nivel3package.RegraTres2",
+		".nivel3package.RegraTres13",
+		".nivel3package.RegraTres14",
+		".nivel3package.RegraTres15"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.RegraTres" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

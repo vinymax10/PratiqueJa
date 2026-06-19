@@ -4,10 +4,21 @@ import matematica.GeradorExercicio;
 
 public class PotenciacaoNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Potenciacao1",
+		".nivel3package.Potenciacao2",
+		".nivel3package.Potenciacao3",
+		".nivel3package.Potenciacao4",
+		".nivel3package.Potenciacao5",
+		".nivel3package.Potenciacao6",
+		".nivel3package.Potenciacao7",
+		".nivel3package.Potenciacao8",
+		".nivel3package.Potenciacao9"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Potenciacao" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

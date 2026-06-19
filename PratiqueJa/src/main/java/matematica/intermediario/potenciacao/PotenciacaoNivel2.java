@@ -4,10 +4,18 @@ import matematica.GeradorExercicio;
 
 public class PotenciacaoNivel2 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel2package.Potenciacao1",
+		".nivel2package.Potenciacao2",
+		".nivel2package.Potenciacao3",
+		".nivel2package.Potenciacao4",
+		".nivel2package.Potenciacao5",
+		".nivel2package.Potenciacao6"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel2package.Potenciacao" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

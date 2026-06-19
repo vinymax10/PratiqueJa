@@ -4,10 +4,15 @@ import matematica.GeradorExercicio;
 
 public class PlanoCartesianoNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Image1",
+		".nivel3package.Image2",
+		".nivel3package.Image3"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Image" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

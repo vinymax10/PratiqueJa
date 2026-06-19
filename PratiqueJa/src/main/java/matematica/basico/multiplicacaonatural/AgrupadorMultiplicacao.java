@@ -40,19 +40,6 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 			"\\(" + a + " \\times " + b + " = " + ab + "\\); \\(" + ab + " \\times " + c + " = \\mathbf{" + (ab * c) + "}\\)"
 		);
 	}
-
-	protected void fatorFaltante(int min, int range)
-	{
-		int a = min + rand.nextInt(range), x = min + rand.nextInt(range);
-		int c = a * x;
-		addParagrafo("Qual é o valor de \\(\\square\\) em \\(" + a + " \\times \\square = " + c + "\\)?");
-		gerarAlternativasInteiras(x);
-		setResolucao(
-			"Como a divisão é a operação inversa: \\(\\\\\\)" +
-			"\\(\\square = " + c + " \\div " + a + " = \\mathbf{" + x + "}\\)"
-		);
-	}
-
 	protected void distributiva(int min, int range)
 	{
 		int a = min + rand.nextInt(range), b = 2 + rand.nextInt(9), c = 2 + rand.nextInt(9);

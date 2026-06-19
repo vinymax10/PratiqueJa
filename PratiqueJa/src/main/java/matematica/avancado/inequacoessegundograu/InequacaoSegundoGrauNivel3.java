@@ -4,10 +4,18 @@ import matematica.GeradorExercicio;
 
 public class InequacaoSegundoGrauNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Image1",
+		".nivel3package.Image2",
+		".nivel3package.Image3",
+		".nivel3package.Image4",
+		".nivel3package.Image5",
+		".nivel3package.Image6"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Image" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

@@ -4,10 +4,17 @@ import matematica.GeradorExercicio;
 
 public class NotacaoCientificaNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.NotacaoCientifica1",
+		".nivel1package.NotacaoCientifica2",
+		".nivel1package.NotacaoCientifica3",
+		".nivel1package.NotacaoCientifica4",
+		".nivel1package.NotacaoCientifica5"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel1package.NotacaoCientifica" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

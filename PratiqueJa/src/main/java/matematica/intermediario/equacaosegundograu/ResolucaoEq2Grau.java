@@ -32,10 +32,12 @@ public class ResolucaoEq2Grau
 	{
 		String resolucaoLatex = "";
 
-		resolucaoLatex += "f(" + x + ")=" + a + " \\cdot " + x + "^2" + Auxiliar.getNumber(b, "", false) + " \\cdot "
-		+ x + Auxiliar.getNumber(c, "", false) + "\\\\";
-		resolucaoLatex += "f(" + x + ")=" + a + " \\cdot " + (x * x) + Auxiliar.getNumber(b, "", false) + " \\cdot "
-		+ x + Auxiliar.getNumber(c, "", false) + "\\\\";
+		// Sem termo linear (b=0) não deve aparecer "\cdot x" solto.
+		String termoB = (b != 0) ? Auxiliar.getNumber(b, "", false) + " \\cdot " + x : "";
+		resolucaoLatex += "f(" + x + ")=" + a + " \\cdot " + x + "^2" + termoB
+		+ Auxiliar.getNumber(c, "", false) + "\\\\";
+		resolucaoLatex += "f(" + x + ")=" + a + " \\cdot " + (x * x) + termoB
+		+ Auxiliar.getNumber(c, "", false) + "\\\\";
 		resolucaoLatex += "f(" + x + ")=" + (a * (x * x)) + Auxiliar.getNumber(b * x, "", false)
 		+ Auxiliar.getNumber(c, "", false);
 		resolucaoLatex += "=" + (a * (x * x) + (b * x) + c);
@@ -55,10 +57,14 @@ public class ResolucaoEq2Grau
 	{
 		String resolucaoLatex = "";
 
-		resolucaoLatex += "f(" + x1 + ")=a \\cdot " + x1 + "^2" + Auxiliar.getNumber(b, "", false) + " \\cdot " + x1
+		// Sem termo linear (b=0), omitir o "\cdot x" também na expressão resolvida,
+		// senão a equação fica a*x^2*x (errada) e a raiz calculada sai incorreta.
+		String termoBDisp = (b != 0) ? Auxiliar.getNumber(b, "", false) + " \\cdot " + x1 : "";
+		String termoBExpr = (b != 0) ? Auxiliar.getNumber(b, "", false) + "*" + x1 : "";
+		resolucaoLatex += "f(" + x1 + ")=a \\cdot " + x1 + "^2" + termoBDisp
 		+ Auxiliar.getNumber(c, "", false) + " = 0" + "\\\\";
 		MyExpression expressao = new MyExpression(
-		"a*" + (x1 * x1) + Auxiliar.getNumber(b, "", false) + "*" + x1 + Auxiliar.getNumber(c, "", false) + " = 0");
+		"a*" + (x1 * x1) + termoBExpr + Auxiliar.getNumber(c, "", false) + " = 0");
 		resolucaoLatex += expressao.resolverLatex();
 
 		return resolucaoLatex;
@@ -143,10 +149,13 @@ public class ResolucaoEq2Grau
 	{
 		String resolucaoLatex = "";
 
-		resolucaoLatex += "f(" + x1 + ")=" + a + " \\cdot " + x1 + "^2" + Auxiliar.getNumber(b, "", false) + "\\cdot "
-		+ x1 + "+c = 0" + "\\\\";
+		// Sem termo linear (b=0), omitir o "\cdot x" na exibição e na expressão.
+		String termoBDisp = (b != 0) ? Auxiliar.getNumber(b, "", false) + "\\cdot " + x1 : "";
+		String termoBExpr = (b != 0) ? Auxiliar.getNumber(b, "", false) + "*" + x1 : "";
+		resolucaoLatex += "f(" + x1 + ")=" + a + " \\cdot " + x1 + "^2" + termoBDisp
+		+ "+c = 0" + "\\\\";
 		MyExpression expressao = new MyExpression(
-		a + "*" + (x1 * x1) + Auxiliar.getNumber(b, "", false) + "*" + x1 + "+c = 0");
+		a + "*" + (x1 * x1) + termoBExpr + "+c = 0");
 		resolucaoLatex += expressao.resolverLatex();
 
 		return resolucaoLatex;

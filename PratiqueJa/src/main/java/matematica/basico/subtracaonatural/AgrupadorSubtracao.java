@@ -31,38 +31,6 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		gerarAlternativasInteiras(a - b);
 		setResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
 	}
-
-	protected void diferenca(int min, int range)
-	{
-		int b = min + rand.nextInt(range);
-		int a = b + 5 + rand.nextInt(range);
-		int dif = a - b;
-		String nomeM = Nomes.masculino(rand), nomeF = Nomes.feminino(rand);
-		int tipo = rand.nextInt(4);
-		switch(tipo)
-		{
-			case 0: addParagrafo(nomeM + " tem \\(" + a + "\\) figurinhas e " + nomeF + " tem \\(" + b + "\\). Quantas figurinhas a mais " + nomeM + " tem?"); break;
-			case 1: addParagrafo("Uma loja tinha \\(" + a + "\\) produtos e vendeu até restarem \\(" + b + "\\). Quantos produtos foram vendidos?"); break;
-			case 2: addParagrafo(nomeF + " tirou \\(" + a + "\\) pontos e " + nomeM + " \\(" + b + "\\). Qual foi a diferença de pontuação?"); break;
-			default: addParagrafo("Um reservatório tinha \\(" + a + "\\) litros e agora tem \\(" + b + "\\). Quantos litros foram consumidos?"); break;
-		}
-		gerarAlternativasInteiras(dif);
-		setResolucao("Subtraímos a quantidade menor da maior: \\(\\\\\\) \\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)");
-	}
-
-	protected void provaReal(int min, int range)
-	{
-		int b = 5 + rand.nextInt(range);
-		int a = min + b + rand.nextInt(range);
-		int c = a - b;
-		addParagrafo(Nomes.masculino(rand) + " calculou que \\(" + a + " - " + b + " = " + c + "\\). Para verificar pela prova real, ele somou \\(" + c + " + " + b + "\\). Qual deve ser o resultado?");
-		gerarAlternativasInteiras(a);
-		setResolucao(
-			"A prova real usa a operação inversa: se \\(a - b = c\\), então \\(c + b = a\\). \\(\\\\\\)" +
-			"\\(" + c + " + " + b + " = \\mathbf{" + a + "}\\)"
-		);
-	}
-
 	protected void missingMinuendo(int min, int range)
 	{
 		int b = min + rand.nextInt(range);

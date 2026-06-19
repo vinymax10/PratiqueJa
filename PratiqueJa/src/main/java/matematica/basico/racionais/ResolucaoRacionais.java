@@ -14,9 +14,11 @@ public class ResolucaoRacionais
 		Racional frac2 = new Racional(c, d);
 		frac1.fatoracao(2);
 		frac2.fatoracao(2);
-		if(b!=d && frac1.isSimplificou() || frac2.isSimplificou())
+		// Pré-simplificação só faz sentido quando os denominadores diferem:
+		// com denominadores iguais, basta somar/subtrair diretamente.
+		if(b != d && (frac1.isSimplificou() || frac2.isSimplificou()))
 		{
-			resolucaoLatex += "\\dfrac{" + a + "}{" + b + "}" + sinalPlusMinus(positivo) 
+			resolucaoLatex += "\\dfrac{" + a + "}{" + b + "}" + sinalPlusMinus(positivo)
 			+ "\\dfrac{" + c + "}{" + d + "}=";
 
 			a = frac1.numerador;
@@ -24,15 +26,17 @@ public class ResolucaoRacionais
 			c = frac2.numerador;
 			d = frac2.denominador;
 		}
-		resolucaoLatex += "\\dfrac{" + a + "}{" + b + "}" + sinalPlusMinus(positivo) 
+		resolucaoLatex += "\\dfrac{" + a + "}{" + b + "}" + sinalPlusMinus(positivo)
 		+ "\\dfrac{" + c + "}{" + d + "}=";
 
 		if(b==d)
 		{
+			// Usa os valores atuais (a, b, c) e não frac1/frac2, que foram
+			// mutados por fatoracao() e podem ter denominadores diferentes.
 			if(positivo)
-				resolucaoLatex +=simplesSoma(frac1, frac2);
+				resolucaoLatex +=simplesSoma(new Racional(a, b), new Racional(c, d));
 			else
-				resolucaoLatex +=simplesMenos(frac1,frac2);
+				resolucaoLatex +=simplesMenos(new Racional(a, b), new Racional(c, d));
 		}
 		else
 		{

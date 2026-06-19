@@ -4,10 +4,16 @@ import matematica.GeradorExercicio;
 
 public class SistemaEquacoesNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.Sistema1",
+		".nivel1package.Sistema2",
+		".nivel1package.Sistema3",
+		".nivel1package.Sistema4"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel1package.Sistema" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

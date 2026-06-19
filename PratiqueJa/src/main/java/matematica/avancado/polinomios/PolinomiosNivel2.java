@@ -4,10 +4,17 @@ import matematica.GeradorExercicio;
 
 public class PolinomiosNivel2 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel2package.Expressao1",
+		".nivel2package.Expressao2",
+		".nivel2package.Expressao3",
+		".nivel2package.Expressao4",
+		".nivel2package.Expressao5"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel2package.Expressao" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

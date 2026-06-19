@@ -4,10 +4,15 @@ import matematica.GeradorExercicio;
 
 public class JurosDescontoNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.JurosDesconto1",
+		".nivel3package.JurosDesconto2",
+		".nivel3package.JurosDesconto3"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.JurosDesconto" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

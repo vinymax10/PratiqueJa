@@ -5,24 +5,20 @@ import matematica.GeradorExercicio;
 public class AdicaoSubtracaoInteiroNivel1 extends GeradorExercicio
 {
 	private static final String[] TIPOS = {
-		".nivel1package.SomaDoisTermos",
-		".nivel1package.ValorAbsoluto",
-		".nivel1package.Oposto",
-		".nivel1package.ElementoNeutro",
-		".nivel1package.SinaisIguais",
-		".nivel1package.SinaisDiferentes",
-		".nivel1package.SubtracaoOposto",
-		".nivel1package.Contextualizada",
-		".nivel1package.Soma2",
-		".nivel1package.Parenteses1",
-		".nivel1package.ValorAbsoluto2",
-		".nivel1package.Oposto2",
 		".nivel1package.Comparar1",
+		".nivel1package.Contextualizada",
+		".nivel1package.ElementoNeutro",
 		".nivel1package.MissingTermo1",
-		".nivel1package.TresTermos1",
+		".nivel1package.Oposto",
+		".nivel1package.Parenteses1",
 		".nivel1package.Problema1",
-		".nivel1package.Soma3",
-		".nivel1package.Parenteses2"
+		".nivel1package.SinaisDiferentes",
+		".nivel1package.SinaisIguais",
+		".nivel1package.Soma2",
+		".nivel1package.SomaDoisTermos",
+		".nivel1package.SubtracaoOposto",
+		".nivel1package.TresTermos1",
+		".nivel1package.ValorAbsoluto"
 	};
 
 	@Override

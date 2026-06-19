@@ -19,12 +19,16 @@ public class ResolucaoFuncaoQuadratica
 
 	public static String resolucaoFx(int a, int b, int c, int x)
 	{
+		// O termo do coeficiente b (incluindo "\cdot x") só deve aparecer quando b != 0;
+		// caso contrário sobraria um "\cdot x" solto sem coeficiente.
+		String termoB = (b != 0) ? Auxiliar.getNumber(b, "", false) + "\\cdot " + x : "";
+
 		String s1 = "f(" + x + ")=" + a + "\\cdot " + x + "^2"
-				+ Auxiliar.getNumber(b, "", false) + "\\cdot " + x
+				+ termoB
 				+ Auxiliar.getNumber(c, "", false);
 
 		String s2 = "f(" + x + ")=" + a + "\\cdot " + (x * x)
-				+ Auxiliar.getNumber(b, "", false) + "\\cdot " + x
+				+ termoB
 				+ Auxiliar.getNumber(c, "", false);
 
 		int r1 = a * x * x;
@@ -82,11 +86,15 @@ public class ResolucaoFuncaoQuadratica
 
 	public static String resolucaoAcharA(int a, int b, int c, int x, int fx)
 	{
+		// Com b=0, o termo "\cdot x" não pode sobrar (nem no display nem na expressão,
+		// senão a equação fica a*x^2*x e a raiz calculada sai errada).
+		String termoBDisp = (b != 0) ? Auxiliar.getNumber(b, "", false) + "\\cdot " + x : "";
+		String termoBExpr = (b != 0) ? Auxiliar.getNumber(b, "", false) + "*" + x : "";
 		String sub = "f(" + x + ")=a\\cdot " + x + "^2"
-				+ Auxiliar.getNumber(b, "", false) + "\\cdot " + x
+				+ termoBDisp
 				+ Auxiliar.getNumber(c, "", false) + "=" + fx;
 		MyExpression expressao = new MyExpression("a*" + (x * x)
-				+ Auxiliar.getNumber(b, "", false) + "*" + x
+				+ termoBExpr
 				+ Auxiliar.getNumber(c, "", false) + "=" + fx);
 
 		return "Substituindo \\(f(" + x + ")=" + fx + "\\): \\(\\\\\\)" +
@@ -110,10 +118,13 @@ public class ResolucaoFuncaoQuadratica
 
 	public static String resolucaoAcharC(int a, int b, int c, int x, int fx)
 	{
+		// Com b=0, o termo "\cdot x" não pode sobrar (nem no display nem na expressão).
+		String termoBDisp = (b != 0) ? Auxiliar.getNumber(b, "", false) + "\\cdot " + x : "";
+		String termoBExpr = (b != 0) ? Auxiliar.getNumber(b, "", false) + "*" + x : "";
 		String sub = "f(" + x + ")=" + a + "\\cdot " + x + "^2"
-				+ Auxiliar.getNumber(b, "", false) + "\\cdot " + x + "+c=" + fx;
+				+ termoBDisp + "+c=" + fx;
 		MyExpression expressao = new MyExpression(a + "*" + (x * x)
-				+ Auxiliar.getNumber(b, "", false) + "*" + x + "+c=" + fx);
+				+ termoBExpr + "+c=" + fx);
 
 		return "Substituindo \\(f(" + x + ")=" + fx + "\\): \\(\\\\\\)" +
 			   "\\(" + sub + "\\\\"  +

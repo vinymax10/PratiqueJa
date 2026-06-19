@@ -4,10 +4,15 @@ import matematica.GeradorExercicio;
 
 public class CombinatoriaNivel2 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel2package.Combinatoria1",
+		".nivel2package.Combinatoria2",
+		".nivel2package.Combinatoria3"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel2package.Combinatoria" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

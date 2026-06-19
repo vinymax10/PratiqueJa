@@ -4,10 +4,17 @@ import matematica.GeradorExercicio;
 
 public class CirculoNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Exercicio1",
+		".nivel3package.Exercicio2",
+		".nivel3package.Exercicio3",
+		".nivel3package.Exercicio4",
+		".nivel3package.Exercicio5"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Exercicio" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

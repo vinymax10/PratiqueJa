@@ -92,16 +92,6 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		res += ResolucaoASInteiro.soma(a, t2);
 		setResolucao(res);
 	}
-
-	protected void valorAbsoluto()
-	{
-		int a = 1 + rand.nextInt(29);
-		int x = rand.nextBoolean() ? -a : a;
-		addParagrafo("Qual é o valor de \\(|" + x + "|\\)?");
-		gerarAlternativasInteiras(a);
-		setResolucao("O módulo é a distância ao zero na reta numérica, sempre positivo ou nulo. \\(\\\\\\) \\(|" + x + "| = \\mathbf{" + a + "}\\)");
-	}
-
 	protected void oposto()
 	{
 		int a = 1 + rand.nextInt(29);

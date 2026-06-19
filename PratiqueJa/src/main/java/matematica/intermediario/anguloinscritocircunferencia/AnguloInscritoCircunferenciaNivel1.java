@@ -4,10 +4,22 @@ import matematica.GeradorExercicio;
 
 public class AnguloInscritoCircunferenciaNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.Image1",
+		".nivel1package.Image2",
+		".nivel1package.Image3",
+		".nivel1package.Image4",
+		".nivel1package.Image5",
+		".nivel1package.Image6",
+		".nivel1package.Image7",
+		".nivel1package.Image8",
+		".nivel1package.Image9",
+		".nivel1package.Image10"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel1package.Image" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

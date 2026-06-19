@@ -4,10 +4,16 @@ import matematica.GeradorExercicio;
 
 public class RadiciacaoNivel1 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel1package.Radiciacao1",
+		".nivel1package.Radiciacao2",
+		".nivel1package.Radiciacao3",
+		".nivel1package.Radiciacao4"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel1package.Radiciacao" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

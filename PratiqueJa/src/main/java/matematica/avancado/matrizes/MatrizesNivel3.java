@@ -4,10 +4,17 @@ import matematica.GeradorExercicio;
 
 public class MatrizesNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Matrizes1",
+		".nivel3package.Matrizes2",
+		".nivel3package.Matrizes3",
+		".nivel3package.Matrizes4",
+		".nivel3package.Matrizes5"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Matrizes" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }

@@ -41,11 +41,6 @@ public abstract class AgrupadorPrimo extends GeradorExercicio
 		return b == 0 ? a : mdc(b, a % b);
 	}
 
-	protected int mmc(int a, int b)
-	{
-		return a / mdc(a, b) * b;
-	}
-
 	protected int numDivisores(Map<Integer, Integer> fatores)
 	{
 		int d = 1;

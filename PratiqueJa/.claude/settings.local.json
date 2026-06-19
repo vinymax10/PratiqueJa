@@ -218,7 +218,8 @@
       "Read(//c/Users/maximovrm/**)",
       "Read(//c/Users/maximovrm/git/PratiqueJa/**)",
       "Bash($MYSQL *)",
-      "Bash('/c/Program Files/MySQL/MySQL *)"
+      "Bash('/c/Program Files/MySQL/MySQL *)",
+      "Bash(py -3 --version)"
     ]
   }
 }

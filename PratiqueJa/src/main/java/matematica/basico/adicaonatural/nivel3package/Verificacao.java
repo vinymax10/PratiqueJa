@@ -1,22 +1,19 @@
 package matematica.basico.adicaonatural.nivel3package;
 
 import matematica.GeradorExercicio;
+import matematica.basico.adicaonatural.ProblemaVerificacao;
+import matematica.basico.adicaonatural.TextoVerificacao;
 
 public class Verificacao extends GeradorExercicio
 {
 	@Override
 	protected void construir()
 	{
-		int a = 100 + rand.nextInt(400);
-		int b = 100 + rand.nextInt(400);
-		int c = a + b;
+		ProblemaVerificacao problema = TextoVerificacao.getProblema();
+		problema.gerarValores(3);
 
-		addParagrafo("Uma caixa registrou que \\(" + a + " + " + b + " = " + c + "\\). Para conferir, a supervisora subtraiu \\(" + c + " - " + b + "\\). Qual deve ser o resultado para o cálculo estar correto?");
-
-		gerarAlternativasInteiras(a);
-
-		String res = "Para verificar que \\(" + a + " + " + b + " = " + c + "\\), calculamos \\(" + c + " - " + b + "\\): \\(\\\\\\)";
-		res += "\\(" + c + " - " + b + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addParagrafo(problema.getPergunta());
+		gerarAlternativasInteiras(problema.resultado());
+		setResolucao(problema.resolucao());
 	}
 }

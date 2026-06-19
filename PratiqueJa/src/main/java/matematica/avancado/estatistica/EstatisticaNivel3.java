@@ -4,10 +4,15 @@ import matematica.GeradorExercicio;
 
 public class EstatisticaNivel3 extends GeradorExercicio
 {
+	private static final String[] TIPOS = {
+		".nivel3package.Estatistica1",
+		".nivel3package.Estatistica2",
+		".nivel3package.Estatistica3"
+	};
+
 	@Override
 	protected void construir()
 	{
-		int tipo = 1 + rand.nextInt(18);
-		delegar(instanciar(".nivel3package.Estatistica" + tipo));
+		delegar(instanciar(TIPOS[rand.nextInt(TIPOS.length)]));
 	}
 }
