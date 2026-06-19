@@ -2,6 +2,8 @@ package service.exercicio;
 
 import java.util.List;
 
+import dao.academico.AssuntoDAO;
+import dao.exercicio.ConfigExercicioDAO;
 import dao.exercicio.ExercicioDAO;
 import dao.exercicio.ExercicioPadraoDAO;
 import dao.exercicio.ResultadoExercicioDAO;
@@ -10,11 +12,14 @@ import filtro.exercicio.FiltroExercicio;
 import filtro.exercicio.FiltroExercicioPadrao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import matematica.ExercicioFactory;
 import modelo.academico.Assunto;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.ConfigExercicio;
+import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
 import modelo.usuario.Usuario;
 
 @ApplicationScoped
@@ -25,6 +30,12 @@ public class ExercicioService
 
 	@Inject
 	private ExercicioPadraoDAO exercicioPadraoDAO;
+
+	@Inject
+	private ConfigExercicioDAO configExercicioDAO;
+
+	@Inject
+	private AssuntoDAO assuntoDAO;
 
 	@Inject
 	private ResultadoExercicioDAO resultadoExercicioDAO;
@@ -91,30 +102,56 @@ public class ExercicioService
 		return (long) exercicioDAO.buscarGlobais().size();
 	}
 
-	public List<Exercicio> renovarExercicios(Assunto assunto)
+	public ResultadoLote gerarTodos()
 	{
-		List<Exercicio> existentes = exercicioDAO.buscarPorAssunto(assunto);
-		for(Exercicio e : existentes)
-			exercicioDAO.remover(e);
+		List<ConfigExercicio> configs = configExercicioDAO.listarTudo();
+		List<Assunto> assuntos = assuntoDAO.todos();
 
-		FiltroExercicioPadrao filtro = new FiltroExercicioPadrao();
-		filtro.setAssunto(assunto);
-		List<ExercicioPadrao> padroes = exercicioPadraoDAO.buscar(filtro);
+		int gerados = 0;
+		int ignorados = 0;
+		int erros = 0;
 
-		for(ExercicioPadrao padrao : padroes)
+		for(ConfigExercicio cfg : configs)
 		{
-			int qtd = padrao.getQuantidade() > 0 ? padrao.getQuantidade() : 1;
-			for(int i = 0; i < qtd; i++)
+			for(Assunto assunto : assuntos)
 			{
-				Exercicio novo = ExercicioFactory.gerar(padrao.getClasse(), i + 1);
-				novo.setAssunto(padrao.getAssunto());
-				novo.setNivel(padrao.getNivel());
-				novo.setGlobal(true);
-				exercicioDAO.salvar(novo);
+				ExercicioPadrao padrao = exercicioPadraoDAO.buscar(assunto, cfg.getNivel());
+				if(padrao == null)
+				{
+					ignorados++;
+					continue;
+				}
+
+				for(int i = 0; i < cfg.getQuantidade(); i++)
+				{
+					try
+					{
+						Exercicio exercicio = ExercicioFactory.gerar(padrao.getClasse(), i + 1);
+						exercicio.setAssunto(padrao.getAssunto());
+						exercicio.setNivel(padrao.getNivel());
+						exercicio.setVisibilidade(cfg.getVisibilidade());
+						exercicioDAO.salvar(exercicio);
+						gerados++;
+					}
+					catch(Exception | LinkageError e)
+					{
+						e.printStackTrace();
+						erros++;
+					}
+				}
 			}
 		}
 
-		return exercicioDAO.buscarPorAssunto(assunto);
+		return new ResultadoLote(gerados, ignorados, erros);
+	}
+
+	@Getter
+	@AllArgsConstructor
+	public static class ResultadoLote
+	{
+		private final int gerados;
+		private final int ignorados;
+		private final int erros;
 	}
 
 }

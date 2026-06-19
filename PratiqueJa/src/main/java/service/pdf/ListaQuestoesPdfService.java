@@ -20,7 +20,7 @@ import modelo.academico.Assunto;
 import modelo.configuracao.Config;
 import modelo.pdf.Pdf;
 import modelo.pdf.TipoPdf;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 import modelo.questao.Dificuldade;
 import modelo.questao.Questao;
 import pdf.questao.GeradorListaQuestoesPDF;
@@ -61,7 +61,7 @@ public class ListaQuestoesPdfService
 	 * @throws ListaQuestoesPdfException quando não há questões suficientes ou
 	 *         a Config não está configurada.
 	 */
-	public Pdf gerar(Assunto assunto, Dificuldade dificuldade, VisibilidadePdf visibilidade, boolean comAlternativas, TipoGabarito tipoGabarito)
+	public Pdf gerar(Assunto assunto, Dificuldade dificuldade, Visibilidade visibilidade, boolean comAlternativas, TipoGabarito tipoGabarito)
 	throws IOException, InterruptedException
 	{
 		Config config = configValido();
@@ -77,7 +77,7 @@ public class ListaQuestoesPdfService
 		Path outputPath = resolverOutputPath(config, assunto, dificuldade, comAlternativas, visibilidade);
 		Files.createDirectories(outputPath.getParent());
 
-		boolean premium = visibilidade == VisibilidadePdf.Premium;
+		boolean premium = visibilidade == Visibilidade.Premium;
 		byte[] bytes = gerarBytes(questoes, assunto, config, instrucao(comAlternativas), premium, comAlternativas, dificuldade, layout, tipoGabarito);
 		Files.write(outputPath, bytes);
 
@@ -87,8 +87,8 @@ public class ListaQuestoesPdfService
 	/**
 	 * Gera as listas para todas as combinações (assunto × dificuldade).
 	 * A visibilidade é derivada da dificuldade:
-	 * {@link Dificuldade#Facil} → {@link VisibilidadePdf#Basico},
-	 * demais → {@link VisibilidadePdf#Premium}.
+	 * {@link Dificuldade#Facil} → {@link Visibilidade#Basico},
+	 * demais → {@link Visibilidade#Premium}.
 	 * Combinações sem questões suficientes são ignoradas.
 	 */
 	public ResultadoLote gerarTodos(boolean comAlternativas, TipoGabarito tipoGabarito)
@@ -109,7 +109,7 @@ public class ListaQuestoesPdfService
 		{
 			for(Dificuldade dificuldade : Dificuldade.values())
 			{
-				VisibilidadePdf visibilidade = visibilidadeDe(dificuldade);
+				Visibilidade visibilidade = visibilidadeDe(dificuldade);
 				try
 				{
 					List<Questao> questoes = buscarQuestoes(assuntoAtual, dificuldade, layout.total());
@@ -122,7 +122,7 @@ public class ListaQuestoesPdfService
 					Path outputPath = resolverOutputPath(config, assuntoAtual, dificuldade, comAlternativas, visibilidade);
 					Files.createDirectories(outputPath.getParent());
 
-					boolean premium = visibilidade == VisibilidadePdf.Premium;
+					boolean premium = visibilidade == Visibilidade.Premium;
 					byte[] bytes = gerarBytes(questoes, assuntoAtual, config, instrucao(comAlternativas), premium, comAlternativas, dificuldade, layout, tipoGabarito);
 					Files.write(outputPath, bytes);
 
@@ -141,9 +141,9 @@ public class ListaQuestoesPdfService
 	}
 
 	/** Facil → Básico; Médio e Difícil → Premium. */
-	private VisibilidadePdf visibilidadeDe(Dificuldade dificuldade)
+	private Visibilidade visibilidadeDe(Dificuldade dificuldade)
 	{
-		return dificuldade == Dificuldade.Facil ? VisibilidadePdf.Basico : VisibilidadePdf.Premium;
+		return dificuldade == Dificuldade.Facil ? Visibilidade.Basico : Visibilidade.Premium;
 	}
 
 	private List<Questao> buscarQuestoes(Assunto assunto, Dificuldade dificuldade, int quantidade)
@@ -201,18 +201,18 @@ public class ListaQuestoesPdfService
 		}
 	}
 
-	private Path resolverOutputPath(Config config, Assunto assunto, Dificuldade dificuldade, boolean comAlternativas, VisibilidadePdf visibilidade)
+	private Path resolverOutputPath(Config config, Assunto assunto, Dificuldade dificuldade, boolean comAlternativas, Visibilidade visibilidade)
 	{
 		String assuntoDir = assunto.getChave().toLowerCase();
 		String dif = dificuldade != null ? dificuldade.name().toLowerCase() : "todas";
 		String tipo = comAlternativas ? "alt" : "disc";
-		String vis = visibilidade == VisibilidadePdf.Premium ? "premium" : "basico";
+		String vis = visibilidade == Visibilidade.Premium ? "premium" : "basico";
 		String filename = assuntoDir + "_" + dif + "_" + tipo + "_" + vis + ".pdf";
 
 		return Path.of(config.getEnderecoPdf()).resolve(SUBPASTA).resolve(assuntoDir).resolve(filename);
 	}
 
-	private Pdf salvarEntidade(Assunto assunto, Dificuldade dificuldade, VisibilidadePdf visibilidade, boolean comAlternativas, Path outputPath)
+	private Pdf salvarEntidade(Assunto assunto, Dificuldade dificuldade, Visibilidade visibilidade, boolean comAlternativas, Path outputPath)
 	{
 		Pdf pdf = new Pdf();
 		pdf.setAssunto(assunto);

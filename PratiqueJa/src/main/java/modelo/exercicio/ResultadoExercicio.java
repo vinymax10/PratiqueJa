@@ -15,7 +15,6 @@ import lombok.ToString;
 import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
-import modelo.matematica.Exercicio;
 import modelo.usuario.Usuario;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

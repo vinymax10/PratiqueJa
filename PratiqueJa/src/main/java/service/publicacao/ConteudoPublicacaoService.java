@@ -23,16 +23,14 @@ import modelo.publicacao.ConfigPost;
 import modelo.publicacao.FinalidadeCta;
 import modelo.publicacao.PerfilCriador;
 import modelo.publicacao.ProgramacaoPost;
-import pdfAntigo.social.InstagramFeed;
-import pdfAntigo.social.TikTok;
 import service.configuracao.DiretorioService;
 import service.email.EmailService;
 
 @ApplicationScoped
 public class ConteudoPublicacaoService
 {
-	@Inject
-	private DiretorioService diretorioService;
+//	@Inject
+//	private DiretorioService diretorioService;
 
 	@Inject
 	private CtaDAO ctaDAO;
@@ -43,33 +41,33 @@ public class ConteudoPublicacaoService
 	@Inject
 	private EmailService emailService;
 
-	public void gerarConteudoFeed(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
-	{
-		Diretorio diretorio = diretorioService.criarDiretorio();
-		InstagramFeed gerarLatex = new InstagramFeed(diretorio);
-
-		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-		gerarLatex.gerarPDF();
-		gerarLatex.convertPNG();
-
-		enviarEmail("Instagram Feed", diretorio, "feed", exercicioPadrao, programacaoPost);
-
-		diretorioService.freeDiretorio(diretorio);
-	}
-
-	public void gerarConteudoReel(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
-	{
-		Diretorio diretorio = diretorioService.criarDiretorio();
-		TikTok gerarLatex = new TikTok(diretorio);
-
-		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-		gerarLatex.gerarPDF();
-		gerarLatex.convertPNG();
-
-		enviarEmail("Instagram Reel", diretorio, "reel", exercicioPadrao, programacaoPost);
-
-		diretorioService.freeDiretorio(diretorio);
-	}
+//	public void gerarConteudoFeed(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
+//	{
+//		Diretorio diretorio = diretorioService.criarDiretorio();
+//		InstagramFeed gerarLatex = new InstagramFeed(diretorio);
+//
+//		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+//		gerarLatex.gerarPDF();
+//		gerarLatex.convertPNG();
+//
+//		enviarEmail("Instagram Feed", diretorio, "feed", exercicioPadrao, programacaoPost);
+//
+//		diretorioService.freeDiretorio(diretorio);
+//	}
+//
+//	public void gerarConteudoReel(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
+//	{
+//		Diretorio diretorio = diretorioService.criarDiretorio();
+//		TikTok gerarLatex = new TikTok(diretorio);
+//
+//		gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+//		gerarLatex.gerarPDF();
+//		gerarLatex.convertPNG();
+//
+//		enviarEmail("Instagram Reel", diretorio, "reel", exercicioPadrao, programacaoPost);
+//
+//		diretorioService.freeDiretorio(diretorio);
+//	}
 
 	private void enviarEmail(String assuntoEmail, Diretorio diretorio, String feed,
 	ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
@@ -89,8 +87,6 @@ public class ConteudoPublicacaoService
 		mensagem += "Nível: " + exercicioPadrao.getNivelRomano() + "\r\n\r\n";
 		mensagem += "✍️ Texto sugestivo para a legenda, que você pode usar como está ou adaptar ao seu estilo de comunicação.\r\n\r\n";
 		mensagem += "---------------------------------------------\r\n";
-		mensagem += exercicioPadrao.getEnunciadoSingular() + "\r\n\r\n";
-
 		if(configPost.getPerfilCriador() == PerfilCriador.Master)
 			mensagem += ctaDAO.getAnyCta(configPost) + "\r\n\r\n";
 		else

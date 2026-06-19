@@ -2,6 +2,9 @@
 \documentclass[12pt]{article}
 \usepackage{pratiqueja}
 \usepackage{tabularray}
+\usepackage{cancel}
+\definecolor{iris}{rgb}{0.39, 0.44, 1}
+\definecolor{babypink}{rgb}{1, 0.42, 0.52}
 
 \newcommand{\numex}[1]{%
   \begin{tcolorbox}[enhanced,arc=3pt,boxrule=0pt,colback=rulebg,colframe=rulebg,left=4pt,right=4pt,top=1pt,bottom=1pt,nobeforeafter,on line]{\bfseries\small\color{darkblue}#1}\end{tcolorbox}\hspace{4pt}}
@@ -61,10 +64,10 @@
   column{2} = {rightsep=0pt},
   rows     = {ht=11.7cm, valign=t, rowsep=0pt},
 }
-\exd{01}{Encontre o valor de b:  \( f(x)=\dfrac{-7}{9}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_01_1.png}\par}} &
-\exd{02}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 9 < 0\).} \\
-\exd{03}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 18 > 0\).} &
-\exd{04}{Encontre o valor de b:  \( f(x)=\dfrac{-10}{14}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_04_1.png}\par}} \\
+\exd{01}{Determine os valores de \(x\) para os quais \(f(x) = 4x + 24 > 0\).} &
+\exd{02}{A função afim \(f(x) = ax + b\) passa pelos pontos \(A = (-3,\ 6)\) e \(B = (2,\ -4)\). Calcule \(f(4)\).} \\
+\exd{03}{Encontre o valor de b:  \( f(x)=\dfrac{-4}{10}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_03_1.png}\par}} &
+\exd{04}{Determine os valores de \(x\) para os quais \(f(x) = -3x - 15 > 0\).} \\
 \end{tblr}
 
 \newpage
@@ -80,10 +83,10 @@
   column{2} = {rightsep=0pt},
   rows     = {ht=11.7cm, valign=t, rowsep=0pt},
 }
-\exd{05}{A função afim \(f(x) = ax + b\) passa pelos pontos \(A = (-4,\ -4)\) e \(B = (3,\ 1)\). Calcule \(f(4)\).} &
-\exd{06}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_06_1.png}\par}} \\
+\exd{05}{Determine os valores de \(x\) para os quais \(f(x) = x - 1 < 0\).} &
+\exd{06}{Encontre o valor de b:  \( f(x)=\dfrac{4}{12}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_06_1.png}\par}} \\
 \exd{07}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_07_1.png}\par}} &
-\exd{08}{Encontre o valor de b:  \( f(x)=0x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_08_1.png}\par}} \\
+\exd{08}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_08_1.png}\par}} \\
 \end{tblr}
 
 \newpage
@@ -99,10 +102,10 @@
   column{2} = {rightsep=0pt},
   rows     = {ht=11.7cm, valign=t, rowsep=0pt},
 }
-\exd{09}{Determine os valores de \(x\) para os quais \(f(x) = -3x + 18 > 0\).} &
-\exd{10}{Determine os valores de \(x\) para os quais \(f(x) = -4x + 20 > 0\).} \\
-\exd{11}{A função afim \(f(x) = ax + b\) passa pelos pontos \(A = (-2,\ -1)\) e \(B = (4,\ 2)\). Calcule \(f(1)\).} &
-\exd{12}{Determine os valores de \(x\) para os quais \(f(x) = -4x - 32 > 0\).} \\
+\exd{09}{Determine os valores de \(x\) para os quais \(f(x) = -5x + 20 < 0\).} &
+\exd{10}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_10_1.png}\par}} \\
+\exd{11}{Encontre o valor de b:  \( f(x)=\dfrac{-6}{10}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_11_1.png}\par}} &
+\exd{12}{Encontre o valor de b:  \( f(x)=\dfrac{4}{4}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_12_1.png}\par}} \\
 \end{tblr}
 
 \newpage
@@ -118,10 +121,10 @@
   column{2} = {rightsep=0pt},
   rows     = {ht=11.7cm, valign=t, rowsep=0pt},
 }
-\exd{13}{Determine os valores de \(x\) para os quais \(f(x) = -4x + 32 < 0\).} &
-\exd{14}{Encontre o valor de b:  \( f(x)=\dfrac{7}{9}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_14_1.png}\par}} \\
-\exd{15}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_15_1.png}\par}} &
-\exd{16}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_16_1.png}\par}} \\
+\exd{13}{Encontre o coeficiente angular da reta:\par {\centering\includegraphics[width=0.6\linewidth]{img_13_1.png}\par}} &
+\exd{14}{Determine os valores de \(x\) para os quais \(f(x) = x - 2 > 0\).} \\
+\exd{15}{Encontre o valor de b:  \( f(x)=\dfrac{13}{11}x+b \)\par {\centering\includegraphics[width=0.6\linewidth]{img_15_1.png}\par}} &
+\exd{16}{Determine os valores de \(x\) para os quais \(f(x) = -2x - 4 < 0\).} \\
 \end{tblr}
 
 \clearpage
@@ -141,22 +144,22 @@
   column{2} = {rightsep=0pt},
   rows     = {valign=t, rowsep=0pt},
 }
-\resd{01}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-7}{9}x + b \\ \)Considerando o ponto (-3,4),  temos: \(\\ \)\(4 = -\dfrac{7}{9} \cdot -3 +b \\4 = \dfrac{7}{3} +b \\-b = \dfrac{7}{3} -4 = -\dfrac{5}{3} \\b = \dfrac{5}{3} \)} &
-\resd{02}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 9 = 0\) \(\\\)\(x_0 = \dfrac{9}{3} = \mathbf{3}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > 3}\)} \\
-\resd{03}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 18 = 0\) \(\\\)\(x_0 = \dfrac{18}{3} = \mathbf{6}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 6}\)} &
-\resd{04}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-10}{14}x + b \\ \)Considerando o ponto (-8,6),  temos: \(\\ \)\(6 = -\dfrac{10}{14} \cdot -8 +b \\6 = \dfrac{40}{7} +b \\-b = \dfrac{40}{7} -6 = -\dfrac{2}{7} \\b = \dfrac{2}{7} \)} \\
-\resd{05}{Coeficiente angular \(a\): \(\\\)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{1 - (-4)}{3-(-4)}= \dfrac{1+4}{3+4}=\dfrac{5}{7}\) \(\\\)Coeficiente linear \(b\) usando \(A = (-4,\ -4)\): \(\\\)\(-4 = \dfrac{5}{7} \cdot \left(-4\right) + b\) \(\\\)\(b = -4 + \dfrac{20}{7} = \mathbf{\dfrac{-8}{7}}\) \(\\\)Logo \(f(x) = \dfrac{5}{7}x - \dfrac{8}{7}\): \(\\\)\(f(4) = \dfrac{5}{7} \cdot 4 + \dfrac{-8}{7} = \dfrac{20}{7} - \dfrac{8}{7} = \mathbf{\dfrac{12}{7}}\)} &
-\resd{06}{Dados os pontos  \(A=(-5,-2)\)  e \(B=(6,-6)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-6 - (-2)}{6-(-5)}= \dfrac{-6+2}{6+5}=\dfrac{-4}{11}\)} \\
-\resd{07}{Dados os pontos  \(A=(-8,4)\)  e \(B=(6,-6)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-6 - 4}{6-(-8)}= \dfrac{-6-4}{6+8}=\dfrac{-10}{14}=\dfrac{-5}{7}\)} &
-\resd{08}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=0x + b \\ \)Considerando o ponto (-6,-8),  temos: \(\\ \)\(-8 = 0 \cdot -6 +b \\-8 = 0 +b \\-b = 0 +8 = 8 \\b = -8 \)} \\
-\resd{09}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x + 18 = 0\) \(\\\)\(x_0 = \dfrac{18}{3} = \mathbf{6}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 6}\)} &
-\resd{10}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x + 20 = 0\) \(\\\)\(x_0 = \dfrac{20}{4} = \mathbf{5}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < 5}\)} \\
-\resd{11}{Coeficiente angular \(a\): \(\\\)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{2 - (-1)}{4-(-2)}= \dfrac{2+1}{4+2}=\dfrac{3}{6}=\dfrac{1}{2}\) \(\\\)Coeficiente linear \(b\) usando \(A = (-2,\ -1)\): \(\\\)\(-1 = \dfrac{1}{2} \cdot \left(-2\right) + b\) \(\\\)\(b = -1 + 1 = \mathbf{0}\) \(\\\)Logo \(f(x) = \dfrac{1}{2}x\): \(\\\)\(f(1) = \dfrac{1}{2} \cdot 1 + 0 = \dfrac{1}{2} = \mathbf{\dfrac{1}{2}}\)} &
-\resd{12}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x - 32 = 0\) \(\\\)\(x_0 = -\dfrac{32}{4} = \mathbf{-8}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < -8}\)} \\
-\resd{13}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-4x + 32 = 0\) \(\\\)\(x_0 = \dfrac{32}{4} = \mathbf{8}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > 8}\)} &
-\resd{14}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{7}{9}x + b \\ \)Considerando o ponto (-7,-5),  temos: \(\\ \)\(-5 = \dfrac{7}{9} \cdot -7 +b \\-5 = -\dfrac{49}{9} +b \\-b = -\dfrac{49}{9} +5 = -\dfrac{4}{9} \\b = \dfrac{4}{9} \)} \\
-\resd{15}{Dados os pontos  \(A=(-3,8)\)  e \(B=(5,2)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{2 - 8}{5-(-3)}= \dfrac{2-8}{5+3}=\dfrac{-6}{8}=\dfrac{-3}{4}\)} &
-\resd{16}{Dados os pontos  \(A=(-2,-3)\)  e \(B=(8,4)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{4 - (-3)}{8-(-2)}= \dfrac{4+3}{8+2}=\dfrac{7}{10}\)} \\
+\resd{01}{Primeiro encontramos o zero \(x_0\): \(\\\)\(4x + 24 = 0\) \(\\\)\(x_0 = -\dfrac{24}{4} = \mathbf{-6}\) \(\\\)A função é crescente (\(a > 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x > -6}\)} &
+\resd{02}{Coeficiente angular \(a\): \(\\\)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-4 - 6}{2-(-3)}= \dfrac{-4-6}{2+3}=\dfrac{-10}{5}=-2\) \(\\\)Coeficiente linear \(b\) usando \(A = (-3,\ 6)\): \(\\\)\(6 = -2 \cdot \left(-3\right) + b\) \(\\\)\(b = 6 - 6 = \mathbf{0}\) \(\\\)Logo \(f(x) = -2x\): \(\\\)\(f(4) = -2 \cdot 4 + 0 = -8 = \mathbf{-8}\)} \\
+\resd{03}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-4}{10}x + b \\ \)Considerando o ponto (-4,7),  temos: \(\\ \)\(7 = -\dfrac{4}{10} \cdot -4 +b \\7 = \dfrac{8}{5} +b \\-b = \dfrac{8}{5} -7 = -\dfrac{27}{5} \\b = \dfrac{27}{5} \)} &
+\resd{04}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-3x - 15 = 0\) \(\\\)\(x_0 = -\dfrac{15}{3} = \mathbf{-5}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x < -5}\)} \\
+\resd{05}{Primeiro encontramos o zero \(x_0\): \(\\\)\(x - 1 = 0\) \(\\\)\(x_0 = \mathbf{1}\) \(\\\)A função é crescente (\(a > 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x < 1}\)} &
+\resd{06}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{4}{12}x + b \\ \)Considerando o ponto (-7,-7),  temos: \(\\ \)\(-7 = \dfrac{4}{12} \cdot -7 +b \\-7 = -\dfrac{7}{3} +b \\-b = -\dfrac{7}{3} +7 = \dfrac{14}{3} \\b = -\dfrac{14}{3} \)} \\
+\resd{07}{Dados os pontos  \(A=(-4,-7)\)  e \(B=(5,3)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{3 - (-7)}{5-(-4)}= \dfrac{3+7}{5+4}=\dfrac{10}{9}\)} &
+\resd{08}{Dados os pontos  \(A=(-2,3)\)  e \(B=(8,-8)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-8 - 3}{8-(-2)}= \dfrac{-8-3}{8+2}=\dfrac{-11}{10}\)} \\
+\resd{09}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-5x + 20 = 0\) \(\\\)\(x_0 = \dfrac{20}{5} = \mathbf{4}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > 4}\)} &
+\resd{10}{Dados os pontos  \(A=(-5,-6)\)  e \(B=(7,-5)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-5 - (-6)}{7-(-5)}= \dfrac{-5+6}{7+5}=\dfrac{1}{12}\)} \\
+\resd{11}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{-6}{10}x + b \\ \)Considerando o ponto (-7,8),  temos: \(\\ \)\(8 = -\dfrac{6}{10} \cdot -7 +b \\8 = \dfrac{21}{5} +b \\-b = \dfrac{21}{5} -8 = -\dfrac{19}{5} \\b = \dfrac{19}{5} \)} &
+\resd{12}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{4}{4}x + b \\ \)Considerando o ponto (-2,3),  temos: \(\\ \)\(3 = \dfrac{4}{4} \cdot -2 +b \\3 = -2 +b \\-b = -2 -3 = -5 \\b = 5 \)} \\
+\resd{13}{Dados os pontos  \(A=(-4,-6)\)  e \(B=(5,-6)\), temos que o coeficiente angular  \(a\)  é calculado por: \(\\ \)\(a=\dfrac{\Delta y}{\Delta x} = \dfrac{y_B - y_A}{x_B-x_A}\\a= \dfrac{-6 - (-6)}{5-(-4)}= \dfrac{-6+6}{5+4}=0=0\)} &
+\resd{14}{Primeiro encontramos o zero \(x_0\): \(\\\)\(x - 2 = 0\) \(\\\)\(x_0 = \mathbf{2}\) \(\\\)A função é crescente (\(a > 0\)), portanto: \(\\\)\(f(x) > 0\) quando \(\mathbf{x > 2}\)} \\
+\resd{15}{O coeficiente linear  \(b\)  pode ser calculado por: \(\\ \)\(y=\dfrac{13}{11}x + b \\ \)Considerando o ponto (-6,-5),  temos: \(\\ \)\(-5 = \dfrac{13}{11} \cdot -6 +b \\-5 = -\dfrac{78}{11} +b \\-b = -\dfrac{78}{11} +5 = -\dfrac{23}{11} \\b = \dfrac{23}{11} \)} &
+\resd{16}{Primeiro encontramos o zero \(x_0\): \(\\\)\(-2x - 4 = 0\) \(\\\)\(x_0 = -\dfrac{4}{2} = \mathbf{-2}\) \(\\\)A função é decrescente (\(a < 0\)), portanto: \(\\\)\(f(x) < 0\) quando \(\mathbf{x > -2}\)} \\
 \end{longtblr}
 
 \end{document}

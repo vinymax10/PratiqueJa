@@ -14,6 +14,8 @@ public class Image9 extends GeradorExercicio
 	protected void construir()
 	{
 		DadosEq2Grau dadosEq2Grau = new DadosEq2Grau();
+		while(dadosEq2Grau.b == 0)
+			dadosEq2Grau = new DadosEq2Grau();
 
 		String resultadoCorreto = "" + dadosEq2Grau.a;
 		String texto = dadosEq2Grau.toString();

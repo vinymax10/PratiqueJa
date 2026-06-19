@@ -18,8 +18,8 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.matematica.Exercicio;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.Exercicio;
+import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
 
 @Data

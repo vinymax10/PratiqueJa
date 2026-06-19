@@ -22,7 +22,6 @@ public class Exercicio8 extends GeradorExercicio
 			angulo       = "30°";
 			anguloDouble = "60°";
 			cosDouble    = "\\dfrac{1}{2}";
-			numExibido   = "1 - \\dfrac{1}{2}";
 			passoNum     = "\\dfrac{1}{2}";
 			resultado    = "\\dfrac{1}{4}";
 			distratores.add("\\(\\dfrac{3}{4}\\)");
@@ -32,7 +31,6 @@ public class Exercicio8 extends GeradorExercicio
 			angulo       = "45°";
 			anguloDouble = "90°";
 			cosDouble    = "0";
-			numExibido   = "1 - 0";
 			passoNum     = "1";
 			resultado    = "\\dfrac{1}{2}";
 			distratores.add("\\(\\dfrac{1}{4}\\)");
@@ -42,13 +40,16 @@ public class Exercicio8 extends GeradorExercicio
 			angulo       = "60°";
 			anguloDouble = "120°";
 			cosDouble    = "-\\dfrac{1}{2}";
-			numExibido   = "1 - \\left(-\\dfrac{1}{2}\\right) = 1 + \\dfrac{1}{2}";
 			passoNum     = "\\dfrac{3}{2}";
 			resultado    = "\\dfrac{3}{4}";
 			distratores.add("\\(\\dfrac{1}{4}\\)");
 			distratores.add("\\(\\dfrac{1}{2}\\)");
 			distratores.add("\\(\\dfrac{3}{8}\\)");
 		}
+
+		numExibido = cosDouble.startsWith("-")
+				? "1 + " + cosDouble.substring(1)
+				: "1 - " + cosDouble;
 
 		addParagrafo("Usando a fórmula de bissecção \\(\\operatorname{sen}^2 a = \\dfrac{1 - \\cos(2a)}{2}\\),"
 				+ " calcule \\(\\operatorname{sen}^2(" + angulo + ")\\).");

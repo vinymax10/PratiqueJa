@@ -11,9 +11,9 @@ import java.util.Random;
 import javax.sql.rowset.serial.SerialBlob;
 
 import infra.Graphics;
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.Exercicio;
+import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
 
 /**

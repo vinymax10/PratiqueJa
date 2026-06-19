@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import matematica.GeradorExercicio;
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.Exercicio;
+import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
 
 /**

@@ -10,7 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
 import modelo.academico.Assunto;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 import modelo.questao.Dificuldade;
 import pdf.questao.TipoGabarito;
 import service.pdf.ListaQuestoesPdfException;
@@ -26,7 +26,7 @@ public class GerarListaQuestoesBean implements Serializable
 
 	private Assunto assunto;
 	private Dificuldade dificuldade;
-	private VisibilidadePdf visibilidade;
+	private Visibilidade visibilidade;
 	private TipoGabarito tipoGabarito = TipoGabarito.COMPLETO;
 
 	@Inject

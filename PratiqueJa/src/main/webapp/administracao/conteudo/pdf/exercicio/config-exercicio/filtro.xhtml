@@ -14,7 +14,7 @@
 
 						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
 							<p:outputLabel for="@next" value="Nível"/>
-							<p:selectOneMenu value="#{configExercicioBean.filtro.nivel}">
+							<p:selectOneMenu value="#{configPdfExercicioBean.filtro.nivel}">
 								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{nivelBean.opcoes}" var="opcao"
 								itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
@@ -23,7 +23,7 @@
 
 						<div class="campo col-12 md:col-6 lg:col-6 xl:col-4">
 							<p:outputLabel for="@next" value="Visibilidade"/>
-							<p:selectOneMenu value="#{configExercicioBean.filtro.visibilidade}">
+							<p:selectOneMenu value="#{configPdfExercicioBean.filtro.visibilidade}">
 								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{visibilidadePdfBean.opcoes}" var="opcao"
 								itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
@@ -39,13 +39,13 @@
 						<p:commandButton value="Limpar"
 						styleClass="ui-button-flat ui-button-plain"
 						icon="fa-solid fa-eraser" oncomplete="manterFiltroAberto('filtros');"
-						action="#{configExercicioBean.filtrarInit}" update="@form">
+						action="#{configPdfExercicioBean.filtrarInit}" update="@form">
 						</p:commandButton>
 
 						<p:commandButton id="filtrar" value="Filtrar"
 						styleClass="ui-button-raised ui-button-primary"
 						icon="pi pi-search" oncomplete="manterFiltroAberto('filtros');"
-						action="#{configExercicioBean.filtrar}" update="@form, :growl" process="@form">
+						action="#{configPdfExercicioBean.filtrar}" update="@form, :growl" process="@form">
 							<p:defaultCommand target="form:filtrar"/>
 						</p:commandButton>
 

@@ -51,7 +51,7 @@ public class Pdf implements Serializable, Entidade
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "visibilidade", genero = modelo.auditoria.GeneroGramatical.FEMININO)
-	private VisibilidadePdf visibilidade;
+	private Visibilidade visibilidade;
 
 	@Size(max = 511)
 	@AuditLabel(value = "descrição", genero = modelo.auditoria.GeneroGramatical.FEMININO)

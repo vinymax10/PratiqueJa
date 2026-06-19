@@ -1,7 +1,7 @@
 package dao.matematica;
 
 import dao.DAO;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.ParagrafoExercicio;
 
 public class ParagrafoExercicioDAO extends DAO<ParagrafoExercicio>
 {

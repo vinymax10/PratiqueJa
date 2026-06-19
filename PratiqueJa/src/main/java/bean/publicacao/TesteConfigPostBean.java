@@ -3,9 +3,7 @@ package bean.publicacao;
 import java.io.IOException;
 import java.io.Serializable;
 
-import util.ColorHolder;
 import bean.download.Diretorio;
-import service.configuracao.DiretorioService;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioPadraoDAO;
 import jakarta.faces.application.FacesMessage;
@@ -17,10 +15,10 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
-import pdfAntigo.social.InstagramFeed;
-import pdfAntigo.social.TikTok;
+import service.configuracao.DiretorioService;
 import service.publicacao.ImagemPostService;
 import service.publicacao.ProgramacaoPostService;
+import util.ColorHolder;
 
 @Data
 @Named
@@ -103,20 +101,20 @@ public class TesteConfigPostBean implements Serializable
 		Diretorio diretorio = diretorioService.criarDiretorio();
 		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssunto(), nivel);
 
-		if(feed)
-		{
-			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
-			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-			gerarLatex.gerarPDF();
-			gerarLatex.convertPNG();
-		}
-		else
-		{
-			TikTok gerarLatex = new TikTok(diretorio);
-			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-			gerarLatex.gerarPDF();
-			gerarLatex.convertPNG();
-		}
+//		if(feed)
+//		{
+//			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
+//			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+//			gerarLatex.gerarPDF();
+//			gerarLatex.convertPNG();
+//		}
+//		else
+//		{
+//			TikTok gerarLatex = new TikTok(diretorio);
+//			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+//			gerarLatex.gerarPDF();
+//			gerarLatex.convertPNG();
+//		}
 
 		try
 		{

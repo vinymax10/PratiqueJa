@@ -9,7 +9,7 @@ import bean.download.Diretorio;
 import dao.academico.AssuntoDAO;
 import dao.configuracao.ConfigDAO;
 import dao.exercicio.ExercicioPadraoDAO;
-import dao.pdf.ConfigExercicioDAO;
+import dao.pdf.ConfigPdfExercicioDAO;
 import dao.pdf.PdfDAO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -19,10 +19,10 @@ import modelo.academico.Assunto;
 import modelo.configuracao.Config;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
-import modelo.pdf.ConfigExercicio;
+import modelo.pdf.ConfigPdfExercicio;
 import modelo.pdf.Pdf;
 import modelo.pdf.TipoPdf;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 import pdf.exercicio.GeradorListaPDF;
 import pdf.exercicio.LayoutLista;
 import service.configuracao.DiretorioService;
@@ -44,7 +44,7 @@ public class ListaExerciciosPdfService
 	@Inject
 	private ExercicioPadraoDAO exercicioPadraoDAO;
 	@Inject
-	private ConfigExercicioDAO configExercicioDAO;
+	private ConfigPdfExercicioDAO configPdfExercicioDAO;
 	@Inject
 	private AssuntoDAO assuntoDAO;
 	@Inject
@@ -60,7 +60,7 @@ public class ListaExerciciosPdfService
 	 * @throws ListaExerciciosPdfException se não houver exercício padrão ou
 	 *         Config válida.
 	 */
-	public Pdf gerar(Assunto assunto, Nivel nivel, VisibilidadePdf visibilidade, boolean comAlternativas)
+	public Pdf gerar(Assunto assunto, Nivel nivel, Visibilidade visibilidade, boolean comAlternativas)
 	throws IOException, InterruptedException
 	{
 		ExercicioPadrao padrao = exercicioPadraoDAO.buscar(assunto, nivel);
@@ -72,7 +72,7 @@ public class ListaExerciciosPdfService
 		Path outputPath = resolverOutputPath(config, assunto, nivel, comAlternativas, visibilidade);
 		Files.createDirectories(outputPath.getParent());
 
-		boolean premium = visibilidade == VisibilidadePdf.Premium;
+		boolean premium = visibilidade == Visibilidade.Premium;
 		byte[] bytes = gerarBytes(padrao, assunto, config, instrucao(nivel, comAlternativas), premium, comAlternativas);
 		Files.write(outputPath, bytes);
 
@@ -87,7 +87,7 @@ public class ListaExerciciosPdfService
 	 */
 	public ResultadoLote gerarTodos()
 	{
-		List<ConfigExercicio> configs = configExercicioDAO.listarTudo();
+		List<ConfigPdfExercicio> configs = configPdfExercicioDAO.listarTudo();
 		if(configs.isEmpty())
 			throw new ListaExerciciosPdfException("Nenhuma Config Exercício cadastrada.");
 
@@ -101,7 +101,7 @@ public class ListaExerciciosPdfService
 		int ignorados = 0;
 		int erros = 0;
 
-		for(ConfigExercicio cfg : configs)
+		for(ConfigPdfExercicio cfg : configs)
 		{
 			for(Assunto assuntoAtual : assuntos)
 			{
@@ -162,18 +162,18 @@ public class ListaExerciciosPdfService
 		}
 	}
 
-	private Path resolverOutputPath(Config config, Assunto assunto, Nivel nivel, boolean comAlternativas, VisibilidadePdf visibilidade)
+	private Path resolverOutputPath(Config config, Assunto assunto, Nivel nivel, boolean comAlternativas, Visibilidade visibilidade)
 	{
 		String assuntoDir = assunto.getChave().toLowerCase();
 		String n = nivel.name().replace("Nivel", "");
 		String tipo = comAlternativas ? "alt" : "disc";
-		String vis = visibilidade == VisibilidadePdf.Premium ? "premium" : "basico";
+		String vis = visibilidade == Visibilidade.Premium ? "premium" : "basico";
 		String filename = assuntoDir + "_nivel" + n + "_" + tipo + "_" + vis + ".pdf";
 
 		return Path.of(config.getEnderecoPdf()).resolve(SUBPASTA).resolve(assuntoDir).resolve(filename);
 	}
 
-	private Pdf salvarEntidade(ExercicioPadrao padrao, Assunto assunto, Nivel nivel, VisibilidadePdf visibilidade, boolean comAlternativas, Path outputPath)
+	private Pdf salvarEntidade(ExercicioPadrao padrao, Assunto assunto, Nivel nivel, Visibilidade visibilidade, boolean comAlternativas, Path outputPath)
 	{
 		Pdf pdf = new Pdf();
 		pdf.setAssunto(assunto);

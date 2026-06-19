@@ -17,8 +17,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.Entidade;
+import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Exercicio;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "exercicioPadrao", "contas", "teste" })

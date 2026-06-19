@@ -3,9 +3,8 @@ package dao.exercicio;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.download.SetDownload;
-import filtro.exercicio.FiltroExercicioPadrao;
 import dao.DAO;
+import filtro.exercicio.FiltroExercicioPadrao;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -32,17 +31,11 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if(filtroExercicio.getQuantidade() != 0)
-		{
-			predicates.add(builder.equal(fromExercicio.get("quantidade"), filtroExercicio.getQuantidade()));
-		}
-
 		if(filtroExercicio.getNomeEnunciadoDescricao() != null && !filtroExercicio.getNomeEnunciadoDescricao().isBlank())
 		{
 			String like = "%" + filtroExercicio.getNomeEnunciadoDescricao() + "%";
 			predicates.add(builder.or(
 				builder.like(fromExercicio.<String>get("nome"), like),
-				builder.like(fromExercicio.<String>get("enunciado"), like),
 				builder.like(fromExercicio.<String>get("descricao"), like)
 			));
 		}
@@ -70,34 +63,6 @@ public class ExercicioPadraoDAO extends DAO<ExercicioPadrao>
 				builder.asc(fromExercicio.get("assunto").get("ordem")),
 				builder.asc(fromExercicio.get("nivel"))
 			)
-		);
-
-		return typedQuery.getResultList();
-	}
-
-	public List<ExercicioPadrao> buscar(SetDownload setDownload)
-	{
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<ExercicioPadrao> query = builder.createQuery(ExercicioPadrao.class);
-		Root<ExercicioPadrao> fromExercicio = query.from(ExercicioPadrao.class);
-
-		List<Predicate> predicates = new ArrayList<>();
-
-		if(setDownload.getQuantidadeNivel1() == 0)
-			predicates.add(builder.notEqual(fromExercicio.<Nivel>get("nivel"), Nivel.Nivel1));
-
-		if(setDownload.getQuantidadeNivel2() == 0)
-			predicates.add(builder.notEqual(fromExercicio.<Nivel>get("nivel"), Nivel.Nivel2));
-
-		if(setDownload.getQuantidadeNivel3() == 0)
-			predicates.add(builder.notEqual(fromExercicio.<Nivel>get("nivel"), Nivel.Nivel3));
-
-		predicates.add(builder.and(fromExercicio.get("assunto").in(setDownload.getAssuntos())));
-
-		TypedQuery<ExercicioPadrao> typedQuery = em.createQuery(
-			query.select(fromExercicio)
-			.where(predicates.toArray(new Predicate[0]))
-			.distinct(true)
 		);
 
 		return typedQuery.getResultList();

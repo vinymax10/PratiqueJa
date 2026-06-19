@@ -1,6 +1,6 @@
 package matematica;
 
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 
 /**
  * Ponto único de instanciação de exercícios a partir do nome da classe

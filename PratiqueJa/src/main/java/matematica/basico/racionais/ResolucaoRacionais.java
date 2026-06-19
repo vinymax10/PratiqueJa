@@ -1,7 +1,7 @@
 package matematica.basico.racionais;
 
 import matematica.Racional;
-import pdfAntigo.util.Convert;
+import pdf.util.Convert;
 
 
 public class ResolucaoRacionais

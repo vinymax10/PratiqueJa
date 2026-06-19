@@ -18,7 +18,7 @@ import dao.teste.ResultadoTesteDAO;
 import dao.teste.TesteDAO;
 import lombok.Data;
 import matematica.ExercicioFactory;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.ResultadoTeste;

@@ -6,11 +6,11 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="#{configExercicioBean.nome}" />
+		<h:outputText class="linkPage" value="#{configPdfExercicioBean.nome}" />
 	</ui:define>
 
 	<f:metadata>
-		<f:viewAction action="#{configExercicioBean.filtrar()}" />
+		<f:viewAction action="#{configPdfExercicioBean.filtrar()}" />
 	</f:metadata>
 
 	<h:form id="form" class="form">
@@ -42,11 +42,11 @@
 		<ui:include src="/administracao/conteudo/pdf/exercicio/config-exercicio/filtro.xhtml" />
 
 		<p:dataTable id="tabela"  stripedRows="true"
-			var="entidade" value="#{configExercicioBean.lista}" reflow="true"
-			selection="#{configExercicioBean.entidade}" selectionMode="single"
+			var="entidade" value="#{configPdfExercicioBean.lista}" reflow="true"
+			selection="#{configPdfExercicioBean.entidade}" selectionMode="single"
 			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">
 
-			<p:ajax event="rowSelect" update="@form" listener="#{configExercicioBean.onSelected}" resetValues="true" />
+			<p:ajax event="rowSelect" update="@form" listener="#{configPdfExercicioBean.onSelected}" resetValues="true" />
 
 			<p:column headerText="Nível" responsivePriority="1" width="15%">
 				<h:outputText value="#{entidade.nivel.nome}" />

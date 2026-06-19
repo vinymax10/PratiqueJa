@@ -18,6 +18,7 @@ import infra.Cripto;
 import infra.Navegacao;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
+import service.exercicio.ExercicioService.ResultadoLote;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -25,8 +26,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import matematica.ExercicioFactory;
 import modelo.academico.Assunto;
+import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.Exercicio;
 import modelo.seguranca.PermissaoPadrao;
 import service.configuracao.DiretorioService;
 import service.exercicio.ExercicioService;
@@ -213,22 +214,6 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		}
 	}
 
-	public void renovarExercicios()
-	{
-		if(assuntoAtual == null) return;
-		try
-		{
-			exercicios = exercicioService.renovarExercicios(assuntoAtual);
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
-				exercicios.size() + " exercício(s) renovado(s) com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível renovar os exercícios.");
-		}
-	}
-
 	/** Registra a resposta de um exercício específico (cards da aba). */
 	public String responder(Exercicio exercicio)
 	{
@@ -289,6 +274,30 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		{
 			e.printStackTrace();
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível remover o(a) " + nome);
+		}
+	}
+
+	public void gerarTodos()
+	{
+		try
+		{
+			ResultadoLote resultado = exercicioService.gerarTodos();
+
+			String msg = resultado.getGerados() + " exercício(s) gerado(s)";
+			if(resultado.getIgnorados() > 0)
+				msg += ", " + resultado.getIgnorados() + " ignorado(s) (sem exercício padrão)";
+			if(resultado.getErros() > 0)
+				msg += ", " + resultado.getErros() + " erro(s)";
+			msg += ".";
+
+			FacesMessage.Severity severity = resultado.getErros() > 0 ? FacesMessage.SEVERITY_WARN : FacesMessage.SEVERITY_INFO;
+			Mensagem.send("growl", severity, msg);
+			filtrar();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Erro ao gerar exercícios: " + e.getMessage());
 		}
 	}
 

@@ -7,7 +7,7 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 
 @Named
 @ApplicationScoped
@@ -16,5 +16,5 @@ public class VisibilidadePdfBean implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	@Getter
-	private final List<VisibilidadePdf> opcoes = Arrays.asList(VisibilidadePdf.values());
+	private final List<Visibilidade> opcoes = Arrays.asList(Visibilidade.values());
 }

@@ -1,20 +1,11 @@
 package bean.questao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
-import infra.DadosGrafico;
-import infra.GraficoPeriodo;
 import bean.PaiBean;
-import bean.download.Diretorio;
 import bean.exercicio.ConfigDownload;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
@@ -22,8 +13,9 @@ import dao.questao.AlternativaDAO;
 import dao.questao.QuestaoDAO;
 import dao.questao.ResultadoQuestaoDAO;
 import dao.usuario.UsuarioDAO;
-import exceptions.RelacaoException;
 import filtro.questao.FiltroQuestao;
+import infra.DadosGrafico;
+import infra.GraficoPeriodo;
 import infra.Navegacao;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -44,7 +36,6 @@ import modelo.questao.ResultadoQuestao;
 import modelo.questao.TipoFiltro;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
-import pdfAntigo.questao.GerarLatexQuestao;
 import service.configuracao.DiretorioService;
 import util.ClasseAux;
 import web.session.Sessao;
@@ -300,36 +291,6 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 			if(!questao.isJaMostrouResolucaoComentada())
 				questao.setJaMostrouResolucaoComentada(true);
 		}
-	}
-
-	public StreamedContent download(boolean massa)
-	{
-		Usuario usuario = Sessao.getUsuarioLogado();
-		usuario = usuarioDAO.carrega(usuario.getId());
-		configDownload.setUsuario(usuario);
-
-		Diretorio diretorio = diretorioService.criarDiretorio();
-
-		GerarLatexQuestao gerarLatex = new GerarLatexQuestao(diretorio);
-		gerarLatex.gerarPDFQuestoes(questoes, configDownload);
-		gerarLatex.gerar();
-
-		File initialFile = new File(diretorio.getEnderecoPdf());
-		InputStream inStream;
-		StreamedContent file = null;
-		try
-		{
-			inStream = new FileInputStream(initialFile);
-			file = DefaultStreamedContent.builder().name("Questoes.pdf").contentType("aplication/pdf").stream(() -> inStream).build();
-		}
-		catch(FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-
-		controleAcessoBean.registrarDownload(diretorio.getEnderecoPdf());
-		diretorioService.freeDiretorio(diretorio);
-		return file;
 	}
 
 	public void podeFazerDownloadAssunto()

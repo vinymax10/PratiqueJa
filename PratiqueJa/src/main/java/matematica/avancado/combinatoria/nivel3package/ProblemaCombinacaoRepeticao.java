@@ -57,7 +57,7 @@ public class ProblemaCombinacaoRepeticao
 
 	public String resultado()
 	{
-		return ""+Algebra.fatorial(n+k-1)/(Algebra.fatorial(k)*Algebra.fatorial(n-1));
+		return ""+(Algebra.fatorial(n+k-1, n-1)/Algebra.fatorial(k));
 	}
 
 	public String getPergunta()

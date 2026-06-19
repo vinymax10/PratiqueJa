@@ -2,7 +2,7 @@ package matematica.intermediario.radiciacao.nivel2package;
 
 import matematica.GeradorExercicio;
 import matematica.intermediario.radiciacao.ResolucaoRadiciacao;
-import pdfAntigo.util.Convert;
+import pdf.util.Convert;
 
 public class Radiciacao4 extends GeradorExercicio
 {

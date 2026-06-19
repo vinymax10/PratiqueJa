@@ -20,10 +20,10 @@ import matematica.GeradorExercicio;
 import modelo.avaliacao.ItemPedidoAvaliacao;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
 import pdf.exercicio.LayoutLista;
 

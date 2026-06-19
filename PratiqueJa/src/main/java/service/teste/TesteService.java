@@ -6,7 +6,7 @@ import dao.teste.TesteDAO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import matematica.ExercicioFactory;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 import modelo.teste.ConteudoTeste;
 import modelo.teste.EtapaTeste;
 import modelo.teste.Teste;

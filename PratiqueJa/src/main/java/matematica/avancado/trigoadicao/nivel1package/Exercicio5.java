@@ -14,22 +14,24 @@ public class Exercicio5 extends GeradorExercicio
 		// choice 1: tg(2·60°) = tg(120°) = -√3
 		int choice = rand.nextInt(2);
 
-		String angulo, passoTg, passoDen, resultado;
+		String angulo, passoTg, denCalculo, denValor, resultado;
 		List<String> distratores = new ArrayList<>();
 
 		if (choice == 0) {
-			angulo    = "30°";
-			passoTg   = "\\dfrac{\\sqrt{3}}{3}";
-			passoDen  = "1 - \\left(\\dfrac{\\sqrt{3}}{3}\\right)^2 = 1 - \\dfrac{1}{3} = \\dfrac{2}{3}";
-			resultado = "\\sqrt{3}";
+			angulo     = "30°";
+			passoTg    = "\\dfrac{\\sqrt{3}}{3}";
+			denCalculo = "1 - \\left(\\dfrac{\\sqrt{3}}{3}\\right)^2 = 1 - \\dfrac{1}{3}";
+			denValor   = "\\dfrac{2}{3}";
+			resultado  = "\\sqrt{3}";
 			distratores.add("\\(-\\sqrt{3}\\)");
 			distratores.add("\\(\\dfrac{\\sqrt{3}}{3}\\)");
 			distratores.add("\\(\\dfrac{2\\sqrt{3}}{3}\\)");
 		} else {
-			angulo    = "60°";
-			passoTg   = "\\sqrt{3}";
-			passoDen  = "1 - (\\sqrt{3})^2 = 1 - 3 = -2";
-			resultado = "-\\sqrt{3}";
+			angulo     = "60°";
+			passoTg    = "\\sqrt{3}";
+			denCalculo = "1 - (\\sqrt{3})^2 = 1 - 3";
+			denValor   = "-2";
+			resultado  = "-\\sqrt{3}";
 			distratores.add("\\(\\sqrt{3}\\)");
 			distratores.add("\\(-\\dfrac{\\sqrt{3}}{3}\\)");
 			distratores.add("\\(-\\dfrac{\\sqrt{3}}{2}\\)");
@@ -39,8 +41,8 @@ public class Exercicio5 extends GeradorExercicio
 				+ " para calcular \\(\\operatorname{tg}(2 \\cdot " + angulo + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Com \\(\\operatorname{tg}(" + angulo + ") = " + passoTg + "\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(2 \\cdot " + angulo + ") = \\dfrac{2 \\cdot " + passoTg + "}{" + passoDen + "} = \\mathbf{" + resultado + "}\\)");
+		setResolucao("Com \\(\\operatorname{tg}(" + angulo + ") = " + passoTg + "\\). \\(\\\\\\)"
+				+ "Denominador: \\(" + denCalculo + " = " + denValor + "\\). \\(\\\\\\)"
+				+ "\\(\\operatorname{tg}(2 \\cdot " + angulo + ") = \\dfrac{2 \\cdot " + passoTg + "}{" + denValor + "} = \\mathbf{" + resultado + "}\\)");
 	}
 }

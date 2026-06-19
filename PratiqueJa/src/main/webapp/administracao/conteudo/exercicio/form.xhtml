@@ -51,6 +51,16 @@
 					value="#{exercicioBean.entidade.global}" />
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-3">
+				<p:outputLabel for="@next" value="Visibilidade" />
+				<p:selectOneMenu value="#{exercicioBean.entidade.visibilidade}">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{visibilidadePdfBean.opcoes}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
 		</div>
 
 		<ui:include rendered="#{!exercicioBean.cadastro}"

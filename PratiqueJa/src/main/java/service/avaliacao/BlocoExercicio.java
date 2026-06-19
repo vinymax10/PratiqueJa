@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import modelo.avaliacao.FormatoAvaliacao;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 import pdf.exercicio.LayoutLista;
 
 /**

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 import modelo.academico.Assunto;
 import modelo.pdf.TipoPdf;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 
 @Data
 public class FiltroPdf implements Serializable
@@ -14,7 +14,7 @@ public class FiltroPdf implements Serializable
 
 	private Assunto assunto;
 
-	private VisibilidadePdf visibilidade;
+	private Visibilidade visibilidade;
 
 	private TipoPdf tipo;
 

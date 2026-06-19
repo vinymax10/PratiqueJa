@@ -47,15 +47,6 @@ public class ExercicioPadrao implements Serializable, Entidade
 	@AuditLabel(value = "nome")
 	private String nome;
 
-	@AuditLabel(value = "quantidade", genero = GeneroGramatical.FEMININO)
-	private int quantidade;
-
-	@AuditLabel(value = "enunciado")
-	private String enunciado;
-
-	@AuditLabel(value = "enunciado singular")
-	private String enunciadoSingular;
-
 	@Column(length = 1023)
 	@Size(max = 1023)
 	@AuditLabel(value = "descrição", genero = GeneroGramatical.FEMININO)

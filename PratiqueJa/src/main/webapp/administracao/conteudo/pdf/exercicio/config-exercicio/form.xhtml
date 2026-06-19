@@ -6,13 +6,13 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="#{configExercicioBean.nome}" />
+		<h:outputText class="linkPage" value="#{configPdfExercicioBean.nome}" />
 	</ui:define>
 
 	<f:metadata>
-		<f:viewParam name="chave" value="#{configExercicioBean.chave}" />
-		<f:viewParam name="cadastro" value="#{configExercicioBean.cadastro}" converter="jakarta.faces.Boolean" />
-		<f:viewAction action="#{configExercicioBean.carregar()}" />
+		<f:viewParam name="chave" value="#{configPdfExercicioBean.chave}" />
+		<f:viewParam name="cadastro" value="#{configPdfExercicioBean.cadastro}" converter="jakarta.faces.Boolean" />
+		<f:viewAction action="#{configPdfExercicioBean.carregar()}" />
 	</f:metadata>
 
 	<h:form id="form" class="form">
@@ -23,7 +23,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Nível" />
-				<p:selectOneMenu value="#{configExercicioBean.entidade.nivel}"
+				<p:selectOneMenu value="#{configPdfExercicioBean.entidade.nivel}"
 				required="true" requiredMessage="O nível é obrigatório">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{nivelBean.opcoes}"
@@ -34,7 +34,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Visibilidade" />
-				<p:selectOneMenu value="#{configExercicioBean.entidade.visibilidade}"
+				<p:selectOneMenu value="#{configPdfExercicioBean.entidade.visibilidade}"
 				required="true" requiredMessage="A visibilidade é obrigatória">
 					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
 					<f:selectItems value="#{visibilidadePdfBean.opcoes}"
@@ -45,7 +45,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Quantidade Padrão" />
-				<p:inputNumber value="#{configExercicioBean.entidade.quantidadePadrao}"
+				<p:inputNumber value="#{configPdfExercicioBean.entidade.quantidadePadrao}"
 				decimalPlaces="0" minValue="0"
 				required="true" requiredMessage="A quantidade padrão é obrigatória" />
 				<p:message for="@previous" display="text" />
@@ -53,7 +53,7 @@
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Quantidade Espaçoso" />
-				<p:inputNumber value="#{configExercicioBean.entidade.quantidadeEspacoso}"
+				<p:inputNumber value="#{configPdfExercicioBean.entidade.quantidadeEspacoso}"
 				decimalPlaces="0" minValue="0"
 				required="true" requiredMessage="A quantidade espaçoso é obrigatória" />
 				<p:message for="@previous" display="text" />
@@ -62,13 +62,13 @@
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Com Alternativas" />
 				<p:toggleSwitch class="toggleSwitch-form"
-				value="#{configExercicioBean.entidade.comAlternativas}" />
+				value="#{configPdfExercicioBean.entidade.comAlternativas}" />
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3">
 				<p:outputLabel for="@next" value="Com Resolução" />
 				<p:toggleSwitch class="toggleSwitch-form"
-				value="#{configExercicioBean.entidade.comResolucao}" />
+				value="#{configPdfExercicioBean.entidade.comResolucao}" />
 			</h:panelGroup>
 
 		</div>
@@ -80,9 +80,9 @@
 			<div class="flex gap-3 flex-wrap">
 
 				<p:commandButton value="Remover" icon="pi pi-trash"
-					rendered="#{!configExercicioBean.cadastro}"
+					rendered="#{!configPdfExercicioBean.cadastro}"
 					styleClass="ui-button-danger ui-button-flat"
-					action="#{configExercicioBean.remover}" update="@form, :growl"
+					action="#{configPdfExercicioBean.remover}" update="@form, :growl"
 					process="@this">
 					<p:confirm header="Confirmação" icon="pi pi-info-circle"
 					message="Você tem certeza que deseja remover esta Config Exercício?" />
@@ -93,10 +93,10 @@
 			<div class="flex gap-3 flex-wrap">
 
 				<p:commandButton id="auditoria" value="Auditoria"
-					rendered="#{sessaoBean.podeVerAuditoria and !configExercicioBean.cadastro}"
+					rendered="#{sessaoBean.podeVerAuditoria and !configPdfExercicioBean.cadastro}"
 					styleClass="ui-button-flat ui-button-plain"
 					icon="fa-regular fa-eye"
-					action="#{auditoriaBean.carregar(configExercicioBean.entidade, configExercicioBean.nome)}"
+					action="#{auditoriaBean.carregar(configPdfExercicioBean.entidade, configPdfExercicioBean.nome)}"
 					update="dialog-auditoria"
 					process="@this" oncomplete="PF('dialogAuditoria').show()">
 				</p:commandButton>
@@ -107,19 +107,19 @@
 				href="/administracao/conteudo/pdf/exercicio/config-exercicio/list.xhtml" />
 
 				<p:commandButton id="adicionarCadastro" value="Adicionar"
-					rendered="#{configExercicioBean.cadastro}"
+					rendered="#{configPdfExercicioBean.cadastro}"
 					styleClass="ui-button-raised ui-button-success"
 					icon="pi pi-plus"
-					action="#{configExercicioBean.adicionar(false)}" update="@form, :growl"
+					action="#{configPdfExercicioBean.adicionar(false)}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="adicionarCadastro" />
 				</p:commandButton>
 
 				<p:commandButton id="salvarCadastro" value="Salvar"
-					rendered="#{!configExercicioBean.cadastro}"
+					rendered="#{!configPdfExercicioBean.cadastro}"
 					styleClass="ui-button-raised ui-button-primary"
 					icon="pi pi-check"
-					action="#{configExercicioBean.salvar(false)}" update="@form, :growl"
+					action="#{configPdfExercicioBean.salvar(false)}" update="@form, :growl"
 					process="@form">
 						<p:defaultCommand target="salvarCadastro" />
 				</p:commandButton>

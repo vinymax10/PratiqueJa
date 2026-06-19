@@ -12,14 +12,14 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import util.StringAux;
 import jakarta.el.MethodExpression;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import lombok.Data;
-import pdfAntigo.relatorio.TabelaPDF;
+import pdf.relatorio.TabelaPDF;
+import util.StringAux;
 
 @Data
 @Named

@@ -13,8 +13,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.Exercicio;
 
 /**
  * Gera a página de gabarito de uma avaliação para uso no modo AGRUPADO_NO_FINAL.

@@ -10,9 +10,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-import modelo.matematica.AlternativaExercicio;
-import modelo.matematica.Exercicio;
-import modelo.matematica.ParagrafoExercicio;
+import modelo.exercicio.AlternativaExercicio;
+import modelo.exercicio.Exercicio;
+import modelo.exercicio.ParagrafoExercicio;
 
 /**
  * Utilitário (main) para gerar exercícios de um assunto e exportá-los em CSV.

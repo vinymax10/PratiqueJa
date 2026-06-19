@@ -20,15 +20,12 @@ public class FiltroExercicioPadrao implements Serializable
 
 	private String nomeEnunciadoDescricao;
 
-	private int quantidade;
-
 	public void limpar()
 	{
 		assunto = null;
 		modulo = null;
 		nivel = null;
 		nomeEnunciadoDescricao = null;
-		quantidade = 0;
 	}
 
 }

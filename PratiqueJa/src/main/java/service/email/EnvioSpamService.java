@@ -1,17 +1,10 @@
 package service.email;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-import javax.sql.rowset.serial.SerialBlob;
-
-import org.apache.commons.io.IOUtils;
 
 import dao.email.ConfigSpamDAO;
 import dao.email.ProgramacaoSpamDAO;
@@ -23,11 +16,9 @@ import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import modelo.DocumentoFile;
-import modelo.academico.Assunto;
 import modelo.email.ConfigSpam;
 import modelo.email.ProgramacaoSpam;
 import modelo.publicacao.FinalidadeCta;
-import service.ebook.EBookService;
 
 @Singleton
 @Startup
@@ -53,9 +44,6 @@ public class EnvioSpamService implements Serializable
 	private CtaDAO ctaDAO;
 
 	@Inject
-	private EBookService ebookService;
-
-	@Inject
 	private ServletContext servletContext;
 
 	private List<ProgramacaoSpam> programacoesSpams = new ArrayList<>();
@@ -79,7 +67,7 @@ public class EnvioSpamService implements Serializable
 			if(configSpam.podeGerar())
 			{
 				logger.fine("gerando conteudo para Spam");
-				gerarListaExercicio();
+//				gerarListaExercicio();
 
 				configSpam.setUltimoEnvio(LocalDate.now());
 				configSpam = configSpamDAO.salvar(configSpam);
@@ -96,28 +84,28 @@ public class EnvioSpamService implements Serializable
 		enviarProgramacao();
 	}
 
-	public void gerarListaExercicio()
-	{
-		Assunto assunto = programacaoSpam.getAssunto();
-		String basePath = servletContext.getRealPath("");
-
-		ByteArrayOutputStream exercicioOutputStream = ebookService.construirListasExercicios(assunto, configSpam, basePath, p -> {});
-		InputStream inStream = new ByteArrayInputStream(exercicioOutputStream.toByteArray());
-
-		DocumentoFile documentoFile = new DocumentoFile();
-		try
-		{
-			SerialBlob serialBlob = new SerialBlob(IOUtils.toByteArray(inStream));
-			documentoFile.setFile(serialBlob);
-			documentoFile.setEndDocumentacao((assunto.getOrdem() + 1) + "_" + assunto.getNome() + ".pdf");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		enviarEmail("Lista de exercícios do Pratique Já", documentoFile, assunto.getNome());
-	}
+//	public void gerarListaExercicio()
+//	{
+//		Assunto assunto = programacaoSpam.getAssunto();
+//		String basePath = servletContext.getRealPath("");
+//
+//		ByteArrayOutputStream exercicioOutputStream = ebookService.construirListasExercicios(assunto, configSpam, basePath, p -> {});
+//		InputStream inStream = new ByteArrayInputStream(exercicioOutputStream.toByteArray());
+//
+//		DocumentoFile documentoFile = new DocumentoFile();
+//		try
+//		{
+//			SerialBlob serialBlob = new SerialBlob(IOUtils.toByteArray(inStream));
+//			documentoFile.setFile(serialBlob);
+//			documentoFile.setEndDocumentacao((assunto.getOrdem() + 1) + "_" + assunto.getNome() + ".pdf");
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		enviarEmail("Lista de exercícios do Pratique Já", documentoFile, assunto.getNome());
+//	}
 
 	private void enviarEmail(String assuntoEmail, DocumentoFile documentoFile, String assunto)
 	{

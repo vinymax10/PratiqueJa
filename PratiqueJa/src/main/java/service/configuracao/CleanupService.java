@@ -12,7 +12,7 @@ import dao.configuracao.ConfigCleanupDAO;
 import dao.exercicio.ExercicioDAO;
 import dao.teste.TesteDAO;
 import modelo.configuracao.ConfigCleanup;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 import modelo.teste.Teste;
 
 @Singleton

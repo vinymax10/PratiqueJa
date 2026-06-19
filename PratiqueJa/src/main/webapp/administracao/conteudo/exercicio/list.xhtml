@@ -37,6 +37,14 @@
 
 			<div class="flex gap-3 align-items-center justify-content-end">
 
+				<p:commandButton value="Gerar Todos" icon="pi pi-bolt"
+				styleClass="ui-button-raised ui-button-warning"
+				action="#{exercicioBean.gerarTodos()}" update="@form, :growl"
+				process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Gerar exercícios para todos os assuntos com base nas Config Exercício cadastradas?" />
+				</p:commandButton>
+
 				<p:commandButton value="Remover Todos" icon="pi pi-trash"
 				styleClass="ui-button-danger ui-button-flat"
 				action="#{exercicioBean.removerTodos()}" update="@form, :growl"
@@ -88,6 +96,12 @@
 
 			<p:column headerText="Global" responsivePriority="2">
 				<h:outputText value="#{entidade.global}" converter="simNaoConverter"/>
+			</p:column>
+
+			<p:column headerText="Visibilidade" responsivePriority="2">
+				<h:outputText value="#{entidade.visibilidade.nome}"
+				rendered="#{not empty entidade.visibilidade}" />
+				<h:outputText value="—" rendered="#{empty entidade.visibilidade}" />
 			</p:column>
 
 			<p:column headerText="Visualizar" responsivePriority="3">

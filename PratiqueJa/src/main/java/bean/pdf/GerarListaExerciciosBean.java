@@ -11,7 +11,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import modelo.academico.Assunto;
 import modelo.exercicio.Nivel;
-import modelo.pdf.VisibilidadePdf;
+import modelo.pdf.Visibilidade;
 import service.pdf.ListaExerciciosPdfException;
 import service.pdf.ListaExerciciosPdfService;
 import service.pdf.ListaExerciciosPdfService.ResultadoLote;
@@ -26,7 +26,7 @@ public class GerarListaExerciciosBean implements Serializable
 	private Assunto assunto;
 	private Nivel nivel;
 	private boolean comAlternativas = true;
-	private VisibilidadePdf visibilidade;
+	private Visibilidade visibilidade;
 
 	@Inject
 	private ListaExerciciosPdfService listaExerciciosPdfService;

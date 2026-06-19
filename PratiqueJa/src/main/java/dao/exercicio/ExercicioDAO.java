@@ -12,7 +12,7 @@ import jakarta.persistence.criteria.Root;
 import dao.DAO;
 import filtro.exercicio.FiltroExercicio;
 import modelo.academico.Assunto;
-import modelo.matematica.Exercicio;
+import modelo.exercicio.Exercicio;
 
 public class ExercicioDAO extends DAO<Exercicio>
 {
@@ -39,6 +39,9 @@ public class ExercicioDAO extends DAO<Exercicio>
 
 		if(filtro.getGlobal() != null)
 			predicates.add(builder.equal(from.get("global"), filtro.getGlobal().booleanValue()));
+
+		if(filtro.getVisibilidade() != null)
+			predicates.add(builder.equal(from.get("visibilidade"), filtro.getVisibilidade()));
 
 		if(filtro.getTexto() != null && !filtro.getTexto().isBlank())
 			predicates.add(builder.like(builder.lower(from.join("paragrafos", JoinType.LEFT).get("texto")),

@@ -177,6 +177,6 @@ public class ProgramacaoSpamBean implements Serializable
 		ProgramacaoSpam ps = programacaoSpamDefault();
 		ps.setAssunto(assunto);
 		programacaoSpamDAO.salvar(ps);
-		envioPostService.acorda();
+//		envioPostService.acorda();
 	}
 }
