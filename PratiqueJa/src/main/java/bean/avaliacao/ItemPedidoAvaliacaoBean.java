@@ -10,7 +10,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import modelo.avaliacao.ConfigPedidoAvaliacao;
 import modelo.avaliacao.ItemPedidoAvaliacao;
 import modelo.exercicio.ExercicioPadrao;
 
@@ -109,10 +108,10 @@ public class ItemPedidoAvaliacaoBean extends FilhoBean<ItemPedidoAvaliacao, Item
 
 	private void validarLimite(int quantidadeAtual) throws RelacaoException
 	{
-		ConfigPedidoAvaliacao config = pedidoAvaliacaoBean.getConfig();
+		int maxExercicios = pedidoAvaliacaoBean.getMaxExerciciosPorAvaliacao();
 		int total = pedidoAvaliacaoBean.totalExercicios() - quantidadeAtual + entidade.getQuantidade();
-		validar(total > config.getMaxExerciciosPorAvaliacao(),
-			"Limite de " + config.getMaxExerciciosPorAvaliacao() + " exercícios por avaliação atingido.");
+		validar(total > maxExercicios,
+			"Limite de " + maxExercicios + " exercícios por avaliação atingido.");
 	}
 
 	private ExercicioPadrao buscarExercicioPadrao(ItemPedidoAvaliacao item)

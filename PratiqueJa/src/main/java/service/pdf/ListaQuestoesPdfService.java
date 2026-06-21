@@ -9,6 +9,7 @@ import java.util.List;
 import bean.download.Diretorio;
 import dao.academico.AssuntoDAO;
 import dao.configuracao.ConfigDAO;
+import dao.pdf.ConfigPdfQuestaoDAO;
 import dao.pdf.PdfDAO;
 import dao.questao.QuestaoDAO;
 import filtro.questao.FiltroQuestao;
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import modelo.academico.Assunto;
 import modelo.configuracao.Config;
+import modelo.pdf.ConfigPdfQuestao;
 import modelo.pdf.Pdf;
 import modelo.pdf.TipoPdf;
 import modelo.pdf.Visibilidade;
@@ -52,6 +54,8 @@ public class ListaQuestoesPdfService
 	private ConfigDAO configDAO;
 	@Inject
 	private PdfDAO pdfDAO;
+	@Inject
+	private ConfigPdfQuestaoDAO configPdfQuestaoDAO;
 
 	/**
 	 * Gera o PDF da lista de questões para um único assunto.
@@ -85,65 +89,88 @@ public class ListaQuestoesPdfService
 	}
 
 	/**
-	 * Gera as listas para todas as combinações (assunto × dificuldade).
-	 * A visibilidade é derivada da dificuldade:
-	 * {@link Dificuldade#Facil} → {@link Visibilidade#Basico},
-	 * demais → {@link Visibilidade#Premium}.
-	 * Combinações sem questões suficientes são ignoradas.
+	 * Gera as listas de questões em lotes para cada combinação (assunto × {@link ConfigPdfQuestao}).
+	 * Para cada assunto/dificuldade, <b>todas</b> as questões revisadas entram nos PDFs (sem sorteio):
+	 * são particionadas em lotes de no máximo {@code quantidade} questões (ou um único lote, quando
+	 * {@code todos}). Ex.: 50 questões com quantidade 20 → 3 PDFs (20, 20 e 10).
+	 *
+	 * <p>Visibilidade: apenas o <b>primeiro</b> lote do assunto na dificuldade {@link Dificuldade#Facil}
+	 * fica {@link Visibilidade#Basico}; todos os demais lotes (e demais dificuldades) ficam
+	 * {@link Visibilidade#Premium}. O gabarito traz resolução conforme {@code comResolucao}.
 	 */
-	public ResultadoLote gerarTodos(boolean comAlternativas, TipoGabarito tipoGabarito)
+	public ResultadoLote gerarTodos()
 	{
 		List<Assunto> assuntos = assuntoDAO.todos();
 		if(assuntos.isEmpty())
 			throw new ListaQuestoesPdfException("Nenhum assunto habilitado.");
 
+		List<ConfigPdfQuestao> configs = configPdfQuestaoDAO.todos();
+		if(configs.isEmpty())
+			throw new ListaQuestoesPdfException(
+				"Nenhuma configuração cadastrada. Cadastre em Config PDF Questão.", true);
+
 		Config config = configValido();
+
+		boolean comAlternativas = true;
 
 		int gerados = 0;
 		int ignorados = 0;
 		int erros = 0;
 
-		LayoutLista layout = LayoutLista.PADRAO;
-
 		for(Assunto assuntoAtual : assuntos)
 		{
-			for(Dificuldade dificuldade : Dificuldade.values())
+			for(ConfigPdfQuestao cfg : configs)
 			{
-				Visibilidade visibilidade = visibilidadeDe(dificuldade);
-				try
+				Dificuldade dificuldade   = cfg.getDificuldade();
+				TipoGabarito tipoGabarito = cfg.isComResolucao()
+					? TipoGabarito.COMPLETO : TipoGabarito.SOMENTE_ALTERNATIVAS;
+
+				// Todas as questões do assunto/dificuldade, em ordem fixa (sem sorteio).
+				List<Questao> todas = buscarTodasQuestoes(assuntoAtual, dificuldade);
+				if(todas.isEmpty())
 				{
-					List<Questao> questoes = buscarQuestoes(assuntoAtual, dificuldade, layout.total());
-					if(questoes.size() < layout.total())
-					{
-						ignorados++;
-						continue;
-					}
-
-					Path outputPath = resolverOutputPath(config, assuntoAtual, dificuldade, comAlternativas, visibilidade);
-					Files.createDirectories(outputPath.getParent());
-
-					boolean premium = visibilidade == Visibilidade.Premium;
-					byte[] bytes = gerarBytes(questoes, assuntoAtual, config, instrucao(comAlternativas), premium, comAlternativas, dificuldade, layout, tipoGabarito);
-					Files.write(outputPath, bytes);
-
-					salvarEntidade(assuntoAtual, dificuldade, visibilidade, comAlternativas, outputPath);
-					gerados++;
+					ignorados++;
+					continue;
 				}
-				catch(Exception | LinkageError e)
+
+				// Tamanho do lote: a quantidade do config (ou tudo num PDF só, se "todos").
+				int tamanhoLote = (cfg.isTodos() || cfg.getQuantidade() <= 0)
+					? todas.size() : cfg.getQuantidade();
+				int totalLotes = (todas.size() + tamanhoLote - 1) / tamanhoLote;
+
+				for(int lote = 0; lote < totalLotes; lote++)
 				{
-					e.printStackTrace();
-					erros++;
+					int inicio = lote * tamanhoLote;
+					int fim    = Math.min(inicio + tamanhoLote, todas.size());
+					List<Questao> questoesLote = todas.subList(inicio, fim);
+
+					// Só o 1º PDF do assunto na dificuldade fácil é Básico; o resto, Premium.
+					Visibilidade visibilidade = (dificuldade == Dificuldade.Facil && lote == 0)
+						? Visibilidade.Basico : Visibilidade.Premium;
+
+					try
+					{
+						Path outputPath = resolverOutputPath(config, assuntoAtual, cfg, visibilidade, lote);
+						Files.createDirectories(outputPath.getParent());
+
+						boolean premium = visibilidade == Visibilidade.Premium;
+						byte[] bytes = gerarBytes(questoesLote, assuntoAtual, config, instrucao(comAlternativas),
+							premium, comAlternativas, dificuldade, LayoutLista.PADRAO, tipoGabarito);
+						Files.write(outputPath, bytes);
+
+						salvarEntidade(assuntoAtual, cfg, visibilidade, lote, outputPath);
+						gerados++;
+					}
+					catch(Exception | LinkageError e)
+					{
+						e.printStackTrace();
+						erros++;
+					}
 				}
 			}
 		}
 
 		return new ResultadoLote(gerados, ignorados, erros);
-	}
-
-	/** Facil → Básico; Médio e Difícil → Premium. */
-	private Visibilidade visibilidadeDe(Dificuldade dificuldade)
-	{
-		return dificuldade == Dificuldade.Facil ? Visibilidade.Basico : Visibilidade.Premium;
 	}
 
 	private List<Questao> buscarQuestoes(Assunto assunto, Dificuldade dificuldade, int quantidade)
@@ -164,6 +191,19 @@ public class ListaQuestoesPdfService
 		return todas.subList(0, quantidade);
 	}
 
+	/** Todas as questões revisadas (com resolução em LaTeX) do assunto/dificuldade, sem sorteio nem corte. */
+	private List<Questao> buscarTodasQuestoes(Assunto assunto, Dificuldade dificuldade)
+	{
+		FiltroQuestao filtro = new FiltroQuestao();
+		filtro.setAssunto(assunto);
+		filtro.setRevisada(Boolean.TRUE);
+		filtro.setResolucaoLatex(Boolean.TRUE);
+		if(dificuldade != null)
+			filtro.setDificuldade(dificuldade);
+
+		return questaoDAO.filtrar(filtro);
+	}
+
 	private Config configValido()
 	{
 		Config config = configDAO.buscar();
@@ -177,7 +217,7 @@ public class ListaQuestoesPdfService
 	throws IOException, InterruptedException
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		Path workDir = Path.of(config.getEndereco()).resolve(diretorio.getDiretorio());
+		Path workDir = Path.of(config.getEnderecoLatex()).resolve(diretorio.getDiretorio());
 		try
 		{
 			return new GeradorListaQuestoesPDF.Builder()
@@ -222,6 +262,37 @@ public class ListaQuestoesPdfService
 		pdf.setDescricao(descricaoPdf(assunto, dificuldade, comAlternativas));
 		pdfDAO.adicionar(pdf);
 		return pdf;
+	}
+
+	/** Caminho do PDF de um lote de uma {@link ConfigPdfQuestao} (único por assunto/dificuldade/lote). */
+	private Path resolverOutputPath(Config config, Assunto assunto, ConfigPdfQuestao cfg, Visibilidade visibilidade, int lote)
+	{
+		String assuntoDir = assunto.getChave().toLowerCase();
+		String dif = cfg.getDificuldade().name().toLowerCase();
+		String vis = visibilidade == Visibilidade.Premium ? "premium" : "basico";
+		String res = cfg.isComResolucao() ? "res" : "alt";
+		String filename = assuntoDir + "_" + dif + "_" + vis + "_" + res + "_lote" + (lote + 1) + ".pdf";
+
+		return Path.of(config.getEnderecoPdf()).resolve(SUBPASTA).resolve(assuntoDir).resolve(filename);
+	}
+
+	private Pdf salvarEntidade(Assunto assunto, ConfigPdfQuestao cfg, Visibilidade visibilidade, int lote, Path outputPath)
+	{
+		Pdf pdf = new Pdf();
+		pdf.setAssunto(assunto);
+		pdf.setTipo(TipoPdf.ListaQuestoes);
+		pdf.setCaminho(outputPath.toString());
+		pdf.setVisibilidade(visibilidade);
+		pdf.setDescricao(descricaoPdf(assunto, cfg, visibilidade, lote));
+		pdfDAO.adicionar(pdf);
+		return pdf;
+	}
+
+	private String descricaoPdf(Assunto assunto, ConfigPdfQuestao cfg, Visibilidade visibilidade, int lote)
+	{
+		String res = cfg.isComResolucao() ? "Com Resolução" : "Somente Alternativas";
+		return assunto.getNome() + " - " + cfg.getDificuldade().getNome() + " - "
+			+ visibilidade.getNome() + " - Lote " + (lote + 1) + " - " + res;
 	}
 
 	private String descricaoPdf(Assunto assunto, Dificuldade dificuldade, boolean comAlternativas)

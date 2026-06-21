@@ -15,7 +15,6 @@ import modelo.questao.Dificuldade;
 import pdf.questao.TipoGabarito;
 import service.pdf.ListaQuestoesPdfException;
 import service.pdf.ListaQuestoesPdfService;
-import service.pdf.ListaQuestoesPdfService.ResultadoLote;
 
 @Data
 @Named
@@ -54,33 +53,6 @@ public class GerarListaQuestoesBean implements Serializable
 		{
 			e.printStackTrace();
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Erro ao gerar PDF: " + e.getMessage());
-		}
-	}
-
-	public void gerarTodos()
-	{
-		try
-		{
-			ResultadoLote resultado = listaQuestoesPdfService.gerarTodos(true, tipoGabarito);
-
-			String msg = resultado.getGerados() + " PDF(s) gerado(s)";
-			if(resultado.getIgnorados() > 0)
-				msg += ", " + resultado.getIgnorados() + " ignorado(s) (questões insuficientes)";
-			if(resultado.getErros() > 0)
-				msg += ", " + resultado.getErros() + " erro(s)";
-			msg += ".";
-
-			FacesMessage.Severity severity = resultado.getErros() > 0 ? FacesMessage.SEVERITY_WARN : FacesMessage.SEVERITY_INFO;
-			Mensagem.send("growl", severity, msg);
-		}
-		catch(ListaQuestoesPdfException e)
-		{
-			Mensagem.send("growl", e.isErro() ? FacesMessage.SEVERITY_ERROR : FacesMessage.SEVERITY_WARN, e.getMessage());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Erro ao gerar PDFs: " + e.getMessage());
 		}
 	}
 }

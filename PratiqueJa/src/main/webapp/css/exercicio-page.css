@@ -33,6 +33,21 @@
     transform: translateY(-1px);
 }
 
+/* ---- CARD PREMIUM: faixa dourada no topo + fundo levemente âmbar ---- */
+.ex-card--premium {
+    position: relative;
+    border-color: #f1d49a;
+    background: linear-gradient(180deg, #fffdf6 0%, #ffffff 60%);
+    overflow: hidden;
+}
+.ex-card--premium::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
 .ex-card-header {
     display: flex;
     align-items: center;
@@ -97,6 +112,23 @@
     background: #eff6ff;
     color: #1d4ed8;
     border-color: #bfdbfe;
+}
+
+/* ---- CHIP DE VISIBILIDADE: Premium x Grátis ---- */
+.ex-chip.ex-chip-premium {
+    color: #92400e;
+    background: linear-gradient(90deg, #fde68a, #fbbf24);
+    border-color: #f1d49a;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 2px rgba(217, 119, 6, 0.3);
+}
+.ex-chip.ex-chip-free {
+    color: #065f46;
+    background: #d1fae5;
+    border-color: #a7f3d0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 /* ---- CHIP DE NÍVEL: cor por nível ---- */
@@ -171,6 +203,65 @@
     border-radius: 0 12px 12px 0;
     line-height: 1.7;
     font-size: 0.95rem;
+}
+
+/* ---- BLOQUEIO PREMIUM: aviso de upgrade ---- */
+.ex-premium-lock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 28px 24px;
+    border: 1px dashed #f1d49a;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fffdf6 0%, #fffaf0 100%);
+}
+.ex-premium-lock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+}
+.ex-premium-lock-title {
+    margin: 4px 0 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #92400e;
+}
+.ex-premium-lock-text {
+    margin: 0;
+    max-width: 460px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #6b5b3e;
+}
+.ex-premium-lock-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    transition: background 0.2s, transform 0.15s;
+}
+.ex-premium-lock-cta:hover {
+    background: linear-gradient(90deg, #d97706, #b45309);
+    transform: translateY(-1px);
+    color: #fff;
+    text-decoration: none;
 }
 
 /* ---- RESPONSIVO ---- */

@@ -96,6 +96,12 @@
 			<ui:insert name="topbarExtra"></ui:insert>
 		</div>
 
+		<!-- CTA destaque: vitrine de Produtos -->
+		<a href="/produtos/produtos.xhtml" class="t2-cta-produtos">
+			<i class="fa-solid fa-store"></i>
+			<span class="t2-cta-text">Produtos</span>
+		</a>
+
 		<!-- Ações do usuário -->
 		<h:form id="formPrincipal" style="margin:0">
 			<p:commandButton icon="pi pi-fw pi-user"
@@ -149,11 +155,9 @@
 			<a href="/questao/questao.xhtml" class="t2-menu-item">
 				<i class="pi pi-question-circle"></i> Questões
 			</a>
-			<h:panelGroup rendered="#{sessaoBean.logado}" layout="block">
-				<a href="/avaliacao/list.xhtml" class="t2-menu-item">
-					<i class="pi pi-file-edit"></i> Confecção de Avaliações
-				</a>
-			</h:panelGroup>
+			<a href="/avaliacao/list.xhtml" class="t2-menu-item">
+				<i class="pi pi-file-edit"></i> Criar Avaliação
+			</a>
 			
 			<a href="/post/configuracao.xhtml?configPost=#{sessaoBean.usuario.configPost.id}"
 			class="t2-menu-item">
@@ -317,6 +321,9 @@
 			<a href="/produtos/conteudo/conteudo.xhtml" class="t2-menu-item">
 				<i class="pi pi-instagram"></i> Produção de Conteúdo
 			</a>
+			<a href="/produtos/avaliacao/avaliacao.xhtml" class="t2-menu-item">
+				<i class="fa-solid fa-file-pen"></i> Confecção de Avaliações
+			</a>
 			<a href="/produtos/apostila/apostilas.xhtml" class="t2-menu-item">
 				<i class="fa-solid fa-book-open"></i> Apostilas
 			</a>
@@ -341,6 +348,9 @@
 					</a>
 					<a href="/administracao/conteudo/pdf/exercicio/config-exercicio/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-sliders-h"></i> Config PDF Exercício
+					</a>
+					<a href="/administracao/conteudo/pdf/questao/config-questao/list.xhtml" class="t2-menu-item t2-sub-item">
+						<i class="pi pi-sliders-h"></i> Config PDF Questão
 					</a>
 				</div>
 
@@ -453,9 +463,6 @@
 					</a>
 					<a href="/administracao/configuracao/cleanup/config.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-trash"></i> Cleanup
-					</a>
-					<a href="/administracao/configuracao/pedido-avaliacao/config.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-file-edit"></i> Config. de Avaliações
 					</a>
 					<a href="/administracao/configuracao/spam/config.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-ban"></i> Spam

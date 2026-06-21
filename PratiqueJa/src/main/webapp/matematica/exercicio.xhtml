@@ -25,7 +25,7 @@
 
 		<ui:repeat id="laco" value="#{exercicioBean.exercicios}" var="exercicio" varStatus="status">
 
-			<div class="ex-card">
+			<div class="ex-card #{exercicio.visibilidade == 'Premium' ? 'ex-card--premium' : ''}">
 
 				<div class="ex-card-header">
 
@@ -39,6 +39,16 @@
 							#{exercicio.assunto.nome}
 						</span>
 						<span class="ex-chip ex-chip-#{exercicio.nivel}">#{exercicio.nivel.nome}</span>
+
+						<span class="ex-chip ex-chip-premium"
+							style="#{exercicio.visibilidade == 'Premium' ? '' : 'display:none'}">
+							<i class="pi pi-crown" style="font-size:10px" /> Premium
+						</span>
+
+						<span class="ex-chip ex-chip-free"
+							style="#{exercicio.visibilidade == 'Premium' ? 'display:none' : ''}">
+							<i class="pi pi-lock-open" style="font-size:10px" /> Grátis
+						</span>
 					</div>
 
 				</div>
@@ -54,6 +64,22 @@
 						</p:graphicImage>
 					</ui:repeat>
 				</div>
+
+			  <h:panelGroup layout="block" rendered="#{exercicioBean.bloqueado(exercicio)}">
+				<div class="ex-premium-lock">
+					<div class="ex-premium-lock-icon"><i class="pi pi-crown" /></div>
+					<h4 class="ex-premium-lock-title">Exercício exclusivo Premium</h4>
+					<p class="ex-premium-lock-text">
+						Este exercício está disponível apenas para assinantes Premium.
+						Faça o upgrade da sua conta para responder e ver a resolução comentada.
+					</p>
+					<a href="/produtos/acesso/acesso.xhtml" class="ex-premium-lock-cta">
+						<i class="pi pi-arrow-up-right" /> Fazer upgrade da conta
+					</a>
+				</div>
+			  </h:panelGroup>
+
+			  <h:panelGroup layout="block" rendered="#{!exercicioBean.bloqueado(exercicio)}">
 
 				<h:panelGroup id="resposta">
 
@@ -111,7 +137,7 @@
 
 					<p:commandButton value="Resposta Comentada" icon="pi pi-pencil"
 						styleClass="ui-button-flat ui-button-plain"
-						action="#{exercicio.toogleResolucaoComentada()}"
+						action="#{exercicioBean.toogleResolucaoComentada(exercicio)}"
 						process="@this" oncomplete="reloadMathJax();"
 						update="resolucaoComentada" />
 
@@ -134,6 +160,8 @@
 						</div>
 					</h:panelGroup>
 				</h:panelGroup>
+
+			  </h:panelGroup>
 
 			</div>
 

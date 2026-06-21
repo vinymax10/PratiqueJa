@@ -1,0 +1,135 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+	<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
+	<link rel="stylesheet" href="/css/vitrine.css" type="text/css" />
+
+	<ui:define name="OpenGraph">
+		<meta property="og:title" content="Produtos · Pratique Já"/>
+		<meta property="og:description" content="Conheça tudo o que o Pratique Já oferece: plataforma de estudos, provas para professores, conteúdo para redes sociais e apostilas físicas."/>
+		<meta property="og:url" content="https://pratiqueja.com/produtos/produtos"/>
+		<meta property="og:type" content="website"/>
+	</ui:define>
+
+<!-- HERO -->
+<div class="vit-hero">
+	<span class="vit-eyebrow"><i class="fa-solid fa-gem"></i> Produtos Pratique Já</span>
+	<h1 class="vit-hero-title">Soluções de alto padrão para <span>dominar a Matemática</span></h1>
+	<p class="vit-hero-sub">
+		Da sala de aula às redes sociais: ferramentas pensadas nos mínimos detalhes para estudar com profundidade, ensinar com autoridade e divulgar com qualidade profissional.
+	</p>
+	<div class="vit-hero-tags">
+		<span><i class="fa-solid fa-circle-check"></i> Comece grátis</span>
+		<span><i class="fa-solid fa-bolt"></i> Resultado em minutos</span>
+		<span><i class="fa-solid fa-shield-halved"></i> Conteúdo exclusivo</span>
+	</div>
+</div>
+
+<!-- VITRINE DE PRODUTOS -->
+<div class="vit-grid">
+
+	<!-- ACESSO AO PRATIQUE JÁ -->
+	<a class="vit-card vit-card--blue" href="/produtos/acesso/acesso.xhtml">
+		<div class="vit-card-top">
+			<div class="vit-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+			<span class="vit-tag">Para estudantes</span>
+		</div>
+		<h3 class="vit-card-title">Acesso ao Pratique Já</h3>
+		<p class="vit-card-desc">
+			A plataforma completa para estudar Matemática no seu ritmo, com profundidade e organização.
+		</p>
+		<ul class="vit-features">
+			<li><i class="pi pi-check"></i> 55 assuntos com anotações de aula</li>
+			<li><i class="pi pi-check"></i> +14 mil questões e exercícios comentados</li>
+			<li><i class="pi pi-check"></i> Resoluções passo a passo</li>
+			<li><i class="pi pi-check"></i> Materiais em PDF para download</li>
+		</ul>
+		<div class="vit-card-foot">
+			<span class="vit-price">Grátis<small>Plano Básico</small></span>
+			<span class="vit-cta">Conhecer planos <i class="pi pi-arrow-right"></i></span>
+		</div>
+	</a>
+
+	<!-- CONFECÇÃO DE AVALIAÇÕES -->
+	<a class="vit-card vit-card--violet" href="/produtos/avaliacao/avaliacao.xhtml">
+		<div class="vit-card-top">
+			<div class="vit-icon"><i class="fa-solid fa-file-pen"></i></div>
+			<span class="vit-tag">Para professores</span>
+		</div>
+		<h3 class="vit-card-title">Confecção de Avaliações</h3>
+		<p class="vit-card-desc">
+			Uma prova diferente para cada aluno — acaba a cola e o trabalho manual de montar avaliações.
+		</p>
+		<ul class="vit-features">
+			<li><i class="pi pi-check"></i> Versão única por aluno, automática</li>
+			<li><i class="pi pi-check"></i> Provas e gabarito prontos em minutos</li>
+			<li><i class="pi pi-check"></i> Escolha por assunto e nível</li>
+			<li><i class="pi pi-check"></i> Vale como lista de exercícios</li>
+		</ul>
+		<div class="vit-card-foot">
+			<span class="vit-price">10 provas<small>Teste grátis</small></span>
+			<span class="vit-cta">Saiba mais <i class="pi pi-arrow-right"></i></span>
+		</div>
+	</a>
+
+	<!-- PRODUÇÃO DE CONTEÚDO -->
+	<a class="vit-card vit-card--pink" href="/produtos/conteudo/conteudo.xhtml">
+		<div class="vit-card-top">
+			<div class="vit-icon"><i class="fa-brands fa-instagram"></i></div>
+			<span class="vit-tag">Para redes sociais</span>
+		</div>
+		<h3 class="vit-card-title">Produção de Conteúdo</h3>
+		<p class="vit-card-desc">
+			Posts de Matemática prontos para publicar, com a identidade visual da sua marca.
+		</p>
+		<ul class="vit-features">
+			<li><i class="pi pi-check"></i> Exercícios exclusivos gerados por IA</li>
+			<li><i class="pi pi-check"></i> Personalizados com sua logo e cores</li>
+			<li><i class="pi pi-check"></i> Prontos para Instagram e TikTok</li>
+			<li><i class="pi pi-check"></i> Entrega recorrente e sem esforço</li>
+		</ul>
+		<div class="vit-card-foot">
+			<span class="vit-price">7 dias<small>Teste grátis</small></span>
+			<span class="vit-cta">Saiba mais <i class="pi pi-arrow-right"></i></span>
+		</div>
+	</a>
+
+	<!-- APOSTILAS FÍSICAS -->
+	<a class="vit-card vit-card--gold" href="/produtos/apostila/apostilas.xhtml">
+		<div class="vit-card-top">
+			<div class="vit-icon"><i class="fa-solid fa-book-open"></i></div>
+			<span class="vit-tag">Material impresso</span>
+		</div>
+		<h3 class="vit-card-title">Apostilas de Matemática</h3>
+		<p class="vit-card-desc">
+			Material físico produzido artesanalmente, pensado para um estudo mais eficiente e prazeroso.
+		</p>
+		<ul class="vit-features">
+			<li><i class="pi pi-check"></i> 3 níveis: Básico, Intermediário e Avançado</li>
+			<li><i class="pi pi-check"></i> +2.484 exercícios selecionados</li>
+			<li><i class="pi pi-check"></i> +227 questões comentadas</li>
+			<li><i class="pi pi-check"></i> Explicações claras e diretas</li>
+		</ul>
+		<div class="vit-card-foot">
+			<span class="vit-price">Frete grátis<small>Entrega em casa</small></span>
+			<span class="vit-cta">Ver apostilas <i class="pi pi-arrow-right"></i></span>
+		</div>
+	</a>
+
+</div>
+
+<!-- FAIXA DE FECHAMENTO -->
+<div class="vit-band">
+	<div>
+		<h2 class="vit-band-title">Ainda com dúvida sobre qual escolher?</h2>
+		<p class="vit-band-sub">Fale com a gente e ajudamos você a encontrar a solução ideal.</p>
+	</div>
+	<a class="vit-band-btn" href="/informativo/fale-conosco.xhtml">
+		Falar com a equipe <i class="pi pi-arrow-right"></i>
+	</a>
+</div>
+
+</ui:decorate>

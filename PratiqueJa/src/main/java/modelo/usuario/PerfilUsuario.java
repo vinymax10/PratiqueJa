@@ -2,9 +2,8 @@ package modelo.usuario;
 
 public enum PerfilUsuario
 {
-	Bronze("Bronze"),
-	Prata("Prata"),
-	Ouro("Ouro"),
+	Basico("Básico"),
+	Premium("Premium"),
 	Admin("Administrador");
 
 	private String nome;

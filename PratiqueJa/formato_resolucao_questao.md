@@ -233,15 +233,22 @@ Resposta: \( \mathbf{13{,}5} \).
 ## 9. Linha de resposta final
 
 A resolução **termina** com uma linha de resposta dedicada, com o valor em
-negrito:
+negrito. **Sempre precedida do separador `\(\\\)`** para que a resposta fique
+isolada na **última linha** (sem isso ela "gruda" no último passo de cálculo):
 
 ```text
+\(... = valor\)
+\(\\\)
 Resposta: \( \mathbf{...} \).
 ```
 
+- **Obrigatório:** uma linha `\(\\\)` imediatamente antes de `Resposta:`. Mesmo
+  quando o passo anterior é prosa, mantenha o `\(\\\)` em linha própria.
 - O valor deve **coincidir com a alternativa marcada** como correta.
 - O negrito (`\mathbf{}`) fica **só nesta linha** — a cadeia de cálculo termina
   no valor **sem** negrito (evita destaque duplicado).
+- **Dinheiro:** na linha Resposta, destaque o valor **inteiro, com o `R$`,
+  dentro do negrito** — ex.: `Resposta: \( \mathbf{R\$\ 365{,}50} \).`
 - **Itens Certo/Errado** ("julgue"): conclua com `Resposta: Certo.` ou
   `Resposta: Errado.`, após explicar o porquê.
 

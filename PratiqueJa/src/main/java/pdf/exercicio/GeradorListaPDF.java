@@ -199,6 +199,21 @@ public class GeradorListaPDF
 			+ "\\usepackage{cancel}\n"
 			+ "\\definecolor{iris}{rgb}{0.39, 0.44, 1}\n"
 			+ "\\definecolor{babypink}{rgb}{1, 0.42, 0.52}\n\n"
+			// Comandos matemáticos estruturais tolerantes a uso dentro de \text{} (modo texto):
+			// algumas resoluções trazem \overline, \dfrac etc. dentro de \text, o que geraria
+			// "Missing $ inserted". \ensuremath garante o modo math e é transparente quando já em math.
+			+ "\\let\\PJoverline\\overline\n"
+			+ "\\renewcommand{\\overline}[1]{\\ensuremath{\\PJoverline{#1}}}\n"
+			+ "\\let\\PJvec\\vec\n"
+			+ "\\renewcommand{\\vec}[1]{\\ensuremath{\\PJvec{#1}}}\n"
+			+ "\\let\\PJoverrightarrow\\overrightarrow\n"
+			+ "\\renewcommand{\\overrightarrow}[1]{\\ensuremath{\\PJoverrightarrow{#1}}}\n"
+			+ "\\let\\PJdfrac\\dfrac\n"
+			+ "\\renewcommand{\\dfrac}[2]{\\ensuremath{\\PJdfrac{#1}{#2}}}\n"
+			+ "\\let\\PJtfrac\\tfrac\n"
+			+ "\\renewcommand{\\tfrac}[2]{\\ensuremath{\\PJtfrac{#1}{#2}}}\n"
+			+ "\\let\\PJfrac\\frac\n"
+			+ "\\renewcommand{\\frac}[2]{\\ensuremath{\\PJfrac{#1}{#2}}}\n\n"
 			+ macros()
 			+ "\\setsubject{" + titulo + " · " + subtitulo + "}\n\n"
 			+ "\\begin{document}\n"
@@ -471,7 +486,10 @@ public class GeradorListaPDF
 	private String escaparTexto(String s)
 	{
 		if (s == null) return "";
-		return s.replaceAll("(?<!\\\\)%", "\\\\%")
+		// \<dígito> (ex.: 2\3) é sequência de controle inexistente e quase sempre erro de
+		// digitação de "/" (fração): converte para /<dígito> sem tocar em \\ nem em \cmd.
+		return s.replaceAll("(?<!\\\\)\\\\(?=\\d)", "/")
+		        .replaceAll("(?<!\\\\)%", "\\\\%")
 		        .replaceAll("(?<!\\\\)\\$", "\\\\\\$");
 	}
 

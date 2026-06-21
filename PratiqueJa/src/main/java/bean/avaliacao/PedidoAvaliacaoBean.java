@@ -1,9 +1,17 @@
 package bean.avaliacao;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialBlob;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +19,9 @@ import bean.PaiBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.academico.AssuntoDAO;
-import dao.avaliacao.ConfigPedidoAvaliacaoDAO;
 import dao.avaliacao.PedidoAvaliacaoDAO;
+import dao.usuario.UsuarioDAO;
+import infra.Graphics;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -22,11 +31,9 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
-import modelo.avaliacao.ConfigPedidoAvaliacao;
 import modelo.avaliacao.FormatoAvaliacao;
 import modelo.avaliacao.FormatoSaida;
 import modelo.avaliacao.ItemPedidoAvaliacao;
-import modelo.avaliacao.NomeDocumento;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.PlanoAvaliacao;
 import modelo.avaliacao.PosicaoGabarito;
@@ -34,8 +41,10 @@ import modelo.avaliacao.StatusPedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
 import modelo.exercicio.Nivel;
 import modelo.seguranca.PermissaoPadrao;
+import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
+import pdf.exercicio.LayoutLista;
 import service.avaliacao.MontadorPedidoAvaliacaoService;
 import web.session.Sessao;
 
@@ -49,6 +58,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	private static final Logger LOG = LoggerFactory.getLogger(PedidoAvaliacaoBean.class);
 
+	/** Cota grátis de teste (vitalícia) para quem ainda não tem plano ativo. */
+	public static final int LIMITE_TRIAL_GRATIS = 10;
+
 	// ── Estado da view ────────────────────────────────────────────────
 
 	private List<PedidoAvaliacao> historico;
@@ -58,17 +70,19 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private String codigoDestaque;
 
 	private List<Assunto> assuntos;
-	private ConfigPedidoAvaliacao config;
 
 	private int avaliacoesUsadasNoMes;
+
+	/** Total vitalício de avaliações geradas — usado para a cota grátis de teste (sem plano). */
+	private int avaliacoesUsadasTotal;
 
 	// ── Injeções ──────────────────────────────────────────────────────
 
 	@Inject
-	private ConfigPedidoAvaliacaoDAO configPedidoAvaliacaoDAO;
+	private AssuntoDAO assuntoDAO;
 
 	@Inject
-	private AssuntoDAO assuntoDAO;
+	private UsuarioDAO usuarioDAO;
 
 	@Inject
 	private MontadorPedidoAvaliacaoService montadorService;
@@ -90,15 +104,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	{
 		historico = new ArrayList<>();
 		avaliacoesUsadasNoMes = 0;
-		try
-		{
-			config = configPedidoAvaliacaoDAO.buscarOuCriarConfig();
-		}
-		catch(Exception e)
-		{
-			LOG.error("Falha ao carregar config de avaliação", e);
-			config = new ConfigPedidoAvaliacao();
-		}
+		avaliacoesUsadasTotal = 0;
 		try
 		{
 			assuntos = assuntoDAO.listarOpcoesAtivas();
@@ -124,6 +130,14 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		catch(Exception e)
 		{
 			LOG.error("Falha ao calcular uso mensal", e);
+		}
+		try
+		{
+			calcularUsoTotal();
+		}
+		catch(Exception e)
+		{
+			LOG.error("Falha ao calcular uso total", e);
 		}
 		try
 		{
@@ -159,7 +173,10 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		entidade.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
 		entidade.setProgresso(0);
 		entidade.setDataSolicitacao(LocalDateTime.now());
-		entidade.setDataExpiracao(LocalDateTime.now().plusDays(config.getDiasRetencaoPdf()));
+
+		// Retenção do PDF varia por plano (Essencial 7 / Profissional 30 / Master 60 dias).
+		entidade.setDataExpiracao(LocalDateTime.now().plusDays(planoAtual().getDiasRetencao()));
+
 		entidade.setUsuario(getUsuarioLogado());
 
 		entidadeDAO.salvar(entidade);
@@ -187,9 +204,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			return false;
 		}
 
-		if(entidade.getQuantidade() < 1 || entidade.getQuantidade() > config.getMaxAvaliacoesPorSolicitacao())
+		if(entidade.getQuantidade() < 1 || entidade.getQuantidade() > getMaxAvaliacoesPorSolicitacao())
 		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Quantidade deve ser entre 1 e " + config.getMaxAvaliacoesPorSolicitacao() + ".");
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Quantidade deve ser entre 1 e " + getMaxAvaliacoesPorSolicitacao() + ".");
 			return false;
 		}
 
@@ -200,14 +217,40 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		PlanoAvaliacao plano = usuario.getPlanoAvaliacao();
 		if(plano == null)
 		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Você não possui um plano ativo para confecção de avaliações.");
+			// Sem plano: libera a cota grátis de teste (vitalícia), sem cartão.
+			int trialRestante = LIMITE_TRIAL_GRATIS - avaliacoesUsadasTotal;
+			if(trialRestante <= 0)
+			{
+				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Suas " + LIMITE_TRIAL_GRATIS + " avaliações grátis acabaram. Assine um plano para continuar gerando avaliações.");
+				return false;
+			}
+			if(entidade.getQuantidade() > trialRestante)
+			{
+				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Cota grátis insuficiente. Restam " + trialRestante + " avaliações de teste. Assine um plano para gerar mais.");
+				return false;
+			}
+			return true;
+		}
+
+		// Plano vencido bloqueia a geração (e o crédito acumulado também deixa de valer).
+		if(usuario.getValidadePlano() != null && usuario.getValidadePlano().isBefore(LocalDate.now()))
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Seu plano venceu em "
+				+ usuario.getValidadePlano().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+				+ ". Renove para continuar gerando avaliações.");
 			return false;
 		}
 
-		int limiteRestante = plano.getLimiteMensal() - avaliacoesUsadasNoMes;
+		// Cota do mês = cota do plano + crédito acumulado (rollover) do mês anterior.
+		int cotaDisponivel = plano.getLimiteMensal() + usuario.getCreditoRollover();
+		int limiteRestante = cotaDisponivel - avaliacoesUsadasNoMes;
 		if(entidade.getQuantidade() > limiteRestante)
 		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Cota mensal insuficiente. Restam " + limiteRestante + " avaliações neste mês.");
+			String extra = usuario.getCreditoRollover() > 0
+				? " (já incluído o crédito acumulado de " + usuario.getCreditoRollover() + ")"
+				: "";
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Cota mensal insuficiente. Restam "
+				+ Math.max(0, limiteRestante) + " avaliações neste mês" + extra + ".");
 			return false;
 		}
 
@@ -266,7 +309,190 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public int limiteExerciciosRestante()
 	{
-		return config.getMaxExerciciosPorAvaliacao() - totalExercicios();
+		return getMaxExerciciosPorAvaliacao() - totalExercicios();
+	}
+
+	// ── Limites do plano do usuário ───────────────────────────────────
+	// Sem plano (teste grátis) cai no Essencial, o mais restritivo.
+
+	private PlanoAvaliacao planoAtual()
+	{
+		Usuario usuario = getUsuarioLogado();
+		PlanoAvaliacao plano = usuario != null ? usuario.getPlanoAvaliacao() : null;
+		return plano != null ? plano : PlanoAvaliacao.ESSENCIAL;
+	}
+
+	public int getMaxExerciciosPorAvaliacao()
+	{
+		return planoAtual().getMaxExerciciosPorAvaliacao();
+	}
+
+	public int getMaxAvaliacoesPorSolicitacao()
+	{
+		return planoAtual().getMaxAvaliacoesPorSolicitacao();
+	}
+
+	// ── Logo da escola no PDF (Profissional/Master) ───────────────────
+
+	/** A logo da escola no cabeçalho é exclusiva dos planos Profissional e Master. */
+	public boolean isPodeUsarLogoEscola()
+	{
+		PlanoAvaliacao plano = getUsuarioLogado() != null ? getUsuarioLogado().getPlanoAvaliacao() : null;
+		return plano == PlanoAvaliacao.PROFISSIONAL || plano == PlanoAvaliacao.MASTER;
+	}
+
+	public boolean isTemLogoEscola()
+	{
+		return getUsuarioLogado() != null && getUsuarioLogado().getLogoEscola() != null;
+	}
+
+	/** Data URI (base64) da logo para o preview no formulário — embutido direto no src, sem depender
+	 *  de uma segunda requisição (StreamedContent) que perderia o contexto da view. */
+	public String getLogoEscolaDataUri()
+	{
+		Usuario usuario = getUsuarioLogado();
+		if(usuario == null || usuario.getId() == null)
+			return null;
+
+		byte[] bytes = usuarioDAO.buscarLogoEscolaBytes(usuario.getId());
+		if(bytes == null || bytes.length == 0)
+			return null;
+
+		return "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
+	}
+
+	public void uploadLogoEscola(FileUploadEvent event)
+	{
+		Usuario usuario = getUsuarioLogado();
+		if(!isPodeUsarLogoEscola())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "A logo da escola está disponível apenas nos planos Profissional e Master.");
+			return;
+		}
+
+		UploadedFile arquivo = event.getFile();
+		try
+		{
+			SerialBlob blob = new SerialBlob(Graphics.resizeLogo(arquivo, 600, 240));
+			Imagem logo = new Imagem();
+			logo.setFile(blob);
+			logo.setEndereco(arquivo.getFileName());
+			usuario.setLogoEscola(logo);
+			usuarioDAO.salvar(usuario);
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola atualizada com sucesso.");
+		}
+		catch(SQLException | IOException e)
+		{
+			LOG.error("Falha ao processar a logo da escola", e);
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível processar a imagem enviada.");
+		}
+	}
+
+	public void removerLogoEscola()
+	{
+		Usuario usuario = getUsuarioLogado();
+		if(usuario == null || usuario.getId() == null)
+			return;
+		usuarioDAO.removerLogoEscola(usuario.getId());
+		usuario.setLogoEscola(null); // sincroniza o objeto da sessão p/ o preview sumir na hora
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola removida.");
+	}
+
+	/** Sequência de layouts de todas as questões, na ordem dos itens (espelha o gerador). */
+	private List<LayoutLista> sequenciaLayouts()
+	{
+		List<LayoutLista> sequencia = new ArrayList<>();
+		for(ItemPedidoAvaliacao item : entidade.getItens())
+		{
+			LayoutLista layout = (item.getExercicioPadrao() != null
+				&& item.getExercicioPadrao().getLayoutLista() == LayoutLista.ESPACOSO)
+				? LayoutLista.ESPACOSO : LayoutLista.PADRAO;
+			for(int i = 0; i < item.getQuantidade(); i++)
+				sequencia.add(layout);
+		}
+		return sequencia;
+	}
+
+	/**
+	 * Distribui as questões em páginas, igual ao gerador: uma página com qualquer questão espaçosa
+	 * comporta 4 (e fica toda espaçosa); uma página só com padrão comporta 6. Devolve, para cada
+	 * página, o par {espaçosa? 1 : 0, quantidade de questões}.
+	 */
+	private List<int[]> simularPaginas()
+	{
+		int capEspacoso = LayoutLista.ESPACOSO.exerciciosPorPagina;
+		int capPadrao = LayoutLista.PADRAO.exerciciosPorPagina;
+
+		List<int[]> paginas = new ArrayList<>();
+		int quantidade = 0;
+		boolean espacoso = false;
+
+		for(LayoutLista layout : sequenciaLayouts())
+		{
+			boolean questaoEspacosa = layout == LayoutLista.ESPACOSO;
+			int capacidade = (espacoso || questaoEspacosa) ? capEspacoso : capPadrao;
+
+			if(quantidade > 0 && quantidade >= capacidade)
+			{
+				paginas.add(new int[]{espacoso ? 1 : 0, quantidade});
+				quantidade = 0;
+				espacoso = false;
+			}
+
+			quantidade++;
+			espacoso = espacoso || questaoEspacosa;
+		}
+		if(quantidade > 0)
+			paginas.add(new int[]{espacoso ? 1 : 0, quantidade});
+
+		return paginas;
+	}
+
+	/** Número de páginas só de questões em cada prova (exato, igual ao gerador). */
+	public int paginasQuestoes()
+	{
+		return simularPaginas().size();
+	}
+
+	/** {espaçosa? 1 : 0, quantidade} da última página, ou null se não há questões. */
+	private int[] ultimaPagina()
+	{
+		List<int[]> paginas = simularPaginas();
+		return paginas.isEmpty() ? null : paginas.get(paginas.size() - 1);
+	}
+
+	/** Capacidade total da última página (4 se espaçosa, 6 se padrão). */
+	private int capacidadeUltimaPagina()
+	{
+		int[] ultima = ultimaPagina();
+		if(ultima == null)
+			return 0;
+		return ultima[0] == 1 ? LayoutLista.ESPACOSO.exerciciosPorPagina
+		                      : LayoutLista.PADRAO.exerciciosPorPagina;
+	}
+
+	/** Quantas questões ainda cabem na última página (mantendo o layout dela). */
+	public int exerciciosQueAindaCabem()
+	{
+		int[] ultima = ultimaPagina();
+		if(ultima == null)
+			return 0;
+		return capacidadeUltimaPagina() - ultima[1];
+	}
+
+	/** Há espaço para ao menos mais uma questão na última página. */
+	public boolean isUltimaPaginaComEspaco()
+	{
+		return exerciciosQueAindaCabem() > 0;
+	}
+
+	/** Última página com metade ou mais da capacidade vazia — sinaliza desperdício de papel. */
+	public boolean isUltimaPaginaOciosa()
+	{
+		int[] ultima = ultimaPagina();
+		if(ultima == null)
+			return false;
+		return ultima[1] <= capacidadeUltimaPagina() / 2;
 	}
 
 	public int limiteMensalRestante()
@@ -281,8 +507,26 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	{
 		PlanoAvaliacao plano = getUsuarioLogado().getPlanoAvaliacao();
 		if(plano == null)
-			return "Sem plano";
+			return "Teste grátis (" + trialRestante() + " de " + LIMITE_TRIAL_GRATIS + " restantes)";
 		return plano.getNome() + " (" + plano.getLimiteMensal() + " avaliações/mês)";
+	}
+
+	/** Usuário em modo de teste grátis: logado, sem plano e fora do perfil Admin. */
+	public boolean isModoTrial()
+	{
+		Usuario usuario = getUsuarioLogado();
+		return usuario != null && usuario.getPerfil() != PerfilUsuario.Admin && usuario.getPlanoAvaliacao() == null;
+	}
+
+	public int getLimiteTrialGratis()
+	{
+		return LIMITE_TRIAL_GRATIS;
+	}
+
+	public int trialRestante()
+	{
+		int restante = LIMITE_TRIAL_GRATIS - avaliacoesUsadasTotal;
+		return restante < 0 ? 0 : restante;
 	}
 
 	public boolean temGerandoEmProgresso()
@@ -298,11 +542,6 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	}
 
 	// ── Dados para selects ────────────────────────────────────────────
-
-	public NomeDocumento[] getNomesDocumento()
-	{
-		return NomeDocumento.values();
-	}
 
 	public FormatoAvaliacao[] getFormatosAvaliacao()
 	{
@@ -341,6 +580,11 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		LocalDateTime inicioMes = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
 		LocalDateTime inicioProximo = inicioMes.plusMonths(1);
 		avaliacoesUsadasNoMes = entidadeDAO.somarAvaliacoesNoMes(getUsuarioLogado(), inicioMes, inicioProximo);
+	}
+
+	private void calcularUsoTotal()
+	{
+		avaliacoesUsadasTotal = entidadeDAO.somarAvaliacoesTotal(getUsuarioLogado());
 	}
 
 	private Usuario getUsuarioLogado()

@@ -51,10 +51,6 @@ public class PedidoAvaliacao implements Serializable, Entidade
 	@AuditLabel(value = "código do lote")
 	private String codigoBatch;
 
-	@Enumerated(EnumType.STRING)
-	@AuditLabel(value = "nome do documento")
-	private NomeDocumento nomeDocumento = NomeDocumento.AVALIACAO;
-
 	@Column(length = 255)
 	@Size(max = 255)
 	@AuditLabel(value = "título")

@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import modelo.questao.Alternativa;
 import modelo.questao.ImagemFile;
@@ -61,9 +63,8 @@ public class GeradorListaQuestoesPDF
 		copiarSty(workDir);
 		this.workDir = workDir;
 
-		if (questoes.size() < layout.total())
-			throw new IllegalStateException(
-				"Questões insuficientes: " + questoes.size() + " (esperado " + layout.total() + ")");
+		if (questoes.isEmpty())
+			throw new IllegalStateException("Nenhuma questão informada para a lista.");
 
 		String nomeBase = nomeArquivo();
 		Path texFile = workDir.resolve(nomeBase + ".tex");
@@ -114,7 +115,7 @@ public class GeradorListaQuestoesPDF
 		// Cabeçalho da lista (1x) + multicols com fluxo livre das questões
 		sb.append(paginaHeader());
 		sb.append(abrirColunas());
-		for (int i = 0; i < layout.total(); i++)
+		for (int i = 0; i < questoes.size(); i++)
 			sb.append(blocoQuestao(i + 1, questoes.get(i)));
 		sb.append(fecharColunas());
 
@@ -123,14 +124,14 @@ public class GeradorListaQuestoesPDF
 		if (tipoGabarito == TipoGabarito.SOMENTE_ALTERNATIVAS)
 		{
 			sb.append(abrirColunasGabaritoCompacto());
-			for (int i = 0; i < layout.total(); i++)
+			for (int i = 0; i < questoes.size(); i++)
 				sb.append(blocoGabaritoCompacto(i + 1, questoes.get(i)));
 			sb.append(fecharColunas());
 		}
 		else
 		{
 			sb.append(abrirColunas());
-			for (int i = 0; i < layout.total(); i++)
+			for (int i = 0; i < questoes.size(); i++)
 				sb.append(blocoGabarito(i + 1, questoes.get(i)));
 			sb.append(fecharColunas());
 		}
@@ -154,6 +155,21 @@ public class GeradorListaQuestoesPDF
 			// Ajustes finos da geometria para a régua do multicols ficar próxima
 			// (mas sem cruzar) a linha divisória do rodapé do pratiqueja.sty.
 			+ "\\addtolength{\\footskip}{0.3cm}\n\n"
+			// Comandos matemáticos estruturais tolerantes a uso dentro de \text{} (modo texto):
+			// algumas resoluções trazem \overline, \dfrac etc. dentro de \text, o que geraria
+			// "Missing $ inserted". \ensuremath garante o modo math e é transparente quando já em math.
+			+ "\\let\\PJoverline\\overline\n"
+			+ "\\renewcommand{\\overline}[1]{\\ensuremath{\\PJoverline{#1}}}\n"
+			+ "\\let\\PJvec\\vec\n"
+			+ "\\renewcommand{\\vec}[1]{\\ensuremath{\\PJvec{#1}}}\n"
+			+ "\\let\\PJoverrightarrow\\overrightarrow\n"
+			+ "\\renewcommand{\\overrightarrow}[1]{\\ensuremath{\\PJoverrightarrow{#1}}}\n"
+			+ "\\let\\PJdfrac\\dfrac\n"
+			+ "\\renewcommand{\\dfrac}[2]{\\ensuremath{\\PJdfrac{#1}{#2}}}\n"
+			+ "\\let\\PJtfrac\\tfrac\n"
+			+ "\\renewcommand{\\tfrac}[2]{\\ensuremath{\\PJtfrac{#1}{#2}}}\n"
+			+ "\\let\\PJfrac\\frac\n"
+			+ "\\renewcommand{\\frac}[2]{\\ensuremath{\\PJfrac{#1}{#2}}}\n\n"
 			+ macros()
 			+ "\\setsubject{" + titulo + " · " + subtitulo + "}\n\n"
 			+ "\\begin{document}\n"
@@ -389,12 +405,15 @@ public class GeradorListaQuestoesPDF
 	private String escaparTextoPuro(String s)
 	{
 		if (s == null) return "";
-		return s.replace("\\", "\\textbackslash{}")
-		        .replace("&", "\\&")
-		        .replace("%", "\\%")
-		        .replace("$", "\\$")
-		        .replace("#", "\\#")
-		        .replace("_", "\\_");
+		s = s.replace("\\", "\\textbackslash{}")
+		     .replace("&", "\\&")
+		     .replace("%", "\\%")
+		     .replace("$", "\\$")
+		     .replace("#", "\\#")
+		     .replace("_", "\\_")
+		     .replace("^", "\\textasciicircum{}")
+		     .replace("~", "\\textasciitilde{}");
+		return substituirUnicodeMath(s);
 	}
 
 	private String enunciado(int num, Questao q)
@@ -405,7 +424,11 @@ public class GeradorListaQuestoesPDF
 		{
 			String parte;
 			if (p.isTipoImagem())
+			{
 				parte = includegraphics(num, p);
+				if (parte.isEmpty())   // imagem ausente: pula o parágrafo
+					continue;
+			}
 			else if (p.getTexto() != null && !p.getTexto().isBlank())
 				parte = escaparTexto(p.getTexto());
 			else
@@ -420,37 +443,209 @@ public class GeradorListaQuestoesPDF
 
 	private String includegraphics(int num, Paragrafo p)
 	{
-		return "{\\centering\\includegraphics[width=0.6\\linewidth]{" + gravarImagem(num, p) + "}\\par}";
+		String nome = gravarImagem(num, p);
+		if (nome == null)
+			return "";
+		return "{\\centering\\includegraphics[width=0.6\\linewidth]{" + nome + "}\\par}";
 	}
 
+	/**
+	 * Grava a imagem do parágrafo no diretório de trabalho e devolve o nome do arquivo.
+	 * Devolve {@code null} quando não há imagem para gravar (sem diretório, sem
+	 * {@code ImagemFile}, blob nulo/vazio ou falha de leitura), evitando referenciar
+	 * um arquivo inexistente em {@code \includegraphics} (que quebra a compilação).
+	 */
 	private String gravarImagem(int num, Paragrafo p)
 	{
+		if (workDir == null)
+			return null;
+
 		String nome = String.format("img_%02d_%d.png", num, p.getOrdem());
-		if (workDir != null)
+		try
 		{
-			try
-			{
-				ImagemFile imf = p.getImagemFile();
-				Blob blob = imf.getFile();
-				if (blob != null)
-				{
-					byte[] bytes = blob.getBytes(1, (int) blob.length());
-					Files.write(workDir.resolve(nome), bytes);
-				}
-			}
-			catch (IOException | SQLException ex)
-			{
-				ex.printStackTrace();
-			}
+			ImagemFile imf = p.getImagemFile();
+			Blob blob = imf != null ? imf.getFile() : null;
+			if (blob == null)
+				return null;
+
+			byte[] bytes = blob.getBytes(1, (int) blob.length());
+			if (bytes == null || bytes.length == 0)
+				return null;
+
+			Files.write(workDir.resolve(nome), bytes);
+			return nome;
 		}
-		return nome;
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
+	/**
+	 * Escapa o texto preservando as regiões matemáticas (\(...\) e \[...\]).
+	 * Nas regiões de texto puro, escapa especiais LaTeX (% $ ^ ~) que de outro
+	 * modo quebram a compilação, e converte símbolos Unicode em comandos LaTeX.
+	 * As regiões matemáticas são mantidas intactas (seus ^ _ { } são intencionais).
+	 */
 	private String escaparTexto(String s)
 	{
 		if (s == null) return "";
-		return s.replaceAll("(?<!\\\\)%", "\\\\%")
-		        .replaceAll("(?<!\\\\)\\$", "\\\\\\$");
+
+		StringBuilder out = new StringBuilder();
+		int i = 0;
+		while (i < s.length())
+		{
+			int open = primeiroIndice(s.indexOf("\\(", i), s.indexOf("\\[", i));
+			if (open < 0)
+			{
+				out.append(escaparForaMath(s.substring(i)));
+				break;
+			}
+
+			out.append(escaparForaMath(s.substring(i, open)));
+
+			String fim = s.startsWith("\\(", open) ? "\\)" : "\\]";
+			int close = s.indexOf(fim, open + 2);
+			if (close < 0)
+			{
+				// fórmula sem fechamento: preserva o restante (só protege o % cru)
+				out.append(protegerRegiaoMath(s.substring(open)));
+				break;
+			}
+
+			// região matemática preservada (delimitadores inclusos);
+			// o único especial que ainda precisa de escape aqui é o % (comentário).
+			out.append(protegerRegiaoMath(s.substring(open, close + 2)));
+			i = close + 2;
+		}
+		return out.toString();
+	}
+
+	/**
+	 * Dentro das regiões matemáticas preservamos tudo (^ _ {{ }} $ são intencionais),
+	 * exceto dois casos que quebram a compilação mesmo em modo math:
+	 *  - o caractere de comentário % (comenta o resto da linha, inclusive a chave que
+	 *    fecharia o \res → "Runaway argument"): escapamos o % ainda não escapado (\%);
+	 *  - uma barra invertida seguida de dígito (ex.: 2\3), que é uma sequência de controle
+	 *    inexistente ("Undefined control sequence") e quase sempre um erro de digitação de
+	 *    "/" (fração): convertemos \<dígito> em /<dígito> (sem tocar em \\ nem em \cmd).
+	 */
+	private String protegerRegiaoMath(String math)
+	{
+		return math.replaceAll("(?<!\\\\)\\\\(?=\\d)", "/")
+		           .replaceAll("(?<!\\\\)%", "\\\\%");
+	}
+
+	/** Menor índice não-negativo entre os dois; -1 quando ambos são -1. */
+	private int primeiroIndice(int a, int b)
+	{
+		if (a < 0) return b;
+		if (b < 0) return a;
+		return Math.min(a, b);
+	}
+
+	/** Escapa especiais LaTeX e converte Unicode em um trecho fora de matemática. */
+	private String escaparForaMath(String s)
+	{
+		if (s.isEmpty()) return s;
+		s = s.replaceAll("(?<!\\\\)\\\\(?=\\d)", "/")
+		     .replaceAll("(?<!\\\\)%", "\\\\%")
+		     .replaceAll("(?<!\\\\)\\$", "\\\\\\$")
+		     .replaceAll("(?<!\\\\)&", "\\\\&")
+		     .replaceAll("(?<!\\\\)#", "\\\\#")
+		     .replaceAll("(?<!\\\\)_", "\\\\_")
+		     .replaceAll("(?<!\\\\)\\^", "\\\\textasciicircum{}")
+		     .replaceAll("(?<!\\\\)~", "\\\\textasciitilde{}");
+		return quebrarUrls(substituirUnicodeMath(s));
+	}
+
+	// URL em texto puro (após o escape): http(s)://… ou www.… até o próximo espaço.
+	private static final Pattern URL_PATTERN = Pattern.compile("(?:https?://|www\\.)\\S*");
+
+	/**
+	 * Insere pontos de quebra invisíveis ({@code \\allowbreak}) após os separadores
+	 * de uma URL ( / . - ? = &amp; : # ~ ), evitando que links longos estourem a largura
+	 * da coluna. A URL continua legível e sem hífens; apenas ganha onde quebrar.
+	 */
+	private String quebrarUrls(String s)
+	{
+		if (s == null || (s.indexOf("http") < 0 && s.indexOf("www") < 0))
+			return s;
+
+		Matcher m = URL_PATTERN.matcher(s);
+		StringBuffer out = new StringBuffer();
+		while (m.find())
+		{
+			String url = m.group().replaceAll("([/.\\-?=&:#~])", "$1\\\\allowbreak{}");
+			m.appendReplacement(out, Matcher.quoteReplacement(url));
+		}
+		m.appendTail(out);
+		return out.toString();
+	}
+
+	/**
+	 * Converte símbolos matemáticos Unicode (∞, →, ≤, π, …) em comandos LaTeX
+	 * encapsulados por {@code \ensuremath}, válidos tanto em modo texto quanto
+	 * matemático. Evita os erros "Missing $ inserted" e glifos ausentes na fonte.
+	 */
+	private String substituirUnicodeMath(String s)
+	{
+		return s
+			.replace("∞", "\\ensuremath{\\infty}")
+			.replace("→", "\\ensuremath{\\rightarrow}")
+			.replace("➝", "\\ensuremath{\\rightarrow}")
+			.replace("←", "\\ensuremath{\\leftarrow}")
+			.replace("↔", "\\ensuremath{\\leftrightarrow}")
+			.replace("⇒", "\\ensuremath{\\Rightarrow}")
+			.replace("⇔", "\\ensuremath{\\Leftrightarrow}")
+			.replace("∧", "\\ensuremath{\\land}")
+			.replace("∨", "\\ensuremath{\\lor}")
+			.replace("¬", "\\ensuremath{\\lnot}")
+			.replace("≤", "\\ensuremath{\\leq}")
+			.replace("≥", "\\ensuremath{\\geq}")
+			.replace("≠", "\\ensuremath{\\neq}")
+			.replace("≈", "\\ensuremath{\\approx}")
+			.replace("≡", "\\ensuremath{\\equiv}")
+			.replace("±", "\\ensuremath{\\pm}")
+			.replace("∓", "\\ensuremath{\\mp}")
+			.replace("×", "\\ensuremath{\\times}")
+			.replace("÷", "\\ensuremath{\\div}")
+			.replace("∈", "\\ensuremath{\\in}")
+			.replace("∉", "\\ensuremath{\\notin}")
+			.replace("⊂", "\\ensuremath{\\subset}")
+			.replace("⊃", "\\ensuremath{\\supset}")
+			.replace("⊆", "\\ensuremath{\\subseteq}")
+			.replace("⊇", "\\ensuremath{\\supseteq}")
+			.replace("∪", "\\ensuremath{\\cup}")
+			.replace("∩", "\\ensuremath{\\cap}")
+			.replace("∅", "\\ensuremath{\\emptyset}")
+			.replace("∀", "\\ensuremath{\\forall}")
+			.replace("∃", "\\ensuremath{\\exists}")
+			.replace("∴", "\\ensuremath{\\therefore}")
+			.replace("√", "\\ensuremath{\\surd}")
+			.replace("∝", "\\ensuremath{\\propto}")
+			.replace("∠", "\\ensuremath{\\angle}")
+			.replace("π", "\\ensuremath{\\pi}")
+			.replace("Δ", "\\ensuremath{\\Delta}")
+			.replace("Λ", "\\ensuremath{\\Lambda}")
+			.replace("Ω", "\\ensuremath{\\Omega}")
+			.replace("Σ", "\\ensuremath{\\Sigma}")
+			.replace("Φ", "\\ensuremath{\\Phi}")
+			.replace("α", "\\ensuremath{\\alpha}")
+			.replace("β", "\\ensuremath{\\beta}")
+			.replace("γ", "\\ensuremath{\\gamma}")
+			.replace("θ", "\\ensuremath{\\theta}")
+			.replace("λ", "\\ensuremath{\\lambda}")
+			.replace("μ", "\\ensuremath{\\mu}")
+			.replace("°", "\\ensuremath{{}^{\\circ}}")
+			.replace("²", "\\ensuremath{{}^{2}}")
+			.replace("³", "\\ensuremath{{}^{3}}")
+			.replace("¹", "\\ensuremath{{}^{1}}")
+			.replace("½", "\\ensuremath{\\tfrac{1}{2}}")
+			.replace("⅓", "\\ensuremath{\\tfrac{1}{3}}")
+			.replace("¼", "\\ensuremath{\\tfrac{1}{4}}")
+			.replace("¾", "\\ensuremath{\\tfrac{3}{4}}");
 	}
 
 	private String enunciadoSemImagem(Questao q)
@@ -477,8 +672,11 @@ public class GeradorListaQuestoesPDF
 		{
 			if (!p.isTipoImagem()) continue;
 
+			String nome = gravarImagem(num, p);
+			if (nome == null) continue;   // imagem ausente: pula
+
 			if (!primeira) sb.append("\\par\\vspace{4pt}");
-			sb.append("\\includegraphics[width=0.8\\linewidth]{").append(gravarImagem(num, p)).append("}");
+			sb.append("\\includegraphics[width=0.8\\linewidth]{").append(nome).append("}");
 			primeira = false;
 		}
 		return sb.toString();

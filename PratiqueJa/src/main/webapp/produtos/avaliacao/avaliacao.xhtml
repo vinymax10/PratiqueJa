@@ -1,0 +1,273 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+	<link rel="stylesheet" href="/css/conteudo.css" type="text/css" />
+
+<!-- HERO -->
+<div class="card-hero">
+	<p class="section-label">Produtos · Área do Professor</p>
+	<h1 class="page-title">Uma prova <span class="accent">diferente para cada aluno</span></h1>
+	<p class="page-subtitle">
+		Gere avaliações de Matemática em que <strong>cada aluno recebe uma versão única</strong> — acaba a cola de quem senta do lado. Escolha assunto e nível, e em minutos você tem as provas e o gabarito prontos. Vale também como lista de exercícios individualizada.
+	</p>
+	<div class="stat-chips">
+		<div class="stat-chip">
+			<div class="stat-label">Por aluno</div>
+			<div class="stat-value">Prova única</div>
+		</div>
+		<div class="stat-chip">
+			<div class="stat-label">Geração</div>
+			<div class="stat-value">Em minutos</div>
+		</div>
+		<div class="stat-chip">
+			<div class="stat-label">Teste grátis</div>
+			<div class="stat-value">10 provas</div>
+		</div>
+		<div class="stat-chip-blue">
+			<div class="stat-label-white">Sem cartão</div>
+			<div class="stat-value-white">Grátis</div>
+		</div>
+	</div>
+	<div style="margin-top:22px;">
+		<p:button value="Criar minha primeira prova grátis" icon="pi pi-arrow-right" iconPos="right"
+			styleClass="ui-button-raised btn-primary"
+			href="/avaliacao/list.xhtml" />
+	</div>
+</div>
+
+<!-- DIFERENCIAIS -->
+<div class="grid-3" style="margin-bottom:24px;">
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
+		<h3 class="card-title">Uma prova por aluno</h3>
+		<p class="card-text">Cada estudante recebe uma versão diferente da mesma avaliação. Colar com o colega do lado deixa de funcionar — sem você ter que montar tudo na mão.</p>
+	</div>
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+		<h3 class="card-title">Pronto em minutos</h3>
+		<p class="card-text">Escolha os assuntos e o nível, defina quantas versões quer e pronto: o sistema sorteia os exercícios e gera as provas com gabarito em PDF.</p>
+	</div>
+	<div class="card">
+		<div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+		<h3 class="card-title">Vale como lista de exercícios</h3>
+		<p class="card-text">Use também para gerar listas de prática individualizadas — uma para cada aluno. Perfeito para professores particulares que passam muitos exercícios.</p>
+	</div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<div class="card-lg">
+	<h2 class="section-title">Como funciona</h2>
+	<p class="card-text" style="margin-bottom:24px;">Em três passos você sai do zero para a prova impressa na mão.</p>
+	<div class="grid-3" style="margin-top:0;">
+		<div class="card">
+			<div class="badge-wrapper"><span class="badge badge-blue">1</span></div>
+			<h3 class="card-title">Monte a avaliação</h3>
+			<p class="card-text">Defina título, escola, assuntos e o nível dos exercícios.</p>
+		</div>
+		<div class="card">
+			<div class="badge-wrapper"><span class="badge badge-blue">2</span></div>
+			<h3 class="card-title">Escolha quantas versões</h3>
+			<p class="card-text">Uma versão única por aluno — informe quantas provas quer gerar.</p>
+		</div>
+		<div class="card">
+			<div class="badge-wrapper"><span class="badge badge-blue">3</span></div>
+			<h3 class="card-title">Baixe e aplique</h3>
+			<p class="card-text">Receba o PDF com todas as provas e o gabarito de cada uma.</p>
+		</div>
+	</div>
+</div>
+
+<!-- TESTE GRÁTIS -->
+<div class="card-lg" style="background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:1px solid #dbeafe;">
+	<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+		<div>
+			<h2 class="section-title" style="margin-bottom:6px;">Comece com 10 provas grátis</h2>
+			<p class="card-text" style="margin:0;">Sem cartão, sem compromisso. Crie suas primeiras provas individuais e veja a mágica do anti-cola antes de assinar.</p>
+		</div>
+		<p:button value="Testar grátis agora" icon="pi pi-gift"
+			styleClass="ui-button-raised btn-primary"
+			href="/avaliacao/list.xhtml" />
+	</div>
+</div>
+
+<!-- PLANOS -->
+<div class="card-lg">
+	<h2 class="section-title">Escolha o plano ideal</h2>
+	<p class="card-text" style="margin-bottom:24px;">Planos por volume de provas individuais — do professor particular à rede de ensino. A cota é em provas por aluno, então cresce junto com o seu número de alunos.</p>
+	<div class="grid-3" style="margin-top:0;">
+
+		<!-- ESSENCIAL -->
+		<div class="card" style="background:#ebf8ff;">
+			<div class="badge-wrapper"><span class="badge badge-green">Essencial</span></div>
+			<h3 class="card-title-lg">Para começar</h3>
+			<p class="card-text" style="margin-bottom:12px;">Professores particulares e quem está começando.</p>
+			<div style="margin-bottom:4px;">
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ 24,90<span style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+			</div>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:13px;color:#2563eb;font-weight:600;">100 provas / mês · ≈ 3 turmas de 30</span>
+			</div>
+			<ul class="module-list">
+				<li>100 provas individuais por mês</li>
+				<li>Prova única por aluno (anti-cola)</li>
+				<li>Gabarito automático de cada versão</li>
+				<li>Use como prova ou lista de exercícios</li>
+				<li>Download disponível por 7 dias</li>
+			</ul>
+			<div style="margin-top:16px;">
+				<p:button value="Assinar Essencial"
+					styleClass="ui-button-raised btn-primary"
+					href="/informativo/fale-conosco" />
+			</div>
+		</div>
+
+		<!-- PROFISSIONAL (destaque) -->
+		<div class="card" style="background:#f8f3ff;border:2px solid #9333ea;position:relative;">
+			<span style="position:absolute;top:-12px;right:16px;background:#9333ea;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:0.03em;">MAIS POPULAR</span>
+			<div class="badge-wrapper"><span class="badge badge-purple">Profissional</span></div>
+			<h3 class="card-title-lg">Para quem dá muita prova</h3>
+			<p class="card-text" style="margin-bottom:12px;">Professores de escola e particulares com muitos alunos.</p>
+			<div style="margin-bottom:4px;">
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ 69,90<span style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+			</div>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:13px;color:#2563eb;font-weight:600;">500 provas / mês · ≈ 16 turmas de 30</span>
+			</div>
+			<ul class="module-list">
+				<li>Tudo do Essencial</li>
+				<li>500 provas individuais por mês</li>
+				<li>Ideal para várias turmas e listas semanais</li>
+				<li>Prioridade na geração</li>
+				<li>Logo personalizada no PDF</li>
+				<li>Cota não usada acumula (rollover)</li>
+				<li>Download disponível por 30 dias</li>
+			</ul>
+			<div style="margin-top:16px;">
+				<p:button value="Assinar Profissional"
+					styleClass="ui-button-raised btn-primary"
+					href="/informativo/fale-conosco" />
+			</div>
+		</div>
+
+		<!-- MASTER -->
+		<div class="card" style="background:#ebfff2;">
+			<div class="badge-wrapper"><span class="badge badge-blue">Master</span></div>
+			<h3 class="card-title-lg">Para instituições</h3>
+			<p class="card-text" style="margin-bottom:12px;">Escolas, cursinhos e redes de ensino.</p>
+			<div style="margin-bottom:4px;">
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ 199<span style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+			</div>
+			<div style="margin-bottom:12px;">
+				<span style="font-size:13px;color:#2563eb;font-weight:600;">2.000 provas / mês · ≈ 66 turmas de 30</span>
+			</div>
+			<ul class="module-list">
+				<li>Tudo do Profissional</li>
+				<li>2.000 provas individuais por mês</li>
+				<li>Para escolas, cursinhos e redes</li>
+				<li>Suporte prioritário</li>
+				<li>Download disponível por 60 dias</li>
+			</ul>
+			<div style="margin-top:16px;">
+				<p:button value="Assinar Master"
+					styleClass="ui-button-raised btn-primary"
+					href="/informativo/fale-conosco" />
+			</div>
+		</div>
+
+	</div>
+	<p class="card-text" style="margin-top:16px;text-align:center;">
+		Todos os planos começam com <strong>10 provas grátis</strong> — sem cartão.
+		Precisa de mais volume? <a href="/informativo/fale-conosco" style="color:#2563eb;font-weight:600;">Fale com a gente</a>.
+	</p>
+</div>
+
+<!-- COMPARAÇÃO -->
+<div class="card-lg">
+	<h2 class="section-title">Comparação de planos</h2>
+	<div style="overflow-x:auto;">
+	<table aria-label="Comparação de planos" style="width:100%;min-width:520px;border-collapse:collapse;">
+		<thead>
+			<tr style="background:#f8fafc;">
+				<th style="text-align:left;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Recurso</th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Essencial<br/><span style="font-weight:500;color:#6b7280;">R$ 24,90</span></th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Profissional<br/><span style="font-weight:500;color:#6b7280;">R$ 69,90</span></th>
+				<th style="text-align:center;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Master<br/><span style="font-weight:500;color:#6b7280;">R$ 199</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Provas individuais / mês</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">100</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">500</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">2.000</td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Turmas equivalentes (30 alunos)</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">≈ 3</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">≈ 16</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">≈ 66</td></tr>
+				<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Exercícios por avaliação</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 20</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 40</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 60</td></tr>
+				<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Avaliações por geração</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 30</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 60</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">até 100</td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Prova única por aluno (anti-cola)</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Gabarito automático</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Uso como lista de exercícios</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Prioridade na geração</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">—</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Retenção da avaliação para download</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">7 dias</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">30 dias</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">60 dias</td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Logo personalizada no PDF</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">—</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">Acúmulo de cota não usada (rollover)</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6;">—</td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td><td style="text-align:center;padding:10px 16px;border-bottom:1px solid #f3f4f6;"><i class="pi pi-check check"></i></td></tr>
+			<tr><td style="padding:10px 16px;font-size:14px;color:#374151;">Suporte prioritário</td><td style="text-align:center;padding:10px 16px;color:#374151;">—</td><td style="text-align:center;padding:10px 16px;color:#374151;">—</td><td style="text-align:center;padding:10px 16px;"><i class="pi pi-check check"></i></td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+<!-- FAQ -->
+<div class="card-lg" style="margin-bottom:0;">
+	<h2 class="section-title">Perguntas frequentes</h2>
+	<div class="faq-list">
+		<details>
+			<summary>Como funciona a prova diferente para cada aluno?</summary>
+			<div class="faq-body">
+				<p>Você monta a avaliação escolhendo assuntos e nível, e informa quantas versões quer. O sistema sorteia os exercícios e gera uma prova única para cada aluno — todas com o mesmo grau de dificuldade, mas com questões diferentes. Quem tentar colar do colega do lado vai estar respondendo outra prova.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Como é contada a cota mensal?</summary>
+			<div class="faq-body">
+				<p>Cada prova individual gerada conta 1 na sua cota. Uma turma de 30 alunos com provas únicas consome 30. Assim, o plano Essencial (100/mês) dá para cerca de 3 turmas de 30, o Profissional (500/mês) para ~16 turmas e o Master (2.000/mês) para ~66 turmas.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Preciso pagar para testar?</summary>
+			<div class="faq-body">
+				<p>Não. Você começa com 10 provas grátis, sem cartão de crédito. Assim dá para criar suas primeiras avaliações e conferir a qualidade antes de assinar qualquer plano.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Posso usar como lista de exercícios em vez de prova?</summary>
+			<div class="faq-body">
+				<p>Sim. O mesmo gerador serve para listas de exercícios individualizadas — uma para cada aluno. É ideal para professores particulares que passam muitos exercícios de prática.</p>
+			</div>
+		</details>
+		<details>
+			<summary>A prova já vem com gabarito?</summary>
+			<div class="faq-body">
+				<p>Sim. Cada versão gerada acompanha o gabarito correspondente, então a correção fica simples mesmo com provas diferentes por aluno.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Sou professor particular, vale a pena?</summary>
+			<div class="faq-body">
+				<p>Com certeza. Além das provas, você gera listas de exercícios individualizadas em poucos minutos. Conforme o número de alunos cresce, é só escolher um plano com mais cota — os planos são por volume, não por tipo de professor.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Posso trocar de plano depois?</summary>
+			<div class="faq-body">
+				<p>Sim, você pode subir ou descer de plano quando quiser, conforme o volume de provas que precisa em cada período.</p>
+			</div>
+		</details>
+		<details>
+			<summary>Atende escolas e cursinhos?</summary>
+			<div class="faq-body">
+				<p>Sim. O plano Master cobre 2.000 provas por mês. Para redes maiores ou necessidades específicas, <a href="/informativo/fale-conosco" style="color:#2563eb;font-weight:600;">fale com a gente</a> para um plano sob medida.</p>
+			</div>
+		</details>
+	</div>
+</div>
+
+</ui:decorate>

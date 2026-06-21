@@ -37,6 +37,14 @@
 
 			<div class="flex gap-3 align-items-center justify-content-end">
 
+				<p:commandButton value="Gerar Todos" icon="pi pi-bolt"
+				styleClass="ui-button-raised ui-button-warning"
+				action="#{pdfQuestaoBean.gerarTodos()}" update="@form, :growl"
+				process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Gerar PDFs para todos os assuntos pode demorar vários minutos. Deseja continuar?" />
+				</p:commandButton>
+
 				<p:commandButton value="Remover Todos" icon="pi pi-trash"
 				styleClass="ui-button-danger ui-button-flat"
 				action="#{pdfQuestaoBean.removerTodos}" update="@form, :growl"

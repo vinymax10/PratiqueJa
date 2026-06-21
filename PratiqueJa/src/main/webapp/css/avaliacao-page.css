@@ -380,13 +380,200 @@
 /* ── GRID DE CAMPOS ───────────────────────────────────────── */
 .av-fields {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* min(100%, 300px) impede a coluna de transbordar quando o container fica menor que 300px */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     gap: 20px;
 }
 
-.av-field-wide { grid-column: span 2; }
+/* 1 / -1 ocupa a linha inteira sem forçar uma 2ª coluna implícita quando o grid tem só
+   uma coluna (o "span 2" criava uma coluna extra que estourava e invadia a área da logo). */
+.av-field-wide { grid-column: 1 / -1; }
 
 .av-field { display: flex; flex-direction: column; gap: 7px; }
+
+/* ── Logo personalizada: split, dropzone e card ───────────── */
+
+/* Split: Dados da Avaliação à esquerda, Logo personalizada à direita */
+.av-data-split { display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch; }
+/* min-width faz as colunas quebrarem (wrap) antes de ficarem estreitas demais, em vez de
+   uma invadir a outra. Abaixo de ~680px de container, a logo desce para baixo dos dados. */
+.av-data-col  { flex: 2 1 400px; min-width: 360px; }
+.av-logo-col  { flex: 1 1 300px; min-width: 300px; display: flex; flex-direction: column; gap: 7px; }
+
+.av-logo-uploader { flex: 1 1 auto; display: flex; flex-direction: column; gap: 14px; }
+
+/* Retângulo: o visual (borda, ícone, instruções) fica no wrap; o fileUpload é só
+   a camada transparente por cima que torna a área inteira clicável e droppable. */
+.av-dropzone-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 210px;
+    border: 2px dashed #bfdbfe;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8fbff 0%, #eff6ff 100%);
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+.av-dropzone-wrap:hover {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0ecff 100%);
+    box-shadow: 0 8px 26px rgba(37, 99, 235, 0.12);
+}
+
+/* Conteúdo visual (ícone + título + instruções) — não captura cliques */
+.av-dropzone-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 22px 18px;
+    text-align: center;
+    pointer-events: none;
+}
+.av-dropzone-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    font-size: 26px;
+}
+.av-dropzone-title {
+    color: #334155;
+    font-weight: 700;
+    font-size: 14px;
+    max-width: 250px;
+    line-height: 1.4;
+}
+.av-dropzone-specs {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.av-dropzone-specs li {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.35;
+}
+.av-dropzone-specs li span { color: #94a3b8; }
+
+/* fileUpload = camada clicável/droppable transparente cobrindo todo o retângulo */
+.av-dropzone.ui-fileupload {
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    z-index: 2;
+}
+.av-dropzone .ui-fileupload-content { display: none !important; }
+.av-dropzone .ui-fileupload-buttonbar {
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.av-dropzone .ui-fileupload-choose {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 16px !important;
+    cursor: pointer !important;
+}
+/* Esconde ícone/texto do botão (usamos o conteúdo visual do wrap) */
+.av-dropzone .ui-fileupload-choose .ui-button-text,
+.av-dropzone .ui-fileupload-choose .ui-icon,
+.av-dropzone .ui-fileupload-choose .ui-button-icon-left { display: none !important; }
+/* O input de arquivo ocupa todo o retângulo → clique e drop em qualquer ponto */
+.av-dropzone .ui-fileupload-choose input[type="file"] {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 0;
+}
+/* Esconde upload/cancel (modo auto) */
+.av-dropzone .ui-fileupload-files,
+.av-dropzone .ui-fileupload-upload,
+.av-dropzone .ui-fileupload-cancel { display: none !important; }
+
+/* Card de preview da logo enviada */
+.av-logo-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #fff;
+    border: 1px solid #e6ebf2;
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+}
+.av-logo-canvas {
+    flex: 0 0 auto;
+    width: 124px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid #eef2f7;
+    background:
+        linear-gradient(45deg, #f1f5f9 25%, transparent 25%) -8px 0 / 16px 16px,
+        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%) -8px 0 / 16px 16px,
+        linear-gradient(45deg, transparent 75%, #f1f5f9 75%) 0 0 / 16px 16px,
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%) 0 0 / 16px 16px,
+        #fff;
+}
+.av-logo-img { max-width: 100%; max-height: 66px; object-fit: contain; display: block; }
+.av-logo-info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.av-logo-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ecfdf5;
+    color: #059669;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 4px 11px;
+    border-radius: 999px;
+}
+.av-logo-badge i { font-size: 13px; }
+.av-logo-hint { color: #64748b; font-size: 13px; }
+.av-logo-remove {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: #fef2f2;
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.15s, color 0.15s;
+}
+.av-logo-remove:hover { background: #dc2626; color: #fff; }
 
 /* ── LINHA DE ADICIONAR ITEM ──────────────────────────────── */
 .av-add-row {
@@ -478,6 +665,12 @@
     background: #fff7ed;
     color: #9a3412;
     border-color: #fed7aa;
+}
+
+.av-item-chip--layout {
+    background: #eef2ff;
+    color: #3730a3;
+    border-color: #c7d2fe;
 }
 
 .av-item-actions { display: flex; gap: 10px; flex-shrink: 0; }
@@ -678,6 +871,15 @@
 .av-item-empty i { display: block; font-size: 28px; margin-bottom: 8px; color: #d1d5db; }
 
 /* ── TOTALIZADOR ──────────────────────────────────────────── */
+.av-totalizer-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Wrappers JSF (h:panelGroup) somem do fluxo para o gap do grupo valer entre todos os chips. */
+.av-tz-contents { display: contents; }
+
 .av-totalizer {
     display: flex;
     align-items: center;
@@ -688,7 +890,6 @@
     border-radius: 10px;
     font-size: 14px;
     color: #6b7280;
-    margin-top: 4px;
 }
 
 .av-totalizer i { color: #9ca3af; }
@@ -727,7 +928,7 @@
     .av-hero-stats { flex-direction: row; flex-wrap: wrap; }
     .av-stat { min-width: 120px; flex: 1; }
     .av-hero-title { font-size: 1.35rem; }
-    .av-field-wide { grid-column: span 1; }
+    .av-field-wide { grid-column: 1 / -1; }
     .av-panel { padding: 24px 20px; }
     .av-shero { margin: -24px -20px 24px; padding: 22px 20px; }
     .av-shero-title { font-size: 1.25rem; }

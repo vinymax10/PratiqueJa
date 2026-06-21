@@ -148,7 +148,7 @@ public class ListaExerciciosPdfService
 	throws IOException, InterruptedException
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		Path workDir = Path.of(config.getEndereco()).resolve(diretorio.getDiretorio());
+		Path workDir = Path.of(config.getEnderecoLatex()).resolve(diretorio.getDiretorio());
 		try
 		{
 			return new GeradorListaPDF.Builder().gerador(padrao.getClasse()).titulo(assunto.getNome()).subtitulo("Nível " + padrao.getNivelRomano())

@@ -53,15 +53,11 @@ public class Pagamento implements Serializable, Entidade
 	{
 		switch(plano)
 		{
-			case Prata:
+			case Premium:
 				if(tipoPagamento == TipoPagamento.Mensal)
-					valor = 27.90;
+					valor = 19.90;
 				else
 					valor = 176.40;
-				break;
-
-			case Ouro:
-				valor = 427.90;
 				break;
 
 			default:

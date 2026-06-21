@@ -2,7 +2,7 @@ package modelo.questao;
 
 public enum Dificuldade
 {
-	Facil("Facil"),
+	Facil("Fácil"),
 	Medio("Médio"),
 	Dificil("Difícil");
 

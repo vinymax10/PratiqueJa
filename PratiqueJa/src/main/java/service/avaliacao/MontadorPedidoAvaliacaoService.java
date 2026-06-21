@@ -73,6 +73,10 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			boolean comGabaritoIndividual =
 				pedido.getPosicaoGabarito() == PosicaoGabarito.APOS_CADA_AVALIACAO;
 
+			// Bytes da logo da escola lidos em transação (o gerador roda sem transação e não conseguiria
+			// ler o LOB). null quando o usuário não é Profissional/Master ou não enviou logo.
+			byte[] logoEscolaBytes = pedidoAvaliacaoDAO.buscarLogoEscolaBytes(pedidoId);
+
 			int total = pedido.getQuantidade();
 			List<byte[]> pdfsAvaliacao = new ArrayList<>(total);
 			List<byte[]> pdfsGabarito = new ArrayList<>(1);
@@ -98,7 +102,7 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 
 				byte[] pdfAvaliacao = geradorAvaliacao.gerarAvaliacao(
 					pedido, blocos, codigoAvaliacao, styDir, xelatex, workDir,
-					comGabaritoIndividual
+					comGabaritoIndividual, logoEscolaBytes
 				);
 				pdfsAvaliacao.add(pdfAvaliacao);
 				etapaAtual++;
@@ -114,7 +118,7 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			// entre exemplares, ou 1 página por exemplar quando for com resolução.
 			if (!gabaritosPorExemplar.isEmpty())
 				pdfsGabarito.add(geradorGabarito.gerarGabaritosCombinados(
-					pedido, gabaritosPorExemplar, styDir, xelatex, baseDir.resolve("gabaritos")));
+					pedido, gabaritosPorExemplar, styDir, xelatex, baseDir.resolve("gabaritos"), logoEscolaBytes));
 
 			byte[] arquivoFinal;
 			String nomeDownload;

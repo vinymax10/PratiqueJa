@@ -67,7 +67,20 @@ public class Graphics
 		return baos.toByteArray();
 
 	}
-	
+
+	/** Redimensiona uma imagem cabendo dentro de maxWidth x maxHeight preservando a proporção
+	 *  (sem distorcer) e devolve os bytes em PNG. Usado para a logo da escola no cabeçalho do PDF. */
+	public static byte[] resizeLogo(UploadedFile uploadedFile, int maxWidth, int maxHeight) throws IOException
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		BufferedImage resizedImage = Thumbnails.of(uploadedFile.getInputStream())
+			.size(maxWidth, maxHeight)
+			.keepAspectRatio(true)
+			.asBufferedImage();
+		ImageIO.write(resizedImage, "png", baos);
+		return baos.toByteArray();
+	}
+
 	public static BufferedImage resize(BufferedImage image, double scale)
 	{
 		int w = image.getWidth();

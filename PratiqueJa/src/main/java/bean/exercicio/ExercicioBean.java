@@ -28,6 +28,7 @@ import matematica.ExercicioFactory;
 import modelo.academico.Assunto;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
+import modelo.pdf.Visibilidade;
 import modelo.seguranca.PermissaoPadrao;
 import service.configuracao.DiretorioService;
 import service.exercicio.ExercicioService;
@@ -217,8 +218,34 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	/** Registra a resposta de um exercício específico (cards da aba). */
 	public String responder(Exercicio exercicio)
 	{
+		if(bloqueado(exercicio))
+			return "";
+
 		exercicioService.registrarResposta(exercicio);
 		return "";
+	}
+
+	/**
+	 * Exibe/oculta a resolução comentada de um exercício específico (cards da aba),
+	 * barrando exercícios Premium para usuários do plano básico.
+	 */
+	public void toogleResolucaoComentada(Exercicio exercicio)
+	{
+		if(bloqueado(exercicio))
+			return;
+
+		exercicio.toogleResolucaoComentada();
+	}
+
+	/**
+	 * Exercício Premium indisponível para o usuário atual (não logado ou plano básico).
+	 * Usado tanto para barrar a ação no servidor quanto para renderizar o aviso de upgrade.
+	 */
+	public boolean bloqueado(Exercicio exercicio)
+	{
+		return exercicio != null
+			&& exercicio.getVisibilidade() == Visibilidade.Premium
+			&& !controleAcessoBean.podeAcessarPremium();
 	}
 
 	public void toogleResolucao()

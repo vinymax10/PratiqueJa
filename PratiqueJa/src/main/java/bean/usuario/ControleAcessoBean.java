@@ -75,6 +75,11 @@ public class ControleAcessoBean implements Serializable
 
 	// --- delegação ao service ---
 
+	public boolean podeAcessarPremium()
+	{
+		return controleAcessoService.podeAcessarPremium(usuario);
+	}
+
 	public boolean podeFazerDownload()
 	{
 		return controleAcessoService.podeFazerDownload(usuario, controleAcesso);

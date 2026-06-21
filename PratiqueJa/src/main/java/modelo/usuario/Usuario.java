@@ -34,7 +34,7 @@ import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
+@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "logoEscola", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
 @Data
 @Entity
 public class Usuario extends Ativo implements Entidade
@@ -87,9 +87,15 @@ public class Usuario extends Ativo implements Entidade
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Imagem imagem;
 
+	/** Logo da escola estampada no cabeçalho do PDF (recurso dos planos Profissional e Master). */
+	@DiffIgnore
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "logoEscola_id")
+	private Imagem logoEscola;
+
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "perfil")
-	private PerfilUsuario perfil = PerfilUsuario.Bronze;
+	private PerfilUsuario perfil = PerfilUsuario.Basico;
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "plano de avaliações")
@@ -103,6 +109,15 @@ public class Usuario extends Ativo implements Entidade
 
 	@AuditLabel(value = "validade do plano", genero = GeneroGramatical.FEMININO)
 	private LocalDate validadePlano;
+
+	/** Crédito de cota acumulado do mês anterior (rollover), recalculado mensalmente. */
+	@DiffIgnore
+	private int creditoRollover;
+
+	/** Primeiro dia do mês em que o rollover foi processado pela última vez (controla a
+	 *  continuidade da assinatura: só acumula quem ficou ativo o mês inteiro). */
+	@DiffIgnore
+	private LocalDate mesRolloverProcessado;
 
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")

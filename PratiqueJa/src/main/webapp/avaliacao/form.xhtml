@@ -30,6 +30,8 @@
 			<!-- ─── Dados da Avaliação ─── -->
 			<div class="av-section-sub"><i class="pi pi-info-circle" /> Dados da Avaliação</div>
 
+			<div class="av-data-split">
+			<div class="av-data-col">
 			<div class="av-fields">
 
 				<div class="av-field av-field-wide">
@@ -54,32 +56,6 @@
 						required="true"
 						requiredMessage="Informe o título da avaliação." />
 					<p:message for="titulo" display="text" />
-				</div>
-
-				<div class="av-field">
-					<div class="av-label">
-						Nome no PDF
-						<p:commandButton id="hNomeDoc" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
-						<p:overlayPanel for="hNomeDoc" appendTo="@body" dynamic="true" styleClass="av-help-panel">
-							<div class="av-help-header">
-								<i class="pi pi-file" />
-								<span class="av-help-header-title">Nome do documento</span>
-							</div>
-							<div class="av-help-body">
-								Define o rótulo principal exibido em destaque no topo do PDF.
-								Escolha o que melhor representa o contexto:<br/><br/>
-								<strong>Prova</strong> — avaliação formal com nota<br/>
-								<strong>Avaliação</strong> — termo geral<br/>
-								<strong>Simulado</strong> — preparação para exames<br/>
-								<strong>Teste</strong> — verificação rápida
-							</div>
-						</p:overlayPanel>
-					</div>
-					<p:selectOneMenu id="nomeDocumento"
-						value="#{pedidoAvaliacaoBean.entidade.nomeDocumento}">
-						<f:selectItems value="#{pedidoAvaliacaoBean.nomesDocumento}"
-							var="nomeDoc" itemLabel="#{nomeDoc.nome}" itemValue="#{nomeDoc}" />
-					</p:selectOneMenu>
 				</div>
 
 				<div class="av-field">
@@ -145,6 +121,72 @@
 						pattern="dd/MM/yyyy"
 						placeholder="(opcional)" />
 				</div>
+
+			</div>
+			</div>
+
+				<ui:fragment rendered="#{pedidoAvaliacaoBean.podeUsarLogoEscola}">
+					<div class="av-logo-col">
+						<div class="av-label">
+							Logo personalizada
+							<p:commandButton id="hLogo" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+							<p:overlayPanel for="hLogo" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+								<div class="av-help-header">
+									<i class="pi pi-image" />
+									<span class="av-help-header-title">Logo personalizada</span>
+								</div>
+								<div class="av-help-body">
+									Recurso dos planos Profissional e Master. A imagem enviada substitui
+									a marca "PratiqueJá" no canto do cabeçalho do PDF.<br/><br/>
+									Pode ser a logo da sua escola ou curso — ou, se você dá aula
+									particular, uma imagem com o seu nome.<br/><br/>
+									Vale para todas as suas avaliações — envie uma vez só. PNG ou JPG.
+								</div>
+							</p:overlayPanel>
+						</div>
+						<div class="av-logo-uploader">
+							<div class="av-dropzone-wrap">
+								<div class="av-dropzone-hint">
+									<span class="av-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+									<span class="av-dropzone-title">Arraste a sua logo aqui ou clique para enviar</span>
+									<ul class="av-dropzone-specs">
+										<li>PNG ou JPG <span>— PNG com fundo transparente fica melhor</span></li>
+										<li>Tamanho máximo: 5 MB</li>
+										<li>Proporção horizontal · ideal ~600 × 240 px</li>
+									</ul>
+								</div>
+								<p:fileUpload listener="#{pedidoAvaliacaoBean.uploadLogoEscola}"
+									mode="advanced" auto="true" dragDropSupport="true"
+									chooseLabel="Selecionar imagem"
+									styleClass="av-dropzone"
+									invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+									invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+									update="form:logoEscolaPreview :growl">
+									<p:validateFile sizeLimit="5002400" allowTypes="/(\.|\/)(png|jpe?g)$/" />
+								</p:fileUpload>
+							</div>
+
+							<h:panelGroup id="logoEscolaPreview" layout="block">
+								<ui:fragment rendered="#{pedidoAvaliacaoBean.temLogoEscola}">
+									<div class="av-logo-card">
+										<div class="av-logo-canvas">
+											<img src="#{pedidoAvaliacaoBean.logoEscolaDataUri}" class="av-logo-img" alt="Logo personalizada" />
+										</div>
+										<div class="av-logo-info">
+											<span class="av-logo-badge"><i class="pi pi-check-circle" /> Logo aplicada</span>
+											<span class="av-logo-hint">Aparece no cabeçalho da prova e do gabarito.</span>
+										</div>
+										<p:commandLink action="#{pedidoAvaliacaoBean.removerLogoEscola}"
+											process="@this" update="form:logoEscolaPreview :growl"
+											styleClass="av-logo-remove" title="Remover logo">
+											<i class="pi pi-trash" />
+										</p:commandLink>
+									</div>
+								</ui:fragment>
+							</h:panelGroup>
+						</div>
+					</div>
+				</ui:fragment>
 
 			</div>
 
@@ -239,7 +281,7 @@
 								Número de avaliações a gerar nesta solicitação.
 								Cada exemplar recebe exercícios diferentes sorteados aleatoriamente
 								e um código único (ex.: A3F7-001) que identifica seu gabarito correspondente.<br/><br/>
-								Máximo por solicitação: #{pedidoAvaliacaoBean.config.maxAvaliacoesPorSolicitacao} exemplares.
+								Máximo por solicitação: #{pedidoAvaliacaoBean.maxAvaliacoesPorSolicitacao} exemplares.
 							</div>
 						</p:overlayPanel>
 					</div>
@@ -288,6 +330,9 @@
 								<span class="av-item-chip av-item-chip--qtd">
 									<h:outputText value="#{item.quantidade} exercício#{item.quantidade != 1 ? 's' : ''}" />
 								</span>
+								<span class="av-item-chip av-item-chip--layout" title="Distribuição no PDF: este assunto ocupa #{item.exerciciosPorPagina} exercícios por página.">
+									<i class="pi pi-th-large" />&#160;<h:outputText value="#{item.exerciciosPorPagina} por página" />
+								</span>
 							</div>
 							<h:outputText styleClass="av-item-descricao"
 								rendered="#{not empty item.exercicioPadrao.descricao}"
@@ -334,15 +379,34 @@
 			</h:panelGroup>
 
 			<!-- Totalizador como componente JSF para poder ser atualizado via AJAX -->
-			<h:panelGroup id="totalizador" layout="block">
-				<div class="av-totalizer #{pedidoAvaliacaoBean.totalExercicios() >= pedidoAvaliacaoBean.config.maxExerciciosPorAvaliacao ? 'av-totalizer--warn' : ''}">
+			<h:panelGroup id="totalizador" layout="block" styleClass="av-totalizer-group">
+				<div class="av-totalizer #{pedidoAvaliacaoBean.totalExercicios() >= pedidoAvaliacaoBean.maxExerciciosPorAvaliacao ? 'av-totalizer--warn' : ''}">
 					<i class="pi pi-list" />
 					Total de exercícios:
 					<b><h:outputText value="#{pedidoAvaliacaoBean.totalExercicios()}" /></b>
 					de
-					<b><h:outputText value="#{pedidoAvaliacaoBean.config.maxExerciciosPorAvaliacao}" /></b>
+					<b><h:outputText value="#{pedidoAvaliacaoBean.maxExerciciosPorAvaliacao}" /></b>
 					máx.
 				</div>
+
+				<h:panelGroup layout="block" styleClass="av-tz-contents" rendered="#{pedidoAvaliacaoBean.totalExercicios() > 0}">
+					<div class="av-totalizer">
+						<i class="pi pi-file" />
+						Cada prova terá
+						<b><h:outputText value="#{pedidoAvaliacaoBean.paginasQuestoes()}" /></b>
+						<h:outputText value="página#{pedidoAvaliacaoBean.paginasQuestoes() != 1 ? 's' : ''} de questões" />
+					</div>
+
+					<h:panelGroup layout="block" styleClass="av-tz-contents" rendered="#{pedidoAvaliacaoBean.ultimaPaginaComEspaco}">
+						<div class="av-totalizer #{pedidoAvaliacaoBean.ultimaPaginaOciosa ? 'av-totalizer--warn' : ''}">
+							<i class="pi pi-info-circle" />
+							Ainda cabem cerca de
+							<b><h:outputText value="#{pedidoAvaliacaoBean.exerciciosQueAindaCabem()}" /></b>
+							<h:outputText value="exercício#{pedidoAvaliacaoBean.exerciciosQueAindaCabem() != 1 ? 's' : ''} na última página" />.
+							Aproveite o espaço ou ajuste a quantidade.
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
 			</h:panelGroup>
 
 			<div class="av-actions av-actions--split">

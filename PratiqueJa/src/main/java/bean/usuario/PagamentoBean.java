@@ -142,15 +142,11 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 		{
 			switch(plano)
 			{
-				case Prata:
+				case Premium:
 					if(tipoPagamento == TipoPagamento.Mensal)
 						Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848eccfa81018ede87a667092d");
 					else
 						Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848eccfa7b018ede9e43dc0955");
-					break;
-
-				case Ouro:
-					Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=a93b47df34f74d178082d08651253cb0");
 					break;
 
 				default: break;

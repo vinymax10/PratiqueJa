@@ -32,12 +32,18 @@
 			</h:panelGroup>
 
 			<h:panelGroup layout="block" styleClass="av-hero-stats"
-				rendered="#{sessaoBean.usuario.planoAvaliacao == null}">
-				<div class="av-no-plan">
-					<span class="av-no-plan-label"><i class="pi pi-lock" /> Sem plano ativo</span>
-					<span class="av-no-plan-text">
-						Entre em contato para ativar seu plano.
-					</span>
+				rendered="#{pedidoAvaliacaoBean.modoTrial}">
+				<div class="av-stat">
+					<span class="av-stat-label">Teste grátis</span>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.limiteTrialGratis} provas</strong>
+				</div>
+				<div class="av-stat">
+					<span class="av-stat-label">Usadas</span>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadasTotal}</strong>
+				</div>
+				<div class="av-stat av-stat--green">
+					<span class="av-stat-label">Restantes</span>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.trialRestante()}</strong>
 				</div>
 			</h:panelGroup>
 		</div>

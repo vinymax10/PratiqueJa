@@ -70,6 +70,35 @@
 	gap: 8px;
 }
 
+/* ---- CTA "Produtos" na topbar (vitrine / destaque de conversão) ---- */
+.t2-cta-produtos {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 38px;
+	padding: 0 16px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+	color: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	text-decoration: none;
+	white-space: nowrap;
+	box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+	transition: transform 0.15s, box-shadow 0.15s;
+}
+.t2-cta-produtos:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(37, 99, 235, 0.45);
+	color: #fff;
+}
+.t2-cta-produtos i { font-size: 14px; }
+
+@media (max-width: 600px) {
+	.t2-cta-produtos .t2-cta-text { display: none; }
+	.t2-cta-produtos { padding: 0 12px; }
+}
+
 /* ---- LAYOUT DA PÁGINA (abaixo do topbar) ---- */
 .t2-page {
 	display: flex;

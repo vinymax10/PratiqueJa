@@ -64,14 +64,14 @@ public class GeradorAvaliacaoPdfService implements Serializable
 	}
 
 	public byte[] gerarAvaliacao(PedidoAvaliacao pedido, List<BlocoExercicio> blocos, String codigoAvaliacao,
-		Path pratiquejaStyDir, String xelatexExe, Path workDir, boolean incluirGabarito)
+		Path pratiquejaStyDir, String xelatexExe, Path workDir, boolean incluirGabarito, byte[] logoEscolaBytes)
 		throws IOException, InterruptedException
 	{
 		Files.createDirectories(workDir);
 		copiarSty(pratiquejaStyDir, workDir);
 
 		String nomeBase = "avaliacao_" + codigoAvaliacao.replace("-", "_").toLowerCase();
-		String tex = construirTex(pedido, codigoAvaliacao, blocos, incluirGabarito, workDir);
+		String tex = construirTex(pedido, codigoAvaliacao, blocos, incluirGabarito, workDir, logoEscolaBytes);
 
 		Path texFile = workDir.resolve(nomeBase + ".tex");
 		Files.writeString(texFile, tex, StandardCharsets.UTF_8);
@@ -120,11 +120,14 @@ public class GeradorAvaliacaoPdfService implements Serializable
 	// ── Construção do .tex ────────────────────────────────────────────
 
 	private String construirTex(PedidoAvaliacao pedido, String codigoAvaliacao,
-		List<BlocoExercicio> blocos, boolean incluirGabarito, Path workDir)
+		List<BlocoExercicio> blocos, boolean incluirGabarito, Path workDir, byte[] logoEscolaBytes)
 	{
+		String logoEscola = gravarLogoEscola(logoEscolaBytes, workDir);
+
 		StringBuilder sb = new StringBuilder();
 		sb.append(preambulo());
-		sb.append(cabecalhoAvaliacao(pedido, codigoAvaliacao));
+		sb.append("\\setsubject{").append(escapar(pedido.getTitulo())).append("}\n\n");
+		sb.append(cabecalhoAvaliacao(pedido, codigoAvaliacao, logoEscola));
 		sb.append(linhaAluno());
 		sb.append("\\vspace{6pt}\n\n");
 		sb.append(blocoQuestoes(blocos, workDir));
@@ -132,7 +135,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		if (incluirGabarito && pedido.getTipoGabarito() != null)
 		{
 			sb.append("\n\\clearpage\n\n");
-			sb.append(blocoGabarito(pedido, codigoAvaliacao, blocos));
+			sb.append(blocoGabarito(pedido, codigoAvaliacao, blocos, logoEscola));
 		}
 
 		sb.append("\n\\end{document}\n");
@@ -151,19 +154,23 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "\\definecolor{iris}{rgb}{0.39, 0.44, 1}\n"
 			+ "\\definecolor{babypink}{rgb}{1, 0.42, 0.52}\n\n"
 			+ macros()
-			+ "\\pagestyle{fancy}\n"
-			+ "\\fancyhf{}\n"
-			+ "\\renewcommand{\\headrulewidth}{0pt}\n"
-			+ "\\fancyfoot[C]{\\small\\color{mutedtext}\\thepage\\ de\\ \\pageref{LastPage}}\n\n"
+			// Rodapé herdado do pratiqueja.sty (PratiqueJá à esquerda, título no centro, filete);
+			// só a direita é sobrescrita para a paginação no formato X/Y.
+			+ "\\fancyfoot[R]{\\small\\color{mutedtext}\\thepage/\\pageref{LastPage}}\n\n"
 			+ "\\begin{document}\n"
 			+ "\\setstretch{1.2}\n"
 			+ "\\color{bodytext}\n\n";
 	}
 
-	private String cabecalhoAvaliacao(PedidoAvaliacao pedido, String codigoAvaliacao)
+	private String cabecalhoAvaliacao(PedidoAvaliacao pedido, String codigoAvaliacao, String logoEscola)
 	{
-		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda, wordmark "PratiqueJá".
-		String titulo = escapar(pedido.getNomeDocumento().getNome()) + ": " + escapar(pedido.getTitulo());
+		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda. No canto direito vai a
+		// logo da escola (planos Profissional/Master) ou, na ausência dela, o wordmark "PratiqueJá".
+		String titulo = escapar(pedido.getTitulo());
+
+		String marca = logoEscola != null
+			? "\\includegraphics[height=1.1cm,keepaspectratio]{" + logoEscola + "}"
+			: "{\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}";
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\begin{tcolorbox}[\n")
@@ -175,7 +182,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		  .append("]\n")
 		  .append("  \\noindent\n")
 		  .append("  {\\color{titletext}\\fontsize{16}{20}\\selectfont\\bfseries ").append(titulo).append("}\\hfill\n")
-		  .append("  {\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}\\par\n")
+		  .append("  ").append(marca).append("\\par\n")
 		  .append("  \\vspace{3pt}\n")
 		  .append("  {\\color{mutedtext}\\small ").append(linhaInfoCabecalho(pedido))
 		  .append("\\hfill\\texttt{Cód.: ").append(codigoAvaliacao).append("}}\n")
@@ -197,6 +204,26 @@ public class GeradorAvaliacaoPdfService implements Serializable
 		return String.join("\\quad ", partes);
 	}
 
+	/** Grava os bytes da logo da escola no workDir e devolve o nome do arquivo, ou null se não houver
+	 *  logo (os bytes já vêm prontos e validados por plano do MontadorPedidoAvaliacaoService). */
+	private String gravarLogoEscola(byte[] logoBytes, Path workDir)
+	{
+		if (logoBytes == null || logoBytes.length == 0)
+			return null;
+
+		try
+		{
+			String nome = "logo_escola.png";
+			Files.write(workDir.resolve(nome), logoBytes);
+			return nome;
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
 	private String linhaAluno()
 	{
 		return
@@ -209,78 +236,120 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	// ── Bloco de questões ─────────────────────────────────────────────
 
-	/** Uma questão da prova: o exercício + se as alternativas devem ser exibidas (discursiva = não). */
+	/** Uma questão da prova: o exercício, se as alternativas devem ser exibidas (discursiva = não)
+	 *  e o layout do seu bloco (define se a página é Padrão ou Espaçosa). */
 	private static final class Questao
 	{
 		final Exercicio exercicio;
 		final boolean mostrarAlternativas;
+		final LayoutLista layout;
 
-		Questao(Exercicio exercicio, boolean mostrarAlternativas)
+		Questao(Exercicio exercicio, boolean mostrarAlternativas, LayoutLista layout)
 		{
 			this.exercicio = exercicio;
 			this.mostrarAlternativas = mostrarAlternativas;
+			this.layout = layout;
 		}
 	}
 
 	private String blocoQuestoes(List<BlocoExercicio> blocos, Path workDir)
 	{
-		// Todas as questões (alternativas e discursivas) numa única grade de 2 colunas, com
-		// paginação contínua. Discursivas usam o mesmo layout, só sem mostrar as alternativas.
-		// Se qualquer bloco for Espaçoso, a grade inteira usa Espaçoso (4/página, linhas mais altas).
+		// Todas as questões (alternativas e discursivas) numa grade de 2 colunas. Cada questão
+		// carrega o layout do seu bloco; a distribuição é feita por página (ver paginar()).
 		List<Questao> questoes = new ArrayList<>();
-		boolean espacoso = false;
 		for (BlocoExercicio bloco : blocos)
 		{
 			boolean mostrarAlternativas = bloco.isAlternativas();
 			for (Exercicio e : bloco.getExercicios())
-				questoes.add(new Questao(e, mostrarAlternativas));
-			espacoso = espacoso || bloco.getLayout() == LayoutLista.ESPACOSO;
+				questoes.add(new Questao(e, mostrarAlternativas, bloco.getLayout()));
 		}
 
 		if (questoes.isEmpty())
 			return "";
 
-		return blocoGrade(questoes, espacoso ? LayoutLista.ESPACOSO : LayoutLista.PADRAO, workDir);
+		return blocoGrade(questoes, workDir);
 	}
 
-	private String blocoGrade(List<Questao> questoes, LayoutLista layout, Path workDir)
+	/** Renderiza as questões página a página. O layout de cada página vem de paginar(): uma página
+	 *  com ao menos uma questão espaçosa é toda espaçosa (4/página, linhas de 10,5cm); caso
+	 *  contrário é padrão (6/página, linhas de 7cm). Numeração contínua e em ordem. */
+	private String blocoGrade(List<Questao> questoes, Path workDir)
 	{
-		// Quantidade por página vem do layout (Padrão = 6/página, Espaçoso = 4/página).
-		// A altura da linha é a da avaliação: 3 linhas de 7cm ou 2 de 10,5cm preenchem ~21cm,
-		// que cabe abaixo do cabeçalho na página 1.
-		int porPagina = layout.exerciciosPorPagina;
-		String altura = layout == LayoutLista.ESPACOSO ? "10.5cm" : "7cm";
+		List<List<Questao>> paginas = paginar(questoes);
 
 		StringBuilder sb = new StringBuilder();
-		// \cellheight controla a altura do parbox de cada questão — casa com a altura da linha
-		sb.append("\\setlength{\\cellheight}{").append(altura).append("}\n");
-		sb.append(abrirGrade(altura));
-		for (int i = 0; i < questoes.size(); i += 2)
+		int num = 1;
+		for (int p = 0; p < paginas.size(); p++)
 		{
-			// Ao atingir o limite por página, fecha a grade, pula de página e reabre na seguinte
-			if (i > 0 && i % porPagina == 0)
-				sb.append(fecharGrade()).append("\\newpage\n").append(abrirGrade(altura));
+			if (p > 0)
+				sb.append("\\newpage\n");
 
-			Questao esq = questoes.get(i);
-			Questao dir = (i + 1 < questoes.size()) ? questoes.get(i + 1) : null;
-			int numEsq = i + 1;
-			int numDir = dir != null ? i + 2 : 0;
-			sb.append(linhaExercicio(numEsq, esq, numDir, dir, workDir));
+			List<Questao> pagina = paginas.get(p);
+			boolean espacoso = pagina.stream().anyMatch(q -> q.layout == LayoutLista.ESPACOSO);
+			String altura = espacoso ? "10.5cm" : "7cm";
+
+			sb.append(abrirGrade());
+			for (int i = 0; i < pagina.size(); i += 2)
+			{
+				Questao esq = pagina.get(i);
+				Questao dir = (i + 1 < pagina.size()) ? pagina.get(i + 1) : null;
+				sb.append(linhaExercicio(altura, num + i, esq, dir != null ? num + i + 1 : 0, dir, workDir));
+			}
+			sb.append(fecharGrade());
+			num += pagina.size();
 		}
-		sb.append(fecharGrade());
 		return sb.toString();
+	}
+
+	/** Distribui as questões em páginas. Regra: uma página que contém ao menos uma questão espaçosa
+	 *  comporta 4 questões (e renderiza tudo espaçoso); uma página só com questões padrão comporta 6.
+	 *  Assim, uma questão padrão "órfã" no fim de um bloco desce para a página espaçosa seguinte. */
+	private List<List<Questao>> paginar(List<Questao> questoes)
+	{
+		int capEspacoso = LayoutLista.ESPACOSO.exerciciosPorPagina;
+		int capPadrao = LayoutLista.PADRAO.exerciciosPorPagina;
+
+		List<List<Questao>> paginas = new ArrayList<>();
+		List<Questao> atual = new ArrayList<>();
+		boolean atualEspacoso = false;
+
+		for (Questao q : questoes)
+		{
+			boolean questaoEspacosa = q.layout == LayoutLista.ESPACOSO;
+			int capacidade = (atualEspacoso || questaoEspacosa) ? capEspacoso : capPadrao;
+
+			if (!atual.isEmpty() && atual.size() >= capacidade)
+			{
+				paginas.add(atual);
+				atual = new ArrayList<>();
+				atualEspacoso = false;
+			}
+
+			atual.add(q);
+			atualEspacoso = atualEspacoso || questaoEspacosa;
+		}
+		if (!atual.isEmpty())
+			paginas.add(atual);
+
+		return paginas;
 	}
 
 	// ── Bloco de gabarito ─────────────────────────────────────────────
 
 	private String blocoGabarito(PedidoAvaliacao pedido, String codigoAvaliacao,
-		List<BlocoExercicio> blocos)
+		List<BlocoExercicio> blocos, String logoEscola)
 	{
+		// Logo da escola (Profissional/Master) à direita do título GABARITO, quando houver.
+		String logoTex = logoEscola != null
+			? "\\raisebox{-0.25cm}{\\includegraphics[height=0.8cm,keepaspectratio]{" + logoEscola + "}}\\hspace{12pt}"
+			: "";
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\begin{tcolorbox}[enhanced, arc=4pt, boxrule=1pt,\n")
 		  .append("  colback=rulebg, colframe=darkblue,\n")
 		  .append("  left=8pt, right=8pt, top=4pt, bottom=4pt]\n")
 		  .append("  {\\bfseries\\color{darkblue} GABARITO}\\hfill")
+		  .append(logoTex)
 		  .append("{\\footnotesize\\color{mutedtext}\\texttt{").append(codigoAvaliacao).append("}}\n")
 		  .append("\\end{tcolorbox}\n\n");
 
@@ -351,8 +420,10 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	// ── Grades ────────────────────────────────────────────────────────
 
-	private String abrirGrade(String alturaLinha)
+	private String abrirGrade()
 	{
+		// Sem "ht" fixo: a altura de cada linha vem do \parbox de altura própria de cada questão,
+		// permitindo linhas Padrão (7cm) e Espaçoso (10,5cm) na mesma grade/página.
 		return
 			"\\noindent\n"
 			+ "\\begin{tblr}{\n"
@@ -361,7 +432,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "  columns  = {colsep=0pt, leftsep=7pt, rightsep=7pt},\n"
 			+ "  column{1} = {leftsep=0pt},\n"
 			+ "  column{2} = {rightsep=0pt},\n"
-			+ "  rows     = {ht=" + alturaLinha + ", valign=t, rowsep=0pt},\n"
+			+ "  rows     = {valign=t, rowsep=0pt},\n"
 			+ "}\n";
 	}
 
@@ -389,13 +460,14 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 	// ── Linhas de questão e gabarito ──────────────────────────────────
 
-	private String linhaExercicio(int numEsq, Questao esq, int numDir, Questao dir, Path workDir)
+	private String linhaExercicio(String altura, int numEsq, Questao esq, int numDir, Questao dir, Path workDir)
 	{
-		String dirTex = dir != null ? macroExercicio(numDir, dir, workDir) : "";
-		return macroExercicio(numEsq, esq, workDir) + " &\n" + dirTex + " \\\\\n";
+		String esqTex = macroExercicio(altura, numEsq, esq, workDir);
+		String dirTex = dir != null ? macroExercicio(altura, numDir, dir, workDir) : "";
+		return esqTex + " &\n" + dirTex + " \\\\\n";
 	}
 
-	private String macroExercicio(int num, Questao q, Path workDir)
+	private String macroExercicio(String altura, int num, Questao q, Path workDir)
 	{
 		String numStr = String.format("%02d", num);
 		Exercicio e = q.exercicio;
@@ -403,10 +475,10 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 		// Discursiva (ou exercício sem alternativas): só o enunciado, sem as opções (\exd)
 		if (!q.mostrarAlternativas || alts == null || alts.isEmpty())
-			return "\\exd{" + numStr + "}{" + enunciado(num, e, workDir) + "}";
+			return "\\exd{" + altura + "}{" + numStr + "}{" + enunciado(num, e, workDir) + "}";
 
 		String[] textos = alternativasTexto(alts);
-		return "\\ex{" + numStr + "}{" + enunciado(num, e, workDir) + "}"
+		return "\\ex{" + altura + "}{" + numStr + "}{" + enunciado(num, e, workDir) + "}"
 			+ "{" + textos[0] + "}"
 			+ "{" + textos[1] + "}"
 			+ "{" + textos[2] + "}"
@@ -440,8 +512,6 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "  \\ifx\\altarg\\altph\\else\n"
 			+ "    \\noindent{\\bfseries\\color{darkblue}\\small(#1)}~{\\small#2}\\par\n"
 			+ "  \\fi}\n"
-			+ "\\newlength{\\cellheight}\n"
-			+ "\\setlength{\\cellheight}{7cm}\n"
 			+ "\\newcommand{\\alts}[5]{%\n"
 			+ "  \\altline{A}{#1}%\n"
 			+ "  \\altline{B}{#2}%\n"
@@ -449,15 +519,15 @@ public class GeradorAvaliacaoPdfService implements Serializable
 			+ "  \\altline{D}{#4}%\n"
 			+ "  \\altline{E}{#5}\n"
 			+ "  \\vspace{0.3cm}}\n"
-			+ "\\newcommand{\\ex}[7]{%\n"
-			+ "  \\parbox[t][\\cellheight][t]{\\linewidth}{%\n"
+			+ "\\newcommand{\\ex}[8]{%\n"
+			+ "  \\parbox[t][#1][t]{\\linewidth}{%\n"
 			+ "    \\setlength{\\parskip}{6pt}%\n"
-			+ "    \\noindent\\numex{#1}{\\small\\color{bodytext}#2}\\par\\vfill\n"
-			+ "    \\alts{#3}{#4}{#5}{#6}{#7}}}\n"
-			+ "\\newcommand{\\exd}[2]{%\n"
-			+ "  \\parbox[t][\\cellheight][t]{\\linewidth}{%\n"
+			+ "    \\noindent\\numex{#2}{\\small\\color{bodytext}#3}\\par\\vfill\n"
+			+ "    \\alts{#4}{#5}{#6}{#7}{#8}}}\n"
+			+ "\\newcommand{\\exd}[3]{%\n"
+			+ "  \\parbox[t][#1][t]{\\linewidth}{%\n"
 			+ "    \\setlength{\\parskip}{6pt}%\n"
-			+ "    \\noindent\\numex{#1}{\\small\\color{bodytext}#2}}}\n"
+			+ "    \\noindent\\numex{#2}{\\small\\color{bodytext}#3}}}\n"
 			+ "\\newcommand{\\resheader}[2]{%\n"
 			+ "  \\begin{tcolorbox}[enhanced,arc=3pt,boxrule=0pt,colback=rulebg,colframe=rulebg,"
 			+ "left=4pt,right=4pt,top=1pt,bottom=1pt,nobeforeafter,on line]"

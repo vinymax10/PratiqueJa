@@ -69,15 +69,6 @@
 				styleClass="ui-button-outlined"
 				icon="pi pi-chevron-left" href="/administracao/conteudo/pdf/questao/list.xhtml" />
 
-				<p:commandButton value="Gerar Todos"
-					styleClass="ui-button-raised ui-button-secondary"
-					icon="pi pi-sync"
-					action="#{gerarListaQuestoesBean.gerarTodos()}" update=":growl"
-					process="@this">
-					<p:confirm header="Confirmação" icon="pi pi-info-circle"
-					message="Gerar PDFs para todos os assuntos pode demorar vários minutos. Deseja continuar?" />
-				</p:commandButton>
-
 				<p:commandButton id="gerarBtn" value="Gerar"
 					styleClass="ui-button-raised ui-button-primary"
 					icon="pi pi-file-pdf"

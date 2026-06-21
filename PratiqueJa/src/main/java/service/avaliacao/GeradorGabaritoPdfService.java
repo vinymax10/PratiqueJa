@@ -35,16 +35,18 @@ public class GeradorGabaritoPdfService implements Serializable
 	 * O mapa deve preservar a ordem dos exemplares (use LinkedHashMap): chave = código, valor = blocos.
 	 */
 	public byte[] gerarGabaritosCombinados(PedidoAvaliacao pedido,
-		Map<String, List<BlocoExercicio>> porExemplar, Path pratiquejaStyDir, String xelatexExe, Path workDir)
+		Map<String, List<BlocoExercicio>> porExemplar, Path pratiquejaStyDir, String xelatexExe, Path workDir,
+		byte[] logoEscolaBytes)
 		throws IOException, InterruptedException
 	{
 		Files.createDirectories(workDir);
 		copiarSty(pratiquejaStyDir, workDir);
 
 		boolean comResolucao = pedido.getTipoGabarito() == TipoGabarito.COM_RESOLUCAO;
+		String logoEscola = gravarLogoEscola(logoEscolaBytes, workDir);
 
 		String nomeBase = "gabaritos_" + pedido.getCodigoBatch().replace("-", "_").toLowerCase();
-		String tex = construirTexCombinado(pedido, porExemplar, comResolucao);
+		String tex = construirTexCombinado(pedido, porExemplar, comResolucao, logoEscola);
 
 		Path texFile = workDir.resolve(nomeBase + ".tex");
 		Files.writeString(texFile, tex, StandardCharsets.UTF_8);
@@ -78,15 +80,13 @@ public class GeradorGabaritoPdfService implements Serializable
 	// ── Construção do .tex ────────────────────────────────────────────
 
 	private String construirTexCombinado(PedidoAvaliacao pedido,
-		Map<String, List<BlocoExercicio>> porExemplar, boolean comResolucao)
+		Map<String, List<BlocoExercicio>> porExemplar, boolean comResolucao, String logoEscola)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(preambulo());
 
 		// Rodapé central (\pj@subject) = título da avaliação, no lugar do placeholder "Assunto".
 		sb.append("\\setsubject{")
-		  .append(escapar(pedido.getNomeDocumento().getNome()))
-		  .append(": ")
 		  .append(escapar(pedido.getTitulo()))
 		  .append("}\n\n");
 
@@ -96,7 +96,7 @@ public class GeradorGabaritoPdfService implements Serializable
 			if (!primeiro)
 				sb.append(comResolucao ? "\\newpage\n\n" : separadorTracejado());
 
-			sb.append(cabecalhoGabarito(pedido, exemplar.getKey()));
+			sb.append(cabecalhoGabarito(pedido, exemplar.getKey(), logoEscola));
 
 			if (!comResolucao)
 			{
@@ -145,10 +145,15 @@ public class GeradorGabaritoPdfService implements Serializable
 			+ "\\color{bodytext}\n\n";
 	}
 
-	private String cabecalhoGabarito(PedidoAvaliacao pedido, String codigoAvaliacao)
+	private String cabecalhoGabarito(PedidoAvaliacao pedido, String codigoAvaliacao, String logoEscola)
 	{
-		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda, wordmark "PratiqueJá".
-		String documento = escapar(pedido.getNomeDocumento().getNome()) + ": " + escapar(pedido.getTitulo());
+		// Mesmo estilo do \listheader: caixa branca, filete azul à esquerda. No canto direito vai a
+		// logo da escola (planos Profissional/Master) ou, na ausência dela, o wordmark "PratiqueJá".
+		String documento = escapar(pedido.getTitulo());
+
+		String marca = logoEscola != null
+			? "\\includegraphics[height=1.1cm,keepaspectratio]{" + logoEscola + "}"
+			: "{\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}";
 
 		return
 			"\\begin{tcolorbox}[\n"
@@ -160,7 +165,7 @@ public class GeradorGabaritoPdfService implements Serializable
 			+ "]\n"
 			+ "  \\noindent\n"
 			+ "  {\\color{titletext}\\fontsize{16}{20}\\selectfont\\bfseries GABARITO}\\hfill\n"
-			+ "  {\\color{mutedtext}\\small\\textbf{Pratique}\\textcolor{darkblue}{\\textbf{Já}}}\\par\n"
+			+ "  " + marca + "\\par\n"
 			+ "  \\vspace{3pt}\n"
 			+ "  {\\color{mutedtext}\\small " + documento
 			+ "\\hfill\\texttt{Cód.: " + codigoAvaliacao + "}}\n"
@@ -282,6 +287,26 @@ public class GeradorGabaritoPdfService implements Serializable
 	}
 
 	// ── Helpers ───────────────────────────────────────────────────────
+
+	/** Grava os bytes da logo da escola no workDir e devolve o nome do arquivo, ou null se não houver
+	 *  logo (os bytes já vêm prontos e validados por plano do MontadorPedidoAvaliacaoService). */
+	private String gravarLogoEscola(byte[] logoBytes, Path workDir)
+	{
+		if (logoBytes == null || logoBytes.length == 0)
+			return null;
+
+		try
+		{
+			String nome = "logo_escola.png";
+			Files.write(workDir.resolve(nome), logoBytes);
+			return nome;
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
 	private String escapar(String s)
 	{

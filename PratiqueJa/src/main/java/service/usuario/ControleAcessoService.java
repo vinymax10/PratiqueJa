@@ -52,12 +52,18 @@ public class ControleAcessoService
 
 	// --- regras de autorização ---
 
+	/** Conteúdo Premium exige plano pago (qualquer perfil acima do Básico). */
+	public boolean podeAcessarPremium(Usuario usuario)
+	{
+		return usuario != null && usuario.getPerfil() != PerfilUsuario.Basico;
+	}
+
 	public boolean podeFazerDownload(Usuario usuario, ControleAcesso controleAcesso)
 	{
 		if(usuario == null || controleAcesso == null)
 			return false;
 
-		if(usuario.getPerfil() != PerfilUsuario.Bronze)
+		if(usuario.getPerfil() != PerfilUsuario.Basico)
 			return true;
 
 		ConfigControleAcesso config = getConfig();
@@ -70,7 +76,7 @@ public class ControleAcessoService
 		if(usuario == null || controleAcesso == null)
 			return false;
 
-		if(usuario.getPerfil() != PerfilUsuario.Bronze)
+		if(usuario.getPerfil() != PerfilUsuario.Basico)
 			return true;
 
 		ConfigControleAcesso config = getConfig();
@@ -83,7 +89,7 @@ public class ControleAcessoService
 		if(usuario == null || controleAcesso == null)
 			return false;
 
-		if(usuario.getPerfil() != PerfilUsuario.Bronze)
+		if(usuario.getPerfil() != PerfilUsuario.Basico)
 			return true;
 
 		ConfigControleAcesso config = getConfig();
@@ -96,7 +102,7 @@ public class ControleAcessoService
 		if(usuario == null || controleAcesso == null)
 			return false;
 
-		if(usuario.getPerfil() != PerfilUsuario.Bronze)
+		if(usuario.getPerfil() != PerfilUsuario.Basico)
 			return true;
 
 		ConfigControleAcesso config = getConfig();

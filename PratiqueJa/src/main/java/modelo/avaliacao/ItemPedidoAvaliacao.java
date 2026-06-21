@@ -19,6 +19,7 @@ import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
+import pdf.exercicio.LayoutLista;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = { "pedidoAvaliacao", "assunto", "exercicioPadrao" })
@@ -59,4 +60,12 @@ public class ItemPedidoAvaliacao implements Serializable, Entidade
 
 	@AuditLabel(value = "ordem")
 	private int ordem;
+
+	/** Quantos exercícios deste item cabem por página no PDF: 6 no layout Padrão, 4 no Espaçoso.
+	 *  Default 6 (Padrão) quando o exercício padrão/layout ainda não está resolvido. */
+	public int getExerciciosPorPagina()
+	{
+		LayoutLista layout = exercicioPadrao != null ? exercicioPadrao.getLayoutLista() : null;
+		return layout != null ? layout.exerciciosPorPagina : LayoutLista.PADRAO.exerciciosPorPagina;
+	}
 }
