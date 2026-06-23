@@ -60,14 +60,16 @@ public class ProblemaTresEtapas
 		return q;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int porDep = a / b;
-		String res = "Resolvemos em dois passos: \\(\\\\\\)";
-		res += "Passo 1 — dividimos o total pelo número de grupos: \\(\\\\\\)";
-		res += "\\(" + a + " \\div " + b + " = " + porDep + "\\) \\(\\\\\\)";
-		res += "Passo 2 — dividimos cada grupo pelo número de subgrupos: \\(\\\\\\)";
-		res += "\\(" + porDep + " \\div " + c + " = \\mathbf{" + q + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Resolvemos em dois passos:",
+			"Passo 1 — dividimos o total pelo número de grupos:",
+			"\\(" + a + " \\div " + b + " = " + porDep + "\\)",
+			"Passo 2 — dividimos cada grupo pelo número de subgrupos:",
+			"\\(" + porDep + " \\div " + c + " = \\mathbf{" + q + "}\\)"
+		};
 	}
 }

@@ -20,6 +20,7 @@ public class Expressao6 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(a1.toString());
-		setResolucao("\\(" + ResolucaoPA.x1(a1, r) + "\\)");
+		for(String passo : ResolucaoPA.x1(a1, r))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

@@ -13,7 +13,7 @@ public class Potenciacao6 extends GeradorExercicio
 		int a = 1 + rand.nextInt(9); // 1..9
 		int n = 3 + rand.nextInt(4); // 3..6
 
-		String numeroLatex, correta, e1, e2, e3, resolucao;
+		String numeroLatex, correta, e1, e2, e3, passoTexto, passoMath;
 
 		if (grande)
 		{
@@ -24,10 +24,8 @@ public class Potenciacao6 extends GeradorExercicio
 			e1         = "\\(" + a + " \\times 10^{" + (n + 1) + "}\\)";
 			e2         = "\\(" + a + " \\times 10^{" + (n - 1) + "}\\)";
 			e3         = "\\(" + (a < 9 ? a + 1 : a - 1) + " \\times 10^{" + n + "}\\)";
-			resolucao  =
-				"Mover a vírgula " + n + " casas para a esquerda:" +
-				"\\(\\\\\\)" +
-				"\\(" + numeroLatex + " = \\mathbf{" + a + " \\times 10^{" + n + "}}\\)";
+			passoTexto = "Mover a vírgula " + n + " casas para a esquerda:";
+			passoMath  = "\\(" + numeroLatex + " = \\mathbf{" + a + " \\times 10^{" + n + "}}\\)";
 		}
 		else
 		{
@@ -39,16 +37,15 @@ public class Potenciacao6 extends GeradorExercicio
 			e1         = "\\(" + a + " \\times 10^{-" + (n + 1) + "}\\)";
 			e2         = "\\(" + a + " \\times 10^{-" + (n - 1) + "}\\)";
 			e3         = "\\(" + (a < 9 ? a + 1 : a - 1) + " \\times 10^{-" + n + "}\\)";
-			resolucao  =
-				"Mover a vírgula " + n + " casas para a direita:" +
-				"\\(\\\\\\)" +
-				"\\(" + numeroLatex + " = \\mathbf{" + a + " \\times 10^{-" + n + "}}\\)";
+			passoTexto = "Mover a vírgula " + n + " casas para a direita:";
+			passoMath  = "\\(" + numeroLatex + " = \\mathbf{" + a + " \\times 10^{-" + n + "}}\\)";
 		}
 
 		addParagrafo("Escreva em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\):");
 		addParagrafo("\\(" + numeroLatex + "\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(resolucao);
+		addResolucao(passoTexto);
+		addResolucao(passoMath);
 	}
 
 	private String formatarLatex(long n)

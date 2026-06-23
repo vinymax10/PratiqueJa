@@ -21,10 +21,9 @@ public class Expressao extends GeradorExercicio
 		gerarAlternativasInteiras(resultado);
 
 		String acao = soma ? "somamos" : "subtraímos";
-		String res = "Realizamos a multiplicação antes da adição/subtração: \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + b + " = " + p1 + "\\) \\(\\\\\\)";
-		res += "Em seguida, " + acao + " \\(" + c + "\\): \\(\\\\\\)";
-		res += "\\(" + p1 + op + c + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Realizamos a multiplicação antes da adição/subtração:");
+		addResolucao("\\(" + a + " \\times " + b + " = " + p1 + "\\)");
+		addResolucao("Em seguida, " + acao + " \\(" + c + "\\):");
+		addResolucao("\\(" + p1 + op + c + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

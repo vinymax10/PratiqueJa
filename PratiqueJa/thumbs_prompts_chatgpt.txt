@@ -1,0 +1,270 @@
+==========================================================================
+THUMBS PRATIQUEJÁ — PROMPTS PARA GERAÇÃO DE IMAGEM (ChatGPT / DALL·E)
+==========================================================================
+
+COMO USAR
+- Copie UM bloco "Prompt:" por vez e cole no ChatGPT pedindo para gerar a imagem.
+- Cada prompt é independente (já contém o estilo completo).
+
+REGRAS FIXAS EM TODOS
+- Estilo educacional premium (ícone flat moderno com leve profundidade).
+- Elemento central em branco com sombra suave, alto contraste, vetorial.
+- Cor de fundo distinta por assunto.
+- SEM TEXTO: nada de palavras, letras ou números legíveis (não dá para ler em
+  128px). Permitidos: símbolos matemáticos (+ − × ÷ √ % ± ≥), gráficos,
+  diagramas e figuras geométricas.
+
+IMPORTANTE — CANTOS ARREDONDADOS TRANSPARENTES (sem preto/cor nos cantos)
+- Resultado desejado: tile com cantos arredondados, e os 4 cantos FORA do tile
+  (entre o canto quadrado e a borda arredondada) TOTALMENTE TRANSPARENTES —
+  nada de preto e nada de cor.
+- Por isso cada prompt já pede "PNG com canal alpha / cantos transparentes".
+  Ao gerar no ChatGPT, peça para exportar como PNG com TRANSPARÊNCIA.
+- Se o gerador NÃO respeitar a transparência e os cantos vierem pretos (ou com
+  cor), rode o pós-processamento, que recorta os cantos em transparência e
+  padroniza tudo em 128x128:
+      bash _arredondar_thumbs.sh
+  (salve cada imagem como tumbs.png na pasta do assunto; ajuste o RAIO no script
+   se quiser cantos mais/menos arredondados.)
+
+Modelo do prompt (referência):
+"Ícone educacional premium, estilo flat moderno com leve profundidade. Tile com
+cantos arredondados, fundo em gradiente <COR>; os 4 cantos FORA do tile
+arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de
+preto nem de cor entre o canto e a borda arredondada. Elemento central em branco
+com sombra suave, alto contraste, vetorial limpo, 128x128 px. SEM texto, letras
+ou números — apenas símbolos/figuras. Elemento: <DESCRIÇÃO>."
+
+
+######################## MÓDULO BÁSICO ########################
+
+[01] Adição com Naturais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho-coral; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um grande sinal de adição (+) ao centro, com pequenos blocos/cubos se juntando para formar um grupo maior, sugerindo somar quantidades.
+
+[02] Subtração com Naturais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente laranja; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um grande sinal de subtração (−) ao centro, com um grupo de blocos do qual alguns estão sendo removidos (esmaecendo), sugerindo tirar quantidades.
+
+[03] Multiplicação com Naturais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente dourado/âmbar; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um sinal de multiplicação (×) e uma grade retangular de bolinhas organizadas em linhas e colunas (array), representando linhas × colunas.
+
+[04] Divisão com Naturais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-limão; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um sinal de divisão (÷) e um círculo repartido em fatias iguais (ou um conjunto dividido em grupos iguais), sugerindo repartir igualmente.
+
+//Parei aqui
+[05] Adição e Subtração com Inteiros
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-azulado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma reta numérica horizontal com setas para a esquerda (negativos) e para a direita (positivos), e um sinal de mais-menos (±) em destaque.
+
+[06] Multiplicação e Divisão com Inteiros
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente turquesa (teal); os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: os símbolos de multiplicação (×) e divisão (÷) juntos, com pequenas marcas de sinal positivo e negativo e setas em sentidos opostos sobre uma reta numérica.
+
+[07] Racionais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma fração estilizada (duas partes separadas por uma barra horizontal) ao lado de um círculo/pizza dividido em partes iguais com algumas preenchidas.
+
+[08] Divisibilidade
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-esmeralda; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: pontos organizados em fileiras perfeitamente iguais (divisão exata, sem sobra), com um colchete/chave agrupando-os.
+
+[09] Área e Perímetro
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente ciano; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um retângulo com o contorno bem destacado (perímetro) e o interior preenchido por uma malha quadriculada (área).
+
+[10] Soma dos Ângulos de um Triângulo
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo com os três ângulos internos marcados por pequenos arcos de cores diferentes.
+
+[11] MMC e MDC
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente índigo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: dois círculos sobrepostos (conjuntos de múltiplos/fatores) e uma pequena árvore de fatoração ramificando em fatores primos.
+
+[12] Regra de Três
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente roxo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: duas frações lado a lado conectadas por setas cruzadas (multiplicação cruzada), sugerindo proporção; opcionalmente uma balança equilibrada.
+
+[13] Conjuntos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um diagrama de Venn com dois círculos sobrepostos e a região de interseção destacada.
+
+[14] Expressões Numéricas
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: parênteses e colchetes aninhados envolvendo símbolos de operações (+ − × ÷), sugerindo ordem das operações.
+
+[15] Números Decimais
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente rosa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma régua/reta numérica com subdivisões finas e um marcador de vírgula decimal em destaque entre as divisões.
+
+[16] Números Primos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: pontos destacados sobre uma grade (crivo) que não formam retângulos (indivisíveis), realçando os "isolados".
+
+[17] Sistema Métrico e Unidades
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente laranja-queimado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma régua e uma fita métrica com marcações de escala, junto a uma pequena balança de pesos.
+
+[18] Plano Cartesiano
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta-rosa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: dois eixos perpendiculares (horizontal e vertical) com um ponto plotado e linhas tracejadas até cada eixo.
+
+
+######################## MÓDULO INTERMEDIÁRIO ########################
+
+[19] Potenciação
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente âmbar; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: blocos/cubos empilhados crescendo de forma acelerada (um pequeno, depois um quadrado, depois um cubo grande), sugerindo potência/crescimento exponencial.
+
+[20] Radiciação
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho-tijolo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um grande e elegante símbolo de raiz quadrada (√) ao centro.
+
+[21] Equações
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho-vivo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma balança de dois pratos perfeitamente equilibrada (igualdade), com um cubo "incógnita" de um dos lados.
+
+[22] Dízima Periódica
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente marrom-âmbar; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma reta numérica decimal com uma seta circular (loop) indicando um padrão que se repete infinitamente.
+
+[23] Teorema de Pitágoras
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-oliva; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo retângulo com um quadrado construído sobre cada um dos três lados (clássica ilustração de Pitágoras), com o ângulo reto marcado.
+
+[24] Semelhança entre Ângulos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente amarelo-esverdeado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: duas retas paralelas cortadas por uma transversal, com ângulos correspondentes iguais marcados por arcos.
+
+[25] Ângulo Inscrito na Circunferência
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma circunferência com um ângulo inscrito (vértice sobre a circunferência e duas cordas formando o ângulo), com o arco marcado.
+
+[26] Semelhança de Triângulos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-esmeralda; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: dois triângulos de mesma forma e tamanhos diferentes (um maior e um menor), alinhados para evidenciar a proporção.
+
+[27] Função Afim
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-água; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma reta inclinada atravessando um plano cartesiano (gráfico de reta/1º grau), com os eixos sutis.
+
+[28] Equações 2º Grau
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente turquesa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma parábola cruzando o eixo horizontal em dois pontos (as raízes), em um plano cartesiano.
+
+[29] Juros e Desconto
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde (tom "dinheiro"); os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um grande símbolo de porcentagem (%) e uma moeda com uma seta de crescimento para cima.
+
+[30] Razões Trigonométricas
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo retângulo com um ângulo agudo destacado por um arco, e os lados (cateto oposto, cateto adjacente e hipotenusa) realçados.
+
+[31] Sistema de Equações
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente índigo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: duas retas se cruzando em um único ponto (a solução) em um plano cartesiano, com uma chave (brace) agrupando-as.
+
+[32] Expressões Algébricas
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente roxo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: "azulejos algébricos" (algebra tiles) — blocos de tamanhos diferentes representando variáveis e constantes — combinados por símbolos de + e −.
+
+[33] Circunferência e Círculo
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma circunferência com o centro marcado por um ponto, um raio traçado e o interior do círculo levemente preenchido.
+
+[34] Notação Científica
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: círculos crescendo em ordens de grandeza (do muito pequeno ao muito grande) com uma seta, sugerindo escala/potência de dez (sem números).
+
+[35] Polígonos Regulares
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente rosa-violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um hexágono regular e um pentágono regular sobrepostos, com lados e ângulos iguais marcados por pequenos traços.
+
+[36] Funções
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma "máquina de função": uma seta de entrada, uma caixa central e uma seta de saída (entrada → processo → saída).
+
+
+######################## MÓDULO AVANÇADO ########################
+
+[37] Função Exponencial
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente roxo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma curva exponencial subindo de forma muito acentuada (crescimento rápido) em um plano cartesiano com eixos sutis.
+
+[38] Função Logarítmica
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma curva logarítmica (sobe rápido e depois desacelera) em um plano cartesiano com eixos sutis.
+
+[39] Funções Trigonométricas
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente rosa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma onda senoidal suave (gráfico de seno/cosseno) atravessando o eixo horizontal.
+
+[40] Geometria Analítica
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um plano cartesiano com dois pontos e o segmento de reta entre eles (distância), além de uma reta passando pelos eixos.
+
+[41] Geometria Espacial
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente vermelho-coral; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um sólido geométrico 3D em perspectiva (cubo ou prisma) com as arestas visíveis (linhas ocultas tracejadas).
+
+[42] Estatística
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente laranja; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um gráfico de barras/colunas com alturas diferentes e, ao lado, um pequeno gráfico de pizza.
+
+[43] Polinômios
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente âmbar-escuro; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma curva polinomial sinuosa com várias subidas e descidas (vários cruzamentos com o eixo) em um plano cartesiano.
+
+[44] Logaritmo
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul-índigo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma elegante espiral logarítmica acompanhada de uma curva logarítmica suave, sugerindo escala logarítmica.
+
+[45] Progressão Aritmética
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma sequência de barras (ou pontos) crescendo em degraus IGUAIS, com setas iguais entre cada termo (mesma diferença constante).
+
+[46] Progressão Geométrica
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-esmeralda; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma sequência de barras (ou pontos) que dobram de tamanho a cada passo (crescimento geométrico, multiplicação por uma razão).
+
+[47] Números Complexos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente turquesa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um plano de Argand (eixo horizontal real e eixo vertical imaginário) com um vetor apontando do centro até um ponto.
+
+[48] Lei dos Senos e dos Cossenos
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-água; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo qualquer (escaleno, não retângulo) com os ângulos marcados por arcos e os lados destacados.
+
+[49] Combinatória
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-claro; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma árvore de possibilidades ramificando (combinações/arranjos), com nós conectados por linhas que se dividem em vários caminhos.
+
+[50] Matrizes
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-oliva; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma grade retangular de células (linhas e colunas) entre dois grandes colchetes, com pontos representando os elementos.
+
+[51] Probabilidade
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: dois dados e uma moeda, com uma pequena árvore de probabilidade ramificando em possibilidades.
+
+[52] Função Quadrática
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente azul-índigo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma parábola com o vértice destacado por um ponto, em um plano cartesiano com eixos sutis.
+
+[53] Inequações do 2º Grau
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente índigo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma parábola com uma região do plano sombreada (acima/abaixo do eixo) indicando a solução, e um símbolo de maior-ou-igual (≥).
+
+[54] Função Modular
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente roxo; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um gráfico em forma de "V" (valor absoluto/módulo) em um plano cartesiano com eixos sutis.
+
+[55] Fórmulas de Adição e Duplicação (Trigonometria)
+Prompt:
+Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um círculo trigonométrico (ciclo unitário) com dois arcos de ângulos sendo somados e vetores partindo do centro até o círculo.
+
+==========================================================================
+FIM — 55 prompts (18 Básico + 18 Intermediário + 19 Avançado)
+==========================================================================

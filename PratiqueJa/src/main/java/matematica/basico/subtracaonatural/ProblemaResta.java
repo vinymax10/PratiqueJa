@@ -61,11 +61,13 @@ public class ProblemaResta
 		return a - b;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int c = resultado();
-		String res = "Para encontrar o que resta, subtraímos: \\(\\\\\\)";
-		res += "\\(" + a + " - " + b + " = \\mathbf{" + c + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Para encontrar o que resta, subtraímos:",
+			"\\(" + a + " - " + b + " = \\mathbf{" + c + "}\\)"
+		};
 	}
 }

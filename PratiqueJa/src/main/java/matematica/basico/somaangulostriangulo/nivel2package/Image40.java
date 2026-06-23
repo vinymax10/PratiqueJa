@@ -42,10 +42,7 @@ public class Image40 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + ext + "^\\circ\\)", distratores);
 
-		String res = "O ângulo externo é igual à soma dos dois ângulos internos não adjacentes.";
-		res += " No triângulo isósceles, os dois ângulos da base são iguais:";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{ext} = \\alpha + \\alpha = 2 \\times " + a + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("O ângulo externo é igual à soma dos dois ângulos internos não adjacentes. No triângulo isósceles, os dois ângulos da base são iguais:");
+		addResolucao("\\(\\text{ext} = \\alpha + \\alpha = 2 \\times " + a + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)");
 	}
 }

@@ -38,14 +38,14 @@ public class ProblemaPitagoras
 		
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		switch(tipoPitagoras) {
-			case XBC: return ResolucaoPitagoras.resolucaoXBC(dados); 
-			case AXC: return ResolucaoPitagoras.resolucaoAXC(dados); 
-			case ABX: return ResolucaoPitagoras.resolucaoABX(dados); 
+			case XBC: return ResolucaoPitagoras.resolucaoXBC(dados);
+			case AXC: return ResolucaoPitagoras.resolucaoAXC(dados);
+			case ABX: return ResolucaoPitagoras.resolucaoABX(dados);
 		}
-		return "";
+		return new String[0];
 	}
 
 	public String resultado()

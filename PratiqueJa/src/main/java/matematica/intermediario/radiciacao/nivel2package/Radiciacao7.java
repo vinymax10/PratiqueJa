@@ -27,6 +27,6 @@ public class Radiciacao7 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + c);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

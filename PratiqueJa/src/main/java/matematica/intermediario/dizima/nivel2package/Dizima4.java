@@ -41,22 +41,20 @@ public class Dizima4 extends GeradorExercicio
 
 		// Resolução
 		long k = 9 / frac.denominador;  // fator de amplificação (1 ou 3)
-		String res;
 		if(k == 1)
 		{
-			res = "Separamos a parte inteira e identificamos o período: \\(\\\\\\)";
-			res += "\\(" + frac.showDfrac() + " = " + inteira + " + \\dfrac{" + period
-				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)";
+			addResolucao("Separamos a parte inteira e identificamos o período:");
+			addResolucao("\\(" + frac.showDfrac() + " = " + inteira + " + \\dfrac{" + period
+				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)");
 		}
 		else
 		{
-			res = "Amplificamos para denominador \\(9\\) e separamos a parte inteira: \\(\\\\\\)";
-			res += "\\(" + frac.showDfrac() + " = \\dfrac{" + frac.numerador + " \\times " + k
+			addResolucao("Amplificamos para denominador \\(9\\) e separamos a parte inteira:");
+			addResolucao("\\(" + frac.showDfrac() + " = \\dfrac{" + frac.numerador + " \\times " + k
 				 + "}{" + frac.denominador + " \\times " + k + "} = \\dfrac{" + num
-				 + "}{9}\\). \\(\\\\\\)";
-			res += "\\(\\dfrac{" + num + "}{9} = " + inteira + " + \\dfrac{" + period
-				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)";
+				 + "}{9}\\).");
+			addResolucao("\\(\\dfrac{" + num + "}{9} = " + inteira + " + \\dfrac{" + period
+				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

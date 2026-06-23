@@ -41,11 +41,9 @@ public class Exercicio6 extends GeradorExercicio
 			resolvido = "x = \\dfrac{" + rhs + "}{" + a + "} = \\mathbf{" + x0 + "}";
 		}
 
-		String res = "Substituindo \\(y = " + y0 + "\\) na equação da reta:"
-				+ "\\(\\\\\\)"
-				+ "\\(" + a + "x" + sinalByPlusC + " = 0\\\\"
-				+ a + "x = " + rhs + "\\\\"
-				+ resolvido + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo \\(y = " + y0 + "\\) na equação da reta:");
+		addResolucao("\\(" + a + "x" + sinalByPlusC + " = 0\\)");
+		addResolucao("\\(" + a + "x = " + rhs + "\\)");
+		addResolucao("\\(" + resolvido + "\\)");
 	}
 }

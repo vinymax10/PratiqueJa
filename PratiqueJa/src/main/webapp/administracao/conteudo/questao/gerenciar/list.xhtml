@@ -175,10 +175,10 @@
 						</h:panelGroup>
 						
 						<!-- Resolução -->
-						<h:panelGroup rendered="#{not empty entidade.resolucao}"
+						<h:panelGroup rendered="#{not empty entidade.resolucaoHtml}"
 						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column">
 							<h:outputText styleClass="title" value="Resolução" />
-							<h:outputText styleClass="status" value="#{entidade.resolucao}" />
+							<h:outputText styleClass="status" value="#{entidade.resolucaoHtml}" escape="false" />
 						</h:panelGroup>
 
 						<!-- Botão Editar -->

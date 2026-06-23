@@ -29,11 +29,9 @@ public class Exercicio1 extends GeradorExercicio
 		int m_val = askX ? mx : my;
 		int p1_val = askX ? x1 : y1;
 
-		String res = "Usando a fórmula do ponto médio e isolando a coordenada desconhecida:"
-				+ "\\(\\\\\\)"
-				+ "\\(M_{" + coord1 + "} = \\dfrac{" + coord1 + "_A + " + coord1 + "_B}{2}\\\\"
-				+ m_val + " = \\dfrac{" + p1_val + " + " + letter + "}{2}\\\\"
-				+ letter + " = 2 \\times " + m_val + " - (" + p1_val + ") = \\mathbf{" + answer + "}\\)";
-		setResolucao(res);
+		addResolucao("Usando a fórmula do ponto médio e isolando a coordenada desconhecida:");
+		addResolucao("\\(M_{" + coord1 + "} = \\dfrac{" + coord1 + "_A + " + coord1 + "_B}{2}\\)");
+		addResolucao("\\(" + m_val + " = \\dfrac{" + p1_val + " + " + letter + "}{2}\\)");
+		addResolucao("\\(" + letter + " = 2 \\times " + m_val + " - (" + p1_val + ") = \\mathbf{" + answer + "}\\)");
 	}
 }

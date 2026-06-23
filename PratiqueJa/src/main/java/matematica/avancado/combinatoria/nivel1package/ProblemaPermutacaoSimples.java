@@ -25,18 +25,15 @@ public class ProblemaPermutacaoSimples
 		n = 3 + rand.nextInt(7);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "A permutação simples de \\(n\\) elementos distintos é dada por:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("P(n) = n!") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(P(" + n + ") = " + n + "! = \\\\ ";
-		res += AuxCombinacao.fatorialString(n) + " = \\mathbf{" + resultado() + "}\\)";
+		String passoIntroducao = "A permutação simples de \\(n\\) elementos distintos é dada por:";
+		String passoFormula = "\\(" + ParCor.formula("P(n) = n!") + "\\)";
+		String passoSubstituicao = "Com \\(n = " + n + "\\):";
+		String passoExpansao = "\\(P(" + n + ") = " + n + "! =\\)";
+		String passoResultado = "\\(" + AuxCombinacao.fatorialString(n) + " = \\mathbf{" + resultado() + "}\\)";
 
-		return res;
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoResultado};
 	}
 
 	public String resultado()

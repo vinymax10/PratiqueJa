@@ -13,12 +13,12 @@ public class Sistema4 extends GeradorExercicio
 		sistema.construirX1(false);
 
 		String resultadoCorreto = "" + sistema.y;
-		String resolucao = ResolucaoSubtituicao.substituicaoY(sistema);
+		String[] resolucao = ResolucaoSubtituicao.substituicaoY(sistema);
 		String texto = sistema.latex();
 
 		addParagrafo("Encontre \\(y\\) pelo método da substituição.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao(resolucao);
+		for(String passo : resolucao) addResolucao(passo);
 	}
 }

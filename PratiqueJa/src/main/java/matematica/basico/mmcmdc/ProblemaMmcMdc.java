@@ -60,33 +60,40 @@ public class ProblemaMmcMdc
 		return pergunta;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "";
 		switch(sizeProblema)
 		{
 			case MmcDuas:
-				resolucaoLatex +="\\text{MMC}~ " + a + ", " + b + "\\\\";
-				resolucaoLatex += ResolucaoMmcMdc.mmc(a, b);
-				break;
-				
+				return new String[]
+				{
+					"\\text{MMC}~ " + a + ", " + b,
+					ResolucaoMmcMdc.mmc(a, b)
+				};
+
 			case MmcTres:
-				resolucaoLatex +="\\text{MMC}~ " + a + ", " + b + ", " + c + "\\\\";
-				resolucaoLatex += ResolucaoMmcMdc.mmc(a, b, c);
-				break;
-				
+				return new String[]
+				{
+					"\\text{MMC}~ " + a + ", " + b + ", " + c,
+					ResolucaoMmcMdc.mmc(a, b, c)
+				};
+
 			case MdcDuas:
-				resolucaoLatex +="\\text{MDC}~ " + a + ", " + b + "\\\\";
-				resolucaoLatex += ResolucaoMmcMdc.mdc(a, b);
-				break;
-				
+				return new String[]
+				{
+					"\\text{MDC}~ " + a + ", " + b,
+					ResolucaoMmcMdc.mdc(a, b)
+				};
+
 			case MdcTres:
-				resolucaoLatex +="\\text{MDC}~ " + a + ", " + b + ", " + c + "\\\\";
-				resolucaoLatex += ResolucaoMmcMdc.mdc(a, b, c);
-				break;
+				return new String[]
+				{
+					"\\text{MDC}~ " + a + ", " + b + ", " + c,
+					ResolucaoMmcMdc.mdc(a, b, c)
+				};
 		}
-		
-		return resolucaoLatex;
+
+		return new String[0];
 	}
 	
 	public long resultado()

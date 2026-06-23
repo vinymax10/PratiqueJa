@@ -54,8 +54,7 @@ public class Exercicio9 extends GeradorExercicio
 		addParagrafo("Qual é a expansão de " + formula + "?");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula de adição/subtração trigonométrica:"
-				+ "\\(\\\\\\)"
-				+ regra);
+		addResolucao("Pela fórmula de adição/subtração trigonométrica:");
+		addResolucao(regra);
 	}
 }

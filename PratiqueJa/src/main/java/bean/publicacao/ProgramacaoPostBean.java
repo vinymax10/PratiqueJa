@@ -2,6 +2,8 @@ package bean.publicacao;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
@@ -66,6 +68,28 @@ public class ProgramacaoPostBean implements Serializable
 	public void onRowReorder(ReorderEvent event)
 	{
 		programacaoPostService.organizarOrdem(configPostBean.getConfigPost());
+	}
+
+	public void subir(ProgramacaoPost programacaoPost)
+	{
+		List<ProgramacaoPost> programacoesPost = configPostBean.getConfigPost().getProgramacoesPost();
+		int indice = programacoesPost.indexOf(programacaoPost);
+		if(indice > 0)
+		{
+			Collections.swap(programacoesPost, indice, indice - 1);
+			programacaoPostService.organizarOrdem(configPostBean.getConfigPost());
+		}
+	}
+
+	public void descer(ProgramacaoPost programacaoPost)
+	{
+		List<ProgramacaoPost> programacoesPost = configPostBean.getConfigPost().getProgramacoesPost();
+		int indice = programacoesPost.indexOf(programacaoPost);
+		if(indice >= 0 && indice < programacoesPost.size() - 1)
+		{
+			Collections.swap(programacoesPost, indice, indice + 1);
+			programacaoPostService.organizarOrdem(configPostBean.getConfigPost());
+		}
 	}
 
 	public void salvar(ProgramacaoPost programacaoPost)

@@ -23,10 +23,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(aTot, 4, true);
 
-		String res = "\\(A_{\\text{lateral}} = \\dfrac{P_{\\text{base}} \\times a_p}{2} = \\dfrac{"
-				+ pBase + " \\times " + ap + "}{2} = " + aLat + "\\,\\text{cm}^2\\\\"
-				+ "A_{\\text{base}} = " + a + "^2 = " + a2 + "\\,\\text{cm}^2\\\\"
-				+ "A_{\\text{total}} = " + aLat + " + " + a2 + " = \\mathbf{" + aTot + "}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{lateral}} = \\dfrac{P_{\\text{base}} \\times a_p}{2} = \\dfrac{"
+				+ pBase + " \\times " + ap + "}{2} = " + aLat + "\\,\\text{cm}^2\\)");
+		addResolucao("\\(A_{\\text{base}} = " + a + "^2 = " + a2 + "\\,\\text{cm}^2\\)");
+		addResolucao("\\(A_{\\text{total}} = " + aLat + " + " + a2 + " = \\mathbf{" + aTot + "}\\,\\text{cm}^2\\)");
 	}
 }

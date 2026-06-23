@@ -121,6 +121,7 @@ public class ConfigValores1 extends ConfigValores
 		}
 		resolucao = new MyExpression(expressao);
 		resolucaoLatex += resolucao.resolverLatex();
+		resolucaoPassos = resolucaoLatex.split("\\\\\\\\");
 	}
 	
 }

@@ -27,11 +27,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + (ml * 10) + "\\,\\text{mL}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)"
-			);
+			addResolucao("\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:");
+			addResolucao("\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -49,11 +46,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + (l * 10) + "\\,\\text{L}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo multiplicar por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + kl + " \\times 1000 = \\mathbf{" + l + "}\\,\\text{L}\\)"
-			);
+			addResolucao("\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo multiplicar por 1000:");
+			addResolucao("\\(" + kl + " \\times 1000 = \\mathbf{" + l + "}\\,\\text{L}\\)");
 		}
 		else if (tipo == 2)
 		{
@@ -73,11 +67,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(0{,}" + intPart + "\\,\\text{L}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)"
-			);
+			addResolucao("\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:");
+			addResolucao("\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)");
 		}
 		else
 		{
@@ -95,11 +86,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + kl + "00\\,\\text{kL}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + l + " \\div 1000 = \\mathbf{" + kl + "}\\,\\text{kL}\\)"
-			);
+			addResolucao("\\(1\\,\\text{kL} = 1000\\,\\text{L}\\), logo dividir por 1000:");
+			addResolucao("\\(" + l + " \\div 1000 = \\mathbf{" + kl + "}\\,\\text{kL}\\)");
 		}
 	}
 }

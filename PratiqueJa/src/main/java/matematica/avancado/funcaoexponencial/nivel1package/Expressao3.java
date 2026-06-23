@@ -35,10 +35,8 @@ public class Expressao3 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(correta, dist);
 
-		String res = "A base da função é " + baseDescricao + ". \\(\\\\\\)";
-		res += "Regra: se \\(a > 1\\) a função é crescente; se \\(0 < a < 1\\) é decrescente. \\(\\\\\\)";
-		res += "\\(\\mathbf{" + correta + "}\\)";
-
-		setResolucao(res);
+		addResolucao("A base da função é " + baseDescricao + ".");
+		addResolucao("Regra: se \\(a > 1\\) a função é crescente; se \\(0 < a < 1\\) é decrescente.");
+		addResolucao("\\(\\mathbf{" + correta + "}\\)");
 	}
 }

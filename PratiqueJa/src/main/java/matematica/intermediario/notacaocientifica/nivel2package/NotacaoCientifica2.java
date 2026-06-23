@@ -30,14 +30,9 @@ public class NotacaoCientifica2 extends GeradorExercicio
 		addParagrafo("Calcule, deixando o resultado em notação científica:");
 		addParagrafo("\\(\\dfrac{" + a + " \\times 10^{" + m + "}}{" + b + " \\times 10^{" + n + "}}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Dividir as mantissas e subtrair os expoentes:" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + "}{" + b + "} = " + ratio + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{10^{" + m + "}}{10^{" + n + "}} = 10^{" + m + " - " + n + "} = 10^{" + expResult + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + ratio + " \\times 10^{" + expResult + "}}\\)"
-		);
+		addResolucao("Dividir as mantissas e subtrair os expoentes:");
+		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = " + ratio + "\\)");
+		addResolucao("\\(\\dfrac{10^{" + m + "}}{10^{" + n + "}} = 10^{" + m + " - " + n + "} = 10^{" + expResult + "}\\)");
+		addResolucao("\\(\\mathbf{" + ratio + " \\times 10^{" + expResult + "}}\\)");
 	}
 }

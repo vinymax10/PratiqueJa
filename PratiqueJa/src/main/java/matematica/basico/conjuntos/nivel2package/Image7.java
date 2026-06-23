@@ -14,7 +14,7 @@ public class Image7 extends GeradorExercicio
 		dados.aIbStr = "";
 
 		String resultadoCorreto = "" + dados.aIb;
-		String resolucao = ResolucaoConjuntos.uniaoAIntersecB2(dados);
+		String[] resolucao = ResolucaoConjuntos.uniaoAIntersecB2(dados);
 
 		ConfigAB config = new ConfigAB(dados);
 		BufferedImage image = config.criarImagem();
@@ -22,6 +22,7 @@ public class Image7 extends GeradorExercicio
 		addParagrafo("Se \\(|A \\cup B| = " + dados.aUb + "\\), qual o valor de \\(|A \\cap B|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao(resolucao);
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 }

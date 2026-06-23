@@ -52,17 +52,15 @@ public class Expressao1 extends GeradorExercicio
 		int effC2 = add ? c2 : -c2;
 		int effD2 = add ? d2 : -d2;
 
-		String res = "Agrupando os termos semelhantes:\\(\\\\\\)";
-		res += "\\(x^3\\): \\(" + sigSum(a1, add ? a2 : -a2) + " = " + rA + "\\)\\(\\\\\\)";
-		res += "\\(x^2\\): \\(" + sigSum(b1, effB2) + " = " + rB + "\\)\\(\\\\\\)";
-		res += "\\(x\\): \\(" + sigSum(c1, effC2) + " = " + rC + "\\)\\(\\\\\\)";
-		res += "Constante: \\(" + sigSum(d1, effD2) + " = " + rD + "\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{p(x) " + op + " q(x) = " + correct + "}\\)";
-
 		addParagrafo("Dados \\(p(x) = " + p + "\\) e \\(q(x) = " + q
 				+ "\\), calcule \\(p(x) " + op + " q(x)\\).");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Agrupando os termos semelhantes:");
+		addResolucao("\\(x^3\\): \\(" + sigSum(a1, add ? a2 : -a2) + " = " + rA + "\\)");
+		addResolucao("\\(x^2\\): \\(" + sigSum(b1, effB2) + " = " + rB + "\\)");
+		addResolucao("\\(x\\): \\(" + sigSum(c1, effC2) + " = " + rC + "\\)");
+		addResolucao("Constante: \\(" + sigSum(d1, effD2) + " = " + rD + "\\)");
+		addResolucao("\\(\\mathbf{p(x) " + op + " q(x) = " + correct + "}\\)");
 	}
 
 	private static String sigSum(int v1, int v2)

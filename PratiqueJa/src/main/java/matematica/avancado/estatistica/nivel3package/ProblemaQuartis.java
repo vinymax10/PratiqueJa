@@ -1,5 +1,7 @@
 package matematica.avancado.estatistica.nivel3package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.avancado.estatistica.AuxEstatistica;
@@ -34,29 +36,24 @@ public class ProblemaQuartis
 	private int q2() { return valores[3]; }
 	private int q3() { return valores[5]; }
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int q1 = q1(), q2 = q2(), q3 = q3();
 
-		String res = "Os quartis dividem os dados ordenados em quatro partes iguais (base do boxplot).";
-		res += "\\(\\\\\\)";
-		res += "Dados em ordem crescente: " + AuxEstatistica.listaStr(valores) + " \\((n = 7)\\).";
-		res += "\\(\\\\\\)";
-		res += "A mediana \\(Q_2\\) ocupa a posição central (4ª): " + bold(TipoQuartil.Q2, "\\(Q_2 = ", q2, "\\)");
-		res += "\\(\\\\\\)";
-		res += "Na metade inferior \\(\\{" + valores[0] + ", " + valores[1] + ", " + valores[2] + "\\}\\), o central é " + bold(TipoQuartil.Q1, "\\(Q_1 = ", q1, "\\)");
-		res += "\\(\\\\\\)";
-		res += "Na metade superior \\(\\{" + valores[4] + ", " + valores[5] + ", " + valores[6] + "\\}\\), o central é " + bold(TipoQuartil.Q3, "\\(Q_3 = ", q3, "\\)");
+		List<String> passos = new ArrayList<>();
+		passos.add("Os quartis dividem os dados ordenados em quatro partes iguais (base do boxplot).");
+		passos.add("Dados em ordem crescente: " + AuxEstatistica.listaStr(valores) + " \\((n = 7)\\).");
+		passos.add("A mediana \\(Q_2\\) ocupa a posição central (4ª): " + bold(TipoQuartil.Q2, "\\(Q_2 = ", q2, "\\)"));
+		passos.add("Na metade inferior \\(\\{" + valores[0] + ", " + valores[1] + ", " + valores[2] + "\\}\\), o central é " + bold(TipoQuartil.Q1, "\\(Q_1 = ", q1, "\\)"));
+		passos.add("Na metade superior \\(\\{" + valores[4] + ", " + valores[5] + ", " + valores[6] + "\\}\\), o central é " + bold(TipoQuartil.Q3, "\\(Q_3 = ", q3, "\\)"));
 
 		if(tipo == TipoQuartil.IQR)
 		{
-			res += "\\(\\\\\\)";
-			res += "A amplitude interquartílica é \\(IQR = Q_3 - Q_1\\):";
-			res += "\\(\\\\\\)";
-			res += "\\(IQR = " + q3 + " - " + q1 + " = \\mathbf{" + (q3 - q1) + "}\\)";
+			passos.add("A amplitude interquartílica é \\(IQR = Q_3 - Q_1\\):");
+			passos.add("\\(IQR = " + q3 + " - " + q1 + " = \\mathbf{" + (q3 - q1) + "}\\)");
 		}
 
-		return res;
+		return passos.toArray(new String[0]);
 	}
 
 	/** Monta "\(Q = valor\)" destacando em \mathbf quando é o quartil perguntado. */

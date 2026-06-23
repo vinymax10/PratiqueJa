@@ -18,12 +18,11 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Resolva a equação logarítmica:");
 		addParagrafo("\\(\\log_{" + b + "} x^{" + p + "} = " + n + "\\)");
 
-		String res = "Propriedade da potência: \\(\\log_b x^p = p \\cdot \\log_b x\\\\";
-		res += "" + p + " \\cdot \\log_{" + b + "} x = " + n + "\\\\";
-		res += "\\log_{" + b + "} x = \\dfrac{" + n + "}{" + p + "} = " + logX + "\\\\";
-		res += "x = " + b + "^{" + logX + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Propriedade da potência: \\(\\log_b x^p = p \\cdot \\log_b x\\)");
+		addResolucao("\\(" + p + " \\cdot \\log_{" + b + "} x = " + n + "\\)");
+		addResolucao("\\(\\log_{" + b + "} x = \\dfrac{" + n + "}{" + p + "} = " + logX + "\\)");
+		addResolucao("\\(x = " + b + "^{" + logX + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

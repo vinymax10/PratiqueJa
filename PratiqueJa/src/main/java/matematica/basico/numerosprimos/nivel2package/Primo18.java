@@ -27,7 +27,7 @@ public class Primo18 extends AgrupadorPrimo
 		addParagrafo("Calcule o valor de \\(N\\), sendo \\(N = " + pLatex + " \\times " + qLatex + "\\):");
 		gerarAlternativasInteiras(n);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& N = " + pLatex + " \\times " + qLatex + "\\\\" +
 			"& N = " + pa + " \\times " + qb + " = \\mathbf{" + n + "}" +

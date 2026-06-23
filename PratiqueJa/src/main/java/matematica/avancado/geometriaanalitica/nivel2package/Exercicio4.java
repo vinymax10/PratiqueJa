@@ -26,12 +26,9 @@ public class Exercicio4 extends GeradorExercicio
 		String cxStr = cx < 0 ? "(" + cx + ")" : Integer.toString(cx);
 		String cyStr = cy < 0 ? "(" + cy + ")" : Integer.toString(cy);
 
-		String res = "A forma canônica é \\((x" + sinalCx + ")^2 + (y" + sinalCy + ")^2 = " + r2 + "\\)."
-				+ "\\(\\\\\\)"
-				+ "Expandindo e identificando \\(F = a^2 + b^2 - r^2\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(F = " + cxStr + "^2 + " + cyStr + "^2 - " + r + "^2\\\\"
-				+ "F = " + (cx*cx) + " + " + (cy*cy) + " - " + r2 + " = \\mathbf{" + F + "}\\)";
-		setResolucao(res);
+		addResolucao("A forma canônica é \\((x" + sinalCx + ")^2 + (y" + sinalCy + ")^2 = " + r2 + "\\).");
+		addResolucao("Expandindo e identificando \\(F = a^2 + b^2 - r^2\\):");
+		addResolucao("\\(F = " + cxStr + "^2 + " + cyStr + "^2 - " + r + "^2\\)");
+		addResolucao("\\(F = " + (cx*cx) + " + " + (cy*cy) + " - " + r2 + " = \\mathbf{" + F + "}\\)");
 	}
 }

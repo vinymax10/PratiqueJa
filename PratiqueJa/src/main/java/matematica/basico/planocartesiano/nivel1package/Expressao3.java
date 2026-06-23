@@ -48,27 +48,23 @@ public class Expressao3 extends GeradorExercicio
 		alts.remove(correta);
 		embaralharEAdicionarAlternativas(correta, alts);
 
-		String res;
 		if (tipo == 0)
 		{
-			res = "A simetria em relação ao eixo \\(x\\) mantém a abscissa e inverte o sinal da ordenada: \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'(a,\\;{-b})\\\\ \\) ";
+			addResolucao("A simetria em relação ao eixo \\(x\\) mantém a abscissa e inverte o sinal da ordenada:");
+			addResolucao("\\(P(a,\\;b) \\to P'(a,\\;{-b})\\)");
 		}
 		else if (tipo == 1)
 		{
-			res = "A simetria em relação ao eixo \\(y\\) inverte o sinal da abscissa e mantém a ordenada: \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'({-a},\\;b)\\\\ \\) ";
+			addResolucao("A simetria em relação ao eixo \\(y\\) inverte o sinal da abscissa e mantém a ordenada:");
+			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;b)\\)");
 		}
 		else
 		{
-			res = "A simetria em relação à origem inverte os sinais de ambas as coordenadas ";
-			res += "(equivale a refletir no eixo \\(x\\) e depois no eixo \\(y\\)): \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\\\ \\) ";
+			addResolucao("A simetria em relação à origem inverte os sinais de ambas as coordenadas (equivale a refletir no eixo \\(x\\) e depois no eixo \\(y\\)):");
+			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\)");
 		}
-		res += "Aplicando ao ponto \\(P(" + a + ",\\;" + b + ")\\): \\(\\\\\\)";
-		res += "\\(P' = (" + rx + ",\\;" + ry + ")\\)";
-
-		setResolucao(res);
+		addResolucao("Aplicando ao ponto \\(P(" + a + ",\\;" + b + ")\\):");
+		addResolucao("\\(P' = (" + rx + ",\\;" + ry + ")\\)");
 	}
 
 	private String par(int x, int y)

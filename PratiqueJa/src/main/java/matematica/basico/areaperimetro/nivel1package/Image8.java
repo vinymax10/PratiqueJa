@@ -15,7 +15,7 @@ public class Image8 extends GeradorExercicio
 		int r = (3 + rand.nextInt(20));
 
 		String resultadoCorreto = "" + (r * r);
-		String resolucao = ResolucaoAreaPerimetro.areaCirculo(r);
+		String[] passosResolucao = ResolucaoAreaPerimetro.areaCirculo(r);
 
 		ConfigCircunferencia config = new ConfigCircunferencia("" + r, true);
 		BufferedImage image = config.criarImagem();
@@ -23,6 +23,7 @@ public class Image8 extends GeradorExercicio
 		addParagrafo("Se a área do círculo é \\(A=x\\pi\\), qual o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

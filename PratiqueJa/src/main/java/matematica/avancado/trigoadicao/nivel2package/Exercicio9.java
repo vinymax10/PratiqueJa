@@ -27,10 +27,9 @@ public class Exercicio9 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (2 * p * q) + "}{" + rr + "}\\)");        // confundiu com sen(2α)
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Usando \\(\\cos(2\\alpha) = 1 - 2\\operatorname{sen}^2\\alpha\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(2\\alpha) = 1 - 2 \\cdot \\left(\\dfrac{" + p + "}{" + r + "}\\right)^2 = \\\\"
-				+ "1 - \\dfrac{" + (2 * pp) + "}{" + rr + "} = "
+		addResolucao("Usando \\(\\cos(2\\alpha) = 1 - 2\\operatorname{sen}^2\\alpha\\):");
+		addResolucao("\\(\\cos(2\\alpha) = 1 - 2 \\cdot \\left(\\dfrac{" + p + "}{" + r + "}\\right)^2 =\\)");
+		addResolucao("\\(1 - \\dfrac{" + (2 * pp) + "}{" + rr + "} = "
 				+ "\\dfrac{" + rr + " - " + (2 * pp) + "}{" + rr + "} = \\mathbf{\\dfrac{" + num + "}{" + rr + "}}\\)");
 	}
 }

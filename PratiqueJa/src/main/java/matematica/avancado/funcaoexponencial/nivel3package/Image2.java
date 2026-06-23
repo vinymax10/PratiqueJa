@@ -29,11 +29,9 @@ public class Image2 extends GeradorExercicio
 			+ "Qual é a base \\(a\\)?");
 		addParagrafoImagem(image);
 
-		String res = "Sabemos que \\(f(2) = a^2 = " + fDois + "\\). \\(\\\\\\)";
-		res += "Extraindo a raiz (com \\(a > 0\\)): \\(\\\\\\)";
-		res += "\\(a = \\sqrt{" + fDois + "} = \\mathbf{" + base + "}\\)";
-
 		gerarAlternativas("" + base);
-		setResolucao(res);
+		addResolucao("Sabemos que \\(f(2) = a^2 = " + fDois + "\\).");
+		addResolucao("Extraindo a raiz (com \\(a > 0\\)):");
+		addResolucao("\\(a = \\sqrt{" + fDois + "} = \\mathbf{" + base + "}\\)");
 	}
 }

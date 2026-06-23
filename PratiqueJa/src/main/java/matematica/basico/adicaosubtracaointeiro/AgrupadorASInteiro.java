@@ -18,14 +18,13 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		return rand.nextBoolean() ? -v : v;
 	}
 
-	private String resolucaoAgrupada(int[] termos, int correto)
+	private void resolucaoAgrupada(int[] termos, int correto)
 	{
 		int somaPos = 0, somaNeg = 0;
 		for(int t : termos) { if(t > 0) somaPos += t; else somaNeg += t; }
-		String res = "Agrupamos os termos positivos e os negativos e somamos. \\(\\\\\\)";
-		res += "Positivos: \\(" + somaPos + "\\); negativos: \\(" + somaNeg + "\\). \\(\\\\\\)";
-		res += "\\(" + somaPos + " + (" + somaNeg + ") = \\mathbf{" + correto + "}\\)";
-		return res;
+		addResolucao("Agrupamos os termos positivos e os negativos e somamos.");
+		addResolucao("Positivos: \\(" + somaPos + "\\); negativos: \\(" + somaNeg + "\\).");
+		addResolucao("\\(" + somaPos + " + (" + somaNeg + ") = \\mathbf{" + correto + "}\\)");
 	}
 
 	private String expressao(int[] termos)
@@ -42,7 +41,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("Calcule o valor da seguinte expressão:");
 		addParagrafo("\\(" + expressao(new int[]{a, b}) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(a + b);
-		setResolucao(ResolucaoASInteiro.soma(a, b));
+		for(String passo : ResolucaoASInteiro.soma(a, b))
+			addResolucao(passo);
 	}
 
 	protected void tresTermos(int maxAbs)
@@ -51,7 +51,7 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + expressao(new int[]{a, b, c}) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(a + b + c);
-		setResolucao(resolucaoAgrupada(new int[]{a, b, c}, a + b + c));
+		resolucaoAgrupada(new int[]{a, b, c}, a + b + c);
 	}
 
 	protected void quatroTermos(int maxAbs)
@@ -60,7 +60,7 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + expressao(new int[]{a, b, c, d}) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(a + b + c + d);
-		setResolucao(resolucaoAgrupada(new int[]{a, b, c, d}, a + b + c + d));
+		resolucaoAgrupada(new int[]{a, b, c, d}, a + b + c + d);
 	}
 
 	protected void cincoTermos(int maxAbs)
@@ -70,7 +70,7 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + expressao(t) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(soma);
-		setResolucao(resolucaoAgrupada(t, soma));
+		resolucaoAgrupada(t, soma);
 	}
 
 	// a ± (±b) — sinal antes do parêntese
@@ -87,10 +87,10 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("\\(" + aStr + (menos ? " - " : " + ") + bPar + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(correto);
 
-		String res = "Eliminamos o parêntese aplicando a regra de sinais: \\(\\\\\\)";
-		res += "\\(" + (menos ? "-" : "+") + bPar + " = " + Auxiliar.getNumber(t2, "", false) + "\\). \\(\\\\\\)";
-		res += ResolucaoASInteiro.soma(a, t2);
-		setResolucao(res);
+		addResolucao("Eliminamos o parêntese aplicando a regra de sinais:");
+		addResolucao("\\(" + (menos ? "-" : "+") + bPar + " = " + Auxiliar.getNumber(t2, "", false) + "\\).");
+		for(String passo : ResolucaoASInteiro.soma(a, t2))
+			addResolucao(passo);
 	}
 	protected void oposto()
 	{
@@ -98,7 +98,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		int x = rand.nextBoolean() ? -a : a;
 		addParagrafo("Qual é o oposto do número \\(" + x + "\\)?");
 		gerarAlternativasInteirasComNegativos(-x);
-		setResolucao("O oposto de um número é o que somado a ele dá zero (troca o sinal). \\(\\\\\\) Oposto de \\(" + x + "\\) é \\(\\mathbf{" + (-x) + "}\\).");
+		addResolucao("O oposto de um número é o que somado a ele dá zero (troca o sinal).");
+		addResolucao("Oposto de \\(" + x + "\\) é \\(\\mathbf{" + (-x) + "}\\).");
 	}
 
 	protected void comparar(int maxAbs, int qtd)
@@ -123,7 +124,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 
 		addParagrafo("Qual é o maior número inteiro entre " + numeros + "?");
 		embaralharEAdicionarAlternativas("\\(" + maior + "\\)", distratores);
-		setResolucao("Na reta numérica, o maior número é o que fica mais à direita (um negativo é maior quanto mais perto de zero). \\(\\\\\\) O maior é \\(\\mathbf{" + maior + "}\\).");
+		addResolucao("Na reta numérica, o maior número é o que fica mais à direita (um negativo é maior quanto mais perto de zero).");
+		addResolucao("O maior é \\(\\mathbf{" + maior + "}\\).");
 	}
 
 	protected void missingTermo(int maxAbs)
@@ -134,7 +136,7 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 		addParagrafo("Qual valor de \\(\\square\\) torna a igualdade verdadeira?");
 		addParagrafo("\\(" + aStr + " + \\square = " + c + "\\)");
 		gerarAlternativasInteirasComNegativos(x);
-		setResolucao("Isolando \\(\\square\\): \\(\\square = " + c + " - (" + a + ") = \\mathbf{" + x + "}\\).");
+		addResolucao("Isolando \\(\\square\\): \\(\\square = " + c + " - (" + a + ") = \\mathbf{" + x + "}\\).");
 	}
 
 	protected void problema()
@@ -147,7 +149,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 			int fim = t0 + delta;
 			addParagrafo("O termômetro marca \\(" + t0 + "\\,°C\\). A temperatura sobe \\(" + delta + "\\,°C\\). Qual é a temperatura final?");
 			gerarAlternativasInteirasComNegativos(fim);
-			setResolucao(ResolucaoASInteiro.soma(t0, delta));
+			for(String passo : ResolucaoASInteiro.soma(t0, delta))
+				addResolucao(passo);
 		}
 		else if(tipo == 1)
 		{
@@ -156,7 +159,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 			int fim = -sub + sobe;
 			addParagrafo("Um elevador está no \\(" + sub + "°\\) subsolo (andar \\(" + (-sub) + "\\)) e sobe \\(" + sobe + "\\) andares. Em que andar ele para?");
 			gerarAlternativasInteirasComNegativos(fim);
-			setResolucao(ResolucaoASInteiro.soma(-sub, sobe));
+			for(String passo : ResolucaoASInteiro.soma(-sub, sobe))
+				addResolucao(passo);
 		}
 		else
 		{
@@ -165,7 +169,8 @@ public abstract class AgrupadorASInteiro extends GeradorExercicio
 			int saldo = -divida + deposito;
 			addParagrafo("Uma conta tem uma dívida de R$\\," + divida + " (saldo \\(" + (-divida) + "\\)). É feito um depósito de R$\\," + deposito + ". Qual é o saldo final?");
 			gerarAlternativasInteirasComNegativos(saldo);
-			setResolucao(ResolucaoASInteiro.soma(-divida, deposito));
+			for(String passo : ResolucaoASInteiro.soma(-divida, deposito))
+				addResolucao(passo);
 		}
 	}
 }

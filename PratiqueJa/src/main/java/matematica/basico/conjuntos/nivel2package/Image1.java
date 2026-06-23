@@ -15,7 +15,7 @@ public class Image1 extends GeradorExercicio
 		dados.bMaStr = "";
 
 		String resultadoCorreto = "" + dados.aIb;
-		String resolucao = ResolucaoConjuntos.menosAIntersecB(dados);
+		String[] resolucao = ResolucaoConjuntos.menosAIntersecB(dados);
 
 		ConfigAB config = new ConfigAB(dados);
 		BufferedImage image = config.criarImagem();
@@ -23,6 +23,7 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("Se \\(|A|=" + dados.a + "\\) qual o valor de \\(|A \\cap B|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao(resolucao);
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 }

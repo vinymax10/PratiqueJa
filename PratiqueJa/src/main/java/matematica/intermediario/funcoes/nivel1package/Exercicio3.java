@@ -90,12 +90,11 @@ public class Exercicio3 extends GeradorExercicio
 			if(i > 0) mapeamentos.append(", \\;");
 			mapeamentos.append("f(").append(d.dominio[i]).append(") = ").append(d.imagemDe(i));
 		}
-		String res = "A imagem de \\(f\\) é o conjunto dos valores de \\(B\\) "
-				+ "efetivamente atingidos por alguma seta. \\(\\\\\\)";
-		res += "Lendo o diagrama: \\(" + mapeamentos + "\\). \\(\\\\\\)";
-		res += "Os valores distintos atingidos são \\(" + imagemCorreta.replace("\\{", "").replace("\\}", "") + "\\). \\(\\\\\\)";
-		res += "Portanto, \\(\\text{Im}(f) = " + imagemCorreta + "\\).";
-		setResolucao(res);
+		addResolucao("A imagem de \\(f\\) é o conjunto dos valores de \\(B\\) "
+				+ "efetivamente atingidos por alguma seta.");
+		addResolucao("Lendo o diagrama: \\(" + mapeamentos + "\\).");
+		addResolucao("Os valores distintos atingidos são \\(" + imagemCorreta.replace("\\{", "").replace("\\}", "") + "\\).");
+		addResolucao("Portanto, \\(\\text{Im}(f) = " + imagemCorreta + "\\).");
 	}
 
 	private static String toSetLatex(List<Integer> vals)

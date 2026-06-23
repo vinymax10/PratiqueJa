@@ -18,9 +18,8 @@ public class Exercicio1 extends GeradorExercicio
 
 		gerarAlternativasInteiras(V, 4, true);
 
-		String res = "\\(V = l \\times w \\times h = "
+		addResolucao("\\(V = l \\times w \\times h = "
 				+ l + " \\times " + w + " \\times " + h + " = "
-				+ lw + " \\times " + h + " = \\mathbf{" + V + "}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+				+ lw + " \\times " + h + " = \\mathbf{" + V + "}\\,\\text{cm}^3\\)");
 	}
 }

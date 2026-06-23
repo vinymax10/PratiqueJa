@@ -31,16 +31,10 @@ public class NotacaoCientifica4 extends GeradorExercicio
 		Collections.shuffle(opcoes, rand);
 		addParagrafo("Qual das opções " + listar(opcoes) + " está escrita corretamente em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\)?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Verificar a condição \\(1 \\leq a < 10\\) em cada opção:" +
-			"\\(\\\\\\)" +
-			"\\(" + cGrande + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cGrande + " \\geq 10\\), inválido" +
-			"\\(\\\\\\)" +
-			"\\(0{,}" + cPeq + " \\times 10^{" + (k + 1) + "}\\): mantissa \\(< 1\\), inválido" +
-			"\\(\\\\\\)" +
-			"\\(" + cNaoAjustado + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cNaoAjustado + " \\geq 10\\), inválido" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + c + " \\times 10^{" + k + "}}\\): mantissa \\(1 \\leq " + c + " < 10\\), correta"
-		);
+		addResolucao("Verificar a condição \\(1 \\leq a < 10\\) em cada opção:");
+		addResolucao("\\(" + cGrande + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cGrande + " \\geq 10\\), inválido");
+		addResolucao("\\(0{,}" + cPeq + " \\times 10^{" + (k + 1) + "}\\): mantissa \\(< 1\\), inválido");
+		addResolucao("\\(" + cNaoAjustado + " \\times 10^{" + (k - 1) + "}\\): mantissa \\(" + cNaoAjustado + " \\geq 10\\), inválido");
+		addResolucao("\\(\\mathbf{" + c + " \\times 10^{" + k + "}}\\): mantissa \\(1 \\leq " + c + " < 10\\), correta");
 	}
 }

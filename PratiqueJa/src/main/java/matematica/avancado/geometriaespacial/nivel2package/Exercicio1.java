@@ -17,11 +17,9 @@ public class Exercicio1 extends GeradorExercicio
 
 		gerarAlternativasInteiras(g, 4, true);
 
-		String res = "Pelo Teorema de Pitágoras:"
-				+ "\\(\\\\\\)"
-				+ "\\(g = \\sqrt{r^2 + h^2} = \\sqrt{" + r + "^2 + " + h + "^2} = \\\\"
-				+ "\\sqrt{"+ r2 + " + " + h2 + "} = "
-				+ "\\sqrt{" + (r2 + h2) + "} = \\mathbf{" + g + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+		addResolucao("Pelo Teorema de Pitágoras:");
+		addResolucao("\\(g = \\sqrt{r^2 + h^2} = \\sqrt{" + r + "^2 + " + h + "^2} =\\)");
+		addResolucao("\\(\\sqrt{"+ r2 + " + " + h2 + "} = "
+				+ "\\sqrt{" + (r2 + h2) + "} = \\mathbf{" + g + "}\\,\\text{cm}\\)");
 	}
 }

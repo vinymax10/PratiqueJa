@@ -18,7 +18,7 @@ public class Sistema6 extends GeradorExercicio
 		int x = sistema.x;
 		int y = sistema.y;
 		String resultadoCorreto = "\\(x=" + x + ",\\;y=" + y + "\\)";
-		String resolucao = ResolucaoAdicao.adicaoXY(sistema);
+		String[] resolucao = ResolucaoAdicao.adicaoXY(sistema);
 		String texto = sistema.latex();
 
 		List<String> distratores = new ArrayList<>();
@@ -29,6 +29,6 @@ public class Sistema6 extends GeradorExercicio
 		addParagrafo("Encontre a solução \\((x,\\,y)\\) pelo método da adição.");
 		addParagrafo("\\(" + texto + "\\)");
 		embaralharEAdicionarAlternativas(resultadoCorreto, distratores);
-		setResolucao(resolucao);
+		for(String passo : resolucao) addResolucao(passo);
 	}
 }

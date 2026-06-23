@@ -24,21 +24,21 @@ public class ProblemaPrincipioMultiplicacao
 		c = 3 + rand.nextInt(12);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "Pelo Princípio da Multiplicação, multiplicamos o número de possibilidades de cada etapa:";
-		res += "\\(\\\\\\)";
+		String passo1 = "Pelo Princípio da Multiplicação, multiplicamos o número de possibilidades de cada etapa:";
+		String passo2 = "";
 		switch(tipo)
 		{
 			case Duas:
-				res += "\\(" + a + " \\cdot " + b + " = \\mathbf{" + (a*b) + "}\\)";
+				passo2 = "\\(" + a + " \\cdot " + b + " = \\mathbf{" + (a*b) + "}\\)";
 				break;
 			case Tres:
-				res += "\\(" + a + " \\cdot " + b + " \\cdot " + c + " = \\mathbf{" + (a*b*c) + "}\\)";
+				passo2 = "\\(" + a + " \\cdot " + b + " \\cdot " + c + " = \\mathbf{" + (a*b*c) + "}\\)";
 				break;
 		}
 
-		return res;
+		return new String[]{passo1, passo2};
 	}
 
 	public String resultado()

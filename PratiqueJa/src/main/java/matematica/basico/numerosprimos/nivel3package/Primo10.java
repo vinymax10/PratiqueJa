@@ -27,6 +27,7 @@ public class Primo10 extends AgrupadorPrimo
 		gerarAlternativasInteiras(count);
 
 		String listaStr = primosStr.length() > 0 ? "\\(" + primosStr + "\\)" : "nenhum";
-		setResolucao("Primos em \\([" + a + ",\\," + b + "]\\): " + listaStr + ". \\(\\\\\\) Total: \\(\\mathbf{" + count + "}\\)");
+		addResolucao("Primos em \\([" + a + ",\\," + b + "]\\): " + listaStr + ".");
+		addResolucao("Total: \\(\\mathbf{" + count + "}\\)");
 	}
 }

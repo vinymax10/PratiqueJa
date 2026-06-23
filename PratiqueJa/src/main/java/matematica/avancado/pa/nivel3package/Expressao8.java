@@ -21,12 +21,10 @@ public class Expressao8 extends GeradorExercicio
 
 		String enunciado = "" + a1.showDfrac() + "+ \\ldots + " + an.showDfrac() + "=" + ResolucaoPA.soma(a1, an, n).showDfrac();
 
-		String resolucao = ResolucaoPA.resolucaoSoma2(a1, r, an, n);
-		resolucao = resolucao.replace("(", "\\left(").replace(")", "\\right)");
-
 		addParagrafo("Quantos termos tem a PA?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas("" + n);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : ResolucaoPA.resolucaoSoma2(a1, r, an, n))
+			addResolucao("\\(" + passo.replace("(", "\\left(").replace(")", "\\right)") + "\\)");
 	}
 }

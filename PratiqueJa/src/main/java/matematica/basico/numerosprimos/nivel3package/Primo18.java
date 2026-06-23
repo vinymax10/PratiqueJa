@@ -28,7 +28,7 @@ public class Primo18 extends AgrupadorPrimo
 		addParagrafo("Dado \\(N = " + nLatex + " = " + n + "\\), quantos divisores tem \\(N^3\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& N^3 = " + n3Latex + "\\\\" +
 			"& \\tau(N^3) = (" + (3 * a) + "{+}1)(" + (3 * b) + "{+}1)\\\\" +

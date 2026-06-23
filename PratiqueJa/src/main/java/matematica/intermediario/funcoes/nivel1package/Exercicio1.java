@@ -22,26 +22,24 @@ public class Exercicio1 extends GeradorExercicio
 		addParagrafoImagem(img);
 		gerarAlternativasBoolean(d.eFuncao);
 
-		String res;
 		if(d.eFuncao)
 		{
-			res = "Uma função associa cada elemento do domínio a "
-				+ "\\(\\textbf{exatamente um}\\) elemento do contradomínio. \\(\\\\\\)";
-			res += "Analisando o diagrama: cada elemento de \\(A\\) possui "
-				+ "exatamente uma seta saindo. \\(\\\\\\)";
-			res += "Portanto, a relação \\(\\textbf{é}\\) uma função.";
+			addResolucao("Uma função associa cada elemento do domínio a "
+				+ "\\(\\textbf{exatamente um}\\) elemento do contradomínio.");
+			addResolucao("Analisando o diagrama: cada elemento de \\(A\\) possui "
+				+ "exatamente uma seta saindo.");
+			addResolucao("Portanto, a relação \\(\\textbf{é}\\) uma função.");
 		}
 		else
 		{
 			int elem  = d.dominio[d.idxBiSeta];
 			int img1  = d.contradominio[d.mapeamento[d.idxBiSeta][0]];
 			int img2  = d.contradominio[d.mapeamento[d.idxBiSeta][1]];
-			res = "Uma função associa cada elemento do domínio a "
-				+ "\\(\\textbf{exatamente um}\\) elemento do contradomínio. \\(\\\\\\)";
-			res += "No diagrama, o elemento \\(" + elem + "\\) possui setas para "
-				+ "\\(" + img1 + "\\) e \\(" + img2 + "\\): duas imagens distintas. \\(\\\\\\)";
-			res += "Portanto, a relação \\(\\textbf{não é}\\) uma função.";
+			addResolucao("Uma função associa cada elemento do domínio a "
+				+ "\\(\\textbf{exatamente um}\\) elemento do contradomínio.");
+			addResolucao("No diagrama, o elemento \\(" + elem + "\\) possui setas para "
+				+ "\\(" + img1 + "\\) e \\(" + img2 + "\\): duas imagens distintas.");
+			addResolucao("Portanto, a relação \\(\\textbf{não é}\\) uma função.");
 		}
-		setResolucao(res);
 	}
 }

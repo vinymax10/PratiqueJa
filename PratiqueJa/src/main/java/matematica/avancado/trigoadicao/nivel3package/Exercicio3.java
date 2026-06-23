@@ -36,12 +36,10 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + Math.abs(num) + "}{" + den + "}\\)");         // esqueceu o sinal negativo
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q1 + "}{" + r1 + "}\\)."
-				+ "\\(\\\\\\)"
-				+ "Pela fórmula \\(\\operatorname{sen}(\\alpha+\\beta) = \\operatorname{sen}\\,\\alpha\\cos\\beta + \\cos\\alpha\\,\\operatorname{sen}\\,\\beta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(\\alpha+\\beta) = \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + q2 + "}{" + r2
-				+ "} + \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right) \\cdot \\dfrac{" + p2 + "}{" + r2 + "} = \\\\"
-				+ "\\dfrac{" + (p1 * q2) + "}{" + den + "} - \\dfrac{" + (q1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
+		addResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q1 + "}{" + r1 + "}\\).");
+		addResolucao("Pela fórmula \\(\\operatorname{sen}(\\alpha+\\beta) = \\operatorname{sen}\\,\\alpha\\cos\\beta + \\cos\\alpha\\,\\operatorname{sen}\\,\\beta\\):");
+		addResolucao("\\(\\operatorname{sen}(\\alpha+\\beta) = \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + q2 + "}{" + r2
+				+ "} + \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right) \\cdot \\dfrac{" + p2 + "}{" + r2 + "} =\\)");
+		addResolucao("\\(\\dfrac{" + (p1 * q2) + "}{" + den + "} - \\dfrac{" + (q1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
 	}
 }

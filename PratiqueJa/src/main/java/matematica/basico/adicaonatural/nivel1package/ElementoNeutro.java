@@ -17,11 +17,10 @@ public class ElementoNeutro extends GeradorExercicio
 
 		gerarAlternativasInteiras(a);
 
-		String res = "O número \\(0\\) é o elemento neutro da adição: somar \\(0\\) não altera o valor. \\(\\\\\\)";
+		addResolucao("O número \\(0\\) é o elemento neutro da adição: somar \\(0\\) não altera o valor.");
 		if (zeroEsquerda)
-			res += "\\(0 + " + a + " = \\mathbf{" + a + "}\\)";
+			addResolucao("\\(0 + " + a + " = \\mathbf{" + a + "}\\)");
 		else
-			res += "\\(" + a + " + 0 = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+			addResolucao("\\(" + a + " + 0 = \\mathbf{" + a + "}\\)");
 	}
 }

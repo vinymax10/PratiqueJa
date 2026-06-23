@@ -24,11 +24,10 @@ public class ElementoEspecial extends GeradorExercicio
 			distrais.add(formatarNumero(algo));
 			embaralharEAdicionarAlternativas(formatarNumero(1), distrais);
 
-			String res = "O elemento neutro da multiplicação é \\(1\\):"
-				+ " qualquer número multiplicado por \\(1\\) é ele mesmo. \\(\\\\\\)";
-			res += "\\(\\square \\times " + algo + " = " + algo
-				+ " \\Rightarrow \\square = \\mathbf{1}\\)";
-			setResolucao(res);
+			addResolucao("O elemento neutro da multiplicação é \\(1\\):"
+				+ " qualquer número multiplicado por \\(1\\) é ele mesmo.");
+			addResolucao("\\(\\square \\times " + algo + " = " + algo
+				+ " \\Rightarrow \\square = \\mathbf{1}\\)");
 		}
 		else
 		{
@@ -41,11 +40,10 @@ public class ElementoEspecial extends GeradorExercicio
 			distrais.add(formatarNumero(algo + 1));
 			embaralharEAdicionarAlternativas(formatarNumero(0), distrais);
 
-			String res = "O elemento absorvente da multiplicação é \\(0\\):"
-				+ " qualquer número multiplicado por \\(0\\) é \\(0\\). \\(\\\\\\)";
-			res += "\\(\\square \\times " + algo + " = 0"
-				+ " \\Rightarrow \\square = \\mathbf{0}\\)";
-			setResolucao(res);
+			addResolucao("O elemento absorvente da multiplicação é \\(0\\):"
+				+ " qualquer número multiplicado por \\(0\\) é \\(0\\).");
+			addResolucao("\\(\\square \\times " + algo + " = 0"
+				+ " \\Rightarrow \\square = \\mathbf{0}\\)");
 		}
 	}
 }

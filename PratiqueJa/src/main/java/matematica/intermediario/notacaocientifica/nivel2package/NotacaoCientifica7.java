@@ -37,12 +37,8 @@ public class NotacaoCientifica7 extends GeradorExercicio
 		addParagrafo(desc + " \\(" + a + " \\times 10^{" + mBase + "}\\) m.");
 		addParagrafo("Expresse em " + unidade + ".");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Multiplicar pelo fator de conversão \\(10^{" + fator + "}\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + a + " \\times 10^{" + mBase + "} \\times 10^{" + fator + "} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + a + " \\times 10^{" + mBase + " + (" + fator + ")} = \\mathbf{" + a + " \\times 10^{" + expResult + "}}\\)"
-		);
+		addResolucao("Multiplicar pelo fator de conversão \\(10^{" + fator + "}\\):");
+		addResolucao("\\(" + a + " \\times 10^{" + mBase + "} \\times 10^{" + fator + "} =\\)");
+		addResolucao("\\(" + a + " \\times 10^{" + mBase + " + (" + fator + ")} = \\mathbf{" + a + " \\times 10^{" + expResult + "}}\\)");
 	}
 }

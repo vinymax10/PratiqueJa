@@ -42,16 +42,14 @@ public class Expressao3 extends GeradorExercicio
 		distratores.add("\\(" + d2 + "\\)");
 		distratores.add("\\(" + d3 + "\\)");
 
-		String res = "Reconhecer o padrão \\(a^2 " + (plus ? "+" : "-") + " 2ab + b^2 = (a "
-				+ sign + " b)^2\\):\\(\\\\\\)";
-		res += "\\(a = " + aStr + "x, \\quad b = " + b + "\\)\\(\\\\\\)";
-		res += "Verificando: \\(2ab = 2 \\cdot " + (a == 1 ? "" : a) + "x \\cdot " + b + " = "
-				+ Math.abs(c1) + "x \\; \\checkmark\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Fatore o trinômio quadrado perfeito.");
 		addParagrafo("\\(" + poly + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Reconhecer o padrão \\(a^2 " + (plus ? "+" : "-") + " 2ab + b^2 = (a "
+				+ sign + " b)^2\\):");
+		addResolucao("\\(a = " + aStr + "x, \\quad b = " + b + "\\)");
+		addResolucao("Verificando: \\(2ab = 2 \\cdot " + (a == 1 ? "" : a) + "x \\cdot " + b + " = "
+				+ Math.abs(c1) + "x \\; \\checkmark\\)");
+		addResolucao("\\(\\mathbf{" + correct + "}\\)");
 	}
 }

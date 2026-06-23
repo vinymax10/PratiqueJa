@@ -42,6 +42,7 @@ public class Primo7 extends AgrupadorPrimo
 
 		addParagrafo("Qual é a decomposição em fatores primos de \\(" + n + "\\)?");
 		embaralharEAdicionarAlternativas(correta, erradas);
-		setResolucao(resolucaoFatoracao(n));
+		for(String passo : resolucaoFatoracao(n))
+			addResolucao(passo);
 	}
 }

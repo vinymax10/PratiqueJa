@@ -15,6 +15,8 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
+import pdf.publicacao.InstagramFeed;
+import pdf.publicacao.TikTok;
 import service.configuracao.DiretorioService;
 import service.publicacao.ImagemPostService;
 import service.publicacao.ProgramacaoPostService;
@@ -101,20 +103,20 @@ public class TesteConfigPostBean implements Serializable
 		Diretorio diretorio = diretorioService.criarDiretorio();
 		ExercicioPadrao exercicioPadrao = exercicioPadraoDAO.buscar(programacaoPost.getAssunto(), nivel);
 
-//		if(feed)
-//		{
-//			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
-//			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-//			gerarLatex.gerarPDF();
-//			gerarLatex.convertPNG();
-//		}
-//		else
-//		{
-//			TikTok gerarLatex = new TikTok(diretorio);
-//			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
-//			gerarLatex.gerarPDF();
-//			gerarLatex.convertPNG();
-//		}
+		if(feed)
+		{
+			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
+			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+			gerarLatex.gerarPDF();
+			gerarLatex.convertPNG();
+		}
+		else
+		{
+			TikTok gerarLatex = new TikTok(diretorio);
+			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
+			gerarLatex.gerarPDF();
+			gerarLatex.convertPNG();
+		}
 
 		try
 		{

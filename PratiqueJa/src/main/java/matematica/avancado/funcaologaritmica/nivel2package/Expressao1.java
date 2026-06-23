@@ -36,8 +36,7 @@ public class Expressao1 extends GeradorExercicio
 		dist.add(errado3);
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "O zero da função é \\(x = 1\\) (pois \\(\\log_{" + a + "}(1) = 0\\)). \\(\\\\\\)";
-		res += justificativa;
-		setResolucao(res);
+		addResolucao("O zero da função é \\(x = 1\\) (pois \\(\\log_{" + a + "}(1) = 0\\)).");
+		addResolucao(justificativa);
 	}
 }

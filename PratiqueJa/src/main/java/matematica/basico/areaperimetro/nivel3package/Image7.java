@@ -18,17 +18,15 @@ public class Image7 extends GeradorExercicio
 
 		String resultadoCorreto = "" + h;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += b + "h=" + area + "\\\\";
-		resolucao += "h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\\\";
-
 		ConfigRetangulo config = new ConfigRetangulo("" + b, "h", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do retângulo é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(" + b + "h=" + area + "\\)");
+		addResolucao("\\(h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\)");
 	}
 }

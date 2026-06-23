@@ -19,19 +19,16 @@ public class Image3 extends GeradorExercicio
 		String strD = "" + h + "\\sqrt{2}";
 		String resultadoCorreto = "" + h * (h + sobra);
 
-		String resolucao = ResolucaoAreaPerimetro.formulaDiagonalQuadrado() +
-		", \\quad " + ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
-		resolucao += "l=" + h + "\\\\";
-		resolucao += "h=" + h + "\\\\";
-		resolucao += "b=l+" + sobra + " = " + h + "+" + sobra + "=" + (h + sobra) + "\\\\";
-		resolucao += "A=" + b + " \\cdot " + h + "=" + (b * h);
-
 		ConfigRetangulo3 config = new ConfigRetangulo3("d", "" + sobra, true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strD + "\\), qual a área do retângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ", \\quad " + ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\)");
+		addResolucao("\\(l=" + h + "\\)");
+		addResolucao("\\(h=" + h + "\\)");
+		addResolucao("\\(b=l+" + sobra + " = " + h + "+" + sobra + "=" + (h + sobra) + "\\)");
+		addResolucao("\\(A=" + b + " \\cdot " + h + "=" + (b * h) + "\\)");
 	}
 }

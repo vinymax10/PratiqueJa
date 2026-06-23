@@ -36,21 +36,19 @@ public class Dizima3 extends GeradorExercicio
 
 		// Resolução
 		long k = 9 / frac.denominador;  // fator de amplificação (1 ou 3)
-		String res;
 		if(k == 1)
 		{
-			res = "O denominador já é \\(9\\), portanto o numerador é diretamente o período. \\(\\\\\\)";
-			res += "\\(" + frac.showDfrac() + " = 0{,}\\overline{" + period + "}\\)";
+			addResolucao("O denominador já é \\(9\\), portanto o numerador é diretamente o período.");
+			addResolucao("\\(" + frac.showDfrac() + " = 0{,}\\overline{" + period + "}\\)");
 		}
 		else
 		{
-			res = "Amplificamos a fração para obter denominador \\(9\\): \\(\\\\\\)";
-			res += "\\(" + frac.showDfrac() + " = \\dfrac{" + frac.numerador + " \\times " + k
+			addResolucao("Amplificamos a fração para obter denominador \\(9\\):");
+			addResolucao("\\(" + frac.showDfrac() + " = \\dfrac{" + frac.numerador + " \\times " + k
 				 + "}{" + frac.denominador + " \\times " + k + "} = \\dfrac{" + period
-				 + "}{9}\\). \\(\\\\\\)";
-			res += "O numerador \\(" + period + "\\) é o período da dízima: \\(\\\\\\)";
-			res += "\\(\\dfrac{" + period + "}{9} = 0{,}\\overline{" + period + "}\\)";
+				 + "}{9}\\).");
+			addResolucao("O numerador \\(" + period + "\\) é o período da dízima:");
+			addResolucao("\\(\\dfrac{" + period + "}{9} = 0{,}\\overline{" + period + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

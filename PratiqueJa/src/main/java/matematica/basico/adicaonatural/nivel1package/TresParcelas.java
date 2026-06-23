@@ -18,10 +18,9 @@ public class TresParcelas extends GeradorExercicio
 
 		gerarAlternativasInteiras(soma);
 
-		String res = "Somamos as duas primeiras parcelas: \\(\\\\\\)";
-		res += "\\(" + a + " + " + b + " = " + ab + "\\) \\(\\\\\\)";
-		res += "Em seguida, somamos com a terceira parcela: \\(\\\\\\)";
-		res += "\\(" + ab + " + " + c + " = \\mathbf{" + soma + "}\\)";
-		setResolucao(res);
+		addResolucao("Somamos as duas primeiras parcelas:");
+		addResolucao("\\(" + a + " + " + b + " = " + ab + "\\)");
+		addResolucao("Em seguida, somamos com a terceira parcela:");
+		addResolucao("\\(" + ab + " + " + c + " = \\mathbf{" + soma + "}\\)");
 	}
 }

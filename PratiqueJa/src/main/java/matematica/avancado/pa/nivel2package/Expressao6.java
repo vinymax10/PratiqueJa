@@ -26,14 +26,13 @@ public class Expressao6 extends GeradorExercicio
 				+ "\\) e \\(r = " + rVal + "\\).");
 		gerarAlternativas(sn.toString());
 
-		String res = "Usando a fórmula alternativa da soma: \\(\\\\\\)";
-		res += "\\(S_n = \\dfrac{\\left[2a_1 + (n-1) \\cdot r\\right] \\cdot n}{2} \\\\";
-		res += "S_{" + n + "} = \\dfrac{\\left[2 \\cdot " + a1Val + " + (" + n + " - 1) \\cdot " + rVal
-				+ "\\right] \\cdot " + n + "}{2} \\\\";
-		res += "S_{" + n + "} = \\dfrac{\\left[" + parte1 + " + " + (n - 1) + " \\cdot " + rVal
-				+ "\\right] \\cdot " + n + "}{2} \\\\";
-		res += "S_{" + n + "} = \\dfrac{" + inner + " \\cdot " + n + "}{2} = \\dfrac{" + produto
-				+ "}{2} = \\mathbf{" + sn.showDfrac() + "}\\)";
-		setResolucao(res);
+		addResolucao("Usando a fórmula alternativa da soma:");
+		addResolucao("\\(S_n = \\dfrac{\\left[2a_1 + (n-1) \\cdot r\\right] \\cdot n}{2}\\)");
+		addResolucao("\\(S_{" + n + "} = \\dfrac{\\left[2 \\cdot " + a1Val + " + (" + n + " - 1) \\cdot " + rVal
+				+ "\\right] \\cdot " + n + "}{2}\\)");
+		addResolucao("\\(S_{" + n + "} = \\dfrac{\\left[" + parte1 + " + " + (n - 1) + " \\cdot " + rVal
+				+ "\\right] \\cdot " + n + "}{2}\\)");
+		addResolucao("\\(S_{" + n + "} = \\dfrac{" + inner + " \\cdot " + n + "}{2} = \\dfrac{" + produto
+				+ "}{2} = \\mathbf{" + sn.showDfrac() + "}\\)");
 	}
 }

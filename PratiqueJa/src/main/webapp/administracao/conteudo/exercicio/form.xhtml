@@ -69,20 +69,8 @@
 		<ui:include rendered="#{!exercicioBean.cadastro}"
 		src="/administracao/conteudo/exercicio/alternativa/alternativa.xhtml" />
 
-		<h4 class="title-divisor">Resolução</h4>
-
-		<div class="ui-fluid gride">
-			<div class="gride col-12 p-0">
-				<div class="campo col-6">
-					<p:outputLabel for="@next" value="Resolução" />
-					<p:inputTextarea rows="10" value="#{exercicioBean.entidade.resolucao}" styleClass="w-full" />
-				</div>
-				<div class="campo col-6">
-					<p:outputLabel value="Preview" style="display:block;margin-bottom:15px;" />
-					<p:outputLabel value="#{exercicioBean.entidade.resolucao}" />
-				</div>
-			</div>
-		</div>
+		<ui:include rendered="#{!exercicioBean.cadastro}"
+		src="/administracao/conteudo/exercicio/resolucao/resolucao.xhtml" />
 
 		<div class="content-button">
 
@@ -146,5 +134,6 @@
 
 	<ui:include src="/administracao/conteudo/exercicio/paragrafo/dialog-cadastro.xhtml" />
 	<ui:include src="/administracao/conteudo/exercicio/alternativa/dialog-cadastro.xhtml" />
+	<ui:include src="/administracao/conteudo/exercicio/resolucao/dialog-cadastro.xhtml" />
 
 </ui:decorate>

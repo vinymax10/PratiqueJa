@@ -26,9 +26,8 @@ public class MultipliPor10 extends GeradorExercicio
 		gerarAlternativasInteiras(resultado);
 
 		int zeros = pot == 10 ? 1 : pot == 100 ? 2 : 3;
-		String res = "Multiplicar por \\(" + pot + "\\) equivale a acrescentar "
-			+ zeros + " zero" + (zeros > 1 ? "s" : "") + " à direita do número: \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + pot + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Multiplicar por \\(" + pot + "\\) equivale a acrescentar "
+			+ zeros + " zero" + (zeros > 1 ? "s" : "") + " à direita do número:");
+		addResolucao("\\(" + a + " \\times " + pot + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

@@ -52,14 +52,11 @@ public class Image6 extends GeradorExercicio
 		for(String d : distratores) distrLatex.add("\\(" + d + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + resultadoCorreto + "\\)", distrLatex);
 
-		String res = "No triângulo 30°-60°-90°, o cateto maior vale \\(\\sqrt{3}\\) vezes o cateto menor:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPitagoras.formula() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(a = " + (2 * l) + ", \\quad c = " + l + " \\\\";
-		res += l + "^2 + b^2 = " + (2 * l) + "^2 \\\\";
-		res += "b^2 = " + (4 * l * l) + " - " + (l * l) + " = " + (3 * l * l) + " \\\\";
-		res += "b = \\mathbf{\\sqrt{" + (3 * l * l) + "}}\\)";
-		setResolucao(res);
+		addResolucao("No triângulo 30°-60°-90°, o cateto maior vale \\(\\sqrt{3}\\) vezes o cateto menor:");
+		addResolucao("\\(" + ResolucaoPitagoras.formula() + "\\)");
+		addResolucao("\\(a = " + (2 * l) + ", \\quad c = " + l + "\\)");
+		addResolucao("\\(" + l + "^2 + b^2 = " + (2 * l) + "^2\\)");
+		addResolucao("\\(b^2 = " + (4 * l * l) + " - " + (l * l) + " = " + (3 * l * l) + "\\)");
+		addResolucao("\\(b = \\mathbf{\\sqrt{" + (3 * l * l) + "}}\\)");
 	}
 }

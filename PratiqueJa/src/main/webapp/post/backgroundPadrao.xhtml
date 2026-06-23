@@ -5,6 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+	</ui:define>
+
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" value="Background Padrão" />
 	</ui:define>
@@ -13,59 +17,74 @@
 	    <f:viewAction action="#{configPostBean.init()}" />
 	</f:metadata>
 
-	<div class="post-tabmenu">
-		<ui:include src="/post/tabMenu.xhtml" />
+	<!-- HERO -->
+	<div class="pc-hero">
+		<div class="pc-hero-head">
+			<span class="pc-hero-badge"><i class="pi pi-megaphone" /> Publicação no Instagram</span>
+			<h1 class="pc-hero-title">Background Padrão</h1>
+			<p class="pc-hero-desc">
+				Galeria de fundos prontos para Feed e Reel — usados quando a publicação está configurada com base de dados padrão.
+			</p>
+		</div>
+		<div class="pc-hero-stats">
+			<div class="pc-stat">
+				<span class="pc-stat-label">Feed</span>
+				<strong class="pc-stat-value">#{imagemPostBean.imagensFeed.size()}</strong>
+			</div>
+			<div class="pc-stat pc-stat--green">
+				<span class="pc-stat-label">Reel</span>
+				<strong class="pc-stat-value">#{imagemPostBean.imagensReel.size()}</strong>
+			</div>
+		</div>
 	</div>
 
-	<h:form id="form" class="form">
+	<ui:include src="/post/navTabs.xhtml" />
 
-		<div class="title-divisor-button">
-			<h4 style="margin:0;padding:0;border:0;">Background Padrão</h4>
-			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
-		</div>
+	<h:form id="form">
 
-		<div class="ui-fluid gride">
+		<div class="pc-panel">
 
-			<div class="col-12 lg:col-6" style="padding: 1rem;">
-				<p:fieldset legend="Background Feed" styleClass="meu-fieldset-half"	 >
+		<div class="pc-bg-grid">
 
-				    <p:galleria value="#{imagemPostBean.imagensFeed}" var="image" numVisible="5"
-			            showCaption="true" showItemNavigators="true"
-			            circular="true"
-			            responsiveOptions="#{imagemPostBean.responsiveOptions}"
-			            >
+			<div class="pc-bg-col">
+				<div class="pc-section-sub"><i class="pi pi-image" /> Background Feed</div>
+				<div class="pc-gallery">
+				    <p:galleria value="#{imagemPostBean.imagensFeed}" var="image" numVisible="4"
+			            showCaption="true" showItemNavigators="true" circular="true"
+			            responsiveOptions="#{imagemPostBean.responsiveOptions}" style="width:100%">
 					        <p:graphicImage value="#{image.endereco}" alt="#{image.nome}"
-					        style="width: 100%; height:auto; display: block;" oncontextmenu="return false;" />
+					        style="width:100%; height:auto; display:block;" oncontextmenu="return false;" />
 					        <f:facet name="caption">
 					            <h4 class="mb-2">#{image.nome}</h4>
 					        </f:facet>
 					        <f:facet name="thumbnail">
 					            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
-					            alt="#{image.nome}" style="width: 80px; display: block;" />
+					            alt="#{image.nome}" style="width:54px; display:block;" />
 					        </f:facet>
 					    </p:galleria>
-
-			    </p:fieldset>
+				</div>
 			</div>
-			<div class="col-12 lg:col-6" style="padding: 1rem;">
-				<p:fieldset legend="Background Reel" styleClass="meu-fieldset-half" >
 
-				    <p:galleria value="#{imagemPostBean.imagensReel}" var="image" numVisible="5"
-				    showCaption="true" showItemNavigators="true"
-				    circular="true"
-				    responsiveOptions="#{imagemPostBean.responsiveOptions}" >
+			<div class="pc-bg-col">
+				<div class="pc-section-sub"><i class="pi pi-video" /> Background Reel</div>
+				<div class="pc-gallery">
+				    <p:galleria value="#{imagemPostBean.imagensReel}" var="image" numVisible="4"
+				    showCaption="true" showItemNavigators="true" circular="true"
+				    responsiveOptions="#{imagemPostBean.responsiveOptions}" style="width:100%">
 				        <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
-				        alt="#{image.nome}" style="width: 100%; display: block;" />
+				        alt="#{image.nome}" style="width:100%; height:auto; display:block;" />
 				        <f:facet name="caption">
 				            <h4 class="mb-2">#{image.nome}</h4>
 				        </f:facet>
 				        <f:facet name="thumbnail">
 				            <p:graphicImage value="#{image.endereco}" oncontextmenu="return false;"
-				             alt="#{image.nome}" style="width: 80px; display: block;" />
+				             alt="#{image.nome}" style="width:54px; display:block;" />
 				        </f:facet>
 				    </p:galleria>
-			    </p:fieldset>
+				</div>
 			</div>
+
+		</div>
 
 		</div>
 

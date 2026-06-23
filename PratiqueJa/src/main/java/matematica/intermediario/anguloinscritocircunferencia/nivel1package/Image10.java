@@ -43,11 +43,9 @@ public class Image10 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + b + "^\\circ\\)", distratores);
 
-		String res = "Os dois arcos formados pelo diâmetro e o ponto \\(P\\) somam \\(180^\\circ\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha + \\beta = 180^\\circ \\\\";
-		res += a + "^\\circ + \\beta = 180^\\circ \\\\";
-		res += "\\beta = 180^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("Os dois arcos formados pelo diâmetro e o ponto \\(P\\) somam \\(180^\\circ\\):");
+		addResolucao("\\(\\alpha + \\beta = 180^\\circ\\)");
+		addResolucao("\\(" + a + "^\\circ + \\beta = 180^\\circ\\)");
+		addResolucao("\\(\\beta = 180^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)");
 	}
 }

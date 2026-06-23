@@ -14,6 +14,6 @@ public class JurosDesconto2 extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		gerarAlternativas("" + problema.resultado());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -25,12 +25,11 @@ public class Racionais3 extends GeradorExercicio
 		gerarAlternativas(resultado);
 
 		long mdc = gcd(num, den);
-		String res = "Dividimos o numerador e o denominador pelo MDC. \\(\\\\\\)";
-		res += "\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\). \\(\\\\\\)";
-		res += "\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{"
+		addResolucao("Dividimos o numerador e o denominador pelo MDC.");
+		addResolucao("\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\).");
+		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{"
 			 + num + " \\div " + mdc + "}{" + den + " \\div " + mdc
-			 + "} = " + resultado.showDfrac() + "\\)";
-		setResolucao(res);
+			 + "} = " + resultado.showDfrac() + "\\)");
 	}
 
 	private static long gcd(long a, long b)

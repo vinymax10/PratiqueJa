@@ -44,9 +44,8 @@ public class RegraTres12 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas("\\(" + p + "\\%\\)", distratores);
 
-		String res = "Fórmula: \\(\\% = \\dfrac{\\text{parte}}{\\text{total}} \\times 100\\). \\(\\\\\\)";
-		res += "\\(\\% = \\dfrac{" + x + "}{" + y + "} \\times 100 = \\\\ \\)";
-		res += "\\(\\dfrac{" + (x * 100) + "}{" + y + "} = \\mathbf{" + p + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("Fórmula: \\(\\% = \\dfrac{\\text{parte}}{\\text{total}} \\times 100\\).");
+		addResolucao("\\(\\% = \\dfrac{" + x + "}{" + y + "} \\times 100 =\\)");
+		addResolucao("\\(\\dfrac{" + (x * 100) + "}{" + y + "} = \\mathbf{" + p + "\\%}\\)");
 	}
 }

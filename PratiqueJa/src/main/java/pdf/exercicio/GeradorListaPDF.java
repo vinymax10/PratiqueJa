@@ -414,7 +414,7 @@ public class GeradorListaPDF
 	private String macroGabarito(int num, Exercicio e)
 	{
 		String numStr = String.format("%02d", num);
-		String resolucao = e.getResolucao() != null ? escaparTexto(e.getResolucao()) : "";
+		String resolucao = e.getResolucaoLatex() != null ? escaparTexto(e.getResolucaoLatex()) : "";
 		AlternativaExercicio correta = comAlternativas ? e.correta() : null;
 
 		if (correta == null)

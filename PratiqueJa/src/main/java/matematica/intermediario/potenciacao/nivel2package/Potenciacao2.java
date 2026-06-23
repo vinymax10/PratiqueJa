@@ -21,6 +21,6 @@ public class Potenciacao2 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + (int) -Math.pow(Math.abs(a), p));
-		setResolucao("\\(" + ResolucaoPotencia.resolucaoNegativo(a, p) + "\\)");
+		addResolucao("\\(" + ResolucaoPotencia.resolucaoNegativo(a, p) + "\\)");
 	}
 }

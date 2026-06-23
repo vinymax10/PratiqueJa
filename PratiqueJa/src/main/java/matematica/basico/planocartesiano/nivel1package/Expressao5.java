@@ -28,14 +28,11 @@ public class Expressao5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(dist);
 
-		String res = "A distância entre dois pontos \\(A(x_A,\\;y_A)\\) e \\(B(x_B,\\;y_B)\\) é dada pela fórmula: ";
-		res += "\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}\\). \\(\\\\\\)";
-		res += "Calculando as diferenças: \\(x_B - x_A = " + innerX + " = " + dx + "\\) e ";
-		res += "\\(y_B - y_A = " + innerY + " = " + dy + "\\). \\(\\\\\\)";
-		res += "Substituindo na fórmula: \\(\\\\\\)";
-		res += "\\(d = \\sqrt{" + strDx + "^2 + " + strDy + "^2} = \\sqrt{" + dx2 + " + " + dy2 + "} =\\\\ ";
-		res += "\\sqrt{" + d2 + "} = " + dist + "\\)";
-
-		setResolucao(res);
+		addResolucao("A distância entre dois pontos \\(A(x_A,\\;y_A)\\) e \\(B(x_B,\\;y_B)\\) é dada pela fórmula:");
+		addResolucao("\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}\\).");
+		addResolucao("Calculando as diferenças: \\(x_B - x_A = " + innerX + " = " + dx + "\\) e \\(y_B - y_A = " + innerY + " = " + dy + "\\).");
+		addResolucao("Substituindo na fórmula:");
+		addResolucao("\\(d = \\sqrt{" + strDx + "^2 + " + strDy + "^2} = \\sqrt{" + dx2 + " + " + dy2 + "} =\\)");
+		addResolucao("\\(\\sqrt{" + d2 + "} = " + dist + "\\)");
 	}
 }

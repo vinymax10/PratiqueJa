@@ -29,6 +29,6 @@ public class Exercicio6 extends GeradorExercicio
 
 		String res = "O ângulo \\(" + ang + "°\\) está entre " + intervalo
 				+ ", portanto pertence ao \\(\\mathbf{" + q + ".°}\\) quadrante.";
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

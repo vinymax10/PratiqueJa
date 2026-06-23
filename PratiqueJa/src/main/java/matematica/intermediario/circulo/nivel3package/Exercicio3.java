@@ -19,18 +19,15 @@ public class Exercicio3 extends GeradorExercicio
 		int theta = triple[1];
 		int r = triple[2];
 
-		String res = "\\(" + ResolucaoCirculo.formulaArco() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = \\dfrac{" + theta + "}{360} \\cdot 2\\pi r \\\\ ";
-		res += k + " = \\dfrac{" + theta + "}{180} \\cdot r \\\\ ";
-		res += "r = \\dfrac{180 \\cdot " + k + "}{" + theta + "} = \\dfrac{" + (180 * k) + "}{" + theta + "} = \\mathbf{" + r + "}\\)";
-
 		ConfigSetor config = new ConfigSetor("r", theta);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de um arco é \\(" + k + "\\pi\\) e o ângulo central é \\(" + theta + "^\\circ\\). Qual é o raio \\(r\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaArco() + "\\)");
+		addResolucao("\\(" + k + "\\pi = \\dfrac{" + theta + "}{360} \\cdot 2\\pi r\\)");
+		addResolucao("\\(" + k + " = \\dfrac{" + theta + "}{180} \\cdot r\\)");
+		addResolucao("\\(r = \\dfrac{180 \\cdot " + k + "}{" + theta + "} = \\dfrac{" + (180 * k) + "}{" + theta + "} = \\mathbf{" + r + "}\\)");
 	}
 }

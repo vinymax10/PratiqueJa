@@ -18,40 +18,39 @@ public class Expressao5 extends GeradorExercicio
 
 		int kmb = k - b; // = a * xResult
 
-		String res = "Igualamos \\(f(x) = " + k + "\\): \\(\\\\\\)";
-		res += "\\(" + funcao + " = " + k + "\\) \\(\\\\\\)";
+		gerarAlternativas("" + xResult);
+
+		addResolucao("Igualamos \\(f(x) = " + k + "\\):");
+		addResolucao("\\(" + funcao + " = " + k + "\\)");
 
 		if(a == 1)
 		{
 			if(b > 0)
-				res += "\\(x = " + k + " - " + b + " = \\mathbf{" + xResult + "}\\)";
+				addResolucao("\\(x = " + k + " - " + b + " = \\mathbf{" + xResult + "}\\)");
 			else
-				res += "\\(x = " + k + " + " + Math.abs(b) + " = \\mathbf{" + xResult + "}\\)";
+				addResolucao("\\(x = " + k + " + " + Math.abs(b) + " = \\mathbf{" + xResult + "}\\)");
 		}
 		else if(a == -1)
 		{
 			if(b > 0)
-				res += "\\(-x = " + k + " - " + b + " = " + kmb + "\\) \\(\\\\\\)";
+				addResolucao("\\(-x = " + k + " - " + b + " = " + kmb + "\\)");
 			else
-				res += "\\(-x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\\\";
-			res += "x = \\mathbf{" + xResult + "}\\)";
+				addResolucao("\\(-x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\)");
+			addResolucao("\\(x = \\mathbf{" + xResult + "}\\)");
 		}
 		else
 		{
 			if(b > 0)
-				res += "\\(" + a + "x = " + k + " - " + b + " = " + kmb + "\\) \\(\\\\\\)";
+				addResolucao("\\(" + a + "x = " + k + " - " + b + " = " + kmb + "\\)");
 			else
-				res += "\\(" + a + "x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\) \\(\\\\\\)";
+				addResolucao("\\(" + a + "x = " + k + " + " + Math.abs(b) + " = " + kmb + "\\)");
 			int num = kmb, den = a;
 			if(den < 0) { num = -num; den = -den; }
 			if(num < 0)
-				res += "\\(x = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + xResult + "}\\)";
+				addResolucao("\\(x = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + xResult + "}\\)");
 			else
-				res += "\\(x = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + xResult + "}\\)";
+				addResolucao("\\(x = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + xResult + "}\\)");
 		}
-
-		gerarAlternativas("" + xResult);
-		setResolucao(res);
 	}
 
 	private static String afimStr(int a, int b)

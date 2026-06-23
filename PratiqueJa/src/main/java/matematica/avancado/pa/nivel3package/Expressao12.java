@@ -23,11 +23,10 @@ public class Expressao12 extends GeradorExercicio
 				+ "\\) e \\(" + b.showDfrac() + "\\), qual é a razão da PA resultante?");
 		gerarAlternativas(r.toString());
 
-		String res = "A PA resultante tem \\(" + n + "\\) termos no total. \\(\\\\\\)";
-		res += "Fórmula da interpolação aritmética: \\(\\\\\\)";
-		res += "\\(r = \\dfrac{b - a}{k + 1} \\\\";
-		res += "r = \\dfrac{" + b.showDfrac() + " - " + a.showDfrac() + "}{" + k + " + 1}"
-				+ " = \\mathbf{" + r.showDfrac() + "}\\)";
-		setResolucao(res);
+		addResolucao("A PA resultante tem \\(" + n + "\\) termos no total.");
+		addResolucao("Fórmula da interpolação aritmética:");
+		addResolucao("\\(r = \\dfrac{b - a}{k + 1}\\)");
+		addResolucao("\\(r = \\dfrac{" + b.showDfrac() + " - " + a.showDfrac() + "}{" + k + " + 1}"
+				+ " = \\mathbf{" + r.showDfrac() + "}\\)");
 	}
 }

@@ -16,10 +16,8 @@ public class Expressao1 extends GeradorExercicio
 
 		addParagrafo("Dada \\(f(x) = " + a + "^x\\), calcule \\(f(" + n + ")\\).");
 
-		String res = "Substituindo \\(x = " + n + "\\) na função: \\(\\\\\\)";
-		res += "\\(f(" + n + ") = " + expo + " = \\mathbf{" + resultado + "}\\)";
-
 		gerarAlternativas("" + resultado);
-		setResolucao(res);
+		addResolucao("Substituindo \\(x = " + n + "\\) na função:");
+		addResolucao("\\(f(" + n + ") = " + expo + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

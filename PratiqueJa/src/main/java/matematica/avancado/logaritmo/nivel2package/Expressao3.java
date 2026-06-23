@@ -15,10 +15,9 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Resolva a equação logarítmica:");
 		addParagrafo("\\(\\log_{" + b + "} x = " + n + "\\)");
 
-		String res = "Convertendo para forma exponencial (\\(\\log_b x = n \\Rightarrow x = b^n\\)): \\(\\\\\\)";
-		res += "\\(x = " + b + "^{" + n + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Convertendo para forma exponencial (\\(\\log_b x = n \\Rightarrow x = b^n\\)):");
+		addResolucao("\\(x = " + b + "^{" + n + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

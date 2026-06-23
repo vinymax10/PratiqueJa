@@ -24,10 +24,8 @@ public class Exercicio5 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + p + "}{" + q + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a propriedade \\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta\\)"
-				+ " (seno é função ímpar):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta = \\mathbf{-\\dfrac{" + p + "}{" + r + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando a propriedade \\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta\\)"
+				+ " (seno é função ímpar):");
+		addResolucao("\\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta = \\mathbf{-\\dfrac{" + p + "}{" + r + "}}\\)");
 	}
 }

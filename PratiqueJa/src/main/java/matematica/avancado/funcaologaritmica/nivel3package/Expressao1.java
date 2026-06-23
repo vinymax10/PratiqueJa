@@ -27,12 +27,11 @@ public class Expressao1 extends GeradorExercicio
 		dist.add("\\(0 < x \\leq " + xMin + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "Base \\(" + baseStr + " < 1\\): função \\(\\mathbf{decrescente}\\), "
-			+ "o sentido da desigualdade \\(\\mathbf{inverte}\\) ao remover o logaritmo. \\(\\\\\\)";
-		res += "\\(\\log_{\\frac{1}{" + den + "}}(x) \\leq " + rhs
-			+ " = \\log_{\\frac{1}{" + den + "}} " + xMin + "\\\\";
-		res += "\\Leftrightarrow x \\geq " + xMin + "\\) (sentido invertido) \\(\\\\\\)";
-		res += "Solução: \\(\\mathbf{x \\geq " + xMin + "}\\)";
-		setResolucao(res);
+		addResolucao("Base \\(" + baseStr + " < 1\\): função \\(\\mathbf{decrescente}\\), "
+			+ "o sentido da desigualdade \\(\\mathbf{inverte}\\) ao remover o logaritmo.");
+		addResolucao("\\(\\log_{\\frac{1}{" + den + "}}(x) \\leq " + rhs
+			+ " = \\log_{\\frac{1}{" + den + "}} " + xMin + "\\)");
+		addResolucao("\\(\\Leftrightarrow x \\geq " + xMin + "\\) (sentido invertido)");
+		addResolucao("Solução: \\(\\mathbf{x \\geq " + xMin + "}\\)");
 	}
 }

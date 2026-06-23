@@ -41,11 +41,8 @@ public class SistemaMetrico4 extends GeradorExercicio
 					"\\(" + (ml / 100) + "\\,\\text{L}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)"
-			);
+			addResolucao("\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:");
+			addResolucao("\\(" + ml + " \\div 1000 = \\mathbf{" + lStr + "}\\,\\text{L}\\)");
 		}
 		else
 		{
@@ -63,11 +60,8 @@ public class SistemaMetrico4 extends GeradorExercicio
 					"\\(" + (ml + 1000) + "\\,\\text{mL}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)"
-			);
+			addResolucao("\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo multiplicar por 1000:");
+			addResolucao("\\(" + l + " \\times 1000 = \\mathbf{" + ml + "}\\,\\text{mL}\\)");
 		}
 	}
 }

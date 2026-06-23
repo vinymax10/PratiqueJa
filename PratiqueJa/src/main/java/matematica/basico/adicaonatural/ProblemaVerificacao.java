@@ -63,10 +63,12 @@ public class ProblemaVerificacao
 		return a;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "A verificação da adição usa a operação inversa: se \\(a + b = c\\), então \\(c - b = a\\). \\(\\\\\\)";
-		res += "\\(" + c + " - " + b + " = \\mathbf{" + a + "}\\)";
-		return res;
+		return new String[]
+		{
+			"A verificação da adição usa a operação inversa: se \\(a + b = c\\), então \\(c - b = a\\).",
+			"\\(" + c + " - " + b + " = \\mathbf{" + a + "}\\)"
+		};
 	}
 }

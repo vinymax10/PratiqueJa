@@ -23,12 +23,11 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("\\(z = " + z + "\\)");
 		gerarAlternativas("" + correct);
 
-		String res = "Na forma \\(z = a + bi\\), identificamos: \\(\\\\\\)";
-		res += "\\(a = " + a + " \\quad b = " + b + "\\). \\(\\\\\\)";
+		addResolucao("Na forma \\(z = a + bi\\), identificamos:");
+		addResolucao("\\(a = " + a + " \\quad b = " + b + "\\).");
 		if (askReal)
-			res += "\\(\\operatorname{Re}(z) = a = \\mathbf{" + a + "}\\)";
+			addResolucao("\\(\\operatorname{Re}(z) = a = \\mathbf{" + a + "}\\)");
 		else
-			res += "\\(\\operatorname{Im}(z) = b = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+			addResolucao("\\(\\operatorname{Im}(z) = b = \\mathbf{" + b + "}\\)");
 	}
 }

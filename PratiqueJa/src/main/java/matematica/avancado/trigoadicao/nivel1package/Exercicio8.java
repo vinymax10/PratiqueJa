@@ -55,10 +55,9 @@ public class Exercicio8 extends GeradorExercicio
 				+ " calcule \\(\\operatorname{sen}^2(" + angulo + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Fazendo \\(a = " + angulo + "\\), temos \\(2a = " + anguloDouble
-				+ "\\) e \\(\\cos(" + anguloDouble + ") = " + cosDouble + "\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}^2(" + angulo + ") = \\dfrac{" + numExibido + "}{2} = \\dfrac{" + passoNum
+		addResolucao("Fazendo \\(a = " + angulo + "\\), temos \\(2a = " + anguloDouble
+				+ "\\) e \\(\\cos(" + anguloDouble + ") = " + cosDouble + "\\):");
+		addResolucao("\\(\\operatorname{sen}^2(" + angulo + ") = \\dfrac{" + numExibido + "}{2} = \\dfrac{" + passoNum
 				+ "}{2} = \\mathbf{" + resultado + "}\\)");
 	}
 }

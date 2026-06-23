@@ -28,11 +28,10 @@ public class Expressao13 extends GeradorExercicio
 				+ "\\), calcule \\(a_2 + a_{" + (n - 1) + "}\\).");
 		gerarAlternativas(resultado.toString());
 
-		String res = "Pela propriedade dos termos equidistantes: \\(\\\\\\)";
-		res += "\\(a_k + a_{n-k+1} = a_1 + a_n, \\quad \\forall\\; k\\) \\(\\\\\\)";
-		res += "Para \\(k = 2\\), temos \\(a_2 + a_{" + (n - 1) + "} = a_1 + a_{" + n + "}\\): \\(\\\\\\)";
-		res += "\\(a_2 + a_{" + (n - 1) + "} = " + a1.showDfrac() + " + " + an.showDfrac()
-				+ " = \\mathbf{" + resultado.showDfrac() + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade dos termos equidistantes:");
+		addResolucao("\\(a_k + a_{n-k+1} = a_1 + a_n, \\quad \\forall\\; k\\)");
+		addResolucao("Para \\(k = 2\\), temos \\(a_2 + a_{" + (n - 1) + "} = a_1 + a_{" + n + "}\\):");
+		addResolucao("\\(a_2 + a_{" + (n - 1) + "} = " + a1.showDfrac() + " + " + an.showDfrac()
+				+ " = \\mathbf{" + resultado.showDfrac() + "}\\)");
 	}
 }

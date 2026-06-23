@@ -38,16 +38,10 @@ public class NotacaoCientifica1 extends GeradorExercicio
 		String e3     = "\\(" + prod + " \\times 10^{" + (m + n) + "}\\) m";      // sem ajuste de mantissa
 
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"\\(d = v \\times t\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + v + " \\times " + t + " = " + prod + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + prod + " \\times 10^{" + m + " + " + n + "} = " + prod + " \\times 10^{" + (m + n) + "}\\)" +
-			"\\(\\\\\\)" +
-			"Reajustar: \\(" + prod + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + r + " \\times 10^1 \\times 10^{" + (m + n) + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\) m"
-		);
+		addResolucao("\\(d = v \\times t\\):");
+		addResolucao("\\(" + v + " \\times " + t + " = " + prod + "\\)");
+		addResolucao("\\(" + prod + " \\times 10^{" + m + " + " + n + "} = " + prod + " \\times 10^{" + (m + n) + "}\\)");
+		addResolucao("Reajustar: \\(" + prod + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):");
+		addResolucao("\\(" + r + " \\times 10^1 \\times 10^{" + (m + n) + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\) m");
 	}
 }

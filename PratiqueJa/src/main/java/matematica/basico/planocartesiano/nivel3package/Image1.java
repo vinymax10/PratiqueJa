@@ -24,29 +24,21 @@ public class Image1 extends GeradorExercicio
 		int tipo = rand.nextInt(3);
 		String nomeRef;
 		int rx, ry;
-		String res;
 
 		if (tipo == 0)
 		{
 			nomeRef = "eixo \\(x\\)";
 			rx = a; ry = -b;
-			res = "A simetria em relação ao eixo \\(x\\) mantém a abscissa e inverte o sinal da ordenada: \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'(a,\\;{-b})\\). \\(\\\\\\)";
 		}
 		else if (tipo == 1)
 		{
 			nomeRef = "eixo \\(y\\)";
 			rx = -a; ry = b;
-			res = "A simetria em relação ao eixo \\(y\\) inverte o sinal da abscissa e mantém a ordenada: \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'({-a},\\;b)\\). \\(\\\\\\)";
 		}
 		else
 		{
 			nomeRef = "origem";
 			rx = -a; ry = -b;
-			res = "A simetria em relação à origem inverte os sinais de ambas as coordenadas ";
-			res += "(equivale a refletir no eixo \\(x\\) e depois no eixo \\(y\\)): \\(\\\\\\)";
-			res += "\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\). \\(\\\\\\)";
 		}
 
 		String preposicao = nomeRef.equals("origem") ? "à" : "ao";
@@ -63,9 +55,23 @@ public class Image1 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, alts);
 
-		res += "Do plano, identificamos \\(P = (" + a + ",\\;" + b + ")\\). \\(\\\\\\)";
-		res += "Aplicando a regra: \\(P' = (" + rx + ",\\;" + ry + ")\\).";
-		setResolucao(res);
+		if (tipo == 0)
+		{
+			addResolucao("A simetria em relação ao eixo \\(x\\) mantém a abscissa e inverte o sinal da ordenada:");
+			addResolucao("\\(P(a,\\;b) \\to P'(a,\\;{-b})\\).");
+		}
+		else if (tipo == 1)
+		{
+			addResolucao("A simetria em relação ao eixo \\(y\\) inverte o sinal da abscissa e mantém a ordenada:");
+			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;b)\\).");
+		}
+		else
+		{
+			addResolucao("A simetria em relação à origem inverte os sinais de ambas as coordenadas (equivale a refletir no eixo \\(x\\) e depois no eixo \\(y\\)):");
+			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\).");
+		}
+		addResolucao("Do plano, identificamos \\(P = (" + a + ",\\;" + b + ")\\).");
+		addResolucao("Aplicando a regra: \\(P' = (" + rx + ",\\;" + ry + ")\\).");
 	}
 
 	private String par(int x, int y)

@@ -20,6 +20,7 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Qual é a soma da PA que possui " + n + " termos?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(ResolucaoPA.soma(a1, an, n).toString());
-		setResolucao("\\(" + ResolucaoPA.resolucaoSoma(a1, r, an, n) + "\\)");
+		for(String passo : ResolucaoPA.resolucaoSoma(a1, r, an, n))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

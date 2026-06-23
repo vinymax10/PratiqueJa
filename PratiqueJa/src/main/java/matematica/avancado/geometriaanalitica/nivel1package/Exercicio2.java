@@ -27,11 +27,9 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\((" + mx + ";\\;" + (my + 1) + ")\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "O ponto médio tem coordenadas iguais às médias aritméticas das extremidades:"
-				+ "\\(\\\\\\)"
-				+ "\\(M_x = \\dfrac{x_1 + x_2}{2} = \\dfrac{" + x1 + " + (" + x2 + ")}{2} = \\dfrac{" + (x1 + x2) + "}{2} = " + mx + "\\\\"
-				+ "M_y = \\dfrac{y_1 + y_2}{2} = \\dfrac{" + y1 + " + (" + y2 + ")}{2} = \\dfrac{" + (y1 + y2) + "}{2} = " + my + "\\\\"
-				+ "M = \\mathbf{(" + mx + ";\\;" + my + ")}\\)";
-		setResolucao(res);
+		addResolucao("O ponto médio tem coordenadas iguais às médias aritméticas das extremidades:");
+		addResolucao("\\(M_x = \\dfrac{x_1 + x_2}{2} = \\dfrac{" + x1 + " + (" + x2 + ")}{2} = \\dfrac{" + (x1 + x2) + "}{2} = " + mx + "\\)");
+		addResolucao("\\(M_y = \\dfrac{y_1 + y_2}{2} = \\dfrac{" + y1 + " + (" + y2 + ")}{2} = \\dfrac{" + (y1 + y2) + "}{2} = " + my + "\\)");
+		addResolucao("\\(M = \\mathbf{(" + mx + ";\\;" + my + ")}\\)");
 	}
 }

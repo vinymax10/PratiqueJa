@@ -17,23 +17,20 @@ public class ElementoNeutro extends GeradorExercicio
 			case 0:
 				addParagrafo("Qual é o resultado de \\(" + Auxiliar.getNumber(a, "", true) + " + 0\\)?");
 				gerarAlternativasInteirasComNegativos(a);
-				String res0 = "O zero é o elemento neutro da adição: qualquer inteiro somado a zero permanece igual. \\(\\\\\\)";
-				res0 += "\\(" + Auxiliar.getNumber(a, "", true) + " + 0 = \\mathbf{" + a + "}\\)";
-				setResolucao(res0);
+				addResolucao("O zero é o elemento neutro da adição: qualquer inteiro somado a zero permanece igual.");
+				addResolucao("\\(" + Auxiliar.getNumber(a, "", true) + " + 0 = \\mathbf{" + a + "}\\)");
 				break;
 			case 1:
 				addParagrafo("Qual é o resultado de \\(0 " + Auxiliar.getNumber(a, "", false) + "\\)?");
 				gerarAlternativasInteirasComNegativos(a);
-				String res1 = "O zero é o elemento neutro da adição: qualquer inteiro somado a zero permanece igual. \\(\\\\\\)";
-				res1 += "\\(0 " + Auxiliar.getNumber(a, "", false) + " = \\mathbf{" + a + "}\\)";
-				setResolucao(res1);
+				addResolucao("O zero é o elemento neutro da adição: qualquer inteiro somado a zero permanece igual.");
+				addResolucao("\\(0 " + Auxiliar.getNumber(a, "", false) + " = \\mathbf{" + a + "}\\)");
 				break;
 			default:
 				addParagrafo("Qual é o valor de \\(\\square\\) para que \\(" + Auxiliar.getNumber(a, "", true) + " + \\square = " + a + "\\)?");
 				gerarAlternativasInteiras(0);
-				String res2 = "O elemento neutro da adição é o zero: somando zero a qualquer inteiro, ele não muda. \\(\\\\\\)";
-				res2 += "\\(\\square = \\mathbf{0}\\)";
-				setResolucao(res2);
+				addResolucao("O elemento neutro da adição é o zero: somando zero a qualquer inteiro, ele não muda.");
+				addResolucao("\\(\\square = \\mathbf{0}\\)");
 				break;
 		}
 	}

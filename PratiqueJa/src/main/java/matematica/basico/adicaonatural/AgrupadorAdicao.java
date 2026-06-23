@@ -14,7 +14,7 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		addParagrafo("Calcule a seguinte adição:");
 		addParagrafo("\\(" + ResolucaoNatural.soma(a, b, false) + "\\)");
 		gerarAlternativasInteiras(a + b);
-		setResolucao("\\(" + ResolucaoNatural.soma(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.soma(a, b, true) + "\\)");
 	}
 	protected void quatroParcelas(int min, int range)
 	{
@@ -24,10 +24,8 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		addParagrafo("Calcule a soma das quatro parcelas:");
 		addParagrafo("\\(" + a + " + " + b + " + " + c + " + " + d + "\\)");
 		gerarAlternativasInteiras(s3);
-		setResolucao(
-			"Somamos passo a passo: \\(\\\\\\)" +
-			"\\(" + a + " + " + b + " = " + s1 + "\\); \\(" + s1 + " + " + c + " = " + s2 + "\\); \\(" + s2 + " + " + d + " = \\mathbf{" + s3 + "}\\)"
-		);
+		addResolucao("Somamos passo a passo:");
+		addResolucao("\\(" + a + " + " + b + " = " + s1 + "\\); \\(" + s1 + " + " + c + " = " + s2 + "\\); \\(" + s2 + " + " + d + " = \\mathbf{" + s3 + "}\\)");
 	}
 
 	protected void tabuada()
@@ -37,7 +35,7 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + a + " + " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(a + b);
-		setResolucao("\\(" + a + " + " + b + " = \\mathbf{" + (a + b) + "}\\)");
+		addResolucao("\\(" + a + " + " + b + " = \\mathbf{" + (a + b) + "}\\)");
 	}
 	protected void problema(int min, int range)
 	{
@@ -52,6 +50,7 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		else
 			addParagrafo("Uma biblioteca recebeu \\(" + a + "\\) livros de ficção e \\(" + b + "\\) de não-ficção. Quantos livros recebeu no total?");
 		gerarAlternativasInteiras(soma);
-		setResolucao("Somamos as duas quantidades: \\(\\\\\\) \\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)");
+		addResolucao("Somamos as duas quantidades:");
+		addResolucao("\\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)");
 	}
 }

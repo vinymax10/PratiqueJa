@@ -13,12 +13,12 @@ public class Sistema6 extends GeradorExercicio
 		sistema.construirX1X2(true);
 
 		String resultadoCorreto = "" + sistema.tres.valor;
-		String resolucao = ResolucaoComparacao.comparacaoY(sistema);
+		String[] resolucao = ResolucaoComparacao.comparacaoY(sistema);
 		String texto = sistema.latex();
 
 		addParagrafo("Encontre \\(z\\) pelo método da comparação.");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao(resolucao);
+		for(String passo : resolucao) addResolucao(passo);
 	}
 }

@@ -27,10 +27,9 @@ public class MmcMdc13 extends GeradorExercicio
 		addParagrafo("Calcule \\(\\text{MMC}(" + a + ",\\," + b + ")\\) usando a relação entre MMC e MDC.");
 		gerarAlternativasInteiras(mmc);
 
-		String res = "Primeiro encontramos o MDC pela fatoração simultânea: \\(\\\\\\)";
-		res += "\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\) \\(\\\\\\)";
-		res += "Em seguida, pela propriedade \\(\\text{MMC} = \\dfrac{a \\times b}{\\text{MDC}}\\): \\(\\\\\\)";
-		res += "\\(\\text{MMC} = \\dfrac{" + a + " \\times " + b + "}{" + mdc + "} = \\dfrac{" + (a * b) + "}{" + mdc + "} = \\mathbf{" + mmc + "}\\)";
-		setResolucao(res);
+		addResolucao("Primeiro encontramos o MDC pela fatoração simultânea:");
+		addResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\)");
+		addResolucao("Em seguida, pela propriedade \\(\\text{MMC} = \\dfrac{a \\times b}{\\text{MDC}}\\):");
+		addResolucao("\\(\\text{MMC} = \\dfrac{" + a + " \\times " + b + "}{" + mdc + "} = \\dfrac{" + (a * b) + "}{" + mdc + "} = \\mathbf{" + mmc + "}\\)");
 	}
 }

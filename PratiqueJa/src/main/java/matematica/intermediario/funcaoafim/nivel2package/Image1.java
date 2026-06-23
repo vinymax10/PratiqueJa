@@ -28,15 +28,14 @@ public class Image1 extends GeradorExercicio
 		int pontoBx = (int) config.pontoBx;
 		int pontoBy = (int) config.pontoBy;
 
-		String resolucao = "";
-		resolucao += "Dado os pontos \\( A=(" + pontoAx + "," + pontoAy + ") \\)  e ";
-		resolucao += "\\(B=(" + pontoBx + "," + pontoBy + ")\\), ";
-		resolucao += "temos que o coeficiente angular \\(a\\) é calculado por: \\(\\\\ \\)";
-		resolucao += "\\("+ResolucaoFuncaoAfim.resolucao(pontoAx, pontoAy, pontoBx, pontoBy)+"\\)";
-
 		addParagrafo("Encontre o coeficiente angular da reta:");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + a);
-		setResolucao( resolucao );
+
+		addResolucao("Dado os pontos \\( A=(" + pontoAx + "," + pontoAy + ") \\)  e "
+			+ "\\(B=(" + pontoBx + "," + pontoBy + ")\\), "
+			+ "temos que o coeficiente angular \\(a\\) é calculado por:");
+		for(String passo : ResolucaoFuncaoAfim.resolucao(pontoAx, pontoAy, pontoBx, pontoBy))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

@@ -20,9 +20,7 @@ public class Exercicio6 extends GeradorExercicio
 
 		String sinalMx0 = (m * x0) >= 0 ? " - " + (m * x0) : " + " + Math.abs(m * x0);
 
-		String res = "Isolando \\(b\\) na forma \\(y = mx + b\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(b = " + y0 + " - " + m + " \\cdot (" + x0 + ") = " + y0 + sinalMx0 + " = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+		addResolucao("Isolando \\(b\\) na forma \\(y = mx + b\\):");
+		addResolucao("\\(b = " + y0 + " - " + m + " \\cdot (" + x0 + ") = " + y0 + sinalMx0 + " = \\mathbf{" + b + "}\\)");
 	}
 }

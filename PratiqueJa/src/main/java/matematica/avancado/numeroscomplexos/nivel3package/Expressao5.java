@@ -76,11 +76,10 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("\\(z = " + zStr + "\\)");
 		embaralharEAdicionarAlternativas(correct, dist);
 
-		String res = "Calculamos o módulo: \\(\\\\\\)";
-		res += "\\(" + rExpl + "\\). \\(\\\\\\)";
-		res += "Determinamos o argumento \\(\\theta\\): \\(\\\\\\)";
-		res += angleExpl + ". \\(\\\\\\)";
-		res += "\\(z = \\mathbf{" + rStr + "\\left(\\cos " + thetaStr + "+i\\sin " + thetaStr + "\\right)}\\)";
-		setResolucao(res);
+		addResolucao("Calculamos o módulo:");
+		addResolucao("\\(" + rExpl + "\\).");
+		addResolucao("Determinamos o argumento \\(\\theta\\):");
+		addResolucao(angleExpl + ".");
+		addResolucao("\\(z = \\mathbf{" + rStr + "\\left(\\cos " + thetaStr + "+i\\sin " + thetaStr + "\\right)}\\)");
 	}
 }

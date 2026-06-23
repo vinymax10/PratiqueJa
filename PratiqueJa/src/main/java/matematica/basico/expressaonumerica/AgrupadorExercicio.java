@@ -118,7 +118,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		if(passoMulDiv != null)
 			res.append(" = \\\\& ").append(passoMulDiv);
 		res.append(" = ").append(result).append("\\end{aligned}\\)");
-		setResolucao(res.toString());
+		addResolucao(res.toString());
 	}
 
 	// Expressão com um par de parênteses: (a ± b) op c  — resolve o agrupador primeiro.
@@ -138,7 +138,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão numérica:");
 		addParagrafo("\\(" + enun + " = \\,?\\)");
 		gerarAlternativas("" + result);
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
 			inner + " " + opDisplay(op2) + " " + c + " = " + result + "\\end{aligned}\\)"
 		);
@@ -161,7 +161,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão numérica:");
 		addParagrafo("\\(" + enun + " = \\,?\\)");
 		gerarAlternativas("" + result);
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
 			sq + " " + op + " " + b + " + " + c + " = \\\\& " +
 			parcial + " + " + c + " = " + result + "\\end{aligned}\\)"
@@ -182,7 +182,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão numérica:");
 		addParagrafo("\\(" + enun + " = \\,?\\)");
 		gerarAlternativas("" + result);
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
 			"[" + s1 + " \\times " + c + "] " + op + " " + d + " = \\\\& " +
 			s2 + " " + op + " " + d + " = " + result + "\\end{aligned}\\)"

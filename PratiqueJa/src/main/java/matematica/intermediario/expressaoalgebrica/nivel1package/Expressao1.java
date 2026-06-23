@@ -72,9 +72,8 @@ public class Expressao1 extends GeradorExercicio
 		}
 
 		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
-		texto = "\\text{Para } x = " + coeficientes[posX] + ", \\\\ " + texto;
 
-		addParagrafo("Calcule o valor da expressão algébrica:");
+		addParagrafo("Calcule o valor da expressão algébrica para \\(x = " + coeficientes[posX] + "\\):");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado);
 
@@ -86,7 +85,7 @@ public class Expressao1 extends GeradorExercicio
 		for(String op : operadores)
 			if(op.equals("*") || op.equals("/")) { hasMulDiv = true; break; }
 
-		String res = "Substituindo \\(x = " + coeficientes[posX] + "\\) na expressão: \\(\\\\\\)";
+		addResolucao("Substituindo \\(x = " + coeficientes[posX] + "\\) na expressão:");
 		if(hasMulDiv)
 		{
 			StringBuilder inter = new StringBuilder();
@@ -102,14 +101,13 @@ public class Expressao1 extends GeradorExercicio
 				}
 			}
 			inter.append(running);
-			res += "\\(" + textoValores + " = \\\\ ";
-			res += "" + inter + " = " + resultado.toStringLatex() + "\\)";
+			addResolucao("\\(" + textoValores + " =\\)");
+			addResolucao("\\(" + inter + " = " + resultado.toStringLatex() + "\\)");
 		}
 		else
 		{
-			res += "\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)";
+			addResolucao("\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)");
 		}
-		setResolucao(res);
 	}
 
 	private String getCoeficiente(int index)

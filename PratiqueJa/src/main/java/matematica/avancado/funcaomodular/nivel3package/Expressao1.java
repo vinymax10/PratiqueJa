@@ -26,10 +26,9 @@ public class Expressao1 extends GeradorExercicio
 		dist.add("\\(" + (low - 1) + " < x < " + (high + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res  = "Regra: \\(|f(x)| < k \\Leftrightarrow -k < f(x) < k\\\\";
-		res += "-" + k + " < " + bStr + " < " + k + "\\) \\(\\\\\\)";
-		res += "Subtraindo \\(" + b + "\\) em todos os termos: \\(\\\\\\)";
-		res += "\\(\\mathbf{" + low + " < x < " + high + "}\\)";
-		setResolucao(res);
+		addResolucao("Regra: \\(|f(x)| < k \\Leftrightarrow -k < f(x) < k\\)");
+		addResolucao("\\(-" + k + " < " + bStr + " < " + k + "\\)");
+		addResolucao("Subtraindo \\(" + b + "\\) em todos os termos:");
+		addResolucao("\\(\\mathbf{" + low + " < x < " + high + "}\\)");
 	}
 }

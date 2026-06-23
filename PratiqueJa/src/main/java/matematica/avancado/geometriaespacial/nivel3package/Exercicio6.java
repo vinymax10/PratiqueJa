@@ -30,12 +30,10 @@ public class Exercicio6 extends GeradorExercicio
 		distratores.add("\\(" + (r * g) + "\\pi\\,\\text{cm}^3\\)");          // confusão com área lateral πrg
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "O triângulo gira em torno do cateto de \\(" + h
+		addResolucao("O triângulo gira em torno do cateto de \\(" + h
 				+ "\\,\\text{cm}\\), gerando um cone com \\(r = " + r
-				+ "\\,\\text{cm}\\) e \\(h = " + h + "\\,\\text{cm}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(V = \\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi \\cdot " + r + "^2 \\cdot " + h
-				+ "}{3} = \\dfrac{" + r2h + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+				+ "\\,\\text{cm}\\) e \\(h = " + h + "\\,\\text{cm}\\):");
+		addResolucao("\\(V = \\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi \\cdot " + r + "^2 \\cdot " + h
+				+ "}{3} = \\dfrac{" + r2h + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

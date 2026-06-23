@@ -19,7 +19,7 @@ public class Radiciacao3 extends GeradorExercicio
 			"" + a,
 			Arrays.asList("" + (a + 1), "" + (a * a), "" + (a - 1))
 		);
-		setResolucao(
+		addResolucao(
 			"\\(\\sqrt[4]{" + n + "} = \\sqrt[4]{" + a + "^4} = \\mathbf{" + a + "}\\)"
 		);
 	}

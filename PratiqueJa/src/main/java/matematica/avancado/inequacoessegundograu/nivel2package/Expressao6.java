@@ -47,25 +47,24 @@ public class Expressao6 extends GeradorExercicio
 
 		String maiorOuIgual = strict ? "maior que" : "maior ou igual a";
 
-		String res = "Sendo \\(x\\) um dos números, o outro é \\(" + k + "-x\\). O produto deve ser " + maiorOuIgual + " \\(" + A + "\\): \\(\\\\\\)";
-		res += "\\(x(" + k + "-x)" + sinalOriginal + A + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + k + "x-x^2" + sinalOriginal + A + "\\)" + "\\(\\\\\\)";
-		res += "\\(-x^2+" + k + "x-" + A + sinalOriginal + "0\\)" + "\\(\\\\\\)";
-		res += "Multiplicar por \\(-1\\) (inverter o sinal): \\(\\\\\\)";
-		res += "\\(" + eq + sinalInvertido + "0\\)" + "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)" + "\\(\\\\\\)";
-		res += "\\(x=\\dfrac{" + negB + "\\pm " + sqrtDelta + "}{2}\\)" + "\\(\\\\\\)";
-		res += "\\(x_1=\\dfrac{" + negB + "-" + sqrtDelta + "}{2}=" + r1
-				+ ", \\quad x_2=\\dfrac{" + negB + "+" + sqrtDelta + "}{2}=" + r2 + "\\)" + "\\(\\\\\\)";
-		res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinalInvertido + "0\\) entre as raízes. \\(\\\\\\)";
-		res += "\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)";
-
 		addParagrafo("A soma de dois números reais é \\(" + k + "\\). Determine os valores de \\(x\\) para os quais o produto dos dois números é " + maiorOuIgual + " \\(" + A + "\\).");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("Sendo \\(x\\) um dos números, o outro é \\(" + k + "-x\\). O produto deve ser " + maiorOuIgual + " \\(" + A + "\\):");
+		addResolucao("\\(x(" + k + "-x)" + sinalOriginal + A + "\\)");
+		addResolucao("\\(" + k + "x-x^2" + sinalOriginal + A + "\\)");
+		addResolucao("\\(-x^2+" + k + "x-" + A + sinalOriginal + "0\\)");
+		addResolucao("Multiplicar por \\(-1\\) (inverter o sinal):");
+		addResolucao("\\(" + eq + sinalInvertido + "0\\)");
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " =\\)"
+				+ "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)");
+		addResolucao("\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)");
+		addResolucao("\\(x=\\dfrac{" + negB + "\\pm " + sqrtDelta + "}{2}\\)");
+		addResolucao("\\(x_1=\\dfrac{" + negB + "-" + sqrtDelta + "}{2}=" + r1
+				+ ", \\quad x_2=\\dfrac{" + negB + "+" + sqrtDelta + "}{2}=" + r2 + "\\)");
+		addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinalInvertido + "0\\) entre as raízes.");
+		addResolucao("\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)");
 	}
 }

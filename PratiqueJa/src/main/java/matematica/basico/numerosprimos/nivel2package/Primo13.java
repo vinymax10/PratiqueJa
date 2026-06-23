@@ -26,6 +26,8 @@ public class Primo13 extends AgrupadorPrimo
 		addParagrafo("Qual é a soma dos fatores primos distintos de \\(" + n + "\\)?");
 		gerarAlternativasInteiras(soma);
 
-		setResolucao(resolucaoFatoracao(n) + " \\(\\\\\\) Fatores primos distintos somados: \\(" + lista + " = \\mathbf{" + soma + "}\\)");
+		for(String passo : resolucaoFatoracao(n))
+			addResolucao(passo);
+		addResolucao("Fatores primos distintos somados: \\(" + lista + " = \\mathbf{" + soma + "}\\)");
 	}
 }

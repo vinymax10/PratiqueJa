@@ -29,11 +29,9 @@ public class Image1 extends GeradorExercicio
 			+ "Determine \\(f(2)\\).");
 		addParagrafoImagem(image);
 
-		String res = "Do gráfico: \\(f(1) = " + base + " \\Rightarrow a = " + base + "\\). \\(\\\\\\)";
-		res += "Calculando \\(f(2)\\): \\(\\\\\\)";
-		res += "\\(f(2) = " + base + "^2 = \\mathbf{" + fDois + "}\\)";
-
 		gerarAlternativas("" + fDois);
-		setResolucao(res);
+		addResolucao("Do gráfico: \\(f(1) = " + base + " \\Rightarrow a = " + base + "\\).");
+		addResolucao("Calculando \\(f(2)\\):");
+		addResolucao("\\(f(2) = " + base + "^2 = \\mathbf{" + fDois + "}\\)");
 	}
 }

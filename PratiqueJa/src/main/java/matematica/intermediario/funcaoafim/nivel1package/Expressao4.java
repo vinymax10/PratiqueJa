@@ -17,31 +17,30 @@ public class Expressao4 extends GeradorExercicio
 
 		int menosB = -b; // = a * x0
 
-		String res = "O zero é o valor \\(x_0\\) tal que \\(f(x_0) = 0\\): \\(\\\\\\)";
-		res += "\\(" + funcao + " = 0\\) \\(\\\\\\)";
+		gerarAlternativas("" + x0);
+
+		addResolucao("O zero é o valor \\(x_0\\) tal que \\(f(x_0) = 0\\):");
+		addResolucao("\\(" + funcao + " = 0\\)");
 
 		if(a == 1)
 		{
-			res += "\\(x = \\mathbf{" + x0 + "}\\)";
+			addResolucao("\\(x = \\mathbf{" + x0 + "}\\)");
 		}
 		else if(a == -1)
 		{
-			res += "\\(-x = " + menosB + "\\\\";
-			res += "x = \\mathbf{" + x0 + "}\\)";
+			addResolucao("\\(-x = " + menosB + "\\)");
+			addResolucao("\\(x = \\mathbf{" + x0 + "}\\)");
 		}
 		else
 		{
-			res += "\\(" + a + "x = " + menosB + "\\) \\(\\\\\\)";
+			addResolucao("\\(" + a + "x = " + menosB + "\\)");
 			int num = menosB, den = a;
 			if(den < 0) { num = -num; den = -den; }
 			if(num < 0)
-				res += "\\(x = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + x0 + "}\\)";
+				addResolucao("\\(x = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + x0 + "}\\)");
 			else
-				res += "\\(x = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + x0 + "}\\)";
+				addResolucao("\\(x = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + x0 + "}\\)");
 		}
-
-		gerarAlternativas("" + x0);
-		setResolucao(res);
 	}
 
 	private static String afimStr(int a, int b)

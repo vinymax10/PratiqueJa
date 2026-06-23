@@ -15,8 +15,7 @@ public class MissingMinuendo extends GeradorExercicio
 
 		gerarAlternativasInteiras(a);
 
-		String res = "Para encontrar o minuendo desconhecido, somamos a diferença com o subtraendo: \\(\\\\\\)";
-		res += "\\(\\square = " + c + " + " + b + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("Para encontrar o minuendo desconhecido, somamos a diferença com o subtraendo:");
+		addResolucao("\\(\\square = " + c + " + " + b + " = \\mathbf{" + a + "}\\)");
 	}
 }

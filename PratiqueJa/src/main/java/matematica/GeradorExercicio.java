@@ -14,6 +14,8 @@ import infra.Graphics;
 import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ParagrafoExercicio;
+import modelo.exercicio.ParagrafoResolucao;
+import modelo.exercicio.ResolucaoSplitter;
 import modelo.questao.ImagemFile;
 
 /**
@@ -269,8 +271,12 @@ public abstract class GeradorExercicio
 	{
 		Exercicio gerado = folha.gerar();
 
-		if(gerado.getResolucao() != null)
-			exercicio.setResolucao(gerado.getResolucao());
+		for(ParagrafoResolucao paragrafo : gerado.getResolucaoParagrafos())
+		{
+			paragrafo.setExercicio(exercicio);
+			paragrafo.setOrdem(exercicio.getResolucaoParagrafos().size());
+			exercicio.getResolucaoParagrafos().add(paragrafo);
+		}
 
 		for(ParagrafoExercicio paragrafo : gerado.getParagrafos())
 		{
@@ -301,8 +307,44 @@ public abstract class GeradorExercicio
 		}
 	}
 
-	protected void setResolucao(String resolucao)
+	/**
+	 * Adiciona um passo de resolução (API preferida). O texto é fatiado em parágrafos de
+	 * forma robusta via {@link ResolucaoSplitter} — move "\\" de dentro de "\(...\)" para
+	 * o modo texto e preserva "\\" de matriz/array. Portanto é seguro passar uma linha OU
+	 * um trecho com várias linhas (ex.: helper que devolve passos com "\\").
+	 */
+	protected void addResolucao(String texto)
 	{
-		exercicio.setResolucao(resolucao);
+		if(texto == null)
+			return;
+		for(String linha : ResolucaoSplitter.split(texto))
+			addLinhaResolucao(linha, null);
+	}
+
+	/** Adiciona um passo de resolução com imagem (a partir de um {@link BufferedImage}). */
+	protected void addResolucaoImagem(BufferedImage imagem)
+	{
+		try
+		{
+			ByteArrayOutputStream baos = Graphics.salvar(imagem, false, "");
+			ImagemFile imagemFile = new ImagemFile();
+			imagemFile.setFile(new SerialBlob(baos.toByteArray()));
+			imagemFile.setEndImagem("resolucao.png");
+			addLinhaResolucao(null, imagemFile);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private void addLinhaResolucao(String texto, ImagemFile imagemFile)
+	{
+		ParagrafoResolucao paragrafo = new ParagrafoResolucao();
+		paragrafo.setOrdem(exercicio.getResolucaoParagrafos().size());
+		paragrafo.setTexto(texto);
+		paragrafo.setImagemFile(imagemFile);
+		paragrafo.setExercicio(exercicio);
+		exercicio.getResolucaoParagrafos().add(paragrafo);
 	}
 }

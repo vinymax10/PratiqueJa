@@ -231,7 +231,7 @@ public class GeradorGabaritoPdfService implements Serializable
 	private String macroGabarito(int num, Exercicio e, boolean comAlternativas)
 	{
 		String numStr = String.format("%02d", num);
-		String resolucao = e.getResolucao() != null ? escapar(e.getResolucao()) : "";
+		String resolucao = e.getResolucaoLatex() != null ? escapar(e.getResolucaoLatex()) : "";
 		AlternativaExercicio correta = comAlternativas ? e.correta() : null;
 
 		if (correta == null)

@@ -58,11 +58,10 @@ public class Exercicio5 extends GeradorExercicio
 		distratores.add("\\(" + dSemSub.showDfrac() + "\\)");     // somou sem subtrair interseção
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
-		String resolucao = "Usando a regra da soma \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\):\\(\\\\\\)";
-		resolucao += "\\(A =\\) carta de " + nomeNaipe + "\\(\\\\\\)";
-		resolucao += "\\(B =\\) carta é figura (J, Q ou K)\\(\\\\\\)";
-		resolucao += "\\(P(A) = \\dfrac{" + nNaipe + "}{52}, \\quad P(B) = \\dfrac{" + nFigura + "}{52}, \\quad P(A \\cap B) = \\dfrac{" + nIntersec + "}{52} \\\\";
-		resolucao += "P(A \\cup B) = \\dfrac{" + nNaipe + "}{52} + \\dfrac{" + nFigura + "}{52} - \\dfrac{" + nIntersec + "}{52} = \\dfrac{" + numFav + "}{52} = \\mathbf{" + res.showDfrac() + "}\\)";
-		setResolucao(resolucao);
+		addResolucao("Usando a regra da soma \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\):");
+		addResolucao("\\(A =\\) carta de " + nomeNaipe);
+		addResolucao("\\(B =\\) carta é figura (J, Q ou K)");
+		addResolucao("\\(P(A) = \\dfrac{" + nNaipe + "}{52}, \\quad P(B) = \\dfrac{" + nFigura + "}{52}, \\quad P(A \\cap B) = \\dfrac{" + nIntersec + "}{52}\\)");
+		addResolucao("\\(P(A \\cup B) = \\dfrac{" + nNaipe + "}{52} + \\dfrac{" + nFigura + "}{52} - \\dfrac{" + nIntersec + "}{52} = \\dfrac{" + numFav + "}{52} = \\mathbf{" + res.showDfrac() + "}\\)");
 	}
 }

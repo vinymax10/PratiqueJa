@@ -33,6 +33,7 @@ public class SinaisDiferentes extends GeradorExercicio
 		}
 
 		gerarAlternativasInteirasComNegativos(resultado);
-		setResolucao(ResolucaoASInteiro.soma(a, b));
+		for (String passo : ResolucaoASInteiro.soma(a, b))
+			addResolucao(passo);
 	}
 }

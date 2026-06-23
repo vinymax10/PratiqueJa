@@ -21,9 +21,8 @@ public class Expressao3 extends GeradorExercicio
 		dist.add("\\(x = -1\\)");
 		embaralharEAdicionarAlternativas("\\(x = 1\\)", dist);
 
-		String res = "O zero ocorre quando \\(f(x) = 0\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + a + "}(x) = 0 \\Leftrightarrow x = " + a + "^0 = \\mathbf{1}\\) \\(\\\\\\)";
-		res += "Toda função logarítmica passa pelo ponto \\((1,\\,0)\\).";
-		setResolucao(res);
+		addResolucao("O zero ocorre quando \\(f(x) = 0\\):");
+		addResolucao("\\(\\log_{" + a + "}(x) = 0 \\Leftrightarrow x = " + a + "^0 = \\mathbf{1}\\)");
+		addResolucao("Toda função logarítmica passa pelo ponto \\((1,\\,0)\\).");
 	}
 }

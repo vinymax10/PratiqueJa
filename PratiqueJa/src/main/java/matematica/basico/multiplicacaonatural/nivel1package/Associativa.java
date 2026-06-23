@@ -18,10 +18,9 @@ public class Associativa extends GeradorExercicio
 
 		gerarAlternativasInteiras(b);
 
-		String res = "Pela propriedade associativa, o agrupamento dos fatores não altera o produto: \\(\\\\\\)";
-		res += "\\((" + a + " \\times " + b + ") \\times " + c
-			+ " = " + a + " \\times (" + b + " \\times " + c + ")\\) \\(\\\\\\)";
-		res += "Portanto, \\(\\square = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade associativa, o agrupamento dos fatores não altera o produto:");
+		addResolucao("\\((" + a + " \\times " + b + ") \\times " + c
+			+ " = " + a + " \\times (" + b + " \\times " + c + ")\\)");
+		addResolucao("Portanto, \\(\\square = \\mathbf{" + b + "}\\)");
 	}
 }

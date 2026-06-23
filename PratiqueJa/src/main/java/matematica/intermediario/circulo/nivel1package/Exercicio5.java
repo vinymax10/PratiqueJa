@@ -21,19 +21,16 @@ public class Exercicio5 extends GeradorExercicio
 		int smallR = pair[1];
 		int k = pair[2];
 
-		String res = "\\(" + ResolucaoCirculo.formulaAreaCoroa() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\pi \\left(" + bigR + "^2 - " + smallR + "^2\\right) \\\\ ";
-		res += "A = \\pi \\left(" + (bigR * bigR) + " - " + (smallR * smallR) + "\\right) \\\\ ";
-		res += "A = \\mathbf{" + k + "}\\pi\\)";
-
 		ConfigCoroa config = new ConfigCoroa("" + bigR, "" + smallR);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área da coroa circular de raio externo \\(R=" + bigR + "\\) e raio interno \\(r=" + smallR + "\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativasPi(k);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaAreaCoroa() + "\\)");
+		addResolucao("\\(A = \\pi \\left(" + bigR + "^2 - " + smallR + "^2\\right)\\)");
+		addResolucao("\\(A = \\pi \\left(" + (bigR * bigR) + " - " + (smallR * smallR) + "\\right)\\)");
+		addResolucao("\\(A = \\mathbf{" + k + "}\\pi\\)");
 	}
 
 	private void gerarAlternativasPi(int k)

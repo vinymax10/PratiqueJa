@@ -23,10 +23,9 @@ public class Expressao3 extends GeradorExercicio
 		dist.add("\\(x < 1\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "Base \\(\\dfrac{1}{" + den + "} < 1\\): função \\(\\mathbf{decrescente}\\). \\(\\\\\\)";
-		res += "\\(f(x) > 0 \\Leftrightarrow \\log_{\\frac{1}{" + den + "}}(x) > 0 = \\log_{\\frac{1}{" + den + "}}(1)\\) \\(\\\\\\)";
-		res += "Como a função é decrescente, o sentido inverte: \\(x < 1\\). \\(\\\\\\)";
-		res += "Com o domínio \\((x > 0)\\): \\(\\mathbf{0 < x < 1}\\)";
-		setResolucao(res);
+		addResolucao("Base \\(\\dfrac{1}{" + den + "} < 1\\): função \\(\\mathbf{decrescente}\\).");
+		addResolucao("\\(f(x) > 0 \\Leftrightarrow \\log_{\\frac{1}{" + den + "}}(x) > 0 = \\log_{\\frac{1}{" + den + "}}(1)\\)");
+		addResolucao("Como a função é decrescente, o sentido inverte: \\(x < 1\\).");
+		addResolucao("Com o domínio \\((x > 0)\\): \\(\\mathbf{0 < x < 1}\\)");
 	}
 }

@@ -38,10 +38,9 @@ public class Exercicio6 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (q * q) + "}{" + (r * r) + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Com \\(\\cos\\alpha = \\dfrac{" + q + "}{" + r + "}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos^2\\!\\dfrac{\\alpha}{2} = \\dfrac{1 + \\dfrac{" + q + "}{" + r + "}}{2} = \\\\"
-				+ "\\dfrac{\\dfrac{" + r + " + " + q + "}{" + r + "}}{2} = "
+		addResolucao("Com \\(\\cos\\alpha = \\dfrac{" + q + "}{" + r + "}\\):");
+		addResolucao("\\(\\cos^2\\!\\dfrac{\\alpha}{2} = \\dfrac{1 + \\dfrac{" + q + "}{" + r + "}}{2} =\\)");
+		addResolucao("\\(\\dfrac{\\dfrac{" + r + " + " + q + "}{" + r + "}}{2} = "
 				+ "\\dfrac{" + (r + q) + "}{" + (2 * r) + "} = \\mathbf{\\dfrac{" + numRes + "}{" + denRes + "}}\\)");
 	}
 

@@ -131,6 +131,16 @@ public class AuxSemelhancaAngulos
 		}
 		return resolucaoLatex;
 	}
+
+	/**
+	 * Mesma resolucao de {@link #resolucao(String, Object)}, porem retornando cada
+	 * passo (separado por {@code \\} de topo) como um elemento, para que o chamador
+	 * faca um {@code addResolucao} por passo. O render permanece identico.
+	 */
+	public static String[] resolucaoLinhas(String instrucao, Object config)
+	{
+		return resolucao(instrucao, config).split("\\\\");
+	}
 	
 	public static void mostrarAngulos(String angleImage, Object config)
 	{

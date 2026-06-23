@@ -26,20 +26,12 @@ public class NotacaoCientifica3 extends GeradorExercicio
 		addParagrafo("Uma colônia de bactérias tem \\(5 \\times 10^{" + m + "}\\) bactérias.");
 		addParagrafo("A população dobra a cada hora. Após \\(" + k + "\\) horas, quantas bactérias há?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Calcular o fator de crescimento:" +
-			"\\(\\\\\\)" +
-			"\\(2^{" + k + "} = " + pot + "\\)" +
-			"\\(\\\\\\)" +
-			"Multiplicar pelo número inicial:" +
-			"\\(\\\\\\)" +
-			"\\(5 \\times " + pot + " = " + produto + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + produto + " \\times 10^{" + m + "}\\)" +
-			"\\(\\\\\\)" +
-			"Reajustar: \\(" + produto + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + r + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)"
-		);
+		addResolucao("Calcular o fator de crescimento:");
+		addResolucao("\\(2^{" + k + "} = " + pot + "\\)");
+		addResolucao("Multiplicar pelo número inicial:");
+		addResolucao("\\(5 \\times " + pot + " = " + produto + "\\)");
+		addResolucao("\\(" + produto + " \\times 10^{" + m + "}\\)");
+		addResolucao("Reajustar: \\(" + produto + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):");
+		addResolucao("\\(" + r + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)");
 	}
 }

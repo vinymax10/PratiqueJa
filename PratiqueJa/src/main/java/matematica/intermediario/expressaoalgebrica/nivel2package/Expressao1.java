@@ -52,9 +52,8 @@ public class Expressao1 extends GeradorExercicio
 				: coeficientes[1].numerador - coeficientes[2].numerador);
 		String gStr = g < 0 ? "\\left(" + g + "\\right)" : "" + g;
 		String step2 = coeficientes[0].numerador + " " + Algebra.converter(op1) + " " + gStr;
-		String res = "Substituindo na expressão: \\(\\\\\\)";
-		res += "\\(" + expSubs + " = \\\\ ";
-		res += "" + step2 + " = " + resultado.toStringLatex() + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo na expressão:");
+		addResolucao("\\(" + expSubs + " =\\)");
+		addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
 	}
 }

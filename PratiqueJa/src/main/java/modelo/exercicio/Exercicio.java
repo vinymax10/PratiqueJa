@@ -83,10 +83,10 @@ public class Exercicio implements Serializable, Entidade
 	@AuditLabel(value = "tamanho da fonte LaTeX")
 	protected String sizeFontTextLatex;
 
-	@Column(length = 1023)
-	@Size(max = 1023)
-	@AuditLabel(value = "resolução LaTeX", genero = GeneroGramatical.FEMININO)
-	protected String resolucao;
+	@DiffIgnore
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "exercicio")
+	@OrderBy("ordem")
+	private List<ParagrafoResolucao> resolucaoParagrafos = new ArrayList<ParagrafoResolucao>();
 
 	@Lob
 	protected Blob imagemResolucao;
@@ -151,6 +151,60 @@ public class Exercicio implements Serializable, Entidade
 				return "[imagem]";
 		}
 		return "";
+	}
+
+	// ── Resolução (lista de parágrafos; a String é apenas uma view legada) ──────
+
+	/** Linhas da resolução (texto de cada parágrafo não-vazio), na ordem. */
+	public List<String> getResolucaoLinhas()
+	{
+		List<String> linhas = new ArrayList<>();
+		for(ParagrafoResolucao paragrafo : resolucaoParagrafos)
+			if(paragrafo.getTexto() != null && !paragrafo.getTexto().isBlank())
+				linhas.add(paragrafo.getTexto());
+		return linhas;
+	}
+
+	/**
+	 * View LaTeX (modo texto) para os PDFs: junta os parágrafos com "\\" (quebra de linha
+	 * em modo texto). O "\\" fica entre segmentos "\(...\)", nunca dentro do math — por isso
+	 * é seguro (foi exatamente o bug que a migração para parágrafos corrigiu).
+	 */
+	public String getResolucaoLatex()
+	{
+		if(resolucaoParagrafos.isEmpty())
+			return null;
+		StringBuilder sb = new StringBuilder();
+		for(ParagrafoResolucao paragrafo : resolucaoParagrafos)
+		{
+			if(paragrafo.getTexto() == null)
+				continue;
+			if(sb.length() > 0)
+				sb.append(" \\\\ ");
+			sb.append(paragrafo.getTexto());
+		}
+		return sb.length() == 0 ? null : sb.toString();
+	}
+
+	/**
+	 * View para HTML/MathJax: junta os parágrafos com {@code <br/>} (cada parágrafo é um
+	 * segmento "\(...\)" ou texto). Nas telas web o "\\" não vira quebra visual, então a
+	 * quebra entre passos precisa ser HTML.
+	 */
+	public String getResolucaoHtml()
+	{
+		if(resolucaoParagrafos.isEmpty())
+			return null;
+		StringBuilder sb = new StringBuilder();
+		for(ParagrafoResolucao paragrafo : resolucaoParagrafos)
+		{
+			if(paragrafo.getTexto() == null || paragrafo.getTexto().isBlank())
+				continue;
+			if(sb.length() > 0)
+				sb.append("<br/>");
+			sb.append(paragrafo.getTexto());
+		}
+		return sb.length() == 0 ? null : sb.toString();
 	}
 
 }

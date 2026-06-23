@@ -17,18 +17,16 @@ public class MissingDividendo extends GeradorExercicio
 			addParagrafo("Uma divisão apresenta divisor \\(" + b + "\\) e quociente \\(" + q + "\\), sendo exata. Qual é o dividendo?");
 			gerarAlternativasInteiras(a);
 
-			String res = "Na divisão exata: dividendo \\(=\\) divisor \\(\\times\\) quociente. \\(\\\\\\)";
-			res += "\\(\\square = " + b + " \\times " + q + " = \\mathbf{" + a + "}\\)";
-			setResolucao(res);
+			addResolucao("Na divisão exata: dividendo \\(=\\) divisor \\(\\times\\) quociente.");
+			addResolucao("\\(\\square = " + b + " \\times " + q + " = \\mathbf{" + a + "}\\)");
 		}
 		else
 		{
 			addParagrafo("Uma divisão apresenta divisor \\(" + b + "\\), quociente \\(" + q + "\\) e resto \\(" + r + "\\). Qual é o dividendo?");
 			gerarAlternativasInteiras(a);
 
-			String res = "Pela relação fundamental da divisão: dividendo \\(=\\) divisor \\(\\times\\) quociente \\(+\\) resto. \\(\\\\\\)";
-			res += "\\(\\square = " + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)";
-			setResolucao(res);
+			addResolucao("Pela relação fundamental da divisão: dividendo \\(=\\) divisor \\(\\times\\) quociente \\(+\\) resto.");
+			addResolucao("\\(\\square = " + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)");
 		}
 	}
 }

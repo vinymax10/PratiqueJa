@@ -29,10 +29,9 @@ public class Expressao8 extends GeradorExercicio
 		String resCalc   = p + " \\cdot " + vavb + qPart;
 		String resCalc2  = pvavb + qPart;
 
-		String res = "Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\): \\(\\\\\\)";
-		res += "\\(" + resSubst + " = \\\\ ";
-		res += "" + resCalc + " = \\\\ ";
-		res += "" + resCalc2 + " = " + resultado + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\):");
+		addResolucao("\\(" + resSubst + " =\\)");
+		addResolucao("\\(" + resCalc + " =\\)");
+		addResolucao("\\(" + resCalc2 + " = " + resultado + "\\)");
 	}
 }

@@ -11,6 +11,7 @@ public abstract class ConfigValores
 	public Racional incognita;
 	protected Random rand = new Random();
 	public String resolucaoLatex;
+	public String[] resolucaoPassos;
 	String nome="";
 	public Racional resultado;
 	int aExp=0;

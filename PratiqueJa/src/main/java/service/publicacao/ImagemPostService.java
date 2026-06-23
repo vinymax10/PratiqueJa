@@ -65,10 +65,10 @@ public class ImagemPostService
 	public void gravarTeste(boolean feed, Diretorio diretorio, ConfigPost configPost) throws IOException
 	{
 		long id = configPost.getUsuario().getId();
-		String endBase = diretorio.getEndBackgroundServidor();
+		String endBase = diretorio.getConfig().getEndereco();
 		String endRel = feed
-			? "/background/" + id + "/teste/feed"
-			: "/background/" + id + "/teste/reel";
+			? "/images/background/" + id + "/teste/feed"
+			: "/images/background/" + id + "/teste/reel";
 
 		File theDir = new File(endBase + endRel);
 		if(!theDir.exists())

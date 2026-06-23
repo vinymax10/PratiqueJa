@@ -25,14 +25,11 @@ public class Exercicio7 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + q + "}{" + p + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}^2\\theta + \\left(\\dfrac{" + q + "}{" + r + "}\\right)^2 = 1 \\\\"
-				+ "\\operatorname{sen}^2\\theta + \\dfrac{" + qq + "}{" + rr + "} = 1 \\\\"
-				+ "\\operatorname{sen}^2\\theta = \\dfrac{" + pp + "}{" + rr + "}\\)"
-				+ " (\\(\\operatorname{sen}\\theta < 0\\) no 4.º quadrante)"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}\\,\\theta = \\mathbf{-\\dfrac{" + p + "}{" + r + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando a identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):");
+		addResolucao("\\(\\operatorname{sen}^2\\theta + \\left(\\dfrac{" + q + "}{" + r + "}\\right)^2 = 1\\)");
+		addResolucao("\\(\\operatorname{sen}^2\\theta + \\dfrac{" + qq + "}{" + rr + "} = 1\\)");
+		addResolucao("\\(\\operatorname{sen}^2\\theta = \\dfrac{" + pp + "}{" + rr + "}\\)"
+				+ " (\\(\\operatorname{sen}\\theta < 0\\) no 4.º quadrante)");
+		addResolucao("\\(\\operatorname{sen}\\,\\theta = \\mathbf{-\\dfrac{" + p + "}{" + r + "}}\\)");
 	}
 }

@@ -17,6 +17,7 @@ public class Divisao extends GeradorExercicio
 
 		addParagrafo("Calcule \\(" + aFmt + " \\div " + bFmt + "\\).");
 		gerarAlternativasInteirasComNegativos(q);
-		setResolucao(ResolucaoMDInteiro.divisao(a, b));
+		for(String passo : ResolucaoMDInteiro.divisao(a, b))
+			addResolucao(passo);
 	}
 }

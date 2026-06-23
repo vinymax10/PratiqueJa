@@ -28,10 +28,9 @@ public class Image1 extends GeradorExercicio
 		addParagrafoImagem(image);
 		addParagrafo("Com base no gráfico, quanto vale \\(f(" + base + ")\\)?");
 
-		String res = "De \\(f(" + x2 + ") = \\log_a(" + x2 + ") = 2\\) temos \\(a^2 = " + x2 + "\\), logo \\(a = " + base + "\\). \\(\\\\\\)";
-		res += "\\(f(" + base + ") = \\log_{" + base + "}(" + base + ") = \\mathbf{1}\\)";
+		addResolucao("De \\(f(" + x2 + ") = \\log_a(" + x2 + ") = 2\\) temos \\(a^2 = " + x2 + "\\), logo \\(a = " + base + "\\).");
+		addResolucao("\\(f(" + base + ") = \\log_{" + base + "}(" + base + ") = \\mathbf{1}\\)");
 
 		gerarAlternativas("1");
-		setResolucao(res);
 	}
 }

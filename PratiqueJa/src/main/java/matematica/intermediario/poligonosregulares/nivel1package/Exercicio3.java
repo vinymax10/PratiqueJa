@@ -21,16 +21,13 @@ public class Exercicio3 extends GeradorExercicio
 		int n = caso[0];
 		int ae = caso[1];
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaAnguloExterno() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha_e = \\dfrac{360^\\circ}{" + n + "} = \\mathbf{" + ae + "^\\circ}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual é a medida de cada ângulo externo de um polígono regular de \\(" + n + "\\) lados?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + ae);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaAnguloExterno() + "\\)");
+		addResolucao("\\(\\alpha_e = \\dfrac{360^\\circ}{" + n + "} = \\mathbf{" + ae + "^\\circ}\\)");
 	}
 }

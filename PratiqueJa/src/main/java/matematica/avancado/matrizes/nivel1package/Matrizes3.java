@@ -24,27 +24,28 @@ public class Matrizes3 extends GeradorExercicio
 
 		String resultadoCorreto = AuxMatriz.soma(b) + "";
 
-		String resolucao = "B=\\begin{bmatrix}";
+		String calc = "B=\\begin{bmatrix}";
 		for(int i = 0; i < lin; i++)
 		{
 			for(int j = 0; j < col; j++)
 			{
-				resolucao += escalar + " \\cdot " + AuxMatriz.parenteses(a[i][j]);
+				calc += escalar + " \\cdot " + AuxMatriz.parenteses(a[i][j]);
 
 				if(j < (col - 1))
-					resolucao += "&";
+					calc += "&";
 			}
-			resolucao += "\\\\";
+			calc += "\\\\";
 		}
-		resolucao += "\\end{bmatrix}" + "\\\\ \\\\";
-		resolucao += "B=" + AuxMatriz.matrizStr(b) + "\\\\ \\\\";
-		resolucao += AuxMatriz.somaStr(b);
+		calc += "\\end{bmatrix}";
 
 		String texto = "A=" + AuxMatriz.matrizStr(a);
 
 		addParagrafo("Se \\(" + escalar + " \\cdot A=B\\), qual a soma dos elementos de \\(B\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(" + calc + "\\)");
+		addResolucao("\\(B=" + AuxMatriz.matrizStr(b) + "\\)");
+		addResolucao("\\(" + AuxMatriz.somaStr(b) + "\\)");
 	}
 }

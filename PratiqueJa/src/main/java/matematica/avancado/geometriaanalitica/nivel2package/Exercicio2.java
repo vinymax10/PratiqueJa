@@ -23,10 +23,8 @@ public class Exercicio2 extends GeradorExercicio
 
 		gerarAlternativas(mPerp);
 
-		String res = "Retas perpendiculares satisfazem \\(m_1 \\cdot m_2 = -1\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(m_\\perp \\cdot " + m + " = -1\\\\"
-				+ "m_\\perp = \\dfrac{-1}{" + m + "} = \\mathbf{" + mPerp.showDfrac() + "}\\)";
-		setResolucao(res);
+		addResolucao("Retas perpendiculares satisfazem \\(m_1 \\cdot m_2 = -1\\):");
+		addResolucao("\\(m_\\perp \\cdot " + m + " = -1\\)");
+		addResolucao("\\(m_\\perp = \\dfrac{-1}{" + m + "} = \\mathbf{" + mPerp.showDfrac() + "}\\)");
 	}
 }

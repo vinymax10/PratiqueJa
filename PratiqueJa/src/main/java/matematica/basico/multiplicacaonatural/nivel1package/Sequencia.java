@@ -27,9 +27,8 @@ public class Sequencia extends GeradorExercicio
 
 		gerarAlternativasInteiras(missingValue);
 
-		String res = "A sequência é a tabuada do \\(" + n
-			+ "\\): cada termo aumenta \\(" + n + "\\) em relação ao anterior. \\(\\\\\\)";
-		res += "\\(" + prev + " + " + n + " = \\mathbf{" + missingValue + "}\\)";
-		setResolucao(res);
+		addResolucao("A sequência é a tabuada do \\(" + n
+			+ "\\): cada termo aumenta \\(" + n + "\\) em relação ao anterior.");
+		addResolucao("\\(" + prev + " + " + n + " = \\mathbf{" + missingValue + "}\\)");
 	}
 }

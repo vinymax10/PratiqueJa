@@ -49,11 +49,9 @@ public class Image23 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + a + "^\\circ\\)", distratores);
 
-		String res = "No triângulo isósceles, os dois ângulos da base são iguais. Pela soma dos ângulos internos:";
-		res += "\\(\\\\\\)";
-		res += "\\(x + x + " + b + "^\\circ = 180^\\circ \\\\";
-		res += "2x = 180^\\circ - " + b + "^\\circ = " + (180 - b) + "^\\circ \\\\";
-		res += "x = \\dfrac{" + (180 - b) + "^\\circ}{2} = \\mathbf{" + a + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("No triângulo isósceles, os dois ângulos da base são iguais. Pela soma dos ângulos internos:");
+		addResolucao("\\(x + x + " + b + "^\\circ = 180^\\circ\\)");
+		addResolucao("\\(2x = 180^\\circ - " + b + "^\\circ = " + (180 - b) + "^\\circ\\)");
+		addResolucao("\\(x = \\dfrac{" + (180 - b) + "^\\circ}{2} = \\mathbf{" + a + "^\\circ}\\)");
 	}
 }

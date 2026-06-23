@@ -14,7 +14,7 @@ public class Image2 extends GeradorExercicio
 		dados.bMaStr = "";
 
 		String resultadoCorreto = "" + dados.a;
-		String resolucao = ResolucaoConjuntos.menosA(dados);
+		String[] resolucao = ResolucaoConjuntos.menosA(dados);
 
 		ConfigAB config = new ConfigAB(dados);
 		BufferedImage image = config.criarImagem();
@@ -22,6 +22,7 @@ public class Image2 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(|A|\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao(resolucao);
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 }

@@ -21,18 +21,16 @@ public class Image17 extends GeradorExercicio
 		// NOTA: bug do original — pergunta pede "a" mas resultadoCorreto = b (preservado fielmente)
 		String resultadoCorreto = "" + b;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += "2 \\cdot a +" + b + "=" + perimetro + "\\\\";
-		resolucao += "2 \\cdot a=" + perimetro + "-" + b + "=" + (perimetro - b) + "\\\\";
-		resolucao += "a=\\dfrac{" + (perimetro - b) + "}{2}=" + a;
-
 		ConfigImagem config = new ConfigTrianguloIsosceles("" + b, "", "", "a", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do triângulo é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(2 \\cdot a +" + b + "=" + perimetro + "\\)");
+		addResolucao("\\(2 \\cdot a=" + perimetro + "-" + b + "=" + (perimetro - b) + "\\)");
+		addResolucao("\\(a=\\dfrac{" + (perimetro - b) + "}{2}=" + a + "\\)");
 	}
 }

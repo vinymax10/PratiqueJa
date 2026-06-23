@@ -28,27 +28,27 @@ public class PotenciaNegativo extends GeradorExercicio
 			distratores.add("\\(+" + (absResult - 1) + "\\)");
 			embaralharEAdicionarAlternativas("\\(+" + absResult + "\\) — pois o expoente é par", distratores);
 
-			String res = "Como o expoente \\(" + n + "\\) é par, o resultado é \\(\\mathbf{positivo}\\). \\(\\\\\\)";
-			res += "Expandindo: \\((-" + a + ")^{" + n + "} = ";
-			for (int i = 0; i < n; i++) { if (i > 0) res += " \\times "; res += "(-" + a + ")"; }
-			res += "\\) \\(\\\\\\)";
-			res += "\\(" + n + "\\) fatores negativos (par) → \\(+" + a + "^{" + n + "} = \\mathbf{+" + absResult + "}\\) \\(\\\\\\)";
-			res += "Atenção: \\(-" + a + "^{" + n + "} = -" + absResult + "\\) (o \\(-\\) fora do parêntese não eleva junto).";
-			setResolucao(res);
+			String expandido = "Expandindo: \\((-" + a + ")^{" + n + "} = ";
+			for (int i = 0; i < n; i++) { if (i > 0) expandido += " \\times "; expandido += "(-" + a + ")"; }
+			expandido += "\\)";
+			addResolucao("Como o expoente \\(" + n + "\\) é par, o resultado é \\(\\mathbf{positivo}\\).");
+			addResolucao(expandido);
+			addResolucao("\\(" + n + "\\) fatores negativos (par) → \\(+" + a + "^{" + n + "} = \\mathbf{+" + absResult + "}\\)");
+			addResolucao("Atenção: \\(-" + a + "^{" + n + "} = -" + absResult + "\\) (o \\(-\\) fora do parêntese não eleva junto).");
 		}
 		else
 		{
 			addParagrafo("Calcule \\((-" + a + ")^{" + n + "}\\).");
 			gerarAlternativasInteirasComNegativos(resultado);
 
-			String res = "Expandimos a potência como produto de \\(" + n + "\\) fatores: \\(\\\\\\)";
-			res += "\\((-" + a + ")^{" + n + "} = ";
-			for (int i = 0; i < n; i++) { if (i > 0) res += " \\times "; res += "(-" + a + ")"; }
-			res += "\\) \\(\\\\\\)";
-			res += "Há \\(" + n + "\\) fatores negativos ";
-			res += par ? "(par) → resultado \\(\\mathbf{positivo}\\). \\(\\\\\\)" : "(ímpar) → resultado \\(\\mathbf{negativo}\\). \\(\\\\\\)";
-			res += "\\(" + a + "^{" + n + "} = " + absResult + " \\to \\mathbf{" + (par ? "+" : "-") + absResult + "}\\)";
-			setResolucao(res);
+			String expandido = "\\((-" + a + ")^{" + n + "} = ";
+			for (int i = 0; i < n; i++) { if (i > 0) expandido += " \\times "; expandido += "(-" + a + ")"; }
+			expandido += "\\)";
+			addResolucao("Expandimos a potência como produto de \\(" + n + "\\) fatores:");
+			addResolucao(expandido);
+			addResolucao("Há \\(" + n + "\\) fatores negativos "
+				+ (par ? "(par) → resultado \\(\\mathbf{positivo}\\)." : "(ímpar) → resultado \\(\\mathbf{negativo}\\)."));
+			addResolucao("\\(" + a + "^{" + n + "} = " + absResult + " \\to \\mathbf{" + (par ? "+" : "-") + absResult + "}\\)");
 		}
 	}
 }

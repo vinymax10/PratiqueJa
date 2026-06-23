@@ -27,27 +27,25 @@ public class Exercicio1 extends GeradorExercicio
 				+ "\\), calcule \\((g \\circ f)(" + v + ")\\)");
 
 		// Resolução passo a passo
-		String res = "Pela definição, \\((g \\circ f)(" + v
-				+ ") = g(f(" + v + "))\\). Calculamos \\(f(" + v + ")\\) primeiro: \\(\\\\\\)";
+		addResolucao("Pela definição, \\((g \\circ f)(" + v
+				+ ") = g(f(" + v + "))\\). Calculamos \\(f(" + v + ")\\) primeiro:");
 
 		// Passo f(v)
 		if(af > 1)
-			res += "\\(f(" + v + ") = " + af + " \\cdot " + vStr + bLatex(bf)
-				+ " = " + (af * v) + bLatex(bf) + " = " + fv + "\\). \\(\\\\\\)";
+			addResolucao("\\(f(" + v + ") = " + af + " \\cdot " + vStr + bLatex(bf)
+				+ " = " + (af * v) + bLatex(bf) + " = " + fv + "\\).");
 		else
-			res += "\\(f(" + v + ") = " + vStr + bLatex(bf) + " = " + fv + "\\). \\(\\\\\\)";
+			addResolucao("\\(f(" + v + ") = " + vStr + bLatex(bf) + " = " + fv + "\\).");
 
 		// Passo g(f(v))
-		res += "Calculamos \\(g(f(" + v + ")) = g(" + fv + ")\\): \\(\\\\\\)";
+		addResolucao("Calculamos \\(g(f(" + v + ")) = g(" + fv + ")\\):");
 		if(ag > 1)
-			res += "\\(g(" + fv + ") = " + ag + " \\cdot " + fvStr + bLatex(bg)
-				+ " = " + (ag * fv) + bLatex(bg) + " = " + resultado + "\\). \\(\\\\\\)";
+			addResolucao("\\(g(" + fv + ") = " + ag + " \\cdot " + fvStr + bLatex(bg)
+				+ " = " + (ag * fv) + bLatex(bg) + " = " + resultado + "\\).");
 		else
-			res += "\\(g(" + fv + ") = " + fvStr + bLatex(bg) + " = " + resultado + "\\). \\(\\\\\\)";
+			addResolucao("\\(g(" + fv + ") = " + fvStr + bLatex(bg) + " = " + resultado + "\\).");
 
-		res += "Portanto, \\((g \\circ f)(" + v + ") = " + resultado + "\\).";
-
-		setResolucao(res);
+		addResolucao("Portanto, \\((g \\circ f)(" + v + ") = " + resultado + "\\).");
 		gerarAlternativas("" + resultado);
 	}
 

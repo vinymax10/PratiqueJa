@@ -14,13 +14,11 @@ public class Potenciacao2 extends GeradorExercicio
 
 		String texto = a + "^{" + p1 + "} \\cdot " + a + "^{" + p2 + "}=" + a + "^{x}";
 
-		String resolucao = a + "^{" + p1 + "+" + p2 + "}=" + a + "^{x}\\\\";
-		resolucao += a + "^{" + (p1 + p2) + "}=" + a + "^{x}\\\\";
-		resolucao += "x=" + (p1 + p2);
-
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + (p1 + p2));
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + a + "^{" + p1 + "+" + p2 + "}=" + a + "^{x}\\)");
+		addResolucao("\\(" + a + "^{" + (p1 + p2) + "}=" + a + "^{x}\\)");
+		addResolucao("\\(x=" + (p1 + p2) + "\\)");
 	}
 }

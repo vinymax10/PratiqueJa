@@ -63,6 +63,6 @@ public class Equacao1 extends GeradorExercicio
 		addParagrafo("Encontre \\(" + icognita + "\\)");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas("" + myExpression.getResultado().toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

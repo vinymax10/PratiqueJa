@@ -22,15 +22,13 @@ public class Expressao5 extends GeradorExercicio
 		String step1 = showEval(a, b, c, d, r);
 		String step2 = showPartial(a, b, c, d, r);
 
-		String res = "Pelo Teorema do Resto, o resto da divisão por \\((x - " + r
-				+ ")\\) é \\(p(" + r + ")\\):\\(\\\\\\)";
-		res += "\\(p(" + r + ") = " + step1 + " = \\\\ \\)";
-		res += "\\(" + step2 + " = \\mathbf{" + result + "}\\)";
-
 		addParagrafo("Qual o resto da divisão de \\(p(x)\\) por \\((x - " + r + ")\\)?");
 		addParagrafo("\\(p(x) = " + poly + "\\)");
 		gerarAlternativas("" + result);
-		setResolucao(res);
+		addResolucao("Pelo Teorema do Resto, o resto da divisão por \\((x - " + r
+				+ ")\\) é \\(p(" + r + ")\\):");
+		addResolucao("\\(p(" + r + ") = " + step1 + "\\)");
+		addResolucao("\\(" + step2 + " = \\mathbf{" + result + "}\\)");
 	}
 
 	private String showEval(int a, int b, int c, int d, int r)

@@ -15,9 +15,7 @@ public class SistemaMetrico18 extends MetricoBase
 		addParagrafo("Quantos segundos há em \\(" + min + "\\,\\text{min}\\;" + s + "\\,\\text{s}\\)?");
 		gerarAlternativasInteiras(total);
 
-		setResolucao(
-			"\\(1\\,\\text{min} = 60\\,\\text{s}\\). Convertendo os minutos e somando: \\(\\\\\\)" +
-			"\\(" + min + " \\times 60 + " + s + " = " + (min * 60) + " + " + s + " = \\mathbf{" + total + "}\\,\\text{s}\\)"
-		);
+		addResolucao("\\(1\\,\\text{min} = 60\\,\\text{s}\\). Convertendo os minutos e somando:");
+		addResolucao("\\(" + min + " \\times 60 + " + s + " = " + (min * 60) + " + " + s + " = \\mathbf{" + total + "}\\,\\text{s}\\)");
 	}
 }

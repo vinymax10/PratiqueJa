@@ -24,9 +24,7 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(0\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a propriedade \\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta = \\mathbf{\\dfrac{" + p + "}{" + r + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando a propriedade \\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta\\):");
+		addResolucao("\\(\\operatorname{sen}(180° - \\theta) = \\operatorname{sen}\\,\\theta = \\mathbf{\\dfrac{" + p + "}{" + r + "}}\\)");
 	}
 }

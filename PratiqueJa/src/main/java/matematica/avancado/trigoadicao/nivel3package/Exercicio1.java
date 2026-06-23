@@ -27,11 +27,9 @@ public class Exercicio1 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (q * q - p * p) + "}{" + rr + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q + "}{" + r + "}\\)."
-				+ "\\(\\\\\\)"
-				+ "Pela fórmula \\(\\operatorname{sen}(2\\alpha) = 2\\operatorname{sen}\\,\\alpha\\cos\\alpha\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(2\\alpha) = 2 \\cdot \\dfrac{" + p + "}{" + r + "} \\cdot \\left(-\\dfrac{" + q + "}{" + r
+		addResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q + "}{" + r + "}\\).");
+		addResolucao("Pela fórmula \\(\\operatorname{sen}(2\\alpha) = 2\\operatorname{sen}\\,\\alpha\\cos\\alpha\\):");
+		addResolucao("\\(\\operatorname{sen}(2\\alpha) = 2 \\cdot \\dfrac{" + p + "}{" + r + "} \\cdot \\left(-\\dfrac{" + q + "}{" + r
 				+ "}\\right) = \\mathbf{-\\dfrac{" + num + "}{" + rr + "}}\\)");
 	}
 }

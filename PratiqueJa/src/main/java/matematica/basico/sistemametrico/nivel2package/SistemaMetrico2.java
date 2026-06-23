@@ -27,11 +27,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (km * 1000000) + "\\,\\text{cm}\\)" // ×1000000 (para mm)
 				)
 			);
-			setResolucao(
-				"km para m (\\(\\times 1000\\)) e m para cm (\\(\\times 100\\)):" +
-				"\\(\\\\\\)" +
-				"\\(" + km + "\\,\\text{km} = " + (km * 1000) + "\\,\\text{m} = \\mathbf{" + cm + "}\\,\\text{cm}\\)"
-			);
+			addResolucao("km para m (\\(\\times 1000\\)) e m para cm (\\(\\times 100\\)):");
+			addResolucao("\\(" + km + "\\,\\text{km} = " + (km * 1000) + "\\,\\text{m} = \\mathbf{" + cm + "}\\,\\text{cm}\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -49,11 +46,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (mm * 10) + "\\,\\text{mm}\\)"
 				)
 			);
-			setResolucao(
-				"m para cm (\\(\\times 100\\)) e cm para mm (\\(\\times 10\\)), ou diretamente m para mm (\\(\\times 1000\\)):" +
-				"\\(\\\\\\)" +
-				"\\(" + m + " \\times 1000 = \\mathbf{" + mm + "}\\,\\text{mm}\\)"
-			);
+			addResolucao("m para cm (\\(\\times 100\\)) e cm para mm (\\(\\times 10\\)), ou diretamente m para mm (\\(\\times 1000\\)):");
+			addResolucao("\\(" + m + " \\times 1000 = \\mathbf{" + mm + "}\\,\\text{mm}\\)");
 		}
 		else
 		{
@@ -71,11 +65,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (intPart * 1000 + 50) + "\\,\\text{m}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{km} = 1000\\,\\text{m}\\); \\(0{,}5\\,\\text{km} = 500\\,\\text{m}\\); somar:" +
-				"\\(\\\\\\)" +
-				"\\(" + intPart + "{,}5 \\times 1000 = \\mathbf{" + m + "}\\,\\text{m}\\)"
-			);
+			addResolucao("\\(1\\,\\text{km} = 1000\\,\\text{m}\\); \\(0{,}5\\,\\text{km} = 500\\,\\text{m}\\); somar:");
+			addResolucao("\\(" + intPart + "{,}5 \\times 1000 = \\mathbf{" + m + "}\\,\\text{m}\\)");
 		}
 	}
 }

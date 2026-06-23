@@ -29,11 +29,8 @@ public class SistemaMetrico4 extends GeradorExercicio
 					"\\(0{,}0" + intPart + "\\,\\text{t}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{t} = 1000\\,\\text{kg}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + kg + " \\div 1000 = \\mathbf{" + tStr + "}\\,\\text{t}\\)"
-			);
+			addResolucao("\\(1\\,\\text{t} = 1000\\,\\text{kg}\\), logo dividir por 1000:");
+			addResolucao("\\(" + kg + " \\div 1000 = \\mathbf{" + tStr + "}\\,\\text{t}\\)");
 		}
 		else
 		{
@@ -53,11 +50,8 @@ public class SistemaMetrico4 extends GeradorExercicio
 					"\\(" + intPart + (meio ? "{,}05" : "{,}5") + "\\,\\text{kg}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + g + " \\div 1000 = \\mathbf{" + kgStr + "}\\,\\text{kg}\\)"
-			);
+			addResolucao("\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo dividir por 1000:");
+			addResolucao("\\(" + g + " \\div 1000 = \\mathbf{" + kgStr + "}\\,\\text{kg}\\)");
 		}
 	}
 }

@@ -27,11 +27,12 @@ public class Racionais1 extends GeradorExercicio
 		Racional resultado = aRacional.mult(bRacional);
 		resultado.fatoracao(2);
 
-		String resolucao = ResolucaoRacionais.Multiplicacao(a, b, c, d);
+		String[] resolucao = ResolucaoRacionais.Multiplicacao(a, b, c, d);
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

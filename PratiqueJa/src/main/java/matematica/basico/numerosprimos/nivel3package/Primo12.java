@@ -23,11 +23,17 @@ public class Primo12 extends AgrupadorPrimo
 		gerarAlternativasBoolean(coprimos);
 
 		if(coprimos)
-			setResolucao("São coprimos quando o MDC é \\(1\\). \\(\\\\\\) \\(\\text{MDC}(" + a + ",\\," + b + ") = 1\\): não compartilham fatores primos. \\(\\\\\\) Logo: \\(\\mathbf{Sim}\\).");
+		{
+			addResolucao("São coprimos quando o MDC é \\(1\\).");
+			addResolucao("\\(\\text{MDC}(" + a + ",\\," + b + ") = 1\\): não compartilham fatores primos.");
+			addResolucao("Logo: \\(\\mathbf{Sim}\\).");
+		}
 		else
 		{
 			int d = mdc(a, b);
-			setResolucao("São coprimos quando o MDC é \\(1\\). \\(\\\\\\) \\(\\text{MDC}(" + a + ",\\," + b + ") = " + d + " > 1\\): têm fator comum. \\(\\\\\\) Logo: \\(\\mathbf{Não}\\).");
+			addResolucao("São coprimos quando o MDC é \\(1\\).");
+			addResolucao("\\(\\text{MDC}(" + a + ",\\," + b + ") = " + d + " > 1\\): têm fator comum.");
+			addResolucao("Logo: \\(\\mathbf{Não}\\).");
 		}
 	}
 }

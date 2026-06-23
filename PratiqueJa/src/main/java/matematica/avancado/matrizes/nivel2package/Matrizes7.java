@@ -27,20 +27,19 @@ public class Matrizes7 extends GeradorExercicio
 		addParagrafo("\\(A = " + matDisplay + "\\)");
 		gerarAlternativas("" + xVal);
 
-		String res = "Matriz simétrica: \\(a_{i,j} = a_{j,i}\\) para todo \\(i, j\\). \\(\\\\\\)";
-		res += "Condição: \\(a_{1,2} = a_{2,1}\\): \\(\\\\\\)";
-		res += "\\(" + a12expr + " = " + dVal + "\\). \\(\\\\\\)";
+		addResolucao("Matriz simétrica: \\(a_{i,j} = a_{j,i}\\) para todo \\(i, j\\).");
+		addResolucao("Condição: \\(a_{1,2} = a_{2,1}\\):");
+		addResolucao("\\(" + a12expr + " = " + dVal + "\\).");
 		if (cst == 0)
 		{
-			res += "\\(" + coef + "x = " + dVal
-				+ " \\Rightarrow x = \\dfrac{" + dVal + "}{" + coef + "} = \\mathbf{" + xVal + "}\\)";
+			addResolucao("\\(" + coef + "x = " + dVal
+				+ " \\Rightarrow x = \\dfrac{" + dVal + "}{" + coef + "} = \\mathbf{" + xVal + "}\\)");
 		}
 		else
 		{
 			int rhs = dVal - cst;
-			res += "\\(" + coef + "x = " + dVal + " - " + cst + " = " + rhs
-				+ " \\Rightarrow x = \\dfrac{" + rhs + "}{" + coef + "} = \\mathbf{" + xVal + "}\\)";
+			addResolucao("\\(" + coef + "x = " + dVal + " - " + cst + " = " + rhs
+				+ " \\Rightarrow x = \\dfrac{" + rhs + "}{" + coef + "} = \\mathbf{" + xVal + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

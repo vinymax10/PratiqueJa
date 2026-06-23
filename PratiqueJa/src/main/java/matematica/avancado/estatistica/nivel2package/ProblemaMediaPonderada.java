@@ -50,7 +50,7 @@ public class ProblemaMediaPonderada
 		return s;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int numTotal = somaProdutos();
 		int denTotal = somaPesos();
@@ -69,16 +69,14 @@ public class ProblemaMediaPonderada
 			}
 		}
 
-		String res = "A média ponderada leva em conta o peso de cada valor:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\bar{x}_p = \\dfrac{x_1 w_1 + x_2 w_2 + \\cdots}{w_1 + w_2 + \\cdots}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Multiplicando cada valor pelo seu peso e dividindo pela soma dos pesos:";
-		res += "\\(\\\\\\)";
-		res += "\\(\\bar{x}_p = \\dfrac{" + num + "}{" + den + "} = \\\\ ";
-		res += "\\dfrac{" + numTotal + "}{" + denTotal + "} = \\mathbf{" + media + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A média ponderada leva em conta o peso de cada valor:",
+			"\\(" + ParCor.formula("\\bar{x}_p = \\dfrac{x_1 w_1 + x_2 w_2 + \\cdots}{w_1 + w_2 + \\cdots}") + "\\)",
+			"Multiplicando cada valor pelo seu peso e dividindo pela soma dos pesos:",
+			"\\(\\bar{x}_p = \\dfrac{" + num + "}{" + den + "} = \\\\ "
+				+ "\\dfrac{" + numTotal + "}{" + denTotal + "} = \\mathbf{" + media + "}\\)"
+		};
 	}
 
 	public String resultado()

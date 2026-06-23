@@ -7,8 +7,10 @@
 	<h:body >
 		<ui:composition>
 			    
-   			<p:fieldset id="reel" legend="Conteúdo Reel" styleClass="meu-fieldset-half" >
-   			
+   			<h:panelGroup id="reel" layout="block">
+
+   				<div class="pc-section-sub"><i class="pi pi-video" /> Conteúdo Reel</div>
+
    				<div class="formgrid grid">
 			    	<div class="col-12 xl:col-9">
 				    	<div class="ui-fluid formgrid grid">
@@ -119,9 +121,9 @@
 			            alt="#{image.nome}" 
 			            style="width: 80px; display: block;" cache="false" />
 			        </f:facet>
-			    </p:galleria>	
-		    		
-    		</p:fieldset>
+			    </p:galleria>
+
+    		</h:panelGroup>
 		</ui:composition>		
 	</h:body>
 </html>

@@ -16,16 +16,14 @@ public class Image21 extends GeradorExercicio
 		String perimetro = "" + (4 * l);
 		String resultadoCorreto = "" + l;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
-		resolucao += "4 \\cdot l=" + perimetro + "\\\\";
-		resolucao += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\\\";
-
 		ConfigQuadrado config = new ConfigQuadrado("l", "", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do quadrado é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
+		addResolucao("\\(4 \\cdot l=" + perimetro + "\\)");
+		addResolucao("\\(l=\\dfrac{" + perimetro + "}{4}=" + l + "\\)");
 	}
 }

@@ -15,13 +15,14 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 	{
 		int a = 1 + rand.nextInt(maxNum), b = 2 + rand.nextInt(maxDen - 1);
 		int c = 1 + rand.nextInt(maxNum), d = 2 + rand.nextInt(maxDen - 1);
-		String resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, true);
+		String[] resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, true);
 		Racional res = new Racional(a, b).add(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} + \\dfrac{" + c + "}{" + d + "} =\\)");
 		gerarAlternativas(res.toString());
-		setResolucao("\\(" + resol + "\\)");
+		for(String passo : resol)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
 	protected void subtracao(int maxNum, int maxDen)
@@ -33,39 +34,42 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 			c = 1 + rand.nextInt(maxNum); d = 2 + rand.nextInt(maxDen - 1);
 		}
 		while(a * d - c * b <= 0); // garante resultado positivo
-		String resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, false);
+		String[] resol = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, false);
 		Racional res = new Racional(a, b).minus(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} - \\dfrac{" + c + "}{" + d + "} =\\)");
 		gerarAlternativas(res.toString());
-		setResolucao("\\(" + resol + "\\)");
+		for(String passo : resol)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
 	protected void multiplicacao(int maxNum, int maxDen)
 	{
 		int a = 1 + rand.nextInt(maxNum), b = 2 + rand.nextInt(maxDen - 1);
 		int c = 1 + rand.nextInt(maxNum), d = 2 + rand.nextInt(maxDen - 1);
-		String resol = ResolucaoRacionais.Multiplicacao(a, b, c, d);
+		String[] resol = ResolucaoRacionais.Multiplicacao(a, b, c, d);
 		Racional res = new Racional(a, b).mult(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} \\times \\dfrac{" + c + "}{" + d + "} =\\)");
 		gerarAlternativas(res.toString());
-		setResolucao("\\(" + resol + "\\)");
+		for(String passo : resol)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
 	protected void divisao(int maxNum, int maxDen)
 	{
 		int a = 1 + rand.nextInt(maxNum), b = 2 + rand.nextInt(maxDen - 1);
 		int c = 1 + rand.nextInt(maxNum), d = 2 + rand.nextInt(maxDen - 1);
-		String resol = ResolucaoRacionais.divisao(a, b, c, d);
+		String[] resol = ResolucaoRacionais.divisao(a, b, c, d);
 		Racional res = new Racional(a, b).div(new Racional(c, d));
 		res.fatoracao(2);
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} \\div \\dfrac{" + c + "}{" + d + "} =\\)");
 		gerarAlternativas(res.toString());
-		setResolucao("\\(" + resol + "\\)");
+		for(String passo : resol)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
 	protected void simplificar()
@@ -80,11 +84,9 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("Simplifique a fração:");
 		addParagrafo("\\(\\dfrac{" + num + "}{" + den + "}\\)");
 		gerarAlternativas(res);
-		setResolucao(
-			"Dividimos numerador e denominador pelo MDC. \\(\\\\\\)" +
-			"\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\). \\(\\\\\\)" +
-			"\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{" + num + " \\div " + mdc + "}{" + den + " \\div " + mdc + "} = " + res.showDfrac() + "\\)"
-		);
+		addResolucao("Dividimos numerador e denominador pelo MDC.");
+		addResolucao("\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\).");
+		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{" + num + " \\div " + mdc + "}{" + den + " \\div " + mdc + "} = " + res.showDfrac() + "\\)");
 	}
 
 	protected void equivalente()
@@ -96,11 +98,9 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("Encontre o numerador que completa a fração equivalente:");
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{\\,?\\,}{" + denDest + "}\\)");
 		gerarAlternativasInteiras(numDest);
-		setResolucao(
-			"Para obter denominador \\(" + denDest + "\\) a partir de \\(" + b + "\\), multiplicamos por \\(" + k + "\\). \\(\\\\\\)" +
-			"Aplicamos o mesmo fator ao numerador: \\(\\\\\\)" +
-			"\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{" + b + " \\times " + k + "} = \\dfrac{" + numDest + "}{" + denDest + "}\\)"
-		);
+		addResolucao("Para obter denominador \\(" + denDest + "\\) a partir de \\(" + b + "\\), multiplicamos por \\(" + k + "\\).");
+		addResolucao("Aplicamos o mesmo fator ao numerador:");
+		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{" + b + " \\times " + k + "} = \\dfrac{" + numDest + "}{" + denDest + "}\\)");
 	}
 
 	protected void mistaParaImpropria()
@@ -112,10 +112,8 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("Converta a fração mista em fração imprópria:");
 		addParagrafo("\\(" + n + "\\dfrac{" + r + "}{" + d + "}\\)");
 		gerarAlternativas(new Racional(num, d).toString());
-		setResolucao(
-			"Multiplicamos a parte inteira pelo denominador e somamos o numerador. \\(\\\\\\)" +
-			"\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d + " + " + r + "}{" + d + "} = \\dfrac{" + num + "}{" + d + "}\\)"
-		);
+		addResolucao("Multiplicamos a parte inteira pelo denominador e somamos o numerador.");
+		addResolucao("\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d + " + " + r + "}{" + d + "} = \\dfrac{" + num + "}{" + d + "}\\)");
 	}
 
 	protected void impropriaParaMista()
@@ -132,11 +130,9 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("Escreva a fração imprópria como número misto:");
 		addParagrafo("\\(\\dfrac{" + num + "}{" + d + "}\\)");
 		embaralharEAdicionarAlternativas("\\(" + correta + "\\)", distratores);
-		setResolucao(
-			"Dividimos o numerador pelo denominador: o quociente é a parte inteira e o resto é o novo numerador. \\(\\\\\\)" +
-			"\\(" + num + " \\div " + d + " = " + q + "\\) resto \\(" + r + "\\). \\(\\\\\\)" +
-			"\\(\\dfrac{" + num + "}{" + d + "} = " + correta + "\\)"
-		);
+		addResolucao("Dividimos o numerador pelo denominador: o quociente é a parte inteira e o resto é o novo numerador.");
+		addResolucao("\\(" + num + " \\div " + d + " = " + q + "\\) resto \\(" + r + "\\).");
+		addResolucao("\\(\\dfrac{" + num + "}{" + d + "} = " + correta + "\\)");
 	}
 
 	protected void comparar()
@@ -162,7 +158,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		String corretaFrac = "\\(\\dfrac{" + maior[0] + "}{" + maior[1] + "}\\)";
 		addParagrafo("Qual das frações " + listarOpcoes(corretaFrac, distratores) + " é a maior?");
 		embaralharEAdicionarAlternativas(corretaFrac, distratores);
-		setResolucao(
+		addResolucao(
 			"Reduzindo as frações ao mesmo denominador (ou comparando seus valores decimais), " +
 			"a maior é \\(\\mathbf{\\dfrac{" + maior[0] + "}{" + maior[1] + "}}\\)."
 		);
@@ -179,10 +175,8 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} =\\)");
 		gerarAlternativas(res.toString());
-		setResolucao(
-			"Elevamos numerador e denominador ao expoente: \\(\\\\\\)" +
-			"\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} = \\dfrac{" + a + "^{" + n + "}}{" + b + "^{" + n + "}} = \\dfrac{" + num + "}{" + den + "}\\)"
-		);
+		addResolucao("Elevamos numerador e denominador ao expoente:");
+		addResolucao("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} = \\dfrac{" + a + "^{" + n + "}}{" + b + "^{" + n + "}} = \\dfrac{" + num + "}{" + den + "}\\)");
 	}
 
 	protected void fracaoDeQuantidade()
@@ -194,10 +188,8 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		int resultado = p * mult;
 		addParagrafo("Quanto é \\(\\dfrac{" + p + "}{" + q + "}\\) de \\(" + total + "\\)?");
 		gerarAlternativasInteiras(resultado);
-		setResolucao(
-			"Multiplicamos a fração pelo total: \\(\\\\\\)" +
-			"\\(\\dfrac{" + p + "}{" + q + "} \\times " + total + " = \\dfrac{" + p + " \\times " + total + "}{" + q + "} = \\dfrac{" + (p * total) + "}{" + q + "} = \\mathbf{" + resultado + "}\\)"
-		);
+		addResolucao("Multiplicamos a fração pelo total:");
+		addResolucao("\\(\\dfrac{" + p + "}{" + q + "} \\times " + total + " = \\dfrac{" + p + " \\times " + total + "}{" + q + "} = \\dfrac{" + (p * total) + "}{" + q + "} = \\mathbf{" + resultado + "}\\)");
 	}
 
 	private static long pow(int base, int exp)

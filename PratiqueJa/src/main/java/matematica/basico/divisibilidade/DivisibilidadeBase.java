@@ -27,10 +27,8 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 
 		addParagrafo("Qual dos números " + listarOpcoes("\\(" + correto + "\\)", erradas) + " é divisível por \\(" + d + "\\)?");
 		embaralharEAdicionarAlternativas("\\(" + correto + "\\)", erradas);
-		setResolucao(
-			"\\(" + correto + " \\div " + d + " = " + (correto / d) + "\\) (resto \\(0\\)), logo \\(" + correto + "\\) é divisível por \\(" + d + "\\). " +
-			"\\(\\\\\\) Os demais deixam resto diferente de zero."
-		);
+		addResolucao("\\(" + correto + " \\div " + d + " = " + (correto / d) + "\\) (resto \\(0\\)), logo \\(" + correto + "\\) é divisível por \\(" + d + "\\).");
+		addResolucao("Os demais deixam resto diferente de zero.");
 	}
 
 	// "Qual dos números abaixo NÃO é divisível por d?"
@@ -50,10 +48,8 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 
 		addParagrafo("Qual dos números " + listarOpcoes("\\(" + correto + "\\)", erradas) + " NÃO é divisível por \\(" + d + "\\)?");
 		embaralharEAdicionarAlternativas("\\(" + correto + "\\)", erradas);
-		setResolucao(
-			"\\(" + correto + " \\div " + d + " = " + (correto / d) + "\\) com resto \\(" + (correto % d) + "\\), logo \\(" + correto + "\\) não é divisível por \\(" + d + "\\). " +
-			"\\(\\\\\\) Os demais são divisíveis (resto \\(0\\))."
-		);
+		addResolucao("\\(" + correto + " \\div " + d + " = " + (correto / d) + "\\) com resto \\(" + (correto % d) + "\\), logo \\(" + correto + "\\) não é divisível por \\(" + d + "\\).");
+		addResolucao("Os demais são divisíveis (resto \\(0\\)).");
 	}
 
 	// "Qual é o resto da divisão de N por d?"
@@ -64,7 +60,7 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 
 		addParagrafo("Qual é o resto da divisão de \\(" + n + "\\) por \\(" + d + "\\)?");
 		gerarAlternativasInteiras(r);
-		setResolucao("\\(" + n + " = " + d + " \\times " + (n / d) + " + " + r + "\\), logo o resto é \\(\\mathbf{" + r + "}\\).");
+		addResolucao("\\(" + n + " = " + d + " \\times " + (n / d) + " + " + r + "\\), logo o resto é \\(\\mathbf{" + r + "}\\).");
 	}
 
 	// "d é divisor de N?" (Sim/Não), N de 3 dígitos
@@ -80,9 +76,9 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 		addParagrafo("\\(" + d + "\\) é divisor de \\(" + n + "\\)?");
 		gerarAlternativasBoolean(div);
 		if(div)
-			setResolucao("\\(" + n + " \\div " + d + " = " + (n / d) + "\\) (resto \\(0\\)), logo \\(" + d + "\\) é divisor de \\(" + n + "\\): \\(\\mathbf{Sim}\\).");
+			addResolucao("\\(" + n + " \\div " + d + " = " + (n / d) + "\\) (resto \\(0\\)), logo \\(" + d + "\\) é divisor de \\(" + n + "\\): \\(\\mathbf{Sim}\\).");
 		else
-			setResolucao("\\(" + n + " \\div " + d + "\\) deixa resto \\(" + (n % d) + "\\), logo \\(" + d + "\\) não é divisor: \\(\\mathbf{Não}\\).");
+			addResolucao("\\(" + n + " \\div " + d + "\\) deixa resto \\(" + (n % d) + "\\), logo \\(" + d + "\\) não é divisor: \\(\\mathbf{Não}\\).");
 	}
 
 	// "N é divisível por d?" (Sim/Não), N de 3 dígitos — resolução por divisão direta
@@ -98,9 +94,9 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 		addParagrafo(n + " é divisível por " + d + "?");
 		gerarAlternativasBoolean(div);
 		if(div)
-			setResolucao("\\(" + n + " \\div " + d + " = " + (n / d) + "\\) (resto \\(0\\)), logo é divisível por \\(" + d + "\\).");
+			addResolucao("\\(" + n + " \\div " + d + " = " + (n / d) + "\\) (resto \\(0\\)), logo é divisível por \\(" + d + "\\).");
 		else
-			setResolucao("\\(" + n + " \\div " + d + "\\) deixa resto \\(" + (n % d) + "\\), logo não é divisível por \\(" + d + "\\).");
+			addResolucao("\\(" + n + " \\div " + d + "\\) deixa resto \\(" + (n % d) + "\\), logo não é divisível por \\(" + d + "\\).");
 	}
 
 	// "N é divisível por 11?" — regra da soma alternada dos algarismos
@@ -128,9 +124,8 @@ public abstract class DivisibilidadeBase extends GeradorExercicio
 
 		addParagrafo(n + " é divisível por 11?");
 		gerarAlternativasBoolean(div);
-		String res = "A soma alternada dos algarismos é \\(" + sb + " = " + soma + "\\). \\(\\\\\\) ";
-		if(div) res += "Como \\(" + soma + "\\) é múltiplo de 11 (ou \\(0\\)), \\(" + n + "\\) é divisível por 11.";
-		else res += "Como \\(" + soma + "\\) não é múltiplo de 11, \\(" + n + "\\) não é divisível por 11.";
-		setResolucao(res);
+		addResolucao("A soma alternada dos algarismos é \\(" + sb + " = " + soma + "\\).");
+		if(div) addResolucao("Como \\(" + soma + "\\) é múltiplo de 11 (ou \\(0\\)), \\(" + n + "\\) é divisível por 11.");
+		else addResolucao("Como \\(" + soma + "\\) não é múltiplo de 11, \\(" + n + "\\) não é divisível por 11.");
 	}
 }

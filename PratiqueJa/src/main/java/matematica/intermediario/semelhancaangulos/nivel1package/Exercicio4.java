@@ -39,11 +39,9 @@ public class Exercicio4 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + beta + "^\\circ\\)", distratores);
 
-		String res = "Ângulos complementares têm soma igual a \\(90^\\circ\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha + \\beta = 90^\\circ \\\\";
-		res += alpha + "^\\circ + \\beta = 90^\\circ \\\\";
-		res += "\\beta = 90^\\circ - " + alpha + "^\\circ = \\mathbf{" + beta + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("Ângulos complementares têm soma igual a \\(90^\\circ\\):");
+		addResolucao("\\(\\alpha + \\beta = 90^\\circ\\)");
+		addResolucao("\\(" + alpha + "^\\circ + \\beta = 90^\\circ\\)");
+		addResolucao("\\(\\beta = 90^\\circ - " + alpha + "^\\circ = \\mathbf{" + beta + "^\\circ}\\)");
 	}
 }

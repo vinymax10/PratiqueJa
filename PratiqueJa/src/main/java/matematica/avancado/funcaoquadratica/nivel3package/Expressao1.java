@@ -34,29 +34,26 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Usando as relações de Vieta, determine " + pergunta
 			+ " de \\(f(x) = " + funcao + "\\)");
 
-		String bDisp = b < 0 ? "(-" + (-b) + ")" : "" + b;
-
-		String res;
+		gerarAlternativas(resultado);
 		if(pedirSoma)
 		{
-			res = "Pela relação de Vieta: \\(x_1 + x_2 = \\dfrac{-b}{a}\\\\";
-			res += "a = " + a + ", \\quad b = " + b + "\\\\";
-			res += "x_1 + x_2 = \\dfrac{-(" + b + ")}{" + a + "} = \\dfrac{" + (-b) + "}{" + a + "}";
+			addResolucao("Pela relação de Vieta: \\(x_1 + x_2 = \\dfrac{-b}{a}\\)");
+			addResolucao("\\(a = " + a + ", \\quad b = " + b + "\\)");
+			String passoFinal = "\\(x_1 + x_2 = \\dfrac{-(" + b + ")}{" + a + "} = \\dfrac{" + (-b) + "}{" + a + "}";
 			if(resultado.denominador != 1)
-				res += " = " + resultado.showDfrac();
-			res += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+				passoFinal += " = " + resultado.showDfrac();
+			passoFinal += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+			addResolucao(passoFinal);
 		}
 		else
 		{
-			res = "Pela relação de Vieta: \\(x_1 \\cdot x_2 = \\dfrac{c}{a}\\\\";
-			res += "a = " + a + ", \\quad c = " + c + "\\\\";
-			res += "x_1 \\cdot x_2 = \\dfrac{" + c + "}{" + a + "}";
+			addResolucao("Pela relação de Vieta: \\(x_1 \\cdot x_2 = \\dfrac{c}{a}\\)");
+			addResolucao("\\(a = " + a + ", \\quad c = " + c + "\\)");
+			String passoFinal = "\\(x_1 \\cdot x_2 = \\dfrac{" + c + "}{" + a + "}";
 			if(resultado.denominador != 1)
-				res += " = " + resultado.showDfrac();
-			res += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+				passoFinal += " = " + resultado.showDfrac();
+			passoFinal += " = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+			addResolucao(passoFinal);
 		}
-
-		gerarAlternativas(resultado);
-		setResolucao(res);
 	}
 }

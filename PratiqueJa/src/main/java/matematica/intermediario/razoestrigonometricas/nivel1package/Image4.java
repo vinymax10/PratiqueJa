@@ -28,6 +28,6 @@ public class Image4 extends GeradorExercicio
 		addParagrafo("Qual o \\(sen~" + angle + "\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

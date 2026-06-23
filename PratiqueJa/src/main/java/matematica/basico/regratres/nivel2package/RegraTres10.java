@@ -26,9 +26,8 @@ public class RegraTres10 extends GeradorExercicio
 		addParagrafo(texto);
 		gerarAlternativas("" + original);
 
-		String res = "O preço com desconto corresponde a \\((100 - " + p + ")\\% = " + (100 - p) + "\\%\\) do original. \\(\\\\\\)";
-		res += "Logo, isolando o valor original: \\(\\\\\\)";
-		res += "\\(V = \\dfrac{" + precoFinal + " \\times 100}{" + (100 - p) + "} = \\dfrac{" + (precoFinal * 100) + "}{" + (100 - p) + "} = \\mathbf{" + original + "}\\)";
-		setResolucao(res);
+		addResolucao("O preço com desconto corresponde a \\((100 - " + p + ")\\% = " + (100 - p) + "\\%\\) do original.");
+		addResolucao("Logo, isolando o valor original:");
+		addResolucao("\\(V = \\dfrac{" + precoFinal + " \\times 100}{" + (100 - p) + "} = \\dfrac{" + (precoFinal * 100) + "}{" + (100 - p) + "} = \\mathbf{" + original + "}\\)");
 	}
 }

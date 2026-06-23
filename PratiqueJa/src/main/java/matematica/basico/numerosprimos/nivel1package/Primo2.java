@@ -25,10 +25,7 @@ public class Primo2 extends AgrupadorPrimo
 		addParagrafo("Quantos divisores tem o número \\(" + n + "\\)?");
 		gerarAlternativasInteiras(contDiv);
 
-		setResolucao(
-			"Divisores de \\(" + n + "\\): \\(\\{" + divStr + "\\}\\). " +
-			"\\(\\\\\\) " +
-			"Total: \\(\\mathbf{" + contDiv + "}\\) divisores."
-		);
+		addResolucao("Divisores de \\(" + n + "\\): \\(\\{" + divStr + "\\}\\).");
+		addResolucao("Total: \\(\\mathbf{" + contDiv + "}\\) divisores.");
 	}
 }

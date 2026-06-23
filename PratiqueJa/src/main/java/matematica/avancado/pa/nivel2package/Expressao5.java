@@ -22,12 +22,11 @@ public class Expressao5 extends GeradorExercicio
 				+ "\\), qual é a razão da PA resultante?");
 		gerarAlternativas("" + rVal);
 
-		String res = "A PA resultante tem \\(" + n + "\\) termos, com \\(" + aVal + "\\) no início e \\("
-				+ b.showDfrac() + "\\) no final. \\(\\\\\\)";
-		res += "Fórmula da interpolação aritmética: \\(\\\\\\)";
-		res += "\\(r = \\dfrac{b - a}{k + 1} \\\\";
-		res += "r = \\dfrac{" + b.showDfrac() + " - " + aVal + "}{" + k + " + 1} \\\\";
-		res += "r = \\dfrac{" + diff + "}{" + (k + 1) + "} = \\mathbf{" + rVal + "}\\)";
-		setResolucao(res);
+		addResolucao("A PA resultante tem \\(" + n + "\\) termos, com \\(" + aVal + "\\) no início e \\("
+				+ b.showDfrac() + "\\) no final.");
+		addResolucao("Fórmula da interpolação aritmética:");
+		addResolucao("\\(r = \\dfrac{b - a}{k + 1}\\)");
+		addResolucao("\\(r = \\dfrac{" + b.showDfrac() + " - " + aVal + "}{" + k + " + 1}\\)");
+		addResolucao("\\(r = \\dfrac{" + diff + "}{" + (k + 1) + "} = \\mathbf{" + rVal + "}\\)");
 	}
 }

@@ -26,6 +26,6 @@ public class MmcMdc12 extends GeradorExercicio
 
 		addParagrafo("Qual é o maior número que divide \\(" + a + "\\), \\(" + b + "\\) e \\(" + c + "\\) ao mesmo tempo?");
 		gerarAlternativasInteiras((int) MMC.mdc(a, b, c));
-		setResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b, c) + "\\)");
+		addResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b, c) + "\\)");
 	}
 }

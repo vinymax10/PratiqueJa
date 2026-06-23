@@ -27,19 +27,21 @@ public class ResolucaoDizima
 		return resultadoCorreto;
 	}
 
-	public static String resolucao(String strInteira, String strNaoPeriodica, String strPeriodica)
+	public static String[] resolucao(String strInteira, String strNaoPeriodica, String strPeriodica)
 	{
-		String resolucaoLatex = formula()+"\\\\";
+		java.util.List<String> passos = new java.util.ArrayList<>();
+
+		passos.add("\\(" + formula() + "\\)");
 
 		String valorLatex = textLatex(strInteira, strNaoPeriodica, strPeriodica);
 
 		int n = strNaoPeriodica.length();
 		int p = strPeriodica.length();
 
-		resolucaoLatex +="n="+n+",\\quad p="+p+"\\\\";
-		
-		resolucaoLatex += "\\dfrac{" + valorLatex + "\\cdot 10^{" + (n + p) + "} - " + valorLatex + "\\cdot 10^{" + n
-		+ "}}" + "{10^{" + (n + p) + "}-10^{" + n + "}}= \\\\";
+		passos.add("\\(n=" + n + ",\\quad p=" + p + "\\)");
+
+		passos.add("\\(\\dfrac{" + valorLatex + "\\cdot 10^{" + (n + p) + "} - " + valorLatex + "\\cdot 10^{" + n
+		+ "}}" + "{10^{" + (n + p) + "}-10^{" + n + "}}= \\)");
 
 		String primeiroTermoNumerador = strInteira + strNaoPeriodica + strPeriodica + "," + strPeriodica + strPeriodica
 		+ "\\ldots";
@@ -48,45 +50,49 @@ public class ResolucaoDizima
 
 		int primeiroTermoDenominador = (int) Math.pow(10, (n + p));
 		int segundoTermoDenominador = (int) Math.pow(10, n);
-		
-		resolucaoLatex += "\\dfrac{" + valorLatex + "\\cdot "+primeiroTermoDenominador
-				+" - " + valorLatex + "\\cdot "+segundoTermoDenominador+"}" 
-				+ "{"+ primeiroTermoDenominador + "-" + segundoTermoDenominador +"}= \\\\";
-		
-		resolucaoLatex += "\\dfrac{" + primeiroTermoNumerador + "-" + segundoTermoNumerador + "}" + "{"
-		+ primeiroTermoDenominador + "-" + segundoTermoDenominador + "}=\\\\";
-		
-		resolucaoLatex += "\\dfrac{" + 
-		Integer.valueOf(strInteira + strNaoPeriodica + strPeriodica) 
-		+ "-" + Integer.valueOf(strInteira + strNaoPeriodica) + "}" 
-		+ "{"+ primeiroTermoDenominador + "-" + segundoTermoDenominador + "}=";
+
+		passos.add("\\(\\dfrac{" + valorLatex + "\\cdot " + primeiroTermoDenominador
+				+ " - " + valorLatex + "\\cdot " + segundoTermoDenominador + "}"
+				+ "{" + primeiroTermoDenominador + "-" + segundoTermoDenominador + "}= \\)");
+
+		passos.add("\\(\\dfrac{" + primeiroTermoNumerador + "-" + segundoTermoNumerador + "}" + "{"
+		+ primeiroTermoDenominador + "-" + segundoTermoDenominador + "}=\\)");
+
+		String ultimoPasso = "\\dfrac{" +
+		Integer.valueOf(strInteira + strNaoPeriodica + strPeriodica)
+		+ "-" + Integer.valueOf(strInteira + strNaoPeriodica) + "}"
+		+ "{" + primeiroTermoDenominador + "-" + segundoTermoDenominador + "}=";
 
 		int resultadoNumerador = Integer.valueOf(strInteira + strNaoPeriodica + strPeriodica)
 		- Integer.valueOf(strInteira + strNaoPeriodica);
 		int resultadoDenominador = primeiroTermoDenominador - segundoTermoDenominador;
 
 		Racional fracSimplificada = new Racional(resultadoNumerador, resultadoDenominador);
-		resolucaoLatex += "" + fracSimplificada.showDfrac();
+		ultimoPasso += fracSimplificada.showDfrac();
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			resolucaoLatex += "=" + fracSimplificada.showDfrac();
+			ultimoPasso += "=" + fracSimplificada.showDfrac();
 
-		return resolucaoLatex;
+		passos.add("\\(" + ultimoPasso + "\\)");
+
+		return passos.toArray(new String[0]);
 	}
-	
-	public static String resolucaoSimples(String inteira, String strPeriodica)
+
+	public static String[] resolucaoSimples(String inteira, String strPeriodica)
 	{
-		String resolucaoLatex = formulaSimples()+"\\\\";
+		java.util.List<String> passos = new java.util.ArrayList<>();
+
+		passos.add("\\(" + formulaSimples() + "\\)");
 
 		String valorLatex = textLatex(inteira, "", strPeriodica);
 
 		int p = strPeriodica.length();
-		
-		resolucaoLatex +="p="+p+"\\\\";
-		
-		resolucaoLatex += "\\dfrac{" + valorLatex + "\\cdot 10^{" + p + "} - " + valorLatex  
-		+ "}" + "{10^{" + p + "}-1}= \\\\";
+
+		passos.add("\\(p=" + p + "\\)");
+
+		passos.add("\\(\\dfrac{" + valorLatex + "\\cdot 10^{" + p + "} - " + valorLatex
+		+ "}" + "{10^{" + p + "}-1}= \\)");
 
 		String primeiroTermoNumerador = Integer.valueOf(inteira+strPeriodica) + "," + strPeriodica + strPeriodica
 		+ "\\ldots";
@@ -95,26 +101,28 @@ public class ResolucaoDizima
 
 		int primeiroTermoDenominador = (int) Math.pow(10, (p));
 		int segundoTermoDenominador = (int) Math.pow(10, 0);
-		
-		resolucaoLatex += "\\dfrac{" + valorLatex + "\\cdot "+primeiroTermoDenominador
-				+" - " + valorLatex + "}" 
-				+ "{"+ primeiroTermoDenominador + "-" + segundoTermoDenominador +"}= \\\\";
-		
+
+		passos.add("\\(\\dfrac{" + valorLatex + "\\cdot " + primeiroTermoDenominador
+				+ " - " + valorLatex + "}"
+				+ "{" + primeiroTermoDenominador + "-" + segundoTermoDenominador + "}= \\)");
+
 		int resultadoDenominador = primeiroTermoDenominador - segundoTermoDenominador;
 
-		resolucaoLatex += "\\dfrac{" + primeiroTermoNumerador + "-" + segundoTermoNumerador + "}" 
+		String ultimoPasso = "\\dfrac{" + primeiroTermoNumerador + "-" + segundoTermoNumerador + "}"
 		+ "{" + resultadoDenominador + "}=";
 
 		int resultadoNumerador = Integer.valueOf(inteira+strPeriodica)-Integer.valueOf(inteira);
 
 		Racional fracSimplificada = new Racional(resultadoNumerador, resultadoDenominador);
-		resolucaoLatex += "" + fracSimplificada.showDfrac();
+		ultimoPasso += fracSimplificada.showDfrac();
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			resolucaoLatex += "=" + fracSimplificada.showDfrac();
+			ultimoPasso += "=" + fracSimplificada.showDfrac();
 
-		return resolucaoLatex;
+		passos.add("\\(" + ultimoPasso + "\\)");
+
+		return passos.toArray(new String[0]);
 	}
 
 	private static String formula()

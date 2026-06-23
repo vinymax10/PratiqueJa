@@ -44,6 +44,6 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Encontre o coeficiente linear");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao( resolucao );
+		addResolucao( resolucao );
 	}
 }

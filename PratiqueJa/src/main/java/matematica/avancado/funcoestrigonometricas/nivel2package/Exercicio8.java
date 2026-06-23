@@ -24,11 +24,8 @@ public class Exercicio8 extends GeradorExercicio
 		distratores.add("\\(-\\dfrac{" + p + "}{" + r + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "O cosseno é uma função par: \\(\\cos(-\\theta) = \\cos\\theta\\)."
-				+ "\\(\\\\\\)"
-				+ "Portanto: \\(\\cos(-\\theta) = \\cos\\theta = \\mathbf{\\dfrac{" + q + "}{" + r + "}}\\)"
-				+ "\\(\\\\\\)"
-				+ "(Compare com o seno, que é função ímpar: \\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta\\).)";
-		setResolucao(res);
+		addResolucao("O cosseno é uma função par: \\(\\cos(-\\theta) = \\cos\\theta\\).");
+		addResolucao("Portanto: \\(\\cos(-\\theta) = \\cos\\theta = \\mathbf{\\dfrac{" + q + "}{" + r + "}}\\)");
+		addResolucao("(Compare com o seno, que é função ímpar: \\(\\operatorname{sen}(-\\theta) = -\\operatorname{sen}\\,\\theta\\).)");
 	}
 }

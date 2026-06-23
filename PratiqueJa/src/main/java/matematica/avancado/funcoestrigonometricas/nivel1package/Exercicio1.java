@@ -39,9 +39,7 @@ public class Exercicio1 extends GeradorExercicio
 		for (int i = 0; i < 3; i++) distratores.add("\\(" + data[others.get(i)][1] + "\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando \\(\\text{rad} = \\theta \\times \\dfrac{\\pi}{180}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(" + grau + "° \\times \\dfrac{\\pi}{180} = \\dfrac{" + grau + "\\pi}{180} = \\mathbf{" + rad + "}\\)";
-		setResolucao(res);
+		addResolucao("Usando \\(\\text{rad} = \\theta \\times \\dfrac{\\pi}{180}\\):");
+		addResolucao("\\(" + grau + "° \\times \\dfrac{\\pi}{180} = \\dfrac{" + grau + "\\pi}{180} = \\mathbf{" + rad + "}\\)");
 	}
 }

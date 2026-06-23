@@ -25,12 +25,10 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(" + (2 * r * (h + r)) + "\\pi\\,\\text{cm}^3\\)"); // área total
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "O retângulo gira em torno do lado \\(" + h
+		addResolucao("O retângulo gira em torno do lado \\(" + h
 				+ "\\,\\text{cm}\\), gerando um cilindro com \\(r = " + r + "\\,\\text{cm}\\) e \\(h = "
-				+ h + "\\,\\text{cm}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(V = \\pi r^2 h = \\pi \\cdot " + r + "^2 \\cdot " + h + " = \\pi \\cdot "
-				+ r2 + " \\cdot " + h + " = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+				+ h + "\\,\\text{cm}\\):");
+		addResolucao("\\(V = \\pi r^2 h = \\pi \\cdot " + r + "^2 \\cdot " + h + " = \\pi \\cdot "
+				+ r2 + " \\cdot " + h + " = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

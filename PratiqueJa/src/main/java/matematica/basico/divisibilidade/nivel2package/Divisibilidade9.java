@@ -20,6 +20,7 @@ public class Divisibilidade9 extends GeradorExercicio
 
 		addParagrafo("" + number + " é divisível por " + ref + "?");
 		gerarAlternativasBoolean(correta);
-		setResolucao(ResolucaoDivisibilidade.resolucao9(correta, number));
+		for(String passo : ResolucaoDivisibilidade.resolucao9(correta, number))
+			addResolucao(passo);
 	}
 }

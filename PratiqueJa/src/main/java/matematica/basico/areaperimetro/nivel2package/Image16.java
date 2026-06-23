@@ -20,18 +20,16 @@ public class Image16 extends GeradorExercicio
 
 		String resultadoCorreto = "" + b;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\\\";
-		resolucao += "a=" + a + "\\\\";
-		resolucao += "2 \\cdot" + a + "+b=" + perimetro + "\\\\";
-		resolucao += (2 * a) + "+b=" + perimetro + "\\\\";
-		resolucao += "b=" + perimetro + "-" + (2 * a) + "=" + b;
-
 		ConfigImagem config = new ConfigTrianguloIsosceles("b", "", "", "" + a, false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do triângulo é \\(" + perimetro + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\)");
+		addResolucao("\\(a=" + a + "\\)");
+		addResolucao("\\(2 \\cdot" + a + "+b=" + perimetro + "\\)");
+		addResolucao("\\(" + (2 * a) + "+b=" + perimetro + "\\)");
+		addResolucao("\\(b=" + perimetro + "-" + (2 * a) + "=" + b + "\\)");
 	}
 }

@@ -26,9 +26,7 @@ public class Image8 extends GeradorExercicio
 
 		gerarAlternativas(resultadoCorreto);
 
-		String res = "Os dois arcos formados pelo diâmetro e o ponto \\(P\\) somam \\(180^\\circ\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(" + resolucao + "\\)";
-		setResolucao(res);
+		addResolucao("Os dois arcos formados pelo diâmetro e o ponto \\(P\\) somam \\(180^\\circ\\):");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

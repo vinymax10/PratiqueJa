@@ -15,9 +15,8 @@ public class MmcMdc8 extends GeradorExercicio
 		addParagrafo("Sabendo que \\(" + menor + "\\) é divisor de \\(" + maior + "\\), calcule \\(\\text{MMC}(" + menor + ",\\," + maior + ")\\).");
 		gerarAlternativasInteiras(maior);
 
-		String res = "Quando um número divide o outro, o MMC é o maior deles. \\(\\\\\\)";
-		res += "Como \\(" + menor + "\\) divide \\(" + maior + "\\): \\(\\\\\\)";
-		res += "\\(\\text{MMC}(" + menor + ",\\," + maior + ") = \\mathbf{" + maior + "}\\)";
-		setResolucao(res);
+		addResolucao("Quando um número divide o outro, o MMC é o maior deles.");
+		addResolucao("Como \\(" + menor + "\\) divide \\(" + maior + "\\):");
+		addResolucao("\\(\\text{MMC}(" + menor + ",\\," + maior + ") = \\mathbf{" + maior + "}\\)");
 	}
 }

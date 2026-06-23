@@ -26,9 +26,8 @@ public class MmcMdc8 extends GeradorExercicio
 		addParagrafo("Sabendo que \\(\\text{MMC}(" + a + ",\\," + b + ") = " + mmc + "\\), calcule \\(\\text{MDC}(" + a + ",\\," + b + ")\\).");
 		gerarAlternativasInteiras(mdc);
 
-		String res = "Pela propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\), isolamos o MDC: \\(\\\\\\)";
-		res += "\\(\\text{MDC} = \\dfrac{a \\times b}{\\text{MMC}} = \\dfrac{" + a + " \\times " + b + "}{" + mmc + "} = \\\\ ";
-		res += "\\dfrac{" + (a * b) + "}{" + mmc + "} = \\mathbf{" + mdc + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\), isolamos o MDC:");
+		addResolucao("\\(\\text{MDC} = \\dfrac{a \\times b}{\\text{MMC}} = \\dfrac{" + a + " \\times " + b + "}{" + mmc + "} = \\\\ "
+			+ "\\dfrac{" + (a * b) + "}{" + mmc + "} = \\mathbf{" + mdc + "}\\)");
 	}
 }

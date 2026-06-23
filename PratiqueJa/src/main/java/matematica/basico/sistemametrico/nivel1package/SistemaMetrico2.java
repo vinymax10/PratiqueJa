@@ -29,11 +29,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (cm * 100) + "\\,\\text{m}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{m} = 100\\,\\text{cm}\\), logo dividir por 100:" +
-				"\\(\\\\\\)" +
-				"\\(" + cm + " \\div 100 = \\mathbf{" + mStr + "}\\,\\text{m}\\)"
-			);
+			addResolucao("\\(1\\,\\text{m} = 100\\,\\text{cm}\\), logo dividir por 100:");
+			addResolucao("\\(" + cm + " \\div 100 = \\mathbf{" + mStr + "}\\,\\text{m}\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -51,11 +48,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(0{,}" + km + "\\,\\text{km}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{km} = 1000\\,\\text{m}\\), logo dividir por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + m + " \\div 1000 = \\mathbf{" + km + "}\\,\\text{km}\\)"
-			);
+			addResolucao("\\(1\\,\\text{km} = 1000\\,\\text{m}\\), logo dividir por 1000:");
+			addResolucao("\\(" + m + " \\div 1000 = \\mathbf{" + km + "}\\,\\text{km}\\)");
 		}
 		else
 		{
@@ -73,11 +67,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(0{,}" + cm + "\\,\\text{cm}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{cm} = 10\\,\\text{mm}\\), logo dividir por 10:" +
-				"\\(\\\\\\)" +
-				"\\(" + mm + " \\div 10 = \\mathbf{" + cm + "}\\,\\text{cm}\\)"
-			);
+			addResolucao("\\(1\\,\\text{cm} = 10\\,\\text{mm}\\), logo dividir por 10:");
+			addResolucao("\\(" + mm + " \\div 10 = \\mathbf{" + cm + "}\\,\\text{cm}\\)");
 		}
 	}
 }

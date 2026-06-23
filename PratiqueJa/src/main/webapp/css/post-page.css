@@ -1,0 +1,619 @@
+/* ============================================================
+   /post/configuracao — prefixo pc-
+   Estilo Hero premium (mesma linguagem visual de /avaliacao/form)
+   ============================================================ */
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.pc-hero {
+    background: linear-gradient(135deg, #07142f 0%, #0d1d47 60%, #1a2f6e 100%);
+    border-radius: 20px;
+    padding: 22px 30px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pc-hero::after {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: 180px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+}
+
+.pc-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 9px;
+}
+
+.pc-hero-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+}
+
+.pc-hero-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 620px;
+}
+
+/* ── STATS DO HERO ────────────────────────────────────────── */
+.pc-hero-stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pc-stat {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pc-stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.pc-stat-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.pc-stat--green .pc-stat-value { color: #34d399; }
+
+/* ── BOTÕES DE NAVEGAÇÃO (abas) ───────────────────────────── */
+.pc-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.pc-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 22px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+    user-select: none;
+}
+.pc-tab:hover { background: #f8fafc; color: #374151; }
+.pc-tab.pc-tab-active {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+    cursor: default;
+}
+
+/* ── PAINEL BRANCO ────────────────────────────────────────── */
+.pc-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 24px;
+}
+
+/* ── TÍTULOS DE SEÇÃO ─────────────────────────────────────── */
+.pc-section-sub {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b5563;
+    margin: 28px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.pc-section-sub i { font-size: 13px; color: #2563eb; }
+
+/* ── GRID DE CAMPOS ───────────────────────────────────────── */
+.pc-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 20px;
+}
+.pc-fields--colors {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 165px), 1fr));
+}
+.pc-field-wide { grid-column: 1 / -1; }
+.pc-field { display: flex; flex-direction: column; gap: 7px; }
+
+.pc-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+/* Inputs preenchem a coluna; foco azul premium */
+.pc-field .ui-inputtext,
+.pc-field .ui-inputfield,
+.pc-field .ui-selectonemenu,
+.pc-field .ui-datepicker-trigger ~ input,
+.pc-field .ui-inputtext.hasDatepicker {
+    width: 100%;
+}
+.pc-panel .ui-inputtext:focus,
+.pc-panel input.ui-inputtext:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+    outline: none !important;
+}
+
+/* ── CAMPO DE COR (swatch premium) ────────────────────────── */
+.pc-color {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+.pc-color .ui-colorpicker { flex-shrink: 0; }
+
+/* ── SPLIT: campos à esquerda, Logomarca à direita (~metade da tela) ──────── */
+.pc-split { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+.pc-split-main  { flex: 1 1 380px; min-width: 0; }
+.pc-split-aside { flex: 1 1 320px; min-width: 280px; display: flex; flex-direction: column; gap: 16px; }
+
+/* A 1ª seção de cada coluna já tem o respiro do split; remove o topo extra p/ alinhar */
+.pc-split-main > .pc-section-sub:first-child,
+.pc-split-aside > .pc-section-sub:first-child { margin-top: 0; }
+
+/* Logomarca: uploader + preview empilhados dentro da coluna ──────────────── */
+.pc-logo-up   { display: flex; flex-direction: column; gap: 10px; }
+.pc-logo-prev { display: block; }
+
+/* Retângulo: o visual (borda, ícone, instruções) fica no wrap; o fileUpload é só
+   a camada transparente por cima que torna a área inteira clicável e droppable. */
+.pc-dropzone-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 210px;
+    border: 2px dashed #bfdbfe;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8fbff 0%, #eff6ff 100%);
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+.pc-dropzone-wrap:hover {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0ecff 100%);
+    box-shadow: 0 8px 26px rgba(37, 99, 235, 0.12);
+}
+
+/* Conteúdo visual (ícone + título + instruções) — não captura cliques */
+.pc-dropzone-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 22px 18px;
+    text-align: center;
+    pointer-events: none;
+}
+.pc-dropzone-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    font-size: 26px;
+}
+.pc-dropzone-title {
+    color: #334155;
+    font-weight: 700;
+    font-size: 14px;
+    max-width: 250px;
+    line-height: 1.4;
+}
+.pc-dropzone-specs {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.pc-dropzone-specs li {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.35;
+}
+.pc-dropzone-specs li span { color: #94a3b8; }
+
+/* fileUpload = camada clicável/droppable transparente cobrindo todo o retângulo */
+.pc-dropzone.ui-fileupload {
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    z-index: 2;
+}
+.pc-dropzone .ui-fileupload-content { display: none !important; }
+.pc-dropzone .ui-fileupload-buttonbar {
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.pc-dropzone .ui-fileupload-choose {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 16px !important;
+    cursor: pointer !important;
+}
+/* Esconde ícone/texto do botão (usamos o conteúdo visual do wrap) */
+.pc-dropzone .ui-fileupload-choose .ui-button-text,
+.pc-dropzone .ui-fileupload-choose .ui-icon,
+.pc-dropzone .ui-fileupload-choose .ui-button-icon-left { display: none !important; }
+/* O input de arquivo ocupa todo o retângulo → clique e drop em qualquer ponto */
+.pc-dropzone .ui-fileupload-choose input[type="file"] {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 0;
+}
+/* Esconde upload/cancel (modo auto) */
+.pc-dropzone .ui-fileupload-files,
+.pc-dropzone .ui-fileupload-upload,
+.pc-dropzone .ui-fileupload-cancel { display: none !important; }
+
+.pc-logo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e6ebf2;
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+}
+.pc-logo-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.pc-logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ecfdf5;
+    color: #059669;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 4px 11px;
+    border-radius: 999px;
+}
+.pc-logo-badge i { font-size: 13px; }
+.pc-logo-remove {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background 0.15s, color 0.15s;
+}
+.pc-logo-remove:hover { background: #fcdada; color: #fff; }
+.pc-logo-canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #eef2f7;
+    background:
+        linear-gradient(45deg, #f1f5f9 25%, transparent 25%) -8px 0 / 16px 16px,
+        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%) -8px 0 / 16px 16px,
+        linear-gradient(45deg, transparent 75%, #f1f5f9 75%) 0 0 / 16px 16px,
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%) 0 0 / 16px 16px,
+        #fff;
+}
+.pc-logo-canvas img { max-width: 100%; max-height: 110px; object-fit: contain; display: block; }
+
+/* Mensagem de detalhes */
+.pc-hint {
+    margin-top: 16px;
+}
+
+/* ── BACKGROUND PADRÃO (galerias) ─────────────────────────── */
+.pc-bg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 28px;
+}
+.pc-bg-col { min-width: 0; }
+.pc-gallery { max-width: 340px; margin: 4px auto 0; }
+.pc-gallery .ui-galleria { border: 0; background: transparent; }
+.pc-gallery .ui-galleria-item img { border-radius: 12px; }
+.pc-gallery .ui-galleria-thumbnail-item img {
+    border-radius: 8px;
+    opacity: 0.65;
+    transition: opacity 0.15s;
+}
+.pc-gallery .ui-galleria-thumbnail-item:hover img,
+.pc-gallery .ui-galleria-thumbnail-item-current img { opacity: 1; }
+.pc-gallery .ui-galleria-caption {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ── MINIATURAS DE BACKGROUND PERSONALIZADO ENVIADO ──────── */
+.pc-bg-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+.pc-bg-thumb {
+    position: relative;
+    width: 92px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e6ebf2;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+    background: #fff;
+}
+.pc-bg-thumb img { width: 92px; height: auto; display: block; }
+.pc-bg-thumb-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: #fff;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.15s, transform 0.15s;
+}
+.pc-bg-thumb:hover .pc-bg-thumb-remove { opacity: 1; }
+.pc-bg-thumb-remove:hover { transform: scale(1.08); background: #fff; color: #fff; }
+
+.pc-bg-empty {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+/* ── CARDS DE AÇÃO EM MASSA (Adicionar todos / Remover todos) ── */
+.pc-action-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.pc-action-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.pc-action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    text-decoration: none;
+}
+.pc-action-card:focus { outline: none; }
+.pc-action-go { margin-left: auto; flex-shrink: 0; color: #9ca3af; font-size: 14px; transition: transform 0.15s, color 0.15s; }
+.pc-action-card:hover .pc-action-go { color: #4b5563; transform: translateX(3px); }
+.pc-action-card--danger:hover .pc-action-go { color: #dc2626; }
+.pc-action-card--add    { background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border-color: #bbf7d0; }
+.pc-action-card--single { background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border-color: #bfdbfe; }
+.pc-action-card--danger { background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%); border-color: #fecaca; }
+.pc-action-ico {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+}
+.pc-action-card--add    .pc-action-ico { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.pc-action-card--single .pc-action-ico { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.pc-action-card--danger .pc-action-ico { background: linear-gradient(135deg, #dc2626, #f87171); }
+.pc-action-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.pc-action-title { font-size: 15px; font-weight: 700; color: #111827; }
+.pc-action-desc  { font-size: 12.5px; color: #6b7280; line-height: 1.4; }
+.pc-action-card .ui-button { flex-shrink: 0; }
+
+/* Barra de ações individuais (Nova programação / Enviar agora) */
+.pc-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+    .pc-action-card { flex-wrap: wrap; }
+    .pc-action-card .ui-button { width: 100%; }
+}
+
+/* ── CARDS DE PROGRAMAÇÃO (estilo lista de itens) ─────────── */
+.pc-item-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+}
+.pc-item-card:hover {
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    border-color: #d1d5db;
+}
+.pc-item-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+    padding: 0 8px;
+}
+.pc-item-info { flex: 1; min-width: 0; }
+.pc-item-assunto {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    display: block;
+    margin-bottom: 6px;
+}
+.pc-item-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.pc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+.pc-chip i { font-size: 11px; }
+.pc-chip--data   { background: #eef2ff; color: #3730a3; border-color: #c7d2fe; }
+.pc-chip--feed   { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+.pc-chip--reel   { background: #faf5ff; color: #6b21a8; border-color: #e9d5ff; }
+.pc-chip--alt    { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+.pc-item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.pc-item-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    font-size: 14px;
+    background: #f8fafc;
+    border: 2px dashed #e5e7eb;
+    border-radius: 14px;
+    line-height: 1.6;
+}
+.pc-item-empty i { display: block; font-size: 28px; margin-bottom: 8px; color: #d1d5db; }
+
+@media (max-width: 600px) {
+    .pc-item-card { flex-wrap: wrap; }
+    .pc-item-actions { width: 100%; justify-content: flex-end; }
+}
+
+/* ── AÇÕES ────────────────────────────────────────────────── */
+.pc-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 28px;
+}
+
+/* ── RESPONSIVO ───────────────────────────────────────────── */
+@media (max-width: 960px) {
+    .pc-hero { grid-template-columns: 1fr; padding: 20px 22px; gap: 18px; }
+    .pc-hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .pc-stat { min-width: 120px; flex: 1; }
+    .pc-hero-title { font-size: 1.35rem; }
+    .pc-panel { padding: 24px 20px; }
+}
+
+@media (max-width: 600px) {
+    .pc-fields { grid-template-columns: 1fr; }
+}

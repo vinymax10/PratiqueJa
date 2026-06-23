@@ -63,9 +63,8 @@ public class Expressao4 extends GeradorExercicio
 		String g1Str = g1 < 0 ? "\\left(" + g1 + "\\right)" : "" + g1;
 		String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
 		String step2 = g1Str + " " + Algebra.converter(op2) + " " + g2Str;
-		String res = "Substituindo na expressão: \\(\\\\\\)";
-		res += "\\(" + expSubs + " = \\\\ ";
-		res += "" + step2 + " = " + resultado.toStringLatex() + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo na expressão:");
+		addResolucao("\\(" + expSubs + " =\\)");
+		addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
 	}
 }

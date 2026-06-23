@@ -14,6 +14,7 @@ public class Contextualizada extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		gerarAlternativasInteirasComNegativos(problema.resultado());
-		setResolucao(problema.resolucao());
+		for (String passo : problema.resolucao())
+			addResolucao(passo);
 	}
 }

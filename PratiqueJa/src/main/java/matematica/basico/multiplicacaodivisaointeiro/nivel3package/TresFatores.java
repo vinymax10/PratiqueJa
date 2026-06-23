@@ -21,7 +21,7 @@ public class TresFatores extends GeradorExercicio
 		int negativos;
 		int resultado;
 		String enunciado;
-		String passoMeio;
+		java.util.List<String> passos = new java.util.ArrayList<>();
 
 		if (quatroFatores)
 		{
@@ -34,11 +34,12 @@ public class TresFatores extends GeradorExercicio
 			int abc = ab * c;
 			String abFmt  = ab  < 0 ? "(" + ab  + ")" : "" + ab;
 			String abcFmt = abc < 0 ? "(" + abc + ")" : "" + abc;
-			passoMeio  = "\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\); ";
-			passoMeio += "\\(" + abFmt + " \\times " + cFmt + " = " + abcFmt + "\\). \\(\\\\\\)";
-			passoMeio += negativos + " fatores negativos ";
-			passoMeio += (negativos % 2 == 0) ? "(par) → produto positivo. \\(\\\\\\)" : "(ímpar) → produto negativo. \\(\\\\\\)";
-			passoMeio += ResolucaoMDInteiro.multiplicacao(abc, d);
+			passos.add("\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\); "
+				+ "\\(" + abFmt + " \\times " + cFmt + " = " + abcFmt + "\\).");
+			passos.add(negativos + " fatores negativos "
+				+ ((negativos % 2 == 0) ? "(par) → produto positivo." : "(ímpar) → produto negativo."));
+			for(String passo : ResolucaoMDInteiro.multiplicacao(abc, d))
+				passos.add(passo);
 		}
 		else
 		{
@@ -47,14 +48,16 @@ public class TresFatores extends GeradorExercicio
 			enunciado = "Calcule \\(" + aFmt + " \\times " + bFmt + " \\times " + cFmt + "\\).";
 			int ab = a * b;
 			String abFmt = ab < 0 ? "(" + ab + ")" : "" + ab;
-			passoMeio  = "\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\). \\(\\\\\\)";
-			passoMeio += negativos + " fatores negativos ";
-			passoMeio += (negativos % 2 == 0) ? "(par) → produto positivo. \\(\\\\\\)" : "(ímpar) → produto negativo. \\(\\\\\\)";
-			passoMeio += ResolucaoMDInteiro.multiplicacao(ab, c);
+			passos.add("\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\).");
+			passos.add(negativos + " fatores negativos "
+				+ ((negativos % 2 == 0) ? "(par) → produto positivo." : "(ímpar) → produto negativo."));
+			for(String passo : ResolucaoMDInteiro.multiplicacao(ab, c))
+				passos.add(passo);
 		}
 
 		addParagrafo(enunciado);
 		gerarAlternativasInteirasComNegativos(resultado);
-		setResolucao(passoMeio);
+		for(String passo : passos)
+			addResolucao(passo);
 	}
 }

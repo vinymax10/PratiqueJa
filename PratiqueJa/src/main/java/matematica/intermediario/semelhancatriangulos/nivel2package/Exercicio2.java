@@ -15,13 +15,13 @@ public class Exercicio2 extends GeradorExercicio
 		ConfigSemelhancaTriangulos5 config = new ConfigSemelhancaTriangulos5(configValores);
 
 		String resultadoCorreto = configValores.incognita.toString();
-		String resolucao = configValores.resolucaoLatex;
 
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : configValores.resolucaoPassos)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

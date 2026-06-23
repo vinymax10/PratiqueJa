@@ -20,20 +20,16 @@ public class Image2 extends GeradorExercicio
 
 		int l = (2 * raio);
 
-		String resolucao = "";
-		resolucao += "\\text{Seja~} d \\text{~a diagonal do quadrado}\\\\";
-		resolucao += "d=2r = 2 \\cdot" + raio + "\\sqrt{2} = " + (2 * raio) + "\\sqrt{2}\\\\";
-		resolucao += ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ""
-		+ ",\\quad" + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
-		resolucao += "l=" + (2 * raio) + "\\\\";
-		resolucao += "A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l);
-
 		ConfigQuadradoCircunferencia config = new ConfigQuadradoCircunferencia("r", "l", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + strRaio + "\\), qual a área do quadrado?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(\\text{Seja~} d \\text{~a diagonal do quadrado}\\)");
+		addResolucao("\\(d=2r = 2 \\cdot" + raio + "\\sqrt{2} = " + (2 * raio) + "\\sqrt{2}\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ",\\quad" + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\)");
+		addResolucao("\\(l=" + (2 * raio) + "\\)");
+		addResolucao("\\(A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l) + "\\)");
 	}
 }

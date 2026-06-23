@@ -36,8 +36,7 @@ public class RegraTres9 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas("\\(" + p + "\\%\\)", distratores);
 
-		String res = "Para converter uma fração em porcentagem, multiplicamos por 100: \\(\\\\\\)";
-		res += "\\(\\dfrac{" + n + "}{" + d + "} \\times 100 = \\dfrac{" + (n * 100) + "}{" + d + "} = \\mathbf{" + p + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("Para converter uma fração em porcentagem, multiplicamos por 100:");
+		addResolucao("\\(\\dfrac{" + n + "}{" + d + "} \\times 100 = \\dfrac{" + (n * 100) + "}{" + d + "} = \\mathbf{" + p + "\\%}\\)");
 	}
 }

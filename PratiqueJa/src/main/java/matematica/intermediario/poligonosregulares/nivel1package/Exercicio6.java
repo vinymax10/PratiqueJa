@@ -23,16 +23,13 @@ public class Exercicio6 extends GeradorExercicio
 		int l = caso[1];
 		int p = caso[2];
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaPerimetro() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(P = " + n + " \\times " + l + " = \\mathbf{" + p + "}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "" + l, "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um polígono regular de \\(" + n + "\\) lados tem lado medindo \\(" + l + "\\). Qual é o seu perímetro?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + p);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaPerimetro() + "\\)");
+		addResolucao("\\(P = " + n + " \\times " + l + " = \\mathbf{" + p + "}\\)");
 	}
 }

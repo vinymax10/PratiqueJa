@@ -9,11 +9,10 @@ public class ResolucaoDivisores
 {
 	List<Integer> lista = new ArrayList<Integer>();
 
-	public String numerosDividores(int number)
+	public String[] numerosDividores(int number)
 	{
-		String resolucaoLatex = fatoresPrimos(number);
-		resolucaoLatex += " \\(\\\\\\) ";
-		resolucaoLatex += "Divisores: ";
+		List<String> passos = new ArrayList<String>();
+		passos.add(fatoresPrimos(number));
 		String listDivisores = "";
 		for(int i = 0; i < lista.size(); i++)
 		{
@@ -22,17 +21,16 @@ public class ResolucaoDivisores
 			if(i < lista.size() - 1)
 				listDivisores += ",~";
 		}
-		resolucaoLatex += "\\(" + listDivisores + "\\)";
-		resolucaoLatex += " \\(\\\\\\) ";
-		resolucaoLatex += "Número de divisores: \\(" + lista.size() + "\\)";
-		return resolucaoLatex;
+		passos.add("Divisores: \\(" + listDivisores + "\\)");
+		passos.add("Número de divisores: \\(" + lista.size() + "\\)");
+		return passos.toArray(new String[0]);
 	}
 
-	public String somaDivisores(int number)
+	public String[] somaDivisores(int number)
 	{
-		String resolucaoLatex = fatoresPrimos(number);
-		resolucaoLatex += " \\(\\\\\\) ";
-		resolucaoLatex += "Soma dos divisores: \\(\\\\\\) ";
+		List<String> passos = new ArrayList<String>();
+		passos.add(fatoresPrimos(number));
+		passos.add("Soma dos divisores:");
 		int soma = 0;
 		String listDivisores = "";
 		for(int i = 0; i < lista.size(); i++)
@@ -43,11 +41,11 @@ public class ResolucaoDivisores
 			if(i < lista.size() - 1)
 				listDivisores += "+";
 		}
-		resolucaoLatex += "\\(" + listDivisores + " = " + soma + "\\)";
-		return resolucaoLatex;
+		passos.add("\\(" + listDivisores + " = " + soma + "\\)");
+		return passos.toArray(new String[0]);
 	}
 
-	public String numerosDividoresParesImpares(int number, boolean par)
+	public String[] numerosDividoresParesImpares(int number, boolean par)
 	{
 		String tipo = "pares";
 		int resto = 0;
@@ -57,7 +55,8 @@ public class ResolucaoDivisores
 			tipo = "ímpares";
 		}
 
-		String resolucaoLatex = fatoresPrimosPares(number, par);
+		List<String> passos = new ArrayList<String>();
+		passos.add(fatoresPrimosPares(number, par));
 		int cont = 0;
 		String listDivisores = "";
 		for(int i = 0; i < lista.size(); i++)
@@ -74,13 +73,11 @@ public class ResolucaoDivisores
 
 		if(cont > 0)
 		{
-			resolucaoLatex += " \\(\\\\\\) ";
-			resolucaoLatex += "Divisores " + tipo + ": \\(\\\\\\) ";
-			resolucaoLatex += "\\(" + listDivisores + "\\)";
+			passos.add("Divisores " + tipo + ":");
+			passos.add("\\(" + listDivisores + "\\)");
 		}
-		resolucaoLatex += " \\(\\\\\\) ";
-		resolucaoLatex += "Número de divisores " + tipo + ": \\(" + cont + "\\)";
-		return resolucaoLatex;
+		passos.add("Número de divisores " + tipo + ": \\(" + cont + "\\)");
+		return passos.toArray(new String[0]);
 	}
 
 	public int numerosDividoresResultado(int number)

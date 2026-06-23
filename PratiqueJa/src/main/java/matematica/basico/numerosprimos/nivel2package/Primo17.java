@@ -19,7 +19,7 @@ public class Primo17 extends AgrupadorPrimo
 		addParagrafo("Quantos divisores tem o número \\(N = " + nLatex + "\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& \\tau(N) = (" + a + "+1)(" + b + "+1)\\\\" +
 			"& = " + (a + 1) + " \\times " + (b + 1) + " = \\mathbf{" + resultado + "}" +

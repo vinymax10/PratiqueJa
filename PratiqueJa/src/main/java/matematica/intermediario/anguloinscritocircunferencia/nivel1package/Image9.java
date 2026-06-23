@@ -39,10 +39,8 @@ public class Image9 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + b + "^\\circ\\)", distratores);
 
-		String res = "Pelo Teorema de Tales, o ângulo oposto ao diâmetro é \\(90^\\circ\\). Pela soma dos ângulos do triângulo:";
-		res += "\\(\\\\\\)";
-		res += "\\(90^\\circ + " + a + "^\\circ + x = 180^\\circ \\\\";
-		res += "x = 180^\\circ - 90^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("Pelo Teorema de Tales, o ângulo oposto ao diâmetro é \\(90^\\circ\\). Pela soma dos ângulos do triângulo:");
+		addResolucao("\\(90^\\circ + " + a + "^\\circ + x = 180^\\circ\\)");
+		addResolucao("\\(x = 180^\\circ - 90^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)");
 	}
 }

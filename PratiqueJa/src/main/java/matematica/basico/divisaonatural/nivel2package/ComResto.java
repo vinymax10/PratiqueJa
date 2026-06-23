@@ -22,12 +22,11 @@ public class ComResto extends GeradorExercicio
 		distratores.add("Quociente \\(" + q + "\\), resto \\(0\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Realizamos a divisão: \\(" + a + " \\div " + b + "\\). \\(\\\\\\)";
-		res += "Estimamos o quociente: \\(" + b + " \\times " + q + " = " + (b * q) + "\\). \\(\\\\\\)";
-		res += "Calculamos o resto: \\(" + a + " - " + (b * q) + " = " + r + "\\). \\(\\\\\\)";
-		res += "Como \\(" + r + " < " + b + "\\), a divisão termina. \\(\\\\\\)";
-		res += "Resultado: quociente \\(\\mathbf{" + q + "}\\), resto \\(\\mathbf{" + r + "}\\). \\(\\\\\\)";
-		res += "Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("Realizamos a divisão: \\(" + a + " \\div " + b + "\\).");
+		addResolucao("Estimamos o quociente: \\(" + b + " \\times " + q + " = " + (b * q) + "\\).");
+		addResolucao("Calculamos o resto: \\(" + a + " - " + (b * q) + " = " + r + "\\).");
+		addResolucao("Como \\(" + r + " < " + b + "\\), a divisão termina.");
+		addResolucao("Resultado: quociente \\(\\mathbf{" + q + "}\\), resto \\(\\mathbf{" + r + "}\\).");
+		addResolucao("Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)");
 	}
 }

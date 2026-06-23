@@ -43,14 +43,13 @@ public class RegraTres2 extends GeradorExercicio
 
 		String sinal = isAumento ? "+" : "-";
 		String tipoLabel = isAumento ? "Aumento" : "Desconto";
-		String res = "\\(\\text{" + tipoLabel + " total} = p_1 + p_2 " + sinal
-			+ " \\dfrac{p_1 \\cdot p_2}{100}\\). \\(\\\\\\)";
-		res += "\\(" + p1 + " + " + p2 + " " + sinal
-			+ " \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} = \\\\ \\)";
-		res += "\\(" + (p1 + p2) + " " + sinal
-			+ " \\dfrac{" + (p1 * p2) + "}{100} = \\\\ \\)";
-		res += "\\(" + (p1 + p2) + " " + sinal + " " + produto
-			+ " = \\mathbf{" + total + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("\\(\\text{" + tipoLabel + " total} = p_1 + p_2 " + sinal
+			+ " \\dfrac{p_1 \\cdot p_2}{100}\\).");
+		addResolucao("\\(" + p1 + " + " + p2 + " " + sinal
+			+ " \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} =\\)");
+		addResolucao("\\(" + (p1 + p2) + " " + sinal
+			+ " \\dfrac{" + (p1 * p2) + "}{100} =\\)");
+		addResolucao("\\(" + (p1 + p2) + " " + sinal + " " + produto
+			+ " = \\mathbf{" + total + "\\%}\\)");
 	}
 }

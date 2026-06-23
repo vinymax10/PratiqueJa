@@ -143,22 +143,9 @@
 		<ui:include rendered="#{!questaoBean.cadastro}"
 		src="/administracao/conteudo/questao/gerenciar/alternativa/alternativa.xhtml" />
 			
-		<h4 class="title-divisor" >Resolução</h4>
-			
-		<div class="ui-fluid gride" >
-			<div class="gride col-12 p-0">
-														
-				 <div class="campo col-6">
-					<p:outputLabel for="@next" value="Resolução"/>
-					<p:inputTextarea rows="10" value="#{questaoBean.entidade.resolucao}"  />
-				</div>
-				<div class="campo col-6">
-					<p:outputLabel  for="@next" value="Resolução" style="display:block;margin-bottom:15px;"/>
-					<p:outputLabel id="resolucao"  value="#{questaoBean.entidade.resolucao}"/>
-				</div>
-				
-			</div>
-		</div>
+		<ui:include rendered="#{!questaoBean.cadastro}"
+		src="/administracao/conteudo/questao/gerenciar/resolucao/resolucao.xhtml" />
+
 		<div class="content-button" >
 
 			<div class="divisor" ></div>
@@ -222,5 +209,7 @@
 	<ui:include src="/administracao/conteudo/questao/gerenciar/paragrafo/dialog-cadastro.xhtml" />
 
 	<ui:include src="/administracao/conteudo/questao/gerenciar/alternativa/dialog-cadastro.xhtml" />
+
+	<ui:include src="/administracao/conteudo/questao/gerenciar/resolucao/dialog-cadastro.xhtml" />
 
 </ui:decorate>

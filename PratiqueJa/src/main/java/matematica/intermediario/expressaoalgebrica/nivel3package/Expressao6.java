@@ -49,9 +49,8 @@ public class Expressao6 extends GeradorExercicio
 		addParagrafo("\\(" + exprLatex + "\\)");
 		gerarAlternativasInteiras(resultado);
 
-		String res = "Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\): \\(\\\\\\)";
-		res += "\\(" + resSubst + " = \\\\ ";
-		res += "" + resCalc + " = " + resultado + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\):");
+		addResolucao("\\(" + resSubst + " =\\)");
+		addResolucao("\\(" + resCalc + " = " + resultado + "\\)");
 	}
 }

@@ -18,13 +18,12 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Resolva a equação logarítmica:");
 		addParagrafo("\\(\\log_{" + b + "} x + \\log_{" + b + "} " + k + " = " + n + "\\)");
 
-		String res = "Aplicando a propriedade do produto: \\(\\\\\\)";
-		res += "\\(\\log_{" + b + "}(x \\cdot " + k + ") = " + n + "\\) \\(\\\\\\)";
-		res += "Convertendo para forma exponencial: \\(\\\\\\)";
-		res += "\\(" + k + "x = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\\\";
-		res += "x = \\dfrac{" + (int) Math.pow(b, n) + "}{" + k + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Aplicando a propriedade do produto:");
+		addResolucao("\\(\\log_{" + b + "}(x \\cdot " + k + ") = " + n + "\\)");
+		addResolucao("Convertendo para forma exponencial:");
+		addResolucao("\\(" + k + "x = " + b + "^{" + n + "} = " + (int) Math.pow(b, n) + "\\)");
+		addResolucao("\\(x = \\dfrac{" + (int) Math.pow(b, n) + "}{" + k + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

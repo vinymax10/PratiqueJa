@@ -29,6 +29,6 @@ public class Image19 extends GeradorExercicio
 
 		addParagrafo("Dois ângulos internos de um triângulo medem \\(" + a + "^\\circ\\) e \\(" + b + "^\\circ\\). O ângulo externo no terceiro vértice mede \\(" + strExt + "\\). Encontre \\(x\\):");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -71,11 +71,13 @@ public class ProblemaSomaContexto
 		}
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int soma = resultado();
-		String res = "Para encontrar o total, somamos as duas quantidades: \\(\\\\\\)";
-		res += "\\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Para encontrar o total, somamos as duas quantidades:",
+			"\\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)"
+		};
 	}
 }

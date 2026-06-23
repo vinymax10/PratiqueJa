@@ -21,6 +21,6 @@ public class MmcMdc12 extends GeradorExercicio
 
 		addParagrafo("Qual é o menor número, diferente de zero, divisível por \\(" + a + "\\), \\(" + b + "\\) e \\(" + c + "\\) ao mesmo tempo?");
 		gerarAlternativasInteiras((int) MMC.mmc(a, b, c));
-		setResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b, c) + "\\)");
+		addResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b, c) + "\\)");
 	}
 }

@@ -24,7 +24,7 @@ public class Primo4 extends AgrupadorPrimo
 		addParagrafo("Dado que \\(N = " + nLatex + " = " + n + "\\), quantos divisores tem \\(N\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& N = " + p + "^{" + a + "} \\times " + q + "^{" + b + "}\\\\" +
 			"& \\tau(N) = (" + a + "+1) \\times (" + b + "+1)\\\\" +

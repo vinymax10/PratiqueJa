@@ -24,11 +24,9 @@ public class Exercicio1 extends GeradorExercicio
 
 		gerarAlternativasInteiras(b, 4, false);
 
-		String res = "Calculamos primeiro o coeficiente angular e depois o linear:"
-				+ "\\(\\\\\\)"
-				+ "\\(m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{" + dy + "}{" + dx + "} = " + m + "\\\\"
-				+ "b = y_1 - m \\cdot x_1 = " + y1 + " - " + m + " \\cdot (" + x1 + ") = \\\\" 
-				+ y1 + " - (" + (m * x1) + ") = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+		addResolucao("Calculamos primeiro o coeficiente angular e depois o linear:");
+		addResolucao("\\(m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{" + dy + "}{" + dx + "} = " + m + "\\)");
+		addResolucao("\\(b = y_1 - m \\cdot x_1 = " + y1 + " - " + m + " \\cdot (" + x1 + ") = "
+				+ y1 + " - (" + (m * x1) + ") = \\mathbf{" + b + "}\\)");
 	}
 }

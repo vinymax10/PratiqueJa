@@ -19,21 +19,16 @@ public class Exercicio5 extends GeradorExercicio
 		int m = triple[1];
 		int r = triple[2];
 
-		String res = "\\(" + ResolucaoCirculo.formulaArco() + "\\), ";
-		res += "\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Dividindo \\(A_s\\) por \\(\\ell\\): \\(\\\\\\)";
-		res += "\\(\\dfrac{A_s}{\\ell} = \\dfrac{\\dfrac{\\theta}{360} \\cdot \\pi r^2}{\\dfrac{\\theta}{360} \\cdot 2\\pi r} = \\dfrac{r}{2}\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\dfrac{A_s}{\\ell} = \\dfrac{" + m + "\\pi}{" + k + "\\pi} = \\dfrac{" + m + "}{" + k + "} = \\dfrac{r}{2} \\\\ ";
-		res += "r = \\dfrac{2 \\cdot " + m + "}{" + k + "} = \\mathbf{" + r + "}\\)";
-
 		ConfigSetor config = new ConfigSetor("r", 90);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um setor circular tem comprimento de arco \\(" + k + "\\pi\\) e área \\(" + m + "\\pi\\). Qual é o raio?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaArco() + "\\), \\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)");
+		addResolucao("Dividindo \\(A_s\\) por \\(\\ell\\):");
+		addResolucao("\\(\\dfrac{A_s}{\\ell} = \\dfrac{\\dfrac{\\theta}{360} \\cdot \\pi r^2}{\\dfrac{\\theta}{360} \\cdot 2\\pi r} = \\dfrac{r}{2}\\)");
+		addResolucao("\\(\\dfrac{A_s}{\\ell} = \\dfrac{" + m + "\\pi}{" + k + "\\pi} = \\dfrac{" + m + "}{" + k + "} = \\dfrac{r}{2}\\)");
+		addResolucao("\\(r = \\dfrac{2 \\cdot " + m + "}{" + k + "} = \\mathbf{" + r + "}\\)");
 	}
 }

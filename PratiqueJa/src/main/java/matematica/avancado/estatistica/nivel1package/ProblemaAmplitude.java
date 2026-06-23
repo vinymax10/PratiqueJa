@@ -26,20 +26,18 @@ public class ProblemaAmplitude
 			valores[i] = 3 + rand.nextInt(40);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int max = AuxEstatistica.maximo(valores);
 		int min = AuxEstatistica.minimo(valores);
 
-		String res = "A amplitude total é a diferença entre o maior e o menor valor do conjunto:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("A = x_{\\max} - x_{\\min}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "No conjunto " + AuxEstatistica.listaStr(valores) + ", o maior valor é \\(" + max + "\\) e o menor é \\(" + min + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(A = " + max + " - " + min + " = \\mathbf{" + (max - min) + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A amplitude total é a diferença entre o maior e o menor valor do conjunto:",
+			"\\(" + ParCor.formula("A = x_{\\max} - x_{\\min}") + "\\)",
+			"No conjunto " + AuxEstatistica.listaStr(valores) + ", o maior valor é \\(" + max + "\\) e o menor é \\(" + min + "\\):",
+			"\\(A = " + max + " - " + min + " = \\mathbf{" + (max - min) + "}\\)"
+		};
 	}
 
 	public String resultado()

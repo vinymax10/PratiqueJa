@@ -17,16 +17,14 @@ public class Image31 extends GeradorExercicio
 
 		String resultadoCorreto = "" + l;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
-		resolucao += "4 \\cdot l=" + perimetro + "\\\\";
-		resolucao += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\\\";
-
 		ConfigLozango config = new ConfigLozango("", "", "", "", "l", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do losango é \\(" + perimetro + "\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
+		addResolucao("\\(4 \\cdot l=" + perimetro + "\\)");
+		addResolucao("\\(l=\\dfrac{" + perimetro + "}{4}=" + l + "\\)");
 	}
 }

@@ -15,18 +15,15 @@ public class Exercicio2 extends GeradorExercicio
 		int r = 2 + rand.nextInt(7); // r = 2..8
 		int k = r * r;               // A = kπ
 
-		String res = "\\(" + ResolucaoCirculo.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = \\pi \\cdot r^2 \\\\ ";
-		res += "r^2 = " + k + " \\\\ ";
-		res += "r = \\sqrt{" + k + "} = \\mathbf{" + r + "}\\)";
-
 		ConfigCircunferencia config = new ConfigCircunferencia("r", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de um círculo é \\(" + k + "\\pi\\). Qual é o raio?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaArea() + "\\)");
+		addResolucao("\\(" + k + "\\pi = \\pi \\cdot r^2\\)");
+		addResolucao("\\(r^2 = " + k + "\\)");
+		addResolucao("\\(r = \\sqrt{" + k + "} = \\mathbf{" + r + "}\\)");
 	}
 }

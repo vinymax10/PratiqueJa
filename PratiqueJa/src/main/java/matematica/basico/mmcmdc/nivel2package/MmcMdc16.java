@@ -23,9 +23,8 @@ public class MmcMdc16 extends GeradorExercicio
 		addParagrafo("Os múltiplos comuns de \\(" + a + "\\) e \\(" + b + "\\) aparecem em sequência. Qual é o terceiro deles?");
 		gerarAlternativasInteiras(resultado);
 
-		String res = "Os múltiplos comuns de dois números são os múltiplos do MMC: \\(\\text{MMC},\\; 2\\,\\text{MMC},\\; 3\\,\\text{MMC},\\dots\\) \\(\\\\\\)";
-		res += "\\(\\text{MMC}(" + a + ",\\," + b + ") = " + mmc + "\\). \\(\\\\\\)";
-		res += "O terceiro múltiplo comum é \\(3 \\times " + mmc + " = \\mathbf{" + resultado + "}\\).";
-		setResolucao(res);
+		addResolucao("Os múltiplos comuns de dois números são os múltiplos do MMC: \\(\\text{MMC},\\; 2\\,\\text{MMC},\\; 3\\,\\text{MMC},\\dots\\)");
+		addResolucao("\\(\\text{MMC}(" + a + ",\\," + b + ") = " + mmc + "\\).");
+		addResolucao("O terceiro múltiplo comum é \\(3 \\times " + mmc + " = \\mathbf{" + resultado + "}\\).");
 	}
 }

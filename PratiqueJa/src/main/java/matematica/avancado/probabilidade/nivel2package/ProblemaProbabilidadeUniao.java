@@ -1,5 +1,7 @@
 package matematica.avancado.probabilidade.nivel2package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.ParCor;
@@ -51,48 +53,48 @@ public class ProblemaProbabilidadeUniao
 		return pergunta;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "";
+		List<String> passos = new ArrayList<>();
 		switch(tipoProbabilidade)
 		{
 			case AUB: {
-				resolucaoLatex = "\\(" + formulaUnicao() + "\\)" + "\\(\\\\\\)";
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
-				resolucaoLatex += "\\(B =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(" + formulaUnicao() + "\\)");
+				passos.add("\\(A =\\) " + eventoA);
+				passos.add("\\(B =\\) " + eventoB);
 				Racional pa = new Racional(u, t);
 				String fr = pa.showDfrac(); pa.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(B)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
-				resolucaoLatex += "n(A \\cup B)=" + a + "+" + b + "-" + i + "=" + u + " \\\\";
-				resolucaoLatex += "P(A \\cup B)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(B)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + "\\)");
+				passos.add("\\(n(A \\cup B)=" + a + "+" + b + "-" + i + "=" + u + "\\)");
+				passos.add("\\(P(A \\cup B)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case AUBC: {
-				resolucaoLatex = "\\(" + formulaUnicao() + "\\)" + "\\(\\\\\\)";
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
-				resolucaoLatex += "\\(B =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(" + formulaUnicao() + "\\)");
+				passos.add("\\(A =\\) " + eventoA);
+				passos.add("\\(B =\\) " + eventoB);
 				Racional pa = new Racional(nn, t);
 				String fr = pa.showDfrac(); pa.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(B)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
-				resolucaoLatex += "n(A \\cup B)=" + a + "+" + b + "-" + i + "=" + u + " \\\\";
-				resolucaoLatex += "n((A \\cup B)^c)=" + t + "-" + u + "=" + nn + " \\\\";
-				resolucaoLatex += "P((A \\cup B)^c)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(B)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + "\\)");
+				passos.add("\\(n(A \\cup B)=" + a + "+" + b + "-" + i + "=" + u + "\\)");
+				passos.add("\\(n((A \\cup B)^c)=" + t + "-" + u + "=" + nn + "\\)");
+				passos.add("\\(P((A \\cup B)^c)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case AMB: {
-				resolucaoLatex = "\\(" + formulaAMenosB() + "\\)" + "\\(\\\\\\)";
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
-				resolucaoLatex += "\\(B =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(" + formulaAMenosB() + "\\)");
+				passos.add("\\(A =\\) " + eventoA);
+				passos.add("\\(B =\\) " + eventoB);
 				Racional pa = new Racional(a-i, t);
 				String fr = pa.showDfrac(); pa.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
-				resolucaoLatex += "n(A - B)=" + a + "-" + i + "=" + (a-i) + " \\\\";
-				resolucaoLatex += "P(A - B)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + "\\)");
+				passos.add("\\(n(A - B)=" + a + "-" + i + "=" + (a-i) + "\\)");
+				passos.add("\\(P(A - B)=" + (pa.isSimplificou() ? fr + "=\\mathbf{" + pa.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 	
 	private String formulaUnicao()

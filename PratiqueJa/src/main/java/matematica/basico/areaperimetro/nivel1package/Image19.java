@@ -15,7 +15,7 @@ public class Image19 extends GeradorExercicio
 		int r = (3 + rand.nextInt(20));
 
 		String resultadoCorreto = "" + (2 * r);
-		String resolucao = ResolucaoAreaPerimetro.comprimentoCircunferencia(r);
+		String[] passosResolucao = ResolucaoAreaPerimetro.comprimentoCircunferencia(r);
 
 		ConfigCircunferencia config = new ConfigCircunferencia("" + r, false);
 		BufferedImage image = config.criarImagem();
@@ -23,6 +23,7 @@ public class Image19 extends GeradorExercicio
 		addParagrafo("Se o comprimento da circunferência é \\(C=x\\pi\\), qual o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

@@ -18,9 +18,8 @@ public class RegraTres6 extends GeradorExercicio
 		addParagrafo("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + c + "}{x}\\)");
 		gerarAlternativasInteiras(x);
 
-		String res = "Aplicando o produto cruzado (produto dos extremos = produto dos meios): \\(\\\\\\)";
-		res += "\\(" + a + " \\cdot x = " + b + " \\cdot " + c + "\\). \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + b + " \\cdot " + c + "}{" + a + "} = \\dfrac{" + (b * c) + "}{" + a + "} = \\mathbf{" + x + "}\\)";
-		setResolucao(res);
+		addResolucao("Aplicando o produto cruzado (produto dos extremos = produto dos meios):");
+		addResolucao("\\(" + a + " \\cdot x = " + b + " \\cdot " + c + "\\).");
+		addResolucao("\\(x = \\dfrac{" + b + " \\cdot " + c + "}{" + a + "} = \\dfrac{" + (b * c) + "}{" + a + "} = \\mathbf{" + x + "}\\)");
 	}
 }

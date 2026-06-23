@@ -61,11 +61,13 @@ public class ProblemaProduto
 		return a * b;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int produto = resultado();
-		String res = "Identificamos uma situação de repetição: \\(" + a + "\\) grupos de \\(" + b + "\\) unidades. \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Identificamos uma situação de repetição: \\(" + a + "\\) grupos de \\(" + b + "\\) unidades.",
+			"\\(" + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)"
+		};
 	}
 }

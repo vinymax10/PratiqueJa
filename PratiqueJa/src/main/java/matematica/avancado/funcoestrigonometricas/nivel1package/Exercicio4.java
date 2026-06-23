@@ -26,9 +26,7 @@ public class Exercicio4 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Pela tabela de valores notáveis:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(" + angle + ") = \\mathbf{" + val + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela tabela de valores notáveis:");
+		addResolucao("\\(\\cos(" + angle + ") = \\mathbf{" + val + "}\\)");
 	}
 }

@@ -22,16 +22,13 @@ public class Exercicio7 extends GeradorExercicio
 		int ai = caso[1];
 		int ae = caso[2];
 
-		String res = "Os ângulos interno e externo são suplementares: \\(\\alpha_i + \\alpha_e = 180^\\circ\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha_e = 180^\\circ - " + ai + "^\\circ = \\mathbf{" + ae + "^\\circ}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Cada ângulo interno de um polígono regular mede \\(" + ai + "^\\circ\\). Qual é a medida de cada ângulo externo?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + ae);
-		setResolucao(res);
+		addResolucao("Os ângulos interno e externo são suplementares: \\(\\alpha_i + \\alpha_e = 180^\\circ\\)");
+		addResolucao("\\(\\alpha_e = 180^\\circ - " + ai + "^\\circ = \\mathbf{" + ae + "^\\circ}\\)");
 	}
 }

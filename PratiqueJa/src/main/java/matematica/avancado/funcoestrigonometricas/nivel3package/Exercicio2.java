@@ -26,14 +26,12 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + q + "}{" + p + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta = \\dfrac{1}{\\cos^2\\theta}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\left(\\dfrac{" + p + "}{" + q + "}\\right)^2 + 1 = \\dfrac{1}{\\cos^2\\theta} \\\\"
-				+ "\\dfrac{" + pp + "}{" + qq + "} + \\dfrac{" + qq + "}{" + qq + "} = \\dfrac{1}{\\cos^2\\theta} \\\\"
-				+ "\\dfrac{" + rr + "}{" + qq + "} = \\dfrac{1}{\\cos^2\\theta} \\\\"
-				+ "\\cos^2\\theta = \\dfrac{" + qq + "}{" + rr + "} \\\\"
-				+ "\\cos\\theta = \\mathbf{\\dfrac{" + q + "}{" + r + "}}\\)"
-				+ " (positivo: \\(\\theta\\) está no 1.º quadrante)";
-		setResolucao(res);
+		addResolucao("Usando a identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta = \\dfrac{1}{\\cos^2\\theta}\\):");
+		addResolucao("\\(\\left(\\dfrac{" + p + "}{" + q + "}\\right)^2 + 1 = \\dfrac{1}{\\cos^2\\theta}\\)");
+		addResolucao("\\(\\dfrac{" + pp + "}{" + qq + "} + \\dfrac{" + qq + "}{" + qq + "} = \\dfrac{1}{\\cos^2\\theta}\\)");
+		addResolucao("\\(\\dfrac{" + rr + "}{" + qq + "} = \\dfrac{1}{\\cos^2\\theta}\\)");
+		addResolucao("\\(\\cos^2\\theta = \\dfrac{" + qq + "}{" + rr + "}\\)");
+		addResolucao("\\(\\cos\\theta = \\mathbf{\\dfrac{" + q + "}{" + r + "}}\\)"
+				+ " (positivo: \\(\\theta\\) está no 1.º quadrante)");
 	}
 }

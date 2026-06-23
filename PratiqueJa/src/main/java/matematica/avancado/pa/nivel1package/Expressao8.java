@@ -26,11 +26,10 @@ public class Expressao8 extends GeradorExercicio
 		addParagrafo("\\(a_{" + i + "} = " + aiVal + " \\quad \\text{e} \\quad a_{" + j + "} = " + ajVal + "\\)");
 		gerarAlternativas("" + rVal);
 
-		String res = "Usando a fórmula do termo geral \\(a_j = a_i + (j - i) \\cdot r\\): \\(\\\\\\)";
-		res += "\\(" + ajVal + " = " + aiVal + " + (" + j + " - " + i + ") \\cdot r \\\\";
-		res += ajVal + " = " + aiVal + " + " + denom + "r \\\\";
-		res += denom + "r = " + diff + " \\\\";
-		res += "r = \\dfrac{" + diff + "}{" + denom + "} = \\mathbf{" + rVal + "}\\)";
-		setResolucao(res);
+		addResolucao("Usando a fórmula do termo geral \\(a_j = a_i + (j - i) \\cdot r\\):");
+		addResolucao("\\(" + ajVal + " = " + aiVal + " + (" + j + " - " + i + ") \\cdot r\\)");
+		addResolucao("\\(" + ajVal + " = " + aiVal + " + " + denom + "r\\)");
+		addResolucao("\\(" + denom + "r = " + diff + "\\)");
+		addResolucao("\\(r = \\dfrac{" + diff + "}{" + denom + "} = \\mathbf{" + rVal + "}\\)");
 	}
 }

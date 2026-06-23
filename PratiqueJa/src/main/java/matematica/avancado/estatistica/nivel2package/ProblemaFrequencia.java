@@ -39,7 +39,7 @@ public class ProblemaFrequencia
 		return sb.toString();
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		StringBuilder soma = new StringBuilder();
 		int total = 0;
@@ -66,15 +66,13 @@ public class ProblemaFrequencia
 			faixa = "Os valores de \\(" + alvo + "\\) até \\(" + (freq.length-1) + "\\) atendem à condição. Somamos suas frequências:";
 		}
 
-		String res = "A frequência acumulada soma as frequências absolutas dos valores que satisfazem a condição.";
-		res += "\\(\\\\\\)";
-		res += "Distribuição (valor → frequência): " + distribuicaoStr() + ".";
-		res += "\\(\\\\\\)";
-		res += faixa;
-		res += "\\(\\\\\\)";
-		res += "\\(" + soma + " = \\mathbf{" + total + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A frequência acumulada soma as frequências absolutas dos valores que satisfazem a condição.",
+			"Distribuição (valor → frequência): " + distribuicaoStr() + ".",
+			faixa,
+			"\\(" + soma + " = \\mathbf{" + total + "}\\)"
+		};
 	}
 
 	public String resultado()

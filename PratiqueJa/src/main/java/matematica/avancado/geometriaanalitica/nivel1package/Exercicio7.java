@@ -29,9 +29,7 @@ public class Exercicio7 extends GeradorExercicio
 		String pxStr = px < 0 ? "(" + px + ")" : Integer.toString(px);
 		String pyStr = py < 0 ? "(" + py + ")" : Integer.toString(py);
 
-		String res = "Pela fórmula da distância com a origem:"
-				+ "\\(\\\\\\)"
-				+ "\\(d = \\sqrt{" + pxStr + "^2 + " + pyStr + "^2} = \\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = \\mathbf{" + dist + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela fórmula da distância com a origem:");
+		addResolucao("\\(d = \\sqrt{" + pxStr + "^2 + " + pyStr + "^2} = \\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = \\mathbf{" + dist + "}\\)");
 	}
 }

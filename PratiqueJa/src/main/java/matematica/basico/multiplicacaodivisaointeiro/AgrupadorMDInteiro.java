@@ -25,7 +25,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		int a = inteiro(maxAbs), b = inteiro(maxAbs);
 		addParagrafo("Calcule \\(" + fmt(a) + " \\times " + fmt(b) + "\\).");
 		gerarAlternativasInteirasComNegativos(a * b);
-		setResolucao(ResolucaoMDInteiro.multiplicacao(a, b));
+		for(String passo : ResolucaoMDInteiro.multiplicacao(a, b))
+			addResolucao(passo);
 	}
 
 	protected void divisao(int maxAbs)
@@ -34,7 +35,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		int prod = a * b;
 		addParagrafo("Calcule \\(" + fmt(prod) + " \\div " + fmt(b) + "\\).");
 		gerarAlternativasInteirasComNegativos(a);
-		setResolucao(ResolucaoMDInteiro.divisao(prod, b));
+		for(String passo : ResolucaoMDInteiro.divisao(prod, b))
+			addResolucao(passo);
 	}
 
 	protected void multiFatores(int qtd, int maxAbs)
@@ -55,11 +57,10 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		boolean positivo = negativos % 2 == 0;
 		addParagrafo("Calcule \\(" + exp + "\\).");
 		gerarAlternativasInteirasComNegativos(produto);
-		String res = "Multiplicamos os valores absolutos: \\(" + abs + " = " + Math.abs(produto) + "\\). \\(\\\\\\)";
-		res += negativos + " fator" + (negativos == 1 ? "" : "es") + " negativo" + (negativos == 1 ? "" : "s") + " ";
-		res += positivo ? "(quantidade par) → resultado positivo. \\(\\\\\\)" : "(quantidade ímpar) → resultado negativo. \\(\\\\\\)";
-		res += "\\(" + exp + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Multiplicamos os valores absolutos: \\(" + abs + " = " + Math.abs(produto) + "\\).");
+		addResolucao(negativos + " fator" + (negativos == 1 ? "" : "es") + " negativo" + (negativos == 1 ? "" : "s") + " "
+			+ (positivo ? "(quantidade par) → resultado positivo." : "(quantidade ímpar) → resultado negativo."));
+		addResolucao("\\(" + exp + " = \\mathbf{" + produto + "}\\)");
 	}
 
 	protected void potenciaNegativo()
@@ -73,11 +74,10 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		gerarAlternativasInteirasComNegativos(resultado);
 		StringBuilder expand = new StringBuilder();
 		for(int i = 0; i < n; i++) { if(i > 0) expand.append(" \\times "); expand.append("(-" + a + ")"); }
-		String res = "Expandimos a potência em \\(" + n + "\\) fatores: \\(\\\\\\)";
-		res += "\\((-" + a + ")^{" + n + "} = " + expand + "\\). \\(\\\\\\)";
-		res += "\\(" + n + "\\) fatores negativos " + (par ? "(par) → positivo" : "(ímpar) → negativo") + ". \\(\\\\\\)";
-		res += "\\(" + a + "^{" + n + "} = " + abs + " \\to \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Expandimos a potência em \\(" + n + "\\) fatores:");
+		addResolucao("\\((-" + a + ")^{" + n + "} = " + expand + "\\).");
+		addResolucao("\\(" + n + "\\) fatores negativos " + (par ? "(par) → positivo" : "(ímpar) → negativo") + ".");
+		addResolucao("\\(" + a + "^{" + n + "} = " + abs + " \\to \\mathbf{" + resultado + "}\\)");
 	}
 
 	protected void identificarSinal(int maxAbs)
@@ -88,7 +88,7 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		String correta = positivo ? "Positivo" : "Negativo";
 		addParagrafo("Qual é o sinal do resultado de \\(" + fmt(a) + (mult ? " \\times " : " \\div ") + fmt(b) + "\\)?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(positivo ? "Negativo" : "Positivo"));
-		setResolucao("Sinais " + (positivo ? "iguais → resultado \\(\\mathbf{positivo}\\)" : "diferentes → resultado \\(\\mathbf{negativo}\\)") + ".");
+		addResolucao("Sinais " + (positivo ? "iguais → resultado \\(\\mathbf{positivo}\\)" : "diferentes → resultado \\(\\mathbf{negativo}\\)") + ".");
 	}
 
 	protected void distributiva(int maxAbs)
@@ -98,10 +98,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		int resultado = a * (b + c);
 		addParagrafo("Use a propriedade distributiva e calcule \\(" + fmt(a) + " \\times (" + b + " + " + c + ")\\).");
 		gerarAlternativasInteirasComNegativos(resultado);
-		setResolucao(
-			"Distribuímos o fator sobre a soma: \\(\\\\\\)" +
-			"\\(" + fmt(a) + " \\times " + b + " + " + fmt(a) + " \\times " + c + " = " + (a * b) + " + (" + (a * c) + ") = \\mathbf{" + resultado + "}\\)"
-		);
+		addResolucao("Distribuímos o fator sobre a soma:");
+		addResolucao("\\(" + fmt(a) + " \\times " + b + " + " + fmt(a) + " \\times " + c + " = " + (a * b) + " + (" + (a * c) + ") = \\mathbf{" + resultado + "}\\)");
 	}
 
 	protected void missingFator(int maxAbs)
@@ -111,7 +109,7 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		addParagrafo("Qual valor de \\(\\square\\) torna a igualdade verdadeira?");
 		addParagrafo("\\(" + fmt(a) + " \\times \\square = " + c + "\\)");
 		gerarAlternativasInteirasComNegativos(x);
-		setResolucao("Como a divisão é a operação inversa: \\(\\square = " + fmt(c) + " \\div " + fmt(a) + " = \\mathbf{" + x + "}\\).");
+		addResolucao("Como a divisão é a operação inversa: \\(\\square = " + fmt(c) + " \\div " + fmt(a) + " = \\mathbf{" + x + "}\\).");
 	}
 
 	protected void provaReal(int maxAbs)
@@ -120,7 +118,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 		int c = a * b;
 		addParagrafo("Sabendo que \\(" + fmt(a) + " \\times " + fmt(b) + " = " + c + "\\), calcule \\(" + fmt(c) + " \\div " + fmt(a) + "\\).");
 		gerarAlternativasInteirasComNegativos(b);
-		setResolucao("A divisão é a operação inversa da multiplicação: \\(\\\\\\) \\(" + fmt(c) + " \\div " + fmt(a) + " = \\mathbf{" + b + "}\\).");
+		addResolucao("A divisão é a operação inversa da multiplicação:");
+		addResolucao("\\(" + fmt(c) + " \\div " + fmt(a) + " = \\mathbf{" + b + "}\\).");
 	}
 
 	protected void problema()
@@ -133,7 +132,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 			int variacao = -queda * horas;
 			addParagrafo("A temperatura cai \\(" + queda + "\\,°C\\) por hora. Qual é a variação total da temperatura após \\(" + horas + "\\) horas?");
 			gerarAlternativasInteirasComNegativos(variacao);
-			setResolucao(ResolucaoMDInteiro.multiplicacao(-queda, horas));
+			for(String passo : ResolucaoMDInteiro.multiplicacao(-queda, horas))
+				addResolucao(passo);
 		}
 		else if(tipo == 1)
 		{
@@ -142,7 +142,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 			int saldo = qtd * (-valor);
 			addParagrafo("Uma pessoa tem \\(" + qtd + "\\) dívidas de R$\\," + valor + " cada. Qual é o saldo total (em reais)?");
 			gerarAlternativasInteirasComNegativos(saldo);
-			setResolucao(ResolucaoMDInteiro.multiplicacao(qtd, -valor));
+			for(String passo : ResolucaoMDInteiro.multiplicacao(qtd, -valor))
+				addResolucao(passo);
 		}
 		else
 		{
@@ -151,7 +152,8 @@ public abstract class AgrupadorMDInteiro extends GeradorExercicio
 			int total = -porPessoa * pessoas;
 			addParagrafo("Uma dívida de R$\\," + (porPessoa * pessoas) + " (saldo \\(" + total + "\\)) é dividida igualmente entre \\(" + pessoas + "\\) pessoas. Qual é o saldo de cada uma (em reais)?");
 			gerarAlternativasInteirasComNegativos(-porPessoa);
-			setResolucao(ResolucaoMDInteiro.divisao(total, pessoas));
+			for(String passo : ResolucaoMDInteiro.divisao(total, pessoas))
+				addResolucao(passo);
 		}
 	}
 }

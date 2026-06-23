@@ -15,9 +15,8 @@ public class DivisaoPorPotencia10 extends GeradorExercicio
 			int a = q * 10;
 			addParagrafo("Qual é o resultado de \\(" + a + " \\div 10\\)?");
 			gerarAlternativasInteiras(q);
-			String res = "Dividir por \\(10\\) equivale a remover um zero à direita do número: \\(\\\\\\)";
-			res += "\\(" + a + " \\div 10 = \\mathbf{" + q + "}\\)";
-			setResolucao(res);
+			addResolucao("Dividir por \\(10\\) equivale a remover um zero à direita do número:");
+			addResolucao("\\(" + a + " \\div 10 = \\mathbf{" + q + "}\\)");
 		}
 		else
 		{
@@ -25,9 +24,8 @@ public class DivisaoPorPotencia10 extends GeradorExercicio
 			int a = q * 100;
 			addParagrafo("Qual é o resultado de \\(" + a + " \\div 100\\)?");
 			gerarAlternativasInteiras(q);
-			String res = "Dividir por \\(100\\) equivale a remover dois zeros à direita do número: \\(\\\\\\)";
-			res += "\\(" + a + " \\div 100 = \\mathbf{" + q + "}\\)";
-			setResolucao(res);
+			addResolucao("Dividir por \\(100\\) equivale a remover dois zeros à direita do número:");
+			addResolucao("\\(" + a + " \\div 100 = \\mathbf{" + q + "}\\)");
 		}
 	}
 }

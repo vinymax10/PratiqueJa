@@ -36,14 +36,9 @@ public class NotacaoCientifica4 extends GeradorExercicio
 		addParagrafo(desc + " \\(" + d + " \\times 10^{" + m + "}\\) m da Terra.");
 		addParagrafo("Em quantos segundos a luz percorre essa distância?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"\\(t = \\dfrac{d}{v}\\):" +
-			"\\(\\\\\\)" +
-			"\\(t = \\dfrac{" + d + " \\times 10^{" + m + "}}{3 \\times 10^8} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + d + "}{3} \\times 10^{" + m + " - 8} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + ratio + " \\times 10^{" + expT + "}}\\) s"
-		);
+		addResolucao("\\(t = \\dfrac{d}{v}\\):");
+		addResolucao("\\(t = \\dfrac{" + d + " \\times 10^{" + m + "}}{3 \\times 10^8} =\\)");
+		addResolucao("\\(\\dfrac{" + d + "}{3} \\times 10^{" + m + " - 8} =\\)");
+		addResolucao("\\(\\mathbf{" + ratio + " \\times 10^{" + expT + "}}\\) s");
 	}
 }

@@ -17,12 +17,11 @@ public class Expressao1 extends GeradorExercicio
 
 		addParagrafo("Qual é a maior solução de \\(|" + bStr + "| = " + k + "\\)?");
 
-		String res = "\\(|f(x)| = k \\Rightarrow f(x) = k\\) ou \\(f(x) = -k\\): \\(\\\\\\)";
-		res += "Caso 1: \\(" + bStr + " = " + k + " \\Rightarrow x = " + x1 + "\\) \\(\\\\\\)";
-		res += "Caso 2: \\(" + bStr + " = -" + k + " \\Rightarrow x = " + x2 + "\\) \\(\\\\\\)";
-		res += "Maior solução: \\(\\mathbf{" + x1 + "}\\)";
-
 		gerarAlternativas("" + x1);
-		setResolucao(res);
+
+		addResolucao("\\(|f(x)| = k \\Rightarrow f(x) = k\\) ou \\(f(x) = -k\\):");
+		addResolucao("Caso 1: \\(" + bStr + " = " + k + " \\Rightarrow x = " + x1 + "\\)");
+		addResolucao("Caso 2: \\(" + bStr + " = -" + k + " \\Rightarrow x = " + x2 + "\\)");
+		addResolucao("Maior solução: \\(\\mathbf{" + x1 + "}\\)");
 	}
 }

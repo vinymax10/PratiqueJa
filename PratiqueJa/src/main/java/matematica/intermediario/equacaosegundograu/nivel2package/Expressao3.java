@@ -24,14 +24,12 @@ public class Expressao3 extends GeradorExercicio
 
 		int deltaCal = b * b - 4 * a * c;
 
-		String res = "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + deltaCal + "}\\)";
-
 		addParagrafo("Calcule o discriminante \\(\\Delta\\)");
 		addParagrafo("\\(" + eq + "\\)");
 		gerarAlternativas("" + deltaCal);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\)");
+		addResolucao("\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + deltaCal + "}\\)");
 	}
 }

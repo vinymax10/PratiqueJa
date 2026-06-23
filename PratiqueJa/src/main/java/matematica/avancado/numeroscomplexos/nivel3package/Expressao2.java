@@ -11,27 +11,29 @@ public class Expressao2 extends GeradorExercicio
 		NumeroComplexo a = NumeroComplexo.contruir(10);
 
 		String texto = "(" + a + ")^2=";
-		String resolucao = a.resolucaoQuadrado();
+		String[] resolucao = a.resolucaoQuadrado();
 		NumeroComplexo resultado = a.mult(a);
 
-		String pergunta, resultadoCorreto;
+		String pergunta, resultadoCorreto, passoFinal;
 		boolean real = rand.nextBoolean();
 		if(real)
 		{
 			pergunta = "Qual a parte real do quadrado?";
 			resultadoCorreto = "" + resultado.real;
-			resolucao += "\\\\ \\operatorname{Re}(z)=" + resultado.real.showDfrac();
+			passoFinal = "\\(\\operatorname{Re}(z)=" + resultado.real.showDfrac() + "\\)";
 		}
 		else
 		{
 			pergunta = "Qual a parte imaginária do quadrado?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucao += "\\\\ \\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac();
+			passoFinal = "\\(\\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac() + "\\)";
 		}
 
 		addParagrafo(pergunta);
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
+		addResolucao(passoFinal);
 	}
 }

@@ -22,11 +22,9 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		addParagrafo("Encontre \\(" + v + "\\)");
 		addParagrafo("\\(" + a + v + " + " + b + " = " + c + "\\)");
 		gerarAlternativas("" + x);
-		setResolucao(
-			"Subtraímos \\(" + b + "\\) dos dois lados: \\(\\\\\\)" +
-			"\\(" + a + v + " = " + c + " - " + b + " = " + (c - b) + "\\). \\(\\\\\\)" +
-			"\\(" + v + " = \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Subtraímos \\(" + b + "\\) dos dois lados:");
+		addResolucao("\\(" + a + v + " = " + c + " - " + b + " = " + (c - b) + "\\).");
+		addResolucao("\\(" + v + " = \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + x + "}\\)");
 	}
 
 	// ax - b = c
@@ -38,11 +36,9 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		addParagrafo("Encontre \\(" + v + "\\)");
 		addParagrafo("\\(" + a + v + " - " + b + " = " + c + "\\)");
 		gerarAlternativas("" + x);
-		setResolucao(
-			"Somamos \\(" + b + "\\) aos dois lados: \\(\\\\\\)" +
-			"\\(" + a + v + " = " + c + " + " + b + " = " + (c + b) + "\\). \\(\\\\\\)" +
-			"\\(" + v + " = \\dfrac{" + (c + b) + "}{" + a + "} = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Somamos \\(" + b + "\\) aos dois lados:");
+		addResolucao("\\(" + a + v + " = " + c + " + " + b + " = " + (c + b) + "\\).");
+		addResolucao("\\(" + v + " = \\dfrac{" + (c + b) + "}{" + a + "} = \\mathbf{" + x + "}\\)");
 	}
 
 	// ax + b = cx + d  (a > c)
@@ -59,11 +55,10 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		addParagrafo("Encontre \\(" + v + "\\)");
 		addParagrafo("\\(" + a + v + " + " + b + " = " + cStr + v + " + " + d + "\\)");
 		gerarAlternativas("" + x);
-		String res = "Agrupamos os termos com \\(" + v + "\\) à esquerda e as constantes à direita: \\(\\\\\\)";
-		res += "\\(" + a + v + " - " + cStr + v + " = " + d + " - " + b + "\\). \\(\\\\\\)";
-		res += "\\(" + (coef > 1 ? coef : "") + v + " = " + (d - b) + "\\). \\(\\\\\\)";
-		res += "\\(" + v + " = \\dfrac{" + (d - b) + "}{" + coef + "} = \\mathbf{" + x + "}\\)";
-		setResolucao(res);
+		addResolucao("Agrupamos os termos com \\(" + v + "\\) à esquerda e as constantes à direita:");
+		addResolucao("\\(" + a + v + " - " + cStr + v + " = " + d + " - " + b + "\\).");
+		addResolucao("\\(" + (coef > 1 ? coef : "") + v + " = " + (d - b) + "\\).");
+		addResolucao("\\(" + v + " = \\dfrac{" + (d - b) + "}{" + coef + "} = \\mathbf{" + x + "}\\)");
 	}
 
 	// a(x + b) = c
@@ -75,12 +70,10 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		addParagrafo("Encontre \\(" + v + "\\)");
 		addParagrafo("\\(" + a + "(" + v + " + " + b + ") = " + c + "\\)");
 		gerarAlternativas("" + x);
-		setResolucao(
-			"Aplicamos a distributiva: \\(\\\\\\)" +
-			"\\(" + a + v + " + " + (a * b) + " = " + c + "\\). \\(\\\\\\)" +
-			"\\(" + a + v + " = " + c + " - " + (a * b) + " = " + (c - a * b) + "\\). \\(\\\\\\)" +
-			"\\(" + v + " = \\dfrac{" + (c - a * b) + "}{" + a + "} = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Aplicamos a distributiva:");
+		addResolucao("\\(" + a + v + " + " + (a * b) + " = " + c + "\\).");
+		addResolucao("\\(" + a + v + " = " + c + " - " + (a * b) + " = " + (c - a * b) + "\\).");
+		addResolucao("\\(" + v + " = \\dfrac{" + (c - a * b) + "}{" + a + "} = \\mathbf{" + x + "}\\)");
 	}
 
 	// x/b + c = d
@@ -93,12 +86,10 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		addParagrafo("Encontre \\(" + v + "\\)");
 		addParagrafo("\\(\\dfrac{" + v + "}{" + b + "} + " + c + " = " + d + "\\)");
 		gerarAlternativas("" + x);
-		setResolucao(
-			"Subtraímos \\(" + c + "\\) dos dois lados: \\(\\\\\\)" +
-			"\\(\\dfrac{" + v + "}{" + b + "} = " + d + " - " + c + " = " + q + "\\). \\(\\\\\\)" +
-			"Multiplicamos por \\(" + b + "\\): \\(\\\\\\)" +
-			"\\(" + v + " = " + q + " \\times " + b + " = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Subtraímos \\(" + c + "\\) dos dois lados:");
+		addResolucao("\\(\\dfrac{" + v + "}{" + b + "} = " + d + " - " + c + " = " + q + "\\).");
+		addResolucao("Multiplicamos por \\(" + b + "\\):");
+		addResolucao("\\(" + v + " = " + q + " \\times " + b + " = \\mathbf{" + x + "}\\)");
 	}
 
 	// ax + b (>, <, >=, <=) c  — inequação do 1º grau (coeficiente positivo, sentido mantido)
@@ -120,12 +111,10 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		distratores.add("\\(" + v + " " + s + " " + (xB > 1 ? xB - 1 : xB + 2) + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + v + " " + s + " " + xB + "\\)", distratores);
 
-		setResolucao(
-			"Isolamos \\(" + v + "\\): \\(\\\\\\)" +
-			"\\(" + a + v + " " + s + " " + c + " - " + b + " = " + (c - b) + "\\). \\(\\\\\\)" +
-			"Dividimos por \\(" + a + " > 0\\) (o sentido se mantém): \\(\\\\\\)" +
-			"\\(" + v + " " + s + " \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + xB + "}\\)"
-		);
+		addResolucao("Isolamos \\(" + v + "\\):");
+		addResolucao("\\(" + a + v + " " + s + " " + c + " - " + b + " = " + (c - b) + "\\).");
+		addResolucao("Dividimos por \\(" + a + " > 0\\) (o sentido se mantém):");
+		addResolucao("\\(" + v + " " + s + " \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + xB + "}\\)");
 	}
 
 	protected void problema(int maxA, int maxX, int maxB)
@@ -140,10 +129,8 @@ public abstract class AgrupadorEquacao extends GeradorExercicio
 		else
 			addParagrafo("Pensei em um número, multipliquei por \\(" + a + "\\), somei \\(" + b + "\\) e obtive \\(" + c + "\\). Em que número pensei?");
 		gerarAlternativas("" + x);
-		setResolucao(
-			"Seja \\(x\\) o número. A equação é \\(" + a + "x + " + b + " = " + c + "\\). \\(\\\\\\)" +
-			"\\(" + a + "x = " + c + " - " + b + " = " + (c - b) + "\\). \\(\\\\\\)" +
-			"\\(x = \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Seja \\(x\\) o número. A equação é \\(" + a + "x + " + b + " = " + c + "\\).");
+		addResolucao("\\(" + a + "x = " + c + " - " + b + " = " + (c - b) + "\\).");
+		addResolucao("\\(x = \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + x + "}\\)");
 	}
 }

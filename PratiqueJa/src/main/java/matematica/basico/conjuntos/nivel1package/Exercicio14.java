@@ -30,8 +30,7 @@ public class Exercicio14 extends GeradorExercicio
 		addParagrafo("\\(A = " + a + "\\)");
 		embaralharEAdicionarAlternativas(formatarNumero(pertence), distratores);
 
-		String res = "Um elemento pertence a \\(A\\) se e somente se está listado no conjunto. \\(\\\\\\)";
-		res += "\\(" + pertence + " \\in A\\), pois \\(" + pertence + "\\) aparece em \\(A = " + a + "\\).";
-		setResolucao(res);
+		addResolucao("Um elemento pertence a \\(A\\) se e somente se está listado no conjunto.");
+		addResolucao("\\(" + pertence + " \\in A\\), pois \\(" + pertence + "\\) aparece em \\(A = " + a + "\\).");
 	}
 }

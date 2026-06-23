@@ -18,8 +18,7 @@ public class ParcelaMissing extends GeradorExercicio
 
 		gerarAlternativasInteiras(a);
 
-		String res = "Para encontrar a parcela desconhecida, subtraímos a parcela conhecida da soma: \\(\\\\\\)";
-		res += "\\(\\square = " + soma + " - " + b + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("Para encontrar a parcela desconhecida, subtraímos a parcela conhecida da soma:");
+		addResolucao("\\(\\square = " + soma + " - " + b + " = \\mathbf{" + a + "}\\)");
 	}
 }

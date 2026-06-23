@@ -16,10 +16,8 @@ public class Expressao6 extends GeradorExercicio
 
 		addParagrafo("Resolva a equação \\(" + baseStr + "^x = " + baseStr + "^{" + n + "}\\).");
 
-		String res = "As bases são iguais \\(\\left(\\dfrac{1}{" + a + "}\\right)\\), então igualamos os expoentes: \\(\\\\\\)";
-		res += "\\(x = \\mathbf{" + n + "}\\)";
-
 		gerarAlternativas("" + n);
-		setResolucao(res);
+		addResolucao("As bases são iguais \\(\\left(\\dfrac{1}{" + a + "}\\right)\\), então igualamos os expoentes:");
+		addResolucao("\\(x = \\mathbf{" + n + "}\\)");
 	}
 }

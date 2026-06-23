@@ -28,14 +28,12 @@ public class Expressao4 extends GeradorExercicio
 		Racional soma = new Racional(-b, a);
 		soma.fatoracao(2);
 
-		String res = "\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)" + "\\(\\\\\\)";
-		res += "Sabendo que \\(x_1=" + x1 + "\\): \\(\\\\\\)";
-		res += "\\(" + x1 + "+x_2=" + soma.toStringLatex() + "\\)" + "\\(\\\\\\)";
-		res += "\\(x_2=" + soma.toStringLatex() + "-" + x1 + "=\\mathbf{" + x2 + "}\\)";
-
 		addParagrafo("Encontre \\(x_2\\), sabendo que \\(x_1=" + x1 + "\\)");
 		addParagrafo("\\(" + eq + "\\)");
 		gerarAlternativas("" + x2);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)");
+		addResolucao("Sabendo que \\(x_1=" + x1 + "\\):");
+		addResolucao("\\(" + x1 + "+x_2=" + soma.toStringLatex() + "\\)");
+		addResolucao("\\(x_2=" + soma.toStringLatex() + "-" + x1 + "=\\mathbf{" + x2 + "}\\)");
 	}
 }

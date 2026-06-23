@@ -37,6 +37,6 @@ public class Image8 extends GeradorExercicio
 				+ "\\), qual o raio \\(R\\) da circunferência circunscrita ao triângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

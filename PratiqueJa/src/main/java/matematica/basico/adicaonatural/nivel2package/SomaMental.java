@@ -12,6 +12,6 @@ public class SomaMental extends GeradorExercicio
 		int b = 11 + rand.nextInt(89); // 11..99
 		addParagrafo("Calcule mentalmente: \\(" + a + " + " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(a + b);
-		setResolucao("\\(" + a + " + " + b + " = \\mathbf{" + (a + b) + "}\\)");
+		addResolucao("\\(" + a + " + " + b + " = \\mathbf{" + (a + b) + "}\\)");
 	}
 }

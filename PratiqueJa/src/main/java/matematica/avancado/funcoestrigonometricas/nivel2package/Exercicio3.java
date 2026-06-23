@@ -25,11 +25,9 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + q + "}{" + r + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando \\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}\\,\\theta = \\dfrac{\\dfrac{" + p + "}{" + r + "}}{\\dfrac{" + q + "}{" + r
+		addResolucao("Usando \\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}\\):");
+		addResolucao("\\(\\operatorname{tg}\\,\\theta = \\dfrac{\\dfrac{" + p + "}{" + r + "}}{\\dfrac{" + q + "}{" + r
 				+ "}} = \\dfrac{" + p + "}{" + r + "} \\times \\dfrac{" + r + "}{" + q
-				+ "} = \\mathbf{\\dfrac{" + p + "}{" + q + "}}\\)";
-		setResolucao(res);
+				+ "} = \\mathbf{\\dfrac{" + p + "}{" + q + "}}\\)");
 	}
 }

@@ -28,13 +28,14 @@ import modelo.Entidade;
 import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
+import modelo.pdf.Visibilidade;
 import modelo.academico.Ano;
 import modelo.academico.Banca;
 import modelo.academico.Disciplina;
 import modelo.academico.Orgao;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "assuntos", "paragrafos", "alternativas", "resultadosQuestao" })
+@ToString(exclude = { "assuntos", "paragrafos", "alternativas", "resultadosQuestao", "resolucaoParagrafos" })
 @Data
 @Entity
 public class Questao implements Serializable, Entidade
@@ -67,6 +68,9 @@ public class Questao implements Serializable, Entidade
 	@AuditLabel(value = "disciplina", genero = GeneroGramatical.FEMININO, atributo = "nome")
 	private Disciplina disciplina;
 
+	@AuditLabel(value = "visibilidade")
+	private Visibilidade visibilidade;
+	
 	@DiffIgnore
 	@ManyToMany
 	@JoinTable(name = "questao_assunto",
@@ -92,11 +96,6 @@ public class Questao implements Serializable, Entidade
 	@AuditLabel(value = "chave", genero = GeneroGramatical.FEMININO)
 	private String chave;
 
-	@Column(length = 2047)
-	@Size(max = 2047)
-	@AuditLabel(value = "resolução", genero = GeneroGramatical.FEMININO)
-	private String resolucao;
-
 	@Column(length = 255)
 	@Size(max = 255)
 	@AuditLabel(value = "prova", genero = GeneroGramatical.FEMININO)
@@ -115,6 +114,16 @@ public class Questao implements Serializable, Entidade
 	@DiffIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "questao")
 	private List<ResultadoQuestao> resultadosQuestao = new ArrayList<ResultadoQuestao>();
+
+	/**
+	 * Resolução em parágrafos (migração da String {@link #resolucao}). Na Fase 1 a coluna
+	 * {@code resolucao} ainda é a fonte de verdade; estes parágrafos são populados pela rotina
+	 * de migração e passam a ser a fonte na Fase 3 (quando a coluna é removida).
+	 */
+	@DiffIgnore
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "questao")
+	@OrderBy("ordem")
+	private List<ParagrafoResolucaoQuestao> resolucaoParagrafos = new ArrayList<ParagrafoResolucaoQuestao>();
 
 	@AuditLabel(value = "revisada", genero = GeneroGramatical.FEMININO)
 	private boolean revisada;
@@ -195,5 +204,37 @@ public class Questao implements Serializable, Entidade
 			sb.append(a.getNome());
 		}
 		return sb.toString();
+	}
+
+	// ── Resolução em parágrafos (views derivadas; ver resolucaoParagrafos) ──────────
+
+	/** Linhas da resolução (texto de cada parágrafo não-vazio), na ordem. */
+	public List<String> getResolucaoLinhas()
+	{
+		List<String> linhas = new ArrayList<>();
+		for(ParagrafoResolucaoQuestao paragrafo : resolucaoParagrafos)
+			if(paragrafo.getTexto() != null && !paragrafo.getTexto().isBlank())
+				linhas.add(paragrafo.getTexto());
+		return linhas;
+	}
+
+	/**
+	 * View LaTeX (modo texto) para os PDFs: junta as linhas com "\\" (quebra de linha em modo
+	 * texto). O "\\" fica entre segmentos "\(...\)", nunca dentro do math.
+	 */
+	public String getResolucaoLatex()
+	{
+		List<String> linhas = getResolucaoLinhas();
+		return linhas.isEmpty() ? null : String.join(" \\\\ ", linhas);
+	}
+
+	/**
+	 * View para HTML/MathJax: junta as linhas com {@code <br/>} (cada uma é um segmento
+	 * "\(...\)" ou texto). Nas telas web o "\\" não vira quebra visual.
+	 */
+	public String getResolucaoHtml()
+	{
+		List<String> linhas = getResolucaoLinhas();
+		return linhas.isEmpty() ? null : String.join("<br/>", linhas);
 	}
 }

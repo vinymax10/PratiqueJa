@@ -16,16 +16,13 @@ public class Exercicio5 extends GeradorExercicio
 		int l = 2 * m;
 		int x = 6 * m * m;          // A = (3√3/2)·l² = (3√3/2)·4m² = 6m²√3
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaAreaHexagono() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\dfrac{3\\sqrt{3}}{2} \\cdot " + l + "^2 = \\dfrac{3\\sqrt{3}}{2} \\cdot " + (l * l) + " = \\mathbf{" + x + "}\\sqrt{3}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "" + l, "a");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Um hexágono regular tem lado \\(" + l + "\\). Sabendo que sua área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + x);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaAreaHexagono() + "\\)");
+		addResolucao("\\(A = \\dfrac{3\\sqrt{3}}{2} \\cdot " + l + "^2 = \\dfrac{3\\sqrt{3}}{2} \\cdot " + (l * l) + " = \\mathbf{" + x + "}\\sqrt{3}\\)");
 	}
 }

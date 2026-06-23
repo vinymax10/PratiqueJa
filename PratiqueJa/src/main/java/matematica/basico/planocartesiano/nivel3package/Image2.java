@@ -33,17 +33,10 @@ public class Image2 extends GeradorExercicio
 		// Verifica se √d² admite simplificação (ex: √8 = 2√2)
 		int[] simplificado = simplificarRadical(d2);
 		String raizStr;
-		String simplStr = "";
 		if (simplificado[0] > 1)
-		{
 			raizStr = simplificado[0] + "\\sqrt{" + simplificado[1] + "}";
-			simplStr = "Simplificando o radical: \\(\\\\\\)";
-			simplStr += "\\(\\sqrt{" + d2 + "} = \\sqrt{" + simplificado[0] * simplificado[0] + " \\cdot " + simplificado[1] + "} = " + raizStr + "\\) \\(\\\\\\) ";
-		}
 		else
-		{
 			raizStr = "\\sqrt{" + d2 + "}";
-		}
 
 		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
 		BufferedImage image = config.criarImagem();
@@ -75,13 +68,16 @@ public class Image2 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Do plano, lemos as coordenadas de P: \\(x = " + px + "\\) e \\(y = " + py + "\\). \\(\\\\\\)";
-		res += "Aplicando a fórmula da distância à origem: \\(\\\\\\)";
-		res += "\\(d(P,\\;O) = \\sqrt{x^2 + y^2} = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ \\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + d2 + "}\\) ";
-		res += simplStr;
-		res += "Portanto, \\(d = " + raizStr + "\\).";
-
-		setResolucao(res);
+		addResolucao("Do plano, lemos as coordenadas de P: \\(x = " + px + "\\) e \\(y = " + py + "\\).");
+		addResolucao("Aplicando a fórmula da distância à origem:");
+		addResolucao("\\(d(P,\\;O) = \\sqrt{x^2 + y^2} = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\)");
+		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + d2 + "}\\)");
+		if (simplificado[0] > 1)
+		{
+			addResolucao("Simplificando o radical:");
+			addResolucao("\\(\\sqrt{" + d2 + "} = \\sqrt{" + simplificado[0] * simplificado[0] + " \\cdot " + simplificado[1] + "} = " + raizStr + "\\)");
+		}
+		addResolucao("Portanto, \\(d = " + raizStr + "\\).");
 	}
 
 	private boolean ehQuadradoPerfeito(int n)

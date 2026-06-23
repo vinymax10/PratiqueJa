@@ -15,7 +15,9 @@ public class Expressao2 extends GeradorExercicio
 		boolean pedirLogDeUm = rand.nextBoolean();
 
 		List<String> dist = new ArrayList<>();
-		String correta, enunciado, res;
+		String correta, enunciado;
+
+		addParagrafo("Calcule usando logaritmos especiais:");
 
 		if (pedirLogDeUm)
 		{
@@ -25,8 +27,9 @@ public class Expressao2 extends GeradorExercicio
 			dist.add("1");
 			dist.add("" + b);
 			dist.add("-1");
-			res = "Pela propriedade \\(\\log_b 1 = 0\\) (pois \\(b^0 = 1\\)): \\(\\\\\\)";
-			res += "\\(\\log_{" + b + "} 1 = \\mathbf{0}\\)";
+			addParagrafo(enunciado);
+			addResolucao("Pela propriedade \\(\\log_b 1 = 0\\) (pois \\(b^0 = 1\\)):");
+			addResolucao("\\(\\log_{" + b + "} 1 = \\mathbf{0}\\)");
 		}
 		else
 		{
@@ -36,13 +39,11 @@ public class Expressao2 extends GeradorExercicio
 			dist.add("0");
 			dist.add("" + b);
 			dist.add("2");
-			res = "Pela propriedade \\(\\log_b b = 1\\) (pois \\(b^1 = b\\)): \\(\\\\\\)";
-			res += "\\(\\log_{" + b + "} " + b + " = \\mathbf{1}\\)";
+			addParagrafo(enunciado);
+			addResolucao("Pela propriedade \\(\\log_b b = 1\\) (pois \\(b^1 = b\\)):");
+			addResolucao("\\(\\log_{" + b + "} " + b + " = \\mathbf{1}\\)");
 		}
 
-		addParagrafo("Calcule usando logaritmos especiais:");
-		addParagrafo(enunciado);
 		embaralharEAdicionarAlternativas(correta, dist);
-		setResolucao(res);
 	}
 }

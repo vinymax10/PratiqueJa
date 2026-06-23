@@ -40,10 +40,8 @@ public class Primo8 extends AgrupadorPrimo
 		addParagrafo("Dado \\(N = " + p + " \\times " + q + " = " + n + "\\), qual dos números " + listarOpcoes("\\(" + correto + "\\)", erradas) + " é coprimo com \\(N\\) (\\(\\text{MDC} = 1\\))?");
 		embaralharEAdicionarAlternativas("\\(" + correto + "\\)", erradas);
 
-		setResolucao(
-			"\\(N = " + p + " \\times " + q + " \\Rightarrow\\) fatores primos de \\(N\\): \\(\\{" + p + ",\\," + q + "\\}\\). \\(\\\\\\) " +
-			"\\(" + correto + "\\) não tem \\(" + p + "\\) nem \\(" + q + "\\) como fator. \\(\\\\\\) " +
-			"MDC\\((" + n + ",\\," + correto + ") = \\mathbf{1} \\Rightarrow\\) coprimos."
-		);
+		addResolucao("\\(N = " + p + " \\times " + q + " \\Rightarrow\\) fatores primos de \\(N\\): \\(\\{" + p + ",\\," + q + "\\}\\).");
+		addResolucao("\\(" + correto + "\\) não tem \\(" + p + "\\) nem \\(" + q + "\\) como fator.");
+		addResolucao("MDC\\((" + n + ",\\," + correto + ") = \\mathbf{1} \\Rightarrow\\) coprimos.");
 	}
 }

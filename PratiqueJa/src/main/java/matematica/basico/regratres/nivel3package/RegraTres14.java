@@ -36,9 +36,8 @@ public class RegraTres14 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas("\\(" + total + "\\%\\)", distratores);
 
-		String res = "Desconto total \\(= p_1 + p_2 - \\dfrac{p_1 \\cdot p_2}{100}\\). \\(\\\\\\)";
-		res += "\\(" + p1 + " + " + p2 + " - \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} = \\\\ \\)";
-		res += "\\(" + (p1 + p2) + " - " + produto + " = \\mathbf{" + total + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("Desconto total \\(= p_1 + p_2 - \\dfrac{p_1 \\cdot p_2}{100}\\).");
+		addResolucao("\\(" + p1 + " + " + p2 + " - \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} =\\)");
+		addResolucao("\\(" + (p1 + p2) + " - " + produto + " = \\mathbf{" + total + "\\%}\\)");
 	}
 }

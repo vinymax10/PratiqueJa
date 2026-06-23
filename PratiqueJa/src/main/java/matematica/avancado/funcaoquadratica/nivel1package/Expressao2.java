@@ -24,11 +24,9 @@ public class Expressao2 extends GeradorExercicio
 		int bSq = b * b;
 		int term4ac = -4 * a * c;
 
-		String res = "\\(\\Delta = b^2 - 4ac\\\\";
-		res += "\\Delta = (" + b + ")^2 - 4 \\cdot (" + a + ") \\cdot (" + c + ")\\\\";
-		res += "\\Delta = " + bSq + Auxiliar.getNumber(term4ac, "", false) + " = \\mathbf{" + delta + "}\\)";
-
 		gerarAlternativas("" + delta);
-		setResolucao(res);
+		addResolucao("\\(\\Delta = b^2 - 4ac\\)");
+		addResolucao("\\(\\Delta = (" + b + ")^2 - 4 \\cdot (" + a + ") \\cdot (" + c + ")\\)");
+		addResolucao("\\(\\Delta = " + bSq + Auxiliar.getNumber(term4ac, "", false) + " = \\mathbf{" + delta + "}\\)");
 	}
 }

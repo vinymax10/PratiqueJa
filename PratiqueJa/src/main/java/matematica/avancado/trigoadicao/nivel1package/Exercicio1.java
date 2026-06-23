@@ -12,7 +12,7 @@ public class Exercicio1 extends GeradorExercicio
 	{
 		int choice = rand.nextInt(2);
 
-		String enunciado, correta, res;
+		String enunciado, correta;
 		List<String> distratores = new ArrayList<>();
 
 		if (choice == 0) {
@@ -22,12 +22,6 @@ public class Exercicio1 extends GeradorExercicio
 			distratores.add("\\(\\dfrac{\\sqrt{6}-\\sqrt{2}}{4}\\)");
 			distratores.add("\\(\\dfrac{\\sqrt{6}+\\sqrt{2}}{2}\\)");
 			distratores.add("\\(\\dfrac{\\sqrt{3}+1}{4}\\)");
-			res = "Aplicando \\(\\operatorname{sen}(a+b) = \\operatorname{sen}\\,a\\cos b + \\cos a\\,\\operatorname{sen}\\,b\\):"
-					+ "\\(\\\\\\)"
-					+ "\\(\\operatorname{sen}(45°+30°) = \\\\"
-					+ "\\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{\\sqrt{3}}{2} + \\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{1}{2} = \\\\"
-					+ "\\dfrac{\\sqrt{6}}{4} + \\dfrac{\\sqrt{2}}{4} = "
-					+ "\\mathbf{\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}}\\)";
 		} else {
 			enunciado = "Calcule \\(\\operatorname{sen}(15°)\\) usando a fórmula de subtração"
 					+ " \\(\\operatorname{sen}(45°-30°)\\).";
@@ -35,16 +29,21 @@ public class Exercicio1 extends GeradorExercicio
 			distratores.add("\\(\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}\\)");
 			distratores.add("\\(\\dfrac{\\sqrt{6}-\\sqrt{2}}{2}\\)");
 			distratores.add("\\(\\dfrac{\\sqrt{3}-1}{4}\\)");
-			res = "Aplicando \\(\\operatorname{sen}(a-b) = \\operatorname{sen}\\,a\\cos b - \\cos a\\,\\operatorname{sen}\\,b\\):"
-					+ "\\(\\\\\\)"
-					+ "\\(\\operatorname{sen}(45°-30°) = \\\\"
-					+ "\\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{\\sqrt{3}}{2} - \\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{1}{2} = \\\\"
-					+ "\\dfrac{\\sqrt{6}}{4} - \\dfrac{\\sqrt{2}}{4} = "
-					+ "\\mathbf{\\dfrac{\\sqrt{6}-\\sqrt{2}}{4}}\\)";
 		}
 
 		addParagrafo(enunciado);
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		if (choice == 0) {
+			addResolucao("Aplicando \\(\\operatorname{sen}(a+b) = \\operatorname{sen}\\,a\\cos b + \\cos a\\,\\operatorname{sen}\\,b\\):");
+			addResolucao("\\(\\operatorname{sen}(45°+30°) =\\)");
+			addResolucao("\\(\\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{\\sqrt{3}}{2} + \\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{1}{2} =\\)");
+			addResolucao("\\(\\dfrac{\\sqrt{6}}{4} + \\dfrac{\\sqrt{2}}{4} = \\mathbf{\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}}\\)");
+		} else {
+			addResolucao("Aplicando \\(\\operatorname{sen}(a-b) = \\operatorname{sen}\\,a\\cos b - \\cos a\\,\\operatorname{sen}\\,b\\):");
+			addResolucao("\\(\\operatorname{sen}(45°-30°) =\\)");
+			addResolucao("\\(\\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{\\sqrt{3}}{2} - \\dfrac{\\sqrt{2}}{2}\\cdot\\dfrac{1}{2} =\\)");
+			addResolucao("\\(\\dfrac{\\sqrt{6}}{4} - \\dfrac{\\sqrt{2}}{4} = \\mathbf{\\dfrac{\\sqrt{6}-\\sqrt{2}}{4}}\\)");
+		}
 	}
 }

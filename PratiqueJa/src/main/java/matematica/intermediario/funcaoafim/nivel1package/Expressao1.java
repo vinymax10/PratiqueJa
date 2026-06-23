@@ -36,14 +36,11 @@ public class Expressao1 extends GeradorExercicio
 
 		texto = texto.replace("(", "\\left(").replace(")", "\\right)");
 
-		String resolucao = "f(" + num + ")=";
-		if(a != -1 && a != 1)
-			resolucao += +a + "\\cdot " + num + nomeB + " = \\\\";
-		resolucao += (a * num) + nomeB + " = " + resultado;
-
 		addParagrafo("Encontre \\( f(" + num + ") \\)");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		if(a != -1 && a != 1)
+			addResolucao("\\(f(" + num + ")=" + a + "\\cdot " + num + nomeB + " =\\)");
+		addResolucao("\\(" + (a != -1 && a != 1 ? "" : "f(" + num + ")=") + (a * num) + nomeB + " = " + resultado + "\\)");
 	}
 }

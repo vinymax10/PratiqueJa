@@ -24,6 +24,7 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Quantos termos tem a PA?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas("" + n);
-		setResolucao("\\(" + ResolucaoPA.numeroTermos(a1, r, an) + "\\)");
+		for(String passo : ResolucaoPA.numeroTermos(a1, r, an))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

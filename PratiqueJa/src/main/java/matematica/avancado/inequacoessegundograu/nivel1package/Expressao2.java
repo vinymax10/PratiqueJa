@@ -49,28 +49,27 @@ public class Expressao2 extends GeradorExercicio
 		int sqrtDelta = r2 - r1;
 		String bStr = b < 0 ? "(" + b + ")" : "" + b;
 
-		String res = "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)" + "\\(\\\\\\)";
-		res += "\\(x=\\dfrac{" + (-b) + "\\pm " + sqrtDelta + "}{2}\\)" + "\\(\\\\\\)";
-		res += "\\(x_1=\\dfrac{" + (-b) + "-" + sqrtDelta + "}{2}=" + r1
-				+ ", \\quad x_2=\\dfrac{" + (-b) + "+" + sqrtDelta + "}{2}=" + r2 + "\\)" + "\\(\\\\\\)";
-		if (pedirNegativo)
-		{
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)\\leq 0\\) entre as raízes (incluindo os zeros). \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in [" + r1 + ",\\," + r2 + "]}\\)";
-		}
-		else
-		{
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)\\geq 0\\) fora das raízes (incluindo os zeros). \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in (-\\infty,\\," + r1 + "] \\cup [" + r2 + ",\\,+\\infty)}\\)";
-		}
-
 		addParagrafo("Resolva a inequação");
 		addParagrafo("\\(" + inequacao + "\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " =\\)"
+				+ "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)");
+		addResolucao("\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)");
+		addResolucao("\\(x=\\dfrac{" + (-b) + "\\pm " + sqrtDelta + "}{2}\\)");
+		addResolucao("\\(x_1=\\dfrac{" + (-b) + "-" + sqrtDelta + "}{2}=" + r1
+				+ ", \\quad x_2=\\dfrac{" + (-b) + "+" + sqrtDelta + "}{2}=" + r2 + "\\)");
+		if (pedirNegativo)
+		{
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)\\leq 0\\) entre as raízes (incluindo os zeros).");
+			addResolucao("\\(\\mathbf{x \\in [" + r1 + ",\\," + r2 + "]}\\)");
+		}
+		else
+		{
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)\\geq 0\\) fora das raízes (incluindo os zeros).");
+			addResolucao("\\(\\mathbf{x \\in (-\\infty,\\," + r1 + "] \\cup [" + r2 + ",\\,+\\infty)}\\)");
+		}
 	}
 }

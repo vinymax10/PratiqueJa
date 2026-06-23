@@ -63,11 +63,13 @@ public class ProblemaProvaReal
 		return a;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "A prova real da subtração usa a operação inversa: se \\(a - b = c\\), então \\(c + b = a\\). \\(\\\\\\)";
-		res += "Verificando: \\(\\\\\\)";
-		res += "\\(" + c + " + " + b + " = \\mathbf{" + a + "}\\)";
-		return res;
+		return new String[]
+		{
+			"A prova real da subtração usa a operação inversa: se \\(a - b = c\\), então \\(c + b = a\\).",
+			"Verificando:",
+			"\\(" + c + " + " + b + " = \\mathbf{" + a + "}\\)"
+		};
 	}
 }

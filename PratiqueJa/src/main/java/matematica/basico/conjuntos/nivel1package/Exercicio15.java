@@ -44,17 +44,15 @@ public class Exercicio15 extends GeradorExercicio
 		addParagrafo("\\(C = " + listaCandidatos + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		StringBuilder res = new StringBuilder();
-		res.append("Verificamos cada elemento de \\(C\\): \\(\\\\\\)");
+		addResolucao("Verificamos cada elemento de \\(C\\):");
 		for (int e : candidatos)
 		{
 			if (a.contem(e))
-				res.append("\\(" + e + " \\in A\\) \\(\\\\\\)");
+				addResolucao("\\(" + e + " \\in A\\)");
 			else
-				res.append("\\(" + e + " \\notin A\\) \\(\\\\\\)");
+				addResolucao("\\(" + e + " \\notin A\\)");
 		}
-		res.append(correto + " elemento" + (correto != 1 ? "s pertencem" : " pertence") + " a \\(A\\).");
-		setResolucao(res.toString());
+		addResolucao(correto + " elemento" + (correto != 1 ? "s pertencem" : " pertence") + " a \\(A\\).");
 	}
 
 	private String buildLista(List<Integer> elementos)

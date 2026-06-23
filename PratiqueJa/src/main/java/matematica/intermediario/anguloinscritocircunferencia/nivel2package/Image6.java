@@ -31,9 +31,7 @@ public class Image6 extends GeradorExercicio
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 
-		String res = "Ângulos inscritos que subtendem o mesmo arco são iguais:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + resolucao + "\\)";
-		setResolucao(res);
+		addResolucao("Ângulos inscritos que subtendem o mesmo arco são iguais:");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

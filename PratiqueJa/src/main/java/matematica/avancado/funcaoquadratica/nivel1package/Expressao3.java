@@ -23,6 +23,7 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Determine a coordenada \\(X_v\\) do vértice de \\(f(x) = " + funcao + "\\)");
 
 		gerarAlternativas("" + xv);
-		setResolucao(ResolucaoFuncaoQuadratica.resolucaoXv(a, b, c));
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoXv(a, b, c))
+			addResolucao(passo);
 	}
 }

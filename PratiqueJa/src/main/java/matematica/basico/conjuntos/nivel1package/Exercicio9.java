@@ -23,13 +23,13 @@ public class Exercicio9 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String resolucao = "\\(A - B = " + c + "\\)" +
-			"\\(\\\\\\)" +
-			"Soma dos elementos de \\(A - B\\):";
+		addResolucao("\\(A - B = " + c + "\\)");
 		if(c.size() > 1)
-			resolucao += "\\(\\\\\\)\\(" + c.somaStr() + " = " + correto + "\\)";
+		{
+			addResolucao("Soma dos elementos de \\(A - B\\):");
+			addResolucao("\\(" + c.somaStr() + " = " + correto + "\\)");
+		}
 		else
-			resolucao += " \\(" + correto + "\\)";
-		setResolucao(resolucao);
+			addResolucao("Soma dos elementos de \\(A - B\\): \\(" + correto + "\\)");
 	}
 }

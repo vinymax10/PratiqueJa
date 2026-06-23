@@ -24,8 +24,7 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\(" + (r2 * (h + r)) + "\\pi\\,\\text{cm}^3\\)");     // r²(h+r)
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(V = \\pi r^2 h = \\pi \\cdot " + r + "^2 \\cdot " + h
-				+ " = \\pi \\cdot " + r2 + " \\cdot " + h + " = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+		addResolucao("\\(V = \\pi r^2 h = \\pi \\cdot " + r + "^2 \\cdot " + h
+				+ " = \\pi \\cdot " + r2 + " \\cdot " + h + " = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

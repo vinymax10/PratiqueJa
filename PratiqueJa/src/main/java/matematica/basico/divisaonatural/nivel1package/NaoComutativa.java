@@ -22,11 +22,10 @@ public class NaoComutativa extends GeradorExercicio
 		distratores.add("\\(1\\), pois qualquer número dividido por outro dá \\(1\\)");
 		embaralharEAdicionarAlternativas("\\(0\\) com resto \\(" + b + "\\), pois a divisão não é comutativa", distratores);
 
-		String res = "A divisão não é comutativa: a ordem dos termos importa. \\(\\\\\\)";
-		res += "Como \\(" + b + " < " + a + "\\), ao dividir \\(" + b + "\\) por \\(" + a + "\\) nos naturais obtemos: \\(\\\\\\)";
-		res += "\\(" + b + " \\div " + a + " = 0\\) com resto \\(" + b + "\\). \\(\\\\\\)";
-		res += "Diferentemente, \\(" + a + " \\div " + b + " = " + q + "\\). \\(\\\\\\)";
-		res += "Portanto \\(" + a + " \\div " + b + " \\neq " + b + " \\div " + a + "\\).";
-		setResolucao(res);
+		addResolucao("A divisão não é comutativa: a ordem dos termos importa.");
+		addResolucao("Como \\(" + b + " < " + a + "\\), ao dividir \\(" + b + "\\) por \\(" + a + "\\) nos naturais obtemos:");
+		addResolucao("\\(" + b + " \\div " + a + " = 0\\) com resto \\(" + b + "\\).");
+		addResolucao("Diferentemente, \\(" + a + " \\div " + b + " = " + q + "\\).");
+		addResolucao("Portanto \\(" + a + " \\div " + b + " \\neq " + b + " \\div " + a + "\\).");
 	}
 }

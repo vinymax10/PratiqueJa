@@ -21,10 +21,9 @@ public class Primo6 extends AgrupadorPrimo
 			if(descartados.length() > 0) descartados.append(",\\, ");
 			descartados.append(k);
 		}
-		String res = "Testamos os números após \\(" + n + "\\) até achar um primo. \\(\\\\\\)";
+		addResolucao("Testamos os números após \\(" + n + "\\) até achar um primo.");
 		if(descartados.length() > 0)
-			res += "\\(" + descartados + "\\) são compostos. \\(\\\\\\)";
-		res += "O primeiro primo é \\(\\mathbf{" + proximo + "}\\).";
-		setResolucao(res);
+			addResolucao("\\(" + descartados + "\\) são compostos.");
+		addResolucao("O primeiro primo é \\(\\mathbf{" + proximo + "}\\).");
 	}
 }

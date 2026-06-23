@@ -31,7 +31,7 @@ public class Primo5 extends AgrupadorPrimo
 		addParagrafo("Calcule o valor de \\(N\\), sendo \\(N = " + nLatex + "\\):");
 		gerarAlternativasInteiras(n);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& N = " + nLatex + "\\\\" +
 			"& N = " + pa + " \\times " + qb + "\\\\" +

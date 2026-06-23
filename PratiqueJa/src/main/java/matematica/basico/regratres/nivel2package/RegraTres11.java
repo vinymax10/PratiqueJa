@@ -26,9 +26,8 @@ public class RegraTres11 extends GeradorExercicio
 		addParagrafo(texto);
 		gerarAlternativas("" + original);
 
-		String res = "O valor com aumento corresponde a \\((100 + " + p + ")\\% = " + (100 + p) + "\\%\\) do original. \\(\\\\\\)";
-		res += "Logo, isolando o valor original: \\(\\\\\\)";
-		res += "\\(V = \\dfrac{" + valorFinal + " \\times 100}{" + (100 + p) + "} = \\dfrac{" + (valorFinal * 100) + "}{" + (100 + p) + "} = \\mathbf{" + original + "}\\)";
-		setResolucao(res);
+		addResolucao("O valor com aumento corresponde a \\((100 + " + p + ")\\% = " + (100 + p) + "\\%\\) do original.");
+		addResolucao("Logo, isolando o valor original:");
+		addResolucao("\\(V = \\dfrac{" + valorFinal + " \\times 100}{" + (100 + p) + "} = \\dfrac{" + (valorFinal * 100) + "}{" + (100 + p) + "} = \\mathbf{" + original + "}\\)");
 	}
 }

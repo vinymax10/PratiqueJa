@@ -17,7 +17,7 @@ public class Image1 extends GeradorExercicio
 		String resultadoCorreto = "" + dadosEq2Grau.x1;
 		String texto = dadosEq2Grau.toString();
 		String pergunta = "Encontre \\(x_1 \\), dado \\( f(x)=" + dadosEq2Grau.a + "x^2" + get(dadosEq2Grau.b) + "x+c \\)";
-		String resolucao = ResolucaoEq2Grau.resolucaoX1(dadosEq2Grau.a, dadosEq2Grau.b, dadosEq2Grau.c);
+		String[] resolucao = ResolucaoEq2Grau.resolucaoX1(dadosEq2Grau.a, dadosEq2Grau.b, dadosEq2Grau.c);
 
 		ConfigEq2Grau config = new ConfigEq2Grau(dadosEq2Grau);
 		config.indice = 1 + rand.nextInt(10);
@@ -32,7 +32,8 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 
 	private String get(int x)

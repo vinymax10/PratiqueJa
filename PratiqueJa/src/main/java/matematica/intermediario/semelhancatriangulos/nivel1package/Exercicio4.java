@@ -20,11 +20,9 @@ public class Exercicio4 extends GeradorExercicio
 
 		gerarAlternativasInteiras(resposta);
 
-		String res = "A razão de semelhança relaciona lados correspondentes: "
-				+ "\\(\\dfrac{\\text{maior}}{\\text{menor}} = \\dfrac{" + p + "}{" + q + "}\\)."
-				+ "\\(\\\\\\)"
-				+ "\\(\\text{menor} = " + M + " \\times \\dfrac{" + q + "}{" + p + "}"
-				+ " = \\dfrac{" + (q * M) + "}{" + p + "} = \\mathbf{" + resposta + "}\\)";
-		setResolucao(res);
+		addResolucao("A razão de semelhança relaciona lados correspondentes: "
+				+ "\\(\\dfrac{\\text{maior}}{\\text{menor}} = \\dfrac{" + p + "}{" + q + "}\\).");
+		addResolucao("\\(\\text{menor} = " + M + " \\times \\dfrac{" + q + "}{" + p + "}"
+				+ " = \\dfrac{" + (q * M) + "}{" + p + "} = \\mathbf{" + resposta + "}\\)");
 	}
 }

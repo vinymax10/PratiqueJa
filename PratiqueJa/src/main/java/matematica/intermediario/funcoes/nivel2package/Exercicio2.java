@@ -20,15 +20,13 @@ public class Exercicio2 extends GeradorExercicio
 
 		// Resolução: resolução de ax + b = k
 		int ladoDireito = k - b;
-		String res = "Igualamos \\(f(x)\\) a \\(" + k + "\\): \\(\\\\\\)";
-		res += "\\(" + aStr + "x" + bLatex(b) + " = " + k + "\\). \\(\\\\\\)";
-		res += "\\(" + aStr + "x = " + k + bLatex(-b) + " = " + ladoDireito + "\\). \\(\\\\\\)";
+		addResolucao("Igualamos \\(f(x)\\) a \\(" + k + "\\):");
+		addResolucao("\\(" + aStr + "x" + bLatex(b) + " = " + k + "\\).");
+		addResolucao("\\(" + aStr + "x = " + k + bLatex(-b) + " = " + ladoDireito + "\\).");
 		if(a > 1)
-			res += "\\(x = \\dfrac{" + ladoDireito + "}{" + a + "} = " + xResult + "\\).";
+			addResolucao("\\(x = \\dfrac{" + ladoDireito + "}{" + a + "} = " + xResult + "\\).");
 		else
-			res += "\\(x = " + xResult + "\\).";
-
-		setResolucao(res);
+			addResolucao("\\(x = " + xResult + "\\).");
 		gerarAlternativas("" + xResult);
 	}
 

@@ -20,12 +20,11 @@ public class NaoAssociativa extends GeradorExercicio
 
 		gerarAlternativasInteiras(left);
 
-		String res = "Resolvemos o que está dentro dos parênteses primeiro: \\(\\\\\\)";
-		res += "\\((" + a + " - " + b + ") - " + c + " = " + ab + " - " + c + " = \\mathbf{" + left + "}\\) \\(\\\\\\)";
-		res += "Atenção: a subtração não é associativa — os parênteses importam! \\(\\\\\\)";
-		res += "Se a posição dos parênteses mudasse: \\(\\\\\\)";
-		res += "\\(" + a + " - (" + b + " - " + c + ") = " + a + " - " + bc + " = " + right + "\\) \\(\\\\\\)";
-		res += "Como \\(" + left + " \\neq " + right + "\\), os parênteses alteram o resultado.";
-		setResolucao(res);
+		addResolucao("Resolvemos o que está dentro dos parênteses primeiro:");
+		addResolucao("\\((" + a + " - " + b + ") - " + c + " = " + ab + " - " + c + " = \\mathbf{" + left + "}\\)");
+		addResolucao("Atenção: a subtração não é associativa — os parênteses importam!");
+		addResolucao("Se a posição dos parênteses mudasse:");
+		addResolucao("\\(" + a + " - (" + b + " - " + c + ") = " + a + " - " + bc + " = " + right + "\\)");
+		addResolucao("Como \\(" + left + " \\neq " + right + "\\), os parênteses alteram o resultado.");
 	}
 }

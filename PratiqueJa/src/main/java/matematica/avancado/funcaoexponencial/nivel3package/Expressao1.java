@@ -17,16 +17,14 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Resolva a equação \\(" + a + "^{2x} - " + soma + " \\cdot " + a + "^x + " + aPowR + " = 0\\). "
 			+ "Determine a maior solução.");
 
-		String res = "Fazemos a substituição \\(y = " + a + "^x\\): \\(\\\\\\)";
-		res += "\\(y^2 - " + soma + "y + " + aPowR + " = 0\\) \\(\\\\\\)";
-		res += "Fatorando: \\((y - 1)(y - " + aPowR + ") = 0\\\\";
-		res += "y = 1 \\quad\\) ou \\(\\quad y = " + aPowR + "\\) \\(\\\\\\)";
-		res += "Voltando para \\(x\\): \\(\\\\\\)";
-		res += "\\(" + a + "^x = 1 = " + a + "^0 \\Rightarrow x = 0\\\\";
-		res += "" + a + "^x = " + aPowR + " = " + a + "^{" + r + "} \\Rightarrow x = " + r + "\\) \\(\\\\\\)";
-		res += "Maior solução: \\(x = \\mathbf{" + r + "}\\)";
-
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("Fazemos a substituição \\(y = " + a + "^x\\):");
+		addResolucao("\\(y^2 - " + soma + "y + " + aPowR + " = 0\\)");
+		addResolucao("Fatorando: \\((y - 1)(y - " + aPowR + ") = 0\\)");
+		addResolucao("\\(y = 1 \\quad\\) ou \\(\\quad y = " + aPowR + "\\)");
+		addResolucao("Voltando para \\(x\\):");
+		addResolucao("\\(" + a + "^x = 1 = " + a + "^0 \\Rightarrow x = 0\\)");
+		addResolucao("\\(" + a + "^x = " + aPowR + " = " + a + "^{" + r + "} \\Rightarrow x = " + r + "\\)");
+		addResolucao("Maior solução: \\(x = \\mathbf{" + r + "}\\)");
 	}
 }

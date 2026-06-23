@@ -26,12 +26,10 @@ public class Exercicio3 extends GeradorExercicio
 
 		gerarAlternativasInteiras(d);
 
-		String res = "Aplicando a fórmula da distância ponto–reta:"
-				+ "\\(\\\\\\)"
-				+ "\\(d = \\dfrac{|a\\,x_0 + b\\,y_0 + c|}{\\sqrt{a^2+b^2}}\\\\"
-				+ "d = \\dfrac{|" + a + "\\cdot(" + x0 + ") + " + b + "\\cdot(" + y0 + ") + (" + c + ")|}"
-				+ "{\\sqrt{" + (a*a) + "+" + (b*b) + "}}\\\\"
-				+ "d = \\dfrac{" + numerador + "}{" + sqrtAB + "} = \\mathbf{" + d + "}\\)";
-		setResolucao(res);
+		addResolucao("Aplicando a fórmula da distância ponto–reta:");
+		addResolucao("\\(d = \\dfrac{|a\\,x_0 + b\\,y_0 + c|}{\\sqrt{a^2+b^2}}\\)");
+		addResolucao("\\(d = \\dfrac{|" + a + "\\cdot(" + x0 + ") + " + b + "\\cdot(" + y0 + ") + (" + c + ")|}"
+				+ "{\\sqrt{" + (a*a) + "+" + (b*b) + "}}\\)");
+		addResolucao("\\(d = \\dfrac{" + numerador + "}{" + sqrtAB + "} = \\mathbf{" + d + "}\\)");
 	}
 }

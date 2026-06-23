@@ -14,10 +14,7 @@ public class Potenciacao3 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + a + "^{0}\\)");
 		embaralharEAdicionarAlternativas("1", Arrays.asList("0", "" + a, "-1"));
-		setResolucao(
-			"Todo número não nulo elevado a \\(0\\) é igual a \\(1\\)." +
-			"\\(\\\\\\)" +
-			"\\(" + a + "^{0} = \\mathbf{1}\\)"
-		);
+		addResolucao("Todo número não nulo elevado a \\(0\\) é igual a \\(1\\).");
+		addResolucao("\\(" + a + "^{0} = \\mathbf{1}\\)");
 	}
 }

@@ -20,33 +20,32 @@ public class Matrizes5 extends GeradorExercicio
 				c[i][j] = a[i][j] - bT[i][j];
 
 		String resultadoCorreto = AuxMatriz.soma(c) + "";
-		String resolucao = "";
-		resolucao += "B^T=" + AuxMatriz.matrizStr(bT) + "\\\\";
-
-		resolucao += "C=\\begin{bmatrix}";
 		int lin = size;
 		int col = size;
 
+		String calc = "C=\\begin{bmatrix}";
 		for(int i = 0; i < lin; i++)
 		{
 			for(int j = 0; j < col; j++)
 			{
-				resolucao += a[i][j] + "-" + AuxMatriz.parenteses(bT[i][j]);
+				calc += a[i][j] + "-" + AuxMatriz.parenteses(bT[i][j]);
 
 				if(j < (col - 1))
-					resolucao += "&";
+					calc += "&";
 			}
-			resolucao += "\\\\";
+			calc += "\\\\";
 		}
-		resolucao += "\\end{bmatrix}" + "\\\\ \\\\";
-		resolucao += "C=" + AuxMatriz.matrizStr(c) + "\\\\ \\\\";
-		resolucao += AuxMatriz.somaStr(c);
+		calc += "\\end{bmatrix}";
 
 		String texto = "A=" + AuxMatriz.matrizStr(a) + ",~B=" + AuxMatriz.matrizStr(b);
 
 		addParagrafo("Se \\(A-B^T=C\\), qual a soma dos elementos de \\(C\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(B^T=" + AuxMatriz.matrizStr(bT) + "\\)");
+		addResolucao("\\(" + calc + "\\)");
+		addResolucao("\\(C=" + AuxMatriz.matrizStr(c) + "\\)");
+		addResolucao("\\(" + AuxMatriz.somaStr(c) + "\\)");
 	}
 }

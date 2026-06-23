@@ -49,45 +49,43 @@ public class Expressao2 extends GeradorExercicio
 		int menosB = -b;
 		String crescente = a > 0 ? "crescente (\\(a > 0\\))" : "decrescente (\\(a < 0\\))";
 
-		String res = "Primeiro encontramos o zero \\(x_0\\): \\(\\\\\\)";
-		res += "\\(" + funcao + " = 0\\) \\(\\\\\\)";
+		addResolucao("Primeiro encontramos o zero \\(x_0\\):");
+		addResolucao("\\(" + funcao + " = 0\\)");
 
 		if(a == 1)
 		{
-			res += "\\(x_0 = \\mathbf{" + x0Str + "}\\) \\(\\\\\\)";
+			addResolucao("\\(x_0 = \\mathbf{" + x0Str + "}\\)");
 		}
 		else if(a == -1)
 		{
-			res += "\\(-x = " + menosB + " \\Rightarrow x_0 = \\mathbf{" + x0Str + "}\\) \\(\\\\\\)";
+			addResolucao("\\(-x = " + menosB + " \\Rightarrow x_0 = \\mathbf{" + x0Str + "}\\)");
 		}
 		else
 		{
 			int num = menosB, den = a;
 			if(den < 0) { num = -num; den = -den; }
 			if(num < 0)
-				res += "\\(x_0 = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + x0Str + "}\\) \\(\\\\\\)";
+				addResolucao("\\(x_0 = -\\dfrac{" + (-num) + "}{" + den + "} = \\mathbf{" + x0Str + "}\\)");
 			else
-				res += "\\(x_0 = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + x0Str + "}\\) \\(\\\\\\)";
+				addResolucao("\\(x_0 = \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + x0Str + "}\\)");
 		}
 
-		res += "A função é " + crescente + ", portanto: \\(\\\\\\)";
+		addResolucao("A função é " + crescente + ", portanto:");
 
 		if(pedirPositivo)
 		{
 			if(a > 0)
-				res += "\\(f(x) > 0\\) quando \\(\\mathbf{x > " + x0Str + "}\\)";
+				addResolucao("\\(f(x) > 0\\) quando \\(\\mathbf{x > " + x0Str + "}\\)");
 			else
-				res += "\\(f(x) > 0\\) quando \\(\\mathbf{x < " + x0Str + "}\\)";
+				addResolucao("\\(f(x) > 0\\) quando \\(\\mathbf{x < " + x0Str + "}\\)");
 		}
 		else
 		{
 			if(a > 0)
-				res += "\\(f(x) < 0\\) quando \\(\\mathbf{x < " + x0Str + "}\\)";
+				addResolucao("\\(f(x) < 0\\) quando \\(\\mathbf{x < " + x0Str + "}\\)");
 			else
-				res += "\\(f(x) < 0\\) quando \\(\\mathbf{x > " + x0Str + "}\\)";
+				addResolucao("\\(f(x) < 0\\) quando \\(\\mathbf{x > " + x0Str + "}\\)");
 		}
-
-		setResolucao(res);
 	}
 
 	private static String afimStr(int a, int b)

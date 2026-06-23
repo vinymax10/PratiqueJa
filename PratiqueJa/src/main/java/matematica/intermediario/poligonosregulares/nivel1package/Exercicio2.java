@@ -22,16 +22,13 @@ public class Exercicio2 extends GeradorExercicio
 		int ai = caso[1];
 		int si = (n - 2) * 180;
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaAnguloInterno() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha_i = \\dfrac{(" + n + " - 2) \\times 180^\\circ}{" + n + "} = \\dfrac{" + si + "^\\circ}{" + n + "} = \\mathbf{" + ai + "^\\circ}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual é a medida de cada ângulo interno de um polígono regular de \\(" + n + "\\) lados?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + ai);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaAnguloInterno() + "\\)");
+		addResolucao("\\(\\alpha_i = \\dfrac{(" + n + " - 2) \\times 180^\\circ}{" + n + "} = \\dfrac{" + si + "^\\circ}{" + n + "} = \\mathbf{" + ai + "^\\circ}\\)");
 	}
 }

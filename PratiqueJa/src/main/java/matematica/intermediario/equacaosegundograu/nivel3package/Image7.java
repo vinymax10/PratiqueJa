@@ -21,7 +21,7 @@ public class Image7 extends GeradorExercicio
 		Auxiliar.getNumber(dadosEq2Grau.b, "", false) + "x"
 		+ Auxiliar.getNumber(dadosEq2Grau.c, "", false) + " \\)";
 
-		String resolucao = ResolucaoEq2Grau.resolucaoYVertice(dadosEq2Grau.a, dadosEq2Grau.b, dadosEq2Grau.c);
+		String[] resolucao = ResolucaoEq2Grau.resolucaoYVertice(dadosEq2Grau.a, dadosEq2Grau.b, dadosEq2Grau.c);
 
 		ConfigEq2Grau config = new ConfigEq2Grau(dadosEq2Grau);
 		config.indice = 1 + rand.nextInt(10);
@@ -34,6 +34,7 @@ public class Image7 extends GeradorExercicio
 		addParagrafo("\\(" + texto + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 }

@@ -29,20 +29,12 @@ public class Potenciacao9 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + expr + "\\)");
 		gerarAlternativas("" + k);
-		setResolucao(
-			"Potência de potência:" +
-			"\\(\\\\\\)" +
-			"\\((" + a + "^{" + x + "})^{" + y + "} = " + a + "^{" + x + " \\cdot " + y + "} = " + a + "^{" + xy + "}\\)" +
-			"\\(\\\\\\)" +
-			"Mult. mesma base:" +
-			"\\(\\\\\\)" +
-			"\\(" + a + "^{" + xy + "} \\cdot " + a + "^{" + z + "} = " + a + "^{" + xyz + "}\\)" +
-			"\\(\\\\\\)" +
-			"Div. mesma base:" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + "^{" + xyz + "}}{" + a + "^{" + w + "}} = " + a + "^{" + xyz + "-" + w + "} = \\mathbf{" + a + "^{" + k + "}}\\)" +
-			"\\(\\\\\\)" +
-			"\\(x = \\mathbf{" + k + "}\\)"
-		);
+		addResolucao("Potência de potência:");
+		addResolucao("\\((" + a + "^{" + x + "})^{" + y + "} = " + a + "^{" + x + " \\cdot " + y + "} = " + a + "^{" + xy + "}\\)");
+		addResolucao("Mult. mesma base:");
+		addResolucao("\\(" + a + "^{" + xy + "} \\cdot " + a + "^{" + z + "} = " + a + "^{" + xyz + "}\\)");
+		addResolucao("Div. mesma base:");
+		addResolucao("\\(\\dfrac{" + a + "^{" + xyz + "}}{" + a + "^{" + w + "}} = " + a + "^{" + xyz + "-" + w + "} = \\mathbf{" + a + "^{" + k + "}}\\)");
+		addResolucao("\\(x = \\mathbf{" + k + "}\\)");
 	}
 }

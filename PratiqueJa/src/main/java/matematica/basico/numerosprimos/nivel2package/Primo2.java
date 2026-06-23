@@ -35,29 +35,22 @@ public class Primo2 extends AgrupadorPrimo
 				primoDivisor = p;
 		}
 
-		StringBuilder res = new StringBuilder();
-		res.append("\\(\\sqrt{").append(n).append("} \\approx ")
-		   .append(sqrtInt).append("{,}").append(sqrtDec)
-		   .append(" \\Rightarrow\\) testar: \\(").append(primos).append("\\). ");
-		res.append("\\(\\\\\\) ");
-		if(ePrimo)
-		{
-			res.append("\\(").append(n).append("\\) não é divisível por nenhum. ");
-			res.append("\\(\\\\\\) ");
-			res.append("\\(\\therefore ").append(n).append("\\) é primo.");
-		}
-		else
-		{
-			res.append("\\(").append(n).append(" \\div ").append(primoDivisor)
-			   .append(" = ").append(n / primoDivisor)
-			   .append(" \\Rightarrow\\) divisível por \\(").append(primoDivisor).append("\\). ");
-			res.append("\\(\\\\\\) ");
-			res.append("\\(\\therefore ").append(n).append("\\) é composto.");
-		}
-
 		addParagrafo("Pelo teste de primalidade, o número \\(" + n + "\\) é:");
 		embaralharEAdicionarAlternativas(correta,
 			Arrays.asList(errada, "Primo e composto", "Nem primo nem composto"));
-		setResolucao(res.toString());
+
+		addResolucao("\\(\\sqrt{" + n + "} \\approx " + sqrtInt + "{,}" + sqrtDec
+			+ " \\Rightarrow\\) testar: \\(" + primos + "\\).");
+		if(ePrimo)
+		{
+			addResolucao("\\(" + n + "\\) não é divisível por nenhum.");
+			addResolucao("\\(\\therefore " + n + "\\) é primo.");
+		}
+		else
+		{
+			addResolucao("\\(" + n + " \\div " + primoDivisor + " = " + (n / primoDivisor)
+				+ " \\Rightarrow\\) divisível por \\(" + primoDivisor + "\\).");
+			addResolucao("\\(\\therefore " + n + "\\) é composto.");
+		}
 	}
 }

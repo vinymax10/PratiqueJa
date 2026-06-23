@@ -27,11 +27,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (t * 10000) + "\\,\\text{kg}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{t} = 1000\\,\\text{kg}\\), logo multiplicar por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + t + " \\times 1000 = \\mathbf{" + kg + "}\\,\\text{kg}\\)"
-			);
+			addResolucao("\\(1\\,\\text{t} = 1000\\,\\text{kg}\\), logo multiplicar por 1000:");
+			addResolucao("\\(" + t + " \\times 1000 = \\mathbf{" + kg + "}\\,\\text{kg}\\)");
 		}
 		else
 		{
@@ -49,11 +46,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (g * 10) + "\\,\\text{g}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo multiplicar por 1000:" +
-				"\\(\\\\\\)" +
-				"\\(" + kg + " \\times 1000 = \\mathbf{" + g + "}\\,\\text{g}\\)"
-			);
+			addResolucao("\\(1\\,\\text{kg} = 1000\\,\\text{g}\\), logo multiplicar por 1000:");
+			addResolucao("\\(" + kg + " \\times 1000 = \\mathbf{" + g + "}\\,\\text{g}\\)");
 		}
 	}
 }

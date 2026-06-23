@@ -20,10 +20,9 @@ public class PadraoNegativo extends GeradorExercicio
 
 		gerarAlternativasInteirasComNegativos(k);
 
-		String res = "Cada vez que o multiplicador diminui \\(1\\), o produto aumenta \\(+" + k + "\\): \\(\\\\\\)";
-		res += "\\(\\ldots, " + (-2 * k) + ", " + (-k) + ", 0, \\ldots\\) — o próximo é \\(0 + " + k + " = +" + k + "\\). \\(\\\\\\)";
-		res += "Isso confirma: \\((-1) \\times (-" + k + ") = \\mathbf{+" + k + "}\\). \\(\\\\\\)";
-		res += "Negativo \\(\\times\\) negativo \\(=\\) positivo!";
-		setResolucao(res);
+		addResolucao("Cada vez que o multiplicador diminui \\(1\\), o produto aumenta \\(+" + k + "\\):");
+		addResolucao("\\(\\ldots, " + (-2 * k) + ", " + (-k) + ", 0, \\ldots\\) — o próximo é \\(0 + " + k + " = +" + k + "\\).");
+		addResolucao("Isso confirma: \\((-1) \\times (-" + k + ") = \\mathbf{+" + k + "}\\).");
+		addResolucao("Negativo \\(\\times\\) negativo \\(=\\) positivo!");
 	}
 }

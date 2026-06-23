@@ -29,7 +29,7 @@ public class Primo1 extends AgrupadorPrimo
 		addParagrafo("Dado \\(N = " + nLatex + " = " + n + "\\), quantos divisores tem \\(N^2\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& N^2 = " + n2Latex + "\\\\" +
 			"& \\tau(N^2) = (" + (2 * a) + "{+}1)(" + (2 * b) + "{+}1)\\\\" +

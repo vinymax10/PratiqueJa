@@ -15,7 +15,7 @@ public class Image9 extends GeradorExercicio
 		int l = 3 + rand.nextInt(20);
 
 		String resultadoCorreto = "" + (4 * l);
-		String resolucao = ResolucaoAreaPerimetro.perimetroQuadrado(l);
+		String[] passosResolucao = ResolucaoAreaPerimetro.perimetroQuadrado(l);
 
 		ConfigQuadrado config = new ConfigQuadrado("" + l, "", false);
 		BufferedImage image = config.criarImagem();
@@ -23,6 +23,7 @@ public class Image9 extends GeradorExercicio
 		addParagrafo("Qual o perímetro do quadrado?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

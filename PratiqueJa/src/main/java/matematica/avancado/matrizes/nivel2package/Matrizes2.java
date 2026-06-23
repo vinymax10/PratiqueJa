@@ -13,29 +13,9 @@ public class Matrizes2 extends GeradorExercicio
 		int[][] a = AuxMatriz.contruirMatriz(1, size, 50);
 		int[][] aT = AuxMatriz.contruirTransposta(a);
 
-		String resolucao = "";
-		resolucao += "A \\cdot A^T=";
-		resolucao += AuxMatriz.matrizStr(a) + "\\cdot" + AuxMatriz.matrizStr(aT) + "=\\\\";
 		int resultado = 0;
 		for(int i = 0; i < size; i++)
-		{
-			if(a[0][i] >= 0)
-				resolucao += a[0][i] + "^2";
-			else
-				resolucao += "(" + a[0][i] + ")^2";
-			if(i < (size - 1))
-				resolucao += "+";
-		}
-		resolucao += "=";
-
-		for(int i = 0; i < size; i++)
-		{
-			resolucao += a[0][i] * a[0][i];
 			resultado += a[0][i] * a[0][i];
-			if(i < (size - 1))
-				resolucao += "+";
-		}
-		resolucao += "=" + resultado;
 
 		String resultadoCorreto = resultado + "";
 
@@ -44,6 +24,27 @@ public class Matrizes2 extends GeradorExercicio
 		addParagrafo("Qual o resultado de \\(A \\cdot A^T\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(A \\cdot A^T=" + AuxMatriz.matrizStr(a) + "\\cdot" + AuxMatriz.matrizStr(aT) + "=\\)");
+
+		String passo = "";
+		for(int i = 0; i < size; i++)
+		{
+			if(a[0][i] >= 0)
+				passo += a[0][i] + "^2";
+			else
+				passo += "(" + a[0][i] + ")^2";
+			if(i < (size - 1))
+				passo += "+";
+		}
+		passo += "=";
+		for(int i = 0; i < size; i++)
+		{
+			passo += a[0][i] * a[0][i];
+			if(i < (size - 1))
+				passo += "+";
+		}
+		passo += "=" + resultado;
+		addResolucao("\\(" + passo + "\\)");
 	}
 }

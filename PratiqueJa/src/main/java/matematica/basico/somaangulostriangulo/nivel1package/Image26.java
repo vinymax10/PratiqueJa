@@ -40,11 +40,9 @@ public class Image26 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + b + "^\\circ\\)", distratores);
 
-		String res = "O ângulo externo é igual à soma dos dois ângulos internos não adjacentes:";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{ext} = \\alpha + \\beta \\\\";
-		res += ext + "^\\circ = " + a + "^\\circ + \\beta \\\\";
-		res += "\\beta = " + ext + "^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("O ângulo externo é igual à soma dos dois ângulos internos não adjacentes:");
+		addResolucao("\\(\\text{ext} = \\alpha + \\beta\\)");
+		addResolucao("\\(" + ext + "^\\circ = " + a + "^\\circ + \\beta\\)");
+		addResolucao("\\(\\beta = " + ext + "^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)");
 	}
 }

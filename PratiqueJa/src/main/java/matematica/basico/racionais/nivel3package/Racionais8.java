@@ -20,10 +20,9 @@ public class Racionais8 extends GeradorExercicio
 		addParagrafo("\\(" + n + "\\dfrac{" + r + "}{" + d + "}\\)");
 		gerarAlternativas(resultado.toString());
 
-		String res = "Multiplicamos a parte inteira pelo denominador e somamos o numerador. \\(\\\\\\)";
-		res += "\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d
+		addResolucao("Multiplicamos a parte inteira pelo denominador e somamos o numerador.");
+		addResolucao("\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d
 			 + " + " + r + "}{" + d + "} = \\dfrac{" + (n * d) + " + " + r + "}{" + d
-			 + "} = \\dfrac{" + num + "}{" + d + "}\\)";
-		setResolucao(res);
+			 + "} = \\dfrac{" + num + "}{" + d + "}\\)");
 	}
 }

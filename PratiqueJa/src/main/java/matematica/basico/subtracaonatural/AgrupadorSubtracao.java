@@ -18,7 +18,7 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("Calcule a seguinte subtração:");
 		addParagrafo("\\(" + ResolucaoNatural.subtracao(a, b, false) + "\\)");
 		gerarAlternativasInteiras(a - b);
-		setResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
 	}
 
 	// Empréstimo com zeros: minuendo terminado em 00.
@@ -29,7 +29,7 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("Calcule a seguinte subtração (atenção ao empréstimo):");
 		addParagrafo("\\(" + ResolucaoNatural.subtracao(a, b, false) + "\\)");
 		gerarAlternativasInteiras(a - b);
-		setResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.subtracao(a, b, true) + "\\)");
 	}
 	protected void missingMinuendo(int min, int range)
 	{
@@ -38,10 +38,8 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		int x = b + c; // x - b = c
 		addParagrafo("Qual é o valor de \\(\\square\\) na equação \\(\\square - " + b + " = " + c + "\\)?");
 		gerarAlternativasInteiras(x);
-		setResolucao(
-			"O minuendo desconhecido é a soma da diferença com o subtraendo: \\(\\\\\\)" +
-			"\\(\\square = " + c + " + " + b + " = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("O minuendo desconhecido é a soma da diferença com o subtraendo:");
+		addResolucao("\\(\\square = " + c + " + " + b + " = \\mathbf{" + x + "}\\)");
 	}
 
 	protected void missingSubtraendo(int min, int range)
@@ -51,10 +49,8 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		int a = x + c; // a - x = c
 		addParagrafo("Qual é o valor de \\(\\square\\) na equação \\(" + a + " - \\square = " + c + "\\)?");
 		gerarAlternativasInteiras(x);
-		setResolucao(
-			"O subtraendo desconhecido é a diferença entre o minuendo e o resultado: \\(\\\\\\)" +
-			"\\(\\square = " + a + " - " + c + " = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("O subtraendo desconhecido é a diferença entre o minuendo e o resultado:");
+		addResolucao("\\(\\square = " + a + " - " + c + " = \\mathbf{" + x + "}\\)");
 	}
 
 	protected void tabuada()
@@ -65,7 +61,7 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + a + " - " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(dif);
-		setResolucao("\\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)");
+		addResolucao("\\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)");
 	}
 
 	protected void tresEtapas(int min, int range)
@@ -78,11 +74,9 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + a + " - " + b + " - " + c + " = \\,?\\)");
 		gerarAlternativasInteiras(res);
-		setResolucao(
-			"Subtraímos da esquerda para a direita: \\(\\\\\\)" +
-			"\\(" + a + " - " + b + " = " + p1 + "\\). \\(\\\\\\)" +
-			"\\(" + p1 + " - " + c + " = \\mathbf{" + res + "}\\)"
-		);
+		addResolucao("Subtraímos da esquerda para a direita:");
+		addResolucao("\\(" + a + " - " + b + " = " + p1 + "\\).");
+		addResolucao("\\(" + p1 + " - " + c + " = \\mathbf{" + res + "}\\)");
 	}
 
 	protected void quatroEtapas(int min, int range)
@@ -93,10 +87,8 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão:");
 		addParagrafo("\\(" + a + " - " + b + " - " + c + " - " + d + " = \\,?\\)");
 		gerarAlternativasInteiras(res);
-		setResolucao(
-			"Subtraímos da esquerda para a direita: \\(\\\\\\)" +
-			"\\(" + a + " - " + b + " = " + p1 + "\\); \\(" + p1 + " - " + c + " = " + p2 + "\\); \\(" + p2 + " - " + d + " = \\mathbf{" + res + "}\\)"
-		);
+		addResolucao("Subtraímos da esquerda para a direita:");
+		addResolucao("\\(" + a + " - " + b + " = " + p1 + "\\); \\(" + p1 + " - " + c + " = " + p2 + "\\); \\(" + p2 + " - " + d + " = \\mathbf{" + res + "}\\)");
 	}
 
 	protected void problema(int min, int range)
@@ -112,6 +104,7 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		else
 			addParagrafo("Uma fábrica produziu \\(" + a + "\\) peças e \\(" + b + "\\) foram reprovadas. Quantas peças foram aprovadas?");
 		gerarAlternativasInteiras(dif);
-		setResolucao("Subtraímos o que saiu do total: \\(\\\\\\) \\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)");
+		addResolucao("Subtraímos o que saiu do total:");
+		addResolucao("\\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)");
 	}
 }

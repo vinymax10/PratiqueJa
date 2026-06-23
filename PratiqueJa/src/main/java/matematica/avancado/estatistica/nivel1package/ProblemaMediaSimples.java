@@ -31,22 +31,20 @@ public class ProblemaMediaSimples
 		while(AuxEstatistica.somar(valores) % n != 0);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int n = valores.length;
 		int total = AuxEstatistica.somar(valores);
 		int media = total / n;
 
-		String res = "A média aritmética simples é a soma de todos os valores dividida pela quantidade de elementos:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\bar{x} = \\dfrac{x_1 + x_2 + \\cdots + x_n}{n}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Somando os " + n + " valores e dividindo por \\(n = " + n + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\bar{x} = \\dfrac{" + AuxEstatistica.somaStr(valores) + "}{" + n + "} = \\\\ ";
-		res += "\\dfrac{" + total + "}{" + n + "} = \\mathbf{" + media + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A média aritmética simples é a soma de todos os valores dividida pela quantidade de elementos:",
+			"\\(" + ParCor.formula("\\bar{x} = \\dfrac{x_1 + x_2 + \\cdots + x_n}{n}") + "\\)",
+			"Somando os " + n + " valores e dividindo por \\(n = " + n + "\\):",
+			"\\(\\bar{x} = \\dfrac{" + AuxEstatistica.somaStr(valores) + "}{" + n + "} = \\\\ "
+				+ "\\dfrac{" + total + "}{" + n + "} = \\mathbf{" + media + "}\\)"
+		};
 	}
 
 	public String resultado()

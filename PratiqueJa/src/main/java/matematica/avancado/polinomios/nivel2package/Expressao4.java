@@ -36,15 +36,13 @@ public class Expressao4 extends GeradorExercicio
 		distratores.add("\\(" + d2 + "\\)");
 		distratores.add("\\(" + d3 + "\\)");
 
-		String res = "Reconhecer o padrão \\(a^2 - b^2 = (a+b)(a-b)\\):\\(\\\\\\)";
-		res += "\\(a = " + aStr + "x, \\quad b = " + b + "\\)\\(\\\\\\)";
-		res += "\\((" + aStr + "x)^2 - " + b + "^2 = (" + aStr + "x + " + b + ")("
-				+ aStr + "x - " + b + ")\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Fatore usando diferença de quadrados.");
 		addParagrafo("\\(" + poly + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Reconhecer o padrão \\(a^2 - b^2 = (a+b)(a-b)\\):");
+		addResolucao("\\(a = " + aStr + "x, \\quad b = " + b + "\\)");
+		addResolucao("\\((" + aStr + "x)^2 - " + b + "^2 = (" + aStr + "x + " + b + ")("
+				+ aStr + "x - " + b + ")\\)");
+		addResolucao("\\(\\mathbf{" + correct + "}\\)");
 	}
 }

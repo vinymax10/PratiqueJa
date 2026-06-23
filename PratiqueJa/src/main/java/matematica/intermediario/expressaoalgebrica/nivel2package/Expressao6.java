@@ -74,9 +74,8 @@ public class Expressao6 extends GeradorExercicio
 		String g2Str = g2 < 0 ? "\\left(" + g2 + "\\right)" : "" + g2;
 		String interNum = g1 + " " + Algebra.converter(s2) + " " + g2Str;
 		String step2 = "\\dfrac{" + interNum + "}{" + g3 + "}";
-		String res = "Substituindo na expressão: \\(\\\\\\)";
-		res += "\\(" + expSubs + " = \\\\ ";
-		res += "" + step2 + " = " + resultado.toStringLatex() + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo na expressão:");
+		addResolucao("\\(" + expSubs + " =\\)");
+		addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
 	}
 }

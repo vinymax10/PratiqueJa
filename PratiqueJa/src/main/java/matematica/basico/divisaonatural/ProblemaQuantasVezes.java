@@ -62,11 +62,13 @@ public class ProblemaQuantasVezes
 		return q;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "\"Quantas vezes \\(" + b + "\\) cabe em \\(" + a + "\\)\" é a ideia central da divisão: \\(\\\\\\)";
-		res += "\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\) \\(\\\\\\)";
-		res += "Verificação: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)";
-		return res;
+		return new String[]
+		{
+			"\"Quantas vezes \\(" + b + "\\) cabe em \\(" + a + "\\)\" é a ideia central da divisão:",
+			"\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\)",
+			"Verificação: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)"
+		};
 	}
 }

@@ -35,8 +35,7 @@ public class SubtracaoOposto extends GeradorExercicio
 		addParagrafo("Calcule: \\(" + expr + "\\)");
 		gerarAlternativasInteirasComNegativos(resultado);
 
-		String res = "Aplicamos a regra do sinal antes do parêntese — " + regraTxt + ". \\(\\\\\\)";
-		res += "\\(" + expr + " = " + simplExpr + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Aplicamos a regra do sinal antes do parêntese — " + regraTxt + ".");
+		addResolucao("\\(" + expr + " = " + simplExpr + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

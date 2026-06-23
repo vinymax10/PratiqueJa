@@ -37,15 +37,14 @@ public class TresTermos extends GeradorExercicio
 			else { if (!firstNeg) negStr.append(" - "); else { negStr.append("-"); firstNeg = false; } negStr.append(Math.abs(t)); sumNeg += t; }
 		}
 
-		String res = "Agrupamos os termos positivos e negativos separadamente: \\(\\\\\\)";
-		if (sumPos > 0) res += "Positivos: \\(+" + posStr + " = +" + sumPos + "\\) \\(\\\\\\)";
-		if (sumNeg < 0) res += "Negativos: \\(" + negStr + " = " + sumNeg + "\\) \\(\\\\\\)";
+		addResolucao("Agrupamos os termos positivos e negativos separadamente:");
+		if (sumPos > 0) addResolucao("Positivos: \\(+" + posStr + " = +" + sumPos + "\\)");
+		if (sumNeg < 0) addResolucao("Negativos: \\(" + negStr + " = " + sumNeg + "\\)");
 		if (sumPos > 0 && sumNeg < 0)
-			res += "\\(" + sumPos + Auxiliar.getNumber(sumNeg, "", false) + " = \\mathbf{" + resultado + "}\\)";
+			addResolucao("\\(" + sumPos + Auxiliar.getNumber(sumNeg, "", false) + " = \\mathbf{" + resultado + "}\\)");
 		else if (sumNeg == 0)
-			res += "\\(+" + posStr + " = \\mathbf{" + resultado + "}\\)";
+			addResolucao("\\(+" + posStr + " = \\mathbf{" + resultado + "}\\)");
 		else
-			res += "\\(" + negStr + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+			addResolucao("\\(" + negStr + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

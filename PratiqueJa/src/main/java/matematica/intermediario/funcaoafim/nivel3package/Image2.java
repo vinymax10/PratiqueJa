@@ -35,17 +35,16 @@ public class Image2 extends GeradorExercicio
 
 		String aStr = aRacional.toStringLatex();
 		String aDisp = aStr.equals("1") ? "" : (aStr.equals("-1") ? "-" : aStr);
-		String resolucao = "";
-		resolucao += "O coeficiente linear  \\(b\\)  pode ser calculado por: \\(\\\\ \\)";
-		resolucao += "\\(y=" + aDisp + "x + b \\\\ \\)";
-		resolucao += "Considerando o ponto (" + pontoAx + "," + pontoAy + "),  temos: \\(\\\\ \\)";
 
 		MyExpression expressao = new MyExpression(pontoAy + " = " + aRacional.toString() + "*" + pontoAx + "+b");
-		resolucao += "\\("+expressao.resolverLatex()+"\\)";
 
 		addParagrafo("Encontre o valor de b:  \\( f(x)=" + aDisp + "x+b \\)");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + bRacional);
-		setResolucao(resolucao);
+
+		addResolucao("O coeficiente linear  \\(b\\)  pode ser calculado por:");
+		addResolucao("\\(y=" + aDisp + "x + b\\)");
+		addResolucao("Considerando o ponto (" + pontoAx + "," + pontoAy + "),  temos:");
+		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
 	}
 }

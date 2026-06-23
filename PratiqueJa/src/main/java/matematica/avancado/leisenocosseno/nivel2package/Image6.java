@@ -31,6 +31,6 @@ public class Image6 extends GeradorExercicio
 		addParagrafo("Qual o \\(cos~" + dados.strAngleB + "\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

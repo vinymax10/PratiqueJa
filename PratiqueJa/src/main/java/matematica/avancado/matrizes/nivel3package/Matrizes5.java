@@ -24,12 +24,12 @@ public class Matrizes5 extends GeradorExercicio
 		addParagrafo("\\(A = " + AuxMatriz.matrizStr(a) + "\\)");
 		gerarAlternativas("" + soma);
 
-		String res = "\\(A^2 = A \\cdot A\\): \\(\\\\\\)";
+		addResolucao("\\(A^2 = A \\cdot A\\):");
 		for (int i = 0; i < 2; i++)
 			for (int j = 0; j < 2; j++)
-				res += "\\(" + AuxMatriz.parcialMult(a, a, i, j) + "\\) \\(\\\\\\)";
+				addResolucao("\\(" + AuxMatriz.parcialMult(a, a, i, j) + "\\)");
 
-		res += "\\(A^2 = " + AuxMatriz.matrizStr(a2) + "\\). \\(\\\\\\)";
+		addResolucao("\\(A^2 = " + AuxMatriz.matrizStr(a2) + "\\).");
 
 		StringBuilder sumParts = new StringBuilder();
 		boolean first = true;
@@ -40,8 +40,7 @@ public class Matrizes5 extends GeradorExercicio
 				sumParts.append(a2[i][j]);
 				first = false;
 			}
-		res += "Soma dos elementos: \\(\\\\\\)";
-		res += "\\(" + sumParts + " = \\mathbf{" + soma + "}\\)";
-		setResolucao(res);
+		addResolucao("Soma dos elementos:");
+		addResolucao("\\(" + sumParts + " = \\mathbf{" + soma + "}\\)");
 	}
 }

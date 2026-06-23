@@ -23,8 +23,7 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(" + (coef + 2 * r * r) + "\\pi\\,\\text{cm}^2\\)");  // A_lat + 2πr²
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(A_{\\text{lateral}} = 2\\pi r h = 2\\pi \\cdot " + r + " \\cdot " + h
-				+ " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{lateral}} = 2\\pi r h = 2\\pi \\cdot " + r + " \\cdot " + h
+				+ " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)");
 	}
 }

@@ -18,14 +18,12 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Resolva a equação \\(" + a + "^{" + expo + "} = " + a + "^{" + d + "}\\).");
 
 		int dc = d - c;
-		String res = "As bases são iguais, então igualamos os expoentes: \\(\\\\\\)";
-		res += "\\(" + expo + " = " + d + "\\\\";
-		res += "" + b + "x = " + d + " - (" + c + ")\\\\";
-		res += "" + b + "x = " + dc + "\\\\";
-		res += "x = \\dfrac{" + dc + "}{" + b + "} = \\mathbf{" + x + "}\\)";
-
 		gerarAlternativas("" + x);
-		setResolucao(res);
+		addResolucao("As bases são iguais, então igualamos os expoentes:");
+		addResolucao("\\(" + expo + " = " + d + "\\)");
+		addResolucao("\\(" + b + "x = " + d + " - (" + c + ")\\)");
+		addResolucao("\\(" + b + "x = " + dc + "\\)");
+		addResolucao("\\(x = \\dfrac{" + dc + "}{" + b + "} = \\mathbf{" + x + "}\\)");
 	}
 
 	private static String expoStr(int m, int c)

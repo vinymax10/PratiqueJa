@@ -19,24 +19,22 @@ public class Expressao3 extends GeradorExercicio
 
 		addParagrafo("Determine a solução de \\(|" + inner + "| = 0\\).");
 
-		String res = "\\(|f(x)| = 0 \\Leftrightarrow f(x) = 0\\): \\(\\\\\\)";
-		res += "\\(" + inner + " = 0\\)";
+		gerarAlternativas("" + x0);
+
+		addResolucao("\\(|f(x)| = 0 \\Leftrightarrow f(x) = 0\\):");
 		if (a > 1 || b != 0)
 		{
-			res += " \\(\\\\\\)";
+			addResolucao("\\(" + inner + " = 0\\)");
 			if (a > 1 && b != 0)
-				res += "\\(" + a + "x = " + (a * x0) + " \\Rightarrow x = \\mathbf{" + x0 + "}\\)";
+				addResolucao("\\(" + a + "x = " + (a * x0) + " \\Rightarrow x = \\mathbf{" + x0 + "}\\)");
 			else if (b != 0)
-				res += "\\(x = \\mathbf{" + x0 + "}\\)";
+				addResolucao("\\(x = \\mathbf{" + x0 + "}\\)");
 			else
-				res += "\\(x = \\mathbf{" + x0 + "}\\)";
+				addResolucao("\\(x = \\mathbf{" + x0 + "}\\)");
 		}
 		else
 		{
-			res += " \\(\\Rightarrow x = \\mathbf{" + x0 + "}\\)";
+			addResolucao("\\(" + inner + " = 0\\) \\(\\Rightarrow x = \\mathbf{" + x0 + "}\\)");
 		}
-
-		gerarAlternativas("" + x0);
-		setResolucao(res);
 	}
 }

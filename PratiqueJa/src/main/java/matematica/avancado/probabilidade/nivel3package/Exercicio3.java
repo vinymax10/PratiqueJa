@@ -55,17 +55,16 @@ public class Exercicio3 extends GeradorExercicio
 			dis.add("\\(" + d3.showDfrac() + "\\)");    // off-by-one
 			embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", dis);
 
-			String resolucao = "Usando combinações para contar os casos:\\(\\\\\\)";
-			resolucao += "\\(A =\\) três bolas " + corAs + "\\(\\\\\\)";
-			resolucao += "\\(n(\\Omega) = C_{" + total + ",3} = \\dfrac{" + total + " \\cdot " + (total-1)
-					+ " \\cdot " + (total-2) + "}{6} = " + cT3 + " \\\\";
-			resolucao += "n(A) = C_{" + a + ",3} = \\dfrac{" + a + " \\cdot " + (a-1)
-					+ " \\cdot " + (a-2) + "}{6} = " + cA3 + " \\\\";
+			addResolucao("Usando combinações para contar os casos:");
+			addResolucao("\\(A =\\) três bolas " + corAs);
+			addResolucao("\\(n(\\Omega) = C_{" + total + ",3} = \\dfrac{" + total + " \\cdot " + (total-1)
+					+ " \\cdot " + (total-2) + "}{6} = " + cT3 + "\\)");
+			addResolucao("\\(n(A) = C_{" + a + ",3} = \\dfrac{" + a + " \\cdot " + (a-1)
+					+ " \\cdot " + (a-2) + "}{6} = " + cA3 + "\\)");
 			if(resSimp)
-				resolucao += "P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)";
+				addResolucao("\\(P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)");
 			else
-				resolucao += "P(A)=\\mathbf{" + fraRes + "}\\)";
-			setResolucao(resolucao);
+				addResolucao("\\(P(A)=\\mathbf{" + fraRes + "}\\)");
 		}
 		else
 		{
@@ -85,17 +84,16 @@ public class Exercicio3 extends GeradorExercicio
 			dis.add("\\(" + d3.showDfrac() + "\\)");    // somou em vez de multiplicar
 			embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", dis);
 
-			String resolucao = "Usando combinações para contar os casos:\\(\\\\\\)";
-			resolucao += "\\(A =\\) 2 bolas " + corAs + " e 1 bola " + corB + "\\(\\\\\\)";
-			resolucao += "\\(n(\\Omega) = C_{" + total + ",3} = \\dfrac{" + total + " \\cdot " + (total-1)
-					+ " \\cdot " + (total-2) + "}{6} = " + cT3 + " \\\\";
-			resolucao += "n(A) = C_{" + a + ",2} \\cdot C_{" + b + ",1} = "
-					+ cA2 + " \\cdot " + cB1 + " = " + num2A1B + " \\\\";
+			addResolucao("Usando combinações para contar os casos:");
+			addResolucao("\\(A =\\) 2 bolas " + corAs + " e 1 bola " + corB);
+			addResolucao("\\(n(\\Omega) = C_{" + total + ",3} = \\dfrac{" + total + " \\cdot " + (total-1)
+					+ " \\cdot " + (total-2) + "}{6} = " + cT3 + "\\)");
+			addResolucao("\\(n(A) = C_{" + a + ",2} \\cdot C_{" + b + ",1} = "
+					+ cA2 + " \\cdot " + cB1 + " = " + num2A1B + "\\)");
 			if(resSimp)
-				resolucao += "P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)";
+				addResolucao("\\(P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)");
 			else
-				resolucao += "P(A)=\\mathbf{" + fraRes + "}\\)";
-			setResolucao(resolucao);
+				addResolucao("\\(P(A)=\\mathbf{" + fraRes + "}\\)");
 		}
 	}
 }

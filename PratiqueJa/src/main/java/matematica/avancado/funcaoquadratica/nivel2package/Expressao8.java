@@ -58,13 +58,11 @@ public class Expressao8 extends GeradorExercicio
 		String posicao = pedirPositivo ? "acima" : "abaixo";
 		String regiao  = entreRaizes ? "\\(\\mathbf{entre}\\) as raízes" : "\\(\\mathbf{fora}\\) das raízes";
 
-		String res = "A parábola abre para " + concav + ". \\(\\\\\\)";
-		res += "A função fica " + posicao + " do eixo \\(x\\) " + regiao + ": \\(\\\\\\)";
+		addResolucao("A parábola abre para " + concav + ".");
+		addResolucao("A função fica " + posicao + " do eixo \\(x\\) " + regiao + ":");
 		if(entreRaizes)
-			res += "\\(\\mathbf{" + x1 + " < x < " + x2 + "}\\)";
+			addResolucao("\\(\\mathbf{" + x1 + " < x < " + x2 + "}\\)");
 		else
-			res += "\\(\\mathbf{x < " + x1 + "}\\) ou \\(\\mathbf{x > " + x2 + "}\\)";
-
-		setResolucao(res);
+			addResolucao("\\(\\mathbf{x < " + x1 + "}\\) ou \\(\\mathbf{x > " + x2 + "}\\)");
 	}
 }

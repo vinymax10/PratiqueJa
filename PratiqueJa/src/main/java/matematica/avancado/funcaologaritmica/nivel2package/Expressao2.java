@@ -28,12 +28,14 @@ public class Expressao2 extends GeradorExercicio
 		dist.add("\\(x > 0\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "O logaritmo só existe para argumento positivo: \\(\\\\\\)";
-		res += "\\(" + argStr + " > 0 \\Rightarrow ";
+		addResolucao("O logaritmo só existe para argumento positivo:");
+
+		String passo = "\\(" + argStr + " > 0 \\Rightarrow ";
 		if (b > 1)
-			res += b + "x > " + c + " \\Rightarrow ";
-		res += "x > " + k + "\\) \\(\\\\\\)";
-		res += "Domínio: \\(\\mathbf{x > " + k + "}\\)";
-		setResolucao(res);
+			passo += b + "x > " + c + " \\Rightarrow ";
+		passo += "x > " + k + "\\)";
+		addResolucao(passo);
+
+		addResolucao("Domínio: \\(\\mathbf{x > " + k + "}\\)");
 	}
 }

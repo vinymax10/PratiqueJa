@@ -25,22 +25,20 @@ public class ProblemaMediana
 			valores[i] = 2 + rand.nextInt(28);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int n = valores.length;
 		int[] ord = AuxEstatistica.ordenar(valores);
 		int pos = (n + 1) / 2;
 		int mediana = ord[pos - 1];
 
-		String res = "A mediana (Me) é o valor central dos dados dispostos em ordem crescente (rol).";
-		res += "\\(\\\\\\)";
-		res += "Ordenando o conjunto: " + AuxEstatistica.listaStr(ord) + ".";
-		res += "\\(\\\\\\)";
-		res += "Como \\(n = " + n + "\\) é ímpar, a mediana está na posição \\(\\dfrac{n+1}{2} = " + pos + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{Me} = \\mathbf{" + mediana + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A mediana (Me) é o valor central dos dados dispostos em ordem crescente (rol).",
+			"Ordenando o conjunto: " + AuxEstatistica.listaStr(ord) + ".",
+			"Como \\(n = " + n + "\\) é ímpar, a mediana está na posição \\(\\dfrac{n+1}{2} = " + pos + "\\):",
+			"\\(\\text{Me} = \\mathbf{" + mediana + "}\\)"
+		};
 	}
 
 	public String resultado()

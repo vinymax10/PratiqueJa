@@ -47,12 +47,11 @@ public class Expressao6 extends GeradorExercicio
 		dist.add("\\(-" + iStr + "\\)");
 		embaralharEAdicionarAlternativas(correct, dist);
 
-		String resolucao = "Pela Fórmula de De Moivre: \\(\\\\\\)";
-		resolucao += "\\([r(\\cos\\theta+i\\sin\\theta)]^n = r^n(\\cos n\\theta+i\\sin n\\theta)\\). \\(\\\\\\)";
-		resolucao += "\\(r^n = " + r + "^{" + n + "} = " + rPow + "\\). \\(\\\\\\)";
-		resolucao += "\\(n\\theta = " + n + " \\cdot \\dfrac{\\pi}{" + den + "} = " + nThetaStr + "\\). \\(\\\\\\)";
-		resolucao += "\\(\\cos(" + nThetaStr + ") = " + cosV + ", \\quad \\sin(" + nThetaStr + ") = 0\\). \\(\\\\\\)";
-		resolucao += "\\(z^{" + n + "} = " + rPow + " \\cdot (" + cosV + " + 0i) = \\mathbf{" + res + "}\\)";
-		setResolucao(resolucao);
+		addResolucao("Pela Fórmula de De Moivre:");
+		addResolucao("\\([r(\\cos\\theta+i\\sin\\theta)]^n = r^n(\\cos n\\theta+i\\sin n\\theta)\\).");
+		addResolucao("\\(r^n = " + r + "^{" + n + "} = " + rPow + "\\).");
+		addResolucao("\\(n\\theta = " + n + " \\cdot \\dfrac{\\pi}{" + den + "} = " + nThetaStr + "\\).");
+		addResolucao("\\(\\cos(" + nThetaStr + ") = " + cosV + ", \\quad \\sin(" + nThetaStr + ") = 0\\).");
+		addResolucao("\\(z^{" + n + "} = " + rPow + " \\cdot (" + cosV + " + 0i) = \\mathbf{" + res + "}\\)");
 	}
 }

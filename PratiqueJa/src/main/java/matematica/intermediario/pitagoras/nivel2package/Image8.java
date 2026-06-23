@@ -28,12 +28,9 @@ public class Image8 extends GeradorExercicio
 
 		gerarAlternativas("" + h);
 
-		String res = "Aplicamos a relação métrica da altura em triângulos retângulos:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPitagoras.formulaMetricaAltura() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(h^2 = " + m + " \\cdot " + n + " = " + (m * n) + " \\\\";
-		res += "h = \\sqrt{" + (m * n) + "} = \\mathbf{" + h + "}\\)";
-		setResolucao(res);
+		addResolucao("Aplicamos a relação métrica da altura em triângulos retângulos:");
+		addResolucao("\\(" + ResolucaoPitagoras.formulaMetricaAltura() + "\\)");
+		addResolucao("\\(h^2 = " + m + " \\cdot " + n + " = " + (m * n) + "\\)");
+		addResolucao("\\(h = \\sqrt{" + (m * n) + "} = \\mathbf{" + h + "}\\)");
 	}
 }

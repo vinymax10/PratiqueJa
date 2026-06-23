@@ -26,19 +26,16 @@ public class ProblemaArranjoSimples
 		k = 2 + rand.nextInt(n-2);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "O arranjo simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dado por:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("A(n,k) = \\dfrac{n!}{(n-k)!}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(A(" + n + "," + k + ") = \\dfrac{" + n + "!}{(" + n + "-" + k + ")!} = \\\\ ";
-		res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + (n-k) + "!} = \\\\ ";
-		res += AuxCombinacao.fatorialString(n,(n-k)) + " = \\mathbf{" + resultado() + "}\\)";
+		String passoIntroducao = "O arranjo simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dado por:";
+		String passoFormula = "\\(" + ParCor.formula("A(n,k) = \\dfrac{n!}{(n-k)!}") + "\\)";
+		String passoSubstituicao = "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
+		String passoExpansao = "\\(A(" + n + "," + k + ") = \\dfrac{" + n + "!}{(" + n + "-" + k + ")!} =\\)";
+		String passoSimplificacao = "\\(\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + (n-k) + "!} =\\)";
+		String passoResultado = "\\(" + AuxCombinacao.fatorialString(n,(n-k)) + " = \\mathbf{" + resultado() + "}\\)";
 
-		return res;
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoSimplificacao, passoResultado};
 	}
 
 	public String resultado()

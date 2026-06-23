@@ -18,17 +18,15 @@ public class Image13 extends GeradorExercicio
 
 		String resultadoCorreto = "" + (2 * (b + h));
 
-		String resolucao = "h=2r= 2 \\cdot" + raio + "=" + h + "\\\\";
-		resolucao += ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += "P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot " + (b + h) + "=" + (2 * (b + h));
-
 		ConfigRetangulo2 config = new ConfigRetangulo2(b + "", "h", "r", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(r=" + raio + "\\), qual o perímetro do retângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(h=2r= 2 \\cdot" + raio + "=" + h + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot " + (b + h) + "=" + (2 * (b + h)) + "\\)");
 	}
 }

@@ -27,9 +27,8 @@ public class Exercicio1 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + p + "}{" + r + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\operatorname{sen}(2\\alpha) = 2\\operatorname{sen}\\,\\alpha\\cos\\alpha\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(2\\alpha) = 2 \\cdot \\dfrac{" + p + "}{" + r + "} \\cdot \\dfrac{" + q + "}{" + r
+		addResolucao("Pela fórmula \\(\\operatorname{sen}(2\\alpha) = 2\\operatorname{sen}\\,\\alpha\\cos\\alpha\\):");
+		addResolucao("\\(\\operatorname{sen}(2\\alpha) = 2 \\cdot \\dfrac{" + p + "}{" + r + "} \\cdot \\dfrac{" + q + "}{" + r
 				+ "} = \\mathbf{\\dfrac{" + num + "}{" + rr + "}}\\)");
 	}
 }

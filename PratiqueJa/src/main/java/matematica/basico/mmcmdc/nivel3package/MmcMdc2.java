@@ -28,7 +28,7 @@ public class MmcMdc2 extends GeradorExercicio
 		);
 		gerarAlternativasInteiras(b);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& \\text{MDC} \\times \\text{MMC} = A \\times B\\\\" +
 			"& " + d + " \\times " + m + " = " + a + " \\times B\\\\" +

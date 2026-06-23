@@ -1,15 +1,18 @@
 package matematica.basico.racionais;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import matematica.Racional;
 import pdf.util.Convert;
 
 
 public class ResolucaoRacionais
 {
-	public static String resolucaoCompleta(long a, long b, long c, long d, boolean positivo)
+	public static String[] resolucaoCompleta(long a, long b, long c, long d, boolean positivo)
 	{
 		String resolucaoLatex = "";
-		
+
 		Racional frac1 = new Racional(a, b);
 		Racional frac2 = new Racional(c, d);
 		frac1.fatoracao(2);
@@ -34,14 +37,14 @@ public class ResolucaoRacionais
 			// Usa os valores atuais (a, b, c) e não frac1/frac2, que foram
 			// mutados por fatoracao() e podem ter denominadores diferentes.
 			if(positivo)
-				resolucaoLatex +=simplesSoma(new Racional(a, b), new Racional(c, d));
+				resolucaoLatex +=simplesSomaLatex(new Racional(a, b), new Racional(c, d));
 			else
-				resolucaoLatex +=simplesMenos(new Racional(a, b), new Racional(c, d));
+				resolucaoLatex +=simplesMenosLatex(new Racional(a, b), new Racional(c, d));
 		}
 		else
 		{
 			resolucaoLatex += "\\dfrac{" + a + "\\cdot" + d + sinalPlusMinus(positivo) + c + "\\cdot " + b + "}{" + b+" \\cdot "+d + "}=";
-			
+
 			resolucaoLatex += "\\dfrac{" + (a*d) + sinalPlusMinus(positivo) + (c*b) + "}{" + (b*d) + "}=";
 
 			Racional frac;
@@ -60,16 +63,21 @@ public class ResolucaoRacionais
 
 		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,180);
 
-		return resolucaoLatex;
+		return separarPassos(resolucaoLatex);
 	}
-	
-	public static String simplesSoma(Racional a, Racional b)
+
+	public static String[] simplesSoma(Racional a, Racional b)
+	{
+		return separarPassos(Convert.includeLineBreak(simplesSomaLatex(a, b), 180));
+	}
+
+	private static String simplesSomaLatex(Racional a, Racional b)
 	{
 		String resolucaoLatex = "";
 		resolucaoLatex += "\\dfrac{" + a.numerador + "+" + b.numerador + "}{" + a.denominador + "}";
-		
+
 		Racional resultado = new Racional(a.numerador + b.numerador,a.denominador);
-		
+
 		resolucaoLatex += "=" + resultado.showDfrac();
 
 		resultado.fatoracao(2);
@@ -77,16 +85,19 @@ public class ResolucaoRacionais
 		if(resultado.isSimplificou()&&!resultado.isZero())
 			resolucaoLatex += "=" + resultado.showDfrac();
 
-		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,180);
-
 		return resolucaoLatex;
 	}
-	
-	public static String simplesMenos(Racional a, Racional b)
+
+	public static String[] simplesMenos(Racional a, Racional b)
+	{
+		return separarPassos(Convert.includeLineBreak(simplesMenosLatex(a, b), 180));
+	}
+
+	private static String simplesMenosLatex(Racional a, Racional b)
 	{
 		String resolucaoLatex = "";
 		resolucaoLatex += "\\dfrac{" + a.numerador + "-" + b.numerador + "}{" + a.denominador + "}";
-		
+
 		Racional resultado = new Racional(a.numerador - b.numerador,a.denominador);
 		resolucaoLatex += "=" + resultado.showDfrac();
 
@@ -95,15 +106,13 @@ public class ResolucaoRacionais
 		if(resultado.isSimplificou()&&!resultado.isZero())
 			resolucaoLatex += "=" + resultado.showDfrac();
 
-		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,180);
-
 		return resolucaoLatex;
 	}
 
-	public static String Multiplicacao(long a, long b, long c, long d)
+	public static String[] Multiplicacao(long a, long b, long c, long d)
 	{
 		String resolucaoLatex = "";
-		
+
 		Racional frac1 = new Racional(a, b);
 		Racional frac2 = new Racional(c, d);
 		frac1.fatoracao(2);
@@ -117,7 +126,7 @@ public class ResolucaoRacionais
 			c = frac2.numerador;
 			d = frac2.denominador;
 		}
-		
+
 		resolucaoLatex += "\\dfrac{" + a + "}{" + b + "} \\cdot \\dfrac{" + c + "}{" + d + "}=";
 
 		resolucaoLatex += "\\dfrac{" + a + "\\cdot" + c + "}{" + b + "\\cdot" + d + "}=";
@@ -132,10 +141,10 @@ public class ResolucaoRacionais
 		if(fracSimplificada.isSimplificou())
 			resolucaoLatex += "=" + fracSimplificada.showDfrac();
 
-		return Convert.includeLineBreak(resolucaoLatex,180);
+		return separarPassos(Convert.includeLineBreak(resolucaoLatex,180));
 	}
 
-	public static String divisao(long a, long b, long c, long d)
+	public static String[] divisao(long a, long b, long c, long d)
 	{
 		String resolucaoLatex = "";
 
@@ -152,7 +161,7 @@ public class ResolucaoRacionais
 			c = frac2.numerador;
 			d = frac2.denominador;
 		}
-		
+
 		resolucaoLatex += "\\dfrac{" + a + "}{" + b + "} \\div \\dfrac{" + c + "}{" + d + "}=";
 		long aux = c;
 		c = d;
@@ -176,7 +185,7 @@ public class ResolucaoRacionais
 		if(fracSimplificada.isSimplificou())
 			resolucaoLatex += "=" + fracSimplificada.showDfrac();
 
-		return Convert.includeLineBreak(resolucaoLatex,180);
+		return separarPassos(Convert.includeLineBreak(resolucaoLatex,180));
 	}
 
 	protected static String sinalPlusMinus(boolean positivo)
@@ -185,5 +194,46 @@ public class ResolucaoRacionais
 			return "+";
 		else
 			return "-";
+	}
+
+	/**
+	 * Separa o LaTeX em passos nos "\\" de nível superior inseridos por
+	 * {@link Convert#includeLineBreak} (quebra de linha da equação por largura),
+	 * preservando "\\" interno de array/bmatrix. Cada passo é devolvido SEM o
+	 * delimitador "\(...\)" — o chamador envolve cada passo e faz um addResolucao.
+	 */
+	private static String[] separarPassos(String latex)
+	{
+		List<String> passos = new ArrayList<>();
+		int arrayDepth = 0, inicio = 0, i = 0, n = latex.length();
+		while(i < n)
+		{
+			if(latex.startsWith("\\begin{", i))
+			{
+				arrayDepth++; i += 7;
+			}
+			else if(arrayDepth > 0 && latex.startsWith("\\end{", i))
+			{
+				arrayDepth--; i += 5;
+			}
+			else if(arrayDepth == 0 && latex.startsWith("\\\\", i))
+			{
+				adicionarPasso(passos, latex.substring(inicio, i));
+				i += 2; inicio = i;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		adicionarPasso(passos, latex.substring(inicio));
+		return passos.toArray(new String[0]);
+	}
+
+	private static void adicionarPasso(List<String> passos, String passo)
+	{
+		String t = passo.trim();
+		if(!t.isEmpty())
+			passos.add(t);
 	}
 }

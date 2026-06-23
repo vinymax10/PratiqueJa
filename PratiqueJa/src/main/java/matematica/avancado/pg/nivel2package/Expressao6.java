@@ -22,6 +22,6 @@ public class Expressao6 extends GeradorExercicio
 		addParagrafo("\\(" + prev.showDfrac() + ", \\; x, \\; " + next.showDfrac() + "\\)");
 		addParagrafo("Qual é o valor de \\(x\\)?");
 		gerarAlternativas(mid.toString());
-		setResolucao("\\(" + ResolucaoPG.resolucaoMediaGeometrica(prev, next, mid) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.resolucaoMediaGeometrica(prev, next, mid) + "\\)");
 	}
 }

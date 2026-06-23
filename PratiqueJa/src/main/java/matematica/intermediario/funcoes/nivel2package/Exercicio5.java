@@ -20,11 +20,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		String vStr  = v < 0 ? "\\left(" + v + "\\right)" : "" + v;
 		String aStr  = a > 1 ? a + " \\cdot " : "";
-		String res = "Substituímos \\(x = " + v + "\\) na expressão: \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + aStr + vStr + "^2" + bLatex(c)
-				+ " = " + aStr + v2 + bLatex(c) + " = " + resultado + "\\).";
-
-		setResolucao(res);
+		addResolucao("Substituímos \\(x = " + v + "\\) na expressão:");
+		addResolucao("\\(f(" + v + ") = " + aStr + vStr + "^2" + bLatex(c)
+				+ " = " + aStr + v2 + bLatex(c) + " = " + resultado + "\\).");
 		gerarAlternativas("" + resultado);
 	}
 

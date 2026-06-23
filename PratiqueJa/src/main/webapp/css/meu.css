@@ -670,15 +670,6 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 	width: 100%;
 }
 
-.post-tabmenu {
-	margin: 0 10px 1rem;
-}
-
-.post-tabmenu .ui-tabmenu {
-	border: 0;
-	background: transparent;
-}
-
 .title-card {
 	color: var(--azul);
 	width: 100%;

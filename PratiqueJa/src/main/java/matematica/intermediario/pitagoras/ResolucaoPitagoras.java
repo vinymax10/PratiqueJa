@@ -7,49 +7,52 @@ import matematica.intermediario.pitagoras.dados.NoPitagoras;
 public class ResolucaoPitagoras
 {
 
-	public static String resolucaoXBC(Dados dados)
+	public static String[] resolucaoXBC(Dados dados)
 	{
 		NoPitagoras a=dados.hipotenusa;
 		NoPitagoras b=dados.base;
 		NoPitagoras c=dados.altura;
-		
-		String resolucaoLatex = formula()+"\\\\";
-		resolucaoLatex += "b=" + b.show() + ",\\quad c=" + c.show() + "\\\\";
-		resolucaoLatex += "a^2 =" + b.showEleQuad() + "+" + c.showEleQuad() + "\\\\";
-		resolucaoLatex += "a^2 =" + b.showQuad() + "+" + c.showQuad() + " = " + (b.quad() + c.quad()) + " \\\\";
-		resolucaoLatex += "a = \\sqrt{" + (b.quad() + c.quad()) + "}" + " = " + a.show();
-		
-		return resolucaoLatex;
+
+		return new String[]
+		{
+			formula(),
+			"b=" + b.show() + ",\\quad c=" + c.show(),
+			"a^2 =" + b.showEleQuad() + "+" + c.showEleQuad(),
+			"a^2 =" + b.showQuad() + "+" + c.showQuad() + " = " + (b.quad() + c.quad()),
+			"a = \\sqrt{" + (b.quad() + c.quad()) + "}" + " = " + a.show()
+		};
 	}
-	
-	public static String resolucaoAXC(Dados dados)
+
+	public static String[] resolucaoAXC(Dados dados)
 	{
 		NoPitagoras a=dados.hipotenusa;
 		NoPitagoras b=dados.base;
 		NoPitagoras c=dados.altura;
-		
-		String resolucaoLatex = formula()+"\\\\";
-		resolucaoLatex += "a=" + a.show() + ",\\quad c=" + c.show() + "\\\\";
-		resolucaoLatex +=  "b^2+" + c.showEleQuad() + " = "+a.showEleQuad()+" \\\\";
-		resolucaoLatex += "b^2 =" + a.showQuad() + "-" + c.showQuad() + " = " + (a.quad() - c.quad()) + " \\\\";
-		resolucaoLatex += "b = \\sqrt{" + (a.quad() - c.quad()) + "}" + " = " + b.show();
-		
-		return resolucaoLatex;
+
+		return new String[]
+		{
+			formula(),
+			"a=" + a.show() + ",\\quad c=" + c.show(),
+			"b^2+" + c.showEleQuad() + " = "+a.showEleQuad(),
+			"b^2 =" + a.showQuad() + "-" + c.showQuad() + " = " + (a.quad() - c.quad()),
+			"b = \\sqrt{" + (a.quad() - c.quad()) + "}" + " = " + b.show()
+		};
 	}
-	
-	public static String resolucaoABX(Dados dados)
+
+	public static String[] resolucaoABX(Dados dados)
 	{
 		NoPitagoras a=dados.hipotenusa;
 		NoPitagoras b=dados.base;
 		NoPitagoras c=dados.altura;
-		
-		String resolucaoLatex = formula()+"\\\\";
-		resolucaoLatex += "a=" + a.show() + ",\\quad b=" + b.show() + "\\\\";
-		resolucaoLatex += b.showEleQuad() + " + c^2 =" + a.showEleQuad()+"\\\\";
-		resolucaoLatex += "c^2 =" + a.showQuad() + "-" + b.showQuad() + " = " + (a.quad() - b.quad()) + " \\\\";
-		resolucaoLatex += "c = \\sqrt{" + (a.quad() - b.quad()) + "}" + " = " + c.show();
-		
-		return resolucaoLatex;
+
+		return new String[]
+		{
+			formula(),
+			"a=" + a.show() + ",\\quad b=" + b.show(),
+			b.showEleQuad() + " + c^2 =" + a.showEleQuad(),
+			"c^2 =" + a.showQuad() + "-" + b.showQuad() + " = " + (a.quad() - b.quad()),
+			"c = \\sqrt{" + (a.quad() - b.quad()) + "}" + " = " + c.show()
+		};
 	}
 	
 	public static String formula()

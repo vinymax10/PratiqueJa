@@ -21,6 +21,6 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\) na PG que possui " + n + " termos?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(a1.toString());
-		setResolucao("\\(" + ResolucaoPG.resolucaoSoma3(a1, q, n) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.resolucaoSoma3(a1, q, n) + "\\)");
 	}
 }

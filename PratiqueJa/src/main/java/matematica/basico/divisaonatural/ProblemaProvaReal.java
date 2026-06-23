@@ -63,11 +63,13 @@ public class ProblemaProvaReal
 		return a;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "A prova real da divisão é: divisor \\(\\times\\) quociente \\(+\\) resto \\(=\\) dividendo. \\(\\\\\\)";
-		res += "Como o resto é zero: \\(\\\\\\)";
-		res += "\\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)";
-		return res;
+		return new String[]
+		{
+			"A prova real da divisão é: divisor \\(\\times\\) quociente \\(+\\) resto \\(=\\) dividendo.",
+			"Como o resto é zero:",
+			"\\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)"
+		};
 	}
 }

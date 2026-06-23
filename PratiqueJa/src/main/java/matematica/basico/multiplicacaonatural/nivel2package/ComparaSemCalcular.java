@@ -45,15 +45,15 @@ public class ComparaSemCalcular extends GeradorExercicio
 		addParagrafo("Sem calcular exatamente, qual das multiplicações " + listarOpcoes(correta, distrais) + " resulta no maior produto?");
 		embaralharEAdicionarAlternativas(correta, distrais);
 
-		String res = "Calculando cada produto: \\(\\\\\\)";
-		res += "\\(";
+		addResolucao("Calculando cada produto:");
+		String bloco = "\\(";
 		for (int i = 0; i < 4; i++)
 		{
-			if (i > 0) res += " \\\\ ";
-			res += opts[i][0] + " \\times " + opts[i][1] + " = " + produtos[i];
+			if (i > 0) bloco += " \\\\ ";
+			bloco += opts[i][0] + " \\times " + opts[i][1] + " = " + produtos[i];
 		}
-		res += "\\) \\(\\\\\\)";
-		res += "O maior é \\(\\mathbf{" + a + " \\times " + b + " = " + maiorProduto + "}\\)";
-		setResolucao(res);
+		bloco += "\\)";
+		addResolucao(bloco);
+		addResolucao("O maior é \\(\\mathbf{" + a + " \\times " + b + " = " + maiorProduto + "}\\)");
 	}
 }

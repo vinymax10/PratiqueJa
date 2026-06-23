@@ -217,19 +217,19 @@ public class NumeroComplexo
 	}
 	
 	
-	public String resolucaoModulo()
+	public String[] resolucaoModulo()
 	{
-		String resolucaoLatex="";
 		long hipotenusa=modulo.numerador;
 		long catetoMaiorQuad=real.numerador;
 		long catetoMenor=imaginaria.numerador;
-		resolucaoLatex = "|z|^2 = a^2 + b^2 \\\\";
-		resolucaoLatex += "a=" + getSqrt(catetoMaiorQuad) + ", ~~ b=" + catetoMenor + "\\\\";
-		resolucaoLatex += "|z|^2 =" + getSqrt(catetoMaiorQuad) + "^2+" + catetoMenor + "^2" + "\\\\";
-		resolucaoLatex += "|z|^2 =" + catetoMaiorQuad + "+" + (catetoMenor * catetoMenor) + " = " + (catetoMaiorQuad + catetoMenor * catetoMenor) + " \\\\";
-		resolucaoLatex += "|z| = \\sqrt{" + (catetoMaiorQuad + catetoMenor * catetoMenor) + "}" + " = " + hipotenusa ;
-		
-		return resolucaoLatex;
+		return new String[]
+		{
+			"|z|^2 = a^2 + b^2",
+			"a=" + getSqrt(catetoMaiorQuad) + ", ~~ b=" + catetoMenor,
+			"|z|^2 =" + getSqrt(catetoMaiorQuad) + "^2+" + catetoMenor + "^2",
+			"|z|^2 =" + catetoMaiorQuad + "+" + (catetoMenor * catetoMenor) + " = " + (catetoMaiorQuad + catetoMenor * catetoMenor),
+			"|z| = \\sqrt{" + (catetoMaiorQuad + catetoMenor * catetoMenor) + "}" + " = " + hipotenusa
+		};
 	}
 	
 	private static String getSqrt(long x)
@@ -273,12 +273,13 @@ public class NumeroComplexo
 		return resolucaoLatex;
 	}
 	
-	public String resolucaoQuadrado()
+	public String[] resolucaoQuadrado()
 	{
-		String resolucaoLatex="("+this+") \\cdot ("+this+")=\\\\";
-		resolucaoLatex+=resolucaoMultiplicacao(this);
-		
-		return resolucaoLatex;
+		return new String[]
+		{
+			"("+this+") \\cdot ("+this+")=",
+			resolucaoMultiplicacao(this)
+		};
 	}
 	
 	public String resolucaoDivisao(NumeroComplexo x)

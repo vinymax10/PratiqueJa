@@ -31,14 +31,9 @@ public class NotacaoCientifica2 extends GeradorExercicio
 		addParagrafo("A massa do planeta Y é \\(" + b + " \\times 10^{" + n + "}\\) kg.");
 		addParagrafo("Quantas vezes a massa de X é maior que a de Y?");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Dividir as massas:" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + " \\times 10^{" + m + "}}{" + b + " \\times 10^{" + n + "}} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + m + " - " + n + "} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + ratio + " \\times 10^{" + diff + "}}\\)"
-		);
+		addResolucao("Dividir as massas:");
+		addResolucao("\\(\\dfrac{" + a + " \\times 10^{" + m + "}}{" + b + " \\times 10^{" + n + "}} =\\)");
+		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + m + " - " + n + "} =\\)");
+		addResolucao("\\(\\mathbf{" + ratio + " \\times 10^{" + diff + "}}\\)");
 	}
 }

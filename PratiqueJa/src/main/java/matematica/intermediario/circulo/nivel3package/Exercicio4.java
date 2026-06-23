@@ -20,19 +20,16 @@ public class Exercicio4 extends GeradorExercicio
 		int smallR = triple[2];
 		int r2 = bigR * bigR - k;
 
-		String res = "\\(" + ResolucaoCirculo.formulaAreaCoroa() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = \\pi \\left(" + bigR + "^2 - r^2\\right) \\\\ ";
-		res += k + " = " + (bigR * bigR) + " - r^2 \\\\ ";
-		res += "r^2 = " + (bigR * bigR) + " - " + k + " = " + r2 + " \\\\ ";
-		res += "r = \\sqrt{" + r2 + "} = \\mathbf{" + smallR + "}\\)";
-
 		ConfigCoroa config = new ConfigCoroa("" + bigR, "r");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de uma coroa circular é \\(" + k + "\\pi\\) e o raio externo mede \\(" + bigR + "\\). Qual é o raio interno \\(r\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + smallR);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaAreaCoroa() + "\\)");
+		addResolucao("\\(" + k + "\\pi = \\pi \\left(" + bigR + "^2 - r^2\\right)\\)");
+		addResolucao("\\(" + k + " = " + (bigR * bigR) + " - r^2\\)");
+		addResolucao("\\(r^2 = " + (bigR * bigR) + " - " + k + " = " + r2 + "\\)");
+		addResolucao("\\(r = \\sqrt{" + r2 + "} = \\mathbf{" + smallR + "}\\)");
 	}
 }

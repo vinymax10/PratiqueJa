@@ -20,9 +20,8 @@ public class ElementoNeutro extends GeradorExercicio
 			case 0:
 				addParagrafo("Calcule: \\(" + aFmt + " \\times 1\\)");
 				gerarAlternativasInteirasComNegativos(a);
-				String res0 = "O \\(1\\) é o elemento neutro da multiplicação: qualquer inteiro multiplicado por \\(1\\) permanece igual. \\(\\\\\\)";
-				res0 += "\\(" + aFmt + " \\times 1 = \\mathbf{" + a + "}\\)";
-				setResolucao(res0);
+				addResolucao("O \\(1\\) é o elemento neutro da multiplicação: qualquer inteiro multiplicado por \\(1\\) permanece igual.");
+				addResolucao("\\(" + aFmt + " \\times 1 = \\mathbf{" + a + "}\\)");
 				break;
 			case 1:
 				addParagrafo("Calcule: \\(" + aFmt + " \\times 0\\)");
@@ -31,16 +30,14 @@ public class ElementoNeutro extends GeradorExercicio
 				distratores1.add("\\(" + (-a) + "\\)");
 				distratores1.add("\\(1\\)");
 				embaralharEAdicionarAlternativas("\\(0\\)", distratores1);
-				String res1 = "O \\(0\\) é o elemento absorvente da multiplicação: qualquer inteiro multiplicado por \\(0\\) resulta em \\(0\\). \\(\\\\\\)";
-				res1 += "\\(" + aFmt + " \\times 0 = \\mathbf{0}\\)";
-				setResolucao(res1);
+				addResolucao("O \\(0\\) é o elemento absorvente da multiplicação: qualquer inteiro multiplicado por \\(0\\) resulta em \\(0\\).");
+				addResolucao("\\(" + aFmt + " \\times 0 = \\mathbf{0}\\)");
 				break;
 			default:
 				addParagrafo("Calcule: \\((-1) \\times " + aFmt + "\\)");
 				gerarAlternativasInteirasComNegativos(-a);
-				String res2 = "Multiplicar por \\(-1\\) inverte o sinal do número: \\(\\\\\\)";
-				res2 += "\\((-1) \\times " + aFmt + " = \\mathbf{" + (-a) + "}\\)";
-				setResolucao(res2);
+				addResolucao("Multiplicar por \\(-1\\) inverte o sinal do número:");
+				addResolucao("\\((-1) \\times " + aFmt + " = \\mathbf{" + (-a) + "}\\)");
 				break;
 		}
 	}

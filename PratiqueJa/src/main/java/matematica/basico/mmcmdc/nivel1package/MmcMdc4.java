@@ -22,6 +22,6 @@ public class MmcMdc4 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\text{MDC}~ " + a + ", " + b + ", " + c + "=\\)");
 		gerarAlternativasInteiras((int) MMC.mdc(a, b, c));
-		setResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b, c) + "\\)");
+		addResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b, c) + "\\)");
 	}
 }

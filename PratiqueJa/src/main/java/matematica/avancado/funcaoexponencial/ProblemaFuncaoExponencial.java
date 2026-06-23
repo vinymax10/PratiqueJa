@@ -121,39 +121,40 @@ public class ProblemaFuncaoExponencial
 		return resultado;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res;
 		switch(tipo)
 		{
 			case CRESCIMENTO:
 			{
 				int potencia = (int) Math.pow(fator, t);
-				res  = "O modelo de crescimento é \\(N(t) = N_0 \\cdot " + fator + "^t\\). \\(\\\\\\)";
-				res += "Com \\(N_0 = " + n0 + "\\) e \\(t = " + t + "\\): \\(\\\\\\)";
-				res += "\\(N(" + t + ") = " + n0 + " \\cdot " + fator + "^{" + t + "} = " + n0 + " \\cdot " + potencia + "\\\\";
-				res += "N(" + t + ") = \\mathbf{" + resultado + "}\\)";
-				break;
+				return new String[]{
+					"O modelo de crescimento é \\(N(t) = N_0 \\cdot " + fator + "^t\\).",
+					"Com \\(N_0 = " + n0 + "\\) e \\(t = " + t + "\\):",
+					"\\(N(" + t + ") = " + n0 + " \\cdot " + fator + "^{" + t + "} = " + n0 + " \\cdot " + potencia + "\\)",
+					"\\(N(" + t + ") = \\mathbf{" + resultado + "}\\)",
+				};
 			}
 			case MEIAVIDA:
 			{
 				int denom = (int) Math.pow(2, k);
-				res  = "O tempo corresponde a \\(k = " + t + " \\div " + meiaVida + " = " + k + "\\) meias-vidas. \\(\\\\\\)";
-				res += "O modelo de decaimento é \\(M = M_0 \\cdot \\left(\\dfrac{1}{2}\\right)^k\\): \\(\\\\\\)";
-				res += "\\(M = " + n0 + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + k + "}";
-				res += " = \\dfrac{" + n0 + "}{" + denom + "}";
-				res += " = \\mathbf{" + resultado + "}\\,\\text{g}\\)";
-				break;
+				return new String[]{
+					"O tempo corresponde a \\(k = " + t + " \\div " + meiaVida + " = " + k + "\\) meias-vidas.",
+					"O modelo de decaimento é \\(M = M_0 \\cdot \\left(\\dfrac{1}{2}\\right)^k\\):",
+					"\\(M = " + n0 + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + k + "}"
+						+ " = \\dfrac{" + n0 + "}{" + denom + "}"
+						+ " = \\mathbf{" + resultado + "}\\,\\text{g}\\)",
+				};
 			}
 			default: // JUROS
 			{
-				res  = "O montante é dado por \\(M = C \\cdot (1 + i)^t\\): \\(\\\\\\)";
-				res += "\\(M = " + n0 + " \\cdot (1 + 0{,}" + (taxa < 10 ? "0" : "") + taxa + ")^{" + t + "}\\\\";
-				res += "M = " + n0 + " \\cdot (" + baseStr + ")^{" + t + "}\\\\";
-				res += "M = " + n0 + " \\cdot " + decStr + " = \\mathbf{R\\$\\," + resultado + "{,}00}\\)";
-				break;
+				return new String[]{
+					"O montante é dado por \\(M = C \\cdot (1 + i)^t\\):",
+					"\\(M = " + n0 + " \\cdot (1 + 0{,}" + (taxa < 10 ? "0" : "") + taxa + ")^{" + t + "}\\)",
+					"\\(M = " + n0 + " \\cdot (" + baseStr + ")^{" + t + "}\\)",
+					"\\(M = " + n0 + " \\cdot " + decStr + " = \\mathbf{R\\$\\," + resultado + "{,}00}\\)",
+				};
 			}
 		}
-		return res;
 	}
 }

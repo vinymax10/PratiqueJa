@@ -18,9 +18,8 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("\\(z = " + z + "\\)");
 		gerarAlternativas("" + produto);
 
-		String res = "O conjugado é \\(\\bar{z} = " + conj + "\\). \\(\\\\\\)";
-		res += "Usando a propriedade \\(z \\cdot \\bar{z} = a^2 + b^2\\): \\(\\\\\\)";
-		res += "\\(z \\cdot \\bar{z} = " + ((long) a * a) + " + " + ((long) b * b) + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("O conjugado é \\(\\bar{z} = " + conj + "\\).");
+		addResolucao("Usando a propriedade \\(z \\cdot \\bar{z} = a^2 + b^2\\):");
+		addResolucao("\\(z \\cdot \\bar{z} = " + ((long) a * a) + " + " + ((long) b * b) + " = \\mathbf{" + produto + "}\\)");
 	}
 }

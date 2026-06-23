@@ -67,12 +67,14 @@ public class ProblemaInteiroContexto
 		return x + sentido * y;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int r = resultado();
 		String op = sentido > 0 ? " + " : " - ";
-		String res = "Partimos do valor inicial e aplicamos a variação com seu sinal: \\(\\\\\\)";
-		res += "\\(" + x + op + y + " = \\mathbf{" + r + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Partimos do valor inicial e aplicamos a variação com seu sinal:",
+			"\\(" + x + op + y + " = \\mathbf{" + r + "}\\)"
+		};
 	}
 }

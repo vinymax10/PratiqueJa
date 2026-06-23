@@ -31,10 +31,8 @@ public class Primo11 extends AgrupadorPrimo
 		addParagrafo("Qual dos números " + listarOpcoes("\\(" + composto + "\\)", erradas) + " é composto?");
 		embaralharEAdicionarAlternativas("\\(" + composto + "\\)", erradas);
 
-		setResolucao(
-			"Um número composto tem outros divisores além de \\(1\\) e dele mesmo. \\(\\\\\\) " +
-			"\\(" + composto + " \\div " + menorFator + " = " + (composto / menorFator) + "\\) (exato), logo é divisível por \\(" + menorFator + "\\). \\(\\\\\\) " +
-			"Resposta: \\(\\mathbf{" + composto + "}\\)."
-		);
+		addResolucao("Um número composto tem outros divisores além de \\(1\\) e dele mesmo.");
+		addResolucao("\\(" + composto + " \\div " + menorFator + " = " + (composto / menorFator) + "\\) (exato), logo é divisível por \\(" + menorFator + "\\).");
+		addResolucao("Resposta: \\(\\mathbf{" + composto + "}\\).");
 	}
 }

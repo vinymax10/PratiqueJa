@@ -21,11 +21,7 @@ public class Image19 extends GeradorExercicio
 		String area = "" + h * b / 2;
 		String resultadoCorreto = "" + b;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\\\";
-		resolucao += "h=" + h + "\\\\";
-		resolucao += "\\dfrac{b \\cdot " + h + "}{2} = " + area + "\\\\";
 		MyExpression expressao = new MyExpression("b * " + h + "=" + area + "*2");
-		resolucao += expressao.resolverLatex();
 
 		ConfigImagem config = null;
 
@@ -41,6 +37,9 @@ public class Image19 extends GeradorExercicio
 		addParagrafo("Se a área do triângulo é \\(" + area + "\\), qual o valor de \\(b\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\)");
+		addResolucao("\\(h=" + h + "\\)");
+		addResolucao("\\(\\dfrac{b \\cdot " + h + "}{2} = " + area + "\\)");
+		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
 	}
 }

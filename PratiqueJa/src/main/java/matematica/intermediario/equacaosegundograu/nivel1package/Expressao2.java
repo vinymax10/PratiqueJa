@@ -32,6 +32,7 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo(pergunta);
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + x);
-		setResolucao("\\(" + ResolucaoEq2Grau.resolucaoX2(a, b, c) + "\\)");
+		for(String passo : ResolucaoEq2Grau.resolucaoX2(a, b, c))
+			addResolucao(passo);
 	}
 }

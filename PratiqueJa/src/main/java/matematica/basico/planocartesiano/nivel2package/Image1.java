@@ -29,14 +29,11 @@ public class Image1 extends GeradorExercicio
 		addParagrafoImagem(image);
 		gerarAlternativasInteirasComNegativos(resposta);
 
-		String res = "A " + tipoCoord + " é o valor lido no eixo das " + eixoNome + ". ";
-		res += "Seguindo a linha tracejada " + direcaoProj + " de P até o eixo \\(" + eixo + "\\), lemos: \\(\\\\\\)";
+		addResolucao("A " + tipoCoord + " é o valor lido no eixo das " + eixoNome + ". Seguindo a linha tracejada " + direcaoProj + " de P até o eixo \\(" + eixo + "\\), lemos:");
 		if (pedirOrdenada)
-			res += "\\(y = " + py + "\\). \\(\\\\\\)";
+			addResolucao("\\(y = " + py + "\\).");
 		else
-			res += "\\(x = " + px + "\\). \\(\\\\\\)";
-		res += "Portanto, a " + tipoCoord + " de P é \\(" + resposta + "\\).";
-
-		setResolucao(res);
+			addResolucao("\\(x = " + px + "\\).");
+		addResolucao("Portanto, a " + tipoCoord + " de P é \\(" + resposta + "\\).");
 	}
 }

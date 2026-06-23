@@ -21,10 +21,9 @@ public class Primo7 extends AgrupadorPrimo
 			if(descartados.length() > 0) descartados.append(",\\, ");
 			descartados.append(k);
 		}
-		String res = "Testamos os números antes de \\(" + n + "\\) até achar um primo. \\(\\\\\\)";
+		addResolucao("Testamos os números antes de \\(" + n + "\\) até achar um primo.");
 		if(descartados.length() > 0)
-			res += "\\(" + descartados + "\\) são compostos. \\(\\\\\\)";
-		res += "O maior primo menor que \\(" + n + "\\) é \\(\\mathbf{" + anterior + "}\\).";
-		setResolucao(res);
+			addResolucao("\\(" + descartados + "\\) são compostos.");
+		addResolucao("O maior primo menor que \\(" + n + "\\) é \\(\\mathbf{" + anterior + "}\\).");
 	}
 }

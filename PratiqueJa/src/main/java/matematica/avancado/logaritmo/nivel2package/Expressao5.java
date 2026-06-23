@@ -25,11 +25,10 @@ public class Expressao5 extends GeradorExercicio
 
 		long ac  = (long) a * c;
 		long acd = ac / d;
-		String res = "Aplicando produto e quociente: \\(\\\\\\)";
-		res += "\\(\\log_{" + b + "}\\!\\left(\\dfrac{" + a + " \\cdot " + c + "}{" + d + "}\\right) = \\log_{" + b + "} " + acd + "\\\\";
-		res += "\\log_{" + b + "} " + b + "^{" + x + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Aplicando produto e quociente:");
+		addResolucao("\\(\\log_{" + b + "}\\!\\left(\\dfrac{" + a + " \\cdot " + c + "}{" + d + "}\\right) = \\log_{" + b + "} " + acd + "\\)");
+		addResolucao("\\(\\log_{" + b + "} " + b + "^{" + x + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

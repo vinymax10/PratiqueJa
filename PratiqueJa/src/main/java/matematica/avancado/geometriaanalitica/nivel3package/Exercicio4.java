@@ -45,12 +45,9 @@ public class Exercicio4 extends GeradorExercicio
 		if (!posicao.equals("exterior"))         distratores.add("\\(\\text{exterior}\\)");
 		embaralharEAdicionarAlternativas("\\(\\text{" + posicao + "}\\)", distratores);
 
-		String res = "Calculamos \\(d^2(P,C) = (x_0 - a)^2 + (y_0 - b)^2\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(d^2 = (" + dx + ")^2 + (" + dy + ")^2 = " + (dx * dx) + " + " + (dy * dy) + " = \\mathbf{" + d2 + "}\\)"
-				+ "\\(\\\\\\)"
-				+ "Como \\(d^2 = " + d2 + " " + sinalD2 + " r^2 = " + r2 + "\\), "
-				+ "o ponto \\(P\\) está \\(\\mathbf{" + posicao + "}\\) da circunferência.";
-		setResolucao(res);
+		addResolucao("Calculamos \\(d^2(P,C) = (x_0 - a)^2 + (y_0 - b)^2\\):");
+		addResolucao("\\(d^2 = (" + dx + ")^2 + (" + dy + ")^2 = " + (dx * dx) + " + " + (dy * dy) + " = \\mathbf{" + d2 + "}\\)");
+		addResolucao("Como \\(d^2 = " + d2 + " " + sinalD2 + " r^2 = " + r2 + "\\), "
+				+ "o ponto \\(P\\) está \\(\\mathbf{" + posicao + "}\\) da circunferência.");
 	}
 }

@@ -36,11 +36,12 @@ public class Racionais3 extends GeradorExercicio
 		Racional resultado = aRacional.add(bRacional);
 		resultado.fatoracao(2);
 
-		String resolucao = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, true);
+		String[] resolucao = ResolucaoRacionais.resolucaoCompleta(a, b, c, d, true);
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

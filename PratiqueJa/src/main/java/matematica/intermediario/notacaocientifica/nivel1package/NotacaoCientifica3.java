@@ -30,11 +30,8 @@ public class NotacaoCientifica3 extends GeradorExercicio
 			addParagrafo("Qual número representa a notação científica?");
 			addParagrafo("\\(" + a + " \\times 10^{" + n + "}\\)");
 			embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-			setResolucao(
-				"Deslocar a vírgula " + n + " casas para a direita:" +
-				"\\(\\\\\\)" +
-				"\\(" + a + " \\times 10^{" + n + "} = \\mathbf{" + formatarLatex(N) + "}\\)"
-			);
+			addResolucao("Deslocar a vírgula " + n + " casas para a direita:");
+			addResolucao("\\(" + a + " \\times 10^{" + n + "} = \\mathbf{" + formatarLatex(N) + "}\\)");
 		}
 		else
 		{
@@ -48,11 +45,8 @@ public class NotacaoCientifica3 extends GeradorExercicio
 			addParagrafo("Qual número representa a notação científica?");
 			addParagrafo("\\(" + a + " \\times 10^{-" + n + "}\\)");
 			embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-			setResolucao(
-				"Deslocar a vírgula " + n + " casas para a esquerda:" +
-				"\\(\\\\\\)" +
-				"\\(" + a + " \\times 10^{-" + n + "} = \\mathbf{" + buildSmall(a, n) + "}\\)"
-			);
+			addResolucao("Deslocar a vírgula " + n + " casas para a esquerda:");
+			addResolucao("\\(" + a + " \\times 10^{-" + n + "} = \\mathbf{" + buildSmall(a, n) + "}\\)");
 		}
 	}
 

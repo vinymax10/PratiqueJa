@@ -31,9 +31,7 @@ public class Exercicio8 extends GeradorExercicio
 		distratores.add("\\(" + c[5] + "\\)" + " cm");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a fórmula do comprimento de arco \\(l = r \\cdot \\theta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(l = " + c[0] + " \\cdot " + c[1] + " = \\mathbf{" + c[2] + "}\\) cm";
-		setResolucao(res);
+		addResolucao("Usando a fórmula do comprimento de arco \\(l = r \\cdot \\theta\\):");
+		addResolucao("\\(l = " + c[0] + " \\cdot " + c[1] + " = \\mathbf{" + c[2] + "}\\) cm");
 	}
 }

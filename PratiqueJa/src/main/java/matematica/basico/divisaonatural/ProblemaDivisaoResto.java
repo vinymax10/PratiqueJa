@@ -80,20 +80,23 @@ public class ProblemaDivisaoResto
 		return d;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "Dividimos o total pelo tamanho de cada grupo: \\(\\\\\\)";
 		if(r == 0)
 		{
-			res += "\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\) sem sobras. \\(\\\\\\)";
-			res += "Prova real: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)";
+			return new String[]
+			{
+				"Dividimos o total pelo tamanho de cada grupo:",
+				"\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\) sem sobras.",
+				"Prova real: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)"
+			};
 		}
-		else
+		return new String[]
 		{
-			res += "\\(" + a + " \\div " + b + " = " + q + "\\) com resto \\(" + r + "\\). \\(\\\\\\)";
-			res += "Portanto, há \\(\\mathbf{" + q + "}\\) grupos completos e sobram \\(\\mathbf{" + r + "}\\). \\(\\\\\\)";
-			res += "Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)";
-		}
-		return res;
+			"Dividimos o total pelo tamanho de cada grupo:",
+			"\\(" + a + " \\div " + b + " = " + q + "\\) com resto \\(" + r + "\\).",
+			"Portanto, há \\(\\mathbf{" + q + "}\\) grupos completos e sobram \\(\\mathbf{" + r + "}\\).",
+			"Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)"
+		};
 	}
 }

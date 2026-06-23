@@ -52,6 +52,6 @@ public class TruqueMental extends GeradorExercicio
 
 		addParagrafo(enunciado);
 		gerarAlternativasInteiras(resultado);
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

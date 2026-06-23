@@ -62,10 +62,12 @@ public class ProblemaDivisaoExata
 		return q;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "Dividimos o total pelo número de partes iguais: \\(\\\\\\)";
-		res += "\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Dividimos o total pelo número de partes iguais:",
+			"\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\)"
+		};
 	}
 }

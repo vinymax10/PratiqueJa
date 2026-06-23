@@ -13,6 +13,7 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Calcule \\(|z|\\)");
 		addParagrafo("\\(z=" + a + "\\)");
 		gerarAlternativas("" + a.modulo);
-		setResolucao("\\(" + a.resolucaoModulo() + "\\)");
+		for(String passo : a.resolucaoModulo())
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

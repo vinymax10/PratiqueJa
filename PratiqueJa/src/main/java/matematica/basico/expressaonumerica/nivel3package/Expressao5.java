@@ -40,7 +40,7 @@ public class Expressao5 extends AgrupadorExercicio
 		addParagrafo("\\(" + par + " " + t2 + " \\dfrac{" + c + " " + t3 + " " + d + "}{" + e + "} = \\,?\\)");
 		gerarAlternativas("" + result);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& " + par + " " + t2 + " \\dfrac{" + c + " " + t3 + " " + d + "}{" + e + "} = \\\\" +
 			"& " + p1 + " " + t2 + " \\dfrac{" + p2 + "}{" + e + "} = \\\\" +

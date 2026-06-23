@@ -25,10 +25,9 @@ public class Expressao4 extends GeradorExercicio
 		dist.add("\\([-" + k + ",\\,+\\infty)\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "\\(|x - h| \\geq 0\\) para todo \\(x \\in \\mathbb{R}\\). \\(\\\\\\)";
-		res += "Logo o mínimo de \\(f\\) é atingido no vértice \\((h, k)\\): \\(\\\\\\)";
-		res += "\\(f_{\\min} = 0 + " + k + " = " + k + "\\) \\(\\\\\\)";
-		res += "Imagem: \\(\\mathbf{[" + k + ",\\,+\\infty)}\\)";
-		setResolucao(res);
+		addResolucao("\\(|x - h| \\geq 0\\) para todo \\(x \\in \\mathbb{R}\\).");
+		addResolucao("Logo o mínimo de \\(f\\) é atingido no vértice \\((h, k)\\):");
+		addResolucao("\\(f_{\\min} = 0 + " + k + " = " + k + "\\)");
+		addResolucao("Imagem: \\(\\mathbf{[" + k + ",\\,+\\infty)}\\)");
 	}
 }

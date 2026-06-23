@@ -25,19 +25,13 @@ public class Equacao2 extends GeradorExercicio
 		addParagrafo("Encontre \\(" + var + "\\)");
 		addParagrafo("\\(" + aStr + var + " + " + b + " = " + cStr + var + " + " + d + "\\)");
 
-		String res = "Passando os termos com \\(" + var + "\\) para o lado esquerdo"
-				+ " e as constantes para o direito: \\(\\\\\\)";
-		res += "\\(" + aStr + var + " - " + cStr + var + " = " + d + " - " + b + "\\). \\(\\\\\\)";
-		res += "\\(" + coefStr + var + " = " + (d - b) + "\\)";
+		addResolucao("Passando os termos com \\(" + var + "\\) para o lado esquerdo"
+				+ " e as constantes para o direito:");
+		addResolucao("\\(" + aStr + var + " - " + cStr + var + " = " + d + " - " + b + "\\).");
+		addResolucao("\\(" + coefStr + var + " = " + (d - b) + "\\).");
 		if(coef > 1)
-		{
-			res += ". \\(\\\\\\)";
-			res += "\\(" + var + " = \\dfrac{" + (d - b) + "}{" + coef + "} = " + xResult + "\\).";
-		}
-		else
-			res += ".";
+			addResolucao("\\(" + var + " = \\dfrac{" + (d - b) + "}{" + coef + "} = " + xResult + "\\).");
 
-		setResolucao(res);
 		gerarAlternativas("" + xResult);
 	}
 }

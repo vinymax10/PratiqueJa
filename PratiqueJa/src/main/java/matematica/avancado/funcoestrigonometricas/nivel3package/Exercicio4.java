@@ -24,10 +24,8 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(0\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Usando a propriedade \\(\\cos(180° - \\theta) = -\\cos\\theta\\)"
-				+ " (cosseno do suplementar):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(180° - \\theta) = -\\cos\\theta = \\mathbf{-\\dfrac{" + q + "}{" + r + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando a propriedade \\(\\cos(180° - \\theta) = -\\cos\\theta\\)"
+				+ " (cosseno do suplementar):");
+		addResolucao("\\(\\cos(180° - \\theta) = -\\cos\\theta = \\mathbf{-\\dfrac{" + q + "}{" + r + "}}\\)");
 	}
 }

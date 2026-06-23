@@ -60,12 +60,9 @@ public class Image7 extends GeradorExercicio
 			? "\\(" + a + "^2 > " + b + "^2 + " + c + "^2\\), logo o triângulo é \\(\\mathbf{obtusângulo}\\)."
 			: "\\(" + a + "^2 < " + b + "^2 + " + c + "^2\\), logo o triângulo é \\(\\mathbf{acutângulo}\\).";
 
-		String res = "Comparamos o quadrado do maior lado com a soma dos quadrados dos demais:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + a + "^2 = " + a2 + ", \\quad " + b + "^2 + " + c + "^2 = "
-			+ b2 + " + " + c2 + " = " + (b2 + c2) + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Como " + concl;
-		setResolucao(res);
+		addResolucao("Comparamos o quadrado do maior lado com a soma dos quadrados dos demais:");
+		addResolucao("\\(" + a + "^2 = " + a2 + ", \\quad " + b + "^2 + " + c + "^2 = "
+			+ b2 + " + " + c2 + " = " + (b2 + c2) + "\\)");
+		addResolucao("Como " + concl);
 	}
 }

@@ -25,21 +25,15 @@ public class Decimal4 extends AgrupadorDecimal
 		{
 			// a,bc × 10 = ab,c  →  fmtT(aH) pois aH décimos = ab,c
 			gerarAltT(aH);
-			setResolucao(
-				"\\(\\begin{aligned}" +
-				"& " + strA + " \\times 10 = \\\\" +
-				"& \\text{vírgula anda 1 casa:} " + fmtT(aH) + "\\end{aligned}\\)"
-			);
+			addResolucao("\\(" + strA + " \\times 10 =\\)");
+			addResolucao("vírgula anda 1 casa: \\(" + fmtT(aH) + "\\)");
 		}
 		else
 		{
 			// a,bc × 100 = abc (inteiro = aH)
 			gerarAlternativasInteiras(aH);
-			setResolucao(
-				"\\(\\begin{aligned}" +
-				"& " + strA + " \\times 100 = \\\\" +
-				"& \\text{vírgula anda 2 casas:} " + aH + "\\end{aligned}\\)"
-			);
+			addResolucao("\\(" + strA + " \\times 100 =\\)");
+			addResolucao("vírgula anda 2 casas: \\(" + aH + "\\)");
 		}
 	}
 }

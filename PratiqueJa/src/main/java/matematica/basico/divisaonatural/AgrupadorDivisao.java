@@ -19,7 +19,7 @@ public abstract class AgrupadorDivisao extends GeradorExercicio
 		addParagrafo("Calcule a seguinte divisão:");
 		addParagrafo("\\(" + ResolucaoNatural.divisao(dividendo, b, false) + "\\)");
 		gerarAlternativasInteiras(q);
-		setResolucao("\\(" + ResolucaoNatural.divisao(dividendo, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.divisao(dividendo, b, true) + "\\)");
 	}
 	protected void divisaoPor10()
 	{
@@ -31,7 +31,8 @@ public abstract class AgrupadorDivisao extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + dividendo + " \\div " + p + " = \\,?\\)");
 		gerarAlternativasInteiras(q);
-		setResolucao("Dividir por \\(" + p + "\\) remove \\(" + zeros + "\\) zero(s) do final: \\(\\\\\\) \\(" + dividendo + " \\div " + p + " = \\mathbf{" + q + "}\\)");
+		addResolucao("Dividir por \\(" + p + "\\) remove \\(" + zeros + "\\) zero(s) do final:");
+		addResolucao("\\(" + dividendo + " \\div " + p + " = \\mathbf{" + q + "}\\)");
 	}
 	protected void problema(int bMin, int bRange, int qMin, int qRange)
 	{
@@ -45,6 +46,7 @@ public abstract class AgrupadorDivisao extends GeradorExercicio
 		else
 			addParagrafo("Um total de \\(" + a + "\\) reais foi dividido igualmente entre \\(" + b + "\\) pessoas. Quanto cada uma recebeu?");
 		gerarAlternativasInteiras(q);
-		setResolucao("Dividimos o total pelo número de grupos: \\(\\\\\\) \\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\)");
+		addResolucao("Dividimos o total pelo número de grupos:");
+		addResolucao("\\(" + a + " \\div " + b + " = \\mathbf{" + q + "}\\)");
 	}
 }

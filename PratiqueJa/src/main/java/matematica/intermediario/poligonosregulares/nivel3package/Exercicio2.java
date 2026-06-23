@@ -17,26 +17,18 @@ public class Exercicio2 extends GeradorExercicio
 		int l = 2 * m;
 		int x = 6 * m * m;           // A = 6m²√3
 
-		String res = "Passo 1: encontrar \\(l\\) e \\(P\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaApotemaHexagono() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + m + "\\sqrt{3} = \\dfrac{l\\sqrt{3}}{2} \\Rightarrow l = " + l + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(P = 6 \\times " + l + " = " + (6 * l) + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Passo 2: calcular \\(A\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\dfrac{" + (6 * l) + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "l", "" + m + "\\sqrt{3}");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O apótema de um hexágono regular mede \\(" + m + "\\sqrt{3}\\). Sabendo que a área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + x);
-		setResolucao(res);
+		addResolucao("Passo 1: encontrar \\(l\\) e \\(P\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaApotemaHexagono() + "\\)");
+		addResolucao("\\(" + m + "\\sqrt{3} = \\dfrac{l\\sqrt{3}}{2} \\Rightarrow l = " + l + "\\)");
+		addResolucao("\\(P = 6 \\times " + l + " = " + (6 * l) + "\\)");
+		addResolucao("Passo 2: calcular \\(A\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)");
+		addResolucao("\\(A = \\dfrac{" + (6 * l) + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)");
 	}
 }

@@ -33,12 +33,11 @@ public class Expressao1 extends GeradorExercicio
 		Racional produto = a.mult(new Racional(b));
 		produto.fatoracao(2);
 
-		String res = "Propriedade do produto: \\(\\log_b M + \\log_b N = \\log_b(M \\cdot N)\\\\";
-		res += "\\log_{" + c + "}\\left(" + argA + " \\cdot " + b + "\\right) = \\log_{" + c + "} " + (long) produto.numerador + "\\\\";
-		res += "\\log_{" + c + "} " + c + "^{" + x + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Propriedade do produto: \\(\\log_b M + \\log_b N = \\log_b(M \\cdot N)\\)");
+		addResolucao("\\(\\log_{" + c + "}\\left(" + argA + " \\cdot " + b + "\\right) = \\log_{" + c + "} " + (long) produto.numerador + "\\)");
+		addResolucao("\\(\\log_{" + c + "} " + c + "^{" + x + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 
 	private void construirSubtracao(int c, int b, int x)
@@ -51,11 +50,10 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo(enunciado);
 
 		long quociente = arg / b; // = c^x
-		String res = "Propriedade do quociente: \\(\\log_b M - \\log_b N = \\log_b\\!\\left(\\dfrac{M}{N}\\right)\\\\";
-		res += "\\log_{" + c + "}\\!\\left(\\dfrac{" + arg + "}{" + b + "}\\right) = \\log_{" + c + "} " + quociente + "\\\\";
-		res += "\\log_{" + c + "} " + c + "^{" + x + "} = \\mathbf{" + x + "}\\)";
+		addResolucao("Propriedade do quociente: \\(\\log_b M - \\log_b N = \\log_b\\!\\left(\\dfrac{M}{N}\\right)\\)");
+		addResolucao("\\(\\log_{" + c + "}\\!\\left(\\dfrac{" + arg + "}{" + b + "}\\right) = \\log_{" + c + "} " + quociente + "\\)");
+		addResolucao("\\(\\log_{" + c + "} " + c + "^{" + x + "} = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

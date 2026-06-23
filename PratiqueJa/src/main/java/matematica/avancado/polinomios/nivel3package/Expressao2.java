@@ -51,13 +51,12 @@ public class Expressao2 extends GeradorExercicio
 				+ Auxiliar.getNumber(b * e, "", false);
 
 		String aStr = (a == 1) ? "" : String.valueOf(a);
-		String res = "Aplicando a propriedade distributiva:\\(\\\\\\)";
-		res += "\\(" + aStr + "x \\cdot (" + trinomio + ") + (" + b + ") \\cdot (" + trinomio + ") = \\\\ \\)";
-		res += "\\(" + group1 + group2 + " = \\mathbf{" + correct + "}\\)";
 
 		addParagrafo("Calcule o produto.");
 		addParagrafo("\\(" + expr + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Aplicando a propriedade distributiva:");
+		addResolucao("\\(" + aStr + "x \\cdot (" + trinomio + ") + (" + b + ") \\cdot (" + trinomio + ")\\)");
+		addResolucao("\\(" + group1 + group2 + " = \\mathbf{" + correct + "}\\)");
 	}
 }

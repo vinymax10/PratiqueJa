@@ -22,11 +22,8 @@ public class Decimal2 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\times " + b + " = \\,?\\)");
 		gerarAltH(prodH);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& " + a + " \\times " + b + " = \\\\" +
-			"& " + aT + " \\times " + bT + " = " + prodH + " \\\\" +
-			"& \\text{2 casas decimais: } " + result + "\\end{aligned}\\)"
-		);
+		addResolucao("\\(" + a + " \\times " + b + " =\\)");
+		addResolucao("\\(" + aT + " \\times " + bT + " = " + prodH + "\\)");
+		addResolucao("2 casas decimais: \\(" + result + "\\)");
 	}
 }

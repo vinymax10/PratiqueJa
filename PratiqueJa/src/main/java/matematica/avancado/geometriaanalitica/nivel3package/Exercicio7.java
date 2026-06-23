@@ -57,11 +57,9 @@ public class Exercicio7 extends GeradorExercicio
 		int dy = b2 - b1;
 		String sinalDMinusA1 = dMinusA1 >= 0 ? " + " + dMinusA1 : " - " + Math.abs(dMinusA1);
 
-		String res = "Usando a condição de coeficiente angular \\(m = \\dfrac{y_B - y_A}{x_B - x_A}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(" + m + " = \\dfrac{" + dy + "}{" + xExprShifted + "}\\\\"
-				+ m + " \\cdot (" + xExprShifted + ") = " + dy + "\\\\"
-				+ resolucaoPassos + "\\)";
-		setResolucao(res);
+		addResolucao("Usando a condição de coeficiente angular \\(m = \\dfrac{y_B - y_A}{x_B - x_A}\\):");
+		addResolucao("\\(" + m + " = \\dfrac{" + dy + "}{" + xExprShifted + "}\\)");
+		addResolucao("\\(" + m + " \\cdot (" + xExprShifted + ") = " + dy + "\\)");
+		addResolucao("\\(" + resolucaoPassos + "\\)");
 	}
 }

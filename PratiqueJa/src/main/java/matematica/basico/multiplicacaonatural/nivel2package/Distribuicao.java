@@ -27,10 +27,9 @@ public class Distribuicao extends GeradorExercicio
 
 		gerarAlternativasInteiras(produto);
 
-		String res = "Decompondo \\(" + n + " = " + decomp + "\\): \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + n
-			+ " = " + a + " \\times " + bRound + op + a + " \\times " + k + " = \\\\ \\)";
-		res += "\\(" + p1 + op + pk + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Decompondo \\(" + n + " = " + decomp + "\\):");
+		addResolucao("\\(" + a + " \\times " + n
+			+ " = " + a + " \\times " + bRound + op + a + " \\times " + k + " = \\\\ \\)"
+			+ "\\(" + p1 + op + pk + " = \\mathbf{" + produto + "}\\)");
 	}
 }

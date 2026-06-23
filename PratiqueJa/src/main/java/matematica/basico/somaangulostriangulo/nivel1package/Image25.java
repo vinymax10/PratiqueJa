@@ -50,10 +50,8 @@ public class Image25 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + ext + "^\\circ\\)", distratores);
 
-		String res = "O ângulo externo de um triângulo é igual à soma dos dois ângulos internos não adjacentes:";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{ext} = \\alpha + \\beta \\\\";
-		res += "= " + a + "^\\circ + " + b + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("O ângulo externo de um triângulo é igual à soma dos dois ângulos internos não adjacentes:");
+		addResolucao("\\(\\text{ext} = \\alpha + \\beta\\)");
+		addResolucao("\\(= " + a + "^\\circ + " + b + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)");
 	}
 }

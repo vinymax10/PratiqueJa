@@ -21,16 +21,14 @@ public class Exercicio2 extends GeradorExercicio
 
 		// Resolução: isola x em f(x)=y, depois substitui y=k
 		int kmb = k - b;
-		String res = "Para encontrar \\(f^{-1}\\), isolamos \\(x\\) em \\(f(x) = y\\): \\(\\\\\\)";
-		res += "\\(" + equacao + " = y\\). \\(\\\\\\)";
-		res += "\\(" + a + "x = y" + bLatex(-b) + "\\). \\(\\\\\\)";
-		res += "\\(x = \\dfrac{y" + bLatex(-b) + "}{" + a
-				+ "}\\), portanto \\(f^{-1}(y) = \\dfrac{y" + bLatex(-b) + "}{" + a + "}\\). \\(\\\\\\)";
-		res += "Substituindo \\(y = " + k + "\\): \\(\\\\\\)";
-		res += "\\(f^{-1}(" + k + ") = \\dfrac{" + k + bLatex(-b) + "}{" + a
-				+ "} = \\dfrac{" + kmb + "}{" + a + "} = " + xResult + "\\).";
-
-		setResolucao(res);
+		addResolucao("Para encontrar \\(f^{-1}\\), isolamos \\(x\\) em \\(f(x) = y\\):");
+		addResolucao("\\(" + equacao + " = y\\).");
+		addResolucao("\\(" + a + "x = y" + bLatex(-b) + "\\).");
+		addResolucao("\\(x = \\dfrac{y" + bLatex(-b) + "}{" + a
+				+ "}\\), portanto \\(f^{-1}(y) = \\dfrac{y" + bLatex(-b) + "}{" + a + "}\\).");
+		addResolucao("Substituindo \\(y = " + k + "\\):");
+		addResolucao("\\(f^{-1}(" + k + ") = \\dfrac{" + k + bLatex(-b) + "}{" + a
+				+ "} = \\dfrac{" + kmb + "}{" + a + "} = " + xResult + "\\).");
 		gerarAlternativas("" + xResult);
 	}
 

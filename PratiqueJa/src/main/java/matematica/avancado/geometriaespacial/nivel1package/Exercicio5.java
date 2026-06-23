@@ -23,11 +23,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(V, 4, true);
 
-		String res = "A área da base triangular é \\(A_{\\text{base}} = \\dfrac{" + c1 + " \\times " + c2
-				+ "}{2} = " + aBase + "\\,\\text{cm}^2\\)."
-				+ "\\(\\\\\\)"
-				+ "\\(V = A_{\\text{base}} \\times h = " + aBase + " \\times " + h
-				+ " = \\mathbf{" + V + "}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+		addResolucao("A área da base triangular é \\(A_{\\text{base}} = \\dfrac{" + c1 + " \\times " + c2
+				+ "}{2} = " + aBase + "\\,\\text{cm}^2\\).");
+		addResolucao("\\(V = A_{\\text{base}} \\times h = " + aBase + " \\times " + h
+				+ " = \\mathbf{" + V + "}\\,\\text{cm}^3\\)");
 	}
 }

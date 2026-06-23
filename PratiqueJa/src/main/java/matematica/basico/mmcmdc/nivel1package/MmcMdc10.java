@@ -21,11 +21,16 @@ public class MmcMdc10 extends GeradorExercicio
 		addParagrafo("O número \\(" + numero + "\\) é múltiplo de \\(" + base + "\\)?");
 		gerarAlternativasBoolean(correta);
 
-		String res = "Um número é múltiplo de \\(" + base + "\\) quando a divisão por \\(" + base + "\\) é exata. \\(\\\\\\)";
+		addResolucao("Um número é múltiplo de \\(" + base + "\\) quando a divisão por \\(" + base + "\\) é exata.");
 		if(correta)
-			res += "\\(" + numero + " \\div " + base + " = " + (numero / base) + "\\) (divisão exata). \\(\\\\\\)Logo, é múltiplo: \\(\\mathbf{Sim}\\)";
+		{
+			addResolucao("\\(" + numero + " \\div " + base + " = " + (numero / base) + "\\) (divisão exata).");
+			addResolucao("Logo, é múltiplo: \\(\\mathbf{Sim}\\)");
+		}
 		else
-			res += "\\(" + numero + " \\div " + base + " = " + (numero / base) + "\\) e sobra resto \\(" + (numero % base) + "\\). \\(\\\\\\)Logo, não é múltiplo: \\(\\mathbf{Não}\\)";
-		setResolucao(res);
+		{
+			addResolucao("\\(" + numero + " \\div " + base + " = " + (numero / base) + "\\) e sobra resto \\(" + (numero % base) + "\\).");
+			addResolucao("Logo, não é múltiplo: \\(\\mathbf{Não}\\)");
+		}
 	}
 }

@@ -26,8 +26,7 @@ public class MmcMdc18 extends GeradorExercicio
 		addParagrafo("Dois números têm \\(\\text{MDC} = " + d + "\\) e \\(\\text{MMC} = " + m + "\\). Qual é o produto desses dois números?");
 		gerarAlternativasInteiras(produto);
 
-		String res = "Pela propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\), o produto dos números é igual ao produto do MMC pelo MDC: \\(\\\\\\)";
-		res += "\\(a \\times b = \\text{MMC} \\times \\text{MDC} = " + m + " \\times " + d + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\), o produto dos números é igual ao produto do MMC pelo MDC:");
+		addResolucao("\\(a \\times b = \\text{MMC} \\times \\text{MDC} = " + m + " \\times " + d + " = \\mathbf{" + produto + "}\\)");
 	}
 }

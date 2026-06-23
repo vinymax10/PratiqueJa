@@ -33,9 +33,8 @@ public class RegraTres15 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas("\\(" + liquido + "\\%\\)", distratores);
 
-		String res = "A variação total é \\(p_1 - p_2 - \\dfrac{p_1 \\cdot p_2}{100}\\) (o produto representa o efeito combinado). \\(\\\\\\)";
-		res += "\\(" + p1 + " - " + p2 + " - \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} = \\\\ \\)";
-		res += "\\(" + (p1 - p2) + " - " + produto + " = \\mathbf{" + liquido + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("A variação total é \\(p_1 - p_2 - \\dfrac{p_1 \\cdot p_2}{100}\\) (o produto representa o efeito combinado).");
+		addResolucao("\\(" + p1 + " - " + p2 + " - \\dfrac{" + p1 + " \\cdot " + p2 + "}{100} =\\)");
+		addResolucao("\\(" + (p1 - p2) + " - " + produto + " = \\mathbf{" + liquido + "\\%}\\)");
 	}
 }

@@ -29,6 +29,6 @@ public class Calculo extends GeradorExercicio
 		addParagrafo("Calcule a seguinte multiplicação:");
 		addParagrafo("\\(" + ResolucaoNatural.multiplicacao(a, b, false) + "\\)");
 		gerarAlternativasInteiras(a * b);
-		setResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
 	}
 }

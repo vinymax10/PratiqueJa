@@ -42,13 +42,9 @@ public class Image41 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + ext + "^\\circ\\)", distratores);
 
-		String res = "Calculamos o ângulo da base do triângulo isósceles:";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha = \\dfrac{180^\\circ - " + b + "^\\circ}{2} = \\mathbf{" + a + "^\\circ}\\)";
-		res += "\\(\\\\\\)";
-		res += "O ângulo externo na base é igual à soma dos ângulos internos não adjacentes (ângulo do vértice e da outra base):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{ext} = " + b + "^\\circ + " + a + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("Calculamos o ângulo da base do triângulo isósceles:");
+		addResolucao("\\(\\alpha = \\dfrac{180^\\circ - " + b + "^\\circ}{2} = \\mathbf{" + a + "^\\circ}\\)");
+		addResolucao("O ângulo externo na base é igual à soma dos ângulos internos não adjacentes (ângulo do vértice e da outra base):");
+		addResolucao("\\(\\text{ext} = " + b + "^\\circ + " + a + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)");
 	}
 }

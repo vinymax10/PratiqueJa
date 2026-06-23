@@ -21,11 +21,10 @@ public class Racionais3 extends GeradorExercicio
 
 		gerarAlternativasInteiras(numDestino);
 
-		String res = "Para obter denominador \\(" + denDestino + "\\) a partir de \\(" + b
-				   + "\\), multiplicamos por \\(" + k + "\\). \\(\\\\\\)";
-		res += "Aplicamos o mesmo fator ao numerador: \\(\\\\\\)";
-		res += "\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{"
-			 + b + " \\times " + k + "} = \\dfrac{" + numDestino + "}{" + denDestino + "}\\)";
-		setResolucao(res);
+		addResolucao("Para obter denominador \\(" + denDestino + "\\) a partir de \\(" + b
+				   + "\\), multiplicamos por \\(" + k + "\\).");
+		addResolucao("Aplicamos o mesmo fator ao numerador:");
+		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{"
+			 + b + " \\times " + k + "} = \\dfrac{" + numDestino + "}{" + denDestino + "}\\)");
 	}
 }

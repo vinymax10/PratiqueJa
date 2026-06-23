@@ -40,10 +40,9 @@ public class RegraTres2 extends GeradorExercicio
 
 		String tipoPt = isDesconto ? "desconto" : "aumento";
 		String sinal = isDesconto ? "-" : "+";
-		String res = "Calcular o " + tipoPt + " de \\(" + p + "\\%\\): \\(\\\\\\)";
-		res += "\\(\\dfrac{" + p + "}{100} \\times " + V + " = \\mathbf{" + delta + "}\\). \\(\\\\\\)";
-		res += "Preço " + (isDesconto ? "com desconto" : "com aumento") + ": \\(\\\\\\)";
-		res += "\\(" + V + " " + sinal + " " + delta + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Calcular o " + tipoPt + " de \\(" + p + "\\%\\):");
+		addResolucao("\\(\\dfrac{" + p + "}{100} \\times " + V + " = \\mathbf{" + delta + "}\\).");
+		addResolucao("Preço " + (isDesconto ? "com desconto" : "com aumento") + ":");
+		addResolucao("\\(" + V + " " + sinal + " " + delta + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

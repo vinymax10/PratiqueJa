@@ -30,11 +30,9 @@ public class Exercicio7 extends GeradorExercicio
 		else if (q == 3) senCos = "No 3.º quadrante, \\(\\operatorname{sen}<0\\) e \\(\\cos<0\\)";
 		else             senCos = "No 4.º quadrante, \\(\\operatorname{sen}<0\\) e \\(\\cos>0\\)";
 
-		String res = senCos + "."
-				+ "\\(\\\\\\)"
-				+ "Como \\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}\\), a divisão de dois valores "
+		addResolucao(senCos + ".");
+		addResolucao("Como \\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}\\), a divisão de dois valores "
 				+ (positivo ? "de mesmo sinal resulta em valor \\(\\mathbf{positivo}\\)."
-				           : "de sinais opostos resulta em valor \\(\\mathbf{negativo}\\).");
-		setResolucao(res);
+				           : "de sinais opostos resulta em valor \\(\\mathbf{negativo}\\)."));
 	}
 }

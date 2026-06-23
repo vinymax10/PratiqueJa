@@ -28,10 +28,6 @@ public class Decimal5 extends AgrupadorDecimal
 		addParagrafo("\\(\\dfrac{" + num + "}{" + den + "}\\)");
 		gerarAltH(resH);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& \\dfrac{" + num + "}{" + den + "}" +
-			" = " + num + " \\div " + den + " = " + result + "\\end{aligned}\\)"
-		);
+		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = " + num + " \\div " + den + " = " + result + "\\)");
 	}
 }

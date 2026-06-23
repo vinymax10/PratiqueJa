@@ -40,11 +40,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + beta + "^\\circ\\)", distratores);
 
-		String res = "Ângulos suplementares têm soma igual a \\(180^\\circ\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha + \\beta = 180^\\circ \\\\";
-		res += alpha + "^\\circ + \\beta = 180^\\circ \\\\";
-		res += "\\beta = 180^\\circ - " + alpha + "^\\circ = \\mathbf{" + beta + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("Ângulos suplementares têm soma igual a \\(180^\\circ\\):");
+		addResolucao("\\(\\alpha + \\beta = 180^\\circ\\)");
+		addResolucao("\\(" + alpha + "^\\circ + \\beta = 180^\\circ\\)");
+		addResolucao("\\(\\beta = 180^\\circ - " + alpha + "^\\circ = \\mathbf{" + beta + "^\\circ}\\)");
 	}
 }

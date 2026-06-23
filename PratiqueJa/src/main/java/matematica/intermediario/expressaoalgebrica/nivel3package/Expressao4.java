@@ -43,14 +43,13 @@ public class Expressao4 extends GeradorExercicio
 
 		String simplif = buildBinomio(coefXRes, constRes, var);
 
-		String res = "Removemos os parênteses e reunimos os termos semelhantes: \\(\\\\\\)";
-		res += "\\(" + inter + " = \\\\ ";
-		res += "" + simplif + " \\\\ \\)";
+		addResolucao("Removemos os parênteses e reunimos os termos semelhantes:");
+		addResolucao("\\(" + inter + " =\\)");
+		addResolucao("\\(" + simplif + "\\)");
 		if(perguntaCoef)
-			res += "O coeficiente de \\(" + var + "\\) é \\(" + coefXRes + "\\).";
+			addResolucao("O coeficiente de \\(" + var + "\\) é \\(" + coefXRes + "\\).");
 		else
-			res += "O termo independente é \\(" + constRes + "\\).";
-		setResolucao(res);
+			addResolucao("O termo independente é \\(" + constRes + "\\).");
 	}
 
 	private String buildBinomio(int coefVar, int cte, String var)

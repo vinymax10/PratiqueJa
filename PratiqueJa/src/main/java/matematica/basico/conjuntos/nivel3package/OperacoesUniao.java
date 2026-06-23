@@ -1,5 +1,9 @@
 package matematica.basico.conjuntos.nivel3package;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import matematica.basico.conjuntos.ResolucaoConjuntos;
 import matematica.basico.conjuntos.nivel2package.DadosAB;
 
@@ -25,29 +29,27 @@ public class OperacoesUniao
 		this.dados=new DadosAB();
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "";
-		resolucaoLatex += "\\(A =\\) " + descricaoA;
-		resolucaoLatex += "\\(\\\\\\)";
-		resolucaoLatex += "\\(B =\\) " + descricaoB;
-		resolucaoLatex += "\\(\\\\\\)";
+		List<String> passos = new ArrayList<>();
+		passos.add("\\(A =\\) " + descricaoA);
+		passos.add("\\(B =\\) " + descricaoB);
 
 		switch(tipoOperacao)
 		{
-			case A: 
-				resolucaoLatex+=ResolucaoConjuntos.uniaoA(dados);
+			case A:
+				passos.addAll(Arrays.asList(ResolucaoConjuntos.uniaoA(dados)));
 				break;
-				
-			case AintersecB: 
-				resolucaoLatex+=ResolucaoConjuntos.uniaoAIntersecB(dados);
+
+			case AintersecB:
+				passos.addAll(Arrays.asList(ResolucaoConjuntos.uniaoAIntersecB(dados)));
 				break;
-			case AUniaoB: 
-				resolucaoLatex+=ResolucaoConjuntos.uniaoAUniaoB(dados);
+			case AUniaoB:
+				passos.addAll(Arrays.asList(ResolucaoConjuntos.uniaoAUniaoB(dados)));
 				break;
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 
 	public String resultado()

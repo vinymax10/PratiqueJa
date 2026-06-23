@@ -25,22 +25,24 @@ public class Image26 extends GeradorExercicio
 		config.d.nome = "x";
 
 		String resultadoCorreto = "" + d + "°";
-		String resolucao = resolucao(a, b, c, d, e, f, g);
+		String[] passos = resolucao(a, b, c, d, e, f, g);
 
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : passos)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
-	private String resolucao(int a, int b, int c, int d, int e, int f, int g)
+	private String[] resolucao(int a, int b, int c, int d, int e, int f, int g)
 	{
-		String resolucaoLatex = ResolucaoSAT2.complemento180("y", a, 90);
-		resolucaoLatex += ResolucaoSAT2.complemento180("z", b);
-		resolucaoLatex += ResolucaoSAT2.complemento180("x", c, e);
+		java.util.List<String> passosLista = new java.util.ArrayList<>();
+		java.util.Collections.addAll(passosLista, ResolucaoSAT2.complemento180("y", a, 90));
+		java.util.Collections.addAll(passosLista, ResolucaoSAT2.complemento180("z", b));
+		java.util.Collections.addAll(passosLista, ResolucaoSAT2.complemento180("x", c, e));
 
-		return resolucaoLatex;
+		return passosLista.toArray(new String[0]);
 	}
 }

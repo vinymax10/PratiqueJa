@@ -48,11 +48,10 @@ public class Image1 extends GeradorExercicio
 		dist.add("\\(" + (low - 1) + " < x < " + (high + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "\\(f(x) < " + c + " \\Leftrightarrow |x - (" + h + ")| + " + k + " < " + c + "\\\\";
-		res += "|x - " + h + "| < " + c + " - " + k + " = " + delta + "\\) \\(\\\\\\)";
-		res += "Regra: \\(|u| < r \\Leftrightarrow -r < u < r\\): \\(\\\\\\)";
-		res += "\\(-" + delta + " < x - " + h + " < " + delta + "\\\\";
-		res += "\\mathbf{" + low + " < x < " + high + "}\\)";
-		setResolucao(res);
+		addResolucao("\\(f(x) < " + c + " \\Leftrightarrow |x - (" + h + ")| + " + k + " < " + c + "\\)");
+		addResolucao("\\(|x - " + h + "| < " + c + " - " + k + " = " + delta + "\\)");
+		addResolucao("Regra: \\(|u| < r \\Leftrightarrow -r < u < r\\):");
+		addResolucao("\\(-" + delta + " < x - " + h + " < " + delta + "\\)");
+		addResolucao("\\(\\mathbf{" + low + " < x < " + high + "}\\)");
 	}
 }

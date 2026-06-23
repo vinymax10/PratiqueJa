@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition>
+
+			<h:panelGroup id="resolucaoParagrafos" class="gride">
+
+				<div class="title-divisor-button">
+					<h4 class="m-0">Resolução (parágrafos)</h4>
+					<div class="flex justify-content-end">
+						<p:commandButton value="Passo" icon="pi pi-plus"
+							styleClass="ui-button-raised ui-button-success"
+							action="#{questaoResolucaoBean.cadastrar()}"
+							update="dialog-resolucao" process="@this"
+							oncomplete="PF('dialogResolucao').show()" resetValues="true">
+						</p:commandButton>
+					</div>
+				</div>
+
+				<p:dataTable id="resolucaoParagrafosTabela" class="tableStatus ml-3 mr-3" stripedRows="true"
+				var="entidade" value="#{questaoBean.entidade.resolucaoParagrafos}"
+				selection="#{questaoResolucaoBean.entidadeOriginal}" reflow="true"
+				selectionMode="single" rowKey="#{entidade.id}"
+				rows="30" paginator="true" paginatorAlwaysVisible="false"
+				draggableRows="true">
+
+					<p:ajax event="rowSelect" update="dialog-resolucao"
+					listener="#{questaoResolucaoBean.onRowSelect}"
+					oncomplete="PF('dialogResolucao').show()" resetValues="true"/>
+
+					<p:ajax event="rowReorder"
+					listener="#{questaoResolucaoBean.onRowReorder(questaoBean.entidade.resolucaoParagrafos)}"
+					update="form:resolucaoParagrafosTabela, :growl" oncomplete="reloadMathJax();" />
+
+					<p:column headerText="Ordem" responsivePriority="1" width="10%">
+						<h:outputText value="#{entidade.ordem}" />
+					</p:column>
+
+					<p:column headerText="Tipo" responsivePriority="2" width="15%">
+						<h:outputText value="#{entidade.tipoImagem ? 'Imagem' : 'Texto'}" />
+					</p:column>
+
+					<p:column headerText="Conteúdo" responsivePriority="3">
+						<h:outputText rendered="#{!entidade.tipoImagem}"
+						value="#{entidade.texto}" style="white-space:pre-wrap;" />
+						<h:panelGroup rendered="#{entidade.tipoImagem}" layout="block"
+						styleClass="flex flex-column gap-1">
+							<p:graphicImage value="#{entidade.imagemFile.imagem()}"
+							stream="false" cache="false"
+							style="max-width:220px;max-height:140px;border-radius:6px;display:block;" />
+							<h:outputText value="#{entidade.imagemFile.endImagem}" styleClass="status" />
+						</h:panelGroup>
+					</p:column>
+
+					<p:column headerText="Ação" responsivePriority="1" style="width:6rem"
+					styleClass="coluna-ativo" exportable="false">
+						<p:commandLink title="Remover passo"
+						action="#{questaoResolucaoBean.remover(entidade)}"
+						update="form:resolucaoParagrafosTabela, :growl" process="@this"
+						oncomplete="reloadMathJax();">
+							<div class="buttonIcon">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+								message="Você tem certeza que deseja remover este passo?" />
+								<i class="pi pi-trash vermelho"></i>
+							</div>
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:panelGroup>
+
+		</ui:composition>
+	</h:body>
+</html>

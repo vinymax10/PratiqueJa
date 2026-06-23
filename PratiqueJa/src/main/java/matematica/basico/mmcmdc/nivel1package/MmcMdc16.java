@@ -23,9 +23,8 @@ public class MmcMdc16 extends GeradorExercicio
 		addParagrafo("Qual é o segundo menor múltiplo comum positivo de \\(" + a + "\\) e \\(" + b + "\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		String res = "Os múltiplos comuns de dois números são exatamente os múltiplos do MMC. \\(\\\\\\)";
-		res += "\\(\\text{MMC}(" + a + ",\\," + b + ") = " + mmc + "\\). \\(\\\\\\)";
-		res += "O segundo múltiplo comum é \\(2 \\times " + mmc + " = \\mathbf{" + resultado + "}\\).";
-		setResolucao(res);
+		addResolucao("Os múltiplos comuns de dois números são exatamente os múltiplos do MMC.");
+		addResolucao("\\(\\text{MMC}(" + a + ",\\," + b + ") = " + mmc + "\\).");
+		addResolucao("O segundo múltiplo comum é \\(2 \\times " + mmc + " = \\mathbf{" + resultado + "}\\).");
 	}
 }

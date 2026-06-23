@@ -17,9 +17,8 @@ public class Exercicio4 extends GeradorExercicio
 
 		gerarAlternativasInteiras(h, 4, true);
 
-		String res = "\\(V = \\pi r^2 h \\Rightarrow " + vCoef + "\\pi = \\pi \\cdot " + r2 + " \\cdot h\\\\"
-				+ r2 + "h = " + vCoef + "\\\\"
-				+ "h = \\dfrac{" + vCoef + "}{" + r2 + "} = \\mathbf{" + h + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+		addResolucao("\\(V = \\pi r^2 h \\Rightarrow " + vCoef + "\\pi = \\pi \\cdot " + r2 + " \\cdot h\\)");
+		addResolucao("\\(" + r2 + "h = " + vCoef + "\\)");
+		addResolucao("\\(h = \\dfrac{" + vCoef + "}{" + r2 + "} = \\mathbf{" + h + "}\\,\\text{cm}\\)");
 	}
 }

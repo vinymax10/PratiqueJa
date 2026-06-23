@@ -26,13 +26,11 @@ public class Expressao2 extends GeradorExercicio
 		Racional resultado = new Racional(c, a);
 		resultado.fatoracao(2);
 
-		String res = "\\(" + ParCor.formula("x_1\\cdot x_2=\\dfrac{c}{a}") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(x_1\\cdot x_2=\\dfrac{" + c + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
-
 		addParagrafo("Encontre o produto das raízes");
 		addParagrafo("\\(" + eq + "\\)");
 		gerarAlternativas(resultado);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("x_1\\cdot x_2=\\dfrac{c}{a}") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(x_1\\cdot x_2=\\dfrac{" + c + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)");
 	}
 }

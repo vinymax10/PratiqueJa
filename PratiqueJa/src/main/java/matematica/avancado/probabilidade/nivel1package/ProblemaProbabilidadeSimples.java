@@ -1,5 +1,7 @@
 package matematica.avancado.probabilidade.nivel1package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.ParCor;
@@ -57,79 +59,80 @@ public class ProblemaProbabilidadeSimples
 		return pergunta;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "\\(" + formula() + "\\)" + "\\(\\\\\\)";
+		List<String> passos = new ArrayList<>();
+		passos.add("\\(" + formula() + "\\)");
 		Racional p;
 		switch(tipoProbabilidade)
 		{
 			case AX: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB);
 				p = new Racional(b, a+b);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + b + ",\\quad n(\\Omega)=" + a + "+" + b + "=" + (a+b) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + b + ",\\quad n(\\Omega)=" + a + "+" + b + "=" + (a+b) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case XB: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA);
 				p = new Racional(a, a+b);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + a + "+" + b + "=" + (a+b) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(\\Omega)=" + a + "+" + b + "=" + (a+b) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case XBC: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA);
 				p = new Racional(a, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case AXC: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB);
 				p = new Racional(b, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + b + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + b + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case ABX: {
-				resolucaoLatex += "\\(A =\\) " + eventoC + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoC);
 				p = new Racional(c, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + c + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + c + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case XXC: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + " ou " + eventoB.toLowerCase() + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA + " ou " + eventoB.toLowerCase());
 				p = new Racional(a+b, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + "+" + b + "=" + (a+b) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + "+" + b + "=" + (a+b) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case XBX: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + " ou " + eventoC.toLowerCase() + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA + " ou " + eventoC.toLowerCase());
 				p = new Racional(a+c, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + "+" + c + "=" + (a+c) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + "+" + c + "=" + (a+c) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 			case AXX: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + " ou " + eventoC.toLowerCase() + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB + " ou " + eventoC.toLowerCase());
 				p = new Racional(b+c, a+b+c);
 				String fr = p.showDfrac(); p.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + b + "+" + c + "=" + (b+c) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + " \\\\";
-				resolucaoLatex += "P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)";
+				passos.add("\\(n(A)=" + b + "+" + c + "=" + (b+c) + ",\\quad n(\\Omega)=" + a + "+" + b + "+" + c + "=" + (a+b+c) + "\\)");
+				passos.add("\\(P(A)=" + (p.isSimplificou() ? fr + "=\\mathbf{" + p.showDfrac() + "}" : "\\mathbf{" + fr + "}") + "\\)");
 				break;
 			}
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 	
 	private String formula()

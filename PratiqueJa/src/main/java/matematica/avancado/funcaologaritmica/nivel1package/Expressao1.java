@@ -16,13 +16,14 @@ public class Expressao1 extends GeradorExercicio
 		String baseStr = "\\log_{" + a + "}";
 		addParagrafo("Dada a função \\(f(x) = \\log_{" + a + "}(x)\\), calcule \\(f(" + arg + ")\\).");
 
-		String res = "Escrever o argumento como potência da base: \\(\\\\\\)";
-		res += "\\(f(" + arg + ") = " + baseStr + "(" + arg + ")";
+		addResolucao("Escrever o argumento como potência da base:");
+
+		String passo = "\\(f(" + arg + ") = " + baseStr + "(" + arg + ")";
 		if (n > 1)
-			res += " = " + baseStr + "(" + a + "^{" + n + "})";
-		res += " = \\mathbf{" + n + "}\\)";
+			passo += " = " + baseStr + "(" + a + "^{" + n + "})";
+		passo += " = \\mathbf{" + n + "}\\)";
 
 		gerarAlternativas("" + n);
-		setResolucao(res);
+		addResolucao(passo);
 	}
 }

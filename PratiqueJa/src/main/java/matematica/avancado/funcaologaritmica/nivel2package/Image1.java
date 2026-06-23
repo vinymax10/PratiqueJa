@@ -25,11 +25,10 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("Qual é a base \\(a\\) da função \\(f(x) = \\log_a(x)\\) representada no gráfico?");
 		addParagrafoImagem(image);
 
-		String res = "O gráfico mostra o ponto \\((" + base + ",\\,1)\\) destacado. \\(\\\\\\)";
-		res += "Portanto \\(f(" + base + ") = \\log_a(" + base + ") = 1\\). \\(\\\\\\)";
-		res += "Isso implica \\(a^1 = " + base + "\\), logo \\(a = \\mathbf{" + base + "}\\).";
+		addResolucao("O gráfico mostra o ponto \\((" + base + ",\\,1)\\) destacado.");
+		addResolucao("Portanto \\(f(" + base + ") = \\log_a(" + base + ") = 1\\).");
+		addResolucao("Isso implica \\(a^1 = " + base + "\\), logo \\(a = \\mathbf{" + base + "}\\).");
 
 		gerarAlternativas("" + base);
-		setResolucao(res);
 	}
 }

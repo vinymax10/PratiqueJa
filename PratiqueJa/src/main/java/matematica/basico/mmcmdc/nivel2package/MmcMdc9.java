@@ -24,9 +24,8 @@ public class MmcMdc9 extends GeradorExercicio
 		addParagrafo("Calcule o produto \\(\\text{MMC}(" + a + ",\\," + b + ") \\times \\text{MDC}(" + a + ",\\," + b + ")\\).");
 		gerarAlternativasInteiras(produto);
 
-		String res = "Para quaisquer dois números, vale a propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\). \\(\\\\\\)";
-		res += "Logo, basta multiplicar os dois números: \\(\\\\\\)";
-		res += "\\(\\text{MMC} \\times \\text{MDC} = " + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Para quaisquer dois números, vale a propriedade \\(\\text{MMC} \\times \\text{MDC} = a \\times b\\).");
+		addResolucao("Logo, basta multiplicar os dois números:");
+		addResolucao("\\(\\text{MMC} \\times \\text{MDC} = " + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)");
 	}
 }

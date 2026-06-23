@@ -29,10 +29,9 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + denTg2 + "}{" + numTg2 + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\operatorname{tg}(2\\alpha) = \\dfrac{2\\operatorname{tg}\\,\\alpha}{1-\\operatorname{tg}^2\\alpha}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(2\\alpha) = \\dfrac{2 \\cdot \\left(-\\dfrac{" + p + "}{" + q + "}\\right)}{1 - \\dfrac{" + (p * p) + "}{" + (q * q) + "}} = \\\\"
-				+ "\\dfrac{-\\dfrac{" + (2 * p) + "}{" + q + "}}{\\dfrac{" + denTg2 + "}{" + (q * q) + "}} = "
+		addResolucao("Pela fórmula \\(\\operatorname{tg}(2\\alpha) = \\dfrac{2\\operatorname{tg}\\,\\alpha}{1-\\operatorname{tg}^2\\alpha}\\):");
+		addResolucao("\\(\\operatorname{tg}(2\\alpha) = \\dfrac{2 \\cdot \\left(-\\dfrac{" + p + "}{" + q + "}\\right)}{1 - \\dfrac{" + (p * p) + "}{" + (q * q) + "}} =\\)");
+		addResolucao("\\(\\dfrac{-\\dfrac{" + (2 * p) + "}{" + q + "}}{\\dfrac{" + denTg2 + "}{" + (q * q) + "}} = "
 				+ "-\\dfrac{" + (2 * p) + "}{" + q + "} \\cdot \\dfrac{" + (q * q) + "}{" + denTg2 + "} = \\mathbf{-\\dfrac{" + numTg2 + "}{" + denTg2 + "}}\\)");
 	}
 }

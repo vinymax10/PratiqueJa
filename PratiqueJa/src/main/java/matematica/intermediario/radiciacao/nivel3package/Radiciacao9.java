@@ -29,12 +29,8 @@ public class Radiciacao9 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(\\sqrt{x + " + k + "} = " + m + "\\)");
 		embaralharEAdicionarAlternativas("" + x, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Elevar ambos os lados ao quadrado:" +
-			"\\(\\\\\\)" +
-			"\\(x + " + k + " = " + m + "^2 = " + m2 + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(x = " + m2 + " - " + k + " = \\mathbf{" + x + "}\\)"
-		);
+		addResolucao("Elevar ambos os lados ao quadrado:");
+		addResolucao("\\(x + " + k + " = " + m + "^2 = " + m2 + "\\)");
+		addResolucao("\\(x = " + m2 + " - " + k + " = \\mathbf{" + x + "}\\)");
 	}
 }

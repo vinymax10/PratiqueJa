@@ -1,5 +1,7 @@
 package matematica.avancado.probabilidade.nivel2package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.ParCor;
@@ -59,48 +61,49 @@ public class ProblemaProbabilidadeCondicao2
 		return pergunta;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "\\(" + formulaCondicao() + "\\)" + "\\(\\\\\\)";
+		List<String> passos = new ArrayList<>();
+		passos.add("\\(" + formulaCondicao() + "\\)");
 		switch(tipoProbabilidade)
 		{
 			case AB: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
-				resolucaoLatex += "\\(B =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA);
+				passos.add("\\(B =\\) " + eventoB);
 				Racional pa = new Racional(a, t);
 				String fraPA = pa.showDfrac(); pa.fatoracao(2); boolean paSimp = pa.isSimplificou();
 				Racional pi = new Racional(i, t);
 				String fraPI = pi.showDfrac(); pi.fatoracao(2); boolean piSimp = pi.isSimplificou();
 				Racional result = pi.div(pa);
 				String fraResult = result.showDfrac(); result.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
-				resolucaoLatex += "P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + " \\\\";
-				resolucaoLatex += "P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + " \\\\";
-				resolucaoLatex += "P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}=";
-				resolucaoLatex += pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "=";
-				resolucaoLatex += (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)";
+				passos.add("\\(n(A)=" + a + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + "\\)");
+				passos.add("\\(P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + "\\)");
+				passos.add("\\(P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + "\\)");
+				passos.add("\\(P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}="
+						+ pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "="
+						+ (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)");
 				break;
 			}
 			case BA: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
-				resolucaoLatex += "\\(B =\\) " + eventoA + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB);
+				passos.add("\\(B =\\) " + eventoA);
 				Racional pa = new Racional(b, t);
 				String fraPA = pa.showDfrac(); pa.fatoracao(2); boolean paSimp = pa.isSimplificou();
 				Racional pi = new Racional(i, t);
 				String fraPI = pi.showDfrac(); pi.fatoracao(2); boolean piSimp = pi.isSimplificou();
 				Racional result = pi.div(pa);
 				String fraResult = result.showDfrac(); result.fatoracao(2);
-				resolucaoLatex += "\\(n(A)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + " \\\\";
-				resolucaoLatex += "P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + " \\\\";
-				resolucaoLatex += "P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + " \\\\";
-				resolucaoLatex += "P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}=";
-				resolucaoLatex += pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "=";
-				resolucaoLatex += (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)";
+				passos.add("\\(n(A)=" + b + ",\\quad n(\\Omega)=" + t + ",\\quad n(A \\cap B)=" + i + "\\)");
+				passos.add("\\(P(A)=" + fraPA + (paSimp ? "=" + pa.showDfrac() : "") + "\\)");
+				passos.add("\\(P(A \\cap B)=" + fraPI + (piSimp ? "=" + pi.showDfrac() : "") + "\\)");
+				passos.add("\\(P(B|A)=\\dfrac{" + pi.showDfrac() + "}{" + pa.showDfrac() + "}="
+						+ pi.showDfrac() + "\\cdot" + pa.inverter().showDfrac() + "="
+						+ (result.isSimplificou() ? fraResult + "=\\mathbf{" + result.showDfrac() + "}" : "\\mathbf{" + fraResult + "}") + "\\)");
 				break;
 			}
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 	
 	private String formulaCondicao()

@@ -38,10 +38,9 @@ public class Dizima3 extends GeradorExercicio
 		gerarAlternativasInteiras(periodica);
 
 		String latexOverline = strInteira + "{,}\\overline{" + strPeriodica + "}";
-		String res = "O período é o bloco de algarismos que se repete indefinidamente. \\(\\\\\\)";
-		res += "Na dízima \\(" + latexOverline + "\\), o bloco que se repete é \\("
+		addResolucao("O período é o bloco de algarismos que se repete indefinidamente.");
+		addResolucao("Na dízima \\(" + latexOverline + "\\), o bloco que se repete é \\("
 			 + strPeriodica + "\\), formado por \\(" + periodLen + "\\) algarismo"
-			 + (periodLen == 1 ? "" : "s") + ".";
-		setResolucao(res);
+			 + (periodLen == 1 ? "" : "s") + ".");
 	}
 }

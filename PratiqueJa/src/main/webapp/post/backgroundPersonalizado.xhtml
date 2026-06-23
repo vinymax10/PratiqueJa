@@ -5,6 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+	</ui:define>
+
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" value="Background Personalizado" />
 	</ui:define>
@@ -14,122 +18,124 @@
 	    <f:viewAction action="#{configPostBean.carregarConfigPost()}" />
 	</f:metadata>
 
-	<div class="post-tabmenu">
-		<ui:include src="/post/tabMenu.xhtml" />
+	<!-- HERO -->
+	<div class="pc-hero">
+		<div class="pc-hero-head">
+			<span class="pc-hero-badge"><i class="pi pi-megaphone" /> Publicação no Instagram</span>
+			<h1 class="pc-hero-title">Background Personalizado</h1>
+			<p class="pc-hero-desc">
+				Envie seus próprios fundos de Feed (1080 × 1350) e Reel (1080 × 1920) para usar nas publicações.
+			</p>
+		</div>
+		<div class="pc-hero-stats">
+			<div class="pc-stat">
+				<span class="pc-stat-label">Usuário</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.nome}</strong>
+			</div>
+			<div class="pc-stat pc-stat--green">
+				<span class="pc-stat-label">Perfil</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.perfilCriador.nome}</strong>
+			</div>
+		</div>
 	</div>
 
-	<h:form id="form" class="form">
+	<ui:include src="/post/navTabs.xhtml" />
 
-		<div class="title-divisor-button">
-			<h4 style="margin:0;padding:0;border:0;">Background Personalizado</h4>
-			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
+	<h:form id="form">
+
+		<div class="pc-panel">
+
+	    <div class="pc-bg-grid">
+
+			<!-- FEED -->
+			<div class="pc-bg-col">
+				<div class="pc-section-sub"><i class="pi pi-image" /> Background Feed</div>
+
+				<div class="pc-dropzone-wrap">
+					<div class="pc-dropzone-hint">
+						<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+						<span class="pc-dropzone-title">Arraste o fundo do Feed aqui ou clique para enviar</span>
+						<ul class="pc-dropzone-specs">
+							<li>PNG ou JPG</li>
+							<li>Tamanho ideal: 1080 × 1350 px</li>
+							<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
+							<li>Tamanho máximo: 5 MB</li>
+						</ul>
+					</div>
+					<p:fileUpload id="upload" listener="#{imagemPostBean.uploadFeed}"
+						mode="advanced" auto="true" dragDropSupport="true"
+						chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
+						label="Escolha um arquivo."
+						invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+						invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+						disabled="#{!imagemPostBean.podeFazerUpload(true)}"
+						update="form">
+						<p:validateFile sizeLimit="5002400" virusScan="true"
+							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+					</p:fileUpload>
+				</div>
+
+				<h:panelGroup id="imagesFeed" layout="block" styleClass="pc-bg-thumbs">
+					<ui:repeat value="#{imagemPostBean.imagemPost(true)}" var="image" varStatus="status">
+						<div class="pc-bg-thumb">
+							<p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" />
+							<p:commandLink styleClass="pc-bg-thumb-remove" title="Remover"
+								action="#{imagemPostBean.remover(image)}" update="form, :growl" process="@this">
+								<i class="pi pi-times" />
+							</p:commandLink>
+						</div>
+					</ui:repeat>
+					<h:outputText styleClass="pc-bg-empty" rendered="#{empty imagemPostBean.imagemPost(true)}"
+						value="Nenhum background de Feed enviado ainda." />
+				</h:panelGroup>
+			</div>
+
+			<!-- REEL -->
+			<div class="pc-bg-col">
+				<div class="pc-section-sub"><i class="pi pi-video" /> Background Reel</div>
+
+				<div class="pc-dropzone-wrap">
+					<div class="pc-dropzone-hint">
+						<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+						<span class="pc-dropzone-title">Arraste o fundo do Reel aqui ou clique para enviar</span>
+						<ul class="pc-dropzone-specs">
+							<li>PNG ou JPG</li>
+							<li>Tamanho ideal: 1080 × 1920 px</li>
+							<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
+							<li>Tamanho máximo: 5 MB</li>
+						</ul>
+					</div>
+					<p:fileUpload listener="#{imagemPostBean.uploadReel}"
+						mode="advanced" auto="true" dragDropSupport="true"
+						chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
+						label="Escolha um arquivo."
+						invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+						invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+						disabled="#{!imagemPostBean.podeFazerUpload(false)}"
+						update="form">
+						<p:validateFile sizeLimit="5002400" virusScan="true"
+							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+					</p:fileUpload>
+				</div>
+
+				<h:panelGroup id="imagesReel" layout="block" styleClass="pc-bg-thumbs">
+					<ui:repeat value="#{imagemPostBean.imagemPost(false)}" var="image" varStatus="status">
+						<div class="pc-bg-thumb">
+							<p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" />
+							<p:commandLink styleClass="pc-bg-thumb-remove" title="Remover"
+								action="#{imagemPostBean.remover(image)}" update="form, :growl" process="@this">
+								<i class="pi pi-times" />
+							</p:commandLink>
+						</div>
+					</ui:repeat>
+					<h:outputText styleClass="pc-bg-empty" rendered="#{empty imagemPostBean.imagemPost(false)}"
+						value="Nenhum background de Reel enviado ainda." />
+				</h:panelGroup>
+			</div>
+
 		</div>
 
-	    <p:remoteCommand name="rcFeed" actionListener="#{imagemPostBean.changeActiveIndex}"
-        update="form:galeriaFeed" oncomplete="PF('galleriaFeed').show()" />
-
-	    <p:remoteCommand name="rcReel" actionListener="#{imagemPostBean.changeActiveIndex}"
-        update="form:galeriaReel" oncomplete="PF('galleriaReel').show()" />
-
-	    <div class="ui-fluid gride">
-			<div class="col-12 xl:col-6" style="padding: 1rem;">
-	    		<p:fieldset legend="Background Feed" style="margin-bottom:1rem;width:100%;" >
-					<p:staticMessage styleClass="mt-2" severity="info" summary="Detalhes do arquivo" display="text"
-			       		detail="O background do Feed deve ter o formato png ou jpg e ter a resolução de 1080 x 1350 pixels. Se o upload for realizado em um tamanho diferente, o sistema fará o redimensionamento da imagem, o que pode causar distorções."
-			       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
-			    		<div class="campo p-col-8 ">
-							<p:fileUpload id="upload"
-							listener="#{imagemPostBean.uploadFeed}"
-				    		label="Escolha um arquivo."
-					    	invalidFileMessage="São permitidos somente arquivos png."
-							invalidSizeMessage="O tamanho máximo permitido é de 10MB."
-					    	auto="true"
-					    	disabled="#{!imagemPostBean.podeFazerUpload(true)}"
-					    	update="form"
-					    	>
-					    		<p:validateFile  sizeLimit="5002400" virusScan="true"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-							</p:fileUpload>
-						</div>
-						<p:galleria id="galeriaFeed" widgetVar="galleriaFeed" activeIndex="#{imagemPostBean.activeIndex}"
-						value="#{imagemPostBean.imagemPost(true)}" var="image"
-						 numVisible="7" fullScreen="true"
-		                    circular="true"  showItemNavigators="true"
-		                    showThumbnails="true" style="max-width: 400px">
-					            <p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" style="width: 80px; display: block;" />
-
-				        </p:galleria>
-
-				        <div class="grid" style="max-width: 100%">
-				            <h:panelGroup id="imagesFeed" style="display: contents">
-					            <ui:repeat value="#{imagemPostBean.imagemPost(true)}"
-					            var="image" varStatus="status">
-					            	<div id="card-saldo" class="card">
-					                	<p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
-							             action="#{imagemPostBean.remover(image)}"
-							             update="form, :growl"
-							             style="text-align: right;color:#495057">
-						                    <i class="pi pi-times" style="line-height: 1.4;"></i>
-							            </p:commandLink>
-
-           						            <p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" style="width: 80px; display: block;" />
-
-					                </div>
-					            </ui:repeat>
-				            </h:panelGroup>
-				        </div>
-		    		</p:fieldset>
-		    	</div>
-
-			<div class="col-12 xl:col-6" style="padding: 1rem;">
-	    		<p:fieldset legend="Background Reel" style="margin-bottom:1rem;width:100%;" >
-		    		<p:staticMessage styleClass="mt-2" severity="info" summary="Detalhes do arquivo" display="text"
-			       		detail="O background do Reel deve ter o formato png ou jpg e ter a resolução de 1080 x 1920 pixels. Se o upload for realizado em um tamanho diferente, o sistema fará o redimensionamento da imagem, o que pode causar distorções."
-			       		style="background: #ecf1ff !important;margin:15px 0 0 0;width: 100%"/>
-			    		<div class="campo p-col-8 ">
-							<p:fileUpload listener="#{imagemPostBean.uploadReel}"
-				    		label="Escolha um arquivo."
-					    	invalidFileMessage="São permitidos somente arquivos png."
-							invalidSizeMessage="O tamanho máximo permitido é de 10MB."
-					    	auto="true"
-					    	disabled="#{!imagemPostBean.podeFazerUpload(false)}"
-					    	update="form"
-					    	>
-					    		<p:validateFile  sizeLimit="5002400" virusScan="true"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-							</p:fileUpload>
-						</div>
-						<p:galleria id="galeriaReel" widgetVar="galleriaReel" activeIndex="#{imagemPostBean.activeIndex}"
-						value="#{imagemPostBean.imagemPost(false)}" var="image"
-						numVisible="7" fullScreen="true"
-	                    circular="true"  showItemNavigators="true"
-	                    showThumbnails="true" style="max-width: 400px">
-
-				            <p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" style="width: 80px; display: block;" />
-
-				        </p:galleria>
-
-				        <div class="grid" style="max-width: 100%">
-				            <h:panelGroup id="imagesReel" style="display: contents">
-					            <ui:repeat value="#{imagemPostBean.imagemPost(false)}"
-					            var="image" varStatus="status">
-					            	<div id="card-saldo" class="card">
-					                	<p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
-							             action="#{imagemPostBean.remover(image)}"
-							             update="form, :growl"
-							             style="text-align: right;color:#495057">
-						                    <i class="pi pi-times" style="line-height: 1.4;"></i>
-							            </p:commandLink>
-
-         						            <p:graphicImage value="#{image.endImagem}" alt="#{image.nome}" style="width: 80px; display: block;" />
-
-					                </div>
-					            </ui:repeat>
-				            </h:panelGroup>
-				        </div>
-		    		</p:fieldset>
-		    	</div>
-	    	</div>
+		</div>
 
 	</h:form>
 </ui:decorate>

@@ -21,11 +21,16 @@ public class MmcMdc11 extends GeradorExercicio
 		addParagrafo("\\(" + divisor + "\\) é divisor de \\(" + numero + "\\)?");
 		gerarAlternativasBoolean(correta);
 
-		String res = "\\(" + divisor + "\\) é divisor de \\(" + numero + "\\) quando a divisão é exata. \\(\\\\\\)";
+		addResolucao("\\(" + divisor + "\\) é divisor de \\(" + numero + "\\) quando a divisão é exata.");
 		if(correta)
-			res += "\\(" + numero + " \\div " + divisor + " = " + (numero / divisor) + "\\) (divisão exata). \\(\\\\\\)Logo, é divisor: \\(\\mathbf{Sim}\\)";
+		{
+			addResolucao("\\(" + numero + " \\div " + divisor + " = " + (numero / divisor) + "\\) (divisão exata).");
+			addResolucao("Logo, é divisor: \\(\\mathbf{Sim}\\)");
+		}
 		else
-			res += "\\(" + numero + " \\div " + divisor + " = " + (numero / divisor) + "\\) e sobra resto \\(" + (numero % divisor) + "\\). \\(\\\\\\)Logo, não é divisor: \\(\\mathbf{Não}\\)";
-		setResolucao(res);
+		{
+			addResolucao("\\(" + numero + " \\div " + divisor + " = " + (numero / divisor) + "\\) e sobra resto \\(" + (numero % divisor) + "\\).");
+			addResolucao("Logo, não é divisor: \\(\\mathbf{Não}\\)");
+		}
 	}
 }

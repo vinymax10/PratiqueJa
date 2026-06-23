@@ -21,9 +21,7 @@ public class Exercicio3 extends GeradorExercicio
 
 		gerarAlternativasInteiras(m, 4, false);
 
-		String res = "O coeficiente angular mede a inclinação da reta:"
-				+ "\\(\\\\\\)"
-				+ "\\(m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{" + y2 + " - (" + y1 + ")}{" + x2 + " - (" + x1 + ")} = \\dfrac{" + dy + "}{" + dx + "} = \\mathbf{" + m + "}\\)";
-		setResolucao(res);
+		addResolucao("O coeficiente angular mede a inclinação da reta:");
+		addResolucao("\\(m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{" + y2 + " - (" + y1 + ")}{" + x2 + " - (" + x1 + ")} = \\dfrac{" + dy + "}{" + dx + "} = \\mathbf{" + m + "}\\)");
 	}
 }

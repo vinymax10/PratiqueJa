@@ -25,6 +25,6 @@ public class Image18 extends GeradorExercicio
 
 		gerarAlternativas(senVal.toString());
 		String resolucao = ResolucaoRazoesTrigonometricas.angulosComplementares(alpha, beta, p, r);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

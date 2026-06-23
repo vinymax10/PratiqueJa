@@ -32,10 +32,7 @@ public class Decimal4 extends AgrupadorDecimal
 		gerarAltH(diffH);
 
 		// mostra a conversão + conta vertical
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& " + a + " = " + a0 + "\\end{aligned}\\) " +
-			vertical("-", a0, b, result)
-		);
+		addResolucao("\\(" + a + " = " + a0 + "\\)");
+		addResolucao(vertical("-", a0, b, result));
 	}
 }

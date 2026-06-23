@@ -25,20 +25,15 @@ public class Exercicio1 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + p + "}{" + r + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Passo 1 — encontrar \\(\\cos\\theta\\) pela identidade fundamental:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1 \\\\"
-				+ "\\dfrac{" + pp + "}{" + rr + "} + \\cos^2\\theta = 1 \\\\"
-				+ "\\cos^2\\theta = \\dfrac{" + qq + "}{" + rr + "}\\)"
-				+ " (\\(\\cos\\theta < 0\\) no 2.º quadrante)"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos\\theta = -\\dfrac{" + q + "}{" + r + "}\\)"
-				+ "\\(\\\\\\)"
-				+ "Passo 2 — calcular \\(\\operatorname{tg}\\,\\theta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}"
+		addResolucao("Passo 1 — encontrar \\(\\cos\\theta\\) pela identidade fundamental:");
+		addResolucao("\\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\)");
+		addResolucao("\\(\\dfrac{" + pp + "}{" + rr + "} + \\cos^2\\theta = 1\\)");
+		addResolucao("\\(\\cos^2\\theta = \\dfrac{" + qq + "}{" + rr + "}\\)"
+				+ " (\\(\\cos\\theta < 0\\) no 2.º quadrante)");
+		addResolucao("\\(\\cos\\theta = -\\dfrac{" + q + "}{" + r + "}\\)");
+		addResolucao("Passo 2 — calcular \\(\\operatorname{tg}\\,\\theta\\):");
+		addResolucao("\\(\\operatorname{tg}\\,\\theta = \\dfrac{\\operatorname{sen}\\,\\theta}{\\cos\\theta}"
 				+ " = \\dfrac{\\dfrac{" + p + "}{" + r + "}}{-\\dfrac{" + q + "}{" + r
-				+ "}} = \\mathbf{-\\dfrac{" + p + "}{" + q + "}}\\)";
-		setResolucao(res);
+				+ "}} = \\mathbf{-\\dfrac{" + p + "}{" + q + "}}\\)");
 	}
 }

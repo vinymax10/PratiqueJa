@@ -27,13 +27,9 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (m2 * 1000000) + "\\,\\text{cm}^2\\)" // fator de volume
 				)
 			);
-			setResolucao(
-				"Para área, cada passo vale \\(\\times 100\\) (não \\(\\times 10\\)):" +
-				"\\(\\\\\\)" +
-				"\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\)" +
-				"\\(\\\\\\)" +
-				"\\(" + m2 + " \\times 10{.}000 = \\mathbf{" + cm2 + "}\\,\\text{cm}^2\\)"
-			);
+			addResolucao("Para área, cada passo vale \\(\\times 100\\) (não \\(\\times 10\\)):");
+			addResolucao("\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\)");
+			addResolucao("\\(" + m2 + " \\times 10{.}000 = \\mathbf{" + cm2 + "}\\,\\text{cm}^2\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -53,11 +49,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (intPart * 100) + "\\,\\text{m}^2\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\), logo dividir por 10 000:" +
-				"\\(\\\\\\)" +
-				"\\(" + cm2 + " \\div 10{.}000 = \\mathbf{" + m2Str + "}\\,\\text{m}^2\\)"
-			);
+			addResolucao("\\(1\\,\\text{m}^2 = 10{.}000\\,\\text{cm}^2\\), logo dividir por 10 000:");
+			addResolucao("\\(" + cm2 + " \\div 10{.}000 = \\mathbf{" + m2Str + "}\\,\\text{m}^2\\)");
 		}
 		else
 		{
@@ -75,11 +68,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (km2 * 100000) + "\\,\\text{m}^2\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{km}^2 = 1{.}000{.}000\\,\\text{m}^2\\), pois km para m é \\(\\times 1000\\), logo \\(\\text{km}^2\\) para \\(\\text{m}^2\\) é \\(\\times 1000^2 = 1{.}000{.}000\\):" +
-				"\\(\\\\\\)" +
-				"\\(" + km2 + " \\times 1{.}000{.}000 = \\mathbf{" + m2 + "}\\,\\text{m}^2\\)"
-			);
+			addResolucao("\\(1\\,\\text{km}^2 = 1{.}000{.}000\\,\\text{m}^2\\), pois km para m é \\(\\times 1000\\), logo \\(\\text{km}^2\\) para \\(\\text{m}^2\\) é \\(\\times 1000^2 = 1{.}000{.}000\\):");
+			addResolucao("\\(" + km2 + " \\times 1{.}000{.}000 = \\mathbf{" + m2 + "}\\,\\text{m}^2\\)");
 		}
 	}
 }

@@ -51,13 +51,11 @@ public class Expressao4 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "A concavidade é determinada pelo coeficiente \\(a\\). \\(\\\\\\)";
-		res += "Identificamos: \\(a = " + a + ", \\quad b = " + b + ", \\quad c = " + c + "\\) \\(\\\\\\)";
+		addResolucao("A concavidade é determinada pelo coeficiente \\(a\\).");
+		addResolucao("Identificamos: \\(a = " + a + ", \\quad b = " + b + ", \\quad c = " + c + "\\)");
 		if(a > 0)
-			res += "Como \\(a = " + a + " > 0\\), a parábola abre para \\(\\mathbf{cima}\\).";
+			addResolucao("Como \\(a = " + a + " > 0\\), a parábola abre para \\(\\mathbf{cima}\\).");
 		else
-			res += "Como \\(a = " + a + " < 0\\), a parábola abre para \\(\\mathbf{baixo}\\).";
-
-		setResolucao(res);
+			addResolucao("Como \\(a = " + a + " < 0\\), a parábola abre para \\(\\mathbf{baixo}\\).");
 	}
 }

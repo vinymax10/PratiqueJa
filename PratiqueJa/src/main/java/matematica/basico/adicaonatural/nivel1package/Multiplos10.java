@@ -18,10 +18,9 @@ public class Multiplos10 extends GeradorExercicio
 			addParagrafo("Calcule: \\(" + a + " + " + b + "\\)");
 			gerarAlternativasInteiras(soma);
 
-			String res = "Somamos apenas as dezenas: \\(\\\\\\)";
-			res += "\\(" + ad + " + " + bd + " = " + (ad + bd) + "\\) \\(\\\\\\)";
-			res += "Portanto: \\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)";
-			setResolucao(res);
+			addResolucao("Somamos apenas as dezenas:");
+			addResolucao("\\(" + ad + " + " + bd + " = " + (ad + bd) + "\\)");
+			addResolucao("Portanto: \\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)");
 		}
 		else
 		{
@@ -34,10 +33,9 @@ public class Multiplos10 extends GeradorExercicio
 			addParagrafo("Calcule: \\(" + a + " + " + b + "\\)");
 			gerarAlternativasInteiras(soma);
 
-			String res = "Somamos apenas as centenas: \\(\\\\\\)";
-			res += "\\(" + ac + " + " + bc + " = " + (ac + bc) + "\\) \\(\\\\\\)";
-			res += "Portanto: \\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)";
-			setResolucao(res);
+			addResolucao("Somamos apenas as centenas:");
+			addResolucao("\\(" + ac + " + " + bc + " = " + (ac + bc) + "\\)");
+			addResolucao("Portanto: \\(" + a + " + " + b + " = \\mathbf{" + soma + "}\\)");
 		}
 	}
 }

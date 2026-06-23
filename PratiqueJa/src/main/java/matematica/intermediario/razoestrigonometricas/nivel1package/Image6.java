@@ -28,6 +28,6 @@ public class Image6 extends GeradorExercicio
 		addParagrafo("Qual a \\(tan~" + angle + "\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

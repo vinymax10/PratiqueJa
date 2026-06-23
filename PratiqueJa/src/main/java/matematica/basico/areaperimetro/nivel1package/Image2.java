@@ -16,7 +16,7 @@ public class Image2 extends GeradorExercicio
 		int h = (int) (((double) b) * 0.7);
 
 		String resultadoCorreto = "" + (b * h);
-		String resolucao = ResolucaoAreaPerimetro.areaRetangulo(b, h);
+		String[] passosResolucao = ResolucaoAreaPerimetro.areaRetangulo(b, h);
 
 		ConfigRetangulo config = new ConfigRetangulo("" + b, "" + h, true);
 		BufferedImage image = config.criarImagem();
@@ -24,6 +24,7 @@ public class Image2 extends GeradorExercicio
 		addParagrafo("Qual a área do retângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

@@ -36,10 +36,9 @@ public class Exercicio3 extends GeradorExercicio
 						: n == 4 ? "\\left(\\dfrac{1}{2}\\right)^4"
 						:          "\\left(\\dfrac{1}{2}\\right)^5";
 
-		String res = "Usando \\(P(A^c) = 1 - P(A)\\):\\(\\\\\\)";
-		res += "\\(A =\\) ao menos uma cara em " + n + " lançamentos\\(\\\\\\)";
-		res += "\\(P(A^c) = " + potStr + " = " + pNenhuma + " \\\\";
-		res += "P(A) = 1 - " + pNenhuma + " = \\dfrac{" + potencia + "-1}{" + potencia + "} = \\mathbf{\\dfrac{" + favoravel + "}{" + potencia + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando \\(P(A^c) = 1 - P(A)\\):");
+		addResolucao("\\(A =\\) ao menos uma cara em " + n + " lançamentos");
+		addResolucao("\\(P(A^c) = " + potStr + " = " + pNenhuma + "\\)");
+		addResolucao("\\(P(A) = 1 - " + pNenhuma + " = \\dfrac{" + potencia + "-1}{" + potencia + "} = \\mathbf{\\dfrac{" + favoravel + "}{" + potencia + "}}\\)");
 	}
 }

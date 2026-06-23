@@ -24,14 +24,9 @@ public class NotacaoCientifica8 extends GeradorExercicio
 		addParagrafo("Calcule, deixando o resultado em notação científica:");
 		addParagrafo("\\((" + a + " \\times 10^{" + n + "})^2\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Elevar ao quadrado a mantissa e o fator de potência de 10:" +
-			"\\(\\\\\\)" +
-			"\\(" + a + "^2 = " + aSq + "\\)" +
-			"\\(\\\\\\)" +
-			"\\((10^{" + n + "})^2 = 10^{" + n + " \\times 2} = 10^{" + (2 * n) + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + aSq + " \\times 10^{" + (2 * n) + "}}\\)"
-		);
+		addResolucao("Elevar ao quadrado a mantissa e o fator de potência de 10:");
+		addResolucao("\\(" + a + "^2 = " + aSq + "\\)");
+		addResolucao("\\((10^{" + n + "})^2 = 10^{" + n + " \\times 2} = 10^{" + (2 * n) + "}\\)");
+		addResolucao("\\(\\mathbf{" + aSq + " \\times 10^{" + (2 * n) + "}}\\)");
 	}
 }

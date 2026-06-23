@@ -15,11 +15,15 @@ public class Primo16 extends AgrupadorPrimo
 		gerarAlternativasBoolean(ePrimo);
 
 		if(ePrimo)
-			setResolucao("Nenhum primo até \\(\\sqrt{" + n + "}\\) divide \\(" + n + "\\). \\(\\\\\\) Logo, é primo: \\(\\mathbf{Sim}\\).");
+		{
+			addResolucao("Nenhum primo até \\(\\sqrt{" + n + "}\\) divide \\(" + n + "\\).");
+			addResolucao("Logo, é primo: \\(\\mathbf{Sim}\\).");
+		}
 		else
 		{
 			int p = fatorar(n).keySet().iterator().next();
-			setResolucao("\\(" + n + " \\div " + p + " = " + (n / p) + "\\) (exato). \\(\\\\\\) Como é divisível por \\(" + p + "\\), não é primo: \\(\\mathbf{Não}\\).");
+			addResolucao("\\(" + n + " \\div " + p + " = " + (n / p) + "\\) (exato).");
+			addResolucao("Como é divisível por \\(" + p + "\\), não é primo: \\(\\mathbf{Não}\\).");
 		}
 	}
 }

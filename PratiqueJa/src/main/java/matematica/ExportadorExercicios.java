@@ -265,7 +265,7 @@ public class ExportadorExercicios
 
 	private static String resolucao(Exercicio exercicio)
 	{
-		return exercicio.getResolucao() == null ? "" : exercicio.getResolucao();
+		return exercicio.getResolucaoLatex() == null ? "" : exercicio.getResolucaoLatex();
 	}
 
 	/** Monta uma linha CSV (RFC 4180) com os campos escapados. */

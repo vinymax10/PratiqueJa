@@ -47,9 +47,8 @@ public class IdentificarSinal extends GeradorExercicio
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		String sinal = sameSign ? "+" : "-";
-		String res = explicacao + " \\(\\\\\\)";
-		res += "\\(|" + a + "| \\times |" + b + "| = " + product + "\\) \\(\\\\\\)";
-		res += "\\(" + aStr + " \\times " + bStr + " = \\mathbf{" + sinal + product + "}\\)";
-		setResolucao(res);
+		addResolucao(explicacao);
+		addResolucao("\\(|" + a + "| \\times |" + b + "| = " + product + "\\)");
+		addResolucao("\\(" + aStr + " \\times " + bStr + " = \\mathbf{" + sinal + product + "}\\)");
 	}
 }

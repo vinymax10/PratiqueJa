@@ -25,12 +25,11 @@ public class MmcMdc9 extends GeradorExercicio
 		addParagrafo("Calcule \\(\\text{MMC}(" + a + ",\\," + b + ") + \\text{MDC}(" + a + ",\\," + b + ")\\).");
 		gerarAlternativasInteiras(resultado);
 
-		String res = "Calculamos o MMC e o MDC separadamente e somamos. \\(\\\\\\)";
-		res += "\\(\\text{MMC}(" + a + ",\\," + b + ")\\): \\(\\\\\\)";
-		res += "\\(" + ResolucaoMmcMdc.mmc(a, b) + "\\) \\(\\\\\\)";
-		res += "\\(\\text{MDC}(" + a + ",\\," + b + ")\\): \\(\\\\\\)";
-		res += "\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\) \\(\\\\\\)";
-		res += "\\(\\text{MMC} + \\text{MDC} = " + mmc + " + " + mdc + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Calculamos o MMC e o MDC separadamente e somamos.");
+		addResolucao("\\(\\text{MMC}(" + a + ",\\," + b + ")\\):");
+		addResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b) + "\\)");
+		addResolucao("\\(\\text{MDC}(" + a + ",\\," + b + ")\\):");
+		addResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\)");
+		addResolucao("\\(\\text{MMC} + \\text{MDC} = " + mmc + " + " + mdc + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

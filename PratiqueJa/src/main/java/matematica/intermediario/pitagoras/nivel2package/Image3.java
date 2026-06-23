@@ -17,7 +17,7 @@ public class Image3 extends GeradorExercicio
 		dados.altura.str = "c";
 
 		String resultadoCorreto = "" + dados.altura.show();
-		String resolucao = ResolucaoPitagoras.resolucaoABX(dados);
+		String[] resolucao = ResolucaoPitagoras.resolucaoABX(dados);
 
 		Config config = Config.build2(dados);
 		BufferedImage image = config.criarImagem();
@@ -25,6 +25,7 @@ public class Image3 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(c\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

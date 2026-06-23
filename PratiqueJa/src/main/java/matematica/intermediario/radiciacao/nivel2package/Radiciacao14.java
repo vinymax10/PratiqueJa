@@ -31,14 +31,9 @@ public class Radiciacao14 extends GeradorExercicio
 		addParagrafo("Simplifique:");
 		addParagrafo("\\(\\sqrt[3]{" + n + "}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Identificar o maior fator cubo perfeito de \\(" + n + "\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + n + " = " + k3 + " \\times " + r + " = " + k + "^3 \\times " + r + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\sqrt[3]{" + n + "} = \\sqrt[3]{" + k + "^3 \\times " + r + "} = \\sqrt[3]{" + k + "^3} \\cdot \\sqrt[3]{" + r + "} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + k + "\\sqrt[3]{" + r + "}}\\)"
-		);
+		addResolucao("Identificar o maior fator cubo perfeito de \\(" + n + "\\):");
+		addResolucao("\\(" + n + " = " + k3 + " \\times " + r + " = " + k + "^3 \\times " + r + "\\)");
+		addResolucao("\\(\\sqrt[3]{" + n + "} = \\sqrt[3]{" + k + "^3 \\times " + r + "} = \\sqrt[3]{" + k + "^3} \\cdot \\sqrt[3]{" + r + "} =\\)");
+		addResolucao("\\(\\mathbf{" + k + "\\sqrt[3]{" + r + "}}\\)");
 	}
 }

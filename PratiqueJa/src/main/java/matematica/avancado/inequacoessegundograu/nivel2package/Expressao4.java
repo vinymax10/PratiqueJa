@@ -59,29 +59,29 @@ public class Expressao4 extends GeradorExercicio
 		distratores.add(d2);
 		distratores.add(d3);
 
-		String res = "Calcular \\(\\Delta\\): \\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
 		String bStr = b < 0 ? "(" + b + ")" : "" + b;
-		res += "\\(\\Delta=" + bStr + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{0}\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=0\\): raiz dupla em \\(x_v=\\dfrac{-b}{2a}=" + r + "\\)" + "\\(\\\\\\)";
-		res += "A parábola toca o eixo \\(x\\) apenas em \\(x=" + r + "\\): \\(f(" + r + ")=0\\) e \\(f(x)>0\\) para todo \\(x\\neq " + r + "\\)" + "\\(\\\\\\)";
-		if (pedirMenorIgual)
-		{
-			res += "\\(f(x)\\leq 0\\) somente quando \\(f(x)=0\\), ou seja, \\(x=" + r + "\\)" + "\\(\\\\\\)";
-			res += "\\(\\mathbf{x=" + r + "}\\)";
-		}
-		else
-		{
-			res += "\\(f(x)\\geq 0\\) para todo \\(x \\in \\mathbb{R}\\)" + "\\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in \\mathbb{R}}\\)";
-		}
 
 		addParagrafo("Resolva a inequação");
 		addParagrafo("\\(" + inequacao + "\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("Calcular \\(\\Delta\\):");
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + bStr + "^2-4\\cdot " + a + "\\cdot " + c + " =\\)"
+				+ "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{0}\\)");
+		addResolucao("\\(\\Delta=0\\): raiz dupla em \\(x_v=\\dfrac{-b}{2a}=" + r + "\\)");
+		addResolucao("A parábola toca o eixo \\(x\\) apenas em \\(x=" + r + "\\): \\(f(" + r + ")=0\\) e \\(f(x)>0\\) para todo \\(x\\neq " + r + "\\)");
+		if (pedirMenorIgual)
+		{
+			addResolucao("\\(f(x)\\leq 0\\) somente quando \\(f(x)=0\\), ou seja, \\(x=" + r + "\\)");
+			addResolucao("\\(\\mathbf{x=" + r + "}\\)");
+		}
+		else
+		{
+			addResolucao("\\(f(x)\\geq 0\\) para todo \\(x \\in \\mathbb{R}\\)");
+			addResolucao("\\(\\mathbf{x \\in \\mathbb{R}}\\)");
+		}
 	}
 
 	private void construirDeltaNegativo()
@@ -124,23 +124,23 @@ public class Expressao4 extends GeradorExercicio
 		distratores.add(d3);
 
 		String bStr = b < 0 ? "(" + b + ")" : "" + b;
-		String res = "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + bStr + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + delta + "}<0\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta<0\\): a parábola não cruza o eixo \\(x\\). Como \\(a=" + a + ">0\\), a parábola está inteiramente acima do eixo. \\(\\\\\\)";
-		if (pedirNegativo)
-		{
-			res += "\\(f(x)<0\\) não possui solução: \\(\\mathbf{S=\\emptyset}\\)";
-		}
-		else
-		{
-			res += "\\(f(x)>0\\) para todo \\(x\\): \\(\\mathbf{x \\in \\mathbb{R}}\\)";
-		}
 
 		addParagrafo("Resolva a inequação");
 		addParagrafo("\\(" + inequacao + "\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + bStr + "^2-4\\cdot " + a + "\\cdot " + c + " =\\)"
+				+ "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + delta + "}<0\\)");
+		addResolucao("\\(\\Delta<0\\): a parábola não cruza o eixo \\(x\\). Como \\(a=" + a + ">0\\), a parábola está inteiramente acima do eixo.");
+		if (pedirNegativo)
+		{
+			addResolucao("\\(f(x)<0\\) não possui solução: \\(\\mathbf{S=\\emptyset}\\)");
+		}
+		else
+		{
+			addResolucao("\\(f(x)>0\\) para todo \\(x\\): \\(\\mathbf{x \\in \\mathbb{R}}\\)");
+		}
 	}
 }

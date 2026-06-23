@@ -15,12 +15,10 @@ public class Potenciacao1 extends GeradorExercicio
 
 		String texto = ResolucaoPotencia.strFatores(a, p) + "=" + a + "^{x}";
 
-		String resolucao = a + "^{" + p + "}=" + a + "^{x}\\\\";
-		resolucao += "x=" + p;
-
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + p);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + a + "^{" + p + "}=" + a + "^{x}\\)");
+		addResolucao("\\(x=" + p + "\\)");
 	}
 }

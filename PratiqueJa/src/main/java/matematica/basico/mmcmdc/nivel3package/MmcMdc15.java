@@ -28,9 +28,8 @@ public class MmcMdc15 extends GeradorExercicio
 		);
 		gerarAlternativasInteiras(b);
 
-		String res = "Pela propriedade \\(\\text{MDC} \\times \\text{MMC} = A \\times B\\), isolamos \\(B\\): \\(\\\\\\)";
-		res += "\\(B = \\dfrac{\\text{MDC} \\times \\text{MMC}}{A} = \\dfrac{" + d + " \\times " + m + "}{" + a + "} = \\\\ ";
-		res += "\\dfrac{" + (d * m) + "}{" + a + "} = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade \\(\\text{MDC} \\times \\text{MMC} = A \\times B\\), isolamos \\(B\\):");
+		addResolucao("\\(B = \\dfrac{\\text{MDC} \\times \\text{MMC}}{A} = \\dfrac{" + d + " \\times " + m + "}{" + a + "} = \\\\ "
+			+ "\\dfrac{" + (d * m) + "}{" + a + "} = \\mathbf{" + b + "}\\)");
 	}
 }

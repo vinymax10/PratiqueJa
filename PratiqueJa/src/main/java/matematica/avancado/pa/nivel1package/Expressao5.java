@@ -17,6 +17,7 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(ResolucaoPA.a(a1, r, 4).toString());
-		setResolucao("\\(" + ResolucaoPA.x4(a1, r) + "\\)");
+		for(String passo : ResolucaoPA.x4(a1, r))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

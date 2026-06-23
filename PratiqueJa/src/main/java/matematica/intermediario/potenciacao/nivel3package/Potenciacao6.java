@@ -21,13 +21,11 @@ public class Potenciacao6 extends GeradorExercicio
 		int termo2 = resultado - termo1;
 		String texto = termo1 + "+" + termo2 + "=" + a + "^{x}";
 
-		String resolucao = resultado + "=" + a + "^{x}\\\\";
-		resolucao += a + "^{" + (p) + "}=" + a + "^{x}\\\\";
-		resolucao += "x=" + (p);
-
 		addParagrafo("Qual o valor de \\(x\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + p);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resultado + "=" + a + "^{x}\\)");
+		addResolucao("\\(" + a + "^{" + (p) + "}=" + a + "^{x}\\)");
+		addResolucao("\\(x=" + (p) + "\\)");
 	}
 }

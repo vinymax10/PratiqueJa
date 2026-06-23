@@ -16,7 +16,8 @@ public class MultDiv extends GeradorExercicio
 
 		boolean divisao = rand.nextBoolean();
 		int correto;
-		String enunciado, resolucao;
+		String enunciado;
+		String[] resolucao;
 
 		if (divisao)
 		{
@@ -34,6 +35,7 @@ public class MultDiv extends GeradorExercicio
 		addParagrafo("Calcule o valor da seguinte expressão:");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativasInteirasComNegativos(correto);
-		setResolucao(resolucao);
+		for(String passo : resolucao)
+			addResolucao(passo);
 	}
 }

@@ -29,12 +29,11 @@ public class ProblemaPermutacaoRepeticao
 		n=palavra.length();
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "Na permutação com repetição, dividimos o fatorial do total de letras pelos fatoriais das repetições.";
-		res += "\\(\\\\\\)";
-		res += "A palavra \"" + palavra + "\" possui " + n + " letras, logo \\(n = " + n + "\\).";
-		res += "\\(\\\\\\)";
+		List<String> passos = new ArrayList<String>();
+		passos.add("Na permutação com repetição, dividimos o fatorial do total de letras pelos fatoriais das repetições.");
+		passos.add("A palavra \"" + palavra + "\" possui " + n + " letras, logo \\(n = " + n + "\\).");
 
         Map<Character, Integer> contador = new HashMap<>();
 
@@ -47,8 +46,7 @@ public class ProblemaPermutacaoRepeticao
         {
             if (entry.getValue() > 1)
             {
-            	res += "A letra '" + entry.getKey() + "' aparece " + entry.getValue() + " vezes: dividir por \\(" + entry.getValue() + "!\\).";
-            	res += "\\(\\\\\\)";
+            	passos.add("A letra '" + entry.getKey() + "' aparece " + entry.getValue() + " vezes: dividir por \\(" + entry.getValue() + "!\\).");
             	list.add(entry.getValue());
             }
         }
@@ -69,23 +67,22 @@ public class ProblemaPermutacaoRepeticao
         	}
 		}
 
-        res += "Aplicando a fórmula:";
-        res += "\\(\\\\\\)";
+        passos.add("Aplicando a fórmula:");
         Racional resultado=new Racional(Algebra.fatorial(n),dFinal);
         resultado.fatoracao(2);
         String fracFinal = "\\dfrac{" + Algebra.fatorial(n) + "}{" + dFinal + "}";
-        res += "\\(\\text{Total} = \\dfrac{" + n + "!}{" + dInicial + "} = \\\\ ";
+        passos.add("\\(\\text{Total} = \\dfrac{" + n + "!}{" + dInicial + "} =\\)");
         if(resultado.isSimplificou())
         {
-        	res += "\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} = \\\\ ";
-        	res += fracFinal + " = \\mathbf{" + resultado.showDfrac() + "}\\)";
+        	passos.add("\\(\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} =\\)");
+        	passos.add("\\(" + fracFinal + " = \\mathbf{" + resultado.showDfrac() + "}\\)");
         }
         else
         {
-        	res += "\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} = \\mathbf{" + fracFinal + "}\\)";
+        	passos.add("\\(\\dfrac{" + Algebra.fatorial(n) + "}{" + dParcial + "} = \\mathbf{" + fracFinal + "}\\)");
         }
 
-		return res;
+		return passos.toArray(new String[0]);
 	}
 
 	public String resultado()

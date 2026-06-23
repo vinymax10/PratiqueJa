@@ -20,11 +20,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(resultado);
 
-		String res = "A razão dos perímetros é igual à razão de semelhança:"
-				+ "\\(\\\\\\)"
-				+ "\\(P' = P \\times \\dfrac{" + p + "}{" + q + "}"
+		addResolucao("A razão dos perímetros é igual à razão de semelhança:");
+		addResolucao("\\(P' = P \\times \\dfrac{" + p + "}{" + q + "}"
 				+ " = " + P + " \\times \\dfrac{" + p + "}{" + q + "}"
-				+ " = \\mathbf{" + resultado + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+				+ " = \\mathbf{" + resultado + "}\\,\\text{cm}\\)");
 	}
 }

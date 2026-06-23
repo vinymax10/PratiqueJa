@@ -33,15 +33,13 @@ public class Expressao1 extends GeradorExercicio
 		String ladoX = px > 0 ? "positivo" : "negativo";
 		String ladoY = py > 0 ? "positivo" : "negativo";
 
-		String res = "Identificamos os sinais das coordenadas: \\(\\\\\\)";
-		res += "\\(x = " + px + "\\), abscissa " + ladoX + ", e ";
-		res += "\\(y = " + py + "\\), ordenada " + ladoY + ". \\(\\\\\\)";
-		res += "Pela definição dos quadrantes: \\(\\\\\\)";
-		res += "Q. I \\(x > 0, y > 0\\); \\(\\\\\\)Q. II \\(x < 0, y > 0\\); \\(\\\\\\)";
-		res += "Q. III \\(x < 0, y < 0\\); \\(\\\\\\)Q. IV \\(x > 0, y < 0\\). \\(\\\\\\)";
-		res += "Como \\(x " + opX + " 0\\) e \\(y " + opY + " 0\\), ";
-		res += "o ponto P está no Quadrante " + quad + ".";
-
-		setResolucao(res);
+		addResolucao("Identificamos os sinais das coordenadas:");
+		addResolucao("\\(x = " + px + "\\), abscissa " + ladoX + ", e \\(y = " + py + "\\), ordenada " + ladoY + ".");
+		addResolucao("Pela definição dos quadrantes:");
+		addResolucao("Q. I \\(x > 0, y > 0\\);");
+		addResolucao("Q. II \\(x < 0, y > 0\\);");
+		addResolucao("Q. III \\(x < 0, y < 0\\);");
+		addResolucao("Q. IV \\(x > 0, y < 0\\).");
+		addResolucao("Como \\(x " + opX + " 0\\) e \\(y " + opY + " 0\\), o ponto P está no Quadrante " + quad + ".");
 	}
 }

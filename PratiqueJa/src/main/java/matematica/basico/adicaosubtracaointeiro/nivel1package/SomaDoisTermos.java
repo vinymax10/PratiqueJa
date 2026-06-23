@@ -20,6 +20,7 @@ public class SomaDoisTermos extends GeradorExercicio
 		addParagrafo("Calcule o valor da seguinte expressão:");
 		addParagrafo("\\(" + Auxiliar.getNumber(a, "", true) + Auxiliar.getNumber(b, "", false) + " = \\,?\\)");
 		gerarAlternativasInteirasComNegativos(correto);
-		setResolucao(ResolucaoASInteiro.soma(a, b));
+		for (String passo : ResolucaoASInteiro.soma(a, b))
+			addResolucao(passo);
 	}
 }

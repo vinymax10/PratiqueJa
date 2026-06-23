@@ -29,11 +29,10 @@ public class Image2 extends GeradorExercicio
 		addParagrafo("Leia no gráfico: qual é o valor de \\(f(" + pontoX + ")\\) para a função representada?");
 		addParagrafoImagem(image);
 
-		String res = "A linha tracejada vertical em \\(x = " + pontoX + "\\) "
-			+ "encontra o gráfico na altura \\(y = " + pontoY + "\\). \\(\\\\\\)";
-		res += "\\(f(" + pontoX + ") = |" + pontoX + " - " + h + "| + " + k + " = " + delta + " + " + k + " = \\mathbf{" + pontoY + "}\\)";
-
 		gerarAlternativas("" + pontoY);
-		setResolucao(res);
+
+		addResolucao("A linha tracejada vertical em \\(x = " + pontoX + "\\) "
+			+ "encontra o gráfico na altura \\(y = " + pontoY + "\\).");
+		addResolucao("\\(f(" + pontoX + ") = |" + pontoX + " - " + h + "| + " + k + " = " + delta + " + " + k + " = \\mathbf{" + pontoY + "}\\)");
 	}
 }

@@ -22,8 +22,8 @@ public class MissingFator extends GeradorExercicio
 
 		gerarAlternativasInteirasComNegativos(a);
 
-		String res = "Para encontrar o fator desconhecido, dividimos o produto pelo fator conhecido: \\(\\\\\\)";
-		res += ResolucaoMDInteiro.divisao(c, b);
-		setResolucao(res);
+		addResolucao("Para encontrar o fator desconhecido, dividimos o produto pelo fator conhecido:");
+		for(String passo : ResolucaoMDInteiro.divisao(c, b))
+			addResolucao(passo);
 	}
 }

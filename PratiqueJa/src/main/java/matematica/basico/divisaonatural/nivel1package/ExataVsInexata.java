@@ -45,19 +45,17 @@ public class ExataVsInexata extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Calculamos: \\(" + a + " \\div " + b + " = " + q;
 		if (exata)
 		{
-			res += "\\) com resto \\(0\\). \\(\\\\\\)";
-			res += "Como o resto é \\(0\\), a divisão é \\(\\mathbf{exata}\\). \\(\\\\\\)";
-			res += "Prova real: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)";
+			addResolucao("Calculamos: \\(" + a + " \\div " + b + " = " + q + "\\) com resto \\(0\\).");
+			addResolucao("Como o resto é \\(0\\), a divisão é \\(\\mathbf{exata}\\).");
+			addResolucao("Prova real: \\(" + b + " \\times " + q + " = \\mathbf{" + a + "}\\)");
 		}
 		else
 		{
-			res += "\\) com resto \\(" + r + "\\). \\(\\\\\\)";
-			res += "Como o resto é diferente de \\(0\\), a divisão é \\(\\mathbf{inexata}\\). \\(\\\\\\)";
-			res += "Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)";
+			addResolucao("Calculamos: \\(" + a + " \\div " + b + " = " + q + "\\) com resto \\(" + r + "\\).");
+			addResolucao("Como o resto é diferente de \\(0\\), a divisão é \\(\\mathbf{inexata}\\).");
+			addResolucao("Prova real: \\(" + b + " \\times " + q + " + " + r + " = " + (b * q) + " + " + r + " = \\mathbf{" + a + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

@@ -65,30 +65,29 @@ public class Expressao5 extends GeradorExercicio
 
 		String eqRearranjada = "x^2" + Auxiliar.getNumber(b, "x", false) + Auxiliar.getNumber(c, "", false);
 
-		String res = "Passar \\(" + rhs + "\\) para o lado esquerdo: \\(\\\\\\)";
-		res += "\\(" + eqRearranjada + sinal + "0\\)" + "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		res += "\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)" + "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)" + "\\(\\\\\\)";
-		res += "\\(x=\\dfrac{" + negB + "\\pm " + sqrtDelta + "}{2}\\)" + "\\(\\\\\\)";
-		res += "\\(x_1=\\dfrac{" + negB + "-" + sqrtDelta + "}{2}=" + r1
-				+ ", \\quad x_2=\\dfrac{" + negB + "+" + sqrtDelta + "}{2}=" + r2 + "\\)" + "\\(\\\\\\)";
-		if (pedirNegativo)
-		{
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) entre as raízes. \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)";
-		}
-		else
-		{
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) fora das raízes. \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in (-\\infty,\\," + r1 + fecha + " \\cup " + abre + r2 + ",\\,+\\infty)}\\)";
-		}
-
 		addParagrafo("Resolva a inequação");
 		addParagrafo("\\(" + eqExibida + "\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("Passar \\(" + rhs + "\\) para o lado esquerdo:");
+		addResolucao("\\(" + eqRearranjada + sinal + "0\\)");
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=1, \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		addResolucao("\\(\\Delta=" + bStr + "^2-4\\cdot " + c + " =\\)"
+				+ "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * c, "", false) + "=" + delta + "\\)");
+		addResolucao("\\(" + ParCor.formula("x=\\dfrac{-b\\pm\\sqrt{\\Delta}}{2a}") + "\\)");
+		addResolucao("\\(x=\\dfrac{" + negB + "\\pm " + sqrtDelta + "}{2}\\)");
+		addResolucao("\\(x_1=\\dfrac{" + negB + "-" + sqrtDelta + "}{2}=" + r1
+				+ ", \\quad x_2=\\dfrac{" + negB + "+" + sqrtDelta + "}{2}=" + r2 + "\\)");
+		if (pedirNegativo)
+		{
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) entre as raízes.");
+			addResolucao("\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)");
+		}
+		else
+		{
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) fora das raízes.");
+			addResolucao("\\(\\mathbf{x \\in (-\\infty,\\," + r1 + fecha + " \\cup " + abre + r2 + ",\\,+\\infty)}\\)");
+		}
 	}
 }

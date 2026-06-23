@@ -47,9 +47,8 @@ public class Exercicio4 extends GeradorExercicio
 				+ " \\(\\cos(2 \\cdot " + angulo + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Pela fórmula \\(\\cos(2a) = \\cos^2 a - \\operatorname{sen}^2 a\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(2 \\cdot " + angulo + ") = " + passo1 + " = \\\\"
-				+ passo2 + " = \\mathbf{" + resultado + "}\\)");
+		addResolucao("Pela fórmula \\(\\cos(2a) = \\cos^2 a - \\operatorname{sen}^2 a\\):");
+		addResolucao("\\(\\cos(2 \\cdot " + angulo + ") = " + passo1 + " =\\)");
+		addResolucao("\\(" + passo2 + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

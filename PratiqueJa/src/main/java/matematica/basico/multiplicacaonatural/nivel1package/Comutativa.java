@@ -18,8 +18,7 @@ public class Comutativa extends GeradorExercicio
 
 		gerarAlternativasInteiras(produto);
 
-		String res = "Pela propriedade comutativa, a ordem dos fatores não altera o produto: \\(\\\\\\)";
-		res += "\\(" + b + " \\times " + a + " = " + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade comutativa, a ordem dos fatores não altera o produto:");
+		addResolucao("\\(" + b + " \\times " + a + " = " + a + " \\times " + b + " = \\mathbf{" + produto + "}\\)");
 	}
 }

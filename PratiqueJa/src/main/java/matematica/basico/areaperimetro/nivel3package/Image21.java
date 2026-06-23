@@ -21,23 +21,18 @@ public class Image21 extends GeradorExercicio
 		int d = 2 * halfd;
 		int perimetro = 4 * l;
 
-		String res = "\\(" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(4 \\cdot l=" + perimetro + " \\\\";
-		res += "l=\\dfrac{" + perimetro + "}{4}=" + l + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoAreaPerimetro.formulaLadoLosango() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + l + "=\\sqrt{\\left(\\dfrac{D}{2}\\right)^2+" + halfd + "^2} \\\\";
-		res += "\\left(\\dfrac{D}{2}\\right)^2=" + l + "^2-" + halfd + "^2=" + (l * l) + "-" + (halfd * halfd) + "=" + (halfD * halfD) + " \\\\";
-		res += "\\dfrac{D}{2}=\\sqrt{" + (halfD * halfD) + "}=" + halfD + " \\Rightarrow D=\\mathbf{" + D + "}\\)";
-
 		ConfigLozango config = new ConfigLozango("D", "" + d, "", "", "", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do losango é \\(" + perimetro + "\\) e \\(d=" + d + "\\), qual o valor de \\(D\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + D);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
+		addResolucao("\\(4 \\cdot l=" + perimetro + " \\)");
+		addResolucao("\\( l=\\dfrac{" + perimetro + "}{4}=" + l + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaLadoLosango() + "\\)");
+		addResolucao("\\(" + l + "=\\sqrt{\\left(\\dfrac{D}{2}\\right)^2+" + halfd + "^2} \\)");
+		addResolucao("\\(\\left(\\dfrac{D}{2}\\right)^2=" + l + "^2-" + halfd + "^2=" + (l * l) + "-" + (halfd * halfd) + "=" + (halfD * halfD) + " \\)");
+		addResolucao("\\(\\dfrac{D}{2}=\\sqrt{" + (halfD * halfD) + "}=" + halfD + " \\Rightarrow D=\\mathbf{" + D + "}\\)");
 	}
 }

@@ -27,11 +27,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (h * 60 + 60) + "\\,\\text{min}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo multiplicar por 60:" +
-				"\\(\\\\\\)" +
-				"\\(" + h + " \\times 60 = \\mathbf{" + min + "}\\,\\text{min}\\)"
-			);
+			addResolucao("\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo multiplicar por 60:");
+			addResolucao("\\(" + h + " \\times 60 = \\mathbf{" + min + "}\\,\\text{min}\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -49,11 +46,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (s + 60) + "\\,\\text{s}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{min} = 60\\,\\text{s}\\), logo multiplicar por 60:" +
-				"\\(\\\\\\)" +
-				"\\(" + min + " \\times 60 = \\mathbf{" + s + "}\\,\\text{s}\\)"
-			);
+			addResolucao("\\(1\\,\\text{min} = 60\\,\\text{s}\\), logo multiplicar por 60:");
+			addResolucao("\\(" + min + " \\times 60 = \\mathbf{" + s + "}\\,\\text{s}\\)");
 		}
 		else if (tipo == 2)
 		{
@@ -71,11 +65,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (h * 360) + "\\,\\text{s}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{h} = 60\\,\\text{min}\\) e \\(1\\,\\text{min} = 60\\,\\text{s}\\), logo \\(1\\,\\text{h} = 3600\\,\\text{s}\\):" +
-				"\\(\\\\\\)" +
-				"\\(" + h + " \\times 3600 = \\mathbf{" + s + "}\\,\\text{s}\\)"
-			);
+			addResolucao("\\(1\\,\\text{h} = 60\\,\\text{min}\\) e \\(1\\,\\text{min} = 60\\,\\text{s}\\), logo \\(1\\,\\text{h} = 3600\\,\\text{s}\\):");
+			addResolucao("\\(" + h + " \\times 3600 = \\mathbf{" + s + "}\\,\\text{s}\\)");
 		}
 		else
 		{
@@ -93,11 +84,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (h + 1) + "\\,\\text{h}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo dividir por 60:" +
-				"\\(\\\\\\)" +
-				"\\(" + min + " \\div 60 = \\mathbf{" + h + "}\\,\\text{h}\\)"
-			);
+			addResolucao("\\(1\\,\\text{h} = 60\\,\\text{min}\\), logo dividir por 60:");
+			addResolucao("\\(" + min + " \\div 60 = \\mathbf{" + h + "}\\,\\text{h}\\)");
 		}
 	}
 }

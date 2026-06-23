@@ -17,17 +17,14 @@ public class Exercicio2 extends GeradorExercicio
 		int r = 2 + rand.nextInt(7); // r = 2..8
 		int k = r * r;               // A = kπ
 
-		String res = "\\(" + ResolucaoCirculo.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\pi \\cdot " + r + "^2 = \\mathbf{" + k + "}\\pi\\)";
-
 		ConfigCircunferencia config = new ConfigCircunferencia("" + r, true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do círculo de raio \\(" + r + "\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativasPi(k);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaArea() + "\\)");
+		addResolucao("\\(A = \\pi \\cdot " + r + "^2 = \\mathbf{" + k + "}\\pi\\)");
 	}
 
 	private void gerarAlternativasPi(int k)

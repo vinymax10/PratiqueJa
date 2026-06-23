@@ -36,7 +36,7 @@ public class Primo13 extends AgrupadorPrimo
 		addParagrafo("Sendo \\(" + n + " = " + fatorLatex(fatores) + "\\), quantos divisores tem \\(" + n + "^2\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& " + n + "^2 = " + n2Latex + "\\\\" +
 			"& \\tau = " + formula + "\\\\" +

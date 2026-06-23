@@ -24,10 +24,8 @@ public class Expressao4 extends GeradorExercicio
 		dist.add("" + (a * b));
 		dist.add("1");
 
-		String res = "Pela propriedade inversa: potenciação e logaritmo de mesma base se cancelam. \\(\\\\\\)";
-		res += "\\(" + b + "^{\\log_{" + b + "} " + a + "} = \\mathbf{" + a + "}\\)";
-
 		embaralharEAdicionarAlternativas("" + a, dist);
-		setResolucao(res);
+		addResolucao("Pela propriedade inversa: potenciação e logaritmo de mesma base se cancelam.");
+		addResolucao("\\(" + b + "^{\\log_{" + b + "} " + a + "} = \\mathbf{" + a + "}\\)");
 	}
 }

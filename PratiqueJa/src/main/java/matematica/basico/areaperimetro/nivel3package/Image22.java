@@ -18,18 +18,15 @@ public class Image22 extends GeradorExercicio
 		int l = 2 * m;
 		int k = m * m;                 // A = k√3
 
-		String res = "\\(" + ResolucaoAreaPerimetro.formulaAreaTrianguloEquilatero() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\dfrac{l^2 \\cdot \\sqrt{3}}{4} = " + k + "\\sqrt{3} \\\\";
-		res += "l^2 = 4 \\cdot " + k + " = " + (4 * k) + " \\\\";
-		res += "l = \\sqrt{" + (4 * k) + "} = \\mathbf{" + l + "}\\)";
-
 		ConfigTrianguloEquilatero config = new ConfigTrianguloEquilatero("l", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do triângulo equilátero é \\(" + k + "\\sqrt{3}\\), qual o valor de \\(l\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + l);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTrianguloEquilatero() + "\\)");
+		addResolucao("\\(\\dfrac{l^2 \\cdot \\sqrt{3}}{4} = " + k + "\\sqrt{3} \\)");
+		addResolucao("\\(l^2 = 4 \\cdot " + k + " = " + (4 * k) + " \\)");
+		addResolucao("\\(l = \\sqrt{" + (4 * k) + "} = \\mathbf{" + l + "}\\)");
 	}
 }

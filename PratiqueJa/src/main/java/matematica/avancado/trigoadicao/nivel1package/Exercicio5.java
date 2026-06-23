@@ -41,8 +41,8 @@ public class Exercicio5 extends GeradorExercicio
 				+ " para calcular \\(\\operatorname{tg}(2 \\cdot " + angulo + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Com \\(\\operatorname{tg}(" + angulo + ") = " + passoTg + "\\). \\(\\\\\\)"
-				+ "Denominador: \\(" + denCalculo + " = " + denValor + "\\). \\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(2 \\cdot " + angulo + ") = \\dfrac{2 \\cdot " + passoTg + "}{" + denValor + "} = \\mathbf{" + resultado + "}\\)");
+		addResolucao("Com \\(\\operatorname{tg}(" + angulo + ") = " + passoTg + "\\).");
+		addResolucao("Denominador: \\(" + denCalculo + " = " + denValor + "\\).");
+		addResolucao("\\(\\operatorname{tg}(2 \\cdot " + angulo + ") = \\dfrac{2 \\cdot " + passoTg + "}{" + denValor + "} = \\mathbf{" + resultado + "}\\)");
 	}
 }

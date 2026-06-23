@@ -14,6 +14,7 @@ public class Verificacao extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		gerarAlternativasInteiras(problema.resultado());
-		setResolucao(problema.resolucao());
+		for (String passo : problema.resolucao())
+			addResolucao(passo);
 	}
 }

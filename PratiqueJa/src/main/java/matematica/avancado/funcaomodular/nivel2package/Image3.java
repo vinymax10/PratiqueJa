@@ -34,9 +34,8 @@ public class Image3 extends GeradorExercicio
 		dist.add("\\(f(x) = |x - " + k + "| + " + h + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "O vértice está em \\((" + h + ",\\," + k + ")\\). \\(\\\\\\)";
-		res += "Na forma \\(f(x) = |x - h| + k\\): \\(h = " + h + "\\) e \\(k = " + k + "\\). \\(\\\\\\)";
-		res += "\\(\\mathbf{f(x) = |x - " + h + "| + " + k + "}\\)";
-		setResolucao(res);
+		addResolucao("O vértice está em \\((" + h + ",\\," + k + ")\\).");
+		addResolucao("Na forma \\(f(x) = |x - h| + k\\): \\(h = " + h + "\\) e \\(k = " + k + "\\).");
+		addResolucao("\\(\\mathbf{f(x) = |x - " + h + "| + " + k + "}\\)");
 	}
 }

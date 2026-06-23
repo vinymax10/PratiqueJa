@@ -88,6 +88,6 @@ public class Expressao1 extends AgrupadorExercicio
 		if(passoMulDiv != null)
 			res.append(" = \\\\& ").append(passoMulDiv);
 		res.append(" = ").append(result).append("\\end{aligned}\\)");
-		setResolucao(res.toString());
+		addResolucao(res.toString());
 	}
 }

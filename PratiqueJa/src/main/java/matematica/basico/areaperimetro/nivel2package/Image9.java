@@ -18,17 +18,14 @@ public class Image9 extends GeradorExercicio
 
 		String resultadoCorreto = "" + (4 * l);
 
-		String resolucao = ResolucaoAreaPerimetro.formulaDiagonalQuadrado() +
-		", \\quad " + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\\\";
-		resolucao += "l=" + l + "\\\\";
-		resolucao += "P=4 \\cdot " + l + "=" + (4 * l);
-
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strDiagonal + "\\), qual o perímetro do quadrado?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ", \\quad " + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
+		addResolucao("\\(l=" + l + "\\)");
+		addResolucao("\\(P=4 \\cdot " + l + "=" + (4 * l) + "\\)");
 	}
 }

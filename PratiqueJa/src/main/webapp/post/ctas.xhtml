@@ -5,6 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+	</ui:define>
+
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" value="CTAs" />
 	</ui:define>
@@ -14,16 +18,32 @@
 	    <f:viewAction action="#{configPostBean.carregarConfigPost()}" />
 	</f:metadata>
 
-	<div class="post-tabmenu">
-		<ui:include src="/post/tabMenu.xhtml" />
+	<!-- HERO -->
+	<div class="pc-hero">
+		<div class="pc-hero-head">
+			<span class="pc-hero-badge"><i class="pi pi-megaphone" /> Publicação no Instagram</span>
+			<h1 class="pc-hero-title">CTAs</h1>
+			<p class="pc-hero-desc">
+				Cadastre as chamadas para ação (CTAs) por finalidade, usadas nas legendas das publicações.
+			</p>
+		</div>
+		<div class="pc-hero-stats">
+			<div class="pc-stat">
+				<span class="pc-stat-label">Usuário</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.nome}</strong>
+			</div>
+			<div class="pc-stat pc-stat--green">
+				<span class="pc-stat-label">CTAs</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.ctas.size()}</strong>
+			</div>
+		</div>
 	</div>
 
-	<h:form id="form" class="form">
+	<ui:include src="/post/navTabs.xhtml" />
 
-		<div class="title-divisor-button">
-			<h4 style="margin:0;padding:0;border:0;">CTAs</h4>
-			<h5 style="margin:0;color:#6b7280;">Usuário: #{configPostBean.configPost.usuario.nome}</h5>
-		</div>
+	<h:form id="form">
+
+		<div class="pc-panel">
 
 		<div class="ui-fluid gride">
 
@@ -112,6 +132,8 @@
             </p:column>
 
 		</p:dataTable>
+
+		</div>
 
 	</h:form>
 

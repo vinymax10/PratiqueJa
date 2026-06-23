@@ -16,9 +16,8 @@ public class Exercicio13 extends GeradorExercicio
 		addParagrafo("\\(A = " + a + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		String res = "A cardinalidade \\(|A|\\) é o número de elementos distintos do conjunto. \\(\\\\\\)";
-		res += "Contando os elementos de \\(A = " + a + "\\): \\(\\\\\\)";
-		res += "\\(|A| = " + correto + "\\)";
-		setResolucao(res);
+		addResolucao("A cardinalidade \\(|A|\\) é o número de elementos distintos do conjunto.");
+		addResolucao("Contando os elementos de \\(A = " + a + "\\):");
+		addResolucao("\\(|A| = " + correto + "\\)");
 	}
 }

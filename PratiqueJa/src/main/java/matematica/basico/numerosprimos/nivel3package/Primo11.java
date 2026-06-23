@@ -33,9 +33,8 @@ public class Primo11 extends AgrupadorPrimo
 		addParagrafo("Quantos divisores tem o número \\(" + n + "\\)?");
 		gerarAlternativasInteiras(resultado);
 
-		setResolucao(
-			resolucaoFatoracao(n) +
-			" \\(\\\\\\) \\(\\tau(" + n + ") = " + formula + " = " + produto + " = \\mathbf{" + resultado + "}\\)"
-		);
+		for(String passo : resolucaoFatoracao(n))
+			addResolucao(passo);
+		addResolucao("\\(\\tau(" + n + ") = " + formula + " = " + produto + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

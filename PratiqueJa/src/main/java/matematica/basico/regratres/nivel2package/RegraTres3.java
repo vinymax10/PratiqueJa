@@ -54,9 +54,8 @@ public class RegraTres3 extends GeradorExercicio
 		embaralharEAdicionarAlternativas(p + "%", distr);
 
 		String tipo = isAumento ? "aumento" : "redução";
-		String res = "Fórmula: \\(\\% = \\dfrac{\\text{variação}}{\\text{valor inicial}} \\times 100\\). \\(\\\\\\)";
-		res += "\\(\\% = \\dfrac{" + delta + "}{" + A + "} \\times 100 = \\\\ \\)";
-		res += "\\(\\dfrac{" + (delta * 100) + "}{" + A + "} = \\mathbf{" + p + "\\%}\\) de " + tipo;
-		setResolucao(res);
+		addResolucao("Fórmula: \\(\\% = \\dfrac{\\text{variação}}{\\text{valor inicial}} \\times 100\\).");
+		addResolucao("\\(\\% = \\dfrac{" + delta + "}{" + A + "} \\times 100 =\\)");
+		addResolucao("\\(\\dfrac{" + (delta * 100) + "}{" + A + "} = \\mathbf{" + p + "\\%}\\) de " + tipo);
 	}
 }

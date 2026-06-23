@@ -31,9 +31,8 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(" + (r2h / 2) + "\\pi\\,\\text{cm}^3\\)");       // dividiu por 2 em vez de 3
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(V = \\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi \\cdot " + r + "^2 \\cdot " + h
+		addResolucao("\\(V = \\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi \\cdot " + r + "^2 \\cdot " + h
 				+ "}{3} = \\dfrac{" + r2 + " \\cdot " + h + " \\cdot \\pi}{3} = \\dfrac{"
-				+ r2h + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+				+ r2h + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

@@ -20,6 +20,7 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(x\\) na PA que possui " + n + " termos?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(an.toString());
-		setResolucao("\\(" + ResolucaoPA.resolucaoSoma4(a1, r, an, n) + "\\)");
+		for(String passo : ResolucaoPA.resolucaoSoma4(a1, r, an, n))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

@@ -15,7 +15,7 @@ public class Exercicio9 extends GeradorExercicio
 		// choice 2: 1 - sen²θ = cos²θ
 		int choice = rand.nextInt(3);
 
-		String expressao, correta, res;
+		String expressao, correta;
 		List<String> distratores = new ArrayList<>();
 
 		if (choice == 0) {
@@ -24,39 +24,36 @@ public class Exercicio9 extends GeradorExercicio
 			distratores.add("\\(\\operatorname{tg}^2\\theta\\)");
 			distratores.add("\\(\\cos^2\\theta\\)");
 			distratores.add("\\(1 + \\cos^2\\theta\\)");
-			res = "Pela identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):"
-					+ "\\(\\\\\\)"
-					+ "\\(\\operatorname{sen}^2\\theta = 1 - \\cos^2\\theta\\)"
-					+ "\\(\\\\\\)"
-					+ "Portanto \\(1 - \\cos^2\\theta = \\mathbf{\\operatorname{sen}^2\\theta}\\)";
 		} else if (choice == 1) {
 			expressao = "\\(\\dfrac{\\operatorname{sen}^2\\theta + \\cos^2\\theta}{\\cos^2\\theta}\\)";
 			correta   = "\\(\\operatorname{tg}^2\\theta + 1\\)";
 			distratores.add("\\(\\operatorname{tg}^2\\theta\\)");
 			distratores.add("\\(\\operatorname{sen}^2\\theta + 1\\)");
 			distratores.add("\\(1\\)");
-			res = "O numerador \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\), logo:"
-					+ "\\(\\\\\\)"
-					+ "\\(\\dfrac{1}{\\cos^2\\theta} = \\sec^2\\theta\\)"
-					+ "\\(\\\\\\)"
-					+ "Pela identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta\\):"
-					+ "\\(\\\\\\)"
-					+ "\\(\\dfrac{\\operatorname{sen}^2\\theta + \\cos^2\\theta}{\\cos^2\\theta} = \\mathbf{\\operatorname{tg}^2\\theta + 1}\\)";
 		} else {
 			expressao = "\\(1 - \\operatorname{sen}^2\\theta\\)";
 			correta   = "\\(\\cos^2\\theta\\)";
 			distratores.add("\\(\\operatorname{sen}^2\\theta\\)");
 			distratores.add("\\(\\operatorname{tg}^2\\theta\\)");
 			distratores.add("\\(1 + \\operatorname{sen}^2\\theta\\)");
-			res = "Pela identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):"
-					+ "\\(\\\\\\)"
-					+ "\\(\\cos^2\\theta = 1 - \\operatorname{sen}^2\\theta\\)"
-					+ "\\(\\\\\\)"
-					+ "Portanto \\(1 - \\operatorname{sen}^2\\theta = \\mathbf{\\cos^2\\theta}\\)";
 		}
 
 		addParagrafo("Qual das expressões " + listarOpcoes(correta, distratores) + " é equivalente a " + expressao + "?");
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		if (choice == 0) {
+			addResolucao("Pela identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):");
+			addResolucao("\\(\\operatorname{sen}^2\\theta = 1 - \\cos^2\\theta\\)");
+			addResolucao("Portanto \\(1 - \\cos^2\\theta = \\mathbf{\\operatorname{sen}^2\\theta}\\)");
+		} else if (choice == 1) {
+			addResolucao("O numerador \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\), logo:");
+			addResolucao("\\(\\dfrac{1}{\\cos^2\\theta} = \\sec^2\\theta\\)");
+			addResolucao("Pela identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta\\):");
+			addResolucao("\\(\\dfrac{\\operatorname{sen}^2\\theta + \\cos^2\\theta}{\\cos^2\\theta} = \\mathbf{\\operatorname{tg}^2\\theta + 1}\\)");
+		} else {
+			addResolucao("Pela identidade fundamental \\(\\operatorname{sen}^2\\theta + \\cos^2\\theta = 1\\):");
+			addResolucao("\\(\\cos^2\\theta = 1 - \\operatorname{sen}^2\\theta\\)");
+			addResolucao("Portanto \\(1 - \\operatorname{sen}^2\\theta = \\mathbf{\\cos^2\\theta}\\)");
+		}
 	}
 }

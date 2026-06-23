@@ -23,23 +23,17 @@ public class Exercicio1 extends GeradorExercicio
 		int si = caso[2];
 		int ae = 180 - ai;
 
-		String res = "Passo 1: encontrar \\(n\\) a partir de \\(\\alpha_e = 180^\\circ - \\alpha_i\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\alpha_e = 180^\\circ - " + ai + "^\\circ = " + ae + "^\\circ \\\\ ";
-		res += "n = \\dfrac{360^\\circ}{\\alpha_e} = \\dfrac{360^\\circ}{" + ae + "^\\circ} = " + n + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Passo 2: calcular \\(S_i\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaSomaInternos() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(S_i = (" + n + " - 2) \\times 180^\\circ = \\mathbf{" + si + "^\\circ}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Cada ângulo interno de um polígono regular mede \\(" + ai + "^\\circ\\). Qual é a soma dos ângulos internos desse polígono?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + si);
-		setResolucao(res);
+		addResolucao("Passo 1: encontrar \\(n\\) a partir de \\(\\alpha_e = 180^\\circ - \\alpha_i\\)");
+		addResolucao("\\(\\alpha_e = 180^\\circ - " + ai + "^\\circ = " + ae + "^\\circ\\)");
+		addResolucao("\\(n = \\dfrac{360^\\circ}{\\alpha_e} = \\dfrac{360^\\circ}{" + ae + "^\\circ} = " + n + "\\)");
+		addResolucao("Passo 2: calcular \\(S_i\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaSomaInternos() + "\\)");
+		addResolucao("\\(S_i = (" + n + " - 2) \\times 180^\\circ = \\mathbf{" + si + "^\\circ}\\)");
 	}
 }

@@ -17,10 +17,6 @@ public class Expressao6 extends GeradorExercicio
 		int b = -soma;
 		int c = produto;
 
-		String res = "\\(" + ParCor.formula("c=a\\cdot x_1\\cdot x_2, \\quad a=1") + "\\)" + "\\(\\\\\\)";
-		res += "\\(x_1\\cdot x_2=" + produto + "\\)" + "\\(\\\\\\)";
-		res += "\\(c=1\\cdot " + produto + "=\\mathbf{" + c + "}\\)";
-
 		String enunciado = "";
 		if(soma >= 0)
 			enunciado = "x_1+x_2=" + soma;
@@ -29,6 +25,8 @@ public class Expressao6 extends GeradorExercicio
 
 		addParagrafo("Dada \\(x^2+bx+c=0\\), com \\(" + enunciado + "\\) e \\(x_1\\cdot x_2=" + produto + "\\), encontre \\(c\\)");
 		gerarAlternativas("" + c);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("c=a\\cdot x_1\\cdot x_2, \\quad a=1") + "\\)");
+		addResolucao("\\(x_1\\cdot x_2=" + produto + "\\)");
+		addResolucao("\\(c=1\\cdot " + produto + "=\\mathbf{" + c + "}\\)");
 	}
 }

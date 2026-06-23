@@ -35,15 +35,13 @@ public class Expressao4 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, alts);
 
-		String res = "O ponto médio \\(M\\) de um segmento \\(\\overline{AB}\\) é calculado fazendo a média aritmética das coordenadas dos extremos: ";
-		res += "\\(M = \\left(\\dfrac{x_A + x_B}{2},\\;\\dfrac{y_A + y_B}{2}\\right)\\). \\(\\\\\\)";
-		res += "Substituindo \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\): \\(\\\\\\)";
+		addResolucao("O ponto médio \\(M\\) de um segmento \\(\\overline{AB}\\) é calculado fazendo a média aritmética das coordenadas dos extremos:");
+		addResolucao("\\(M = \\left(\\dfrac{x_A + x_B}{2},\\;\\dfrac{y_A + y_B}{2}\\right)\\).");
+		addResolucao("Substituindo \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\):");
 		String bxStr = bx < 0 ? "(" + bx + ")" : "" + bx;
 		String byStr = by < 0 ? "(" + by + ")" : "" + by;
-		res += "\\(M = \\left(\\dfrac{" + ax + " + " + bxStr + "}{2},\\;\\dfrac{" + ay + " + " + byStr + "}{2}\\right) =\\\\ ";
-		res += "\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\)";
-
-		setResolucao(res);
+		addResolucao("\\(M = \\left(\\dfrac{" + ax + " + " + bxStr + "}{2},\\;\\dfrac{" + ay + " + " + byStr + "}{2}\\right) =\\)");
+		addResolucao("\\(\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\)");
 	}
 
 	private String par(int x, int y)

@@ -31,15 +31,14 @@ public class Image1 extends GeradorExercicio
 		ConfigRetaReal config = new ConfigRetaReal(a, b, pontoAx, pontoAy, pontoBx, pontoBy);
 		BufferedImage image = config.criarImagem();
 
-		String resolucao = "";
-		resolucao += "Dados os pontos  \\(A=(" + pontoAx + "," + pontoAy + ")\\)  e ";
-		resolucao += "\\(B=(" + pontoBx + "," + pontoBy + ")\\), ";
-		resolucao += "temos que o coeficiente angular  \\(a\\)  é calculado por: \\(\\\\ \\)";
-		resolucao += "\\("+ResolucaoFuncaoAfim.resolucao(pontoAx, pontoAy, pontoBx, pontoBy)+"\\)";
-
 		addParagrafo("Encontre o coeficiente angular da reta:");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + aRacional);
-		setResolucao( resolucao );
+
+		addResolucao("Dados os pontos  \\(A=(" + pontoAx + "," + pontoAy + ")\\)  e "
+			+ "\\(B=(" + pontoBx + "," + pontoBy + ")\\), "
+			+ "temos que o coeficiente angular  \\(a\\)  é calculado por:");
+		for(String passo : ResolucaoFuncaoAfim.resolucao(pontoAx, pontoAy, pontoBx, pontoBy))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

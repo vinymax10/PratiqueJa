@@ -57,12 +57,8 @@ public class Primo3 extends AgrupadorPrimo
 		);
 		embaralharEAdicionarAlternativas("\\(" + correto + "\\)", erradas);
 
-		setResolucao(
-			"\\(N = " + p + " \\times " + q + " \\Rightarrow\\) fatores primos de \\(N\\): \\(\\{" + p + ",\\," + q + "\\}\\). " +
-			"\\(\\\\\\) " +
-			"\\(" + correto + "\\) não tem \\(" + p + "\\) nem \\(" + q + "\\) como fator. " +
-			"\\(\\\\\\) " +
-			"MDC\\((" + n + ",\\," + correto + ") = \\mathbf{1} \\Rightarrow\\) coprimos."
-		);
+		addResolucao("\\(N = " + p + " \\times " + q + " \\Rightarrow\\) fatores primos de \\(N\\): \\(\\{" + p + ",\\," + q + "\\}\\).");
+		addResolucao("\\(" + correto + "\\) não tem \\(" + p + "\\) nem \\(" + q + "\\) como fator.");
+		addResolucao("MDC\\((" + n + ",\\," + correto + ") = \\mathbf{1} \\Rightarrow\\) coprimos.");
 	}
 }

@@ -23,19 +23,17 @@ public class Exercicio4 extends GeradorExercicio
 		gerarAlternativasBoolean(pertence);
 
 		String vStr = v < 0 ? "\\left(" + v + "\\right)" : "" + v;
-		String res = "Um ponto \\((v,\\ w)\\) pertence ao gráfico de \\(f\\) "
-				+ "se, e somente se, \\(f(v) = w\\). \\(\\\\\\)";
-		res += "Calculamos \\(f(" + v + ")\\): \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b)
-				+ " = " + (a * v) + bLatex(b) + " = " + fv + "\\). \\(\\\\\\)";
+		addResolucao("Um ponto \\((v,\\ w)\\) pertence ao gráfico de \\(f\\) "
+				+ "se, e somente se, \\(f(v) = w\\).");
+		addResolucao("Calculamos \\(f(" + v + ")\\):");
+		addResolucao("\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b)
+				+ " = " + (a * v) + bLatex(b) + " = " + fv + "\\).");
 		if(pertence)
-			res += "Como \\(f(" + v + ") = " + fv + " = " + w
-					+ "\\), o ponto \\(\\textbf{pertence}\\) ao gráfico.";
+			addResolucao("Como \\(f(" + v + ") = " + fv + " = " + w
+					+ "\\), o ponto \\(\\textbf{pertence}\\) ao gráfico.");
 		else
-			res += "Como \\(f(" + v + ") = " + fv + " \\neq " + w
-					+ "\\), o ponto \\(\\textbf{não pertence}\\) ao gráfico.";
-
-		setResolucao(res);
+			addResolucao("Como \\(f(" + v + ") = " + fv + " \\neq " + w
+					+ "\\), o ponto \\(\\textbf{não pertence}\\) ao gráfico.");
 	}
 
 	private static String equacaoStr(int a, int b)

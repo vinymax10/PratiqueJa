@@ -28,20 +28,18 @@ public class Expressao1 extends GeradorExercicio
 
 		addParagrafo("Calcule \\(|" + a + " - " + b + "|\\).");
 
-		String res;
+		gerarAlternativas("" + result);
+
 		if (inner < 0)
 		{
-			res  = "\\(" + a + " - " + b + " = " + inner + "\\) (negativo) \\(\\\\\\)";
-			res += "Como \\(" + inner + " < 0\\), pela definição: \\(|" + inner + "| = -(" + inner + ")\\) \\(\\\\\\)";
-			res += "\\(|" + a + " - " + b + "| = \\mathbf{" + result + "}\\)";
+			addResolucao("\\(" + a + " - " + b + " = " + inner + "\\) (negativo)");
+			addResolucao("Como \\(" + inner + " < 0\\), pela definição: \\(|" + inner + "| = -(" + inner + ")\\)");
+			addResolucao("\\(|" + a + " - " + b + "| = \\mathbf{" + result + "}\\)");
 		}
 		else
 		{
-			res  = "\\(" + a + " - " + b + " = " + inner + "\\) (não negativo) \\(\\\\\\)";
-			res += "\\(|" + inner + "| = \\mathbf{" + result + "}\\)";
+			addResolucao("\\(" + a + " - " + b + " = " + inner + "\\) (não negativo)");
+			addResolucao("\\(|" + inner + "| = \\mathbf{" + result + "}\\)");
 		}
-
-		gerarAlternativas("" + result);
-		setResolucao(res);
 	}
 }

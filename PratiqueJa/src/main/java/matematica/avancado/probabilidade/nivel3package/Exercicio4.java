@@ -71,20 +71,18 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(" + dPrev.showDfrac() + "\\)");   // confundiu com prevalência
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
-		String resolucao = "Usando o Teorema de Bayes com uma população de 1000 pessoas:\\(\\\\\\)";
-		resolucao += "\\(A =\\) pessoa tem " + doenca + "\\(\\\\\\)";
-		resolucao += "\\(B =\\) teste dá positivo\\(\\\\\\)";
-		resolucao += "Em 1000 pessoas: " + doentes + " doentes, " + saudaveis + " saudáveis.\\(\\\\\\)";
-		resolucao += "Verdadeiros positivos: \\(" + sens + "\\%\\) de " + doentes
-				+ " \\(= " + vp + "\\)\\(\\\\\\)";
-		resolucao += "Falsos positivos: \\(" + (100 - espec) + "\\%\\) de " + saudaveis
-				+ " \\(= " + fp + "\\)\\(\\\\\\)";
-		resolucao += "Total de positivos: \\(" + vp + " + " + fp + " = " + totalPos + "\\)\\(\\\\\\)";
-		resolucao += "\\(P(A|B) = \\dfrac{" + vp + "}{" + totalPos + "}";
+		addResolucao("Usando o Teorema de Bayes com uma população de 1000 pessoas:");
+		addResolucao("\\(A =\\) pessoa tem " + doenca);
+		addResolucao("\\(B =\\) teste dá positivo");
+		addResolucao("Em 1000 pessoas: " + doentes + " doentes, " + saudaveis + " saudáveis.");
+		addResolucao("Verdadeiros positivos: \\(" + sens + "\\%\\) de " + doentes
+				+ " \\(= " + vp + "\\)");
+		addResolucao("Falsos positivos: \\(" + (100 - espec) + "\\%\\) de " + saudaveis
+				+ " \\(= " + fp + "\\)");
+		addResolucao("Total de positivos: \\(" + vp + " + " + fp + " = " + totalPos + "\\)");
 		if (resSimp)
-			resolucao += " = \\mathbf{" + res.showDfrac() + "}\\)";
+			addResolucao("\\(P(A|B) = \\dfrac{" + vp + "}{" + totalPos + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 		else
-			resolucao += " = \\mathbf{" + fraRes + "}\\)";
-		setResolucao(resolucao);
+			addResolucao("\\(P(A|B) = \\dfrac{" + vp + "}{" + totalPos + "} = \\mathbf{" + fraRes + "}\\)");
 	}
 }

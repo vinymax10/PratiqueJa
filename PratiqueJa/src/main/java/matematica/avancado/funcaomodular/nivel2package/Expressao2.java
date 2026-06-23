@@ -21,11 +21,10 @@ public class Expressao2 extends GeradorExercicio
 
 		addParagrafo("Determine a soma das soluções de \\(|" + bStr + "| = " + k + "\\).");
 
-		String res = "Caso 1: \\(" + bStr + " = " + k + " \\Rightarrow 2x = " + (k - b) + " \\Rightarrow x = " + m + "\\) \\(\\\\\\)";
-		res += "Caso 2: \\(" + bStr + " = -" + k + " \\Rightarrow 2x = " + (-k - b) + " \\Rightarrow x = " + (-n) + "\\) \\(\\\\\\)";
-		res += "Soma: \\(" + m + " + (" + (-n) + ") = \\mathbf{" + soma + "}\\)";
-
 		gerarAlternativas("" + soma);
-		setResolucao(res);
+
+		addResolucao("Caso 1: \\(" + bStr + " = " + k + " \\Rightarrow 2x = " + (k - b) + " \\Rightarrow x = " + m + "\\)");
+		addResolucao("Caso 2: \\(" + bStr + " = -" + k + " \\Rightarrow 2x = " + (-k - b) + " \\Rightarrow x = " + (-n) + "\\)");
+		addResolucao("Soma: \\(" + m + " + (" + (-n) + ") = \\mathbf{" + soma + "}\\)");
 	}
 }

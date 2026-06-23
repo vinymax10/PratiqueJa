@@ -43,22 +43,20 @@ public class Expressao3 extends GeradorExercicio
 		distratores.add("\\(" + distr2 + "\\)");
 		distratores.add("\\(" + distr3 + "\\)");
 
-		String res = "Coeficientes de \\(p(x)\\): \\(1, "
-				+ B + ", " + C + ", " + D + "\\) com \\(a = " + r + "\\)\\(\\\\\\)";
-		res += "Algoritmo de Briot-Ruffini:\\(\\\\\\)";
-		res += "Descendo o coef. líder: \\(" + q0 + "\\)\\(\\\\\\)";
-		res += "\\(" + q0 + " \\cdot " + r + Auxiliar.getNumber(B, "", false)
-				+ " = " + q1 + "\\)\\(\\\\\\)";
-		res += "\\(" + q1 + " \\cdot " + r + Auxiliar.getNumber(C, "", false)
-				+ " = " + q2 + "\\)\\(\\\\\\)";
-		res += "Resto: \\(" + q2 + " \\cdot " + r + Auxiliar.getNumber(D, "", false)
-				+ " = 0 \\; \\checkmark\\)\\(\\\\\\)";
-		res += "Quociente: \\(\\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Use o algoritmo de Briot-Ruffini para dividir \\(p(x)\\) por \\((x - " + r
 				+ ")\\). Qual o quociente?");
 		addParagrafo("\\(p(x) = " + poly + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Coeficientes de \\(p(x)\\): \\(1, "
+				+ B + ", " + C + ", " + D + "\\) com \\(a = " + r + "\\)");
+		addResolucao("Algoritmo de Briot-Ruffini:");
+		addResolucao("Descendo o coef. líder: \\(" + q0 + "\\)");
+		addResolucao("\\(" + q0 + " \\cdot " + r + Auxiliar.getNumber(B, "", false)
+				+ " = " + q1 + "\\)");
+		addResolucao("\\(" + q1 + " \\cdot " + r + Auxiliar.getNumber(C, "", false)
+				+ " = " + q2 + "\\)");
+		addResolucao("Resto: \\(" + q2 + " \\cdot " + r + Auxiliar.getNumber(D, "", false)
+				+ " = 0 \\; \\checkmark\\)");
+		addResolucao("Quociente: \\(\\mathbf{" + correct + "}\\)");
 	}
 }

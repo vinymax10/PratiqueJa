@@ -22,13 +22,15 @@ public class ProvaReal extends GeradorExercicio
 		{
 			addParagrafo(Nomes.masculino(rand) + " calculou \\(" + aParens + " \\times " + bParens + " = " + cStr + "\\). Para verificar, dividiu \\(" + cStr + " \\div " + bParens + "\\). Qual deve ser o resultado?");
 			gerarAlternativasInteirasComNegativos(a);
-			setResolucao(ResolucaoMDInteiro.divisao(c, b));
+			for(String passo : ResolucaoMDInteiro.divisao(c, b))
+				addResolucao(passo);
 		}
 		else
 		{
 			addParagrafo("Sabendo que \\(" + aParens + " \\times " + bParens + " = " + cStr + "\\), qual é o resultado de \\(" + cStr + " \\div " + aParens + "\\)?");
 			gerarAlternativasInteirasComNegativos(b);
-			setResolucao(ResolucaoMDInteiro.divisao(c, a));
+			for(String passo : ResolucaoMDInteiro.divisao(c, a))
+				addResolucao(passo);
 		}
 	}
 }

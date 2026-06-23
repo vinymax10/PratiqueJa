@@ -18,11 +18,10 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("Dada \\(f(x) = \\log_{" + a + "}(x)\\), calcule "
 			+ "\\(f\\!\\left(\\dfrac{1}{" + arg + "}\\right)\\).");
 
-		String res = "Reescrever \\(" + argStr + "\\) como potência de \\(" + a + "\\): \\(\\\\\\)";
-		res += "\\(\\dfrac{1}{" + arg + "} = \\dfrac{1}{" + a + "^{" + n + "}} = " + a + "^{-" + n + "}\\\\";
-		res += "f\\!\\left(" + argStr + "\\right) = \\log_{" + a + "}(" + a + "^{-" + n + "}) = \\mathbf{-" + n + "}\\)";
+		addResolucao("Reescrever \\(" + argStr + "\\) como potência de \\(" + a + "\\):");
+		addResolucao("\\(\\dfrac{1}{" + arg + "} = \\dfrac{1}{" + a + "^{" + n + "}} = " + a + "^{-" + n + "}\\)");
+		addResolucao("\\(f\\!\\left(" + argStr + "\\right) = \\log_{" + a + "}(" + a + "^{-" + n + "}) = \\mathbf{-" + n + "}\\)");
 
 		gerarAlternativas(new Racional(resultado, 1));
-		setResolucao(res);
 	}
 }

@@ -21,10 +21,9 @@ public class Distributiva extends GeradorExercicio
 
 		gerarAlternativasInteiras(produto);
 
-		String res = "Decompondo \\(" + n + " = " + bTen + " + " + c
-			+ "\\) e aplicando a propriedade distributiva: \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + n + " = " + a + " \\times " + bTen
-			+ " + " + a + " \\times " + c + " = " + p1 + " + " + p2 + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Decompondo \\(" + n + " = " + bTen + " + " + c
+			+ "\\) e aplicando a propriedade distributiva:");
+		addResolucao("\\(" + a + " \\times " + n + " = " + a + " \\times " + bTen
+			+ " + " + a + " \\times " + c + " = " + p1 + " + " + p2 + " = \\mathbf{" + produto + "}\\)");
 	}
 }

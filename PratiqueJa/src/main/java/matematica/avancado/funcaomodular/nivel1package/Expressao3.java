@@ -34,6 +34,6 @@ public class Expressao3 extends GeradorExercicio
 		}
 
 		gerarAlternativas("" + result);
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

@@ -27,33 +27,33 @@ public class Matrizes1 extends GeradorExercicio
 
 		String resultadoCorreto = c[posI][posJ] + "";
 
-		String resolucao = ParCor.formula("c_{i,j}= \\sum_{1}^{k} A_{i,k} \\cdot B_{k,j}") + "\\\\";
-		resolucao += "i=" + (posI + 1) + ", \\quad j=" + (posJ + 1) + ", \\quad k=" + size + "\\\\";
-
-		resolucao += "c_{" + (posI + 1) + "," + (posJ + 1) + "}=";
-		for(int i = 0; i < size; i++)
-		{
-			resolucao += AuxMatriz.parenteses(a[posI][i]) + "\\cdot" + AuxMatriz.parenteses(b[i][posJ]);
-			if(i < (size - 1))
-				resolucao += "+";
-		}
-		resolucao += "\\\\";
-		resolucao += "c_{" + (posI + 1) + "," + (posJ + 1) + "}=";
-
-		for(int i = 0; i < size; i++)
-		{
-			if(i > 0 && (a[posI][i] * b[i][posJ]) >= 0)
-				resolucao += "+";
-
-			resolucao += a[posI][i] * b[i][posJ];
-		}
-		resolucao += "=" + resultadoCorreto;
-
 		String texto = "A=" + AuxMatriz.matrizStr(a) + ",~B=" + AuxMatriz.matrizStr(b);
 
 		addParagrafo("Se \\(A \\cdot B=C\\), qual o valor de \\(c_{" + (posI + 1) + "," + (posJ + 1) + "}\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		// Resolução: uma linha (parágrafo) por passo — sem montar string única com "\\".
+		addResolucao("\\(" + ParCor.formula("c_{i,j}= \\sum_{1}^{k} A_{i,k} \\cdot B_{k,j}") + "\\)");
+		addResolucao("\\(i=" + (posI + 1) + ", \\quad j=" + (posJ + 1) + ", \\quad k=" + size + "\\)");
+
+		String produto = "c_{" + (posI + 1) + "," + (posJ + 1) + "}=";
+		for(int i = 0; i < size; i++)
+		{
+			produto += AuxMatriz.parenteses(a[posI][i]) + "\\cdot" + AuxMatriz.parenteses(b[i][posJ]);
+			if(i < (size - 1))
+				produto += "+";
+		}
+		addResolucao("\\(" + produto + "\\)");
+
+		String soma = "c_{" + (posI + 1) + "," + (posJ + 1) + "}=";
+		for(int i = 0; i < size; i++)
+		{
+			if(i > 0 && (a[posI][i] * b[i][posJ]) >= 0)
+				soma += "+";
+			soma += a[posI][i] * b[i][posJ];
+		}
+		soma += "=" + resultadoCorreto;
+		addResolucao("\\(" + soma + "\\)");
 	}
 }

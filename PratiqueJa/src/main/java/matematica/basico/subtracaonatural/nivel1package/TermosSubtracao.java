@@ -49,11 +49,10 @@ public class TermosSubtracao extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(termoCorreto, distratores);
 
-		String res = "Na subtração \\(a - b = c\\): \\(\\\\\\)";
-		res += "Minuendo \\((" + a + ")\\): o número do qual se subtrai. \\(\\\\\\)";
-		res += "Subtraendo \\((" + b + ")\\): o número que é subtraído. \\(\\\\\\)";
-		res += "Diferença \\((" + c + ")\\): o resultado da subtração. \\(\\\\\\)";
-		res += "Portanto, \\(" + numero + "\\) é o " + termoCorreto + ".";
-		setResolucao(res);
+		addResolucao("Na subtração \\(a - b = c\\):");
+		addResolucao("Minuendo \\((" + a + ")\\): o número do qual se subtrai.");
+		addResolucao("Subtraendo \\((" + b + ")\\): o número que é subtraído.");
+		addResolucao("Diferença \\((" + c + ")\\): o resultado da subtração.");
+		addResolucao("Portanto, \\(" + numero + "\\) é o " + termoCorreto + ".");
 	}
 }

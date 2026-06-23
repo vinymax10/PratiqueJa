@@ -14,7 +14,7 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		addParagrafo("Calcule a seguinte multiplicação:");
 		addParagrafo("\\(" + ResolucaoNatural.multiplicacao(a, b, false) + "\\)");
 		gerarAlternativasInteiras(a * b);
-		setResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.multiplicacao(a, b, true) + "\\)");
 	}
 
 	protected void multiplicaPor10()
@@ -26,7 +26,8 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + a + " \\times " + f + " = \\,?\\)");
 		gerarAlternativasInteiras(a * f);
-		setResolucao("Multiplicar por \\(" + f + "\\) acrescenta \\(" + zeros + "\\) zero(s) ao final: \\(\\\\\\) \\(" + a + " \\times " + f + " = \\mathbf{" + (a * f) + "}\\)");
+		addResolucao("Multiplicar por \\(" + f + "\\) acrescenta \\(" + zeros + "\\) zero(s) ao final:");
+		addResolucao("\\(" + a + " \\times " + f + " = \\mathbf{" + (a * f) + "}\\)");
 	}
 
 	protected void tresFatores(int min, int range)
@@ -35,20 +36,16 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		int ab = a * b;
 		addParagrafo("Calcule \\(" + a + " \\times " + b + " \\times " + c + "\\).");
 		gerarAlternativasInteiras(ab * c);
-		setResolucao(
-			"Multiplicamos dois fatores de cada vez: \\(\\\\\\)" +
-			"\\(" + a + " \\times " + b + " = " + ab + "\\); \\(" + ab + " \\times " + c + " = \\mathbf{" + (ab * c) + "}\\)"
-		);
+		addResolucao("Multiplicamos dois fatores de cada vez:");
+		addResolucao("\\(" + a + " \\times " + b + " = " + ab + "\\); \\(" + ab + " \\times " + c + " = \\mathbf{" + (ab * c) + "}\\)");
 	}
 	protected void distributiva(int min, int range)
 	{
 		int a = min + rand.nextInt(range), b = 2 + rand.nextInt(9), c = 2 + rand.nextInt(9);
 		addParagrafo("Use a propriedade distributiva e calcule \\(" + a + " \\times (" + b + " + " + c + ")\\).");
 		gerarAlternativasInteiras(a * (b + c));
-		setResolucao(
-			"Distribuímos o fator sobre a soma: \\(\\\\\\)" +
-			"\\(" + a + " \\times " + b + " + " + a + " \\times " + c + " = " + (a * b) + " + " + (a * c) + " = \\mathbf{" + (a * (b + c)) + "}\\)"
-		);
+		addResolucao("Distribuímos o fator sobre a soma:");
+		addResolucao("\\(" + a + " \\times " + b + " + " + a + " \\times " + c + " = " + (a * b) + " + " + (a * c) + " = \\mathbf{" + (a * (b + c)) + "}\\)");
 	}
 
 	protected void expressao()
@@ -57,10 +54,8 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		addParagrafo("Calcule, respeitando a ordem das operações:");
 		addParagrafo("\\(" + a + " \\times " + b + " + " + c + " \\times " + d + " = \\,?\\)");
 		gerarAlternativasInteiras(a * b + c * d);
-		setResolucao(
-			"Primeiro as multiplicações: \\(" + a + " \\times " + b + " = " + (a * b) + "\\) e \\(" + c + " \\times " + d + " = " + (c * d) + "\\). \\(\\\\\\)" +
-			"Depois a soma: \\(" + (a * b) + " + " + (c * d) + " = \\mathbf{" + (a * b + c * d) + "}\\)"
-		);
+		addResolucao("Primeiro as multiplicações: \\(" + a + " \\times " + b + " = " + (a * b) + "\\) e \\(" + c + " \\times " + d + " = " + (c * d) + "\\).");
+		addResolucao("Depois a soma: \\(" + (a * b) + " + " + (c * d) + " = \\mathbf{" + (a * b + c * d) + "}\\)");
 	}
 
 	protected void tabuada()
@@ -69,7 +64,7 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + a + " \\times " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(a * b);
-		setResolucao("\\(" + a + " \\times " + b + " = \\mathbf{" + (a * b) + "}\\)");
+		addResolucao("\\(" + a + " \\times " + b + " = \\mathbf{" + (a * b) + "}\\)");
 	}
 
 	protected void problema(int min, int range)
@@ -84,6 +79,7 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		else
 			addParagrafo("Cada pacote tem \\(" + a + "\\) figurinhas. Quantas figurinhas há em \\(" + b + "\\) pacotes?");
 		gerarAlternativasInteiras(r);
-		setResolucao("Multiplicamos a quantidade por unidade pelo número de grupos: \\(\\\\\\) \\(" + a + " \\times " + b + " = \\mathbf{" + r + "}\\)");
+		addResolucao("Multiplicamos a quantidade por unidade pelo número de grupos:");
+		addResolucao("\\(" + a + " \\times " + b + " = \\mathbf{" + r + "}\\)");
 	}
 }

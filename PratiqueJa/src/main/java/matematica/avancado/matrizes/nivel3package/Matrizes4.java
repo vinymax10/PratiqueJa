@@ -28,12 +28,11 @@ public class Matrizes4 extends GeradorExercicio
 		addParagrafo("\\(A = " + matDisplay + "\\)");
 		gerarAlternativas("" + xVal);
 
-		String res = "\\(\\det A = a_{1,1} \\cdot a_{2,2} - a_{1,2} \\cdot a_{2,1} = 0\\). \\(\\\\\\)";
-		res += "\\(" + p + " \\cdot x - "
-			+ AuxMatriz.parenteses(b) + " \\cdot " + AuxMatriz.parenteses(c) + " = 0\\). \\(\\\\\\)";
 		long bc = (long) b * c;
-		res += "\\(" + p + "x = " + bc + "\\). \\(\\\\\\)";
-		res += "\\(x = \\dfrac{" + bc + "}{" + p + "} = \\mathbf{" + xVal + "}\\)";
-		setResolucao(res);
+		addResolucao("\\(\\det A = a_{1,1} \\cdot a_{2,2} - a_{1,2} \\cdot a_{2,1} = 0\\).");
+		addResolucao("\\(" + p + " \\cdot x - "
+			+ AuxMatriz.parenteses(b) + " \\cdot " + AuxMatriz.parenteses(c) + " = 0\\).");
+		addResolucao("\\(" + p + "x = " + bc + "\\).");
+		addResolucao("\\(x = \\dfrac{" + bc + "}{" + p + "} = \\mathbf{" + xVal + "}\\)");
 	}
 }

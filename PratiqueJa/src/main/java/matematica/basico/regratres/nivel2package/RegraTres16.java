@@ -17,8 +17,7 @@ public class RegraTres16 extends GeradorExercicio
 		addParagrafo("Um produto que custa R$" + valor + ",00 está com " + p + "% de desconto. Qual é o valor do desconto, em reais?");
 		gerarAlternativas("" + k);
 
-		String res = "O valor do desconto é \\(" + p + "\\%\\) do preço: \\(\\\\\\)";
-		res += "\\(\\dfrac{" + p + "}{100} \\times " + valor + " = \\dfrac{" + (p * valor) + "}{100} = \\mathbf{" + k + "}\\)";
-		setResolucao(res);
+		addResolucao("O valor do desconto é \\(" + p + "\\%\\) do preço:");
+		addResolucao("\\(\\dfrac{" + p + "}{100} \\times " + valor + " = \\dfrac{" + (p * valor) + "}{100} = \\mathbf{" + k + "}\\)");
 	}
 }

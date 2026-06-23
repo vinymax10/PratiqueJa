@@ -26,10 +26,8 @@ public class Exercicio5 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (rr + qq) + "}{" + rr + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Pela identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta = \\dfrac{1}{\\cos^2\\theta}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}^2\\theta + 1 = \\dfrac{1}{\\left(\\dfrac{" + q + "}{" + r + "}\\right)^2}"
-				+ " = \\dfrac{1}{\\dfrac{" + qq + "}{" + rr + "}} = \\mathbf{\\dfrac{" + rr + "}{" + qq + "}}\\)";
-		setResolucao(res);
+		addResolucao("Pela identidade \\(\\operatorname{tg}^2\\theta + 1 = \\sec^2\\theta = \\dfrac{1}{\\cos^2\\theta}\\):");
+		addResolucao("\\(\\operatorname{tg}^2\\theta + 1 = \\dfrac{1}{\\left(\\dfrac{" + q + "}{" + r + "}\\right)^2}"
+				+ " = \\dfrac{1}{\\dfrac{" + qq + "}{" + rr + "}} = \\mathbf{\\dfrac{" + rr + "}{" + qq + "}}\\)");
 	}
 }

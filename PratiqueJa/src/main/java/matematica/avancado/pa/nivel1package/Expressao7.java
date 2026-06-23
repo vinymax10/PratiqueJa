@@ -23,6 +23,7 @@ public class Expressao7 extends GeradorExercicio
 		addParagrafo("Qual é o " + n + "º termo da PA decrescente?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(an.toString());
-		setResolucao("\\(" + ResolucaoPA.n_esimo(a1, r, n) + "\\)");
+		for(String passo : ResolucaoPA.n_esimo(a1, r, n))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

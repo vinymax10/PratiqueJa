@@ -15,8 +15,7 @@ public class Comutativa extends GeradorExercicio
 
 		gerarAlternativasInteiras(soma);
 
-		String res = "Pela propriedade comutativa, trocar a ordem das parcelas não altera a soma: \\(\\\\\\)";
-		res += "\\(" + b + " + " + a + " = " + a + " + " + b + " = \\mathbf{" + soma + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade comutativa, trocar a ordem das parcelas não altera a soma:");
+		addResolucao("\\(" + b + " + " + a + " = " + a + " + " + b + " = \\mathbf{" + soma + "}\\)");
 	}
 }

@@ -31,10 +31,9 @@ public class Expressao4 extends GeradorExercicio
 		int kb  = k - b;   // = 2*x2
 		int mkb = -k - b;  // = 2*x1
 
-		String res  = "Regra: \\(|f(x)| \\geq k \\Leftrightarrow f(x) \\leq -k\\) ou \\(f(x) \\geq k\\) \\(\\\\\\)";
-		res += "Caso 1: \\(" + bStr + " \\leq -" + k + " \\Rightarrow 2x \\leq " + mkb + " \\Rightarrow x \\leq " + x1 + "\\) \\(\\\\\\)";
-		res += "Caso 2: \\(" + bStr + " \\geq " + k + " \\Rightarrow 2x \\geq " + kb + " \\Rightarrow x \\geq " + x2 + "\\) \\(\\\\\\)";
-		res += "Solução: \\(\\mathbf{x \\leq " + x1 + "}\\) ou \\(\\mathbf{x \\geq " + x2 + "}\\)";
-		setResolucao(res);
+		addResolucao("Regra: \\(|f(x)| \\geq k \\Leftrightarrow f(x) \\leq -k\\) ou \\(f(x) \\geq k\\)");
+		addResolucao("Caso 1: \\(" + bStr + " \\leq -" + k + " \\Rightarrow 2x \\leq " + mkb + " \\Rightarrow x \\leq " + x1 + "\\)");
+		addResolucao("Caso 2: \\(" + bStr + " \\geq " + k + " \\Rightarrow 2x \\geq " + kb + " \\Rightarrow x \\geq " + x2 + "\\)");
+		addResolucao("Solução: \\(\\mathbf{x \\leq " + x1 + "}\\) ou \\(\\mathbf{x \\geq " + x2 + "}\\)");
 	}
 }

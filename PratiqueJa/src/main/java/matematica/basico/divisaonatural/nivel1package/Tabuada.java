@@ -30,8 +30,7 @@ public class Tabuada extends GeradorExercicio
 
 		gerarAlternativasInteiras(q);
 
-		String res = "A divisão é a operação inversa da multiplicação: \\(\\\\\\)";
-		res += "\\(" + b + " \\times " + q + " = " + a + " \\implies " + a + " \\div " + b + " = \\mathbf{" + q + "}\\)";
-		setResolucao(res);
+		addResolucao("A divisão é a operação inversa da multiplicação:");
+		addResolucao("\\(" + b + " \\times " + q + " = " + a + " \\implies " + a + " \\div " + b + " = \\mathbf{" + q + "}\\)");
 	}
 }

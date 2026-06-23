@@ -41,12 +41,8 @@ public class Decimal3 extends AgrupadorDecimal
 		}
 		embaralharEAdicionarAlternativas(correctStr, distratores);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& " + a + " \\times " + b + " = \\\\" +
-			"& " + aH + " \\times " + bT + " = " + prodM + " \\\\" +
-			"& \\text{3 casas decimais: } " + result +
-			"\\end{aligned}\\)"
-		);
+		addResolucao("\\(" + a + " \\times " + b + " =\\)");
+		addResolucao("\\(" + aH + " \\times " + bT + " = " + prodM + "\\)");
+		addResolucao("3 casas decimais: \\(" + result + "\\)");
 	}
 }

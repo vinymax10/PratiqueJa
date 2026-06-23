@@ -44,6 +44,6 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Encontre o coeficiente angular");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao( resolucao );
+		addResolucao( resolucao );
 	}
 }

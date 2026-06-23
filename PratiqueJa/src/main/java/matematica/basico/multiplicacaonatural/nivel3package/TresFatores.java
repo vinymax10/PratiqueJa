@@ -38,10 +38,9 @@ public class TresFatores extends GeradorExercicio
 
 		gerarAlternativasInteiras(produto);
 
-		String res = "Reagrupamos \\(" + a + "\\) e \\(" + c + "\\), pois \\("
-			+ a + " \\times " + c + " = " + ac + "\\) (número redondo): \\(\\\\\\)";
-		res += "\\(" + fatores + " = (" + a + " \\times " + c + ") \\times " + n
-			+ " = " + ac + " \\times " + n + " = \\mathbf{" + produto + "}\\)";
-		setResolucao(res);
+		addResolucao("Reagrupamos \\(" + a + "\\) e \\(" + c + "\\), pois \\("
+			+ a + " \\times " + c + " = " + ac + "\\) (número redondo):");
+		addResolucao("\\(" + fatores + " = (" + a + " \\times " + c + ") \\times " + n
+			+ " = " + ac + " \\times " + n + " = \\mathbf{" + produto + "}\\)");
 	}
 }

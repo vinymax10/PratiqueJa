@@ -34,8 +34,7 @@ public class Image1 extends GeradorExercicio
 		dist.add("\\((0,\\," + k + ")\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "As linhas tracejadas mostram \\(h = " + h + "\\) no eixo \\(x\\) e \\(k = " + k + "\\) no eixo \\(y\\). \\(\\\\\\)";
-		res += "Vértice: \\(\\mathbf{(" + h + ",\\," + k + ")}\\)";
-		setResolucao(res);
+		addResolucao("As linhas tracejadas mostram \\(h = " + h + "\\) no eixo \\(x\\) e \\(k = " + k + "\\) no eixo \\(y\\).");
+		addResolucao("Vértice: \\(\\mathbf{(" + h + ",\\," + k + ")}\\)");
 	}
 }

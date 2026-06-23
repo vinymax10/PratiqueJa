@@ -21,16 +21,14 @@ public class Exercicio4 extends GeradorExercicio
 		String vStr  = v  < 0 ? "\\left(" + v  + "\\right)" : "" + v;
 		String fvStr = fv < 0 ? "\\left(" + fv + "\\right)" : "" + fv;
 
-		String res = "\\((f \\circ f)(" + v + ") = f\\!\\left(f(" + v + ")\\right)\\). \\(\\\\\\)";
-		res += "Calculamos \\(f(" + v + ")\\): \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b)
-				+ " = " + (a * v) + bLatex(b) + " = " + fv + "\\). \\(\\\\\\)";
-		res += "Agora calculamos \\(f(" + fv + ")\\): \\(\\\\\\)";
-		res += "\\(f(" + fv + ") = " + a + " \\cdot " + fvStr + bLatex(b)
-				+ " = " + (a * fv) + bLatex(b) + " = " + ffv + "\\). \\(\\\\\\)";
-		res += "Portanto, \\((f \\circ f)(" + v + ") = " + ffv + "\\).";
-
-		setResolucao(res);
+		addResolucao("\\((f \\circ f)(" + v + ") = f\\!\\left(f(" + v + ")\\right)\\).");
+		addResolucao("Calculamos \\(f(" + v + ")\\):");
+		addResolucao("\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b)
+				+ " = " + (a * v) + bLatex(b) + " = " + fv + "\\).");
+		addResolucao("Agora calculamos \\(f(" + fv + ")\\):");
+		addResolucao("\\(f(" + fv + ") = " + a + " \\cdot " + fvStr + bLatex(b)
+				+ " = " + (a * fv) + bLatex(b) + " = " + ffv + "\\).");
+		addResolucao("Portanto, \\((f \\circ f)(" + v + ") = " + ffv + "\\).");
 		gerarAlternativas("" + ffv);
 	}
 

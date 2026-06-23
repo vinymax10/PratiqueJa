@@ -19,7 +19,7 @@ public class Image17 extends GeradorExercicio
 		int l = (int) (((double) B) * 0.7);
 
 		String resultadoCorreto = "" + (B + b + h + l);
-		String resolucao = ResolucaoAreaPerimetro.perimetroTrapezio(B, b, h, l);
+		String[] passosResolucao = ResolucaoAreaPerimetro.perimetroTrapezio(B, b, h, l);
 
 		ConfigImagem config = new ConfigTrapezio2(B + "", b + "", "" + h, "" + l, false);
 		BufferedImage image = config.criarImagem();
@@ -27,6 +27,7 @@ public class Image17 extends GeradorExercicio
 		addParagrafo("Qual o perímetro do trapézio?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

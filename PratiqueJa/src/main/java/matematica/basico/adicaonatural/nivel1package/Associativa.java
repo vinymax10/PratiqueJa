@@ -16,9 +16,8 @@ public class Associativa extends GeradorExercicio
 
 		gerarAlternativasInteiras(b);
 
-		String res = "Pela propriedade associativa, a forma de agrupar as parcelas não altera a soma: \\(\\\\\\)";
-		res += "\\((" + a + " + " + b + ") + " + c + " = " + a + " + (" + b + " + " + c + ")\\) \\(\\\\\\)";
-		res += "Portanto, \\(\\square = \\mathbf{" + b + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela propriedade associativa, a forma de agrupar as parcelas não altera a soma:");
+		addResolucao("\\((" + a + " + " + b + ") + " + c + " = " + a + " + (" + b + " + " + c + ")\\)");
+		addResolucao("Portanto, \\(\\square = \\mathbf{" + b + "}\\)");
 	}
 }

@@ -336,7 +336,7 @@ public class GeradorListaQuestoesPDF
 	private String blocoGabarito(int num, Questao q)
 	{
 		String numStr = String.format("%02d", num);
-		String resolucao = q.getResolucao() != null ? escaparTexto(q.getResolucao()) : "";
+		String resolucao = q.getResolucaoLatex() != null ? escaparTexto(q.getResolucaoLatex()) : "";
 		Alternativa correta = comAlternativas ? q.correta() : null;
 
 		if (correta == null)

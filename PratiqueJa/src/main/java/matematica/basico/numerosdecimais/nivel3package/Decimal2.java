@@ -26,12 +26,7 @@ public class Decimal2 extends AgrupadorDecimal
 		);
 		gerarAltT(resT);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& \\left(" + a + " + " + b +
-			"\\right) \\times " + e + " = \\\\" +
-			"& " + soma + " \\times " + e + " = " + result +
-			"\\end{aligned}\\)"
-		);
+		addResolucao("\\(\\left(" + a + " + " + b + "\\right) \\times " + e + " =\\)");
+		addResolucao("\\(" + soma + " \\times " + e + " = " + result + "\\)");
 	}
 }

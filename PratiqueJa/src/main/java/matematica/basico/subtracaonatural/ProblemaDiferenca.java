@@ -69,11 +69,13 @@ public class ProblemaDiferenca
 		}
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int dif = resultado();
-		String res = "Para encontrar a diferença entre duas quantidades, subtraímos a menor da maior: \\(\\\\\\)";
-		res += "\\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Para encontrar a diferença entre duas quantidades, subtraímos a menor da maior:",
+			"\\(" + a + " - " + b + " = \\mathbf{" + dif + "}\\)"
+		};
 	}
 }

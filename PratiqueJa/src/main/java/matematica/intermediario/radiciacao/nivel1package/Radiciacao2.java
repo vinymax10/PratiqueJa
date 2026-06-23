@@ -13,7 +13,7 @@ public class Radiciacao2 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\sqrt[3]{" + cubo + "}\\)");
 		gerarAlternativas("" + a);
-		setResolucao(
+		addResolucao(
 			"\\(\\sqrt[3]{" + cubo + "} = \\sqrt[3]{" + a + "^3} = \\mathbf{" + a + "}\\)"
 		);
 	}

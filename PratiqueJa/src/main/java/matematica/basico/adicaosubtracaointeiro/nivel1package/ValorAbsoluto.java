@@ -27,8 +27,7 @@ public class ValorAbsoluto extends GeradorExercicio
 
 		gerarAlternativasInteiras(a);
 
-		String res = "O módulo (valor absoluto) representa a distância ao zero na reta numérica, sempre positivo ou nulo. \\(\\\\\\)";
-		res += "\\(|" + x + "| = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("O módulo (valor absoluto) representa a distância ao zero na reta numérica, sempre positivo ou nulo.");
+		addResolucao("\\(|" + x + "| = \\mathbf{" + a + "}\\)");
 	}
 }

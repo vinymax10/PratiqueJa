@@ -26,11 +26,10 @@ public class Expressao2 extends GeradorExercicio
 			addParagrafo("\\(" + exprLatex + "\\)");
 			gerarAlternativasInteiras(coefR);
 
-			String res = "Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes. \\(\\\\\\)";
-			res += "\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} = \\\\ \\)";
-			res += "\\(" + coefR + "x^{" + expR + "} \\\\ \\)";
-			res += "O coeficiente é \\(" + coefR + "\\).";
-			setResolucao(res);
+			addResolucao("Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes.");
+			addResolucao("\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} =\\)");
+			addResolucao("\\(" + coefR + "x^{" + expR + "}\\)");
+			addResolucao("O coeficiente é \\(" + coefR + "\\).");
 		}
 		else
 		{
@@ -38,11 +37,10 @@ public class Expressao2 extends GeradorExercicio
 			addParagrafo("\\(" + exprLatex + "\\)");
 			gerarAlternativasInteiras(expR);
 
-			String res = "Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes. \\(\\\\\\)";
-			res += "\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} = \\\\ \\)";
-			res += "\\(" + coefR + "x^{" + expR + "} \\\\ \\)";
-			res += "O expoente de \\(x\\) no resultado é \\(" + expR + "\\).";
-			setResolucao(res);
+			addResolucao("Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes.");
+			addResolucao("\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} =\\)");
+			addResolucao("\\(" + coefR + "x^{" + expR + "}\\)");
+			addResolucao("O expoente de \\(x\\) no resultado é \\(" + expR + "\\).");
 		}
 	}
 }

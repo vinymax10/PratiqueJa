@@ -41,16 +41,14 @@ public class Expressao2 extends GeradorExercicio
 		distratores.add("\\(" + d2 + "\\)");
 		distratores.add("\\(" + d3 + "\\)");
 
-		String res = "Agrupando os termos semelhantes:\\(\\\\\\)";
-		res += "Termos em \\(x^2\\): \\(" + Polinomio.termo(a1, 2, true) + Polinomio.termo(a2, 2, false)
-				+ " = " + Polinomio.termo(sumA, 2, true) + "\\)\\(\\\\\\)";
-		res += "Termos em \\(x\\): \\(" + Polinomio.termo(b1, 1, true) + Polinomio.termo(b2, 1, false)
-				+ " = " + Polinomio.termo(sumB, 1, true) + "\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Simplifique combinando os termos semelhantes.");
 		addParagrafo("\\(" + shown + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Agrupando os termos semelhantes:");
+		addResolucao("Termos em \\(x^2\\): \\(" + Polinomio.termo(a1, 2, true) + Polinomio.termo(a2, 2, false)
+				+ " = " + Polinomio.termo(sumA, 2, true) + "\\)");
+		addResolucao("Termos em \\(x\\): \\(" + Polinomio.termo(b1, 1, true) + Polinomio.termo(b2, 1, false)
+				+ " = " + Polinomio.termo(sumB, 1, true) + "\\)");
+		addResolucao("\\(\\mathbf{" + correct + "}\\)");
 	}
 }

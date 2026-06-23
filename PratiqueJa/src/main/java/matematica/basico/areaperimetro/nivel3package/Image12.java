@@ -19,11 +19,7 @@ public class Image12 extends GeradorExercicio
 
 		String resultadoCorreto = D + "";
 
-		String resolucao = ResolucaoAreaPerimetro.formulaLosango() + "\\\\";
-		resolucao += "d=" + d + "\\\\";
-		resolucao += "\\dfrac{D \\cdot " + d + "}{2} = " + area + "\\\\";
 		MyExpression expressao = new MyExpression("D * " + d + "=" + area + "*2");
-		resolucao += expressao.resolverLatex();
 
 		ConfigLozango config = new ConfigLozango("D", d + "", "", "", "", true);
 		BufferedImage image = config.criarImagem();
@@ -31,6 +27,9 @@ public class Image12 extends GeradorExercicio
 		addParagrafo("Se a área do losango é \\(" + area + "\\), qual o valor de \\(D\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaLosango() + "\\)");
+		addResolucao("\\(d=" + d + "\\)");
+		addResolucao("\\(\\dfrac{D \\cdot " + d + "}{2} = " + area + "\\)");
+		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
 	}
 }

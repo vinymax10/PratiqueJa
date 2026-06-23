@@ -17,7 +17,8 @@ public class Contextualizada extends GeradorExercicio
 			p.gerarValores(1);
 			addParagrafo(p.getPergunta());
 			gerarAlternativasInteirasComNegativos(p.resultado());
-			setResolucao(p.resolucao());
+			for(String passo : p.resolucao())
+				addResolucao(passo);
 		}
 		else // divisão (1/3)
 		{
@@ -25,7 +26,8 @@ public class Contextualizada extends GeradorExercicio
 			p.gerarValores(1);
 			addParagrafo(p.getPergunta());
 			gerarAlternativasInteirasComNegativos(p.resultado());
-			setResolucao(p.resolucao());
+			for(String passo : p.resolucao())
+				addResolucao(passo);
 		}
 	}
 }

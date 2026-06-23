@@ -47,29 +47,29 @@ public class Expressao1 extends GeradorExercicio
 			+ "\\(A = (" + x1 + ",\\ " + y1 + ")\\) e \\(B = (" + x2 + ",\\ " + y2 + ")\\). "
 			+ "Calcule \\(f(" + v + ")\\).");
 
-		String res = "Coeficiente angular \\(a\\): \\(\\\\\\)";
-		res += "\\(" + ResolucaoFuncaoAfim.resolucao(x1, y1, x2, y2) + "\\) \\(\\\\\\)";
+		gerarAlternativas(fvr);
 
-		res += "Coeficiente linear \\(b\\) usando \\(A = (" + x1 + ",\\ " + y1 + ")\\): \\(\\\\\\)";
-		res += "\\(" + y1 + " = " + aStr + " \\cdot " + x1Disp + " + b\\) \\(\\\\\\)";
+		addResolucao("Coeficiente angular \\(a\\):");
+		for(String passo : ResolucaoFuncaoAfim.resolucao(x1, y1, x2, y2))
+			addResolucao("\\(" + passo + "\\)");
+
+		addResolucao("Coeficiente linear \\(b\\) usando \\(A = (" + x1 + ",\\ " + y1 + ")\\):");
+		addResolucao("\\(" + y1 + " = " + aStr + " \\cdot " + x1Disp + " + b\\)");
 
 		if(ax1r.numerador < 0)
 		{
 			Racional posAx1 = new Racional(-ax1r.numerador, ax1r.denominador);
-			res += "\\(b = " + y1 + " + " + posAx1.toStringLatex() + " = \\mathbf{" + bStr + "}\\) \\(\\\\\\)";
+			addResolucao("\\(b = " + y1 + " + " + posAx1.toStringLatex() + " = \\mathbf{" + bStr + "}\\)");
 		}
 		else
 		{
-			res += "\\(b = " + y1 + " - " + ax1r.toStringLatex() + " = \\mathbf{" + bStr + "}\\) \\(\\\\\\)";
+			addResolucao("\\(b = " + y1 + " - " + ax1r.toStringLatex() + " = \\mathbf{" + bStr + "}\\)");
 		}
 
 		String aLeading = a.toString().equals("1") ? "" : (a.toString().equals("-1") ? "-" : aStr);
-		res += "Logo \\(f(x) = " + aLeading + "x" + bTermStr(bRac) + "\\): \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + aStr + " \\cdot " + v + bTermStr(bRac)
-			+ " = " + avStr + bTermStr(bRac) + " = \\mathbf{" + fvStr + "}\\)";
-
-		gerarAlternativas(fvr);
-		setResolucao(res);
+		addResolucao("Logo \\(f(x) = " + aLeading + "x" + bTermStr(bRac) + "\\):");
+		addResolucao("\\(f(" + v + ") = " + aStr + " \\cdot " + v + bTermStr(bRac)
+			+ " = " + avStr + bTermStr(bRac) + " = \\mathbf{" + fvStr + "}\\)");
 	}
 
 	private static String bTermStr(Racional b)

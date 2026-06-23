@@ -61,11 +61,12 @@ public class ProblemaIntMult
 		return -(m * n);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int r = resultado();
-		String res = "Multiplicamos a grandeza negativa pela quantidade: \\(\\\\\\)";
-		res += "\\((-" + m + ") \\times " + n + " = \\mathbf{" + r + "}\\)";
-		return res;
+		return new String[] {
+			"Multiplicamos a grandeza negativa pela quantidade:",
+			"\\((-" + m + ") \\times " + n + " = \\mathbf{" + r + "}\\)"
+		};
 	}
 }

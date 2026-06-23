@@ -31,8 +31,7 @@ public class RegraTres10 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas("\\(" + p + "\\%\\)", distratores);
 
-		String res = "Para converter um decimal em porcentagem, multiplicamos por 100 (deslocamos a vírgula duas casas): \\(\\\\\\)";
-		res += "\\(" + decimal + " \\times 100 = \\mathbf{" + p + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("Para converter um decimal em porcentagem, multiplicamos por 100 (deslocamos a vírgula duas casas):");
+		addResolucao("\\(" + decimal + " \\times 100 = \\mathbf{" + p + "\\%}\\)");
 	}
 }

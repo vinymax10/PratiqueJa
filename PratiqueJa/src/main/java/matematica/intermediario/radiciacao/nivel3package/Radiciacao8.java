@@ -30,10 +30,7 @@ public class Radiciacao8 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\((\\sqrt{" + a + "} + \\sqrt{" + b + "})(\\sqrt{" + a + "} - \\sqrt{" + b + "})\\)");
 		embaralharEAdicionarAlternativas("" + res, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Produto de conjugados \\((A+B)(A-B) = A^2 - B^2\\):" +
-			"\\(\\\\\\)" +
-			"\\((\\sqrt{" + a + "})^2 - (\\sqrt{" + b + "})^2 = " + a + " - " + b + " = \\mathbf{" + res + "}\\)"
-		);
+		addResolucao("Produto de conjugados \\((A+B)(A-B) = A^2 - B^2\\):");
+		addResolucao("\\((\\sqrt{" + a + "})^2 - (\\sqrt{" + b + "})^2 = " + a + " - " + b + " = \\mathbf{" + res + "}\\)");
 	}
 }

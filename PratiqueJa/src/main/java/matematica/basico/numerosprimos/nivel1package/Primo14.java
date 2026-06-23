@@ -25,6 +25,7 @@ public class Primo14 extends AgrupadorPrimo
 		addParagrafo("Qual é a soma de todos os divisores de \\(" + n + "\\)?");
 		gerarAlternativasInteiras(soma);
 
-		setResolucao("Divisores de \\(" + n + "\\) somados: \\(\\\\\\) \\(" + divStr + " = \\mathbf{" + soma + "}\\).");
+		addResolucao("Divisores de \\(" + n + "\\) somados:");
+		addResolucao("\\(" + divStr + " = \\mathbf{" + soma + "}\\).");
 	}
 }

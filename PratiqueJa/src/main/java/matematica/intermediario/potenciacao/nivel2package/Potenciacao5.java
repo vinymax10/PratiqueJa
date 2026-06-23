@@ -25,10 +25,9 @@ public class Potenciacao5 extends GeradorExercicio
 		addParagrafo("Calcule usando \\((a \\cdot b)^n = a^n \\cdot b^n\\):");
 		addParagrafo("\\((" + a + " \\cdot " + b + ")^{" + p + "}\\)");
 		gerarAlternativas("" + resultado);
-		setResolucao(
+		addResolucao(
 			"\\((" + a + " \\cdot " + b + ")^{" + p + "}" +
-			" = " + a + "^{" + p + "} \\cdot " + b + "^{" + p + "} =\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + an + " \\cdot " + bn + " = \\mathbf{" + resultado +"}\\)");
+			" = " + a + "^{" + p + "} \\cdot " + b + "^{" + p + "} =\\)");
+		addResolucao("\\(" + an + " \\cdot " + bn + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

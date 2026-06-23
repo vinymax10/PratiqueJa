@@ -57,13 +57,12 @@ public class Estatistica4 extends GeradorExercicio
 		distratores.add(d3Num + "%");
 		embaralharEAdicionarAlternativas(sCorreta, distratores);
 
-		String res = "A frequência relativa é a proporção de cada categoria em relação ao total:\\(\\\\\\)";
-		res += "\\(fr_i = \\dfrac{f_i}{n} \\times 100\\%\\)\\(\\\\\\)";
-		res += "Para a " + cen[1] + " " + (alvo + 1) + ": \\(f_i = " + fi[alvo]
-				+ "\\), \\(n = " + n + "\\)\\(\\\\\\)";
-		res += "\\(fr = \\dfrac{" + fi[alvo] + "}{" + n + "} \\times 100\\% = \\mathbf{"
-				+ percentual + "\\%}\\)";
-		setResolucao(res);
+		addResolucao("A frequência relativa é a proporção de cada categoria em relação ao total:");
+		addResolucao("\\(fr_i = \\dfrac{f_i}{n} \\times 100\\%\\)");
+		addResolucao("Para a " + cen[1] + " " + (alvo + 1) + ": \\(f_i = " + fi[alvo]
+				+ "\\), \\(n = " + n + "\\)");
+		addResolucao("\\(fr = \\dfrac{" + fi[alvo] + "}{" + n + "} \\times 100\\% = \\mathbf{"
+				+ percentual + "\\%}\\)");
 	}
 
 	private int[] gerarFrequencias(int n, int numCat)

@@ -37,17 +37,10 @@ public class Image3 extends GeradorExercicio
 
 		int[] simplificado = simplificarRadical(d2);
 		String raizStr;
-		String simplStr = "";
 		if (simplificado[0] > 1)
-		{
 			raizStr = simplificado[0] + "\\sqrt{" + simplificado[1] + "}";
-			simplStr = "Simplificando o radical: \\(\\\\\\)";
-			simplStr += "\\(\\sqrt{" + d2 + "} = \\sqrt{" + simplificado[0] * simplificado[0] + " \\cdot " + simplificado[1] + "} = " + raizStr + "\\) \\(\\\\\\) ";
-		}
 		else
-		{
 			raizStr = "\\sqrt{" + d2 + "}";
-		}
 
 		String correta = simplificado[0] > 1 ? "\\(" + raizStr + "\\)" : "\\(\\sqrt{" + d2 + "}\\)";
 
@@ -77,16 +70,18 @@ public class Image3 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Do plano, lemos: \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\). \\(\\\\\\)";
-		res += "Aplicando a fórmula da distância entre dois pontos: \\(\\\\\\)";
-		res += "\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2} = \\\\";
-		res += "\\sqrt{(" + innerX + ")^2 + (" + innerY + ")^2} = \\\\"
-		+ "\\sqrt{" + strDx + "^2 + " + strDy + "^2} =\\\\ ";
-		res += "\\sqrt{" + dx2 + " + " + dy2 + "} = \\sqrt{" + d2 + "}\\\\ \\) ";
-		res += simplStr;
-		res += "Portanto, \\(d(A,B) = " + raizStr + "\\).";
-
-		setResolucao(res);
+		addResolucao("Do plano, lemos: \\(A(" + ax + ",\\;" + ay + ")\\) e \\(B(" + bx + ",\\;" + by + ")\\).");
+		addResolucao("Aplicando a fórmula da distância entre dois pontos:");
+		addResolucao("\\(d(A,B) = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2} =\\)");
+		addResolucao("\\(\\sqrt{(" + innerX + ")^2 + (" + innerY + ")^2} =\\)");
+		addResolucao("\\(\\sqrt{" + strDx + "^2 + " + strDy + "^2} =\\)");
+		addResolucao("\\(\\sqrt{" + dx2 + " + " + dy2 + "} = \\sqrt{" + d2 + "}\\)");
+		if (simplificado[0] > 1)
+		{
+			addResolucao("Simplificando o radical:");
+			addResolucao("\\(\\sqrt{" + d2 + "} = \\sqrt{" + simplificado[0] * simplificado[0] + " \\cdot " + simplificado[1] + "} = " + raizStr + "\\)");
+		}
+		addResolucao("Portanto, \\(d(A,B) = " + raizStr + "\\).");
 	}
 
 	private boolean ehQuadradoPerfeito(int n)

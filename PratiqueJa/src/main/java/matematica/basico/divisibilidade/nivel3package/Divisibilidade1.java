@@ -14,6 +14,7 @@ public class Divisibilidade1 extends GeradorExercicio
 
 		addParagrafo("Quantos divisores naturais possui o número " + number + "?");
 		gerarAlternativas("" + resolucaoDivisores.numerosDividoresResultado(number));
-		setResolucao(resolucaoDivisores.numerosDividores(number));
+		for(String passo : resolucaoDivisores.numerosDividores(number))
+			addResolucao(passo);
 	}
 }

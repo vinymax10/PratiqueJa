@@ -22,12 +22,10 @@ public class Expressao11 extends GeradorExercicio
 		String enunciado = a1.showDfrac() + ", " + ResolucaoPA.a(a1, r, 2).showDfrac()
 				+ ", " + ResolucaoPA.a(a1, r, 3).showDfrac() + ", \\ldots";
 
-		String resolucao = ResolucaoPA.n_esimo(a1, r, n);
-		resolucao = resolucao.replace("(", "\\left(").replace(")", "\\right)");
-
 		addParagrafo("Qual é o " + n + "º termo da PA decrescente?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(an.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : ResolucaoPA.n_esimo(a1, r, n))
+			addResolucao("\\(" + passo.replace("(", "\\left(").replace(")", "\\right)") + "\\)");
 	}
 }

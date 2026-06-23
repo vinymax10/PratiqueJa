@@ -54,16 +54,14 @@ public class Exercicio5 extends GeradorExercicio
 		distratores.add("\\(" + d3.showDfrac() + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
-		String resolucao = "Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):\\(\\\\\\)";
-		resolucao += "\\(n = " + n + ", \\quad k = " + k + ", \\quad p = \\dfrac{1}{2} \\\\";
-		resolucao += "C_{" + n + "," + k + "} = \\dfrac{" + n + "!}{" + k + "! \\cdot " + (n - k) + "!} = " + cnk + " \\\\";
-		resolucao += "P(X=" + k + ") = " + cnk + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + k + "} \\cdot \\left(\\dfrac{1}{2}\\right)^{" + (n - k) + "} \\\\ ";
-		resolucao += "= \\dfrac{" + cnk + "}{" + den + "}";
+		addResolucao("Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):");
+		addResolucao("\\(n = " + n + ", \\quad k = " + k + ", \\quad p = \\dfrac{1}{2}\\)");
+		addResolucao("\\(C_{" + n + "," + k + "} = \\dfrac{" + n + "!}{" + k + "! \\cdot " + (n - k) + "!} = " + cnk + "\\)");
+		addResolucao("\\(P(X=" + k + ") = " + cnk + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + k + "} \\cdot \\left(\\dfrac{1}{2}\\right)^{" + (n - k) + "}\\)");
 		if (resSimp)
-			resolucao += " = \\mathbf{" + res.showDfrac() + "}\\)";
+			addResolucao("\\(= \\dfrac{" + cnk + "}{" + den + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 		else
-			resolucao += " = \\mathbf{" + fraRes + "}\\)";
-		setResolucao(resolucao);
+			addResolucao("\\(= \\dfrac{" + cnk + "}{" + den + "} = \\mathbf{" + fraRes + "}\\)");
 	}
 
 	// P(X = k) com p = 1/6 (sair face específica em dado), n ∈ {2,3}, k ∈ {1}
@@ -102,16 +100,14 @@ public class Exercicio5 extends GeradorExercicio
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
 		String p5str = n == 2 ? "\\dfrac{5}{6}" : "\\left(\\dfrac{5}{6}\\right)^2";
-		String resolucao = "Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):\\(\\\\\\)";
-		resolucao += "\\(n = " + n + ", \\quad k = 1, \\quad p = \\dfrac{1}{6} \\\\";
-		resolucao += "C_{" + n + ",1} = " + cnk + " \\\\";
-		resolucao += "P(X=1) = " + cnk + " \\cdot \\dfrac{1}{6} \\cdot " + p5str + " \\\\ ";
-		resolucao += "= \\dfrac{" + num + "}{" + den6 + "}";
+		addResolucao("Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):");
+		addResolucao("\\(n = " + n + ", \\quad k = 1, \\quad p = \\dfrac{1}{6}\\)");
+		addResolucao("\\(C_{" + n + ",1} = " + cnk + "\\)");
+		addResolucao("\\(P(X=1) = " + cnk + " \\cdot \\dfrac{1}{6} \\cdot " + p5str + "\\)");
 		if (resSimp)
-			resolucao += " = \\mathbf{" + res.showDfrac() + "}\\)";
+			addResolucao("\\(= \\dfrac{" + num + "}{" + den6 + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 		else
-			resolucao += " = \\mathbf{" + fraRes + "}\\)";
-		setResolucao(resolucao);
+			addResolucao("\\(= \\dfrac{" + num + "}{" + den6 + "} = \\mathbf{" + fraRes + "}\\)");
 	}
 
 	private static int combinacao(int n, int k)

@@ -37,12 +37,11 @@ public class Racionais4 extends GeradorExercicio
 			Arrays.asList(incorreta, "São iguais", "Não é possível determinar"));
 
 		String fracMaior = f1EhMaior ? f1 : f2;
-		String res = "Usamos o produto cruzado: multiplicamos o numerador de cada fração "
-				   + "pelo denominador da outra. \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + d + " = " + cross1 + "\\) e \\("
-			 + c + " \\times " + b + " = " + cross2 + "\\). \\(\\\\\\)";
-		res += "Como \\(" + cross1 + (f1EhMaior ? " > " : " < ") + cross2
-			 + "\\), a maior fração é \\(" + fracMaior + "\\).";
-		setResolucao(res);
+		addResolucao("Usamos o produto cruzado: multiplicamos o numerador de cada fração "
+				   + "pelo denominador da outra.");
+		addResolucao("\\(" + a + " \\times " + d + " = " + cross1 + "\\) e \\("
+			 + c + " \\times " + b + " = " + cross2 + "\\).");
+		addResolucao("Como \\(" + cross1 + (f1EhMaior ? " > " : " < ") + cross2
+			 + "\\), a maior fração é \\(" + fracMaior + "\\).");
 	}
 }

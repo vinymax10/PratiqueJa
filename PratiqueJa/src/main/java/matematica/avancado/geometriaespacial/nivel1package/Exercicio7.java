@@ -15,9 +15,8 @@ public class Exercicio7 extends GeradorExercicio
 
 		gerarAlternativasInteiras(r, 4, true);
 
-		String res = "\\(A_{\\text{sup}} = 4\\pi r^2 \\Rightarrow " + coef + "\\pi = 4\\pi r^2\\\\"
-				+ "r^2 = \\dfrac{" + coef + "}{4} = " + r2 + "\\\\"
-				+ "r = \\sqrt{" + r2 + "} = \\mathbf{" + r + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{sup}} = 4\\pi r^2 \\Rightarrow " + coef + "\\pi = 4\\pi r^2\\)");
+		addResolucao("\\(r^2 = \\dfrac{" + coef + "}{4} = " + r2 + "\\)");
+		addResolucao("\\(r = \\sqrt{" + r2 + "} = \\mathbf{" + r + "}\\,\\text{cm}\\)");
 	}
 }

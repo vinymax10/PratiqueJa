@@ -37,9 +37,8 @@ public class Image2 extends GeradorExercicio
 		dist.add("\\(-" + base + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "De \\(f(" + base + ") = 1\\) temos \\(a = " + base + "\\). \\(\\\\\\)";
-		res += "\\(f\\!\\left(\\dfrac{1}{" + base + "}\\right) = \\log_{" + base + "} " + base + "^{-1}\\\\";
-		res += "= -1 \\cdot \\log_{" + base + "} " + base + " = -1 \\cdot 1 = \\mathbf{-1}\\)";
-		setResolucao(res);
+		addResolucao("De \\(f(" + base + ") = 1\\) temos \\(a = " + base + "\\).");
+		addResolucao("\\(f\\!\\left(\\dfrac{1}{" + base + "}\\right) = \\log_{" + base + "} " + base + "^{-1}\\)");
+		addResolucao("\\(= -1 \\cdot \\log_{" + base + "} " + base + " = -1 \\cdot 1 = \\mathbf{-1}\\)");
 	}
 }

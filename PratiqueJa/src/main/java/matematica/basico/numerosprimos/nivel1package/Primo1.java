@@ -28,21 +28,15 @@ public class Primo1 extends AgrupadorPrimo
 
 		if(ePrimo)
 		{
-			setResolucao(
-				"Divisores de \\(" + n + "\\): apenas \\(1\\) e \\(" + n + "\\). " +
-				"\\(\\\\\\) " +
-				"\\(\\therefore " + n + "\\) é primo."
-			);
+			addResolucao("Divisores de \\(" + n + "\\): apenas \\(1\\) e \\(" + n + "\\).");
+			addResolucao("\\(\\therefore " + n + "\\) é primo.");
 		}
 		else
 		{
 			Map<Integer, Integer> f = fatorar(n);
 			int p = f.keySet().iterator().next();
-			setResolucao(
-				"\\(" + n + " \\div " + p + " = " + (n / p) + " \\Rightarrow\\) divisível por \\(" + p + "\\). " +
-				"\\(\\\\\\) " +
-				"\\(\\therefore " + n + "\\) é composto."
-			);
+			addResolucao("\\(" + n + " \\div " + p + " = " + (n / p) + " \\Rightarrow\\) divisível por \\(" + p + "\\).");
+			addResolucao("\\(\\therefore " + n + "\\) é composto.");
 		}
 	}
 }

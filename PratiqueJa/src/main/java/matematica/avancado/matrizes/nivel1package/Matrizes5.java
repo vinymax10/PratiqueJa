@@ -23,11 +23,10 @@ public class Matrizes5 extends GeradorExercicio
 		addParagrafo("\\(A = " + AuxMatriz.matrizStr(a) + "\\)");
 		gerarAlternativas("" + correct);
 
-		String res = "A transposta troca linhas por colunas: \\((A^T)_{i,j} = a_{j,i}\\). \\(\\\\\\)";
-		res += "\\(A^T = " + AuxMatriz.matrizStr(aT) + "\\). \\(\\\\\\)";
-		res += "\\((A^T)_{" + (posI + 1) + "," + (posJ + 1) + "}"
+		addResolucao("A transposta troca linhas por colunas: \\((A^T)_{i,j} = a_{j,i}\\).");
+		addResolucao("\\(A^T = " + AuxMatriz.matrizStr(aT) + "\\).");
+		addResolucao("\\((A^T)_{" + (posI + 1) + "," + (posJ + 1) + "}"
 			+ " = a_{" + (posJ + 1) + "," + (posI + 1) + "}"
-			+ " = \\mathbf{" + correct + "}\\)";
-		setResolucao(res);
+			+ " = \\mathbf{" + correct + "}\\)");
 	}
 }

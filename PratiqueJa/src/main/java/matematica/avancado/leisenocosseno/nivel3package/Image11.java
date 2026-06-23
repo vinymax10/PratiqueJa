@@ -35,6 +35,6 @@ public class Image11 extends GeradorExercicio
 		addParagrafo(pergunta);
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

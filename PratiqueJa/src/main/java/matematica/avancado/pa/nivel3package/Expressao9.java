@@ -21,12 +21,10 @@ public class Expressao9 extends GeradorExercicio
 
 		String enunciado = "x" + "+ \\ldots + " + an.showDfrac() + "=" + ResolucaoPA.soma(a1, an, n).showDfrac();
 
-		String resolucao = ResolucaoPA.resolucaoSoma3(a1, r, an, n);
-		resolucao = resolucao.replace("(", "\\left(").replace(")", "\\right)");
-
 		addParagrafo("Qual o valor de \\(x\\) na PA que possui " + n + " termos?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(a1.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : ResolucaoPA.resolucaoSoma3(a1, r, an, n))
+			addResolucao("\\(" + passo.replace("(", "\\left(").replace(")", "\\right)") + "\\)");
 	}
 }

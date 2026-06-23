@@ -19,14 +19,9 @@ public class Radiciacao6 extends GeradorExercicio
 		addParagrafo("Calcule simplificando o índice:");
 		addParagrafo("\\(\\sqrt[" + nc + "]{" + V + "}\\)");
 		gerarAlternativas("" + a);
-		setResolucao(
-			"Decompor o radicando:" +
-			"\\(\\\\\\)" +
-			"\\(" + V + " = " + a + "^{" + nc + "}\\)" +
-			"\\(\\\\\\)" +
-			"Simplificar índice e expoente \\((\\div " + c + ")\\):" +
-			"\\(\\\\\\)" +
-			"\\(\\sqrt[" + nc + "]{" + a + "^{" + nc + "}} = \\sqrt[" + n + "]{" + a + "^{" + n + "}} = \\mathbf{" + a + "}\\)"
-		);
+		addResolucao("Decompor o radicando:");
+		addResolucao("\\(" + V + " = " + a + "^{" + nc + "}\\)");
+		addResolucao("Simplificar índice e expoente \\((\\div " + c + ")\\):");
+		addResolucao("\\(\\sqrt[" + nc + "]{" + a + "^{" + nc + "}} = \\sqrt[" + n + "]{" + a + "^{" + n + "}} = \\mathbf{" + a + "}\\)");
 	}
 }

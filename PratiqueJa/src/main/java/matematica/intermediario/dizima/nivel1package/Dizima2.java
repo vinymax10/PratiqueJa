@@ -55,6 +55,6 @@ public class Dizima2 extends GeradorExercicio
 			res = "Dízima \\(\\textbf{composta}\\): existe pelo menos um algarismo não periódico "
 				+ "entre a vírgula e o início do período \\(\\left(\\overline{\\,\\cdot\\,}\\right)\\).";
 		}
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

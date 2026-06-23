@@ -38,10 +38,8 @@ public abstract class MetricoBase extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\," + unidDestino + "\\)", distratores);
 
-		setResolucao(
-			"\\(1\\," + unidOrigem + " = " + fator + "\\," + unidDestino + "\\), logo multiplicar por " + fator + ": \\(\\\\\\)" +
-			"\\(" + valor + " \\times " + fator + " = \\mathbf{" + resultado + "}\\," + unidDestino + "\\)"
-		);
+		addResolucao("\\(1\\," + unidOrigem + " = " + fator + "\\," + unidDestino + "\\), logo multiplicar por " + fator + ":");
+		addResolucao("\\(" + valor + " \\times " + fator + " = \\mathbf{" + resultado + "}\\," + unidDestino + "\\)");
 	}
 
 	// Conversão de unidade MENOR para MAIOR (divisão exata): origem = resultado × fator.
@@ -60,10 +58,8 @@ public abstract class MetricoBase extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\," + unidDestino + "\\)", distratores);
 
-		setResolucao(
-			"\\(1\\," + unidDestino + " = " + fator + "\\," + unidOrigem + "\\), logo dividir por " + fator + ": \\(\\\\\\)" +
-			"\\(" + valor + " \\div " + fator + " = \\mathbf{" + resultado + "}\\," + unidDestino + "\\)"
-		);
+		addResolucao("\\(1\\," + unidDestino + " = " + fator + "\\," + unidOrigem + "\\), logo dividir por " + fator + ":");
+		addResolucao("\\(" + valor + " \\div " + fator + " = \\mathbf{" + resultado + "}\\," + unidDestino + "\\)");
 	}
 
 	private void adicionarDistrator(List<String> distratores, long valor, String unidadeLatex, long correto)

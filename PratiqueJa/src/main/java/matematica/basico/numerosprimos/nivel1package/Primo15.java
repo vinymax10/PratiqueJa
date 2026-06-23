@@ -21,6 +21,8 @@ public class Primo15 extends AgrupadorPrimo
 		addParagrafo("Qual é o maior fator primo de \\(" + n + "\\)?");
 		gerarAlternativasInteiras(maiorFator);
 
-		setResolucao(resolucaoFatoracao(n) + " \\(\\\\\\) Maior fator primo: \\(\\mathbf{" + maiorFator + "}\\)");
+		for(String passo : resolucaoFatoracao(n))
+			addResolucao(passo);
+		addResolucao("Maior fator primo: \\(\\mathbf{" + maiorFator + "}\\)");
 	}
 }

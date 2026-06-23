@@ -57,12 +57,10 @@ public class Expressao3 extends GeradorExercicio
 		String concav = a > 0 ? "cima (\\(a > 0\\))" : "baixo (\\(a < 0\\))";
 		String imStr  = a > 0 ? "[y_v,\\ +\\infty)" : "(-\\infty,\\ y_v]";
 
-		String res = ResolucaoFuncaoQuadratica.resolucaoYv(a, b, c);
-		res += "\\(\\\\\\)";
-		res += "A parábola abre para " + concav + ", logo \\(\\text{Im}(f) = " + imStr + "\\): \\(\\\\\\)";
-		res += "\\(\\text{Im}(f) = \\mathbf{" + (a > 0 ? "[" : "(-\\infty,\\ ") + yvStr
-			+ (a > 0 ? ",\\ +\\infty)" : "]") + "}\\)";
-
-		setResolucao(res);
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoYv(a, b, c))
+			addResolucao(passo);
+		addResolucao("A parábola abre para " + concav + ", logo \\(\\text{Im}(f) = " + imStr + "\\):");
+		addResolucao("\\(\\text{Im}(f) = \\mathbf{" + (a > 0 ? "[" : "(-\\infty,\\ ") + yvStr
+			+ (a > 0 ? ",\\ +\\infty)" : "]") + "}\\)");
 	}
 }

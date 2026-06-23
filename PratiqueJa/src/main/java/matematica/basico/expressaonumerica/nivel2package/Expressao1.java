@@ -31,7 +31,7 @@ public class Expressao1 extends AgrupadorExercicio
 		addParagrafo("\\(" + a + " " + t1 + " " + par + " = \\,?\\)");
 		gerarAlternativas("" + result);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& " + a + " " + t1 + " " + par + " = \\\\" +
 			"& " + a + " " + t1 + " " + p1 + " = " + result + "\\end{aligned}\\)"

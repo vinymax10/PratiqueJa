@@ -25,6 +25,6 @@ public class Image7 extends GeradorExercicio
 				+ "Sabendo que \\(\\text{sen}~" + angle + " = " + sen.showDfrac() + "\\), "
 				+ "qual o valor de \\(x\\)?");
 		gerarAlternativas("" + resultado);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

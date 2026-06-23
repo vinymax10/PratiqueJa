@@ -29,10 +29,8 @@ public class Exercicio6 extends GeradorExercicio
 		distratores.add("\\(" + (vCone + r2) + "\\pi\\,\\text{cm}^3\\)"); // off por r²π
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "O volume do cone é sempre \\(\\dfrac{1}{3}\\) do volume do cilindro de mesma base e altura:"
-				+ "\\(\\\\\\)"
-				+ "\\(V_{\\text{cone}} = \\dfrac{V_{\\text{cilindro}}}{3} = \\dfrac{" + vCil
-				+ "\\pi}{3} = \\mathbf{" + vCone + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+		addResolucao("O volume do cone é sempre \\(\\dfrac{1}{3}\\) do volume do cilindro de mesma base e altura:");
+		addResolucao("\\(V_{\\text{cone}} = \\dfrac{V_{\\text{cilindro}}}{3} = \\dfrac{" + vCil
+				+ "\\pi}{3} = \\mathbf{" + vCone + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

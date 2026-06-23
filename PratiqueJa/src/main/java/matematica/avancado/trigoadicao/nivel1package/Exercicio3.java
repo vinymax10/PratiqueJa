@@ -42,8 +42,7 @@ public class Exercicio3 extends GeradorExercicio
 		addParagrafo("Use a fórmula de duplicação para calcular \\(\\operatorname{sen}(2 \\cdot " + angulo + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Pela fórmula \\(\\operatorname{sen}(2a) = 2\\operatorname{sen}\\,a\\cos a\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{sen}(2 \\cdot " + angulo + ") = " + passo1 + " = \\mathbf{" + resultado + "}\\)");
+		addResolucao("Pela fórmula \\(\\operatorname{sen}(2a) = 2\\operatorname{sen}\\,a\\cos a\\):");
+		addResolucao("\\(\\operatorname{sen}(2 \\cdot " + angulo + ") = " + passo1 + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

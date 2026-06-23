@@ -33,14 +33,11 @@ public class Image5 extends GeradorExercicio
 		String resultadoCorreto = "" + (2 * l);
 		gerarAlternativas(resultadoCorreto);
 
-		String res = "No triângulo 30°-60°-90°, a hipotenusa é o dobro do cateto menor:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPitagoras.formula() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + l + "^2 + (\\sqrt{" + (3 * l * l) + "})^2 = a^2 \\\\";
-		res += (l * l) + " + " + (3 * l * l) + " = a^2 \\\\";
-		res += "a^2 = " + (4 * l * l) + " \\\\";
-		res += "a = \\sqrt{" + (4 * l * l) + "} = \\mathbf{" + (2 * l) + "}\\)";
-		setResolucao(res);
+		addResolucao("No triângulo 30°-60°-90°, a hipotenusa é o dobro do cateto menor:");
+		addResolucao("\\(" + ResolucaoPitagoras.formula() + "\\)");
+		addResolucao("\\(" + l + "^2 + (\\sqrt{" + (3 * l * l) + "})^2 = a^2\\)");
+		addResolucao("\\(" + (l * l) + " + " + (3 * l * l) + " = a^2\\)");
+		addResolucao("\\(a^2 = " + (4 * l * l) + "\\)");
+		addResolucao("\\(a = \\sqrt{" + (4 * l * l) + "} = \\mathbf{" + (2 * l) + "}\\)");
 	}
 }

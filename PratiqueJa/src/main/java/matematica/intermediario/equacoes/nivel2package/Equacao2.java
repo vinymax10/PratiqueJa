@@ -23,13 +23,12 @@ public class Equacao2 extends GeradorExercicio
 		addParagrafo("Encontre \\(" + var + "\\)");
 		addParagrafo("\\(" + a + "(" + bStr + var + " + " + c + ") = " + d + "\\)");
 
-		String res = "Aplicando a propriedade distributiva: \\(\\\\\\)";
-		res += "\\(" + ab + var + " + " + ac + " = " + d + "\\). \\(\\\\\\)";
-		res += "Isolando o termo com \\(" + var + "\\): \\(\\\\\\)";
-		res += "\\(" + ab + var + " = " + d + " - " + ac + " = " + (d - ac) + "\\). \\(\\\\\\)";
-		res += "\\(" + var + " = \\dfrac{" + (d - ac) + "}{" + ab + "} = " + xResult + "\\).";
+		addResolucao("Aplicando a propriedade distributiva:");
+		addResolucao("\\(" + ab + var + " + " + ac + " = " + d + "\\).");
+		addResolucao("Isolando o termo com \\(" + var + "\\):");
+		addResolucao("\\(" + ab + var + " = " + d + " - " + ac + " = " + (d - ac) + "\\).");
+		addResolucao("\\(" + var + " = \\dfrac{" + (d - ac) + "}{" + ab + "} = " + xResult + "\\).");
 
-		setResolucao(res);
 		gerarAlternativas("" + xResult);
 	}
 }

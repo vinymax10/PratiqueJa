@@ -16,7 +16,7 @@ public class Image15 extends GeradorExercicio
 		int l = 2 * (3 + rand.nextInt(13));
 
 		String resultadoCorreto = "" + (3 * l);
-		String resolucao = ResolucaoAreaPerimetro.perimetroTrianguloEquilatero(l);
+		String[] passosResolucao = ResolucaoAreaPerimetro.perimetroTrianguloEquilatero(l);
 
 		ConfigImagem config = new ConfigTrianguloEquilatero("" + l, false);
 		BufferedImage image = config.criarImagem();
@@ -24,6 +24,7 @@ public class Image15 extends GeradorExercicio
 		addParagrafo("Qual o perímetro do triângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

@@ -18,11 +18,9 @@ public class Exercicio4 extends GeradorExercicio
 
 		gerarAlternativasInteiras(resultado);
 
-		String res = "A razão das áreas é igual ao quadrado da razão de semelhança:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\dfrac{A'}{A} = k^2 = " + p + "^2 = " + (p * p) + "\\\\"
-				+ "A' = A \\times " + (p * p) + " = " + A + " \\times " + (p * p)
-				+ " = \\mathbf{" + resultado + "}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("A razão das áreas é igual ao quadrado da razão de semelhança:");
+		addResolucao("\\(\\dfrac{A'}{A} = k^2 = " + p + "^2 = " + (p * p) + "\\)");
+		addResolucao("\\(A' = A \\times " + (p * p) + " = " + A + " \\times " + (p * p)
+				+ " = \\mathbf{" + resultado + "}\\,\\text{cm}^2\\)");
 	}
 }

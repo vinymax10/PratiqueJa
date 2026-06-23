@@ -46,7 +46,7 @@ public class Expressao4 extends AgrupadorExercicio
 		addParagrafo("\\(\\dfrac{" + a + " " + t1 + " " + b + "}{" + c + "} " + t2 + " \\dfrac{" + d + " " + t3 + " " + e + "}{" + f + "} = \\,?\\)");
 		gerarAlternativas("" + result);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& \\dfrac{" + a + " " + t1 + " " + b + "}{" + c + "} " + t2 + " \\dfrac{" + d + " " + t3 + " " + e + "}{" + f + "} = \\\\" +
 			"& \\dfrac{" + p1 + "}{" + c + "} " + t2 + " \\dfrac{" + p2 + "}{" + f + "} = \\\\" +

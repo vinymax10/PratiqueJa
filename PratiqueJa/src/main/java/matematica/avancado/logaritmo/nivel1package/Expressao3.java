@@ -15,11 +15,10 @@ public class Expressao3 extends GeradorExercicio
 		addParagrafo("Aplique a propriedade \\(\\log_b b^n = n\\):");
 		addParagrafo("\\(\\log_{" + b + "} " + b + "^{" + n + "} = \\,?\\)");
 
-		String res = "A potência e o logaritmo de mesma base se cancelam: \\(\\\\\\)";
-		res += "\\(\\log_{" + b + "} " + b + "^{" + n + "} = " + n + "\\), pois \\(" + b + "^{" + n + "} = " + b + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "\\(\\log_{" + b + "} " + b + "^{" + n + "} = \\mathbf{" + n + "}\\)";
+		addResolucao("A potência e o logaritmo de mesma base se cancelam:");
+		addResolucao("\\(\\log_{" + b + "} " + b + "^{" + n + "} = " + n + "\\), pois \\(" + b + "^{" + n + "} = " + b + "^{" + n + "}\\)");
+		addResolucao("\\(\\log_{" + b + "} " + b + "^{" + n + "} = \\mathbf{" + n + "}\\)");
 
 		gerarAlternativas("" + n);
-		setResolucao(res);
 	}
 }

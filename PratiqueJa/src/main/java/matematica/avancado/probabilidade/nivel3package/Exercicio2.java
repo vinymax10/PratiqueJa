@@ -55,17 +55,16 @@ public class Exercicio2 extends GeradorExercicio
 			dis.add("\\(" + dSoB.showDfrac() + "\\)");     // só C(b,2)/C(total,2)
 			embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", dis);
 
-			String resolucao = "Usando combinações para contar os casos:\\(\\\\\\)";
-			resolucao += "\\(A =\\) duas bolas da mesma cor\\(\\\\\\)";
-			resolucao += "\\(n(\\Omega) = C_{" + total + ",2} = \\dfrac{" + total + " \\cdot " + (total-1) + "}{2} = " + cT2 + " \\\\";
-			resolucao += "n(A) = C_{" + a + ",2} + C_{" + b + ",2} = "
+			addResolucao("Usando combinações para contar os casos:");
+			addResolucao("\\(A =\\) duas bolas da mesma cor");
+			addResolucao("\\(n(\\Omega) = C_{" + total + ",2} = \\dfrac{" + total + " \\cdot " + (total-1) + "}{2} = " + cT2 + "\\)");
+			addResolucao("\\(n(A) = C_{" + a + ",2} + C_{" + b + ",2} = "
 					+ "\\dfrac{" + a + " \\cdot " + (a-1) + "}{2} + \\dfrac{" + b + " \\cdot " + (b-1) + "}{2} = "
-					+ cA2 + "+" + cB2 + "=" + numFav + " \\\\";
+					+ cA2 + "+" + cB2 + "=" + numFav + "\\)");
 			if(resSimp)
-				resolucao += "P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)";
+				addResolucao("\\(P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)");
 			else
-				resolucao += "P(A)=\\mathbf{" + fraRes + "}\\)";
-			setResolucao(resolucao);
+				addResolucao("\\(P(A)=\\mathbf{" + fraRes + "}\\)");
 		}
 		else
 		{
@@ -88,15 +87,14 @@ public class Exercicio2 extends GeradorExercicio
 			dis.add("\\(" + dSoB.showDfrac() + "\\)");     // só C(b,2)/C(total,2)
 			embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", dis);
 
-			String resolucao = "Usando combinações para contar os casos:\\(\\\\\\)";
-			resolucao += "\\(A =\\) duas bolas de cores diferentes\\(\\\\\\)";
-			resolucao += "\\(n(\\Omega) = C_{" + total + ",2} = \\dfrac{" + total + " \\cdot " + (total-1) + "}{2} = " + cT2 + " \\\\";
-			resolucao += "n(A) = C_{" + a + ",1} \\cdot C_{" + b + ",1} = " + a + " \\cdot " + b + " = " + numFav + " \\\\";
+			addResolucao("Usando combinações para contar os casos:");
+			addResolucao("\\(A =\\) duas bolas de cores diferentes");
+			addResolucao("\\(n(\\Omega) = C_{" + total + ",2} = \\dfrac{" + total + " \\cdot " + (total-1) + "}{2} = " + cT2 + "\\)");
+			addResolucao("\\(n(A) = C_{" + a + ",1} \\cdot C_{" + b + ",1} = " + a + " \\cdot " + b + " = " + numFav + "\\)");
 			if(resSimp)
-				resolucao += "P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)";
+				addResolucao("\\(P(A)=" + fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)");
 			else
-				resolucao += "P(A)=\\mathbf{" + fraRes + "}\\)";
-			setResolucao(resolucao);
+				addResolucao("\\(P(A)=\\mathbf{" + fraRes + "}\\)");
 		}
 	}
 }

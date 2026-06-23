@@ -18,8 +18,7 @@ public class FatorFaltante extends GeradorExercicio
 
 		gerarAlternativasInteiras(a);
 
-		String res = "Para encontrar o fator desconhecido, dividimos o produto pelo fator conhecido: \\(\\\\\\)";
-		res += "\\(\\square = " + produto + " \\div " + b + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("Para encontrar o fator desconhecido, dividimos o produto pelo fator conhecido:");
+		addResolucao("\\(\\square = " + produto + " \\div " + b + " = \\mathbf{" + a + "}\\)");
 	}
 }

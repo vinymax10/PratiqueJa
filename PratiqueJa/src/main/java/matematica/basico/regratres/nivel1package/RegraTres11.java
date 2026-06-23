@@ -28,9 +28,8 @@ public class RegraTres11 extends GeradorExercicio
 		addParagrafo(texto);
 		gerarAlternativas("" + k);
 
-		String res = "Calcular \\(" + p + "\\%\\) de \\(" + valor + "\\): \\(\\\\\\)";
-		res += "\\(\\dfrac{" + p + "}{100} \\times " + valor + " = \\\\ \\)";
-		res += "\\(\\dfrac{" + (p * valor) + "}{100} = \\mathbf{" + k + "}\\)";
-		setResolucao(res);
+		addResolucao("Calcular \\(" + p + "\\%\\) de \\(" + valor + "\\):");
+		addResolucao("\\(\\dfrac{" + p + "}{100} \\times " + valor + " =\\)");
+		addResolucao("\\(\\dfrac{" + (p * valor) + "}{100} = \\mathbf{" + k + "}\\)");
 	}
 }

@@ -64,6 +64,6 @@ public class JurosDesconto2 extends GeradorExercicio
 				break;
 		}
 
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -35,39 +35,33 @@ public class ProblemaPascal
 		}
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		switch(tipo)
 		{
 			case Subconjuntos: return resolucaoSubconjuntos();
 			case Binomial: return resolucaoBinomial();
 		}
-		return "";
+		return new String[]{};
 	}
 
-	private String resolucaoSubconjuntos()
+	private String[] resolucaoSubconjuntos()
 	{
-		String res = "Cada um dos \\(n\\) elementos pode estar ou não no subconjunto, gerando \\(2^n\\) subconjuntos (a soma da linha \\(n\\) do Triângulo de Pascal):";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\text{subconjuntos} = 2^n") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(2^{" + n + "} = \\mathbf{" + resultado() + "}\\)";
-		return res;
+		String passoIntroducao = "Cada um dos \\(n\\) elementos pode estar ou não no subconjunto, gerando \\(2^n\\) subconjuntos (a soma da linha \\(n\\) do Triângulo de Pascal):";
+		String passoFormula = "\\(" + ParCor.formula("\\text{subconjuntos} = 2^n") + "\\)";
+		String passoSubstituicao = "Com \\(n = " + n + "\\):";
+		String passoResultado = "\\(2^{" + n + "} = \\mathbf{" + resultado() + "}\\)";
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoResultado};
 	}
 
-	private String resolucaoBinomial()
+	private String[] resolucaoBinomial()
 	{
-		String res = "O coeficiente binomial conta de quantas formas escolher \\(k\\) elementos entre \\(n\\) (valor de uma posição no Triângulo de Pascal):";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\binom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(\\binom{" + n + "}{" + k + "} = \\dfrac{" + n + "!}{" + k + "!\\,(" + n + "-" + k + ")!} = \\\\ ";
-		res += "\\dfrac{" + Algebra.fatorial(n) + "}{" + Algebra.fatorial(k) + " \\cdot " + Algebra.fatorial(n-k) + "} = \\mathbf{" + resultado() + "}\\)";
-		return res;
+		String passoIntroducao = "O coeficiente binomial conta de quantas formas escolher \\(k\\) elementos entre \\(n\\) (valor de uma posição no Triângulo de Pascal):";
+		String passoFormula = "\\(" + ParCor.formula("\\binom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}") + "\\)";
+		String passoSubstituicao = "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
+		String passoExpansao = "\\(\\binom{" + n + "}{" + k + "} = \\dfrac{" + n + "!}{" + k + "!\\,(" + n + "-" + k + ")!} =\\)";
+		String passoResultado = "\\(\\dfrac{" + Algebra.fatorial(n) + "}{" + Algebra.fatorial(k) + " \\cdot " + Algebra.fatorial(n-k) + "} = \\mathbf{" + resultado() + "}\\)";
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoResultado};
 	}
 
 	public String resultado()

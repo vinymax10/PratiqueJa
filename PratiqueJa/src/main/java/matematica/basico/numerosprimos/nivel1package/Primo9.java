@@ -16,6 +16,8 @@ public class Primo9 extends AgrupadorPrimo
 		addParagrafo("Qual é o menor fator primo de \\(" + n + "\\)?");
 		gerarAlternativasInteiras(menorFator);
 
-		setResolucao(resolucaoFatoracao(n) + " \\(\\\\\\) Menor fator primo: \\(\\mathbf{" + menorFator + "}\\)");
+		for(String passo : resolucaoFatoracao(n))
+			addResolucao(passo);
+		addResolucao("Menor fator primo: \\(\\mathbf{" + menorFator + "}\\)");
 	}
 }

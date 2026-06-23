@@ -76,14 +76,15 @@ public class ProblemaFuncaoQuadratica
 		return tipo == TipoFuncaoQuadratica.ABSCISSA ? xv : yv;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res;
 		if(tipo == TipoFuncaoQuadratica.ABSCISSA)
 		{
-			res  = "O ponto ótimo é a abscissa do vértice da parábola, dada por \\(x_v = \\dfrac{-b}{2a}\\). \\(\\\\\\)";
-			res += "Com \\(a = -" + a + "\\) e \\(b = " + b + "\\): \\(\\\\\\)";
-			res += "\\(x_v = \\dfrac{-" + b + "}{2 \\cdot (-" + a + ")} = \\dfrac{-" + b + "}{-" + (2 * a) + "} = \\mathbf{" + xv + "}\\) " + unidade;
+			return new String[] {
+				"O ponto ótimo é a abscissa do vértice da parábola, dada por \\(x_v = \\dfrac{-b}{2a}\\).",
+				"Com \\(a = -" + a + "\\) e \\(b = " + b + "\\):",
+				"\\(x_v = \\dfrac{-" + b + "}{2 \\cdot (-" + a + ")} = \\dfrac{-" + b + "}{-" + (2 * a) + "} = \\mathbf{" + xv + "}\\) " + unidade
+			};
 		}
 		else
 		{
@@ -91,11 +92,12 @@ public class ProblemaFuncaoQuadratica
 			int t2 = b * xv;
 			String cNum = (c > 0 ? " + " + c : "");
 			String aFat = (a == 1 ? "" : a + " \\cdot ");
-			res  = "O valor máximo é a ordenada do vértice. Primeiro achamos a abscissa \\(x_v = \\dfrac{-b}{2a}\\): \\(\\\\\\)";
-			res += "\\(x_v = \\dfrac{-" + b + "}{2 \\cdot (-" + a + ")} = " + xv + "\\\\";
-			res += "f(" + xv + ") = -" + aFat + xv + "^2 + " + b + " \\cdot " + xv + cNum + "\\\\";
-			res += "f(" + xv + ") = " + t1 + " + " + t2 + cNum + " = \\mathbf{" + yv + "}\\) " + unidade;
+			return new String[] {
+				"O valor máximo é a ordenada do vértice. Primeiro achamos a abscissa \\(x_v = \\dfrac{-b}{2a}\\):",
+				"\\(x_v = \\dfrac{-" + b + "}{2 \\cdot (-" + a + ")} = " + xv + "\\)",
+				"\\(f(" + xv + ") = -" + aFat + xv + "^2 + " + b + " \\cdot " + xv + cNum + "\\)",
+				"\\(f(" + xv + ") = " + t1 + " + " + t2 + cNum + " = \\mathbf{" + yv + "}\\) " + unidade
+			};
 		}
-		return res;
 	}
 }

@@ -32,11 +32,10 @@ public class Exercicio7 extends GeradorExercicio
 
 		gerarAlternativas(String.valueOf(x));
 
-		String res = "A proporção entre os lados correspondentes:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\dfrac{" + ladoMenor + "}{" + M + "} = \\dfrac{1}{" + p + "}\\\\"
-				+ p + "(" + ladoMenor + ") = " + M + "\\\\"
-				+ resolucao + "\\)";
-		setResolucao(res);
+		addResolucao("A proporção entre os lados correspondentes:");
+		addResolucao("\\(\\dfrac{" + ladoMenor + "}{" + M + "} = \\dfrac{1}{" + p + "}\\)");
+		addResolucao("\\(" + p + "(" + ladoMenor + ") = " + M + "\\)");
+		for(String passo : resolucao.split("\\\\\\\\"))
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

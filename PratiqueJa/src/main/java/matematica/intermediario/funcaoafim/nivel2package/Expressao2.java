@@ -20,24 +20,23 @@ public class Expressao2 extends GeradorExercicio
 		int av = a * v;
 		String vDisp = v < 0 ? "\\left(" + v + "\\right)" : "" + v;
 
-		String res = "Se \\((" + v + ",\\ " + w + ")\\) pertence ao gráfico, então "
-			+ "\\(f(" + v + ") = " + w + "\\): \\(\\\\\\)";
+		gerarAlternativas("" + b);
+
+		addResolucao("Se \\((" + v + ",\\ " + w + ")\\) pertence ao gráfico, então "
+			+ "\\(f(" + v + ") = " + w + "\\):");
 
 		if(a == 1)
-			res += "\\(" + vDisp + " + b = " + w + "\\) \\(\\\\\\)";
+			addResolucao("\\(" + vDisp + " + b = " + w + "\\)");
 		else if(a == -1)
-			res += "\\(-" + vDisp + " + b = " + w + "\\) \\(\\\\\\)";
+			addResolucao("\\(-" + vDisp + " + b = " + w + "\\)");
 		else
-			res += "\\(" + a + " \\cdot " + vDisp + " + b = " + w + "\\) \\(\\\\\\)";
+			addResolucao("\\(" + a + " \\cdot " + vDisp + " + b = " + w + "\\)");
 
-		res += "\\(" + av + " + b = " + w + "\\) \\(\\\\\\)";
+		addResolucao("\\(" + av + " + b = " + w + "\\)");
 
 		if(av >= 0)
-			res += "\\(b = " + w + " - " + av + " = \\mathbf{" + b + "}\\)";
+			addResolucao("\\(b = " + w + " - " + av + " = \\mathbf{" + b + "}\\)");
 		else
-			res += "\\(b = " + w + " + " + Math.abs(av) + " = \\mathbf{" + b + "}\\)";
-
-		gerarAlternativas("" + b);
-		setResolucao(res);
+			addResolucao("\\(b = " + w + " + " + Math.abs(av) + " = \\mathbf{" + b + "}\\)");
 	}
 }

@@ -19,20 +19,18 @@ public class Image28 extends GeradorExercicio
 
 		String resultadoCorreto = "" + raio;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += "2 \\cdot(" + b + " + h)=" + perimetro + "\\\\";
-		resolucao += b + " + h=\\dfrac{" + perimetro + "}{2}=" + (b + h) + "\\\\";
-		resolucao += "h=" + (b + h) + "-" + b + "=" + h + "\\\\";
-		resolucao += "2r=" + h + "\\\\";
-		resolucao += "r=\\dfrac{" + h + "}{" + 2 + "}=" + raio + "\\\\";
-
 		ConfigRetangulo2 config = new ConfigRetangulo2("" + b, "h", "r", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do retângulo é \\(" + perimetro + "\\), qual o valor de \\(r\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(2 \\cdot(" + b + " + h)=" + perimetro + "\\)");
+		addResolucao("\\(" + b + " + h=\\dfrac{" + perimetro + "}{2}=" + (b + h) + "\\)");
+		addResolucao("\\(h=" + (b + h) + "-" + b + "=" + h + "\\)");
+		addResolucao("\\(2r=" + h + "\\)");
+		addResolucao("\\(r=\\dfrac{" + h + "}{" + 2 + "}=" + raio + "\\)");
 	}
 }

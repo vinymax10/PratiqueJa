@@ -43,22 +43,20 @@ public class Expressao4 extends GeradorExercicio
 
 		String quotient = Polinomio.formatar(1, q1, q2);
 
-		String res = "Como \\(x = " + r1 + "\\) é raiz, \\((x - " + r1
-				+ ")\\) é fator. Aplicando Briot-Ruffini:\\(\\\\\\)";
-		res += "Coeficientes: \\(1, " + B + ", " + C + ", " + D
-				+ "\\) com \\(a = " + r1 + "\\)\\(\\\\\\)";
-		res += "\\(1 \\cdot " + r1 + Auxiliar.getNumber(B, "", false) + " = " + q1
-				+ "\\)\\(\\\\\\)";
-		res += "\\(" + q1 + " \\cdot " + r1 + Auxiliar.getNumber(C, "", false) + " = " + q2
-				+ "\\)\\(\\\\\\)";
-		res += "Quociente: \\(" + quotient + "\\)\\(\\\\\\)";
-		res += "Fatorando o quociente: \\(" + quotient + " = (x - " + r2 + ")(x - " + r3
-				+ ")\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{p(x) = " + correct + "}\\)";
-
 		addParagrafo("Sabendo que \\(x = " + r1 + "\\) é raiz, fatore completamente \\(p(x)\\).");
 		addParagrafo("\\(p(x) = " + poly + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Como \\(x = " + r1 + "\\) é raiz, \\((x - " + r1
+				+ ")\\) é fator. Aplicando Briot-Ruffini:");
+		addResolucao("Coeficientes: \\(1, " + B + ", " + C + ", " + D
+				+ "\\) com \\(a = " + r1 + "\\)");
+		addResolucao("\\(1 \\cdot " + r1 + Auxiliar.getNumber(B, "", false) + " = " + q1
+				+ "\\)");
+		addResolucao("\\(" + q1 + " \\cdot " + r1 + Auxiliar.getNumber(C, "", false) + " = " + q2
+				+ "\\)");
+		addResolucao("Quociente: \\(" + quotient + "\\)");
+		addResolucao("Fatorando o quociente: \\(" + quotient + " = (x - " + r2 + ")(x - " + r3
+				+ ")\\)");
+		addResolucao("\\(\\mathbf{p(x) = " + correct + "}\\)");
 	}
 }

@@ -21,8 +21,7 @@ public class MissingTermo extends GeradorExercicio
 
 		gerarAlternativasInteirasComNegativos(missing);
 
-		String res = "Isolamos o termo desconhecido usando a operação inversa: \\(\\\\\\)";
-		res += "\\(\\square = " + c + Auxiliar.getNumber(-b, "", false) + " = \\mathbf{" + missing + "}\\)";
-		setResolucao(res);
+		addResolucao("Isolamos o termo desconhecido usando a operação inversa:");
+		addResolucao("\\(\\square = " + c + Auxiliar.getNumber(-b, "", false) + " = \\mathbf{" + missing + "}\\)");
 	}
 }

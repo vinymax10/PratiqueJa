@@ -35,40 +35,35 @@ public class Matrizes3 extends GeradorExercicio
 
 		String resultadoCorreto = AuxMatriz.somaRacional(inversaA) + "";
 
-		String resolucao = "";
-		resolucao += ParCor.formula(AuxMatriz.formulaInversa()) + " \\\\";
-		resolucao += ParCor.formula("\\det~ A = a_{1,1} \\cdot a_{2,2} - a_{1,2} \\cdot a_{2,1}") + "\\\\";
-
-		resolucao += "\\det~ A = " + a[0][0] + " \\cdot " + AuxMatriz.parenteses(a[1][1]) +
-		"-" + AuxMatriz.parenteses(a[0][1]) + " \\cdot " + AuxMatriz.parenteses(a[1][0]) + "\\\\";
-		resolucao += "\\det~ A =" + (a[0][0] * a[1][1]) + "-" + AuxMatriz.parenteses(a[0][1] * a[1][0]) + "=" + determinanteA + "\\\\";
-
-		resolucao += "A^{-1} =" + fator.showDfrac() + "\\cdot " + AuxMatriz.matrizStr(parcialInversa) + "\\\\";
-
-		resolucao += "A^{-1}=\\begin{bmatrix}";
-
-		for(int i = 0; i < size; i++)
-		{
-			for(int j = 0; j < size; j++)
-			{
-				resolucao += fator.showDfrac() + " \\cdot " + AuxMatriz.parenteses(parcialInversa[i][j]);
-
-				if(j < (size - 1))
-					resolucao += "&";
-			}
-			resolucao += "\\\\";
-		}
-
-		resolucao += "\\end{bmatrix}" + "\\\\ \\\\";
-
-		resolucao += "A^{-1}=" + AuxMatriz.matrizStrRacional(inversaA) + "\\\\ \\\\";
-		resolucao += AuxMatriz.somaStrRacional(inversaA);
-
 		String texto = "A=" + AuxMatriz.matrizStr(a);
 
 		addParagrafo("Qual a soma dos elementos de \\( A^{-1} \\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(" + ParCor.formula(AuxMatriz.formulaInversa()) + "\\)");
+		addResolucao("\\(" + ParCor.formula("\\det~ A = a_{1,1} \\cdot a_{2,2} - a_{1,2} \\cdot a_{2,1}") + "\\)");
+		addResolucao("\\(\\det~ A = " + a[0][0] + " \\cdot " + AuxMatriz.parenteses(a[1][1]) +
+			"-" + AuxMatriz.parenteses(a[0][1]) + " \\cdot " + AuxMatriz.parenteses(a[1][0]) + "\\)");
+		addResolucao("\\(\\det~ A =" + (a[0][0] * a[1][1]) + "-" + AuxMatriz.parenteses(a[0][1] * a[1][0]) + "=" + determinanteA + "\\)");
+		addResolucao("\\(A^{-1} =" + fator.showDfrac() + "\\cdot " + AuxMatriz.matrizStr(parcialInversa) + "\\)");
+
+		String calc = "A^{-1}=\\begin{bmatrix}";
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				calc += fator.showDfrac() + " \\cdot " + AuxMatriz.parenteses(parcialInversa[i][j]);
+
+				if(j < (size - 1))
+					calc += "&";
+			}
+			calc += "\\\\";
+		}
+		calc += "\\end{bmatrix}";
+		addResolucao("\\(" + calc + "\\)");
+
+		addResolucao("\\(A^{-1}=" + AuxMatriz.matrizStrRacional(inversaA) + "\\)");
+		addResolucao("\\(" + AuxMatriz.somaStrRacional(inversaA) + "\\)");
 	}
 }

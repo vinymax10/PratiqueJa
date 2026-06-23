@@ -27,9 +27,7 @@ public class Exercicio7 extends GeradorExercicio
 
 		gerarAlternativasInteiras(answer, 4, false);
 
-		String res = "Na forma canônica \\((x-a)^2 + (y-b)^2 = r^2\\) o centro é \\(C(a;\\;b)\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(C = (" + cx + ";\\;" + cy + ") \\Rightarrow " + coordLatex + " = \\mathbf{" + answer + "}\\)";
-		setResolucao(res);
+		addResolucao("Na forma canônica \\((x-a)^2 + (y-b)^2 = r^2\\) o centro é \\(C(a;\\;b)\\):");
+		addResolucao("\\(C = (" + cx + ";\\;" + cy + ") \\Rightarrow " + coordLatex + " = \\mathbf{" + answer + "}\\)");
 	}
 }

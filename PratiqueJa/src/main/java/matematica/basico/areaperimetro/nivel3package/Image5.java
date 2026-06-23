@@ -16,17 +16,15 @@ public class Image5 extends GeradorExercicio
 		String area = "" + (4 * a * a);
 		String resultadoCorreto = "" + a;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
-		resolucao += "l^2=" + area + "\\\\";
-		resolucao += "l=" + "\\sqrt{" + area + "} = " + (2 * a) + "\\\\";
-		resolucao += "r=\\dfrac{l}{2}=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\\\";
-
 		ConfigQuadrado3 config = new ConfigQuadrado3("l", "r", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(r\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\)");
+		addResolucao("\\(l^2=" + area + "\\)");
+		addResolucao("\\(l=" + "\\sqrt{" + area + "} = " + (2 * a) + "\\)");
+		addResolucao("\\(r=\\dfrac{l}{2}=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\)");
 	}
 }

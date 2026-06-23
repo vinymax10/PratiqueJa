@@ -30,6 +30,7 @@ public class Image2 extends GeradorExercicio
 		addParagrafo("\\(" + funcao + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas(dados.yVerticeRacional);
-		setResolucao(ResolucaoFuncaoQuadratica.resolucaoYv(dados.a, dados.b, dados.c));
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoYv(dados.a, dados.b, dados.c))
+			addResolucao(passo);
 	}
 }

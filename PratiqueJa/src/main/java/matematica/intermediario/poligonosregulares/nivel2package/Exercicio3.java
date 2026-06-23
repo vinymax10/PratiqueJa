@@ -21,20 +21,17 @@ public class Exercicio3 extends GeradorExercicio
 		int n = caso[1];
 		int ae = 180 - ai;
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaAnguloInterno() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ai + "^\\circ = \\dfrac{(n-2) \\times 180^\\circ}{n} \\\\ ";
-		res += ai + "n = (n-2) \\times 180 \\\\ ";
-		res += ai + "n = 180n - 360 \\\\ ";
-		res += "360 = " + ae + "n \\\\ ";
-		res += "n = \\dfrac{360}{" + ae + "} = \\mathbf{" + n + "}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Cada ângulo interno de um polígono regular mede \\(" + ai + "^\\circ\\). Quantos lados ele tem?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + n);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaAnguloInterno() + "\\)");
+		addResolucao("\\(" + ai + "^\\circ = \\dfrac{(n-2) \\times 180^\\circ}{n}\\)");
+		addResolucao("\\(" + ai + "n = (n-2) \\times 180\\)");
+		addResolucao("\\(" + ai + "n = 180n - 360\\)");
+		addResolucao("\\(360 = " + ae + "n\\)");
+		addResolucao("\\(n = \\dfrac{360}{" + ae + "} = \\mathbf{" + n + "}\\)");
 	}
 }

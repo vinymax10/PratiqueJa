@@ -38,7 +38,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				addParagrafo("Uma aplicação rende " + iaStr + "% ao ano em regime de juros compostos. "
 						+ "Qual é a taxa mensal equivalente?");
 				gerarAlternativas(iMensal + "\\%");
-				setResolucao("\\(" + resolucao + "\\)");
+				addResolucao("\\(" + resolucao + "\\)");
 				break;
 			}
 			case 1:
@@ -56,7 +56,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				addParagrafo("Uma aplicação rende " + itStr + "% ao trimestre em regime de juros compostos. "
 						+ "Qual é a taxa mensal equivalente?");
 				gerarAlternativas(iMensal + "\\%");
-				setResolucao("\\(" + resolucao + "\\)");
+				addResolucao("\\(" + resolucao + "\\)");
 				break;
 			}
 			case 2:
@@ -74,7 +74,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				addParagrafo("Uma aplicação rende " + iMensal + "% ao mês em regime de juros compostos. "
 						+ "Qual é a taxa anual equivalente aproximada?");
 				gerarAlternativas(iaStr + "\\%");
-				setResolucao("\\(" + resolucao + "\\)");
+				addResolucao("\\(" + resolucao + "\\)");
 				break;
 			}
 			default:
@@ -92,7 +92,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				addParagrafo("Uma aplicação rende " + iMensal + "% ao mês em regime de juros compostos. "
 						+ "Qual é a taxa trimestral equivalente aproximada?");
 				gerarAlternativas(itStr + "\\%");
-				setResolucao("\\(" + resolucao + "\\)");
+				addResolucao("\\(" + resolucao + "\\)");
 				break;
 			}
 		}

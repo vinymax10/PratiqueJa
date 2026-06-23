@@ -17,17 +17,14 @@ public class Image14 extends GeradorExercicio
 
 		String resultadoCorreto = "" + (2 * ((2 * h) + h));
 
-		String resolucao = "";
-		resolucao += ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\\\";
-		resolucao += "b=2 \\cdot" + h + "=" + (2 * h) + "\\\\";
-		resolucao += "P=2 \\cdot (" + (2 * h) + "+" + h + ")=2 \\cdot " + ((2 * h) + h) + "=" + (2 * ((2 * h) + h));
-
 		ConfigRetangulo config = new ConfigRetangulo("2h", "h", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(h=" + strLado + "\\), qual o perímetro do retângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\)");
+		addResolucao("\\(b=2 \\cdot" + h + "=" + (2 * h) + "\\)");
+		addResolucao("\\(P=2 \\cdot (" + (2 * h) + "+" + h + ")=2 \\cdot " + ((2 * h) + h) + "=" + (2 * ((2 * h) + h)) + "\\)");
 	}
 }

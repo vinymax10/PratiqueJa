@@ -12,6 +12,7 @@ public class Estatistica2 extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		gerarAlternativas("" + problema.resultado());
-		setResolucao(problema.resolucao());
+		for(String passo : problema.resolucao())
+			addResolucao(passo);
 	}
 }

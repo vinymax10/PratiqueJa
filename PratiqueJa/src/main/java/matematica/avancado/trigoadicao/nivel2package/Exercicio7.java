@@ -36,11 +36,10 @@ public class Exercicio7 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (q1 * q2) + "}{" + den + "}\\)");            // esqueceu o termo -sen·sen
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\cos(\\alpha+\\beta) = \\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(\\alpha+\\beta) = \\dfrac{" + q1 + "}{" + r1 + "} \\cdot \\dfrac{" + q2 + "}{" + r2
-				+ "} - \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + p2 + "}{" + r2 + "} = \\\\"
-				+ "\\dfrac{" + (q1 * q2) + "}{" + den + "} - \\dfrac{" + (p1 * p2) + "}{" + den + "} "
+		addResolucao("Pela fórmula \\(\\cos(\\alpha+\\beta) = \\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):");
+		addResolucao("\\(\\cos(\\alpha+\\beta) = \\dfrac{" + q1 + "}{" + r1 + "} \\cdot \\dfrac{" + q2 + "}{" + r2
+				+ "} - \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + p2 + "}{" + r2 + "} =\\)");
+		addResolucao("\\(\\dfrac{" + (q1 * q2) + "}{" + den + "} - \\dfrac{" + (p1 * p2) + "}{" + den + "} "
 				+ "= \\mathbf{\\dfrac{" + num + "}{" + den + "}}\\)");
 	}
 }

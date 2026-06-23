@@ -203,12 +203,13 @@ public class Exercicio5 extends GeradorExercicio
 
 		AuxSemelhancaAngulos.mostrarAngulos(angleResult, config);
 
-		String resolucao = AuxSemelhancaAngulos.resolucao(instrucao, config);
+		String[] passos = AuxSemelhancaAngulos.resolucaoLinhas(instrucao, config);
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : passos)
+			addResolucao("\\(" + passo + "\\)");
 	}
 
 }

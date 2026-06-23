@@ -43,15 +43,13 @@ public class Expressao2 extends GeradorExercicio
 		distratores.add("\\(" + d2 + "\\)");
 		distratores.add("\\(" + d3 + "\\)");
 
-		String res = "O MDC dos coeficientes " + coef2 + ", " + coef1 + " e " + coef0
-				+ " é \\(" + k + "\\).\\(\\\\\\)";
-		res += "Colocando \\(" + k + "\\) em evidência:\\(\\\\\\)";
-		res += "\\(" + poly + " = " + k + "\\left(" + inner + "\\right)\\)\\(\\\\\\)";
-		res += "\\(\\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Fatore o polinômio colocando o fator comum em evidência.");
 		addParagrafo("\\(" + poly + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("O MDC dos coeficientes " + coef2 + ", " + coef1 + " e " + coef0
+				+ " é \\(" + k + "\\).");
+		addResolucao("Colocando \\(" + k + "\\) em evidência:");
+		addResolucao("\\(" + poly + " = " + k + "\\left(" + inner + "\\right)\\)");
+		addResolucao("\\(\\mathbf{" + correct + "}\\)");
 	}
 }

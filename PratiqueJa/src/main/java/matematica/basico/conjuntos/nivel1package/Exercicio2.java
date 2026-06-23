@@ -23,10 +23,7 @@ public class Exercicio2 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		setResolucao(
-			"\\(A \\cap B = " + c + "\\)" +
-			"\\(\\\\\\)" +
-			"Menor elemento de \\(A \\cap B\\) é \\(" + correto + "\\)"
-		);
+		addResolucao("\\(A \\cap B = " + c + "\\)");
+		addResolucao("Menor elemento de \\(A \\cap B\\) é \\(" + correto + "\\)");
 	}
 }

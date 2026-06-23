@@ -25,11 +25,9 @@ public class Exercicio1 extends GeradorExercicio
 
 		gerarAlternativasInteiras(dist);
 
-		String res = "Aplicando a fórmula da distância entre dois pontos:"
-				+ "\\(\\\\\\)"
-				+ "\\(d_{AB} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}\\\\"
-				+ "d_{AB} = \\sqrt{(" + dx + ")^2 + (" + dy + ")^2}\\\\"
-				+ "d_{AB} = \\sqrt{" + dx2 + " + " + dy2 + "} = \\sqrt{" + (dx2 + dy2) + "} = \\mathbf{" + dist + "}\\)";
-		setResolucao(res);
+		addResolucao("Aplicando a fórmula da distância entre dois pontos:");
+		addResolucao("\\(d_{AB} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}\\)");
+		addResolucao("\\(d_{AB} = \\sqrt{(" + dx + ")^2 + (" + dy + ")^2}\\)");
+		addResolucao("\\(d_{AB} = \\sqrt{" + dx2 + " + " + dy2 + "} = \\sqrt{" + (dx2 + dy2) + "} = \\mathbf{" + dist + "}\\)");
 	}
 }

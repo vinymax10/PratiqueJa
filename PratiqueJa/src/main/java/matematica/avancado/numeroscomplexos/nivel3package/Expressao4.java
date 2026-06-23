@@ -15,24 +15,25 @@ public class Expressao4 extends GeradorExercicio
 		String resolucao = a.resolucaoDivisao(b);
 		NumeroComplexo resultado = a.div(b);
 
-		String pergunta, resultadoCorreto;
+		String pergunta, resultadoCorreto, passoFinal;
 		boolean real = rand.nextBoolean();
 		if(real)
 		{
 			pergunta = "Qual a parte real da divisão?";
 			resultadoCorreto = "" + resultado.real;
-			resolucao += "\\\\ \\operatorname{Re}(z)=" + resultado.real.showDfrac();
+			passoFinal = "\\(\\operatorname{Re}(z)=" + resultado.real.showDfrac() + "\\)";
 		}
 		else
 		{
 			pergunta = "Qual a parte imaginária da divisão?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			resolucao += "\\\\ \\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac();
+			passoFinal = "\\(\\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac() + "\\)";
 		}
 
 		addParagrafo(pergunta);
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
+		addResolucao(passoFinal);
 	}
 }

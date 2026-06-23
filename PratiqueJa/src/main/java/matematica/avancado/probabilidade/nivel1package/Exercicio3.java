@@ -50,17 +50,17 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(" + d3.showDfrac() + "\\)");               // n(Ω) inflado
 		embaralharEAdicionarAlternativas("\\(" + pAc.showDfrac() + "\\)", distratores);
 
-		String res = "Usando \\(P(A^c) = 1 - P(A)\\):\\(\\\\\\)";
-		res += "\\(A =\\) tirar bola " + corA + "\\(\\\\\\)";
-		res += "\\(n(A)=" + a + ",\\quad n(\\Omega)=" + total + " \\\\";
-		res += "P(A)=" + fraPA + (pASimp ? "=" + pA.showDfrac() : "") + " \\\\";
+		addResolucao("Usando \\(P(A^c) = 1 - P(A)\\):");
+		addResolucao("\\(A =\\) tirar bola " + corA);
+		addResolucao("\\(n(A)=" + a + ",\\quad n(\\Omega)=" + total + "\\)");
+		addResolucao("\\(P(A)=" + fraPA + (pASimp ? "=" + pA.showDfrac() : "") + "\\)");
 		// "1 - P(A)" usa a forma simplificada de P(A)
-		res += "P(A^c)=1-" + pA.showDfrac()
+		String res = "\\(P(A^c)=1-" + pA.showDfrac()
 				+ "=\\dfrac{" + total + "-" + a + "}{" + total + "}=";
 		if(pAcSimp)
 			res += fraAc + "=\\mathbf{" + pAc.showDfrac() + "}\\)";
 		else
 			res += "\\mathbf{" + fraAc + "}\\)";
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

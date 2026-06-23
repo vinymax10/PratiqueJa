@@ -50,12 +50,11 @@ public class TermosDivisao extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(termoCorreto, distratores);
 
-		String res = "Na divisão \\(a \\div b = q\\) com resto \\(r\\): \\(\\\\\\)";
-		res += "Dividendo \\((" + a + ")\\): o número que está sendo dividido. \\(\\\\\\)";
-		res += "Divisor \\((" + b + ")\\): o número pelo qual dividimos. \\(\\\\\\)";
-		res += "Quociente \\((" + q + ")\\): o resultado da divisão. \\(\\\\\\)";
-		res += "Resto \\((" + r + ")\\): o que sobra quando a divisão é exata o resto é zero. \\(\\\\\\)";
-		res += "Portanto, \\(" + numero + "\\) é o \\(\\mathbf{" + termoCorreto + "}\\).";
-		setResolucao(res);
+		addResolucao("Na divisão \\(a \\div b = q\\) com resto \\(r\\):");
+		addResolucao("Dividendo \\((" + a + ")\\): o número que está sendo dividido.");
+		addResolucao("Divisor \\((" + b + ")\\): o número pelo qual dividimos.");
+		addResolucao("Quociente \\((" + q + ")\\): o resultado da divisão.");
+		addResolucao("Resto \\((" + r + ")\\): o que sobra quando a divisão é exata o resto é zero.");
+		addResolucao("Portanto, \\(" + numero + "\\) é o \\(\\mathbf{" + termoCorreto + "}\\).");
 	}
 }

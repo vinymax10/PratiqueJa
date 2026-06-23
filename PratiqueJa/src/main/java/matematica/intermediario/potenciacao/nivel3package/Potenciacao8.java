@@ -20,7 +20,7 @@ public class Potenciacao8 extends GeradorExercicio
 		}
 		while (multiplicacao ? (a * b >= 10) : (a % b != 0));
 
-		String enunciado, correta, e1, e2, e3, resolucao;
+		String enunciado, correta, e1, e2, e3, passoTexto, passoMath1, passoMath2;
 
 		if (multiplicacao)
 		{
@@ -32,12 +32,9 @@ public class Potenciacao8 extends GeradorExercicio
 			e1        = "\\(" + mantissa + " \\times 10^{" + (expoente + 1) + "}\\)";
 			e2        = "\\(" + mantissa + " \\times 10^{" + (expoente - 1) + "}\\)";
 			e3        = "\\(" + (mantissa + 1) + " \\times 10^{" + expoente + "}\\)";
-			resolucao =
-				"Agrupar mantissas e potências de 10:" +
-				"\\(\\\\\\)" +
-				"\\((" + a + " \\times " + b + ") \\times 10^{" + p + "+" + q + "} =\\)" +
-				"\\(\\\\\\)" +
-				"\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
+			passoTexto = "Agrupar mantissas e potências de 10:";
+			passoMath1 = "\\((" + a + " \\times " + b + ") \\times 10^{" + p + "+" + q + "} =\\)";
+			passoMath2 = "\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
 		}
 		else
 		{
@@ -49,17 +46,16 @@ public class Potenciacao8 extends GeradorExercicio
 			e1        = "\\(" + mantissa + " \\times 10^{" + (expoente + 1) + "}\\)";
 			e2        = "\\(" + mantissa + " \\times 10^{" + (expoente - 1) + "}\\)";
 			e3        = "\\(" + (mantissa + 1) + " \\times 10^{" + expoente + "}\\)";
-			resolucao =
-				"Dividir mantissas e subtrair expoentes:" +
-				"\\(\\\\\\)" +
-				"\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + p + "-" + q + "} =\\)" +
-				"\\(\\\\\\)" +
-				"\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
+			passoTexto = "Dividir mantissas e subtrair expoentes:";
+			passoMath1 = "\\(\\dfrac{" + a + "}{" + b + "} \\times 10^{" + p + "-" + q + "} =\\)";
+			passoMath2 = "\\(\\mathbf{" + mantissa + " \\times 10^{" + expoente + "}}\\)";
 		}
 
 		addParagrafo("Calcule e expresse em notação científica:");
 		addParagrafo(enunciado);
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(resolucao);
+		addResolucao(passoTexto);
+		addResolucao(passoMath1);
+		addResolucao(passoMath2);
 	}
 }

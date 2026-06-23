@@ -29,8 +29,7 @@ public class Racionais4 extends GeradorExercicio
 		String maior = f1EhMaior ? "" + a : "" + b;
 		String menor = f1EhMaior ? "" + b : "" + a;
 		String fracMaior = f1EhMaior ? f1 : f2;
-		String res = "Denominadores iguais: basta comparar os numeradores. \\(\\\\\\)";
-		res += "\\(" + maior + " > " + menor + "\\), portanto \\(" + fracMaior + "\\) é a maior.";
-		setResolucao(res);
+		addResolucao("Denominadores iguais: basta comparar os numeradores.");
+		addResolucao("\\(" + maior + " > " + menor + "\\), portanto \\(" + fracMaior + "\\) é a maior.");
 	}
 }

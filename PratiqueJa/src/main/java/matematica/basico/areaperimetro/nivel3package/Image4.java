@@ -17,17 +17,15 @@ public class Image4 extends GeradorExercicio
 		String area = "" + b * h;
 		String resultadoCorreto = "" + h;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += b + "h=" + area + "\\\\";
-		resolucao += "h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\\\";
-
 		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "h", "", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do paralelogramo é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(" + b + "h=" + area + "\\)");
+		addResolucao("\\(h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\)");
 	}
 }

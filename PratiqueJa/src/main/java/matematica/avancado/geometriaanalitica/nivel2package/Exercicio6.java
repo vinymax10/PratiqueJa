@@ -14,7 +14,7 @@ public class Exercicio6 extends GeradorExercicio
 
 		String correto;
 		String enunciado;
-		String res;
+		String[] res;
 
 		if (caseType == 0)
 		{
@@ -33,10 +33,11 @@ public class Exercicio6 extends GeradorExercicio
 					+ "\\(s: y = " + m + "x" + sinalB2 + "\\).";
 
 			correto = "Paralelas distintas";
-			res = "As duas retas têm o mesmo coeficiente angular \\(m = " + m + "\\) e coeficientes lineares diferentes "
-					+ "\\(" + b1 + " \\neq " + b2 + "\\)."
-					+ "\\(\\\\\\)"
-					+ "Retas com mesmo \\(m\\) e \\(b\\) diferentes são \\(\\mathbf{paralelas\\;distintas}\\).";
+			res = new String[] {
+					"As duas retas têm o mesmo coeficiente angular \\(m = " + m + "\\) e coeficientes lineares diferentes "
+							+ "\\(" + b1 + " \\neq " + b2 + "\\).",
+					"Retas com mesmo \\(m\\) e \\(b\\) diferentes são \\(\\mathbf{paralelas\\;distintas}\\)."
+			};
 		}
 		else if (caseType == 1)
 		{
@@ -58,9 +59,10 @@ public class Exercicio6 extends GeradorExercicio
 					+ "\\(s: y = " + m2str + "x" + sinalB2 + "\\).";
 
 			correto = "Perpendiculares";
-			res = "O produto dos coeficientes angulares é \\(m_1 \\cdot m_2 = " + m1 + " \\cdot \\left(" + m2str + "\\right) = -1\\)."
-					+ "\\(\\\\\\)"
-					+ "Quando \\(m_1 \\cdot m_2 = -1\\), as retas são \\(\\mathbf{perpendiculares}\\).";
+			res = new String[] {
+					"O produto dos coeficientes angulares é \\(m_1 \\cdot m_2 = " + m1 + " \\cdot \\left(" + m2str + "\\right) = -1\\).",
+					"Quando \\(m_1 \\cdot m_2 = -1\\), as retas são \\(\\mathbf{perpendiculares}\\)."
+			};
 		}
 		else
 		{
@@ -81,9 +83,10 @@ public class Exercicio6 extends GeradorExercicio
 					+ "\\(s: y = " + m2 + "x" + sinalB2 + "\\).";
 
 			correto = "Concorrentes";
-			res = "As retas têm coeficientes angulares diferentes \\(" + m1 + " \\neq " + m2 + "\\)."
-					+ "\\(\\\\\\)"
-					+ "Retas com \\(m\\) diferentes se intersectam em um ponto, sendo \\(\\mathbf{concorrentes}\\).";
+			res = new String[] {
+					"As retas têm coeficientes angulares diferentes \\(" + m1 + " \\neq " + m2 + "\\).",
+					"Retas com \\(m\\) diferentes se intersectam em um ponto, sendo \\(\\mathbf{concorrentes}\\)."
+			};
 		}
 
 		addParagrafo(enunciado);
@@ -95,6 +98,7 @@ public class Exercicio6 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(correto, distratores);
 
-		setResolucao(res);
+		for (String passo : res)
+			addResolucao(passo);
 	}
 }

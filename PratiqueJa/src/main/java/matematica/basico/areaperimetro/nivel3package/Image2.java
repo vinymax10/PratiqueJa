@@ -16,19 +16,17 @@ public class Image2 extends GeradorExercicio
 		String area = "" + 2 * a * a;
 		String resultadoCorreto = "" + a * 2;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
-		resolucao += "l^2=" + area + "\\\\";
-		resolucao += "l=" + "\\sqrt{" + area + "} = \\sqrt{" + a + "^2 \\cdot 2} = " + a + "\\sqrt{2}\\\\";
-		resolucao += ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + "\\\\";
-		resolucao += "d=" + a + "\\sqrt{2} \\cdot \\sqrt{2}\\\\";
-		resolucao += "d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\\\";
-
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se a área do quadrado é \\(" + area + "\\), qual o valor de \\(d\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\)");
+		addResolucao("\\(l^2=" + area + "\\)");
+		addResolucao("\\(l=" + "\\sqrt{" + area + "} = \\sqrt{" + a + "^2 \\cdot 2} = " + a + "\\sqrt{2}\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + "\\)");
+		addResolucao("\\(d=" + a + "\\sqrt{2} \\cdot \\sqrt{2}\\)");
+		addResolucao("\\(d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\)");
 	}
 }

@@ -24,6 +24,6 @@ public class ColunaDiv extends GeradorExercicio
 		addParagrafo("Calcule a seguinte divisão:");
 		addParagrafo("\\(" + ResolucaoNatural.divisao(dividendo, b, false) + "\\)");
 		gerarAlternativasInteiras(a);
-		setResolucao("\\(" + ResolucaoNatural.divisao(dividendo, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.divisao(dividendo, b, true) + "\\)");
 	}
 }

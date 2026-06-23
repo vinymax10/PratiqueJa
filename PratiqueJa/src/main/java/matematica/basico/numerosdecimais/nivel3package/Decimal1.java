@@ -20,11 +20,7 @@ public class Decimal1 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\div " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(n);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& " + a + " \\div " + b + " = \\\\" +
-			"& (\\times 10): " + aT + " \\div " + bT + " = " + n +
-			"\\end{aligned}\\)"
-		);
+		addResolucao("\\(" + a + " \\div " + b + " =\\)");
+		addResolucao("\\((\\times 10):\\ " + aT + " \\div " + bT + " = " + n + "\\)");
 	}
 }

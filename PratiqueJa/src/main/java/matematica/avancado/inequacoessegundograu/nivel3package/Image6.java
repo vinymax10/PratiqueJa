@@ -49,14 +49,13 @@ public class Image6 extends GeradorExercicio
 		config.indice = 1 + rand.nextInt(10);
 		BufferedImage image = config.criarImagem();
 
-		String res = "Do gráfico, as raízes são \\(x_1=" + r1 + "\\) e \\(x_2=" + r2 + "\\)" + "\\(\\\\\\)";
-		res += "A parábola abre para baixo (\\(a=" + a + "<0\\)): \\(f(x)" + sinal + "0\\) fora das raízes" + (strict ? "." : " (incluindo os zeros).") + " \\(\\\\\\)";
-		res += "\\(\\mathbf{x \\in " + lEsq + " \\cup " + lDir + "}\\)";
-
 		addParagrafo("Com base no gráfico, determine o conjunto solução de \\(f(x)" + sinal + "0\\)");
 		addParagrafo("\\(" + funcao + "\\)");
 		addParagrafoImagem(image);
 		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
+
+		addResolucao("Do gráfico, as raízes são \\(x_1=" + r1 + "\\) e \\(x_2=" + r2 + "\\)");
+		addResolucao("A parábola abre para baixo (\\(a=" + a + "<0\\)): \\(f(x)" + sinal + "0\\) fora das raízes" + (strict ? "." : " (incluindo os zeros)."));
+		addResolucao("\\(\\mathbf{x \\in " + lEsq + " \\cup " + lDir + "}\\)");
 	}
 }

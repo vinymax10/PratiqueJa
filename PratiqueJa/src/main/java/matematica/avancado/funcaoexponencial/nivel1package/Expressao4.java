@@ -14,12 +14,10 @@ public class Expressao4 extends GeradorExercicio
 
 		addParagrafo("Resolva a equação \\(" + a + "^x = " + aPowN + "\\).");
 
-		String res = "Reescrevemos \\(" + aPowN + "\\) como potência de base \\(" + a + "\\): \\(\\\\\\)";
-		res += "\\(" + aPowN + " = " + a + "^{" + n + "}\\) \\(\\\\\\)";
-		res += "Igualando bases: \\(" + a + "^x = " + a + "^{" + n + "}\\\\";
-		res += "x = \\mathbf{" + n + "}\\)";
-
 		gerarAlternativas("" + n);
-		setResolucao(res);
+		addResolucao("Reescrevemos \\(" + aPowN + "\\) como potência de base \\(" + a + "\\):");
+		addResolucao("\\(" + aPowN + " = " + a + "^{" + n + "}\\)");
+		addResolucao("Igualando bases: \\(" + a + "^x = " + a + "^{" + n + "}\\)");
+		addResolucao("\\(x = \\mathbf{" + n + "}\\)");
 	}
 }

@@ -79,28 +79,29 @@ public class ProblemaFuncaoAfim
 		return x;
 	}
 
-	public String resolucao()
+	// Retorna a resolução como passos (um parágrafo por elemento); o chamador adiciona
+	// cada passo via addResolucao, na ordem.
+	public String[] resolucao()
 	{
-		String res;
 		if(tipo == TipoFuncaoAfim.DECRESCENTE)
 		{
 			// f(x) = -a·x + b ; resolvemos -a·x + b = k  =>  x = (b - k)/a
-			res = "Modelamos a situação por uma função do 1º grau decrescente: \\(f(x) = -ax + b\\), em que \\(a\\) é a taxa de variação e \\(b\\) o valor inicial. \\(\\\\\\)";
-			res += "Com \\(a = " + a + "\\) e \\(b = " + b + "\\), queremos \\(f(x) = " + k + "\\): \\(\\\\\\)";
-			res += "\\(-" + a + "x + " + b + " = " + k + "\\\\";
-			res += "-" + a + "x = " + (k - b) + "\\\\";
-			res += "" + a + "x = " + (b - k) + "\\\\";
-			res += "x = \\dfrac{" + (b - k) + "}{" + a + "} = \\mathbf{" + x + "}\\) " + unidade;
+			return new String[] {
+				"Modelamos a situação por uma função do 1º grau decrescente: \\(f(x) = -ax + b\\), em que \\(a\\) é a taxa de variação e \\(b\\) o valor inicial.",
+				"Com \\(a = " + a + "\\) e \\(b = " + b + "\\), queremos \\(f(x) = " + k + "\\):",
+				"\\(-" + a + "x + " + b + " = " + k + "\\)",
+				"\\(-" + a + "x = " + (k - b) + "\\)",
+				"\\(" + a + "x = " + (b - k) + "\\)",
+				"\\(x = \\dfrac{" + (b - k) + "}{" + a + "} = \\mathbf{" + x + "}\\) " + unidade
+			};
 		}
-		else
-		{
-			// f(x) = a·x + b ; resolvemos a·x + b = k  =>  x = (k - b)/a
-			res = "Modelamos a situação por uma função do 1º grau: \\(f(x) = ax + b\\), em que \\(a\\) é a taxa de variação e \\(b\\) o valor inicial. \\(\\\\\\)";
-			res += "Com \\(a = " + a + "\\) e \\(b = " + b + "\\), queremos \\(f(x) = " + k + "\\): \\(\\\\\\)";
-			res += "\\(" + a + "x + " + b + " = " + k + "\\\\";
-			res += "" + a + "x = " + (k - b) + "\\\\";
-			res += "x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) " + unidade;
-		}
-		return res;
+		// f(x) = a·x + b ; resolvemos a·x + b = k  =>  x = (k - b)/a
+		return new String[] {
+			"Modelamos a situação por uma função do 1º grau: \\(f(x) = ax + b\\), em que \\(a\\) é a taxa de variação e \\(b\\) o valor inicial.",
+			"Com \\(a = " + a + "\\) e \\(b = " + b + "\\), queremos \\(f(x) = " + k + "\\):",
+			"\\(" + a + "x + " + b + " = " + k + "\\)",
+			"\\(" + a + "x = " + (k - b) + "\\)",
+			"\\(x = \\dfrac{" + (k - b) + "}{" + a + "} = \\mathbf{" + x + "}\\) " + unidade
+		};
 	}
 }

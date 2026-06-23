@@ -25,9 +25,8 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\(" + (2 * r * gpr) + "\\pi\\,\\text{cm}^2\\)");     // 2r(g+r) confusão com cilindro
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(A_{\\text{total}} = \\pi r(g + r) = \\pi \\cdot " + r + " \\cdot (" + g + " + " + r
-				+ ") = \\\\"
-				+ "\\pi \\cdot " + r + " \\cdot " + gpr + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{total}} = \\pi r(g + r) = \\pi \\cdot " + r + " \\cdot (" + g + " + " + r
+				+ ") =\\)");
+		addResolucao("\\(\\pi \\cdot " + r + " \\cdot " + gpr + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)");
 	}
 }

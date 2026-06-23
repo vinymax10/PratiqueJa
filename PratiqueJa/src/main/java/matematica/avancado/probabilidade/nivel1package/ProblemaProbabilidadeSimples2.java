@@ -1,5 +1,7 @@
 package matematica.avancado.probabilidade.nivel1package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.ParCor;
@@ -67,65 +69,66 @@ public class ProblemaProbabilidadeSimples2
 		return pergunta;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String resolucaoLatex = "\\(" + formula() + "\\)" + "\\(\\\\\\)";
+		List<String> passos = new ArrayList<>();
+		passos.add("\\(" + formula() + "\\)");
 		Racional resultado;
 		switch(tipoProbabilidade)
 		{
 			case XB: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA);
 				String fraPA = pa.showDfrac();
 				resultado = pa.mult(new Racional(t));
 				String fraRes = resultado.showDfrac();
 				resultado.fatoracao(2);
-				resolucaoLatex += "\\(P(A)=" + fraPA + ",\\quad n(\\Omega)=" + t + " \\\\";
-				resolucaoLatex += fraPA + "=\\dfrac{n(A)}{" + t + "} \\\\";
-				resolucaoLatex += "n(A)=" + fraPA + "\\cdot " + t + "=";
-				resolucaoLatex += (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)";
+				passos.add("\\(P(A)=" + fraPA + ",\\quad n(\\Omega)=" + t + "\\)");
+				passos.add("\\(" + fraPA + "=\\dfrac{n(A)}{" + t + "}\\)");
+				passos.add("\\(n(A)=" + fraPA + "\\cdot " + t + "="
+						+ (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)");
 				break;
 			}
 			case AX: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB);
 				String fraPB = pb.showDfrac();
 				resultado = pb.mult(new Racional(t));
 				String fraRes = resultado.showDfrac();
 				resultado.fatoracao(2);
-				resolucaoLatex += "\\(P(A)=" + fraPB + ",\\quad n(\\Omega)=" + t + " \\\\";
-				resolucaoLatex += fraPB + "=\\dfrac{n(A)}{" + t + "} \\\\";
-				resolucaoLatex += "n(A)=" + fraPB + "\\cdot " + t + "=";
-				resolucaoLatex += (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)";
+				passos.add("\\(P(A)=" + fraPB + ",\\quad n(\\Omega)=" + t + "\\)");
+				passos.add("\\(" + fraPB + "=\\dfrac{n(A)}{" + t + "}\\)");
+				passos.add("\\(n(A)=" + fraPB + "\\cdot " + t + "="
+						+ (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)");
 				break;
 			}
 			case XBT: {
-				resolucaoLatex += "\\(A =\\) " + eventoA + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoA);
 				String fraPA = pa.showDfrac();
-				resolucaoLatex += "\\(P(A)=" + fraPA + ",\\quad n(A)=" + a + " \\\\";
-				resolucaoLatex += fraPA + "=\\dfrac{" + a + "}{n(\\Omega)} \\\\";
-				resolucaoLatex += "n(\\Omega)=\\dfrac{" + a + "}{" + fraPA + "} \\\\";
+				passos.add("\\(P(A)=" + fraPA + ",\\quad n(A)=" + a + "\\)");
+				passos.add("\\(" + fraPA + "=\\dfrac{" + a + "}{n(\\Omega)}\\)");
+				passos.add("\\(n(\\Omega)=\\dfrac{" + a + "}{" + fraPA + "}\\)");
 				resultado = new Racional(a).div(pa);
 				String fraRes = resultado.showDfrac();
 				resultado.fatoracao(2);
-				resolucaoLatex += "n(\\Omega)=" + a + "\\cdot " + pa.inverter().showDfrac() + "=";
-				resolucaoLatex += (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)";
+				passos.add("\\(n(\\Omega)=" + a + "\\cdot " + pa.inverter().showDfrac() + "="
+						+ (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)");
 				break;
 			}
 			case AXT: {
-				resolucaoLatex += "\\(A =\\) " + eventoB + "\\(\\\\\\)";
+				passos.add("\\(A =\\) " + eventoB);
 				String fraPB = pb.showDfrac();
-				resolucaoLatex += "\\(P(A)=" + fraPB + ",\\quad n(A)=" + b + " \\\\";
-				resolucaoLatex += fraPB + "=\\dfrac{" + b + "}{n(\\Omega)} \\\\";
-				resolucaoLatex += "n(\\Omega)=\\dfrac{" + b + "}{" + fraPB + "} \\\\";
+				passos.add("\\(P(A)=" + fraPB + ",\\quad n(A)=" + b + "\\)");
+				passos.add("\\(" + fraPB + "=\\dfrac{" + b + "}{n(\\Omega)}\\)");
+				passos.add("\\(n(\\Omega)=\\dfrac{" + b + "}{" + fraPB + "}\\)");
 				resultado = new Racional(b).div(pb);
 				String fraRes = resultado.showDfrac();
 				resultado.fatoracao(2);
-				resolucaoLatex += "n(\\Omega)=" + b + "\\cdot " + pb.inverter().showDfrac() + "=";
-				resolucaoLatex += (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)";
+				passos.add("\\(n(\\Omega)=" + b + "\\cdot " + pb.inverter().showDfrac() + "="
+						+ (resultado.isSimplificou() ? fraRes + "=\\mathbf{" + resultado.showDfrac() + "}" : "\\mathbf{" + fraRes + "}") + "\\)");
 				break;
 			}
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 	
 	private String formula()

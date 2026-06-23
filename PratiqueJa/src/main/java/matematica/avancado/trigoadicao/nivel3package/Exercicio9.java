@@ -40,14 +40,12 @@ public class Exercicio9 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + q + "}{" + r + "}\\)");                       // só |cos(α)|, sem bissecção
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q + "}{" + r + "}\\)."
-				+ "\\(\\\\\\)"
-				+ "Aplicando a fórmula de bissecção:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos^2\\!\\dfrac{\\alpha}{2} = \\dfrac{1 + \\left(-\\dfrac{" + q + "}{" + r + "}\\right)}{2} = \\\\"
-				+ "\\dfrac{1 - \\dfrac{" + q + "}{" + r + "}}{2} = "
-				+ "\\dfrac{\\dfrac{" + r + " - " + q + "}{" + r + "}}{2} = \\\\"
-				+ "\\dfrac{" + (r - q) + "}{" + (2 * r) + "} = \\mathbf{\\dfrac{" + numRes + "}{" + denRes + "}}\\)");
+		addResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q + "}{" + r + "}\\).");
+		addResolucao("Aplicando a fórmula de bissecção:");
+		addResolucao("\\(\\cos^2\\!\\dfrac{\\alpha}{2} = \\dfrac{1 + \\left(-\\dfrac{" + q + "}{" + r + "}\\right)}{2} =\\)");
+		addResolucao("\\(\\dfrac{1 - \\dfrac{" + q + "}{" + r + "}}{2} = "
+				+ "\\dfrac{\\dfrac{" + r + " - " + q + "}{" + r + "}}{2} =\\)");
+		addResolucao("\\(\\dfrac{" + (r - q) + "}{" + (2 * r) + "} = \\mathbf{\\dfrac{" + numRes + "}{" + denRes + "}}\\)");
 	}
 
 	private static int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }

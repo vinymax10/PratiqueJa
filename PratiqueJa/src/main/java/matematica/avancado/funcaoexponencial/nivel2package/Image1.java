@@ -25,11 +25,9 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("Qual é a base \\(a\\) da função \\(f(x) = a^x\\) representada no gráfico?");
 		addParagrafoImagem(image);
 
-		String res = "O gráfico mostra \\(f(1) = " + base + "\\). \\(\\\\\\)";
-		res += "Como \\(f(1) = a^1 = a\\), temos: \\(\\\\\\)";
-		res += "\\(a = \\mathbf{" + base + "}\\)";
-
 		gerarAlternativas("" + base);
-		setResolucao(res);
+		addResolucao("O gráfico mostra \\(f(1) = " + base + "\\).");
+		addResolucao("Como \\(f(1) = a^1 = a\\), temos:");
+		addResolucao("\\(a = \\mathbf{" + base + "}\\)");
 	}
 }

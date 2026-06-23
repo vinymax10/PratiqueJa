@@ -48,24 +48,22 @@ public class Expressao7 extends GeradorExercicio
 		eq += Auxiliar.getNumber(c, "", false);
 		eq += "=0";
 
-		String res = "\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)" + "\\(\\\\\\)";
-		if(b == 0)
-			res += "\\(\\Delta=0^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		else
-			res += "\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\\\ \\)";
-		res += "\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + delta + "}\\)" + "\\(\\\\\\)";
-
-		if(delta > 0)
-			res += "Como \\(\\Delta=" + delta + " > 0\\), a equação possui \\(\\mathbf{2}\\) raízes reais distintas.";
-		else if(delta == 0)
-			res += "Como \\(\\Delta=0\\), a equação possui \\(\\mathbf{1}\\) raiz real repetida.";
-		else
-			res += "Como \\(\\Delta=" + delta + " < 0\\), a equação não possui raízes reais: \\(\\mathbf{0}\\) raízes.";
-
 		addParagrafo("Quantas raízes reais a equação possui?");
 		addParagrafo("\\(" + eq + "\\)");
 		gerarAlternativas("" + resultado);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("\\Delta=b^2-4ac") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad b=" + b + ", \\quad c=" + c + "\\)");
+		if(b == 0)
+			addResolucao("\\(\\Delta=0^2-4\\cdot " + a + "\\cdot " + c + " = \\)");
+		else
+			addResolucao("\\(\\Delta=" + (b < 0 ? "(" + b + ")" : b) + "^2-4\\cdot " + a + "\\cdot " + c + " = \\)");
+		addResolucao("\\(\\Delta=" + (b * b) + Auxiliar.getNumber(-4 * a * c, "", false) + "=\\mathbf{" + delta + "}\\)");
+
+		if(delta > 0)
+			addResolucao("Como \\(\\Delta=" + delta + " > 0\\), a equação possui \\(\\mathbf{2}\\) raízes reais distintas.");
+		else if(delta == 0)
+			addResolucao("Como \\(\\Delta=0\\), a equação possui \\(\\mathbf{1}\\) raiz real repetida.");
+		else
+			addResolucao("Como \\(\\Delta=" + delta + " < 0\\), a equação não possui raízes reais: \\(\\mathbf{0}\\) raízes.");
 	}
 }

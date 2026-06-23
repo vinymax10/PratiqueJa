@@ -58,13 +58,12 @@ public class Estatistica3 extends GeradorExercicio
 		distratores.add("" + d3);
 		embaralharEAdicionarAlternativas("" + cercaSup, distratores);
 
-		String res = "Para detectar outliers usa-se o critério do boxplot:\\(\\\\\\)";
-		res += "Dados ordenados: " + AuxEstatistica.listaStr(valores) + " \\((n = 7)\\).\\(\\\\\\)";
-		res += "\\(Q_1 = " + Q1 + "\\) (2º valor), \\(\\quad Q_3 = " + Q3 + "\\) (6º valor)\\(\\\\\\)";
-		res += "\\(AIQ = Q_3 - Q_1 = " + Q3 + " - " + Q1 + " = " + iqr + "\\)\\(\\\\\\)";
-		res += "Limite superior:\\(\\\\\\)";
-		res += "\\(Q_3 + 1{,}5 \\times AIQ = " + Q3 + " + 1{,}5 \\times " + iqr
-				+ " = " + Q3 + " + " + limite15 + " = \\mathbf{" + cercaSup + "}\\)";
-		setResolucao(res);
+		addResolucao("Para detectar outliers usa-se o critério do boxplot:");
+		addResolucao("Dados ordenados: " + AuxEstatistica.listaStr(valores) + " \\((n = 7)\\).");
+		addResolucao("\\(Q_1 = " + Q1 + "\\) (2º valor), \\(\\quad Q_3 = " + Q3 + "\\) (6º valor)");
+		addResolucao("\\(AIQ = Q_3 - Q_1 = " + Q3 + " - " + Q1 + " = " + iqr + "\\)");
+		addResolucao("Limite superior:");
+		addResolucao("\\(Q_3 + 1{,}5 \\times AIQ = " + Q3 + " + 1{,}5 \\times " + iqr
+				+ " = " + Q3 + " + " + limite15 + " = \\mathbf{" + cercaSup + "}\\)");
 	}
 }

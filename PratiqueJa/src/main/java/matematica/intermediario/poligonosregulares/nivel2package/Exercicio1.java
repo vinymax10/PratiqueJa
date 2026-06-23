@@ -20,18 +20,15 @@ public class Exercicio1 extends GeradorExercicio
 		int si = caso[0];
 		int n = caso[1];
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaSomaInternos() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + si + "^\\circ = (n-2) \\times 180^\\circ \\\\ ";
-		res += "n - 2 = \\dfrac{" + si + "}{180} = " + (n - 2) + " \\\\ ";
-		res += "n = \\mathbf{" + n + "}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(n, false, "l", "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A soma dos ângulos internos de um polígono regular é \\(" + si + "^\\circ\\). Quantos lados ele tem?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + n);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaSomaInternos() + "\\)");
+		addResolucao("\\(" + si + "^\\circ = (n-2) \\times 180^\\circ\\)");
+		addResolucao("\\(n - 2 = \\dfrac{" + si + "}{180} = " + (n - 2) + "\\)");
+		addResolucao("\\(n = \\mathbf{" + n + "}\\)");
 	}
 }

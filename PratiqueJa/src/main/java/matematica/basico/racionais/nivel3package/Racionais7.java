@@ -23,14 +23,13 @@ public class Racionais7 extends GeradorExercicio
 		addParagrafo("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "}\\)");
 		gerarAlternativas(resultado.toString());
 
-		String res = "Elevamos o numerador e o denominador ao expoente \\(" + n + "\\). \\(\\\\\\)";
+		addResolucao("Elevamos o numerador e o denominador ao expoente \\(" + n + "\\).");
 		String step = "\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} = \\dfrac{"
 					+ a + "^{" + n + "}}{" + b + "^{" + n + "}} = \\dfrac{" + numRes + "}{"
 					+ denRes + "}";
 		if(resultado.isSimplificou())
 			step += " = " + resultado.showDfrac();
 		step += "\\)";
-		res += step;
-		setResolucao(res);
+		addResolucao(step);
 	}
 }

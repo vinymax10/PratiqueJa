@@ -22,15 +22,12 @@ public class Expressao5 extends GeradorExercicio
 
 		addParagrafo("Resolva a equação \\(" + leftBase + "^x = \\dfrac{1}{" + rightDen + "}\\).");
 
-		String res = "Reescrevemos ambos os lados com base \\(" + p + "\\): \\(\\\\\\)";
-		res += "\\(" + leftBase + " = " + p + "^{" + m + "}\\) \\(\\quad\\) e \\(\\quad\\)";
-		res += "\\(\\dfrac{1}{" + rightDen + "} = " + p + "^{-" + n + "}\\\\";
-		res += "(" + p + "^{" + m + "})^x = " + p + "^{-" + n + "}\\\\";
-		res += "" + p + "^{" + m + "x} = " + p + "^{-" + n + "}\\) \\(\\\\\\)";
-		res += "Igualando os expoentes: \\(" + m + "x = -" + n + "\\\\";
-		res += "x = \\dfrac{-" + n + "}{" + m + "} = \\mathbf{" + x.toStringLatex() + "}\\)";
-
 		gerarAlternativas(x);
-		setResolucao(res);
+		addResolucao("Reescrevemos ambos os lados com base \\(" + p + "\\):");
+		addResolucao("\\(" + leftBase + " = " + p + "^{" + m + "}\\) \\(\\quad\\) e \\(\\quad\\) \\(\\dfrac{1}{" + rightDen + "} = " + p + "^{-" + n + "}\\)");
+		addResolucao("\\((" + p + "^{" + m + "})^x = " + p + "^{-" + n + "}\\)");
+		addResolucao("\\(" + p + "^{" + m + "x} = " + p + "^{-" + n + "}\\)");
+		addResolucao("Igualando os expoentes: \\(" + m + "x = -" + n + "\\)");
+		addResolucao("\\(x = \\dfrac{-" + n + "}{" + m + "} = \\mathbf{" + x.toStringLatex() + "}\\)");
 	}
 }

@@ -39,12 +39,11 @@ public class Exercicio4 extends GeradorExercicio
 		String potStr5 = buildFracPot(5, 6, n);
 		String pNenhuma = "\\dfrac{" + num5 + "}{" + den6 + "}";
 
-		String res = "Usando \\(P(A^c) = 1 - P(A)\\):\\(\\\\\\)";
-		res += "\\(A =\\) sair " + face + " em ao menos um lançamento\\(\\\\\\)";
-		res += "Em cada lançamento, P(não sair " + face + ") \\(= \\dfrac{5}{6}\\)\\(\\\\\\)";
-		res += "\\(P(A^c) = " + potStr5 + " = " + pNenhuma + " \\\\";
-		res += "P(A) = 1 - " + pNenhuma + " = \\dfrac{" + den6 + "-" + num5 + "}{" + den6 + "} = \\mathbf{\\dfrac{" + favoravel + "}{" + den6 + "}}\\)";
-		setResolucao(res);
+		addResolucao("Usando \\(P(A^c) = 1 - P(A)\\):");
+		addResolucao("\\(A =\\) sair " + face + " em ao menos um lançamento");
+		addResolucao("Em cada lançamento, P(não sair " + face + ") \\(= \\dfrac{5}{6}\\)");
+		addResolucao("\\(P(A^c) = " + potStr5 + " = " + pNenhuma + "\\)");
+		addResolucao("\\(P(A) = 1 - " + pNenhuma + " = \\dfrac{" + den6 + "-" + num5 + "}{" + den6 + "} = \\mathbf{\\dfrac{" + favoravel + "}{" + den6 + "}}\\)");
 	}
 
 	private static long pow(long base, int exp)

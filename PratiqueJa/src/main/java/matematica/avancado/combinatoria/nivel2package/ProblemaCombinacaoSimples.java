@@ -1,5 +1,7 @@
 package matematica.avancado.combinatoria.nivel2package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import util.Algebra;
@@ -26,31 +28,29 @@ public class ProblemaCombinacaoSimples
 		k = 3 + rand.nextInt(n-4);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "A combinação simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dada por:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("C(n,k) = \\dfrac{n!}{k!\\cdot(n-k)!}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\) e \\(k = " + k + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(C(" + n + "," + k + ") = \\dfrac{" + n + "!}{" + k + "!\\cdot(" + n + "-" + k + ")!} = \\\\ ";
+		List<String> passos = new ArrayList<String>();
+		passos.add("A combinação simples de \\(n\\) elementos tomados \\(k\\) a \\(k\\) é dada por:");
+		passos.add("\\(" + ParCor.formula("C(n,k) = \\dfrac{n!}{k!\\cdot(n-k)!}") + "\\)");
+		passos.add("Com \\(n = " + n + "\\) e \\(k = " + k + "\\):");
+		passos.add("\\(C(" + n + "," + k + ") = \\dfrac{" + n + "!}{" + k + "!\\cdot(" + n + "-" + k + ")!} =\\)");
 		if((n-k)>k)
 		{
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + k + "!\\cdot" + (n-k) + "!} = \\\\ ";
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + k + "!} = \\\\ ";
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + AuxCombinacao.fatorialString(k) + "} = \\\\ ";
-			res += "\\dfrac{" + Algebra.fatorial(n,(n-k)) + "}{" + Algebra.fatorial(k) + "} = \\mathbf{" + resultado() + "}\\)";
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "\\cdot " + (n-k) + "!}{" + k + "!\\cdot" + (n-k) + "!} =\\)");
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + k + "!} =\\)");
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,(n-k)) + "}{" + AuxCombinacao.fatorialString(k) + "} =\\)");
+			passos.add("\\(\\dfrac{" + Algebra.fatorial(n,(n-k)) + "}{" + Algebra.fatorial(k) + "} = \\mathbf{" + resultado() + "}\\)");
 		}
 		else
 		{
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "\\cdot " + k + "!}{" + k + "!\\cdot" + (n-k) + "!} = \\\\ ";
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + (n-k) + "!} = \\\\ ";
-			res += "\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + AuxCombinacao.fatorialString(n-k) + "} = \\\\ ";
-			res += "\\dfrac{" + Algebra.fatorial(n,k) + "}{" + Algebra.fatorial(n-k) + "} = \\mathbf{" + resultado() + "}\\)";
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "\\cdot " + k + "!}{" + k + "!\\cdot" + (n-k) + "!} =\\)");
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + (n-k) + "!} =\\)");
+			passos.add("\\(\\dfrac{" + AuxCombinacao.fatorialString(n,k) + "}{" + AuxCombinacao.fatorialString(n-k) + "} =\\)");
+			passos.add("\\(\\dfrac{" + Algebra.fatorial(n,k) + "}{" + Algebra.fatorial(n-k) + "} = \\mathbf{" + resultado() + "}\\)");
 		}
 
-		return res;
+		return passos.toArray(new String[0]);
 	}
 
 	public String resultado()

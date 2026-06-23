@@ -28,12 +28,10 @@ public class Expressao2 extends GeradorExercicio
 
 		gerarAlternativasInteiras(dist);
 
-		String res = "A distância de um ponto \\(P(x,\\;y)\\) à origem \\(O(0,\\;0)\\) ";
-		res += "é a hipotenusa do triângulo retângulo cujos catetos são \\(|x|\\) e \\(|y|\\). ";
-		res += "Pelo Teorema de Pitágoras: \\(\\\\\\) \\(d(P,\\;O) = \\sqrt{x^2 + y^2}\\). \\(\\\\\\)";
-		res += "Substituindo \\(x = " + px + "\\) e \\(y = " + py + "\\): \\(\\\\\\)";
-		res += "\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ \\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = " + dist + "\\)";
-
-		setResolucao(res);
+		addResolucao("A distância de um ponto \\(P(x,\\;y)\\) à origem \\(O(0,\\;0)\\) é a hipotenusa do triângulo retângulo cujos catetos são \\(|x|\\) e \\(|y|\\). Pelo Teorema de Pitágoras:");
+		addResolucao("\\(d(P,\\;O) = \\sqrt{x^2 + y^2}\\).");
+		addResolucao("Substituindo \\(x = " + px + "\\) e \\(y = " + py + "\\):");
+		addResolucao("\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\)");
+		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = " + dist + "\\)");
 	}
 }

@@ -18,7 +18,7 @@ public class Image14 extends GeradorExercicio
 		int c = a;
 
 		String resultadoCorreto = "" + (b + a + c);
-		String resolucao = ResolucaoAreaPerimetro.perimetroTrianguloIsosceles(a, b);
+		String[] passosResolucao = ResolucaoAreaPerimetro.perimetroTrianguloIsosceles(a, b);
 
 		ConfigImagem config = new ConfigTrianguloIsosceles("" + b, "", "", "" + a, false);
 		BufferedImage image = config.criarImagem();
@@ -26,6 +26,7 @@ public class Image14 extends GeradorExercicio
 		addParagrafo("Qual o perímetro do triângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

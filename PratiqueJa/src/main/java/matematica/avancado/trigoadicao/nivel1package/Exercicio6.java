@@ -55,8 +55,7 @@ public class Exercicio6 extends GeradorExercicio
 		String numExibido = cosDouble.startsWith("-")
 				? "1 - " + cosDouble.substring(1)
 				: "1 + " + cosDouble;
-		setResolucao("Fazendo \\(a = " + angulo + "\\), temos \\(2a = " + anguloDouble + "\\) e \\(\\cos(" + anguloDouble + ") = " + cosDouble + "\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos^2(" + angulo + ") = \\dfrac{" + numExibido + "}{2} = \\dfrac{" + passoNum + "}{2} = \\mathbf{" + resultado + "}\\)");
+		addResolucao("Fazendo \\(a = " + angulo + "\\), temos \\(2a = " + anguloDouble + "\\) e \\(\\cos(" + anguloDouble + ") = " + cosDouble + "\\):");
+		addResolucao("\\(\\cos^2(" + angulo + ") = \\dfrac{" + numExibido + "}{2} = \\dfrac{" + passoNum + "}{2} = \\mathbf{" + resultado + "}\\)");
 	}
 }

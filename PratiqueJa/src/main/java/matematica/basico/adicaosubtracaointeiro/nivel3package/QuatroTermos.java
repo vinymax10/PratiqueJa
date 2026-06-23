@@ -71,17 +71,16 @@ public class QuatroTermos extends GeradorExercicio
 			else { if (!firstNeg) negStr.append(" - "); else { negStr.append("-"); firstNeg = false; } negStr.append(Math.abs(v)); sumNeg += v; }
 		}
 
-		String res = "Passo 1 — Eliminamos os parênteses aplicando as regras de sinal: \\(\\\\\\)";
-		res += "\\(" + expr + " = " + simpl + "\\) \\(\\\\\\)";
-		res += "Passo 2 — Agrupamos os termos positivos e negativos: \\(\\\\\\)";
-		if (sumPos > 0) res += "Positivos: \\(+" + posStr + " = +" + sumPos + "\\) \\(\\\\\\)";
-		if (sumNeg < 0) res += "Negativos: \\(" + negStr + " = " + sumNeg + "\\) \\(\\\\\\)";
+		addResolucao("Passo 1 — Eliminamos os parênteses aplicando as regras de sinal:");
+		addResolucao("\\(" + expr + " = " + simpl + "\\)");
+		addResolucao("Passo 2 — Agrupamos os termos positivos e negativos:");
+		if (sumPos > 0) addResolucao("Positivos: \\(+" + posStr + " = +" + sumPos + "\\)");
+		if (sumNeg < 0) addResolucao("Negativos: \\(" + negStr + " = " + sumNeg + "\\)");
 		if (sumPos > 0 && sumNeg < 0)
-			res += "\\(" + sumPos + Auxiliar.getNumber(sumNeg, "", false) + " = \\mathbf{" + resultado + "}\\)";
+			addResolucao("\\(" + sumPos + Auxiliar.getNumber(sumNeg, "", false) + " = \\mathbf{" + resultado + "}\\)");
 		else if (sumNeg == 0)
-			res += "\\(+" + posStr + " = \\mathbf{" + resultado + "}\\)";
+			addResolucao("\\(+" + posStr + " = \\mathbf{" + resultado + "}\\)");
 		else
-			res += "\\(" + negStr + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+			addResolucao("\\(" + negStr + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

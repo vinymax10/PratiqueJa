@@ -33,11 +33,9 @@ public class Image3 extends GeradorExercicio
 			+ "Calcule \\(f(2)\\).");
 		addParagrafoImagem(image);
 
-		String res = "Do gráfico: \\(f(-1) = " + fNegUm + " \\Rightarrow a = " + den + "\\). \\(\\\\\\)";
-		res += "Calculando \\(f(2)\\): \\(\\\\\\)";
-		res += "\\(f(2) = " + baseStr + "^2 = \\dfrac{1}{" + den + "^2} = \\dfrac{1}{" + (den * den) + "} = \\mathbf{" + fDois.toStringLatex() + "}\\)";
-
 		gerarAlternativas(fDois);
-		setResolucao(res);
+		addResolucao("Do gráfico: \\(f(-1) = " + fNegUm + " \\Rightarrow a = " + den + "\\).");
+		addResolucao("Calculando \\(f(2)\\):");
+		addResolucao("\\(f(2) = " + baseStr + "^2 = \\dfrac{1}{" + den + "^2} = \\dfrac{1}{" + (den * den) + "} = \\mathbf{" + fDois.toStringLatex() + "}\\)");
 	}
 }

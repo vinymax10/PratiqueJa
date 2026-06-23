@@ -43,9 +43,8 @@ public class Exercicio2 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("" + resposta, distratores);
 
-		String res = "Observando o diagrama, o elemento \\(" + queryElem
-				+ "\\) possui seta apontando para \\(" + resposta + "\\). \\(\\\\\\)";
-		res += "Portanto, \\(f(" + queryElem + ") = " + resposta + "\\).";
-		setResolucao(res);
+		addResolucao("Observando o diagrama, o elemento \\(" + queryElem
+				+ "\\) possui seta apontando para \\(" + resposta + "\\).");
+		addResolucao("Portanto, \\(f(" + queryElem + ") = " + resposta + "\\).");
 	}
 }

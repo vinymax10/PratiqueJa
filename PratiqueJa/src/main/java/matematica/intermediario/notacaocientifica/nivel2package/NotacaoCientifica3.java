@@ -31,16 +31,10 @@ public class NotacaoCientifica3 extends GeradorExercicio
 		addParagrafo("Calcule, deixando o resultado em notação científica:");
 		addParagrafo("\\((" + a + " \\times 10^{" + m + "}) \\times (" + b + " \\times 10^{" + n + "})\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Multiplicar as mantissas e somar os expoentes:" +
-			"\\(\\\\\\)" +
-			"\\(" + a + " \\times " + b + " = " + prod + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + prod + " \\times 10^{" + (m + n) + "}\\)" +
-			"\\(\\\\\\)" +
-			"Reajustar: \\(" + prod + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + r + " \\times 10^1 \\times 10^{" + (m + n) + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)"
-		);
+		addResolucao("Multiplicar as mantissas e somar os expoentes:");
+		addResolucao("\\(" + a + " \\times " + b + " = " + prod + "\\)");
+		addResolucao("\\(" + prod + " \\times 10^{" + (m + n) + "}\\)");
+		addResolucao("Reajustar: \\(" + prod + " \\geq 10\\), escrever como \\(" + r + " \\times 10^1\\):");
+		addResolucao("\\(" + r + " \\times 10^1 \\times 10^{" + (m + n) + "} = \\mathbf{" + r + " \\times 10^{" + expResult + "}}\\)");
 	}
 }

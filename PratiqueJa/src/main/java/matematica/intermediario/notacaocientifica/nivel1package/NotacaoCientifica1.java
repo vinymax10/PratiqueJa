@@ -26,11 +26,8 @@ public class NotacaoCientifica1 extends GeradorExercicio
 		addParagrafo("Escreva em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\):");
 		addParagrafo("\\(" + nLatex + "\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Deslocar a vírgula " + n + " casas para a esquerda:" +
-			"\\(\\\\\\)" +
-			"\\(" + nLatex + " = \\mathbf{" + a + " \\times 10^{" + n + "}}\\)"
-		);
+		addResolucao("Deslocar a vírgula " + n + " casas para a esquerda:");
+		addResolucao("\\(" + nLatex + " = \\mathbf{" + a + " \\times 10^{" + n + "}}\\)");
 	}
 
 	private String formatarLatex(long n)

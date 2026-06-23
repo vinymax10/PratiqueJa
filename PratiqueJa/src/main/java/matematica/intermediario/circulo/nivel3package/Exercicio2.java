@@ -20,19 +20,16 @@ public class Exercicio2 extends GeradorExercicio
 		int r = triple[2];
 		int r2 = 360 * k / theta; // r²
 
-		String res = "\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = \\dfrac{" + theta + "}{360} \\cdot \\pi \\cdot r^2 \\\\ ";
-		res += k + " = \\dfrac{" + theta + " \\cdot r^2}{360} \\\\ ";
-		res += "r^2 = \\dfrac{360 \\cdot " + k + "}{" + theta + "} = " + r2 + " \\\\ ";
-		res += "r = \\sqrt{" + r2 + "} = \\mathbf{" + r + "}\\)";
-
 		ConfigSetor config = new ConfigSetor("r", theta);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de um setor circular é \\(" + k + "\\pi\\) e o ângulo central é \\(" + theta + "^\\circ\\). Qual é o raio \\(r\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)");
+		addResolucao("\\(" + k + "\\pi = \\dfrac{" + theta + "}{360} \\cdot \\pi \\cdot r^2\\)");
+		addResolucao("\\(" + k + " = \\dfrac{" + theta + " \\cdot r^2}{360}\\)");
+		addResolucao("\\(r^2 = \\dfrac{360 \\cdot " + k + "}{" + theta + "} = " + r2 + "\\)");
+		addResolucao("\\(r = \\sqrt{" + r2 + "} = \\mathbf{" + r + "}\\)");
 	}
 }

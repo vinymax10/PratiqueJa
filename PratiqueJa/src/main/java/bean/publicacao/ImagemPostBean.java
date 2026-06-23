@@ -113,19 +113,19 @@ public class ImagemPostBean implements Serializable
 		try
 		{
 			long id = configPostBean.getConfigPost().getUsuario().getId();
-			String endBase = diretorio.getEndBackgroundServidor();
+			String endBase = diretorio.getConfig().getEndereco();
 			String endRel;
 			int width, height;
 
 			if(feed)
 			{
-				endRel = "/background/" + id + "/feed/";
+				endRel = "/images/background/" + id + "/feed/";
 				width = 1080;
 				height = 1350;
 			}
 			else
 			{
-				endRel = "/background/" + id + "/reel/";
+				endRel = "/images/background/" + id + "/reel/";
 				width = 1080;
 				height = 1920;
 			}

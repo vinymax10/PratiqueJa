@@ -25,6 +25,7 @@ public class Primo8 extends AgrupadorPrimo
 		addParagrafo("Quantos números primos existem de \\(2\\) até \\(" + n + "\\)?");
 		gerarAlternativasInteiras(contagem);
 
-		setResolucao("Primos até \\(" + n + "\\): \\(" + lista + "\\). \\(\\\\\\) Total: \\(\\mathbf{" + contagem + "}\\).");
+		addResolucao("Primos até \\(" + n + "\\): \\(" + lista + "\\).");
+		addResolucao("Total: \\(\\mathbf{" + contagem + "}\\).");
 	}
 }

@@ -25,9 +25,7 @@ public class Image7 extends GeradorExercicio
 
 		gerarAlternativas(resultadoCorreto);
 
-		String res = "Pelo Teorema de Tales, o ângulo oposto ao diâmetro é \\(90^\\circ\\). Pela soma dos ângulos do triângulo:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + resolucao + "\\)";
-		setResolucao(res);
+		addResolucao("Pelo Teorema de Tales, o ângulo oposto ao diâmetro é \\(90^\\circ\\). Pela soma dos ângulos do triângulo:");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

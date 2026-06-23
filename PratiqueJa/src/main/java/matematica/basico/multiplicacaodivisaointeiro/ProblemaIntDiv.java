@@ -63,11 +63,12 @@ public class ProblemaIntDiv
 		return -(t / n);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int r = resultado();
-		String res = "A grandeza total negativa é representada como \\(-" + t + "\\): \\(\\\\\\)";
-		res += "\\((-" + t + ") \\div " + n + " = \\mathbf{" + r + "}\\)";
-		return res;
+		return new String[] {
+			"A grandeza total negativa é representada como \\(-" + t + "\\):",
+			"\\((-" + t + ") \\div " + n + " = \\mathbf{" + r + "}\\)"
+		};
 	}
 }

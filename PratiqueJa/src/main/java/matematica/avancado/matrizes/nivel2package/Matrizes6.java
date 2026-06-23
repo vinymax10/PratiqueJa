@@ -70,12 +70,11 @@ public class Matrizes6 extends GeradorExercicio
 				first = false;
 			}
 
-		String res = "Calculando \\(" + k + "A\\): \\(\\\\\\)";
-		res += "\\(" + k + "A = " + kAstep + " = " + AuxMatriz.matrizStr(kA) + "\\). \\(\\\\\\)";
-		res += "Somando \\(B\\): \\(\\\\\\)";
-		res += "\\(C = " + cStep + " = " + AuxMatriz.matrizStr(c) + "\\). \\(\\\\\\)";
-		res += "Soma dos elementos de \\(C\\): \\(\\\\\\)";
-		res += "\\(" + sumParts + " = \\mathbf{" + soma + "}\\)";
-		setResolucao(res);
+		addResolucao("Calculando \\(" + k + "A\\):");
+		addResolucao("\\(" + k + "A = " + kAstep + " = " + AuxMatriz.matrizStr(kA) + "\\).");
+		addResolucao("Somando \\(B\\):");
+		addResolucao("\\(C = " + cStep + " = " + AuxMatriz.matrizStr(c) + "\\).");
+		addResolucao("Soma dos elementos de \\(C\\):");
+		addResolucao("\\(" + sumParts + " = \\mathbf{" + soma + "}\\)");
 	}
 }

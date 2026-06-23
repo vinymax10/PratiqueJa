@@ -34,11 +34,9 @@ public class Potenciacao2 extends GeradorExercicio
 			sb.append("(-").append(a).append(")");
 		}
 		sb.append("\\)");
-		sb.append("\\(\\\\\\)");
-		sb.append("Expoente ").append(par ? "par" : "ímpar")
-		  .append(" → sinal ").append(par ? "positivo" : "negativo").append(".");
-		sb.append("\\(\\\\\\)");
-		sb.append("\\((-").append(a).append(")^{").append(p).append("} = \\mathbf{").append(resultado).append("}\\)");
-		setResolucao(sb.toString());
+		addResolucao(sb.toString());
+		addResolucao("Expoente " + (par ? "par" : "ímpar")
+			+ " → sinal " + (par ? "positivo" : "negativo") + ".");
+		addResolucao("\\((-" + a + ")^{" + p + "} = \\mathbf{" + resultado + "}\\)");
 	}
 }

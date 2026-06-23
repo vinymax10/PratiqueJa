@@ -25,6 +25,6 @@ public class ColunaSoma extends GeradorExercicio
 
 		gerarAlternativasInteiras(a + b);
 
-		setResolucao("\\(" + ResolucaoNatural.soma(a, b, true) + "\\)");
+		addResolucao("\\(" + ResolucaoNatural.soma(a, b, true) + "\\)");
 	}
 }

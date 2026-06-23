@@ -21,11 +21,9 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(h);
 
-		String res = "Pela relação métrica no triângulo retângulo:"
-				+ "\\(\\\\\\)"
-				+ "\\(h^2 = m \\cdot n\\\\"
-				+ "h^2 = " + m + " \\times " + n + " = " + (m * n) + "\\\\"
-				+ "h = \\sqrt{" + (m * n) + "} = \\mathbf{" + h + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela relação métrica no triângulo retângulo:");
+		addResolucao("\\(h^2 = m \\cdot n\\)");
+		addResolucao("\\(h^2 = " + m + " \\times " + n + " = " + (m * n) + "\\)");
+		addResolucao("\\(h = \\sqrt{" + (m * n) + "} = \\mathbf{" + h + "}\\)");
 	}
 }

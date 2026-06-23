@@ -29,9 +29,8 @@ public class Oposto extends GeradorExercicio
 		gerarAlternativasInteirasComNegativos(oposto);
 
 		String opostoStr = oposto >= 0 ? "+" + oposto : "" + oposto;
-		String res = "O oposto de um número é o que, somado a ele, resulta zero: \\(\\\\\\)";
-		res += "\\(" + x + " + (" + opostoStr + ") = 0\\) \\(\\\\\\)";
-		res += "Portanto, o oposto de \\(" + x + "\\) é \\(\\mathbf{" + oposto + "}\\).";
-		setResolucao(res);
+		addResolucao("O oposto de um número é o que, somado a ele, resulta zero:");
+		addResolucao("\\(" + x + " + (" + opostoStr + ") = 0\\)");
+		addResolucao("Portanto, o oposto de \\(" + x + "\\) é \\(\\mathbf{" + oposto + "}\\).");
 	}
 }

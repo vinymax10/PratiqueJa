@@ -26,22 +26,19 @@ public class ProblemaBinomioNewton
 		p = n - k;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int binom = AuxCombinacao.combinacao(n, k);
 		int cPow = AuxCombinacao.potencia(c, k);
 		int coef = binom * cPow;
 
-		String res = "Pelo Binômio de Newton, o termo geral da expansão de \\((a+b)^n\\) é:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("T_{k+1} = \\binom{n}{k}\\,a^{\\,n-k}\\,b^{k}") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Aqui \\(a = x\\), \\(b = " + c + "\\) e \\(n = " + n + "\\). O termo em \\(x^{" + p + "}\\) exige \\(n-k = " + p + "\\), logo \\(k = " + k + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(T_{" + (k+1) + "} = \\binom{" + n + "}{" + k + "}\\,x^{" + p + "}\\cdot " + potencia(""+c, k) + " = \\\\ ";
-		res += binom + " \\cdot " + cPow + "\\,x^{" + p + "} = \\mathbf{" + coef + "}\\,x^{" + p + "}\\)";
+		String passoIntroducao = "Pelo Binômio de Newton, o termo geral da expansão de \\((a+b)^n\\) é:";
+		String passoFormula = "\\(" + ParCor.formula("T_{k+1} = \\binom{n}{k}\\,a^{\\,n-k}\\,b^{k}") + "\\)";
+		String passoSubstituicao = "Aqui \\(a = x\\), \\(b = " + c + "\\) e \\(n = " + n + "\\). O termo em \\(x^{" + p + "}\\) exige \\(n-k = " + p + "\\), logo \\(k = " + k + "\\):";
+		String passoExpansao = "\\(T_{" + (k+1) + "} = \\binom{" + n + "}{" + k + "}\\,x^{" + p + "}\\cdot " + potencia(""+c, k) + " =\\)";
+		String passoResultado = "\\(" + binom + " \\cdot " + cPow + "\\,x^{" + p + "} = \\mathbf{" + coef + "}\\,x^{" + p + "}\\)";
 
-		return res;
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoResultado};
 	}
 
 	private String potencia(String base, int exp)

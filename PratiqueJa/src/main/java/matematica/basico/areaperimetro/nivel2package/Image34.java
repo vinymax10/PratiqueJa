@@ -21,17 +21,15 @@ public class Image34 extends GeradorExercicio
 
 		String resultadoCorreto = "" + a;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTrapezio() + "\\\\";
-		resolucao += "b=" + b + ",\\quad c=" + h + ",\\quad d=" + l + "\\\\";
-		resolucao += "a+" + b + "+" + h + "+" + l + "=" + perimetro + "\\\\";
-		resolucao += "a=" + perimetro + "-" + b + "-" + h + "-" + l + "=" + a;
-
 		ConfigImagem config = new ConfigTrapezio2("a", "" + b, "" + h, "" + l, false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do trapézio é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTrapezio() + "\\)");
+		addResolucao("\\(b=" + b + ",\\quad c=" + h + ",\\quad d=" + l + "\\)");
+		addResolucao("\\(a+" + b + "+" + h + "+" + l + "=" + perimetro + "\\)");
+		addResolucao("\\(a=" + perimetro + "-" + b + "-" + h + "-" + l + "=" + a + "\\)");
 	}
 }

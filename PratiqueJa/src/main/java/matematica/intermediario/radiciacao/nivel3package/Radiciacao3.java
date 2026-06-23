@@ -25,27 +25,31 @@ public class Radiciacao3 extends GeradorExercicio
 
 		String texto = " \\dfrac{ \\sqrt{" + a + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c + "} }" + "=";
 
-		String resolucao = " \\dfrac{ \\sqrt{" + a + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c + "} }" +
-		"\\cdot \\dfrac{ \\sqrt{" + b + "} + \\sqrt{" + c + "} }{ \\sqrt{" + b + "} + \\sqrt{" + c + "} }=\\\\";
+		String passo1 = " \\dfrac{ \\sqrt{" + a + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c + "} }" +
+		"\\cdot \\dfrac{ \\sqrt{" + b + "} + \\sqrt{" + c + "} }{ \\sqrt{" + b + "} + \\sqrt{" + c + "} }=";
 
-		resolucao += " \\dfrac{ \\sqrt{" + a + "} \\cdot \\sqrt{" + b + "} + \\sqrt{" + a + "} \\cdot \\sqrt{" + c + "}}{ (\\sqrt{" + b + "})^2 - (\\sqrt{" + c + "})^2 }=\\\\";
+		String passo2 = " \\dfrac{ \\sqrt{" + a + "} \\cdot \\sqrt{" + b + "} + \\sqrt{" + a + "} \\cdot \\sqrt{" + c + "}}{ (\\sqrt{" + b + "})^2 - (\\sqrt{" + c + "})^2 }=";
 
-		resolucao += " \\dfrac{ \\sqrt{" + a + " \\cdot " + b + "} + \\sqrt{" + a + " \\cdot" + c + "}}{ " + b + " - " + c + " }=\\\\";
+		String passo3 = " \\dfrac{ \\sqrt{" + a + " \\cdot " + b + "} + \\sqrt{" + a + " \\cdot" + c + "}}{ " + b + " - " + c + " }=";
 
-		resolucao += " \\dfrac{ \\sqrt{" + a * b + "} + \\sqrt{" + a * c + "} }{ " + (b - c) + " }=";
+		String passo4 = " \\dfrac{ \\sqrt{" + a * b + "} + \\sqrt{" + a * c + "} }{ " + (b - c) + " }=";
 
-		resolucao += " \\dfrac{ " + (x * b) + " + " + (x * b * y) + " }{ " + (b - c) + " }=\\\\";
+		passo4 += " \\dfrac{ " + (x * b) + " + " + (x * b * y) + " }{ " + (b - c) + " }=";
 
 		Racional resultado = new Racional((x * b) + (x * b * y), b - c);
 
-		resolucao += resultado.showDfrac();
+		String passo5 = resultado.showDfrac();
 		resultado.fatoracao(2);
 		if(resultado.isSimplificou())
-			resolucao += "=" + resultado.showDfrac();
+			passo5 += "=" + resultado.showDfrac();
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + passo1 + "\\)");
+		addResolucao("\\(" + passo2 + "\\)");
+		addResolucao("\\(" + passo3 + "\\)");
+		addResolucao("\\(" + passo4 + "\\)");
+		addResolucao("\\(" + passo5 + "\\)");
 	}
 }

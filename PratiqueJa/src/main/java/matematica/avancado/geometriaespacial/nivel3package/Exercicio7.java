@@ -17,10 +17,9 @@ public class Exercicio7 extends GeradorExercicio
 
 		gerarAlternativasInteiras(a, 4, true);
 
-		String res = "\\(V = a^2 \\cdot h = a^2 \\cdot 2a = 2a^3\\\\"
-				+ "2a^3 = " + V + "\\\\"
-				+ "a^3 = \\dfrac{" + V + "}{2} = " + (V / 2) + "\\\\"
-				+ "a = \\sqrt[3]{" + (V / 2) + "} = \\mathbf{" + a + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+		addResolucao("\\(V = a^2 \\cdot h = a^2 \\cdot 2a = 2a^3\\)");
+		addResolucao("\\(2a^3 = " + V + "\\)");
+		addResolucao("\\(a^3 = \\dfrac{" + V + "}{2} = " + (V / 2) + "\\)");
+		addResolucao("\\(a = \\sqrt[3]{" + (V / 2) + "} = \\mathbf{" + a + "}\\,\\text{cm}\\)");
 	}
 }

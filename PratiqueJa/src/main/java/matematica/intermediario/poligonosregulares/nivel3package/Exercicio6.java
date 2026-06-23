@@ -23,22 +23,16 @@ public class Exercicio6 extends GeradorExercicio
 		int l = caso[1];
 		int p = caso[2];
 
-		String res = "Passo 1: encontrar \\(l\\) a partir da área do quadrado \\((A = l^2)\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(l = \\sqrt{A} = \\sqrt{" + area + "} = " + l + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Passo 2: calcular \\(P\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaPerimetro() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(P = 4 \\times " + l + " = \\mathbf{" + p + "}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(4, false, "" + l, "");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de um quadrado é \\(" + area + "\\). Qual é o seu perímetro?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + p);
-		setResolucao(res);
+		addResolucao("Passo 1: encontrar \\(l\\) a partir da área do quadrado \\((A = l^2)\\)");
+		addResolucao("\\(l = \\sqrt{A} = \\sqrt{" + area + "} = " + l + "\\)");
+		addResolucao("Passo 2: calcular \\(P\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaPerimetro() + "\\)");
+		addResolucao("\\(P = 4 \\times " + l + " = \\mathbf{" + p + "}\\)");
 	}
 }

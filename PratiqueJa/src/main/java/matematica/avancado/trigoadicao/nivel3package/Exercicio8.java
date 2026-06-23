@@ -36,12 +36,10 @@ public class Exercicio8 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (p1 * q2 - q1 * p2) + "}{" + den + "}\\)");       // confundiu com sen(α-β) Q2
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q1 + "}{" + r1 + "}\\)."
-				+ "\\(\\\\\\)"
-				+ "Pela fórmula \\(\\cos(\\alpha-\\beta) = \\cos\\alpha\\cos\\beta + \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(\\alpha-\\beta) = \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right)\\cdot\\dfrac{" + q2 + "}{" + r2
-				+ "} + \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + p2 + "}{" + r2 + "} = \\\\"
-				+ "-\\dfrac{" + (q1 * q2) + "}{" + den + "} + \\dfrac{" + (p1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
+		addResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q1 + "}{" + r1 + "}\\).");
+		addResolucao("Pela fórmula \\(\\cos(\\alpha-\\beta) = \\cos\\alpha\\cos\\beta + \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):");
+		addResolucao("\\(\\cos(\\alpha-\\beta) = \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right)\\cdot\\dfrac{" + q2 + "}{" + r2
+				+ "} + \\dfrac{" + p1 + "}{" + r1 + "} \\cdot \\dfrac{" + p2 + "}{" + r2 + "} =\\)");
+		addResolucao("\\(-\\dfrac{" + (q1 * q2) + "}{" + den + "} + \\dfrac{" + (p1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
 	}
 }

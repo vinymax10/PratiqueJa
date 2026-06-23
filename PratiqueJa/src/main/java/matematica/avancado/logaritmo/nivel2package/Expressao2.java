@@ -22,12 +22,11 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Calcule o valor do logaritmo:");
 		addParagrafo("\\(\\log_{" + leftBase + "} " + rightArg + " = \\,?\\)");
 
-		String res = "Reconhecemos \\(" + leftBase + " = " + p + "^{" + m + "}\\) e \\(" + rightArg + " = " + p + "^{" + n + "}\\). \\(\\\\\\)";
-		res += "Pela propriedade \\(\\log_{b^c} a = \\dfrac{1}{c} \\cdot \\log_b a\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + p + "^{" + m + "}} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot \\log_{" + p + "} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot " + n + "\\\\";
-		res += "= \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)";
+		addResolucao("Reconhecemos \\(" + leftBase + " = " + p + "^{" + m + "}\\) e \\(" + rightArg + " = " + p + "^{" + n + "}\\).");
+		addResolucao("Pela propriedade \\(\\log_{b^c} a = \\dfrac{1}{c} \\cdot \\log_b a\\):");
+		addResolucao("\\(\\log_{" + p + "^{" + m + "}} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot \\log_{" + p + "} " + p + "^{" + n + "} = \\dfrac{1}{" + m + "} \\cdot " + n + "\\)");
+		addResolucao("\\(= \\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 
 		gerarAlternativas(resultado);
-		setResolucao(res);
 	}
 }

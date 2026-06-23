@@ -21,11 +21,12 @@ public class Racionais1 extends GeradorExercicio
 		Racional resultado = aRacional.add(bRacional);
 		resultado.fatoracao(2);
 
-		String resolucao = ResolucaoRacionais.simplesSoma(aRacional, bRacional);
+		String[] resolucao = ResolucaoRacionais.simplesSoma(aRacional, bRacional);
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(resultado.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

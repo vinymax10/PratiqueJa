@@ -26,10 +26,9 @@ public class Distributiva extends GeradorExercicio
 		String abStr = ab >= 0 ? "+" + ab : "" + ab;
 		String acStr = Auxiliar.getNumber(ac, "", false);
 
-		String res = "Distribuímos o fator \\(" + aFmt + "\\) sobre os termos do parêntese: \\(\\\\\\)";
-		res += "\\(" + aFmt + " \\times " + bFmt + " = " + abStr + "\\) \\(\\\\\\)";
-		res += "\\(" + aFmt + " \\times (" + (c >= 0 ? "+" + c : "" + c) + ") = " + acStr + "\\) \\(\\\\\\)";
-		res += "\\(" + abStr + " " + acStr + " = \\mathbf{" + resultado + "}\\)";
-		setResolucao(res);
+		addResolucao("Distribuímos o fator \\(" + aFmt + "\\) sobre os termos do parêntese:");
+		addResolucao("\\(" + aFmt + " \\times " + bFmt + " = " + abStr + "\\)");
+		addResolucao("\\(" + aFmt + " \\times (" + (c >= 0 ? "+" + c : "" + c) + ") = " + acStr + "\\)");
+		addResolucao("\\(" + abStr + " " + acStr + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

@@ -26,10 +26,9 @@ public class Expressao2 extends GeradorExercicio
 		dist.add("\\(x < " + (low - 1) + "\\) ou \\(x > " + (high + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res  = "Regra: \\(|f(x)| > k \\Leftrightarrow f(x) < -k\\) ou \\(f(x) > k\\) \\(\\\\\\)";
-		res += "Caso 1: \\(" + bStr + " < -" + k + " \\Rightarrow x < " + low + "\\) \\(\\\\\\)";
-		res += "Caso 2: \\(" + bStr + " > " + k + " \\Rightarrow x > " + high + "\\) \\(\\\\\\)";
-		res += "Solução: \\(\\mathbf{x < " + low + "}\\) ou \\(\\mathbf{x > " + high + "}\\)";
-		setResolucao(res);
+		addResolucao("Regra: \\(|f(x)| > k \\Leftrightarrow f(x) < -k\\) ou \\(f(x) > k\\)");
+		addResolucao("Caso 1: \\(" + bStr + " < -" + k + " \\Rightarrow x < " + low + "\\)");
+		addResolucao("Caso 2: \\(" + bStr + " > " + k + " \\Rightarrow x > " + high + "\\)");
+		addResolucao("Solução: \\(\\mathbf{x < " + low + "}\\) ou \\(\\mathbf{x > " + high + "}\\)");
 	}
 }

@@ -46,20 +46,18 @@ public class ProblemaModa
 		valores = base;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int freq = 0;
 		for(int x : valores) if(x == moda) freq++;
 
-		String res = "A moda (Mo) é o valor que aparece com maior frequência no conjunto.";
-		res += "\\(\\\\\\)";
-		res += "Contando as ocorrências em " + AuxEstatistica.listaStr(AuxEstatistica.ordenar(valores)) + ":";
-		res += "\\(\\\\\\)";
-		res += "O valor " + moda + " aparece " + freq + " vezes — mais que qualquer outro, que aparecem 1 vez.";
-		res += "\\(\\\\\\)";
-		res += "\\(\\text{Mo} = \\mathbf{" + moda + "}\\)";
-
-		return res;
+		return new String[]
+		{
+			"A moda (Mo) é o valor que aparece com maior frequência no conjunto.",
+			"Contando as ocorrências em " + AuxEstatistica.listaStr(AuxEstatistica.ordenar(valores)) + ":",
+			"O valor " + moda + " aparece " + freq + " vezes — mais que qualquer outro, que aparecem 1 vez.",
+			"\\(\\text{Mo} = \\mathbf{" + moda + "}\\)"
+		};
 	}
 
 	public String resultado()

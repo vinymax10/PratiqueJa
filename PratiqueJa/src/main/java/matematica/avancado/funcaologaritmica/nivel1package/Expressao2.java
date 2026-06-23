@@ -45,6 +45,6 @@ public class Expressao2 extends GeradorExercicio
 		dist.add("Constante");
 		dist.add("Nem crescente nem decrescente");
 		embaralharEAdicionarAlternativas(correto, dist);
-		setResolucao(resolucao);
+		addResolucao(resolucao);
 	}
 }

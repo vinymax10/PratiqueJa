@@ -19,7 +19,7 @@ public class Image4 extends GeradorExercicio
 		int h = (int) (((double) b) * 0.6);
 
 		String resultadoCorreto = "" + ((b * h) / 2);
-		String resolucao = ResolucaoAreaPerimetro.areaTriangulo(b, h);
+		String[] passosResolucao = ResolucaoAreaPerimetro.areaTriangulo(b, h);
 
 		ConfigImagem config = null;
 
@@ -36,6 +36,7 @@ public class Image4 extends GeradorExercicio
 		addParagrafo("Qual a área do triângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

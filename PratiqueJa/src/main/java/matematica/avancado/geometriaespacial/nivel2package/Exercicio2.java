@@ -18,8 +18,7 @@ public class Exercicio2 extends GeradorExercicio
 
 		gerarAlternativasInteiras(V, 4, true);
 
-		String res = "\\(V = \\dfrac{A_{\\text{base}} \\times h}{3} = \\dfrac{" + a2 + " \\times " + h
-				+ "}{3} = \\dfrac{" + (a2 * h) + "}{3} = \\mathbf{" + V + "}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+		addResolucao("\\(V = \\dfrac{A_{\\text{base}} \\times h}{3} = \\dfrac{" + a2 + " \\times " + h
+				+ "}{3} = \\dfrac{" + (a2 * h) + "}{3} = \\mathbf{" + V + "}\\,\\text{cm}^3\\)");
 	}
 }

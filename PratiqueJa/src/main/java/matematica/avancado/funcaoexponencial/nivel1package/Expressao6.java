@@ -19,11 +19,9 @@ public class Expressao6 extends GeradorExercicio
 
 		addParagrafo("Dada \\(f(x) = " + baseStr + "^x\\), calcule \\(f(" + n + ")\\).");
 
-		String res = "Substituindo \\(x = " + n + "\\): \\(\\\\\\)";
-		res += "\\(f(" + n + ") = " + baseStr + "^{" + n + "} = \\dfrac{1^{" + n + "}}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\\\";
-		res += "f(" + n + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)";
-
 		gerarAlternativas(resultado);
-		setResolucao(res);
+		addResolucao("Substituindo \\(x = " + n + "\\):");
+		addResolucao("\\(f(" + n + ") = " + baseStr + "^{" + n + "} = \\dfrac{1^{" + n + "}}{" + a + "^{" + n + "}} = \\dfrac{1}{" + aPowN + "}\\)");
+		addResolucao("\\(f(" + n + ") = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 	}
 }

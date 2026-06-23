@@ -30,15 +30,10 @@ public class NotacaoCientifica4 extends GeradorExercicio
 		addParagrafo("Escreva em notação científica \\((a \\times 10^n,\\; 1 \\leq a < 10)\\):");
 		addParagrafo("\\(" + nLatex + "\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Posicionar a vírgula após o primeiro algarismo significativo:" +
-			"\\(\\\\\\)" +
-			"\\(" + nLatex + " \\rightarrow " + mantissa + "\\ldots\\)" +
-			"\\(\\\\\\)" +
-			"Contar \\(" + k + "\\) casas deslocadas, expoente \\(" + k + "\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + nLatex + " = \\mathbf{" + mantissa + " \\times 10^{" + k + "}}\\)"
-		);
+		addResolucao("Posicionar a vírgula após o primeiro algarismo significativo:");
+		addResolucao("\\(" + nLatex + " \\rightarrow " + mantissa + "\\ldots\\)");
+		addResolucao("Contar \\(" + k + "\\) casas deslocadas, expoente \\(" + k + "\\):");
+		addResolucao("\\(" + nLatex + " = \\mathbf{" + mantissa + " \\times 10^{" + k + "}}\\)");
 	}
 
 	private String formatarLatex(long n)

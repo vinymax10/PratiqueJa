@@ -47,17 +47,17 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(" + d3.showDfrac() + "\\)");              // contou uma face a mais
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
-		String resolucao = "Como os eventos são mutuamente exclusivos,"
-				+ " \\(P(A \\cup B) = P(A) + P(B)\\):\\(\\\\\\)";
-		resolucao += "\\(A =\\) " + textoA + "\\(\\\\\\)";
-		resolucao += "\\(B =\\) " + textoB + "\\(\\\\\\)";
-		resolucao += "\\(n(A)=" + nA + ",\\quad n(B)=" + nB + ",\\quad n(\\Omega)=6 \\\\";
-		resolucao += "P(A)=" + pA.showDfrac() + ",\\quad P(B)=" + pB.showDfrac() + " \\\\";
-		resolucao += "P(A \\cup B)=" + pA.showDfrac() + "+" + pB.showDfrac() + "=";
+		addResolucao("Como os eventos são mutuamente exclusivos,"
+				+ " \\(P(A \\cup B) = P(A) + P(B)\\):");
+		addResolucao("\\(A =\\) " + textoA);
+		addResolucao("\\(B =\\) " + textoB);
+		addResolucao("\\(n(A)=" + nA + ",\\quad n(B)=" + nB + ",\\quad n(\\Omega)=6\\)");
+		addResolucao("\\(P(A)=" + pA.showDfrac() + ",\\quad P(B)=" + pB.showDfrac() + "\\)");
+		String resolucao = "\\(P(A \\cup B)=" + pA.showDfrac() + "+" + pB.showDfrac() + "=";
 		if(resSimp)
 			resolucao += fraRes + "=\\mathbf{" + res.showDfrac() + "}\\)";
 		else
 			resolucao += "\\mathbf{" + fraRes + "}\\)";
-		setResolucao(resolucao);
+		addResolucao(resolucao);
 	}
 }

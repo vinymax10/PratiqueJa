@@ -24,18 +24,15 @@ public class ProblemaPermutacaoCircular
 		n = 4 + rand.nextInt(7);
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
-		String res = "Em disposições circulares, fixamos um elemento e permutamos os demais, pois rotações geram o mesmo arranjo:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("P_c(n) = (n-1)!") + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Com \\(n = " + n + "\\):";
-		res += "\\(\\\\\\)";
-		res += "\\(P_c(" + n + ") = (" + n + "-1)! = " + (n-1) + "! = \\\\ ";
-		res += AuxCombinacao.fatorialString(n-1) + " = \\mathbf{" + resultado() + "}\\)";
+		String passoIntroducao = "Em disposições circulares, fixamos um elemento e permutamos os demais, pois rotações geram o mesmo arranjo:";
+		String passoFormula = "\\(" + ParCor.formula("P_c(n) = (n-1)!") + "\\)";
+		String passoSubstituicao = "Com \\(n = " + n + "\\):";
+		String passoExpansao = "\\(P_c(" + n + ") = (" + n + "-1)! = " + (n-1) + "! =\\)";
+		String passoResultado = "\\(" + AuxCombinacao.fatorialString(n-1) + " = \\mathbf{" + resultado() + "}\\)";
 
-		return res;
+		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoResultado};
 	}
 
 	public String resultado()

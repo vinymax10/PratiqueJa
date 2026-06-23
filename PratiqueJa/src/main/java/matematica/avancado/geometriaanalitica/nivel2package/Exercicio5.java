@@ -24,10 +24,8 @@ public class Exercicio5 extends GeradorExercicio
 
 		String sinalMx1 = (m * x1) >= 0 ? " - " + (m * x1) : " + " + Math.abs(m * x1);
 
-		String res = "Calculamos \\(b\\) e depois \\(y\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(b = " + y1 + " - " + m + " \\cdot (" + x1 + ") = " + y1 + sinalMx1 + " = " + b + "\\\\"
-				+ "y = " + m + " \\cdot " + x2 + sinalB + " = \\mathbf{" + y2 + "}\\)";
-		setResolucao(res);
+		addResolucao("Calculamos \\(b\\) e depois \\(y\\):");
+		addResolucao("\\(b = " + y1 + " - " + m + " \\cdot (" + x1 + ") = " + y1 + sinalMx1 + " = " + b + "\\)");
+		addResolucao("\\(y = " + m + " \\cdot " + x2 + sinalB + " = \\mathbf{" + y2 + "}\\)");
 	}
 }

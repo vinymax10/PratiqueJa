@@ -55,10 +55,8 @@ public class Image2 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, dist);
 
-		String res = "A base da função é " + baseDesc + ". \\(\\\\\\)";
-		res += "Regra: \\(a > 1 \\Rightarrow\\) crescente; \\(0 < a < 1 \\Rightarrow\\) decrescente. \\(\\\\\\)";
-		res += "\\(\\mathbf{" + (crescente ? "Crescente" : "Decrescente") + "}\\)";
-
-		setResolucao(res);
+		addResolucao("A base da função é " + baseDesc + ".");
+		addResolucao("Regra: \\(a > 1 \\Rightarrow\\) crescente; \\(0 < a < 1 \\Rightarrow\\) decrescente.");
+		addResolucao("\\(\\mathbf{" + (crescente ? "Crescente" : "Decrescente") + "}\\)");
 	}
 }

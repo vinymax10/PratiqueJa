@@ -44,9 +44,8 @@ public class Estimativa extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas(formatarNumero(estimativa), distrais);
 
-		String res = "Arredondamos cada fator para a dezena mais próxima: \\(\\\\\\)";
-		res += "\\(" + a + " \\approx " + ar + "\\) e \\(" + b + " \\approx " + br + "\\) \\(\\\\\\)";
-		res += "Estimativa: \\(" + ar + " \\times " + br + " = \\mathbf{" + estimativa + "}\\)";
-		setResolucao(res);
+		addResolucao("Arredondamos cada fator para a dezena mais próxima:");
+		addResolucao("\\(" + a + " \\approx " + ar + "\\) e \\(" + b + " \\approx " + br + "\\)");
+		addResolucao("Estimativa: \\(" + ar + " \\times " + br + " = \\mathbf{" + estimativa + "}\\)");
 	}
 }

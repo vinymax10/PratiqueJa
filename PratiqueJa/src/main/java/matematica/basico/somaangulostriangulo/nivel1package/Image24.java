@@ -50,10 +50,8 @@ public class Image24 extends GeradorExercicio
 
 		embaralharEAdicionarAlternativas("\\(" + b + "^\\circ\\)", distratores);
 
-		String res = "No triângulo isósceles, os dois ângulos da base são iguais:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + a + "^\\circ + " + a + "^\\circ + x = 180^\\circ \\\\";
-		res += "x = 180^\\circ - " + a + "^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)";
-		setResolucao(res);
+		addResolucao("No triângulo isósceles, os dois ângulos da base são iguais:");
+		addResolucao("\\(" + a + "^\\circ + " + a + "^\\circ + x = 180^\\circ\\)");
+		addResolucao("\\(x = 180^\\circ - " + a + "^\\circ - " + a + "^\\circ = \\mathbf{" + b + "^\\circ}\\)");
 	}
 }

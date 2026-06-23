@@ -30,14 +30,15 @@ public class Image10 extends GeradorExercicio
 		config.d.nome = strD;
 
 		String resultadoCorreto = "" + x + "°";
-		String resolucao = new MyExpression("y+y+" + b + "=180").resolverLatex();
-		resolucao += "\\\\" + new MyExpression(a + "+" + strD + "=180").resolverLatex();
+		String passo1 = new MyExpression("y+y+" + b + "=180").resolverLatex();
+		String passo2 = new MyExpression(a + "+" + strD + "=180").resolverLatex();
 
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + passo1 + "\\)");
+		addResolucao("\\(" + passo2 + "\\)");
 	}
 }

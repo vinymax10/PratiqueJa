@@ -37,14 +37,9 @@ public class NotacaoCientifica5 extends GeradorExercicio
 
 		addParagrafo("Qual é o maior número entre " + numeros + "?");
 		embaralharEAdicionarAlternativas(maior, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Comparar pelos expoentes: maior expoente corresponde ao maior número." +
-			"\\(\\\\\\)" +
-			"\\(10^{" + exps[3] + "} > 10^{" + exps[2] + "} > 10^{" + exps[1] + "} > 10^{" + exps[0] + "}\\)" +
-			"\\(\\\\\\)" +
-			"O maior expoente é " + exps[3] + ", portanto o maior número é:" +
-			"\\(\\\\\\)" +
-			"\\(\\mathbf{" + mant[3] + " \\times 10^{" + exps[3] + "}}\\)"
-		);
+		addResolucao("Comparar pelos expoentes: maior expoente corresponde ao maior número.");
+		addResolucao("\\(10^{" + exps[3] + "} > 10^{" + exps[2] + "} > 10^{" + exps[1] + "} > 10^{" + exps[0] + "}\\)");
+		addResolucao("O maior expoente é " + exps[3] + ", portanto o maior número é:");
+		addResolucao("\\(\\mathbf{" + mant[3] + " \\times 10^{" + exps[3] + "}}\\)");
 	}
 }

@@ -14,6 +14,7 @@ public class QuantasVezes extends GeradorExercicio
 
 		addParagrafo(problema.getPergunta());
 		embaralharEAdicionarAlternativas(problema.resultado(), problema.getDistratores());
-		setResolucao(problema.resolucao());
+		for(String passo : problema.resolucao())
+			addResolucao(passo);
 	}
 }

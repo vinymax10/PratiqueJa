@@ -37,11 +37,10 @@ public class Exercicio6 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + num + "}{" + (q1 * q2 + p1 * p2) + "}\\)");                   // denominador errado
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\operatorname{tg}(\\alpha+\\beta) = \\dfrac{\\operatorname{tg}\\,\\alpha + \\operatorname{tg}\\,\\beta}{1 - \\operatorname{tg}\\,\\alpha \\cdot \\operatorname{tg}\\,\\beta}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(\\alpha+\\beta) = \\dfrac{\\dfrac{" + p1 + "}{" + q1 + "} + \\dfrac{" + p2 + "}{" + q2 + "}}"
-				+ "{1 - \\dfrac{" + p1 + "}{" + q1 + "} \\cdot \\dfrac{" + p2 + "}{" + q2 + "}} = \\\\"
-				+ "\\dfrac{\\dfrac{" + (p1 * q2) + " + " + (p2 * q1) + "}{" + (q1 * q2) + "}}"
+		addResolucao("Pela fórmula \\(\\operatorname{tg}(\\alpha+\\beta) = \\dfrac{\\operatorname{tg}\\,\\alpha + \\operatorname{tg}\\,\\beta}{1 - \\operatorname{tg}\\,\\alpha \\cdot \\operatorname{tg}\\,\\beta}\\):");
+		addResolucao("\\(\\operatorname{tg}(\\alpha+\\beta) = \\dfrac{\\dfrac{" + p1 + "}{" + q1 + "} + \\dfrac{" + p2 + "}{" + q2 + "}}"
+				+ "{1 - \\dfrac{" + p1 + "}{" + q1 + "} \\cdot \\dfrac{" + p2 + "}{" + q2 + "}} =\\)");
+		addResolucao("\\(\\dfrac{\\dfrac{" + (p1 * q2) + " + " + (p2 * q1) + "}{" + (q1 * q2) + "}}"
 				+ "{\\dfrac{" + (q1 * q2) + " - " + (p1 * p2) + "}{" + (q1 * q2) + "}} = \\mathbf{\\dfrac{" + num + "}{" + den + "}}\\)");
 	}
 }

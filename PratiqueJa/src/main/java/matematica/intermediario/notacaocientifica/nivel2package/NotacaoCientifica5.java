@@ -30,14 +30,9 @@ public class NotacaoCientifica5 extends GeradorExercicio
 		addParagrafo("Calcule, deixando o resultado em notação científica:");
 		addParagrafo("\\(" + a + " \\times 10^{" + n + "} + " + b + " \\times 10^{" + (n - 1) + "}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Converter o segundo termo para o expoente " + n + ":" +
-			"\\(\\\\\\)" +
-			"\\(" + b + " \\times 10^{" + (n - 1) + "} = 0{,}" + b + " \\times 10^{" + n + "}\\)" +
-			"\\(\\\\\\)" +
-			"Somar as mantissas com mesmo expoente:" +
-			"\\(\\\\\\)" +
-			"\\((" + a + " + 0{,}" + b + ") \\times 10^{" + n + "} = \\mathbf{" + mantissa + " \\times 10^{" + n + "}}\\)"
-		);
+		addResolucao("Converter o segundo termo para o expoente " + n + ":");
+		addResolucao("\\(" + b + " \\times 10^{" + (n - 1) + "} = 0{,}" + b + " \\times 10^{" + n + "}\\)");
+		addResolucao("Somar as mantissas com mesmo expoente:");
+		addResolucao("\\((" + a + " + 0{,}" + b + ") \\times 10^{" + n + "} = \\mathbf{" + mantissa + " \\times 10^{" + n + "}}\\)");
 	}
 }

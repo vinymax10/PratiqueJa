@@ -61,26 +61,25 @@ public class Expressao3 extends GeradorExercicio
 		distratores.add(d2);
 		distratores.add(d3);
 
+		addParagrafo("Resolva a inequação");
+		addParagrafo("\\(" + inequacao + "\\)");
+		embaralharEAdicionarAlternativas(correta, distratores);
+
 		// Resolution
-		String res = "Equação incompleta (\\(b=0\\)): isolar \\(x^2\\): \\(\\\\\\)";
-		res += "\\(x^2=" + (r * r) + "\\)" + "\\(\\\\\\)";
-		res += "\\(x=\\pm " + r + "\\), logo \\(x_1=-" + r + "\\) e \\(x_2=" + r + "\\)" + "\\(\\\\\\)";
+		addResolucao("Equação incompleta (\\(b=0\\)): isolar \\(x^2\\):");
+		addResolucao("\\(x^2=" + (r * r) + "\\)");
+		addResolucao("\\(x=\\pm " + r + "\\), logo \\(x_1=-" + r + "\\) e \\(x_2=" + r + "\\)");
 		if (pedirNegativo)
 		{
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) entre as raízes. \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in " + abre + "-" + r + ",\\," + r + fecha + "}\\)";
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) entre as raízes.");
+			addResolucao("\\(\\mathbf{x \\in " + abre + "-" + r + ",\\," + r + fecha + "}\\)");
 		}
 		else
 		{
 			String lEsq = "(-\\infty,\\,-" + r + fecha;
 			String lDir = abre + r + ",\\,+\\infty)";
-			res += "Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) fora das raízes. \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in " + lEsq + " \\cup " + lDir + "}\\)";
+			addResolucao("Como \\(a=1>0\\), a parábola abre para cima: \\(f(x)" + sinal + "0\\) fora das raízes.");
+			addResolucao("\\(\\mathbf{x \\in " + lEsq + " \\cup " + lDir + "}\\)");
 		}
-
-		addParagrafo("Resolva a inequação");
-		addParagrafo("\\(" + inequacao + "\\)");
-		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
 	}
 }

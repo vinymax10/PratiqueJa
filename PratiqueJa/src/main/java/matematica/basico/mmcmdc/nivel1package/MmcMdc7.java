@@ -20,6 +20,6 @@ public class MmcMdc7 extends GeradorExercicio
 
 		addParagrafo("Qual é o menor número que é múltiplo de \\(" + a + "\\) e de \\(" + b + "\\) ao mesmo tempo?");
 		gerarAlternativasInteiras((int) MMC.mmc(a, b));
-		setResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b) + "\\)");
+		addResolucao("\\(" + ResolucaoMmcMdc.mmc(a, b) + "\\)");
 	}
 }

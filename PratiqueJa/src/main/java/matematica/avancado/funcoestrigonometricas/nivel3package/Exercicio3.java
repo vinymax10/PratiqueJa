@@ -43,9 +43,7 @@ public class Exercicio3 extends GeradorExercicio
 		addParagrafo("Calcule o valor da expressão " + expressao + ".");
 		gerarAlternativasInteiras(resultado, 4, true);
 
-		String res = "Substituindo os valores notáveis:"
-				+ "\\(\\\\\\)"
-				+ resolucaoCalc;
-		setResolucao(res);
+		addResolucao("Substituindo os valores notáveis:");
+		addResolucao(resolucaoCalc);
 	}
 }

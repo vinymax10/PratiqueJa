@@ -26,10 +26,9 @@ public class Expressao4 extends GeradorExercicio
 		dist.add("\\((-" + c + ",\\," + d + ")\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "A função inversa troca domínio e imagem, "
-			+ "refletindo o gráfico em torno da reta \\(y = x\\): \\(\\\\\\)";
-		res += "Ponto \\((c,\\,d)\\) em \\(g\\) \\(\\Rightarrow\\) ponto \\((d,\\,c)\\) em \\(f\\). \\(\\\\\\)";
-		res += "Portanto: \\((" + c + ",\\," + d + ") \\to \\mathbf{(" + d + ",\\," + c + ")}\\)";
-		setResolucao(res);
+		addResolucao("A função inversa troca domínio e imagem, "
+			+ "refletindo o gráfico em torno da reta \\(y = x\\):");
+		addResolucao("Ponto \\((c,\\,d)\\) em \\(g\\) \\(\\Rightarrow\\) ponto \\((d,\\,c)\\) em \\(f\\).");
+		addResolucao("Portanto: \\((" + c + ",\\," + d + ") \\to \\mathbf{(" + d + ",\\," + c + ")}\\)");
 	}
 }

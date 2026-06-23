@@ -17,10 +17,9 @@ public class Exercicio7 extends GeradorExercicio
 
 		gerarAlternativasInteiras(r, 4, true);
 
-		String res = "\\(V = \\dfrac{4\\pi r^3}{3} \\Rightarrow " + vCoef + "\\pi = \\dfrac{4\\pi r^3}{3}\\\\"
-				+ "4r^3 = 3 \\times " + vCoef + " = " + (3 * vCoef) + "\\\\"
-				+ "r^3 = \\dfrac{" + (3 * vCoef) + "}{4} = " + r3 + "\\\\"
-				+ "r = \\sqrt[3]{" + r3 + "} = \\mathbf{" + r + "}\\,\\text{cm}\\)";
-		setResolucao(res);
+		addResolucao("\\(V = \\dfrac{4\\pi r^3}{3} \\Rightarrow " + vCoef + "\\pi = \\dfrac{4\\pi r^3}{3}\\)");
+		addResolucao("\\(4r^3 = 3 \\times " + vCoef + " = " + (3 * vCoef) + "\\)");
+		addResolucao("\\(r^3 = \\dfrac{" + (3 * vCoef) + "}{4} = " + r3 + "\\)");
+		addResolucao("\\(r = \\sqrt[3]{" + r3 + "} = \\mathbf{" + r + "}\\,\\text{cm}\\)");
 	}
 }

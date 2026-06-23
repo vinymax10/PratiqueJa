@@ -21,9 +21,7 @@ public class Expressao5 extends GeradorExercicio
 		dist.add("" + (a + 1));
 		embaralharEAdicionarAlternativas("1", dist);
 
-		String res = "Aplicando a propriedade \\(a^0 = 1\\) (qualquer base ≠ 0): \\(\\\\\\)";
-		res += "\\(f(0) = " + a + "^0 = \\mathbf{1}\\)";
-
-		setResolucao(res);
+		addResolucao("Aplicando a propriedade \\(a^0 = 1\\) (qualquer base ≠ 0):");
+		addResolucao("\\(f(0) = " + a + "^0 = \\mathbf{1}\\)");
 	}
 }

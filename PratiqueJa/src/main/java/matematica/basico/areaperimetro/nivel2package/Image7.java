@@ -22,19 +22,14 @@ public class Image7 extends GeradorExercicio
 
 		String resultadoCorreto = "" + (b * h) / 2;
 
-		String resolucao = "";
-		resolucao += ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\\\";
-		resolucao += "h=" + h + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\\\";
-		resolucao += "A=\\dfrac{" + b + " \\cdot " + h + "}{2}=";
-		resolucao += "\\dfrac{" + b * h + "}{2}=";
-		resolucao += (b * h) / 2;
-
 		ConfigImagem config = new ConfigTrianguloIsosceles("", strAltura, "" + meiaBase, "", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do triângulo?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\)");
+		addResolucao("\\(h=" + h + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\)");
+		addResolucao("\\(A=\\dfrac{" + b + " \\cdot " + h + "}{2}=" + "\\dfrac{" + b * h + "}{2}=" + (b * h) / 2 + "\\)");
 	}
 }

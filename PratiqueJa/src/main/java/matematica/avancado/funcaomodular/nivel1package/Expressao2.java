@@ -25,9 +25,8 @@ public class Expressao2 extends GeradorExercicio
 		dist.add("\\((" + k + ",\\," + h + ")\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "Na forma \\(f(x) = |x - h| + k\\), o vértice é \\((h,\\,k)\\). \\(\\\\\\)";
-		res += "Comparando: \\(h = " + h + "\\) e \\(k = " + k + "\\). \\(\\\\\\)";
-		res += "Vértice: \\(\\mathbf{(" + h + ",\\," + k + ")}\\)";
-		setResolucao(res);
+		addResolucao("Na forma \\(f(x) = |x - h| + k\\), o vértice é \\((h,\\,k)\\).");
+		addResolucao("Comparando: \\(h = " + h + "\\) e \\(k = " + k + "\\).");
+		addResolucao("Vértice: \\(\\mathbf{(" + h + ",\\," + k + ")}\\)");
 	}
 }

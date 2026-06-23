@@ -50,20 +50,18 @@ public class Exercicio3 extends GeradorExercicio
 		embaralharEAdicionarAlternativas(correto, distratores.subList(0, 3));
 
 		// Resolução
-		String res = "Pela definição, \\((g \\circ f)(x) = g(f(x))\\). "
-				+ "Substituímos \\(f(x) = " + ef + "\\) em \\(g\\): \\(\\\\\\)";
-		res += "\\((g \\circ f)(x) = " + ag + "\\left(" + ef + "\\right)" + bLatex(bg) + "\\). \\(\\\\\\)";
-		res += "Aplicando a distributiva: \\(\\\\\\)";
-		res += "\\((g \\circ f)(x) = " + coef + "x" + bLatex(ag * bf) + bLatex(bg) + "\\). \\(\\\\\\)";
+		addResolucao("Pela definição, \\((g \\circ f)(x) = g(f(x))\\). "
+				+ "Substituímos \\(f(x) = " + ef + "\\) em \\(g\\):");
+		addResolucao("\\((g \\circ f)(x) = " + ag + "\\left(" + ef + "\\right)" + bLatex(bg) + "\\).");
+		addResolucao("Aplicando a distributiva:");
+		addResolucao("\\((g \\circ f)(x) = " + coef + "x" + bLatex(ag * bf) + bLatex(bg) + "\\).");
 		if(ag * bf + bg != ag * bf)
 		{
-			res += "Simplificando a constante: \\(\\\\\\)";
-			res += "\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).";
+			addResolucao("Simplificando a constante:");
+			addResolucao("\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).");
 		}
 		else
-			res += "\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).";
-
-		setResolucao(res);
+			addResolucao("\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).");
 	}
 
 	private static String equacaoStr(int a, int b)

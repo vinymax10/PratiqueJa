@@ -41,7 +41,8 @@ public class QuestaoDAO extends DAO<Questao>
 		List<Predicate> predicates = new ArrayList<>();
 
 		predicates.add(builder.equal(fromQuestao.get("revisada"), true));
-		predicates.add(builder.notEqual(fromQuestao.get("resolucao"),""));
+		predicates.add(builder.isNotEmpty(
+			fromQuestao.<java.util.Collection<modelo.questao.ParagrafoResolucaoQuestao>>get("resolucaoParagrafos")));
 
 		if(assunto != null)
 		{
@@ -206,14 +207,9 @@ public class QuestaoDAO extends DAO<Questao>
 
 		if(filtroQuestao.getResolucaoLatex() != null)
 		{
-			if(filtroQuestao.getResolucaoLatex().booleanValue())
-				predicates.add(builder.and(
-					builder.isNotNull(fromQuestao.get("resolucao")),
-					builder.notEqual(builder.trim(fromQuestao.<String>get("resolucao")), "")));
-			else
-				predicates.add(builder.or(
-					builder.isNull(fromQuestao.get("resolucao")),
-					builder.equal(builder.trim(fromQuestao.<String>get("resolucao")), "")));
+			Predicate temParagrafos = builder.isNotEmpty(
+				fromQuestao.<java.util.Collection<modelo.questao.ParagrafoResolucaoQuestao>>get("resolucaoParagrafos"));
+			predicates.add(filtroQuestao.getResolucaoLatex().booleanValue() ? temParagrafos : builder.not(temParagrafos));
 		}
 		
 		Usuario usuario = Sessao.getUsuarioLogado();

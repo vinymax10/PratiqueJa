@@ -63,13 +63,15 @@ public class ProblemaSomaTripla
 		return a + b + c;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int ab = a + b;
 		int soma = ab + c;
-		String res = "Somamos as três quantidades em dois passos: \\(\\\\\\)";
-		res += "\\(" + a + " + " + b + " = " + ab + "\\) \\(\\\\\\)";
-		res += "\\(" + ab + " + " + c + " = \\mathbf{" + soma + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Somamos as três quantidades em dois passos:",
+			"\\(" + a + " + " + b + " = " + ab + "\\)",
+			"\\(" + ab + " + " + c + " = \\mathbf{" + soma + "}\\)"
+		};
 	}
 }

@@ -17,7 +17,7 @@ public class Image4 extends GeradorExercicio
 		dados.hipotenusa.str = "a";
 
 		String resultadoCorreto = "" + dados.hipotenusa.show();
-		String resolucao = ResolucaoPitagoras.resolucaoXBC(dados);
+		String[] resolucao = ResolucaoPitagoras.resolucaoXBC(dados);
 
 		Config config = Config.build3(dados);
 		BufferedImage image = config.criarImagem();
@@ -25,6 +25,7 @@ public class Image4 extends GeradorExercicio
 		addParagrafo("Qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : resolucao)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

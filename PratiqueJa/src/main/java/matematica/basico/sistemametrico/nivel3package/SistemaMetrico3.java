@@ -30,13 +30,9 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (h * 100 + m) + "\\,\\text{min}\\)"
 				)
 			);
-			setResolucao(
-				"Converter as horas para minutos e somar:" +
-				"\\(\\\\\\)" +
-				"\\(" + h + "\\,\\text{h} = " + (h * 60) + "\\,\\text{min}\\)" +
-				"\\(\\\\\\)" +
-				"\\(" + (h * 60) + " + " + m + " = \\mathbf{" + total + "}\\,\\text{min}\\)"
-			);
+			addResolucao("Converter as horas para minutos e somar:");
+			addResolucao("\\(" + h + "\\,\\text{h} = " + (h * 60) + "\\,\\text{min}\\)");
+			addResolucao("\\(" + (h * 60) + " + " + m + " = \\mathbf{" + total + "}\\,\\text{min}\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -55,11 +51,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (h + 1) + "\\,\\text{h}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{h} = 3600\\,\\text{s}\\), logo dividir por 3600:" +
-				"\\(\\\\\\)" +
-				"\\(" + s + " \\div 3600 = \\mathbf{" + h + "}\\,\\text{h}\\)"
-			);
+			addResolucao("\\(1\\,\\text{h} = 3600\\,\\text{s}\\), logo dividir por 3600:");
+			addResolucao("\\(" + s + " \\div 3600 = \\mathbf{" + h + "}\\,\\text{h}\\)");
 		}
 		else if (tipo == 2)
 		{
@@ -80,16 +73,14 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (h * 60 + (m30 > 0 ? 1 : 0)) + "\\,\\text{min}\\)"
 				)
 			);
-			setResolucao(
-				"Dividir por 60 para obter horas e minutos:" +
-				"\\(\\\\\\)" +
+			addResolucao("Dividir por 60 para obter horas e minutos:");
+			addResolucao(
 				"\\(" + total + " \\div 60 = " + h + "\\)" +
 				(m30 > 0
 					? " com resto " + m30 + " min"
-					: " exato (sem resto)") +
-				"\\(\\\\\\)" +
-				"\\(\\mathbf{" + hStr + "}\\)"
+					: " exato (sem resto)")
 			);
+			addResolucao("\\(\\mathbf{" + hStr + "}\\)");
 		}
 		else
 		{
@@ -108,11 +99,8 @@ public class SistemaMetrico3 extends GeradorExercicio
 					"\\(" + (h + 24) + "\\,\\text{h}\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{dia} = 24\\,\\text{h}\\), logo multiplicar por 24:" +
-				"\\(\\\\\\)" +
-				"\\(" + dias + " \\times 24 = \\mathbf{" + h + "}\\,\\text{h}\\)"
-			);
+			addResolucao("\\(1\\,\\text{dia} = 24\\,\\text{h}\\), logo multiplicar por 24:");
+			addResolucao("\\(" + dias + " \\times 24 = \\mathbf{" + h + "}\\,\\text{h}\\)");
 		}
 	}
 }

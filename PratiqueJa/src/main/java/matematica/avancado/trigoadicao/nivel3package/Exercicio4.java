@@ -37,10 +37,9 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + (q1 * q2 + p1 * p2) + "}{" + den + "}\\)");  // esqueceu os sinais
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\cos(\\alpha+\\beta) = \\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(\\alpha+\\beta) = \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right)\\dfrac{" + q2 + "}{" + r2
-				+ "} - \\left(-\\dfrac{" + p1 + "}{" + r1 + "}\\right)\\dfrac{" + p2 + "}{" + r2 + "} = \\\\"
-				+ "-\\dfrac{" + (q1 * q2) + "}{" + den + "} + \\dfrac{" + (p1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
+		addResolucao("Pela fórmula \\(\\cos(\\alpha+\\beta) = \\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\):");
+		addResolucao("\\(\\cos(\\alpha+\\beta) = \\left(-\\dfrac{" + q1 + "}{" + r1 + "}\\right)\\dfrac{" + q2 + "}{" + r2
+				+ "} - \\left(-\\dfrac{" + p1 + "}{" + r1 + "}\\right)\\dfrac{" + p2 + "}{" + r2 + "} =\\)");
+		addResolucao("\\(-\\dfrac{" + (q1 * q2) + "}{" + den + "} + \\dfrac{" + (p1 * p2) + "}{" + den + "} = \\mathbf{" + numStr + "}\\)");
 	}
 }

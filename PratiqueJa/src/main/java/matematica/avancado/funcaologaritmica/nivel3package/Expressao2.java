@@ -24,11 +24,10 @@ public class Expressao2 extends GeradorExercicio
 		dist.add("\\(0 < x < " + (k - 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "Base \\(" + a + " > 1\\): \\(\\log_{" + a + "}\\) é crescente, "
-			+ "preserva a ordem: \\(\\\\\\)";
-		res += "\\(\\log_{" + a + "}(x) < \\log_{" + a + "}(" + k + ") "
-			+ "\\Leftrightarrow x < " + k + "\\) \\(\\\\\\)";
-		res += "Incluindo o domínio \\((x > 0)\\): \\(\\mathbf{0 < x < " + k + "}\\)";
-		setResolucao(res);
+		addResolucao("Base \\(" + a + " > 1\\): \\(\\log_{" + a + "}\\) é crescente, "
+			+ "preserva a ordem:");
+		addResolucao("\\(\\log_{" + a + "}(x) < \\log_{" + a + "}(" + k + ") "
+			+ "\\Leftrightarrow x < " + k + "\\)");
+		addResolucao("Incluindo o domínio \\((x > 0)\\): \\(\\mathbf{0 < x < " + k + "}\\)");
 	}
 }

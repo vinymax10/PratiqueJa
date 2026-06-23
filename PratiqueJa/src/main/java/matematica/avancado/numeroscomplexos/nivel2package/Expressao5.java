@@ -19,12 +19,11 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("\\((" + lhsReal + ") + " + b + "i = " + a + " + " + b + "i\\)");
 		gerarAlternativas("" + x);
 
-		String res = "Por igualdade de complexos, as partes reais são iguais: \\(\\\\\\)";
-		res += "\\(" + lhsReal + " = " + a + "\\). \\(\\\\\\)";
+		addResolucao("Por igualdade de complexos, as partes reais são iguais:");
+		addResolucao("\\(" + lhsReal + " = " + a + "\\).");
 		if (c == 0)
-			res += "\\(x = \\dfrac{" + a + "}{" + n + "} = \\mathbf{" + x + "}\\)";
+			addResolucao("\\(x = \\dfrac{" + a + "}{" + n + "} = \\mathbf{" + x + "}\\)");
 		else
-			res += "\\(" + n + "x = " + a + " - " + c + " = " + (a - c) + " \\Rightarrow x = \\dfrac{" + (a - c) + "}{" + n + "} = \\mathbf{" + x + "}\\)";
-		setResolucao(res);
+			addResolucao("\\(" + n + "x = " + a + " - " + c + " = " + (a - c) + " \\Rightarrow x = \\dfrac{" + (a - c) + "}{" + n + "} = \\mathbf{" + x + "}\\)");
 	}
 }

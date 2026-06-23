@@ -17,18 +17,16 @@ public class Image24 extends GeradorExercicio
 		String perimetro = "" + (2 * (b + a));
 		String resultadoCorreto = "" + a;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroParalelogramo() + "\\\\";
-		resolucao += "b=" + b + "\\\\";
-		resolucao += "2 \\cdot(a + " + b + ")=" + perimetro + "\\\\";
-		resolucao += "a +" + b + "=\\dfrac{" + perimetro + "}{2}=" + (b + a) + "\\\\";
-		resolucao += "a=" + (b + a) + "-" + b + "=" + a + "\\\\";
-
 		ConfigParalelogramo config = new ConfigParalelogramo("" + b, "", "a", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do paralelogramo é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroParalelogramo() + "\\)");
+		addResolucao("\\(b=" + b + "\\)");
+		addResolucao("\\(2 \\cdot(a + " + b + ")=" + perimetro + "\\)");
+		addResolucao("\\(a +" + b + "=\\dfrac{" + perimetro + "}{2}=" + (b + a) + "\\)");
+		addResolucao("\\(a=" + (b + a) + "-" + b + "=" + a + "\\)");
 	}
 }

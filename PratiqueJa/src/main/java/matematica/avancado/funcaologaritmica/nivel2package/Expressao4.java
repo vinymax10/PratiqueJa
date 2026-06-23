@@ -24,9 +24,8 @@ public class Expressao4 extends GeradorExercicio
 		dist.add("\\(x \\geq " + (xMin + 1) + "\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
-		String res = "Base \\(" + a + " > 1\\): função crescente, a desigualdade é preservada. \\(\\\\\\)";
-		res += "\\(\\log_{" + a + "}(x) \\geq " + n + " \\Leftrightarrow x \\geq " + a + "^{" + n + "}\\\\";
-		res += "x \\geq \\mathbf{" + xMin + "}\\)";
-		setResolucao(res);
+		addResolucao("Base \\(" + a + " > 1\\): função crescente, a desigualdade é preservada.");
+		addResolucao("\\(\\log_{" + a + "}(x) \\geq " + n + " \\Leftrightarrow x \\geq " + a + "^{" + n + "}\\)");
+		addResolucao("\\(x \\geq \\mathbf{" + xMin + "}\\)");
 	}
 }

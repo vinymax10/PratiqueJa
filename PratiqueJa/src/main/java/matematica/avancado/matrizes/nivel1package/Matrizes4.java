@@ -20,10 +20,9 @@ public class Matrizes4 extends GeradorExercicio
 		addParagrafo("\\(A = " + AuxMatriz.matrizStr(a) + "\\)");
 		gerarAlternativas("" + correct);
 
-		String res = "\\(a_{i,j}\\) é o elemento da linha \\(i\\), coluna \\(j\\). \\(\\\\\\)";
-		res += "Destacando \\(a_{" + (posI + 1) + "," + (posJ + 1) + "}\\): \\(\\\\\\)";
-		res += "\\(" + AuxMatriz.matrizStr(a, posI, posJ) + "\\). \\(\\\\\\)";
-		res += "\\(a_{" + (posI + 1) + "," + (posJ + 1) + "} = \\mathbf{" + correct + "}\\)";
-		setResolucao(res);
+		addResolucao("\\(a_{i,j}\\) é o elemento da linha \\(i\\), coluna \\(j\\).");
+		addResolucao("Destacando \\(a_{" + (posI + 1) + "," + (posJ + 1) + "}\\):");
+		addResolucao("\\(" + AuxMatriz.matrizStr(a, posI, posJ) + "\\).");
+		addResolucao("\\(a_{" + (posI + 1) + "," + (posJ + 1) + "} = \\mathbf{" + correct + "}\\)");
 	}
 }

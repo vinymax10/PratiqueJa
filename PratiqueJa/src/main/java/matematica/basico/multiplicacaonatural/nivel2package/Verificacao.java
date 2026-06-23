@@ -24,9 +24,8 @@ public class Verificacao extends GeradorExercicio
 		distrais.add("\\(" + c + " \\times " + b + "\\)");
 		embaralharEAdicionarAlternativas(correta, distrais);
 
-		String res = "A divisão é a operação inversa da multiplicação. Se \\("
-			+ a + " \\times " + b + " = " + c + "\\), então: \\(\\\\\\)";
-		res += "\\(" + c + " \\div " + b + " = \\mathbf{" + a + "}\\)";
-		setResolucao(res);
+		addResolucao("A divisão é a operação inversa da multiplicação. Se \\("
+			+ a + " \\times " + b + " = " + c + "\\), então:");
+		addResolucao("\\(" + c + " \\div " + b + " = \\mathbf{" + a + "}\\)");
 	}
 }

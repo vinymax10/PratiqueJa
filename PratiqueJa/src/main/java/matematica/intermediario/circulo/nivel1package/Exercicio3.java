@@ -49,19 +49,16 @@ public class Exercicio3 extends GeradorExercicio
 			k = r;
 		}
 
-		String res = "\\(" + ResolucaoCirculo.formulaArco() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(\\ell = \\dfrac{" + theta + "}{360} \\cdot 2\\pi \\cdot " + r + " \\\\ ";
-		res += "\\ell = \\dfrac{" + (theta * 2 * r) + "}{360}\\pi \\\\ ";
-		res += "\\ell = \\mathbf{" + k + "}\\pi\\)";
-
 		ConfigSetor config = new ConfigSetor("" + r, theta);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual o comprimento do arco de círculo de raio \\(" + r + "\\) e ângulo central \\(" + theta + "^\\circ\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativasPi(k);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaArco() + "\\)");
+		addResolucao("\\(\\ell = \\dfrac{" + theta + "}{360} \\cdot 2\\pi \\cdot " + r + "\\)");
+		addResolucao("\\(\\ell = \\dfrac{" + (theta * 2 * r) + "}{360}\\pi\\)");
+		addResolucao("\\(\\ell = \\mathbf{" + k + "}\\pi\\)");
 	}
 
 	private void gerarAlternativasPi(int k)

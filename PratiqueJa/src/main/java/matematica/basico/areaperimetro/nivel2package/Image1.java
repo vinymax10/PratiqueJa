@@ -18,17 +18,14 @@ public class Image1 extends GeradorExercicio
 
 		String resultadoCorreto = "" + l * l;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaDiagonalQuadrado() +
-		", \\quad " + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\\\";
-		resolucao += "l=" + l + "\\\\";
-		resolucao += "A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l);
-
 		ConfigQuadrado config = new ConfigQuadrado("l", "d", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se \\(d=" + strDiagonal + "\\), qual a área do quadrado?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ", \\quad " + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\)");
+		addResolucao("\\(l=" + l + "\\)");
+		addResolucao("\\(A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l) + "\\)");
 	}
 }

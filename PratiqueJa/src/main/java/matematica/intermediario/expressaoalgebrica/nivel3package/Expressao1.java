@@ -141,13 +141,12 @@ public class Expressao1 extends GeradorExercicio
 			}
 		}
 
-		String res = "Agrupamos os termos com \\(" + variavel + "\\) e as constantes: \\(\\\\\\)";
+		addResolucao("Agrupamos os termos com \\(" + variavel + "\\) e as constantes:");
 		if(termosVar.length() > 0)
-			res += "Termos em \\(" + variavel + "\\): \\(" + termosVar + "\\) \\(\\\\\\)";
+			addResolucao("Termos em \\(" + variavel + "\\): \\(" + termosVar + "\\)");
 		if(termosCte.length() > 0)
-			res += "Constantes: \\(" + termosCte + "\\\\";
-		res += "" + resultadoCorreto + "\\)";
-		setResolucao(res);
+			addResolucao("Constantes: \\(" + termosCte + "\\)");
+		addResolucao("\\(" + resultadoCorreto + "\\)");
 	}
 
 	private String buildResultado(long cx, long cte, String var)

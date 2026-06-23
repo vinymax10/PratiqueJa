@@ -15,7 +15,7 @@ public class Image7 extends GeradorExercicio
 		int d = (int) (((double) D) * 0.7);
 
 		String resultadoCorreto = "" + (D / 2 * d);
-		String resolucao = ResolucaoAreaPerimetro.losango(D, d);
+		String[] passosResolucao = ResolucaoAreaPerimetro.losango(D, d);
 
 		ConfigLozango config = new ConfigLozango("" + D, "" + d, "", "", "", true);
 		BufferedImage image = config.criarImagem();
@@ -23,6 +23,7 @@ public class Image7 extends GeradorExercicio
 		addParagrafo("Qual a área do losango?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

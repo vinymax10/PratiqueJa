@@ -22,25 +22,23 @@ public class Exercicio4 extends GeradorExercicio
 		addParagrafoImagem(img);
 		gerarAlternativasBoolean(d.eInjetora);
 
-		String res;
 		if(d.eInjetora)
 		{
-			res = "Uma função é injetora quando elementos distintos do domínio têm "
-				+ "imagens distintas no contradomínio. \\(\\\\\\)";
-			res += "Analisando o diagrama: cada elemento de \\(B\\) recebe no máximo uma seta. \\(\\\\\\)";
-			res += "Portanto, a função \\(\\textbf{é}\\) injetora.";
+			addResolucao("Uma função é injetora quando elementos distintos do domínio têm "
+				+ "imagens distintas no contradomínio.");
+			addResolucao("Analisando o diagrama: cada elemento de \\(B\\) recebe no máximo uma seta.");
+			addResolucao("Portanto, a função \\(\\textbf{é}\\) injetora.");
 		}
 		else
 		{
 			int e1   = d.dominio[d.idxColisao1];
 			int e2   = d.dominio[d.idxColisao2];
 			int imag = d.contradominio[d.mapeamento[d.idxColisao1][0]];
-			res = "Uma função é injetora quando elementos distintos do domínio têm "
-				+ "imagens distintas no contradomínio. \\(\\\\\\)";
-			res += "No diagrama, \\(" + e1 + "\\) e \\(" + e2 + "\\) apontam ambos para "
-				+ "\\(" + imag + "\\): dois elementos com a mesma imagem. \\(\\\\\\)";
-			res += "Portanto, a função \\(\\textbf{não é}\\) injetora.";
+			addResolucao("Uma função é injetora quando elementos distintos do domínio têm "
+				+ "imagens distintas no contradomínio.");
+			addResolucao("No diagrama, \\(" + e1 + "\\) e \\(" + e2 + "\\) apontam ambos para "
+				+ "\\(" + imag + "\\): dois elementos com a mesma imagem.");
+			addResolucao("Portanto, a função \\(\\textbf{não é}\\) injetora.");
 		}
-		setResolucao(res);
 	}
 }

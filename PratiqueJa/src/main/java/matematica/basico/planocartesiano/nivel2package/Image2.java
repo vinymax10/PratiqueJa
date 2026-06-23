@@ -51,11 +51,9 @@ public class Image2 extends GeradorExercicio
 			if (v != d2) distratores.add("\\(\\sqrt{" + v + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Do plano, lemos as coordenadas de P: \\(x = " + px + "\\) e \\(y = " + py + "\\). ";
-		res += "Aplicando a fórmula da distância à origem: \\(\\\\\\)";
-		res += "\\(d(P,\\;O) = \\sqrt{x^2 + y^2} = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\\\ \\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + d2 + "}\\)";
-
-		setResolucao(res);
+		addResolucao("Do plano, lemos as coordenadas de P: \\(x = " + px + "\\) e \\(y = " + py + "\\). Aplicando a fórmula da distância à origem:");
+		addResolucao("\\(d(P,\\;O) = \\sqrt{x^2 + y^2} = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\)");
+		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + d2 + "}\\)");
 	}
 
 	private boolean ehQuadradoPerfeito(int n)

@@ -26,10 +26,9 @@ public class Expressao14 extends GeradorExercicio
 				+ "\\), qual é o " + centralPos + "º termo (termo central)?");
 		gerarAlternativas(central.toString());
 
-		String res = "O termo central de uma PA com número ímpar de termos é a média dos extremos: \\(\\\\\\)";
-		res += "\\(a_{" + centralPos + "} = \\dfrac{a_1 + a_n}{2} \\\\";
-		res += "a_{" + centralPos + "} = \\dfrac{" + a1.showDfrac() + " + " + an.showDfrac()
-				+ "}{2} = \\mathbf{" + central.showDfrac() + "}\\)";
-		setResolucao(res);
+		addResolucao("O termo central de uma PA com número ímpar de termos é a média dos extremos:");
+		addResolucao("\\(a_{" + centralPos + "} = \\dfrac{a_1 + a_n}{2}\\)");
+		addResolucao("\\(a_{" + centralPos + "} = \\dfrac{" + a1.showDfrac() + " + " + an.showDfrac()
+				+ "}{2} = \\mathbf{" + central.showDfrac() + "}\\)");
 	}
 }

@@ -54,27 +54,26 @@ public class Expressao3 extends GeradorExercicio
 		distratores.add(d2);
 		distratores.add(d3);
 
-		String res = "Zeros dos fatores: \\(x_1=" + r1 + "\\) e \\(x_2=" + r2 + "\\)" + "\\(\\\\\\)";
-		res += "Estudar o sinal do produto em cada intervalo: \\(\\\\\\)";
-		res += "Para \\(x<" + r1 + "\\): \\((x-" + r1 + ")<0\\) e \\((x-" + r2 + ")<0\\), produto \\((-)(-)=+\\)" + "\\(\\\\\\)";
-		res += "Para \\(" + r1 + "<x<" + r2 + "\\): \\((x-" + r1 + ")>0\\) e \\((x-" + r2 + ")<0\\), produto \\((+)(-)=-\\)" + "\\(\\\\\\)";
-		res += "Para \\(x>" + r2 + "\\): \\((x-" + r1 + ")>0\\) e \\((x-" + r2 + ")>0\\), produto \\((+)(+)=+\\)" + "\\(\\\\\\)";
+		addParagrafo("Resolva a inequação");
+		addParagrafo("\\(" + eq + "\\)");
+		embaralharEAdicionarAlternativas(correta, distratores);
+
+		addResolucao("Zeros dos fatores: \\(x_1=" + r1 + "\\) e \\(x_2=" + r2 + "\\)");
+		addResolucao("Estudar o sinal do produto em cada intervalo:");
+		addResolucao("Para \\(x<" + r1 + "\\): \\((x-" + r1 + ")<0\\) e \\((x-" + r2 + ")<0\\), produto \\((-)(-)=+\\)");
+		addResolucao("Para \\(" + r1 + "<x<" + r2 + "\\): \\((x-" + r1 + ")>0\\) e \\((x-" + r2 + ")<0\\), produto \\((+)(-)=-\\)");
+		addResolucao("Para \\(x>" + r2 + "\\): \\((x-" + r1 + ")>0\\) e \\((x-" + r2 + ")>0\\), produto \\((+)(+)=+\\)");
 		if (pedirPositivo)
 		{
 			String cond = strict ? "produto \\(>0\\)" : "produto \\(\\geq 0\\)";
-			res += "A condição " + cond + " é satisfeita fora das raízes" + (strict ? "." : " (incluindo os zeros).") + " \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in (-\\infty,\\," + r1 + fecha + " \\cup " + abre + r2 + ",\\,+\\infty)}\\)";
+			addResolucao("A condição " + cond + " é satisfeita fora das raízes" + (strict ? "." : " (incluindo os zeros)."));
+			addResolucao("\\(\\mathbf{x \\in (-\\infty,\\," + r1 + fecha + " \\cup " + abre + r2 + ",\\,+\\infty)}\\)");
 		}
 		else
 		{
 			String cond = strict ? "produto \\(<0\\)" : "produto \\(\\leq 0\\)";
-			res += "A condição " + cond + " é satisfeita entre as raízes" + (strict ? "." : " (incluindo os zeros).") + " \\(\\\\\\)";
-			res += "\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)";
+			addResolucao("A condição " + cond + " é satisfeita entre as raízes" + (strict ? "." : " (incluindo os zeros)."));
+			addResolucao("\\(\\mathbf{x \\in " + abre + r1 + ",\\," + r2 + fecha + "}\\)");
 		}
-
-		addParagrafo("Resolva a inequação");
-		addParagrafo("\\(" + eq + "\\)");
-		embaralharEAdicionarAlternativas(correta, distratores);
-		setResolucao(res);
 	}
 }

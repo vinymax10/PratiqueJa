@@ -43,12 +43,8 @@ public class Radiciacao10 extends GeradorExercicio
 
 		String regra = soma ? "Radicais semelhantes: somam-se os coeficientes."
 		                    : "Radicais semelhantes: subtraem-se os coeficientes.";
-		setResolucao(
-			regra +
-			"\\(\\\\\\)" +
-			"\\(" + m + "\\sqrt{" + r + "} " + op + " " + n + "\\sqrt{" + r + "} = (" + m + " " + op + " " + n + ")\\sqrt{" + r + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(= \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)"
-		);
+		addResolucao(regra);
+		addResolucao("\\(" + m + "\\sqrt{" + r + "} " + op + " " + n + "\\sqrt{" + r + "} = (" + m + " " + op + " " + n + ")\\sqrt{" + r + "}\\)");
+		addResolucao("\\(= \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
 	}
 }

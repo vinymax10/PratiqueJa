@@ -17,8 +17,7 @@ public class Image8 extends GeradorExercicio
 
 		String resultadoCorreto = "" + (l * l) / 4;
 
-		String resolucao = "";
-		resolucao += ResolucaoAreaPerimetro.areaTrianguloEquilatero(l);
+		String[] passosResolucao = ResolucaoAreaPerimetro.areaTrianguloEquilatero(l);
 
 		ConfigImagem config = new ConfigTrianguloEquilatero("" + l, true);
 		BufferedImage image = config.criarImagem();
@@ -26,6 +25,7 @@ public class Image8 extends GeradorExercicio
 		addParagrafo("Se a área do triângulo é \\(A=x\\sqrt{3}\\), qual o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passoResolucao : passosResolucao)
+			addResolucao(passoResolucao);
 	}
 }

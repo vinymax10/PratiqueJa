@@ -22,6 +22,6 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Quantos termos tem a PG?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas("" + n);
-		setResolucao("\\(" + ResolucaoPG.numeroTermos(a1, q, an, n) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.numeroTermos(a1, q, an, n) + "\\)");
 	}
 }

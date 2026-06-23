@@ -46,7 +46,7 @@ public class Expressao10 extends AgrupadorExercicio
 		addParagrafo("\\(\\{" + par1 + " " + t2 + " " + par2 + "\\} " + t5 + " " + par3 + " = \\,?\\)");
 		gerarAlternativas("" + result);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& \\{" + par1 + " " + t2 + " " + par2 + "\\} " + t5 + " " + par3 + " = \\\\" +
 			"& \\{" + p1 + " " + t2 + " " + p2 + "\\} " + t5 + " " + p4 + " = \\\\" +

@@ -44,19 +44,16 @@ public class Exercicio4 extends GeradorExercicio
 
 		String kPi = k == 1 ? "\\pi" : k + "\\pi";
 
-		String res = "\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A_s = \\dfrac{" + theta + "}{360} \\cdot \\pi \\cdot " + r + "^2 \\\\ ";
-		res += "A_s = \\dfrac{" + theta + " \\cdot " + (r * r) + "}{360}\\pi \\\\ ";
-		res += "A_s = \\dfrac{" + (theta * r * r) + "}{360}\\pi = \\mathbf{" + kPi + "}\\)";
-
 		ConfigSetor config = new ConfigSetor("" + r, theta);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Qual a área do setor circular de raio \\(" + r + "\\) e ângulo central \\(" + theta + "^\\circ\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativasPi(k);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaAreaSetor() + "\\)");
+		addResolucao("\\(A_s = \\dfrac{" + theta + "}{360} \\cdot \\pi \\cdot " + r + "^2\\)");
+		addResolucao("\\(A_s = \\dfrac{" + theta + " \\cdot " + (r * r) + "}{360}\\pi\\)");
+		addResolucao("\\(A_s = \\dfrac{" + (theta * r * r) + "}{360}\\pi = \\mathbf{" + kPi + "}\\)");
 	}
 
 	private void gerarAlternativasPi(int k)

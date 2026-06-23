@@ -54,6 +54,6 @@ public class Expressao5 extends GeradorExercicio
 			default -> { dist.add("Nenhuma (\\(S = \\emptyset\\))"); dist.add("Uma"); dist.add("Três"); }
 		}
 		embaralharEAdicionarAlternativas(correto, dist);
-		setResolucao(resolucao);
+		addResolucao(resolucao);
 	}
 }

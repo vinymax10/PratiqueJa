@@ -25,11 +25,10 @@ public class TresFatores extends GeradorExercicio
 		int ab = a * b;
 		String abFmt = ab < 0 ? "(" + ab + ")" : "" + ab;
 
-		String res = "\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\). \\(\\\\\\)";
-		res += negativos + " fator" + (negativos == 1 ? "" : "es") + " negativo" + (negativos == 1 ? "" : "s") + " ";
-		res += positivo ? "(par) → produto positivo. \\(\\\\\\)" : "(ímpar) → produto negativo. \\(\\\\\\)";
-		res += ResolucaoMDInteiro.multiplicacao(ab, c);
-
-		setResolucao(res);
+		addResolucao("\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\).");
+		addResolucao(negativos + " fator" + (negativos == 1 ? "" : "es") + " negativo" + (negativos == 1 ? "" : "s") + " "
+			+ (positivo ? "(par) → produto positivo." : "(ímpar) → produto negativo."));
+		for(String passo : ResolucaoMDInteiro.multiplicacao(ab, c))
+			addResolucao(passo);
 	}
 }

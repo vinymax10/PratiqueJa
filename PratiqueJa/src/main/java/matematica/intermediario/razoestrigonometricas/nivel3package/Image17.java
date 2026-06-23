@@ -26,6 +26,6 @@ public class Image17 extends GeradorExercicio
 
 		gerarAlternativas(cosVal.toString());
 		String resolucao = ResolucaoRazoesTrigonometricas.identidadePitagorica(angle, p, q, r);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

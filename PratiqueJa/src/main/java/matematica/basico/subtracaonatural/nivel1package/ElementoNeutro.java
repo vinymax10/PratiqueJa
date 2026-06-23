@@ -14,18 +14,16 @@ public class ElementoNeutro extends GeradorExercicio
 			addParagrafo("Qual é o valor de \\(" + a + " - 0\\)?");
 			gerarAlternativasInteiras(a);
 
-			String res = "Subtrair \\(0\\) não altera o valor — \\(0\\) é o elemento neutro da subtração à direita: \\(\\\\\\)";
-			res += "\\(" + a + " - 0 = \\mathbf{" + a + "}\\)";
-			setResolucao(res);
+			addResolucao("Subtrair \\(0\\) não altera o valor — \\(0\\) é o elemento neutro da subtração à direita:");
+			addResolucao("\\(" + a + " - 0 = \\mathbf{" + a + "}\\)");
 		}
 		else
 		{
 			addParagrafo("Qual é o valor de \\(" + a + " - " + a + "\\)?");
 			gerarAlternativasInteiras(0);
 
-			String res = "Todo número subtraído de si mesmo é igual a zero: \\(\\\\\\)";
-			res += "\\(" + a + " - " + a + " = \\mathbf{0}\\)";
-			setResolucao(res);
+			addResolucao("Todo número subtraído de si mesmo é igual a zero:");
+			addResolucao("\\(" + a + " - " + a + " = \\mathbf{0}\\)");
 		}
 	}
 }

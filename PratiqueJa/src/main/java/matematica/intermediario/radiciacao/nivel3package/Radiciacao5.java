@@ -31,52 +31,59 @@ public class Radiciacao5 extends GeradorExercicio
 
 		String texto = " \\dfrac{ \\sqrt{" + a.showDfrac() + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c.showDfrac() + "} }" + "=";
 
-		String resolucao = " \\dfrac{ \\sqrt{" + a.showDfrac() + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c.showDfrac() + "} }" +
-		"\\cdot \\dfrac{ \\sqrt{" + b + "} + \\sqrt{" + c.showDfrac() + "} }{ \\sqrt{" + b + "} + \\sqrt{" + c.showDfrac() + "} }=\\\\";
+		String passo1 = " \\dfrac{ \\sqrt{" + a.showDfrac() + "} }{ \\sqrt{" + b + "} - \\sqrt{" + c.showDfrac() + "} }" +
+		"\\cdot \\dfrac{ \\sqrt{" + b + "} + \\sqrt{" + c.showDfrac() + "} }{ \\sqrt{" + b + "} + \\sqrt{" + c.showDfrac() + "} }=";
 
-		resolucao += " \\dfrac{ \\sqrt{" + a.showDfrac() + "} \\cdot \\sqrt{" + b + "} + \\sqrt{" + a.showDfrac() + "} \\cdot \\sqrt{" + c.showDfrac() + "}}{ (\\sqrt{" + b + "})^2 - (\\sqrt{" + c.showDfrac() + "})^2 }=\\\\";
+		String passo2 = " \\dfrac{ \\sqrt{" + a.showDfrac() + "} \\cdot \\sqrt{" + b + "} + \\sqrt{" + a.showDfrac() + "} \\cdot \\sqrt{" + c.showDfrac() + "}}{ (\\sqrt{" + b + "})^2 - (\\sqrt{" + c.showDfrac() + "})^2 }=";
 
-		resolucao += " \\dfrac{ \\sqrt{" + a.showDfrac() + "\\cdot" + bR.showDfrac() + "} + \\sqrt{" + a.showDfrac() + "\\cdot" + c.showDfrac() + "} }{ " + b + " - " + c.showDfrac() + " }=";
+		String passo3 = " \\dfrac{ \\sqrt{" + a.showDfrac() + "\\cdot" + bR.showDfrac() + "} + \\sqrt{" + a.showDfrac() + "\\cdot" + c.showDfrac() + "} }{ " + b + " - " + c.showDfrac() + " }=";
 
 		Racional parcial = a.mult(c);
 		parcial.fatoracao(2);
 		Racional denominador = bR.minus(c);
 		denominador.fatoracao(2);
 
-		resolucao += " \\dfrac{ \\sqrt{" + (x * x) + "} + \\sqrt{" + parcial.showDfrac() + "} }{ " + denominador.showDfrac() + " }=\\\\";
+		passo3 += " \\dfrac{ \\sqrt{" + (x * x) + "} + \\sqrt{" + parcial.showDfrac() + "} }{ " + denominador.showDfrac() + " }=";
 
 		parcial = new Racional(x * y, b);
 		parcial.fatoracao(2);
 
-		resolucao += " \\dfrac{ " + x + " + " + parcial.showDfrac() + " }{ " + denominador.showDfrac() + " }=";
+		String passo4 = " \\dfrac{ " + x + " + " + parcial.showDfrac() + " }{ " + denominador.showDfrac() + " }=";
 
 		parcial = new Racional(x).add(parcial);
 		parcial.fatoracao(2);
 
-		resolucao += " \\dfrac{ " + parcial.showDfrac() + " }{ " + denominador.showDfrac() + " }=";
+		passo4 += " \\dfrac{ " + parcial.showDfrac() + " }{ " + denominador.showDfrac() + " }=";
 
 		if(parcial.denominador != 1 || denominador.denominador != 1)
 		{
-			resolucao += parcial.showDfrac() + " \\cdot " + denominador.inverter().showDfrac() + "=";
+			passo4 += parcial.showDfrac() + " \\cdot " + denominador.inverter().showDfrac() + "=";
 
 			parcial = parcial.mult(denominador.inverter());
-			resolucao += parcial.showDfrac();
+			passo4 += parcial.showDfrac();
 
 			parcial.fatoracao(2);
 			if(parcial.isSimplificou())
-				resolucao += "=" + parcial.showDfrac();
+				passo4 += "=" + parcial.showDfrac();
 		}
 		else
 		{
 			parcial = parcial.mult(denominador.inverter());
 			parcial.fatoracao(2);
-			resolucao += parcial.showDfrac();
+			passo4 += parcial.showDfrac();
 		}
-		resolucao = resolucao.replace("(", "\\left(").replace(")", "\\right)");
+
+		passo1 = passo1.replace("(", "\\left(").replace(")", "\\right)");
+		passo2 = passo2.replace("(", "\\left(").replace(")", "\\right)");
+		passo3 = passo3.replace("(", "\\left(").replace(")", "\\right)");
+		passo4 = passo4.replace("(", "\\left(").replace(")", "\\right)");
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(parcial.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + passo1.trim() + "\\)");
+		addResolucao("\\(" + passo2.trim() + "\\)");
+		addResolucao("\\(" + passo3.trim() + "\\)");
+		addResolucao("\\(" + passo4.trim() + "\\)");
 	}
 }

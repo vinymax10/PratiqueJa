@@ -56,23 +56,21 @@ public class Estatistica4 extends GeradorExercicio
 				distratores.add(NOMES[i]);
 		embaralharEAdicionarAlternativas(tipoCorreto, distratores);
 
-		String res;
 		if (tipoIdx <= 1)
 		{
-			res = "A variável \"" + descricao + "\" é quantitativa (expressa um valor numérico).\\(\\\\\\)";
+			addResolucao("A variável \"" + descricao + "\" é quantitativa (expressa um valor numérico).");
 			if (tipoIdx == 0)
-				res += "Entre as quantitativas: contável → discreta; mensurável → contínua.\\(\\\\\\)";
-			res += "Esta variável " + justificativa + ".\\(\\\\\\)";
-			res += "Classificação: " + tipoCorreto + ".";
+				addResolucao("Entre as quantitativas: contável → discreta; mensurável → contínua.");
+			addResolucao("Esta variável " + justificativa + ".");
+			addResolucao("Classificação: " + tipoCorreto + ".");
 		}
 		else
 		{
-			res = "A variável \"" + descricao + "\" é qualitativa (expressa uma categoria, não um valor numérico).\\(\\\\\\)";
+			addResolucao("A variável \"" + descricao + "\" é qualitativa (expressa uma categoria, não um valor numérico).");
 			if (tipoIdx == 2)
-				res += "Entre as qualitativas: sem ordem entre categorias → nominal; com ordem → ordinal.\\(\\\\\\)";
-			res += "Esta variável " + justificativa + ".\\(\\\\\\)";
-			res += "Classificação: " + tipoCorreto + ".";
+				addResolucao("Entre as qualitativas: sem ordem entre categorias → nominal; com ordem → ordinal.");
+			addResolucao("Esta variável " + justificativa + ".");
+			addResolucao("Classificação: " + tipoCorreto + ".");
 		}
-		setResolucao(res);
 	}
 }

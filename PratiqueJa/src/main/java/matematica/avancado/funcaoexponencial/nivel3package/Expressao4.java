@@ -28,14 +28,12 @@ public class Expressao4 extends GeradorExercicio
 
 		addParagrafo("Resolva a equação \\(\\left(\\dfrac{1}{" + a + "}\\right)^x = " + aPowN + "\\).");
 
-		String res = "Reescrevemos: \\(\\dfrac{1}{" + a + "} = " + a + "^{-1}\\), logo: \\(\\\\\\)";
-		res += "\\(\\left(" + a + "^{-1}\\right)^x = " + a + "^{" + n + "}\\\\";
-		res += "" + a + "^{-x} = " + a + "^{" + n + "}\\\\";
-		res += "-x = " + n + "\\\\";
-		res += "x = \\mathbf{" + (-n) + "}\\)";
-
 		gerarAlternativas("" + (-n));
-		setResolucao(res);
+		addResolucao("Reescrevemos: \\(\\dfrac{1}{" + a + "} = " + a + "^{-1}\\), logo:");
+		addResolucao("\\(\\left(" + a + "^{-1}\\right)^x = " + a + "^{" + n + "}\\)");
+		addResolucao("\\(" + a + "^{-x} = " + a + "^{" + n + "}\\)");
+		addResolucao("\\(-x = " + n + "\\)");
+		addResolucao("\\(x = \\mathbf{" + (-n) + "}\\)");
 	}
 
 	private void crescimentoBase3()
@@ -49,12 +47,10 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Uma população de \\(" + n0 + "\\) organismos triplica a cada dia. "
 			+ "Qual será a população após \\(" + t + "\\) dias?");
 
-		String res = "O modelo de crescimento é \\(P(t) = P_0 \\cdot 3^t\\). \\(\\\\\\)";
-		res += "\\(P(" + t + ") = " + n0 + " \\cdot 3^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(3, t) + "\\\\";
-		res += "P(" + t + ") = \\mathbf{" + resultado + "}\\) organismos";
-
 		gerarAlternativas("" + resultado);
-		setResolucao(res);
+		addResolucao("O modelo de crescimento é \\(P(t) = P_0 \\cdot 3^t\\).");
+		addResolucao("\\(P(" + t + ") = " + n0 + " \\cdot 3^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(3, t) + "\\)");
+		addResolucao("\\(P(" + t + ") = \\mathbf{" + resultado + "}\\) organismos");
 	}
 
 	private void crescimentoBase4()
@@ -68,11 +64,9 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Um vírus quadruplica a cada hora, partindo de \\(" + n0 + "\\) unidades. "
 			+ "Quantas unidades haverá após \\(" + t + "\\) horas?");
 
-		String res = "O modelo de crescimento é \\(N(t) = N_0 \\cdot 4^t\\). \\(\\\\\\)";
-		res += "\\(N(" + t + ") = " + n0 + " \\cdot 4^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(4, t) + "\\\\";
-		res += "N(" + t + ") = \\mathbf{" + resultado + "}\\) unidades";
-
 		gerarAlternativas("" + resultado);
-		setResolucao(res);
+		addResolucao("O modelo de crescimento é \\(N(t) = N_0 \\cdot 4^t\\).");
+		addResolucao("\\(N(" + t + ") = " + n0 + " \\cdot 4^{" + t + "} = " + n0 + " \\cdot " + (int) Math.pow(4, t) + "\\)");
+		addResolucao("\\(N(" + t + ") = \\mathbf{" + resultado + "}\\) unidades");
 	}
 }

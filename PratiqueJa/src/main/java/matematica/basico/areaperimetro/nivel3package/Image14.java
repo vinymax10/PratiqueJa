@@ -21,11 +21,7 @@ public class Image14 extends GeradorExercicio
 
 		String resultadoCorreto = "" + h;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaAreaTrapezio() + "\\\\";
-		resolucao += "B=" + B + ", \\quad b=" + b + "\\\\";
-		resolucao += "\\dfrac{(" + B + "+" + b + ")\\cdot h" + "}{2} = " + area + "\\\\";
 		MyExpression expressao = new MyExpression("(" + B + "+" + b + ") * h" + "=" + area + "*2");
-		resolucao += expressao.resolverLatex();
 
 		ConfigImagem config = new ConfigTrapezio(B + "", b + "", "h", "", "", true);
 		BufferedImage image = config.criarImagem();
@@ -33,6 +29,9 @@ public class Image14 extends GeradorExercicio
 		addParagrafo("Se a área do trapézio é \\(" + area + "\\), qual o valor de \\(h\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTrapezio() + "\\)");
+		addResolucao("\\(B=" + B + ", \\quad b=" + b + "\\)");
+		addResolucao("\\(\\dfrac{(" + B + "+" + b + ")\\cdot h" + "}{2} = " + area + "\\)");
+		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
 	}
 }

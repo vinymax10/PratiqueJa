@@ -26,9 +26,7 @@ public class Exercicio5 extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "Pela tabela de valores notáveis:"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(" + angle + ") = \\mathbf{" + val + "}\\)";
-		setResolucao(res);
+		addResolucao("Pela tabela de valores notáveis:");
+		addResolucao("\\(\\operatorname{tg}(" + angle + ") = \\mathbf{" + val + "}\\)");
 	}
 }

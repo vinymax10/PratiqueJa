@@ -14,6 +14,7 @@ public class Divisibilidade4 extends GeradorExercicio
 
 		addParagrafo("Qual é a soma dos divisores naturais do número " + number + "?");
 		gerarAlternativas("" + resolucaoDivisores.somaDividoresResultado(number));
-		setResolucao(resolucaoDivisores.somaDivisores(number));
+		for(String passo : resolucaoDivisores.somaDivisores(number))
+			addResolucao(passo);
 	}
 }

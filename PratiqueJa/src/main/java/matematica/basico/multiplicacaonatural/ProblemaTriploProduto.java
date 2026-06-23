@@ -61,14 +61,16 @@ public class ProblemaTriploProduto
 		return a * b * c;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int passo1 = a * b;
 		int total = passo1 * c;
-		String res = "Passo 1: \\(\\\\\\)";
-		res += "\\(" + a + " \\times " + b + " = " + passo1 + unidade + "\\) \\(\\\\\\)";
-		res += "Passo 2: \\(\\\\\\)";
-		res += "\\(" + passo1 + " \\times " + c + " = \\mathbf{" + total + "}" + unidade + "\\)";
-		return res;
+		return new String[]
+		{
+			"Passo 1:",
+			"\\(" + a + " \\times " + b + " = " + passo1 + unidade + "\\)",
+			"Passo 2:",
+			"\\(" + passo1 + " \\times " + c + " = \\mathbf{" + total + "}" + unidade + "\\)"
+		};
 	}
 }

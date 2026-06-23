@@ -18,7 +18,8 @@ public class DobradoMetade extends GeradorExercicio
 
 		int tipo = rand.nextInt(2);
 		int novoPrimeiro, novoSegundo, resultado;
-		String enunciado, res;
+		String enunciado;
+		String passoExplicacao, passoCalculo;
 
 		if (tipo == 0)
 		{
@@ -27,8 +28,8 @@ public class DobradoMetade extends GeradorExercicio
 			resultado = 2 * produto;
 			enunciado = "Sabendo que \\(" + a + " \\times " + b + " = " + produto
 				+ "\\), calcule \\(" + novoPrimeiro + " \\times " + b + "\\).";
-			res = "Como \\(" + novoPrimeiro + " = 2 \\times " + a + "\\), temos: \\(\\\\\\)";
-			res += "\\(" + novoPrimeiro + " \\times " + b + " = 2 \\times ("
+			passoExplicacao = "Como \\(" + novoPrimeiro + " = 2 \\times " + a + "\\), temos:";
+			passoCalculo = "\\(" + novoPrimeiro + " \\times " + b + " = 2 \\times ("
 				+ a + " \\times " + b + ") = 2 \\times " + produto + " = \\mathbf{" + resultado + "}\\)";
 		}
 		else
@@ -38,8 +39,8 @@ public class DobradoMetade extends GeradorExercicio
 			resultado = 2 * produto;
 			enunciado = "Sabendo que \\(" + a + " \\times " + b + " = " + produto
 				+ "\\), calcule \\(" + a + " \\times " + novoSegundo + "\\).";
-			res = "Como \\(" + novoSegundo + " = 2 \\times " + b + "\\), temos: \\(\\\\\\)";
-			res += "\\(" + a + " \\times " + novoSegundo + " = 2 \\times ("
+			passoExplicacao = "Como \\(" + novoSegundo + " = 2 \\times " + b + "\\), temos:";
+			passoCalculo = "\\(" + a + " \\times " + novoSegundo + " = 2 \\times ("
 				+ a + " \\times " + b + ") = 2 \\times " + produto + " = \\mathbf{" + resultado + "}\\)";
 		}
 
@@ -60,6 +61,7 @@ public class DobradoMetade extends GeradorExercicio
 		}
 		embaralharEAdicionarAlternativas(formatarNumero(resultado), distrais);
 
-		setResolucao(res);
+		addResolucao(passoExplicacao);
+		addResolucao(passoCalculo);
 	}
 }

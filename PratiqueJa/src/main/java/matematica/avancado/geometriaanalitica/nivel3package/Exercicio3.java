@@ -32,11 +32,9 @@ public class Exercicio3 extends GeradorExercicio
 		String sinalCx = cx >= 0 ? " - " + cx : " + " + Math.abs(cx);
 		String sinalCy = cy >= 0 ? " - " + cy : " + " + Math.abs(cy);
 
-		String res = "Completando o quadrado em \\(x\\) e em \\(y\\):"
-				+ "\\(\\\\\\)"
-				+ "\\((x^2" + sinalD + "x + " + hD2 + ") + (y^2" + sinalE + "y + " + hE2 + ") = -(" + F + ") + " + hD2 + " + " + hE2 + "\\\\"
-				+ "(x" + sinalCx + ")^2 + (y" + sinalCy + ")^2 = " + r2 + "\\\\"
-				+ "r^2 = " + r2 + " \\Rightarrow r = \\mathbf{" + r + "}\\)";
-		setResolucao(res);
+		addResolucao("Completando o quadrado em \\(x\\) e em \\(y\\):");
+		addResolucao("\\((x^2" + sinalD + "x + " + hD2 + ") + (y^2" + sinalE + "y + " + hE2 + ") = -(" + F + ") + " + hD2 + " + " + hE2 + "\\)");
+		addResolucao("\\((x" + sinalCx + ")^2 + (y" + sinalCy + ")^2 = " + r2 + "\\)");
+		addResolucao("\\(r^2 = " + r2 + " \\Rightarrow r = \\mathbf{" + r + "}\\)");
 	}
 }

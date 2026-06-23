@@ -38,18 +38,11 @@ public class Radiciacao7 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + ca + "\\sqrt{" + nA + "} - " + cb + "\\sqrt{" + nB + "}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Simplificar cada radical:" +
-			"\\(\\\\\\)" +
-			"\\(\\sqrt{" + nA + "} = \\sqrt{" + (A * A) + " \\times " + r + "} = " + A + "\\sqrt{" + r + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(\\sqrt{" + nB + "} = \\sqrt{" + (B * B) + " \\times " + r + "} = " + B + "\\sqrt{" + r + "}\\)" +
-			"\\(\\\\\\)" +
-			"Aplicar coeficientes e subtrair:" +
-			"\\(\\\\\\)" +
-			"\\(" + a + " \\cdot " + A + "\\sqrt{" + r + "} - " + b + " \\cdot " + B + "\\sqrt{" + r + "}\\)" +
-			"\\(\\\\\\)" +
-			"\\(= (" + (a * A) + " - " + (b * B) + ")\\sqrt{" + r + "} = \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)"
-		);
+		addResolucao("Simplificar cada radical:");
+		addResolucao("\\(\\sqrt{" + nA + "} = \\sqrt{" + (A * A) + " \\times " + r + "} = " + A + "\\sqrt{" + r + "}\\)");
+		addResolucao("\\(\\sqrt{" + nB + "} = \\sqrt{" + (B * B) + " \\times " + r + "} = " + B + "\\sqrt{" + r + "}\\)");
+		addResolucao("Aplicar coeficientes e subtrair:");
+		addResolucao("\\(" + a + " \\cdot " + A + "\\sqrt{" + r + "} - " + b + " \\cdot " + B + "\\sqrt{" + r + "}\\)");
+		addResolucao("\\(= (" + (a * A) + " - " + (b * B) + ")\\sqrt{" + r + "} = \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
 	}
 }

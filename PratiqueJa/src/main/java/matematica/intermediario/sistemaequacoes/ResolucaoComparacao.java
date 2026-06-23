@@ -1,12 +1,14 @@
 package matematica.intermediario.sistemaequacoes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import matematica.expressao.MyExpression;
 
 public class ResolucaoComparacao
 {
-	private static String wrapLatex(String mathSteps)
+	private static void wrapLatex(List<String> passos, String mathSteps)
 	{
-		StringBuilder result = new StringBuilder();
 		int start = 0;
 		for (int i = 0; i < mathSteps.length() - 1; i++)
 		{
@@ -14,76 +16,75 @@ public class ResolucaoComparacao
 			{
 				String part = mathSteps.substring(start, i).trim();
 				if (!part.isEmpty())
-					result.append("\\(").append(part).append("\\)").append("\\(\\\\\\)");
+					passos.add("\\(" + part + "\\)");
 				i++;
 				start = i + 1;
 			}
 		}
 		String last = mathSteps.substring(start).trim();
 		if (!last.isEmpty())
-			result.append("\\(").append(last).append("\\)").append("\\(\\\\\\)");
-		return result.toString();
+			passos.add("\\(" + last + "\\)");
 	}
 
-	public static String comparacaoY(SistemaEquacoes sistema)
+	public static String[] comparacaoY(SistemaEquacoes sistema)
 	{
 		MyExpression expressao;
-		String resolucaoLatex="";
+		List<String> passos = new ArrayList<>();
 		EquacaoSE equacao=sistema.um;
 		EquacaoSE outra=sistema.dois;
 
-		resolucaoLatex+="Isolando \\(x\\) na equação (1):\\(\\\\\\)";
+		passos.add("Isolando \\(x\\) na equação (1):");
 		expressao = new MyExpression(equacao.valor+"+"+(-equacao.coeficienteY)+"y");
 		String parteIsolada=expressao.imprimir();
-		resolucaoLatex+="\\(x ="+parteIsolada+"\\)\\(\\\\\\)";
+		passos.add("\\(x ="+parteIsolada+"\\)");
 
-		resolucaoLatex+="Isolando \\(x\\) na equação (2):\\(\\\\\\)";
+		passos.add("Isolando \\(x\\) na equação (2):");
 		expressao = new MyExpression(outra.valor+"+"+(-outra.coeficienteY)+"y");
 		String parteIsolada2=expressao.imprimir();
-		resolucaoLatex+="\\(x ="+parteIsolada2+"\\)\\(\\\\\\)";
+		passos.add("\\(x ="+parteIsolada2+"\\)");
 
-		resolucaoLatex+="Igualando as duas expressões:\\(\\\\\\)";
+		passos.add("Igualando as duas expressões:");
 
 		expressao = new MyExpression(parteIsolada+"="+parteIsolada2);
-		resolucaoLatex+=wrapLatex(expressao.resolverLatex());
+		wrapLatex(passos, expressao.resolverLatex());
 
 		if(sistema.tres!=null)
 		{
-			resolucaoLatex+=ResolucaoAdicao.resolvendoX(sistema,2);
-			resolucaoLatex+=ResolucaoSubtituicao.resolvendoZ(sistema);
+			ResolucaoAdicao.resolvendoX(passos, sistema,2);
+			ResolucaoSubtituicao.resolvendoZ(passos, sistema);
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 
-	public static String comparacaoX(SistemaEquacoes sistema)
+	public static String[] comparacaoX(SistemaEquacoes sistema)
 	{
 		MyExpression expressao;
-		String resolucaoLatex="";
+		List<String> passos = new ArrayList<>();
 		EquacaoSE equacao=sistema.um;
 		EquacaoSE outra=sistema.dois;
 
-		resolucaoLatex+="Isolando \\(y\\) na equação (1):\\(\\\\\\)";
+		passos.add("Isolando \\(y\\) na equação (1):");
 		expressao = new MyExpression(equacao.valor+"+"+(-equacao.coeficienteX)+"x");
 		String parteIsolada=expressao.imprimir();
-		resolucaoLatex+="\\(y ="+parteIsolada+"\\)\\(\\\\\\)";
+		passos.add("\\(y ="+parteIsolada+"\\)");
 
-		resolucaoLatex+="Isolando \\(y\\) na equação (2):\\(\\\\\\)";
+		passos.add("Isolando \\(y\\) na equação (2):");
 		expressao = new MyExpression(outra.valor+"+"+(-outra.coeficienteX)+"x");
 		String parteIsolada2=expressao.imprimir();
-		resolucaoLatex+="\\(y ="+parteIsolada2+"\\)\\(\\\\\\)";
+		passos.add("\\(y ="+parteIsolada2+"\\)");
 
-		resolucaoLatex+="Igualando as duas expressões:\\(\\\\\\)";
+		passos.add("Igualando as duas expressões:");
 
 		expressao = new MyExpression(parteIsolada+"="+parteIsolada2);
-		resolucaoLatex+=wrapLatex(expressao.resolverLatex());
+		wrapLatex(passos, expressao.resolverLatex());
 
 		if(sistema.tres!=null)
 		{
-			resolucaoLatex+=ResolucaoAdicao.resolvendoY(sistema,2);
-			resolucaoLatex+=ResolucaoSubtituicao.resolvendoZ(sistema);
+			ResolucaoAdicao.resolvendoY(passos, sistema,2);
+			ResolucaoSubtituicao.resolvendoZ(passos, sistema);
 		}
 
-		return resolucaoLatex;
+		return passos.toArray(new String[0]);
 	}
 }

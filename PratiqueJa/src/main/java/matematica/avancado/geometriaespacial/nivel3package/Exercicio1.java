@@ -24,8 +24,7 @@ public class Exercicio1 extends GeradorExercicio
 		distratores.add("\\(" + (2 * r * (rph + 1)) + "\\pi\\,\\text{cm}^2\\)");  // off-by-1 no raio
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(A_{\\text{total}} = 2\\pi r(h + r) = 2\\pi \\cdot " + r + " \\cdot (" + h + " + " + r
-				+ ") = 2\\pi \\cdot " + r + " \\cdot " + rph + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{total}} = 2\\pi r(h + r) = 2\\pi \\cdot " + r + " \\cdot (" + h + " + " + r
+				+ ") = 2\\pi \\cdot " + r + " \\cdot " + rph + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)");
 	}
 }

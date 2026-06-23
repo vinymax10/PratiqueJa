@@ -27,20 +27,15 @@ public class Image7 extends GeradorExercicio
 
 		String resultadoCorreto = "" + 2 * metadeArcoEsq + "°";
 
-		String resolucao = "";
 		MyExpression expressao = new MyExpression(anguloCentral + "+c=180");
-		resolucao += expressao.resolverLatex() + "\\\\";
-
-		resolucao += "a=\\dfrac{" + (2 * metadeArcoDir) + "}{2}=" + metadeArcoDir + "\\\\";
-
-		resolucao += "a+b+c=180\\\\";
+		String resolucao1 = expressao.resolverLatex();
 
 		int c = 180 - metadeArcoEsq - metadeArcoDir;
 		expressao = new MyExpression(c + "+" + metadeArcoDir + "+b=180");
-		resolucao += expressao.resolverLatex() + "\\\\";
+		String resolucao2 = expressao.resolverLatex();
 
 		expressao = new MyExpression("x=2*" + metadeArcoEsq);
-		resolucao += expressao.resolverLatex();
+		String resolucao3 = expressao.resolverLatex();
 
 		DadosConfig5 dados = new DadosConfig5();
 		dados.lateralEsq = "x";
@@ -53,6 +48,10 @@ public class Image7 extends GeradorExercicio
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao1 + "\\)");
+		addResolucao("\\(a=\\dfrac{" + (2 * metadeArcoDir) + "}{2}=" + metadeArcoDir + "\\)");
+		addResolucao("\\(a+b+c=180\\)");
+		addResolucao("\\(" + resolucao2 + "\\)");
+		addResolucao("\\(" + resolucao3 + "\\)");
 	}
 }

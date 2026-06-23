@@ -19,6 +19,6 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("Insira " + ordenais[k - 1] + " entre \\(" + a.showDfrac() + "\\) e \\("
 				+ b.showDfrac() + "\\). Qual é a razão \\(q\\) da PG formada?");
 		gerarAlternativas(q.toString());
-		setResolucao("\\(" + ResolucaoPG.resolucaoInterpolacao(a, b, k, q) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.resolucaoInterpolacao(a, b, k, q) + "\\)");
 	}
 }

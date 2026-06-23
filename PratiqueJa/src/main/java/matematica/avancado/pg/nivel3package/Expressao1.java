@@ -43,6 +43,6 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Qual é o " + n + "º termo?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(an.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

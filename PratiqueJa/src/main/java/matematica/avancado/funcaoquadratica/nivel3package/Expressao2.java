@@ -33,15 +33,13 @@ public class Expressao2 extends GeradorExercicio
 		String x1s = "" + x1;
 		String x2s = "" + x2;
 
-		String res = "Expandindo \\(f(x) = " + fatorada + "\\): \\(\\\\\\)";
-		res += "\\(f(x) = " + aPref + "[x^2 - (" + x1 + " + " + x2 + ")x + (" + x1 + ") \\cdot (" + x2 + ")]\\\\";
-		res += "f(x) = " + aPref + "[x^2" + Auxiliar.getNumber(-(x1 + x2), "x", false)
-			+ Auxiliar.getNumber(prod, "", false) + "]\\) \\(\\\\\\)";
-		res += "Portanto \\(c = a \\cdot x_1 \\cdot x_2 = " + a + " \\cdot (" + x1s + ") \\cdot (" + x2s + ") = "
-			+ (a * prod) + "\\). \\(\\\\\\)";
-		res += "\\(c = \\mathbf{" + c + "}\\)";
-
 		gerarAlternativas("" + c);
-		setResolucao(res);
+		addResolucao("Expandindo \\(f(x) = " + fatorada + "\\):");
+		addResolucao("\\(f(x) = " + aPref + "[x^2 - (" + x1 + " + " + x2 + ")x + (" + x1 + ") \\cdot (" + x2 + ")]\\)");
+		addResolucao("\\(f(x) = " + aPref + "[x^2" + Auxiliar.getNumber(-(x1 + x2), "x", false)
+			+ Auxiliar.getNumber(prod, "", false) + "]\\)");
+		addResolucao("Portanto \\(c = a \\cdot x_1 \\cdot x_2 = " + a + " \\cdot (" + x1s + ") \\cdot (" + x2s + ") = "
+			+ (a * prod) + "\\).");
+		addResolucao("\\(c = \\mathbf{" + c + "}\\)");
 	}
 }

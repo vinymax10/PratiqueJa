@@ -40,6 +40,6 @@ public class Expressao10 extends GeradorExercicio
 		addParagrafo("Qual é a soma de todos os termos da PG infinita?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(sInf.toString());
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

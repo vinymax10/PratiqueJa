@@ -15,11 +15,15 @@ public class Primo5 extends AgrupadorPrimo
 		gerarAlternativasBoolean(ePrimo);
 
 		if(ePrimo)
-			setResolucao("\\(" + n + "\\) só é divisível por \\(1\\) e por ele mesmo. \\(\\\\\\) Logo, é primo: \\(\\mathbf{Sim}\\).");
+		{
+			addResolucao("\\(" + n + "\\) só é divisível por \\(1\\) e por ele mesmo.");
+			addResolucao("Logo, é primo: \\(\\mathbf{Sim}\\).");
+		}
 		else
 		{
 			int p = fatorar(n).keySet().iterator().next();
-			setResolucao("\\(" + n + " \\div " + p + " = " + (n / p) + "\\) (divisão exata). \\(\\\\\\) Como tem o divisor \\(" + p + "\\), não é primo: \\(\\mathbf{Não}\\).");
+			addResolucao("\\(" + n + " \\div " + p + " = " + (n / p) + "\\) (divisão exata).");
+			addResolucao("Como tem o divisor \\(" + p + "\\), não é primo: \\(\\mathbf{Não}\\).");
 		}
 	}
 }

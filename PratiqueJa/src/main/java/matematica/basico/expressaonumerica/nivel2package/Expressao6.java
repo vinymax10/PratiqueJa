@@ -32,7 +32,7 @@ public class Expressao6 extends AgrupadorExercicio
 		addParagrafo("\\([" + par + " " + t2 + " " + c + "] " + t3 + " " + d + " = \\,?\\)");
 		gerarAlternativas("" + result);
 
-		setResolucao(
+		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& [" + par + " " + t2 + " " + c + "] " + t3 + " " + d + " = \\\\" +
 			"& [" + p1 + " " + t2 + " " + c + "] " + t3 + " " + d + " = \\\\" +

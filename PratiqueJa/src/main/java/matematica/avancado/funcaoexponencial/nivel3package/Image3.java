@@ -36,10 +36,8 @@ public class Image3 extends GeradorExercicio
 		addParagrafoImagem(image);
 		embaralharEAdicionarAlternativas(correta, dist);
 
-		String res = "Toda função exponencial \\(f(x) = a^x\\) satisfaz \\(a^0 = 1\\). \\(\\\\\\)";
-		res += "Portanto, \\(f(0) = " + base + "^0 = 1\\), e o ponto \\((0, 1)\\) está sempre no gráfico. \\(\\\\\\)";
-		res += "\\(\\mathbf{(0,\\, 1)}\\)";
-
-		setResolucao(res);
+		addResolucao("Toda função exponencial \\(f(x) = a^x\\) satisfaz \\(a^0 = 1\\).");
+		addResolucao("Portanto, \\(f(0) = " + base + "^0 = 1\\), e o ponto \\((0, 1)\\) está sempre no gráfico.");
+		addResolucao("\\(\\mathbf{(0,\\, 1)}\\)");
 	}
 }

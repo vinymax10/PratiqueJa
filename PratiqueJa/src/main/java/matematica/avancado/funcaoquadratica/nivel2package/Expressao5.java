@@ -28,6 +28,7 @@ public class Expressao5 extends GeradorExercicio
 		addParagrafo("Encontre \\(b\\) tendo \\(f(" + x + ")=" + fx + "\\)");
 		addParagrafo("\\(" + funcao + "\\)");
 		gerarAlternativas("" + b);
-		setResolucao(ResolucaoFuncaoQuadratica.resolucaoAcharB(a, b, c, x, fx));
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoAcharB(a, b, c, x, fx))
+			addResolucao(passo);
 	}
 }

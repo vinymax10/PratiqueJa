@@ -22,6 +22,6 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Qual é o " + n + "º termo?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(an.toString());
-		setResolucao("\\(" + ResolucaoPG.n_esimo(a1, q, n) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.n_esimo(a1, q, n) + "\\)");
 	}
 }

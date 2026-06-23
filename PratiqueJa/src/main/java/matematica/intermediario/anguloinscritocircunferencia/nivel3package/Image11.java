@@ -26,10 +26,8 @@ public class Image11 extends GeradorExercicio
 		String arcoEsq = 2 * metadeArcoEsq + "°";
 		String resultadoCorreto = "" + metadeArcoDir + "°";
 
-		String resolucao = "";
-		resolucao += "b=\\dfrac{" + (2 * metadeArcoEsq) + "}{2}=" + metadeArcoEsq + "\\\\";
 		MyExpression expressao = new MyExpression("x+" + metadeArcoEsq + "=" + anguloCentral);
-		resolucao += expressao.resolverLatex();
+		String resolucao = expressao.resolverLatex();
 
 		DadosConfig5 dados = new DadosConfig5();
 		dados.lateralEsq = arcoEsq;
@@ -42,6 +40,7 @@ public class Image11 extends GeradorExercicio
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(b=\\dfrac{" + (2 * metadeArcoEsq) + "}{2}=" + metadeArcoEsq + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

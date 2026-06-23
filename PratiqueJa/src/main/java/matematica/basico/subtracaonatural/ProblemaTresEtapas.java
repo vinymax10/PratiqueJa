@@ -64,13 +64,15 @@ public class ProblemaTresEtapas
 		return a - b - c;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int ab = a - b;
 		int resultado = ab - c;
-		String res = "Subtraímos em dois passos: \\(\\\\\\)";
-		res += "\\(" + a + " - " + b + " = " + ab + "\\) \\(\\\\\\)";
-		res += "\\(" + ab + " - " + c + " = \\mathbf{" + resultado + "}\\)";
-		return res;
+		return new String[]
+		{
+			"Subtraímos em dois passos:",
+			"\\(" + a + " - " + b + " = " + ab + "\\)",
+			"\\(" + ab + " - " + c + " = \\mathbf{" + resultado + "}\\)"
+		};
 	}
 }

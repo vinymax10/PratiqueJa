@@ -15,17 +15,14 @@ public class Exercicio1 extends GeradorExercicio
 		int r = 2 + rand.nextInt(9); // r = 2..10
 		int k = 2 * r;               // C = kπ (k sempre par)
 
-		String res = "\\(" + ResolucaoCirculo.formulaComprimento() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = 2\\pi \\cdot r \\\\ ";
-		res += "r = \\dfrac{" + k + "\\pi}{2\\pi} = \\mathbf{" + r + "}\\)";
-
 		ConfigCircunferencia config = new ConfigCircunferencia("r", false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de uma circunferência é \\(" + k + "\\pi\\). Qual é o raio?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + r);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaComprimento() + "\\)");
+		addResolucao("\\(" + k + "\\pi = 2\\pi \\cdot r\\)");
+		addResolucao("\\(r = \\dfrac{" + k + "\\pi}{2\\pi} = \\mathbf{" + r + "}\\)");
 	}
 }

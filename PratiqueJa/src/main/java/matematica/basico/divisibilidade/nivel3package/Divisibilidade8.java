@@ -13,6 +13,7 @@ public class Divisibilidade8 extends GeradorExercicio
 
 		addParagrafo("Quantos divisores naturais ímpares possui o número " + number + "?");
 		gerarAlternativas("" + resolucao.numerosDividoresResultadoPares(number, false));
-		setResolucao(resolucao.numerosDividoresParesImpares(number, false));
+		for(String passo : resolucao.numerosDividoresParesImpares(number, false))
+			addResolucao(passo);
 	}
 }

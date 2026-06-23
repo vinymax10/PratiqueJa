@@ -15,12 +15,11 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Calcule o valor do logaritmo:");
 		addParagrafo("\\(\\log_{" + c + "} " + a + " = \\,?\\)");
 
-		String res = "Pela definição \\(\\log_b a = x \\iff b^x = a\\): \\(\\\\\\)";
-		res += "\\(\\log_{" + c + "} " + a + " = x \\Rightarrow " + c + "^x = " + a + "\\\\";
-		res += "" + c + "^x = " + c + "^{" + x + "}\\\\";
-		res += "x = \\mathbf{" + x + "}\\)";
+		addResolucao("Pela definição \\(\\log_b a = x \\iff b^x = a\\):");
+		addResolucao("\\(\\log_{" + c + "} " + a + " = x \\Rightarrow " + c + "^x = " + a + "\\)");
+		addResolucao("\\(" + c + "^x = " + c + "^{" + x + "}\\)");
+		addResolucao("\\(x = \\mathbf{" + x + "}\\)");
 
 		gerarAlternativas("" + x);
-		setResolucao(res);
 	}
 }

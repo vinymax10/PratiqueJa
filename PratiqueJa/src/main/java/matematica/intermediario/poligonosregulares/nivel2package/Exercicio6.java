@@ -23,17 +23,14 @@ public class Exercicio6 extends GeradorExercicio
 		int a = caso[1];
 		int p = caso[2];
 
-		String res = "\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + area + " = \\dfrac{P \\times " + a + "}{2} \\\\ ";
-		res += "P = \\dfrac{2 \\times " + area + "}{" + a + "} = \\mathbf{" + p + "}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "l", "" + a);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("A área de um polígono regular é \\(" + area + "\\) e o seu apótema mede \\(" + a + "\\). Qual é o seu perímetro?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + p);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)");
+		addResolucao("\\(" + area + " = \\dfrac{P \\times " + a + "}{2}\\)");
+		addResolucao("\\(P = \\dfrac{2 \\times " + area + "}{" + a + "} = \\mathbf{" + p + "}\\)");
 	}
 }

@@ -20,6 +20,6 @@ public class MmcMdc13 extends GeradorExercicio
 
 		addParagrafo("Qual é o máximo divisor comum (MDC) de \\(" + a + "\\) e \\(" + b + "\\)?");
 		gerarAlternativasInteiras((int) MMC.mdc(a, b));
-		setResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\)");
+		addResolucao("\\(" + ResolucaoMmcMdc.mdc(a, b) + "\\)");
 	}
 }

@@ -20,13 +20,10 @@ public class Exercicio6 extends GeradorExercicio
 
 		gerarAlternativasInteiras(aTot, 4, true);
 
-		String res = "\\(A_{\\text{base}} = " + l + " \\times " + w + " = " + aBase
-				+ "\\,\\text{cm}^2 \\quad P_{\\text{base}} = 2(" + l + " + " + w + ") = " + pBase + "\\,\\text{cm}\\)"
-				+ "\\(\\\\\\)"
-				+ "\\(A_{\\text{lateral}} = " + pBase + " \\times " + h + " = " + aLat + "\\,\\text{cm}^2\\)"
-				+ "\\(\\\\\\)"
-				+ "\\(A_{\\text{total}} = " + aLat + " + 2 \\times " + aBase + " = "
-				+ aLat + " + " + (2 * aBase) + " = \\mathbf{" + aTot + "}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{base}} = " + l + " \\times " + w + " = " + aBase
+				+ "\\,\\text{cm}^2 \\quad P_{\\text{base}} = 2(" + l + " + " + w + ") = " + pBase + "\\,\\text{cm}\\)");
+		addResolucao("\\(A_{\\text{lateral}} = " + pBase + " \\times " + h + " = " + aLat + "\\,\\text{cm}^2\\)");
+		addResolucao("\\(A_{\\text{total}} = " + aLat + " + 2 \\times " + aBase + " = "
+				+ aLat + " + " + (2 * aBase) + " = \\mathbf{" + aTot + "}\\,\\text{cm}^2\\)");
 	}
 }

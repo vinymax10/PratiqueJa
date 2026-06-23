@@ -60,25 +60,24 @@ public abstract class AgrupadorPrimo extends GeradorExercicio
 		return sb.toString();
 	}
 
-	protected String resolucaoFatoracao(int original)
+	protected String[] resolucaoFatoracao(int original)
 	{
 		Map<Integer, Integer> fatores = fatorar(original);
-		StringBuilder sb = new StringBuilder("\\(\\begin{array}[t]{r|l}");
+		StringBuilder array = new StringBuilder("\\(\\begin{array}[t]{r|l}");
 		int n = original;
 		for(int p : LISTA_PRIMOS)
 		{
 			if(p * p > n) break;
 			while(n % p == 0)
 			{
-				sb.append(n).append(" & ").append(p).append("\\\\");
+				array.append(n).append(" & ").append(p).append("\\\\");
 				n /= p;
 			}
 		}
 		if(n > 1)
-			sb.append(n).append(" & ").append(n).append("\\\\");
-		sb.append("\\hline 1 & \\\\\\end{array}\\)");
-		sb.append("\\(\\\\\\)");
-		sb.append(" \\(").append(original).append(" = ").append(fatorLatex(fatores)).append("\\)");
-		return sb.toString();
+			array.append(n).append(" & ").append(n).append("\\\\");
+		array.append("\\hline 1 & \\\\\\end{array}\\)");
+		String equacao = "\\(" + original + " = " + fatorLatex(fatores) + "\\)";
+		return new String[]{array.toString(), equacao};
 	}
 }

@@ -30,24 +30,20 @@ public class Exercicio2 extends GeradorExercicio
 
 		gerarAlternativasInteiras(answer, 4, false);
 
-		String res;
 		if (askX)
 		{
-			res = "Igualando as equações das retas:"
-					+ "\\(\\\\\\)"
-					+ "\\(" + m1 + "x" + sinalB1 + " = " + m2 + "x" + sinalB2 + "\\\\"
-					+ "(" + m1 + " - " + m2 + ")x = " + b2 + " - (" + b1 + ")\\\\"
-					+ diffM + "x = " + diffB + "\\\\"
-					+ "x = \\dfrac{" + diffB + "}{" + diffM + "} = \\mathbf{" + xInt + "}\\)";
+			addResolucao("Igualando as equações das retas:");
+			addResolucao("\\(" + m1 + "x" + sinalB1 + " = " + m2 + "x" + sinalB2 + "\\)");
+			addResolucao("\\((" + m1 + " - " + m2 + ")x = " + b2 + " - (" + b1 + ")\\)");
+			addResolucao("\\(" + diffM + "x = " + diffB + "\\)");
+			addResolucao("\\(x = \\dfrac{" + diffB + "}{" + diffM + "} = \\mathbf{" + xInt + "}\\)");
 		}
 		else
 		{
-			res = "Igualando as equações para encontrar \\(x\\), depois substituindo:"
-					+ "\\(\\\\\\)"
-					+ "\\(" + m1 + "x" + sinalB1 + " = " + m2 + "x" + sinalB2 + "\\\\"
-					+ diffM + "x = " + diffB + " \\Rightarrow x = " + xInt + "\\\\"
-					+ "y = " + m1 + " \\cdot " + xInt + sinalB1 + " = \\mathbf{" + yInt + "}\\)";
+			addResolucao("Igualando as equações para encontrar \\(x\\), depois substituindo:");
+			addResolucao("\\(" + m1 + "x" + sinalB1 + " = " + m2 + "x" + sinalB2 + "\\)");
+			addResolucao("\\(" + diffM + "x = " + diffB + " \\Rightarrow x = " + xInt + "\\)");
+			addResolucao("\\(y = " + m1 + " \\cdot " + xInt + sinalB1 + " = \\mathbf{" + yInt + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

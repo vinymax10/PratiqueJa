@@ -20,9 +20,7 @@ public class Exercicio5 extends GeradorExercicio
 
 		gerarAlternativasInteiras(y, 4, false);
 
-		String res = "Substituindo \\(x = " + x0 + "\\) na equação:"
-				+ "\\(\\\\\\)"
-				+ "\\(y = " + m + " \\cdot (" + x0 + ")" + sinalB + " = " + (m * x0) + sinalB + " = \\mathbf{" + y + "}\\)";
-		setResolucao(res);
+		addResolucao("Substituindo \\(x = " + x0 + "\\) na equação:");
+		addResolucao("\\(y = " + m + " \\cdot (" + x0 + ")" + sinalB + " = " + (m * x0) + sinalB + " = \\mathbf{" + y + "}\\)");
 	}
 }

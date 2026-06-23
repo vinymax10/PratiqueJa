@@ -22,17 +22,15 @@ public class Exercicio3 extends GeradorExercicio
 
 		addParagrafo("Sendo \\(f(x) = " + eq + "\\), calcule \\(f(" + v1 + ") + f(" + v2 + ")\\)");
 
-		String res = "Calculamos cada valor separadamente: \\(\\\\\\)";
-		res += "\\(f(" + v1 + ") = " + aStr + " \\cdot " + v1 + bLatex(b)
-				+ " = " + (a * v1) + bLatex(b) + " = " + fv1 + "\\). \\(\\\\\\)";
-		res += "\\(f(" + v2 + ") = " + aStr + " \\cdot " + v2 + bLatex(b)
-				+ " = " + (a * v2) + bLatex(b) + " = " + fv2 + "\\). \\(\\\\\\)";
-		res += "Somando os resultados: \\(\\\\\\)";
+		addResolucao("Calculamos cada valor separadamente:");
+		addResolucao("\\(f(" + v1 + ") = " + aStr + " \\cdot " + v1 + bLatex(b)
+				+ " = " + (a * v1) + bLatex(b) + " = " + fv1 + "\\).");
+		addResolucao("\\(f(" + v2 + ") = " + aStr + " \\cdot " + v2 + bLatex(b)
+				+ " = " + (a * v2) + bLatex(b) + " = " + fv2 + "\\).");
+		addResolucao("Somando os resultados:");
 		String fv2Str = fv2 < 0 ? "\\left(" + fv2 + "\\right)" : "" + fv2;
-		res += "\\(f(" + v1 + ") + f(" + v2 + ") = " + fv1 + " + " + fv2Str
-				+ " = " + resultado + "\\).";
-
-		setResolucao(res);
+		addResolucao("\\(f(" + v1 + ") + f(" + v2 + ") = " + fv1 + " + " + fv2Str
+				+ " = " + resultado + "\\).");
 		gerarAlternativas("" + resultado);
 	}
 

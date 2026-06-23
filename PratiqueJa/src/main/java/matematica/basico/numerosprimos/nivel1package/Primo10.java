@@ -28,10 +28,8 @@ public class Primo10 extends AgrupadorPrimo
 		addParagrafo("Qual dos números " + listarOpcoes("\\(" + primo + "\\)", erradas) + " é primo?");
 		embaralharEAdicionarAlternativas("\\(" + primo + "\\)", erradas);
 
-		setResolucao(
-			"Um número primo tem apenas dois divisores: \\(1\\) e ele mesmo. \\(\\\\\\) " +
-			"\\(" + primo + "\\) atende a isso; os demais são compostos (têm outros divisores). \\(\\\\\\) " +
-			"Resposta: \\(\\mathbf{" + primo + "}\\)."
-		);
+		addResolucao("Um número primo tem apenas dois divisores: \\(1\\) e ele mesmo.");
+		addResolucao("\\(" + primo + "\\) atende a isso; os demais são compostos (têm outros divisores).");
+		addResolucao("Resposta: \\(\\mathbf{" + primo + "}\\).");
 	}
 }

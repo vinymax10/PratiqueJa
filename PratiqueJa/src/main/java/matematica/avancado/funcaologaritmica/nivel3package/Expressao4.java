@@ -17,11 +17,10 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("A função \\(g(x) = a^x\\) passa pelo ponto \\((" + n + ",\\," + val + ")\\).");
 		addParagrafo("Sabendo que \\(f(x) = \\log_a(x)\\) é a inversa de \\(g\\), determine o valor de \\(a\\).");
 
-		String res = "\\(g(" + n + ") = a^{" + n + "} = " + val + "\\\\";
-		res += "a = " + raizStr + " = \\mathbf{" + a + "}\\) \\(\\\\\\)";
-		res += "Portanto a base de \\(f\\) é \\(\\mathbf{" + a + "}\\).";
+		addResolucao("\\(g(" + n + ") = a^{" + n + "} = " + val + "\\)");
+		addResolucao("\\(a = " + raizStr + " = \\mathbf{" + a + "}\\)");
+		addResolucao("Portanto a base de \\(f\\) é \\(\\mathbf{" + a + "}\\).");
 
 		gerarAlternativas("" + a);
-		setResolucao(res);
 	}
 }

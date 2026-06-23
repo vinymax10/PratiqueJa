@@ -1,5 +1,7 @@
 package matematica.avancado.estatistica.nivel3package;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import matematica.ParCor;
@@ -36,7 +38,7 @@ public class ProblemaDispersao
 		return somaSq / valores.length;
 	}
 
-	public String resolucao()
+	public String[] resolucao()
 	{
 		int n = valores.length;
 		int var = variancia();
@@ -58,37 +60,30 @@ public class ProblemaDispersao
 			}
 		}
 
-		String res;
+		List<String> passos = new ArrayList<>();
 		if(tipo == TipoDispersao.Variancia)
-			res = "A variância mede a dispersão dos dados: é a média dos quadrados dos desvios em relação à média.";
+			passos.add("A variância mede a dispersão dos dados: é a média dos quadrados dos desvios em relação à média.");
 		else
-			res = "O desvio padrão é a raiz quadrada da variância e mede o espalhamento dos dados.";
-		res += "\\(\\\\\\)";
-		res += "Primeiro, a média dos dados " + AuxEstatistica.listaStr(valores) + ":";
-		res += "\\(\\\\\\)";
-		res += "\\(\\bar{x} = \\dfrac{" + AuxEstatistica.somaStr(valores) + "}{" + n + "} = " + media + "\\)";
-		res += "\\(\\\\\\)";
-		res += "Desvios \\(d_i = x_i - \\bar{x}\\): " + devs + ".";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ParCor.formula("\\sigma^2 = \\dfrac{\\sum (x_i - \\bar{x})^2}{n}") + "\\)";
-		res += "\\(\\\\\\)";
+			passos.add("O desvio padrão é a raiz quadrada da variância e mede o espalhamento dos dados.");
+		passos.add("Primeiro, a média dos dados " + AuxEstatistica.listaStr(valores) + ":");
+		passos.add("\\(\\bar{x} = \\dfrac{" + AuxEstatistica.somaStr(valores) + "}{" + n + "} = " + media + "\\)");
+		passos.add("Desvios \\(d_i = x_i - \\bar{x}\\): " + devs + ".");
+		passos.add("\\(" + ParCor.formula("\\sigma^2 = \\dfrac{\\sum (x_i - \\bar{x})^2}{n}") + "\\)");
 
 		if(tipo == TipoDispersao.Variancia)
 		{
-			res += "\\(\\sigma^2 = \\dfrac{" + quad + "}{" + n + "} = \\\\ ";
-			res += "\\dfrac{" + somaSq + "}{" + n + "} = \\mathbf{" + var + "}\\)";
+			passos.add("\\(\\sigma^2 = \\dfrac{" + quad + "}{" + n + "} = \\\\ "
+					+ "\\dfrac{" + somaSq + "}{" + n + "} = \\mathbf{" + var + "}\\)");
 		}
 		else
 		{
-			res += "\\(\\sigma^2 = \\dfrac{" + quad + "}{" + n + "} = \\\\ ";
-			res += "\\dfrac{" + somaSq + "}{" + n + "} = " + var + "\\)";
-			res += "\\(\\\\\\)";
-			res += "Extraindo a raiz quadrada:";
-			res += "\\(\\\\\\)";
-			res += "\\(\\sigma = \\sqrt{" + var + "} = \\mathbf{" + sigma + "}\\)";
+			passos.add("\\(\\sigma^2 = \\dfrac{" + quad + "}{" + n + "} = \\\\ "
+					+ "\\dfrac{" + somaSq + "}{" + n + "} = " + var + "\\)");
+			passos.add("Extraindo a raiz quadrada:");
+			passos.add("\\(\\sigma = \\sqrt{" + var + "} = \\mathbf{" + sigma + "}\\)");
 		}
 
-		return res;
+		return passos.toArray(new String[0]);
 	}
 
 	public String resultado()

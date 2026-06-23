@@ -20,17 +20,15 @@ public class Image36 extends GeradorExercicio
 
 		String resultadoCorreto = "" + a;
 
-		String resolucao = ResolucaoAreaPerimetro.formulaPerimetroTriangulo() + "\\\\";
-		resolucao += "b=" + b + ",\\quad c=" + c + "\\\\";
-		resolucao += "a+" + b + "+" + c + "=" + perimetro + "\\\\";
-		resolucao += "a=" + perimetro + "-" + b + "-" + c + "=" + a;
-
 		ConfigImagem config = new ConfigTriangulo("" + b, "", "a", "" + c, false);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Se o perímetro do triângulo é \\(" + perimetro + "\\), qual o valor de \\(a\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTriangulo() + "\\)");
+		addResolucao("\\(b=" + b + ",\\quad c=" + c + "\\)");
+		addResolucao("\\(a+" + b + "+" + c + "=" + perimetro + "\\)");
+		addResolucao("\\(a=" + perimetro + "-" + b + "-" + c + "=" + a + "\\)");
 	}
 }

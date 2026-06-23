@@ -20,11 +20,9 @@ public class Exercicio1 extends GeradorExercicio
 		addParagrafo("Sendo \\(f(x) = " + equacao + "\\), calcule \\(f(" + v + ")\\)");
 
 		// Resolução: substitui v, mostra produto, resultado
-		String res = "Substituindo \\(x = " + v + "\\) em \\(f(x) = " + equacao + "\\): \\(\\\\\\)";
-		res += "\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b) + " = "
-			+ prod + bLatex(b) + " = " + resultado + "\\).";
-
-		setResolucao(res);
+		addResolucao("Substituindo \\(x = " + v + "\\) em \\(f(x) = " + equacao + "\\):");
+		addResolucao("\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b) + " = "
+			+ prod + bLatex(b) + " = " + resultado + "\\).");
 		gerarAlternativas("" + resultado);
 	}
 

@@ -43,10 +43,9 @@ public class Exercicio7 extends GeradorExercicio
 				+ " \\(\\operatorname{tg}(" + angulo + ") = \\operatorname{tg}(" + operacao + ")\\).");
 		embaralharEAdicionarAlternativas("\\(" + resultado + "\\)", distratores);
 
-		setResolucao("Aplicando a fórmula com \\(\\operatorname{tg}(45°)=1\\) e \\(\\operatorname{tg}(30°)=\\dfrac{\\sqrt{3}}{3}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\operatorname{tg}(" + angulo + ") = " + passo1 + " = \\\\"
-				+ passo2 + " = \\\\"
-				+ passo3 + " = \\mathbf{" + resultado + "}\\)");
+		addResolucao("Aplicando a fórmula com \\(\\operatorname{tg}(45°)=1\\) e \\(\\operatorname{tg}(30°)=\\dfrac{\\sqrt{3}}{3}\\):");
+		addResolucao("\\(\\operatorname{tg}(" + angulo + ") = " + passo1 + " =\\)");
+		addResolucao("\\(" + passo2 + " =\\)");
+		addResolucao("\\(" + passo3 + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

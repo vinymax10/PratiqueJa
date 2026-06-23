@@ -180,97 +180,91 @@ public class ProblemaRegraTres
 		return pergunta;
 	}
 	
-	public String getMatriz()
+	public String getMatrizSemSeparador()
 	{
 		String matriz="";
 		switch(tipoProporcao)
 		{
 			case ABCX:
 				matriz="\\begin{array}[t]{cc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\downarrow) \\\\ \\hline"
-				+ a + "&" + b + "\\\\ \\hline " + c + "& x" + "\\\\ \\hline " + "\\end{array}\\\\\\\\";break;
-				
+				+ a + "&" + b + "\\\\ \\hline " + c + "& x" + "\\\\ \\hline " + "\\end{array}";break;
+
 			case ABXC: matriz="\\begin{array}[t]{cc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\downarrow) \\\\ \\hline"
-			+ a + "&" + b + "\\\\ \\hline " + " x &"+ c + "\\\\ \\hline " + "\\end{array}\\\\\\\\";break;	
-		
+			+ a + "&" + b + "\\\\ \\hline " + " x &"+ c + "\\\\ \\hline " + "\\end{array}";break;
+
 			case IABCX:
 				matriz="\\begin{array}[t]{cc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\uparrow) \\\\ \\hline"
-				+ a + "&" + b + "\\\\ \\hline " + c + "& x" + "\\\\ \\hline " + "\\end{array}\\\\\\\\";break;
-				
+				+ a + "&" + b + "\\\\ \\hline " + c + "& x" + "\\\\ \\hline " + "\\end{array}";break;
+
 			case IABXC: matriz="\\begin{array}[t]{cc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\uparrow) \\\\ \\hline"
-			+ a + "&" + b + "\\\\ \\hline " + " x &"+ c + "\\\\ \\hline " + "\\end{array}\\\\\\\\";break;	
+			+ a + "&" + b + "\\\\ \\hline " + " x &"+ c + "\\\\ \\hline " + "\\end{array}";break;
 
 			case IABCDEX: matriz="\\begin{array}[t]{ccc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\downarrow) & \\text{"+coluna3+"} (\\uparrow) \\\\ \\hline"
-			+ a + "&" + b + "&" + c + "\\\\ \\hline " + d+ "&"+ e +"&"+ " x "+"\\\\ \\hline " + "\\end{array}\\\\\\\\";break;
+			+ a + "&" + b + "&" + c + "\\\\ \\hline " + d+ "&"+ e +"&"+ " x "+"\\\\ \\hline " + "\\end{array}";break;
 
 			case IABCDXE: matriz="\\begin{array}[t]{ccc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\downarrow) & \\text{"+coluna3+"} (\\uparrow) \\\\ \\hline"
-			+ a + "&" + b + "&" + c + "\\\\ \\hline " + d+"&"+ " x "+ "&"+ e +"\\\\ \\hline " + "\\end{array}\\\\\\\\";break;
-			
+			+ a + "&" + b + "&" + c + "\\\\ \\hline " + d+"&"+ " x "+ "&"+ e +"\\\\ \\hline " + "\\end{array}";break;
+
 			case IABCXDE: matriz="\\begin{array}[t]{ccc}" + " (\\downarrow) \\text{"+coluna1+"} & \\text{"+coluna2+"} (\\downarrow) & \\text{"+coluna3+"} (\\uparrow) \\\\ \\hline"
-			+ a + "&" + b + "&" + c + "\\\\ \\hline " + " x "+"&"+ d + "&"+ e +"\\\\ \\hline " + "\\end{array}\\\\\\\\";break;
+			+ a + "&" + b + "&" + c + "\\\\ \\hline " + " x "+"&"+ d + "&"+ e +"\\\\ \\hline " + "\\end{array}";break;
 		}
-		
+
 		return matriz;
 	}
 	
-	public String resolucao()
+	public String[] resolucao()
 	{
 //		String num1, String den1, String num2, String den2
-		String resolucaoLatex = getMatriz();
-		MyExpression expressao;
+		String matriz = getMatrizSemSeparador();
+		String proporcao = "";
+		MyExpression expressao = null;
 		switch(tipoProporcao)
 		{
 			case ABCX:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + c + "}=\\dfrac{" + b + "}{" + "x" + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + c + "}=\\dfrac{" + b + "}{" + "x" + "}";
+
 				expressao = new MyExpression(a+"x" + "=" + c + "*" + b);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 			case ABXC:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + b + "}{" + c + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + b + "}{" + c + "}";
+
 				expressao = new MyExpression(b+"x" + "=" + a + "*" + c);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 			case IABCX:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + c + "}=\\dfrac{" + "x" + "}{" + b + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + c + "}=\\dfrac{" + "x" + "}{" + b + "}";
+
 				expressao = new MyExpression(c+"x" + "=" + a + "*" + b);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 			case IABXC:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + c + "}{" + b + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + c + "}{" + b + "}";
+
 				expressao = new MyExpression(c+"x" + "=" + a + "*" + b);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 			case IABCDEX:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + d + "}=\\dfrac{" + b + "}{" + e + "} \\cdot \\dfrac{" + "x" + "}{" + c + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + d + "}=\\dfrac{" + b + "}{" + e + "} \\cdot \\dfrac{" + "x" + "}{" + c + "}";
+
 				expressao = new MyExpression(d + "*" + b + "x"+ "=" + a+"*"+e+ "*" +c);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 			case IABCDXE:
-				resolucaoLatex += "\\dfrac{" + a + "}{" + d + "}=\\dfrac{" + b + "}{" + "x" + "} \\cdot \\dfrac{" + e + "}{" + c + "}\\\\";
-				
+				proporcao = "\\dfrac{" + a + "}{" + d + "}=\\dfrac{" + b + "}{" + "x" + "} \\cdot \\dfrac{" + e + "}{" + c + "}";
+
 				expressao = new MyExpression(a + "*" + c + "x"+ "=" + d+"*"+b+ "*" +e);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
-			case IABCXDE: 
-				resolucaoLatex += "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + b + "}{" + d + "} \\cdot \\dfrac{" + e + "}{" + c + "}\\\\";
-				
+
+			case IABCXDE:
+				proporcao = "\\dfrac{" + a + "}{" + "x" + "}=\\dfrac{" + b + "}{" + d + "} \\cdot \\dfrac{" + e + "}{" + c + "}";
+
 				expressao = new MyExpression(b + "*" + e + "x"+ "=" + a+ "*" +d+ "*" +c);
-				resolucaoLatex += expressao.resolverLatex();
 				break;
-				
+
 		}
-		
-		return resolucaoLatex;
+
+		return new String[]{matriz, proporcao, expressao.resolverLatex()};
 	}
 	
 	public Racional resultado()

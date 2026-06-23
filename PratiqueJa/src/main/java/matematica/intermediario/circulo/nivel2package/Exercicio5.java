@@ -18,22 +18,17 @@ public class Exercicio5 extends GeradorExercicio
 		int k = 2 * m;               // C = kπ (k par)
 		int aCoef = m * m;           // A = m²π
 
-		String res = "\\(" + ResolucaoCirculo.formulaComprimento() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + k + "\\pi = 2\\pi \\cdot r \\\\ ";
-		res += "r = \\dfrac{" + k + "}{2} = " + m + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoCirculo.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\pi \\cdot " + m + "^2 = \\mathbf{" + aCoef + "}\\pi\\)";
-
 		ConfigCircunferencia config = new ConfigCircunferencia("r", true);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O comprimento de uma circunferência é \\(" + k + "\\pi\\). Qual é a área do círculo?");
 		addParagrafoImagem(image);
 		gerarAlternativasPi(aCoef);
-		setResolucao(res);
+		addResolucao("\\(" + ResolucaoCirculo.formulaComprimento() + "\\)");
+		addResolucao("\\(" + k + "\\pi = 2\\pi \\cdot r\\)");
+		addResolucao("\\(r = \\dfrac{" + k + "}{2} = " + m + "\\)");
+		addResolucao("\\(" + ResolucaoCirculo.formulaArea() + "\\)");
+		addResolucao("\\(A = \\pi \\cdot " + m + "^2 = \\mathbf{" + aCoef + "}\\pi\\)");
 	}
 
 	private void gerarAlternativasPi(int k)

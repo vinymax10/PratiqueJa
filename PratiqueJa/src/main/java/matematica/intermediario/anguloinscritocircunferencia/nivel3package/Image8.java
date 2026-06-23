@@ -21,18 +21,15 @@ public class Image8 extends GeradorExercicio
 
 		String resultadoCorreto = "" + 2 * c + "°";
 
-		String resolucao = "";
-		resolucao += "a=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\\\";
-
 		MyExpression expressao = new MyExpression(a + "+b=180");
-		resolucao += expressao.resolverLatex() + "\\\\";
+		String resolucao1 = expressao.resolverLatex();
 		int b = 180 - a;
 
 		expressao = new MyExpression(intAnguloExterno + "+" + b + "+c=180");
-		resolucao += expressao.resolverLatex() + "\\\\";
+		String resolucao2 = expressao.resolverLatex();
 
 		expressao = new MyExpression("x=2*" + c);
-		resolucao += expressao.resolverLatex();
+		String resolucao3 = expressao.resolverLatex();
 
 		DadosConfig6 dados = new DadosConfig6();
 		dados.lateralEsq = lateralEsq;
@@ -45,6 +42,9 @@ public class Image8 extends GeradorExercicio
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(a=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\)");
+		addResolucao("\\(" + resolucao1 + "\\)");
+		addResolucao("\\(" + resolucao2 + "\\)");
+		addResolucao("\\(" + resolucao3 + "\\)");
 	}
 }

@@ -80,6 +80,6 @@ public class JurosDesconto2 extends GeradorExercicio
 
 		addParagrafo(pergunta);
 		gerarAlternativas(resultado);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

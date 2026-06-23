@@ -29,6 +29,7 @@ public class Image5 extends GeradorExercicio
 		addParagrafo("Encontre \\(a\\), dado \\(" + funcao + "\\)");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + dados.a);
-		setResolucao(ResolucaoFuncaoQuadratica.resolucaoAcharA_Yv(dados.a, dados.b, dados.c, dados.yVerticeRacional));
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoAcharA_Yv(dados.a, dados.b, dados.c, dados.yVerticeRacional))
+			addResolucao(passo);
 	}
 }

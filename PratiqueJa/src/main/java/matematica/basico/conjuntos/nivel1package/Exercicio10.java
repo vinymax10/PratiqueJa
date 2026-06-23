@@ -23,10 +23,7 @@ public class Exercicio10 extends GeradorExercicio
 		addParagrafo("\\(B = " + b + "\\)");
 		gerarAlternativasInteiras(correto);
 
-		setResolucao(
-			"\\(A \\cap B = " + c + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(|A \\cap B| = \\mathbf{" + correto + "}\\)"
-		);
+		addResolucao("\\(A \\cap B = " + c + "\\)");
+		addResolucao("\\(|A \\cap B| = \\mathbf{" + correto + "}\\)");
 	}
 }

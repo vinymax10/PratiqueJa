@@ -35,6 +35,7 @@ public class Dizima1 extends GeradorExercicio
 		addParagrafo("Escreva a dízima periódica a seguir na forma de fração:");
 		addParagrafo("\\(" + ResolucaoDizima.textLatex(strInteira, strNaoPeriodica, strPeriodica) + " = \\,?\\)");
 		gerarAlternativas(ResolucaoDizima.resultadoCorreto(strInteira, strNaoPeriodica, strPeriodica));
-		setResolucao("\\(" + ResolucaoDizima.resolucaoSimples(strInteira, strPeriodica) + "\\)");
+		for(String passo : ResolucaoDizima.resolucaoSimples(strInteira, strPeriodica))
+			addResolucao(passo);
 	}
 }

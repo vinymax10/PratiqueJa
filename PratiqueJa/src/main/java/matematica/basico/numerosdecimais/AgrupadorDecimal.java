@@ -101,7 +101,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " + " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(s);
-		setResolucao(vertical("+", fmtT(aT), fmtT(bT), fmtT(s)));
+		addResolucao(vertical("+", fmtT(aT), fmtT(bT), fmtT(s)));
 	}
 
 	protected void subtracaoDecimos(int min, int range)
@@ -113,7 +113,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " - " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(d);
-		setResolucao(vertical("-", fmtT(aT), fmtT(bT), fmtT(d)));
+		addResolucao(vertical("-", fmtT(aT), fmtT(bT), fmtT(d)));
 	}
 
 	protected void somaCentesimos(int min, int range)
@@ -124,7 +124,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " + " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(s);
-		setResolucao(vertical("+", fmtH(aH), fmtH(bH), fmtH(s)));
+		addResolucao(vertical("+", fmtH(aH), fmtH(bH), fmtH(s)));
 	}
 
 	protected void subtracaoCentesimos(int min, int range)
@@ -136,7 +136,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " - " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(d);
-		setResolucao(vertical("-", fmtH(aH), fmtH(bH), fmtH(d)));
+		addResolucao(vertical("-", fmtH(aH), fmtH(bH), fmtH(d)));
 	}
 
 	// (a décimos) × (b décimos) → centésimos
@@ -148,10 +148,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule o produto dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " \\times " + fmtT(bT) + " = \\,?\\)");
 		gerarAltH(prodH);
-		setResolucao(
-			"Multiplicamos sem a vírgula e contamos as casas decimais (1 + 1 = 2): \\(\\\\\\)" +
-			"\\(" + aT + " \\times " + bT + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)"
-		);
+		addResolucao("Multiplicamos sem a vírgula e contamos as casas decimais (1 + 1 = 2):");
+		addResolucao("\\(" + aT + " \\times " + bT + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)");
 	}
 
 	// (a centésimos) × inteiro pequeno → centésimos
@@ -163,10 +161,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + fmtH(aH) + " \\times " + k + " = \\,?\\)");
 		gerarAltH(prodH);
-		setResolucao(
-			"Multiplicamos sem a vírgula e recolocamos as 2 casas decimais: \\(\\\\\\)" +
-			"\\(" + aH + " \\times " + k + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)"
-		);
+		addResolucao("Multiplicamos sem a vírgula e recolocamos as 2 casas decimais:");
+		addResolucao("\\(" + aH + " \\times " + k + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)");
 	}
 
 	// a,bc × 10 (→ décimos) ou × 100 (→ inteiro)
@@ -180,12 +176,14 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		if(por10)
 		{
 			gerarAltT(aH);
-			setResolucao("A vírgula anda 1 casa à direita: \\(\\\\\\) \\(" + fmtH(aH) + " \\times 10 = " + fmtT(aH) + "\\)");
+			addResolucao("A vírgula anda 1 casa à direita:");
+			addResolucao("\\(" + fmtH(aH) + " \\times 10 = " + fmtT(aH) + "\\)");
 		}
 		else
 		{
 			gerarAlternativasInteiras(aH);
-			setResolucao("A vírgula anda 2 casas à direita: \\(\\\\\\) \\(" + fmtH(aH) + " \\times 100 = " + aH + "\\)");
+			addResolucao("A vírgula anda 2 casas à direita:");
+			addResolucao("\\(" + fmtH(aH) + " \\times 100 = " + aH + "\\)");
 		}
 	}
 
@@ -198,10 +196,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a divisão dos números decimais:");
 		addParagrafo("\\(" + fmtT(dividendoT) + " \\div " + fmtT(c) + " = \\,?\\)");
 		gerarAlternativasInteiras(q);
-		setResolucao(
-			"Multiplicamos dividendo e divisor por 10 para eliminar a vírgula do divisor: \\(\\\\\\)" +
-			"\\(" + dividendoT + " \\div " + c + " = \\mathbf{" + q + "}\\)"
-		);
+		addResolucao("Multiplicamos dividendo e divisor por 10 para eliminar a vírgula do divisor:");
+		addResolucao("\\(" + dividendoT + " \\div " + c + " = \\mathbf{" + q + "}\\)");
 	}
 
 	// (a centésimos ÷ inteiro) → centésimos exato
@@ -213,10 +209,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a divisão do número decimal pelo inteiro:");
 		addParagrafo("\\(" + fmtH(dividendoH) + " \\div " + k + " = \\,?\\)");
 		gerarAltH(q);
-		setResolucao(
-			"Dividimos normalmente, mantendo a vírgula no quociente: \\(\\\\\\)" +
-			"\\(" + fmtH(dividendoH) + " \\div " + k + " = " + fmtH(q) + "\\)"
-		);
+		addResolucao("Dividimos normalmente, mantendo a vírgula no quociente:");
+		addResolucao("\\(" + fmtH(dividendoH) + " \\div " + k + " = " + fmtH(q) + "\\)");
 	}
 
 	// Qual é o maior decimal? (4 valores em centésimos)
@@ -237,7 +231,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		}
 		addParagrafo("Qual é o maior número decimal entre " + numeros + "?");
 		embaralharEAdicionarAlternativas("\\(" + fmtH(maior) + "\\)", distratores);
-		setResolucao("Comparando casa a casa (da esquerda para a direita), o maior é \\(\\mathbf{" + fmtH(maior) + "}\\).");
+		addResolucao("Comparando casa a casa (da esquerda para a direita), o maior é \\(\\mathbf{" + fmtH(maior) + "}\\).");
 	}
 
 	// Fração de denominador 10 ou 100 → decimal
@@ -250,7 +244,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 			addParagrafo("Qual é o número decimal equivalente à fração abaixo?");
 			addParagrafo("\\(\\dfrac{" + n + "}{10}\\)");
 			gerarAltT(n);
-			setResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = " + fmtT(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = " + fmtT(n) + "\\)");
 		}
 		else
 		{
@@ -258,7 +252,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 			addParagrafo("Qual é o número decimal equivalente à fração abaixo?");
 			addParagrafo("\\(\\dfrac{" + n + "}{100}\\)");
 			gerarAltH(n);
-			setResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = " + fmtH(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = " + fmtH(n) + "\\)");
 		}
 	}
 
@@ -273,9 +267,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule, respeitando a ordem das operações:");
 		addParagrafo("\\(" + fmtT(aT) + " + " + fmtT(cT) + " \\times " + e + " = \\,?\\)");
 		gerarAltT(resT);
-		setResolucao(
-			"Primeiro a multiplicação: \\(" + fmtT(cT) + " \\times " + e + " = " + fmtT(prodT) + "\\). \\(\\\\\\)" +
-			"Depois a soma: \\(" + fmtT(aT) + " + " + fmtT(prodT) + " = \\mathbf{" + fmtT(resT) + "}\\)"
-		);
+		addResolucao("Primeiro a multiplicação: \\(" + fmtT(cT) + " \\times " + e + " = " + fmtT(prodT) + "\\).");
+		addResolucao("Depois a soma: \\(" + fmtT(aT) + " + " + fmtT(prodT) + " = \\mathbf{" + fmtT(resT) + "}\\)");
 	}
 }

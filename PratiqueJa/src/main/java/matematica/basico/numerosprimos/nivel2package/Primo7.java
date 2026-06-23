@@ -30,17 +30,20 @@ public class Primo7 extends AgrupadorPrimo
 		String correta = ePrimo ? "Primo" : "Composto";
 		String errada = ePrimo ? "Composto" : "Primo";
 
-		StringBuilder res = new StringBuilder();
-		res.append("\\(\\sqrt{").append(n).append("} \\approx ").append(sqrtFloor)
-		   .append(" \\Rightarrow\\) testar primos até \\(").append(sqrtFloor).append("\\): \\(").append(primos).append("\\). \\(\\\\\\) ");
-		if(ePrimo)
-			res.append("\\(").append(n).append("\\) não é divisível por nenhum. \\(\\\\\\) \\(\\therefore ").append(n).append("\\) é primo.");
-		else
-			res.append("\\(").append(n).append(" \\div ").append(primoDivisor).append(" = ").append(n / primoDivisor)
-			   .append("\\) (exato). \\(\\\\\\) \\(\\therefore ").append(n).append("\\) é composto.");
-
 		addParagrafo("Pelo teste de primalidade, o número \\(" + n + "\\) é:");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(errada, "Primo e composto", "Nem primo nem composto"));
-		setResolucao(res.toString());
+
+		addResolucao("\\(\\sqrt{" + n + "} \\approx " + sqrtFloor
+			+ " \\Rightarrow\\) testar primos até \\(" + sqrtFloor + "\\): \\(" + primos + "\\).");
+		if(ePrimo)
+		{
+			addResolucao("\\(" + n + "\\) não é divisível por nenhum.");
+			addResolucao("\\(\\therefore " + n + "\\) é primo.");
+		}
+		else
+		{
+			addResolucao("\\(" + n + " \\div " + primoDivisor + " = " + (n / primoDivisor) + "\\) (exato).");
+			addResolucao("\\(\\therefore " + n + "\\) é composto.");
+		}
 	}
 }

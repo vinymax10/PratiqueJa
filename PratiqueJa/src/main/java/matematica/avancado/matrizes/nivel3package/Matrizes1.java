@@ -25,20 +25,17 @@ public class Matrizes1 extends GeradorExercicio
 
 		String resultadoCorreto = AuxMatriz.soma(c) + "";
 
-		String resolucao = ParCor.formula("c_{i,j}= \\sum_{1}^{k} A_{i,k} \\cdot B_{k,j}") + "\\\\";
-		resolucao += "i, j \\in \\{1,2\\}, \\quad k=" + size + "\\\\";
-
-		for(int i = 0; i < size; i++)
-			for(int j = 0; j < c.length; j++)
-				resolucao += AuxMatriz.parcialMult(a, b, i, j) + "\\\\";
-
-		resolucao += AuxMatriz.somaStr(c);
-
 		String texto = "A=" + AuxMatriz.matrizStr(a) + ",~B=" + AuxMatriz.matrizStr(b);
 
 		addParagrafo("Se \\(A \\cdot B=C\\), qual a soma dos elementos de \\(C\\)?");
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(" + ParCor.formula("c_{i,j}= \\sum_{1}^{k} A_{i,k} \\cdot B_{k,j}") + "\\)");
+		addResolucao("\\(i, j \\in \\{1,2\\}, \\quad k=" + size + "\\)");
+		for(int i = 0; i < size; i++)
+			for(int j = 0; j < c.length; j++)
+				addResolucao("\\(" + AuxMatriz.parcialMult(a, b, i, j) + "\\)");
+		addResolucao("\\(" + AuxMatriz.somaStr(c) + "\\)");
 	}
 }

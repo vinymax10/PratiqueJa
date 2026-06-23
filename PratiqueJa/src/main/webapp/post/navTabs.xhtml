@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition>
+
+		<!-- BOTÕES DE NAVEGAÇÃO (abas da área de Post) -->
+		<div class="pc-tabs">
+
+			<h:link outcome="/post/configuracao"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/configuracao') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-gear" /> Configurações
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="0" />
+			</h:link>
+
+			<h:link outcome="/post/programacao"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/programacao') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-list" /> Programação
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="1" />
+			</h:link>
+
+			<h:link outcome="/post/backgroundPadrao"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPadrao') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-images" /> Background Padrão
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="2" />
+			</h:link>
+
+			<h:link outcome="/post/backgroundPersonalizado"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPersonalizado') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-file-image" /> Background Personalizado
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="3" />
+			</h:link>
+
+			<h:link outcome="/post/teste"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/teste') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-flask-vial" /> Teste
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="4" />
+			</h:link>
+
+			<h:link outcome="/post/ctas"
+				rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/ctas') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-bullhorn" /> CTAs
+				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="tab" value="5" />
+			</h:link>
+
+		</div>
+
+	</ui:composition>
+</h:body>
+</html>

@@ -40,9 +40,7 @@ public class Exercicio2 extends GeradorExercicio
 		else
 			fracPart = "\\dfrac{" + num + " \\times 180}{" + den + "}";
 
-		String res = "Usando \\(\\theta_{\\circ} = \\text{rad} \\times \\dfrac{180}{\\pi}\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(" + rad + " \\times \\dfrac{180}{\\pi} = " + fracPart + " = \\mathbf{" + grau + "°}\\)";
-		setResolucao(res);
+		addResolucao("Usando \\(\\theta_{\\circ} = \\text{rad} \\times \\dfrac{180}{\\pi}\\):");
+		addResolucao("\\(" + rad + " \\times \\dfrac{180}{\\pi} = " + fracPart + " = \\mathbf{" + grau + "°}\\)");
 	}
 }

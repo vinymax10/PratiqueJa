@@ -50,14 +50,11 @@ public class Image4 extends GeradorExercicio
 		for(String d : distratores) distrLatex.add("\\(" + d + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + resultadoCorreto + "\\)", distrLatex);
 
-		String res = "No triângulo isósceles retângulo (45°-45°-90°), os dois catetos são iguais:";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPitagoras.formula() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + l + "^2 + " + l + "^2 = a^2 \\\\";
-		res += (l * l) + " + " + (l * l) + " = a^2 \\\\";
-		res += "a^2 = " + (2 * l * l) + " \\\\";
-		res += "a = \\mathbf{\\sqrt{" + (2 * l * l) + "}}\\)";
-		setResolucao(res);
+		addResolucao("No triângulo isósceles retângulo (45°-45°-90°), os dois catetos são iguais:");
+		addResolucao("\\(" + ResolucaoPitagoras.formula() + "\\)");
+		addResolucao("\\(" + l + "^2 + " + l + "^2 = a^2\\)");
+		addResolucao("\\(" + (l * l) + " + " + (l * l) + " = a^2\\)");
+		addResolucao("\\(a^2 = " + (2 * l * l) + "\\)");
+		addResolucao("\\(a = \\mathbf{\\sqrt{" + (2 * l * l) + "}}\\)");
 	}
 }

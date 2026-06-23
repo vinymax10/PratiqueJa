@@ -48,11 +48,10 @@ public class Expressao2 extends GeradorExercicio
 		if(c > 0)  s1b.append(" + ").append(c);
 		if(c < 0)  s1b.append(" - ").append(Math.abs(c));
 
-		String res = "Substituindo \\(x = " + v + "\\): \\(\\\\\\)";
-		res += "\\(" + s1 + " = \\\\ ";
-		res += "" + s1b + " = \\\\ ";
-		res += "" + s2 + " = " + resultado + "\\)";
-		setResolucao(res);
+		addResolucao("Substituindo \\(x = " + v + "\\):");
+		addResolucao("\\(" + s1 + " =\\)");
+		addResolucao("\\(" + s1b + " =\\)");
+		addResolucao("\\(" + s2 + " = " + resultado + "\\)");
 	}
 
 	private String termoLinear(int coef)

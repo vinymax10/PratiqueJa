@@ -29,6 +29,7 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Encontre a coordenada \\(Y_v\\) do vértice");
 		addParagrafo("\\(" + funcao + "\\)");
 		gerarAlternativas(resultado);
-		setResolucao(ResolucaoFuncaoQuadratica.resolucaoYv(a, b, c));
+		for(String passo : ResolucaoFuncaoQuadratica.resolucaoYv(a, b, c))
+			addResolucao(passo);
 	}
 }

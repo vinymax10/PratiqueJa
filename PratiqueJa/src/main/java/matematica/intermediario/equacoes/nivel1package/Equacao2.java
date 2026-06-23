@@ -19,14 +19,13 @@ public class Equacao2 extends GeradorExercicio
 		addParagrafo("Encontre \\(" + var + "\\)");
 		addParagrafo("\\(" + aStr + var + " + " + b + " = " + c + "\\)");
 
-		String res = "Subtraindo \\(" + b + "\\) dos dois lados: \\(\\\\\\)";
-		res += "\\(" + aStr + var + " = " + c + " - " + b + " = " + (c - b) + "\\). \\(\\\\\\)";
+		addResolucao("Subtraindo \\(" + b + "\\) dos dois lados:");
+		addResolucao("\\(" + aStr + var + " = " + c + " - " + b + " = " + (c - b) + "\\).");
 		if(a > 1)
-			res += "\\(" + var + " = \\dfrac{" + (c - b) + "}{" + a + "} = " + xResult + "\\).";
+			addResolucao("\\(" + var + " = \\dfrac{" + (c - b) + "}{" + a + "} = " + xResult + "\\).");
 		else
-			res += "\\(" + var + " = " + xResult + "\\).";
+			addResolucao("\\(" + var + " = " + xResult + "\\).");
 
-		setResolucao(res);
 		gerarAlternativas("" + xResult);
 	}
 }

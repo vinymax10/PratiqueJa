@@ -22,8 +22,7 @@ public class Exercicio3 extends GeradorExercicio
 		distratores.add("\\(" + (3 * r2) + "\\pi\\,\\text{cm}^2\\)");  // 3πr²
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(A_{\\text{sup}} = 4\\pi r^2 = 4\\pi \\cdot " + r + "^2 = 4\\pi \\cdot "
-				+ r2 + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)";
-		setResolucao(res);
+		addResolucao("\\(A_{\\text{sup}} = 4\\pi r^2 = 4\\pi \\cdot " + r + "^2 = 4\\pi \\cdot "
+				+ r2 + " = \\mathbf{" + coef + "\\pi}\\,\\text{cm}^2\\)");
 	}
 }

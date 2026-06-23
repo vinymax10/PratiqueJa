@@ -33,6 +33,6 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Qual o grau do polinômio \\(p(x)\\)?");
 		addParagrafo("\\(p(x) = " + poly + "\\)");
 		gerarAlternativas("" + degree);
-		setResolucao(res);
+		addResolucao(res);
 	}
 }

@@ -29,11 +29,10 @@ public class Exercicio5 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{1}{8}\\)");
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
-		String resolucao = "Como moeda e dado são independentes, usa-se a regra do produto:\\(\\\\\\)";
-		resolucao += "\\(A =\\) sair cara na moeda\\(\\\\\\)";
-		resolucao += "\\(B =\\) sair " + face + " no dado\\(\\\\\\)";
-		resolucao += "\\(P(A) = \\dfrac{1}{2}, \\quad P(B) = \\dfrac{1}{6} \\\\";
-		resolucao += "P(A \\cap B) = P(A) \\cdot P(B) = \\dfrac{1}{2} \\cdot \\dfrac{1}{6} = \\mathbf{\\dfrac{1}{12}}\\)";
-		setResolucao(resolucao);
+		addResolucao("Como moeda e dado são independentes, usa-se a regra do produto:");
+		addResolucao("\\(A =\\) sair cara na moeda");
+		addResolucao("\\(B =\\) sair " + face + " no dado");
+		addResolucao("\\(P(A) = \\dfrac{1}{2}, \\quad P(B) = \\dfrac{1}{6}\\)");
+		addResolucao("\\(P(A \\cap B) = P(A) \\cdot P(B) = \\dfrac{1}{2} \\cdot \\dfrac{1}{6} = \\mathbf{\\dfrac{1}{12}}\\)");
 	}
 }

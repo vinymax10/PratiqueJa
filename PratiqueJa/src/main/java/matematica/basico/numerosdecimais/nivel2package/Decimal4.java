@@ -24,6 +24,6 @@ public class Decimal4 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " + " + b + " + " + c + " = \\,?\\)");
 		gerarAltT(sumT);
 
-		setResolucao(vertical3("+", a, b, c, result));
+		addResolucao(vertical3("+", a, b, c, result));
 	}
 }

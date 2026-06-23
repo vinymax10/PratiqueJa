@@ -26,16 +26,14 @@ public class Expressao1 extends GeradorExercicio
 		Racional resultado = new Racional(-b, a);
 		resultado.fatoracao(2);
 
-		String res = "\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)" + "\\(\\\\\\)";
-		res += "\\(a=" + a + ", \\quad b=" + b + "\\)" + "\\(\\\\\\)";
-		if(b < 0)
-			res += "\\(x_1+x_2=\\dfrac{-(" + b + ")}{" + a + "}=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
-		else
-			res += "\\(x_1+x_2=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)";
-
 		addParagrafo("Encontre a soma das raízes");
 		addParagrafo("\\(" + eq + "\\)");
 		gerarAlternativas(resultado);
-		setResolucao(res);
+		addResolucao("\\(" + ParCor.formula("x_1+x_2=\\dfrac{-b}{a}") + "\\)");
+		addResolucao("\\(a=" + a + ", \\quad b=" + b + "\\)");
+		if(b < 0)
+			addResolucao("\\(x_1+x_2=\\dfrac{-(" + b + ")}{" + a + "}=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)");
+		else
+			addResolucao("\\(x_1+x_2=\\dfrac{" + (-b) + "}{" + a + "}=\\mathbf{" + resultado.toStringLatex() + "}\\)");
 	}
 }

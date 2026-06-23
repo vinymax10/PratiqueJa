@@ -27,10 +27,10 @@ public class Exercicio2 extends GeradorExercicio
 		distratores.add("\\(\\dfrac{" + qq + "}{" + rr + "}\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		setResolucao("Pela fórmula \\(\\cos(2\\alpha) = \\cos^2\\alpha - \\operatorname{sen}^2\\alpha\\):"
-				+ "\\(\\\\\\)"
-				+ "\\(\\cos(2\\alpha) = \\left(\\dfrac{" + q + "}{" + r + "}\\right)^2 - \\left(\\dfrac{" + p + "}{" + r
-				+ "}\\right)^2 = \\\\ \\dfrac{" + qq + "}{" + rr + "} - \\dfrac{" + pp + "}{" + rr
+		addResolucao("Pela fórmula \\(\\cos(2\\alpha) = \\cos^2\\alpha - \\operatorname{sen}^2\\alpha\\):");
+		addResolucao("\\(\\cos(2\\alpha) = \\left(\\dfrac{" + q + "}{" + r + "}\\right)^2 - \\left(\\dfrac{" + p + "}{" + r
+				+ "}\\right)^2 =\\)");
+		addResolucao("\\(\\dfrac{" + qq + "}{" + rr + "} - \\dfrac{" + pp + "}{" + rr
 				+ "} = \\mathbf{\\dfrac{" + num + "}{" + rr + "}}\\)");
 	}
 }

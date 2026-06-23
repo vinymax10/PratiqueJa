@@ -42,16 +42,10 @@ public class NotacaoCientifica5 extends GeradorExercicio
 		String ctx = CONTEXTOS[rand.nextInt(CONTEXTOS.length)];
 		addParagrafo(String.format(ctx, a, m, b, m));
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
-			"Somar as mantissas (mesmo expoente):" +
-			"\\(\\\\\\)" +
-			"\\(" + a + " + " + b + " = " + soma + "\\)" +
-			"\\(\\\\\\)" +
-			"\\(" + soma + " \\times 10^{" + m + "}\\)" +
-			"\\(\\\\\\)" +
-			"Reajustar: \\(" + soma + " \\geq 10\\), escrever como \\(" + mantissa + " \\times 10^1\\):" +
-			"\\(\\\\\\)" +
-			"\\(" + mantissa + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + mantissa + " \\times 10^{" + expResult + "}}\\)"
-		);
+		addResolucao("Somar as mantissas (mesmo expoente):");
+		addResolucao("\\(" + a + " + " + b + " = " + soma + "\\)");
+		addResolucao("\\(" + soma + " \\times 10^{" + m + "}\\)");
+		addResolucao("Reajustar: \\(" + soma + " \\geq 10\\), escrever como \\(" + mantissa + " \\times 10^1\\):");
+		addResolucao("\\(" + mantissa + " \\times 10^1 \\times 10^{" + m + "} = \\mathbf{" + mantissa + " \\times 10^{" + expResult + "}}\\)");
 	}
 }

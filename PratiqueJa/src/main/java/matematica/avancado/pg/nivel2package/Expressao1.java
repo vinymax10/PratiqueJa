@@ -20,6 +20,6 @@ public class Expressao1 extends GeradorExercicio
 		addParagrafo("Qual é a soma da PG que possui " + n + " termos?");
 		addParagrafo("\\(" + enunciado + "\\)");
 		gerarAlternativas(ResolucaoPG.soma(a1, q, n).toString());
-		setResolucao("\\(" + ResolucaoPG.resolucaoSoma(a1, q, n) + "\\)");
+		addResolucao("\\(" + ResolucaoPG.resolucaoSoma(a1, q, n) + "\\)");
 	}
 }

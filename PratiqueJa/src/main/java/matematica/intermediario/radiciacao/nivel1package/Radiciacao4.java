@@ -26,7 +26,7 @@ public class Radiciacao4 extends GeradorExercicio
 		addParagrafo("Calcule:");
 		addParagrafo("\\(\\sqrt{\\dfrac{" + pp + "}{" + qq + "}}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
-		setResolucao(
+		addResolucao(
 			"\\(\\sqrt{\\dfrac{" + pp + "}{" + qq + "}} = \\dfrac{\\sqrt{" + pp + "}}{\\sqrt{" + qq + "}} = \\dfrac{\\sqrt{" + p + "^2}}{\\sqrt{" + q + "^2}} = \\mathbf{\\dfrac{" + p + "}{" + q + "}}\\)"
 		);
 	}

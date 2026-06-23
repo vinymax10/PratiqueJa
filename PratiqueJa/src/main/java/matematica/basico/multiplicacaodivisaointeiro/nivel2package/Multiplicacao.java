@@ -16,6 +16,7 @@ public class Multiplicacao extends GeradorExercicio
 
 		addParagrafo("Calcule \\(" + aFmt + " \\times " + bFmt + "\\).");
 		gerarAlternativasInteirasComNegativos(a * b);
-		setResolucao(ResolucaoMDInteiro.multiplicacao(a, b));
+		for(String passo : ResolucaoMDInteiro.multiplicacao(a, b))
+			addResolucao(passo);
 	}
 }

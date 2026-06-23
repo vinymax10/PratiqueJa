@@ -36,6 +36,6 @@ public class Image12 extends GeradorExercicio
 		addParagrafo("Qual o valor de x?");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + resolucao + "\\)");
 	}
 }

@@ -20,11 +20,8 @@ public class Decimal3 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\div " + n + " = \\,?\\)");
 		gerarAltT(resT);
 
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& " + a + " \\div " + n + " = \\\\" +
-			"& " + aT + " \\div " + n + " = " + resT + " \\\\" +
-			"& \\text{1 casa decimal: } " + result + "\\end{aligned}\\)"
-		);
+		addResolucao("\\(" + a + " \\div " + n + " =\\)");
+		addResolucao("\\(" + aT + " \\div " + n + " = " + resT + "\\)");
+		addResolucao("1 casa decimal: \\(" + result + "\\)");
 	}
 }

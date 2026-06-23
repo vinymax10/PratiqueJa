@@ -24,8 +24,7 @@ public class Exercicio4 extends GeradorExercicio
 		distratores.add("\\(" + (vCoef - 12 * k) + "\\pi\\,\\text{cm}^3\\)");
 		embaralharEAdicionarAlternativas(correta, distratores);
 
-		String res = "\\(V = \\dfrac{4\\pi r^3}{3} = \\dfrac{4\\pi \\cdot " + r3 + "}{3} = \\dfrac{"
-				+ (4 * r3) + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)";
-		setResolucao(res);
+		addResolucao("\\(V = \\dfrac{4\\pi r^3}{3} = \\dfrac{4\\pi \\cdot " + r3 + "}{3} = \\dfrac{"
+				+ (4 * r3) + "\\pi}{3} = \\mathbf{" + vCoef + "\\pi}\\,\\text{cm}^3\\)");
 	}
 }

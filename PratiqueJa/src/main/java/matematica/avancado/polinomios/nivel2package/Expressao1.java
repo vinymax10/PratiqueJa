@@ -40,13 +40,11 @@ public class Expressao1 extends GeradorExercicio
 		distratores.add("\\(" + d2 + "\\)");
 		distratores.add("\\(" + d3 + "\\)");
 
-		String res = "Usando o caso notável \\((a-b)^2 = a^2 - 2ab + b^2\\):\\(\\\\\\)";
-		res += "\\(a = " + a + "x, \\quad b = " + b + "\\)\\(\\\\\\)";
-		res += "\\((" + a + "x)^2 - 2 \\cdot " + a + "x \\cdot " + b + " + " + b + "^2 = \\mathbf{" + correct + "}\\)";
-
 		addParagrafo("Expanda a expressão usando casos notáveis.");
 		addParagrafo("\\(" + expr + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + correct + "\\)", distratores);
-		setResolucao(res);
+		addResolucao("Usando o caso notável \\((a-b)^2 = a^2 - 2ab + b^2\\):");
+		addResolucao("\\(a = " + a + "x, \\quad b = " + b + "\\)");
+		addResolucao("\\((" + a + "x)^2 - 2 \\cdot " + a + "x \\cdot " + b + " + " + b + "^2 = \\mathbf{" + correct + "}\\)");
 	}
 }

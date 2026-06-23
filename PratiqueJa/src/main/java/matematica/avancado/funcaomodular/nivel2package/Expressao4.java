@@ -22,13 +22,12 @@ public class Expressao4 extends GeradorExercicio
 
 		addParagrafo("Resolva: \\(|" + aStr + "| = |" + bStr + "|\\)");
 
-		String res  = "\\(|f| = |g| \\Rightarrow f = g\\) ou \\(f = -g\\): \\(\\\\\\)";
-		res += "Caso 1: \\(x + " + a + " = x + " + b + " \\Rightarrow " + a + " = " + b + "\\) (impossível) \\(\\\\\\)";
-		res += "Caso 2: \\(x + " + a + " = -(x + " + b + ")\\\\";
-		res += "x + " + a + " = -x - " + b + " \\Rightarrow 2x = -" + (a + b) + "\\\\";
-		res += "x = \\mathbf{" + x + "}\\)";
-
 		gerarAlternativas("" + x);
-		setResolucao(res);
+
+		addResolucao("\\(|f| = |g| \\Rightarrow f = g\\) ou \\(f = -g\\):");
+		addResolucao("Caso 1: \\(x + " + a + " = x + " + b + " \\Rightarrow " + a + " = " + b + "\\) (impossível)");
+		addResolucao("Caso 2: \\(x + " + a + " = -(x + " + b + ")\\)");
+		addResolucao("\\(x + " + a + " = -x - " + b + " \\Rightarrow 2x = -" + (a + b) + "\\)");
+		addResolucao("\\(x = \\mathbf{" + x + "}\\)");
 	}
 }

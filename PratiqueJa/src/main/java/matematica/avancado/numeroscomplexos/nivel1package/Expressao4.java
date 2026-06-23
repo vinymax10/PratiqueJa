@@ -24,19 +24,18 @@ public class Expressao4 extends GeradorExercicio
 			if (!v.equals(correct)) dist.add(v);
 		embaralharEAdicionarAlternativas(correct, dist);
 
-		String res = "Como \\(i^4 = 1\\), dividimos o expoente por 4: \\(\\\\\\)";
+		addResolucao("Como \\(i^4 = 1\\), dividimos o expoente por 4:");
 		if (r == 0)
 		{
-			res += "\\(" + n + " = 4 \\cdot " + k + "\\). \\(\\\\\\)";
-			res += "\\(i^{" + n + "} = (i^4)^{" + k + "} = 1^{" + k + "} = \\mathbf{1}\\)";
+			addResolucao("\\(" + n + " = 4 \\cdot " + k + "\\).");
+			addResolucao("\\(i^{" + n + "} = (i^4)^{" + k + "} = 1^{" + k + "} = \\mathbf{1}\\)");
 		}
 		else
 		{
 			String iR = (r == 1) ? "i" : (r == 2) ? "-1" : "-i";
-			res += "\\(" + n + " = 4 \\cdot " + k + " + " + r + "\\). \\(\\\\\\)";
-			res += "\\(i^{" + n + "} = (i^4)^{" + k + "} \\cdot i^{" + r + "} = 1 \\cdot i^{" + r + "}\\). \\(\\\\\\)";
-			res += "\\(i^{" + n + "} = \\mathbf{" + iR + "}\\)";
+			addResolucao("\\(" + n + " = 4 \\cdot " + k + " + " + r + "\\).");
+			addResolucao("\\(i^{" + n + "} = (i^4)^{" + k + "} \\cdot i^{" + r + "} = 1 \\cdot i^{" + r + "}\\).");
+			addResolucao("\\(i^{" + n + "} = \\mathbf{" + iR + "}\\)");
 		}
-		setResolucao(res);
 	}
 }

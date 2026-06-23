@@ -45,13 +45,13 @@ public class Radiciacao13 extends GeradorExercicio
 
 		if(p == 1)
 		{
-			setResolucao(
+			addResolucao(
 				"\\(" + base + "^{" + expoente + "} = \\sqrt[" + q + "]{" + base + "} = \\mathbf{" + res + "}\\)"
 			);
 		}
 		else
 		{
-			setResolucao(
+			addResolucao(
 				"\\(" + base + "^{" + expoente + "} = \\left(\\sqrt[" + q + "]{" + base + "}\\right)^{" + p + "} = " + raiz + "^{" + p + "} = \\mathbf{" + res + "}\\)"
 			);
 		}

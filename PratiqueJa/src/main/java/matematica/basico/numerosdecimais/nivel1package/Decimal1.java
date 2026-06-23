@@ -20,6 +20,6 @@ public class Decimal1 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " + " + b + " = \\,?\\)");
 		gerarAltT(sumT);
 
-		setResolucao(vertical("+", a, b, result));
+		addResolucao(vertical("+", a, b, result));
 	}
 }

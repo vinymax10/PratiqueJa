@@ -27,13 +27,9 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + (m3 * 100000) + "\\,\\text{cm}^3\\)"
 				)
 			);
-			setResolucao(
-				"Para volume, cada passo vale \\(\\times 1000\\,(= 10^3)\\):" +
-				"\\(\\\\\\)" +
-				"\\(1\\,\\text{m}^3 = 1{.}000{.}000\\,\\text{cm}^3\\)" +
-				"\\(\\\\\\)" +
-				"\\(" + m3 + " \\times 1{.}000{.}000 = \\mathbf{" + cm3 + "}\\,\\text{cm}^3\\)"
-			);
+			addResolucao("Para volume, cada passo vale \\(\\times 1000\\,(= 10^3)\\):");
+			addResolucao("\\(1\\,\\text{m}^3 = 1{.}000{.}000\\,\\text{cm}^3\\)");
+			addResolucao("\\(" + m3 + " \\times 1{.}000{.}000 = \\mathbf{" + cm3 + "}\\,\\text{cm}^3\\)");
 		}
 		else if (tipo == 1)
 		{
@@ -50,11 +46,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + (dm3 / 10 == 0 ? dm3 + 1 : dm3 / 10) + "\\,\\text{L}\\)"
 				)
 			);
-			setResolucao(
-				"Equivalência fundamental: \\(1\\,\\text{dm}^3 = 1\\,\\text{L}\\):" +
-				"\\(\\\\\\)" +
-				"\\(" + dm3 + "\\,\\text{dm}^3 = \\mathbf{" + dm3 + "}\\,\\text{L}\\)"
-			);
+			addResolucao("Equivalência fundamental: \\(1\\,\\text{dm}^3 = 1\\,\\text{L}\\):");
+			addResolucao("\\(" + dm3 + "\\,\\text{dm}^3 = \\mathbf{" + dm3 + "}\\,\\text{L}\\)");
 		}
 		else
 		{
@@ -72,11 +65,8 @@ public class SistemaMetrico1 extends GeradorExercicio
 					"\\(" + (l * 1000000) + "\\,\\text{cm}^3\\)"
 				)
 			);
-			setResolucao(
-				"\\(1\\,\\text{L} = 1\\,\\text{dm}^3 = 1000\\,\\text{cm}^3\\):" +
-				"\\(\\\\\\)" +
-				"\\(" + l + " \\times 1000 = \\mathbf{" + cm3 + "}\\,\\text{cm}^3\\)"
-			);
+			addResolucao("\\(1\\,\\text{L} = 1\\,\\text{dm}^3 = 1000\\,\\text{cm}^3\\):");
+			addResolucao("\\(" + l + " \\times 1000 = \\mathbf{" + cm3 + "}\\,\\text{cm}^3\\)");
 		}
 	}
 }

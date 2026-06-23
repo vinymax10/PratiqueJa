@@ -20,20 +20,16 @@ public class Exercicio4 extends GeradorExercicio
 			addParagrafo("Na reta \\(" + equacao + "\\), qual é o coeficiente angular \\(m\\)?");
 			gerarAlternativasInteiras(m, 4, false);
 
-			String res = "Na forma \\(y = mx + b\\), o coeficiente angular é o fator que multiplica \\(x\\)."
-					+ "\\(\\\\\\)"
-					+ "\\(" + equacao + " \\Rightarrow m = \\mathbf{" + m + "}\\)";
-			setResolucao(res);
+			addResolucao("Na forma \\(y = mx + b\\), o coeficiente angular é o fator que multiplica \\(x\\).");
+			addResolucao("\\(" + equacao + " \\Rightarrow m = \\mathbf{" + m + "}\\)");
 		}
 		else
 		{
 			addParagrafo("Na reta \\(" + equacao + "\\), qual é o coeficiente linear \\(b\\)?");
 			gerarAlternativasInteiras(b, 4, false);
 
-			String res = "Na forma \\(y = mx + b\\), o coeficiente linear é o termo independente de \\(x\\)."
-					+ "\\(\\\\\\)"
-					+ "\\(" + equacao + " \\Rightarrow b = \\mathbf{" + b + "}\\)";
-			setResolucao(res);
+			addResolucao("Na forma \\(y = mx + b\\), o coeficiente linear é o termo independente de \\(x\\).");
+			addResolucao("\\(" + equacao + " \\Rightarrow b = \\mathbf{" + b + "}\\)");
 		}
 	}
 }

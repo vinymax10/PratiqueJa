@@ -17,26 +17,18 @@ public class Exercicio3 extends GeradorExercicio
 		int p = 12 * m;              // P = 6l = 12m
 		int x = 6 * m * m;           // A = 6m²√3
 
-		String res = "Passo 1: encontrar \\(l\\) e o apótema \\(a\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(l = \\dfrac{P}{6} = \\dfrac{" + p + "}{6} = " + l + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaApotemaHexagono() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(a = \\dfrac{" + l + "\\sqrt{3}}{2} = " + m + "\\sqrt{3}\\)";
-		res += "\\(\\\\\\)";
-		res += "Passo 2: calcular \\(A\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)";
-		res += "\\(\\\\\\)";
-		res += "\\(A = \\dfrac{" + p + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)";
-
 		ConfigPoligonoRegular config = new ConfigPoligonoRegular(6, true, "l", "a");
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O perímetro de um hexágono regular é \\(" + p + "\\). Sabendo que a área é \\(x\\sqrt{3}\\), qual é o valor de \\(x\\)?");
 		addParagrafoImagem(image);
 		gerarAlternativas("" + x);
-		setResolucao(res);
+		addResolucao("Passo 1: encontrar \\(l\\) e o apótema \\(a\\)");
+		addResolucao("\\(l = \\dfrac{P}{6} = \\dfrac{" + p + "}{6} = " + l + "\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaApotemaHexagono() + "\\)");
+		addResolucao("\\(a = \\dfrac{" + l + "\\sqrt{3}}{2} = " + m + "\\sqrt{3}\\)");
+		addResolucao("Passo 2: calcular \\(A\\)");
+		addResolucao("\\(" + ResolucaoPoligonoRegular.formulaArea() + "\\)");
+		addResolucao("\\(A = \\dfrac{" + p + " \\times " + m + "\\sqrt{3}}{2} = \\mathbf{" + x + "}\\sqrt{3}\\)");
 	}
 }

@@ -25,9 +25,8 @@ public class NaoComutativa extends GeradorExercicio
 			"Não é definida nos naturais, pois \\(" + b + " < " + a + "\\)",
 			distratores);
 
-		String res = "A subtração não é comutativa: a ordem dos termos importa. \\(\\\\\\)";
-		res += "Como \\(" + b + " < " + a + "\\), não é possível calcular \\(" + b + " - " + a + "\\) nos números naturais. \\(\\\\\\)";
-		res += "Diferentemente da adição, \\(" + a + " - " + b + " \\neq " + b + " - " + a + "\\).";
-		setResolucao(res);
+		addResolucao("A subtração não é comutativa: a ordem dos termos importa.");
+		addResolucao("Como \\(" + b + " < " + a + "\\), não é possível calcular \\(" + b + " - " + a + "\\) nos números naturais.");
+		addResolucao("Diferentemente da adição, \\(" + a + " - " + b + " \\neq " + b + " - " + a + "\\).");
 	}
 }

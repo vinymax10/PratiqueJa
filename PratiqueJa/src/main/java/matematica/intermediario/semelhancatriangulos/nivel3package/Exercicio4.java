@@ -17,13 +17,13 @@ public class Exercicio4 extends GeradorExercicio
 		ConfigSemelhancaTriangulos4 config = new ConfigSemelhancaTriangulos4(configValores);
 
 		String resultadoCorreto = configValores.resultado.toString() + "";
-		String resolucao = configValores.resolucaoLatex;
 
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		setResolucao("\\(" + resolucao + "\\)");
+		for(String passo : configValores.resolucaoPassos)
+			addResolucao("\\(" + passo + "\\)");
 	}
 }

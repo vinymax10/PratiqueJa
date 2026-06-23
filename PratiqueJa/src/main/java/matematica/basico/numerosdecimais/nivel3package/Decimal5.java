@@ -61,13 +61,9 @@ public class Decimal5 extends AgrupadorDecimal
 		embaralharEAdicionarAlternativas(corretaStr, distratores);
 
 		// resolução: mostrar ordenação crescente
-		setResolucao(
-			"\\(\\begin{aligned}" +
-			"& \\text{Ordenando crescente:} \\\\" +
-			"& " + fmtH(sorted[0]) + " < " + fmtH(sorted[1]) +
-			" < " + fmtH(sorted[2]) + " < " + fmtH(sorted[3]) + " \\\\" +
-			"& \\text{" + (pedirMaior ? "Maior" : "Menor") + ": }" +
-			fmtH(correto) + "\\end{aligned}\\)"
-		);
+		addResolucao("Ordenando crescente:");
+		addResolucao("\\(" + fmtH(sorted[0]) + " < " + fmtH(sorted[1]) +
+			" < " + fmtH(sorted[2]) + " < " + fmtH(sorted[3]) + "\\)");
+		addResolucao((pedirMaior ? "Maior" : "Menor") + ": \\(" + fmtH(correto) + "\\)");
 	}
 }
