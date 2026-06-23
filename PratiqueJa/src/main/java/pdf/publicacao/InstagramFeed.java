@@ -6,12 +6,10 @@ import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.List;
 
 import bean.download.Diretorio;
 import matematica.GeradorExercicio;
 import modelo.configuracao.SistemaOperacional;
-import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ParagrafoExercicio;
@@ -83,7 +81,7 @@ public class InstagramFeed
 
 		if(!logo.exists())
 		{
-	        File origem = new File(diretorio.getEndBackgroundServidor() +programacaoPost.getConfigPost().getLogo().getEndImagem());
+	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getConfigPost().getLogo().getEndImagem());
 			try
 			{
 				Files.copy(origem.toPath(), logo.toPath());
@@ -273,18 +271,58 @@ public class InstagramFeed
 		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
 			return conta.getSizeFontTextLatex();
 
+		return fontsize(ptConteudo(texto));
+	}
+
+	/**
+	 * Fonte do enunciado quando ele aparece na página da resolução: limitado
+	 * a 8pt (foco da página é a resolução; o enunciado é só um lembrete) e
+	 * com piso em 7pt para manter legibilidade.
+	 */
+	private String sizeFontEnunciadoResolucao(String texto)
+	{
+		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
+			return conta.getSizeFontTextLatex();
+
+		return fontsize(Math.max(7, Math.min(8, ptConteudo(texto) - 2)));
+	}
+
+	private int ptConteudo(String texto)
+	{
 		int caracteres = texto.length();
 		int linhas = contarLinhas(texto);
 
-		int pt;
-		if(caracteres<=140 && linhas<=4)        pt=12;
-		else if(caracteres<=260 && linhas<=7)   pt=10;
-		else if(caracteres<=420 && linhas<=10)  pt=9;
-		else if(caracteres<=650 && linhas<=14)  pt=8;
-		else if(caracteres<=900 && linhas<=18)  pt=7;
-		else                                    pt=6;
+		// Limiares de linhas mais apertados que os de caracteres: a altura total
+		// (linhas × baselineskip + \lineskip) é o que estoura a página, não o nº
+		// de caracteres por si só.
+		if(caracteres<=140 && linhas<=4)        return 12;
+		if(caracteres<=260 && linhas<=6)        return 10;
+		if(caracteres<=420 && linhas<=8)        return 9;
+		if(caracteres<=650 && linhas<=10)       return 8;
+		if(caracteres<=900 && linhas<=12)       return 7;
+		return 6;
+	}
 
+	private String fontsize(int pt)
+	{
 		return "\\fontsize{"+pt+"}{"+(pt+2)+"}\\selectfont";
+	}
+
+	/**
+	 * \lineskip e \jot para o bloco de resolução. Para resoluções densas
+	 * (pt≤7), aperta o gap — caso contrário, 6pt × muitas linhas estoura.
+	 * Override de fonte mantém o gap padrão (não dá pra inferir pt).
+	 */
+	private String espacamentoResolucao(String texto)
+	{
+		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
+			return "\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}";
+
+		int pt = ptConteudo(texto);
+		// Só aperta quando a fonte já caiu para o menor tier (6pt). Tiers ≥7pt
+		// mantêm 6pt para preservar espaço para \dfrac e matrizes.
+		int gap = pt <= 6 ? 3 : 6;
+		return "\\setlength{\\lineskip}{"+gap+"pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{"+gap+"pt}";
 	}
 
 	/** Número de linhas do conteúdo = 1 + quantidade de quebras LaTeX ("\\"). */
@@ -303,7 +341,7 @@ public class InstagramFeed
 
 	public void exercicio()
 	{
-		String enunciado = enunciado();
+		String enunciado = enunciado(true);
 
 		latex+="\\setstretch{1.4}\r\n\r\n"
 		+"\\vspace{-16px}\r\n"
@@ -316,18 +354,20 @@ public class InstagramFeed
 		+sizeFontConteudo(enunciado)+"\r\n\r\n"
 		+enunciado
 		+"\\end{center}\r\n\r\n"
-		+"\\vfill\r\n"
-		+alternativas();
+		+"\\vfill\r\n";
 	}
 
-	/** Enunciado: parágrafos de texto (com matemática inline \\( \\)) e imagens via \\includegraphics. */
-	private String enunciado()
+	/**
+	 * Enunciado: parágrafos de texto (com matemática inline \\( \\)) e imagens via \\includegraphics.
+	 * Na página da resolução (primeiraPage=false) a imagem renderiza menor para liberar espaço vertical.
+	 */
+	private String enunciado(boolean primeiraPage)
 	{
 		StringBuilder sb = new StringBuilder();
 		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 		{
 			if(paragrafo.isTipoImagem())
-				sb.append("\\vspace{6px}\r\n\\includegraphics[width="+widthImagem(true)+"]{"
+				sb.append("\\vspace{6px}\r\n\\includegraphics[width="+widthImagem(primeiraPage)+"]{"
 					+diretorio.getConfig().getImagens()+"/"+nomeImagem(paragrafo)+"}\r\n\r\n");
 			else if(paragrafo.getTexto()!=null&&!paragrafo.getTexto().isBlank())
 				sb.append(escapar(paragrafo.getTexto())).append("\r\n\r\n");
@@ -335,37 +375,9 @@ public class InstagramFeed
 		return sb.toString();
 	}
 
-	/** Alternativas em duas colunas: 1ª metade (A, B) à esquerda; 2ª metade (C, D) à direita. */
-	private String alternativas()
-	{
-		List<AlternativaExercicio> alternativas = conta.getAlternativas();
-		if(alternativas.isEmpty())
-			return "";
-
-		int metade = (alternativas.size() + 1) / 2; // esquerda recebe a maior metade (ímpares)
-
-		StringBuilder esquerda = new StringBuilder();
-		StringBuilder direita = new StringBuilder();
-		for(int i = 0; i < alternativas.size(); i++)
-		{
-			StringBuilder coluna = (i < metade) ? esquerda : direita;
-			coluna.append("\\BC{"+alternativas.get(i).getLetra()+")}~"+escapar(alternativas.get(i).getTexto())+"\\par\r\n");
-		}
-
-		// \parskip separa as alternativas; \lineskip/\lineskiplimit garantem um espaço
-		// mínimo mesmo quando a linha é alta (\dfrac), evitando que uma fração cole na
-		// outra. Mesma abordagem usada na lista de exercícios em PDF (GeradorListaPDF).
-		String espacamento = "\\setlength{\\parskip}{6pt}\\setlength{\\lineskip}{6pt}"
-			+ "\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}\r\n";
-
-		return "\\vspace{8px}\r\n"
-		+"\\begin{minipage}[t]{0.48\\linewidth}\r\n"+espacamento+esquerda+"\\end{minipage}\\hfill\r\n"
-		+"\\begin{minipage}[t]{0.48\\linewidth}\r\n"+espacamento+direita+"\\end{minipage}\r\n";
-	}
-
 	public void resolucao()
 	{
-		String enunciado = enunciado();
+		String enunciado = enunciado(false);
 		String texto = getTextoResolucao();
 
 		latex+="\\setstretch{1.4}\r\n\r\n"
@@ -376,14 +388,14 @@ public class InstagramFeed
 		+"\\vspace{4px}\r\n"
 		+"\\bfseries\r\n\r\n"
 		+"\\boldmath\r\n\r\n"
-		+sizeFontConteudo(enunciado)+"\r\n\r\n"
+		+sizeFontEnunciadoResolucao(enunciado)+"\r\n\r\n"
 		+enunciado
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n"
 		+"\\begin{center}\r\n"
 		+sizeFontConteudo(texto)+"\r\n\r\n"
-		// gap mínimo entre linhas altas (\dfrac) — evita uma fração colar na outra (igual à lista de exercícios)
-		+"\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}\r\n\r\n"
+		// gap mínimo entre linhas altas (\dfrac) — aperta quando a fonte cai a 6/7pt
+		+espacamentoResolucao(texto)+"\r\n\r\n"
 		+texto
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n";
@@ -466,12 +478,12 @@ public class InstagramFeed
 	{
 		ProcessBuilder pb;
 		if(diretorio.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdftopng","-r","300",
+			pb= new ProcessBuilder("sudo", "pdftoppm","-png","-r","300",
 			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftopng","-r","300",
+			pb = new ProcessBuilder("pdftoppm","-png","-r","300",
 			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));

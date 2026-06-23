@@ -51,12 +51,12 @@ public class Diretorio implements Serializable
 	
 	public String getEnderecoExercicioPNG()
 	{
-		return converte(getEndereco()+"/"+config.getNome()+"-000001.png");
+		return converte(getEndereco()+"/"+config.getNome()+"-1.png");
 	}
-	
+
 	public String getEnderecoResolucaoPNG()
 	{
-		return converte(getEndereco()+"/"+config.getNome()+"-000002.png");
+		return converte(getEndereco()+"/"+config.getNome()+"-2.png");
 	}
 	
 	public String getEnderecoLogo()

@@ -92,7 +92,7 @@ public class ImagemPostBean implements Serializable
 	{
 		try
 		{
-			imagemPostService.remover(imagem, diretorio.getEndBackgroundServidor());
+			imagemPostService.remover(imagem, diretorio.getConfig().getEndereco());
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Imagem removida com sucesso.");
 			init();
 		}

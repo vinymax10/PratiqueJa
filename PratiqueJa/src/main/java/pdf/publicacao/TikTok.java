@@ -83,7 +83,7 @@ public class TikTok
 
 		if(!logo.exists())
 		{
-	        File origem = new File(diretorio.getEndBackgroundServidor() +programacaoPost.getConfigPost().getLogo().getEndImagem());
+	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getConfigPost().getLogo().getEndImagem());
 			try
 			{
 				Files.copy(origem.toPath(), logo.toPath());
@@ -272,17 +272,37 @@ public class TikTok
 		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
 			return conta.getSizeFontTextLatex();
 
+		return fontsize(ptConteudo(texto));
+	}
+
+	/**
+	 * Fonte do enunciado quando ele aparece na página da resolução: 2pt menor
+	 * que a heurística base, para liberar espaço vertical para a resolução
+	 * (que é o foco da página). Piso em 7pt para manter legibilidade.
+	 */
+	private String sizeFontEnunciadoResolucao(String texto)
+	{
+		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
+			return conta.getSizeFontTextLatex();
+
+		return fontsize(Math.max(7, ptConteudo(texto) - 2));
+	}
+
+	private int ptConteudo(String texto)
+	{
 		int caracteres = texto.length();
 		int linhas = contarLinhas(texto);
 
-		int pt;
-		if(caracteres<=200 && linhas<=6)        pt=12;
-		else if(caracteres<=380 && linhas<=10)  pt=11;
-		else if(caracteres<=600 && linhas<=14)  pt=10;
-		else if(caracteres<=900 && linhas<=20)  pt=9;
-		else if(caracteres<=1300 && linhas<=26) pt=8;
-		else                                    pt=7;
+		if(caracteres<=200 && linhas<=6)        return 12;
+		if(caracteres<=380 && linhas<=10)       return 11;
+		if(caracteres<=600 && linhas<=14)       return 10;
+		if(caracteres<=900 && linhas<=20)       return 9;
+		if(caracteres<=1300 && linhas<=26)      return 8;
+		return 7;
+	}
 
+	private String fontsize(int pt)
+	{
 		return "\\fontsize{"+pt+"}{"+(pt+2)+"}\\selectfont";
 	}
 
@@ -301,7 +321,7 @@ public class TikTok
 
 	public void exercicio()
 	{
-		String enunciado = enunciado();
+		String enunciado = enunciado(true);
 
 		latex+="\\setstretch{1.4}\r\n\r\n"
 		+"\\vspace{-10px}\r\n"
@@ -316,19 +336,21 @@ public class TikTok
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n";
 
-		// Alternativas (duas colunas) só quando o Reel é configurado com alternativas.
 		if(programacaoPost.isAlternativaReel())
 			latex+=alternativas();
 	}
 
-	/** Enunciado: parágrafos de texto (com matemática inline \\( \\)) e imagens via \\includegraphics. */
-	private String enunciado()
+	/**
+	 * Enunciado: parágrafos de texto (com matemática inline \\( \\)) e imagens via \\includegraphics.
+	 * Na página da resolução (primeiraPage=false) a imagem renderiza menor para liberar espaço vertical.
+	 */
+	private String enunciado(boolean primeiraPage)
 	{
 		StringBuilder sb = new StringBuilder();
 		for(ParagrafoExercicio paragrafo : conta.getParagrafos())
 		{
 			if(paragrafo.isTipoImagem())
-				sb.append("\\vspace{6px}\r\n\\includegraphics[width="+widthImagem(true)+"]{"
+				sb.append("\\vspace{6px}\r\n\\includegraphics[width="+widthImagem(primeiraPage)+"]{"
 					+diretorio.getConfig().getImagens()+"/"+nomeImagem(paragrafo)+"}\r\n\r\n");
 			else if(paragrafo.getTexto()!=null&&!paragrafo.getTexto().isBlank())
 				sb.append(escapar(paragrafo.getTexto())).append("\r\n\r\n");
@@ -336,22 +358,16 @@ public class TikTok
 		return sb.toString();
 	}
 
-	/** Alternativas em duas colunas: 1ª metade (A, B) à esquerda; 2ª metade (C, D) à direita. */
+	/** Alternativas em coluna única, alinhadas à esquerda (formato vertical do Reel/TikTok). */
 	private String alternativas()
 	{
 		List<AlternativaExercicio> alternativas = conta.getAlternativas();
 		if(alternativas.isEmpty())
 			return "";
 
-		int metade = (alternativas.size() + 1) / 2;
-
-		StringBuilder esquerda = new StringBuilder();
-		StringBuilder direita = new StringBuilder();
-		for(int i = 0; i < alternativas.size(); i++)
-		{
-			StringBuilder coluna = (i < metade) ? esquerda : direita;
-			coluna.append("\\BC{"+alternativas.get(i).getLetra()+")}~"+escapar(alternativas.get(i).getTexto())+"\\par\r\n");
-		}
+		StringBuilder linhas = new StringBuilder();
+		for(AlternativaExercicio alt : alternativas)
+			linhas.append("\\BC{"+alt.getLetra()+")}~"+escapar(alt.getTexto())+"\\par\r\n");
 
 		// \parskip separa as alternativas; \lineskip/\lineskiplimit garantem espaço mínimo
 		// mesmo com linhas altas (\dfrac), evitando que uma fração cole na outra.
@@ -359,13 +375,12 @@ public class TikTok
 			+ "\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}\r\n";
 
 		return "\\vspace{8px}\r\n"
-		+"\\begin{minipage}[t]{0.48\\linewidth}\r\n"+espacamento+esquerda+"\\end{minipage}\\hfill\r\n"
-		+"\\begin{minipage}[t]{0.48\\linewidth}\r\n"+espacamento+direita+"\\end{minipage}\r\n";
+		+"\\begin{flushleft}\r\n"+espacamento+linhas+"\\end{flushleft}\r\n";
 	}
 
 	public void resolucao()
 	{
-		String enunciado = enunciado();
+		String enunciado = enunciado(false);
 		String texto = getTextoResolucao();
 
 		latex+="\\setstretch{1.4}\r\n\r\n"
@@ -376,7 +391,7 @@ public class TikTok
 		+"\\vspace{6px}\r\n"
 		+"\\bfseries\r\n\r\n"
 		+"\\boldmath\r\n\r\n"
-		+sizeFontConteudo(enunciado)+"\r\n\r\n"
+		+sizeFontEnunciadoResolucao(enunciado)+"\r\n\r\n"
 		+enunciado
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n"
@@ -483,10 +498,10 @@ public class TikTok
 	{
 		ProcessBuilder pb;
 		if(diretorio.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdftopng", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("sudo", "pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftopng", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 
 		pb.redirectErrorStream(true);

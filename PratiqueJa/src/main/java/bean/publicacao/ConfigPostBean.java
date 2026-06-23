@@ -96,8 +96,8 @@ public class ConfigPostBean implements Serializable
 		try
 		{
 			long id = configPost.getUsuario().getId();
-			String endBase = diretorio.getEndBackgroundServidor();
-			String endRel = "/background/" + id + "/";
+			String endBase = diretorio.getConfig().getEndereco();
+			String endRel = "/images/background/" + id + "/";
 
 			ImagemPost logo = configPost.getLogo() != null ? configPost.getLogo() : new ImagemPost();
 			logo = imagemPostService.salvar(uploadedFile, logo, endBase, endRel, 400, 100);
@@ -117,7 +117,7 @@ public class ConfigPostBean implements Serializable
 
 	public String removerLogo()
 	{
-		File file = new File(diretorio.getEndBackgroundServidor() + configPost.getLogo().getEndImagem());
+		File file = new File(diretorio.getConfig().getEndereco() + configPost.getLogo().getEndImagem());
 		file.delete();
 		configPost.setLogo(null);
 		configPostDAO.salvar(configPost);
