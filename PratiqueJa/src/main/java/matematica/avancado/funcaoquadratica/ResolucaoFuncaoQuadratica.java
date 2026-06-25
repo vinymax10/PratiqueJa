@@ -155,9 +155,20 @@ public class ResolucaoFuncaoQuadratica
 			formulaXv(),
 			"\\(a=" + a + ", \\quad c=" + c + "\\)",
 			"\\(" + xv.showFrac() + "=\\dfrac{-b}{2\\cdot " + a + "}=\\dfrac{-b}{" + (2 * a) + "}\\)",
-			"\\(" + expressao.resolverLatex() + "\\)",
+			"\\(" + semUltimoPasso(expressao.resolverLatex()) + "\\)",
 			"\\(b=\\mathbf{" + b + "}\\)"
 		};
+	}
+
+	/**
+	 * Remove a última sub-linha (a isolação pura, ex.: "b = 30") da resolução do
+	 * MyExpression, pois o passo final em negrito já a repete — evita os dois
+	 * parágrafos idênticos no fim. Mantém o restante do desenvolvimento.
+	 */
+	private static String semUltimoPasso(String resolucao)
+	{
+		int corte = resolucao.lastIndexOf("\\\\");
+		return corte >= 0 ? resolucao.substring(0, corte) : resolucao;
 	}
 
 	public static String[] resolucaoAcharA_Xv(int a, int b, int c, Racional xv)
@@ -173,7 +184,7 @@ public class ResolucaoFuncaoQuadratica
 			formulaXv(),
 			"\\(b=" + b + ", \\quad c=" + c + "\\)",
 			passoSub,
-			"\\(" + expressao.resolverLatex() + "\\)",
+			"\\(" + semUltimoPasso(expressao.resolverLatex()) + "\\)",
 			"\\(a=\\mathbf{" + a + "}\\)"
 		};
 	}
@@ -189,7 +200,7 @@ public class ResolucaoFuncaoQuadratica
 			"\\(b=" + b + ", \\quad c=" + c + "\\)",
 			"\\(" + yv.showDfrac() + "=\\dfrac{-(" + bStr + "^2-4\\cdot a\\cdot " + cStr + ")}{4a}\\)",
 			"\\(" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * c, "a", false) + ")}{4a}\\)",
-			"\\(" + expressao.resolverLatex() + "\\)",
+			"\\(" + semUltimoPasso(expressao.resolverLatex()) + "\\)",
 			"\\(a=\\mathbf{" + a + "}\\)"
 		};
 	}
@@ -205,7 +216,7 @@ public class ResolucaoFuncaoQuadratica
 			"\\(a=" + a + ", \\quad b=" + b + "\\)",
 			"\\(" + yv.showDfrac() + "=\\dfrac{-(" + bStr + "^2-4\\cdot " + aStr + "\\cdot c)}{4\\cdot " + aStr + "}\\)",
 			"\\(" + yv.showDfrac() + "=\\dfrac{-(" + (b * b) + Auxiliar.getNumber(-4 * a, "c", false) + ")}{" + (4 * a) + "}\\)",
-			"\\(" + expressao.resolverLatex() + "\\)",
+			"\\(" + semUltimoPasso(expressao.resolverLatex()) + "\\)",
 			"\\(c=\\mathbf{" + c + "}\\)"
 		};
 	}

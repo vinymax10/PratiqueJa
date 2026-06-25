@@ -1,0 +1,166 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Gerar Posts" />
+	</ui:define>
+
+	<!-- ═══════════════════════════════════════════════════════ HERO -->
+	<div class="av-hero">
+		<div class="av-hero-head">
+			<span class="av-hero-badge"><i class="pi pi-images" /> Área do Professor</span>
+			<h1 class="av-hero-title">Gerar Posts</h1>
+			<p class="av-hero-desc">
+				Monte um lote de posts, salve para configurar com calma e gere quando quiser. Cada post consome 1 crédito.
+			</p>
+		</div>
+
+		<h:panelGroup layout="block" styleClass="av-hero-stats" rendered="#{!pedidoPostBean.modoTrial}">
+			<div class="av-stat">
+				<span class="av-stat-label">Plano ativo</span>
+				<strong class="av-stat-value">#{pedidoPostBean.nomePlano}</strong>
+			</div>
+			<div class="av-stat">
+				<span class="av-stat-label">Usados no mês</span>
+				<strong class="av-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
+			</div>
+			<div class="av-stat av-stat--green">
+				<span class="av-stat-label">Restantes</span>
+				<strong class="av-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
+			</div>
+		</h:panelGroup>
+
+		<h:panelGroup layout="block" styleClass="av-hero-stats" rendered="#{pedidoPostBean.modoTrial}">
+			<div class="av-stat">
+				<span class="av-stat-label">Teste grátis</span>
+				<strong class="av-stat-value">#{pedidoPostBean.limiteTrialGratis} posts</strong>
+			</div>
+			<div class="av-stat">
+				<span class="av-stat-label">Usados</span>
+				<strong class="av-stat-value">#{pedidoPostBean.postsUsadosTotal}</strong>
+			</div>
+			<div class="av-stat av-stat--green">
+				<span class="av-stat-label">Restantes</span>
+				<strong class="av-stat-value">#{pedidoPostBean.trialRestante()}</strong>
+			</div>
+		</h:panelGroup>
+	</div>
+
+	<ui:include src="/post/navTabs.xhtml" />
+
+	<h:form id="form">
+
+		<div class="av-panel">
+
+			<!-- ─── Dados do lote ─── -->
+			<div class="av-section-sub"><i class="pi pi-info-circle" /> Dados do lote</div>
+
+			<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;">
+				<div class="av-field" style="flex:2 1 320px;">
+					<div class="av-label">Nome do lote</div>
+					<p:inputText id="nome" placeholder="(opcional) Ex.: Posts da semana 1"
+						value="#{pedidoPostBean.entidade.nome}" style="width:100%;" />
+				</div>
+				<div class="av-field" style="flex:1 1 180px;">
+					<div class="av-label">Receber por e-mail</div>
+					<p:toggleSwitch value="#{pedidoPostBean.entidade.enviarEmail}" />
+				</div>
+			</div>
+
+			<!-- ─── Conteúdo ─── -->
+			<div class="av-section-sub"><i class="pi pi-list" /> Conteúdo</div>
+
+			<div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+				<p:commandButton value="Adicionar assunto" icon="pi pi-plus"
+					styleClass="ui-button-raised ui-button-success"
+					action="#{pedidoPostBean.cadastrarItem}"
+					update=":dialogItemPost" process="@this"
+					oncomplete="PF('wDialogItemPost').show()" resetValues="true" />
+			</div>
+
+			<h:panelGroup id="listaItens" layout="block">
+				<ui:repeat value="#{pedidoPostBean.entidade.itens}" var="it" varStatus="status">
+					<div class="av-item-card">
+						<div class="av-item-num"><h:outputText value="#{status.index + 1}" /></div>
+						<div class="av-item-info">
+							<span class="av-item-assunto"><h:outputText value="#{it.assunto.nome}" /></span>
+							<div class="av-item-meta">
+								<span class="av-item-chip av-item-chip--nivel">
+									<h:outputText value="#{it.nivel != null ? it.nivel.nome : 'Todos os níveis'}" />
+								</span>
+								<span class="av-item-chip av-item-chip--formato"><h:outputText value="#{it.formato.nome}" /></span>
+								<span class="av-item-chip av-item-chip--qtd">
+									<h:outputText value="#{it.quantidade} exercício#{it.quantidade != 1 ? 's' : ''} · #{it.creditos} post#{it.creditos != 1 ? 's' : ''}" />
+								</span>
+							</div>
+						</div>
+						<div class="av-item-actions">
+							<p:commandButton icon="pi pi-pencil"
+								styleClass="ui-button-flat ui-button-secondary" title="Editar"
+								action="#{pedidoPostBean.editarItem(it)}"
+								update=":dialogItemPost" process="@this"
+								oncomplete="PF('wDialogItemPost').show()" resetValues="true" />
+							<p:commandButton icon="pi pi-copy"
+								styleClass="ui-button-flat ui-button-secondary" title="Duplicar"
+								action="#{pedidoPostBean.duplicarItem(it)}"
+								update="form:listaItens form:totalizador :growl" process="@this" />
+							<p:commandButton icon="pi pi-trash"
+								styleClass="ui-button-danger ui-button-flat" title="Remover"
+								action="#{pedidoPostBean.removerItem(it)}"
+								update="form:listaItens form:totalizador :growl" process="@this" />
+						</div>
+					</div>
+				</ui:repeat>
+
+				<h:panelGroup layout="block" rendered="#{empty pedidoPostBean.entidade.itens}">
+					<div class="av-item-empty">
+						<i class="pi pi-inbox" />
+						Nenhum assunto adicionado ainda.<br/>
+						Clique em <b>Adicionar assunto</b> para montar o conteúdo do lote.
+					</div>
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<h:panelGroup id="totalizador" layout="block" styleClass="av-totalizer-group">
+				<div class="av-totalizer #{pedidoPostBean.totalCreditos() > pedidoPostBean.creditosRestantes() ? 'av-totalizer--warn' : ''}">
+					<i class="pi pi-images" />
+					Total deste lote:
+					<b><h:outputText value="#{pedidoPostBean.totalCreditos()}" /></b>
+					post#{pedidoPostBean.totalCreditos() != 1 ? 's' : ''} (créditos)
+				</div>
+			</h:panelGroup>
+
+			<div class="av-actions av-actions--split">
+				<p:button value="Voltar ao histórico" icon="pi pi-arrow-left"
+					outcome="/post/gerar/list" styleClass="ui-button-flat ui-button-plain" />
+				<h:panelGroup styleClass="flex align-items-center gap-2" style="display:flex;gap:8px;">
+					<p:commandButton value="Salvar rascunho" icon="pi pi-save"
+						styleClass="ui-button-flat ui-button-secondary"
+						action="#{pedidoPostBean.salvarRascunho}"
+						update="@form :growl" process="@form" />
+					<p:commandButton id="gerar" value="Gerar posts" icon="pi pi-bolt"
+						styleClass="ui-button-raised btn-primary"
+						action="#{pedidoPostBean.solicitar}"
+						update="@form :growl" process="@form">
+						<p:defaultCommand target="gerar" />
+					</p:commandButton>
+				</h:panelGroup>
+			</div>
+
+		</div>
+
+	</h:form>
+
+	<!-- ═══════════════════════════════ MODAL: ADICIONAR/EDITAR ASSUNTO -->
+	<ui:include src="/post/gerar/dialog-item-post.xhtml" />
+
+</ui:decorate>

@@ -49,8 +49,8 @@ public class Email implements Serializable, Entidade
 	@AuditLabel(value = "assunto")
 	private String assunto;
 
-	@Column(length = 4097)
-	@Size(max = 4097)
+	@Column(columnDefinition = "TEXT")
+	@Size(max = 16383)
 	@AuditLabel(value = "mensagem", genero = GeneroGramatical.FEMININO)
 	private String mensagem;
 

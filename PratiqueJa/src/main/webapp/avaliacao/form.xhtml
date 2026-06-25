@@ -416,6 +416,14 @@
 					outcome="/avaliacao/list"
 					styleClass="ui-button-flat ui-button-plain" />
 				<p:commandButton
+					value="Salvar como padrão"
+					icon="pi pi-bookmark"
+					styleClass="ui-button-flat ui-button-secondary"
+					action="#{pedidoAvaliacaoBean.salvarComoPadrao}"
+					process="@form"
+					update=":growl"
+					title="Guarda estes dados (cabeçalho e formato) para já virem preenchidos nas próximas avaliações." />
+				<p:commandButton
 					id="solicitar"
 					value="Solicitar Confecção"
 					icon="pi pi-send"

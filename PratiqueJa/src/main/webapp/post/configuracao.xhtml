@@ -138,7 +138,7 @@
 					<p:message for="data" display="text"/>
 				</h:panelGroup>
 
-				<h:panelGroup styleClass="pc-field #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}" layout="block">
+				<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
 	                <p:outputLabel styleClass="pc-label" for="@next" value="Finalidade da Cta"/>
 	                <p:selectOneMenu id="finalidadeCta" value="#{configPostBean.configPost.finalidadeCta}"
 	                filter="true" filterMatchMode="contains" required="true"
@@ -149,7 +149,7 @@
 	                <p:message for="finalidadeCta" display="text"/>
 	            </h:panelGroup>
 
-				<h:panelGroup styleClass="pc-field #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}" layout="block">
+				<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
 	                <p:outputLabel styleClass="pc-label" for="@next" value="Perfil"/>
 	                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.perfilCriador}"
 	                filter="true" filterMatchMode="contains" required="true" requiredMessage="O intervalo de envio é obrigatório" >
@@ -159,7 +159,8 @@
 	                <p:message for="perfilCriador" display="text"/>
 	            </h:panelGroup>
 
-	            <h:panelGroup styleClass="pc-field #{autenticacaoBean.usuario.perfil=='Admin'? '':'hidden'}" layout="block">
+	            <h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}"
+	            layout="block">
 					<p:outputLabel styleClass="pc-label" for="@next" value="Ativo" />
 					<p:toggleSwitch class="toggleSwitch-form"
 						value="#{configPostBean.configPost.ativo}" />
@@ -239,7 +240,7 @@
 				</p:commandButton>
 
 				<p:commandButton id="salvarGerais" value="Salvar"
-				styleClass="ui-button-raised ui-button-primary"  icon="pi pi-check"
+				styleClass="ui-button-raised btn-primary"  icon="pi pi-check"
 				action="#{configPostBean.salvar}" update="@form, :growl"  process="@form"	>
 					<p:defaultCommand target="salvarGerais"/>
 				</p:commandButton>

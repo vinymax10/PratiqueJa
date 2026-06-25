@@ -28,6 +28,15 @@
 							value="#{programacaoPostBean.programacaoPost.alternativaReel}" />
 					</h:panelGroup>
 
+					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2"
+						rendered="#{configPostBean.configPost.perfilCriador=='Basico'}">
+						<p:outputLabel for="@next" value="Formato" />
+						<p:selectOneButton value="#{programacaoPostBean.programacaoPost.formato}">
+							<f:selectItem itemLabel="Feed" itemValue="Feed" />
+							<f:selectItem itemLabel="Reel" itemValue="Reel" />
+						</p:selectOneButton>
+					</h:panelGroup>
+
 					<h:panelGroup styleClass="campo col-12  xl:col-8">
 						<p:outputLabel for="@next" value="Assunto" />
 						<p:selectOneMenu

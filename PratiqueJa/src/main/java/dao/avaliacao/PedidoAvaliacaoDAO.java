@@ -82,7 +82,7 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 	{
 		List<Object[]> linhas = em.createQuery(
 			"SELECT u.planoAvaliacao, l.file FROM PedidoAvaliacao p " +
-			"JOIN p.usuario u JOIN u.logoEscola l WHERE p.id = :pedidoId",
+			"JOIN p.usuario u JOIN u.configAvaliacao c JOIN c.logoEscola l WHERE p.id = :pedidoId",
 			Object[].class)
 			.setParameter("pedidoId", pedidoId)
 			.getResultList();

@@ -28,13 +28,14 @@ import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.ResultadoExercicio;
+import modelo.avaliacao.ConfigAvaliacao;
 import modelo.avaliacao.PlanoAvaliacao;
 import modelo.publicacao.ConfigPost;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "logoEscola", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
+@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "configAvaliacao", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
 @Data
 @Entity
 public class Usuario extends Ativo implements Entidade
@@ -87,11 +88,12 @@ public class Usuario extends Ativo implements Entidade
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Imagem imagem;
 
-	/** Logo da escola estampada no cabeçalho do PDF (recurso dos planos Profissional e Master). */
+	/** Valores-padrão da avaliação (cabeçalho, formato e logo da escola), pré-carregados a cada
+	 *  nova solicitação para o professor não digitar tudo de novo. */
 	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "logoEscola_id")
-	private Imagem logoEscola;
+	@JoinColumn(name = "configAvaliacao_id")
+	private ConfigAvaliacao configAvaliacao;
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "perfil")
@@ -118,6 +120,14 @@ public class Usuario extends Ativo implements Entidade
 	 *  continuidade da assinatura: só acumula quem ficou ativo o mês inteiro). */
 	@DiffIgnore
 	private LocalDate mesRolloverProcessado;
+
+	/** Crédito de post acumulado do mês anterior (rollover do produto de conteúdo). */
+	@DiffIgnore
+	private int creditoRolloverPost;
+
+	/** Primeiro dia do mês em que o rollover de post foi processado pela última vez. */
+	@DiffIgnore
+	private LocalDate mesRolloverPostProcessado;
 
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")

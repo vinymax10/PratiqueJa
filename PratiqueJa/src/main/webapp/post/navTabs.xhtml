@@ -16,6 +16,11 @@
 				<f:param name="tab" value="0" />
 			</h:link>
 
+			<h:link outcome="/post/gerar/list"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/gerar/') ? 'pc-tab-active' : ''}">
+				<i class="fa-solid fa-bolt" /> Gerar Posts
+			</h:link>
+
 			<h:link outcome="/post/programacao"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/programacao') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-list" /> Programação
@@ -45,7 +50,7 @@
 			</h:link>
 
 			<h:link outcome="/post/ctas"
-				rendered="#{autenticacaoBean.usuario.perfil=='Admin'}"
+				rendered="#{sessaoBean.podeVerAdministracao()}"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/ctas') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-bullhorn" /> CTAs
 				<f:param name="configPost" value="#{configPostBean.configPost.id}" />

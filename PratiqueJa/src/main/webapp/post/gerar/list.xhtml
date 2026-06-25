@@ -1,0 +1,152 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+		<style>
+			/* Realce sutil da linha do lote recém-criado. */
+			.tableStatus .ui-datatable-data tr.av-row-novo > td { background: #eff6ff !important; }
+			/* Tabela não-interativa: sem cursor de clique e sem foco/seleção de célula. */
+			.pc-historico .ui-datatable-data tr { cursor: default !important; }
+			.pc-historico .ui-datatable-data td:focus,
+			.pc-historico .ui-datatable-data td[role="gridcell"]:focus,
+			.pc-historico .ui-datatable-data td[tabindex]:focus {
+				outline: none !important;
+				box-shadow: none !important;
+			}
+		</style>
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Gerar Posts" />
+	</ui:define>
+
+	<!-- HERO (card azul) -->
+	<div class="pc-hero">
+		<div class="pc-hero-head">
+			<span class="pc-hero-badge"><i class="pi pi-images" /> Conteúdo para Instagram</span>
+			<h1 class="pc-hero-title">Gerar Posts</h1>
+			<p class="pc-hero-desc">
+				Monte lotes de posts, gere quando quiser e baixe o ZIP com tudo pronto. Cada post consome 1 crédito.
+			</p>
+		</div>
+		<div class="pc-hero-stats">
+			<div class="pc-stat">
+				<span class="pc-stat-label">Plano</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.descricaoPlano()}</strong>
+			</div>
+			<div class="pc-stat pc-stat--green">
+				<span class="pc-stat-label">Lotes</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.historico.size()}</strong>
+			</div>
+		</div>
+	</div>
+
+	<ui:include src="/post/navTabs.xhtml" />
+
+	<h:form id="painelHistorico">
+
+		<p:poll interval="2"
+			listener="#{pedidoPostBean.atualizarProgresso}"
+			update="@form"
+			rendered="#{pedidoPostBean.temGerandoEmProgresso()}" />
+
+		<div class="pc-panel">
+
+			<div class="av-list-actions">
+				<p:button value="Gerar posts" icon="pi pi-bolt"
+					outcome="/post/gerar/form"
+					styleClass="ui-button-raised ui-button-success" />
+			</div>
+
+			<p:dataTable value="#{pedidoPostBean.historico}" var="pedido"
+				emptyMessage="Nenhum lote gerado ainda."
+				reflow="true"
+				rows="30" paginator="true" paginatorAlwaysVisible="false"
+				stripedRows="true"
+				rowStyleClass="#{pedido.codigoBatch == pedidoPostBean.codigoDestaque ? 'av-row-novo' : null}"
+				styleClass="tableStatus pc-historico">
+
+				<p:column headerText="Código" style="width:100px">
+					<h:outputText value="#{pedido.codigoBatch}"
+						style="font-family:monospace;font-weight:700;color:#2563eb;font-size:15px" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{pedido.nome}" />
+				</p:column>
+
+				<p:column headerText="Posts" style="width:60px">
+					<h:outputText value="#{pedido.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Solicitado" style="width:130px">
+					<h:outputText value="#{pedido.dataSolicitacao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Expira" style="width:95px">
+					<h:outputText value="#{pedido.dataExpiracao}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Status" style="width:155px">
+					<h:panelGroup rendered="#{pedido.status.name() == 'GERANDO'}">
+						<p:progressBar value="#{pedido.progresso}" style="height:10px;border-radius:999px" />
+						<div style="font-size:11px;text-align:center;margin-top:4px;color:#6b7280">
+							<h:outputText value="#{pedido.progresso}">
+								<f:convertNumber maxFractionDigits="0" />
+							</h:outputText>%
+						</div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{pedido.status.name() != 'GERANDO'}">
+						<ui:include src="/status/status.xhtml">
+							<ui:param name="status" value="#{pedido.status}" />
+						</ui:include>
+					</h:panelGroup>
+				</p:column>
+
+				<p:column headerText="Ações" style="width:140px;text-align:center">
+					<p:menuButton value="Ações" styleClass="ui-button-outlined"
+						rendered="#{pedido.status.name() == 'CONCLUIDO'}">
+						<p:menuitem value="Ver" icon="pi pi-eye"
+							action="#{pedidoPostBean.verPedido(pedido)}"
+							update=":formDetalhePost" oncomplete="PF('wDialogDetalhePost').show()" />
+						<p:menuitem value="Baixar" icon="pi pi-download" ajax="false"
+							rendered="#{pedido.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedido)}">
+							<p:fileDownload value="#{pedidoPostBean.download(pedido)}" />
+						</p:menuitem>
+						<p:menuitem value="Enviar por e-mail" icon="pi pi-envelope"
+							rendered="#{pedido.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedido)}"
+							action="#{pedidoPostBean.enviarEmail(pedido)}"
+							update=":growl" />
+					</p:menuButton>
+					<p:menuButton value="Ações" styleClass="ui-button-outlined"
+						rendered="#{pedido.status.name() == 'RASCUNHO'}">
+						<p:menuitem value="Gerar" icon="pi pi-bolt"
+							action="#{pedidoPostBean.gerarRascunho(pedido)}"
+							process="@this" update="@form :growl" />
+						<p:menuitem value="Editar" icon="pi pi-pencil"
+							outcome="/post/gerar/form">
+							<f:param name="rascunho" value="#{pedido.id}" />
+						</p:menuitem>
+					</p:menuButton>
+				</p:column>
+
+			</p:dataTable>
+
+		</div>
+
+	</h:form>
+
+	<!-- ═══════════════════════════════ DIALOG: DETALHES DO LOTE -->
+	<ui:include src="/post/gerar/dialog-detalhe-post.xhtml" />
+
+</ui:decorate>

@@ -58,17 +58,65 @@ public class CommonsEmail
 		message.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(email.getDestinatario()));
 		message.setSubject(email.getAssunto(), "UTF-8");
 
+		String corpo = email.getMensagem() != null ? email.getMensagem() : "";
+		// Corpo que começa com "<" é tratado como HTML; senão, texto puro (demais e-mails).
+		boolean html = corpo.stripLeading().startsWith("<");
+
 		if(email.getAnexos().isEmpty())
 		{
-			message.setText(email.getMensagem(), "UTF-8");
+			if(html)
+				message.setContent(corpo, "text/html; charset=UTF-8");
+			else
+				message.setText(corpo, "UTF-8");
+		}
+		else if(html)
+		{
+			// multipart/related: HTML + imagens embutidas (inline) referenciadas por cid:<nome>.
+			MimeMultipart related = new MimeMultipart("related");
+
+			MimeBodyPart parteHtml = new MimeBodyPart();
+			parteHtml.setContent(corpo, "text/html; charset=UTF-8");
+			related.addBodyPart(parteHtml);
+
+			for(EmailParaEnvio.Anexo anexo : email.getAnexos())
+			{
+				String nome = anexo.getNome() != null ? anexo.getNome() : "anexo";
+				MimeBodyPart parte = new MimeBodyPart();
+				parte.setDataHandler(new DataHandler(new ByteArrayDataSource(anexo.getDados(), tipoMime(nome))));
+				parte.setFileName(nome);
+				parte.setContentID("<" + nome + ">");
+				parte.setDisposition(MimeBodyPart.INLINE);
+				related.addBodyPart(parte);
+			}
+
+			// multipart/mixed: envolve o corpo (related) e repete as imagens como anexos
+			// com disposição ATTACHMENT, para que apareçam no corpo e também fiquem
+			// disponíveis para download (no celular o inline sozinho não oferece essa opção).
+			MimeMultipart mixed = new MimeMultipart("mixed");
+
+			MimeBodyPart parteCorpo = new MimeBodyPart();
+			parteCorpo.setContent(related);
+			mixed.addBodyPart(parteCorpo);
+
+			for(EmailParaEnvio.Anexo anexo : email.getAnexos())
+			{
+				String nome = anexo.getNome() != null ? anexo.getNome() : "anexo";
+				MimeBodyPart parte = new MimeBodyPart();
+				parte.setDataHandler(new DataHandler(new ByteArrayDataSource(anexo.getDados(), tipoMime(nome))));
+				parte.setFileName(nome);
+				parte.setDisposition(MimeBodyPart.ATTACHMENT);
+				mixed.addBodyPart(parte);
+			}
+
+			message.setContent(mixed);
 		}
 		else
 		{
 			MimeMultipart multipart = new MimeMultipart();
 
-			MimeBodyPart corpo = new MimeBodyPart();
-			corpo.setText(email.getMensagem(), "UTF-8");
-			multipart.addBodyPart(corpo);
+			MimeBodyPart parteTexto = new MimeBodyPart();
+			parteTexto.setText(corpo, "UTF-8");
+			multipart.addBodyPart(parteTexto);
 
 			for(EmailParaEnvio.Anexo anexo : email.getAnexos())
 			{

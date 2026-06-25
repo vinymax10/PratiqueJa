@@ -276,16 +276,67 @@ public class TikTok
 	}
 
 	/**
-	 * Fonte do enunciado quando ele aparece na página da resolução: 2pt menor
-	 * que a heurística base, para liberar espaço vertical para a resolução
-	 * (que é o foco da página). Piso em 7pt para manter legibilidade.
+	 * Há folga vertical na página da resolução? Ou seja: enunciado + resolução
+	 * são pequenos o bastante para ampliar ambos sem risco de estourar a página.
+	 * Mede pelo total de caracteres (capta também a quebra de linhas longas),
+	 * pelo nº de linhas da resolução e pela quantidade de frações \\dfrac/\\frac
+	 * (que ocupam altura dupla). Sem folga, cai no dimensionamento conservador.
 	 */
-	private String sizeFontEnunciadoResolucao(String texto)
+	private boolean folgaResolucao(String enunciado, String resolucao)
+	{
+		return enunciado.length() + resolucao.length() <= 260
+			&& contarLinhas(resolucao) <= 7
+			&& contarOcorrencias(resolucao, "frac") <= 2;
+	}
+
+	/**
+	 * Fonte do enunciado na página da resolução. Com folga, mantém o tamanho
+	 * cheio (aproveita o espaço); sem folga, reduz 2pt para liberar espaço à
+	 * resolução (foco da página). Piso em 7pt para manter legibilidade.
+	 */
+	private String sizeFontEnunciadoResolucao(String enunciado, String resolucao)
 	{
 		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
 			return conta.getSizeFontTextLatex();
 
-		return fontsize(Math.max(7, ptConteudo(texto) - 2));
+		int base = ptConteudo(enunciado);
+		int pt = folgaResolucao(enunciado, resolucao) ? base : Math.max(7, base - 2);
+		return fontsize(pt);
+	}
+
+	/**
+	 * Fonte da resolução (foco da página 2). Quando há folga, amplia sobre a
+	 * heurística-base para aproveitar o espaço; sem folga, mantém o tamanho-base
+	 * (que já preenche a página) para não estourar nem quebrar linhas.
+	 */
+	private String sizeFontResolucao(String enunciado, String resolucao)
+	{
+		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
+			return conta.getSizeFontTextLatex();
+
+		return fontsize(ptResolucao(enunciado, resolucao));
+	}
+
+	private int ptResolucao(String enunciado, String resolucao)
+	{
+		int base = ptConteudo(resolucao);
+		if(!folgaResolucao(enunciado, resolucao))
+			return base;                                          // sem folga: tamanho-base
+
+		if(resolucao.length()<=120 && contarLinhas(resolucao)<=4)
+			return base + 5;                                     // resolução bem pequena
+		return base + 4;
+	}
+
+	private int contarOcorrencias(String texto, String alvo)
+	{
+		int total=0, i=0;
+		while((i=texto.indexOf(alvo, i))>=0)
+		{
+			total++;
+			i+=alvo.length();
+		}
+		return total;
 	}
 
 	private int ptConteudo(String texto)
@@ -391,12 +442,12 @@ public class TikTok
 		+"\\vspace{6px}\r\n"
 		+"\\bfseries\r\n\r\n"
 		+"\\boldmath\r\n\r\n"
-		+sizeFontEnunciadoResolucao(enunciado)+"\r\n\r\n"
+		+sizeFontEnunciadoResolucao(enunciado, texto)+"\r\n\r\n"
 		+enunciado
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n"
 		+"\\begin{center}\r\n"
-		+sizeFontConteudo(texto)+"\r\n\r\n"
+		+sizeFontResolucao(enunciado, texto)+"\r\n\r\n"
 		// gap mínimo entre linhas altas (\dfrac) — evita uma fração colar na outra
 		+"\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}\r\n\r\n"
 		+texto

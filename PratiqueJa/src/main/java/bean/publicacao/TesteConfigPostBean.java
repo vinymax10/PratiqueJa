@@ -15,8 +15,8 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
-import pdf.publicacao.InstagramFeed;
-import pdf.publicacao.TikTok;
+import pdf.publicacao.InstagramFeed2;
+import pdf.publicacao.TikTok2;
 import service.configuracao.DiretorioService;
 import service.publicacao.ImagemPostService;
 import service.publicacao.ProgramacaoPostService;
@@ -105,14 +105,14 @@ public class TesteConfigPostBean implements Serializable
 
 		if(feed)
 		{
-			InstagramFeed gerarLatex = new InstagramFeed(diretorio);
+			InstagramFeed2 gerarLatex = new InstagramFeed2(diretorio);
 			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
 			gerarLatex.gerarPDF();
 			gerarLatex.convertPNG();
 		}
 		else
 		{
-			TikTok gerarLatex = new TikTok(diretorio);
+			TikTok2 gerarLatex = new TikTok2(diretorio);
 			gerarLatex.gerarPDFExercicio(exercicioPadrao, programacaoPost);
 			gerarLatex.gerarPDF();
 			gerarLatex.convertPNG();

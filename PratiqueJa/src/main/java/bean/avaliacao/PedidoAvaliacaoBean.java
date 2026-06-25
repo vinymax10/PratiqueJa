@@ -31,6 +31,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
+import modelo.avaliacao.ConfigAvaliacao;
 import modelo.avaliacao.FormatoAvaliacao;
 import modelo.avaliacao.FormatoSaida;
 import modelo.avaliacao.ItemPedidoAvaliacao;
@@ -154,7 +155,60 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private void novoPedido()
 	{
 		entidade = new PedidoAvaliacao();
-		entidade.setUsuario(getUsuarioLogado());
+		Usuario usuario = getUsuarioLogado();
+		entidade.setUsuario(usuario);
+		aplicarConfigPadrao(usuario);
+	}
+
+	/** Pré-carrega na nova avaliação os valores-padrão salvos pelo usuário (cabeçalho e formato). */
+	private void aplicarConfigPadrao(Usuario usuario)
+	{
+		if(usuario == null || usuario.getConfigAvaliacao() == null)
+			return;
+
+		ConfigAvaliacao config = usuario.getConfigAvaliacao();
+		entidade.setTitulo(config.getTitulo());
+		entidade.setEscola(config.getEscola());
+		entidade.setNomeProfessor(config.getNomeProfessor());
+		entidade.setTipoGabarito(config.getTipoGabarito());
+		entidade.setPosicaoGabarito(config.getPosicaoGabarito());
+		entidade.setFormatoSaida(config.getFormatoSaida());
+		entidade.setQuantidade(config.getQuantidade());
+	}
+
+	/** Salva os dados atuais (cabeçalho e formato) como o padrão do usuário, reaproveitado nas próximas avaliações. */
+	public void salvarComoPadrao()
+	{
+		Usuario usuario = getUsuarioLogado();
+		if(usuario == null)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Faça login para salvar um padrão.");
+			return;
+		}
+
+		ConfigAvaliacao config = obterOuCriarConfig(usuario);
+		config.setTitulo(entidade.getTitulo());
+		config.setEscola(entidade.getEscola());
+		config.setNomeProfessor(entidade.getNomeProfessor());
+		config.setTipoGabarito(entidade.getTipoGabarito());
+		config.setPosicaoGabarito(entidade.getPosicaoGabarito());
+		config.setFormatoSaida(entidade.getFormatoSaida());
+		config.setQuantidade(entidade.getQuantidade());
+
+		usuarioDAO.salvar(usuario);
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Padrão salvo! As próximas avaliações já virão com esses dados.");
+	}
+
+	/** Devolve a config de avaliação do usuário, criando-a (e vinculando-a) se ainda não existir. */
+	private ConfigAvaliacao obterOuCriarConfig(Usuario usuario)
+	{
+		ConfigAvaliacao config = usuario.getConfigAvaliacao();
+		if(config == null)
+		{
+			config = new ConfigAvaliacao();
+			usuario.setConfigAvaliacao(config);
+		}
+		return config;
 	}
 
 	// ── Validação e solicitação ───────────────────────────────────────
@@ -343,7 +397,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public boolean isTemLogoEscola()
 	{
-		return getUsuarioLogado() != null && getUsuarioLogado().getLogoEscola() != null;
+		Usuario usuario = getUsuarioLogado();
+		return usuario != null && usuario.getConfigAvaliacao() != null
+			&& usuario.getConfigAvaliacao().getLogoEscola() != null;
 	}
 
 	/** Data URI (base64) da logo para o preview no formulário — embutido direto no src, sem depender
@@ -377,7 +433,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			Imagem logo = new Imagem();
 			logo.setFile(blob);
 			logo.setEndereco(arquivo.getFileName());
-			usuario.setLogoEscola(logo);
+			obterOuCriarConfig(usuario).setLogoEscola(logo);
 			usuarioDAO.salvar(usuario);
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola atualizada com sucesso.");
 		}
@@ -394,7 +450,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		if(usuario == null || usuario.getId() == null)
 			return;
 		usuarioDAO.removerLogoEscola(usuario.getId());
-		usuario.setLogoEscola(null); // sincroniza o objeto da sessão p/ o preview sumir na hora
+		// sincroniza o objeto da sessão p/ o preview sumir na hora
+		if(usuario.getConfigAvaliacao() != null)
+			usuario.getConfigAvaliacao().setLogoEscola(null);
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola removida.");
 	}
 

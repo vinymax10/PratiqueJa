@@ -142,6 +142,26 @@ public class UsuarioDAO extends DAO<Usuario>
 		}
 	}
 
+	/** Usuários criadores de conteúdo (com config de posts), para o rollover mensal de créditos de post. */
+	public List<Usuario> listarCriadores()
+	{
+		return em.createQuery(
+			"SELECT u FROM Usuario u JOIN FETCH u.configPost WHERE u.configPost IS NOT NULL", Usuario.class)
+			.getResultList();
+	}
+
+	/** Grava o crédito de rollover de post do mês e o marcador de continuidade. */
+	@Transactional
+	public void atualizarRolloverPost(Long usuarioId, int credito, LocalDate mesProcessado)
+	{
+		Usuario usuario = em.find(Usuario.class, usuarioId);
+		if(usuario != null)
+		{
+			usuario.setCreditoRolloverPost(credito);
+			usuario.setMesRolloverPostProcessado(mesProcessado);
+		}
+	}
+
 	/** Remove a logo da escola do usuário sobre a entidade gerenciada (o orphanRemoval só dispara
 	 *  de forma confiável dentro da transação/contexto de persistência). */
 	@Transactional
@@ -150,8 +170,8 @@ public class UsuarioDAO extends DAO<Usuario>
 		if(usuarioId == null)
 			return;
 		Usuario usuario = em.find(Usuario.class, usuarioId);
-		if(usuario != null && usuario.getLogoEscola() != null)
-			usuario.setLogoEscola(null);
+		if(usuario != null && usuario.getConfigAvaliacao() != null && usuario.getConfigAvaliacao().getLogoEscola() != null)
+			usuario.getConfigAvaliacao().setLogoEscola(null);
 	}
 
 	/** Lê os bytes da logo da escola do usuário, dentro de uma transação (o LOB só pode ser lido
@@ -163,7 +183,7 @@ public class UsuarioDAO extends DAO<Usuario>
 			return null;
 
 		List<Blob> linhas = em.createQuery(
-			"SELECT l.file FROM Usuario u JOIN u.logoEscola l WHERE u.id = :usuarioId", Blob.class)
+			"SELECT l.file FROM Usuario u JOIN u.configAvaliacao c JOIN c.logoEscola l WHERE u.id = :usuarioId", Blob.class)
 			.setParameter("usuarioId", usuarioId)
 			.getResultList();
 

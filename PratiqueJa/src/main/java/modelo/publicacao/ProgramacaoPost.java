@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -40,6 +42,11 @@ public class ProgramacaoPost implements Serializable, Entidade
 
 	@AuditLabel(value = "alternativa reel", genero = GeneroGramatical.FEMININO)
 	private boolean alternativaReel = true;
+
+	// Formato usado quando o plano gera só um post por dia (Básico): Feed ou Reel.
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "formato")
+	private FormatoPost formato = FormatoPost.Feed;
 
 	@AuditLabel(value = "teste")
 	private boolean teste = false;
@@ -100,6 +107,7 @@ public class ProgramacaoPost implements Serializable, Entidade
 		clone.basePadraoReel = this.basePadraoReel;
 		clone.configPost = this.configPost;
 		clone.data = this.data;
+		clone.formato = this.formato;
 		clone.ordem = this.ordem;
 		clone.padraoFeed = this.padraoFeed;
 		clone.padraoReel = this.padraoReel;

@@ -158,17 +158,17 @@ public class ProgramacaoPostBean implements Serializable
 
 		try
 		{
-//			int enviados = envioPostService.enviarConfig(configPost);
-//
-//			if(enviados == EnvioPostService.OCUPADO)
-//				Mensagem.send("growl", FacesMessage.SEVERITY_WARN,
-//				"Já existe um envio em andamento. Aguarde alguns instantes e tente novamente.");
-//			else if(enviados == 0)
-//				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
-//				"Nenhuma programação com data para hoje (ou anterior). Nada foi enviado.");
-//			else
-//				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
-//				enviados + " publicação(ões) gerada(s) e enviada(s) para o seu e-mail.");
+			int enviados = envioPostService.enviarConfig(configPost);
+
+			if(enviados == EnvioPostService.OCUPADO)
+				Mensagem.send("growl", FacesMessage.SEVERITY_WARN,
+				"Já existe um envio em andamento. Aguarde alguns instantes e tente novamente.");
+			else if(enviados == 0)
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Nenhuma programação com data para hoje (ou anterior). Nada foi enviado.");
+			else
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				enviados + " publicação(ões) gerada(s) e enviada(s) para o seu e-mail.");
 		}
 		catch(Exception e)
 		{
@@ -202,7 +202,7 @@ public class ProgramacaoPostBean implements Serializable
 		programacaoPost.setAssunto(assunto);
 		programacaoPost.setAvulsa(true);
 		programacaoPostService.persistir(programacaoPost);
-//		envioPostService.acorda();
+		envioPostService.acorda();
 	}
 
 	public ConfigPost getConfigPost()

@@ -4,128 +4,120 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:body >
+	<h:body>
 		<ui:composition>
-			    
-   			<h:panelGroup id="reel" layout="block">
 
-   				<div class="pc-section-sub"><i class="pi pi-video" /> Conteúdo Reel</div>
+			<h:panelGroup id="reel" layout="block">
 
-   				<div class="formgrid grid">
-			    	<div class="col-12 xl:col-9">
-				    	<div class="ui-fluid formgrid grid">
-					    	<div class="campo col-12 lg:col-6 xl:col-4">
-								<p:outputLabel for="@next" value="Escolha" />
-								<p:selectBooleanButton 
-									value="#{testeConfigPostBean.programacaoPost.backgroundAleatorioReel}"
-									onLabel="Aleatória" offLabel="Específica" 
-									onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
-									disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-									style="width-min:8rem;display:block;">
-									<f:ajax event="change" process="@this" render="form:backgroundReel" />
-								</p:selectBooleanButton>
-							</div>
-							
-					    	<div class="campo col-12 lg:col-6 xl:col-4">
-								<p:outputLabel for="@next" value="Base de Dados" />
-								<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
-									value="#{testeConfigPostBean.programacaoPost.basePadraoReel}"
-									onLabel="Padrão" offLabel="Personalizada" 
-									onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
-									style="width-min:8rem;display:block;">
-									<f:ajax event="change" process="@this" render="form:backgroundReel" />
-								</p:selectBooleanButton>
-							</div>
-							
-							<div class="campo col-12">
-								<h:panelGroup id="backgroundReel" >
-									<h:panelGroup 
-									rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel 
-									and !testeConfigPostBean.programacaoPost.basePadraoReel
-									and imagemPostBean.imagemPost(false).size()>0}">
-										<p:outputLabel for="@next" value="Background" />
-										<p:selectOneMenu 
-											value="#{testeConfigPostBean.programacaoPost.backgroundReel}"
-											converter="generic" required="true" filter="true"
-											filterMatchMode="contains" var="item" >
-											<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
-														var="image" itemLabel="#{image.nome}"
-														itemValue="#{image}" />
-														
-											<p:column >
-						                        <p:graphicImage value="#{item.endImagem}" alt="#{image.nome}" 
-							                    style="width: 80px; cursor: pointer" cache="false" stream="false"
-							                     />
-						                    </p:column>
-						                    
-						                    <p:column >
-						                         <f:facet name="header">
-						                            <h:outputText value="Nome"/>
-						                        </f:facet>
-						                        <h:outputText value="#{item.nome}"/>
-						                    </p:column>
-						
-										</p:selectOneMenu>
-									</h:panelGroup>
-									<h:panelGroup 
-									rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel and testeConfigPostBean.programacaoPost.basePadraoReel}">
-										<p:outputLabel for="@next" value="Background" />
-										<p:selectOneMenu 
-											value="#{testeConfigPostBean.programacaoPost.padraoReel}"
-											converter="generic" required="true" filter="true"
-											filterMatchMode="contains" var="item">
-											<f:selectItems value="#{imagemPostBean.imagensReel}"
-														var="image" itemLabel="#{image.nome}"
-														itemValue="#{image}" >
-														</f:selectItems>
-														
-											<p:column >
-						                        <p:graphicImage value="#{item.endereco}" alt="#{item.nome}" 
-							                    style="width: 80px;" cache="false" stream="false"  />
-						                    </p:column>
-						                    
-						                    <p:column >
-						                         <f:facet name="header">
-						                            <h:outputText value="Nome"/>
-						                        </f:facet>
-						                        <h:outputText value="#{item.nome}"/>
-						                    </p:column>
-										</p:selectOneMenu>
-									</h:panelGroup>
-								</h:panelGroup>
-							</div>
-						</div>
-			    	</div>
-			    	
-			    	<div class="col-12 xl:col-3">
-						<div class="p-col-12 p-text-right" >
-				    		<p:commandButton  value="Testar Reel"  styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
-							action="#{testeConfigPostBean.teste(false)}" update="@form, form:configPost:reel, :growl"  process="@form"	>
-							</p:commandButton>
-						</div>
-			    	</div>
+				<div class="pc-section-sub"><i class="pi pi-video" /> Conteúdo Reel</div>
+
+				<div class="pc-fields">
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Escolha" />
+						<p:selectBooleanButton
+							value="#{testeConfigPostBean.programacaoPost.backgroundAleatorioReel}"
+							onLabel="Aleatória" offLabel="Específica"
+							onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+							disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Base de Dados" />
+						<p:selectBooleanButton
+							disabled="#{imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
+							value="#{testeConfigPostBean.programacaoPost.basePadraoReel}"
+							onLabel="Padrão" offLabel="Personalizada"
+							onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup id="backgroundReel" styleClass="pc-field-wide" layout="block">
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel
+							and !testeConfigPostBean.programacaoPost.basePadraoReel
+							and imagemPostBean.imagemPost(false).size()>0}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.backgroundReel}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+
+								<p:column>
+									<p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
+										style="width: 80px; cursor: pointer" cache="false" stream="false" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Nome" />
+									</f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel and testeConfigPostBean.programacaoPost.basePadraoReel}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.padraoReel}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagensReel}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+
+								<p:column>
+									<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
+										style="width: 80px;" cache="false" stream="false" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Nome" />
+									</f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
 				</div>
-					
-		    	<p:galleria value="#{configPostBean.configPost.listTesteReel}" var="image" numVisible="5" 
-	            showItemNavigators="true" class="mt-3"
-	            rendered="#{configPostBean.configPost.listTesteReel.size()>0}"
-	            circular="true" responsiveOptions="#{imagemPostBean.responsiveOptions}" >
-			        <p:graphicImage value="#{image.endImagem}" oncontextmenu="return false;"
-			        alt="#{image.nome}" 
-			        style="width: 100%; display: block;" cache="false" />
-			        <f:facet name="caption">
-			            <h4 class="mb-2">#{image.nome}</h4>
-			        </f:facet>
-			        <f:facet name="thumbnail">
-			            <p:graphicImage value="#{image.endImagem}" oncontextmenu="return false;"
-			            alt="#{image.nome}" 
-			            style="width: 80px; display: block;" cache="false" />
-			        </f:facet>
-			    </p:galleria>
 
-    		</h:panelGroup>
-		</ui:composition>		
+				<div class="pc-actions" style="justify-content:flex-end">
+					<p:commandButton value="Testar Reel" styleClass="ui-button-raised btn-primary" icon="pi pi-check"
+						action="#{testeConfigPostBean.teste(false)}" update="@form, form:configPost:reel, :growl" process="@form" />
+				</div>
+
+				<h:panelGroup styleClass="pc-gallery mt-3" layout="block" rendered="#{configPostBean.configPost.listTesteReel.size()>0}">
+					<p:galleria value="#{configPostBean.configPost.listTesteReel}" var="image" numVisible="4"
+						showItemNavigators="true"
+						circular="true" responsiveOptions="#{imagemPostBean.responsiveOptions}" style="width:100%">
+						<p:graphicImage value="#{image.endImagem}" oncontextmenu="return false;"
+							alt="#{image.nome}"
+							style="width: 100%; display: block;" cache="false" />
+						<f:facet name="caption">
+							<h4 class="mb-2">#{image.nome}</h4>
+						</f:facet>
+						<f:facet name="thumbnail">
+							<p:graphicImage value="#{image.endImagem}" oncontextmenu="return false;"
+								alt="#{image.nome}"
+								style="width: 54px; display: block;" cache="false" />
+						</f:facet>
+					</p:galleria>
+				</h:panelGroup>
+
+			</h:panelGroup>
+
+		</ui:composition>
 	</h:body>
 </html>
-
-	

@@ -1,0 +1,152 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialogDetalhePost"
+			widgetVar="wDialogDetalhePost"
+			styleClass="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2 av-dlg"
+			showHeader="false"
+			showEffect="fade" hideEffect="fade" width="100%;" modal="true"
+			responsive="true">
+
+			<h:form id="formDetalhePost">
+
+				<h:panelGroup layout="block" styleClass="av-dlg-inner"
+					rendered="#{not empty pedidoPostBean.pedidoSelecionado}">
+
+					<div class="av-dlg-hero">
+						<button type="button" class="av-dlg-hero-close"
+							onclick="PF('wDialogDetalhePost').hide()" title="Fechar">
+							<i class="pi pi-times" />
+						</button>
+
+						<span class="av-dlg-hero-eyebrow">
+							<i class="pi pi-hashtag" />
+							<h:outputText value="#{pedidoPostBean.pedidoSelecionado.codigoBatch}" />
+						</span>
+
+						<h3 class="av-dlg-hero-title">
+							<h:outputText value="#{empty pedidoPostBean.pedidoSelecionado.nome ? 'Lote de posts' : pedidoPostBean.pedidoSelecionado.nome}" />
+						</h3>
+
+						<div class="av-det-hero-meta">
+							<ui:include src="/status/status.xhtml">
+								<ui:param name="status" value="#{pedidoPostBean.pedidoSelecionado.status}" />
+							</ui:include>
+							<span class="av-det-hero-when">
+								<i class="pi pi-clock" />
+								Solicitado em
+								<h:outputText value="#{pedidoPostBean.pedidoSelecionado.dataSolicitacao}">
+									<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy 'às' HH:mm" />
+								</h:outputText>
+							</span>
+						</div>
+					</div>
+
+					<div class="av-dlg-body">
+
+						<div class="av-det-grid">
+
+							<div class="av-det-cell">
+								<span class="av-det-cell-ico"><i class="pi pi-images" /></span>
+								<span class="av-det-cell-txt">
+									<span class="av-det-cell-label">Total de posts</span>
+									<span class="av-det-cell-value">
+										<h:outputText value="#{pedidoPostBean.pedidoSelecionado.quantidade}" />
+									</span>
+								</span>
+							</div>
+
+							<div class="av-det-cell">
+								<span class="av-det-cell-ico"><i class="pi pi-envelope" /></span>
+								<span class="av-det-cell-txt">
+									<span class="av-det-cell-label">Receber por e-mail</span>
+									<span class="av-det-cell-value">
+										<h:outputText value="#{pedidoPostBean.pedidoSelecionado.enviarEmail ? 'Sim' : 'Não'}" />
+									</span>
+								</span>
+							</div>
+
+							<div class="av-det-cell">
+								<span class="av-det-cell-ico"><i class="pi pi-clock" /></span>
+								<span class="av-det-cell-txt">
+									<span class="av-det-cell-label">Expira em</span>
+									<span class="av-det-cell-value">
+										<h:outputText value="#{pedidoPostBean.pedidoSelecionado.dataExpiracao}"
+											rendered="#{not empty pedidoPostBean.pedidoSelecionado.dataExpiracao}">
+											<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy" />
+										</h:outputText>
+										<h:outputText value="—" rendered="#{empty pedidoPostBean.pedidoSelecionado.dataExpiracao}" />
+									</span>
+								</span>
+							</div>
+
+						</div>
+
+						<div class="av-det-block">
+							<div class="av-det-block-head">
+								<span><i class="pi pi-list" /> Conteúdo</span>
+								<span class="av-det-pill">
+									<h:outputText value="#{pedidoPostBean.pedidoSelecionado.itens.size()} assunto#{pedidoPostBean.pedidoSelecionado.itens.size() != 1 ? 's' : ''}" />
+								</span>
+							</div>
+
+							<div class="av-det-itens">
+								<ui:repeat value="#{pedidoPostBean.pedidoSelecionado.itens}" var="item" varStatus="status">
+									<div class="av-det-item">
+										<span class="av-det-item-num">#{status.index + 1}</span>
+										<span class="av-det-item-assunto">
+											<h:outputText value="#{item.assunto.nome}" />
+										</span>
+										<span class="av-item-chip av-item-chip--nivel">
+											<h:outputText value="#{item.nivel != null ? item.nivel.nome : 'Todos os níveis'}" />
+										</span>
+										<span class="av-item-chip av-item-chip--formato">
+											<h:outputText value="#{item.formato.nome}" />
+										</span>
+										<span class="av-item-chip av-item-chip--qtd">
+											<h:outputText value="#{item.quantidade} exercício#{item.quantidade != 1 ? 's' : ''} · #{item.creditos} post#{item.creditos != 1 ? 's' : ''}" />
+										</span>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="av-dlg-footer">
+						<p:commandButton value="Fechar" type="button"
+							styleClass="ui-button-flat ui-button-plain" icon="pi pi-times"
+							onclick="PF('wDialogDetalhePost').hide()" />
+
+						<h:panelGroup styleClass="flex align-items-center gap-3">
+							<h:outputText styleClass="av-det-expirado" value="Arquivo expirado"
+								rendered="#{pedidoPostBean.estaExpirado(pedidoPostBean.pedidoSelecionado)}" />
+							<p:commandButton value="Enviar por e-mail" icon="pi pi-envelope"
+								styleClass="ui-button-flat ui-button-secondary"
+								rendered="#{pedidoPostBean.pedidoSelecionado.status.name() == 'CONCLUIDO' and pedidoPostBean.pedidoSelecionado.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedidoPostBean.pedidoSelecionado)}"
+								action="#{pedidoPostBean.enviarEmail(pedidoPostBean.pedidoSelecionado)}"
+								process="@this" update=":growl" />
+							<p:commandButton value="Baixar ZIP" icon="pi pi-download"
+								styleClass="ui-button-raised ui-button-success"
+								rendered="#{pedidoPostBean.pedidoSelecionado.status.name() == 'CONCLUIDO' and pedidoPostBean.pedidoSelecionado.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedidoPostBean.pedidoSelecionado)}"
+								ajax="false">
+								<p:fileDownload value="#{pedidoPostBean.download(pedidoPostBean.pedidoSelecionado)}" />
+							</p:commandButton>
+						</h:panelGroup>
+					</div>
+
+				</h:panelGroup>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

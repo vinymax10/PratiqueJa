@@ -20,6 +20,17 @@ public class ConfigPostDAO extends DAO<ConfigPost>
 		super(ConfigPost.class);
 	}
 
+	/** Carrega o ConfigPost com a logo já inicializada (a geração roda sem transação e não
+	 *  conseguiria resolver o lazy depois). */
+	public ConfigPost getComLogo(Long id)
+	{
+		List<ConfigPost> list = em.createQuery(
+			"SELECT c FROM ConfigPost c LEFT JOIN FETCH c.logo WHERE c.id = :id", ConfigPost.class)
+			.setParameter("id", id)
+			.getResultList();
+		return list.isEmpty() ? null : list.get(0);
+	}
+
 	public ConfigPost getConfigPost(Long id)
 	{
 
