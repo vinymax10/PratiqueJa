@@ -7,6 +7,24 @@
 
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<style>
+			/* Prévia do teste: Exercício + Resolução lado a lado + lightbox. */
+			.pc-preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+			.pc-preview-card { background: #f8fafc; border: 1px solid #e2e8f4; border-radius: 12px; padding: 12px; text-align: center; }
+			.pc-preview-imgwrap { display: block; cursor: pointer; }
+			.pc-preview-img {
+				width: 100%; height: auto; border-radius: 8px; display: block;
+				transition: transform .15s ease, box-shadow .15s ease;
+			}
+			.pc-preview-imgwrap:hover .pc-preview-img { transform: scale(1.01); box-shadow: 0 8px 20px rgba(37, 99, 235, .15); }
+			.pc-preview-label { display: block; margin-top: 8px; font-size: 13px; font-weight: 700; color: #374151; }
+			.pc-preview-empty { color: #9ca3af; font-size: 14px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 24px; text-align: center; }
+			/* Lightbox */
+			.pc-bglb { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, .85); align-items: center; justify-content: center; padding: 24px; }
+			.pc-bglb.pc-bglb--open { display: flex; }
+			.pc-bglb img { max-width: 92vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 0, 0, .5); }
+			.pc-bglb-close { position: fixed; top: 16px; right: 26px; color: #fff; font-size: 40px; line-height: 1; font-weight: 300; cursor: pointer; }
+		</style>
 	</ui:define>
 
 	<ui:define name="linkPage">
@@ -49,6 +67,15 @@
 
 		<div class="pc-fields pc-fields--teste">
 
+			<h:panelGroup styleClass="pc-field" layout="block">
+				<p:outputLabel styleClass="pc-label" for="@next" value="Formato" />
+				<p:selectBooleanButton value="#{testeConfigPostBean.testarFeed}"
+					onLabel="Feed" offLabel="Reel"
+					onIcon="pi pi-image" offIcon="pi pi-video" styleClass="pc-toggle-btn">
+					<f:ajax event="change" process="@this" render="form:blocoFormato form:previewTeste" />
+				</p:selectBooleanButton>
+			</h:panelGroup>
+
 			<h:panelGroup styleClass="pc-field pc-field-wide" layout="block">
 				<p:outputLabel styleClass="pc-label" for="@next" value="Assunto" />
 				<p:selectOneMenu
@@ -71,17 +98,267 @@
 				</p:selectOneMenu>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="pc-field" layout="block">
-				<p:outputLabel styleClass="pc-label" for="@next" value="Alternativa no Reel" />
-				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{testeConfigPostBean.programacaoPost.alternativaReel}" />
-			</h:panelGroup>
-
 		</div>
 
-	    <ui:include src="/post/teste/resultado.xhtml" />
+		<!-- ─── Controles de fundo (do formato selecionado) ─── -->
+		<h:panelGroup id="blocoFormato" layout="block">
+
+			<!-- FEED -->
+			<h:panelGroup layout="block" rendered="#{testeConfigPostBean.testarFeed}">
+				<div class="pc-section-sub"><i class="pi pi-image" /> Conteúdo Feed</div>
+				<div class="pc-fields">
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Escolha" />
+						<p:selectBooleanButton
+							value="#{testeConfigPostBean.programacaoPost.backgroundAleatorioFeed}"
+							onLabel="Aleatória" offLabel="Específica"
+							onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+							disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundFeed" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Base de Dados" />
+						<p:selectBooleanButton
+							disabled="#{imagemPostBean.imagemPost(true).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
+							value="#{testeConfigPostBean.programacaoPost.basePadraoFeed}"
+							onLabel="Padrão" offLabel="Personalizada"
+							onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundFeed" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup id="backgroundFeed" styleClass="pc-field-wide" layout="block">
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioFeed
+							and !testeConfigPostBean.programacaoPost.basePadraoFeed
+							and imagemPostBean.imagemPost(true).size()>0}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.backgroundFeed}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagemPost(true)}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+								<p:column>
+									<p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
+										style="width: 80px; cursor: pointer" cache="false" stream="false" />
+								</p:column>
+								<p:column>
+									<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioFeed and testeConfigPostBean.programacaoPost.basePadraoFeed}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.padraoFeed}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagensFeed}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+								<p:column>
+									<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
+										style="width: 80px;" cache="false" stream="false" />
+								</p:column>
+								<p:column>
+									<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
+				</div>
+			</h:panelGroup>
+
+			<!-- REEL -->
+			<h:panelGroup layout="block" rendered="#{!testeConfigPostBean.testarFeed}">
+				<div class="pc-section-sub"><i class="pi pi-video" /> Conteúdo Reel</div>
+				<div class="pc-fields">
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Alternativa no Reel" />
+						<p:toggleSwitch class="toggleSwitch-form"
+							value="#{testeConfigPostBean.programacaoPost.alternativaReel}" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Escolha" />
+						<p:selectBooleanButton
+							value="#{testeConfigPostBean.programacaoPost.backgroundAleatorioReel}"
+							onLabel="Aleatória" offLabel="Específica"
+							onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+							disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="pc-field" layout="block">
+						<p:outputLabel styleClass="pc-label" for="@next" value="Base de Dados" />
+						<p:selectBooleanButton
+							disabled="#{imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
+							value="#{testeConfigPostBean.programacaoPost.basePadraoReel}"
+							onLabel="Padrão" offLabel="Personalizada"
+							onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+							styleClass="pc-toggle-btn">
+							<f:ajax event="change" process="@this" render="form:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup id="backgroundReel" styleClass="pc-field-wide" layout="block">
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel
+							and !testeConfigPostBean.programacaoPost.basePadraoReel
+							and imagemPostBean.imagemPost(false).size()>0}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.backgroundReel}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+								<p:column>
+									<p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
+										style="width: 80px; cursor: pointer" cache="false" stream="false" />
+								</p:column>
+								<p:column>
+									<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+
+						<h:panelGroup layout="block" styleClass="pc-field"
+							rendered="#{!testeConfigPostBean.programacaoPost.backgroundAleatorioReel and testeConfigPostBean.programacaoPost.basePadraoReel}">
+							<p:outputLabel styleClass="pc-label" for="@next" value="Background" />
+							<p:selectOneMenu
+								value="#{testeConfigPostBean.programacaoPost.padraoReel}"
+								converter="generic" required="true" filter="true"
+								filterMatchMode="contains" var="item">
+								<f:selectItems value="#{imagemPostBean.imagensReel}"
+									var="image" itemLabel="#{image.nome}"
+									itemValue="#{image}" />
+								<p:column>
+									<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
+										style="width: 80px;" cache="false" stream="false" />
+								</p:column>
+								<p:column>
+									<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+									<h:outputText value="#{item.nome}" />
+								</p:column>
+							</p:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
+				</div>
+			</h:panelGroup>
+
+		</h:panelGroup>
+
+		<div class="pc-actions" style="justify-content:flex-end">
+			<p:commandButton value="Testar #{testeConfigPostBean.testarFeed ? 'Feed' : 'Reel'}"
+				styleClass="ui-button-raised btn-primary" icon="pi pi-check"
+				action="#{testeConfigPostBean.teste(testeConfigPostBean.testarFeed)}"
+				update="form:previewTeste, :growl" process="@form" />
+		</div>
+
+		<!-- ─── Prévia do formato selecionado ─── -->
+		<h:panelGroup id="previewTeste" layout="block">
+
+			<!-- FEED -->
+			<h:panelGroup layout="block" rendered="#{testeConfigPostBean.testarFeed}">
+				<h:panelGroup layout="block" rendered="#{configPostBean.configPost.listTesteFeed.size()>0}">
+					<div class="pc-section-sub" style="margin-top:1.5rem"><i class="pi pi-eye" /> Última prévia</div>
+					<div class="pc-preview-grid">
+						<h:panelGroup styleClass="pc-preview-card" layout="block"
+							rendered="#{configPostBean.configPost.testeExeFeed != null}">
+							<span class="pc-preview-imgwrap" onclick="pcBgPreview(this.querySelector('img').src, 'Exercício')">
+								<p:graphicImage value="#{configPostBean.configPost.testeExeFeed.endImagem}" alt="Exercício"
+									styleClass="pc-preview-img" oncontextmenu="return false;" cache="false" stream="false" />
+							</span>
+							<span class="pc-preview-label">Exercício</span>
+						</h:panelGroup>
+						<h:panelGroup styleClass="pc-preview-card" layout="block"
+							rendered="#{configPostBean.configPost.testeResFeed != null}">
+							<span class="pc-preview-imgwrap" onclick="pcBgPreview(this.querySelector('img').src, 'Resolução')">
+								<p:graphicImage value="#{configPostBean.configPost.testeResFeed.endImagem}" alt="Resolução"
+									styleClass="pc-preview-img" oncontextmenu="return false;" cache="false" stream="false" />
+							</span>
+							<span class="pc-preview-label">Resolução</span>
+						</h:panelGroup>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup styleClass="pc-preview-empty mt-3" layout="block"
+					rendered="#{configPostBean.configPost.listTesteFeed.size()==0}">
+					<i class="pi pi-image" style="font-size:22px;display:block;margin-bottom:6px;opacity:.6" />
+					Rode um teste para ver a prévia do Feed aqui.
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<!-- REEL -->
+			<h:panelGroup layout="block" rendered="#{!testeConfigPostBean.testarFeed}">
+				<h:panelGroup layout="block" rendered="#{configPostBean.configPost.listTesteReel.size()>0}">
+					<div class="pc-section-sub" style="margin-top:1.5rem"><i class="pi pi-eye" /> Última prévia</div>
+					<div class="pc-preview-grid">
+						<h:panelGroup styleClass="pc-preview-card" layout="block"
+							rendered="#{configPostBean.configPost.testeExeReel != null}">
+							<span class="pc-preview-imgwrap" onclick="pcBgPreview(this.querySelector('img').src, 'Exercício')">
+								<p:graphicImage value="#{configPostBean.configPost.testeExeReel.endImagem}" alt="Exercício"
+									styleClass="pc-preview-img" oncontextmenu="return false;" cache="false" stream="false" />
+							</span>
+							<span class="pc-preview-label">Exercício</span>
+						</h:panelGroup>
+						<h:panelGroup styleClass="pc-preview-card" layout="block"
+							rendered="#{configPostBean.configPost.testeResReel != null}">
+							<span class="pc-preview-imgwrap" onclick="pcBgPreview(this.querySelector('img').src, 'Resolução')">
+								<p:graphicImage value="#{configPostBean.configPost.testeResReel.endImagem}" alt="Resolução"
+									styleClass="pc-preview-img" oncontextmenu="return false;" cache="false" stream="false" />
+							</span>
+							<span class="pc-preview-label">Resolução</span>
+						</h:panelGroup>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup styleClass="pc-preview-empty mt-3" layout="block"
+					rendered="#{configPostBean.configPost.listTesteReel.size()==0}">
+					<i class="pi pi-image" style="font-size:22px;display:block;margin-bottom:6px;opacity:.6" />
+					Rode um teste para ver a prévia do Reel aqui.
+				</h:panelGroup>
+			</h:panelGroup>
+
+		</h:panelGroup>
 
 		</div>
 
 	</h:form>
+
+	<!-- Lightbox das prévias do teste -->
+	<div id="pcBgLightbox" class="pc-bglb" onclick="pcBgClose()">
+		<span class="pc-bglb-close" title="Fechar">&#215;</span>
+		<img id="pcBgLightboxImg" src="" alt="" onclick="event.stopPropagation();" />
+	</div>
+	<script>
+		function pcBgPreview(src, alt){
+			var lb = document.getElementById('pcBgLightbox');
+			var im = document.getElementById('pcBgLightboxImg');
+			im.src = src; im.alt = alt || '';
+			lb.classList.add('pc-bglb--open');
+		}
+		function pcBgClose(){
+			document.getElementById('pcBgLightbox').classList.remove('pc-bglb--open');
+		}
+		document.addEventListener('keydown', function(e){ if(e.key === 'Escape') pcBgClose(); });
+	</script>
+
 </ui:decorate>

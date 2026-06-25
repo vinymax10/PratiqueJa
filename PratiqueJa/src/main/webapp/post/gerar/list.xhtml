@@ -11,14 +11,48 @@
 		<style>
 			/* Realce sutil da linha do lote recém-criado. */
 			.tableStatus .ui-datatable-data tr.av-row-novo > td { background: #eff6ff !important; }
-			/* Tabela não-interativa: sem cursor de clique e sem foco/seleção de célula. */
-			.pc-historico .ui-datatable-data tr { cursor: default !important; }
-			.pc-historico .ui-datatable-data td:focus,
-			.pc-historico .ui-datatable-data td[role="gridcell"]:focus,
-			.pc-historico .ui-datatable-data td[tabindex]:focus {
-				outline: none !important;
-				box-shadow: none !important;
+
+			/* Modal "Enviar por e-mail": cartões de escolha do modo de envio. */
+			.pc-email-opts { display: flex; gap: 16px; flex-wrap: wrap; }
+			.pc-email-card {
+				flex: 1 1 0; min-width: 210px; display: block; text-align: center;
+				padding: 26px 20px; border-radius: 16px; border: 2px solid #e2e8f4;
+				background: #fff; cursor: pointer; text-decoration: none; color: #2b3445;
+				transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
 			}
+			.pc-email-card:hover, .pc-email-card:focus {
+				border-color: #3b5bdb; box-shadow: 0 12px 26px rgba(59, 91, 219, .16);
+				transform: translateY(-3px); text-decoration: none; outline: none;
+			}
+			.pc-email-card .pc-email-ico {
+				width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 14px;
+				display: flex; align-items: center; justify-content: center; font-size: 27px;
+			}
+			.pc-email-card .pc-email-ico.zip { background: #eaeefb; color: #3b5bdb; }
+			.pc-email-card .pc-email-ico.post { background: #e7f7ee; color: #1aa251; }
+			.pc-email-card .pc-email-title { display: block; font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+			.pc-email-card .pc-email-desc { display: block; font-size: 13px; color: #6b7689; line-height: 1.5; }
+
+			/* Botão "Ações" no mesmo estilo do "Gerar posts" (azul sólido, sem deslocar no hover). */
+			.pc-hero-btn .ui-button {
+				background: #2563eb !important; border-color: #2563eb !important; color: #fff !important;
+			}
+			.pc-hero-btn .ui-button:hover, .pc-hero-btn .ui-button:focus {
+				background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #fff !important;
+			}
+			.pc-hero-btn .ui-button .ui-icon,
+			.pc-hero-btn .ui-button .ui-button-text,
+			.pc-hero-btn .ui-button .ui-menubutton-text { color: #fff !important; }
+
+			/* Cabeçalho da tabela de lotes: azul sólido, combinando com os botões (escopado só nesta tela). */
+			.pc-historico.ui-datatable thead tr th {
+				background: #2563eb !important;
+				color: #fff !important; border-color: rgba(255, 255, 255, .18) !important;
+			}
+			.pc-historico.ui-datatable thead tr th .ui-column-title,
+			.pc-historico.ui-datatable thead tr th .ui-sortable-column-icon { color: #fff !important; }
+			.pc-historico.ui-datatable thead tr th:first-child { border-top-left-radius: 10px; }
+			.pc-historico.ui-datatable thead tr th:last-child { border-top-right-radius: 10px; }
 		</style>
 	</ui:define>
 
@@ -114,7 +148,7 @@
 				</p:column>
 
 				<p:column headerText="Ações" style="width:140px;text-align:center">
-					<p:menuButton value="Ações" styleClass="ui-button-outlined"
+					<p:menuButton value="Ações" styleClass="pc-hero-btn"
 						rendered="#{pedido.status.name() == 'CONCLUIDO'}">
 						<p:menuitem value="Ver" icon="pi pi-eye"
 							action="#{pedidoPostBean.verPedido(pedido)}"
@@ -125,10 +159,11 @@
 						</p:menuitem>
 						<p:menuitem value="Enviar por e-mail" icon="pi pi-envelope"
 							rendered="#{pedido.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedido)}"
-							action="#{pedidoPostBean.enviarEmail(pedido)}"
-							update=":growl" />
+							actionListener="#{pedidoPostBean.prepararEnvioEmail(pedido)}"
+							process="@this" update=":formEnvioEmail"
+							oncomplete="PF('wDialogEnvioEmail').show()" />
 					</p:menuButton>
-					<p:menuButton value="Ações" styleClass="ui-button-outlined"
+					<p:menuButton value="Ações" styleClass="pc-hero-btn"
 						rendered="#{pedido.status.name() == 'RASCUNHO'}">
 						<p:menuitem value="Gerar" icon="pi pi-bolt"
 							action="#{pedidoPostBean.gerarRascunho(pedido)}"
@@ -148,5 +183,69 @@
 
 	<!-- ═══════════════════════════════ DIALOG: DETALHES DO LOTE -->
 	<ui:include src="/post/gerar/dialog-detalhe-post.xhtml" />
+
+	<!-- ═══════════════════════════════ DIALOG: ENVIAR POR E-MAIL -->
+	<p:dialog id="dialogEnvioEmail" widgetVar="wDialogEnvioEmail"
+		styleClass="col-12 md:col-10 md:col-offset-1 lg:col-8 lg:col-offset-2 xl:col-6 xl:col-offset-3 av-dlg"
+		showHeader="false" showEffect="fade" hideEffect="fade"
+		width="100%;" modal="true" responsive="true">
+
+		<h:form id="formEnvioEmail">
+
+			<h:panelGroup layout="block" styleClass="av-dlg-inner">
+
+				<div class="av-dlg-hero">
+					<button type="button" class="av-dlg-hero-close"
+						onclick="PF('wDialogEnvioEmail').hide()" title="Fechar">
+						<i class="pi pi-times" />
+					</button>
+					<span class="av-dlg-hero-eyebrow">
+						<i class="pi pi-envelope" />
+						<h:outputText value="Envio por e-mail" />
+					</span>
+					<h3 class="av-dlg-hero-title">Como deseja receber?</h3>
+					<span class="av-dlg-hero-sub">
+						<i class="pi pi-hashtag" />
+						Lote
+						<h:outputText value="#{pedidoPostBean.pedidoParaEmail.codigoBatch}" />
+						— escolha enviar tudo de uma vez ou um e-mail para cada post.
+					</span>
+				</div>
+
+				<div class="av-dlg-body">
+					<div class="pc-email-opts">
+
+						<p:commandLink styleClass="pc-email-card"
+							action="#{pedidoPostBean.enviarEmailZip}"
+							process="@this" update=":growl"
+							oncomplete="PF('wDialogEnvioEmail').hide()">
+							<span class="pc-email-ico zip"><i class="pi pi-file-export" /></span>
+							<span class="pc-email-title">Um único e-mail</span>
+							<span class="pc-email-desc">Recebe o arquivo ZIP com todos os posts anexado, pronto para baixar.</span>
+						</p:commandLink>
+
+						<p:commandLink styleClass="pc-email-card"
+							action="#{pedidoPostBean.enviarEmailPorPost}"
+							process="@this" update=":growl"
+							oncomplete="PF('wDialogEnvioEmail').hide()">
+							<span class="pc-email-ico post"><i class="pi pi-images" /></span>
+							<span class="pc-email-title">Um e-mail por post</span>
+							<span class="pc-email-desc">Cada post chega num e-mail separado, com a prévia das imagens e a legenda pronta.</span>
+						</p:commandLink>
+
+					</div>
+				</div>
+
+				<div class="av-dlg-footer">
+					<p:commandButton value="Cancelar" type="button"
+						styleClass="ui-button-flat ui-button-plain" icon="pi pi-times"
+						onclick="PF('wDialogEnvioEmail').hide()" />
+				</div>
+
+			</h:panelGroup>
+
+		</h:form>
+
+	</p:dialog>
 
 </ui:decorate>

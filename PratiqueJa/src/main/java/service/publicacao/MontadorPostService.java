@@ -217,6 +217,59 @@ public class MontadorPostService implements Serializable
 		}
 	}
 
+	/**
+	 * Reenvia um lote já gerado como <b>um e-mail por post</b>, no mesmo padrão dos e-mails da
+	 * programação diária (prévia das imagens embutidas + legenda pronta). Regenera o conteúdo a
+	 * partir dos itens do pedido, então as peças podem diferir das do ZIP baixado.
+	 */
+	@Asynchronous
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void reenviarPorPost(Long pedidoId)
+	{
+		PedidoPost pedido = pedidoPostDAO.carrega(pedidoId);
+		if(pedido == null)
+			return;
+
+		try
+		{
+			ConfigPost configPost = configPostDAO.getComLogo(pedido.getConfigPost().getId());
+			// Os e-mails por post leem o destinatário do configPost; garante o usuário do pedido.
+			configPost.setUsuario(pedido.getUsuario());
+
+			ColorHolder.setCOLOR(configPost.getCorFonte());
+			ColorHolder.setFORMULA(configPost.getCorFormula());
+
+			for(ItemPedidoPost item : pedido.getItens())
+			{
+				// Programação transitória só para carregar o branding e sortear backgrounds aleatórios.
+				ProgramacaoPost prog = new ProgramacaoPost();
+				prog.setConfigPost(configPost);
+				prog.setAssunto(item.getAssunto());
+				programacaoPostService.setImagemPost(prog);
+
+				List<ExercicioPadrao> doNivel = filtrarPorNivel(
+					item.getAssunto().getExerciciosPadrao(), item.getNivel());
+				List<ExercicioPadrao> exercicios = sortearExercicios(doNivel, item.getQuantidade());
+
+				for(ExercicioPadrao exercicio : exercicios)
+				{
+					if(item.getFormato().geraFeed())
+						conteudoPublicacaoService.gerarConteudoFeed(exercicio, prog);
+					if(item.getFormato().geraReel())
+						conteudoPublicacaoService.gerarConteudoReel(exercicio, prog);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			ColorHolder.clear();
+		}
+	}
+
 	/** Envia o ZIP gerado por e-mail quando o usuário pediu (anexo). Falha de e-mail não derruba o pedido. */
 	private void enviarPorEmail(PedidoPost pedido, String nomeDownload, byte[] zipBytes)
 	{
@@ -230,8 +283,8 @@ public class MontadorPostService implements Serializable
 			anexo.setFile(new SerialBlob(zipBytes));
 			anexo.setEndDocumentacao(nomeDownload);
 
-			String html = "<p>Olá! Seus posts (lote <b>" + pedido.getCodigoBatch() + "</b>) estão prontos. "
-				+ "O arquivo com as imagens (feed e reels) está anexado, pronto para baixar e publicar.</p>";
+			String nome = pedido.getUsuario().getFirstNome();
+			String html = montarHtmlZip(nome, pedido.getCodigoBatch(), pedido.getNome(), pedido.getQuantidade());
 
 			emailService.adicionar(email, "Seus posts do Pratique Já estão prontos", html, List.of(anexo));
 		}
@@ -239,6 +292,63 @@ public class MontadorPostService implements Serializable
 		{
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Corpo HTML do e-mail do lote (ZIP anexado), no mesmo padrão visual dos e-mails individuais:
+	 * identidade do Pratique Já, saudação, badges do lote e o destaque do arquivo anexado. Inicia
+	 * com "&lt;" para o {@code CommonsEmail} reconhecê-lo como HTML.
+	 */
+	private String montarHtmlZip(String nome, String codigoLote, String nomeLote, int quantidade)
+	{
+		nome = escapeHtml(nome);
+		String codigo = escapeHtml(codigoLote);
+		String tituloLote = nomeLote != null && !nomeLote.isBlank() ? escapeHtml(nomeLote) : "Lote de posts";
+		String qtd = quantidade + " post" + (quantidade != 1 ? "s" : "");
+
+		return "<!DOCTYPE html><html><body style=\"margin:0;padding:0;background:#eef1f8;\">"
+		+ "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#eef1f8;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;\"><tr><td align=\"center\">"
+		+ "<table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f4;\">"
+		+ "<tr><td style=\"padding:20px 28px;border-bottom:3px solid #3b5bdb;\">"
+		+ "<span style=\"font-size:22px;font-weight:bold;color:#3b5bdb;\">Pratique<span style=\"color:#de7b40;\">Já</span></span>"
+		+ "<span style=\"font-size:12px;color:#8a93a6;float:right;padding-top:9px;\">Material para Instagram</span>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:26px 28px 6px;\">"
+		+ "<p style=\"margin:0 0 6px;font-size:17px;color:#2b3445;\">Olá, <b>" + nome + "</b>! 👋</p>"
+		+ "<p style=\"margin:0 0 16px;font-size:14px;color:#6b7689;line-height:1.5;\">Seu lote de posts está pronto! O arquivo com todas as imagens (feed e reels) e as legendas está anexado a este e-mail.</p>"
+		+ "<span style=\"display:inline-block;background:#eaeefb;color:#3b5bdb;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:bold;margin:0 6px 6px 0;\">Lote " + codigo + "</span>"
+		+ "<span style=\"display:inline-block;background:#fceee4;color:#de7b40;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:bold;margin:0 0 6px;\">" + qtd + "</span>"
+		+ "</td></tr>"
+		+ "<tr><td align=\"center\" style=\"padding:14px 28px 6px;\">"
+		+ "<div style=\"background:#f6f8fc;border:1px dashed #c2cce0;border-radius:12px;padding:22px 18px;\">"
+		+ "<div style=\"font-size:34px;line-height:1;margin-bottom:8px;\">📦</div>"
+		+ "<p style=\"margin:0;font-size:15px;font-weight:bold;color:#2b3445;\">" + tituloLote + "</p>"
+		+ "<p style=\"margin:6px 0 0;font-size:13px;color:#6b7689;line-height:1.5;\">Baixe o arquivo <b>.zip</b> anexo e descompacte para acessar todos os posts.</p>"
+		+ "</div>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:16px 28px 4px;\">"
+		+ "<p style=\"margin:0 0 8px;font-size:14px;font-weight:bold;color:#2b3445;\">📂 O que vem no arquivo</p>"
+		+ "<div style=\"background:#f6f8fc;border:1px solid #e2e8f4;border-radius:12px;padding:14px 18px;font-size:14px;color:#2b3445;line-height:1.8;\">"
+		+ "🖼️ Imagens do <b>exercício</b> e da <b>resolução</b> (feed e/ou reel)<br>"
+		+ "✍️ Um arquivo de <b>legenda</b> pronto para copiar e colar em cada post"
+		+ "</div>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:18px 28px 8px;\">"
+		+ "<p style=\"margin:0;font-size:13px;color:#6b7689;line-height:1.5;\">É só baixar, escolher os posts e publicar. Bons posts! 🚀</p>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:8px 28px 24px;border-top:1px solid #eef1f8;\">"
+		+ "<p style=\"margin:14px 0 0;font-size:13px;color:#3b5bdb;font-weight:bold;\">Equipe do Pratique Já</p>"
+		+ "<p style=\"margin:2px 0 0;font-size:12px;color:#8a93a6;\">pratiqueja.com</p>"
+		+ "</td></tr>"
+		+ "</table></td></tr></table></body></html>";
+	}
+
+	/** Escapa os caracteres que quebrariam o HTML (conteúdo vem do banco/usuário). */
+	private String escapeHtml(String texto)
+	{
+		if(texto == null)
+			return "";
+		return texto.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
 	}
 
 	private void adicionarAoZip(ZipOutputStream zip, String nome, byte[] bytes) throws IOException

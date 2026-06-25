@@ -130,8 +130,9 @@
 							<p:commandButton value="Enviar por e-mail" icon="pi pi-envelope"
 								styleClass="ui-button-flat ui-button-secondary"
 								rendered="#{pedidoPostBean.pedidoSelecionado.status.name() == 'CONCLUIDO' and pedidoPostBean.pedidoSelecionado.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedidoPostBean.pedidoSelecionado)}"
-								action="#{pedidoPostBean.enviarEmail(pedidoPostBean.pedidoSelecionado)}"
-								process="@this" update=":growl" />
+								actionListener="#{pedidoPostBean.prepararEnvioEmail(pedidoPostBean.pedidoSelecionado)}"
+								process="@this" update=":formEnvioEmail"
+								oncomplete="PF('wDialogEnvioEmail').show()" />
 							<p:commandButton value="Baixar ZIP" icon="pi pi-download"
 								styleClass="ui-button-raised ui-button-success"
 								rendered="#{pedidoPostBean.pedidoSelecionado.status.name() == 'CONCLUIDO' and pedidoPostBean.pedidoSelecionado.caminhoArquivo != null and !pedidoPostBean.estaExpirado(pedidoPostBean.pedidoSelecionado)}"

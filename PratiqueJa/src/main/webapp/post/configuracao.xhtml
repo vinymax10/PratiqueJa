@@ -7,6 +7,25 @@
 
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<style>
+			/* Fundos padrão: grid compacto de miniaturas + lightbox. */
+			.pc-bgpad { display: flex; gap: 24px; flex-wrap: wrap; }
+			.pc-bgpad-group { flex: 1 1 320px; min-width: 0; }
+			.pc-bgpad-title { font-weight: 700; color: #374151; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+			.pc-bgpad-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; }
+			.pc-bgpad-thumb {
+				width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px;
+				border: 1px solid #e2e8f4; cursor: pointer; display: block;
+				transition: transform .15s ease, box-shadow .15s ease;
+			}
+			.pc-bgpad-thumb:hover { transform: scale(1.04); box-shadow: 0 6px 14px rgba(37, 99, 235, .18); }
+			.pc-bgpad-empty { font-size: 13px; color: #9ca3af; }
+			/* Lightbox */
+			.pc-bglb { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, .85); align-items: center; justify-content: center; padding: 24px; }
+			.pc-bglb.pc-bglb--open { display: flex; }
+			.pc-bglb img { max-width: 92vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 0, 0, .5); }
+			.pc-bglb-close { position: fixed; top: 16px; right: 26px; color: #fff; font-size: 40px; line-height: 1; font-weight: 300; cursor: pointer; }
+		</style>
 	</ui:define>
 
 	<ui:define name="linkPage">
@@ -249,4 +268,65 @@
 		</div>
 
 	</h:form>
+
+	<!-- ═══════════════════════════════════════════ FUNDOS PADRÃO -->
+	<div class="pc-panel">
+		<div class="pc-section-sub"><i class="pi pi-images" /> Fundos padrão</div>
+		<p class="pc-hero-desc" style="color:#6b7689;margin:0 0 16px;font-size:14px;">
+			Estes são os fundos que o sistema sorteia quando a publicação usa a base de imagens padrão. Clique para ampliar.
+		</p>
+
+		<div class="pc-bgpad">
+
+			<div class="pc-bgpad-group">
+				<div class="pc-bgpad-title">
+					<i class="pi pi-image" /> Feed
+					<span style="font-weight:500;color:#9ca3af;">(#{imagemPostBean.imagensFeed.size()})</span>
+				</div>
+				<div class="pc-bgpad-grid">
+					<ui:repeat value="#{imagemPostBean.imagensFeed}" var="img">
+						<h:graphicImage value="#{img.endereco}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
+							onclick="pcBgPreview(this.src, this.alt)" oncontextmenu="return false;" />
+					</ui:repeat>
+					<h:outputText styleClass="pc-bgpad-empty" value="Nenhum fundo padrão de Feed."
+						rendered="#{empty imagemPostBean.imagensFeed}" />
+				</div>
+			</div>
+
+			<div class="pc-bgpad-group">
+				<div class="pc-bgpad-title">
+					<i class="pi pi-video" /> Reel
+					<span style="font-weight:500;color:#9ca3af;">(#{imagemPostBean.imagensReel.size()})</span>
+				</div>
+				<div class="pc-bgpad-grid">
+					<ui:repeat value="#{imagemPostBean.imagensReel}" var="img">
+						<h:graphicImage value="#{img.endereco}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
+							onclick="pcBgPreview(this.src, this.alt)" oncontextmenu="return false;" />
+					</ui:repeat>
+					<h:outputText styleClass="pc-bgpad-empty" value="Nenhum fundo padrão de Reel."
+						rendered="#{empty imagemPostBean.imagensReel}" />
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Lightbox dos fundos padrão -->
+	<div id="pcBgLightbox" class="pc-bglb" onclick="pcBgClose()">
+		<span class="pc-bglb-close" title="Fechar">&#215;</span>
+		<img id="pcBgLightboxImg" src="" alt="" onclick="event.stopPropagation();" />
+	</div>
+	<script>
+		function pcBgPreview(src, alt){
+			var lb = document.getElementById('pcBgLightbox');
+			var im = document.getElementById('pcBgLightboxImg');
+			im.src = src; im.alt = alt || '';
+			lb.classList.add('pc-bglb--open');
+		}
+		function pcBgClose(){
+			document.getElementById('pcBgLightbox').classList.remove('pc-bglb--open');
+		}
+		document.addEventListener('keydown', function(e){ if(e.key === 'Escape') pcBgClose(); });
+	</script>
+
 </ui:decorate>

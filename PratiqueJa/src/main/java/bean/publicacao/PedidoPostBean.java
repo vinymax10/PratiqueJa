@@ -49,6 +49,8 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private List<PedidoPost> historico;
 	private PedidoPost pedidoSelecionado;
+	/** Lote escolhido no menu de ações para envio por e-mail (define o modo no modal de opções). */
+	private PedidoPost pedidoParaEmail;
 	private String codigoDestaque;
 
 	private List<Assunto> assuntos;
@@ -406,10 +408,43 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		pedidoSelecionado = entidadeDAO.carrega(pedido.getId());
 	}
 
+	/** Abre o modal de opções de envio por e-mail (e-mail único com ZIP × um e-mail por post). */
+	public void prepararEnvioEmail(PedidoPost pedido)
+	{
+		pedidoParaEmail = pedido;
+	}
+
+	/** Envia tudo num único e-mail, com o ZIP anexado (modo escolhido no modal). */
+	public void enviarEmailZip()
+	{
+		enviarEmail(pedidoParaEmail);
+	}
+
+	/** Envia um e-mail por post, no mesmo padrão dos e-mails da programação diária. */
+	public void enviarEmailPorPost()
+	{
+		if(pedidoParaEmail == null || pedidoParaEmail.getCaminhoArquivo() == null)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Este lote não está mais disponível para envio.");
+			return;
+		}
+		try
+		{
+			montadorService.reenviarPorPost(pedidoParaEmail.getId());
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Estamos preparando um e-mail para cada post. Eles chegarão em instantes.");
+		}
+		catch(Exception e)
+		{
+			LOG.error("Falha ao enviar posts por e-mail", e);
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível enviar os e-mails.");
+		}
+	}
+
 	/** Envia o ZIP de um lote já gerado para o e-mail do usuário. */
 	public void enviarEmail(PedidoPost pedido)
 	{
-		if(pedido.getCaminhoArquivo() == null)
+		if(pedido == null || pedido.getCaminhoArquivo() == null)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Este lote não está mais disponível para envio.");
 			return;

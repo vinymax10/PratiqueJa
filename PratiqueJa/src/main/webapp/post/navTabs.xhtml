@@ -28,13 +28,6 @@
 				<f:param name="tab" value="1" />
 			</h:link>
 
-			<h:link outcome="/post/backgroundPadrao"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPadrao') ? 'pc-tab-active' : ''}">
-				<i class="fa-solid fa-images" /> Background Padrão
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
-				<f:param name="tab" value="2" />
-			</h:link>
-
 			<h:link outcome="/post/backgroundPersonalizado"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPersonalizado') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-file-image" /> Background Personalizado

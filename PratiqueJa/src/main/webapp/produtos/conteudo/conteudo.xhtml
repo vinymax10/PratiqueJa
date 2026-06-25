@@ -64,9 +64,9 @@
 	</style>
 	<div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:8px;">
 		<button type="button" id="btnMensal" class="ciclo-btn ciclo-ativo" onclick="setCiclo('mensal')">Mensal</button>
-		<button type="button" id="btnAnual" class="ciclo-btn" onclick="setCiclo('anual')">Anual <span style="color:#16a34a;font-weight:800;">−20%</span></button>
+		<button type="button" id="btnAnual" class="ciclo-btn" onclick="setCiclo('anual')">Anual <span style="color:#16a34a;font-weight:800;">−20%+</span></button>
 	</div>
-	<p class="card-text" style="text-align:center;margin-bottom:24px;font-size:13px;color:#16a34a;font-weight:600;">No plano anual você economiza 20% — equivale a mais de 2 meses grátis.</p>
+	<p class="card-text" style="text-align:center;margin-bottom:24px;font-size:13px;color:#16a34a;font-weight:600;">No plano anual você economiza mais de 20% — equivale a mais de 2 meses grátis.</p>
 
 	<div class="grid-3" style="margin-top:0;">
 
@@ -85,7 +85,7 @@
 				<li>Legendas curtas automáticas</li>
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
-				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="19,90" data-anual="191">19,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="19,90" data-anual="189,90">19,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
 				<p:commandButton value="Começar agora"
 					styleClass="ui-button-raised btn-primary"
 					process="@this" action="#{pagamentoBean.pagamentoCriador('Basico')}"/>
@@ -108,7 +108,7 @@
 				<li>Legendas completas com CTA e hashtags inteligentes</li>
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
-				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="34,90" data-anual="335">34,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="34,90" data-anual="334,90">34,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
 				<p:commandButton value="Ser Premium"
 					styleClass="ui-button-raised btn-primary"
 					process="@this" action="#{pagamentoBean.pagamentoCriador('Premium')}"/>
@@ -131,7 +131,7 @@
 				<li>Suporte prioritário</li>
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
-				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="59,90" data-anual="575">59,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
+				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="59,90" data-anual="574,90">59,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
 				<p:commandButton value="Ser Master"
 					styleClass="ui-button-raised btn-primary"
 					process="@this" action="#{pagamentoBean.pagamentoCriador('Master')}"/>
@@ -161,7 +161,8 @@
 <!-- COMPARAÇÃO -->
 <div class="card-lg">
 	<h2 class="section-title">Comparação de planos</h2>
-	<table aria-label="Comparação de planos" style="width:100%;border-collapse:collapse;">
+	<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+		<table aria-label="Comparação de planos" style="width:100%;min-width:560px;border-collapse:collapse;">
 		<thead>
 			<tr style="background:#f8fafc;">
 				<th style="text-align:left;padding:12px 16px;font-size:14px;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Benefícios</th>
@@ -183,6 +184,7 @@
 						<tr><td style="padding:10px 16px;font-size:14px;color:#374151;">Suporte prioritário</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;">—</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;">—</td><td style="text-align:center;padding:10px 16px;font-size:14px;color:#374151;"><i class="pi pi-check check"></i></td></tr>
 		</tbody>
 	</table>
+		</div>
 </div>
 
 <!-- FAQ -->

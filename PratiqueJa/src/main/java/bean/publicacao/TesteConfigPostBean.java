@@ -46,6 +46,9 @@ public class TesteConfigPostBean implements Serializable
 
 	private Nivel nivel;
 
+	/** Formato selecionado no switch do teste: true = Feed, false = Reel. */
+	private boolean testarFeed = true;
+
 	@Inject
 	private ExercicioPadraoDAO exercicioPadraoDAO;
 

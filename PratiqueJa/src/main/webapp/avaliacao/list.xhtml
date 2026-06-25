@@ -7,6 +7,17 @@
 
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+		<style>
+			/* Cabeçalho da tabela: azul sólido, combinando com os botões (escopado só nesta tela). */
+			.av-historico-table.ui-datatable thead tr th {
+				background: #2563eb !important;
+				color: #fff !important; border-color: rgba(255, 255, 255, .18) !important;
+			}
+			.av-historico-table.ui-datatable thead tr th .ui-column-title,
+			.av-historico-table.ui-datatable thead tr th .ui-sortable-column-icon { color: #fff !important; }
+			.av-historico-table.ui-datatable thead tr th:first-child { border-top-left-radius: 10px; }
+			.av-historico-table.ui-datatable thead tr th:last-child { border-top-right-radius: 10px; }
+		</style>
 	</ui:define>
 
 	<ui:define name="linkPage">
