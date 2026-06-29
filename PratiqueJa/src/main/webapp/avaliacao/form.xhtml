@@ -7,11 +7,57 @@
 
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<script>
+			//<![CDATA[
+			function pcSemAcento(s){
+				return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+			}
+			function pcFiltrarAssuntos(input){
+				var termo = pcSemAcento(input.value).trim();
+				var galeria = (input.closest('.pc-field') || document).querySelector('.pc-seg2--assunto');
+				if(!galeria) return;
+				galeria.querySelectorAll('.pc-seg2-opt--assunto').forEach(function(card){
+					var titulo = card.querySelector('.pc-seg2-title');
+					var nome = pcSemAcento(titulo ? titulo.textContent : '');
+					card.classList.toggle('pc-card-hidden', termo !== '' && nome.indexOf(termo) === -1);
+				});
+			}
+			function pcAbrirAssuntos(btn){
+				var p = btn.closest('.pc-assunto-picker');
+				if(!p) return;
+				p.classList.add('is-expanded');
+				var f = p.querySelector('.pc-assunto-filtro');
+				if(f){ f.value = ''; pcFiltrarAssuntos(f); f.focus(); }
+			}
+			function pcFecharAssuntos(el){
+				var p = el.closest('.pc-assunto-picker');
+				if(p) p.classList.remove('is-expanded');
+			}
+			function pcEscolherAssunto(card){
+				var p = card.closest('.pc-assunto-picker');
+				if(!p) return;
+				var img = card.querySelector('img');
+				var titulo = card.querySelector('.pc-seg2-title');
+				var sel = p.querySelector('.pc-assunto-selected');
+				if(sel){
+					var simg = sel.querySelector('img');
+					var stit = sel.querySelector('.pc-seg2-title');
+					if(simg && img){ simg.src = img.src; simg.alt = img.alt; }
+					if(stit && titulo){ stit.textContent = titulo.textContent; }
+				}
+				p.classList.remove('is-expanded');
+			}
+			//]]>
+		</script>
 	</ui:define>
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="Confecção de Avaliações" />
+		<h:outputText class="linkPage" value="Nova Solicitação" />
 	</ui:define>
+
+	<!-- ═══════ HERO + Formulário unidos num card único ═══════ -->
+	<div class="av-joined">
 
 	<!-- ═══════════════════════════════════════════════════════ HERO -->
 	<ui:include src="/avaliacao/hero.xhtml" />
@@ -20,12 +66,6 @@
 	<h:form id="form">
 
 		<div class="av-panel">
-
-			<div class="av-shero">
-				<span class="av-shero-eyebrow"><i class="pi pi-pencil" /> Formulário</span>
-				<h2 class="av-shero-title"><i class="pi pi-plus-circle" /> Nova Solicitação</h2>
-				<p class="av-shero-sub">Preencha os dados, defina o formato e monte o conteúdo da avaliação.</p>
-			</div>
 
 			<!-- ─── Dados da Avaliação ─── -->
 			<div class="av-section-sub"><i class="pi pi-info-circle" /> Dados da Avaliação</div>
@@ -52,9 +92,7 @@
 					</div>
 					<p:inputText id="titulo"
 						placeholder="Ex.: Avaliação Bimestral — 2º Bimestre"
-						value="#{pedidoAvaliacaoBean.entidade.titulo}"
-						required="true"
-						requiredMessage="Informe o título da avaliação." />
+						value="#{pedidoAvaliacaoBean.entidade.titulo}" />
 					<p:message for="titulo" display="text" />
 				</div>
 
@@ -121,79 +159,6 @@
 						pattern="dd/MM/yyyy"
 						placeholder="(opcional)" />
 				</div>
-
-			</div>
-			</div>
-
-				<ui:fragment rendered="#{pedidoAvaliacaoBean.podeUsarLogoEscola}">
-					<div class="av-logo-col">
-						<div class="av-label">
-							Logo personalizada
-							<p:commandButton id="hLogo" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
-							<p:overlayPanel for="hLogo" appendTo="@body" dynamic="true" styleClass="av-help-panel">
-								<div class="av-help-header">
-									<i class="pi pi-image" />
-									<span class="av-help-header-title">Logo personalizada</span>
-								</div>
-								<div class="av-help-body">
-									Recurso dos planos Profissional e Master. A imagem enviada substitui
-									a marca "PratiqueJá" no canto do cabeçalho do PDF.<br/><br/>
-									Pode ser a logo da sua escola ou curso — ou, se você dá aula
-									particular, uma imagem com o seu nome.<br/><br/>
-									Vale para todas as suas avaliações — envie uma vez só. PNG ou JPG.
-								</div>
-							</p:overlayPanel>
-						</div>
-						<div class="av-logo-uploader">
-							<div class="av-dropzone-wrap">
-								<div class="av-dropzone-hint">
-									<span class="av-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
-									<span class="av-dropzone-title">Arraste a sua logo aqui ou clique para enviar</span>
-									<ul class="av-dropzone-specs">
-										<li>PNG ou JPG <span>— PNG com fundo transparente fica melhor</span></li>
-										<li>Tamanho máximo: 5 MB</li>
-										<li>Proporção horizontal · ideal ~600 × 240 px</li>
-									</ul>
-								</div>
-								<p:fileUpload listener="#{pedidoAvaliacaoBean.uploadLogoEscola}"
-									mode="advanced" auto="true" dragDropSupport="true"
-									chooseLabel="Selecionar imagem"
-									styleClass="av-dropzone"
-									invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
-									invalidSizeMessage="O tamanho máximo permitido é de 5MB."
-									update="form:logoEscolaPreview :growl">
-									<p:validateFile sizeLimit="5002400" allowTypes="/(\.|\/)(png|jpe?g)$/" />
-								</p:fileUpload>
-							</div>
-
-							<h:panelGroup id="logoEscolaPreview" layout="block">
-								<ui:fragment rendered="#{pedidoAvaliacaoBean.temLogoEscola}">
-									<div class="av-logo-card">
-										<div class="av-logo-canvas">
-											<img src="#{pedidoAvaliacaoBean.logoEscolaDataUri}" class="av-logo-img" alt="Logo personalizada" />
-										</div>
-										<div class="av-logo-info">
-											<span class="av-logo-badge"><i class="pi pi-check-circle" /> Logo aplicada</span>
-											<span class="av-logo-hint">Aparece no cabeçalho da prova e do gabarito.</span>
-										</div>
-										<p:commandLink action="#{pedidoAvaliacaoBean.removerLogoEscola}"
-											process="@this" update="form:logoEscolaPreview :growl"
-											styleClass="av-logo-remove" title="Remover logo">
-											<i class="pi pi-trash" />
-										</p:commandLink>
-									</div>
-								</ui:fragment>
-							</h:panelGroup>
-						</div>
-					</div>
-				</ui:fragment>
-
-			</div>
-
-			<!-- ─── Formato ─── -->
-			<div class="av-section-sub"><i class="pi pi-sliders-h" /> Formato</div>
-
-			<div class="av-fields">
 
 				<div class="av-field">
 					<div class="av-label">
@@ -279,33 +244,101 @@
 							</div>
 							<div class="av-help-body">
 								Número de avaliações a gerar nesta solicitação.
-								Cada exemplar recebe exercícios diferentes sorteados aleatoriamente
+								Cada exemplar recebe exercícios diferentes gerados aleatoriamente
 								e um código único (ex.: A3F7-001) que identifica seu gabarito correspondente.<br/><br/>
 								Máximo por solicitação: #{pedidoAvaliacaoBean.maxAvaliacoesPorSolicitacao} exemplares.
 							</div>
 						</p:overlayPanel>
 					</div>
 					<p:inputText id="quantidade"
-						value="#{pedidoAvaliacaoBean.entidade.quantidade}"
-						required="true"
-						requiredMessage="Informe a quantidade de avaliações." />
+						value="#{pedidoAvaliacaoBean.entidade.quantidade}" />
 					<p:message for="quantidade" display="text" />
 				</div>
+
+			</div>
+			</div>
+
+				<ui:fragment rendered="#{pedidoAvaliacaoBean.podeUsarLogoEscola}">
+					<div class="av-logo-col">
+						<div class="av-label">
+							Logo personalizada
+							<p:commandButton id="hLogo" type="button" icon="pi pi-question-circle" styleClass="av-help-btn" />
+							<p:overlayPanel for="hLogo" appendTo="@body" dynamic="true" styleClass="av-help-panel">
+								<div class="av-help-header">
+									<i class="pi pi-image" />
+									<span class="av-help-header-title">Logo personalizada</span>
+								</div>
+								<div class="av-help-body">
+									Recurso dos planos Profissional e Master. A imagem enviada substitui
+									a marca "PratiqueJá" no canto do cabeçalho do PDF.<br/><br/>
+									Pode ser a logo da sua escola ou curso — ou, se você dá aula
+									particular, uma imagem com o seu nome.<br/><br/>
+									Vale para todas as suas avaliações — envie uma vez só. PNG ou JPG.
+								</div>
+							</p:overlayPanel>
+						</div>
+						<div class="av-logo-uploader">
+							<div class="av-dropzone-wrap">
+								<div class="av-dropzone-hint">
+									<span class="av-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+									<span class="av-dropzone-title">Arraste a sua logo aqui ou clique para enviar</span>
+									<ul class="av-dropzone-specs">
+										<li>PNG ou JPG <span>— PNG com fundo transparente fica melhor</span></li>
+										<li>Tamanho máximo: 5 MB</li>
+										<li>Proporção horizontal · ideal ~600 × 240 px</li>
+									</ul>
+								</div>
+								<p:fileUpload listener="#{pedidoAvaliacaoBean.uploadLogoEscola}"
+									mode="advanced" auto="true" dragDropSupport="true"
+									chooseLabel="Selecionar imagem"
+									styleClass="av-dropzone"
+									invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+									invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+									update="form:logoEscolaPreview :growl">
+									<p:validateFile sizeLimit="5002400" allowTypes="/(\.|\/)(png|jpe?g)$/" />
+								</p:fileUpload>
+							</div>
+
+							<h:panelGroup id="logoEscolaPreview" layout="block">
+								<ui:fragment rendered="#{pedidoAvaliacaoBean.temLogoEscola}">
+									<div class="av-logo-card">
+										<div class="av-logo-canvas">
+											<h:graphicImage value="#{pedidoAvaliacaoBean.logoEscolaEndereco}" styleClass="av-logo-img" alt="Logo personalizada" />
+										</div>
+										<div class="av-logo-info">
+											<span class="av-logo-badge"><i class="pi pi-check-circle" /> Logo aplicada</span>
+											<span class="av-logo-hint">Aparece no cabeçalho da prova e do gabarito.</span>
+										</div>
+										<p:commandLink action="#{pedidoAvaliacaoBean.removerLogoEscola}"
+											process="@this" update="form:logoEscolaPreview :growl"
+											styleClass="av-logo-remove" title="Remover logo">
+											<i class="pi pi-trash" />
+										</p:commandLink>
+									</div>
+								</ui:fragment>
+							</h:panelGroup>
+						</div>
+					</div>
+				</ui:fragment>
 
 			</div>
 
 			<!-- ─── Conteúdo ─── -->
 			<div class="av-section-sub"><i class="pi pi-list" /> Conteúdo</div>
 
+			<h:panelGroup id="painelConteudo" layout="block">
+
+			<!-- modo lista -->
+			<h:panelGroup layout="block" rendered="#{!itemPedidoAvaliacaoBean.editandoItem}">
+
 			<div style="display:flex;justify-content:flex-end;margin-bottom:16px">
 				<p:commandButton
-					value="Adicionar assunto"
+					value="Adicionar Conteúdo"
 					icon="pi pi-plus"
 					styleClass="ui-button-raised ui-button-success"
 					action="#{itemPedidoAvaliacaoBean.cadastrar}"
-					update=":dialogItem"
+					update="form:painelConteudo"
 					process="@this"
-					oncomplete="PF('wDialogItem').show()"
 					resetValues="true" />
 			</div>
 
@@ -353,9 +386,13 @@
 								styleClass="ui-button-flat ui-button-secondary"
 								title="Editar"
 								action="#{itemPedidoAvaliacaoBean.editar(item)}"
-								update=":dialogItem" process="@this"
-								oncomplete="PF('wDialogItem').show()"
+								update="form:painelConteudo" process="@this"
 								resetValues="true" />
+							<p:commandButton icon="pi pi-copy"
+								styleClass="ui-button-flat ui-button-secondary"
+								title="Duplicar"
+								action="#{itemPedidoAvaliacaoBean.duplicar(item)}"
+								update="form:painelConteudo :growl" process="@this" />
 							<p:commandButton icon="pi pi-trash"
 								styleClass="ui-button-danger ui-button-flat"
 								title="Remover"
@@ -424,6 +461,14 @@
 					update=":growl"
 					title="Guarda estes dados (cabeçalho e formato) para já virem preenchidos nas próximas avaliações." />
 				<p:commandButton
+					value="Salvar rascunho"
+					icon="pi pi-save"
+					styleClass="ui-button-flat ui-button-secondary"
+					action="#{pedidoAvaliacaoBean.salvarRascunho}"
+					process="@form"
+					update="@form :growl"
+					title="Salva o que já foi montado para você continuar e gerar depois." />
+				<p:commandButton
 					id="solicitar"
 					value="Solicitar Confecção"
 					icon="pi pi-send"
@@ -435,11 +480,60 @@
 				</p:commandButton>
 			</div>
 
+			</h:panelGroup>
+			<!-- fim modo lista -->
+
+			<!-- modo formulário (cadastro/edição de assunto, inline) -->
+			<h:panelGroup layout="block" rendered="#{itemPedidoAvaliacaoBean.editandoItem}">
+				<ui:include src="/avaliacao/item-form.xhtml" />
+			</h:panelGroup>
+
+			</h:panelGroup>
+			<!-- fim painelConteudo -->
+
 		</div>
+
+		<!-- Dialog: cota esgotada / plano vencido -->
+		<p:dialog widgetVar="dlgCota" modal="true" closable="true" showHeader="false"
+			styleClass="av-dlg-cota" responsive="true" width="460">
+			<div class="av-dlg-cota-inner">
+				<div class="av-dlg-cota-head">
+					<div class="av-dlg-cota-icon-wrap">
+						<i class="pi pi-crown" />
+					</div>
+					<h3 class="av-dlg-cota-titulo">#{pedidoAvaliacaoBean.dialogCotaTitulo}</h3>
+					<button type="button" class="av-dlg-cota-close" onclick="PF('dlgCota').hide()">
+						<i class="pi pi-times" />
+					</button>
+				</div>
+				<div class="av-dlg-cota-body">
+					<p class="av-dlg-cota-msg">#{pedidoAvaliacaoBean.dialogCotaMensagem}</p>
+					<div class="av-dlg-cota-stats">
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Usadas</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadas}</div>
+						</div>
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Restantes</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoAvaliacaoBean.creditosRestantes}</div>
+						</div>
+					</div>
+				</div>
+				<div class="av-dlg-cota-footer">
+					<button type="button" class="av-dlg-btn av-dlg-btn--ghost" onclick="PF('dlgCota').hide()">
+						Fechar
+					</button>
+					<a href="/produtos/avaliacao/avaliacao.xhtml" class="av-dlg-btn av-dlg-btn--primary">
+						<i class="pi pi-shopping-cart" /> Ver planos
+					</a>
+				</div>
+			</div>
+		</p:dialog>
 
 	</h:form>
 
-	<!-- ═══════════════════════════════ DIALOG: ADICIONAR/EDITAR ASSUNTO -->
-	<ui:include src="/avaliacao/dialog-item.xhtml" />
+	</div>
+
+	<script>window.t2Bread = {main: 'Avaliações', sub: 'Formulário'};</script>
 
 </ui:decorate>

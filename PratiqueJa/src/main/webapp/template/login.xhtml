@@ -7,64 +7,88 @@
 <h:body>
 	<ui:composition>
 
-		<p:dialog id="dialogLogin"
-			class="p-col-12 p-md-10 p-md-offset-1 p-lg-8 p-lg-offset-2 p-xl-4 p-xl-offset-4"
-			header="Login" showEffect="fade" hideEffect="fade" width="100%;"
-			modal="true" widgetVar="loginWidget" responsive="true">
-			<h:form id="formLogin" enctype="multipart/form-data" >
-				<div style="text-align: center;">
-					<img alt="user header" src="/image/logo.png" style="width: 300px;" />
+		<p:dialog id="dialogLogin" widgetVar="loginWidget"
+			modal="true" responsive="true" showHeader="false"
+			dismissableMask="true" closeOnEscape="true"
+			styleClass="login-dlg" width="880">
+
+			<div class="login-split">
+
+				<!-- ─────────── Painel hero (esquerda) ─────────── -->
+				<div class="login-hero-side">
+					<span class="login-badge"><i class="pi pi-star" /> Área do Professor</span>
+					<h2 class="login-hero-title">Conteúdo de matemática<br/>pronto para publicar</h2>
+					<p class="login-hero-desc">
+						Exercícios gerados por IA, com a sua identidade visual,
+						prontos para o Instagram e o TikTok.
+					</p>
+					<ul class="login-hero-list">
+						<li><i class="pi pi-check" /> Posts e avaliações personalizadas</li>
+						<li><i class="pi pi-check" /> Exercícios exclusivos nos 3 níveis</li>
+						<li><i class="pi pi-check" /> Gere quando quiser ou agende o envio</li>
+					</ul>
 				</div>
-				<div class="ui-fluid formgrid grid">
-	
-					<div class="campoMsg col-12">
-						<p:outputLabel for="email" value="Email" />
-						<p:inputText id="email" value="#{autenticacaoBean.email}" 
-						validator="#{autenticacaoBean.validateEmail}" 
-							required="true" requiredMessage="O e-mail é obrigatório"/>
-						<p:message id="msgEmail" for="email" display="text" />
-							
-					</div>
-					
-					<div class="campoMsg col-12">
-						<p:outputLabel for="senha" value="Senha" />
-						<p:password id="senha" value="#{autenticacaoBean.senha}"
-							required="true" requiredMessage="A senha é obrigatória"/>
-						<p:message id="msgSenha" for="senha" display="text" />
-					</div>
-					
-<!-- 					<div class="campoMsg col-6" > -->
-<!-- 						<p:commandLink action="#{usuarioBean.cadastrar(true)}" -->
-<!-- 							 resetValues="true" update="cadastroUsuario" process="@this" value="Cadastre-se" /> -->
-<!-- 					</div> -->
-					
-					<div class="campoMsg col-6" style="text-align: right;">
-						<p:commandLink value="Esqueci minha senha"
-							onclick="PF('resetSenhaWidget').show()" />
-					</div>
-					
-					<div class="campoMsg col-12">
-						<p:commandButton id="login" value="Login" update="@form :formPrincipal :growl"
-							process="@form" ajax="true" 
+
+				<!-- ─────────── Formulário (direita) ─────────── -->
+				<div class="login-form-side">
+
+					<button type="button" class="login-close"
+						onclick="PF('loginWidget').hide()" aria-label="Fechar">
+						<i class="pi pi-times" />
+					</button>
+
+					<img class="login-logo" alt="PratiqueJá" src="/image/logo.png" />
+					<h3 class="login-form-title">Entrar</h3>
+					<p class="login-form-sub">Acesse sua conta</p>
+
+					<h:form id="formLogin" enctype="multipart/form-data" styleClass="login-form">
+
+						<div class="login-field">
+							<p:outputLabel for="email" value="Email" />
+							<p:inputText id="email" value="#{autenticacaoBean.email}"
+								validator="#{autenticacaoBean.validateEmail}"
+								required="true" requiredMessage="O e-mail é obrigatório" />
+							<p:message id="msgEmail" for="email" display="text" />
+						</div>
+
+						<div class="login-field">
+							<p:outputLabel for="senha" value="Senha" />
+							<p:password id="senha" value="#{autenticacaoBean.senha}"
+								required="true" requiredMessage="A senha é obrigatória" />
+							<p:message id="msgSenha" for="senha" display="text" />
+						</div>
+
+						<div class="login-forgot">
+							<p:commandLink value="Esqueci minha senha"
+								onclick="PF('resetSenhaWidget').show()" />
+						</div>
+
+						<p:commandButton id="login" value="Entrar"
+							update="@form :formPrincipal :growl"
+							process="@form" ajax="true"
 							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('loginWidget').hide()"
-							style="width: auto" icon="pi pi-sign-in" iconPos="right"
-							action="#{autenticacaoBean.login}" >
-								<p:defaultCommand target="formLogin:login"/>
-							</p:commandButton>
-					</div>
-	
+							styleClass="login-btn" icon="pi pi-sign-in" iconPos="right"
+							action="#{autenticacaoBean.login}">
+							<p:defaultCommand target="formLogin:login" />
+						</p:commandButton>
+
+					</h:form>
+
+					<div class="login-or"><span>ou</span></div>
+
+					<div id="buttonDiv" class="login-google"></div>
+
+					<p style="text-align:center; margin-top:1rem; font-size:0.9rem; color:var(--text-color-secondary);">
+						Não tem conta?
+						<a href="/usuario/perfil.xhtml" style="color:var(--primary-color); font-weight:600;">Cadastre-se</a>
+					</p>
+
 				</div>
-				
-			</h:form>
-			
-			<div class="col-12">
-				<div id="buttonDiv" ></div>
+
 			</div>
-			
+
 		</p:dialog>
 
 	</ui:composition>
 </h:body>
 </html>
-
-

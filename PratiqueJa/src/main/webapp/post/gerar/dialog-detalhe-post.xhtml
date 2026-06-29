@@ -63,16 +63,6 @@
 							</div>
 
 							<div class="av-det-cell">
-								<span class="av-det-cell-ico"><i class="pi pi-envelope" /></span>
-								<span class="av-det-cell-txt">
-									<span class="av-det-cell-label">Receber por e-mail</span>
-									<span class="av-det-cell-value">
-										<h:outputText value="#{pedidoPostBean.pedidoSelecionado.enviarEmail ? 'Sim' : 'Não'}" />
-									</span>
-								</span>
-							</div>
-
-							<div class="av-det-cell">
 								<span class="av-det-cell-ico"><i class="pi pi-clock" /></span>
 								<span class="av-det-cell-txt">
 									<span class="av-det-cell-label">Expira em</span>
@@ -103,9 +93,11 @@
 										<span class="av-det-item-assunto">
 											<h:outputText value="#{item.assunto.nome}" />
 										</span>
-										<span class="av-item-chip av-item-chip--nivel">
-											<h:outputText value="#{item.nivel != null ? item.nivel.nome : 'Todos os níveis'}" />
-										</span>
+										<ui:repeat value="#{item.niveis}" var="nv">
+											<span class="av-item-chip av-item-chip--nivel">
+												<h:outputText value="#{nv.nome}" />
+											</span>
+										</ui:repeat>
 										<span class="av-item-chip av-item-chip--formato">
 											<h:outputText value="#{item.formato.nome}" />
 										</span>

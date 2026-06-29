@@ -1,7 +1,5 @@
 package dao.usuario;
 
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -123,10 +121,10 @@ public class UsuarioDAO extends DAO<Usuario>
 	}
 
 	/** Usuários com plano de avaliações (assinantes), para o processamento mensal do rollover. */
-	public List<Usuario> listarComPlanoAvaliacao()
+	public List<Usuario> listarComPerfilAvaliacao()
 	{
 		return em.createQuery(
-			"SELECT u FROM Usuario u WHERE u.planoAvaliacao IS NOT NULL", Usuario.class)
+			"SELECT u FROM Usuario u WHERE u.perfilAvaliacao IS NOT NULL", Usuario.class)
 			.getResultList();
 	}
 
@@ -159,46 +157,6 @@ public class UsuarioDAO extends DAO<Usuario>
 		{
 			usuario.setCreditoRolloverPost(credito);
 			usuario.setMesRolloverPostProcessado(mesProcessado);
-		}
-	}
-
-	/** Remove a logo da escola do usuário sobre a entidade gerenciada (o orphanRemoval só dispara
-	 *  de forma confiável dentro da transação/contexto de persistência). */
-	@Transactional
-	public void removerLogoEscola(Long usuarioId)
-	{
-		if(usuarioId == null)
-			return;
-		Usuario usuario = em.find(Usuario.class, usuarioId);
-		if(usuario != null && usuario.getConfigAvaliacao() != null && usuario.getConfigAvaliacao().getLogoEscola() != null)
-			usuario.getConfigAvaliacao().setLogoEscola(null);
-	}
-
-	/** Lê os bytes da logo da escola do usuário, dentro de uma transação (o LOB só pode ser lido
-	 *  com a conexão aberta). Devolve null se não houver logo. Usado para o preview no formulário. */
-	@Transactional
-	public byte[] buscarLogoEscolaBytes(Long usuarioId)
-	{
-		if(usuarioId == null)
-			return null;
-
-		List<Blob> linhas = em.createQuery(
-			"SELECT l.file FROM Usuario u JOIN u.configAvaliacao c JOIN c.logoEscola l WHERE u.id = :usuarioId", Blob.class)
-			.setParameter("usuarioId", usuarioId)
-			.getResultList();
-
-		if(linhas.isEmpty() || linhas.get(0) == null)
-			return null;
-
-		try
-		{
-			Blob blob = linhas.get(0);
-			return blob.getBytes(1, (int) blob.length());
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-			return null;
 		}
 	}
 

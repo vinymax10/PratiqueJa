@@ -79,25 +79,9 @@
 				<h:outputText value="#{entidade.chave}"/>
 			</p:column>
 
-			<p:column headerText="Habilitado" responsivePriority="3" width="10%"
+			<p:column headerText="Mostrar no Teste" responsivePriority="3" width="10%"
 			styleClass="coluna-ativo">
-				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.habilidado}" >
-					<p:ajax event="change" process="@this"
-					listener="#{assuntoBean.salvar(entidade)}" />
-				</p:toggleSwitch>
-			</p:column>
-
-			<p:column headerText="Exercícios" responsivePriority="4" width="10%"
-			styleClass="coluna-ativo">
-				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showExercicio}" >
-					<p:ajax event="change" process="@this"
-					listener="#{assuntoBean.salvar(entidade)}" />
-				</p:toggleSwitch>
-			</p:column>
-
-			<p:column headerText="Questões" responsivePriority="5" width="10%"
-			styleClass="coluna-ativo">
-				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.showQuestao}" >
+				<p:toggleSwitch class="toggleSwitch-form" value="#{entidade.mostrarTesteConteudo}" >
 					<p:ajax event="change" process="@this"
 					listener="#{assuntoBean.salvar(entidade)}" />
 				</p:toggleSwitch>

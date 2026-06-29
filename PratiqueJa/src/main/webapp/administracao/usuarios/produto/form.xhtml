@@ -1,0 +1,158 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{produtoBean.nome}" />
+	</ui:define>
+
+	<f:metadata>
+		<f:viewParam name="chave" value="#{produtoBean.chave}" />
+		<f:viewParam name="cadastro" value="#{produtoBean.cadastro}" converter="jakarta.faces.Boolean"/>
+		<f:viewAction action="#{produtoBean.carregar()}" />
+	</f:metadata>
+
+	<h:form id="form" class="form">
+
+		<h4 class="title-divisor">Produto</h4>
+
+		<div class="ui-fluid gride">
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Nome"/>
+				<p:inputText value="#{produtoBean.entidade.nome}"
+				placeholder="Ex.: Premium Mensal" required="true"
+				requiredMessage="O nome é obrigatório" maxlength="255"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Valor"/>
+				<p:inputNumber value="#{produtoBean.entidade.valor}" required="true"
+				symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="."
+				requiredMessage="O valor é obrigatório"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Dias de Validade"/>
+				<p:inputNumber value="#{produtoBean.entidade.diasValididade}"
+				minValue="0" decimalPlaces="0"
+				placeholder="Ex.: 30 (mensal) ou 365 (anual)"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Tipo de Pagamento"/>
+				<p:selectOneMenu value="#{produtoBean.entidade.tipoPagamento}">
+					<f:selectItem itemLabel="Nenhum" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.opcoesTipoPagamento}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Perfil Usuário (concede)"/>
+				<p:selectOneMenu value="#{produtoBean.entidade.perfilUsuario}">
+					<f:selectItem itemLabel="Nenhum" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.opcoesPerfilUsuario}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Perfil Criador (concede)"/>
+				<p:selectOneMenu value="#{produtoBean.entidade.perfilCriador}">
+					<f:selectItem itemLabel="Nenhum" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.opcoesPerfilCriador}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-3">
+				<p:outputLabel for="@next" value="Perfil Avaliação (concede)"/>
+				<p:selectOneMenu value="#{produtoBean.entidade.perfilAvaliacao}">
+					<f:selectItem itemLabel="Nenhum" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.opcoesPerfilAvaliacao}" var="opcao"
+					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="ID Mercado Pago"/>
+				<p:inputText value="#{produtoBean.entidade.idMercadoPago}"
+				placeholder="preapproval_plan_id do Mercado Pago" maxlength="255"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Ativo"/>
+				<p:toggleSwitch class="toggleSwitch-form"
+				value="#{produtoBean.entidade.ativo}" />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="content-button">
+
+			<div class="divisor"></div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Remover" icon="pi pi-trash"
+					rendered="#{!produtoBean.cadastro}"
+					styleClass="ui-button-danger ui-button-flat"
+					action="#{produtoBean.remover}" update="@form, :growl"
+					process="@this">
+					<p:confirm header="Confirmação" icon="pi pi-info-circle"
+					message="Você tem certeza que deseja remover este Produto?" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</div>
+
+			<div class="flex gap-3 flex-wrap">
+
+				<p:commandButton value="Auditoria"
+					rendered="#{sessaoBean.podeVerAuditoria and !produtoBean.cadastro}"
+					styleClass="ui-button-flat ui-button-plain"
+					icon="fa-regular fa-eye"
+					action="#{auditoriaBean.carregar(produtoBean.entidade, produtoBean.nome)}"
+					update="dialog-auditoria"
+					process="@this" oncomplete="PF('dialogAuditoria').show()">
+				</p:commandButton>
+
+				<p:button value="Voltar"
+				styleClass="ui-button-outlined"
+				icon="pi pi-chevron-left" href="/administracao/usuarios/produto/list.xhtml" />
+
+				<p:commandButton id="adicionarCadastro" value="Adicionar"
+					rendered="#{produtoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-success"
+					icon="pi pi-plus"
+					action="#{produtoBean.adicionar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="adicionarCadastro" />
+				</p:commandButton>
+
+				<p:commandButton id="salvarCadastro" value="Salvar"
+					rendered="#{!produtoBean.cadastro}"
+					styleClass="ui-button-raised ui-button-primary"
+					icon="pi pi-check"
+					action="#{produtoBean.salvar(false)}" update="@form, :growl"
+					process="@form">
+						<p:defaultCommand target="salvarCadastro" />
+				</p:commandButton>
+
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:decorate>

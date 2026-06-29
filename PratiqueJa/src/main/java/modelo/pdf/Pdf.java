@@ -56,4 +56,7 @@ public class Pdf implements Serializable, Entidade
 	@Size(max = 511)
 	@AuditLabel(value = "descrição", genero = modelo.auditoria.GeneroGramatical.FEMININO)
 	private String descricao;
+	
+	@DiffIgnore
+	private int ordem;
 }

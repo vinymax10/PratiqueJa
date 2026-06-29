@@ -1,0 +1,165 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/inicio-page.css" type="text/css" />
+	</ui:define>
+
+	<div class="in-wrap">
+
+		<!-- ═══════════════════════ HERO — VISITANTE (deslogado) ═══════ -->
+		<h:panelGroup layout="block" styleClass="in-hero" rendered="#{!sessaoBean.logado}">
+			<span class="in-hero-badge"><i class="fa-solid fa-graduation-cap" /> Pratique Já</span>
+			<h1 class="in-hero-title">Aprenda e ensine <span>matemática</span> na prática</h1>
+			<p class="in-hero-desc">
+				Teoria objetiva, exercícios resolvidos passo a passo, banco de questões e geração de
+				posts para professores — tudo em um só lugar.
+			</p>
+			<div class="in-hero-actions">
+				<h:form id="formInicioLogin" style="margin:0">
+					<p:commandLink styleClass="in-btn in-btn--primary" resetValues="true"
+						update="formLogin" action="#{autenticacaoBean.init()}"
+						oncomplete="PF('loginWidget').show();return false;">
+						<i class="fa-brands fa-google" /> Entrar com Google
+					</p:commandLink>
+				</h:form>
+				<a href="/produtos/produtos.xhtml" class="in-btn in-btn--ghost">
+					<i class="fa-solid fa-store" /> Ver produtos
+				</a>
+			</div>
+		</h:panelGroup>
+
+		<!-- ═══════════════════════ HERO — USUÁRIO (logado) ═══════════ -->
+		<h:panelGroup layout="block" styleClass="in-hero" rendered="#{sessaoBean.logado}">
+			<span class="in-hero-badge"><i class="fa-solid fa-bolt" /> Seu painel</span>
+			<h1 class="in-hero-title">Olá, #{sessaoBean.usuario.firstNome}! 👋</h1>
+			<p class="in-hero-desc">
+				Bom te ver de volta. Continue praticando de onde parou ou escolha uma nova frente abaixo.
+			</p>
+
+			<h:panelGroup layout="block" styleClass="in-hero-stats" rendered="#{inicioBean.temProgresso}">
+				<h:panelGroup styleClass="in-chip in-chip--fire" rendered="#{inicioBean.streakDias > 0}">
+					<i class="fa-solid fa-fire" /> <b>#{inicioBean.streakDias}</b> dia#{inicioBean.streakDias != 1 ? 's' : ''} seguidos
+				</h:panelGroup>
+				<span class="in-chip">
+					<i class="pi pi-check-circle" /> <b>#{inicioBean.totalResolvidos}</b> exercício#{inicioBean.totalResolvidos != 1 ? 's' : ''} resolvido#{inicioBean.totalResolvidos != 1 ? 's' : ''}
+				</span>
+			</h:panelGroup>
+
+			<div class="in-hero-actions">
+				<a href="/matematica/painel.xhtml" class="in-btn in-btn--primary">
+					<i class="pi pi-play" /> Continuar praticando
+				</a>
+				<a href="/questao/questao.xhtml" class="in-btn in-btn--ghost">
+					<i class="pi pi-question-circle" /> Resolver questões
+				</a>
+			</div>
+		</h:panelGroup>
+
+		<!-- ═══════════════════════ CARDS DE AÇÃO ═════════════════════ -->
+		<div class="in-section-title"><i class="pi pi-th-large" /> O que você quer fazer?</div>
+
+		<div class="in-cards">
+
+			<a class="in-card" href="/matematica/painel.xhtml">
+				<span class="in-card-ico"><i class="fa-solid fa-calculator" /></span>
+				<span class="in-card-title">Praticar Matemática</span>
+				<span class="in-card-desc">Teoria + exercícios do básico ao avançado, com resolução passo a passo.</span>
+				<span class="in-card-cta">Começar <i class="pi pi-arrow-right" /></span>
+			</a>
+
+			<a class="in-card" href="/questao/questao.xhtml">
+				<span class="in-card-ico in-card-ico--green"><i class="pi pi-question-circle" /></span>
+				<span class="in-card-title">Resolver Questões</span>
+				<span class="in-card-desc">Banco de questões de provas e concursos, com gabarito e resolução.</span>
+				<span class="in-card-cta">Explorar <i class="pi pi-arrow-right" /></span>
+			</a>
+
+			<ui:fragment rendered="#{sessaoBean.logado}">
+				<a class="in-card" href="/avaliacao/list.xhtml">
+					<span class="in-card-ico in-card-ico--violet"><i class="pi pi-file-edit" /></span>
+					<span class="in-card-title">Criar Avaliação</span>
+					<span class="in-card-desc">Monte provas e listas personalizadas escolhendo assunto, nível e formato.</span>
+					<span class="in-card-cta">Montar <i class="pi pi-arrow-right" /></span>
+				</a>
+			</ui:fragment>
+
+			<ui:fragment rendered="#{sessaoBean.logado and sessaoBean.usuario.criador and sessaoBean.usuario.configPost != null}">
+				<a class="in-card" href="/post/configuracao.xhtml?configPost=#{sessaoBean.usuario.configPost.id}">
+					<span class="in-card-ico in-card-ico--pink"><i class="fa-brands fa-instagram" /></span>
+					<span class="in-card-title">Gerar Posts</span>
+					<span class="in-card-desc">Crie posts de Feed e Reels prontos para o Instagram a partir dos exercícios.</span>
+					<span class="in-card-cta">Criar <i class="pi pi-arrow-right" /></span>
+				</a>
+			</ui:fragment>
+
+			<a class="in-card" href="/produtos/produtos.xhtml">
+				<span class="in-card-ico in-card-ico--amber"><i class="fa-solid fa-store" /></span>
+				<span class="in-card-title">Produtos</span>
+				<span class="in-card-desc">Apostilas, planos de acesso e pacotes de avaliações e conteúdo.</span>
+				<span class="in-card-cta">Ver loja <i class="pi pi-arrow-right" /></span>
+			</a>
+
+		</div>
+
+		<ui:fragment rendered="#{!sessaoBean.logado}">
+			<div class="in-hint">
+				<i class="pi pi-info-circle" /> Faça login para criar avaliações e gerar posts para o Instagram.
+			</div>
+		</ui:fragment>
+
+		<!-- ═══════════════════════ COMECE POR AQUI (logado) ══════════ -->
+		<ui:fragment rendered="#{sessaoBean.logado}">
+			<div class="in-section-title"><i class="pi pi-compass" /> Comece por aqui</div>
+			<p class="in-section-sub">Sugestões de assuntos do módulo Básico para aquecer.</p>
+			<div class="in-rec">
+				<ui:repeat value="#{assuntoBean.getTodosAssuntos('Basico')}" var="assunto" varStatus="st">
+					<ui:fragment rendered="#{st.index lt 6}">
+						<a class="in-rec-card" href="#{assunto.endTeoria()}">
+							<img class="in-rec-thumb" src="#{assunto.endImageThumb()}" alt="#{assunto.nome}"
+								onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
+							<span class="in-rec-info">
+								<span class="in-rec-name">#{assunto.nome}</span>
+								<span class="in-rec-stars">
+									<i class="fa-solid fa-star #{assunto.numStar gt 0 ? '' : 'off'}" />
+									<i class="fa-solid fa-star #{assunto.numStar gt 1 ? '' : 'off'}" />
+									<i class="fa-solid fa-star #{assunto.numStar gt 2 ? '' : 'off'}" />
+									<i class="fa-solid fa-star #{assunto.numStar gt 3 ? '' : 'off'}" />
+									<i class="fa-solid fa-star #{assunto.numStar gt 4 ? '' : 'off'}" />
+								</span>
+							</span>
+						</a>
+					</ui:fragment>
+				</ui:repeat>
+			</div>
+		</ui:fragment>
+
+		<!-- ═══════════════════════ PROMO PRODUTOS (deslogado) ════════ -->
+		<ui:fragment rendered="#{!sessaoBean.logado}">
+			<div class="in-promo">
+				<div class="in-promo-text">
+					<h3>Apostilas e planos de acesso</h3>
+					<p>Material completo de matemática do básico ao avançado e planos para destravar todo o conteúdo e as ferramentas de professor.</p>
+				</div>
+				<a href="/produtos/produtos.xhtml" class="in-btn in-btn--primary">
+					<i class="fa-solid fa-store" /> Conhecer produtos
+				</a>
+			</div>
+		</ui:fragment>
+
+		<!-- ═══════════════════════ RODAPÉ ════════════════════════════ -->
+		<div class="in-foot">
+			<span>© Pratique Já</span>
+			<span class="in-foot-spacer"></span>
+			<a href="/informativo/fale-conosco.xhtml">Fale conosco</a>
+			<a href="/informativo/politica-de-privacidade.xhtml">Política de privacidade</a>
+			<a href="/produtos/produtos.xhtml">Produtos</a>
+		</div>
+
+	</div>
+
+</ui:decorate>

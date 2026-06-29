@@ -126,7 +126,7 @@ public class EnvioPostService
 	{
 		ConfigPost configPost = programacaoPost.getConfigPost();
 		Usuario usuario = configPost.getUsuario();
-		PerfilCriador perfilCriador = configPost.getPerfilCriador();
+		PerfilCriador perfilCriador = usuario.getPerfilCriador();
 		logger.fine("gerando conteudo para " + usuario.getNome()
 		+ "\n" + programacaoPost);
 
@@ -148,8 +148,8 @@ public class EnvioPostService
 			return;
 		}
 
-		ColorHolder.setCOLOR(configPost.getCorFonte());
-		ColorHolder.setFORMULA(configPost.getCorFormula());
+		ColorHolder.setCOLOR(ConfigPost.COR_FONTE);
+		ColorHolder.setFORMULA(ConfigPost.COR_FORMULA);
 
 		List<ExercicioPadrao> exerciciosDoDia = sortearExercicios(
 			programacaoPost.getAssunto().getExerciciosPadrao(), perfilCriador.getExerciciosPorDia());

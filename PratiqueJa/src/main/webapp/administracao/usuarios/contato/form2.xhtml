@@ -27,15 +27,14 @@
 
 					<!-- Avatar com imagem -->
 					<h:panelGroup layout="block" styleClass="fc-avatar"
-						rendered="#{not empty contatoBean.entidade.usuario.imagem}">
-						<p:graphicImage styleClass="fc-avatar-img"
-							value="#{contatoBean.entidade.usuario.imagem.getFotoStreamedContent()}"
-							stream="false" />
+						rendered="#{not empty contatoBean.entidade.usuario.foto}">
+						<h:graphicImage styleClass="fc-avatar-img"
+							value="#{contatoBean.entidade.usuario.foto.endereco}" />
 					</h:panelGroup>
 
 					<!-- Avatar placeholder sem imagem -->
 					<h:panelGroup layout="block" styleClass="fc-avatar-placeholder"
-						rendered="#{empty contatoBean.entidade.usuario.imagem}">
+						rendered="#{empty contatoBean.entidade.usuario.foto}">
 						<i class="pi pi-user"></i>
 					</h:panelGroup>
 

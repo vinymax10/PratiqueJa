@@ -162,24 +162,178 @@
 .pc-field-wide { grid-column: 1 / -1; }
 .pc-field { display: flex; flex-direction: column; gap: 7px; }
 
-/* Botões de alternância do teste (Aleatória/Específica, Padrão/Personalizada):
-   largura conforme o conteúdo, com mínimo e sem quebrar/espremer o texto quando
-   a tela diminui ou a fonte aumenta. */
-.pc-toggle-btn { display: block; }
-.pc-toggle-btn .ui-button {
-    width: auto;
-    min-width: 9rem;
-    white-space: nowrap;
+/* ── SEGMENTED CONTROL EM CARDS (toggles do teste) ────────────
+   Substitui os antigos selectBooleanButton por p:selectOneButton
+   layout="custom": cada opção é um card (ícone + título + tagline),
+   sempre visível, com destaque azul no selecionado. O grupo de
+   radios do PrimeFaces fica oculto (ui-helper-hidden-accessible) e
+   estes cards (role="radio") são casados por ordem com os selectItem. */
+.pc-seg2 { display: inline-flex; gap: 10px; flex-wrap: wrap; }
+.pc-seg2-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 104px;
+    padding: 11px 14px;
+    background: #fff;
+    border: 2px solid #e2e8f4;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .12s ease;
+    user-select: none;
 }
+.pc-seg2-opt:hover:not(.ui-state-active):not(.ui-state-disabled) {
+    border-color: #bfdbfe;
+    background: #f8fbff;
+    transform: translateY(-1px);
+}
+.pc-seg2-icon { font-size: 20px; color: #64748b; transition: color .18s ease; }
+.pc-seg2-title { font-size: 13.5px; font-weight: 700; color: #334155; }
+.pc-seg2-tag { font-size: 11px; color: #94a3b8; line-height: 1.2; }
 
-/* Tela grande: assunto, nível e alternativa do reel em uma única linha. */
-@media (min-width: 992px) {
-    .pc-fields--teste {
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) max-content;
-        align-items: start;
-    }
-    .pc-fields--teste .pc-field-wide { grid-column: auto; }
+/* Selecionado: borda + fundo azul claro + ícone/título azulados */
+.pc-seg2-opt.ui-state-active {
+    border-color: #2563eb;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, .15);
 }
+.pc-seg2-opt.ui-state-active .pc-seg2-icon { color: #2563eb; }
+.pc-seg2-opt.ui-state-active .pc-seg2-title { color: #1d4ed8; }
+
+/* Foco acessível (PrimeFaces adiciona ui-state-focus) */
+.pc-seg2-opt.ui-state-focus { outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, .18); }
+
+/* Desabilitado: esmaecido e não clicável */
+.pc-seg2-opt.ui-state-disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+
+
+/* Nível: 3 cards compactos sempre na mesma linha (título numa linha só) */
+.pc-seg2--nivel { gap: 8px; flex-wrap: nowrap; }
+.pc-seg2--nivel .pc-seg2-opt { min-width: 0; padding: 11px 8px; }
+.pc-seg2--nivel .pc-seg2-title { white-space: nowrap; }
+
+/* Variante com thumbnail para o Assunto: card horizontal (thumb + nome ao lado)
+   para ficar na mesma altura compacta dos demais cards (galeria que quebra linha) */
+.pc-seg2--assunto { gap: 12px; }
+.pc-seg2-opt--assunto {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 188px;
+    min-width: 0;
+    padding: 11px 14px;
+    gap: 10px;
+    text-align: left;
+}
+.pc-seg2-thumb {
+    width: 48px;
+    height: 48px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f1f5f9;
+    display: block;
+    flex-shrink: 0;
+}
+.pc-seg2-opt--assunto .pc-seg2-title {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 12.5px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+.pc-seg2-opt--assunto.ui-state-active .pc-seg2-thumb { box-shadow: 0 0 0 2px #2563eb; }
+
+/* Galeria de backgrounds: miniaturas selecionáveis em cards (substitui o antigo
+   selectOneMenu com imagem). Mesmo estilo de thumb do Assunto; rola se houver muitas. */
+.pc-seg2--bg {
+    gap: 12px;
+    max-height: 340px;
+    overflow-y: auto;
+    align-content: flex-start;
+    padding: 2px;
+}
+.pc-seg2-opt--bg { width: 100px; min-width: 0; padding: 6px; gap: 6px; }
+.pc-seg2-bg-thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f1f5f9;
+    display: block;
+}
+.pc-seg2--bg-reel .pc-seg2-bg-thumb { aspect-ratio: 9 / 16; }
+.pc-seg2-opt--bg .pc-seg2-title {
+    display: block;
+    max-width: 100%;
+    font-size: 11.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.pc-seg2-opt--bg.ui-state-active .pc-seg2-bg-thumb { box-shadow: 0 0 0 2px #2563eb; }
+
+/* Picker de Background: igual ao de Assunto — card selecionado (recolhido) +
+   galeria (expandida ao clicar em "Trocar"); ao escolher uma miniatura, recolhe. */
+.pc-bg-selected {
+    display: inline-flex;
+    align-self: flex-start;   /* não estica na coluna do .pc-field */
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #e2e8f4;
+    border-radius: 12px;
+    background: #fff;
+}
+.pc-bg-selected-thumb {
+    width: 48px; height: 48px; aspect-ratio: 1 / 1;
+    object-fit: cover; border-radius: 8px; background: #f1f5f9;
+    display: block; flex-shrink: 0;
+}
+.pc-bg-selected-thumb--reel { width: 40px; height: 71px; aspect-ratio: 9 / 16; }
+/* Sem background selecionado (ex.: teste antes de escolher): esconde a miniatura vazia */
+.pc-bg-selected-thumb:not([src]),
+.pc-bg-selected-thumb[src=""] { display: none; }
+.pc-bg-selected-name {
+    min-width: 0; max-width: 280px;
+    font-size: 13px; font-weight: 700; color: #334155;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pc-bg-opcoes { display: none; margin-top: 8px; }
+.pc-bg-picker.is-expanded .pc-bg-opcoes { display: block; }
+.pc-bg-picker.is-expanded .pc-bg-selected { display: none; }
+.pc-bg-opcoes-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 8px;
+}
+.pc-bg-hint { font-size: 12.5px; color: #64748b; font-weight: 600; }
+.pc-bg-trocar {
+    display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+    border: 1px solid #bfdbfe; background: #eff6ff; color: #1d4ed8;
+    border-radius: 8px; padding: 7px 13px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    transition: background .15s ease;
+}
+.pc-bg-trocar:hover { background: #dbeafe; }
+.pc-bg-fechar {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid #e2e8f4; background: #fff; color: #64748b;
+    border-radius: 8px; cursor: pointer;
+}
+.pc-bg-fechar:hover { background: #f1f5f9; }
+
+/* Wrapper "fantasma": funde os campos do formato (blocoFormato/Feed/Reel) no
+   mesmo grid .pc-fields dos Parâmetros do teste, sem criar caixa própria. */
+.pc-contents { display: contents; }
 
 .pc-label {
     display: flex;
@@ -203,6 +357,79 @@
     border-color: #2563eb !important;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
     outline: none !important;
+}
+
+/* ── SELECT PREMIUM (Assunto / Background) ────────────────────
+   Mesma altura (66px) e visual dos cards: rounded, borda e foco
+   azul iguais, ícone à esquerda e chevron limpo — para o dropdown
+   alinhar e combinar com os campos em cards. */
+.pc-field .ui-selectonemenu.pc-select {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;          /* estica para preencher a altura da célula (alinha o fundo com os cards) */
+    min-height: 48px;        /* piso quando está sozinho na linha (Background) */
+    padding: 0 6px 0 14px;
+    background: #fff;
+    border: 2px solid #e2e8f4;
+    border-radius: 12px;
+    box-shadow: none;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+.pc-field .ui-selectonemenu.pc-select:hover,
+.pc-field .ui-selectonemenu.pc-select.ui-state-hover { border-color: #bfdbfe; }
+.pc-field .ui-selectonemenu.pc-select.ui-state-focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+/* Ícone à esquerda (PrimeIcons) — por variante */
+.pc-select--book::before,
+.pc-select--img::before {
+    font-family: 'primeicons';
+    color: #2563eb;
+    font-size: 16px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.pc-select--book::before { content: "\e9ba"; } /* pi-book */
+.pc-select--img::before  { content: "\e972"; } /* pi-image */
+/* Texto do valor: ocupa o espaço, sem caixa própria, com reticências */
+.pc-select .ui-selectonemenu-label {
+    flex: 1 1 auto;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Chevron limpo no lugar do triângulo do tema */
+.pc-select .ui-selectonemenu-trigger {
+    border: 0 !important;
+    background: transparent !important;
+    width: 2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pc-select .ui-selectonemenu-trigger .ui-icon {
+    width: auto;
+    height: auto;
+    text-indent: 0;
+    overflow: visible;
+    background: none !important;
+    color: #2563eb;
+}
+.pc-select .ui-selectonemenu-trigger .ui-icon::before {
+    font-family: 'primeicons';
+    content: "\e902"; /* pi-chevron-down */
+    font-size: 13px;
 }
 
 /* ── CAMPO DE COR (swatch premium) ────────────────────────── */
@@ -637,3 +864,46 @@
 @media (max-width: 600px) {
     .pc-fields { grid-template-columns: 1fr; }
 }
+
+/* ── Dialog de créditos insuficientes ──────────────────────── */
+.av-dlg-cota .ui-dialog-content { padding: 0 !important; }
+.av-dlg-cota-inner { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; }
+.av-dlg-cota-head {
+    background: linear-gradient(135deg, #07142f 0%, #1e3a8a 60%, #2563eb 100%);
+    padding: 28px 24px 24px; text-align: center; position: relative;
+}
+.av-dlg-cota-icon-wrap {
+    width: 60px; height: 60px; background: rgba(255,255,255,.12); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;
+}
+.av-dlg-cota-icon-wrap .pi { font-size: 26px; color: #fbbf24; }
+.av-dlg-cota-titulo { color: #fff; font-size: 18px; font-weight: 700; margin: 0; letter-spacing: -.2px; }
+.av-dlg-cota-close {
+    position: absolute; top: 12px; right: 14px; background: rgba(255,255,255,.12);
+    border: none; color: rgba(255,255,255,.75); width: 30px; height: 30px;
+    border-radius: 50%; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; font-size: 13px; transition: background .15s, color .15s;
+}
+.av-dlg-cota-close:hover { background: rgba(255,255,255,.22); color: #fff; }
+.av-dlg-cota-body { padding: 24px 28px 8px; background: #fff; }
+.av-dlg-cota-msg { color: #4b5563; font-size: 14px; line-height: 1.7; text-align: center; margin: 0; }
+.av-dlg-cota-stats { display: flex; gap: 12px; justify-content: center; margin: 20px 0 0; }
+.av-dlg-cota-stat {
+    flex: 1; background: #f8faff; border: 1px solid #e0e7ff;
+    border-radius: 12px; padding: 12px 10px; text-align: center;
+}
+.av-dlg-cota-stat-label { font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+.av-dlg-cota-stat-value { font-size: 26px; font-weight: 800; color: #1e3a8a; line-height: 1; }
+.av-dlg-cota-footer {
+    display: flex; gap: 10px; padding: 20px 28px 24px;
+    background: #fff; justify-content: flex-end;
+}
+.av-dlg-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px;
+    border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;
+    text-decoration: none; border: none; transition: background .15s, color .15s, border-color .15s;
+}
+.av-dlg-btn--ghost { background: transparent; border: 1px solid #e5e7eb; color: #6b7280; }
+.av-dlg-btn--ghost:hover { background: #f3f4f6; color: #374151; }
+.av-dlg-btn--primary { background: #2563eb; color: #fff; }
+.av-dlg-btn--primary:hover { background: #1d4ed8; color: #fff; }

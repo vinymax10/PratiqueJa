@@ -14,6 +14,7 @@ import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.exercicio.ParagrafoResolucao;
+import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
 import pdf.util.Arquivo;
@@ -99,7 +100,7 @@ public class InstagramFeed
 
 		if(!background.exists())
 		{
-	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadraoFeed().getEndereco());
+	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadrao().getEndereco());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -117,7 +118,7 @@ public class InstagramFeed
 
 		if(!background.exists())
 		{
-	        File origem = new File(diretorio.getConfig().getEndereco() +programacaoPost.getBackgroundFeed().getEndImagem());
+	        File origem = new File(diretorio.getConfig().getEndereco() +programacaoPost.getBackground().getEndImagem());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -132,7 +133,7 @@ public class InstagramFeed
 	private void gerarImagem()
 	{
 		gravarLogo();
-		if(programacaoPost.isBasePadraoFeed())
+		if(programacaoPost.isBasePadrao())
 			gravarBackgroundPadrao();
 		else
 			gravarBackgroundEspecifico();
@@ -202,7 +203,7 @@ public class InstagramFeed
 		 +"paperheight=323.75px\r\n"
 		 +"}\r\n"
 		 +"\\usepackage{background}\r\n"
-		 +"\\backgroundsetup{scale=1,opacity="+programacaoPost.getConfigPost().getTransparenciaPorc()+",angle=0,contents={\\includegraphics[width=\\paperwidth]{background.png}}}\r\n"
+		 +"\\backgroundsetup{scale=1,opacity="+ConfigPost.TRANSPARENCIA+",angle=0,contents={\\includegraphics[width=\\paperwidth]{background.png}}}\r\n"
 		 +"\\usepackage{natbib}\r\n"
 		 +"\\usepackage{soul}\r\n"
 		 +"\\usepackage{setspace}\r\n"
@@ -227,9 +228,9 @@ public class InstagramFeed
 		 +"\\definecolor{laranja}{rgb}{0.87, 0.48, 0.25}\r\n"
 		 +"\\definecolor{verde}{rgb}{0, 0.54, 0.44}\r\n"
 		 +"\\definecolor{babypink}{rgb}{1, 0.42, 0.52} \r\n"
-		 +"\\definecolor{cinza}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorFonte())+"} \r\n"
-		 +"\\definecolor{iris}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorTitulo())+"} \r\n"
-		 +"\\definecolor{babyblue}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorNome())+"} \r\n"
+		 +"\\definecolor{cinza}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_FONTE)+"} \r\n"
+		 +"\\definecolor{iris}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_TITULO)+"} \r\n"
+		 +"\\definecolor{babyblue}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_NOME)+"} \r\n"
 		 +"\r\n"
 		 +"\\color{cinza} \r\n \r\n"
 		 +"\\newcommand{\\C}[1]{\\textcolor{cinza}{#1}}\r\n"
@@ -309,20 +310,17 @@ public class InstagramFeed
 	}
 
 	/**
-	 * \lineskip e \jot para o bloco de resolução. Para resoluções densas
-	 * (pt≤7), aperta o gap — caso contrário, 6pt × muitas linhas estoura.
-	 * Override de fonte mantém o gap padrão (não dá pra inferir pt).
+	 * \lineskip/\lineskiplimit/\jot da resolução escalados pela fonte (mesma proporção da
+	 * avaliação a 10pt: 0,6·pt / 0,2·pt / 0,8·pt) — funciona em qualquer tamanho, não só 10pt.
 	 */
 	private String espacamentoResolucao(String texto)
 	{
-		if(conta.getSizeFontTextLatex()!=null&&!conta.getSizeFontTextLatex().isBlank())
-			return "\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}";
-
-		int pt = ptConteudo(texto);
-		// Só aperta quando a fonte já caiu para o menor tier (6pt). Tiers ≥7pt
-		// mantêm 6pt para preservar espaço para \dfrac e matrizes.
-		int gap = pt <= 6 ? 3 : 6;
-		return "\\setlength{\\lineskip}{"+gap+"pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{"+gap+"pt}";
+		// Fonte custom (override manual): não dá p/ inferir o pt, usa um valor médio.
+		int pt = (conta.getSizeFontTextLatex()!=null && !conta.getSizeFontTextLatex().isBlank()) ? 9 : ptConteudo(texto);
+		int lineskip = Math.round(pt * 0.6f);
+		int limit = Math.round(pt * 0.2f);
+		int jot = Math.round(pt * 0.8f);
+		return "\\setlength{\\lineskip}{"+lineskip+"pt}\\setlength{\\lineskiplimit}{"+limit+"pt}\\setlength{\\jot}{"+jot+"pt}";
 	}
 
 	/** Número de linhas do conteúdo = 1 + quantidade de quebras LaTeX ("\\"). */
@@ -407,11 +405,15 @@ public class InstagramFeed
 		StringBuilder sb = new StringBuilder();
 		for(ParagrafoResolucao paragrafo : conta.getResolucaoParagrafos())
 		{
-			if(paragrafo.getTexto()==null || paragrafo.getTexto().isBlank())
+			String texto = paragrafo.getTexto();
+			if(texto==null || texto.isBlank())
 				continue;
+			// frações de display ficam grandes (\dfrac), mas no EXPOENTE mantém \frac (pequena):
+			// \dfrac num expoente fica enorme/feio (ex.: juros compostos (1+i)^{\frac{1}{12}}).
+			texto = texto.replace("\\frac", "\\dfrac").replace("^{\\dfrac", "^{\\frac");
 			if(sb.length()>0)
 				sb.append(" \\\\\r\n");
-			sb.append(escapar(paragrafo.getTexto()));
+			sb.append(escapar(texto));
 		}
 		return sb.toString();
 	}
@@ -430,19 +432,8 @@ public class InstagramFeed
 		            .replaceAll("(?<!\\\\)\\$", "\\\\\\$");
 	}
 
-	private String addSizeNome()
-	{
-		if(programacaoPost.getConfigPost().getNome().length()<=33)
-			return "\\normalsize";
-		else
-			return "\\small";
-	}
-
 	public void rodape(boolean resposta)
 	{
-		latex+="\\begin{flushright}\r\n"
-		+addSizeNome()+" \\BB{\\textbf{"+programacaoPost.getConfigPost().getNome()+"}}\r\n \\\\"
-		+"\\end{flushright}\r\n";
 	}
 
 	public void gerarPDF()
@@ -478,12 +469,12 @@ public class InstagramFeed
 	{
 		ProcessBuilder pb;
 		if(diretorio.getConfig().getSistemaOperacional()==SistemaOperacional.Linux)
-			pb= new ProcessBuilder("sudo", "pdftoppm","-png","-r","300",
+			pb= new ProcessBuilder("sudo", "pdftocairo","-png","-r","300",
 			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftoppm","-png","-r","300",
+			pb = new ProcessBuilder("pdftocairo","-png","-r","300",
 			diretorio.getConfig().getNome()+".pdf", diretorio.getConfig().getNome())
 	        .inheritIO()
 	        .directory(new File(diretorio.getEndereco()));

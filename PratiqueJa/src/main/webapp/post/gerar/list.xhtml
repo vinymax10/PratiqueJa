@@ -70,13 +70,18 @@
 			</p>
 		</div>
 		<div class="pc-hero-stats">
+			
+			<div class="pc-stat ">
+				<span class="pc-stat-label">Perfil</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.perfilCriador.nome}</strong>
+			</div>
 			<div class="pc-stat">
-				<span class="pc-stat-label">Plano</span>
-				<strong class="pc-stat-value">#{pedidoPostBean.descricaoPlano()}</strong>
+				<span class="pc-stat-label">Usados no mês</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
 			</div>
 			<div class="pc-stat pc-stat--green">
-				<span class="pc-stat-label">Lotes</span>
-				<strong class="pc-stat-value">#{pedidoPostBean.historico.size()}</strong>
+				<span class="pc-stat-label">Restantes</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
 			</div>
 		</div>
 	</div>
@@ -179,6 +184,43 @@
 
 		</div>
 
+		<!-- Dialog: créditos insuficientes -->
+		<p:dialog widgetVar="dlgCota" modal="true" closable="true" showHeader="false"
+			styleClass="av-dlg-cota" responsive="true" width="460">
+			<div class="av-dlg-cota-inner">
+				<div class="av-dlg-cota-head">
+					<div class="av-dlg-cota-icon-wrap">
+						<i class="pi pi-crown" />
+					</div>
+					<h3 class="av-dlg-cota-titulo">#{pedidoPostBean.dialogCotaTitulo}</h3>
+					<button type="button" class="av-dlg-cota-close" onclick="PF('dlgCota').hide()">
+						<i class="pi pi-times" />
+					</button>
+				</div>
+				<div class="av-dlg-cota-body">
+					<p class="av-dlg-cota-msg">#{pedidoPostBean.dialogCotaMensagem}</p>
+					<div class="av-dlg-cota-stats">
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Usados</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoPostBean.postsUsadosNoMes}</div>
+						</div>
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Disponíveis</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoPostBean.creditosDisponiveis()}</div>
+						</div>
+					</div>
+				</div>
+				<div class="av-dlg-cota-footer">
+					<button type="button" class="av-dlg-btn av-dlg-btn--ghost" onclick="PF('dlgCota').hide()">
+						Fechar
+					</button>
+					<a href="/produtos/conteudo/conteudo.xhtml" class="av-dlg-btn av-dlg-btn--primary">
+						<i class="pi pi-shopping-cart" /> Ver planos
+					</a>
+				</div>
+			</div>
+		</p:dialog>
+
 	</h:form>
 
 	<!-- ═══════════════════════════════ DIALOG: DETALHES DO LOTE -->
@@ -247,5 +289,7 @@
 		</h:form>
 
 	</p:dialog>
-
+	
+	<script>window.t2Bread = {main: 'Post', sub: 'Gerar'};</script>
+	
 </ui:decorate>

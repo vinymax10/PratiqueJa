@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.primefaces.PrimeFaces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +23,11 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
+import modelo.exercicio.Nivel;
+import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
-import modelo.publicacao.FormatoPedidoPost;
+import modelo.publicacao.FormatoPost;
+import modelo.publicacao.ImagemPost;
 import modelo.publicacao.ItemPedidoPost;
 import modelo.publicacao.PedidoPost;
 import modelo.publicacao.PerfilCriador;
@@ -55,11 +59,14 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private List<Assunto> assuntos;
 
-	/** Item em edição no modal (assunto + formato + quantidade). */
+	/** Item em edição (assunto + nível + formato + fundo + quantidade). */
 	private ItemPedidoPost item;
 
-	/** true = modal em modo de adição; false = edição de um item existente. */
+	/** true = formulário inline em modo de adição; false = edição de um item existente. */
 	private boolean cadastroItem = true;
+
+	/** true = o formulário inline de cadastro de item está aberto (substitui a lista). */
+	private boolean editandoItem = false;
 
 	/** Item da lista sendo editado (quando cadastroItem = false). */
 	private ItemPedidoPost itemOriginal;
@@ -67,8 +74,15 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private int postsUsadosNoMes;
 	private int postsUsadosTotal;
 
+	/** Dialog de créditos insuficientes — título e mensagem definidos em validar(). */
+	private String dialogCotaTitulo;
+	private String dialogCotaMensagem;
+
 	@Inject
 	private AssuntoDAO assuntoDAO;
+
+	@Inject
+	private ImagemPostBean imagemPostBean;
 
 	@Inject
 	private MontadorPostService montadorService;
@@ -167,29 +181,43 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private void novoItem()
 	{
 		item = new ItemPedidoPost();
-		item.setFormato(FormatoPedidoPost.AMBOS);
+		item.setFormato(FormatoPost.Feed);
 		item.setQuantidade(1);
+		// Já deixa um nível e um assunto selecionados para não adicionar item incompleto.
+		item.getNiveis().add(Nivel.Nivel1);
+		if(assuntos != null && !assuntos.isEmpty())
+			item.setAssunto(assuntos.get(0));
 	}
 
-	// ── Itens (modal) ─────────────────────────────────────────────────
+	// ── Itens (formulário inline) ─────────────────────────────────────
 
-	/** Abre o modal em modo de adição. */
+	/** Abre o formulário inline em modo de adição. */
 	public void cadastrarItem()
 	{
 		cadastroItem = true;
+		editandoItem = true;
 		itemOriginal = null;
 		novoItem();
 	}
 
-	/** Abre o modal em modo de edição, carregando uma cópia do item selecionado. */
+	/** Abre o formulário inline em modo de edição, carregando uma cópia do item selecionado. */
 	public void editarItem(ItemPedidoPost alvo)
 	{
 		cadastroItem = false;
+		editandoItem = true;
 		itemOriginal = alvo;
 		item = alvo.copia();
 	}
 
-	/** Confirma o modal: adiciona um novo item ou aplica a edição no item original. */
+	/** Fecha o formulário inline sem salvar. */
+	public void cancelarItem()
+	{
+		editandoItem = false;
+		itemOriginal = null;
+		novoItem();
+	}
+
+	/** Confirma: adiciona um novo item ou aplica a edição no item original, e fecha o formulário. */
 	public void salvarItem()
 	{
 		if(cadastroItem)
@@ -201,9 +229,19 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		else if(itemOriginal != null)
 		{
 			itemOriginal.setAssunto(item.getAssunto());
+			// mantém a mesma instância de coleção (evita problema do Hibernate com @ElementCollection)
+			itemOriginal.getNiveis().clear();
+			itemOriginal.getNiveis().addAll(item.getNiveis());
 			itemOriginal.setFormato(item.getFormato());
 			itemOriginal.setQuantidade(item.getQuantidade());
+			itemOriginal.setAlternativaReel(item.isAlternativaReel());
+			itemOriginal.setBackgroundAleatorio(item.isBackgroundAleatorio());
+			itemOriginal.setBasePadrao(item.isBasePadrao());
+			itemOriginal.setBackground(item.getBackground());
+			itemOriginal.setPadrao(item.getPadrao());
 		}
+		editandoItem = false;
+		itemOriginal = null;
 		novoItem();
 	}
 
@@ -288,48 +326,35 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 			return false;
 		}
 
-		if(usuario.getPerfil() == PerfilUsuario.Admin)
-			return true;
-
-		// Sem plano ativo: usa a cota grátis de teste (vitalícia), sem cartão.
-		if(isModoTrial())
+		int disponiveis = creditosDisponiveis();
+		if(total > disponiveis)
 		{
-			int trialRestante = trialRestante();
-			if(trialRestante <= 0)
-			{
-				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Seus " + LIMITE_TRIAL_GRATIS
-					+ " posts grátis acabaram. Assine um plano para continuar gerando conteúdo.");
-				return false;
-			}
-			if(total > trialRestante)
-			{
-				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Cota grátis insuficiente. Restam "
-					+ trialRestante + " posts de teste. Assine um plano para gerar mais.");
-				return false;
-			}
-			return true;
-		}
-
-		// Plano ativo: cota mensal = créditos do plano + rollover − usados no mês.
-		int restante = creditosRestantes();
-		if(total > restante)
-		{
-			String extra = usuario.getCreditoRolloverPost() > 0
-				? " (já incluído o crédito acumulado de " + usuario.getCreditoRolloverPost() + ")"
-				: "";
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Créditos insuficientes. Restam "
-				+ Math.max(0, restante) + " posts neste mês" + extra + ".");
+			abrirDialogCota(
+				disponiveis <= 0
+					? "Créditos esgotados"
+					: "Créditos insuficientes",
+				disponiveis <= 0
+					? "Você não tem posts disponíveis. Assine um plano para continuar gerando conteúdo."
+					: "Você solicitou mais posts do que o disponível. Você tem " + disponiveis + " post(s) disponível(is)."
+			);
 			return false;
 		}
 
 		return true;
 	}
 
-	/** Usuário em teste grátis: logado, fora do perfil Admin e sem plano de conteúdo ativo. */
+	private void abrirDialogCota(String titulo, String mensagem)
+	{
+		dialogCotaTitulo = titulo;
+		dialogCotaMensagem = mensagem;
+		PrimeFaces.current().executeScript("PF('dlgCota').show()");
+	}
+
+	/** Usuário em teste grátis: sem plano de conteúdo ativo. */
 	public boolean isModoTrial()
 	{
 		Usuario usuario = getUsuarioLogado();
-		if(usuario == null || usuario.getPerfil() == PerfilUsuario.Admin)
+		if(usuario == null)
 			return false;
 		return usuario.getValidadePlano() == null || usuario.getValidadePlano().isBefore(LocalDate.now());
 	}
@@ -479,8 +504,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private PerfilCriador planoAtual()
 	{
 		Usuario usuario = getUsuarioLogado();
-		ConfigPost configPost = usuario != null ? usuario.getConfigPost() : null;
-		return configPost != null ? configPost.getPerfilCriador() : PerfilCriador.Basico;
+		return usuario != null ? usuario.getPerfilCriador() : PerfilCriador.Basico;
 	}
 
 	public String getNomePlano()
@@ -505,6 +529,12 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		return cotaDisponivel() - postsUsadosNoMes;
 	}
 
+	/** Créditos disponíveis independente do modo (trial ou plano ativo). */
+	public int creditosDisponiveis()
+	{
+		return isModoTrial() ? trialRestante() : creditosRestantes();
+	}
+
 	public String descricaoPlano()
 	{
 		if(isModoTrial())
@@ -519,14 +549,61 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	// ── Selects ───────────────────────────────────────────────────────
 
-	public FormatoPedidoPost[] getFormatos()
+	public FormatoPost[] getFormatos()
 	{
-		return FormatoPedidoPost.values();
+		return FormatoPost.values();
 	}
 
 	public modelo.exercicio.Nivel[] getNiveis()
 	{
 		return modelo.exercicio.Nivel.values();
+	}
+
+	/** Qtd de imagens personalizadas do formato em edição (habilita a opção "Personalizada"). */
+	public int getQtdImagensPersonalizadas()
+	{
+		boolean feed = item != null && item.getFormato() == FormatoPost.Feed;
+		return imagemPostBean.imagemPost(feed).size();
+	}
+
+	/**
+	 * Em "Específica", garante que haja sempre uma imagem do pool atual selecionada
+	 * (evita adicionar item sem imagem). Em "Aleatória", a imagem é sorteada na geração.
+	 */
+	public void ajustarImagemFundo()
+	{
+		if(item == null || item.isBackgroundAleatorio())
+			return;
+
+		boolean feed = item.getFormato() == FormatoPost.Feed;
+		if(item.isBasePadrao())
+		{
+			if(item.getPadrao() == null)
+			{
+				List<Background> padroes = feed ? imagemPostBean.getImagensFeed() : imagemPostBean.getImagensReel();
+				if(padroes != null && !padroes.isEmpty())
+					item.setPadrao(padroes.get(0));
+			}
+		}
+		else
+		{
+			if(item.getBackground() == null)
+			{
+				List<ImagemPost> personalizadas = imagemPostBean.imagemPost(feed);
+				if(personalizadas != null && !personalizadas.isEmpty())
+					item.setBackground(personalizadas.get(0));
+			}
+		}
+	}
+
+	/** Ao trocar o formato, a imagem específica é de outro pool (Feed x Reel): limpa e re-seleciona. */
+	public void mudarFormatoItem()
+	{
+		if(item == null)
+			return;
+		item.setBackground(null);
+		item.setPadrao(null);
+		ajustarImagemFundo();
 	}
 
 	// ── Utilitários ───────────────────────────────────────────────────

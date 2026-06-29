@@ -1,21 +1,21 @@
 package bean.usuario;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.EnumSet;
 import java.util.List;
-
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import bean.PaiBean;
-import bean.publicacao.ConfigPostBean;
+import bean.download.Diretorio;
 import dao.usuario.UsuarioDAO;
 import filtro.usuario.FiltroUsuario;
 import infra.Graphics;
 import jakarta.annotation.PostConstruct;
+import service.configuracao.DiretorioService;
+import util.FileAux;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -26,7 +26,6 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.publicacao.ConfigPost;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
@@ -43,10 +42,10 @@ public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Us
 	private FiltroUsuario filtro;
 
 	@Inject
-	private ConfigPostBean configPostBean;
+	private UsuarioService usuarioService;
 
 	@Inject
-	private UsuarioService usuarioService;
+	private DiretorioService diretorioService;
 
 	private String senha;
 	private String confirmaSenha;
@@ -89,28 +88,28 @@ public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Us
 			entidade.setSenha(usuarioService.hashPassword(senha));
 	}
 
-	@Override
-	public void personalizarSalvar()
-	{
-		if(entidade.isCriador() && entidade.getConfigPost() == null)
-		{
-			ConfigPost configPost = configPostBean.cadastrar(entidade);
-			entidade.setConfigPost(configPost);
-		}
-	}
-
 	public void uploadFile(FileUploadEvent event)
 	{
-		UploadedFile file = event.getFile();
+		UploadedFile arquivo = event.getFile();
 		try
 		{
-			SerialBlob serialBlob = new SerialBlob(Graphics.shapeImage(file, 400, 400));
-			Imagem imagem = new Imagem();
-			imagem.setFile(serialBlob);
-			imagem.setEndereco(file.getFileName());
-			entidade.setImagem(imagem);
+			Diretorio diretorio = diretorioService.criarDiretorioSemReserva();
+			String endBase = diretorio.getConfig().getEndereco();
+			String endRel = "/images/usuario/" + entidade.getId() + "/";
+
+			Imagem foto = entidade.getFoto() != null ? entidade.getFoto() : new Imagem();
+			if(foto.getEndereco() != null)
+			{
+				File antigo = new File(endBase + foto.getEndereco());
+				if(antigo.exists())
+					antigo.delete();
+			}
+			byte[] bytes = Graphics.shapeImage(arquivo, 400, 400);
+			FileAux.gravarFile(endBase + endRel, arquivo.getFileName(), bytes);
+			foto.setEndereco(endRel + arquivo.getFileName());
+			entidade.setFoto(foto);
 		}
-		catch(SQLException | IOException e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}

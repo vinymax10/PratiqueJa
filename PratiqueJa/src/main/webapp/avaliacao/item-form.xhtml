@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!-- Formulário de assunto (inline, largura total) — substitui a lista enquanto aberto. -->
+	<h:panelGroup layout="block" styleClass="pc-item-form">
+
+		<div class="pc-fields">
+
+			<!-- Assunto: card selecionado + "Trocar" abre a galeria (busca, rolável); ao escolher, fecha. -->
+			<h:panelGroup styleClass="pc-field pc-field-wide pc-assunto-picker" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Assunto" />
+
+				<!-- Estado recolhido: só o assunto selecionado -->
+				<div class="pc-assunto-selected">
+					<img class="pc-seg2-thumb" src="#{itemPedidoAvaliacaoBean.entidade.assunto.endImageThumb()}"
+						alt="#{itemPedidoAvaliacaoBean.entidade.assunto.nome}"
+						onerror="this.onerror=null;this.src='#{itemPedidoAvaliacaoBean.entidade.assunto.endImageCapa()}';" />
+					<span class="pc-seg2-title">#{itemPedidoAvaliacaoBean.entidade.assunto.nome}</span>
+					<button type="button" class="pc-assunto-trocar" onclick="pcAbrirAssuntos(this)">
+						<i class="pi pi-pencil" /> Trocar
+					</button>
+				</div>
+
+				<!-- Estado expandido: galeria de escolha (oculta por padrão) -->
+				<div class="pc-assunto-opcoes">
+					<div class="pc-assunto-opcoes-head">
+						<input type="text" class="pc-assunto-filtro" placeholder="Filtrar assunto..."
+							autocomplete="off" onkeyup="pcFiltrarAssuntos(this)" />
+						<button type="button" class="pc-assunto-fechar" title="Fechar" onclick="pcFecharAssuntos(this)">
+							<i class="pi pi-times" />
+						</button>
+					</div>
+					<div class="pc-seg2 pc-seg2--assunto">
+						<p:selectOneButton value="#{itemPedidoAvaliacaoBean.entidade.assunto}"
+							layout="custom" unselectable="false" required="true"
+							requiredMessage="Selecione um assunto." converter="generic">
+							<f:selectItems value="#{pedidoAvaliacaoBean.assuntos}" var="assunto"
+								itemValue="#{assunto}" itemLabel="#{assunto.nome}" />
+						</p:selectOneButton>
+						<ui:repeat value="#{pedidoAvaliacaoBean.assuntos}" var="assunto">
+							<div class="pc-seg2-opt pc-seg2-opt--assunto #{assunto == itemPedidoAvaliacaoBean.entidade.assunto ? 'ui-state-active' : ''}"
+								role="radio" tabindex="0" onclick="pcEscolherAssunto(this)">
+								<img class="pc-seg2-thumb" src="#{assunto.endImageThumb()}" alt="#{assunto.nome}"
+									onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
+								<span class="pc-seg2-title">#{assunto.nome}</span>
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
+			</h:panelGroup>
+
+			<!-- Nível (seleção única) -->
+			<h:panelGroup styleClass="pc-field" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Nível" />
+				<div class="pc-seg2 pc-seg2--nivel">
+					<p:selectOneButton value="#{itemPedidoAvaliacaoBean.entidade.nivel}" layout="custom"
+						unselectable="false" required="true" requiredMessage="Selecione o nível.">
+						<f:selectItems value="#{pedidoAvaliacaoBean.niveis}" var="opcao"
+							itemValue="#{opcao}" itemLabel="#{opcao.nome}" />
+					</p:selectOneButton>
+					<ui:repeat value="#{pedidoAvaliacaoBean.niveis}" var="opcao" varStatus="st">
+						<div class="pc-seg2-opt #{opcao == itemPedidoAvaliacaoBean.entidade.nivel ? 'ui-state-active' : ''}"
+							role="radio" tabindex="0">
+							<i class="pi pi-gauge pc-seg2-icon"></i>
+							<span class="pc-seg2-title">#{opcao.nome}</span>
+							<span class="pc-seg2-tag">#{st.index == 0 ? 'Fácil' : (st.index == 1 ? 'Médio' : 'Difícil')}</span>
+						</div>
+					</ui:repeat>
+				</div>
+			</h:panelGroup>
+
+			<!-- Tipo de questão -->
+			<h:panelGroup styleClass="pc-field" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Tipo de questão" />
+				<div class="pc-seg2">
+					<p:selectOneButton value="#{itemPedidoAvaliacaoBean.entidade.formato}" layout="custom"
+						unselectable="false" required="true" requiredMessage="Selecione o tipo de questão.">
+						<f:selectItems value="#{pedidoAvaliacaoBean.formatosAvaliacao}" var="fmt"
+							itemValue="#{fmt}" itemLabel="#{fmt.nome}" />
+					</p:selectOneButton>
+					<div class="pc-seg2-opt #{itemPedidoAvaliacaoBean.entidade.formato == 'ALTERNATIVAS' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<i class="pi pi-list-check pc-seg2-icon"></i>
+						<span class="pc-seg2-title">Com Alternativas</span>
+						<span class="pc-seg2-tag">Múltipla escolha</span>
+					</div>
+					<div class="pc-seg2-opt #{itemPedidoAvaliacaoBean.entidade.formato == 'DISCURSIVA' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<i class="pi pi-align-left pc-seg2-icon"></i>
+						<span class="pc-seg2-title">Discursiva</span>
+						<span class="pc-seg2-tag">Resposta aberta</span>
+					</div>
+				</div>
+			</h:panelGroup>
+
+			<!-- Exercícios -->
+			<h:panelGroup styleClass="pc-field" layout="block">
+				<p:outputLabel styleClass="pc-label" for="@next" value="Quantidade de exercícios" />
+				<p:inputNumber minValue="1" maxValue="100" decimalPlaces="0"
+					value="#{itemPedidoAvaliacaoBean.entidade.quantidade}"
+					required="true" requiredMessage="Informe a quantidade de exercícios." />
+			</h:panelGroup>
+
+		</div>
+
+		<div class="av-actions av-actions--split" style="margin-top:18px;">
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				styleClass="ui-button-flat ui-button-plain"
+				action="#{itemPedidoAvaliacaoBean.cancelarItem}"
+				update="form:painelConteudo" process="@this" />
+
+			<p:commandButton id="btnAdicionarItemInline"
+				value="Adicionar" icon="pi pi-check"
+				rendered="#{itemPedidoAvaliacaoBean.cadastro}"
+				styleClass="ui-button-raised ui-button-success"
+				action="#{itemPedidoAvaliacaoBean.adicionar}"
+				update="form:painelConteudo :growl" process="@form" />
+			<p:commandButton id="btnSalvarItemInline"
+				value="Salvar" icon="pi pi-check"
+				rendered="#{!itemPedidoAvaliacaoBean.cadastro}"
+				styleClass="ui-button-raised btn-primary"
+				action="#{itemPedidoAvaliacaoBean.salvar}"
+				update="form:painelConteudo :growl" process="@form" />
+		</div>
+
+	</h:panelGroup>
+
+</ui:composition>

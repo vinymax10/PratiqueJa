@@ -24,6 +24,18 @@ public class PdfDAO extends DAO<Pdf>
 		super(Pdf.class);
 	}
 
+	public int contarPdfs(Assunto assunto)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> query = builder.createQuery(Long.class);
+		Root<Pdf> from = query.from(Pdf.class);
+
+		query.select(builder.count(from))
+			.where(builder.equal(from.<Assunto>get("assunto").get("id"), assunto.getId()));
+
+		return em.createQuery(query).getSingleResult().intValue();
+	}
+
 	public List<Pdf> buscar(FiltroPdf filtro)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();

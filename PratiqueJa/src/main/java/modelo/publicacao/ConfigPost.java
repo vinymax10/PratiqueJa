@@ -35,36 +35,18 @@ public class ConfigPost implements Serializable, Entidade
 {
 	private static final long serialVersionUID = 1L;
 
+	// Cores e transparência fixas (antes configuráveis no ConfigPost; agora constantes).
+	public static final String COR_FONTE   = "#4d4d4d";
+	public static final String COR_TITULO  = "#4059e3";
+	public static final String COR_NOME    = "#4d4d4d";
+	public static final String COR_FORMULA = "#4059e3";
+	public static final double TRANSPARENCIA = 0.15;
+
 	@DiffIgnore
 	@Id
 	@GeneratedValue
 	@EqualsAndHashCode.Include
 	private Long id;
-
-	@Column(length = 255)
-	@Size(max = 255)
-	@AuditLabel(value = "nome", atributo = "nome")
-	private String nome;
-
-	@Column(length = 255)
-	@Size(max = 255)
-	@AuditLabel(value = "cor da fonte", genero = GeneroGramatical.FEMININO)
-	private String corFonte;
-
-	@Column(length = 255)
-	@Size(max = 255)
-	@AuditLabel(value = "cor do título")
-	private String corTitulo;
-
-	@Column(length = 255)
-	@Size(max = 255)
-	@AuditLabel(value = "cor do nome")
-	private String corNome;
-
-	@Column(length = 255)
-	@Size(max = 255)
-	@AuditLabel(value = "cor da fórmula", genero = GeneroGramatical.FEMININO)
-	private String corFormula;
 
 	@Column(length = 4096)
 	@Size(max = 4096)
@@ -80,13 +62,6 @@ public class ConfigPost implements Serializable, Entidade
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "finalidade do CTA", genero = GeneroGramatical.FEMININO)
 	private FinalidadeCta finalidadeCta = FinalidadeCta.Ensino;
-
-	@Enumerated(EnumType.STRING)
-	@AuditLabel(value = "perfil do criador")
-	private PerfilCriador perfilCriador = PerfilCriador.Basico;
-
-	@AuditLabel(value = "transparência", genero = GeneroGramatical.FEMININO)
-	private int transparencia;
 
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "configPost")
@@ -126,16 +101,6 @@ public class ConfigPost implements Serializable, Entidade
 	@OrderBy("ordem")
 	private List<ProgramacaoPost> programacoesPost = new ArrayList<ProgramacaoPost>();
 
-	public void setNome(String nome)
-	{
-		this.nome = nome.trim();
-	}
-
-	public double getTransparenciaPorc()
-	{
-		return (double) transparencia / 100;
-	}
-
 	public boolean podeGerar()
 	{
 		if(!ativo)
@@ -145,9 +110,6 @@ public class ConfigPost implements Serializable, Entidade
 			return false;
 
 		if(logo == null)
-			return false;
-
-		if(nome == null)
 			return false;
 
 		return true;

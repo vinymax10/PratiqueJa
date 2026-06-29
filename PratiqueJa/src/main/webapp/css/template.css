@@ -70,33 +70,53 @@
 	gap: 8px;
 }
 
-/* ---- CTA "Produtos" na topbar (vitrine / destaque de conversão) ---- */
+/* ---- Botão Login / nome do usuário na topbar (azul sólido, igual ao "Ações" de /avaliacao/list) ---- */
+/* commandButton: classe vai direto no <button>; menuButton: classe vai no container, .ui-button é filho */
+.t2-btn-login.ui-button,
+.t2-btn-login .ui-button {
+	background: #2563eb !important;
+	border-color: #2563eb !important;
+	color: #fff !important;
+}
+.t2-btn-login.ui-button:hover,
+.t2-btn-login.ui-button:focus,
+.t2-btn-login .ui-button:hover,
+.t2-btn-login .ui-button:focus {
+	background: #1d4ed8 !important;
+	border-color: #1d4ed8 !important;
+	color: #fff !important;
+}
+.t2-btn-login .ui-button .ui-icon,
+.t2-btn-login .ui-button .ui-button-text,
+.t2-btn-login .ui-button .ui-menubutton-text { color: #fff !important; }
+
+/* ---- Link "Produtos" na topbar (discreto, acesso secundário) ---- */
 .t2-cta-produtos {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
+	gap: 6px;
 	height: 38px;
-	padding: 0 16px;
-	border-radius: 10px;
-	background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-	color: #fff;
-	font-weight: 700;
-	font-size: 14px;
+	padding: 0 12px;
+	border-radius: 8px;
+	background: transparent;
+	border: 1px solid #e5e7eb;
+	color: #9ca3af;
+	font-weight: 400;
+	font-size: 13px;
 	text-decoration: none;
 	white-space: nowrap;
-	box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
-	transition: transform 0.15s, box-shadow 0.15s;
+	transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .t2-cta-produtos:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 4px 12px rgba(37, 99, 235, 0.45);
-	color: #fff;
+	background: #f3f4f6;
+	border-color: #d1d5db;
+	color: #374151;
 }
-.t2-cta-produtos i { font-size: 14px; }
+.t2-cta-produtos i { font-size: 13px; }
 
 @media (max-width: 600px) {
 	.t2-cta-produtos .t2-cta-text { display: none; }
-	.t2-cta-produtos { padding: 0 12px; }
+	.t2-cta-produtos { padding: 0 10px; }
 }
 
 /* ---- LAYOUT DA PÁGINA (abaixo do topbar) ---- */

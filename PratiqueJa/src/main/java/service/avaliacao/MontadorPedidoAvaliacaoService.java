@@ -14,6 +14,8 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
@@ -25,12 +27,14 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import dao.avaliacao.PedidoAvaliacaoDAO;
 import dao.configuracao.ConfigDAO;
+import modelo.DocumentoFile;
 import modelo.avaliacao.FormatoSaida;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.PosicaoGabarito;
 import modelo.avaliacao.StatusPedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
 import modelo.configuracao.Config;
+import service.email.EmailService;
 
 /**
  * Orquestra a geração assíncrona de todas as avaliações de um PedidoAvaliacao.
@@ -51,6 +55,9 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 
 	@Inject
 	private ConfigDAO configDAO;
+
+	@Inject
+	private EmailService emailService;
 
 	@Asynchronous
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -73,9 +80,14 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			boolean comGabaritoIndividual =
 				pedido.getPosicaoGabarito() == PosicaoGabarito.APOS_CADA_AVALIACAO;
 
-			// Bytes da logo da escola lidos em transação (o gerador roda sem transação e não conseguiria
-			// ler o LOB). null quando o usuário não é Profissional/Master ou não enviou logo.
-			byte[] logoEscolaBytes = pedidoAvaliacaoDAO.buscarLogoEscolaBytes(pedidoId);
+			String logoEscolaEndRel = pedidoAvaliacaoDAO.buscarLogoEscolaEndereco(pedidoId);
+			byte[] logoEscolaBytes = null;
+			if(logoEscolaEndRel != null)
+			{
+				Path logoPath = Path.of(config.getEndereco() + logoEscolaEndRel);
+				if(Files.exists(logoPath))
+					logoEscolaBytes = Files.readAllBytes(logoPath);
+			}
 
 			int total = pedido.getQuantidade();
 			List<byte[]> pdfsAvaliacao = new ArrayList<>(total);
@@ -194,6 +206,97 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			}
 		}
 		return saida.toByteArray();
+	}
+
+	// ── Envio por e-mail ──────────────────────────────────────────────
+
+	/** Envia (ou reenvia) por e-mail o arquivo de um pedido já gerado, lido do disco. */
+	public void reenviarPorEmail(Long pedidoId)
+	{
+		PedidoAvaliacao pedido = pedidoAvaliacaoDAO.carrega(pedidoId);
+		if (pedido == null || pedido.getCaminhoArquivo() == null)
+			return;
+		try
+		{
+			byte[] bytes = Files.readAllBytes(Path.of(pedido.getCaminhoArquivo()));
+			enviarPorEmail(pedido, pedido.getNomeDownload(), bytes);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/** Enfileira o e-mail com o arquivo anexado para o dono do pedido. Falha não derruba o fluxo. */
+	private void enviarPorEmail(PedidoAvaliacao pedido, String nomeDownload, byte[] bytes)
+	{
+		try
+		{
+			String email = pedido.getUsuario() != null ? pedido.getUsuario().getEmail() : null;
+			if (email == null || email.isBlank())
+				return;
+
+			DocumentoFile anexo = new DocumentoFile();
+			anexo.setFile(new SerialBlob(bytes));
+			anexo.setEndDocumentacao(nomeDownload);
+
+			String nome = pedido.getUsuario().getFirstNome();
+			String html = montarHtmlAvaliacao(nome, pedido.getCodigoBatch(), pedido.getTitulo(),
+				pedido.getQuantidade(), nomeDownload);
+
+			emailService.adicionar(email, "Sua avaliação do Pratique Já está pronta", html, List.of(anexo));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Corpo HTML do e-mail da avaliação (arquivo anexado), no mesmo padrão visual dos demais
+	 * e-mails do Pratique Já. Inicia com "&lt;" para o e-mail ser reconhecido como HTML.
+	 */
+	private String montarHtmlAvaliacao(String nome, String codigo, String titulo, int quantidade,
+		String nomeDownload)
+	{
+		nome = escapeHtml(nome);
+		String cod = escapeHtml(codigo);
+		String tit = titulo != null && !titulo.isBlank() ? escapeHtml(titulo) : "Avaliação";
+		boolean zip = nomeDownload != null && nomeDownload.toLowerCase().endsWith(".zip");
+		String formato = zip ? "ZIP" : "PDF";
+		String qtd = quantidade + " avaliaç" + (quantidade != 1 ? "ões" : "ão");
+
+		return "<!DOCTYPE html><html><body style=\"margin:0;padding:0;background:#eef1f8;\">"
+		+ "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#eef1f8;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;\"><tr><td align=\"center\">"
+		+ "<table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f4;\">"
+		+ "<tr><td style=\"padding:20px 28px;border-bottom:3px solid #2563eb;\">"
+		+ "<span style=\"font-size:22px;font-weight:bold;color:#2563eb;\">Pratique<span style=\"color:#de7b40;\">Já</span></span>"
+		+ "<span style=\"font-size:12px;color:#8a93a6;float:right;padding-top:9px;\">Confecção de Avaliações</span>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:26px 28px 6px;\">"
+		+ "<p style=\"margin:0 0 6px;font-size:17px;color:#2b3445;\">Olá, <b>" + nome + "</b>! 👋</p>"
+		+ "<p style=\"margin:0 0 16px;font-size:14px;color:#6b7689;line-height:1.5;\">Sua avaliação está pronta! O arquivo com a" + (quantidade != 1 ? "s provas e os gabaritos" : " prova e o gabarito") + " está anexado a este e-mail.</p>"
+		+ "<span style=\"display:inline-block;background:#e7edfd;color:#2563eb;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:bold;margin:0 6px 6px 0;\">Código " + cod + "</span>"
+		+ "<span style=\"display:inline-block;background:#fceee4;color:#de7b40;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:bold;margin:0 0 6px;\">" + qtd + "</span>"
+		+ "</td></tr>"
+		+ "<tr><td align=\"center\" style=\"padding:14px 28px 6px;\">"
+		+ "<div style=\"background:#f6f8fc;border:1px dashed #c2cce0;border-radius:12px;padding:22px 18px;\">"
+		+ "<div style=\"font-size:34px;line-height:1;margin-bottom:8px;\">📄</div>"
+		+ "<p style=\"margin:0;font-size:15px;font-weight:bold;color:#2b3445;\">" + tit + "</p>"
+		+ "<p style=\"margin:6px 0 0;font-size:13px;color:#6b7689;line-height:1.5;\">Baixe o arquivo <b>." + formato.toLowerCase() + "</b> anexo para imprimir e aplicar.</p>"
+		+ "</div>"
+		+ "</td></tr>"
+		+ "<tr><td style=\"padding:18px 28px 28px;\">"
+		+ "<p style=\"margin:0;font-size:12px;color:#8a93a6;line-height:1.6;\">Este e-mail foi enviado automaticamente pelo Pratique Já. Se você não solicitou esta avaliação, basta ignorá-lo.</p>"
+		+ "</td></tr>"
+		+ "</table></td></tr></table></body></html>";
+	}
+
+	private String escapeHtml(String texto)
+	{
+		if (texto == null)
+			return "";
+		return texto.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
 	}
 
 	// ── Utilitários ───────────────────────────────────────────────────

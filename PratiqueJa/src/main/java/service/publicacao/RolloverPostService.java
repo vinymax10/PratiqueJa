@@ -39,7 +39,7 @@ public class RolloverPostService
 
 		for(Usuario usuario : usuarioDAO.listarCriadores())
 		{
-			PerfilCriador perfil = usuario.getConfigPost().getPerfilCriador();
+			PerfilCriador perfil = usuario.getPerfilCriador();
 			boolean planoAtivo = usuario.getValidadePlano() == null
 				|| !usuario.getValidadePlano().isBefore(hoje);
 

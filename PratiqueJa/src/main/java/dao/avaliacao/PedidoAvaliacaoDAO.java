@@ -1,15 +1,12 @@
 package dao.avaliacao;
 
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import dao.DAO;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import modelo.avaliacao.PedidoAvaliacao;
-import modelo.avaliacao.PlanoAvaliacao;
+import modelo.avaliacao.PerfilAvaliacao;
 import modelo.usuario.Usuario;
 
 public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
@@ -40,7 +37,8 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 
 		TypedQuery<Long> q = em.createQuery(
 			"SELECT SUM(p.quantidade) FROM PedidoAvaliacao p " +
-			"WHERE p.usuario.id = :usuarioId AND p.dataSolicitacao >= :inicio AND p.dataSolicitacao < :fim",
+			"WHERE p.usuario.id = :usuarioId AND p.status <> modelo.avaliacao.StatusPedidoAvaliacao.RASCUNHO " +
+			"AND p.dataSolicitacao >= :inicio AND p.dataSolicitacao < :fim",
 			Long.class);
 		q.setParameter("usuarioId", usuario.getId());
 		q.setParameter("inicio", inicio);
@@ -56,7 +54,8 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 			return 0;
 
 		TypedQuery<Long> q = em.createQuery(
-			"SELECT SUM(p.quantidade) FROM PedidoAvaliacao p WHERE p.usuario.id = :usuarioId",
+			"SELECT SUM(p.quantidade) FROM PedidoAvaliacao p WHERE p.usuario.id = :usuarioId " +
+			"AND p.status <> modelo.avaliacao.StatusPedidoAvaliacao.RASCUNHO",
 			Long.class);
 		q.setParameter("usuarioId", usuario.getId());
 		Long result = q.getSingleResult();
@@ -72,16 +71,12 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 		return q.getResultList();
 	}
 
-	/**
-	 * Lê os bytes da logo da escola do dono do pedido, dentro de uma transação (o LOB só pode ser
-	 * lido com a conexão aberta). Devolve null se o usuário não é Profissional/Master ou não tem logo.
-	 * Usado pela geração assíncrona do PDF, que roda sem transação.
-	 */
-	@Transactional
-	public byte[] buscarLogoEscolaBytes(Long pedidoId)
+	/** Retorna o endereco relativo da logo da escola do dono do pedido, ou null se não existe ou o
+	 *  plano não permite (restrição aos planos Profissional e Master). */
+	public String buscarLogoEscolaEndereco(Long pedidoId)
 	{
 		List<Object[]> linhas = em.createQuery(
-			"SELECT u.planoAvaliacao, l.file FROM PedidoAvaliacao p " +
+			"SELECT u.perfilAvaliacao, l.endereco FROM PedidoAvaliacao p " +
 			"JOIN p.usuario u JOIN u.configAvaliacao c JOIN c.logoEscola l WHERE p.id = :pedidoId",
 			Object[].class)
 			.setParameter("pedidoId", pedidoId)
@@ -90,22 +85,10 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 		if(linhas.isEmpty())
 			return null;
 
-		PlanoAvaliacao plano = (PlanoAvaliacao) linhas.get(0)[0];
-		if(plano != PlanoAvaliacao.PROFISSIONAL && plano != PlanoAvaliacao.MASTER)
+		PerfilAvaliacao plano = (PerfilAvaliacao) linhas.get(0)[0];
+		if(plano != PerfilAvaliacao.Profissional && plano != PerfilAvaliacao.Master)
 			return null;
 
-		Blob blob = (Blob) linhas.get(0)[1];
-		if(blob == null)
-			return null;
-
-		try
-		{
-			return blob.getBytes(1, (int) blob.length());
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-			return null;
-		}
+		return (String) linhas.get(0)[1];
 	}
 }

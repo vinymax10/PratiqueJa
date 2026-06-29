@@ -18,15 +18,7 @@ public class FiltroAssunto implements Serializable
 
 	private String assunto;
 
-	private Boolean habilidado;
-
-	private Boolean showAula;
-
-	private Boolean showAnotacao;
-
-	private Boolean showExercicio;
-
-	private Boolean showQuestao;
+	private Boolean mostrarTesteConteudo;
 
 	public void limpar()
 	{
@@ -34,10 +26,6 @@ public class FiltroAssunto implements Serializable
 		chave = "";
 		modulo = null;
 		assunto = "";
-		showAula = null;
-		showAnotacao = null;
-		showExercicio = null;
-		showQuestao = null;
-		habilidado = null;
+		mostrarTesteConteudo = null;
 	}
 }

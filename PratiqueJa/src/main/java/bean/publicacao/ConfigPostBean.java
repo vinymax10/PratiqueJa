@@ -14,6 +14,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import dao.publicacao.ConfigPostDAO;
+import dao.usuario.UsuarioDAO;
 import lombok.Data;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ImagemPost;
@@ -41,6 +42,9 @@ public class ConfigPostBean implements Serializable
 
 	@Inject
 	private ConfigPostDAO configPostDAO;
+
+	@Inject
+	private UsuarioDAO usuarioDAO;
 
 	@Inject
 	private ProgramacaoPostService programacaoPostService;
@@ -79,6 +83,7 @@ public class ConfigPostBean implements Serializable
 	{
 		try
 		{
+			usuarioDAO.salvar(configPost.getUsuario());
 			configPost = configPostDAO.salvar(configPost);
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " salvo com sucesso.");
 		}
@@ -128,12 +133,6 @@ public class ConfigPostBean implements Serializable
 
 	public String configDefault()
 	{
-		configPost.setCorFonte("#4D4D4D");
-		configPost.setCorTitulo("#4059E3");
-		configPost.setCorNome("#4D4D4D");
-		configPost.setCorFormula("#4059E3");
-
-		configPost.setTransparencia(15);
 		configPost = configPostDAO.salvar(configPost);
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Restauração da configuração default realizado com sucesso.");
 

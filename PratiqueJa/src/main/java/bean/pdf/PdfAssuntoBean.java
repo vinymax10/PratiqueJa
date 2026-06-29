@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -46,6 +47,9 @@ public class PdfAssuntoBean implements Serializable
 		FiltroPdf filtro = new FiltroPdf();
 		filtro.setAssunto(assunto);
 		pdfs = pdfDAO.buscar(filtro);
+		pdfs.sort(Comparator
+			.comparingInt((Pdf p) -> p.getTipo() != null ? p.getTipo().getOrdem() : 99)
+			.thenComparingInt(Pdf::getOrdem));
 	}
 
 	public StreamedContent download(Pdf pdf)

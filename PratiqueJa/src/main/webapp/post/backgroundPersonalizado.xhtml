@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -28,13 +28,18 @@
 			</p>
 		</div>
 		<div class="pc-hero-stats">
+			
+			<div class="pc-stat ">
+				<span class="pc-stat-label">Perfil</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.perfilCriador.nome}</strong>
+			</div>
 			<div class="pc-stat">
-				<span class="pc-stat-label">Usuário</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.nome}</strong>
+				<span class="pc-stat-label">Usados no mês</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
 			</div>
 			<div class="pc-stat pc-stat--green">
-				<span class="pc-stat-label">Perfil</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.perfilCriador.nome}</strong>
+				<span class="pc-stat-label">Restantes</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
 			</div>
 		</div>
 	</div>
@@ -138,4 +143,7 @@
 		</div>
 
 	</h:form>
+	
+	<script>window.t2Bread = {main: 'Post', sub: 'Background'};</script>
 </ui:decorate>
+

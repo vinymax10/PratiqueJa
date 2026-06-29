@@ -16,6 +16,7 @@ import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.exercicio.ParagrafoResolucao;
+import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
 import pdf.util.Arquivo;
@@ -101,7 +102,7 @@ public class TikTok
 
 		if(!background.exists())
 		{
-	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadraoReel().getEndereco());
+	        File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadrao().getEndereco());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -119,7 +120,7 @@ public class TikTok
 
 		if(!background.exists())
 		{
-	        File origem = new File(diretorio.getConfig().getEndereco() +programacaoPost.getBackgroundReel().getEndImagem());
+	        File origem = new File(diretorio.getConfig().getEndereco() +programacaoPost.getBackground().getEndImagem());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -134,7 +135,7 @@ public class TikTok
 	private void gerarImagem()
 	{
 		gravarLogo();
-		if(programacaoPost.isBasePadraoReel())
+		if(programacaoPost.isBasePadrao())
 			gravarBackgroundPadrao();
 		else
 			gravarBackgroundEspecifico();
@@ -203,7 +204,7 @@ public class TikTok
 		+ "paperheight=460.5px\r\n"
 		+ "}\r\n"
 		+ "\\usepackage{background}\r\n"
-		+"\\backgroundsetup{scale=1,opacity="+programacaoPost.getConfigPost().getTransparenciaPorc()+",angle=0,contents={\\includegraphics[width=\\paperwidth]{background.png}}}\r\n"
+		+"\\backgroundsetup{scale=1,opacity="+ConfigPost.TRANSPARENCIA+",angle=0,contents={\\includegraphics[width=\\paperwidth]{background.png}}}\r\n"
 		+ "\\usepackage{natbib}\r\n"
 		+ "\\usepackage{soul}\r\n"
 		+ "\\usepackage{setspace}\r\n"
@@ -228,9 +229,9 @@ public class TikTok
 		 +"\\definecolor{laranja}{rgb}{0.87, 0.48, 0.25}\r\n"
 		 +"\\definecolor{verde}{rgb}{0, 0.54, 0.44}\r\n"
 		 +"\\definecolor{babypink}{rgb}{1, 0.42, 0.52} \r\n"
-		 +"\\definecolor{cinza}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorFonte())+"} \r\n"
-		 +"\\definecolor{iris}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorTitulo())+"} \r\n"
-		 +"\\definecolor{babyblue}{rgb}{"+CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorNome())+"} \r\n"
+		 +"\\definecolor{cinza}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_FONTE)+"} \r\n"
+		 +"\\definecolor{iris}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_TITULO)+"} \r\n"
+		 +"\\definecolor{babyblue}{rgb}{"+CorAux.convertHexPorc(ConfigPost.COR_NOME)+"} \r\n"
 		+ "\r\n"
 		+ "\\color{cinza} \r\n \r\n"
 		+ "\\newcommand{\\C}[1]{\\textcolor{cinza}{#1}}\r\n"
@@ -357,6 +358,17 @@ public class TikTok
 		return "\\fontsize{"+pt+"}{"+(pt+2)+"}\\selectfont";
 	}
 
+	/** Espaçamento da resolução escalado pela fonte (mesma proporção da avaliação a 10pt:
+	 *  lineskip 0,6·pt, lineskiplimit 0,2·pt, jot 0,8·pt) — funciona em qualquer tamanho. */
+	private String espacamentoResolucao(int pt)
+	{
+		int lineskip = Math.round(pt * 0.6f);
+		int limit = Math.round(pt * 0.2f);
+		int jot = Math.round(pt * 0.8f);
+		return "\\setlength{\\lineskip}{"+lineskip+"pt}\\setlength{\\lineskiplimit}{"+limit
+			+"pt}\\setlength{\\jot}{"+jot+"pt}";
+	}
+
 	private int contarLinhas(String texto)
 	{
 		if(texto==null||texto.isEmpty())
@@ -448,8 +460,8 @@ public class TikTok
 		+"\\vfill\r\n"
 		+"\\begin{center}\r\n"
 		+sizeFontResolucao(enunciado, texto)+"\r\n\r\n"
-		// gap mínimo entre linhas altas (\dfrac) — evita uma fração colar na outra
-		+"\\setlength{\\lineskip}{6pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{6pt}\r\n\r\n"
+		// espaçamento escalado pela fonte (proporção da avaliação) — funciona em qualquer tamanho
+		+espacamentoResolucao(ptResolucao(enunciado, texto))+"\r\n\r\n"
 		+texto
 		+"\\end{center}\r\n\r\n"
 		+"\\vfill\r\n";
@@ -461,11 +473,15 @@ public class TikTok
 		StringBuilder sb = new StringBuilder();
 		for(ParagrafoResolucao paragrafo : conta.getResolucaoParagrafos())
 		{
-			if(paragrafo.getTexto()==null || paragrafo.getTexto().isBlank())
+			String texto = paragrafo.getTexto();
+			if(texto==null || texto.isBlank())
 				continue;
+			// frações de display ficam grandes (\dfrac), mas no EXPOENTE mantém \frac (pequena):
+			// \dfrac num expoente fica enorme/feio (ex.: juros compostos (1+i)^{\frac{1}{12}}).
+			texto = texto.replace("\\frac", "\\dfrac").replace("^{\\dfrac", "^{\\frac");
 			if(sb.length()>0)
 				sb.append(" \\\\\r\n");
-			sb.append(escapar(paragrafo.getTexto()));
+			sb.append(escapar(texto));
 		}
 		return sb.toString();
 	}
@@ -484,37 +500,11 @@ public class TikTok
 		            .replaceAll("(?<!\\\\)\\$", "\\\\\\$");
 	}
 
-	private String addSizeNomeAlternativa()
-	{
-		int tamanho = programacaoPost.getConfigPost().getNome().length();
-		if(tamanho<=22)
-			return "\\footnotesize";
-		if(tamanho<=29)
-			return "\\scriptsize";
-		else
-			return "\\tiny";
-	}
-
-	private String addSizeNome()
-	{
-		if(programacaoPost.getConfigPost().getNome().length()<=33)
-			return "\\normalsize";
-		else
-			return "\\small";
-	}
-
 	public void rodape(boolean resposta)
 	{
 		if(resposta && programacaoPost.isAlternativaReel() && conta.correta()!=null)
 		{
-			latex+="\\noindent\\BC{Alternativa "+conta.correta().getLetra()+"}\\hfill "
-			+addSizeNomeAlternativa()+" \\BB{\\textbf{"+programacaoPost.getConfigPost().getNome()+"}}\r\n\r\n";
-		}
-		else
-		{
-			latex+="\\begin{flushright}\r\n"
-			+addSizeNome()+" \\BB{\\textbf{"+programacaoPost.getConfigPost().getNome()+"}}\r\n \\\\"
-			+"\\end{flushright}\r\n";
+			latex+="\\noindent\\BC{Alternativa "+conta.correta().getLetra()+"}\r\n\r\n";
 		}
 	}
 
@@ -549,10 +539,10 @@ public class TikTok
 	{
 		ProcessBuilder pb;
 		if(diretorio.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("sudo", "pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 
 		pb.redirectErrorStream(true);

@@ -24,8 +24,8 @@
 			<div  class="campo col-12 xl:col-6" style="text-align:center;margin-bottom:0">
 				<h:panelGroup id="image" rendered="#{!usuarioBean.lista}">
 			
-		    		<p:graphicImage class="circle" value="#{usuarioBean.entidade.imagem.fotoStreamedContent}" 
-		    		rendered="#{not empty usuarioBean.entidade.imagem}" cache="false"  />
+		    		<h:graphicImage class="circle" value="#{usuarioBean.entidade.foto.endereco}"
+		    		rendered="#{not empty usuarioBean.entidade.foto}" />
 				</h:panelGroup>
 			</div>
 			

@@ -3,10 +3,11 @@ package modelo.publicacao;
 public enum PerfilCriador
 {
 	// nome, intervalo (dias entre envios), exercicios por dia, gera os dois formatos (feed e reel),
-	// créditos de post por mês, dias de retenção do download
-	Master("Master", 1, 2, true, 120, 90),
-	Premium("Premium", 1, 1, true, 60, 60),
-	Basico("Básico", 1, 1, false, 30, 30);
+	// créditos de post por mês, dias de retenção do download, renovavel, uploadBackground, legenda
+	Teste("Teste", 1, 1, false, 10, 3, false, 0, "Curtas"),
+	Master("Master", 1, 2, true, 120, 90, true, 30, "Personalizadas"),
+	Premium("Premium", 1, 1, true, 60, 60, true, 10, "Com CTA"),
+	Basico("Básico", 1, 1, false, 30, 30, true, 0, "Curtas");
 
 	private String nome;
 	private int intervalo;
@@ -14,8 +15,11 @@ public enum PerfilCriador
 	private boolean ambosFormatos;
 	private int creditosMensais;
 	private int diasRetencao;
+	private boolean renovavel;
+	private int uploadBackground;
+	private String legenda;
 
-	PerfilCriador(String nome, int intervalo, int exerciciosPorDia, boolean ambosFormatos, int creditosMensais, int diasRetencao)
+	PerfilCriador(String nome, int intervalo, int exerciciosPorDia, boolean ambosFormatos, int creditosMensais, int diasRetencao, boolean renovavel, int uploadBackground, String legenda)
 	{
 		this.nome = nome;
 		this.intervalo = intervalo;
@@ -23,6 +27,9 @@ public enum PerfilCriador
 		this.ambosFormatos = ambosFormatos;
 		this.creditosMensais = creditosMensais;
 		this.diasRetencao = diasRetencao;
+		this.renovavel = renovavel;
+		this.uploadBackground = uploadBackground;
+		this.legenda = legenda;
 	}
 
 	public String getNome()
@@ -87,10 +94,28 @@ public enum PerfilCriador
 		this.diasRetencao = diasRetencao;
 	}
 
+	/** Créditos renovam mensalmente (false = cota total fixa, sem renovação). */
+	public boolean isRenovavel()
+	{
+		return renovavel;
+	}
+
 	/** Quantidade de posts gerados por dia: um por exercício, dobrando quando gera feed e reel. */
 	public int getPostsPorDia()
 	{
 		return ambosFormatos ? exerciciosPorDia * 2 : exerciciosPorDia;
+	}
+
+	/** Quantidade de imagens de background que o usuário pode fazer upload (0 = não disponível). */
+	public int getUploadBackground()
+	{
+		return uploadBackground;
+	}
+
+	/** Tipo de legenda gerada: Curtas, Com CTA ou Personalizadas. */
+	public String getLegenda()
+	{
+		return legenda;
 	}
 
 	public boolean equals(PerfilCriador x)

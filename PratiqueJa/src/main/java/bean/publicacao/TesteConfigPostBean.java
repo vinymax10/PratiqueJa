@@ -2,18 +2,23 @@ package bean.publicacao;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
+import bean.academico.AssuntoBean;
 import bean.download.Diretorio;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioPadraoDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
+import modelo.academico.Assunto;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
+import modelo.publicacao.FormatoPost;
 import modelo.publicacao.ProgramacaoPost;
 import pdf.publicacao.InstagramFeed2;
 import pdf.publicacao.TikTok2;
@@ -36,15 +41,21 @@ public class TesteConfigPostBean implements Serializable
 	private ConfigPostBean configPostBean;
 
 	@Inject
+	private AssuntoBean assuntoBean;
+
+	@Inject
 	private ProgramacaoPostService programacaoPostService;
 
 	@Inject
 	private ImagemPostService imagemPostService;
 
 	@Inject
+	private ImagemPostBean imagemPostBean;
+
+	@Inject
 	private DiretorioService diretorioService;
 
-	private Nivel nivel;
+	private Nivel nivel = Nivel.Nivel1;
 
 	/** Formato selecionado no switch do teste: true = Feed, false = Reel. */
 	private boolean testarFeed = true;
@@ -52,18 +63,28 @@ public class TesteConfigPostBean implements Serializable
 	@Inject
 	private ExercicioPadraoDAO exercicioPadraoDAO;
 
+	@PostConstruct
+	public void init()
+	{
+		if(programacaoPost.getAssunto() == null)
+		{
+			List<Assunto> opcoes = assuntoBean.getOpcoesTeste();
+			if(opcoes != null && !opcoes.isEmpty())
+				programacaoPost.setAssunto(opcoes.get(0));
+		}
+	}
+
+	public int getQtdImagensPersonalizadas()
+	{
+		return imagemPostBean.imagemPost(testarFeed).size();
+	}
+
 	private boolean validacao()
 	{
 		ConfigPost configPost = configPostBean.getConfigPost();
 		if(configPost.getLogo() == null)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Por favor adicione uma logomarca em configurações para realizar o teste.");
-			return false;
-		}
-
-		if(configPost.getNome() == null || configPost.getNome().isBlank())
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Por favor adicione um nome em configurações para realizar o teste.");
 			return false;
 		}
 
@@ -77,10 +98,11 @@ public class TesteConfigPostBean implements Serializable
 			ConfigPost configPost = configPostBean.getConfigPost();
 			programacaoPost.setConfigPost(configPost);
 			programacaoPost.setTeste(true);
+			programacaoPost.setFormato(feed ? FormatoPost.Feed : FormatoPost.Reel);
 			programacaoPostService.setImagemPost(programacaoPost);
 
-			ColorHolder.setCOLOR(configPost.getCorFonte());
-			ColorHolder.setFORMULA(configPost.getCorFormula());
+			ColorHolder.setCOLOR(ConfigPost.COR_FONTE);
+			ColorHolder.setFORMULA(ConfigPost.COR_FORMULA);
 
 			gerarConteudo(feed);
 

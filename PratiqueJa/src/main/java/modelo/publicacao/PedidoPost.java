@@ -68,9 +68,6 @@ public class PedidoPost implements Serializable, Entidade
 	@AuditLabel(value = "quantidade")
 	private int quantidade;
 
-	@AuditLabel(value = "enviar por e-mail")
-	private boolean enviarEmail = false;
-
 	/** Registro de consumo gerado pela programação diária (não é um lote sob demanda baixável). */
 	@AuditLabel(value = "programado")
 	private boolean programado = false;

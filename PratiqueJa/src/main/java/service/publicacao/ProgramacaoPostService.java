@@ -15,6 +15,7 @@ import jakarta.inject.Inject;
 import modelo.academico.Assunto;
 import modelo.publicacao.Background;
 import modelo.publicacao.ConfigPost;
+import modelo.publicacao.FormatoPost;
 import modelo.publicacao.ImagemPost;
 import modelo.publicacao.ProgramacaoPost;
 
@@ -49,20 +50,15 @@ public class ProgramacaoPostService
 
 	public void setImagemPost(ProgramacaoPost programacaoPost)
 	{
-		if(programacaoPost.isBackgroundAleatorioFeed())
+		if(programacaoPost.isBackgroundAleatorio())
 		{
-			if(programacaoPost.isBasePadraoFeed())
-				programacaoPost.setPadraoFeed(imagensFeed.get(random.nextInt(imagensFeed.size())));
-			else
-				programacaoPost.setBackgroundFeed(aleatorioImagemPost(programacaoPost.getConfigPost(), true));
-		}
+			boolean feed = programacaoPost.getFormato() == FormatoPost.Feed;
+			List<Background> padroes = feed ? imagensFeed : imagensReel;
 
-		if(programacaoPost.isBackgroundAleatorioReel())
-		{
-			if(programacaoPost.isBasePadraoReel())
-				programacaoPost.setPadraoReel(imagensReel.get(random.nextInt(imagensReel.size())));
+			if(programacaoPost.isBasePadrao())
+				programacaoPost.setPadrao(padroes.get(random.nextInt(padroes.size())));
 			else
-				programacaoPost.setBackgroundReel(aleatorioImagemPost(programacaoPost.getConfigPost(), false));
+				programacaoPost.setBackground(aleatorioImagemPost(programacaoPost.getConfigPost(), feed));
 		}
 	}
 

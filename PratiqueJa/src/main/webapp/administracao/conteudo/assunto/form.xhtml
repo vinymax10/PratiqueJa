@@ -66,34 +66,10 @@
 				placeholder="Hashtag" maxlength="255" />
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Habilitado" />
+			<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-4 xl:col-4">
+				<p:outputLabel for="@next" value="Mostrar no Teste de Conteúdo" />
 				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{assuntoBean.entidade.habilidado}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Mostrar Aulas" />
-				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{assuntoBean.entidade.showAula}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Mostrar Anotações" />
-				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{assuntoBean.entidade.showAnotacao}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Mostrar Exercícios" />
-				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{assuntoBean.entidade.showExercicio}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campo col-12 md:col-2 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Mostrar Questões" />
-				<p:toggleSwitch class="toggleSwitch-form"
-					value="#{assuntoBean.entidade.showQuestao}" />
+					value="#{assuntoBean.entidade.mostrarTesteConteudo}" />
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12">

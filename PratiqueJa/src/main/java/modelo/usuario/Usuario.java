@@ -18,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -29,13 +30,14 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.avaliacao.ConfigAvaliacao;
-import modelo.avaliacao.PlanoAvaliacao;
+import modelo.avaliacao.PerfilAvaliacao;
 import modelo.publicacao.ConfigPost;
+import modelo.publicacao.PerfilCriador;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "imagem", "configAvaliacao", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
+@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "foto", "configAvaliacao", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
 @Data
 @Entity
 public class Usuario extends Ativo implements Entidade
@@ -86,14 +88,14 @@ public class Usuario extends Ativo implements Entidade
 
 	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Imagem imagem;
+	private Imagem foto;
 
 	/** Valores-padrão da avaliação (cabeçalho, formato e logo da escola), pré-carregados a cada
 	 *  nova solicitação para o professor não digitar tudo de novo. */
 	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "configAvaliacao_id")
-	private ConfigAvaliacao configAvaliacao;
+	private ConfigAvaliacao configAvaliacao = new ConfigAvaliacao();
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "perfil")
@@ -101,7 +103,11 @@ public class Usuario extends Ativo implements Entidade
 
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "plano de avaliações")
-	private PlanoAvaliacao planoAvaliacao;
+	private PerfilAvaliacao perfilAvaliacao = PerfilAvaliacao.Teste;
+
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "perfil criador")
+	private PerfilCriador perfilCriador = PerfilCriador.Teste;
 
 	@AuditLabel(value = "criador")
 	private boolean criador;
@@ -148,7 +154,14 @@ public class Usuario extends Ativo implements Entidade
 
 	@DiffIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private ConfigPost configPost;
+	private ConfigPost configPost = new ConfigPost();
+
+	@PrePersist
+	private void prePersist()
+	{
+		if(configPost != null && configPost.getUsuario() == null)
+			configPost.setUsuario(this);
+	}
 	
 	@DiffIgnore
 	private boolean resetSenha;

@@ -8,6 +8,7 @@ import jakarta.faces.application.FacesMessage;
 import bean.PaiBean;
 import dao.academico.AssuntoDAO;
 import dao.exercicio.ExercicioDAO;
+import dao.pdf.PdfDAO;
 import dao.teste.ResultadoTesteDAO;
 import exceptions.RelacaoException;
 import filtro.academico.FiltroAssunto;
@@ -42,6 +43,9 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 
 	@Inject
 	private ExercicioDAO exercicioDAO;
+
+	@Inject
+	private PdfDAO pdfDAO;
 	
 	private String assunto;
 
@@ -92,6 +96,17 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 			return entidadeDAO.getExerciciosPadrao(entidade);
 
 		return null;
+	}
+
+	/** Assuntos marcados para aparecer na tela de teste (mostrarTesteConteudo = true). */
+	private List<Assunto> opcoesTeste;
+
+	public List<Assunto> getOpcoesTeste()
+	{
+		if(opcoesTeste == null)
+			opcoesTeste = entidadeDAO.mostrarTesteConteudo();
+
+		return opcoesTeste;
 	}
 
 	public String pdfAnotacao()
@@ -194,6 +209,7 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 		{
 			a.setQtdQuestoes(entidadeDAO.contarQuestoes(a));
 			a.setQtdExercicios((int) exercicioDAO.contarExercicios(a));
+			a.setQtdPdf(pdfDAO.contarPdfs(a));
 			entidadeDAO.salvar(a);
 		}
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, todos.size() + " assunto(s) atualizados.");

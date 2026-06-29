@@ -31,6 +31,7 @@ import modelo.configuracao.Config;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
+import modelo.publicacao.FormatoPost;
 import modelo.publicacao.ItemPedidoPost;
 import modelo.publicacao.PedidoPost;
 import modelo.publicacao.ProgramacaoPost;
@@ -84,8 +85,8 @@ public class MontadorPostService implements Serializable
 			Config config = configDAO.buscar();
 			ConfigPost configPost = configPostDAO.getComLogo(pedido.getConfigPost().getId());
 
-			ColorHolder.setCOLOR(configPost.getCorFonte());
-			ColorHolder.setFORMULA(configPost.getCorFormula());
+			ColorHolder.setCOLOR(ConfigPost.COR_FONTE);
+			ColorHolder.setFORMULA(ConfigPost.COR_FORMULA);
 
 			int totalPosts = pedido.getQuantidade();
 			int feitos = 0;
@@ -98,15 +99,17 @@ public class MontadorPostService implements Serializable
 				{
 					ordemItem++;
 
-					// Programação transitória só para carregar o branding e sortear backgrounds aleatórios.
-					ProgramacaoPost prog = new ProgramacaoPost();
-					prog.setConfigPost(configPost);
-					prog.setAssunto(item.getAssunto());
-					programacaoPostService.setImagemPost(prog);
+					// Programação transitória com a config de fundo do item (sorteia se aleatório).
+					ProgramacaoPost prog = montarProg(item, configPost);
 
-					List<ExercicioPadrao> doNivel = filtrarPorNivel(
-						item.getAssunto().getExerciciosPadrao(), item.getNivel());
-					List<ExercicioPadrao> exercicios = sortearExercicios(doNivel, item.getQuantidade());
+					// Para cada nível, sorteia `quantidade` exercícios daquele nível.
+					List<ExercicioPadrao> exercicios = new ArrayList<>();
+					for(Nivel nivel : item.getNiveis())
+					{
+						List<ExercicioPadrao> doNivel = filtrarPorNivel(
+							item.getAssunto().getExerciciosPadrao(), nivel);
+						exercicios.addAll(sortearExercicios(doNivel, item.getQuantidade()));
+					}
 
 					for(int i = 0; i < exercicios.size(); i++)
 					{
@@ -117,25 +120,23 @@ public class MontadorPostService implements Serializable
 						byte[] legenda = conteudoPublicacaoService.montarLegenda(exercicio, configPost)
 							.getBytes(StandardCharsets.UTF_8);
 
-						if(item.getFormato().geraFeed())
+						if(item.getFormato() == FormatoPost.Feed)
 						{
 							byte[][] imagens = conteudoPublicacaoService.gerarImagensFeed(exercicio, prog);
 							adicionarAoZip(zip, base + "-feed-exercicio.png", imagens[0]);
 							adicionarAoZip(zip, base + "-feed-resolucao.png", imagens[1]);
 							adicionarAoZip(zip, base + "-feed-legenda.txt", legenda);
-							feitos++;
-							atualizarProgresso(pedido, feitos, totalPosts);
 						}
-
-						if(item.getFormato().geraReel())
+						else
 						{
 							byte[][] imagens = conteudoPublicacaoService.gerarImagensReel(exercicio, prog);
 							adicionarAoZip(zip, base + "-reel-exercicio.png", imagens[0]);
 							adicionarAoZip(zip, base + "-reel-resolucao.png", imagens[1]);
 							adicionarAoZip(zip, base + "-reel-legenda.txt", legenda);
-							feitos++;
-							atualizarProgresso(pedido, feitos, totalPosts);
 						}
+
+						feitos++;
+						atualizarProgresso(pedido, feitos, totalPosts);
 					}
 				}
 			}
@@ -153,12 +154,9 @@ public class MontadorPostService implements Serializable
 			pedido.setCaminhoArquivo(destino.toAbsolutePath().toString());
 			pedido.setNomeDownload(nomeDownload);
 			pedido.setProgresso(100);
-			pedido.setDataExpiracao(LocalDateTime.now().plusDays(configPost.getPerfilCriador().getDiasRetencao()));
+			pedido.setDataExpiracao(LocalDateTime.now().plusDays(configPost.getUsuario().getPerfilCriador().getDiasRetencao()));
 			pedido.setStatus(StatusPedidoPost.CONCLUIDO);
 			pedidoPostDAO.salvar(pedido);
-
-			if(pedido.isEnviarEmail())
-				enviarPorEmail(pedido, nomeDownload, saida.toByteArray());
 		}
 		catch(Exception e)
 		{
@@ -174,10 +172,24 @@ public class MontadorPostService implements Serializable
 	 * usa todos os disponíveis.
 	 */
 	/** Mantém só os exercícios do nível pedido; null = todos os níveis. */
+	/** Monta uma ProgramacaoPost transitória com a config de fundo do item (sorteia o fundo se aleatório). */
+	private ProgramacaoPost montarProg(ItemPedidoPost item, ConfigPost configPost)
+	{
+		ProgramacaoPost prog = new ProgramacaoPost();
+		prog.setConfigPost(configPost);
+		prog.setAssunto(item.getAssunto());
+		prog.setFormato(item.getFormato());
+		prog.setAlternativaReel(item.isAlternativaReel());
+		prog.setBackgroundAleatorio(item.isBackgroundAleatorio());
+		prog.setBasePadrao(item.isBasePadrao());
+		prog.setBackground(item.getBackground());
+		prog.setPadrao(item.getPadrao());
+		programacaoPostService.setImagemPost(prog);
+		return prog;
+	}
+
 	private List<ExercicioPadrao> filtrarPorNivel(List<ExercicioPadrao> exercicios, Nivel nivel)
 	{
-		if(nivel == null)
-			return exercicios;
 		List<ExercicioPadrao> filtrados = new ArrayList<>();
 		for(ExercicioPadrao exercicio : exercicios)
 			if(exercicio.getNivel() == nivel)
@@ -236,26 +248,27 @@ public class MontadorPostService implements Serializable
 			// Os e-mails por post leem o destinatário do configPost; garante o usuário do pedido.
 			configPost.setUsuario(pedido.getUsuario());
 
-			ColorHolder.setCOLOR(configPost.getCorFonte());
-			ColorHolder.setFORMULA(configPost.getCorFormula());
+			ColorHolder.setCOLOR(ConfigPost.COR_FONTE);
+			ColorHolder.setFORMULA(ConfigPost.COR_FORMULA);
 
 			for(ItemPedidoPost item : pedido.getItens())
 			{
-				// Programação transitória só para carregar o branding e sortear backgrounds aleatórios.
-				ProgramacaoPost prog = new ProgramacaoPost();
-				prog.setConfigPost(configPost);
-				prog.setAssunto(item.getAssunto());
-				programacaoPostService.setImagemPost(prog);
+				// Programação transitória com a config de fundo do item (sorteia se aleatório).
+				ProgramacaoPost prog = montarProg(item, configPost);
 
-				List<ExercicioPadrao> doNivel = filtrarPorNivel(
-					item.getAssunto().getExerciciosPadrao(), item.getNivel());
-				List<ExercicioPadrao> exercicios = sortearExercicios(doNivel, item.getQuantidade());
+				List<ExercicioPadrao> exercicios = new ArrayList<>();
+				for(Nivel nivel : item.getNiveis())
+				{
+					List<ExercicioPadrao> doNivel = filtrarPorNivel(
+						item.getAssunto().getExerciciosPadrao(), nivel);
+					exercicios.addAll(sortearExercicios(doNivel, item.getQuantidade()));
+				}
 
 				for(ExercicioPadrao exercicio : exercicios)
 				{
-					if(item.getFormato().geraFeed())
+					if(item.getFormato() == FormatoPost.Feed)
 						conteudoPublicacaoService.gerarConteudoFeed(exercicio, prog);
-					if(item.getFormato().geraReel())
+					else
 						conteudoPublicacaoService.gerarConteudoReel(exercicio, prog);
 				}
 			}

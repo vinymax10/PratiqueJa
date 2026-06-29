@@ -34,8 +34,9 @@ public class Pagamento implements Serializable, Entidade
 	@ManyToOne
 	private Usuario usuario;
 
-	@AuditLabel(value = "plano")
-	private PerfilUsuario plano;
+	@ManyToOne
+	@AuditLabel(value = "produto")
+	private Produto produto;
 
 	@AuditLabel(value = "valor")
 	private double valor;
@@ -43,25 +44,6 @@ public class Pagamento implements Serializable, Entidade
 	@AuditLabel(value = "data", genero = GeneroGramatical.FEMININO)
 	private LocalDate data;
 
-	@AuditLabel(value = "tipo de pagamento")
-	private TipoPagamento tipoPagamento;
-
 	@AuditLabel(value = "pago")
 	private boolean pago = false;
-
-	public void calcularValor()
-	{
-		switch(plano)
-		{
-			case Premium:
-				if(tipoPagamento == TipoPagamento.Mensal)
-					valor = 19.90;
-				else
-					valor = 176.40;
-				break;
-
-			default:
-				break;
-		}
-	}
 }

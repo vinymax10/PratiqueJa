@@ -11,7 +11,7 @@
 		content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" />
 
 	<link rel="stylesheet" href="/css/meu.css" type="text/css" />
-	<link rel="stylesheet" href="/css/assunto.css" type="text/css" />
+	<link rel="stylesheet" href="/css/login.css" type="text/css" />
 	<link rel="stylesheet" href="/css/status.css" type="text/css" />
 	<link rel="stylesheet" href="/css/page.css" type="text/css" />
 	<link rel="stylesheet" href="/css/primeflex.min.css" type="text/css" />
@@ -76,7 +76,7 @@
 		</button>
 
 		<!-- Logo / Marca -->
-		<a href="/matematica/painel.xhtml" class="t2-brand">
+		<a href="/inicio.xhtml" class="t2-brand">
 <!-- 			<img src="/image/logoQuadrada.png" alt="Pratique Já" /> -->
 			
 			<span class="t2-brand-name t2-brand-full">Pratique<span>Já</span></span>
@@ -106,7 +106,7 @@
 		<h:form id="formPrincipal" style="margin:0">
 			<p:commandButton icon="pi pi-fw pi-user"
 				value="Login"
-				styleClass="p-button-outlined p-button-sm"
+				styleClass="t2-btn-login p-button-sm"
 				rendered="#{!sessaoBean.logado}"
 				resetValues="true"
 				update="formLogin"
@@ -117,7 +117,7 @@
 				value="#{sessaoBean.usuario.firstNome}"
 				icon="pi pi-user"
 				rendered="#{sessaoBean.logado}"
-				styleClass="p-button-outlined p-button-sm">
+				styleClass="t2-btn-login p-button-sm">
 
 <!-- 				<p:menuitem icon="pi pi-instagram" -->
 <!-- 					rendered="#{autenticacaoBean.usuario.criador}" -->
@@ -128,6 +128,10 @@
 <!-- 					icon="fa-solid fa-money-bill" -->
 <!-- 					onclick="PF('meuPlanoWidget').show();" -->
 <!-- 					update="formMeuPlano" /> -->
+
+				<p:menuitem value="Meu Perfil"
+					icon="pi pi-user-edit"
+					url="/usuario/perfil.xhtml" />
 
 				<p:menuitem value="Logout"
 					icon="pi pi-sign-out"
@@ -149,8 +153,11 @@
 		<aside id="t2Sidebar" class="t2-sidebar">
 
 			<div class="t2-menu-title">Principal</div>
+			<a href="/inicio.xhtml" class="t2-menu-item">
+				<i class="pi pi-home"></i> Início
+			</a>
 			<a href="/matematica/painel.xhtml" class="t2-menu-item">
-				<i class="pi pi-home"></i> Painel
+				<i class="fa-solid fa-calculator"></i> Praticar
 			</a>
 			<a href="/questao/questao.xhtml" class="t2-menu-item">
 				<i class="pi pi-question-circle"></i> Questões
@@ -422,6 +429,9 @@
 					<a href="/administracao/usuarios/contato/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-address-book"></i> Contatos
 					</a>
+					<a href="/administracao/usuarios/produto/list.xhtml" class="t2-menu-item t2-sub-item">
+						<i class="pi pi-box"></i> Produtos
+					</a>
 					<a href="/administracao/usuarios/pagamento/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-credit-card"></i> Pagamento
 					</a>
@@ -635,6 +645,12 @@
 					}
 				}
 			});
+
+			// Override de página: define window.t2Bread = {main:'...', sub:'...'} antes deste script
+			if (window.t2Bread) {
+				if (window.t2Bread.main != null && mainEl) mainEl.textContent = window.t2Bread.main;
+				if (window.t2Bread.sub  != null && subEl)  subEl.textContent  = window.t2Bread.sub;
+			}
 		})();
 		//]]>
 	</script>

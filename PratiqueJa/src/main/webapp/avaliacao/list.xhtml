@@ -17,12 +17,26 @@
 			.av-historico-table.ui-datatable thead tr th .ui-sortable-column-icon { color: #fff !important; }
 			.av-historico-table.ui-datatable thead tr th:first-child { border-top-left-radius: 10px; }
 			.av-historico-table.ui-datatable thead tr th:last-child { border-top-right-radius: 10px; }
+
+			/* Botão "Ações" (azul sólido, mesmo padrão da tela de posts). */
+			.pc-hero-btn .ui-button {
+				background: #2563eb !important; border-color: #2563eb !important; color: #fff !important;
+			}
+			.pc-hero-btn .ui-button:hover, .pc-hero-btn .ui-button:focus {
+				background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #fff !important;
+			}
+			.pc-hero-btn .ui-button .ui-icon,
+			.pc-hero-btn .ui-button .ui-button-text,
+			.pc-hero-btn .ui-button .ui-menubutton-text { color: #fff !important; }
 		</style>
 	</ui:define>
 
 	<ui:define name="linkPage">
 		<h:outputText class="linkPage" value="Confecção de Avaliações" />
 	</ui:define>
+
+	<!-- ═══════ HERO + Histórico unidos num card único ═══════ -->
+	<div class="av-joined">
 
 	<!-- ═══════════════════════════════════════════════════════ HERO -->
 	<ui:include src="/avaliacao/hero.xhtml" />
@@ -37,12 +51,6 @@
 
 		<div class="av-panel">
 
-			<div class="av-shero">
-				<span class="av-shero-eyebrow"><i class="pi pi-clock" /> Suas avaliações</span>
-				<h2 class="av-shero-title"><i class="pi pi-history" /> Histórico de Solicitações</h2>
-				<p class="av-shero-sub">Clique em uma linha para ver os detalhes e baixar o arquivo.</p>
-			</div>
-
 			<div class="av-list-actions">
 				<p:button value="Nova avaliação"
 					icon="pi pi-plus"
@@ -55,16 +63,9 @@
 				var="pedido"
 				emptyMessage="Nenhuma solicitação encontrada."
 				rows="30" paginator="true" paginatorAlwaysVisible="false"
-				selectionMode="single"
-				selection="#{pedidoAvaliacaoBean.pedidoSelecionado}"
-				rowKey="#{pedido.id}"
+				reflow="true" stripedRows="true"
 				rowStyleClass="#{pedido.codigoBatch == pedidoAvaliacaoBean.codigoDestaque ? 'av-row-novo' : null}"
 				styleClass="av-historico-table">
-
-				<p:ajax event="rowSelect"
-					listener="#{pedidoAvaliacaoBean.aoSelecionarPedido}"
-					update=":dialogDetalhe"
-					oncomplete="PF('wDialogDetalhe').show()" />
 
 				<p:column headerText="Código" style="width:100px">
 					<h:outputText value="#{pedido.codigoBatch}"
@@ -101,25 +102,37 @@
 						</div>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{pedido.status.name() != 'GERANDO'}">
-						<p:tag value="#{pedido.status.nome}"
-							severity="#{pedido.status.name() == 'CONCLUIDO' ? 'success' : pedido.status.name() == 'ERRO' ? 'danger' : 'info'}" />
+						<ui:include src="/status/status.xhtml">
+							<ui:param name="status" value="#{pedido.status}" />
+						</ui:include>
 					</h:panelGroup>
 				</p:column>
 
-				<p:column headerText="Download" style="width:110px;text-align:center">
-					<p:commandButton
-						value="Baixar"
-						icon="pi pi-download"
-						styleClass="ui-button-outlined ui-button-success"
-						rendered="#{pedido.status.name() == 'CONCLUIDO' and !pedidoAvaliacaoBean.estaExpirado(pedido)}"
-						ajax="false">
-						<p:fileDownload value="#{pedidoAvaliacaoBean.download(pedido)}" />
-					</p:commandButton>
-					<h:outputText
-						value="Expirado"
-						styleClass="text-color-secondary"
-						style="font-size:12px;color:#9ca3af"
-						rendered="#{pedidoAvaliacaoBean.estaExpirado(pedido)}" />
+				<p:column headerText="Ações" style="width:140px;text-align:center">
+					<p:menuButton value="Ações" styleClass="pc-hero-btn"
+						rendered="#{pedido.status.name() == 'CONCLUIDO'}">
+						<p:menuitem value="Ver" icon="pi pi-eye"
+							action="#{pedidoAvaliacaoBean.verPedido(pedido)}"
+							update=":formDetalhe" oncomplete="PF('wDialogDetalhe').show()" />
+						<p:menuitem value="Baixar" icon="pi pi-download" ajax="false"
+							rendered="#{pedido.caminhoArquivo != null and !pedidoAvaliacaoBean.estaExpirado(pedido)}">
+							<p:fileDownload value="#{pedidoAvaliacaoBean.download(pedido)}" />
+						</p:menuitem>
+						<p:menuitem value="Enviar por e-mail" icon="pi pi-envelope"
+							rendered="#{pedido.caminhoArquivo != null and !pedidoAvaliacaoBean.estaExpirado(pedido)}"
+							action="#{pedidoAvaliacaoBean.enviarEmail(pedido)}"
+							process="@this" update=":growl" />
+					</p:menuButton>
+					<p:menuButton value="Ações" styleClass="pc-hero-btn"
+						rendered="#{pedido.status.name() == 'RASCUNHO'}">
+						<p:menuitem value="Gerar" icon="pi pi-send"
+							action="#{pedidoAvaliacaoBean.gerarRascunho(pedido)}"
+							process="@this" update="@form :growl" />
+						<p:menuitem value="Editar" icon="pi pi-pencil"
+							outcome="/avaliacao/form">
+							<f:param name="rascunho" value="#{pedido.id}" />
+						</p:menuitem>
+					</p:menuButton>
 				</p:column>
 
 			</p:dataTable>
@@ -127,6 +140,8 @@
 		</div>
 
 	</h:form>
+
+	</div>
 
 	<!-- ═══════════════════════════════ DIALOG: DETALHES DA SOLICITAÇÃO -->
 	<ui:include src="/avaliacao/dialog-detalhe.xhtml" />

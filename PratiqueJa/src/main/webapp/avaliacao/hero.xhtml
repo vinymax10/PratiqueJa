@@ -16,18 +16,18 @@
 			</div>
 
 			<h:panelGroup layout="block" styleClass="av-hero-stats"
-				rendered="#{sessaoBean.usuario.planoAvaliacao != null}">
+				rendered="#{sessaoBean.usuario.perfilAvaliacao != null}">
 				<div class="av-stat">
 					<span class="av-stat-label">Plano ativo</span>
-					<strong class="av-stat-value">#{sessaoBean.usuario.planoAvaliacao.nome}</strong>
+					<strong class="av-stat-value">#{sessaoBean.usuario.perfilAvaliacao.nome}</strong>
 				</div>
 				<div class="av-stat">
-					<span class="av-stat-label">Usadas no mês</span>
-					<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadasNoMes}</strong>
+					<span class="av-stat-label">#{pedidoAvaliacaoBean.labelUsadas}</span>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadas}</strong>
 				</div>
 				<div class="av-stat av-stat--green">
 					<span class="av-stat-label">Restantes</span>
-					<strong class="av-stat-value">#{pedidoAvaliacaoBean.limiteMensalRestante()}</strong>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.creditosRestantes}</strong>
 				</div>
 			</h:panelGroup>
 
@@ -39,11 +39,11 @@
 				</div>
 				<div class="av-stat">
 					<span class="av-stat-label">Usadas</span>
-					<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadasTotal}</strong>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.avaliacoesUsadas}</strong>
 				</div>
 				<div class="av-stat av-stat--green">
 					<span class="av-stat-label">Restantes</span>
-					<strong class="av-stat-value">#{pedidoAvaliacaoBean.trialRestante()}</strong>
+					<strong class="av-stat-value">#{pedidoAvaliacaoBean.creditosRestantes}</strong>
 				</div>
 			</h:panelGroup>
 		</div>

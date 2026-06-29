@@ -63,7 +63,7 @@ public class ImagemPostBean implements Serializable
 	public boolean podeFazerUpload(boolean feed)
 	{
 		ConfigPost configPost = configPostBean.getConfigPost();
-		switch(configPost.getPerfilCriador())
+		switch(configPost.getUsuario().getPerfilCriador())
 		{
 			case Basico: return false;
 			case Master:

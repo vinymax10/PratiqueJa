@@ -1,0 +1,217 @@
+/* ============================================================
+   Login no estilo hero (split: painel escuro + formulário)
+   ============================================================ */
+
+.login-dlg.ui-dialog {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(7, 20, 47, 0.45);
+    max-width: 92vw;
+}
+.login-dlg .ui-dialog-content {
+    padding: 0 !important;
+    border: none !important;
+    overflow: visible;
+}
+
+.login-split {
+    display: flex;
+    min-height: 500px;
+}
+
+/* ── lado hero (escuro) ─────────────────────────────────── */
+.login-hero-side {
+    flex: 1 1 0;
+    background: linear-gradient(135deg, #07142f 0%, #0d1d47 60%, #1a2f6e 100%);
+    color: #fff;
+    padding: 48px 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+}
+.login-hero-side::after {
+    content: "";
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(99, 140, 255, 0.35), transparent 70%);
+    pointer-events: none;
+}
+.login-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #dbe4ff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+.login-hero-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 6px 0 0;
+    color: #fff;
+}
+.login-hero-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.5;
+    margin: 0;
+}
+.login-hero-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+.login-hero-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+.login-hero-list i {
+    color: #34d399;
+    font-size: 13px;
+}
+
+/* ── lado formulário (branco) ───────────────────────────── */
+.login-form-side {
+    flex: 1 1 0;
+    background: #fff;
+    padding: 44px 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+.login-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+.login-close:hover {
+    color: #374151;
+}
+.login-logo {
+    width: 160px;
+    margin-bottom: 18px;
+}
+.login-form-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+}
+.login-form-sub {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 4px 0 22px;
+}
+
+.login-form .login-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+.login-form .login-field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+.login-form .ui-inputtext {
+    width: 100%;
+}
+.login-form .ui-password {
+    width: 100%;
+    display: block;
+}
+.login-form .ui-password .ui-inputtext {
+    width: 100%;
+}
+.login-form .ui-message {
+    margin-top: 5px;
+}
+
+.login-forgot {
+    text-align: right;
+    margin-bottom: 18px;
+}
+.login-forgot a {
+    font-size: 0.85rem;
+    color: #2563eb;
+    text-decoration: none;
+}
+.login-forgot a:hover {
+    text-decoration: underline;
+}
+
+.login-btn.ui-button {
+    width: 100%;
+    justify-content: center;
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    border: none;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.login-btn.ui-button:hover {
+    background: linear-gradient(90deg, #1d4ed8, #1e40af);
+}
+
+.login-or {
+    display: flex;
+    align-items: center;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    margin: 18px 0;
+}
+.login-or::before,
+.login-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+.login-or span {
+    padding: 0 12px;
+}
+.login-google {
+    display: flex;
+    justify-content: center;
+}
+
+/* ── responsivo: empilha (esconde o painel hero) ────────── */
+@media (max-width: 720px) {
+    .login-hero-side {
+        display: none;
+    }
+    .login-split {
+        min-height: auto;
+    }
+    .login-form-side {
+        padding: 36px 26px;
+    }
+}

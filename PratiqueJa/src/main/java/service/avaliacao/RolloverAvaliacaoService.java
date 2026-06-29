@@ -11,7 +11,7 @@ import jakarta.inject.Inject;
 
 import dao.avaliacao.PedidoAvaliacaoDAO;
 import dao.usuario.UsuarioDAO;
-import modelo.avaliacao.PlanoAvaliacao;
+import modelo.avaliacao.PerfilAvaliacao;
 import modelo.usuario.Usuario;
 
 /**
@@ -43,9 +43,9 @@ public class RolloverAvaliacaoService
 		LocalDateTime inicioAnterior = mesAnterior.atStartOfDay();
 		LocalDateTime inicioAtual = mesAtual.atStartOfDay();
 
-		for (Usuario usuario : usuarioDAO.listarComPlanoAvaliacao())
+		for (Usuario usuario : usuarioDAO.listarComPerfilAvaliacao())
 		{
-			PlanoAvaliacao plano = usuario.getPlanoAvaliacao();
+			PerfilAvaliacao plano = usuario.getPerfilAvaliacao();
 			boolean planoAtivo = usuario.getValidadePlano() == null
 				|| !usuario.getValidadePlano().isBefore(hoje);
 

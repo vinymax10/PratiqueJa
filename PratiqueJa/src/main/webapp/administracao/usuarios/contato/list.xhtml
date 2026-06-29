@@ -60,8 +60,8 @@
 			resetValues="true"/>
 
 			<p:column headerText="Foto" width="4rem" responsivePriority="6">
-				<p:graphicImage class="circleTable" value="#{entidade.usuario.imagem.getFotoStreamedContent()}"
-				rendered="#{not empty entidade.usuario.imagem}" stream="false" />
+				<h:graphicImage class="circleTable" value="#{entidade.usuario.foto.endereco}"
+				rendered="#{not empty entidade.usuario.foto}" />
 			</p:column>
 
 			<p:column headerText="ID" responsivePriority="5" width="5%">

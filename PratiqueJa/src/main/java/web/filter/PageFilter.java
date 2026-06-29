@@ -34,7 +34,8 @@ public class PageFilter extends Filtro
 			|| httpRequest.getRequestURI().contains("/produtos/")
 			|| httpRequest.getRequestURI().contains("/informativo/")
 			|| httpRequest.getRequestURI().contains("/download/")
-			|| httpRequest.getRequestURI().contains("/questao/"))
+			|| httpRequest.getRequestURI().contains("/questao/")
+			|| httpRequest.getRequestURI().contains("/usuario/perfil"))
 				acesso = true;
 
 			if(usuario != null)

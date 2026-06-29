@@ -8,6 +8,69 @@
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
 		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+		<script>
+			//<![CDATA[
+			function pcSemAcento(s){
+				return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+			}
+			function pcFiltrarAssuntos(input){
+				var termo = pcSemAcento(input.value).trim();
+				var galeria = (input.closest('.pc-field') || document).querySelector('.pc-seg2--assunto');
+				if(!galeria) return;
+				galeria.querySelectorAll('.pc-seg2-opt--assunto').forEach(function(card){
+					var titulo = card.querySelector('.pc-seg2-title');
+					var nome = pcSemAcento(titulo ? titulo.textContent : '');
+					card.classList.toggle('pc-card-hidden', termo !== '' && nome.indexOf(termo) === -1);
+				});
+			}
+			function pcAbrirAssuntos(btn){
+				var p = btn.closest('.pc-assunto-picker');
+				if(!p) return;
+				p.classList.add('is-expanded');
+				var f = p.querySelector('.pc-assunto-filtro');
+				if(f){ f.value = ''; pcFiltrarAssuntos(f); f.focus(); }
+			}
+			function pcFecharAssuntos(el){
+				var p = el.closest('.pc-assunto-picker');
+				if(p) p.classList.remove('is-expanded');
+			}
+			function pcEscolherAssunto(card){
+				var p = card.closest('.pc-assunto-picker');
+				if(!p) return;
+				var img = card.querySelector('img');
+				var titulo = card.querySelector('.pc-seg2-title');
+				var sel = p.querySelector('.pc-assunto-selected');
+				if(sel){
+					var simg = sel.querySelector('img');
+					var stit = sel.querySelector('.pc-seg2-title');
+					if(simg && img){ simg.src = img.src; simg.alt = img.alt; }
+					if(stit && titulo){ stit.textContent = titulo.textContent; }
+				}
+				p.classList.remove('is-expanded');
+			}
+			function pcAbrirBg(btn){
+				var p = btn.closest('.pc-bg-picker');
+				if(p) p.classList.add('is-expanded');
+			}
+			function pcFecharBg(el){
+				var p = el.closest('.pc-bg-picker');
+				if(p) p.classList.remove('is-expanded');
+			}
+			function pcEscolherBg(card){
+				var p = card.closest('.pc-bg-picker');
+				if(!p) return;
+				var img = card.querySelector('img');
+				var sel = p.querySelector('.pc-bg-selected');
+				if(sel && img){
+					var simg = sel.querySelector('img');
+					if(simg){ simg.src = img.src; simg.alt = img.alt; }
+					var snm = sel.querySelector('.pc-bg-selected-name');
+					if(snm){ snm.textContent = img.alt || ''; }
+				}
+				p.classList.remove('is-expanded');
+			}
+			//]]>
+		</script>
 	</ui:define>
 
 	<ui:define name="linkPage">
@@ -70,36 +133,59 @@
 					<p:inputText id="nome" placeholder="(opcional) Ex.: Posts da semana 1"
 						value="#{pedidoPostBean.entidade.nome}" style="width:100%;" />
 				</div>
-				<div class="av-field" style="flex:1 1 180px;">
-					<div class="av-label">Receber por e-mail</div>
-					<p:toggleSwitch value="#{pedidoPostBean.entidade.enviarEmail}" />
-				</div>
 			</div>
 
 			<!-- ─── Conteúdo ─── -->
 			<div class="av-section-sub"><i class="pi pi-list" /> Conteúdo</div>
 
+			<h:panelGroup id="painelConteudo" layout="block">
+
+			<!-- modo lista -->
+			<h:panelGroup layout="block" rendered="#{!pedidoPostBean.editandoItem}">
+
 			<div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
-				<p:commandButton value="Adicionar assunto" icon="pi pi-plus"
+				<p:commandButton value="Adicionar Post" icon="pi pi-plus"
 					styleClass="ui-button-raised ui-button-success"
 					action="#{pedidoPostBean.cadastrarItem}"
-					update=":dialogItemPost" process="@this"
-					oncomplete="PF('wDialogItemPost').show()" resetValues="true" />
+					update="form:painelConteudo" process="@this" resetValues="true" />
 			</div>
 
 			<h:panelGroup id="listaItens" layout="block">
 				<ui:repeat value="#{pedidoPostBean.entidade.itens}" var="it" varStatus="status">
 					<div class="av-item-card">
 						<div class="av-item-num"><h:outputText value="#{status.index + 1}" /></div>
+
+						<h:panelGroup layout="block" styleClass="av-item-thumb">
+							<img src="#{it.assunto.endImageThumb()}" alt="#{it.assunto.nome}"
+								onerror="this.onerror=null;this.src='#{it.assunto.endImageCapa()}';" />
+						</h:panelGroup>
+
 						<div class="av-item-info">
 							<span class="av-item-assunto"><h:outputText value="#{it.assunto.nome}" /></span>
 							<div class="av-item-meta">
-								<span class="av-item-chip av-item-chip--nivel">
-									<h:outputText value="#{it.nivel != null ? it.nivel.nome : 'Todos os níveis'}" />
+								<ui:repeat value="#{it.niveis}" var="nv">
+									<span class="av-item-chip av-item-chip--nivel">
+										<i class="pi pi-gauge" /><h:outputText value="#{nv.nome}" />
+									</span>
+								</ui:repeat>
+								<span class="av-item-chip av-item-chip--formato">
+									<i class="#{it.formato == 'Feed' ? 'pi pi-image' : 'pi pi-video'}" /><h:outputText value="#{it.formato.nome}" />
 								</span>
-								<span class="av-item-chip av-item-chip--formato"><h:outputText value="#{it.formato.nome}" /></span>
+								<span class="av-item-chip av-item-chip--escolha">
+									<i class="#{it.backgroundAleatorio ? 'pi pi-sync' : 'pi pi-check-circle'}" /><h:outputText value="#{it.backgroundAleatorio ? 'Aleatória' : 'Específica'}" />
+								</span>
+								<span class="av-item-chip av-item-chip--origem">
+									<i class="#{it.basePadrao ? 'pi pi-images' : 'pi pi-user'}" /><h:outputText value="#{it.basePadrao ? 'Padrão' : 'Personalizada'}" />
+								</span>
+								<h:panelGroup styleClass="av-item-chip av-item-chip--imagem"
+									rendered="#{!it.backgroundAleatorio and (it.basePadrao ? it.padrao != null : it.background != null)}">
+									<i class="pi pi-image" /><h:outputText value="#{it.basePadrao ? it.padrao.nome : it.background.nome}" />
+								</h:panelGroup>
+								<h:panelGroup styleClass="av-item-chip av-item-chip--alt" rendered="#{it.formato == 'Reel'}">
+									<i class="pi pi-list-check" /><h:outputText value="#{it.alternativaReel ? 'Com alternativa' : 'Sem alternativa'}" />
+								</h:panelGroup>
 								<span class="av-item-chip av-item-chip--qtd">
-									<h:outputText value="#{it.quantidade} exercício#{it.quantidade != 1 ? 's' : ''} · #{it.creditos} post#{it.creditos != 1 ? 's' : ''}" />
+									<i class="pi pi-bolt" /><h:outputText value="#{it.quantidade} exercício#{it.quantidade != 1 ? 's' : ''} · #{it.creditos} post#{it.creditos != 1 ? 's' : ''}" />
 								</span>
 							</div>
 						</div>
@@ -107,8 +193,7 @@
 							<p:commandButton icon="pi pi-pencil"
 								styleClass="ui-button-flat ui-button-secondary" title="Editar"
 								action="#{pedidoPostBean.editarItem(it)}"
-								update=":dialogItemPost" process="@this"
-								oncomplete="PF('wDialogItemPost').show()" resetValues="true" />
+								update="form:painelConteudo" process="@this" resetValues="true" />
 							<p:commandButton icon="pi pi-copy"
 								styleClass="ui-button-flat ui-button-secondary" title="Duplicar"
 								action="#{pedidoPostBean.duplicarItem(it)}"
@@ -125,7 +210,7 @@
 					<div class="av-item-empty">
 						<i class="pi pi-inbox" />
 						Nenhum assunto adicionado ainda.<br/>
-						Clique em <b>Adicionar assunto</b> para montar o conteúdo do lote.
+						Clique em <b>Adicionar Post</b> para montar o conteúdo do lote.
 					</div>
 				</h:panelGroup>
 			</h:panelGroup>
@@ -156,11 +241,58 @@
 				</h:panelGroup>
 			</div>
 
+			</h:panelGroup>
+			<!-- fim modo lista -->
+
+			<!-- modo formulário (cadastro/edição de item, inline) -->
+			<h:panelGroup layout="block" rendered="#{pedidoPostBean.editandoItem}">
+				<ui:include src="/post/gerar/item-form.xhtml" />
+			</h:panelGroup>
+
+			</h:panelGroup>
+			<!-- fim painelConteudo -->
+
 		</div>
+
+		<!-- Dialog: créditos insuficientes -->
+		<p:dialog widgetVar="dlgCota" modal="true" closable="true" showHeader="false"
+			styleClass="av-dlg-cota" responsive="true" width="460">
+			<div class="av-dlg-cota-inner">
+				<div class="av-dlg-cota-head">
+					<div class="av-dlg-cota-icon-wrap">
+						<i class="pi pi-crown" />
+					</div>
+					<h3 class="av-dlg-cota-titulo">#{pedidoPostBean.dialogCotaTitulo}</h3>
+					<button type="button" class="av-dlg-cota-close" onclick="PF('dlgCota').hide()">
+						<i class="pi pi-times" />
+					</button>
+				</div>
+				<div class="av-dlg-cota-body">
+					<p class="av-dlg-cota-msg">#{pedidoPostBean.dialogCotaMensagem}</p>
+					<div class="av-dlg-cota-stats">
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Usados</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoPostBean.postsUsadosNoMes}</div>
+						</div>
+						<div class="av-dlg-cota-stat">
+							<div class="av-dlg-cota-stat-label">Disponíveis</div>
+							<div class="av-dlg-cota-stat-value">#{pedidoPostBean.creditosDisponiveis()}</div>
+						</div>
+					</div>
+				</div>
+				<div class="av-dlg-cota-footer">
+					<button type="button" class="av-dlg-btn av-dlg-btn--ghost" onclick="PF('dlgCota').hide()">
+						Fechar
+					</button>
+					<a href="/produtos/conteudo/conteudo.xhtml" class="av-dlg-btn av-dlg-btn--primary">
+						<i class="pi pi-shopping-cart" /> Ver planos
+					</a>
+				</div>
+			</div>
+		</p:dialog>
 
 	</h:form>
 
-	<!-- ═══════════════════════════════ MODAL: ADICIONAR/EDITAR ASSUNTO -->
-	<ui:include src="/post/gerar/dialog-item-post.xhtml" />
+	<script>window.t2Bread = {main: 'Post', sub: 'Formulário'};</script>
 
 </ui:decorate>

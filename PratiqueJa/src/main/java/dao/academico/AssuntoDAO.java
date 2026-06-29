@@ -47,29 +47,9 @@ public class AssuntoDAO extends DAO<Assunto>
 			predicates.add(builder.equal(fromAssunto.get("modulo"), filtro.getModulo()));
 		}
 
-		if(filtro.getHabilidado() != null)
+		if(filtro.getMostrarTesteConteudo() != null)
 		{
-			predicates.add(builder.equal(fromAssunto.get("habilidado"), filtro.getHabilidado()));
-		}
-
-		if(filtro.getShowAula() != null)
-		{
-			predicates.add(builder.equal(fromAssunto.get("showAula"), filtro.getShowAula()));
-		}
-
-		if(filtro.getShowAnotacao() != null)
-		{
-			predicates.add(builder.equal(fromAssunto.get("showAnotacao"), filtro.getShowAnotacao()));
-		}
-
-		if(filtro.getShowExercicio() != null)
-		{
-			predicates.add(builder.equal(fromAssunto.get("showExercicio"), filtro.getShowExercicio()));
-		}
-
-		if(filtro.getShowQuestao() != null)
-		{
-			predicates.add(builder.equal(fromAssunto.get("showQuestao"), filtro.getShowQuestao()));
+			predicates.add(builder.equal(fromAssunto.get("mostrarTesteConteudo"), filtro.getMostrarTesteConteudo()));
 		}
 
 		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicates.toArray(new Predicate[0]))
@@ -88,7 +68,6 @@ public class AssuntoDAO extends DAO<Assunto>
 		Root<Assunto> fromAssunto = query.from(Assunto.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-		predicates.add(builder.equal(fromAssunto.get("habilidado"), true));
 
 		predicates.add(builder.equal(fromAssunto.get("chave"), chave));
 
@@ -108,7 +87,6 @@ public class AssuntoDAO extends DAO<Assunto>
 		Root<Assunto> fromAssunto = query.from(Assunto.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-		predicates.add(builder.equal(fromAssunto.get("habilidado"), true));
 
 		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicates.toArray(new Predicate[0]))
 		.orderBy(builder.asc(fromAssunto.get("modulo")),
@@ -119,6 +97,22 @@ public class AssuntoDAO extends DAO<Assunto>
 		return list;
 	}
 
+	public List<Assunto> mostrarTesteConteudo()
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Assunto> query = builder.createQuery(Assunto.class);
+		Root<Assunto> fromAssunto = query.from(Assunto.class);
+
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromAssunto.get("mostrarTesteConteudo"), true));
+
+		TypedQuery<Assunto> typedQuery = em.createQuery(query.select(fromAssunto).where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromAssunto.get("modulo")),
+		builder.asc(fromAssunto.get("ordem"))));
+
+		return typedQuery.getResultList();
+	}
+
 	public List<Assunto> buscar(Modulo modulo)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -126,7 +120,6 @@ public class AssuntoDAO extends DAO<Assunto>
 		Root<Assunto> fromAssunto = query.from(Assunto.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-		predicates.add(builder.equal(fromAssunto.get("habilidado"), true));
 
 		if(modulo != null)
 		{

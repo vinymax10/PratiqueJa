@@ -51,20 +51,8 @@ public class Assunto extends Config implements Entidade
 	@AuditLabel(value = "módulo")
 	private Modulo modulo;
 
-	@AuditLabel(value = "habilitado")
-	private boolean habilidado;
-
-	@AuditLabel(value = "exibir aula", genero = GeneroGramatical.FEMININO)
-	private boolean showAula;
-
-	@AuditLabel(value = "exibir anotação", genero = GeneroGramatical.FEMININO)
-	private boolean showAnotacao;
-
-	@AuditLabel(value = "exibir exercício")
-	private boolean showExercicio;
-
-	@AuditLabel(value = "exibir questão", genero = GeneroGramatical.FEMININO)
-	private boolean showQuestao;
+	@AuditLabel(value = "mostrar no teste de conteúdo")
+	private boolean mostrarTesteConteudo;
 
 	@DiffIgnore
 	@OneToMany(mappedBy = "assunto")
@@ -109,6 +97,11 @@ public class Assunto extends Config implements Entidade
 	public String endImageCapa()
 	{
 		return "/image/matematica/"+getModuloImage()+"/"+getChaveImage()+"/capa.png";
+	}
+
+	public String endImageThumb()
+	{
+		return "/image/matematica/"+getModuloImage()+"/"+getChaveImage()+"/tumbs.png";
 	}
 	
 	public String getChaveImage()

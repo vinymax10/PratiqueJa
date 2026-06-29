@@ -41,13 +41,13 @@ public abstract class Filtro implements Filter
 		{
 			if(isAjax(httpRequest))
 			{
-				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/matematica/painel.xhtml"));
+				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/inicio.xhtml"));
 				httpResponse.flushBuffer();
 			}
 			else
 			{
 				String contextPath = ((HttpServletRequest) request).getContextPath();
-				httpResponse.sendRedirect(contextPath + "/matematica/painel.xhtml");
+				httpResponse.sendRedirect(contextPath + "/inicio.xhtml");
 			}
 		}
 	}

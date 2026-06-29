@@ -22,7 +22,7 @@ public class SessaoBean implements Serializable
 {
 	private Usuario usuario;
 
-	private String urlInicial = "/matematica/painel.xhtml";
+	private String urlInicial = "/inicio.xhtml";
 	private String urlLogin = "/login/login.xhtml";
 	
 //	@Inject

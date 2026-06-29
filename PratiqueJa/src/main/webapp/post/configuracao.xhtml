@@ -1,4 +1,4 @@
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+﻿<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -48,13 +48,18 @@
 		</div>
 
 		<div class="pc-hero-stats">
+			
+			<div class="pc-stat ">
+				<span class="pc-stat-label">Perfil</span>
+				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.perfilCriador.nome}</strong>
+			</div>
 			<div class="pc-stat">
-				<span class="pc-stat-label">Usuário</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.nome}</strong>
+				<span class="pc-stat-label">Usados no mês</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
 			</div>
 			<div class="pc-stat pc-stat--green">
-				<span class="pc-stat-label">Perfil</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.perfilCriador.nome}</strong>
+				<span class="pc-stat-label">Restantes</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
 			</div>
 		</div>
 	</div>
@@ -70,85 +75,10 @@
 
 			<div class="pc-split-main">
 
-			<!-- ─── Nome &amp; Cores ─── -->
-			<div class="pc-section-sub"><i class="pi pi-tag" /> Nome &amp; Cores</div>
-
-			<div class="pc-fields">
-
-				<h:panelGroup styleClass="pc-field pc-field-wide" layout="block">
-					<p:outputLabel styleClass="pc-label" for="nome" value="Nome" />
-					<p:inputText id="nome" placeholder="Nome" maxlength="37"
-					title="Nome utilizado no rodapé do conteúdo."
-					value="#{configPostBean.configPost.nome}" required="true"
-					requiredMessage="O nome é obrigatório"/>
-					<p:message for="nome" display="text" />
-				</h:panelGroup>
-
-			</div>
-
-			<div class="pc-fields pc-fields--colors" style="margin-top:20px">
-
-				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="corFonte" value="Cor da Fonte" />
-					<div class="pc-color">
-						<p:colorPicker id="corFonte" value="#{configPostBean.configPost.corFonte}"
-						title="Cor utilizada no exercício e resolução."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-		                closeButton="true" alpha="false"  >
-						</p:colorPicker>
-					</div>
-				</h:panelGroup>
-
-				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="corTitulo" value="Cor do Título" />
-					<div class="pc-color">
-						<p:colorPicker id="corTitulo" value="#{configPostBean.configPost.corTitulo}"
-						title="Cor utilizada no assunto do exercício."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-		                closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-				</h:panelGroup>
-
-				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="corNome" value="Cor do Nome" />
-					<div class="pc-color">
-						<p:colorPicker id="corNome" value="#{configPostBean.configPost.corNome}"
-						title="Cor utilizada no nome contido no rodapé."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-		                closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-				</h:panelGroup>
-
-				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="corFormula" value="Cor da Fórmula" />
-					<div class="pc-color">
-						<p:colorPicker id="corFormula" value="#{configPostBean.configPost.corFormula}"
-						title="Cor utilizada nas fórmulas das resoluções."
-						disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-						theme="polaroid" formatToggle="true" clearButton="true"
-		                closeButton="true" alpha="false" >
-						</p:colorPicker>
-					</div>
-				</h:panelGroup>
-
-			</div>
-
 			<!-- ─── Publicação ─── -->
 			<div class="pc-section-sub"><i class="pi pi-send" /> Publicação</div>
 
 			<div class="pc-fields">
-
-				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="transparencia" value="Transparência" />
-		            <p:inputText id="transparencia" value="#{configPostBean.configPost.transparencia}"
-		            title="Transparência utilizada na imagem do background." />
-		            <p:slider for="transparencia"/>
-		        </h:panelGroup>
 
 				<h:panelGroup styleClass="pc-field" layout="block">
 					<p:outputLabel styleClass="pc-label" for="@next" value="Último Envio" />
@@ -170,7 +100,7 @@
 
 				<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
 	                <p:outputLabel styleClass="pc-label" for="@next" value="Perfil"/>
-	                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.perfilCriador}"
+	                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.usuario.perfilCriador}"
 	                filter="true" filterMatchMode="contains" required="true" requiredMessage="O intervalo de envio é obrigatório" >
 	                    <f:selectItems value="#{perfilCriadorBean.opcoes}" var="perfil"
 	                    itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
@@ -187,7 +117,7 @@
 
 			</div>
 
-            <h:panelGroup styleClass="pc-field #{configPostBean.configPost.perfilCriador=='Master'? '':'hidden'}" layout="block" style="margin-top:20px">
+            <h:panelGroup styleClass="pc-field #{configPostBean.configPost.usuario.perfilCriador=='Master'? '':'hidden'}" layout="block" style="margin-top:20px">
 				<p:outputLabel styleClass="pc-label" for="@next" value="Descrição das CTA" />
 				<p:inputTextarea rows="5" maxlength="4096" style="width:100%"
 				placeholder="Descreva como as legendas devem ser configuradas para que possam ser personalizadas."
@@ -327,6 +257,10 @@
 			document.getElementById('pcBgLightbox').classList.remove('pc-bglb--open');
 		}
 		document.addEventListener('keydown', function(e){ if(e.key === 'Escape') pcBgClose(); });
+		
 	</script>
 
+	<script>window.t2Bread = {main: 'Post', sub: 'Configurações'};</script>
+
 </ui:decorate>
+

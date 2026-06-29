@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+﻿<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -30,7 +30,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-3"
-						rendered="#{configPostBean.configPost.perfilCriador=='Basico'}">
+						rendered="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}">
 						<p:outputLabel for="@next" value="Formato" />
 						<p:selectOneButton value="#{programacaoPostBean.programacaoPost.formato}">
 							<f:selectItem itemLabel="Feed" itemValue="Feed" />
@@ -54,84 +54,79 @@
 				</div>
 
 				<div class="ui-fluid gride">
+
+					<!-- Escolha e Origem do background: valem para Feed e Reel (sempre iguais) -->
+					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
+						<p:outputLabel for="@next" value="Escolha" />
+						<p:selectBooleanButton
+							value="#{programacaoPostBean.programacaoPost.backgroundAleatorio}"
+							onLabel="Aleatória" offLabel="Específica"
+							onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
+							disabled="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}"
+							style="width-min:8rem;display:block;">
+							<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed formAdicionarProgramacaoPost:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
+						<p:outputLabel for="@next" value="Base de Dados" />
+						<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(true).size()==0 or imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.usuario.perfilCriador=='Basico'}"
+							value="#{programacaoPostBean.programacaoPost.basePadrao}"
+							onLabel="Padrão" offLabel="Personalizada"
+							onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
+							style="width-min:8rem;display:block;">
+							<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed formAdicionarProgramacaoPost:backgroundReel" />
+						</p:selectBooleanButton>
+					</h:panelGroup>
+
 					<div class="col-12 ">
 						<p:fieldset legend="Background Feed"
 						style="margin-bottom:1rem;width:100%;" >
 							<div class="ui-fluid gride">
-								<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-									<p:outputLabel for="@next" value="Escolha" />
-									<p:selectBooleanButton
-										value="#{programacaoPostBean.programacaoPost.backgroundAleatorioFeed}"
-										onLabel="Aleatória" offLabel="Específica"
-										onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
-										disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-										style="width-min:8rem;display:block;">
-										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed" />
-									</p:selectBooleanButton>
-								</h:panelGroup>
-
-								<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-									<p:outputLabel for="@next" value="Base de Dados" />
-									<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(true).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
-										value="#{programacaoPostBean.programacaoPost.basePadraoFeed}"
-										onLabel="Padrão" offLabel="Personalizada"
-										onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
-										style="width-min:8rem;display:block;">
-										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundFeed" />
-									</p:selectBooleanButton>
-								</h:panelGroup>
-
-								<h:panelGroup styleClass="campo col-12 xl:col-8">
+								<h:panelGroup styleClass="campo col-12">
 									<h:panelGroup id="backgroundFeed" >
 										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioFeed and !programacaoPostBean.programacaoPost.basePadraoFeed}">
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and !programacaoPostBean.programacaoPost.basePadrao}">
 											<p:outputLabel for="@next" value="Background" />
 											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.backgroundFeed}"
+												value="#{programacaoPostBean.programacaoPost.background}"
 												converter="generic" required="true" filter="true"
 												filterMatchMode="contains" var="item" >
 												<f:selectItems value="#{imagemPostBean.imagemPost(true)}"
 															var="image" itemLabel="#{image.nome}"
 															itemValue="#{image}" />
-
 												<p:column >
-							                        <p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
-								                    style="width: 80px; "
-								                     />
-							                    </p:column>
-
-							                    <p:column >
-							                         <f:facet name="header">
-							                            <h:outputText value="Nome"/>
-							                        </f:facet>
-							                        <h:outputText value="#{item.nome}"/>
-							                    </p:column>
-
+													<p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
+														style="width: 80px; " />
+												</p:column>
+												<p:column >
+													<f:facet name="header">
+														<h:outputText value="Nome"/>
+													</f:facet>
+													<h:outputText value="#{item.nome}"/>
+												</p:column>
 											</p:selectOneMenu>
 										</h:panelGroup>
 										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioFeed and programacaoPostBean.programacaoPost.basePadraoFeed}">
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and programacaoPostBean.programacaoPost.basePadrao}">
 											<p:outputLabel for="@next" value="Background" />
 											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.padraoFeed}"
+												value="#{programacaoPostBean.programacaoPost.padrao}"
 												converter="generic" required="true" filter="true"
 												filterMatchMode="contains" var="item">
 												<f:selectItems value="#{imagemPostBean.imagensFeed}"
 															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" >
-															</f:selectItems>
-
+															itemValue="#{image}" />
 												<p:column >
-							                        <p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
-								                    style="width: 80px;" />
-							                    </p:column>
-
-							                    <p:column >
-							                         <f:facet name="header">
-							                            <h:outputText value="Nome"/>
-							                        </f:facet>
-							                        <h:outputText value="#{item.nome}"/>
-							                    </p:column>
+													<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
+														style="width: 80px;" />
+												</p:column>
+												<p:column >
+													<f:facet name="header">
+														<h:outputText value="Nome"/>
+													</f:facet>
+													<h:outputText value="#{item.nome}"/>
+												</p:column>
 											</p:selectOneMenu>
 										</h:panelGroup>
 									</h:panelGroup>
@@ -143,80 +138,50 @@
 						<p:fieldset legend="Background Reel"
 						style="margin-bottom:1rem;width:100%;" >
 							<div class="ui-fluid gride">
-								<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-									<p:outputLabel for="@next" value="Escolha" />
-									<p:selectBooleanButton
-										value="#{programacaoPostBean.programacaoPost.backgroundAleatorioReel}"
-										onLabel="Aleatória" offLabel="Específica"
-										onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
-										disabled="#{configPostBean.configPost.perfilCriador=='Basico'}"
-										style="width-min:8rem;display:block;">
-										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundReel" />
-									</p:selectBooleanButton>
-								</h:panelGroup>
-
-								<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-									<p:outputLabel for="@next" value="Base de Dados" />
-									<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.perfilCriador=='Basico'}"
-										value="#{programacaoPostBean.programacaoPost.basePadraoReel}"
-										onLabel="Padrão" offLabel="Personalizada"
-										onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
-										style="width-min:8rem;display:block;">
-										<f:ajax event="change" process="@this" render="formAdicionarProgramacaoPost:backgroundReel" />
-									</p:selectBooleanButton>
-								</h:panelGroup>
-
-								<h:panelGroup styleClass="campo col-12 xl:col-8">
+								<h:panelGroup styleClass="campo col-12">
 									<h:panelGroup id="backgroundReel" >
 										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioReel and !programacaoPostBean.programacaoPost.basePadraoReel}">
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and !programacaoPostBean.programacaoPost.basePadrao}">
 											<p:outputLabel for="@next" value="Background" />
 											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.backgroundReel}"
+												value="#{programacaoPostBean.programacaoPost.background}"
 												converter="generic" required="true" filter="true"
 												filterMatchMode="contains" var="item" >
 												<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
 															var="image" itemLabel="#{image.nome}"
 															itemValue="#{image}" />
-
 												<p:column >
-							                        <p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
-								                    style="width: 80px;"
-								                     />
-							                    </p:column>
-
-							                    <p:column >
-							                         <f:facet name="header">
-							                            <h:outputText value="Nome"/>
-							                        </f:facet>
-							                        <h:outputText value="#{item.nome}"/>
-							                    </p:column>
-
+													<p:graphicImage value="#{item.endImagem}" alt="#{image.nome}"
+														style="width: 80px;" />
+												</p:column>
+												<p:column >
+													<f:facet name="header">
+														<h:outputText value="Nome"/>
+													</f:facet>
+													<h:outputText value="#{item.nome}"/>
+												</p:column>
 											</p:selectOneMenu>
 										</h:panelGroup>
 										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorioReel and programacaoPostBean.programacaoPost.basePadraoReel}">
+										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and programacaoPostBean.programacaoPost.basePadrao}">
 											<p:outputLabel for="@next" value="Background" />
 											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.padraoReel}"
+												value="#{programacaoPostBean.programacaoPost.padrao}"
 												converter="generic" required="true" filter="true"
 												filterMatchMode="contains" var="item">
 												<f:selectItems value="#{imagemPostBean.imagensReel}"
 															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" >
-															</f:selectItems>
-
+															itemValue="#{image}" />
 												<p:column >
-							                        <p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
-								                    style="width: 80px;"   />
-							                    </p:column>
-
-							                    <p:column >
-							                         <f:facet name="header">
-							                            <h:outputText value="Nome"/>
-							                        </f:facet>
-							                        <h:outputText value="#{item.nome}"/>
-							                    </p:column>
+													<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
+														style="width: 80px;"   />
+												</p:column>
+												<p:column >
+													<f:facet name="header">
+														<h:outputText value="Nome"/>
+													</f:facet>
+													<h:outputText value="#{item.nome}"/>
+												</p:column>
 											</p:selectOneMenu>
 										</h:panelGroup>
 									</h:panelGroup>
@@ -244,3 +209,4 @@
 	</ui:composition>
 </h:body>
 </html>
+

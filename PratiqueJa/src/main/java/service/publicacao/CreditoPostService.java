@@ -26,17 +26,18 @@ public class CreditoPostService implements Serializable
 	@Inject
 	private PedidoPostDAO pedidoPostDAO;
 
-	/** Créditos ainda disponíveis no mês: cota do plano + rollover − posts já gerados no mês. */
+	/** Créditos ainda disponíveis: para planos renováveis conta só o mês atual; para Teste conta o total acumulado. */
 	public int creditosRestantes(Usuario usuario, PerfilCriador perfil)
 	{
 		if(usuario == null || perfil == null)
 			return 0;
 
-		int cota = perfil.getCreditosMensais() + usuario.getCreditoRolloverPost();
+		if(!perfil.isRenovavel())
+			return perfil.getCreditosMensais() - pedidoPostDAO.somarPostsTotal(usuario);
 
+		int cota = perfil.getCreditosMensais() + usuario.getCreditoRolloverPost();
 		LocalDateTime inicioMes = LocalDate.now().withDayOfMonth(1).atStartOfDay();
 		int usados = pedidoPostDAO.somarPostsNoMes(usuario, inicioMes, inicioMes.plusMonths(1));
-
 		return cota - usados;
 	}
 

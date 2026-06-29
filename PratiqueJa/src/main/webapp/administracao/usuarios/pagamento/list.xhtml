@@ -61,8 +61,8 @@
 			resetValues="true"/>
 
 			<p:column headerText="Foto" width="4rem" responsivePriority="6">
-				<p:graphicImage class="circleTable" value="#{entidade.usuario.imagem.getFotoStreamedContent()}"
-				rendered="#{not empty entidade.usuario.imagem}" stream="false" />
+				<h:graphicImage class="circleTable" value="#{entidade.usuario.foto.endereco}"
+				rendered="#{not empty entidade.usuario.foto}" />
 			</p:column>
 
 			<p:column headerText="ID" responsivePriority="5" width="5rem">
@@ -86,15 +86,11 @@
 				</h:outputText>
 			</p:column>
 
-			<p:column headerText="Tipo" responsivePriority="3">
-				<h:outputText value="#{entidade.tipoPagamento.nome}" />
+			<p:column headerText="Produto" responsivePriority="3">
+				<h:outputText value="#{entidade.produto.nome}" rendered="#{entidade.produto != null}" />
 			</p:column>
 
-			<p:column headerText="Plano" responsivePriority="3">
-				<h:outputText value="#{entidade.plano.nome}" />
-			</p:column>
-
-			<p:column headerText="Pago" responsivePriority="1" 
+			<p:column headerText="Pago" responsivePriority="1"
 			width="4rem" exportable="false" styleClass="coluna-ativo">
 				<p:toggleSwitch class="toggleSwitch-form"
 					value="#{entidade.pago}" >

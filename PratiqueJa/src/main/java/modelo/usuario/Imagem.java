@@ -46,7 +46,7 @@ public class Imagem implements Serializable, Entidade
 	private String endereco;
 
 	@DiffIgnore
-	@OneToOne(mappedBy = "imagem")
+	@OneToOne(mappedBy = "foto")
 	private Usuario usuario;
 
 	public StreamedContent getFotoStreamedContent()

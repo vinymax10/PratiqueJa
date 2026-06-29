@@ -6,8 +6,7 @@ import java.util.List;
 
 import filtro.PeriodoPreset;
 import lombok.Data;
-import modelo.usuario.PerfilUsuario;
-import modelo.usuario.TipoPagamento;
+import modelo.usuario.Produto;
 
 @Data
 public class FiltroPagamento implements Serializable
@@ -17,15 +16,13 @@ public class FiltroPagamento implements Serializable
 	private Long id;
 
 	private String nomeUsuario;
-	
-	private PerfilUsuario plano;
+
+	private Produto produto;
 
 	private Double valor;
 
 	private List<LocalDate> periodo;
 	private PeriodoPreset preset;
-
-	private TipoPagamento tipoPagamento;
 
 	private Boolean pago;
 
@@ -33,26 +30,25 @@ public class FiltroPagamento implements Serializable
 	{
 		id = null;
 		nomeUsuario = null;
-		plano = null;
+		produto = null;
 		valor = null;
-		tipoPagamento = null;
 		periodo = null;
 		preset = null;
 		pago = null;
 	}
-	
+
 	public void resetPreset()
 	{
-		preset=PeriodoPreset.PERSONALIZADO;
+		preset = PeriodoPreset.PERSONALIZADO;
 	}
-	
+
 	public void aplicarPreset()
 	{
 		if(this.preset == null)
-            this.periodo = null;
+			this.periodo = null;
 
 		else if(preset != PeriodoPreset.PERSONALIZADO)
-	    	periodo = preset.calcularIntervalo();
+			periodo = preset.calcularIntervalo();
 	}
-	
+
 }

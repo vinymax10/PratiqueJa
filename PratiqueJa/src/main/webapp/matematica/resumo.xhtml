@@ -34,7 +34,7 @@
 						<strong class="as-stat-value">#{assuntoBean.entidade.qtdVideosAula}</strong>
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="as-stat as-stat--orange"
-						rendered="#{assuntoBean.entidade.showAnotacao}">
+						>
 						<span class="as-stat-label">PDF's</span>
 						<strong class="as-stat-value">#{assuntoBean.entidade.qtdPdf}</strong>
 					</h:panelGroup>
@@ -84,25 +84,21 @@
 		<!-- BOTÕES DE NAVEGAÇÃO -->
 		<div class="as-tabs" id="asTabs">
 			<h:panelGroup layout="block"
-				rendered="#{assuntoBean.entidade.showAnotacao}"
 				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/teoria') ? 'as-tab-active' : ''}" 
 				onclick="navegarComScroll('#{assuntoBean.entidade.endTeoria()}')">
 				<i class="pi pi-book"></i> Teoria
 			</h:panelGroup>
 
 			<h:panelGroup layout="block"
-				rendered="#{assuntoBean.entidade.showExercicio}"
 				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/exercicio') ? 'as-tab-active' : ''}" 
 				onclick="navegarComScroll('/matematica/exercicio.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-pencil"></i> Exercícios
 			</h:panelGroup>
 			<h:panelGroup layout="block"
-				rendered="#{assuntoBean.entidade.showAula}"
 				styleClass="as-tab" onclick="asShowTab('videoaulas', this)">
 				<i class="pi pi-video"></i> Videoaulas
 			</h:panelGroup>
 			<h:panelGroup layout="block"
-				rendered="#{assuntoBean.entidade.showQuestao}"
 				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/questoes') ? 'as-tab-active' : ''}" 
 				onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-question-circle"></i> Questões

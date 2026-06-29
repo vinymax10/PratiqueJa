@@ -108,14 +108,9 @@
 								</h:outputText>
 							</span>
 							<span class="pc-chip pc-chip--feed">
-								<i class="pi pi-image" /> Feed:
-								#{programacaoPost.backgroundAleatorioFeed ? 'Aleatória' : 'Específica'} ·
-								#{programacaoPost.basePadraoFeed ? 'Padrão' : 'Personalizada'}
-							</span>
-							<span class="pc-chip pc-chip--reel">
-								<i class="pi pi-video" /> Reel:
-								#{programacaoPost.backgroundAleatorioReel ? 'Aleatória' : 'Específica'} ·
-								#{programacaoPost.basePadraoReel ? 'Padrão' : 'Personalizada'}
+								<i class="pi pi-image" /> Background:
+								#{programacaoPost.backgroundAleatorio ? 'Aleatória' : 'Específica'} ·
+								#{programacaoPost.basePadrao ? 'Padrão' : 'Personalizada'}
 							</span>
 							<h:panelGroup styleClass="pc-chip pc-chip--alt"
 								rendered="#{programacaoPost.alternativaReel}">

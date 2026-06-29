@@ -1,0 +1,444 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+		<style>
+			/* ── Avatar no hero ── */
+			.pf-avatar-col {
+				display: flex; flex-direction: column; align-items: center; gap: 8px;
+			}
+			.pf-avatar-ring {
+				width: 100px; height: 100px;
+				border-radius: 50%; object-fit: cover; display: block;
+				border: 3px solid rgba(255,255,255,0.25);
+			}
+			.pf-avatar-placeholder {
+				width: 100px; height: 100px;
+				border-radius: 50%;
+				background: rgba(255,255,255,0.08);
+				border: 3px solid rgba(255,255,255,0.18);
+				display: flex; align-items: center; justify-content: center;
+				font-size: 42px; color: rgba(255,255,255,0.35);
+			}
+
+			/* ── Dropzone circular (clique na foto para trocar) ── */
+			.pf-photo-wrap {
+				position: relative;
+				width: 100px; height: 100px;
+				border-radius: 50%; cursor: pointer;
+			}
+			.pf-photo-wrap:hover .pf-photo-overlay { opacity: 1; }
+
+			.pf-photo-overlay {
+				position: absolute; inset: 0; border-radius: 50%;
+				background: rgba(0,0,0,0.45);
+				display: flex; align-items: center; justify-content: center;
+				opacity: 0; transition: opacity 0.18s;
+				pointer-events: none; color: #fff; font-size: 22px;
+			}
+			.pf-photo-hint {
+				font-size: 11px; color: rgba(255,255,255,0.5); text-align: center;
+			}
+
+			/* fileUpload como overlay transparente sobre o círculo */
+			.pf-dropzone.ui-fileupload {
+				position: absolute !important; inset: 0 !important;
+				background: transparent !important; border: 0 !important;
+				border-radius: 50% !important; z-index: 2;
+			}
+			.pf-dropzone .ui-fileupload-content { display: none !important; }
+			.pf-dropzone .ui-fileupload-buttonbar {
+				position: absolute !important; inset: 0 !important;
+				background: transparent !important; border: 0 !important;
+				padding: 0 !important; margin: 0 !important; border-radius: 50% !important;
+			}
+			.pf-dropzone .ui-fileupload-choose {
+				position: absolute !important; inset: 0 !important;
+				width: 100% !important; height: 100% !important;
+				background: transparent !important; border: 0 !important;
+				box-shadow: none !important; border-radius: 50% !important;
+				cursor: pointer !important;
+			}
+			.pf-dropzone .ui-fileupload-choose .ui-button-text,
+			.pf-dropzone .ui-fileupload-choose .ui-icon,
+			.pf-dropzone .ui-fileupload-choose .ui-button-icon-left { display: none !important; }
+			.pf-dropzone .ui-fileupload-choose input[type="file"] {
+				position: absolute !important; inset: 0 !important;
+				width: 100% !important; height: 100% !important;
+				margin: 0 !important; padding: 0 !important;
+				opacity: 0; cursor: pointer; font-size: 0;
+			}
+			.pf-dropzone .ui-fileupload-files,
+			.pf-dropzone .ui-fileupload-upload,
+			.pf-dropzone .ui-fileupload-cancel { display: none !important; }
+		</style>
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="#{perfilBean.editando ? 'Meu Perfil' : 'Cadastro'}" />
+	</ui:define>
+
+	<h:form id="form">
+		<div class="av-joined">
+
+			<!-- ── HERO ─────────────────────────────────────── -->
+			<div class="av-hero">
+				<div class="av-hero-head">
+					<span class="av-hero-badge">
+						<i class="#{perfilBean.editando ? 'pi pi-user' : 'pi pi-user-plus'}" />
+						#{perfilBean.editando ? 'Meu Perfil' : 'Novo Cadastro'}
+					</span>
+					<h1 class="av-hero-title">
+						#{perfilBean.editando ? perfilBean.entidade.nome : 'Criar sua conta'}
+					</h1>
+					<p class="av-hero-desc">
+						#{perfilBean.editando
+							? 'Gerencie suas informações pessoais e foto de perfil.'
+							: 'Cadastre-se para acessar exercícios, avaliações e conteúdo para professor.'}
+					</p>
+				</div>
+
+				<!-- Avatar clicável (editando) / estático (novo cadastro) -->
+				<div class="pf-avatar-col">
+
+					<!-- editando: dropzone transparente sobre a foto -->
+					<h:panelGroup id="fotoContainer" layout="block" styleClass="pf-photo-wrap"
+						rendered="#{perfilBean.editando}">
+						<h:graphicImage value="#{perfilBean.entidade.foto.endereco}"
+							rendered="#{not empty perfilBean.entidade.foto}"
+							styleClass="pf-avatar-ring" />
+						<h:panelGroup layout="block" styleClass="pf-avatar-placeholder"
+							rendered="#{empty perfilBean.entidade.foto}">
+							<i class="pi pi-user" />
+						</h:panelGroup>
+						<div class="pf-photo-overlay"><i class="pi pi-camera" /></div>
+						<p:fileUpload mode="advanced" auto="true"
+							styleClass="pf-dropzone"
+							listener="#{perfilBean.uploadFoto}"
+							invalidFileMessage="São permitidos somente arquivos JPG, PNG, GIF ou WebP."
+							invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+							update="form:fotoContainer :growl">
+							<p:validateFile sizeLimit="5242880"
+								allowTypes="/(\.|\/)(gif|jpe?g|png|webp)$/" />
+						</p:fileUpload>
+					</h:panelGroup>
+					<h:outputText styleClass="pf-photo-hint" value="Clique para alterar"
+						rendered="#{perfilBean.editando}" />
+
+					<!-- novo cadastro: só ícone estático -->
+					<h:panelGroup layout="block" styleClass="pf-avatar-placeholder"
+						rendered="#{not perfilBean.editando}">
+						<i class="pi pi-user" />
+					</h:panelGroup>
+
+				</div>
+			</div>
+
+			<!-- ── PAINEL BRANCO ──────────────────────────── -->
+			<div class="av-panel">
+
+				<!-- Campos -->
+				<div class="av-fields">
+
+					<div class="av-field">
+						<p:outputLabel for="nome" value="Nome" />
+						<p:inputText id="nome" value="#{perfilBean.entidade.nome}"
+							required="true" requiredMessage="O nome é obrigatório" maxlength="255" />
+						<p:message for="nome" display="text" />
+					</div>
+
+					<div class="av-field">
+						<p:outputLabel for="email" value="E-mail" />
+						<p:inputText id="email" value="#{perfilBean.entidade.email}"
+							required="true" requiredMessage="O e-mail é obrigatório" maxlength="255"
+							validator="#{perfilBean.validateEmail}" />
+						<p:message for="email" display="text" />
+					</div>
+
+					<div class="av-field">
+						<p:outputLabel for="nasc" value="Nascimento" />
+						<p:datePicker id="nasc" value="#{perfilBean.entidade.nascimento}"
+							pattern="dd/MM/yyyy" />
+					</div>
+
+					<div class="av-field">
+						<p:outputLabel for="senha" value="#{perfilBean.editando ? 'Nova Senha' : 'Senha'}" />
+						<p:password id="senha" value="#{perfilBean.senha}" feedback="true"
+							required="#{!perfilBean.editando}" requiredMessage="A senha é obrigatória"
+							match="confirmaSenha" maxlength="255" />
+						<p:message for="senha" display="text" />
+					</div>
+
+					<div class="av-field">
+						<p:outputLabel for="confirmaSenha"
+							value="#{perfilBean.editando ? 'Confirmar Nova Senha' : 'Confirmar Senha'}" />
+						<p:password id="confirmaSenha" value="#{perfilBean.confirmaSenha}"
+							required="#{!perfilBean.editando}" requiredMessage="Confirme a senha"
+							maxlength="255" />
+						<p:message for="confirmaSenha" display="text" />
+					</div>
+
+				</div>
+
+				<div class="av-actions">
+					<p:commandButton id="btnRegistrar" value="Criar Conta"
+						rendered="#{!perfilBean.editando}"
+						styleClass="ui-button-raised ui-button-success"
+						icon="pi pi-user-plus"
+						action="#{perfilBean.registrar()}"
+						update="@form :growl"
+						process="@form">
+						<p:defaultCommand target="btnRegistrar" />
+					</p:commandButton>
+
+					<p:commandButton id="btnSalvar" value="Salvar alterações"
+						rendered="#{perfilBean.editando}"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{perfilBean.salvar()}"
+						update="@form :growl"
+						process="@form">
+						<p:defaultCommand target="btnSalvar" />
+					</p:commandButton>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- ── CARDS DE PERFIL (só exibe quando logado) ───── -->
+		<h:panelGroup rendered="#{perfilBean.editando}" layout="block" style="margin-top:20px;">
+			<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:20px;">
+
+				<!-- Acesso Pratique Já -->
+				<div class="av-panel" style="margin-bottom:0">
+					<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+						<span class="av-shero-eyebrow"><i class="pi pi-graduation-cap" /> Estudante</span>
+						<div class="av-shero-title">
+							<i class="pi pi-star" />
+							#{perfilBean.entidade.perfil.nome}
+						</div>
+						<p class="av-shero-sub">Acesso ao Pratique Já</p>
+					</div>
+
+					<div class="av-det-grid">
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#f0fdf4;color:#16a34a;"><i class="pi pi-book" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Anotações de aula</span>
+								<span class="av-det-cell-value">Incluído</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#f0f9ff;color:#0284c7;"><i class="pi pi-pencil" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Exercícios</span>
+								<span class="av-det-cell-value">
+									#{perfilBean.entidade.perfil.exerciciosIlimitados ? 'Ilimitado' : 'Limitado'}
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#fff7ed;color:#c2410c;"><i class="pi pi-list" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Questões</span>
+								<span class="av-det-cell-value">
+									#{perfilBean.entidade.perfil.questoesIlimitadas ? 'Ilimitado' : 'Limitado'}
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#eff6ff;color:#2563eb;"><i class="pi pi-comment" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Resoluções</span>
+								<span class="av-det-cell-value">
+									#{perfilBean.entidade.perfil.resolucoesCompletas ? 'Completas' : 'Limitadas'}
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#fdf4ff;color:#9333ea;"><i class="pi pi-download" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Download PDF</span>
+								<span class="av-det-cell-value">
+									#{perfilBean.entidade.perfil.downloadIlimitado ? 'Ilimitado' : 'Limitado'}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Perfil de Conteúdo (Posts) -->
+				<div class="av-panel" style="margin-bottom:0">
+					<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+						<span class="av-shero-eyebrow"><i class="pi pi-instagram" /> Conteúdo</span>
+						<div class="av-shero-title">
+							<i class="pi pi-star" />
+							#{perfilBean.entidade.perfilCriador.nome}
+						</div>
+						<p class="av-shero-sub">Plano de geração de posts</p>
+					</div>
+
+					<div class="av-det-grid">
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico"><i class="pi pi-bolt" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Créditos</span>
+								<span class="av-det-cell-value">
+									<h:outputText value="#{perfilBean.entidade.perfilCriador.creditosMensais} / mês"
+										rendered="#{perfilBean.entidade.perfilCriador.renovavel}" />
+									<h:outputText value="#{perfilBean.entidade.perfilCriador.creditosMensais} total"
+										rendered="#{!perfilBean.entidade.perfilCriador.renovavel}" />
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#ecfdf5;color:#059669;"><i class="pi pi-check-circle" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Restantes</span>
+								<span class="av-det-cell-value" style="color:#059669;">#{perfilBean.creditosRestantesPost}</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#f0f9ff;color:#0284c7;"><i class="pi pi-image" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Upload de background</span>
+								<span class="av-det-cell-value">
+									#{perfilBean.entidade.perfilCriador.uploadBackground == 0 ? 'Não disponível' : perfilBean.entidade.perfilCriador.uploadBackground}
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#fdf4ff;color:#9333ea;"><i class="pi pi-align-left" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Legendas</span>
+								<span class="av-det-cell-value">#{perfilBean.entidade.perfilCriador.legenda}</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#fff7ed;color:#c2410c;"><i class="pi pi-clock" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Retenção</span>
+								<span class="av-det-cell-value">#{perfilBean.entidade.perfilCriador.diasRetencao} dias</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Perfil de Avaliação -->
+				<div class="av-panel" style="margin-bottom:0">
+					<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+						<span class="av-shero-eyebrow"><i class="pi pi-file-edit" /> Avaliações</span>
+						<div class="av-shero-title">
+							<i class="pi pi-star" />
+							#{perfilBean.entidade.perfilAvaliacao.nome}
+						</div>
+						<p class="av-shero-sub">Plano de confecção de avaliações</p>
+					</div>
+
+					<div class="av-det-grid">
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico"><i class="pi pi-bolt" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Créditos</span>
+								<span class="av-det-cell-value">
+									<h:outputText value="#{perfilBean.entidade.perfilAvaliacao.limiteMensal} / mês"
+										rendered="#{perfilBean.entidade.perfilAvaliacao.renovavel}" />
+									<h:outputText value="#{perfilBean.entidade.perfilAvaliacao.limiteMensal} total"
+										rendered="#{!perfilBean.entidade.perfilAvaliacao.renovavel}" />
+								</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#ecfdf5;color:#059669;"><i class="pi pi-check-circle" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Restantes</span>
+								<span class="av-det-cell-value" style="color:#059669;">#{perfilBean.creditosRestantesAvaliacao}</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#f0f9ff;color:#0284c7;"><i class="pi pi-list" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Exercícios por avaliação</span>
+								<span class="av-det-cell-value">#{perfilBean.entidade.perfilAvaliacao.maxExerciciosPorAvaliacao}</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#faf5ff;color:#7c3aed;"><i class="pi pi-copy" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Avaliações por solicitação</span>
+								<span class="av-det-cell-value">#{perfilBean.entidade.perfilAvaliacao.maxAvaliacoesPorSolicitacao}</span>
+							</div>
+						</div>
+						<div class="av-det-cell">
+							<div class="av-det-cell-ico" style="background:#fff7ed;color:#c2410c;"><i class="pi pi-clock" /></div>
+							<div class="av-det-cell-txt">
+								<span class="av-det-cell-label">Retenção</span>
+								<span class="av-det-cell-value">#{perfilBean.entidade.perfilAvaliacao.diasRetencao} dias</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</h:panelGroup>
+
+		<!-- ── HISTÓRICO DE PAGAMENTOS ────────────────── -->
+		<h:panelGroup rendered="#{perfilBean.editando and not empty perfilBean.pagamentos}"
+			layout="block" style="margin-top:20px;">
+			<div class="av-panel">
+				<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+					<span class="av-shero-eyebrow"><i class="pi pi-credit-card" /> Financeiro</span>
+					<div class="av-shero-title"><i class="pi pi-history" /> Histórico de Pagamentos</div>
+					<p class="av-shero-sub">Cobranças registradas na sua conta</p>
+				</div>
+
+				<div style="overflow-x:auto;">
+					<table style="width:100%;min-width:420px;border-collapse:collapse;font-size:14px;">
+						<thead>
+							<tr style="border-bottom:2px solid #e5e7eb;">
+								<th style="text-align:left;padding:8px 12px;color:#6b7280;font-weight:600;">Data</th>
+								<th style="text-align:left;padding:8px 12px;color:#6b7280;font-weight:600;">Produto</th>
+								<th style="text-align:right;padding:8px 12px;color:#6b7280;font-weight:600;">Valor</th>
+								<th style="text-align:center;padding:8px 12px;color:#6b7280;font-weight:600;">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<ui:repeat value="#{perfilBean.pagamentos}" var="pag">
+								<tr style="border-bottom:1px solid #f3f4f6;">
+									<td style="padding:10px 12px;color:#374151;">
+										<h:outputText value="#{pag.data}">
+											<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+										</h:outputText>
+									</td>
+									<td style="padding:10px 12px;color:#374151;">
+										<h:outputText value="#{pag.produto.nome}" rendered="#{pag.produto != null}" />
+									</td>
+									<td style="padding:10px 12px;text-align:right;color:#111827;font-weight:600;">
+										<h:outputText value="#{pag.valor}">
+											<f:convertNumber pattern="R$ #,##0.00" />
+										</h:outputText>
+									</td>
+									<td style="padding:10px 12px;text-align:center;">
+										<h:outputText value="Pago"
+											rendered="#{pag.pago}"
+											style="background:#dcfce7;color:#16a34a;font-size:12px;font-weight:600;padding:3px 10px;border-radius:12px;" />
+										<h:outputText value="Pendente"
+											rendered="#{!pag.pago}"
+											style="background:#fef9c3;color:#854d0e;font-size:12px;font-weight:600;padding:3px 10px;border-radius:12px;" />
+									</td>
+								</tr>
+							</ui:repeat>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:decorate>

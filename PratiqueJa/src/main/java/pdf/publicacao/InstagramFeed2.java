@@ -6,7 +6,6 @@ import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Random;
 
 import bean.download.Diretorio;
 import matematica.GeradorExercicio;
@@ -16,6 +15,7 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.exercicio.ParagrafoResolucao;
+import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
 import pdf.util.Arquivo;
@@ -30,30 +30,6 @@ import util.CorAux;
  */
 public class InstagramFeed2
 {
-	/** Frases de gancho sorteadas por post (única parte sem dado no modelo). */
-	private static final String[] GANCHOS = {
-		"90\\% ERRAM ISSO",
-		"VOCÊ CONSEGUE EM 10s?",
-		"SEM CALCULADORA!",
-		"SÓ GÊNIOS ACERTAM",
-		"RÁPIDO: 10 SEGUNDOS!",
-		"PENSE ANTES DE VIRAR",
-		"QUASE NINGUÉM ACERTA",
-		"DESAFIO DO DIA",
-		"PARECE FÁCIL, MAS NÃO É",
-		"CUIDADO COM A PEGADINHA",
-		"RESOLVE DE CABEÇA?",
-		"ISSO CAI NO ENEM",
-		"TESTE SEU CÉREBRO",
-		"SÓ 1 EM 10 ACERTA",
-		"MOSTRE QUE VOCÊ SABE",
-		"ACERTE EM 1 TENTATIVA",
-		"DESAFIO RELÂMPAGO",
-		"VOCÊ AINDA LEMBRA?",
-		"NÃO VALE CALCULADORA",
-		"COMENTA SUA RESPOSTA"
-	};
-
 	ExercicioPadrao exercicio;
 	String latex;
 	Exercicio conta;
@@ -126,7 +102,7 @@ public class InstagramFeed2
 
 		if(!background.exists())
 		{
-			File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadraoFeed().getEndereco());
+			File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getPadrao().getEndereco());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -144,7 +120,7 @@ public class InstagramFeed2
 
 		if(!background.exists())
 		{
-			File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getBackgroundFeed().getEndImagem());
+			File origem = new File(diretorio.getConfig().getEndereco() + programacaoPost.getBackground().getEndImagem());
 			try
 			{
 				Files.copy(origem.toPath(), background.toPath());
@@ -159,7 +135,7 @@ public class InstagramFeed2
 	private void gerarImagem()
 	{
 		gravarLogo();
-		if(programacaoPost.isBasePadraoFeed())
+		if(programacaoPost.isBasePadrao())
 			gravarBackgroundPadrao();
 		else
 			gravarBackgroundEspecifico();
@@ -196,9 +172,9 @@ public class InstagramFeed2
 
 	public void caput()
 	{
-		String corFonte  = CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorFonte());
-		String corTitulo = CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorTitulo());
-		String corNome   = CorAux.convertHexPorc(programacaoPost.getConfigPost().getCorNome());
+		String corFonte  = CorAux.convertHexPorc(ConfigPost.COR_FONTE);
+		String corTitulo = CorAux.convertHexPorc(ConfigPost.COR_TITULO);
+		String corNome   = CorAux.convertHexPorc(ConfigPost.COR_NOME);
 
 		latex = "\\documentclass[12pt]{article}\r\n"
 		+ "\\usepackage[utf8]{inputenc}\r\n"
@@ -250,7 +226,7 @@ public class InstagramFeed2
 		+ "\\painel\r\n"
 		+ cabecalho(labelNivel())
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-34px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
-		+ "\\node[hook,below=5px of chip] (hook){" + gancho() + "};\r\n"
+		+ "\\node[hook,below=5px of chip] (hook){" + Ganchos.aleatorio() + "};\r\n"
 		+ "\\node[anchor=center,align=center,text width=216px,text=iris,font=\\bfseries] (enun)"
 		+ " at ([yshift=-178px]current page.north){" + fontsize(ptEnunciado(enunciado)) + "\r\n" + enunciado + "};\r\n"
 		+ "\\node[cta,anchor=south] at ([yshift=14px]PS){Comente sua resposta!};\r\n"
@@ -270,9 +246,13 @@ public class InstagramFeed2
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-34px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
 		+ "\\node[anchor=north,align=center,text width=216px,text=cinza,font=\\bfseries] (enun)"
 		+ " at ([yshift=-6px]chip.south){" + fontsize(Math.max(8, ptEnunciado(enunciado) - 5)) + "\r\n" + enunciado + "};\r\n"
-		+ "\\node[anchor=north,align=center,text width=216px,text=cinza,font=\\bfseries] (res)"
-		+ " at ([yshift=-12px]enun.south){" + fontsize(ptResolucao(texto)) + "\r\n"
-		+ "\\setlength{\\lineskip}{4pt}\\setlength{\\lineskiplimit}{2pt}\\setlength{\\jot}{4pt}\r\n" + texto + "};\r\n"
+		// Resolução num minipage (modo parágrafo normal), NÃO em node align=center: o
+		// align=center do TikZ não respeita a profundidade das frações e cola as linhas;
+		// o minipage espaça certo (igual à avaliação) e o \lineskip volta a funcionar.
+		+ "\\node[anchor=north,inner sep=0] (res)"
+		+ " at ([yshift=-12px]enun.south){\\begin{minipage}{216px}\\centering\\color{cinza}\\bfseries"
+		+ fontsizeResolucao(ptResolucao(texto)) + "\r\n"
+		+ espacamentoResolucao(ptResolucao(texto)) + "\r\n" + texto + "\\par\\end{minipage}};\r\n"
 		+ resposta()
 		+ "\\end{tikzpicture}\r\n";
 	}
@@ -324,11 +304,15 @@ public class InstagramFeed2
 		StringBuilder sb = new StringBuilder();
 		for(ParagrafoResolucao paragrafo : conta.getResolucaoParagrafos())
 		{
-			if(paragrafo.getTexto() == null || paragrafo.getTexto().isBlank())
+			String texto = paragrafo.getTexto();
+			if(texto == null || texto.isBlank())
 				continue;
+			// frações de display ficam grandes (\dfrac), mas no EXPOENTE mantém \frac (pequena):
+			// \dfrac num expoente fica enorme/feio (ex.: juros compostos (1+i)^{\frac{1}{12}}).
+			texto = texto.replace("\\frac", "\\dfrac").replace("^{\\dfrac", "^{\\frac");
 			if(sb.length() > 0)
 				sb.append(" \\\\\r\n");
-			sb.append(escapar(paragrafo.getTexto()));
+			sb.append(escapar(texto));
 		}
 		return sb.toString();
 	}
@@ -364,6 +348,24 @@ public class InstagramFeed2
 		return "\\fontsize{" + pt + "}{" + (pt + 3) + "}\\selectfont";
 	}
 
+	/** Leading apertado (pt+2) para a resolução, igual à avaliação: faz o \lineskip
+	 *  disparar nas linhas com \dfrac, evitando que a linha seguinte cole. */
+	private String fontsizeResolucao(int pt)
+	{
+		return "\\fontsize{" + pt + "}{" + (pt + 2) + "}\\selectfont";
+	}
+
+	/** Espaçamento da resolução escalado pela fonte (mesma proporção da avaliação a 10pt:
+	 *  lineskip 0,6·pt, lineskiplimit 0,2·pt, jot 0,8·pt) — funciona em qualquer tamanho. */
+	private String espacamentoResolucao(int pt)
+	{
+		int lineskip = Math.round(pt * 0.6f);
+		int limit = Math.round(pt * 0.2f);
+		int jot = Math.round(pt * 0.8f);
+		return "\\setlength{\\lineskip}{" + lineskip + "pt}\\setlength{\\lineskiplimit}{" + limit
+			+ "pt}\\setlength{\\jot}{" + jot + "pt}";
+	}
+
 	/** Reduz a fonte do chip quando o nome do assunto é longo. */
 	private String sizeChip()
 	{
@@ -393,12 +395,6 @@ public class InstagramFeed2
 		if(exercicio.getNivel() == Nivel.Nivel2)
 			return "NÍVEL MÉDIO";
 		return "NÍVEL DIFÍCIL";
-	}
-
-	/** Gancho sorteado do pool. */
-	private String gancho()
-	{
-		return GANCHOS[new Random().nextInt(GANCHOS.length)];
 	}
 
 	/**
@@ -447,10 +443,10 @@ public class InstagramFeed2
 	{
 		ProcessBuilder pb;
 		if(diretorio.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("sudo", "pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 		else
-			pb = new ProcessBuilder("pdftoppm", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+			pb = new ProcessBuilder("pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 
 		pb.redirectErrorStream(true);

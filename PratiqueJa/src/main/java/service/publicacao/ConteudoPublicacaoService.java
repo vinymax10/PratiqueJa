@@ -113,12 +113,12 @@ public class ConteudoPublicacaoService
 	 */
 	public String montarLegenda(ExercicioPadrao exercicioPadrao, ConfigPost configPost)
 	{
-		String cta = configPost.getPerfilCriador() == PerfilCriador.Master
+		String cta = configPost.getUsuario().getPerfilCriador() == PerfilCriador.Master
 			? ctaDAO.getAnyCta(configPost)
 			: ctaDAO.getAnyCta(FinalidadeCta.Ensino);
 
 		String legenda = cta;
-		if(configPost.getPerfilCriador() != PerfilCriador.Basico)
+		if(configPost.getUsuario().getPerfilCriador() != PerfilCriador.Basico)
 			legenda += "\n\n" + exercicioPadrao.getAssunto().getHashtag() + " " + hashtagDAO.getAny(3);
 
 		return legenda;

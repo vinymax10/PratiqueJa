@@ -5,134 +5,51 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	template="/template/template.xhtml">
-	
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/assunto.css" type="text/css" />
+	</ui:define>
 
 	<div class="p-d-flex">
 	    <h:form id="form" style="margin-bottom:0">
-<!-- 	    	<div class="p-grid" style="margin:0 1rem;"> -->
-		
-				<div class="p-col-12" style="padding:0;">	
-					<h2 style="margin:24px 0 0 24px">Básico</h2>	
-				</div>
+
 				<nav class="painel">
 					<ul class="listAssunto">
-						<ui:repeat  value="#{assuntoBean.getTodosAssuntos('Basico')}" var="assunto" >
+						<ui:repeat value="#{assuntoBean.listaAtivas}" var="assunto">
 		                   	<li class="assunto">
-		                    	<a  href="/matematica/assunto.xhtml?assunto=#{assunto.chave}&amp;tab=1"  >
-				                    <div class="image" >
-					                    <img class="imageAssunto" 
-					                    src="/image/matematica/#{assunto.getModuloImage()}/#{assunto.getChaveImage()}/#{assunto.getChaveImage()}.png" />
+		                    	<a href="#{assunto.endTeoria()}">
+				                    <div class="image">
+					                    <img class="imageAssunto"
+					                    	src="#{assunto.endImageThumb()}"
+					                    	onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
 							         </div>
-							         
-							         <div class="text" >
-							         
-								        <span class="titleAssunto" >
-									    	#{assunto.nome}
+							         <div class="text">
+								        <span class="titleAssunto">#{assunto.nome}</span>
+									    <span class="descriptionAssunto">#{assunto.descricao}</span>
+									    <span class="assunto-badges">
+									    	<span class="assunto-badge assunto-badge--blue">
+									    		<i class="fa-solid fa-pencil"></i> #{assunto.qtdExercicios} exercícios
+									    	</span>
+									    	<span class="assunto-badge assunto-badge--green">
+									    		<i class="fa-solid fa-circle-question"></i> #{assunto.qtdQuestoes} questões
+									    	</span>
+									    	<span class="assunto-badge assunto-badge--purple">
+									    		<i class="fa-solid fa-play"></i> #{assunto.qtdVideosAula} videoaulas
+									    	</span>
+									    	<span class="assunto-badge assunto-badge--orange">
+									    		<i class="fa-solid fa-file-pdf"></i> #{assunto.qtdPdf} PDFs
+									    	</span>
 									    </span>
-									    <span class="titleAssunto" >
-										    <i class="star #{assunto.numStar>0 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>1 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>2 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>3 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>4 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-									    </span>
-									    
-									    <span class="descriptionAssunto" >
-										    #{assunto.descricao}
-									    </span>
-									    
 								    </div>
-			                    </a>	
+			                    </a>
 		                   	</li>
-		                   
 	                	</ui:repeat>
-	                	
 	                </ul>
 				</nav>
-				
-					
-				<div class="p-col-12" style="padding:0;">	
-					<h2 style="margin:24px 0 0 24px">Intermediário</h2>	
-				</div>
-				<nav class="painel">
-					<ul class="listAssunto">
-						<ui:repeat  value="#{assuntoBean.getTodosAssuntos('Intermediario')}" var="assunto" >
-		                   	<li class="assunto">
-		                    	<a  href="/matematica/assunto.xhtml?assunto=#{assunto.chave}&amp;tab=1"  >
-				                    <div class="image" >
-					                    <img class="imageAssunto" 
-					                    src="/image/matematica/#{assunto.getModuloImage()}/#{assunto.getChaveImage()}/#{assunto.getChaveImage()}.png" />
-							         </div>
-							         
-							         <div class="text" >
-							         
-								        <span class="titleAssunto" >
-									    	#{assunto.nome}  
-									    </span>
-									    <span class="titleAssunto" >
-									    	<i class="star #{assunto.numStar>0 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>1 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>2 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>3 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>4 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-									    </span>
-									    
-									    <span class="descriptionAssunto" >
-										    #{assunto.descricao} 	
-									    </span>
-									    
-								    </div>
-			                    </a>	
-		                   	</li>
-		                   
-	                	</ui:repeat>
-	                	
-	                </ul>
-				</nav>	
-				
-				<div class="p-col-12" style="padding:0;">	
-					<h2 style="margin:24px 0 0 24px">Avançado</h2>	
-				</div>
-				<nav class="painel">
-					<ul class="listAssunto">
-						<ui:repeat  value="#{assuntoBean.getTodosAssuntos('Avancado')}" var="assunto" >
-		                   	<li class="assunto">
-		                    	<a  href="/matematica/assunto.xhtml?assunto=#{assunto.chave}&amp;tab=1"  >
-				                    <div class="image" >
-					                    <img class="imageAssunto" 
-					                    src="/image/matematica/#{assunto.getModuloImage()}/#{assunto.getChaveImage()}/#{assunto.getChaveImage()}.png" />
-							         </div>
-							         
-							         <div class="text" >
-							         
-								        <span class="titleAssunto" >
-									    	#{assunto.nome}
-									    </span>
-									    <span class="titleAssunto" >
-										    <i class="star #{assunto.numStar>0 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>1 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>2 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>3 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-										    <i class="star #{assunto.numStar>4 ? 'fa-solid fa-star' : 'fa-regular fa-star'}" ></i>
-									    </span>
-									    
-									    <span class="descriptionAssunto" >
-										    #{assunto.descricao}
-									    </span>
-									    
-								    </div>
-			                    </a>	
-		                   	</li>
-		                   
-	                	</ui:repeat>
-	                	
-	                </ul>
-				</nav>
-		    	
+
 			<br/>
 			<br/>
 		</h:form>
 	</div>
-	
+
 </ui:decorate>
-	

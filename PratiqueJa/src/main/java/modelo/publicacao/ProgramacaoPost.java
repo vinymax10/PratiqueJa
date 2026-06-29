@@ -21,7 +21,7 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "configPost", "backgroundFeed", "backgroundReel", "padraoFeed", "padraoReel", "assunto" })
+@ToString(exclude = { "configPost", "background", "padrao", "assunto" })
 @Data
 @Entity
 public class ProgramacaoPost implements Serializable, Entidade
@@ -54,37 +54,25 @@ public class ProgramacaoPost implements Serializable, Entidade
 	@AuditLabel(value = "avulsa", genero = GeneroGramatical.FEMININO)
 	private boolean avulsa = false;
 
-	@AuditLabel(value = "background aleatório feed")
-	private boolean backgroundAleatorioFeed = true;
+	// Escolha (aleatória/específica) e origem (padrão/personalizada) do background:
+	// valem para Feed e Reel ao mesmo tempo (sempre iguais).
+	@AuditLabel(value = "background aleatório")
+	private boolean backgroundAleatorio = true;
 
-	@AuditLabel(value = "base padrão feed", genero = GeneroGramatical.FEMININO)
-	private boolean basePadraoFeed = true;
+	@AuditLabel(value = "base padrão", genero = GeneroGramatical.FEMININO)
+	private boolean basePadrao = true;
 
+	// Imagem escolhida quando "Personalizada".
 	@DiffIgnore
 	@ManyToOne
 	@JoinColumn(nullable = true)
-	private ImagemPost backgroundFeed;
+	private ImagemPost background;
 
+	// Imagem escolhida quando "Padrão".
 	@DiffIgnore
 	@ManyToOne
 	@JoinColumn(nullable = true)
-	private Background padraoFeed;
-
-	@AuditLabel(value = "background aleatório reel")
-	private boolean backgroundAleatorioReel = true;
-
-	@AuditLabel(value = "base padrão reel", genero = GeneroGramatical.FEMININO)
-	private boolean basePadraoReel = true;
-
-	@DiffIgnore
-	@ManyToOne
-	@JoinColumn(nullable = true)
-	private ImagemPost backgroundReel;
-
-	@DiffIgnore
-	@ManyToOne
-	@JoinColumn(nullable = true)
-	private Background padraoReel;
+	private Background padrao;
 
 	@AuditLabel(value = "assunto", atributo = "nome")
 	@ManyToOne
@@ -99,18 +87,14 @@ public class ProgramacaoPost implements Serializable, Entidade
 		ProgramacaoPost clone = new ProgramacaoPost();
 		clone.alternativaReel = this.alternativaReel;
 		clone.assunto = this.assunto;
-		clone.backgroundAleatorioFeed = this.backgroundAleatorioFeed;
-		clone.backgroundAleatorioReel = this.backgroundAleatorioReel;
-		clone.backgroundFeed = this.backgroundFeed;
-		clone.backgroundReel = this.backgroundReel;
-		clone.basePadraoFeed = this.basePadraoFeed;
-		clone.basePadraoReel = this.basePadraoReel;
+		clone.backgroundAleatorio = this.backgroundAleatorio;
+		clone.background = this.background;
+		clone.basePadrao = this.basePadrao;
 		clone.configPost = this.configPost;
 		clone.data = this.data;
 		clone.formato = this.formato;
 		clone.ordem = this.ordem;
-		clone.padraoFeed = this.padraoFeed;
-		clone.padraoReel = this.padraoReel;
+		clone.padrao = this.padrao;
 		clone.teste = this.teste;
 		return clone;
 	}
@@ -118,7 +102,7 @@ public class ProgramacaoPost implements Serializable, Entidade
 	public void updateData()
 	{
 		LocalDate ultimoEnvio = configPost.getUltimoEnvio();
-		PerfilCriador perfilCriador = configPost.getPerfilCriador();
+		PerfilCriador perfilCriador = configPost.getUsuario().getPerfilCriador();
 		data = ultimoEnvio.plusDays((ordem + 1) * perfilCriador.getIntervalo());
 	}
 }

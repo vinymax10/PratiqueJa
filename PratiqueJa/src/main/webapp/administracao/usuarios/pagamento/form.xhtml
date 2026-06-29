@@ -33,33 +33,24 @@
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Produto"/>
+				<p:selectOneMenu id="produto" value="#{pagamentoBean.entidade.produto}" converter="generic"
+				filter="true" filterMatchMode="contains"
+				required="true" requiredMessage="Selecione um produto">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.listaTudo}" var="produto"
+					itemLabel="#{produto.nome} (R$ #{produto.valor})" itemValue="#{produto}"/>
+					<p:ajax event="change" update="form:valor" listener="#{pagamentoBean.atualizarValor}" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
 				<p:outputLabel for="@next" value="Valor"/>
-				<p:inputNumber value="#{pagamentoBean.entidade.valor}" required="true"
+				<p:inputNumber id="valor" value="#{pagamentoBean.entidade.valor}" required="true"
 				symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="."
 				requiredMessage="O valor é obrigatório"/>
-				<p:message for="@previous" display="text"/>
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
-				<p:outputLabel for="@next" value="Plano"/>
-				<p:selectOneMenu value="#{pagamentoBean.entidade.plano}"
-				required="true" requiredMessage="O plano é obrigatório">
-					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{perfilUsuarioBean.opcoes}" var="opcao"
-					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
-				</p:selectOneMenu>
-				<p:message for="@previous" display="text"/>
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
-				<p:outputLabel for="@next" value="Tipo de Pagamento"/>
-				<p:selectOneMenu value="#{pagamentoBean.entidade.tipoPagamento}"
-				required="true" requiredMessage="O tipo de pagamento é obrigatório">
-					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{tipoPagamentoBean.opcoes}" var="opcao"
-					itemLabel="#{opcao.nome}" itemValue="#{opcao}"/>
-				</p:selectOneMenu>
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 

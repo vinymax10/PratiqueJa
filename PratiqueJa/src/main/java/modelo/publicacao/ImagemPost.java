@@ -21,7 +21,7 @@ import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "configPost", "configPostLogo", "programacoesFeed", "programacoesReel" })
+@ToString(exclude = { "configPost", "configPostLogo", "programacoes" })
 @Data
 @Entity
 public class ImagemPost implements Serializable, Entidade
@@ -59,10 +59,6 @@ public class ImagemPost implements Serializable, Entidade
 	private ConfigPost configPostLogo;
 
 	@DiffIgnore
-	@OneToMany(mappedBy = "backgroundFeed")
-	private List<ProgramacaoPost> programacoesFeed = new ArrayList<ProgramacaoPost>();
-
-	@DiffIgnore
-	@OneToMany(mappedBy = "backgroundReel")
-	private List<ProgramacaoPost> programacoesReel = new ArrayList<ProgramacaoPost>();
+	@OneToMany(mappedBy = "background")
+	private List<ProgramacaoPost> programacoes = new ArrayList<ProgramacaoPost>();
 }

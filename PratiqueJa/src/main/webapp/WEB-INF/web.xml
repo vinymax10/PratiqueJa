@@ -39,7 +39,7 @@
 
 	<error-page>
 		<exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
-		<location>/matematica/painel.xhtml</location>
+		<location>/inicio.xhtml</location>
 	</error-page>
 
 	<session-config>

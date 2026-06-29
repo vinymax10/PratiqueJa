@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import bean.PaiBean;
 import bean.seguranca.AutenticacaoBean;
 import dao.usuario.PagamentoDAO;
+import dao.usuario.ProdutoDAO;
 import filtro.usuario.FiltroPagamento;
 import infra.Navegacao;
 import jakarta.annotation.PostConstruct;
@@ -16,10 +17,11 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
-import modelo.seguranca.PermissaoPadrao;
 import modelo.publicacao.PerfilCriador;
+import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Pagamento;
 import modelo.usuario.PerfilUsuario;
+import modelo.usuario.Produto;
 import modelo.usuario.TipoPagamento;
 import modelo.usuario.Usuario;
 import service.email.EmailService;
@@ -39,6 +41,9 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 
 	private String planoStr;
 	private String tipoPagamentoStr;
+
+	@Inject
+	private ProdutoDAO produtoDAO;
 
 	@Inject
 	private AutenticacaoBean autenticacaoBean;
@@ -81,6 +86,12 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 			filtro = tabState.getState(FiltroPagamento.class);
 	}
 
+	public void atualizarValor()
+	{
+		if(entidade != null && entidade.getProduto() != null)
+			entidade.setValor(entidade.getProduto().getValor());
+	}
+
 	public String adicionarFinalizar()
 	{
 		try
@@ -88,38 +99,39 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 			TipoPagamento tipoPagamento = TipoPagamento.valueOf(this.tipoPagamentoStr);
 			PerfilUsuario plano = PerfilUsuario.valueOf(this.planoStr);
 
+			Produto produto = produtoDAO.buscarPorPerfilUsuario(plano, tipoPagamento);
+
 			Usuario usuario = Sessao.getUsuarioLogado();
 
 			entidade = new Pagamento();
 			entidade.setUsuario(usuario);
+			entidade.setProduto(produto);
+			entidade.setValor(produto != null ? produto.getValor() : 0);
 
 			LocalDate hoje = LocalDate.now();
 			entidade.setData(hoje);
-			entidade.setTipoPagamento(tipoPagamento);
-			entidade.setPlano(plano);
-			entidade.calcularValor();
 
 			if(!entidadeDAO.contem(entidade))
 			{
 				LocalDate validade = null;
-				if(tipoPagamento == TipoPagamento.Mensal)
-					validade = hoje.plusMonths(1);
-				else if(tipoPagamento == TipoPagamento.Anual)
-					validade = hoje.plusYears(1);
+				if(produto != null && produto.getDiasValididade() > 0)
+					validade = hoje.plusDays(produto.getDiasValididade());
 
-				usuario.setPerfil(plano);
+				if(produto != null && produto.getPerfilUsuario() != null)
+					usuario.setPerfil(produto.getPerfilUsuario());
+
 				usuario.setValidadePlano(validade);
 				usuario = usuarioBean.getEntidadeDAO().salvar(usuario);
 				SessionContext.getInstance().setAttribute("UsuarioLogado", usuario);
 				autenticacaoBean.setUsuario(usuario);
 
+				String nomeProduto = produto != null ? produto.getNome() : plano.getNome();
 				String assunto = "Pagamento realizado";
 				String mensagem = "Pagamento realizado\n\n"
 				+ "Nome: " + entidade.getUsuario().getNome() + "\n"
 				+ "Dia: " + StringAux.getDataStr(entidade.getData()) + "\n"
 				+ "Valor: " + entidade.getValor() + "\n"
-				+ "Plano: " + entidade.getPlano() + "\n"
-				+ "TipoPagamento: " + entidade.getTipoPagamento() + "\n";
+				+ "Produto: " + nomeProduto + "\n";
 
 				emailService.adicionar("vinymax10@gmail.com", assunto, mensagem);
 
@@ -140,17 +152,9 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			switch(plano)
-			{
-				case Premium:
-					if(tipoPagamento == TipoPagamento.Mensal)
-						Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848eccfa81018ede87a667092d");
-					else
-						Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848eccfa7b018ede9e43dc0955");
-					break;
-
-				default: break;
-			}
+			Produto produto = produtoDAO.buscarPorPerfilUsuario(plano, tipoPagamento);
+			if(produto != null && produto.getIdMercadoPago() != null)
+				Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=" + produto.getIdMercadoPago());
 		}
 		return "";
 	}
@@ -159,20 +163,9 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			switch(perfilCriador)
-			{
-				case Basico:
-					Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=d311f39e2ead490bbf268c99afec68cc");
-					break;
-				case Premium:
-					Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2227a4e613f34be8978b6cdd63990d04");
-					break;
-				case Master:
-					Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=4af587d1c8b045c2acdbe0112b5c93c4");
-					break;
-
-				default: break;
-			}
+			Produto produto = produtoDAO.buscarPorPerfilCriador(perfilCriador);
+			if(produto != null && produto.getIdMercadoPago() != null)
+				Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=" + produto.getIdMercadoPago());
 		}
 		return "";
 	}

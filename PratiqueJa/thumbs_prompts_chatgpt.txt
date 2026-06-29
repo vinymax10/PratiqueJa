@@ -54,7 +54,6 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-limão; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um sinal de divisão (÷) e um círculo repartido em fatias iguais (ou um conjunto dividido em grupos iguais), sugerindo repartir igualmente.
 
-//Parei aqui
 [05] Adição e Subtração com Inteiros
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-azulado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma reta numérica horizontal com setas para a esquerda (negativos) e para a direita (positivos), e um sinal de mais-menos (±) em destaque.
@@ -91,6 +90,7 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um diagrama de Venn com dois círculos sobrepostos e a região de interseção destacada.
 
+//Parei aqui
 [14] Expressões Numéricas
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: parênteses e colchetes aninhados envolvendo símbolos de operações (+ − × ÷), sugerindo ordem das operações.
