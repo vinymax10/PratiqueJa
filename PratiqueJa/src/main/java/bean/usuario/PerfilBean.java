@@ -166,10 +166,22 @@ public class PerfilBean implements Serializable
 		return creditoPostService.creditosRestantes(entidade, entidade.getPerfilCriador());
 	}
 
+	public int getPostsUsados()
+	{
+		if(entidade == null || entidade.getPerfilCriador() == null) return 0;
+		return creditoPostService.postsUsados(entidade, entidade.getPerfilCriador());
+	}
+
 	public int getCreditosRestantesAvaliacao()
 	{
 		if(entidade == null) return 0;
 		return creditoAvaliacaoService.creditosRestantes(entidade);
+	}
+
+	public int getAvaliacoesUsadas()
+	{
+		if(entidade == null) return 0;
+		return creditoAvaliacaoService.avaliacoesUsadas(entidade);
 	}
 
 	public void validateEmail(FacesContext context, UIComponent component, Object value)

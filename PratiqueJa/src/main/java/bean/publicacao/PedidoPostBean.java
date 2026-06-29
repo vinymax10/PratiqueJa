@@ -526,7 +526,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	public int creditosRestantes()
 	{
-		return cotaDisponivel() - postsUsadosNoMes;
+		return Math.max(0, cotaDisponivel() - postsUsadosNoMes);
 	}
 
 	/** Créditos disponíveis independente do modo (trial ou plano ativo). */

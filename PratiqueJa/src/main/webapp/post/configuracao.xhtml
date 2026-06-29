@@ -54,8 +54,8 @@
 				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.perfilCriador.nome}</strong>
 			</div>
 			<div class="pc-stat">
-				<span class="pc-stat-label">Usados no mês</span>
-				<strong class="pc-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
+				<span class="pc-stat-label">#{pedidoPostBean.modoTrial ? 'Usados no total' : 'Usados no mês'}</span>
+				<strong class="pc-stat-value">#{pedidoPostBean.modoTrial ? pedidoPostBean.postsUsadosTotal : pedidoPostBean.postsUsadosNoMes}</strong>
 			</div>
 			<div class="pc-stat pc-stat--green">
 				<span class="pc-stat-label">Restantes</span>

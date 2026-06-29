@@ -33,12 +33,22 @@ public class CreditoPostService implements Serializable
 			return 0;
 
 		if(!perfil.isRenovavel())
-			return perfil.getCreditosMensais() - pedidoPostDAO.somarPostsTotal(usuario);
+			return Math.max(0, perfil.getCreditosMensais() - pedidoPostDAO.somarPostsTotal(usuario));
 
 		int cota = perfil.getCreditosMensais() + usuario.getCreditoRolloverPost();
 		LocalDateTime inicioMes = LocalDate.now().withDayOfMonth(1).atStartOfDay();
 		int usados = pedidoPostDAO.somarPostsNoMes(usuario, inicioMes, inicioMes.plusMonths(1));
-		return cota - usados;
+		return Math.max(0, cota - usados);
+	}
+
+	/** Posts já gerados no período vigente. Teste: total acumulado. Renovável: só o mês corrente. */
+	public int postsUsados(Usuario usuario, PerfilCriador perfil)
+	{
+		if(usuario == null || perfil == null) return 0;
+		if(!perfil.isRenovavel())
+			return pedidoPostDAO.somarPostsTotal(usuario);
+		LocalDateTime inicioMes = LocalDate.now().withDayOfMonth(1).atStartOfDay();
+		return pedidoPostDAO.somarPostsNoMes(usuario, inicioMes, inicioMes.plusMonths(1));
 	}
 
 	/** Registra o consumo de {@code quantidade} posts pela programação (não baixável). */
