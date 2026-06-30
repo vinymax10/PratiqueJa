@@ -41,10 +41,12 @@ public class ProblemaDescontoSimples
 			case XNIT: 	resolucaoLatex+=formulaDescontoSimples()+"\\\\";
 						resolucaoLatex+="N="+n+", \\quad i="+i.porcentagem()+"\\%"+", \\quad t="+t+"\\\\";
 						resultado=n.mult(i).mult(t);
-						resolucaoLatex+="D="+n+" \\cdot "+i.showDfrac()+" \\cdot "+t+"="+resultado.showDfrac();
+						String showD = resultado.showDfrac();
 						resultado.fatoracao(2);
 						if(resultado.isSimplificou())
-							resolucaoLatex+="="+resultado;
+							resolucaoLatex+="D="+n+" \\cdot "+i.showDfrac()+" \\cdot "+t+"="+showD+"=\\mathbf{"+resultado+"}";
+						else
+							resolucaoLatex+="D="+n+" \\cdot "+i.showDfrac()+" \\cdot "+t+"=\\mathbf{"+showD+"}";
 			break;
 			
 			case XDNIT:
@@ -56,7 +58,7 @@ public class ProblemaDescontoSimples
 			if(resultado.isSimplificou())
 				resolucaoLatex+="="+resultado.showDfrac()+"\\\\";
 			resolucaoLatex+=formulaAtual()+"\\\\";
-			resolucaoLatex+="A="+n.showDfrac()+"-"+resultado.showDfrac()+"="+n.minus(resultado).showDfrac();
+			resolucaoLatex+="A="+n.showDfrac()+"-"+resultado.showDfrac()+"=\\mathbf{"+n.minus(resultado).showDfrac()+"}";
 			break;
 
 			case DXIT:
@@ -66,7 +68,7 @@ public class ProblemaDescontoSimples
 			resolucaoLatex+="N=\\dfrac{"+d+"}{"+i.showDfrac()+" \\cdot "+t.showDfrac()+"}";
 			resultado=i.mult(t);
 			resultado.fatoracao(2);
-			resolucaoLatex+="=\\dfrac{"+d+"}{"+resultado.showDfrac()+"}="+n.showDfrac();
+			resolucaoLatex+="=\\dfrac{"+d+"}{"+resultado.showDfrac()+"}=\\mathbf{"+n.showDfrac()+"}";
 			break;
 			
 			case DNXT: 	
@@ -75,7 +77,7 @@ public class ProblemaDescontoSimples
 			resultado=d.div(n).div(t);
 			resolucaoLatex+=d.showDfrac()+"="+n+" \\cdot i \\cdot "+t+"\\\\";
 			resolucaoLatex+="i=\\dfrac{"+d+"}{"+n+" \\cdot "+t+"}";
-			resolucaoLatex+="=\\dfrac{"+d+"}{"+n.mult(t)+"}="+i.showDfrac();
+			resolucaoLatex+="=\\dfrac{"+d+"}{"+n.mult(t)+"}=\\mathbf{"+i.showDfrac()+"}";
 			break;
 			
 			case DNIX:
@@ -85,7 +87,7 @@ public class ProblemaDescontoSimples
 			resolucaoLatex+="t=\\dfrac{"+d+"}{"+n.showDfrac()+" \\cdot "+i.showDfrac()+"}";
 			resultado=n.mult(i);
 			resultado.fatoracao(2);
-			resolucaoLatex+="=\\dfrac{"+d+"}{"+resultado.showDfrac()+"}="+t.showDfrac();
+			resolucaoLatex+="=\\dfrac{"+d+"}{"+resultado.showDfrac()+"}=\\mathbf{"+t.showDfrac()+"}";
 			break;
 		}
 		return resolucaoLatex;

@@ -19,7 +19,7 @@ public class Resolucao
 		resolucaoLatex+="x = "+parcial.showDfrac()+"  \\cdot"+sen2.inverter().showDfrac();
 		parcial=parcial.mult(sen2.inverter());
 		parcial.fatoracao(2);
-		resolucaoLatex+=" = "+parcial.showDfrac();
+		resolucaoLatex+=" = \\mathbf{"+parcial.showDfrac()+"}";
 		
 		return resolucaoLatex;
 	}
@@ -39,11 +39,11 @@ public class Resolucao
 		parcial=parcial.div(numerador2);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucaoLatex+=" = "+parcial.showDfrac();
-		
+			resolucaoLatex+=" = \\mathbf{"+parcial.showDfrac()+"}";
+
 		return resolucaoLatex;
 	}
-	
+
 	public static String leiCosLado(String angle,
 	Racional lado1, Racional lado2, Racional cos)
 	{
@@ -65,18 +65,18 @@ public class Resolucao
 		parcial=lado1.mult(lado1).add(lado2.mult(lado2)).minus(parcial);
 		
 		resolucaoLatex +=parcial.showDfrac()+"\\\\";
-		resolucaoLatex +="x=\\sqrt{"+parcial.showDfrac()+"}="+((int)Math.sqrt(parcial.numerador));
+		resolucaoLatex +="x=\\sqrt{"+parcial.showDfrac()+"}=\\mathbf{"+((int)Math.sqrt(parcial.numerador))+"}";
 
 		return resolucaoLatex;
 	}
-	
+
 	public static String raioCircunscrito(String angle, Racional lado, Racional sen)
 	{
 		String resolucaoLatex = ParCor.formula("R = \\dfrac{a}{2 \\cdot \\text{sen}~A}")+"\\\\";
 		resolucaoLatex += "R = \\dfrac{"+lado.showDfrac()+"}{2 \\cdot "+sen.showDfrac()+"}\\\\";
 		Racional r = lado.div(new Racional(2).mult(sen));
 		r.fatoracao(2);
-		resolucaoLatex += "R = "+r.showDfrac();
+		resolucaoLatex += "R = \\mathbf{"+r.showDfrac()+"}";
 		return resolucaoLatex;
 	}
 
@@ -86,7 +86,7 @@ public class Resolucao
 		resolucaoLatex += "x = 2 \\cdot "+r.showDfrac()+" \\cdot "+sen.showDfrac()+"\\\\";
 		Racional resultado = new Racional(2).mult(r).mult(sen);
 		resultado.fatoracao(2);
-		resolucaoLatex += "x = "+resultado.showDfrac();
+		resolucaoLatex += "x = \\mathbf{"+resultado.showDfrac()+"}";
 		return resolucaoLatex;
 	}
 
@@ -113,12 +113,12 @@ public class Resolucao
 		
 		parcial=parcial.div(new Racional(2).mult(lado2).mult(lado3));
 		
-		resolucaoLatex +="cos~"+angle+"="+parcial.showDfrac();
+		resolucaoLatex +="cos~"+angle+"=\\mathbf{"+parcial.showDfrac()+"}";
 
 		parcial.fatoracao(2);
-		
+
 		if(parcial.isSimplificou())
-			resolucaoLatex +="="+parcial.showDfrac();
+			resolucaoLatex +="=\\mathbf{"+parcial.showDfrac()+"}";
 		
 //		if(parcial.positivo())
 //			resolucaoLatex +="x^2="+lado1.mult(lado1).showDfrac()+"+"+lado2.mult(lado2).showDfrac()+" - "+

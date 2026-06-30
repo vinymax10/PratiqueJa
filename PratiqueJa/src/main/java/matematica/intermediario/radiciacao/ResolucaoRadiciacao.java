@@ -56,7 +56,7 @@ public class ResolucaoRadiciacao
 		}
 		
 		if(fatoresPrimos.precisaDesenvolver())
-			resolucaoLatex+="="+fatoresPrimos.resultado();
+			resolucaoLatex+="=\\mathbf{"+fatoresPrimos.resultado()+"}";
 		
 		return resolucaoLatex;
 	}

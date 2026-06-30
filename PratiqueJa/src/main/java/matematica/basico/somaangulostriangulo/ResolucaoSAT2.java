@@ -9,7 +9,7 @@ public class ResolucaoSAT2
 		return new String[]
 		{
 			x + "+" + a + "° +" + b + "° = 180°",
-			x + "= 180° -" + a + "° - " + b + "°=" + (180 - a - b) + "°"
+			x + "= 180° -" + a + "° - " + b + "°=\\mathbf{" + (180 - a - b) + "°}"
 		};
 	}
 
@@ -18,7 +18,7 @@ public class ResolucaoSAT2
 		return new String[]
 		{
 			x + "+" + a + "° +" + b + "° +" + c + "° = 180°",
-			x + "= 180° -" + a + "° - " + b + "° - " + c + "°=" + (180 - a - b - c) + "°"
+			x + "= 180° -" + a + "° - " + b + "° - " + c + "°=\\mathbf{" + (180 - a - b - c) + "°}"
 		};
 	}
 
@@ -27,7 +27,7 @@ public class ResolucaoSAT2
 		return new String[]
 		{
 			x + "+" + a + "° = 180°",
-			x + "= 180° -" + a + "° =" + (180 - a) + "°"
+			x + "= 180° -" + a + "° =\\mathbf{" + (180 - a) + "°}"
 		};
 	}
 
@@ -36,7 +36,7 @@ public class ResolucaoSAT2
 		return new String[]
 		{
 			x + "+" + a + "° +" + b + "° = 90°",
-			x + "= 90° -" + a + "° - " + b + "°=" + (90 - a - b) + "°"
+			x + "= 90° -" + a + "° - " + b + "°=\\mathbf{" + (90 - a - b) + "°}"
 		};
 	}
 
@@ -45,7 +45,7 @@ public class ResolucaoSAT2
 		return new String[]
 		{
 			x + "+" + a + "° = 90°",
-			x + "= 90° -" + a + "° =" + (90 - a) + "°"
+			x + "= 90° -" + a + "° =\\mathbf{" + (90 - a) + "°}"
 		};
 	}
 

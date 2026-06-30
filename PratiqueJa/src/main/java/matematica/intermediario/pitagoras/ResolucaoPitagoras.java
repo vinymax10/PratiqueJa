@@ -19,7 +19,7 @@ public class ResolucaoPitagoras
 			"b=" + b.show() + ",\\quad c=" + c.show(),
 			"a^2 =" + b.showEleQuad() + "+" + c.showEleQuad(),
 			"a^2 =" + b.showQuad() + "+" + c.showQuad() + " = " + (b.quad() + c.quad()),
-			"a = \\sqrt{" + (b.quad() + c.quad()) + "}" + " = " + a.show()
+			"a = \\sqrt{" + (b.quad() + c.quad()) + "}" + " = \\mathbf{" + a.show() + "}"
 		};
 	}
 
@@ -35,7 +35,7 @@ public class ResolucaoPitagoras
 			"a=" + a.show() + ",\\quad c=" + c.show(),
 			"b^2+" + c.showEleQuad() + " = "+a.showEleQuad(),
 			"b^2 =" + a.showQuad() + "-" + c.showQuad() + " = " + (a.quad() - c.quad()),
-			"b = \\sqrt{" + (a.quad() - c.quad()) + "}" + " = " + b.show()
+			"b = \\sqrt{" + (a.quad() - c.quad()) + "}" + " = \\mathbf{" + b.show() + "}"
 		};
 	}
 
@@ -51,7 +51,7 @@ public class ResolucaoPitagoras
 			"a=" + a.show() + ",\\quad b=" + b.show(),
 			b.showEleQuad() + " + c^2 =" + a.showEleQuad(),
 			"c^2 =" + a.showQuad() + "-" + b.showQuad() + " = " + (a.quad() - b.quad()),
-			"c = \\sqrt{" + (a.quad() - b.quad()) + "}" + " = " + c.show()
+			"c = \\sqrt{" + (a.quad() - b.quad()) + "}" + " = \\mathbf{" + c.show() + "}"
 		};
 	}
 	

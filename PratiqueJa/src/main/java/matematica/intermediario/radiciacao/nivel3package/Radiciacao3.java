@@ -38,10 +38,10 @@ public class Radiciacao3 extends GeradorExercicio
 
 		Racional resultado = new Racional((x * b) + (x * b * y), b - c);
 
-		String passo5 = resultado.showDfrac();
+		String passo5 = "\\mathbf{" + resultado.showDfrac() + "}";
 		resultado.fatoracao(2);
 		if(resultado.isSimplificou())
-			passo5 += "=" + resultado.showDfrac();
+			passo5 += "=\\mathbf{" + resultado.showDfrac() + "}";
 
 		addParagrafo("Calcule:");
 		addParagrafo("\\(" + texto + "\\)");

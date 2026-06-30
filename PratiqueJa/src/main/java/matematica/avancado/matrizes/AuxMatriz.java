@@ -218,7 +218,7 @@ public class AuxMatriz
 					str+="\\\\";
 			}
 		}
-		str+="="+soma(matriz);
+		str+="=\\mathbf{"+soma(matriz)+"}";
 		return str;
 	}
 	
@@ -242,7 +242,7 @@ public class AuxMatriz
 					str+="\\\\";
 			}
 		}
-		str+="="+somaRacional(matriz).showDfrac();
+		str+="=\\mathbf{"+somaRacional(matriz).showDfrac()+"}";
 		return str;
 	}
 	

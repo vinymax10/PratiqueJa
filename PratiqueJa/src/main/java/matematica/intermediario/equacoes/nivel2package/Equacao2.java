@@ -27,7 +27,7 @@ public class Equacao2 extends GeradorExercicio
 		addResolucao("\\(" + ab + var + " + " + ac + " = " + d + "\\).");
 		addResolucao("Isolando o termo com \\(" + var + "\\):");
 		addResolucao("\\(" + ab + var + " = " + d + " - " + ac + " = " + (d - ac) + "\\).");
-		addResolucao("\\(" + var + " = \\dfrac{" + (d - ac) + "}{" + ab + "} = " + xResult + "\\).");
+		addResolucao("\\(" + var + " = \\dfrac{" + (d - ac) + "}{" + ab + "} = \\mathbf{" + xResult + "}\\).");
 
 		gerarAlternativas("" + xResult);
 	}

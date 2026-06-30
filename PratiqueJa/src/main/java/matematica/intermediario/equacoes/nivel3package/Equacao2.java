@@ -28,9 +28,9 @@ public class Equacao2 extends GeradorExercicio
 		addResolucao("Passando os termos com \\(" + var + "\\) para o lado esquerdo"
 				+ " e as constantes para o direito:");
 		addResolucao("\\(" + aStr + var + " - " + cStr + var + " = " + d + " - " + b + "\\).");
-		addResolucao("\\(" + coefStr + var + " = " + (d - b) + "\\).");
+		addResolucao("\\(" + coefStr + var + " = \\mathbf{" + (d - b) + "}\\).");
 		if(coef > 1)
-			addResolucao("\\(" + var + " = \\dfrac{" + (d - b) + "}{" + coef + "} = " + xResult + "\\).");
+			addResolucao("\\(" + var + " = \\dfrac{" + (d - b) + "}{" + coef + "} = \\mathbf{" + xResult + "}\\).");
 
 		gerarAlternativas("" + xResult);
 	}

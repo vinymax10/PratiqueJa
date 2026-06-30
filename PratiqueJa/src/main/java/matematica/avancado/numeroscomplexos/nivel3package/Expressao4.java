@@ -21,13 +21,13 @@ public class Expressao4 extends GeradorExercicio
 		{
 			pergunta = "Qual a parte real da divisão?";
 			resultadoCorreto = "" + resultado.real;
-			passoFinal = "\\(\\operatorname{Re}(z)=" + resultado.real.showDfrac() + "\\)";
+			passoFinal = "\\(\\operatorname{Re}(z)=\\mathbf{" + resultado.real.showDfrac() + "}\\)";
 		}
 		else
 		{
 			pergunta = "Qual a parte imaginária da divisão?";
 			resultadoCorreto = "" + resultado.imaginaria;
-			passoFinal = "\\(\\operatorname{Im}(z)=" + resultado.imaginaria.showDfrac() + "\\)";
+			passoFinal = "\\(\\operatorname{Im}(z)=\\mathbf{" + resultado.imaginaria.showDfrac() + "}\\)";
 		}
 
 		addParagrafo(pergunta);

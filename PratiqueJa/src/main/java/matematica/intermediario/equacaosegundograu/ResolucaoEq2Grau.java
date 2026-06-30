@@ -189,11 +189,13 @@ public class ResolucaoEq2Grau
 		passos.add(passoFracao);
 
 		Racional resultado = new Racional((-b) + raiz, (2 * a));
-		String passoResultado = "\\(x_1=" + resultado.showDfrac();
+		String fracOriginalX1 = resultado.showDfrac();
 		resultado.fatoracao(2);
+		String passoResultado;
 		if(resultado.isSimplificou())
-			passoResultado += "=" + resultado.showDfrac();
-		passoResultado += "\\)";
+			passoResultado = "\\(x_1=" + fracOriginalX1 + "=\\mathbf{" + resultado.showDfrac() + "}\\)";
+		else
+			passoResultado = "\\(x_1=\\mathbf{" + fracOriginalX1 + "}\\)";
 		passos.add(passoResultado);
 
 		return passos.toArray(new String[0]);
@@ -221,11 +223,13 @@ public class ResolucaoEq2Grau
 		passos.add(passoFracao);
 
 		Racional resultado = new Racional((-b) - raiz, (2 * a));
-		String passoResultado = "\\(x_2=" + resultado.showDfrac();
+		String fracOriginalX2 = resultado.showDfrac();
 		resultado.fatoracao(2);
+		String passoResultado;
 		if(resultado.isSimplificou())
-			passoResultado += "=" + resultado.showDfrac();
-		passoResultado += "\\)";
+			passoResultado = "\\(x_2=" + fracOriginalX2 + "=\\mathbf{" + resultado.showDfrac() + "}\\)";
+		else
+			passoResultado = "\\(x_2=\\mathbf{" + fracOriginalX2 + "}\\)";
 		passos.add(passoResultado);
 
 		return passos.toArray(new String[0]);

@@ -26,7 +26,7 @@ public class Matrizes2 extends GeradorExercicio
 			addResolucao("\\(" + ParCor.formula("\\det~ A = a_{1,1} \\cdot a_{2,2} - a_{1,2} \\cdot a_{2,1}") + "\\)");
 			addResolucao("\\(\\det~ A = " + a[0][0] + " \\cdot " + AuxMatriz.parenteses(a[1][1]) +
 				"-" + AuxMatriz.parenteses(a[0][1]) + " \\cdot " + AuxMatriz.parenteses(a[1][0]) + "\\)");
-			addResolucao("\\(\\det~ A =" + (a[0][0] * a[1][1]) + "-" + AuxMatriz.parenteses(a[0][1] * a[1][0]) + "=" + resultadoCorreto + "\\)");
+			addResolucao("\\(\\det~ A =" + (a[0][0] * a[1][1]) + "-" + AuxMatriz.parenteses(a[0][1] * a[1][0]) + "=\\mathbf{" + resultadoCorreto + "}" + "\\)");
 		}
 		else
 		{
@@ -57,7 +57,7 @@ public class Matrizes2 extends GeradorExercicio
 				AuxMatriz.sinalPos(a[0][1] * a[1][0] * a[2][2]) +
 				"=" + sds + "\\)");
 
-			addResolucao("\\(\\det~ A = " + sdp + "-" + AuxMatriz.parenteses(sds) + "=" + resultadoCorreto + "\\)");
+			addResolucao("\\(\\det~ A = " + sdp + "-" + AuxMatriz.parenteses(sds) + "=\\mathbf{" + resultadoCorreto + "}" + "\\)");
 		}
 	}
 }

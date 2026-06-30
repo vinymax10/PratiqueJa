@@ -25,7 +25,6 @@ public class Radiciacao12 extends GeradorExercicio
 		addParagrafo("\\(\\dfrac{" + k + "}{\\sqrt{" + a + "}}\\)");
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
 		addResolucao("Multiplicar por \\(\\dfrac{\\sqrt{" + a + "}}{\\sqrt{" + a + "}}\\):");
-		addResolucao("\\(\\dfrac{" + k + "}{\\sqrt{" + a + "}} \\cdot \\dfrac{\\sqrt{" + a + "}}{\\sqrt{" + a + "}} = \\dfrac{" + k + "\\sqrt{" + a + "}}{" + a + "}\\)");
-		addResolucao("\\(= \\mathbf{" + m + "\\sqrt{" + a + "}}\\)");
+		addResolucao("\\(\\dfrac{" + k + "}{\\sqrt{" + a + "}} \\cdot \\dfrac{\\sqrt{" + a + "}}{\\sqrt{" + a + "}} = \\dfrac{" + k + "\\sqrt{" + a + "}}{" + a + "} = \\mathbf{" + m + "\\sqrt{" + a + "}}\\)");
 	}
 }

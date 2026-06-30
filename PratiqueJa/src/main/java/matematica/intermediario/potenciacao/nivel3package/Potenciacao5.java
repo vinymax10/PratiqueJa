@@ -19,6 +19,6 @@ public class Potenciacao5 extends GeradorExercicio
 		gerarAlternativas("" + (p1 - p2));
 		addResolucao("\\(" + a + "^{" + p1 + "-" + p2 + "}=" + a + "^{x}\\)");
 		addResolucao("\\(" + a + "^{" + (p1 - p2) + "}=" + a + "^{x}\\)");
-		addResolucao("\\(x=" + (p1 - p2) + "\\)");
+		addResolucao("\\(x=\\mathbf{" + (p1 - p2) + "}\\)");
 	}
 }

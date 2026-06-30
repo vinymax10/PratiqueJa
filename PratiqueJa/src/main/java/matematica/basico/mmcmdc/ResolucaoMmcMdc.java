@@ -41,9 +41,9 @@ public class ResolucaoMmcMdc
 		
 		resolucaoLatex+="\\hline";
 		if(cont<=1)
-			resolucaoLatex+=a+",&"+ b+"&"+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+"&\\mathbf{"+mmc+"}\\\\";
 		else
-			resolucaoLatex+=a+",&"+ b+"&"+resultado+"="+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+"&"+resultado+"=\\mathbf{"+mmc+"}\\\\";
 
 		resolucaoLatex+="\\end{array}";
 		return resolucaoLatex;
@@ -123,9 +123,9 @@ public class ResolucaoMmcMdc
 		
 		resolucaoLatex+="\\hline";
 		if(cont<=1)
-			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+",&"+ c+"&\\mathbf{"+mmc+"}\\\\";
 		else
-			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+resultado+"="+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+resultado+"=\\mathbf{"+mmc+"}\\\\";
 		
 		resolucaoLatex+="\\end{array}";
 		return resolucaoLatex;
@@ -175,9 +175,9 @@ public class ResolucaoMmcMdc
 		
 		resolucaoLatex+="\\hline";
 		if(cont<=1)
-			resolucaoLatex+=a+",&"+ b+"&"+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+"&\\mathbf{"+mmc+"}\\\\";
 		else
-			resolucaoLatex+=a+",&"+ b+"&"+resultado+"="+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+"&"+resultado+"=\\mathbf{"+mmc+"}\\\\";
 
 		resolucaoLatex+="\\end{array}";
 		return resolucaoLatex;
@@ -230,9 +230,9 @@ public class ResolucaoMmcMdc
 
 		resolucaoLatex+="\\hline";
 		if(cont<=1)
-			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+",&"+ c+"&\\mathbf{"+mmc+"}\\\\";
 		else
-			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+resultado+"="+mmc+"\\\\";
+			resolucaoLatex+=a+",&"+ b+",&"+ c+"&"+resultado+"=\\mathbf{"+mmc+"}\\\\";
 
 		resolucaoLatex+="\\end{array}";
 		return resolucaoLatex;

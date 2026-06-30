@@ -46,7 +46,7 @@ public class Matrizes3 extends GeradorExercicio
 
 			soma += a[0][i] * b[i][0];
 		}
-		soma += "=" + resultado;
+		soma += "=\\mathbf{" + resultado + "}";
 		addResolucao("\\(" + soma + "\\)");
 	}
 }

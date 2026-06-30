@@ -120,6 +120,13 @@ public class ConfigValores2 extends ConfigValores
 		resolucao = new MyExpression(expressao);
 		resolucaoLatex += resolucao.resolverLatex();
 		resolucaoPassos = resolucaoLatex.split("\\\\\\\\");
+		if (resolucaoPassos.length > 0)
+		{
+			String ultimo = resolucaoPassos[resolucaoPassos.length - 1].trim();
+			int lastEq = ultimo.lastIndexOf('=');
+			if (lastEq >= 0)
+				resolucaoPassos[resolucaoPassos.length - 1] = ultimo.substring(0, lastEq + 1) + "\\mathbf{" + ultimo.substring(lastEq + 1).trim() + "}";
+		}
 	}
 	
 	

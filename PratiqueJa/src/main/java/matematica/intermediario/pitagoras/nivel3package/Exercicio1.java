@@ -29,6 +29,6 @@ public class Exercicio1 extends GeradorExercicio
 		addResolucao("\\(d =\\sqrt{(" + x2 + "-" + x1 + ")^2 + (" + y2 + "-" + y1 + ")^2}\\)");
 		addResolucao("\\(d =\\sqrt{" + b.show() + "^2 + " + c.show() + "^2}\\)");
 		addResolucao("\\(d =\\sqrt{" + b.quad() + " + " + c.quad() + "}\\)");
-		addResolucao("\\(d =\\sqrt{" + (b.quad() + c.quad()) + "} = " + a.show() + "\\)");
+		addResolucao("\\(d =\\sqrt{" + (b.quad() + c.quad()) + "} = \\mathbf{" + a.show() + "}\\)");
 	}
 }

@@ -22,9 +22,9 @@ public class Equacao2 extends GeradorExercicio
 		addResolucao("Subtraindo \\(" + b + "\\) dos dois lados:");
 		addResolucao("\\(" + aStr + var + " = " + c + " - " + b + " = " + (c - b) + "\\).");
 		if(a > 1)
-			addResolucao("\\(" + var + " = \\dfrac{" + (c - b) + "}{" + a + "} = " + xResult + "\\).");
+			addResolucao("\\(" + var + " = \\dfrac{" + (c - b) + "}{" + a + "} = \\mathbf{" + xResult + "}\\).");
 		else
-			addResolucao("\\(" + var + " = " + xResult + "\\).");
+			addResolucao("\\(" + var + " = \\mathbf{" + xResult + "}\\).");
 
 		gerarAlternativas("" + xResult);
 	}

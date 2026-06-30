@@ -39,7 +39,7 @@ public class Expressao3 extends GeradorExercicio
 		String resolucao = "\\("+DefinicaoCores.irisBabypink()+"\\)";
 		resolucao += "O coeficiente linear da reta formada pela função "
 		+"\\(f(x)=" + nomeA + "x" + "\\textcolor{iris}{" + nomeB + "} \\)"
-		+ " é  \\(\\textcolor{iris}{" + b + "}\\)";
+		+ " é  \\(\\textcolor{iris}{\\mathbf{" + b + "}}\\)";
 
 		addParagrafo("Encontre o coeficiente linear");
 		addParagrafo("\\(" + texto + "\\)");

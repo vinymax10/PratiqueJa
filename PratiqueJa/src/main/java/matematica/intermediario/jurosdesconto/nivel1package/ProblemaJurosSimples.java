@@ -42,10 +42,12 @@ public class ProblemaJurosSimples
 				resolucaoLatex += formulaJurosSimples() + "\\\\";
 				resolucaoLatex += "C=" + c + ", \\quad i=" + i.porcentagem() + "\\%" + ", \\quad t=" + t + "\\\\";
 				resultado = c.mult(i).mult(t);
-				resolucaoLatex += "J=" + c + " \\cdot " + i.showDfrac() + " \\cdot " + t + "=" + resultado.showDfrac();
+				String showJ = resultado.showDfrac();
 				resultado.fatoracao(2);
 				if(resultado.isSimplificou())
-					resolucaoLatex += "=" + resultado;
+					resolucaoLatex += "J=" + c + " \\cdot " + i.showDfrac() + " \\cdot " + t + "=" + showJ + "=\\mathbf{" + resultado + "}";
+				else
+					resolucaoLatex += "J=" + c + " \\cdot " + i.showDfrac() + " \\cdot " + t + "=\\mathbf{" + showJ + "}";
 				break;
 
 			case XJCIT:
@@ -57,7 +59,7 @@ public class ProblemaJurosSimples
 				if(resultado.isSimplificou())
 					resolucaoLatex += "=" + resultado.showDfrac() + "\\\\";
 				resolucaoLatex += formulaMontante() + "\\\\";
-				resolucaoLatex += "M=" + resultado.showDfrac() + "+" + c.showDfrac() + "=" + resultado.add(c).showDfrac();
+				resolucaoLatex += "M=" + resultado.showDfrac() + "+" + c.showDfrac() + "=\\mathbf{" + resultado.add(c).showDfrac() + "}";
 				break;
 
 			case JXIT:
@@ -67,7 +69,7 @@ public class ProblemaJurosSimples
 				resolucaoLatex += "C=\\dfrac{" + j + "}{" + i.showDfrac() + " \\cdot " + t.showDfrac() + "}";
 				resultado = i.mult(t);
 				resultado.fatoracao(2);
-				resolucaoLatex += "=\\dfrac{" + j + "}{" + resultado.showDfrac() + "}=" + c.showDfrac();
+				resolucaoLatex += "=\\dfrac{" + j + "}{" + resultado.showDfrac() + "}=\\mathbf{" + c.showDfrac() + "}";
 				break;
 
 			case JCXT:
@@ -76,7 +78,7 @@ public class ProblemaJurosSimples
 				resultado = j.div(c).div(t);
 				resolucaoLatex += j.showDfrac() + "=" + c + " \\cdot i \\cdot " + t + "\\\\";
 				resolucaoLatex += "i=\\dfrac{" + j + "}{" + c + " \\cdot " + t + "}";
-				resolucaoLatex += "=\\dfrac{" + j + "}{" + c.mult(t) + "}=" + i.showDfrac();
+				resolucaoLatex += "=\\dfrac{" + j + "}{" + c.mult(t) + "}=\\mathbf{" + i.showDfrac() + "}";
 				break;
 
 			case JCIX:
@@ -86,7 +88,7 @@ public class ProblemaJurosSimples
 				resolucaoLatex += "t=\\dfrac{" + j + "}{" + c.showDfrac() + " \\cdot " + i.showDfrac() + "}";
 				resultado = c.mult(i);
 				resultado.fatoracao(2);
-				resolucaoLatex += "=\\dfrac{" + j + "}{" + resultado.showDfrac() + "}=" + t.showDfrac();
+				resolucaoLatex += "=\\dfrac{" + j + "}{" + resultado.showDfrac() + "}=\\mathbf{" + t.showDfrac() + "}";
 				break;
 		}
 		return resolucaoLatex;

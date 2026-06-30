@@ -9,7 +9,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = x + " + a + "° + 180° - " + c + " = x+ " + (a + 180 - c) + "°",
-			"x= 180° - " + (a + 180 - c) + "°=" + x + "°"
+			"x= 180° - " + (a + 180 - c) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -18,7 +18,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = " + a + "° + " + b + "° + 180° - x = " + (a + b + 180) + "° - x",
-			"x= - 180° + " + (a + b + 180) + "°=" + x + "°"
+			"x= - 180° + " + (a + b + 180) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -27,7 +27,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = " + a + "° + " + b + "° + x = " + (a + b) + "° + x",
-			"x= 180° - " + (a + b) + "°=" + x + "°"
+			"x= 180° - " + (a + b) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -36,7 +36,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = " + a + "° + 90° + x = " + (a + 90) + "° + x",
-			"x= 180° - " + (a + 90) + "°=" + x + "°"
+			"x= 180° - " + (a + 90) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -45,7 +45,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = x + 90° + 180° - " + a + "°= x + " + (270 - a) + "°",
-			"x=  180° - " + (270 - a) + "°=" + x + "°"
+			"x=  180° - " + (270 - a) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -54,7 +54,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = " + a + "° + 90° + 180° - x = " + (a + 270) + "° - x",
-			"x= - 180° + " + (a + 270) + "°=" + x + "°"
+			"x= - 180° + " + (a + 270) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 
@@ -63,7 +63,7 @@ public class ResolucaoSomaAngulosTriangulo1
 		return new String[]
 		{
 			"180° = x + 2 (180° - " + a + ") = x + 2 \\cdot" + (180 - a) + "° = x + " + (2 * (180 - a)),
-			"x= 180° - " + (2 * (180 - a)) + "°=" + x + "°"
+			"x= 180° - " + (2 * (180 - a)) + "°=\\mathbf{" + x + "°}"
 		};
 	}
 }

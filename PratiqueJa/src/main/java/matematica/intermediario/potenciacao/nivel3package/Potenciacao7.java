@@ -26,6 +26,6 @@ public class Potenciacao7 extends GeradorExercicio
 		gerarAlternativas("" + p);
 		addResolucao("\\(" + resultado + "=" + a + "^{x}\\)");
 		addResolucao("\\(" + a + "^{" + (p) + "}=" + a + "^{x}\\)");
-		addResolucao("\\(x=" + (p) + "\\)");
+		addResolucao("\\(x=\\mathbf{" + (p) + "}\\)");
 	}
 }

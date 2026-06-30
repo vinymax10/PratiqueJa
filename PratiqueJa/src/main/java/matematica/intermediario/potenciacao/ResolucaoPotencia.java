@@ -25,7 +25,7 @@ public class ResolucaoPotencia
 		if(p>1)
 			resolucaoLatex+=strFatores(a,p)+"=";
 		
-		resolucaoLatex +=  + Integer.valueOf((int) Math.pow(a, p));
+		resolucaoLatex += "\\mathbf{" + Integer.valueOf((int) Math.pow(a, p)) + "}";
 		return resolucaoLatex;
 	}
 	
@@ -41,7 +41,7 @@ public class ResolucaoPotencia
 
 			resolucaoLatex += "" + Math.abs(a) + ")=";
 		}
-		resolucaoLatex += "" + Integer.valueOf((int) -Math.pow(Math.abs(a), p));
+		resolucaoLatex += "\\mathbf{" + Integer.valueOf((int) -Math.pow(Math.abs(a), p)) + "}";
 
 		return resolucaoLatex;
 	}
@@ -67,10 +67,12 @@ public class ResolucaoPotencia
 		int numerador = (int) Math.pow(a, p);
 		int denominador = (int) Math.pow(b, p);
 		Racional racional = new Racional(numerador, denominador);
-		resolucaoLatex += racional.showDfrac();
+		String showFracAntes = racional.showDfrac();
 		racional.fatoracao(2);
 		if(racional.isSimplificou())
-			resolucaoLatex += "=" + racional.showDfrac();
+			resolucaoLatex += showFracAntes + "=\\mathbf{" + racional.showDfrac() + "}";
+		else
+			resolucaoLatex += "\\mathbf{" + showFracAntes + "}";
 
 		return resolucaoLatex;
 	}

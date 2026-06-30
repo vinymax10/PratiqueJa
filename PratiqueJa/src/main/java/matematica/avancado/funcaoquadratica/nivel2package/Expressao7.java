@@ -49,6 +49,6 @@ public class Expressao7 extends GeradorExercicio
 			+ (b * b) + Auxiliar.getNumber(-4 * c, "", false) + " = " + delta + "\\)");
 		addResolucao("\\(\\sqrt{\\Delta} = " + sqrtDelta + "\\)");
 		addResolucao("\\(x_1 = \\dfrac{" + negB + " - " + sqrtDelta + "}{2} = \\dfrac{" + num1 + "}{2} = \\mathbf{" + x1 + "}\\)");
-		addResolucao("\\(x_2 = \\dfrac{" + negB + " + " + sqrtDelta + "}{2} = \\dfrac{" + num2 + "}{2} = " + x2 + "\\)");
+		addResolucao("\\(x_2 = \\dfrac{" + negB + " + " + sqrtDelta + "}{2} = \\dfrac{" + num2 + "}{2} = \\mathbf{" + x2 + "}\\)");
 	}
 }

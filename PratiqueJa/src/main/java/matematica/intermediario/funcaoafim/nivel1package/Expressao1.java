@@ -41,6 +41,6 @@ public class Expressao1 extends GeradorExercicio
 		gerarAlternativas(resultado.toString());
 		if(a != -1 && a != 1)
 			addResolucao("\\(f(" + num + ")=" + a + "\\cdot " + num + nomeB + " =\\)");
-		addResolucao("\\(" + (a != -1 && a != 1 ? "" : "f(" + num + ")=") + (a * num) + nomeB + " = " + resultado + "\\)");
+		addResolucao("\\(" + (a != -1 && a != 1 ? "" : "f(" + num + ")=") + (a * num) + nomeB + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

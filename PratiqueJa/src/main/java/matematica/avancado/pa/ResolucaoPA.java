@@ -23,7 +23,7 @@ public class ResolucaoPA
 			"a_{" + termo + "} = " + a1.showDfrac() + "+(" + termo + "-1)\\cdot" + r.showDfrac(),
 			"a_{" + termo + "} = " + a1.showDfrac() + "+" + (termo - 1) + "\\cdot" + r.showDfrac(),
 			"a_{" + termo + "} = " + a1.showDfrac() + "+" + parcial.showDfrac() + "="
-			+ resultado.showDfrac()
+			+ "\\mathbf{" + resultado.showDfrac() + "}"
 		};
 	}
 
@@ -32,6 +32,16 @@ public class ResolucaoPA
 	 * helper externo {@code MyExpression.resolverLatex()} (não editável, pode conter
 	 * "\\" internos), que o chamador repassa intacto em um único {@code addResolucao}.
 	 */
+	private static String boldUltimoLatex(String latexSteps)
+	{
+		int lastSep = latexSteps.lastIndexOf("\\\\");
+		String ultimo = (lastSep >= 0) ? latexSteps.substring(lastSep + 2).trim() : latexSteps.trim();
+		int lastEq = ultimo.lastIndexOf('=');
+		if (lastEq < 0) return latexSteps;
+		String boldado = ultimo.substring(0, lastEq + 1) + "\\mathbf{" + ultimo.substring(lastEq + 1).trim() + "}";
+		return (lastSep >= 0) ? latexSteps.substring(0, lastSep + 2) + boldado : boldado;
+	}
+
 	public static String[] numeroTermos(Racional a1, Racional r, Racional an)
 	{
 		String expressao = an.toString() + " = " + a1.toString() + "+" + r.toString() + "n - "
@@ -44,7 +54,7 @@ public class ResolucaoPA
 			"a_1=" + a1.showDfrac() + ", a_n=" + an.showDfrac() + ", " + "r="
 			+ (a(a1,r,2).showDfrac() + "-" + a1.showDfrac()) + "=" + r.showDfrac(),
 			an.showDfrac() + " = " + a1.showDfrac() + "+(n-1)\\cdot" + r.showDfrac(),
-			myExpression.resolverLatex()
+			boldUltimoLatex(myExpression.resolverLatex())
 		};
 	}
 
@@ -57,7 +67,7 @@ public class ResolucaoPA
 			"r=" + a(a1, r, 4).showDfrac() + "-" + a(a1, r, 3).showDfrac() + "=" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+(2-1)\\cdot" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+1\\cdot" + r.showDfrac(),
-			"x=" + a1.showDfrac() + "+" + r.showDfrac() + "=" + a(a1, r, 2).showDfrac()
+			"x=" + a1.showDfrac() + "+" + r.showDfrac() + "=\\mathbf{" + a(a1, r, 2).showDfrac() + "}"
 		};
 	}
 
@@ -71,7 +81,7 @@ public class ResolucaoPA
 			"x=" + a1.showDfrac() + "+(3-1)\\cdot" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+2\\cdot" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+" + r.mult(new Racional(2)).showDfrac() + "="
-			+ a(a1, r, 3).showDfrac()
+			+ "\\mathbf{" + a(a1, r, 3).showDfrac() + "}"
 		};
 	}
 
@@ -85,7 +95,7 @@ public class ResolucaoPA
 			"x=" + a1.showDfrac() + "+(4-1)\\cdot" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+3\\cdot" + r.showDfrac(),
 			"x=" + a1.showDfrac() + "+" + r.mult(new Racional(3)).showDfrac() + "="
-			+ a(a1, r, 4).showDfrac()
+			+ "\\mathbf{" + a(a1, r, 4).showDfrac() + "}"
 		};
 	}
 
@@ -99,7 +109,7 @@ public class ResolucaoPA
 			a(a1, r, 2).showDfrac() + "=x+(2-1)\\cdot" + r.showDfrac(),
 			a(a1, r, 2).showDfrac() + "=x+1\\cdot" + r.showDfrac(),
 			a(a1, r, 2).showDfrac() + "=x+" + r.showDfrac(),
-			"x=" + a(a1, r, 2).showDfrac() + "-" + r.showDfrac() + "=" + a1.showDfrac()
+			"x=" + a(a1, r, 2).showDfrac() + "-" + r.showDfrac() + "=\\mathbf{" + a1.showDfrac() + "}"
 		};
 	}
 
@@ -119,13 +129,13 @@ public class ResolucaoPA
 		String passoFinal = "S_{" + n + "}=" + parcial.showDfrac()+" \\cdot "+meio.showDfrac()+"=";
 		Racional resultado = parcial.mult(meio);
 
-		passoFinal += resultado.showDfrac();
+		passoFinal += "\\mathbf{" + resultado.showDfrac() + "}";
 
 		resultado.setSimplificou(false);
 		resultado.fatoracao(2);
 
 		if(resultado.isSimplificou())
-			passoFinal += "=" + resultado.showDfrac();
+			passoFinal += "=\\mathbf{" + resultado.showDfrac() + "}";
 
 		return new String[]
 		{

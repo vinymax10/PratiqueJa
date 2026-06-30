@@ -19,12 +19,12 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "a_{" + n + "} = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String n_esimoFrac(Racional a1, Racional q, int n)
 	{
 		String resolucao = formula() + "\\\\";
@@ -39,12 +39,12 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "a_{" + n + "} = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = " + parcial.showDfrac();
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 
 
 		return resolucao;
@@ -65,11 +65,11 @@ public class ResolucaoPG
 		resolucao += q.showDfrac()+"^{"+(n-1)+"} = " + q.showDfrac() + "^{(n-1)}"+ "\\\\";
 		resolucao += "n-1 = " + (n-1)+ "\\\\";
 		resolucao += "n = " + (n-1)+"+"+1;
-		resolucao += " = " + n;
+		resolucao += " = \\mathbf{" + n + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String numeroTermosFrac(Racional a1, Racional q, Racional an, int n)
 	{
 		String resolucao = formula() + "\\\\";
@@ -87,7 +87,7 @@ public class ResolucaoPG
 		resolucao += "(" + q.showDfrac() + ")^{(n-1)}"+ " = "+"("+ q.showDfrac()+")^{"+(n-1)+"}\\\\";
 		resolucao += "n-1 = " + (n-1)+ "\\\\";
 		resolucao += "n = " + (n-1)+"+"+1;
-		resolucao += " = " + n;
+		resolucao += " = \\mathbf{" + n + "}";
 
 		return resolucao;
 	}
@@ -105,12 +105,12 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
-		
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
-	
+
 	public static String x2Frac(Racional a1, Racional q)
 	{
 		String resolucao = formula() + "\\\\";
@@ -125,13 +125,13 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = " + parcial.showDfrac();
-		
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
 
@@ -149,12 +149,12 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
-		
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
-	
+
 	public static String x3Frac(Racional a1, Racional q)
 	{
 		String resolucao = formula() + "\\\\";
@@ -169,13 +169,13 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = " + parcial.showDfrac();
-		
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
 
@@ -192,12 +192,12 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
-		
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
-	
+
 	public static String x4Frac(Racional a1, Racional q)
 	{
 		String resolucao = formula() + "\\\\";
@@ -212,13 +212,13 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += "x = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac();
 		parcial=a1.mult(parcial);
-		
-		resolucao += " = " + parcial.showDfrac();
+
+		resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = " + parcial.showDfrac();
-		
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
+
 		return resolucao;
 	}
 
@@ -234,11 +234,11 @@ public class ResolucaoPG
 //		parcial.fatoracao(2);
 		resolucao += a(a1, q, 2).showDfrac()+" = x \\cdot" + q.showDfrac()+ "\\\\";
 		resolucao += "x = \\dfrac{"+a(a1, q, 2).showDfrac()+"}{" + q.showDfrac()+"}";
-		resolucao += " = "+a1.showDfrac();
+		resolucao += " = \\mathbf{" + a1.showDfrac() + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String x1Frac(Racional a1, Racional q)
 	{
 		String resolucao = formula() + "\\\\";
@@ -253,7 +253,7 @@ public class ResolucaoPG
 		resolucao += a(a1, q, 2).showDfrac()+" = x \\cdot" + q.showDfrac()+ "\\\\";
 		resolucao += "x ="+a(a1, q, 2).showDfrac()+"\\div" + q.showDfrac();
 		resolucao += " ="+a(a1, q, 2).showDfrac()+"\\cdot" + q.inverter().showDfrac();
-		resolucao += " = "+a1.showDfrac();
+		resolucao += " = \\mathbf{" + a1.showDfrac() + "}";
 
 		return resolucao;
 	}
@@ -279,7 +279,7 @@ public class ResolucaoPG
 		{
 			resolucao += "S_{" + n + "} = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac() ;
 			parcial=a1.mult(parcial);
-			resolucao += " = " + parcial.showDfrac();
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		}
 		else
 		{
@@ -287,12 +287,12 @@ public class ResolucaoPG
 			parcial=a1.mult(parcial);
 			resolucao += "S_{" + n + "} = \\dfrac{" + parcial.showDfrac() + "}{"+denominador.showDfrac()+"}";
 		}
-		
+
 		parcial=parcial.div(denominador);
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = "+ parcial.showDfrac();
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 
 		return resolucao;
 	}
@@ -318,27 +318,27 @@ public class ResolucaoPG
 		{
 			resolucao += " = " + a1.showDfrac() + "\\cdot " + parcial.showDfrac() ;
 			parcial=a1.mult(parcial);
-			resolucao += " = " + parcial.showDfrac();
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 		}
 		else
 		{
 			resolucao += " = \\dfrac{" + a1.showDfrac() + "\\cdot " + parcial.showDfrac() + "}{"+denominador.showDfrac()+"}\\\\";
 			parcial=a1.mult(parcial);
 			parcial.fatoracao(2);
-			
+
 			resolucao += "S_{" + n + "} = \\dfrac{" + parcial.showDfrac() + "}{"+denominador.showDfrac()+"}";
 			resolucao += " = "+parcial.showDfrac() +"\\cdot"+denominador.inverter().showDfrac();
 		}
-		
+
 		parcial=parcial.div(denominador);
 		parcial.setSimplificou(false);
 		parcial.fatoracao(2);
 		if(parcial.isSimplificou())
-			resolucao += " = "+ parcial.showDfrac();
+			resolucao += " = \\mathbf{" + parcial.showDfrac() + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String resolucaoSoma2(Racional a1, Racional q, int n)
 	{
 		String resolucao = formulaSoma() + "\\\\";
@@ -372,11 +372,11 @@ public class ResolucaoPG
 		parcial.fatoracao(2);
 		resolucao +=" = "+parcial.showDfrac()+" \\\\";
 
-		resolucao += q.showDfrac() + "^{n} ="+q.showDfrac()+"^{"+n+"} \\Rightarrow n = "+n;
+		resolucao += q.showDfrac() + "^{n} ="+q.showDfrac()+"^{"+n+"} \\Rightarrow n = \\mathbf{" + n + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String resolucaoSoma2Frac(Racional a1, Racional q, int n)
 	{
 		String resolucao = formulaSoma() + "\\\\";
@@ -410,11 +410,11 @@ public class ResolucaoPG
 		parcial.fatoracao(2);
 		resolucao +=" = "+parcial.showDfrac()+" \\\\";
 
-		resolucao += q.showDfrac() + "^{n} ="+q.showDfrac()+"^{"+n+"} \\Rightarrow n = "+n;
+		resolucao += q.showDfrac() + "^{n} ="+q.showDfrac()+"^{"+n+"} \\Rightarrow n = \\mathbf{" + n + "}";
 
 		return resolucao;
 	}
-	
+
 	public static String resolucaoSoma3(Racional a1, Racional q, int n)
 	{
 		String resolucao = formulaSoma() + "\\\\";
@@ -529,7 +529,7 @@ public class ResolucaoPG
 		resultado.fatoracao(2);
 
 		resolucao += "S_\\infty = " + a1.showDfrac() + " \\cdot " + umMenosQ.inverter().showDfrac();
-		resolucao += " = " + resultado.showDfrac();
+		resolucao += " = \\mathbf{" + resultado.showDfrac() + "}";
 
 		return resolucao;
 	}
@@ -551,7 +551,7 @@ public class ResolucaoPG
 		Racional resultado = a1.div(umMenosQ);
 		resultado.fatoracao(2);
 
-		resolucao += " = " + resultado.showDfrac();
+		resolucao += " = \\mathbf{" + resultado.showDfrac() + "}";
 
 		return resolucao;
 	}
@@ -575,7 +575,7 @@ public class ResolucaoPG
 		resolucao += "a_k^2 = " + prev.showDfrac() + " \\cdot " + next.showDfrac();
 		resolucao += " = " + produto.showDfrac() + "\\\\";
 		resolucao += "a_k = \\sqrt{" + produto.showDfrac() + "}";
-		resolucao += " = " + mid.showDfrac();
+		resolucao += " = \\mathbf{" + mid.showDfrac() + "}";
 
 		return resolucao;
 	}
@@ -590,7 +590,7 @@ public class ResolucaoPG
 		razao.fatoracao(2);
 
 		resolucao += "q = \\sqrt[" + (k + 1) + "]{" + razao.showDfrac() + "}";
-		resolucao += " = " + q.showDfrac();
+		resolucao += " = \\mathbf{" + q.showDfrac() + "}";
 
 		return resolucao;
 	}

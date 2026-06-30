@@ -228,7 +228,7 @@ public class NumeroComplexo
 			"a=" + getSqrt(catetoMaiorQuad) + ", ~~ b=" + catetoMenor,
 			"|z|^2 =" + getSqrt(catetoMaiorQuad) + "^2+" + catetoMenor + "^2",
 			"|z|^2 =" + catetoMaiorQuad + "+" + (catetoMenor * catetoMenor) + " = " + (catetoMaiorQuad + catetoMenor * catetoMenor),
-			"|z| = \\sqrt{" + (catetoMaiorQuad + catetoMenor * catetoMenor) + "}" + " = " + hipotenusa
+			"|z| = \\sqrt{" + (catetoMaiorQuad + catetoMenor * catetoMenor) + "}" + " = \\mathbf{" + hipotenusa + "}"
 		};
 	}
 	

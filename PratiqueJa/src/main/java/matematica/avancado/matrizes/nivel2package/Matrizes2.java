@@ -44,7 +44,7 @@ public class Matrizes2 extends GeradorExercicio
 			if(i < (size - 1))
 				passo += "+";
 		}
-		passo += "=" + resultado;
+		passo += "=\\mathbf{" + resultado + "}";
 		addResolucao("\\(" + passo + "\\)");
 	}
 }

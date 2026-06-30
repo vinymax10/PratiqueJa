@@ -26,6 +26,23 @@ public class ResolucaoComparacao
 			passos.add("\\(" + last + "\\)");
 	}
 
+	private static void boldUltimo(List<String> passos)
+	{
+		if (passos.isEmpty()) return;
+		String ultimo = passos.get(passos.size() - 1);
+		if (ultimo.startsWith("\\(") && ultimo.endsWith("\\)"))
+		{
+			String conteudo = ultimo.substring(2, ultimo.length() - 2);
+			int lastEq = conteudo.lastIndexOf('=');
+			if (lastEq >= 0)
+			{
+				String antes = conteudo.substring(0, lastEq + 1);
+				String valor = conteudo.substring(lastEq + 1).trim();
+				passos.set(passos.size() - 1, "\\(" + antes + "\\mathbf{" + valor + "}\\)");
+			}
+		}
+	}
+
 	public static String[] comparacaoY(SistemaEquacoes sistema)
 	{
 		MyExpression expressao;
@@ -54,6 +71,7 @@ public class ResolucaoComparacao
 			ResolucaoSubtituicao.resolvendoZ(passos, sistema);
 		}
 
+		boldUltimo(passos);
 		return passos.toArray(new String[0]);
 	}
 
@@ -85,6 +103,7 @@ public class ResolucaoComparacao
 			ResolucaoSubtituicao.resolvendoZ(passos, sistema);
 		}
 
+		boldUltimo(passos);
 		return passos.toArray(new String[0]);
 	}
 }

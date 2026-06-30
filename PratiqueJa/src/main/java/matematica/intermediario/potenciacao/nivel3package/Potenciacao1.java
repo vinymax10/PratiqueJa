@@ -19,6 +19,6 @@ public class Potenciacao1 extends GeradorExercicio
 		addParagrafo("\\(" + texto + "\\)");
 		gerarAlternativas("" + p);
 		addResolucao("\\(" + a + "^{" + p + "}=" + a + "^{x}\\)");
-		addResolucao("\\(x=" + p + "\\)");
+		addResolucao("\\(x=\\mathbf{" + p + "}\\)");
 	}
 }

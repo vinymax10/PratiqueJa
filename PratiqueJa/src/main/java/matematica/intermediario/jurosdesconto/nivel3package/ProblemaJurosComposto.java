@@ -68,7 +68,7 @@ public class ProblemaJurosComposto
 						resolucaoLatex+="M="+c.decimalMoeda()+" \\cdot (1 + "+i.decimalStr()+")^{"+t+"}=\\\\";
 						resolucaoLatex+=c.decimalMoeda()+" \\cdot ("+i.add(new Racional(1)).decimalStr()+")^{"+t+"}=";
 						resolucaoLatex+=c.decimalMoeda()+" \\cdot "+i.add(new Racional(1)).pow(t).decimalStr()+"\\\\";
-						resolucaoLatex+="M="+m;
+						resolucaoLatex+="M=\\mathbf{"+m+"}";
 
 			break;
 			
@@ -78,7 +78,7 @@ public class ProblemaJurosComposto
 			resolucaoLatex+=m.decimalMoeda()+"= C \\cdot (1 + "+i.decimalStr()+")^{"+t+"}\\\\";
 			resolucaoLatex+="C = \\dfrac{"+m.decimalMoeda()+"}{ ("+i.add(new Racional(1)).decimalStr()+")^{"+t+"}}=";
 			resolucaoLatex+="\\dfrac{"+m.decimalMoeda()+"}{"+i.add(new Racional(1)).pow(t).decimalStr()+"}=";
-			resolucaoLatex+=c;
+			resolucaoLatex+="\\mathbf{"+c+"}";
 			break;
 			
 			case MCIX:
@@ -95,7 +95,7 @@ public class ProblemaJurosComposto
 			resolucaoLatex+="t = \\dfrac{\\log("+deci.format(resultado)+")}{ \\log("+i.add(new Racional(1)).decimalStr()+")}=";
 			double denominador=i.add(new Racional(1)).decimal();
 			resolucaoLatex+="\\dfrac{"+deci.format(Math.log(resultado))+"}{ "+deci.format(Math.log(denominador))+"}=";
-			resolucaoLatex+=t;
+			resolucaoLatex+="\\mathbf{"+t+"}";
 			break;
 			
 			case XXCIT: 	
@@ -106,9 +106,9 @@ public class ProblemaJurosComposto
 			resolucaoLatex+=c.decimalMoeda()+" \\cdot "+i.add(new Racional(1)).pow(t).decimalStr()+"\\\\";
 			resolucaoLatex+="M="+m.decimalMoeda()+"\\\\";
 			resolucaoLatex+=formulaJuros()+"\\\\";
-			resolucaoLatex+="J="+m.decimalMoeda()+"-"+c.decimalMoeda()+"="+j.decimalMoeda();
+			resolucaoLatex+="J="+m.decimalMoeda()+"-"+c.decimalMoeda()+"=\\mathbf{"+j.decimalMoeda()+"}";
 			break;
-			
+
 			case XMXIT:
 				resolucaoLatex+=formulaJurosComposto()+"\\\\";
 				resolucaoLatex+="M="+m.decimalMoeda()+", \\quad i="+i.porcentagem()+"\\%"+", \\quad t="+t+"\\\\";
@@ -117,7 +117,7 @@ public class ProblemaJurosComposto
 				resolucaoLatex+="\\dfrac{"+m.decimalMoeda()+"}{"+i.add(new Racional(1)).pow(t).decimalStr()+"}=";
 				resolucaoLatex+=c.decimalMoeda()+"\\\\";
 				resolucaoLatex+=formulaJuros()+"\\\\";
-				resolucaoLatex+="J="+m.decimalMoeda()+"-"+c.decimalMoeda()+"="+j.decimalMoeda();
+				resolucaoLatex+="J="+m.decimalMoeda()+"-"+c.decimalMoeda()+"=\\mathbf{"+j.decimalMoeda()+"}";
 		}
 		return resolucaoLatex;
 

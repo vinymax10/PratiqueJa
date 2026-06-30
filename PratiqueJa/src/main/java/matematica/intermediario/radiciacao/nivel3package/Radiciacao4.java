@@ -60,17 +60,17 @@ public class Radiciacao4 extends GeradorExercicio
 			passo4 += parcial.showDfrac() + " \\cdot " + denominador.inverter().showDfrac() + "=";
 
 			parcial = parcial.mult(denominador.inverter());
-			passo4 += parcial.showDfrac();
+			passo4 += "\\mathbf{" + parcial.showDfrac() + "}";
 
 			parcial.fatoracao(2);
 			if(parcial.isSimplificou())
-				passo4 += "=" + parcial.showDfrac();
+				passo4 += "=\\mathbf{" + parcial.showDfrac() + "}";
 		}
 		else
 		{
 			parcial = parcial.mult(denominador.inverter());
 			parcial.fatoracao(2);
-			passo4 += parcial.showDfrac();
+			passo4 += "\\mathbf{" + parcial.showDfrac() + "}";
 		}
 
 		passo1 = passo1.replace("(", "\\left(").replace(")", "\\right)");

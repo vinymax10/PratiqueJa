@@ -67,7 +67,7 @@ public class ProblemaDescontoComposto
 						resolucaoLatex+="A="+n.decimalMoeda()+" \\cdot (1 - "+i.decimalStr()+")^{"+t+"}=\\\\";
 						resolucaoLatex+=n.decimalMoeda()+" \\cdot ("+new Racional(1).minus(i).decimalStr()+")^{"+t+"}=";
 						resolucaoLatex+=n.decimalMoeda()+" \\cdot "+new Racional(1).minus(i).pow(t).decimalStr()+"=\\\\";
-						resolucaoLatex+=a;
+						resolucaoLatex+="\\mathbf{"+a+"}";
 
 			break;
 			
@@ -77,7 +77,7 @@ public class ProblemaDescontoComposto
 			resolucaoLatex+=a.decimalMoeda()+"= N \\cdot (1 - "+i.decimalStr()+")^{"+t+"}\\\\";
 			resolucaoLatex+="N = \\dfrac{"+a.decimalMoeda()+"}{ ("+new Racional(1).minus(i).decimalStr()+")^{"+t+"}}=";
 			resolucaoLatex+="\\dfrac{"+a.decimalMoeda()+"}{"+new Racional(1).minus(i).pow(t).decimalStr()+"}=";
-			resolucaoLatex+=n;
+			resolucaoLatex+="\\mathbf{"+n+"}";
 			break;
 			
 			case ANIX:
@@ -94,7 +94,7 @@ public class ProblemaDescontoComposto
 			resolucaoLatex+="t = \\dfrac{\\log("+deci.format(resultado)+")}{ \\log("+new Racional(1).minus(i).decimalStr()+")}=";
 			double denominador=new Racional(1).minus(i).decimal();
 			resolucaoLatex+="\\dfrac{"+deci.format(Math.log(resultado))+"}{ "+deci.format(Math.log(denominador))+"}=";
-			resolucaoLatex+=t;
+			resolucaoLatex+="\\mathbf{"+t+"}";
 			break;
 			
 			case XXNIT: 	
@@ -105,7 +105,7 @@ public class ProblemaDescontoComposto
 			resolucaoLatex+=n.decimalMoeda()+" \\cdot "+new Racional(1).minus(i).pow(t).decimalStr()+"\\\\";
 			resolucaoLatex+="A="+a.decimalMoeda()+"\\\\";
 			resolucaoLatex+=formulaDesconto()+"\\\\";
-			resolucaoLatex+="D="+n.decimalMoeda()+"-"+a.decimalMoeda()+"="+d.decimalMoeda();
+			resolucaoLatex+="D="+n.decimalMoeda()+"-"+a.decimalMoeda()+"=\\mathbf{"+d.decimalMoeda()+"}";
 			break;
 			
 			case XAXIT:
@@ -116,7 +116,7 @@ public class ProblemaDescontoComposto
 				resolucaoLatex+="\\dfrac{"+a.decimalMoeda()+"}{"+new Racional(1).minus(i).pow(t).decimalStr()+"}=";
 				resolucaoLatex+=n.decimalMoeda()+"\\\\";
 				resolucaoLatex+=formulaDesconto()+"\\\\";
-				resolucaoLatex+="D="+n.decimalMoeda()+"-"+a.decimalMoeda()+"="+d.decimalMoeda();
+				resolucaoLatex+="D="+n.decimalMoeda()+"-"+a.decimalMoeda()+"=\\mathbf{"+d.decimalMoeda()+"}";
 		}
 		return resolucaoLatex;
 
