@@ -71,7 +71,7 @@ public class Image1 extends GeradorExercicio
 			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\).");
 		}
 		addResolucao("Do plano, identificamos \\(P = (" + a + ",\\;" + b + ")\\).");
-		addResolucao("Aplicando a regra: \\(P' = (" + rx + ",\\;" + ry + ")\\).");
+		addResolucao("Aplicando a regra: \\(P' = \\mathbf{(" + rx + ",\\;" + ry + ")}\\).");
 	}
 
 	private String par(int x, int y)

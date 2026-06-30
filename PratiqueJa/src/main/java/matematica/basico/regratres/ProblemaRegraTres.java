@@ -264,7 +264,16 @@ public class ProblemaRegraTres
 
 		}
 
-		return new String[]{matriz, proporcao, expressao.resolverLatex()};
+		String resolucaoExpressao = expressao.resolverLatex();
+		int lastSep = resolucaoExpressao.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucaoExpressao.substring(lastSep + 2).trim() : resolucaoExpressao.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucaoExpressao = (lastSep >= 0) ? resolucaoExpressao.substring(0, lastSep + 2) + boldado : boldado;
+		}
+		return new String[]{matriz, proporcao, resolucaoExpressao};
 	}
 	
 	public Racional resultado()

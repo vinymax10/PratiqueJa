@@ -46,7 +46,7 @@ public class Expressao13 extends AgrupadorExercicio
 			"\\(\\begin{aligned}" +
 			"& \\dfrac{" + a + " " + t1 + " " + par1 + "}{" + d + " " + t3 + " " + par2 + "} = \\\\" +
 			"& \\dfrac{" + a + " " + t1 + " " + p1 + "}{" + d + " " + t3 + " " + p2 + "} = \\\\" +
-			"& \\dfrac{" + num + "}{" + den + "} = " + result +
+			"& \\dfrac{" + num + "}{" + den + "} = \\mathbf{" + result + "}" +
 			"\\end{aligned}\\)"
 		);
 	}

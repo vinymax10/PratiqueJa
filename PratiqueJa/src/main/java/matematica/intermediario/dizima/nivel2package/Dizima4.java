@@ -45,7 +45,7 @@ public class Dizima4 extends GeradorExercicio
 		{
 			addResolucao("Separamos a parte inteira e identificamos o período:");
 			addResolucao("\\(" + frac.showDfrac() + " = " + inteira + " + \\dfrac{" + period
-				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)");
+				 + "}{9} = \\mathbf{" + inteira + "{,}\\overline{" + period + "}}\\)");
 		}
 		else
 		{
@@ -54,7 +54,7 @@ public class Dizima4 extends GeradorExercicio
 				 + "}{" + frac.denominador + " \\times " + k + "} = \\dfrac{" + num
 				 + "}{9}\\).");
 			addResolucao("\\(\\dfrac{" + num + "}{9} = " + inteira + " + \\dfrac{" + period
-				 + "}{9} = " + inteira + "{,}\\overline{" + period + "}\\)");
+				 + "}{9} = \\mathbf{" + inteira + "{,}\\overline{" + period + "}}\\)");
 		}
 	}
 }

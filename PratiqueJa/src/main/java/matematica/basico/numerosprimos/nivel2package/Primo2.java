@@ -44,13 +44,13 @@ public class Primo2 extends AgrupadorPrimo
 		if(ePrimo)
 		{
 			addResolucao("\\(" + n + "\\) não é divisível por nenhum.");
-			addResolucao("\\(\\therefore " + n + "\\) é primo.");
+			addResolucao("\\(\\therefore \\mathbf{" + n + "}\\) é primo.");
 		}
 		else
 		{
 			addResolucao("\\(" + n + " \\div " + primoDivisor + " = " + (n / primoDivisor)
 				+ " \\Rightarrow\\) divisível por \\(" + primoDivisor + "\\).");
-			addResolucao("\\(\\therefore " + n + "\\) é composto.");
+			addResolucao("\\(\\therefore \\mathbf{" + n + "}\\) é composto.");
 		}
 	}
 }

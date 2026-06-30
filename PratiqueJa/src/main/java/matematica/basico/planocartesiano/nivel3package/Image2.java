@@ -77,7 +77,7 @@ public class Image2 extends GeradorExercicio
 			addResolucao("Simplificando o radical:");
 			addResolucao("\\(\\sqrt{" + d2 + "} = \\sqrt{" + simplificado[0] * simplificado[0] + " \\cdot " + simplificado[1] + "} = " + raizStr + "\\)");
 		}
-		addResolucao("Portanto, \\(d = " + raizStr + "\\).");
+		addResolucao("Portanto, \\(d = \\mathbf{" + raizStr + "}\\).");
 	}
 
 	private boolean ehQuadradoPerfeito(int n)

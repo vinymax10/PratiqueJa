@@ -33,6 +33,14 @@ public class Image5 extends GeradorExercicio
 		int c = 180 - metadeArcoEsq - metadeArcoDir;
 		expressao = new MyExpression(c + "+x=180");
 		String resolucao2 = expressao.resolverLatex();
+		int lastSep = resolucao2.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucao2.substring(lastSep + 2).trim() : resolucao2.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucao2 = (lastSep >= 0) ? resolucao2.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		DadosConfig5 dados = new DadosConfig5();
 		dados.lateralEsq = arcoEsq;

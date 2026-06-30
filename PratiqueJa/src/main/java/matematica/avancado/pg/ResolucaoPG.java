@@ -8,6 +8,16 @@ import matematica.expressao.MyExpression;
 public class ResolucaoPG
 {
 
+	private static String boldUltimoLatex(String latexSteps)
+	{
+		int lastSep = latexSteps.lastIndexOf("\\\\");
+		String ultimo = (lastSep >= 0) ? latexSteps.substring(lastSep + 2).trim() : latexSteps.trim();
+		int lastEq = ultimo.lastIndexOf('=');
+		if (lastEq < 0) return latexSteps;
+		String boldado = ultimo.substring(0, lastEq + 1) + "\\mathbf{" + ultimo.substring(lastEq + 1).trim() + "}";
+		return (lastSep >= 0) ? latexSteps.substring(0, lastSep + 2) + boldado : boldado;
+	}
+
 	public static String n_esimo(Racional a1, Racional q, int n)
 	{
 		String resolucao = formula() + "\\\\";
@@ -438,8 +448,8 @@ public class ResolucaoPG
 		
 		String expressao = parcial.toString() + "x = "+parcial2.toString();
 		MyExpression myExpression = new MyExpression(expressao);
-		resolucao += myExpression.resolverLatex();
-		
+		resolucao += boldUltimoLatex(myExpression.resolverLatex());
+
 		return resolucao;
 	}
 	
@@ -476,8 +486,8 @@ public class ResolucaoPG
 		
 		String expressao = parcial.toString() + "x = "+parcial2.toString();
 		MyExpression myExpression = new MyExpression(expressao);
-		resolucao += myExpression.resolverLatex();
-		
+		resolucao += boldUltimoLatex(myExpression.resolverLatex());
+
 		return resolucao;
 	}
 	
@@ -490,7 +500,7 @@ public class ResolucaoPG
 
 		String expressao = soma.toString() + " * 2 = "+a1.toString()+"*"+n+"+x"+n;
 		MyExpression myExpression = new MyExpression(expressao);
-		resolucao += myExpression.resolverLatex();
+		resolucao += boldUltimoLatex(myExpression.resolverLatex());
 
 		return resolucao;
 	}

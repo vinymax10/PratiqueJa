@@ -8,25 +8,25 @@ public class ResolucaoDivisibilidade
 	public static String[] resolucao2(boolean correta, int number)
 	{
 		if(correta)
-			return new String[]{ "O número \\(" + number + "\\) é par, por isso é divisível por 2." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) é par, por isso é divisível por 2." };
 		else
-			return new String[]{ "O número \\(" + number + "\\) não é par, por isso não é divisível por 2." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não é par, por isso não é divisível por 2." };
 	}
 
 	public static String[] resolucao10(boolean correta, int number)
 	{
 		if(correta)
-			return new String[]{ "O número \\(" + number + "\\) termina em 0, por isso é divisível por 10." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) termina em 0, por isso é divisível por 10." };
 		else
-			return new String[]{ "O número \\(" + number + "\\) não termina em 0, por isso não é divisível por 10." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não termina em 0, por isso não é divisível por 10." };
 	}
 
 	public static String[] resolucao5(boolean correta, int number)
 	{
 		if(correta)
-			return new String[]{ "O número \\(" + number + "\\) termina em 0 ou 5, por isso é divisível por 5." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) termina em 0 ou 5, por isso é divisível por 5." };
 		else
-			return new String[]{ "O número \\(" + number + "\\) não termina em 0 ou 5, por isso não é divisível por 5." };
+			return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não termina em 0 ou 5, por isso não é divisível por 5." };
 	}
 
 	public static String[] resolucao3(boolean correta, int number)
@@ -44,9 +44,9 @@ public class ResolucaoDivisibilidade
 
 		String somaParagrafo = "A soma dos algarismos é \\(" + somaAlgarismosStr + " = " + somaAlgarismos + "\\).";
 		if(correta)
-			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) é múltiplo de 3, \\(" + numberStr + "\\) é divisível por 3." };
+			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) é múltiplo de 3, \\(\\mathbf{" + numberStr + "}\\) é divisível por 3." };
 		else
-			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) não é múltiplo de 3, \\(" + numberStr + "\\) não é divisível por 3." };
+			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) não é múltiplo de 3, \\(\\mathbf{" + numberStr + "}\\) não é divisível por 3." };
 	}
 
 	public static String[] resolucao9(boolean correta, int number)
@@ -64,9 +64,9 @@ public class ResolucaoDivisibilidade
 
 		String somaParagrafo = "A soma dos algarismos é \\(" + somaAlgarismosStr + " = " + somaAlgarismos + "\\).";
 		if(correta)
-			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) é múltiplo de 9, \\(" + numberStr + "\\) é divisível por 9." };
+			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) é múltiplo de 9, \\(\\mathbf{" + numberStr + "}\\) é divisível por 9." };
 		else
-			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) não é múltiplo de 9, \\(" + numberStr + "\\) não é divisível por 9." };
+			return new String[]{ somaParagrafo, "Como \\(" + somaAlgarismos + "\\) não é múltiplo de 9, \\(\\mathbf{" + numberStr + "}\\) não é divisível por 9." };
 	}
 
 	public static String[] resolucao6(boolean correta, int number)
@@ -82,18 +82,18 @@ public class ResolucaoDivisibilidade
 		{
 			return new String[]{
 				"O número \\(" + number + "\\) é divisível por 2 e a soma dos seus algarismos é \\(" + somaAlgarismos + "\\), que é múltiplo de 3.",
-				"Portanto, \\(" + numberStr + "\\) é divisível por 6."
+				"Portanto, \\(\\mathbf{" + numberStr + "}\\) é divisível por 6."
 			};
 		}
 		else
 		{
 			if(!divisivel2)
-				return new String[]{ "O número \\(" + number + "\\) não é par, por isso não é divisível por 6." };
+				return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não é par, por isso não é divisível por 6." };
 			else
 			{
 				return new String[]{
 					"O número \\(" + number + "\\) é divisível por 2, mas a soma dos seus algarismos é \\(" + somaAlgarismos + "\\), que não é múltiplo de 3.",
-					"Portanto, \\(" + numberStr + "\\) não é divisível por 6."
+					"Portanto, \\(\\mathbf{" + numberStr + "}\\) não é divisível por 6."
 				};
 			}
 		}
@@ -113,11 +113,11 @@ public class ResolucaoDivisibilidade
 			{
 				return new String[]{
 					"Os dois últimos algarismos de \\(" + number + "\\) formam \\(" + valor + "\\), que é múltiplo de 4.",
-					"Portanto, \\(" + numberStr + "\\) é divisível por 4."
+					"Portanto, \\(\\mathbf{" + numberStr + "}\\) é divisível por 4."
 				};
 			}
 			else
-				return new String[]{ "O número \\(" + number + "\\) é múltiplo de 4." };
+				return new String[]{ "O número \\(\\mathbf{" + number + "}\\) é múltiplo de 4." };
 		}
 		else
 		{
@@ -125,11 +125,11 @@ public class ResolucaoDivisibilidade
 			{
 				return new String[]{
 					"Os dois últimos algarismos de \\(" + number + "\\) formam \\(" + valor + "\\), que não é múltiplo de 4.",
-					"Portanto, \\(" + numberStr + "\\) não é divisível por 4."
+					"Portanto, \\(\\mathbf{" + numberStr + "}\\) não é divisível por 4."
 				};
 			}
 			else
-				return new String[]{ "O número \\(" + number + "\\) não é múltiplo de 4." };
+				return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não é múltiplo de 4." };
 		}
 	}
 
@@ -150,11 +150,11 @@ public class ResolucaoDivisibilidade
 			{
 				return new String[]{
 					"Os três últimos algarismos de \\(" + number + "\\) formam \\(" + valor + "\\), que é múltiplo de 8.",
-					"Portanto, \\(" + numberStr + "\\) é divisível por 8."
+					"Portanto, \\(\\mathbf{" + numberStr + "}\\) é divisível por 8."
 				};
 			}
 			else
-				return new String[]{ "O número \\(" + number + "\\) é múltiplo de 8." };
+				return new String[]{ "O número \\(\\mathbf{" + number + "}\\) é múltiplo de 8." };
 		}
 		else
 		{
@@ -162,11 +162,11 @@ public class ResolucaoDivisibilidade
 			{
 				return new String[]{
 					"Os três últimos algarismos de \\(" + number + "\\) formam \\(" + valor + "\\), que não é múltiplo de 8.",
-					"Portanto, \\(" + numberStr + "\\) não é divisível por 8."
+					"Portanto, \\(\\mathbf{" + numberStr + "}\\) não é divisível por 8."
 				};
 			}
 			else
-				return new String[]{ "O número \\(" + number + "\\) não é múltiplo de 8." };
+				return new String[]{ "O número \\(\\mathbf{" + number + "}\\) não é múltiplo de 8." };
 		}
 	}
 
@@ -193,12 +193,12 @@ public class ResolucaoDivisibilidade
 		if(correta)
 		{
 			passos.add("O número \\(" + resultado + "\\) é múltiplo de 7.");
-			passos.add("Portanto, \\(" + number + "\\) é divisível por 7.");
+			passos.add("Portanto, \\(\\mathbf{" + number + "}\\) é divisível por 7.");
 		}
 		else
 		{
 			passos.add("O número \\(" + resultado + "\\) não é múltiplo de 7.");
-			passos.add("Portanto, \\(" + number + "\\) não é divisível por 7.");
+			passos.add("Portanto, \\(\\mathbf{" + number + "}\\) não é divisível por 7.");
 		}
 		return passos.toArray(new String[0]);
 	}

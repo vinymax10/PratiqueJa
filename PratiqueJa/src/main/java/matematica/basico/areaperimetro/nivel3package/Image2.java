@@ -27,6 +27,6 @@ public class Image2 extends GeradorExercicio
 		addResolucao("\\(l=" + "\\sqrt{" + area + "} = \\sqrt{" + a + "^2 \\cdot 2} = " + a + "\\sqrt{2}\\)");
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + "\\)");
 		addResolucao("\\(d=" + a + "\\sqrt{2} \\cdot \\sqrt{2}\\)");
-		addResolucao("\\(d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\)");
+		addResolucao("\\(d=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =\\mathbf{" + (a * 2) + "}\\)");
 	}
 }

@@ -162,7 +162,7 @@ public class ResolucaoPA
 			"a_1=" + a1.showDfrac() + ", a_n=" + an.showDfrac() + ", S_n=" + soma.showDfrac(),
 			soma.showDfrac() + " = \\dfrac{(" + a1.showDfrac() + "+" + an.showDfrac() + ")\\cdot n}{2}",
 			soma.showDfrac() + " = \\dfrac{" + parcial.showDfrac() + "\\cdot n}{2}",
-			myExpression.resolverLatex()
+			boldUltimoLatex(myExpression.resolverLatex())
 		};
 	}
 
@@ -177,7 +177,7 @@ public class ResolucaoPA
 			formulaSoma(),
 			"n=" + n + ", a_{"+n+"}=" + an.showDfrac() + ", S_{"+n+"}=" + soma.showDfrac()+", x=a_1",
 			soma.showDfrac() + " = \\dfrac{(x+" + an.showDfrac() + ")\\cdot"+n+" }{2}",
-			myExpression.resolverLatex()
+			boldUltimoLatex(myExpression.resolverLatex())
 		};
 	}
 
@@ -192,7 +192,7 @@ public class ResolucaoPA
 			formulaSoma(),
 			"n=" + n + ", a_1=" + a1.showDfrac() + ", S_{"+n+"}=" + soma.showDfrac()+", x=a_{"+n+"}",
 			soma.showDfrac() + " = \\dfrac{("+a1.showDfrac() + "+x)\\cdot"+n+" }{2}",
-			myExpression.resolverLatex()
+			boldUltimoLatex(myExpression.resolverLatex())
 		};
 	}
 

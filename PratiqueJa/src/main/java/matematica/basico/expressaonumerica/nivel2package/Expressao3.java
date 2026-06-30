@@ -36,7 +36,7 @@ public class Expressao3 extends AgrupadorExercicio
 		addResolucao(
 			"\\(\\begin{aligned}" +
 			"& " + par1 + " " + t2 + " " + par2 + " = \\\\" +
-			"& " + p1 + " " + t2 + " " + p2 + " = " + result + "\\end{aligned}\\)"
+			"& " + p1 + " " + t2 + " " + p2 + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 }

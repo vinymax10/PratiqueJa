@@ -24,6 +24,6 @@ public class Image21 extends GeradorExercicio
 		gerarAlternativas(resultadoCorreto);
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
 		addResolucao("\\(4 \\cdot l=" + perimetro + "\\)");
-		addResolucao("\\(l=\\dfrac{" + perimetro + "}{4}=" + l + "\\)");
+		addResolucao("\\(l=\\dfrac{" + perimetro + "}{4}=\\mathbf{" + l + "}\\)");
 	}
 }

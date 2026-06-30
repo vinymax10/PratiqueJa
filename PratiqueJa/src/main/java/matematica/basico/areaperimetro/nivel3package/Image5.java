@@ -25,6 +25,6 @@ public class Image5 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaQuadrado() + "\\)");
 		addResolucao("\\(l^2=" + area + "\\)");
 		addResolucao("\\(l=" + "\\sqrt{" + area + "} = " + (2 * a) + "\\)");
-		addResolucao("\\(r=\\dfrac{l}{2}=\\dfrac{" + (2 * a) + "}{2}=" + a + "\\)");
+		addResolucao("\\(r=\\dfrac{l}{2}=\\dfrac{" + (2 * a) + "}{2}=\\mathbf{" + a + "}\\)");
 	}
 }

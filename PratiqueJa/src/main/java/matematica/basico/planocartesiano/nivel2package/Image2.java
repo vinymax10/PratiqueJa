@@ -53,7 +53,7 @@ public class Image2 extends GeradorExercicio
 
 		addResolucao("Do plano, lemos as coordenadas de P: \\(x = " + px + "\\) e \\(y = " + py + "\\). Aplicando a fórmula da distância à origem:");
 		addResolucao("\\(d(P,\\;O) = \\sqrt{x^2 + y^2} = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\)");
-		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + d2 + "}\\)");
+		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\mathbf{\\sqrt{" + d2 + "}}\\)");
 	}
 
 	private boolean ehQuadradoPerfeito(int n)

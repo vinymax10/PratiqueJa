@@ -39,7 +39,7 @@ public class Dizima3 extends GeradorExercicio
 		if(k == 1)
 		{
 			addResolucao("O denominador já é \\(9\\), portanto o numerador é diretamente o período.");
-			addResolucao("\\(" + frac.showDfrac() + " = 0{,}\\overline{" + period + "}\\)");
+			addResolucao("\\(" + frac.showDfrac() + " = \\mathbf{0{,}\\overline{" + period + "}}\\)");
 		}
 		else
 		{
@@ -48,7 +48,7 @@ public class Dizima3 extends GeradorExercicio
 				 + "}{" + frac.denominador + " \\times " + k + "} = \\dfrac{" + period
 				 + "}{9}\\).");
 			addResolucao("O numerador \\(" + period + "\\) é o período da dízima:");
-			addResolucao("\\(\\dfrac{" + period + "}{9} = 0{,}\\overline{" + period + "}\\)");
+			addResolucao("\\(\\dfrac{" + period + "}{9} = \\mathbf{0{,}\\overline{" + period + "}}\\)");
 		}
 	}
 }

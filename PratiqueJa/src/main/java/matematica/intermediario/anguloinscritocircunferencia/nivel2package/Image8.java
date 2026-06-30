@@ -21,6 +21,14 @@ public class Image8 extends GeradorExercicio
 
 		MyExpression expressao = new MyExpression(str1 + "+" + a + "=180");
 		String resolucao = expressao.resolverLatex();
+		int lastSep = resolucao.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucao.substring(lastSep + 2).trim() : resolucao.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucao = (lastSep >= 0) ? resolucao.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		addParagrafo("Um ponto \\(P\\) sobre uma circunferência forma dois arcos com as extremidades de um diâmetro. Os arcos medem \\(" + str1 + "\\) e \\(" + strA + "\\). Encontre \\(x\\).");
 

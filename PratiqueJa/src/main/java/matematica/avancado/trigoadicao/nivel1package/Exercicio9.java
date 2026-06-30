@@ -24,28 +24,28 @@ public class Exercicio9 extends GeradorExercicio
 		if (choice == 0) {
 			formula    = "\\(\\operatorname{sen}(\\alpha+\\beta)\\)";
 			correta    = fSenMais;
-			regra      = "\\(\\operatorname{sen}(\\alpha+\\beta) = \\operatorname{sen}\\,\\alpha\\cos\\beta + \\cos\\alpha\\,\\operatorname{sen}\\,\\beta\\)";
+			regra      = "\\(\\operatorname{sen}(\\alpha+\\beta) = \\mathbf{\\operatorname{sen}\\,\\alpha\\cos\\beta + \\cos\\alpha\\,\\operatorname{sen}\\,\\beta}\\)";
 			distratores.add(fSenMenos);
 			distratores.add(fCosMenos);
 			distratores.add(fCosMais);
 		} else if (choice == 1) {
 			formula    = "\\(\\operatorname{sen}(\\alpha-\\beta)\\)";
 			correta    = fSenMenos;
-			regra      = "\\(\\operatorname{sen}(\\alpha-\\beta) = \\operatorname{sen}\\,\\alpha\\cos\\beta - \\cos\\alpha\\,\\operatorname{sen}\\,\\beta\\)";
+			regra      = "\\(\\operatorname{sen}(\\alpha-\\beta) = \\mathbf{\\operatorname{sen}\\,\\alpha\\cos\\beta - \\cos\\alpha\\,\\operatorname{sen}\\,\\beta}\\)";
 			distratores.add(fSenMais);
 			distratores.add(fCosMenos);
 			distratores.add(fCosMais);
 		} else if (choice == 2) {
 			formula    = "\\(\\cos(\\alpha+\\beta)\\)";
 			correta    = fCosMenos;
-			regra      = "\\(\\cos(\\alpha+\\beta) = \\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\)";
+			regra      = "\\(\\cos(\\alpha+\\beta) = \\mathbf{\\cos\\alpha\\cos\\beta - \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta}\\)";
 			distratores.add(fSenMais);
 			distratores.add(fSenMenos);
 			distratores.add(fCosMais);
 		} else {
 			formula    = "\\(\\cos(\\alpha-\\beta)\\)";
 			correta    = fCosMais;
-			regra      = "\\(\\cos(\\alpha-\\beta) = \\cos\\alpha\\cos\\beta + \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta\\)";
+			regra      = "\\(\\cos(\\alpha-\\beta) = \\mathbf{\\cos\\alpha\\cos\\beta + \\operatorname{sen}\\,\\alpha\\,\\operatorname{sen}\\,\\beta}\\)";
 			distratores.add(fSenMais);
 			distratores.add(fSenMenos);
 			distratores.add(fCosMenos);

@@ -27,6 +27,6 @@ public class Image13 extends GeradorExercicio
 		addResolucao("\\(h=2r= 2 \\cdot" + raio + "=" + h + "\\)");
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroRetangulo() + "\\)");
 		addResolucao("\\(b=" + b + "\\)");
-		addResolucao("\\(P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot " + (b + h) + "=" + (2 * (b + h)) + "\\)");
+		addResolucao("\\(P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot " + (b + h) + "=\\mathbf{" + (2 * (b + h)) + "}\\)");
 	}
 }

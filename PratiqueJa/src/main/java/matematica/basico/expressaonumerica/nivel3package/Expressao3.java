@@ -45,7 +45,7 @@ public class Expressao3 extends AgrupadorExercicio
 			"\\(\\begin{aligned}" +
 			"& \\dfrac{" + a + " " + t1 + " " + b + "}{" + c + "} " + t2 + " " + par + " = \\\\" +
 			"& \\dfrac{" + p1 + "}{" + c + "} " + t2 + " " + p2 + " = \\\\" +
-			"& " + frac1 + " " + t2 + " " + p2 + " = " + result + "\\end{aligned}\\)"
+			"& " + frac1 + " " + t2 + " " + p2 + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 }

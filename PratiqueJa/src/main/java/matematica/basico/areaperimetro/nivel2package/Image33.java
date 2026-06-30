@@ -29,6 +29,6 @@ public class Image33 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTrapezio() + "\\)");
 		addResolucao("\\(a=" + a + ",\\quad c=" + l + ",\\quad d=" + l + "\\)");
 		addResolucao("\\(" + a + "+b+" + l + "+" + l + "=" + perimetro + "\\)");
-		addResolucao("\\(b=" + perimetro + "-" + a + "-" + l + "-" + l + "=" + b + "\\)");
+		addResolucao("\\(b=" + perimetro + "-" + a + "-" + l + "-" + l + "=\\mathbf{" + b + "}\\)");
 	}
 }

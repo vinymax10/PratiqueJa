@@ -40,6 +40,6 @@ public class Expressao1 extends GeradorExercicio
 		addResolucao("Q. II \\(x < 0, y > 0\\);");
 		addResolucao("Q. III \\(x < 0, y < 0\\);");
 		addResolucao("Q. IV \\(x > 0, y < 0\\).");
-		addResolucao("Como \\(x " + opX + " 0\\) e \\(y " + opY + " 0\\), o ponto P está no Quadrante " + quad + ".");
+		addResolucao("Como \\(x " + opX + " 0\\) e \\(y " + opY + " 0\\), o ponto P está no Quadrante \\(\\mathbf{" + quad + "}\\).");
 	}
 }

@@ -30,6 +30,6 @@ public class Image8 extends GeradorExercicio
 		addResolucao("\\(" + b + "h=" + area + "\\)");
 		addResolucao("\\(h=\\dfrac{" + area + "}{" + b + "}=" + h + "\\)");
 		addResolucao("\\(2r=" + h + "\\)");
-		addResolucao("\\(r=\\dfrac{" + h + "}{" + 2 + "}=" + raio + "\\)");
+		addResolucao("\\(r=\\dfrac{" + h + "}{" + 2 + "}=\\mathbf{" + raio + "}\\)");
 	}
 }

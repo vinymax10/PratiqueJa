@@ -38,12 +38,12 @@ public class Primo7 extends AgrupadorPrimo
 		if(ePrimo)
 		{
 			addResolucao("\\(" + n + "\\) não é divisível por nenhum.");
-			addResolucao("\\(\\therefore " + n + "\\) é primo.");
+			addResolucao("\\(\\therefore \\mathbf{" + n + "}\\) é primo.");
 		}
 		else
 		{
 			addResolucao("\\(" + n + " \\div " + primoDivisor + " = " + (n / primoDivisor) + "\\) (exato).");
-			addResolucao("\\(\\therefore " + n + "\\) é composto.");
+			addResolucao("\\(\\therefore \\mathbf{" + n + "}\\) é composto.");
 		}
 	}
 }

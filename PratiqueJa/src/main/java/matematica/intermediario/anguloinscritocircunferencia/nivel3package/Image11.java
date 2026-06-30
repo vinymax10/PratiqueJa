@@ -28,6 +28,14 @@ public class Image11 extends GeradorExercicio
 
 		MyExpression expressao = new MyExpression("x+" + metadeArcoEsq + "=" + anguloCentral);
 		String resolucao = expressao.resolverLatex();
+		int lastSep = resolucao.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucao.substring(lastSep + 2).trim() : resolucao.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucao = (lastSep >= 0) ? resolucao.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		DadosConfig5 dados = new DadosConfig5();
 		dados.lateralEsq = arcoEsq;

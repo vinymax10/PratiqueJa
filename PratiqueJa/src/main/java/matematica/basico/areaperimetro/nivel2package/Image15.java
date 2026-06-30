@@ -28,6 +28,6 @@ public class Image15 extends GeradorExercicio
 		gerarAlternativas(resultadoCorreto);
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTrianguloIsosceles() + "\\)");
 		addResolucao("\\(a=" + a + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\)");
-		addResolucao("\\(P=2 \\cdot " + a + "+" + b + "=" + (2 * a) + "+" + b + "=" + ((2 * a) + b) + "\\)");
+		addResolucao("\\(P=2 \\cdot " + a + "+" + b + "=" + (2 * a) + "+" + b + "=\\mathbf{" + ((2 * a) + b) + "}\\)");
 	}
 }

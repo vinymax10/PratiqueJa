@@ -117,7 +117,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		StringBuilder res = new StringBuilder("\\(\\begin{aligned}& ").append(enun);
 		if(passoMulDiv != null)
 			res.append(" = \\\\& ").append(passoMulDiv);
-		res.append(" = ").append(result).append("\\end{aligned}\\)");
+		res.append(" = \\mathbf{").append(result).append("}\\end{aligned}\\)");
 		addResolucao(res.toString());
 	}
 
@@ -140,7 +140,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		gerarAlternativas("" + result);
 		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
-			inner + " " + opDisplay(op2) + " " + c + " = " + result + "\\end{aligned}\\)"
+			inner + " " + opDisplay(op2) + " " + c + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 
@@ -164,7 +164,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
 			sq + " " + op + " " + b + " + " + c + " = \\\\& " +
-			parcial + " + " + c + " = " + result + "\\end{aligned}\\)"
+			parcial + " + " + c + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 
@@ -185,7 +185,7 @@ public abstract class AgrupadorExercicio extends GeradorExercicio
 		addResolucao(
 			"\\(\\begin{aligned}& " + enun + " = \\\\& " +
 			"[" + s1 + " \\times " + c + "] " + op + " " + d + " = \\\\& " +
-			s2 + " " + op + " " + d + " = " + result + "\\end{aligned}\\)"
+			s2 + " " + op + " " + d + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 }

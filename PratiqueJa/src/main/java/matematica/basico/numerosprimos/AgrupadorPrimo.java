@@ -77,7 +77,7 @@ public abstract class AgrupadorPrimo extends GeradorExercicio
 		if(n > 1)
 			array.append(n).append(" & ").append(n).append("\\\\");
 		array.append("\\hline 1 & \\\\\\end{array}\\)");
-		String equacao = "\\(" + original + " = " + fatorLatex(fatores) + "\\)";
+		String equacao = "\\(\\mathbf{" + original + " = " + fatorLatex(fatores) + "}\\)";
 		return new String[]{array.toString(), equacao};
 	}
 }

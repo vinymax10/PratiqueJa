@@ -28,6 +28,6 @@ public class Image30 extends GeradorExercicio
 		addResolucao("\\(a=" + a + "\\)");
 		addResolucao("\\(2 \\cdot(" + a + " + b)=" + perimetro + "\\)");
 		addResolucao("\\(" + a + "+ b =\\dfrac{" + perimetro + "}{2}=" + (b + a) + "\\)");
-		addResolucao("\\(b=" + (b + a) + "-" + a + "=" + b + "\\)");
+		addResolucao("\\(b=" + (b + a) + "-" + a + "=\\mathbf{" + b + "}\\)");
 	}
 }

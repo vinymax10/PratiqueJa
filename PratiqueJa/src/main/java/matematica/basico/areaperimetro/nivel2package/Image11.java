@@ -29,6 +29,6 @@ public class Image11 extends GeradorExercicio
 		addResolucao("\\(l=" + h + "\\)");
 		addResolucao("\\(h=" + h + "\\)");
 		addResolucao("\\(b=l+" + sobra + " = " + h + "+" + sobra + "=" + (h + sobra) + "\\)");
-		addResolucao("\\(P=2 \\cdot (" + b + " + " + h + ")=2 \\cdot " + (b + h) + "=" + (2 * (b + h)) + "\\)");
+		addResolucao("\\(P=2 \\cdot (" + b + " + " + h + ")=2 \\cdot " + (b + h) + "=\\mathbf{" + (2 * (b + h)) + "}\\)");
 	}
 }

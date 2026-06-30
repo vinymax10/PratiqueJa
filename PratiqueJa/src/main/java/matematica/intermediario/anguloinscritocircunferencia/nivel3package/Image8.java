@@ -30,6 +30,14 @@ public class Image8 extends GeradorExercicio
 
 		expressao = new MyExpression("x=2*" + c);
 		String resolucao3 = expressao.resolverLatex();
+		int lastSep = resolucao3.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucao3.substring(lastSep + 2).trim() : resolucao3.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucao3 = (lastSep >= 0) ? resolucao3.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		DadosConfig6 dados = new DadosConfig6();
 		dados.lateralEsq = lateralEsq;

@@ -32,6 +32,6 @@ public class Expressao2 extends GeradorExercicio
 		addResolucao("\\(d(P,\\;O) = \\sqrt{x^2 + y^2}\\).");
 		addResolucao("Substituindo \\(x = " + px + "\\) e \\(y = " + py + "\\):");
 		addResolucao("\\(d = \\sqrt{" + strPx + "^2 + " + strPy + "^2} =\\)");
-		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = " + dist + "\\)");
+		addResolucao("\\(\\sqrt{" + px2 + " + " + py2 + "} = \\sqrt{" + soma + "} = \\mathbf{" + dist + "}\\)");
 	}
 }

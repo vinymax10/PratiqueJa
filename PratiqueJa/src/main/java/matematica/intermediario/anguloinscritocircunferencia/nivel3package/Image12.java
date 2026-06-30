@@ -30,6 +30,14 @@ public class Image12 extends GeradorExercicio
 		String expandedStr = Auxiliar.getNumber(effC, "x", true) + Auxiliar.getNumber(effD, "", false);
 		MyExpression expressao = new MyExpression(expandedStr + "=2*" + a);
 		String resolucao = expressao.resolverLatex();
+		int lastSep = resolucao.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucao.substring(lastSep + 2).trim() : resolucao.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucao = (lastSep >= 0) ? resolucao.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		Config4 config = new Config4(strA, str1, strC);
 		BufferedImage image = config.criarImagem();

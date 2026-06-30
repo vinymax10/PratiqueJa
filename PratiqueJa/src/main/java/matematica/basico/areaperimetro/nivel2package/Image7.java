@@ -30,6 +30,6 @@ public class Image7 extends GeradorExercicio
 		gerarAlternativas(resultadoCorreto);
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\)");
 		addResolucao("\\(h=" + h + ", \\quad b=" + meiaBase + " \\cdot 2=" + b + "\\)");
-		addResolucao("\\(A=\\dfrac{" + b + " \\cdot " + h + "}{2}=" + "\\dfrac{" + b * h + "}{2}=" + (b * h) / 2 + "\\)");
+		addResolucao("\\(A=\\dfrac{" + b + " \\cdot " + h + "}{2}=" + "\\dfrac{" + b * h + "}{2}=\\mathbf{" + (b * h) / 2 + "}\\)");
 	}
 }

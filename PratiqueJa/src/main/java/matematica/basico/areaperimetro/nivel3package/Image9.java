@@ -26,6 +26,6 @@ public class Image9 extends GeradorExercicio
 		addResolucao("\\(2h \\cdot h=" + area + "\\)");
 		addResolucao("\\(2h^2=" + area + "\\)");
 		addResolucao("\\(h^2=\\dfrac{" + area + "}{" + 2 + "}=" + (h * h) + "\\)");
-		addResolucao("\\(h=\\sqrt{" + (h * h) + "}=" + h + "\\)");
+		addResolucao("\\(h=\\sqrt{" + (h * h) + "}=\\mathbf{" + h + "}\\)");
 	}
 }

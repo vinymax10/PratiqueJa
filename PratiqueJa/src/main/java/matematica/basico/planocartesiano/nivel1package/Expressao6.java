@@ -48,6 +48,6 @@ public class Expressao6 extends GeradorExercicio
 			addResolucao("A distância de um ponto a um eixo coordenado é medida perpendicularmente até ele. A distância ao eixo \\(x\\) é o módulo da ordenada \\(|y|\\), pois a ordenada indica o afastamento vertical.");
 		else
 			addResolucao("A distância de um ponto a um eixo coordenado é medida perpendicularmente até ele. A distância ao eixo \\(y\\) é o módulo da abscissa \\(|x|\\), pois a abscissa indica o afastamento horizontal.");
-		addResolucao("Portanto: \\(d = |" + coordUsada + "| = " + resposta + "\\)");
+		addResolucao("Portanto: \\(d = |" + coordUsada + "| = \\mathbf{" + resposta + "}\\)");
 	}
 }

@@ -26,6 +26,6 @@ public class Image29 extends GeradorExercicio
 		addResolucao("\\(2 \\cdot (2h + h)=" + perimetro + "\\)");
 		addResolucao("\\(2h + h=\\dfrac{" + perimetro + "}{2}=" + (perimetro / 2) + "\\)");
 		addResolucao("\\(3h=" + (perimetro / 2) + "\\)");
-		addResolucao("\\(h=\\dfrac{" + (perimetro / 2) + "}{3}=" + h + "\\)");
+		addResolucao("\\(h=\\dfrac{" + (perimetro / 2) + "}{3}=\\mathbf{" + h + "}\\)");
 	}
 }

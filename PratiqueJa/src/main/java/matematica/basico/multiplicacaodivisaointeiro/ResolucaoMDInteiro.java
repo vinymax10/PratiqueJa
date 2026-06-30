@@ -15,7 +15,7 @@ public class ResolucaoMDInteiro
 			String contas = "\\(" + ResolucaoNatural.multiplicacao(Math.abs(a), Math.abs(b), true) + "\\\\"
 				+ "\\textcolor{iris}{" + sinal(a) + "}" + Math.abs(a)
 				+ " \\times \\textcolor{iris}{" + sinal(b) + "}" + Math.abs(b)
-				+ " = \\textcolor{iris}{+}" + (Math.abs(a) * Math.abs(b)) + "\\)";
+				+ " = \\textcolor{iris}{\\mathbf{+" + (Math.abs(a) * Math.abs(b)) + "}}\\)";
 			return new String[] { cores, prosa, contas };
 		}
 		else
@@ -24,7 +24,7 @@ public class ResolucaoMDInteiro
 			String contas = "\\(" + ResolucaoNatural.multiplicacao(Math.abs(a), Math.abs(b), true) + "\\\\"
 				+ "\\textcolor{iris}{" + sinal(a) + "}" + Math.abs(a)
 				+ " \\times \\textcolor{iris}{" + sinal(b) + "}" + Math.abs(b)
-				+ " = \\textcolor{iris}{-}" + Math.abs(a * b) + "\\)";
+				+ " = \\textcolor{iris}{\\mathbf{-" + Math.abs(a * b) + "}}\\)";
 			return new String[] { cores, prosa, contas };
 		}
 	}
@@ -39,7 +39,7 @@ public class ResolucaoMDInteiro
 			String contas = "\\(" + ResolucaoNatural.divisao(Math.abs(a), Math.abs(b), true) + "\\\\"
 				+ "\\textcolor{iris}{" + sinal(a) + "}" + Math.abs(a)
 				+ " \\div \\textcolor{iris}{" + sinal(b) + "}" + Math.abs(b)
-				+ " = \\textcolor{iris}{+}" + (Math.abs(a) / Math.abs(b)) + "\\)";
+				+ " = \\textcolor{iris}{\\mathbf{+" + (Math.abs(a) / Math.abs(b)) + "}}\\)";
 			return new String[] { cores, prosa, contas };
 		}
 		else
@@ -48,7 +48,7 @@ public class ResolucaoMDInteiro
 			String contas = "\\(" + ResolucaoNatural.divisao(Math.abs(a), Math.abs(b), true) + "\\\\"
 				+ "\\textcolor{iris}{" + sinal(a) + "}" + Math.abs(a)
 				+ " \\div \\textcolor{iris}{" + sinal(b) + "}" + Math.abs(b)
-				+ " = \\textcolor{iris}{-}" + Math.abs(a / b) + "\\)";
+				+ " = \\textcolor{iris}{\\mathbf{-" + Math.abs(a / b) + "}}\\)";
 			return new String[] { cores, prosa, contas };
 		}
 	}

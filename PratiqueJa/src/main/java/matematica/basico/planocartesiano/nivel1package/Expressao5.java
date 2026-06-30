@@ -33,6 +33,6 @@ public class Expressao5 extends GeradorExercicio
 		addResolucao("Calculando as diferenças: \\(x_B - x_A = " + innerX + " = " + dx + "\\) e \\(y_B - y_A = " + innerY + " = " + dy + "\\).");
 		addResolucao("Substituindo na fórmula:");
 		addResolucao("\\(d = \\sqrt{" + strDx + "^2 + " + strDy + "^2} = \\sqrt{" + dx2 + " + " + dy2 + "} =\\)");
-		addResolucao("\\(\\sqrt{" + d2 + "} = " + dist + "\\)");
+		addResolucao("\\(\\sqrt{" + d2 + "} = \\mathbf{" + dist + "}\\)");
 	}
 }

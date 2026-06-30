@@ -44,7 +44,7 @@ public class Expressao14 extends AgrupadorExercicio
 			"& \\{" + a + " " + t1 + " [" + b + " " + t2 + " " + par + "]\\} " + t4 + " " + e + " = \\\\" +
 			"& \\{" + a + " " + t1 + " [" + b + " " + t2 + " " + p1 + "]\\} " + t4 + " " + e + " = \\\\" +
 			"& \\{" + a + " " + t1 + " " + p2 + "\\} " + t4 + " " + e + " = \\\\" +
-			"& " + p3 + " " + t4 + " " + e + " = " + result + "\\end{aligned}\\)"
+			"& " + p3 + " " + t4 + " " + e + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 }

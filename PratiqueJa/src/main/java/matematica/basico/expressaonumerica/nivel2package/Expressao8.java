@@ -43,7 +43,7 @@ public class Expressao8 extends AgrupadorExercicio
 			"\\(\\begin{aligned}" +
 			"& " + par1 + " " + t2 + " [" + c + " " + t3 + " " + inner + "] = \\\\" +
 			"& " + p1 + " " + t2 + " [" + c + " " + t3 + " " + p2 + "] = \\\\" +
-			"& " + p1 + " " + t2 + " " + p3 + " = " + result + "\\end{aligned}\\)"
+			"& " + p1 + " " + t2 + " " + p3 + " = \\mathbf{" + result + "}\\end{aligned}\\)"
 		);
 	}
 }

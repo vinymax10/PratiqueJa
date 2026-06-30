@@ -16,7 +16,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaAreaRetangulo() + "\\)",
 			"\\(b=" + b + ",\\quad h=" + h + "\\)",
-			"\\(A=" + b + " \\cdot " + h + "=" + (b * h) + "\\)"
+			"\\(A=" + b + " \\cdot " + h + "=\\mathbf{" + (b * h) + "}\\)"
 		};
 	}
 
@@ -31,7 +31,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroRetangulo() + "\\)",
 			"\\(b=" + b + ",\\quad h=" + h + "\\)",
-			"\\(P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot (" + (b + h) + ")=" + (2 * (b + h)) + "\\)"
+			"\\(P=2 \\cdot (" + b + "+" + h + ")=2 \\cdot (" + (b + h) + ")=\\mathbf{" + (2 * (b + h)) + "}\\)"
 		};
 	}
 
@@ -46,7 +46,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroParalelogramo() + "\\)",
 			"\\(a=" + a + ",\\quad b=" + b + "\\)",
-			"\\(P=2 \\cdot (" + a + "+" + b + ")=2 \\cdot (" + (a + b) + ")=" + (2 * (a + b)) + "\\)"
+			"\\(P=2 \\cdot (" + a + "+" + b + ")=2 \\cdot (" + (a + b) + ")=\\mathbf{" + (2 * (a + b)) + "}\\)"
 		};
 	}
 
@@ -66,7 +66,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaAreaQuadrado() + "\\)",
 			"\\(l=" + l + "\\)",
-			"\\(A=" + l + "^2=" + l + " \\cdot " + l + "=" + (l * l) + "\\)"
+			"\\(A=" + l + "^2=" + l + " \\cdot " + l + "=\\mathbf{" + (l * l) + "}\\)"
 		};
 	}
 
@@ -81,7 +81,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroQuadrado() + "\\)",
 			"\\(l=" + l + "\\)",
-			"\\(P= 4 \\cdot " + l + "=" + (4 * l) + "\\)"
+			"\\(P= 4 \\cdot " + l + "=\\mathbf{" + (4 * l) + "}\\)"
 		};
 	}
 
@@ -97,7 +97,7 @@ public class ResolucaoAreaPerimetro
 			"\\(" + formulaComprimentoCircunferencia() + "\\)",
 			"\\(r=" + r + "\\)",
 			"\\(C=2 \\cdot \\pi \\cdot" + r + "=" + (2 * r) + "\\pi \\)",
-			"\\(x=" + (2 * r) + "\\)"
+			"\\(x=\\mathbf{" + (2 * r) + "}\\)"
 		};
 	}
 
@@ -113,7 +113,7 @@ public class ResolucaoAreaPerimetro
 			"\\(" + formulaAreaCirculo() + "\\)",
 			"\\(r=" + r + "\\)",
 			"\\(A=\\pi \\cdot" + r + "^2=\\pi \\cdot " + r + " \\cdot " + r + "=" + (r * r) + "\\pi\\)",
-			"\\(x=" + (r * r) + "\\)"
+			"\\(x=\\mathbf{" + (r * r) + "}\\)"
 		};
 	}
 
@@ -128,7 +128,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaAreaTriangulo() + "\\)",
 			"\\(b=" + b + ",\\quad h=" + h + "\\)",
-			"\\(A=\\dfrac{" + b + " \\cdot " + h + "}{2}=" + "\\dfrac{" + b * h + "}{2}=" + (b * h) / 2 + "\\)"
+			"\\(A=\\dfrac{" + b + " \\cdot " + h + "}{2}=" + "\\dfrac{" + b * h + "}{2}=\\mathbf{" + (b * h) / 2 + "}\\)"
 		};
 	}
 
@@ -143,7 +143,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroTrianguloEquilatero() + "\\)",
 			"\\(l=" + l + "\\)",
-			"\\(P=3 \\cdot" + l + "=" + (3 * l) + "\\)"
+			"\\(P=3 \\cdot" + l + "=\\mathbf{" + (3 * l) + "}\\)"
 		};
 	}
 
@@ -158,7 +158,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroTrianguloIsosceles() + "\\)",
 			"\\(a=" + a + ",\\quad b=" + b + "\\)",
-			"\\(P=2 \\cdot" + a + "+" + b + "=" + (2 * a) + "+" + b + "=" + ((2 * a) + b) + "\\)"
+			"\\(P=2 \\cdot" + a + "+" + b + "=" + (2 * a) + "+" + b + "=\\mathbf{" + ((2 * a) + b) + "}\\)"
 		};
 	}
 
@@ -173,7 +173,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroTriangulo() + "\\)",
 			"\\(a=" + a + ",\\quad b=" + b + ",\\quad c=" + c + "\\)",
-			"\\(P=" + a + "+" + b + "+" + c + "=" + (a + b + c) + "\\)"
+			"\\(P=" + a + "+" + b + "+" + c + "=\\mathbf{" + (a + b + c) + "}\\)"
 		};
 	}
 
@@ -189,7 +189,7 @@ public class ResolucaoAreaPerimetro
 			"\\(" + formulaAreaTrianguloEquilatero() + "\\)",
 			"\\(l=" + l + "\\)",
 			"\\(A=\\dfrac{" + l + "^2 \\cdot \\sqrt{3}}{4}=" + "\\dfrac{" + (l * l) + "\\cdot \\sqrt{3}}{4}=" + (l * l) / 4 + "\\sqrt{3}\\)",
-			"\\(x=" + (l * l) / 4 + "\\)"
+			"\\(x=\\mathbf{" + (l * l) / 4 + "}\\)"
 		};
 	}
 
@@ -204,7 +204,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaLosango() + "\\)",
 			"\\(D=" + D + ",\\quad d=" + d + "\\)",
-			"\\(A=\\dfrac{" + (D) + " \\cdot " + (d) + "}{2}=" + "\\dfrac{" + (D) * (d) + "}{2}=" + (D * d) / 2 + "\\)"
+			"\\(A=\\dfrac{" + (D) + " \\cdot " + (d) + "}{2}=" + "\\dfrac{" + (D) * (d) + "}{2}=\\mathbf{" + (D * d) / 2 + "}\\)"
 		};
 	}
 
@@ -219,7 +219,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaPerimetroTrapezio() + "\\)",
 			"\\(a=" + a + ",\\quad b=" + b + ",\\quad c=" + c + ",\\quad d=" + d + "\\)",
-			"\\(P=" + a + "+" + b + "+" + c + "+" + d + "=" + (a + b + c + d) + "\\)"
+			"\\(P=" + a + "+" + b + "+" + c + "+" + d + "=\\mathbf{" + (a + b + c + d) + "}\\)"
 		};
 	}
 
@@ -234,7 +234,7 @@ public class ResolucaoAreaPerimetro
 		{
 			"\\(" + formulaAreaTrapezio() + "\\)",
 			"\\(B=" + baseMaior + ",\\quad b=" + baseMenor + ",\\quad h=" + altura + "\\)",
-			"\\(A=\\dfrac{(" + baseMaior + "+" + baseMenor + ") \\cdot " + altura + "}{2}=" + "\\dfrac{" + (baseMaior + baseMenor) + " \\cdot " + altura + "}{2}=" + "\\dfrac{" + (baseMaior + baseMenor) * altura + "}{2}=" + (baseMenor + baseMaior) * altura / 2 + "\\)"
+			"\\(A=\\dfrac{(" + baseMaior + "+" + baseMenor + ") \\cdot " + altura + "}{2}=" + "\\dfrac{" + (baseMaior + baseMenor) + " \\cdot " + altura + "}{2}=" + "\\dfrac{" + (baseMaior + baseMenor) * altura + "}{2}=\\mathbf{" + (baseMenor + baseMaior) * altura / 2 + "}\\)"
 		};
 	}
 

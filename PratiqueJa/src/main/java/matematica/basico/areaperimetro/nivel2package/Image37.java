@@ -29,6 +29,6 @@ public class Image37 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaPerimetroTriangulo() + "\\)");
 		addResolucao("\\(a=" + a + ",\\quad c=" + c + "\\)");
 		addResolucao("\\(" + a + "+b+" + c + "=" + perimetro + "\\)");
-		addResolucao("\\(b=" + perimetro + "-" + a + "-" + c + "=" + b + "\\)");
+		addResolucao("\\(b=" + perimetro + "-" + a + "-" + c + "=\\mathbf{" + b + "}\\)");
 	}
 }

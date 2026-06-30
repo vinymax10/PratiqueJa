@@ -101,7 +101,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " + " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(s);
-		addResolucao(vertical("+", fmtT(aT), fmtT(bT), fmtT(s)));
+		addResolucao(vertical("+", fmtT(aT), fmtT(bT), "\\mathbf{" + fmtT(s) + "}"));
 	}
 
 	protected void subtracaoDecimos(int min, int range)
@@ -113,7 +113,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " - " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(d);
-		addResolucao(vertical("-", fmtT(aT), fmtT(bT), fmtT(d)));
+		addResolucao(vertical("-", fmtT(aT), fmtT(bT), "\\mathbf{" + fmtT(d) + "}"));
 	}
 
 	protected void somaCentesimos(int min, int range)
@@ -124,7 +124,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " + " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(s);
-		addResolucao(vertical("+", fmtH(aH), fmtH(bH), fmtH(s)));
+		addResolucao(vertical("+", fmtH(aH), fmtH(bH), "\\mathbf{" + fmtH(s) + "}"));
 	}
 
 	protected void subtracaoCentesimos(int min, int range)
@@ -136,7 +136,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " - " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(d);
-		addResolucao(vertical("-", fmtH(aH), fmtH(bH), fmtH(d)));
+		addResolucao(vertical("-", fmtH(aH), fmtH(bH), "\\mathbf{" + fmtH(d) + "}"));
 	}
 
 	// (a décimos) × (b décimos) → centésimos
@@ -149,7 +149,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("\\(" + fmtT(aT) + " \\times " + fmtT(bT) + " = \\,?\\)");
 		gerarAltH(prodH);
 		addResolucao("Multiplicamos sem a vírgula e contamos as casas decimais (1 + 1 = 2):");
-		addResolucao("\\(" + aT + " \\times " + bT + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)");
+		addResolucao("\\(" + aT + " \\times " + bT + " = " + prodH + " \\Rightarrow \\mathbf{" + fmtH(prodH) + "}\\)");
 	}
 
 	// (a centésimos) × inteiro pequeno → centésimos
@@ -162,7 +162,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("\\(" + fmtH(aH) + " \\times " + k + " = \\,?\\)");
 		gerarAltH(prodH);
 		addResolucao("Multiplicamos sem a vírgula e recolocamos as 2 casas decimais:");
-		addResolucao("\\(" + aH + " \\times " + k + " = " + prodH + " \\Rightarrow " + fmtH(prodH) + "\\)");
+		addResolucao("\\(" + aH + " \\times " + k + " = " + prodH + " \\Rightarrow \\mathbf{" + fmtH(prodH) + "}\\)");
 	}
 
 	// a,bc × 10 (→ décimos) ou × 100 (→ inteiro)
@@ -210,7 +210,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("\\(" + fmtH(dividendoH) + " \\div " + k + " = \\,?\\)");
 		gerarAltH(q);
 		addResolucao("Dividimos normalmente, mantendo a vírgula no quociente:");
-		addResolucao("\\(" + fmtH(dividendoH) + " \\div " + k + " = " + fmtH(q) + "\\)");
+		addResolucao("\\(" + fmtH(dividendoH) + " \\div " + k + " = \\mathbf{" + fmtH(q) + "}\\)");
 	}
 
 	// Qual é o maior decimal? (4 valores em centésimos)
@@ -244,7 +244,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 			addParagrafo("Qual é o número decimal equivalente à fração abaixo?");
 			addParagrafo("\\(\\dfrac{" + n + "}{10}\\)");
 			gerarAltT(n);
-			addResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = " + fmtT(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = \\mathbf{" + fmtT(n) + "}\\)");
 		}
 		else
 		{
@@ -252,7 +252,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 			addParagrafo("Qual é o número decimal equivalente à fração abaixo?");
 			addParagrafo("\\(\\dfrac{" + n + "}{100}\\)");
 			gerarAltH(n);
-			addResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = " + fmtH(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = \\mathbf{" + fmtH(n) + "}\\)");
 		}
 	}
 

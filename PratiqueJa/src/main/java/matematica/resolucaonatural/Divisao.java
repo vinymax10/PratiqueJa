@@ -123,7 +123,7 @@ public class Divisao
 			resolucaoLatex+=simbolo+subtraendos.get(i).latexEsq(size+1).replaceAll("\\\\\\\\", "");
 			
 			if(i==0)
-				resolucaoLatex+="&&"+(intDividendo/intDivisor);
+				resolucaoLatex+="&&\\mathbf{"+(intDividendo/intDivisor)+"}";
 			
 			resolucaoLatex+="\\\\";
 				

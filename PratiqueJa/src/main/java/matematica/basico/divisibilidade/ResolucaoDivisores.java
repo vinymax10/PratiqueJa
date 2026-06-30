@@ -22,7 +22,7 @@ public class ResolucaoDivisores
 				listDivisores += ",~";
 		}
 		passos.add("Divisores: \\(" + listDivisores + "\\)");
-		passos.add("Número de divisores: \\(" + lista.size() + "\\)");
+		passos.add("Número de divisores: \\(\\mathbf{" + lista.size() + "}\\)");
 		return passos.toArray(new String[0]);
 	}
 
@@ -41,7 +41,7 @@ public class ResolucaoDivisores
 			if(i < lista.size() - 1)
 				listDivisores += "+";
 		}
-		passos.add("\\(" + listDivisores + " = " + soma + "\\)");
+		passos.add("\\(" + listDivisores + " = \\mathbf{" + soma + "}\\)");
 		return passos.toArray(new String[0]);
 	}
 

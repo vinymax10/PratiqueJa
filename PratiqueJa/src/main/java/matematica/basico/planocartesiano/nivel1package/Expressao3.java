@@ -64,7 +64,7 @@ public class Expressao3 extends GeradorExercicio
 			addResolucao("\\(P(a,\\;b) \\to P'({-a},\\;{-b})\\)");
 		}
 		addResolucao("Aplicando ao ponto \\(P(" + a + ",\\;" + b + ")\\):");
-		addResolucao("\\(P' = (" + rx + ",\\;" + ry + ")\\)");
+		addResolucao("\\(P' = \\mathbf{(" + rx + ",\\;" + ry + ")}\\)");
 	}
 
 	private String par(int x, int y)

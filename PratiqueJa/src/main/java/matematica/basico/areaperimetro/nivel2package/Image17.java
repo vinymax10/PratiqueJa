@@ -31,6 +31,6 @@ public class Image17 extends GeradorExercicio
 		addResolucao("\\(b=" + b + "\\)");
 		addResolucao("\\(2 \\cdot a +" + b + "=" + perimetro + "\\)");
 		addResolucao("\\(2 \\cdot a=" + perimetro + "-" + b + "=" + (perimetro - b) + "\\)");
-		addResolucao("\\(a=\\dfrac{" + (perimetro - b) + "}{2}=" + a + "\\)");
+		addResolucao("\\(a=\\dfrac{" + (perimetro - b) + "}{2}=\\mathbf{" + a + "}\\)");
 	}
 }

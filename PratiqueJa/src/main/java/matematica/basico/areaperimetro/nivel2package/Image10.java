@@ -29,6 +29,6 @@ public class Image10 extends GeradorExercicio
 		addResolucao("\\(d=2r = 2 \\cdot" + raio + "\\sqrt{2} = " + (2 * raio) + "\\sqrt{2}\\)");
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaDiagonalQuadrado() + ",\\quad" + ResolucaoAreaPerimetro.formulaPerimetroQuadrado() + "\\)");
 		addResolucao("\\(l=" + (2 * raio) + "\\)");
-		addResolucao("\\(P=4 \\cdot " + l + "=" + (4 * l) + "\\)");
+		addResolucao("\\(P=4 \\cdot " + l + "=\\mathbf{" + (4 * l) + "}\\)");
 	}
 }

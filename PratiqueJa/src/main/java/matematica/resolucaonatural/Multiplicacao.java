@@ -132,7 +132,7 @@ public class Multiplicacao
 				}
 				resolucaoLatex+="\\hline";
 			}
-			resolucaoLatex+= resultado.latexDir(size+1);
+			resolucaoLatex+= resultado.latexDirBold(size+1);
 		}
 		
 		resolucaoLatex+="\\end{array}";

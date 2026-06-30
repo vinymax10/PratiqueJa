@@ -68,11 +68,13 @@ public class ResolucaoDizima
 		int resultadoDenominador = primeiroTermoDenominador - segundoTermoDenominador;
 
 		Racional fracSimplificada = new Racional(resultadoNumerador, resultadoDenominador);
-		ultimoPasso += fracSimplificada.showDfrac();
+		String fracOriginalResolucao = fracSimplificada.showDfrac();
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			ultimoPasso += "=" + fracSimplificada.showDfrac();
+			ultimoPasso += fracOriginalResolucao + "=\\mathbf{" + fracSimplificada.showDfrac() + "}";
+		else
+			ultimoPasso += "\\mathbf{" + fracOriginalResolucao + "}";
 
 		passos.add("\\(" + ultimoPasso + "\\)");
 
@@ -114,11 +116,13 @@ public class ResolucaoDizima
 		int resultadoNumerador = Integer.valueOf(inteira+strPeriodica)-Integer.valueOf(inteira);
 
 		Racional fracSimplificada = new Racional(resultadoNumerador, resultadoDenominador);
-		ultimoPasso += fracSimplificada.showDfrac();
+		String fracOriginalSimples = fracSimplificada.showDfrac();
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			ultimoPasso += "=" + fracSimplificada.showDfrac();
+			ultimoPasso += fracOriginalSimples + "=\\mathbf{" + fracSimplificada.showDfrac() + "}";
+		else
+			ultimoPasso += "\\mathbf{" + fracOriginalSimples + "}";
 
 		passos.add("\\(" + ultimoPasso + "\\)");
 

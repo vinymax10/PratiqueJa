@@ -30,6 +30,6 @@ public class Image23 extends GeradorExercicio
 		addResolucao("\\(2r=l\\sqrt{2}\\)");
 		addResolucao("\\(2r=" + a + "\\sqrt{2} \\cdot \\sqrt{2}\\)");
 		addResolucao("\\(2r=" + a + "(\\sqrt{2})^2 = " + a + "\\cdot 2 =" + (a * 2) + "\\)");
-		addResolucao("\\(r=\\dfrac{" + (a * 2) + "}{2} = " + a + "\\)");
+		addResolucao("\\(r=\\dfrac{" + (a * 2) + "}{2} = \\mathbf{" + a + "}\\)");
 	}
 }

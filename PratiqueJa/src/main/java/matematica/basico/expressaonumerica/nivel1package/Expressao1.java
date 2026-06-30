@@ -87,7 +87,7 @@ public class Expressao1 extends AgrupadorExercicio
 		StringBuilder res = new StringBuilder("\\(\\begin{aligned}& ").append(enun);
 		if(passoMulDiv != null)
 			res.append(" = \\\\& ").append(passoMulDiv);
-		res.append(" = ").append(result).append("\\end{aligned}\\)");
+		res.append(" = \\mathbf{").append(result).append("}\\end{aligned}\\)");
 		addResolucao(res.toString());
 	}
 }

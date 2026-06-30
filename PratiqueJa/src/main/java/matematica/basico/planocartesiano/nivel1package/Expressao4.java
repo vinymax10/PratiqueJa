@@ -41,7 +41,7 @@ public class Expressao4 extends GeradorExercicio
 		String bxStr = bx < 0 ? "(" + bx + ")" : "" + bx;
 		String byStr = by < 0 ? "(" + by + ")" : "" + by;
 		addResolucao("\\(M = \\left(\\dfrac{" + ax + " + " + bxStr + "}{2},\\;\\dfrac{" + ay + " + " + byStr + "}{2}\\right) =\\)");
-		addResolucao("\\(\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = (" + mx + ",\\;" + my + ")\\)");
+		addResolucao("\\(\\left(\\dfrac{" + (ax + bx) + "}{2},\\;\\dfrac{" + (ay + by) + "}{2}\\right) = \\mathbf{(" + mx + ",\\;" + my + ")}\\)");
 	}
 
 	private String par(int x, int y)

@@ -25,6 +25,6 @@ public class Image6 extends GeradorExercicio
 		gerarAlternativas(resultadoCorreto);
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaRetangulo() + "\\)");
 		addResolucao("\\(b=2 \\cdot" + h + "=" + (2 * h) + "\\)");
-		addResolucao("\\(A=" + (2 * h) + " \\cdot " + h + "=" + (2 * h * h) + "\\)");
+		addResolucao("\\(A=" + (2 * h) + " \\cdot " + h + "=\\mathbf{" + (2 * h * h) + "}\\)");
 	}
 }

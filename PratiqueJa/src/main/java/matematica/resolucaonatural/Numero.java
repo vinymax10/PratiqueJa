@@ -90,17 +90,34 @@ public class Numero
 		return false;
 	}
 	
-	public String latexDir(int size) 
+	public String latexDir(int size)
 	{
 		String resolucaoLatex="\\\\";
-		for (int i = 0; i < size; i++) 
+		for (int i = 0; i < size; i++)
 		{
 			resolucaoLatex=""+getDigitoStrDir(i)+resolucaoLatex;
 
 			if(i<size-1)
 				resolucaoLatex="&"+resolucaoLatex;
 		}
-		
+
+		return resolucaoLatex;
+	}
+
+	public String latexDirBold(int size)
+	{
+		String resolucaoLatex="\\\\";
+		for (int i = 0; i < size; i++)
+		{
+			String digito=getDigitoStrDir(i);
+			if(!digito.isEmpty())
+				digito="\\mathbf{"+digito+"}";
+			resolucaoLatex=digito+resolucaoLatex;
+
+			if(i<size-1)
+				resolucaoLatex="&"+resolucaoLatex;
+		}
+
 		return resolucaoLatex;
 	}
 	

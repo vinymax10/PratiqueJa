@@ -34,6 +34,6 @@ public class Image1 extends GeradorExercicio
 			addResolucao("\\(y = " + py + "\\).");
 		else
 			addResolucao("\\(x = " + px + "\\).");
-		addResolucao("Portanto, a " + tipoCoord + " de P é \\(" + resposta + "\\).");
+		addResolucao("Portanto, a " + tipoCoord + " de P é \\(\\mathbf{" + resposta + "}\\).");
 	}
 }

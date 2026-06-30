@@ -46,6 +46,14 @@ public class Exercicio7 extends GeradorExercicio
 
 		MyExpression myExpression = new MyExpression(eqStr);
 		String resolucaoPassos = myExpression.resolverLatex();
+		int lastSep = resolucaoPassos.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSep >= 0) ? resolucaoPassos.substring(lastSep + 2).trim() : resolucaoPassos.trim();
+		int lastEq = ultimoPasso.lastIndexOf('=');
+		if (lastEq >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastEq + 1) + "\\mathbf{" + ultimoPasso.substring(lastEq + 1).trim() + "}";
+			resolucaoPassos = (lastSep >= 0) ? resolucaoPassos.substring(0, lastSep + 2) + boldado : boldado;
+		}
 
 		// Enunciado
 		addParagrafo("A reta de coeficiente angular \\(m = " + m + "\\) passa por \\(A(" + a1 + ";\\;" + b1 + ")\\). "
