@@ -38,7 +38,7 @@ public class Expressao2 extends GeradorExercicio
 			enunciado = "\\(\\log_{" + b + "} " + b + " = \\,?\\)";
 			dist.add("0");
 			dist.add("" + b);
-			dist.add("2");
+			dist.add(b != 2 ? "2" : "3"); // evita duplicar "2" quando b==2
 			addParagrafo(enunciado);
 			addResolucao("Pela propriedade \\(\\log_b b = 1\\) (pois \\(b^1 = b\\)):");
 			addResolucao("\\(\\log_{" + b + "} " + b + " = \\mathbf{1}\\)");

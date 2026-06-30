@@ -1,7 +1,10 @@
 package bean.avaliacao;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,18 +12,22 @@ import java.util.List;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bean.PaiBean;
 import bean.download.Diretorio;
+import bean.seguranca.SessaoBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.academico.AssuntoDAO;
 import dao.avaliacao.PedidoAvaliacaoDAO;
 import dao.usuario.UsuarioDAO;
 import infra.Graphics;
+import service.avaliacao.CreditoAvaliacaoService;
+import service.avaliacao.MontadorPedidoAvaliacaoService;
 import service.configuracao.DiretorioService;
 import util.FileAux;
 import jakarta.annotation.PostConstruct;
@@ -47,9 +54,6 @@ import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
 import pdf.exercicio.LayoutLista;
-import service.avaliacao.CreditoAvaliacaoService;
-import service.avaliacao.MontadorPedidoAvaliacaoService;
-import web.session.Sessao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -82,6 +86,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private String dialogCotaMensagem;
 
 	// ── Injeções ──────────────────────────────────────────────────────
+
+	@Inject
+	private SessaoBean sessaoBean;
 
 	@Inject
 	private AssuntoDAO assuntoDAO;
@@ -160,7 +167,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private void novoPedido()
 	{
 		entidade = new PedidoAvaliacao();
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		entidade.setUsuario(usuario);
 		aplicarConfigPadrao(usuario);
 	}
@@ -175,7 +182,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			try
 			{
 				PedidoAvaliacao rascunho = entidadeDAO.carrega(Long.valueOf(idParam));
-				Usuario usuario = getUsuarioLogado();
+				Usuario usuario = sessaoBean.getUsuario();
 				if(rascunho != null && usuario != null && rascunho.getUsuario() != null
 					&& usuario.getId().equals(rascunho.getUsuario().getId())
 					&& rascunho.getStatus() == StatusPedidoAvaliacao.RASCUNHO)
@@ -211,7 +218,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** Salva os dados atuais (cabeçalho e formato) como o padrão do usuário, reaproveitado nas próximas avaliações. */
 	public void salvarComoPadrao()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario == null)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Faça login para salvar um padrão.");
@@ -255,24 +262,20 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		if(!validar())
 			return null;
 
+		prepararPedido();
 		entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
-		entidade.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
-		entidade.setProgresso(0);
 		entidade.setDataSolicitacao(LocalDateTime.now());
+		entidade.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
 
 		// Retenção do PDF varia por plano (Essencial 7 / Profissional 30 / Master 60 dias).
 		entidade.setDataExpiracao(LocalDateTime.now().plusDays(planoAtual().getDiasRetencao()));
-
-		entidade.setUsuario(getUsuarioLogado());
 
 		entidadeDAO.salvar(entidade);
 		montadorService.montar(entidade.getId());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Solicitação registrada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");
-
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("avNovoCodigo", entidade.getCodigoBatch());
 
-		// Redirect ajax-safe via outcome (mantém a mensagem no flash até a list)
 		return urlLista + "?faces-redirect=true";
 	}
 
@@ -282,13 +285,8 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		if(!controleAcessoBean.verificaEstaLogado())
 			return null;
 
-		entidade.setUsuario(getUsuarioLogado());
+		prepararPedido();
 		entidade.setStatus(StatusPedidoAvaliacao.RASCUNHO);
-		entidade.setProgresso(0);
-		if(entidade.getCodigoBatch() == null)
-			entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
-		if(entidade.getDataSolicitacao() == null)
-			entidade.setDataSolicitacao(LocalDateTime.now());
 
 		entidade = entidadeDAO.salvar(entidade);
 
@@ -302,6 +300,20 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	{
 		entidade = rascunho;
 		return solicitar();
+	}
+
+	/**
+	 * Preenche os campos comuns antes de salvar ou solicitar: usuário, progresso, e garante
+	 * codigoBatch e dataSolicitacao quando ainda não definidos.
+	 */
+	private void prepararPedido()
+	{
+		entidade.setUsuario(sessaoBean.getUsuario());
+		entidade.setProgresso(0);
+		if(entidade.getCodigoBatch() == null)
+			entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
+		if(entidade.getDataSolicitacao() == null)
+			entidade.setDataSolicitacao(LocalDateTime.now());
 	}
 
 	private boolean validar()
@@ -324,7 +336,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			return false;
 		}
 
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario.getPerfil() == PerfilUsuario.Admin && usuario.getPerfilAvaliacao() == null)
 			return true;
 
@@ -393,16 +405,13 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	{
 		if(historico == null)
 			return;
-		for(PedidoAvaliacao p : historico)
+		for(PedidoAvaliacao pedido : historico)
 		{
-			if(p.getStatus() == StatusPedidoAvaliacao.GERANDO
-			|| p.getStatus() == StatusPedidoAvaliacao.AGUARDANDO)
+			if(pedido.getStatus() == StatusPedidoAvaliacao.GERANDO
+			|| pedido.getStatus() == StatusPedidoAvaliacao.AGUARDANDO)
 			{
-				PedidoAvaliacao atualizado = entidadeDAO.carrega(p.getId());
-				p.setProgresso(atualizado.getProgresso());
-				p.setStatus(atualizado.getStatus());
-				p.setCaminhoArquivo(atualizado.getCaminhoArquivo());
-				p.setNomeDownload(atualizado.getNomeDownload());
+				PedidoAvaliacao atualizado = entidadeDAO.carrega(pedido.getId());
+				pedido.sincronizarProgresso(atualizado);
 			}
 		}
 	}
@@ -437,18 +446,17 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	// ── Download ──────────────────────────────────────────────────────
 
-	public org.primefaces.model.DefaultStreamedContent download(PedidoAvaliacao p) throws java.io.IOException
+	public DefaultStreamedContent download(PedidoAvaliacao p) throws IOException
 	{
 		if(p.getCaminhoArquivo() == null)
 			return null;
 
-		java.nio.file.Path arquivo = java.nio.file.Path.of(p.getCaminhoArquivo());
-		byte[] bytes = java.nio.file.Files.readAllBytes(arquivo);
-
+		byte[] bytes = Files.readAllBytes(Path.of(p.getCaminhoArquivo()));
 		String mime = p.getNomeDownload() != null && p.getNomeDownload().endsWith(".zip") ? "application/zip" : "application/pdf";
 
-		return org.primefaces.model.DefaultStreamedContent.builder().name(p.getNomeDownload()).contentType(mime)
-		.stream(() -> new java.io.ByteArrayInputStream(bytes)).build();
+		return DefaultStreamedContent.builder()
+			.name(p.getNomeDownload()).contentType(mime)
+			.stream(() -> new ByteArrayInputStream(bytes)).build();
 	}
 
 	// ── Cálculos auxiliares ───────────────────────────────────────────
@@ -468,7 +476,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	private PerfilAvaliacao planoAtual()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
 		return plano != null ? plano : PerfilAvaliacao.Essencial;
 	}
@@ -488,13 +496,14 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** A logo da escola no cabeçalho é exclusiva dos planos Profissional e Master. */
 	public boolean isPodeUsarLogoEscola()
 	{
-		PerfilAvaliacao plano = getUsuarioLogado() != null ? getUsuarioLogado().getPerfilAvaliacao() : null;
+		Usuario usuario = sessaoBean.getUsuario();
+		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
 		return plano == PerfilAvaliacao.Profissional || plano == PerfilAvaliacao.Master;
 	}
 
 	public boolean isTemLogoEscola()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		return usuario != null && usuario.getConfigAvaliacao() != null
 			&& usuario.getConfigAvaliacao().getLogoEscola() != null
 			&& usuario.getConfigAvaliacao().getLogoEscola().getEndereco() != null;
@@ -502,7 +511,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public String getLogoEscolaEndereco()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario == null || usuario.getConfigAvaliacao() == null
 			|| usuario.getConfigAvaliacao().getLogoEscola() == null)
 			return null;
@@ -511,7 +520,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public void uploadLogoEscola(FileUploadEvent event)
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(!isPodeUsarLogoEscola())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "A logo da escola está disponível apenas nos planos Profissional e Master.");
@@ -551,7 +560,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public void removerLogoEscola()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario == null || usuario.getId() == null)
 			return;
 
@@ -674,7 +683,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public String descricaoPlano()
 	{
-		PerfilAvaliacao plano = getUsuarioLogado().getPerfilAvaliacao();
+		PerfilAvaliacao plano = sessaoBean.getUsuario().getPerfilAvaliacao();
 		if(plano == null)
 			return "Teste grátis (" + creditosRestantes + " de " + PerfilAvaliacao.Teste.getLimiteMensal() + " restantes)";
 		if(!plano.isRenovavel())
@@ -685,7 +694,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** Usuário em modo de teste grátis legado: logado, sem plano atribuído e fora do perfil Admin. */
 	public boolean isModoTrial()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		return usuario != null && usuario.getPerfil() != PerfilUsuario.Admin && usuario.getPerfilAvaliacao() == null;
 	}
 
@@ -697,13 +706,15 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** Rótulo do stat "usadas" no hero: "no mês" para renovável, "total" para Teste. */
 	public String getLabelUsadas()
 	{
-		PerfilAvaliacao plano = getUsuarioLogado() != null ? getUsuarioLogado().getPerfilAvaliacao() : null;
-		return (plano != null && plano.isRenovavel()) ? "Usadas no mês" : "Usadas";
+		Usuario usuario = sessaoBean.getUsuario();
+		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
+		return (plano != null && plano.isRenovavel()) ? "Usadas no mês" : "Usadas no total";
 	}
 
 	public boolean temGerandoEmProgresso()
 	{
-		if (historico == null) return false;
+		if(historico == null)
+			return false;
 		return historico.stream().anyMatch(p -> p.getStatus() == StatusPedidoAvaliacao.GERANDO
 		                                    || p.getStatus() == StatusPedidoAvaliacao.AGUARDANDO);
 	}
@@ -744,19 +755,15 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	private void carregarHistorico()
 	{
-		historico = entidadeDAO.buscarPorUsuario(getUsuarioLogado());
+		historico = entidadeDAO.buscarPorUsuario(sessaoBean.getUsuario());
 	}
 
 	private void calcularUso()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario == null) return;
 		creditosRestantes = creditoAvaliacaoService.creditosRestantes(usuario);
 		avaliacoesUsadas = creditoAvaliacaoService.avaliacoesUsadas(usuario);
 	}
 
-	private Usuario getUsuarioLogado()
-	{
-		return Sessao.getUsuarioLogado();
-	}
 }

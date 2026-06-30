@@ -27,21 +27,7 @@
 				Envie seus próprios fundos de Feed (1080 × 1350) e Reel (1080 × 1920) para usar nas publicações.
 			</p>
 		</div>
-		<div class="pc-hero-stats">
-			
-			<div class="pc-stat ">
-				<span class="pc-stat-label">Perfil</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.perfilCriador.nome}</strong>
-			</div>
-			<div class="pc-stat">
-				<span class="pc-stat-label">Usados no mês</span>
-				<strong class="pc-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
-			</div>
-			<div class="pc-stat pc-stat--green">
-				<span class="pc-stat-label">Restantes</span>
-				<strong class="pc-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
-			</div>
-		</div>
+		<ui:include src="/post/statsPost.xhtml" />
 	</div>
 
 	<ui:include src="/post/navTabs.xhtml" />

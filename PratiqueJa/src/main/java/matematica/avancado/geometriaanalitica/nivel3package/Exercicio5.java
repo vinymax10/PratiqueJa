@@ -36,7 +36,7 @@ public class Exercicio5 extends GeradorExercicio
 		addResolucao("O raio é a distância \\(d(C, P)\\):");
 		addResolucao("\\(r = \\sqrt{(" + px + " - " + cx + ")^2 + (" + py + " - " + cy + ")^2}"
 				+ " = \\sqrt{" + dxStr + "^2 + " + dyStr + "^2}\\)");
-		addResolucao("\\(= \\sqrt{" + dx2 + " + " + dy2 + "}"
+		addResolucao("\\(r = \\sqrt{" + dx2 + " + " + dy2 + "}"
 				+ " = \\sqrt{" + soma + "} = \\mathbf{" + r + "}\\)");
 	}
 }

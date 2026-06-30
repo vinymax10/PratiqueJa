@@ -25,7 +25,9 @@ public class NotacaoCientifica2 extends GeradorExercicio
 		String correta = "\\(" + ratio + " \\times 10^{" + diff + "}\\)";
 		String e1     = "\\(" + ratio + " \\times 10^{" + (diff + 1) + "}\\)";
 		String e2     = "\\(" + ratio + " \\times 10^{" + (diff - 1) + "}\\)";
-		String e3     = "\\(" + (a - b) + " \\times 10^{" + diff + "}\\)"; // subtração em vez de divisão
+		// Quando ratio=2, b=2, a=4: a-b=2==ratio → e3==correta; usar a+b nesses casos
+		int e3mant = (a - b == ratio) ? a + b : a - b;
+		String e3     = "\\(" + e3mant + " \\times 10^{" + diff + "}\\)"; // subtração/adição em vez de divisão
 
 		addParagrafo("A massa do planeta X é \\(" + a + " \\times 10^{" + m + "}\\) kg.");
 		addParagrafo("A massa do planeta Y é \\(" + b + " \\times 10^{" + n + "}\\) kg.");

@@ -101,4 +101,13 @@ public class PedidoPost implements Serializable, Entidade
 	@OneToMany(mappedBy = "pedidoPost", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("ordem ASC")
 	private List<ItemPedidoPost> itens = new ArrayList<>();
+
+	/** Atualiza os campos de progresso a partir de uma versão recarregada do banco. */
+	public void sincronizarProgresso(PedidoPost atualizado)
+	{
+		this.progresso = atualizado.progresso;
+		this.status = atualizado.status;
+		this.caminhoArquivo = atualizado.caminhoArquivo;
+		this.nomeDownload = atualizado.nomeDownload;
+	}
 }

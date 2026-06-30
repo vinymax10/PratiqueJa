@@ -139,7 +139,15 @@ public class AuxSemelhancaAngulos
 	 */
 	public static String[] resolucaoLinhas(String instrucao, Object config)
 	{
-		return resolucao(instrucao, config).split("\\\\");
+		String[] passos = resolucao(instrucao, config).split("\\\\\\\\");
+		if (passos.length > 0)
+		{
+			String ultimo = passos[passos.length - 1].trim();
+			int lastEq = ultimo.lastIndexOf('=');
+			if (lastEq >= 0)
+				passos[passos.length - 1] = ultimo.substring(0, lastEq + 1) + "\\mathbf{" + ultimo.substring(lastEq + 1).trim() + "}";
+		}
+		return passos;
 	}
 	
 	public static void mostrarAngulos(String angleImage, Object config)

@@ -32,7 +32,8 @@ public class Radiciacao11 extends GeradorExercicio
 		int coef = soma ? A + B : A - B;
 
 		int e3raw = soma ? A * B : A + B;
-		if (e3raw == coef) e3raw = coef + 2;
+		// Quando soma e {A,B}={2,3}: coef=5, e3raw=A*B=6==coef+1=e1 → colisão; usar coef+2
+		if (e3raw == coef || e3raw == coef + 1) e3raw = coef + 2;
 
 		String op      = soma ? "+" : "-";
 		String correta = "\\(" + coef + "\\sqrt{" + r + "}\\)";

@@ -18,8 +18,9 @@ public class Exercicio2 extends GeradorExercicio
 				+ "\\,\\text{cm}\\). Calcule o volume em função de \\(\\pi\\).");
 
 		String correta = "\\(" + vCoef + "\\pi\\,\\text{cm}^3\\)";
+		int d1 = 2 * r * h; if (d1 == vCoef) d1 += r; // evita colisão quando r=2
 		List<String> distratores = new ArrayList<>();
-		distratores.add("\\(" + (2 * r * h) + "\\pi\\,\\text{cm}^3\\)");       // 2rh (área lateral)
+		distratores.add("\\(" + d1 + "\\pi\\,\\text{cm}^3\\)");                 // ~2rh (área lateral)
 		distratores.add("\\(" + (vCoef + r2) + "\\pi\\,\\text{cm}^3\\)");       // r²(h+1)
 		distratores.add("\\(" + (r2 * (h + r)) + "\\pi\\,\\text{cm}^3\\)");     // r²(h+r)
 		embaralharEAdicionarAlternativas(correta, distratores);

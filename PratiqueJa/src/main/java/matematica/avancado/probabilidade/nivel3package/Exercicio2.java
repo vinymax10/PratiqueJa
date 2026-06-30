@@ -47,8 +47,10 @@ public class Exercicio2 extends GeradorExercicio
 			String fraRes = res.showDfrac(); res.fatoracao(2); boolean resSimp = res.isSimplificou();
 
 			Racional dCorDif = new Racional(a * b, cT2); dCorDif.fatoracao(2);
-			Racional dSoA   = new Racional(cA2, cT2);   dSoA.fatoracao(2);
-			Racional dSoB   = new Racional(cB2, cT2);   dSoB.fatoracao(2);
+			Racional dSoA   = new Racional(cA2, cT2); dSoA.fatoracao(2);
+			// Quando a==b, cA2==cB2 → dSoA==dSoB; usar cB2+1 para evitar colisão
+			int cB2Dist = (cA2 == cB2) ? cB2 + 1 : cB2;
+			Racional dSoB   = new Racional(cB2Dist, cT2); dSoB.fatoracao(2);
 			List<String> dis = new ArrayList<>();
 			dis.add("\\(" + dCorDif.showDfrac() + "\\)");  // P(cores diferentes): complementar
 			dis.add("\\(" + dSoA.showDfrac() + "\\)");     // só C(a,2)/C(total,2)
@@ -79,8 +81,10 @@ public class Exercicio2 extends GeradorExercicio
 
 			int numMesmaCor = cA2 + cB2;
 			Racional dMesma = new Racional(numMesmaCor, cT2); dMesma.fatoracao(2);
-			Racional dSoA   = new Racional(cA2, cT2);         dSoA.fatoracao(2);
-			Racional dSoB   = new Racional(cB2, cT2);         dSoB.fatoracao(2);
+			Racional dSoA   = new Racional(cA2, cT2); dSoA.fatoracao(2);
+			// Quando a==b, cA2==cB2 → dSoA==dSoB; usar cB2+1 para evitar colisão
+			int cB2Dist = (cA2 == cB2) ? cB2 + 1 : cB2;
+			Racional dSoB   = new Racional(cB2Dist, cT2); dSoB.fatoracao(2);
 			List<String> dis = new ArrayList<>();
 			dis.add("\\(" + dMesma.showDfrac() + "\\)");   // P(mesma cor): trocou o evento
 			dis.add("\\(" + dSoA.showDfrac() + "\\)");     // só C(a,2)/C(total,2)

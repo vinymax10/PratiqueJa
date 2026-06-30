@@ -21,10 +21,17 @@ public class Exercicio2 extends GeradorExercicio
 				+ "onde \\(A(" + x1 + ";\\;" + y1 + ")\\) e \\(B(" + x2 + ";\\;" + y2 + ")\\).");
 
 		String correta = "\\((" + mx + ";\\;" + my + ")\\)";
+		String d2str = "\\((" + (mx + 1) + ";\\;" + my + ")\\)";
+		String d3str = "\\((" + mx + ";\\;" + (my + 1) + ")\\)";
+		// d1=(x1;y1) pode colidir com correta (x1=x2,y1=y2), d2 (x1=x2+2,y1=y2)
+		// ou d3 (x1=x2,y1=y2-2); usar (mx-1;my-1) nesses casos (sempre único)
+		String d1str = "\\((" + x1 + ";\\;" + y1 + ")\\)";
+		if (d1str.equals(correta) || d1str.equals(d2str) || d1str.equals(d3str))
+			d1str = "\\((" + (mx - 1) + ";\\;" + (my - 1) + ")\\)";
 		List<String> distratores = new ArrayList<>();
-		distratores.add("\\((" + x1 + ";\\;" + y1 + ")\\)");
-		distratores.add("\\((" + (mx + 1) + ";\\;" + my + ")\\)");
-		distratores.add("\\((" + mx + ";\\;" + (my + 1) + ")\\)");
+		distratores.add(d1str);
+		distratores.add(d2str);
+		distratores.add(d3str);
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		addResolucao("O ponto médio tem coordenadas iguais às médias aritméticas das extremidades:");

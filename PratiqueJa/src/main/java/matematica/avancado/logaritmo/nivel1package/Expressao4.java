@@ -19,8 +19,10 @@ public class Expressao4 extends GeradorExercicio
 		addParagrafo("Aplique a propriedade \\(b^{\\log_b a} = a\\):");
 		addParagrafo("\\(" + b + "^{\\log_{" + b + "} " + a + "} = \\,?\\)");
 
+		// Quando b==a: d1=b==correta; usar b+1 para evitar colisão (casos: a=3,b=3 e a=5,b=5)
+		int d1 = (b == a) ? b + 1 : b;
 		List<String> dist = new ArrayList<>();
-		dist.add("" + b);
+		dist.add("" + d1);
 		dist.add("" + (a * b));
 		dist.add("1");
 

@@ -18,7 +18,9 @@ public class NotacaoCientifica8 extends GeradorExercicio
 
 		String correta = "\\(" + aSq + " \\times 10^{" + (2 * n) + "}\\)";
 		String e1     = "\\(" + aSq + " \\times 10^{" + n + "}\\)";       // não dobrou o expoente
-		String e2     = "\\(" + (2 * a) + " \\times 10^{" + (2 * n) + "}\\)"; // multiplicou por 2 em vez de elevar ao quadrado
+		// Quando a=2: 2a=4==aSq=4 → e2==correta; usar 2a+1=5 para evitar colisão
+		int e2mant = (2 * a == aSq) ? 2 * a + 1 : 2 * a;
+		String e2     = "\\(" + e2mant + " \\times 10^{" + (2 * n) + "}\\)"; // multiplicou em vez de elevar
 		String e3     = "\\(" + aSq + " \\times 10^{" + (2 * n + 1) + "}\\)"; // expoente a mais
 
 		addParagrafo("Calcule, deixando o resultado em notação científica:");

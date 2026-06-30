@@ -36,7 +36,9 @@ public class NotacaoCientifica6 extends GeradorExercicio
 		String correta = "\\(" + r + " \\times 10^{" + expResult + "}\\)";
 		String e1     = "\\(" + r + " \\times 10^{" + (expResult + 1) + "}\\)";
 		String e2     = "\\(" + r + " \\times 10^{" + (expResult - 1) + "}\\)";
-		String e3     = "\\(" + (a * b) + " \\times 10^{" + (m + n) + "}\\)"; // esqueceu de dividir
+		// Quando c==1 e p==1: r==a*b e expResult+1==m+n → e1==e3; usar a*b-1 para evitar
+		int e3mant = (c == 1 && p == 1) ? a * b - 1 : a * b;
+		String e3     = "\\(" + e3mant + " \\times 10^{" + (m + n) + "}\\)"; // esqueceu de dividir
 
 		addParagrafo("Calcule, em notação científica:");
 		addParagrafo("\\(\\dfrac{" + a + " \\times 10^{" + m + "} \\;\\times\\; " + b + " \\times 10^{" + n + "}}{" + c + " \\times 10^{" + p + "}}\\)");

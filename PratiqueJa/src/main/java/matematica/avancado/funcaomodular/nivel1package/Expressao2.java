@@ -19,10 +19,12 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("Qual é o vértice da função \\(f(x) = " + funcStr + "\\)?");
 
 		String correto = "\\((" + h + ",\\," + k + ")\\)";
+		// Quando h>0 e h==k, distrator (k,h) == correto (h,k); deslocar k
+		int kDist3 = (h > 0 && h == k) ? k + 1 : k;
 		List<String> dist = new ArrayList<>();
 		dist.add("\\((" + (-h) + ",\\," + k + ")\\)");
 		dist.add("\\((" + h + ",\\," + (-k) + ")\\)");
-		dist.add("\\((" + k + ",\\," + h + ")\\)");
+		dist.add("\\((" + kDist3 + ",\\," + h + ")\\)");
 		embaralharEAdicionarAlternativas(correto, dist);
 
 		addResolucao("Na forma \\(f(x) = |x - h| + k\\), o vértice é \\((h,\\,k)\\).");

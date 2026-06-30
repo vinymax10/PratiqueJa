@@ -46,8 +46,7 @@ public class Expressao5 extends GeradorExercicio
 			+ "Use \\(\\text{pH} = -\\log[\\text{H}^+]\\).");
 
 		addResolucao("Substituindo na fórmula:");
-		addResolucao("\\(\\text{pH} = -\\log(10^{-" + n + "})\\)");
-		addResolucao("\\(= -(-" + n + ") \\cdot \\log 10 = " + n + " \\cdot 1\\)");
+		addResolucao("\\(\\text{pH} = -\\log(10^{-" + n + "}) = -(-" + n + ") \\cdot \\log 10 = " + n + " \\cdot 1\\)");
 		addResolucao("\\(\\text{pH} = \\mathbf{" + n + "}\\)");
 
 		gerarAlternativas("" + n);

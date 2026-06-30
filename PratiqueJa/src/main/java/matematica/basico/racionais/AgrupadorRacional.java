@@ -86,7 +86,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		gerarAlternativas(res);
 		addResolucao("Dividimos numerador e denominador pelo MDC.");
 		addResolucao("\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\).");
-		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{" + num + " \\div " + mdc + "}{" + den + " \\div " + mdc + "} = " + res.showDfrac() + "\\)");
+		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{" + num + " \\div " + mdc + "}{" + den + " \\div " + mdc + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 	}
 
 	protected void equivalente()
@@ -100,7 +100,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		gerarAlternativasInteiras(numDest);
 		addResolucao("Para obter denominador \\(" + denDest + "\\) a partir de \\(" + b + "\\), multiplicamos por \\(" + k + "\\).");
 		addResolucao("Aplicamos o mesmo fator ao numerador:");
-		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{" + b + " \\times " + k + "} = \\dfrac{" + numDest + "}{" + denDest + "}\\)");
+		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{" + b + " \\times " + k + "} = \\mathbf{\\dfrac{" + numDest + "}{" + denDest + "}}\\)");
 	}
 
 	protected void mistaParaImpropria()
@@ -113,7 +113,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("\\(" + n + "\\dfrac{" + r + "}{" + d + "}\\)");
 		gerarAlternativas(new Racional(num, d).toString());
 		addResolucao("Multiplicamos a parte inteira pelo denominador e somamos o numerador.");
-		addResolucao("\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d + " + " + r + "}{" + d + "} = \\dfrac{" + num + "}{" + d + "}\\)");
+		addResolucao("\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d + " + " + r + "}{" + d + "} = \\mathbf{\\dfrac{" + num + "}{" + d + "}}\\)");
 	}
 
 	protected void impropriaParaMista()
@@ -125,14 +125,15 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		String correta = q + "\\dfrac{" + r + "}{" + d + "}";
 		List<String> distratores = new ArrayList<>();
 		distratores.add("\\(" + (q + 1) + "\\dfrac{" + r + "}{" + d + "}\\)");
-		distratores.add("\\(" + q + "\\dfrac{" + (r % (d - 1) + 1) + "}{" + d + "}\\)");
+		// d=2: r%(d-1)+1 = r%1+1 = 1 = r → D2==correta; usar r+1 quando d=2
+		distratores.add("\\(" + q + "\\dfrac{" + (d > 2 ? r % (d - 1) + 1 : r + 1) + "}{" + d + "}\\)");
 		distratores.add("\\(" + (q > 1 ? q - 1 : q + 2) + "\\dfrac{" + r + "}{" + d + "}\\)");
 		addParagrafo("Escreva a fração imprópria como número misto:");
 		addParagrafo("\\(\\dfrac{" + num + "}{" + d + "}\\)");
 		embaralharEAdicionarAlternativas("\\(" + correta + "\\)", distratores);
 		addResolucao("Dividimos o numerador pelo denominador: o quociente é a parte inteira e o resto é o novo numerador.");
 		addResolucao("\\(" + num + " \\div " + d + " = " + q + "\\) resto \\(" + r + "\\).");
-		addResolucao("\\(\\dfrac{" + num + "}{" + d + "} = " + correta + "\\)");
+		addResolucao("\\(\\dfrac{" + num + "}{" + d + "} = \\mathbf{" + correta + "}\\)");
 	}
 
 	protected void comparar()
@@ -176,7 +177,7 @@ public abstract class AgrupadorRacional extends GeradorExercicio
 		addParagrafo("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} =\\)");
 		gerarAlternativas(res.toString());
 		addResolucao("Elevamos numerador e denominador ao expoente:");
-		addResolucao("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} = \\dfrac{" + a + "^{" + n + "}}{" + b + "^{" + n + "}} = \\dfrac{" + num + "}{" + den + "}\\)");
+		addResolucao("\\(\\left(\\dfrac{" + a + "}{" + b + "}\\right)^{" + n + "} = \\dfrac{" + a + "^{" + n + "}}{" + b + "^{" + n + "}} = \\mathbf{\\dfrac{" + num + "}{" + den + "}}\\)");
 	}
 
 	protected void fracaoDeQuantidade()

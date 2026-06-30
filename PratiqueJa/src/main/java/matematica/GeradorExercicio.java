@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -121,11 +122,15 @@ public abstract class GeradorExercicio
 
 	/**
 	 * Embaralha a correta junto com os distratores e adiciona como alternativas
-	 * (ordem/letra automáticas). Os distratores devem ser distintos da correta.
+	 * (ordem/letra automáticas). Remove distrátores que coincidam com a correta ou
+	 * entre si para evitar C2 (2+ corretas) e C3 (alternativas duplicadas).
 	 */
 	protected void embaralharEAdicionarAlternativas(String correta, List<String> distratores)
 	{
-		List<String> textos = new ArrayList<>(distratores);
+		List<String> textos = new ArrayList<>();
+		for(String d : distratores)
+			if(d != null && !d.equals(correta) && !textos.contains(d))
+				textos.add(d);
 		textos.add(correta);
 		Collections.shuffle(textos, rand);
 
@@ -224,11 +229,25 @@ public abstract class GeradorExercicio
 	{
 		if(resultadoCorreto.contains("%"))
 		{
-			long numerador = Long.parseLong(resultadoCorreto.replace("\\%", "").replace("%", "").trim());
-			do
-				numerador += rand.nextBoolean() ? 1 + rand.nextInt(10) : -1 - rand.nextInt(10);
-			while(numerador <= 0);
-			return numerador + "\\%";
+			String numStr = resultadoCorreto.replace("\\%", "").replace("%", "").trim();
+			try
+			{
+				long numerador = Long.parseLong(numStr);
+				do
+					numerador += rand.nextBoolean() ? 1 + rand.nextInt(10) : -1 - rand.nextInt(10);
+				while(numerador <= 0);
+				return numerador + "\\%";
+			}
+			catch(NumberFormatException e)
+			{
+				// Porcentagem decimal (ex.: "12.68%"): perturbar como double
+				double valor = Double.parseDouble(numStr);
+				double delta;
+				do
+					delta = (rand.nextBoolean() ? 1.0 : -1.0) * (1 + rand.nextInt(5));
+				while(valor + delta <= 0);
+				return String.format(Locale.US, "%.2f", valor + delta) + "\\%";
+			}
 		}
 
 		Racional correta = Racional.toConvert(resultadoCorreto);

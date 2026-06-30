@@ -40,10 +40,17 @@ public class Exercicio4 extends GeradorExercicio
 		res.fatoracao(2);
 		boolean resSimp = res.isSimplificou();
 
+		// Quando nA==nB, P(A)==P(B): substituir d2 para evitar duplicação
+		Racional d2 = pB;
+		if (pA.showDfrac().equals(pB.showDfrac()))
+		{
+			d2 = new Racional(nFav + 2, 6);
+			d2.fatoracao(2);
+		}
+		Racional d3 = new Racional(nFav + 1, 6); d3.fatoracao(2);
 		List<String> distratores = new ArrayList<>();
 		distratores.add("\\(" + pA.showDfrac() + "\\)");              // só P(A)
-		distratores.add("\\(" + pB.showDfrac() + "\\)");              // só P(B)
-		Racional d3 = new Racional(nFav + 1, 6); d3.fatoracao(2);
+		distratores.add("\\(" + d2.showDfrac() + "\\)");              // só P(B)
 		distratores.add("\\(" + d3.showDfrac() + "\\)");              // contou uma face a mais
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 

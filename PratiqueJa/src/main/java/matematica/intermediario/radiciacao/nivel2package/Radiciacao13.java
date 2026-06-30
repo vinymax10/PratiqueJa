@@ -41,6 +41,8 @@ public class Radiciacao13 extends GeradorExercicio
 		int e1 = res + 1;
 		int e2 = res > 2 ? res - 1 : res + 2;
 		int e3 = (base == res) ? res + 4 : base;
+		// Quando {4,1,2,2,2}: res=2 → e2=4=base=e3; ajustar e3
+		if (e3 == e2) e3 = e2 + 1;
 		embaralharEAdicionarAlternativas("" + res, Arrays.asList("" + e1, "" + e2, "" + e3));
 
 		if(p == 1)

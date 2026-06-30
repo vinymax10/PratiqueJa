@@ -1,11 +1,15 @@
 package bean.publicacao;
 
-import java.time.LocalDate;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.DefaultStreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +29,6 @@ import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
 import modelo.exercicio.Nivel;
 import modelo.publicacao.Background;
-import modelo.publicacao.ConfigPost;
 import modelo.publicacao.FormatoPost;
 import modelo.publicacao.ImagemPost;
 import modelo.publicacao.ItemPedidoPost;
@@ -33,10 +36,10 @@ import modelo.publicacao.PedidoPost;
 import modelo.publicacao.PerfilCriador;
 import modelo.publicacao.StatusPedidoPost;
 import modelo.seguranca.PermissaoPadrao;
-import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
+import bean.seguranca.SessaoBean;
+import service.publicacao.CreditoPostService;
 import service.publicacao.MontadorPostService;
-import web.session.Sessao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -89,6 +92,12 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
+
+	@Inject
+	private SessaoBean sessaoBean;
+
+	@Inject
+	private CreditoPostService creditoPostService;
 
 	public PedidoPostBean()
 	{
@@ -145,7 +154,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private void novoPedido()
 	{
 		entidade = new PedidoPost();
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		entidade.setUsuario(usuario);
 		if(usuario != null)
 			entidade.setConfigPost(usuario.getConfigPost());
@@ -161,7 +170,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 			try
 			{
 				PedidoPost rascunho = entidadeDAO.carrega(Long.valueOf(idParam));
-				Usuario usuario = getUsuarioLogado();
+				Usuario usuario = sessaoBean.getUsuario();
 				if(rascunho != null && usuario != null && rascunho.getUsuario() != null
 					&& usuario.getId().equals(rascunho.getUsuario().getId())
 					&& rascunho.getStatus() == StatusPedidoPost.RASCUNHO)
@@ -228,17 +237,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		}
 		else if(itemOriginal != null)
 		{
-			itemOriginal.setAssunto(item.getAssunto());
-			// mantém a mesma instância de coleção (evita problema do Hibernate com @ElementCollection)
-			itemOriginal.getNiveis().clear();
-			itemOriginal.getNiveis().addAll(item.getNiveis());
-			itemOriginal.setFormato(item.getFormato());
-			itemOriginal.setQuantidade(item.getQuantidade());
-			itemOriginal.setAlternativaReel(item.isAlternativaReel());
-			itemOriginal.setBackgroundAleatorio(item.isBackgroundAleatorio());
-			itemOriginal.setBasePadrao(item.isBasePadrao());
-			itemOriginal.setBackground(item.getBackground());
-			itemOriginal.setPadrao(item.getPadrao());
+			itemOriginal.aplicarEdicao(item);
 		}
 		editandoItem = false;
 		itemOriginal = null;
@@ -282,15 +281,10 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		if(!validar())
 			return null;
 
+		prepararPedido();
 		entidade.setCodigoBatch(MontadorPostService.gerarCodigoBatch());
-		entidade.setStatus(StatusPedidoPost.AGUARDANDO);
-		entidade.setProgresso(0);
 		entidade.setDataSolicitacao(LocalDateTime.now());
-		entidade.setQuantidade(totalCreditos());
-
-		Usuario usuario = getUsuarioLogado();
-		entidade.setUsuario(usuario);
-		entidade.setConfigPost(usuario.getConfigPost());
+		entidade.setStatus(StatusPedidoPost.AGUARDANDO);
 
 		entidadeDAO.salvar(entidade);
 		montadorService.montar(entidade.getId());
@@ -304,7 +298,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private boolean validar()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 
 		if(usuario == null || usuario.getConfigPost() == null)
 		{
@@ -350,18 +344,18 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		PrimeFaces.current().executeScript("PF('dlgCota').show()");
 	}
 
-	/** Usuário em teste grátis: sem plano de conteúdo ativo. */
+	/** Usuário em teste grátis: plano não renovável (cota total fixa). */
 	public boolean isModoTrial()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		if(usuario == null)
 			return false;
-		return usuario.getValidadePlano() == null || usuario.getValidadePlano().isBefore(LocalDate.now());
+		return !usuario.getPerfilCriador().isRenovavel();
 	}
 
 	public int trialRestante()
 	{
-		return Math.max(0, LIMITE_TRIAL_GRATIS - postsUsadosTotal);
+		return creditoPostService.creditosRestantes(sessaoBean.getUsuario(), planoAtual());
 	}
 
 	/** Salva o pedido como rascunho (sem gerar), para o usuário continuar a configuração depois. */
@@ -370,16 +364,8 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		if(!controleAcessoBean.verificaEstaLogado())
 			return null;
 
-		Usuario usuario = getUsuarioLogado();
-		entidade.setUsuario(usuario);
-		entidade.setConfigPost(usuario.getConfigPost());
+		prepararPedido();
 		entidade.setStatus(StatusPedidoPost.RASCUNHO);
-		entidade.setProgresso(0);
-		entidade.setQuantidade(totalCreditos());
-		if(entidade.getCodigoBatch() == null)
-			entidade.setCodigoBatch(MontadorPostService.gerarCodigoBatch());
-		if(entidade.getDataSolicitacao() == null)
-			entidade.setDataSolicitacao(LocalDateTime.now());
 
 		entidade = entidadeDAO.salvar(entidade);
 
@@ -395,21 +381,35 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		return solicitar();
 	}
 
+	/**
+	 * Preenche os campos comuns antes de salvar ou solicitar: usuário, configPost, quantidade,
+	 * progresso, e garante codigoBatch e dataSolicitacao quando ainda não definidos.
+	 */
+	private void prepararPedido()
+	{
+		Usuario usuario = sessaoBean.getUsuario();
+		entidade.setUsuario(usuario);
+		entidade.setConfigPost(usuario.getConfigPost());
+		entidade.setQuantidade(totalCreditos());
+		entidade.setProgresso(0);
+		if(entidade.getCodigoBatch() == null)
+			entidade.setCodigoBatch(MontadorPostService.gerarCodigoBatch());
+		if(entidade.getDataSolicitacao() == null)
+			entidade.setDataSolicitacao(LocalDateTime.now());
+	}
+
 	// ── Progresso / download ──────────────────────────────────────────
 
 	public void atualizarProgresso()
 	{
 		if(historico == null)
 			return;
-		for(PedidoPost p : historico)
+		for(PedidoPost pedido : historico)
 		{
-			if(p.getStatus() == StatusPedidoPost.GERANDO || p.getStatus() == StatusPedidoPost.AGUARDANDO)
+			if(pedido.getStatus() == StatusPedidoPost.GERANDO || pedido.getStatus() == StatusPedidoPost.AGUARDANDO)
 			{
-				PedidoPost atualizado = entidadeDAO.carrega(p.getId());
-				p.setProgresso(atualizado.getProgresso());
-				p.setStatus(atualizado.getStatus());
-				p.setCaminhoArquivo(atualizado.getCaminhoArquivo());
-				p.setNomeDownload(atualizado.getNomeDownload());
+				PedidoPost atualizado = entidadeDAO.carrega(pedido.getId());
+				pedido.sincronizarProgresso(atualizado);
 			}
 		}
 	}
@@ -486,24 +486,23 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		}
 	}
 
-	public org.primefaces.model.DefaultStreamedContent download(PedidoPost p) throws java.io.IOException
+	public DefaultStreamedContent download(PedidoPost p) throws IOException
 	{
 		if(p.getCaminhoArquivo() == null)
 			return null;
 
-		java.nio.file.Path arquivo = java.nio.file.Path.of(p.getCaminhoArquivo());
-		byte[] bytes = java.nio.file.Files.readAllBytes(arquivo);
+		byte[] bytes = Files.readAllBytes(Path.of(p.getCaminhoArquivo()));
 
-		return org.primefaces.model.DefaultStreamedContent.builder()
+		return DefaultStreamedContent.builder()
 			.name(p.getNomeDownload()).contentType("application/zip")
-			.stream(() -> new java.io.ByteArrayInputStream(bytes)).build();
+			.stream(() -> new ByteArrayInputStream(bytes)).build();
 	}
 
 	// ── Cota / créditos ───────────────────────────────────────────────
 
 	private PerfilCriador planoAtual()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		return usuario != null ? usuario.getPerfilCriador() : PerfilCriador.Basico;
 	}
 
@@ -519,7 +518,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	public int cotaDisponivel()
 	{
-		Usuario usuario = getUsuarioLogado();
+		Usuario usuario = sessaoBean.getUsuario();
 		int rollover = usuario != null ? usuario.getCreditoRolloverPost() : 0;
 		return getCreditosMensais() + rollover;
 	}
@@ -532,13 +531,13 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	/** Créditos disponíveis independente do modo (trial ou plano ativo). */
 	public int creditosDisponiveis()
 	{
-		return isModoTrial() ? trialRestante() : creditosRestantes();
+		return creditoPostService.creditosRestantes(sessaoBean.getUsuario(), planoAtual());
 	}
 
 	public String descricaoPlano()
 	{
 		if(isModoTrial())
-			return "Teste grátis (" + trialRestante() + " de " + LIMITE_TRIAL_GRATIS + " restantes)";
+			return "Teste grátis (" + trialRestante() + " de " + planoAtual().getCreditosMensais() + " restantes)";
 		return planoAtual().getNome() + " (" + getCreditosMensais() + " posts/mês)";
 	}
 
@@ -610,19 +609,14 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private void carregarHistorico()
 	{
-		historico = entidadeDAO.buscarPorUsuario(getUsuarioLogado());
+		historico = entidadeDAO.buscarPorUsuario(sessaoBean.getUsuario());
 	}
 
 	private void calcularUso()
 	{
 		LocalDateTime inicioMes = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
 		LocalDateTime inicioProximo = inicioMes.plusMonths(1);
-		postsUsadosNoMes = entidadeDAO.somarPostsNoMes(getUsuarioLogado(), inicioMes, inicioProximo);
-		postsUsadosTotal = entidadeDAO.somarPostsTotal(getUsuarioLogado());
-	}
-
-	private Usuario getUsuarioLogado()
-	{
-		return Sessao.getUsuarioLogado();
+		postsUsadosNoMes = entidadeDAO.somarPostsNoMes(sessaoBean.getUsuario(), inicioMes, inicioProximo);
+		postsUsadosTotal = entidadeDAO.somarPostsTotal(sessaoBean.getUsuario());
 	}
 }

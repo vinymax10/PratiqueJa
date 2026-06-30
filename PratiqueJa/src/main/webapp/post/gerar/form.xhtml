@@ -87,35 +87,7 @@
 			</p>
 		</div>
 
-		<h:panelGroup layout="block" styleClass="av-hero-stats" rendered="#{!pedidoPostBean.modoTrial}">
-			<div class="av-stat">
-				<span class="av-stat-label">Plano ativo</span>
-				<strong class="av-stat-value">#{pedidoPostBean.nomePlano}</strong>
-			</div>
-			<div class="av-stat">
-				<span class="av-stat-label">Usados no mês</span>
-				<strong class="av-stat-value">#{pedidoPostBean.postsUsadosNoMes}</strong>
-			</div>
-			<div class="av-stat av-stat--green">
-				<span class="av-stat-label">Restantes</span>
-				<strong class="av-stat-value">#{pedidoPostBean.creditosRestantes()}</strong>
-			</div>
-		</h:panelGroup>
-
-		<h:panelGroup layout="block" styleClass="av-hero-stats" rendered="#{pedidoPostBean.modoTrial}">
-			<div class="av-stat">
-				<span class="av-stat-label">Teste grátis</span>
-				<strong class="av-stat-value">#{pedidoPostBean.limiteTrialGratis} posts</strong>
-			</div>
-			<div class="av-stat">
-				<span class="av-stat-label">Usados</span>
-				<strong class="av-stat-value">#{pedidoPostBean.postsUsadosTotal}</strong>
-			</div>
-			<div class="av-stat av-stat--green">
-				<span class="av-stat-label">Restantes</span>
-				<strong class="av-stat-value">#{pedidoPostBean.trialRestante()}</strong>
-			</div>
-		</h:panelGroup>
+		<ui:include src="/post/statsPost.xhtml" />
 	</div>
 
 	<ui:include src="/post/navTabs.xhtml" />

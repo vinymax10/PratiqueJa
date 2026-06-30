@@ -51,6 +51,7 @@ public class Image7 extends GeradorExercicio
 			errados.add("Retângulo");
 			errados.add("Obtusângulo");
 		}
+		errados.add("Equilátero"); // nunca correto nos CASOS deste exercício
 		embaralharEAdicionarAlternativas(correto, errados);
 
 		String rel = (tipo == 0) ? "=" : (tipo == 1) ? ">" : "<";

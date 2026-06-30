@@ -19,10 +19,12 @@ public class Exercicio4 extends GeradorExercicio
 				+ "\\,\\text{cm}\\). Qual é o volume do sólido gerado?");
 
 		String correta = "\\(" + vCoef + "\\pi\\,\\text{cm}^3\\)";
+		int d2 = 2 * r * h;     if (d2 == vCoef) d2 += r;         // evita colisão quando r=2
+		int d3 = 2 * r * (h + r); if (d3 == vCoef) d3 += 2 * r;  // evita colisão quando r=3,h=6
 		List<String> distratores = new ArrayList<>();
 		distratores.add("\\(" + (r * h * h) + "\\pi\\,\\text{cm}^3\\)"); // girou em torno do lado r (r↔h trocados)
-		distratores.add("\\(" + (2 * r * h) + "\\pi\\,\\text{cm}^3\\)"); // área lateral (confundida com volume)
-		distratores.add("\\(" + (2 * r * (h + r)) + "\\pi\\,\\text{cm}^3\\)"); // área total
+		distratores.add("\\(" + d2 + "\\pi\\,\\text{cm}^3\\)");          // ~área lateral
+		distratores.add("\\(" + d3 + "\\pi\\,\\text{cm}^3\\)");          // ~área total
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		addResolucao("O retângulo gira em torno do lado \\(" + h

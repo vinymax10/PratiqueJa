@@ -46,9 +46,17 @@ public class Exercicio3 extends GeradorExercicio
 			Racional res = new Racional(cA3, cT3);
 			String fraRes = res.showDfrac(); res.fatoracao(2); boolean resSimp = res.isSimplificou();
 
+			// Quando a=5: C(5,2)==C(5,3)=10 → d2 colide com res (cA2/cT3==res)
+			// E d3=cA3+1 colide com d2=cA2+1 (ambos 11). Usar cA3+2 nesses casos.
 			Racional d1 = new Racional(num2A1B, cT3); d1.fatoracao(2);
-			Racional d2 = new Racional(cA2, cT3);     d2.fatoracao(2);
-			Racional d3 = new Racional(cA3 + 1, cT3); d3.fatoracao(2);
+			Racional d2, d3;
+			if (cA2 == cA3) {
+				d2 = new Racional(cA2 + 1, cT3); d2.fatoracao(2);
+				d3 = new Racional(cA3 + 2, cT3); d3.fatoracao(2);
+			} else {
+				d2 = new Racional(cA2, cT3);     d2.fatoracao(2);
+				d3 = new Racional(cA3 + 1, cT3); d3.fatoracao(2);
+			}
 			List<String> dis = new ArrayList<>();
 			dis.add("\\(" + d1.showDfrac() + "\\)");    // P(2A+1B): confundiu evento
 			dis.add("\\(" + d2.showDfrac() + "\\)");    // usou C(a,2) em vez de C(a,3)
@@ -75,9 +83,16 @@ public class Exercicio3 extends GeradorExercicio
 			Racional res = new Racional(num2A1B, cT3);
 			String fraRes = res.showDfrac(); res.fatoracao(2); boolean resSimp = res.isSimplificou();
 
-			Racional d1 = new Racional(cA3, cT3);         d1.fatoracao(2);
-			Racional d2 = new Racional(cA2, cT3);         d2.fatoracao(2);
-			Racional d3 = new Racional(cA2 + cB1, cT3);  d3.fatoracao(2);
+			// Quando a=5: cA2==cA3==10 → d1==d2; usar cA2+1 para d2
+			int cA2Dist = (cA2 == cA3) ? cA2 + 1 : cA2;
+			Racional d1 = new Racional(cA3, cT3);          d1.fatoracao(2);
+			Racional d2 = new Racional(cA2Dist, cT3);      d2.fatoracao(2);
+			Racional d3 = new Racional(cA2 + cB1, cT3);   d3.fatoracao(2);
+			// Par (6,5): cA3=20==cA2+cB1=15+5=20 → d1==d3; usar cA2+cB1+1
+			if (d3.showDfrac().equals(d1.showDfrac()))
+			{
+				d3 = new Racional(cA2 + cB1 + 1, cT3); d3.fatoracao(2);
+			}
 			List<String> dis = new ArrayList<>();
 			dis.add("\\(" + d1.showDfrac() + "\\)");    // P(3A): confundiu evento
 			dis.add("\\(" + d2.showDfrac() + "\\)");    // esqueceu multiplicar por C(b,1)

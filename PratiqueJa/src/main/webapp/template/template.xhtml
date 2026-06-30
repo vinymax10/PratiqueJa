@@ -135,9 +135,7 @@
 
 				<p:menuitem value="Logout"
 					icon="pi pi-sign-out"
-					update="@form :formPrincipal :growl"
-					ajax="true"
-					process="@this"
+					ajax="false"
 					action="#{autenticacaoBean.logout}" />
 
 			</p:menuButton>
@@ -509,8 +507,7 @@
 					<h:form id="formSidebarLogout" style="margin:0">
 						<p:commandLink styleClass="t2-menu-item"
 							style="width:100%;display:flex"
-							update="@form :formPrincipal :growl"
-							process="@this"
+							ajax="false"
 							action="#{autenticacaoBean.logout}">
 							<i class="pi pi-sign-out"></i>
 							<h:outputText value="Sair" />

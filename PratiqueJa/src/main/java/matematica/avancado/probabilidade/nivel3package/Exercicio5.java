@@ -42,26 +42,32 @@ public class Exercicio5 extends GeradorExercicio
 				+ " lançamento" + (k > 1 ? "s" : "") + "?");
 
 		List<String> distratores = new ArrayList<>();
-		// d1: k+1 caras
+		// d1: k+1 caras — se C(n,k+1)==C(n,k) (simetria de Pascal), usar k-1
 		int numD1 = combinacao(n, Math.min(k + 1, n));
+		if (numD1 == num) numD1 = (k > 0) ? combinacao(n, k - 1) : num + 1;
 		Racional d1 = new Racional(numD1, den); d1.fatoracao(2);
 		distratores.add("\\(" + d1.showDfrac() + "\\)");
-		// d2: esquece o C(n,k) — apenas 1/2^n
-		Racional d2 = new Racional(1, den); d2.fatoracao(2);
+		// d2: esquece o C(n,k) — apenas 1/2^n; se d1==1/2^n (k=n-1 case), usar 2/2^n
+		int numD2 = 1;
+		if (numD1 == numD2) numD2 = 2;
+		Racional d2 = new Racional(numD2, den); d2.fatoracao(2);
 		distratores.add("\\(" + d2.showDfrac() + "\\)");
-		// d3: k/n
+		// d3: k/n (razão intuitiva errada); quando k/n==correta (ex: n=4,k=1: 1/4==4/16), usar (k+1)/n
 		Racional d3 = new Racional(k, n); d3.fatoracao(2);
+		if (d3.showDfrac().equals(res.showDfrac()))
+		{
+			d3 = new Racional(k + 1, n); d3.fatoracao(2);
+		}
 		distratores.add("\\(" + d3.showDfrac() + "\\)");
 		embaralharEAdicionarAlternativas("\\(" + res.showDfrac() + "\\)", distratores);
 
 		addResolucao("Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):");
 		addResolucao("\\(n = " + n + ", \\quad k = " + k + ", \\quad p = \\dfrac{1}{2}\\)");
 		addResolucao("\\(C_{" + n + "," + k + "} = \\dfrac{" + n + "!}{" + k + "! \\cdot " + (n - k) + "!} = " + cnk + "\\)");
-		addResolucao("\\(P(X=" + k + ") = " + cnk + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + k + "} \\cdot \\left(\\dfrac{1}{2}\\right)^{" + (n - k) + "}\\)");
 		if (resSimp)
-			addResolucao("\\(= \\dfrac{" + cnk + "}{" + den + "} = \\mathbf{" + res.showDfrac() + "}\\)");
+			addResolucao("\\(P(X=" + k + ") = " + cnk + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + n + "} = \\dfrac{" + cnk + "}{" + den + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 		else
-			addResolucao("\\(= \\dfrac{" + cnk + "}{" + den + "} = \\mathbf{" + fraRes + "}\\)");
+			addResolucao("\\(P(X=" + k + ") = " + cnk + " \\cdot \\left(\\dfrac{1}{2}\\right)^{" + n + "} = \\mathbf{" + fraRes + "}\\)");
 	}
 
 	// P(X = k) com p = 1/6 (sair face específica em dado), n ∈ {2,3}, k ∈ {1}
@@ -103,11 +109,10 @@ public class Exercicio5 extends GeradorExercicio
 		addResolucao("Usando a distribuição binomial \\(P(X=k) = C_{n,k} \\cdot p^k \\cdot (1-p)^{n-k}\\):");
 		addResolucao("\\(n = " + n + ", \\quad k = 1, \\quad p = \\dfrac{1}{6}\\)");
 		addResolucao("\\(C_{" + n + ",1} = " + cnk + "\\)");
-		addResolucao("\\(P(X=1) = " + cnk + " \\cdot \\dfrac{1}{6} \\cdot " + p5str + "\\)");
 		if (resSimp)
-			addResolucao("\\(= \\dfrac{" + num + "}{" + den6 + "} = \\mathbf{" + res.showDfrac() + "}\\)");
+			addResolucao("\\(P(X=1) = " + cnk + " \\cdot \\dfrac{1}{6} \\cdot " + p5str + " = \\dfrac{" + num + "}{" + den6 + "} = \\mathbf{" + res.showDfrac() + "}\\)");
 		else
-			addResolucao("\\(= \\dfrac{" + num + "}{" + den6 + "} = \\mathbf{" + fraRes + "}\\)");
+			addResolucao("\\(P(X=1) = " + cnk + " \\cdot \\dfrac{1}{6} \\cdot " + p5str + " = \\mathbf{" + fraRes + "}\\)");
 	}
 
 	private static int combinacao(int n, int k)

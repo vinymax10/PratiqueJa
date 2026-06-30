@@ -90,7 +90,6 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente violeta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um diagrama de Venn com dois círculos sobrepostos e a região de interseção destacada.
 
-//Parei aqui
 [14] Expressões Numéricas
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente magenta; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: parênteses e colchetes aninhados envolvendo símbolos de operações (+ − × ÷), sugerindo ordem das operações.
@@ -134,6 +133,7 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-oliva; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo retângulo com um quadrado construído sobre cada um dos três lados (clássica ilustração de Pitágoras), com o ângulo reto marcado.
 
+//Parei aqui
 [24] Semelhança entre Ângulos
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente amarelo-esverdeado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: duas retas paralelas cortadas por uma transversal, com ângulos correspondentes iguais marcados por arcos.

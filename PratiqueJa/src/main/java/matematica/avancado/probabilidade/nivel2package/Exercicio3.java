@@ -25,9 +25,12 @@ public class Exercicio3 extends GeradorExercicio
 
 		String correta = "\\(\\dfrac{" + favoravel + "}{" + potencia + "}\\)";
 		List<String> distratores = new ArrayList<>();
+		// Quando n=2: fav-1==n → d2==d3 ("2/4"=="2/4"); usar pot+2 como denominador de d3
+		int d3num = favoravel - 1;
+		int d3den = (d3num == n) ? potencia + 2 : potencia;
 		distratores.add("\\(\\dfrac{1}{" + potencia + "}\\)");              // P(nenhuma cara): erro de complementar
 		distratores.add("\\(\\dfrac{" + n + "}{" + potencia + "}\\)");      // multiplicou P × n
-		distratores.add("\\(\\dfrac{" + (favoravel - 1) + "}{" + potencia + "}\\)");  // off-by-one
+		distratores.add("\\(\\dfrac{" + d3num + "}{" + d3den + "}\\)");    // off-by-one
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		String pNenhuma = "\\dfrac{1}{" + potencia + "}";

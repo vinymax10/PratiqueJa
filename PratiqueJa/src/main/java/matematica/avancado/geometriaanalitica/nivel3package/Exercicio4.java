@@ -40,9 +40,10 @@ public class Exercicio4 extends GeradorExercicio
 		addParagrafo("Calcule \\(d^2(P,C)\\) e compare com \\(r^2 = " + r2 + "\\).");
 
 		List<String> distratores = new ArrayList<>();
-		if (!posicao.equals("interior"))         distratores.add("\\(\\text{interior}\\)");
+		if (!posicao.equals("interior"))          distratores.add("\\(\\text{interior}\\)");
 		if (!posicao.equals("na circunferência")) distratores.add("\\(\\text{na circunferência}\\)");
-		if (!posicao.equals("exterior"))         distratores.add("\\(\\text{exterior}\\)");
+		if (!posicao.equals("exterior"))          distratores.add("\\(\\text{exterior}\\)");
+		distratores.add("\\(\\text{no centro}\\)"); // d² é sempre > 0 neste exercício
 		embaralharEAdicionarAlternativas("\\(\\text{" + posicao + "}\\)", distratores);
 
 		addResolucao("Calculamos \\(d^2(P,C) = (x_0 - a)^2 + (y_0 - b)^2\\):");

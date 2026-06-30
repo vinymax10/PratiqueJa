@@ -111,4 +111,13 @@ public class PedidoAvaliacao implements Serializable, Entidade
 	@OneToMany(mappedBy = "pedidoAvaliacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("ordem ASC")
 	private List<ItemPedidoAvaliacao> itens = new ArrayList<>();
+
+	/** Atualiza os campos de progresso a partir de uma versão recarregada do banco. */
+	public void sincronizarProgresso(PedidoAvaliacao atualizado)
+	{
+		this.progresso = atualizado.progresso;
+		this.status = atualizado.status;
+		this.caminhoArquivo = atualizado.caminhoArquivo;
+		this.nomeDownload = atualizado.nomeDownload;
+	}
 }

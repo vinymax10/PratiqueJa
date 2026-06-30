@@ -545,6 +545,19 @@
     color: white !important;
 }
 
+/* ---- GRID DE CARDS: 2 colunas acima de 1300px, 1 coluna abaixo ---- */
+.qz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+@media (max-width: 1300px) {
+    .qz-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ---- CARD DE QUESTÃO ---- */
 .qz-card {
     width: 100%;
@@ -556,6 +569,9 @@
     margin-bottom: 20px;
     border: 1px solid #f1f5f9;
     transition: box-shadow 0.2s, transform 0.15s;
+}
+.qz-grid .qz-card {
+    margin-bottom: 0;
 }
 .qz-card:hover {
     box-shadow: 0 8px 30px rgba(15, 23, 42, 0.10);

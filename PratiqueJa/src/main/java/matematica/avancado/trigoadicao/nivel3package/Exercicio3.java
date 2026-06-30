@@ -31,9 +31,13 @@ public class Exercicio3 extends GeradorExercicio
 		String numStr = num < 0 ? "-\\dfrac{" + Math.abs(num) + "}{" + den + "}" : "\\dfrac{" + num + "}{" + den + "}";
 		String correta = "\\(" + numStr + "\\)";
 		List<String> distratores = new ArrayList<>();
+		// Quando num>0, |num|/den == correta; usar -num/den como distrator "sinal invertido"
+		String d3Str = num > 0
+			? "\\(-\\dfrac{" + num + "}{" + den + "}\\)"
+			: "\\(\\dfrac{" + Math.abs(num) + "}{" + den + "}\\)";
 		distratores.add("\\(\\dfrac{" + (p1 * q2 + q1 * p2) + "}{" + den + "}\\)"); // esqueceu o sinal de cos
 		distratores.add("\\(-\\dfrac{" + (p1 * p2 + q1 * q2) + "}{" + den + "}\\)"); // cos(α+β) com sinal errado
-		distratores.add("\\(\\dfrac{" + Math.abs(num) + "}{" + den + "}\\)");         // esqueceu o sinal negativo
+		distratores.add(d3Str);                                                        // sinal invertido
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		addResolucao("No 2.º quadrante, \\(\\cos\\alpha = -\\dfrac{" + q1 + "}{" + r1 + "}\\).");

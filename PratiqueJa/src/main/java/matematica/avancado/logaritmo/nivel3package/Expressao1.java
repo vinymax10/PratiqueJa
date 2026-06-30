@@ -25,8 +25,7 @@ public class Expressao1 extends GeradorExercicio
 			enunciado = "\\(" + b + " \\cdot \\log_{" + c + "} " + val + "\\)";
 			addParagrafo(enunciado);
 			addResolucao("Propriedade da potência: \\(k \\cdot \\log_b a = \\log_b a^k\\)");
-			addResolucao("\\(\\log_{" + c + "} " + val + "^{" + b + "} = \\log_{" + c + "} " + c + "^{" + (d * b) + "}\\)");
-			addResolucao("\\(= \\mathbf{" + x.toStringLatex() + "}\\)");
+			addResolucao("\\(\\log_{" + c + "} " + val + "^{" + b + "} = \\log_{" + c + "} " + c + "^{" + (d * b) + "} = \\mathbf{" + x.toStringLatex() + "}\\)");
 		}
 		else
 		{
@@ -36,7 +35,7 @@ public class Expressao1 extends GeradorExercicio
 			addParagrafo(enunciado);
 			addResolucao("Reescrevendo a raiz como potência e aplicando a propriedade:");
 			addResolucao("\\(" + b + " \\cdot \\log_{" + c + "} " + val + "^{1/" + a + "} = \\log_{" + c + "} " + val + "^{" + potRac.showFrac() + "}\\)");
-			addResolucao("\\(= \\log_{" + c + "} " + c + "^{" + x.showFrac() + "} = \\mathbf{" + x.toStringLatex() + "}\\)");
+			addResolucao("\\(\\log_{" + c + "} " + c + "^{" + x.showFrac() + "} = \\mathbf{" + x.toStringLatex() + "}\\)");
 		}
 
 		gerarAlternativas(x);

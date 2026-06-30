@@ -32,8 +32,12 @@ public class Exercicio7 extends GeradorExercicio
 		String numStr = num < 0 ? "-\\dfrac{" + Math.abs(num) + "}{" + den + "}" : "\\dfrac{" + num + "}{" + den + "}";
 		String correta = "\\(" + numStr + "\\)";
 		List<String> distratores = new ArrayList<>();
+		// Quando num>0, |num|/den == correta; usar -num/den como distrator "sinal invertido"
+		String d2Str = num > 0
+			? "\\(-\\dfrac{" + num + "}{" + den + "}\\)"
+			: "\\(\\dfrac{" + Math.abs(num) + "}{" + den + "}\\)";
 		distratores.add("\\(\\dfrac{" + (p1 * q2 + p2 * q1) + "}{" + (q1 * q2 - p1 * p2) + "}\\)"); // tg(α+β)
-		distratores.add("\\(\\dfrac{" + Math.abs(num) + "}{" + den + "}\\)");                         // esqueceu sinal
+		distratores.add(d2Str);                                                                        // sinal invertido
 		distratores.add("\\(\\dfrac{" + (p1 * q2 - p2 * q1) + "}{" + (q1 * q2) + "}\\)");           // denominador incompleto
 		embaralharEAdicionarAlternativas(correta, distratores);
 

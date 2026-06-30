@@ -24,9 +24,10 @@ public class Exercicio6 extends GeradorExercicio
 
 		String correta = "\\(" + vCone + "\\pi\\,\\text{cm}^3\\)";
 		List<String> distratores = new ArrayList<>();
+		// Quando h==6 (k=2): vCil/2 == 3r² == vCone+r² → d2==d3; usar 2*vCone como d3
 		distratores.add("\\(" + vCil + "\\pi\\,\\text{cm}^3\\)");          // igual ao cilindro
 		distratores.add("\\(" + (vCil / 2) + "\\pi\\,\\text{cm}^3\\)");    // metade (divisão errada)
-		distratores.add("\\(" + (vCone + r2) + "\\pi\\,\\text{cm}^3\\)"); // off por r²π
+		distratores.add("\\(" + (2 * vCone) + "\\pi\\,\\text{cm}^3\\)");   // dobro do volume correto
 		embaralharEAdicionarAlternativas(correta, distratores);
 
 		addResolucao("O volume do cone é sempre \\(\\dfrac{1}{3}\\) do volume do cilindro de mesma base e altura:");

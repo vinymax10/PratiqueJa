@@ -26,7 +26,6 @@ public class Radiciacao9 extends GeradorExercicio
 		embaralharEAdicionarAlternativas(correta, Arrays.asList(e1, e2, e3));
 		addResolucao("Identificar o maior fator quadrado perfeito de \\(" + n + "\\):");
 		addResolucao("\\(" + n + " = " + (k * k) + " \\times " + r + "\\)");
-		addResolucao("\\(\\sqrt{" + n + "} = \\sqrt{" + (k * k) + " \\times " + r + "} = \\sqrt{" + (k * k) + "} \\cdot \\sqrt{" + r + "}\\)");
-		addResolucao("\\(= \\mathbf{" + k + "\\sqrt{" + r + "}}\\)");
+		addResolucao("\\(\\sqrt{" + n + "} = \\sqrt{" + (k * k) + " \\times " + r + "} = \\sqrt{" + (k * k) + "} \\cdot \\sqrt{" + r + "} = \\mathbf{" + k + "\\sqrt{" + r + "}}\\)");
 	}
 }

@@ -24,12 +24,11 @@ public class Expressao2 extends GeradorExercicio
 		addParagrafo("\\(\\log_{" + leftBase + "} " + rightArg + " = \\,?\\)");
 
 		addResolucao("Fórmula de mudança de base com base auxiliar \\(" + p + "\\):");
-		addResolucao("\\(\\log_{" + leftBase + "} " + rightArg + " = \\dfrac{\\log_{" + p + "} " + rightArg + "}{\\log_{" + p + "} " + leftBase + "}\\)");
-		addResolucao("\\(= \\dfrac{\\log_{" + p + "} " + p + "^{" + n + "}}{\\log_{" + p + "} " + p + "^{" + m + "}} = \\dfrac{" + n + "}{" + m + "}\\)");
+		addResolucao("\\(\\log_{" + leftBase + "} " + rightArg + " = \\dfrac{\\log_{" + p + "} " + rightArg + "}{\\log_{" + p + "} " + leftBase + "} = \\dfrac{\\log_{" + p + "} " + p + "^{" + n + "}}{\\log_{" + p + "} " + p + "^{" + m + "}} = \\dfrac{" + n + "}{" + m + "}\\)");
 		if (resultado.denominador != 1)
-			addResolucao("\\(= " + resultado.showDfrac() + " = \\mathbf{" + resultado.toStringLatex() + "}\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 		else
-			addResolucao("\\(= \\mathbf{" + resultado.toStringLatex() + "}\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{" + m + "} = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 
 		gerarAlternativas(resultado);
 	}

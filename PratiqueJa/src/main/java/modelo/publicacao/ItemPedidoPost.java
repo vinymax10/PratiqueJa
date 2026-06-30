@@ -107,4 +107,19 @@ public class ItemPedidoPost implements Serializable, Entidade
 		copia.padrao = this.padrao;
 		return copia;
 	}
+
+	/** Aplica os dados de {@code origem} neste item (preserva a instância do {@code @ElementCollection} de níveis). */
+	public void aplicarEdicao(ItemPedidoPost origem)
+	{
+		this.assunto = origem.assunto;
+		this.niveis.clear();
+		this.niveis.addAll(origem.niveis);
+		this.formato = origem.formato;
+		this.quantidade = origem.quantidade;
+		this.alternativaReel = origem.alternativaReel;
+		this.backgroundAleatorio = origem.backgroundAleatorio;
+		this.basePadrao = origem.basePadrao;
+		this.background = origem.background;
+		this.padrao = origem.padrao;
+	}
 }

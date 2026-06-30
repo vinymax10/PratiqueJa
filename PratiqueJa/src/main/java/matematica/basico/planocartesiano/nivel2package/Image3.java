@@ -25,7 +25,7 @@ public class Image3 extends GeradorExercicio
 			ax = mx - hdx; bx = mx + hdx;
 			ay = my - hdy; by = my + hdy;
 		}
-		while (ax == 0 || bx == 0 || ay == 0 || by == 0 || ax == bx || ay == by);
+		while (ax == 0 || bx == 0 || ay == 0 || by == 0 || ax == bx || ay == by || (mx == 0 && my == 0));
 
 		ConfigPlanoCartesianoAB config = new ConfigPlanoCartesianoAB(ax, ay, bx, by);
 		BufferedImage image = config.criarImagem();

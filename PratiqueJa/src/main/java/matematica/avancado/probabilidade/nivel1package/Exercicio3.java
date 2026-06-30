@@ -42,11 +42,23 @@ public class Exercicio3 extends GeradorExercicio
 		pAc.fatoracao(2);
 		boolean pAcSimp = pAc.isSimplificou();
 
-		List<String> distratores = new ArrayList<>();
-		distratores.add("\\(" + pA.showDfrac() + "\\)");               // confundiu P(A) com P(A^c)
+		// Quando a==b, P(A)==P(A^c): substituir d1 para evitar duplicação
+		Racional d1 = pA;
+		if (pA.showDfrac().equals(pAc.showDfrac()))
+		{
+			d1 = new Racional(a + 1, total);
+			d1.fatoracao(2);
+		}
 		Racional d2 = new Racional(b - 1, total); d2.fatoracao(2);
-		distratores.add("\\(" + d2.showDfrac() + "\\)");               // n(A^c) - 1
+		// Quando a==b-1: d1=pA=a/total==(b-1)/total=d2; usar (b-2)/total para d2
+		if (d2.showDfrac().equals(d1.showDfrac()))
+		{
+			d2 = new Racional(b - 2, total); d2.fatoracao(2);
+		}
 		Racional d3 = new Racional(b, total + 1); d3.fatoracao(2);
+		List<String> distratores = new ArrayList<>();
+		distratores.add("\\(" + d1.showDfrac() + "\\)");               // confundiu P(A) com P(A^c)
+		distratores.add("\\(" + d2.showDfrac() + "\\)");               // n(A^c) - 1
 		distratores.add("\\(" + d3.showDfrac() + "\\)");               // n(Ω) inflado
 		embaralharEAdicionarAlternativas("\\(" + pAc.showDfrac() + "\\)", distratores);
 

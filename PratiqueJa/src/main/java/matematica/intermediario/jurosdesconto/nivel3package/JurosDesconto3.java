@@ -12,8 +12,8 @@ public class JurosDesconto3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		DecimalFormat deci = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.FRANCE));
-		DecimalFormat pct  = new DecimalFormat("#.##",   new DecimalFormatSymbols(Locale.FRANCE));
+		DecimalFormat deci = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat pct  = new DecimalFormat("#.##",   new DecimalFormatSymbols(Locale.US));
 
 		int iMensal = 1 + rand.nextInt(3);  // 1%, 2% ou 3%
 		double im = iMensal / 100.0;

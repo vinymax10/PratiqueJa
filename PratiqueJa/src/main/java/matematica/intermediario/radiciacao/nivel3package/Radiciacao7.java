@@ -42,7 +42,6 @@ public class Radiciacao7 extends GeradorExercicio
 		addResolucao("\\(\\sqrt{" + nA + "} = \\sqrt{" + (A * A) + " \\times " + r + "} = " + A + "\\sqrt{" + r + "}\\)");
 		addResolucao("\\(\\sqrt{" + nB + "} = \\sqrt{" + (B * B) + " \\times " + r + "} = " + B + "\\sqrt{" + r + "}\\)");
 		addResolucao("Aplicar coeficientes e subtrair:");
-		addResolucao("\\(" + a + " \\cdot " + A + "\\sqrt{" + r + "} - " + b + " \\cdot " + B + "\\sqrt{" + r + "}\\)");
-		addResolucao("\\(= (" + (a * A) + " - " + (b * B) + ")\\sqrt{" + r + "} = \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
+		addResolucao("\\(" + a + " \\cdot " + A + "\\sqrt{" + r + "} - " + b + " \\cdot " + B + "\\sqrt{" + r + "} = (" + (a * A) + " - " + (b * B) + ")\\sqrt{" + r + "} = \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
 	}
 }

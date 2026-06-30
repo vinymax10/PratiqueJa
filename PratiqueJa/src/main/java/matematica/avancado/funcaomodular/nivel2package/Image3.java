@@ -15,6 +15,8 @@ public class Image3 extends GeradorExercicio
 		// Gráfico em V com vértice (h, k); identificar a equação da função
 		int h = 1 + rand.nextInt(3);  // 1..3 (positivo para rótulo limpo)
 		int k = 1 + rand.nextInt(3);  // 1..3
+		// Quando h==k: dist[2]=|x-k|+h==correto; forçar k≠h
+		if (h == k) k = k % 3 + 1;
 
 		DadosFuncaoMod dados = DadosFuncaoMod.comVertice(h, k);
 		ConfigFuncaoMod config = new ConfigFuncaoMod(dados);

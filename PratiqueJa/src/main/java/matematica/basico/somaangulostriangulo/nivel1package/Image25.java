@@ -51,7 +51,6 @@ public class Image25 extends GeradorExercicio
 		embaralharEAdicionarAlternativas("\\(" + ext + "^\\circ\\)", distratores);
 
 		addResolucao("O ângulo externo de um triângulo é igual à soma dos dois ângulos internos não adjacentes:");
-		addResolucao("\\(\\text{ext} = \\alpha + \\beta\\)");
-		addResolucao("\\(= " + a + "^\\circ + " + b + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)");
+		addResolucao("\\(\\text{ext} = " + a + "^\\circ + " + b + "^\\circ = \\mathbf{" + ext + "^\\circ}\\)");
 	}
 }

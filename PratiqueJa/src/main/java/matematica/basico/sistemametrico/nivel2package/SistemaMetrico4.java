@@ -38,7 +38,8 @@ public class SistemaMetrico4 extends GeradorExercicio
 				Arrays.asList(
 					"\\(" + (intPart * 10) + "\\,\\text{L}\\)",
 					"\\(" + intPart + (meio ? "{,}05" : "{,}5") + "\\,\\text{L}\\)",
-					"\\(" + (ml / 100) + "\\,\\text{L}\\)"
+					// meio=false: ml/100==intPart*10==D1; usar ml/10 (dividiu por 10 em vez de 1000)
+					"\\(" + (ml / 10) + "\\,\\text{L}\\)"
 				)
 			);
 			addResolucao("\\(1\\,\\text{L} = 1000\\,\\text{mL}\\), logo dividir por 1000:");

@@ -95,6 +95,7 @@ public class Exercicio6 extends GeradorExercicio
 		if (!correto.equals("Paralelas distintas")) distratores.add("Paralelas distintas");
 		if (!correto.equals("Perpendiculares"))     distratores.add("Perpendiculares");
 		if (!correto.equals("Concorrentes"))        distratores.add("Concorrentes");
+		if (!correto.equals("Coincidentes"))        distratores.add("Coincidentes");
 
 		embaralharEAdicionarAlternativas(correto, distratores);
 

@@ -22,10 +22,12 @@ public class SistemaMetrico3 extends GeradorExercicio
 			String[] eventos = {"Um filme tem duração de", "Uma prova dura", "Uma viagem de trem leva"};
 			addParagrafo(eventos[rand.nextInt(eventos.length)] + " \\(" + duracao + "\\).");
 			addParagrafo("Quantos minutos isso representa?");
+			// Quando m==0, h*60 == total → d1 colide com correta; usar total-5 como fallback
+			int d1 = m > 0 ? h * 60 : total - 5;
 			embaralharEAdicionarAlternativas(
 				"\\(" + total + "\\,\\text{min}\\)",
 				Arrays.asList(
-					"\\(" + (h * 60) + "\\,\\text{min}\\)",
+					"\\(" + d1 + "\\,\\text{min}\\)",
 					"\\(" + (total + 15) + "\\,\\text{min}\\)",
 					"\\(" + (h * 100 + m) + "\\,\\text{min}\\)"
 				)
@@ -43,11 +45,12 @@ public class SistemaMetrico3 extends GeradorExercicio
 			String[] eventos = {"Uma maratona durou", "Um exame ocupa", "Uma palestra tem"};
 			addParagrafo(eventos[rand.nextInt(eventos.length)] + " \\(" + s + "\\,\\text{s}\\).");
 			addParagrafo("Quantas horas isso representa?");
+			// s/60==h*60: d1 e d2 eram iguais; substituir d2 por s (não converteu segundos)
 			embaralharEAdicionarAlternativas(
 				"\\(" + h + "\\,\\text{h}\\)",
 				Arrays.asList(
 					"\\(" + (s / 60) + "\\,\\text{h}\\)",
-					"\\(" + (h * 60) + "\\,\\text{h}\\)",
+					"\\(" + s + "\\,\\text{h}\\)",
 					"\\(" + (h + 1) + "\\,\\text{h}\\)"
 				)
 			);
