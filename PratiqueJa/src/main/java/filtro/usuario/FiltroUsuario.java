@@ -20,8 +20,6 @@ public class FiltroUsuario implements Serializable
 
 	private Boolean criador;
 
-	private Boolean recebeSpam;
-
 	public void limpar()
 	{
 		nome = null;
@@ -29,7 +27,6 @@ public class FiltroUsuario implements Serializable
 		turma = null;
 		perfil = null;
 		criador = null;
-		recebeSpam = null;
 	}
 
 }

@@ -112,9 +112,6 @@ public class Usuario extends Ativo implements Entidade
 	@AuditLabel(value = "criador")
 	private boolean criador;
 
-	@AuditLabel(value = "recebe spam")
-	private boolean recebeSpam;
-
 	@AuditLabel(value = "validade do plano", genero = GeneroGramatical.FEMININO)
 	private LocalDate validadePlano;
 

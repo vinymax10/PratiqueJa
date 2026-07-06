@@ -38,6 +38,27 @@ public class EmailDAO extends DAO<Email>
 		return typedQuery.getResultList();
 	}
 
+	public List<Email> buscarEnviadosComAnexosAntesDe(LocalDateTime limite)
+	{
+		return em.createQuery(
+			"SELECT DISTINCT e FROM Email e JOIN e.documentosFile d " +
+			"WHERE e.status = :status AND e.dataEnvio < :limite",
+			Email.class)
+			.setParameter("status", StatusEmail.ENVIADO)
+			.setParameter("limite", limite)
+			.getResultList();
+	}
+
+	public List<Email> buscarEnviadosAntesDe(LocalDateTime limite)
+	{
+		return em.createQuery(
+			"SELECT e FROM Email e WHERE e.status = :status AND e.dataEnvio < :limite",
+			Email.class)
+			.setParameter("status", StatusEmail.ENVIADO)
+			.setParameter("limite", limite)
+			.getResultList();
+	}
+
 	public List<Email> buscar(FiltroEmail filtro)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();

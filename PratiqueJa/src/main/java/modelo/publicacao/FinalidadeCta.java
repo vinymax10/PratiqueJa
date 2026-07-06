@@ -5,8 +5,7 @@ public enum FinalidadeCta
 	Ensino("Ensino"),
 	ProducaoConteudo("Produção de Conteúdo"),
 	Apostilas("Apostilas"),
-	EBook("EBook"),
-	Spam("Spam");
+	EBook("EBook");
 
 	private String nome;
 	

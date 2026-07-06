@@ -9,9 +9,7 @@ import modelo.academico.Orgao;
 import modelo.configuracao.ConfigCleanup;
 import modelo.configuracao.Config;
 import modelo.configuracao.Edicao;
-import modelo.email.ConfigSpam;
 import modelo.email.Email;
-import modelo.email.ProgramacaoSpam;
 import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
@@ -89,10 +87,6 @@ public enum EntidadeAuditavel
 	Cta(Cta.class, "CTA"),
 	Hashtag(Hashtag.class, "Hashtag"),
 	ConviteGrupo(ConviteGrupo.class, "Convite de Grupo"),
-
-//	Spam
-	ConfigSpam(ConfigSpam.class, "Configuração de Spam"),
-	ProgramacaoSpam(ProgramacaoSpam.class, "Programação de Spam"),
 
 //	Email
 	Email(Email.class, "Email"),
