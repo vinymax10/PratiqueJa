@@ -212,7 +212,6 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente laranja; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um gráfico de barras/colunas com alturas diferentes e, ao lado, um pequeno gráfico de pizza.
 
-//Parei aqui
 [43] Polinômios
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente âmbar-escuro; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma curva polinomial sinuosa com várias subidas e descidas (vários cruzamentos com o eixo) em um plano cartesiano.
@@ -229,6 +228,7 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-esmeralda; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma sequência de barras (ou pontos) que dobram de tamanho a cada passo (crescimento geométrico, multiplicação por uma razão).
 
+//Parei aqui
 [47] Números Complexos
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente turquesa; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um plano de Argand (eixo horizontal real e eixo vertical imaginário) com um vetor apontando do centro até um ponto.
