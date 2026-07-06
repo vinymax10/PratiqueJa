@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+122887	manter_imagem		grafico de barras (producao de milho) com fonte citada
+122941	manter_imagem		grafico de linha (taxa por trimestre) - reutilizado de questoes anteriores (lote_079)
+123027	manter_imagem		mesmo grafico de linha reutilizado
+123060	manter_imagem		mesmo grafico de linha reutilizado
+123205	manter_imagem		mesmo grafico de linha reutilizado
+123254	manter_imagem		grafico de barras (produtividade empresas X e Y)
+123263	latex_candidato	\(\Delta x\)	fragmento continuando enunciado do histograma (questao 123260, 1 de 2)
+123266	manter_imagem		histograma (F/deltax x I.M.C.) - 2 de 2 da questao 123260
+123309	manter_imagem		mesmo grafico de linha reutilizado (mais uma ocorrencia)
+123318	latex_candidato	\(\textbf{Tabela de Valores de Bolsas no Brasil}\)<<P>>\(\begin{array}{|l|c|}\hline \textbf{Modalidade} & \textbf{Valor (R\$)}\\\hline \text{Apoio Técnico à Pesquisa} & 550{,}00\\\hline \text{Doutorado} & 2.200{,}00\\\hline \text{Iniciação Científica} & 400{,}00\\\hline \text{Iniciação Científica Júnior} & 100{,}00\\\hline \text{Iniciação Tecnológica (PIBITI)} & 400{,}00\\\hline \text{Mestrado} & 1.500{,}00\\\hline \text{Pós-doutorado Sênior} & 4.400{,}00\\\hline \text{Pós-doutorado Júnior} & 4.100{,}00\\\hline \text{Pós-doutorado Empresarial} & 4.100{,}00\\\hline\end{array}\)<<P>>\(\text{Público Alvo: Jovens de ensino médio e superior, em nível de pós-graduação, interessados em atuar na pesquisa científica, e especialistas para atuarem em Pesquisa e Desenvolvimento (P\&D) nas empresas e centros tecnológicos. (Disponível em: <http://cnpq.gov.br/no-pais/>. Acesso em 28 de junho de 2019).}\)
+123386	manter_imagem		poligono em L com pontos A H B C G F D E, cotas 3cm 3cm 4cm 2cm
+123534	manter_imagem		prisma triangular, cotas 6 20
+123554	manter_imagem		figura irregular tipo estrela em malha quadriculada
+123604	manter_imagem		circulo inscrito em quadrado com equacao "2x-4=6" escrita dentro - diagrama geometrico genuino (nao apenas decorativo), reclassificado apos reler o texto do enunciado
+123766	manter_imagem		poligono em L, cotas 5,5 13 10 7
+123941	manter_imagem		retangulo com regioes R Q, cotas x 21m
+124059	manter_imagem		ilustracao de caixa de papelao "Detergente Contem 12 frascos"
+124094	manter_imagem		tabela larga (mes jan-dez, 13 colunas) - excede limite de colunas
+124323	manter_imagem		grafico de curva senoidal
+124337	manter_imagem		quadrado com padrao de estrela/quadrilatero, pontos A-P, regiao sombreada verde

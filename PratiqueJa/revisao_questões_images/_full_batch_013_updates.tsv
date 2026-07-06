@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+20154	manter_imagem		ilustração (moldura de quadro)
+20170	manter_imagem		diagrama geométrico (triângulo com ângulo, igual a 19730)
+20184	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline & \textbf{TAREFA 1} & \textbf{TAREFA 2} & \textbf{TAREFA 3} & \textbf{TAREFA 4} \\\hline \textbf{EQUIPE AZUL} & 10 & 5 & 8 & 7 \\\hline \textbf{EQUIPE VERMELHA} & 7 & 7 & 10 & 10 \\\hline \textbf{EQUIPE VERDE} & 8 & 7 & 9 & 10 \\\hline\end{array}\)	tabela idêntica à do parágrafo 19754 (outra questão)
+20200	manter_imagem		diagrama geométrico (retângulo com lados algébricos, igual a 19739)
+20214	manter_imagem		diagrama geométrico (círculo com raio)
+20240	manter_imagem		diagrama geométrico (retângulo com lados algébricos, igual a 19739/20200)
+20249	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline & \textbf{TAREFA 1} & \textbf{TAREFA 2} & \textbf{TAREFA 3} & \textbf{TAREFA 4} \\\hline \textbf{EQUIPE AZUL} & 10 & 5 & 8 & 7 \\\hline \textbf{EQUIPE VERMELHA} & 7 & 7 & 10 & 10 \\\hline \textbf{EQUIPE VERDE} & 8 & 7 & 9 & 10 \\\hline\end{array}\)	tabela idêntica à do parágrafo 19754/20184 (outra questão)
+20258	manter_imagem		diagrama geométrico (triângulo com ângulo, igual a 19730/20170)
+20310	manter_imagem		gráfico de barras (desempenho em provas)
+20410	manter_imagem		diagrama geométrico (triângulo com cevianas)
+20462	manter_imagem		gráfico de barras (desempenho em provas)
+20496	manter_imagem		gráfico de pizza (faixas de peso)
+20700	manter_imagem		mapa de rota
+20892	manter_imagem		mapa de rota (idêntico a 20700)
+21048	manter_imagem		mapa de rota (idêntico a 20700)
+21133	manter_imagem		diagrama de planta (cômodos com medidas)
+21213	manter_imagem		diagrama geométrico (escada)
+21240	manter_imagem		diagrama geométrico (retângulo com losango)
+21532	manter_imagem		foto (placas de carro antiga e nova)
+21633	manter_imagem		gráfico de função trigonométrica

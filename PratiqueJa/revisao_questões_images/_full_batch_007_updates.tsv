@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+10351	manter_imagem		diagrama geométrico (triângulo com ângulo)
+10416	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Jogador} & \textbf{\textit{Gols} marcados} \\\hline \text{André} & 3 \\\hline \text{Rogério} & 1 \\\hline \text{Marcos} & 5 \\\hline \text{Fabiano} & 4 \\\hline \text{Jonas} & 2 \\\hline\end{array}\)
+10642	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \textbf{Candidato Robert} & & & \\\hline \textbf{Matéria} & \textbf{Quant. Acertos} & \textbf{Valor da Questão} & \textbf{Peso} \\\hline \text{Português} & 8 & 2{,}00 & 2 \\\hline \text{Matemática} & 6 & 2{,}00 & 2 \\\hline \text{Legislação} & 6 & 2{,}00 & 1 \\\hline \text{Informática} & 4 & 2{,}00 & 1 \\\hline \text{Conhecimentos Específicos} & 12 & 2{,}00 & 4 \\\hline\end{array}\)
+10652	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Dia} & \textbf{Valor Total Recebido (R\$)} \\\hline 1 & 230{,}00 \\\hline 2 & 280{,}00 \\\hline 3 & 320{,}00 \\\hline 4 & 180{,}00 \\\hline 5 & 340{,}00 \\\hline 6 & 290{,}00 \\\hline 7 & 210{,}00 \\\hline 8 & 230{,}00 \\\hline\end{array}\)	imagem original parece cortada (mais linhas abaixo do dia 8 não visíveis) — conferir se falta conteúdo
+10690	manter_imagem		figura poligonal em malha quadriculada
+10719	manter_imagem		figuras geométricas (pentágonos e estrela)
+10744	manter_imagem		diagrama geométrico (triângulos semelhantes)
+10928	latex_candidato	\(\begin{cases}P_0 = 0 \\P_1 = 1 \\P_n = 2P_{n-1} + P_{n-2}, \ \forall n \in \mathbb{N}, n \geq 2\end{cases}\)
+10979	manter_imagem		ilustração (prédio/edifício)
+10988	manter_imagem		ilustração (bolo)
+10997	manter_imagem		foto (pilhas/baterias)
+11013	manter_imagem		foto (maracujá)
+11105	manter_imagem		foto (ovos em bandeja)
+11247	manter_imagem		gráfico de barras
+11295	manter_imagem		gráfico de pizza
+11408	manter_imagem		foto (padrão de mosaico de madeira)
+11491	manter_imagem		figura geométrica em malha quadriculada
+11724	latex_candidato	\(\begin{array}{l}\textbf{Estacionamento da Di} \\\text{VALOR POR HORA} \\\text{CARRO - 7,50} \\\text{MOTO - 3,25}\end{array}\)	moldura/placa decorativa permanece como imagem, só o texto virou parágrafo
+11811	manter_imagem		foto artística (painel de árvore em 5 partes)
+11821	manter_imagem		ilustração (estante de livros)

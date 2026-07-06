@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+7981	manter_imagem		diagrama geométrico (retângulo com medida x)
+8036	latex_candidato	\(b:\ p \cong \pi\left[3(a+b) - \sqrt{(3a+b)(a+3b)}\right]\)
+8088	manter_imagem		diagrama geométrico (quadrado rotacionado com área sombreada)
+8105	manter_imagem		gráfico de pizza
+8121	manter_imagem		diagrama geométrico (trapézio)
+8131	latex_candidato	\(\begin{array}{|l|l|}\hline \textbf{Loja I} & \textbf{Loja II} \\\hline \text{R\$ 68,00} & \text{R\$ 80,00} \\\text{Acréscimo do frete de R\$ 0,10 por grama.} & \text{Frete incluso} \\\hline\end{array}\)
+8151	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{I} & \textbf{II} & \textbf{III} \\\hline 6\text{h }33\text{min} = 6{,}55\text{h} & 0{,}075\text{ m}^3 = 75\text{ litros} & 15{,}2\text{ cm}^2 = 15\text{ cm}^2 \text{ e } 2\text{ mm}^2 \\\hline\end{array}\)
+8169	manter_imagem		gráfico de barras + mapa do Brasil
+8179	manter_imagem		gráfico de barras
+8203	manter_imagem		diagrama geométrico (triângulos retângulos)
+8227	manter_imagem		diagrama geométrico (retângulo com quadrado)
+8245	manter_imagem		diagrama geométrico (prisma retangular x,y,z)
+8261	manter_imagem		diagrama de mapa/ruas
+8275	latex_candidato	\(\text{HD,}\)	fragmento de imagem muito pequeno (só "HD,"), provavelmente recorte de uma frase do enunciado da questão 8271 — conferir contexto completo na revisão manual
+8277	manter_imagem		diagrama geométrico (dois lotes/quadrados adjacentes)
+8279	latex_candidato	\(\text{HD,}\)	fragmento de imagem muito pequeno (só "HD,", idêntico ao parágrafo 8275 da mesma questão 8271) — conferir contexto completo na revisão manual
+8289	manter_imagem		diagrama geométrico (estacionamento)
+8299	manter_imagem		gráfico de barras (acidentes por mês)
+8308	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{CAIXA} & \textbf{MASSA} \\\hline 1 & 4{,}8\text{ kg} \\\hline 2 & 5{,}7\text{ kg} \\\hline 3 & x \\\hline 4 & x + 300\text{ g} \\\hline 5 & 2{,}5\text{ kg} \\\hline\end{array}\)
+8319	manter_imagem		diagrama de trajeto (segmentos com medidas)

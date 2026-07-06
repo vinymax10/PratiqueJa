@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+99698	manter_imagem		2 quadrados A e B de tamanhos diferentes (comparacao visual, "figuras fora de escala")
+99708	manter_imagem		grafico de pizza (unidades compradas por trimestre)
+99760	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Item} & \textbf{Quantidade} & \textbf{Valor unitário}\\\hline \text{Caixa de lápis de cor} & 2 & \text{R\$ }5{,}80\\\hline \text{Canetinhas} & 5 & \text{R\$ }1{,}20\\\hline \text{Cadernos} & 3 & \text{R\$ }8{,}50\\\hline\end{array}\)
+99899	manter_imagem		grafico de pizza (despesas: refeicoes transporte hotel outros)
+100255	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{Marcas} & \textbf{Unidades produzidas} & \textbf{\% da produção vendida}\\\hline A & 18.000 & Y\\\hline B & X & 82\%\\\hline C & 22.600 & 75\%\\\hline\end{array}\)
+100402	manter_imagem		ilustracao de agrimensor com arvore, angulo 60 graus, 20m
+100411	manter_imagem		grafico de curva logaritmica com pontos (2,1) e (4,2)
+100420	manter_imagem		2 figuras sombreadas em malha quadriculada (figura I e II)
+100428	manter_imagem		figura irregular sombreada em malha quadriculada (formato de peixe)
+100597	manter_imagem		circulo inscrito em quadrado com cantos sombreados
+100882	manter_imagem		cubo ABCD (com vertices ocultos tracejados)
+101439	manter_imagem		quadrado ABDC inscrito em circulo
+101454	manter_imagem		grafico de temperatura x tempo com pontos A B C D
+101695	manter_imagem		grafico de linha com pontos de dados (sem rotulo de eixo)
+101710	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Avaliação} & \textbf{Peso}\\\hline \text{Prova mensal} & 2\\\hline \text{Prova bimestral} & 3\\\hline \text{Trabalho} & 1\\\hline\end{array}\)
+101785	manter_imagem		screenshot de software GeoGebra (grafico de parabola com janela de algebra e barra de tarefas)
+101827	manter_imagem		triangulo ACD com ponto B em AD, ceviana CB
+101850	manter_imagem		retangulo ABCD com pontos D E F G H I J C na base
+101893	manter_imagem		diagrama com pontos A B G F E D C, forma irregular
+101965	manter_imagem		triangulo ABC inscrito em circulo, segmentos sombreados

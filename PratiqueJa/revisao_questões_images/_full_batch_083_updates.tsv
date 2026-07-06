@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+120941	latex_candidato	\(\sqrt{-1}\)	fragmento (questao 120928, 5 de 5 - questao completa)
+120949	latex_candidato	\(x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}\)	formula (questao 120944, 1 de 5) - mesmo conjunto reutilizado das questoes-irmas 120912/120928
+120951	latex_candidato	\(\sqrt{-1}\)	fragmento (questao 120944, 2 de 5)
+120953	latex_candidato	\((2+\sqrt{-1})^3=2+\sqrt{-121}\)	formula (questao 120944, 3 de 5)
+120955	latex_candidato	\((2-\sqrt{-1})^3=2-\sqrt{-121}\)	formula (questao 120944, 4 de 5)
+120957	latex_candidato	\(\sqrt{-1}\)	fragmento (questao 120944, 5 de 5 - questao completa)
+120965	manter_imagem		grafico de pizza (PNAD-C distribuicao de renda)
+121186	manter_imagem		tabela idade/quantidade de estudantes (7 colunas) - proximo ao limite de colunas
+121194	manter_imagem		mesma tabela idade/estudantes reutilizada
+121202	manter_imagem		mesma tabela idade/estudantes reutilizada
+121210	manter_imagem		mesma tabela idade/estudantes reutilizada (4a ocorrencia)
+121219	latex_candidato	\(P=\left(\dfrac{\sqrt{3}}{2},\dfrac{1}{2}\right)\)	fragmento (ponto da circunferencia), imagem ampliada 5x
+121236	latex_candidato	\(\dfrac{L}{\sqrt{2}}\text{ cm}\)	fragmento continuando enunciado sobre piramide regular quadrangular
+121243	latex_candidato	\(4\sqrt{2}\text{ cm}\)	fragmento (diametro da circunferencia circunscrita a triangulo ABC)
+121250	latex_candidato	\(\left(x-\dfrac{1}{\sqrt{x}}\right)^6\)	fragmento (expressao binomial a expandir), imagem ampliada 5x
+121257	latex_candidato	\(\binom{16}{5}+\binom{11}{5}+\binom{6}{6}\)	formula de combinacoes, imagem ampliada 5x para confirmar valores
+121305	manter_imagem		diagrama de laser/triangulo, cotas 1,6m 2,4m h, angulo alfa
+121322	latex_candidato	\(1\leq x<\sqrt{3},\ \dfrac{f(x)}{g(x)}\leq 0\)	fragmento continuando enunciado sobre intervalo, imagem ampliada 5x
+121373	latex_candidato	\(g(x)=\sqrt{x+4}\)	fragmento (funcao inversa)
+121393	latex_candidato	\(\dfrac{3}{4}-\dfrac{5}{6}+\dfrac{7}{9}=\left(\dfrac{5}{6}\right)^2\)	formula, imagem ampliada 5x para confirmar

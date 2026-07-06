@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+100827	latex_candidato	I. O resultado da operação \(\left(\dfrac{2}{5}\cdot\dfrac{3}{4}-\dfrac{2}{4}\cdot\dfrac{2}{3}\right):\left(4+\dfrac{1}{3}\cdot\dfrac{2}{3}\right)\) é igual a \(\dfrac{-116}{2140}\).<<P>>II. O resultado da operação \(\left(\dfrac{2}{3}-\dfrac{1}{2}\right)-\left(\dfrac{3}{5}:\dfrac{4}{6}\right)\) é igual a \(\dfrac{-44}{60}\).<<P>>III. Fazendo a operação: \(3+\left(\dfrac{5}{3}+\dfrac{5}{4}\right)+\left(\dfrac{3}{4}-\dfrac{1}{3}\right)\), obtemos como resultado um valor igual a \(\dfrac{76}{12}\).	3 paragrafos novos (I/II/III) - o texto original nao renderiza quebra de linha dentro de 1 paragrafo (h:outputText sem escape=false/white-space:pre)
+100907	manter_imagem		diagrama de barra tracejada representando fracao (grafico, nao formula)
+102222	latex_candidato	\(\begin{array}{|l|c|c|}\hline\textbf{Secretaria} & \textbf{Sem ensino superior completo} & \textbf{Com ensino superior completo} \\\hline\text{Educação} & 18\% & 82\% \\\text{Saúde} & 25\% & 75\% \\\text{Turismo} & 38\% & 62\% \\\hline\end{array}\)	tabela de dados, sem elemento grafico
+105020	latex_candidato	\(\sqrt{2^3+\sqrt{2^6}}\)	expressao simples
+124181	manter_imagem		imagem degenerada 5x6px (quase em branco) - possivel artefato de digitacao antigo; recomendo revisar/remover manualmente
+124183	manter_imagem		imagem degenerada 5x6px (quase em branco) - possivel artefato de digitacao antigo; recomendo revisar/remover manualmente
+125603	manter_imagem		diagrama (duas espirais "Corda 1"/"Corda 2") - grafico, nao formula
+125677	manter_imagem		foto de familia com setas indicando nomes + tabela de idades - foto e essencial para o enunciado, nao da p/ separar
+126444	manter_imagem		diagrama geometrico (terreno ABCD dividido em alface/cenoura) - figura, nao formula
+130123	latex_candidato	\(-4 \quad 13 \quad 0{,}001 \quad \dfrac{3}{4} \quad 17 \quad 0{,}01 \quad 57 \quad 22 \quad -7 \quad \dfrac{5}{7} \quad 33\)	lista de numeros dispersos (sem elemento grafico)
+130139	latex_candidato	\(-4 \quad 13 \quad 0{,}001 \quad \dfrac{3}{4} \quad 17 \quad 0{,}01 \quad 57 \quad 22 \quad -7 \quad \dfrac{5}{7} \quad 33\)	mesma imagem de 130123 (lista de numeros), reutilizada em outra questao
+133372	manter_imagem		grafico de linha (producao de veiculos por mes) - grafico estatistico, nao formula
+133423	manter_imagem		grafico de linha (LCA em R$ bilhoes por ano) - grafico estatistico, nao formula
+133739	latex_candidato	Promoção de geladeira — preço: R$ \(1300{,}00\); comprando à vista: desconto de \(20\%\).	ilustracao da geladeira e decorativa; o dado numerico relevante vira latex, imagem permanece
+134050	manter_imagem		diagrama de balanca de dois pratos com formas geometricas (quebra-cabeca de sistema de equacoes) - metafora visual, nao formula
+134479	latex_candidato	Tabela de preços: \(\begin{array}{|l|c|}\hline & \textbf{Valor por litro} \\\hline\text{Etanol} & \text{R\$ 2,96} \\\text{Gasolina} & \text{R\$ 3,92} \\\hline\end{array}\)	tabela de dados
+134489	latex_candidato	\(\begin{array}{|c|c|}\hline\textbf{Valor} & \textbf{Fração} \\\hline\text{R\$ 10,00} & \dfrac{1}{2} \\\text{R\$ 20,00} & \dfrac{1}{4} \\\text{R\$ 50,00} & \dfrac{1}{4} \\\hline\end{array}\)	tabela de dados
+134540	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{Valor unitário} & \textbf{Quantidade} \\\hline\text{Comida} & \text{R\$ 22,50} & 04 \\\text{Bebida} & \text{R\$ 4,50} & 06 \\\text{Sobremesa} & \text{R\$ 3,00} & 03 \\\hline\end{array}\)	tabela de dados
+134682	latex_candidato	\(\begin{array}{|c|l|r|}\hline\textbf{Dia} & \textbf{Transação} & \textbf{Valor} \\\hline5 & \text{Salário} & \text{R\$ 990,00} \\7 & \text{Pagamento Energia} & \text{R\$ 137,00} \\7 & \text{Pagamento Internet} & \text{R\$ 98,00} \\10 & \text{Compra Cartão} & \text{R\$ 332,00} \\12 & \text{Compra Cartão} & \text{R\$ 195,00} \\15 & \text{Depósito} & \text{R\$ 70,00} \\\hline\end{array}\)	tabela de dados
+134838	latex_candidato	Lista de símbolos: \(\begin{array}{ll}\Rightarrow & \text{Condicional} \\\Leftrightarrow & \text{Bicondicional} \\\wedge & \text{Conector "e"} \\\vee & \text{Conector "ou"} \\\underline{\vee} & \text{Conector "ou" exclusivo} \\\neg & \text{Negação da proposição} \\\end{array}\)	legenda de simbolos de logica, sem elemento grafico

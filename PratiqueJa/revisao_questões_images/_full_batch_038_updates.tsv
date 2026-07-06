@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+51201	manter_imagem		grafico de linha massa corporal por mes (fora de escala)
+51217	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Faixas} & \textbf{Duração}\\\hline 1 & \text{5 minutos e 30 segundos}\\\hline 2 & \text{?}\\\hline 3 & \text{6 minutos e 18 segundos}\\\hline 4 & \text{4 minutos e 42 segundos}\\\hline 5 & \text{5 minutos e 45 segundos}\\\hline \end{array}\)
+51269	latex_candidato	\(\begin{array}{|c|l|c|}\hline \textbf{Dia} & \textbf{Movimentação} & \textbf{Valor}\\\hline 12 & \text{Saldo} & \text{+R\$ 528,00}\\\hline 15 & \text{Farmácia} & \text{-R\$ 130,00}\\\hline 17 & \text{Supermercado} & \text{-R\$ 275,00}\\\hline 25 & \text{Depósito} & \text{?}\\\hline 25 & \text{Salto total} & \text{+R\$ 255,00}\\\hline \end{array}\)	tabela transcrita literalmente; "Salto total" aparece assim no material original (possivel erro de digitacao por "Saldo total")
+51364	manter_imagem		foto de embalagem de chocolate Toblerone
+51380	manter_imagem		poligono irregular com angulos retos e lado y, cotas 30 120 140
+51391	manter_imagem		paralelepipedo com nivel de agua sombreado, cotas 50cm e 0,75x
+51401	manter_imagem		triangulo isosceles com altura h e base x
+51674	manter_imagem		grafico de barras percentual de aumento por mes
+51700	manter_imagem		quadrado dividido em 4 lotes I II III IV com cotas a e b
+51795	manter_imagem		ilustracao de tanque cilindrico com tres torneiras
+51804	manter_imagem		grafico de duas funcoes y=x^2 e y=x^4-2x^2 com area sombreada
+51829	manter_imagem		ilustracao de placa de carro antiga
+51839	manter_imagem		foto/ilustracao 3d de tabuleiro de xadrez com fonte wikipedia
+51858	manter_imagem		ilustracao de submarino e iceberg com angulos 15 e 30 graus
+51875	latex_candidato	\(\dfrac{\operatorname{sen}(\theta)}{\sec(\theta)}=\dfrac{1}{2}, \quad 0\le\theta<2\pi\)	fragmento de formula, continuacao do enunciado (questao 51872)
+51884	latex_candidato	\(\dfrac{\sqrt{5}+\sqrt{3}}{\sqrt{5}-\sqrt{3}}+\dfrac{\sqrt{5}-\sqrt{3}}{\sqrt{5}+\sqrt{3}}\)
+51904	latex_candidato	\(\sqrt{20+\sqrt{20+\sqrt{20+\ldots}}}\)
+52154	manter_imagem		octaedro regular em perspectiva
+52818	manter_imagem		grafico de linha evolucao da potencia solar instalada por ano
+54209	manter_imagem		grafico de linha membros do clube de xadrez por tempo

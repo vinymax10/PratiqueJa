@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+59963	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{x} & \textbf{log x}\\\hline 2 & 0{,}30\\\hline 7 & 0{,}84\\\hline 9 & 0{,}95\\\hline 13 & 1{,}11\\\hline \end{array}\)
+60089	latex_candidato	\(\begin{array}{|c|c||c|c|}\hline \textbf{Letra} & \textbf{Número} & \textbf{Letra} & \textbf{Número}\\\hline A & 1 & N & 14\\\hline B & 2 & O & 15\\\hline C & 3 & P & 16\\\hline D & 4 & Q & 17\\\hline E & 5 & R & 18\\\hline F & 6 & S & 19\\\hline G & 7 & T & 20\\\hline H & 8 & U & 21\\\hline I & 9 & V & 22\\\hline J & 10 & W & 23\\\hline K & 11 & X & 24\\\hline L & 12 & Y & 25\\\hline M & 13 & Z & 26\\\hline \end{array}\)
+60115	latex_candidato	\(\begin{array}{|c|c||c|c|}\hline \textbf{Letra} & \textbf{Número} & \textbf{Letra} & \textbf{Número}\\\hline A & 1 & N & 14\\\hline B & 2 & O & 15\\\hline C & 3 & P & 16\\\hline D & 4 & Q & 17\\\hline E & 5 & R & 18\\\hline F & 6 & S & 19\\\hline G & 7 & T & 20\\\hline H & 8 & U & 21\\\hline I & 9 & V & 22\\\hline J & 10 & W & 23\\\hline K & 11 & X & 24\\\hline L & 12 & Y & 25\\\hline M & 13 & Z & 26\\\hline \end{array}\)	mesma tabela reutilizada da questao 60078
+60138	manter_imagem		dois retangulos A e B com cotas 2,2x/x+10 e 1,2x/x+8
+60466	manter_imagem		retangulo com elipse (piscina) inscrita, area 11,19m2, cotas 8m 5m
+60590	latex_candidato	\(A=\begin{pmatrix}\operatorname{sen}(2x) & \operatorname{sen}(x) & 0\\\cos(x) & \dfrac{1}{2} & 0\\0 & 0 & 1\end{pmatrix}\) e \(B=\begin{pmatrix}4 & 5 & 7\\3 & 2 & 1\\2 & 3 & 5\end{pmatrix}\).
+60714	manter_imagem		quadrado DABC com subdivisoes I II e pontos G F E
+60722	manter_imagem		circunferencia com centro O, corda AB e angulos u i e	arquivo com nome atipico "Sem titulo.png" (upload direto, nao pelo padrao QuestoesQ)
+60839	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Salário mensal (em reais)} & \textbf{Quantidade de colaboradores}\\\hline 1.100 & 9\\\hline 1.250 & 7\\\hline 1.400 & 6\\\hline 1.550 & 5\\\hline 1.700 & 5\\\hline 1.850 & 3\\\hline 2.000 & 1\\\hline \end{array}\)
+60867	latex_candidato	\(x+x+y=7;\quad y^2+4=13\ \text{e}\ z+\dfrac{x}{y}=5.\ \text{Onde } x, y \text{ e } z \text{ pertencem a } \mathbb{N}.\)
+60877	manter_imagem		paralelepipedo (reservatorio) com cotas 2m 1,5m e altura h
+60894	manter_imagem		prisma com nivel de agua e cotas 1m 1m 220mm
+60926	latex_candidato	\(\begin{array}{r} FG\\+\ \ 23\\\hline 99\end{array}\)
+60934	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Ficha técnica: Piña colada} & \\\hline \text{Rum} & 15\%\\\hline \text{Suco} & 40\%\\\hline \text{Leite Condensado} & 12\%\\\hline \text{Leite de côco} & 13\%\\\hline \text{Gelo} & 20\%\\\hline \end{array}\)
+60958	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Polígono} & \textbf{N° de triângulos pequenos correspondentes}\\\hline \text{Triângulo médio} & 2\\\hline \text{Triângulo grande} & 4\\\hline \text{Quadrado} & 2\\\hline \text{Paralelogramo} & 2\\\hline \end{array}\)	imagem tambem contem ilustracao colorida do tangram, que permanece na imagem original
+61829	manter_imagem		matriz de rotacao 3x3 com cos x, sen x	conteudo identico ja presente no enunciado (paragrafo 61827) como texto — redundante, nao duplicar
+61852	manter_imagem		triangulo ABC com angulo 120 graus e lados 5cm 4cm
+61861	manter_imagem		formula raiz de (x^2-5x+6)/(2x-2)	conteudo identico ja presente no enunciado (paragrafo 61859) como texto — redundante, nao duplicar
+61968	latex_candidato	\(\begin{array}{|c|l|c|c|}\hline & \textbf{Usuário} & \textbf{Número de livros} & \textbf{Número de dias de empréstimo de cada livro}\\\hline 1 & \text{José} & 2 & 12\\\hline 2 & \text{João} & 3 & 15\\\hline 3 & \text{Maria} & 1 & 10\\\hline 4 & \text{Paulo} & 2 & 20\\\hline 5 & \text{Luiza} & 4 & 8\\\hline 6 & \text{Helena} & 1 & 30\\\hline 7 & \text{Tatiana} & 1 & 21\\\hline 8 & \text{Cristina} & 1 & 20\\\hline 9 & \text{Mauro} & 4 & 10\\\hline 10 & \text{Luis} & 1 & 13\\\hline \end{array}\)
+62029	manter_imagem		ilustracao de predio, arvore e sombras (Tales de Mileto) com cotas h 5,2m 6,0m 18,0m

@@ -1,0 +1,22 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+67800	manter_imagem		figura de coruja formada por poligonos regulares (hexagono, triangulo)
+67844	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline \textbf{Espécies} & \textbf{Coruja-das-neves} & \textbf{Coruja-buraqueira} & \textbf{Corujão-orelhudo} & \textbf{Coruja-moura}\\\hline \textbf{Pesos médios} & 2\text{ kg} & 150\text{ g} & 1{,}4\text{ kg} & 330\text{ g}\\\hline \end{array}\)
+67878	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \text{Estudantes / Alturas (cm)} & \textbf{110 a 119} & \textbf{120 a 129} & \textbf{130 a 139}\\\hline \text{Quantidade de meninos} & 4 & 10 & 1\\\hline \text{Quantidade de meninas} & 3 & 8 & 4\\\hline \end{array}\)	celula de cabecalho diagonal do original simplificada como "Estudantes / Alturas (cm)"
+68397	manter_imagem		grafico de duas curvas com regiao sombreada entre elas
+68406	manter_imagem		elipse no plano cartesiano centrada na origem
+68412	manter_imagem		ilustracao de urna com bolas brancas pretas e cinzas
+68415	manter_imagem		ilustracao de urna com bolas brancas pretas e cinzas (mesmo tipo de imagem de 68412, urna diferente)
+68433	latex_candidato	\(\sum_{x=1}^{\infty}\left(\dfrac{1}{2^x}-\dfrac{1}{3^x}\right)\)	fragmento de formula (serie), continuacao do enunciado (questao 68430)
+68443	manter_imagem		ilustracao de fatia de bolo com cereja e triangulo de referencia, cotas 12cm 15cm 10cm
+68452	manter_imagem		ilustracao de carro pessoa e arvore com angulos 30 e 45 graus, distancia 50m
+68465	latex_candidato	\(\begin{vmatrix}3&2&1&1\\2&1&0&0\\0&2&3&0\\1&3&2&0\end{vmatrix}-2\times\begin{vmatrix}3&1&2\\2&1&3\\1&2&3\end{vmatrix}+\begin{vmatrix}3&1\\12&6\end{vmatrix}\)	fragmento de formula, continuacao do enunciado (questao 68462)
+68475	manter_imagem		infografico de barras homens/mulheres por faixa etaria
+68920	manter_imagem		figura composta (triangulo+retangulo+semicirculo) com cotas 8m 20m 20m
+70433	manter_imagem		trapezio ABDC com pontos E F e segmentos x y a b
+70440	manter_imagem		trapezio ABDC com pontos E F e segmentos x y a b (figura reutilizada de 70433)
+70447	manter_imagem		trapezio ABDC com pontos E F e segmentos x y a b (figura reutilizada de 70433)
+70451	latex_candidato	\(P(x)=30+2\sqrt{100+x^2}+2\sqrt{100+(3-x)^2}\)	fragmento de formula, continuacao do enunciado (questao 70445)
+70456	manter_imagem		trapezio ABDC com pontos E F e segmentos x y a b (figura reutilizada de 70433)
+70460	latex_candidato	\(f(a)=50+2\sqrt{9+a^2}.\)	fragmento de formula, continuacao do enunciado (questao 70454)
+70675	manter_imagem		grafico de pizza feminino 80% masculino 20%
+70684	manter_imagem		grafico de pizza feminino 80% masculino 20% (figura reutilizada de 70675)

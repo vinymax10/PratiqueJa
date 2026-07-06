@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+78733	manter_imagem		foto aerea de praca circular com cota de 18 metros
+78915	latex_candidato	\(f(x)=-\dfrac{2x^2}{5}+\dfrac{24x}{5}-\dfrac{22}{5}\)	fragmento de formula, continuacao do enunciado (questao 78912)
+79277	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 79274)
+79279	latex_candidato	\(\overline{BC}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 79274)
+79281	latex_candidato	\(A\hat{B}C\)	fragmento de notacao de angulo, continuacao do enunciado (questao 79274)
+80203	manter_imagem		paralelepipedo com cotas 9cm 9cm 18,5cm
+80241	manter_imagem		trapezio com bases 14cm 26cm e altura 10cm
+80312	manter_imagem		triangulo retangulo com catetos 24cm x e hipotenusa 40cm
+80602	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Números empregados} & \textbf{Salário (em reais)}\\\hline 10 & 1240\\\hline 15 & 1400\\\hline 3 & 2500\\\hline 2 & 3000\\\hline \end{array}\)
+82530	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Valores em R\$ por m}^2 & & & & \\\hline 100 & 150 & 100 & 120 & 100\\\hline 80 & 80 & 80 & 100 & 130\\\hline \end{array}\)
+82537	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Valores em R\$ por m}^2 & & & & \\\hline 100 & 150 & 100 & 120 & 100\\\hline 80 & 80 & 80 & 100 & 130\\\hline \end{array}\)	mesma tabela reutilizada da questao 82528
+82544	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Valores em R\$ por m}^2 & & & & \\\hline 100 & 150 & 100 & 120 & 100\\\hline 80 & 80 & 80 & 100 & 130\\\hline \end{array}\)	mesma tabela reutilizada da questao 82528
+82551	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Valores em R\$ por m}^2 & & & & \\\hline 100 & 150 & 100 & 120 & 100\\\hline 80 & 80 & 80 & 100 & 130\\\hline \end{array}\)	mesma tabela reutilizada da questao 82528
+82558	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Valores em R\$ por m}^2 & & & & \\\hline 100 & 150 & 100 & 120 & 100\\\hline 80 & 80 & 80 & 100 & 130\\\hline \end{array}\)	mesma tabela reutilizada da questao 82528
+82586	manter_imagem		regua de escala grafica com marcas 0 2,5km 5km 7,5km
+82596	manter_imagem		mapa do acre em plano cartesiano com cidades Porto Velter Tarauaca Rio Branco Assis Brasil
+82603	manter_imagem		mapa do acre em plano cartesiano (figura reutilizada de 82596)
+82617	manter_imagem		mapa do acre em plano cartesiano (figura reutilizada de 82596)
+82633	manter_imagem		planta baixa com regioes A B C D E F e cotas
+82647	manter_imagem		planta baixa com regioes A B C D E F e cotas (figura reutilizada de 82633)

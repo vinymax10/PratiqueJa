@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+12024	latex_candidato	\(\overline{AB} = \overline{AC}\)
+12026	manter_imagem		ilustração (topógrafo/teodolito e círculo)
+12051	manter_imagem		diagrama geométrico (cubo sobre plano)
+12065	manter_imagem		gráfico de funções (parábolas f, g)
+12081	manter_imagem		diagrama geométrico (triângulo com ângulo)
+12096	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Quantidade de requerimentos recebidos por hora} & & & \\\hline \textbf{Técnicos} & \textbf{1ª hora} & \textbf{2ª hora} & \textbf{3ª hora} \\\hline A & 1 & 3 & 5 \\\hline B & 2 & 4 & 6 \\\hline\end{array}\)
+12113	latex_candidato	\(20,\ 20,\ 21,\ 21,\ x,\ 35,\ 40,\ y\)
+12129	manter_imagem		gráfico de pizza
+12145	manter_imagem		figuras geométricas em malha quadriculada
+12205	manter_imagem		gráfico de barras empilhadas
+12639	manter_imagem		ilustração (silos)
+2	latex_candidato	\(\begin{array}{l}\textbf{Leis de formação} \\\text{I) } y=a^x \text{ com } 0<a<1 \\\text{II) } y=a^x \text{ com } a>1 \\\text{III) } y=\log_a x \text{ com } 0<a<1 \\\text{IV) } y=\log_a x \text{ com } a>1\end{array}\)	os 4 gráficos (A-D) permanecem na imagem, só o texto das leis de formação virou parágrafo
+12664	manter_imagem		diagrama geométrico (três cilindros/tronco empilhados)
+12675	manter_imagem		diagrama geométrico (idêntico a 12664)
+12809	manter_imagem		diagrama geométrico (triângulo em retângulo)
+12831	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline & \textbf{Mais que 2 m} & \textbf{Entre 1,80 m e 2 m} & \textbf{Menos que 1,80 m} \\\hline \textbf{Homens} & 10\% & 70\% & 20\% \\\hline \textbf{Mulheres} & 5\% & 50\% & 45\% \\\hline\end{array}\)
+13161	manter_imagem		diagrama geométrico (ângulos)
+14107	manter_imagem		screenshot de planilha eletrônica (com fórmula)
+14380	latex_candidato	\(2,\ 5,\ 8,\ 11,\ 14,\ 17,\ 20,\ \ldots\)
+14390	manter_imagem		diagrama geométrico (prédio com escada)

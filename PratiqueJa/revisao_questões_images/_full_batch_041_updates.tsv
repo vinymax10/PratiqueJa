@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+58225	manter_imagem		grafico de dispersao tempo de resolucao por aluno
+58236	manter_imagem		grafico de duas funcoes f e g com pontos de intersecao
+58332	manter_imagem		grafico de linha nivel do reservatorio por hora do dia
+58375	manter_imagem		diagrama esquematico do interior de um barco (totoo) com bancos A B C
+58388	manter_imagem		grafico de funcao periodica com valores 1,50 1,58 1,83 2,00
+58431	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Base de cálculo (R\$)} & \textbf{Alíquota (\%)}\\\hline \text{Até 1.903,98} & -\\\hline \text{De 1.903,99 até 2.826,65} & 7{,}5\\\hline \text{De 2.826,66 até 3.751,05} & 15{,}0\\\hline \text{De 3.751,06 até 4.664,68} & 22{,}5\\\hline \text{Acima de 4.664,68} & 27{,}5\\\hline \end{array}\)
+58467	manter_imagem		ilustracao detalhada dos formatos de papel A0 a A6 com cotas 1189mm e 841mm
+58478	manter_imagem		retangulo ABCD com regiao sombreada interna e cotas x e 9cm 15cm
+58487	manter_imagem		triangulo retangulo com catetos 10m e 50m e hipotenusa 50m
+58512	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{Apenas o Ensino Médio completo} & \textbf{Ensino Superior completo}\\\hline \textbf{Secretaria A} & 60\% & 40\%\\\hline \textbf{Secretaria B} & 70\% & 30\%\\\hline \end{array}\)
+58522	manter_imagem		grafico de barras numero de moradores urbana vs rural
+58545	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de acertos} & \textbf{Número de pessoas}\\\hline 0 & 3\\\hline 1 & 10\\\hline 2 & 20\\\hline 3 & 10\\\hline 4 & 15\\\hline 5 & x\\\hline \end{array}\)
+58632	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número dito por Ana} & \textbf{Número em resposta de Bruno}\\\hline 1 & 2\\\hline 2 & 9\\\hline 3 & 28\\\hline 5 & 126\\\hline \end{array}\)
+58649	manter_imagem		grafico de barras atendimentos por idade
+58732	manter_imagem		diagrama de angulo dividido com 6x+15 e 2x+5
+58753	manter_imagem		triangulo retangulo com catetos 60 e 80 e hipotenusa x
+58782	manter_imagem		triangulo retangulo com circunferencia inscrita de raio 1, catetos 4 e 3
+58856	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Município} & \textbf{População (n.º de habitantes)} & \textbf{Total de casos de covid-19 confirmados}\\\hline \text{A} & \text{1 milhão} & \text{80 mil}\\\hline \text{B} & \text{120 mil} & \text{30 mil}\\\hline \text{C} & \text{50 mil} & \text{10 mil}\\\hline \end{array}\)
+58886	latex_candidato	\(\dfrac{\displaystyle\sum_{i=n-6}^{n}C_i}{7}\)	fragmento de formula, continuacao da definicao de MVn (questao 58880)
+58888	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{Dia} & \textbf{A} & \textbf{B}\\\hline 1 & 21 & 15\\\hline 2 & 0 & 6\\\hline 3 & 20 & 8\\\hline 4 & 0 & 6\\\hline 5 & 15 & 8\\\hline 6 & 20 & 13\\\hline 7 & 0 & 8\\\hline 8 & 15 & 13\\\hline 9 & 7 & 1\\\hline 10 & 9 & 16\\\hline 11 & 8 & 12\\\hline \end{array}\)

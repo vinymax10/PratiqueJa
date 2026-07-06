@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+9220	manter_imagem		diagrama de sólido de revolução
+9231	manter_imagem		diagrama de sólido de revolução (idêntico a 9220)
+9450	latex_candidato	\(a_{ij} = \begin{cases}2i+j, & \text{se } i>j \\13, & \text{se } i=j \\i^2-j, & \text{se } i<j\end{cases} \text{ e } B = A^T\)
+9481	manter_imagem		gráfico de funções f(x) e g(x)
+9491	manter_imagem		gráfico de funções f(x) e g(x) (idêntico a 9481)
+9501	manter_imagem		gráfico de funções f(x) e g(x) (idêntico a 9481)
+9541	manter_imagem		gráfico de pizza (40%)
+9623	manter_imagem		diagrama geométrico (casa: retângulo + triângulo)
+9640	manter_imagem		gráficos de linha e barras (assinantes/faturamento)
+9651	latex_candidato	\(\dfrac{\text{área de circulação}}{7}\)
+9662	manter_imagem		gráfico de barras horizontal
+9687	manter_imagem		diagrama geométrico (triângulo em retângulo)
+9833	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{Segunda feira} & \textbf{Terça feira} & \textbf{Quarta feira} & \textbf{Quinta feira} & \textbf{Sexta feira} \\\hline 5 & 4 & 6 & 5 & 8 \\\hline\end{array}\)
+9967	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline & \textbf{30°} & \textbf{45°} & \textbf{60°} \\\hline \textbf{Sen }\theta & \dfrac{1}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{\sqrt{3}}{2} \\\hline \textbf{Cos }\theta & \dfrac{\sqrt{3}}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{1}{2} \\\hline \textbf{Tg }\theta & \dfrac{\sqrt{3}}{3} & 1 & \sqrt{3} \\\hline\end{array}\)
+10149	manter_imagem		diagrama geométrico (prisma com dimensões)
+10184	manter_imagem		diagrama geométrico (quadrilátero em círculo)
+10261	manter_imagem		diagrama geométrico (caixa/prisma com dimensões)
+10271	manter_imagem		diagrama geométrico (triângulos com medidas)
+10296	manter_imagem		diagrama geométrico (dois retângulos)
+10337	manter_imagem		diagrama geométrico (triângulo com ângulo)

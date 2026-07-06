@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+106512	manter_imagem		paralelepipedo 3D, cotas 15cm 9cm 12cm ("figura fora de escala")
+106522	manter_imagem		2 quadrados A e B ("figuras fora de escala")
+107000	manter_imagem		retangulo, cotas 4,8m 12,5m
+107022	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline \textbf{JANEIRO} & \textbf{FEVEREIRO} & \textbf{MARÇO} & \textbf{ABRIL} & \textbf{MAIO}\\\hline \text{R\$ }8.000{,}00 & & & & \\\hline\end{array}\)	tabela com maioria das celulas vazias (a preencher pelo aluno) no original
+107223	manter_imagem		cubo com pontos A e B (diagonal)
+107764	latex_candidato	\(\lambda\)	fragmento continuando "reta t: x-y+k=0 seja tangente a circunferencia ___" (nome da circunferencia)
+107974	manter_imagem		grafico de curva senoidal
+108183	manter_imagem		grafico de barra empilhada (destino das exportacoes brasileiras) com fonte
+108193	manter_imagem		diagrama de dobradura em L, cotas 8m 4m 10m 4m
+108209	manter_imagem		sequencia de poligonos com vertices numerados (triangulo quadrado pentagono hexagono)
+108275	manter_imagem		diagrama de linha em zigue-zague entre pontos A e B
+108307	manter_imagem		triangulo ABC em malha quadriculada
+108336	latex_candidato	\(\overline{AB}\text{ e }\overline{CD}\)	fragmento continuando "o angulo formado pelos vetores ___" (questao sobre pontos A B C D)
+108350	manter_imagem		grafico altura x comprimento com regioes "parede" e "porta" (arco parabolico)
+108397	manter_imagem		tabela larga "resultado da enquete" (8 colunas: jornais A B C AeB AeC BeC AeBeC) - excede limite de colunas
+108419	manter_imagem		retangulo, cotas 16 e x
+108486	manter_imagem		diagrama de cruzamento/faixa de pedestre com pontos A B C, cotas 12m 9m
+108497	manter_imagem		caixa 3D com base sombreada, cotas 1m 1m 200mm
+108568	manter_imagem		grafico de barras (grupos A-E, numero de pessoas)
+108585	manter_imagem		diagrama com regioes T e Q, pontos A B C D, cotas 80m 100m

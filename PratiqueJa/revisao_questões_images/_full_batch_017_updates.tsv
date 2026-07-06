@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+24079	manter_imagem		diagrama geométrico (triângulo com pontos)
+24143	manter_imagem		figura (círculo com fatia removida, "pacman")
+24149	manter_imagem		figura idêntica a 24143
+24212	latex_candidato	\(\begin{array}{|l|c|c|c|c|c|c|}\hline & \textbf{Carboidratos (g)} & \textbf{Proteínas (g)} & \textbf{Gorduras totais (g)} & \textbf{Gorduras saturadas (g)} & \textbf{Fibra alimentar (g)} & \textbf{Sódio (mg)} \\\hline \text{Farinha de trigo} & 77{,}7 & 9{,}4 & 1{,}3 & 0{,}2 & 3{,}6 & 3 \\\hline \text{Açúcar refinado} & 99{,}9 & 0 & 0 & 0 & 0 & 1 \\\hline \text{Gordura vegetal hidrogenada} & 0 & 0 & 100 & 23{,}3 & 0 & 0 \\\hline \text{Coco ralado} & 15{,}2 & 3{,}34 & 33{,}5 & 29{,}7 & 9{,}4 & 20 \\\hline \text{Fermento em pó} & 37{,}8 & 5{,}2 & 0 & 0 & 0 & 11{,}8 \\\hline \text{Ovos} & 1{,}23 & 12{,}5 & 10 & 3{,}1 & 0 & 12 \\\hline\end{array}\)	tabela com 6 linhas x 6 colunas — conferir valores contra a imagem original
+24274	manter_imagem		diagrama geométrico (retângulo com losango, igual a 21240)
+24315	manter_imagem		diagrama geométrico (casa com jardim)
+24352	latex_candidato	\(\overline{DE}\)	fragmento pequeno (notação de segmento), parte da questão 24349
+24354	latex_candidato	\(\overline{BC}\)	fragmento pequeno, parte da questão 24349
+24356	manter_imagem		diagrama geométrico (círculo com triângulo, referenciado pelos segmentos da mesma questão)
+24385	manter_imagem		diagrama geométrico (ponte com cabos)
+24421	manter_imagem		diagrama geométrico (duas caixas conectadas por cano)
+24444	manter_imagem		ilustração (poste de luz com medidas)
+24467	manter_imagem		diagrama geométrico (dois triângulos)
+24477	manter_imagem		diagrama geométrico (cone)
+24629	manter_imagem		ilustração (livro sobre mesa em formato geométrico)
+24637	manter_imagem		diagrama geométrico (casa, combinatória)
+24874	manter_imagem		diagrama de mapa/regiões
+24892	manter_imagem		gráfico de função (igual a 22869)
+25106	latex_candidato	\(\text{ARAGUAIA ARAGUAIA ARAGUAIA }\ldots\text{ ARAGUAIA.}\)
+25187	manter_imagem		gráfico de barras

@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+42587	manter_imagem		circunferencia de raio 3 centrada na origem, plano xy
+42601	manter_imagem		grafico de parabola f(x)=x^2
+42622	manter_imagem		grafico de funcao trigonometrica (tangente) periodica
+42631	manter_imagem		esfera com raio r em perspectiva
+42690	manter_imagem		grafico de funcao exponencial decrescente
+42698	manter_imagem		dois triangulos semelhantes com angulos e medidas
+42734	manter_imagem		figura pitagorica com quadrados de area 9 16 e lados a b c
+42745	manter_imagem		figura pitagorica com quadrados de area 9 16 e lados a b c (mesma figura reutilizada)
+42756	manter_imagem		figura pitagorica com quadrados de area 9 16 e lados a b c (mesma figura reutilizada)
+42765	manter_imagem		reta numerica de -5 a 5 com bola aberta em -1
+42798	manter_imagem		diagrama de trajeto de entrega com bairros e distancias em cm
+42838	latex_candidato	\(\begin{vmatrix}\alpha&\delta&\mu\\\beta&\theta&\rho\\\gamma&\vartheta&\sigma\end{vmatrix}=-3.\)<<P>>I. \(\begin{vmatrix}\beta&\theta&\rho\\\alpha&\delta&\mu\\\gamma&\vartheta&\sigma\end{vmatrix}=3\)<<P>>II. \(\begin{vmatrix}\alpha&\delta&\mu\\\beta&\theta&\rho\\0&0&0\end{vmatrix}=0\)<<P>>III. \(\begin{vmatrix}3\alpha&3\delta&3\mu\\3\beta&3\theta&3\rho\\3\gamma&3\vartheta&3\sigma\end{vmatrix}=-9\)<<P>>IV. \(\begin{vmatrix}\alpha&\delta&\mu\\\beta&\theta&\rho\\\gamma+2\beta&\vartheta+2\theta&\sigma+2\rho\end{vmatrix}=-3\)
+42865	manter_imagem		grafico de barras arvores frutiferas por tipo
+42874	manter_imagem		ilustracao de produtos de higiene (pasta enxaguante fio dental escova) com precos ao lado de cada um
+42950	latex_candidato	\(\overline{HI}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 42947)
+42952	latex_candidato	\(\overline{FG}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 42947)
+43259	manter_imagem		triangulo ABC com pontos medios M N e vertice B
+43357	manter_imagem		solido tipo rampa/prisma com cotas 5m 3m 6m
+43445	manter_imagem		losango com diagonais 2 e 4
+43515	manter_imagem		duas retas concorrentes formando angulos y 10 40 20

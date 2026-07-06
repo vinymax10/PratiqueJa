@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+87706	manter_imagem		grafico de reta decrescente passando por (0,6) e (3,0)
+87840	manter_imagem		triangulo ABC com marcas de congruencia
+87854	manter_imagem		poligono com cotas 3m 5m 2m 7m
+88244	manter_imagem		retas f g cortadas por transversal com angulos 55 e a
+88336	manter_imagem		trajeto CAT com cotas 400m 300m 260m e diagonal CB
+88390	manter_imagem		figura em L dividida em regioes I II, cotas 3x 40 80
+88697	latex_candidato	\(\begin{array}{|c|c|c|}\hline A & B & A\\\hline B & A & A\\\hline A & A & B\\\hline \end{array}\)
+88724	manter_imagem		planta de secretaria com pontos A B T e cotas 4m 3m
+88739	manter_imagem		grafico de barras aniversarios por mes
+88829	manter_imagem		grafico de barras empilhadas faturamento por filial e trimestre
+88847	manter_imagem		grafico de barras horas extras por filial
+88987	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento (1 de 3), continuacao do enunciado (questao 88984)
+88989	latex_candidato	\(\overline{A'B'}\)	fragmento de notacao de segmento (2 de 3), continuacao do enunciado (questao 88984)
+88991	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento (3 de 3), continuacao do enunciado (questao 88984)
+88993	manter_imagem		ilustracao de cadeira com ponto de perspectiva P e segmentos AB A'B'
+89017	latex_candidato	\(\sqrt{(x+3)^2}=\sqrt{(2x-1)^2}\)<<P>>\(x+3=2x-1\)<<P>>\(-x=-4\)<<P>>\(x=4\)<<P>>\(S=\{4\}\)
+89028	manter_imagem		grafico de barras frequentadores da piscina por dia da semana
+89052	latex_candidato	\(\overline{CD}\)	fragmento de notacao de segmento (1 de 2), continuacao do enunciado (questao 89048)
+89054	latex_candidato	\(\overline{AD}\)	fragmento de notacao de segmento (2 de 2), continuacao do enunciado (questao 89048)
+89056	manter_imagem		quadrado ABCD com pontos M N P e triangulo equilatero MNP

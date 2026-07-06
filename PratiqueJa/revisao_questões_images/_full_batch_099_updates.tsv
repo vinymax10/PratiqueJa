@@ -1,0 +1,41 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+139025	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Faixa salarial} & \textbf{Número de funcionários}\\\hline \text{R\$ 960,00 a R\$ 1.200,00} & 40\\\hline \text{R\$ 1.200,00 a R\$ 1.500,00} & 20\\\hline \text{R\$ 1.600,00 a R\$ 1.800,00} & 12\\\hline \text{R\$ 1.900,00 a R\$ 2.300,00} & 8\\\hline \end{array}\)	mesma tabela reutilizada da questao 134236 (lote_096)
+139040	manter_imagem		figura em L com medidas 8m 8m 15m 17m (figura reutilizada da questao 134251, lote_096)
+139084	manter_imagem		grafico de barras vendas de motos por mes
+139093	latex_candidato	\(\textbf{Lanchonete Água na boca}\)<<P>>\(\textit{Cardápio}\)<<P>>\(\text{Coxinha}\ \ldots\ \text{R\$ 3,50}\)<<P>>\(\text{Empada}\ \ldots\ \text{R\$ 3,00}\)<<P>>\(\text{Quibe}\ \ldots\ \text{R\$ 3,00}\)<<P>>\(\text{Esfirra}\ \ldots\ \text{R\$ 3,80}\)<<P>>\(\text{Hambúrguer}\ \ldots\ \text{R\$ 12,00}\)<<P>>\(\text{x-egg}\ \ldots\ \text{R\$ 15,00}\)<<P>>\(\text{x-tudo}\ \ldots\ \text{R\$ 18,00}\)<<P>>\(\text{Refrigerante Lata}\ \ldots\ \text{R\$ 4,00}\)<<P>>\(\text{Suco lata}\ \ldots\ \text{R\$ 4,50}\)	cardapio de lanchonete, texto via <<P>>
+139107	manter_imagem		grafico de barras atendimento casa loterica por funcionario
+139131	latex_candidato	\(\begin{array}{|l|c|}\hline \text{Pedro} & \text{R\$ 72,00}\\\hline \text{Carlos} & \text{R\$ 68,40}\\\hline \text{Rodrigo} & \text{R\$ 58,80}\\\hline \end{array}\)	tabela de valores por pessoa
+139140	latex_candidato	\(\textbf{OFERTA}\)<<P>>\(\text{Smart TV led 43”}\)<<P>>\(\text{Em até R\$ 12 X 209,90}\)	banner de promocao de TV; ilustracao da TV permanece na imagem
+139163	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Gênero} & \textbf{Número de eleitores}\\\hline \text{Masculino} & 31.189\\\hline \text{Feminino} & ?\\\hline \textbf{Total} & 66.376\\\hline \end{array}\)<<P>>\(\text{REPOSITÓRIO DE DADOS ELEITORAIS DO TSE.}\)	tabela genero/numero de eleitores com incognita, + fonte via <<P>>
+139186	manter_imagem		hexagono com pontos A-F e centro O
+139203	manter_imagem		anomalia "Lista de simbolos" (legenda de logica) anexada a questao de Estatistica sem relacao - mesmo padrao ja visto nos lotes anteriores
+139215	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Equacoes 2o Grau sem relacao
+139225	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Equacoes sem relacao
+139427	latex_candidato	\(\text{"O Ponto A está duas vezes mais distante do Ponto C do que do Ponto B. Se a distância do Ponto B ao Ponto C é 12,5 centímetros, quão distante está o Ponto A do Ponto C?"}\)<<P>>\(\text{"Os mortos-vivos não precisam resolver problemas escolares."}\)<<P>>\(\text{Disponível em: <http://acidezeincoerencia.blogspot.com.br/2011/05/pra-quem-nao-conhece-ainda-lhes.html>. Acesso em: 9 dez. 2017.}\)	quadrinho (Calvin) cujo dialogo contem o proprio enunciado do problema matematico (distancias entre pontos A/B/C), nao presente em outro paragrafo de texto; extraido o texto das falas, a ilustracao do quadrinho permanece na imagem
+139467	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Categoria} & \textbf{Valor da Diária (R\$)}\\\hline \text{Compacto} & 140,00\\\hline \text{Econômico} & 110,00\\\hline \text{Intermediário} & 130,00\\\hline \textit{Standart} & 120,00\\\hline \end{array}\)	tabela categoria/valor da diaria
+139519	manter_imagem		arranjos 1-4 de cubos (padrao de crescimento visual)
+139535	manter_imagem		tabela posicao do termo x valor do termo (9 colunas) - excede limite de largura
+139637	manter_imagem		padrao losango/quadrado preto e branco
+139651	manter_imagem		grafico de parabola em malha quadriculada
+139741	manter_imagem		grafico de barras jovens que nao estudam nem trabalham, com fonte
+139789	manter_imagem		grafico de barras venda de salgados "Barraca da Joana" (figura reutilizada da questao 138589, lote_098)
+139839	manter_imagem		mapa de assentos de onibus (diagrama, mesmo padrao do lote_096)
+139849	latex_candidato	\(\textbf{PROMOÇÃO}\)<<P>>\(\text{KIT 2 PNEUS ARO 13}\)<<P>>\(\text{R\$ 269,00}\)	mesmo banner de pneus reutilizado da questao 133752 (lote_095)
+139880	manter_imagem		quadro de avisos com post-its, medidas 1,30m e 1,10m (figura reutilizada da questao 133649, lote_096)
+139982	manter_imagem		foto desfocada de nota fiscal/recibo
+139991	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline \textbf{Nome} & \textbf{M} & \textbf{P} & \textbf{D} & \textbf{NF}\\\hline \text{Bruno} & 5 & 6 & 3 & \\\hline \text{Artur} & 6 & 5 & 4 & \\\hline \text{Claudio} & 7 & 4 & 5 & \\\hline \text{Durval} & 5 & 5 & 4 & \\\hline \text{Elisa} & 6 & 4 & 6 & \\\hline \end{array}\)	tabela nome/M/P/D/NF (coluna NF vazia a completar)
+140021	manter_imagem		triangulo com secao sombreada
+140970	latex_candidato	\(Y=\beta_0+\beta_1 x+\varepsilon\text{, com }\varepsilon\sim N(0,\sigma^2)\)	fragmento: definicao do modelo linear simples (imagens ampliadas 4x p/ conferencia, mesma questao dos 4 itens seguintes)
+140972	latex_candidato	\((\ )\ Var[\beta_0]=\left(\dfrac{1}{n}+\dfrac{\bar{x}^2}{S_{xx}}\right)\sigma^2\)	fragmento: item de julgamento V/F sobre variancia de beta0
+140974	latex_candidato	\((\ )\ \hat{\beta}_1=\bar{y}-\hat{\beta}_0\bar{x}\)	fragmento: item de julgamento V/F (formula com indices trocados no original - pode ser proposital, transcrito literalmente)
+140976	latex_candidato	\((\ )\ \hat{\beta}_0=\dfrac{\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n (x_i-\bar{x})^2}\)	fragmento: item de julgamento V/F (formula com indices trocados no original - pode ser proposital, transcrito literalmente)
+140978	latex_candidato	\((\ )\ Var[\hat{\beta}_1]=\dfrac{\sigma^2}{S_{xx}},\ S_{xx}=\sum_{i=1}^n (x_i-\bar{x})^2\)	fragmento: item de julgamento V/F sobre variancia de beta1_hat, ultimo dos 5 itens desta questao
+140991	latex_candidato	\(\hat{Y}=300+0{,}65X.\)	fragmento: equacao de regressao ajustada
+141002	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Sistema Metrico e Unidades sem relacao
+141012	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Numeros Decimais sem relacao
+141022	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Divisibilidade sem relacao
+141032	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Adicao com Naturais sem relacao
+141042	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Numeros Decimais sem relacao
+141052	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Numeros Decimais sem relacao
+141077	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Area e Perimetro sem relacao
+141080	manter_imagem		triangulo equilatero ABC com ponto D (altura)

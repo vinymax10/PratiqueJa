@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+39453	latex_candidato	\(N=\lim_{x\to9}\dfrac{x^2-6x-27}{\sqrt{x}-3}+\lim_{x\to16}\dfrac{x^2-256}{\sqrt{x}-4}\)
+39497	latex_candidato	\(\sqrt{8+\sqrt{61}}=\sqrt{x}+\sqrt{y}\)
+39512	manter_imagem		triangulo retangulo com angulos e catetos rotulados
+39728	manter_imagem		dois paralelepipedos rotulados A e B
+39752	manter_imagem		grafico de barras percentual de acertos
+39761	manter_imagem		retangulo ABCD com regiao interna R e cotas
+40365	manter_imagem		triangulo com lados e angulo x
+40513	manter_imagem		grafico de barras quantidade de pacientes
+40641	manter_imagem		tetraedro com arestas rotuladas a b c h
+40970	manter_imagem		sequencia de poligonos (figura 1 2 3)
+41160	manter_imagem		diagrama de trajeto casa-fabrica-escola com icones e distancias
+41528	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline & \textbf{1° Bimestre} & \textbf{2° Bimestre} & \textbf{3° Bimestre} & \textbf{4° Bimestre} \\\hline \textbf{Vítor} & 7 & 9 & 9 & 10 \\\hline \textbf{Mariana} & 7 & 9 & 10 & 8 \\\hline \textbf{Júlia} & 9 & 9 & 8 & 10 \\\hline \textbf{Eduardo} & 6 & 9 & 9 & 10 \\\hline \textbf{Cláudio} & 8 & 9 & 8 & n \\\hline \end{array}\)
+41538	manter_imagem		duas circunferencias tangentes a reta r, centros C e D
+41547	manter_imagem		grafico de parabola e reta com pontos A B C
+41731	manter_imagem		retangulo com quadrado interno e cotas
+41740	manter_imagem		grafico de barras por disciplina
+41832	manter_imagem		diagrama observador-lua-lago com angulo alfa e reflexo
+41907	manter_imagem		foto de barra de chocolate
+41909	manter_imagem		retangulo MNPQ com diagonais e triangulos pintados
+41919	manter_imagem		tres circunferencias internas tangentes dentro de circunferencia maior, pontos A B X Y Z

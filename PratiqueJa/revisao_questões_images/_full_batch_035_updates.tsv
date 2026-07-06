@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+43547	latex_candidato	I. \(\sqrt{\dfrac{9}{6}}=\sqrt{3}\)<<P>>II. \(\sqrt[3]{\sqrt{3}}=\sqrt[5]{3}\)<<P>>III. \(\dfrac{2}{\sqrt{5}+5}=\dfrac{5-\sqrt{5}}{10}\)
+43699	manter_imagem		tabela de balanco financeiro (ingressos/dispendios) de documento oficial escaneado, valores precisos	tabela grande e financeiramente sensível a erro de transcrição, mantida como imagem por conservadorismo
+43733	manter_imagem		triangulo retangulo 3-4-5
+43819	latex_candidato	\(f(x)=b+\log_a{x}\)	fragmento de formula, continuacao do enunciado (questao 43816)
+43821	manter_imagem		grafico de funcao logaritmica decrescente com pontos (1,3) e (4,1)
+43904	manter_imagem		3x3 circulos inscritos em quadrado
+43921	manter_imagem		circunferencia com cordas AD e BC se cruzando em P
+43930	manter_imagem		circunferencia de centro O com setor ABD sombreado
+43969	manter_imagem		triangulo XYZ com ponto O na base e P R internos
+43992	latex_candidato	\(\dfrac{7}{\sqrt{11-6\sqrt{2}}}+\dfrac{5}{\sqrt{7+\sqrt{2}}}\)
+44358	manter_imagem		quadrado com arcos formando regioes sombreadas tipo folha
+44380	manter_imagem		grafico de funcao seno periodica de 0 a 4pi
+44496	manter_imagem		duas circunferencias concentricas-tangentes com raio 5cm
+44812	manter_imagem		circunferencia trigonometrica com ponto P e angulo delta
+44821	manter_imagem		cubo com aresta 40cm
+45102	manter_imagem		grafico de linha "valores de y" em planilha
+45129	manter_imagem		duas retas paralelas cortadas por duas transversais com segmentos 2 8 x 12
+45138	manter_imagem		pentagono irregular com angulos em funcao de x
+45164	manter_imagem		grafico de linha de materia de jornal sobre emprego na construcao
+45201	manter_imagem		tabela climatica com 12 meses (13 colunas), tabela larga demais para LaTeX

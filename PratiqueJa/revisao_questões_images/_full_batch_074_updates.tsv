@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+105454	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de funcionários} & \textbf{Salário (R\$)}\\\hline 6 & 2.500{,}00\\\hline 5 & 4.000{,}00\\\hline 4 & 5.000{,}00\\\hline 1 & 8.000{,}00\\\hline\end{array}\)
+105491	manter_imagem		triangulo retangulo, angulo 30 graus, cota 3cm
+105584	manter_imagem		paralelepipedo 3D, cotas 2 1,5 1,25
+105593	manter_imagem		2 retangulos T1 T2, cotas x 1,5x 37 x-8
+105603	manter_imagem		grafico de pizza (assuntos de biologia)
+105628	manter_imagem		malha quadriculada com pontos A C E, cotas 8cm 15cm
+105760	manter_imagem		grafico de barras + grafico de pizza (exportacoes por ano e por regiao)
+105779	latex_candidato	\(\textbf{ENTENDA A MUDANÇA}\)<<P>>\(\text{A Sanepar alterou o consumo mínimo de 10 para 5 metros cúbicos, e criou mais faixas de custo.}\)<<P>>\(\textbf{ANTES}\)<<P>>\(\begin{array}{|c|c|c|}\hline \textbf{Custo (R\$)} & \textbf{Faixa de custo} & \\\hline 33{,}74 & \text{Até 10 m}^3 & \textbf{MÍNIMO}\\\hline 5{,}06\text{/m}^3 & \text{11 a 30} & \textbf{EXCEDENTE}\\\hline 8{,}63\text{/m}^3 & \text{Acima de 30} & \textbf{EXCEDENTE}\\\hline\end{array}\)<<P>>\(\textbf{HOJE}\)<<P>>\(\begin{array}{|c|c|c|}\hline \textbf{Faixa de custo} & \textbf{Custo (R\$)} & \\\hline \text{Até 5 m}^3 & 32{,}90 & \textbf{MÍNIMO}\\\hline \text{6 a 10} & 1{,}02\text{/m}^3 & \textbf{EXCEDENTE}\\\hline \text{11 a 15} & 5{,}67\text{/m}^3 & \textbf{EXCEDENTE}\\\hline \text{16 a 20} & 5{,}70\text{/m}^3 & \textbf{EXCEDENTE}\\\hline \text{21 a 30} & 5{,}75\text{/m}^3 & \textbf{EXCEDENTE}\\\hline \text{Acima de 30} & 9{,}72\text{/m}^3 & \textbf{EXCEDENTE}\\\hline\end{array}\)<<P>>\(\text{Fonte: }\textit{Gazeta do Povo}\text{, 6 de julho de 2017.}\)	infografico com 2 tabelas lado a lado (ANTES/HOJE); coluna MINIMO/EXCEDENTE era mesclada verticalmente no original (rowspan), resolvido repetindo o texto em cada linha em vez de multirow
+105789	manter_imagem		3 cubos (Cubo 1 2 3) em perspectiva
+105806	manter_imagem		2 caixas (embalagem antiga/nova), cotas 80cm 70cm 20cm 50cm 40cm h
+105815	manter_imagem		construcao geometrica de logotipo (2 triangulos formando losango)
+105832	manter_imagem		screenshot de planilha eletronica (celulas A1=? B1=4 C1=76)
+105852	manter_imagem		2 circulos tangentes com pontos A B C (9o/ultimo item da questao 105840)
+105869	manter_imagem		triangulo ABC com ponto P e altura (8o/ultimo item da questao 105858)
+105961	manter_imagem		pentagono em plano cartesiano com pontos A B C D E
+105970	manter_imagem		grafico de curva exponencial com pontos rotulados
+106002	manter_imagem		2 cubos A e B, cotas 3cm 6cm
+106075	manter_imagem		quadrilatero ADEF com ponto G, regiao sombreada, cotas 12cm 5cm 7cm 2cm
+106085	manter_imagem		quadrilatero irregular em grade de marcas (sem numeros)
+106481	manter_imagem		triangulo ABC com ponto D, regiao sombreada, 3cm - reutilizada de questao anterior (104268)

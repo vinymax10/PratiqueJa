@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+114313	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{1ª semana} & \textbf{2ª semana}\\\hline \text{Número de máquinas funcionando continuamente} & 6 & 5\\\hline \text{Número de peças produzidas} & 30.000 & 45.000\\\hline \text{Carga horária trabalhada de cada máquina em funcionamento} & \text{5 horas e 30 minutos} & y\\\hline\end{array}\)
+114323	manter_imagem		grafico de barras empilhadas percentual (meninas/meninos por ano)
+114360	manter_imagem		grafico de barras (numero de alunos por numero de faltas)
+114370	manter_imagem		2 quadrados A e B, cotas x e 2x
+114380	latex_candidato	\(\overline{BD}\)	fragmento (questao 114377, 1 de 2)
+114382	manter_imagem		retangulo ABCD com diagonal, cotas 100m 60m (2 de 2 da questao 114377)
+114399	manter_imagem		3 cubos x y z com pontos A B C
+114503	manter_imagem		ilustracao de produto (rolo de papel higienico) com texto promocional "Leve 12 Pague 11"
+115126	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Idade} & \textbf{Número de Entrevistados}\\\hline 15 & 12\\\hline 18 & 25\\\hline 25 & 32\\\hline 31 & 20\\\hline 34 & 14\\\hline 45 & 8\\\hline\end{array}\)
+115405	manter_imagem		grafico com curva e regiao sombreada sob a curva
+115441	manter_imagem		ilustracao de caminhao-tanque
+115453	manter_imagem		grafico de curva com ponto minimo V
+115463	manter_imagem		foto de fachada de predio (theatro municipal) com pontos A B C
+115693	latex_candidato	\(\begin{array}{|c|c|c|c|c|}\hline & \textbf{Portfólio 1} & & \textbf{Portfólio 2} & \\\hline \textbf{Ativo} & \textbf{Proporção} & \textbf{Beta} & \textbf{Proporção} & \textbf{Beta}\\\hline a & 0{,}2 & 0{,}95 & 0{,}25 & -1{,}25\\\hline b & 0{,}5 & 1{,}35 & 0{,}3 & -0{,}25\\\hline c & 0{,}3 & 0{,}45 & 0{,}45 & -0{,}25\\\hline \textbf{Totais} & 1 & & 1 & \\\hline\end{array}\)	imagem ampliada 3x para conferir digitos (cabecalhos Portfolio 1/2 mesclados no original, sem multicolumn)
+115710	manter_imagem		diagrama de terreno (area livre, galpao, garagem), cotas 30m 50m 8m
+115720	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Nº de pedaços} & \textbf{Comprimento de um pedaço}\\\hline 2 & 1{,}2\text{ metro}\\\hline 3 & 1{,}8\text{ metro}\\\hline \text{?} & 80\text{ centímetros}\\\hline\end{array}\)
+115894	manter_imagem		diagrama de escada entre margem inferior e superior, pontos A B, marcas de 4m (3 de 3 da questao 115889)
+115950	manter_imagem		planta baixa com cotas y 7 3 8 x 10
+115960	latex_candidato	\(\Rightarrow\)	fragmento da lista de simbolos (questao 115956) - "Condicional"; outros 4 simbolos (∧,∨,XOR,¬) ainda pendentes em ordens posteriores, nao incluidos neste lote
+115963	latex_candidato	\(\Leftrightarrow\)	fragmento da lista de simbolos (questao 115956) - "Bicondicional", imagem ampliada 6x para confirmar seta dupla

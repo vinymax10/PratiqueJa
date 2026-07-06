@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+92489	manter_imagem		4 pares de triangulos (I II III IV) com angulos/lados para comparacao de semelhanca
+92569	manter_imagem		piramide/estrela 3D (base quadrada com 4 triangulos), altura h
+92684	manter_imagem		grafico de parabola (0 a 150, pico ~300)
+92694	latex_candidato	\(\begin{array}{|l|c|}\hline & \textbf{Palestra} & \textbf{Número de Participantes}\\\hline \text{Primeiro grupo} & \text{Efeitos prejudiciais do sinal de wi-fi} & 175\\\hline \text{Segundo grupo} & \text{Efeitos benéficos do sinal de wi-fi} & 225\\\hline\end{array}\)
+92741	manter_imagem		grafico de curva C(x), 0 a 80, valor inicial 4000
+92757	manter_imagem		grafico de linha crescente (0 a 40, ate 350)
+92774	manter_imagem		tetraedro ABCD com cotas 4cm 3cm 2cm
+92887	latex_candidato	\(\begin{array}{|c|l|c|}\hline \textbf{I} & \text{Hipótese} & a=b\\\hline \textbf{II} & \text{Multiplique ambos os membros por }a & a^2=ab\\\hline \textbf{III} & \text{Subtraia }b^2\text{ de ambos os membros} & a^2-b^2=ab-b^2\\\hline \textbf{IV} & \text{Aplique a fatoração a ambos os membros} & (a+b)(a-b)=b(a-b)\\\hline \textbf{V} & \text{Cancele os fatores comuns} & (a+b)=b\\\hline \textbf{VI} & \text{Use a hipótese de que }a=b & 2b=b\\\hline \textbf{VII} & \text{Divida ambos os membros por }b & 2=1\\\hline\end{array}\)
+92971	manter_imagem		diagrama de terreno entre Rua A e Rua B, cotas 36m 60m 48m 156m
+92995	manter_imagem		grafico de temperatura por dia (1º a 10º) com valores anotados no eixo
+93011	manter_imagem		triangulo retangulo cotas 12m 4m 3m e incognita ?
+93027	manter_imagem		grafico de curva N(t) com minimo marcado em (3,2) e (1,4)
+93156	latex_candidato	\(\text{( ) }B\text{ é maior que }A.\)<<P>>\(\text{( ) O valor de }A\text{ excede o valor de }B\text{ em }13860.\)<<P>>\(\text{( ) }2A-B=62370\)<<P>>\(\text{( ) }A+B=N=83160\)
+93175	latex_candidato	\(\text{I) }\begin{vmatrix}-2 & 7 & 13 & -21\\-2 & 1 & 5 & 8\\0 & 0 & 2^{-1} & 11\\0 & 0 & 0 & 3\end{vmatrix}=-3\)<<P>>\(\text{II) }\begin{vmatrix}\dfrac{1}{2} & \pi & 13 & 25\\-7 & 5 & 6 & 3\\0 & 0 & 0 & 0\\21 & -8 & -4 & -3\end{vmatrix}=0\)<<P>>\(\text{III) A matriz }A=\begin{pmatrix}-1 & 2 & -3 & 5\\4 & 1 & -2 & 9\\6 & -3 & 4 & -1\\10 & -11 & -7 & 6\end{pmatrix}\text{ é singular, isto é, não possui inversa.}\)<<P>>\(\text{IV) O conjunto solução da equação }\begin{vmatrix}x & 1 & -2\\3 & 2 & -1\\4 & 1 & x\end{vmatrix}+\begin{vmatrix}-2 & 2\\1 & 4\end{vmatrix}=0\text{ possui dois elementos cujo produto é igual a }-2.\)	transcrito com zoom 4x para conferir digitos; conferir na revisao manual mesmo assim
+93185	manter_imagem		2 triangulos retangulos com incognitas alfanumericas (24, x-14, x+2, y)
+93410	latex_candidato	\(\Rightarrow \text{Condicional}\)<<P>>\(\Leftrightarrow \text{Bicondicional}\)<<P>>\(\wedge \text{ Conector "e"}\)<<P>>\(\vee \text{ Conector "ou"}\)<<P>>\(\underline{\vee} \text{ Conector "ou" exclusivo}\)<<P>>\(\neg \text{ Negação da proposição}\)	legenda de simbolos logicos (mesma imagem reutilizada em 93417)
+93421	latex_candidato	\(\Rightarrow \text{Condicional}\)<<P>>\(\Leftrightarrow \text{Bicondicional}\)<<P>>\(\wedge \text{ Conector "e"}\)<<P>>\(\vee \text{ Conector "ou"}\)<<P>>\(\underline{\vee} \text{ Conector "ou" exclusivo}\)<<P>>\(\neg \text{ Negação da proposição}\)	legenda de simbolos logicos (mesma imagem reutilizada em 93406)
+93424	manter_imagem		paralelepipedo com cotas em unidades mistas (3000 mm, 400 cm, 20 dm)
+93490	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de dias} & \textbf{Temperatura em °C}\\\hline 5 & 20\\\hline 10 & 27\\\hline 5 & 32\\\hline 2 & 35\\\hline 8 & 30\\\hline\end{array}\)
+93500	manter_imagem		2 graficos de pizza (turismo no brasil 2015/2016, turistas argentinos)

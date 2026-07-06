@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+36612	manter_imagem		gráficos de pizza (igual a 32847)
+36680	manter_imagem		diagrama geométrico (triângulo com altura, igual a 36603)
+36735	manter_imagem		diagrama geométrico (idêntico a 36603)
+36767	manter_imagem		diagrama geométrico (trapézio, igual a 36594)
+36847	manter_imagem		gráficos de pizza (igual a 32847)
+36871	manter_imagem		diagrama geométrico (triângulo com altura, igual a 36603)
+36890	manter_imagem		diagrama geométrico (trapézio, igual a 36594)
+36974	manter_imagem		gráficos de pizza (igual a 32847)
+36998	manter_imagem		diagrama geométrico (círculo com ângulo em radianos)
+37039	manter_imagem		diagrama geométrico (retas concorrentes com ângulos)
+37048	manter_imagem		diagrama geométrico (trajetória parabólica)
+37065	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Altura dos alunos do 3º ano do Ensino Médio} & \\\hline \textbf{Altura do aluno (cm)} & \textbf{Total de alunos} \\\hline 150\vdash 158 & 02 \\\hline 158\vdash 166 & 08 \\\hline 166\vdash 174 & 10 \\\hline 174\vdash 182 & 13 \\\hline 182\vdash 190 & 07 \\\hline\end{array}\)
+37175	manter_imagem		figura geométrica (estrela poligonal)
+37216	latex_candidato	\(\begin{pmatrix}\sqrt{2} & 1 & \sqrt{2} \\1 & 1 & 3 \\\sqrt{2} & 3 & \sqrt{2}\end{pmatrix}\)	matriz pequena e de leitura difícil — conferir os valores da 1ª linha contra a imagem original
+37304	latex_candidato	\(\dfrac{1}{\sqrt{2}-\sqrt{3}}\)
+37350	manter_imagem		gráfico de funções (curvas f, g com pontos)
+37370	manter_imagem		ilustração (espiral)
+37417	manter_imagem		gráfico de função polinomial
+37426	manter_imagem		ilustração/foto (impressora 3D)
+37460	manter_imagem		gráfico de pontos (valores por ano)

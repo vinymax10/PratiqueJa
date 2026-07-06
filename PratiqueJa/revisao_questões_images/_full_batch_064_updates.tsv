@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+94407	manter_imagem		retangulo com moldura, cotas 2m 3m 3m 4m (figura similar a 94394)
+94452	manter_imagem		foto de predio (camara municipal de capanema)
+94460	manter_imagem		grafico de linha (evolucao do numero de eleitores, capanema-pa)
+94481	manter_imagem		tabela larga (13 colunas: numero final do NIS + 12 meses) - excede limite de colunas
+94492	manter_imagem		mesma tabela larga reutilizada (13 colunas) - excede limite de colunas
+94564	latex_candidato	\(\textbf{População Residente por ano}\)<<P>>\(\begin{array}{|c|c|c|}\hline \textbf{Ano} & \textbf{População} & \textbf{Método}\\\hline 2009 & 6.118.727 & \text{Estimativa}\\\hline 2008 & 6.052.587 & \text{Estimativa}\\\hline 2007 & 6.049.251 & \text{Estimativa}\\\hline 2006 & 5.958.295 & \text{Estimativa}\\\hline 2005 & 5.866.590 & \text{Estimativa}\\\hline 2004 & 5.686.503 & \text{Estimativa}\\\hline 2003 & 5.607.160 & \text{Estimativa}\\\hline 2002 & 5.527.718 & \text{Estimativa}\\\hline 2001 & 5.448.702 & \text{Estimativa}\\\hline 2000 & 5.356.360 & \text{Censo}\\\hline\end{array}\)<<P>>\(\text{Fonte: IBGE, Censos e Estimativas}\)
+94656	manter_imagem		quadrado ABCD com losango PMNO inscrito, cota 8cm
+94678	manter_imagem		grafico de barras (area de vegetacao natural por periodo)
+94962	manter_imagem		grafico de barras empilhadas (percentual positivo/negativo por exame)
+94979	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Tipo do produto} & \textbf{Preço unitário de venda}\\\hline A & \text{R\$ }10{,}00\\\hline B & \text{R\$ }12{,}00\\\hline C & \text{R\$ }15{,}00\\\hline\end{array}\)
+95284	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{Números de vezes} & \textbf{Frequência absoluta} & \textbf{Frequênica Absoluta Acumulada}\\\hline 0 & 3 & 3\\\hline 0 & 3 & 3\\\hline 1 & 10 & 13\\\hline 2 & 32 & 45\\\hline 3 & 2 & 47\\\hline 4 & 2 & 49\\\hline 5 & 1 & 50\\\hline\end{array}\)	primeira linha duplicada (0,3,3) no material original, confirmado com zoom 3x - transcrito literalmente sem corrigir; cabecalho "Frequênica" tambem preservado como no original (possivel typo de "Frequência")
+95337	manter_imagem		grafico de barras (frequencia absoluta x salarios)
+95418	latex_candidato	\(\overline{AB}\)	fragmento (1 de 2), continuacao de "o segmento ___ e tangente..." (questao 95415)
+95420	latex_candidato	\(\overline{AB}\)	fragmento (2 de 2), continuacao de "determine a medida de ___." (questao 95415) - mesmo segmento AB citado 2x no enunciado, nao e redundancia
+95422	manter_imagem		circunferencia com centro O, pontos A B C, segmento tangente
+95431	latex_candidato	\(\overline{AB}\equiv\overline{AC}\)	fragmento continuando "sabendo-se que ___ e que M e ponto medio..." (questao 95428)
+95433	manter_imagem		triangulo ABC com ponto medio M, angulo 42 graus, x e y marcados
+95456	manter_imagem		circunferencia com centro O, pontos A B C, angulo 30 graus
+95465	manter_imagem		diagrama de retas m n r s com angulos 123 108 e 2x-11 graus
+95474	latex_candidato	\(\overline{MN}\parallel\overline{BC}\)	fragmento continuando "Seja o triangulo ABC abaixo, em que ___." (questao 95471) - questao tem mais 3 imagens pendentes em ordens posteriores (95476,95479,95481), nao incluidas neste lote

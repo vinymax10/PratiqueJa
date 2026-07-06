@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+14690	manter_imagem		diagrama geométrico (triângulos)
+14926	manter_imagem		diagrama geométrico (quadrados)
+15033	manter_imagem		diagrama de planta (área com legendas)
+15064	manter_imagem		gráfico de pizza
+15080	manter_imagem		diagrama geométrico (retângulo com diagonal)
+15214	manter_imagem		diagrama geométrico (triângulo)
+15266	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Máquina} & \textbf{Tempo trabalhado (em minutos)} \\\hline A & 1{,}2x \\\hline B & x \\\hline C & 564 \\\hline\end{array}\)
+15290	manter_imagem		diagrama geométrico (prisma retangular)
+15572	latex_candidato	\(\overline{AB}\)	fragmento pequeno (notação de segmento), parte da questão 15569 junto com 15574/15576/15578/15580 (diagrama)
+15574	latex_candidato	\(\overline{AC}\)	fragmento pequeno (notação de segmento), parte da questão 15569
+15576	latex_candidato	\(\overline{CD}\)	fragmento pequeno (notação de segmento), parte da questão 15569
+15578	latex_candidato	\(\overline{AD}\)	fragmento pequeno (notação de segmento), parte da questão 15569
+15580	manter_imagem		diagrama geométrico (mesa com triângulo, referenciado pelos segmentos AB/AC/CD/AD da mesma questão)
+15778	manter_imagem		gráfico de barras
+15805	manter_imagem		diagrama geométrico (cilindro)
+15816	manter_imagem		gráficos de funções
+15853	manter_imagem		diagrama de planta (cômodos coloridos)
+15909	latex_candidato	\(\dfrac{2^{n+3}\cdot 2 - 2^{n-1}\cdot 7}{5\cdot 2^{n-4}}\)
+15986	manter_imagem		gráficos de funções
+15988	latex_candidato	\(f(x) = a^x,\ a>1\)	gráfico permanece na imagem, só o texto da fórmula virou parágrafo

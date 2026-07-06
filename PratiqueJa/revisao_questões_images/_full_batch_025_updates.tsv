@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+33598	manter_imagem		diagrama geométrico (círculo em quadrado com áreas)
+33618	manter_imagem		ilustração (prédio com pipa/pessoa)
+33640	manter_imagem		diagrama geométrico (cubo)
+33715	manter_imagem		gráficos de pizza (igual a 32847)
+33746	latex_candidato	\(\overline{AC}\)	fragmento pequeno (notação de segmento), parte da questão 33743
+33748	latex_candidato	\(\overline{AB}\)	fragmento pequeno, parte da questão 33743
+33750	manter_imagem		diagrama geométrico (triângulo com ângulo, referenciado pelos segmentos da mesma questão)
+33843	manter_imagem		diagrama geométrico (ângulos com medidas)
+33950	manter_imagem		gráfico de barras
+34014	manter_imagem		diagrama geométrico (cubo, igual a 33640)
+34036	latex_candidato	\(\dfrac{(4-1)\cdot 5+3+7}{5\cdot 2-(7-2)}\)	expressão idêntica à do parágrafo 33503 (outra questão)
+34050	manter_imagem		diagrama geométrico (cubo, igual a 33640)
+34309	manter_imagem		diagrama geométrico (trapézio com variáveis)
+34317	manter_imagem		diagrama geométrico (círculo com reta)
+34331	manter_imagem		gráfico de função exponencial
+34458	manter_imagem		diagrama geométrico (trapézio irregular)
+34510	manter_imagem		diagrama geométrico (casa e poste)
+34520	manter_imagem		diagrama geométrico (retângulo com lados algébricos)
+34551	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Número de máquinas em operação} & \textbf{Número de horas trabalhadas por dia} & \textbf{Quantidade de peças produzidas} & \textbf{Número de dias trabalhados} \\\hline 5 & 8 & 90\,000 & 6 \\\hline 8 & 6 & 162\,000 & x \\\hline\end{array}\)
+34561	manter_imagem		diagrama geométrico (caixa com dimensões)

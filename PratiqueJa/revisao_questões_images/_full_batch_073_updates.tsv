@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+104268	manter_imagem		triangulo ABC com ponto D, regiao sombreada, 3cm
+104385	manter_imagem		quadrado com regioes a e b (diagrama algebrico)
+104447	manter_imagem		poligono em malha quadriculada
+104457	manter_imagem		3 quadrados de tamanhos diferentes (576/324/144 cm2) - reutilizada de questao anterior
+104481	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de alunos} & \textbf{Notas}\\\hline 6 & 5{,}0\\\hline 5 & 8{,}0\\\hline 4 & 8{,}5\\\hline 5 & X\\\hline\end{array}\)	mesma tabela reutilizada de questao anterior (99663/99667)
+104491	manter_imagem		grafico de barras (percentual por regiao 2014/2015) - reutilizado de questao anterior
+104571	manter_imagem		paralelepipedo 3D, cotas 10cm 20cm 12cm
+104590	manter_imagem		anel circular com pontos A B C
+104608	manter_imagem		infografico com logos de times de futebol, media de publico e ocupacao (mini graficos de pizza)
+104643	manter_imagem		diagrama de irrigacao circular (torre fixa, torres moveis, area irrigada)
+104652	manter_imagem		ilustracao de pneu com medidas 195/55
+104661	manter_imagem		moldura quadrada, cotas 4cm e 2500cm2
+104670	manter_imagem		diagrama com pontos A D (linha superior) B C (linha inferior), cota 2m, diagonais
+104680	manter_imagem		ilustracao de fio/mola em espiral (foto)
+104697	manter_imagem		3 graficos comparativos (linhas, quadrados, cubos) - Grafico 1 2 3
+104868	manter_imagem		grafico de barras (carros vendidos por mes)
+105064	manter_imagem		circulo com quadrilatero inscrito ABCD sombreado
+105113	manter_imagem		grafico de barras agrupadas (matematica/quimica por quadrimestre)
+105326	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Marca} & \textbf{Quantidade de lenços} & \textbf{Tamanho} & \textbf{Valor total}\\\hline A & 50 & 20\text{ cm x }15\text{ cm} & \text{R\$ }6{,}30\\\hline B & 100 & 20\text{ cm x }10\text{ cm} & \text{R\$ }7{,}70\\\hline C & 100 & 15\text{ cm x }10\text{ cm} & \text{R\$ }6{,}00\\\hline D & 100 & 20\text{ cm x }15\text{ cm} & \text{R\$ }11{,}70\\\hline E & 50 & 20\text{ cm x }10\text{ cm} & \text{R\$ }3{,}90\\\hline\end{array}\)
+105362	manter_imagem		grafico de barras (expectativa de vida 1940/2017)

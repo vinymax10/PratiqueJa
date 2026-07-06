@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+124345	manter_imagem		trapezio ABCD com altura h e ponto H
+124359	manter_imagem		cilindro obliquo, cotas 6cm 4cm, angulo 60 graus
+124367	manter_imagem		circulo com triangulo ABC, pontos D E O
+124389	manter_imagem		triangulo em plano cartesiano, pontos A B C, retas r s, cotas 10 20
+124772	manter_imagem		caixa 3D, cotas x+10 x 45
+124783	manter_imagem		figura irregular, cotas 50cm 20cm 15cm (x3)
+124794	manter_imagem		2 retangulos A B, cotas x 6 x-3 8
+124849	manter_imagem		mesma figura irregular reutilizada (50cm 20cm 15cm)
+124859	manter_imagem		mesmos retangulos A B reutilizados
+124956	manter_imagem		caixa 3D, cotas 25 h 12 15
+124967	manter_imagem		hexagono, cotas x x+8
+124978	manter_imagem		retangulo DCAB com regiao Galpao, cota 9m
+124989	manter_imagem		grafico de barras (produto A/B por dia da semana) com incognita x
+125006	manter_imagem		diagrama de caminho C B F L S, cotas x+100 300 800 x
+125023	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \textbf{Produto} & \textbf{Nº de unidades no estoque} & \textbf{Nº de unidades vendidas} & \textbf{Nº de unidades restantes}\\\hline A & & x & 25\\\hline B & & & \\\hline C & & x+3 & 32\\\hline \textbf{Total} & 120 & 3x & 75\\\hline\end{array}\)	tabela com varias celulas vazias (a preencher pelo aluno) no original
+125095	manter_imagem		retangulo, cotas x-1 2x
+125136	latex_candidato	\(g:\mathbb{R}\rightarrow\ ]1,+\infty[\)	fragmento (dominio/contradominio da funcao), 1 de 2 da questao 125133
+125138	manter_imagem		grafico de funcao exponencial - 2 de 2 da questao 125133
+125239	manter_imagem		poligono irregular, cotas 7cm 5cm 3cm 3cm 2cm 4cm
+125307	manter_imagem		tronco de cone + foto de copo, cotas r g h R (3 de 3 da questao 125302)

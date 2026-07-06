@@ -1,0 +1,41 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+136489	manter_imagem		duas retas paralelas com transversal, angulos x e y
+136504	manter_imagem		dois quadrados A1 (3cm) e A2 (x)
+136530	manter_imagem		retangulo 6cm x + triangulo 3cm/5cm
+136659	latex_candidato	\(\begin{array}{|l|l|l|l|}\hline \textbf{Loja A} & \text{6 guarda-roupas} & \text{2 sofás} & \text{3 mesas}\\\hline \textbf{Loja B} & \text{7 sofás} & \text{4 mesas} & \text{3 guarda-roupas}\\\hline \textbf{Loja C} & \text{3 mesas} & \text{3 sofás} & \text{2 guarda-roupas}\\\hline \end{array}\)	mesma tabela reutilizada da questao 135732
+136705	manter_imagem		grafico de barras taxa media de desemprego com fonte
+136790	manter_imagem		diagrama "Unidade Prisional" com ponto E, 50m, muro sul/oeste
+136799	manter_imagem		dois retangulos P/Q com medidas algebricas 0,75x x 3/5x 5/6x
+136816	manter_imagem		paralelepipedo com medidas 8 8 h
+136879	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Horas/dia} & \textbf{Número de funcionários}\\\hline 4 & 6\\\hline 6 & 8\\\hline 8 & 3\\\hline \end{array}\)	tabela horas/dia x funcionarios (tabela antiga, previsao 30 dias)
+136881	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Horas/dia} & \textbf{Número de funcionários}\\\hline 4 & 4\\\hline 6 & X\\\hline 8 & 10\\\hline \end{array}\)	tabela horas/dia x funcionarios (tabela nova, previsao 20 dias, incognita X); mesma questao 136874 do item acima, sem problema de ordenacao pois ambas viraram latex_candidato em ordens adjacentes 3/4
+136944	latex_candidato	\(\begin{array}{r}2a1b\\3c5b\\+\,141c\\\hline 7294\end{array}\)	adicao criptoaritmetica (cada letra representa um algarismo)
+137020	latex_candidato	\(\begin{array}{r}aba7\\63fd\\+\,ab56\\\hline 19071\end{array}\)	adicao criptoaritmetica (cada letra representa um algarismo)
+137029	manter_imagem		padrao preto/branco tipo cata-vento em malha quadriculada
+137071	manter_imagem		padrao de circulos em arranjo triangular (10 circulos)
+137105	manter_imagem		matriz vitaminas/sucos (x, 60, 68, x-5); conteudo identico ja existe como texto no paragrafo 164976 da mesma questao (ordem1) - imagem redundante, nao duplicar
+137185	manter_imagem		circulo com quadrado inscrito e icone de tesoura
+137194	manter_imagem		seta com medidas 15 e 4
+137318	manter_imagem		triangulo com angulo x e 30 graus
+137351	manter_imagem		planificacao em cruz (geometria espacial)
+137360	manter_imagem		triangulo com rotulos "Rampa" e "Solo"
+137388	manter_imagem		circulo com pontos A B e centro C
+137397	manter_imagem		triangulo ABC com pontos D E
+137405	manter_imagem		grafico de dispersao numero de moedas por pessoa
+137552	manter_imagem		diagrama de quarto com 4 paredes rotuladas
+137588	manter_imagem		padrao de circulos em arranjo triangular (figura reutilizada de 137071)
+137603	manter_imagem		losango listrado preto/branco
+137612	manter_imagem		fluxograma de formas geometricas com operacoes matematicas
+137680	manter_imagem		circulo com secoes triangulares preto/branco
+137701	latex_candidato	\(\overline{AC}\)	fragmento de notacao de segmento (diagonal do retangulo ABCD)
+137783	manter_imagem		histograma numero de funcionarios faltantes com legenda "Figura 3"
+137876	manter_imagem		paralelogramo base do prisma com legenda "Figura 1", medidas 4cm 3cm 5cm
+137915	manter_imagem		grafico de barras desempenho do setor de servicos com fonte
+137936	manter_imagem		trapezio "Area de Plantio" com angulo de 60 graus
+137938	latex_candidato	\(AB=30\sqrt{3}\text{ m}\)	fragmento completando medida do segmento AB
+137940	latex_candidato	\(\sqrt{3}=1{,}7\)	fragmento completando aproximacao a ser usada, mesma questao 137932 dos 2 itens acima (diagrama+2 fragmentos)
+137948	manter_imagem		triangulo ABC com pontos D E, medida 6
+137956	manter_imagem		circulo com pontos A B e centro O
+137976	manter_imagem		grafico de parabola com pontos A B C
+138003	manter_imagem		grafico velocidade x tempo com regiao sombreada A B C
+138067	manter_imagem		triangulo ABC entre retas paralelas z e w

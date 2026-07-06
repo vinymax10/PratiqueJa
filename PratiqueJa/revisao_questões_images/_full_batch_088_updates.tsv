@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+125392	manter_imagem		poligono com angulos rotulados (95 92 134 220 99 graus), incognita theta
+125506	manter_imagem		retangulo ABCD com regioes Z W Y, cotas 30 x 40
+125627	manter_imagem		tabela com pictogramas (figuras de barco/carro adquiridas por participante)
+125636	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Nome da peça} & \textbf{Valor da peça} & \textbf{Numeração}\\\hline \text{Maxi} & 7\text{ pontos} & \text{130 até 149}\\\hline \text{Top} & 5\text{ pontos} & \text{110 até 129}\\\hline \text{Bop} & 3\text{ pontos} & \text{90 até 109}\\\hline \text{Mini} & 1\text{ ponto} & \text{70 até 89}\\\hline\end{array}\)
+125646	manter_imagem		grafico de linha (temperatura por hora do dia)
+125657	latex_candidato	\(\textbf{RECIBO - Estacionamento do Parque}\)<<P>>\(\text{1ª hora} \ldots\ldots \text{R\$ }12{,}00\)<<P>>\(\text{Demais horas (5 x 8)} \ldots\ldots \text{R\$ }40{,}00\)<<P>>\(\text{Imposto (15\%)} \ldots\ldots \text{R\$ }7{,}80\)<<P>>\(\textbf{Total} \ldots\ldots \text{R\$ }59{,}80\)	recibo com linhas pontilhadas representadas como reticencias
+125691	manter_imagem		foto antiga de familia (1948) com nomes e idades rotulados
+125705	manter_imagem		diagrama tipo casa (Figura 1) com pontos E F B C G H A D, cotas 4cm 10cm
+125711	manter_imagem		caixa 3D com telhado (Figura 2), cota 1,2cm
+125725	manter_imagem		mesma Figura 1 reutilizada (2 de 3 da questao 125718)
+125731	manter_imagem		mesma Figura 2 reutilizada (4 de 3... item posterior da questao 125718)
+125734	latex_candidato	\(\overline{EF},\)	fragmento continuando "a medida de ___ em cm e" (questao 125718, ultimo item)
+125747	manter_imagem		mesma Figura 1 reutilizada (questao 125740)
+125753	manter_imagem		mesma Figura 2 reutilizada (questao 125740)
+125769	manter_imagem		retas paralelas r s t com paralelogramo, pontos F E C D A B u v, cotas 10cm 15cm 15cm x
+125794	manter_imagem		subtracao com digitos borrados/manchados (5637 - 9?5 = 46?2)
+125804	manter_imagem		grafico de barras (faixa etaria)
+125861	manter_imagem		retangulo ABCD com diagonal y, cota 1,5m
+125871	manter_imagem		caixa 3D, cotas h 20 12
+125965	manter_imagem		grafico de linha (taxa de mortalidade infantil)

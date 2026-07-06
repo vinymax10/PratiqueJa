@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+6191	manter_imagem		diagrama (braço robótico com posições A-E)
+6206	manter_imagem		diagrama (braço robótico com posições A-E)
+6453	manter_imagem		diagrama geométrico (quadrado com altura e área)
+6469	manter_imagem		diagrama geométrico (polígono irregular com medidas)
+6530	manter_imagem		gráfico de barras + mapa do Brasil
+6897	manter_imagem		diagrama geométrico (retas paralelas cortadas por transversais)
+6926	latex_candidato	\(23,\ 32,\ 41,\ 50,\ 59,\ 68,\ \ldots\)
+6935	latex_candidato	\(\begin{array}{l}\text{Pagamento à vista: R\$950,00} \\\text{Pagamento a prazo: R\$997,50}\end{array}\)	ilustração da cafeteira permanece como imagem, só o texto de preço virou parágrafo
+6958	manter_imagem		diagrama geométrico (cubo com dimensões)
+6973	manter_imagem		diagrama geométrico (quadrilátero com medidas)
+7032	manter_imagem		gráfico de linha (série histórica)
+7065	manter_imagem		diagrama geométrico (círculo com ângulo)
+7093	manter_imagem		tirinha/quadrinho (humor)
+7119	manter_imagem		charge/cartoon (humor)
+7225	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{frequência} & \textbf{nota} \\\hline 3 & 0 \\\hline 7 & 2 \\\hline 8 & 4 \\\hline 10 & 6 \\\hline 8 & 8 \\\hline 4 & 10 \\\hline\end{array}\)
+7232	manter_imagem		histograma
+7330	manter_imagem		diagrama geométrico (triângulos com ângulos)
+7337	manter_imagem		diagrama geométrico (quadrado com diagonal e ângulo)
+7344	manter_imagem		diagrama geométrico (composição de triângulos retângulos)
+7356	manter_imagem		diagrama geométrico (triângulo inscrito em retângulo)

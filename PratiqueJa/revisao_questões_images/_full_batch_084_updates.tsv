@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+121400	latex_candidato	\(\dfrac{4ab-2b^2+6bc}{2a^2-ab+3ac}=\dfrac{2b}{a}\)
+121420	latex_candidato	\(\begin{array}{|l|c|}\hline \text{Música} & 135\text{ alunos}\\\hline \text{Dança} & 108\text{ alunos}\\\hline \text{Imitação} & 95\text{ alunos}\\\hline \text{Música e Dança} & 49\text{ alunos}\\\hline \text{Música e Imitação} & 58\text{ alunos}\\\hline \text{Dança e Imitação} & 42\text{ alunos}\\\hline \text{Música, Dança e Imitação} & 17\text{ alunos}\\\hline\end{array}\)	imagem ampliada 3x - primeira leitura tinha 2 valores errados (49/58 lidos como 68/62) e faltava a linha "Danca e Imitacao", corrigido apos zoom
+121524	manter_imagem		grade irregular em formato L (1, x, x / 4x / 11) - layout nao retangular, dificil reproduzir fielmente em array
+121616	manter_imagem		infografico "consumo per capita" com bandeiras de paises
+121708	manter_imagem		grafico de barras 3D (agua consumida por dia da semana)
+121718	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de aulas} & \textbf{Preço total (R\$)}\\\hline 2 & 100{,}00\\\hline 4 & 150{,}00\\\hline 8 & 250{,}00\\\hline 10 & 300{,}00\\\hline\end{array}\)
+121777	manter_imagem		infografico "preco da gasolina pelo mundo" com ilustracoes (posto de gasolina, moedas)
+121788	manter_imagem		grafico de linha (PIB por pais, multiplas series)
+121830	manter_imagem		parede com padrao de tijolos, cotas 50cm 50cm 5m 4m
+121840	manter_imagem		diagrama de 2 postes, cotas 60m 32m 96m
+121869	manter_imagem		caixa 3D, cotas x x h
+121887	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Formas de pagamento} & \textbf{Valores (em milhares de reais)}\\\hline \text{Dinheiro} & 256\\\hline \text{Cartões de débito e crédito} & 352\\\hline \text{Cheque} & 32\\\hline\end{array}\)	3 de 4 da questao 121882
+121889	manter_imagem		grafico de pizza (dinheiro/cartoes/cheque) - 4 de 4 da questao 121882
+121931	manter_imagem		retangulo ABCD com regioes Q R, cotas y 0,8x x
+121933	latex_candidato	\(\dfrac{y}{0{,}8x}\)	fragmento (3 de 3 da questao 121927)
+121943	manter_imagem		diagrama de poste com sombra, cotas x 2x y 0,9
+122015	manter_imagem		grafico de barras (grupos I-V, numero de pessoas)
+122024	manter_imagem		quadrilatero ABCD com regioes I II, cotas 30 20
+122033	manter_imagem		2 cubos P M, cotas a 1,5a
+122084	manter_imagem		triangulo ABC com pontos E D, cota 3cm

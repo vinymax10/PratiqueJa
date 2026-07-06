@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+87243	manter_imagem		grafico de barras caixas de laranja compradas por tipo
+87253	manter_imagem		grafico de linha acidentes de transito fatais por mes
+87263	latex_candidato	\(\overline{XY}\)	fragmento de notacao de segmento (1 de 3), continuacao do enunciado (questao 87260)
+87265	latex_candidato	\(\overline{YZ}\)	fragmento de notacao de segmento (2 de 3), continuacao do enunciado (questao 87260)
+87267	latex_candidato	\(\overline{XZ}\)	fragmento de notacao de segmento (3 de 3), continuacao do enunciado (questao 87260)
+87269	manter_imagem		triangulo XYZ com cotas 24cm e 7cm
+87451	latex_candidato	\(\begin{array}{|l|l|}\hline \textbf{Dia da semana} & \textbf{Consumo em litros}\\\hline \text{Segunda-feira} & \text{Um quinto do total}\\\hline \text{Terça-feira} & \text{Um quarto do restante}\\\hline \text{Quarta-feira} & 1.200\\\hline \text{Quinta-feira} & \text{Metade do restante}\\\hline \text{Sexta-feira} & \text{Três quintos do restante}\\\hline \end{array}\)
+87459	manter_imagem		retangulo EFBC sobre triangulo ABC com angulos 75 50 55 e X interno
+87486	manter_imagem		piscina quadrada com contorno de placas
+87514	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Meses Completos} & \textbf{Preço}\\\hline 1 & \text{R\$ 700,00}\\\hline 2 & \text{R\$ 679,00}\\\hline 3 & \text{R\$ 658,00}\\\hline \end{array}\)
+87536	manter_imagem		retangulo ABCD com canteiro PQRS interno sombreado, cotas 8m 50m
+87538	latex_candidato	\(\overline{PR}\)	fragmento de notacao de segmento (diagonal), continuacao do enunciado (questao 87532)
+87540	latex_candidato	\(\overline{AD}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 87532)
+87542	latex_candidato	\(\overline{RS}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 87532)
+87559	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Marcas} & \textbf{Nº de litros}\\\hline A & 5\\\hline B & 3\\\hline C & 2\\\hline \end{array}\)
+87613	manter_imagem		paralelepipedo (reservatorio) com nivel de agua 0,8m e base x por x
+87623	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento (1 de 3), continuacao do enunciado (questao 87620)
+87625	latex_candidato	\(\overline{BC}\)	fragmento de notacao de segmento (2 de 3), continuacao do enunciado (questao 87620)
+87627	latex_candidato	\(\overline{AC}\)	fragmento de notacao de segmento (3 de 3), continuacao do enunciado (questao 87620)
+87629	manter_imagem		triangulo retangulo ABC com cotas 3x/4, 100m e x

@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+96485	manter_imagem		triangulo retangulo ABC, cota 150m
+96604	latex_candidato	\(\textbf{Ofertas da semana}\)<<P>>\(\text{(válidas de 06.01.20 a 11.01.20)}\)<<P>>\(\begin{array}{|l|c|}\hline \textbf{Produto} & \textbf{Preço – 1 quilograma}\\\hline \text{Banana prata} & \text{R\$ }3{,}20\\\hline \text{Cebola} & \text{R\$ }2{,}60\\\hline \text{Laranja pera} & \text{R\$ }2{,}00\\\hline \text{Mamão} & \text{R\$ }6{,}00\\\hline \text{Vagem} & \text{R\$ }9{,}00\\\hline\end{array}\)
+96677	manter_imagem		grafico de barras (notas por turma A B C)
+96694	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Nota} & \textbf{Quantidade de alunos}\\\hline 0{,}0 & 1\\\hline 1{,}0 & 3\\\hline 2{,}0 & 4\\\hline 3{,}0 & 7\\\hline 4{,}0 & \text{?}\\\hline 5{,}0 & \text{?}\\\hline\end{array}\)
+96732	manter_imagem		diagrama de retas concorrentes com pontos M N O P Q R
+96800	manter_imagem		icone/pictograma (barco com bandeira e sol)
+96812	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Atividade} & \textbf{Dias da semana} & \textbf{Horas por dia}\\\hline \text{Brincadeiras no parque} & \text{2ª e 4ª} & 2\\\hline \text{Descanso} & \text{2ª, 3ª, 4ª, 5ª e 6ª} & 1\\\hline \text{Atividades de dança e música} & \text{3ª e 6ª} & 3\\\hline \text{Atividade de pintura} & \text{4ª e 5ª} & 2\\\hline \text{Roda de conversa} & \text{2ª, 5ª e 6ª} & 1\\\hline\end{array}\)
+96822	manter_imagem		triangulo retangulo (cozinha, sala de atividades, refeitorio), cotas 5m 12m x
+96881	manter_imagem		quadrilatero (paralelogramo) com cotas 215m 115m
+96891	manter_imagem		grafico de barras (despesas em mil reais)
+97073	latex_candidato	\(\textbf{Ofertas da semana}\)<<P>>\(\text{(válidas de 06.01.20 a 11.01.20)}\)<<P>>\(\begin{array}{|l|c|}\hline \textbf{Produto} & \textbf{Preço – 1 quilograma}\\\hline \text{Banana prata} & \text{R\$ }3{,}20\\\hline \text{Cebola} & \text{R\$ }2{,}60\\\hline \text{Laranja pera} & \text{R\$ }2{,}00\\\hline \text{Mamão} & \text{R\$ }6{,}00\\\hline \text{Vagem} & \text{R\$ }9{,}00\\\hline\end{array}\)	mesma tabela reutilizada da questao 96601
+97154	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \textbf{Cargo} & \textbf{Homens} & \textbf{Mulheres} & \textbf{Total}\\\hline \text{Economista} & 30 & 20 & 50\\\hline \text{Administrador} & 40 & 40 & 80\\\hline \text{Contador} & 70 & 50 & 120\\\hline \textbf{Total} & 140 & 110 & 250\\\hline\end{array}\)
+97173	manter_imagem		grafico de barras horizontais (copas do mundo, media de gols por jogo)
+97184	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Classificação} & \textbf{IMC}\\\hline \text{Magreza} & \text{Abaixo de }18{,}5\\\hline \text{Peso normal} & \text{Entre }18{,}6\text{ e }24{,}9\\\hline \text{Sobrepeso} & \text{Entre }25\text{ e }29{,}9\\\hline \text{Obesidade de grau I} & \text{Entre }30\text{ e }34{,}9\\\hline \text{Obesidade de grau II} & \text{Entre }35\text{ e }39{,}9\\\hline \text{Obesidade de grau III} & \text{Acima de }40\\\hline\end{array}\)
+97210	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Classificação} & \textbf{IMC}\\\hline \text{Magreza} & \text{Abaixo de }18{,}5\\\hline \text{Peso normal} & \text{Entre }18{,}6\text{ e }24{,}9\\\hline \text{Sobrepeso} & \text{Entre }25\text{ e }29{,}9\\\hline \text{Obesidade de grau I} & \text{Entre }30\text{ e }34{,}9\\\hline \text{Obesidade de grau II} & \text{Entre }35\text{ e }39{,}9\\\hline \text{Obesidade de grau III} & \text{Acima de }40\\\hline\end{array}\)	mesma tabela reutilizada da questao 97178
+97234	manter_imagem		triangulo com angulo 120 graus em A
+97244	manter_imagem		diagrama de quadra de basquete (11m x 15m) com zonas de pontuacao
+97248	manter_imagem		mesma quadra de basquete com pontos A B C D E marcados
+97254	manter_imagem		mesma quadra de basquete (reutilizada)
+97265	manter_imagem		diagrama de trajetoria parabolica (pessoa arremessando bola na cesta)

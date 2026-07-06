@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+22483	latex_candidato	\(3\dfrac{5}{3} - \sqrt[3]{27} + \left(\dfrac{3}{2} - 5^2\right) + \sqrt{144} =\)	expressão idêntica à do parágrafo 21822/22257 (outras questões)
+22513	manter_imagem		diagrama geométrico (retângulo dividido, igual a 21813)
+22549	latex_candidato	\(\overline{RA}\)	fragmento pequeno (notação de segmento), parte da questão 22546 (6 imagens: RA/AB/RA/RB/AB/diagrama)
+22551	latex_candidato	\(\overline{AB}\)	fragmento pequeno, parte da questão 22546
+22553	latex_candidato	\(\overline{RA}\)	fragmento pequeno, idêntico a 22549, parte da questão 22546
+22555	latex_candidato	\(\overline{RB}\)	fragmento pequeno, parte da questão 22546
+22557	latex_candidato	\(\overline{AB}\)	fragmento pequeno, idêntico a 22551, parte da questão 22546
+22559	manter_imagem		diagrama geométrico (triângulo com pontos A,B,D,A',B',R — referenciado pelos segmentos da mesma questão)
+22779	manter_imagem		diagrama geométrico (cone)
+22788	manter_imagem		diagrama geométrico (polígono com ângulos)
+22797	manter_imagem		diagrama geométrico (forma em L)
+22807	manter_imagem		diagrama geométrico (círculo com pontos)
+22816	manter_imagem		diagrama geométrico (quadrados aninhados)
+22846	manter_imagem		diagrama de mapa/regiões
+22869	manter_imagem		gráfico de função
+22909	latex_candidato	\(2 \cdot 10^{-5} + \dfrac{99998^2}{99999^2 - 1} \text{ é igual a:}\)
+22918	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{A} & \textbf{B} & \textbf{C} \\\hline 51 & 59 & 88 \\\hline\end{array}\)<<P>>\(\begin{array}{|c|c|c|}\hline \textbf{A e B} & \textbf{A e C} & \textbf{B e C} \\\hline 14 & 18 & 23 \\\hline\end{array}\)	imagem tinha 2 tabelas lado a lado — viraram 2 parágrafos separados
+22984	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{TIME} & \textbf{ARQUIBANCADA} & \textbf{CADEIRAS} \\\hline \text{REMO} & 6.740 & 2.480 \\\hline \text{PAYSANDU} & 8.125 & 1.925 \\\hline\end{array}\)
+23029	manter_imagem		infográfico de gráfico de barras (desmatamento)
+23100	manter_imagem		diagrama geométrico (retângulo com diagonais)

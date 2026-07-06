@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+56320	manter_imagem		quadrado ABCD com ponto E sobre BC, angulos alfa=4x e beta
+56331	manter_imagem		grafico de barras consumo de agua bloco A e B por mes
+56673	manter_imagem		triangulo ABC com diagonal tracejada e angulo reto em B
+56790	manter_imagem		ilustracao de escada apoiada em parede com janela, cotas 8m e 10m
+56970	manter_imagem		paralelepipedo retangulo com vertices A B C
+57345	manter_imagem		grafico de pizza votos por candidato
+57557	manter_imagem		retangulo com altura 5m e comprimento indicado (fora de escala)
+57692	manter_imagem		triangulo ABC com altura h e projecoes m n sobre a hipotenusa a, lados 12 e 16
+57747	manter_imagem		reta tangente a circunferencia com pontos Q R S T
+57755	manter_imagem		diagrama de angulos externos com vertices A B C
+58021	manter_imagem		grafico de parabola f(x) e reta y=3
+58066	manter_imagem		mapa da regiao nordeste do brasil com estados coloridos por padrao
+58076	manter_imagem		retangulo (piscina) com cerca ao redor, cotas 9m 4m e area 84m2
+58094	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Tempo t a partir da ingestão do antibiótico (em horas)} & \textbf{Quantidade Q do antibiótico na corrente sanguínea (em mg)}\\\hline 0 & 216\\\hline 1 & 108\\\hline 2 & 54\\\hline 4 & 13{,}5\\\hline \end{array}\)	tabela original pula de t=2 para t=4 (sem linha t=3) — transcrito fielmente como no material original
+58115	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Nº de Funcionários} & \textbf{Salário (R\$)}\\\hline 4 & 1.500,00\\\hline 6 & 2.500,00\\\hline 4 & 4.000,00\\\hline 2 & 10.000,00\\\hline \end{array}\)
+58125	manter_imagem		segmento de reta com pontos marcados P Q X
+58135	manter_imagem		trapezio BAID com angulos retos em C e D e I no topo
+58145	manter_imagem		grafico de barras rendimento medio mensal por regiao (IBGE)
+58165	manter_imagem		paraboloide de revolucao (espelho parabolico) com eixo x y
+58176	manter_imagem		plano alfa com mastro P e pontos A B, angulos 75 e 15 graus

@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+85385	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 85379)
+85406	manter_imagem		triangulo retangulo ABC com 6 quadrados internos de area 4cm2 cada
+85408	latex_candidato	\(\overline{AB}\)	fragmento de notacao de segmento, continuacao do enunciado (questao 85402)
+85428	latex_candidato	\(\overline{AC}\)	fragmento de notacao de segmento (diagonal), continuacao do enunciado (questao 85425)
+85430	latex_candidato	\(\overline{BD}\)	fragmento de notacao de segmento (diagonal), continuacao do enunciado (questao 85425)
+85541	latex_candidato	\(\begin{array}{|c|c|c|}\hline A & 1{,}1 & 0{,}4\\\hline \dfrac{1}{2} & \dfrac{7}{10} & 0{,}9\\\hline 1 & 0{,}3 & B\\\hline \end{array}\)
+85551	manter_imagem		triangulo retangulo com angulos 3x+10 e 2x+5
+85636	manter_imagem		tres retas paralelas a b c cortadas por transversal com angulos 50 e 9x
+85736	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{Nº de pessoas} & 2 & 5 & 3\\\hline \textbf{Pontos por pessoa} & 9{,}0 & 8{,}5 & x\\\hline \end{array}\)
+85749	latex_candidato	\(\textbf{AZEITONA PRETA}\)<<P>>\(\text{INTEIRA}\)<<P>>\(\begin{array}{|l|l|}\hline \text{DATA:} & 24/04/16\\\hline \text{HORA:} & 08:41\\\hline \text{VALIDADE:} & 06/05/16\\\hline \text{LOTE:} & \text{ABD2345DEF89}\\\hline \text{Tara:} & 0{,}008\text{ kg (T)}\\\hline \text{Preço/kg R\$:} & 25{,}60\\\hline \end{array}\)<<P>>\(\text{PESO: } 0{,}496\text{ kg (L)}\)<<P>>\(\text{PESO DRENADO: ??? kg}\)<<P>>\(\textbf{TOTAL R\$: } 6{,}40\)	foto de etiqueta de preco com codigo de barras; codigo de barras permanece so na imagem, dados textuais extraidos
+85774	latex_candidato	I. \(\sqrt[4]{32}=2\sqrt{2}\)<<P>>II. \(\sqrt{\sqrt[5]{4096}}=2\)<<P>>III. \(\sqrt[11]{-1}=-1\)<<P>>IV. \(\left(\dfrac{3}{4}\right)^{-2}=\dfrac{9}{16}\)
+85871	manter_imagem		paralelepipedo (reservatorio) com cotas 2 1,5 h
+85881	manter_imagem		retangulo ABCD com galpao sombreado, cotas 5m 6m 2m
+85891	manter_imagem		grafico de pizza domicilios visitados por regiao A B C D
+85908	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Produto} & \textbf{Nº de latas compradas} & \textbf{Preço por lata}\\\hline \text{Milho} & 3 & \text{R\$ 1,50}\\\hline \text{Ervilha} & 2 & \text{R\$ 1,95}\\\hline \text{Mix de legumes} & 5 & \text{R\$ 3,20}\\\hline \text{Molho de tomate} & 2 & \text{R\$ 2,80}\\\hline \end{array}\)
+85952	manter_imagem		grafico de barras gastos da previdencia social por categoria
+85969	manter_imagem		grafico de barras percentual por preco de produto
+86028	manter_imagem		triangulo com lados a b c
+86036	manter_imagem		losango com diagonais x e 4x/3
+86378	manter_imagem		grafico de barras depositos/retiradas mensais jun/18 a mai/19

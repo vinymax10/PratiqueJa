@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+122219	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline \textbf{Número de municípios pesquisados} & 5 & 3 & 4 & 8\\\hline \textbf{Precipitação de chuvas em mm} & 19{,}0 & 21{,}0 & 22{,}5 & 23{,}0\\\hline\end{array}\)
+122235	latex_candidato	\(0,\ 13,\ 24,\ 33,\ 40,\ 45,\ 48\)	sequencia numerica em reta, transcrita como lista (evita tabela larga)
+122244	manter_imagem		tabela larga (vinho A B C AeB AeC BeC ABC Nenhum = 8 colunas) - excede limite
+122290	manter_imagem		caixa 3D, cotas H 30cm 40cm
+122306	manter_imagem		planta baixa (arquibancada, quadra, vestiarios), cotas 3m 2m
+122316	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Dias da semana} & \textbf{Número de alunos}\\\hline \text{2ª feira} & 1\\\hline \text{3ª feira} & 3\\\hline \text{4ª feira} & 5\\\hline \text{5ª feira} & 2\\\hline \text{6ª feira} & \text{?}\\\hline\end{array}\)
+122414	manter_imagem		retangulo, cotas 4m 4m
+122425	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Tipo} & \textbf{Nº de mudas compradas} & \textbf{Preço de uma muda}\\\hline \text{grama} & 100 & \text{R\$ }2{,}00\\\hline \text{folhagem} & 50 & \text{R\$ }5{,}00\\\hline \text{flores} & 80 & \text{R\$ }3{,}00\\\hline\end{array}\)
+122525	manter_imagem		grafico de barras empilhadas (agropecuaria/industria/servicos 2015/2017)
+122535	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de funcionários} & \textbf{Salários}\\\hline 4 & \text{R\$ }1.200{,}00\\\hline 2 & \text{R\$ }1.500{,}00\\\hline 3 & \text{R\$ }1.800{,}00\\\hline 1 & \text{R\$ }2.100{,}00\\\hline\end{array}\)
+122546	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de funcionários} & \textbf{Salários}\\\hline 4 & \text{R\$ }1.200{,}00\\\hline 2 & \text{R\$ }1.500{,}00\\\hline 3 & \text{R\$ }1.800{,}00\\\hline 1 & \text{R\$ }2.100{,}00\\\hline\end{array}\)	mesma tabela reutilizada da questao 122531
+122557	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de funcionários} & \textbf{Salários}\\\hline 4 & \text{R\$ }1.200{,}00\\\hline 2 & \text{R\$ }1.500{,}00\\\hline 3 & \text{R\$ }1.800{,}00\\\hline 1 & \text{R\$ }2.100{,}00\\\hline\end{array}\)	mesma tabela reutilizada (3a ocorrencia)
+122619	latex_candidato	\(\text{(I) }\dfrac{x^2-1}{-2}>x-1\)<<P>>\(\text{(II) }\dfrac{x^2-1}{-2}-\dfrac{(-2)(x-1)}{-2}>0\)<<P>>\(\text{(III) }\dfrac{x^2-1+2x-2}{-2}>0\)<<P>>\(\text{(IV) }x^2+2x-3<0\)<<P>>\(\text{(V) }-3<x<1\)	passo (I) e ja identico ao paragrafo de texto anterior da mesma questao (a inequacao original), mas passos II-V sao conteudo novo - transcrito por completo
+122636	manter_imagem		grafico de dispersao (pontos em malha)
+122701	manter_imagem		grafico de barras empilhadas (engenheiros/economistas homens/mulheres)
+122732	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Nota} & \textbf{Nº de consumidores}\\\hline 5 & 2\\\hline 6 & 2\\\hline 7 & 2\\\hline 8 & 1\\\hline 9 & x\\\hline 10 & 1\\\hline\end{array}\)
+122784	manter_imagem		retangulo ABCD com diagonal, cotas 24m 25m x
+122794	manter_imagem		jardim com faixas de rosas e superficie gramada, cotas 8m 1,5m 1,5m
+122811	manter_imagem		hexagono, cotas X 12m
+122878	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Sanduíche} & \textbf{Número de vendas} & \textbf{Preço unitário (R\$)}\\\hline \text{Simples} & 20 & 10{,}00\\\hline \text{Com queijo} & 15 & 12{,}00\\\hline \text{Duplo} & 18 & 15{,}00\\\hline \text{Duplo com queijo} & 10 & 18{,}00\\\hline \text{Especial} & 4 & 20{,}00\\\hline\end{array}\)

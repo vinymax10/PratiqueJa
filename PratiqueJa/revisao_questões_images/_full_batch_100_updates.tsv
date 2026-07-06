@@ -1,0 +1,41 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+141089	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Funcao Afim sem relacao
+141099	manter_imagem		anomalia "Lista de simbolos" anexada a questao de Equacoes 2o Grau sem relacao
+141132	manter_imagem		grafico de barras 3 series (concursos/agendamentos/alvara) por dia da semana
+141155	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Produto} & \textbf{Preço unitário}\\\hline \text{Pneu} & \text{R\$ 197,90}\\\hline \text{Retrovisor} & \text{R\$ 109,80}\\\hline \end{array}\)	tabela produto/preco unitario
+141305	manter_imagem		grafico velocidade x tempo com pontos A-E
+141677	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4}\\\hline \text{Topo esquerdo} & 3 & 4 & 5 & 6\\\hline \text{Topo direito} & 4 & 5 & 6 & 7\\\hline \text{Meio} & 2 & 3 & 4 & 5\\\hline \text{Base} & 10 & 17 & 26 & ?\\\hline \end{array}\)	quebra-cabeca numerico (4 triangulos), transcrito como tabela; posicionamento triangular e apenas decorativo
+141733	manter_imagem		quadrado com lado X+2
+141781	manter_imagem		cubo (diagrama 3D) com pontos A B C D O
+141808	manter_imagem		triangulo ABC com pontos D E (altura)
+142097	manter_imagem		grafico de barras horizontais numero de irmaos
+142114	manter_imagem		grafico de barras numero de irmaos (figura reutilizada)
+142124	manter_imagem		quadrilatero ABCD inscrito em circulo com centro G
+142148	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Regiões brasileiras} & \textbf{\%}\\\hline \text{Norte} & 8,0\\\hline \text{Nordeste} & 14,5\\\hline \text{Sudeste} & 3,5\\\hline \text{Sul} & 3,5\\\hline \text{Centro-Oeste} & 5,2\\\hline \end{array}\)<<P>>\(\text{(Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua 2016-2017)}\)	tabela regioes brasileiras/percentual + fonte via <<P>>
+142193	manter_imagem		grafico de barras secretaria A/B por ano
+142244	manter_imagem		regiao sombreada entre curvas nos eixos
+142283	manter_imagem		esfera com calota esferica sombreada, altura h
+142301	manter_imagem		retas paralelas com segmentos 6 8 y e 4 x 5
+142318	manter_imagem		setor circular com raio 10pi e angulo alfa
+142327	manter_imagem		poligono irregular com medidas 4 6 10 e angulo theta
+142442	manter_imagem		diagrama "jardim de inverno" com porta de vidro, medidas x 150cm 80cm
+142452	manter_imagem		conjunto de 5 anuncios retangulares (I-V) com medidas diversas
+142469	manter_imagem		grafico de barras inflacao anual (IPCA) com fonte
+142640	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Atleta} & \textbf{Equipe 1} & \textbf{Equipe 2} & \textbf{Equipe 3}\\\hline 1 & \text{Tiago} & \text{Fábio} & \text{Rogério}\\\hline 2 & \text{Gabriel} & \text{Ivan} & \text{Rodrigo}\\\hline 3 & \text{Marcus} & \text{Luiz} & \text{Jorge}\\\hline 4 & \text{Luan} & \text{Gael} & \text{Adriano}\\\hline \end{array}\)	tabela atleta/equipe (revezamento natacao)
+142662	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Atleta} & \textbf{Equipe 1} & \textbf{Equipe 2} & \textbf{Equipe 3}\\\hline 1 & \text{Tiago} & \text{Fábio} & \text{Rogério}\\\hline 2 & \text{Gabriel} & \text{Ivan} & \text{Rodrigo}\\\hline 3 & \text{Marcus} & \text{Luiz} & \text{Jorge}\\\hline 4 & \text{Luan} & \text{Gael} & \text{Adriano}\\\hline \end{array}\)	mesma tabela reutilizada da questao 142624
+142684	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Atleta} & \textbf{Equipe 1} & \textbf{Equipe 2} & \textbf{Equipe 3}\\\hline 1 & \text{Tiago} & \text{Fábio} & \text{Rogério}\\\hline 2 & \text{Gabriel} & \text{Ivan} & \text{Rodrigo}\\\hline 3 & \text{Marcus} & \text{Luiz} & \text{Jorge}\\\hline 4 & \text{Luan} & \text{Gael} & \text{Adriano}\\\hline \end{array}\)	mesma tabela reutilizada; esta questao tem uma 2a imagem (fragmento de formula) mais adiante
+142689	latex_candidato	\(\dfrac{12!}{(4!)^3}\)	fragmento de formula, mesma questao 142668 da tabela atleta/equipe acima
+142708	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Atleta} & \textbf{Equipe 1} & \textbf{Equipe 2} & \textbf{Equipe 3}\\\hline 1 & \text{Tiago} & \text{Fábio} & \text{Rogério}\\\hline 2 & \text{Gabriel} & \text{Ivan} & \text{Rodrigo}\\\hline 3 & \text{Marcus} & \text{Luiz} & \text{Jorge}\\\hline 4 & \text{Luan} & \text{Gael} & \text{Adriano}\\\hline \end{array}\)	mesma tabela reutilizada
+142730	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{Atleta} & \textbf{Equipe 1} & \textbf{Equipe 2} & \textbf{Equipe 3}\\\hline 1 & \text{Tiago} & \text{Fábio} & \text{Rogério}\\\hline 2 & \text{Gabriel} & \text{Ivan} & \text{Rodrigo}\\\hline 3 & \text{Marcus} & \text{Luiz} & \text{Jorge}\\\hline 4 & \text{Luan} & \text{Gael} & \text{Adriano}\\\hline \end{array}\)	mesma tabela reutilizada
+142782	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & & & \\\hline 2 & & & \\\hline 3 & & & \\\hline 4 & & & \\\hline \end{array}\)	tabela modelo em branco (a ser preenchida no sorteio)
+142786	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & \text{Marcelo} & \text{Celia} & \text{segurança}\\\hline 2 & \text{Celia} & \text{Antônio} & \text{transporte}\\\hline 3 & \text{Carla} & \text{Marcelo} & \text{saúde}\\\hline 4 & \text{Antônio} & \text{Carla} & \text{educação}\\\hline \end{array}\)	tabela exemplo preenchida (1a ocorrencia; ha uma 2a imagem identica logo a seguir, ordem5, marcada manter_imagem por ser duplicata)
+142790	manter_imagem		imagem identica (mesmo md5) ao paragrafo anterior 142786 - conteudo ja transcrito, nao duplicar; o texto entre as duas imagens tambem esta duplicado no original
+142820	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & & & \\\hline 2 & & & \\\hline 3 & & & \\\hline 4 & & & \\\hline \end{array}\)	tabela modelo em branco, mesmo padrao da questao 142777
+142824	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & \text{Marcelo} & \text{Celia} & \text{segurança}\\\hline 2 & \text{Celia} & \text{Antônio} & \text{transporte}\\\hline 3 & \text{Carla} & \text{Marcelo} & \text{saúde}\\\hline 4 & \text{Antônio} & \text{Carla} & \text{educação}\\\hline \end{array}\)	tabela exemplo preenchida (1a ocorrencia nesta questao; 2a imagem identica em ordem5 marcada manter_imagem)
+142828	manter_imagem		imagem identica (mesmo md5) ao paragrafo anterior 142824 - conteudo ja transcrito, nao duplicar
+142839	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & & & \\\hline 2 & & & \\\hline 3 & & & \\\hline 4 & & & \\\hline \end{array}\)	tabela modelo em branco, mesmo padrao das questoes 142777/142815
+142843	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{ordem} & \textbf{quem pergunta} & \textbf{quem responde} & \textbf{tema abordado}\\\hline 1 & \text{Marcelo} & \text{Celia} & \text{segurança}\\\hline 2 & \text{Celia} & \text{Antônio} & \text{transporte}\\\hline 3 & \text{Carla} & \text{Marcelo} & \text{saúde}\\\hline 4 & \text{Antônio} & \text{Carla} & \text{educação}\\\hline \end{array}\)	tabela exemplo preenchida (1a ocorrencia nesta questao; 2a imagem identica em ordem5 marcada manter_imagem)
+142847	manter_imagem		imagem identica (mesmo md5) ao paragrafo anterior 142843 - conteudo ja transcrito, nao duplicar
+142864	manter_imagem		diagrama de reta Ana-Arthur-Escola com 240m e 560m
+142894	manter_imagem		grafico de barras venda de frutas
+142905	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Vigilante} & \textbf{Número de copinhos de café} & \textbf{Quantidade ingerida em cada copinho (em mL)}\\\hline \text{Marina} & 2 & 40\\\hline \text{José} & 4 & 20\\\hline \text{Álvaro} & 3 & 25\\\hline \text{Pedro} & 4 & 30\\\hline \end{array}\)	tabela vigilante/copinhos/quantidade

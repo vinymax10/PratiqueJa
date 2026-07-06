@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+86425	manter_imagem		triangulo retangulo com cateto 9cm hipotenusa 15cm e cateto x
+86561	latex_candidato	\(\dfrac{x^3+2x^2+5x+10}{x^2+5}\)<<P>>\(\textbf{Ana:}\)<<P>>\(\dfrac{x^3+2x^2+5x+10}{x^2+5}=\)<<P>>\(\dfrac{x^2(x+2)+5(x+2)}{x^2+5}=\)<<P>>\(\dfrac{(x^2+5)\cdot(x+2)}{x^2+5}=\)<<P>>\(x+2\)<<P>>\(\textbf{Danilo:}\)<<P>>\(\dfrac{x^3+2x^2+5x+10}{x^2+5}=\)<<P>>\(\dfrac{x^3+x^2+5x+5+x^2+5}{x^2+5}=\)<<P>>\(\dfrac{(x^3+5x)+(x^2+5)+(x^2+5)}{x^2+5}=\)<<P>>\(\dfrac{x(x^2+5)+2(x^2+5)}{x^2+5}=\)<<P>>\(\dfrac{(x^2+5)\cdot(x+2)}{x^2+5}=\)<<P>>\(x+2\)
+86688	manter_imagem		grafico de barras pecas aprovadas/reprovadas agosto e setembro
+86730	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Número de acertos} & \textbf{Número de alunos}\\\hline 0 & 3\\\hline 1 & 3\\\hline 2 & 5\\\hline 3 & 5\\\hline 4 & 2\\\hline 5 & 2\\\hline \textbf{Total} & 20\\\hline \end{array}\)
+86764	manter_imagem		retas transversais com angulos alfa, cotas x-10 60cm x+20 80cm
+86870	manter_imagem		triangulo retangulo com catetos x y e angulo a
+86882	latex_candidato	\(\begin{array}{|c|c|}\hline 1\to4 & 90\\\hline 3\to5 & 60\\\hline 12\to6 & 180\\\hline 7\to9 & 30\\\hline 5\to\text{?} & 120\\\hline \end{array}\)
+86922	manter_imagem		cubo 4x4x4 subdividido em cubinhos
+86931	manter_imagem		quadrado dividido em 4 retangulos horizontais, cota 2cm
+86934	manter_imagem		nova figura formada por retangulos reorganizados (quadrado maior e menor)
+86955	manter_imagem		ilustracao de tres onibus vistos de angulos diferentes
+86964	manter_imagem		ilustracao de garrafa com rosto desenhado
+86980	manter_imagem		foto de nota de dinheiro croata e placa de carro com numeros circulados
+86990	manter_imagem		grafico de barras consumo de plasticos por mes
+87000	manter_imagem		paralelepipedo com cotas 14m 5m 5m
+87009	manter_imagem		paralelogramo ABCD com pontos P Q e segmentos internos
+87038	latex_candidato	\(\begin{array}{|c|l|}\hline \textbf{Faixa etária (anos)} & \textbf{Atividades sociais}\\\hline \text{18 a 25} & \text{Recreação}\\\hline \text{26 a 33} & \text{Distribuição de alimentos}\\\hline \text{34 a 41} & \text{Coleta de alimentos}\\\hline \text{42 a 49} & \text{Intervenção Cultural}\\\hline \text{50 ou mais} & \text{Aconselhamento}\\\hline \end{array}\)
+87054	manter_imagem		ilustracao colorida de bandeira municipal com brasao, cotas 70cm 100cm
+87140	latex_candidato	\(\begin{array}{|c|l|}\hline \textbf{Hotel} & \textbf{Preço}\\\hline X & \text{R\$ 270,00 por dia}\\\hline Y & \text{Inicial de R\$ 700,00 mais R\$ 150,00 por dia (incluindo o 1º dia)}\\\hline Z & \text{Inicial de R\$ 2100,00 mais R\$ 60,00 por dia (incluindo o 1º dia)}\\\hline \end{array}\)
+87240	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Tipo de Laranja} & \textbf{Preço de compra (a dúzia)} & \textbf{Preço de venda (a dúzia)}\\\hline \text{Lima} & \text{R\$ 4,00} & \text{R\$ 6,00}\\\hline \text{Pera} & \text{R\$ 3,00} & \text{R\$ 4,50}\\\hline \text{Bahia} & \text{R\$ 6,00} & \text{R\$ 9,00}\\\hline \end{array}\)

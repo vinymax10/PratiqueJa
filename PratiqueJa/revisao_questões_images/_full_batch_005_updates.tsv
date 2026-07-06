@@ -1,0 +1,21 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+8450	manter_imagem		diagrama de ruas com medidas
+8508	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Faixa Etária} & \textbf{Proporção} \\\hline \text{Até 30 anos} & 3x\% \\\hline \text{31 a 40 anos} & 32\% \\\hline \text{41 a 50 anos} & 18\% \\\hline \text{51 a 60 anos} & 14\% \\\hline \text{Mais de 60 anos} & x\% \\\hline\end{array}\)
+8531	manter_imagem		diagrama de Venn (3 conjuntos com valores)
+8599	manter_imagem		gráfico de pizza
+8623	manter_imagem		diagrama geométrico (trapézio)
+8633	manter_imagem		figura geométrica em malha quadriculada
+8656	manter_imagem		gráfico de barras horizontal
+8911	manter_imagem		gráfico de barras
+8920	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Opinião} & \textbf{Número de Pessoas} \\\hline \text{Ótimo} & 117 \\\hline \text{Bom} & 120 \\\hline \text{Regular} & 42 \\\hline \text{Ruim} & 21 \\\hline\end{array}\)
+8943	manter_imagem		diagrama geométrico (triângulo isósceles)
+8967	manter_imagem		diagrama geométrico (retângulo com triângulo)
+9033	manter_imagem		diagrama de rede/caminhos (combinatória)
+9043	manter_imagem		diagrama de círculo com raio
+9060	manter_imagem		diagrama geométrico (paralelogramo)
+9086	manter_imagem		diagrama geométrico (moldura retangular)
+9094	manter_imagem		diagrama geométrico (triângulo retângulo com ângulo)
+9143	manter_imagem		diagrama de sólidos geométricos (prismas)
+9157	manter_imagem		gráfico de função (parábola)
+9165	manter_imagem		diagrama de planificação de sólido (cubo)
+9209	manter_imagem		diagrama de sólido de revolução

@@ -1,0 +1,43 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+146706	latex_candidato	\(FEA=\dfrac{\text{Número de átomos x volume do átomo}}{\text{volume da célula unitária}}.\)	formula completando "A equacao do Fator de Empacotamento Atomico e dada por:"; a proxima imagem (esferas empacotadas) e diagrama genuino, mantida manter_imagem
+146708	manter_imagem		ilustracao de esferas empacotadas em celula cristalina (estrutura CFC); mesma questao 146702 do fragmento acima
+146762	manter_imagem		grafico de reta com angulo theta e pontos E1 E2 E3
+146773	manter_imagem		triangulo com circulo inscrito
+146828	manter_imagem		diagrama de angulo A B C com 145 graus
+147025	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \textbf{Funcionário} & \textbf{Dia 1} & \textbf{Dia 2} & \textbf{Dia 3}\\\hline \text{Ana} & 11,5 & 8 & 8,5\\\hline \text{Caio} & 10 & 12 & 6,5\\\hline \text{Maria} & 10 & 8 & 12\\\hline \text{Miguel} & 8,5 & 12 & 6,5\\\hline \bar{X} & 10 & 10 & 7\\\hline \end{array}\)	tabela funcionario/dia1-3 com linha de media X-barra
+147027	latex_candidato	\(\bar{X}\)	fragmento completando "gráfico de controle ___" (1a ocorrencia); mesma questao 147021 da tabela acima
+147029	latex_candidato	\(\bar{X}\)	fragmento completando "gráfico ___" (2a ocorrencia, gap diferente no texto - nao e imagem duplicada por engano, sao 2 lacunas distintas que pedem o mesmo simbolo); mesma questao 147021
+147133	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Posição do jogador} & \textbf{Gols marcados}\\\hline \text{meio-campista} & 7\\\hline \text{meia-esquerda} & 8\\\hline \text{centroavante} & 12\\\hline \text{ponta-direita} & 9\\\hline \end{array}\)	tabela posicao do jogador/gols marcados
+147186	latex_candidato	\(\begin{array}{|l|c|c|c|}\hline \textbf{Veículo} & \textbf{A} & \textbf{B} & \textbf{C}\\\hline \text{Distância percorrida (Km)} & 33 & 45 & 68\\\hline \text{Consumo de gasolina (L)} & 5,5 & 7,5 & 8,5\\\hline \end{array}\)	tabela veiculo/distancia/consumo
+147210	latex_candidato	\(\begin{array}{|c|c|c|}\hline \textbf{Tipo de peça} & \textbf{Número de peças que entraram na máquina} & \textbf{Número de peças que não quebraram na máquina}\\\hline \text{I} & 32 & 24\\\hline \text{II} & 20 & 15\\\hline \text{III} & 25 & 20\\\hline \text{IV} & 15 & 9\\\hline \end{array}\)	tabela tipo de peca/entraram/nao quebraram
+147275	manter_imagem		grafico de barras numero de vendas por equipe
+147307	manter_imagem		grafico de barras 100% empilhadas escola A/B/C por ano
+147326	manter_imagem		grafico de barras homens/mulheres sim/nao
+147411	manter_imagem		grade pontilhada com pontos A(-2,1) e B(4,1)
+147438	manter_imagem		grafico de parabola com ponto (1,3)
+147448	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Nº de funcionários} & \textbf{Salário mensal (em mínimos)}\\\hline 5 & 2\\\hline 20 & 4\\\hline 15 & 5\\\hline 8 & 10\\\hline 2 & 15\\\hline \end{array}\)	tabela numero de funcionarios/salario mensal
+147489	manter_imagem		triangulo PQR com forma inscrita ABC sombreada
+147499	latex_candidato	\(\textbf{Inequação 1}\)<<P>>\(6-2(3-2x)\leq 6x+7\)<<P>>\(6-6+4x\leq 6x+7\)<<P>>\(4x\leq 6x+7\)<<P>>\(4x-6x\leq 7\)<<P>>\(-2x\leq 7\)<<P>>\(x\geq -\dfrac{7}{2}\)<<P>>\(\textbf{Inequação 2}\)<<P>>\(2+\dfrac{1}{2}x<1-\dfrac{2(1+x)}{3}\)<<P>>\(\dfrac{12+3x}{6}<\dfrac{6-4(1+x)}{6}\)<<P>>\(12+3x<6-4-4x\)<<P>>\(3x+4x<6-4-12\)<<P>>\(7x<-10\)<<P>>\(x<-\dfrac{10}{7}\)<<P>>\(\textbf{Inequação 3}\)<<P>>\(\dfrac{1}{2}\geq -3-\dfrac{2}{x}\)<<P>>\(\dfrac{x}{2x}\geq \dfrac{-6x-4}{2x}\)<<P>>\(x\geq -6x-4\)<<P>>\(x+6x\geq -4\)<<P>>\(x\geq -\dfrac{4}{7}\)	derivacao passo a passo de 3 inequacoes resolvidas por Andre, 19 paragrafos via <<P>>, mesmo padrao Ana/Beatriz do lote_096
+147509	manter_imagem		poligono com centro C e angulos x y z
+147519	manter_imagem		padrao de crescimento de quadrados pretos (1,2,3,4...)
+147546	manter_imagem		grafico de barras numero de candidatos mulheres/homens
+147573	manter_imagem		grafico de linha P/v
+147591	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{PRODUÇÃO SEMANA 1} & \textbf{PRODUÇÃO SEMANA 2}\\\hline \text{Número de máquinas em funcionamento} & x & 12\\\hline \text{Número de objetos produzidos} & 40\,000 & y\\\hline \text{Número de horas diárias de funcionamento de cada máquina} & z & \text{10 horas}\\\hline \end{array}\)	tabela producao semana1/semana2 com incognitas x y z
+147617	latex_candidato	\(\begin{array}{|c|c|c|c|}\hline \textbf{x} & 0 & -1 & 2\\\hline \textbf{y=f(x)} & -2 & -6 & 0\\\hline \end{array}\)	tabela x/y=f(x)
+147720	latex_candidato	\(\begin{array}{|c|c|c|}\hline 1,8 & X & 1,0\\\hline Y & 1,5 & 2,3\\\hline 2,0 & 1,3 & Z\\\hline \end{array}\)	quadrado magico 3x3 com incognitas X Y Z
+147729	manter_imagem		paralelepipedo com medidas 5m 300cm 10dm
+147910	manter_imagem		circulo inscrito em forma com medidas 6cm 8cm 12cm
+159146	manter_imagem		triangulo isosceles com angulo 45 graus, lados 4 4 x
+159183	manter_imagem		triangulo ABC com angulo 120 graus, lados 6 6raiz5 x
+159198	manter_imagem		triangulo ABC com angulos 40 110 30 e lado 32,60
+159230	manter_imagem		paralelogramo ABCD com medidas 4cm 6cm e 60 graus
+159312	manter_imagem		triangulo ABC com angulos 30 105 e lado 12cm
+159325	latex_candidato	\(\begin{array}{|c|c|}\hline \textbf{Ângulo} & \textbf{Seno}\\\hline 46° & 0,72\\\hline 58° & 0,85\\\hline 76° & 0,97\\\hline \end{array}\)	tabela de senos aproximados; o triangulo na mesma imagem permanece como imagem
+159335	manter_imagem		triangulo com lado 60, angulos 45 e 30 graus
+159338	latex_candidato	\(\begin{array}{|c|}\hline \textbf{Aproximações:}\\\hline \sqrt{2}=1,4\\\hline \sqrt{3}=1,7\\\hline \sqrt{6}=2,4\\\hline \end{array}\)	tabela de aproximacoes de raizes; mesma questao 159333 do triangulo anterior
+159347	manter_imagem		diagrama de ponte com cabos a 30 graus
+163501	manter_imagem		retas paralelas r s com transversal t, angulos a-h
+163516	manter_imagem		retas paralelas com angulos algebricos 4x, 120-2x, y+8
+163526	manter_imagem		retas paralelas r s com transversal t, angulos alfa beta
+164829	manter_imagem		ilustracao de campo de futebol com arcos concentricos Q1-Q6 e angulo alfa
+164840	manter_imagem		circulo com pontos A B C O (angulo inscrito)

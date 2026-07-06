@@ -1,0 +1,41 @@
+paragrafo_id	tipo_conteudo	latex_proposto	obs
+132549	manter_imagem		tabela financeira larga (fator (1+i)^n e 1/(1+i)^n, 10 colunas x 15 linhas) - excede limite de colunas, reutilizada
+132562	manter_imagem		mesma tabela financeira larga reutilizada (questao 132559, ordem0)
+132565	manter_imagem		tabela IPTU Faixa A/B/C com cabecalhos mesclados (7 colunas no total) - atinge o limite, mesma questao 132559 ordem2
+132611	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Amigas} & \textbf{Número de Canais Selecionados}\\\hline \text{Ana} & 28\\\hline \text{Bia} & 33\\\hline \text{Cris} & 35\\\hline \end{array}\)	tabela amigas/numero de canais selecionados
+132741	latex_candidato	\(\displaystyle\sum_{n=1}^{\infty}\dfrac{1}{n(n+1)}\)	formula de soma de serie completando "a soma da serie abaixo e"
+132970	latex_candidato	\(\begin{array}{|l|c|}\hline & \textbf{Dimensões}\\\hline \text{Comprimento} & 20\text{ m}\\\hline \text{Largura} & 12\text{ m}\\\hline \text{Altura} & 10\text{ cm}\\\hline \end{array}\)	tabela dimensoes da laje (comprimento/largura/altura)
+132987	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{Valor unitário} & \textbf{Quantidade}\\\hline \text{Ingresso} & \text{R\$20,00} & 02\\\hline \text{Pipoca} & \text{R\$11,80} & 02\\\hline \text{Bebida} & \text{R\$5,60} & 02\\\hline \text{Doce} & X & 04\\\hline \end{array}\)	tabela despesas cinema com incognita X
+133244	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Produtos} & \textbf{Valor unitário} & \textbf{Quantidade}\\\hline \text{Salgado} & \text{R\$ 4,50} & 10\\\hline \text{Refrigerante} & \text{R\$ 5,50} & 08\\\hline \text{Suco} & \text{R\$ 6,00} & 04\\\hline \end{array}\)	tabela produtos/valor unitario/quantidade (venda de quiosque)
+133306	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Produtos} & \textbf{Valor unitário} & \textbf{Quantidade}\\\hline \text{Salgado} & \text{R\$ 4,50} & 10\\\hline \text{Refrigerante} & \text{R\$ 5,50} & 08\\\hline \text{Suco} & \text{R\$ 6,00} & 04\\\hline \end{array}\)	mesma tabela reutilizada da questao 133240
+133390	manter_imagem		figura pentagonal tipo trapezio
+133406	manter_imagem		tabela idade/numero de jogadores (7 colunas) - atinge o limite de largura
+133440	manter_imagem		infografico "carne bovina - principais produtores em 2013" com icones/bandeiras
+133465	latex_candidato	\(\begin{array}{|c|c|c|c|c|c|}\hline \textbf{t} & 2 & 3 & 4 & 5 & 6\\\hline 1{,}12^{t} & 1{,}25 & 1{,}40 & 1{,}57 & 1{,}76 & 1{,}97\\\hline \end{array}\)	tabela de valores de 1,12^t (6 colunas)
+133592	latex_candidato	\(\textbf{Reajustes individuais}\)<<P>>\(\begin{array}{|c|c|}\hline \textbf{Ano} & \textbf{Reajustes no ano}\\\hline 2017 & 13{,}00\%\\\hline 2016 & 13{,}00\%\\\hline 2015 & 13{,}00\%\\\hline 2014 & 10{,}00\%\\\hline 2013 & 9{,}00\%\\\hline \end{array}\)<<P>>\(\text{Fonte: ANS. Disponível em http://www.ans.gov.br. Acesso em: 30 jun. 2019 (adaptado).}\)	titulo+tabela+fonte via <<P>>
+133609	manter_imagem		grafico de linha IPCA x meta central de inflacao
+133652	latex_candidato	\(\textbf{PROMOÇÃO}\)<<P>>\(\text{PREÇO: R\$1850,00}\)<<P>>\(\textit{ENTRADA:}\text{ A QUARTA PARTE DO VALOR}\)<<P>>\(\textit{RESTANTE}\text{ EM 5 PRESTAÇÕES IGUAIS.}\)	banner de promocao de celular; ilustracao do celular permanece na imagem
+133667	manter_imagem		ilustracao de quadro de avisos (corticeira) com post-its, medidas 1,30m e 1,10m
+133747	manter_imagem		mapa de assentos de onibus (diagrama)
+133755	latex_candidato	\(\textbf{PROMOÇÃO}\)<<P>>\(\text{KIT 2 PNEUS ARO 13}\)<<P>>\(\text{R\$ 269,00}\)	banner de promocao de pneus; ilustracao dos pneus permanece na imagem
+133769	manter_imagem		retangulo com medidas 36m e 15m
+133839	manter_imagem		retangulo com area ocupada pela oficina demarcada, medidas 40m 18m 21m 12m
+133854	latex_candidato	\(\begin{array}{|l|c|l|c|l|}\hline \textbf{Cidade} & \textbf{Km} & \textbf{Cidade} & \textbf{Km} & \textbf{Cidade}\\\hline \text{Santa Bárbara-MG} & 520 & \text{São Paulo} & 520 & \text{Santa Bárbara-MG}\\\hline \text{Santa Bárbara-MG} & 328 & \text{Rio de Janeiro} & 328 & \text{Santa Bárbara-MG}\\\hline \text{Santa Bárbara-MG} & 717 & \text{Goiânia} & 717 & \text{Santa Bárbara-MG}\\\hline \text{Santa Bárbara-MG} & 59 & \text{Belo Horizonte} & 59 & \text{Santa Bárbara-MG}\\\hline \end{array}\)	tabela de viagens ida e volta (5 colunas: cidade origem/km ida/cidade destino/km volta/cidade retorno)
+133869	manter_imagem		triangulo inscrito em semicirculo, regiao hachurada
+133929	manter_imagem		trapezio com medidas 3,7m 2,6m 4,2m
+133968	manter_imagem		grafico de barras distribuicao de notas
+134064	latex_candidato	\(\begin{array}{|l|c|}\hline & \textbf{Dimensões}\\\hline \text{Comprimento} & 20\text{ m}\\\hline \text{Largura} & 12\text{ m}\\\hline \text{Altura} & 10\text{ cm}\\\hline \end{array}\)	mesma tabela reutilizada da questao 132966
+134081	latex_candidato	\(\begin{array}{|l|c|c|}\hline & \textbf{Valor unitário} & \textbf{Quantidade}\\\hline \text{Ingresso} & \text{R\$20,00} & 02\\\hline \text{Pipoca} & \text{R\$11,80} & 02\\\hline \text{Bebida} & \text{R\$5,60} & 02\\\hline \text{Doce} & X & 04\\\hline \end{array}\)	mesma tabela reutilizada da questao 132983
+134205	manter_imagem		grafico de barras geladeira/maquina de lavar/fogao por ano
+134239	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Faixa salarial} & \textbf{Número de funcionários}\\\hline \text{R\$ 960,00 a R\$ 1.200,00} & 40\\\hline \text{R\$ 1.200,00 a R\$ 1.500,00} & 20\\\hline \text{R\$ 1.600,00 a R\$ 1.800,00} & 12\\\hline \text{R\$ 1.900,00 a R\$ 2.300,00} & 8\\\hline \end{array}\)	tabela faixa salarial/numero de funcionarios
+134254	manter_imagem		figura em L com medidas 8m 8m 15m 17m
+134345	manter_imagem		ilustracao geometrica tipo bandeira preto/branco
+134412	manter_imagem		grafico de barras horizontais ensino superior/medio/fundamental
+134421	latex_candidato	\(\begin{array}{|l|c|c|c|c|}\hline \textbf{F.V.} & \textbf{g.l.} & \textbf{SQ} & \textbf{QM} & \textbf{F}\\\hline \text{Regressão} & 1 & 810 & & 25{,}90\\\hline \text{Resíduo} & 18 & 563 & & \\\hline \textbf{Total} & & & 72{,}26 & \\\hline \end{array}\)	tabela ANOVA com celulas vazias a completar
+134451	latex_candidato	\(\hat{\beta}\text{ e }\hat{\alpha},\)	fragmento de formula (coeficientes do modelo de regressao)
+134453	latex_candidato	\(y_i=\hat{\alpha}-\beta x_i,\ i=1,\ldots,n\)	fragmento de formula (modelo de regressao linear simples)
+134464	latex_candidato	\(\begin{array}{|l|l|l|}\hline \textbf{Soma dos Quadrados} & \textbf{Grau de Liberdade} & \textbf{SQ}\\\hline \text{Regressão} & & \text{SQReg}\\\hline \text{Resíduo} & & \text{SqRes}\\\hline \text{Total} & & \text{SqTot}\\\hline \end{array}\)	tabela ANOVA simbolica (celulas de grau de liberdade vazias no original); cabecalho da 1a coluna diz "Soma dos Quadrados" no original mas os valores da coluna sao Regressao/Residuo/Total - transcrito literalmente
+134500	latex_candidato	\(\begin{array}{|l|c|c|}\hline \textbf{Produto} & \textbf{Valor unitário} & \textbf{Quantidade}\\\hline \text{Carne} & \text{R\$ 16,00} & 4{,}5\text{ kg}\\\hline \text{Frango} & \text{R\$ 8,00} & 2{,}5\text{ kg}\\\hline \text{Linguiça} & \text{R\$ 6,00} & 3{,}5\text{ kg}\\\hline \text{Coração} & \text{R\$ 8,00} & 1{,}5\text{ kg}\\\hline \text{Carvão} & \text{R\$ 5,50} & 4\text{ sacos}\\\hline \end{array}\)	tabela de compras de churrasco (produto/valor/quantidade)
+134551	latex_candidato	\(\textbf{Tabela de preços:}\)<<P>>\(\text{Lanche – 01: Salgado com refresco = R\$ 5,50}\)<<P>>\(\text{Lanche – 02: Sanduíche com refresco = R\$ 8,50}\)	texto de tabela de precos (sem grade, apenas texto formatado)
+134624	manter_imagem		grafico de pizza "seu restaurante preferido"
+134636	latex_candidato	\(\begin{array}{|l|c|}\hline \textbf{Horários (hora)} & \textbf{Número de ônibus em trânsito}\\\hline \text{04:00 – 06:00} & 12\\\hline \text{06:00 – 08:00} & 16\\\hline \text{08:00 – 10:00} & 20\\\hline \text{10:00 – 12:00} & 12\\\hline \text{12:00 – 14:00} & 8\\\hline \text{14:00 – 16:00} & 12\\\hline \text{16:00 – 18:00} & 16\\\hline \text{18:00 – 20:00} & 22\\\hline \text{20:00 – 22:00} & 18\\\hline \text{22:00 – 24:00} & 14\\\hline \end{array}\)	tabela horarios/numero de onibus em transito (10 linhas)
