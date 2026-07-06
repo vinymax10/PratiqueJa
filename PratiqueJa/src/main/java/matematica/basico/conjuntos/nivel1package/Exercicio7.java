@@ -24,6 +24,6 @@ public class Exercicio7 extends GeradorExercicio
 		gerarAlternativasInteiras(correto);
 
 		addResolucao("\\(A - B = " + c + "\\)");
-		addResolucao("Maior elemento de \\(A - B\\) é \\(" + correto + "\\)");
+		addResolucao("Maior elemento de \\(A - B\\) é \\(\\mathbf{" + correto + "}\\)");
 	}
 }

@@ -10,7 +10,7 @@ public class Exercicio4 extends GeradorExercicio
 	protected void construir()
 	{
 		// Ângulo suplementar: sen(180°-θ) = sen(θ)
-		int[][] triples = {{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}};
+		int[][] triples = {{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {20, 21, 29}, {9, 40, 41}, {12, 35, 37}, {28, 45, 53}};
 		int[] t = triples[rand.nextInt(triples.length)];
 		int p = t[0], r = t[2];
 

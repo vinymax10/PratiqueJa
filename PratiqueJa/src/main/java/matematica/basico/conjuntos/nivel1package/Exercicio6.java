@@ -27,9 +27,9 @@ public class Exercicio6 extends GeradorExercicio
 		if(c.size() > 1)
 		{
 			addResolucao("Soma dos elementos de \\(A \\cup B\\):");
-			addResolucao("\\(" + c.somaStr() + " = " + correto + "\\)");
+			addResolucao("\\(" + c.somaStr() + " = \\mathbf{" + correto + "}\\)");
 		}
 		else
-			addResolucao("Soma dos elementos de \\(A \\cup B\\): \\(" + correto + "\\)");
+			addResolucao("Soma dos elementos de \\(A \\cup B\\): \\(\\mathbf{" + correto + "}\\)");
 	}
 }

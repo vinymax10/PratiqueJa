@@ -10,10 +10,10 @@ public class Expressao2 extends GeradorExercicio
 	protected void construir()
 	{
 		// Domínio de f(x) = log_a(bx - bk) → x > k
-		int[] bases = {2, 3, 4, 5};
+		int[] bases = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 		int a = bases[rand.nextInt(bases.length)];
-		int b = 1 + rand.nextInt(3); // coeficiente 1, 2 ou 3
-		int k = 1 + rand.nextInt(5); // limiar 1..5
+		int b = 1 + rand.nextInt(4); // coeficiente 1..4
+		int k = 1 + rand.nextInt(9); // limiar 1..9
 
 		// argumento: bx - b*k (sempre anula em x=k)
 		int c = b * k;

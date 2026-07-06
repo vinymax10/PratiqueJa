@@ -11,7 +11,8 @@ public class Expressao1 extends GeradorExercicio
 	{
 		// Inequação com 0 < a < 1 (sentido inverte)
 		// log_{1/den}(x) ≤ -n  →  x ≥ den^n
-		int den = rand.nextBoolean() ? 2 : 3;
+		int[] dens = {2, 3, 4, 5};
+		int den = dens[rand.nextInt(dens.length)];
 		int n   = 1 + rand.nextInt(2); // 1 ou 2
 		int xMin = (int) Math.pow(den, n);
 

@@ -10,7 +10,8 @@ public class Expressao2 extends GeradorExercicio
 	protected void construir()
 	{
 		// Comparação: log_a(x) < log_a(k) com a > 1 → 0 < x < k
-		int a = rand.nextBoolean() ? 2 : 3;
+		int[] bases = {2, 3, 4, 5};
+		int a = bases[rand.nextInt(bases.length)];
 		int n = 1 + rand.nextInt(2); // expoente 1 ou 2
 		int k = (int) Math.pow(a, n); // ex: 2^2=4, 2^1=2, 3^2=9
 

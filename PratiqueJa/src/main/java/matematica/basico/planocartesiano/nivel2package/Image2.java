@@ -14,14 +14,14 @@ public class Image2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int px = 1 + rand.nextInt(5);
-		int py = 1 + rand.nextInt(5);
+		int px = 1 + rand.nextInt(7);
+		int py = 1 + rand.nextInt(7);
 
 		// Garante que d² não é quadrado perfeito (resultado em radical)
 		while (ehQuadradoPerfeito(px * px + py * py))
 		{
-			px = 1 + rand.nextInt(5);
-			py = 1 + rand.nextInt(5);
+			px = 1 + rand.nextInt(7);
+			py = 1 + rand.nextInt(7);
 		}
 		if (rand.nextBoolean()) px = -px;
 		if (rand.nextBoolean()) py = -py;
@@ -32,7 +32,7 @@ public class Image2 extends GeradorExercicio
 		String strPx = px < 0 ? "(" + px + ")" : "" + px;
 		String strPy = py < 0 ? "(" + py + ")" : "" + py;
 
-		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
+		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py, 9);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O ponto P está indicado no plano. Calcule a distância de P à origem \\( O(0,\\;0) \\).");

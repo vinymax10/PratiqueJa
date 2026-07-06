@@ -17,8 +17,8 @@ public class Image3 extends GeradorExercicio
 		int ax, ay, bx, by, dx, dy, d2;
 		do
 		{
-			ax = rand.nextInt(7) - 3; // -3 a 3
-			ay = rand.nextInt(7) - 3;
+			ax = rand.nextInt(9) - 4; // -4 a 4
+			ay = rand.nextInt(9) - 4;
 			dx = 2 + rand.nextInt(3); if (rand.nextBoolean()) dx = -dx; // |dx| ≥ 2
 			dy = 2 + rand.nextInt(3); if (rand.nextBoolean()) dy = -dy;
 			bx = ax + dx;
@@ -26,7 +26,7 @@ public class Image3 extends GeradorExercicio
 			d2 = dx * dx + dy * dy;
 		}
 		while (ax == 0 || bx == 0 || ay == 0 || by == 0
-				|| Math.abs(bx) > 7 || Math.abs(by) > 7
+				|| Math.abs(bx) > 8 || Math.abs(by) > 8
 				|| ehQuadradoPerfeito(d2));
 
 		int dx2 = dx * dx, dy2 = dy * dy;
@@ -44,7 +44,7 @@ public class Image3 extends GeradorExercicio
 
 		String correta = simplificado[0] > 1 ? "\\(" + raizStr + "\\)" : "\\(\\sqrt{" + d2 + "}\\)";
 
-		ConfigPlanoCartesianoAB config = new ConfigPlanoCartesianoAB(ax, ay, bx, by);
+		ConfigPlanoCartesianoAB config = new ConfigPlanoCartesianoAB(ax, ay, bx, by, 9);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("Os pontos A e B estão indicados no plano. Calcule a distância \\( d(A,B) \\). Simplifique o radical, se possível.");

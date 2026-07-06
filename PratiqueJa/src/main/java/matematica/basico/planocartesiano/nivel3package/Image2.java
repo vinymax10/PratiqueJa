@@ -14,12 +14,12 @@ public class Image2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int px = 2 + rand.nextInt(5);
-		int py = 2 + rand.nextInt(5);
+		int px = 2 + rand.nextInt(6);
+		int py = 2 + rand.nextInt(6);
 		while (px == py || ehQuadradoPerfeito(px * px + py * py))
 		{
-			px = 2 + rand.nextInt(5);
-			py = 2 + rand.nextInt(5);
+			px = 2 + rand.nextInt(6);
+			py = 2 + rand.nextInt(6);
 		}
 		if (rand.nextBoolean()) px = -px;
 		if (rand.nextBoolean()) py = -py;
@@ -38,7 +38,7 @@ public class Image2 extends GeradorExercicio
 		else
 			raizStr = "\\sqrt{" + d2 + "}";
 
-		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
+		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py, 9);
 		BufferedImage image = config.criarImagem();
 
 		addParagrafo("O ponto P está indicado no plano. Calcule a distância de P à origem \\( O(0,\\;0) \\). Simplifique o radical, se possível.");

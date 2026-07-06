@@ -9,9 +9,9 @@ public class Potenciacao2 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int[] bases = {2, 3, 4, 5};
+		int[] bases = {2, 3, 4, 5, 6, 7};
 		int a = bases[rand.nextInt(bases.length)];
-		int p = 2 + rand.nextInt(3); // 2..4
+		int p = 2 + rand.nextInt(4); // 2..5
 		boolean par = (p % 2 == 0);
 		int resultado = par ? (int) Math.pow(a, p) : -(int) Math.pow(a, p);
 

@@ -11,7 +11,7 @@ public class Expressao1 extends GeradorExercicio
 	{
 		// Análise de sinal: para quais x é f(x) < 0 ou f(x) > 0?
 		boolean positivo = rand.nextBoolean();
-		int[] bases = {2, 3, 4, 5, 10};
+		int[] bases = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 		int a = bases[rand.nextInt(bases.length)];
 
 		String sinal    = positivo ? "> 0" : "< 0";

@@ -10,12 +10,12 @@ public class Image1 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int px = 1 + rand.nextInt(6);
-		int py = 1 + rand.nextInt(6);
+		int px = 1 + rand.nextInt(9);
+		int py = 1 + rand.nextInt(9);
 		if (rand.nextBoolean()) px = -px;
 		if (rand.nextBoolean()) py = -py;
 
-		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py);
+		ConfigPlanoCartesiano config = new ConfigPlanoCartesiano(px, py, 11);
 		BufferedImage image = config.criarImagem();
 
 		boolean pedirOrdenada = rand.nextBoolean();

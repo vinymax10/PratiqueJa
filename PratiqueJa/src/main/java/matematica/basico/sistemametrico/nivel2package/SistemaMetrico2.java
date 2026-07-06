@@ -65,7 +65,8 @@ public class SistemaMetrico2 extends GeradorExercicio
 					"\\(" + (intPart * 1000 + 50) + "\\,\\text{m}\\)"
 				)
 			);
-			addResolucao("\\(1\\,\\text{km} = 1000\\,\\text{m}\\); \\(0{,}5\\,\\text{km} = 500\\,\\text{m}\\); somar:");
+			addResolucao("\\(1\\,\\text{km} = 1000\\,\\text{m}\\)");
+			addResolucao("\\(0{,}5\\,\\text{km} = 500\\,\\text{m}\\), logo somar:");
 			addResolucao("\\(" + intPart + "{,}5 \\times 1000 = \\mathbf{" + m + "}\\,\\text{m}\\)");
 		}
 	}

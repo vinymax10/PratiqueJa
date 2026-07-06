@@ -10,7 +10,7 @@ public class Radiciacao3 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int a = 2 + rand.nextInt(5); // 2..6
+		int a = 2 + rand.nextInt(7); // 2..8
 		int n = (int) Math.pow(a, 4);
 
 		addParagrafo("Calcule:");

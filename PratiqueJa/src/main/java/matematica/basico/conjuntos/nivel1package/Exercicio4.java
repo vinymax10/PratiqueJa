@@ -24,6 +24,6 @@ public class Exercicio4 extends GeradorExercicio
 		gerarAlternativasInteiras(correto);
 
 		addResolucao("\\(A \\cup B = " + c + "\\)");
-		addResolucao("Maior elemento de \\(A \\cup B\\) é \\(" + correto + "\\)");
+		addResolucao("Maior elemento de \\(A \\cup B\\) é \\(\\mathbf{" + correto + "}\\)");
 	}
 }

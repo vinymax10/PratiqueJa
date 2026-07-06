@@ -25,7 +25,9 @@ public abstract class AgrupadorAdicao extends GeradorExercicio
 		addParagrafo("\\(" + a + " + " + b + " + " + c + " + " + d + "\\)");
 		gerarAlternativasInteiras(s3);
 		addResolucao("Somamos passo a passo:");
-		addResolucao("\\(" + a + " + " + b + " = " + s1 + "\\); \\(" + s1 + " + " + c + " = " + s2 + "\\); \\(" + s2 + " + " + d + " = \\mathbf{" + s3 + "}\\)");
+		addResolucao("\\(" + a + " + " + b + " = " + s1 + "\\)");
+		addResolucao("\\(" + s1 + " + " + c + " = " + s2 + "\\)");
+		addResolucao("\\(" + s2 + " + " + d + " = \\mathbf{" + s3 + "}\\)");
 	}
 
 	protected void tabuada()

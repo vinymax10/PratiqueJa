@@ -10,7 +10,7 @@ public class Exercicio1 extends GeradorExercicio
 	protected void construir()
 	{
 		// 2.º quadrante: sen>0, cos<0 → tg<0
-		int[][] triples = {{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}};
+		int[][] triples = {{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {20, 21, 29}, {9, 40, 41}, {12, 35, 37}, {28, 45, 53}};
 		int[] t = triples[rand.nextInt(triples.length)];
 		int p = t[0], q = t[1], r = t[2];
 		int pp = p * p, qq = q * q, rr = r * r;

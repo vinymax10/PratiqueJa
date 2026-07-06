@@ -16,22 +16,22 @@ public class Expressao5 extends GeradorExercicio
 
 		int k;
 		String correto;
-		String resolucao;
+		List<String> passos = new ArrayList<>();
 
 		if (tipo == 0)
 		{
 			k       = -(1 + rand.nextInt(5));
 			correto = "Nenhuma (\\(S = \\emptyset\\))";
-			resolucao = "O módulo é sempre \\(\\geq 0\\), portanto \\(|x + " + a + "| \\geq 0\\). "
-				+ "Como \\(k = " + k + " < 0\\), a equação não tem solução: \\(\\mathbf{S = \\emptyset}\\).";
+			passos.add("O módulo é sempre \\(\\geq 0\\), portanto \\(|x + " + a + "| \\geq 0\\). "
+				+ "Como \\(k = " + k + " < 0\\), a equação não tem solução: \\(\\mathbf{S = \\emptyset}\\).");
 		}
 		else if (tipo == 1)
 		{
 			k       = 0;
 			int x0  = -a;
 			correto = "Uma (\\(x = " + x0 + "\\))";
-			resolucao = "\\(|x + " + a + "| = 0 \\Leftrightarrow x + " + a + " = 0 \\Rightarrow x = \\mathbf{" + x0 + "}\\). "
-				+ "Exatamente \\(\\mathbf{1}\\) solução.";
+			passos.add("\\(|x + " + a + "| = 0 \\Leftrightarrow x + " + a + " = 0 \\Rightarrow x = \\mathbf{" + x0 + "}\\). "
+				+ "Exatamente \\(\\mathbf{1}\\) solução.");
 		}
 		else
 		{
@@ -39,9 +39,9 @@ public class Expressao5 extends GeradorExercicio
 			int x1  = k - a;
 			int x2  = -k - a;
 			correto = "Duas (\\(x = " + x1 + "\\) ou \\(x = " + x2 + "\\))";
-			resolucao = "\\(k = " + k + " > 0\\): dois casos. \\(x + " + a + " = " + k
-				+ " \\Rightarrow x = " + x1 + "\\); \\(x + " + a + " = -" + k
-				+ " \\Rightarrow x = " + x2 + "\\). Total: \\(\\mathbf{2}\\) soluções.";
+			passos.add("\\(k = " + k + " > 0\\): dois casos.");
+			passos.add("\\(x + " + a + " = " + k + " \\Rightarrow x = " + x1 + "\\)");
+			passos.add("\\(x + " + a + " = -" + k + " \\Rightarrow x = " + x2 + "\\). Total: \\(\\mathbf{2}\\) soluções.");
 		}
 
 		addParagrafo("Quantas soluções reais tem a equação \\(|x + " + a + "| = " + k + "\\)?");
@@ -54,6 +54,7 @@ public class Expressao5 extends GeradorExercicio
 			default -> { dist.add("Nenhuma (\\(S = \\emptyset\\))"); dist.add("Uma"); dist.add("Três"); }
 		}
 		embaralharEAdicionarAlternativas(correto, dist);
-		addResolucao(resolucao);
+		for(String passo : passos)
+			addResolucao(passo);
 	}
 }

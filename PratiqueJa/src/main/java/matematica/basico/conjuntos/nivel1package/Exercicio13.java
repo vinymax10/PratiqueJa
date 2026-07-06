@@ -18,6 +18,6 @@ public class Exercicio13 extends GeradorExercicio
 
 		addResolucao("A cardinalidade \\(|A|\\) é o número de elementos distintos do conjunto.");
 		addResolucao("Contando os elementos de \\(A = " + a + "\\):");
-		addResolucao("\\(|A| = " + correto + "\\)");
+		addResolucao("\\(|A| = \\mathbf{" + correto + "}\\)");
 	}
 }

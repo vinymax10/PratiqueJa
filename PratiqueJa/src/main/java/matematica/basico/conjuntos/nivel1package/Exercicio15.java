@@ -52,7 +52,7 @@ public class Exercicio15 extends GeradorExercicio
 			else
 				addResolucao("\\(" + e + " \\notin A\\)");
 		}
-		addResolucao(correto + " elemento" + (correto != 1 ? "s pertencem" : " pertence") + " a \\(A\\).");
+		addResolucao("\\(\\mathbf{" + correto + "}\\) elemento" + (correto != 1 ? "s pertencem" : " pertence") + " a \\(A\\).");
 	}
 
 	private String buildLista(List<Integer> elementos)

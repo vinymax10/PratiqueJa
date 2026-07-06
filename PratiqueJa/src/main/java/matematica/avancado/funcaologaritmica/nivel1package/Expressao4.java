@@ -10,7 +10,7 @@ public class Expressao4 extends GeradorExercicio
 	protected void construir()
 	{
 		// Função inversa: ponto (c, d) em g(x)=a^x ↔ ponto (d, c) em f(x)=log_a(x)
-		int[] bases = {2, 3, 4};
+		int[] bases = {2, 3, 4, 5, 6, 7};
 		int a = bases[rand.nextInt(bases.length)];
 		int c = 1 + rand.nextInt(3); // expoente 1..3
 		int d = (int) Math.pow(a, c); // d = a^c

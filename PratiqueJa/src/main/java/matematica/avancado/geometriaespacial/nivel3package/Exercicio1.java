@@ -9,8 +9,8 @@ public class Exercicio1 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int r    = 2 + rand.nextInt(5); // 2..6
-		int h    = 2 + rand.nextInt(7); // 2..8
+		int r    = 2 + rand.nextInt(7); // 2..8
+		int h    = 2 + rand.nextInt(9); // 2..10
 		int rph  = r + h;
 		int coef = 2 * r * rph;
 

@@ -8,8 +8,8 @@ public class Exercicio7 extends GeradorExercicio
 	protected void construir()
 	{
 		// Prisma de base quadrada com altura h = 2a → V = 2a³
-		// a=3: V=54  |  a=4: V=128  |  a=5: V=250
-		int a = 3 + rand.nextInt(3); // 3..5
+		// a=3: V=54  |  a=4: V=128  |  a=5: V=250  |  ...  |  a=8: V=1024
+		int a = 3 + rand.nextInt(6); // 3..8
 		int V = 2 * a * a * a;
 
 		addParagrafo("Um prisma de base quadrada tem altura \\(h = 2a\\), onde \\(a\\) é o lado da base. "

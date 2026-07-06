@@ -19,7 +19,7 @@ public class Expressao2 extends GeradorExercicio
 
 		if (crescente)
 		{
-			int[] bases = {2, 3, 4, 5, 7, 10};
+			int[] bases = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 			int a = bases[rand.nextInt(bases.length)];
 			funcao     = "\\log_{" + a + "}(x)";
 			correto    = "Crescente";
@@ -29,7 +29,7 @@ public class Expressao2 extends GeradorExercicio
 		}
 		else
 		{
-			int[] dens = {2, 3, 4, 5};
+			int[] dens = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 			int den = dens[rand.nextInt(dens.length)];
 			funcao    = "\\log_{\\frac{1}{" + den + "}}(x)";
 			correto   = "Decrescente";

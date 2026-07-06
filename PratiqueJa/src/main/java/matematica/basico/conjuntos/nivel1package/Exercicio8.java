@@ -24,6 +24,6 @@ public class Exercicio8 extends GeradorExercicio
 		gerarAlternativasInteiras(correto);
 
 		addResolucao("\\(A - B = " + c + "\\)");
-		addResolucao("Menor elemento de \\(A - B\\) é \\(" + correto + "\\)");
+		addResolucao("Menor elemento de \\(A - B\\) é \\(\\mathbf{" + correto + "}\\)");
 	}
 }

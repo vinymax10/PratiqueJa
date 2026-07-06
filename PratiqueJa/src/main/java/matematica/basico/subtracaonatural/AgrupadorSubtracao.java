@@ -88,7 +88,9 @@ public abstract class AgrupadorSubtracao extends GeradorExercicio
 		addParagrafo("\\(" + a + " - " + b + " - " + c + " - " + d + " = \\,?\\)");
 		gerarAlternativasInteiras(res);
 		addResolucao("Subtraímos da esquerda para a direita:");
-		addResolucao("\\(" + a + " - " + b + " = " + p1 + "\\); \\(" + p1 + " - " + c + " = " + p2 + "\\); \\(" + p2 + " - " + d + " = \\mathbf{" + res + "}\\)");
+		addResolucao("\\(" + a + " - " + b + " = " + p1 + "\\)");
+		addResolucao("\\(" + p1 + " - " + c + " = " + p2 + "\\)");
+		addResolucao("\\(" + p2 + " - " + d + " = \\mathbf{" + res + "}\\)");
 	}
 
 	protected void problema(int min, int range)

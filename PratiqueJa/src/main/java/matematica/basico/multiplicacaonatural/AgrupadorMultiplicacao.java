@@ -37,7 +37,8 @@ public abstract class AgrupadorMultiplicacao extends GeradorExercicio
 		addParagrafo("Calcule \\(" + a + " \\times " + b + " \\times " + c + "\\).");
 		gerarAlternativasInteiras(ab * c);
 		addResolucao("Multiplicamos dois fatores de cada vez:");
-		addResolucao("\\(" + a + " \\times " + b + " = " + ab + "\\); \\(" + ab + " \\times " + c + " = \\mathbf{" + (ab * c) + "}\\)");
+		addResolucao("\\(" + a + " \\times " + b + " = " + ab + "\\)");
+		addResolucao("\\(" + ab + " \\times " + c + " = \\mathbf{" + (ab * c) + "}\\)");
 	}
 	protected void distributiva(int min, int range)
 	{

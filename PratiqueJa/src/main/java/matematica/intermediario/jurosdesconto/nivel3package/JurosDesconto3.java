@@ -15,7 +15,7 @@ public class JurosDesconto3 extends GeradorExercicio
 		DecimalFormat deci = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 		DecimalFormat pct  = new DecimalFormat("#.##",   new DecimalFormatSymbols(Locale.US));
 
-		int iMensal = 1 + rand.nextInt(3);  // 1%, 2% ou 3%
+		int iMensal = 1 + rand.nextInt(15);  // 1% a 15%
 		double im = iMensal / 100.0;
 
 		// tipo: 0=anual→mensal, 1=trimestral→mensal, 2=mensal→anual, 3=mensal→trimestral

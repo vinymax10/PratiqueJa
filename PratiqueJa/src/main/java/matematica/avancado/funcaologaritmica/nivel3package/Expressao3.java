@@ -10,7 +10,7 @@ public class Expressao3 extends GeradorExercicio
 	protected void construir()
 	{
 		// Análise de sinal combinada: log_{1/a}(x) > 0  →  0 < x < 1  (base < 1, decrescente)
-		int[] dens = {2, 3, 4};
+		int[] dens = {2, 3, 4, 5, 6};
 		int den = dens[rand.nextInt(dens.length)];
 
 		addParagrafo("Determine os valores de \\(x\\) para os quais \\(f(x) > 0\\), "

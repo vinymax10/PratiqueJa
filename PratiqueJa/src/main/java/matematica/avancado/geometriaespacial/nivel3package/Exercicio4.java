@@ -9,8 +9,8 @@ public class Exercicio4 extends GeradorExercicio
 	@Override
 	protected void construir()
 	{
-		int r     = 2 + rand.nextInt(5); // 2..6 (lado menor = raio)
-		int h     = r + 1 + rand.nextInt(5); // h > r (lado em torno do qual gira)
+		int r     = 2 + rand.nextInt(7); // 2..8 (lado menor = raio)
+		int h     = r + 1 + rand.nextInt(6); // h > r (lado em torno do qual gira)
 		int r2    = r * r;
 		int vCoef = r2 * h;
 

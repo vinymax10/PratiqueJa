@@ -10,9 +10,9 @@ public class Expressao4 extends GeradorExercicio
 	protected void construir()
 	{
 		// Inequação: log_a(x) ≥ n (a > 1) → x ≥ a^n
-		int[] bases = {2, 3, 4};
+		int[] bases = {2, 3, 4, 5};
 		int a = bases[rand.nextInt(bases.length)];
-		int n = 2 + rand.nextInt(2); // 2 ou 3
+		int n = 2 + rand.nextInt(3); // 2..4
 		int xMin = (int) Math.pow(a, n);
 
 		addParagrafo("Resolva a inequação: \\(\\log_{" + a + "}(x) \\geq " + n + "\\)");

@@ -8,7 +8,8 @@ public class Expressao4 extends GeradorExercicio
 	protected void construir()
 	{
 		// Encontrar base: g(x)=a^x passa por (n, val) → a = val^(1/n) → a inteiro
-		int a = rand.nextBoolean() ? 2 : 3;
+		int[] bases = {2, 3, 4, 5};
+		int a = bases[rand.nextInt(bases.length)];
 		int n = 2 + rand.nextInt(2); // n = 2 ou 3
 		int val = (int) Math.pow(a, n);
 

@@ -9,7 +9,8 @@ public class Expressao5 extends GeradorExercicio
 	protected void construir()
 	{
 		// f(1/a^n) = log_a(a^(-n)) = -n  →  resultado negativo
-		int a = rand.nextBoolean() ? 2 : 3;
+		int[] bases = {2, 3, 4, 5};
+		int a = bases[rand.nextInt(bases.length)];
 		int n = 1 + rand.nextInt(3); // 1, 2, 3
 		int arg = (int) Math.pow(a, n); // a^n → argumento exibido como 1/arg
 		int resultado = -n;

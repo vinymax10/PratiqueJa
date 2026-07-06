@@ -133,7 +133,6 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente verde-oliva; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um triângulo retângulo com um quadrado construído sobre cada um dos três lados (clássica ilustração de Pitágoras), com o ângulo reto marcado.
 
-//Parei aqui
 [24] Semelhança entre Ângulos
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente amarelo-esverdeado; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: duas retas paralelas cortadas por uma transversal, com ângulos correspondentes iguais marcados por arcos.
@@ -213,6 +212,7 @@ Prompt:
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente laranja; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: um gráfico de barras/colunas com alturas diferentes e, ao lado, um pequeno gráfico de pizza.
 
+//Parei aqui
 [43] Polinômios
 Prompt:
 Ícone educacional premium, flat moderno com leve profundidade. Tile com cantos arredondados, fundo em gradiente âmbar-escuro; os 4 cantos FORA do tile arredondado devem ser TOTALMENTE TRANSPARENTES (PNG com canal alpha): nada de preto nem de cor entre o canto e a borda arredondada. Elemento central em branco com sombra suave, alto contraste, vetorial, 128x128 px. SEM texto/letras/números. Elemento: uma curva polinomial sinuosa com várias subidas e descidas (vários cruzamentos com o eixo) em um plano cartesiano.

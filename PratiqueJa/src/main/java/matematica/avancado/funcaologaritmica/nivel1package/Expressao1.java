@@ -8,7 +8,7 @@ public class Expressao1 extends GeradorExercicio
 	protected void construir()
 	{
 		// f(x) = log_a(x), calcular f(a^n) = n
-		int[] bases = {2, 3, 4, 5, 10};
+		int[] bases = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 		int a = bases[rand.nextInt(bases.length)];
 		int n = 1 + rand.nextInt(4); // 1..4
 		int arg = (int) Math.pow(a, n);

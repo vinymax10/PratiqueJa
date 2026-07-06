@@ -10,7 +10,7 @@ public class Expressao3 extends GeradorExercicio
 	protected void construir()
 	{
 		// Zero da função logarítmica: f(x) = log_a(x) = 0 → x = 1, independente da base
-		int[] bases = {2, 3, 4, 5, 7, 10};
+		int[] bases = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20};
 		int a = bases[rand.nextInt(bases.length)];
 
 		addParagrafo("Em qual valor de \\(x\\) a função \\(f(x) = \\log_{" + a + "}(x)\\) se anula?");

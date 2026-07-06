@@ -22,6 +22,6 @@ public class Exercicio16 extends GeradorExercicio
 
 		addResolucao("O complementar \\(A^c\\) reúne todos os elementos de \\(U\\) que não estão em \\(A\\).");
 		addResolucao("\\(A^c = U - A = " + comp + "\\)");
-		addResolucao("\\(|A^c| = " + correto + "\\)");
+		addResolucao("\\(|A^c| = \\mathbf{" + correto + "}\\)");
 	}
 }

@@ -62,7 +62,7 @@ public class Estatistica4 extends GeradorExercicio
 			if (tipoIdx == 0)
 				addResolucao("Entre as quantitativas: contável → discreta; mensurável → contínua.");
 			addResolucao("Esta variável " + justificativa + ".");
-			addResolucao("Classificação: " + tipoCorreto + ".");
+			addResolucao("Classificação: \\(\\textbf{" + tipoCorreto + "}\\).");
 		}
 		else
 		{
@@ -70,7 +70,7 @@ public class Estatistica4 extends GeradorExercicio
 			if (tipoIdx == 2)
 				addResolucao("Entre as qualitativas: sem ordem entre categorias → nominal; com ordem → ordinal.");
 			addResolucao("Esta variável " + justificativa + ".");
-			addResolucao("Classificação: " + tipoCorreto + ".");
+			addResolucao("Classificação: \\(\\textbf{" + tipoCorreto + "}\\).");
 		}
 	}
 }
