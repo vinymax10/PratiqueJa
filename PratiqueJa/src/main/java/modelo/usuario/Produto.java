@@ -36,8 +36,11 @@ public class Produto implements Serializable, Entidade
 	@AuditLabel(value = "tipo de pagamento")
 	private TipoPagamento tipoPagamento;
 
-	@AuditLabel(value = "ID Mercado Pago")
-	private String idMercadoPago;
+	@AuditLabel(value = "ID Hotmart")
+	private String idHotmart;
+
+	@AuditLabel(value = "link de checkout Hotmart")
+	private String linkHotmart;
 
 	@AuditLabel(value = "perfil usuário")
 	private PerfilUsuario perfilUsuario;

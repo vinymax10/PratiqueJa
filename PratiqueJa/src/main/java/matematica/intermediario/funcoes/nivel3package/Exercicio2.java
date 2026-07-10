@@ -28,7 +28,7 @@ public class Exercicio2 extends GeradorExercicio
 				+ "}\\), portanto \\(f^{-1}(y) = \\dfrac{y" + bLatex(-b) + "}{" + a + "}\\).");
 		addResolucao("Substituindo \\(y = " + k + "\\):");
 		addResolucao("\\(f^{-1}(" + k + ") = \\dfrac{" + k + bLatex(-b) + "}{" + a
-				+ "} = \\dfrac{" + kmb + "}{" + a + "} = " + xResult + "\\).");
+				+ "} = \\dfrac{" + kmb + "}{" + a + "} = \\mathbf{" + xResult + "}\\).");
 		gerarAlternativas("" + xResult);
 	}
 

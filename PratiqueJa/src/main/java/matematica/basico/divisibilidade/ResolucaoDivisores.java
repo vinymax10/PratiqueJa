@@ -76,7 +76,7 @@ public class ResolucaoDivisores
 			passos.add("Divisores " + tipo + ":");
 			passos.add("\\(" + listDivisores + "\\)");
 		}
-		passos.add("Número de divisores " + tipo + ": \\(" + cont + "\\)");
+		passos.add("Número de divisores " + tipo + ": \\(\\mathbf{" + cont + "}\\)");
 		return passos.toArray(new String[0]);
 	}
 

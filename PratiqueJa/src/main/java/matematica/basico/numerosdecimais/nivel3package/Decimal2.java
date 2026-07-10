@@ -26,7 +26,8 @@ public class Decimal2 extends AgrupadorDecimal
 		);
 		gerarAltT(resT);
 
-		addResolucao("\\(\\left(" + a + " + " + b + "\\right) \\times " + e + " =\\)");
-		addResolucao("\\(" + soma + " \\times " + e + " = " + result + "\\)");
+		addResolucao("Resolvemos primeiro o que está entre parênteses:");
+		addResolucao("\\(" + a + " + " + b + " = " + soma + "\\)");
+		addResolucao("\\(" + soma + " \\times " + e + " = \\mathbf{" + result + "}\\)");
 	}
 }

@@ -42,6 +42,6 @@ public class Image20 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\)");
 		addResolucao("\\(b=" + b + "\\)");
 		addResolucao("\\(\\dfrac{" + b + "\\cdot h}{2} = " + area + "\\)");
-		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
+		addResolucao("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 	}
 }

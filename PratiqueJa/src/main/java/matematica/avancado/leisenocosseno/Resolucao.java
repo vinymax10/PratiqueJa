@@ -38,8 +38,7 @@ public class Resolucao
 		resolucaoLatex+="sen~"+angle1+" = \\dfrac{"+parcial.showDfrac()+"}{"+numerador2.showDfrac()+"}";
 		parcial=parcial.div(numerador2);
 		parcial.fatoracao(2);
-		if(parcial.isSimplificou())
-			resolucaoLatex+=" = \\mathbf{"+parcial.showDfrac()+"}";
+		resolucaoLatex+=" = \\mathbf{"+parcial.showDfrac()+"}";
 
 		return resolucaoLatex;
 	}

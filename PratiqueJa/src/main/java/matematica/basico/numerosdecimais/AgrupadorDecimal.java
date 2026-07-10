@@ -34,8 +34,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		return "\\(\\begin{array}{r}" +
 			a + " \\\\" +
 			op + "\\;" + b + " \\\\" +
-			"\\hline " + result +
-			"\\end{array}\\)";
+			"\\hline \\mathbf{" + result +
+			"}\\end{array}\\)";
 	}
 
 	/** Conta vertical com 3 parcelas (todos com sinal op nas 2ª e 3ª linhas) */
@@ -45,8 +45,8 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 			a + " \\\\" +
 			op + "\\;" + b + " \\\\" +
 			op + "\\;" + c + " \\\\" +
-			"\\hline " + result +
-			"\\end{array}\\)";
+			"\\hline \\mathbf{" + result +
+			"}\\end{array}\\)";
 	}
 
 	/** 4 alternativas embaralhadas para resultado em décimos */
@@ -101,7 +101,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " + " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(s);
-		addResolucao(vertical("+", fmtT(aT), fmtT(bT), "\\mathbf{" + fmtT(s) + "}"));
+		addResolucao(vertical("+", fmtT(aT), fmtT(bT), fmtT(s)));
 	}
 
 	protected void subtracaoDecimos(int min, int range)
@@ -113,7 +113,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtT(aT) + " - " + fmtT(bT) + " = \\,?\\)");
 		gerarAltT(d);
-		addResolucao(vertical("-", fmtT(aT), fmtT(bT), "\\mathbf{" + fmtT(d) + "}"));
+		addResolucao(vertical("-", fmtT(aT), fmtT(bT), fmtT(d)));
 	}
 
 	protected void somaCentesimos(int min, int range)
@@ -124,7 +124,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a soma dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " + " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(s);
-		addResolucao(vertical("+", fmtH(aH), fmtH(bH), "\\mathbf{" + fmtH(s) + "}"));
+		addResolucao(vertical("+", fmtH(aH), fmtH(bH), fmtH(s)));
 	}
 
 	protected void subtracaoCentesimos(int min, int range)
@@ -136,7 +136,7 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		addParagrafo("Calcule a subtração dos números decimais:");
 		addParagrafo("\\(" + fmtH(aH) + " - " + fmtH(bH) + " = \\,?\\)");
 		gerarAltH(d);
-		addResolucao(vertical("-", fmtH(aH), fmtH(bH), "\\mathbf{" + fmtH(d) + "}"));
+		addResolucao(vertical("-", fmtH(aH), fmtH(bH), fmtH(d)));
 	}
 
 	// (a décimos) × (b décimos) → centésimos
@@ -177,13 +177,13 @@ public abstract class AgrupadorDecimal extends GeradorExercicio
 		{
 			gerarAltT(aH);
 			addResolucao("A vírgula anda 1 casa à direita:");
-			addResolucao("\\(" + fmtH(aH) + " \\times 10 = " + fmtT(aH) + "\\)");
+			addResolucao("\\(" + fmtH(aH) + " \\times 10 = \\mathbf{" + fmtT(aH) + "}\\)");
 		}
 		else
 		{
 			gerarAlternativasInteiras(aH);
 			addResolucao("A vírgula anda 2 casas à direita:");
-			addResolucao("\\(" + fmtH(aH) + " \\times 100 = " + aH + "\\)");
+			addResolucao("\\(" + fmtH(aH) + " \\times 100 = \\mathbf{" + aH + "}\\)");
 		}
 	}
 

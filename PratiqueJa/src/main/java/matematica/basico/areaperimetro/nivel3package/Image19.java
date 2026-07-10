@@ -40,6 +40,6 @@ public class Image19 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTriangulo() + "\\)");
 		addResolucao("\\(h=" + h + "\\)");
 		addResolucao("\\(\\dfrac{b \\cdot " + h + "}{2} = " + area + "\\)");
-		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
+		addResolucao("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 	}
 }

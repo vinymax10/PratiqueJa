@@ -8,31 +8,39 @@
 
 <!-- HERO -->
 <div class="card-hero">
-	<p class="section-label">Produtos</p>
-	<h1 class="page-title">Pratique Já para <span class="accent">Estudantes</span></h1>
-	<p class="page-subtitle">
-		Estude no seu ritmo com 55 assuntos de Matemática, mais de 14 mil questões, 3.300+ exercícios comentados, resoluções passo a passo e diversos materiais em PDF. Escolha o plano que combina com a sua forma de aprender.
-	</p>
-	<div class="stat-chips">
-		<div class="stat-chip">
-			<div class="stat-label">Assuntos</div>
-			<div class="stat-value">55</div>
+	<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+		<div style="flex:1 1 360px;min-width:280px;">
+			<p class="section-label">Produtos</p>
+			<h1 class="page-title">Pratique Já para <span class="accent">Estudantes</span></h1>
+			<p class="page-subtitle">
+				Estude no seu ritmo com 55 assuntos de Matemática, mais de 14 mil questões, 3.300+ exercícios comentados, resoluções passo a passo e diversos materiais em PDF. Escolha o plano que combina com a sua forma de aprender.
+			</p>
+			<div class="stat-chips">
+				<div class="stat-chip">
+					<div class="stat-label">Assuntos</div>
+					<div class="stat-value">55</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Questões</div>
+					<div class="stat-value">14 mil</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Exercícios comentados</div>
+					<div class="stat-value">3.300+</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Materiais em PDF</div>
+					<div class="stat-value">Vários</div>
+				</div>
+				<div class="stat-chip-blue">
+					<div class="stat-label-white">Básico</div>
+					<div class="stat-value-white">Grátis</div>
+				</div>
+			</div>
 		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Questões</div>
-			<div class="stat-value">14 mil</div>
-		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Exercícios comentados</div>
-			<div class="stat-value">3.300+</div>
-		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Materiais em PDF</div>
-			<div class="stat-value">Vários</div>
-		</div>
-		<div class="stat-chip-blue">
-			<div class="stat-label-white">Básico</div>
-			<div class="stat-value-white">Grátis</div>
+		<div style="flex:0 1 320px;min-width:220px;text-align:center;">
+			<img src="/image/produtos/acesso.png" alt="Resolução de equação passo a passo no Pratique Já"
+				style="width:100%;max-width:320px;border-radius:24px;box-shadow:0 20px 40px rgba(37,99,235,0.25);" />
 		</div>
 	</div>
 </div>
@@ -111,11 +119,13 @@
 			</div>
 			<div style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap;">
 				<p:commandButton value="Assinar Mensal"
+					rendered="#{pagamentoBean.temHotmart('Premium','Mensal')}"
 					styleClass="ui-button-raised ui-button-flat ui-button-secondary"
-					process="@this" action="#{pagamentoBean.pagamento('Premium','Mensal')}"/>
+					process="@this" action="#{pagamentoBean.pagamentoHotmart('Premium','Mensal')}"/>
 				<p:commandButton value="Assinar Anual"
+					rendered="#{pagamentoBean.temHotmart('Premium','Anual')}"
 					styleClass="ui-button-raised btn-primary"
-					process="@this" action="#{pagamentoBean.pagamento('Premium','Anual')}"/>
+					process="@this" action="#{pagamentoBean.pagamentoHotmart('Premium','Anual')}"/>
 			</div>
 		</div>
 

@@ -29,7 +29,7 @@ public class Racionais3 extends GeradorExercicio
 		addResolucao("\\(\\text{MDC}(" + num + ",\\," + den + ") = " + mdc + "\\).");
 		addResolucao("\\(\\dfrac{" + num + "}{" + den + "} = \\dfrac{"
 			 + num + " \\div " + mdc + "}{" + den + " \\div " + mdc
-			 + "} = " + resultado.showDfrac() + "\\)");
+			 + "} = \\mathbf{" + resultado.showDfrac() + "}\\)");
 	}
 
 	private static long gcd(long a, long b)

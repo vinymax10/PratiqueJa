@@ -24,7 +24,7 @@ public class NaoComutativa extends GeradorExercicio
 
 		addResolucao("A divisão não é comutativa: a ordem dos termos importa.");
 		addResolucao("Como \\(" + b + " < " + a + "\\), ao dividir \\(" + b + "\\) por \\(" + a + "\\) nos naturais obtemos:");
-		addResolucao("\\(" + b + " \\div " + a + " = 0\\) com resto \\(" + b + "\\).");
+		addResolucao("Resultado: \\(" + b + " \\div " + a + " = \\mathbf{0}\\), resto \\(\\mathbf{" + b + "}\\).");
 		addResolucao("Diferentemente, \\(" + a + " \\div " + b + " = " + q + "\\).");
 		addResolucao("Portanto \\(" + a + " \\div " + b + " \\neq " + b + " \\div " + a + "\\).");
 	}

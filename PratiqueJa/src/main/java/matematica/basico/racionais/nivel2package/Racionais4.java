@@ -42,6 +42,6 @@ public class Racionais4 extends GeradorExercicio
 		addResolucao("\\(" + a + " \\times " + d + " = " + cross1 + "\\) e \\("
 			 + c + " \\times " + b + " = " + cross2 + "\\).");
 		addResolucao("Como \\(" + cross1 + (f1EhMaior ? " > " : " < ") + cross2
-			 + "\\), a maior fração é \\(" + fracMaior + "\\).");
+			 + "\\), a maior fração é \\(\\mathbf{" + fracMaior + "}\\).");
 	}
 }

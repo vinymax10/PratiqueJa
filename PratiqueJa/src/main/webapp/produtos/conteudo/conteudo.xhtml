@@ -8,27 +8,35 @@
 
 <!-- HERO -->
 <div class="card-hero">
-	<p class="section-label">Produtos</p>
-	<h1 class="page-title">Posts prontos para <span class="accent">professores</span></h1>
-	<p class="page-subtitle">
-		Conteúdo exclusivo de matemática para Instagram e TikTok — exercícios gerados por IA, personalizados com sua logo e imagens, entregues prontos para publicar.
-	</p>
-	<div class="stat-chips">
-		<div class="stat-chip">
-			<div class="stat-label">Planos</div>
-			<div class="stat-value">3</div>
+	<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+		<div style="flex:1 1 360px;min-width:280px;">
+			<p class="section-label">Produtos</p>
+			<h1 class="page-title">Posts prontos para <span class="accent">professores</span></h1>
+			<p class="page-subtitle">
+				Conteúdo exclusivo de matemática para Instagram e TikTok — exercícios gerados por IA, personalizados com sua logo e imagens, entregues prontos para publicar.
+			</p>
+			<div class="stat-chips">
+				<div class="stat-chip">
+					<div class="stat-label">Planos</div>
+					<div class="stat-value">3</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Posts por mês</div>
+					<div class="stat-value">até 120</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Teste grátis</div>
+					<div class="stat-value">10 posts</div>
+				</div>
+				<div class="stat-chip-blue">
+					<div class="stat-label-white">Exercícios</div>
+					<div class="stat-value-white">Exclusivos</div>
+				</div>
+			</div>
 		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Posts por mês</div>
-			<div class="stat-value">até 120</div>
-		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Teste grátis</div>
-			<div class="stat-value">10 posts</div>
-		</div>
-		<div class="stat-chip-blue">
-			<div class="stat-label-white">Exercícios</div>
-			<div class="stat-value-white">Exclusivos</div>
+		<div style="flex:0 1 320px;min-width:220px;text-align:center;">
+			<img src="/image/produtos/post.png" alt="Posts de exercícios de matemática gerados para Instagram e TikTok"
+				style="width:100%;max-width:320px;border-radius:24px;box-shadow:0 20px 40px rgba(37,99,235,0.25);" />
 		</div>
 	</div>
 </div>
@@ -86,9 +94,18 @@
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
 				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="19,90" data-anual="189,90">19,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
-				<p:commandButton value="Começar agora"
-					styleClass="ui-button-raised btn-primary"
-					process="@this" action="#{pagamentoBean.pagamentoCriador('Basico')}"/>
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Começar agora"
+						rendered="#{pagamentoBean.temHotmartCriador('Basico','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Basico','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Começar agora"
+						rendered="#{pagamentoBean.temHotmartCriador('Basico','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Basico','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -109,9 +126,18 @@
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
 				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="34,90" data-anual="334,90">34,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
-				<p:commandButton value="Ser Premium"
-					styleClass="ui-button-raised btn-primary"
-					process="@this" action="#{pagamentoBean.pagamentoCriador('Premium')}"/>
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Ser Premium"
+						rendered="#{pagamentoBean.temHotmartCriador('Premium','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Premium','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Ser Premium"
+						rendered="#{pagamentoBean.temHotmartCriador('Premium','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Premium','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -132,9 +158,18 @@
 			</ul>
 			<div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
 				<span style="font-size:22px;font-weight:800;color:#111827;">R$ <span class="js-valor" data-mensal="59,90" data-anual="574,90">59,90</span><span class="js-periodo" style="font-size:14px;font-weight:500;color:#6b7280;"> / mês</span></span>
-				<p:commandButton value="Ser Master"
-					styleClass="ui-button-raised btn-primary"
-					process="@this" action="#{pagamentoBean.pagamentoCriador('Master')}"/>
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Ser Master"
+						rendered="#{pagamentoBean.temHotmartCriador('Master','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Master','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Ser Master"
+						rendered="#{pagamentoBean.temHotmartCriador('Master','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoCriadorHotmart('Master','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -150,6 +185,12 @@
 		});
 		document.querySelectorAll('.js-periodo').forEach(function(el){
 			el.textContent = anual ? ' / ano' : ' / mês';
+		});
+		document.querySelectorAll('.js-ciclo-mensal').forEach(function(el){
+			el.style.display = anual ? 'none' : '';
+		});
+		document.querySelectorAll('.js-ciclo-anual').forEach(function(el){
+			el.style.display = anual ? '' : 'none';
 		});
 		var bm = document.getElementById('btnMensal');
 		var ba = document.getElementById('btnAnual');

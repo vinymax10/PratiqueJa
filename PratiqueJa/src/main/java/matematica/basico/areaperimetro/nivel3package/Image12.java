@@ -30,6 +30,6 @@ public class Image12 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaLosango() + "\\)");
 		addResolucao("\\(d=" + d + "\\)");
 		addResolucao("\\(\\dfrac{D \\cdot " + d + "}{2} = " + area + "\\)");
-		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
+		addResolucao("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 	}
 }

@@ -45,6 +45,6 @@ public class Exercicio2 extends GeradorExercicio
 
 		addResolucao("Observando o diagrama, o elemento \\(" + queryElem
 				+ "\\) possui seta apontando para \\(" + resposta + "\\).");
-		addResolucao("Portanto, \\(f(" + queryElem + ") = " + resposta + "\\).");
+		addResolucao("Portanto, \\(f(" + queryElem + ") = \\mathbf{" + resposta + "}\\).");
 	}
 }

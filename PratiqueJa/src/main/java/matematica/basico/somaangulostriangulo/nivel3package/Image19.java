@@ -1,6 +1,7 @@
 package matematica.basico.somaangulostriangulo.nivel3package;
 
 import matematica.GeradorExercicio;
+import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
 import matematica.expressao.MyExpression;
 
 public class Image19 extends GeradorExercicio
@@ -29,6 +30,6 @@ public class Image19 extends GeradorExercicio
 
 		addParagrafo("Dois ângulos internos de um triângulo medem \\(" + a + "^\\circ\\) e \\(" + b + "^\\circ\\). O ângulo externo no terceiro vértice mede \\(" + strExt + "\\). Encontre \\(x\\):");
 		gerarAlternativas(resultadoCorreto);
-		addResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoSAT2.boldLastResult(resolucao) + "\\)");
 	}
 }

@@ -46,18 +46,24 @@ public class ResolucaoRadiciacao
 			resolucaoLatex+="\\sqrt{"+fatoresPrimos.latex()+"}=";
 		
 		fatoresPrimos.dividirPotencias(potencia);
-		
+
+		if(!fatoresPrimos.precisaDesenvolver())
+		{
+			// Já reduzido a um único fator de potência 1 — esse valor já É o resultado final.
+			resolucaoLatex+="\\mathbf{"+fatoresPrimos.latex()+"}";
+			return resolucaoLatex;
+		}
+
 		resolucaoLatex+=""+fatoresPrimos.latex();
-		
+
 		if(fatoresPrimos.possuiPotencias())
 		{
 			fatoresPrimos.removerPotencias();
 			resolucaoLatex+="="+fatoresPrimos.latex();
 		}
-		
-		if(fatoresPrimos.precisaDesenvolver())
-			resolucaoLatex+="=\\mathbf{"+fatoresPrimos.resultado()+"}";
-		
+
+		resolucaoLatex+="=\\mathbf{"+fatoresPrimos.resultado()+"}";
+
 		return resolucaoLatex;
 	}
 	
@@ -71,7 +77,7 @@ public class ResolucaoRadiciacao
 		
 		if(valor==1)
 		{
-			resolucaoLatex+=""+valor;
+			resolucaoLatex+="\\mathbf{"+valor+"}";
 		}
 		else
 		{

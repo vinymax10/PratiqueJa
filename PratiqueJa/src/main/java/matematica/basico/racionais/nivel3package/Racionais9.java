@@ -22,6 +22,6 @@ public class Racionais9 extends GeradorExercicio
 
 		addResolucao("\\(\\dfrac{a}{b}\\) de \\(N\\) significa \\(\\dfrac{a}{b} \\times N\\).");
 		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} \\times " + N + " = \\dfrac{" + a + " \\times "
-			 + N + "}{" + b + "} = \\dfrac{" + (a * N) + "}{" + b + "} = " + resultado + "\\)");
+			 + N + "}{" + b + "} = \\dfrac{" + (a * N) + "}{" + b + "} = \\mathbf{" + resultado + "}\\)");
 	}
 }

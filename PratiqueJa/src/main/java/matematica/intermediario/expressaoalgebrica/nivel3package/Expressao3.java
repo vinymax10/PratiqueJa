@@ -33,6 +33,6 @@ public class Expressao3 extends GeradorExercicio
 		addResolucao("Aplicamos a propriedade distributiva:");
 		addResolucao("\\(" + exprLatex + " = " + expandida + "\\)");
 		addResolucao("Substituindo \\(x = " + v + "\\):");
-		addResolucao("\\(" + term1 + " " + sinalStr + " " + term2 + " = " + resultado + "\\)");
+		addResolucao("\\(" + term1 + " " + sinalStr + " " + term2 + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

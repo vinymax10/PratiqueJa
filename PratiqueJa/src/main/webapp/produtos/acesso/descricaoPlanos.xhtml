@@ -56,12 +56,14 @@
 
 			        <div class="hero-cta mt-3">
 			        	<p:commandButton  value="Assinar Premium (Mensal)"
-			        	process="@this" action="#{pagamentoBean.pagamento('Premium','Mensal')}"
+			        	rendered="#{pagamentoBean.temHotmart('Premium','Mensal')}"
+			        	process="@this" action="#{pagamentoBean.pagamentoHotmart('Premium','Mensal')}"
 						styleClass="ui-button-raised ui-button-flat ui-button-secondary" >
 						</p:commandButton>
 
 			        	<p:commandButton  value="Assinar Premium (Anual)"
-			        	process="@this" action="#{pagamentoBean.pagamento('Premium','Anual')}"
+			        	rendered="#{pagamentoBean.temHotmart('Premium','Anual')}"
+			        	process="@this" action="#{pagamentoBean.pagamentoHotmart('Premium','Anual')}"
 						styleClass="ui-button-raised  buttonBlue" >
 						</p:commandButton>
 			        </div>

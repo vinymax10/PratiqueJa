@@ -34,8 +34,8 @@ public class TresFatores extends GeradorExercicio
 			int abc = ab * c;
 			String abFmt  = ab  < 0 ? "(" + ab  + ")" : "" + ab;
 			String abcFmt = abc < 0 ? "(" + abc + ")" : "" + abc;
-			passos.add("\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\); "
-				+ "\\(" + abFmt + " \\times " + cFmt + " = " + abcFmt + "\\).");
+			passos.add("\\(" + Math.abs(a) + " \\times " + Math.abs(b) + " = " + Math.abs(ab) + "\\).");
+			passos.add("\\(" + abFmt + " \\times " + cFmt + " = " + abcFmt + "\\).");
 			passos.add(negativos + " fatores negativos "
 				+ ((negativos % 2 == 0) ? "(par) → produto positivo." : "(ímpar) → produto negativo."));
 			for(String passo : ResolucaoMDInteiro.multiplicacao(abc, d))

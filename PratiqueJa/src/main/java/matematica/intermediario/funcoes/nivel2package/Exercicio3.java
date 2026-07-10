@@ -30,7 +30,7 @@ public class Exercicio3 extends GeradorExercicio
 		addResolucao("Somando os resultados:");
 		String fv2Str = fv2 < 0 ? "\\left(" + fv2 + "\\right)" : "" + fv2;
 		addResolucao("\\(f(" + v1 + ") + f(" + v2 + ") = " + fv1 + " + " + fv2Str
-				+ " = " + resultado + "\\).");
+				+ " = \\mathbf{" + resultado + "}\\).");
 		gerarAlternativas("" + resultado);
 	}
 

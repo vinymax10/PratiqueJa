@@ -17,6 +17,7 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
+import modelo.avaliacao.PerfilAvaliacao;
 import modelo.publicacao.PerfilCriador;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Pagamento;
@@ -148,26 +149,55 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 		return "";
 	}
 
-	public String pagamento(PerfilUsuario plano, TipoPagamento tipoPagamento)
+	public String pagamentoHotmart(PerfilUsuario plano, TipoPagamento tipoPagamento)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			Produto produto = produtoDAO.buscarPorPerfilUsuario(plano, tipoPagamento);
-			if(produto != null && produto.getIdMercadoPago() != null)
-				Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=" + produto.getIdMercadoPago());
+			if(produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank())
+				Navegacao.redirect(produto.getLinkHotmart());
 		}
 		return "";
 	}
 
-	public String pagamentoCriador(PerfilCriador perfilCriador)
+	public String pagamentoCriadorHotmart(PerfilCriador perfilCriador, TipoPagamento tipoPagamento)
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			Produto produto = produtoDAO.buscarPorPerfilCriador(perfilCriador);
-			if(produto != null && produto.getIdMercadoPago() != null)
-				Navegacao.redirect("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=" + produto.getIdMercadoPago());
+			Produto produto = produtoDAO.buscarPorPerfilCriador(perfilCriador, tipoPagamento);
+			if(produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank())
+				Navegacao.redirect(produto.getLinkHotmart());
 		}
 		return "";
+	}
+
+	public boolean temHotmart(PerfilUsuario plano, TipoPagamento tipoPagamento)
+	{
+		Produto produto = produtoDAO.buscarPorPerfilUsuario(plano, tipoPagamento);
+		return produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank();
+	}
+
+	public boolean temHotmartCriador(PerfilCriador perfilCriador, TipoPagamento tipoPagamento)
+	{
+		Produto produto = produtoDAO.buscarPorPerfilCriador(perfilCriador, tipoPagamento);
+		return produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank();
+	}
+
+	public String pagamentoAvaliacaoHotmart(PerfilAvaliacao perfilAvaliacao, TipoPagamento tipoPagamento)
+	{
+		if(controleAcessoBean.verificaEstaLogado())
+		{
+			Produto produto = produtoDAO.buscarPorPerfilAvaliacao(perfilAvaliacao, tipoPagamento);
+			if(produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank())
+				Navegacao.redirect(produto.getLinkHotmart());
+		}
+		return "";
+	}
+
+	public boolean temHotmartAvaliacao(PerfilAvaliacao perfilAvaliacao, TipoPagamento tipoPagamento)
+	{
+		Produto produto = produtoDAO.buscarPorPerfilAvaliacao(perfilAvaliacao, tipoPagamento);
+		return produto != null && produto.getLinkHotmart() != null && !produto.getLinkHotmart().isBlank();
 	}
 
 }

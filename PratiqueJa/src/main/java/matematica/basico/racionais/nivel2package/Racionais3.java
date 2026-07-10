@@ -25,6 +25,6 @@ public class Racionais3 extends GeradorExercicio
 				   + "\\), multiplicamos por \\(" + k + "\\).");
 		addResolucao("Aplicamos o mesmo fator ao numerador:");
 		addResolucao("\\(\\dfrac{" + a + "}{" + b + "} = \\dfrac{" + a + " \\times " + k + "}{"
-			 + b + " \\times " + k + "} = \\dfrac{" + numDestino + "}{" + denDestino + "}\\)");
+			 + b + " \\times " + k + "} = \\mathbf{\\dfrac{" + numDestino + "}{" + denDestino + "}}\\)");
 	}
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import modelo.avaliacao.PerfilAvaliacao;
 import modelo.publicacao.PerfilCriador;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Produto;
@@ -62,7 +63,7 @@ public class ProdutoDAO extends DAO<Produto>
 		return resultado.isEmpty() ? null : resultado.get(0);
 	}
 
-	public Produto buscarPorPerfilCriador(PerfilCriador perfilCriador)
+	public Produto buscarPorPerfilCriador(PerfilCriador perfilCriador, TipoPagamento tipoPagamento)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
@@ -70,6 +71,42 @@ public class ProdutoDAO extends DAO<Produto>
 
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(builder.equal(fromProduto.get("perfilCriador"), perfilCriador));
+		predicates.add(builder.equal(fromProduto.get("tipoPagamento"), tipoPagamento));
+		predicates.add(builder.equal(fromProduto.get("ativo"), true));
+
+		TypedQuery<Produto> typedQuery = em.createQuery(
+			query.select(fromProduto).where(predicates.toArray(new Predicate[0])));
+
+		List<Produto> resultado = typedQuery.getResultList();
+		return resultado.isEmpty() ? null : resultado.get(0);
+	}
+
+	public Produto buscarPorPerfilAvaliacao(PerfilAvaliacao perfilAvaliacao, TipoPagamento tipoPagamento)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
+		Root<Produto> fromProduto = query.from(Produto.class);
+
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromProduto.get("perfilAvaliacao"), perfilAvaliacao));
+		predicates.add(builder.equal(fromProduto.get("tipoPagamento"), tipoPagamento));
+		predicates.add(builder.equal(fromProduto.get("ativo"), true));
+
+		TypedQuery<Produto> typedQuery = em.createQuery(
+			query.select(fromProduto).where(predicates.toArray(new Predicate[0])));
+
+		List<Produto> resultado = typedQuery.getResultList();
+		return resultado.isEmpty() ? null : resultado.get(0);
+	}
+
+	public Produto buscarPorIdHotmart(String idHotmart)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
+		Root<Produto> fromProduto = query.from(Produto.class);
+
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(builder.equal(fromProduto.get("idHotmart"), idHotmart));
 		predicates.add(builder.equal(fromProduto.get("ativo"), true));
 
 		TypedQuery<Produto> typedQuery = em.createQuery(

@@ -28,7 +28,7 @@ public class Exercicio4 extends GeradorExercicio
 		addResolucao("Agora calculamos \\(f(" + fv + ")\\):");
 		addResolucao("\\(f(" + fv + ") = " + a + " \\cdot " + fvStr + bLatex(b)
 				+ " = " + (a * fv) + bLatex(b) + " = " + ffv + "\\).");
-		addResolucao("Portanto, \\((f \\circ f)(" + v + ") = " + ffv + "\\).");
+		addResolucao("Portanto, \\((f \\circ f)(" + v + ") = \\mathbf{" + ffv + "}\\).");
 		gerarAlternativas("" + ffv);
 	}
 

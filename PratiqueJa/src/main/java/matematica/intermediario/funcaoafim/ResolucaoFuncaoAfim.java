@@ -47,10 +47,12 @@ public class ResolucaoFuncaoAfim
 		}
 
 		Racional racional=new Racional((pontoBy-pontoAy),(pontoBx-pontoAx));
-		passoCalculo+="="+ racional.toStringLatex();
+		String semSimplificar = racional.toStringLatex();
 		racional.fatoracao(2);
 		if(racional.isSimplificou())
-			passoCalculo+="="+ racional.toStringLatex();
+			passoCalculo+="="+ semSimplificar +"=\\mathbf{"+ racional.toStringLatex() +"}";
+		else
+			passoCalculo+="=\\mathbf{"+ semSimplificar +"}";
 
 		return new String[] { passoFormula, passoCalculo };
 	}

@@ -46,4 +46,7 @@ public class Pagamento implements Serializable, Entidade
 
 	@AuditLabel(value = "pago")
 	private boolean pago = false;
+
+	@AuditLabel(value = "transação Hotmart")
+	private String codigoTransacaoHotmart;
 }

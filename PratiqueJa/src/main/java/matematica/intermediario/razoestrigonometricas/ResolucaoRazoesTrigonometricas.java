@@ -13,7 +13,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaCos(angle)+"\\\\";
 		resolucao+=cos.showDfrac()+"=\\dfrac{"+catetoAdjacente+"}{x}\\\\";
 		MyExpression expressao = new MyExpression(cos.numerador+"x="+cos.denominador+"*"+catetoAdjacente);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 
@@ -22,7 +22,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaCos(angle)+"\\\\";
 		resolucao+=cos.showDfrac()+"=\\dfrac{x}{"+hipotenusa+"}\\\\";
 		MyExpression expressao = new MyExpression(cos.denominador+"x="+cos.numerador+"*"+hipotenusa);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 
@@ -31,7 +31,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaTag(angle)+"\\\\";
 		resolucao+=tag.showDfrac()+"=\\dfrac{"+catetoOposto+"}{x}\\\\";
 		MyExpression expressao = new MyExpression(tag.numerador+"x="+tag.denominador+"*"+catetoOposto);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 
@@ -40,7 +40,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaTag(angle)+"\\\\";
 		resolucao+=tag.showDfrac()+"=\\dfrac{x}{"+catetoAdjacente+"}\\\\";
 		MyExpression expressao = new MyExpression(tag.denominador+"x="+tag.numerador+"*"+catetoAdjacente);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 
@@ -49,7 +49,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaSen(angle)+"\\\\";
 		resolucao+=sen.showDfrac()+"=\\dfrac{"+catetoOposto+"}{x}\\\\";
 		MyExpression expressao = new MyExpression(sen.numerador+"x="+sen.denominador+"*"+catetoOposto);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 
@@ -58,7 +58,7 @@ public class ResolucaoRazoesTrigonometricas
 		String resolucao=formulaSen(angle)+"\\\\";
 		resolucao+=sen.showDfrac()+"=\\dfrac{x}{"+hipotenusa+"}\\\\";
 		MyExpression expressao = new MyExpression(sen.denominador+"x="+sen.numerador+"*"+hipotenusa);
-		resolucao+= expressao.resolverLatex();
+		resolucao+= boldLastResult(expressao.resolverLatex());
 		return resolucao;
 	}
 

@@ -46,6 +46,6 @@ public class Radiciacao10 extends GeradorExercicio
 		                    : "Radicais semelhantes: subtraem-se os coeficientes.";
 		addResolucao(regra);
 		addResolucao("\\(" + m + "\\sqrt{" + r + "} " + op + " " + n + "\\sqrt{" + r + "} = (" + m + " " + op + " " + n + ")\\sqrt{" + r + "}\\)");
-		addResolucao("\\(= \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
+		addResolucao("\\((" + m + " " + op + " " + n + ")\\sqrt{" + r + "} = \\mathbf{" + coef + "\\sqrt{" + r + "}}\\)");
 	}
 }

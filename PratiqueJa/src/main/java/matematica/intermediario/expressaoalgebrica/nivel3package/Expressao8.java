@@ -32,6 +32,6 @@ public class Expressao8 extends GeradorExercicio
 		addResolucao("Substituindo \\(a = " + va + "\\) e \\(b = " + vb + "\\):");
 		addResolucao("\\(" + resSubst + " =\\)");
 		addResolucao("\\(" + resCalc + " =\\)");
-		addResolucao("\\(" + resCalc2 + " = " + resultado + "\\)");
+		addResolucao("\\(" + resCalc2 + " = \\mathbf{" + resultado + "}\\)");
 	}
 }

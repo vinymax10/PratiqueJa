@@ -37,8 +37,8 @@ public class Decimal5 extends AgrupadorDecimal
 		int correto = pedirMaior ? sorted[3] : sorted[0];
 
 		String enun = pedirMaior
-			? "Qual é o <strong>maior</strong> número entre os quatro abaixo?"
-			: "Qual é o <strong>menor</strong> número entre os quatro abaixo?";
+			? "Qual é o maior número entre os quatro abaixo?"
+			: "Qual é o menor número entre os quatro abaixo?";
 
 		StringBuilder lista = new StringBuilder("\\(");
 		for(int i = 0; i < 4; i++)
@@ -64,6 +64,6 @@ public class Decimal5 extends AgrupadorDecimal
 		addResolucao("Ordenando crescente:");
 		addResolucao("\\(" + fmtH(sorted[0]) + " < " + fmtH(sorted[1]) +
 			" < " + fmtH(sorted[2]) + " < " + fmtH(sorted[3]) + "\\)");
-		addResolucao((pedirMaior ? "Maior" : "Menor") + ": \\(" + fmtH(correto) + "\\)");
+		addResolucao((pedirMaior ? "Maior" : "Menor") + ": \\(\\mathbf{" + fmtH(correto) + "}\\)");
 	}
 }

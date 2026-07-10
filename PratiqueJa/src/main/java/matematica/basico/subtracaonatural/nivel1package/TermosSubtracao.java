@@ -53,6 +53,6 @@ public class TermosSubtracao extends GeradorExercicio
 		addResolucao("Minuendo \\((" + a + ")\\): o número do qual se subtrai.");
 		addResolucao("Subtraendo \\((" + b + ")\\): o número que é subtraído.");
 		addResolucao("Diferença \\((" + c + ")\\): o resultado da subtração.");
-		addResolucao("Portanto, \\(" + numero + "\\) é o " + termoCorreto + ".");
+		addResolucao("Portanto, \\(" + numero + "\\) é o \\(\\textbf{" + termoCorreto + "}\\).");
 	}
 }

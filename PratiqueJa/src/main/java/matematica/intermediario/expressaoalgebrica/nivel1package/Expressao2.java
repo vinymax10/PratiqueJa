@@ -51,7 +51,7 @@ public class Expressao2 extends GeradorExercicio
 		addResolucao("Substituindo \\(x = " + v + "\\):");
 		addResolucao("\\(" + s1 + " =\\)");
 		addResolucao("\\(" + s1b + " =\\)");
-		addResolucao("\\(" + s2 + " = " + resultado + "\\)");
+		addResolucao("\\(" + s2 + " = \\mathbf{" + resultado + "}\\)");
 	}
 
 	private String termoLinear(int coef)

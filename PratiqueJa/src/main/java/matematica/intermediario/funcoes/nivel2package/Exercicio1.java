@@ -22,7 +22,7 @@ public class Exercicio1 extends GeradorExercicio
 		// Resolução: substitui v, mostra produto, resultado
 		addResolucao("Substituindo \\(x = " + v + "\\) em \\(f(x) = " + equacao + "\\):");
 		addResolucao("\\(f(" + v + ") = " + a + " \\cdot " + vStr + bLatex(b) + " = "
-			+ prod + bLatex(b) + " = " + resultado + "\\).");
+			+ prod + bLatex(b) + " = \\mathbf{" + resultado + "}\\).");
 		gerarAlternativas("" + resultado);
 	}
 

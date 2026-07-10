@@ -19,7 +19,7 @@ public class Decimal5 extends AgrupadorDecimal
 			addParagrafo("\\(\\dfrac{" + n + "}{10}\\)");
 			gerarAltT(n);
 
-			addResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = " + fmtT(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{10} = " + n + " \\div 10 = \\mathbf{" + fmtT(n) + "}\\)");
 		}
 		else
 		{
@@ -30,7 +30,7 @@ public class Decimal5 extends AgrupadorDecimal
 			addParagrafo("\\(\\dfrac{" + n + "}{100}\\)");
 			gerarAltH(n);
 
-			addResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = " + fmtH(n) + "\\)");
+			addResolucao("\\(\\dfrac{" + n + "}{100} = " + n + " \\div 100 = \\mathbf{" + fmtH(n) + "}\\)");
 		}
 	}
 }

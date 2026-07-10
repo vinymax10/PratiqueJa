@@ -22,7 +22,7 @@ public class Exercicio5 extends GeradorExercicio
 		String aStr  = a > 1 ? a + " \\cdot " : "";
 		addResolucao("Substituímos \\(x = " + v + "\\) na expressão:");
 		addResolucao("\\(f(" + v + ") = " + aStr + vStr + "^2" + bLatex(c)
-				+ " = " + aStr + v2 + bLatex(c) + " = " + resultado + "\\).");
+				+ " = " + aStr + v2 + bLatex(c) + " = \\mathbf{" + resultado + "}\\).");
 		gerarAlternativas("" + resultado);
 	}
 

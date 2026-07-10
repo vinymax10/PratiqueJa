@@ -102,11 +102,11 @@ public class Expressao1 extends GeradorExercicio
 			}
 			inter.append(running);
 			addResolucao("\\(" + textoValores + " =\\)");
-			addResolucao("\\(" + inter + " = " + resultado.toStringLatex() + "\\)");
+			addResolucao("\\(" + inter + " = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 		}
 		else
 		{
-			addResolucao("\\(" + textoValores + " = " + resultado.toStringLatex() + "\\)");
+			addResolucao("\\(" + textoValores + " = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 		}
 	}
 

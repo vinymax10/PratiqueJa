@@ -23,6 +23,6 @@ public class Racionais8 extends GeradorExercicio
 		addResolucao("Multiplicamos a parte inteira pelo denominador e somamos o numerador.");
 		addResolucao("\\(" + n + "\\dfrac{" + r + "}{" + d + "} = \\dfrac{" + n + " \\times " + d
 			 + " + " + r + "}{" + d + "} = \\dfrac{" + (n * d) + " + " + r + "}{" + d
-			 + "} = \\dfrac{" + num + "}{" + d + "}\\)");
+			 + "} = \\mathbf{\\dfrac{" + num + "}{" + d + "}}\\)");
 	}
 }

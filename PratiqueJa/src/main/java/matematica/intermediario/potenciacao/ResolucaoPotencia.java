@@ -116,10 +116,12 @@ public class ResolucaoPotencia
 		int numerador = (int) Math.pow(a, p);
 		int denominador = (int) Math.pow(b, p);
 		Racional racional = new Racional(numerador, denominador);
-		resolucaoLatex += "-"+racional.showDfrac();
+		String showFracAntes = racional.showDfrac();
 		racional.fatoracao(2);
 		if(racional.isSimplificou())
-			resolucaoLatex += "=-" + racional.showDfrac();
+			resolucaoLatex += "-" + showFracAntes + "=\\mathbf{-" + racional.showDfrac() + "}";
+		else
+			resolucaoLatex += "\\mathbf{-" + showFracAntes + "}";
 
 		return resolucaoLatex;
 	}

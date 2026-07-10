@@ -58,10 +58,10 @@ public class Exercicio3 extends GeradorExercicio
 		if(ag * bf + bg != ag * bf)
 		{
 			addResolucao("Simplificando a constante:");
-			addResolucao("\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).");
+			addResolucao("\\((g \\circ f)(x) = \\mathbf{" + equacaoStr(coef, constante) + "}\\).");
 		}
 		else
-			addResolucao("\\((g \\circ f)(x) = " + equacaoStr(coef, constante) + "\\).");
+			addResolucao("\\((g \\circ f)(x) = \\mathbf{" + equacaoStr(coef, constante) + "}\\).");
 	}
 
 	private static String equacaoStr(int a, int b)

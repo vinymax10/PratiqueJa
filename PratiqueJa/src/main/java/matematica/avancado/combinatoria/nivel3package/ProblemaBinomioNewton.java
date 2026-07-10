@@ -34,11 +34,12 @@ public class ProblemaBinomioNewton
 
 		String passoIntroducao = "Pelo Binômio de Newton, o termo geral da expansão de \\((a+b)^n\\) é:";
 		String passoFormula = "\\(" + ParCor.formula("T_{k+1} = \\binom{n}{k}\\,a^{\\,n-k}\\,b^{k}") + "\\)";
-		String passoSubstituicao = "Aqui \\(a = x\\), \\(b = " + c + "\\) e \\(n = " + n + "\\). O termo em \\(x^{" + p + "}\\) exige \\(n-k = " + p + "\\), logo \\(k = " + k + "\\):";
+		String passoCondicao = "Aqui \\(a = x\\), \\(b = " + c + "\\) e \\(n = " + n + "\\). O termo em \\(x^{" + p + "}\\) exige \\(n-k = " + p + "\\).";
+		String passoIsolaK = "Isolando \\(k\\): \\(k = n - " + p + " = " + n + " - " + p + " = " + k + "\\):";
 		String passoExpansao = "\\(T_{" + (k+1) + "} = \\binom{" + n + "}{" + k + "}\\,x^{" + p + "}\\cdot " + potencia(""+c, k) + " =\\)";
 		String passoResultado = "\\(" + binom + " \\cdot " + cPow + "\\,x^{" + p + "} = \\mathbf{" + coef + "}\\,x^{" + p + "}\\)";
 
-		return new String[]{passoIntroducao, passoFormula, passoSubstituicao, passoExpansao, passoResultado};
+		return new String[]{passoIntroducao, passoFormula, passoCondicao, passoIsolaK, passoExpansao, passoResultado};
 	}
 
 	private String potencia(String base, int exp)

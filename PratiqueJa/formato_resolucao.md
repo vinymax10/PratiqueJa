@@ -27,6 +27,10 @@ metadata:
 **Why:** texto fora do math fica legível e a quebra acontece por parágrafo, sem `\\` frágil dentro de
 `\(…\)` (era o bug que quebrava `A^{-1}`, subíndices etc.).
 
+> **Nunca deixe raciocínio de rascunho num `addResolucao`.** Nada de "espera...", "na verdade..." ou
+> qualquer autocorreção visível — o texto gerado é o que o aluno lê (ver seção "Lições da revisão
+> pós-Fase 7" no fim deste documento).
+
 > **Rede de segurança:** `addResolucao(texto)` ainda passa o trecho pelo `ResolucaoSplitter`, que move
 > qualquer `\\` solto de dentro de `\(…\)` para o modo texto e fatia em parágrafos. Ou seja, um `\\`
 > acidental não quebra o math — mas o **padrão correto é uma chamada por passo, sem `\\` no fonte**.
@@ -217,6 +221,13 @@ protected void gerarAlternativas(Racional resultado)
 `fatoracao(2)` simplifica a fração antes de gerar os distratores e também beneficia chamadas a
 `toStringLatex()` posteriores na mesma execução de `construir()`.
 
+### `\frac` para frações pequenas
+
+`toStringLatex()` sempre produz `\dfrac{n}{d}` — esse é o padrão quando a fração aparece **no nível da
+linha**. Se a fração precisa ficar **pequena** por estar dentro de um expoente, subscrito, aninhada no
+numerador/denominador de outra fração, ou dentro de uma raiz, monte a string manualmente com
+`\frac{n}{d}` em vez de `toStringLatex()`. Nunca gerar uma fração como texto puro (`"n/d"`).
+
 ---
 
 ## Alternativas para resultados algébricos (strings com variável)
@@ -279,6 +290,17 @@ addResolucao("\\(" + val + "\\,\\text{m}^2\\)");
 addResolucao("\\(" + val + "\\,\\text{kg/m}^3\\)");
 ```
 
+Para unidade ao quadrado/cúbica, o expoente vai **fora** de `\text{}` (`\,\text{m}^2`, nunca `"m2"` ou
+`"m²"` colado no texto):
+
+```java
+// ERRADO — unidade ao quadrado como texto puro
+addResolucao("A área é \\(" + area + "\\) m2.");
+
+// CORRETO
+addResolucao("A área é \\(" + area + "\\,\\text{m}^2\\).");
+```
+
 Operações descritas em texto introdutório usam `\(…\)` inline para os fatores — e a quebra vira uma
 nova chamada:
 
@@ -290,6 +312,22 @@ addResolucao("\\(" + val + " \\times 1000 = \\mathbf{" + resultado + "}\\,\\text
 // operador descrito em texto com inline math
 addResolucao("Converter km para m (\\(\\times 1000\\)) e h para s (\\(\\times 3600\\)):");
 addResolucao("\\(\\dfrac{" + kmh + "\\,\\text{km}}{\\text{h}} = \\dfrac{" + ms + "\\,\\text{m}}{3600\\,\\text{s}} = \\mathbf{" + ms + "}\\,\\text{m/s}\\)");
+```
+
+---
+
+## Letras gregas e raiz
+
+Letra grega sempre via comando LaTeX dentro de `\(…\)` — `\pi`, `\alpha`, `\beta`, `\gamma`, `\delta`,
+`\varepsilon`, `\theta`, `\sigma`, `\mu`, `\phi`, `\omega`, `\Delta`, `\Lambda`... — **nunca** concatenar
+o caractere unicode (`π`, `σ`...) numa `String` Java. Raiz sempre `\sqrt{}` — **nunca** o caractere `√`.
+
+```java
+// ERRADO
+addResolucao("\\(A = " + raio + "² × π\\)");
+
+// CORRETO
+addResolucao("\\(A = " + raio + "^2 \\times \\pi\\)");
 ```
 
 ---
@@ -342,11 +380,14 @@ addResolucao("\\(B =\\) " + descricaoB);
 | Passo de math inline simples | `addResolucao("\\(expressão\\)")` |
 | Passo de prosa (com inline math opcional) | `addResolucao("texto … \\(x\\) …")` |
 | `\\` de matriz/ambiente | interno a `\\(\\begin{…}…\\\\…\\end{…}\\)`, numa única chamada |
-| `\dfrac{n}{d}` (fração) | `resultado.toStringLatex()` |
+| `\dfrac{n}{d}` (fração, nível da linha) | `resultado.toStringLatex()` |
+| `\frac{n}{d}` (fração pequena — expoente/subscrito/raiz/aninhada) | montar string manualmente, não usar `toStringLatex()` |
 | Grupo negativo com parênteses | `"\\left(" + g + "\\right)"` (quando `g < 0`) |
 | `\;` (espaço fino em math) | `\\;` dentro de `\\(…\\)` |
 | Espaço fino antes de unidade | `\\,` antes de `\\text{unidade}` |
-| Unidade física em math | `\\,\\text{km}`, `\\,\\text{m}^2`, `\\,\\text{kg/m}^3` |
+| Unidade física em math | `\\,\\text{km}`, `\\,\\text{m}^2`, `\\,\\text{kg/m}^3` (nunca `"m2"` em texto puro) |
+| Letra grega | `\\pi`, `\\alpha`, `\\theta`... (nunca unicode `π`, `α`...) |
+| Raiz | `\\sqrt{}` (nunca `√`) |
 | Resultado final em negrito | `\\mathbf{" + resultado + "}` no último bloco |
 | Vários valores conhecidos na mesma linha | `\\quad` entre eles dentro de `\\(…\\)` |
 | Rótulo math + descrição em texto | `addResolucao("\\(A =\\) " + descricaoTexto)` |
@@ -373,4 +414,99 @@ addResolucao("Substituindo na expressão:");
 addResolucao("\\(" + expSubs + "\\)");
 addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
 gerarAlternativas(resultado);   // Racional overload — usa \dfrac nas alternativas
+```
+
+---
+
+## Lições da revisão pós-Fase 7 (2026-07)
+
+Uma revisão dedicada de 516 questões geradas (feita depois da migração para `addResolucao` por passo)
+encontrou padrões que passavam despercebidos por não violarem nenhuma regra explícita até então. As
+quatro lições abaixo valem tanto para geradores Java quanto para resoluções autoradas à mão
+(`formato_resolucao_questao.md` §13 — mesmo texto, adaptado para `addResolucao`).
+
+### "logo" não substitui a quebra de passo
+
+Encadear **dois estados de equação diferentes** no mesmo `addResolucao` usando "logo" esconde a
+substituição do aluno — o mesmo problema que motivou abandonar `res += "\\(...\\\\)"` no paradigma antigo.
+
+```java
+// ERRADO — duas equações coladas por "logo" na mesma chamada
+addResolucao("\\(3(2a+17)=6a+51\\), logo \\(a+6a+51=9\\).");
+
+// CORRETO — fato (avaliação) e nova equação em chamadas separadas
+addResolucao("\\(3(2a+17)=6a+51\\).");
+addResolucao("\\(a+6a+51=9\\).");
+```
+
+**Exceções — não separar** (não há substituição escondida, cabe numa chamada só): mesma operação
+explícita ("Multiplicando por \(4\): \(8n=3n+30\)."), mesma expressão avaliada em etapas sem introduzir
+equação alheia, conclusão final simples ("logo \(x=5\)."), raciocínio narrativo trivial, leitura direta
+de um dígito/coeficiente já dado, ou definição/identidade aplicada diretamente (ex.: "\(\log_4 b=y\),
+logo \(b=4^y\)." — definição de logaritmo).
+
+Quando o "logo" é só a **substituição de um valor já derivado** sem frase explicativa, prefira
+**reescrever nomeando a operação** em vez de separar:
+
+```java
+// ERRADO
+addResolucao("\\(2a+8{,}5=98{,}1/9\\), logo \\(2a+8{,}5=10{,}9\\).");
+
+// CORRETO — operação nomeada, sem "logo"
+addResolucao("Dividindo por \\(9\\): \\(2a+8{,}5=\\dfrac{98{,}1}{9}=10{,}9\\).");
+```
+
+### Desenvolvimento de termo/lado isolado precisa de narração antes
+
+Quando um passo sai do fluxo principal para desenvolver um termo ou lado da equação sozinho, o passo
+**anterior** precisa dizer o quê e por quê — senão o próximo passo "aparece do nada":
+
+```java
+// ERRADO — o termo (n+2)^2 aparece sem contexto
+addResolucao("\\((n+4)^2=n^2+8n+16\\).");
+addResolucao("\\((n+2)^2=n^2+4n+4\\).");
+
+// CORRETO — narração antes de cada termo desenvolvido isoladamente
+addResolucao("Vamos desenvolver cada termo desta equação separadamente. Primeiro, o lado esquerdo \\((n+4)^2\\):");
+addResolucao("\\((n+4)^2=n^2+2\\cdot n\\cdot4+4^2=n^2+8n+16\\).");
+addResolucao("Agora o termo \\((n+2)^2\\), do lado direito:");
+addResolucao("\\((n+2)^2=n^2+2\\cdot n\\cdot2+2^2=n^2+4n+4\\).");
+```
+
+A evolução mecânica em si **pode ficar direta** (fórmula + resultado na mesma chamada) — o que não pode
+faltar é a chamada anterior anunciando a mudança de foco.
+
+### Múltiplas incógnitas/entradas resolvidas em sequência: cada uma (a partir da 2ª) precisa de transição
+
+O mesmo problema aparece quando o gerador resolve **mais de uma incógnita ou entrada** em sequência: a
+primeira costuma fluir naturalmente da equação inicial, mas as seguintes não podem só aparecer:
+
+```java
+// ERRADO — a equação de "y" aparece sem aviso
+addResolucao("Para \\(A+B=I\\): \\(x+2=1\\Rightarrow x=-1\\).");
+addResolucao("\\(y+4=0\\Rightarrow y=-4\\).");
+
+// CORRETO — cada entrada seguinte tem sua transição
+addResolucao("Para \\(A+B=I\\): \\(x+2=1\\Rightarrow x=-1\\).");
+addResolucao("Para \\(y\\):");
+addResolucao("\\(y+4=0\\Rightarrow y=-4\\).");
+```
+
+Frases curtas resolvem: `"Para \\(y\\):"`, `"Da segunda operação:"`, `"Para a segunda raiz:"`. Quando
+**todas** as raízes/soluções já foram anunciadas juntas antes de ramificar (ex.: "as raízes são
+\(u=5\) ou \(u=25\)"), a ramificação seguinte não precisa de transição própria.
+
+### Nunca deixar raciocínio de rascunho na resolução
+
+Texto como `"— espera, ..."`, `"na verdade, ..."` é sinal de autocorreção que **não deveria ir para a
+resolução salva**. Revise o `String[]`/`addResolucao` finais e garanta que só o raciocínio limpo entra:
+
+```java
+// ERRADO
+addResolucao("\\(8\\times2=16\\) — espera: os 10 vendidos são a parte de 5, logo 8+5=13 partes? Na verdade, a razão vendidos/total = 8:5, e 1 parte = 2; total = 8 partes = 16.");
+
+// CORRETO
+addResolucao("A razão entre o total de veículos e os vendidos é \\(8:5\\).");
+addResolucao("Os vendidos correspondem à parte \"5\": \\(5\\) partes \\(=10\\) veículos, ou seja \\(1\\) parte \\(=2\\).");
+addResolucao("O total corresponde à parte \"8\": \\(8\\times2=\\mathbf{16}\\).");
 ```

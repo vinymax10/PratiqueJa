@@ -45,7 +45,7 @@ public class Exercicio1 extends GeradorExercicio
 		else
 			addResolucao("\\(g(" + fv + ") = " + fvStr + bLatex(bg) + " = " + resultado + "\\).");
 
-		addResolucao("Portanto, \\((g \\circ f)(" + v + ") = " + resultado + "\\).");
+		addResolucao("Portanto, \\((g \\circ f)(" + v + ") = \\mathbf{" + resultado + "}\\).");
 		gerarAlternativas("" + resultado);
 	}
 

@@ -29,7 +29,7 @@ public class Expressao2 extends GeradorExercicio
 			addResolucao("Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes.");
 			addResolucao("\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} =\\)");
 			addResolucao("\\(" + coefR + "x^{" + expR + "}\\)");
-			addResolucao("O coeficiente é \\(" + coefR + "\\).");
+			addResolucao("O coeficiente é \\(\\mathbf{" + coefR + "}\\).");
 		}
 		else
 		{
@@ -40,7 +40,7 @@ public class Expressao2 extends GeradorExercicio
 			addResolucao("Na multiplicação de monômios, multiplicamos os coeficientes e somamos os expoentes.");
 			addResolucao("\\(" + exprLatex + " = \\left(" + coefA + " \\times " + coefB + "\\right) \\cdot x^{" + expA + "+" + expB + "} =\\)");
 			addResolucao("\\(" + coefR + "x^{" + expR + "}\\)");
-			addResolucao("O expoente de \\(x\\) no resultado é \\(" + expR + "\\).");
+			addResolucao("O expoente de \\(x\\) no resultado é \\(\\mathbf{" + expR + "}\\).");
 		}
 	}
 }

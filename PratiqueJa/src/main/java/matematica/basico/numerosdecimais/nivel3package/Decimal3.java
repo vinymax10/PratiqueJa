@@ -41,8 +41,8 @@ public class Decimal3 extends AgrupadorDecimal
 		}
 		embaralharEAdicionarAlternativas(correctStr, distratores);
 
-		addResolucao("\\(" + a + " \\times " + b + " =\\)");
+		addResolucao("Multiplicamos como se fossem inteiros (ignorando as vírgulas):");
 		addResolucao("\\(" + aH + " \\times " + bT + " = " + prodM + "\\)");
-		addResolucao("3 casas decimais: \\(" + result + "\\)");
+		addResolucao("O primeiro fator tem 2 casas decimais e o segundo 1, então o resultado tem 3: \\(\\mathbf{" + result + "}\\)");
 	}
 }

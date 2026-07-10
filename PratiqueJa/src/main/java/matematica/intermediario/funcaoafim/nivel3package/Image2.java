@@ -45,6 +45,6 @@ public class Image2 extends GeradorExercicio
 		addResolucao("O coeficiente linear  \\(b\\)  pode ser calculado por:");
 		addResolucao("\\(y=" + aDisp + "x + b\\)");
 		addResolucao("Considerando o ponto (" + pontoAx + "," + pontoAy + "),  temos:");
-		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
+		addResolucao("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 	}
 }

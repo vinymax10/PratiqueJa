@@ -146,7 +146,7 @@ public class Expressao1 extends GeradorExercicio
 			addResolucao("Termos em \\(" + variavel + "\\): \\(" + termosVar + "\\)");
 		if(termosCte.length() > 0)
 			addResolucao("Constantes: \\(" + termosCte + "\\)");
-		addResolucao("\\(" + resultadoCorreto + "\\)");
+		addResolucao("\\(\\mathbf{" + resultadoCorreto + "}\\)");
 	}
 
 	private String buildResultado(long cx, long cte, String var)

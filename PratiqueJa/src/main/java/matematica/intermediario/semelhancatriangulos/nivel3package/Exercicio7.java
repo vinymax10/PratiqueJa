@@ -23,7 +23,7 @@ public class Exercicio7 extends GeradorExercicio
 		int rhs = p * L;
 		MyExpression expressao = new MyExpression(
 				Auxiliar.getNumber(effC, "x", true) + Auxiliar.getNumber(effD, "", false) + "=" + rhs);
-		String resolucao = expressao.resolverLatex();
+		String resolucao = boldLastResult(expressao.resolverLatex());
 
 		addParagrafo("Dois triângulos são semelhantes com razão de semelhança \\(k = " + p + "\\). "
 				+ "O lado correspondente do triângulo menor mede \\(" + ladoMenor + "\\) "

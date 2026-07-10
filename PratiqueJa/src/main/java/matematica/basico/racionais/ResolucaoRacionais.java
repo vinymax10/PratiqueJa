@@ -43,9 +43,9 @@ public class ResolucaoRacionais
 		}
 		else
 		{
-			resolucaoLatex += "\\dfrac{" + a + "\\cdot" + d + sinalPlusMinus(positivo) + c + "\\cdot " + b + "}{" + b+" \\cdot "+d + "}=";
+			resolucaoLatex += "\\dfrac{" + wrapNeg(a) + "\\cdot" + d + sinalPlusMinus(positivo) + wrapNeg(c) + "\\cdot " + b + "}{" + b+" \\cdot "+d + "}=";
 
-			resolucaoLatex += "\\dfrac{" + (a*d) + sinalPlusMinus(positivo) + (c*b) + "}{" + (b*d) + "}=";
+			resolucaoLatex += "\\dfrac{" + wrapNeg(a*d) + sinalPlusMinus(positivo) + wrapNeg(c*b) + "}{" + (b*d) + "}=";
 
 			Racional frac;
 			if(positivo)
@@ -53,12 +53,14 @@ public class ResolucaoRacionais
 			else
 				frac = new Racional((a*d)-(c*b),(b*d));
 
-			resolucaoLatex += frac.showDfrac();
+			String semSimplificar = frac.showDfrac();
 
 			frac.fatoracao(2);
 
 			if(frac.isSimplificou()&&!frac.isZero())
-				resolucaoLatex += "=" + frac.showDfrac();
+				resolucaoLatex += semSimplificar + "=\\mathbf{" + frac.showDfrac() + "}";
+			else
+				resolucaoLatex += "\\mathbf{" + semSimplificar + "}";
 		}
 
 		resolucaoLatex=Convert.includeLineBreak(resolucaoLatex,180);
@@ -77,13 +79,14 @@ public class ResolucaoRacionais
 		resolucaoLatex += "\\dfrac{" + a.numerador + "+" + b.numerador + "}{" + a.denominador + "}";
 
 		Racional resultado = new Racional(a.numerador + b.numerador,a.denominador);
-
-		resolucaoLatex += "=" + resultado.showDfrac();
+		String semSimplificar = resultado.showDfrac();
 
 		resultado.fatoracao(2);
 
 		if(resultado.isSimplificou()&&!resultado.isZero())
-			resolucaoLatex += "=" + resultado.showDfrac();
+			resolucaoLatex += "=" + semSimplificar + "=\\mathbf{" + resultado.showDfrac() + "}";
+		else
+			resolucaoLatex += "=\\mathbf{" + semSimplificar + "}";
 
 		return resolucaoLatex;
 	}
@@ -96,15 +99,17 @@ public class ResolucaoRacionais
 	private static String simplesMenosLatex(Racional a, Racional b)
 	{
 		String resolucaoLatex = "";
-		resolucaoLatex += "\\dfrac{" + a.numerador + "-" + b.numerador + "}{" + a.denominador + "}";
+		resolucaoLatex += "\\dfrac{" + a.numerador + "-" + wrapNeg(b.numerador) + "}{" + a.denominador + "}";
 
 		Racional resultado = new Racional(a.numerador - b.numerador,a.denominador);
-		resolucaoLatex += "=" + resultado.showDfrac();
+		String semSimplificar = resultado.showDfrac();
 
 		resultado.fatoracao(2);
 
 		if(resultado.isSimplificou()&&!resultado.isZero())
-			resolucaoLatex += "=" + resultado.showDfrac();
+			resolucaoLatex += "=" + semSimplificar + "=\\mathbf{" + resultado.showDfrac() + "}";
+		else
+			resolucaoLatex += "=\\mathbf{" + semSimplificar + "}";
 
 		return resolucaoLatex;
 	}
@@ -134,12 +139,14 @@ public class ResolucaoRacionais
 		long resultDenominador = b * d;
 
 		Racional fracSimplificada = new Racional(resultNumerodor, resultDenominador);
-		resolucaoLatex += fracSimplificada.showDfrac();
+		String semSimplificar = fracSimplificada.showDfrac();
 
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			resolucaoLatex += "=" + fracSimplificada.showDfrac();
+			resolucaoLatex += semSimplificar + "=\\mathbf{" + fracSimplificada.showDfrac() + "}";
+		else
+			resolucaoLatex += "\\mathbf{" + semSimplificar + "}";
 
 		return separarPassos(Convert.includeLineBreak(resolucaoLatex,180));
 	}
@@ -178,12 +185,14 @@ public class ResolucaoRacionais
 		long resultDenominador = b * d;
 
 		Racional fracSimplificada = new Racional(resultNumerodor, resultDenominador);
-		resolucaoLatex += fracSimplificada.showDfrac();
+		String semSimplificar = fracSimplificada.showDfrac();
 
 		fracSimplificada.fatoracao(2);
 
 		if(fracSimplificada.isSimplificou())
-			resolucaoLatex += "=" + fracSimplificada.showDfrac();
+			resolucaoLatex += semSimplificar + "=\\mathbf{" + fracSimplificada.showDfrac() + "}";
+		else
+			resolucaoLatex += "\\mathbf{" + semSimplificar + "}";
 
 		return separarPassos(Convert.includeLineBreak(resolucaoLatex,180));
 	}
@@ -194,6 +203,13 @@ public class ResolucaoRacionais
 			return "+";
 		else
 			return "-";
+	}
+
+	/** Envolve um valor negativo em parênteses ao concatená-lo após um operador
+	 *  (+/-), evitando o sinal duplo "--" quando o próprio valor já é negativo. */
+	private static String wrapNeg(long v)
+	{
+		return v < 0 ? "\\left(" + v + "\\right)" : "" + v;
 	}
 
 	/**

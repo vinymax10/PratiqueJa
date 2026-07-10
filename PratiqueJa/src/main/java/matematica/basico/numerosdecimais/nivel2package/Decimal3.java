@@ -20,8 +20,8 @@ public class Decimal3 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\div " + n + " = \\,?\\)");
 		gerarAltT(resT);
 
-		addResolucao("\\(" + a + " \\div " + n + " =\\)");
+		addResolucao("Dividimos ignorando a vírgula e depois recolocamos:");
 		addResolucao("\\(" + aT + " \\div " + n + " = " + resT + "\\)");
-		addResolucao("1 casa decimal: \\(" + result + "\\)");
+		addResolucao("O dividendo tem 1 casa decimal, então o resultado também: \\(\\mathbf{" + result + "}\\)");
 	}
 }

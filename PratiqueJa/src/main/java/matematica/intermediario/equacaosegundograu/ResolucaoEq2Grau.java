@@ -68,7 +68,7 @@ public class ResolucaoEq2Grau
 		+ Auxiliar.getNumber(c, "", false) + " = 0\\)");
 		MyExpression expressao = new MyExpression(
 		"a*" + (x1 * x1) + termoBExpr + Auxiliar.getNumber(c, "", false) + " = 0");
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -85,7 +85,7 @@ public class ResolucaoEq2Grau
 			passos.add("\\(" + xv.showDfrac() + "=\\dfrac{" + (-b) + " }{2a}\\)");
 
 		MyExpression expressao = new MyExpression(xv.toString() + "* 2a=" + -b);
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -101,7 +101,7 @@ public class ResolucaoEq2Grau
 
 		MyExpression expressao = new MyExpression(
 		yv.toString() + "*4a=" + -(b * b) + "" + Auxiliar.getNumber(-(-4 * c), "a", false));
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -119,7 +119,7 @@ public class ResolucaoEq2Grau
 
 		MyExpression expressao = new MyExpression(
 		yv.toString() + "*" + (4 * a) + "=" + -(b * b) + "" + Auxiliar.getNumber(-(-4 * a), "c", false));
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -132,7 +132,7 @@ public class ResolucaoEq2Grau
 		+ Auxiliar.getNumber(c, "", false) + " = 0\\)");
 		MyExpression expressao = new MyExpression(
 		a + "*" + (x1 * x1) + " +b * " + x1 + Auxiliar.getNumber(c, "", false) + " = 0");
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -146,7 +146,7 @@ public class ResolucaoEq2Grau
 		passos.add("\\(" + xv.showFrac() + "=\\dfrac{-b }{2 \\cdot " + a + "}"
 		+ "=\\dfrac{-b }{" + (2 * a) + "}\\)");
 		MyExpression expressao = new MyExpression(xv.toString() + "*" + (2 * a) + "=-b");
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -162,7 +162,7 @@ public class ResolucaoEq2Grau
 		+ "+c = 0\\)");
 		MyExpression expressao = new MyExpression(
 		a + "*" + (x1 * x1) + termoBExpr + "+c = 0");
-		passos.add("\\(" + expressao.resolverLatex() + "\\)");
+		passos.add("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 
 		return passos.toArray(new String[0]);
 	}
@@ -248,10 +248,12 @@ public class ResolucaoEq2Grau
 			passoXv += "=\\dfrac{" + (-b) + "}{2 \\cdot " + a + "}";
 
 		Racional resultado = new Racional((-b), (2 * a));
-		passoXv += "=" + resultado.showDfrac();
+		String semSimplificar = resultado.showDfrac();
 		resultado.fatoracao(2);
 		if(resultado.isSimplificou())
-			passoXv += "=" + resultado.showDfrac();
+			passoXv += "=" + semSimplificar + "=\\mathbf{" + resultado.showDfrac() + "}";
+		else
+			passoXv += "=\\mathbf{" + semSimplificar + "}";
 		passoXv += "\\)";
 		passos.add(passoXv);
 
@@ -271,13 +273,31 @@ public class ResolucaoEq2Grau
 		String passoYv = "\\(Y_v=\\dfrac{" + (-delta) + "}{4 \\cdot " + a + "}";
 
 		Racional resultado = new Racional((-delta), (4 * a));
-		passoYv += "=" + resultado.showDfrac();
+		String semSimplificar = resultado.showDfrac();
 		resultado.fatoracao(2);
 		if(resultado.isSimplificou())
-			passoYv += "=" + resultado.showDfrac();
+			passoYv += "=" + semSimplificar + "=\\mathbf{" + resultado.showDfrac() + "}";
+		else
+			passoYv += "=\\mathbf{" + semSimplificar + "}";
 		passoYv += "\\)";
 		passos.add(passoYv);
 
 		return passos.toArray(new String[0]);
+	}
+
+	/** Envolve em \mathbf{} o valor após o último "=" do último passo de uma
+	 *  resolução vinda de {@code MyExpression.resolverLatex()} (passos separados
+	 *  por "\\"), destacando o resultado final sem alterar os passos anteriores. */
+	private static String boldLastResult(String resolucaoLatex)
+	{
+		int lastSeparador = resolucaoLatex.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSeparador >= 0) ? resolucaoLatex.substring(lastSeparador + 2).trim() : resolucaoLatex.trim();
+		int lastIgual = ultimoPasso.lastIndexOf('=');
+		if(lastIgual >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastIgual + 1) + "\\mathbf{" + ultimoPasso.substring(lastIgual + 1).trim() + "}";
+			return (lastSeparador >= 0) ? resolucaoLatex.substring(0, lastSeparador + 2) + boldado : boldado;
+		}
+		return resolucaoLatex;
 	}
 }

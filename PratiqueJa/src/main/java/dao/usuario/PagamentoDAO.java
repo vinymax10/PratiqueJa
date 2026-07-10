@@ -68,6 +68,17 @@ public class PagamentoDAO extends DAO<Pagamento>
 			.getResultList();
 	}
 
+	public Pagamento buscarPorCodigoTransacaoHotmart(String codigoTransacaoHotmart)
+	{
+		List<Pagamento> resultado = em.createQuery(
+			"SELECT p FROM Pagamento p WHERE p.codigoTransacaoHotmart = :codigo",
+			Pagamento.class)
+			.setParameter("codigo", codigoTransacaoHotmart)
+			.getResultList();
+
+		return resultado.isEmpty() ? null : resultado.get(0);
+	}
+
 	public boolean contem(Pagamento pagamento)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();

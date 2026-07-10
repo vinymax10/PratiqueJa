@@ -175,10 +175,16 @@
 						</h:panelGroup>
 						
 						<!-- Resolução -->
-						<h:panelGroup rendered="#{not empty entidade.resolucaoHtml}"
-						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column">
+						<h:panelGroup rendered="#{not empty entidade.resolucaoParagrafos}"
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-2">
 							<h:outputText styleClass="title" value="Resolução" />
-							<h:outputText styleClass="status" value="#{entidade.resolucaoHtml}" escape="false" />
+							<ui:repeat value="#{entidade.resolucaoParagrafos}" var="paragrafo">
+								<h:outputText styleClass="status"
+								value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
+								<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
+								cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+								style="max-width:300px;height:auto;margin:.25rem 0;" />
+							</ui:repeat>
 						</h:panelGroup>
 
 						<!-- Botão Editar -->

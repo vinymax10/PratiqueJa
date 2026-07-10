@@ -59,7 +59,7 @@ public class Equacao1 extends GeradorExercicio
 
 		MyExpression myExpression = new MyExpression(expressao);
 		String enunciado = myExpression.imprimir().replace("(", "\\left(").replace(")", "\\right)");
-		String resolucao = myExpression.resolverLatex().replace("(", "\\left(").replace(")", "\\right)");
+		String resolucao = boldLastResult(myExpression.resolverLatex()).replace("(", "\\left(").replace(")", "\\right)");
 
 		addParagrafo("Encontre \\(" + icognita + "\\)");
 		addParagrafo("\\(" + enunciado + "\\)");

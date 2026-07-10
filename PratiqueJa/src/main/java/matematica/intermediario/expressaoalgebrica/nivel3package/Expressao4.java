@@ -47,9 +47,9 @@ public class Expressao4 extends GeradorExercicio
 		addResolucao("\\(" + inter + " =\\)");
 		addResolucao("\\(" + simplif + "\\)");
 		if(perguntaCoef)
-			addResolucao("O coeficiente de \\(" + var + "\\) é \\(" + coefXRes + "\\).");
+			addResolucao("O coeficiente de \\(" + var + "\\) é \\(\\mathbf{" + coefXRes + "}\\).");
 		else
-			addResolucao("O termo independente é \\(" + constRes + "\\).");
+			addResolucao("O termo independente é \\(\\mathbf{" + constRes + "}\\).");
 	}
 
 	private String buildBinomio(int coefVar, int cte, String var)

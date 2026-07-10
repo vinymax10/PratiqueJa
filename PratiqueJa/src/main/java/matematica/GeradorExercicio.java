@@ -340,6 +340,25 @@ public abstract class GeradorExercicio
 			addLinhaResolucao(linha, null);
 	}
 
+	/**
+	 * Envolve em \mathbf{} o valor após o último "=" do último passo de uma resolução vinda
+	 * de {@link matematica.expressao.MyExpression#resolverLatex()} (passos separados por
+	 * "\\"), destacando o resultado final sem alterar os passos anteriores. Útil quando o
+	 * gerador delega a álgebra a {@code MyExpression} e só precisa destacar a resposta.
+	 */
+	protected static String boldLastResult(String resolucaoLatex)
+	{
+		int lastSeparador = resolucaoLatex.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSeparador >= 0) ? resolucaoLatex.substring(lastSeparador + 2).trim() : resolucaoLatex.trim();
+		int lastIgual = ultimoPasso.lastIndexOf('=');
+		if(lastIgual >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastIgual + 1) + "\\mathbf{" + ultimoPasso.substring(lastIgual + 1).trim() + "}";
+			return (lastSeparador >= 0) ? resolucaoLatex.substring(0, lastSeparador + 2) + boldado : boldado;
+		}
+		return resolucaoLatex;
+	}
+
 	/** Adiciona um passo de resolução com imagem (a partir de um {@link BufferedImage}). */
 	protected void addResolucaoImagem(BufferedImage imagem)
 	{

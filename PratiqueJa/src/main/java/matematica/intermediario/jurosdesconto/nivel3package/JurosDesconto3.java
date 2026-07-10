@@ -33,7 +33,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				resolucao += "i_m=(1+" + deci.format(ia) + ")^{\\frac{1}{12}}-1\\\\";
 				resolucao += "i_m=(" + deci.format(1 + ia) + ")^{\\frac{1}{12}}-1\\\\";
 				resolucao += "i_m=" + deci.format(Math.pow(1 + ia, 1.0 / 12)) + "-1=" + deci.format(im) + "\\\\";
-				resolucao += "i_m=" + iMensal + "\\%";
+				resolucao += "i_m=\\mathbf{" + iMensal + "\\%}";
 
 				addParagrafo("Uma aplicação rende " + iaStr + "% ao ano em regime de juros compostos. "
 						+ "Qual é a taxa mensal equivalente?");
@@ -51,7 +51,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				resolucao += "i_m=(1+" + deci.format(it) + ")^{\\frac{1}{3}}-1\\\\";
 				resolucao += "i_m=(" + deci.format(1 + it) + ")^{\\frac{1}{3}}-1\\\\";
 				resolucao += "i_m=" + deci.format(Math.pow(1 + it, 1.0 / 3)) + "-1=" + deci.format(im) + "\\\\";
-				resolucao += "i_m=" + iMensal + "\\%";
+				resolucao += "i_m=\\mathbf{" + iMensal + "\\%}";
 
 				addParagrafo("Uma aplicação rende " + itStr + "% ao trimestre em regime de juros compostos. "
 						+ "Qual é a taxa mensal equivalente?");
@@ -69,7 +69,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				resolucao += "(1+i_a)=(1+" + deci.format(im) + ")^{12}\\\\";
 				resolucao += "(1+i_a)=(" + deci.format(1 + im) + ")^{12}=" + deci.format(Math.pow(1 + im, 12)) + "\\\\";
 				resolucao += "i_a=" + deci.format(Math.pow(1 + im, 12)) + "-1=" + deci.format(ia) + "\\\\";
-				resolucao += "i_a \\approx " + iaStr + "\\%";
+				resolucao += "i_a \\approx \\mathbf{" + iaStr + "\\%}";
 
 				addParagrafo("Uma aplicação rende " + iMensal + "% ao mês em regime de juros compostos. "
 						+ "Qual é a taxa anual equivalente aproximada?");
@@ -87,7 +87,7 @@ public class JurosDesconto3 extends GeradorExercicio
 				resolucao += "(1+i_t)=(1+" + deci.format(im) + ")^{3}\\\\";
 				resolucao += "(1+i_t)=(" + deci.format(1 + im) + ")^{3}=" + deci.format(Math.pow(1 + im, 3)) + "\\\\";
 				resolucao += "i_t=" + deci.format(Math.pow(1 + im, 3)) + "-1=" + deci.format(it) + "\\\\";
-				resolucao += "i_t \\approx " + itStr + "\\%";
+				resolucao += "i_t \\approx \\mathbf{" + itStr + "\\%}";
 
 				addParagrafo("Uma aplicação rende " + iMensal + "% ao mês em regime de juros compostos. "
 						+ "Qual é a taxa trimestral equivalente aproximada?");

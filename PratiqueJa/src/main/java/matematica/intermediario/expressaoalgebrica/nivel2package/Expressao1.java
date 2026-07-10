@@ -54,6 +54,6 @@ public class Expressao1 extends GeradorExercicio
 		String step2 = coeficientes[0].numerador + " " + Algebra.converter(op1) + " " + gStr;
 		addResolucao("Substituindo na expressão:");
 		addResolucao("\\(" + expSubs + " =\\)");
-		addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
+		addResolucao("\\(" + step2 + " = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 	}
 }

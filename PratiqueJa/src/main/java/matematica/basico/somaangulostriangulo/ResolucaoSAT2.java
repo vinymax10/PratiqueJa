@@ -49,4 +49,19 @@ public class ResolucaoSAT2
 		};
 	}
 
+	/** Envolve em \mathbf{} o valor após o último "=" do último passo de uma
+	 *  resolução vinda de {@code MyExpression.resolverLatex()} (passos separados
+	 *  por "\\"), destacando o resultado final sem alterar os passos anteriores. */
+	public static String boldLastResult(String resolucaoLatex)
+	{
+		int lastSeparador = resolucaoLatex.lastIndexOf("\\\\");
+		String ultimoPasso = (lastSeparador >= 0) ? resolucaoLatex.substring(lastSeparador + 2).trim() : resolucaoLatex.trim();
+		int lastIgual = ultimoPasso.lastIndexOf('=');
+		if(lastIgual >= 0)
+		{
+			String boldado = ultimoPasso.substring(0, lastIgual + 1) + "\\mathbf{" + ultimoPasso.substring(lastIgual + 1).trim() + "}";
+			return (lastSeparador >= 0) ? resolucaoLatex.substring(0, lastSeparador + 2) + boldado : boldado;
+		}
+		return resolucaoLatex;
+	}
 }

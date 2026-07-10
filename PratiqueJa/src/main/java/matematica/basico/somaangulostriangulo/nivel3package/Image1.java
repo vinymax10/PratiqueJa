@@ -3,6 +3,7 @@ package matematica.basico.somaangulostriangulo.nivel3package;
 import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
+import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
 import matematica.expressao.MyExpression;
 
 public class Image1 extends GeradorExercicio
@@ -32,6 +33,6 @@ public class Image1 extends GeradorExercicio
 		addParagrafo("Encontre o valor de \\(x\\):");
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
-		addResolucao("\\(" + resolucao + "\\)");
+		addResolucao("\\(" + ResolucaoSAT2.boldLastResult(resolucao) + "\\)");
 	}
 }

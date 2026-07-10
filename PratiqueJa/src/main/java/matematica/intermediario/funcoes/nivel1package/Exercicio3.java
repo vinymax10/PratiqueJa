@@ -94,7 +94,7 @@ public class Exercicio3 extends GeradorExercicio
 				+ "efetivamente atingidos por alguma seta.");
 		addResolucao("Lendo o diagrama: \\(" + mapeamentos + "\\).");
 		addResolucao("Os valores distintos atingidos são \\(" + imagemCorreta.replace("\\{", "").replace("\\}", "") + "\\).");
-		addResolucao("Portanto, \\(\\text{Im}(f) = " + imagemCorreta + "\\).");
+		addResolucao("Portanto, \\(\\text{Im}(f) = \\mathbf{" + imagemCorreta + "}\\).");
 	}
 
 	private static String toSetLatex(List<Integer> vals)

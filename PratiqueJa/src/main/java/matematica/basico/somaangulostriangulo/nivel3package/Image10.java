@@ -3,6 +3,7 @@ package matematica.basico.somaangulostriangulo.nivel3package;
 import java.awt.image.BufferedImage;
 
 import matematica.GeradorExercicio;
+import matematica.basico.somaangulostriangulo.ResolucaoSAT2;
 import matematica.expressao.MyExpression;
 
 public class Image10 extends GeradorExercicio
@@ -39,6 +40,6 @@ public class Image10 extends GeradorExercicio
 		addParagrafoImagem(image);
 		gerarAlternativas(resultadoCorreto);
 		addResolucao("\\(" + passo1 + "\\)");
-		addResolucao("\\(" + passo2 + "\\)");
+		addResolucao("\\(" + ResolucaoSAT2.boldLastResult(passo2) + "\\)");
 	}
 }

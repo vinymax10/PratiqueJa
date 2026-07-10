@@ -11,8 +11,10 @@ public class JurosDesconto2 extends GeradorExercicio
 		int iMensal = 1 + rand.nextInt(5);
 		int tipo = rand.nextInt(6);
 
-		String pergunta, resultado, resolucao;
-		String formula = ParCor.formula("i_2 = i_1 \\cdot \\dfrac{t_2}{t_1}");
+		String pergunta, resultado;
+		int i1, i2;
+		String t1Label, t2Label;
+		String fatorNum, fatorDen;
 
 		switch(tipo)
 		{
@@ -21,9 +23,9 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iAnual = iMensal * 12;
 				pergunta = "Uma taxa de " + iMensal + "% ao mês é proporcional a quantos % ao ano?";
 				resultado = iAnual + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iMensal + "\\%, \\quad t_1=1\\text{ mês}, \\quad t_2=12\\text{ meses}\\\\";
-				resolucao += "i_2=" + iMensal + "\\% \\cdot \\dfrac{12}{1} = " + iAnual + "\\%";
+				i1 = iMensal; i2 = iAnual;
+				t1Label = "1\\text{ mês}"; t2Label = "12\\text{ meses}";
+				fatorNum = "12"; fatorDen = "1";
 				break;
 			}
 			case 1:
@@ -31,9 +33,9 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iAnual = iMensal * 12;
 				pergunta = "Uma taxa de " + iAnual + "% ao ano é proporcional a quantos % ao mês?";
 				resultado = iMensal + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iAnual + "\\%, \\quad t_1=12\\text{ meses}, \\quad t_2=1\\text{ mês}\\\\";
-				resolucao += "i_2=" + iAnual + "\\% \\cdot \\dfrac{1}{12} = \\dfrac{" + iAnual + "}{12} = " + iMensal + "\\%";
+				i1 = iAnual; i2 = iMensal;
+				t1Label = "12\\text{ meses}"; t2Label = "1\\text{ mês}";
+				fatorNum = "1"; fatorDen = "12";
 				break;
 			}
 			case 2:
@@ -41,9 +43,9 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iTrimestral = iMensal * 3;
 				pergunta = "Uma taxa de " + iMensal + "% ao mês é proporcional a quantos % ao trimestre?";
 				resultado = iTrimestral + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iMensal + "\\%, \\quad t_1=1\\text{ mês}, \\quad t_2=3\\text{ meses}\\\\";
-				resolucao += "i_2=" + iMensal + "\\% \\cdot \\dfrac{3}{1} = " + iTrimestral + "\\%";
+				i1 = iMensal; i2 = iTrimestral;
+				t1Label = "1\\text{ mês}"; t2Label = "3\\text{ meses}";
+				fatorNum = "3"; fatorDen = "1";
 				break;
 			}
 			case 3:
@@ -51,9 +53,9 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iTrimestral = iMensal * 3;
 				pergunta = "Uma taxa de " + iTrimestral + "% ao trimestre é proporcional a quantos % ao mês?";
 				resultado = iMensal + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iTrimestral + "\\%, \\quad t_1=3\\text{ meses}, \\quad t_2=1\\text{ mês}\\\\";
-				resolucao += "i_2=" + iTrimestral + "\\% \\cdot \\dfrac{1}{3} = \\dfrac{" + iTrimestral + "}{3} = " + iMensal + "\\%";
+				i1 = iTrimestral; i2 = iMensal;
+				t1Label = "3\\text{ meses}"; t2Label = "1\\text{ mês}";
+				fatorNum = "1"; fatorDen = "3";
 				break;
 			}
 			case 4:
@@ -61,9 +63,9 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iSemestral = iMensal * 6;
 				pergunta = "Uma taxa de " + iMensal + "% ao mês é proporcional a quantos % ao semestre?";
 				resultado = iSemestral + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iMensal + "\\%, \\quad t_1=1\\text{ mês}, \\quad t_2=6\\text{ meses}\\\\";
-				resolucao += "i_2=" + iMensal + "\\% \\cdot \\dfrac{6}{1} = " + iSemestral + "\\%";
+				i1 = iMensal; i2 = iSemestral;
+				t1Label = "1\\text{ mês}"; t2Label = "6\\text{ meses}";
+				fatorNum = "6"; fatorDen = "1";
 				break;
 			}
 			default:
@@ -71,15 +73,22 @@ public class JurosDesconto2 extends GeradorExercicio
 				int iSemestral = iMensal * 6;
 				pergunta = "Uma taxa de " + iSemestral + "% ao semestre é proporcional a quantos % ao mês?";
 				resultado = iMensal + "\\%";
-				resolucao = formula + "\\\\";
-				resolucao += "i_1=" + iSemestral + "\\%, \\quad t_1=6\\text{ meses}, \\quad t_2=1\\text{ mês}\\\\";
-				resolucao += "i_2=" + iSemestral + "\\% \\cdot \\dfrac{1}{6} = \\dfrac{" + iSemestral + "}{6} = " + iMensal + "\\%";
+				i1 = iSemestral; i2 = iMensal;
+				t1Label = "6\\text{ meses}"; t2Label = "1\\text{ mês}";
+				fatorNum = "1"; fatorDen = "6";
 				break;
 			}
 		}
 
 		addParagrafo(pergunta);
 		gerarAlternativas(resultado);
-		addResolucao("\\(" + resolucao + "\\)");
+
+		addResolucao("\\(" + ParCor.formula("i_2 = i_1 \\cdot \\dfrac{t_2}{t_1}") + "\\)");
+		addResolucao("\\(i_1=" + i1 + "\\%, \\quad t_1=" + t1Label + ", \\quad t_2=" + t2Label + "\\)");
+		if(fatorDen.equals("1"))
+			addResolucao("\\(i_2=" + i1 + "\\% \\cdot \\dfrac{" + fatorNum + "}{" + fatorDen + "} = \\mathbf{" + i2 + "\\%}\\)");
+		else
+			addResolucao("\\(i_2=" + i1 + "\\% \\cdot \\dfrac{" + fatorNum + "}{" + fatorDen
+				+ "} = \\dfrac{" + i1 + "}{" + fatorDen + "} = \\mathbf{" + i2 + "\\%}\\)");
 	}
 }

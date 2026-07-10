@@ -24,9 +24,9 @@ public class Exercicio2 extends GeradorExercicio
 		addResolucao("\\(" + aStr + "x" + bLatex(b) + " = " + k + "\\).");
 		addResolucao("\\(" + aStr + "x = " + k + bLatex(-b) + " = " + ladoDireito + "\\).");
 		if(a > 1)
-			addResolucao("\\(x = \\dfrac{" + ladoDireito + "}{" + a + "} = " + xResult + "\\).");
+			addResolucao("\\(x = \\dfrac{" + ladoDireito + "}{" + a + "} = \\mathbf{" + xResult + "}\\).");
 		else
-			addResolucao("\\(x = " + xResult + "\\).");
+			addResolucao("\\(x = \\mathbf{" + xResult + "}\\).");
 		gerarAlternativas("" + xResult);
 	}
 

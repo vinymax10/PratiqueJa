@@ -35,6 +35,8 @@ A resolução é **autoral** e precisa ser confiável:
 3. **Corrigir erros do original.** Se a resolução/gabarito textual tiver erro factual, corrija.
 4. **Conferir a alternativa marcada como correta** e garantir que a resolução chega exatamente nela.
 5. **Profissional e didática:** prosa clara, transições explicadas, nada de "pulo do gato".
+6. **Nunca salvar raciocínio de rascunho.** A resolução é o texto final para o aluno — nada de
+   "espera...", "na verdade...", autocorreções ou hesitação visíveis (ver §13.4).
 
 ---
 
@@ -141,15 +143,30 @@ Numa cadeia `A = B = C = D`, cada pedaço separado por `=` é um **passo**. Orde
 
 | Item | Convenção |
 |---|---|
-| Fração | `\dfrac{n}{d}` (nunca `n/d`) |
+| Fração | `\dfrac{n}{d}` (nunca `n/d`) — ver regra de `\frac` vs `\dfrac` abaixo |
 | Decimais | vírgula com `{,}` — ex.: `13{,}5` |
 | Operadores nomeados | `\operatorname{}` — `\operatorname{MMC}`, `\operatorname{MDC}`, `\operatorname{sen}`, `\operatorname{tg}` |
 | Resposta em destaque | `\mathbf{...}` — **só** no parágrafo Resposta (ver §9) |
 | Grupo negativo | `\left( ... \right)` quando o valor é negativo |
 | Unidade física | `\,\text{}` — ex.: `5\,\text{cm}`, `9{,}8\,\text{m/s}^2` |
+| Unidade ao quadrado/cúbica | `\,\text{m}^2`, `\,\text{cm}^3` — **nunca** texto puro (`m2`, `cm2`, `km2`, `dm2`, `mm2`) |
+| Letra grega | comando LaTeX dentro de `\(...\)` — `\pi`, `\alpha`, `\beta`, `\gamma`, `\delta`, `\varepsilon`, `\theta`, `\sigma`, `\mu`, `\phi`, `\omega`, `\Delta`, `\Lambda`... — **nunca** o caractere unicode solto (`π`, `σ`...) |
+| Raiz | sempre `\sqrt{}` — **nunca** o caractere `√` |
 | Dinheiro | "R$" **fora** do math — ex.: `R$ \(150{,}00\)` |
 | Vários valores na mesma linha | `\quad` entre eles dentro do `\(…\)` |
 | Espaço fino em math | `\;` |
+
+### `\frac` vs `\dfrac`
+
+`\dfrac{n}{d}` é o padrão sempre que a fração aparece **no nível da linha** (um passo do cálculo, um
+valor isolado). `\frac{n}{d}` só é aceitável quando a fração precisa ficar **pequena** por estar:
+
+- dentro de um **expoente** — `x^{\frac{a}{b}}`;
+- dentro de um **subscrito**;
+- **aninhada** dentro do numerador/denominador de outra fração;
+- dentro de uma **raiz** — `\sqrt{\frac{a}{b}}`.
+
+Fração **nunca** em texto puro (`3/4`) — sempre `\dfrac` ou `\frac`, conforme o contexto acima.
 
 ---
 
@@ -231,11 +248,15 @@ Resposta: \( \mathbf{...} \).
 | Quebra em cadeia, `=` no fim | `= \\` |
 | `\\` de matriz/ambiente (fica no mesmo parágrafo) | interno a `\(\begin{…}…\\…\end{…}\)` |
 | Math inline | `\(expressão\)` |
-| Fração | `\dfrac{n}{d}` |
+| Fração (nível da linha) | `\dfrac{n}{d}` |
+| Fração pequena (expoente/subscrito/raiz/aninhada) | `\frac{n}{d}` |
 | Decimal | `{,}` |
 | Operador nomeado | `\operatorname{MMC}` |
 | Grupo negativo | `\left( ... \right)` |
 | Unidade | `\,\text{km}` |
+| Unidade ao quadrado/cúbica | `\,\text{m}^2` |
+| Letra grega | `\pi`, `\alpha`, `\theta`... (nunca unicode) |
+| Raiz | `\sqrt{}` (nunca `√`) |
 | Vários valores na linha | `\quad` |
 | Resposta final | `\(\\\)` + `Resposta: \( \mathbf{...} \).` |
 
@@ -302,3 +323,107 @@ pipeline antigo (`UPDATE ... resolucao = UNHEX(...)`) está **aposentado**. Agor
 > O converter só **fatia + grava** (mecânico); o conteúdo continua autorado à mão (regra #1 do projeto).
 > Conexão local: banco `pratiqueja`, binários em `C:\Program Files\MySQL\MySQL Server 8.0\bin\`.
 > Credenciais fora de arquivos versionados.
+
+---
+
+## 13. Lições da revisão pós-Fase 7 (2026-07)
+
+Depois da migração para parágrafos (Fase 7), uma revisão dedicada de 516 questões encontrou padrões
+que **passavam despercebidos na autoria original** por não violarem nenhuma regra explícita até então.
+As quatro lições abaixo complementam os princípios do §1 e a regra de quebra do §6.
+
+### 13.1 "logo" não substitui a quebra de parágrafo
+
+Encadear **duas equações/estados diferentes** no mesmo parágrafo usando "logo" é o mesmo problema que a
+seta (`\Rightarrow`) resolvia antes: o aluno vê o resultado sem ver a substituição acontecer.
+
+```text
+ERRADO — duas equações coladas por "logo":
+\(3(2a+17)=6a+51\), logo \(a+6a+51=9\).
+
+CERTO — fato (avaliação) e nova equação em parágrafos separados:
+\(3(2a+17)=6a+51\). \(\\\)
+\(a+6a+51=9\).
+```
+
+**Exceções — não separar** (o "logo" aqui não esconde uma substituição, então fica num parágrafo só):
+
+| Caso | Exemplo |
+|---|---|
+| Mesma operação, explícita | "Multiplicando por \(4\): \(8n=3n+30\)." |
+| Mesma expressão avaliada em etapas (sem equação nova alheia) | "\(3\cdot4=12\), \(3\cdot8=24\), \(4\cdot8=32\), logo \(2(12+24+32)=2\cdot68\)." |
+| Conclusão final simples | "logo \(x=5\)." |
+| Raciocínio narrativo/lógico trivial | "Eva voltou com \(Q/2\), logo gastou \(Q/2\)." |
+| Leitura direta de dígito/coeficiente já dado | "\(\overline{A8}=98\), logo \(A=9\)." / "\(f(x)=3x-5\), logo \(a=3\)." |
+| Definição/identidade aplicada diretamente | "\(\log_4 b=y\), logo \(b=4^y\)." (definição de logaritmo) |
+
+Quando o "logo" é só a **substituição de um valor já derivado** numa relação já estabelecida, sem
+frase explicativa, prefira **reescrever com framing** em vez de separar:
+
+```text
+ERRADO:
+\(2a+8{,}5=98{,}1/9\), logo \(2a+8{,}5=10{,}9\).
+
+CERTO — operação nomeada, sem "logo":
+Dividindo por \(9\): \(2a+8{,}5=\dfrac{98{,}1}{9}=10{,}9\).
+```
+
+### 13.2 Desenvolvimento de termo/lado isolado precisa de narração antes
+
+Quando um parágrafo vai **sair do fluxo principal** para desenvolver um termo, lado da equação ou
+sub-expressão sozinho, o parágrafo **anterior** precisa dizer o quê e por quê — senão o próximo
+parágrafo "aparece do nada" para quem está lendo.
+
+```text
+ERRADO — o termo (n+2)^2 aparece sem contexto:
+\((n+4)^2=n^2+8n+16\). \(\\\)
+\((n+2)^2=n^2+4n+4\).
+
+CERTO — frase de contexto antes de cada termo desenvolvido isoladamente:
+Vamos desenvolver cada termo desta equação separadamente. Primeiro, o lado esquerdo \((n+4)^2\): \(\\\)
+\((n+4)^2=n^2+2\cdot n\cdot4+4^2=n^2+8n+16\). \(\\\)
+Agora o termo \((n+2)^2\), do lado direito: \(\\\)
+\((n+2)^2=n^2+2\cdot n\cdot2+2^2=n^2+4n+4\).
+```
+
+A evolução mecânica em si **pode ficar direta** (fórmula + resultado no mesmo parágrafo) — o que não
+pode faltar é a frase anunciando a mudança de foco.
+
+### 13.3 Múltiplas incógnitas/entradas resolvidas em sequência: cada uma (a partir da 2ª) precisa de transição
+
+O mesmo problema do §13.2 aparece quando a resolução resolve **mais de uma incógnita, entrada de
+matriz, raiz ou item** em sequência: a primeira costuma fluir naturalmente da equação inicial, mas as
+seguintes não podem simplesmente aparecer.
+
+```text
+ERRADO — a equação de "y" aparece sem aviso:
+Para \(A+B=I\): \(x+2=1\Rightarrow x=-1\). \(\\\)
+\(y+4=0\Rightarrow y=-4\).
+
+CERTO — cada entrada seguinte tem sua transição:
+Para \(A+B=I\): \(x+2=1\Rightarrow x=-1\). \(\\\)
+Para \(y\): \(\\\)
+\(y+4=0\Rightarrow y=-4\).
+```
+
+Frases curtas resolvem: "Para \(y\):", "Da segunda operação:", "Para a segunda raiz:", "Também da
+soma:". Quando **todas** as raízes/soluções já foram anunciadas juntas antes de ramificar (ex.: "as
+raízes são \(u=5\) ou \(u=25\)"), a ramificação seguinte não precisa de transição própria — o aviso
+já cobre as duas.
+
+### 13.4 Nunca deixar raciocínio de rascunho na resolução
+
+Texto como "— espera, ...", "na verdade, ..." é sinal de autocorreção de quem (ou do processo que)
+gerou o conteúdo e **não deveria chegar ao aluno**. Revise o resultado final e reescreva limpo, sem
+vestígio de hesitação:
+
+```text
+ERRADO:
+\(8\times2=16\) — espera: os 10 vendidos são a parte de 5, logo o total é 8+5=13 partes? Na verdade,
+a razão vendidos/total = 8:5, e 1 parte = 2; total = 8 partes = 16.
+
+CERTO:
+A razão entre o total de veículos e os vendidos é \(8:5\). \(\\\)
+Os vendidos correspondem à parte "5": \(5\) partes \(=10\) veículos, ou seja \(1\) parte \(=2\). \(\\\)
+O total corresponde à parte "8": \(8\times2=\mathbf{16}\).
+```

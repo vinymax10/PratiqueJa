@@ -8,33 +8,41 @@
 
 <!-- HERO -->
 <div class="card-hero">
-	<p class="section-label">Produtos · Área do Professor</p>
-	<h1 class="page-title">Uma prova <span class="accent">diferente para cada aluno</span></h1>
-	<p class="page-subtitle">
-		Gere avaliações de Matemática em que <strong>cada aluno recebe uma versão única</strong> — acaba a cola de quem senta do lado. Escolha assunto e nível, e em minutos você tem as provas e o gabarito prontos. Vale também como lista de exercícios individualizada.
-	</p>
-	<div class="stat-chips">
-		<div class="stat-chip">
-			<div class="stat-label">Por aluno</div>
-			<div class="stat-value">Prova única</div>
+	<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+		<div style="flex:1 1 360px;min-width:280px;">
+			<p class="section-label">Produtos · Área do Professor</p>
+			<h1 class="page-title">Uma prova <span class="accent">diferente para cada aluno</span></h1>
+			<p class="page-subtitle">
+				Gere avaliações de Matemática em que <strong>cada aluno recebe uma versão única</strong> — acaba a cola de quem senta do lado. Escolha assunto e nível, e em minutos você tem as provas e o gabarito prontos. Vale também como lista de exercícios individualizada.
+			</p>
+			<div class="stat-chips">
+				<div class="stat-chip">
+					<div class="stat-label">Por aluno</div>
+					<div class="stat-value">Prova única</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Geração</div>
+					<div class="stat-value">Em minutos</div>
+				</div>
+				<div class="stat-chip">
+					<div class="stat-label">Teste grátis</div>
+					<div class="stat-value">10 provas</div>
+				</div>
+				<div class="stat-chip-blue">
+					<div class="stat-label-white">Sem cartão</div>
+					<div class="stat-value-white">Grátis</div>
+				</div>
+			</div>
+			<div style="margin-top:22px;">
+				<p:button value="Criar minha primeira prova grátis" icon="pi pi-arrow-right" iconPos="right"
+					styleClass="ui-button-raised btn-primary"
+					href="/avaliacao/list.xhtml" />
+			</div>
 		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Geração</div>
-			<div class="stat-value">Em minutos</div>
+		<div style="flex:0 1 320px;min-width:220px;text-align:center;">
+			<img src="/image/produtos/avaliacao.png" alt="Provas de matemática com versões diferentes por aluno"
+				style="width:100%;max-width:320px;border-radius:24px;box-shadow:0 20px 40px rgba(37,99,235,0.25);" />
 		</div>
-		<div class="stat-chip">
-			<div class="stat-label">Teste grátis</div>
-			<div class="stat-value">10 provas</div>
-		</div>
-		<div class="stat-chip-blue">
-			<div class="stat-label-white">Sem cartão</div>
-			<div class="stat-value-white">Grátis</div>
-		</div>
-	</div>
-	<div style="margin-top:22px;">
-		<p:button value="Criar minha primeira prova grátis" icon="pi pi-arrow-right" iconPos="right"
-			styleClass="ui-button-raised btn-primary"
-			href="/avaliacao/list.xhtml" />
 	</div>
 </div>
 
@@ -94,6 +102,7 @@
 </div>
 
 <!-- PLANOS -->
+<h:form id="formPlanos">
 <div class="card-lg">
 	<h2 class="section-title">Escolha o plano ideal</h2>
 	<p class="card-text" style="margin-bottom:16px;">Planos por volume de provas individuais — do professor particular à rede de ensino. A cota é em provas por aluno, então cresce junto com o seu número de alunos.</p>
@@ -129,9 +138,18 @@
 				<li>Download disponível por 7 dias</li>
 			</ul>
 			<div style="margin-top:16px;">
-				<p:button value="Assinar Essencial"
-					styleClass="ui-button-raised btn-primary"
-					href="/informativo/fale-conosco" />
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Assinar Essencial"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Essencial','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Essencial','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Assinar Essencial"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Essencial','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Essencial','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -157,9 +175,18 @@
 				<li>Download disponível por 30 dias</li>
 			</ul>
 			<div style="margin-top:16px;">
-				<p:button value="Assinar Profissional"
-					styleClass="ui-button-raised btn-primary"
-					href="/informativo/fale-conosco" />
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Assinar Profissional"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Profissional','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Profissional','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Assinar Profissional"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Profissional','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Profissional','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -182,9 +209,18 @@
 				<li>Download disponível por 60 dias</li>
 			</ul>
 			<div style="margin-top:16px;">
-				<p:button value="Assinar Master"
-					styleClass="ui-button-raised btn-primary"
-					href="/informativo/fale-conosco" />
+				<span class="js-ciclo-mensal">
+					<p:commandButton value="Assinar Master"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Master','Mensal')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Master','Mensal')}"/>
+				</span>
+				<span class="js-ciclo-anual" style="display:none;">
+					<p:commandButton value="Assinar Master"
+						rendered="#{pagamentoBean.temHotmartAvaliacao('Master','Anual')}"
+						styleClass="ui-button-raised btn-primary"
+						process="@this" action="#{pagamentoBean.pagamentoAvaliacaoHotmart('Master','Anual')}"/>
+				</span>
 			</div>
 		</div>
 
@@ -194,6 +230,7 @@
 		Precisa de mais volume? <a href="/informativo/fale-conosco" style="color:#2563eb;font-weight:600;">Fale com a gente</a>.
 	</p>
 </div>
+</h:form>
 
 <script>
 	function setCiclo(ciclo){
@@ -203,6 +240,12 @@
 		});
 		document.querySelectorAll('.js-periodo').forEach(function(el){
 			el.textContent = anual ? ' / ano' : ' / mês';
+		});
+		document.querySelectorAll('.js-ciclo-mensal').forEach(function(el){
+			el.style.display = anual ? 'none' : '';
+		});
+		document.querySelectorAll('.js-ciclo-anual').forEach(function(el){
+			el.style.display = anual ? '' : 'none';
 		});
 		var bm = document.getElementById('btnMensal');
 		var ba = document.getElementById('btnAnual');

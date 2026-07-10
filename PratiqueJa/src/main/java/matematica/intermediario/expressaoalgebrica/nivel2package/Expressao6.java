@@ -76,6 +76,6 @@ public class Expressao6 extends GeradorExercicio
 		String step2 = "\\dfrac{" + interNum + "}{" + g3 + "}";
 		addResolucao("Substituindo na expressão:");
 		addResolucao("\\(" + expSubs + " =\\)");
-		addResolucao("\\(" + step2 + " = " + resultado.toStringLatex() + "\\)");
+		addResolucao("\\(" + step2 + " = \\mathbf{" + resultado.toStringLatex() + "}\\)");
 	}
 }

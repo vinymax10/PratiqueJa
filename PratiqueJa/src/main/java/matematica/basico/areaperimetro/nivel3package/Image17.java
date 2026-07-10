@@ -32,6 +32,6 @@ public class Image17 extends GeradorExercicio
 		addResolucao("\\(" + ResolucaoAreaPerimetro.formulaAreaTrapezio() + "\\)");
 		addResolucao("\\(B=" + B + ", \\quad b=" + b + "\\)");
 		addResolucao("\\(\\dfrac{(" + B + "+" + b + ")\\cdot h" + "}{2} = " + area + "\\)");
-		addResolucao("\\(" + expressao.resolverLatex() + "\\)");
+		addResolucao("\\(" + boldLastResult(expressao.resolverLatex()) + "\\)");
 	}
 }

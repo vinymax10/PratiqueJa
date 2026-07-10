@@ -80,10 +80,17 @@
 				</p:selectOneMenu>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-4">
-				<p:outputLabel for="@next" value="ID Mercado Pago"/>
-				<p:inputText value="#{produtoBean.entidade.idMercadoPago}"
-				placeholder="preapproval_plan_id do Mercado Pago" maxlength="255"/>
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="ID Hotmart"/>
+				<p:inputText value="#{produtoBean.entidade.idHotmart}"
+				placeholder="Código da oferta (ou ID do produto) no Hotmart" maxlength="255"/>
+				<p:message for="@previous" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Link de Checkout Hotmart"/>
+				<p:inputText value="#{produtoBean.entidade.linkHotmart}"
+				placeholder="https://pay.hotmart.com/..." maxlength="255"/>
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 

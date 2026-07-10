@@ -12,7 +12,7 @@ public class Expressao5 extends GeradorExercicio
 		int tipo = rand.nextInt(4);
 		int k    = 1 + rand.nextInt(3); // 1, 2 ou 3
 
-		String zStr, rStr, thetaStr, rExpl, angleExpl;
+		String zStr, rStr, thetaStr, rExpl, quadranteExpl, thetaExpl;
 		List<String> dist = new ArrayList<>();
 
 		switch (tipo)
@@ -24,8 +24,8 @@ public class Expressao5 extends GeradorExercicio
 				rExpl    = k == 1
 					? "r = \\sqrt{1 + 1} = \\sqrt{2}"
 					: "r = \\sqrt{" + (k*k) + " + " + (k*k) + "} = \\sqrt{" + (2*k*k) + "} = " + rStr;
-				angleExpl = "\\(a > 0, b > 0\\) (1.° quadrante); "
-					+ "\\(\\tan\\theta = \\dfrac{b}{a} = 1 \\Rightarrow \\theta = \\dfrac{\\pi}{4}\\)";
+				quadranteExpl = "\\(a > 0, b > 0\\) (1.° quadrante).";
+				thetaExpl = "\\(\\tan\\theta = \\dfrac{b}{a} = 1 \\Rightarrow \\theta = \\dfrac{\\pi}{4}\\)";
 				dist.add("\\(" + rStr + "\\left(\\cos\\dfrac{\\pi}{3}+i\\sin\\dfrac{\\pi}{3}\\right)\\)");
 				dist.add("\\(" + rStr + "\\left(\\cos\\dfrac{\\pi}{2}+i\\sin\\dfrac{\\pi}{2}\\right)\\)");
 				dist.add("\\(" + k + "\\left(\\cos\\dfrac{\\pi}{4}+i\\sin\\dfrac{\\pi}{4}\\right)\\)");
@@ -38,8 +38,8 @@ public class Expressao5 extends GeradorExercicio
 				rExpl    = k == 1
 					? "r = \\sqrt{1 + 1} = \\sqrt{2}"
 					: "r = \\sqrt{" + (k*k) + " + " + (k*k) + "} = \\sqrt{" + (2*k*k) + "} = " + rStr;
-				angleExpl = "\\(a < 0, b > 0\\) (2.° quadrante); "
-					+ "\\(\\tan\\theta = \\dfrac{b}{a} = -1 \\Rightarrow \\theta = \\dfrac{3\\pi}{4}\\)";
+				quadranteExpl = "\\(a < 0, b > 0\\) (2.° quadrante).";
+				thetaExpl = "\\(\\tan\\theta = \\dfrac{b}{a} = -1 \\Rightarrow \\theta = \\dfrac{3\\pi}{4}\\)";
 				dist.add("\\(" + rStr + "\\left(\\cos\\dfrac{\\pi}{4}+i\\sin\\dfrac{\\pi}{4}\\right)\\)");
 				dist.add("\\(" + rStr + "\\left(\\cos\\dfrac{\\pi}{2}+i\\sin\\dfrac{\\pi}{2}\\right)\\)");
 				dist.add("\\(" + k + "\\left(\\cos\\dfrac{3\\pi}{4}+i\\sin\\dfrac{3\\pi}{4}\\right)\\)");
@@ -50,8 +50,8 @@ public class Expressao5 extends GeradorExercicio
 				rStr     = "" + k;
 				thetaStr = "\\dfrac{\\pi}{2}";
 				rExpl    = "r = \\sqrt{0 + " + (k*k) + "} = \\sqrt{" + (k*k) + "} = " + k;
-				angleExpl = "\\(a = 0, b > 0\\) (eixo imaginário positivo) "
-					+ "\\(\\Rightarrow \\theta = \\dfrac{\\pi}{2}\\)";
+				quadranteExpl = "\\(a = 0, b > 0\\) (eixo imaginário positivo).";
+				thetaExpl = "\\(\\Rightarrow \\theta = \\dfrac{\\pi}{2}\\)";
 				String wrongSqrt = k == 1 ? "\\sqrt{2}" : k + "\\sqrt{2}";
 				dist.add("\\(" + k + "\\left(\\cos\\dfrac{\\pi}{4}+i\\sin\\dfrac{\\pi}{4}\\right)\\)");
 				dist.add("\\(" + k + "\\left(\\cos\\pi+i\\sin\\pi\\right)\\)");
@@ -63,7 +63,8 @@ public class Expressao5 extends GeradorExercicio
 				rStr     = "" + k;
 				thetaStr = "\\pi";
 				rExpl    = "r = \\sqrt{" + (k*k) + " + 0} = \\sqrt{" + (k*k) + "} = " + k;
-				angleExpl = "\\(a < 0, b = 0\\) (eixo real negativo) \\(\\Rightarrow \\theta = \\pi\\)";
+				quadranteExpl = "\\(a < 0, b = 0\\) (eixo real negativo).";
+				thetaExpl = "\\(\\Rightarrow \\theta = \\pi\\)";
 				dist.add("\\(" + k + "\\left(\\cos\\dfrac{\\pi}{2}+i\\sin\\dfrac{\\pi}{2}\\right)\\)");
 				dist.add("\\(" + k + "\\left(\\cos\\dfrac{3\\pi}{2}+i\\sin\\dfrac{3\\pi}{2}\\right)\\)");
 				dist.add("\\(" + k + "\\left(\\cos 0+i\\sin 0\\right)\\)");
@@ -79,7 +80,8 @@ public class Expressao5 extends GeradorExercicio
 		addResolucao("Calculamos o módulo:");
 		addResolucao("\\(" + rExpl + "\\).");
 		addResolucao("Determinamos o argumento \\(\\theta\\):");
-		addResolucao(angleExpl + ".");
+		addResolucao(quadranteExpl);
+		addResolucao(thetaExpl + ".");
 		addResolucao("\\(z = \\mathbf{" + rStr + "\\left(\\cos " + thetaStr + "+i\\sin " + thetaStr + "\\right)}\\)");
 	}
 }

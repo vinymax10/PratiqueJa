@@ -22,8 +22,8 @@ public class Decimal2 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\times " + b + " = \\,?\\)");
 		gerarAltH(prodH);
 
-		addResolucao("\\(" + a + " \\times " + b + " =\\)");
+		addResolucao("Multiplicamos como se fossem inteiros (ignorando a vírgula):");
 		addResolucao("\\(" + aT + " \\times " + bT + " = " + prodH + "\\)");
-		addResolucao("2 casas decimais: \\(" + result + "\\)");
+		addResolucao("Cada fator tem 1 casa decimal, então o resultado tem 2 casas: \\(\\mathbf{" + result + "}\\)");
 	}
 }

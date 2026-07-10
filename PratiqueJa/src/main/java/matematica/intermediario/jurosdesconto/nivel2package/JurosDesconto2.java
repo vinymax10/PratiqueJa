@@ -40,7 +40,7 @@ public class JurosDesconto2 extends GeradorExercicio
 				resolucao += "N=" + n + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "A=\\dfrac{" + n + "}{1+" + i.showDfrac() + " \\cdot " + t + "}\\\\";
 				resolucao += "A=\\dfrac{" + n + "}{1+" + it.showDfrac() + "}\\\\";
-				resolucao += "A=\\dfrac{" + n + "}{" + denominador.showDfrac() + "}=" + a.showDfrac();
+				resolucao += "A=\\dfrac{" + n + "}{" + denominador.showDfrac() + "}=\\mathbf{" + a.showDfrac() + "}";
 				break;
 
 			case 1:
@@ -50,7 +50,7 @@ public class JurosDesconto2 extends GeradorExercicio
 				resolucao += "A=" + a + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "N=A \\cdot (1+i \\cdot t)\\\\";
 				resolucao += "N=" + a + " \\cdot (1+" + i.showDfrac() + " \\cdot " + t + ")\\\\";
-				resolucao += "N=" + a + " \\cdot " + denominador.showDfrac() + "=" + n.showDfrac();
+				resolucao += "N=" + a + " \\cdot " + denominador.showDfrac() + "=\\mathbf{" + n.showDfrac() + "}";
 				break;
 
 			default:
@@ -60,7 +60,7 @@ public class JurosDesconto2 extends GeradorExercicio
 				resolucao += "N=" + n + ", \\quad i=" + i.porcentagem() + "\\%, \\quad t=" + t + "\\\\";
 				resolucao += "A=\\dfrac{" + n + "}{" + denominador.showDfrac() + "}=" + a.showDfrac() + "\\\\";
 				resolucao += formulaD + "\\\\";
-				resolucao += "D=" + n + "-" + a.showDfrac() + "=" + d.showDfrac();
+				resolucao += "D=" + n + "-" + a.showDfrac() + "=\\mathbf{" + d.showDfrac() + "}";
 				break;
 		}
 

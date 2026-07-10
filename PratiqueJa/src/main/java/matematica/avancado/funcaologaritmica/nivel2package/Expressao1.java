@@ -23,10 +23,10 @@ public class Expressao1 extends GeradorExercicio
 		String justificativa;
 		if (positivo)
 			justificativa = "\\(f(x) > 0 \\Leftrightarrow \\log_{" + a + "}(x) > 0 = \\log_{" + a + "}(1) "
-				+ "\\Leftrightarrow x > 1\\) (base \\(> 1\\), função crescente)";
+				+ "\\Leftrightarrow \\mathbf{x > 1}\\) (base \\(> 1\\), função crescente)";
 		else
 			justificativa = "\\(f(x) < 0 \\Leftrightarrow \\log_{" + a + "}(x) < 0 = \\log_{" + a + "}(1) "
-				+ "\\Leftrightarrow x < 1\\), com domínio \\(x > 0\\), logo \\(0 < x < 1\\)";
+				+ "\\Leftrightarrow x < 1\\), com domínio \\(x > 0\\), logo \\(\\mathbf{0 < x < 1}\\)";
 
 		addParagrafo("Para \\(f(x) = \\log_{" + a + "}(x)\\), determine os valores de \\(x\\) para os quais \\(f(x) " + sinal + "\\).");
 

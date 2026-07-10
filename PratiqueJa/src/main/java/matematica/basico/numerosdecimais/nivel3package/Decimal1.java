@@ -20,7 +20,7 @@ public class Decimal1 extends AgrupadorDecimal
 		addParagrafo("\\(" + a + " \\div " + b + " = \\,?\\)");
 		gerarAlternativasInteiras(n);
 
-		addResolucao("\\(" + a + " \\div " + b + " =\\)");
-		addResolucao("\\((\\times 10):\\ " + aT + " \\div " + bT + " = " + n + "\\)");
+		addResolucao("Multiplicamos dividendo e divisor por 10 para eliminar a vírgula do divisor:");
+		addResolucao("\\(" + aT + " \\div " + bT + " = \\mathbf{" + n + "}\\)");
 	}
 }

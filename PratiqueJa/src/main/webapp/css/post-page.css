@@ -214,6 +214,12 @@
 .pc-seg2--nivel .pc-seg2-opt { min-width: 0; padding: 11px 8px; }
 .pc-seg2--nivel .pc-seg2-title { white-space: nowrap; }
 
+/* Tipo de questão: 2 cards sempre lado a lado, dividindo a largura da coluna
+   (títulos mais longos que os do Nível, então aqui o título pode quebrar em
+   duas linhas em vez de forçar nowrap e estourar a coluna). */
+.pc-seg2--tipo { gap: 8px; flex-wrap: nowrap; }
+.pc-seg2--tipo .pc-seg2-opt { flex: 1 1 0; min-width: 0; padding: 11px 8px; }
+
 /* Variante com thumbnail para o Assunto: card horizontal (thumb + nome ao lado)
    para ficar na mesma altura compacta dos demais cards (galeria que quebra linha) */
 .pc-seg2--assunto { gap: 12px; }
