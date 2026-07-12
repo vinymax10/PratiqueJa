@@ -18,15 +18,16 @@ import modelo.exercicio.ParagrafoResolucao;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
+import pdf.publicacao.estilo.EstiloVisual;
 import pdf.util.Arquivo;
 import util.CorAux;
 
 /**
  * Post do Feed (formato retrato 4:5, menor que o Reel) com o mesmo visual do
- * {@link TikTok2} — foto de fundo vibrante como moldura, conteúdo sobre painel
- * branco translúcido, gancho de atenção, selo de nível e resolução destacada —
- * porém SEM alternativas: a página 1 traz apenas a pergunta. A classe antiga
- * {@link InstagramFeed} permanece intacta.
+ * {@link TikTok2} — conteúdo sobre um painel branco, cujo fundo varia conforme o
+ * {@link EstiloVisual} escolhido em {@code ConfigPost.estilo} — gancho de atenção,
+ * selo de nível e resolução destacada — porém SEM alternativas: a página 1 traz
+ * apenas a pergunta. A classe antiga {@link InstagramFeed} permanece intacta.
  */
 public class InstagramFeed2
 {
@@ -35,6 +36,7 @@ public class InstagramFeed2
 	Exercicio conta;
 	Diretorio diretorio;
 	ProgramacaoPost programacaoPost;
+	EstiloVisual estiloVisual;
 
 	public InstagramFeed2(Diretorio diretorio)
 	{
@@ -46,6 +48,7 @@ public class InstagramFeed2
 	{
 		this.exercicio = exercicio;
 		this.programacaoPost = programacaoPost;
+		this.estiloVisual = EstiloVisual.de(programacaoPost.getConfigPost().getEstilo(), "destaque");
 		gerarConta();
 
 		diretorio.limparDiretorios();
@@ -172,9 +175,11 @@ public class InstagramFeed2
 
 	public void caput()
 	{
-		String corFonte  = CorAux.convertHexPorc(ConfigPost.COR_FONTE);
-		String corTitulo = CorAux.convertHexPorc(ConfigPost.COR_TITULO);
-		String corNome   = CorAux.convertHexPorc(ConfigPost.COR_NOME);
+		String corFonte    = CorAux.convertHexPorc(ConfigPost.COR_FONTE);
+		String corTitulo   = CorAux.convertHexPorc(ConfigPost.COR_TITULO);
+		String corNome     = CorAux.convertHexPorc(ConfigPost.COR_NOME);
+		String hexDestaque = programacaoPost.getConfigPost().getCorDestaque();
+		String corDestaque = CorAux.convertHexPorc(hexDestaque != null && !hexDestaque.isBlank() ? hexDestaque : ConfigPost.COR_TITULO);
 
 		latex = "\\documentclass[12pt]{article}\r\n"
 		+ "\\usepackage[utf8]{inputenc}\r\n"
@@ -196,21 +201,19 @@ public class InstagramFeed2
 		+ "\\definecolor{verde}{rgb}{0,0.54,0.44}\r\n"
 		+ "\\definecolor{amarelo}{rgb}{0.96,0.66,0.13}\r\n"
 		+ "\\definecolor{vermelho}{rgb}{0.86,0.27,0.27}\r\n"
+		+ "\\definecolor{coral}{rgb}{0.94,0.40,0.34}\r\n"
+		+ "\\definecolor{roxo}{rgb}{0.47,0.31,0.79}\r\n"
+		+ "\\definecolor{rosa}{rgb}{0.86,0.29,0.55}\r\n"
+		+ "\\definecolor{destaque}{rgb}{" + corDestaque + "}\r\n"
 		+ "\r\n"
 		+ "\\tikzset{\r\n"
 		+ "  nivel/.style={fill=" + corNivel() + ",text=white,rounded corners=4pt,inner xsep=6pt,inner ysep=2pt,font=\\bfseries\\scriptsize},\r\n"
-		+ "  chip/.style={fill=iris,text=white,rounded corners=7pt,inner xsep=8pt,inner ysep=3pt,font=\\bfseries\\small},\r\n"
+		+ "  chip/.style={fill=" + estiloVisual.corDestaque() + ",text=white,rounded corners=7pt,inner xsep=8pt,inner ysep=3pt,font=\\bfseries\\small},\r\n"
 		+ "  hook/.style={text=laranja,font=\\bfseries,align=center},\r\n"
 		+ "  cta/.style={fill=verde,text=white,rounded corners=9pt,inner xsep=12pt,inner ysep=5pt,font=\\bfseries\\small},\r\n"
 		+ "}\r\n"
 		+ "\\newcommand{\\painel}{%\r\n"
-		+ "  \\node[inner sep=0] at (current page.center){\\includegraphics[width=\\paperwidth,height=\\paperheight]{background.png}};\r\n"
-		+ "  \\coordinate (PNW) at ([shift={(14px,-14px)}]current page.north west);\r\n"
-		+ "  \\coordinate (PSE) at ([shift={(-14px,14px)}]current page.south east);\r\n"
-		+ "  \\coordinate (PNE) at ([shift={(-14px,-14px)}]current page.north east);\r\n"
-		+ "  \\coordinate (PN) at ([yshift=-14px]current page.north);\r\n"
-		+ "  \\coordinate (PS) at ([yshift=14px]current page.south);\r\n"
-		+ "  \\fill[white,opacity=0.82,rounded corners=16pt] (PNW) rectangle (PSE);\r\n"
+		+ estiloVisual.painel("14px", "16pt")
 		+ "}\r\n"
 		+ "\\begin{document}\r\n\r\n";
 	}
@@ -227,7 +230,7 @@ public class InstagramFeed2
 		+ cabecalho(labelNivel())
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-34px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
 		+ "\\node[hook,below=5px of chip] (hook){" + Ganchos.aleatorio() + "};\r\n"
-		+ "\\node[anchor=center,align=center,text width=216px,text=iris,font=\\bfseries] (enun)"
+		+ "\\node[anchor=center,align=center,text width=216px,text=" + estiloVisual.corDestaque() + ",font=\\bfseries] (enun)"
 		+ " at ([yshift=-178px]current page.north){" + fontsize(ptEnunciado(enunciado)) + "\r\n" + enunciado + "};\r\n"
 		+ "\\node[cta,anchor=south] at ([yshift=14px]PS){Comente sua resposta!};\r\n"
 		+ "\\end{tikzpicture}\r\n";

@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.EnumSet;
 
 import bean.PaiBean;
-import bean.seguranca.AutenticacaoBean;
+import bean.seguranca.SessaoBean;
+import dao.usuario.AssinaturaDAO;
 import dao.usuario.PagamentoDAO;
 import dao.usuario.ProdutoDAO;
 import filtro.usuario.FiltroPagamento;
@@ -20,15 +21,16 @@ import modelo.auditoria.TipoEvento;
 import modelo.avaliacao.PerfilAvaliacao;
 import modelo.publicacao.PerfilCriador;
 import modelo.seguranca.PermissaoPadrao;
+import modelo.usuario.Assinatura;
 import modelo.usuario.Pagamento;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Produto;
+import modelo.usuario.StatusAssinatura;
 import modelo.usuario.TipoPagamento;
 import modelo.usuario.Usuario;
 import service.email.EmailService;
 import util.StringAux;
 import bean.util.Mensagem;
-import web.session.SessionContext;
 import web.session.Sessao;
 
 @Data
@@ -47,7 +49,10 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	private ProdutoDAO produtoDAO;
 
 	@Inject
-	private AutenticacaoBean autenticacaoBean;
+	private AssinaturaDAO assinaturaDAO;
+
+	@Inject
+	private SessaoBean sessaoBean;
 
 	@Inject
 	private UsuarioBean usuarioBean;
@@ -123,8 +128,23 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 
 				usuario.setValidadePlano(validade);
 				usuario = usuarioBean.getEntidadeDAO().salvar(usuario);
-				SessionContext.getInstance().setAttribute("UsuarioLogado", usuario);
-				autenticacaoBean.setUsuario(usuario);
+				sessaoBean.updateSession(usuario);
+
+				if(produto != null)
+				{
+					Assinatura assinatura = assinaturaDAO.buscarAtivaPorUsuarioEProduto(usuario, produto);
+					if(assinatura == null)
+					{
+						assinatura = new Assinatura();
+						assinatura.setUsuario(usuario);
+						assinatura.setProduto(produto);
+						assinatura.setDataInicio(hoje);
+					}
+					assinatura.setStatus(StatusAssinatura.Ativa);
+					assinatura.setDataValidade(validade);
+					assinatura.setDataCancelamento(null);
+					entidade.setAssinatura(assinaturaDAO.salvar(assinatura));
+				}
 
 				String nomeProduto = produto != null ? produto.getNome() : plano.getNome();
 				String assunto = "Pagamento realizado";

@@ -458,7 +458,8 @@
 /* A 1ª seção de cada coluna já tem o respiro do split; remove o topo extra p/ alinhar */
 .pc-split-main > .pc-section-sub:first-child,
 .pc-split-aside > .pc-section-sub:first-child,
-.pc-panel > .pc-section-sub:first-child { margin-top: 0; }
+.pc-panel > .pc-section-sub:first-child,
+.pc-bg-col > .pc-section-sub { margin-top: 0; }
 
 /* Logomarca: uploader + preview empilhados dentro da coluna ──────────────── */
 .pc-logo-up   { display: flex; flex-direction: column; gap: 10px; }
@@ -576,6 +577,130 @@
 .pc-dropzone .ui-fileupload-files,
 .pc-dropzone .ui-fileupload-upload,
 .pc-dropzone .ui-fileupload-cancel { display: none !important; }
+
+/* ── Recurso exclusivo Premium/Master (Background Personalizado) ──────────── */
+.pc-premium-banner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: linear-gradient(90deg, #fef3c7, #fde68a);
+    border: 1px solid #fbbf24;
+    border-radius: 14px;
+    padding: 14px 20px;
+    margin: 0 0 20px;
+}
+.pc-premium-banner-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #fff;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+.pc-premium-banner-text {
+    flex: 1 1 260px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #92400e;
+}
+.pc-premium-banner-text strong { font-weight: 800; }
+.pc-premium-banner-cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 9px;
+    background: linear-gradient(90deg, #d97706, #b45309);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.pc-premium-banner-cta:hover { background: linear-gradient(90deg, #b45309, #92400e); color: #fff; }
+
+/* Dropzone bloqueada: mesma caixa tracejada, conteúdo trocado por aviso + cadeado */
+.pc-dropzone-locked {
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 14px;
+}
+.pc-dropzone-locked-icon { font-size: 26px; color: #d97706; }
+.pc-dropzone-locked-title { font-weight: 700; color: #92400e; font-size: 14px; }
+.pc-dropzone-locked-desc { font-size: 12.5px; color: #92400e; opacity: .8; max-width: 220px; }
+
+/* Dialog "recurso exclusivo" (mesmo padrão do dialog Premium de Questões) */
+.pc-premium-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 12px 8px 4px;
+}
+.pc-premium-dialog-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #fff;
+    font-size: 24px;
+}
+.pc-premium-dialog-title {
+    margin: 4px 0 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #92400e;
+}
+.pc-premium-dialog-text {
+    margin: 0;
+    max-width: 380px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #6b5b3e;
+}
+.pc-premium-dialog-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    background: linear-gradient(90deg, #d97706, #b45309);
+    color: #fff;
+    text-decoration: none;
+}
+.pc-premium-dialog-cta:hover {
+    background: linear-gradient(90deg, #b45309, #92400e);
+    transform: translateY(-1px);
+    color: #fff;
+}
+.pc-premium-dialog-dismiss {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    cursor: pointer;
+    text-decoration: none;
+}
+.pc-premium-dialog-dismiss:hover { color: #6b7280; text-decoration: underline; }
 
 .pc-logo-card {
     display: flex;

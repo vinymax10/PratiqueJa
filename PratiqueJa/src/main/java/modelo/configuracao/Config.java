@@ -70,6 +70,12 @@ public class Config implements Serializable, Entidade
 		return endereco + "/avaliacoes";
 	}
 
+	/** Anexos de e-mail (avaliações, ZIPs de post, imagens de post) — só disco, nunca no banco. */
+	public String getEnderecoAnexoEmail()
+	{
+		return endereco + "/anexos-email";
+	}
+
 	// ── Nomes fixos (antes configuráveis) ─────────────────────────────
 
 	public String getNome()

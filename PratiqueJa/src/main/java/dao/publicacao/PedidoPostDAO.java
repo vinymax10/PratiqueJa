@@ -62,6 +62,17 @@ public class PedidoPostDAO extends DAO<PedidoPost>
 		return result == null ? 0 : result.intValue();
 	}
 
+	/** Pedidos ainda não concluídos (fila em memória perdida num restart do servidor), na ordem
+	 *  original de chegada, para a fila única de geração poder recuperá-los. */
+	public List<PedidoPost> buscarPendentes()
+	{
+		return em.createQuery(
+			"SELECT p FROM PedidoPost p WHERE p.status = modelo.publicacao.StatusPedidoPost.AGUARDANDO " +
+			"OR p.status = modelo.publicacao.StatusPedidoPost.GERANDO ORDER BY p.dataSolicitacao ASC",
+			PedidoPost.class)
+			.getResultList();
+	}
+
 	public List<PedidoPost> buscarExpirados(LocalDateTime agora)
 	{
 		TypedQuery<PedidoPost> q = em.createQuery(

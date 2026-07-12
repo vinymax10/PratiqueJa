@@ -30,6 +30,10 @@
 								<i class="pi pi-tag" style="font-size:10px" />
 								#{questao.assuntosNomes}
 							</span>
+							<span class="qz-chip qz-chip-premium"
+								style="#{questao.visibilidade == 'Premium' ? '' : 'display:none'}">
+								<i class="pi pi-crown" style="font-size:10px" /> Premium
+							</span>
 						</div>
 
 					</div>
@@ -96,7 +100,7 @@
 					<div class="qz-card-actions">
 
 						<p:commandButton value="Responder" process="@form"
-							update="feedbackResposta, :growl, dialogUpgrade"
+							update="feedbackResposta, :growl, dialogUpgrade, :formProgresso:progressoWidget"
 							action="#{questaoBean.estaCorreta(questao)}"
 							styleClass="ui-button-raised btn-primary" />
 
@@ -106,13 +110,10 @@
 							process="@this" oncomplete="reloadMathJax();"
 							update="resolucaoComentada, estatistica, :growl, dialogUpgrade" />
 
-						<p:commandButton value="Resolução" icon="pi pi-video"
-							styleClass="ui-button-flat ui-button-plain" />
-
 						<p:commandButton value="Estatística" icon="pi pi-chart-bar"
 							process="@this"
-							update="resolucaoComentada, estatistica"
-							action="#{questao.toogleEstatistica()}"
+							update="resolucaoComentada, estatistica, :growl, dialogUpgrade"
+							action="#{questaoBean.toogleEstatistica(questao)}"
 							styleClass="ui-button-flat ui-button-plain" />
 							
 						<p:button value="Editar" icon="pi pi-pencil"
@@ -125,7 +126,7 @@
 
 					<h:panelGroup id="estatistica" layout="block">
 						<div class="ui-fluid p-grid" style="#{not questao.showEstatistica ? 'display:none' : ''}">
-							<div class="field col-12 lg:col-6 xl:col-4">
+							<div class="field col-12">
 								<p:chart value="#{questaoBean.createBarModel(questao)}"
 									rendered="#{questao.showEstatistica}"
 									style="width:100%;height:350px;" />
@@ -147,6 +148,24 @@
 				</div>
 
 			</ui:repeat>
+
+			<p:dialog widgetVar="dialogPremiumQuestao" modal="true" showHeader="false"
+				responsive="true" width="420">
+				<div class="qz-premium-dialog-content">
+					<div class="qz-premium-dialog-icon"><i class="pi pi-crown" /></div>
+					<h4 class="qz-premium-dialog-title">Resolução exclusiva Premium</h4>
+					<p class="qz-premium-dialog-text">
+						Essa resolução comentada está disponível apenas para assinantes Premium.
+						Faça o upgrade da sua conta para ver a explicação completa.
+					</p>
+					<a href="/produtos/acesso/acesso.xhtml" class="qz-premium-dialog-cta">
+						<i class="pi pi-arrow-up-right" /> Fazer upgrade da conta
+					</a>
+					<a href="#" onclick="PF('dialogPremiumQuestao').hide(); return false;" class="qz-premium-dialog-dismiss">
+						Agora não
+					</a>
+				</div>
+			</p:dialog>
 
 		</ui:composition>
 	</h:body>

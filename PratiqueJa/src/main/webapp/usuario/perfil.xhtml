@@ -223,6 +223,11 @@
 							#{perfilBean.entidade.perfil.nome}
 						</div>
 						<p class="av-shero-sub">Acesso ao Pratique Já</p>
+						<ui:fragment rendered="#{not empty perfilBean.statusValidade(perfilBean.entidade.validadePlano)}">
+							<p class="av-shero-sub" style="font-weight:600;">
+								#{perfilBean.statusValidade(perfilBean.entidade.validadePlano)}
+							</p>
+						</ui:fragment>
 					</div>
 
 					<div class="av-det-grid">
@@ -270,6 +275,18 @@
 							</div>
 						</div>
 					</div>
+
+					<ui:fragment rendered="#{not empty perfilBean.entidade.subscriberCodeHotmart}">
+						<div style="margin-top:16px;text-align:right;">
+							<p:commandButton value="Cancelar assinatura" icon="pi pi-ban"
+								styleClass="ui-button-flat ui-button-danger"
+								action="#{perfilBean.cancelarAssinaturaPremium}"
+								update="@form :growl" process="@this">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+									message="Cancelar a assinatura Premium? A validade continua até o fim do período já pago." />
+							</p:commandButton>
+						</div>
+					</ui:fragment>
 				</div>
 
 				<!-- Perfil de Conteúdo (Posts) -->
@@ -281,6 +298,11 @@
 							#{perfilBean.entidade.perfilCriador.nome}
 						</div>
 						<p class="av-shero-sub">Plano de geração de posts</p>
+						<ui:fragment rendered="#{not empty perfilBean.statusValidade(perfilBean.entidade.validadePlanoCriador)}">
+							<p class="av-shero-sub" style="font-weight:600;">
+								#{perfilBean.statusValidade(perfilBean.entidade.validadePlanoCriador)}
+							</p>
+						</ui:fragment>
 					</div>
 
 					<div class="av-det-grid">
@@ -334,6 +356,18 @@
 							</div>
 						</div>
 					</div>
+
+					<ui:fragment rendered="#{not empty perfilBean.entidade.subscriberCodeHotmartCriador}">
+						<div style="margin-top:16px;text-align:right;">
+							<p:commandButton value="Cancelar assinatura" icon="pi pi-ban"
+								styleClass="ui-button-flat ui-button-danger"
+								action="#{perfilBean.cancelarAssinaturaCriador}"
+								update="@form :growl" process="@this">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+									message="Cancelar a assinatura de Conteúdo? A validade continua até o fim do período já pago." />
+							</p:commandButton>
+						</div>
+					</ui:fragment>
 				</div>
 
 				<!-- Perfil de Avaliação -->
@@ -345,6 +379,11 @@
 							#{perfilBean.entidade.perfilAvaliacao.nome}
 						</div>
 						<p class="av-shero-sub">Plano de confecção de avaliações</p>
+						<ui:fragment rendered="#{not empty perfilBean.statusValidade(perfilBean.entidade.validadePlanoAvaliacao)}">
+							<p class="av-shero-sub" style="font-weight:600;">
+								#{perfilBean.statusValidade(perfilBean.entidade.validadePlanoAvaliacao)}
+							</p>
+						</ui:fragment>
 					</div>
 
 					<div class="av-det-grid">
@@ -396,6 +435,18 @@
 							</div>
 						</div>
 					</div>
+
+					<ui:fragment rendered="#{not empty perfilBean.entidade.subscriberCodeHotmartAvaliacao}">
+						<div style="margin-top:16px;text-align:right;">
+							<p:commandButton value="Cancelar assinatura" icon="pi pi-ban"
+								styleClass="ui-button-flat ui-button-danger"
+								action="#{perfilBean.cancelarAssinaturaAvaliacao}"
+								update="@form :growl" process="@this">
+								<p:confirm header="Confirmação" icon="pi pi-info-circle"
+									message="Cancelar a assinatura de Avaliações? A validade continua até o fim do período já pago." />
+							</p:commandButton>
+						</div>
+					</ui:fragment>
 				</div>
 
 			</div>

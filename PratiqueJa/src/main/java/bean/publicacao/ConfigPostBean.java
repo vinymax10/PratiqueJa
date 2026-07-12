@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
+import bean.usuario.ControleAcessoBean;
 import dao.publicacao.ConfigPostDAO;
 import dao.usuario.UsuarioDAO;
 import lombok.Data;
@@ -52,6 +53,9 @@ public class ConfigPostBean implements Serializable
 	@Inject
 	private ImagemPostService imagemPostService;
 
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
 	private int activeIndex;
 
 	private UploadedFile uploadedFile;
@@ -81,6 +85,9 @@ public class ConfigPostBean implements Serializable
 
 	public String salvar()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		try
 		{
 			usuarioDAO.salvar(configPost.getUsuario());
@@ -97,6 +104,9 @@ public class ConfigPostBean implements Serializable
 
 	public String uploadLogo(FileUploadEvent event)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		uploadedFile = event.getFile();
 		try
 		{
@@ -122,6 +132,9 @@ public class ConfigPostBean implements Serializable
 
 	public String removerLogo()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		File file = new File(diretorio.getConfig().getEndereco() + configPost.getLogo().getEndImagem());
 		file.delete();
 		configPost.setLogo(null);
@@ -133,6 +146,9 @@ public class ConfigPostBean implements Serializable
 
 	public String configDefault()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		configPost = configPostDAO.salvar(configPost);
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Restauração da configuração default realizado com sucesso.");
 
@@ -143,13 +159,33 @@ public class ConfigPostBean implements Serializable
 	public void init()
 	{
 		diretorio = diretorioService.criarDiretorioSemReserva();
-		Usuario usuario = Sessao.getUsuarioLogado();
-		if(usuario.isCriador())
-			configPost = usuario.getConfigPost();
+		sincronizarConfigPost();
 	}
 
 	public void carregarConfigPost()
 	{
-		this.configPost = configPostDAO.getConfigPost(idConfigPost);
+		sincronizarConfigPost();
+	}
+
+	/**
+	 * Alinha o configPost em edição com o usuário da sessão. A tela é navegável sem login (como
+	 * "Criar Avaliação"); sem usuário logado fica um objeto vazio só para exibição — as ações que
+	 * de fato gravam (salvar, upload) exigem login antes de prosseguir. Um admin pode inspecionar
+	 * o configPost de outro usuário via o parâmetro {@code configPost} da URL; para os demais,
+	 * ignora esse parâmetro e usa sempre o próprio configPost — inclusive ao recarregar a página
+	 * após o login (o formulário de login redireciona de volta para a mesma URL).
+	 */
+	private void sincronizarConfigPost()
+	{
+		Usuario usuario = Sessao.getUsuarioLogado();
+		if(usuario == null)
+		{
+			configPost = new ConfigPost();
+			return;
+		}
+		if(idConfigPost != null && usuario.isAdmin())
+			configPost = configPostDAO.getConfigPost(idConfigPost);
+		else
+			configPost = usuario.getConfigPost();
 	}
 }

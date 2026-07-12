@@ -6,6 +6,7 @@ import java.util.List;
 
 import bean.academico.AssuntoBean;
 import bean.download.Diretorio;
+import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.exercicio.ExercicioPadraoDAO;
 import jakarta.annotation.PostConstruct;
@@ -55,6 +56,9 @@ public class TesteConfigPostBean implements Serializable
 	@Inject
 	private DiretorioService diretorioService;
 
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
 	private Nivel nivel = Nivel.Nivel1;
 
 	/** Formato selecionado no switch do teste: true = Feed, false = Reel. */
@@ -93,6 +97,9 @@ public class TesteConfigPostBean implements Serializable
 
 	public String teste(boolean feed)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		if(validacao())
 		{
 			ConfigPost configPost = configPostBean.getConfigPost();

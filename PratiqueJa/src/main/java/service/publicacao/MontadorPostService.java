@@ -15,8 +15,6 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.sql.rowset.serial.SerialBlob;
-
 import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
@@ -68,7 +66,12 @@ public class MontadorPostService implements Serializable
 
 	private final Random random = new Random();
 
-	@Asynchronous
+	/**
+	 * Monta um pedido de posts de forma síncrona (bloqueia a thread chamadora até terminar).
+	 * A concorrência é controlada por {@link FilaGeracaoPostService}, que garante uma única fila
+	 * para toda a aplicação — este método nunca deve ser chamado diretamente a partir de um bean
+	 * de tela; use {@code FilaGeracaoPostService#enfileirar(Long)}.
+	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void montar(Long pedidoId)
 	{
@@ -292,9 +295,7 @@ public class MontadorPostService implements Serializable
 			if(email == null || email.isBlank())
 				return;
 
-			DocumentoFile anexo = new DocumentoFile();
-			anexo.setFile(new SerialBlob(zipBytes));
-			anexo.setEndDocumentacao(nomeDownload);
+			DocumentoFile anexo = emailService.criarAnexo(nomeDownload, zipBytes);
 
 			String nome = pedido.getUsuario().getFirstNome();
 			String html = montarHtmlZip(nome, pedido.getCodigoBatch(), pedido.getNome(), pedido.getQuantidade());

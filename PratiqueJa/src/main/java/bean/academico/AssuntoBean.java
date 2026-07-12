@@ -8,7 +8,9 @@ import jakarta.faces.application.FacesMessage;
 import bean.PaiBean;
 import dao.academico.AssuntoDAO;
 import dao.exercicio.ExercicioDAO;
+import dao.exercicio.ResultadoExercicioDAO;
 import dao.pdf.PdfDAO;
+import dao.questao.ResultadoQuestaoDAO;
 import dao.teste.ResultadoTesteDAO;
 import exceptions.RelacaoException;
 import filtro.academico.FiltroAssunto;
@@ -46,6 +48,12 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 
 	@Inject
 	private PdfDAO pdfDAO;
+
+	@Inject
+	private ResultadoExercicioDAO resultadoExercicioDAO;
+
+	@Inject
+	private ResultadoQuestaoDAO resultadoQuestaoDAO;
 	
 	private String assunto;
 
@@ -189,6 +197,42 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 			return resultadoTesteDAO.melhorResultado(assunto, usuario);
 		else
 			return 0;
+	}
+
+	/** Exercícios do assunto que o usuário logado já acertou. */
+	public int exerciciosCorretos(Assunto assunto)
+	{
+		Usuario usuario = Sessao.getUsuarioLogado();
+		if(usuario == null || assunto == null)
+			return 0;
+		return resultadoExercicioDAO.contarCorretos(assunto, usuario);
+	}
+
+	/** Questões do assunto que o usuário logado já acertou. */
+	public int questoesCorretas(Assunto assunto)
+	{
+		Usuario usuario = Sessao.getUsuarioLogado();
+		if(usuario == null || assunto == null)
+			return 0;
+		return resultadoQuestaoDAO.contarCorretas(assunto, usuario);
+	}
+
+	/**
+	 * Progresso do usuário logado no assunto: exercícios corretos / total de exercícios do
+	 * assunto. As questões ficam de fora do denominador — são o banco de provas do assunto
+	 * (centenas por assunto), não uma lista de prática do aluno; usá-las junto inflava o total
+	 * a ponto do progresso nunca sair de 0% mesmo depois de responder várias.
+	 */
+	public int progresso(Assunto assunto)
+	{
+		if(assunto == null)
+			return 0;
+
+		int total = assunto.getQtdExercicios();
+		if(total == 0)
+			return 0;
+
+		return (int) Math.round(100d * exerciciosCorretos(assunto) / total);
 	}
 
 	public void atualziar()

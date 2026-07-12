@@ -1,5 +1,8 @@
 package service.email;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,6 +13,7 @@ import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
 
 import dao.email.EmailDAO;
+import modelo.DocumentoFile;
 import modelo.email.Email;
 
 /**
@@ -43,6 +47,7 @@ public class CleanupEmailService
 		{
 			try
 			{
+				apagarArquivos(email.getDocumentosFile());
 				email.getDocumentosFile().clear();
 				emailDAO.salvar(email);
 			}
@@ -60,11 +65,32 @@ public class CleanupEmailService
 		{
 			try
 			{
+				// Defensivo: se por algum motivo os anexos ainda não tinham sido limpos.
+				apagarArquivos(email.getDocumentosFile());
 				emailDAO.remover(email);
 			}
 			catch(Exception e)
 			{
 				logger.warning("Falha ao remover e-mail id=" + email.getId() + ": " + e.getMessage());
+			}
+		}
+	}
+
+	/** Apaga do disco os arquivos dos anexos; o registro em si é removido pelo chamador. */
+	private void apagarArquivos(List<DocumentoFile> documentosFile)
+	{
+		for(DocumentoFile documentoFile : documentosFile)
+		{
+			if(documentoFile.getCaminhoArquivo() == null)
+				continue;
+			try
+			{
+				Files.deleteIfExists(Path.of(documentoFile.getCaminhoArquivo()));
+			}
+			catch(IOException e)
+			{
+				logger.warning("Falha ao apagar arquivo de anexo " + documentoFile.getCaminhoArquivo()
+					+ ": " + e.getMessage());
 			}
 		}
 	}

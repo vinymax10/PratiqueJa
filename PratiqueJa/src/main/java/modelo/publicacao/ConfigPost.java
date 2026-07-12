@@ -63,6 +63,15 @@ public class ConfigPost implements Serializable, Entidade
 	@AuditLabel(value = "finalidade do CTA", genero = GeneroGramatical.FEMININO)
 	private FinalidadeCta finalidadeCta = FinalidadeCta.Ensino;
 
+	@Enumerated(EnumType.STRING)
+	@AuditLabel(value = "estilo do post", genero = GeneroGramatical.MASCULINO)
+	private EstiloPost estilo = EstiloPost.FotoFundo;
+
+	@Column(length = 7)
+	@Size(max = 7)
+	@AuditLabel(value = "cor de destaque", genero = GeneroGramatical.FEMININO)
+	private String corDestaque = "#4059E3";
+
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "configPost")
 	@OrderBy("ordem")

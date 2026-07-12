@@ -1,5 +1,6 @@
 package service.exercicio;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.academico.AssuntoDAO;
@@ -20,7 +21,9 @@ import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.ConfigExercicio;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
+import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
+import web.session.Sessao;
 
 @ApplicationScoped
 public class ExercicioService
@@ -70,6 +73,25 @@ public class ExercicioService
 		}
 
 		exercicioDAO.salvar(exercicio);
+		registrarResultado(exercicio, acertou);
+	}
+
+	/** Grava (ou atualiza, se já existir) o resultado do usuário para este exercício. */
+	private void registrarResultado(Exercicio exercicio, boolean acertou)
+	{
+		Usuario usuario = Sessao.getUsuarioLogado();
+		if(usuario == null)
+			return;
+
+		ResultadoExercicio resultado = resultadoExercicioDAO.buscar(exercicio, usuario);
+		if(resultado == null)
+			resultado = new ResultadoExercicio();
+
+		resultado.setUsuario(usuario);
+		resultado.setExercicio(exercicio);
+		resultado.setNota(acertou ? 1d : 0d);
+		resultado.setRealizacao(LocalDate.now());
+		resultadoExercicioDAO.salvar(resultado);
 	}
 
 	public Exercicio salvar(Exercicio exercicio)

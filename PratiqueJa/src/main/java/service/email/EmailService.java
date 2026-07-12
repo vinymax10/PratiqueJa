@@ -1,11 +1,14 @@
 package service.email;
 
-import java.sql.Blob;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import dao.configuracao.ConfigDAO;
 import dao.email.EmailDAO;
 import filtro.email.FiltroEmail;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -14,6 +17,7 @@ import jakarta.faces.push.PushContext;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import modelo.DocumentoFile;
+import modelo.configuracao.Config;
 import modelo.email.Email;
 import modelo.email.StatusEmail;
 
@@ -24,8 +28,39 @@ public class EmailService
 	private EmailDAO emailDAO;
 
 	@Inject
+	private ConfigDAO configDAO;
+
+	@Inject
 	@Push(channel = "email")
 	private PushContext push;
+
+	/**
+	 * Grava os bytes do anexo em disco (nunca no banco) e devolve o {@link DocumentoFile} pronto
+	 * para anexar a um {@link Email}. Nome em disco é prefixado com um UUID para não colidir
+	 * com outros anexos do mesmo lote (ex.: vários posts com o mesmo nome de arquivo).
+	 */
+	public DocumentoFile criarAnexo(String nomeArquivo, byte[] dados)
+	{
+		DocumentoFile anexo = new DocumentoFile();
+		anexo.setEndDocumentacao(nomeArquivo);
+		try
+		{
+			Config config = configDAO.buscar();
+			Path dir = Path.of(config.getEnderecoAnexoEmail());
+			Files.createDirectories(dir);
+
+			String nomeUnico = UUID.randomUUID().toString().replace("-", "") + "_" + nomeArquivo;
+			Path destino = dir.resolve(nomeUnico);
+			Files.write(destino, dados);
+
+			anexo.setCaminhoArquivo(destino.toAbsolutePath().toString());
+		}
+		catch(IOException e)
+		{
+			throw new RuntimeException("Falha ao gravar anexo de e-mail em disco: " + nomeArquivo, e);
+		}
+		return anexo;
+	}
 
 	public List<Email> listarPendentes()
 	{
@@ -86,11 +121,11 @@ public class EmailService
 			{
 				try
 				{
-					Blob blob = documentoFile.getFile();
-					byte[] dados = blob == null ? new byte[0] : blob.getBytes(1, (int) blob.length());
+					String caminho = documentoFile.getCaminhoArquivo();
+					byte[] dados = caminho == null ? new byte[0] : Files.readAllBytes(Path.of(caminho));
 					dto.adicionarAnexo(documentoFile.getEndDocumentacao(), dados);
 				}
-				catch(SQLException e)
+				catch(IOException e)
 				{
 					throw new RuntimeException("Falha ao ler anexo do e-mail " + email.getId(), e);
 				}

@@ -137,11 +137,18 @@ public class AutenticacaoBean implements Serializable
 
 	public String logout()
 	{
+		String paginaAtual = obterPaginaOrigem();
+
 		acessoService.registrarLogout(Sessao.id());
-		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Logout efetuado com sucesso.");
 		Sessao.encerrar();
-		usuario=null;
-		return sessaoBean.getUrlLogin();
+		usuario = null;
+
+		// A flash message precisa ser setada depois de encerrar a sessão antiga, senão
+		// ela é descartada junto com o resto dos atributos da sessão invalidada.
+		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Logout efetuado com sucesso.");
+		Navegacao.redirect(paginaAtual);
+
+		return "";
 	}
 
 	public void validateEmail(FacesContext context, UIComponent component, Object email)

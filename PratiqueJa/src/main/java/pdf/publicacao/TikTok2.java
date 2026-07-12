@@ -20,16 +20,17 @@ import modelo.exercicio.ParagrafoResolucao;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
+import pdf.publicacao.estilo.EstiloVisual;
 import pdf.util.Arquivo;
 import util.CorAux;
 
 /**
- * Geração do post vertical (Reel/TikTok) com layout repaginado: foto de fundo
- * vibrante (mantém a diversidade do repositório de 103 imagens) como moldura,
- * conteúdo sobre painel branco translúcido (legível sobre qualquer fundo),
- * chamada/gancho para reter atenção, alternativas em badges e resolução
- * destacada. Espelha a interface pública de {@link TikTok} (gerarPDFExercicio,
- * gerarPDF, convertPNG); a classe antiga permanece intacta.
+ * Geração do post vertical (Reel/TikTok) com layout repaginado: conteúdo sobre
+ * um painel branco (legível sobre qualquer fundo), cujo fundo varia conforme o
+ * {@link EstiloVisual} escolhido em {@code ConfigPost.estilo}, chamada/gancho
+ * para reter atenção, alternativas em badges e resolução destacada. Espelha a
+ * interface pública de {@link TikTok} (gerarPDFExercicio, gerarPDF, convertPNG);
+ * a classe antiga permanece intacta.
  */
 public class TikTok2
 {
@@ -38,6 +39,7 @@ public class TikTok2
 	Exercicio conta;
 	Diretorio diretorio;
 	ProgramacaoPost programacaoPost;
+	EstiloVisual estiloVisual;
 
 	public TikTok2(Diretorio diretorio)
 	{
@@ -49,6 +51,7 @@ public class TikTok2
 	{
 		this.exercicio = exercicio;
 		this.programacaoPost = programacaoPost;
+		this.estiloVisual = EstiloVisual.de(programacaoPost.getConfigPost().getEstilo(), "destaque");
 		gerarConta();
 
 		diretorio.limparDiretorios();
@@ -175,9 +178,11 @@ public class TikTok2
 
 	public void caput()
 	{
-		String corFonte  = CorAux.convertHexPorc(ConfigPost.COR_FONTE);
-		String corTitulo = CorAux.convertHexPorc(ConfigPost.COR_TITULO);
-		String corNome   = CorAux.convertHexPorc(ConfigPost.COR_NOME);
+		String corFonte    = CorAux.convertHexPorc(ConfigPost.COR_FONTE);
+		String corTitulo   = CorAux.convertHexPorc(ConfigPost.COR_TITULO);
+		String corNome     = CorAux.convertHexPorc(ConfigPost.COR_NOME);
+		String hexDestaque = programacaoPost.getConfigPost().getCorDestaque();
+		String corDestaque = CorAux.convertHexPorc(hexDestaque != null && !hexDestaque.isBlank() ? hexDestaque : ConfigPost.COR_TITULO);
 
 		latex = "\\documentclass[12pt]{article}\r\n"
 		+ "\\usepackage[utf8]{inputenc}\r\n"
@@ -199,24 +204,22 @@ public class TikTok2
 		+ "\\definecolor{verde}{rgb}{0,0.54,0.44}\r\n"
 		+ "\\definecolor{amarelo}{rgb}{0.96,0.66,0.13}\r\n"
 		+ "\\definecolor{vermelho}{rgb}{0.86,0.27,0.27}\r\n"
+		+ "\\definecolor{coral}{rgb}{0.94,0.40,0.34}\r\n"
+		+ "\\definecolor{roxo}{rgb}{0.47,0.31,0.79}\r\n"
+		+ "\\definecolor{rosa}{rgb}{0.86,0.29,0.55}\r\n"
+		+ "\\definecolor{destaque}{rgb}{" + corDestaque + "}\r\n"
 		+ "\r\n"
 		+ "\\tikzset{\r\n"
 		+ "  nivel/.style={fill=" + corNivel() + ",text=white,rounded corners=4pt,inner xsep=7pt,inner ysep=3pt,font=\\bfseries\\footnotesize},\r\n"
-		+ "  chip/.style={fill=iris,text=white,rounded corners=8pt,inner xsep=10pt,inner ysep=4pt,font=\\bfseries},\r\n"
+		+ "  chip/.style={fill=" + estiloVisual.corDestaque() + ",text=white,rounded corners=8pt,inner xsep=10pt,inner ysep=4pt,font=\\bfseries},\r\n"
 		+ "  hook/.style={text=laranja,font=\\bfseries\\large,align=center},\r\n"
-		+ "  altbadge/.style={circle,fill=iris,text=white,font=\\bfseries\\small,inner sep=0pt,minimum size=23px},\r\n"
+		+ "  altbadge/.style={circle,fill=" + estiloVisual.corDestaque() + ",text=white,font=\\bfseries\\small,inner sep=0pt,minimum size=23px},\r\n"
 		+ "  alttext/.style={text=cinza,anchor=west,font=\\bfseries},\r\n"
 		+ "  cta/.style={fill=verde,text=white,rounded corners=10pt,inner xsep=14pt,inner ysep=6pt,font=\\bfseries},\r\n"
 		+ "  site/.style={font=\\bfseries\\footnotesize,text=nomecor},\r\n"
 		+ "}\r\n"
 		+ "\\newcommand{\\painel}{%\r\n"
-		+ "  \\node[inner sep=0] at (current page.center){\\includegraphics[width=\\paperwidth,height=\\paperheight]{background.png}};\r\n"
-		+ "  \\coordinate (PNW) at ([shift={(16px,-16px)}]current page.north west);\r\n"
-		+ "  \\coordinate (PSE) at ([shift={(-16px,16px)}]current page.south east);\r\n"
-		+ "  \\coordinate (PNE) at ([shift={(-16px,-16px)}]current page.north east);\r\n"
-		+ "  \\coordinate (PN) at ([yshift=-16px]current page.north);\r\n"
-		+ "  \\coordinate (PS) at ([yshift=16px]current page.south);\r\n"
-		+ "  \\fill[white,opacity=0.82,rounded corners=18pt] (PNW) rectangle (PSE);\r\n"
+		+ estiloVisual.painel("16px", "18pt")
 		+ "}\r\n"
 		+ "\\begin{document}\r\n\r\n";
 	}
@@ -232,7 +235,7 @@ public class TikTok2
 		+ cabecalho(labelNivel())
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-40px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
 		+ "\\node[hook,below=7px of chip] (hook){" + Ganchos.aleatorio() + "};\r\n"
-		+ "\\node[anchor=north,align=center,text width=216px,text=iris,font=\\bfseries] (enun)"
+		+ "\\node[anchor=north,align=center,text width=216px,text=" + estiloVisual.corDestaque() + ",font=\\bfseries] (enun)"
 		+ " at ([yshift=-104px]current page.north){" + fontsize(ptEnunciado(enunciado)) + "\r\n" + enunciado + "};\r\n";
 
 		if(programacaoPost.isAlternativaReel())

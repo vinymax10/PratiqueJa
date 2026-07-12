@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import org.javers.core.metamodel.annotation.DiffIgnore;
 
@@ -9,15 +8,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import modelo.auditoria.AuditLabel;
 
+/** Anexo de e-mail: os bytes ficam só em disco ({@link #caminhoArquivo}), nunca no banco. */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = { "file" })
+@ToString
 @Data
 @Entity
 public class DocumentoFile implements Serializable, Entidade
@@ -30,9 +29,11 @@ public class DocumentoFile implements Serializable, Entidade
 	@EqualsAndHashCode.Include
 	private Long id;
 
+	/** Caminho absoluto do arquivo em disco (diretório {@code Config#getEnderecoAnexoEmail()}). */
+	@Column(length = 511)
+	@Size(max = 511)
 	@DiffIgnore
-	@Lob
-	private Blob file;
+	private String caminhoArquivo;
 
 	@Column(length = 255)
 	@Size(max = 255)
@@ -43,7 +44,7 @@ public class DocumentoFile implements Serializable, Entidade
 	{
 		DocumentoFile documento = new DocumentoFile();
 		documento.endDocumentacao = this.endDocumentacao;
-		documento.file = this.file;
+		documento.caminhoArquivo = this.caminhoArquivo;
 		return documento;
 	}
 }

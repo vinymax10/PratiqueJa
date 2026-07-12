@@ -10,6 +10,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import modelo.academico.Assunto;
+import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
@@ -32,6 +34,36 @@ public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 		query.setParameter("usuarioId", usuario.getId());
 
 		return query.getResultList();
+	}
+
+	/** Resultado já existente do usuário para o exercício (para upsert), ou null se ainda não respondeu. */
+	public ResultadoExercicio buscar(Exercicio exercicio, Usuario usuario)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<ResultadoExercicio> query = builder.createQuery(ResultadoExercicio.class);
+		Root<ResultadoExercicio> from = query.from(ResultadoExercicio.class);
+
+		query.select(from).where(
+			builder.equal(from.get("exercicio").get("id"), exercicio.getId()),
+			builder.equal(from.get("usuario").get("id"), usuario.getId()));
+
+		List<ResultadoExercicio> lista = em.createQuery(query).getResultList();
+		return lista.isEmpty() ? null : lista.get(0);
+	}
+
+	/** Quantos exercícios do assunto o usuário já acertou (nota >= 1). */
+	public int contarCorretos(Assunto assunto, Usuario usuario)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> query = builder.createQuery(Long.class);
+		Root<ResultadoExercicio> from = query.from(ResultadoExercicio.class);
+
+		query.select(builder.count(from)).where(
+			builder.equal(from.get("usuario").get("id"), usuario.getId()),
+			builder.equal(from.get("exercicio").get("assunto").get("id"), assunto.getId()),
+			builder.greaterThanOrEqualTo(from.<Double>get("nota"), 1d));
+
+		return em.createQuery(query).getSingleResult().intValue();
 	}
 
 	public List<ResultadoExercicio> exerciciosRealizados100(ExercicioPadrao exercicio, Usuario usuario)

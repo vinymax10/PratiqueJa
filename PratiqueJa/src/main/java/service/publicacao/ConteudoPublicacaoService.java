@@ -1,19 +1,11 @@
 package service.publicacao;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import javax.sql.rowset.serial.SerialBlob;
-
-import org.apache.commons.io.IOUtils;
 
 import bean.download.Diretorio;
 import dao.publicacao.CtaDAO;
@@ -228,19 +220,6 @@ public class ConteudoPublicacaoService
 
 	private DocumentoFile buildDocumentoFile(String endFile, String nomeFile)
 	{
-		File initialFile = new File(endFile);
-		DocumentoFile documentoFile = new DocumentoFile();
-		try
-		{
-			InputStream inStream = new FileInputStream(initialFile);
-			SerialBlob serialBlob = new SerialBlob(IOUtils.toByteArray(inStream));
-			documentoFile.setFile(serialBlob);
-			documentoFile.setEndDocumentacao(nomeFile);
-		}
-		catch(IOException | SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return documentoFile;
+		return emailService.criarAnexo(nomeFile, lerArquivo(endFile));
 	}
 }

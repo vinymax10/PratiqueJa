@@ -29,10 +29,12 @@
 						<span class="as-stat-label">Questões</span>
 						<strong class="as-stat-value">#{assuntoBean.entidade.qtdQuestoes}</strong>
 					</div>
+					<ui:remove>
 					<h:panelGroup layout="block" styleClass="as-stat as-stat--purple">
 						<span class="as-stat-label">Videoaulas</span>
 						<strong class="as-stat-value">#{assuntoBean.entidade.qtdVideosAula}</strong>
 					</h:panelGroup>
+					</ui:remove>
 					<h:panelGroup layout="block" styleClass="as-stat as-stat--orange"
 						>
 						<span class="as-stat-label">PDF's</span>
@@ -40,22 +42,27 @@
 					</h:panelGroup>
 				</div>
 				
-				<div class="as-progress-inline">
+				<!-- Form próprio (fora dos forms de exercicio.xhtml/questoes.xhtml) só pra permitir que os
+				     botões "Responder" dessas páginas atualizem o progresso via ajax (update=":formProgresso:progressoWidget"),
+				     sem precisar recarregar a página inteira. -->
+				<h:form id="formProgresso" style="width:100%">
+				<h:panelGroup id="progressoWidget" layout="block" styleClass="as-progress-inline">
 					<div class="as-progress-inline-header">
 						<span class="as-progress-inline-label">
 							<i class="pi pi-chart-line"></i> Progresso
 						</span>
-						<span class="as-progress-inline-pct">0%</span>
+						<span class="as-progress-inline-pct">#{assuntoBean.progresso(assuntoBean.entidade)}%</span>
 					</div>
 					<div class="as-progress-bar-sm">
-						<div class="as-progress-fill" style="width: 0%"></div>
+						<div class="as-progress-fill" style="width: #{assuntoBean.progresso(assuntoBean.entidade)}%"></div>
 					</div>
 					<div class="as-progress-inline-meta">
-						<span>0 exercícios resolvidos</span>
+						<span>#{assuntoBean.exerciciosCorretos(assuntoBean.entidade)} exercícios resolvidos</span>
 						<span class="as-progress-dot">·</span>
-						<span>0 questões respondidas</span>
+						<span>#{assuntoBean.questoesCorretas(assuntoBean.entidade)} questões respondidas</span>
 					</div>
-				</div>
+				</h:panelGroup>
+				</h:form>
 			</div>
 
 			<div class="as-hero-image">
@@ -94,10 +101,10 @@
 				onclick="navegarComScroll('/matematica/exercicio.xhtml?assunto=#{assuntoBean.assunto}')">
 				<i class="pi pi-pencil"></i> Exercícios
 			</h:panelGroup>
-			<h:panelGroup layout="block"
-				styleClass="as-tab" onclick="asShowTab('videoaulas', this)">
-				<i class="pi pi-video"></i> Videoaulas
-			</h:panelGroup>
+<!-- 			<h:panelGroup layout="block" -->
+<!-- 				styleClass="as-tab" onclick="asShowTab('videoaulas', this)"> -->
+<!-- 				<i class="pi pi-video"></i> Videoaulas -->
+<!-- 			</h:panelGroup> -->
 			<h:panelGroup layout="block"
 				styleClass="as-tab #{facesContext.viewRoot.viewId.contains('/questoes') ? 'as-tab-active' : ''}" 
 				onclick="navegarComScroll('/matematica/questoes.xhtml?assunto=#{assuntoBean.assunto}')">

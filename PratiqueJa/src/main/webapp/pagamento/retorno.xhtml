@@ -1,0 +1,74 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+	</ui:define>
+
+	<ui:define name="linkPage">
+		<h:outputText class="linkPage" value="Confirmação de pagamento" />
+	</ui:define>
+
+	<h:form id="form" style="max-width:560px;margin:40px auto;">
+
+		<p:poll interval="3"
+			listener="#{retornoPagamentoBean.atualizar}"
+			update="@form"
+			rendered="#{retornoPagamentoBean.aguardando}" />
+
+		<div class="av-panel" style="text-align:center;">
+
+			<ui:fragment rendered="#{!retornoPagamentoBean.logado}">
+				<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+					<i class="pi pi-user" style="font-size:32px;" />
+					<div class="av-shero-title">Faça login para ver o status</div>
+				</div>
+				<p class="card-text">Entre na sua conta para acompanhar a confirmação do pagamento.</p>
+				<p:button value="Entrar" icon="pi pi-sign-in" outcome="/template/login" styleClass="ui-button-raised btn-primary" style="margin-top:16px;" />
+			</ui:fragment>
+
+			<ui:fragment rendered="#{retornoPagamentoBean.confirmado}">
+				<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;background:linear-gradient(135deg,#16a34a,#22c55e);">
+					<i class="pi pi-check-circle" style="font-size:32px;" />
+					<div class="av-shero-title">Pagamento confirmado!</div>
+				</div>
+				<p class="card-text">
+					Seu plano <b>#{retornoPagamentoBean.ultimoPagamento.produto.nome}</b> já está ativo.
+					Você pode acompanhar os detalhes da sua assinatura a qualquer momento no seu perfil.
+				</p>
+				<p:button value="Ver meu perfil" icon="pi pi-user" outcome="/usuario/perfil" styleClass="ui-button-raised btn-primary" style="margin-top:16px;" />
+			</ui:fragment>
+
+			<ui:fragment rendered="#{retornoPagamentoBean.aguardando}">
+				<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;">
+					<i class="pi pi-spin pi-spinner" style="font-size:32px;" />
+					<div class="av-shero-title">Estamos confirmando seu pagamento...</div>
+				</div>
+				<p class="card-text">
+					Isso costuma levar só alguns segundos. Não feche esta página.
+				</p>
+			</ui:fragment>
+
+			<ui:fragment rendered="#{retornoPagamentoBean.demorando}">
+				<div class="av-shero" style="margin:-36px -40px 24px;padding:22px 40px 20px;background:linear-gradient(135deg,#c2410c,#ea580c);">
+					<i class="pi pi-exclamation-triangle" style="font-size:32px;" />
+					<div class="av-shero-title">Isso está demorando mais que o esperado</div>
+				</div>
+				<p class="card-text">
+					A confirmação do seu pagamento ainda não chegou. Verifique seu e-mail — ou, se preferir,
+					fale com a gente que resolvemos rapidinho.
+				</p>
+				<p:button value="Falar conosco" icon="pi pi-comment" outcome="/informativo/fale-conosco" styleClass="ui-button-raised ui-button-secondary" style="margin-top:16px;" />
+			</ui:fragment>
+
+		</div>
+
+	</h:form>
+
+	<script>window.t2Bread = {main: 'Pagamento', sub: 'Confirmação'};</script>
+
+</ui:decorate>

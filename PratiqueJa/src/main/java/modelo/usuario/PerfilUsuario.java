@@ -4,8 +4,7 @@ public enum PerfilUsuario
 {
 	// nome, exerciciosIlimitados, questoesIlimitadas, resolucoesCompletas, downloadIlimitado
 	Basico("Básico", false, false, false, false),
-	Premium("Premium", true, true, true, true),
-	Admin("Administrador", true, true, true, true);
+	Premium("Premium", true, true, true, true);
 
 	private String nome;
 	private boolean exerciciosIlimitados;
@@ -54,12 +53,6 @@ public enum PerfilUsuario
 	public boolean isDownloadIlimitado()
 	{
 		return downloadIlimitado;
-	}
-
-	public boolean equals(PerfilUsuario x)
-	{
-		PerfilUsuario modulo = (PerfilUsuario) x;
-		return this.nome.equals(modulo.nome);
 	}
 
 }

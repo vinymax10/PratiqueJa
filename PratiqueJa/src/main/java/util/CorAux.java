@@ -7,6 +7,8 @@ public class CorAux
 	
 	public static String convertHexPorc(String cor)
 	{
+	   if(!cor.startsWith("#") && !cor.startsWith("0x") && !cor.startsWith("0X"))
+	       cor = "#" + cor;
 	   Color color = Color.decode(cor);
 
         // pega os valores RGB (0-255)

@@ -31,6 +31,15 @@ public class StringAux
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return formatter.format(data);
 	}
+
+	public static String statusValidade(LocalDate validade)
+	{
+		if(validade == null)
+			return null;
+
+		String data = getDataStr(validade);
+		return validade.isBefore(LocalDate.now()) ? "Vencido em " + data : "Ativo até " + data;
+	}
 	
 	public static String numeroStr(Long numero)
 	{

@@ -55,10 +55,15 @@
 
 					<div class="pdf-card-actions">
 						<p:commandButton ajax="false" value="Baixar" icon="pi pi-download"
-							styleClass="pdf-download-btn #{pdf.visibilidade == 'Premium' ? 'pdf-download-btn--premium' : ''}"
-							rendered="#{not empty pdf.caminho}">
+							styleClass="pdf-download-btn"
+							rendered="#{not empty pdf.caminho and !pdfAssuntoBean.bloqueado(pdf)}">
 							<p:fileDownload value="#{pdfAssuntoBean.download(pdf)}" />
 						</p:commandButton>
+
+						<p:button value="Fazer upgrade" icon="pi pi-crown"
+							styleClass="pdf-download-btn pdf-download-btn--premium"
+							href="/produtos/acesso/acesso.xhtml"
+							rendered="#{pdfAssuntoBean.bloqueado(pdf)}" />
 					</div>
 
 				</div>

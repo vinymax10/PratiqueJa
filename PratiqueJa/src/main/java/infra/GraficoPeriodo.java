@@ -42,7 +42,27 @@ public class GraficoPeriodo
 			json.append("\"indexAxis\":\"").append(dados.getIndexAxis()).append("\",");
 
 		json.append("\"plugins\":{\"title\":{\"display\":").append(dados.getTitulo() != null).append(",\"text\":\"").append(escape(dados.getTitulo()))
-		.append("\"}}}}");
+		.append("\"}}");
+
+		if(dados.getTituloEixoX() != null || dados.getTituloEixoY() != null)
+		{
+			json.append(",\"scales\":{");
+			boolean primeiro = true;
+			if(dados.getTituloEixoX() != null)
+			{
+				json.append("\"x\":{\"title\":{\"display\":true,\"text\":\"").append(escape(dados.getTituloEixoX())).append("\"}}");
+				primeiro = false;
+			}
+			if(dados.getTituloEixoY() != null)
+			{
+				if(!primeiro)
+					json.append(",");
+				json.append("\"y\":{\"title\":{\"display\":true,\"text\":\"").append(escape(dados.getTituloEixoY())).append("\"}}");
+			}
+			json.append("}");
+		}
+
+		json.append("}}");
 
 		return json.toString();
 	}

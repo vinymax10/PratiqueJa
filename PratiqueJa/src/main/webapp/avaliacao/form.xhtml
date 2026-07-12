@@ -346,8 +346,14 @@
 			<h:panelGroup id="listaItens" layout="block">
 				<ui:repeat value="#{pedidoAvaliacaoBean.entidade.itens}" var="item" varStatus="status">
 					<div class="av-item-card">
-						<div class="av-item-num">
-							<h:outputText value="#{status.index + 1}" />
+						<div class="av-item-thumb-wrap">
+							<div class="av-item-num">
+								<h:outputText value="#{status.index + 1}" />
+							</div>
+							<div class="av-item-thumb">
+								<img src="#{item.assunto.endImageThumb()}" alt="#{item.assunto.nome}"
+									onerror="this.onerror=null;this.src='#{item.assunto.endImageCapa()}';" />
+							</div>
 						</div>
 						<div class="av-item-info">
 							<span class="av-item-assunto">

@@ -76,6 +76,15 @@
 			</h:panelGroup>
 			
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
+				<p:outputLabel for="@next" value="Visibilidade" />
+				<p:selectOneMenu value="#{questaoBean.entidade.visibilidade}">
+					<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{questaoBean.visibilidadeValues}" var="v"
+					itemLabel="#{v.nome}" itemValue="#{v}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-3 xl:col-2">
 				<p:outputLabel for="@next" value="Qualidade da Formulação" />
 				<p:inputNumber value="#{questaoBean.entidade.qualidadeFormulacao}"
 				decimalPlaces="0" minValue="0" maxValue="100" />

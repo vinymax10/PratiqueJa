@@ -18,15 +18,12 @@ public class FiltroUsuario implements Serializable
 
 	private PerfilUsuario perfil;
 
-	private Boolean criador;
-
 	public void limpar()
 	{
 		nome = null;
 		email = null;
 		turma = null;
 		perfil = null;
-		criador = null;
 	}
 
 }

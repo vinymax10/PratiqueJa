@@ -3,6 +3,7 @@ package bean.usuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,9 @@ import lombok.Data;
 import modelo.usuario.Imagem;
 import modelo.usuario.Pagamento;
 import modelo.usuario.Usuario;
+import service.pagamento.HotmartApiClient;
 import service.usuario.UsuarioService;
+import util.StringAux;
 import web.session.Sessao;
 
 @Data
@@ -61,6 +64,9 @@ public class PerfilBean implements Serializable
 
 	@Inject
 	private DiretorioService diretorioService;
+
+	@Inject
+	private HotmartApiClient hotmartApiClient;
 
 	private Diretorio diretorio;
 	private Usuario entidade;
@@ -193,5 +199,39 @@ public class PerfilBean implements Serializable
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "E-mail já cadastrado.");
 			throw new ValidatorException(msg);
 		}
+	}
+
+	public String statusValidade(LocalDate validade)
+	{
+		return StringAux.statusValidade(validade);
+	}
+
+	public void cancelarAssinaturaPremium()
+	{
+		cancelarAssinatura(entidade.getSubscriberCodeHotmart());
+	}
+
+	public void cancelarAssinaturaCriador()
+	{
+		cancelarAssinatura(entidade.getSubscriberCodeHotmartCriador());
+	}
+
+	public void cancelarAssinaturaAvaliacao()
+	{
+		cancelarAssinatura(entidade.getSubscriberCodeHotmartAvaliacao());
+	}
+
+	private void cancelarAssinatura(String subscriberCode)
+	{
+		if(subscriberCode == null || subscriberCode.isBlank())
+			return;
+
+		boolean solicitado = hotmartApiClient.cancelarAssinatura(subscriberCode);
+		if(solicitado)
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Cancelamento solicitado. Pode levar alguns minutos até confirmar — você receberá um aviso por e-mail.");
+		else
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR,
+				"Não foi possível cancelar automaticamente. Cancele diretamente na sua conta Hotmart.");
 	}
 }

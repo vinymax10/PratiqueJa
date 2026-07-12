@@ -84,7 +84,7 @@
 		</a>
 		<div class="brand">
 			<div style="display:flex;flex-direction:column;justify-content:center;margin:0 12px;line-height:1.25;">
-				<span id="t2BreadMain" style="font-size:18px;font-weight:700;color:#07142f;"></span>
+				<span id="t2BreadMain" class="t2-bread-main"></span>
 				<span id="t2BreadSub" style="font-size:15px;color:#6b7280;"></span>
 			</div>
 		</div>
@@ -164,7 +164,7 @@
 				<i class="pi pi-file-edit"></i> Criar Avaliação
 			</a>
 			
-			<a href="/post/configuracao.xhtml?configPost=#{sessaoBean.usuario.configPost.id}"
+			<a href="/post/gerar/list.xhtml"
 			class="t2-menu-item">
 				<i class="fa-brands fa-instagram"></i> Post
 			</a>
@@ -303,22 +303,6 @@
 				<a href="/matematica/avancado/estatistica/teoria.xhtml?assunto=Estatistica" class="t2-menu-item t2-sub-item">Estatística</a>
 			</div>
 
-			<h:panelGroup rendered="#{autenticacaoBean.usuario != null}" layout="block">
-				<div class="t2-menu-title">Atividades</div>
-				<a href="/atividades/meusExercicios.xhtml" class="t2-menu-item">
-					<i class="fa-solid fa-clock-rotate-left"></i> Exercícios Pendentes
-				</a>
-				<a href="/atividades/resultadosExercicios.xhtml" class="t2-menu-item">
-					<i class="fa-solid fa-chart-simple"></i> Resultados Exercícios
-				</a>
-				<a href="/atividades/meusTestes.xhtml" class="t2-menu-item">
-					<i class="fa-solid fa-hourglass-start"></i> Testes Pendentes
-				</a>
-				<a href="/atividades/resultadosTestes.xhtml" class="t2-menu-item">
-					<i class="fa-solid fa-check-double"></i> Resultados Testes
-				</a>
-			</h:panelGroup>
-
 			<div class="t2-menu-title">Produtos</div>
 			<a href="/produtos/acesso/acesso.xhtml" class="t2-menu-item">
 				<i class="fa-solid fa-door-open"></i> Acesso ao Pratique Já
@@ -432,6 +416,9 @@
 					</a>
 					<a href="/administracao/usuarios/pagamento/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-credit-card"></i> Pagamento
+					</a>
+					<a href="/administracao/usuarios/assinatura/list.xhtml" class="t2-menu-item t2-sub-item">
+						<i class="pi pi-sync"></i> Assinaturas
 					</a>
 					<a href="/administracao/usuarios/acesso/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-key"></i> Acessos

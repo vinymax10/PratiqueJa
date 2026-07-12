@@ -12,8 +12,12 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
+import modelo.academico.Assunto;
 import modelo.exercicio.ResultadoExercicio;
 import modelo.usuario.Usuario;
+import service.avaliacao.CreditoAvaliacaoService;
+import service.publicacao.CreditoPostService;
+import util.StringAux;
 import web.session.Sessao;
 
 /**
@@ -30,6 +34,14 @@ public class InicioBean implements Serializable
 	@Inject
 	private ResultadoExercicioDAO resultadoExercicioDAO;
 
+	@Inject
+	private CreditoPostService creditoPostService;
+
+	@Inject
+	private CreditoAvaliacaoService creditoAvaliacaoService;
+
+	private Usuario usuario;
+
 	/** Total de exercícios já realizados pelo usuário. */
 	private int totalResolvidos;
 
@@ -39,10 +51,13 @@ public class InicioBean implements Serializable
 	/** Data da última prática (null se nunca praticou). */
 	private LocalDate ultimaPratica;
 
+	/** Assunto do exercício mais recente, para retomar de onde parou (null se nunca praticou). */
+	private Assunto ultimoAssunto;
+
 	@PostConstruct
 	public void init()
 	{
-		Usuario usuario = Sessao.getUsuarioLogado();
+		usuario = Sessao.getUsuarioLogado();
 		if(usuario == null)
 			return;
 
@@ -53,12 +68,34 @@ public class InicioBean implements Serializable
 		totalResolvidos = resultados.size();
 		ultimaPratica = resultados.get(0).getRealizacao(); // listar() ordena por realizacao DESC
 		streakDias = calcularStreak(resultados);
+
+		if(resultados.get(0).getExercicio() != null)
+			ultimoAssunto = resultados.get(0).getExercicio().getAssunto();
 	}
 
 	/** true quando há algum progresso para exibir (evita renderizar a faixa vazia). */
 	public boolean isTemProgresso()
 	{
 		return totalResolvidos > 0;
+	}
+
+	public String statusValidade(LocalDate validade)
+	{
+		return StringAux.statusValidade(validade);
+	}
+
+	public int getCreditosRestantesPost()
+	{
+		if(usuario == null || usuario.getPerfilCriador() == null)
+			return 0;
+		return creditoPostService.creditosRestantes(usuario, usuario.getPerfilCriador());
+	}
+
+	public int getCreditosRestantesAvaliacao()
+	{
+		if(usuario == null)
+			return 0;
+		return creditoAvaliacaoService.creditosRestantes(usuario);
 	}
 
 	private int calcularStreak(List<ResultadoExercicio> resultados)

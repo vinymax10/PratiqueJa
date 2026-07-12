@@ -12,7 +12,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
 
 public class PageFilter extends Filtro
@@ -35,41 +34,32 @@ public class PageFilter extends Filtro
 			|| httpRequest.getRequestURI().contains("/informativo/")
 			|| httpRequest.getRequestURI().contains("/download/")
 			|| httpRequest.getRequestURI().contains("/questao/")
-			|| httpRequest.getRequestURI().contains("/usuario/perfil"))
+			|| httpRequest.getRequestURI().contains("/usuario/perfil")
+			// "Gerar Posts" é a porta de entrada da área de Post, navegável sem login (igual
+			// "Criar Avaliação"); só a geração de fato exige login — ver PedidoPostBean. As
+			// demais abas (Configurações, Programação, Background, Teste, CTAs) continuam
+			// exigindo login para entrar, como antes.
+			|| httpRequest.getRequestURI().contains("/post/gerar/"))
 				acesso = true;
 
 			if(usuario != null)
 			{
-				if(httpRequest.getRequestURI().contains("/avaliacao/"))
+				if(httpRequest.getRequestURI().contains("/avaliacao/")
+				// Logado: as demais abas de Post (Configurações, Background, Teste, CTAs)
+				// ficam liberadas — a ownership do configPost é garantida em
+				// ConfigPostBean.sincronizarConfigPost(), não mais aqui no filtro.
+				// "/post/programacao" fica de fora: só admin acessa (via usuario.isAdmin() logo
+				// abaixo) — CTAs já seguia essa regra só na navTabs, aqui é reforçado no filtro.
+				|| (httpRequest.getRequestURI().contains("/post/")
+					&& !httpRequest.getRequestURI().contains("/post/programacao")))
 					acesso = true;
 				MDC.put("usuario", String.valueOf(usuario.getId()));
 				if(httpRequest.getRequestURI().contains("/atividades/")
 				||httpRequest.getRequestURI().contains("/exercicio/exercicio/verExercicio")
 				||httpRequest.getRequestURI().contains("/teste/teste/verTeste")
 				||httpRequest.getRequestURI().contains("usuario/pagamento/finalizado")
-				||usuario.getPerfil() == PerfilUsuario.Admin)
+				||usuario.isAdmin())
 					acesso = true;
-				
-				if(httpRequest.getRequestURI().contains("/post/")
-				&&usuario.isCriador())
-				{
-					String configPost = httpRequest.getParameter("configPost");
-		            Long idConfigPost = null;
-		            if(!isAjax(httpRequest)&&configPost != null) 
-		            {
-		                try 
-		                {
-		                    idConfigPost = Long.valueOf(configPost);
-		                    if(usuario.getConfigPost().getId().equals(idConfigPost))
-		                    	acesso = true;
-		                } 
-		                catch (NumberFormatException e) {
-		                    e.printStackTrace();
-		                }
-		            }
-		            else
-		            	acesso = true;
-				}
 			}
 			
 			LOG.info("Acesso={} à url={}", acesso, httpRequest.getServletPath());

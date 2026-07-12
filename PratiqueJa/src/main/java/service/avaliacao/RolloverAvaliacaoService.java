@@ -20,7 +20,7 @@ import modelo.usuario.Usuario;
  * validade de um mês). Regras:
  * <ul>
  *   <li>Só acumula quem manteve o plano ativo o mês inteiro (continuidade via mesRolloverProcessado).</li>
- *   <li>Plano vencido (validadePlano no passado) zera o crédito — parar de pagar = perder o saldo.</li>
+ *   <li>Plano vencido (validadePlanoAvaliacao no passado) zera o crédito — parar de pagar = perder o saldo.</li>
  *   <li>Novo assinante só começa a acumular após um mês completo de assinatura.</li>
  * </ul>
  */
@@ -46,8 +46,8 @@ public class RolloverAvaliacaoService
 		for (Usuario usuario : usuarioDAO.listarComPerfilAvaliacao())
 		{
 			PerfilAvaliacao plano = usuario.getPerfilAvaliacao();
-			boolean planoAtivo = usuario.getValidadePlano() == null
-				|| !usuario.getValidadePlano().isBefore(hoje);
+			boolean planoAtivo = usuario.getValidadePlanoAvaliacao() == null
+				|| !usuario.getValidadePlanoAvaliacao().isBefore(hoje);
 
 			int credito;
 			LocalDate mesProcessado;

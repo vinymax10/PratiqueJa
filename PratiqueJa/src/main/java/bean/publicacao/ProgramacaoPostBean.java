@@ -16,6 +16,7 @@ import lombok.Data;
 import modelo.academico.Assunto;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.ProgramacaoPost;
+import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import service.publicacao.EnvioPostService;
 import service.publicacao.ProgramacaoPostService;
@@ -29,6 +30,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	@Inject
 	private ConfigPostBean configPostBean;
+
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
 
 	private ProgramacaoPost programacaoPost;
 
@@ -52,6 +56,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String adicionar()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		for(int i = 0; i < quantidade; i++)
 		{
 			ProgramacaoPost novo = programacaoPost.clone();
@@ -94,6 +101,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public void salvar(ProgramacaoPost programacaoPost)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return;
+
 		try
 		{
 			programacaoPostService.setImagemPost(programacaoPost);
@@ -108,6 +118,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String salvar()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		try
 		{
 			programacaoPostService.setImagemPost(programacaoPost);
@@ -124,6 +137,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String remover(ProgramacaoPost programacaoPost)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		try
 		{
 			programacaoPostService.remover(programacaoPost);
@@ -139,6 +155,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String programacaoDefault()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		programacaoPostService.programacaoDefault(configPostBean.getConfigPost());
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Programação Default realizada com sucesso.");
 
@@ -147,6 +166,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String enviarAgora()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		ConfigPost configPost = configPostBean.getConfigPost();
 
 		if(!configPost.podeGerar())
@@ -181,6 +203,9 @@ public class ProgramacaoPostBean implements Serializable
 
 	public String removerTodosAcao()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		programacaoPostService.removerTodos(configPostBean.getConfigPost());
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Remoção de todas as Programações realizada com sucesso.");
 

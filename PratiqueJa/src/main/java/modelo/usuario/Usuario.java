@@ -101,6 +101,9 @@ public class Usuario extends Ativo implements Entidade
 	@AuditLabel(value = "perfil")
 	private PerfilUsuario perfil = PerfilUsuario.Basico;
 
+	@AuditLabel(value = "administrador")
+	private boolean admin=false;
+
 	@Enumerated(EnumType.STRING)
 	@AuditLabel(value = "plano de avaliações")
 	private PerfilAvaliacao perfilAvaliacao = PerfilAvaliacao.Teste;
@@ -109,11 +112,23 @@ public class Usuario extends Ativo implements Entidade
 	@AuditLabel(value = "perfil criador")
 	private PerfilCriador perfilCriador = PerfilCriador.Teste;
 
-	@AuditLabel(value = "criador")
-	private boolean criador;
-
 	@AuditLabel(value = "validade do plano", genero = GeneroGramatical.FEMININO)
 	private LocalDate validadePlano;
+
+	@AuditLabel(value = "validade do plano criador", genero = GeneroGramatical.FEMININO)
+	private LocalDate validadePlanoCriador;
+
+	@AuditLabel(value = "validade do plano avaliação", genero = GeneroGramatical.FEMININO)
+	private LocalDate validadePlanoAvaliacao;
+
+	@DiffIgnore
+	private String subscriberCodeHotmart;
+
+	@DiffIgnore
+	private String subscriberCodeHotmartCriador;
+
+	@DiffIgnore
+	private String subscriberCodeHotmartAvaliacao;
 
 	/** Crédito de cota acumulado do mês anterior (rollover), recalculado mensalmente. */
 	@DiffIgnore

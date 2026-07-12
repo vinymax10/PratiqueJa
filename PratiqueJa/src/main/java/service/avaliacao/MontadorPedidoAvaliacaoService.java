@@ -14,9 +14,6 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.sql.rowset.serial.SerialBlob;
-
-import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
@@ -59,7 +56,12 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 	@Inject
 	private EmailService emailService;
 
-	@Asynchronous
+	/**
+	 * Monta um pedido de avaliação de forma síncrona (bloqueia a thread chamadora até terminar).
+	 * A concorrência é controlada por {@link FilaGeracaoAvaliacaoService}, que garante uma única
+	 * fila para toda a aplicação — este método nunca deve ser chamado diretamente a partir de um
+	 * bean de tela; use {@code FilaGeracaoAvaliacaoService#enfileirar(Long)}.
+	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void montar(Long pedidoId)
 	{
@@ -236,9 +238,7 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			if (email == null || email.isBlank())
 				return;
 
-			DocumentoFile anexo = new DocumentoFile();
-			anexo.setFile(new SerialBlob(bytes));
-			anexo.setEndDocumentacao(nomeDownload);
+			DocumentoFile anexo = emailService.criarAnexo(nomeDownload, bytes);
 
 			String nome = pedido.getUsuario().getFirstNome();
 			String html = montarHtmlAvaliacao(nome, pedido.getCodigoBatch(), pedido.getTitulo(),

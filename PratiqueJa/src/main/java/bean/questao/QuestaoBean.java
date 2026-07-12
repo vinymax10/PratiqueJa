@@ -29,6 +29,7 @@ import modelo.academico.Assunto;
 import modelo.academico.Banca;
 import modelo.academico.Orgao;
 import modelo.auditoria.TipoEvento;
+import modelo.pdf.Visibilidade;
 import modelo.questao.Alternativa;
 import modelo.questao.Dificuldade;
 import modelo.questao.Questao;
@@ -277,20 +278,26 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			if(!questao.isShowResolucaoComentada() && controleAcessoBean.podeResolucaoQuestao())
+			if(questao.isShowResolucaoComentada())
 			{
 				questao.toogleResolucaoComentada();
-				if(!questao.isJaMostrouResolucaoComentada())
-					controleAcessoBean.registrarResolucaoQuestao();
+				return;
 			}
-			else if(questao.isShowResolucaoComentada())
-				questao.toogleResolucaoComentada();
-			else
-				controleAcessoBean.showUpgrade("Limite mensal de acesso as resoluções de questões foi excedido." + "\nPor favor faça o upgrade de sua conta.");
 
-			if(!questao.isJaMostrouResolucaoComentada())
-				questao.setJaMostrouResolucaoComentada(true);
+			if(questao.getVisibilidade() == Visibilidade.Premium && !controleAcessoBean.podeAcessarPremium())
+			{
+				PrimeFaces.current().executeScript("PF('dialogPremiumQuestao').show()");
+				return;
+			}
+
+			questao.toogleResolucaoComentada();
 		}
+	}
+
+	public void toogleEstatistica(Questao questao)
+	{
+		if(controleAcessoBean.verificaEstaLogado())
+			questao.toogleEstatistica();
 	}
 
 	public void podeFazerDownloadAssunto()
@@ -426,6 +433,11 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 		return Dificuldade.values();
 	}
 
+	public Visibilidade[] getVisibilidadeValues()
+	{
+		return Visibilidade.values();
+	}
+
 	public String createBarModel(Questao questao)
 	{
 		int total = 0;
@@ -441,7 +453,9 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 		}
 
 		DadosGrafico dados = new DadosGrafico();
-		dados.setTitulo("Q" + questao.getId());
+		dados.setTitulo("Escolha das alternativas");
+		dados.setTituloEixoX("Alternativas");
+		dados.setTituloEixoY("Porcentagem");
 		dados.setIndexAxis("x");
 		dados.setLabels(labels);
 		dados.setValues(values);

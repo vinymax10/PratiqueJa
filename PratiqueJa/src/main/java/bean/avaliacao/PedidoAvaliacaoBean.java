@@ -27,6 +27,7 @@ import dao.avaliacao.PedidoAvaliacaoDAO;
 import dao.usuario.UsuarioDAO;
 import infra.Graphics;
 import service.avaliacao.CreditoAvaliacaoService;
+import service.avaliacao.FilaGeracaoAvaliacaoService;
 import service.avaliacao.MontadorPedidoAvaliacaoService;
 import service.configuracao.DiretorioService;
 import util.FileAux;
@@ -51,7 +52,6 @@ import modelo.avaliacao.TipoGabarito;
 import modelo.exercicio.Nivel;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Imagem;
-import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
 import pdf.exercicio.LayoutLista;
 
@@ -101,6 +101,9 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	@Inject
 	private MontadorPedidoAvaliacaoService montadorService;
+
+	@Inject
+	private FilaGeracaoAvaliacaoService filaGeracaoService;
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
@@ -271,7 +274,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		entidade.setDataExpiracao(LocalDateTime.now().plusDays(planoAtual().getDiasRetencao()));
 
 		entidadeDAO.salvar(entidade);
-		montadorService.montar(entidade.getId());
+		filaGeracaoService.enfileirar(entidade.getId());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Solicitação registrada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("avNovoCodigo", entidade.getCodigoBatch());
@@ -337,7 +340,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		}
 
 		Usuario usuario = sessaoBean.getUsuario();
-		if(usuario.getPerfil() == PerfilUsuario.Admin && usuario.getPerfilAvaliacao() == null)
+		if(usuario.isAdmin() && usuario.getPerfilAvaliacao() == null)
 			return true;
 
 		PerfilAvaliacao plano = usuario.getPerfilAvaliacao();
@@ -365,11 +368,11 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		}
 
 		// Plano vencido bloqueia a geração (e o crédito acumulado também deixa de valer).
-		if(usuario.getValidadePlano() != null && usuario.getValidadePlano().isBefore(LocalDate.now()))
+		if(usuario.getValidadePlanoAvaliacao() != null && usuario.getValidadePlanoAvaliacao().isBefore(LocalDate.now()))
 		{
 			abrirDialogCota(
 				"Plano vencido",
-				"Seu plano venceu em " + usuario.getValidadePlano().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+				"Seu plano venceu em " + usuario.getValidadePlanoAvaliacao().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 				+ ". Renove para continuar gerando avaliações personalizadas."
 			);
 			return false;
@@ -691,11 +694,11 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		return plano.getNome() + " (" + plano.getLimiteMensal() + " avaliações/mês)";
 	}
 
-	/** Usuário em modo de teste grátis legado: logado, sem plano atribuído e fora do perfil Admin. */
+	/** Usuário em modo de teste grátis legado: logado, sem plano atribuído e não admin. */
 	public boolean isModoTrial()
 	{
 		Usuario usuario = sessaoBean.getUsuario();
-		return usuario != null && usuario.getPerfil() != PerfilUsuario.Admin && usuario.getPerfilAvaliacao() == null;
+		return usuario != null && !usuario.isAdmin() && usuario.getPerfilAvaliacao() == null;
 	}
 
 	public int getLimiteTrialGratis()

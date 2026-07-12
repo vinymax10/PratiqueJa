@@ -39,6 +39,7 @@ import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
 import bean.seguranca.SessaoBean;
 import service.publicacao.CreditoPostService;
+import service.publicacao.FilaGeracaoPostService;
 import service.publicacao.MontadorPostService;
 
 @Data
@@ -89,6 +90,9 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	@Inject
 	private MontadorPostService montadorService;
+
+	@Inject
+	private FilaGeracaoPostService filaGeracaoService;
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
@@ -287,7 +291,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		entidade.setStatus(StatusPedidoPost.AGUARDANDO);
 
 		entidadeDAO.salvar(entidade);
-		montadorService.montar(entidade.getId());
+		filaGeracaoService.enfileirar(entidade.getId());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO,
 			"Geração iniciada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");

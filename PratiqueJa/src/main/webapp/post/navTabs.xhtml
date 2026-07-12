@@ -9,36 +9,40 @@
 		<!-- BOTÕES DE NAVEGAÇÃO (abas da área de Post) -->
 		<div class="pc-tabs">
 
-			<h:link outcome="/post/configuracao"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/configuracao') ? 'pc-tab-active' : ''}">
-				<i class="fa-solid fa-gear" /> Configurações
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
-				<f:param name="tab" value="0" />
-			</h:link>
-
 			<h:link outcome="/post/gerar/list"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/gerar/') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-bolt" /> Gerar Posts
 			</h:link>
 
+			<h:link outcome="/post/configuracao"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/configuracao') ? 'pc-tab-active' : ''}"
+				onclick="return t2PostRequerLogin(#{sessaoBean.logado})">
+				<i class="fa-solid fa-gear" /> Configurações
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
+				<f:param name="tab" value="0" />
+			</h:link>
+
 			<h:link outcome="/post/programacao"
+				rendered="#{sessaoBean.podeVerAdministracao()}"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/programacao') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-list" /> Programação
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="1" />
 			</h:link>
 
 			<h:link outcome="/post/backgroundPersonalizado"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPersonalizado') ? 'pc-tab-active' : ''}">
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPersonalizado') ? 'pc-tab-active' : ''}"
+				onclick="return t2PostRequerLogin(#{sessaoBean.logado})">
 				<i class="fa-solid fa-file-image" /> Background Personalizado
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="3" />
 			</h:link>
 
 			<h:link outcome="/post/teste"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/teste') ? 'pc-tab-active' : ''}">
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/teste') ? 'pc-tab-active' : ''}"
+				onclick="return t2PostRequerLogin(#{sessaoBean.logado})">
 				<i class="fa-solid fa-flask-vial" /> Teste
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="4" />
 			</h:link>
 
@@ -46,11 +50,23 @@
 				rendered="#{sessaoBean.podeVerAdministracao()}"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/ctas') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-bullhorn" /> CTAs
-				<f:param name="configPost" value="#{configPostBean.configPost.id}" />
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="5" />
 			</h:link>
 
 		</div>
+
+		<!-- Abas além de "Gerar Posts" exigem login: em vez de navegar e o filtro
+		     mandar pra tela inicial, abre direto o dialog de login nesta mesma página. -->
+		<script>
+			function t2PostRequerLogin(logado) {
+				if (!logado) {
+					PF('loginWidget').show();
+					return false;
+				}
+				return true;
+			}
+		</script>
 
 	</ui:composition>
 </h:body>

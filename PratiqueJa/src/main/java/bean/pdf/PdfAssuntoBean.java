@@ -12,6 +12,7 @@ import java.util.List;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import bean.usuario.ControleAcessoBean;
 import dao.pdf.PdfDAO;
 import filtro.pdf.FiltroPdf;
 import jakarta.faces.view.ViewScoped;
@@ -20,6 +21,7 @@ import jakarta.inject.Named;
 import lombok.Getter;
 import modelo.academico.Assunto;
 import modelo.pdf.Pdf;
+import modelo.pdf.Visibilidade;
 
 /**
  * Bean da tela pública /matematica/pdf — lista os PDFs de um assunto.
@@ -33,8 +35,19 @@ public class PdfAssuntoBean implements Serializable
 	@Inject
 	private PdfDAO pdfDAO;
 
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
 	@Getter
 	private List<Pdf> pdfs = new ArrayList<>();
+
+	/** PDF Premium indisponível para o usuário atual (não logado ou plano básico). */
+	public boolean bloqueado(Pdf pdf)
+	{
+		return pdf != null
+			&& pdf.getVisibilidade() == Visibilidade.Premium
+			&& !controleAcessoBean.podeAcessarPremium();
+	}
 
 	public void filtrarPorAssunto(Assunto assunto)
 	{
@@ -54,7 +67,7 @@ public class PdfAssuntoBean implements Serializable
 
 	public StreamedContent download(Pdf pdf)
 	{
-		if (pdf == null || pdf.getCaminho() == null || pdf.getCaminho().isBlank())
+		if (pdf == null || bloqueado(pdf) || pdf.getCaminho() == null || pdf.getCaminho().isBlank())
 			return new DefaultStreamedContent();
 
 		Path path = Path.of(pdf.getCaminho());

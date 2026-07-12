@@ -51,92 +51,122 @@
 			</h:panelGroup>
 
 			<div class="in-hero-actions">
-				<a href="/matematica/painel.xhtml" class="in-btn in-btn--primary">
-					<i class="pi pi-play" /> Continuar praticando
-				</a>
+				<ui:fragment rendered="#{inicioBean.ultimoAssunto != null}">
+					<a href="#{inicioBean.ultimoAssunto.endTeoria()}" class="in-btn in-btn--primary">
+						<i class="pi pi-play" /> Continuar: #{inicioBean.ultimoAssunto.nome}
+					</a>
+				</ui:fragment>
+				<ui:fragment rendered="#{inicioBean.ultimoAssunto == null}">
+					<a href="/matematica/painel.xhtml" class="in-btn in-btn--primary">
+						<i class="pi pi-play" /> Começar a praticar
+					</a>
+				</ui:fragment>
 				<a href="/questao/questao.xhtml" class="in-btn in-btn--ghost">
 					<i class="pi pi-question-circle" /> Resolver questões
 				</a>
 			</div>
 		</h:panelGroup>
 
-		<!-- ═══════════════════════ CARDS DE AÇÃO ═════════════════════ -->
-		<div class="in-section-title"><i class="pi pi-th-large" /> O que você quer fazer?</div>
+		<div class="in-layout #{sessaoBean.logado ? '' : 'in-layout--solo'}">
 
-		<div class="in-cards">
+			<div class="in-main">
 
-			<a class="in-card" href="/matematica/painel.xhtml">
-				<span class="in-card-ico"><i class="fa-solid fa-calculator" /></span>
-				<span class="in-card-title">Praticar Matemática</span>
-				<span class="in-card-desc">Teoria + exercícios do básico ao avançado, com resolução passo a passo.</span>
-				<span class="in-card-cta">Começar <i class="pi pi-arrow-right" /></span>
-			</a>
+				<!-- ═══════════════════════ CARDS DE AÇÃO ═════════════════ -->
+				<div class="in-section-title"><i class="pi pi-th-large" /> O que você quer fazer?</div>
 
-			<a class="in-card" href="/questao/questao.xhtml">
-				<span class="in-card-ico in-card-ico--green"><i class="pi pi-question-circle" /></span>
-				<span class="in-card-title">Resolver Questões</span>
-				<span class="in-card-desc">Banco de questões de provas e concursos, com gabarito e resolução.</span>
-				<span class="in-card-cta">Explorar <i class="pi pi-arrow-right" /></span>
-			</a>
+				<div class="in-cards">
 
-			<ui:fragment rendered="#{sessaoBean.logado}">
-				<a class="in-card" href="/avaliacao/list.xhtml">
-					<span class="in-card-ico in-card-ico--violet"><i class="pi pi-file-edit" /></span>
-					<span class="in-card-title">Criar Avaliação</span>
-					<span class="in-card-desc">Monte provas e listas personalizadas escolhendo assunto, nível e formato.</span>
-					<span class="in-card-cta">Montar <i class="pi pi-arrow-right" /></span>
-				</a>
-			</ui:fragment>
+					<a class="in-card" href="/matematica/painel.xhtml">
+						<span class="in-card-ico"><i class="fa-solid fa-calculator" /></span>
+						<span class="in-card-title">Praticar Matemática</span>
+						<span class="in-card-desc">Teoria + exercícios do básico ao avançado, com resolução passo a passo.</span>
+						<span class="in-card-cta">Começar <i class="pi pi-arrow-right" /></span>
+					</a>
 
-			<ui:fragment rendered="#{sessaoBean.logado and sessaoBean.usuario.criador and sessaoBean.usuario.configPost != null}">
-				<a class="in-card" href="/post/configuracao.xhtml?configPost=#{sessaoBean.usuario.configPost.id}">
-					<span class="in-card-ico in-card-ico--pink"><i class="fa-brands fa-instagram" /></span>
-					<span class="in-card-title">Gerar Posts</span>
-					<span class="in-card-desc">Crie posts de Feed e Reels prontos para o Instagram a partir dos exercícios.</span>
-					<span class="in-card-cta">Criar <i class="pi pi-arrow-right" /></span>
-				</a>
-			</ui:fragment>
+					<a class="in-card" href="/questao/questao.xhtml">
+						<span class="in-card-ico in-card-ico--green"><i class="pi pi-question-circle" /></span>
+						<span class="in-card-title">Resolver Questões</span>
+						<span class="in-card-desc">Banco de questões de provas e concursos, com gabarito e resolução.</span>
+						<span class="in-card-cta">Explorar <i class="pi pi-arrow-right" /></span>
+					</a>
 
-			<a class="in-card" href="/produtos/produtos.xhtml">
-				<span class="in-card-ico in-card-ico--amber"><i class="fa-solid fa-store" /></span>
-				<span class="in-card-title">Produtos</span>
-				<span class="in-card-desc">Apostilas, planos de acesso e pacotes de avaliações e conteúdo.</span>
-				<span class="in-card-cta">Ver loja <i class="pi pi-arrow-right" /></span>
-			</a>
-
-		</div>
-
-		<ui:fragment rendered="#{!sessaoBean.logado}">
-			<div class="in-hint">
-				<i class="pi pi-info-circle" /> Faça login para criar avaliações e gerar posts para o Instagram.
-			</div>
-		</ui:fragment>
-
-		<!-- ═══════════════════════ COMECE POR AQUI (logado) ══════════ -->
-		<ui:fragment rendered="#{sessaoBean.logado}">
-			<div class="in-section-title"><i class="pi pi-compass" /> Comece por aqui</div>
-			<p class="in-section-sub">Sugestões de assuntos do módulo Básico para aquecer.</p>
-			<div class="in-rec">
-				<ui:repeat value="#{assuntoBean.getTodosAssuntos('Basico')}" var="assunto" varStatus="st">
-					<ui:fragment rendered="#{st.index lt 6}">
-						<a class="in-rec-card" href="#{assunto.endTeoria()}">
-							<img class="in-rec-thumb" src="#{assunto.endImageThumb()}" alt="#{assunto.nome}"
-								onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
-							<span class="in-rec-info">
-								<span class="in-rec-name">#{assunto.nome}</span>
-								<span class="in-rec-stars">
-									<i class="fa-solid fa-star #{assunto.numStar gt 0 ? '' : 'off'}" />
-									<i class="fa-solid fa-star #{assunto.numStar gt 1 ? '' : 'off'}" />
-									<i class="fa-solid fa-star #{assunto.numStar gt 2 ? '' : 'off'}" />
-									<i class="fa-solid fa-star #{assunto.numStar gt 3 ? '' : 'off'}" />
-									<i class="fa-solid fa-star #{assunto.numStar gt 4 ? '' : 'off'}" />
-								</span>
-							</span>
+					<ui:fragment rendered="#{sessaoBean.logado}">
+						<a class="in-card" href="/avaliacao/list.xhtml">
+							<span class="in-card-ico in-card-ico--violet"><i class="pi pi-file-edit" /></span>
+							<span class="in-card-title">Criar Avaliação</span>
+							<span class="in-card-desc">Monte provas e listas personalizadas escolhendo assunto, nível e formato.</span>
+							<span class="in-card-cta">Montar <i class="pi pi-arrow-right" /></span>
 						</a>
 					</ui:fragment>
-				</ui:repeat>
+
+					<ui:fragment rendered="#{sessaoBean.logado}">
+						<a class="in-card" href="/post/gerar/list.xhtml">
+							<span class="in-card-ico in-card-ico--pink"><i class="fa-brands fa-instagram" /></span>
+							<span class="in-card-title">Gerar Posts</span>
+							<span class="in-card-desc">Crie posts de Feed e Reels prontos para o Instagram a partir dos exercícios.</span>
+							<span class="in-card-cta">Criar <i class="pi pi-arrow-right" /></span>
+						</a>
+					</ui:fragment>
+
+					<a class="in-card" href="/produtos/produtos.xhtml">
+						<span class="in-card-ico in-card-ico--amber"><i class="fa-solid fa-store" /></span>
+						<span class="in-card-title">Produtos</span>
+						<span class="in-card-desc">Apostilas, planos de acesso e pacotes de avaliações e conteúdo.</span>
+						<span class="in-card-cta">Ver loja <i class="pi pi-arrow-right" /></span>
+					</a>
+
+				</div>
+
+				<ui:fragment rendered="#{!sessaoBean.logado}">
+					<div class="in-hint">
+						<i class="pi pi-info-circle" /> Faça login para criar avaliações e gerar posts para o Instagram.
+					</div>
+				</ui:fragment>
+
 			</div>
-		</ui:fragment>
+
+			<!-- ═══════════════════════ RESUMO DO PLANO (logado) ═══════ -->
+			<ui:fragment rendered="#{sessaoBean.logado}">
+				<aside class="in-aside">
+					<div class="in-plan-card">
+						<div class="in-plan-title"><i class="pi pi-crown" /> Seu plano</div>
+
+						<div class="in-plan-row">
+							<span class="in-plan-label">Conteúdo</span>
+							<span class="in-plan-value">#{sessaoBean.usuario.perfil.nome}</span>
+							<ui:fragment rendered="#{sessaoBean.usuario.validadePlano != null}">
+								<span class="in-plan-sub">#{inicioBean.statusValidade(sessaoBean.usuario.validadePlano)}</span>
+							</ui:fragment>
+						</div>
+
+						<ui:fragment rendered="#{sessaoBean.usuario.perfilAvaliacao != null and sessaoBean.usuario.perfilAvaliacao != 'Teste'}">
+							<div class="in-plan-row">
+								<span class="in-plan-label">Avaliação</span>
+								<span class="in-plan-value">#{sessaoBean.usuario.perfilAvaliacao.nome}</span>
+								<ui:fragment rendered="#{sessaoBean.usuario.validadePlanoAvaliacao != null}">
+									<span class="in-plan-sub">#{inicioBean.statusValidade(sessaoBean.usuario.validadePlanoAvaliacao)}</span>
+								</ui:fragment>
+								<span class="in-plan-sub">#{inicioBean.creditosRestantesAvaliacao} avaliaç#{inicioBean.creditosRestantesAvaliacao == 1 ? 'ão' : 'ões'} restante#{inicioBean.creditosRestantesAvaliacao == 1 ? '' : 's'} este mês</span>
+							</div>
+						</ui:fragment>
+
+						<ui:fragment rendered="#{sessaoBean.usuario.perfilCriador != null and sessaoBean.usuario.perfilCriador != 'Teste'}">
+							<div class="in-plan-row">
+								<span class="in-plan-label">Criador</span>
+								<span class="in-plan-value">#{sessaoBean.usuario.perfilCriador.nome}</span>
+								<ui:fragment rendered="#{sessaoBean.usuario.validadePlanoCriador != null}">
+									<span class="in-plan-sub">#{inicioBean.statusValidade(sessaoBean.usuario.validadePlanoCriador)}</span>
+								</ui:fragment>
+								<span class="in-plan-sub">#{inicioBean.creditosRestantesPost} post#{inicioBean.creditosRestantesPost == 1 ? '' : 's'} restante#{inicioBean.creditosRestantesPost == 1 ? '' : 's'} este mês</span>
+							</div>
+						</ui:fragment>
+
+						<a href="/produtos/produtos.xhtml" class="in-plan-cta">Ver planos <i class="pi pi-arrow-right" /></a>
+					</div>
+				</aside>
+			</ui:fragment>
+
+		</div>
 
 		<!-- ═══════════════════════ PROMO PRODUTOS (deslogado) ════════ -->
 		<ui:fragment rendered="#{!sessaoBean.logado}">

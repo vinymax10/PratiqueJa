@@ -3,6 +3,7 @@ package service.pdf;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class ListaQuestoesPdfService
 		Config config = configValido();
 
 		LayoutLista layout = LayoutLista.PADRAO;
-		List<Questao> questoes = buscarQuestoes(assunto, dificuldade, layout.total());
+		List<Questao> questoes = buscarQuestoes(assunto, dificuldade, visibilidade, layout.total());
 		if(questoes.size() < layout.total())
 			throw new ListaQuestoesPdfException(
 				"Não há questões suficientes para este assunto"
@@ -94,9 +95,10 @@ public class ListaQuestoesPdfService
 	 * são particionadas em lotes de no máximo {@code quantidade} questões (ou um único lote, quando
 	 * {@code todos}). Ex.: 50 questões com quantidade 20 → 3 PDFs (20, 20 e 10).
 	 *
-	 * <p>Visibilidade: apenas o <b>primeiro</b> lote do assunto na dificuldade {@link Dificuldade#Facil}
-	 * fica {@link Visibilidade#Basico}; todos os demais lotes (e demais dificuldades) ficam
-	 * {@link Visibilidade#Premium}. O gabarito traz resolução conforme {@code comResolucao}.
+	 * <p>Visibilidade: cada questão entra no lote da sua própria {@link Questao#getVisibilidade()}
+	 * (gerenciada em Administração › Questões), formando lotes {@link Visibilidade#Basico} e
+	 * {@link Visibilidade#Premium} separados por assunto/dificuldade. O gabarito traz resolução
+	 * conforme {@code comResolucao}.
 	 */
 	public ResultadoLote gerarTodos()
 	{
@@ -133,52 +135,75 @@ public class ListaQuestoesPdfService
 					continue;
 				}
 
-				// Tamanho do lote: a quantidade do config (ou tudo num PDF só, se "todos").
-				int tamanhoLote = (cfg.isTodos() || cfg.getQuantidade() <= 0)
-					? todas.size() : cfg.getQuantidade();
-				int totalLotes = (todas.size() + tamanhoLote - 1) / tamanhoLote;
+				// Cada questão vai para o lote da sua própria visibilidade.
+				List<Questao> basicas = new ArrayList<>();
+				List<Questao> premium = new ArrayList<>();
+				for(Questao q : todas)
+					(q.getVisibilidade() == Visibilidade.Basico ? basicas : premium).add(q);
 
-				for(int lote = 0; lote < totalLotes; lote++)
-				{
-					int inicio = lote * tamanhoLote;
-					int fim    = Math.min(inicio + tamanhoLote, todas.size());
-					List<Questao> questoesLote = todas.subList(inicio, fim);
+				int[] resBasico  = gerarLotesVisibilidade(assuntoAtual, cfg, dificuldade, tipoGabarito,
+					comAlternativas, config, basicas, Visibilidade.Basico);
+				int[] resPremium = gerarLotesVisibilidade(assuntoAtual, cfg, dificuldade, tipoGabarito,
+					comAlternativas, config, premium, Visibilidade.Premium);
 
-					// Só o 1º PDF do assunto na dificuldade fácil é Básico; o resto, Premium.
-					Visibilidade visibilidade = (dificuldade == Dificuldade.Facil && lote == 0)
-						? Visibilidade.Basico : Visibilidade.Premium;
-
-					try
-					{
-						Path outputPath = resolverOutputPath(config, assuntoAtual, cfg, visibilidade, lote);
-						Files.createDirectories(outputPath.getParent());
-
-						boolean premium = visibilidade == Visibilidade.Premium;
-						byte[] bytes = gerarBytes(questoesLote, assuntoAtual, config, instrucao(comAlternativas),
-							premium, comAlternativas, dificuldade, LayoutLista.PADRAO, tipoGabarito);
-						Files.write(outputPath, bytes);
-
-						salvarEntidade(assuntoAtual, cfg, visibilidade, lote, outputPath);
-						gerados++;
-					}
-					catch(Exception | LinkageError e)
-					{
-						e.printStackTrace();
-						erros++;
-					}
-				}
+				gerados += resBasico[0] + resPremium[0];
+				erros    += resBasico[1] + resPremium[1];
 			}
 		}
 
 		return new ResultadoLote(gerados, ignorados, erros);
 	}
 
-	private List<Questao> buscarQuestoes(Assunto assunto, Dificuldade dificuldade, int quantidade)
+	/** Particiona {@code questoes} em lotes de {@code cfg.getQuantidade()} e gera um PDF por lote. */
+	private int[] gerarLotesVisibilidade(Assunto assuntoAtual, ConfigPdfQuestao cfg, Dificuldade dificuldade,
+	                                      TipoGabarito tipoGabarito, boolean comAlternativas, Config config,
+	                                      List<Questao> questoes, Visibilidade visibilidade)
+	{
+		if(questoes.isEmpty())
+			return new int[] { 0, 0 };
+
+		int tamanhoLote = (cfg.isTodos() || cfg.getQuantidade() <= 0)
+			? questoes.size() : cfg.getQuantidade();
+		int totalLotes = (questoes.size() + tamanhoLote - 1) / tamanhoLote;
+
+		int gerados = 0;
+		int erros = 0;
+		for(int lote = 0; lote < totalLotes; lote++)
+		{
+			int inicio = lote * tamanhoLote;
+			int fim    = Math.min(inicio + tamanhoLote, questoes.size());
+			List<Questao> questoesLote = questoes.subList(inicio, fim);
+
+			try
+			{
+				Path outputPath = resolverOutputPath(config, assuntoAtual, cfg, visibilidade, lote);
+				Files.createDirectories(outputPath.getParent());
+
+				boolean premium = visibilidade == Visibilidade.Premium;
+				byte[] bytes = gerarBytes(questoesLote, assuntoAtual, config, instrucao(comAlternativas),
+					premium, comAlternativas, dificuldade, LayoutLista.PADRAO, tipoGabarito);
+				Files.write(outputPath, bytes);
+
+				salvarEntidade(assuntoAtual, cfg, visibilidade, lote, outputPath);
+				gerados++;
+			}
+			catch(Exception | LinkageError e)
+			{
+				e.printStackTrace();
+				erros++;
+			}
+		}
+
+		return new int[] { gerados, erros };
+	}
+
+	private List<Questao> buscarQuestoes(Assunto assunto, Dificuldade dificuldade, Visibilidade visibilidade, int quantidade)
 	{
 		FiltroQuestao filtro = new FiltroQuestao();
 		filtro.setAssunto(assunto);
 		filtro.setRevisada(Boolean.TRUE);
 		filtro.setResolucaoLatex(Boolean.TRUE);
+		filtro.setVisibilidade(visibilidade);
 		if(dificuldade != null)
 			filtro.setDificuldade(dificuldade);
 

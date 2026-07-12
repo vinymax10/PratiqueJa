@@ -62,6 +62,17 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 		return result == null ? 0 : result.intValue();
 	}
 
+	/** Pedidos ainda não concluídos (fila em memória perdida num restart do servidor), na ordem
+	 *  original de chegada, para a fila única de geração poder recuperá-los. */
+	public List<PedidoAvaliacao> buscarPendentes()
+	{
+		return em.createQuery(
+			"SELECT p FROM PedidoAvaliacao p WHERE p.status = modelo.avaliacao.StatusPedidoAvaliacao.AGUARDANDO " +
+			"OR p.status = modelo.avaliacao.StatusPedidoAvaliacao.GERANDO ORDER BY p.dataSolicitacao ASC",
+			PedidoAvaliacao.class)
+			.getResultList();
+	}
+
 	public List<PedidoAvaliacao> buscarExpirados(LocalDateTime agora)
 	{
 		TypedQuery<PedidoAvaliacao> q = em.createQuery(

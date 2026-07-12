@@ -49,4 +49,8 @@ public class Pagamento implements Serializable, Entidade
 
 	@AuditLabel(value = "transação Hotmart")
 	private String codigoTransacaoHotmart;
+
+	@ManyToOne
+	@AuditLabel(value = "assinatura")
+	private Assinatura assinatura;
 }

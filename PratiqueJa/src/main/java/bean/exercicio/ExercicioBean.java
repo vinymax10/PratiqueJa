@@ -15,7 +15,10 @@ import modelo.auditoria.TipoEvento;
 import dao.exercicio.ExercicioDAO;
 import filtro.exercicio.FiltroExercicio;
 import infra.Cripto;
+import infra.DadosGrafico;
+import infra.GraficoPeriodo;
 import infra.Navegacao;
+import modelo.exercicio.AlternativaExercicio;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import service.exercicio.ExercicioService.ResultadoLote;
@@ -201,6 +204,9 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 
 	public String responder()
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		exercicioService.registrarResposta(entidade);
 		return "";
 	}
@@ -218,6 +224,9 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	/** Registra a resposta de um exercício específico (cards da aba). */
 	public String responder(Exercicio exercicio)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		if(bloqueado(exercicio))
 			return "";
 
@@ -231,10 +240,28 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	 */
 	public void toogleResolucaoComentada(Exercicio exercicio)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return;
+
 		if(bloqueado(exercicio))
 			return;
 
 		exercicio.toogleResolucaoComentada();
+	}
+
+	/**
+	 * Exibe/oculta o gráfico de escolha das alternativas de um exercício específico (cards da
+	 * aba), barrando exercícios Premium para usuários do plano básico.
+	 */
+	public void toogleEstatistica(Exercicio exercicio)
+	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return;
+
+		if(bloqueado(exercicio))
+			return;
+
+		exercicio.toogleEstatistica();
 	}
 
 	/**
@@ -246,6 +273,32 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		return exercicio != null
 			&& exercicio.getVisibilidade() == Visibilidade.Premium
 			&& !controleAcessoBean.podeAcessarPremium();
+	}
+
+	/** Gráfico de barras com o percentual de escolha de cada alternativa do exercício. */
+	public String createBarModel(Exercicio exercicio)
+	{
+		int total = 0;
+		for(AlternativaExercicio a : exercicio.getAlternativas())
+			total += a.getQtnEscolhida();
+
+		List<String> labels = new ArrayList<>();
+		List<Number> values = new ArrayList<>();
+		for(AlternativaExercicio a : exercicio.getAlternativas())
+		{
+			labels.add(a.getLetra());
+			values.add(total == 0 ? 0 : 100 * a.getQtnEscolhida() / total);
+		}
+
+		DadosGrafico dados = new DadosGrafico();
+		dados.setTitulo("Escolha das alternativas");
+		dados.setTituloEixoX("Alternativas");
+		dados.setTituloEixoY("Porcentagem");
+		dados.setIndexAxis("x");
+		dados.setLabels(labels);
+		dados.setValues(values);
+
+		return GraficoPeriodo.criarGraficoBarras(dados);
 	}
 
 	public void toogleResolucao()

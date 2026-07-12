@@ -51,149 +51,87 @@
 
 			<p:dataViewListItem>
 
-				<p:card class="newBorder mt-3 mb-3 p-2" style="width:100%">
-					<div class="grid panelStatus m-0">
+				<p:card class="newBorder qg-card mt-3 mb-3 p-2" style="width:100%">
 
-						<!-- ID -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="ID" />
-							<h:outputText styleClass="status" value="#{entidade.id}" />
-						</h:panelGroup>
+					<!-- Cabeçalho: ID, Chave e badges de status -->
+					<div class="qg-header">
+						<h:outputText styleClass="qg-id" value="Q#{entidade.id}" />
+						<h:outputText styleClass="qg-chave" value="#{entidade.chave}" rendered="#{not empty entidade.chave}" />
 
-						<!-- Chave -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Chave" />
-							<h:outputText styleClass="status" value="#{entidade.chave}" />
-						</h:panelGroup>
+						<div class="qg-badges">
+							<p:tag value="#{entidade.dificuldade.nome}" rendered="#{entidade.dificuldade != null}"
+							severity="#{entidade.dificuldade == 'Facil' ? 'success' : entidade.dificuldade == 'Medio' ? 'warning' : 'danger'}" />
 
-						<!-- Ordem de Inserção -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Ordem" />
-							<h:outputText styleClass="status" value="#{entidade.ordemInsercao}" />
-						</h:panelGroup>
+							<p:tag value="#{entidade.visibilidade.nome}" rendered="#{entidade.visibilidade != null}"
+							severity="#{entidade.visibilidade == 'Basico' ? 'success' : 'warning'}" />
 
-						<!-- Revisada -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Revisada" />
-							<h:outputText styleClass="status" value="#{entidade.revisada ? 'Sim' : 'Não'}" />
-						</h:panelGroup>
+							<p:tag value="Revisada" severity="success" rendered="#{entidade.revisada}" />
+							<p:tag value="Não Revisada" severity="secondary" rendered="#{!entidade.revisada}" />
 
-						<!-- Assunto Curso -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Assunto Curso" />
-							<h:outputText styleClass="status" value="#{entidade.assuntosNomes}" />
-						</h:panelGroup>
+							<p:tag value="Mal Formulada" severity="danger" rendered="#{entidade.malFormulada}" />
+						</div>
+					</div>
 
-						<!-- Disciplina -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Disciplina" />
-							<h:outputText styleClass="status" value="#{entidade.disciplina.nome}" />
-						</h:panelGroup>
+					<!-- Chips de metadados -->
+					<div class="qg-chips">
+						<h:outputText styleClass="qg-chip" value="Assunto: #{entidade.assuntosNomes}" rendered="#{not empty entidade.assuntosNomes}" />
+						<h:outputText styleClass="qg-chip" value="Disciplina: #{entidade.disciplina.nome}" rendered="#{entidade.disciplina != null}" />
+						<h:outputText styleClass="qg-chip" value="Ano: #{entidade.ano.nome}" rendered="#{entidade.ano != null}" />
+						<h:outputText styleClass="qg-chip" value="Banca: #{entidade.banca.nome}" rendered="#{entidade.banca != null}" />
+						<h:outputText styleClass="qg-chip" value="Órgão: #{entidade.orgao.nome}" rendered="#{entidade.orgao != null}" />
+						<h:outputText styleClass="qg-chip" value="Prova: #{entidade.prova}" rendered="#{not empty entidade.prova}" />
+						<h:outputText styleClass="qg-chip" value="Ordem: #{entidade.ordemInsercao}" />
+						<h:outputText styleClass="qg-chip" value="Qualid. Formulação: #{entidade.qualidadeFormulacao}" />
+						<h:outputText styleClass="qg-chip" value="Qualid. Resolução: #{entidade.qualidadeResolucao}" />
+					</div>
 
-						<!-- Ano -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Ano" />
-							<h:outputText styleClass="status" value="#{entidade.ano.nome}" />
-						</h:panelGroup>
-
-						<!-- Dificuldade -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Dificuldade" />
-							<h:outputText styleClass="status" value="#{entidade.dificuldade.nome}" />
-						</h:panelGroup>
-						
-						<!-- Qualidade da Formulação -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Qualidade da Formulação" />
-							<h:outputText styleClass="status" value="#{entidade.qualidadeFormulacao}" />
-						</h:panelGroup>
-
-						<!-- Qualidade da Resolução -->
-						<h:panelGroup
-						styleClass="col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Qualidade da Resolução" />
-							<h:outputText styleClass="status" value="#{entidade.qualidadeResolucao}" />
-						</h:panelGroup>
-
-						<!-- Banca -->
-						<h:panelGroup
-						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Banca" />
-							<h:outputText styleClass="status" value="#{entidade.banca.nome}" />
-						</h:panelGroup>
-
-						<!-- Órgão -->
-						<h:panelGroup
-						styleClass="col-12 md:col-12 lg:col-12 xl:col-6 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Órgão" />
-							<h:outputText styleClass="status" value="#{entidade.orgao.nome}" />
-						</h:panelGroup>
-
-						<!-- Prova -->
-						<h:panelGroup
-						styleClass="col-12 md:col-12 lg:col-12 xl:col-12 flex flex-column align-items-start">
-							<h:outputText styleClass="title" value="Prova" />
-							<h:outputText styleClass="status" value="#{entidade.prova}" />
-						</h:panelGroup>
-						
-						<!-- Parágrafos -->
-						<h:panelGroup rendered="#{not empty entidade.paragrafos}"
-						styleClass="col-12 flex flex-column">
-							<h:outputText styleClass="title" value="Enunciado" />
+					<!-- Enunciado -->
+					<h:panelGroup rendered="#{not empty entidade.paragrafos}" layout="block">
+						<h:outputText styleClass="qg-section-title" value="Enunciado" />
+						<div class="qg-enunciado">
 							<ui:repeat value="#{entidade.paragrafos}" var="paragrafo">
-								<h:outputText styleClass="status"
+								<h:outputText style="display:block;margin-bottom:.5rem"
 								value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
 								<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
 								cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
-								style="max-width:300px;height:auto;margin:.25rem 0;" />
+								style="max-width:300px;height:auto;margin:.25rem 0;display:block" />
 							</ui:repeat>
-						</h:panelGroup>
+						</div>
+					</h:panelGroup>
+
+					<div class="grid m-0">
 
 						<!-- Alternativas -->
 						<h:panelGroup rendered="#{not empty entidade.alternativas}"
-						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-2">
-							<h:outputText styleClass="title" value="Alternativas" />
-							<ui:repeat value="#{entidade.alternativas}" var="alt">
-								<h:panelGroup styleClass="flex flex-row align-items-center gap-2">
-									<h:outputText styleClass="status"
-									value="#{alt.letra}) #{alt.texto}" />
-									<h:outputText rendered="#{alt.correta}">
-										<i class="pi pi-check" style="color:var(--green-500);" />
-									</h:outputText>
-									
-								</h:panelGroup>
-							</ui:repeat>
-						</h:panelGroup>
-						
-						<!-- Resolução -->
-						<h:panelGroup rendered="#{not empty entidade.resolucaoParagrafos}"
-						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column gap-2">
-							<h:outputText styleClass="title" value="Resolução" />
-							<ui:repeat value="#{entidade.resolucaoParagrafos}" var="paragrafo">
-								<h:outputText styleClass="status"
-								value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
-								<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
-								cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
-								style="max-width:300px;height:auto;margin:.25rem 0;" />
-							</ui:repeat>
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column">
+							<h:outputText styleClass="qg-section-title" value="Alternativas" />
+							<div style="margin:0 1rem">
+								<ui:repeat value="#{entidade.alternativas}" var="alt">
+									<div class="qg-alt #{alt.correta ? 'qg-alt-correta' : ''}">
+										<h:outputText value="#{alt.letra}) #{alt.texto}" />
+										<i class="pi pi-check" style="margin-left:auto;#{alt.correta ? '' : 'display:none'}" />
+									</div>
+								</ui:repeat>
+							</div>
 						</h:panelGroup>
 
-						<!-- Botão Editar -->
-						<h:panelGroup styleClass="col-12 flex justify-content-end mt-2">
-							
+						<!-- Resolução -->
+						<h:panelGroup rendered="#{not empty entidade.resolucaoParagrafos}"
+						styleClass="col-12 md:col-12 lg:col-6 xl:col-6 flex flex-column">
+							<h:outputText styleClass="qg-section-title" value="Resolução" />
+							<div class="qg-resolucao">
+								<ui:repeat value="#{entidade.resolucaoParagrafos}" var="paragrafo">
+									<h:outputText style="display:block;margin-bottom:.5rem"
+									value="#{paragrafo.texto}" rendered="#{!paragrafo.tipoImagem}" />
+									<p:graphicImage value="#{paragrafo.imagemFile.imagem()}"
+									cache="false" stream="false" rendered="#{paragrafo.tipoImagem}"
+									style="max-width:300px;height:auto;margin:.25rem 0;display:block" />
+								</ui:repeat>
+							</div>
 						</h:panelGroup>
 
 					</div>
-					
+
 				<div class="content-button" >
 
 			<div class="divisor" ></div>

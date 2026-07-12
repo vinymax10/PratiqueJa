@@ -77,6 +77,25 @@
 				</div>
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="pc-field pc-field-wide" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Estilo do Post" />
+				<div class="pc-seg2">
+					<p:selectOneButton value="#{configPostBean.configPost.estilo}" layout="custom"
+						unselectable="false" required="true">
+						<f:selectItems value="#{estiloPostBean.opcoes}" var="opcao"
+							itemValue="#{opcao}" itemLabel="#{opcao.nome}" />
+					</p:selectOneButton>
+					<ui:repeat value="#{estiloPostBean.opcoes}" var="opcao">
+						<div class="pc-seg2-opt #{opcao == configPostBean.configPost.estilo ? 'ui-state-active' : ''}"
+							role="radio" tabindex="0" title="#{opcao.descricao}">
+							<i class="#{opcao.icone} pc-seg2-icon"></i>
+							<span class="pc-seg2-title">#{opcao.nome}</span>
+							<span class="pc-seg2-tag">#{opcao.tag}</span>
+						</div>
+					</ui:repeat>
+				</div>
+			</h:panelGroup>
+
 			<h:panelGroup styleClass="pc-field" layout="block">
 				<p:outputLabel styleClass="pc-label" value="Nível" />
 				<div class="pc-seg2 pc-seg2--nivel">

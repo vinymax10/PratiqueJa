@@ -1061,6 +1061,97 @@ body .ui-panel.titleSlim .ui-panel-titlebar {
 	pointer-events: none;
 }
 
+/* ===== ADMIN: card da Questão (gerenciar/list.xhtml) ===== */
+.qg-card {
+	border-radius: 16px !important;
+	transition: box-shadow .2s, transform .15s;
+}
+.qg-card:hover {
+	box-shadow: 0 8px 28px rgba(15, 23, 42, .12) !important;
+	transform: translateY(-1px);
+}
+.qg-header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 0 0 12px;
+	margin: 0 1rem 12px;
+	border-bottom: 1px solid #eef0f3;
+}
+.qg-id {
+	font-size: .8rem;
+	font-weight: 600;
+	color: #94a3b8;
+}
+.qg-chave {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #1e293b;
+}
+.qg-badges {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-left: auto;
+}
+.qg-chips {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin: 0 1rem 14px;
+}
+.qg-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 10px;
+	border-radius: 8px;
+	font-size: .75rem;
+	font-weight: 600;
+	background: #f1f5f9;
+	color: #475569;
+	border: 1px solid #e2e8f0;
+	white-space: nowrap;
+}
+.qg-section-title {
+	display: block;
+	font-size: .7rem;
+	font-weight: 700;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+	color: #94a3b8;
+	margin: 0 1rem 6px;
+}
+.qg-enunciado {
+	background: #f8fafc;
+	border-radius: 10px;
+	padding: 14px 16px;
+	margin: 0 1rem 8px;
+}
+.qg-alt {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	background: #f8fafc;
+	margin-bottom: 6px;
+}
+.qg-alt-correta {
+	background: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	color: #15803d;
+	font-weight: 600;
+}
+.qg-resolucao {
+	background: #f0fdf4;
+	border-left: 4px solid #16a34a;
+	border-radius: 0 10px 10px 0;
+	padding: 14px 16px;
+	margin: 0 1rem;
+}
+
 .marcadagua {
 	position: absolute;
 	top: 10px;

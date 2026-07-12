@@ -1,6 +1,5 @@
 package service.seguranca;
 
-import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
 
 public class AutorizacaoService
@@ -8,7 +7,7 @@ public class AutorizacaoService
 	public static boolean podeVerAuditoria(Usuario usuario)
 	{
 		if(usuario!=null)
-			return usuario.getPerfil()==PerfilUsuario.Admin;
+			return usuario.isAdmin();
 
 		return false;
 	}
@@ -16,7 +15,7 @@ public class AutorizacaoService
 	public static boolean podeVerAdministracao(Usuario usuario)
 	{
 		if(usuario!=null)
-			return usuario.getPerfil()==PerfilUsuario.Admin;
+			return usuario.isAdmin();
 
 		return false;
 	}

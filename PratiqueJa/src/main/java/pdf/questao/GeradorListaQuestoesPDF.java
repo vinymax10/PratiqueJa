@@ -187,8 +187,19 @@ public class GeradorListaQuestoesPDF
 	private String macros()
 	{
 		return
+			// imagem que ocupa no máximo #1 de largura, sem jamais ser ampliada
+			// além do tamanho natural (equivalente a max-width:100% do CSS)
+			"\\newsavebox{\\PJimgbox}\n"
+			+ "\\newcommand{\\PJimg}[2]{%\n"
+			+ "  \\sbox{\\PJimgbox}{\\includegraphics{#2}}%\n"
+			+ "  \\ifdim\\wd\\PJimgbox>#1\n"
+			+ "    \\includegraphics[width=#1]{#2}%\n"
+			+ "  \\else\n"
+			+ "    \\usebox{\\PJimgbox}%\n"
+			+ "  \\fi}\n\n"
+
 			// número da questão — badge azul
-			"\\newcommand{\\numex}[1]{%\n"
+			+ "\\newcommand{\\numex}[1]{%\n"
 			+ "  \\begin{tcolorbox}[enhanced,arc=3pt,boxrule=0pt,colback=rulebg,colframe=rulebg,"
 			+ "left=4pt,right=4pt,top=1pt,bottom=1pt,nobeforeafter,on line]"
 			+ "{\\bfseries\\small\\color{darkblue}#1}\\end{tcolorbox}\\hspace{4pt}}\n"
@@ -446,7 +457,7 @@ public class GeradorListaQuestoesPDF
 		String nome = gravarImagem(num, p);
 		if (nome == null)
 			return "";
-		return "{\\centering\\includegraphics[width=0.6\\linewidth]{" + nome + "}\\par}";
+		return "{\\centering\\PJimg{0.6\\linewidth}{" + nome + "}\\par}";
 	}
 
 	/**
@@ -676,7 +687,7 @@ public class GeradorListaQuestoesPDF
 			if (nome == null) continue;   // imagem ausente: pula
 
 			if (!primeira) sb.append("\\par\\vspace{4pt}");
-			sb.append("\\includegraphics[width=0.8\\linewidth]{").append(nome).append("}");
+			sb.append("\\PJimg{0.8\\linewidth}{").append(nome).append("}");
 			primeira = false;
 		}
 		return sb.toString();

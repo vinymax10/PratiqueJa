@@ -45,6 +45,29 @@
 
 		<div class="pc-panel">
 
+		<!-- STATUS -->
+		<div class="pc-section-sub"><i class="pi pi-toggle-on" /> Status</div>
+
+		<div class="pc-fields">
+
+			<h:panelGroup styleClass="pc-field" layout="block">
+				<p:outputLabel styleClass="pc-label" for="@next" value="Último Envio" />
+				<p:datePicker id="ultimoEnvio" value="#{configPostBean.configPost.ultimoEnvio}"
+					locale="pt" required="true" requiredMessage="A data é obrigatória">
+					<p:ajax event="change" process="@this" listener="#{configPostBean.salvar}" update=":growl" />
+				</p:datePicker>
+				<p:message for="ultimoEnvio" display="text"/>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
+				<p:outputLabel styleClass="pc-label" for="@next" value="Ativo" />
+				<p:toggleSwitch class="toggleSwitch-form" value="#{configPostBean.configPost.ativo}">
+					<p:ajax event="change" process="@this" listener="#{configPostBean.salvar}" update=":growl" />
+				</p:toggleSwitch>
+			</h:panelGroup>
+
+		</div>
+
 		<!-- AÇÕES EM MASSA (cards) -->
 		<div class="pc-action-cards">
 

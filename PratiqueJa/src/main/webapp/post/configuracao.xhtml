@@ -66,12 +66,32 @@
 
 			<div class="pc-fields">
 
+				<h:panelGroup styleClass="pc-field pc-field-wide" layout="block">
+	                <p:outputLabel styleClass="pc-label" for="@next" value="Estilo do Post"/>
+	                <div class="pc-seg2">
+	                    <p:selectOneButton id="estilo" value="#{configPostBean.configPost.estilo}" layout="custom"
+	                    unselectable="false" required="true" requiredMessage="O estilo do post é obrigatório">
+	                        <f:selectItems value="#{estiloPostBean.opcoes}" var="opcao"
+	                        itemValue="#{opcao}" itemLabel="#{opcao.nome}" />
+	                    </p:selectOneButton>
+	                    <ui:repeat value="#{estiloPostBean.opcoes}" var="opcao">
+	                        <div class="pc-seg2-opt #{opcao == configPostBean.configPost.estilo ? 'ui-state-active' : ''}"
+	                        role="radio" tabindex="0" title="#{opcao.descricao}">
+	                            <i class="#{opcao.icone} pc-seg2-icon"></i>
+	                            <span class="pc-seg2-title">#{opcao.nome}</span>
+	                            <span class="pc-seg2-tag">#{opcao.tag}</span>
+	                        </div>
+	                    </ui:repeat>
+	                </div>
+	                <p:message for="estilo" display="text"/>
+	            </h:panelGroup>
+
 				<h:panelGroup styleClass="pc-field" layout="block">
-					<p:outputLabel styleClass="pc-label" for="@next" value="Último Envio" />
-					<p:datePicker id="data" value="#{configPostBean.configPost.ultimoEnvio}"
-						locale="pt" required="true" requiredMessage="A data é obrigatória"  />
-					<p:message for="data" display="text"/>
-				</h:panelGroup>
+	                <p:outputLabel styleClass="pc-label" for="@next" value="Cor de Destaque"/>
+	                <p:colorPicker id="corDestaque" value="#{configPostBean.configPost.corDestaque}"
+	                required="true" requiredMessage="A cor de destaque é obrigatória" />
+	                <p:message for="corDestaque" display="text"/>
+	            </h:panelGroup>
 
 				<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
 	                <p:outputLabel styleClass="pc-label" for="@next" value="Finalidade da Cta"/>
@@ -83,23 +103,6 @@
 	                </p:selectOneMenu>
 	                <p:message for="finalidadeCta" display="text"/>
 	            </h:panelGroup>
-
-				<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
-	                <p:outputLabel styleClass="pc-label" for="@next" value="Perfil"/>
-	                <p:selectOneMenu id="perfilCriador" value="#{configPostBean.configPost.usuario.perfilCriador}"
-	                filter="true" filterMatchMode="contains" required="true" requiredMessage="O intervalo de envio é obrigatório" >
-	                    <f:selectItems value="#{perfilCriadorBean.opcoes}" var="perfil"
-	                    itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
-	                </p:selectOneMenu>
-	                <p:message for="perfilCriador" display="text"/>
-	            </h:panelGroup>
-
-	            <h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}"
-	            layout="block">
-					<p:outputLabel styleClass="pc-label" for="@next" value="Ativo" />
-					<p:toggleSwitch class="toggleSwitch-form"
-						value="#{configPostBean.configPost.ativo}" />
-				</h:panelGroup>
 
 			</div>
 

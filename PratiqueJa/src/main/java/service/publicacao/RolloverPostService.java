@@ -40,8 +40,8 @@ public class RolloverPostService
 		for(Usuario usuario : usuarioDAO.listarCriadores())
 		{
 			PerfilCriador perfil = usuario.getPerfilCriador();
-			boolean planoAtivo = usuario.getValidadePlano() == null
-				|| !usuario.getValidadePlano().isBefore(hoje);
+			boolean planoAtivo = usuario.getValidadePlanoCriador() == null
+				|| !usuario.getValidadePlanoCriador().isBefore(hoje);
 
 			int credito;
 			LocalDate mesProcessado;

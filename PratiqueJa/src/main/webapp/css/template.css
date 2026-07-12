@@ -62,6 +62,23 @@
 	.t2-brand-short { display: inline; }
 }
 
+.t2-bread-main {
+	font-size: 18px;
+	font-weight: 700;
+	color: #07142f;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100%;
+}
+
+@media (max-width: 900px) {
+	.t2-bread-main {
+		max-width: 160px;
+	}
+}
+
 .t2-topbar-spacer { flex: 1; }
 
 .t2-topbar-extra {
@@ -117,6 +134,21 @@
 @media (max-width: 600px) {
 	.t2-cta-produtos .t2-cta-text { display: none; }
 	.t2-cta-produtos { padding: 0 10px; }
+
+	/* Botão "Login" / nome do usuário logado: some o texto, fica só o ícone (igual ao "Produtos"
+	   acima). commandButton (Login) e menuButton (nome do usuário) usam classes de texto
+	   diferentes — cobre as duas. O ícone do PrimeFaces é position:absolute (sai do fluxo), então
+	   com o texto em display:none não sobra nada pra dar tamanho à caixa do botão — ele colapsa
+	   pra ~2x2px (confirmado via getComputedStyle). Por isso largura/altura fixas aqui, não só
+	   esconder o texto. */
+	.t2-btn-login .ui-button-text,
+	.t2-btn-login .ui-menubutton-text { display: none; }
+	.t2-btn-login.ui-button,
+	.t2-btn-login .ui-button {
+		width: 38px;
+		height: 38px;
+		padding: 0;
+	}
 }
 
 /* ---- LAYOUT DA PÁGINA (abaixo do topbar) ---- */

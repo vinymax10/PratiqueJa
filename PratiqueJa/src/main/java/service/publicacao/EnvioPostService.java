@@ -131,8 +131,8 @@ public class EnvioPostService
 		+ "\n" + programacaoPost);
 
 		// Envio programado é exclusivo de quem tem plano ativo (o teste grátis é só sob demanda).
-		boolean planoAtivo = usuario.getValidadePlano() != null
-			&& !usuario.getValidadePlano().isBefore(java.time.LocalDate.now());
+		boolean planoAtivo = usuario.getValidadePlanoCriador() != null
+			&& !usuario.getValidadePlanoCriador().isBefore(java.time.LocalDate.now());
 		if(!programacaoPost.isAvulsa() && !planoAtivo)
 		{
 			logger.fine("Plano de conteúdo inativo para " + usuario.getNome() + "; envio programado pulado.");

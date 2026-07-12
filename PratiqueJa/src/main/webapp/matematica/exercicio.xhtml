@@ -131,7 +131,7 @@
 				<div class="ex-card-actions">
 
 					<p:commandButton value="Responder" process="@form"
-						update="feedbackResposta, :growl"
+						update="feedbackResposta, :growl, :formProgresso:progressoWidget"
 						action="#{exercicioBean.responder(exercicio)}"
 						styleClass="ui-button-raised btn-primary" />
 
@@ -139,7 +139,13 @@
 						styleClass="ui-button-flat ui-button-plain"
 						action="#{exercicioBean.toogleResolucaoComentada(exercicio)}"
 						process="@this" oncomplete="reloadMathJax();"
-						update="resolucaoComentada" />
+						update="resolucaoComentada, estatistica" />
+
+					<p:commandButton value="Estatística" icon="pi pi-chart-bar"
+						process="@this"
+						update="resolucaoComentada, estatistica"
+						action="#{exercicioBean.toogleEstatistica(exercicio)}"
+						styleClass="ui-button-flat ui-button-plain" />
 
 					<p:button value="Editar" icon="pi pi-pencil"
 						rendered="#{sessaoBean.podeVerAdministracao()}"
@@ -148,6 +154,16 @@
 						href="#{exercicioBean.getUrlEdicao(exercicio)}" />
 
 				</div>
+
+				<h:panelGroup id="estatistica" layout="block">
+					<div class="ui-fluid p-grid" style="#{not exercicio.showEstatistica ? 'display:none' : ''}">
+						<div class="field col-12">
+							<p:chart value="#{exercicioBean.createBarModel(exercicio)}"
+								rendered="#{exercicio.showEstatistica}"
+								style="width:100%;height:350px;" />
+						</div>
+					</div>
+				</h:panelGroup>
 
 				<h:panelGroup id="resolucaoComentada" layout="block">
 					<h:panelGroup layout="block" rendered="#{exercicio.showResolucaoComentada}">

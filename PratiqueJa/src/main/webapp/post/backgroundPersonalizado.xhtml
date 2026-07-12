@@ -32,6 +32,19 @@
 
 	<ui:include src="/post/navTabs.xhtml" />
 
+	<ui:fragment rendered="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}">
+		<div class="pc-premium-banner">
+			<span class="pc-premium-banner-icon"><i class="pi pi-crown" /></span>
+			<span class="pc-premium-banner-text">
+				<strong>Backgrounds personalizados são exclusivos dos planos Premium e Master.</strong><br />
+				Faça upgrade da sua conta para enviar suas próprias imagens de fundo.
+			</span>
+			<a href="/produtos/conteudo/conteudo.xhtml" class="pc-premium-banner-cta">
+				<i class="pi pi-arrow-up-right" /> Ver planos
+			</a>
+		</div>
+	</ui:fragment>
+
 	<h:form id="form">
 
 		<div class="pc-panel">
@@ -43,27 +56,36 @@
 				<div class="pc-section-sub"><i class="pi pi-image" /> Background Feed</div>
 
 				<div class="pc-dropzone-wrap">
-					<div class="pc-dropzone-hint">
-						<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
-						<span class="pc-dropzone-title">Arraste o fundo do Feed aqui ou clique para enviar</span>
-						<ul class="pc-dropzone-specs">
-							<li>PNG ou JPG</li>
-							<li>Tamanho ideal: 1080 × 1350 px</li>
-							<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
-							<li>Tamanho máximo: 5 MB</li>
-						</ul>
-					</div>
-					<p:fileUpload id="upload" listener="#{imagemPostBean.uploadFeed}"
-						mode="advanced" auto="true" dragDropSupport="true"
-						chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
-						label="Escolha um arquivo."
-						invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
-						invalidSizeMessage="O tamanho máximo permitido é de 5MB."
-						disabled="#{!imagemPostBean.podeFazerUpload(true)}"
-						update="form">
-						<p:validateFile sizeLimit="5002400" virusScan="true"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-					</p:fileUpload>
+					<h:panelGroup layout="block" rendered="#{imagemPostBean.podeFazerUpload(true)}">
+						<div class="pc-dropzone-hint">
+							<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+							<span class="pc-dropzone-title">Arraste o fundo do Feed aqui ou clique para enviar</span>
+							<ul class="pc-dropzone-specs">
+								<li>PNG ou JPG</li>
+								<li>Tamanho ideal: 1080 × 1350 px</li>
+								<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
+								<li>Tamanho máximo: 5 MB</li>
+							</ul>
+						</div>
+						<p:fileUpload id="upload" listener="#{imagemPostBean.uploadFeed}"
+							mode="advanced" auto="true" dragDropSupport="true"
+							chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
+							label="Escolha um arquivo."
+							invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+							invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+							update="form">
+							<p:validateFile sizeLimit="5002400" virusScan="true"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+						</p:fileUpload>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="pc-dropzone-locked"
+						rendered="#{!imagemPostBean.podeFazerUpload(true)}"
+						onclick="PF('dialogPremiumBackground').show()">
+						<i class="pi pi-lock pc-dropzone-locked-icon" />
+						<span class="pc-dropzone-locked-title">Upload bloqueado</span>
+						<span class="pc-dropzone-locked-desc">#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'Disponível nos planos Premium e Master' : 'Limite de imagens do seu plano atingido'}</span>
+					</h:panelGroup>
 				</div>
 
 				<h:panelGroup id="imagesFeed" layout="block" styleClass="pc-bg-thumbs">
@@ -86,27 +108,36 @@
 				<div class="pc-section-sub"><i class="pi pi-video" /> Background Reel</div>
 
 				<div class="pc-dropzone-wrap">
-					<div class="pc-dropzone-hint">
-						<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
-						<span class="pc-dropzone-title">Arraste o fundo do Reel aqui ou clique para enviar</span>
-						<ul class="pc-dropzone-specs">
-							<li>PNG ou JPG</li>
-							<li>Tamanho ideal: 1080 × 1920 px</li>
-							<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
-							<li>Tamanho máximo: 5 MB</li>
-						</ul>
-					</div>
-					<p:fileUpload listener="#{imagemPostBean.uploadReel}"
-						mode="advanced" auto="true" dragDropSupport="true"
-						chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
-						label="Escolha um arquivo."
-						invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
-						invalidSizeMessage="O tamanho máximo permitido é de 5MB."
-						disabled="#{!imagemPostBean.podeFazerUpload(false)}"
-						update="form">
-						<p:validateFile sizeLimit="5002400" virusScan="true"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-					</p:fileUpload>
+					<h:panelGroup layout="block" rendered="#{imagemPostBean.podeFazerUpload(false)}">
+						<div class="pc-dropzone-hint">
+							<span class="pc-dropzone-icon"><i class="pi pi-cloud-upload" /></span>
+							<span class="pc-dropzone-title">Arraste o fundo do Reel aqui ou clique para enviar</span>
+							<ul class="pc-dropzone-specs">
+								<li>PNG ou JPG</li>
+								<li>Tamanho ideal: 1080 × 1920 px</li>
+								<li>Outros tamanhos são redimensionados <span>(pode distorcer)</span></li>
+								<li>Tamanho máximo: 5 MB</li>
+							</ul>
+						</div>
+						<p:fileUpload listener="#{imagemPostBean.uploadReel}"
+							mode="advanced" auto="true" dragDropSupport="true"
+							chooseLabel="Selecionar imagem" styleClass="pc-dropzone"
+							label="Escolha um arquivo."
+							invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+							invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+							update="form">
+							<p:validateFile sizeLimit="5002400" virusScan="true"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+						</p:fileUpload>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="pc-dropzone-locked"
+						rendered="#{!imagemPostBean.podeFazerUpload(false)}"
+						onclick="PF('dialogPremiumBackground').show()">
+						<i class="pi pi-lock pc-dropzone-locked-icon" />
+						<span class="pc-dropzone-locked-title">Upload bloqueado</span>
+						<span class="pc-dropzone-locked-desc">#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'Disponível nos planos Premium e Master' : 'Limite de imagens do seu plano atingido'}</span>
+					</h:panelGroup>
 				</div>
 
 				<h:panelGroup id="imagesReel" layout="block" styleClass="pc-bg-thumbs">
@@ -129,7 +160,22 @@
 		</div>
 
 	</h:form>
-	
+
+	<p:dialog widgetVar="dialogPremiumBackground" modal="true" showHeader="false"
+		responsive="true" width="420">
+		<div class="pc-premium-dialog-content">
+			<div class="pc-premium-dialog-icon"><i class="pi pi-crown" /></div>
+			<h4 class="pc-premium-dialog-title">#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'Recurso exclusivo Premium e Master' : 'Limite de imagens atingido'}</h4>
+			<p class="pc-premium-dialog-text">#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'O envio de backgrounds personalizados está disponível apenas para os planos Premium e Master. Faça upgrade da sua conta para usar suas próprias imagens de fundo.' : 'Seu plano já tem o número máximo de imagens personalizadas para este formato. Remova uma imagem existente ou faça upgrade para um plano com mais espaço.'}</p>
+			<a href="/produtos/conteudo/conteudo.xhtml" class="pc-premium-dialog-cta">
+				<i class="pi pi-arrow-up-right" /> Ver planos
+			</a>
+			<a href="#" onclick="PF('dialogPremiumBackground').hide(); return false;" class="pc-premium-dialog-dismiss">
+				Agora não
+			</a>
+		</div>
+	</p:dialog>
+
 	<script>window.t2Bread = {main: 'Post', sub: 'Background'};</script>
 </ui:decorate>
 

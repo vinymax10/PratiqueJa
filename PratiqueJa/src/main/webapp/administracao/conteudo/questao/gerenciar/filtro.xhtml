@@ -118,6 +118,15 @@
 							</p:selectOneMenu>
 						</div>
 
+						<div class="campo col-12 md:col-6 lg:col-4 xl:col-2">
+							<p:outputLabel for="@next" value="Visibilidade"/>
+							<p:selectOneMenu value="#{questaoBean.filtro.visibilidade}">
+								<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{questaoBean.visibilidadeValues}" var="v"
+								itemLabel="#{v.nome}" itemValue="#{v}" />
+							</p:selectOneMenu>
+						</div>
+
 						<div class="campo col-6 md:col-3 lg:col-2 xl:col-2">
 							<p:outputLabel for="@next" value="Qualid. Formulação (mín)"/>
 							<p:inputText value="#{questaoBean.filtro.qualidadeFormulacaoMin}"

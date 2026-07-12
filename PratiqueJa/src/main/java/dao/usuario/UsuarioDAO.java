@@ -108,9 +108,6 @@ public class UsuarioDAO extends DAO<Usuario>
 		if(filtroUsuario.getPerfil() !=null)
 			predicates.add(builder.equal(fromUsuario.get("perfil"), filtroUsuario.getPerfil()));
 
-		if(filtroUsuario.getCriador() !=null)
-			predicates.add(builder.equal(fromUsuario.get("criador"), filtroUsuario.getCriador() ));
-
 		TypedQuery<Usuario> typedQuery = em.createQuery(query.select(fromUsuario).where(predicates.toArray(new Predicate[0])).distinct(true));
 		List<Usuario> list = typedQuery.getResultList();
 

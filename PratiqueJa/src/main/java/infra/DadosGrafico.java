@@ -8,6 +8,8 @@ public class DadosGrafico
 	private List<Number> values;
 	private String titulo;
 	private String indexAxis;
+	private String tituloEixoX;
+	private String tituloEixoY;
 
 	public List<String> getLabels()
 	{
@@ -47,5 +49,25 @@ public class DadosGrafico
 	public void setIndexAxis(String indexAxis)
 	{
 		this.indexAxis = indexAxis;
+	}
+
+	public String getTituloEixoX()
+	{
+		return tituloEixoX;
+	}
+
+	public void setTituloEixoX(String tituloEixoX)
+	{
+		this.tituloEixoX = tituloEixoX;
+	}
+
+	public String getTituloEixoY()
+	{
+		return tituloEixoY;
+	}
+
+	public void setTituloEixoY(String tituloEixoY)
+	{
+		this.tituloEixoY = tituloEixoY;
 	}
 }

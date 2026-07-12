@@ -23,6 +23,7 @@ import org.primefaces.model.file.UploadedFile;
 
 import exceptions.RelacaoException;
 import bean.download.Diretorio;
+import bean.usuario.ControleAcessoBean;
 import service.configuracao.DiretorioService;
 import bean.util.Mensagem;
 import service.publicacao.ImagemPostService;
@@ -46,6 +47,9 @@ public class ImagemPostBean implements Serializable
 	@Inject
 	private ProgramacaoPostService programacaoPostService;
 
+	@Inject
+	private ControleAcessoBean controleAcessoBean;
+
 	private List<Background> imagensFeed;
 	private List<Background> imagensReel;
 
@@ -63,6 +67,8 @@ public class ImagemPostBean implements Serializable
 	public boolean podeFazerUpload(boolean feed)
 	{
 		ConfigPost configPost = configPostBean.getConfigPost();
+		if(configPost.getUsuario() == null)
+			return false;
 		switch(configPost.getUsuario().getPerfilCriador())
 		{
 			case Basico: return false;
@@ -76,6 +82,9 @@ public class ImagemPostBean implements Serializable
 
 	public String uploadFeed(FileUploadEvent event)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		uploadedFile = event.getFile();
 		criarImagemPost(true);
 		return "";
@@ -83,6 +92,9 @@ public class ImagemPostBean implements Serializable
 
 	public String uploadReel(FileUploadEvent event)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		uploadedFile = event.getFile();
 		criarImagemPost(false);
 		return "";
@@ -90,6 +102,9 @@ public class ImagemPostBean implements Serializable
 
 	public String remover(ImagemPost imagem)
 	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return "";
+
 		try
 		{
 			imagemPostService.remover(imagem, diretorio.getConfig().getEndereco());

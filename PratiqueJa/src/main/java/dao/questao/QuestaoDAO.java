@@ -151,6 +151,9 @@ public class QuestaoDAO extends DAO<Questao>
 		else if(filtroQuestao.getDificuldade() != null)
 			predicates.add(builder.equal(fromQuestao.get("dificuldade"), filtroQuestao.getDificuldade()));
 
+		if(filtroQuestao.getVisibilidade() != null)
+			predicates.add(builder.equal(fromQuestao.get("visibilidade"), filtroQuestao.getVisibilidade()));
+
 		if(filtroQuestao.getChave()!=null&&!filtroQuestao.getChave().isBlank())
 		{
 			predicates.add(builder.like(fromQuestao.<String>get("chave"), "%" + filtroQuestao.getChave() + "%"));
@@ -248,13 +251,14 @@ public class QuestaoDAO extends DAO<Questao>
 		}
 
 		TypedQuery<Questao> typedQuery = em
-		.createQuery(query.select(fromQuestao).where(predicates.toArray(new Predicate[0])).distinct(true).orderBy(builder.asc(fromQuestao.get("ordemInsercao"))));
+		.createQuery(query.select(fromQuestao).where(predicates.toArray(new Predicate[0])).distinct(true)
+		.orderBy(builder.asc(fromQuestao.get("visibilidade")), builder.asc(fromQuestao.get("ordemInsercao"))));
 
 		List<Questao> list = typedQuery.getResultList();
 
 		return list;
 	}
-	
+
 	public Questao getQuestao(long idQuestao)
 	{
 

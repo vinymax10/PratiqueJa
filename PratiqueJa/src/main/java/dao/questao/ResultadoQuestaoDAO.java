@@ -6,10 +6,12 @@ import java.util.List;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 import dao.DAO;
+import modelo.academico.Assunto;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.usuario.Usuario;
@@ -46,6 +48,23 @@ public class ResultadoQuestaoDAO extends DAO<ResultadoQuestao>
 		List<ResultadoQuestao> list = typedQuery.getResultList();
 
 		return list;
+	}
+
+	/** Quantas questões do assunto o usuário já acertou. */
+	public int contarCorretas(Assunto assunto, Usuario usuario)
+	{
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> query = builder.createQuery(Long.class);
+		Root<ResultadoQuestao> from = query.from(ResultadoQuestao.class);
+		Join<ResultadoQuestao, Questao> questaoJoin = from.join("questao");
+		Join<Questao, Assunto> assuntoJoin = questaoJoin.join("assuntos");
+
+		query.select(builder.count(from)).where(
+			builder.equal(from.get("usuario").get("id"), usuario.getId()),
+			builder.equal(from.<Boolean>get("acertou"), true),
+			builder.equal(assuntoJoin.get("id"), assunto.getId()));
+
+		return em.createQuery(query).getSingleResult().intValue();
 	}
 
 }

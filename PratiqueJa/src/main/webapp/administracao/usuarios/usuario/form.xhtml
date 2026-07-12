@@ -30,9 +30,9 @@
 			</div>
 			
            	<div class="col-12 xl:col-6 p-text-right" >
-				<p:button  value="ConfogPost" styleClass="ui-button-raised ui-button-flat" 
-				icon="pi pi-instagram" rendered="#{usuarioBean.entidade.criador}"
-				href="/post/configuracao.xhtml?configPost=#{usuarioBean.entidade.configPost.id}"					
+				<p:button  value="ConfogPost" styleClass="ui-button-raised ui-button-flat"
+				icon="pi pi-instagram"
+				href="/post/configuracao.xhtml?configPost=#{usuarioBean.entidade.configPost.id}"
 				style="margin-left:15px;" target="_blank">
 				</p:button>
 			</div>
@@ -83,8 +83,20 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
-				<p:outputLabel for="@next" value="Validade do Plano" />
+				<p:outputLabel for="@next" value="Validade do Plano — Premium" />
 				<p:datePicker value="#{usuarioBean.entidade.validadePlano}"
+				pattern="dd/MM/yyyy" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Validade do Plano — Criador" />
+				<p:datePicker value="#{usuarioBean.entidade.validadePlanoCriador}"
+				pattern="dd/MM/yyyy" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Validade do Plano — Avaliação" />
+				<p:datePicker value="#{usuarioBean.entidade.validadePlanoAvaliacao}"
 				pattern="dd/MM/yyyy" />
 			</h:panelGroup>
 
@@ -106,9 +118,9 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-2 xl:col-2">
-				<p:outputLabel for="@next" value="Criador" />
+				<p:outputLabel for="@next" value="Admin" />
 				<p:toggleSwitch class="toggleSwitch-form"
-				value="#{usuarioBean.entidade.criador}" />
+				value="#{usuarioBean.entidade.admin}" />
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-4 lg:col-2 xl:col-2">

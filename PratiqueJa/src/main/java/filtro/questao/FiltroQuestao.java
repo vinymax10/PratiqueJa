@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.academico.Assunto;
+import modelo.pdf.Visibilidade;
 import modelo.questao.Dificuldade;
 import modelo.academico.Ano;
 import modelo.academico.Banca;
@@ -30,6 +31,7 @@ public class FiltroQuestao implements Serializable
 	private List<Dificuldade> dificuldades = new ArrayList<>();
 	private Disciplina disciplina;
 	private Dificuldade dificuldade;
+	private Visibilidade visibilidade;
 	private Boolean revisada;
 	private int ordemInsercao;
 	private String chave;
@@ -52,6 +54,7 @@ public class FiltroQuestao implements Serializable
 		orgao = null;
 		disciplina = null;
 		dificuldade = null;
+		visibilidade = null;
 		revisada = null;
 		ordemInsercao = 0;
 		chave = null;
