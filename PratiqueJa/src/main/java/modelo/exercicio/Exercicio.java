@@ -27,7 +27,6 @@ import modelo.academico.Assunto;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.pdf.Visibilidade;
-import modelo.teste.EtapaTeste;
 
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -47,10 +46,6 @@ public class Exercicio implements Serializable, Entidade
 	@DiffIgnore
 	@ManyToOne
 	private Assunto assunto;
-
-	@DiffIgnore
-	@ManyToOne
-	private EtapaTeste etapaTeste;
 
 	@AuditLabel(value = "nível")
 	private Nivel nivel;

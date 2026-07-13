@@ -10,18 +10,13 @@ import jakarta.inject.Inject;
 
 import dao.configuracao.ConfigCleanupDAO;
 import dao.exercicio.ExercicioDAO;
-import dao.teste.TesteDAO;
 import modelo.configuracao.ConfigCleanup;
 import modelo.exercicio.Exercicio;
-import modelo.teste.Teste;
 
 @Singleton
 @Startup
 public class CleanupService
 {
-	@Inject
-	private TesteDAO testeDAO;
-
 	@Inject
 	private ExercicioDAO exercicioDAO;
 
@@ -34,31 +29,12 @@ public class CleanupService
 		ConfigCleanup config = configCleanupDAO.buscar();
 		try
 		{
-			removerTestes(testeDAO.testesRealizados(config.getDiasRemoverTesteRealizado()));
-			removerTestes(testeDAO.testesNaoRealizados(config.getDiasRemoverTesteNaoRealizado()));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
 //			removerExercicios(exercicioDAO.exerciciosRealizados(config.getDiasRemoverExercicioRealizado()));
 //			removerExercicios(exercicioDAO.exerciciosNaoRealizados(config.getDiasRemoverExercicioNaoRealizado()));
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-	}
-
-	private void removerTestes(List<Teste> testes)
-	{
-		Iterator<Teste> it = testes.iterator();
-		while(it.hasNext())
-		{
-			testeDAO.remover(it.next());
-			it.remove();
 		}
 	}
 

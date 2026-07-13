@@ -1,9 +1,14 @@
 package bean.seguranca;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
+import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import bean.download.Diretorio;
 import bean.email.EmailBean;
 import bean.util.Mensagem;
 import dao.usuario.UsuarioDAO;
@@ -17,9 +22,14 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Pattern;
+import javax.imageio.ImageIO;
 import lombok.Data;
+import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
+import net.coobird.thumbnailator.Thumbnails;
+import service.configuracao.DiretorioService;
 import service.seguranca.AcessoService;
+import util.FileAux;
 import web.session.Sessao;
 
 @Data
@@ -50,7 +60,10 @@ public class AutenticacaoBean implements Serializable
 	
 	@Inject
 	private SessaoBean sessaoBean;
-	
+
+	@Inject
+	private DiretorioService diretorioService;
+
 	public void init()
 	{
 		email = "";
@@ -75,6 +88,77 @@ public class AutenticacaoBean implements Serializable
 		}
 
 		return "";
+	}
+
+	/** Chamado via p:remoteCommand após o login com o Google (google.js). */
+	public void loginGoogle()
+	{
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String emailGoogle = params.get("email");
+		String nome = params.get("name");
+		String sub = params.get("sub");
+		String picture = params.get("picture");
+
+		usuario = usuarioDAO.getUsuarioGoogle(sub);
+
+		if(usuario == null)
+		{
+			usuario = usuarioDAO.getUsuario(emailGoogle, "");
+			boolean novo = usuario == null;
+			if(novo)
+			{
+				usuario = new Usuario();
+				usuario.setEmail(emailGoogle);
+				usuario.setNome(nome);
+			}
+			usuario.setSubGoogle(sub);
+			usuario = usuarioDAO.salvar(usuario);
+			salvarFotoGoogle(picture);
+		}
+
+		if(!usuario.isAtivo())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Usuário inativo.");
+			return;
+		}
+
+		iniciarSessaoUsuario();
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso.");
+	}
+
+	private void salvarFotoGoogle(String pictureUrl)
+	{
+		if(pictureUrl == null || pictureUrl.isBlank() || usuario.getFoto() != null)
+			return;
+
+		try
+		{
+			byte[] bytes = redimensionar(pictureUrl);
+
+			Diretorio diretorio = diretorioService.criarDiretorioSemReserva();
+			String endBase = diretorio.getConfig().getEndereco();
+			String endRel = "/images/usuario/" + usuario.getId() + "/";
+			String nomeArquivo = "google.png";
+
+			FileAux.gravarFile(endBase + endRel, nomeArquivo, bytes);
+
+			Imagem foto = new Imagem();
+			foto.setEndereco(endRel + nomeArquivo);
+			usuario.setFoto(foto);
+			usuario = usuarioDAO.salvar(usuario);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private byte[] redimensionar(String pictureUrl) throws IOException
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(Thumbnails.of(URI.create(pictureUrl).toURL()).size(400, 400).keepAspectRatio(false).asBufferedImage(),
+			"png", baos);
+		return baos.toByteArray();
 	}
 
 	private String obterPaginaOrigem()

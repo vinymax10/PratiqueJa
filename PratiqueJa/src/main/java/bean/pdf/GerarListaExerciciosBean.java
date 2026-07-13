@@ -14,7 +14,6 @@ import modelo.exercicio.Nivel;
 import modelo.pdf.Visibilidade;
 import service.pdf.ListaExerciciosPdfException;
 import service.pdf.ListaExerciciosPdfService;
-import service.pdf.ListaExerciciosPdfService.ResultadoLote;
 
 @Data
 @Named
@@ -56,30 +55,4 @@ public class GerarListaExerciciosBean implements Serializable
 		}
 	}
 
-	public void gerarTodos()
-	{
-		try
-		{
-			ResultadoLote resultado = listaExerciciosPdfService.gerarTodos();
-
-			String msg = resultado.getGerados() + " PDF(s) gerado(s)";
-			if(resultado.getIgnorados() > 0)
-				msg += ", " + resultado.getIgnorados() + " ignorado(s) (sem exercício padrão)";
-			if(resultado.getErros() > 0)
-				msg += ", " + resultado.getErros() + " erro(s)";
-			msg += ".";
-
-			FacesMessage.Severity severity = resultado.getErros() > 0 ? FacesMessage.SEVERITY_WARN : FacesMessage.SEVERITY_INFO;
-			Mensagem.send("growl", severity, msg);
-		}
-		catch(ListaExerciciosPdfException e)
-		{
-			Mensagem.send("growl", e.isErro() ? FacesMessage.SEVERITY_ERROR : FacesMessage.SEVERITY_WARN, e.getMessage());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Erro ao gerar PDFs: " + e.getMessage());
-		}
-	}
 }

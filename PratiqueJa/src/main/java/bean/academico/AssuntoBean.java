@@ -11,7 +11,6 @@ import dao.exercicio.ExercicioDAO;
 import dao.exercicio.ResultadoExercicioDAO;
 import dao.pdf.PdfDAO;
 import dao.questao.ResultadoQuestaoDAO;
-import dao.teste.ResultadoTesteDAO;
 import exceptions.RelacaoException;
 import filtro.academico.FiltroAssunto;
 import jakarta.annotation.PostConstruct;
@@ -39,9 +38,6 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 {
 	@Inject
 	private FiltroAssunto filtro;
-
-	@Inject
-	private ResultadoTesteDAO resultadoTesteDAO;
 
 	@Inject
 	private ExercicioDAO exercicioDAO;
@@ -106,7 +102,7 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 		return null;
 	}
 
-	/** Assuntos marcados para aparecer na tela de teste (mostrarTesteConteudo = true). */
+	/** Assuntos marcados para servir de padrão na tela de teste/preview de configuração de Post. */
 	private List<Assunto> opcoesTeste;
 
 	public List<Assunto> getOpcoesTeste()
@@ -121,28 +117,6 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 	{
 		String url = "/pdf/" + entidade.getModulo().toString().toLowerCase() + "/" + entidade.getChave() + ".pdf";
 		return url;
-	}
-
-	public String getKeyPdfEmbedAdobe()
-	{
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String serverName = request.getServerName();
-
-		if(serverName.equals("pratiqueja.com"))
-			return "ffa6fcd96c444c23a7a33890f2cc3191";
-
-		if(serverName.equals("www.pratiqueja.com"))
-			return "f9531c1d598a4add8119f9fc90092f80";
-
-		if(serverName.equals("pratiqueja.com.br"))
-			return "d564d4ff38e949cf84d43cd17ddfed7d";
-
-		if(serverName.equals("www.pratiqueja.com.br"))
-			return "71f1532cf63f42d6b493cb75073e5b8d";
-
-		if(serverName.equals("localhost"))
-			return "f6fdcab0872641c5bd7c6963fbce62f4";
-		return "";
 	}
 
 	public String pdfName()
@@ -166,37 +140,6 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 		}
 		catch (Exception e) { }
 		return null;
-	}
-
-	private int numStar(Assunto assunto)
-	{
-		Usuario usuario = Sessao.getUsuarioLogado();
-		if(usuario==null)
-			return 0;
-
-		double resultado = resultadoTesteDAO.melhorResultado(assunto, usuario);
-
-		if(resultado>=100)
-			return 5;
-		if(resultado>=80)
-			return 4;
-		if(resultado>=60)
-			return 3;
-		if(resultado>=40)
-			return 2;
-		if(resultado>=20)
-			return 1;
-
-		return 0;
-	}
-
-	public double porcentagemConcluida(Assunto assunto)
-	{
-		Usuario usuario = Sessao.getUsuarioLogado();
-		if(usuario!=null)
-			return resultadoTesteDAO.melhorResultado(assunto, usuario);
-		else
-			return 0;
 	}
 
 	/** Exercícios do assunto que o usuário logado já acertou. */
@@ -261,11 +204,7 @@ public class AssuntoBean extends PaiBean<Assunto,AssuntoDAO,PermissaoPadrao<Assu
 
 	public List<Assunto> getTodosAssuntos(Modulo modulo)
 	{
-		List<Assunto> assuntos = entidadeDAO.buscar(modulo);
-		for(Assunto assunto : assuntos)
-			assunto.setNumStar(numStar(assunto));
-
-		return assuntos;
+		return entidadeDAO.buscar(modulo);
 	}
 
 }

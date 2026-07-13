@@ -21,16 +21,10 @@
 				
 <!-- 				<h:panelGroup id="filtro" rendered="#{emailBean.lista}"> -->
 				
-					<p:commandButton look="success" value="Cadastrar" icon="pi pi-plus" 
+					<p:commandButton look="success" value="Cadastrar" icon="pi pi-plus"
 					styleClass="ui-button-raised ui-button-success ui-button-flat"
 					action="#{emailBean.cadastrar()}" update="@form" process="@this" style="margin-right:15px;" />
-						
-					<p:commandButton look="success" value="Remover" process="@this" 
-					icon="pi pi-trash" 
-					styleClass="ui-button-raised ui-button-danger ui-button-flat"
-					action="#{emailBean.removerTeste()}" style="margin-right:15px;" />
-						
-					
+
 					<f:websocket channel="email">
 						<f:ajax event="updateEmail" render="form:tabela" />
 					</f:websocket>

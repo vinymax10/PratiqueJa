@@ -13,6 +13,7 @@ import bean.util.Mensagem;
 import dao.pdf.PdfDAO;
 import filtro.pdf.FiltroPdf;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -21,6 +22,9 @@ import lombok.EqualsAndHashCode;
 import modelo.pdf.Pdf;
 import modelo.pdf.TipoPdf;
 import modelo.seguranca.PermissaoPadrao;
+import service.pdf.ListaExerciciosPdfException;
+import service.pdf.ListaExerciciosPdfService;
+import service.pdf.ListaExerciciosPdfService.ResultadoLote;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -30,6 +34,9 @@ public class PdfExercicioBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
 {
 	@Inject
 	private FiltroPdf filtro;
+
+	@Inject
+	private ListaExerciciosPdfService listaExerciciosPdfService;
 
 	public PdfExercicioBean()
 	{
@@ -113,6 +120,34 @@ public class PdfExercicioBean extends PaiBean<Pdf, PdfDAO, PermissaoPadrao<Pdf>>
 
 		Mensagem.send("growl", jakarta.faces.application.FacesMessage.SEVERITY_INFO,
 			total + " PDF(s) removido(s) com sucesso.");
+	}
+
+	public void gerarTodos()
+	{
+		try
+		{
+			ResultadoLote resultado = listaExerciciosPdfService.gerarTodos();
+
+			String msg = resultado.getGerados() + " PDF(s) gerado(s)";
+			if (resultado.getIgnorados() > 0)
+				msg += ", " + resultado.getIgnorados() + " ignorado(s) (sem exercício padrão)";
+			if (resultado.getErros() > 0)
+				msg += ", " + resultado.getErros() + " erro(s)";
+			msg += ".";
+
+			FacesMessage.Severity severity = resultado.getErros() > 0 ? FacesMessage.SEVERITY_WARN : FacesMessage.SEVERITY_INFO;
+			Mensagem.send("growl", severity, msg);
+			filtrar();
+		}
+		catch (ListaExerciciosPdfException e)
+		{
+			Mensagem.send("growl", e.isErro() ? FacesMessage.SEVERITY_ERROR : FacesMessage.SEVERITY_WARN, e.getMessage());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Erro ao gerar PDFs: " + e.getMessage());
+		}
 	}
 
 	public void filtrar()

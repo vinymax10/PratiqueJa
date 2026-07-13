@@ -60,9 +60,10 @@
 							<p:fileDownload value="#{pdfAssuntoBean.download(pdf)}" />
 						</p:commandButton>
 
-						<p:button value="Fazer upgrade" icon="pi pi-crown"
+						<p:commandButton value="Baixar" icon="pi pi-crown"
 							styleClass="pdf-download-btn pdf-download-btn--premium"
-							href="/produtos/acesso/acesso.xhtml"
+							action="#{pdfAssuntoBean.abrirDialogBloqueado(pdf)}"
+							process="@this" update="@none"
 							rendered="#{pdfAssuntoBean.bloqueado(pdf)}" />
 					</div>
 
@@ -77,6 +78,24 @@
 				Nenhum PDF disponível para este assunto.
 			</p>
 		</h:panelGroup>
+
+		<p:dialog widgetVar="dialogPremiumPdf" modal="true" showHeader="false"
+			responsive="true" width="420">
+			<div class="pdf-premium-dialog-content">
+				<div class="pdf-premium-dialog-icon"><i class="pi pi-crown" /></div>
+				<h4 class="pdf-premium-dialog-title">PDF exclusivo Premium</h4>
+				<p class="pdf-premium-dialog-text">
+					Este material está disponível apenas para assinantes Premium.
+					Faça o upgrade da sua conta para baixar este e outros PDFs exclusivos.
+				</p>
+				<a href="/produtos/acesso/acesso.xhtml" class="pdf-premium-dialog-cta">
+					<i class="pi pi-arrow-up-right" /> Fazer upgrade da conta
+				</a>
+				<a href="#" onclick="PF('dialogPremiumPdf').hide(); return false;" class="pdf-premium-dialog-dismiss">
+					Agora não
+				</a>
+			</div>
+		</p:dialog>
 
 	</h:form>
 

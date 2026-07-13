@@ -35,10 +35,6 @@ import service.configuracao.DiretorioService;
 @RequestScoped
 public class ListaExerciciosPdfService
 {
-	private static final Path TEX_NEW_DIR = Path.of("C:/Users/maximovrm/git/PratiqueJa/PratiqueJa/tex-new");
-
-	private static final String XELATEX_EXE = "C:/Users/maximovrm/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe";
-
 	private static final String SUBPASTA = "lista_exercicios";
 
 	@Inject
@@ -148,11 +144,11 @@ public class ListaExerciciosPdfService
 	throws IOException, InterruptedException
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
-		Path workDir = Path.of(config.getEnderecoLatex()).resolve(diretorio.getDiretorio());
+		Path workDir = Path.of(diretorio.getEndereco());
 		try
 		{
 			return new GeradorListaPDF.Builder().gerador(padrao.getClasse()).titulo(assunto.getNome()).subtitulo("Nível " + padrao.getNivelRomano())
-			.categoria("Matemática · " + assunto.getModulo().getNome()).instrucao(instrucao).pratiquejaStyDir(TEX_NEW_DIR).xelatexExe(XELATEX_EXE)
+			.categoria("Matemática · " + assunto.getModulo().getNome()).instrucao(instrucao).pratiquejaStyDir(Path.of(config.getEnderecoTexNew())).xelatexExe("xelatex")
 			.premium(premium).layout(padrao.getLayoutLista() != null ? padrao.getLayoutLista() : LayoutLista.PADRAO)
 			.comAlternativas(comAlternativas).build().gerarBytes(workDir);
 		}

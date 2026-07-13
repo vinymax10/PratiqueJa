@@ -97,7 +97,7 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 			// Blocos de cada exemplar, na ordem, para montar um único PDF de gabaritos ao final
 			Map<String, List<BlocoExercicio>> gabaritosPorExemplar = new LinkedHashMap<>();
 
-			Path styDir = Path.of("C:/Users/maximovrm/git/PratiqueJa/PratiqueJa/tex-new");
+			Path styDir = Path.of(config.getEnderecoTexNew());
 			String xelatex = resolverXelatex(config);
 
 			// Cada avaliação possui 3 sub-etapas (exercícios, PDF, gabarito) para granularidade do progresso

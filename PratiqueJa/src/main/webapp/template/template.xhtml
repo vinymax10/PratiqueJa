@@ -55,7 +55,7 @@
 
 	<p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"
 		process="@this"
-		oncomplete="if (args &amp;&amp; !args.validationFailed) PF('loginWidget').hide()"
+		oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('loginWidget').hide(); window.location.reload(); }"
 		update=":formPrincipal :growl" />
 
 	<p:growl for="growl" id="growl" redisplay="false" showDetail="true"
@@ -358,22 +358,6 @@
 						<i class="pi pi-sliders-h"></i> Config Exercício
 					</a>
 					<a href="/administracao/atividades/resultado-exercicio/list.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-chart-bar"></i> Resultados
-					</a>
-				</div>
-
-				<div class="t2-menu-item t2-has-sub" onclick="t2ToggleSub(this)">
-					<i class="fa-solid fa-hourglass-start"></i> Testes
-					<i class="t2-sub-arrow pi pi-chevron-down"></i>
-				</div>
-				<div class="t2-submenu">
-					<a href="/teste/teste/teste.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-list"></i> Testes
-					</a>
-					<a href="/administracao/conteudo/teste-padrao/list.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-star"></i> Teste Padrão
-					</a>
-					<a href="/administracao/atividades/resultado-teste/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-chart-bar"></i> Resultados
 					</a>
 				</div>

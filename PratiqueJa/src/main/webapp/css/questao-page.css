@@ -598,12 +598,6 @@
     padding: 0 10px;
 }
 
-.qz-card-id {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #07142f;
-    flex-shrink: 0;
-}
 
 .qz-card-meta {
     display: flex;

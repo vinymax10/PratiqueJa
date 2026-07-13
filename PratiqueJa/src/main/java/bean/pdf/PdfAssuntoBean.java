@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import bean.usuario.ControleAcessoBean;
+import bean.util.Mensagem;
 import dao.pdf.PdfDAO;
 import filtro.pdf.FiltroPdf;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -49,6 +52,19 @@ public class PdfAssuntoBean implements Serializable
 			&& !controleAcessoBean.podeAcessarPremium();
 	}
 
+	/**
+	 * Chamado ao clicar em "Baixar" de um PDF bloqueado.
+	 * Se não estiver logado, abre o dialog de login; se logado sem premium, abre o dialog de upgrade.
+	 */
+	public void abrirDialogBloqueado(Pdf pdf)
+	{
+		if (!controleAcessoBean.verificaEstaLogado())
+			return;
+
+		if (bloqueado(pdf))
+			PrimeFaces.current().executeScript("PF('dialogPremiumPdf').show()");
+	}
+
 	public void filtrarPorAssunto(Assunto assunto)
 	{
 		if (assunto == null)
@@ -61,18 +77,22 @@ public class PdfAssuntoBean implements Serializable
 		filtro.setAssunto(assunto);
 		pdfs = pdfDAO.buscar(filtro);
 		pdfs.sort(Comparator
-			.comparingInt((Pdf p) -> p.getTipo() != null ? p.getTipo().getOrdem() : 99)
+			.comparingInt((Pdf p) -> p.getVisibilidade() == Visibilidade.Premium ? 1 : 0)
+			.thenComparingInt((Pdf p) -> p.getTipo() != null ? p.getTipo().getOrdem() : 99)
 			.thenComparingInt(Pdf::getOrdem));
 	}
 
 	public StreamedContent download(Pdf pdf)
 	{
 		if (pdf == null || bloqueado(pdf) || pdf.getCaminho() == null || pdf.getCaminho().isBlank())
-			return new DefaultStreamedContent();
+			return null;
 
 		Path path = Path.of(pdf.getCaminho());
 		if (!Files.exists(path))
-			return new DefaultStreamedContent();
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Arquivo não encontrado no servidor.");
+			return null;
+		}
 
 		String nomeArquivo = path.getFileName().toString();
 		return DefaultStreamedContent.builder()

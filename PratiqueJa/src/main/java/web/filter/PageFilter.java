@@ -28,40 +28,53 @@ public class PageFilter extends Filtro
 		try
 		{
 			Usuario usuario = (Usuario) session.getAttribute("UsuarioLogado");
-
-			if(httpRequest.getRequestURI().contains("/matematica/")
-			|| httpRequest.getRequestURI().contains("/produtos/")
-			|| httpRequest.getRequestURI().contains("/informativo/")
-			|| httpRequest.getRequestURI().contains("/download/")
-			|| httpRequest.getRequestURI().contains("/questao/")
-			|| httpRequest.getRequestURI().contains("/usuario/perfil")
-			// "Gerar Posts" é a porta de entrada da área de Post, navegável sem login (igual
-			// "Criar Avaliação"); só a geração de fato exige login — ver PedidoPostBean. As
-			// demais abas (Configurações, Programação, Background, Teste, CTAs) continuam
-			// exigindo login para entrar, como antes.
-			|| httpRequest.getRequestURI().contains("/post/gerar/"))
-				acesso = true;
+			String uri = httpRequest.getRequestURI();
 
 			if(usuario != null)
-			{
-				if(httpRequest.getRequestURI().contains("/avaliacao/")
-				// Logado: as demais abas de Post (Configurações, Background, Teste, CTAs)
-				// ficam liberadas — a ownership do configPost é garantida em
-				// ConfigPostBean.sincronizarConfigPost(), não mais aqui no filtro.
-				// "/post/programacao" fica de fora: só admin acessa (via usuario.isAdmin() logo
-				// abaixo) — CTAs já seguia essa regra só na navTabs, aqui é reforçado no filtro.
-				|| (httpRequest.getRequestURI().contains("/post/")
-					&& !httpRequest.getRequestURI().contains("/post/programacao")))
-					acesso = true;
 				MDC.put("usuario", String.valueOf(usuario.getId()));
-				if(httpRequest.getRequestURI().contains("/atividades/")
-				||httpRequest.getRequestURI().contains("/exercicio/exercicio/verExercicio")
-				||httpRequest.getRequestURI().contains("/teste/teste/verTeste")
-				||httpRequest.getRequestURI().contains("usuario/pagamento/finalizado")
-				||usuario.isAdmin())
-					acesso = true;
+
+			// Área administrativa (inclui os fragmentos de exportação/auditoria, que expõem
+			// download direto do bean se acessados sem passar pela página que os inclui):
+			// ramo exclusivo, só admin logado — nenhuma das regras públicas abaixo se aplica,
+			// senão heurísticas como "/questao/" vazariam acesso a /administracao/conteudo/questao/*.
+			if(uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/"))
+			{
+				acesso = usuario != null && usuario.isAdmin();
 			}
-			
+			else
+			{
+				if(uri.contains("/matematica/")
+				|| uri.contains("/produtos/")
+				|| uri.contains("/informativo/")
+				|| uri.contains("/download/")
+				|| uri.contains("/questao/")
+				|| uri.contains("/usuario/perfil")
+				// "Gerar Posts" é a porta de entrada da área de Post, navegável sem login (igual
+				// "Criar Avaliação"); só a geração de fato exige login — ver PedidoPostBean. As
+				// demais abas (Configurações, Programação, Background, Teste, CTAs) continuam
+				// exigindo login para entrar, como antes.
+				|| uri.contains("/post/gerar/"))
+					acesso = true;
+
+				if(usuario != null)
+				{
+					if(uri.contains("/avaliacao/")
+					// Logado: as demais abas de Post (Configurações, Background, Teste, CTAs)
+					// ficam liberadas — a ownership do configPost é garantida em
+					// ConfigPostBean.sincronizarConfigPost(), não mais aqui no filtro.
+					// "/post/programacao" fica de fora: só admin acessa (via usuario.isAdmin() logo
+					// abaixo) — CTAs já seguia essa regra só na navTabs, aqui é reforçado no filtro.
+					|| (uri.contains("/post/") && !uri.contains("/post/programacao")))
+						acesso = true;
+
+					if(uri.contains("/atividades/")
+					|| uri.contains("/exercicio/exercicio/verExercicio")
+					|| uri.contains("usuario/pagamento/finalizado")
+					|| usuario.isAdmin())
+						acesso = true;
+				}
+			}
+
 			LOG.info("Acesso={} à url={}", acesso, httpRequest.getServletPath());
 			redirecionar(acesso, request, response, chain);
 		}

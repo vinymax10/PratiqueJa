@@ -27,12 +27,6 @@ public class ConfigCleanup implements Serializable, Entidade
 	@EqualsAndHashCode.Include
 	private Long id;
 
-	@AuditLabel(value = "dias para remover teste realizado")
-	private int diasRemoverTesteRealizado;
-
-	@AuditLabel(value = "dias para remover teste não realizado")
-	private int diasRemoverTesteNaoRealizado;
-
 	@AuditLabel(value = "dias para remover exercício realizado")
 	private int diasRemoverExercicioRealizado;
 

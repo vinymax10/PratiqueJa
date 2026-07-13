@@ -38,9 +38,9 @@ public class ConfigBean implements Serializable
 
 		if(config==null)
 		{
+			// Endereço-raiz em branco; os demais caminhos derivam dele (latex/, images/, pdf/,
+			// ebook/, avaliacoes/, tex-new/, anexos-email/) — preencher e salvar aqui.
 			config=new Config();
-			// Endereço-raiz; os demais caminhos derivam dele (latex/, images/, pdf/, ebook/, avaliacoes/)
-			config.setEndereco("C:\\Users\\maximovrm\\Documents");
 			configDAO.salvar(config);
 		}
 	}

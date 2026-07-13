@@ -14,27 +14,31 @@
 		<filter-name>PageFilter</filter-name>
 		<url-pattern>/</url-pattern>
 		<url-pattern>/acesso/*</url-pattern>
+		<url-pattern>/administracao/*</url-pattern>
 		<url-pattern>/assunto/*</url-pattern>
 		<url-pattern>/atividades/*</url-pattern>
+		<url-pattern>/auditoria/*</url-pattern>
+		<url-pattern>/avaliacao/*</url-pattern>
 		<url-pattern>/configLatex/*</url-pattern>
 		<url-pattern>/configuracao/*</url-pattern>
 		<url-pattern>/contato/*</url-pattern>
 		<url-pattern>/download/*</url-pattern>
 		<url-pattern>/email/*</url-pattern>
 		<url-pattern>/exercicio/*</url-pattern>
+		<url-pattern>/exportar/*</url-pattern>
 		<url-pattern>/gestaoQuestao/*</url-pattern>
 		<url-pattern>/informativo/*</url-pattern>
 		<url-pattern>/matematica/*</url-pattern>
 		<url-pattern>/pagamento/*</url-pattern>
 		<url-pattern>/planos/*</url-pattern>
+		<url-pattern>/produtos/*</url-pattern>
 		<url-pattern>/questao/*</url-pattern>
 		<url-pattern>/exercicio/*</url-pattern>
-		<url-pattern>/teste/*</url-pattern>
 		<url-pattern>/usuario/*</url-pattern>
 		<url-pattern>/ebook/*</url-pattern>
 		<url-pattern>/post/*</url-pattern>
 		<url-pattern>/instagram/*</url-pattern>
-		
+
 	</filter-mapping>
 
 	<error-page>
@@ -48,10 +52,6 @@
 	<listener>
 		<listener-class>web.listener.SessionListener</listener-class>
 	</listener>
-	<context-param>
-		<param-name>jakarta.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
 	<context-param>
 		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
 		<param-value>true</param-value>

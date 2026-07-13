@@ -49,17 +49,6 @@
 				<p:message for="@previous" display="text"/>
 			</h:panelGroup>
 
-			<h:panelGroup styleClass="campoMsg col-12 md:col-12 lg:col-6 xl:col-6">
-				<p:outputLabel for="@next" value="Teste Padrão" />
-				<p:selectOneMenu value="#{assuntoBean.entidade.testePadrao}"
-				converter="generic" filter="true" filterMatchMode="contains">
-	            	<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-					<f:selectItems value="#{testePadraoBean.listaTudo}" var="testePadrao"
-						itemLabel="#{testePadrao.nome}" itemValue="#{testePadrao}" />
-				</p:selectOneMenu>
-				<p:message for="@previous" display="text"/>
-			</h:panelGroup>
-
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-4">
 				<p:outputLabel for="@next" value="Hashtag" />
 				<p:inputText value="#{assuntoBean.entidade.hashtag}"

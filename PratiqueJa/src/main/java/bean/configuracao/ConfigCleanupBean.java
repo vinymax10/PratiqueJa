@@ -41,9 +41,7 @@ public class ConfigCleanupBean implements Serializable
 			configCleanup=new ConfigCleanup();
 			configCleanup.setDiasRemoverExercicioRealizado(7);
 			configCleanup.setDiasRemoverExercicioNaoRealizado(7);
-			configCleanup.setDiasRemoverTesteRealizado(7);
-			configCleanup.setDiasRemoverTesteNaoRealizado(7);
-			
+
 			configCleanupDAO.salvar(configCleanup);
 		}
 	}

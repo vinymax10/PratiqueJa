@@ -11,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,11 +21,10 @@ import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.questao.Questao;
-import modelo.teste.TestePadrao;
 import util.StringAux;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "exerciciosPadrao", "questoes", "testePadrao" })
+@ToString(exclude = { "exerciciosPadrao", "questoes" })
 @Data
 @Entity
 public class Assunto extends Config implements Entidade
@@ -51,6 +48,7 @@ public class Assunto extends Config implements Entidade
 	@AuditLabel(value = "módulo")
 	private Modulo modulo;
 
+	/** Usado para pré-selecionar um assunto padrão na tela de teste/preview de configuração de Post. */
 	@AuditLabel(value = "mostrar no teste de conteúdo")
 	private boolean mostrarTesteConteudo;
 
@@ -62,15 +60,8 @@ public class Assunto extends Config implements Entidade
 	@ManyToMany(mappedBy = "assuntos")
 	private List<Questao> questoes = new ArrayList<Questao>();
 
-	@DiffIgnore
-	@OneToOne
-	private TestePadrao testePadrao;
-
 	@AuditLabel(value = "hashtag", genero = GeneroGramatical.FEMININO)
 	private String hashtag;
-
-	@Transient
-	private int numStar;
 
 	@Column(length = 1023)
 	@Size(max = 1023)

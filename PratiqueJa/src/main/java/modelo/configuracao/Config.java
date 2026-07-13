@@ -76,6 +76,12 @@ public class Config implements Serializable, Entidade
 		return endereco + "/anexos-email";
 	}
 
+	/** Templates/estilos LaTeX (.sty/.cls) usados na geração de avaliações e listas em PDF. */
+	public String getEnderecoTexNew()
+	{
+		return endereco + "/tex-new";
+	}
+
 	// ── Nomes fixos (antes configuráveis) ─────────────────────────────
 
 	public String getNome()

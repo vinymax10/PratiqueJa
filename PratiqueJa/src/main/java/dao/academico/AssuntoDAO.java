@@ -97,6 +97,7 @@ public class AssuntoDAO extends DAO<Assunto>
 		return list;
 	}
 
+	/** Assuntos marcados para servir de padrão na tela de teste/preview de configuração de Post. */
 	public List<Assunto> mostrarTesteConteudo()
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();

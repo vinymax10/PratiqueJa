@@ -27,11 +27,6 @@ import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
-import modelo.teste.ConteudoTeste;
-import modelo.teste.EtapaTeste;
-import modelo.teste.ResultadoTeste;
-import modelo.teste.Teste;
-import modelo.teste.TestePadrao;
 import modelo.usuario.Contato;
 import modelo.usuario.ControleAcesso;
 import modelo.usuario.Imagem;
@@ -71,13 +66,6 @@ public enum EntidadeAuditavel
 
 //	Assunto
 	Assunto(Assunto.class, "Assunto"),
-
-//	Teste
-	TestePadrao(TestePadrao.class, "Teste Padrão"),
-	Teste(Teste.class, "Teste"),
-	EtapaTeste(EtapaTeste.class, "Etapa do Teste"),
-	ConteudoTeste(ConteudoTeste.class, "Conteúdo do Teste"),
-	ResultadoTeste(ResultadoTeste.class, "Resultado do Teste"),
 
 //	Instagram
 	ConfigPost(ConfigPost.class, "Configuração de Post"),

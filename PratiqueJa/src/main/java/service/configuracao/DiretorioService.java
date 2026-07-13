@@ -64,9 +64,9 @@ public class DiretorioService implements Serializable
 		config = configDAO.buscar();
 		if(config == null)
 		{
+			// Endereço-raiz ainda não configurado; fica em branco até o admin defini-lo em
+			// /administracao/configuracao/config/config.xhtml — os demais caminhos derivam dele.
 			config = new Config();
-			// Endereço-raiz; os demais caminhos derivam dele
-			config.setEndereco("C:\\Users\\maximovrm\\Documents");
 			configDAO.salvar(config);
 		}
 	}

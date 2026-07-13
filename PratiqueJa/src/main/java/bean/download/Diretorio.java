@@ -1,11 +1,14 @@
 package bean.download;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import lombok.Data;
 import modelo.configuracao.Config;
-import modelo.configuracao.SistemaOperacional;
 
 @Data
 public class Diretorio implements Serializable
@@ -13,9 +16,9 @@ public class Diretorio implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	private Config config;
-	
+
 	private String diretorio;
-	
+
 	public Diretorio(Config config, String diretorio)
 	{
 		this.config = config;
@@ -24,88 +27,83 @@ public class Diretorio implements Serializable
 
 	public void limparDiretorios()
 	{
-		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"));
-		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"+config.getImagens()));
-		gerarDiretorios(converte(config.getEnderecoLatex()+"/"+diretorio+"/"+config.getImagensResolucao()));
+		limparPasta(caminhoBase());
+		limparPasta(caminhoBase().resolve(config.getImagens()));
+		limparPasta(caminhoBase().resolve(config.getImagensResolucao()));
 	}
-	
-	private void gerarDiretorios(String endereco)
-	{
-		File theDir = new File(endereco);
-		if(!theDir.exists())
-			theDir.mkdirs();
 
-		if(theDir.isDirectory())
+	/** Garante que a pasta exista e remove os arquivos diretamente dentro dela (não recursivo). */
+	private void limparPasta(Path pasta)
+	{
+		try
 		{
-			File[] files = theDir.listFiles();
-			if(files != null)
-				for(File file : files)
-					file.delete();
+			Files.createDirectories(pasta);
+			try(Stream<Path> arquivos = Files.list(pasta))
+			{
+				arquivos.filter(Files::isRegularFile).forEach(this::apagar);
+			}
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
 		}
 	}
-	
-	public String getEnderecoPdf()
+
+	private void apagar(Path arquivo)
 	{
-		return converte(getEndereco()+"/"+config.getNome()+".pdf");
+		try
+		{
+			Files.delete(arquivo);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
-	
+
 	public String getEnderecoExercicioPNG()
 	{
-		return converte(getEndereco()+"/"+config.getNome()+"-1.png");
+		return caminhoBase().resolve(config.getNome() + "-1.png").toString();
 	}
 
 	public String getEnderecoResolucaoPNG()
 	{
-		return converte(getEndereco()+"/"+config.getNome()+"-2.png");
+		return caminhoBase().resolve(config.getNome() + "-2.png").toString();
 	}
-	
+
 	public String getEnderecoLogo()
 	{
-		return converte(getEndereco()+"/logo.png");
+		return caminhoBase().resolve("logo.png").toString();
 	}
-	
+
 	public String getEnderecoBackground()
 	{
-		return converte(getEndereco()+"/background.png");
+		return caminhoBase().resolve("background.png").toString();
 	}
-	
+
 	public String getEnderecoTex()
 	{
-		return converte(getEndereco()+"/"+config.getNome()+".tex");
+		return caminhoBase().resolve(config.getNome() + ".tex").toString();
 	}
-	
+
 	public String getEndereco()
 	{
-		return converte(config.getEnderecoLatex()+"/"+diretorio);
+		return caminhoBase().toString();
 	}
-	
-	public String getEndBackgroundServidor()
-	{
-		return converte(config.getEndBackground());
-	}
-	
+
+	/** Termina com separador: usado pelos geradores de post via concatenação direta com o nome do arquivo. */
 	public String getEnderecoImagens()
 	{
-		return converte(getEndereco()+"/"+config.getImagens()+"/");
+		return caminhoBase().resolve(config.getImagens()).toString() + File.separator;
 	}
-	
-	public String getEnderecoImagensResolucao()
-	{
-		return converte(getEndereco()+"/"+config.getImagensResolucao()+"/");
-	}
-	
+
 	public String getEnderecoOutputLog()
 	{
-		return converte(getEndereco()+"/outputLog.log");
+		return caminhoBase().resolve("outputLog.log").toString();
 	}
-	
-	private String converte(String texto)
+
+	private Path caminhoBase()
 	{
-		if(config.getSistemaOperacional()==SistemaOperacional.Windows)
-		{
-			return texto.replace("/", "\\");
-		}
-		return texto;	
+		return Path.of(config.getEnderecoLatex(), diretorio);
 	}
-	
 }
