@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" />
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/image/favicon/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/image/favicon/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/image/favicon/favicon-16x16.png" />
+	<link rel="manifest" href="/image/favicon/site.webmanifest" />
+	<link rel="mask-icon" href="/image/favicon/safari-pinned-tab.svg" color="#2563eb" />
+	<meta name="theme-color" content="#07142f" />
+
+	<title>500 - Erro interno</title>
+
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+			background: linear-gradient(135deg, #07142f 0%, #0d1d47 60%, #1a2f6e 100%);
+			color: #fff;
+		}
+
+		.container {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			text-align: center;
+			padding: 1rem;
+			box-sizing: border-box;
+		}
+
+		.logo {
+			font-size: 20px;
+			font-weight: 800;
+			margin-bottom: 30px;
+			letter-spacing: 0.02em;
+		}
+		.logo .accent { color: #34d399; }
+
+		.code {
+			font-size: 120px;
+			font-weight: 800;
+			margin-bottom: 10px;
+			line-height: 1;
+		}
+
+		.title {
+			font-size: 26px;
+			font-weight: 700;
+			margin-bottom: 10px;
+		}
+
+		.description {
+			font-size: 15px;
+			color: rgba(255, 255, 255, 0.65);
+			margin-bottom: 34px;
+			line-height: 1.6;
+		}
+
+		.btn {
+			background: linear-gradient(90deg, #2563eb, #1d4ed8);
+			color: #fff;
+			padding: 12px 25px;
+			border-radius: 10px;
+			text-decoration: none;
+			font-weight: 700;
+			transition: 0.2s;
+			display: inline-block;
+		}
+		.btn:hover { background: linear-gradient(90deg, #1d4ed8, #1e40af); }
+
+		.btn-outline {
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.24);
+		}
+		.btn-outline:hover { background: rgba(255, 255, 255, 0.16); }
+	</style>
+</h:head>
+
+<h:body>
+	<div class="container">
+
+		<div class="logo">Pratique<span class="accent">Já</span></div>
+
+		<div class="code">500</div>
+
+		<div class="title">Erro interno do sistema</div>
+
+		<div class="description">
+			Ocorreu um erro inesperado ao processar sua solicitação.<br />
+			Tente novamente em alguns instantes ou entre em contato com o suporte.
+		</div>
+
+		<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+
+			<h:link styleClass="btn btn-outline"
+				value="Voltar"
+				onclick="history.back(); return false;" />
+
+			<h:link rendered="#{sessaoBean.logado}"
+				styleClass="btn"
+				value="Página Inicial"
+				outcome="#{sessaoBean.urlInicial}" />
+
+			<h:link rendered="#{!sessaoBean.logado}"
+				styleClass="btn"
+				value="Ir para o início"
+				outcome="/inicio.xhtml" />
+		</div>
+	</div>
+</h:body>
+
+</html>

@@ -41,13 +41,13 @@ public abstract class Filtro implements Filter
 		{
 			if(isAjax(httpRequest))
 			{
-				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/inicio.xhtml"));
+				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/acesso/acesso-negado.xhtml"));
 				httpResponse.flushBuffer();
 			}
 			else
 			{
 				String contextPath = ((HttpServletRequest) request).getContextPath();
-				httpResponse.sendRedirect(contextPath + "/inicio.xhtml");
+				httpResponse.sendRedirect(contextPath + "/acesso/acesso-negado.xhtml");
 			}
 		}
 	}

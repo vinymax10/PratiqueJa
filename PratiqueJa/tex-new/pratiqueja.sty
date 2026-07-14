@@ -37,7 +37,26 @@
 \definecolor{notetext}{HTML}{78350F}
 
 % ── Pacotes de conteúdo ───────────────────────────────────────
-\RequirePackage{amsmath,amssymb}
+\RequirePackage{amsmath}
+
+% Sem isso, números/letras em modo matemático usam a fonte serifada padrão
+% do LaTeX (Computer Modern) em vez da Inter usada no resto do texto — fica
+% visualmente destoante, principalmente em fórmulas e resoluções. unicode-math
+% troca só os intervalos de letras/números (up/it/bfup/bfit) pela Inter,
+% mantendo os símbolos/operadores (∑, ∫, √ etc.) vindo de uma fonte matemática
+% completa (Inter não tem esses glifos). Substitui o amssymb: carregar os
+% dois juntos causa conflito de símbolos já definidos.
+\RequirePackage{unicode-math}
+\setmathfont{Latin Modern Math}
+\setmathfont{Inter 18pt}[range={up,it,bfup,bfit}]
+
+% \square não vem por padrão com unicode-math (diferente do amssymb, que definia
+% explicitamente) — usado em várias questões ("substitua □"). Símbolos abaixo
+% cobrem os que apareceram usados de fato no banco (levantamento em 2026-07-13).
+\providecommand{\square}{\ensuremath{\mathord{\text{□}}}}
+
+\RequirePackage{cancel}
+
 \RequirePackage{multicol}
 \RequirePackage{setspace}
 \RequirePackage{parskip}

@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import modelo.usuario.Usuario;
 
@@ -30,14 +31,30 @@ public class PageFilter extends Filtro
 			Usuario usuario = (Usuario) session.getAttribute("UsuarioLogado");
 			String uri = httpRequest.getRequestURI();
 
+			// Raiz do site ("/") não é uma URL de conteúdo real — sempre foi um atalho pra cair
+			// na home, não uma tela protegida. Trata à parte, senão cai no fluxo de "acesso
+			// negado" (que hoje mostra a tela de erro em vez de redirecionar pra home).
+			String contextPath = httpRequest.getContextPath();
+			if(uri.equals(contextPath) || uri.equals(contextPath + "/"))
+			{
+				((HttpServletResponse) response).sendRedirect(contextPath + "/inicio.xhtml");
+				return;
+			}
+
 			if(usuario != null)
 				MDC.put("usuario", String.valueOf(usuario.getId()));
 
+			// Telas de erro (404/500/acesso negado) sempre acessíveis — senão um acesso negado
+			// redireciona pra cá e cai em loop de redirecionamento.
+			if(uri.contains("/acesso/"))
+			{
+				acesso = true;
+			}
 			// Área administrativa (inclui os fragmentos de exportação/auditoria, que expõem
 			// download direto do bean se acessados sem passar pela página que os inclui):
 			// ramo exclusivo, só admin logado — nenhuma das regras públicas abaixo se aplica,
 			// senão heurísticas como "/questao/" vazariam acesso a /administracao/conteudo/questao/*.
-			if(uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/"))
+			else if(uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/"))
 			{
 				acesso = usuario != null && usuario.isAdmin();
 			}
