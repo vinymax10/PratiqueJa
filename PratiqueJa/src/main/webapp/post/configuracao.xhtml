@@ -204,8 +204,10 @@
 				</div>
 				<div class="pc-bgpad-grid">
 					<ui:repeat value="#{imagemPostBean.imagensFeed}" var="img">
-						<h:graphicImage value="#{img.endereco}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
-							onclick="pcBgPreview(this.src, this.alt)" oncontextmenu="return false;" />
+						<h:graphicImage value="#{img.enderecoThumb}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
+							onclick="pcBgPreview('#{img.endereco}', this.alt)" oncontextmenu="return false;">
+							<f:passThroughAttribute name="loading" value="lazy" />
+						</h:graphicImage>
 					</ui:repeat>
 					<h:outputText styleClass="pc-bgpad-empty" value="Nenhum fundo padrão de Feed."
 						rendered="#{empty imagemPostBean.imagensFeed}" />
@@ -219,8 +221,10 @@
 				</div>
 				<div class="pc-bgpad-grid">
 					<ui:repeat value="#{imagemPostBean.imagensReel}" var="img">
-						<h:graphicImage value="#{img.endereco}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
-							onclick="pcBgPreview(this.src, this.alt)" oncontextmenu="return false;" />
+						<h:graphicImage value="#{img.enderecoThumb}" alt="#{img.nome}" styleClass="pc-bgpad-thumb"
+							onclick="pcBgPreview('#{img.endereco}', this.alt)" oncontextmenu="return false;">
+							<f:passThroughAttribute name="loading" value="lazy" />
+						</h:graphicImage>
 					</ui:repeat>
 					<h:outputText styleClass="pc-bgpad-empty" value="Nenhum fundo padrão de Reel."
 						rendered="#{empty imagemPostBean.imagensReel}" />

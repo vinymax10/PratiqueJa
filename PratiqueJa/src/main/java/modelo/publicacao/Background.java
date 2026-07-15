@@ -35,4 +35,14 @@ public class Background implements Serializable, Entidade
 
 	@AuditLabel(value = "feed")
 	private boolean feed;
+
+	/** URL do thumbnail (10% da dimensão): mesma pasta do original + "thumb/" + nome do arquivo.
+	 *  Usado no grid da configuração para carregar leve; o clique abre a imagem cheia ({@code endereco}). */
+	public String getEnderecoThumb()
+	{
+		if(endereco == null)
+			return null;
+		int i = endereco.lastIndexOf('/');
+		return i < 0 ? endereco : endereco.substring(0, i + 1) + "thumb/" + endereco.substring(i + 1);
+	}
 }

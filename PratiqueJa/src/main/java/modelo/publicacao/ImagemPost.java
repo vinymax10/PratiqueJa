@@ -61,4 +61,13 @@ public class ImagemPost implements Serializable, Entidade
 	@DiffIgnore
 	@OneToMany(mappedBy = "background")
 	private List<ProgramacaoPost> programacoes = new ArrayList<ProgramacaoPost>();
+
+	/** URL do thumbnail (10% da dimensão): mesma pasta do original + "thumb/" + nome do arquivo. */
+	public String getEnderecoThumb()
+	{
+		if(endImagem == null)
+			return null;
+		int i = endImagem.lastIndexOf('/');
+		return i < 0 ? endImagem : endImagem.substring(0, i + 1) + "thumb/" + endImagem.substring(i + 1);
+	}
 }

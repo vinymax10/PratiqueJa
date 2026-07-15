@@ -41,6 +41,9 @@ public class ImagemPostService
 			File file = new File(endBase + imagem.getEndImagem());
 			if(file.exists())
 				file.delete();
+			File thumb = Graphics.thumbFile(file);
+			if(thumb.exists())
+				thumb.delete();
 		}
 		imagemPostDAO.remover(imagem);
 	}
@@ -53,9 +56,15 @@ public class ImagemPostService
 			File antigo = new File(endBase + imagem.getEndImagem());
 			if(antigo.exists())
 				antigo.delete();
+			File antigoThumb = Graphics.thumbFile(antigo);
+			if(antigoThumb.exists())
+				antigoThumb.delete();
 		}
 		byte[] bytes = Graphics.shapeImage(uploadedFile, width, height);
 		FileAux.gravarFile(endBase + endRel, nome, bytes);
+		// hook: gera o thumbnail (10%) do fundo recém-enviado, sem quebrar o upload se falhar.
+		try { Graphics.gerarThumb(new File(endBase + endRel, nome), 0.1); }
+		catch(Exception e) { e.printStackTrace(); }
 		imagem.setEndImagem(endRel + nome);
 		imagem.setNome(nome);
 		return imagemPostDAO.salvar(imagem);

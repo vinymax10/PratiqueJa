@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 import bean.download.Diretorio;
 import matematica.GeradorExercicio;
-import modelo.configuracao.SistemaOperacional;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.Nivel;
@@ -417,12 +416,9 @@ public class InstagramFeed2
 
 	public void gerarPDF()
 	{
-		ProcessBuilder pb;
-		if(diretorio.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdflatex", "-interaction=nonstopmode", diretorio.getConfig().getNome()).inheritIO()
-			.directory(new File(diretorio.getEndereco()));
-		else
-			pb = new ProcessBuilder("pdflatex", "-interaction=nonstopmode", diretorio.getConfig().getNome()).inheritIO()
+		// pdflatex roda como o próprio usuário do WildFly (dono da pasta latex); sem sudo,
+		// que a conta de serviço não tem e faria a compilação falhar sem gerar o PNG.
+		ProcessBuilder pb = new ProcessBuilder("pdflatex", "-interaction=nonstopmode", diretorio.getConfig().getNome()).inheritIO()
 			.directory(new File(diretorio.getEndereco()));
 
 		pb.redirectErrorStream(true);
@@ -444,12 +440,7 @@ public class InstagramFeed2
 
 	public void convertPNG()
 	{
-		ProcessBuilder pb;
-		if(diretorio.getConfig().getSistemaOperacional() == SistemaOperacional.Linux)
-			pb = new ProcessBuilder("sudo", "pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
-			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
-		else
-			pb = new ProcessBuilder("pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
+		ProcessBuilder pb = new ProcessBuilder("pdftocairo", "-png", "-r", "300", diretorio.getConfig().getNome() + ".pdf",
 			diretorio.getConfig().getNome()).inheritIO().directory(new File(diretorio.getEndereco()));
 
 		pb.redirectErrorStream(true);

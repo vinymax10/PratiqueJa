@@ -81,6 +81,21 @@ public class Graphics
 		return baos.toByteArray();
 	}
 
+	/** Gera um thumbnail a {@code escala} (ex.: 0.1 = 10%) do arquivo de imagem, numa subpasta
+	 *  "thumb/" ao lado do original e com o mesmo nome. Alivia o carregamento dos grids de fundos. */
+	public static void gerarThumb(File origem, double escala) throws IOException
+	{
+		File destino = thumbFile(origem);
+		destino.getParentFile().mkdirs();
+		Thumbnails.of(origem).scale(escala).toFile(destino);
+	}
+
+	/** Caminho do thumbnail correspondente a um arquivo original: mesma pasta + "thumb/" + nome. */
+	public static File thumbFile(File original)
+	{
+		return new File(new File(original.getParentFile(), "thumb"), original.getName());
+	}
+
 	public static BufferedImage resize(BufferedImage image, double scale)
 	{
 		int w = image.getWidth();
