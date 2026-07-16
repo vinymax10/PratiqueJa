@@ -146,6 +146,25 @@ public class ProgramacaoPostService
 		salvar(programacaoPost);
 	}
 
+	/**
+	 * Reancorar a programação para começar hoje: fixa o "último envio" um intervalo atrás, de modo
+	 * que a primeira publicação (ordem 0) caia em hoje, e recomputa as datas de todas as demais.
+	 * Usado ao ativar a programação — o usuário não precisa mais escolher a data manualmente.
+	 */
+	public void reprogramarParaHoje(ConfigPost configPost)
+	{
+		int intervalo = configPost.getUsuario().getPerfilCriador().getIntervalo();
+		configPost.setUltimoEnvio(LocalDate.now().minusDays(intervalo));
+		configPostDAO.salvar(configPost);
+		organizarOrdem(configPost);
+	}
+
+	/** Persiste o configPost (ex.: estado ativo/pausado da programação). */
+	public void salvarConfigPost(ConfigPost configPost)
+	{
+		configPostDAO.salvar(configPost);
+	}
+
 	public List<ProgramacaoPost> listarHoje()
 	{
 		return programacaoPostDAO.hoje();

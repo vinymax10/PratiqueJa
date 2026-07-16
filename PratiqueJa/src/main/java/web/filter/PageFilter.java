@@ -66,6 +66,11 @@ public class PageFilter extends Filtro
 				|| uri.contains("/download/")
 				|| uri.contains("/questao/")
 				|| uri.contains("/usuario/perfil")
+				// "Criar Avaliação" é navegável sem login (igual "Gerar Posts" e "responder questão"):
+				// a tela abre para todos e o login só é exigido na ação de gerar/salvar rascunho —
+				// PedidoAvaliacaoBean.solicitar()/salvarRascunho() chamam verificaEstaLogado(), que
+				// abre o popup de login. O bean é null-safe para usuário anônimo.
+				|| uri.contains("/avaliacao/")
 				// "Gerar Posts" é a porta de entrada da área de Post, navegável sem login (igual
 				// "Criar Avaliação"); só a geração de fato exige login — ver PedidoPostBean. As
 				// demais abas (Configurações, Programação, Background, Teste, CTAs) continuam
@@ -75,13 +80,10 @@ public class PageFilter extends Filtro
 
 				if(usuario != null)
 				{
-					if(uri.contains("/avaliacao/")
-					// Logado: as demais abas de Post (Configurações, Background, Teste, CTAs)
+					// Logado: todas as abas de Post (Configurações, Programação, Background, Teste, CTAs)
 					// ficam liberadas — a ownership do configPost é garantida em
 					// ConfigPostBean.sincronizarConfigPost(), não mais aqui no filtro.
-					// "/post/programacao" fica de fora: só admin acessa (via usuario.isAdmin() logo
-					// abaixo) — CTAs já seguia essa regra só na navTabs, aqui é reforçado no filtro.
-					|| (uri.contains("/post/") && !uri.contains("/post/programacao")))
+					if(uri.contains("/post/"))
 						acesso = true;
 
 					if(uri.contains("/atividades/")

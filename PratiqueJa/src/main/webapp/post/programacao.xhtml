@@ -7,6 +7,7 @@
 
 	<ui:define name="OpenGraph">
 		<link rel="stylesheet" href="/css/post-page.css" type="text/css" />
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
 	</ui:define>
 
 	<ui:define name="linkPage">
@@ -22,6 +23,10 @@
 	<div class="pc-hero">
 		<div class="pc-hero-head">
 			<span class="pc-hero-badge"><i class="pi pi-megaphone" /> Publicação no Instagram</span>
+			<ui:include src="/post/ajuda/ajuda.xhtml">
+				<ui:param name="tela" value="programacao" />
+				<ui:param name="titulo" value="Programação de Post" />
+			</ui:include>
 			<h1 class="pc-hero-title">Programação de Post</h1>
 			<p class="pc-hero-desc">
 				Defina o que será publicado e em qual data — arraste para reordenar e use "Enviar agora" para disparar as publicações do dia.
@@ -45,25 +50,30 @@
 
 		<div class="pc-panel">
 
-		<!-- STATUS -->
-		<div class="pc-section-sub"><i class="pi pi-toggle-on" /> Status</div>
+		<!-- ENVIO AUTOMÁTICO -->
+		<div class="pc-section-sub"><i class="pi pi-bolt" /> Envio automático</div>
 
 		<div class="pc-fields">
 
-			<h:panelGroup styleClass="pc-field" layout="block">
-				<p:outputLabel styleClass="pc-label" for="@next" value="Último Envio" />
-				<p:datePicker id="ultimoEnvio" value="#{configPostBean.configPost.ultimoEnvio}"
-					locale="pt" required="true" requiredMessage="A data é obrigatória">
-					<p:ajax event="change" process="@this" listener="#{configPostBean.salvar}" update=":growl" />
-				</p:datePicker>
-				<p:message for="ultimoEnvio" display="text"/>
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="pc-field #{sessaoBean.podeVerAdministracao()? '':'hidden'}" layout="block">
-				<p:outputLabel styleClass="pc-label" for="@next" value="Ativo" />
-				<p:toggleSwitch class="toggleSwitch-form" value="#{configPostBean.configPost.ativo}">
-					<p:ajax event="change" process="@this" listener="#{configPostBean.salvar}" update=":growl" />
-				</p:toggleSwitch>
+			<h:panelGroup styleClass="pc-field pc-field-wide mb-3" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Programação" />
+				<div class="pc-seg2">
+					<p:selectOneButton value="#{configPostBean.configPost.ativo}" layout="custom" unselectable="false">
+						<f:selectItem itemValue="#{true}" itemLabel="Ativa" />
+						<f:selectItem itemValue="#{false}" itemLabel="Pausada" />
+						<p:ajax event="change" process="@this" listener="#{programacaoPostBean.alternarAtivacao}" update="@form :growl" />
+					</p:selectOneButton>
+					<div class="pc-seg2-opt #{configPostBean.configPost.ativo ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<i class="pi pi-play-circle pc-seg2-icon"></i>
+						<span class="pc-seg2-title">Ativa</span>
+						<span class="pc-seg2-tag">Publica todo dia às 8h</span>
+					</div>
+					<div class="pc-seg2-opt #{!configPostBean.configPost.ativo ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<i class="pi pi-pause-circle pc-seg2-icon"></i>
+						<span class="pc-seg2-title">Pausada</span>
+						<span class="pc-seg2-tag">Envio automático desligado</span>
+					</div>
+				</div>
 			</h:panelGroup>
 
 		</div>
@@ -116,8 +126,14 @@
 
 			<ui:repeat value="#{configPostBean.configPost.programacoesPost}" var="programacaoPost" varStatus="status">
 				<div class="pc-item-card">
-					<div class="pc-item-num">
-						<h:outputText value="#{status.index + 1}" />
+					<div class="pc-item-thumb-wrap">
+						<div class="pc-item-num">
+							<h:outputText value="#{status.index + 1}" />
+						</div>
+						<div class="pc-item-thumb">
+							<img src="#{programacaoPost.assunto.endImageThumb()}" alt="#{programacaoPost.assunto.nome}"
+								onerror="this.onerror=null;this.src='#{programacaoPost.assunto.endImageCapa()}';" />
+						</div>
 					</div>
 					<div class="pc-item-info">
 						<span class="pc-item-assunto">
@@ -155,10 +171,7 @@
 						</p:commandButton>
 						<p:commandButton icon="pi pi-trash" styleClass="ui-button-danger ui-button-flat"
 							title="Remover" action="#{programacaoPostBean.remover(programacaoPost)}"
-							update="@form, :growl" process="@this">
-							<p:confirm header="Confirmação" icon="pi pi-info-circle"
-								message="Deseja remover a programação de '#{programacaoPost.assunto.nome}'?" />
-						</p:commandButton>
+							update="@form, :growl" process="@this" />
 					</div>
 				</div>
 			</ui:repeat>

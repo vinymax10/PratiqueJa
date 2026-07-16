@@ -38,7 +38,12 @@ public class ConteudoPublicacaoService
 	@Inject
 	private EmailService emailService;
 
-	public void gerarConteudoFeed(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
+	/**
+	 * Gera um post de feed, envia o e-mail com a prévia e devolve os dois PNGs
+	 * (índice 0 = exercício, 1 = resolução) — lidos antes de liberar o diretório —
+	 * para que o chamador possa também empacotá-los (ex.: ZIP do pedido programado).
+	 */
+	public byte[][] gerarConteudoFeed(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
 		InstagramFeed2 gerarLatex = new InstagramFeed2(diretorio);
@@ -49,10 +54,13 @@ public class ConteudoPublicacaoService
 
 		enviarEmail("Instagram Feed", diretorio, "feed", exercicioPadrao, programacaoPost);
 
+		byte[][] imagens = lerImagens(diretorio);
 		diretorioService.freeDiretorio(diretorio);
+		return imagens;
 	}
 
-	public void gerarConteudoReel(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
+	/** Gera um post de reel, envia o e-mail e devolve os dois PNGs (exercício, resolução). */
+	public byte[][] gerarConteudoReel(ExercicioPadrao exercicioPadrao, ProgramacaoPost programacaoPost)
 	{
 		Diretorio diretorio = diretorioService.criarDiretorio();
 		TikTok2 gerarLatex = new TikTok2(diretorio);
@@ -63,7 +71,9 @@ public class ConteudoPublicacaoService
 
 		enviarEmail("Instagram Reel", diretorio, "reel", exercicioPadrao, programacaoPost);
 
+		byte[][] imagens = lerImagens(diretorio);
 		diretorioService.freeDiretorio(diretorio);
+		return imagens;
 	}
 
 	/**

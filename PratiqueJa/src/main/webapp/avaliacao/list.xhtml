@@ -39,7 +39,10 @@
 	<div class="av-joined">
 
 	<!-- ═══════════════════════════════════════════════════════ HERO -->
-	<ui:include src="/avaliacao/hero.xhtml" />
+	<ui:include src="/avaliacao/hero.xhtml">
+		<ui:param name="ajudaTela" value="avaliacao-list" />
+		<ui:param name="ajudaTitulo" value="Confecção de Avaliações" />
+	</ui:include>
 
 	<!-- ══════════════════════════════════════════════ HISTÓRICO -->
 	<h:form id="painelHistorico">

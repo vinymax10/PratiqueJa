@@ -912,19 +912,42 @@
     box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
     border-color: #d1d5db;
 }
+.pc-item-thumb-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+/* Miniatura do assunto (verificação visual), igual ao item de avaliação */
+.pc-item-thumb {
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    background: #eef2f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pc-item-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Número da ordem acoplado no canto superior direito da miniatura */
 .pc-item-num {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 38px;
-    height: 38px;
+    min-width: 22px;
+    height: 22px;
     background: linear-gradient(135deg, #2563eb, #3b82f6);
-    border-radius: 10px;
-    font-size: 14px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    font-size: 11px;
     font-weight: 800;
     color: white;
-    flex-shrink: 0;
-    padding: 0 8px;
+    padding: 0 6px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
 }
 .pc-item-info { flex: 1; min-width: 0; }
 .pc-item-assunto {

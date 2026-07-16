@@ -23,8 +23,8 @@
 			</h:link>
 
 			<h:link outcome="/post/programacao"
-				rendered="#{sessaoBean.podeVerAdministracao()}"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/programacao') ? 'pc-tab-active' : ''}">
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/programacao') ? 'pc-tab-active' : ''}"
+				onclick="return t2PostRequerLogin(#{sessaoBean.logado})">
 				<i class="fa-solid fa-list" /> Programação
 				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="1" />

@@ -9,6 +9,12 @@
 		<div class="av-hero">
 			<div class="av-hero-head">
 				<span class="av-hero-badge"><i class="pi pi-star" /> Área do Professor</span>
+				<ui:fragment rendered="#{not empty ajudaTela}">
+					<ui:include src="/post/ajuda/ajuda.xhtml">
+						<ui:param name="tela" value="#{ajudaTela}" />
+						<ui:param name="titulo" value="#{ajudaTitulo}" />
+					</ui:include>
+				</ui:fragment>
 				<h1 class="av-hero-title">Confecção de Avaliações</h1>
 				<p class="av-hero-desc">
 					Provas e avaliações personalizadas, com exercícios sorteados por assunto e nível.

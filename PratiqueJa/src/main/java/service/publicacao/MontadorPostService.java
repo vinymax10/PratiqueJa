@@ -34,6 +34,7 @@ import modelo.publicacao.ItemPedidoPost;
 import modelo.publicacao.PedidoPost;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.publicacao.StatusPedidoPost;
+import modelo.usuario.Usuario;
 import service.email.EmailService;
 import util.ColorHolder;
 
@@ -167,6 +168,75 @@ public class MontadorPostService implements Serializable
 			ColorHolder.clear();
 			pedido.setStatus(StatusPedidoPost.ERRO);
 			pedidoPostDAO.salvar(pedido);
+		}
+	}
+
+	/**
+	 * Registra a geração da programação diária como um {@link PedidoPost} baixável: empacota num ZIP
+	 * as peças já geradas (recebidas em {@code entradas}, nome do arquivo → bytes), grava no disco e
+	 * cria o pedido CONCLUÍDO com data de expiração conforme a retenção do plano do usuário. Assim o
+	 * post programado fica registrado, rastreável e disponível para download (o e-mail já foi enviado
+	 * durante a geração). A quantidade do pedido conta na cota mensal, substituindo o antigo registro
+	 * de consumo "não baixável".
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void salvarPedidoProgramado(ProgramacaoPost programacaoPost,
+		java.util.Map<String, byte[]> entradas, List<ItemPedidoPost> itens, int gerados)
+	{
+		if(gerados <= 0 || entradas == null || entradas.isEmpty())
+			return;
+
+		try
+		{
+			ConfigPost configPost = programacaoPost.getConfigPost();
+			Usuario usuario = configPost.getUsuario();
+			Config config = configDAO.buscar();
+
+			String codigoBatch = gerarCodigoBatch();
+
+			ByteArrayOutputStream saida = new ByteArrayOutputStream();
+			try(ZipOutputStream zip = new ZipOutputStream(saida))
+			{
+				for(java.util.Map.Entry<String, byte[]> entrada : entradas.entrySet())
+					adicionarAoZip(zip, entrada.getKey(), entrada.getValue());
+			}
+
+			String nomeAssunto = programacaoPost.getAssunto() != null
+				? programacaoPost.getAssunto().getNome() : "posts";
+
+			PedidoPost pedido = new PedidoPost();
+			pedido.setUsuario(usuario);
+			pedido.setConfigPost(configPost);
+			pedido.setProgramado(true);
+			pedido.setQuantidade(gerados);
+			pedido.setStatus(StatusPedidoPost.CONCLUIDO);
+			pedido.setProgresso(100);
+			pedido.setDataSolicitacao(LocalDateTime.now());
+			pedido.setCodigoBatch(codigoBatch);
+			pedido.setNome("Programação — " + nomeAssunto);
+
+			String nomeDownload = nomeArquivo(pedido) + ".zip";
+			Path baseDir = Path.of(config.getEnderecoAvaliacao(), "posts", codigoBatch);
+			Files.createDirectories(baseDir);
+			Path destino = baseDir.resolve(nomeDownload);
+			Files.write(destino, saida.toByteArray());
+
+			pedido.setCaminhoArquivo(destino.toAbsolutePath().toString());
+			pedido.setNomeDownload(nomeDownload);
+			pedido.setDataExpiracao(LocalDateTime.now().plusDays(usuario.getPerfilCriador().getDiasRetencao()));
+
+			if(itens != null)
+				for(ItemPedidoPost item : itens)
+				{
+					item.setPedidoPost(pedido);
+					pedido.getItens().add(item);
+				}
+
+			pedidoPostDAO.salvar(pedido);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 

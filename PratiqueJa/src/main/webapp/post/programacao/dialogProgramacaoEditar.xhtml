@@ -1,4 +1,4 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -8,201 +8,418 @@
 	<ui:composition>
 
 		<p:dialog id="dialog-editar-programacaoPost"
-		class="col-12 md:col-12 lg:col-10 lg:col-offset-1 xl:col-8 xl:col-offset-2"
-		header="Programação de Post" dynamic="true"
-		showEffect="fade" hideEffect="fade" width="100%;" modal="true"  widgetVar="dialogEditarProgramacaoPost" responsive="true"
-	    focus="formEditarProgramacaoPost:ordem"	>
-			<h:form id="formEditarProgramacaoPost" class="form" enctype="multipart/form-data" >
-				<div class="ui-fluid gride">
+			widgetVar="dialogEditarProgramacaoPost"
+			styleClass="av-dlg"
+			showHeader="false" modal="true" responsive="true" dynamic="true"
+			showEffect="fade" hideEffect="fade" width="900">
 
-					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-2" >
-						<p:outputLabel for="@next" value="Ordem" />
-						<p:inputNumber id="ordem" minValue="0" maxValue="100" decimalPlaces="0"
-							value="#{programacaoPostBean.programacaoPost.ordem}"
-							required="true" />
-					</h:panelGroup>
+			<h:form id="formEditarProgramacaoPost">
 
-					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-						<p:outputLabel for="@next" value="Alternativa no Reel" />
-						<p:toggleSwitch class="toggleSwitch-form"
-							value="#{programacaoPostBean.programacaoPost.alternativaReel}" />
-					</h:panelGroup>
+				<div class="av-dlg-inner">
 
-					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2"
-						rendered="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}">
-						<p:outputLabel for="@next" value="Formato" />
-						<p:selectOneButton value="#{programacaoPostBean.programacaoPost.formato}">
-							<f:selectItem itemLabel="Feed" itemValue="Feed" />
-							<f:selectItem itemLabel="Reel" itemValue="Reel" />
-						</p:selectOneButton>
-					</h:panelGroup>
-
-					<h:panelGroup styleClass="campo col-12  xl:col-8">
-						<p:outputLabel for="@next" value="Assunto" />
-						<p:selectOneMenu
-							value="#{programacaoPostBean.programacaoPost.assunto}"
-							converter="generic" required="true" filter="true"
-							filterMatchMode="contains">
-							<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
-							<f:selectItems value="#{assuntoBean.listaAtivas}"
-										var="assunto" itemLabel="#{assunto.nome}"
-										itemValue="#{assunto}" />
-						</p:selectOneMenu>
-					</h:panelGroup>
-
-				</div>
-				<div class="ui-fluid gride">
-
-					<!-- Escolha e Origem do background: valem para Feed e Reel (sempre iguais) -->
-					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-						<p:outputLabel for="@next" value="Escolha" />
-						<p:selectBooleanButton
-							value="#{programacaoPostBean.programacaoPost.backgroundAleatorio}"
-							onLabel="Aleatória" offLabel="Específica"
-							onIcon="fa fa-solid fa-shuffle" offIcon="fa fa-regular fa-circle-check"
-							disabled="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}"
-							style="width-min:8rem;display:block;">
-							<f:ajax event="change" process="@this" render="formEditarProgramacaoPost:backgroundFeed formEditarProgramacaoPost:backgroundReel" />
-						</p:selectBooleanButton>
-					</h:panelGroup>
-
-					<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-4 xl:col-2">
-						<p:outputLabel for="@next" value="Base de Dados" />
-						<p:selectBooleanButton disabled="#{imagemPostBean.imagemPost(true).size()==0 or imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.usuario.perfilCriador=='Basico'}"
-							value="#{programacaoPostBean.programacaoPost.basePadrao}"
-							onLabel="Padrão" offLabel="Personalizada"
-							onIcon="fa fa-solid fa-image" offIcon="fa fa-solid fa-circle-user"
-							style="width-min:8rem;display:block;">
-							<f:ajax event="change" process="@this" render="formEditarProgramacaoPost:backgroundFeed formEditarProgramacaoPost:backgroundReel" />
-						</p:selectBooleanButton>
-					</h:panelGroup>
-
-					<div class="col-12 ">
-						<p:fieldset legend="Background Feed" style="margin-bottom:1rem;width:100%;" >
-							<div class="ui-fluid gride">
-								<h:panelGroup styleClass="campo col-12">
-									<h:panelGroup id="backgroundFeed" >
-										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and !programacaoPostBean.programacaoPost.basePadrao}">
-											<p:outputLabel for="@next" value="Background" />
-											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.background}"
-												converter="generic" required="true" filter="true"
-												filterMatchMode="contains" var="item" >
-												<f:selectItems value="#{imagemPostBean.imagemPost(true)}"
-															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" />
-												<p:column >
-													<p:graphicImage value="#{item.endImagem}" alt="#{image.endImagem}"
-														style="width: 80px; cursor: pointer" cache="false" stream="false" />
-												</p:column>
-												<p:column >
-													<f:facet name="header">
-														<h:outputText value="Nome"/>
-													</f:facet>
-													<h:outputText value="#{item.nome}"/>
-												</p:column>
-											</p:selectOneMenu>
-										</h:panelGroup>
-										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and programacaoPostBean.programacaoPost.basePadrao}">
-											<p:outputLabel for="@next" value="Background" />
-											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.padrao}"
-												converter="generic" required="true" filter="true"
-												filterMatchMode="contains" var="item">
-												<f:selectItems value="#{imagemPostBean.imagensFeed}"
-															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" />
-												<p:column >
-													<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
-														style="width: 80px; cursor: pointer" cache="false" stream="false"  />
-												</p:column>
-												<p:column >
-													<f:facet name="header">
-														<h:outputText value="Nome"/>
-													</f:facet>
-													<h:outputText value="#{item.nome}"/>
-												</p:column>
-											</p:selectOneMenu>
-										</h:panelGroup>
-									</h:panelGroup>
-								</h:panelGroup>
-							</div>
-						</p:fieldset>
+					<!-- ═══════════ HEAD ═══════════ -->
+					<div class="av-dlg-hero">
+						<button type="button" class="av-dlg-hero-close" title="Fechar"
+							onclick="PF('dialogEditarProgramacaoPost').hide()">
+							<i class="pi pi-times" />
+						</button>
+						<span class="av-dlg-hero-eyebrow"><i class="pi pi-calendar" /> Programação</span>
+						<h3 class="av-dlg-hero-title">Editar programação</h3>
+						<span class="av-dlg-hero-sub"><i class="pi pi-megaphone" /> Defina o assunto e o visual desta publicação</span>
 					</div>
-					<div class="col-12 ">
-						<p:fieldset legend="Background Reel" style="margin-bottom:1rem;width:100%;" >
-							<div class="ui-fluid gride">
-								<h:panelGroup styleClass="campo col-12">
-									<h:panelGroup id="backgroundReel" >
-										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and !programacaoPostBean.programacaoPost.basePadrao}">
-											<p:outputLabel for="@next" value="Background" />
-											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.background}"
-												converter="generic" required="true" filter="true"
-												filterMatchMode="contains" var="item" >
-												<f:selectItems value="#{imagemPostBean.imagemPost(false)}"
-															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" />
-												<p:column >
-													<p:graphicImage value="#{item.endImagem}" alt="#{image.endImagem}"
-														style="width: 80px; cursor: pointer" cache="false" stream="false" />
-												</p:column>
-												<p:column >
-													<f:facet name="header">
-														<h:outputText value="Nome"/>
-													</f:facet>
-													<h:outputText value="#{item.nome}"/>
-												</p:column>
-											</p:selectOneMenu>
-										</h:panelGroup>
-										<h:panelGroup
-										rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio and programacaoPostBean.programacaoPost.basePadrao}">
-											<p:outputLabel for="@next" value="Background" />
-											<p:selectOneMenu
-												value="#{programacaoPostBean.programacaoPost.padrao}"
-												converter="generic" required="true" filter="true"
-												filterMatchMode="contains" var="item">
-												<f:selectItems value="#{imagemPostBean.imagensReel}"
-															var="image" itemLabel="#{image.nome}"
-															itemValue="#{image}" />
-												<p:column >
-													<p:graphicImage value="#{item.endereco}" alt="#{item.nome}"
-														style="width: 80px; cursor: pointer" cache="false" stream="false"  />
-												</p:column>
-												<p:column >
-													<f:facet name="header">
-														<h:outputText value="Nome"/>
-													</f:facet>
-													<h:outputText value="#{item.nome}"/>
-												</p:column>
-											</p:selectOneMenu>
-										</h:panelGroup>
-									</h:panelGroup>
+
+					<!-- ═══════════ CORPO ═══════════ -->
+					<div class="av-dlg-body pc-item-form">
+
+						<div class="pc-fields">
+
+							<!-- ─── Assunto (card + Trocar → galeria) ─── -->
+							<h:panelGroup styleClass="pc-field pc-field-wide pc-assunto-picker" layout="block">
+								<p:outputLabel styleClass="pc-label" value="Assunto" />
+
+								<!-- Estado recolhido: só o assunto selecionado -->
+								<div class="pc-assunto-selected">
+									<img class="pc-seg2-thumb" src="#{programacaoPostBean.programacaoPost.assunto.endImageThumb()}"
+										alt="#{programacaoPostBean.programacaoPost.assunto.nome}"
+										onerror="this.onerror=null;this.src='#{programacaoPostBean.programacaoPost.assunto.endImageCapa()}';" />
+									<span class="pc-seg2-title">#{programacaoPostBean.programacaoPost.assunto.nome}</span>
+									<button type="button" class="pc-assunto-trocar" onclick="pcAbrirAssuntos(this)">
+										<i class="pi pi-pencil" /> Trocar
+									</button>
+								</div>
+
+								<!-- Estado expandido: galeria de escolha (oculta por padrão) -->
+								<div class="pc-assunto-opcoes">
+									<div class="pc-assunto-opcoes-head">
+										<input type="text" class="pc-assunto-filtro" placeholder="Filtrar assunto..."
+											autocomplete="off" onkeyup="pcFiltrarAssuntos(this)" />
+										<button type="button" class="pc-assunto-fechar" title="Fechar" onclick="pcFecharAssuntos(this)">
+											<i class="pi pi-times" />
+										</button>
+									</div>
+									<div class="pc-seg2 pc-seg2--assunto">
+										<p:selectOneButton value="#{programacaoPostBean.programacaoPost.assunto}"
+											layout="custom" unselectable="false" required="true"
+											requiredMessage="Selecione um assunto." converter="generic">
+											<f:selectItems value="#{assuntoBean.listaAtivas}" var="assunto"
+												itemValue="#{assunto}" itemLabel="#{assunto.nome}" />
+										</p:selectOneButton>
+										<ui:repeat value="#{assuntoBean.listaAtivas}" var="assunto">
+											<div class="pc-seg2-opt pc-seg2-opt--assunto #{assunto == programacaoPostBean.programacaoPost.assunto ? 'ui-state-active' : ''}"
+												role="radio" tabindex="0" onclick="pcEscolherAssunto(this)">
+												<img class="pc-seg2-thumb" src="#{assunto.endImageThumb()}" alt="#{assunto.nome}"
+													onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
+												<span class="pc-seg2-title">#{assunto.nome}</span>
+											</div>
+										</ui:repeat>
+									</div>
+								</div>
+							</h:panelGroup>
+
+							<!-- ─── Formato (só planos que geram 1 post/dia — Básico) ─── -->
+							<h:panelGroup styleClass="pc-field" layout="block"
+								rendered="#{configPostBean.configPost.usuario.perfilCriador=='Basico'}">
+								<p:outputLabel styleClass="pc-label" value="Formato" />
+								<div class="pc-seg2">
+									<p:selectOneButton value="#{programacaoPostBean.programacaoPost.formato}"
+										layout="custom" unselectable="false">
+										<f:selectItem itemValue="Feed" itemLabel="Feed" />
+										<f:selectItem itemValue="Reel" itemLabel="Reel" />
+										<p:ajax event="change" process="@this"
+											update="formEditarProgramacaoPost:blocoAlt formEditarProgramacaoPost:blocoBgFeed formEditarProgramacaoPost:blocoBgReel" />
+									</p:selectOneButton>
+									<div class="pc-seg2-opt #{programacaoPostBean.programacaoPost.formato == 'Feed' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+										<i class="pi pi-image pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Feed</span>
+										<span class="pc-seg2-tag">1080x1350px</span>
+									</div>
+									<div class="pc-seg2-opt #{programacaoPostBean.programacaoPost.formato == 'Reel' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+										<i class="pi pi-video pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Reel</span>
+										<span class="pc-seg2-tag">1080x1920px</span>
+									</div>
+								</div>
+							</h:panelGroup>
+
+							<!-- ─── Escolha do Background (Aleatória/Específica) ─── -->
+							<h:panelGroup styleClass="pc-field" layout="block">
+								<p:outputLabel styleClass="pc-label" value="Escolha do Background" />
+								<div class="pc-seg2">
+									<p:selectOneButton value="#{programacaoPostBean.programacaoPost.backgroundAleatorio}"
+										layout="custom" unselectable="false">
+										<f:selectItem itemValue="#{true}" itemLabel="Aleatória" />
+										<f:selectItem itemValue="#{false}" itemLabel="Específica" />
+										<p:ajax event="change" process="@this"
+											update="formEditarProgramacaoPost:blocoBgFeed formEditarProgramacaoPost:blocoBgReel" />
+									</p:selectOneButton>
+									<div class="pc-seg2-opt #{programacaoPostBean.programacaoPost.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
+										role="radio" tabindex="#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? '-1' : '0'}">
+										<i class="fa fa-solid fa-shuffle pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Aleatória</span>
+										<span class="pc-seg2-tag">Sistema escolhe</span>
+									</div>
+									<div class="pc-seg2-opt #{!programacaoPostBean.programacaoPost.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
+										role="radio" tabindex="#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? '-1' : '0'}">
+										<i class="fa fa-regular fa-circle-check pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Específica</span>
+										<span class="pc-seg2-tag">Você escolhe</span>
+									</div>
+								</div>
+							</h:panelGroup>
+
+							<!-- ─── Origem do Background (Padrão/Personalizada) ─── -->
+							<h:panelGroup styleClass="pc-field" layout="block">
+								<p:outputLabel styleClass="pc-label" value="Origem do Background" />
+								<div class="pc-seg2">
+									<p:selectOneButton value="#{programacaoPostBean.programacaoPost.basePadrao}"
+										layout="custom" unselectable="false">
+										<f:selectItem itemValue="#{true}" itemLabel="Padrão" />
+										<f:selectItem itemValue="#{false}" itemLabel="Personalizada" />
+										<p:ajax event="change" process="@this"
+											update="formEditarProgramacaoPost:blocoBgFeed formEditarProgramacaoPost:blocoBgReel" />
+									</p:selectOneButton>
+									<div class="pc-seg2-opt #{programacaoPostBean.programacaoPost.basePadrao ? 'ui-state-active' : ''} #{(imagemPostBean.imagemPost(true).size()==0 or imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
+										role="radio" tabindex="0">
+										<i class="fa fa-solid fa-image pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Padrão</span>
+										<span class="pc-seg2-tag">Imagens padrão</span>
+									</div>
+									<div class="pc-seg2-opt #{!programacaoPostBean.programacaoPost.basePadrao ? 'ui-state-active' : ''} #{(imagemPostBean.imagemPost(true).size()==0 or imagemPostBean.imagemPost(false).size()==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
+										role="radio" tabindex="0">
+										<i class="fa fa-solid fa-circle-user pc-seg2-icon"></i>
+										<span class="pc-seg2-title">Personalizada</span>
+										<span class="pc-seg2-tag">Suas imagens</span>
+									</div>
+								</div>
+							</h:panelGroup>
+
+							<!-- ─── Alternativa no Reel ─── -->
+							<h:panelGroup id="blocoAlt" styleClass="pc-contents" layout="block">
+								<h:panelGroup styleClass="pc-field" layout="block">
+									<p:outputLabel styleClass="pc-label" value="Alternativa no Reel" />
+									<div class="pc-seg2">
+										<p:selectOneButton value="#{programacaoPostBean.programacaoPost.alternativaReel}"
+											layout="custom" unselectable="false">
+											<f:selectItem itemValue="#{true}" itemLabel="Com" />
+											<f:selectItem itemValue="#{false}" itemLabel="Sem" />
+										</p:selectOneButton>
+										<div class="pc-seg2-opt #{programacaoPostBean.programacaoPost.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+											<i class="pi pi-list-check pc-seg2-icon"></i>
+											<span class="pc-seg2-title">Com</span>
+											<span class="pc-seg2-tag">Exibe alternativas</span>
+										</div>
+										<div class="pc-seg2-opt #{!programacaoPostBean.programacaoPost.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+											<i class="pi pi-align-left pc-seg2-icon"></i>
+											<span class="pc-seg2-title">Sem</span>
+											<span class="pc-seg2-tag">Só o enunciado</span>
+										</div>
+									</div>
 								</h:panelGroup>
-							</div>
-						</p:fieldset>
+							</h:panelGroup>
+
+							<!-- ─── Background Feed (quando Específica) ─── -->
+							<h:panelGroup id="blocoBgFeed" styleClass="pc-field-wide" layout="block">
+								<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
+									rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio
+									and !programacaoPostBean.programacaoPost.basePadrao
+									and imagemPostBean.imagemPost(true).size()>0}">
+									<p:outputLabel styleClass="pc-label" value="Background (Feed)" />
+									<div class="pc-bg-selected">
+										<p:graphicImage styleClass="pc-bg-selected-thumb"
+											value="#{programacaoPostBean.programacaoPost.background.endImagem}"
+											alt="#{programacaoPostBean.programacaoPost.background.nome}" cache="false" stream="false" />
+										<span class="pc-bg-selected-name">#{programacaoPostBean.programacaoPost.background != null ? programacaoPostBean.programacaoPost.background.nome : 'Selecione um background'}</span>
+										<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
+											<i class="pi pi-pencil" /> Trocar
+										</button>
+									</div>
+									<div class="pc-bg-opcoes">
+										<div class="pc-bg-opcoes-head">
+											<span class="pc-bg-hint">Escolha o background</span>
+											<button type="button" class="pc-bg-fechar" title="Fechar" onclick="pcFecharBg(this)">
+												<i class="pi pi-times" />
+											</button>
+										</div>
+										<div class="pc-seg2 pc-seg2--bg">
+											<p:selectOneButton value="#{programacaoPostBean.programacaoPost.background}"
+												layout="custom" unselectable="false" required="true" converter="generic">
+												<f:selectItems value="#{imagemPostBean.imagemPost(true)}" var="image"
+													itemValue="#{image}" itemLabel="#{image.nome}" />
+											</p:selectOneButton>
+											<ui:repeat value="#{imagemPostBean.imagemPost(true)}" var="image">
+												<div class="pc-seg2-opt pc-seg2-opt--bg #{image == programacaoPostBean.programacaoPost.background ? 'ui-state-active' : ''}"
+													role="radio" tabindex="0" onclick="pcEscolherBg(this)">
+													<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endImagem}"
+														alt="#{image.nome}" cache="false" stream="false" />
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</h:panelGroup>
+
+								<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
+									rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio
+									and programacaoPostBean.programacaoPost.basePadrao}">
+									<p:outputLabel styleClass="pc-label" value="Background (Feed)" />
+									<div class="pc-bg-selected">
+										<p:graphicImage styleClass="pc-bg-selected-thumb"
+											value="#{programacaoPostBean.programacaoPost.padrao.endereco}"
+											alt="#{programacaoPostBean.programacaoPost.padrao.nome}" cache="false" stream="false" />
+										<span class="pc-bg-selected-name">#{programacaoPostBean.programacaoPost.padrao != null ? programacaoPostBean.programacaoPost.padrao.nome : 'Selecione um background'}</span>
+										<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
+											<i class="pi pi-pencil" /> Trocar
+										</button>
+									</div>
+									<div class="pc-bg-opcoes">
+										<div class="pc-bg-opcoes-head">
+											<span class="pc-bg-hint">Escolha o background</span>
+											<button type="button" class="pc-bg-fechar" title="Fechar" onclick="pcFecharBg(this)">
+												<i class="pi pi-times" />
+											</button>
+										</div>
+										<div class="pc-seg2 pc-seg2--bg">
+											<p:selectOneButton value="#{programacaoPostBean.programacaoPost.padrao}"
+												layout="custom" unselectable="false" required="true" converter="generic">
+												<f:selectItems value="#{imagemPostBean.imagensFeed}" var="image"
+													itemValue="#{image}" itemLabel="#{image.nome}" />
+											</p:selectOneButton>
+											<ui:repeat value="#{imagemPostBean.imagensFeed}" var="image">
+												<div class="pc-seg2-opt pc-seg2-opt--bg #{image == programacaoPostBean.programacaoPost.padrao ? 'ui-state-active' : ''}"
+													role="radio" tabindex="0" onclick="pcEscolherBg(this)">
+													<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endereco}"
+														alt="#{image.nome}" cache="false" stream="false" />
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</h:panelGroup>
+							</h:panelGroup>
+
+							<!-- ─── Background Reel (quando Específica) ─── -->
+							<h:panelGroup id="blocoBgReel" styleClass="pc-field-wide" layout="block">
+								<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
+									rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio
+									and !programacaoPostBean.programacaoPost.basePadrao
+									and imagemPostBean.imagemPost(false).size()>0}">
+									<p:outputLabel styleClass="pc-label" value="Background (Reel)" />
+									<div class="pc-bg-selected">
+										<p:graphicImage styleClass="pc-bg-selected-thumb pc-bg-selected-thumb--reel"
+											value="#{programacaoPostBean.programacaoPost.background.endImagem}"
+											alt="#{programacaoPostBean.programacaoPost.background.nome}" cache="false" stream="false" />
+										<span class="pc-bg-selected-name">#{programacaoPostBean.programacaoPost.background != null ? programacaoPostBean.programacaoPost.background.nome : 'Selecione um background'}</span>
+										<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
+											<i class="pi pi-pencil" /> Trocar
+										</button>
+									</div>
+									<div class="pc-bg-opcoes">
+										<div class="pc-bg-opcoes-head">
+											<span class="pc-bg-hint">Escolha o background</span>
+											<button type="button" class="pc-bg-fechar" title="Fechar" onclick="pcFecharBg(this)">
+												<i class="pi pi-times" />
+											</button>
+										</div>
+										<div class="pc-seg2 pc-seg2--bg pc-seg2--bg-reel">
+											<p:selectOneButton value="#{programacaoPostBean.programacaoPost.background}"
+												layout="custom" unselectable="false" required="true" converter="generic">
+												<f:selectItems value="#{imagemPostBean.imagemPost(false)}" var="image"
+													itemValue="#{image}" itemLabel="#{image.nome}" />
+											</p:selectOneButton>
+											<ui:repeat value="#{imagemPostBean.imagemPost(false)}" var="image">
+												<div class="pc-seg2-opt pc-seg2-opt--bg #{image == programacaoPostBean.programacaoPost.background ? 'ui-state-active' : ''}"
+													role="radio" tabindex="0" onclick="pcEscolherBg(this)">
+													<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endImagem}"
+														alt="#{image.nome}" cache="false" stream="false" />
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</h:panelGroup>
+
+								<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
+									rendered="#{!programacaoPostBean.programacaoPost.backgroundAleatorio
+									and programacaoPostBean.programacaoPost.basePadrao}">
+									<p:outputLabel styleClass="pc-label" value="Background (Reel)" />
+									<div class="pc-bg-selected">
+										<p:graphicImage styleClass="pc-bg-selected-thumb pc-bg-selected-thumb--reel"
+											value="#{programacaoPostBean.programacaoPost.padrao.endereco}"
+											alt="#{programacaoPostBean.programacaoPost.padrao.nome}" cache="false" stream="false" />
+										<span class="pc-bg-selected-name">#{programacaoPostBean.programacaoPost.padrao != null ? programacaoPostBean.programacaoPost.padrao.nome : 'Selecione um background'}</span>
+										<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
+											<i class="pi pi-pencil" /> Trocar
+										</button>
+									</div>
+									<div class="pc-bg-opcoes">
+										<div class="pc-bg-opcoes-head">
+											<span class="pc-bg-hint">Escolha o background</span>
+											<button type="button" class="pc-bg-fechar" title="Fechar" onclick="pcFecharBg(this)">
+												<i class="pi pi-times" />
+											</button>
+										</div>
+										<div class="pc-seg2 pc-seg2--bg pc-seg2--bg-reel">
+											<p:selectOneButton value="#{programacaoPostBean.programacaoPost.padrao}"
+												layout="custom" unselectable="false" required="true" converter="generic">
+												<f:selectItems value="#{imagemPostBean.imagensReel}" var="image"
+													itemValue="#{image}" itemLabel="#{image.nome}" />
+											</p:selectOneButton>
+											<ui:repeat value="#{imagemPostBean.imagensReel}" var="image">
+												<div class="pc-seg2-opt pc-seg2-opt--bg #{image == programacaoPostBean.programacaoPost.padrao ? 'ui-state-active' : ''}"
+													role="radio" tabindex="0" onclick="pcEscolherBg(this)">
+													<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endereco}"
+														alt="#{image.nome}" cache="false" stream="false" />
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</h:panelGroup>
+							</h:panelGroup>
+
+						</div>
+
+						<div class="pc-actions" style="justify-content:flex-end">
+							<p:commandButton value="Cancelar" icon="pi pi-times" type="button"
+								styleClass="ui-button-flat ui-button-plain"
+								onclick="PF('dialogEditarProgramacaoPost').hide()" />
+							<p:commandButton id="salvarGeraisEdicao" value="Salvar" icon="pi pi-check"
+								styleClass="ui-button-raised btn-primary"
+								action="#{programacaoPostBean.salvar}" update="@form, form:lista, :growl"
+								process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogEditarProgramacaoPost').hide()">
+								<p:defaultCommand target="salvarGeraisEdicao" />
+							</p:commandButton>
+						</div>
+
 					</div>
-				</div>
-
-				<div class="content-button-right">
-
-					<div class="divisor"></div>
-
-					<p:commandButton id="salvarGeraisEdicao" value="Salvar"
-						styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
-						action="#{programacaoPostBean.salvar}" update="@form, form:tabela, :growl"
-						process="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogEditarProgramacaoPost').hide()">
-						<p:defaultCommand target="salvarGeraisEdicao" />
-					</p:commandButton>
 
 				</div>
-
 			</h:form>
 		</p:dialog>
+
+		<script>
+			//<![CDATA[
+			// ── Picker de Assunto: card recolhido + "Trocar" abre a galeria (com filtro) ──
+			function pcSemAcento(s){
+				return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+			}
+			function pcFiltrarAssuntos(input){
+				var termo = pcSemAcento(input.value).trim();
+				var galeria = (input.closest('.pc-field') || document).querySelector('.pc-seg2--assunto');
+				if(!galeria) return;
+				galeria.querySelectorAll('.pc-seg2-opt--assunto').forEach(function(card){
+					var titulo = card.querySelector('.pc-seg2-title');
+					var nome = pcSemAcento(titulo ? titulo.textContent : '');
+					card.classList.toggle('pc-card-hidden', termo !== '' && nome.indexOf(termo) === -1);
+				});
+			}
+			function pcAbrirAssuntos(btn){
+				var p = btn.closest('.pc-assunto-picker');
+				if(!p) return;
+				p.classList.add('is-expanded');
+				var f = p.querySelector('.pc-assunto-filtro');
+				if(f){ f.value = ''; pcFiltrarAssuntos(f); f.focus(); }
+			}
+			function pcFecharAssuntos(el){
+				var p = el.closest('.pc-assunto-picker');
+				if(p) p.classList.remove('is-expanded');
+			}
+			function pcEscolherAssunto(card){
+				var p = card.closest('.pc-assunto-picker');
+				if(!p) return;
+				var img = card.querySelector('img');
+				var titulo = card.querySelector('.pc-seg2-title');
+				var sel = p.querySelector('.pc-assunto-selected');
+				if(sel){
+					var simg = sel.querySelector('img');
+					var stit = sel.querySelector('.pc-seg2-title');
+					if(simg && img){ simg.src = img.src; simg.alt = img.alt; }
+					if(stit && titulo){ stit.textContent = titulo.textContent; }
+				}
+				p.classList.remove('is-expanded');
+			}
+
+			// ── Picker de Background: expande/recolhe a galeria ──
+			function pcAbrirBg(btn){
+				var p = btn.closest('.pc-bg-picker');
+				if(p) p.classList.add('is-expanded');
+			}
+			function pcFecharBg(el){
+				var p = el.closest('.pc-bg-picker');
+				if(p) p.classList.remove('is-expanded');
+			}
+			function pcEscolherBg(card){
+				var p = card.closest('.pc-bg-picker');
+				if(!p) return;
+				var img = card.querySelector('img');
+				var sel = p.querySelector('.pc-bg-selected');
+				if(sel && img){
+					var simg = sel.querySelector('img');
+					if(simg){ simg.src = img.src; simg.alt = img.alt; }
+					var snm = sel.querySelector('.pc-bg-selected-name');
+					if(snm){ snm.textContent = img.alt || ''; }
+				}
+				p.classList.remove('is-expanded');
+			}
+			//]]>
+		</script>
+
 	</ui:composition>
 </h:body>
 </html>
-

@@ -2,6 +2,7 @@ package bean.publicacao;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -199,6 +200,69 @@ public class ProgramacaoPostBean implements Serializable
 		}
 
 		return "";
+	}
+
+	/** Horário do envio diário automático (mesmo do @Schedule em EnvioPostService). */
+	private static final LocalTime HORARIO_ENVIO = LocalTime.of(8, 0);
+
+	/**
+	 * Liga/desliga a programação (chamado ao alternar o seletor). Ao ativar, reancorar a agenda para
+	 * começar hoje (a 1ª publicação cai em hoje) e, se já passou das 8h, dispara a publicação de hoje
+	 * na hora. Ao pausar, apenas persiste o estado.
+	 */
+	public void alternarAtivacao()
+	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return;
+
+		ConfigPost configPost = configPostBean.getConfigPost();
+
+		if(!configPost.isAtivo())
+		{
+			programacaoPostService.salvarConfigPost(configPost);
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+			"Programação pausada. Nenhuma publicação automática será enviada.");
+			return;
+		}
+
+		// Ativou: recomeça a agenda a partir de hoje.
+		programacaoPostService.reprogramarParaHoje(configPost);
+
+		// Sem logo/e-mail, nada é publicado — avisa e não tenta disparar.
+		if(!configPost.podeGerar())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_WARN,
+			"Programação ativada, mas nada será publicado até você cadastrar logomarca e e-mail em Configurações.");
+			return;
+		}
+
+		// Antes das 8h: o agendador diário cuida hoje. Depois das 8h: dispara a de hoje agora.
+		if(!LocalTime.now().isAfter(HORARIO_ENVIO))
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+			"Programação ativada! A primeira publicação de hoje sai às 8h.");
+			return;
+		}
+
+		try
+		{
+			int enviados = envioPostService.enviarConfig(configPost);
+			if(enviados == EnvioPostService.OCUPADO)
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Programação ativada! Há um envio em andamento; a publicação de hoje sai em instantes.");
+			else if(enviados > 0)
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Programação ativada! A primeira publicação de hoje já foi gerada e enviada para o seu e-mail.");
+			else
+				Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+				"Programação ativada! As publicações começam a partir de hoje.");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+			"Programação ativada! As publicações começam a partir de hoje.");
+		}
 	}
 
 	public String removerTodosAcao()

@@ -22,8 +22,12 @@ public class PedidoPostDAO extends DAO<PedidoPost>
 		if(usuario == null || usuario.getId() == null)
 			return List.of();
 
+		// Mostra os lotes sob demanda (programado = false) e também os posts programados que viraram
+		// pedido baixável (têm data de expiração). Os antigos registros de consumo "não baixáveis"
+		// da programação (sem dataExpiracao) continuam ocultos.
 		return em.createQuery(
-			"SELECT p FROM PedidoPost p WHERE p.usuario.id = :usuarioId AND p.programado = false " +
+			"SELECT p FROM PedidoPost p WHERE p.usuario.id = :usuarioId " +
+			"AND (p.programado = false OR p.dataExpiracao IS NOT NULL) " +
 			"ORDER BY p.dataSolicitacao DESC",
 			PedidoPost.class)
 			.setParameter("usuarioId", usuario.getId())

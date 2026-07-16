@@ -1,0 +1,379 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!--
+		Ajuda contextual "Como funciona?" — reutilizável por tela.
+		Uso (dentro do hero da tela):
+			<ui:include src="/post/ajuda/ajuda.xhtml">
+				<ui:param name="tela"   value="programacao" />
+				<ui:param name="titulo" value="Programação de Post" />
+			</ui:include>
+		Para adicionar uma tela nova: crie mais um <ui:fragment rendered="#{tela=='xxx'}"> no corpo.
+		Auto-contido: botão + modal + estilos + JS (sem bibliotecas externas).
+	-->
+
+	<!-- Botão de ajuda (fica no hero) -->
+	<button type="button" class="pc-ajuda-btn" title="Como funciona esta tela"
+		aria-label="Como funciona esta tela" onclick="pcAjudaShow('#{tela}')">
+		<i class="pi pi-question-circle" /> Como funciona
+	</button>
+
+	<!-- Modal (overlay) -->
+	<div id="pcAjuda-#{tela}" class="pc-ajuda-overlay" onclick="pcAjudaHide(this)">
+		<div class="pc-ajuda-card" onclick="event.stopPropagation()">
+
+			<div class="pc-ajuda-head">
+				<button type="button" class="pc-ajuda-close" title="Fechar"
+					onclick="pcAjudaHide(this.closest('.pc-ajuda-overlay'))">
+					<i class="pi pi-times" />
+				</button>
+				<span class="pc-ajuda-eyebrow"><i class="pi pi-question-circle" /> Como funciona</span>
+				<h3 class="pc-ajuda-title">#{titulo}</h3>
+			</div>
+
+			<div class="pc-ajuda-body">
+
+				<!-- ══════════════ PROGRAMAÇÃO ══════════════ -->
+				<ui:fragment rendered="#{tela == 'programacao'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Define <b>o que será publicado automaticamente a cada dia</b> — uma publicação por assunto.
+							No horário programado o sistema gera o conteúdo, envia por e-mail e deixa o post pronto para baixar.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Monte a lista.</b> Use <i>Adicionar todos</i> para criar uma programação de cada assunto, ou <i>Adicionar avulsa</i> para escolher um assunto específico.</li>
+							<li><b>Ajuste cada card.</b> No lápis você edita o assunto, o background (aleatório/específico, padrão/personalizado) e, no plano Básico, o formato (Feed ou Reel). As setas <b>↑ ↓</b> mudam a ordem.</li>
+							<li><b>Envio diário.</b> Todo dia às 08h o sistema pega as programações cuja data chegou, gera os posts e <b>envia um e-mail por post</b> (com a prévia das imagens e a legenda pronta para copiar).</li>
+							<li><b>Fica registrado.</b> Cada geração também vira um <b>pedido baixável</b> na aba <i>Gerar Posts</i>, disponível pelo tempo de retenção do seu plano.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>
+							O envio automático é exclusivo de quem tem <b>plano de criador ativo</b> e com <b>créditos disponíveis</b> —
+							sem isso, a programação do dia é pulada e tentada de novo no próximo ciclo. O campo <b>Último Envio</b> define
+							a partir de quando as datas das publicações são calculadas.
+						</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ GERAR POSTS ══════════════ -->
+				<ui:fragment rendered="#{tela == 'gerar'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Monta <b>lotes de posts sob demanda</b> — você escolhe os assuntos, gera na hora e baixa tudo
+							pronto num arquivo, sem depender da programação diária.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Adicione o conteúdo.</b> Em <i>Gerar posts</i>, inclua um ou mais assuntos, escolhendo níveis, formato (Feed/Reel), background e a quantidade de exercícios.</li>
+							<li><b>Salve ou gere.</b> Dá para salvar como rascunho e terminar depois, ou gerar na hora. Cada post consome <b>1 crédito</b> do seu plano.</li>
+							<li><b>Acompanhe.</b> A geração roda em segundo plano — a barra de progresso mostra o andamento na lista.</li>
+							<li><b>Baixe.</b> Ao concluir, use <i>Ações → Baixar</i> para o ZIP (imagens + legendas) ou <i>Enviar por e-mail</i>.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>
+							O download fica disponível pelo <b>tempo de retenção do seu plano</b>; depois o arquivo é apagado, mas o
+							registro do lote continua na lista. Os <b>posts programados</b> também aparecem aqui, prontos para baixar.
+						</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ GERAR POSTS — MONTAR LOTE ══════════════ -->
+				<ui:fragment rendered="#{tela == 'gerar-form'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Aqui você <b>monta o lote</b>: escolhe os assuntos e o conteúdo de cada post. Depois é só gerar e baixar.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Adicione um post.</b> Escolha o assunto e configure os <i>níveis</i>, o <i>formato</i> (Feed/Reel), o <i>background</i> e a <i>quantidade de exercícios</i>. Cada nível gera a quantidade escolhida de exercícios.</li>
+							<li><b>Monte a lista.</b> Repita para quantos assuntos quiser — dá para <i>duplicar</i>, <i>editar</i> e <i>remover</i> cada item. O total de posts (créditos) aparece no rodapé.</li>
+							<li><b>Salve ou gere.</b> Use <i>Salvar rascunho</i> para continuar depois, ou <i>Gerar posts</i> para produzir agora. Cada post consome <b>1 crédito</b>.</li>
+							<li><b>Acompanhe e baixe.</b> Ao gerar, você volta ao histórico para ver o progresso e baixar o ZIP quando concluir.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>Se faltar crédito, o sistema avisa antes de gerar — você pode reduzir a quantidade ou ver os planos.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ CONFIGURAÇÕES ══════════════ -->
+				<ui:fragment rendered="#{tela == 'configuracao'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Define a <b>identidade visual dos seus posts</b> — o que vale para tudo que é gerado (programação, teste e lotes sob demanda).
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Estilo e cor.</b> Escolha o <i>Estilo do post</i> e a <i>Cor de destaque</i> das artes.</li>
+							<li><b>Logomarca.</b> Envie sua logo (PNG, ideal 400 × 100 px, fundo transparente) — ela entra nas publicações.</li>
+							<li><b>Legendas.</b> Nos planos com CTA, defina a <i>Finalidade</i> e a descrição usada para montar as legendas.</li>
+							<li><b>Salve.</b> Mais abaixo você vê os <i>Fundos padrão</i> que o sistema sorteia quando a publicação usa a base padrão.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>O botão <b>Default</b> restaura a configuração padrão a qualquer momento.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ BACKGROUND PERSONALIZADO ══════════════ -->
+				<ui:fragment rendered="#{tela == 'background'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Envie <b>seus próprios fundos</b> de Feed (1080 × 1350) e Reel (1080 × 1920) para usar no lugar dos fundos padrão.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Envie.</b> Arraste (ou clique) para subir a imagem na coluna <i>Feed</i> ou <i>Reel</i> — PNG/JPG, até 5 MB.</li>
+							<li><b>Gerencie.</b> As miniaturas enviadas aparecem abaixo; passe o mouse e clique no <b>✕</b> para remover.</li>
+							<li><b>Use.</b> Para aplicar um fundo seu, na <i>Programação</i> ou em <i>Gerar Posts</i> escolha background <i>Específica</i> + origem <i>Personalizada</i>.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>Recurso exclusivo dos planos <b>Premium</b> e <b>Master</b>; cada plano tem um limite de imagens por formato.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ TESTE ══════════════ -->
+				<ui:fragment rendered="#{tela == 'teste'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							<b>Pré-visualizar</b> como um post vai ficar (Feed ou Reel) antes de programar de verdade — para acertar estilo, nível e fundo.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Escolha os parâmetros.</b> Assunto, Estilo, Nível e o formato (Feed/Reel).</li>
+							<li><b>Ajuste o background.</b> Aleatório ou específico, padrão ou personalizado.</li>
+							<li><b>Gere a prévia.</b> Clique em <i>Gerar Conteúdo</i> — o exercício e a resolução aparecem abaixo (clique na imagem para ampliar).</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>É só uma prévia para conferência — gere quantas vezes precisar até o visual ficar do jeito que você quer.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ CTAs ══════════════ -->
+				<ui:fragment rendered="#{tela == 'ctas'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Cadastra as <b>chamadas para ação (CTAs)</b> por finalidade — elas são usadas para montar as <b>legendas</b> dos posts.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Cadastre.</b> Escolha a <i>Finalidade</i>, digite as CTAs (uma por linha) e clique em <i>Adicionar</i>.</li>
+							<li><b>Organize.</b> As CTAs entram na tabela; edite clicando na célula e arraste as linhas para reordenar.</li>
+							<li><b>Uso automático.</b> Ao gerar um post, o sistema sorteia uma CTA da finalidade e monta a legenda (com hashtags nos planos pagos).</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span><b>Remover Todos</b> limpa a lista de CTAs de uma vez.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ AVALIAÇÕES — HISTÓRICO ══════════════ -->
+				<ui:fragment rendered="#{tela == 'avaliacao-list'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Acompanha as <b>avaliações que você gerou</b> — status, andamento e download — e é o ponto de partida para criar uma nova.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Nova avaliação.</b> O botão abre o formulário para montar uma prova do zero.</li>
+							<li><b>Acompanhe.</b> Cada solicitação aparece na tabela com código, título, quantidade, validade e status; enquanto gera, a barra mostra o progresso.</li>
+							<li><b>Use o resultado.</b> Quando concluir, em <i>Ações</i> você pode <i>Ver</i>, <i>Baixar</i> o arquivo ou <i>Enviar por e-mail</i>.</li>
+							<li><b>Rascunhos.</b> Ficam salvos aqui — em <i>Ações</i> dá para <i>Gerar</i> ou <i>Editar</i>.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>O download fica disponível pelo <b>tempo de retenção do seu plano</b>; depois o registro continua na lista, mas sem o arquivo.</span>
+					</div>
+				</ui:fragment>
+
+				<!-- ══════════════ AVALIAÇÕES — NOVA AVALIAÇÃO ══════════════ -->
+				<ui:fragment rendered="#{tela == 'avaliacao-form'}">
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-info-circle" /> Para que serve</div>
+						<p class="pc-ajuda-text">
+							Monta uma <b>avaliação personalizada</b> — cabeçalho + assuntos — e solicita a geração das provas com exercícios sorteados.
+						</p>
+					</div>
+
+					<div class="pc-ajuda-sec">
+						<div class="pc-ajuda-sec-title"><i class="pi pi-list-check" /> Como funciona</div>
+						<ol class="pc-ajuda-steps">
+							<li><b>Cabeçalho.</b> Preencha título, escola, professor, data, tipo/posição do gabarito, formato de saída e a <i>quantidade de exemplares</i>.</li>
+							<li><b>Assuntos.</b> Adicione um ou mais assuntos; para cada um escolha o <i>nível</i>, o <i>tipo de questão</i> e a <i>quantidade de exercícios</i>.</li>
+							<li><b>Gere.</b> Use <i>Salvar rascunho</i> para continuar depois, ou <i>Solicitar Confecção</i> para gerar (requer login e consome sua cota de avaliações).</li>
+							<li><b>Baixe.</b> Acompanhe o progresso e baixe o resultado no histórico.</li>
+						</ol>
+					</div>
+
+					<div class="pc-ajuda-tip">
+						<i class="pi pi-lightbulb" />
+						<span>
+							<b>Salvar como padrão</b> guarda o cabeçalho e o formato para as próximas avaliações. A logo da escola é exclusiva
+							dos planos <b>Profissional</b> e <b>Master</b>. Passe o mouse nos ícones <b>?</b> ao lado de cada campo para dicas específicas.
+						</span>
+					</div>
+				</ui:fragment>
+
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Estilos + comportamento (auto-contido; renderiza uma vez por página) -->
+	<style>
+		/* Pílula inline, na mesma linha do badge do hero — não empilha (não aumenta a altura). */
+		.pc-ajuda-btn {
+			display: inline-flex; align-items: center; gap: 6px;
+			vertical-align: middle; margin-left: 10px;
+			background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.24);
+			color: #fff; border-radius: 999px; padding: 5px 12px;
+			font-size: 12px; font-weight: 600; cursor: pointer; line-height: 1;
+			transition: background .15s ease;
+		}
+		.pc-ajuda-btn:hover { background: rgba(255,255,255,.22); }
+		.pc-ajuda-btn .pi { font-size: 13px; }
+
+		.pc-ajuda-overlay {
+			display: none; position: fixed; inset: 0; z-index: 10000;
+			background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px);
+			align-items: center; justify-content: center; padding: 20px;
+		}
+		.pc-ajuda-overlay.is-open { display: flex; }
+
+		.pc-ajuda-card {
+			width: 100%; max-width: 820px; max-height: 88vh;
+			display: flex; flex-direction: column; overflow: hidden;
+			background: #fff; border-radius: 18px;
+			box-shadow: 0 28px 70px rgba(7, 20, 47, .35);
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		/* Cabeçalho fixo (não rola) */
+		.pc-ajuda-head {
+			position: relative; flex-shrink: 0;
+			background: linear-gradient(135deg, #07142f 0%, #0d1d47 60%, #1a2f6e 100%);
+			padding: 24px 28px 22px; color: #fff;
+		}
+		.pc-ajuda-close {
+			position: absolute; top: 16px; right: 16px; width: 34px; height: 34px;
+			border-radius: 10px; background: rgba(255,255,255,.10);
+			border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.85);
+			cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+			transition: background .15s ease;
+		}
+		.pc-ajuda-close:hover { background: rgba(255,255,255,.22); color: #fff; }
+		.pc-ajuda-eyebrow {
+			display: inline-flex; align-items: center; gap: 6px;
+			font-size: 12px; font-weight: 700; letter-spacing: .4px; color: #93c5fd;
+			background: rgba(147,197,253,.12); border: 1px solid rgba(147,197,253,.22);
+			padding: 4px 12px; border-radius: 999px;
+		}
+		.pc-ajuda-title { margin: 12px 0 0; font-size: 1.4rem; font-weight: 800; color: #fff; padding-right: 40px; }
+
+		/* Só o corpo rola (do cabeçalho pra baixo) */
+		.pc-ajuda-body { padding: 22px 28px 26px; flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+		.pc-ajuda-sec { margin-bottom: 20px; }
+		.pc-ajuda-sec-title {
+			display: flex; align-items: center; gap: 8px;
+			font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+			color: #1d4ed8; margin-bottom: 8px;
+		}
+		.pc-ajuda-sec-title .pi { font-size: 15px; }
+		.pc-ajuda-text { margin: 0; font-size: 14px; line-height: 1.65; color: #334155; }
+
+		.pc-ajuda-steps { margin: 0; padding-left: 0; list-style: none; counter-reset: passo; }
+		.pc-ajuda-steps li {
+			position: relative; padding: 0 0 12px 40px; margin: 0;
+			font-size: 14px; line-height: 1.6; color: #334155; counter-increment: passo;
+		}
+		.pc-ajuda-steps li::before {
+			content: counter(passo); position: absolute; left: 0; top: 0;
+			width: 26px; height: 26px; border-radius: 999px;
+			background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff;
+			font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;
+		}
+		.pc-ajuda-steps li:last-child { padding-bottom: 0; }
+
+		.pc-ajuda-tip {
+			display: flex; gap: 10px; align-items: flex-start;
+			background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px;
+			padding: 14px 16px; font-size: 13.5px; line-height: 1.6; color: #7c2d12;
+		}
+		.pc-ajuda-tip .pi { color: #ea580c; font-size: 17px; margin-top: 1px; }
+
+		@media (max-width: 600px) { .pc-ajuda-title { font-size: 1.2rem; } }
+	</style>
+
+	<script>
+		//<![CDATA[
+		function pcAjudaShow(tela){
+			var el = document.getElementById('pcAjuda-' + tela);
+			if(el) el.classList.add('is-open');
+		}
+		function pcAjudaHide(overlay){
+			if(overlay) overlay.classList.remove('is-open');
+		}
+		document.addEventListener('keydown', function(e){
+			if(e.key === 'Escape')
+				document.querySelectorAll('.pc-ajuda-overlay.is-open').forEach(function(o){ o.classList.remove('is-open'); });
+		});
+		//]]>
+	</script>
+
+</ui:composition>

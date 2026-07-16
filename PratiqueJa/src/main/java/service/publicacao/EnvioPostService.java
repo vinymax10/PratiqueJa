@@ -1,10 +1,15 @@
 package service.publicacao;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
@@ -18,8 +23,10 @@ import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
 import jakarta.inject.Inject;
 import modelo.exercicio.ExercicioPadrao;
+import modelo.exercicio.Nivel;
 import modelo.publicacao.ConfigPost;
 import modelo.publicacao.FormatoPost;
+import modelo.publicacao.ItemPedidoPost;
 import modelo.publicacao.PerfilCriador;
 import modelo.publicacao.ProgramacaoPost;
 import modelo.usuario.Usuario;
@@ -44,6 +51,9 @@ public class EnvioPostService
 
 	@Inject
 	private CreditoPostService creditoPostService;
+
+	@Inject
+	private MontadorPostService montadorPostService;
 
 	/**
 	 * Garante que apenas um envio rode por vez (agendador ou disparo manual),
@@ -154,23 +164,45 @@ public class EnvioPostService
 		List<ExercicioPadrao> exerciciosDoDia = sortearExercicios(
 			programacaoPost.getAssunto().getExerciciosPadrao(), perfilCriador.getExerciciosPorDia());
 
+		// Além de enviar o e-mail, guarda cada peça gerada (nome do arquivo → PNG/legenda) para
+		// empacotar num ZIP e deixar o post programado baixável no histórico de pedidos.
+		Map<String, byte[]> entradasZip = new LinkedHashMap<>();
+		Set<Nivel> niveisUsados = new LinkedHashSet<>();
+		boolean fezFeed = false;
+		boolean fezReel = false;
 		int gerados = 0;
+		int indice = 0;
+
 		for(ExercicioPadrao exercicioPadrao : exerciciosDoDia)
 		{
+			indice++;
+			niveisUsados.add(exercicioPadrao.getNivel());
+			String base = "post-" + String.format("%02d", indice);
+			byte[] legenda = conteudoPublicacaoService.montarLegenda(exercicioPadrao, configPost)
+				.getBytes(StandardCharsets.UTF_8);
+
 			if(perfilCriador.isAmbosFormatos())
 			{
-				conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
-				conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+				byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
+				adicionarPeca(entradasZip, base + "-feed", feed, legenda);
+				byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+				adicionarPeca(entradasZip, base + "-reel", reel, legenda);
+				fezFeed = true;
+				fezReel = true;
 				gerados += 2;
 			}
 			else if(programacaoPost.getFormato() == FormatoPost.Reel)
 			{
-				conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+				byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+				adicionarPeca(entradasZip, base + "-reel", reel, legenda);
+				fezReel = true;
 				gerados++;
 			}
 			else
 			{
-				conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
+				byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
+				adicionarPeca(entradasZip, base + "-feed", feed, legenda);
+				fezFeed = true;
 				gerados++;
 			}
 		}
@@ -178,12 +210,47 @@ public class EnvioPostService
 		ColorHolder.clear();
 
 		if(programacaoPost.isAvulsa())
-			programacaoPostService.remover(programacaoPost);
-		else
 		{
-			programacaoPostService.registrarEnvio(programacaoPost);
-			creditoPostService.registrarConsumo(usuario, configPost, gerados);
+			programacaoPostService.remover(programacaoPost);
+			return;
 		}
+
+		programacaoPostService.registrarEnvio(programacaoPost);
+
+		// Um item por formato gerado, para rastreabilidade no detalhe do pedido.
+		List<ItemPedidoPost> itens = new ArrayList<>();
+		if(fezFeed)
+			itens.add(montarItem(programacaoPost, FormatoPost.Feed, niveisUsados, perfilCriador.getExerciciosPorDia()));
+		if(fezReel)
+			itens.add(montarItem(programacaoPost, FormatoPost.Reel, niveisUsados, perfilCriador.getExerciciosPorDia()));
+
+		// Cria o pedido baixável (também serve de registro de consumo da cota mensal).
+		montadorPostService.salvarPedidoProgramado(programacaoPost, entradasZip, itens, gerados);
+	}
+
+	/** Adiciona ao ZIP as duas imagens (exercício/resolução) e a legenda de uma peça. */
+	private void adicionarPeca(Map<String, byte[]> entradas, String base, byte[][] imagens, byte[] legenda)
+	{
+		entradas.put(base + "-exercicio.png", imagens[0]);
+		entradas.put(base + "-resolucao.png", imagens[1]);
+		entradas.put(base + "-legenda.txt", legenda);
+	}
+
+	/** Item de pedido (rastreabilidade) espelhando a config da programação, para um formato. */
+	private ItemPedidoPost montarItem(ProgramacaoPost prog, FormatoPost formato, Set<Nivel> niveis, int quantidade)
+	{
+		ItemPedidoPost item = new ItemPedidoPost();
+		item.setAssunto(prog.getAssunto());
+		item.setFormato(formato);
+		item.setNiveis(new ArrayList<>(niveis));
+		item.setQuantidade(quantidade);
+		item.setAlternativaReel(prog.isAlternativaReel());
+		item.setBackgroundAleatorio(prog.isBackgroundAleatorio());
+		item.setBasePadrao(prog.isBasePadrao());
+		item.setBackground(prog.getBackground());
+		item.setPadrao(prog.getPadrao());
+		item.setOrdem(0);
+		return item;
 	}
 
 	/**

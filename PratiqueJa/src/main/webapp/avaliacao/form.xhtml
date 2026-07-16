@@ -60,7 +60,10 @@
 	<div class="av-joined">
 
 	<!-- ═══════════════════════════════════════════════════════ HERO -->
-	<ui:include src="/avaliacao/hero.xhtml" />
+	<ui:include src="/avaliacao/hero.xhtml">
+		<ui:param name="ajudaTela" value="avaliacao-form" />
+		<ui:param name="ajudaTitulo" value="Nova Avaliação" />
+	</ui:include>
 
 	<!-- ═══════════════════════════════════════════════ FORMULÁRIO -->
 	<h:form id="form">
