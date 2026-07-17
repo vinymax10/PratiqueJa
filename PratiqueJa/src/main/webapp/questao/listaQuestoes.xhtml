@@ -139,8 +139,14 @@
 					<h:panelGroup id="resolucaoComentada" layout="block">
 						<h:panelGroup layout="block" rendered="#{questao.showResolucaoComentada}">
 							<div class="qz-resolucao">
-								<h:outputLabel value="#{questao.resolucaoHtml}" escape="false"
-									style="display:block;margin-bottom:8px;color:#374151" />
+								<!-- Um bloco por passo (getResolucaoLinhas), em vez do resolucaoHtml
+								     colado com <br/>: com <br/> o respiro depende do line-height, e um
+								     \dfrac é mais alto que a linha — ela cresce pra caber a fração e o
+								     espaço entre os passos zera. Mesmo tratamento da tela de exercício. -->
+								<ui:repeat value="#{questao.resolucaoLinhas}" var="linhaResolucao">
+									<h:outputText value="#{linhaResolucao}" escape="false"
+										styleClass="qz-resolucao-linha" />
+								</ui:repeat>
 								<h:outputLabel value="Alternativa correta: #{questao.correta().letra}"
 									style="font-weight:800;color:#15803d;font-size:1rem" />
 							</div>

@@ -154,10 +154,12 @@
 							<div class="av-det-itens">
 								<ui:repeat value="#{pedidoAvaliacaoBean.pedidoSelecionado.itens}" var="item" varStatus="status">
 									<div class="av-det-item">
-										<span class="av-det-item-num">#{status.index + 1}</span>
-										<div class="av-det-item-thumb">
-											<img src="#{item.assunto.endImageThumb()}" alt="#{item.assunto.nome}"
-												onerror="this.onerror=null;this.src='#{item.assunto.endImageCapa()}';" />
+										<div class="av-det-item-thumb-wrap">
+											<span class="av-det-item-num">#{status.index + 1}</span>
+											<div class="av-det-item-thumb">
+												<img src="#{item.assunto.endImageThumb()}" alt="#{item.assunto.nome}"
+													onerror="this.onerror=null;this.src='#{item.assunto.endImageCapa()}';" />
+											</div>
 										</div>
 										<span class="av-det-item-assunto">
 											<h:outputText value="#{item.assunto.nome}" />

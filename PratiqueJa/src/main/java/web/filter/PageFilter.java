@@ -44,17 +44,21 @@ public class PageFilter extends Filtro
 			if(usuario != null)
 				MDC.put("usuario", String.valueOf(usuario.getId()));
 
+			// Área administrativa (inclui os fragmentos de exportação/auditoria, que expõem
+			// download direto do bean se acessados sem passar pela página que os inclui):
+			// ramo exclusivo, só admin logado — nenhuma das regras públicas abaixo se aplica,
+			// senão heurísticas como "/questao/" vazariam acesso a /administracao/conteudo/questao/*.
+			// É a ÚNICA área que ainda barra com a tela de acesso negado: as demais telas só
+			// exigem login, e quem não tem vai para a tela inicial (ver destinoNegado abaixo).
+			boolean areaAdmin = uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/");
+
 			// Telas de erro (404/500/acesso negado) sempre acessíveis — senão um acesso negado
 			// redireciona pra cá e cai em loop de redirecionamento.
 			if(uri.contains("/acesso/"))
 			{
 				acesso = true;
 			}
-			// Área administrativa (inclui os fragmentos de exportação/auditoria, que expõem
-			// download direto do bean se acessados sem passar pela página que os inclui):
-			// ramo exclusivo, só admin logado — nenhuma das regras públicas abaixo se aplica,
-			// senão heurísticas como "/questao/" vazariam acesso a /administracao/conteudo/questao/*.
-			else if(uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/"))
+			else if(areaAdmin)
 			{
 				acesso = usuario != null && usuario.isAdmin();
 			}
@@ -95,7 +99,7 @@ public class PageFilter extends Filtro
 			}
 
 			LOG.info("Acesso={} à url={}", acesso, httpRequest.getServletPath());
-			redirecionar(acesso, request, response, chain);
+			redirecionar(acesso, areaAdmin ? ACESSO_NEGADO : HOME, request, response, chain);
 		}
 		finally
 		{

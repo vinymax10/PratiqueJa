@@ -4,8 +4,15 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
 	version="2.3">
 	
+	<!-- Sessão perdida vai para a tela inicial em vez de tela de erro (ajax e não-ajax). -->
+	<factory>
+	    <exception-handler-factory>
+	        web.exception.SessaoExpiradaExceptionHandlerFactory
+	    </exception-handler-factory>
+	</factory>
+
 	<application>
-	
+
 	    <action-listener>
 	        org.primefaces.application.DialogActionListener
 	    </action-listener>

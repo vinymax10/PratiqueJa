@@ -65,21 +65,10 @@
 					</ui:repeat>
 				</div>
 
-			  <h:panelGroup layout="block" rendered="#{exercicioBean.bloqueado(exercicio)}">
-				<div class="ex-premium-lock">
-					<div class="ex-premium-lock-icon"><i class="pi pi-crown" /></div>
-					<h4 class="ex-premium-lock-title">Exercício exclusivo Premium</h4>
-					<p class="ex-premium-lock-text">
-						Este exercício está disponível apenas para assinantes Premium.
-						Faça o upgrade da sua conta para responder e ver a resolução comentada.
-					</p>
-					<a href="/produtos/acesso/acesso.xhtml" class="ex-premium-lock-cta">
-						<i class="pi pi-arrow-up-right" /> Fazer upgrade da conta
-					</a>
-				</div>
-			  </h:panelGroup>
-
-			  <h:panelGroup layout="block" rendered="#{!exercicioBean.bloqueado(exercicio)}">
+			  <!-- Premium bloqueado não troca mais a questão por um bloco de upgrade: ela fica
+			       normal (o chip e o tom creme do card já sinalizam) e o aviso vira o
+			       dialogPremiumExercicio, aberto no clique — igual ao PDF Premium. -->
+			  <h:panelGroup layout="block">
 
 				<h:panelGroup id="resposta">
 
@@ -168,8 +157,15 @@
 				<h:panelGroup id="resolucaoComentada" layout="block">
 					<h:panelGroup layout="block" rendered="#{exercicio.showResolucaoComentada}">
 						<div class="ex-resolucao">
-							<h:outputLabel value="#{exercicio.resolucaoHtml}" escape="false"
-								style="display:block;margin-bottom:8px;color:#374151" />
+							<!-- Um bloco por passo (getResolucaoLinhas), em vez do resolucaoHtml
+							     inteiro colado com <br/>: o <br/> deixa o respiro por conta do
+							     line-height, e um \dfrac é mais alto que a linha — ela cresce pra
+							     caber a fração e o espaço entre os passos vira zero. Mesmo padrão
+							     do enunciado, que já usa um bloco com margem por parágrafo. -->
+							<ui:repeat value="#{exercicio.resolucaoLinhas}" var="linhaResolucao">
+								<h:outputText value="#{linhaResolucao}" escape="false"
+									styleClass="ex-resolucao-linha" />
+							</ui:repeat>
 							<h:outputLabel value="Alternativa correta: #{exercicio.correta().letra}"
 								rendered="#{not empty exercicio.correta()}"
 								style="font-weight:800;color:#15803d;font-size:1rem" />
@@ -190,6 +186,27 @@
 				Nenhum exercício disponível para este assunto.
 			</p>
 		</h:panelGroup>
+
+		<!-- Um único dialog para a lista toda (fica fora do ui:repeat de propósito: dentro
+		     dele sairia um dialog por exercício). Quem abre é o ExercicioBean.abrirDialogBloqueado. -->
+		<p:dialog widgetVar="dialogPremiumExercicio" modal="true" showHeader="false"
+			responsive="true" width="420">
+			<div class="ex-premium-dialog-content">
+				<div class="ex-premium-dialog-icon"><i class="pi pi-crown" /></div>
+				<h4 class="ex-premium-dialog-title">Resolução exclusiva Premium</h4>
+				<p class="ex-premium-dialog-text">
+					Você pode responder este exercício à vontade. A resolução comentada e a
+					estatística são exclusivas para assinantes Premium — faça o upgrade da sua
+					conta para ver o passo a passo.
+				</p>
+				<a href="/produtos/acesso/acesso.xhtml" class="ex-premium-dialog-cta">
+					<i class="pi pi-arrow-up-right" /> Fazer upgrade da conta
+				</a>
+				<a href="#" onclick="PF('dialogPremiumExercicio').hide(); return false;" class="ex-premium-dialog-dismiss">
+					Agora não
+				</a>
+			</div>
+		</p:dialog>
 
 	</h:form>
 

@@ -221,13 +221,14 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		}
 	}
 
-	/** Registra a resposta de um exercício específico (cards da aba). */
+	/**
+	 * Registra a resposta de um exercício específico (cards da aba). Responder é liberado em
+	 * todos os exercícios, inclusive os Premium: o plano básico responde e vê acerto/erro; o
+	 * que fica atrás do paywall é o porquê (resolução comentada) e a estatística.
+	 */
 	public String responder(Exercicio exercicio)
 	{
 		if(!controleAcessoBean.verificaEstaLogado())
-			return "";
-
-		if(bloqueado(exercicio))
 			return "";
 
 		exercicioService.registrarResposta(exercicio);
@@ -244,7 +245,10 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 			return;
 
 		if(bloqueado(exercicio))
+		{
+			abrirDialogBloqueado(exercicio);
 			return;
+		}
 
 		exercicio.toogleResolucaoComentada();
 	}
@@ -259,13 +263,17 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 			return;
 
 		if(bloqueado(exercicio))
+		{
+			abrirDialogBloqueado(exercicio);
 			return;
+		}
 
 		exercicio.toogleEstatistica();
 	}
 
 	/**
-	 * Exercício Premium indisponível para o usuário atual (não logado ou plano básico).
+	 * Resolução/estatística de um exercício Premium indisponíveis para o usuário atual (não
+	 * logado ou plano básico). Não barra o responder — só o que vem depois dele.
 	 * Usado tanto para barrar a ação no servidor quanto para renderizar o aviso de upgrade.
 	 */
 	public boolean bloqueado(Exercicio exercicio)
@@ -273,6 +281,18 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		return exercicio != null
 			&& exercicio.getVisibilidade() == Visibilidade.Premium
 			&& !controleAcessoBean.podeAcessarPremium();
+	}
+
+	/**
+	 * Exercício Premium para quem não assina: a questão fica normal na tela (só com o chip e o
+	 * tom creme do card) e o aviso só aparece aqui, no clique — mesmo padrão do PDF Premium.
+	 * Antes disso, cada exercício bloqueado trazia um bloco de upgrade fixo no lugar das
+	 * alternativas; como um assunto tem ~20 deles, a página virava uma sequência de CTAs.
+	 */
+	public void abrirDialogBloqueado(Exercicio exercicio)
+	{
+		if(bloqueado(exercicio))
+			PrimeFaces.current().executeScript("PF('dialogPremiumExercicio').show()");
 	}
 
 	/** Gráfico de barras com o percentual de escolha de cada alternativa do exercício. */

@@ -19,7 +19,13 @@ public abstract class Filtro implements Filter
 	{
 	}
 
-	protected void redirecionar(boolean acesso, ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
+	/** Para onde vai quem é barrado: só a área administrativa usa a tela de acesso negado. */
+	public static final String ACESSO_NEGADO = "/acesso/acesso-negado.xhtml";
+
+	/** Telas que só exigem login mandam o visitante para a tela inicial, não para uma tela de erro. */
+	public static final String HOME = "/inicio.xhtml";
+
+	protected void redirecionar(boolean acesso, String destinoNegado, ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -41,13 +47,13 @@ public abstract class Filtro implements Filter
 		{
 			if(isAjax(httpRequest))
 			{
-				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, "/acesso/acesso-negado.xhtml"));
+				httpResponse.getWriter().print(xmlPartialRedirectToPage(httpRequest, destinoNegado));
 				httpResponse.flushBuffer();
 			}
 			else
 			{
 				String contextPath = ((HttpServletRequest) request).getContextPath();
-				httpResponse.sendRedirect(contextPath + "/acesso/acesso-negado.xhtml");
+				httpResponse.sendRedirect(contextPath + destinoNegado);
 			}
 		}
 	}

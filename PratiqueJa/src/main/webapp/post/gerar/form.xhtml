@@ -129,12 +129,17 @@
 			<h:panelGroup id="listaItens" layout="block">
 				<ui:repeat value="#{pedidoPostBean.entidade.itens}" var="it" varStatus="status">
 					<div class="av-item-card">
-						<div class="av-item-num"><h:outputText value="#{status.index + 1}" /></div>
+						<!-- num + miniatura no mesmo wrap: o .av-item-num é absolute e precisa
+						     do .av-item-thumb-wrap (position:relative) como âncora, senão vai
+						     parar no canto da página. Mesma estrutura da /avaliacao/form. -->
+						<div class="av-item-thumb-wrap">
+							<div class="av-item-num"><h:outputText value="#{status.index + 1}" /></div>
 
-						<h:panelGroup layout="block" styleClass="av-item-thumb">
-							<img src="#{it.assunto.endImageThumb()}" alt="#{it.assunto.nome}"
-								onerror="this.onerror=null;this.src='#{it.assunto.endImageCapa()}';" />
-						</h:panelGroup>
+							<h:panelGroup layout="block" styleClass="av-item-thumb">
+								<img src="#{it.assunto.endImageThumb()}" alt="#{it.assunto.nome}"
+									onerror="this.onerror=null;this.src='#{it.assunto.endImageCapa()}';" />
+							</h:panelGroup>
+						</div>
 
 						<div class="av-item-info">
 							<span class="av-item-assunto"><h:outputText value="#{it.assunto.nome}" /></span>

@@ -407,9 +407,11 @@
 /* Split: Dados da Avaliação à esquerda, Logo personalizada à direita */
 .av-data-split { display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch; }
 /* min-width faz as colunas quebrarem (wrap) antes de ficarem estreitas demais, em vez de
-   uma invadir a outra. Abaixo de ~680px de container, a logo desce para baixo dos dados. */
-.av-data-col  { flex: 2 1 400px; min-width: 360px; }
-.av-logo-col  { flex: 1 1 300px; min-width: 300px; display: flex; flex-direction: column; gap: 7px; }
+   uma invadir a outra. Abaixo de ~680px de container, a logo desce para baixo dos dados.
+   min(100%, Npx) evita que esse mesmo min-width transborde quando o container é menor que
+   Npx (celular): aí a coluna acompanha o container em vez de furar o padding do painel. */
+.av-data-col  { flex: 2 1 400px; min-width: min(100%, 360px); }
+.av-logo-col  { flex: 1 1 300px; min-width: min(100%, 300px); display: flex; flex-direction: column; gap: 7px; }
 
 .av-logo-uploader { flex: 1 1 auto; display: flex; flex-direction: column; gap: 14px; }
 
@@ -618,10 +620,12 @@
     flex-shrink: 0;
 }
 
+/* Canto superior direito, igual ao .pc-item-num (/post/programacao) e ao .av-det-item-num
+   dos dialogs de detalhe — o número fica no mesmo canto em todas as telas. */
 .av-item-num {
     position: absolute;
     top: -6px;
-    left: -6px;
+    right: -6px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -732,7 +736,16 @@
 
 /* ── DIALOG PREMIUM — chrome compartilhado (av-dlg) ────────── */
 .av-dlg.ui-dialog { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(7, 20, 47, 0.28); }
+/* O responsive="true" do p:dialog NÃO limita a largura — ele só recentraliza no resize.
+   Com width="900" o initSize grava width:900px inline e, num celular, o initPosition
+   trava o left em 0 (collision fit) e os 900px vazam pela direita; como o body tem
+   overflow-x:hidden, nem barra de rolagem aparece. max-width vence o width inline. */
+.av-dlg.ui-dialog { max-width: calc(100vw - 2rem); }
 .av-dlg .ui-dialog-content { padding: 0 !important; border-radius: 20px; }
+/* Sem teto de altura o dialog passa da tela e, sendo position:fixed, o rodapé (com o
+   botão de salvar) fica inalcançável. O overflow:auto do conteúdo já vem do PrimeFaces,
+   então basta o limite para ele virar área rolável. */
+.av-dlg .ui-dialog-content { max-height: calc(100vh - 2rem); }
 .av-dlg-inner { display: flex; flex-direction: column; }
 
 /* HERO */
@@ -949,18 +962,31 @@
     transition: border-color 0.15s, box-shadow 0.15s;
 }
 .av-det-item:hover { border-color: #dbe7ff; box-shadow: 0 2px 12px rgba(37, 99, 235, 0.07); }
-.av-det-item-num {
+/* Âncora do número sobre a miniatura (position:relative é o que prende o .av-det-item-num,
+   que é absolute — sem este wrap ele escaparia para o canto da página). */
+.av-det-item-thumb-wrap {
+    position: relative;
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 7px;
+}
+/* Número acoplado no canto superior direito da miniatura, como na /post/programacao. */
+.av-det-item-num {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border: 2px solid #fff;
+    border-radius: 999px;
     background: linear-gradient(135deg, #2563eb, #1a2f6e);
     color: #fff;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 10.5px;
+    font-weight: 800;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
 }
 .av-det-item-thumb {
     width: 40px;
@@ -1028,6 +1054,8 @@
 /* ── AÇÕES ────────────────────────────────────────────────── */
 .av-actions {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: flex-end;
     padding-top: 24px;
     border-top: 1px solid #f3f4f6;
@@ -1059,10 +1087,35 @@
 @media (max-width: 600px) {
     .av-fields { grid-template-columns: 1fr; }
     .av-add-row { grid-template-columns: 1fr; }
+
+    /* Cards de item: sem o wrap, o info é esmagado entre a miniatura e os comandos
+       (chega a ~87px, com os chips empilhados um por linha). Os comandos passam a
+       ocupar uma linha própria e o info fica com a largura toda — mesma receita da
+       /post/programacao (.pc-item-card, em post-page.css). */
+    .av-item-card { flex-wrap: wrap; }
+    .av-item-actions { width: 100%; justify-content: flex-end; }
+
+    /* Barra --split (as de vários botões): sem isto eles disputam uma linha só e se
+       espremem — o rótulo quebrava em 3 linhas e o botão principal saía da tela.
+       Metade da largura cada → 2 por linha. O -5px compensa metade do gap de 10px.
+       Fica no --split de propósito: a .av-actions simples (perfil) tem um botão só. */
+    .av-actions--split > .ui-button { flex: 1 1 calc(50% - 5px); }
+    /* stretch (em vez do center herdado) iguala a altura dos botões da mesma linha
+       quando um rótulo quebra em duas — sem isto a grade fica desalinhada. */
+    .av-actions--split { align-items: stretch; }
+    /* Em ~170px o rótulo não cabe com o padding do tema (.5rem 1rem .5rem 2rem).
+       Aperta o recuo — 1.75rem ainda passa longe do ícone, que fica em left:.5em. */
+    .av-actions--split > .ui-button.ui-button-text-icon-left .ui-button-text {
+        padding: .5rem .5rem .5rem 1.75rem;
+        font-size: 13px;
+    }
 }
 
 /* ── Dialog de cota esgotada / plano vencido ───────────────── */
-.av-dlg-cota .ui-dialog-content { padding: 0 !important; }
+/* Mesmo caso do .av-dlg: width="460" fixo + responsive="true" que não limita largura.
+   Num celular de 390px o dialog vazava 70px pela direita, cortando o "Ver planos". */
+.av-dlg-cota.ui-dialog { max-width: calc(100vw - 2rem); }
+.av-dlg-cota .ui-dialog-content { padding: 0 !important; max-height: calc(100vh - 2rem); }
 
 .av-dlg-cota-inner {
     display: flex;

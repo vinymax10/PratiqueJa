@@ -152,6 +152,10 @@
     line-height: 1.85;
     font-size: 1rem;
     margin-bottom: 16px;
+    /* Math longo (ex.: cadeia com \Rightarrow) é mais largo que a coluna e escapava do
+       card, quebrando o layout da página. Rola dentro do próprio bloco, como a
+       .qz-resolucao já fazia — era o único container com essa proteção. */
+    overflow-x: auto;
 }
 
 .ex-card-actions {
@@ -202,65 +206,94 @@
     border-radius: 0 12px 12px 0;
     line-height: 1.7;
     font-size: 0.95rem;
+    /* Math longo (ex.: cadeia com \Rightarrow) é mais largo que a coluna e escapava do
+       card, quebrando o layout da página. Rola dentro do próprio bloco, como a
+       .qz-resolucao já fazia — era o único container com essa proteção. */
+    overflow-x: auto;
 }
 
-/* ---- BLOQUEIO PREMIUM: aviso de upgrade ---- */
-.ex-premium-lock {
+/* Cada passo da resolução é um bloco com margem própria. O espaçamento não pode depender
+   do line-height: um \dfrac do MathJax mede ~2.5em, mais que a linha, então a linha cresce
+   para caber a fração e o respiro entre os passos zera — que era o efeito de "linhas
+   grudadas". Com margem, o respiro independe da altura da fórmula. */
+.ex-resolucao-linha {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #374151;
+}
+.ex-resolucao-linha:last-child {
+    margin-bottom: 0;
+}
+
+/* ---- BLOQUEIO PREMIUM: dialog de upgrade ----
+   Substitui o antigo bloco .ex-premium-lock, que ficava fixo no lugar das alternativas de
+   cada exercício bloqueado (~20 por assunto). Agora o aviso é um dialog só, aberto no
+   clique; na questão ficam apenas o chip Premium e o tom creme do .ex-card--premium.
+   Mesma linguagem visual do .pdf-premium-dialog-* (pdf-page.css). */
+.ex-premium-dialog-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 10px;
-    padding: 28px 24px;
-    border: 1px dashed #f1d49a;
-    border-radius: 16px;
-    background: linear-gradient(180deg, #fffdf6 0%, #fffaf0 100%);
+    padding: 12px 8px 4px;
 }
-.ex-premium-lock-icon {
+.ex-premium-dialog-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: linear-gradient(135deg, #fbbf24, #d97706);
     color: #fff;
-    font-size: 22px;
+    font-size: 24px;
     box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
 }
-.ex-premium-lock-title {
+.ex-premium-dialog-title {
     margin: 4px 0 0;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #92400e;
 }
-.ex-premium-lock-text {
+.ex-premium-dialog-text {
     margin: 0;
-    max-width: 460px;
-    font-size: 0.9rem;
+    max-width: 380px;
+    font-size: 0.92rem;
     line-height: 1.6;
     color: #6b5b3e;
 }
-.ex-premium-lock-cta {
+.ex-premium-dialog-cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 8px;
-    padding: 10px 22px;
+    margin-top: 10px;
+    padding: 10px 24px;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: #fff;
     text-decoration: none;
     background: linear-gradient(90deg, #f59e0b, #d97706);
     box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
     transition: background 0.2s, transform 0.15s;
 }
-.ex-premium-lock-cta:hover {
+.ex-premium-dialog-cta:hover {
     background: linear-gradient(90deg, #d97706, #b45309);
     transform: translateY(-1px);
     color: #fff;
     text-decoration: none;
+}
+.ex-premium-dialog-dismiss {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    cursor: pointer;
+    text-decoration: none;
+}
+.ex-premium-dialog-dismiss:hover {
+    color: #6b7280;
+    text-decoration: underline;
 }
 
 /* ---- RESPONSIVO ---- */

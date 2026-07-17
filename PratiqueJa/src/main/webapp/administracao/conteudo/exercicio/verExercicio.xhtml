@@ -55,11 +55,18 @@
 			</ui:repeat>
 		</div>
 
-		<h:panelGroup rendered="#{not empty exercicioBean.exercicio.resolucaoHtml}">
+		<h:panelGroup rendered="#{not empty exercicioBean.exercicio.resolucaoLinhas}">
 			<h4 class="title-divisor">Resolução</h4>
 			<div class="grid ui-fluid" style="margin:0 15px;">
 				<div class="col-12">
-					<h:outputText value="#{exercicioBean.exercicio.resolucaoHtml}" escape="false" />
+					<!-- Um bloco por passo (getResolucaoLinhas), em vez do resolucaoHtml colado com
+					     <br/>: com <br/> o respiro depende do line-height, e um \dfrac é mais alto
+					     que a linha — ela cresce pra caber a fração e o espaço entre os passos zera.
+					     Estilo inline porque esta tela não carrega o exercicio-page.css. -->
+					<ui:repeat value="#{exercicioBean.exercicio.resolucaoLinhas}" var="linhaResolucao">
+						<h:outputText value="#{linhaResolucao}" escape="false"
+							style="display:block;margin-bottom:0.55rem" />
+					</ui:repeat>
 				</div>
 			</div>
 		</h:panelGroup>

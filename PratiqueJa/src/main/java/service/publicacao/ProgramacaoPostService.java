@@ -68,6 +68,12 @@ public class ProgramacaoPostService
 		for(int i = 0; i < programacoesPost.size(); i++)
 		{
 			ProgramacaoPost p = programacoesPost.get(i);
+			// updateData() lê p.getConfigPost().getUltimoEnvio(), mas essa referência pode ser
+			// OUTRA instância de ConfigPost, com ultimoEnvio velho: a coleção lazy é inicializada
+			// em sessão temporária (hibernate.enable_lazy_load_no_trans) e o ConfigPostBean é
+			// @SessionScoped, então ela sobrevive entre requisições. Sem reancorar no configPost
+			// que acabou de ser alterado, a data sai calculada do ultimoEnvio antigo.
+			p.setConfigPost(configPost);
 			p.setOrdem(i);
 			p.updateData();
 			setImagemPost(p);

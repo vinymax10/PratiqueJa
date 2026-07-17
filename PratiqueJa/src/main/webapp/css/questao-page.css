@@ -711,6 +711,10 @@
     line-height: 1.85;
     font-size: 1rem;
     margin-bottom: 16px;
+    /* Math longo (ex.: cadeia com \Rightarrow) é mais largo que a coluna e escapava do
+       card, quebrando o layout da página. Rola dentro do próprio bloco, como a
+       .qz-resolucao já fazia — era o único container com essa proteção. */
+    overflow-x: auto;
 }
 
 .qz-card-actions {
@@ -762,6 +766,19 @@
     font-size: 0.95rem;
     max-width: 100%;
     overflow-x: auto;
+}
+
+/* Cada passo da resolução é um bloco com margem própria. O respiro não pode depender do
+   line-height acima: um \dfrac do MathJax mede ~2.5em, mais que a linha, então a linha
+   cresce para caber a fração e o espaço entre os passos zera — o efeito de "linhas
+   grudadas". Espelha o .ex-resolucao-linha da tela de exercício. */
+.qz-resolucao-linha {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #374151;
+}
+.qz-resolucao-linha:last-child {
+    margin-bottom: 0;
 }
 
 /* ---- RESPONSIVO ---- */
