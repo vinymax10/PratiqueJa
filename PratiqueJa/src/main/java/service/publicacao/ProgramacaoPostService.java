@@ -142,14 +142,39 @@ public class ProgramacaoPostService
 		}
 	}
 
+	/**
+	 * Registra a publicação diária do assunto do topo. A postagem é diária; a rotação para o próximo
+	 * assunto só acontece depois que o assunto atual completou {@code qtdDias} dias de publicação.
+	 *
+	 * <p>Em ambos os casos {@code ultimoEnvio} avança para hoje, o que empurra a data do topo para
+	 * amanhã (evita republicar hoje e agenda a próxima publicação diária).</p>
+	 */
 	public void registrarEnvio(ProgramacaoPost programacaoPost)
 	{
 		ConfigPost configPost = programacaoPost.getConfigPost();
 		configPost.setUltimoEnvio(LocalDate.now());
-		configPost = configPostDAO.salvar(configPost);
-		programacaoPost.setConfigPost(configPost);
-		programacaoPost.setOrdem(configPost.getProgramacoesPost().size() - 1);
-		salvar(programacaoPost);
+
+		int qtdDias = Math.max(1, configPost.getQtdDias());
+		int diasNoCiclo = configPost.getDiasNoCiclo() + 1;
+
+		if(diasNoCiclo >= qtdDias)
+		{
+			// Assunto atual completou o ciclo: zera o contador e rotaciona para o fim da fila,
+			// de modo que amanhã o próximo assunto assuma o topo.
+			configPost.setDiasNoCiclo(0);
+			configPost = configPostDAO.salvar(configPost);
+			programacaoPost.setConfigPost(configPost);
+			programacaoPost.setOrdem(configPost.getProgramacoesPost().size() - 1);
+			salvar(programacaoPost);
+		}
+		else
+		{
+			// Ainda dentro do ciclo: mantém o mesmo assunto no topo para publicar de novo amanhã.
+			configPost.setDiasNoCiclo(diasNoCiclo);
+			configPost = configPostDAO.salvar(configPost);
+			programacaoPost.setConfigPost(configPost);
+			organizarOrdem(configPost);
+		}
 	}
 
 	/**
@@ -161,6 +186,8 @@ public class ProgramacaoPostService
 	{
 		int intervalo = configPost.getUsuario().getPerfilCriador().getIntervalo();
 		configPost.setUltimoEnvio(LocalDate.now().minusDays(intervalo));
+		// Recomeça o ciclo do assunto do topo (publica hoje como dia 1 de qtdDias).
+		configPost.setDiasNoCiclo(0);
 		configPostDAO.salvar(configPost);
 		organizarOrdem(configPost);
 	}

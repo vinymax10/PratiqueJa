@@ -76,6 +76,18 @@
 				</div>
 			</h:panelGroup>
 
+			<h:panelGroup styleClass="pc-field mb-3" layout="block">
+				<p:outputLabel styleClass="pc-label" value="Dias por assunto" for="qtdDias" />
+				<p:inputNumber id="qtdDias" value="#{configPostBean.configPost.qtdDias}"
+					minValue="1" maxValue="90" decimalPlaces="0">
+					<p:ajax event="change" process="@this" listener="#{programacaoPostBean.salvarQtdDias}"
+						update=":growl" />
+				</p:inputNumber>
+				<div class="pc-seg2-tag" style="margin-top:.35rem">
+					O mesmo assunto publica todo dia por esse número de dias antes de o ciclo trocar para o próximo.
+				</div>
+			</h:panelGroup>
+
 		</div>
 
 		<!-- AÇÕES EM MASSA (cards) -->
@@ -142,7 +154,7 @@
 						<div class="pc-item-meta">
 							<span class="pc-chip pc-chip--data">
 								<i class="pi pi-calendar" />
-								<h:outputText value="#{programacaoPost.data}">
+								<h:outputText value="#{programacaoPost.dataInicioBloco}">
 									<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
 								</h:outputText>
 							</span>

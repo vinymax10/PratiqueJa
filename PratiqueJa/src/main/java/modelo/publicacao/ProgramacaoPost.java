@@ -103,6 +103,30 @@ public class ProgramacaoPost implements Serializable, Entidade
 	{
 		LocalDate ultimoEnvio = configPost.getUltimoEnvio();
 		PerfilCriador perfilCriador = configPost.getUsuario().getPerfilCriador();
+		// A postagem é diária: o assunto do topo (ordem 0) fica sempre com data = ultimoEnvio+1.
+		// Quantos dias esse assunto permanece no topo antes de rotacionar é controlado por
+		// ConfigPost.qtdDias (contador diasNoCiclo em registrarEnvio), não pela data.
 		data = ultimoEnvio.plusDays((ordem + 1) * perfilCriador.getIntervalo());
+	}
+
+	/**
+	 * Data de exibição no calendário: o dia em que o BLOCO deste assunto entra no ar. Como cada assunto
+	 * publica diariamente por {@code qtdDias} dias antes de rotacionar, os blocos ficam espaçados de
+	 * {@code qtdDias} em {@code qtdDias} dias (o campo {@code data} é interno/diário, usado só pelo motor).
+	 *
+	 * <p>Deriva o início do bloco atual (do topo) a partir de {@code ultimoEnvio} e {@code diasNoCiclo}:
+	 * {@code inicioBlocoTopo = ultimoEnvio - (diasNoCiclo - 1)}; os demais assuntos somam múltiplos de
+	 * {@code qtdDias} conforme a ordem.</p>
+	 */
+	@jakarta.persistence.Transient
+	public LocalDate getDataInicioBloco()
+	{
+		if(configPost == null || configPost.getUltimoEnvio() == null)
+			return data;
+
+		int qtdDias = Math.max(1, configPost.getQtdDias());
+		int diasNoCiclo = configPost.getDiasNoCiclo();
+		LocalDate inicioBlocoTopo = configPost.getUltimoEnvio().plusDays(1L - diasNoCiclo);
+		return inicioBlocoTopo.plusDays((long) ordem * qtdDias);
 	}
 }

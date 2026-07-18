@@ -56,6 +56,15 @@ public class ConfigPost implements Serializable, Entidade
 	@AuditLabel(value = "último envio")
 	private LocalDate ultimoEnvio = LocalDate.now();
 
+	// Quantos dias cada assunto (o do topo da fila) permanece ativo publicando diariamente antes de
+	// o ciclo rotacionar para o próximo assunto. Ex.: 7 → o mesmo assunto posta todo dia por 7 dias.
+	@AuditLabel(value = "dias por assunto")
+	private int qtdDias = 1;
+
+	// Contador interno: dias já publicados do assunto atual no ciclo. Ao atingir qtdDias, rotaciona.
+	@DiffIgnore
+	private int diasNoCiclo = 0;
+
 	@AuditLabel(value = "ativo")
 	private boolean ativo;
 

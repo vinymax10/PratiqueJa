@@ -265,6 +265,34 @@ public class ProgramacaoPostBean implements Serializable
 		}
 	}
 
+	/**
+	 * Salva quantos dias cada assunto permanece ativo (publicando diariamente) antes de o ciclo
+	 * rotacionar para o próximo. Reinicia o ciclo do assunto atual para a nova duração valer já.
+	 * Mínimo de 1 dia.
+	 */
+	public void salvarQtdDias()
+	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return;
+
+		ConfigPost configPost = configPostBean.getConfigPost();
+		if(configPost.getQtdDias() < 1)
+			configPost.setQtdDias(1);
+
+		try
+		{
+			configPost.setDiasNoCiclo(0);
+			programacaoPostService.salvarConfigPost(configPost);
+			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+			"Atualizado: cada assunto publica por " + configPost.getQtdDias() + " dia(s) antes de trocar.");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível salvar a duração.");
+		}
+	}
+
 	public String removerTodosAcao()
 	{
 		if(!controleAcessoBean.verificaEstaLogado())
