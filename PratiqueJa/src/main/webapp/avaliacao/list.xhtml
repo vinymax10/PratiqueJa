@@ -35,6 +35,11 @@
 		<h:outputText class="linkPage" value="Confecção de Avaliações" />
 	</ui:define>
 
+	<f:metadata>
+		<!-- configAvaliacao presente (card de suporte) → aquele usuário; ausente (menu lateral) → volta pro meu -->
+		<f:viewAction action="#{configAvaliacaoBean.sincronizarPeloRequest()}" />
+	</f:metadata>
+
 	<!-- ═══════ HERO + Histórico unidos num card único ═══════ -->
 	<div class="av-joined">
 
@@ -55,9 +60,10 @@
 		<div class="av-panel">
 
 			<div class="av-list-actions">
-				<p:button value="Nova avaliação"
+				<p:commandButton value="Nova avaliação"
 					icon="pi pi-plus"
-					outcome="/avaliacao/form"
+					action="#{pedidoAvaliacaoBean.novaAvaliacao}"
+					process="@this"
 					styleClass="ui-button-raised ui-button-success" />
 			</div>
 
@@ -134,6 +140,9 @@
 						<p:menuitem value="Editar" icon="pi pi-pencil"
 							outcome="/avaliacao/form">
 							<f:param name="rascunho" value="#{pedido.id}" />
+							<!-- Modo suporte: mantém ?configAvaliacao ao editar o rascunho; omitido no fluxo normal. -->
+							<f:param name="configAvaliacao" value="#{configAvaliacaoBean.configAvaliacao.id}"
+								disable="#{empty configAvaliacaoBean.usuarioVisualizado}" />
 						</p:menuitem>
 					</p:menuButton>
 				</p:column>

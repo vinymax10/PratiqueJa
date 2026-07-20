@@ -48,8 +48,9 @@ public class PageFilter extends Filtro
 			// download direto do bean se acessados sem passar pela página que os inclui):
 			// ramo exclusivo, só admin logado — nenhuma das regras públicas abaixo se aplica,
 			// senão heurísticas como "/questao/" vazariam acesso a /administracao/conteudo/questao/*.
-			// É a ÚNICA área que ainda barra com a tela de acesso negado: as demais telas só
-			// exigem login, e quem não tem vai para a tela inicial (ver destinoNegado abaixo).
+			// É a única área que pode levar à tela de acesso negado — e só para quem ESTÁ logado
+			// mas não é admin. Visitante anônimo (aqui ou em qualquer tela protegida) vai para a
+			// tela inicial, nunca para a de acesso negado (ver destinoNegado abaixo).
 			boolean areaAdmin = uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/");
 
 			// Telas de erro (404/500/acesso negado) sempre acessíveis — senão um acesso negado
@@ -99,7 +100,14 @@ public class PageFilter extends Filtro
 			}
 
 			LOG.info("Acesso={} à url={}", acesso, httpRequest.getServletPath());
-			redirecionar(acesso, areaAdmin ? ACESSO_NEGADO : HOME, request, response, chain);
+
+			// Destino de quem é barrado:
+			// - Não logado (usuario == null): SEMPRE vai para a home (mesmo em URL admin) — nada de
+			//   tela de "acesso negado" para visitante anônimo, só o convite implícito de logar.
+			// - Logado numa área admin sem ser admin: tela de "acesso negado".
+			// - Logado numa área comum: home.
+			String destinoNegado = (usuario != null && areaAdmin) ? ACESSO_NEGADO : HOME;
+			redirecionar(acesso, destinoNegado, request, response, chain);
 		}
 		finally
 		{

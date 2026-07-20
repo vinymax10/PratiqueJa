@@ -1,20 +1,14 @@
 package bean.usuario;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.primefaces.PrimeFaces;
 
-import filtro.usuario.FiltroControleAcesso;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
-import modelo.usuario.ControleAcesso;
+import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
-import service.usuario.ControleAcessoService;
 import web.session.Sessao;
 
 @Data
@@ -24,39 +18,7 @@ public class ControleAcessoBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private ControleAcessoService controleAcessoService;
-
-	@Inject
-	private FiltroControleAcesso filtro;
-
-	private Usuario usuario;
-
-	private ControleAcesso controleAcesso;
-
 	private String mensagem;
-
-	private List<ControleAcesso> controlesAcessos = new ArrayList<>();
-
-	// --- admin: lista ---
-
-	public void filtrar()
-	{
-		this.controlesAcessos = controleAcessoService.buscar(filtro);
-	}
-
-	public void filtrarInit()
-	{
-		filtro.limpar();
-		filtrar();
-	}
-
-	@PostConstruct
-	public void carrega()
-	{
-		usuario = Sessao.getUsuarioLogado();
-		controleAcesso = controleAcessoService.carregarOuCriar(usuario);
-	}
 
 	public boolean verificaEstaLogado()
 	{
@@ -73,55 +35,10 @@ public class ControleAcessoBean implements Serializable
 		PrimeFaces.current().executeScript("PF('upgradeWidget').show()");
 	}
 
-	// --- delegação ao service ---
-
+	/** Conteúdo Premium exige plano pago (qualquer perfil acima do Básico). */
 	public boolean podeAcessarPremium()
 	{
-		return controleAcessoService.podeAcessarPremium(usuario);
-	}
-
-	public boolean podeFazerDownload()
-	{
-		return controleAcessoService.podeFazerDownload(usuario, controleAcesso);
-	}
-
-	public boolean podeResolucaoExercicio()
-	{
-		return controleAcessoService.podeResolucaoExercicio(usuario, controleAcesso);
-	}
-
-	public boolean podeResolucaoQuestao()
-	{
-		return controleAcessoService.podeResolucaoQuestao(usuario, controleAcesso);
-	}
-
-	public boolean podeFazerQuestao()
-	{
-		return controleAcessoService.podeFazerQuestao(usuario, controleAcesso);
-	}
-
-	public void registrarDownload(String pdfPath)
-	{
-		controleAcessoService.registrarDownload(controleAcesso, pdfPath);
-	}
-
-	public void registrarDownload(int paginas)
-	{
-		controleAcessoService.registrarDownload(controleAcesso, paginas);
-	}
-
-	public void registrarResolucaoExercicio()
-	{
-		controleAcessoService.registrarResolucaoExercicio(controleAcesso);
-	}
-
-	public void registrarResolucaoQuestao()
-	{
-		controleAcessoService.registrarResolucaoQuestao(controleAcesso);
-	}
-
-	public void registrarQuestaoFeita()
-	{
-		controleAcessoService.registrarQuestaoFeita(controleAcesso);
+		Usuario usuario = Sessao.getUsuarioLogado();
+		return usuario != null && usuario.getPerfil() != PerfilUsuario.Basico;
 	}
 }

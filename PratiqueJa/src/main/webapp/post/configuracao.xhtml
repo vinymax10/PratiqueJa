@@ -45,6 +45,12 @@
 				<ui:param name="tela" value="configuracao" />
 				<ui:param name="titulo" value="Configuração de Post" />
 			</ui:include>
+			<h:panelGroup layout="block" styleClass="pc-hero-badge"
+				rendered="#{not empty configPostBean.usuarioVisualizado}"
+				title="#{configPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{configPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
 			<h1 class="pc-hero-title">Configuração de Post</h1>
 			<p class="pc-hero-desc">
 				Defina a identidade visual dos seus posts — cores, transparência, logomarca e a programação de envio.
@@ -141,11 +147,11 @@
 							chooseLabel="Selecionar imagem"
 							styleClass="pc-dropzone"
 				    		label="Escolha um arquivo."
-					    	invalidFileMessage="São permitidos somente arquivos png."
-							invalidSizeMessage="O tamanho máximo permitido é de 10MB."
-					    	update="form:imagem"	 >
+					    	invalidFileMessage="São permitidos somente arquivos PNG ou JPG."
+							invalidSizeMessage="O tamanho máximo permitido é de 5MB."
+					    	update="form:imagem :growl"	 >
 					    		<p:validateFile  sizeLimit="5002400" virusScan="true"
-								allowTypes="/(\.|\/)(png)$/"/>
+								allowTypes="/(\.|\/)(png|jpe?g)$/"/>
 							</p:fileUpload>
 					</div>
 				</div>

@@ -27,21 +27,18 @@
 				<ui:param name="tela" value="programacao" />
 				<ui:param name="titulo" value="Programação de Post" />
 			</ui:include>
+			<h:panelGroup layout="block" styleClass="pc-hero-badge"
+				rendered="#{not empty configPostBean.usuarioVisualizado}"
+				title="#{configPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{configPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
 			<h1 class="pc-hero-title">Programação de Post</h1>
 			<p class="pc-hero-desc">
 				Defina o que será publicado e em qual data — arraste para reordenar e use "Enviar agora" para disparar as publicações do dia.
 			</p>
 		</div>
-		<div class="pc-hero-stats">
-			<div class="pc-stat">
-				<span class="pc-stat-label">Usuário</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.usuario.nome}</strong>
-			</div>
-			<div class="pc-stat pc-stat--green">
-				<span class="pc-stat-label">Programações</span>
-				<strong class="pc-stat-value">#{configPostBean.configPost.programacoesPost.size()}</strong>
-			</div>
-		</div>
+		<ui:include src="/post/statsPost.xhtml" />
 	</div>
 
 	<ui:include src="/post/navTabs.xhtml" />
@@ -66,7 +63,7 @@
 					<div class="pc-seg2-opt #{configPostBean.configPost.ativo ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 						<i class="pi pi-play-circle pc-seg2-icon"></i>
 						<span class="pc-seg2-title">Ativa</span>
-						<span class="pc-seg2-tag">Publica todo dia às 8h</span>
+						<span class="pc-seg2-tag">Publica todo dia às 6h</span>
 					</div>
 					<div class="pc-seg2-opt #{!configPostBean.configPost.ativo ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 						<i class="pi pi-pause-circle pc-seg2-icon"></i>

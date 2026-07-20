@@ -303,12 +303,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	public void podeFazerDownloadAssunto()
 	{
 		if(controleAcessoBean.verificaEstaLogado())
-		{
-			if(controleAcessoBean.podeFazerDownload())
-				PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
-			else
-				controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido." + "\nPor favor faça o upgrade de sua conta.");
-		}
+			PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
 	}
 
 	public void podeFazerDownloadMassa()
@@ -316,12 +311,7 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			if(questoes.size() > 0)
-			{
-				if(controleAcessoBean.podeFazerDownload())
-					PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
-				else
-					controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido." + "\nPor favor faça o upgrade de sua conta.");
-			}
+				PrimeFaces.current().executeScript("PF('downloadQuestaoWidget').show()");
 			else
 				Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Nenhuma questão carregada. " + "Por favor utilize o filtro para carregar as questões.");
 		}
@@ -335,34 +325,25 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 
 		if(controleAcessoBean.verificaEstaLogado())
 		{
-			if(controleAcessoBean.podeFazerQuestao())
+			if(questao.getAlternativaEscolhida() != null)
 			{
-				if(questao.getAlternativaEscolhida() != null)
+				computarAlternativaEscolhida(questao.getAlternativaEscolhida());
+				salvarResultadoQuestao(questao);
+
+				boolean acertou = questao.getAlternativaEscolhida().isCorreta();
+				questao.setFeedbackAcertou(acertou);
+
+				if(!acertou)
 				{
-					computarAlternativaEscolhida(questao.getAlternativaEscolhida());
-					salvarResultadoQuestao(questao);
-
-					boolean acertou = questao.getAlternativaEscolhida().isCorreta();
-					questao.setFeedbackAcertou(acertou);
-
-					if(!acertou)
-					{
-						Alternativa correta = entidadeDAO.getAlternativaCorreta(questao);
-						if(correta != null)
-							questao.setFeedbackLetraCorreta(correta.getLetra());
-					}
-
-					if(!questao.isJaFezQuestao())
-					{
-						controleAcessoBean.registrarQuestaoFeita();
-						questao.setJaFezQuestao(true);
-					}
+					Alternativa correta = entidadeDAO.getAlternativaCorreta(questao);
+					if(correta != null)
+						questao.setFeedbackLetraCorreta(correta.getLetra());
 				}
-				else
-					questao.setFeedbackSemSelecao(true);
+
+				questao.setJaFezQuestao(true);
 			}
 			else
-				controleAcessoBean.showUpgrade("Limite mensal para resolver as questões foi excedido." + "\nPor favor faça o upgrade de sua conta.");
+				questao.setFeedbackSemSelecao(true);
 		}
 		return "";
 	}

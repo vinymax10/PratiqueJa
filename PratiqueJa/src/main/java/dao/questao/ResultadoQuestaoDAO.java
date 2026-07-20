@@ -25,6 +25,18 @@ public class ResultadoQuestaoDAO extends DAO<ResultadoQuestao>
 		super(ResultadoQuestao.class);
 	}
 
+	/** Quantidade total de questões que o usuário já resolveu (linhas de ResultadoQuestao). */
+	public long contarTotal(Usuario usuario)
+	{
+		if(usuario == null || usuario.getId() == null)
+			return 0;
+
+		return em.createQuery(
+			"SELECT COUNT(r) FROM ResultadoQuestao r WHERE r.usuario.id = :usuarioId", Long.class)
+			.setParameter("usuarioId", usuario.getId())
+			.getSingleResult();
+	}
+
 	public List<ResultadoQuestao> questoesRealizados(Questao questao, Usuario usuario)
 	{
 

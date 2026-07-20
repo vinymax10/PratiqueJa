@@ -85,6 +85,12 @@
 				<ui:param name="tela" value="gerar-form" />
 				<ui:param name="titulo" value="Gerar Posts — Montar lote" />
 			</ui:include>
+			<h:panelGroup layout="block" styleClass="av-hero-badge"
+				rendered="#{not empty pedidoPostBean.usuarioVisualizado}"
+				title="#{pedidoPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{pedidoPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
 			<h1 class="av-hero-title">Gerar Posts</h1>
 			<p class="av-hero-desc">
 				Monte um lote de posts, salve para configurar com calma e gere quando quiser. Cada post consome 1 crédito.
@@ -117,12 +123,12 @@
 			<h:panelGroup id="painelConteudo" layout="block">
 
 			<!-- modo lista -->
-			<h:panelGroup layout="block" rendered="#{!pedidoPostBean.editandoItem}">
+			<h:panelGroup layout="block" rendered="#{!itemPedidoPostBean.editandoItem}">
 
 			<div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
 				<p:commandButton value="Adicionar Post" icon="pi pi-plus"
 					styleClass="ui-button-raised ui-button-success"
-					action="#{pedidoPostBean.cadastrarItem}"
+					action="#{itemPedidoPostBean.cadastrar}"
 					update="form:painelConteudo" process="@this" resetValues="true" />
 			</div>
 
@@ -173,15 +179,15 @@
 						<div class="av-item-actions">
 							<p:commandButton icon="pi pi-pencil"
 								styleClass="ui-button-flat ui-button-secondary" title="Editar"
-								action="#{pedidoPostBean.editarItem(it)}"
+								action="#{itemPedidoPostBean.editar(it)}"
 								update="form:painelConteudo" process="@this" resetValues="true" />
 							<p:commandButton icon="pi pi-copy"
 								styleClass="ui-button-flat ui-button-secondary" title="Duplicar"
-								action="#{pedidoPostBean.duplicarItem(it)}"
+								action="#{itemPedidoPostBean.duplicar(it)}"
 								update="form:listaItens form:totalizador :growl" process="@this" />
 							<p:commandButton icon="pi pi-trash"
 								styleClass="ui-button-danger ui-button-flat" title="Remover"
-								action="#{pedidoPostBean.removerItem(it)}"
+								action="#{itemPedidoPostBean.removerItem(it)}"
 								update="form:listaItens form:totalizador :growl" process="@this" />
 						</div>
 					</div>
@@ -207,7 +213,11 @@
 
 			<div class="av-actions av-actions--split">
 				<p:button value="Voltar ao histórico" icon="pi pi-arrow-left"
-					outcome="/post/gerar/list" styleClass="ui-button-flat ui-button-plain" />
+					outcome="/post/gerar/list" styleClass="ui-button-flat ui-button-plain">
+					<!-- Modo suporte: mantém ?configPost ao voltar; omitido no fluxo normal. -->
+					<f:param name="configPost" value="#{pedidoPostBean.idConfigSuporte}"
+						disable="#{empty pedidoPostBean.usuarioVisualizado}" />
+				</p:button>
 				<h:panelGroup styleClass="flex align-items-center gap-2" style="display:flex;gap:8px;">
 					<p:commandButton value="Salvar rascunho" icon="pi pi-save"
 						styleClass="ui-button-flat ui-button-secondary"
@@ -226,7 +236,7 @@
 			<!-- fim modo lista -->
 
 			<!-- modo formulário (cadastro/edição de item, inline) -->
-			<h:panelGroup layout="block" rendered="#{pedidoPostBean.editandoItem}">
+			<h:panelGroup layout="block" rendered="#{itemPedidoPostBean.editandoItem}">
 				<ui:include src="/post/gerar/item-form.xhtml" />
 			</h:panelGroup>
 

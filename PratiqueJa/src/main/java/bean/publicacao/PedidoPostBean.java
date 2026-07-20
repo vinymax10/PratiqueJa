@@ -18,6 +18,8 @@ import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.academico.AssuntoDAO;
 import dao.publicacao.PedidoPostDAO;
+import dao.publicacao.ConfigPostDAO;
+import modelo.publicacao.ConfigPost;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -27,10 +29,6 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
-import modelo.exercicio.Nivel;
-import modelo.publicacao.Background;
-import modelo.publicacao.FormatoPost;
-import modelo.publicacao.ImagemPost;
 import modelo.publicacao.ItemPedidoPost;
 import modelo.publicacao.PedidoPost;
 import modelo.publicacao.PerfilCriador;
@@ -39,8 +37,8 @@ import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Usuario;
 import bean.seguranca.SessaoBean;
 import service.publicacao.CreditoPostService;
-import service.publicacao.FilaGeracaoPostService;
 import service.publicacao.MontadorPostService;
+import service.publicacao.PostFormService;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -63,18 +61,6 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private List<Assunto> assuntos;
 
-	/** Item em edição (assunto + nível + formato + fundo + quantidade). */
-	private ItemPedidoPost item;
-
-	/** true = formulário inline em modo de adição; false = edição de um item existente. */
-	private boolean cadastroItem = true;
-
-	/** true = o formulário inline de cadastro de item está aberto (substitui a lista). */
-	private boolean editandoItem = false;
-
-	/** Item da lista sendo editado (quando cadastroItem = false). */
-	private ItemPedidoPost itemOriginal;
-
 	private int postsUsadosNoMes;
 	private int postsUsadosTotal;
 
@@ -86,13 +72,10 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private AssuntoDAO assuntoDAO;
 
 	@Inject
-	private ImagemPostBean imagemPostBean;
-
-	@Inject
 	private MontadorPostService montadorService;
 
 	@Inject
-	private FilaGeracaoPostService filaGeracaoService;
+	private PostFormService postFormService;
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
@@ -102,6 +85,18 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	@Inject
 	private CreditoPostService creditoPostService;
+
+	@Inject
+	private ConfigPostDAO configPostDAO;
+
+	/**
+	 * Usuário cujos posts estão sendo visualizados quando um ADMIN abre a lista com {@code ?configPost=ID}
+	 * (para dar suporte). {@code null} = o próprio usuário logado (fluxo normal).
+	 */
+	private Usuario usuarioVisualizado;
+
+	/** Id do {@code ?configPost} em modo suporte, para reanexar o parâmetro nas navegações (list↔form). */
+	private Long idConfigSuporte;
 
 	public PedidoPostBean()
 	{
@@ -116,6 +111,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		historico = new ArrayList<>();
 		postsUsadosNoMes = 0;
 		postsUsadosTotal = 0;
+		resolverUsuarioVisualizado();
 		try
 		{
 			assuntos = assuntoDAO.listarOpcoesAtivas();
@@ -126,7 +122,6 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 			assuntos = new ArrayList<>();
 		}
 		carregarOuNovo();
-		novoItem();
 		try
 		{
 			carregarHistorico();
@@ -158,7 +153,8 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	private void novoPedido()
 	{
 		entidade = new PedidoPost();
-		Usuario usuario = sessaoBean.getUsuario();
+		// Modo suporte: o pedido pertence ao usuário atendido (dono do configPost), não ao admin logado.
+		Usuario usuario = usuarioAlvo();
 		entidade.setUsuario(usuario);
 		if(usuario != null)
 			entidade.setConfigPost(usuario.getConfigPost());
@@ -174,7 +170,8 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 			try
 			{
 				PedidoPost rascunho = entidadeDAO.carrega(Long.valueOf(idParam));
-				Usuario usuario = sessaoBean.getUsuario();
+				// Posse pelo usuário-alvo: em modo suporte o admin edita o rascunho do usuário atendido.
+				Usuario usuario = usuarioAlvo();
 				if(rascunho != null && usuario != null && rascunho.getUsuario() != null
 					&& usuario.getId().equals(rascunho.getUsuario().getId())
 					&& rascunho.getStatus() == StatusPedidoPost.RASCUNHO)
@@ -191,91 +188,36 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		novoPedido();
 	}
 
-	private void novoItem()
-	{
-		item = new ItemPedidoPost();
-		item.setFormato(FormatoPost.Feed);
-		item.setQuantidade(1);
-		// Já deixa um nível e um assunto selecionados para não adicionar item incompleto.
-		item.getNiveis().add(Nivel.Nivel1);
-		if(assuntos != null && !assuntos.isEmpty())
-			item.setAssunto(assuntos.get(0));
-	}
-
-	// ── Itens (formulário inline) ─────────────────────────────────────
-
-	/** Abre o formulário inline em modo de adição. */
-	public void cadastrarItem()
-	{
-		cadastroItem = true;
-		editandoItem = true;
-		itemOriginal = null;
-		novoItem();
-	}
-
-	/** Abre o formulário inline em modo de edição, carregando uma cópia do item selecionado. */
-	public void editarItem(ItemPedidoPost alvo)
-	{
-		cadastroItem = false;
-		editandoItem = true;
-		itemOriginal = alvo;
-		item = alvo.copia();
-	}
-
-	/** Fecha o formulário inline sem salvar. */
-	public void cancelarItem()
-	{
-		editandoItem = false;
-		itemOriginal = null;
-		novoItem();
-	}
-
-	/** Confirma: adiciona um novo item ou aplica a edição no item original, e fecha o formulário. */
-	public void salvarItem()
-	{
-		if(cadastroItem)
-		{
-			item.setPedidoPost(entidade);
-			item.setOrdem(entidade.getItens().size());
-			entidade.getItens().add(item);
-		}
-		else if(itemOriginal != null)
-		{
-			itemOriginal.aplicarEdicao(item);
-		}
-		editandoItem = false;
-		itemOriginal = null;
-		novoItem();
-	}
-
-	/** Duplica um item da lista. */
-	public void duplicarItem(ItemPedidoPost alvo)
-	{
-		ItemPedidoPost copia = alvo.copia();
-		copia.setPedidoPost(entidade);
-		copia.setOrdem(entidade.getItens().size());
-		entidade.getItens().add(copia);
-	}
-
-	public void removerItem(ItemPedidoPost alvo)
-	{
-		entidade.getItens().removeIf(i -> i == alvo);
-		reordenar();
-	}
-
-	private void reordenar()
-	{
-		List<ItemPedidoPost> itens = entidade.getItens();
-		for(int i = 0; i < itens.size(); i++)
-			itens.get(i).setOrdem(i);
-	}
-
 	public int totalCreditos()
 	{
 		return entidade.getItens().stream().mapToInt(ItemPedidoPost::getCreditos).sum();
 	}
 
 	// ── Solicitação ───────────────────────────────────────────────────
+
+	/**
+	 * Início da geração (botão "Gerar posts" na list). Exige o login ANTES de abrir o formulário:
+	 * assim o usuário deslogado não preenche a configuração toda para só ser barrado na geração e
+	 * perder o trabalho. Deslogado: abre o login e permanece na list (após logar, clica de novo).
+	 * Logado: navega para o formulário.
+	 */
+	public String novoPost()
+	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return null;
+
+		return "/post/gerar/form?faces-redirect=true" + sufixoSuporte();
+	}
+
+	/**
+	 * Sufixo {@code &configPost=ID} para reanexar o modo suporte do admin nas navegações (list→form,
+	 * form→list); vazio no fluxo normal. Sem isso o parâmetro se perde no redirect e o admin volta a
+	 * gerenciar a própria config em vez da do usuário atendido.
+	 */
+	private String sufixoSuporte()
+	{
+		return (usuarioVisualizado != null && idConfigSuporte != null) ? "&configPost=" + idConfigSuporte : "";
+	}
 
 	public String solicitar()
 	{
@@ -285,29 +227,43 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		if(!validar())
 			return null;
 
-		prepararPedido();
-		entidade.setCodigoBatch(MontadorPostService.gerarCodigoBatch());
-		entidade.setDataSolicitacao(LocalDateTime.now());
-		entidade.setStatus(StatusPedidoPost.AGUARDANDO);
-
-		entidadeDAO.salvar(entidade);
-		filaGeracaoService.enfileirar(entidade.getId());
+		postFormService.solicitarGeracao(entidade, usuarioAlvo());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO,
 			"Geração iniciada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("postNovoCodigo", entidade.getCodigoBatch());
 
-		return urlLista + "?faces-redirect=true";
+		return urlLista + "?faces-redirect=true" + sufixoSuporte();
 	}
 
 	private boolean validar()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioAlvo();
 
 		if(usuario == null || usuario.getConfigPost() == null)
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR,
 				"Configure seu perfil de posts (logo, cores) antes de gerar conteúdo.");
+			return false;
+		}
+
+		// Campos obrigatórios da configuração — sem eles a geração produziria post inválido
+		// (a logo, por ex., é usada direto no layout: configPost.getLogo() daria NullPointer).
+		ConfigPost config = usuario.getConfigPost();
+		List<String> faltando = new ArrayList<>();
+		if(config.getLogo() == null)
+			faltando.add("logomarca");
+		if(config.getEstilo() == null)
+			faltando.add("estilo do post");
+		if(config.getCorDestaque() == null || config.getCorDestaque().isBlank())
+			faltando.add("cor de destaque");
+		if(config.getFinalidadeCta() == null)
+			faltando.add("finalidade do CTA");
+
+		if(!faltando.isEmpty())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR,
+				"Complete a configuração de posts antes de gerar. Faltando: " + String.join(", ", faltando) + ".");
 			return false;
 		}
 
@@ -351,7 +307,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	/** Usuário em teste grátis: plano não renovável (cota total fixa). */
 	public boolean isModoTrial()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioAlvo();
 		if(usuario == null)
 			return false;
 		return !usuario.getPerfilCriador().isRenovavel();
@@ -359,7 +315,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	public int trialRestante()
 	{
-		return creditoPostService.creditosRestantes(sessaoBean.getUsuario(), planoAtual());
+		return creditoPostService.creditosRestantes(usuarioAlvo(), planoAtual());
 	}
 
 	/** Salva o pedido como rascunho (sem gerar), para o usuário continuar a configuração depois. */
@@ -368,14 +324,11 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		if(!controleAcessoBean.verificaEstaLogado())
 			return null;
 
-		prepararPedido();
-		entidade.setStatus(StatusPedidoPost.RASCUNHO);
-
-		entidade = entidadeDAO.salvar(entidade);
+		entidade = postFormService.salvarRascunho(entidade, usuarioAlvo());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO,
 			"Rascunho salvo. Gere quando terminar de configurar.");
-		return urlLista + "?faces-redirect=true";
+		return urlLista + "?faces-redirect=true" + sufixoSuporte();
 	}
 
 	/** Gera um rascunho salvo direto do histórico (valida cota e dispara a geração). */
@@ -383,23 +336,6 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	{
 		entidade = rascunho;
 		return solicitar();
-	}
-
-	/**
-	 * Preenche os campos comuns antes de salvar ou solicitar: usuário, configPost, quantidade,
-	 * progresso, e garante codigoBatch e dataSolicitacao quando ainda não definidos.
-	 */
-	private void prepararPedido()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		entidade.setUsuario(usuario);
-		entidade.setConfigPost(usuario.getConfigPost());
-		entidade.setQuantidade(totalCreditos());
-		entidade.setProgresso(0);
-		if(entidade.getCodigoBatch() == null)
-			entidade.setCodigoBatch(MontadorPostService.gerarCodigoBatch());
-		if(entidade.getDataSolicitacao() == null)
-			entidade.setDataSolicitacao(LocalDateTime.now());
 	}
 
 	// ── Progresso / download ──────────────────────────────────────────
@@ -506,7 +442,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	private PerfilCriador planoAtual()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioAlvo();
 		return usuario != null ? usuario.getPerfilCriador() : PerfilCriador.Basico;
 	}
 
@@ -522,7 +458,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 
 	public int cotaDisponivel()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioAlvo();
 		int rollover = usuario != null ? usuario.getCreditoRolloverPost() : 0;
 		return getCreditosMensais() + rollover;
 	}
@@ -535,7 +471,7 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 	/** Créditos disponíveis independente do modo (trial ou plano ativo). */
 	public int creditosDisponiveis()
 	{
-		return creditoPostService.creditosRestantes(sessaoBean.getUsuario(), planoAtual());
+		return creditoPostService.creditosRestantes(usuarioAlvo(), planoAtual());
 	}
 
 	public String descricaoPlano()
@@ -550,77 +486,65 @@ public class PedidoPostBean extends PaiBean<PedidoPost, PedidoPostDAO, Permissao
 		return LIMITE_TRIAL_GRATIS;
 	}
 
-	// ── Selects ───────────────────────────────────────────────────────
-
-	public FormatoPost[] getFormatos()
-	{
-		return FormatoPost.values();
-	}
-
-	public modelo.exercicio.Nivel[] getNiveis()
-	{
-		return modelo.exercicio.Nivel.values();
-	}
-
-	/** Qtd de imagens personalizadas do formato em edição (habilita a opção "Personalizada"). */
-	public int getQtdImagensPersonalizadas()
-	{
-		boolean feed = item != null && item.getFormato() == FormatoPost.Feed;
-		return imagemPostBean.imagemPost(feed).size();
-	}
-
-	/**
-	 * Em "Específica", garante que haja sempre uma imagem do pool atual selecionada
-	 * (evita adicionar item sem imagem). Em "Aleatória", a imagem é sorteada na geração.
-	 */
-	public void ajustarImagemFundo()
-	{
-		if(item == null || item.isBackgroundAleatorio())
-			return;
-
-		boolean feed = item.getFormato() == FormatoPost.Feed;
-		if(item.isBasePadrao())
-		{
-			if(item.getPadrao() == null)
-			{
-				List<Background> padroes = feed ? imagemPostBean.getImagensFeed() : imagemPostBean.getImagensReel();
-				if(padroes != null && !padroes.isEmpty())
-					item.setPadrao(padroes.get(0));
-			}
-		}
-		else
-		{
-			if(item.getBackground() == null)
-			{
-				List<ImagemPost> personalizadas = imagemPostBean.imagemPost(feed);
-				if(personalizadas != null && !personalizadas.isEmpty())
-					item.setBackground(personalizadas.get(0));
-			}
-		}
-	}
-
-	/** Ao trocar o formato, a imagem específica é de outro pool (Feed x Reel): limpa e re-seleciona. */
-	public void mudarFormatoItem()
-	{
-		if(item == null)
-			return;
-		item.setBackground(null);
-		item.setPadrao(null);
-		ajustarImagemFundo();
-	}
-
 	// ── Utilitários ───────────────────────────────────────────────────
 
 	private void carregarHistorico()
 	{
-		historico = entidadeDAO.buscarPorUsuario(sessaoBean.getUsuario());
+		historico = entidadeDAO.buscarPorUsuario(usuarioAlvo());
+	}
+
+	/** Usuário efetivo da lista: o visualizado pelo admin (se houver) ou o próprio logado. */
+	private Usuario usuarioAlvo()
+	{
+		return usuarioVisualizado != null ? usuarioVisualizado : sessaoBean.getUsuario();
+	}
+
+	/**
+	 * Resolve o {@code ?configPost=ID} do request: se o usuário logado é admin, carrega o ConfigPost
+	 * e passa a exibir a lista do dono dele. Fora disso (não-admin ou sem parâmetro), fica no fluxo
+	 * normal (o próprio logado). Evita que um não-admin veja posts de terceiros forjando o parâmetro.
+	 */
+	private void resolverUsuarioVisualizado()
+	{
+		usuarioVisualizado = null;
+		idConfigSuporte = null;
+		Usuario logado = sessaoBean.getUsuario();
+		if(logado == null || !logado.isAdmin())
+			return;
+
+		String cfg = FacesContext.getCurrentInstance().getExternalContext()
+			.getRequestParameterMap().get("configPost");
+		if(cfg == null || cfg.isBlank())
+			return;
+
+		try
+		{
+			ConfigPost configPost = configPostDAO.getConfigPost(Long.valueOf(cfg));
+			// Só marca "modo suporte" quando o dono é OUTRO usuário (logado != detentor do configPost).
+			if(configPost != null && configPost.getUsuario() != null
+				&& !configPost.getUsuario().getId().equals(logado.getId()))
+			{
+				usuarioVisualizado = configPost.getUsuario();
+				idConfigSuporte = configPost.getId();
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Falha ao resolver usuário do configPost para visualização admin", e);
+		}
+	}
+
+	/** Usuário que o admin está visualizando (null quando é a própria lista do logado). Para banner na UI. */
+	public Usuario getUsuarioVisualizado()
+	{
+		return usuarioVisualizado;
 	}
 
 	private void calcularUso()
 	{
 		LocalDateTime inicioMes = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
 		LocalDateTime inicioProximo = inicioMes.plusMonths(1);
-		postsUsadosNoMes = entidadeDAO.somarPostsNoMes(sessaoBean.getUsuario(), inicioMes, inicioProximo);
-		postsUsadosTotal = entidadeDAO.somarPostsTotal(sessaoBean.getUsuario());
+		postsUsadosNoMes = entidadeDAO.somarPostsNoMes(usuarioAlvo(), inicioMes, inicioProximo);
+		postsUsadosTotal = entidadeDAO.somarPostsTotal(usuarioAlvo());
 	}
 }

@@ -1,0 +1,104 @@
+/*
+ * Design system compartilhado dos formulários da administração (.uf-form).
+ * Aplique a classe "uf-form" no <h:form> e inclua este CSS via OpenGraph:
+ *   <ui:define name="OpenGraph"><link rel="stylesheet" href="/css/admin-form.css" type="text/css"/></ui:define>
+ * Referência original: /administracao/usuarios/usuario/form.xhtml
+ */
+.uf-form{
+	--uf-card:#fff; --uf-border:#e7ecf4; --uf-text:#1f2a37; --uf-muted:#6b7688;
+	--uf-primary:#2563eb; --uf-primary-strong:#1d4ed8; --uf-primary-soft:#eef4ff;
+	width:100%; margin:10px 0; background:var(--uf-card);
+	border:1px solid var(--uf-border); border-radius:20px;
+	box-shadow:0 1px 2px rgba(16,24,40,.04), 0 10px 30px rgba(16,24,40,.05);
+	padding:26px 30px 18px;
+}
+/* Cabeçalhos de seção — barrinha de acento em gradiente, sem azul escuro forte */
+.uf-form .title-divisor{
+	font-size:.98rem; font-weight:700; color:var(--uf-text);
+	margin:24px 0 16px; padding-left:13px; position:relative; border:0;
+}
+.uf-form .title-divisor::before{
+	content:""; position:absolute; left:0; top:1px; bottom:1px; width:4px;
+	border-radius:4px; background:var(--uf-primary);
+}
+.uf-form .title-divisor:first-of-type{ margin-top:4px; }
+/* Labels suaves */
+.uf-form .ui-outputlabel{
+	color:var(--uf-muted); font-weight:600; font-size:.8rem;
+	margin-bottom:6px; display:inline-block; letter-spacing:.01em;
+}
+/* Campos limpos, arredondados, foco azul suave */
+.uf-form .ui-inputtext, .uf-form .ui-selectonemenu,
+.uf-form .ui-password, .uf-form .ui-inputfield{
+	border:1px solid var(--uf-border) !important; border-radius:11px !important;
+	background:#fff !important; box-shadow:none !important; color:var(--uf-text) !important;
+}
+.uf-form .ui-inputtext:enabled:focus,
+.uf-form .ui-inputfield:enabled:focus,
+.uf-form .ui-selectonemenu.ui-state-focus{
+	border-color:var(--uf-primary) !important;
+	box-shadow:0 0 0 3px rgba(37,99,235,.16) !important;
+}
+.uf-form .ui-selectonemenu .ui-selectonemenu-trigger{ background:transparent; color:var(--uf-muted); }
+/* O label interno do selectOneMenu também é .ui-inputfield e ganhava borda própria,
+   criando um contorno duplo. Mantém só a borda do container. */
+.uf-form .ui-selectonemenu .ui-selectonemenu-label{
+	border:0 !important; border-radius:0 !important; box-shadow:none !important; background:transparent !important;
+}
+/* Botões arredondados; primário azul médio (nada de navy) */
+.uf-form .ui-button{ border-radius:11px !important; font-weight:600; }
+.uf-form .ui-button.ui-button-primary{
+	background:var(--uf-primary) !important; border-color:var(--uf-primary) !important;
+}
+.uf-form .ui-button.ui-button-primary:hover{
+	background:var(--uf-primary-strong) !important; border-color:var(--uf-primary-strong) !important;
+}
+.uf-form .divisor{ margin:8px 0 18px; }
+/* ToggleSwitch — trilho azul da marca quando ligado */
+body .ui-toggleswitch.ui-toggleswitch-checked .ui-toggleswitch-slider{
+	background:#2563eb !important; border-color:#2563eb !important;
+}
+.uf-form .circle{
+	border-radius:50%; width:96px; height:96px; object-fit:cover;
+	border:3px solid #fff; box-shadow:0 0 0 3px var(--uf-primary-soft);
+}
+/* Stat cards — compactos, 4 na mesma linha (ícone à esquerda, número + label à direita) */
+.uf-stats{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:4px; width:100%; }
+.uf-stat{
+	flex:1 1 200px; display:flex; align-items:center; gap:12px;
+	background:#fff; border:1px solid var(--uf-border); border-radius:14px;
+	padding:12px 16px; box-shadow:0 1px 2px rgba(16,24,40,.04);
+	transition:box-shadow .16s ease, transform .16s ease;
+}
+.uf-stat:hover{ box-shadow:0 6px 18px rgba(16,24,40,.08); transform:translateY(-2px); }
+.uf-stat-ico{
+	width:40px; height:40px; border-radius:11px; flex:none; display:flex;
+	align-items:center; justify-content:center; font-size:1.1rem;
+}
+.uf-stat-body{ display:flex; flex-direction:column; line-height:1.15; }
+.uf-stat-num{ font-size:1.55rem; font-weight:800; color:var(--uf-text); }
+.uf-stat-label{ font-size:.76rem; color:var(--uf-muted); font-weight:600; }
+.uf-stat--blue   .uf-stat-ico{ background:#eef2ff; color:#4f6ef7; }
+.uf-stat--purple .uf-stat-ico{ background:#f3effe; color:#7c5cff; }
+.uf-stat--green  .uf-stat-ico{ background:#e8f8ef; color:#16a34a; }
+.uf-stat--amber  .uf-stat-ico{ background:#fef3e2; color:#d97706; }
+/* Action cards — atalhos para os produtos do usuário (config post, posts, avaliações) */
+.uf-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:4px; }
+.uf-action{
+	flex:1 1 280px; display:flex; align-items:center; gap:14px; text-decoration:none;
+	background:#fff; border:1px solid var(--uf-border); border-radius:16px; padding:15px 18px;
+	box-shadow:0 1px 2px rgba(16,24,40,.04);
+	transition:box-shadow .16s ease, transform .16s ease, border-color .16s ease;
+}
+.uf-action:hover{ box-shadow:0 8px 22px rgba(16,24,40,.09); transform:translateY(-2px); border-color:#d7deea; }
+.uf-action-ico{
+	width:46px; height:46px; border-radius:13px; flex:none; display:flex;
+	align-items:center; justify-content:center; font-size:1.25rem;
+}
+.uf-action-body{ display:flex; flex-direction:column; gap:2px; flex:1; }
+.uf-action-title{ font-size:.96rem; font-weight:700; color:var(--uf-text); }
+.uf-action-desc{ font-size:.78rem; color:var(--uf-muted); line-height:1.35; }
+.uf-action-go{ color:#b6c0d4; font-size:1.05rem; flex:none; }
+.uf-action--blue   .uf-action-ico{ background:#eef2ff; color:#4f6ef7; }
+.uf-action--purple .uf-action-ico{ background:#f3effe; color:#7c5cff; }
+.uf-action--green  .uf-action-ico{ background:#e8f8ef; color:#16a34a; }

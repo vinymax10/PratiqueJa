@@ -578,7 +578,7 @@
 .pc-dropzone .ui-fileupload-upload,
 .pc-dropzone .ui-fileupload-cancel { display: none !important; }
 
-/* ── Recurso exclusivo Premium/Master (Background Personalizado) ──────────── */
+/* ── Recurso exclusivo Premium/Master (Background) ──────────── */
 .pc-premium-banner {
     display: flex;
     align-items: center;

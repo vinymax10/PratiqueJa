@@ -14,7 +14,7 @@
 	--babyblue: #2196F3;
 	--azul-claro: #f4f9ff;
 	--side-bar: #f4f9ff;
-	--divisor: #BDD2FC;
+	--azul: #BDD2FC;
 	--menubar-bg-color: rgb(236, 241, 255);
 	--menubar-bg-color-hover: #d7e1ff;
 }
@@ -548,6 +548,19 @@ body .ui-growl .ui-growl-item-container.ui-growl-info .ui-growl-image::before {
 	padding: .7rem 1rem !important;
 }
 
+/* Cabeçalho azul sólido das tabelas do administrativo — mesmo estilo de /post/gerar/list */
+.tableStatus.ui-datatable thead tr th {
+	background: #2563eb !important;
+	color: #fff !important;
+	border-color: rgba(255, 255, 255, .18) !important;
+}
+.tableStatus.ui-datatable thead tr th .ui-column-title,
+.tableStatus.ui-datatable thead tr th .ui-sortable-column-icon {
+	color: #fff !important;
+}
+.tableStatus.ui-datatable thead tr th:first-child { border-top-left-radius: 10px; }
+.tableStatus.ui-datatable thead tr th:last-child { border-top-right-radius: 10px; }
+
 .headFit table > thead > tr > th {
 	padding: .5rem 1rem !important;
 }
@@ -679,15 +692,15 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 
 .title-divisor {
 	color: var(--azul);
-	border-bottom: 2px solid var(--divisor);
-	padding-bottom: 10px;
+	border-bottom: 2px solid var(--azul);
+	padding: 5px 0;
 	width: 100%;
 	margin: 1rem;
 }
 
 .divisor {
 	color: var(--azul);
-	border-bottom: 2px solid var(--divisor);
+	border-bottom: 2px solid var(--azul);
 	width: 100%;
 }
 
@@ -716,7 +729,7 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 	align-items: flex-end;
 	justify-content: space-between;
 	color: var(--azul);
-	border-bottom: 2px solid var(--divisor);
+	border-bottom: 2px solid var(--azul);
 	padding-bottom: 10px;
 	width: 100%;
 	margin: 1rem;
@@ -999,7 +1012,7 @@ body .ui-tabs .ui-tabs-panels .ui-tabs-panel {
 }
 
 .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
-	border-color: var(--divisor) !important;
+	border-color: var(--azul) !important;
 }
 
 .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active a {

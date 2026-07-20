@@ -9,13 +9,20 @@
 		<h:outputText class="linkPage" value="#{questaoBean.nome}" />
 	</ui:define>
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/admin-form.css" type="text/css" />
+		<!-- Breadcrumb igual ao da list (form sem item próprio no menu). -->
+		<script>window.t2Bread = { main: 'Questões', sub: 'Questões' };</script>
+	</ui:define>
+
+
 	<f:metadata>
 	    <f:viewParam name="chave" value="#{questaoBean.chave}" />
 	    <f:viewParam name="cadastro" value="#{questaoBean.cadastro}" converter="jakarta.faces.Boolean"/>
 	    <f:viewAction action="#{questaoBean.carregar()}" />
 	</f:metadata>
 
-	<h:form id="form" class="form" >
+	<h:form id="form" class="form uf-form" >
 
 		<h4 class="title-divisor" >Questão</h4>
 

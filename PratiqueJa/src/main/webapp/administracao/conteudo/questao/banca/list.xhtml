@@ -47,7 +47,7 @@
 
 		<ui:include src="/administracao/conteudo/questao/banca/filtro.xhtml" />
 
-		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true" reflow="true"
 			var="entidade" value="#{bancaBean.opcoes}" widgetVar="dtBanca"
 			selection="#{bancaBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
 			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"

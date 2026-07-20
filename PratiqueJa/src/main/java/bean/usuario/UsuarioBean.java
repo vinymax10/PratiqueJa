@@ -14,8 +14,6 @@ import dao.usuario.UsuarioDAO;
 import filtro.usuario.FiltroUsuario;
 import infra.Graphics;
 import jakarta.annotation.PostConstruct;
-import service.configuracao.DiretorioService;
-import util.FileAux;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -26,11 +24,16 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.auditoria.TipoEvento;
+import modelo.avaliacao.PerfilAvaliacao;
+import modelo.publicacao.PerfilCriador;
 import modelo.seguranca.PermissaoPadrao;
 import modelo.usuario.Imagem;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Usuario;
+import service.configuracao.DiretorioService;
+import service.usuario.EstatisticaUsuarioService;
 import service.usuario.UsuarioService;
+import util.FileAux;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,6 +49,16 @@ public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Us
 
 	@Inject
 	private DiretorioService diretorioService;
+
+	@Inject
+	private EstatisticaUsuarioService estatisticaUsuarioService;
+
+	// Estatísticas do usuário (calculadas sob demanda e cacheadas por id enquanto a view viver).
+	private Long estatisticasParaId;
+	private int totalPosts;
+	private int totalAvaliacoes;
+	private int totalExerciciosResolvidos;
+	private int totalQuestoesResolvidas;
 
 	private String senha;
 	private String confirmaSenha;
@@ -139,6 +152,64 @@ public class UsuarioBean extends PaiBean<Usuario, UsuarioDAO, PermissaoPadrao<Us
 	public PerfilUsuario[] getPerfis()
 	{
 		return PerfilUsuario.values();
+	}
+
+	public PerfilCriador[] getPerfisCriador()
+	{
+		return PerfilCriador.values();
+	}
+
+	public PerfilAvaliacao[] getPerfisAvaliacao()
+	{
+		return PerfilAvaliacao.values();
+	}
+
+	// ── Estatísticas do usuário (form do admin) ───────────────────────
+
+	/** Calcula as 4 estatísticas uma vez por usuário carregado (evita reconsultar a cada getter do JSF). */
+	private void carregarEstatisticas()
+	{
+		Usuario u = getEntidade();
+		Long id = u != null ? u.getId() : null;
+
+		if(id != null && id.equals(estatisticasParaId))
+			return;
+
+		estatisticasParaId = id;
+
+		EstatisticaUsuarioService.Estatisticas e = estatisticaUsuarioService.calcular(u);
+		totalPosts = e.posts();
+		totalAvaliacoes = e.avaliacoes();
+		totalExerciciosResolvidos = e.exerciciosResolvidos();
+		totalQuestoesResolvidas = e.questoesResolvidas();
+	}
+
+	/** Total de posts gerados pelo usuário (soma das quantidades, exceto rascunhos). */
+	public int getTotalPosts()
+	{
+		carregarEstatisticas();
+		return totalPosts;
+	}
+
+	/** Total de avaliações geradas pelo usuário (soma das quantidades, exceto rascunhos). */
+	public int getTotalAvaliacoes()
+	{
+		carregarEstatisticas();
+		return totalAvaliacoes;
+	}
+
+	/** Total de exercícios que o usuário já resolveu. */
+	public int getTotalExerciciosResolvidos()
+	{
+		carregarEstatisticas();
+		return totalExerciciosResolvidos;
+	}
+
+	/** Total de questões que o usuário já resolveu. */
+	public int getTotalQuestoesResolvidas()
+	{
+		carregarEstatisticas();
+		return totalQuestoesResolvidas;
 	}
 
 }

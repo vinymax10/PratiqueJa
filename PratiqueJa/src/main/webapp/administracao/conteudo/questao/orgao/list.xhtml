@@ -47,7 +47,7 @@
 
 		<ui:include src="/administracao/conteudo/questao/orgao/filtro.xhtml" />
 
-		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true" reflow="true"
 			var="entidade" value="#{orgaoBean.opcoes}" widgetVar="dtOrgao"
 			selection="#{orgaoBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
 			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"

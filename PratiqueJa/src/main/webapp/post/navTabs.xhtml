@@ -12,6 +12,7 @@
 			<h:link outcome="/post/gerar/list"
 				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/gerar/') ? 'pc-tab-active' : ''}">
 				<i class="fa-solid fa-bolt" /> Gerar Posts
+				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 			</h:link>
 
 			<h:link outcome="/post/configuracao"
@@ -30,10 +31,10 @@
 				<f:param name="tab" value="1" />
 			</h:link>
 
-			<h:link outcome="/post/backgroundPersonalizado"
-				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/backgroundPersonalizado') ? 'pc-tab-active' : ''}"
+			<h:link outcome="/post/background"
+				styleClass="pc-tab #{facesContext.viewRoot.viewId.contains('/background') ? 'pc-tab-active' : ''}"
 				onclick="return t2PostRequerLogin(#{sessaoBean.logado})">
-				<i class="fa-solid fa-file-image" /> Background Personalizado
+				<i class="fa-solid fa-file-image" /> Background
 				<f:param name="configPost" value="#{configPostBean.configPost.id != null ? configPostBean.configPost.id : ''}" />
 				<f:param name="tab" value="3" />
 			</h:link>

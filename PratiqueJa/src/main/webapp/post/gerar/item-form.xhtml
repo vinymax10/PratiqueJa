@@ -15,10 +15,10 @@
 
 				<!-- Estado recolhido: só o assunto selecionado -->
 				<div class="pc-assunto-selected">
-					<img class="pc-seg2-thumb" src="#{pedidoPostBean.item.assunto.endImageThumb()}"
-						alt="#{pedidoPostBean.item.assunto.nome}"
-						onerror="this.onerror=null;this.src='#{pedidoPostBean.item.assunto.endImageCapa()}';" />
-					<span class="pc-seg2-title">#{pedidoPostBean.item.assunto.nome}</span>
+					<img class="pc-seg2-thumb" src="#{itemPedidoPostBean.entidade.assunto.endImageThumb()}"
+						alt="#{itemPedidoPostBean.entidade.assunto.nome}"
+						onerror="this.onerror=null;this.src='#{itemPedidoPostBean.entidade.assunto.endImageCapa()}';" />
+					<span class="pc-seg2-title">#{itemPedidoPostBean.entidade.assunto.nome}</span>
 					<button type="button" class="pc-assunto-trocar" onclick="pcAbrirAssuntos(this)">
 						<i class="pi pi-pencil" /> Trocar
 					</button>
@@ -34,14 +34,14 @@
 						</button>
 					</div>
 					<div class="pc-seg2 pc-seg2--assunto">
-						<p:selectOneButton value="#{pedidoPostBean.item.assunto}"
+						<p:selectOneButton value="#{itemPedidoPostBean.entidade.assunto}"
 							layout="custom" unselectable="false" required="true"
 							requiredMessage="Selecione um assunto." converter="generic">
 							<f:selectItems value="#{pedidoPostBean.assuntos}" var="assunto"
 								itemValue="#{assunto}" itemLabel="#{assunto.nome}" />
 						</p:selectOneButton>
 						<ui:repeat value="#{pedidoPostBean.assuntos}" var="assunto">
-							<div class="pc-seg2-opt pc-seg2-opt--assunto #{assunto == pedidoPostBean.item.assunto ? 'ui-state-active' : ''}"
+							<div class="pc-seg2-opt pc-seg2-opt--assunto #{assunto == itemPedidoPostBean.entidade.assunto ? 'ui-state-active' : ''}"
 								role="radio" tabindex="0" onclick="pcEscolherAssunto(this)">
 								<img class="pc-seg2-thumb" src="#{assunto.endImageThumb()}" alt="#{assunto.nome}"
 									onerror="this.onerror=null;this.src='#{assunto.endImageCapa()}';" />
@@ -56,13 +56,13 @@
 			<h:panelGroup styleClass="pc-field" layout="block">
 				<p:outputLabel styleClass="pc-label" value="Níveis" />
 				<div class="pc-seg2 pc-seg2--nivel">
-					<p:selectManyButton value="#{pedidoPostBean.item.niveis}" layout="custom"
+					<p:selectManyButton value="#{itemPedidoPostBean.entidade.niveis}" layout="custom"
 						required="true" requiredMessage="Selecione ao menos um nível.">
-						<f:selectItems value="#{pedidoPostBean.niveis}" var="opcao"
+						<f:selectItems value="#{itemPedidoPostBean.niveis}" var="opcao"
 							itemValue="#{opcao}" itemLabel="#{opcao.nome}" />
 					</p:selectManyButton>
-					<ui:repeat value="#{pedidoPostBean.niveis}" var="opcao" varStatus="st">
-						<div class="pc-seg2-opt #{pedidoPostBean.item.niveis.contains(opcao) ? 'ui-state-active' : ''}"
+					<ui:repeat value="#{itemPedidoPostBean.niveis}" var="opcao" varStatus="st">
+						<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.niveis.contains(opcao) ? 'ui-state-active' : ''}"
 							role="checkbox" tabindex="0">
 							<i class="pi pi-gauge pc-seg2-icon"></i>
 							<span class="pc-seg2-title">#{opcao.nome}</span>
@@ -78,18 +78,18 @@
 				<h:panelGroup styleClass="pc-field" layout="block">
 					<p:outputLabel styleClass="pc-label" value="Escolha do Background" />
 					<div class="pc-seg2">
-						<p:selectOneButton value="#{pedidoPostBean.item.backgroundAleatorio}" layout="custom" unselectable="false">
+						<p:selectOneButton value="#{itemPedidoPostBean.entidade.backgroundAleatorio}" layout="custom" unselectable="false">
 							<f:selectItem itemValue="#{true}" itemLabel="Aleatória" />
 							<f:selectItem itemValue="#{false}" itemLabel="Específica" />
-							<p:ajax event="change" process="@this" listener="#{pedidoPostBean.ajustarImagemFundo}" update="form:blocoFundoOpcoes form:blocoFundoGaleria" />
+							<p:ajax event="change" process="@this" listener="#{itemPedidoPostBean.ajustarImagemFundo}" update="form:blocoFundoOpcoes form:blocoFundoGaleria" />
 						</p:selectOneButton>
-						<div class="pc-seg2-opt #{pedidoPostBean.item.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
+						<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
 							role="radio" tabindex="#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? '-1' : '0'}">
 							<i class="fa fa-solid fa-shuffle pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Aleatória</span>
 							<span class="pc-seg2-tag">Sistema escolhe</span>
 						</div>
-						<div class="pc-seg2-opt #{!pedidoPostBean.item.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
+						<div class="pc-seg2-opt #{!itemPedidoPostBean.entidade.backgroundAleatorio ? 'ui-state-active' : ''} #{configPostBean.configPost.usuario.perfilCriador=='Basico' ? 'ui-state-disabled' : ''}"
 							role="radio" tabindex="#{configPostBean.configPost.usuario.perfilCriador=='Basico' ? '-1' : '0'}">
 							<i class="fa fa-regular fa-circle-check pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Específica</span>
@@ -101,19 +101,19 @@
 				<h:panelGroup styleClass="pc-field" layout="block">
 					<p:outputLabel styleClass="pc-label" value="Origem do Background" />
 					<div class="pc-seg2">
-						<p:selectOneButton value="#{pedidoPostBean.item.basePadrao}" layout="custom" unselectable="false">
+						<p:selectOneButton value="#{itemPedidoPostBean.entidade.basePadrao}" layout="custom" unselectable="false">
 							<f:selectItem itemValue="#{true}" itemLabel="Padrão" />
 							<f:selectItem itemValue="#{false}" itemLabel="Personalizada" />
-							<p:ajax event="change" process="@this" listener="#{pedidoPostBean.ajustarImagemFundo}" update="form:blocoFundoOpcoes form:blocoFundoGaleria" />
+							<p:ajax event="change" process="@this" listener="#{itemPedidoPostBean.ajustarImagemFundo}" update="form:blocoFundoOpcoes form:blocoFundoGaleria" />
 						</p:selectOneButton>
-						<div class="pc-seg2-opt #{pedidoPostBean.item.basePadrao ? 'ui-state-active' : ''} #{(pedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
-							role="radio" tabindex="#{(pedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? '-1' : '0'}">
+						<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.basePadrao ? 'ui-state-active' : ''} #{(itemPedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
+							role="radio" tabindex="#{(itemPedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? '-1' : '0'}">
 							<i class="fa fa-solid fa-image pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Padrão</span>
 							<span class="pc-seg2-tag">Imagens padrão</span>
 						</div>
-						<div class="pc-seg2-opt #{!pedidoPostBean.item.basePadrao ? 'ui-state-active' : ''} #{(pedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
-							role="radio" tabindex="#{(pedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? '-1' : '0'}">
+						<div class="pc-seg2-opt #{!itemPedidoPostBean.entidade.basePadrao ? 'ui-state-active' : ''} #{(itemPedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? 'ui-state-disabled' : ''}"
+							role="radio" tabindex="#{(itemPedidoPostBean.qtdImagensPersonalizadas==0 or configPostBean.configPost.usuario.perfilCriador=='Basico') ? '-1' : '0'}">
 							<i class="fa fa-solid fa-circle-user pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Personalizada</span>
 							<span class="pc-seg2-tag">Suas imagens</span>
@@ -127,18 +127,18 @@
 			<h:panelGroup styleClass="pc-field" layout="block">
 				<p:outputLabel styleClass="pc-label" value="Formato" />
 				<div class="pc-seg2">
-					<p:selectOneButton value="#{pedidoPostBean.item.formato}" layout="custom"
+					<p:selectOneButton value="#{itemPedidoPostBean.entidade.formato}" layout="custom"
 						unselectable="false" required="true" requiredMessage="Selecione o formato.">
-						<f:selectItems value="#{pedidoPostBean.formatos}" var="fmt"
+						<f:selectItems value="#{itemPedidoPostBean.formatos}" var="fmt"
 							itemValue="#{fmt}" itemLabel="#{fmt.nome}" />
-						<p:ajax event="change" process="@this" listener="#{pedidoPostBean.mudarFormatoItem}" update="form:blocoFundoOpcoes form:blocoFundoGaleria form:blocoAltItem" />
+						<p:ajax event="change" process="@this" listener="#{itemPedidoPostBean.mudarFormatoItem}" update="form:blocoFundoOpcoes form:blocoFundoGaleria form:blocoAltItem" />
 					</p:selectOneButton>
-					<div class="pc-seg2-opt #{pedidoPostBean.item.formato == 'Feed' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+					<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.formato == 'Feed' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 						<i class="pi pi-image pc-seg2-icon"></i>
 						<span class="pc-seg2-title">Feed</span>
 						<span class="pc-seg2-tag">1080x1350px</span>
 					</div>
-					<div class="pc-seg2-opt #{pedidoPostBean.item.formato == 'Reel' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+					<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.formato == 'Reel' ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 						<i class="pi pi-video pc-seg2-icon"></i>
 						<span class="pc-seg2-title">Reel</span>
 						<span class="pc-seg2-tag">1080x1920px</span>
@@ -148,19 +148,19 @@
 
 			<!-- Alternativa no Reel (só quando Reel) -->
 			<h:panelGroup id="blocoAltItem" layout="block" styleClass="pc-contents">
-				<h:panelGroup styleClass="pc-field" layout="block" rendered="#{pedidoPostBean.item.formato == 'Reel'}">
+				<h:panelGroup styleClass="pc-field" layout="block" rendered="#{itemPedidoPostBean.entidade.formato == 'Reel'}">
 					<p:outputLabel styleClass="pc-label" value="Alternativa no Reel" />
 					<div class="pc-seg2">
-						<p:selectOneButton value="#{pedidoPostBean.item.alternativaReel}" layout="custom" unselectable="false">
+						<p:selectOneButton value="#{itemPedidoPostBean.entidade.alternativaReel}" layout="custom" unselectable="false">
 							<f:selectItem itemValue="#{true}" itemLabel="Com" />
 							<f:selectItem itemValue="#{false}" itemLabel="Sem" />
 						</p:selectOneButton>
-						<div class="pc-seg2-opt #{pedidoPostBean.item.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<div class="pc-seg2-opt #{itemPedidoPostBean.entidade.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 							<i class="pi pi-list-check pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Com</span>
 							<span class="pc-seg2-tag">Exibe alternativas</span>
 						</div>
-						<div class="pc-seg2-opt #{!pedidoPostBean.item.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
+						<div class="pc-seg2-opt #{!itemPedidoPostBean.entidade.alternativaReel ? 'ui-state-active' : ''}" role="radio" tabindex="0">
 							<i class="pi pi-align-left pc-seg2-icon"></i>
 							<span class="pc-seg2-title">Sem</span>
 							<span class="pc-seg2-tag">Só o enunciado</span>
@@ -173,19 +173,19 @@
 			<h:panelGroup id="blocoFundoGaleria" layout="block" styleClass="pc-contents">
 
 				<!-- FEED -->
-				<h:panelGroup layout="block" styleClass="pc-contents" rendered="#{pedidoPostBean.item.formato == 'Feed'}">
+				<h:panelGroup layout="block" styleClass="pc-contents" rendered="#{itemPedidoPostBean.entidade.formato == 'Feed'}">
 					<h:panelGroup styleClass="pc-field-wide" layout="block">
 						<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
-							rendered="#{!pedidoPostBean.item.backgroundAleatorio
-							and !pedidoPostBean.item.basePadrao
+							rendered="#{!itemPedidoPostBean.entidade.backgroundAleatorio
+							and !itemPedidoPostBean.entidade.basePadrao
 							and imagemPostBean.imagemPost(true).size()>0}">
 							<p:outputLabel styleClass="pc-label" value="Background" />
 							<!-- Estado recolhido: só o background selecionado -->
 							<div class="pc-bg-selected">
 								<p:graphicImage styleClass="pc-bg-selected-thumb"
-									value="#{pedidoPostBean.item.background.endImagem}" alt="#{pedidoPostBean.item.background.nome}"
+									value="#{itemPedidoPostBean.entidade.background.endImagem}" alt="#{itemPedidoPostBean.entidade.background.nome}"
 									cache="false" stream="false" />
-								<span class="pc-bg-selected-name">#{pedidoPostBean.item.background != null ? pedidoPostBean.item.background.nome : 'Selecione um background'}</span>
+								<span class="pc-bg-selected-name">#{itemPedidoPostBean.entidade.background != null ? itemPedidoPostBean.entidade.background.nome : 'Selecione um background'}</span>
 								<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
 									<i class="pi pi-pencil" /> Trocar
 								</button>
@@ -199,13 +199,13 @@
 									</button>
 								</div>
 								<div class="pc-seg2 pc-seg2--bg">
-									<p:selectOneButton value="#{pedidoPostBean.item.background}"
+									<p:selectOneButton value="#{itemPedidoPostBean.entidade.background}"
 										layout="custom" unselectable="false" required="true" converter="generic">
 										<f:selectItems value="#{imagemPostBean.imagemPost(true)}" var="image"
 											itemValue="#{image}" itemLabel="#{image.nome}" />
 									</p:selectOneButton>
 									<ui:repeat value="#{imagemPostBean.imagemPost(true)}" var="image">
-										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == pedidoPostBean.item.background ? 'ui-state-active' : ''}"
+										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == itemPedidoPostBean.entidade.background ? 'ui-state-active' : ''}"
 											role="radio" tabindex="0" onclick="pcEscolherBg(this)">
 											<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endImagem}"
 												alt="#{image.nome}" cache="false" stream="false" />
@@ -216,13 +216,13 @@
 						</h:panelGroup>
 
 						<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
-							rendered="#{!pedidoPostBean.item.backgroundAleatorio and pedidoPostBean.item.basePadrao}">
+							rendered="#{!itemPedidoPostBean.entidade.backgroundAleatorio and itemPedidoPostBean.entidade.basePadrao}">
 							<p:outputLabel styleClass="pc-label" value="Background" />
 							<div class="pc-bg-selected">
 								<p:graphicImage styleClass="pc-bg-selected-thumb"
-									value="#{pedidoPostBean.item.padrao.endereco}" alt="#{pedidoPostBean.item.padrao.nome}"
+									value="#{itemPedidoPostBean.entidade.padrao.endereco}" alt="#{itemPedidoPostBean.entidade.padrao.nome}"
 									cache="false" stream="false" />
-								<span class="pc-bg-selected-name">#{pedidoPostBean.item.padrao != null ? pedidoPostBean.item.padrao.nome : 'Selecione um background'}</span>
+								<span class="pc-bg-selected-name">#{itemPedidoPostBean.entidade.padrao != null ? itemPedidoPostBean.entidade.padrao.nome : 'Selecione um background'}</span>
 								<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
 									<i class="pi pi-pencil" /> Trocar
 								</button>
@@ -235,13 +235,13 @@
 									</button>
 								</div>
 								<div class="pc-seg2 pc-seg2--bg">
-									<p:selectOneButton value="#{pedidoPostBean.item.padrao}"
+									<p:selectOneButton value="#{itemPedidoPostBean.entidade.padrao}"
 										layout="custom" unselectable="false" required="true" converter="generic">
 										<f:selectItems value="#{imagemPostBean.imagensFeed}" var="image"
 											itemValue="#{image}" itemLabel="#{image.nome}" />
 									</p:selectOneButton>
 									<ui:repeat value="#{imagemPostBean.imagensFeed}" var="image">
-										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == pedidoPostBean.item.padrao ? 'ui-state-active' : ''}"
+										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == itemPedidoPostBean.entidade.padrao ? 'ui-state-active' : ''}"
 											role="radio" tabindex="0" onclick="pcEscolherBg(this)">
 											<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endereco}"
 												alt="#{image.nome}" cache="false" stream="false" />
@@ -254,18 +254,18 @@
 				</h:panelGroup>
 
 				<!-- REEL -->
-				<h:panelGroup layout="block" styleClass="pc-contents" rendered="#{pedidoPostBean.item.formato == 'Reel'}">
+				<h:panelGroup layout="block" styleClass="pc-contents" rendered="#{itemPedidoPostBean.entidade.formato == 'Reel'}">
 					<h:panelGroup styleClass="pc-field-wide" layout="block">
 						<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
-							rendered="#{!pedidoPostBean.item.backgroundAleatorio
-							and !pedidoPostBean.item.basePadrao
+							rendered="#{!itemPedidoPostBean.entidade.backgroundAleatorio
+							and !itemPedidoPostBean.entidade.basePadrao
 							and imagemPostBean.imagemPost(false).size()>0}">
 							<p:outputLabel styleClass="pc-label" value="Background" />
 							<div class="pc-bg-selected">
 								<p:graphicImage styleClass="pc-bg-selected-thumb pc-bg-selected-thumb--reel"
-									value="#{pedidoPostBean.item.background.endImagem}" alt="#{pedidoPostBean.item.background.nome}"
+									value="#{itemPedidoPostBean.entidade.background.endImagem}" alt="#{itemPedidoPostBean.entidade.background.nome}"
 									cache="false" stream="false" />
-								<span class="pc-bg-selected-name">#{pedidoPostBean.item.background != null ? pedidoPostBean.item.background.nome : 'Selecione um background'}</span>
+								<span class="pc-bg-selected-name">#{itemPedidoPostBean.entidade.background != null ? itemPedidoPostBean.entidade.background.nome : 'Selecione um background'}</span>
 								<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
 									<i class="pi pi-pencil" /> Trocar
 								</button>
@@ -278,13 +278,13 @@
 									</button>
 								</div>
 								<div class="pc-seg2 pc-seg2--bg pc-seg2--bg-reel">
-									<p:selectOneButton value="#{pedidoPostBean.item.background}"
+									<p:selectOneButton value="#{itemPedidoPostBean.entidade.background}"
 										layout="custom" unselectable="false" required="true" converter="generic">
 										<f:selectItems value="#{imagemPostBean.imagemPost(false)}" var="image"
 											itemValue="#{image}" itemLabel="#{image.nome}" />
 									</p:selectOneButton>
 									<ui:repeat value="#{imagemPostBean.imagemPost(false)}" var="image">
-										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == pedidoPostBean.item.background ? 'ui-state-active' : ''}"
+										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == itemPedidoPostBean.entidade.background ? 'ui-state-active' : ''}"
 											role="radio" tabindex="0" onclick="pcEscolherBg(this)">
 											<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endImagem}"
 												alt="#{image.nome}" cache="false" stream="false" />
@@ -295,13 +295,13 @@
 						</h:panelGroup>
 
 						<h:panelGroup layout="block" styleClass="pc-field pc-bg-picker"
-							rendered="#{!pedidoPostBean.item.backgroundAleatorio and pedidoPostBean.item.basePadrao}">
+							rendered="#{!itemPedidoPostBean.entidade.backgroundAleatorio and itemPedidoPostBean.entidade.basePadrao}">
 							<p:outputLabel styleClass="pc-label" value="Background" />
 							<div class="pc-bg-selected">
 								<p:graphicImage styleClass="pc-bg-selected-thumb pc-bg-selected-thumb--reel"
-									value="#{pedidoPostBean.item.padrao.endereco}" alt="#{pedidoPostBean.item.padrao.nome}"
+									value="#{itemPedidoPostBean.entidade.padrao.endereco}" alt="#{itemPedidoPostBean.entidade.padrao.nome}"
 									cache="false" stream="false" />
-								<span class="pc-bg-selected-name">#{pedidoPostBean.item.padrao != null ? pedidoPostBean.item.padrao.nome : 'Selecione um background'}</span>
+								<span class="pc-bg-selected-name">#{itemPedidoPostBean.entidade.padrao != null ? itemPedidoPostBean.entidade.padrao.nome : 'Selecione um background'}</span>
 								<button type="button" class="pc-bg-trocar" onclick="pcAbrirBg(this)">
 									<i class="pi pi-pencil" /> Trocar
 								</button>
@@ -314,13 +314,13 @@
 									</button>
 								</div>
 								<div class="pc-seg2 pc-seg2--bg pc-seg2--bg-reel">
-									<p:selectOneButton value="#{pedidoPostBean.item.padrao}"
+									<p:selectOneButton value="#{itemPedidoPostBean.entidade.padrao}"
 										layout="custom" unselectable="false" required="true" converter="generic">
 										<f:selectItems value="#{imagemPostBean.imagensReel}" var="image"
 											itemValue="#{image}" itemLabel="#{image.nome}" />
 									</p:selectOneButton>
 									<ui:repeat value="#{imagemPostBean.imagensReel}" var="image">
-										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == pedidoPostBean.item.padrao ? 'ui-state-active' : ''}"
+										<div class="pc-seg2-opt pc-seg2-opt--bg #{image == itemPedidoPostBean.entidade.padrao ? 'ui-state-active' : ''}"
 											role="radio" tabindex="0" onclick="pcEscolherBg(this)">
 											<p:graphicImage styleClass="pc-seg2-bg-thumb" value="#{image.endereco}"
 												alt="#{image.nome}" cache="false" stream="false" />
@@ -338,7 +338,7 @@
 			<h:panelGroup styleClass="pc-field" layout="block">
 				<p:outputLabel styleClass="pc-label" for="@next" value="Quantidade de exercícios" />
 				<p:inputNumber minValue="1" maxValue="50" decimalPlaces="0"
-					value="#{pedidoPostBean.item.quantidade}"
+					value="#{itemPedidoPostBean.entidade.quantidade}"
 					required="true" requiredMessage="Informe a quantidade de exercícios." />
 			</h:panelGroup>
 
@@ -347,14 +347,14 @@
 		<div class="av-actions av-actions--split" style="margin-top:18px;">
 			<p:commandButton value="Cancelar" icon="pi pi-times"
 				styleClass="ui-button-flat ui-button-plain"
-				action="#{pedidoPostBean.cancelarItem}"
+				action="#{itemPedidoPostBean.cancelarItem}"
 				update="form:painelConteudo" process="@this" />
 
 			<p:commandButton id="btnSalvarItemInline"
-				value="#{pedidoPostBean.cadastroItem ? 'Adicionar' : 'Salvar'}"
+				value="#{itemPedidoPostBean.cadastro ? 'Adicionar' : 'Salvar'}"
 				icon="pi pi-check"
-				styleClass="ui-button-raised #{pedidoPostBean.cadastroItem ? 'ui-button-success' : 'btn-primary'}"
-				action="#{pedidoPostBean.salvarItem}"
+				styleClass="ui-button-raised #{itemPedidoPostBean.cadastro ? 'ui-button-success' : 'btn-primary'}"
+				action="#{itemPedidoPostBean.salvarItem}"
 				update="form:painelConteudo :growl" process="@form" />
 		</div>
 

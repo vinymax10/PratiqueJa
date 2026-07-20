@@ -26,6 +26,12 @@
 				<ui:param name="tela" value="ctas" />
 				<ui:param name="titulo" value="CTAs" />
 			</ui:include>
+			<h:panelGroup layout="block" styleClass="pc-hero-badge"
+				rendered="#{not empty configPostBean.usuarioVisualizado}"
+				title="#{configPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{configPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
 			<h1 class="pc-hero-title">CTAs</h1>
 			<p class="pc-hero-desc">
 				Cadastre as chamadas para ação (CTAs) por finalidade, usadas nas legendas das publicações.

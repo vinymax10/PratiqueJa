@@ -60,6 +60,11 @@
 		<h:outputText class="linkPage" value="Gerar Posts" />
 	</ui:define>
 
+	<f:metadata>
+		<!-- configPost presente (card/aba) → aquele usuário; ausente (menu lateral "Post") → volta pro meu -->
+		<f:viewAction action="#{configPostBean.sincronizarPeloRequest()}" />
+	</f:metadata>
+
 	<!-- HERO (card azul) -->
 	<div class="pc-hero">
 		<div class="pc-hero-head">
@@ -68,6 +73,12 @@
 				<ui:param name="tela" value="gerar" />
 				<ui:param name="titulo" value="Gerar Posts" />
 			</ui:include>
+			<h:panelGroup layout="block" styleClass="pc-hero-badge"
+				rendered="#{not empty pedidoPostBean.usuarioVisualizado}"
+				title="#{pedidoPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{pedidoPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
 			<h1 class="pc-hero-title">Gerar Posts</h1>
 			<p class="pc-hero-desc">
 				Monte lotes de posts, gere quando quiser e baixe o ZIP com tudo pronto. Cada post consome 1 crédito.
@@ -88,8 +99,9 @@
 		<div class="pc-panel">
 
 			<div class="av-list-actions">
-				<p:button value="Gerar posts" icon="pi pi-bolt"
-					outcome="/post/gerar/form"
+				<p:commandButton value="Gerar posts" icon="pi pi-bolt"
+					action="#{pedidoPostBean.novoPost}"
+					process="@this"
 					styleClass="ui-button-raised ui-button-success" />
 			</div>
 
@@ -166,6 +178,9 @@
 						<p:menuitem value="Editar" icon="pi pi-pencil"
 							outcome="/post/gerar/form">
 							<f:param name="rascunho" value="#{pedido.id}" />
+							<!-- Modo suporte: mantém ?configPost ao editar o rascunho; omitido no fluxo normal. -->
+							<f:param name="configPost" value="#{pedidoPostBean.idConfigSuporte}"
+								disable="#{empty pedidoPostBean.usuarioVisualizado}" />
 						</p:menuitem>
 					</p:menuButton>
 				</p:column>

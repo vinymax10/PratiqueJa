@@ -1,27 +1,18 @@
 package bean.questao;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
-
-import org.apache.xmlbeans.impl.common.Levenshtein;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.ReorderEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import bean.exercicio.ConfigDownload;
 import bean.academico.AnoBean;
 import bean.academico.BancaBean;
 import bean.academico.DisciplinaBean;
 import bean.academico.OrgaoBean;
+import bean.exercicio.ConfigDownload;
 import bean.util.Mensagem;
 import dao.questao.QuestaoDAO;
 import filtro.questao.FiltroQuestao;
@@ -34,16 +25,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
 import modelo.questao.Alternativa;
-import modelo.questao.Dificuldade;
-import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
-import modelo.academico.Ano;
-import modelo.academico.Banca;
-import modelo.academico.Disciplina;
-import modelo.academico.Orgao;
-import scraping.QuestaoQ;
-import web.session.SessionContext;
+import service.questao.QuestaoImportService;
+import web.session.Sessao;
 
 @Data
 @Named
@@ -94,7 +79,10 @@ public class GestaoQuestaoBean implements Serializable
 	
 	@Inject
 	private QuestaoBean questaoBean;
-	
+
+	@Inject
+	private QuestaoImportService questaoImportService;
+
 	public String cadastrar()
 	{
 		activeIndex = 0;
@@ -175,7 +163,7 @@ public class GestaoQuestaoBean implements Serializable
 	{
 		if(idQuestao!=0)
 		{
-			SessionContext.getInstance().setAttribute("id", null);
+			Sessao.set("id", null);
 			this.questao = questaoDAO.getQuestao(idQuestao);
 			cadastro = false;
 		}
@@ -220,197 +208,12 @@ public class GestaoQuestaoBean implements Serializable
 		}
 	}
 
+	/** Importa em massa as questões serializadas do scraping (delegado ao {@link QuestaoImportService}). */
 	public void adicionarQuestoesSalvas()
 	{
-		for(int index = inicioCarregamento; index < fimCarregamento; index++)
-		{
-			QuestaoQ questaoQ = deSerializar("" + index);
-
-			questao = new Questao();
-			questao.setRevisada(false);
-			questao.setOrdemInsercao(index);
-			questao.setChave(questaoQ.getId());
-			questao.setProva(questaoQ.getProva());
-			questao.setDificuldade(Dificuldade.Facil);
-
-			List<Ano> anos = anoBean.getEntidadeDAO().filtrar(questaoQ.getAno().trim());
-			if(anos.size() > 0)
-			{
-				Ano ano = anos.get(0);
-				questao.setAno(ano);
-			}
-			else
-			{
-				Ano ano = new Ano();
-				ano.setNome(questaoQ.getAno().trim());
-				anoBean.getEntidadeDAO().salvar(ano);
-				anoBean.getOpcoes().add(ano);
-				questao.setAno(ano);
-			}
-
-			List<Banca> bancas = bancaBean.getEntidadeDAO().filtrar(questaoQ.getBanca().trim());
-			if(bancas.size() > 0)
-			{
-				Banca bestBanca = null;
-				if(bancas.size() > 1)
-				{
-					int distMin = Integer.MAX_VALUE;
-					int dist;
-					for(Banca banca : bancas)
-					{
-						dist = Levenshtein.distance(banca.getSigla(), questaoQ.getBanca().trim());
-						if(dist < distMin)
-						{
-							distMin = dist;
-							bestBanca = banca;
-						}
-					}
-				}
-				else
-					bestBanca = bancas.get(0);
-
-				questao.setBanca(bestBanca);
-			}
-			else
-			{
-				Banca banca = new Banca();
-				banca.setNome(questaoQ.getBanca().trim());
-				banca.setSigla(questaoQ.getOrgao().trim());
-				bancaBean.getEntidadeDAO().salvar(banca);
-				bancaBean.getOpcoes().add(banca);
-				questao.setBanca(banca);
-			}
-
-			List<Orgao> orgaos = orgaoBean.getEntidadeDAO().filtrar(questaoQ.getOrgao().trim());
-			if(orgaos.size() > 0)
-			{
-				Orgao bestOrgao = null;
-				if(orgaos.size() > 1)
-				{
-					int distMin = Integer.MAX_VALUE;
-					int dist;
-					for(Orgao orgao : orgaos)
-					{
-						dist = Levenshtein.distance(orgao.getSigla(), questaoQ.getOrgao().trim());
-						if(dist < distMin)
-						{
-							distMin = dist;
-							bestOrgao = orgao;
-						}
-					}
-				}
-				else
-					bestOrgao = orgaos.get(0);
-
-				questao.setOrgao(bestOrgao);
-			}
-			else
-			{
-				Orgao orgao = new Orgao();
-				orgao.setNome(questaoQ.getOrgao().trim());
-				orgao.setSigla(questaoQ.getOrgao().trim());
-				orgaoBean.getEntidadeDAO().salvar(orgao);
-				orgaoBean.getOpcoes().add(orgao);
-				questao.setOrgao(orgao);
-			}
-
-			Disciplina disciplina = null;
-			List<Disciplina> disciplinas = disciplinaBean.getEntidadeDAO().filtrar(questaoQ.getDisciplina().trim());
-			if(disciplinas.size() > 0)
-			{
-				disciplina = disciplinas.get(0);
-				questao.setDisciplina(disciplina);
-			}
-
-			questaoDAO.salvar(questao);
-
-			for(scraping.Paragrafo paragrafoQ : questaoQ.getParagrafos())
-			{
-				modelo.questao.Paragrafo paragrafo = new Paragrafo();
-				paragrafo.setQuestao(questao);
-				if(paragrafoQ.getTexto() != null)
-				{
-					paragrafo.setTexto(paragrafoQ.getTexto());
-					paragrafo.setOrdem(questao.getParagrafos().size());
-					questao.getParagrafos().add(paragrafo);
-				}
-				else if(paragrafoQ.getImagem() != null && !paragrafoQ.getImagem().equals(""))
-				{
-					SerialBlob serialBlob = getImage(paragrafoQ.getImagem());
-					ImagemFile imagemFile = new ImagemFile();
-
-					imagemFile.setFile(serialBlob);
-					imagemFile.setEndImagem(paragrafoQ.getImagem());
-
-					paragrafo.setImagemFile(imagemFile);
-
-					paragrafo.setOrdem(questao.getParagrafos().size());
-					questao.getParagrafos().add(paragrafo);
-				}
-			}
-
-			questaoDAO.salvar(questao);
-
-			for(scraping.Alternativa alternativaQ : questaoQ.getAlternativas())
-			{
-				modelo.questao.Alternativa alternativa = new Alternativa();
-				alternativa.setQuestao(questao);
-				if(alternativaQ.getTexto() != null && !alternativaQ.getTexto().equals(""))
-				{
-					String str = alternativaQ.getTexto();
-					if(str.charAt(str.length() - 1) == '.')
-						str = str.substring(0, str.length() - 1);
-
-					if(str.charAt(str.length() - 1) == ';')
-						str = str.substring(0, str.length() - 1);
-
-					alternativa.setTexto(str);
-					alternativa.setCorreta(alternativaQ.isCorreta());
-					alternativa.setOrdem(questao.getAlternativas().size());
-					questao.getAlternativas().add(alternativa);
-				}
-			}
-
-			questaoDAO.salvar(questao);
-		}
-		FacesContext.getCurrentInstance().addMessage("growl", new FacesMessage(FacesMessage.SEVERITY_INFO, "Carregamento realizado com sucesso.", ""));
-	}
-
-	public QuestaoQ deSerializar(String nome)
-	{
-		QuestaoQ questao = null;
-		try
-		{
-			FileInputStream fin = new FileInputStream("C://QuestoesQ//" + nome + ".ser");
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			questao = (QuestaoQ) ois.readObject();
-			ois.close();
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		return questao;
-	}
-
-	private SerialBlob getImage(String endImagem)
-	{
-		SerialBlob serialBlob = null;
-		try
-		{
-			BufferedImage bi = ImageIO.read(new File("C://" + endImagem));
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			String termos[] = endImagem.split("\\.");
-			String extensao = termos[termos.length - 1];
-			ImageIO.write(bi, extensao, baos);
-			byte[] bytes = baos.toByteArray();
-			serialBlob = new SerialBlob(bytes);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return serialBlob;
+		int importadas = questaoImportService.importarQuestoesSalvas(inicioCarregamento, fimCarregamento);
+		FacesContext.getCurrentInstance().addMessage("growl",
+			new FacesMessage(FacesMessage.SEVERITY_INFO, importadas + " questão(ões) importada(s) com sucesso.", ""));
 	}
 
 	public void reorderParagrafo(ReorderEvent event)

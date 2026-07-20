@@ -69,8 +69,8 @@ public class EnvioPostService
 		logger.info("----------------Envio Post iniciado----------------");
 	}
 
-	// Uma vez por dia, às 08:00 (horário do servidor): processa as programações do dia.
-	@Schedule(hour = "8", minute = "0", second = "0", persistent = false)
+	// Uma vez por dia, às 06:00 (horário do servidor): processa as programações do dia.
+	@Schedule(hour = "6", minute = "0", second = "0", persistent = false)
 	public void enviarProgramacao()
 	{
 		if(!enviando.compareAndSet(false, true))

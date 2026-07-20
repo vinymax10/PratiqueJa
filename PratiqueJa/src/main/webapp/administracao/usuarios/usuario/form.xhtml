@@ -9,35 +9,88 @@
 		<h:outputText class="linkPage" value="#{usuarioBean.nome}" />
 	</ui:define>
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/admin-form.css" type="text/css" />
+		<!-- Breadcrumb igual ao da list (form sem item próprio no menu). -->
+		<script>window.t2Bread = { main: 'Usuários', sub: 'Usuários' };</script>
+	</ui:define>
+
 	<f:metadata>
 	    <f:viewParam name="chave" value="#{usuarioBean.chave}" />
 	    <f:viewParam name="cadastro" value="#{usuarioBean.cadastro}" converter="jakarta.faces.Boolean"/>
 	    <f:viewAction action="#{usuarioBean.carregar()}" />
 	</f:metadata>
 
-	<h:form id="form" class="form" >
+	<h:form id="form" class="form uf-form" >
 
 		<h4 class="title-divisor" >Usuário</h4>
 		
-		 <div class="formgrid grid">
-	    	
-			<div  class="campo col-12 xl:col-6" style="text-align:center;margin-bottom:0">
-				<h:panelGroup id="image" rendered="#{!usuarioBean.lista}">
-			
-		    		<h:graphicImage class="circle" value="#{usuarioBean.entidade.foto.endereco}"
-		    		rendered="#{not empty usuarioBean.entidade.foto}" />
+		<div class="formgrid grid">
+			<div class="campo col-12" style="text-align:center;margin-bottom:0">
+				<h:panelGroup id="image" rendered="#{!usuarioBean.lista and not empty usuarioBean.entidade.foto}">
+					<h:graphicImage class="circle" value="#{usuarioBean.entidade.foto.endereco}" />
 				</h:panelGroup>
 			</div>
-			
-           	<div class="col-12 xl:col-6 p-text-right" >
-				<p:button  value="ConfogPost" styleClass="ui-button-raised ui-button-flat"
-				icon="pi pi-instagram"
-				href="/post/configuracao.xhtml?configPost=#{usuarioBean.entidade.configPost.id}"
-				style="margin-left:15px;" target="_blank">
-				</p:button>
-			</div>
 		</div>
+
+		<h:panelGroup layout="block" rendered="#{usuarioBean.entidade.id != null}">
+			<h4 class="title-divisor">Produtos do usuário — atalhos de suporte</h4>
+			<div class="uf-actions">
+				<a class="uf-action uf-action--purple" target="_blank"
+				   href="/post/gerar/list.xhtml?configPost=#{usuarioBean.entidade.configPost.id}">
+					<span class="uf-action-ico"><i class="pi pi-images" /></span>
+					<span class="uf-action-body">
+						<span class="uf-action-title">Posts do usuário</span>
+						<span class="uf-action-desc">Veja a lista de posts que este usuário já gerou.</span>
+					</span>
+					<i class="pi pi-external-link uf-action-go" />
+				</a>
+				<a class="uf-action uf-action--green" target="_blank"
+				   href="/avaliacao/list.xhtml?configAvaliacao=#{usuarioBean.entidade.configAvaliacao.id}">
+					<span class="uf-action-ico"><i class="pi pi-file-edit" /></span>
+					<span class="uf-action-body">
+						<span class="uf-action-title">Avaliações do usuário</span>
+						<span class="uf-action-desc">Veja as avaliações deste usuário para dar suporte a quem tem dificuldade.</span>
+					</span>
+					<i class="pi pi-external-link uf-action-go" />
+				</a>
+			</div>
+		</h:panelGroup>
 				
+		<h:panelGroup layout="block" rendered="#{usuarioBean.entidade.id != null}">
+			<h4 class="title-divisor">Estatísticas</h4>
+			<div class="uf-stats">
+				<div class="uf-stat uf-stat--blue">
+					<span class="uf-stat-ico"><i class="pi pi-images" /></span>
+					<span class="uf-stat-body">
+						<span class="uf-stat-num"><h:outputText value="#{usuarioBean.totalPosts}" /></span>
+						<span class="uf-stat-label">Posts gerados</span>
+					</span>
+				</div>
+				<div class="uf-stat uf-stat--purple">
+					<span class="uf-stat-ico"><i class="pi pi-file-edit" /></span>
+					<span class="uf-stat-body">
+						<span class="uf-stat-num"><h:outputText value="#{usuarioBean.totalAvaliacoes}" /></span>
+						<span class="uf-stat-label">Avaliações geradas</span>
+					</span>
+				</div>
+				<div class="uf-stat uf-stat--green">
+					<span class="uf-stat-ico"><i class="pi pi-check-circle" /></span>
+					<span class="uf-stat-body">
+						<span class="uf-stat-num"><h:outputText value="#{usuarioBean.totalExerciciosResolvidos}" /></span>
+						<span class="uf-stat-label">Exercícios resolvidos</span>
+					</span>
+				</div>
+				<div class="uf-stat uf-stat--amber">
+					<span class="uf-stat-ico"><i class="pi pi-book" /></span>
+					<span class="uf-stat-body">
+						<span class="uf-stat-num"><h:outputText value="#{usuarioBean.totalQuestoesResolvidas}" /></span>
+						<span class="uf-stat-label">Questões resolvidas</span>
+					</span>
+				</div>
+			</div>
+		</h:panelGroup>
+
 		<div class="ui-fluid gride" >
 
 			<h:panelGroup styleClass="campoMsg col-12 md:col-6 lg:col-6 xl:col-4">
@@ -89,9 +142,25 @@
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Perfil — Criador" />
+				<p:selectOneMenu value="#{usuarioBean.entidade.perfilCriador}">
+					<f:selectItems value="#{usuarioBean.perfisCriador}" var="p"
+					itemLabel="#{p.nome}" itemValue="#{p}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
 				<p:outputLabel for="@next" value="Validade do Plano — Criador" />
 				<p:datePicker value="#{usuarioBean.entidade.validadePlanoCriador}"
 				pattern="dd/MM/yyyy" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">
+				<p:outputLabel for="@next" value="Perfil — Avaliação" />
+				<p:selectOneMenu value="#{usuarioBean.entidade.perfilAvaliacao}">
+					<f:selectItems value="#{usuarioBean.perfisAvaliacao}" var="p"
+					itemLabel="#{p.nome}" itemValue="#{p}" />
+				</p:selectOneMenu>
 			</h:panelGroup>
 
 			<h:panelGroup styleClass="campo col-12 md:col-6 lg:col-6 xl:col-4">

@@ -17,12 +17,12 @@
 			<property name="hibernate.archive.autodetection" value="class, hbm"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-			<property name="hibernate.boot.allow_jdbc_metadata_access" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"></property>
 			<property name="hibernate.id.new_generator_mappings" value="true"></property>
 			<property name="org.hibernate.envers.store_data_at_delete" value="true"></property>
 			<property name="hibernate.enable_lazy_load_no_trans" value="true"></property>
 			
+<!-- 			<property name="hibernate.boot.allow_jdbc_metadata_access" value="false"/> -->
 <!-- 			<property name="hibernate.show_sql" value="true" /> -->
 <!-- 			<property name="hibernate.format_sql" value="true" /> -->
 <!-- 			<property name="user_sql_comments" value="true" /> -->

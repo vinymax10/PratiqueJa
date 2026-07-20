@@ -203,11 +203,11 @@ public class ProgramacaoPostBean implements Serializable
 	}
 
 	/** Horário do envio diário automático (mesmo do @Schedule em EnvioPostService). */
-	private static final LocalTime HORARIO_ENVIO = LocalTime.of(8, 0);
+	private static final LocalTime HORARIO_ENVIO = LocalTime.of(6, 0);
 
 	/**
 	 * Liga/desliga a programação (chamado ao alternar o seletor). Ao ativar, reancorar a agenda para
-	 * começar hoje (a 1ª publicação cai em hoje) e, se já passou das 8h, dispara a publicação de hoje
+	 * começar hoje (a 1ª publicação cai em hoje) e, se já passou das 6h, dispara a publicação de hoje
 	 * na hora. Ao pausar, apenas persiste o estado.
 	 */
 	public void alternarAtivacao()
@@ -236,11 +236,11 @@ public class ProgramacaoPostBean implements Serializable
 			return;
 		}
 
-		// Antes das 8h: o agendador diário cuida hoje. Depois das 8h: dispara a de hoje agora.
+		// Antes das 6h: o agendador diário cuida hoje. Depois das 6h: dispara a de hoje agora.
 		if(!LocalTime.now().isAfter(HORARIO_ENVIO))
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
-			"Programação ativada! A primeira publicação de hoje sai às 8h.");
+			"Programação ativada! A primeira publicação de hoje sai às 6h.");
 			return;
 		}
 

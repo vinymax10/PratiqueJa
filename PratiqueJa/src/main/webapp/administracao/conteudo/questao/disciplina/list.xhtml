@@ -26,7 +26,7 @@
 			oncomplete="PF('dialogCadastro').show()" resetValues="true" />
 		</div>
 
-		<p:dataTable id="tabela" class="table" stripedRows="true" reflow="true"
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true" reflow="true"
 			var="entidade" value="#{disciplinaBean.opcoes}" widgetVar="dtDisciplina"
 			selection="#{disciplinaBean.entidade}" selectionMode="single" rowKey="#{entidade.id}"
 			draggableRows="true" rows="30" paginator="true" paginatorAlwaysVisible="false"

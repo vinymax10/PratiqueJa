@@ -26,7 +26,7 @@ public class UsuarioDAO extends DAO<Usuario>
 		super(Usuario.class);
 	}
 
-	public Usuario getUsuario(String email, String sub)
+public Usuario getUsuario(String email, String sub)
 	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);

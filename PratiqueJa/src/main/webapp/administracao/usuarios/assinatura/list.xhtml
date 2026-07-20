@@ -85,8 +85,9 @@
 			</p:column>
 
 			<p:column headerText="Status" responsivePriority="1">
-				<p:tag value="#{entidade.status}"
-				severity="#{entidade.status == 'Ativa' ? 'success' : entidade.status == 'Cancelada' ? 'danger' : 'warning'}" />
+				<ui:include src="/status/status.xhtml">
+					<ui:param name="status" value="#{entidade.status}" />
+				</ui:include>
 			</p:column>
 
 		</p:dataTable>

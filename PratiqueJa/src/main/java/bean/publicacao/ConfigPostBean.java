@@ -26,6 +26,7 @@ import bean.util.Mensagem;
 import service.publicacao.ImagemPostService;
 import service.publicacao.ProgramacaoPostService;
 import web.session.Sessao;
+import jakarta.faces.context.FacesContext;
 
 @Data
 @Named
@@ -123,9 +124,12 @@ public class ConfigPostBean implements Serializable
 			Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
 			"Upload do arquivo " + uploadedFile.getFileName() + " realizado com sucesso.");
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
+			// Antes o erro só ia para o stderr (upload "não fazia nada"); agora avisa o usuário.
 			e.printStackTrace();
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR,
+				"Não foi possível enviar a imagem. Use um PNG válido de até 5 MB. (" + e.getMessage() + ")");
 		}
 		return "";
 	}
@@ -168,6 +172,27 @@ public class ConfigPostBean implements Serializable
 	}
 
 	/**
+	 * Sincroniza o configPost lendo o parâmetro {@code configPost} DIRETO do request: presente →
+	 * aquele config (admin, modo suporte); ausente → volta para o config do próprio usuário logado.
+	 * Diferente do {@code f:viewParam} (que mantém o valor antigo na sessão quando o parâmetro some),
+	 * isto reseta de fato — usado ao entrar em Gerar Posts pelo menu lateral para sair do modo suporte
+	 * e voltar ao próprio configPost.
+	 */
+	public void sincronizarPeloRequest()
+	{
+		String p = FacesContext.getCurrentInstance().getExternalContext()
+			.getRequestParameterMap().get("configPost");
+
+		if(p == null || p.isBlank())
+			idConfigPost = null;
+		else
+			try { idConfigPost = Long.valueOf(p); }
+			catch(NumberFormatException e) { idConfigPost = null; }
+
+		sincronizarConfigPost();
+	}
+
+	/**
 	 * Alinha o configPost em edição com o usuário da sessão. A tela é navegável sem login (como
 	 * "Criar Avaliação"); sem usuário logado fica um objeto vazio só para exibição — as ações que
 	 * de fato gravam (salvar, upload) exigem login antes de prosseguir. Um admin pode inspecionar
@@ -187,5 +212,21 @@ public class ConfigPostBean implements Serializable
 			configPost = configPostDAO.getConfigPost(idConfigPost);
 		else
 			configPost = usuario.getConfigPost();
+	}
+
+	/**
+	 * Dono do configPost em edição quando é OUTRO usuário (admin no modo suporte, via {@code ?configPost=ID}).
+	 * {@code null} quando é a própria área do logado. Usado para o chip no cabeçalho das telas de Post.
+	 */
+	public Usuario getUsuarioVisualizado()
+	{
+		if(configPost == null || configPost.getUsuario() == null)
+			return null;
+
+		Usuario logado = Sessao.getUsuarioLogado();
+		if(logado != null && !configPost.getUsuario().getId().equals(logado.getId()))
+			return configPost.getUsuario();
+
+		return null;
 	}
 }

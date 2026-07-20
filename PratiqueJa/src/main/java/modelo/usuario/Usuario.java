@@ -37,7 +37,7 @@ import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "exercicios", "contatos", "foto", "configAvaliacao", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
+@ToString(exclude = { "resultadosExercicios", "resultadosQuestoes", "contatos", "foto", "configAvaliacao", "acessos", "controlesAcessos", "pagamentos", "turma", "configPost" })
 @Data
 @Entity
 public class Usuario extends Ativo implements Entidade
@@ -150,10 +150,6 @@ public class Usuario extends Ativo implements Entidade
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
 	private List<Acesso> acessos = new ArrayList<Acesso>();
-
-	@DiffIgnore
-	@OneToMany(orphanRemoval = true, mappedBy = "usuario")
-	private List<ControleAcesso> controlesAcessos = new ArrayList<ControleAcesso>();
 
 	@DiffIgnore
 	@OneToMany(orphanRemoval = true, mappedBy = "usuario")

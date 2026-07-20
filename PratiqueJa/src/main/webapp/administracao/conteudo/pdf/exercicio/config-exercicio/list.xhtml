@@ -41,7 +41,7 @@
 
 		<ui:include src="/administracao/conteudo/pdf/exercicio/config-exercicio/filtro.xhtml" />
 
-		<p:dataTable id="tabela"  stripedRows="true"
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
 			var="entidade" value="#{configPdfExercicioBean.lista}" reflow="true"
 			selection="#{configPdfExercicioBean.entidade}" selectionMode="single"
 			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">

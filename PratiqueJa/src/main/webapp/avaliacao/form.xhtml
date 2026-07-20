@@ -56,6 +56,11 @@
 		<h:outputText class="linkPage" value="Nova Solicitação" />
 	</ui:define>
 
+	<f:metadata>
+		<!-- Mantém a config-alvo (?configAvaliacao) sincronizada antes do form renderizar (chip, logo, cabeçalho) -->
+		<f:viewAction action="#{configAvaliacaoBean.sincronizarPeloRequest()}" />
+	</f:metadata>
+
 	<!-- ═══════ HERO + Formulário unidos num card único ═══════ -->
 	<div class="av-joined">
 
@@ -261,7 +266,7 @@
 			</div>
 			</div>
 
-				<ui:fragment rendered="#{pedidoAvaliacaoBean.podeUsarLogoEscola}">
+				<ui:fragment rendered="#{configAvaliacaoBean.podeUsarLogoEscola}">
 					<div class="av-logo-col">
 						<div class="av-label">
 							Logo personalizada
@@ -291,7 +296,7 @@
 										<li>Proporção horizontal · ideal ~600 × 240 px</li>
 									</ul>
 								</div>
-								<p:fileUpload listener="#{pedidoAvaliacaoBean.uploadLogoEscola}"
+								<p:fileUpload listener="#{configAvaliacaoBean.uploadLogoEscola}"
 									mode="advanced" auto="true" dragDropSupport="true"
 									chooseLabel="Selecionar imagem"
 									styleClass="av-dropzone"
@@ -303,16 +308,16 @@
 							</div>
 
 							<h:panelGroup id="logoEscolaPreview" layout="block">
-								<ui:fragment rendered="#{pedidoAvaliacaoBean.temLogoEscola}">
+								<ui:fragment rendered="#{configAvaliacaoBean.temLogoEscola}">
 									<div class="av-logo-card">
 										<div class="av-logo-canvas">
-											<h:graphicImage value="#{pedidoAvaliacaoBean.logoEscolaEndereco}" styleClass="av-logo-img" alt="Logo personalizada" />
+											<h:graphicImage value="#{configAvaliacaoBean.logoEscolaEndereco}" styleClass="av-logo-img" alt="Logo personalizada" />
 										</div>
 										<div class="av-logo-info">
 											<span class="av-logo-badge"><i class="pi pi-check-circle" /> Logo aplicada</span>
 											<span class="av-logo-hint">Aparece no cabeçalho da prova e do gabarito.</span>
 										</div>
-										<p:commandLink action="#{pedidoAvaliacaoBean.removerLogoEscola}"
+										<p:commandLink action="#{configAvaliacaoBean.removerLogoEscola}"
 											process="@this" update="form:logoEscolaPreview :growl"
 											styleClass="av-logo-remove" title="Remover logo">
 											<i class="pi pi-trash" />
@@ -460,12 +465,16 @@
 					value="Voltar ao histórico"
 					icon="pi pi-arrow-left"
 					outcome="/avaliacao/list"
-					styleClass="ui-button-flat ui-button-plain" />
+					styleClass="ui-button-flat ui-button-plain">
+					<!-- Modo suporte: mantém ?configAvaliacao ao voltar; omitido no fluxo normal. -->
+					<f:param name="configAvaliacao" value="#{configAvaliacaoBean.configAvaliacao.id}"
+						disable="#{empty configAvaliacaoBean.usuarioVisualizado}" />
+				</p:button>
 				<p:commandButton
 					value="Salvar como padrão"
 					icon="pi pi-bookmark"
 					styleClass="ui-button-flat ui-button-secondary"
-					action="#{pedidoAvaliacaoBean.salvarComoPadrao}"
+					action="#{configAvaliacaoBean.salvarComoPadrao(pedidoAvaliacaoBean.entidade)}"
 					process="@form"
 					update=":growl"
 					title="Guarda estes dados (cabeçalho e formato) para já virem preenchidos nas próximas avaliações." />

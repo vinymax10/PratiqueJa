@@ -407,9 +407,6 @@
 					<a href="/administracao/usuarios/acesso/list.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-key"></i> Acessos
 					</a>
-					<a href="/administracao/usuarios/controle-acesso/list.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-shield"></i> Controle de Acesso
-					</a>
 				</div>
 
 				<div class="t2-menu-item t2-has-sub" onclick="t2ToggleSub(this)">
@@ -442,9 +439,6 @@
 					</a>
 					<a href="/administracao/configuracao/cleanup/config.xhtml" class="t2-menu-item t2-sub-item">
 						<i class="pi pi-trash"></i> Cleanup
-					</a>
-					<a href="/administracao/configuracao/config-controle-acesso/config.xhtml" class="t2-menu-item t2-sub-item">
-						<i class="pi pi-lock"></i> Controle de Acesso
 					</a>
 				</div>
 
@@ -578,7 +572,39 @@
 				return t.trim();
 			}
 
-			document.querySelectorAll('#t2Sidebar .t2-menu-item[href]').forEach(function (el) {
+			// Marca o item como ativo, abre o submenu pai e preenche o breadcrumb.
+			function activate(el) {
+				el.classList.add('active');
+				var submenu = el.closest('.t2-submenu');
+				if (submenu) {
+					submenu.classList.add('t2-sub-open');
+					var toggle = submenu.previousElementSibling;
+					if (toggle && toggle.classList.contains('t2-has-sub')) {
+						toggle.classList.add('t2-sub-open');
+						toggle.classList.add('active');
+						if (mainEl) mainEl.textContent = menuText(toggle);
+					}
+					if (subEl) subEl.textContent = menuText(el);
+				} else {
+					if (mainEl) mainEl.textContent = menuText(el);
+					if (subEl)  subEl.textContent  = '';
+				}
+			}
+
+			// Diretório de um href de menu (path até a última "/", incluindo-a); '' se for raiz.
+			function hrefDirOf(el) {
+				var rawHref = el.getAttribute('href');
+				var qIdx = rawHref.indexOf('?');
+				var hrefPath = (qIdx >= 0 ? rawHref.slice(0, qIdx) : rawHref).replace(/\.xhtml$/, '');
+				var slash = hrefPath.lastIndexOf('/');
+				return slash <= 0 ? '' : hrefPath.slice(0, slash + 1);
+			}
+
+			var menuItems = document.querySelectorAll('#t2Sidebar .t2-menu-item[href]');
+
+			// 1ª passada — casamento exato do path (mantém a lógica de "assunto").
+			var found = false;
+			menuItems.forEach(function (el) {
 				var rawHref = el.getAttribute('href');
 				var qIdx = rawHref.indexOf('?');
 				var hrefPath = (qIdx >= 0 ? rawHref.slice(0, qIdx) : rawHref).replace(/\.xhtml$/, '');
@@ -593,23 +619,25 @@
 				}
 
 				if (matches) {
-					el.classList.add('active');
-					var submenu = el.closest('.t2-submenu');
-					if (submenu) {
-						submenu.classList.add('t2-sub-open');
-						var toggle = submenu.previousElementSibling;
-						if (toggle && toggle.classList.contains('t2-has-sub')) {
-							toggle.classList.add('t2-sub-open');
-							toggle.classList.add('active');
-							if (mainEl) mainEl.textContent = menuText(toggle);
-						}
-						if (subEl) subEl.textContent = menuText(el);
-					} else {
-						if (mainEl) mainEl.textContent = menuText(el);
-						if (subEl)  subEl.textContent  = '';
-					}
+					activate(el);
+					found = true;
 				}
 			});
+
+			// 2ª passada (fallback) — nenhuma tela casou exatamente (ex.: form.xhtml, cadastro.xhtml).
+			// Ativa o item cujo diretório é o prefixo mais longo do path atual: assim uma tela como
+			// /administracao/conteudo/pdf/questao/form ativa o item /administracao/conteudo/pdf/questao/list.
+			if (!found) {
+				var best = null, bestLen = 0;
+				menuItems.forEach(function (el) {
+					var dir = hrefDirOf(el);
+					if (dir && path.indexOf(dir) === 0 && dir.length > bestLen) {
+						best = el;
+						bestLen = dir.length;
+					}
+				});
+				if (best) activate(best);
+			}
 
 			// Override de página: define window.t2Bread = {main:'...', sub:'...'} antes deste script
 			if (window.t2Bread) {

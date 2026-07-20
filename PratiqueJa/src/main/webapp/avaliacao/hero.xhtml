@@ -15,6 +15,12 @@
 						<ui:param name="titulo" value="#{ajudaTitulo}" />
 					</ui:include>
 				</ui:fragment>
+				<h:panelGroup layout="block" styleClass="av-hero-badge"
+					rendered="#{not empty configAvaliacaoBean.usuarioVisualizado}"
+					title="#{configAvaliacaoBean.usuarioVisualizado.email}"
+					style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+					<i class="pi pi-user-edit" /> #{configAvaliacaoBean.usuarioVisualizado.nome}
+				</h:panelGroup>
 				<h1 class="av-hero-title">Confecção de Avaliações</h1>
 				<p class="av-hero-desc">
 					Provas e avaliações personalizadas, com exercícios sorteados por assunto e nível.
@@ -22,10 +28,10 @@
 			</div>
 
 			<h:panelGroup layout="block" styleClass="av-hero-stats"
-				rendered="#{sessaoBean.usuario.perfilAvaliacao != null}">
+				rendered="#{configAvaliacaoBean.usuarioAlvo.perfilAvaliacao != null}">
 				<div class="av-stat">
 					<span class="av-stat-label">Plano ativo</span>
-					<strong class="av-stat-value">#{sessaoBean.usuario.perfilAvaliacao.nome}</strong>
+					<strong class="av-stat-value">#{configAvaliacaoBean.usuarioAlvo.perfilAvaliacao.nome}</strong>
 				</div>
 				<div class="av-stat">
 					<span class="av-stat-label">#{pedidoAvaliacaoBean.labelUsadas}</span>

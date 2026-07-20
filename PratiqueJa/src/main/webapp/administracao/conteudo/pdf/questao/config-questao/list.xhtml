@@ -41,7 +41,7 @@
 
 		<ui:include src="/administracao/conteudo/pdf/questao/config-questao/filtro.xhtml" />
 
-		<p:dataTable id="tabela"  stripedRows="true"
+		<p:dataTable id="tabela" class="tableStatus" stripedRows="true"
 			var="entidade" value="#{configPdfQuestaoBean.lista}" reflow="true"
 			selection="#{configPdfQuestaoBean.entidade}" selectionMode="single"
 			rowKey="#{entidade.id}" rows="30" paginator="true" paginatorAlwaysVisible="false">

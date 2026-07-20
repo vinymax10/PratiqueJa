@@ -9,13 +9,20 @@
 		<h:outputText class="linkPage" value="#{pdfExercicioBean.nome}" />
 	</ui:define>
 
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/admin-form.css" type="text/css" />
+		<!-- Form sem item próprio no menu: fixa o breadcrumb igual ao da list (PDFs / Exercícios). -->
+		<script>window.t2Bread = { main: 'PDFs', sub: 'Exercícios' };</script>
+	</ui:define>
+
+
 	<f:metadata>
 		<f:viewParam name="chave" value="#{pdfExercicioBean.chave}" />
 		<f:viewParam name="cadastro" value="#{pdfExercicioBean.cadastro}" converter="jakarta.faces.Boolean" />
 		<f:viewAction action="#{pdfExercicioBean.carregar()}" />
 	</f:metadata>
 
-	<h:form id="form" class="form">
+	<h:form id="form" class="form uf-form">
 
 		<h4 class="title-divisor">PDF</h4>
 

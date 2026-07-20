@@ -324,7 +324,6 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 	public void toogleResolucao()
 	{
 		entidade.toogleResolucaoComentada();
-		controleAcessoBean.registrarResolucaoExercicio();
 	}
 
 	public void podeFazerDownload(ExercicioPadrao exercicioPadrao)
@@ -332,11 +331,7 @@ public class ExercicioBean extends PaiBean<Exercicio, ExercicioDAO, PermissaoPad
 		if(controleAcessoBean.verificaEstaLogado())
 		{
 			this.exercicioPadrao = exercicioPadrao;
-			if(controleAcessoBean.podeFazerDownload())
-				PrimeFaces.current().executeScript("PF('downloadExercicioWidget').show()");
-			else
-				controleAcessoBean.showUpgrade("Limite mensal de páginas baixadas foi excedido."
-				+ "\nPor favor faça o upgrade de sua conta.");
+			PrimeFaces.current().executeScript("PF('downloadExercicioWidget').show()");
 		}
 	}
 

@@ -25,6 +25,18 @@ public class ResultadoExercicioDAO extends DAO<ResultadoExercicio>
 		super(ResultadoExercicio.class);
 	}
 
+	/** Quantidade total de exercícios que o usuário já resolveu (linhas de ResultadoExercicio). */
+	public long contarTotal(Usuario usuario)
+	{
+		if(usuario == null || usuario.getId() == null)
+			return 0;
+
+		return em.createQuery(
+			"SELECT COUNT(e) FROM ResultadoExercicio e WHERE e.usuario.id = :usuarioId", Long.class)
+			.setParameter("usuarioId", usuario.getId())
+			.getSingleResult();
+	}
+
 	public List<ResultadoExercicio> listar(Usuario usuario)
 	{
 		TypedQuery<ResultadoExercicio> query = em.createQuery(

@@ -22,6 +22,7 @@ import modelo.Entidade;
 import modelo.auditoria.AuditLabel;
 import modelo.auditoria.GeneroGramatical;
 import modelo.usuario.Imagem;
+import modelo.usuario.Usuario;
 
 /**
  * Valores-padrão de avaliação de um usuário (cabeçalho e formato). Pré-carregados
@@ -77,4 +78,8 @@ public class ConfigAvaliacao implements Serializable, Entidade
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "logoEscola_id")
 	private Imagem logoEscola;
+	
+	@DiffIgnore
+	@OneToOne
+	private Usuario usuario;
 }

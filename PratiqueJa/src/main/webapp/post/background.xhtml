@@ -10,7 +10,7 @@
 	</ui:define>
 
 	<ui:define name="linkPage">
-		<h:outputText class="linkPage" value="Background Personalizado" />
+		<h:outputText class="linkPage" value="Background" />
 	</ui:define>
 
 	<f:metadata>
@@ -24,9 +24,15 @@
 			<span class="pc-hero-badge"><i class="pi pi-megaphone" /> Publicação no Instagram</span>
 			<ui:include src="/post/ajuda/ajuda.xhtml">
 				<ui:param name="tela" value="background" />
-				<ui:param name="titulo" value="Background Personalizado" />
+				<ui:param name="titulo" value="Background" />
 			</ui:include>
-			<h1 class="pc-hero-title">Background Personalizado</h1>
+			<h:panelGroup layout="block" styleClass="pc-hero-badge"
+				rendered="#{not empty configPostBean.usuarioVisualizado}"
+				title="#{configPostBean.usuarioVisualizado.email}"
+				style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;">
+				<i class="pi pi-user-edit" /> #{configPostBean.usuarioVisualizado.nome}
+			</h:panelGroup>
+			<h1 class="pc-hero-title">Background</h1>
 			<p class="pc-hero-desc">
 				Envie seus próprios fundos de Feed (1080 × 1350) e Reel (1080 × 1920) para usar nas publicações.
 			</p>

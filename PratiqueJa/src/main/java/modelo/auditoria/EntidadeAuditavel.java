@@ -28,7 +28,6 @@ import modelo.questao.Questao;
 import modelo.questao.ResultadoQuestao;
 import modelo.seguranca.Acesso;
 import modelo.usuario.Contato;
-import modelo.usuario.ControleAcesso;
 import modelo.usuario.Imagem;
 import modelo.usuario.Pagamento;
 import modelo.usuario.Turma;
@@ -40,7 +39,6 @@ public enum EntidadeAuditavel
 	Usuario(Usuario.class, "Usuário"),
 	Acesso(Acesso.class, "Acesso"),
 	Contato(Contato.class, "Contato"),
-	ControleAcesso(ControleAcesso.class, "Controle de Acesso"),
 	Imagem(Imagem.class, "Imagem"),
 	Pagamento(Pagamento.class, "Pagamento"),
 	Turma(Turma.class, "Turma"),

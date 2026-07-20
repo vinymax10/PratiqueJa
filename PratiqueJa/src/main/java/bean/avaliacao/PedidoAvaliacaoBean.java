@@ -1,7 +1,6 @@
 package bean.avaliacao;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,26 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bean.PaiBean;
-import bean.download.Diretorio;
 import bean.seguranca.SessaoBean;
 import bean.usuario.ControleAcessoBean;
 import bean.util.Mensagem;
 import dao.academico.AssuntoDAO;
 import dao.avaliacao.PedidoAvaliacaoDAO;
-import dao.usuario.UsuarioDAO;
-import infra.Graphics;
+import service.avaliacao.AvaliacaoFormService;
 import service.avaliacao.CreditoAvaliacaoService;
-import service.avaliacao.FilaGeracaoAvaliacaoService;
 import service.avaliacao.MontadorPedidoAvaliacaoService;
-import service.configuracao.DiretorioService;
-import util.FileAux;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -40,10 +32,8 @@ import jakarta.inject.Named;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import modelo.academico.Assunto;
-import modelo.avaliacao.ConfigAvaliacao;
 import modelo.avaliacao.FormatoAvaliacao;
 import modelo.avaliacao.FormatoSaida;
-import modelo.avaliacao.ItemPedidoAvaliacao;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.PerfilAvaliacao;
 import modelo.avaliacao.PosicaoGabarito;
@@ -51,9 +41,7 @@ import modelo.avaliacao.StatusPedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
 import modelo.exercicio.Nivel;
 import modelo.seguranca.PermissaoPadrao;
-import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
-import pdf.exercicio.LayoutLista;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -68,6 +56,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	// ── Estado da view ────────────────────────────────────────────────
 
 	private List<PedidoAvaliacao> historico;
+
 	private PedidoAvaliacao pedidoSelecionado;
 
 	/** Código do pedido recém-criado, para realçar a linha na list (vem do flash após o redirect). */
@@ -94,24 +83,19 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private AssuntoDAO assuntoDAO;
 
 	@Inject
-	private UsuarioDAO usuarioDAO;
-
-	@Inject
 	private CreditoAvaliacaoService creditoAvaliacaoService;
 
 	@Inject
 	private MontadorPedidoAvaliacaoService montadorService;
 
 	@Inject
-	private FilaGeracaoAvaliacaoService filaGeracaoService;
+	private AvaliacaoFormService avaliacaoService;
+
+	@Inject
+	private ConfigAvaliacaoBean configAvaliacaoBean;
 
 	@Inject
 	private ControleAcessoBean controleAcessoBean;
-
-	@Inject
-	private DiretorioService diretorioService;
-
-	private Diretorio diretorio;
 
 	public PedidoAvaliacaoBean()
 	{
@@ -125,7 +109,6 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	@PostConstruct
 	public void init()
 	{
-		diretorio = diretorioService.criarDiretorioSemReserva();
 		historico = new ArrayList<>();
 		creditosRestantes = 0;
 		avaliacoesUsadas = 0;
@@ -170,9 +153,20 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	private void novoPedido()
 	{
 		entidade = new PedidoAvaliacao();
-		Usuario usuario = sessaoBean.getUsuario();
-		entidade.setUsuario(usuario);
-		aplicarConfigPadrao(usuario);
+		entidade.setUsuario(usuarioEfetivo());
+		// Cabeçalho pré-carregado da config gerenciada pelo ConfigAvaliacaoBean (própria ou de suporte).
+		avaliacaoService.aplicarPadrao(entidade, configAvaliacaoBean.getConfigAvaliacao());
+	}
+
+	/**
+	 * Usuário-alvo do contexto: no modo suporte do admin ({@code ?configAvaliacao=ID}) é o dono da
+	 * config do parâmetro; no fluxo normal, o próprio logado. Concentra aqui a resolução para que
+	 * cabeçalho (plano/cota), validação e geração sigam o mesmo usuário exibido no chip. Para usuários
+	 * comuns é idêntico a {@code sessaoBean.getUsuario()} (a config-alvo é a própria).
+	 */
+	private Usuario usuarioEfetivo()
+	{
+		return configAvaliacaoBean.getUsuarioAlvo();
 	}
 
 	/** Abre um rascunho existente (parâmetro {@code rascunho}) para continuar a configuração, ou um novo pedido. */
@@ -185,7 +179,8 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			try
 			{
 				PedidoAvaliacao rascunho = entidadeDAO.carrega(Long.valueOf(idParam));
-				Usuario usuario = sessaoBean.getUsuario();
+				// Posse pelo usuário-alvo: em modo suporte o admin edita o rascunho do usuário atendido.
+				Usuario usuario = usuarioEfetivo();
 				if(rascunho != null && usuario != null && rascunho.getUsuario() != null
 					&& usuario.getId().equals(rascunho.getUsuario().getId())
 					&& rascunho.getStatus() == StatusPedidoAvaliacao.RASCUNHO)
@@ -202,58 +197,34 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		novoPedido();
 	}
 
-	/** Pré-carrega na nova avaliação os valores-padrão salvos pelo usuário (cabeçalho e formato). */
-	private void aplicarConfigPadrao(Usuario usuario)
-	{
-		if(usuario == null || usuario.getConfigAvaliacao() == null)
-			return;
-
-		ConfigAvaliacao config = usuario.getConfigAvaliacao();
-		entidade.setTitulo(config.getTitulo());
-		entidade.setEscola(config.getEscola());
-		entidade.setNomeProfessor(config.getNomeProfessor());
-		entidade.setTipoGabarito(config.getTipoGabarito());
-		entidade.setPosicaoGabarito(config.getPosicaoGabarito());
-		entidade.setFormatoSaida(config.getFormatoSaida());
-		entidade.setQuantidade(config.getQuantidade());
-	}
-
-	/** Salva os dados atuais (cabeçalho e formato) como o padrão do usuário, reaproveitado nas próximas avaliações. */
-	public void salvarComoPadrao()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		if(usuario == null)
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "Faça login para salvar um padrão.");
-			return;
-		}
-
-		ConfigAvaliacao config = obterOuCriarConfig(usuario);
-		config.setTitulo(entidade.getTitulo());
-		config.setEscola(entidade.getEscola());
-		config.setNomeProfessor(entidade.getNomeProfessor());
-		config.setTipoGabarito(entidade.getTipoGabarito());
-		config.setPosicaoGabarito(entidade.getPosicaoGabarito());
-		config.setFormatoSaida(entidade.getFormatoSaida());
-		config.setQuantidade(entidade.getQuantidade());
-
-		usuarioDAO.salvar(usuario);
-		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Padrão salvo! As próximas avaliações já virão com esses dados.");
-	}
-
-	/** Devolve a config de avaliação do usuário, criando-a (e vinculando-a) se ainda não existir. */
-	private ConfigAvaliacao obterOuCriarConfig(Usuario usuario)
-	{
-		ConfigAvaliacao config = usuario.getConfigAvaliacao();
-		if(config == null)
-		{
-			config = new ConfigAvaliacao();
-			usuario.setConfigAvaliacao(config);
-		}
-		return config;
-	}
-
 	// ── Validação e solicitação ───────────────────────────────────────
+
+	/**
+	 * Início da criação de uma avaliação (botão "Nova avaliação" na list). Exige o login ANTES de
+	 * abrir o formulário: assim o usuário deslogado não preenche a configuração toda para só ser
+	 * barrado na geração e perder todo o trabalho. Deslogado: abre o login e permanece na list
+	 * (após logar, clica de novo). Logado: navega para o formulário.
+	 */
+	public String novaAvaliacao()
+	{
+		if(!controleAcessoBean.verificaEstaLogado())
+			return null;
+
+		// Modo suporte do admin: repassa o mesmo ?configAvaliacao para o formulário, mantendo o
+		// contexto e o chip do usuário atendido na tela /avaliacao/form.
+		return "/avaliacao/form?faces-redirect=true" + sufixoSuporte();
+	}
+
+	/**
+	 * Sufixo {@code &configAvaliacao=ID} para reanexar o modo suporte do admin nas navegações
+	 * (list→form, form→list); vazio no fluxo normal. Sem isso o parâmetro se perde no redirect e o
+	 * admin volta a gerenciar a própria config em vez da do usuário atendido.
+	 */
+	private String sufixoSuporte()
+	{
+		return configAvaliacaoBean.getUsuarioVisualizado() != null
+			? "&configAvaliacao=" + configAvaliacaoBean.getConfigAvaliacao().getId() : "";
+	}
 
 	public String solicitar()
 	{
@@ -265,21 +236,13 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		if(!validar())
 			return null;
 
-		prepararPedido();
-		entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
-		entidade.setDataSolicitacao(LocalDateTime.now());
-		entidade.setStatus(StatusPedidoAvaliacao.AGUARDANDO);
-
 		// Retenção do PDF varia por plano (Essencial 7 / Profissional 30 / Master 60 dias).
-		entidade.setDataExpiracao(LocalDateTime.now().plusDays(planoAtual().getDiasRetencao()));
-
-		entidadeDAO.salvar(entidade);
-		filaGeracaoService.enfileirar(entidade.getId());
+		avaliacaoService.solicitarGeracao(entidade, usuarioEfetivo(), planoAtual().getDiasRetencao());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Solicitação registrada! Código: " + entidade.getCodigoBatch() + ". Acompanhe o progresso na lista.");
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("avNovoCodigo", entidade.getCodigoBatch());
 
-		return urlLista + "?faces-redirect=true";
+		return urlLista + "?faces-redirect=true" + sufixoSuporte();
 	}
 
 	/** Salva o pedido como rascunho (sem gerar), para o usuário continuar a configuração depois. */
@@ -288,14 +251,11 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		if(!controleAcessoBean.verificaEstaLogado())
 			return null;
 
-		prepararPedido();
-		entidade.setStatus(StatusPedidoAvaliacao.RASCUNHO);
-
-		entidade = entidadeDAO.salvar(entidade);
+		entidade = avaliacaoService.salvarRascunho(entidade, usuarioEfetivo());
 
 		Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO,
 			"Rascunho salvo. Gere quando terminar de configurar.");
-		return urlLista + "?faces-redirect=true";
+		return urlLista + "?faces-redirect=true" + sufixoSuporte();
 	}
 
 	/** Gera um rascunho salvo direto do histórico (valida cota e dispara a geração). */
@@ -303,20 +263,6 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	{
 		entidade = rascunho;
 		return solicitar();
-	}
-
-	/**
-	 * Preenche os campos comuns antes de salvar ou solicitar: usuário, progresso, e garante
-	 * codigoBatch e dataSolicitacao quando ainda não definidos.
-	 */
-	private void prepararPedido()
-	{
-		entidade.setUsuario(sessaoBean.getUsuario());
-		entidade.setProgresso(0);
-		if(entidade.getCodigoBatch() == null)
-			entidade.setCodigoBatch(MontadorPedidoAvaliacaoService.gerarCodigoBatch());
-		if(entidade.getDataSolicitacao() == null)
-			entidade.setDataSolicitacao(LocalDateTime.now());
 	}
 
 	private boolean validar()
@@ -339,7 +285,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 			return false;
 		}
 
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioEfetivo();
 		if(usuario.isAdmin() && usuario.getPerfilAvaliacao() == null)
 			return true;
 
@@ -466,12 +412,12 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public int totalExercicios()
 	{
-		return entidade.getItens().stream().mapToInt(ItemPedidoAvaliacao::getQuantidade).sum();
+		return avaliacaoService.totalExercicios(entidade);
 	}
 
 	public int limiteExerciciosRestante()
 	{
-		return getMaxExerciciosPorAvaliacao() - totalExercicios();
+		return getMaxExerciciosPorAvaliacao() - avaliacaoService.totalExercicios(entidade);
 	}
 
 	// ── Limites do plano do usuário ───────────────────────────────────
@@ -479,7 +425,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	private PerfilAvaliacao planoAtual()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioEfetivo();
 		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
 		return plano != null ? plano : PerfilAvaliacao.Essencial;
 	}
@@ -494,188 +440,28 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 		return planoAtual().getMaxAvaliacoesPorSolicitacao();
 	}
 
-	// ── Logo da escola no PDF (Profissional/Master) ───────────────────
-
-	/** A logo da escola no cabeçalho é exclusiva dos planos Profissional e Master. */
-	public boolean isPodeUsarLogoEscola()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
-		return plano == PerfilAvaliacao.Profissional || plano == PerfilAvaliacao.Master;
-	}
-
-	public boolean isTemLogoEscola()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		return usuario != null && usuario.getConfigAvaliacao() != null
-			&& usuario.getConfigAvaliacao().getLogoEscola() != null
-			&& usuario.getConfigAvaliacao().getLogoEscola().getEndereco() != null;
-	}
-
-	public String getLogoEscolaEndereco()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		if(usuario == null || usuario.getConfigAvaliacao() == null
-			|| usuario.getConfigAvaliacao().getLogoEscola() == null)
-			return null;
-		return usuario.getConfigAvaliacao().getLogoEscola().getEndereco();
-	}
-
-	public void uploadLogoEscola(FileUploadEvent event)
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		if(!isPodeUsarLogoEscola())
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_WARN, "A logo da escola está disponível apenas nos planos Profissional e Master.");
-			return;
-		}
-
-		UploadedFile arquivo = event.getFile();
-		try
-		{
-			String endBase = diretorio.getConfig().getEndereco();
-			String endRel = "/images/logo-escola/" + usuario.getId() + "/";
-
-			ConfigAvaliacao config = obterOuCriarConfig(usuario);
-			Imagem logo = config.getLogoEscola() != null ? config.getLogoEscola() : new Imagem();
-
-			if(logo.getEndereco() != null)
-			{
-				File antigo = new File(endBase + logo.getEndereco());
-				if(antigo.exists())
-					antigo.delete();
-			}
-
-			byte[] bytes = Graphics.resizeLogo(arquivo, 600, 240);
-			FileAux.gravarFile(endBase + endRel, arquivo.getFileName(), bytes);
-			logo.setEndereco(endRel + arquivo.getFileName());
-
-			config.setLogoEscola(logo);
-			usuarioDAO.salvar(usuario);
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola atualizada com sucesso.");
-		}
-		catch(IOException e)
-		{
-			LOG.error("Falha ao processar a logo da escola", e);
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível processar a imagem enviada.");
-		}
-	}
-
-	public void removerLogoEscola()
-	{
-		Usuario usuario = sessaoBean.getUsuario();
-		if(usuario == null || usuario.getId() == null)
-			return;
-
-		ConfigAvaliacao config = usuario.getConfigAvaliacao();
-		if(config != null && config.getLogoEscola() != null && config.getLogoEscola().getEndereco() != null)
-		{
-			File arquivo = new File(diretorio.getConfig().getEndereco() + config.getLogoEscola().getEndereco());
-			if(arquivo.exists())
-				arquivo.delete();
-		}
-
-		if(config != null)
-			config.setLogoEscola(null);
-		usuarioDAO.salvar(usuario);
-		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Logo da escola removida.");
-	}
-
-	/** Sequência de layouts de todas as questões, na ordem dos itens (espelha o gerador). */
-	private List<LayoutLista> sequenciaLayouts()
-	{
-		List<LayoutLista> sequencia = new ArrayList<>();
-		for(ItemPedidoAvaliacao item : entidade.getItens())
-		{
-			LayoutLista layout = (item.getExercicioPadrao() != null
-				&& item.getExercicioPadrao().getLayoutLista() == LayoutLista.ESPACOSO)
-				? LayoutLista.ESPACOSO : LayoutLista.PADRAO;
-			for(int i = 0; i < item.getQuantidade(); i++)
-				sequencia.add(layout);
-		}
-		return sequencia;
-	}
-
-	/**
-	 * Distribui as questões em páginas, igual ao gerador: uma página com qualquer questão espaçosa
-	 * comporta 4 (e fica toda espaçosa); uma página só com padrão comporta 6. Devolve, para cada
-	 * página, o par {espaçosa? 1 : 0, quantidade de questões}.
-	 */
-	private List<int[]> simularPaginas()
-	{
-		int capEspacoso = LayoutLista.ESPACOSO.exerciciosPorPagina;
-		int capPadrao = LayoutLista.PADRAO.exerciciosPorPagina;
-
-		List<int[]> paginas = new ArrayList<>();
-		int quantidade = 0;
-		boolean espacoso = false;
-
-		for(LayoutLista layout : sequenciaLayouts())
-		{
-			boolean questaoEspacosa = layout == LayoutLista.ESPACOSO;
-			int capacidade = (espacoso || questaoEspacosa) ? capEspacoso : capPadrao;
-
-			if(quantidade > 0 && quantidade >= capacidade)
-			{
-				paginas.add(new int[]{espacoso ? 1 : 0, quantidade});
-				quantidade = 0;
-				espacoso = false;
-			}
-
-			quantidade++;
-			espacoso = espacoso || questaoEspacosa;
-		}
-		if(quantidade > 0)
-			paginas.add(new int[]{espacoso ? 1 : 0, quantidade});
-
-		return paginas;
-	}
-
 	/** Número de páginas só de questões em cada prova (exato, igual ao gerador). */
 	public int paginasQuestoes()
 	{
-		return simularPaginas().size();
-	}
-
-	/** {espaçosa? 1 : 0, quantidade} da última página, ou null se não há questões. */
-	private int[] ultimaPagina()
-	{
-		List<int[]> paginas = simularPaginas();
-		return paginas.isEmpty() ? null : paginas.get(paginas.size() - 1);
-	}
-
-	/** Capacidade total da última página (4 se espaçosa, 6 se padrão). */
-	private int capacidadeUltimaPagina()
-	{
-		int[] ultima = ultimaPagina();
-		if(ultima == null)
-			return 0;
-		return ultima[0] == 1 ? LayoutLista.ESPACOSO.exerciciosPorPagina
-		                      : LayoutLista.PADRAO.exerciciosPorPagina;
+		return avaliacaoService.paginasQuestoes(entidade);
 	}
 
 	/** Quantas questões ainda cabem na última página (mantendo o layout dela). */
 	public int exerciciosQueAindaCabem()
 	{
-		int[] ultima = ultimaPagina();
-		if(ultima == null)
-			return 0;
-		return capacidadeUltimaPagina() - ultima[1];
+		return avaliacaoService.exerciciosQueAindaCabem(entidade);
 	}
 
 	/** Há espaço para ao menos mais uma questão na última página. */
 	public boolean isUltimaPaginaComEspaco()
 	{
-		return exerciciosQueAindaCabem() > 0;
+		return avaliacaoService.ultimaPaginaComEspaco(entidade);
 	}
 
 	/** Última página com metade ou mais da capacidade vazia — sinaliza desperdício de papel. */
 	public boolean isUltimaPaginaOciosa()
 	{
-		int[] ultima = ultimaPagina();
-		if(ultima == null)
-			return false;
-		return ultima[1] <= capacidadeUltimaPagina() / 2;
+		return avaliacaoService.ultimaPaginaOciosa(entidade);
 	}
 
 	/** Créditos disponíveis no período vigente (delegado ao CreditoAvaliacaoService no @PostConstruct). */
@@ -686,7 +472,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	public String descricaoPlano()
 	{
-		PerfilAvaliacao plano = sessaoBean.getUsuario().getPerfilAvaliacao();
+		PerfilAvaliacao plano = usuarioEfetivo().getPerfilAvaliacao();
 		if(plano == null)
 			return "Teste grátis (" + creditosRestantes + " de " + PerfilAvaliacao.Teste.getLimiteMensal() + " restantes)";
 		if(!plano.isRenovavel())
@@ -697,7 +483,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** Usuário em modo de teste grátis legado: logado, sem plano atribuído e não admin. */
 	public boolean isModoTrial()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioEfetivo();
 		return usuario != null && !usuario.isAdmin() && usuario.getPerfilAvaliacao() == null;
 	}
 
@@ -709,7 +495,7 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 	/** Rótulo do stat "usadas" no hero: "no mês" para renovável, "total" para Teste. */
 	public String getLabelUsadas()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioEfetivo();
 		PerfilAvaliacao plano = usuario != null ? usuario.getPerfilAvaliacao() : null;
 		return (plano != null && plano.isRenovavel()) ? "Usadas no mês" : "Usadas no total";
 	}
@@ -758,12 +544,13 @@ public class PedidoAvaliacaoBean extends PaiBean<PedidoAvaliacao, PedidoAvaliaca
 
 	private void carregarHistorico()
 	{
-		historico = entidadeDAO.buscarPorUsuario(sessaoBean.getUsuario());
+		// Modo suporte: histórico do usuário atendido (dono da config gerenciada pelo ConfigAvaliacaoBean).
+		historico = entidadeDAO.buscarPorUsuario(configAvaliacaoBean.getUsuarioAlvo());
 	}
 
 	private void calcularUso()
 	{
-		Usuario usuario = sessaoBean.getUsuario();
+		Usuario usuario = usuarioEfetivo();
 		if(usuario == null) return;
 		creditosRestantes = creditoAvaliacaoService.creditosRestantes(usuario);
 		avaliacoesUsadas = creditoAvaliacaoService.avaliacoesUsadas(usuario);

@@ -1,11 +1,8 @@
 package bean.usuario;
 
-import java.time.LocalDate;
 import java.util.EnumSet;
 
 import bean.PaiBean;
-import bean.seguranca.SessaoBean;
-import dao.usuario.AssinaturaDAO;
 import dao.usuario.PagamentoDAO;
 import dao.usuario.ProdutoDAO;
 import filtro.usuario.FiltroPagamento;
@@ -21,17 +18,11 @@ import modelo.auditoria.TipoEvento;
 import modelo.avaliacao.PerfilAvaliacao;
 import modelo.publicacao.PerfilCriador;
 import modelo.seguranca.PermissaoPadrao;
-import modelo.usuario.Assinatura;
 import modelo.usuario.Pagamento;
 import modelo.usuario.PerfilUsuario;
 import modelo.usuario.Produto;
-import modelo.usuario.StatusAssinatura;
 import modelo.usuario.TipoPagamento;
-import modelo.usuario.Usuario;
-import service.email.EmailService;
-import util.StringAux;
 import bean.util.Mensagem;
-import web.session.Sessao;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -42,26 +33,11 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	@Inject
 	private FiltroPagamento filtro;
 
-	private String planoStr;
-	private String tipoPagamentoStr;
-
 	@Inject
 	private ProdutoDAO produtoDAO;
 
 	@Inject
-	private AssinaturaDAO assinaturaDAO;
-
-	@Inject
-	private SessaoBean sessaoBean;
-
-	@Inject
-	private UsuarioBean usuarioBean;
-
-	@Inject
 	private ControleAcessoBean controleAcessoBean;
-
-	@Inject
-	private EmailService emailService;
 
 	public PagamentoBean()
 	{
@@ -96,77 +72,6 @@ public class PagamentoBean extends PaiBean<Pagamento, PagamentoDAO, PermissaoPad
 	{
 		if(entidade != null && entidade.getProduto() != null)
 			entidade.setValor(entidade.getProduto().getValor());
-	}
-
-	public String adicionarFinalizar()
-	{
-		try
-		{
-			TipoPagamento tipoPagamento = TipoPagamento.valueOf(this.tipoPagamentoStr);
-			PerfilUsuario plano = PerfilUsuario.valueOf(this.planoStr);
-
-			Produto produto = produtoDAO.buscarPorPerfilUsuario(plano, tipoPagamento);
-
-			Usuario usuario = Sessao.getUsuarioLogado();
-
-			entidade = new Pagamento();
-			entidade.setUsuario(usuario);
-			entidade.setProduto(produto);
-			entidade.setValor(produto != null ? produto.getValor() : 0);
-
-			LocalDate hoje = LocalDate.now();
-			entidade.setData(hoje);
-
-			if(!entidadeDAO.contem(entidade))
-			{
-				LocalDate validade = null;
-				if(produto != null && produto.getDiasValididade() > 0)
-					validade = hoje.plusDays(produto.getDiasValididade());
-
-				if(produto != null && produto.getPerfilUsuario() != null)
-					usuario.setPerfil(produto.getPerfilUsuario());
-
-				usuario.setValidadePlano(validade);
-				usuario = usuarioBean.getEntidadeDAO().salvar(usuario);
-				sessaoBean.updateSession(usuario);
-
-				if(produto != null)
-				{
-					Assinatura assinatura = assinaturaDAO.buscarAtivaPorUsuarioEProduto(usuario, produto);
-					if(assinatura == null)
-					{
-						assinatura = new Assinatura();
-						assinatura.setUsuario(usuario);
-						assinatura.setProduto(produto);
-						assinatura.setDataInicio(hoje);
-					}
-					assinatura.setStatus(StatusAssinatura.Ativa);
-					assinatura.setDataValidade(validade);
-					assinatura.setDataCancelamento(null);
-					entidade.setAssinatura(assinaturaDAO.salvar(assinatura));
-				}
-
-				String nomeProduto = produto != null ? produto.getNome() : plano.getNome();
-				String assunto = "Pagamento realizado";
-				String mensagem = "Pagamento realizado\n\n"
-				+ "Nome: " + entidade.getUsuario().getNome() + "\n"
-				+ "Dia: " + StringAux.getDataStr(entidade.getData()) + "\n"
-				+ "Valor: " + entidade.getValor() + "\n"
-				+ "Produto: " + nomeProduto + "\n";
-
-				emailService.adicionar("vinymax10@gmail.com", assunto, mensagem);
-
-				entidadeDAO.salvar(entidade);
-			}
-
-			Mensagem.send("growl", FacesMessage.SEVERITY_INFO, nome + " efetuado com sucesso.");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível constatar qual pagamento foi efetuado.");
-		}
-		return "";
 	}
 
 	public String pagamentoHotmart(PerfilUsuario plano, TipoPagamento tipoPagamento)
