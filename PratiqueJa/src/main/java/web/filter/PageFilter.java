@@ -54,8 +54,10 @@ public class PageFilter extends Filtro
 			boolean areaAdmin = uri.contains("/administracao/") || uri.contains("/auditoria/") || uri.contains("/exportar/");
 
 			// Telas de erro (404/500/acesso negado) sempre acessíveis — senão um acesso negado
-			// redireciona pra cá e cai em loop de redirecionamento.
-			if(uri.contains("/acesso/"))
+			// redireciona pra cá e cai em loop de redirecionamento. Precisa ser startsWith,
+			// não contains: subpastas admin como /administracao/usuarios/acesso/ contêm
+			// "/acesso/" no meio da URL e vazariam sem login.
+			if(uri.startsWith(contextPath + "/acesso/"))
 			{
 				acesso = true;
 			}
