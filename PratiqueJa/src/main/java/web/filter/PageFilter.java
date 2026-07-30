@@ -24,11 +24,15 @@ public class PageFilter extends Filtro
 	{
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		boolean acesso = false;
-		HttpSession session = ((HttpServletRequest) request).getSession(true);
-		
+		// getSession(false): NÃO cria sessão para requisição anônima/bot. Antes, o getSession(true)
+		// forçava uma sessão nova em toda requisição (só para ler UsuarioLogado, que nem existe para
+		// visitante) — crawlers batendo direto nas URLs geravam milhares de sessões. A sessão de
+		// usuário real nasce no login (SessaoBean), não aqui.
+		HttpSession session = ((HttpServletRequest) request).getSession(false);
+
 		try
 		{
-			Usuario usuario = (Usuario) session.getAttribute("UsuarioLogado");
+			Usuario usuario = session != null ? (Usuario) session.getAttribute("UsuarioLogado") : null;
 			String uri = httpRequest.getRequestURI();
 
 			// Raiz do site ("/") não é uma URL de conteúdo real — sempre foi um atalho pra cair
@@ -82,7 +86,11 @@ public class PageFilter extends Filtro
 				// "Criar Avaliação"); só a geração de fato exige login — ver PedidoPostBean. As
 				// demais abas (Configurações, Programação, Background, Teste, CTAs) continuam
 				// exigindo login para entrar, como antes.
-				|| uri.contains("/post/gerar/"))
+				|| uri.contains("/post/gerar/")
+				// Tela da nova senha: quem chega nela veio do link do e-mail de recuperação e,
+				// por definição, NÃO está logado (ver RecuperacaoSenhaServlet). O token já foi
+				// validado lá; sem ele a tela só mostra "link expirado".
+				|| uri.contains("/login/novaSenha"))
 					acesso = true;
 
 				if(usuario != null)
@@ -96,6 +104,9 @@ public class PageFilter extends Filtro
 					if(uri.contains("/atividades/")
 					|| uri.contains("/exercicio/exercicio/verExercicio")
 					|| uri.contains("usuario/pagamento/finalizado")
+					// /login/redefinirSenha: troca de senha forçada (Usuario.resetSenha) —
+					// só faz sentido para quem já está logado.
+					|| uri.contains("/login/")
 					|| usuario.isAdmin())
 						acesso = true;
 				}

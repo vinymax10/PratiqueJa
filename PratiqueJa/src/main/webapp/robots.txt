@@ -1,4 +1,4 @@
-# Crawlers de IA que varrem o site de forma agressiva
+# Crawlers de IA / não-busca que varrem o site de forma agressiva
 User-agent: GPTBot
 Disallow: /
 
@@ -11,6 +11,35 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-# Demais robôs (Google, Bing, etc.): acesso liberado
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# Applebot: em 23/07/2026 varreu o site a ~10.000 req/h vindas de ~1.900 IPs
+# e derrubou o WildFly por falta de heap. Bloqueado por completo (o nginx
+# também devolve 403 para ele e para a faixa 17.0.0.0/8).
+User-agent: Applebot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# Demais robôs (Google, Bing, etc.): acesso liberado, mas com teto de
+# requisições no nginx (ver /etc/nginx/conf.d/protecao-bots.conf no VPS).
 User-agent: *
 Disallow:
+Crawl-delay: 2

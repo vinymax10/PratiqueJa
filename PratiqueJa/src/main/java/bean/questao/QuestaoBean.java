@@ -97,7 +97,25 @@ public class QuestaoBean extends PaiBean<Questao, QuestaoDAO, PermissaoPadrao<Qu
 	{
 		if(tabState.hasState(FiltroQuestao.class))
 			filtro = tabState.getState(FiltroQuestao.class);
-		filtrar();
+	}
+
+	/**
+	 * Carrega sob demanda, no mesmo esquema de getListaTudo(): só as telas de
+	 * /administracao/conteudo/questao/gerenciar/ leem esta lista.
+	 *
+	 * Antes o filtrar() rodava no @PostConstruct, então toda criação do bean
+	 * trazia as ~14 mil questões do banco — inclusive em /questao/questao, que
+	 * só renderiza questoesOverview (janela de 20). Como o bean é @ViewScoped,
+	 * o JSF criava sessão para o view state e a lista ficava retida até ela
+	 * expirar: ~10 MB por acesso, o que estourou o heap em 23/07/2026.
+	 */
+	@Override
+	public List<Questao> getLista()
+	{
+		if(lista == null)
+			filtrar();
+
+		return lista;
 	}
 
 	public void filtrar()

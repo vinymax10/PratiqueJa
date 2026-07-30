@@ -31,7 +31,9 @@ public abstract class Filtro implements Filter
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		if(acesso)
 		{
-			HttpSession session = ((HttpServletRequest) request).getSession(true);
+			// getSession(false): não cria sessão para anônimo/bot só para gravar o "page".
+			// As checagens abaixo já são null-safe (só grava se a sessão já existir).
+			HttpSession session = ((HttpServletRequest) request).getSession(false);
 			if(session!=null&&session.getAttribute("page")!=null
 			&&!session.getAttribute("page").equals(httpRequest.getRequestURI()))
 			{

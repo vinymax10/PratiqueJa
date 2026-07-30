@@ -27,11 +27,9 @@ public class Potenciacao1 extends GeradorExercicio
 		Racional racional = new Racional(a, b);
 		racional.fatoracao(2);
 
-		int maxBase = (int) Math.min((Math.log(1000) / Math.log((Math.abs(a) + Math.abs(b) / 2))), potenciaMaxima);
+		int maxBase = Math.max(2, (int) Math.min((Math.log(1000) / Math.log((Math.abs(a) + Math.abs(b) / 2))), potenciaMaxima));
 
-		int p = rand.nextInt(maxBase + 1);
-		if(p == 0 || p == 1)
-			p = rand.nextInt(maxBase + 1);
+		int p = 2 + rand.nextInt(maxBase - 1); // 2..maxBase (evita expoente 0 e 1)
 
 		String texto = "\\left(" + racional.showDfrac() + "\\right)^{" + p + "}" + "=";
 

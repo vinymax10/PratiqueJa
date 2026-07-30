@@ -8,8 +8,9 @@ import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import org.primefaces.PrimeFaces;
+
 import bean.download.Diretorio;
-import bean.email.EmailBean;
 import bean.util.Mensagem;
 import dao.usuario.UsuarioDAO;
 import infra.Navegacao;
@@ -29,7 +30,9 @@ import modelo.usuario.Usuario;
 import net.coobird.thumbnailator.Thumbnails;
 import service.configuracao.DiretorioService;
 import service.seguranca.AcessoService;
+import service.usuario.RecuperacaoSenhaService;
 import util.FileAux;
+import util.UrlAux;
 import web.session.Sessao;
 
 @Data
@@ -42,17 +45,20 @@ public class AutenticacaoBean implements Serializable
 	@Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", message = "Email inválido.")
 	private String email;
 	private String senha;
-	
+
 	private String senhaAntiga;
-	
+
+	/** Campo do diálogo "Esqueci minha senha" — separado do e-mail do formulário de login. */
+	private String emailRecuperacao;
+
 	private Usuario usuario;
 
 	@Inject
 	private UsuarioDAO usuarioDAO;
 
 	@Inject
-	private EmailBean emailBean;
-	
+	private RecuperacaoSenhaService recuperacaoSenhaService;
+
 	private String urlRedefinirSenha = "/login/redefinirSenha.xhtml";
 
 	@Inject
@@ -69,6 +75,45 @@ public class AutenticacaoBean implements Serializable
 		email = "";
 		senha = "";
 		senhaAntiga="";
+		emailRecuperacao = "";
+	}
+
+	/**
+	 * Ação do diálogo "Esqueci minha senha": envia por e-mail um link com token de uso único
+	 * (ver {@link RecuperacaoSenhaService}). A senha atual continua valendo até o link ser usado.
+	 */
+	public void recuperarSenha()
+	{
+		// getUsuario ignora parâmetro em branco (varreria a tabela inteira) — barra antes.
+		if(emailRecuperacao == null || emailRecuperacao.isBlank())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Informe o e-mail cadastrado.");
+			return;
+		}
+
+		Usuario usuarioRecuperacao = usuarioDAO.getUsuario(emailRecuperacao, "");
+
+		if(usuarioRecuperacao == null)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "E-mail não cadastrado.");
+			return;
+		}
+
+		if(!usuarioRecuperacao.isAtivo())
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Usuário inativo. Entre em contato com o suporte.");
+			return;
+		}
+
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+			.getExternalContext().getRequest();
+		recuperacaoSenhaService.solicitar(usuarioRecuperacao, UrlAux.base(request));
+
+		Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
+			"Enviamos para " + emailRecuperacao + " um link para você cadastrar uma nova senha. Ele vale por 60 minutos.");
+
+		emailRecuperacao = "";
+		PrimeFaces.current().ajax().addCallbackParam("recuperado", true);
 	}
 	
 	public String login()

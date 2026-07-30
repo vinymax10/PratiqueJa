@@ -28,6 +28,7 @@
 		<url-pattern>/exportar/*</url-pattern>
 		<url-pattern>/gestaoQuestao/*</url-pattern>
 		<url-pattern>/informativo/*</url-pattern>
+		<url-pattern>/login/*</url-pattern>
 		<url-pattern>/matematica/*</url-pattern>
 		<url-pattern>/pagamento/*</url-pattern>
 		<url-pattern>/planos/*</url-pattern>
@@ -61,9 +62,23 @@
 		<location>/acesso/500.xhtml</location>
 	</error-page>
 
+	<!-- 30 min: o JSF cria sessão para guardar o view state mesmo de visitante
+	     anônimo, e cada uma segurava memória até expirar. Com 120 min uma janela
+	     de tráfego comum bastava para estourar o heap (OOM de 23/07/2026). -->
 	<session-config>
-		<session-timeout>120</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
+
+	<!-- Padrão do Mojarra é 15 views por sessão. Cada view guarda o estado da
+	     árvore de componentes; 5 cobre o vai-e-volta normal entre telas. -->
+	<context-param>
+		<param-name>com.sun.faces.numberOfViewsInSession</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.numberOfLogicalViews</param-name>
+		<param-value>5</param-value>
+	</context-param>
 	<listener>
 		<listener-class>web.listener.SessionListener</listener-class>
 	</listener>

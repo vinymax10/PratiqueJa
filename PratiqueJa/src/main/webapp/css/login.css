@@ -203,6 +203,19 @@
     justify-content: center;
 }
 
+/* ── diálogo "Esqueci minha senha" ──────────────────────── */
+/* Reaproveita o lado branco do login (.login-form-side), sem o painel hero. */
+.reset-dlg .login-form-side {
+    padding: 40px 38px;
+}
+.reset-dlg .login-logo {
+    width: 140px;
+    margin-bottom: 14px;
+}
+.reset-dlg .login-btn.ui-button {
+    margin-top: 4px;
+}
+
 /* ── responsivo: empilha (esconde o painel hero) ────────── */
 @media (max-width: 720px) {
     .login-hero-side {

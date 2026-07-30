@@ -228,14 +228,17 @@ public class TikTok2
 	public void paginaExercicio()
 	{
 		String enunciado = enunciado(true);
+		int pt = ptEnunciado(enunciado);
 
 		latex += "\\begin{tikzpicture}[remember picture,overlay]\r\n"
 		+ "\\painel\r\n"
 		+ cabecalho(labelNivel())
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-40px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
 		+ "\\node[hook,below=7px of chip] (hook){" + Ganchos.aleatorio() + "};\r\n"
-		+ "\\node[anchor=north,align=center,text width=216px,text=" + estiloVisual.corDestaque() + ",font=\\bfseries] (enun)"
-		+ " at ([yshift=-104px]current page.north){" + fontsize(ptEnunciado(enunciado)) + "\r\n" + enunciado + "};\r\n";
+		+ "\\node[anchor=north,inner sep=0] (enun)"
+		+ " at ([yshift=-104px]current page.north){\\begin{minipage}{216px}\\centering\\color{"
+		+ estiloVisual.corDestaque() + "}\\bfseries" + fontsize(pt) + "\r\n"
+		+ espacamentoEnunciado(pt) + "\r\n" + enunciado + "\\par\\end{minipage}};\r\n";
 
 		if(programacaoPost.isAlternativaReel())
 			latex += alternativas();
@@ -250,13 +253,16 @@ public class TikTok2
 	{
 		String enunciado = enunciado(false);
 		String texto = getTextoResolucao();
+		int ptEnun = Math.max(9, ptEnunciado(enunciado) - 4);
 
 		latex += "\\begin{tikzpicture}[remember picture,overlay]\r\n"
 		+ "\\painel\r\n"
 		+ cabecalho("RESOLUÇÃO")
 		+ "\\node[chip,anchor=north] (chip) at ([yshift=-40px]PN){" + sizeChip() + exercicio.getAssunto().getNome() + "};\r\n"
-		+ "\\node[anchor=north,align=center,text width=216px,text=cinza,font=\\bfseries] (enun)"
-		+ " at ([yshift=-8px]chip.south){" + fontsize(Math.max(9, ptEnunciado(enunciado) - 4)) + "\r\n" + enunciado + "};\r\n"
+		+ "\\node[anchor=north,inner sep=0] (enun)"
+		+ " at ([yshift=-8px]chip.south){\\begin{minipage}{216px}\\centering\\color{cinza}\\bfseries"
+		+ fontsize(ptEnun) + "\r\n"
+		+ espacamentoEnunciado(ptEnun) + "\r\n" + enunciado + "\\par\\end{minipage}};\r\n"
 		// Resolução num minipage (modo parágrafo normal), NÃO em node align=center: o
 		// align=center do TikZ não respeita a profundidade das frações e cola as linhas;
 		// o minipage espaça certo (igual à avaliação) e o \lineskip volta a funcionar.
@@ -472,6 +478,23 @@ public class TikTok2
 	private String fontsizeResolucao(int pt)
 	{
 		return "\\fontsize{" + pt + "}{" + (pt + 2) + "}\\selectfont";
+	}
+
+	/**
+	 * Espaçamento do enunciado, na mesma proporção da resolução. O \parskip é o que separa
+	 * um parágrafo do outro (o padrão do article é 0pt: "Calcule:" colava na expressão logo
+	 * abaixo); o \lineskip evita que uma linha alta — \dfrac, expoente — encoste na anterior.
+	 *
+	 * Depende do enunciado estar num minipage: dentro de um node com align=center o TikZ
+	 * ignora o \lineskip e cola as linhas (mesmo motivo que levou a resolução ao minipage).
+	 */
+	private String espacamentoEnunciado(int pt)
+	{
+		int parskip = Math.round(pt * 0.6f);
+		int lineskip = Math.round(pt * 0.6f);
+		int limit = Math.round(pt * 0.2f);
+		return "\\setlength{\\parskip}{" + parskip + "pt}\\setlength{\\lineskip}{" + lineskip
+			+ "pt}\\setlength{\\lineskiplimit}{" + limit + "pt}";
 	}
 
 	/** Espaçamento da resolução escalado pela fonte (mesma proporção da avaliação a 10pt:

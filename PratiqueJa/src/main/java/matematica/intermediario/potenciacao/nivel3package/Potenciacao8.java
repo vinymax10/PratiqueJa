@@ -18,7 +18,7 @@ public class Potenciacao8 extends GeradorExercicio
 			p = 2 + rand.nextInt(5); // 2..6
 			q = 2 + rand.nextInt(5); // 2..6
 		}
-		while (multiplicacao ? (a * b >= 10) : (a % b != 0));
+		while (multiplicacao ? (a * b >= 10) : (a % b != 0 || p == q)); // p == q daria 10^0
 
 		String enunciado, correta, e1, e2, e3, passoTexto, passoMath1, passoMath2;
 

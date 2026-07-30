@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+
+		<p:dialog id="dialogResetSenha" widgetVar="resetSenhaWidget"
+			modal="true" responsive="true" showHeader="false"
+			dismissableMask="true" closeOnEscape="true"
+			styleClass="login-dlg reset-dlg" width="420">
+
+			<div class="login-form-side">
+
+				<button type="button" class="login-close"
+					onclick="PF('resetSenhaWidget').hide()" aria-label="Fechar">
+					<i class="pi pi-times" />
+				</button>
+
+				<img class="login-logo" alt="PratiqueJá" src="/image/logo.png" />
+				<h3 class="login-form-title">Recuperar senha</h3>
+				<p class="login-form-sub">
+					Informe o e-mail cadastrado e enviaremos um link para você criar uma nova senha.
+				</p>
+
+				<h:form id="formResetSenha" styleClass="login-form">
+
+					<div class="login-field">
+						<p:outputLabel for="emailReset" value="Email" />
+						<p:inputText id="emailReset" value="#{autenticacaoBean.emailRecuperacao}"
+							required="true" requiredMessage="O e-mail é obrigatório" maxlength="255" />
+						<p:message id="msgEmailReset" for="emailReset" display="text" />
+					</div>
+
+					<p:commandButton id="recuperar" value="Enviar link de redefinição"
+						process="@form" update="@form :growl" ajax="true"
+						action="#{autenticacaoBean.recuperarSenha}"
+						oncomplete="if (args &amp;&amp; args.recuperado) PF('resetSenhaWidget').hide()"
+						styleClass="login-btn" icon="pi pi-send" iconPos="right" />
+
+					<p:defaultCommand target="recuperar" />
+
+				</h:form>
+
+				<p style="text-align:center; margin-top:1rem; font-size:0.9rem; color:var(--text-color-secondary);">
+					Lembrou a senha?
+					<a href="#" style="color:var(--primary-color); font-weight:600;"
+						onclick="PF('resetSenhaWidget').hide(); PF('loginWidget').show(); return false;">Entrar</a>
+				</p>
+
+			</div>
+
+		</p:dialog>
+
+	</ui:composition>
+</h:body>
+</html>

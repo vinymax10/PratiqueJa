@@ -11,10 +11,8 @@ public class Potenciacao1 extends GeradorExercicio
 		int a = 1 + rand.nextInt(10);
 
 		int potenciaMaxima = 7;
-		int maxBase = (int) Math.min((Math.log(1000) / Math.log(a)), potenciaMaxima);
-		int p = rand.nextInt(maxBase + 1);
-		if(p == 0 || p == 1)
-			p = rand.nextInt(maxBase + 1);
+		int maxBase = Math.max(2, (int) Math.min((Math.log(1000) / Math.log(a)), potenciaMaxima));
+		int p = 2 + rand.nextInt(maxBase - 1); // 2..maxBase (evita expoente 0 e 1)
 
 		String texto = "" + a + "^{" + p + "}" + "=";
 

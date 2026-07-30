@@ -58,9 +58,11 @@
 							<p:message id="msgSenha" for="senha" display="text" />
 						</div>
 
+						<!-- Link puro (não p:commandLink): um commandLink submeteria o formulário de
+						     login e a validação de e-mail/senha obrigatórios barraria a abertura. -->
 						<div class="login-forgot">
-							<p:commandLink value="Esqueci minha senha"
-								onclick="PF('resetSenhaWidget').show()" />
+							<a href="#" onclick="PF('loginWidget').hide(); PF('resetSenhaWidget').show(); return false;">
+								Esqueci minha senha</a>
 						</div>
 
 						<p:commandButton id="login" value="Entrar"

@@ -1,0 +1,64 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="OpenGraph">
+		<link rel="stylesheet" href="/css/avaliacao-page.css" type="text/css" />
+	</ui:define>
+
+	<h:form id="form">
+		<div class="av-joined">
+
+			<div class="av-hero">
+				<div class="av-hero-head">
+					<span class="av-hero-badge">
+						<i class="pi pi-lock" /> Segurança
+					</span>
+					<h1 class="av-hero-title">Cadastre uma nova senha</h1>
+					<p class="av-hero-desc">
+						Para continuar, escolha uma nova senha de acesso à sua conta.
+					</p>
+				</div>
+			</div>
+
+			<div class="av-panel">
+
+				<div class="av-fields">
+
+					<div class="av-field">
+						<p:outputLabel for="senha" value="Nova senha" />
+						<p:password id="senha" value="#{redefinirSenhaBean.senha}" feedback="true"
+							required="true" requiredMessage="A senha é obrigatória"
+							match="confirmaSenha" maxlength="255" />
+						<p:message for="senha" display="text" />
+					</div>
+
+					<div class="av-field">
+						<p:outputLabel for="confirmaSenha" value="Confirmar nova senha" />
+						<p:password id="confirmaSenha" value="#{redefinirSenhaBean.confirmaSenha}"
+							required="true" requiredMessage="Confirme a senha" maxlength="255" />
+						<p:message for="confirmaSenha" display="text" />
+					</div>
+
+				</div>
+
+				<div class="av-actions">
+					<p:commandButton id="btnRedefinir" value="Salvar nova senha"
+						styleClass="ui-button-raised ui-button-primary"
+						icon="pi pi-check"
+						action="#{redefinirSenhaBean.redefinir()}"
+						update="@form :growl"
+						process="@form">
+						<p:defaultCommand target="btnRedefinir" />
+					</p:commandButton>
+				</div>
+
+			</div>
+
+		</div>
+	</h:form>
+
+</ui:decorate>

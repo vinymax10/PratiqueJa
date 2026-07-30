@@ -12,6 +12,9 @@ public class Potenciacao3 extends GeradorExercicio
 		int p1 = 2 + rand.nextInt(9);
 		int p2 = 2 + rand.nextInt(9);
 
+		while(p1 == p2) // evita resultado a^0
+			p2 = 2 + rand.nextInt(9);
+
 		String texto = a + "^{" + p1 + "} \\div " + a + "^{" + p2 + "}=" + a + "^{x}";
 
 		addParagrafo("Qual o valor de \\(x\\)?");
