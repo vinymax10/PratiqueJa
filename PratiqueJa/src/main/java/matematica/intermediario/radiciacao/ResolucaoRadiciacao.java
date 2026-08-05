@@ -59,6 +59,14 @@ public class ResolucaoRadiciacao
 		if(fatoresPrimos.possuiPotencias())
 		{
 			fatoresPrimos.removerPotencias();
+
+			if(!fatoresPrimos.precisaDesenvolver())
+			{
+				// Sobrou um único fator de potência 1 — ele já É o resultado, não repetir.
+				resolucaoLatex+="=\\mathbf{"+fatoresPrimos.latex()+"}";
+				return resolucaoLatex;
+			}
+
 			resolucaoLatex+="="+fatoresPrimos.latex();
 		}
 
