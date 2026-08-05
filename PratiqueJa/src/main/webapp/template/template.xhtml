@@ -50,6 +50,10 @@
 
 <h:body styleClass="t2-body">
 
+	<!-- Nonce por sessão (bean.seguranca.GoogleNonce): o google.js o passa ao
+	     initialize e o servidor confere que o token é desta sessão. Definido
+	     antes do google.js, que o lê de window.googleNonce. -->
+	<script type="text/javascript">window.googleNonce = "#{googleNonce.valor}";</script>
 	<script type="text/javascript" src="/js/google.js"></script>
 
 	<p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"

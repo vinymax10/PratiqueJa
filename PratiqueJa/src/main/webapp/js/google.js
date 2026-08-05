@@ -12,8 +12,12 @@ function handleCredentialResponse(response)
 }
 
 window.onload = function () {
+  // window.googleNonce é definido pelo template (bean.seguranca.GoogleNonce),
+  // por sessão. O Google carimba o nonce no token; o servidor confere que é o
+  // desta sessão, o que impede reapresentar aqui um token capturado alhures.
   google.accounts.id.initialize({
     client_id: "404469863896-q3dl3oechaqfocos3ho3k986igu3g6o8.apps.googleusercontent.com",
+    nonce: window.googleNonce,
     callback: handleCredentialResponse
   });
   google.accounts.id.renderButton(
