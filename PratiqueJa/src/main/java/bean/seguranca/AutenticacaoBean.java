@@ -25,11 +25,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Pattern;
 import javax.imageio.ImageIO;
 import lombok.Data;
+import modelo.seguranca.GoogleUserInfo;
 import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
 import net.coobird.thumbnailator.Thumbnails;
 import service.configuracao.DiretorioService;
 import service.seguranca.AcessoService;
+import service.seguranca.GoogleTokenService;
 import service.usuario.RecuperacaoSenhaService;
 import util.FileAux;
 import util.UrlAux;
@@ -69,6 +71,9 @@ public class AutenticacaoBean implements Serializable
 
 	@Inject
 	private DiretorioService diretorioService;
+
+	@Inject
+	private GoogleTokenService googleTokenService;
 
 	public void init()
 	{
@@ -135,30 +140,42 @@ public class AutenticacaoBean implements Serializable
 		return "";
 	}
 
-	/** Chamado via p:remoteCommand após o login com o Google (google.js). */
+	/**
+	 * Chamado via p:remoteCommand após o login com o Google (google.js).
+	 *
+	 * O único parâmetro aceito é o ID token ("credential"); e-mail, nome e sub saem das claims
+	 * dele depois de verificado ({@link GoogleTokenService}). Ler esses campos direto do request
+	 * permitiria a qualquer um postar o e-mail de outra pessoa e entrar na conta dela.
+	 */
 	public void loginGoogle()
 	{
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String emailGoogle = params.get("email");
-		String nome = params.get("name");
-		String sub = params.get("sub");
-		String picture = params.get("picture");
 
-		usuario = usuarioDAO.getUsuarioGoogle(sub);
+		GoogleUserInfo info = googleTokenService.verificar(params.get("credential"));
+
+		if(info == null)
+		{
+			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Não foi possível validar o login com o Google.");
+			return;
+		}
+
+		usuario = usuarioDAO.getUsuarioGoogle(info.sub());
 
 		if(usuario == null)
 		{
-			usuario = usuarioDAO.getUsuario(emailGoogle, "");
+			// Vincula a conta já existente de mesmo e-mail: só é seguro porque o e-mail
+			// vem do token verificado e com email_verified.
+			usuario = usuarioDAO.getUsuario(info.email(), "");
 			boolean novo = usuario == null;
 			if(novo)
 			{
 				usuario = new Usuario();
-				usuario.setEmail(emailGoogle);
-				usuario.setNome(nome);
+				usuario.setEmail(info.email());
+				usuario.setNome(info.name());
 			}
-			usuario.setSubGoogle(sub);
+			usuario.setSubGoogle(info.sub());
 			usuario = usuarioDAO.salvar(usuario);
-			salvarFotoGoogle(picture);
+			salvarFotoGoogle(info.picture());
 		}
 
 		if(!usuario.isAtivo())
@@ -169,6 +186,10 @@ public class AutenticacaoBean implements Serializable
 
 		iniciarSessaoUsuario();
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso.");
+
+		// Sem isso o oncomplete recarregaria a página também quando o login falha, e o
+		// growl com o motivo se perderia no reload.
+		PrimeFaces.current().ajax().addCallbackParam("loginOk", true);
 	}
 
 	private void salvarFotoGoogle(String pictureUrl)

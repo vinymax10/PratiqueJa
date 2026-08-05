@@ -1,33 +1,14 @@
-function handleCredentialResponse(response) 
+// O ID token vai inteiro para o servidor, que confere assinatura, aud, iss e validade
+// (GoogleTokenService). Decodificar aqui e mandar e-mail/sub soltos não provaria nada:
+// qualquer um poderia postar os mesmos campos e entrar na conta de outra pessoa.
+function handleCredentialResponse(response)
 {
-	const responsePayload = jwt_decode(response.credential);
-
-    console.log("ID: " + responsePayload.sub);
-    console.log('Full Name: ' + responsePayload.name);
-    console.log('Given Name: ' + responsePayload.given_name);
-    console.log('Family Name: ' + responsePayload.family_name);
-    console.log("Image URL: " + responsePayload.picture);
-    console.log("Email: " + responsePayload.email);
-    console.log(responsePayload);
-	
-    sendDadosUser ([ 
+    sendDadosUser([
         {
-            name : 'email',
-            value : responsePayload.email
-       },   
-       {
-         name : 'name',
-         value : responsePayload.name
-       },
-       {
-           name : 'sub',
-           value : responsePayload.sub
-       },
-       {
-           name : 'picture',
-           value : responsePayload.picture
-       }
-     ]);  
+            name : 'credential',
+            value : response.credential
+        }
+    ]);
 }
 
 window.onload = function () {

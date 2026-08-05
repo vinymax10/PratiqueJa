@@ -21,7 +21,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
 
-	<script type="text/javascript" src="/js/jwt-decode.js"></script>
 	<script src="https://accounts.google.com/gsi/client"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -55,7 +54,7 @@
 
 	<p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"
 		process="@this"
-		oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('loginWidget').hide(); window.location.reload(); }"
+		oncomplete="if (args &amp;&amp; args.loginOk) { PF('loginWidget').hide(); window.location.reload(); }"
 		update=":formPrincipal :growl" />
 
 	<p:growl for="growl" id="growl" redisplay="false" showDetail="true"

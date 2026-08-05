@@ -24,7 +24,6 @@
 
 	<!-- <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
 
-	<script type="text/javascript" src="/js/jwt-decode.js"></script>
 	<script src="https://accounts.google.com/gsi/client" ></script>
 	
 
@@ -62,7 +61,7 @@
 	<script type="text/javascript" src="/js/google.js" ></script>
     
     <p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"
-    process="@this" oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('loginWidget').hide(); window.location.reload(); }"
+    process="@this" oncomplete="if (args &amp;&amp; args.loginOk) { PF('loginWidget').hide(); window.location.reload(); }"
     update=":formPrincipal :growl" />
 	
 	<p:growl for="growl" id="growl" redisplay="false" showDetail="true"
