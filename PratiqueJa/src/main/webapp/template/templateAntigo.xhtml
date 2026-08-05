@@ -58,6 +58,8 @@
 <h:body >
 	
 	<!-- 	login google -->
+	<!-- Nonce por sessão (bean.seguranca.GoogleNonce), lido pelo google.js. -->
+	<script type="text/javascript">window.googleNonce = "#{googleNonce.valor}";</script>
 	<script type="text/javascript" src="/js/google.js" ></script>
     
     <p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"

@@ -74,6 +74,13 @@
 				<version>3.5.0</version>
 			</plugin>
 
+			<!-- Roda os testes JUnit 5 (antes não havia suíte no projeto). -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+			</plugin>
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -93,7 +100,15 @@
 	</build>
 
 	<dependencies>
-		
+
+		<!-- Testes (JUnit 5). Só as classes de throttle, que são lógica pura. -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter</artifactId>
+		    <version>5.10.2</version>
+		    <scope>test</scope>
+		</dependency>
+
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>

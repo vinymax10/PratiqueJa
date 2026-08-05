@@ -16,9 +16,7 @@ import dao.usuario.UsuarioDAO;
 import infra.Navegacao;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.validator.ValidatorException;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,9 +27,12 @@ import modelo.seguranca.GoogleUserInfo;
 import modelo.usuario.Imagem;
 import modelo.usuario.Usuario;
 import net.coobird.thumbnailator.Thumbnails;
+import infra.IpRequisicao;
 import service.configuracao.DiretorioService;
 import service.seguranca.AcessoService;
 import service.seguranca.GoogleTokenService;
+import service.seguranca.ThrottleLogin;
+import service.seguranca.ThrottleRecuperacaoSenha;
 import service.usuario.RecuperacaoSenhaService;
 import util.FileAux;
 import util.UrlAux;
@@ -75,6 +76,27 @@ public class AutenticacaoBean implements Serializable
 	@Inject
 	private GoogleTokenService googleTokenService;
 
+	@Inject
+	private GoogleNonce googleNonce;
+
+	@Inject
+	private ThrottleLogin throttleLogin;
+
+	@Inject
+	private ThrottleRecuperacaoSenha throttleRecuperacao;
+
+	private static final String MSG_CREDENCIAIS = "E-mail ou senha incorretos.";
+	private static final String MSG_MUITAS_TENTATIVAS =
+		"Muitas tentativas de login. Aguarde alguns minutos e tente novamente.";
+
+	/**
+	 * Hash de comparação para quando não há senha real (e-mail inexistente ou
+	 * conta só-Google). Custo 12, o mesmo dos hashes de verdade
+	 * ({@code UsuarioService}) — se fosse mais barato, o tempo denunciaria que
+	 * ali não havia conta. Calculado uma vez no carregamento da classe.
+	 */
+	private static final String HASH_FICTICIO = BCrypt.hashpw("pratiqueja-timing-uniforme", BCrypt.gensalt(12));
+
 	public void init()
 	{
 		email = "";
@@ -89,33 +111,30 @@ public class AutenticacaoBean implements Serializable
 	 */
 	public void recuperarSenha()
 	{
-		// getUsuario ignora parâmetro em branco (varreria a tabela inteira) — barra antes.
 		if(emailRecuperacao == null || emailRecuperacao.isBlank())
 		{
 			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Informe o e-mail cadastrado.");
 			return;
 		}
 
+		// Responde SEMPRE a mesma coisa, exista ou não a conta (e esteja ela
+		// ativa ou não). Antes a tela dizia "E-mail não cadastrado" / "Usuário
+		// inativo" / "Enviamos para X..." — três respostas que juntas
+		// transformavam o formulário num verificador de cadastro. O envio de
+		// fato só acontece com conta ativa e passando pela trava anti-bomba
+		// (ThrottleRecuperacaoSenha), mas nada disso muda o que o usuário vê.
 		Usuario usuarioRecuperacao = usuarioDAO.getUsuario(emailRecuperacao, "");
 
-		if(usuarioRecuperacao == null)
+		if(usuarioRecuperacao != null && usuarioRecuperacao.isAtivo() && throttleRecuperacao.podeEnviar(emailRecuperacao))
 		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "E-mail não cadastrado.");
-			return;
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest();
+			recuperacaoSenhaService.solicitar(usuarioRecuperacao, UrlAux.base(request));
 		}
-
-		if(!usuarioRecuperacao.isAtivo())
-		{
-			Mensagem.send("growl", FacesMessage.SEVERITY_ERROR, "Usuário inativo. Entre em contato com o suporte.");
-			return;
-		}
-
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
-			.getExternalContext().getRequest();
-		recuperacaoSenhaService.solicitar(usuarioRecuperacao, UrlAux.base(request));
 
 		Mensagem.send("growl", FacesMessage.SEVERITY_INFO,
-			"Enviamos para " + emailRecuperacao + " um link para você cadastrar uma nova senha. Ele vale por 60 minutos.");
+			"Se existir uma conta com esse e-mail, enviamos um link para você criar uma nova senha. "
+			+ "Ele vale por 60 minutos; confira também o spam.");
 
 		emailRecuperacao = "";
 		PrimeFaces.current().ajax().addCallbackParam("recuperado", true);
@@ -123,18 +142,47 @@ public class AutenticacaoBean implements Serializable
 	
 	public String login()
 	{
-		usuario = usuarioDAO.getUsuario(email, "");
-		if(validarLogin())
+		String ip = IpRequisicao.atual();
+
+		if(throttleLogin.bloqueadoPorIp(ip))
 		{
-			String paginaOrigem = obterPaginaOrigem();
-			iniciarSessaoUsuario();
-			if(usuario.isResetSenha())
-				Navegacao.redirect(urlRedefinirSenha);
-			else
-			{
-				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso");
-				Navegacao.redirect(paginaOrigem);
-			}
+			// Recusa antes do BCrypt: não se gasta CPU com o chute e a tentativa
+			// não conta como falha nova. A mensagem fala do excesso, não da conta.
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, MSG_MUITAS_TENTATIVAS);
+			senha = "";
+			return "";
+		}
+
+		usuario = usuarioDAO.getUsuario(email, "");
+
+		if(!senhaConfere(usuario, senha))
+		{
+			pausar(throttleLogin.registrarFalha(email, ip));
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, MSG_CREDENCIAIS);
+			senha = "";
+			return "";
+		}
+
+		// Senha correta: zera o placar do throttle.
+		throttleLogin.registrarSucesso(email, ip);
+
+		// "Inativo" só aparece DEPOIS de a senha bater — não é oráculo de
+		// enumeração (o atacante já teria a senha), e é o aviso certo para o dono.
+		if(!usuario.isAtivo())
+		{
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, "Usuário inativo. Entre em contato com o suporte.");
+			senha = "";
+			return "";
+		}
+
+		String paginaOrigem = obterPaginaOrigem();
+		iniciarSessaoUsuario();
+		if(usuario.isResetSenha())
+			Navegacao.redirect(urlRedefinirSenha);
+		else
+		{
+			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso");
+			Navegacao.redirect(paginaOrigem);
 		}
 
 		return "";
@@ -151,7 +199,7 @@ public class AutenticacaoBean implements Serializable
 	{
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
-		GoogleUserInfo info = googleTokenService.verificar(params.get("credential"));
+		GoogleUserInfo info = googleTokenService.verificar(params.get("credential"), googleNonce.getValor());
 
 		if(info == null)
 		{
@@ -252,31 +300,42 @@ public class AutenticacaoBean implements Serializable
 		return sessaoBean.getUrlInicial();
 	}
 
-	private boolean validarLogin()
+	/**
+	 * Confere a senha rodando o BCrypt <b>sempre</b> — inclusive quando o
+	 * usuário não existe ou é conta só-Google (sem senha), caso em que a
+	 * comparação é contra o {@link #HASH_FICTICIO}. Sem isso, só a conta real
+	 * chegaria a rodar o BCrypt e o tempo de resposta viraria um verificador de
+	 * cadastro: a diferença de algumas centenas de ms é medível de fora. A
+	 * recusa é sempre a mesma mensagem ({@link #MSG_CREDENCIAIS}), sem distinguir
+	 * e-mail inexistente de senha errada.
+	 */
+	private boolean senhaConfere(Usuario u, String senhaDigitada)
 	{
-		boolean ok = true;
+		boolean temSenha = u != null && u.getSenha() != null && !u.getSenha().isBlank();
+		String hash = temSenha ? u.getSenha() : HASH_FICTICIO;
 
-		if(usuario == null)
+		boolean confere = BCrypt.checkpw(senhaDigitada == null ? "" : senhaDigitada, hash);
+
+		return temSenha && confere;
+	}
+
+	/**
+	 * Aplica o atraso do throttle por conta. Interrupção não é motivo para vazar
+	 * a diferença de tempo nem para derrubar o login — restaura o flag e volta.
+	 */
+	private void pausar(long ms)
+	{
+		if(ms <= 0)
+			return;
+
+		try
 		{
-			ok = false;
-			Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, "Usuário não cadastrado.");
+			Thread.sleep(ms);
 		}
-		else 
+		catch(InterruptedException e)
 		{
-			if(usuario.getSenha() == null || usuario.getSenha().isBlank() || !BCrypt.checkpw(senha, usuario.getSenha()))
-			{
-				ok = false;
-				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, "Usuário e senha incorretos.");
-			}
-			
-			if(!usuario.isAtivo())
-			{
-				ok = false;
-				Mensagem.sendRedirect("growl", FacesMessage.SEVERITY_ERROR, "Usuário inativo.");
-			}
+			Thread.currentThread().interrupt();
 		}
-		
-		return ok;
 	}
 
 	private void iniciarSessaoUsuario()
@@ -299,16 +358,6 @@ public class AutenticacaoBean implements Serializable
 		Navegacao.redirect(paginaAtual);
 
 		return "";
-	}
-
-	public void validateEmail(FacesContext context, UIComponent component, Object email)
-	{
-		Usuario usuariosBanco = usuarioDAO.getUsuario((String) email, "");
-		if(usuariosBanco == null)
-		{
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email", "Não cadastrado.");
-			throw new ValidatorException(msg);
-		}
 	}
 
 }

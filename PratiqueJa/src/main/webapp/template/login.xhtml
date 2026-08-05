@@ -45,8 +45,10 @@
 
 						<div class="login-field">
 							<p:outputLabel for="email" value="Email" />
+							<!-- Sem validador de existência de e-mail aqui: ele respondia
+							     "Não cadastrado" e virava um verificador de quem tem conta.
+							     Quem confere é o login(), com mensagem única. -->
 							<p:inputText id="email" value="#{autenticacaoBean.email}"
-								validator="#{autenticacaoBean.validateEmail}"
 								required="true" requiredMessage="O e-mail é obrigatório" />
 							<p:message id="msgEmail" for="email" display="text" />
 						</div>
