@@ -3,6 +3,14 @@
 // qualquer um poderia postar os mesmos campos e entrar na conta de outra pessoa.
 function handleCredentialResponse(response)
 {
+    // Sem token não há o que enviar: postar vazio só produziria a recusa do servidor
+    // sem dizer o motivo. Aqui pelo menos sobra o rastro no console do navegador.
+    if (!response || !response.credential)
+    {
+        console.error('Login Google: resposta sem credential', response);
+        return;
+    }
+
     sendDadosUser([
         {
             name : 'credential',

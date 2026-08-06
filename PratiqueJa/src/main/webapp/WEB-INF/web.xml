@@ -10,6 +10,18 @@
 		<filter-class>web.filter.PageFilter</filter-class>
 	</filter>
 
+	<!-- Sem isto o navegador guarda os scripts por dias (cache heurístico) e um
+	     deploy só chega ao usuário muito depois. Ver web.filter.CacheJsFilter. -->
+	<filter>
+		<filter-name>CacheJsFilter</filter-name>
+		<filter-class>web.filter.CacheJsFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CacheJsFilter</filter-name>
+		<url-pattern>/js/*</url-pattern>
+	</filter-mapping>
+
 	<filter-mapping>
 		<filter-name>PageFilter</filter-name>
 		<url-pattern>/</url-pattern>

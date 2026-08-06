@@ -54,7 +54,11 @@
 	     initialize e o servidor confere que o token é desta sessão. Definido
 	     antes do google.js, que o lê de window.googleNonce. -->
 	<script type="text/javascript">window.googleNonce = "#{googleNonce.valor}";</script>
-	<script type="text/javascript" src="/js/google.js"></script>
+	<!-- ?v= troca a URL do script e descarta de uma vez o que já está em cache.
+	     Precisou existir porque o google.js antigo, guardado nos navegadores,
+	     chamava jwt_decode() — função que saiu da página na correção de segurança —
+	     e estourava antes de enviar o token. Bump a cada mudança no arquivo. -->
+	<script type="text/javascript" src="/js/google.js?v=2"></script>
 
 	<p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"
 		process="@this"

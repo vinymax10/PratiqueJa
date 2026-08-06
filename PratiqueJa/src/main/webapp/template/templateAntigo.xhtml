@@ -60,7 +60,8 @@
 	<!-- 	login google -->
 	<!-- Nonce por sessão (bean.seguranca.GoogleNonce), lido pelo google.js. -->
 	<script type="text/javascript">window.googleNonce = "#{googleNonce.valor}";</script>
-	<script type="text/javascript" src="/js/google.js" ></script>
+	<!-- ?v= descarta o google.js antigo em cache (ver template.xhtml). -->
+	<script type="text/javascript" src="/js/google.js?v=2" ></script>
     
     <p:remoteCommand name="sendDadosUser" action="#{autenticacaoBean.loginGoogle}"
     process="@this" oncomplete="if (args &amp;&amp; args.loginOk) { PF('loginWidget').hide(); window.location.reload(); }"

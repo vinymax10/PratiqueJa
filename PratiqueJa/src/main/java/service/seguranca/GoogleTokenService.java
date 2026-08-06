@@ -82,8 +82,15 @@ public class GoogleTokenService
 	 */
 	public GoogleUserInfo verificar(String idToken, String nonceEsperado)
 	{
+		// Logado, e não recusado em silêncio: token ausente é o sintoma de front
+		// desatualizado (script velho em cache mandando os campos soltos, ou nem
+		// chegando a mandar). Sem esta linha a falha não deixava rastro nenhum no
+		// log e ficava indistinguível de "ninguém tentou".
 		if(idToken == null || idToken.isBlank())
+		{
+			LOG.warn("Login Google recusado: requisição sem o ID token (front desatualizado?)");
 			return null;
+		}
 
 		try
 		{
