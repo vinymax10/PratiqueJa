@@ -36,6 +36,15 @@ public class CommonsEmail
 		props.put("mail.smtp.port", port);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.enable", "true");
+		/*
+		 * Sem estas tres linhas o padrao do jakarta.mail e esperar indefinidamente. Um servidor
+		 * SMTP que aceita a conexao e emudece segurava o ciclo inteiro: quem envia e um timer do
+		 * servidor de aplicacao, nao uma requisicao que alguem possa cancelar, e o AtomicBoolean
+		 * do EnvioEmailService faria todos os ciclos seguintes desistirem por "ja em andamento".
+		 */
+		props.put("mail.smtp.connectiontimeout", 15_000);
+		props.put("mail.smtp.timeout", 30_000);
+		props.put("mail.smtp.writetimeout", 30_000);
 
 		return Session.getInstance(props, new Authenticator()
 		{
@@ -53,6 +62,13 @@ public class CommonsEmail
 	 */
 	public static void mandarEmail(EmailParaEnvio email) throws MessagingException
 	{
+		// Última barreira: anexo de 0 byte (geração que falhou, ou arquivo já apagado do disco)
+		// não vai para o usuário. Falhar aqui deixa o EnvioEmailService contar a tentativa e,
+		// depois do limite, marcar FALHA_DEFINITIVA — melhor do que entregar um post vazio.
+		for(EmailParaEnvio.Anexo anexo : email.getAnexos())
+			if(anexo.getDados() == null || anexo.getDados().length == 0)
+				throw new MessagingException("Anexo vazio (" + anexo.getNome() + "); envio abortado.");
+
 		MimeMessage message = new MimeMessage(criarSession());
 		message.setFrom(new InternetAddress(usuario));
 		message.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(email.getDestinatario()));

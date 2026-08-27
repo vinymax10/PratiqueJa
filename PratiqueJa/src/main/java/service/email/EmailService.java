@@ -24,6 +24,18 @@ import modelo.email.StatusEmail;
 @ApplicationScoped
 public class EmailService
 {
+	/**
+	 * Quantas tentativas de envio um e-mail tem antes de virar {@code FALHA_DEFINITIVA}.
+	 *
+	 * <p>Morava no {@code EnvioEmailService} e viajava como parâmetro. Passou para cá porque
+	 * quem conta a tentativa agora é o {@link #prepararPendentes()} — e a regra tem que ficar
+	 * junto de quem a aplica.</p>
+	 */
+	public static final int LIMITE_TENTATIVA_ENVIO = 5;
+
+	/** Teto de e-mails por ciclo — ver {@code EmailDAO.listarPendentes(int)}. */
+	public static final int LIMITE_POR_CICLO = 50;
+
 	@Inject
 	private EmailDAO emailDAO;
 
@@ -41,6 +53,11 @@ public class EmailService
 	 */
 	public DocumentoFile criarAnexo(String nomeArquivo, byte[] dados)
 	{
+		// Anexo vazio é sempre sintoma de geração que falhou; barra aqui para o e-mail
+		// nunca chegar ao usuário com um arquivo de 0 byte.
+		if(dados == null || dados.length == 0)
+			throw new IllegalArgumentException("Anexo de e-mail vazio: " + nomeArquivo);
+
 		DocumentoFile anexo = new DocumentoFile();
 		anexo.setEndDocumentacao(nomeArquivo);
 		try
@@ -104,16 +121,45 @@ public class EmailService
 	}
 
 	/**
-	 * Carrega os e-mails pendentes já com os bytes dos anexos lidos, dentro de
-	 * uma transação, para que possam ser enviados via SMTP fora dela.
+	 * Reserva os pendentes do ciclo: conta a tentativa de cada um e devolve o que enviar, já
+	 * com os bytes dos anexos lidos, tudo dentro de uma transação — para que o envio por SMTP
+	 * aconteça fora dela.
+	 *
+	 * <p><b>Contar antes de enviar.</b> O contador subia só na falha, e depois do envio. O SMTP
+	 * não tem rollback: uma vez que a mensagem sai, ela saiu. Se a gravação seguinte falhasse —
+	 * o {@code registrarEnvio} e, no {@code catch}, o {@code registrarFalha} usam o mesmo banco,
+	 * então uma queda derruba os dois —, o registro ficava PENDENTE com o contador intacto, e a
+	 * mesma mensagem saía de novo no minuto seguinte, sem nunca alcançar o limite. Com o
+	 * incremento confirmado aqui, o número avança mesmo que tudo depois dele se perca.</p>
+	 *
+	 * <p>O custo é o oposto: uma falha passageira gasta uma das tentativas. É a troca certa —
+	 * enviar cinco vezes é ruim, enviar para sempre é pior.</p>
+	 *
+	 * <p>O teto por ciclo importa aqui mais que na outra fila: este método lê do disco os anexos
+	 * de tudo o que carregar e segura os bytes na memória até o fim do ciclo.</p>
 	 */
 	@Transactional
 	public List<EmailParaEnvio> prepararPendentes()
 	{
 		List<EmailParaEnvio> prontos = new ArrayList<>();
 
-		for(Email email : emailDAO.listarPendentes())
+		for(Email email : emailDAO.listarPendentes(LIMITE_POR_CICLO))
 		{
+			email.incrementaTetativa();
+
+			// Rede de segurança: o caminho normal de desistência é o registrarFalha. Aqui só
+			// cai o registro cujas tentativas foram consumidas sem chegar a registrar nada —
+			// uma queda entre a reserva e a gravação do resultado.
+			if(email.getTentativaEnvio() > LIMITE_TENTATIVA_ENVIO)
+			{
+				email.setStatus(StatusEmail.FALHA_DEFINITIVA);
+				emailDAO.salvar(email);
+
+				continue;
+			}
+
+			emailDAO.salvar(email);
+
 			EmailParaEnvio dto = new EmailParaEnvio(email.getId(), email.getDestinatario(),
 			email.getAssunto(), email.getMensagem());
 
@@ -150,18 +196,24 @@ public class EmailService
 		emailDAO.salvar(email);
 	}
 
+	/**
+	 * Guarda o motivo da falha e decide se ainda vale tentar.
+	 *
+	 * <p><b>Não mexe no contador</b>: ele já foi incrementado e confirmado no
+	 * {@link #prepararPendentes()}, antes de a mensagem ir para o SMTP. Incrementar aqui
+	 * contaria a mesma tentativa duas vezes.</p>
+	 */
 	@Transactional
-	public void registrarFalha(Long id, String erro, int maxTentativas)
+	public void registrarFalha(Long id, String erro)
 	{
 		Email email = emailDAO.carrega(id);
 		if(email == null)
 			return;
 
-		email.incrementaTetativa();
 		email.setErro(erro);
 		email.setDataEnvio(LocalDateTime.now());
 
-		if(email.getTentativaEnvio() >= maxTentativas)
+		if(email.getTentativaEnvio() >= LIMITE_TENTATIVA_ENVIO)
 			email.setStatus(StatusEmail.FALHA_DEFINITIVA);
 		// caso contrário permanece PENDENTE e será reprocessado no próximo ciclo.
 

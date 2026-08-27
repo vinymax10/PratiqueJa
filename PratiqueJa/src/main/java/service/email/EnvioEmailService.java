@@ -17,8 +17,16 @@ import jakarta.inject.Inject;
 
 /**
  * Despachante de e-mails: a cada minuto envia, via SMTP, os e-mails que estão
- * com status PENDENTE. Em caso de falha, incrementa a tentativa e, após
- * {@link #MAX_TENTATIVAS}, marca como falha definitiva.
+ * com status PENDENTE. Depois de {@code EmailService.LIMITE_TENTATIVA_ENVIO}
+ * tentativas sem sucesso, o registro vira falha definitiva.
+ *
+ * <p><b>A tentativa é contada antes do envio</b>, no
+ * {@code EmailService.prepararPendentes}. O SMTP não tem rollback: se a gravação
+ * do resultado falhar depois de a mensagem já ter saído, a próxima rodada manda
+ * de novo — e é a contagem feita antes que faz esse reenvio terminar em vez de
+ * durar para sempre. O {@code catch} abaixo cobre os dois passos, mas
+ * {@code registrarEnvio} e {@code registrarFalha} usam o mesmo banco: uma queda
+ * derruba os dois, e aí não sobrava nada para contar.</p>
  */
 @Singleton
 @Startup
@@ -26,8 +34,6 @@ import jakarta.inject.Inject;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class EnvioEmailService
 {
-	private static final int MAX_TENTATIVAS = 5;
-
 	/** Tamanho máximo da coluna "erro" no banco. */
 	private static final int LIMITE_ERRO = 255;
 
@@ -80,7 +86,7 @@ public class EnvioEmailService
 		}
 		catch(Exception e)
 		{
-			emailService.registrarFalha(email.getId(), resumirErro(e), MAX_TENTATIVAS);
+			emailService.registrarFalha(email.getId(), resumirErro(e));
 			logger.warning("Falha ao enviar e-mail id=" + email.getId() + ": " + e.getMessage());
 		}
 	}

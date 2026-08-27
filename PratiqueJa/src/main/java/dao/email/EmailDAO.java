@@ -25,6 +25,22 @@ public class EmailDAO extends DAO<Email>
 
 	public List<Email> listarPendentes()
 	{
+		return listarPendentes(Integer.MAX_VALUE);
+	}
+
+	/**
+	 * Os pendentes, no máximo este tanto e do mais antigo para o mais novo.
+	 *
+	 * <p><b>O teto não é enfeite.</b> Quem chama é o {@code EmailService.prepararPendentes},
+	 * que lê do disco os bytes de todos os anexos de tudo o que voltar daqui — e segura isso
+	 * na memória durante o ciclo inteiro. Sem teto, uma fila acumulada de e-mails com anexo
+	 * entrava inteira no heap de uma vez, num servidor que ainda divide esse heap com outra
+	 * aplicação. O que sobra vai no ciclo seguinte, um minuto depois.</p>
+	 *
+	 * <p>Ordenado pelo id: o mais antigo é o que está esperando há mais tempo.</p>
+	 */
+	public List<Email> listarPendentes(int limite)
+	{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Email> query = builder.createQuery(Email.class);
 		Root<Email> fromEmail = query.from(Email.class);
@@ -33,9 +49,10 @@ public class EmailDAO extends DAO<Email>
 		predicates.add(builder.equal(fromEmail.get("status"), StatusEmail.PENDENTE));
 
 		TypedQuery<Email> typedQuery = em.createQuery(query.select(fromEmail)
-		.where(predicates.toArray(new Predicate[0])));
+		.where(predicates.toArray(new Predicate[0]))
+		.orderBy(builder.asc(fromEmail.get("id"))));
 
-		return typedQuery.getResultList();
+		return typedQuery.setMaxResults(limite).getResultList();
 	}
 
 	public List<Email> buscarEnviadosComAnexosAntesDe(LocalDateTime limite)
