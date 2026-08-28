@@ -1,6 +1,7 @@
 package service.pagamento;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -69,8 +70,66 @@ public class HotmartWebhookService
 	@Inject
 	private HotmartApiClient hotmartApiClient;
 
-	@Transactional
+	/**
+	 * O próprio bean, pelo proxy do CDI. {@code @Transactional} é um interceptador: chamada de
+	 * método no próprio {@code this} não passa pelo proxy e rodaria <b>sem transação nenhuma</b>.
+	 */
+	@Inject
+	private HotmartWebhookService self;
+
+	/**
+	 * Ponto de entrada do webhook. Grava tudo numa transação e só depois, <b>fora dela</b>,
+	 * cancela na Hotmart as assinaturas substituídas.
+	 *
+	 * <p><b>Por que a chamada externa não pode ficar dentro.</b> Ela é HTTP para fora e não tem
+	 * rollback: uma vez cancelada, cancelada está. Enquanto ela morava dentro da transação, uma
+	 * Hotmart lenta estourava os 300s do WildFly e desfazia o {@code Pagamento}, a
+	 * {@code Assinatura}, a validade do plano e os e-mails enfileirados — <b>mas a assinatura
+	 * antiga já tinha sido cancelada lá</b>. A Hotmart reenviava o webhook e o ciclo repetia. É o
+	 * mesmo defeito do SMTP na fila de e-mail, com dinheiro no meio.</p>
+	 *
+	 * <p>Adiar para depois do commit também casa melhor com a intenção já declarada em
+	 * {@link #cancelarAssinaturaAnteriorSeTrocaDePlano}: a chamada é best-effort, falhar nela nunca
+	 * deveria impedir a ativação do plano novo.</p>
+	 */
 	public void processarNotificacao(JsonObject corpo)
+	{
+		// LinkedHashSet: eixos diferentes do usuário podem apontar para o mesmo subscriber_code
+		// antigo, e não faz sentido pedir o mesmo cancelamento duas vezes.
+		Set<String> cancelamentosHotmart = new LinkedHashSet<>();
+
+		self.aplicar(corpo, cancelamentosHotmart);
+
+		for(String subscriberCode : cancelamentosHotmart)
+			cancelarNaHotmart(subscriberCode);
+	}
+
+	/**
+	 * Cancela uma assinatura na Hotmart, já fora da transação. O {@code catch} é o que impede que
+	 * uma falha aqui vire HTTP 500 no servlet: o banco já commitou, e um 500 faria a Hotmart
+	 * reenviar o webhook para reprocessar o que já está gravado.
+	 */
+	private void cancelarNaHotmart(String subscriberCode)
+	{
+		try
+		{
+			if(!hotmartApiClient.cancelarAssinatura(subscriberCode))
+				LOG.warn("Não foi possível cancelar automaticamente a assinatura Hotmart anterior '{}'", subscriberCode);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Erro ao cancelar a assinatura Hotmart anterior '" + subscriberCode + "'", e);
+		}
+	}
+
+	/**
+	 * Aplica no banco o efeito da notificação. Público só porque precisa passar pelo proxy do CDI
+	 * (ver {@link #self}); o ponto de entrada é o {@link #processarNotificacao}.
+	 *
+	 * @param cancelamentosHotmart saída: subscriber_codes a cancelar na Hotmart depois do commit.
+	 */
+	@Transactional
+	public void aplicar(JsonObject corpo, Set<String> cancelamentosHotmart)
 	{
 		String evento = corpo.getString("event", null);
 		JsonObject dados = corpo.getJsonObject("data");
@@ -83,7 +142,7 @@ public class HotmartWebhookService
 
 		if(EVENTO_TROCA_PLANO.equals(evento))
 		{
-			trocarPlano(dados);
+			trocarPlano(dados, cancelamentosHotmart);
 			return;
 		}
 
@@ -132,7 +191,7 @@ public class HotmartWebhookService
 		}
 
 		if(EVENTOS_APROVACAO.contains(evento))
-			ativar(usuario, produto, transacao, subscriberCode);
+			ativar(usuario, produto, transacao, subscriberCode, cancelamentosHotmart);
 		else if(EVENTOS_CANCELAMENTO_COMPRA.contains(evento))
 			cancelar(usuario, produto, subscriberCode);
 		else
@@ -159,7 +218,7 @@ public class HotmartWebhookService
 	 * gerar um novo registro de pagamento (não houve uma nova transação, só a troca
 	 * de valor cobrado no próximo ciclo).
 	 */
-	private void trocarPlano(JsonObject dados)
+	private void trocarPlano(JsonObject dados, Set<String> cancelamentosHotmart)
 	{
 		JsonObject subscription = dados.getJsonObject("subscription");
 		if(subscription == null)
@@ -207,10 +266,11 @@ public class HotmartWebhookService
 			return;
 		}
 
-		ativar(usuario, produto, null, subscriberCode);
+		ativar(usuario, produto, null, subscriberCode, cancelamentosHotmart);
 	}
 
-	private void ativar(Usuario usuario, Produto produto, String transacao, String subscriberCode)
+	private void ativar(Usuario usuario, Produto produto, String transacao, String subscriberCode,
+		Set<String> cancelamentosHotmart)
 	{
 		if(transacao != null && pagamentoDAO.buscarPorCodigoTransacaoHotmart(transacao) != null)
 		{
@@ -225,7 +285,7 @@ public class HotmartWebhookService
 
 		if(produto.getPerfilUsuario() != null)
 		{
-			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmart(), subscriberCode, hoje);
+			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmart(), subscriberCode, hoje, cancelamentosHotmart);
 			usuario.setPerfil(produto.getPerfilUsuario());
 			usuario.setValidadePlano(validade);
 			usuario.setSubscriberCodeHotmart(subscriberCode);
@@ -233,7 +293,7 @@ public class HotmartWebhookService
 
 		if(produto.getPerfilCriador() != null)
 		{
-			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmartCriador(), subscriberCode, hoje);
+			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmartCriador(), subscriberCode, hoje, cancelamentosHotmart);
 			usuario.setPerfilCriador(produto.getPerfilCriador());
 			usuario.setValidadePlanoCriador(validade);
 			usuario.setSubscriberCodeHotmartCriador(subscriberCode);
@@ -241,7 +301,7 @@ public class HotmartWebhookService
 
 		if(produto.getPerfilAvaliacao() != null)
 		{
-			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmartAvaliacao(), subscriberCode, hoje);
+			trocouDePlano |= cancelarAssinaturaAnteriorSeTrocaDePlano(usuario.getSubscriberCodeHotmartAvaliacao(), subscriberCode, hoje, cancelamentosHotmart);
 			usuario.setPerfilAvaliacao(produto.getPerfilAvaliacao());
 			usuario.setValidadePlanoAvaliacao(validade);
 			usuario.setSubscriberCodeHotmartAvaliacao(subscriberCode);
@@ -387,8 +447,13 @@ public class HotmartWebhookService
 	 * a antiga na Hotmart via API antes de sobrescrever — evita cobrança duplicada num upgrade/downgrade
 	 * feito fora do fluxo nativo de troca de plano (SWITCH_PLAN), por exemplo uma nova compra avulsa.
 	 * Best-effort: falha na chamada não impede a ativação do novo plano.
+	 *
+	 * <p>Aqui a assinatura antiga só é <b>anotada</b> em {@code cancelamentosHotmart} e fechada no
+	 * banco; quem fala com a Hotmart é o {@link #processarNotificacao}, depois do commit — ver lá
+	 * o porquê.</p>
 	 */
-	private boolean cancelarAssinaturaAnteriorSeTrocaDePlano(String subscriberCodeAtual, String subscriberCodeNovo, LocalDate hoje)
+	private boolean cancelarAssinaturaAnteriorSeTrocaDePlano(String subscriberCodeAtual, String subscriberCodeNovo,
+		LocalDate hoje, Set<String> cancelamentosHotmart)
 	{
 		if(subscriberCodeAtual == null || subscriberCodeAtual.isBlank())
 			return false;
@@ -396,9 +461,7 @@ public class HotmartWebhookService
 		if(subscriberCodeNovo != null && subscriberCodeNovo.equals(subscriberCodeAtual))
 			return false;
 
-		boolean cancelado = hotmartApiClient.cancelarAssinatura(subscriberCodeAtual);
-		if(!cancelado)
-			LOG.warn("Não foi possível cancelar automaticamente a assinatura Hotmart anterior '{}'", subscriberCodeAtual);
+		cancelamentosHotmart.add(subscriberCodeAtual);
 
 		fecharAssinatura(assinaturaDAO.buscarAtivaPorSubscriberCode(subscriberCodeAtual), hoje);
 

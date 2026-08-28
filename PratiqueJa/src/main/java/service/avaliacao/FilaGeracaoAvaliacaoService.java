@@ -41,23 +41,69 @@ public class FilaGeracaoAvaliacaoService implements Serializable
 	@Inject
 	private PedidoAvaliacaoDAO pedidoAvaliacaoDAO;
 
+	/**
+	 * Quantas vezes a montagem de um pedido pode ser iniciada antes de ele ser dado por perdido.
+	 * A regra mora aqui, junto de quem desiste; quem conta a tentativa é o {@code Montador}.
+	 */
+	public static final int LIMITE_TENTATIVA_GERACAO = 3;
+
 	private final Queue<Long> fila = new ConcurrentLinkedQueue<>();
 
 	/** true enquanto o worker está consumindo a fila; garante processamento de um pedido por vez. */
 	private final AtomicBoolean processando = new AtomicBoolean(false);
 
-	/** Reenfileira pedidos que ficaram parados em AGUARDANDO/GERANDO após um restart do servidor
-	 *  (a fila em memória se perde no restart, o status no banco não). */
+	/**
+	 * Reenfileira pedidos que ficaram parados em AGUARDANDO/GERANDO após um restart do servidor
+	 * (a fila em memória se perde no restart, o status no banco não).
+	 *
+	 * <p><b>Com teto de tentativas.</b> Antes isto reenfileirava tudo, sempre. Um pedido que
+	 * derruba a JVM durante a geração — um OOM, por exemplo — voltava para a fila no restart,
+	 * derrubava de novo, e o servidor entrava num laço de reboot do qual não saía sozinho. Como o
+	 * {@code Montador} conta a tentativa <b>antes</b> de gerar, o contador sobrevive à queda:
+	 * esgotadas as tentativas o pedido vira ERRO e sai do caminho, em vez de derrubar a aplicação
+	 * para sempre. É o mesmo remédio do {@code LIMITE_TENTATIVA_ENVIO} da fila de e-mail.</p>
+	 */
 	@PostConstruct
 	public void recuperarPendentes()
 	{
 		List<PedidoAvaliacao> pendentes = pedidoAvaliacaoDAO.buscarPendentes();
-		for(PedidoAvaliacao pedido : pendentes)
-			fila.add(pedido.getId());
+		int recuperados = 0;
+		int desistidos = 0;
 
-		if(!pendentes.isEmpty())
+		for(PedidoAvaliacao pedido : pendentes)
 		{
-			logger.info(pendentes.size() + " pedido(s) de avaliação recuperado(s) na fila após início da aplicação.");
+			if(pedido.getTentativaGeracao() >= LIMITE_TENTATIVA_GERACAO)
+			{
+				desistidos++;
+				logger.warning("Pedido de avaliação " + pedido.getId() + " abandonado: "
+					+ pedido.getTentativaGeracao() + " tentativa(s) de geração sem concluir.");
+
+				// Isto roda no @PostConstruct de um @Startup: exceção aqui reprova o deploy da
+				// aplicação inteira. Não enfileirar já resolve o laço de reboot; marcar o ERRO é
+				// só para o pedido aparecer certo na tela, e não vale o risco.
+				try
+				{
+					pedidoAvaliacaoDAO.marcarErro(pedido.getId());
+				}
+				catch(Exception e)
+				{
+					logger.log(java.util.logging.Level.WARNING,
+						"Falha ao marcar ERRO no pedido " + pedido.getId(), e);
+				}
+
+				continue;
+			}
+
+			fila.add(pedido.getId());
+			recuperados++;
+		}
+
+		if(desistidos > 0)
+			logger.warning(desistidos + " pedido(s) de avaliação abandonado(s) por excesso de tentativas.");
+
+		if(recuperados > 0)
+		{
+			logger.info(recuperados + " pedido(s) de avaliação recuperado(s) na fila após início da aplicação.");
 			disparar();
 		}
 	}

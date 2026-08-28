@@ -2,6 +2,7 @@ package pdf.publicacao;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.sql.Blob;
@@ -20,6 +21,7 @@ import modelo.questao.ImagemFile;
 import pdf.publicacao.estilo.EstiloVisual;
 import pdf.util.Arquivo;
 import util.CorAux;
+import util.ProcessoExterno;
 
 /**
  * Post do Feed (formato retrato 4:5, menor que o Reel) com o mesmo visual do
@@ -447,18 +449,9 @@ public class InstagramFeed2
 		pb.redirectErrorStream(true);
 		pb.redirectOutput(Redirect.appendTo(new File(diretorio.getEnderecoOutputLog())));
 
-		Process process;
-		try
-		{
-			process = pb.start();
-			process.waitFor();
-			process = pb.start();
-			process.waitFor();
-		}
-		catch(IOException | InterruptedException e)
-		{
-			e.printStackTrace();
-		}
+		// Duas passadas: a segunda resolve as referências do TikZ (remember picture).
+		executar(pb, "pdflatex");
+		executar(pb, "pdflatex");
 	}
 
 	public void convertPNG()
@@ -469,15 +462,34 @@ public class InstagramFeed2
 		pb.redirectErrorStream(true);
 		pb.redirectOutput(Redirect.appendTo(new File(diretorio.getEnderecoOutputLog())));
 
-		Process process;
+		executar(pb, "pdftocairo");
+	}
+
+	/**
+	 * Roda o processo externo e <b>propaga</b> a falha de lançamento. Engolir esse erro fazia a
+	 * geração seguir adiante sem PDF/PNG e o post ser enviado com anexos de 0 byte (ver o caso do
+	 * upgrade do JDK, que quebrou o {@code jspawnhelper} e derrubou todo {@code ProcessBuilder}).
+	 * O código de saída não é verificado: o pdflatex sai com 1 em erros recuperáveis e ainda assim
+	 * produz o PDF — quem valida o resultado é quem lê os arquivos gerados.
+	 *
+	 * <p>O prazo fica por conta do {@link ProcessoExterno}: estourado, o processo é morto e a falha
+	 * chega aqui como {@code IOException}. Sem ele, um processo pendurado travava a fila inteira de
+	 * geração — a thread nunca devolvia o {@code processando} de {@code FilaGeracaoPostService}.</p>
+	 */
+	private void executar(ProcessBuilder pb, String comando)
+	{
 		try
 		{
-			process = pb.start();
-			process.waitFor();
+			ProcessoExterno.executar(pb, comando);
 		}
-		catch(IOException | InterruptedException e)
+		catch(IOException e)
 		{
-			e.printStackTrace();
+			throw new UncheckedIOException("Falha ao executar " + comando + " em " + diretorio.getEndereco(), e);
+		}
+		catch(InterruptedException e)
+		{
+			Thread.currentThread().interrupt();
+			throw new IllegalStateException("Execução de " + comando + " interrompida", e);
 		}
 	}
 }

@@ -68,8 +68,11 @@ public class MontadorPedidoAvaliacaoService implements Serializable
 		PedidoAvaliacao pedido = pedidoAvaliacaoDAO.carrega(pedidoId);
 		if (pedido == null) return;
 
+		// A tentativa é contada e confirmada AQUI, antes do trabalho pesado — ver o gêmeo em
+		// MontadorPostService: é o que impede o laço de reboot quando a geração derruba a JVM.
 		pedido.setStatus(StatusPedidoAvaliacao.GERANDO);
 		pedido.setProgresso(0);
+		pedido.setTentativaGeracao(pedido.getTentativaGeracao() + 1);
 		pedidoAvaliacaoDAO.salvar(pedido);
 
 		try

@@ -25,6 +25,7 @@ import modelo.exercicio.Exercicio;
 import modelo.exercicio.Nivel;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
+import util.ProcessoExterno;
 
 /**
  * Gera, por assunto, uma lista para o grupo de WhatsApp: apostila de <b>teoria</b> (o PDF já
@@ -541,7 +542,7 @@ public class GeradorListaGrupoWhatsapp
 				.redirectOutput(ProcessBuilder.Redirect.DISCARD)
 				.redirectError(ProcessBuilder.Redirect.DISCARD);
 			pb.environment().put("TEXINPUTS", texFile.getParent().toAbsolutePath() + ";");
-			int exit = pb.start().waitFor();
+			int exit = ProcessoExterno.executar(pb, "XeLaTeX");
 			if(exit != 0 && passagem == 2)
 				throw new IOException("XeLaTeX falhou (código " + exit + ") em " + texFile
 					+ " — ver " + texFile.resolveSibling(nomeSemExt(texFile) + ".log"));
@@ -556,7 +557,7 @@ public class GeradorListaGrupoWhatsapp
 			exercicios.toAbsolutePath().toString(), saida.toAbsolutePath().toString())
 			.redirectOutput(ProcessBuilder.Redirect.DISCARD)
 			.redirectError(ProcessBuilder.Redirect.DISCARD);
-		int exit = pb.start().waitFor();
+		int exit = ProcessoExterno.executar(pb, "pdfunite");
 		if(exit != 0 || !Files.exists(saida))
 			throw new IOException("pdfunite falhou (código " + exit + ") ao unir " + teoria + " + " + exercicios);
 	}

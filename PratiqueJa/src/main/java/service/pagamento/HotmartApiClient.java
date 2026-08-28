@@ -8,6 +8,7 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
 
@@ -34,7 +35,19 @@ public class HotmartApiClient
 	private static final String URL_TOKEN = "https://api-sec-vlc.hotmart.com/security/oauth/token";
 	private static final String URL_CANCELAR_ASSINATURA = "https://developers.hotmart.com/payments/api/v1/subscriptions/%s/cancel";
 
-	private final HttpClient httpClient = HttpClient.newHttpClient();
+	/**
+	 * Tempos limite. O default do {@code java.net.http} é <b>esperar para sempre</b>, nos dois
+	 * lados: {@code HttpClient.newHttpClient()} não tem timeout de conexão e um {@code send()} sem
+	 * {@code timeout()} não tem prazo de resposta. Como {@link #obterToken()} é {@code synchronized}
+	 * num bean de aplicação, uma única chamada pendurada travava também todos os outros webhooks
+	 * que chegassem depois.
+	 */
+	private static final Duration TIMEOUT_CONEXAO = Duration.ofSeconds(10);
+	private static final Duration TIMEOUT_RESPOSTA = Duration.ofSeconds(20);
+
+	private final HttpClient httpClient = HttpClient.newBuilder()
+		.connectTimeout(TIMEOUT_CONEXAO)
+		.build();
 
 	private String tokenCache;
 	private Instant tokenExpiraEm = Instant.EPOCH;
@@ -65,6 +78,7 @@ public class HotmartApiClient
 
 			HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(url))
+				.timeout(TIMEOUT_RESPOSTA)
 				.header("Authorization", "Bearer " + token)
 				.header("Content-Type", "application/json")
 				.POST(BodyPublishers.ofString(corpo))
@@ -104,6 +118,7 @@ public class HotmartApiClient
 
 		HttpRequest request = HttpRequest.newBuilder()
 			.uri(URI.create(url))
+			.timeout(TIMEOUT_RESPOSTA)
 			.header("Authorization", "Basic " + basic)
 			.header("Content-Type", "application/json")
 			.POST(BodyPublishers.noBody())

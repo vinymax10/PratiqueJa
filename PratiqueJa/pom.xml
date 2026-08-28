@@ -101,7 +101,9 @@
 
 	<dependencies>
 
-		<!-- Testes (JUnit 5). Só as classes de throttle, que são lógica pura. -->
+		<!-- Testes (JUnit 5), sem dependência nova: lógica pura (throttle, token, fila de
+		     geração) e testes de arquitetura que leem o próprio código-fonte/bytecode
+		     para impedir a volta de transação longa e de espera sem prazo. -->
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter</artifactId>

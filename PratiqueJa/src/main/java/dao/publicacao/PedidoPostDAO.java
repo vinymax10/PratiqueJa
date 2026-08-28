@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.DAO;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import modelo.publicacao.PedidoPost;
 import modelo.usuario.Usuario;
 
@@ -75,6 +76,36 @@ public class PedidoPostDAO extends DAO<PedidoPost>
 			"OR p.status = modelo.publicacao.StatusPedidoPost.GERANDO ORDER BY p.dataSolicitacao ASC",
 			PedidoPost.class)
 			.getResultList();
+	}
+
+	/**
+	 * Zera a referência ao arquivo baixado de um pedido — a transação é só deste pedido.
+	 *
+	 * <p>Carrega por id em vez de receber a entidade: o {@code CleanupPostService} agora roda sem
+	 * transação (para não fazer da limpeza inteira um commit só), então o que ele tem em mãos é uma
+	 * entidade destacada. Recarregar aqui deixa o Hibernate trabalhar sobre uma instância gerenciada,
+	 * sem depender de {@code merge} sobre coleções que ficaram por inicializar.</p>
+	 */
+	@Transactional
+	public void limparArquivo(Long id)
+	{
+		PedidoPost pedido = em.find(PedidoPost.class, id);
+		if(pedido == null)
+			return;
+
+		pedido.setCaminhoArquivo(null);
+		pedido.setNomeDownload(null);
+	}
+
+	/** Marca o pedido como falho — usado quando as tentativas de geração se esgotam. */
+	@Transactional
+	public void marcarErro(Long id)
+	{
+		PedidoPost pedido = em.find(PedidoPost.class, id);
+		if(pedido == null)
+			return;
+
+		pedido.setStatus(modelo.publicacao.StatusPedidoPost.ERRO);
 	}
 
 	public List<PedidoPost> buscarExpirados(LocalDateTime agora)

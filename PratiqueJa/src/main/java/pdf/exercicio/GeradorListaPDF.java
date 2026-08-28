@@ -15,6 +15,7 @@ import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.Exercicio;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
+import util.ProcessoExterno;
 
 /**
  * Gera um PDF de lista de exercícios (20 questões, 2 colunas) a partir de
@@ -566,7 +567,7 @@ public class GeradorListaPDF
 			pb.environment().put("TEXINPUTS",
 				texFile.getParent().toAbsolutePath() + ";");
 
-			int exitCode = pb.start().waitFor();
+			int exitCode = ProcessoExterno.executar(pb, "XeLaTeX");
 			if (exitCode != 0 && passagem == 2)
 				throw new IOException(
 					"XeLaTeX falhou (código " + exitCode + ") ao compilar " + texFile);

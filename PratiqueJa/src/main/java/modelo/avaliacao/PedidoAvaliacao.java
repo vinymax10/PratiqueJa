@@ -91,6 +91,15 @@ public class PedidoAvaliacao implements Serializable, Entidade
 	@DiffIgnore
 	private double progresso;
 
+	/**
+	 * Quantas vezes a montagem deste pedido já foi iniciada. Contado <b>antes</b> da geração e
+	 * confirmado ali mesmo, para que uma tentativa que derrube a JVM (um OOM na geração) ainda
+	 * tenha sido contada: sem isso o pedido voltava para a fila a cada restart, derrubava de novo,
+	 * e o servidor entrava num laço de reboot. Mesma lógica da tentativa de envio de e-mail.
+	 */
+	@DiffIgnore
+	private int tentativaGeracao = 0;
+
 	@AuditLabel(value = "data de solicitação", genero = GeneroGramatical.FEMININO)
 	private LocalDateTime dataSolicitacao;
 

@@ -20,6 +20,7 @@ import modelo.publicacao.ProgramacaoPost;
 import modelo.questao.ImagemFile;
 import pdf.util.Arquivo;
 import util.CorAux;
+import util.ProcessoExterno;
 
 public class TikTok
 {
@@ -517,13 +518,11 @@ public class TikTok
 		pb.redirectErrorStream(true);
 		pb.redirectOutput(Redirect.appendTo(new File(diretorio.getEnderecoOutputLog())));
 
-		Process process;
 		try
 		{
-			process = pb.start();
-			process.waitFor();
-			process = pb.start();
-			process.waitFor();
+			// Duas passagens: a segunda resolve as referências que a primeira só anotou.
+			ProcessoExterno.executar(pb, "pdflatex");
+			ProcessoExterno.executar(pb, "pdflatex");
 		}
 		catch(IOException | InterruptedException e)
 		{
@@ -539,11 +538,9 @@ public class TikTok
 		pb.redirectErrorStream(true);
 		pb.redirectOutput(Redirect.appendTo(new File(diretorio.getEnderecoOutputLog())));
 
-		Process process;
 		try
 		{
-			process = pb.start();
-			process.waitFor();
+			ProcessoExterno.executar(pb, "pdftocairo");
 		}
 		catch(IOException | InterruptedException e)
 		{

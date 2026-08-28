@@ -15,6 +15,7 @@ import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.TipoGabarito;
 import modelo.exercicio.AlternativaExercicio;
 import modelo.exercicio.Exercicio;
+import util.ProcessoExterno;
 
 /**
  * Gera a página de gabarito de uma avaliação para uso no modo AGRUPADO_NO_FINAL.
@@ -336,7 +337,7 @@ public class GeradorGabaritoPdfService implements Serializable
 				.redirectError(ProcessBuilder.Redirect.DISCARD);
 			pb.environment().put("TEXINPUTS", texFile.getParent().toAbsolutePath() + ";");
 
-			int exitCode = pb.start().waitFor();
+			int exitCode = ProcessoExterno.executar(pb, "XeLaTeX");
 			if (exitCode != 0 && passagem == 2)
 				throw new IOException("XeLaTeX falhou (código " + exitCode + ") em " + texFile
 					+ "\n──── trecho do .log ────\n" + extrairErroDoLog(texFile));

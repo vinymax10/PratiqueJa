@@ -87,7 +87,7 @@ public class EnvioPostService
 			{
 				ConfigPost configPost = programacaoPost.getConfigPost();
 				if(configPost.podeGerar())
-					processar(programacaoPost);
+					processarIsolado(programacaoPost);
 			}
 		}
 		finally
@@ -122,13 +122,31 @@ public class EnvioPostService
 					devidas.add(programacaoPost);
 
 			for(ProgramacaoPost programacaoPost : devidas)
-				processar(programacaoPost);
+				processarIsolado(programacaoPost);
 
 			return devidas.size();
 		}
 		finally
 		{
 			enviando.set(false);
+		}
+	}
+
+	/**
+	 * Processa uma programação sem deixar que a falha dela derrube as dos outros usuários.
+	 * Como {@code registrarEnvio} só roda no fim, a programação que falhou continua devida e
+	 * é retentada no próximo ciclo — ninguém recebe post pela metade nem anexo vazio.
+	 */
+	private void processarIsolado(ProgramacaoPost programacaoPost)
+	{
+		try
+		{
+			processar(programacaoPost);
+		}
+		catch(RuntimeException e)
+		{
+			logger.log(java.util.logging.Level.SEVERE, "Falha ao gerar a programação de post id="
+				+ programacaoPost.getId() + "; as demais seguem.", e);
 		}
 	}
 
@@ -173,49 +191,53 @@ public class EnvioPostService
 		int gerados = 0;
 		int indice = 0;
 
-		for(ExercicioPadrao exercicioPadrao : exerciciosDoDia)
+		try
 		{
-			indice++;
-			niveisUsados.add(exercicioPadrao.getNivel());
-			String base = "post-" + String.format("%02d", indice);
-			byte[] legenda = conteudoPublicacaoService.montarLegenda(exercicioPadrao, configPost)
-				.getBytes(StandardCharsets.UTF_8);
+			for(ExercicioPadrao exercicioPadrao : exerciciosDoDia)
+			{
+				indice++;
+				niveisUsados.add(exercicioPadrao.getNivel());
+				String base = "post-" + String.format("%02d", indice);
+				byte[] legenda = conteudoPublicacaoService.montarLegenda(exercicioPadrao, configPost)
+					.getBytes(StandardCharsets.UTF_8);
 
-			if(perfilCriador.isAmbosFormatos())
-			{
-				byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
-				adicionarPeca(entradasZip, base + "-feed", feed, legenda);
-				byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
-				adicionarPeca(entradasZip, base + "-reel", reel, legenda);
-				fezFeed = true;
-				fezReel = true;
-				gerados += 2;
-			}
-			else if(programacaoPost.getFormato() == FormatoPost.Reel)
-			{
-				byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
-				adicionarPeca(entradasZip, base + "-reel", reel, legenda);
-				fezReel = true;
-				gerados++;
-			}
-			else
-			{
-				byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
-				adicionarPeca(entradasZip, base + "-feed", feed, legenda);
-				fezFeed = true;
-				gerados++;
+				if(perfilCriador.isAmbosFormatos())
+				{
+					byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
+					adicionarPeca(entradasZip, base + "-feed", feed, legenda);
+					byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+					adicionarPeca(entradasZip, base + "-reel", reel, legenda);
+					fezFeed = true;
+					fezReel = true;
+					gerados += 2;
+				}
+				else if(programacaoPost.getFormato() == FormatoPost.Reel)
+				{
+					byte[][] reel = conteudoPublicacaoService.gerarConteudoReel(exercicioPadrao, programacaoPost);
+					adicionarPeca(entradasZip, base + "-reel", reel, legenda);
+					fezReel = true;
+					gerados++;
+				}
+				else
+				{
+					byte[][] feed = conteudoPublicacaoService.gerarConteudoFeed(exercicioPadrao, programacaoPost);
+					adicionarPeca(entradasZip, base + "-feed", feed, legenda);
+					fezFeed = true;
+					gerados++;
+				}
 			}
 		}
-
-		ColorHolder.clear();
+		finally
+		{
+			// ThreadLocal: precisa sair mesmo se a geração abortar, senão vaza para o próximo post.
+			ColorHolder.clear();
+		}
 
 		if(programacaoPost.isAvulsa())
 		{
 			programacaoPostService.remover(programacaoPost);
 			return;
 		}
-
-		programacaoPostService.registrarEnvio(programacaoPost);
 
 		// Um item por formato gerado, para rastreabilidade no detalhe do pedido.
 		List<ItemPedidoPost> itens = new ArrayList<>();
@@ -224,8 +246,20 @@ public class EnvioPostService
 		if(fezReel)
 			itens.add(montarItem(programacaoPost, FormatoPost.Reel, niveisUsados, perfilCriador.getExerciciosPorDia()));
 
-		// Cria o pedido baixável (também serve de registro de consumo da cota mensal).
+		// Entregar antes de marcar. Cria o pedido baixável (que também é o registro de consumo da
+		// cota mensal) e só então empurra a data da programação.
+		//
+		// A ordem era a inversa, e o custo dela era o pior dos dois: se o salvar falhasse, a data
+		// já tinha avançado — o usuário ficava sem o post do dia, sem retentativa nenhuma. Assim,
+		// uma falha no salvar deixa a programação devida e ela é refeita no próximo ciclo (ou no
+		// start seguinte, pelo RecuperacaoPendenciasService).
+		//
+		// O risco que se assume é o oposto e é menor: se o registrarEnvio falhar depois de o
+		// pedido já estar salvo, o post do dia sai duplicado uma vez. Um envio a mais é ruim,
+		// nenhum envio é pior — a mesma escolha feita na fila de e-mail.
 		montadorPostService.salvarPedidoProgramado(programacaoPost, entradasZip, itens, gerados);
+
+		programacaoPostService.registrarEnvio(programacaoPost);
 	}
 
 	/** Adiciona ao ZIP as duas imagens (exercício/resolução) e a legenda de uma peça. */

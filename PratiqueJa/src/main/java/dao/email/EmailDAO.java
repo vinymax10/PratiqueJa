@@ -9,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import filtro.email.FiltroEmail;
 import modelo.email.Email;
 import modelo.email.StatusEmail;
@@ -55,10 +56,31 @@ public class EmailDAO extends DAO<Email>
 		return typedQuery.setMaxResults(limite).getResultList();
 	}
 
+	/**
+	 * Apaga os anexos de um e-mail — a transação é só dele.
+	 *
+	 * <p>Carrega por id de propósito: o {@code CleanupEmailService} roda sem transação, e limpar
+	 * uma coleção com {@code orphanRemoval} numa entidade destacada depende de o {@code merge}
+	 * fazer a coisa certa. Com a entidade gerenciada aqui dentro, o próprio dirty checking resolve.</p>
+	 */
+	@Transactional
+	public void limparAnexos(Long id)
+	{
+		Email email = em.find(Email.class, id);
+		if(email == null)
+			return;
+
+		email.getDocumentosFile().clear();
+	}
+
+	/**
+	 * Enviados com anexo antes do limite. O {@code JOIN FETCH} não é enfeite: quem consome isto
+	 * roda fora de transação e precisa dos caminhos dos anexos já carregados.
+	 */
 	public List<Email> buscarEnviadosComAnexosAntesDe(LocalDateTime limite)
 	{
 		return em.createQuery(
-			"SELECT DISTINCT e FROM Email e JOIN e.documentosFile d " +
+			"SELECT DISTINCT e FROM Email e JOIN FETCH e.documentosFile " +
 			"WHERE e.status = :status AND e.dataEnvio < :limite",
 			Email.class)
 			.setParameter("status", StatusEmail.ENVIADO)
@@ -66,10 +88,12 @@ public class EmailDAO extends DAO<Email>
 			.getResultList();
 	}
 
+	/** Enviados antes do limite. {@code LEFT JOIN FETCH} pelo mesmo motivo do método acima. */
 	public List<Email> buscarEnviadosAntesDe(LocalDateTime limite)
 	{
 		return em.createQuery(
-			"SELECT e FROM Email e WHERE e.status = :status AND e.dataEnvio < :limite",
+			"SELECT DISTINCT e FROM Email e LEFT JOIN FETCH e.documentosFile " +
+			"WHERE e.status = :status AND e.dataEnvio < :limite",
 			Email.class)
 			.setParameter("status", StatusEmail.ENVIADO)
 			.setParameter("limite", limite)

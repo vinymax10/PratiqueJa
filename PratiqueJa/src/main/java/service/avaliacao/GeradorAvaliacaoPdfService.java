@@ -26,6 +26,7 @@ import modelo.exercicio.ExercicioPadrao;
 import modelo.exercicio.ParagrafoExercicio;
 import modelo.questao.ImagemFile;
 import pdf.exercicio.LayoutLista;
+import util.ProcessoExterno;
 
 /**
  * Gera o PDF de uma única avaliação a partir de um PedidoAvaliacao.
@@ -643,7 +644,7 @@ public class GeradorAvaliacaoPdfService implements Serializable
 
 			pb.environment().put("TEXINPUTS", texFile.getParent().toAbsolutePath() + ";");
 
-			int exitCode = pb.start().waitFor();
+			int exitCode = ProcessoExterno.executar(pb, "XeLaTeX");
 			if (exitCode != 0 && passagem == 2)
 				throw new IOException("XeLaTeX falhou (código " + exitCode + ") em " + texFile
 					+ "\n──── trecho do .log ────\n" + extrairErroDoLog(texFile));

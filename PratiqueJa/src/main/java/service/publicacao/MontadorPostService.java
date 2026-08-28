@@ -80,8 +80,12 @@ public class MontadorPostService implements Serializable
 		if(pedido == null)
 			return;
 
+		// A tentativa é contada e confirmada AQUI, antes do trabalho pesado. Se a geração
+		// derrubar a JVM (um OOM), o contador já subiu: o pedido volta na fila do restart, mas
+		// desta vez com um número a mais — e é isso que faz o laço de reboot terminar.
 		pedido.setStatus(StatusPedidoPost.GERANDO);
 		pedido.setProgresso(0);
+		pedido.setTentativaGeracao(pedido.getTentativaGeracao() + 1);
 		pedidoPostDAO.salvar(pedido);
 
 		try
@@ -236,7 +240,12 @@ public class MontadorPostService implements Serializable
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			// Propaga em vez de engolir. Engolindo, o EnvioPostService seguia como se o pedido
+			// tivesse sido criado e empurrava a data da programação — o usuário ficava sem o post
+			// do dia e sem retentativa, com o erro só no stdout. Agora a falha chega ao
+			// processarIsolado, que a registra com o id, e a programação continua devida.
+			throw new GeracaoPostException("Falha ao salvar o pedido da programação de post "
+				+ programacaoPost.getId(), e);
 		}
 	}
 

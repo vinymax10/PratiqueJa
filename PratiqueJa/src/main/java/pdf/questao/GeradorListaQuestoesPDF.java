@@ -15,6 +15,7 @@ import modelo.questao.Alternativa;
 import modelo.questao.ImagemFile;
 import modelo.questao.Paragrafo;
 import modelo.questao.Questao;
+import util.ProcessoExterno;
 
 /**
  * Gera um PDF de lista de questões em layout fluente de 2 colunas
@@ -730,7 +731,7 @@ public class GeradorListaQuestoesPDF
 			pb.environment().put("TEXINPUTS",
 				texFile.getParent().toAbsolutePath() + ";");
 
-			int exitCode = pb.start().waitFor();
+			int exitCode = ProcessoExterno.executar(pb, "XeLaTeX");
 			if (exitCode != 0 && passagem == 2)
 				throw new IOException(
 					"XeLaTeX falhou (código " + exitCode + ") ao compilar " + texFile);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.DAO;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import modelo.avaliacao.PedidoAvaliacao;
 import modelo.avaliacao.PerfilAvaliacao;
 import modelo.usuario.Usuario;
@@ -71,6 +72,33 @@ public class PedidoAvaliacaoDAO extends DAO<PedidoAvaliacao>
 			"OR p.status = modelo.avaliacao.StatusPedidoAvaliacao.GERANDO ORDER BY p.dataSolicitacao ASC",
 			PedidoAvaliacao.class)
 			.getResultList();
+	}
+
+	/**
+	 * Zera a referência ao arquivo baixado de um pedido — a transação é só deste pedido.
+	 * Carrega por id porque o {@code CleanupPedidoAvaliacaoService} passou a rodar sem transação
+	 * (ver o gêmeo em {@code PedidoPostDAO#limparArquivo}).
+	 */
+	@Transactional
+	public void limparArquivo(Long id)
+	{
+		PedidoAvaliacao pedido = em.find(PedidoAvaliacao.class, id);
+		if(pedido == null)
+			return;
+
+		pedido.setCaminhoArquivo(null);
+		pedido.setNomeDownload(null);
+	}
+
+	/** Marca o pedido como falho — usado quando as tentativas de geração se esgotam. */
+	@Transactional
+	public void marcarErro(Long id)
+	{
+		PedidoAvaliacao pedido = em.find(PedidoAvaliacao.class, id);
+		if(pedido == null)
+			return;
+
+		pedido.setStatus(modelo.avaliacao.StatusPedidoAvaliacao.ERRO);
 	}
 
 	public List<PedidoAvaliacao> buscarExpirados(LocalDateTime agora)
