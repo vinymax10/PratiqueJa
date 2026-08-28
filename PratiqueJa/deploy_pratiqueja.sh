@@ -15,6 +15,23 @@
 #                     scp pj.sha256 deploy@VPS:~/PratiqueJa.war.new.sha256
 #   3) publicacao     ssh deploy@VPS 'sudo -n /home/deploy/deploy_pratiqueja.sh'
 #
+# POR QUE ELE REINICIA O WILDFLY (28/08/2026)
+#
+# Ate aqui a publicacao era a quente: `touch .dodeploy` e o scanner trocava a
+# aplicacao sem reiniciar a JVM. Isso custou um OOM.
+#
+# Em 27/08 as 06:06 o WildFly morreu com OutOfMemoryError num servidor OCIOSO —
+# nenhum acesso na madrugada, so o timer das 06:00 gerando os posts do dia. A
+# geracao nao era a causa: no dia seguinte, numa JVM recem-reiniciada, o mesmo
+# trabalho rodou em 25 segundos. O que faltava era heap, e o motivo estava no
+# historico: a JVM vinha de antes de 20/08 e levara 40 redeploys a quente sem um
+# unico restart (18 so no dia 22). Cada troca a quente so libera o classloader
+# antigo se nada segurar referencia a ele — e alguma coisa segurava.
+#
+# Reiniciar no deploy troca ~1-2 min de indisponibilidade por uma JVM que comeca
+# limpa toda vez. Derruba junto o OrcamentoDigital, que divide a JVM; por isso o
+# script confere os dois no fim, e nao so o PratiqueJa.
+#
 # O sudo do usuario deploy e NOPASSWD para este caminho exato — `sudo bash ~/...`
 # pede senha, `sudo -n /home/deploy/deploy_pratiqueja.sh` nao.
 #
@@ -81,45 +98,93 @@ echo "   ok"
 echo ">> backup do WAR atual -> $BAK"
 install -o deploy -g deploy -m 644 "$WAR" "$BAK"
 
+# Poe o WAR no lugar e marca para o scanner pegá-lo no proximo boot.
+publicar()
+{
+	local origem=$1
+	rm -f "$WAR.deployed" "$WAR.failed" "$WAR.dodeploy"
+	install -o wildfly -g wildfly -m 644 "$origem" "$WAR"
+	sudo -u wildfly touch "$WAR.dodeploy"
+}
+
+# Espera o marcador aparecer. 0 = no ar, 1 = falhou, 2 = nem um nem outro.
+# O prazo e maior que o do scanner a quente porque aqui a JVM sobe do zero.
+aguardar()
+{
+	local tentativas=${1:-60}
+
+	for _ in $(seq 1 "$tentativas"); do
+		sleep 3
+		[ -f "$WAR.deployed" ] && return 0
+		[ -f "$WAR.failed" ]   && return 1
+	done
+
+	return 2
+}
+
 echo ">> publicando PratiqueJa.war..."
-rm -f "$WAR.deployed" "$WAR.failed" "$WAR.dodeploy"
-install -o wildfly -g wildfly -m 644 "$SRC" "$WAR"
-sudo -u wildfly touch "$WAR.dodeploy"
+publicar "$SRC"
 
-echo ">> aguardando o scanner (ate ~120s)..."
-for i in $(seq 1 40); do
-	sleep 3
-	if [ -f "$WAR.deployed" ]; then
-		echo
-		echo "===================== OK: NO AR ====================="
-		limpar
-		echo
-		echo "Backup da versao anterior: $BAK"
-		echo "Rollback manual:"
-		echo "  sudo install -o wildfly -g wildfly -m 644 $BAK $WAR"
-		echo "  sudo rm -f $WAR.deployed $WAR.failed"
-		echo "  sudo -u wildfly touch $WAR.dodeploy"
-		exit 0
-	fi
-	if [ -f "$WAR.failed" ]; then
-		echo
-		echo "===================== FALHOU ====================="
-		cat "$WAR.failed"
-		echo
-		echo ">> ROLLBACK AUTOMATICO para $BAK ..."
-		rm -f "$WAR.failed" "$WAR.deployed" "$WAR.dodeploy"
-		install -o wildfly -g wildfly -m 644 "$BAK" "$WAR"
-		sudo -u wildfly touch "$WAR.dodeploy"
-		for j in $(seq 1 40); do
-			sleep 3
-			[ -f "$WAR.deployed" ] && { echo "== rollback OK: versao anterior de volta no ar =="; exit 2; }
-			[ -f "$WAR.failed" ]   && { echo "!! ROLLBACK TAMBEM FALHOU — ver /opt/wildfly/standalone/log/server.log"; exit 3; }
-		done
-		echo "!! timeout no rollback — ver /opt/wildfly/standalone/log/server.log"
-		exit 3
-	fi
-done
+# O restart e o ponto do exercicio: JVM nova, sem os classloaders acumulados.
+# Nao usa systemctl reload nem o scanner a quente de proposito.
+echo ">> reiniciando o WildFly (a JVM sobe limpa; ~1-2 min de indisponibilidade)..."
+systemctl restart wildfly
 
-echo "AVISO: timeout aguardando o marcador. Estado atual:"
-ls -la "$DEP"
-exit 4
+echo ">> aguardando a aplicacao subir (ate ~180s)..."
+# `|| RESULTADO=$?` e obrigatorio: com `set -e` (linha 44) um `aguardar 60` solto
+# que devolvesse 1 ou 2 encerraria o script aqui, antes de chegar ao rollback —
+# justamente no caso em que ele e necessario.
+RESULTADO=0
+aguardar 60 || RESULTADO=$?
+
+if [ "$RESULTADO" = "0" ]; then
+	echo
+	echo "===================== OK: NO AR ====================="
+
+	# O OrcamentoDigital divide a JVM: o restart derrubou os dois, entao nao
+	# basta o PratiqueJa ter voltado.
+	OD=$DEP/OrcamentoDigital.war
+	if [ -f "$OD.failed" ]; then
+		echo "!! ATENCAO: o PratiqueJa subiu, mas o OrcamentoDigital FALHOU:"
+		cat "$OD.failed"
+	elif [ -f "$OD.deployed" ]; then
+		echo "   OrcamentoDigital: no ar"
+	elif [ -e "$OD" ]; then
+		echo "!! ATENCAO: OrcamentoDigital sem marcador — conferir o server.log"
+	fi
+
+	limpar
+	echo
+	echo "Backup da versao anterior: $BAK"
+	echo "Rollback manual:"
+	echo "  sudo install -o wildfly -g wildfly -m 644 $BAK $WAR"
+	echo "  sudo rm -f $WAR.deployed $WAR.failed"
+	echo "  sudo -u wildfly touch $WAR.dodeploy"
+	echo "  sudo systemctl restart wildfly"
+	exit 0
+fi
+
+echo
+if [ "$RESULTADO" = "1" ]; then
+	echo "===================== FALHOU ====================="
+	cat "$WAR.failed"
+else
+	# Sem marcador nenhum: normalmente a JVM nao subiu. Volta a versao boa do
+	# mesmo jeito — deixar o servidor fora do ar esperando nao ajuda ninguem.
+	echo "===================== TIMEOUT ====================="
+	echo "Nenhum marcador apareceu. Estado do systemd:"
+	systemctl status wildfly --no-pager | head -12 || true
+fi
+
+echo
+echo ">> ROLLBACK AUTOMATICO para $BAK ..."
+publicar "$BAK"
+systemctl restart wildfly
+
+if aguardar 60; then
+	echo "== rollback OK: versao anterior de volta no ar =="
+	exit 2
+fi
+
+echo "!! ROLLBACK TAMBEM FALHOU — ver /opt/wildfly/standalone/log/server.log"
+exit 3
